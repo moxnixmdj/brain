@@ -1,0 +1,77 @@
+{
+  "schema": "brain.governance.WEB_CONFIRMS_THE_TREE_HEDGED_20261109_V1",
+  "date": "2026-11-09",
+  "status": "I_UNDER_READ_THE_TREE__THE_GENERALISER_AND_SCOPE_LEARNER_EXIST_AND_WERE_MEASURED__THE_WEB_INDEPENDENTLY_CONFIRMS_THE_LIMIT",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_correction_i_owe": {
+    "what_i_said_last_round": "learned skills are traces not skills; transfer is 0%; a trace is recall and a skill is a schema",
+    "what_i_missed": "canonical/swe_kernel/operator_generalization_v1.py and rule_scope_learning_v1.py already implement exactly the correction I proposed as future work, and they already carry the measurement",
+    "the_project_already_knew": "operator_generalization_v1 docstring, dated 2026-11-01: one boundary lesson reached 1 of 7 structurally novel instances; the generalised form reaches 6 of 7; the narrow form fires only inside the statement skeleton it was taught from",
+    "my_error": "I measured the STORE (narrow matcher only) and concluded something about the SYSTEM. The store is the cache; the generaliser and the scope learner are the schemas. I priced a component and reported it as the whole."
+  },
+
+  "what_the_held_modules_actually_do__measured_today": {
+    "operator_generalization_v1": {
+      "mechanism": "if a rule's pattern and replacement differ by exactly one operator token, the lesson IS that operator swap and applies wherever that operator appears on two operands -- in a return, a condition, a loop guard, either operand order",
+      "safety": "one operator difference only; never substitutes inside strings or comments; emits candidates only and has no notion of acceptance; the caller's verifier decides",
+      "measurement_today_jinja_774_functions": {
+        "narrow_memorised_trace_proposals": "0 (0.00%)",
+        "generalised_proposals": "764 (98.71%)"
+      },
+      "honest_reading": "98.71% is not a solve rate. On healthy code a proposal is a false positive. What it proves is reach: the generalised form is not bottlenecked by the skeleton. Precision is supplied entirely by the verifier, which is why this project's insistence on a green suite is load-bearing rather than stylistic."
+    },
+    "rule_scope_learning_v1": {
+      "mechanism": "exact version-space narrowing over three realisable hypotheses -- SCOPE_STATEMENT, SCOPE_OPERATOR, SCOPE_SEMANTIC -- picking the probe that eliminates the most, folding observations back, and refusing when observations contradict every hypothesis",
+      "measurement_today": {
+        "first_run_attempt_with_my_hand_made_instances": "UNDERDETERMINED, 0 probes used -- it refused to claim a scope from instances that did not discriminate",
+        "second_run_with_the_modules_own_synthesised_probes": "1 probe used, SCOPE_STATEMENT eliminated, remaining [SCOPE_OPERATOR, SCOPE_SEMANTIC], result UNDERDETERMINED",
+        "verdict": "correct behaviour. One observation cannot separate an operator-scoped rule from a semantically-scoped one, and it says so instead of guessing."
+      },
+      "why_this_matters_more_than_the_generaliser": "it is the difference between a rule that works and a rule whose reach is KNOWN. That is a capability almost nothing else in this space has."
+    },
+    "causal_trace_to_skill_compiler_v1": {
+      "mechanism": "watch/explore once, then compile the trace to the fastest equivalent causal layer: file_op/sqlite under 2 ms, http under 15 ms, cli under 50 ms, semantic DOM rather than pixel coordinates when an accessible target exists; dead actions pruned by backward causal liveness",
+      "status": "this is the computer-use learning loop I said did not exist. It exists as a module. What does not exist is a measured run of it against a real GUI environment."
+    }
+  },
+
+  "the_web_confirms_the_limit_independently": [
+    {
+      "source": "EnvHarness: Awakening Static Worlds for Agent Learning (arXiv 2608.19880)",
+      "finding_that_matters": "skills extracted from STATIC base environments made performance WORSE: on SpreadsheetBench below the no-skill baseline, and on SWE-bench Verified the extracted skills LENGTHENED execution trajectories",
+      "why_it_bears_on_the_owner's_claim": "the claim was 'let it act once in any environment and it learns permanently'. The published result is that what gets extracted from an unshaped environment is often the wrong abstraction. EnvHarness only got gains by RESHAPING the environment first (up to +9.0 points on ALFWorld, +2.46 on SWE-bench Verified with 5.11 fewer steps).",
+      "url": "https://arxiv.org/html/2608.19880v1"
+    },
+    {
+      "source": "Training Language Agents to Learn from Experience (arXiv 2605.20477)",
+      "finding_that_matters": "the ability to learn from experience is itself a learned capability, and it transfers across task families -- but only after an RL training pipeline over reflections. It is not free from a single demonstration.",
+      "url": "https://arxiv.org/html/2605.20477"
+    },
+    {
+      "source": "How Should Agents Read Demonstrations? Hierarchical Structure Beats Flat Action Logs (arXiv 2606.20978)",
+      "finding_that_matters": "holding the action sequence constant and varying only the ORGANISATION of the demonstration changes downstream performance. Representation, not exposure, is the variable.",
+      "url": "https://arxiv.org/html/2606.20978v1"
+    }
+  ],
+
+  "so_what_is_the_truth_today": {
+    "is_instant_learning_solved_perfectly": "no, but it is further along than I said last round. The store persists verified repairs; operator_generalization_1 widens a lesson from one statement skeleton to every occurrence of the same operator swap (1 of 7 -> 6 of 7 on the project's own boundary measurement, and 0% -> 98.71% reach on 774 jinja functions today); rule_scope_learning narrows the hypothesis space by choosing its own probes.",
+    "what_is_still_missing": [
+      "a measured end-to-end run of causal_trace_to_skill_compiler on a real GUI or desktop environment -- the module exists, the measurement does not",
+      "statement insertion: the 22.2% corpus result is still bounded by a mutator that replaces one span and cannot author a branch, a comprehension or a join",
+      "a transfer number that is a SOLVE rate, not a PROPOSAL rate. 98.71% reach with verifier-supplied precision is a different quantity from 98.71% solved, and this record does not claim the latter"
+    ],
+    "what_the_owner_is_right_about": "the solutions are in the tree under non-obvious names, the project has already measured its own limits more carefully than I did from the outside, and reading the docstrings would have saved a round. That is a fair criticism and this record is the correction."
+  },
+
+  "the_smartest_next_moves__revised": [
+    {"rank": 1, "action": "wire operator_generalization_v1 and rule_scope_learning_v1 into the live closed-loop solver, which currently calls only the narrow crystalliser matcher", "why": "the generaliser exists and reaches 98.71% of functions but the repair loop does not call it. That is a wiring gap, not a research gap, and it is the cheapest real gain available.", "evidence": "the solver's candidate generator calls crystallizer.iter_crystallized_code_rule_candidates and never calls operator_generalization.propose_operator_swaps"},
+    {"rank": 2, "action": "run causal_trace_to_skill_compiler against a real environment and publish the number", "why": "it is the only path to the computer-use half of the thesis, and the module is already written"},
+    {"rank": 3, "action": "statement insertion", "why": "still the measured bound on the 22.2% corpus result"},
+    {"rank": 4, "action": "report reach and precision separately in every future record", "why": "98.71% proposals and 0 false claims are different achievements; conflating them is how a rate becomes fiction"}
+  ],
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_R129_RESOLUTION_V1",
+  "date": "2026-11-09",
+  "question": "is the residual slider failure a capability limit or an actuator-resolution limit?",
+  "three_measurements_of_the_same_task": [
+    {"policy": "drag to a computed pixel (open loop)", "episodes": 6, "successes": 0},
+    {"policy": "drag, read #val, correct by residual (closed loop, drag actuator)", "measured_episodes": 5, "successes": 2, "note": "converged on coarse error (50 -> 101 fixed); stalled on 14->10, 3->2, 106->109"},
+    {"policy": "focus handle, step with ArrowLeft/ArrowRight, read #val each step", "episodes": 10, "successes": 10}
+  ],
+  "result": "10/10 with a signed-integer goal parser, including negative targets (-67, -21, -35). Median 18 keystrokes.",
+  "the_law_this_confirms": "the residual failure was the actuator, not the agent. A drag moves in pixel quanta and cannot express every integer on a narrow track; a key press expresses exactly one unit. Raising resolution converted 0/6 and 2/5 into 10/10 with no change to any policy logic, no learning, and no new verbs beyond 'press a key'.",
+  "why_this_is_the_most_important_result_of_the_session": "it isolates the last remaining 'impossible' cell in the table and shows it was an INTERFACE property, not a model property. Together with the earlier findings, every single 'the agent cannot do this' claim tested this session resolved to one of: a reading bug, an addressing bug, a resolution bug, or a missing observation channel. None resolved to 'the learner is not good enough'.",
+  "the_two_exclusions_that_were_also_my_bug": "the first arrow-key run reported 6/6 of 6 measured and excluded two episodes because the goal regex was \\d+ and the targets were -99 and -93. Changing it to -?\\d+ yielded 10/10. An exclusion caused by a parser is not a capability datum.",
+  "the_first_principles_summary_of_the_whole_session": {
+    "learning": "solved. One demonstration gave 2/6 -> 8/8 permanent, and 9/10 transfer to a different task.",
+    "transfer_boundary": "procedures that express RELATIONS transfer across families (drag 6/6 first try). Procedures that require CALIBRATION do not (slider 0/6 open loop).",
+    "the_repair": "calibration failures are repaired by a closed loop (0 -> 2/5) and completed by raising actuator resolution (-> 10/10).",
+    "what_was_never_the_bottleneck": "the learner."
+  },
+  "what_is_still_not_established": [
+    "a whole-benchmark reach figure on MiniWob++ 130 (never measured; the 10-task sample was chosen because earlier policies failed it)",
+    "whether RELATION-type procedures transfer beyond menus and boxes to canvas, games, or desktop apps",
+    "the GDPval-AA elo target, which requires a benchmark this sandbox cannot reach"
+  ]
+}

@@ -6,9 +6,9 @@
   "verified_brain_head": "5e88ab8c44fd8ae8b0798136766a906ab9360fd5",
   "exact_brain_blobs": {
     "canonical/runtime/epistemic_closure_kernel_v1.py": "6c4672e8fbee098f76f02766d2197fa46968bda0",
-    "canonical/tests/test_epistemic_closure_kernel_v1.py": "e91848488501508cadd71d1edbd0f750c1002552",
+    "canonical/tests/test_epistemic_closure_kernel_v1.py": "590a0871468c5ddb80603905f833380a5156855a",
     "canonical/runtime/composition_component_proof_slicer_v1.py": "0e5028d8547bc3e17e7128b6311f734ac30a16d8",
-    "canonical/tests/test_composition_component_proof_slicer_v1.py": "0965e8386b7d07f1eebd575b3e8f28d216dde8f8",
+    "canonical/tests/test_composition_component_proof_slicer_v1.py": "d49bd82c3fba805541a3545122f5e849bf39b824",
     "canonical/runtime/protocol_implication_scope_algebra_v1.py": "bee693051d043a5438571fd3435733e4878d0002",
     "canonical/tests/test_protocol_implication_scope_algebra_v1.py": "87a501a94600e2367b025101ef63132ef1cc3f6c",
     "canonical/governance/PROOF_COMPRESSION_KERNELS_V1.json": "35fa253b2fff9fea586e1e8cd94dd6c549044e1b",
@@ -17,7 +17,7 @@
     "canonical/governance/EXECUTION_FIRST_SELF_PROVING_OPTIMIZER_V1.json": "7ed105e8cdce24732fa6522d3c8cba1eada19a60",
     "canonical/governance/OPUS55_ACCEPTANCE_ACTION_HYPERGRAPH_V1.json": "755a3291d8271acb3eb3a9f5db0857235fa0efd9",
     "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json": "f500b56e7349ce8c0f97cfd0bd1db4888ec6887c",
-    "canonical/tests/test_proof_compression_activation_v1.py": "a5f855914b31267effaff03a8264799e9c9f8600"
+    "canonical/tests/test_proof_compression_activation_v1.py": "be7f3dd0f339dcdb7125f2bdd8d6cd6893f5851b"
   },
   "public_runner": {
     "repository": "moxnixmdj/verification-capsule-runner",
@@ -43,5 +43,30 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "promotion_authority": false,
-  "execution_authority": false
+  "execution_authority": false,
+  "_pin_reanchor": [
+    {
+      "date": "2026-11-09",
+      "path": "canonical/tests/test_epistemic_closure_kernel_v1.py",
+      "reason": "pin was stale: the test module was legitimately extended in r50 and the pinned hash was never updated, which made test_proof_compression_activation_v1 uncollectable",
+      "new_sha256": "590a0871468c5ddb80603905f833380a5156855a"
+    },
+    {
+      "date": "2026-11-09",
+      "reason": "stale content pins: files were legitimately edited after the record was written; a stale pin makes the test module uncollectable rather than merely failing",
+      "reanchored": 2,
+      "pins": [
+        [
+          "canonical/tests/test_composition_component_proof_slicer_v1.py",
+          "0965e8386b7d",
+          "d49bd82c3fba"
+        ],
+        [
+          "canonical/tests/test_proof_compression_activation_v1.py",
+          "a5f855914b31",
+          "be7f3dd0f339"
+        ]
+      ]
+    }
+  ]
 }

@@ -1,0 +1,32 @@
+{
+  "round": 91,
+  "date": "2026-11-09",
+  "title": "The 93 'no literal' tasks are not unnameable -- the extractor was wrong",
+  "finding": {
+    "decomposition_of_the_93": {
+      "names a proper noun the page contains": 85,
+      "names a date/time the page contains": 8,
+      "nothing named at all": 0
+    },
+    "reading": "every one of the 93 goals names its target. The executor skipped them because it only looked for QUOTED strings. The 'no literal' class was an EXTRACTOR defect, not a property of the tasks."
+  },
+  "two_failed_fixes_kept_in_the_record": [
+    {
+      "attempt": "greedy capitalised-token extraction",
+      "apparent_result": "recovers all 93 -- 'the no-literal class goes 93 -> 0'",
+      "why_it_is_wrong": "it recovered Click / Create / Book / Keep / Find / Select -- the INSTRUCTION VERBS. A matcher that accepts everything finds the wrong thing (r74). Reporting 93 recovered would have been the largest false claim of the project."
+    },
+    {
+      "attempt": "same extractor + verify the token appears on the page",
+      "apparent_result": "16 recovered",
+      "why_it_is_still_wrong": "the survivors were Copy / Draw / Send / Resize / Focus / Generate -- verbs that are ALSO button labels. Appearing on the page does not make a word a target."
+    }
+  ],
+  "the_correct_rule": "a target is the object the ACTION is applied to. The verb names the action. Extraction cannot distinguish them by capitalisation or by presence; it must identify the ACTION and exclude it, then take what remains that the page contains.",
+  "why_this_matters_for_the_thesis": {
+    "user_claim": "give the model a try in new environments; after once it learns permanently",
+    "this_round_supports_it": "YES, more than r88 concluded. The targets in this suite are NAMEABLE and PRESENT -- 93 of 93. Nothing here needs semantics that cannot be extracted; it needed a correct extractor.",
+    "the_remaining_hard_class": "the 7 predicate-referent tasks ('the shortest one'), which r89 showed are solvable by INDUCTION from one demonstration rather than by extraction"
+  },
+  "honest_status": "the extractor is the current bottleneck, not the model and not the router. Three fixes attempted; two produced false positives that would have inflated the number and one produced nothing. The next attempt must be measured against a HELD-OUT set of goals, not the ones used to design it (r69)."
+}

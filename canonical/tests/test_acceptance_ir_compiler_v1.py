@@ -43,3 +43,11 @@ assert actions["RUN_COMPOSITION_COMPONENT_PROOF_SLICER"]["available_now"] is Tru
 assert actions["RUN_COMPOSITION_COMPONENT_PROOF_SLICER"]["unsatisfied_preconditions"] == []
 
 print("test_acceptance_ir_compiler_v1: PASS")
+
+# pytest does not collect module-level assertions. Without this wrapper the
+# whole file runs on import and any failure surfaces as a collection ERROR, not
+# as a test result -- so the evidence it carries is never actually reported.
+def test_module_level_assertions():
+    """Execute this module's own assertions under the runner."""
+    import runpy
+    runpy.run_path(__file__, run_name="__module_level_assertions__")

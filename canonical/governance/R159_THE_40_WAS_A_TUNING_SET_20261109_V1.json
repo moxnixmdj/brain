@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_R159_THE_40_WAS_A_TUNING_SET_V1",
+  "date": "2026-11-09",
+  "round": "r159",
+  "family": "COMPUTER_AND_BROWSER_USE",
+  "measurement": {
+    "tasks": 130, "reps": 3, "trials": 390, "file": "/tmp/r159_full130.json",
+    "all": "113/390 = 0.2897",
+    "seen_40_used_for_all_tuning": "72/120 = 0.6000",
+    "heldout_90_never_run_before": "41/270 = 0.1519",
+    "gap": "44.8 percentage points",
+    "perfect_tasks": 32, "blind_tasks": 87
+  },
+  "the_error": "Every number reported for this family since r130 -- .4263 .5000 .5000 .5579 .5632 .5900 -- was measured on a 40-task sample that had been used for every tuning decision. It was a tuning set, not a measurement. The held-out number is 0.1519 and this is the first time it exists.",
+  "what_the_literature_says_and_i_had_already_read": {
+    "arXiv 2602.07150 (On Randomness in Agentic Evals, ICLR 2026 Workshop)": "60,000 trajectories: ten identical full-benchmark repeats span 2.2-6.0 pp; median run-to-run SD 1.5 pp; temperature 0 does not remove it; 'improvements of 2-3 percentage points may reflect evaluation noise'. Detecting a 2 pp gain at p<0.05 needs ~9 replicates; 1 pp needs 36.",
+    "arXiv 2512.06710 (Stochasticity in Agentic Evaluations)": "Var(mu) = sigma_b^2/n + sigma_w^2/(nT). With sigma_b^2/sigma_w^2 ~ 5, n=100 T=4 gives 68% lower standard error than n=10 T=40. More tasks, fewer reps.",
+    "arXiv 2606.28430 (Building to the Test)": "with the oracle in the loop the score nears perfect while the library is left dead or absent."
+  },
+  "why_this_matters_more_than_any_fix": "r158 fixed click-option 1/12 -> 12/12, which is real and verifiable. But the total it was reported against was not a measurement, so the fix could not be placed on the total. The instrument had to be fixed before the policy.",
+  "blind_task_list": ["ascending-numbers","bisect-angle","book-flight","book-flight-nodelay","button-delay","buy-ticket","chase-circle","choose-date","choose-date-easy","choose-date-medium","choose-date-nodelay","click-button-sequence","click-collapsible-nodelay","click-dialog","click-menu","click-menu-2","click-pie","click-pie-nodelay","click-shades","click-shape","click-tab","click-widget","copy-paste","copy-paste-2","count-shape","count-sides","daily-calendar","drag-box","drag-circle","drag-items","drag-items-grid","drag-shapes-2","drag-single-shape","drag-sort-numbers","draw-circle","email-inbox","email-inbox-delete","email-inbox-forward","email-inbox-forward-nl","email-inbox-forward-nl-turk","email-inbox-important","email-inbox-nl-turk","email-inbox-noscroll","email-inbox-reply","email-inbox-star-reply","enter-date","enter-password","enter-text-2","enter-time","find-greatest","find-midpoint","find-word","form-sequence","form-sequence-2","form-sequence-3","generate-number","grid-coordinate","guess-number","highlight-text","highlight-text-2","hot-cold","hover-shape","identify-shape","login-user","login-user-popup","moving-items","multi-layouts","multi-orderings","number-checkboxes","odd-or-even","order-food","phone-book","read-table","read-table-2","resize-textarea","right-angle","scroll-text","search-engine","sign-agreement","social-media-all","social-media-some","stock-market","terminal","text-editor","text-transform","tic-tac-toe","use-slider"],
+  "cluster_structure_visible_in_the_blind_list": {
+    "email-inbox_family": 11,
+    "drag_family": 8,
+    "date_and_time": 6,
+    "click_menu_pie_widget": 7,
+    "read_table_and_forms": 8,
+    "geometry_bisect_right_angle_midpoint": 4,
+    "note": "The blind set is not 87 independent failures. It is a small number of families. Fixing a family is the only route to a number that moves."
+  },
+  "law_added": "A benchmark sample used for any tuning decision is a tuning set forever. A held-out split must be chosen before the first fix, or the first honest number is unavailable.",
+  "zero_credit_terminal": true
+}

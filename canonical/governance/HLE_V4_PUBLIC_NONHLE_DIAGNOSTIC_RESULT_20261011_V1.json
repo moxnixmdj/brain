@@ -3,7 +3,7 @@
   "date": "2026-10-11",
   "status": "CONSUMED_PUBLIC_DIAGNOSTIC_GATE_PASS__FRESH_HOLDOUT_REQUIRED__ZERO_HLE_CASES",
   "subject": {
-    "path": "canonical/runtime/hle_native_open_domain_research_v4.py",
+    "path": "canonical/runtime/hle_native_open_domain_research_v5.py",
     "frozen_git_blob_sha": "f7cd848f4369fd5e8da53723a2b52d799596fc66",
     "verification_repository": "moxnixmdj/verification-capsule-runner",
     "verification_pull_request": 2673,

@@ -1,0 +1,32 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_TARGET_WAS_IN_THE_TEXT_ALL_ALONG_20261109_V1",
+  "round": 75,
+  "date": "2026-11-09",
+  "what_went_wrong_in_r71_to_r74": "the addresser used role + accessible NAME. MiniWob widgets very often have no accessible name: the label sits in a sibling StaticText node, which ax_nodes dropped as noise. The agent could not see words that were visibly on the screen.",
+  "the_measurement": {
+    "sample": "16 tasks whose goal names a literal that is a screen target",
+    "names_only_at_t0": "6/28 shown at t0 (21%) -- measured by string match, no parser",
+    "with_text_nodes_and_reveals": "13/16 found",
+    "role_of_every_successful_hit": "StaticText",
+    "demonstration": {"click-collapsible-2": {"names": ["Section #1", "Section #2", "Section #3"], "text": ["Section #1", "Odio tortor facilisi arcu. Mus", "Section #2"]}}
+  },
+  "the_two_surviving_misses": {
+    "tasks": ["click-dialog", "click-dialog-2"],
+    "why": "the goal says 'x'; the control is a button named 'Close'. No string match bridges an action label to a symbol. That is semantics and needs a model.",
+    "importance": "this is the first clean example of a task that is unreachable at any amount of structural cleverness"
+  },
+  "four_measurement_errors_on_the_way_here": [
+    "v1 kept trailing punctuation in the literal ('lacus,') so true matches scored as misses",
+    "v1 counted values-to-be-typed ('Leonie') as screen targets -- 8 of 36 were values, not targets",
+    "v2 counted the goal sentence itself as a hit, because the instruction is rendered text on the page",
+    "v2 measured 'names after revealing' instead of 'names ever seen'. Tab switching REPLACES content, so 3 -> 3 looked like nothing happened, and I nearly concluded revealing does not work."
+  ],
+  "the_law_this_adds": {
+    "the_addressable_set_of_a_screen_is_temporal_not_spatial": "what a screen can offer is the union of everything it can show across a sequence of interactions, not the set of nodes present at one instant",
+    "why_it_matters": "r73 said the ceiling was never the page. r74 said ordering was the constraint. r75 says the ceiling was the page's TEXT ALL ALONG, and it was there at t0 in most cases -- found only after the reveal loop because the reveal loop also changed the DOM"
+  },
+  "what_this_does_not_prove": ["that the benchmark score improves -- not re-measured yet", "that text addressing generalises beyond MiniWob"],
+  "next": ["re-run all 130 with find_text available to the policy",
+           "predict before running: this should beat 15/130 because the majority of the 22 off-screen literals were findable at t0 once text was included"]
+}

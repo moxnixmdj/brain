@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_R155_V1",
+  "date": "2026-11-09",
+  "round": "r155",
+  "the_defect": {
+    "what_it_looked_like": "a relation-aware search oracle added in r151 that checked the produced bytes before calling a goal reached",
+    "what_it_was": "DEAD CODE. env.state() returns a LISTING string ('notes.txt:43:870c73dc8fc8'), not a path. The predicate ran pathlib.Path(listing).rglob(...), found nothing, and every call fell through to `return True`.",
+    "how_long": "two rounds. It was written, measured as 'wired', and reported as working.",
+    "how_i_caught_it": "asked why drive() spent only 8 of a 120-trial budget on a goal no program could satisfy. The answer was that the oracle said YES to any file with the right name.",
+    "measured_consequence": "uppercase ... into loud.txt closed on plan ['run_sort'] in 8 trials, verification correctly rejected the bytes, and the retry loop banned one program per round for 14 s: banned=['run_pgrep','run_pidwait','run_sort','run_tar','run_tree','run_uniq']"
+  },
+  "the_fix": {
+    "what": "is_goal now reads the produced file from the LIVE sandbox (bound per drive call) instead of parsing a listing string",
+    "guard_kept": "when there is no seed to relate to, or the target has not been read back, it still returns True and lets _verify_plan judge -- the predicate never invents a pass, it only refuses one"
+  },
+  "measured_after": {
+    "the_same_unreachable_goal": "banned=[] and OPEN__NO_USABLE_PRIOR_EXPERIENCE -- the search genuinely explored and found nothing. Before: six bans and a wrong answer in 14 s. After: no bans and an honest refusal in 32 s.",
+    "the_honest_trade": "correct searching is SLOWER than wrong stopping. 14 s -> 32 s on a goal that cannot be reached, because the oracle no longer ends the search early on a name match.",
+    "reachable_goals_unchanged": {
+      "sort": "YES 1.26 s ['sort',{input}]",
+      "reverse_each_line": "YES 0.42 s ['rev',{input}]",
+      "reverse_lines": "YES 0.45 s ['tac',{input}]",
+      "unique": "YES 5.90 s ['sort','--unique',{input}]",
+      "head": "YES 1.20 s ['head','--lines','3',{input}]"
+    },
+    "non_relation_goals_unaffected": {
+      "compress the input into out.gz": "PASS 1.15 s ['gzip','-c','{input}']",
+      "hash a.txt into a.sha256": "PASS 1.01 s ['sha256sum','{input}']",
+      "compress logs into logs.zip": "PASS 5.97 s ['zip','logs.zip','{input}']"
+    },
+    "memory_still_holds": ["gzip 0.40 s mem=True", "sha256sum 0.07 s mem=True", "sort 0.32 s mem=True", "head 0.04 s mem=True"]
+  },
+  "the_retry_cost_named_and_partly_addressed": {
+    "mechanism": "_MAX_RETRIES=6 re-runs the whole shortlist, banning one action per round",
+    "why_the_retries_existed": "the search oracle accepted any file with the right name, so each round stopped at the first wrong program and the ban was the only progress",
+    "what_changed": "with a working oracle, a round no longer stops at the first wrong program, so the bans are gone on the unreachable goal (banned=[])",
+    "what_did_not_change": "_MAX_RETRIES is still 6 and still re-searches from scratch when every round fails. The tax is now paid once per reachable goal (0 times) and six times per unreachable goal.",
+    "not_yet_fixed": true
+  },
+  "tests": {"result": "79 passed, 13 subtests, 3 failed", "the_3": "the R148 curriculum/boundary contradiction, untouched"},
+  "the_law_this_round_adds": "a predicate that has a fallback branch has to be measured on the branch that runs. A fallback that returns True is indistinguishable from an oracle that agrees -- and I shipped the second while running the first.",
+  "sentience": "no."
+}

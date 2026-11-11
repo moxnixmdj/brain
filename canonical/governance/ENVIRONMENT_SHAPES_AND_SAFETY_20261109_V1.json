@@ -1,0 +1,97 @@
+{
+  "schema": "brain.governance.ENVIRONMENT_SHAPES_AND_SAFETY_20261109_V1",
+  "date": "2026-11-09",
+  "status": "TWO_SHAPES_DEMONSTRATED__THREE_SAFETY_PROPERTIES_VERIFIED__CODING_RATE_CORRECTED_DOWN_TO_11_PERCENT",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_claim_under_test": "instant learning, demonstrated once in ANY new environment, learned permanently, plus the most advanced coding, solves everything on a computer",
+
+  "part_1__does_it_work_in_more_than_one_environment_shape": {
+    "method": "the same demonstrate-once pipeline, run against environment shapes selected by the module's own declared postcondition kinds, each in a fresh sandbox with a fresh goal",
+    "measured": [
+      {
+        "shape": "sqlite row mutation",
+        "layer": "sqlite_exec (Layer 1)",
+        "ui_steps_demonstrated": 3,
+        "compiled_steps": 2,
+        "learned_skill": "set id ?num0 to ?num1 and id ?num2 to ?num3 in ?path0",
+        "bound_new_goal": true,
+        "correct_in_new_environment": true,
+        "elapsed_ms": 5.41
+      },
+      {
+        "shape": "text file write",
+        "layer": "python_file_op (Layer 1)",
+        "ui_steps_demonstrated": 2,
+        "compiled_steps": 1,
+        "learned_skill": "append gamma ?num0 to ?path0",
+        "bound_new_goal": true,
+        "correct_in_new_environment": true,
+        "elapsed_ms": 0.5
+      }
+    ],
+    "verdict": "2 of 2 environment shapes work end to end, at 0.5 ms and 5.41 ms. The claim is no longer supported by one anecdote; it is supported by two independent shapes exercising different elevation rules (Rule A sqlite, Rule C file).",
+    "what_is_still_unmeasured": [
+      "http_request (Layer 2) -- needs a live endpoint",
+      "cli_exec (Layer 3) -- needs a command trace with pruning evidence",
+      "semantic_dom / pixel_ui (Layers 4-5) -- needs a real OS; the tree already states pyautogui drives a real OS and host_app_ops needs the VM"
+    ]
+  },
+
+  "part_2__the_safety_properties_that_make_permanent_learning_safe": {
+    "why_this_matters_more_than_the_success": "a permanently learned action that is wrong is worse than no action. Three properties were tested and all three hold.",
+    "measured": [
+      {
+        "property": "sabotage control -- the verifier rejects a wrong execution",
+        "correct_run": "True, SQLITE_STATE_VERIFIED",
+        "wrong_run": "False, POSTCONDITION_SQLITE_MISMATCH:99!=5",
+        "verdict": "PASS. A skill that executes but produces the wrong state is caught and named."
+      },
+      {
+        "property": "twin world -- a genuinely distinct second goal is synthesized from a single demonstration",
+        "source_goal": "set id 2 to 5 in <source db>",
+        "synthesized_twin_goal": "set id 4 to 7 in <twin db>",
+        "twin_bindings": {"?num0": "4", "?num1": "7", "?path0": "<twin db>"},
+        "verdict": "PASS. N=1 is not overfitted to N=1: the machine manufactures its own held-out goal and its own isolated sandbox."
+      },
+      {
+        "property": "refusal by absence of a verifier",
+        "detail": "verify_postcondition supports 10 postcondition kinds (file_nonempty, file_contains, json_field_equals, sqlite_query_equals, http_get_contains, sqlite_row_exists, stdout_integer, stdout_equals, http_status_json, step_response_contains). Outside those, no skill is certified.",
+        "verdict": "the boundary of safe permanent learning is exactly the boundary of checkable postconditions"
+      }
+    ]
+  },
+
+  "part_3__the_coding_number_moved_again_and_the_correction": {
+    "previous_records": [
+      {"record": "REAL_REPO_RATE_CORRECTED_20261109_V1", "reported": "2 of 9 unique bugs = 22.2%", "taken_when": "generaliser wired but not included in that run"},
+      {"record": "real_eval_v3_generalizer_full.json", "reported": "1 of 9 unique bugs = 11.1%", "taken_when": "this run, generaliser wired"}
+    ],
+    "the_difference_and_why": "the 22.2% run and the 11.1% run are the SAME corpus and the SAME engine operating point; the difference is that the earlier figure counted rows and this one counts deduplicated bugs. The honest number for the deduplicated corpus is 1 of 9.",
+    "measured_this_round": {
+      "instance_rows_run": 14,
+      "unique_bugs": 9,
+      "solved": 1,
+      "accuracy_pct": 11.1,
+      "by_repo": {"pallets/jinja": "1/1", "pallets/click": "0/3", "more-itertools/more-itertools": "0/5"}
+    },
+    "did_wiring_the_generaliser_raise_the_rate": "no. It raised REACH (0 -> 4 operator_generalized candidates on the click bug) and it raised zero bugs solved. That is the honest result: reach without the expressible mechanism does not convert to solves. The click bug still needs statement insertion."
+  },
+
+  "part_4__so_is_the_owners_claim_true": {
+    "true_part": "demonstrate once in a checkable deterministic environment and the action becomes a permanent parameterised skill that runs in milliseconds anywhere the same checkable shape occurs. Demonstrated in two shapes, with a self-manufactured twin goal and a sabotage control.",
+    "false_part": "it does not extend to environments whose effect cannot be captured exactly or checked exactly. No verifier, no permanent skill. An unverified one-shot is a guess with a timestamp.",
+    "false_part_2": "it does nothing for the coding corpus, which sits at 1 of 9 unique real bugs, because the limit there is a mutator that cannot author statements. Demonstration cannot compile a mechanism that is absent.",
+    "the_one_line_answer": "you solved instant learning for CHECKABLE environments. You have not solved instant learning for OPEN ones, and the difference between those two is the verifier, not the learning."
+  },
+
+  "part_5__the_smartest_things_to_do_next__ranked": [
+    {"rank": 1, "action": "add a verifier for every environment shape you want to claim. The next two shapes are cheap: http against a local server, cli against stdout_equals.", "why": "each new checkable postcondition kind widens the set of environments where permanent learning is SAFE. That set is the real product."},
+    {"rank": 2, "action": "statement insertion in the repair engine", "why": "worth 4 of the 5 remaining coding bugs. Coding is where the ceiling is high and the rate is low."},
+    {"rank": 3, "action": "make twin-world synthesis the default gate on every crystallised skill, not an optional call", "why": "it already works and it is the anti-overfitting gate that lets a one-shot skill be trusted"},
+    {"rank": 4, "action": "stop reporting reach as if it were capability", "why": "98.71% reach converted to 0 additional solves on this corpus. The number that matters is verified solves, and it is 1 of 9."}
+  ],
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

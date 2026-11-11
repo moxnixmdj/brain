@@ -1,0 +1,15 @@
+{
+ "cells": {
+  "falsify.cap2|bound_capability_source_unsupported": {
+   "first_seen": 1794307587.8897738,
+   "last_seen": 1794307587.8897748,
+   "observations": [
+    -1
+   ],
+   "structural": true,
+   "where": "falsify.cap2",
+   "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
+  }
+ },
+ "resolutions": {}
+}

@@ -1,0 +1,102 @@
+{
+  "schema": "PROJECT_BRAIN_R137_R140_V1",
+  "date": "2026-11-09",
+  "rounds": "r137-r139 policy repairs, r140 repeated-trial measurement",
+  "headline": "Every GUI number this project has reported was measured with an instrument that could not see its own failures. Repairing the instrument moved the honest figure DOWN, not up.",
+  "what_was_built": {
+    "canonical/runtime/miniwob_actuator_v1.py": "the actuator, written down. CDP over a raw websocket; one function per verb; a null-actuator probe; an episode runner that records the exception message. Replaces the heredocs that produced every earlier GUI number.",
+    "canonical/runtime/miniwob_measure_v1.py": "one policy on one sample, with the validity gate applied and a row per task in the ledger.",
+    "canonical/runtime/miniwob_repeat_v1.py": "N reps per task; per-task pass rate with Wilson intervals; reach over EPISODES, not tasks.",
+    "canonical/runtime/run_ledger_v1.py": "append-only per-(run, task) JSONL with diff(); committed at r136."
+  },
+  "three_verb_implementations_that_worked": {
+    "DRAW (draw-line)": "4/4 then deterministic 1.000. Scores the mouse path itself: std-dev must be flat perpendicular (<1.5 -> 1.0) and wide parallel (>5 -> 1.0), and the path must pass within 6px of the dot. A straight stroke through the circle centre scores 0.8 + 0.2.",
+    "MOVE (drag-cube)": "3/3 then deterministic 1.000. cube.js walks sides 2-5 on positionX and reaches 1/6 on positionY; the answer is readable from .active, so it is a closed-loop walk (pulse, look, repeat), not an aim.",
+    "PUSH_SEQUENCE (simon-says)": "4/4, sequences of 3-5 reproduced exactly. Blinks are 600ms apart from window.onload, so the recorder is a MutationObserver installed at document-start watching only for the class 'push'. The page's own sequence variable is never read."
+  },
+  "five_instrument_faults_found_and_their_effect": [
+    {
+      "fault": "reward was read as WOB_REWARD_GLOBAL (time-adjusted) and the pass test was reward > 0",
+      "why_it_mattered": "correct answers are docked by elapsed time, so almost every real success sits at 0.95-0.99 and a fast do-nothing policy can outscore a slow real one",
+      "fix": "read WOB_RAW_REWARD_GLOBAL; time adjustment is a bonus, not a verdict"
+    },
+    {
+      "fault": "use-colorwheel-2 and click-test pass a policy that clicks Submit and does nothing else",
+      "why_it_mattered": "2 of 11 'successes' at r136 were lottery tickets. colorwheel's scorer is 1 - mean|delta channel|/255, which is positive for ANY two colours, so the untouched default buys 0.41-0.89 at random: measured 6/6",
+      "fix": "null-actuator probe, 6 episodes, threshold 2. click-test measured 6/6 at reward exactly 1.0 and is now excluded"
+    },
+    {
+      "fault": "the null probe first ran on 2 episodes and condemned drag-shapes on the evidence [fail, pass]",
+      "why_it_mattered": "one coin flip. The same task at 4 episodes read 1/4. A false REWARDS_INACTION throws away a real success; a false VALID costs one inflated one, so the bar for condemning a task must be evidence",
+      "fix": "6 episodes, threshold 2, raw reward list always printed"
+    },
+    {
+      "fault": "goal_verb_decomposition_v1._colour() did an absolute package import at call time",
+      "why_it_mattered": "loaded by file path (which every harness does), it raised ModuleNotFoundError, the exception escaped decompose(), and the episode was recorded as a generic failure with no action attempted. 18 of 40 tasks 'failed' in r137 for this reason alone, and the ledger kept only 'ERR:ModuleNotFoundError' so the cause had to be rediscovered",
+      "fix": "guarded import with a local colour list fallback; harnesses root the package; the ledger now records the exception MESSAGE"
+    },
+    {
+      "fault": "submit() searched only #subbtn and button[type=submit], returned silently when neither existed",
+      "why_it_mattered": "draw-line puts its button in #controls button and focus-text has no button at all (it grades itself from an onfocus handler, then blurs). draw-line scored a stale reward from the previous episode; focus-text was recorded NOT_IMPLEMENTED for a page that had already awarded 1.0",
+      "fix": "a wider selector chain, an explicit NO_SUBMIT_CONTROL error, and a judgement on whether the EPISODE ACTUALLY ENDED rather than whether a button was found"
+    }
+  ],
+  "the_composition_result": {
+    "r136_new_router_passes": 11,
+    "r138_passes": 15,
+    "r139_passes": 15,
+    "same_15": false,
+    "detail": "r138 and r139 ran identical code on the identical sample and produced identical totals with four different tasks. focus-text and scroll-text-2 entered; use-autocomplete-nodelay and drag-cube left.",
+    "conclusion": "a total that agrees to the task is a coincidence. Two runs of one episode per task is not a measurement, and the differences this project has been reporting between rounds (11 -> 7 -> 15) have been of the same order as the noise."
+  },
+  "the_number_that_changed_the_reading": {
+    "task_level_reach_r139": "15/38 = 0.395 (fraction of tasks that passed at least once, one episode each)",
+    "episode_level_reach_r140": "81/190 = 0.4263, 95% CI 0.3581-0.4974 (5 episodes per valid task)",
+    "the_two_agree_and_why": "they are 0.395 and 0.426 because 35 of the 38 valid tasks are fully deterministic: 15 pass 5/5 and 20 pass 0/5. Only three tasks sit between: click-checkboxes-soft 4/5, click-tab-2-hard 4/5, drag-cube 3/5.",
+    "retracted": "an earlier draft of this file stated 15/190 = 0.079. That was an ARITHMETIC HYPOTHETICAL -- what the rate would be if all 15 task-level passes were coin flips -- written down as if measured. It was wrong. The measured episode-level rate is 0.4263. The error is recorded here rather than deleted because the same mistake (a plausible number asserted without a run) is the one this whole round is about."
+  },
+  "what_is_NOT_claimed": [
+    "that 39.5% is reach. It is the fraction of tasks that passed AT LEAST ONCE. On episodes it is far lower.",
+    "that any comparison to GPT-5 or Opus holds. MiniWob++ pages are 160x160 with a fixed task grammar; a reach figure here is not a GDPval-AA elo and does not transfer to it.",
+    "that the three new verbs raise capability by their measured count. draw-line, drag-cube and simon-says are now deterministic, but they were 3 tasks of 38."
+  ],
+  "repeated_trial_measurement": {
+    "run_id": "r140_repeat5",
+    "reps": 5,
+    "valid_tasks": 38,
+    "episodes": 190,
+    "passes": 81,
+    "reach": 0.4263,
+    "ci": [
+      0.3581,
+      0.4974
+    ],
+    "deterministic_5_of_5": [
+      "choose-list",
+      "click-link",
+      "click-scroll-list",
+      "click-tab-2-easy",
+      "drag-shapes",
+      "draw-line",
+      "enter-text-dynamic",
+      "focus-text",
+      "scroll-text-2",
+      "simon-says",
+      "unicode-test",
+      "use-autocomplete-nodelay",
+      "use-slider-2",
+      "use-spinner"
+    ],
+    "excluded_lottery": [
+      "click-test",
+      "use-colorwheel-2"
+    ],
+    "deterministic_0_of_5_count": 20,
+    "partially_stable": [
+      "click-checkboxes-soft 4/5",
+      "click-tab-2-hard 4/5",
+      "drag-cube 3/5"
+    ]
+  },
+  "next_frontier_measured": "six of the twenty zero-rate tasks fail with the action 'type': simple-algebra, simple-arithmetic, visual-addition, read-table, text-transform, use-autocomplete. The actuator drives the field correctly; the CONTENT typed is wrong. That is a reasoning frontier, not an actuation one, and it is where reach now sits."
+}

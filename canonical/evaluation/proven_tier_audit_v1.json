@@ -1,0 +1,4843 @@
+{
+ "schema": "brain.proven_tier_audit.v1",
+ "proven_records": 681,
+ "distinct_cited_modules": 589,
+ "distinct_cited_tests": 160,
+ "cited_modules_missing": 2,
+ "cited_modules_missing_list": [
+  "canonical/runtime/hle_native_open_domain_research_v4.py",
+  "canonical/runtime/native_artifact_information_safe_candidate.py"
+ ],
+ "cited_tests_missing": 0,
+ "cited_tests_missing_list": [],
+ "cited_tests_run": 160,
+ "cited_test_verdicts": {
+  "GREEN": 134,
+  "EMPTY": 9,
+  "RED": 13,
+  "COLLECTION_ERROR": 4
+ },
+ "cited_tests_red": [
+  "canonical/tests/test_cad_t0_route_specific_candidate_v1.py",
+  "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py",
+  "canonical/tests/test_harbor_science_agent_v1.py",
+  "canonical/tests/test_live_capability_invoker_v1.py",
+  "canonical/tests/test_native_artifact_cross_format_preflight_v1.py",
+  "canonical/tests/test_objective_route_certificate_verifier.py",
+  "canonical/tests/test_one_shot_reality_closure_v2_integration.py",
+  "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py",
+  "canonical/tests/test_opus55_acceptance_residual_compiler_v4_projection.py",
+  "canonical/tests/test_saccr_route_specific_terminal_executor_v1.py",
+  "canonical/tests/test_selected_discriminator_policy_cover_bridge_v1.py",
+  "canonical/tests/test_terminal_frontier_compiler_v2.py",
+  "canonical/tests/test_terminal_parent_portfolio_runner_v1.py"
+ ],
+ "uncited_proven_records": 333,
+ "uncited_pct": 48.9,
+ "machine_checkable_pct": 51.1,
+ "what_this_proves": [
+  "the evidence object a PROVEN record cites is present on disk",
+  "the cited test file passes when executed"
+ ],
+ "what_this_does_NOT_prove": [
+  "that the test measures the sentence the record asserts",
+  "that a module which exists implements what the record says it implements",
+  "anything about the uncited PROVEN records, which assert deductions rather than executions"
+ ],
+ "records": [
+  {
+   "name": "AA_BRIEFCASE_24_OF_24_ABSTENTION_COUNTERMODEL_CUT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AA_BRIEFCASE_COMPONENT_SUMMARY_NONINVERSION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_EVALUATOR_HANDOFF_BOUNDARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_FROZEN_EPOCH_RECEIPT_HARDENING_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_dual_predicate_result_bridge_v1.py",
+    "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py",
+    "canonical/tests/test_aa_briefcase_frozen_epoch_result_bridge_v2.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_IDENTIFICATION_PROOF_RECONCILIATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+    "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+    "canonical/tests/test_aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+    "canonical/tests/test_aa_briefcase_top_support_collapse_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_INTERNAL_ONLY_ROUTE_EXHAUSTION_20261011_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "AA_BRIEFCASE_INTERNAL_PROOF_ROUTE_COMPLETENESS_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_internal_proof_route_completeness_v1.py",
+    "canonical/tests/test_aa_briefcase_internal_proof_route_completeness_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_LITE_T2_PUBLIC_FALSIFICATION_SUMMARY_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AA_BRIEFCASE_MINIMUM_INFORMATION_FRONTIER_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+    "canonical/tests/test_aa_briefcase_minimum_information_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_OPUS55_COMPARATOR_PROVENANCE_RECONCILIATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AA_BRIEFCASE_PRIVATE_RUBRIC_EXPRESSIVITY_CUT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_private_rubric_expressivity_cut_v1.py",
+    "canonical/tests/test_aa_briefcase_private_rubric_expressivity_cut_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_PUBLIC_DATA_API_TRACE_BOUNDARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_PUBLIC_INTERFACE_DISCOVERY_CUT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_frozen_epoch_result_bridge_v2.py",
+    "canonical/runtime/aa_briefcase_owner_handoff_gate_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_PUBLIC_INTERFACE_OUTCOME_SUPERDOMAIN_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_public_interface_outcome_superdomain_v1.py",
+    "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_PUBLIC_MODEL_PAYLOAD_BOUNDARY_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AA_BRIEFCASE_RAW_SUPERDOMAIN_TOP_SUPPORT_CUT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_hidden_rubric_indistinguishability_v1.py",
+    "canonical/tests/test_aa_briefcase_hidden_rubric_indistinguishability_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_SCORE_BEARING_SUFFICIENT_STATISTIC_THEOREM_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_score_bearing_sufficient_statistic_v1.py",
+    "canonical/tests/test_aa_briefcase_score_bearing_sufficient_statistic_v1.py"
+   ]
+  },
+  {
+   "name": "AA_BRIEFCASE_TRACE_SCORER_NONIDENTIFIABILITY_CUT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/aa_briefcase_trace_scorer_nonidentifiability_v1.py",
+    "canonical/tests/test_aa_briefcase_trace_scorer_nonidentifiability_v1.py"
+   ]
+  },
+  {
+   "name": "AA_RELATIVE_BAR_SOURCE_DRIFT_GUARD_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ABDUCTIVE_RESIDUAL_THEOREM_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/abductive_residual_theorem_v1.py",
+    "canonical/tests/test_abductive_residual_theorem_v1.py"
+   ]
+  },
+  {
+   "name": "ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "canonical/tests/test_acceptance_proof_transmuter_v1.py"
+   ]
+  },
+  {
+   "name": "ABSTRACT_INTERPRETATION_POSITIVE_COVER_THEOREM_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ACCEPTANCE_FIXED_POINT_CLOSURE_ENGINE_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_ir_compiler_v1.py",
+    "canonical/runtime/minimum_terminal_cut_solver_v1.py",
+    "canonical/runtime/proof_fixed_point_saturator_v1.py",
+    "canonical/tests/test_acceptance_ir_compiler_v1.py",
+    "canonical/tests/test_minimum_terminal_cut_solver_v1.py",
+    "canonical/tests/test_proof_fixed_point_saturator_v1.py"
+   ]
+  },
+  {
+   "name": "ACCEPTANCE_QUOTIENT_POLICY_V5_PUBLIC_VERIFICATION_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ACCEPTANCE_RELATION_UNCERTAINTY_NORMAL_FORM_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ACCEPTED_PURE_ROUTE_EFFECT_FOOTPRINT_OUTPUT_20261007_V2",
+   "cited_modules": [
+    "canonical/obsolescence/run_exact_symbolic_v1.py",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+    "canonical/runtime/material_effect_reference_monitor_v1.py",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+   ]
+  },
+  {
+   "name": "ACTIONS_PRESTEP_RUNNER_DISPATCH_FAILURE_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ACTION_HYPERGRAPH_OPEN_PREDICATE_GUARD_V1",
+   "cited_modules": [
+    "canonical/runtime/action_hypergraph_open_predicate_guard_v1.py",
+    "canonical/tests/test_action_hypergraph_open_predicate_guard_v1.py"
+   ]
+  },
+  {
+   "name": "ADAPTIVE_COVER_INDUCTION_MECHANIZATION_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/adaptive_cover_induction_gate_v1.py",
+    "canonical/tests/test_adaptive_cover_induction_gate_v1.py"
+   ]
+  },
+  {
+   "name": "ADEQUACY_BASIS_POSITIVE_COVER_COMPLETENESS_TRUTH_REPAIR_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/adequacy_basis_structural_completeness_gate_v1.py",
+    "canonical/tests/test_adequacy_basis_structural_completeness_gate_v1.py"
+   ]
+  },
+  {
+   "name": "ARC_PUBLIC_BENCHMARK_RESULT_20261109_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ARENA_PUBLIC_SEMANTICS_TRUTH_REPAIR_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ARTIFACT_EXCLUDE_TRANSPORT_VERIFICATION_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ARTIFACT_MEASUREMENT_BINDING_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/content_addressed_artifact_measurement_v1.py",
+    "canonical/runtime/measured_typed_acceptance_program_v1.py"
+   ]
+  },
+  {
+   "name": "ATOMIC_SURVIVOR_EXECUTION_AUTHORITY_RECONCILIATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AUTHENTICATED_ACCOUNT_ACCESS_FACT_SWEEP_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AUTHENTICATED_CONTEXT_CONCEPT_BRIDGE_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/authenticated_context_concept_bridge_v1.py",
+    "canonical/runtime/authoritative_typed_context_compiler_v1.py",
+    "canonical/runtime/bounded_authenticated_concept_universe_v1.py",
+    "canonical/runtime/semantic_ambiguity_control_v1.py",
+    "canonical/runtime/semantic_information_frontier_v1.py"
+   ]
+  },
+  {
+   "name": "AUTHENTICATED_PRESENTATION_PARETO_CAPABILITY_BINDING_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/authenticated_presentation_pareto_comparator_v1.py",
+    "canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py"
+   ]
+  },
+  {
+   "name": "AUTOMATIONBENCH_CAPABILITY_FIRST_CANDIDATE_BINDING_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/automationbench_policy_state_machine_v3.py",
+    "canonical/runtime/automationbench_stirrup_client_v1.py",
+    "canonical/runtime/generic_goal_constraint_guard_v1.py",
+    "canonical/runtime/generic_goal_state_verifier_v3.py",
+    "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+    "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
+    "canonical/runtime/generic_tool_argument_binder_v1.py",
+    "canonical/runtime/generic_tool_schema_discovery_v1.py"
+   ]
+  },
+  {
+   "name": "AUTOMATIONBENCH_PUBLIC_600_ZERO_COST_RUNTIME_BINDING_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "AUTOMATIONBENCH_PUBLIC_SCOPE_BINDING_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BOUND_REGISTRY_NO_UNIVERSAL_SEMANTIC_SHORTCUT_AUDIT_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/browser_state_information_safe_candidate.py",
+    "canonical/runtime/browser_state_information_safe_proof.py",
+    "canonical/runtime/browser_transition_objective_audit_v1.py",
+    "canonical/runtime/consensus_dom_grounding.py"
+   ]
+  },
+  {
+   "name": "BROWSER_VISUAL_TARGET_PROJECTION_MECHANISM_ENTAILMENT_CORRECTION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BUILDKITE_OWNER_TRIAL_SUPPORT_BINDING_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BUILDKITE_PUBLIC_TRIAL_RESOURCE_POLICY_REDUCTION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BYTES_BOUNDARY_DERIVED_CHECKER_20261007_V3",
+   "cited_modules": [
+    "canonical/runtime/bytes_fused_generic_certificate_checker_v3.py"
+   ]
+  },
+  {
+   "name": "BYTES_CROSS_CAPABILITY_REPRESENTATION_V14_20261007",
+   "cited_modules": [
+    "canonical/runtime/bytes_generic_cross_capability_core_v14.py"
+   ]
+  },
+  {
+   "name": "BYTES_FUSED_GENERIC_CERTIFICATE_CHECKER_20261007_V2",
+   "cited_modules": [
+    "canonical/runtime/bytes_fused_generic_certificate_checker_v2.py"
+   ]
+  },
+  {
+   "name": "BYTES_SCALAR_SMALL_MODEL_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BYTES_SELF_CERTIFYING_SEQUENCE_CHECKER_20261007_V2",
+   "cited_modules": [
+    "canonical/runtime/bytes_self_certifying_sequence_checker_v2.py"
+   ]
+  },
+  {
+   "name": "BYTES_SEQUENCE_EQUIVALENCE_PRESENTATION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "BYTES_SHARED_PROOF_CHECKER_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/bytes_shared_equational_certificate_checker_v1.py"
+   ]
+  },
+  {
+   "name": "BYTES_UNIFIED_TYPED_EQUIVALENCE_CHECKER_20261007_V3",
+   "cited_modules": [
+    "canonical/runtime/bytes_unified_typed_equivalence_checker_v3.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_BOUNDARY_DERIVED_CHECKER_20261007_V4",
+   "cited_modules": [
+    "canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
+    "canonical/runtime/bytes_v14_boundary_derived_checker_v4.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_CLOSED_PROOF_KERNEL_20261007_V7",
+   "cited_modules": [
+    "canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
+    "canonical/runtime/bytes_v14_closed_proof_kernel_v7.py",
+    "canonical/runtime/bytes_v14_self_checker_v4.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_FUSED_SELF_CHECKER_20261007_V3",
+   "cited_modules": [
+    "canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
+    "canonical/runtime/bytes_v14_fused_self_checker_v3.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_GENERIC_LAW_MECHANIZER_20261007_V5",
+   "cited_modules": []
+  },
+  {
+   "name": "BYTES_V14_SELF_CERTIFYING_STRONG_PACKAGE_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
+    "canonical/runtime/bytes_self_certifying_sequence_checker_v2.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_SELF_CHECKER_20261007_V4",
+   "cited_modules": [
+    "canonical/runtime/bytes_generic_zero_overhead_totality_core_v14.py",
+    "canonical/runtime/bytes_v14_self_checker_v4.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_SINGLE_ARTIFACT_CLOSED_20261007_V10",
+   "cited_modules": [
+    "canonical/runtime/bytes_v14_single_artifact_closed_v10.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_SINGLE_ARTIFACT_CLOSED_20261007_V11",
+   "cited_modules": [
+    "canonical/runtime/bytes_v14_single_artifact_closed_v11.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_SINGLE_ARTIFACT_CLOSED_20261007_V12",
+   "cited_modules": [
+    "canonical/runtime/bytes_v14_single_artifact_closed_v12.py"
+   ]
+  },
+  {
+   "name": "BYTES_V14_SINGLE_ARTIFACT_CLOSED_20261007_V8",
+   "cited_modules": [
+    "canonical/runtime/bytes_v14_single_artifact_closed_v8.py"
+   ]
+  },
+  {
+   "name": "CAD_T0_CANDIDATE_FREEZE_V4",
+   "cited_modules": [
+    "canonical/runtime/cad_partspec_generator.py",
+    "canonical/runtime/cad_t0_geometry_population.py",
+    "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "canonical/runtime/cad_t0_oracle_adapter.py",
+    "canonical/runtime/cad_t0_route_specific_candidate_v1.py",
+    "canonical/runtime/m1b_continuous_geometry_compiler.py",
+    "canonical/runtime/m1b_smooth_surface_compiler.py",
+    "canonical/tests/test_cad_t0_route_specific_candidate_v1.py"
+   ]
+  },
+  {
+   "name": "CAD_T0_MULTIPLEX_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "canonical/tests/test_cad_t0_multiplex_scorer.py"
+   ]
+  },
+  {
+   "name": "CAD_T0_POST_REFREEZE_BINDING_V4",
+   "cited_modules": [
+    "canonical/runtime/cad_t0_geometry_population.py",
+    "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "canonical/runtime/cad_t0_oracle_adapter.py",
+    "canonical/runtime/cad_t0_route_specific_candidate_v1.py"
+   ]
+  },
+  {
+   "name": "CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/canonical_proof_atom_basis_v1.py",
+    "canonical/tests/test_canonical_proof_atom_basis_v1.py"
+   ]
+  },
+  {
+   "name": "CANONICAL_PROOF_ATOM_BASIS_ACTIVATION_V2",
+   "cited_modules": [
+    "canonical/runtime/canonical_proof_atom_basis_v2.py"
+   ]
+  },
+  {
+   "name": "CANONICAL_PROOF_ATOM_BASIS_V2",
+   "cited_modules": [
+    "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "canonical/tests/test_canonical_proof_atom_basis_v2.py"
+   ]
+  },
+  {
+   "name": "CANONICAL_PROOF_ATOM_BASIS_V2_ACTIVE_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "canonical/tests/test_canonical_proof_atom_basis_v2.py"
+   ]
+  },
+  {
+   "name": "CAPABILITY_FRONTIER_CURRENTNESS_RECONCILIATION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CERTIFICATE_GATED_SELECTED_ROUTE_DEPLOYED_BINDING_20261007_V2",
+   "cited_modules": [
+    "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+    "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+    "canonical/runtime/router_deployment_canary_v1.py",
+    "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v2.py"
+   ]
+  },
+  {
+   "name": "CERTIFICATE_GATED_SELECTED_ROUTE_ROUTER_RUNTIME_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/certificate_gated_selected_route_router_v1.py"
+   ]
+  },
+  {
+   "name": "CERTIFIED_DEONTIC_SOURCE_EXTENSION_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/proof_carrying_semantic_refinement_v6.py",
+    "canonical/runtime/source_aligned_semantic_proof_v6.py"
+   ]
+  },
+  {
+   "name": "CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CHARTOGRAPHY_89_PROTOCOL_IDENTITY_TRUTH_REPAIR_20261011_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/chartography_crop_tool_v1.py",
+    "canonical/runtime/chartography_with_tools_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "CHARTOGRAPHY_89_WITH_TOOLS_PROTOCOL_BINDING_20261011_V2",
+   "cited_modules": [
+    "canonical/runtime/chartography_brain_credit_subject_gate_v1.py",
+    "canonical/runtime/chartography_crop_tool_v1.py",
+    "canonical/runtime/chartography_deterministic_geometry_v1.py",
+    "canonical/runtime/chartography_deterministic_lower_bound_scorer_v1.py",
+    "canonical/runtime/chartography_deterministic_relation_router_v1.py"
+   ]
+  },
+  {
+   "name": "CHARTOGRAPHY_PUBLIC_DATA_ACCESS_BOUNDARY_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CHARTOGRAPHY_QWEN3_VL4B_EXACT_ARTIFACT_MANIFEST_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CHARTOGRAPHY_WITH_TOOLS_PROTOCOL_PUBLIC_BINDING_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CHARTOGRAPHY_ZERO_SPEND_GUARD_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CHART_AXIS_TITLE_UNIT_BINDING_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/chart_axis_title_unit_binding_v1.py",
+    "canonical/tests/test_chart_axis_title_unit_binding_v1.py"
+   ]
+  },
+  {
+   "name": "CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/chart_direct_curve_label_family_rank_v1.py",
+    "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_CONTROL_KERNEL_MATERIALITY_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_control_kernel_v1.py",
+    "canonical/runtime/harbor_brain_agent.py",
+    "canonical/tests/test_harbor_brain_agent.py"
+   ]
+  },
+  {
+   "name": "CODING_FINITE_EXACT_ORACLE_CONSTRUCTIVE_ADEQUACY_THEOREM_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_finite_candidate_exact_oracle_solver_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_FINITE_EXACT_ORACLE_POLICY_ADEQUACY_CERTIFICATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_finite_candidate_exact_oracle_solver_v1.py",
+    "canonical/tests/test_coding_finite_candidate_exact_oracle_solver_v1.py",
+    "canonical/tests/test_coding_finite_exact_oracle_constructive_theorem_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_GENERAL_SUBSTRATE_MATERIALITY_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_control_kernel_v1.py",
+    "canonical/runtime/harbor_brain_agent.py",
+    "canonical/tests/test_harbor_brain_agent.py"
+   ]
+  },
+  {
+   "name": "CODING_PRIVATE_BENCHMARK_PROOF_CARRYING_SCOPE_COVER_RECONCILIATION_20261009_V2",
+   "cited_modules": [
+    "canonical/runtime/benchmark_proof_evidence_adapter_v1.py",
+    "canonical/runtime/benchmark_witness_elimination_compiler_v4.py"
+   ]
+  },
+  {
+   "name": "CODING_PROOF_CARRYING_TYPED_ACCEPTANCE_CONTROLLER_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_proof_carrying_typed_acceptance_controller_v1.py",
+    "canonical/tests/test_coding_proof_carrying_typed_acceptance_controller_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_ROBUST_FINITE_MULTI_INTERPRETATION_CONSTRUCTIVE_ADEQUACY_THEOREM_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_robust_finite_multi_interpretation_solver_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_ROBUST_FINITE_MULTI_INTERPRETATION_POLICY_ADEQUACY_CERTIFICATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_robust_finite_multi_interpretation_solver_v1.py",
+    "canonical/tests/test_coding_robust_finite_multi_interpretation_solver_v1.py",
+    "canonical/tests/test_coding_robust_finite_multi_interpretation_theorem_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_STATIC_ROUTE_REGION_NONSUBSUMPTION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_STATIC_VERIFIED_CAPABILITY_ROUTE_CONSTRUCTIVE_ADEQUACY_THEOREM_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/universal_verified_adaptive_solver_v12.py"
+   ]
+  },
+  {
+   "name": "CODING_STATIC_VERIFIED_CAPABILITY_ROUTE_POLICY_ADEQUACY_CERTIFICATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/universal_verified_adaptive_solver_v12.py",
+    "canonical/runtime/universal_verified_adaptive_solver_v4.py"
+   ]
+  },
+  {
+   "name": "CODING_TB4_SOURCE_GATE_V2_ADMISSION_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_capability_source_gate_v2.py"
+   ]
+  },
+  {
+   "name": "CODING_TYPED_SPECIALIST_POLICY_COVER_DEFICIT_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_V5_TERMINAL_SOUNDNESS_VS_CONSTRUCTIVE_ADEQUACY_SEPARATION_20261009_V1",
+   "cited_modules": [
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/build_overlay.py",
+    "canonical/runtime/coding_v5_positive_adequacy_certificate_gate_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_V5_WAL_SINGLETON_FINITE_CELL_REDUCTION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CODING_VISIBLE_ACCEPTANCE_REGION_NONSUBSUMPTION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_visible_complete_acceptance_contract_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_ADEQUACY_THEOREM_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_visible_complete_acceptance_contract_v1.py"
+   ]
+  },
+  {
+   "name": "CODING_VISIBLE_COMPLETE_ACCEPTANCE_CONTRACT_POLICY_ADEQUACY_CERTIFICATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/coding_visible_complete_acceptance_contract_v1.py",
+    "canonical/tests/test_coding_visible_complete_acceptance_contract_v1.py"
+   ]
+  },
+  {
+   "name": "COMPLETE_OBJECTIVE_COMPARATOR_ERASURE_THEOREM_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "COMPOSITION_CURRENT_UPSTREAM_BRIDGE_FIXED_POINT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CONTRACT_NATIVE_ACTUAL_POLICY_GENERATOR_DOMAIN_THEOREM_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CORE_HARDENING_VERIFICATION_20261001_V1",
+   "cited_modules": [
+    "canonical/runtime/execution_authority_reducer.py",
+    "canonical/runtime/source_contract_compiler.py"
+   ]
+  },
+  {
+   "name": "COUNTEREXAMPLE_GUIDED_CAUSAL_ARCHITECTURE_SYNTHESIS_ACTIVATION_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/counterexample_guided_causal_architecture_synthesizer_v1.py",
+    "canonical/tests/test_counterexample_guided_causal_architecture_synthesizer_v1.py"
+   ]
+  },
+  {
+   "name": "COVERAGE_CC_R3_MISSION_SCOPE_BRIDGE_STATUS_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "COVERAGE_CC_R3_PROFESSIONAL_R12_STABLE_ADAPTER_ACTIVATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v1.py",
+    "canonical/runtime/professional_r12_v9_policy_cover_totality_semantic_verify_v1.py"
+   ]
+  },
+  {
+   "name": "CREATIVE_DIAGRAM_TERMINAL_ACCEPTANCE_BASIS_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CROSS_CUTTING_CONDITION_FACTORING_THEOREM_V2_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CROSS_CUTTING_CONDITION_LIFTING_THEOREM_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_26_ZERO_REALITY_FRONTIER_V3_ACTIVATION",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_30_INFORMATION_DOMINANCE_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ALL_OPEN_CHECKPOINT_WAKE_GATE_RECONCILIATION_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_BENCHMARK_WITNESS_ELIMINATION_RUNTIME_OVERLAY_V1",
+   "cited_modules": [
+    "canonical/runtime/benchmark_witness_elimination_compiler_v3.py",
+    "canonical/tests/test_benchmark_witness_elimination_compiler_v3.py"
+   ]
+  },
+  {
+   "name": "CURRENT_BENCHMARK_WITNESS_ELIMINATION_RUNTIME_OVERLAY_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_FULL_REGRESSION_QUIESCENCE_EPOCH_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_O_CODING_WAKE_GATE_RECONCILIATION_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_O_TB4_MYSTERY_WAKE_GATE_RECONCILIATION_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_R2_DECISION_INTELLIGENCE",
+   "cited_modules": [
+    "canonical/runtime/authenticated_context_concept_bridge_v1.py",
+    "canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py",
+    "canonical/runtime/bounded_authenticated_concept_universe_v1.py",
+    "canonical/runtime/bounded_semantic_relation_proof_v1.py",
+    "canonical/runtime/brain_owned_scoped_domain_mapping_relation_edge_authority_v1.py",
+    "canonical/runtime/brain_owned_semantic_relation_edge_registry_v4.py",
+    "canonical/runtime/certified_oewn_decision_evidence_v1.py",
+    "canonical/runtime/cross_document_effect_semantic_lattice_v1.py"
+   ]
+  },
+  {
+   "name": "CURRENT_RESIDUAL_REUSE_CLASSIFICATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+    "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py",
+    "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+    "canonical/runtime/escape_progress_shared_gap_audit_v5.py",
+    "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py"
+   ]
+  },
+  {
+   "name": "CURRENT_REUSE_FRONTIER_EXACT_DELTA_CUT_20261011_V2",
+   "cited_modules": [
+    "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py",
+    "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py"
+   ]
+  },
+  {
+   "name": "CURRENT_ROOT3_ZERO_REALITY_STRONGER_PROOF_SATURATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_SEMANTIC_COMPLETENESS_ROOT",
+   "cited_modules": [
+    "canonical/runtime/semantic_root_uvck_adapter_v1.py",
+    "canonical/tests/test_semantic_root_uvck_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "CURRENT_TB_SCIENCE_EXECUTION",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v13.py"
+   ]
+  },
+  {
+   "name": "CURRENT_V8_POST_COMPRESSION_VERIFICATION_BINDING_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V11",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V12_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V13_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V14_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V15_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V16_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V17_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V19_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V20_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V21_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURRENT_ZERO_REALITY_MINIMUM_CUT_V22_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/opus55_target_truth_normalizer_v1.py",
+    "canonical/runtime/terminal_frontier_factorizer_v1.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_4_0_INFORMATION_BOUNDARY_PUBLIC_SEARCH_SATURATION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_4_0_PUBLIC_OWNER_SURFACE_CEILING_REDUCTION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_4_0_SCOPE_COMPLETENESS_RECEIPT_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_4_0_SCORE_LATTICE_ATTACK_SCHEDULER_RECONCILIATION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_4_0_VENDOR_PDF_RESULT_ARTIFACT_ROUTE_CLOSURE_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_CURRENT_ROOT2_ROUTE_CORRECTION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_DEPENDENCY_PROVENANCE_ATOM_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/cursorbench_typed_acceptance_dependency_provenance_atom_v1.py",
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_DEPENDENCY_PROVENANCE_MINCUT_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/cursorbench_typed_acceptance_dependency_provenance_atom_v1.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_HTML_JS_FILTER_TYPED_ACCEPTANCE_CONTEXT_POLICY_ADEQUACY_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/independent_acceptance_model.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_OWNER_ACCESS_BOUNDARY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_PREVERIFIER_INFORMATION_BOUNDARY_ATOM_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/cursorbench_typed_acceptance_information_boundary_atom_v1.py",
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_REACT_LEAD_FORM_SPENT_VALIDATION_HIDDEN_REVEAL_AUTHORIZATION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_REACT_LEAD_FORM_SPENT_VALIDATION_PRODUCER_FREEZE_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_ROUTE_A_PUBLIC_OWNER_SEARCH_SATURATION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "CURSORBENCH_SOURCE_COVERAGE_ATOMS_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/cursorbench_typed_acceptance_source_coverage_atoms_v1.py",
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/independent_acceptance_model.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_TYPED_ACCEPTANCE_PLAN_POLICY_ADEQUACY_CERTIFICATE_20261009_V2",
+   "cited_modules": [
+    "canonical/runtime/independent_acceptance_model.py"
+   ]
+  },
+  {
+   "name": "CURSORBENCH_TYPED_SPECIALIST_TARGET_MEMBERSHIP_TRANSFER_FALSIFICATION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "D0_NATIVE_STRUCTURED_ARTIFACT_EDIT_CLOSURE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "DB_ESCAPE_CATCHALL_TOTAL_ABSTRACTION_REDUCTION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "DECLARED_ARTIFACT_SEMANTIC_POLICY_ACTIVATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/declared_artifact_semantic_policy_v1.py",
+    "canonical/runtime/effect_broker_semantic_gate_v1.py",
+    "canonical/runtime/root3_declared_artifact_finalizer_v1.py"
+   ]
+  },
+  {
+   "name": "DELEGATION_TERMINAL_POPULATION_BINDING_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "DELEGATION_WHOLE_DIMENSION_PREFLIGHT_V2",
+   "cited_modules": [
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "canonical/tests/test_delegation_whole_scope_v2.py"
+   ]
+  },
+  {
+   "name": "DERIVED_STAGE_C_STATE_GATE_20261001_V1",
+   "cited_modules": [
+    "canonical/runtime/execution_authority_reducer.py"
+   ]
+  },
+  {
+   "name": "DIFFERENTIAL_DOMINANCE_COMPILER_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/differential_dominance_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "DIFFERENTIAL_DOMINANCE_COMPILER_V1",
+   "cited_modules": [
+    "canonical/runtime/differential_dominance_compiler_v1.py",
+    "canonical/tests/test_differential_dominance_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "DOMAIN_KNOWLEDGE_QUOTIENT_THEOREM_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "EFFECT_BROKER_FORGED_RECEIPT_COUNTEREXAMPLE_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/effect_broker_contract_v1.py"
+   ]
+  },
+  {
+   "name": "EFFECT_CARRIER_GUARD_V1_SUPERSESSION_AND_V2_VERIFICATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/effect_carrier_guard_v1.py",
+    "canonical/runtime/effect_carrier_guard_v2.py",
+    "canonical/tests/test_effect_carrier_guard_v1.py",
+    "canonical/tests/test_effect_carrier_guard_v2.py"
+   ]
+  },
+  {
+   "name": "ENVIRONMENT_SHAPES_AND_SAFETY_20261109_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_OCCUPANCY_NONENTAILMENT_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_PROGRESS_13_FRONTIER_RECONCILIATION_20261010_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_20261010_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_PROGRESS_EXACT_OBSERVATIONAL_SEPARABILITY_NORMAL_FORM_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/finite_identifiability.py"
+   ]
+  },
+  {
+   "name": "ESCAPE_PROGRESS_FINANCE_INDEX_CAUSAL_RECLASSIFICATION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ESCAPE_PROGRESS_REACHED_STATE_V2_REUSE_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+    "canonical/runtime/reached_escape_repair_cycle_v1.py"
+   ]
+  },
+  {
+   "name": "EVERY_VALUABLE_THING_CENSUS_20261109_V1",
+   "cited_modules": [
+    "canonical/runtime/every_valuable_thing_measured_v1.py"
+   ]
+  },
+  {
+   "name": "EVERY_VALUABLE_THING_CENSUS_V2_20261109_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "EVIDENCE_SYNTHESIS_EXISTING_SCOPE_CERTIFICATE_REUSE_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "EXACT_FOUR_PORTFOLIO_PREQUALIFICATION_V1",
+   "cited_modules": [
+    "canonical/runtime/scope_equivalent_proof_gate.py"
+   ]
+  },
+  {
+   "name": "EXACT_INFORMATION_GAIN_KERNEL_V1",
+   "cited_modules": [
+    "canonical/runtime/exact_information_gain.py",
+    "canonical/tests/test_exact_information_gain.py"
+   ]
+  },
+  {
+   "name": "EXECUTION_SURFACE_PACKAGE_POLICY_PROBE_VERIFICATION_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "EXTERNAL_BENCHMARK_DOMINANCE_GATE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FIBO_Q2_2026_BASEL_DESIGNATION_AUTHORITY_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/fibo_q2_2026_basel_designation_authority_v1.py",
+    "canonical/tests/test_fibo_q2_2026_basel_designation_authority_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_ACCOUNTING_INDEX_IDENTITY_RECONCILIATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q11_DONOR_FREE_FCCR_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q13_DONOR_FREE_PREMIUM_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q15_DONOR_FREE_EV_REVENUE_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "canonical/runtime/finance_sec_fact_selector_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q19_DONOR_FREE_GUIDANCE_MARGIN_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q20_DONOR_FREE_CAPEX_INTENSITY_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q21_DONOR_FREE_OPENINGS_GUIDANCE_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q25_DONOR_FREE_DCF_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "canonical/runtime/finance_sec_fact_selector_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q26_DONOR_FREE_LBO_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_modeling_workflows_v1.py",
+    "canonical/runtime/finance_quantitative_algebra_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q27_DONOR_FREE_DCF_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_modeling_workflows_v1.py",
+    "canonical/runtime/finance_quantitative_algebra_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q4_DONOR_FREE_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py",
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "canonical/runtime/finance_sec_fact_selector_v1.py",
+    "canonical/runtime/finance_sec_ticker_cik_from_registry_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q5_DONOR_FREE_CAGR_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLIC_Q6_DONOR_FREE_DIO_CANARY_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/sec_companyconcept_source_native.py",
+    "canonical/runtime/finance_metric_xbrl_registry_v1.py",
+    "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "canonical/runtime/finance_quantitative_dependency_v1.py",
+    "canonical/runtime/finance_quantitative_question_contract_v1.py",
+    "canonical/runtime/finance_sec_fact_selector_v1.py",
+    "canonical/runtime/finance_sec_ticker_cik_from_registry_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_AGENT_V2_PUBLISHED_CONTRACT_SCOPE_FALSIFICATION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_COMMON_POLICY_REGION_GATE_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/evidence_decision_synthesis.py",
+    "canonical/runtime/finance_source_coverage_certificate_v1.py",
+    "canonical/runtime/judgment_common_policy_region_gate_v1.py",
+    "canonical/runtime/judgment_control_envelope_v1.py",
+    "canonical/tests/test_judgment_common_policy_region_gate_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_COMMON_POLICY_TRANSITIVE_REPLAY_RESOLUTION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_INDEX_DETERMINISTIC_ZERO_REALITY_FIXED_POINT_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_INDEX_DIRECT_RESULT_BRIDGE_HARDENING_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finance_index_direct_result_bridge_v1.py",
+    "canonical/runtime/finance_index_direct_threshold_v1.py",
+    "canonical/tests/test_finance_index_direct_result_bridge_v1.py"
+   ]
+  },
+  {
+   "name": "FINANCE_INDEX_DIRECT_THRESHOLD_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_INDEX_DIRECT_THRESHOLD_AUTHORITY_RECONCILIATION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_INDEX_IRREDUCIBLE_NORMALIZATION_AUTHORITY_CUT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_INDEX_PUBLIC_CAPABILITY_WEIGHT_BINDING_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FINANCE_INDEX_PUBLIC_IDENTIFIABILITY_AND_THRESHOLD_SEMANTICS_RECONCILIATION_20261011_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "FINITE_BLACK_BOX_TARGET_UNIVERSAL_CERTIFICATION_LOWER_BOUND_20261005_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "FINITE_EVIDENCE_UNIVERSAL_DOMINANCE_LOWER_BOUND_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FREECAD_SPRING_CLIP_RANK22_DERIVED_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/execution_authority_reducer.py"
+   ]
+  },
+  {
+   "name": "FREECAD_SPRING_CLIP_RANK22_REQUALIFICATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FRONTIERCODE_HOSTED_EVALUATION_ROUTE_REFRESH_20261008_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261008_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FRONTIERCODE_OWNER_EVALUATION_ACCESS_REFRESH_20261009_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "FRONTIERCODE_PUBLIC_EVALUATION_INTAKE_REFRESH_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "FROZEN_COMPOSITION_COMPONENT_INTERFACE_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/composition_component_proof_slicer_v1.py",
+    "canonical/runtime/composition_interface_manifest_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1",
+   "cited_modules": [
+    "canonical/runtime/composition_interface_manifest_compiler_v1.py",
+    "canonical/tests/test_composition_interface_manifest_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "G0_DEPENDENCY_COMPRESSION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GDPVAL_AA_V21_CROWD_BT_PUBLIC_KERNEL_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/gdpval_aa_v21_crowd_bt_kernel_v1.py"
+   ]
+  },
+  {
+   "name": "GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/gdpval_evaluation_law_information_cut_v1.py",
+    "canonical/runtime/gdpval_necessary_preference_certificate_v1.py",
+    "canonical/tests/test_gdpval_evaluation_law_information_cut_v1.py"
+   ]
+  },
+  {
+   "name": "GDPVAL_EVALUATOR_FACING_QUOTIENT_U_ROUTE_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/gdpval_evaluator_facing_quotient_u_route_v1.py",
+    "canonical/tests/test_gdpval_evaluator_facing_quotient_u_route_v1.py"
+   ]
+  },
+  {
+   "name": "GDPVAL_EXACT_CRITERION_TEXT_QUOTIENT_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GDPVAL_FIRST_RESIDUAL_MECHANICAL_ROUTE_EXPANSION_20261009_V2",
+   "cited_modules": [
+    "canonical/runtime/gdpval_objective_artifact_criteria_v2.py"
+   ]
+  },
+  {
+   "name": "GDPVAL_FIXED_BAR_OWNER_PAIRWISE_NONNECESSITY_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GDPVAL_OPUS55_FIXED_BAR_PROVENANCE_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GDPVAL_OWNER_EXAMPLE_SUBMISSION_SURFACE_DELTA_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GDPVAL_RUBRIC_ACCEPTANCE_COMPLEMENT_CUT_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/gdpval_rubric_acceptance_index_v1.py"
+   ]
+  },
+  {
+   "name": "GDPVAL_SOURCE_BOUND_IMPERATIVE_REQUIREMENT_CHANNEL_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+    "canonical/runtime/bounded_predicate_argument_semantics.py",
+    "canonical/runtime/explicit_obligation_index_v1.py",
+    "canonical/runtime/explicit_requirement_index_v2.py"
+   ]
+  },
+  {
+   "name": "GDPVAL_V21_COMMON_ANCHOR_TRANSPORT_FALSIFIER_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GDPVAL_V21_PUBLIC_GRADING_PROTOCOL_CLOSURE_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GENERAL_GRID_SYNTHESIS_INFRASTRUCTURE_CHECKPOINT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/finite_grid_program_inducer_v1.py",
+    "canonical/runtime/grid_delta_rule_inducer_v1.py",
+    "canonical/runtime/grid_delta_rule_inducer_v2.py",
+    "canonical/tests/test_finite_grid_program_inducer_v1.py",
+    "canonical/tests/test_grid_delta_rule_inducer_v1.py",
+    "canonical/tests/test_grid_delta_rule_inducer_v2.py"
+   ]
+  },
+  {
+   "name": "GENERIC_PRECOMMIT_ISOLATION_THEOREM_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GITHUB_ACTIONS_PRESTEP_CARRIER_FAILURE_20261002_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GLOBAL_CERTIFICATE_ABDUCTIVE_RESIDUAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GLOBAL_IDENTICAL_RESIDUAL_REUSE_FIXED_POINT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GLOBAL_MINIMUM_REALITY_CUT_CHALLENGER_V3_DETERMINISTIC_REPLAY_V1",
+   "cited_modules": [
+    "canonical/runtime/minimum_reality_cut.py"
+   ]
+  },
+  {
+   "name": "GLOBAL_MINIMUM_REALITY_CUT_INPUT_VERIFICATION_20261002_V1",
+   "cited_modules": [
+    "canonical/runtime/minimum_reality_cut.py"
+   ]
+  },
+  {
+   "name": "GLOBAL_MINIMUM_REALITY_CUT_V3_VERIFICATION_20261002_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "GLOBAL_RETRIEVAL_CURRENT_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/global_retrieval_authority_guard_v1.py",
+    "canonical/runtime/global_retrieval_controller_v2.py",
+    "canonical/runtime/global_retrieval_controller_v3.py",
+    "canonical/runtime/global_retrieval_entrypoint_v1.py",
+    "canonical/runtime/global_retrieval_entrypoint_v2.py",
+    "canonical/runtime/global_retrieval_entrypoint_v3.py",
+    "canonical/runtime/global_retrieval_entrypoint_v4.py",
+    "canonical/runtime/retrieval_hidden_witness_arena_v1.py"
+   ]
+  },
+  {
+   "name": "GLOBAL_TERMINAL_SURFACE_DOMINANCE_V3_VERDICT",
+   "cited_modules": [
+    "canonical/runtime/proof_route_dominance.py"
+   ]
+  },
+  {
+   "name": "GLOBAL_TERMINAL_SURFACE_DOMINANCE_VERDICT_V3",
+   "cited_modules": [
+    "canonical/runtime/proof_route_dominance.py"
+   ]
+  },
+  {
+   "name": "H100_CAPABILITY_RATCHETED_SEARCH_BOUND_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_capability_ratcheted_search_bound_v1.py",
+    "canonical/tests/test_h100_capability_ratcheted_search_bound_v1.py"
+   ]
+  },
+  {
+   "name": "H100_COMPILED_MACRO_CHAIN_SEARCH_PRECOMMIT_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_verified_capability_registry_v8.py"
+   ]
+  },
+  {
+   "name": "H100_COMPOSITIONAL_LANGUAGE_BRAIN_CI_INTEGRATION_ANOMALY_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py"
+   ]
+  },
+  {
+   "name": "H100_EXPRESSION_TREE_SYMBOLIC_REGRESSION_CANDIDATE_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+    "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py",
+    "canonical/tests/test_h100_expression_tree_symbolic_regression_v1.py"
+   ]
+  },
+  {
+   "name": "H100_LEXICAL_NO_EVIDENCE_INDISTINGUISHABILITY_BOUND_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_lexical_no_evidence_indistinguishability_v1.py",
+    "canonical/tests/test_h100_lexical_no_evidence_indistinguishability_v1.py"
+   ]
+  },
+  {
+   "name": "H100_OPEN_WORLD_LEXICAL_COVERAGE_BOUND_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_lexical_coverage_bound_v1.py",
+    "canonical/tests/test_h100_lexical_coverage_bound_v1.py"
+   ]
+  },
+  {
+   "name": "H100_OPEN_WORLD_PROPOSAL_IMPOSSIBILITY_AND_COMPLEXITY_BOUND_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_universal_proposal_bound_v1.py",
+    "canonical/tests/test_h100_universal_proposal_bound_v1.py"
+   ]
+  },
+  {
+   "name": "H100_PROPOSAL_MEASUREMENT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "H100_TOOL_TRACE_BRAIN_CI_INTEGRATION_ANOMALY_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "H100_VERIFIED_CAPABILITY_REGISTRY_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_verified_capability_registry_v1.py",
+    "canonical/tests/test_h100_verified_capability_registry_v1.py"
+   ]
+  },
+  {
+   "name": "H100_ZERO_LEARNED_MECHANISM_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py"
+   ]
+  },
+  {
+   "name": "H100_ZERO_LEARNED_PARAMETRIC_PRIMITIVE_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/h100_zero_learned_parametric_unary_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_ANTHROPIC_PROTOCOL_OUTREACH_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_CAPABILITY_FIRST_MISSION_LOCK_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_DATASET_CLEANROOM_INTAKE_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_DATASET_INGEST_VERIFICATION_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_EXACT_COMMIT_EXECUTION_PREFLIGHT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_EXACT_RETRIEVAL_SPAN_VERIFICATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_exact_retrieval_span_v1.py",
+    "canonical/runtime/hle_question_shape_router_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "canonical/tests/test_hle_exact_retrieval_span_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_EXACT_RETRIEVAL_V2_ISOLATION_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_EXECUTION_PREFLIGHT_20261011_V4",
+   "cited_modules": [
+    "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_G2_TARGET_GRADER_BINDING_RECONCILIATION_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_GATED_POPULATION_QUARANTINE_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_MCQ_RETRIEVAL_VOTE_VERIFICATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_mcq_retrieval_vote_v1.py",
+    "canonical/runtime/hle_native_semantic_compiler_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py",
+    "canonical/tests/test_hle_mcq_retrieval_vote_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_NATIVE_MCQ_COMPILER_VERIFICATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_native_semantic_compiler_v1.py",
+    "canonical/tests/test_hle_native_semantic_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_NATIVE_OPEN_WEB_FALLBACK_PREFLIGHT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_native_open_web_fallback_v1.py",
+    "canonical/tests/test_hle_native_open_web_fallback_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_NATIVE_SOLVER_STACK_V2_STATUS_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_exact_retrieval_extract_v2.py",
+    "canonical/runtime/hle_image_observation_v1.py",
+    "canonical/runtime/hle_mcq_retrieval_vote_v1.py",
+    "canonical/runtime/hle_native_total_solver_v2.py",
+    "canonical/runtime/hle_symbolic_lark_solver_v2.py",
+    "canonical/runtime/hle_symbolic_surface_solver_v1.py",
+    "canonical/runtime/root2_hle_opus55_tool_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_OPEN_WEB_FALLBACK_CONSUMED_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_OPUS46_GRADER_PUBLIC_SEARCH_SATURATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_OPUS55_PUBLIC_PROTOCOL_REGRESSION_RECONCILIATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_PUBLIC_REVISION_LOCK_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_QUESTION_SHAPE_ROUTER_VERIFICATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_question_shape_router_v1.py",
+    "canonical/tests/test_hle_question_shape_router_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_RELATION_REQUIREMENTS_CONSUMED_CAUSAL_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_RELATION_WIKIPEDIA_COMPOSITION_CONSUMED_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_RETRIEVAL_QUERY_PLANNER_V2_PAIRED_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_RETRIEVAL_RECALL_CONSUMED_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_SEMANTIC_SCORER_RESEAL_VERIFICATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_exact_commit_semantic_certificate_v1.py",
+    "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "HLE_TARGET_POPULATION_FAMILY_BINDING_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_TARGET_SCORE_EXECUTION_PREFLIGHT_20261011_V5",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_TOOLS_OFFICIAL_PROTOCOL_BOUNDARY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_UPLOADED_POPULATION_STRICT_SOLVER_BOUNDARY_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_V4_PUBLIC_NONHLE_DIAGNOSTIC_RESULT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_native_open_domain_research_v4.py"
+   ]
+  },
+  {
+   "name": "HLE_V5_CONSUMED_PUBLIC_DIAGNOSTIC_RESULT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_native_open_domain_research_v5.py"
+   ]
+  },
+  {
+   "name": "HLE_V5_CORRECTED_TRANSPORT_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_WIKIPEDIA_BING_CONSUMED_CAUSAL_RESULT_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "HLE_WIKIPEDIA_BING_TRANSPORT_PREFLIGHT_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_wikipedia_bing_transport_v1.py",
+    "canonical/tests/test_hle_wikipedia_bing_transport_v1.py"
+   ]
+  },
+  {
+   "name": "HUGGINGFACE_ACCOUNT_EXISTENCE_MAILBOX_RECEIPT_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "IF_SCOPE_BOUNDARY_ATOMIC_PREDICATE_PROMOTION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "INSTRUCTION_FOLLOWING_FAMILY_ACCEPTANCE_PROMOTION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "INSTRUCTION_FOLLOWING_OWNERSHIP_PACKAGE_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_predicate_argument_semantics.py",
+    "canonical/runtime/explicit_compound_requirement_decomposer.py",
+    "canonical/runtime/if_scope_finite_wave_v1.py",
+    "canonical/runtime/independent_acceptance_model.py",
+    "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+    "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+    "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py",
+    "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py"
+   ]
+  },
+  {
+   "name": "IS_INSTANT_LEARNING_ENOUGH_20261109_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "J_G_FALSIFICATION_TOURNAMENT_EXECUTION_20261006_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LEASE_CAD_MODEL_TB4_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LEASE_DATA_ANONYMIZATION_TB4_STAGE_C_V2_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LEASE_FIN_SACCR_RWA_TB4_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LEASE_ONTOLOGY_KG_QUERYING_TB4_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LITERAL_ALL_CAPABILITY_UNIVERSE_EXHAUSTIVENESS_THEOREM_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_2026_06_25_IFBENCH58_SCORER_ROUTE_RECONCILIATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_2026_06_25_OPUS55_IF_TARGET_GEOMETRY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_58_FAMILY_PUBLIC_DETECTION_COVERAGE_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_if_single_checker_solver_v1.py",
+    "canonical/tests/test_livebench_if_single_checker_solver_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_ACTIVE15_SCOPE_REBOUND_POINTWISE_CLOSURE_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_CLEAN_ACTIVE15_PREDICATE_ACCEPTANCE_REDUCTION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_CONTAMINATION_SAFE_RESCUE_FRONTIER_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_ACTIVATION_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_FORMAL_ROUTING_V2_UNQUOTED_ATOM_EXTENSION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_FROZEN_ACTIVE_LEGACY15_HASH_OPENING_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_FROZEN_RUNTIME_PACKAGE_CLOSURE_RECONCILIATION_V1",
+   "cited_modules": [
+    "canonical/runtime/auto_capability_acquisition.py",
+    "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_IF_2026_TERMINAL_SCOPE_TRUTH_REPAIR_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_IF_COMPARATOR_ALIGNMENT_RECONCILIATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_IF_COMPARATOR_ROUTE_RECONCILIATION_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_IF_CURRENT_PREDICATE_LOCAL_DIRECT_AUTHORITY_REBIND_CANDIDATE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_IF_HERMETIC_INPUT_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_if_response_adapter.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_IF_REFERENCE_FREE_COMPOUND_WITNESS_BREAKTHROUGH_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py",
+    "canonical/tests/test_livebench_if_reference_free_compound_witness_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_if_score_bound_v1.py",
+    "canonical/tests/test_livebench_if_score_bound_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_IF_THIN_ADAPTER_COMPLETION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_IF_VERIFIER_BINDING_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_partial_credit_mass_v1.py",
+    "canonical/tests/test_livebench_partial_credit_mass_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_PROMPT_ONLY_OVERLAP_BREAKTHROUGH_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_prompt_only_overlap_compiler_v1.py",
+    "canonical/tests/test_livebench_prompt_only_overlap_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_PUBLIC_CHECKER_COVERAGE_FRONTIER_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_PUBLIC_CHECKER_EXACT_MINCUT_CERTIFICATE_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_public_checker_exact_mincut_v1.py",
+    "canonical/tests/test_livebench_public_checker_exact_mincut_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_PUBLIC_KWARGS_EXACT_REFERENCE_RECOVERY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_PUBLIC_PROMPT_PARAMETER_DERIVABILITY_TRUTH_REPAIR_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_PUBLIC_RUNTIME_CLOSURE_FROZEN_BINDING_V2",
+   "cited_modules": [
+    "canonical/runtime/astra_runtime.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/capability_proposal_generators.py",
+    "canonical/runtime/goal_compiler.py",
+    "canonical/runtime/root2_livebench_if_astra_inference_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_RATIO_OVERLAP_VISIBLE_WITNESS_V1",
+   "cited_modules": [
+    "canonical/runtime/livebench_ratio_overlap_visible_witness_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_RETRY_EXECUTION_EPOCH_V6_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_4B_EXACT_PUBLIC_200_GATE_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_CONTRASTIVE_SEMANTIC_GATE_BREAKTHROUGH_V1",
+   "cited_modules": [
+    "canonical/runtime/root1_contrastive_semantic_gate_v1.py",
+    "canonical/tests/test_root1_contrastive_semantic_gate_v1.py"
+   ]
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_OPEN_WEIGHT_DOMINANCE_UPDATE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_OPEN_WEIGHT_SEMANTIC_CORE_BREAKTHROUGH_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_Q4_RESOURCE_DOMINANCE_FREEZE_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_QWEN38_4B_SEMANTIC_SEED_PRECOMMIT_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_ROOT1_QWEN38_4B_SEMANTIC_SEED_PRECOMMIT_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "LIVEBENCH_V7_GENERIC_ATOMIC_ONE_USE_EXECUTION_CLAIM_BRIDGE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "M0A_COMPLETE_ACTION_BUNDLE_V1",
+   "cited_modules": [
+    "canonical/runtime/explicit_compound_requirement_decomposer.py",
+    "canonical/runtime/explicit_definition_reference_graph.py",
+    "canonical/runtime/source_contract_compiler.py"
+   ]
+  },
+  {
+   "name": "M0A_SPECIALIZED_DONOR_PROVENANCE_SCREEN_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "M0B_FROZEN_ENVELOPE_CLOSURE_V1",
+   "cited_modules": [
+    "canonical/runtime/independent_acceptance_model.py",
+    "canonical/runtime/m0b_frozen_envelope_type_audit.py",
+    "canonical/runtime/requirement_acceptance_compiler.py"
+   ]
+  },
+  {
+   "name": "M0_PORTFOLIO_MULTIPLEX_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/independent_acceptance_model.py",
+    "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+    "canonical/runtime/source_contract_compiler.py"
+   ]
+  },
+  {
+   "name": "M1A_COMPLETE_ACTION_BUNDLE_V1",
+   "cited_modules": [
+    "canonical/runtime/callout_geometry_association.py",
+    "canonical/runtime/drawing_view_regions.py",
+    "canonical/runtime/drawing_view_registration.py",
+    "canonical/runtime/orthographic_view_identity.py"
+   ]
+  },
+  {
+   "name": "M1A_POSITIONED_OCR_TSV_BRIDGE_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+    "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+    "canonical/runtime/drawing_annotation_constraint_pipeline.py",
+    "canonical/tests/test_image_ocr_tesseract_positioned.py"
+   ]
+  },
+  {
+   "name": "M1B_COMPLETE_ACTION_BUNDLE_V1",
+   "cited_modules": [
+    "canonical/runtime/engineering_callout_parser.py",
+    "canonical/runtime/orthographic_constraint_graph.py",
+    "canonical/runtime/orthographic_uniqueness_gate.py"
+   ]
+  },
+  {
+   "name": "M1_MULTIPLEXED_MATCHED_GEOMETRY_PROOF_BUNDLE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "M3_DEPENDENCY_COMPRESSION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "M5_DEPENDENCY_COMPRESSION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "MATCHED_SCOPE_HIERARCHICAL_REFINEMENT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "MINIMUM_TERMINAL_BASIS_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/minimum_terminal_basis_v1.py"
+   ]
+  },
+  {
+   "name": "MINIMUM_TERMINAL_BASIS_COMPILER_V1",
+   "cited_modules": [
+    "canonical/runtime/minimum_terminal_basis_v1.py",
+    "canonical/tests/test_minimum_terminal_basis_v1.py"
+   ]
+  },
+  {
+   "name": "MULTITARGET_CERTIFICATE_TARGET_REFINEMENT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "MYSTERYMECHANISM_IDENTIFIABILITY_LOWER_BOUND_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "MYSTERYMECHANISM_PUBLIC_OPERATOR_COVERAGE_AUDIT_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v2.py"
+   ]
+  },
+  {
+   "name": "MYSTERYMECHANISM_REASONING_EFFORT_PROFILE_REDUCTION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "NATIVE_ARTIFACT_CROSS_FORMAT_INFORMATION_SAFE_PREFLIGHT_V1",
+   "cited_modules": [
+    "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/ooxml_package_transaction.py",
+    "canonical/runtime/pdf_native_edit_transaction.py",
+    "canonical/tests/test_native_artifact_cross_format_preflight_v1.py"
+   ]
+  },
+  {
+   "name": "NATIVE_ARTIFACT_PREFLIGHT_ROUTE_DOMINANCE_V1",
+   "cited_modules": [
+    "canonical/runtime/native_artifact_information_safe_candidate.py",
+    "canonical/runtime/native_artifact_information_safe_proof.py"
+   ]
+  },
+  {
+   "name": "NATIVE_ARTIFACT_RENDER_PRESERVATION_PREFLIGHT_V1",
+   "cited_modules": [
+    "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+    "canonical/tests/test_native_artifact_render_preservation_v1.py"
+   ]
+  },
+  {
+   "name": "NATIVE_ARTIFACT_T1_MULTIPLEX_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/native_artifact_render_preservation_proof_v1.py"
+   ]
+  },
+  {
+   "name": "OBJECTIVE_ORACLE_DOMINANCE_COMPILER_V1",
+   "cited_modules": [
+    "canonical/runtime/objective_oracle_dominance_compiler.py",
+    "canonical/tests/test_objective_oracle_dominance_compiler.py"
+   ]
+  },
+  {
+   "name": "OBJECTIVE_ROUTE_CERTIFICATE_KERNEL_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/objective_route_certificate_verifier.py",
+    "canonical/tests/test_objective_route_certificate_verifier.py"
+   ]
+  },
+  {
+   "name": "OBSERVABLE_POLICY_COVER_OVERAPPROXIMATION_SUFFICIENCY_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/observable_policy_cover_overapproximation_gate_v2.py",
+    "canonical/tests/test_observable_policy_cover_overapproximation_gate_v2.py"
+   ]
+  },
+  {
+   "name": "OBSERVATIONAL_EQUIVALENCE_POLICY_COVER_TOTALITY_THEOREM_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/common_policy_decision_region_gate_v1.py",
+    "canonical/runtime/observable_policy_cover_totality_gate_v1.py",
+    "canonical/tests/test_observable_policy_cover_totality_gate_v1.py"
+   ]
+  },
+  {
+   "name": "OBSERVATIONAL_QUOTIENT_ESCAPE_PROGRESS_REDUCTION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OBS_EVERYTHING_TERMINAL_ACCELERATION_20261001_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "OEWN_2025_RELEASE_SENSE_UNIVERSE_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_authenticated_concept_universe_v1.py",
+    "canonical/runtime/bounded_semantic_relation_proof_v1.py",
+    "canonical/runtime/h100_oewn_lexical_acquisition_v1.py",
+    "canonical/runtime/oewn_release_sense_universe_v1.py",
+    "canonical/runtime/semantic_ambiguity_control_v1.py",
+    "canonical/runtime/semantic_information_frontier_v1.py"
+   ]
+  },
+  {
+   "name": "ONE_SHOT_REALITY_CLOSURE_V2_CANDIDATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/one_shot_reality_closure_v2.py",
+    "canonical/runtime/one_shot_verified_closure_v1.py",
+    "canonical/tests/test_one_shot_reality_closure_v2.py",
+    "canonical/tests/test_one_shot_reality_closure_v2_integration.py"
+   ]
+  },
+  {
+   "name": "ONE_SHOT_SKY_IMPACT_PLAN_20261012_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OPEN_ENDED_MATCHED_STATISTICAL_PROOF_PROTOCOL_V1",
+   "cited_modules": [
+    "canonical/runtime/matched_statistical_acceptance.py"
+   ]
+  },
+  {
+   "name": "OPERATOR_OBS_AUTHORITY_ENVELOPE_V1",
+   "cited_modules": [
+    "canonical/runtime/enforce_goal_hierarchy.py"
+   ]
+  },
+  {
+   "name": "OPUS55_ACCEPTANCE_CALIBRATION_V2",
+   "cited_modules": [
+    "canonical/runtime/acceptance_proof_transmuter_v1.py",
+    "canonical/runtime/opus55_acceptance_calibration_reducer_v2.py",
+    "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py"
+   ]
+  },
+  {
+   "name": "OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2",
+   "cited_modules": [
+    "canonical/runtime/delegation_structural_variety_proof_v3.py",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/tool_discovery_information_safe_proof.py",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py"
+   ]
+  },
+  {
+   "name": "OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V3",
+   "cited_modules": [
+    "canonical/runtime/delegation_structural_variety_proof_v3.py",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/tool_discovery_information_safe_proof.py",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py"
+   ]
+  },
+  {
+   "name": "OPUS55_ACCEPTANCE_RESIDUAL_COMPILER_V4_RECONCILIATION_V1",
+   "cited_modules": [
+    "canonical/runtime/opus55_acceptance_residual_compiler_v3.py",
+    "canonical/tests/test_opus55_acceptance_residual_compiler_v4_projection.py"
+   ]
+  },
+  {
+   "name": "OPUS55_AUTHORITATIVE_COMPLETENESS_SOURCE_AUDIT_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OPUS55_BRAIN_WITNESS_NORMALIZATION_V1",
+   "cited_modules": [
+    "canonical/runtime/delegation_structural_variety_proof_v3.py",
+    "canonical/runtime/delegation_whole_scope_proof_v2.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/tool_discovery_information_safe_proof.py",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py"
+   ]
+  },
+  {
+   "name": "OPUS55_MATCHED_TARGET_NORMALIZATION_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/matched_target_normalization_provenance_verifier_v1.py"
+   ]
+  },
+  {
+   "name": "OPUS55_MATCHED_TARGET_NORMALIZATION_PROVENANCE_V1",
+   "cited_modules": [
+    "canonical/runtime/matched_target_normalization_provenance_verifier_v1.py"
+   ]
+  },
+  {
+   "name": "OPUS55_PROTOCOL_IMPLICATION_GATE_REFINEMENT_V1",
+   "cited_modules": [
+    "canonical/runtime/protocol_implication_scope_algebra_v2.py"
+   ]
+  },
+  {
+   "name": "OPUS55_PUBLIC_AUTHORITATIVE_COMPLETENESS_ROUTE_FALSIFICATION_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OPUS55_TARGET_DISCOVERY_COMPLETENESS_CERTIFICATE_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_frontier_compiler_v2.py",
+    "canonical/tests/test_terminal_frontier_compiler_v2.py"
+   ]
+  },
+  {
+   "name": "OPUS55_TARGET_MEASUREMENT_IDENTITY_AUDIT_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OPUS55_TARGET_OWNER_EXHAUSTIVENESS_ATTESTATION_OUTREACH_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OPUS55_W1_FIRST_PARTY_EXHAUSTIVENESS_RECHECK_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OPUS55_ZERO_INCREMENTAL_EXACT_COMPARATOR_ACCESS_RECONCILIATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_OPUS55_PROTOCOL_PUBLIC_BINDING_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_REFERENCE_EQUIVALENCE_DESERIALIZATION_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_ACCESS_ROUTING_TRUTH_REPAIR_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_BENCHMARK_VS_FAMILY_SCOPE_TRUTH_REPAIR_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_CAPABILITY_FIRST_LOCK_V13",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_GENERIC_STATE_POLICY_FRONTIER_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py",
+    "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
+    "canonical/runtime/osworld_v21_runner_bridge_v1.py",
+    "canonical/runtime/osworld_v21_state_ops_v1.py"
+   ]
+  },
+  {
+   "name": "OSWORLD_V21_OFFICIAL_COMPONENT_PIN_REDUCTION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_PARTIAL_METRIC_SEMANTICS_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_PINNED_TASK_UNIVERSE_IDENTITY_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_PUBLIC_REFERENCE_SEMANTIC_COVERAGE_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OSWORLD_V21_REFERENCE_TREE_EQUIVALENCE_AND_OWNER_RUN_ROUTE_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "OUTER_GLOBAL_MINIMUM_REALITY_CUT_VERDICT_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "P1_TYPED_INTERVENTION_ENVELOPE_V5_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v5.py",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+    "canonical/tests/test_trajectory_failure_typed_ir_v5.py"
+   ]
+  },
+  {
+   "name": "P1_ZERO_REALITY_EXHAUSTION_GATE_ACTIVE_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py",
+    "canonical/tests/test_p1_zero_reality_exhaustion_gate_v1.py"
+   ]
+  },
+  {
+   "name": "P2_MECHANICS_BASELINE_EQUIVALENCE_NECESSITY_REPAIR_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/p2_strong_quality_visible_certifier_v3.py",
+    "canonical/tests/test_p2_strong_quality_visible_certifier_v3.py"
+   ]
+  },
+  {
+   "name": "P2_STRONG_VISIBLE_QUALITY_COMPARISON_ORDER_ADMISSION_V2_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/p2_strong_quality_visible_certifier_v2.py",
+    "canonical/runtime/source_aligned_semantic_proof_v1.py"
+   ]
+  },
+  {
+   "name": "P2_VISIBLE_GATE_SELF_PROOF_FALSIFIER_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "P3_BOUNDED_OBJECTIVE_ROLE_RELEVANCE_ACTIVATION_20261008_V2",
+   "cited_modules": [
+    "canonical/runtime/p3_bounded_objective_role_relevance_v1.py"
+   ]
+  },
+  {
+   "name": "P3_BOUND_OBJECTIVE_ROLE_PRESENTATION_TOP_LAW_CANDIDATE_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py",
+    "canonical/tests/test_p3_bounded_objective_role_presentation_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "P3_BOUND_RELEVANCE_CEGAR_LOOP_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+    "canonical/runtime/p3_real_context_v3_admission_v12.py",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "canonical/runtime/p3_source_positive_selection_cell_v1.py",
+    "canonical/runtime/selected_semantic_truth_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "P3_EXPLICIT_WEIGHTED_SALIENCE_CELL_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py"
+   ]
+  },
+  {
+   "name": "P3_MECHANICALLY_CLOSED_COMMON_POLICY_CELL_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py"
+   ]
+  },
+  {
+   "name": "P3_OPTIONAL_RELEVANCE_MINIMUM_INFORMATION_CUT_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/tournament_failure_capability_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "P3_R5_R7_REQUIRED_ONLY_PARTIAL_CLOSURE_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py"
+   ]
+  },
+  {
+   "name": "P3_REQUIRED_CLAIM_BOUND_CONFLICT_CELL_CLOSURE_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/selected_bounded_support_truth_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "P3_REQUIRED_CLAIM_GROUNDED_REALIZATION_CELL_V2_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py"
+   ]
+  },
+  {
+   "name": "P3_ROBUST_POLICY_ADEQUACY_CEGAR_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/monotone_semantic_constraint_kernel_v1.py",
+    "canonical/runtime/p3_real_context_v3_admission_v10.py",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py"
+   ]
+  },
+  {
+   "name": "P3_SYNTHESIS_PROVENANCE_GATE_IMPLEMENTATION_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/contract_native_brain_candidate.py",
+    "canonical/runtime/contract_native_proof_suites.py",
+    "canonical/tests/test_contract_native_proof_suites.py"
+   ]
+  },
+  {
+   "name": "PER_ACTION_CANONICAL_LEASE_REVALIDATION_VERIFICATION_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "POSITIVE_ADEQUACY_OVERAPPROXIMATION_SUFFICIENCY_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/monotone_semantic_constraint_kernel_v1.py",
+    "canonical/runtime/proof_carrying_semantic_refinement_v6.py"
+   ]
+  },
+  {
+   "name": "POST_DELEGATION_FRONTIER_RECOMPILE_ACTIVE_AUTHORITY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "POST_LIVEBENCH_CURRENT_ROOT_SEAL_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "POST_LIVEBENCH_CURRENT_TERMINAL_AUTHORITY_RECONCILIATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PREWAVE_BRAIN_ROUTE_DEPENDENCY_MANIFEST_V1",
+   "cited_modules": [
+    "canonical/runtime/astra_runtime.py",
+    "canonical/runtime/capability_planner.py",
+    "canonical/runtime/finite_identifiability.py",
+    "canonical/runtime/m4_research_control.py",
+    "canonical/runtime/shared_decision_primitives.py",
+    "canonical/runtime/source_traceable_semantic_ir.py",
+    "canonical/runtime/typed_hypothesis_compiler.py"
+   ]
+  },
+  {
+   "name": "PREWAVE_OPAQUE_PROVIDER_DEPENDENCY_CLEANLINESS_AUDIT_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PRIVATE_CODING_PUBLIC_CONTRACT_HIDDEN_SCOPE_UPPER_BOUND_FALSIFICATION_20261008_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PRIVATE_SURFACE_DEPENDENCY_DELETION_AND_ABSOLUTE_PROOF_MAP_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PRIVATE_SURFACE_DOMINANCE_VERDICT_V2",
+   "cited_modules": [
+    "canonical/runtime/proof_route_dominance.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_CANDIDATE_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/image_ocr_tesseract_positioned.py",
+    "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+    "canonical/runtime/professional_artifact_visual_observer_v1.py",
+    "canonical/tests/test_professional_artifact_visual_observer_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_PROPERTY_TRUTH_FRONTIER_RECONCILIATION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PROFESSIONAL_PROPERTY_TRUTH_FRONTIER_RECONCILIATION_20261010_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V10_DECLARED_SYSTEM_SUBJECT_20261011_V9",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_declared_system_subject_verify_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py",
+    "canonical/runtime/professional_quality_p1_router_v6.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V3_DECLARED_SYSTEM_SUBJECT_20261010_V2",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V4_DECLARED_SYSTEM_SUBJECT_20261010_V3",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py",
+    "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+    "canonical/runtime/professional_target_semantic_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V5_DECLARED_SYSTEM_SUBJECT_20261010_V4",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py",
+    "canonical/runtime/professional_quality_p1_router_v5.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V6_DECLARED_SYSTEM_SUBJECT_20261010_V5",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py",
+    "canonical/runtime/professional_quality_p1_router_v6.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V7_DECLARED_SYSTEM_SUBJECT_20261010_V6",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py",
+    "canonical/runtime/professional_quality_p1_router_v6.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V8_DECLARED_SYSTEM_SUBJECT_20261010_V7",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_declared_system_subject_verify_v2.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_P1_V9_DECLARED_SYSTEM_SUBJECT_20261010_V8",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/goal_to_decision_binding_authority_v1.py",
+    "canonical/runtime/professional_artifact_hard_defect_preflight_v1.py",
+    "canonical/runtime/professional_quality_declared_system_subject_verify_v2.py",
+    "canonical/runtime/professional_quality_leaf_binder_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v2.py",
+    "canonical/runtime/professional_quality_p1_router_v3.py",
+    "canonical/runtime/professional_quality_p1_router_v4.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_R4_VISUAL_TECHNICAL_OBSERVATION_EXTENSION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/professional_artifact_visual_observer_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_SAME_SUBJECT_COMPOSITION_GATE_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/professional_quality_same_subject_composition_gate_v1.py",
+    "canonical/runtime/professional_quality_scoped_evidence_v1.py",
+    "canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_WHOLE_LEAF_RESIDUAL_LEDGER_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/professional_quality_whole_leaf_residual_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_WHOLE_LEAF_UNCOVERED_PARTITION_WORKLIST_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/professional_quality_whole_leaf_certificate_gate_v1.py",
+    "canonical/runtime/universal_scope_closure_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_QUALITY_WHOLE_LEAF_V2_CLAIM_SCOPE_FACTORIZATION_WORKLIST_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/coverage_claim_scope_guard_v1.py",
+    "canonical/runtime/professional_quality_whole_leaf_claim_scope_gate_v2.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_R12_SEMANTIC_ROOT_CUT_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/professional_r12_semantic_root_cut_v1.py",
+    "canonical/tests/test_professional_r12_semantic_root_cut_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_SEMANTIC_TOTALITY_FROZEN_CLAIM_PACK_20261010_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "PROFESSIONAL_SEMANTIC_TOTALITY_REUSE_REDUCTION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/professional_semantic_totality_reduction_v1.py",
+    "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "canonical/tests/test_professional_semantic_totality_reduction_v1.py"
+   ]
+  },
+  {
+   "name": "PROFESSIONAL_SEMANTIC_V10_AUTHENTIC_POSITIVE_RECEIPT_BATCH_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PROFESSIONAL_SEMANTIC_V2_SUCCESSOR_CLAIM_BATCH_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PROOF_ATOM_RECEIPT_INDEX_V2_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/canonical_proof_atom_basis_v2.py",
+    "canonical/runtime/proof_atom_receipt_index_v2.py",
+    "canonical/tests/test_proof_atom_receipt_index_v2.py"
+   ]
+  },
+  {
+   "name": "PROOF_ATOM_RECEIPT_SNAPSHOT_SELF_DIRTYING_DIAGNOSTIC_V1",
+   "cited_modules": [
+    "canonical/runtime/proof_atom_receipt_snapshot_v1.py",
+    "canonical/tests/test_proof_atom_receipt_snapshot_v1.py"
+   ]
+  },
+  {
+   "name": "PROOF_ATOM_ROUTE_PRUNER_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/proof_atom_route_pruner_v1.py",
+    "canonical/tests/test_proof_atom_route_pruner_v1.py"
+   ]
+  },
+  {
+   "name": "PROOF_COMPRESSION_EXECUTION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PROOF_COMPRESSION_KERNELS_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/composition_component_proof_slicer_v1.py",
+    "canonical/runtime/epistemic_closure_kernel_v1.py",
+    "canonical/runtime/protocol_implication_scope_algebra_v1.py"
+   ]
+  },
+  {
+   "name": "PROOF_COMPRESSION_KERNELS_V1",
+   "cited_modules": [
+    "canonical/runtime/composition_component_proof_slicer_v1.py",
+    "canonical/runtime/epistemic_closure_kernel_v1.py",
+    "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+    "canonical/tests/test_composition_component_proof_slicer_v1.py",
+    "canonical/tests/test_epistemic_closure_kernel_v1.py",
+    "canonical/tests/test_protocol_implication_scope_algebra_v1.py"
+   ]
+  },
+  {
+   "name": "PROOF_OBLIGATION_DELTA_COMPILER_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/proof_obligation_delta_compiler_v1.py",
+    "canonical/tests/test_proof_obligation_delta_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "PROTOCOL_IMPLICATION_SCOPE_ALGEBRA_V2_CANDIDATE",
+   "cited_modules": [
+    "canonical/runtime/protocol_implication_scope_algebra_v1.py",
+    "canonical/runtime/protocol_implication_scope_algebra_v2.py",
+    "canonical/tests/test_protocol_implication_scope_algebra_v2.py"
+   ]
+  },
+  {
+   "name": "PUBLIC_EVALUATOR_SEMANTICS_COMPRESSION_20261006_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "PUBLIC_STANDARD_RUNNER_ZERO_COST_CARRIER_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "QWEN38_27B_CURRENT_Q2_EXACT_EXECUTION_SUBJECT_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "QWEN38_27B_EXACT_OPEN_WEIGHT_MANIFEST_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "QWEN38_27B_Q2_EXACT_EXECUTION_SUBJECT_MANIFEST_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "R2_FINANCE_FIBO_FULL_RELEASE_SET_RELATION_WAKE_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py"
+   ]
+  },
+  {
+   "name": "R2_GENERAL_ADEQUATE_DECISION_CURRENT_STATE_20261008_V3",
+   "cited_modules": [
+    "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "canonical/runtime/general_adequate_decision_fixed_point_v2.py",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "canonical/runtime/unified_cognitive_fabric_v1.py"
+   ]
+  },
+  {
+   "name": "R2_GOAL_SCOPED_GROUNDED_FRONTIER_AUTHORITY_RECONCILIATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py",
+    "canonical/tests/test_general_adequate_decision_controller_v1.py",
+    "canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py"
+   ]
+  },
+  {
+   "name": "R2_LOSS_CUSHION_MREL_AUTHORITY_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v4.py",
+    "canonical/runtime/regcap_loss_cushion_truth_certificate_v2.py",
+    "canonical/runtime/regcap_property_candidate_discovery_v2.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "R2_LOSS_CUSHION_MREL_PAIR_REVALIDATION_AUTHORITY_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v6.py",
+    "canonical/runtime/regcap_loss_cushion_truth_certificate_v4.py",
+    "canonical/runtime/regcap_mrel_pair_discriminator_v1.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "R2_LOSS_CUSHION_PAIR_COMPOSITION_AUTHORITY_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/loss_absorbing_cushion_regcap_grounding_v5.py",
+    "canonical/runtime/regcap_loss_cushion_truth_certificate_v3.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "R2_OEWN_SENSE_UNIVERSE_WAKE_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/oewn_decision_sense_control_v1.py",
+    "canonical/runtime/oewn_release_sense_universe_v1.py"
+   ]
+  },
+  {
+   "name": "R2_REGCAP_CONTEXTUAL_MEANING_RECONCILIATION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "R2_REGCAP_CONTEXT_ATOM_TRUTH_DISPATCH_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/regcap_context_atom_truth_certificate_v1.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "R2_REGCAP_CONTEXT_ATOM_V2_CURRENTNESS_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/regcap_context_atom_truth_certificate_v1.py",
+    "canonical/runtime/regcap_context_atom_truth_certificate_v2.py",
+    "canonical/runtime/regcap_contextual_observation_compiler_v1.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "R2_SCOPED_DOMAIN_EQUIVALENCE_INTERNALIZATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/brain_owned_scoped_domain_mapping_relation_edge_authority_v1.py",
+    "canonical/runtime/brain_owned_semantic_relation_edge_registry_v4.py",
+    "canonical/runtime/semantic_relation_control_v2.py",
+    "canonical/runtime/unified_cognitive_fabric_v1.py"
+   ]
+  },
+  {
+   "name": "R2_SEC_INLINE_XBRL_FIELD_SEMANTICS_WAKE_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/sec_inline_xbrl_fact_anchor_v1.py",
+    "canonical/runtime/sec_inline_xbrl_fact_anchor_verify_v1.py",
+    "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_v1.py",
+    "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py"
+   ]
+  },
+  {
+   "name": "R2_SEC_ISSUER_EXTENSION_CROSS_FILING_GROUP_STABILITY_WAKE_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py"
+   ]
+  },
+  {
+   "name": "R2_SEC_ISSUER_EXTENSION_CROSS_FILING_STABILITY_WAKE_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py"
+   ]
+  },
+  {
+   "name": "R2_SEC_ISSUER_EXTENSION_FIELD_SEMANTICS_WAKE_RECONCILIATION_20261009_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "R2_SEMANTIC_ACQUISITION_RESEARCH_RECONCILIATION_20261009_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "R2_TOTAL_FAIL_CLOSED_ADEQUACY_CONTROL_CLOSURE_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/general_adequate_decision_controller_v1.py",
+    "canonical/runtime/lossless_raw_task_contract_v1.py",
+    "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py",
+    "canonical/runtime/p3_conditioned_policy_adequacy_registry_v1.py",
+    "canonical/runtime/p3_real_context_v3_admission_v12.py",
+    "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py",
+    "canonical/runtime/r2_authenticated_adequacy_authority_registry_v1.py",
+    "canonical/runtime/r2_grounded_candidate_policy_frontier_v1.py"
+   ]
+  },
+  {
+   "name": "R2_V74_BOUNDED_SEMANTIC_POSITIVE_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/arm_margin_context_identity_v1.py",
+    "canonical/runtime/margin_context_identity_truth_certificate_v1.py",
+    "canonical/runtime/regcap_facet_role_projection_v1.py",
+    "canonical/runtime/regcap_facet_role_truth_certificate_v1.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "R2_V75_BOUNDED_SEMANTIC_POSITIVE_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/regcap_buffer_reference_truth_certificate_v1.py",
+    "canonical/runtime/regcap_definite_buffer_reference_v1.py",
+    "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "canonical/runtime/spread_relation_context_identity_v1.py",
+    "canonical/runtime/spread_relation_identity_truth_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "R3_MODE_GUARD_PATCH_AUTHOR_DOMINANCE_TRUTH_REPAIR_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/r3_bound_success_adapter_v1.py",
+    "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py",
+    "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py",
+    "canonical/runtime/r3_structural_bound_success_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "RANK22_BUILDER_FAILURE_IMMUNITY_VERIFICATION_20261002_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "REACHED_ESCAPE_CALLER_ASSERTED_AUTHORITY_FALSIFICATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+    "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+    "canonical/runtime/reached_escape_state_kernel_v1.py",
+    "canonical/tests/test_certified_reached_escape_state_constructor_v1.py"
+   ]
+  },
+  {
+   "name": "REAL_REPO_BUG_FIXED_20261109_V1",
+   "cited_modules": [
+    "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py"
+   ]
+  },
+  {
+   "name": "RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "REMOTE_DEVICE_EXTERNAL_AUTH_SURFACE_RECHECK_20261006_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RESEARCH_T3_OBJECTIVE_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/research_control_information_safe_candidate.py",
+    "canonical/runtime/research_control_information_safe_proof.py",
+    "canonical/tests/test_research_control_information_safe.py"
+   ]
+  },
+  {
+   "name": "RESIDUAL_ACTION_UNIVERSE_V2",
+   "cited_modules": [
+    "canonical/runtime/calibrated_dense_warp_rectifier.py",
+    "canonical/runtime/callout_geometry_association.py",
+    "canonical/runtime/drawing_view_regions.py",
+    "canonical/runtime/drawing_view_registration.py",
+    "canonical/runtime/explicit_compound_requirement_decomposer.py",
+    "canonical/runtime/orthographic_view_identity.py"
+   ]
+  },
+  {
+   "name": "RESIDUAL_CUT_VERIFICATION_20261002_V1",
+   "cited_modules": [
+    "canonical/runtime/global_proof_cut_compiler.py"
+   ]
+  },
+  {
+   "name": "RESIDUAL_MINIMUM_REALITY_CUT_VERDICT_V6",
+   "cited_modules": []
+  },
+  {
+   "name": "RESIDUAL_WITNESS_BACKEND_CONTRACT_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py",
+    "canonical/runtime/capability_discovery.py",
+    "canonical/runtime/residual_witness_backend_router_v1.py"
+   ]
+  },
+  {
+   "name": "RESIDUAL_WITNESS_RETRIEVAL_CONTRACT_V1",
+   "cited_modules": [
+    "canonical/runtime/residual_witness_retrieval_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "RETRIEVAL_V10_DEEP_WINDOW_LIVE_PROVIDER_EVENTS_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RETRIEVAL_V10_LIVE_PROVIDER_EVENTS_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RETRIEVAL_V10_MULTI_QUERY_LIVE_PROVIDER_EVENTS_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RETRIEVAL_V10_OPTIMIZED_LIVE_PROVIDER_EVENTS_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RETRIEVAL_V10_VERIFIED_BRIDGED_LIVE_EVENTS_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RETRIEVAL_V10_VERIFIED_PACKAGE_BRIDGES_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "RETRIEVAL_V11_STRATIFIED_LIVE_EVENTS_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V2_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/root1_acquisition_closure_controller_v2.py",
+    "canonical/tests/test_root1_acquisition_closure_controller_v2.py"
+   ]
+  },
+  {
+   "name": "ROOT1_ACQUISITION_CLOSURE_CONTROLLER_V3_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/root1_acquisition_closure_controller_v3.py",
+    "canonical/tests/test_root1_acquisition_closure_controller_v3.py"
+   ]
+  },
+  {
+   "name": "ROOT1_DETERMINISTIC_VISIBLE_WITNESS_LOWER_BOUND_20261004_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT1_TERMINAL_FAMILY_ENVELOPE_AUDIT_V6_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_18_ZERO_REALITY_CERTIFICATE_CUT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_19_POST_REVOCATION_DAG_REACTIVATION_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/threshold_proof_dag_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT2_BLIND_THRESHOLD_RECEIPT_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/blind_threshold_receipt_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT2_CLOSURE_CONTROLLER_V2_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/root2_closure_controller_v2.py"
+   ]
+  },
+  {
+   "name": "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V2_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V3_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V4_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_CLOSURE_V2_CURRENT_FRONTIER_V5_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_DECISION_ONLY_EVALUATION_FINAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_EXTERNAL_FACT_ACQUISITION_OVERLAY_V2_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V10_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V10_FINAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V11_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V11_FINAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V12_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V12_FINAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V13_FINAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V6_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V7_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_FRONTIER_V8_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_OUTPUT_ONLY_THRESHOLD_DAG_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/threshold_proof_dag_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT2_OWNER_RECEIPT_AUTHENTICATED_MAILBOX_SCAN_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_PROOF_HYPERGRAPH_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/root2_proof_hypergraph_v1.py",
+    "canonical/tests/test_root2_proof_hypergraph_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V4_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_PROOF_HYPERGRAPH_CURRENT_REBIND_V5_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT2_R2E_EVENT_BOUND_RECLASSIFICATION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_CLASS_BOUND_SUBPROCESS_MEDIATOR_V2_ACTIVATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/root3_subprocess_final_authorizer_adapter_v2.py",
+    "canonical/runtime/root3_subprocess_mediator_v2.py"
+   ]
+  },
+  {
+   "name": "ROOT3_DIRECT_PROCESS_MEDIATION_DOMINATOR_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_MINIMUM_ACTION_CUT_V1",
+   "cited_modules": [
+    "canonical/runtime/root3_minimum_action_cut_v1.py",
+    "canonical/tests/test_root3_minimum_action_cut_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT3_MINIMUM_ACTION_CUT_V6_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_PROCESS_UNIVERSE_18_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_PROCESS_UNIVERSE_19_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_RUNTIME_CALLSITE_CLASS_JOIN_ACTIVATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/root3_subprocess_callsite_classifier_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT3_SCOPE_CERTIFICATE_ADMISSIBILITY_REFINEMENT_ACTIVATION_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_SEVEN_CLASS_ONE_SUBSTRATE_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_SHARED_CHANNEL_DOMINATOR_KERNEL_V2",
+   "cited_modules": [
+    "canonical/runtime/shared_channel_dominator_v1.py",
+    "canonical/tests/test_shared_channel_dominator_v1.py"
+   ]
+  },
+  {
+   "name": "ROOT3_TARGET_POPULATION_COALESCENCE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "ROOT3_UNIVERSAL_SCOPE_CLOSURE_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/root3_universal_scope_closure_compiler_v1.py",
+    "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "canonical/tests/test_root3_universal_scope_closure_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "RUNNER_TOTAL_STAGE_C_BUDGET_GUARD_VERIFICATION_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "S1_DEPENDENCY_COMPRESSION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SA_CCR_ACTIVE_CONTRACT_SCOPE_CLOSURE_V1",
+   "cited_modules": [
+    "canonical/runtime/saccr_credit_information_safe_candidate.py",
+    "canonical/runtime/saccr_credit_information_safe_proof.py",
+    "canonical/runtime/saccr_credit_kernel.py"
+   ]
+  },
+  {
+   "name": "SCIENTIFIC_HYPOTHESIS_FORMATION_DETERMINISTIC_SUBTRACTION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SELECTED_BOUNDED_SUPPORT_TRUTH_CERTIFICATE_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/selected_bounded_support_truth_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "SELECTED_SEMANTIC_DISCRIMINATOR_DISPATCH_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/selected_semantic_discriminator_dispatch_v1.py",
+    "canonical/runtime/selected_semantic_truth_certificate_v1.py",
+    "canonical/tests/test_selected_semantic_discriminator_dispatch_v1.py"
+   ]
+  },
+  {
+   "name": "SELECTED_SUPPORT_TRUTH_CERTIFICATE_V2_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_attestation_support_v1.py",
+    "canonical/runtime/selected_support_truth_certificate_v2.py"
+   ]
+  },
+  {
+   "name": "SELECTED_SUPPORT_TRUTH_CERTIFICATE_V3_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_source_declared_equivalence_support_v1.py",
+    "canonical/runtime/selected_support_truth_certificate_v3.py"
+   ]
+  },
+  {
+   "name": "SELECTED_SUPPORT_TRUTH_CERTIFICATE_V4_ACTIVATION_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_numeric_relation_support_v1.py",
+    "canonical/runtime/selected_support_truth_certificate_v4.py"
+   ]
+  },
+  {
+   "name": "SEMANTIC_COMPLETENESS_ROOT_THEOREM_20261009_V2",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/tests/test_assurance_closure_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "SESSION_BRIDGE_LIVE_TERMINAL_AUTHORIZATION_FIX_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SEVEN_SURVIVING_LEAF_ZERO_REALITY_RECEIPT_SATURATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py"
+   ]
+  },
+  {
+   "name": "SHARED_RESIDUAL_ACCEPTED_FAMILY_REUSE_BINDING_20261005_V2_ACTIVATION",
+   "cited_modules": []
+  },
+  {
+   "name": "SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SIX_BENCHMARK_PROXY_SCOPE_PARTITION_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V2_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SMAUG_MINI_CAPABILITY_DELTA_STORAGE_COLLAPSE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SMAUG_MINI_EXACT_SHARD_DEDUP_DISCOVERY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SMAUG_MINI_REVERSE_LORA_BYTE_FRONTIER_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SMAUG_MINI_REVERSE_LORA_PUBLIC_RUNNER_EXTRACTION_FIT_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SMAUG_MINI_ZERO_COST_DURABLE_INTERNALIZATION_ROUTE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SOURCE_BOUNDARY_PROMOTION_GATE_VERIFICATION_20261001_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "STATIC_SVG_DIAGRAM_MECHANICS_KERNEL_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/html_svg_diagram_mechanics_v1.py",
+    "canonical/runtime/svg_diagram_render_oracle_v1.py",
+    "canonical/tests/test_html_svg_diagram_mechanics_v1.py",
+    "canonical/tests/test_svg_diagram_render_oracle_v1.py"
+   ]
+  },
+  {
+   "name": "STRUCTURED_METHOD_EXPRESSION_AST_PREFLIGHT_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "STRUCTURED_METHOD_TERMINAL_POPULATION_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/structured_method_terminal_population_v1.py"
+   ]
+  },
+  {
+   "name": "STRUCTURED_METHOD_UNIVERSAL_CEILING_THEOREM_FALSIFICATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/structured_method_normalized_rule_graph_v3.py"
+   ]
+  },
+  {
+   "name": "SUB100MB_H100_EXPERIMENT_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/sub100mb_learned_state_guard_v1.py"
+   ]
+  },
+  {
+   "name": "SYMBOLIC_ADMISSION_PREDICATE_SUCCESSOR_DEPLOYMENT_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/symbolic_admission_predicate_successor_v1.py",
+    "canonical/tests/test_symbolic_admission_predicate_successor_v1.py"
+   ]
+  },
+  {
+   "name": "SYNTHESIS_CERTIFIED_VISIBLE_SUPPORT_TOP_LAW_CELL_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/bounded_claim_support.py",
+    "canonical/runtime/synthesis_certified_visible_support_policy_v1.py",
+    "canonical/runtime/synthesis_grounded_expression_ir_v1.py",
+    "canonical/tests/test_synthesis_certified_visible_support_policy_v1.py"
+   ]
+  },
+  {
+   "name": "SYNTHESIS_COMMON_POLICY_COVER_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/synthesis_certified_visible_support_policy_v1.py"
+   ]
+  },
+  {
+   "name": "SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SYNTHESIS_EXPLICIT_UNCERTAINTY_TOP_LAW_CELL_20261007_V3",
+   "cited_modules": [
+    "canonical/runtime/synthesis_certified_visible_support_policy_v3.py",
+    "canonical/tests/test_synthesis_certified_visible_support_policy_v3.py"
+   ]
+  },
+  {
+   "name": "SYNTHESIS_HIDDEN_EVALUATOR_ROUTE_TRUTH_REPAIR_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SYNTHESIS_MATCHED_QUALITY_METRIC_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/synthesis_matched_quality_metric_v1.py"
+   ]
+  },
+  {
+   "name": "SYNTHESIS_SCOPE_CERTIFICATE_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SYNTHESIS_SINGLETON_FAMILY_SCOPE_FALSIFICATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "SYNTHESIS_ZERO_REQUIRED_UNCERTAINTY_TOP_LAW_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/synthesis_certified_visible_support_policy_v2.py",
+    "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py"
+   ]
+  },
+  {
+   "name": "T3_RESEARCH_CONTROL_MULTIPLEX_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/hle_strict_reference_scorer.py",
+    "canonical/runtime/research_control_information_safe_candidate.py",
+    "canonical/runtime/research_control_information_safe_proof.py"
+   ]
+  },
+  {
+   "name": "TB4_CURRENT_RESEARCH_FRONTIER_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/tb4_success_slot_certificate_v1.py",
+    "canonical/runtime/tb4_threshold_indistinguishability_v1.py"
+   ]
+  },
+  {
+   "name": "TB4_MINI_SWE_SUPERPOWERS_ACCEPTANCE_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "canonical/runtime/coding_control_kernel_v1.py",
+    "canonical/runtime/harbor_brain_agent.py"
+   ]
+  },
+  {
+   "name": "TB4_OMC_CLOUD_FREE_TRIAL_CARRIER_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB4_PROOF_ATOM_FALSIFICATION_ADJUDICATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB4_TARGET_DOMAIN_EVALUATOR_RELATION_20261008_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB4_TASK_LEVEL_VERIFIER_ACCEPTANCE_THEOREM_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/tb4_success_slot_certificate_v1.py",
+    "canonical/tests/test_tb4_success_slot_certificate_v1.py"
+   ]
+  },
+  {
+   "name": "TB4_THRESHOLD_INDISTINGUISHABILITY_CUT_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/tb4_threshold_indistinguishability_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_ARTIFACTCONFIG_MAIN_SERVICE_BRIDGE_REPAIR_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/task_artifact_authority_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_CANARY_V3_FINAL_ZERO_RECONCILIATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_CAPABILITY_CLOSURE_RECONCILIATION_20261011_V1",
+   "cited_modules": [
+    "canonical/runtime/general_scientific_raw_resource_pipeline_v1.py",
+    "canonical/tests/test_general_scientific_raw_resource_pipeline_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261008_V14",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V69",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V71",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V72",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261011_V75",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_CURRENT_TARGET_EXECUTION_OVERLAY_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_DEDICATED_PLANNER_V2_CANDIDATE",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_DETERMINISTIC_TERMINALIZATION_CANDIDATE_V1",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/tests/test_harbor_science_agent_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_EXECUTION_ENVELOPE_V8_20261008_V1",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_GENERAL_SUBSTRATE_MATERIALITY_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_LOCAL_QWEN_PLANNER_REPAIR_V1",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py",
+    "canonical/tests/test_harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_LONG_CONTEXT_TIMEOUT_ENVELOPE_REPAIR_CANDIDATE_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_planner_v1.py",
+    "canonical/tests/test_harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_PLANNER_LATENCY_REPAIR_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_PROMOTION_PREFLIGHT_RECONCILIATION_20261003_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK16_PREEXECUTION_REPAIR_RECONCILIATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/tests/test_harbor_science_agent_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_RANK18_RESEAL_PROGRESS_RECONCILIATION_20261010_V1",
+   "cited_modules": [
+    "canonical/runtime/harbor_science_agent_v12.py",
+    "canonical/runtime/science_typed_action_protocol_v2.py",
+    "canonical/tests/test_harbor_science_agent_v12_artifact_finish_gate.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_RANK18_RESEAL_PROGRESS_RECONCILIATION_20261010_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK18_V2_LIVE_ACTIVATION_SNAPSHOT_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK19_IDENTITY_SKEW_DIAGNOSIS_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK19_LIVE_ACTIVATION_SNAPSHOT_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_ACTIVATION_AUTHORITY_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_ACTIVATION_AUTHORITY_20261010_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_ACTIVATION_AUTHORITY_20261010_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_LIVE_ACTIVATION_SNAPSHOT_20261010_V2",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V13",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_ONE_SLOT_EXECUTION_AUTHORITY_20261010_V9",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_V3_PRESTART_ABORT_DIAGNOSIS_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK20_V5_EFFECTIVE_AUTHORITY_PROMOTION_20261010_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK21_ACTIVATION_AUTHORITY_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK22_ACTIVATION_AUTHORITY_20261011_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_RANK22_ONE_SLOT_EXECUTION_AUTHORITY_20261011_V3",
+   "cited_modules": []
+  },
+  {
+   "name": "TB_SCIENCE_TERMINAL_EXECUTION_MANIFEST_V1",
+   "cited_modules": [
+    "canonical/runtime/tb_science_conservative_censoring_reducer_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261008_V7",
+   "cited_modules": [
+    "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+    "canonical/runtime/bounded_predicate_argument_semantics.py",
+    "canonical/runtime/explicit_requirement_index_v2.py",
+    "canonical/runtime/harbor_command_policy.py",
+    "canonical/runtime/harbor_environment_transport.py",
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py",
+    "canonical/runtime/instruction_constraint_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V8",
+   "cited_modules": [
+    "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+    "canonical/runtime/bounded_predicate_argument_semantics.py",
+    "canonical/runtime/bounded_task_directive_semantics_v1.py",
+    "canonical/runtime/explicit_requirement_index_v2.py",
+    "canonical/runtime/harbor_command_policy.py",
+    "canonical/runtime/harbor_environment_transport.py",
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_TRANSITIVE_RUNTIME_CLOSURE_MANIFEST_20261009_V9",
+   "cited_modules": [
+    "canonical/runtime/bounded_imperative_directive_semantics_v1.py",
+    "canonical/runtime/bounded_predicate_argument_semantics.py",
+    "canonical/runtime/bounded_task_directive_semantics_v1.py",
+    "canonical/runtime/explicit_requirement_index_v2.py",
+    "canonical/runtime/harbor_command_policy.py",
+    "canonical/runtime/harbor_environment_transport.py",
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py"
+   ]
+  },
+  {
+   "name": "TB_SCIENCE_V01_PUBLIC_GITHUB_CARRIER_ATTAINABILITY_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_ACCEPTANCE_BASIS_V5_FALSIFICATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V2",
+   "cited_modules": [
+    "canonical/runtime/global_retrieval_entrypoint_v4.py",
+    "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V3_FINAL_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_adaptive_minimum_action_policy_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_ADAPTIVE_MINIMUM_ACTION_POLICY_V4_FINAL_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_AUTHORITY_RECONCILIATION_OVERLAY_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_AUTHORITY_RECONCILIATION_OVERLAY_V2_ACTIVATION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_AUTOPILOT_ACTIVATION_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/python_transitive_runtime_closure_v1.py",
+    "canonical/runtime/terminal_autopilot_v1.py",
+    "canonical/tests/test_terminal_autopilot_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_AUTOPILOT_ADAPTIVE_ESCAPE_PROGRESS_ROUTE_ACTIVATION_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_autopilot_v1.py",
+    "canonical/tests/test_terminal_autopilot_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_BENCH_SCIENCE_ROUTE_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "canonical/runtime/harbor_science_agent_v1.py",
+    "canonical/runtime/harbor_science_planner_v1.py",
+    "canonical/runtime/tb_science_opus55_target_freshness_guard_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_BUREAUCRACY_COLLAPSE_SINGLE_ROOT_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_CAUSAL_DEPTH_COLLAPSE_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_CEILING_WITNESS_LIFTER_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_ceiling_witness_lifter_v1.py",
+    "canonical/tests/test_terminal_ceiling_witness_lifter_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_CERTIFICATE_CUT_ACTIVATION_V3",
+   "cited_modules": [
+    "canonical/runtime/terminal_certificate_cut_v1.py",
+    "canonical/runtime/terminal_information_dominance_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_CONDITION_RESTRICTION_CELL_COMPILER_V2_ACTIVATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_condition_restriction_cell_compiler_v2.py",
+    "canonical/tests/test_terminal_condition_restriction_cell_compiler_v2.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_FALSIFICATION_CONTROL_LOOP_V2_CURRENT_ACTIVATION_20261006_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_falsification_control_loop_v2.py",
+    "canonical/tests/test_terminal_falsification_control_loop_v2.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_FRONTIER_COMPILER_V1_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_frontier_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_MINIMUM_CAUSAL_DEPTH_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_NOW_EXECUTION_RECEIPT_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_PARENT_CASE_PRODUCER_MANIFEST_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_parent_portfolio_launcher_v1.py",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+    "canonical/tests/test_terminal_parent_portfolio_runner_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_PARENT_LAUNCHER_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_parent_portfolio_launcher_v1.py",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py",
+    "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/contract_native_brain_candidate.py",
+    "canonical/runtime/contract_native_proof_suites.py",
+    "canonical/runtime/m0a_raw_source_brain_candidate_v2.py",
+    "canonical/runtime/m0a_raw_source_terminal_suite_v2.py",
+    "canonical/runtime/native_artifact_cross_format_candidate_v1.py",
+    "canonical/runtime/native_artifact_cross_format_proof_v1.py",
+    "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_PROOF_ROUTE_AUTOCOMPILER_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/objective_oracle_dominance_compiler.py",
+    "canonical/runtime/terminal_proof_route_autocompiler.py",
+    "canonical/tests/test_terminal_proof_route_autocompiler.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1",
+   "cited_modules": [
+    "canonical/runtime/cad_t0_geometry_population.py",
+    "canonical/runtime/cad_t0_multiplex_scorer.py",
+    "canonical/runtime/cad_t0_oracle_adapter.py",
+    "canonical/runtime/cad_t0_route_specific_terminal_executor_v1.py",
+    "canonical/runtime/direct_route_terminal_executors_v1.py",
+    "canonical/runtime/portfolio_multiplex_terminal_instrumentation_v1.py",
+    "canonical/runtime/saccr_route_specific_terminal_executor_v1.py",
+    "canonical/runtime/terminal_replacement_wave.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_SCHEDULING_ACTIVATION_V6",
+   "cited_modules": [
+    "canonical/runtime/terminal_information_dominance_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_SCHEDULING_ACTIVATION_V7",
+   "cited_modules": []
+  },
+  {
+   "name": "TERMINAL_SCHEDULING_V10_ACTIVE_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_SCHEDULING_V12_ACTIVE_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_SCHEDULING_V13_ACTIVE_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_SCHEDULING_V9_ACTIVE_AUTHORITY_V1",
+   "cited_modules": [
+    "canonical/runtime/current_terminal_scheduling_world_v1.py",
+    "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py"
+   ]
+  },
+  {
+   "name": "TERMINAL_STRUCTURAL_BREAKTHROUGH_V1_FINAL_ACTIVATION",
+   "cited_modules": []
+  },
+  {
+   "name": "TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1",
+   "cited_modules": [
+    "canonical/runtime/bound_capabilities/image_ocr_tesseract.py",
+    "canonical/runtime/bound_capabilities/pdf_ocr_tesseract.py",
+    "canonical/tests/test_image_ocr_tesseract.py",
+    "canonical/verification/verify_image_ocr_tesseract_reuse.py"
+   ]
+  },
+  {
+   "name": "TOOLATHLON_BRAIN_HOST_INTEGRATION_V1",
+   "cited_modules": [
+    "canonical/runtime/toolathlon_brain_host_integration_v1.py",
+    "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py",
+    "canonical/tests/test_toolathlon_brain_host_integration_v1.py"
+   ]
+  },
+  {
+   "name": "TOOLATHLON_GENERAL_SUBSTRATE_MATERIALITY_V1",
+   "cited_modules": [
+    "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "canonical/runtime/toolathlon_brain_owned_selection_adapter_v1.py"
+   ]
+  },
+  {
+   "name": "TOOL_DISCOVERY_CURRENT_ROUTE_SELECTION_V2",
+   "cited_modules": [
+    "canonical/runtime/tool_discovery_dynamic_candidate_v8.py",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v9.py"
+   ]
+  },
+  {
+   "name": "TOOL_DISCOVERY_DYNAMIC_REFINEMENT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TOOL_DISCOVERY_RESIDUAL_WITNESS_RETRIEVAL_FRONTIER_V2_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TOOL_DISCOVERY_SCOPE_FORMALISM_CUT_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "TOOL_DISCOVERY_T2_T3_OBJECTIVE_TERMINAL_BINDING_V1",
+   "cited_modules": [
+    "canonical/runtime/tool_discovery_information_safe_candidate.py",
+    "canonical/runtime/tool_discovery_information_safe_proof.py",
+    "canonical/runtime/tool_discovery_information_safe_proof_v2.py"
+   ]
+  },
+  {
+   "name": "TOOL_DISCOVERY_V8_AUTHORITY_SOUNDNESS_REPAIR_V1",
+   "cited_modules": [
+    "canonical/runtime/tool_discovery_dynamic_candidate_v7.py",
+    "canonical/runtime/tool_discovery_dynamic_candidate_v8.py",
+    "canonical/tests/test_tool_discovery_dynamic_candidate_v8.py"
+   ]
+  },
+  {
+   "name": "TOOL_ROUTE_DISCOVERY_EXACT_REUSE_BINDING_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/tool_discovery_information_safe_candidate.py"
+   ]
+  },
+  {
+   "name": "UNIVERSAL_DOMINANCE_ROUTE_COLLAPSE_THEOREM_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "UNIVERSAL_LEARNING_ACTIVE_V2_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/universal_learning_active_router_v2.py"
+   ]
+  },
+  {
+   "name": "UNIVERSAL_LEARNING_DECISION_ROUTER_V3_ACTIVATION_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "UNIVERSAL_SCOPE_CLOSURE_COMPILER_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/universal_scope_closure_compiler_v1.py",
+    "canonical/tests/test_universal_scope_closure_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "UNKNOWN_DOMAIN_V6_POST_PROMOTION_SEMANTIC_BRIDGE_AUDIT_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/unknown_domain_direct_candidate_v3.py",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v5.py",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py",
+    "canonical/runtime/unknown_domain_direct_v6_universal_proof_v1.py"
+   ]
+  },
+  {
+   "name": "UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "UNKNOWN_POLICY_UNRESTRICTED_UTILITY_LOWER_BOUND_20261007_V1",
+   "cited_modules": []
+  },
+  {
+   "name": "UVCK_V2_ASSURANCE_CLOSURE_COMPILER_20261009_V1",
+   "cited_modules": [
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/tests/test_assurance_closure_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "UVCK_V2_DECLARED_LOAD_BEARING_REGRESSION_CUT_20261009_V1",
+   "cited_modules": [
+    "canonical/experiments/run_xapian_apt_e2e_integration_heldout_005.py",
+    "canonical/runtime/acceptance_capability_source_gate_v2.py",
+    "canonical/runtime/assurance_closure_adversary_v1.py",
+    "canonical/runtime/assurance_closure_compiler_v1.py",
+    "canonical/runtime/assurance_closure_reference_checker_v1.py",
+    "canonical/runtime/assurance_domain_challenge_registry_v1.py",
+    "canonical/runtime/authenticated_context_concept_bridge_v1.py",
+    "canonical/runtime/authenticated_positive_cover_compiler_v1.py"
+   ]
+  },
+  {
+   "name": "V16_TERMINAL_SEMANTIC_QUOTIENT_INFORMATION_POLICY_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/semantic_information_frontier_v1.py",
+    "canonical/runtime/terminal_semantic_quotient_v1.py"
+   ]
+  },
+  {
+   "name": "V6_POLICY_ADEQUACY_SELF_CERTIFICATION_REPAIR_20261007_V1",
+   "cited_modules": [
+    "canonical/runtime/proof_carrying_semantic_refinement_v6.py"
+   ]
+  },
+  {
+   "name": "VERIFIED_WITNESS_TARGET_OVERLAY_ACTIVATION_V1",
+   "cited_modules": [
+    "canonical/runtime/protocol_implication_overlay_batch_reducer_v1.py",
+    "canonical/runtime/protocol_implication_scope_algebra_v2.py"
+   ]
+  },
+  {
+   "name": "W4_COVERAGE_ONLY_LITERAL_FINALITY_FALSIFICATION_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/terminal_frontier_compiler_v2.py"
+   ]
+  },
+  {
+   "name": "ZERO_AMBIENT_NAMESPACE_LAUNCHER_CANDIDATE_20261005_V1",
+   "cited_modules": [
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "canonical/tests/test_zero_ambient_namespace_launcher_v1.py"
+   ]
+  },
+  {
+   "name": "ZERO_AMBIENT_NAMESPACE_LAUNCHER_CANDIDATE_20261005_V2",
+   "cited_modules": [
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+    "canonical/tests/test_zero_ambient_namespace_launcher_v1.py"
+   ]
+  },
+  {
+   "name": "ZERO_COST_TERMINAL_SURFACE_EXECUTABILITY_20261002_V1",
+   "cited_modules": []
+  }
+ ],
+ "test_verdicts": {
+  "canonical/tests/test_aa_briefcase_frozen_epoch_result_bridge_v2.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_hidden_rubric_indistinguishability_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_internal_proof_route_completeness_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_minimum_information_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_private_rubric_expressivity_cut_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_public_interface_outcome_superdomain_v1.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_score_bearing_sufficient_statistic_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_top_support_collapse_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_aa_briefcase_trace_scorer_nonidentifiability_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_abductive_residual_theorem_v1.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_acceptance_ir_compiler_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_acceptance_proof_transmuter_v1.py": {
+   "verdict": "GREEN",
+   "passed": 13,
+   "failed": 0
+  },
+  "canonical/tests/test_action_hypergraph_open_predicate_guard_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_adaptive_cover_induction_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_adequacy_basis_structural_completeness_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_assurance_closure_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_assurance_closure_independent_adversary_v1.py": {
+   "verdict": "GREEN",
+   "passed": 3,
+   "failed": 0
+  },
+  "canonical/tests/test_assurance_domain_challenge_registry_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_authenticated_presentation_pareto_comparator_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_benchmark_witness_elimination_compiler_v3.py": {
+   "verdict": "GREEN",
+   "passed": 20,
+   "failed": 0
+  },
+  "canonical/tests/test_cad_t0_multiplex_scorer.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_cad_t0_route_specific_candidate_v1.py": {
+   "verdict": "RED",
+   "passed": 2,
+   "failed": 14
+  },
+  "canonical/tests/test_cad_t0_route_specific_terminal_executor_v1.py": {
+   "verdict": "RED",
+   "passed": 6,
+   "failed": 7
+  },
+  "canonical/tests/test_cad_t0_source_structure_antishortcut_repair_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_canonical_proof_atom_basis_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_canonical_proof_atom_basis_v2.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_certificate_gated_selected_route_runtime_entrypoint_v2.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_certified_reached_escape_state_constructor_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_chart_axis_title_unit_binding_v1.py": {
+   "verdict": "COLLECTION_ERROR",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_chart_direct_curve_label_family_rank_v1.py": {
+   "verdict": "COLLECTION_ERROR",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_coding_finite_candidate_exact_oracle_solver_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_coding_finite_exact_oracle_constructive_theorem_v1.py": {
+   "verdict": "GREEN",
+   "passed": 2,
+   "failed": 0
+  },
+  "canonical/tests/test_coding_proof_carrying_typed_acceptance_controller_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_coding_robust_finite_multi_interpretation_solver_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_coding_robust_finite_multi_interpretation_theorem_v1.py": {
+   "verdict": "GREEN",
+   "passed": 2,
+   "failed": 0
+  },
+  "canonical/tests/test_coding_visible_complete_acceptance_contract_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_composition_component_proof_slicer_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_composition_interface_manifest_compiler_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_contract_native_proof_suites.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_counterexample_guided_causal_architecture_synthesizer_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_coverage_claim_scope_guard_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_delegation_whole_scope_v2.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_differential_dominance_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_direct_route_terminal_executors_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_effect_carrier_guard_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_effect_carrier_guard_v2.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_epistemic_closure_kernel_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_exact_information_gain.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_exact_sound_db_admission_convergence_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_fibo_q2_2026_basel_designation_authority_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_finance_index_direct_result_bridge_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_finite_grid_program_inducer_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_gdpval_evaluation_law_information_cut_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_gdpval_evaluator_facing_quotient_u_route_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_gdpval_necessary_preference_certificate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 15,
+   "failed": 0
+  },
+  "canonical/tests/test_general_adequate_decision_controller_v1.py": {
+   "verdict": "GREEN",
+   "passed": 28,
+   "failed": 0
+  },
+  "canonical/tests/test_general_adequate_decision_fixed_point_v2.py": {
+   "verdict": "GREEN",
+   "passed": 32,
+   "failed": 0
+  },
+  "canonical/tests/test_general_adequate_decision_totalized_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_general_scientific_raw_resource_pipeline_v1.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_grid_delta_rule_inducer_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_grid_delta_rule_inducer_v2.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_h100_capability_ratcheted_search_bound_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_h100_expression_tree_symbolic_regression_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_h100_lexical_coverage_bound_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_h100_lexical_no_evidence_indistinguishability_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_h100_universal_proposal_bound_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_h100_verified_capability_registry_v1.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_harbor_brain_agent.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_harbor_science_agent_v1.py": {
+   "verdict": "RED",
+   "passed": 27,
+   "failed": 1
+  },
+  "canonical/tests/test_harbor_science_agent_v12_artifact_finish_gate.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_harbor_science_planner_v1.py": {
+   "verdict": "GREEN",
+   "passed": 22,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_exact_commit_semantic_certificate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_exact_retrieval_span_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_mcq_retrieval_vote_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_native_open_web_fallback_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_native_semantic_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_question_shape_router_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_hle_wikipedia_bing_transport_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_html_svg_diagram_mechanics_v1.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_image_ocr_tesseract.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_image_ocr_tesseract_positioned.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_judgment_common_policy_region_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_live_capability_invoker_v1.py": {
+   "verdict": "RED",
+   "passed": 3,
+   "failed": 1
+  },
+  "canonical/tests/test_livebench_if_reference_free_compound_witness_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_livebench_if_score_bound_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_livebench_if_single_checker_solver_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_livebench_partial_credit_mass_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_livebench_prompt_only_overlap_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 14,
+   "failed": 0
+  },
+  "canonical/tests/test_livebench_public_checker_exact_mincut_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_loss_absorbing_cushion_regcap_grounding_v7.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_minimum_terminal_basis_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_minimum_terminal_cut_solver_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_native_artifact_cross_format_preflight_v1.py": {
+   "verdict": "RED",
+   "passed": 1,
+   "failed": 4
+  },
+  "canonical/tests/test_native_artifact_render_preservation_v1.py": {
+   "verdict": "COLLECTION_ERROR",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_objective_oracle_dominance_compiler.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_objective_route_certificate_verifier.py": {
+   "verdict": "RED",
+   "passed": 3,
+   "failed": 1
+  },
+  "canonical/tests/test_observable_policy_cover_overapproximation_gate_v2.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_observable_policy_cover_totality_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 14,
+   "failed": 0
+  },
+  "canonical/tests/test_one_shot_reality_closure_v2.py": {
+   "verdict": "GREEN",
+   "passed": 23,
+   "failed": 0
+  },
+  "canonical/tests/test_one_shot_reality_closure_v2_integration.py": {
+   "verdict": "RED",
+   "passed": 0,
+   "failed": 1
+  },
+  "canonical/tests/test_opus55_acceptance_calibration_reducer_v2.py": {
+   "verdict": "RED",
+   "passed": 1,
+   "failed": 3
+  },
+  "canonical/tests/test_opus55_acceptance_residual_compiler_v4_projection.py": {
+   "verdict": "RED",
+   "passed": 1,
+   "failed": 1
+  },
+  "canonical/tests/test_p1_zero_reality_exhaustion_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_p2_strong_quality_visible_certifier_v3.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_p3_bound_relevance_cegar_loop_v1.py": {
+   "verdict": "GREEN",
+   "passed": 14,
+   "failed": 0
+  },
+  "canonical/tests/test_p3_bounded_objective_role_presentation_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_portfolio_multiplex_terminal_instrumentation_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_professional_artifact_visual_observer_v1.py": {
+   "verdict": "COLLECTION_ERROR",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_professional_quality_evidence_currentness_v1.py": {
+   "verdict": "GREEN",
+   "passed": 3,
+   "failed": 0
+  },
+  "canonical/tests/test_professional_quality_same_subject_composition_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_professional_r12_semantic_root_cut_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_professional_semantic_totality_reduction_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_professional_v8_r12_reuse_closure_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_proof_atom_receipt_index_v2.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_proof_atom_receipt_snapshot_v1.py": {
+   "verdict": "GREEN",
+   "passed": 3,
+   "failed": 0
+  },
+  "canonical/tests/test_proof_atom_route_pruner_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_proof_fixed_point_saturator_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_proof_obligation_delta_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_protocol_implication_scope_algebra_v1.py": {
+   "verdict": "EMPTY",
+   "passed": 0,
+   "failed": 0
+  },
+  "canonical/tests/test_protocol_implication_scope_algebra_v2.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_r2_assurance_shadow_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_r2_fixed_point_bound_truth_reentry_v1.py": {
+   "verdict": "GREEN",
+   "passed": 1,
+   "failed": 0
+  },
+  "canonical/tests/test_r2_grounded_candidate_policy_frontier_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_r2_r3_durable_policy_repair_context_v2.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_regcap_loss_cushion_truth_certificate_v5.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_research_control_information_safe.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_root1_acquisition_closure_controller_v2.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_root1_acquisition_closure_controller_v3.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_root1_contrastive_semantic_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_root2_proof_hypergraph_v1.py": {
+   "verdict": "GREEN",
+   "passed": 11,
+   "failed": 0
+  },
+  "canonical/tests/test_root3_minimum_action_cut_v1.py": {
+   "verdict": "GREEN",
+   "passed": 1,
+   "failed": 0
+  },
+  "canonical/tests/test_root3_universal_scope_closure_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_saccr_route_specific_terminal_executor_v1.py": {
+   "verdict": "RED",
+   "passed": 3,
+   "failed": 1
+  },
+  "canonical/tests/test_selected_discriminator_policy_cover_bridge_v1.py": {
+   "verdict": "RED",
+   "passed": 0,
+   "failed": 1
+  },
+  "canonical/tests/test_selected_semantic_discriminator_dispatch_v1.py": {
+   "verdict": "GREEN",
+   "passed": 12,
+   "failed": 0
+  },
+  "canonical/tests/test_semantic_root_uvck_adapter_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_semantic_truth_dispatch_regcap_loss_v5.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_shared_channel_dominator_v1.py": {
+   "verdict": "GREEN",
+   "passed": 12,
+   "failed": 0
+  },
+  "canonical/tests/test_svg_diagram_render_oracle_v1.py": {
+   "verdict": "GREEN",
+   "passed": 3,
+   "failed": 0
+  },
+  "canonical/tests/test_symbolic_admission_predicate_router_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_symbolic_admission_predicate_successor_v1.py": {
+   "verdict": "GREEN",
+   "passed": 4,
+   "failed": 0
+  },
+  "canonical/tests/test_synthesis_certified_visible_support_policy_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_synthesis_certified_visible_support_policy_v3.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_tb4_success_slot_certificate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 12,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_autopilot_v1.py": {
+   "verdict": "GREEN",
+   "passed": 12,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_ceiling_witness_lifter_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_closure_reducer_v2.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_condition_restriction_cell_compiler_v2.py": {
+   "verdict": "GREEN",
+   "passed": 14,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_falsification_control_loop_v2.py": {
+   "verdict": "GREEN",
+   "passed": 18,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_frontier_compiler_v2.py": {
+   "verdict": "RED",
+   "passed": 7,
+   "failed": 2
+  },
+  "canonical/tests/test_terminal_parent_portfolio_launcher_v1.py": {
+   "verdict": "GREEN",
+   "passed": 9,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_parent_portfolio_runner_v1.py": {
+   "verdict": "RED",
+   "passed": 2,
+   "failed": 3
+  },
+  "canonical/tests/test_terminal_proof_route_autocompiler.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_terminal_root_decision_gate_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_tool_discovery_dynamic_candidate_v8.py": {
+   "verdict": "GREEN",
+   "passed": 10,
+   "failed": 0
+  },
+  "canonical/tests/test_toolathlon_brain_host_integration_v1.py": {
+   "verdict": "GREEN",
+   "passed": 6,
+   "failed": 0
+  },
+  "canonical/tests/test_tournament_failure_capability_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_trajectory_failure_typed_ir_v5.py": {
+   "verdict": "GREEN",
+   "passed": 8,
+   "failed": 0
+  },
+  "canonical/tests/test_universal_scope_closure_compiler_v1.py": {
+   "verdict": "GREEN",
+   "passed": 7,
+   "failed": 0
+  },
+  "canonical/tests/test_zero_ambient_namespace_launcher_v1.py": {
+   "verdict": "GREEN",
+   "passed": 5,
+   "failed": 0
+  }
+ }
+}

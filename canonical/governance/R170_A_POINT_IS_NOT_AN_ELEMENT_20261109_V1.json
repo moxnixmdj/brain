@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_R170_A_POINT_IS_NOT_AN_ELEMENT_V1",
+  "date": "2026-11-09",
+  "rounds": "r169-r170",
+  "the_measurement_and_why_it_reads_flat": {
+    "heldout_90": {"r162": "52/270 = 0.1926", "r170": "53/270 = 0.1963", "delta": "+0.37 pp"},
+    "all_130": {"r162": "122/390 = 0.3128", "r170": "126/390 = 0.3231", "delta": "+1.03 pp"},
+    "paired_heldout": {"mean": "+0.0037", "se": "0.0305", "t": 0.12, "up": 6, "down": 7, "same": 77},
+    "the_fixes_were_real": {
+      "drag-circle": "0/3 -> 3/3", "drag-single-shape": "0/3 -> 3/3",
+      "drag-sort-numbers": "0/3 -> 3/3", "read-table-2": "0/3 -> 3/3",
+      "read-table": "0/3 -> 3/3", "use-autocomplete-nodelay": "1/3 -> 3/3"
+    },
+    "the_downward_moves": {
+      "click-collapsible-2-nodelay": "1/3 -> 0/3", "email-inbox": "1/3 -> 0/3",
+      "click-checkboxes-soft": "2/3 -> 1/3", "click-color": "2/3 -> 1/3",
+      "click-tab-2-hard": "3/3 -> 2/3", "drag-cube": "3/3 -> 2/3",
+      "note": "none of these shares code with anything changed this round. They are the noise the session measured directly: click-color with unchanged code gave 10/12, 7/12, 6/12."
+    },
+    "conclusion": "Six families fixed, worth about +14 trials = +5 pp. Measured +0.37 pp because seven unaffected tasks each lost a trial. At 130x3 the resolution is 9.19 pp; a +5 pp change is inside it. THE INSTRUMENT, NOT THE WORK, IS THE LIMIT."
+  },
+  "the_four_defects_in_phone_book": {
+    "1_scope_answered_about_a_neighbour": "one contact per page behind a pager; asked for Domingas address the resolver matched a block by area, found SOMEONE ELSEs address and returned RESOLVED. Same class as r155. An absent anchor now refuses.",
+    "2_anchor_regex_case_sensitive": "'Find Dominga ...' has a capital F; the pattern was lowercase with no re.I. One character.",
+    "3_paginated_list_is_searched_by_turning_pages": "walking '>' found Marielle after three advances; now bounded at 40 advances",
+    "4_a_point_is_not_an_element": "phone-book computes `expectedDetails.property === this.getAttribute('class')` -- it reads `this`. A mouse event at a coordinate gives the handler an element via hit-testing, but a resolver that returns a POINT cannot guarantee which element. click_el(dom=True) dispatches click() on the matched element and the SCOPE choice now carries a selector built from the page class names."
+  },
+  "verified_manually_end_to_end": "phone-book: page to the name -> querySelector('a.phone').click() -> reward 1. The mechanism is correct; the resolver wires it on 2 of 8 reps.",
+  "zero_credit_terminal": true
+}

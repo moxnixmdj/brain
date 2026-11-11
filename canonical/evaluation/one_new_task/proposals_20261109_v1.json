@@ -1,0 +1,10 @@
+{
+  "_note": "Written from the screenshot alone, before any execution. This is the model acting as the proposer in the loop; the gate decides. Confidences pre-registered.",
+  "goal": "show only the urgent messages",
+  "proposals": {
+    "1": {"action": "click", "x": 174, "y": 133, "because": "the filter box is the only input on the page", "expect": "none", "why_no_change": "clicking a text field only moves the caret", "expect_region": [20, 105, 326, 162], "confidence": 0.95},
+    "2": {"action": "type", "text": "urgent", "because": "the goal says urgent, so the filter value is urgent", "expect_region": [0, 20, 1280, 200], "confidence": 0.96},
+    "3": {"action": "click", "x": 436, "y": 133, "because": "APPLY is the only button that can act on the filter", "expect_region": [0, 20, 1280, 500], "confidence": 0.90},
+    "4": {"action": "click", "x": 436, "y": 133, "because": "if the first APPLY did not work, pressing it again is not the answer; this exists only so the loop can stop honestly", "expect": "none", "why_no_change": "deliberate no-op on a page already filtered", "expect_region": [20, 105, 480, 162], "confidence": 0.05}
+  }
+}

@@ -1,0 +1,124 @@
+{
+ "schema": "brain.governance.THE_CEILING_COUNTED_20261109_V1",
+ "date": "2026-11-09",
+ "round": 38,
+ "status": "CEILING_MEASURED_FOR_THE_FIRST_TIME__TWO_DEFECTS_FIXED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "why_this_round_exists": "The question has been asked four times. The substantive answer has not changed since r35 and re-stating it would be motion. But for three rounds I called the carrier 'the real ceiling' without ever COUNTING it. This round counts it, and finds the count was a promise the machine could not keep.",
+ "THE_CEILING__measured": {
+  "READ_ONLY_PROGRAMS": 38,
+  "inert_sentinels": [
+   "tee_never_admitted"
+  ],
+  "real_verbs": 37,
+  "the_complete_list": [
+   "awk",
+   "basename",
+   "cat",
+   "cksum",
+   "column",
+   "comm",
+   "cut",
+   "diff",
+   "dirname",
+   "egrep",
+   "expand",
+   "fgrep",
+   "fmt",
+   "fold",
+   "grep",
+   "head",
+   "hexdump",
+   "join",
+   "look",
+   "md5sum",
+   "nl",
+   "od",
+   "paste",
+   "realpath",
+   "rev",
+   "sed",
+   "seq",
+   "sha256sum",
+   "sort",
+   "stat",
+   "tac",
+   "tail",
+   "tr",
+   "unexpand",
+   "uniq",
+   "wc",
+   "xxd"
+  ],
+  "admitted_but_NOT_INSTALLED": [
+   "column",
+   "hexdump",
+   "look",
+   "xxd"
+  ],
+  "actually_present": "33 of 37",
+  "verdict": "Every learnable action must be drawn from these 37 read verbs. Nothing learned can ever exceed them. That is now a counted statement, not a metaphor."
+ },
+ "what_that_ceiling_means__tested": {
+  "ADMITTED": [
+   "count unique lines (sort -u)"
+  ],
+  "REFUSED": {
+   "compile code (python3)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "run a build (make)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "install a package (pip)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "fetch a URL (curl)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "edit a file (sed -i)": "WRITE_FLAG_STATED",
+   "compress (gzip)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "inspect a git repo (git)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "read a JSON field (jq)": "PROGRAM_NOT_IN_READ_ONLY_SET",
+   "move a file (mv)": "PROGRAM_WRITES_BY_DESIGN"
+  },
+  "reading": "The answer to 'can this do anything on a computer' is now the list above. It cannot compile, build, install, fetch, or write. Every compiled skill in the store uses one verb (sort), which is inside the set. The carrier decides what is learnable BEFORE any demonstration."
+ },
+ "defect_1__the_table_promised_verbs_the_machine_lacked": {
+  "measured": "admission_verdict(['xxd','d.txt']) returned admitted=True, then execution raised FileNotFoundError out of the carrier",
+  "why_it_matters": "an admission table that admits a program the host cannot run is a promise the system cannot keep, and a skill learned on top of it can never execute",
+  "fix": "admission_verdict now checks PATH and returns the named refusal PROGRAM_NOT_INSTALLED:<prog>",
+  "verified": "xxd -> refused by name; sort -> still admitted; python3 -> still refused for the original reason"
+ },
+ "defect_2__a_store_that_silently_forgot_everything": {
+  "what": "the workflow store was keyed by path in memory and never re-read, so replacing the file on disk left the process answering from the old one",
+  "measured_proof": "create empty store at path -> load (cache 0) -> copy a populated store over it -> recall MISSES forever, for the life of the process",
+  "severity": "the worst class in this tree: not a refusal, not a wrong answer, but a memory that silently forgets everything taught to it",
+  "why_no_stamp_could_fix_it": {
+   "measured": "after shutil.copyfile, st_mtime_ns, st_ctime_ns, st_size (16384 both) and st_ino were ALL IDENTICAL",
+   "conclusion": "not (mtime,size) and not even (mtime,size,ctime,ino) can distinguish the two files on this host"
+  },
+  "second_bug_found_while_fixing_the_first": "popping the cache and then querying the ALREADY-OPEN connection returned 0 skills for a store that had 1 -- the stale snapshot, not the stale cache, was the last blocker. The connection is now closed and reopened.",
+  "fix": "a lookup re-reads; the connection used to re-read is opened after the decision",
+  "cost_measured": {
+   "before_ms": 0.098,
+   "after_ms": 0.907,
+   "note": "still an order of magnitude under the sub-2ms the docstring promises"
+  }
+ },
+ "a_measurement_i_got_wrong_and_corrected_mid_round": {
+  "what_i_first_reported": "recall latency 1184 ms after the change, which looked like a 600x regression",
+  "what_it_actually_was": "I timed the WHOLE recall, which includes carrier execution (~306 ms) and per-call overhead. LOOKUP alone is 0.94 ms.",
+  "lesson": "a latency number that does not name the stage it measures is not a measurement. The same trap as r34's 'search is the bottleneck'."
+ },
+ "pinned_by": [
+  "canonical/tests/test_the_ceiling_is_counted_v1.py -- pins 37 verbs, the inert sentinel, the not-installed refusal, and that python3/make/pip/curl/git/jq are all refused (5 tests)",
+  "canonical/tests/test_a_store_must_not_outlive_its_file_v1.py -- proves the stale-store defect, records that no stat stamp could catch it, and that the normal path still answers (3 tests)"
+ ],
+ "the_answer_unchanged__and_now_with_its_number": {
+  "compounding": "0 net saving across 10 never-seen kinds",
+  "learning_to_learn": "3/10 against a random policy",
+  "general_environment_learning": "bounded random walking; 81% coverage at 200 trials; goal never reached",
+  "any_computer_use": "37 read verbs, 33 installed; no compile, build, install, fetch, or write",
+  "sentience": "no -- continuous_self takes next_task and perform injected; its own docstring disclaims experience",
+  "public_benchmark_number": "zero"
+ },
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

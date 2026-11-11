@@ -1,0 +1,22 @@
+{
+ "cells": {
+  "falsify.cap|runtimeerror": {
+   "first_seen": 1794307587.8879132,
+   "last_seen": 1794307587.8895302,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "falsify.cap",
+   "why": "RuntimeError"
+  }
+ },
+ "resolutions": {}
+}

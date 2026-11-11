@@ -1,0 +1,15 @@
+{
+  "_note": "Written by the model in this session, from (goal, library) only, before any route was executed. Confidences are pre-registered. The library triggers were the ONLY signal available; no page was inspected.",
+  "routes": {
+    "find me papers about eigenvalues": {"skills": ["search"], "slots": {"search": "eigenvalues"}, "because": "searching for a topic is the search skill with the topic as its query", "confidence": 0.93},
+    "put the list in alphabetical order": {"skills": ["sort"], "slots": {}, "because": "alphabetical order is what sorting produces", "confidence": 0.96},
+    "give this file a different name": {"skills": ["rename"], "slots": {}, "because": "a different name for a file is a rename", "confidence": 0.95},
+    "get rid of the file": {"skills": ["delete"], "slots": {}, "because": "get rid of, on a file, is delete", "confidence": 0.88},
+    "grab that paragraph": {"skills": ["copy"], "slots": {}, "because": "grabbing text to hold on to is copying it", "confidence": 0.62},
+    "show me the report": {"skills": ["open"], "slots": {}, "because": "showing a document is opening it", "confidence": 0.84},
+    "don't lose what I did": {"skills": ["save"], "slots": {}, "because": "not losing work is saving it", "confidence": 0.79},
+    "put the photo on the server": {"skills": ["upload"], "slots": {}, "because": "putting a file on a server is an upload", "confidence": 0.91},
+    "mail this to the team": {"skills": ["email"], "slots": {}, "because": "mailing something is sending an email", "confidence": 0.94},
+    "find eigenvalues then alphabetise": {"skills": ["search", "sort"], "slots": {"search": "eigenvalues"}, "because": "two stages: find eigenvalues, then put the result in order", "confidence": 0.86}
+  }
+}

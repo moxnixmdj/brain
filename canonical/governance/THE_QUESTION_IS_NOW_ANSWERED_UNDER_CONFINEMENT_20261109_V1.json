@@ -1,0 +1,101 @@
+{
+ "schema": "brain.governance.THE_QUESTION_IS_NOW_ANSWERED_UNDER_CONFINEMENT_20261109_V1",
+ "date": "2026-11-09",
+ "round": 29,
+ "status": "ANSWERED_AND_NOT_YET_LEARNED__THE_LAST_WALL_IS_THE_GATE_REFUSING_TO_PERSIST_AN_UNCONFINED_DEMONSTRATION",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_question_that_started_four_rounds_ago": {
+  "goal": "how many unique lines in data.txt",
+  "file": "16 rows, 8 distinct",
+  "correct_answer": 8,
+  "round_26": "not reached at all -- recall skipped for computer-shaped goals",
+  "round_27": "routed to python.source.definition_count.v1 (a Python symbol counter) and the chain admission gate refused it",
+  "round_28": "the carrier was proven to work; the refusal was a path-scope bug",
+  "round_29": "ANSWERED: answer=8, confined=True, live_workspace_untouched=True, tier=tier1_confined_query_bridge"
+ },
+ "what_was_built": {
+  "file": "canonical/runtime/confined_query_bridge_v1.py",
+  "what": "answers a counting question about a file using ONE read-only admitted program under the carrier, reading the count from that program's stdout in-process",
+  "why_not_a_pipeline": "`sort -u X | wc -l` is the obvious form and the carrier takes one argv. So the distinct set is read out of sort's stdout and counted here: no second process, no shell, no pipe.",
+  "measured": [
+   {
+    "goal": "how many unique lines in data.txt",
+    "answer": "8",
+    "want": 8
+   },
+   {
+    "goal": "how many lines in data.txt",
+    "answer": "16",
+    "want": 16
+   },
+   {
+    "goal": "how many unique lines in pods.txt",
+    "answer": "13",
+    "want": 13,
+    "rows": 26
+   },
+   {
+    "goal": "how many lines in pods.txt",
+    "answer": "39",
+    "want": 39,
+    "rows": 39
+   }
+  ],
+  "wired_into": "closed_loop_autonomous_controller_v1._solve_or_learn_impl, BEFORE the composer route, so the wrong tool is never consulted for a question this bridge can answer"
+ },
+ "the_speed_problem_and_what_it_cost": {
+  "symptom": "the second question of the same shape cost 10,454 ms end to end",
+  "cause": "the carrier proves its invariants (namespace setup, staging, tree hash) on every call, and the orchestrator re-proved a shape that had already been proven",
+  "fix": "a shape memo. A (kind, argv-shape) that has returned a pass on this host is not re-proved; the SHAPE is what the carrier certifies and the file differs, not the property.",
+  "measured_after": {
+   "first_call_ms": 253.5,
+   "second_call_ms": 116.3,
+   "reused_carrier_proof": true
+  },
+  "honesty": "`reused_carrier_proof` is reported on every result so a caller can tell a first proof from a repeat. The invariant is a property of the confinement, not of the bytes."
+ },
+ "what_now_passes_and_what_does_not": {
+  "phase3_assertions_that_now_pass": [
+   "r1['pass']",
+   "str(r1['answer']).strip() == '8'"
+  ],
+  "phase3_assertion_that_still_fails": "r1['skill_crystallized']",
+  "why": "crystallisation runs compile_and_qualify_skill, whose transfer-ownership gate returns COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT. The gate will not persist a skill whose demonstration was executed outside the carrier, and _qualify_cli_measurement_skill's held-out and postcondition checks still use computer_env_v1.answer_query, which runs host programs unconfined.",
+  "the_gate_is_right": "a learned skill is the thing that will be trusted forever. Learning it from an unconfined execution would make the permanence permanent over a proof that was never admitted. Refusing is the correct behaviour and I did not override it.",
+  "so_the_honest_position_is": "the question is ANSWERED correctly under confinement, and it is NOT YET LEARNED. Those are different claims and only the first one is now true."
+ },
+ "the_last_wall_named_precisely": {
+  "what_is_needed": "the crystallisation path must execute its held-out and postcondition checks through the carrier rather than through computer_env_v1's unconfined subprocess runners",
+  "why_i_did_not_do_it_this_round": "it requires routing the qualification harness itself through the carrier, including the probe-file staging the harness constructs, and a half-done version would produce a skill whose qualification silently fell back to the unconfined path -- a worse outcome than the honest refusal",
+  "the_size_of_it": "the harness already has a confined equivalent for every program it uses (wc, sort, uniq, grep are all in READ_ONLY_PROGRAMS), so this is a wiring job with a known shape, not a research problem"
+ },
+ "fresh_research_from_the_week_of_2026_11_02__what_it_changes": [
+  {
+   "paper": "Hybrid Computer Use (arXiv 2610.41432, 30 Oct 2026)",
+   "finding": "three channels -- programmatic, accessibility, visual -- in one interface, with AX actions reported as DIFFS; best OSWorld 2.0 Partial and Binary among compared systems",
+   "effect_here": "round 25 added the AX channel, round 27 gated the programmatic one, round 29 uses the programmatic channel for a question the semantic channel cannot answer. The composition is now the same shape the frontier converged on, built independently and four rounds apart."
+  },
+  {
+   "paper": "Computer-Use Agents Are Embodied Generalists (arXiv 2611.09847, 6 Nov 2026)",
+   "finding": "a single unmodified CUA design places 1st, 2nd, 3rd and 6th across four ECCV workshops by rendering physical environments as software",
+   "effect_here": "supports 'one model, many environments' as a substrate claim -- not as a one-shot-learning claim"
+  },
+  {
+   "paper": "Agents, Think Only When it Helps (arXiv 2611.05709, 3 Nov 2026)",
+   "finding": "thought supervision barely matters unless the thought is not disclosed in the action",
+   "effect_here": "an argument that a compiled skill -- the action, observed -- carries most of what a model would have reasoned, which is the premise the whole tree rests on"
+  }
+ ],
+ "tests_added": {
+  "file": "canonical/tests/test_confined_query_bridge_v1.py",
+  "count": 7,
+  "passing": true
+ },
+ "suite": "47 passed across the five relevant files; guard PASS 17/0; 443 capabilities; compiled 10,214,475 bytes",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

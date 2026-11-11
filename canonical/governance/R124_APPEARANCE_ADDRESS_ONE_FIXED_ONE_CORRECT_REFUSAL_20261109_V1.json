@@ -1,0 +1,26 @@
+{
+  "schema": "PROJECT_BRAIN_R124_APPEARANCE_ADDRESS_V1",
+  "date": "2026-11-09",
+  "built": "canonical/runtime/appearance_address_v1.py -- resolves a goal against a candidate set using the modality the goal implies: COLOUR (computed background), TEXT (text/aria/title/alt), GLYPH (single-character targets). Refuses with a named status rather than guessing.",
+  "design_basis": "2026 hybrid-consensus: accessibility tree first, rendered-appearance fallback. zylos 2026: accessibility-only 73.1% vs hybrid 89.1% on WebVoyager. 'Use the accessibility tree when it exists, fall back to Set-of-Marks where the tree is empty.'",
+  "measurement": {
+    "tasks": 10,
+    "before": "5/10 (R122)",
+    "after": "5/10 (R124)",
+    "the_score_did_not_move": true,
+    "what_changed": "the failure list changed completely, which is the informative part"
+  },
+  "per_task": [
+    {"task": "click-link", "before": "FAIL click-miss:nunc", "after": "PASS", "why": "the anchor was addressable through a modality the text-only channel missed"},
+    {"task": "click-button", "before": "FAIL (race, R121G)", "after": "PASS"},
+    {"task": "click-color", "before": "FAIL click-miss (no colour parsed)", "after": "REFUSED MULTIPLE_EQUAL_MATCHES", "why": "MiniWob renders duplicate swatches; nearest-colour has genuine ties. The module refuses instead of picking one and silently being wrong 50% of the time. A refusal is progress when the alternative is a coin flip."},
+    {"task": "click-dialog", "before": "FAIL", "after": "FAIL NO_APPEARANCE_MATCH:GLYPH", "why": "the glyph x is not exposed as a visible candidate element by the harvest query (it is a styled div with a background, not text and not an accessible character)"},
+    {"task": "click-menu", "before": "FAIL", "after": "FAIL menu-miss level 1", "why": "clicking the top-level menu item does not open the submenu under a synthetic mouse event in this build"},
+    {"task": "click-test", "before": "FAIL", "after": "FAIL GOAL_MODALITY_UNKNOWN", "why": "the goal 'Click the button' contains no addressable token at all"},
+    {"task": "choose-list", "before": "FAIL", "after": "FAIL NO_APPEARANCE_MATCH:TEXT", "why": "the options do not exist in the DOM until the select is opened; enumerating them requires an open-then-read step"}
+  ],
+  "honest_conclusion": "the appearance channel fixed one task and converted one silent error into a correct refusal. It did not move the score. The remaining four failures are NOT perception-modality problems: they are (a) a target with no addressable token, (b) a collapsed widget that must be opened before it can be enumerated, (c) a submenu that does not open, (d) a glyph that is drawn rather than exposed.",
+  "correction_to_my_own_r123_claim": "I said 'the fix is to look at it'. I built the looking, and it was worth exactly one task. The coefficient is not raised by adding one more reading modality; two of the four remaining blockers need INTERACTION (open the select, open the submenu) rather than better perception.",
+  "the_more_precise_limiting_factor": "among the four remaining failures, two require the agent to open a closed widget and then re-read the world -- an interact-then-observe loop -- and two involve targets with no addressable token or glyph at all. Neither is solved by a better static reader, and neither is solved by a better learner.",
+  "what_this_means_for_the_users_thesis": "instant learning multiplies whatever the agent can perceive AND OPERATE. Opening a collapsed widget is an operation, not a perception. The remaining gap is operational, which is consistent with the component-benchmark finding that action-space coverage (not learning) bounds end-to-end reliability."
+}

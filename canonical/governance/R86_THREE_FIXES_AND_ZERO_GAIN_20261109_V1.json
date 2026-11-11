@@ -1,0 +1,42 @@
+{
+  "round": 86,
+  "date": "2026-11-09",
+  "title": "Three improvements, zero gain -- the constancy is the finding",
+  "the_evidence": [
+    {"round": "r84", "change": "coverage bug fixed (93 never-attempted tasks now labelled)", "suite": "9/130"},
+    {"round": "r85", "change": "typing fidelity fixed; empty-library refusal became NOT_LOOKED", "suite": "9/130"},
+    {"round": "r86", "change": "loop reversed to SEARCH-THEN-PLAN; plan produced 1 -> 9 tasks", "suite": "9/130"}
+  ],
+  "why_it_did_not_move": {
+    "planner_is_not_the_bottleneck": "r86 produced a plan for 9 tasks (up from 1) and only 2 won",
+    "the_binder_is": [
+      "enter-password : 'Enter the password \"0xMq\" into BOTH text fields'",
+      "login-user     : 'username \"dolores\" AND password \"xGta\"'",
+      "enter-text-2   : 'Type \"leonie\" in ALL UPPER CASE letters'"
+    ],
+    "mechanism": "the executor binds ONE literal into ONE control; those goals need two literals, two fields, or a transform"
+  },
+  "measured_coverage": {
+    "module": "canonical/runtime/goal_arity_v1.py",
+    "single_binding_suffices": 32,
+    "multi_literal": 3,
+    "spread_across_fields": 2,
+    "requires_transform": 1,
+    "no_literal_at_all": 92,
+    "total": 130,
+    "success_within_the_covered_class": "9/32 = 28.1%"
+  },
+  "search_then_plan_effect": {
+    "NO_ROUTE": "12 -> 6 (searching now happens)",
+    "wins_gained": 0,
+    "probes": {"total": 86, "tasks_probed": 34}
+  },
+  "literature_match": {
+    "source": "LatentGUIWorld, arXiv 2610.16720",
+    "taxonomy": {"I_0": "prior knowledge and context suffice", "I_1": "an interaction reveals hidden semantics", "I_2": "dynamics must be inferred from action-response"},
+    "finding": "frontier models struggle especially on I_2; the paper's answer is a finer action interface (cursor move separated from mouse-down and mouse-up) that yields an observation before committing",
+    "mapping": "the 92 no-literal tasks are I_1/I_2; the 8 arity>1/transform tasks are pure binder failures and are the cheapest remaining gain"
+  },
+  "honest_statement": "The suite did not move for three rounds of real fixes. Continuing to tune the planner is the wrong move. The binder is the bottleneck and it is small enough to fix.",
+  "tests": {"new_file": "canonical/tests/test_goal_arity_decides_the_binder_v1.py", "new_passed": 5}
+}

@@ -1,0 +1,51 @@
+{
+  "round": 52,
+  "date": "2026-11-09",
+  "title": "The strategy 'teach it every smart action' is self-defeating, and it is refuted at four skills, not thirty",
+  "the_strategy_under_test": "give the model the smartest actions we need an agent to do; after it does them at least once it learns them all permanently; therefore we solve everything perfectly and permanently",
+  "why_it_had_never_been_tested": "every prior round taught between one and eight skills into a fresh store. The claim is about what happens as the store GROWS. No round had ever built a catalog.",
+  "first_measurement": {
+    "design": "one fixed ask in a user's own words ('dedupe the lines in <file>') against N taught skills, one store per N",
+    "table": {"1": "sort -u OK", "2": "sort -u OK", "5": "sort -u OK", "10": "sort -u OK",
+              "15": "sort -u OK", "20": "sort -u OK", "25": "sort -u OK", "30": "sort data.txt WRONG"},
+    "first_reading": "a scaling collapse around 30 skills",
+    "why_it_matters_more_than_a_miss": "it returns `sort` without -u. Right verb, right row, right FILE, wrong flag. It is not a refusal. It is an answer that is alphabetised and retains duplicates while claiming to dedupe."
+  },
+  "isolation_that_corrected_my_first_reading": {
+    "|S|=30 with four confusable sort-skills": "WRONG",
+    "|S|=30 with one sort-skill": "OK",
+    "|S|=4 with four confusable sort-skills": "WRONG",
+    "conclusion": "the variable is NOT catalog size. It is how many taught skills do nearly the same thing. My 'collapse at 30' framing was wrong and is retracted here rather than published as a finding."
+  },
+  "the_refutation": "Adding a near-duplicate action to the catalog does not add capability -- it removes the ability to select the capability that was already there. One skill: correct. Four overlapping skills: the original skill becomes unreachable. The proposal 'teach it all the smartest actions' is therefore not neutral, not merely unscalable, and not a matter of needing a bigger model: each redundant teaching actively degrades the system.",
+  "external_confirmation": {
+    "arXiv 2601.04748v2 (Jan 2026)": "'semantic confusability among similar skills, rather than library size alone, plays a central role in this degradation'; at identical |S|=20, replacing unique skills with confusable base-competitor pairs causes an 18-30% accuracy drop; and selection shows a phase transition at a critical library size, restored by hierarchical routing",
+    "arXiv 2606.17519 (Jun 2026)": "production catalog, 110 agents / 584 tools, three frontier models: routing F1 drops 16-23pp as the catalog scales, recall-driven (55%->37% recall vs 68%->60% precision); decomposes into a retrieval gap recoverable by shortlisting and a 'confusion gap' that shortlisting cannot close (oracle ceiling falls 79%->69%)",
+    "superhuman_go_2026": "tool-calling degrades 7%-85% as tools scale from 49 to 741; same 16-23pp / recall-driven result reproduced independently",
+    "what_this_project_contributes": "the same defect at |S|=4, in a system with no embedding model, no GPU and no LLM in the selection path. Confusability hurts even a deterministic lexical selector. It is a property of the task, not of the model."
+  },
+  "the_second_silent_failure_found_this_round": {
+    "defect": "a path containing a space compiles, qualifies, stores, and infers its verb correctly -- then binds nothing and returns None",
+    "measured": "'unique lines of /tmp/.../a dir/my data.txt' -> infer_verb_from_goal returns 'sort', recall returns None",
+    "why_it_matters": "it passes every test that checks compile/qualify. It fails only when a human uses a filename with a space. Silent, not loud.",
+    "status": "recorded as a known defect, not fixed this round, so the test that pins it can fail honestly first"
+  },
+  "honest_scoring_correction": {
+    "r50_claim": "0/8 misroutes -- every miss returns None",
+    "why_that_was_wrong": "it was measured at one skill per store. At a realistic catalog the failure mode is a WRONG ANSWER, not a None",
+    "95_percent_interval_on_the_4_of_8": "22% to 78%. The headline number was never precise enough to defend; it is a direction, not a rate."
+  },
+  "what_is_real": [
+    "one demonstration installs one operation, permanently",
+    "it runs on new files and new directories",
+    "it refuses when nothing is taught",
+    "it refuses to compile when trained and tested on the same instance",
+    "a small catalog of DISTINCT skills selects correctly even at thirty"
+  ],
+  "what_is_not_real": [
+    "that repeating this over many actions produces a general agent",
+    "that more taught actions is monotonic progress",
+    "that the 'confusion gap' is a model-size problem -- it reproduced with no model"
+  ],
+  "next": ["space-in-path defect pin", "multi-step answer audit", "evidence omission", "write layer, last"]
+}

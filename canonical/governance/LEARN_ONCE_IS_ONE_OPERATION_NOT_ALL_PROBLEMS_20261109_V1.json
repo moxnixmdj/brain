@@ -1,0 +1,73 @@
+{
+  "round": 51,
+  "date": "2026-11-09",
+  "title": "The claim decomposed into six powers; three are real and three are absent. 'Learn once' is a filing cabinet, not a solver.",
+  "the_claim_under_test": "instant learning + instant learning in new arbitrary environments is solved perfectly, therefore we have a perfect solution for all problems and any computer use; teach it once and it has it permanently; therefore everything on a computer is solved perfectly and permanently",
+  "decomposition": [
+    {"power": "LEARNING", "question": "can one demonstration install an operation", "verdict": "REAL", "evidence": "r34-r41, 37-verb track, 23/33 reproducible"},
+    {"power": "PERMANENCE", "question": "does it survive restarts and time", "verdict": "REAL", "evidence": "r42, sqlite store, replayed every round since"},
+    {"power": "PORTABILITY", "question": "does it run in a different directory on a different file", "verdict": "REAL, re-confirmed this round", "evidence": "new dir + new filename -> correct answer [q,z]"},
+    {"power": "SELECTION", "question": "given a new sentence, is the right learned thing chosen", "verdict": "4/8", "evidence": "r50"},
+    {"power": "DISCOVERY", "question": "when the goal does not name the object, can it work out what to operate on", "verdict": "ABSENT", "evidence": "'unique lines of the largest .log file in DIR' -> None"},
+    {"power": "COMPOSITION", "question": "can two learned operations combine from one sentence", "verdict": "ABSENT", "evidence": "'count the unique lines of f' with both skills taught -> None"}
+  ],
+  "the_measurement_table": [
+    {"demonstration": "same task, new dir, new name", "claim": "works", "measured": "YES"},
+    {"demonstration": "same task, `sort` not installed", "claim": "works or refuses loudly", "measured": "refused (fails closed, correct)"},
+    {"demonstration": "needs to FIND the file first", "claim": "works", "measured": "NO, returns None"},
+    {"demonstration": "two learned verbs, one sentence", "claim": "works", "measured": "NO, returns None"},
+    {"demonstration": "never taught", "claim": "refuses", "measured": "refused (correct)"}
+  ],
+  "the_structural_point": "The claim's first half is true and the second half does not follow from it. Learn-once delivers LEARN + KEEP + CARRY. Every sentence in the thesis that begins 'and then it solves everything' requires SELECT + FIND + COMBINE, which are three different mechanisms and none of them were built. A cabinet that returns anything you filed, forever, anywhere, is not a librarian.",
+  "the_gui_branch": {
+    "claim": "use it to do anything on a computer just once and it learns all of it permanently",
+    "machine_measured_this_round": {
+      "display_server": "none", "browser_binary": "none", "pointer_control": "none",
+      "screenshot_library": "none", "gui_toolkit": "none", "docker": "none",
+      "unix_binaries_present": "45 of 47 — it is a good headless Unix box and nothing else"
+    },
+    "consequence": "on this machine 'anything on a computer' is not a hard problem, it is an unrelated problem. There is not one pixel to click.",
+    "2026_evidence_against_the_branch": {
+      "osworld_2_0_best_models_do_not_use_the_ui": "on OSWorld-V2 the strongest models frequently skip the interface entirely — injecting JavaScript and POSTing to an internal API endpoint rather than clicking. GUI competence is not what is being measured, and it is not what is being acquired.",
+      "osworld_2_0_action_budget": "perception (visual grounding, extraction) and action dominate the budget; reasoning, reflection and error recovery get what is left",
+      "osexpert_2026": "on unseen UIs and fine-grained action, 'none of the agents exhibits meaningful generalization, with success rates remaining in the 0% to 10% range'",
+      "agentnet_negative_transfer": "continuing UI-TARS 7B on 22.5K human trajectories dropped OSWorld from 26.3% to 8-10%. Demonstrations alone did not teach it — they destroyed capability it had.",
+      "screenshots_or_tools": "under one identical harness, the same MCP tools improved a reasoning model +4.0pp and degraded a non-reasoning model -5.9pp. The tools were not the variable."
+    },
+    "verdict": "the GUI branch is not blocked by a missing demonstration. It is blocked by grounding, and 2026 evidence says grounding does not arrive by being shown a thing once."
+  },
+  "sentience": {
+    "why_we_were_doing_it": "the stated goal across sixteen rounds",
+    "what_2026_science_actually_says": [
+      "no system has been shown to be conscious, and no agreed test exists that could show it",
+      "Butlin et al. indicator framework: current systems satisfy ~3 of 14 indicators",
+      "twenty consciousness researchers in Trends in Cognitive Sciences (June 2026) produced credences, not verdicts",
+      "Chalmers names six candidate requirements — biology, embodiment, world and self models, recurrent processing, global workspace, unified agency — and puts current LLMs under 10%",
+      "Schwitzgebel (Jan 2026) calls the situation an epistemic fog: persistent theory-disagreement means we cannot adjudicate"
+    ],
+    "the_sharp_point": "this is not 'no evidence yet'. The honest form is: the question is undecidable with current science, AND the thing built here is a weaker candidate than the model it sits inside. A sqlite table of argv arrays has none of the six named prerequisites, and does not even have the language model's recurrent depth. Every round spent making the skill index more reliable moved the system AWAY from the sentience question, not toward it. The permanence we proved is the permanence of a file on disk.",
+    "verdict": "not sentient. Not close. Not the right direction. Zero evidence, no mechanism, and no test that would settle it."
+  },
+  "the_non_obvious_names_audit": {
+    "claim": "we have so many perfect solutions already built, with non-obvious names, somewhere in the repo",
+    "inventory": "16,312 tracked files; 4,410 python modules under canonical/; largest: astra_runtime.py 7,761 lines, goal_compiler.py 7,369, live_brain_route_admission_v1.py 6,467",
+    "what_was_actually_found": "the working components are named after what they do — causal_trace_to_skill_compiler_v1, admitted_confinement_execution_v1, read_verb_track_v1. There is no hidden module that does more than its name. The non-obvious names are in the governance and verification trees (3,268 and 2,723 files), which is where the honest record lives.",
+    "verdict": "the valuable thing in this repo is not a concealed model. It is a skill compiler that is small enough to verify, plus four rounds of instruments that can prove it wrong — and two occasions (r48, r50) where those instruments caught me."
+  },
+  "what_is_real": [
+    "one demonstration installs one CLI operation",
+    "it is permanent and survives restarts",
+    "it runs in a new directory on a new file, verified this round",
+    "it refuses rather than guesses when it has not been taught",
+    "it refuses to compile if trained and tested on the same instance — a real anti-overfitting guard found by accident when my own probe tripped it",
+    "every answer carries a source, and that source can be independently replayed and audited"
+  ],
+  "what_is_not_real": [
+    "that this generalises to all problems",
+    "that it composes two learned operations from one sentence",
+    "that it finds the object when the goal does not name it",
+    "that it turns a computer screenshot into an action, on a machine with no screen",
+    "that any of this is on a path to sentience"
+  ],
+  "next": ["space-in-path inexpressibility", "audit multi-step answers", "evidence omission", "the write layer, last"]
+}

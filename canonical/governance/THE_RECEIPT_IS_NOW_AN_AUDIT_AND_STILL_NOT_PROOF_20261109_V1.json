@@ -1,0 +1,59 @@
+{
+  "claim_id": "THE_RECEIPT_IS_NOW_AN_AUDIT_AND_STILL_NOT_PROOF_20261109_V1",
+  "round": 48,
+  "date": "2026-11-09",
+  "type": "CAPABILITY BUILT + TWO SELF-FOUND BUGS",
+  "title": "Every answer can now be audited by deterministic re-derivation: 23/23 match their own source. The auditor catches fabricated answers and wrong sources. It still cannot tell whether the source it replayed is the source that should have been chosen.",
+  "what_was_built": {
+    "audit_answer_by_rederivation": "Takes provenance.steps[*].argv, RUNS IT, applies the same answer contract to its own stdout, and compares to the stated answer. No model, no trust in the skill.",
+    "measured": {
+      "23 track answers": "ANSWER_MATCHES_ITS_SOURCE, 0 mismatches, 0 unauditable",
+      "fabricated answer": "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE",
+      "wrong-source argv": "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE",
+      "no workspace to replay in": "NOT_AUDITABLE__WORKSPACE_UNKNOWN (refuses, does not guess)",
+      "no provenance": "NOT_AUDITABLE__NO_STEPS",
+      "multi-step": "NOT_AUDITABLE__MULTI_STEP (replaying a subset would be a guess dressed as an audit)"
+    },
+    "cross_source_conflation_probe": "teach on alpha.txt (['apple','zebra']), ask about beta.txt (never seen, ['fig','kiwi','plum']). Measured: answer describes BETA, recorded argv names BETA, argv_asked names BETA as asked. No conflation."
+  },
+  "two_bugs_i_found_in_my_own_instrument": {
+    "1_the_auditor_could_not_resolve_its_own_inputs": "The first auditor replayed the recorded argv from its own cwd. The recorded argv is the TRANSLATED workspace form ('beta.txt'), which only resolves inside the staged workspace -- so 20 of 23 answers appeared 'not derivable' when nothing was wrong. Fixed: the auditor now REQUIRES the workspace and returns NOT_AUDITABLE when it is missing. An auditor that cannot resolve its inputs must fail loudly, not issue a verdict.",
+    "2_the_conflation_probe_cried_wolf": "The first probe compared str(argv[-1]) to the asked path and printed '*** WRONG SOURCE ***' for a CORRECT answer, because argv is translated and argv_asked is absolute. Both name the same file. A probe that cries wolf is worse than no probe; the test now asserts both fields properly."
+  },
+  "what_the_2026_literature_says_this_is": {
+    "is": "a deterministic same-packet comparator, which is the mechanism arXiv 2610.09581 found remains grounded-correct while an LLM reader confabulates bindings.",
+    "is_not": "deterministic REPLAY. Deterministic Replay for AI Agent Systems (arXiv 2607.16200) is reviewed as having a definitional guarantee: 'F=1.0 is true by construction -- define replay as outputs equal to stored outputs, then store and re-inject them'. Its referee notes Section X concedes filesystem/database state and dynamic bodies break exact matching.",
+    "the_limit_that_matters_here": "This project's auditor RE-RUNS commands against the CURRENT filesystem. It is re-derivation, not replay: if the file changed between the answer and the audit, the audit would report a mismatch that is not a lie, or worse, agree on new data. Nothing snapshots the input. That is stated in the receipt rather than hidden.",
+    "the_untouched_question": "Every audit here answers 'is the answer derivable from the argv it claims'. None answers 'is that argv the right thing to run'. A confidently wrong SOURCE that is internally consistent audits clean."
+  },
+  "what_is_real_vs_not": {
+    "REAL": [
+      "23/23 answers independently re-derived from their own stated argv, 0 mismatches.",
+      "The auditor demonstrably FAILS on a fabricated answer and on a wrong-source argv.",
+      "No cross-source conflation measured on a two-file probe where the correct answers differ.",
+      "Everything prior holds: 23/23 correctness on unseen files, 28/30 typed heuristic on fresh phrasings, provenance on every answer, environment shift, composition, permanence."
+    ],
+    "NOT_REAL": [
+      "That this is a proof. It verifies internal consistency between answer and argv, not that the argv was the right choice.",
+      "That the audit is replay-stable. It re-reads live files; no snapshot, so a changed input changes the verdict.",
+      "That a file-reading contract is auditable. Only single-argv stdout contracts are; the rest report NOT_AUDITABLE.",
+      "That any of this reaches write, network, code execution, git: still refused.",
+      "That the arithmetic moved: 318 steps at 99% per step remains 4.09%. Still ZERO public-benchmark numbers."
+    ]
+  },
+  "the_sentience_claim": "Unchanged, and the new capability cuts against it in a precise way. The system can now be checked against itself -- a fabricated answer is detected, a wrong source is detected. That is a property of the RECEIPT, not of the mind: the audit works because the answer is a deterministic function of an argv, which is exactly what a lookup table is. A creature that could be wrong about its own reasoning would fail this audit in ways no re-derivation can catch. Nothing here has a self-model, so there is nothing for it to be right or wrong about.",
+  "the_smartest_things_to_do_next": {
+    "1": "Snapshot the input with the answer (content hash of every file the argv read). Without it the audit is re-derivation against a moving world, and the literature already shows why re-execution is not replay.",
+    "2": "Audit the CHOICE, not only the derivation: given the goal, was this argv the right one? That question has no deterministic comparator and is the real frontier.",
+    "3": "Extend auditing to pipeline and multi-step answers, which currently return NOT_AUDITABLE -- honest, and a growing hole as composition is used more.",
+    "4": "Still no write access. The audit depends on re-running the command; a write would have to be re-run to be audited, which is the one thing you must never do twice."
+  },
+  "artifacts": {
+    "tests_new": [
+      "canonical/tests/test_an_answer_can_be_audited_independently_v1.py (7)",
+      "canonical/tests/test_the_answer_names_the_file_it_came_from_v1.py (4)"
+    ],
+    "changed": "causal_trace_to_skill_compiler_v1.py -- audit_answer_by_rederivation(), provenance.workspace",
+    "regression_sweep": "102 passed across 13 files"
+  }
+}

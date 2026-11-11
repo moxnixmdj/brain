@@ -1,0 +1,31 @@
+{
+  "round": 95,
+  "date": "2026-11-09",
+  "title": "The second half of the stated goal has never been run",
+  "the_question": "'you sure this is the smartest approach?' (sixth time)",
+  "the_answer": "no. There is a structural asymmetry nobody named in 94 rounds:",
+  "the_asymmetry": {
+    "stated_goal": "'totally solve any computer use, literally anything on the computer, and this includes the most advanced software engineering capabilities'",
+    "computer_use_half": "measured every round for 94 rounds -- 130 tasks, dozens of runs, ~10 governance records",
+    "software_engineering_half": "canonical/swe_kernel/ = 39 modules, a 1525-line closed-loop repository solver with localise/patch/verify/backtrack ... and ZERO benchmark runs, ever. It has produced no diffs, no patches and no pass@1.",
+    "reading": "the goal is conjunctive. Half of it has never once been executed. Every 'smartest approach' answer I gave was about the half that was already instrumented, because that is where the instruments were."
+  },
+  "what_was_run_instead": {
+    "the_repo_own_verifier": "canonical/runtime/verify_brain_unified_model_v1.py -- NEVER RUN before this round",
+    "first_result": "32/33 FAIL -- ARTIFACT_INTEGRITY 5/6, recompilation_is_byte_identical FAILED",
+    "the_artifact_was_stale": "built 58c0eb74 (round 40); recompute gives a different digest than the stored artifact. The self-verifying compiled model could not reproduce itself.",
+    "after_recompile": "33/33 PASS -- digest 908bedbb, 443 capabilities, 149 bound, 294 receipt-backed, 26 engines, 312 knowledge docs, 1990 source modules, 6791 research records, 2360 routing tokens, 0 weights",
+    "caveat_kept_verbatim": "AUTHORITY NONE -- SANDBOX MEASUREMENT, NOT INDEPENDENT VERIFICATION"
+  },
+  "what_this_proves": "the repository contains a compiled, digest-stable, self-verifying zero-weight model whose own verifier passes 33/33 and was, until this round, unrun and stale. The instruments were not missing. They were unplugged (r93) or unrun (r95).",
+  "the_next_gate_that_matters": {
+    "instrument": "solve_repository_closed_loop(repo_root, goal, test_files, apply_to_source)",
+    "status": "exists, has never been executed against a benchmark",
+    "the_measurement": "a sealed benchmark instance: apply a hidden defect, hand it the goal, count tests that pass afterwards. Any live repo is a valid instance because the repo owns real tests.",
+    "why_it_is_the_smartest_next_step": "it is the OTHER HALF of the stated goal, it requires no external model, it can be scored by a real oracle (the repo's own test suite), and every prior round's instruments (page grounding, router, inducer) are irrelevant to it -- which is exactly why it was never done."
+  },
+  "the_lesson": {
+    "statement": "optimisation follows instrumentation. A part of the goal with no instrument will not be worked on, no matter how often it is stated, because every round ends by reading a number and the uninstrumented half produces none.",
+    "the_fix": "the software-engineering half needs a benchmark entry before it needs a single improvement."
+  }
+}

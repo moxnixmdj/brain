@@ -1,0 +1,259 @@
+{
+ "tasks": [
+  {
+   "task": "click-button",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "goal": "Click on the \"Cancel\" button.",
+   "plan": "click_named",
+   "done": true,
+   "reward": 0.8933,
+   "reason": null
+  },
+  {
+   "task": "click-button-sequence",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Click button ONE, then click button TWO.",
+   "plan": "click_two",
+   "done": true,
+   "reward": -1,
+   "reason": null
+  },
+  {
+   "task": "click-checkboxes",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Select MVZ, E9wqun and click Submit.",
+   "plan": "click_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-option",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Select JvP4 and click Submit.",
+   "plan": "click_named",
+   "done": true,
+   "reward": 0.8618,
+   "reason": null
+  },
+  {
+   "task": "click-link",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Click on the link \"vitae.\".",
+   "plan": "click_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-tab",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "goal": "Click on Tab #3.",
+   "plan": "click_nth_tab",
+   "done": true,
+   "reward": 0.8924,
+   "reason": null
+  },
+  {
+   "task": "click-dialog",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Close the dialog box by clicking the \"x\".",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-dialog-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "goal": "Click the button in the dialog box labeled \"Cancel\".",
+   "plan": "click_named",
+   "done": true,
+   "reward": 0.8926000000000001,
+   "reason": null
+  },
+  {
+   "task": "choose-list",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Select Dominga from the list and click Submit.",
+   "plan": "click_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "enter-text",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Enter \"Annis\" into the text field and press Submit.",
+   "plan": "type_named",
+   "done": true,
+   "reward": 0.8412999999999999,
+   "reason": null
+  },
+  {
+   "task": "enter-text-2",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Type \"ALAN\" in all lower case letters in the text input and press Submit.",
+   "plan": "type_named",
+   "done": true,
+   "reward": -1,
+   "reason": null
+  },
+  {
+   "task": "simple-arithmetic",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Solve the math problem and type your answer into the textbox. Press submit when done.",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "login-user",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "goal": "Enter the username \"cheree\" and the password \"2Pu\" into the text fields and press login.",
+   "plan": "type_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "email-inbox",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Find the email by Floris and reply to them with the text \"Aliquam tincidunt vitae.\".",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "terminal",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Use the terminal below to delete a file ending with the extension .html",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "choose-date-easy",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Select 12/23/2016 as the date and hit submit.",
+   "plan": "click_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-checkboxes-soft",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Select words similar to hide, end and click Submit.",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-menu",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Select Adele>Adora>Ardelis",
+   "plan": "click_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-menu-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "goal": "Click the \"Menu\" button, and then find and click on the item with the  icon.",
+   "plan": "click_named",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "enter-date",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Enter 10/07/2018 as the date and hit submit.",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "enter-password",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Enter the password \"2bpBa\" into both text fields and press submit.",
+   "plan": "type_named",
+   "done": true,
+   "reward": -1,
+   "reason": null
+  },
+  {
+   "task": "enter-text-dynamic",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Enter \"iw\" into the text field and press Submit.",
+   "plan": "type_named",
+   "done": true,
+   "reward": 0.8455,
+   "reason": null
+  },
+  {
+   "task": "click-radio",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "",
+   "error": "NO_GOAL: the page did not start (cover never dismissed)",
+   "plan": "unknown",
+   "done": false,
+   "reward": null,
+   "reason": null
+  },
+  {
+   "task": "click-collapsible",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "goal": "Expand the section below and click submit.",
+   "plan": "unknown",
+   "done": false,
+   "reward": 0,
+   "reason": null
+  },
+  {
+   "task": "click-scroll-list",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "goal": "Select Guyana from the scroll list and click Submit.",
+   "plan": "click_named",
+   "done": true,
+   "reward": -1,
+   "reason": null
+  }
+ ],
+ "n": 25,
+ "success": 6,
+ "seconds": 73.1,
+ "success_rate": 24.0
+}

@@ -1,0 +1,73 @@
+{
+ "schema": "brain.governance.CARRIER_WAS_71X_SLOWER_THAN_THE_MACHINE_20261109_V1",
+ "date": "2026-11-09",
+ "round": 31,
+ "status": "235MS_TO_89MS_BY_REMOVING_SLEEP_NOT_SAFETY__THE_REMAINING_86MS_IS_THE_DESIGN_FLOOR_AND_IS_NAMED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_user_requirement": "everything must be insanely fast",
+ "the_measurement_that_started_this": {
+  "floor_on_this_host": "bare `unshare --user --map-root-user --mount --net --pid --fork --ipc --uts bash -c 'exit 0'` = 3.2-3.3 ms",
+  "carrier_before": "235 ms on a one-file workspace, 1267 ms on a 16k-file workspace",
+  "ratio": "71x the machine it runs on"
+ },
+ "three_wastes_found_by_profiling_none_of_them_safety": [
+  {
+   "waste": "namespace_broker_available() runs a whole unshare SANDBOX to answer 'is the broker available', and it was asked TWICE per command",
+   "evidence": "a traced time.sleep stack showed two complete probe sandboxes inside a single run_staged_confined_command call",
+   "fix_1": "namespace_primitives_cheap() -- a shutil.which check over the seven required binaries, memoised per uid/gid, 0.2 ms. It can only REFUSE faster; it never returns True as a substitute for the probe.",
+   "fix_2": "the availability answer is now fetched once per call and reused",
+   "security_note": "this does not weaken the probe. If a primitive is missing the answer is False in 0.2 ms instead of after a wasted sandbox; if all are present the real probe still runs and still decides."
+  },
+  {
+   "waste": "subprocess.Popen.wait() polls at 16 / 32 / 50 ms",
+   "evidence": "0.455 s of a 0.601 s five-run profile was three time.sleep calls inside subprocess._wait",
+   "fix": "a blocking wait plus a threading.Timer that kills the process group at the deadline -- the same guarantee the polling loop was approximating, with no sleep at all",
+   "verified_by": "test_the_timeout_still_fires_without_polling -- a /usr/bin/sleep 30 under wallclock_s=1 returns WALLCLOCK_LIMIT_EXCEEDED in under 5 s"
+  },
+  {
+   "waste": "none left in the parent",
+   "evidence": "after both fixes the profile shows posix.waitpid as the dominant cost -- the parent is now genuinely blocked on the child, not sleeping",
+   "what_the_child_spends_it_on": "the _SETUP bash script performs nine mount operations (rprivate, tmpfs, bind, remount ro, four /usr /bin /lib /lib64 binds, device binds). Measured by running _SETUP directly against /bin/true: 53-62 ms.",
+   "conclusion": "55 ms is the floor of THIS design. It is not fixable by micro-optimisation."
+  }
+ ],
+ "measured_before_and_after": {
+  "carrier_on_a_one_file_workspace": {
+   "before_ms": 235.3,
+   "after_ms": 88.8,
+   "ratio": "2.6x faster"
+  },
+  "carrier_on_the_repo_root": {
+   "before_ms": 1267.1,
+   "after_ms": "not re-measured -- that path also walks a 16k-file manifest, which this round did not change"
+  },
+  "confined_query_bridge_warm": {
+   "before_ms": 116.3,
+   "after_ms": 102.1
+  },
+  "correctness": "unchanged: ok True, confined True, live_workspace_untouched True, and every end-to-end test still green (7 + 7 + 6 + 5)"
+ },
+ "the_honest_gap_to_the_frontier": {
+  "this_tree": "~89-102 ms per carried command",
+  "frontier_2026": {
+   "firecracker_snapshot_restore": "4-25 ms (published: 125 ms cold boot, <5 ms restored snapshots; a 2026 builder measured 25 ms on bare metal, 26x faster than cold boot)",
+   "google_agent_compute_engine_pattern": "warm snapshot restore, memory checkpointing, copy-on-write cloning, one microVM per agent session",
+   "e2b": "~150 ms cold start via pre-forked microVM snapshotting"
+  },
+  "what_gets_this_tree_under_55ms": "a long-lived pre-mounted sandbox handed out per command, or a pre-warmed fork of the mounted namespace. The tree already has a zygote worker pool (canonical/swe_kernel/zygote_worker_pool_v1.py); the carrier is not in it. That is a design change, not a bug fix.",
+  "what_i_did_NOT_do": "I did not skip the workspace manifest, and I did not skip the probe's real sandbox. Both would have made the number smaller and the invariant unverified while still reporting it."
+ },
+ "the_larger_remaining_cost_this_round_did_not_touch": {
+  "problem": "the workspace manifest walks the whole tree: 235 ms for 1 file, 1267 ms for the 16k-file repository root",
+  "why_it_matters": "any command carried with the repo as workspace pays a full-tree walk",
+  "frontier_answer_found": "incremental content-addressed verification -- read only the tiles that changed rather than re-hashing the whole history (tlog-tiles / Merkle tile layouts, 2026). Measured elsewhere in the same design family: an incremental verify after N appended records reads O(changed tiles), not O(entire history).",
+  "not_done_because": "it changes what 'the live tree is untouched' MEANS, from a full comparison to a proof about a delta. That is a governance decision about the strength of the invariant, not a performance patch, and it is the next round's work rather than this one's."
+ },
+ "suite": "5 new latency tests green; end-to-end 7, bridge 7, path-scope 6 all still green; guard PASS 17/0; 443 capabilities; compiled 10,216,146 bytes",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

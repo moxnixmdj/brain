@@ -1,0 +1,25 @@
+{
+  "schema": "PROJECT_BRAIN_R130_UNSELECTED_REACH_V1",
+  "date": "2026-11-09",
+  "what_this_is": "the first reach number on this project measured on a sample NOT chosen by the policy's author",
+  "design": {
+    "sample": "the first 60 MiniWob++ task files in filesystem walk order, alphabetic, truncated at the 60-task time budget. No task was dropped, added, or re-ordered after results were seen.",
+    "policy": "one generic policy with five goal-shape procedures: Enter \"X\" (type), Select N with the slider (arrow keys), A>B>C (nested menu), Select X from the list (native select), drag with #draggableSmall (drag-box). Everything else falls through to a quoted-token click.",
+    "episodes": "one attempt per task, as in a benchmark run",
+    "instrument": "live MiniWob++ on 127.0.0.1:8893, HeadlessChrome/153, CDP 9222"
+  },
+  "result": {"reach": "6/60 = 10.0%", "successes": ["click-test","drag-box","enter-text","use-slider","(plus 2 more in the truncated head of the transcript)"], "dominant_failure": "NO_PROCEDURE on 46 of 60"},
+  "the_number_that_matters_is_the_contrast": {
+    "hand_picked_10_task_sample": "6/10 = 60%",
+    "unselected_60_task_sample": "6/60 = 10%",
+    "interpretation": "the 60% figure was obtained on a set chosen BECAUSE earlier policies failed it and were then fixed until they passed. That is a tuning set. The 10% figure is the first estimate with no selection."
+  },
+  "the_failure_taxonomy_at_scale": {
+    "NO_PROCEDURE": 46,
+    "what_that_means": "the task's goal sentence did not match any of five known shapes. This is a COVERAGE failure, not a perception, resolution, or learning failure. The agent never attempted 77% of the benchmark.",
+    "the_other_failures": "the remaining 14 attempted tasks scored 6, so among ATTEMPTED tasks the rate is 6/14 = 43%. That is the more informative denominator for 'when the agent has a procedure, does it work', and it is still not a reach figure."
+  },
+  "honest_reading": "instant learning is real and was measured (one demonstration gave 2/6 -> 8/8 and transferred at 9/10; resolution raised a slider from 0/6 to 10/10). None of that changes the reach number, because reach is bounded by how many DIFFERENT task shapes the agent has a procedure for. Writing one procedure per goal shape does not scale to 130 tasks and does not generalise: this policy was authored with knowledge of the benchmark.",
+  "what_would_actually_raise_the_number": "not more learning, and not more hand-written goal regexes. Either (a) a planner that decomposes an unseen goal sentence into the primitive operations it implies, or (b) a model that has been trained on the task distribution. (a) is the only one available with zero weights, and it is the honest target.",
+  "retracted_claims_this_supersedes": "any implication that the project was near 60% or near 'solved' for computer use. The measured unselected reach is 10%."
+}

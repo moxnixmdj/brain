@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_R121B_SPECTRUM_MISSES_INJECTED_DEFECT_V1",
+  "date": "2026-11-09",
+  "measurement": {
+    "environment": "live MiniWob++ click-option, HeadlessChrome/153.0.8010.0, CDP 9222",
+    "runs": 12,
+    "successes": 2,
+    "failures": 10,
+    "policy": "read the goal sentence (permitted channel), resolve the named option by accessible label (permitted channel), click one radio, submit",
+    "defect_injected": "on runs where seed % 4 == 3, deliberately select a neighbouring option instead of the resolved target",
+    "injected_runs": 3,
+    "injected_runs_all_failed": true
+  },
+  "spectrum_result": {
+    "status": "SPECTRUM_SEPARATES",
+    "verified_coverage": true,
+    "named_cause": "select:1",
+    "named_cause_success_rate": "0/4",
+    "injected_defect": "select-mismatch",
+    "injected_defect_rank": 2,
+    "injected_defect_ochiai": 0.5477,
+    "named_cause_ochiai": 0.6325,
+    "only_action_that_ever_succeeds": "select:0 (2/4)"
+  },
+  "finding": "repeat-execution spectrum attribution ranked an incidental always-failing action ABOVE the deliberately injected cause, even though the injected cause appears in the trajectories. Ochiai's frequency-weighting rewards actions that appear often in failing runs, not actions that are causal.",
+  "why_this_matters": "this is the same structural failure as the first measurement, at a different rank. The method needs the CAUSE to vary while everything else is held fixed. Here the cause (select-mismatch) varied, but so did which option was selected, and the latter dominated by frequency.",
+  "carried_forward": "verified_coverage=true was produced, and it is TRUE THAT THE SPECTRUM SEPARATED, but the named action is not the injected cause. A downstre consumer treating this as a localisation would act on the wrong action. This is why the universal learning contract gates on verified coverage but the contract itself still declines to grant acceptance credit without matched empirical effectiveness.",
+  "next_measurement_requirement": "to test whether the method can find a GUI cause at all, the policy must hold the action vocabulary fixed (same number of runs per action class, identical action sets) and vary ONLY the candidate cause. Until then, no claim about GUI localisation accuracy is warranted."
+}

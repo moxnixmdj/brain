@@ -1,0 +1,30 @@
+{
+  "round": 61,
+  "date": "2026-11-09",
+  "title": "Rank 2 of the path, built: the gate now checks the OPERATION and not only the shape of the answer",
+  "why_this_round": "r60 measured 3/3 type-changing wrong picks caught and named the hole precisely: a wrong pick between two operations that return the same kind of answer. That was rank 2 on the ranked path and it needed no model, so it was built rather than described.",
+  "the_defect_on_the_stored_record": {
+    "taught_sort_minus_u": {"goal_skeleton": "unique lines of ?path0", "postcondition": {"kind": "stdout_lines"}},
+    "taught_plain_sort": {"goal_skeleton": "sort the lines of ?path0", "postcondition": {"kind": "stdout_lines"}},
+    "observation": "identical postconditions. The contract described how to check the OUTPUT SHAPE and said nothing about the operation that produced it."
+  },
+  "the_fix": {
+    "new_field": "an operation commitment inferred from the GOAL: 'unique' / 'distinct' / 'dedupe' require the executed argv to contain '-u'",
+    "checked_at": "the recall success path, immediately after the postcondition verifies and before the answer is returned",
+    "verdict_before": "sort for 'unique lines of' -> postcondition True STDOUT_LINES_VERIFIED:4, shape audit SHAPE_MATCHES_THE_GOAL",
+    "verdict_after": "same proposal -> OPERATION_NOT_HONOURED__ASKED_FOR_-u, refused",
+    "correct_proposal": "sort -u -> OPERATION_COMMITTED:-u"
+  },
+  "deliberate_narrowness": "the commitment fires only where the goal names a behaviour the argv can be checked for. A goal that names no flag ('count the lines of', 'sha256 of') gets no extra check, because a gate that fires on wording it cannot verify rejects correct answers -- the exact mistake r53 made and had to revert.",
+  "what_this_does_not_do": [
+    "it does not catch a same-kind wrong pick between two operations the goal cannot distinguish by flag, e.g. `rev` vs `tac` where both return lines and the wording is 'reverse the lines'",
+    "it does not replace a model. It bounds one.",
+    "it does not change the r55 ceiling: a sentence that does not say which operation you want still has no unique answer"
+  ],
+  "still_rank_1_on_the_path": "attach a model to the selection step. Everything downstream of selection now verifies against both the answer kind and, where the wording allows, the operation itself. The gate is ready; the model is still absent.",
+  "regression": {"files": 23, "passed": 168, "xfailed": 1, "r46_baseline": "23/23 unchanged"},
+  "honest_verdict": {
+    "on_the_goal": "one more wall segment added to the only part of the architecture that is defensible without a model. Nothing about the goal moved: still no model, no actuator, no planner.",
+    "on_the_method": "this is what 'fastest optimal path' looks like when taken literally -- the next item on the ranked list was cheap, so it was done, and it was measured against the specific hole the previous round had already named."
+  }
+}

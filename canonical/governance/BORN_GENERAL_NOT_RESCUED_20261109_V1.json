@@ -1,0 +1,81 @@
+{
+ "schema": "brain.governance.BORN_GENERAL_NOT_RESCUED_20261109_V1",
+ "date": "2026-11-09",
+ "round": 37,
+ "status": "COMPILE_TIME_GENERALISATION_LANDED__NO_REGRESSIONS",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "why_this_round_exists": "The question has been asked three times and answered twice with measurement. Re-deriving it a third time would be motion, not progress. So this round did the thing my own r36 plan ranked #1 and left undone: make skills GENERAL AT BIRTH instead of rescuing them at read time.",
+ "the_gap_r36_left": "r36 taught recall to read intent, so an already-stored specialist could survive a synonym. But `anti_unify_workflow` still froze the literal adjective into BOTH the skeleton and the regex. Every skill compiled after r36 was therefore born a specialist and had to be rescued again. Fixing the read path while the write path keeps producing the defect is not a fix; it is a filter.",
+ "what_changed": {
+  "compile_time": "the intent-bearing word (unique/distinct/different for `uniquelines`) is no longer a hard skeleton token, because it names the OPERATION and carries no binding",
+  "not_a_wildcard": "removing it could leave NO anchor, and an empty skeleton matched everything -- worse than a specialist, because it would answer questions it was never taught. The record now carries a reserved `__intent__` anchor plus `skeleton_intent`, so a skill with no literal words still has exactly ONE hard requirement, and it is the right one.",
+  "single_definition": "the 'does this skeleton apply' rule had been written TWICE (candidate builder and recall). Both are now `_skeleton_matches`. Two copies drift; one cannot.",
+  "legacy_compat": "a skill stored before this change (literal tokens, no intent anchor) is admitted by word coverage OR by intent, so the shipped store needs no migration and no record that already proved itself is rewritten.",
+  "unchanged": "a goal the intent classifier does not recognise keeps its literal skeleton. Nothing is widened that was never classified."
+ },
+ "measured": {
+  "a_skill_born_today": {
+   "stored_tokens": [
+    "__intent__"
+   ],
+   "recall_on_its_own_wording": "HIT answer=2",
+   "recall_on_distinct": "HIT answer=2",
+   "recall_on_different": "HIT answer=2",
+   "control_words": "MISS",
+   "reading": "no rescue path was used -- the record was simply written general"
+  },
+  "the_shipped_legacy_store": {
+   "unique": "HIT",
+   "distinct": "HIT",
+   "different": "HIT",
+   "controls": {
+    "words": "MISS",
+    "duplicate": "MISS"
+   },
+   "reading": "the old record is still paraphrase-tolerant through the either-signal rule"
+  },
+  "end_to_end_through_the_door": "unique 359 ms / distinct 218 ms / different 216 ms, all pass=True answer=2",
+  "distinct_intents_stay_distinct": {
+   "uniquelines": [
+    "__intent__"
+   ],
+   "lines": [
+    "__intent__",
+    "lines"
+   ],
+   "words": [
+    "__intent__",
+    "words"
+   ],
+   "duplicatelines": [
+    "__intent__",
+    "lines"
+   ]
+  }
+ },
+ "regressions": {
+  "before_and_after_the_compile_time_change": "6 failed / 35 passed, IDENTICAL in both runs",
+  "conclusion": "the change introduces ZERO regressions; the 6 are the long-known stale `test_acquisition_to_execution_engine_v1` family",
+  "verified_by": "stashing only causal_trace_to_skill_compiler_v1.py and re-running the same 5 files"
+ },
+ "pinned_by": "canonical/tests/test_a_skill_is_born_general_v1.py -- all 6 tests FAIL on the pre-fix tree (on ASSERTIONS, not import errors) and pass after",
+ "the_same_answer_as_r35_and_r36__unchanged_by_this_round": {
+  "compounding": "0 net saving across 10 never-seen kinds (cold_acts 1525 == grown_acts 1525)",
+  "learning_to_learn": "beat a random policy 3/10 -- a coin flip",
+  "general_environment_learning": "bounded random walking; 81% coverage at 200 trials; goal never reached",
+  "any_computer_use": "PIL/cv2/numpy/tesseract absent; carrier is cli_exec argv only; a 3-step GUI trace elevates to 1 and the click and typing are discarded",
+  "sentience": "continuous_self_v1.run() takes next_task and perform INJECTED; its own docstring disclaims experience; 2026 consensus: no AI system confirmed conscious",
+  "public_benchmark_number": "zero"
+ },
+ "what_this_round_actually_bought": "One axis moved, and it is the only one that had evidence behind it. A skill taught once now generalises across the phrasings of the SAME operation instead of the one sentence used to teach it -- at birth, with no rescue. That is the PolySkill claim (ICLR 2026) implemented at the write end, and it is worth exactly what it is worth: it removes ONE of the two bounds. A skill store still cannot exceed the carrier that executes it, and that bound is untouched.",
+ "the_two_bounds": {
+  "bound_1_the_carrier": "a skill can only use verbs the carrier admits -- UNTOUCHED, and it is the real ceiling",
+  "bound_2_the_wording": "a skill keyed on a sentence could not exceed that sentence -- REMOVED this round, at the write end"
+ },
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

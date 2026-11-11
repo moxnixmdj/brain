@@ -1,0 +1,16 @@
+{
+ "schema": "PROJECT_BRAIN_INDEPENDENT_VERIFICATION_RECEIPT_V1",
+ "mission_id": "ASTRA-VERIFY-PDF-PRODUCER-001",
+ "capability_id": "pdf.document.create.from_text",
+ "independently_verified_by": "pypdf.PdfReader (separate codebase, separate process)",
+ "independently_verified_by_version": "6.19.0",
+ "observed_effect": {
+  "output_path": "canonical/pdf_probe/independent_check.pdf",
+  "output_sha256": "be9659624b58fffc4ed7619867e51d99e77accca356219a220e6be73def511d3",
+  "output_bytes": 671,
+  "pages_seen_by_oracle": 1,
+  "text_recovered_by_oracle": "Independent Verification\nLine one of the report.\nLine two."
+ },
+ "claim": "the produced file is a PDF that an independent parser opens and from which it recovers exactly the text the caller supplied",
+ "authority": "NONE__SANDBOX_MEASUREMENT"
+}

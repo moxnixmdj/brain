@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_R153_V1",
+  "date": "2026-11-09",
+  "round": "r153",
+  "the_claim_under_test": "'after he does them at least once, he would learn all of those permanently' -- so: does the second call RECALL the command, or does it secretly search again?",
+  "answer_before_this_round": "it secretly searched again. Every surface said otherwise.",
+  "three_defects_that_made_recall_impossible": {
+    "1_recall_verified_without_the_goal": {
+      "code": "recall() -> _verify_plan(plan, suffix, target, progs)",
+      "why_fatal": "every .txt plan was checked by carries_content_evidence, which is hard-False for .txt and must stay so",
+      "measured": "a goal that closed in 1.27 s was re-found in 0.10 s by searching again; from_memory was always False"
+    },
+    "2_verification_replayed_on_the_wrong_input": {
+      "code": "_verify_plan: env = ComputerEnv()   # no seed",
+      "why_fatal": "the plan was replayed against the default one-line sandbox file and then compared to the caller's real 7-line input, so it could never match",
+      "measured": "fingerprint similarity was 1.0000 between calls and the store held the right row -- the failure was not similarity and not storage"
+    },
+    "3_the_receipt_was_a_command_that_does_not_work": {
+      "code": "_recipe_of: env = ComputerEnv(); program_actions(..., target=target)   # no goal",
+      "why_fatal": "a goal learned as `sort --unique {input}` re-derived plain `sort {input}` and reported THAT as the winning command",
+      "measured": "PASS__RECALLED_AND_REVERIFIED with verify=DEDUPLICATED_SET_OF_INPUT_LINES while argv was ['sort','{input}'], and `sort` alone leaves `apple` twice in the file. The pass was genuine; the receipt could not do the job it claimed.",
+      "why_this_is_the_worst_of_the_three": "the recipe is the only part of this system that leaves the sandbox. A wrong recipe is a wrong answer in the only form a caller can run."
+    },
+    "the_pattern": "all three are the same mistake: a parameter (goal, seed_file) added to one call site and not followed to the others. This was the third, second and fourth instance of it in two rounds.",
+    "the_discipline_that_should_have_caught_it": "after changing a function's signature, grep every call site and assert on each one. I added the parameter, ran the new path, saw a pass, and did not check the call sites that produce the RECEIPT."
+  },
+  "measured_after": {
+    "three_separate_processes_sharing_one_store": {
+      "process_1_learn": ["sort 1.25 s", "deduplicate 5.81 s", "reverse 0.40 s"],
+      "process_2_recall": ["sort 0.37 s mem=True", "deduplicate 0.15 s mem=True", "reverse 0.03 s mem=True"],
+      "process_3_recall": ["sort 0.33 s mem=True", "deduplicate 0.13 s mem=True", "reverse 0.03 s mem=True"],
+      "receipts": {"sort": "sort {input}", "deduplicate": "sort --unique {input}", "reverse": "rev {input}"},
+      "speedup": "13x to 45x, and the command handed back is the one that actually works"
+    },
+    "same_program_different_jobs": "sort and deduplicate both use `sort` and get DIFFERENT argv, chosen by checking bytes rather than by position or by a table"
+  },
+  "a_false_alarm_i_raised_and_then_killed": {
+    "what_i_reported": "reverse regressed to OPEN__EFFECT_NOT_VERIFIED with rejected=['run_xargs'], FileNotFoundError '/tmp...'",
+    "what_was_actually_true": "my fixture /tmp/perm/list.txt had never been created. The FileNotFoundError was the fixture, and the xargs rejection message was masking it.",
+    "how_i_found_it": "re-ran ComputerEnv(seed_file='/tmp/perm/list.txt') directly and read the traceback instead of the status string",
+    "result_after_fixing_the_fixture": "reverse closed in 0.65 s and recalled in 0.03 s. It was never broken.",
+    "the_law_reinforced": "an instrument that reports a failure must be audited before the failure is believed -- including when the instrument is my own test script"
+  },
+  "tests_added": {
+    "file": "canonical/tests/test_a_learned_text_recipe_is_recalled_and_is_the_command_that_worked_v1.py",
+    "count": 4,
+    "what_they_pin": ["the second call is a RECALL, not a search", "the recalled receipt carries the flag that does the job", "a recalled recipe is still checked against real bytes", "one program, two jobs, must not use one argv for both"],
+    "isolation_note": "each test gets its own store, because a shared store made test #1's 'first' call a recall of test #4's result -- measured, and a test whose result depends on run order is not a test",
+    "result": "4 passed, stable across three runs and inside a wider suite (23 passed)"
+  },
+  "regression": {"files": "test_computer_env_v1.py + test_text_relation_verifier_v1.py", "result": "98 passed, 3 failed", "the_3": "the R148 curriculum/boundary contradiction. test_the_first_time_learns_and_the_second_does_not asserts on curriculum_v1.study(), which _try_explore refuses before discover() is ever reached -- it has nothing to do with memory and this round does not touch it."},
+  "what_is_now_real_that_was_not": "the permanence claim has a transcript in three processes with receipts. Before this round the machine was fast the second time and had learned nothing -- the speed was the fingerprint cache, not memory of the command.",
+  "sentience": "no. Delete the store and only the commands are lost."
+}

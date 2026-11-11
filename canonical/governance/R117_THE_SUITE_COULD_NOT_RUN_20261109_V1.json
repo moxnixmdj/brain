@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_R117_SUITE_COULD_NOT_RUN_V1",
+  "date": "2026-11-09",
+  "headline": "the repository's own test suite was uncollectable; 23 collection errors, all stale pins or missing packages, none a code defect",
+  "before": {"collected": 17884, "collection_errors": 23, "runnable_as_one_command": false},
+  "after":  {"collected": 18001, "collection_errors": 0,  "runnable_as_one_command": true},
+  "causes": [
+    {"cause": "missing python packages", "detail": "cv2, sympy, pydantic, langdetect", "files": 13, "fix": "installed; 68 additional tests now collect"},
+    {"cause": "effect-class registry pinned to LINE NUMBERS", "detail": "five of six _LEGACY_LINE_REMAP entries for astra_runtime.py pointed at lines that no longer contain subprocess.run (781/859/1309/1653/6405 had drifted to 862/940/1408/1769/6539); python_test_audit 136 -> 144", "files": 9, "fix": "re-anchored; obligation count unchanged, six sites in and six out"},
+    {"cause": "verification records pinned to FILE CONTENT HASHES", "detail": "test_epistemic_closure_kernel_v1.py was legitimately extended in r50 and the pinned sha was never updated; two other pins stale in the same records", "files": 2, "fix": "re-anchored with provenance appended to the record"},
+    {"cause": "module-scope import of cadquery, which needs libGL.so.1", "detail": "a missing system library made the file a COLLECTION ERROR, which takes the whole summary down with it", "files": 1, "fix": "unittest.SkipTest with the reason; a missing library is a skip, not a verdict"}
+  ],
+  "the_law": "a stale pin does not fail loudly, it makes tests DISAPPEAR -- so the failure is invisible to anyone who does not run the whole suite, which is everyone",
+  "implication": "every green reported in this project up to r116 was a green on a hand-picked file; the suite that would have contradicted it could not be loaded",
+  "needed_next": "the pins are still maintained by hand, and they will drift again. The durable fix is content-addressed effect sites (hash the function body) and auto-re-anchoring verification records, not more manual updates"
+}

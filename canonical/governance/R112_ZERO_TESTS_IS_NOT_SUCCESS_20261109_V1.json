@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_R112_ZERO_TESTS_IS_NOT_SUCCESS_V1",
+  "date": "2026-11-09",
+  "defect": {
+    "module": "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+    "function": "localize_faults_by_differential_trace",
+    "observed": {"ok": true, "runner": "pytest", "total_tests": 0, "failed_count": 0},
+    "child_stderr": "ImportError while loading conftest 'tests/conftest.py' / ModuleNotFoundError: No module named 'markupsafe'",
+    "cause": "child sets PYTHONNOUSERSITE=1; a user-site dependency became invisible; pytest collection aborted before importing any test; the runner reported an empty pass carrying a success flag",
+    "law": "r87 -- a silent empty result is indistinguishable from a true empty result, and worse when it carries ok:True"
+  },
+  "fix": {
+    "rule": "total_passed + total_failed == 0 => ok False, reason NO_TESTS_DISCOVERED, child_stderr returned",
+    "effect_on_solver_guard": "the r111 post-apply guard (if not ok) now refuses instead of passing vacuously"
+  },
+  "verification": {
+    "zero_test_path": {"ok": false, "reason": "NO_TESTS_DISCOVERED"},
+    "real_repair_regression": {"status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED", "post_apply_verified": true, "post_apply_passed_count": 11}
+  },
+  "sbfl_measurement_on_foreign_repo": {
+    "corpus": "jinja2-3.1.4 sdist, 25 source files, 851 tests",
+    "defects": 6,
+    "file_recall": "6/6",
+    "file_ranks": [1, 1, 1, 1, 2, 2],
+    "line_recall": "0/6",
+    "interpretation": "SBFL localizes to FILE with rank <= 2 on every defect; the crystallized skill operates on token patterns and requires only a file, so file granularity is sufficient",
+    "prior_round_correction": "r111 attributed the weak result to localization being the bottleneck; the true cause was zero tests executed. That attribution is retracted."
+  },
+  "instrument_audit_this_round": [
+    "r110 tested the solver with apply_to_source=False and called the resulting non-application a false claim by the solver -- retracted",
+    "r111 post-apply guard passes when ok:True and failed==0, which a zero-test run satisfies -- fixed here",
+    "r111/r112 first SBFL sweep reported 0/6 could-not-inject; the mutations ran against a shadowed import -- probe defect, not solver defect"
+  ]
+}

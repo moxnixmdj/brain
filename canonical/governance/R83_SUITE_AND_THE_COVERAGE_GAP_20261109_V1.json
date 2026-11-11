@@ -1,0 +1,42 @@
+{
+  "round": 83,
+  "date": "2026-11-09",
+  "title": "The whole-suite number after the r80 rebase fix, and why five shapes have not moved it",
+  "suite": {
+    "runner": "canonical/evaluation/bench/run_planned_v1.py",
+    "n": 130,
+    "success": 9,
+    "success_rate_pct": 6.9,
+    "clean": 9,
+    "refused": 0,
+    "seconds": 327,
+    "previous_runs": {"r80_planned": 10, "r73_baseline_first_public": 15},
+    "spread_caveat": "SINGLE RUN. r78 measured 18/15/18 across three runs (stdev 1.73) at a different configuration, so 9 vs 10 is NOT a difference. It is also NOT an improvement, which is the only claim that matters.",
+    "verdict": "SUPERSEDED BY R84: this number measured COVERAGE, not capability. 93 of the 130 tasks were never attempted (their goals contain no quoted literal, and that branch performed no actions). Corrected decomposition: 9/37 = 24.3% on attempted."
+  },
+  "why_this_is_expected_and_not_an_excuse": {
+    "finding": "the five shapes are exactly the class whose postcondition is addressable; MiniWob is overwhelmingly the class where it is not",
+    "evidence": "the same r83 discriminator that separated :8901 (server-rendered, elevates, 4/4) from :8895 (client-side onclick, refuses loudly) applies to the suite's dominant task family",
+    "unmeasured": "the fraction of the 130 tasks with an addressable postcondition is NOT measured. Until it is, the 6.9% cannot be attributed between 'the mechanism is wrong' and 'the benchmark is out of scope for the mechanism'.",
+    "next_measurement_in_order": [
+      "classify all 130 MiniWob tasks by addressability (URL/HTTP/SQL/file/CLI effect vs DOM-only effect)",
+      "report the success rate SEPARATELY on the addressable subset",
+      "that split is the first number that can actually test the thesis"
+    ]
+  },
+  "web_debt": {
+    "rounds_with_zero_fetches_before_today": 9,
+    "fetches_this_round": 3,
+    "status": "partially paid, still owed",
+    "what_the_three_fetches_settled": [
+      "SkillShift-Bench (arXiv 2610.33528): transfer degrades under same-site evolution; Execution Shift is the strongest pressure (Src 56.67 -> Src-Exec 33.23). This is the published version of the addressability boundary found here by measurement.",
+      "Work2Skill (arXiv 2610.12984): the informative number is the changed-requirement gain (+3.93 to 8.64), because it tests rules-vs-memorisation. That is the r83 params:[] defect, named independently.",
+      "SharedKV-BT (arXiv 2610.07327): 'neither model-reported completion nor the skill's return value authorizes progression; a separate evaluator confirms the external postcondition'. This is the sixth instance of the failure class, stated as an architectural law."
+    ]
+  },
+  "sentience_claim": {
+    "answer": "no",
+    "reasoning": "the system's only persistent state is what it writes to disk between rounds. There is no self-model that survives a context reset, no continuity of experience, and no process that represents its own state. What exists is a trace capture, a compiler, and a verifier -- a skill library with a postcondition checker.",
+    "why_the_question_persists": "after one demonstration the system measurably improves at a task it has never run. That behavioural signature -- 'it learned' -- is what people read as sentience. It is memory plus a verifier, and it is indifferent to whether anything is home."
+  }
+}

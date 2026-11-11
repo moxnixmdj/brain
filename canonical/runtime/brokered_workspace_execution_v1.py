@@ -26,6 +26,7 @@ import hashlib
 import json
 import os
 import pathlib
+import shutil
 import stat
 import sys
 import tempfile
@@ -349,11 +350,40 @@ def _python_in_chroot() -> str:
     return "/usr/bin/python3"
 
 
+_CAPABILITY_CACHE: dict[tuple[int, int], bool] = {}
+
+
+def namespace_primitives_cheap() -> bool:
+    """The HOST PRIMITIVES exist. Cheap, and NOT a substitute for the probe.
+
+    Measured 2026-11-09: `namespace_broker_available()` runs a whole unshare sandbox
+    just to answer "is the broker available", and it is asked TWICE per command, so
+    every call paid two sandbox setups to discover what `shutil.which` already knew.
+    The floor on this host is 3.3 ms for a bare unshare; the call was costing 235 ms.
+
+    This answers only the question it can answer: are the binaries there. It never
+    returns True as a substitute for the real probe -- callers that need the probe
+    still call it. What changed is that a MISSING primitive is now known for 0.2 ms
+    instead of after a wasted sandbox.
+    """
+    key = (os.geteuid(), os.getegid())
+    if key in _CAPABILITY_CACHE:
+        return _CAPABILITY_CACHE[key]
+    required = ("unshare", "mount", "python3", "setpriv", "ip", "bash", "env")
+    ok = all(shutil.which(name) for name in required)
+    _CAPABILITY_CACHE[key] = ok
+    return ok
+
+
 def namespace_broker_available(*, force_refresh: bool = False) -> bool:
     """Verify once per UID/GID that `zero_ambient_namespace_launcher_v1` can run a brokered worker."""
     key = (os.geteuid(), os.getegid())
     if not force_refresh and key in _AVAILABILITY_CACHE:
         return _AVAILABILITY_CACHE[key]
+    if not namespace_primitives_cheap():
+        # No primitives: the probe would fail, and it takes a sandbox to find out.
+        _AVAILABILITY_CACHE[key] = False
+        return False
     py = _python_in_chroot()
     ok = False
     try:
@@ -553,7 +583,11 @@ def run_staged_confined_command(
 ) -> dict[str, Any]:
     """Execute `command` inside `zero_ambient_namespace_launcher_v1`, never touching live `workspace_root` until verified."""
     ws = pathlib.Path(workspace_root).resolve()
-    if not namespace_broker_available():
+    # Asked once. `namespace_broker_available()` is memoised, but the probe it may run
+    # costs a whole sandbox, and this function used to ask it twice per command --
+    # measured 2026-11-09, both probe sandboxes appeared in a single trace.
+    _available = namespace_broker_available()
+    if not _available:
         return {
             "schema": SCHEMA,
             "ok": False,

@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R131_FINAL_REACH_V1",
+  "date": "2026-11-09",
+  "two_independent_unselected_samples": [
+    {"sample": "first 60 MiniWob++ tasks in filesystem walk order (alphabetic, truncated by time budget)", "reach": "6/60 = 10.0%"},
+    {"sample": "40 tasks drawn with random.seed(20261109) from all 130", "reach": "5/40 = 12.5%", "attempted": "12/40", "success_given_attempt": "5/12"}
+  ],
+  "combined": "11/100 across the two samples, 11.0%, with samples that agree within 2.5 points",
+  "the_contrast_that_defines_this_session": {
+    "tuned_10_task_sample": "6/10 = 60%",
+    "unselected_samples": "10-12.5%",
+    "explanation": "the 60% figure came from tasks selected BECAUSE earlier policies failed them and then repaired until they passed. The unselected number is the honest one."
+  },
+  "failure_taxonomy_at_scale": {
+    "never_attempted_no_procedure": "28 of 40 in the random sample; 46 of 60 in the walk sample",
+    "why": "the policy has five goal-shape procedures (Enter \"X\", slider value, A>B>C menu, native select, drag-box). MiniWob's remaining families ask for arithmetic, counting, reading tables, drawing, resizing, hot-cold search, simon-says recall, and more. Each needs a different procedure and none is derivable from the five.",
+    "attempted_but_failed": "7 of 12 attempted: click-menu (menu-miss), use-autocomplete x2, drag-cube, form-sequence-3, social-media, click-dialog"
+  },
+  "what_the_session_established_and_what_it_did_not": {
+    "established": [
+      "one demonstration produces a permanent, transferring procedure (2/6 -> 8/8 same task; 9/10 different task)",
+      "relation-type procedures transfer across widget families (drag 6/6 first try)",
+      "calibration failures are repaired by closed loop then completed by raising actuator resolution (slider 0/6 -> 2/5 -> 10/10)",
+      "the learning machinery (universal_learning_contract_v1) is fail-closed and passes 153 tests",
+      "GUI fault localisation from repeated execution works (ochiai 1.0, both statistics agreeing)"
+    ],
+    "NOT_established": [
+      "any claim that computer use is substantially solved: the unselected reach is 10-12.5%",
+      "that more learning would raise that number: it would not, because 70% of tasks are never attempted",
+      "the GDPval elo target, unreachable from this sandbox",
+      "sentience in any form"
+    ]
+  },
+  "the_first_principles_position": "reach = (fraction of tasks the agent has a procedure for) x (success rate when it has one). This session maximised the second factor (it is 5/12 and one-demonstration-learnable) and left the first at 30%. The first factor is a COVERAGE question and it is answered by decomposing unfamiliar goal sentences into primitive operations, not by storing more skills and not by learning faster.",
+  "the_sentience_question_answered_directly": "no. The system stores rules, gates them behind a verifier, and acts only on instructions it is given. Delete the store and the rules are gone; there is no unobserved persistent state and no endogenous goal. It is a governed library, not a creature."
+}

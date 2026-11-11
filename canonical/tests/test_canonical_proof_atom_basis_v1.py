@@ -77,3 +77,11 @@ assert out["promotion_authority"] is False
 assert out["new_reality_units_consumed"] == 0
 
 print("test_canonical_proof_atom_basis_v1: PASS")
+
+# pytest does not collect module-level assertions. Without this wrapper the
+# whole file runs on import and any failure surfaces as a collection ERROR, not
+# as a test result -- so the evidence it carries is never actually reported.
+def test_module_level_assertions():
+    """Execute this module's own assertions under the runner."""
+    import runpy
+    runpy.run_path(__file__, run_name="__module_level_assertions__")

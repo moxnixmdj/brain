@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R162_THE_HARNESS_SCORED_ANOTHER_TASKS_PAGE_V1",
+  "date": "2026-11-09",
+  "round": "r162",
+  "family": "COMPUTER_AND_BROWSER_USE",
+  "the_instrument_defect": {
+    "observation": "navigate -> drag-sort-numbers; location 0.5s later = drag-sort-numbers; 1.0s = search-engine; 1.5s = sign-agreement; 2.0s = simon-says",
+    "cause": "A full-corpus run and an isolated probe were alive simultaneously and both drove the same CDP browser on 127.0.0.1:9222. Each navigated the other's page away mid-episode.",
+    "consequence": "start() polls the goal for up to 3.6 s. A probe for drag-sort-numbers read 'Enter the username \"kasie\" and the password...' and was scored on it. Per-task numbers taken while another run was alive were mixtures of one task's goal and another task's reward.",
+    "fix": "run_episode raises PAGE_IS_NOT_THE_TASK when location.pathname is not the task the harness asked for; the trial is discarded and reported, never scored.",
+    "re_measured_with_guard_no_other_run": {
+      "click-dialog": "12/12 find-done",
+      "email-inbox-delete": "12/12 find-done",
+      "email-inbox-important": "12/12 find-done",
+      "email-inbox-star-reply": "7/12"
+    }
+  },
+  "full_corpus_r160_vs_r162_130_tasks_3_reps": {
+    "all": {"r160": "122/390 = 0.3128", "r162": "122/390 = 0.3128"},
+    "heldout_90": {"r160": "54/270 = 0.2000", "r162": "52/270 = 0.1926", "delta": "-0.74 pp"},
+    "seen_40": {"r160": "68/120 = 0.5667", "r162": "70/120 = 0.5833", "delta": "+1.67 pp"},
+    "identity_violations_in_run": 0
+  },
+  "the_arithmetic_that_settles_it": "click-dialog 0/3 -> 3/3 is +3 trials. On a 270-trial held-out set that is +1.1 pp. The other held-out tasks moved -1.9 pp net. At 3 reps per task a single-task fix is smaller than the per-task noise the session measured directly (click-color, unchanged code, three runs: 10/12, 7/12, 6/12). No 130x3 total can arbitrate a per-task change.",
+  "what_is_defensible": [
+    "click-dialog 12/12 with page identity verified every rep (was 0 in every prior run)",
+    "email-inbox-delete 12/12, email-inbox-important 12/12, email-inbox-star-reply 7/12, all identity-verified",
+    "the harness can no longer score a page it did not navigate to"
+  ],
+  "what_is_not_defensible": [
+    "that the held-out rate improved this round -- it did not, it moved -0.74 pp",
+    "any per-task +/- within a 130x3 run, including the ones that look good"
+  ],
+  "law_added": "A single CDP browser is a shared resource. Any episode whose location is not the task asked for must be discarded, and a per-task claim needs more reps than the total has room for.",
+  "zero_credit_terminal": true
+}

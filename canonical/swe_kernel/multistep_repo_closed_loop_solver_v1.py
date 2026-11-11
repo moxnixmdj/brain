@@ -46,6 +46,7 @@ from typing import Any, Mapping, Sequence
 from canonical.swe_kernel import incremental_semantic_graph_v1 as sem_graph
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as _input_gate
 from canonical.swe_kernel import verified_skill_crystallizer_v1 as crystallizer
+from canonical.swe_kernel import operator_generalization_v1 as opgen
 from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wb_synth
 
 SCHEMA = "PROJECT_BRAIN_MULTISTEP_REPO_CLOSED_LOOP_SOLVER_V1"
@@ -671,6 +672,34 @@ def localize_faults_by_differential_trace(
                     pass
 
     suspects.sort(key=lambda s: (-s["score"], -s.get("max_line_ochiai", 0.0), -s["ochiai"], s["file"], s["function"]))
+
+    # ROUND 112 -- ZERO TESTS IS NOT SUCCESS. Measured 2026-11-09 on jinja2-3.1.4:
+    #   localize_faults_by_differential_trace() returned
+    #       {"ok": True, "runner": "pytest", "total_tests": 0, "failed_count": 0}
+    #   while the child's stderr read
+    #       ImportError while loading conftest 'tests/conftest.py'
+    # The child forces PYTHONNOUSERSITE=1, so a user-site dependency (markupsafe) was
+    # invisible, collection aborted before importing a single test, and the runner
+    # reported an empty pass. `ok: True` then meant "I proved nothing, successfully".
+    #
+    # This is r87 exactly ("a silent empty result is indistinguishable from a true
+    # empty result"), and it is worse than silent here because the empty result carried
+    # a success flag. A suite that did not run cannot certify a tree, so `ok` is False
+    # whenever nothing was discovered, and the child's stderr travels with the answer
+    # so the reason is never guesswork.
+    if total_passed + total_failed == 0:
+        return {
+            "ok": False,
+            "reason": "NO_TESTS_DISCOVERED",
+            "runner": runner_kind,
+            "passed_count": 0,
+            "failed_count": 0,
+            "total_tests": 0,
+            "test_files": list(data.get("test_files") or []),
+            "suspects": [],
+            "child_stderr": (proc.stderr or "")[-1200:],
+        }
+
     return {
         "ok": True,
         "runner": runner_kind,
@@ -730,6 +759,7 @@ def _surgical_span_mutations(
     line_scores: Mapping[int, float] | None = None,
     *,
     firstlineno: int = 0,
+    file_scope: bool = False,
 ) -> list[tuple[str, str]]:
     """Produce minimal 1-line span-preserving AST repairs ordered by statement-level Ochiai."""
     try:
@@ -761,16 +791,24 @@ def _surgical_span_mutations(
         (ast.NotEq, " == ", "neq_to_eq"),
     ]
 
+    # ROUND 115 -- same lesson as _replace_ast_node_in_function: fn_name is a hint.
+    # `file_scope=True` walks every function in the file so a correct revert cannot be
+    # missed because the traceback named the base class instead of the override.
     for node in ast.walk(tree):
-        if not (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == fn_name):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             continue
-        if firstlineno > 0 and node.lineno != firstlineno:
-            continue
+        if not file_scope:
+            if node.name != fn_name:
+                continue
+            if firstlineno > 0 and node.lineno != firstlineno:
+                continue
 
         for sub in ast.walk(node):
             lineno = getattr(sub, "lineno", None)
-            if hot_set and lineno is not None and not any(abs(lineno - hl) <= 2 for hl in hot_set):
-                continue
+            # ROUND 114 -- +/-2-LINE WINDOW ORDERING, NOT FILTERING. See C2 for the
+            # measurement: hot_lines is function-granular, so a +/-2 statement window
+            # around it discards nearly everything this mechanism can produce. Ochiai
+            # still sorts the output; the suite still decides what is true (r106).
             prio = max(
                 (scores.get(lineno + d, 0.0) for d in (-1, 0, 1, 2) if lineno is not None),
                 default=0.0,
@@ -811,6 +849,50 @@ def _surgical_span_mutations(
                                 except SyntaxError:
                                     pass
 
+            # Dunder-identity rewrite: `x.__class__` -> `type(x)` and back.
+            # This is a real, recurring bug class. Upstream markupsafe 54bb00bfaf fixed
+            # an escape bypass where `s.__class__ is str` skipped escaping for proxy
+            # objects that report a false __class__. `type(x)` cannot be spoofed that way.
+            # The AST form is an Attribute whose attr is a dunder and whose value is an
+            # expression; the replacement is the builtin call on the same expression.
+            if isinstance(sub, ast.Attribute) and sub.attr in _DUNDER_IDENTITY_ATTRS:
+                obj_seg = ast.get_source_segment(src, sub.value)
+                if obj_seg:
+                    builtin = _DUNDER_IDENTITY_ATTRS[sub.attr]
+                    repl = f"{builtin}({obj_seg})"
+                    cand = _splice_ast_span_bytes(src_bytes, sub, repl)
+                    if cand and cand != src:
+                        try:
+                            ast.parse(cand)
+                            seq += 1
+                            scored_results.append(
+                                (prio + 0.10, seq, f"dunder_identity:{sub.attr}_to_{builtin}", cand)
+                            )
+                        except SyntaxError:
+                            pass
+
+            # The inverse: `type(x)` -> `x.__class__`
+            if (
+                isinstance(sub, ast.Call)
+                and isinstance(sub.func, ast.Name)
+                and sub.func.id in _BUILTIN_IDENTITY_INVERSE
+                and len(sub.args) == 1
+            ):
+                arg_seg = ast.get_source_segment(src, sub.args[0])
+                if arg_seg:
+                    attr = _BUILTIN_IDENTITY_INVERSE[sub.func.id]
+                    repl = f"{arg_seg}.{attr}"
+                    cand = _splice_ast_span_bytes(src_bytes, sub, repl)
+                    if cand and cand != src:
+                        try:
+                            ast.parse(cand)
+                            seq += 1
+                            scored_results.append(
+                                (prio + 0.06, seq, f"dunder_identity:{sub.func.id}_to_{attr}", cand)
+                            )
+                        except SyntaxError:
+                            pass
+
             # Binary operator swap preserving exact operand source text
             if isinstance(sub, ast.BinOp):
                 lseg = ast.get_source_segment(src, sub.left)
@@ -848,6 +930,7 @@ def _replace_ast_node_in_function(
     mutator_fn: Any,
     *,
     firstlineno: int = 0,
+    file_scope: bool = False,
 ) -> list[tuple[str, str]]:
     """Apply `mutator_fn(fn_node) -> list[(label, new_fn_node)]` and splice cleanly into `src`."""
     try:
@@ -856,9 +939,28 @@ def _replace_ast_node_in_function(
         return []
     lines = src.splitlines(keepends=True)
     results: list[tuple[str, str]] = []
+    # ROUND 115 -- THE LOCALIZER NAMES A FRAME, NOT THE FAULT.
+    # Measured 2026-11-09 on jinja2-3.1.4: a seeded `and` -> `or` defect on compiler.py
+    # line 65 lives in `Visitor.visit_BinOp`. The traceback's innermost source frame is the
+    # base-class no-op `Visitor.visitor`, so SBFL reported `compiler.py::visitor` at rank 1,
+    # this function was scoped to `visitor`, and the correct revert was NEVER GENERATED
+    # (35 candidates in the pool, exact revert absent). The same shape broke `off-by-one`
+    # on compiler.py:229.
+    #
+    # That is the third appearance of one error: a provenance hint used as a constraint.
+    # The sabotage control did it (it broke the suspect's function instead of the changed
+    # one); SBFL's own granularity does it (it attributes an execution to the enclosing
+    # function, never to the statement); and here the generator does it. So: when fn_name
+    # yields nothing, or when the caller asks for file scope, mutate EVERY function in the
+    # file. The suite is the arbiter; the function name is only a place to look first.
+    _target_names = [fn_name] if fn_name else []
+    if file_scope:
+        _target_names = None  # sentinel: every function in the file
     for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == fn_name:
-            if firstlineno > 0 and node.lineno != firstlineno:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and (
+            _target_names is None or node.name in _target_names
+        ):
+            if _target_names is not None and firstlineno > 0 and node.lineno != firstlineno:
                 continue
             # Only splice top-level or class-method functions cleanly with indentation preserved
             fn_start = node.lineno - 1
@@ -921,8 +1023,17 @@ def _deductive_ast_mutations(fn_node: ast.FunctionDef | ast.AsyncFunctionDef, ho
     all_nodes = list(ast.walk(fn_node))
     for idx, sub in enumerate(all_nodes):
         lineno = getattr(sub, "lineno", None)
+        # ROUND 114 -- HOT-LINE ORDERING, NOT HOT-LINE FILTERING.
+        # This used to `continue`, which discarded every mutation outside an SBFL hot line.
+        # Measured 2026-11-09: SBFL ranks by FUNCTION (line-rank was 0/6 on six seeded
+        # defects) because `_rel_source` attributes each trace event to the enclosing
+        # function, never to a statement inside it. So `hot_lines` was function-granular
+        # noise being used as a statement-level filter, and it silently removed almost all
+        # of this mechanism's candidates on every real file. Ochiai ordering still puts the
+        # most suspicious statements first; the rest are still offered, and the test suite
+        # decides. Selection belongs to the verifier, never to a prior (r106).
         if hot_set and lineno is not None and lineno not in hot_set:
-            continue
+            pass
 
         # 1. Binary operator repairs + off-by-one constant adjustments
         if isinstance(sub, ast.BinOp):
@@ -1155,6 +1266,9 @@ def _concurrency_rlock_candidates(src: str, fn_name: str) -> list[tuple[str, str
         return []
 
 
+synthesis_refused_dropped_call = 0
+
+
 def _generate_candidates_for_state(
     worktree: pathlib.Path,
     diag: Mapping[str, Any],
@@ -1225,6 +1339,46 @@ def _generate_candidates_for_state(
                         except SyntaxError:
                             pass
 
+        # Mechanism A2: GENERALISED crystallised rules.
+        # Mechanism A fires a stored rule only inside the statement skeleton it was taught
+        # from. operator_generalization recovers the lesson behind it: when a rule's pattern
+        # and replacement differ by exactly one operator token, the lesson IS that operator
+        # swap and it applies wherever the operator appears on two operands -- in a return,
+        # a condition, a loop guard, either order. Measured on 774 jinja functions the narrow
+        # form reached 0 and this reaches 98.71% of functions (proposal reach, not a solve
+        # rate; the verifier below supplies the precision).
+        # It is bounded and refusal-safe: one operator difference only, never inside strings
+        # or comments, candidates only. The green-suite check decides.
+        #
+        # ROUND 113 -- THE LIMIT WAS THE CEILING, AND BY ONE.
+        # Measured 2026-11-09 on jinja2-3.1.4 with a real '+'->'-' defect in compiler.py:
+        #   SBFL named compiler.py at rank 1 (localisation correct)
+        #   rule '-','+' produced 129 candidates in that file
+        #   the correct fix sat at RANK 7
+        #   this call asked for limit=6
+        # The solver therefore could not reach the answer it was holding, and returned
+        # FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED. Nothing was wrong with the skill, the rule,
+        # or the localiser; a constant was one short. A bounded proposal list is right --
+        # the docstring says the caller's verifier decides, so the bound should be set by
+        # what the verifier can afford, not by a habit. The budget below keeps the number
+        # of *test runs* bounded (which is the real cost) while letting the proposer offer
+        # every candidate in the file the localiser already named number one.
+        _GEN_LIMIT = 256
+        for rule in stored_rules:
+            try:
+                for gsrc in opgen.propose_operator_swaps(
+                        orig_src, rule, language="python", limit=_GEN_LIMIT):
+                    if gsrc and gsrc != orig_src:
+                        try:
+                            ast.parse(gsrc)
+                            _add_to(bucket, rel_f, fn_nm, fl_no,
+                                    f"operator_generalized:{rule.get('skill_id', '')[:12]}",
+                                    gsrc)
+                        except SyntaxError:
+                            pass
+            except Exception:
+                pass
+
         # Mechanism B1: Algebraic directional/dual method & builtin span swaps + test-driven entry guards
         hot_lines = list(susp.get("hot_lines") or [])
         line_scores = susp.get("line_scores") or {}
@@ -1241,6 +1395,16 @@ def _generate_candidates_for_state(
 
         # Mechanism B2: Live runtime assertion trace observational synthesis (for standalone non-pytest modules)
         if test_files and fn_nm and not is_pytest_suite and len(orig_src) <= 12_000:
+            # ROUND 116 -- SYNTHESIS MAY NOT SOLVE THE TESTS BY ABANDONING THE CALL.
+            # Measured 2026-11-09 on the repo's own coupled-billing fixture: candidate #4
+            # (live_trace_synthesis "return (sum(items) - disc)") made both visible tests
+            # green without calling `apply_discount`, so the real bug survived and the run
+            # still reported PASS with one changed file.
+            # The refusal itself lives in repair_input_dependency_gate_v1 (PATCH_STOPPED_CALLING),
+            # enforced at candidate ADMISSION, exactly as that module's own test docstring
+            # specifies: "enforced at candidate admission -- not after the winner is chosen,
+            # so the search still has the chance to find an honest repair". Duplicating the
+            # check here would have been a second, weaker copy in the wrong place.
             try:
                 synth_list = wb_synth.synthesize_candidates_for_file(
                     fpath, worktree, test_files
@@ -1253,17 +1417,26 @@ def _generate_candidates_for_state(
 
         # Mechanism C1: Surgical 1-line UTF-8 span-preserving AST repairs ordered by statement Ochiai
         for tag, c_src in _surgical_span_mutations(
-            orig_src, fn_nm, hot_lines, line_scores, firstlineno=fl_no
+            orig_src, fn_nm, hot_lines, line_scores, firstlineno=fl_no, file_scope=True
         ):
             _add_to(bucket, rel_f, fn_nm, fl_no, f"surgical_ast:{tag}", c_src)
 
-        # Mechanism C2: Function-level deductive AST mutations (range/augassign/const) on small modules
-        if len(orig_src) <= 6_000:
+        # Mechanism C2: Function-level deductive AST mutations (range/augassign/const).
+        # ROUND 114 -- THE SIZE GATE WAS THE CEILING FOR EVERY MECHANISM BUT ONE.
+        # This used to read `if len(orig_src) <= 6_000:`. Every jinja2 source file is
+        # 20-90 KB, so every comparison flip, off-by-one, augmented-assignment swap and
+        # `and`/`or` flip was disabled on every real module. Measured 2026-11-09: the only
+        # mechanism that ever fired on a real repository was operator_generalization, which
+        # is why 6/6 and 0/774 before it were both about ONE defect class. A size gate that
+        # excludes every real file is not a safety measure; it is a stub (r88).
+        # The cost of widening it is candidate count, which the verifier bounds anyway.
+        if len(orig_src) <= 400_000:
             for tag, c_src in _replace_ast_node_in_function(
                 orig_src,
                 fn_nm,
                 lambda fn_node, hl=hot_lines: _deductive_ast_mutations(fn_node, hl),
                 firstlineno=fl_no,
+                file_scope=True,
             ):
                 _add_to(bucket, rel_f, fn_nm, fl_no, f"deductive_ast:{tag}", c_src)
 
@@ -1289,6 +1462,17 @@ def _generate_candidates_for_state(
             candidates.extend(b[offset : offset + stride])
 
     return candidates
+
+
+# Dunder-identity rewrites. A proxy object may report a false `__class__`; `type(x)`
+# never can. Upstream markupsafe 54bb00bfaf is exactly this bug: `s.__class__ is str`
+# skipped escaping and let markup through an HTML escaper.
+_DUNDER_IDENTITY_ATTRS: dict[str, str] = {
+    "__class__": "type",
+}
+_BUILTIN_IDENTITY_INVERSE: dict[str, str] = {
+    "type": "__class__",
+}
 
 
 _QUICK_PYTEST_CODE = r"""
@@ -1373,6 +1557,50 @@ def _input_dependencies_preserved(before_text: str, after_text: str) -> bool:
     """
     verdict = _input_gate.gate(before_text, after_text)
     return verdict.get("status") == _input_gate.PASS
+
+
+def _actual_changed_function(old_src: str, new_src: str) -> tuple[str, int]:
+    """Return (function_name, firstlineno) of the function that ACTUALLY changed.
+
+    ROUND 113c. Measured 2026-11-09 on jinja2-3.1.4: SBFL named `compiler.py::visitor`
+    at rank 1 and the correct operator fix sat at candidate position 29 of 49 -- but the
+    edit itself landed in a different function in the same file. The sabotage control was
+    handed the SUSPECT's function name, sabotaged `visitor` (a base-class no-op), saw no
+    test fail, and reported that the repair was not load-bearing. It then discarded the
+    single candidate that made all 851 tests pass.
+
+    A candidate's provenance is a hint about WHERE TO LOOK, not a statement about WHAT
+    CHANGED. The sabotage control must break the code the candidate actually touched, so
+    the function is recomputed from the two sources instead of inherited from the suspect.
+    """
+    try:
+        old_lines = old_src.splitlines()
+        new_lines = new_src.splitlines()
+        if len(old_lines) == len(new_lines):
+            diff_idx = next(
+                (i for i, (a, b) in enumerate(zip(old_lines, new_lines)) if a != b),
+                None,
+            )
+        else:
+            diff_idx = next(
+                (i for i, (a, b) in enumerate(zip(old_lines, new_lines)) if a != b),
+                min(len(old_lines), len(new_lines)) - 1,
+            )
+        if diff_idx is None:
+            return "", 0
+        changed_line = diff_idx + 1
+        tree = ast.parse(new_src)
+        best: tuple[str, int] | None = None
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                start = node.lineno
+                end = getattr(node, "end_lineno", None) or start
+                if start <= changed_line <= end:
+                    if best is None or start > best[1]:
+                        best = (node.name, start)
+        return best if best else ("", 0)
+    except Exception:
+        return "", 0
 
 
 def _sabotage_control_kills_suite(
@@ -1574,6 +1802,7 @@ def solve_repository_closed_loop(
         winning_state: tuple[dict[str, bytes], list[dict[str, Any]], dict[str, Any]] | None = None
         pruned_regressions = 0
         candidates_evaluated = 0
+        unproven_candidates = 0
         use_fast_pytest_screen = (
             initial_diag.get("runner") == "pytest"
             and int(initial_diag["total_tests"]) >= 15
@@ -1631,10 +1860,55 @@ def solve_repository_closed_loop(
                         hinted_files=hinted_files,
                         timeout=15.0,
                     )
+
+                    # ROUND 113b -- A TIMEOUT IS NOT A VERDICT.
+                    # Measured 2026-11-09 on jinja2-3.1.4 with a real defect in compiler.py:
+                    # the generator produced the EXACT correct fix at position 29 of 49, and
+                    # this loop discarded it. Not because the fix was wrong and not because
+                    # the localiser failed: with 851 individual test_files the child takes the
+                    # per-file trace path instead of the pytest-plugin path and needs minutes,
+                    # not 13.5s. The 15s cap fired, `localize` correctly returned
+                    # ok=False/TEST_TRACE_TIMEOUT, and the old `if not ok: continue` read that
+                    # refusal as "this candidate is wrong", binning a correct repair for
+                    # being too slow to prove.
+                    #
+                    # Three different things were sharing one boolean:
+                    #   PROVEN_RED     -- measured, and the tree is red        -> discard
+                    #   UNPROVEN       -- the measurement did not finish       -> NOT a discard
+                    #   NOTHING_TO_RUN -- zero tests discovered                -> NOT a discard
+                    # Only the first is evidence about the candidate; the other two are
+                    # evidence about the instrument (r87). So when the whole-suite trace
+                    # cannot finish, fall back to the cheap complete verdict this file already
+                    # owns: run ONLY the nodeids that must turn green. That runs on the
+                    # candidate bytes, BEFORE the parent file is restored.
+                    cand_ok = bool(cand_diag.get("ok"))
+                    cand_unproven_reason = None
+                    if not cand_ok:
+                        _nodeids = list(failing_nodeids)
+                        _ran, _still = (False, -1)
+                        if _nodeids:
+                            _ran, _still = _quick_pytest_failing_subset(wt, _nodeids, timeout=20.0)
+                        if _ran and int(_still) == 0:
+                            cand_unproven_reason = str(cand_diag.get("reason") or "UNKNOWN")
+                        else:
+                            unproven_candidates += 1
+
                     # Restore parent file immediately
                     (wt / rel_f).write_bytes(state_files[rel_f])
 
-                    if not cand_diag.get("ok"):
+                    if cand_unproven_reason is not None:
+                        cand_diag = dict(cand_diag)
+                        cand_diag.update({
+                            "ok": True,
+                            "recovered_by": "FAILING_NODEIDS_ONLY",
+                            "unproven_reason": cand_unproven_reason,
+                            "failed_count": 0,
+                            "failed_tests": [],
+                            "passed_tests": list(parent_passed_set),
+                            "total_tests": int(state_diag.get("total_tests") or 0),
+                        })
+                        cand_ok = True
+                    if not cand_ok:
                         continue
                     # Never allow test count shrinkage or syntax/import collapse
                     if int(cand_diag["total_tests"]) < int(initial_diag["total_tests"]):
@@ -1696,11 +1970,19 @@ def solve_repository_closed_loop(
                         # Materialize candidate and run mandatory Sabotage Control
                         for rp, rb in next_files.items():
                             (wt / rp).write_bytes(rb)
+                        # ROUND 113c: sabotage the function the candidate CHANGED,
+                        # not the function SBFL guessed. See _actual_changed_function.
+                        _sab_fn, _sab_line = _actual_changed_function(
+                            state_files[rel_f].decode("utf-8", errors="replace"),
+                            next_files[rel_f].decode("utf-8", errors="replace"),
+                        )
+                        if not _sab_fn:
+                            _sab_fn, _sab_line = fn_nm, fl_no
                         sabotage_ok = _sabotage_control_kills_suite(
                             wt,
                             rel_f,
-                            fn_nm,
-                            firstlineno=fl_no,
+                            _sab_fn,
+                            firstlineno=_sab_line,
                             test_files=test_files,
                             failing_nodeids=failing_nodeids if use_fast_pytest_screen else None,
                         )
@@ -1874,11 +2156,52 @@ def solve_repository_closed_loop(
             for rel_p in changed_files:
                 (src_root / rel_p).write_bytes(final_files[rel_p])
 
+        # ROUND 111 -- POST-APPLY RE-VERIFICATION. THE FALSE PASS IS FIXED HERE.
+        # Measured before this guard: on a sealed defect the solver returned
+        #   PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED, verified=True,
+        #   passed_count=11, failed_count=0
+        # while the repository's own pytest was byte-identically red both before and after
+        # (3 failed, 8 passed). The diagnostic that produced failed_count=0 was measured on
+        # `next_files` inside the beam, and `apply_to_source` is False by default, so the
+        # bytes were never written to src_root. The status described a worktree that was
+        # then discarded, and `changed_files` described diffs that did not exist on disk.
+        #
+        # A repair that is not measured on the tree it claims to have repaired is not a
+        # repair -- the same law as r84's "a field never written is not a measurement",
+        # one level up. So: re-run the suite ON THE CONTENTS BEING RETURNED, and refuse to
+        # name PASS unless THAT run is green.
+        if not apply_to_source:
+            for rel_p, blob in final_files.items():
+                (wt / rel_p).write_bytes(blob)
+        post_apply = localize_faults_by_differential_trace(
+            src_root if apply_to_source else wt,
+            test_files=test_files,
+            timeout=min(60.0, max(20.0, timeout_s)),
+        )
+        post_failed = int(post_apply.get("failed_count") or 0)
+        if not post_apply.get("ok") or post_failed > 0:
+            return {
+                "schema": SCHEMA,
+                "ok": False,
+                "verified": False,
+                "sabotage_control_passed": True,
+                "status": "FAIL_CLOSED__POST_APPLY_SUITE_RED",
+                "reason": "POST_APPLY_SUITE_RED",
+                "post_apply_failed_count": post_failed,
+                "post_apply_passed_count": int(post_apply.get("passed_count") or 0),
+                "initial_failed_count": initial_diag["failed_count"],
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                "model_dependency_count": 0,
+                "incremental_spend_usd": 0,
+            }
+
         return {
             "schema": SCHEMA,
             "ok": True,
             "verified": True,
             "sabotage_control_passed": True,
+            "post_apply_verified": True,
+            "post_apply_passed_count": int(post_apply.get("passed_count") or 0),
             "refused_by_input_dependency_gate": refused_by_input_gate,
             "applied_to_source": apply_to_source,
             "status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED",

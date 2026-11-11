@@ -1,0 +1,35 @@
+{
+  "round": 93,
+  "date": "2026-11-09",
+  "title": "Six of eight modules were never wired into the loop. The benchmark was measuring the old pipeline.",
+  "the_question": "'you sure this is the smartest approach?' (asked three times)",
+  "the_answer": "no -- not the grounding algorithm. The failure was one level up: NOTHING I BUILT WAS IN THE LOOP.",
+  "the_audit": {
+    "page_first_grounding_v1": "wired 0",
+    "predicate_induction_v1": "wired 0",
+    "task_class_router_v1": "wired 0",
+    "addressability_probe_v1": "wired 0",
+    "goal_arity_v1": "wired 0",
+    "target_extraction_v2": "wired 0",
+    "multi_bind_v1": "wired 1",
+    "state_read_v1": "wired 1",
+    "reading": "ten rounds of instruments, six of eight in a drawer. The runner still used text_locate_v1.best_run -- the regex matcher I had spent those rounds criticising."
+  },
+  "why_every_number_was_flat": "an improvement that is not connected cannot appear in any measurement. r84-r92 all reported 'the number did not move' while the code that was supposed to move it was never called. The instrument was measuring a pipeline I had already replaced on paper.",
+  "what_changed": "page-first grounding is now called inside the loop, before the quoted-literal fallback, using the LIVE rendered DOM as the index.",
+  "measured_after_wiring": {
+    "total": "21/130 = 16.2%",
+    "previous_rounds": {"r92": "not run", "r87_best": 11, "old_records": "15 / 17 / 18"},
+    "grounding_status": {"GROUNDED": 91, "NOT_MENTIONED": 30, "AMBIGUOUS": 9},
+    "literal_source": {"page": 91, "quote": 10, "none": 29},
+    "success_by_source": {"page": "19/91 = 21%", "quote": "2/10 = 20%", "none": "0/29 = 0%"},
+    "honest_caveat": "SINGLE RUN. r78 measured a 1.73 stdev at a comparable configuration, so 21 must be repeated before it is claimed. It is the first number to exceed every prior record, including the pre-decline 18."
+  },
+  "the_lesson": {
+    "statement": "building a better component is not progress. WIRING it is progress. Between the two there is a gap where ten rounds of real work produce zero behavioural change.",
+    "the_general_form": "every claim of the shape 'the new approach is better' must be accompanied by the evidence that the new approach RAN. The runner now records `literal_source` and `grounding` on every task so this defect cannot recur silently.",
+    "law": "no round may report on a module without a field in the run that proves the module executed"
+  },
+  "still_unwired": ["predicate_induction_v1", "task_class_router_v1", "addressability_probe_v1", "goal_arity_v1", "target_extraction_v2"],
+  "tests": {"total_across_suite": 80}
+}

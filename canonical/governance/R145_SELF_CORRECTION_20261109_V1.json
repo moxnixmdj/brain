@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_R145_V1",
+  "date": "2026-11-09",
+  "round": "r145",
+  "two_corrections_to_my_own_previous_round": {
+    "correction_1_the_flight_task_cannot_be_scored_here": {
+      "what_i_said_at_r144": "'First contact with a real app' implied the flight task was now being solved.",
+      "what_is_true": "Alaska/index.html and AA/index.html contain ZERO references to flightSubmit, which is the only path to core.validateForm and therefore the only path to a reward. No flight episode can register a score in this tree. r144 demonstrated correct DOM state on an unseen app; it did not and could not demonstrate reward.",
+      "why_it_matters": "r144 was the round whose whole purpose was to stop overstating. It overstated."
+    },
+    "correction_2_the_readiness_check_was_reading_a_stale_global": {
+      "what_i_did": "polled `!!WOB_TASK_READY` to decide the flight app was loaded",
+      "what_happened": "it returned True at t+1s, t+3s and t+6s while the iframe's contentDocument did not exist and wrap.src was None",
+      "the_fault": "WOB_TASK_READY is a page global that survives navigation; it was true because a PREVIOUS episode had set it. This is the same fault as the earlier submit() bug that read a reward from the episode before, and it was reintroduced.",
+      "the_rule": "readiness must be a fact about the CURRENT document (an element that only this page can have), never a bare global that outlives a navigation."
+    }
+  },
+  "regression_check_r143_to_r145": {
+    "r143_reach": "106/190 = 0.5579",
+    "r145_reach": "107/190 = 0.5632",
+    "verdict": "no net regression from the slot reader / FILL_FORM addition",
+    "per_task": {
+      "click-checkboxes-soft": "1/5 -> 4/5",
+      "use-autocomplete": "1/5 -> 4/5",
+      "click-tab-2-hard": "5/5 -> 3/5",
+      "drag-cube": "3/5 -> 1/5",
+      "count-sides": "2/5 -> 1/5"
+    },
+    "the_uncomfortable_part": "net +1 episode is inside the noise of 5 tasks moving. Two tasks each gained 3, three lost 1-2. The headline did not change; the per-task ledger shows five tasks changed. A single total would have reported 'no change' for a round in which five behaviours moved.",
+    "instability": "7 of 38 valid tasks are non-deterministic across 5 repetitions (up from 3 two rounds ago). drag-cube went 5/5 -> 4/5 -> 3/5 -> 1/5 across four rounds without its code changing: the walk depends on where the cube happens to be rotating, and 50 pulses is not always enough."
+  },
+  "what_is_STILL_not_done": [
+    "no flight episode is scored; the scoring hook is absent from the app in this tree",
+    "the sandbox browser has no outbound network, so no live web site can be tested from here",
+    "click-menu, social-media, hot-cold remain 0/5 and their resolution paths are partly wired"
+  ]
+}

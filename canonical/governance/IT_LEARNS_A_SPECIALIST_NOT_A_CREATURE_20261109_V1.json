@@ -1,0 +1,115 @@
+{
+ "schema": "brain.governance.IT_LEARNS_A_SPECIALIST_NOT_A_CREATURE_20261109_V1",
+ "date": "2026-11-09",
+ "round": 36,
+ "status": "COMPOUNDING_MEASURED_AND_FALSIFIED__ONE_TRANSFER_BUILT_AND_MEASURED",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_claim_restated": "Learning is instant and works in new arbitrary environments, so all we have to do is give the model a try in new coding environments or give it the smartest actions; after it does them once it learns them permanently; therefore we solve everything on a computer, and we were building a sentient creature.",
+ "the_one_measurement_that_settles_it": {
+  "instrument": "canonical/tools/cross_kind_compounding_benchmark_v1.py (already in the tree, not written this round)",
+  "question_it_asks": "For each never-before-seen KIND: solve the same instance once with an EMPTY store, once with a store that has already solved kinds 1..k-1. If meeting more kinds helps at all, grown_acts < cold_acts.",
+  "result": {
+   "kinds": 10,
+   "cold_acts": 1525,
+   "grown_acts": 1525,
+   "net_saving": 0,
+   "improved": 0,
+   "worsened": 0,
+   "unchanged": 10
+  },
+  "verdict": "COMPOUNDING ACROSS KINDS: NO -- meeting more kinds does not make the next kind cheaper.",
+  "why_it_matters": "This is the exact difference between a creature and a well-audited program, in the repo's own words: a program does what its code says; a creature gets better at NEW problems because it has met old ones. It does not.",
+  "the_constant": "median cost of a never-seen kind = 8 trials / 84 acts, identical at kind 2 and at kind 10."
+ },
+ "the_fair_second_test": {
+  "instrument": "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py",
+  "why_run": "the first test only falsifies ONE mechanism (a transition model keyed per kind). Steelmanning the claim requires testing whether the SEARCH STRATEGY improves.",
+  "result": {
+   "test_kinds": 10,
+   "solved": 5,
+   "beat_default": "1/10",
+   "beat_random_mean": "3/10"
+  },
+  "verdict": "NO_COMPOUNDING -- the learned choice is not better than a coin flip on unseen kinds; the features do not generalise.",
+  "honest_read": "the policies themselves are hand-written by me, so this is learning-to-learn over a fixed vocabulary. It still does not beat a coin flip."
+ },
+ "what_the_2026_literature_says__and_it_is_more_generous_than_our_result": {
+  "PolySkill_ICLR_2026": "specialist skills reuse at <4-31% across sites; separating a skill's abstract GOAL from its site-specific IMPLEMENTATION lifts transfer to 73% of skills on unseen websites (+9.4% Mind2Web, +13.9% unseen sites).",
+  "SkillLens_Microsoft_2026": "model-generated skills help in 75% of extractor-target pairings and HURT in 25% (negative transfer). ALFWorld is worst at 47%. Readable text predicts utility no better than chance (46.4%).",
+  "Memory_Transfer_Learning_2026": "cross-domain memory gains only +3.7%, because high-level INSIGHTS transfer and low-level TRAJECTORIES induce negative transfer.",
+  "reading": "the field has NOT solved transfer. It has measured that transfer is possible only across an abstraction boundary, and that concrete traces transfer badly or negatively. Our store was on the wrong side of that boundary."
+ },
+ "the_defect_this_round_found_and_fixed": {
+  "what": "the permanent skill store was a paraphrase-intolerant SPECIALIST",
+  "measured_before": {
+   "how many unique lines in f": "HIT",
+   "how many distinct lines in f": "MISS",
+   "how many different lines in f": "MISS"
+  },
+  "why_it_is_the_wrong_side_of_the_boundary": "the skill stored its GOAL as a set of raw words {how, lines, many, unique} and froze the literal adjective into its regex. `computer_env_v1.query_kind` already calls unique/distinct/different the SAME intent `uniquelines` -- the abstraction existed in the tree; the store did not read it.",
+  "FOUR_gates_each_dropped_the_paraphrase_and_each_was_found_by_measuring": [
+   "gate 1: `_candidate_skills_for_words` indexes by raw word, so the skill never became a candidate (any downstream intent check was therefore UNREACHABLE)",
+   "gate 2: a SECOND COPY of the skeleton test inside `recall_and_execute_workflow` dropped the candidate gate 1 had been fixed to admit",
+   "gate 3: `bind_goal_parameters` matched a regex with the literal adjective frozen into it",
+   "gate 4: the intent was built from a SORTED BAG OF WORDS ('different how lines many pd txt'), which `query_kind` reads as plain `lines` -- so 'different' stayed broken after gates 1-3 while 'distinct' worked by alphabetical luck"
+  ],
+  "measured_after": {
+   "unique": "HIT answer=2",
+   "distinct": "HIT answer=2",
+   "different": "HIT answer=2",
+   "duplicate-free": "MISS"
+  },
+  "controls_that_must_stay_MISS_and_do": {
+   "how many words in f": "MISS",
+   "how many duplicate lines in f": "MISS"
+  },
+  "end_to_end_through_the_door": "all three paraphrases return pass=True answer=2 via CONFINED_QUERY_BRIDGE in 238-387 ms",
+  "pinned_by": "canonical/tests/test_a_learned_skill_survives_its_synonym_v1.py -- 3 of its 6 tests FAIL on the pre-fix tree (verified by stashing), all 6 pass after."
+ },
+ "what_is_REAL": [
+  "one-shot COMPILATION: a demonstrated program becomes a stored skill that survives a restart (79 recorded recalls)",
+  "intent-level transfer for a taught skill: a skill taught with one word now reaches two synonym phrasings of the same intent, and refuses two different intents",
+  "the carrier is fast and honest: 238-387 ms end-to-end, refusals named, confinement reported"
+ ],
+ "what_is_NOT_real": [
+  "COMPOUNDING: 0 saving across 10 never-seen kinds, byte-identical. Median 8 trials / 84 acts whether it is kind 2 or kind 10.",
+  "LEARNING TO LEARN: 1/10 against default, 3/10 against a random policy -- a coin flip",
+  "GENERAL ENVIRONMENT LEARNING: bounded random walking; 81% state coverage on a 64-state space at 200 trials, goal never reached, plan never produced",
+  "ANY COMPUTER USE: PIL/cv2/numpy/tesseract absent; carrier is cli_exec argv only; a 3-step GUI trace is elevated to 1 step and the click and typing are discarded",
+  "SENTIENCE: continuous_self_v1.run() takes next_task and perform INJECTED; it owns continuity, not judgement. Its own docstring: 'It is not a claim of experience or sentience, and nothing here tests for either.' 2026 consensus: no AI system confirmed conscious."
+ ],
+ "the_structural_law": "A skill store can never exceed the carrier that executes it, and a skill keyed on the surface of a sentence can never exceed the sentence that taught it. The first bound is the carrier's verb set; the second is the goal's wording. This round removed the second bound for one skill. The first bound is untouched and is the real ceiling.",
+ "the_smartest_things_to_do__ranked": [
+  {
+   "rank": 1,
+   "action": "STORE THE GOAL AS INTENT, NOT AS WORDS -- at COMPILE time",
+   "why": "this round fixed recall to read intent, but the registry regex is still built from the literal sentence. Every NEW skill will be born a specialist and the same four gates will have to be re-fixed. Move the abstraction to `anti_unify_workflow` so skills are BORN general.",
+   "evidence": "PolySkill: goal/implementation separation is what lifts reuse from <31% to 73%; ours is still on the wrong side at compile time.",
+   "cost": "one function; the intent noun already exists and is already tested."
+  },
+  {
+   "rank": 2,
+   "action": "MEASURE TRANSFER AS A NUMBER AND PUBLISH IT",
+   "why": "the repo can now say 'a skill survives 2 of 3 synonyms' -- that is a transfer number with controls, which is more than it had. Make it a benchmark with held-out phrasings, not a demo.",
+   "why_now": "it is the only axis where this round moved, so it is the honest place to compound."
+  },
+  {
+   "rank": 3,
+   "action": "ACCEPT THAT COMPOUNDING IS NOT AN ENGINEERING KNOB HERE",
+   "why": "two independent instruments, both with controls, say 0 saving and coin-flip policy choice. Stop testing whether THIS transition model compounds; it cannot, by construction, because it is keyed per kind.",
+   "what_to_do_instead": "if compounding is ever wanted it needs a key that is not the kind -- which is exactly the abstraction work in rank 1."
+  }
+ ],
+ "what_would_have_to_become_true": [
+  "grown_acts < cold_acts on never-seen kinds (today: equal, 0/10)",
+  "a learned policy choice beating a random one on unseen kinds (today: 3/10, a coin flip)",
+  "a GUI demonstration retained rather than discarded at elevation (today: 3 steps -> 1)",
+  "a public benchmark number of any kind (today: zero)"
+ ],
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

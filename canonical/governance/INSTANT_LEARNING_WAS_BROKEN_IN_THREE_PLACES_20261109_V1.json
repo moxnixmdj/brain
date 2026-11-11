@@ -1,0 +1,87 @@
+{
+ "schema": "brain.governance.INSTANT_LEARNING_WAS_BROKEN_IN_THREE_PLACES_20261109_V1",
+ "date": "2026-11-09",
+ "round": 26,
+ "status": "THE_IDEA_WAS_SOUND_AND_IMPLEMENTATION_MADE_IT_IMPOSSIBLE__THREE_REAL_BUGS_FIXED__ONE_DELIBERATE_REFUSAL_LEFT_STANDING",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_single_most_important_measurement_of_this_round": {
+  "layer_a_learn": {
+   "call": "compile_and_qualify_skill",
+   "result": "PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED",
+   "ms": 8
+  },
+  "layer_b_recall": {
+   "call": "recall_and_execute_workflow",
+   "result": "pass=True, new database, value 77 CORRECT",
+   "ms": 4.11
+  },
+  "layer_c_door": {
+   "call": "closed_loop_autonomous_controller_v1.solve_or_learn",
+   "result": "pass=False, tier0_honest_contract_refusal, value 0 WRONG",
+   "ms": 265
+  },
+  "meaning": "the demonstration compiles, the skill transfers to a database it has never seen in four milliseconds, and the door the model is actually used through never asks for it. The capability existed and was unreachable."
+ },
+ "the_three_bugs__all_in_the_compiler_never_in_the_idea": [
+  {
+   "bug": "substitution rewrote values inside hole names",
+   "evidence": "the literal demonstration `UPDATE items SET qty = 40 WHERE id = 1` compiled to `UPDATE items SET qty = ?num?num0 WHERE id = ?num0`",
+   "cause": "_substitute_in_obj called out.replace(raw_val, hole) with no shielding, so the value '1' matched the '1' inside the hole '?num0'",
+   "fix": "shield every hole already present with a sentinel before substituting; restore after. Bare numbers now match whole tokens only, so '1' no longer eats the 1 in '12'.",
+   "severity": "produced unparseable SQL -- any demonstration whose values shared a digit with a hole name was uncompilable"
+  },
+  {
+   "bug": "the twin-world synthesiser could not replay bound parameters",
+   "evidence": "learn on `UPDATE items SET qty = ? WHERE id = ?` with params [40,1] failed with heldout_reason POSTCONDITION_SQLITE_NO_ROW",
+   "cause": "every `?` consumed params[0], and `?` in the WHERE clause was skipped entirely, so the twin row was seeded with the wrong key and the held-out postcondition found no row",
+   "fix": "bound parameters are consumed in appearance order across SET and WHERE, via a single cursor",
+   "severity": "THE PREFERRED OUTPUT SHAPE OF THE COMPILER COULD NEVER QUALIFY. The compiler emits bound `?` parameters; the gate that decides whether a skill may be learned could not replay them. Every parameterized SQLite skill was permanently unlearnable."
+  },
+  {
+   "bug": "recall raised instead of refusing on a shape mismatch",
+   "evidence": "a skill compiled against table `items` matched the goal 'set id 1 to 77 in other.sqlite' and raised sqlite3.OperationalError: no such table: items out of the caller",
+   "cause": "execute_compiled_steps was called unguarded inside the candidate loop",
+   "fix": "a step failure is a candidate miss, not an exception; the loop continues to the next candidate and the door keeps the real reason",
+   "severity": "an exception at the door became COMPOSER_STEP_OUTCOME_UNCERTAIN, which names no cause"
+  }
+ ],
+ "what_now_works_end_to_end_and_was_verified_twice": {
+  "inline_literal_demonstration": {
+   "learn_ms": 12,
+   "recall_ms": 4.0,
+   "new_db_value": 77,
+   "correct": true
+  },
+  "bound_parameter_demonstration": {
+   "learn_ms": 8,
+   "recall_ms": 4.11,
+   "new_db_value": 77,
+   "correct": true
+  },
+  "negative_control": "the same skill does NOT transfer to a database with a different table -- it refuses rather than raising",
+  "tests": "canonical/tests/test_demonstrate_once_transfers_v1.py, 5 tests, all passing"
+ },
+ "the_deliberate_refusal_i_did_NOT_override": {
+  "code": "closed_loop_autonomous_controller_v1.py line 589: recalled = None if (not learn or computer_shape) else recall_and_execute_workflow(...)",
+  "measured": "computer_shape is True for 'set id 1 to 40 in x.sqlite', 'compress logs into bundle.tar.gz', and 'how many unique lines in data.txt'. It is False for 'rename calc.py to main.py'.",
+  "why_it_exists": "a learned skill is EVIDENCE of what was done before; it is not AUTHORITY to act now. Computer-shaped actions need an admitted confinement and a verification path before they may run.",
+  "why_i_did_not_remove_it": "removing a fail-closed confinement gate to make a demo pass is exactly the corruption this project legislates against. The gate is correct; what is missing is the admitted confinement it is waiting for.",
+  "the_cheapest_heal": "if this machine has a separate workspace directory and an operator consents, that operator's once-per-session authorization supplies exactly the 'admitted confinement' the refusal names -- and the confinement evidence for each execution is the skill's own postcondition check, which is deterministic. Do not build a self-declared flag; that makes the refusal into a formality."
+ },
+ "connection_to_round_25": "round 25 gave the oracle five semantic UI postcondition kinds because it could not see a GUI. This round shows the same problem one layer down: for computer-shaped goals the door never reaches recall at all, so no oracle is consulted. A verifier that is never called has the same effect as a verifier that does not exist.",
+ "what_this_proves_and_what_it_does_not": {
+  "proves": "the same skill, learned from one demonstration, reaches a database it has never seen in ~4 ms and writes the correct value, for both shapes the compiler emits.",
+  "does_NOT_prove": [
+   "that the door will use it on this machine -- it will not, and that is a deliberate refusal standing exactly where the claim needs it to be absent",
+   "that this generalises to coding. The coding rate remains 1 of 9 unique bugs = 11.1%",
+   "that the skill is the RIGHT skill. The permanence finding from round 24 is untouched: one demonstration still selects among several consistent rules, and the held-out + sabotage gate is what makes the selection safe",
+   "anything about computer use beyond the semantic oracle built in round 25 -- still zero terminal results on a real desktop"
+  ]
+ },
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

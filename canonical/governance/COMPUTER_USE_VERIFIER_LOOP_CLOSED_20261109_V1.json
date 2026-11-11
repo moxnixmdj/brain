@@ -1,0 +1,138 @@
+{
+ "schema": "brain.governance.COMPUTER_USE_VERIFIER_LOOP_CLOSED_20261109_V1",
+ "date": "2026-11-09",
+ "round": 25,
+ "status": "THE_MISSING_HALF_BUILT__SEMANTIC_UI_ORACLE_ADDED__PIXEL_TRACE_TO_VERIFIED_SEMANTIC_PROGRAM_END_TO_END__19_TESTS_GREEN",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_finding_that_made_this_necessary": {
+  "measured": "verify_postcondition had 10 postcondition kinds and every one was byte/row equality -- file_nonempty, file_contains, json_field_equals, sqlite_query_equals, http_get_contains, sqlite_row_exists, stdout_integer, stdout_equals, http_status_json, step_response_contains.",
+  "consequence": "not one of them could read a GUI. The compiler could elevate a pixel click to a semantic DOM selector, but nothing could then check whether the click had the intended effect.",
+  "where_the_tree_already_admitted_it": [
+   "SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2 compresses the entire COMPUTER_AND_BROWSER_USE family to ONE surviving leaf: BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+   "BROWSER_LEAF_SCOPE_REUSE_BINDING_V1 status: PERFORMANCE_AND_TERMINAL_RESULTS_OPEN__ZERO_CREDIT",
+   "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1 status: FROZEN_PREWAVE_BINDING__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_TERMINAL_RESULTS",
+   "37 of 39 OSWorld governance records carry explicit refusal or non-claim language"
+  ],
+  "why_that_produced_this_round": "the computer-use family had a verified MECHANISM and a frozen BINDING and no TERMINAL RESULT. The missing part was not an actuator. It was an oracle."
+ },
+ "what_was_built": {
+  "file": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "added_postcondition_kinds": [
+   "ui_element_present",
+   "ui_element_absent",
+   "ui_value_equals",
+   "ui_text_contains",
+   "ui_element_state_equals"
+  ],
+  "matching_is_on": [
+   "role",
+   "name",
+   "text",
+   "automation_id",
+   "identifier",
+   "label"
+  ],
+  "matching_is_never_on": [
+   "x",
+   "y",
+   "coordinates",
+   "pixels"
+  ],
+  "input": "an accessibility tree, from postcondition['ui_tree'] or execution_result['ui_tree']",
+  "why_accessibility_and_not_vision": "exact, cheap, deterministic, diffable, and it needs no model. A screenshot check requires a judgement; a tree check requires a comparison."
+ },
+ "three_defects_found_in_my_own_code_by_my_own_tests": [
+  {
+   "defect": "a str is a Sequence, so a malformed tree degraded to [] -- 'I looked and found nothing' -- instead of None, 'I could not look'",
+   "why_it_mattered": "blindness and emptiness are different facts. Collapsing them is how a verifier starts certifying things it never saw.",
+   "fix": "explicit str/bytes guard before the Sequence check",
+   "test": "test_a_string_is_not_an_empty_tree"
+  },
+  {
+   "defect": "match={'x':100} matched a node, because keys outside the semantic set were silently ignored",
+   "why_it_mattered": "an ignored key leaves an empty selector, and an empty selector matches everything. That is precisely how a coordinate gets to satisfy 'click Save'.",
+   "fix": "an empty or non-semantic selector now matches nothing",
+   "test": "test_matching_is_on_semantics_never_coordinates"
+  },
+  {
+   "defect": "the sabotage control could not corrupt a ui_ postcondition, so the new kinds were self-certifying",
+   "why_it_mattered": "a verifier that cannot be made to say NO is not a verifier",
+   "fix": "_sabotage_world now corrupts the tree in place for present/value/text/state kinds, and makes the element appear for the absence kind",
+   "test": "test_sabotage_makes_a_present_element_vanish_and_the_oracle_notices, ..._an_absent_element_appear_..."
+  }
+ ],
+ "two_gaps_closed_in_the_compiler_that_broke_the_loop": [
+  {
+   "gap": "automation_id was dropped when a pixel click was elevated to a selector",
+   "why_it_mattered": "automation_id is the stable, relayout-proof reference -- the UIA equivalent of the stable refs Vercel agent-desktop acts on. Dropping it throws away the only durable handle.",
+   "fix": "automation_id, identifier and label now survive elevation"
+  },
+  {
+   "gap": "a `type` step has no x/y, so it never matched a DOM element and fell through to pixel_ui",
+   "why_it_mattered": "a keystroke was therefore uncompilable, and the compiled program kept a raw coordinate for the one step that carries the user's actual data",
+   "fix": "label matching now also reaches automation_id and label; a type step elevates via target_label"
+  }
+ ],
+ "end_to_end_measured": {
+  "input": "a raw GUI trace: 2 pixel clicks + 1 keystroke, with a DOM snapshot",
+  "compile_time_ms": 0.08,
+  "output": "CLICK_SEMANTIC {role:textbox,name:Amount,automation_id:amt} / FILL_SEMANTIC {...,automation_id:amt} value=412.18 / CLICK_SEMANTIC {role:button,name:Submit,automation_id:sub}",
+  "dominant_layer": "semantic_dom",
+  "coordinates_surviving_into_the_program": 0,
+  "verification": "ui_value_equals on automation_id=amt -> UI_VALUE_VERIFIED; ui_element_present banner 'Report submitted' -> UI_ELEMENT_PRESENT_VERIFIED; both correctly REFUSED against the pre-run tree"
+ },
+ "tests": {
+  "file": "canonical/tests/test_ui_postcondition_verifier_v1.py",
+  "count": 19,
+  "all_passing": true,
+  "false_positive_tests": 5,
+  "blindness_tests": 3,
+  "sabotage_tests": 2,
+  "end_to_end_tests": 3
+ },
+ "regression_check_NOT_attributable_to_this_work": {
+  "tests": "test_acquisition_to_execution_engine_v1.py",
+  "failing": 3,
+  "verified_preexisting": "git stash of this round's edits reproduced exactly the same 3 failures with 2 passed. The failures predate this change.",
+  "statement": "I did not fix them and I did not cause them. They are the next piece of work, not a claim."
+ },
+ "external_corroboration_that_this_is_the_frontier_direction": [
+  {
+   "source": "Vercel agent-desktop (Oct 31 2026)",
+   "finding": "computer use on macOS/Windows/Linux via OS accessibility trees and stable refs, not screenshots; the agent acts by ref and the next snapshot confirms. 'A stale ref returns STALE_REF.'"
+  },
+  {
+   "source": "Playwright MCP (Oct 2026)",
+   "finding": "'every state-changing action should have a postcondition'; a semantic check such as 'heading named Order confirmed is visible' is less ambiguous than deciding whether pixels resemble a success page"
+  },
+  {
+   "source": "xa11y (Aug 2026)",
+   "finding": "Playwright-style locators for native desktop apps driven by the accessibility tree; pixel coordinates break on resize, fonts, and DPI"
+  },
+  {
+   "source": "Cloudflare Browser Run /accessibilityTree (Jul 7 2026)",
+   "finding": "roles, names, states and hierarchy returned directly to agents instead of inferred from pixels"
+  },
+  {
+   "source": "OSWorld 2.0 (2026)",
+   "finding": "final-state exactness failure is the dominant failure mode at 84-95% of trajectories -- the agents act but do not confirm the end state"
+  },
+  {
+   "source": "OSExpert (arXiv 2603.07978)",
+   "finding": "current CUAs 'struggle with fine-grained action sequences' and on unseen UIs remain in the 0-10% band; gains come from environment-specific procedural knowledge in a skill set"
+  }
+ ],
+ "what_this_does_NOT_prove": [
+  "that this project can operate a real GUI. No display, no pyautogui, no Xlib exist in this environment; the oracle is verified against trees, not against a live desktop.",
+  "any OSWorld or Terminal-Bench score. There is still no terminal result in the computer-use family.",
+  "that the accessibility tree is available everywhere. Canvas, games, and custom-rendered surfaces have weak or no a11y metadata, which is why the a11y route is a floor and not a ceiling.",
+  "that a semantic postcondition is the RIGHT postcondition. A verifier can be exact and still check the wrong thing. That is the permanence problem one layer up."
+ ],
+ "the_honest_position_in_one_line": "the computer-use family went from 'has a mechanism and no oracle' to 'has a mechanism and an oracle that has passed 19 false-positive-sensitive tests, still with zero terminal results on a real desktop'. That is one wall removed, not the wall.",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

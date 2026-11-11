@@ -1,0 +1,70 @@
+{
+  "claim_id": "NEW_ENVIRONMENTS_PASS_THE_ANSWER_TYPE_DOES_NOT_20261109_V1",
+  "round": 44,
+  "date": "2026-11-09",
+  "type": "MEASUREMENT (the untested pillar) + SELF-CORRECTION",
+  "title": "Instant learning in NEW environments genuinely works: 23/23 correct in three of five environment shifts. The failures are a blind spot in the answer type, not drift. And the 23/33 headline measures reproducibility, not correctness.",
+  "the_pillar_i_had_never_tested": {
+    "why_now": "Rounds 39-43 all said the same caveat: 'one environment was tested'. That was the last untested plank. It is now tested.",
+    "method": "Teach 23 read skills in environment 0 (7-line file, cwd = fixture dir, LF, no subdir). Ask every skill in five shifted environments. Every answer compared to what the real command produces THERE.",
+    "results": {
+      "0 baseline as taught": "recalled 23/23, correct 23/23",
+      "1 trailing blank line": "23/23, 23/23",
+      "2 empty file": "5/23, 5/23",
+      "3 CRLF line endings": "23/23, 23/23",
+      "4 two hundred lines": "20/23, 20/23",
+      "5 file moved into a subdirectory": "23/23, 23/23"
+    },
+    "verdict": "THE CLAIM HOLDS HERE, and this is the first evidence for it. Changing line endings, adding a blank line, relocating the file into a subdirectory, and changing the file's length did not break a single skill. That is real transferred competence, not a restatement.",
+    "what_the_failures_are": {
+      "empty_file_18_of_23": "NOT drift. The truth is 0 and 0 is unreachable: `stdout_line_count` fails closed on zero. A representability hole in the answer type.",
+      "200_lines_3_of_23": "`grep a` over 'line0..line199' matches nothing and exits 1; the carrier treats non-zero exit as a failed step, so the result collapses to None. It reports SILENCE, not an invented answer. Suppression, not lying."
+    },
+    "external_2026": "OpenAgent (2026) finds agents fail under query/action/observation/domain shift, with 'logic inversion' (causal reordering) the hardest -- and notes agents memorise trajectories and anchor to tool names. This system's shifts kept the action order fixed and changed only the observation (the file), which is why it held. The harder shifts in that taxonomy were NOT tested here."
+  },
+  "the_self_correction_that_matters_more": {
+    "finding": "All 23 answers returned by the r41 track are EXACTLY 'the number of non-empty lines the program printed' -- true 23 of 23 times, no exceptions.",
+    "what_that_means": "'count the lines of <f>' on a 7-line file answers 1, because `wc -l` prints one line ('7 <f>') and the verifier counts lines of output. 'sha256 of <f>' answers 1. 'first column of <f>' answers 7. Only set-valued programs (`sort -u`, `grep`) give a number that also happens to be the useful one.",
+    "consequence": "The 23/33 headline is a REPRODUCIBILITY measurement -- the same command runs and prints something on a new file -- not a correctness measurement against each goal.",
+    "why_i_did_not_soften_it": "I produced that headline last round and framed it as 'the first real capability number'. It is real and it is narrower than the framing implied. Correcting it is worth more than defending it.",
+    "the_worst_observed_case": "An EMPTY file answered 1 with pass=True and verification 'STDOUT_LINE_COUNT_VERIFIED:1'. Truth was 0. That is a verified wrong answer."
+  },
+  "the_fix_that_had_to_be_reverted": {
+    "attempt": "Make got==0 verify instead of failing closed, so an empty file could answer 0.",
+    "result": "EVERY skill was then refused: FAIL_CLOSED__TRANSFER_OWNERSHIP_GATE_REJECTED with REQUIRED_TRUE_MISSING:causal_ablation_pass and causal_rescue_pass.",
+    "cause": "causal_ablation_pass = not pre_ok. The ablation control requires the postcondition to FAIL on an empty execution result before the skill runs. Letting 0 verify made every empty check pass, silently inverting the control.",
+    "why_reverted": "A named inability to say 'zero' is far cheaper than a control that inverts silently. Reverted, with a comment recording both the trap and why the check must keep failing. Pinned by test_zero_cannot_verify_and_must_not_be_made_to.",
+    "lesson": "A control whose correctness depends on a check failing is fragile in a way that does not show up in tests for that check. It shows up as every skill being rejected."
+  },
+  "what_is_real_vs_not": {
+    "REAL": [
+      "Teaching once persists across process death (23/23, r42).",
+      "Two or more admitted read verbs compose and a composite is learned from one demonstration (3/4, r43).",
+      "Instant learning survives real environment shifts: line endings, blank lines, subdirectory moves, file length -- 23/23 correct in each (r44).",
+      "Failure modes are suppression and blind spots, not confabulation: no invented answer observed."
+    ],
+    "NOT_REAL": [
+      "That the 23 verbs answer what their goals ask. They answer 'how many lines did it print'. 23/23. Only set-valued programs give a useful number by luck of shape.",
+      "That zero is expressible. It is not, and making it so inverts the causal ablation control.",
+      "That environment shift is solved generally. Action order was never perturbed; tool sets never changed; the domain never changed. OpenAgent calls logic inversion the hardest shift and it was not tested.",
+      "That the arithmetic changed: 318-step tasks at 99% per step are still 4.09%; Opus 5.5 still needs 99.774% per step for 48.7%.",
+      "That any of this is a public benchmark: still ZERO public-benchmark numbers."
+    ]
+  },
+  "the_sentience_claim": "Unchanged, and this round is the clearest illustration yet of why. What persists is a regex over a teaching sentence and an argv. What transfers is a command's line count. There is no representation of the environment, no model of its own state, no goal, no preference. A capability surviving a CRLF change is a robust lookup, not an experience.",
+  "the_smartest_things_to_do_next": {
+    "1": "Change the answer type before adding any capability. The system cannot say 'here are the four unique lines' or 'the checksum is 9f2a...' or 'zero'. Every goal it can express is 'how many lines'. A typed result (text, integer, empty-allowed) is worth more than the next ten verbs, and it is the thing the 23/33 number is actually bottlenecked on.",
+    "2": "Replace the ablation control's dependence on a failing predicate. `causal_ablation_pass = not pre_ok` is correct today only because stdout_line_count fails closed on empty. Any legitimate future postcondition that can pass on an empty world will silently invert it. Make the ablation explicit (run with the skill disabled and assert the GOAL is unmet) rather than inferring it from a generic check.",
+    "3": "Test the shifts that were not tested, in the order OpenAgent ranks difficulty: action-space change (a verb absent on the new host -- already partly covered by PROGRAM_NOT_INSTALLED), observation dynamics, logic inversion (causal reordering). Reordering is the one that would break the cli_pipeline composer and is the honest next experiment.",
+    "4": "Do not add write capability yet. With answers this narrow and zero unrepresentable, a write layer would be a fast way to make irreversible mistakes with a measurement that cannot tell 0 from 1."
+  },
+  "artifacts": {
+    "tests_new": [
+      "canonical/tests/test_the_skill_survives_a_different_environment_v1.py (5)",
+      "canonical/tests/test_what_the_answer_actually_is_v1.py (4)"
+    ],
+    "changed": "causal_trace_to_skill_compiler_v1.py -- zero-fix attempted, measured, reverted with a durable comment",
+    "regression_sweep": "51 passed across 7 files",
+    "r41_track": "unchanged 23/33, still a reproducibility measurement"
+  }
+}

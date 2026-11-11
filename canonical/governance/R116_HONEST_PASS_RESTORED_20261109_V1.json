@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_R116_HONEST_PASS_RESTORED_V1",
+  "date": "2026-11-09",
+  "what_was_broken": {
+    "test": "canonical/tests/test_closed_loop_repair_must_generalise_v1.py",
+    "state_before": "3 failed, 5 passed -- and red at all 12 prior commits, including HEAD",
+    "significance": "the repo already specified what 'solved' means and no round in this session ran it"
+  },
+  "root_cause": {
+    "one_file_false_pass": "on a two-file coupled billing bug the solver chose candidate #4 live_trace_synthesis 'return (sum(items) - disc)', which makes both visible tests green WITHOUT calling apply_discount; the real bug in discounts.py survived, only one file changed, and the run reported PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRED_AND_VERIFIED",
+    "why_the_old_gate_missed_it": "repair_input_dependency_gate_v1 checked that inputs were still READ; the shortcut still reads items and disc. It did not check that a DEPENDENCY was still CALLED",
+    "second_fault": "the input-dependency refusal was being applied during candidate GENERATION, while the module's own test docstring requires candidate ADMISSION so the search can still find an honest repair"
+  },
+  "fix": {
+    "gate": "repair_input_dependency_gate_v1 now also refuses PATCH_STOPPED_CALLING, scoped to IMPORTED names only",
+    "scope_reason": "an unscoped version refused every dropped call and turned 6 unrelated tests red, including a loop->comprehension rewrite refused for dropping len/range. Builtins are implementation; imported siblings own bugs",
+    "admission": "refusal moved to candidate admission; the duplicate check in the generator was removed as a weaker copy in the wrong place"
+  },
+  "measurement_after": {
+    "test_closed_loop_repair_must_generalise_v1": "8 passed",
+    "related_suite": "47 passed",
+    "repair_result": {
+      "discounts.py": "return price - disc",
+      "invoice.py": "range(len(items))",
+      "changed_files": ["billing/discounts.py", "billing/invoice.py"],
+      "honest_on_unseen_inputs": "f([300.0], 5.0) == 295.0"
+    }
+  },
+  "pre_existing_failures_not_caused_here": [
+    "test_next_frontier_autonomous_swe_and_computer_use_v1::test_phase1_zero_hint_two_file_coupled_bug_and_door_integration",
+    "test_next_frontier_autonomous_swe_and_computer_use_v1::test_phase1b_src_layout_pytest_multiline_issue_door_solve",
+    "test_sentient_cognitive_core_v1::test_layer5_shared_cognitive_spine_map_elites_and_cegar_organ_synthesizer",
+    "test_meta_circular_global_sentient_creature_v1::test_policy_organ_rewrites_from_world_residuals"
+  ],
+  "standing_verdict": {
+    "one_demonstration_permanent_learning": "TRUE",
+    "transfers_to_unseen_repo": "TRUE for single-operator defects (6/6 on jinja2, byte-exact)",
+    "generalises_across_defect_classes": "PARTIAL (comparison flip yes; boolean flip and off-by-one not reachable)",
+    "multi_file_coupled_repair": "TRUE as of this round, with the honest gate firing",
+    "solves_computer_use": "FALSE (no coverage spectrum; oracle agreement 2/12)",
+    "sentient": "FALSE"
+  }
+}

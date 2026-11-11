@@ -1,0 +1,47 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "TWO_SKILLS_COVER_THREE_TENTHS_20261109_V1",
+  "round": 66,
+  "date": "2026-11-09",
+  "question": "Does a taught skill make a NEW task cheaper, or only an old one?",
+  "method": "teach two skills separately (search for <query>; sort the list); compose them with a greedy planner that needs no model; run the composition with zero model calls",
+  "measured": {
+    "composition": {
+      "task": "search for eigenvalues then sort the list",
+      "taught_for": "neither skill was taught this task",
+      "result": "COMPOSED_WITHOUT_A_MODEL",
+      "actions": 4,
+      "causal": "both steps CAUSAL_OK",
+      "evidence": "canonical/evaluation/the_loop/composed_new_task.png -- heading reads 'Results for eigenvalues' and the list reads apple, banana, cherry"
+    },
+    "five_new_tasks_from_two_skills": "5/5, zero model calls",
+    "coverage_of_ordinary_task_space": {
+      "one_skill": "1/10",
+      "other_skill": "1/10",
+      "both_skills": "3/10",
+      "note": "one plus one equals three -- composition is superlinear in task coverage"
+    }
+  },
+  "the_honest_half": {
+    "what_composition_invents": "new COMBINATIONS and new PARAMETER VALUES (search for apples / bananas / zeta)",
+    "what_composition_cannot_invent": "a capability that no taught skill contains",
+    "all_five_passing_tasks": "subsets or reorderings of the two taught canonical forms",
+    "so": "the library compounds over the space its skills span. It does not generalise outside that span, and no composition can."
+  },
+  "bugs_found_by_running_it": [
+    "a slot in a trigger became the literal word 'query' because normalisation stripped the brackets",
+    "the second attempt turned '< query >' into three tokens: both were the same bug, being clever about punctuation",
+    "a connector ('then') was reported as an uncovered gap, so no compound task could ever plan",
+    "the ambiguity rule was wrong twice: a COUNT of ties (162 inside one field, all valid) and a spread in units of 2.5 anchor widths. The unit that works is the patch's own size",
+    "a teach run saved two frames for three actions, so the third action's measured effect was silently None"
+  ],
+  "what_this_does_not_prove": [
+    "that composition scales: the planner is greedy, has no search, and composes only literal triggers",
+    "that any of this reaches 318-step workflows (99% per step over 318 steps is 4.09%)",
+    "that the model is optional. The model taught the skills; it is absent only from the reuse",
+    "a benchmark number. There are still zero."
+  ],
+  "next": ["how many skills until coverage saturates, and does findability degrade first (r59 says it does)",
+           "compose under a model-chosen plan rather than literal triggers",
+           "a public benchmark number, still owed"]
+}

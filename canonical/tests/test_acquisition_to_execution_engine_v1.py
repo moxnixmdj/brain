@@ -30,7 +30,15 @@ from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import (
 
 class AcquisitionToExecutionEngineTests(unittest.TestCase):
     def setUp(self) -> None:
-        self.tmp = pathlib.Path(tempfile.mkdtemp(prefix="brain_acq_exec_test_"))
+        # The live door refuses goals whose only stated paths lie outside the tree
+        # it is rooted at -- a scope fact, not a bug (see
+        # live_brain_route_admission_v1._stated_paths_outside_the_root). This test
+        # used /tmp, so every goal it built was answered with
+        # FAIL_CLOSED__STATED_PATH_OUTSIDE_THE_WORKSPACE and the phases it was
+        # testing never ran. Scratch space must be INSIDE the root to be in scope.
+        _base = pathlib.Path(__file__).resolve().parents[2] / "canonical" / "astra_runtime" / "tmp"
+        _base.mkdir(parents=True, exist_ok=True)
+        self.tmp = pathlib.Path(tempfile.mkdtemp(prefix="brain_acq_exec_test_", dir=str(_base)))
         self.skill_db = self.tmp / "compiled_workflows.sqlite"
         self._old_wf_env = os.environ.get("BRAIN_COMPILED_WORKFLOW_DB")
         os.environ["BRAIN_COMPILED_WORKFLOW_DB"] = str(self.skill_db)

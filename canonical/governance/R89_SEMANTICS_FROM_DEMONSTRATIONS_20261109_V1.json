@@ -1,0 +1,32 @@
+{
+  "round": 89,
+  "date": "2026-11-09",
+  "title": "A demonstration CAN give semantics -- by induction, not by replay",
+  "the_correction_to_r88": {
+    "r88_said": "'a demonstration gives you procedure and cannot give you semantics; that is structural'",
+    "measured_now": "a demonstration gives (chosen element + all candidates + their exposed quantities). The chosen element differs from the others in one direction on one quantity. That IS the predicate.",
+    "mechanism": "hypothesis selection over a tiny, exact hypothesis space -- no model, no training, no second example required when one suffices",
+    "so": "the claim was too strong. Induction from demonstration is real."
+  },
+  "new_module": "canonical/runtime/predicate_induction_v1.py",
+  "induction_is_real": {
+    "data_used": "data-duration and data-price attributes on MiniWob's buy-ticket elements",
+    "example": "chose the shortest flight -> 'pick the element with the minimum duration'",
+    "applied_to_numbers_never_seen": "yes (unit test: durations 99999999 vs 1 -> picks 1)"
+  },
+  "three_limits_measured_not_assumed": [
+    {"limit": "duplicate quantity names", "detail": "data-price and the '$340' in the button text are one quantity; treating them as two produced false AMBIGUOUS in every non-trivial case", "fix": "dedupe on the VALUE ranking, not the name"},
+    {"limit": "co-varying quantities", "detail": "the longest flight is usually also the most expensive, so ONE demo often cannot separate 'max duration' from 'max price'", "fix": "refuse and ask for a second demonstration; induce_from_two resolves it by agreement", "measured": "3 of 4 demo rounds returned AMBIGUOUS until the two agreeing demos arrived"},
+    {"limit": "the rule is TASK-SPECIFIC", "detail": "a rule induced from 'longest duration' applied to a 'cheapest cost' goal scored -0.5", "law": "that is a ROUTING error, not a transfer success or a transfer failure -- the rule must be matched to the task that produced it"}
+  ],
+  "live_results": {
+    "rule_recovered_from_two_demos_of_one_task": "pick the element with the minimum duration",
+    "cold_transfer_within_that_task": "1/1 (small n; the task appears randomly, so same-task instances are rare in a short run)",
+    "cross_task_application": "0/3, all REFUSED by scoping -- correct"
+  },
+  "what_this_does_to_the_thesis": {
+    "learn_once_permanently": "STRONGER than r88 concluded. For tasks whose candidates expose comparable quantities, one or two demonstrations yield a RULE that transfers to unseen numbers.",
+    "still_not_universal": "the induction needs the page to EXPOSE the quantity (a data attribute, a numeric text field). If the deciding property is not in the readable state, nothing can be induced from any number of demonstrations.",
+    "the_sharpened_boundary": "a demonstration supplies semantics IFF the evidence for the choice is present in the observed state. That is a checkable precondition, not a philosophical limit."
+  }
+}

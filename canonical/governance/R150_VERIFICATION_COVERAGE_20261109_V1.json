@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_R150_V1",
+  "date": "2026-11-09",
+  "round": "r150",
+  "the_limiting_factor_measured": "verification coverage. 3 of 13 ordinary goals were checkable; the other 10 were refused because success could not be established without a reference answer.",
+  "web_grounding": {
+    "property_based_testing_vs_alternatives": "82.7% correctness vs 58.3% baseline, and vs 77.3% for the agent judging its own output; fuzzing 79.1%; TDD 61.8%",
+    "source": "dev.to/max_quimby/your-verifier-is-a-confident-liar-26pc (Oct 2026)",
+    "the_insight_used": "ask whether the output satisfies properties any correct output must satisfy, instead of asking whether it equals a reference",
+    "also_used": "Oracle independence: a verdict is worth only as much as the distance between the evidence source and the system that produced the work",
+    "warning_heeded": "WebVoyager's judge produces false positives at 45%+; a verifier that only says YES is a rubber stamp"
+  },
+  "what_was_built": {
+    "module": "canonical/runtime/text_relation_verifier_v1.py",
+    "idea": "for a recognised verb the CORRECT OUTPUT IS DEFINED BY THE INPUT, so no reference answer is needed",
+    "relations": ["sort", "reverse_each_line", "reverse_lines", "unique", "upper", "lower", "head", "tail", "strip_blank"],
+    "refused_verbs": "summarise, translate, rewrite, paraphrase, explain, describe, improve, fix, clean, format, beautify, analysis, review, refactor"
+  },
+  "measured_before_and_after": {
+    "before": {"sort notes.txt into sorted.txt": "OPEN__FORMAT_CARRIES_NO_EVIDENCE", "reverse ... into rev.txt": "refused", "checkable_goals": "3 of 13"},
+    "after": {
+      "sort notes.txt into sorted.txt": "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED, plan ['run_sort'], SORTED_PERMUTATION_OF_INPUT, 0.33 s",
+      "reverse each line of list.txt into rev.txt": "PASS, plan ['run_rev'], EACH_LINE_REVERSED, 0.08 s",
+      "reverse the lines of list.txt into rev2.txt": "PASS, plan ['run_tac'], LINE_ORDER_REVERSED, 0.06 s",
+      "count the lines in notes.txt": "still refused (a question)",
+      "write a summary of notes.txt into out.md": "still refused (needs an oracle)"
+    }
+  },
+  "the_null_policy_fails": {
+    "law": "a pass is not a pass until the NULL policy fails the same task",
+    "measured": {"copy-as-answer for sort": "False NOT_ORDERED", "for reverse_lines": "False LINE_ORDER_NOT_REVERSED", "for reverse_each_line": "False NOT_EACH_LINE_REVERSED"}
+  },
+  "five_defects_found_in_my_own_work_before_they_shipped": [
+    {"defect": "dedupe compared only NEIGHBOURS", "measured": "input banana/apple/cherry/apple returned verbatim was accepted as deduplicated", "fix": "len(set(out)) == len(out)"},
+    {"defect": "the fixture could not discriminate", "measured": "computer_env's seed is one line, so reversing it is identity and `patch` (a diff tool) closed reverse with plan ['run_patch']", "fix": "discriminates() refuses unless the source can tell right from wrong; probe seed supplied"},
+    {"defect": "'reverse' conflated two operations", "measured": "rev reverses EACH LINE; the verifier demanded line ORDER, so the correct program was rejected for 140 s and a wrong program would have passed", "fix": "reverse_each_line (rev) vs reverse_lines (tac), chosen by phrasing"},
+    {"defect": "admits() accepted a QUESTION", "measured": "test_a_goal_that_asks_for_a_value_is_not_reported_closed failed on 'the unique lines of the file a.txt', whose .txt belongs to its INPUT", "fix": "admits() now requires an explicit output artifact"},
+    {"defect": "trailing newline counted as a line", "measured": "a correctly sorted file read as NOT_A_PERMUTATION_OF_THE_INPUT", "fix": "drop exactly one trailing empty entry on both sides"}
+  ],
+  "the_second_limiting_factor_found_underneath": {
+    "what": "candidate selection never named the program that does the job",
+    "measured": "programs_for('.txt') = ['gp-display-text','md5sum.textutils','pod2text','pygettext3','systemd-sysext','addpart','addr2line','animate','apt','apt-cache',...] -- `sort` absent; programs_for_goal(goal) omitted it too",
+    "fact": "sort, rev, uniq, tac are all installed and working",
+    "consequence": "a 126 s search could not succeed because its shortlist did not contain the answer",
+    "fix": "text_relation_verifier_v1._CANONICAL_PROGRAM leads the shortlist for a named relation; it is still proven by executing, never trusted"
+  },
+  "verifier_version_now_hashes_the_relation_rules": {
+    "why": "a refusal learned under old rules must not survive new ones",
+    "measured": "after the relation verifier was added, three goals kept returning OPEN__EFFECT_NOT_VERIFIED in 0.0 s from a cache written before it existed",
+    "fix": "program_synthesis_v1.verifier_version() includes the relation table and the oracle-verb pattern"
+  },
+  "regression_measured_against_baseline": {
+    "files": "test_curriculum_v1.py + test_computer_unconfined_route_guard_v1.py",
+    "with_changes": "12 failed, 32 passed",
+    "with_changes_stashed": "12 failed, 32 passed",
+    "conclusion": "no regression; the 12 are pre-existing and named in R148"
+  },
+  "tests_added": {"file": "canonical/tests/test_text_relation_verifier_v1.py", "count": 19, "result": "19 passed", "design": "every True assertion is paired with a False assertion against the null policy"},
+  "still_refused_and_correctly": ["deduplicate emails.txt into unique.txt (OPEN__EFFECT_NOT_VERIFIED after 121 s -- uniq invocation shape not yet found)", "count the lines in notes.txt", "the different lines of notes.txt", "write a summary of notes.txt into out.md", "translate ...", "pack into .tar.gz"],
+  "what_this_does_not_claim": [
+    "that computer use is solved. Nine relations on .txt/.md moved from impossible to checkable; the rest of the machine is unchanged.",
+    "that the MiniWob number moved. It is a GUI path and is untouched at 56.3%.",
+    "that the three TransferTests pass. They encode a contradiction (see R148) and are untouched."
+  ],
+  "the_answer_to_the_user": "instant learning is real and permanent (measured: recall in 0.0 s across processes). It does not generalise to all computer use for one reason only -- the machine must be able to tell that the one time it ran, it worked. Every goal given a verifier becomes learnable forever. That is the whole bottleneck, and this round added nine verifiers."
+}

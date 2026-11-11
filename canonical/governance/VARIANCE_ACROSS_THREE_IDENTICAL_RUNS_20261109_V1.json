@@ -1,0 +1,50 @@
+{
+ "schema": "GOVERNANCE_RECORD_V1",
+ "id": "VARIANCE_ACROSS_THREE_IDENTICAL_RUNS_20261109_V1",
+ "round": 78,
+ "date": "2026-11-09",
+ "why": "r77 promised to run the same configuration three times and report the spread before quoting any number again. Every number in r73-r77 was a single seed.",
+ "result": {
+  "identical_code_identical_rules": true,
+  "scores": {
+   "run_original": 18,
+   "run_seed_a": 15,
+   "run_seed_b": 18
+  },
+  "mean": 17,
+  "stdev": 1.73,
+  "spread": "3 tasks",
+  "unstable_tasks": 8,
+  "stable_wins": 13,
+  "stable_losses": 109
+ },
+ "the_implication_for_every_number_quoted_so_far": {
+  "r73_baseline_15": "indistinguishable from 18, 17 or 14",
+  "r76_text_17": "indistinguishable from the 15 baseline",
+  "r77_sequenced_18": "indistinguishable from the 15 baseline",
+  "conclusion": "'text nodes moved it by two tasks' and 'the gate moved it by one' are both INSIDE the noise floor. Neither claim survives three runs."
+ },
+ "the_implication_for_the_published_comparison": {
+  "GPT-4_71.7": "some margin left",
+  "SeeAct_66.1": "some margin left",
+  "WebGUM_94.2": "some margin left",
+  "but": "the systems near 15-20% are within one or two seeds of each other, and agent benchmarks in this range routinely report single-seed numbers. The ranking at the bottom of the table is not resolvable at n=1."
+ },
+ "one_flip_explained": {
+  "task": "click-test-2, goal 'Click button ONE'",
+  "variance_verdict": "0/6 failures reproduced in isolation. The full runner flips on this task; the isolated path is 6/6.",
+  "so": "at least part of the measured variance is a BUG in my sequencer, not irreducible variance. The 8 unstable tasks are not all coin flips; some are a code path I have not isolated."
+ },
+ "what_is_now_law": "no number from this benchmark is quoted without at least three runs and a spread. Single-seed scores at this level of accuracy are not measurements, they are anecdotes.",
+ "next": [
+  "find the sequencer bug behind the unstable tasks",
+  "then, and only then, quote a number with its spread"
+ ],
+ "refusal_vs_acting": {
+  "wrong_clicks": 15,
+  "reward_points_lost": "-14.20 across 130 tasks",
+  "if_those_had_refused": "score recovers 14.20 points, win count unchanged",
+  "conclusion": "refusing does NOT win tasks. It raises the score and removes wrong-but-confident actions. The benchmark publishes only the win count, so the safety property that the gate provides is INVISIBLE to the metric everyone quotes. That is a property of the benchmark, not of the gate.",
+  "note": "no honest probability of success is available for those 15 actions, so no refusal policy was run; the 14.20 is an upper bound on what refusing every one of them would recover"
+ }
+}

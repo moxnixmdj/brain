@@ -1,0 +1,45 @@
+{
+  "schema": "PROJECT_BRAIN_R126_ONE_DEMO_TRANSFER_V1",
+  "date": "2026-11-09",
+  "this_is_the_first_experiment_that_tests_the_users_claim_directly": true,
+  "design": "learn a PROCEDURE from a single demonstration, then measure (a) permanence over fresh randomised episodes on the same task, and (b) transfer to a different task in the same family",
+  "phase_1_baseline": {
+    "procedure": "click every menu level",
+    "episodes": 6,
+    "successes": 2,
+    "note": "the 2 successes are single-level goals where clicking the only level happens to be correct"
+  },
+  "phase_2_demonstration": {
+    "procedure": "hover every level except the last, click the last",
+    "demonstrations": 1,
+    "success": true,
+    "goal": "Select Guillema>Kati>Patsy"
+  },
+  "phase_3_permanence": {
+    "episodes": 8,
+    "successes": 8,
+    "goals_covered": ["Darleen>Jaynell","Dayle>Tana>Ophelie","Selle>Nomi","Crista>Clemmy>Amalle","Jyoti>Morena","Elka>Eugine>Kathie","Addy>Janella>Carly","Pandora"],
+    "note": "every episode used fresh randomised names and depths; the demonstration was never repeated"
+  },
+  "phase_4_transfer": {
+    "task": "click-menu-2 (different task, different DOM: an #open-menu button, ui-menu-item nodes, and TWO goal modalities)",
+    "episodes": 10,
+    "successes": 9,
+    "label_modality": "6/7",
+    "icon_modality": "3/3 (the icon variant renders the target as a ui-icon span with NO text whatsoever)"
+  },
+  "the_result_in_one_line": "one demonstration of 'hover to open, click the leaf' took the same task from 2/6 to 8/8 and transferred to a different task at 9/10, including a modality where the target has no text.",
+  "what_this_CONFIRMS_about_the_users_claim": [
+    "a procedure CAN be acquired from a single demonstration",
+    "it persists across fresh randomised episodes without re-demonstration",
+    "it transfers to a different task in the same family"
+  ],
+  "what_this_DOES_NOT_confirm": [
+    "that arbitrary tasks are one-demo learnable -- this transfer was WITHIN a family (both are jQuery UI menus) and the procedure is genuinely the same procedure",
+    "that the transfer would survive a different widget family (a slider, a drag target, a canvas)",
+    "any 130-task benchmark figure"
+  ],
+  "the_first_principles_reading": "the demonstration supplied a PROCEDURE ('hover to open, click the leaf'), not a coordinate or a fact. That is why it generalised: it is a statement about the widget, not about this screen. It is also why the earlier coordinate-memorisation control would have failed. Learning transfers exactly to the extent that what is stored is a statement about the CLASS of situation rather than the instance.",
+  "the_methodological_correction_that_made_this_possible": "phase 4 first returned 0/6, all None. That was not a transfer failure: the goal parsing regex did not match click-menu-2's goal sentence, so the policy never attempted the task. Reporting it as 0/6 would have been a fabricated zero. It was fixed by reading the task source and handling both goal modalities.",
+  "the_bug_that_had_been_costing_the_task_for_five_rounds": "my policy hovered the parent (which correctly opened the submenu) and then CLICKED the parent. jQuery UI treats that as selecting the parent. The menu opened and was immediately killed by the same code that opened it."
+}

@@ -1,0 +1,87 @@
+{
+ "schema": "brain.governance.INSTANT_LEARNING_END_TO_END_PROVEN_20261109_V1",
+ "date": "2026-11-09",
+ "round": 30,
+ "status": "THE_CLAIM_IS_NOW_TRUE_FOR_THIS_DOMAIN__DEMONSTRATE_ONCE__CRYSTALLISE__ANSWER_A_NEW_FILE",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "the_claim_as_stated_and_the_result": {
+  "claim": "give the model a try once; after it does it at least once it learns it permanently, and then it can do it again on other input",
+  "result": "TRUE for a counting question about a file. Demonstrated, crystallised and reused on a different file with a different answer.",
+  "measured": [
+   {
+    "step": 1,
+    "goal": "how many unique lines in data.txt",
+    "file": "16 rows, 8 distinct",
+    "answer": 8,
+    "confined": true,
+    "skill_crystallized": true,
+    "qualification": "PASS__WORKFLOW_SKILL_COMPILED_QUALIFIED_AND_OWNED"
+   },
+   {
+    "step": 2,
+    "goal": "how many unique lines in pods.txt",
+    "file": "26 rows, 13 distinct",
+    "answer": 13,
+    "note": "a file the skill never saw"
+   },
+   {
+    "step": 3,
+    "goal": "how many unique lines in b.txt",
+    "file": "learned on 4 distinct, asked about 21 distinct",
+    "answer": 21,
+    "note": "proves it did not memorise the number it was shown"
+   }
+  ]
+ },
+ "the_last_wall_and_the_three_walls_inside_it": [
+  {
+   "wall": "execute_compiled_steps refused EVERY cli_exec step outright",
+   "evidence": "line 724 returned COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT for any cli_exec, unconditionally, before any stage ran",
+   "fix": "_carried_step_is_admissible() asks the carrier whether it would admit exactly this argv; a step that passes is ROUTED to the carrier, everything else keeps the original refusal verbatim",
+   "note": "cli_pipeline is still refused -- the carrier takes one argv, and a pipeline is not a thing it can carry"
+  },
+  {
+   "wall": "the postcondition had the wrong SHAPE for a set-printing program",
+   "evidence": "postcondition was stdout_integer while `sort -u` prints the distinct set; after the carrier fix the failure moved to POSTCONDITION_STDOUT_MISMATCH on nine distinct rows",
+   "fix": "added the stdout_line_count kind -- the number of non-empty lines a program printed -- with its own mismatch refusal and its sabotage control",
+   "why_it_is_not_a_loosening": "it does not accept arbitrary text; it requires a specific COUNT and refuses on mismatch, which is what 'how many' asks for"
+  },
+  {
+   "wall": "the held-out and sabotage contracts were hard-coded to stdout_equals '11'",
+   "evidence": "a correct set-printing skill was rejected because its held-out twin printed rows instead of the literal 11",
+   "fix": "the held-out and sabotage expectations now take the same shape as the measurement"
+  }
+ ],
+ "what_is_now_true_that_was_not_true_at_the_start_of_this_session": {
+  "before": "one demonstration compiled a skill, the skill transferred to a new sqlite database in 4 ms, and the door never asked for it",
+  "now": "one demonstration compiles a skill THROUGH THE ADMITTED CARRIER, the skill is qualified against an unseen twin with a sabotage control, and the door answers a different file from it",
+  "the_difference": "the demonstration itself now runs confined, so the thing permanence is granted to is a proof that was admitted rather than a proof that was merely observed"
+ },
+ "speed__the_honest_number": {
+  "bridge_only_warm": "116 ms per question (carrier setup dominates; the question itself is microseconds)",
+  "through_the_door": "490 ms (the orchestrator's tier ladder runs first)",
+  "not_insanely_fast": true,
+  "why": "the carrier proves its invariants by starting a namespace and hashing the live tree on every call. That is the price of not lying about confinement.",
+  "the_fix_that_exists_and_is_not_yet_built": "an escape-free long-lived carrier process (or a pre-warmed zygote of it) would remove the per-call setup. The tree already has a zygote worker pool; the carrier is not yet in it.",
+  "and_the_alternative_that_is_not_acceptable": "skipping the hash check on repeat calls would make the invariant unverified while still reporting it, which is the one thing this project refuses to do"
+ },
+ "what_is_still_not_true": {
+  "coding": "1 of 9 unique bugs = 11.1%. Unchanged.",
+  "real_computer_use": "zero terminal results on a real desktop. The carrier is a CLI carrier, not a GUI one.",
+  "generalisation_beyond_the_shape": "this proves one skill over one argument class (a file, a count kind). It does not prove that any skill transfers to any environment.",
+  "carrier_qualified": "still False everywhere -- host /usr is mounted read-only and no hostile-code certification has been done"
+ },
+ "tests_added": {
+  "file": "canonical/tests/test_instant_learning_end_to_end_v1.py",
+  "count": 7,
+  "passing": true
+ },
+ "regressions": "test_acquisition_to_execution_engine_v1 still 3 failed / 2 passed -- its Phase 3 asserts skill_crystallized on a goal whose cwd is outside the tree, and its Phase 1/2 assert confinement refusals the carrier has since made answerable. Neither is caused by this round.",
+ "suite": "guard PASS 17/0; 443 capabilities; compiled 10,215,312 bytes",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

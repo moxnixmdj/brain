@@ -1,0 +1,105 @@
+{
+  "schema": "brain.governance.EVERY_VALUABLE_THING_CENSUS_V2_20261109_V1",
+  "date": "2026-11-09",
+  "status": "CENSUS_COMPLETE__98_5_PERCENT_OF_A_3229_RECORD_POPULATION_PRICED__THE_PROVEN_RATE_DOUBLED_WHEN_I_LEARNED_TO_READ",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "why_v2_exists": {
+    "v1_result": "3229 records; 1101 (34.1%) landed in UNCLASSIFIED",
+    "v1_defect": "the classifier recognised six status tokens out of the 224 distinct leading tokens the tree actually uses. A third of the population was invisible to pricing, and a census that cannot read a third of its population has not finished the job.",
+    "v2_work": "read the whole vocabulary and priced prose statuses by the evidence word they contain",
+    "v2_result": "47 records (1.5%) remain unpriceable, and those 47 are named rather than hidden"
+  },
+
+  "the_complete_census_v2": {
+    "population": "canonical/governance/*.json",
+    "total_records": 3229,
+    "total_bytes": 20840045,
+    "unparseable": 1,
+    "tiers": {
+      "PROVEN":      {"count": 680,  "pct": 21.1, "mb": 3.60},
+      "ACTIVE":      {"count": 1040, "pct": 32.2, "mb": 8.83},
+      "REFUSED":     {"count": 247,  "pct": 7.6,  "mb": 1.70},
+      "CANDIDATE":   {"count": 1047, "pct": 32.4, "mb": 5.61},
+      "RETRACTED":   {"count": 85,   "pct": 2.6,  "mb": 0.30},
+      "NO_STATUS":   {"count": 83,   "pct": 2.6,  "mb": 0.60},
+      "UNCLASSIFIED":{"count": 47,   "pct": 1.5,  "mb": 0.21}
+    },
+    "priced_pct": 98.5,
+    "records_carrying_a_measured_number": 355,
+    "records_declaring_explicit_hard_nonclaims": 1656,
+    "nonclaim_rate_pct": 51.3
+  },
+
+  "the_three_corrections_v2_forces_on_v1": [
+    {
+      "v1": "10.9% PROVEN",
+      "v2": "21.1% PROVEN",
+      "why": "the tree writes proof in far more words than PASS -- PROVED, VERIFIED, EXECUTED, DERIVED, BOUND, COMPLETE, AUTHENTICATED, DEDUCTIVE, EXACT, FORMAL, and prose forms such as 'MINIMUM_PROOF_CARRYING_INFORMATION_DERIVED'. V1 read one dialect and mispriced the rest."
+    },
+    {
+      "v1": "5.6% REFUSED",
+      "v2": "7.6% REFUSED",
+      "why": "refusals are also written in prose: ZERO_VERIFIED, NOT_ENTAILED, UNDECIDED, EXHAUSTED, QUARANTINED, NOT_SENT, ZERO_CREDIT, INFRASTRUCTURE_FAILURE"
+    },
+    {
+      "v1": "34.1% UNREADABLE",
+      "v2": "1.5% UNREADABLE plus 2.6% NO_STATUS",
+      "why": "83 records declare no status at all. That is not an unreadable word, it is a record that states nothing about its own standing. It deserves its own tier because the remedy is different: those records need a status written, not a vocabulary learned."
+    }
+  ],
+
+  "the_family_inventory_v2__corrected": [
+    {"family": "TB",           "records": 241, "proven": 40, "refused": 5,  "candidate": 36},
+    {"family": "TERMINAL",     "records": 169, "proven": 30, "refused": 25, "candidate": 56},
+    {"family": "ROOT2",        "records": 164, "proven": 27, "refused": 8,  "candidate": 54},
+    {"family": "LIVEBENCH",    "records": 142, "proven": 36, "refused": 7,  "candidate": 64},
+    {"family": "OPUS55",       "records": 134, "proven": 15, "refused": 24, "candidate": 68},
+    {"family": "CURRENT",      "records": 132, "proven": 26, "refused": 7,  "candidate": 62},
+    {"family": "PROFESSIONAL", "records": 124, "proven": 22, "refused": 3,  "candidate": 37},
+    {"family": "R2",           "records": 98,  "proven": 19, "refused": 2,  "candidate": 10},
+    {"family": "HLE",          "records": 94,  "proven": 33, "refused": 13, "candidate": 7},
+    {"family": "H100",         "records": 84,  "proven": 13, "refused": 1,  "candidate": 15},
+    {"family": "ROOT3",        "records": 70,  "proven": 13, "refused": 6,  "candidate": 39},
+    {"family": "CURSORBENCH",  "records": 59,  "proven": 18, "refused": 2,  "candidate": 7},
+    {"family": "BYTES",        "records": 58,  "proven": 18, "refused": 0,  "candidate": 7},
+    {"family": "FINANCE",      "records": 52,  "proven": 23, "refused": 5,  "candidate": 15},
+    {"family": "P3",           "records": 52,  "proven": 11, "refused": 2,  "candidate": 8},
+    {"family": "AA",           "records": 50,  "proven": 19, "refused": 8,  "candidate": 3},
+    {"family": "GDPVAL",       "records": 47,  "proven": 12, "refused": 2,  "candidate": 14},
+    {"family": "OSWORLD",      "records": 37,  "proven": 11, "refused": 1,  "candidate": 9}
+  ],
+
+  "what_the_corrected_census_says_about_the_project": {
+    "it_is_richer_than_i_said_and_i_was_wrong_twice": "v1 said 10.9% proven. v2 says 21.1%. My first census under-read the tree by half and I published that under-reading before checking the vocabulary.",
+    "the_families_are_mostly_real": "almost every major benchmark family has a substantial PROVEN count: TB 40, LIVEBENCH 36, HLE 33, TERMINAL 30, ROOT2 27, CURRENT 26, FINANCE 23, PROFESSIONAL 22, R2 19, AA 19, CURSORBENCH 18, BYTES 18, OPUS55 15, H100 13, GDPVAL 12, OSWORLD 11. The tree is not a pile of proposals with a thin crust of proof; it is closer to one third proof, one third live work, one third open proposal.",
+    "CURSORBENCH_was_the_worst_family_in_v1_and_is_not_in_v2": "v1 reported CURSORBENCH as 59 records and 0 proven. v2 finds 18 proven. The v1 finding was an artefact of a six-token classifier, and it would have sent the next round chasing a defect that did not exist. This is the cleanest demonstration in the session of why a census must be validated before it is believed.",
+    "OPUS55_has_the_most_refusals": "24 of 134 OPUS55 records are REFUSED. The family devoted to the frontier bar is also the family that most often reports failing it. That is a credible shape."
+  },
+
+  "the_47_records_that_remain_unpriced__named_not_hidden": {
+    "count": 47,
+    "pct": 1.5,
+    "character": "prose statuses containing no evidence word this census recognises -- e.g. 'RUBRIC_ONLY_HEADLINE_SHORTCUT_REJECTED__THREE_SCORE_BEARING_SCOPES_LOAD_BE...', 'AA_PUBLIC_SUPERDOMAIN_TOP_SUPPORT_COLLAPSES_TO_OBSERVATIONAL_EQUIVALENCE_U...'",
+    "decision": "they are reported as UNCLASSIFIED rather than force-fitted. Forcing a tier would make the census look complete and be wrong, which is the failure this project exists to avoid.",
+    "remaining_remedy": "read them individually, or add a semantic classifier. 47 is small enough to read."
+  },
+
+  "the_smartest_next_moves__from_v2": [
+    {"rank": 1, "action": "give the 83 NO_STATUS records a status", "why": "2.6% of the population states nothing about its own standing. This is bookkeeping, not research, and it is the largest concrete defect left in the governance layer."},
+    {"rank": 2, "action": "read the 47 unpriceable prose statuses by hand", "why": "small enough to finish, and finishing the census is the law"},
+    {"rank": 3, "action": "statement insertion in the repair engine", "why": "still the actual capability gap: 11.1% on 9 unique control-verified real bugs"},
+    {"rank": 4, "action": "quote PROVEN with its denominator and its tier definition every time", "why": "21.1% PROVEN means 680 records declare a passed check. It does not mean 680 capabilities, and the difference must survive every retelling"},
+    {"rank": 5, "action": "re-run the census as a test, so the price of the tree is a tracked number that cannot drift unnoticed", "why": "v1 was published wrong and only caught by running v2"}
+  ],
+
+  "what_this_census_still_does_NOT_prove": [
+    "that a PROVEN record is correct -- only that it declares a passed, verified, proved, derived, bounded or executed check",
+    "that tier assignment is exact for prose statuses: it reads an evidence word, and a long sentence can carry two",
+    "any capability rate: a count of claims is not a measure of skill",
+    "coverage of claims made outside governance JSON (code, docstrings, test names)"
+  ],
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

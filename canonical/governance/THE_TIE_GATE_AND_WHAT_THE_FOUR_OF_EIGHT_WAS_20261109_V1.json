@@ -1,0 +1,40 @@
+{
+  "round": 57,
+  "date": "2026-11-09",
+  "title": "The tie is not duplication; it is the word 'lines'. The recall loop was picking the first candidate that ran, so half the old 4/8 were won by list order.",
+  "the_factor_this_round_attacked": "rank 6 of r56: confusability / catalog poisoning. Real, unbuilt, and closable from inside this repository.",
+  "what_r52_had_concluded_and_why_it_was_incomplete": {
+    "r52": "four near-duplicate skills break selection at |S|=4",
+    "measured_this_round": "the four skills were only TWO operations -- `sort` and `sort -u`, each filed twice",
+    "so": "duplication inflated the tie but did not cause it"
+  },
+  "the_real_cause": {
+    "store": "5 skills: tac, rev, cat, wc -l, sort -u",
+    "ask": "dedupe the lines in <file>",
+    "scores": {"sort -u (unique lines of)": 1, "wc -l (count the lines of)": 1, "tac/rev/cat": 0},
+    "why": "the ask shares the word 'lines' with BOTH line-operations. It contains nothing that separates them -- the discriminating word is 'unique', and a paraphrase drops it.",
+    "what_the_old_loop_did": "ran the candidates in list order and returned the first one that executed and verified",
+    "consequence": "correct when the target happened to come first, wrong when it did not (r52's `sort` without `-u`). The 4/8 in r50 contained answers won by ordering, not by evidence.",
+    "the_hardest_admission": "with only TWO taught operations -- `count the lines of` and `unique lines of` -- the ask is already a genuine tie. A user who taught two things can already not be served by ranking."
+  },
+  "the_fix": {
+    "where": "in the recall loop itself, not in the door",
+    "rule": "_refuse_if_operations_tie: if more than one DISTINCT OPERATION ties for best word overlap, return no candidates at all",
+    "deduplication_not_suppression": "one operation filed under several skeletons still counts as one -- the signature is the program plus its first two arguments",
+    "what_it_deliberately_does_not_do": "it does NOT refuse at zero word overlap. Refusing there also disabled the verb-selection fallback (r50), and a 10-skill catalog went from answering correctly to returning None. Measured, reverted, narrowed.",
+    "raised_to_the_user_by": "answer_or_ask -> select_or_ask, which names the operations rather than picking one"
+  },
+  "the_measurement_after": {
+    "eight_asks_in_new_words": {"answered": 4, "asked": 4, "wrong": 0},
+    "note": "the old 4/8 and the new 4/8 are the same count with different content: the new four are the ones supported by evidence that the sentence actually contains"
+  },
+  "external_context_2026": {
+    "pattern": "tool-catalog consolidation is being done by hand across the ecosystem -- exodus-mcp 100 -> 72 canonical concepts with 39 deprecated aliases and parity tests; agent-herder 99 -> 40; paperclip rejecting conflicting same-name descriptors with 409 rather than selecting an ambiguous binding; cyanheads deduplicating identical records while keeping case variants distinct",
+    "what_this_repo_adds": "the same rule enforced at selection time rather than at catalog-review time, and the measured proof that the tie exists at |S|=5, long before catalog size is a problem",
+    "the rule they all converge on": "identical duplicates collapse; CONFLICTING ones fail loudly rather than selecting an ambiguous binding"
+  },
+  "what_the_first_principles_reading_says": "the limiting factor was never 'the loop picks badly'. It was 'the loop is entitled to pick'. Removing that entitlement cost nothing except an answer that was only sometimes right, and it is the same correction r55 made one layer up: a system that cannot distinguish its answers from its guesses must not present them identically.",
+  "regression": {"files": 19, "passed": 143, "xfailed": 1, "r46_baseline": "23/23 unchanged"},
+  "what_is_real": ["a unique operation is still answered", "a tie is refused and raised as a named question", "one operation filed twice is still selectable"],
+  "what_is_not_real": ["that r50's 4/8 measured evidence", "that teaching more operations helps -- it creates ties", "that any of this is a language model"]
+}

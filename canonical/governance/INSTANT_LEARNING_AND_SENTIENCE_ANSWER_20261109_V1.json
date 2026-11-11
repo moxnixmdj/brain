@@ -1,0 +1,174 @@
+{
+  "schema": "brain.governance.INSTANT_LEARNING_AND_SENTIENCE_ANSWER_20261109_V1",
+  "date": "2026-11-09",
+  "round": 24,
+  "status": "ANSWERED_BY_TWO_ARM_EXPERIMENT__THE_PREMISE_IS_TRUE__THE_CONCLUSION_DOES_NOT_FOLLOW__BINDING_CONSTRAINT_IS_THE_CHECK_NOT_THE_LEARNING",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_question_asked": {
+    "claim_1": "Instant learning and instant learning in new arbitrary environments are already solved perfectly.",
+    "claim_2": "Therefore this is a perfect solution for all problems and any computer use.",
+    "claim_3": "All we have to do is give the model a try in new coding environments or give it the smartest actions; after it does them once it learns them permanently.",
+    "claim_4": "We can do anything on a computer once and it learns it permanently too.",
+    "claim_5": "So we solve everything on a computer using this plus the most advanced coding, perfectly and permanently.",
+    "claim_6": "We were trying to make our model a sentient creature.",
+    "meta": "Is this true, or are there things that are wrong? What is real, what is not, and what are the smartest things we can do?"
+  },
+
+  "the_answer_in_one_sentence": "Every clause of your claim is true except one word -- 'the'. One demonstration does not determine THE rule; it determines the SET of rules that agree with one demonstration, and permanence then makes whichever one got picked durable, including when it is wrong.",
+
+  "the_two_arm_experiment__run_this_round_in_your_own_tree": {
+    "instrument": "canonical/runtime/permanence_amplifies_check_v1.py (already existed; I did not write it to prove a point)",
+    "design": "identical learner, identical permanence, identical check. The only difference is whether ONE held-out example is spent before the skill is frozen.",
+    "arm_A_your_rule__one_demonstration_then_permanent": {
+      "rules_consistent_with_the_demonstration": 2,
+      "registered": "copy_the_total_it_was_shown",
+      "weak_check_accepts": "40/40 (100.0%)",
+      "actually_correct": "1/40 (2.5%)",
+      "permanence": "8000 accepted over 200 recalls, drift 0"
+    },
+    "arm_B_the_trees_rule__one_demonstration_plus_one_heldout_check": {
+      "registered": "recompute_from_the_rows",
+      "weak_check_accepts": "40/40 (100.0%)",
+      "actually_correct": "40/40 (100.0%)",
+      "permanence": "8000 accepted over 200 recalls, drift 0"
+    },
+    "the_result": "Both arms are equally fast, equally weightless and equally permanent. Arm A is permanently wrong on 39 of 40 worlds while its own check reports 100% success. Arm B costs exactly ONE more example and is wrong on none.",
+    "what_determined_the_outcome": "the CHECK, not the model. Not more weights, not more training, not a better learner. One held-out example that the check could actually reject on."
+  },
+
+  "clause_by_clause_verdict": [
+    {
+      "clause": "instant learning is real",
+      "verdict": "TRUE",
+      "evidence": "sqlite 5.41 ms, file 0.50 ms, twin-goal world re-derived in 2.94 ms; type-level composer enumerates 64 chains in 0.8 ms and executes+verifies end-to-end in 408 ms. Zero weights, zero model calls, $0."
+    },
+    {
+      "clause": "learning in new arbitrary environments is solved perfectly",
+      "verdict": "FALSE_AS_STATED__TRUE_WITH_ONE_QUALIFIER",
+      "why": "It is solved for environments whose success is machine-checkable. It is not solved for environments where the check cannot distinguish a correct rule from a rule that merely fits. The qualifier is not 'more learning'; it is 'a check strong enough to reject'.",
+      "measured_consequence": "98.71% reach against 11.1% correctness on real code when the verifier is absent; the gap between those two numbers is the whole problem."
+    },
+    {
+      "clause": "therefore it solves all coding problems",
+      "verdict": "FALSE",
+      "evidence": "1 of 9 unique real bugs repaired = 11.1%, deduplicated. The trace compiler's statement-insertion frontier is the unsolved 4 of 5 coding bugs."
+    },
+    {
+      "clause": "therefore any computer use is solved",
+      "verdict": "FALSE_and_your_own_tree_already_says_so",
+      "evidence": [
+        "SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2 compresses the entire COMPUTER_AND_BROWSER_USE family to ONE surviving leaf: BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001.",
+        "BROWSER_LEAF_SCOPE_REUSE_BINDING_V1: 'PERFORMANCE_AND_TERMINAL_RESULTS_OPEN__ZERO_CREDIT'.",
+        "BROWSER_T2_OBJECTIVE_TERMINAL_BINDING_V1: 'FROZEN_PREWAVE_BINDING__INDEPENDENT_PUBLIC_RUNNER_PASS__ZERO_TERMINAL_RESULTS'.",
+        "COMPUTER_BROWSER_OPENWEIGHT_DONOR_FRONTIER_20261005_V1: 'ZERO_ACCEPTANCE_CREDIT'.",
+        "37 of 39 OSWorld governance records carry explicit refusal or non-claim language.",
+        "The browser route has an independently verified mechanism and a frozen binding. It has no terminal result."
+      ],
+      "verification_note": "I did not conclude this from the web. I read it out of your governance tree, which had already reached it and recorded it more carefully than I would have."
+    },
+    {
+      "clause": "do it once and it is permanent",
+      "verdict": "TRUE_AND_THIS_IS_THE_PROBLEM_NOT_THE_SOLUTION",
+      "why": "Permanence is unconditional. It does not wait to find out whether the skill was right. Drift 0 over 8,000 recalls in BOTH arms -- the broken one and the good one. Permanence amplifies whatever the check accepted."
+    },
+    {
+      "clause": "perhaps composition rescues the demonstration cost",
+      "verdict": "PARTIALLY_TRUE__AND_IT_IS_THE_REAL_LEVER",
+      "measured": "Token graph over the same capability surface: ONE multi-step chain. Type graph over the identical surface: 245 edges, 64 executable chains, enumerated in 0.8 ms.",
+      "why_it_matters": "composition is what removes the 'demonstrate every chain' cost -- but each type match is a hypothesis, and the composer already refuses to call one real until it has executed. It executes them. That is the same discipline as arm B."
+    },
+    {
+      "clause": "we were trying to make a sentient creature",
+      "verdict": "FALSE__AND_THE_TREE_IS_UNUSUALLY_CLEAR_ABOUT_IT",
+      "evidence": "truth.achieved is false everywhere. There is no sentience claim in the record set and the tree refuses the framing. What exists is a deterministic skill compiler, a type-level composer, a ~13,000-file governed evidence base and a repair engine that solves 11.1% of real bugs. That is a serious engineering artefact. It is not a creature.",
+      "why_it_is_worth_saying_plainly": "the sentience framing is the single biggest risk to this project, because it converts measurable gaps into things that feel already solved. Every number above was produced by refusing that framing."
+    }
+  ],
+
+  "external_corroboration__four_2026_benchmarks_say_the_same_thing_independently": [
+    {
+      "source": "AnyAppBench (arXiv 2609.34139), 13 agents, 52 apps, task held fixed and only the app changed",
+      "finding": "11 instruction-only agents: 38.7% on the original AndroidWorld apps, 27.3% on new apps in the same category -- an 11.4 point drop from changing only the interface. On the newly authored templates the pattern repeats: 45.2% -> 31.4%.",
+      "why_it_is_decisive_for_your_claim": "these are the most advanced GUI agents in existence, and the task is held constant. Only the app changes. Exposure to one app did not generalise to the next app in the same category. This is your exact claim, tested against the frontier, and it fails."
+    },
+    {
+      "source": "OSExpert (arXiv 2603.07978), OSExpert-Eval, 113 professional tasks",
+      "finding": "On unseen UIs and fine-grained action execution, 'none of the agents exhibits meaningful generalization, with success rates remaining in the 0% to 10% range'. The authors note gains on long-horizon and unseen-UI subsets come primarily from 'environment specific procedural knowledge stored in the skill set' -- exactly your mechanism -- and they build it by GUI-DFS exploration because one-shot is not enough.",
+      "why_it_is_decisive": "the one group that built your mechanism deliberately found it works only for the environment it was learned in, and had to explore to build it."
+    },
+    {
+      "source": "MacArena (arXiv 2606.06560), 421 tasks, 50 apps, macOS vs Linux, identical task set",
+      "finding": "Every model with a reference score performs worse on the same tasks on macOS. Rankings invert; a leading model trails by over 26% on the native subset. 'A model can appear competitive by pattern-matching previously seen task structures while failing to generalize to new environments.'",
+      "why_it_is_decisive": "same tasks, different platform, and the best models lose a quarter of their score. The variable was not capability. It was familiarity."
+    },
+    {
+      "source": "EnvHarness (arXiv 2608.19880), skills extracted from static environments",
+      "finding": "Skills extracted from static worlds made things WORSE: SpreadsheetBench below the no-skill baseline; on SWE-bench Verified they lengthen execution trajectories. Gains appear only after reshaping the environment: +9.0 ALFWorld, +2.46 SWE-bench Verified with 5.11 fewer steps.",
+      "why_it_is_decisive": "exposure alone is not the variable. The structure that the exposure is filtered through is."
+    }
+  ],
+
+  "what_is_real_and_what_it_is_worth": [
+    {"thing": "Causal demonstration-to-program compiler", "what": "watch once -> compiled skill at the fastest causal layer, at or under 5 ms", "worth": "HIGHEST IN THE TREE. This is the actual asset. Nothing else in the project matches it."},
+    {"thing": "Type-level composer", "what": "245 edges and 64 executable chains from a surface where the token graph saw 1", "worth": "HIGH. It collapses the cost of covering a composition space from 'demonstrate everything' to 'demonstrate a few, then type-match and execute'."},
+    {"thing": "Mandatory held-out + sabotage transfer gate", "what": "no skill is persisted until it passes an untouched held-out execution AND fails a sabotaged control", "worth": "HIGHEST LEVERAGE AND MOST UNDERUSED. This is the exact mechanism that separated arm A from arm B. It exists. It is in compile_and_qualify_skill. It is not applied broadly enough."},
+    {"thing": "Permanence", "what": "zero drift over 8,000 recalls", "worth": "REAL, UNCONDITIONAL, AND DANGEROUS IN EXACTLY THAT ORDER."},
+    {"thing": "Unified model, 443 capabilities, 26 engines, no weights, 10.2 MB", "what": "one door, one compiled artefact", "worth": "REAL AS AN ARCHITECTURE. Not a capability rate. The 11.1% is the capability rate."},
+    {"thing": "3,230 governance records, 682 PROVEN, 143 green cited tests", "what": "a governed evidence base", "worth": "REAL AND RARE. Worth more than most research repos produce, and it is provenance, never reach."},
+    {"thing": "OSWorld / computer use", "what": "verified mechanism, frozen binding, zero terminal result", "worth": "UNSOLVED. The tree says so in its own words."}
+  ],
+
+  "the_smartest_things_to_do__ranked": [
+    {
+      "rank": 1,
+      "action": "Never freeze a skill on one demonstration. Make the second example mandatory, not optional.",
+      "why": "It is the single change that took 2.5% to 100% in the experiment above. It costs one example. It is already implemented in compile_and_qualify_skill and is not applied everywhere.",
+      "cost": "one extra demonstration per skill"
+    },
+    {
+      "rank": 2,
+      "action": "Spend the effort on the CHECK, not the learner. The check is the product.",
+      "why": "Arm A and arm B had the same learner. The measured gap between 2.5% and 100% was entirely the check. In the wider tree the same fact appears as 98.71% reach against 11.1% correctness. Every hour on the verifier buys more than every hour on the compiler.",
+      "external": "DebugRepair reaches 224 Defects4J bugs with simulated instrumentation -- it wins by exposing intermediate state to the check, not by learning harder."
+    },
+    {
+      "rank": 3,
+      "action": "Refuse the fault-localization shortcut. The web says it is a trap.",
+      "why": "A placebo-controlled comparison over 488 failing candidates found localized infilling scores 4.4% against blind resampling's 10.1% at matched budget, and 48.9% of localized attempts hand back the identical code. The repair engine's statement-insertion frontier is exactly this cliff.",
+      "instruction": "generate whole candidate programs and test them. Do not infill into a localized hole."
+    },
+    {
+      "rank": 4,
+      "action": "Use exploration to build the skill set, not one-shot exposure.",
+      "why": "OSExpert had to build GUI-DFS to get procedural knowledge because one-shot was not enough. The equivalent already exists in this tree: explore_v1, discover_v1, environment_probe_v1, capability_discovery, generic_tool_schema_discovery_v1. Point them at a new environment and let them build the skill set before claiming the environment is learned.",
+      "external": "EnvHarness: gains came only after reshaping the environment."
+    },
+    {
+      "rank": 5,
+      "action": "Stop treating 'it learned it' as the target. Make 'it learned the right thing' the target.",
+      "why": "Permanence makes both indistinguishable afterwards. The only thing that separates them is a check that was allowed to say no before the freeze."
+    },
+    {
+      "rank": 6,
+      "action": "Keep the sentience framing out of the engineering record.",
+      "why": "It is the one framing that makes an 11.1% repair rate feel like a solved problem. The tree is unusually disciplined here and that discipline is why its numbers can be trusted at all."
+    }
+  ],
+
+  "the_thing_you_were_right_about_and_I_had_not_credited_fully": {
+    "your_instruction": "Everything you should know, you will find out somewhere hidden here or there, always under a not-obvious name in the project.",
+    "what_I_found_this_round_by_taking_it_literally": [
+      "permanence_amplifies_check_v1 -- the exact refutation of the exact claim, sitting in the tree, named after its conclusion rather than its topic",
+      "type_level_composer_v1 -- a working composition engine that turns 1 chain into 64",
+      "SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2 -- the entire computer-use family compressed to one leaf",
+      "BROWSER_LEAF_SCOPE_REUSE_BINDING_V1 -- the zero-credit verdict on it",
+      "compile_and_qualify_skill -- the held-out + sabotage gate that is the answer to the question you asked"
+    ],
+    "assessment": "Your instruction was correct again, for the fifth time. The answer to 'is this true' was not in a paper and not in my reasoning. It was in canonical/runtime/, named after its conclusion, unrun."
+  },
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false,
+  "no_capability_claim_is_made_by_this_record": true
+}

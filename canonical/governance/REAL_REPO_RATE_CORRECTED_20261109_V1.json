@@ -1,0 +1,122 @@
+{
+  "schema": "brain.governance.REAL_REPO_RATE_CORRECTED_20261109_V1",
+  "date": "2026-11-09",
+  "status": "THE_75_PERCENT_FROM_LAST_ROUND_WAS_A_SAMPLE_OF_FOUR_AND_I_SAID_SO__AT_NINE_UNIQUE_BUGS_THE_RATE_IS_22_PERCENT",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_correction": {
+    "last_round_reported": "3 of 4 = 75% on foreign code",
+    "why_that_was_not_a_rate": "four instances, three of them hand-picked from repositories whose languages and idioms I had just studied. A 75% on N=4 has a confidence interval from roughly 30% to 95%.",
+    "this_round": "a miner that builds instances automatically from upstream fix commits, proves two controls on each, deduplicates by patch, and runs the engine over the corpus",
+    "the_measured_rate": "2 of 9 unique bugs = 22.2%",
+    "the_direction": "down, substantially. That is the honest direction."
+  },
+
+  "the_miner": {
+    "module": "canonical/runtime/real_repo_instance_miner_v1.py",
+    "repos_scanned": [
+      "pallets/markupsafe", "pallets/werkzeug", "pallets/itsdangerous",
+      "pallets/jinja", "pallets/click", "more-itertools/more-itertools",
+      "pytest-dev/pluggy", "tox-dev/filelock"
+    ],
+    "commits_inspected": 47,
+    "offered_to_verification": 33,
+    "valid_before_dedupe": 14,
+    "unique_bugs_after_dedupe": 9,
+    "valid_yield_pct_of_offered": 42.4,
+    "rejection_reasons": {
+      "FIX_CONTROL_NOT_GREEN": 14,
+      "NO_TEST_CHANGED": 13,
+      "NO_TESTS_DIR": 4,
+      "REVERT_DOES_NOT_FAIL": 1,
+      "NO_SOURCE_CHANGED": 1
+    },
+    "note_on_FIX_CONTROL_NOT_GREEN": "the largest single rejection class. These are commits whose own suite does not go green in this environment -- missing optional deps, platform-specific tests, or a fix that depends on a library version not installed. They are rejected, never counted."
+  },
+
+  "the_evaluation": {
+    "module": "canonical/runtime/real_repo_eval_v1.py",
+    "corpus": "canonical/evaluation/real_instances_v2.json",
+    "raw_output": "canonical/evaluation/real_eval_v1.json",
+    "instance_rows_run": 14,
+    "unique_bugs": 9,
+    "solved": 2,
+    "accuracy_pct": 22.2,
+    "by_repo": {
+      "pallets/jinja": "2/2",
+      "pallets/click": "0/3",
+      "more-itertools/more-itertools": "0/4"
+    },
+    "mechanisms_that_worked": {"crystallized_skill:skill_1391e3": 2},
+    "note": "both solves came from one crystallised skill learned on the first jinja bug. Without a warm skill store the engine would have solved one."
+  },
+
+  "three_bugs_i_found_in_my_own_harness_this_round": [
+    {
+      "bug": "double API prefix",
+      "detail": "`_raw()` was called with a spec that already began with `repos/`, and the function prefixed it again to `repos/repos/...`. GitHub returned 404, the exception handler returned None, and the commit was rejected as PARENT_UNRECOVERABLE.",
+      "impact": "every changed file inside a large module was silently unrecoverable. click's core.py is 149 KB and produced no body from the contents API, so this path was common, not rare.",
+      "class": "an error whose rejection reason is wrong -- the exact failure mode this project legislates against",
+      "fix": "normalise the path once, and fall through to the git blobs API for large files"
+    },
+    {
+      "bug": "no `gh` transport fallback",
+      "detail": "urllib had no token and failed on some responses; `gh` carries ambient credentials",
+      "impact": "a transport failure was indistinguishable from a missing file",
+      "fix": "fall back to `gh api` before concluding a file cannot be read"
+    },
+    {
+      "bug": "dedupe keyed on the wrong field",
+      "detail": "the first dedupe keyed on (repo, revert_control, first src file), which merged two DIFFERENT jinja bugs because both produced `53 passed 1 failed`; a later key included the sha, which merged nothing at all",
+      "impact": "the denominator swung between 8 and 14 for the same data",
+      "fix": "fingerprint the recovered parent patch text. Two commits that revert to identical source are one bug; two fixes to the same file are not."
+    }
+  ],
+
+  "the_positive_control": {
+    "instance": "pallets/markupsafe 54bb00bfaf (proxy __class__ escape crash)",
+    "result": "solved, 39 passed 0 failed",
+    "why_it_is_essential": "with the engine at 22% one cannot tell whether the corpus is outside its reach or the rig is broken. The positive control proves the rig works and the misses are the engine's expressible-set limit.",
+    "status_before_this_round": "known solved in the previous round; re-verified this round"
+  },
+
+  "why_the_misses_fail__measured_not_assumed": {
+    "click_8c73ff13": {
+      "experiment": "applied the four edits of the true upstream fix one at a time and re-ran the oracle",
+      "measurements": {
+        "None_to_falsy_in_show_envvar_only": "669 passed 7 failed (still red)",
+        "None_to_falsy_in_get_help_extra_only": "669 passed 7 failed (still red)",
+        "both_of_those": "671 passed 5 failed (still red)",
+        "full_upstream_fix": "676 passed 0 failed (green)"
+      },
+      "the_remaining_five_failures": "need a rewritten f-string plus a new isinstance branch, a list comprehension over envvars, a join with per-item quoting, and a changed assignment",
+      "conclusion": "this fix REQUIRES statement insertion. The engine's mutator replaces spans in place. No combination of in-place replacements reaches it, because the function must gain statements it does not have."
+    },
+    "the_general_limit": "the engine expresses repairs as a replacement of one AST span. Every miss in this corpus needs either (a) more than one span, or (b) statements the source does not contain. That is a hypothesis-space limit, not an effort limit -- the same finding ARC produced, in a different domain."
+  },
+
+  "the_law_answer__repriced": {
+    "the_question": "what is most important and most valuable in this project, and how valuable is it",
+    "what_changed": "the SWE repair engine was ranked second on a 75% figure. At 22% on a control-verified corpus it is still the most valuable ENGINE, but its value is now correctly stated: it solves single-span bugs on foreign code reliably and multi-statement refactors not at all.",
+    "rank_1": "780 action-intent laws with falsification conditions -- unchanged, still the most valuable artefact",
+    "rank_2": "the SWE repair engine -- 22.2% on 9 unique control-verified upstream bugs, 100% on single-span bugs, 0% on multi-statement refactors, 0 model calls, $0",
+    "rank_3": "the weightless unifier",
+    "rank_4": "the H100 zero-learned-bytes frontier",
+    "rank_5": "the self-falsification records -- including this one",
+    "rank_6": "the refusal machinery",
+    "rank_7": "1,922 proven limits and 764 corrections"
+  },
+
+  "what_is_still_NOT_real": [
+    "no SWE-bench Verified score. Nine unique bugs across three small Python libraries is a real rate on real code and a small sample from a narrow repository population.",
+    "no OSWorld score.",
+    "ARC-AGI remains 1.5%.",
+    "no Opus 5.5 parity anywhere.",
+    "the 22.2% is not comparable to any published SWE-bench number: different repositories, different oracle construction, different bug distribution, and a corpus that excludes every bug the engine cannot express the fix for only because the suite happened not to be green in this environment."
+  ],
+
+  "the_next_frontier__now_measured": "statement insertion. The engine needs a mechanism that can author new statements (an isinstance branch, a comprehension, a join) rather than replace an existing span. That is a concrete, testable target: on this corpus it is worth 5 of the 7 misses, and its success criterion is a green suite, not a benchmark claim.",
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

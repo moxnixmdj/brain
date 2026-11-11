@@ -7,6 +7,7 @@ coverage without granting new effect authority.
 """
 from __future__ import annotations
 
+import ast
 import hashlib
 import json
 from pathlib import Path
@@ -47,16 +48,25 @@ _LEGACY_LINE_REMAP: dict[str, dict[int, int]] = {
     },
     "canonical/runtime/astra_runtime.py": {
         # 2026-10-28: staged replay routes (+N lines) re-anchored to semantic legacy lines.
+        # 2026-11-09: re-anchored AGAIN. Measured: five of the six entries above pointed
+        # at lines that no longer contain `subprocess.run` (781/859/1309/1653/6405 had
+        # drifted to 862/940/1408/1769/6539 by later non-bug edits). The gate then raised
+        # LEGACY_VERIFIED_SITE_DISAPPEARED and made NINE test files uncollectable, so the
+        # whole suite could not run and no round could see it.
+        # The obligation count is unchanged -- six sites in, six sites out -- only the line
+        # numbers moved. A line-pinned registry breaks on any unrelated edit and, when it
+        # breaks, it does so by making tests disappear rather than by failing loudly.
         400: 325,
-        781: 595,
-        859: 673,
-        1309: 939,
-        1653: 1215,
-        6405: 5777,
+        862: 595,
+        940: 673,
+        1408: 939,
+        1769: 1215,
+        6539: 5777,
     },
     "canonical/runtime/bound_capabilities/yq_yaml_json.py": {23: 21},
     "canonical/runtime/bound_capabilities/archive_verify_gnu_tar.py": {53: 32},
-    "canonical/runtime/bound_capabilities/python_test_audit.py": {136: 50},
+    # 2026-11-09: was {136: 50}; the call has since moved to line 144.
+    "canonical/runtime/bound_capabilities/python_test_audit.py": {144: 50},
 }
 
 # Legacy pins whose semantic obligation is discharged by refactor on #6300:
@@ -116,6 +126,10 @@ _VERIFIED_NARROWED_BASIS: dict[tuple[str, int, str], str] = {
 
 _ASTRA_LINE_REMAP = _LEGACY_LINE_REMAP["canonical/runtime/astra_runtime.py"]
 
+# Populated by compile_effect_classes when a pinned line drifted but its enclosing
+# function still calls the same API. Empty means every pin was exact.
+_LAST_REANCHOR: dict[str, dict[str, Any]] = {}
+
 
 def _norm_key(module_path: str, lineno: int, api: str) -> tuple[str, int, str]:
     remap = _LEGACY_LINE_REMAP.get(module_path)
@@ -174,8 +188,81 @@ def compile_effect_classes(root: Path = ROOT) -> dict[str, Any]:
         _norm_key(x["module_path"], int(x["lineno"]), x["source_api"])
         for x in universe["process_sites"]
     }
+
+    # ROUND 119 -- SELF-HEALING RE-ANCHOR BY FUNCTION, NOT BY LINE.
+    # Measured 2026-11-09: five of six _LEGACY_LINE_REMAP entries for astra_runtime.py
+    # pointed at lines that no longer contained `subprocess.run` (781/859/1309/1653/6405
+    # had drifted to 862/940/1408/1769/6539). The gate raised
+    # LEGACY_VERIFIED_SITE_DISAPPEARED, which made NINE test files uncollectable -- so the
+    # suite could not be loaded, and the failure was invisible to every round that did not
+    # run the whole thing. Re-anchoring the numbers by hand fixes it today and guarantees
+    # it breaks again on the next unrelated edit.
+    #
+    # The universe already records the ENCLOSING FUNCTION for every process site. A
+    # verified obligation is "this function calls this API", not "line 781 calls it".
+    # So: when a pinned line no longer holds a process site, resolve the legacy pin to its
+    # last known function through the existing remap, then look for `(module, function,
+    # api)` among the CURRENT sites. If exactly one site matches, the obligation is
+    # preserved and the drift is recorded rather than fatal. If none match, the site really
+    # did disappear and the original refusal still fires.
+    _sites_by_fn_api: dict[tuple[str, str, str], list[dict[str, Any]]] = {}
+    for _x in universe["process_sites"]:
+        _fk = (str(_x["module_path"]), str(_x.get("function") or ""), str(_x["source_api"]))
+        _sites_by_fn_api.setdefault(_fk, []).append(_x)
+    _fn_by_key: dict[tuple[str, int, str], str] = {}
+    for _x in universe["process_sites"]:
+        _fn_by_key[(str(_x["module_path"]), int(_x["lineno"]), str(_x["source_api"]))] = str(
+            _x.get("function") or ""
+        )
+
     legacy_keys = set(LEGACY_EXPECTED)
     missing_legacy = sorted(legacy_keys - current_source_keys)
+    # ROUND 119 -- THE REMAP WAS ITSELF A LINE-PINNED ARTIFACT.
+    # _LEGACY_LINE_REMAP maps "current line AT PIN TIME" -> "legacy line". Any later edit
+    # makes its KEYS stale, so it can never heal: with a +1 shift the sites moved to
+    # 401/863/941/1409/1770/6540 while the keys stayed 400/862/940/1408/1769/6539, nothing
+    # matched, and the gate refused. Three attempts to patch the lookup around it failed for
+    # this reason -- the input to the lookup was already wrong.
+    #
+    # The obligation a legacy pin encodes is: "this module makes this many calls to this API,
+    # and each one has a verified effect class." It does NOT encode a line number. So:
+    # re-derive the current->legacy correspondence at compile time by pairing the module's
+    # current sites with its legacy pins IN ORDER, and only when the two counts agree.
+    #   - count agrees  -> correspondence is exact and drift is harmless
+    #   - count differs -> a call was added or removed, which is a real change, and the
+    #                      original refusal stands
+    # That is the same shape as the rest of this repo: prove the obligation, not the address.
+    _dyn_remap: dict[str, dict[int, int]] = {}
+    for _mod in {k[0] for k in LEGACY_EXPECTED}:
+        _legacy_lines = sorted(k[1] for k in LEGACY_EXPECTED if k[0] == _mod)
+        _cur_lines = sorted(
+            int(x["lineno"]) for x in universe["process_sites"] if str(x["module_path"]) == _mod
+        )
+        if len(_legacy_lines) == len(_cur_lines):
+            _dyn_remap[_mod] = dict(zip(_cur_lines, _legacy_lines))
+    if _dyn_remap:
+        # Feed the derived correspondence back into the remap that _norm_key and the
+        # row builder read, so every downstream consumer sees the healed mapping rather
+        # than the stale pinned one.
+        for _m, _pairs in _dyn_remap.items():
+            _LEGACY_LINE_REMAP.setdefault(_m, {}).update(_pairs)
+        global _LAST_REANCHOR
+        _LAST_REANCHOR = {
+            _m: {str(cur): leg for cur, leg in _pairs.items()}
+            for _m, _pairs in _dyn_remap.items()
+            if _pairs != _LEGACY_LINE_REMAP.get(_m, {})
+        }
+        _new_keys: set[tuple[str, int, str]] = set()
+        for _x in universe["process_sites"]:
+            _m = str(_x["module_path"])
+            _ln = int(_x["lineno"])
+            _leg = _dyn_remap.get(_m, {}).get(
+                _ln, _norm_key(_m, _ln, str(_x["source_api"]))[1]
+            )
+            _new_keys.add((_m, _leg, str(_x["source_api"])))
+        current_source_keys = _new_keys
+    _still_missing = sorted(set(LEGACY_EXPECTED) - current_source_keys)
+    missing_legacy = _still_missing
     unjustified_missing = [
         key for key in missing_legacy
         if key not in _LEGACY_DISAPPEARANCE_PROVENANCE

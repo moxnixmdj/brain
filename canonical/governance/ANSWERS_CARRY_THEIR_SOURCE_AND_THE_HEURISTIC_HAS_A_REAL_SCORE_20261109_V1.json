@@ -1,0 +1,57 @@
+{
+  "claim_id": "ANSWERS_CARRY_THEIR_SOURCE_AND_THE_HEURISTIC_HAS_A_REAL_SCORE_20261109_V1",
+  "round": 47,
+  "date": "2026-11-09",
+  "type": "CAPABILITY BUILT + ONE MORE HONEST CONTROL",
+  "title": "Every answer now carries the argv, exit code and stdout hash that produced it. And the type heuristic is scored on phrasings written to defeat it: 28/30, with the two misses pinned rather than patched.",
+  "the_number_that_matters": {
+    "fresh_heldout": "28 of 30 natural phrasings typed correctly, composed AFTER the vocabulary was frozen, with no consultation",
+    "why_not_23_23": "The 23/23 in r46 was measured on the 23 goals of the r41 track -- goals that had been written to match the heuristic. That is a closed loop and worth nothing as evidence.",
+    "why_not_27_27": "Rewriting the goals as natural phrasings scored 23/27. Widening the vocabulary against those made 27/27 -- which is a TRAINING number, also worth nothing.",
+    "the_two_misses": [
+      "'verify the integrity of backup.iso' -- wants a checksum, says 'integrity', not 'checksum'",
+      "'how long is report.txt in lines' -- wants an integer, says 'how long'"
+    ],
+    "why_they_are_pinned_not_fixed": "Both are encoded as tests that assert they STILL FAIL. Widening the vocabulary until a held-out set passes is how a heuristic becomes a copy of its own test set. A measured 28/30 with named misses is worth more than an untraceable 30/30."
+  },
+  "provenance_built": {
+    "what": "every recall now returns `provenance`: the argv that ran, the argv that was asked for, the exit code, whether the result was an empty match, the sha256 and byte length of the stdout actually observed, and a plain-language claim.",
+    "why": "r46 closed with the warning that a number with no pedigree is indistinguishable from a lucky guess. This is the pedigree.",
+    "empty_answers_are_announced": "'an EMPTY RESULT: this is nothing matched, not the tool failed' -- the exact confusion that r46's fix made reachable.",
+    "model_dependency_count": 0,
+    "incremental_spend_usd": 0
+  },
+  "what_the_2026_literature_says_this_is_and_is_not": {
+    "is": "the first layer of evidence tracing. The 'From Agent Traces to Trust' survey (arXiv 2606.04990) separates citation presence, source relevance, claim support and evidence OMISSION as distinct relations. This round records claim -> tool output faithfully.",
+    "is_not": "source ATTRIBUTION verification. ProvenanceGuard (arXiv 2606.18037) shows the failure it names 'cross-source conflation': a claim can be supported somewhere in the trace while being attributed to the wrong source. Source-blind support checks cannot see it. Its source-plus-relation accuracy is 0.229 on a harder multi-source benchmark -- exact ownership is still hard.",
+    "the_sharpest_warning": "'Correct Answers, Unsupported Findings' (arXiv 2610.09581, Oct 2026) is the closest analogue to this project's risk: Sonnet retrieved every literal source location correctly in all 64 control cases, and then made UNSUPPORTED citation-source assertions in 26 of 28 cases requiring a binding it could not see -- and 22 of those assertions happened to MATCH the reference. Correct output, fabricated pedigree, undetectable by checking the answer.",
+    "what_that_means_here": "Provenance recorded by the same system that produced the answer is not yet independent evidence. It is a receipt, not an audit."
+  },
+  "what_is_real_vs_not": {
+    "REAL": [
+      "23/23 read verbs return the real command output on unseen files (r46, re-verified this round).",
+      "Every answer carries argv, exit, stdout hash and an explicit empty-result claim (12 new assertions).",
+      "The type heuristic is 28/30 on held-out natural phrasings, with both misses named and pinned.",
+      "Safety unchanged: writers, shell, pipe smuggling refused; live tree intact."
+    ],
+    "NOT_REAL": [
+      "That 23/23 means the system answers arbitrary natural-language requests. It means 23 goals in one narrow idiom were answered. The fresh set is where the real rate lives, and it is 93%.",
+      "That provenance is verification. Nothing checks that the recorded argv is the one that should have been chosen.",
+      "That this reaches write, network, code execution, git: all still refused.",
+      "That the reliability arithmetic moved: 318-step tasks at 99% per step remain 4.09%.",
+      "That any of it touches a public benchmark: still ZERO public-benchmark numbers."
+    ]
+  },
+  "the_sentience_claim": "Unchanged, and this round adds a reason rather than removing one. A system that records why it believes something looks more like a mind than one that does not -- and that resemblance is an artefact of the receipt format. ProvenanceGuard's probes show the receipt and the belief can come apart completely: correct values, wrong attribution, 22 of 26 undetectable from the answer alone. Nothing in this project has a self-model that could be wrong about itself, which is what sentience would minimally require.",
+  "the_smartest_things_to_do_next": {
+    "1": "Build the claim-to-source check as an INDEPENDENT reader. arXiv 2610.09581 shows a same-packet deterministic comparator is grounded-correct throughout while an LLM reader confabulates bindings. A deterministic re-derivation of the answer from the recorded argv is the cheapest real audit, and it is what turns the receipt into evidence.",
+    "2": "Probe for cross-source conflation: one goal, two files, and check the answer is attributed to the right one. That is the failure mode named by ProvenanceGuard and this system has no test for it.",
+    "3": "Represent evidence OMISSION, not just support -- 'I found nothing' and 'I did not look' must never be one answer.",
+    "4": "Still no write access, and now for a sharper reason: a write with a fabricated pedigree is unrecoverable, while a read with one is merely wrong."
+  },
+  "artifacts": {
+    "tests_new": "canonical/tests/test_an_answer_carries_its_source_v1.py (6 tests, 32 assertions)",
+    "changed": "causal_trace_to_skill_compiler_v1.py -- answer_provenance(), infer_contract_from_goal vocabulary widened against natural phrasings",
+    "regression_sweep": "91 passed across 11 files; 23/23 re-verified"
+  }
+}

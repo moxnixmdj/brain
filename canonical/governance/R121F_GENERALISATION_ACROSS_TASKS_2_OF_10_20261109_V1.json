@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_R121F_GENERALISATION_ACROSS_TASKS_2_OF_10_V1",
+  "date": "2026-11-09",
+  "design": "one generic policy across 10 unseen tasks. It starts the episode by whichever overlay exists, reads the goal sentence, and clicks the first visible element whose accessible text exactly equals a goal token, then presses #subbtn if present. No per-task code.",
+  "results": [
+    {"task": "click-button",  "goal": "Click on the \"Okay\" button.", "picked": "Okay", "outcome": "SUCCESS", "reward": 0.9295},
+    {"task": "click-dialog",  "goal": "Close the dialog box by clicking the \"x\".", "picked": "Close", "outcome": "SUCCESS", "reward": 0.9293},
+    {"task": "click-menu",    "goal": "Select Emlynn>Correy>Anetta", "picked": "Emlynn", "outcome": "ended wrong (reward -1)", "why": "needs a 3-level nested navigation, policy clicked only level 1"},
+    {"task": "choose-list",   "goal": "Select Grazia from the list and click Submit.", "picked": "Submit", "outcome": "ended wrong (reward -1)", "why": "policy submitted without selecting; the goal token 'Grazi' is in a list, not a button"},
+    {"task": "click-option",  "goal": "Select ImQgU and click Submit.", "picked": "Submit", "outcome": "FAILED", "why": "generic matcher took Submit instead of the radio; the bespoke policy earlier got 20/20 on this same task"},
+    {"task": "click-checkboxes", "goal": "Select 3 items and click Submit", "picked": "Submit", "outcome": "FAILED", "why": "requires multi-select of 3 named checkboxes"},
+    {"task": "enter-text",    "goal": "Enter \"Marcella\" into the text field", "picked": "Submit", "outcome": "FAILED", "why": "requires typing, which this policy cannot do"},
+    {"task": "click-link",    "goal": "Click on the link \"ornare.\"", "picked": null, "outcome": "FAILED", "why": "no button elements; targets are anchor text"},
+    {"task": "click-color",   "goal": "Click on the olive colored box.", "picked": null, "outcome": "FAILED", "why": "requires visual colour identification, not text matching"},
+    {"task": "click-test",    "goal": "Click the button.", "picked": null, "outcome": "FAILED", "why": "goal names no token to match"}
+  ],
+  "score": "2/10 tasks fully successful",
+  "what_this_shows": [
+    "live-geometry addressing is necessary but nowhere near sufficient",
+    "the binding constraint is the VERB SET: this policy has exactly one verb (click a text-matched element). Tasks needing type, multi-select, nested navigation, list selection, colour matching, or unlabelled targets all fail",
+    "a bespoke policy can solve a task that the generic policy fails (click-option: 20/20 bespoke vs FAILED generic), which is the definition of not generalising"
+  ],
+  "relationship_to_previous_numbers": {
+    "26/130 = 20.0%": "measured earlier under a different policy and a different (hard-coded) addressing scheme",
+    "2/10 = 20%": "this round, generic policy, live geometry",
+    "20/20 and 16/16": "two tasks, bespoke policies",
+    "honest_conclusion": "the project sits near 20% on unseen tasks whether or not geometry is read live. Fixing addressing removes a self-inflicted error but does not move the capability ceiling, because the ceiling is the verb set, not the coordinates."
+  },
+  "why_this_is_the_important_number": "it separates two failures the project had conflated: an ADDRESSING failure (self-inflicted, fixable) and a CAPABILITY failure (verb coverage, not fixable by remembering to re-read the DOM). The earlier 20% was mostly capability; this round removed the addressing component and the number barely moved."
+}

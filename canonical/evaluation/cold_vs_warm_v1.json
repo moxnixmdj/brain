@@ -1,0 +1,142 @@
+[
+ {
+  "id": "jinja_66587ce9",
+  "repo": "pallets/jinja",
+  "subject": "Fix bug where set would sometimes fail within if",
+  "cold": {
+   "solved": true,
+   "cands": 2,
+   "mech": [
+    "surgical_ast:add_to_sub"
+   ],
+   "status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRE"
+  },
+  "warm": {
+   "solved": true,
+   "cands": 1,
+   "mech": [
+    "crystallized_skill:skill_1391e3"
+   ],
+   "status": "PASS__CLOSED_LOOP_MULTISTEP_REPO_REPAIRE"
+  }
+ },
+ {
+  "id": "click_c53d3732",
+  "repo": "pallets/click",
+  "subject": "Fix `show_envvar` output for a sequence or an empt",
+  "cold": {
+   "solved": false,
+   "cands": 8,
+   "mech": [],
+   "status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHO"
+  },
+  "warm": {
+   "solved": false,
+   "cands": 8,
+   "mech": [],
+   "status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHO"
+  }
+ },
+ {
+  "id": "click_f67c2bb6",
+  "repo": "pallets/click",
+  "subject": "Fix short help abbreviation",
+  "cold": {
+   "solved": false,
+   "cands": 20,
+   "mech": [],
+   "status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHO"
+  },
+  "warm": {
+   "solved": false,
+   "cands": 20,
+   "mech": [],
+   "status": "FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHO"
+  }
+ },
+ {
+  "id": "more-itertools_c6292147",
+  "repo": "more-itertools/more-itertools",
+  "subject": "Fix numeric_range equality and hashing above sys.m",
+  "cold": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  },
+  "warm": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  }
+ },
+ {
+  "id": "more-itertools_fbd55137",
+  "repo": "more-itertools/more-itertools",
+  "subject": "fix: validate the chunk size in chunked_even",
+  "cold": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  },
+  "warm": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  }
+ },
+ {
+  "id": "more-itertools_e6ce1b0f",
+  "repo": "more-itertools/more-itertools",
+  "subject": "Fix peekable slice with negative step and omitted ",
+  "cold": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  },
+  "warm": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  }
+ },
+ {
+  "id": "more-itertools_67fcf640",
+  "repo": "more-itertools/more-itertools",
+  "subject": "fix: honour a falsey validator in bucket (#1308)",
+  "cold": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  },
+  "warm": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  }
+ },
+ {
+  "id": "more-itertools_1ea82a71",
+  "repo": "more-itertools/more-itertools",
+  "subject": "Merge pull request #1305 from 00200200/fix/ichunke",
+  "cold": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  },
+  "warm": {
+   "solved": false,
+   "cands": null,
+   "mech": [],
+   "status": "FAIL_CLOSED__TEST_TRACE_TIMEOUT"
+  }
+ }
+]

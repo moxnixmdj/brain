@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_R141_V1",
+  "date": "2026-11-09",
+  "round": "r141",
+  "change": "READ_AND_COMPUTE verb: an evaluator that reads the DISPLAY and answers it. Three shapes decided by what is on the screen -- an equation in #math-problem (simple-arithmetic, simple-algebra), a countable block display in #visual-1/#visual-2 (visual-addition), otherwise no evaluator.",
+  "why_this_is_a_general_verb_and_not_three_hacks": "Reading a quantity off a rendered display and putting it in a field is what a spreadsheet, a dashboard, a checkout page and a chart all ask for. The three MiniWob tasks differ only in how they RENDER the quantity -- text versus blocks -- and that difference is handled by reading the DOM, not by a task name.",
+  "measured": {
+    "r140_repeat5_reach": "81/190 = 0.4263  CI 0.3581-0.4974",
+    "r141_repeat5_reach": "95/190 = 0.5000  CI 0.4296-0.5704",
+    "delta": "+14 episodes / +7.4 points",
+    "attribution": "simple-arithmetic 0/5 -> 5/5, simple-algebra 0/5 -> 5/5, visual-addition 0/5 -> 5/5 = +15 episodes. Net +14 because use-autocomplete-nodelay slipped 5/5 -> 4/5 and drag-cube 3/5 -> 4/5 (one up, one down).",
+    "same_sample": "/tmp/r130_sample.json, seed 20261109, 40 tasks, 38 valid after the null-actuator gate",
+    "reps": 5
+  },
+  "evaluator_coverage": {
+    "tested": ["3 + 4 = ", "8 - 2 = ", "7 x 6 = ", "9 x 9 = ", "x * 3 = 12", "x + 5 = 9", "2 x + 1 = 7", "9 + 9 =", "5 - 3 ="],
+    "correct": 8,
+    "the_one_that_fails": "'2 x + 1 = 7' (a leading coefficient). Added because it seemed plausible; then the task source was read and simple-algebra only ever emits 'x OP d = n' and 'd OP x = n'. The failing form does not occur, so it is documented rather than fixed."
+  },
+  "the_honesty_note": "The gain is measured against r140 on the identical sample with the identical gate. It is not measured against any external baseline and the 50% figure does not transfer to GDPval-AA, OSWorld or any real application. MiniWob++ pages are 160x160 with a fixed grammar; what transfers is the VERB (read a display, compute, write the answer), not the score.",
+  "remaining_zero_rate_tasks": {
+    "REFUSED_no_procedure_8": ["bisect-angle", "click-dialog", "count-sides", "drag-items-grid", "email-inbox-forward-nl", "multi-orderings", "resize-textarea", "terminal"],
+    "wrong_answer": ["circle-center", "read-table", "text-transform", "use-autocomplete", "click-color", "hot-cold", "form-sequence-3"],
+    "no_submit_dead_end": ["click-collapsible-2", "social-media", "click-menu"],
+    "note": "the three 'no_submit_dead_end' tasks are pages that grade on an event and have no Submit control. focus-text was one of these and now passes 5/5 via self-grading; these three still do not, so either their trigger event is not being fired or their verb is wrong. That is the next measured cluster."
+  }
+}

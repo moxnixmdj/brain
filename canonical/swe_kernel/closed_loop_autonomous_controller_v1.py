@@ -27,13 +27,15 @@ from __future__ import annotations
 
 import json
 import pathlib
+import queue
 import re
+import time
 import shutil
 import tempfile
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from time import perf_counter_ns
-from typing import Any, Mapping
+from typing import Any, Callable, Mapping
 from urllib.parse import parse_qs
 
 from canonical.runtime import computer_execution_boundary_v1 as computer_boundary
@@ -389,6 +391,20 @@ def _qualify_cli_measurement_skill(
             goal_file_tok = tok
             break
 
+    # A SET-PRINTING program needs a COUNT postcondition, not a stdout comparison.
+    # Measured 2026-11-09: after the carrier routing landed, crystallisation got past
+    # the confinement refusal and failed with
+    #   POSTCONDITION_STDOUT_MISMATCH:'row 0\nrow 1\nrow 10...'
+    # because `sort -u` prints the distinct set and the postcondition compared that
+    # text to the number 11. The measurement is "how many", so the contract has to be
+    # about the number -- a line count of the program's own output.
+    _set_printing = {
+        "uniquelines", "lineswith",
+    }
+    count_postcondition = (
+        {"kind": "stdout_line_count"} if kind in _set_printing else {"kind": "stdout_integer"}
+    )
+
     if hit.get("stages") == 2:
         first, second = argv
         argv1 = [first[0]] + [goal_file_tok if a == "probe.txt" else a for a in first[1:]]
@@ -408,11 +424,19 @@ def _qualify_cli_measurement_skill(
         return compile_and_qualify_skill(
             goal=goal,
             trace=trace,
-            postcondition={"kind": "stdout_integer"},
+            postcondition=count_postcondition,
             heldout_goal=held_goal,
             heldout_cwd=held_dir,
-            heldout_postcondition={"kind": "stdout_equals", "expected": "11"},
-            sabotaged_postcondition={"kind": "stdout_equals", "expected": "999999"},
+            # The held-out expectation has to be the same SHAPE as the real one, or the
+            # gate rejects a correct skill. Measured 2026-11-09: with a set-printing
+            # program this said stdout_equals "11" against sort -u's own output and
+            # produced POSTCONDITION_STDOUT_MISMATCH on nine distinct rows.
+            heldout_postcondition=(count_postcondition | {"equals": 11}
+                                   if count_postcondition["kind"] == "stdout_line_count"
+                                   else {"kind": "stdout_equals", "expected": "11"}),
+            sabotaged_postcondition=({"kind": "stdout_line_count", "equals": 999999}
+                                     if count_postcondition["kind"] == "stdout_line_count"
+                                     else {"kind": "stdout_equals", "expected": "999999"}),
             source_channel="tier2_cli_pipeline_discovery",
             db_path=db_path,
         )
@@ -454,22 +478,95 @@ def solve_or_learn(
             confinement_admitted=confinement_admitted,
         )
         if learn and can_read_memory() and isinstance(res, dict):
-            try:
-                from canonical.swe_kernel.sentient_cognitive_core_v1 import shared_cognitive_core
+            # THE ANSWER IS ALREADY COMPUTED. This is bookkeeping: a wake episode drives
+            # `record_transition`, which every second call runs a full DreamCoder/Stitch
+            # `sleep_abstract` concept-mining pass over the policy organs.
+            #
+            # Measured 2026-11-09: that pass costs 2.4-4.0 s, runs 2x per call, and admitted
+            # 0 concepts in 6 consecutive passes -- while sitting INSIDE the caller's
+            # latency. A query answered in 96 ms became a 7.7 s call because of it. The
+            # learning is not abandoned; it is performed after the answer is returned, so
+            # the caller waits for the answer and not for the maintenance.
+            g_txt = request if isinstance(request, str) else str(request.get("goal") or "")
+            t_id = "autonomous-solve" if isinstance(request, str) else str(request.get("task_id") or "autonomous-solve")
+            _elapsed_ms = max(0.05, (perf_counter_ns() - t0_wrap) / 1e6)
+            _outcome = bool(res.get("pass") is True)
+            _route = str(res.get("tier_used") or res.get("status") or "solve_or_learn")
 
-                core = shared_cognitive_core(None)
-                g_txt = request if isinstance(request, str) else str(request.get("goal") or "")
-                t_id = "autonomous-solve" if isinstance(request, str) else str(request.get("task_id") or "autonomous-solve")
-                core.record_wake_episode(
-                    task_id=t_id,
-                    goal=g_txt,
-                    outcome_pass=bool(res.get("pass") is True),
-                    route_id=str(res.get("tier_used") or res.get("status") or "solve_or_learn"),
-                    elapsed_ms=max(0.05, (perf_counter_ns() - t0_wrap) / 1e6),
-                )
-            except Exception:
-                pass
+            def _record(_tid=t_id, _goal=g_txt, _ok=_outcome, _rid=_route, _ms=_elapsed_ms) -> None:
+                try:
+                    from canonical.swe_kernel.sentient_cognitive_core_v1 import shared_cognitive_core
+
+                    shared_cognitive_core(None).record_wake_episode(
+                        task_id=_tid, goal=_goal, outcome_pass=_ok,
+                        route_id=_rid, elapsed_ms=_ms)
+                except Exception:
+                    pass
+
+            _deferred = defer_learning(_record)
+            res["learning_deferred"] = _deferred
         return res
+
+
+# ---------------------------------------------------------------------------- defer --
+_DEFER_LOCK = threading.Lock()
+_DEFER_QUEUE: "queue.Queue[Callable[[], None] | None]" = queue.Queue(maxsize=256)
+_DEFER_THREAD: threading.Thread | None = None
+
+
+def _defer_worker() -> None:
+    while True:
+        fn = _DEFER_QUEUE.get()
+        if fn is None:
+            _DEFER_QUEUE.task_done()
+            return
+        try:
+            fn()
+        except Exception:  # noqa: BLE001 - a lost bookkeeping episode is not a lost answer
+            pass
+        finally:
+            _DEFER_QUEUE.task_done()
+
+
+def defer_learning(fn: Callable[[], None]) -> str:
+    """Run `fn` after the answer is returned. Returns how it was scheduled.
+
+    Ordering is preserved (FIFO, one worker), so the learning stream sees episodes in
+    exactly the order the calls happened. The gate is deliberate: a process that is
+    about to exit must not silently drop an episode, so `drain_deferred_learning()` is
+    exported and the controller's callers/tests can use it. `sync` is returned when
+    spawning is not possible, in which case the work runs inline exactly as before.
+    """
+    global _DEFER_THREAD
+    try:
+        with _DEFER_LOCK:
+            if _DEFER_THREAD is None or not _DEFER_THREAD.is_alive():
+                _DEFER_THREAD = threading.Thread(target=_defer_worker,
+                                                 name="brain-deferred-learning",
+                                                 daemon=True)
+                _DEFER_THREAD.start()
+        _DEFER_QUEUE.put_nowait(fn)
+        return "background"
+    except Exception:
+        fn()
+        return "sync"
+
+
+def drain_deferred_learning(timeout: float = 120.0) -> bool:
+    """Wait for queued learning to finish. Returns True when the queue is empty."""
+    deadline = time.monotonic() + float(timeout)
+    with _DEFER_LOCK:
+        thread = _DEFER_THREAD
+    if thread is None:
+        return True
+    try:
+        while thread.is_alive() and _DEFER_QUEUE.unfinished_tasks:
+            if time.monotonic() > deadline:
+                return False
+            time.sleep(0.01)
+    except Exception:
+        return False
+    return True
 
 
 def _solve_or_learn_impl(
@@ -586,7 +683,21 @@ def _solve_or_learn_impl(
                           or any(ext in goal.lower() for ext in (".tar.gz", ".tar.bz2", ".tar.xz")))
     except Exception:
         computer_shape = True  # a failed classification cannot authorize recall
-    recalled = None if (not learn or computer_shape) else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db)
+    # Round 31: this used to read `None if (not learn or computer_shape) else recall...`,
+    # which meant a learned skill could NEVER answer a "computer shape" goal -- including
+    # the exact goal it was learned from. The skip was written when recall executed
+    # unconfined steps with the caller's authority. Since the carrier landed, a cli_exec
+    # skill executes UNDER it, so the correct filter is "is this skill carried", asked of
+    # the instantiated argv, not "does this goal look like a computer task".
+    #
+    # Measured 2026-11-09: demonstrate once (8 unique lines in data.txt), then ask a new
+    # file -> `from_memory` was False and the door paid 490 ms to re-derive the same
+    # program. With the filter: 101 ms, 13 lines, hit_count incremented, still confined.
+    recalled = (
+        None if not learn
+        else recall_and_execute_workflow(goal, cwd=work_cwd, db_path=skill_db,
+                                         require_carried=bool(computer_shape))
+    )
     if recalled is not None and recalled.get("status") == computer_boundary.STATUS:
         out = dict(recalled)
         out.update(controller_schema=SCHEMA, task_id=task_id,
@@ -596,7 +707,15 @@ def _solve_or_learn_impl(
     if recalled is not None and recalled.get("pass") is True:
         receipts = list(recalled.get("step_receipts") or [])
         last_step = receipts[-1] if receipts else {}
-        ans = last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows")
+        # Prefer the value the skill's postcondition says IS the answer. Raw stdout is
+        # only a fallback: a set-printing program prints its set, and handing that back
+        # as the answer to "how many" is the shape error this tier exists to avoid.
+        ans = recalled.get("answer")
+        if ans is None:
+            ans = last_step.get("stdout") or last_step.get("response_preview") or last_step.get("rows")
+        _carried_flags = [r.get("confined") for r in receipts if r.get("layer") == "cli_exec"]
+        _untouched_flags = [r.get("live_workspace_untouched") for r in receipts
+                            if r.get("layer") == "cli_exec"]
         return {
             "schema": SCHEMA,
             "task_id": task_id,
@@ -604,8 +723,15 @@ def _solve_or_learn_impl(
             "status": "PASS__TIER0_COMPILED_SKILL_RECALL",
             "tier_used": "tier0_compiled_skill_recall",
             "from_memory": True,
+            "learned_this_turn": False,
             "skill_id": recalled.get("skill_id"),
             "fastest_layer": recalled.get("dominant_layer"),
+            # Reported only when every carried step actually reported it. A recalled
+            # skill that ran no cli_exec step makes no confinement claim at all.
+            "confined": bool(_carried_flags) and all(f is True for f in _carried_flags),
+            "live_workspace_untouched": (bool(_untouched_flags)
+                                         and all(f is True for f in _untouched_flags)),
+            "carried_only": recalled.get("carried_only"),
             "answer": ans,
             "step_receipts": receipts,
             "qualification_receipt": qualification_receipt,
@@ -725,7 +851,30 @@ def _solve_or_learn_impl(
         and any(w in goal.lower() for w in ("fix", "repair", "failing tests", "make all tests pass"))
         and any(work_cwd.rglob("test_*.py"))
     )
-    if ((_is_honest_contract_refusal(front_res) and not is_repo_scoped_repair)
+    # `computer_boundary.FAILURE_CLASS` is in `_HONEST_REFUSAL_CLASSES`, which was right
+    # when no admitted confinement existed: "requires an admitted boundary" was then a
+    # true, final answer. One exists now (Tier 1B, round 28), so for a counting question
+    # about a file that boundary refusal is STALE -- it means "this route cannot do it",
+    # not "it cannot be done".
+    #
+    # Measured 2026-11-09: after learning "unique lines" from ONE demonstration, the same
+    # shape transferred (13, 3) but `how many words in logs.txt` -- which the bridge
+    # answers in 100 ms, confined, verified -- was refused here, before Tier 1B ran. The
+    # skill was fine; the refusal in front of it was out of date. This exception is
+    # narrow on purpose: it applies only when the bridge can actually serve this exact
+    # goal on this exact file. Every other boundary refusal stays final.
+    _servable_by_carrier_bridge = False
+    if str(front_res.get("failure_class") or "") == computer_boundary.FAILURE_CLASS:
+        try:
+            from canonical.runtime import computer_env_v1 as _cenv
+
+            if _cenv.query_kind(goal) is not None and _extract_existing_file(goal, work_cwd) is not None:
+                _servable_by_carrier_bridge = True
+        except Exception:  # noqa: BLE001 - an unaskable bridge is not a servable goal
+            _servable_by_carrier_bridge = False
+
+    if ((_is_honest_contract_refusal(front_res) and not is_repo_scoped_repair
+             and not _servable_by_carrier_bridge)
             or front_res.get("side_effects_may_exist") is True):
         out = dict(front_res)
         out["controller_schema"] = SCHEMA
@@ -812,14 +961,122 @@ def _solve_or_learn_impl(
             except Exception:
                 pass
 
+    # ------------------------------------------------------------------
+    # TIER 1B: a counting question about a file, answered UNDER CONFINEMENT
+    # ------------------------------------------------------------------
+    # Measured 2026-11-09: "how many unique lines in data.txt" has a correct engine
+    # (computer_env_v1.answer_query -> 8) that runs host programs with the caller's
+    # authority, and a composer that routed it to python.source.definition_count.v1 -- a
+    # Python symbol counter -- which the chain admission gate (round 27) now refuses. So
+    # the question was neither answered nor answered wrongly; it was refused.
+    #
+    # The carrier exists and works (round 28). This asks it the question directly, in the
+    # only single-program form that needs no pipe, and reads the count out of that
+    # program's stdout in-process. One read-only program, one admitted confinement, no
+    # shell, no pipeline, nothing written.
+    try:
+        from canonical.runtime import confined_query_bridge_v1 as _qbridge
+        from canonical.runtime import computer_env_v1 as _cenv
+
+        _qkind = _cenv.query_kind(goal)
+        _qfile = _extract_existing_file(goal, work_cwd) if _qkind is not None else None
+        if _qkind is not None and _qfile is not None:
+            _qres = _qbridge.answer_confined(goal, _qfile, timeout=int(min(20, 20)))
+            if _qres.get("pass") is True:
+                # ANSWER, THEN LEARN. The demonstration that just succeeded is the
+                # demonstration; refusing to keep it would make every repeat pay the
+                # full carrier price again (measured: 10,454 ms on the second question).
+                # Crystallisation goes through the same compile_and_qualify_skill gate
+                # as everything else, with its own held-out twin and sabotage control,
+                # so a skill is only kept if it re-proves on data it never saw.
+                _crystallised = None
+                try:
+                    _crystallised = _qualify_cli_measurement_skill(
+                        goal=goal, input_file=_qfile,
+                        measured_res={"kind": _qres.get("kind"),
+                                      "survivors": [{"argv": list(_qres.get("argv") or []),
+                                                     "program": (_qres.get("argv") or [""])[0],
+                                                     "stages": 1}]},
+                        cwd=work_cwd, db_path=skill_db)
+                except Exception:  # noqa: BLE001 - a failed crystallisation is data
+                    _crystallised = None
+                return {"schema": SCHEMA, "task_id": task_id, "pass": True,
+                        "status": _qres.get("status"),
+                        "tier_used": "tier1_confined_query_bridge",
+                        "from_memory": False,
+                        "learned_this_turn": bool(_crystallised and _crystallised.get("pass")),
+                        "skill_crystallized": bool(_crystallised and _crystallised.get("pass")),
+                        "qualification_receipt": _crystallised,
+                        "answer": _qres.get("answer"), "query_kind": _qres.get("kind"),
+                        "confined": _qres.get("confined"),
+                        "live_workspace_untouched": _qres.get("live_workspace_untouched"),
+                        "carried": _qres,
+                        "semantic_acceptance_complete": True,
+                        "executed": True, "side_effects_may_exist": False,
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
+    except Exception:  # noqa: BLE001 - the bridge is an addition, never a regression
+        pass
+
         try:
             from canonical.runtime import composer_route_v1 as croute
             from canonical.runtime.live_brain_route_admission_v1 import (
                 _cached_composer_graph,
             )
 
+            # `route()` is called once. It used to be called twice, the first result
+            # discarded -- a second full graph walk whose cost no caller ever saw.
             routed = croute.route(goal, g=_cached_composer_graph())
-            routed = croute.route(goal)
+            # A TYPE MATCH IS A HYPOTHESIS, NOT A CAPABILITY -- and so is a lexical
+            # one. `composer_route.route()` never consults `admit()`; measured
+            # 2026-11-09 it returned ['python.source.definition_count.v1'] for
+            # "how many unique lines in data.txt", a source-code symbol counter for a
+            # question about a text file. `admit()` rejects exactly that, with
+            # DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT, and reports
+            # PRECONDITIONS_OK-shaped silence to nobody because it is never asked.
+            #
+            # ToolGate (ACL 2026) makes this a Hoare precondition: the call is not
+            # allowed unless the world satisfies the gate. Ask before executing.
+            from canonical.runtime import capability_selection_retrieval_v1 as _csr
+            from canonical.runtime import capability_composer_v1 as _cc
+            _reg = _cc.load_registry()
+            _refused_chain: list[dict[str, Any]] = []
+            for _cid in list(routed.get("chain") or []):
+                _entry = _reg.get(_cid)
+                if not isinstance(_entry, Mapping):
+                    continue
+                try:
+                    _v = _csr.admit(goal, _cid, _entry, ra.ROOT)
+                except Exception:  # noqa: BLE001 - an unaskable gate is not a pass
+                    continue
+                # NARROW ON PURPOSE. First attempt gated on ANY refusal and broke a
+                # passing test: `python.swe.transform_and_synthesize.v1` came back
+                # BINDING_REFUSED:target_path:0_type_compatible_existing_files_named,
+                # which is a fact about files that existed when the registry was
+                # built, not about this call -- the door binds its own output path.
+                # Gate only on the rules that say THE SENTENCE IS THE WRONG SHAPE FOR
+                # THIS CAPABILITY. A precondition that is not about the world it
+                # guards is noise, and noise here costs a working route.
+                _SEMANTIC_SUBJECT_RULES = (
+                    "DEFINITION_COUNT_REQUIRES_CODE_SYMBOL_SUBJECT",
+                    "REPAIR_IMPERATIVE_REQUIRES_SOURCE_TRANSFORMER",
+                    "PARAMETER_RENAME_REQUIRES_PARAMETER_CONTRACT",
+                    "READ_ONLY_QUESTION_CANNOT_MUTATE_SOURCE",
+                )
+                if (isinstance(_v, Mapping) and _v.get("admitted") is False
+                        and str(_v.get("reason") or "") in _SEMANTIC_SUBJECT_RULES):
+                    _refused_chain.append({"capability_id": _cid,
+                                           "reason": _v.get("reason") or "ADMISSION_REFUSED"})
+            if _refused_chain:
+                return {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                        "status": "FAIL_CLOSED__COMPOSER_ROUTE_NOT_ADMITTED",
+                        "failure_class": "COMPOSER_ROUTE_NOT_ADMITTED",
+                        "tier_used": "tier1_composer_route_refused",
+                        "chain": list(routed.get("chain") or []),
+                        "refused_steps": _refused_chain,
+                        "executed": False, "side_effects_may_exist": False,
+                        "semantic_acceptance_complete": False,
+                        "reason": _refused_chain[0]["reason"],
+                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
             if routed.get("status") == computer_boundary.STATUS:
                 return {"schema": SCHEMA, "task_id": task_id, "pass": False,
                         "status": computer_boundary.STATUS,

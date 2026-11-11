@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_R120_REFUSED_TO_CERTIFY_FABRICATED_BINDINGS_V1",
+  "date": "2026-11-09",
+  "action": "REFUSED. Did not re-anchor the two failing content pins.",
+  "why": "re-anchoring would have manufactured evidence for an acceptance predicate I have not verified; that is the exact failure this governance layer exists to prevent",
+  "finding": {
+    "governance_record": "canonical/governance/UNIVERSAL_LEARNING_CONTRACT_V1.json",
+    "field": "exact_bound_components",
+    "bound_components_total": 10,
+    "unsatisfiable": 2,
+    "detail": [
+      {
+        "path": "canonical/runtime/acceptance_capability_source_gate_v2.py",
+        "pinned_blob": "b168b131f6383e158bdc0d931439d14e61f2a5de",
+        "actual_blob": "4ce3fde56117b5665109d8ce4281d69fae52b1be",
+        "versions_in_git_history": 1,
+        "only_commit": "41aed71c",
+        "finding": "the pinned blob exists in NO commit; it has never been any version of this file"
+      },
+      {
+        "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+        "pinned_blob": "0ed075c1efa053fe6e4eb3519d9903cf63fcf163",
+        "actual_blob": "cb7bf612ab443c84d3db3b6183682cf53399003c",
+        "versions_in_git_history": 1,
+        "only_commit": "41aed71c",
+        "finding": "the pinned blob exists in NO commit"
+      }
+    ],
+    "method": "git log --format=%h --all -- <path> enumerated every committed version; git rev-list --all --objects confirms the pinned shas are absent from the object database"
+  },
+  "distinction_from_r117": "r117 re-anchored pins where the current blob WAS a real committed version and only the record was behind. Here the pinned value never corresponded to any real file, so there is nothing to re-anchor TO: the binding is fabricated or corrupt rather than stale.",
+  "consequence_for_the_universal_learning_contract": "8 of 10 bindings verify. The contract's evidence base is therefore 8/10, not 10/10. No acceptance credit may be drawn from the two unsatisfiable bindings.",
+  "test_behaviour": "test_universal_learning_contract_binding_v1::test_every_bound_component_matches_exact_blob FAILS, and it is correct to fail -- it is asserting the right property",
+  "recommended_resolution": "the two components must be re-evidenced by re-running whatever produced them and recording a binding to a real, committed blob -- or removed from exact_bound_components with the contract's evidence base restated as 8/10"
+}

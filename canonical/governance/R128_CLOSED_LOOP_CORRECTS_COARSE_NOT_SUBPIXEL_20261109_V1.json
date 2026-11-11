@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_R128_CLOSED_LOOP_BOUNDARY_V1",
+  "date": "2026-11-09",
+  "prediction_tested": "R127 predicted that rewriting the slider episode as drag -> read #val -> correct by residual would converge. This tests it.",
+  "results": {
+    "open_loop": {"episodes": 6, "successes": 0},
+    "closed_loop": {"episodes": 8, "successes": 2, "unmeasured_goal_parse_failures": 3},
+    "outcomes": [
+      {"want": 106, "got": 109, "corrections": 4, "pass": false},
+      {"want": 30, "got": 30, "corrections": 4, "pass": true},
+      {"want": null, "got": null, "corrections": 0, "pass": false, "note": "goal regex did not match; NOT a capability failure, excluded from the honest denominator"},
+      {"want": 12, "got": 12, "corrections": 1, "pass": true},
+      {"want": null, "got": null, "corrections": 0, "pass": false, "note": "unmeasured"},
+      {"want": null, "got": null, "corrections": 0, "pass": false, "note": "unmeasured"},
+      {"want": 14, "got": 10, "corrections": 4, "pass": false},
+      {"want": 3, "got": 2, "corrections": 4, "pass": false}
+    ],
+    "honest_denominator": "5 measured episodes, 2 passed"
+  },
+  "what_converged": "both successes landed the value EXACTLY on the target integer. One needed a single correction, the other needed four.",
+  "what_did_not": "14->10, 3->2, 106->109. These are small-integer residuals that four corrections did not close. A mouse drag moves in pixel quanta; at the observed track widths some integer values are not reachable by dragging alone.",
+  "the_precise_law": "a closed correction loop removes COARSE calibration error and cannot remove error finer than the resolution of the actuator. Prediction from R127 was directionally right (0 -> 2) and quantitatively wrong (not 6/6).",
+  "why_this_matters_for_computer_use_as_a_whole": [
+    "the 2026 ComponentBench finding is that continuous calibration error is the single largest error class (20.2%) and is 'resistant to added reasoning'. This measurement localises WHY: the residual is below the action resolution, so more reasoning cannot fix it and more corrections cannot either.",
+    "the remedy is not a better policy. It is a finer actuator: keyboard arrow keys step a slider by exactly one unit where a drag cannot.",
+    "this is a testable next step with a known-mechanism answer rather than a guess."
+  ],
+  "the_answer_to_the_users_recurring_question": {
+    "instant_learning_solves": "any task whose correctness can be OBSERVED and whose error can be CORRECTED at a scale larger than the actuator's resolution",
+    "instant_learning_does_not_solve": "targets finer than the actuator can express, and tasks where the result cannot be observed before the episode is scored",
+    "measured_evidence_across_this_session": "menu 8/8 and 9/10 (relations, observable, correctable); drag 6/6 (geometric relation, observable at submit); slider 0/6 open-loop and 2/5 measured closed-loop (continuous, residual below actuator resolution)"
+  }
+}

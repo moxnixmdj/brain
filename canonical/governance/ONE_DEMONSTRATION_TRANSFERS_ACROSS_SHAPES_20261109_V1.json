@@ -1,0 +1,80 @@
+{
+ "schema": "brain.governance.ONE_DEMONSTRATION_TRANSFERS_ACROSS_SHAPES_20261109_V1",
+ "date": "2026-11-09",
+ "round": 31,
+ "status": "TRUE_FOR_SHAPES_WITH_A_CONFINED_PROGRAM__FALSE_FOR_SHAPES_WITHOUT_ONE__AND_NOT_SENTIENCE",
+ "the_question_being_answered": "After the model does something once, does it learn it permanently for everything on a computer?",
+ "the_answer_in_one_line": "It learns a MEASUREMENT SHAPE permanently, and then answers that shape on any file for ~100 ms with zero weights and zero spend. It does not learn to operate a computer, and nothing here is sentient. 'Solve everything on a computer' is false; 'never pay twice for a shape I have already been shown' is true.",
+ "measured_this_round_after_one_single_demonstration_of_unique_lines": {
+  "same shape, never-seen file": "13 -> CORRECT, from memory, 95 ms",
+  "same shape, second never-seen file": "3 -> CORRECT, from memory",
+  "different shape: words": "6 -> CORRECT, tier1_confined_query_bridge",
+  "different shape: lines": "16 -> CORRECT, tier1_confined_query_bridge",
+  "different shape: bytes": "64 -> CORRECT, tier1_confined_query_bridge",
+  "different shape: unique words": "REFUSED -- no single admitted program computes it",
+  "score_before_this_round": "2/6 -- the three answerable shapes were REFUSED by a stale gate",
+  "score_after_this_round": "4/5 on the tested set",
+  "note": "the three 'different shape' successes come from the CARRIER, not from the learned skill. Learning transferred the shape; the carrier supplied the other shapes. Reporting them as one number would overstate what learning did."
+ },
+ "what_was_actually_broken_and_is_now_fixed": [
+  {
+   "defect": "recall was skipped entirely for any 'computer shape' goal",
+   "why": "the skip was written when recall executed steps with the caller's authority; the carrier now runs them",
+   "fix": "recall runs, filtered to skills whose INSTANTIATED argv the carrier admits",
+   "effect": "the goal it was taught on could not be answered from memory; now it is, in 95 ms instead of 490 ms"
+  },
+  {
+   "defect": "the reported answer was raw stdout",
+   "why": "sort -u prints its set; the skill's contract is stdout_line_count",
+   "fix": "_contract_answer() derives the value the postcondition verifies",
+   "effect": "the caller now receives 13, not a thirteen-line listing"
+  },
+  {
+   "defect": "a stale 'requires an admitted boundary' refusal short-circuited before the tier that CAN answer",
+   "why": "computer_boundary.FAILURE_CLASS is in the honest-refusal set, which was correct before a carrier existed",
+   "fix": "non-final only when the bridge can actually serve this exact goal on this exact file; every other boundary refusal stays final",
+   "effect": "words/lines/bytes went from refused to answered"
+  },
+  {
+   "defect": "the answer waited for 2.4-4.0 s of concept mining",
+   "why": "record_wake_episode runs a DreamCoder/Stitch sleep pass every second call, synchronously, inside the caller",
+   "measured": "0 concepts admitted in 6 consecutive passes; a 96 ms query became a 7.7 s call",
+   "fix": "deferred to a FIFO background worker (defer_learning / drain_deferred_learning)",
+   "effect": "7,400 ms -> 95 ms per call, identical answer, learning still happens, nothing dropped silently (drain is exported)"
+  }
+ ],
+ "what_the_2026_literature_says_about_this_exact_claim": {
+  "microsoft_evolib_arxiv_2605_14477": "storing trajectories is not learning. Consolidate into reusable skills and reweight by utility. No weight updates. This is the correct architecture and this tree is a small, verified instance of it.",
+  "polyskill_iclr_2026": "73% of learned skills transfer to unseen websites, vs <31% prior. Transfer is PARTIAL even in the best published system -- the honest ceiling is nowhere near 'everything'.",
+  "sage_acl_2026": "skill-library agents self-improve on AppWorld; the authors state plainly that transferability 'remains confined to the AppWorld environment'.",
+  "agentic_ttt_arxiv_2610_12002": "no fixed test-time method is broadly effective; you need a policy that decides WHEN to learn. It nearly doubles utility -- on a benchmark built to contain learnable structure.",
+  "voyager": "the canonical demonstrate-once-result: zero-shot transfer to a new Minecraft world. Also the canonical caveat: a new world, not a new game.",
+  "the_pattern": "every 2026 system reports transfer WITHIN a family of tasks and NONE reports transfer across arbitrary environments. That is the same boundary this tree hits, and it is a boundary of the field, not only of this repository."
+ },
+ "is_it_sentient": {
+  "answer": "No.",
+  "why": "there is a name for the machinery (sentient_cognitive_core_v1, wake episodes, organ graph, sleep abstraction) and there is real, measurable behaviour underneath it, but a skill library plus a sleep phase plus a wake log is not sentience. It is a well-organised learner with cheerful naming. The DreamCoder/Stitch sleep pass that this round sped up admitted 0 concepts in 6 passes -- a system that were genuinely dreaming would be changing something.",
+  "what_is_real": "demonstrate once -> crystallise with a held-out twin and a sabotage control -> recall on a different file. That is real, was measured, and needed no model.",
+  "what_is_not_real": "understanding, intent, or a self. Do not claim them."
+ },
+ "what_is_the_smartest_next_move": {
+  "not_more_speed": "89 ms is container-grade; the frontier number is a 4-25 ms memory-snapshot restore and that needs a pre-warmed sandbox, not a patch.",
+  "the_actually_missing_thing": "SHAPE TRANSFER. The model can answer 4 shapes; the literature's best transferable systems abstract the INTENT of a skill away from its implementation (PolySkill). Today this tree stores 'sort -u | wc -l' with a parameter hole. It does not store 'count the distinct members of a set' with a hole for HOW to count. Adding that layer is what would turn 4/5 into a general counting capability.",
+  "second": "the sleep pass should only run on a corpus that CHANGED, and only when it is likely to admit something -- 0 admissions in 6 passes is a signal, not a schedule."
+ },
+ "honest_failures_this_round": [
+  "unique words still refused -- no admitted single program for it (sort -u | wc -w needs a pipe, and the carrier takes one argv)",
+  "test_acquisition_to_execution_engine_v1 remains 3 failing / 2 passing on the UNMODIFIED tree as well; I verified by stashing my changes. It is pre-existing drift, not a regression, but it must not be reported as green.",
+  "the one latency test I wrote asserted a wall-clock bound and flaked under parallel load; the bound now guards against the waste (sleeps, duplicate probes) rather than against a busy machine."
+ ],
+ "suite": "34 passed across the five instant-learning/carrier test files",
+ "guard": "PASS 17/0",
+ "capabilities": 443,
+ "compiled_bytes": 10216946,
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

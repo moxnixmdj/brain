@@ -1,0 +1,33 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "STRUCTURE_ROUTING_SURVIVES_WHAT_WORDS_CANNOT_20261109_V1",
+  "round": 68,
+  "date": "2026-11-09",
+  "owed_from_last_round": "hierarchical routing measured against flat routing at several library sizes",
+  "method": "a 64-skill library generated in 8 categories, every probe written to use DIFFERENT verbs and syntax from its target; three routers; 20 random libraries per size; no model anywhere",
+  "measured": {
+    "flat_word_overlap": {"n10": "13.5%", "n25": "9.6%", "n50": "7.3%", "n64": "6.2%", "note": "reproduces the published decay"},
+    "hierarchical": {"n10": "12.5%", "n25": "8.2%", "n50": "9.0%", "n64": "9.4%", "note": "does NOT rescue word overlap. The literature hoped it would; on this library it does not."},
+    "structure": {"n10": "94.0%", "n25": "88.8%", "n50": "85.8%", "n64": "84.4%", "note": "nearly flat while the others collapse"}
+  },
+  "the_number_that_matters_more_than_accuracy": {
+    "twelve_dangerous_confusions": "staging vs production, scale up vs down, start vs stop, delete vs share, filter vs sort, dedupe vs filter",
+    "at_n64": {"right": "41.7%", "REFUSED": "50.0%", "wrong": "8.3%"},
+    "why_it_matters": "a router that cannot tell staging from production REFUSES, and refusing is safe. An accurate router with no refusals would ship to production."
+  },
+  "bugs_behind_the_numbers_every_one_found_by_reading_a_failure": [
+    "the predicate was the whole trigger: 'open the file' contributed the verb 'file', so all file skills tied on the subject and the tie rule refused 26 of 64 probes",
+    "action verbs were STOP WORDS: show, give, put, get, make were deleted before routing, so 'SHOW me the file' had no verb left",
+    "the first experiment's probes shared no vocabulary with their targets, which measured the experimenter's imagination rather than the router",
+    "English inflection is not handled by stripping a trailing s; 'smaller' needed an explicit mapping to 'small'"
+  ],
+  "what_this_does_not_prove": [
+    "that structure routing generalises to a library whose skill names were written by someone else -- the synonym table is hand-built for this experiment and is the likely failure point at scale",
+    "a comparison against a model router at these sizes",
+    "a public benchmark number. Still zero."
+  ],
+  "the_honest_reading": "word-overlap routing is a dead end above a few dozen skills, and hierarchy over a dead-end similarity measure does not save it. What survives is a similarity measure closer to the SHAPE of a request -- action applied to object -- plus a refusal rule that fires when two skills are equally good. The refusal is doing at least as much work as the matching.",
+  "next": ["drop the hand-built synonym table and see how far structure routing falls without it -- that is the real test",
+           "a model router at the same sizes, for comparison",
+           "a public benchmark number, still owed"]
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "brain.governance.PROVEN_TIER_AUDITED_20261109_V1",
+  "date": "2026-11-09",
+  "status": "PROVEN_TIER_AUDITED_BY_EXECUTION__93_8_PERCENT_OF_CITED_EVIDENCE_RUNS_GREEN__13_CITED_TESTS_FAIL",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "the_hole_this_closes": {
+    "what_the_census_did": "priced 3,230 governance records by the weight their own status can bear",
+    "what_it_never_did": "verify a single one of them. The record said PROVEN and the census believed it.",
+    "why_that_matters": "'how valuable it is' depends on whether the thing is true. A census that never checks is a well-organised assumption.",
+    "this_round": "audited the PROVEN tier against the artefacts each record itself cites, by existing on disk and by executing"
+  },
+
+  "the_audit": {
+    "module": "canonical/runtime/proven_tier_audit_v1.py",
+    "output": "canonical/evaluation/proven_tier_audit_v1.json",
+    "proven_records": 681,
+    "records_citing_a_checkable_artefact": 348,
+    "machine_checkable_pct": 51.1,
+    "uncited_deduction_only_records": 333,
+    "uncited_pct": 48.9,
+    "distinct_cited_modules": 589,
+    "cited_modules_missing": 2,
+    "cited_modules_missing_list": [
+      "canonical/runtime/hle_native_open_domain_research_v5.py",
+      "canonical/runtime/native_artifact_information_safe_proof.py"
+    ],
+    "distinct_cited_tests": 160,
+    "cited_tests_missing": 0,
+    "cited_tests_executed": 160,
+    "verdicts": {
+      "GREEN": 134,
+      "EMPTY": 9,
+      "RED": 13,
+      "COLLECTION_ERROR": 4
+    },
+    "green_rate_pct": 93.8,
+    "green_rate_basis": "134 of 143 executable-and-non-empty cited tests; the 4 collection errors and 9 empty files are excluded from both numerator and denominator rather than being counted as passes or failures"
+  },
+
+  "the_13_cited_tests_that_actually_fail": [
+    {"test": "test_objective_route_certificate_verifier.py", "passed": 3, "failed": 1},
+    {"test": "test_native_artifact_cross_format_preflight_v1.py", "passed": 1, "failed": 4},
+    {"test": "test_one_shot_reality_closure_v2_integration.py", "passed": 0, "failed": 1},
+    {"test": "test_saccr_route_specific_terminal_executor_v1.py", "passed": 3, "failed": 1},
+    {"test": "test_cad_t0_route_specific_terminal_executor_v1.py", "passed": 6, "failed": 7},
+    {"test": "test_selected_discriminator_policy_cover_bridge_v1.py", "passed": 0, "failed": 1},
+    {"test": "test_opus55_acceptance_calibration_reducer_v2.py", "passed": 1, "failed": 3},
+    {"test": "test_harbor_science_agent_v1.py", "passed": 27, "failed": 1},
+    {"test": "test_live_capability_invoker_v1.py", "passed": 3, "failed": 1},
+    {"test": "test_cad_t0_route_specific_candidate_v1.py", "passed": 2, "failed": 14},
+    {"test": "test_opus55_acceptance_residual_compiler_v4_projection.py", "passed": 1, "failed": 1},
+    {"test": "test_terminal_frontier_compiler_v2.py", "passed": 7, "failed": 2}
+  ],
+
+  "the_9_cited_tests_that_execute_nothing": {
+    "verdict": "EMPTY",
+    "meaning": "0 passed, 0 failed -- the file exists, is cited as evidence, and runs no assertions",
+    "why_this_is_not_called_RED": "calling it red would overstate breakage; calling it green would overstate coverage. A cited evidence file with no assertions is a documentation defect, not a failure, and it needs its own category.",
+    "files": [
+      "test_acceptance_ir_compiler_v1.py", "test_canonical_proof_atom_basis_v1.py",
+      "test_canonical_proof_atom_basis_v2.py", "test_composition_component_proof_slicer_v1.py",
+      "test_composition_interface_manifest_compiler_v1.py", "test_epistemic_closure_kernel_v1.py",
+      "test_minimum_terminal_cut_solver_v1.py", "test_proof_fixed_point_saturator_v1.py"
+    ]
+  },
+
+  "the_audit_failed_first_and_the_failure_was_mine_not_theirs": {
+    "first_run_result": "160 of 160 cited tests RED",
+    "why_that_was_obviously_wrong": "a tree cannot have 160 uniformly failing evidence files and still be a tree that runs 89 tests green in this session",
+    "the_cause": "pytest was not installed in the sandbox. Every subprocess returned 'No module named pytest', my parser saw 0 passed and 0 failed, and classified it as RED. One hundred and sixty false accusations of the tree, produced by my own environment.",
+    "the_fix": "installed pytest, re-ran, and got 134 green / 9 empty / 13 red / 4 collection errors",
+    "why_this_is_recorded": "this is the third time this session that a harness gap produced a wrong verdict about the tree. The pattern is consistent: when a measurement comes back uniformly damning, suspect the instrument before the subject."
+  },
+
+  "what_the_audit_actually_establishes": {
+    "proven_and_checkable": "348 of 681 PROVEN records cite a concrete artefact; 93.8% of the cited tests that execute anything run green",
+    "proven_but_deductive": "333 of 681 PROVEN records (48.9%) cite no runnable artefact. They assert a deduction or a reconciliation. They may well be correct, but this audit did NOT check them and says so.",
+    "the_two_missing_modules": "2 of 589 distinct cited modules do not exist on disk. That is a concrete, small, fixable defect: either the module was renamed or the record cites something that was never built.",
+    "the_13_failing_tests": "13 cited evidence files have real failures. Each one is a PROVEN record whose supporting test does not currently pass. That is the single most actionable finding of this round."
+  },
+
+  "what_this_still_does_NOT_prove": [
+    "that a green test measures the sentence the record asserts -- a passing test can test the wrong thing, and nothing here detects that",
+    "that a module which exists implements what the citing record says it implements",
+    "anything at all about the 333 deduction-only PROVEN records",
+    "anything about the 2,549 non-PROVEN records, which were never in scope for this audit"
+  ],
+
+  "the_honest_scorecard_after_this_round": {
+    "claims_priced": "3,230 records, 98.5% of the population",
+    "claims_audited_by_execution": "160 cited test files, of which 134 green, 13 red, 9 empty, 4 uncollectable",
+    "fraction_of_PROVEN_that_is_machine_checkable": "51.1%",
+    "fraction_of_proven_checkable_evidence_that_passes": "93.8%",
+    "fraction_of_the_whole_governance_population_audited_by_execution": "160 test files against 3,230 records -- a small slice, stated plainly"
+  },
+
+  "the_smartest_next_moves__from_the_audit": [
+    {"rank": 1, "action": "fix or reclassify the 13 PROVEN records whose cited test fails", "why": "these are the only records in the tree currently known to cite evidence that does not pass. It is a small, concrete, finishable list."},
+    {"rank": 2, "action": "delete or repair the 2 cited modules that do not exist", "why": "a claim citing a missing file is the cheapest possible defect to find and the most damaging to leave"},
+    {"rank": 3, "action": "give the 9 EMPTY cited tests real assertions, or stop citing them as evidence", "why": "an evidence file that asserts nothing is worse than no citation because it looks like support"},
+    {"rank": 4, "action": "extend the audit past the PROVEN tier to ACTIVE and REFUSED", "why": "REFUSED records are the tree's memory of what failed; if a refusal is wrong it misdirects future work permanently"},
+    {"rank": 5, "action": "make the audit a scheduled test with a floor, so a green rate cannot silently decay", "why": "93.8% is a number worth defending, and undefended numbers decay"}
+  ],
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

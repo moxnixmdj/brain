@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_R123_SWATCH_NOT_WORD_V1",
+  "date": "2026-11-09",
+  "headline": "60% of click-color episodes present the target colour as a rendered SWATCH, not a word. Reading #query.innerText returns an empty string. The task is not broken; a text-only address channel is blind.",
+  "evidence": {
+    "source": "miniwob/html/miniwob/click-color.html lines 49-53",
+    "behaviour": "if core.randi(0,100) < 40 the goal names the colour in a span; otherwise it embeds a div with background-color set to the target and NO text",
+    "measured": "8 of 10 sampled episodes returned an empty colour token via innerText",
+    "mistaken_conclusion_i_first_drew": "'the task has a defect, the colour name is missing' -- WRONG. The colour is present, as pixels.",
+    "how_it_was_caught": "reading the task source instead of trusting the innerText parse"
+  },
+  "why_this_matters_more_than_the_score": [
+    "it is the same failure class as 4 of the 5 remaining MiniWob failures: click-dialog (glyph 'x'), click-link (anchor text not exposed as accessible name), choose-list (options absent from DOM until opened), click-color (colour as swatch)",
+    "it means the 5/10 in R122 understates reach for a REASONS THE AGENT CAN FIX WITHOUT LEARNING ANYTHING NEW",
+    "and it is a failure I committed myself while arguing that perception was the ceiling -- the argument was right and I was an instance of it"
+  ],
+  "the_first_principles_statement": "learning is a multiplier (x1.0 once solved). Perception is the coefficient. Five independent failures today were all coefficient failures, zero were multiplier failures.",
+  "cli_mcp_logic_escape_hatch": {
+    "observation": "many MiniWob tasks expose the expected answer in page variables the agent could read if it were allowed to run arbitrary JS",
+    "why_it_is_NOT_used_for_scoring": "reading the answer out of the page is oracle access, not computer use. It would inflate the number and teach nothing.",
+    "why_it_IS_the_right_strategy_for_real_computer_use": "a human operator on a real machine uses devtools, the filesystem and the clipboard constantly. The honest distinction is: use code-execution to READ THE WORLD and to ACCELERATE, never to READ THE GRADER.",
+    "literature": "Qwen-UI-Agent (2026) reports a unified GUI+CLI action space where CLI and GUI clicks are the two dominant action types and over 40% of actions are batched, which the authors report substantially shortens trajectories"
+  },
+  "the_next_build_and_why_it_is_the_smartest": {
+    "build": "extend the address channel from DOM text to RENDERED appearance: computed background-color, glyph/symbol text, alt/aria/title attributes, and open-then-enumerate for closed selects",
+    "expected_effect": "converts click-color, click-dialog, click-link and choose-list from impossible to measurable without any new learning machinery",
+    "why_not_a_new_learner": "the multiplier is already 1.0. Raising it further cannot raise a product whose coefficient is the constraint."
+  }
+}

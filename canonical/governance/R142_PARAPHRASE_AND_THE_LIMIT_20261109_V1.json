@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_R142_V1",
+  "date": "2026-11-09",
+  "round": "r142",
+  "change": "VERB_PATTERNS rewritten as AFFORDANCES rather than one phrasing per verb: click|press|hit|tap|activate, move|rotate|turn|spin, push|press|hit|tap|repeat|enter + sequence|order|shown|displayed. Motivation was measured, not assumed.",
+  "the_measurement_that_motivated_it": {
+    "test": "19 paraphrases of goals the system already solves, each with the same meaning and different words",
+    "before": "9/19 identical plans (47%). Ten produced verb=None, i.e. total refusal.",
+    "examples_of_refusal_before": ["'Press the button.'", "'Hit the button.'", "'Rotate the cube so that 4 faces the user.'", "'Press the buttons in the order displayed.'"],
+    "after": "22/23 DECOMPOSED correctly. The one that still refuses is 'Follow the link.', kept deliberately: 'follow' is ambiguous with navigation and refusing is the safe side."
+  },
+  "measured_effect_on_the_sample": {
+    "r141_reach": "95/190 = 0.5000",
+    "r142_reach": "95/190 = 0.5000",
+    "identical": true,
+    "tasks_that_changed": {
+      "drag-cube": "4/5 -> 5/5",
+      "use-autocomplete": "0/5 -> 2/5",
+      "use-autocomplete-nodelay": "4/5 -> 2/5",
+      "click-checkboxes-soft": "3/5 -> 2/5"
+    },
+    "net": 0
+  },
+  "what_this_round_actually_proves": "Widening a parser fixes false negatives and creates false positives at the same rate. The new FIND rule (\\bfind\\b|\\blocate\\b) is ordered before more specific verbs, so circle-center, hot-cold and email-inbox-forward-nl now return VERB_NOT_IMPLEMENTED:FIND instead of doing something. Two of those were already failing, one was not. A net of zero out of six changed tasks is the normal outcome of grammar work: the grammar is not the limiting factor.",
+
+  "the_thesis_test": {
+    "claim": "record one demonstration, the procedure is permanent, therefore any computer task is solved after doing it once",
+    "verdict": "FALSE as stated, for a reason this repo measured directly",
+    "evidence": [
+      "paraphrase: 47% of same-meaning rewordings produced no plan at all. What was stored was a string, not a class. A real user does not type the benchmark's sentence.",
+      "Work2Skill (arXiv, Oct 2026): one recording -> SKILL.md gives +4.67 to +10.54 points on MyPCBench, +3.11 to +7.50 on an OSWorld subset. Real, and nowhere near solved.",
+      "CUA-Skill (Microsoft, arXiv 2601.21123, Jan 2026): 452 skills, 17 apps, best-of-three 57.5% on WindowsAgentArena -- state of the art at the time",
+      "Naive Visual Memory is Not Enough (arXiv 2606.14106, Jun 2026): adding store-and-retrieve memory to a GUI agent raised accuracy 18.3 -> 20.4 but made hidden-operation blindness WORSE (67.1 -> 78.8%) and grounding error worse (27.5 -> 36.1%)",
+      "the failure taxonomy in that paper -- cognitive, visual-state, hidden-operation, grounding -- matches this repo's own 20 zero-rate tasks: 8 no-procedure, 7 resolution, 2 read/compute, 1 other. The learning channel is not the binding one."
+    ]
+  },
+
+  "the_resolution_limiting_factor_measured_today": {
+    "finding": "7 of the 20 zero-rate tasks fail with the ACTUATOR CHANGING NOTHING (action string 'click-miss', 'menu-miss', 'self-grading:NO_SUBMIT'), not with a wrong answer.",
+    "concrete_cases": [
+      "social-media: 'For the user @leonie, click on the \"Report\" button.' -- the verb has NO ROW SELECTOR and clicks the first Report button in the document",
+      "click-color / hot-cold: goal is 'find the red circle' among siblings; the click resolver is exact-name then substring, with no colour, shape or geometry term",
+      "click-menu: menu-miss alternating with NO_SUBMIT across episodes of one task"
+    ],
+    "why_it_is_the_binding_factor": "on all 7 the procedure is already known. A demonstration would not add it. What is missing is resolving a REFERRING EXPRESSION against sibling distractors -- which is the second failure mode in the 2026 literature (confusion hallucination, WinDeskGround semantic interference, RSC paragraph grounding)."
+  },
+
+  "what_is_NOT_claimed": [
+    "that 50% is a capability figure for anything outside MiniWob++",
+    "that the paraphrase result generalises beyond the 19 sentences tested",
+    "that fixing resolution would reach 100%; it converts 7 tasks at most, and 8 have no procedure at all"
+  ]
+}

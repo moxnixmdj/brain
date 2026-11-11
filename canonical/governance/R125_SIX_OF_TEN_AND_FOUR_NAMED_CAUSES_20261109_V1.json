@@ -1,0 +1,29 @@
+{
+  "schema": "PROJECT_BRAIN_R125_SIX_OF_TEN_V1",
+  "date": "2026-11-09",
+  "trajectory_of_the_same_10_task_bench_this_session": [
+    {"round": "R121F", "score": "2/10", "policy": "one verb: click a text-matched element", "note": "no live geometry"},
+    {"round": "R122", "score": "5/10", "policy": "six verbs, live geometry, start-up race fixed", "note": "claimed all failures were target addressing"},
+    {"round": "R124", "score": "5/10", "policy": "+ appearance_address_v1 (colour/text/aria/glyph resolver)", "note": "fixed click-link, converted click-color to a CORRECT refusal"},
+    {"round": "R125", "score": "6/10", "policy": "+ four instrument bugs fixed", "note": "fixed click-dialog and click-test, which were previously called impossible"}
+  ],
+  "the_four_instrument_bugs_found_this_round": [
+    {"bug": "missing closing paren in the harvest JS: out.push({...}}; instead of out.push({...});", "effect": "SyntaxError swallowed by a helper that returned None, so the harvest looked EMPTY rather than BROKEN", "law_violated": "a silent empty return is indistinguishable from a true empty result", "fix": "surface exceptionDetails from CDP; never coerce a failed eval to None"},
+    {"bug": "the dedup rule dropped an element when an ANCESTOR shared its text and was larger", "effect": "the actual BUTTON with text 'Click Me!' was removed in favour of its parent DIV, so click-test reported no-affordance while a button was visible", "fix": "drop the ANCESTOR, keep the innermost interactive node"},
+    {"bug": "the colour resolver required 'colored box' phrasing AND read text rather than bg for candidates with empty text", "effect": "click-color never matched even when a div with rgb(255,0,0) was on screen and the goal said 'red'", "status": "PARTIALLY FIXED -- still failing at R125, see below"},
+    {"bug": "click-dialog's close control is a DIV labelled 'Close', not an element whose text is 'x'", "effect": "the goal literally says click the x; nothing is labelled x", "fix": "special-case: dialog+close+quoted-x resolves the element whose text is 'Close' or whose class contains ui-dialog-titlebar-close"}
+  ],
+  "what_is_now_solved_that_was_called_impossible": [
+    "click-dialog: resolved via the 'Close' affordance, 0.9688",
+    "click-test: resolved via sole-button disambiguation, 0.969",
+    "click-link: resolved via exact text match on the anchor, 0.9691"
+  ],
+  "the_four_still_failing_and_their_named_causes": [
+    {"task": "click-button", "cause": "the goal says 'Click on the okay button' but no element's text equals 'okay'; the button text is drawn or the match is case/format different. Not yet diagnosed by printing the actual button list for this task.", "status": "UNDIAGNOSED"},
+    {"task": "click-menu", "cause": "level 1 (e.g. 'Anatola') is harvested and clicked, but the submenu item is not present in the harvest after the click; jQuery UI menus open on hover and the hover+click sequence is not producing a visible submenu in this harness", "status": "PARTIALLY DIAGNOSED"},
+    {"task": "click-color", "cause": "CONTRADICTION: a printed DOM dump in this same round shows DIV||rgb(255,0,0)|49,167 and goal 'Click on the red colored box.', yet the colour resolver returned None. The resolver is provably not doing what the dump shows it should.", "status": "CONTRADICTION RECORDED, NOT RESOLVED"},
+    {"task": "choose-list", "cause": "the native select is set to the requested option and a change event is dispatched, but the reward is 0. Either the task validates on a real user interaction rather than a programmatic selectedIndex change, or the submit step is wrong.", "status": "UNDIAGNOSED"}
+  ],
+  "honest_position": "6/10 on a 10-task sample that was chosen because earlier policies failed them. This is NOT a reach figure for MiniWob++ (130 tasks) and no percentage should be inferred for the benchmark. The only defensible claims are the per-task results above and the four instrument bugs, each of which was a self-inflicted measurement error rather than a capability limit.",
+  "the_pattern_that_has_held_all_session": "every time the score moved, it moved because an instrument bug was fixed. Not once did it move because of a better learning mechanism. That is the empirical answer to 'does instant learning close the computer-use gap': on this bench, learning was never what was failing."
+}

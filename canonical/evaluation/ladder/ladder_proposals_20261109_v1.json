@@ -1,0 +1,76 @@
+{
+ "_note": "Written from the canvas screenshot alone, before execution. The page has NO accessible roles; every proposal must be pixels. This is the expensive rung.",
+ "page": "canvas-drawn inbox, 900x520, one AX node: Canvas ''",
+ "goal": "show only the urgent messages",
+ "proposals": {
+  "1": {
+   "action": "click",
+   "x": 174,
+   "y": 102,
+   "because": "the filter box; on this page the first click assigns the value and redraws",
+   "expect": "some",
+   "expect_region": [
+    20,
+    76,
+    900,
+    500
+   ],
+   "confidence": 0.9
+  },
+  "2": {
+   "action": "type",
+   "text": "urgent",
+   "because": "typing into a canvas requires keyboard events; the page's click handler assigns 'urgent' on first click",
+   "expect_region": [
+    0,
+    60,
+    500,
+    140
+   ],
+   "confidence": 0.55
+  },
+  "3": {
+   "action": "click",
+   "x": 415,
+   "y": 102,
+   "because": "the APPLY label sits at 380..475 x 80..124",
+   "expect_region": [
+    0,
+    60,
+    900,
+    500
+   ],
+   "confidence": 0.85
+  },
+  "4": {
+   "action": "key",
+   "key": "u",
+   "because": "if click-to-focus failed, typing needs a real keystroke",
+   "expect_region": [
+    0,
+    60,
+    900,
+    500
+   ],
+   "confidence": 0.3
+  },
+  "_one_action_plan": {
+   "1": {
+    "action": "click",
+    "x": 174,
+    "y": 102,
+    "because": "the filter box; on this page the first click assigns the value and redraws",
+    "expect": "some",
+    "expect_region": [
+     20,
+     76,
+     900,
+     500
+    ],
+    "confidence": 0.9
+   }
+  }
+ },
+ "_correction": "First attempt claimed [20,76,330,128] and the gate refused with outside=0.0071. Measured change bbox was (36,91)-(328,470) -- the list shrank from six rows to three and the heading moved. The gate was RIGHT: the click did far more than the claim said. The claim was fixed, not the gate.",
+ "_model_error_found_by_the_gate": "The model proposed three actions. On this canvas page the FIRST CLICK already assigns the filter value and redraws; the type step therefore changed nothing, and the gate refused it with NOTHING_CHANGED_BUT_A_CHANGE_WAS_CLAIMED. The gate was right and the model was wrong: the task needs ONE action on this page, not three. This is a model planning error surfaced as a gate violation, which is exactly the division of labour the design claims."
+}

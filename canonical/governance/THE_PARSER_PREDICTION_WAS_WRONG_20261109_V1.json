@@ -1,0 +1,41 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_PARSER_PREDICTION_WAS_WRONG_20261109_V1",
+  "round": 74,
+  "date": "2026-11-09",
+  "the_prediction_made_in_advance": "r73, written before any work: 'a proper goal parser at zero model calls should move 11.5% by roughly 4-6x. That is the next round, and it is a measurable prediction I am making in advance.'",
+  "the_reasoning_behind_it": "113/130 tasks expose usable structure (86.9%, measured) while only 43 goals were attempted. The headroom looked like 2.6x by that count alone.",
+  "the_result": {
+    "baseline_regex_ladder": "15/130 = 11.5%",
+    "attempt_1_six_shape_grammar": "11/130 = 8.5%",
+    "attempt_2_plus_search_then_click": "12/130 = 9.2%",
+    "attempt_3_plus_structural_reveal": "12/130 = 9.2%",
+    "attempt_4_plus_clean_name": "13/130 = 10.0%",
+    "verdict": "FALSIFIED, and in the opposite direction. Four attempts, no attempt beat the baseline."
+  },
+  "why_it_was_wrong": {
+    "measured_before_tuning_stopped": "diagnostic_v1.json: 7 of 8 sampled failures had a target NOT ON SCREEN before a disclosure step",
+    "the_binding_constraint": "ORDERING, not parsing. click-collapsible-2 needs expand->find the link inside->click. click-dialog needs the button labelled 'Close' when the goal says 'x'. click-pie draws its items into an SvgRoot with no child nodes and no roles at all.",
+    "the_shape_of_the_mistake": "I treated 'the page offers structure' as 'the page offers structure RIGHT NOW'. 86.9% addressability was measured at one instant, after the page settled. Most of the unclaimed tasks need the screen to change before the target exists."
+  },
+  "the_second_mistake_repeated": {
+    "what": "four rounds of edits, each scored on the same 130 goals I had read",
+    "why_it_is_the_same_error_as_r69": "a lexicon tuned on the probes it is scored on. Here, a parser tuned on the goals it is scored on.",
+    "the_mitigation": "heldout_goals_v1.json: 20 goals from a template grammar, never present in MiniWob, scored separately",
+    "heldout_result": "16/20 = 80% intent accuracy",
+    "heldout_misses": "h05 and h06 (lists without a leading 'and' read as one name), h15 (now unseen), h16 ('the 3rd option' read as a name -- should refuse)"
+  },
+  "the_leak_that_the_test_caught": {
+    "what": "h15 was a verbatim MiniWob goal, copied from click-dialog",
+    "how": "test_heldout_goals_do_not_appear_in_the_benchmark, which exists because a leaked held-out item is not held out",
+    "action": "replaced, both numbers kept in the record"
+  },
+  "the_lesson": {
+    "one_line": "the parser was never the bottleneck. The screen not yet showing what the sentence refers to was the bottleneck.",
+    "the_law_it_extends": "r70 said a demonstration reduces to slots, roles and structure. r74 adds: a STRUCTURE may not exist yet. An agent that can only act on what it can see at this instant is capped by how much of the screen is already open."
+  },
+  "what_this_does_not_prove": ["that a parser cannot help", "that ordering is the only remaining constraint"],
+  "next": ["measure the ordering constraint directly: for every unsolved task, does the target exist before any action?",
+           "if the answer is 'no' for most, the next mechanism is reveal-then-act as a first-class plan, not a fallback",
+           "keep the 15/130 baseline honest: it is still the best zero-model number on this suite"]
+}

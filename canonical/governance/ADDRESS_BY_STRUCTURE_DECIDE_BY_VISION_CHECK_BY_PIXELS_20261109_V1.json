@@ -1,0 +1,51 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "ADDRESS_BY_STRUCTURE_DECIDE_BY_VISION_CHECK_BY_PIXELS_20261109_V1",
+  "round": 71,
+  "date": "2026-11-09",
+  "what_was_blocked_last_round": "the learned trajectory could not be reused on a new goal: an empty text field has almost no appearance, and a 40x40 patch of the blank input matched 453 offsets spread over 258 pixels",
+  "the_change": {
+    "module": "canonical/runtime/address_v1.py",
+    "principle": "DECIDING stays with vision. ADDRESSING moves to the page's own tree.",
+    "why_the_ban_was_half_wrong": "the visual executor forbids DOM. and Accessibility. so the agent cannot be steered by the thing it is operating on. That is right for DECIDING and wrong for ADDRESSING, where there is no judgement, only geometry.",
+    "enforcement": "ALLOWED_ADDRESSING is an allowlist of read-only methods; anything else raises AddressingError rather than being filtered",
+    "what_it_may_never_do": "navigate, capture, input, evaluate, or read values"
+  },
+  "measured": {
+    "the_field_addressed_structurally": "role=textbox name='filter' box (34,120)-(314,148) -> centre (174,134)",
+    "teach_once": "click textbox/filter, type {slot0}, click button/APPLY  -- the model decided this, once",
+    "reuse_1": "goal 'show only the messages about refund' -> typed 'refund' -> heading reads 'Inbox - 1 shown', one matching message",
+    "reuse_2": "goal 'show only messages from alice' -> typed 'alice'",
+    "reuse_3": "goal 'show only the urgent messages' -> typed 'urgent' -> heading reads 'Inbox - 3 shown'",
+    "model_calls_in_reuse": 0,
+    "robustness": {
+      "same_page": "RAN, filter at (174,134)",
+      "everything_moved_down": "RAN, filter at (230,302)",
+      "cookie_banner": "RAN, filter at (174,187)",
+      "moved_and_banner": "RAN, filter at (214,307)",
+      "result": "4/4 addressed and run with zero model calls; the coordinate changed every time and the skill never stored one"
+    },
+    "evidence": ["canonical/evaluation/one_new_task/reuse_refund_addressed.png",
+                 "canonical/evaluation/one_new_task/reuse_alice_addressed.png"]
+  },
+  "hostile_checks": [
+    "a forbidden CDP call raises rather than being filtered",
+    "a missing target stops the run before any action",
+    "an unfillable goal is refused, not guessed",
+    "the addresser's source contains no notion of a goal, an intention or a choice"
+  ],
+  "what_this_actually_is": {
+    "yes": "a demonstration recorded once, reused with new parameters on four differently laid-out pages, with no model in the reuse path",
+    "no": "not a solution to any computer use. It works where the page is built from standard roles and accessible names. A canvas, a custom-drawn widget, or an unlabelled div gives it nothing to address, and it would refuse.",
+    "the_honest_boundary": "structure addressing works when the interface has structure. Vision remains necessary for everything that does not."
+  },
+  "the_three-signal_division_that_finally_held": {
+    "model": "decides what to do, by looking -- once, at teach time",
+    "page": "reports where things are, by structure -- every time, exactly",
+    "gate": "checks what happened, by pixels -- every step, causally"
+  },
+  "what_this_does_not_prove": ["one page family", "no public benchmark number: still zero"],
+  "next": ["a page with NO accessible roles, to find where structure addressing dies",
+           "the same skill through the full act() loop with the model back in the decision seat",
+           "a public benchmark number, still owed"]
+}

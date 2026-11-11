@@ -1,0 +1,56 @@
+{
+ "schema": "PROJECT_BRAIN_SEMANTICS_WITHOUT_WEIGHTS_20261109_V1",
+ "date": "2026-11-09",
+ "status": "SANDBOX_MEASUREMENT_ONLY__ZERO_TERMINAL_CREDIT",
+ "authority": "NONE",
+ "credit": 0,
+ "truth_achieved": false,
+ "the_instruction_i_had_been_ignoring": "'You have to use the web to the fullest. You can take any perfect solutions there or any code in the repos there or from AI researches there.' I searched the web for Claude Opus 5.5's SPECS seven times and never once searched it for CODE TO TAKE. This round I did.",
+ "what_the_research_gave": "Hyperdimensional Computing (Kanerva 2009) + Random Indexing (Sahlgren 2005) + Holographic Reduced Representations (Plate 1995). Verbatim from the survey: the binding operation 'does not require any training'; Random Indexing 'only require[s] a single pass through the training data'. That is the user's thesis stated in the literature twenty years before they stated it, with mathematics instead of a claim.",
+ "what_i_built": "canonical/runtime/hyperdimensional_semantics_v1.py \u2014 a semantic space where a word's meaning is the sum of its neighbours' FIXED random vectors. There is no parameter to train: blake2b(token) is the entire embedding table, and only a SUM accumulates.",
+ "measured": {
+  "one_pass_64_files_40885_tokens_ms": 933,
+  "throughput_tokens_per_sec": 43812,
+  "one_pass_764_files_784288_tokens_sec": 27.5,
+  "scale_throughput_tokens_per_sec": 28557,
+  "trained_parameters": 0,
+  "gradient_steps": 0,
+  "epochs": 0,
+  "vocabulary_at_scale": 13077,
+  "speedups_found_by_profiling": {
+   "index_vector_recomputed_per_token": "memoised -> 9.6s to 3.4s for 40k tokens",
+   "inlined_accumulation": "3.4s to 1.95s",
+   "dead_order_accumulation_removed": "1.95s to 0.93s; order is bound in phrase() and the stored order vector was never read by neighbours()",
+   "total": "9.6s -> 0.93s for the same 40k tokens = 10.3x"
+  }
+ },
+ "quality_work_that_was_necessary": [
+  "Function words must not be context and must not own a vector. Measured: the six nearest neighbours of 'capability' were 'and, to, by, is, the, as'. After: 'knowledge, law, laws, engine, frontier'.",
+  "The common component must be removed. Measured: 'evidence' and 'claim' were nearest to 'the, is, and, for'. Subtracting the mean context vector is what Sahlgren's RI does. After: evidence -> verifier, properties, registry; claim -> digest, target, benchmark, exact.",
+  "Identifiers must be split. Measured: a test function name arrived as one token 'testfailthefallthroughisscopedtowhat'. Splitting snake_case and camelCase fixed it."
+ ],
+ "what_it_can_do_measured": {
+  "neighbours": "verify -> verifier, guard, binding, reconciliation | evidence -> claim, candidate, source | bound -> verified, registry, capability, adapter, goal | receipt -> receipts, verification, sha, evidence, soundness",
+  "analogy_on_an_isolated_corpus": "capability->bound :: receipt -> [executed, accepts, work, evidence]",
+  "word_association_learned_from_prose": "model -> [weights, gradient, nothing, epochs, gradients] \u2014 the space learned what a model is associated with, and this one has none of them",
+  "composition": "phrase('verified capability') vs phrase('capability verified') cosine 0.501 \u2014 order is encoded by permutation, no training"
+ },
+ "what_it_CANNOT_do_and_i_will_not_claim": [
+  "It cannot produce a vector for a word it has never seen in context, and it says so rather than inventing one.",
+  "ANALOGY IS UNRELIABLE AT SCALE. On a tight corpus 'capability->bound :: receipt -> executed' is right. Over 764 mixed files 'fail->failure :: refuse -> [apt-cli, canonical-namespace, ...]' is noise. Random indexing gives similarity; the offset for a relational analogy is not sharp enough at this scale. I am not claiming a solved analogy engine.",
+  "It does NOT close the routing gap yet. Measured: on goals whose words the router could not place, semantic expansion changed the top candidate on 0 of 4 probes. The neighbours were correct; the expansion was not strong enough to outvote the router's own scoring. It is wired as a layer and it is honest about being inert on its own.",
+  "It is not comparable to a transformer on open-domain language. 28.5k tokens/sec through pure Python with fixed random vectors is a very different object from a trained model, and the only fair statement is that the SHAPE of the two is different, not that one is better."
+ ],
+ "why_this_matters_for_the_user_s_thesis": "It is the first piece in this tree where the no-weights claim is a MECHANISM rather than an accounting fact. Everything else established weights:0 by not having a model. This has a semantic space -- word meaning, similarity, composition -- with trained parameters 0 by construction, because the vectors are random draws and only sums accumulate.",
+ "tests": {
+  "new": "test_hyperdimensional_semantics_v1.py 10/10",
+  "model_suite": "97 passed",
+  "answers_family": "111 passed",
+  "guard": "repo_integrity_guard 17 rules 0 violations PASS"
+ },
+ "files": [
+  "canonical/runtime/hyperdimensional_semantics_v1.py",
+  "canonical/tests/test_hyperdimensional_semantics_v1.py",
+  "canonical/runtime/brain_one_model_v3.py (semantic layer wired)"
+ ]
+}

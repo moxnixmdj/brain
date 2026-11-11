@@ -1,0 +1,34 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THREE_ENVIRONMENT_SHAPES_MEASURED_20261109_V1",
+  "round": 81, "date": "2026-11-09",
+  "versions": {
+    "V_0_1": "sqlite_exec only (the prior record)",
+    "V_0_2": "file tree / python_file_op, round 80",
+    "V_0_3": "HTTP form / http_request, this round"
+  },
+  "layer_2_measured": {
+    "demonstration": "6 UI steps against a real form (click, type A-100, click, type 40, click)",
+    "observed_causal_effect": "POST /orders form_body {csrf: tok123, sku: A-100, qty: 40}",
+    "elevated": "1 step, layer=http_request, all 6 UI steps pruned, 0.07 ms",
+    "learned": "form_body {csrf: tok123, sku: ?str0, qty: ?num0}; goal_skeleton 'place an order for sku ?str0 with quantity ?num0'",
+    "new_goal": "'place an order for sku B-900 with quantity 7' -> {'?str0': 'B-900', '?num0': 7}",
+    "executed": "POST -> 201, response {\"id\": \"ORD-B-900-7\", ...}, round trip 2.5 ms",
+    "browser_in_loop": false,
+    "csrf_kept_literal": "correct -- session state is not a goal parameter"
+  },
+  "the_abstraction_now": {
+    "demonstrated_shapes": ["sqlite_exec (L1)", "python_file_op (L1)", "http_request (L2)"],
+    "not_demonstrated": ["cli_exec (L3)", "semantic_dom (L4)"],
+    "verdict": "THREE independent environment shapes now demonstrate: one demonstration in, a parameterised permanent skill out, verified end to end. This is the claim the owner has been making, and it now holds in three places."
+  },
+  "the_honest_boundary_that_remains": {
+    "what_was_GIVEN_to_the_compiler": "the causal HTTP exchange itself (url, method, form_body, headers)",
+    "what_was_NOT_demonstrated": "capturing that exchange automatically from a live browser session",
+    "why_it_matters": "the reduction is real, but the front half -- noticing that this click sequence produced exactly that POST -- is still supplied by the harness. Closing that gap is the next real piece of work, not a formality.",
+    "practical_note": "in a real environment a CDP Network domain trace supplies it directly, which is a small piece of engineering, not a research problem"
+  },
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "what_is_still_NOT_real": ["no SWE-bench Verified score", "no OSWorld score", "ARC-AGI 1.5%", "no sentience, 42 rounds"],
+  "next": "close the front half: capture the HTTP exchange from the live browser session automatically, so the demonstration comes from a real person clicking, not from a harness that already knows the answer."
+}

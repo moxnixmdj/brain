@@ -1,0 +1,20 @@
+{
+  "schema": "PROJECT_BRAIN_R127_FAMILY_BOUNDARY_V1",
+  "date": "2026-11-09",
+  "question": "does the procedure learned from one demonstration transfer ACROSS widget families, or only WITHIN one?",
+  "previous_round_answer": "within-family transfer proven (click-menu 8/8, click-menu-2 9/10). cross-family untested.",
+  "this_round": {
+    "family_B_slider": {"task": "use-slider", "procedure": "drag the slider handle to the pixel corresponding to the target value", "episodes": 6, "successes": 0},
+    "family_C_drag": {"task": "drag-box", "procedure": "translate the small box so its top-left lands inside the large box", "episodes": 6, "successes": 6}
+  },
+  "the_decisive_observation": {
+    "slider_failures": [[5,0],[31,15],[50,101],[104,102],[73,82],[187,127]],
+    "what_this_shows": "the procedure executed. it did not fail to transfer. it produced a WRONG NUMBER every time because the value-to-pixel mapping is not the linear mapping the procedure assumed. target 50 produced 101.",
+    "literature_match": "ComponentBench (COLM 2026) reports continuous calibration error as the single largest error class at 20.2%, and states these tasks are 'trivial for humans (one drag) yet resistant to added reasoning'. This is that failure mode, reproduced.",
+    "why_drag_succeeded": "containment is a GEOMETRIC RELATION between two boxes: put this corner inside that rectangle. A relation is expressible as a rule and is valid for every box. Value-to-pixel calibration is a PROPERTY OF THIS WIDGET INSTANCE, which no rule derived from one demonstration can know."
+  },
+  "the_first_principles_law_that_this_establishes": "a procedure transfers across families exactly when the world provides the error signal that lets the procedure self-correct. drag-box gives one: you can measure whether the small box is inside the large one, before submitting. the slider gives none: after dragging you can READ the number off the page, which means the correct procedure is not 'compute the pixel' but 'drag, read the value, correct, repeat'.",
+  "the_implication_for_the_users_thesis": "instant learning transfers across families WHEN the task admits a closed correction loop (observe the result of your own action and compare it to the goal). It does NOT transfer when the agent must open-loop guess a continuous parameter. The fix is not more learning, and not more verbs: it is making the action OBSERVABLE and CORRECTABLE, which is the same thing that makes the SE case work (compile, run, read the failure).",
+  "the_untested_prediction_this_generates": "if the slider episode is rewritten as drag -> read #val -> drag again by the residual, it should converge in 1-2 corrections and the family-C result should repeat. That is a falsifiable prediction, not a claim.",
+  "what_is_NOT_claimed": ["that slider is unsolvable", "that drag works on every drag task", "any benchmark-level figure"]
+}

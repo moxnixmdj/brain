@@ -1,0 +1,40 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_LOOP_RUNS_AND_REPLAYS_WITHOUT_A_MODEL_20261109_V1",
+  "round": 64,
+  "date": "2026-11-09",
+  "claim": "A model-proposed, gate-verified computer-use loop now runs against a real browser in this repository, and a taught trajectory replays with zero model calls.",
+  "what_was_already_there_and_is_used_unchanged": {
+    "browser": "canonical/runtime/browser_launch_v1.sh (vendored Chromium, DevTools :9222)",
+    "eyes_and_hands": "canonical/runtime/astra_hidden_visual_executor.py (Page.captureScreenshot, Input.dispatchMouseEvent, Input.insertText; DOM./Accessibility./Runtime. forbidden)",
+    "gate_precedent": "r60/r61 operation + shape verification"
+  },
+  "what_is_new": {
+    "module": "canonical/runtime/act_loop_v1.py",
+    "function": "act(goal) -- propose, gate, execute, causal_check, verify, or REFUSE",
+    "memory": "record_trajectory / replay, keyed on the starting screen hash",
+    "tests": "canonical/tests/test_the_act_loop_answers_or_refuses_v1.py (25 passed)"
+  },
+  "measured": {
+    "single_action_goal": {"run1": "ANSWERED CAUSAL_OK", "run2_no_model": "REPLAYED_WITHOUT_A_MODEL", "steps": 1},
+    "three_step_goal": {"goal": "search for eigenvalues", "run1": "ANSWERED 3/3 causal OK", "run2_no_model": "REPLAYED_WITHOUT_A_MODEL 3 steps"},
+    "verify_evidence": "screenshots committed under canonical/evaluation/the_loop/",
+    "the_number_that_matters": {"definition": "fraction of trajectories that replay without a model and still verify", "value": "2/2 on the goals exercised today", "honest_scope": "two toy pages; not a benchmark"}
+  },
+  "bugs_found_by_running_it_not_by_reading_it": [
+    {"id": "CORRUPT_FRAME_CRASHED_THE_LOOP", "detail": "PIL raised OSError on a truncated PNG outside the import guard; the loop died instead of failing closed. The hostile test found it."},
+    {"id": "A_CORRECT_ACTION_WAS_REFUSED", "detail": "Focusing a text field moves ~0.16% of the frame; the 2% floor refused a correct click. r53's mistake in a new domain."},
+    {"id": "A_PERCENTAGE_FLOOR_PUNISHES_AN_HONEST_GENEROUS_REGION", "detail": "Typing 11 characters moved ~1900 px = 0.9% of the claimed band. Fixed by using absolute changed pixels for 'did something happen here' and a fraction for 'did it happen elsewhere'."},
+    {"id": "NO_GLOBAL_THRESHOLD_SEPARATES_A_CARET_FROM_A_HEADING_SWAP", "detail": "focus ring 1896 px vs heading swap 3250 px, a factor of 1.7. Any global pixel threshold here is theatre; a 'none' claim was made checkable only as a claim about a PLACE."},
+    {"id": "A_LIVE_TEST_MUST_START_FROM_A_KNOWN_STATE", "detail": "An earlier demo had already pressed the button; clicking again changed nothing and the gate refused correctly while the test blamed the loop."}
+  ],
+  "what_this_does_not_prove": [
+    "It is not a benchmark result. Two five-element pages are not OSWorld.",
+    "The verifier is still a model reading a screenshot. The gate bounds it; it does not replace it.",
+    "Replay is keyed to the exact starting screen hash; any layout or content change forces the model path.",
+    "No desktop applications: no display server and no window manager on this machine. Browser only.",
+    "Planning across pages is not built. Each act() run has one goal on one screen."
+  ],
+  "next": ["Phase 2 measurement at scale: how often does replay still verify after a benign page change",
+           "Phase 3: connect act() to the OSWorld V2.1 adapter family already in canonical/runtime"]
+}

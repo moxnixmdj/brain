@@ -1,0 +1,121 @@
+{
+ "schema": "brain.governance.CONFINEMENT_REFUSAL_WAS_A_SCOPE_BUG_20261109_V1",
+ "date": "2026-11-09",
+ "round": 28,
+ "status": "THE_CARRIER_EXISTED_AND_WAS_WIRED__THE_REFUSAL_WAS_A_PATH_SCOPE_MISMATCH_AT_THE_JOIN__ONE_MODEL_NOW_PASSES_END_TO_END",
+ "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+ "what_the_user_asked_and_why_the_date_matters": {
+  "user": "we are in 10/11/2026, use the latest most advanced research or tools",
+  "response": "searched the week of 2026-11-02 to 2026-11-09 rather than relying on training data",
+  "found_and_used": [
+   {
+    "paper": "Hybrid Computer Use (arXiv 2610.41432, 30 Oct 2026)",
+    "finding": "the interface should expose three channels -- programmatic (code/CLI), semantic (accessibility), visual (GUI) -- and report AX actions as DIFFS so fewer round trips are needed. Best Partial and Binary scores on OSWorld 2.0 among compared systems.",
+    "why_it_validates_this_tree": "round 25 added exactly the semantic/AX verifier channel, and round 27 gated programmatic execution. HCU is the argument that all three belong in one interface -- which is what brain_one_model_v3 is for."
+   },
+   {
+    "paper": "Computer-Use Agents Are Embodied Generalists (arXiv 2611.09847, 6 Nov 2026)",
+    "finding": "CUAs win first, second, third and sixth place across four ECCV workshop competitions with a single unmodified design, by rendering the physical environment as software.",
+    "why_it_matters": "the claim 'one model, many environments' has independent support as of three days ago -- for computer use as the substrate, not for one-shot learning"
+   },
+   {
+    "paper": "Agents, Think Only When it Helps (arXiv 2611.05709, 3 Nov 2026)",
+    "finding": "discarding teacher THOUGHTS during agent distillation barely changes student action performance, except where the thought is not disclosed in the action",
+    "why_it_matters": "an argument for the fast path: much of what an agent 'thinks' is recoverable from what it does. A compiled skill is the limit of that observation."
+   },
+   {
+    "paper": "SCIENCEBOARD (ICLR 2026)",
+    "finding": "SOTA computer-using agents average 20% success on real scientific software tasks; agents range 0-15% with a 20% peak",
+    "why_it_matters": "current capability is far below human experts. A tree that refuses to claim capability it cannot show is behaving correctly in this regime."
+   },
+   {
+    "paper": "ToolGate (ACL 2026 Findings)",
+    "finding": "each tool is a Hoare contract; the precondition gates invocation, the postcondition decides commitment",
+    "used_in": "round 27 (chain admission) and round 28 (SQL preconditions)"
+   }
+  ]
+ },
+ "the_defect": {
+  "symptom": "brain_one_model_v3.resolve('sort -u data.txt', root=<scratch>, execute=True) returned layer=REFUSAL with FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_CONFINEMENT",
+  "what_the_carrier_actually_reported": {
+   "confined": true,
+   "live_workspace_untouched": true,
+   "exit": 2,
+   "stderr": "sort: cannot read: data.txt: No such file or directory"
+  },
+  "so": "the carrier HAD established confinement. The failure was that the command could not see the file. The status blamed isolation for a scope mistake.",
+  "root_cause": "the door passed workspace_root='.' -- the repository -- while the operand data.txt was relative to `root`, the scratch workspace the caller named"
+ },
+ "both_obvious_fixes_were_wrong_and_are_now_recorded": [
+  {
+   "attempt": "rebase the operand to an absolute path",
+   "result": "carrier ran in the right directory but sort died: 'cannot read: /abs/path/data.txt'. The carrier stages a WORKSPACE-RELATIVE view; an absolute host path is not in it.",
+   "kept_as_test": "test_an_absolute_operand_is_not_what_the_carrier_wants"
+  },
+  {
+   "attempt": "leave the operand bare and the cwd at '.'",
+   "result": "carrier ran in the repository; sort died on a file that lives in the scratch workspace",
+   "kept_as_test": "none -- this is the original defect"
+  },
+  {
+   "attempt_that_worked": "pass the caller's workspace as the carrier's cwd and leave the command's words alone",
+   "result": "PASS__READ_ONLY_COMMAND_EXECUTED_UNDER_ADMITTED_CONFINEMENT, confined True, untouched True, exit 0, 8 distinct lines"
+  }
+ ],
+ "measured_result": {
+  "call": "brain_one_model_v3.resolve('sort -u data.txt', root=<scratch>, execute=True)",
+  "layer": "ADMITTED_CONFINEMENT",
+  "pass": true,
+  "confined": true,
+  "live_workspace_untouched": true,
+  "changed_files": [],
+  "exit": 0
+ },
+ "security_probe__the_part_that_would_have_made_a_PASS_dishonest": {
+  "why_probed": "'awk' is in READ_ONLY_PROGRAMS, and awk can execute arbitrary shell commands with system(). If that worked inside the carrier, the carrier would be a lie.",
+  "results": [
+   {
+    "argv": "sed -i s/a/b/ data.txt",
+    "outcome": "REFUSED__WRITE_FLAG_STATED:sed -i"
+   },
+   {
+    "argv": "sort -o out.txt data.txt",
+    "outcome": "REFUSED__WRITE_FLAG_STATED:sort -o"
+   },
+   {
+    "argv": "cat /etc/passwd",
+    "outcome": "exit 1, no pass -- the host path is not in the staged view"
+   },
+   {
+    "argv": "awk 'BEGIN{system(\"touch /tmp/brain_escape_marker\")}'",
+    "outcome": "no pass, and the marker file WAS NEVER CREATED"
+   }
+  ],
+  "conclusion": "no escape observed in the four probed directions. This is a probe, not a certification -- carrier_qualified remains False by the project's own honesty note (host /usr is mounted read-only; no hostile-code certification has been done)."
+ },
+ "what_this_changes_and_what_it_does_not": {
+  "changes": [
+   "the one model can now carry out a stated read-only command under admitted confinement and report a verified pass",
+   "a scope failure at the join can no longer be reported as an isolation failure"
+  ],
+  "does_not_change": [
+   "no SQL, no file WRITE, no arbitrary program is admitted by the carrier -- those keep the original refusal",
+   "carrier_qualified stays False in every result, by the module's own design",
+   "computer use still has ZERO terminal results on a real desktop",
+   "coding rate unchanged at 1 of 9 = 11.1%",
+   "'how many unique lines' is still not answered through the door -- sort -u returns the distinct set, which is a different question from the count"
+  ]
+ },
+ "tests": {
+  "file": "canonical/tests/test_one_model_carrier_path_scope_v1.py",
+  "count": 6,
+  "passing": true
+ },
+ "suite": "53 passed across the five relevant files; guard PASS 17/0; 443 capabilities; compiled 10,212,754 bytes",
+ "cost": {
+  "trained_parameters": 0,
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "truth_achieved": false
+}

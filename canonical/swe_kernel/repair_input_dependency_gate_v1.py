@@ -143,6 +143,78 @@ def _names_by_slot(source_text: str, function_name: str) -> dict[str, str]:
     return {}
 
 
+
+def _called_names(source: str) -> set[str]:
+    """Names/attributes invoked as calls anywhere in `source`."""
+    import ast as _ast
+    try:
+        tree = _ast.parse(source)
+    except SyntaxError:
+        return set()
+    out: set[str] = set()
+    for node in _ast.walk(tree):
+        if isinstance(node, _ast.Call):
+            fn = node.func
+            if isinstance(fn, _ast.Name):
+                out.add(fn.id)
+            elif isinstance(fn, _ast.Attribute):
+                out.add(fn.attr)
+    return out
+
+
+def _imported_names(source: str) -> set[str]:
+    """Names this module imports from somewhere else (cross-module dependencies)."""
+    import ast as _ast
+    out: set[str] = set()
+    try:
+        tree = _ast.parse(source)
+    except SyntaxError:
+        return out
+    for node in _ast.walk(tree):
+        if isinstance(node, _ast.ImportFrom):
+            for a in node.names:
+                out.add(a.asname or a.name)
+        elif isinstance(node, _ast.Import):
+            for a in node.names:
+                out.add((a.asname or a.name).split(".")[0])
+    return out
+
+
+def lost_calls(before_source: str, after_source: str) -> list[str]:
+    """Calls the original made that the patch no longer makes anywhere.
+
+    ROUND 116b -- THE SAME DISHONESTY, ONE COSTUME OVER.
+    Measured 2026-11-09 on the coupled-billing fixture in
+    canonical/tests/test_closed_loop_repair_must_generalise_v1.py:
+
+        before: compute_invoice -> return apply_discount(total, disc)
+        patch : compute_invoice -> return (sum(items) - disc)
+
+    This gate REFUSED a lookup table that returns constants, and PASSED the
+    inline shortcut above -- because the shortcut still reads `items` and `disc`,
+    which was the only thing being checked. Both patches are the same act: make
+    the visible tests green without repairing the bug in the module that owns it.
+    The shortcut does not fix `apply_discount`; it stops calling it.
+
+    The distinction this adds is DEPENDENCY, not DATA: a patch may compute
+    differently, but it may not silently drop a call the original made. Narrow by
+    design -- it is one syntactic fact, it names the dropped call, and
+    `terminal_authority` stays false so a caller with knowledge this module does
+    not have can override.
+    """
+    # SCOPE: imported names only. The first version of this compared EVERY call and
+    # immediately refused legitimate work -- measured 2026-11-09, it turned 6 unrelated
+    # repository tests red, including a loop->comprehension rewrite refused for dropping
+    # `len` and `range`, and a reformatted-but-identical function refused outright.
+    # `len` and `range` are builtins the language owns; dropping them is a change of
+    # implementation. `apply_discount` is a dependency this module imports from a sibling
+    # module that owns the bug; dropping THAT is how you make the tests green without
+    # repairing anything. So the gate is scoped to imported call sites, which keeps the
+    # billing catch and leaves ordinary refactoring alone.
+    computed = {n for n in _called_names(after_source)}
+    return sorted((_called_names(before_source) & _imported_names(before_source)) - computed)
+
+
 def gate(before_source: str, after_source: str) -> dict[str, Any]:
     """Decide whether the patch keeps every input the original function consumed."""
     try:
@@ -162,6 +234,16 @@ def gate(before_source: str, after_source: str) -> dict[str, Any]:
             "status": REFUSED,
             "reason": "PATCH_STOPPED_READING_ITS_INPUTS: " + listed,
             "lost": lost,
+            "terminal_authority": False,
+        }
+    dropped = lost_calls(before_source, after_source)
+    if dropped:
+        return {
+            "schema": SCHEMA,
+            "status": REFUSED,
+            "reason": "PATCH_STOPPED_CALLING: " + ", ".join(dropped),
+            "lost": [],
+            "dropped_calls": dropped,
             "terminal_authority": False,
         }
     return {

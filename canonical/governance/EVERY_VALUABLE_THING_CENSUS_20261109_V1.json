@@ -1,0 +1,102 @@
+{
+  "schema": "brain.governance.EVERY_VALUABLE_THING_CENSUS_20261109_V1",
+  "date": "2026-11-09",
+  "status": "THE_COMPLETE_CENSUS_EXISTS_FOR_THE_FIRST_TIME__3228_RECORDS_PRICED",
+  "agreement": "OPTIMIZE_MEASURE_NEVER_CLAIM",
+
+  "what_was_unfinished_and_is_now_done": {
+    "the_law": "see every important or valuable thing: what it is and how valuable it is. Stated twenty times.",
+    "what_i_had_been_doing": "answering with a seven-item list. That is a highlight reel, not a census, and it does not satisfy the law.",
+    "what_i_did": "enumerated the entire population of written claims -- every JSON governance record -- and priced each one by the weight it can bear",
+    "population": "canonical/governance/*.json",
+    "why_this_population_is_the_right_one": "this repository writes down every claim it makes as a governance record with a status, a date and usually hard_nonclaims. The claims are therefore finite and enumerable, which is what makes a census possible at all.",
+    "module": "canonical/runtime/every_valuable_thing_measured_v1.py",
+    "output": "canonical/evaluation/every_valuable_thing_census_v1.json"
+  },
+
+  "the_census": {
+    "total_records": 3228,
+    "total_bytes": 20830994,
+    "unparseable": 1,
+    "tiers": {
+      "PROVEN":      {"count": 353,  "pct": 10.9, "mb": 1.93, "meaning": "declares a passed or independently-run check"},
+      "ACTIVE":      {"count": 433,  "pct": 13.4, "mb": 5.12, "meaning": "a live route or mechanism, not a completed proof"},
+      "REFUSED":     {"count": 182,  "pct": 5.6,  "mb": 1.49, "meaning": "a fail-closed outcome -- asserts that something did NOT work"},
+      "CANDIDATE":   {"count": 1082, "pct": 33.5, "mb": 5.74, "meaning": "a hypothesis or proposal"},
+      "RETRACTED":   {"count": 77,   "pct": 2.4,  "mb": 0.28, "meaning": "revoked, withdrawn or superseded"},
+      "UNCLASSIFIED":{"count": 1101, "pct": 34.1, "mb": 6.28, "meaning": "no recognisable status token"}
+    },
+    "records_carrying_a_measured_number": 355,
+    "proven_records_with_a_measured_number": 45,
+    "records_declaring_explicit_hard_nonclaims": 1656,
+    "nonclaim_rate_pct": 51.3
+  },
+
+  "the_pricing_rule_and_why_it_is_ordered_that_way": {
+    "order": "PROVEN > ACTIVE > REFUSED > CANDIDATE > RETRACTED > UNCLASSIFIED",
+    "the_counterintuitive_choice": "REFUSED is ranked ABOVE CANDIDATE",
+    "why": "a documented failure is evidence -- it narrows the space of what can be true, and it cost something real to obtain. A candidate is a sentence about what might be true and costs nothing. An inventory that ranks proposals above refusals is upside down, and most inventories are upside down.",
+    "the_repo_agrees": "182 records are REFUSED and they are counted, not hidden. 51.3% of all records carry an explicit non-claim. That is the highest-value statistic in this census."
+  },
+
+  "the_complete_family_inventory": [
+    {"family": "TB",           "records": 241, "proven": 17, "refused": 3,  "candidate": 36},
+    {"family": "TERMINAL",     "records": 169, "proven": 30, "refused": 20, "candidate": 57},
+    {"family": "ROOT2",        "records": 164, "proven": 26, "refused": 7,  "candidate": 54},
+    {"family": "LIVEBENCH",    "records": 142, "proven": 20, "refused": 6,  "candidate": 65},
+    {"family": "OPUS55",       "records": 134, "proven": 6,  "refused": 20, "candidate": 67},
+    {"family": "CURRENT",      "records": 132, "proven": 22, "refused": 7,  "candidate": 62},
+    {"family": "PROFESSIONAL", "records": 124, "proven": 4,  "refused": 3,  "candidate": 39},
+    {"family": "R2",           "records": 98,  "proven": 7,  "refused": 1,  "candidate": 11},
+    {"family": "HLE",          "records": 94,  "proven": 6,  "refused": 3,  "candidate": 7},
+    {"family": "H100",         "records": 84,  "proven": 8,  "refused": 0,  "candidate": 20},
+    {"family": "ROOT3",        "records": 70,  "proven": 13, "refused": 6,  "candidate": 39},
+    {"family": "UNKNOWN",      "records": 68,  "proven": 2,  "refused": 5,  "candidate": 26},
+    {"family": "CURSORBENCH",  "records": 59,  "proven": 0,  "refused": 0,  "candidate": 7},
+    {"family": "BYTES",        "records": 58,  "proven": 17, "refused": 0,  "candidate": 7},
+    {"family": "FINANCE",      "records": 52,  "proven": 14, "refused": 3,  "candidate": 18},
+    {"family": "P3",           "records": 52,  "proven": 2,  "refused": 2,  "candidate": 8},
+    {"family": "AA",           "records": 50,  "proven": 1,  "refused": 0,  "candidate": 3},
+    {"family": "SYNTHESIS",    "records": 50,  "proven": 9,  "refused": 6,  "candidate": 27},
+    {"family": "GDPVAL",       "records": 47,  "proven": 1,  "refused": 2,  "candidate": 14},
+    {"family": "COMPOSITION",  "records": 40,  "proven": 1,  "refused": 4,  "candidate": 28},
+    {"family": "TOOL",         "records": 40,  "proven": 7,  "refused": 3,  "candidate": 26},
+    {"family": "OSWORLD",      "records": 37,  "proven": 2,  "refused": 0,  "candidate": 11}
+  ],
+
+  "what_the_census_changes_about_the_answer": [
+    "The project is not short of claims. It has 3,228 of them, 20.8 MB of them, across 22+ named benchmark families including SWE-bench, Terminal, OSWorld, LiveBench, HLE, GDPval, CursorBench and Opus55.",
+    "Only 10.9% of them declare a passed check. That is the single most important number in this document, because it is measured over the WHOLE population rather than a sample.",
+    "5.6% are documented failures. These are assets, not embarrassments -- they are the records that stop the next round repeating a dead end.",
+    "51.3% carry an explicit hard non-claim. A project where half of every assertion comes with its own falsification condition is rare, and it is the reason any number in this document can be believed.",
+    "34.1% are UNCLASSIFIED, which is honestly a defect: 1,101 records have a status string this census cannot read. That is the largest single improvement available to the governance layer itself."
+  ],
+
+  "the_seven_things_i_was_reporting_as_if_they_were_the_answer__repriced_against_the_census": [
+    {"what": "780 action-intent laws", "census_evidence": "distinct from governance JSON; the falsification-condition population", "value": "highest, unchanged"},
+    {"what": "SWE repair engine", "census_evidence": "11.1% on 9 unique control-verified real bugs (this session, measured live)", "value": "real, bounded by statement insertion"},
+    {"what": "demonstrate-once trace compiler", "census_evidence": "2 environment shapes correct in new sandboxes at 0.5 ms and 5.41 ms, sabotage control passing, twin world synthesizing its own held-out goal", "value": "highest for computer use, bounded by the verifier"},
+    {"what": "H100 zero-learned-bytes frontier", "census_evidence": "H100 family: 84 records, 8 proven, 0 refused, 20 candidate; frontier record carries fp32 0.55/0.66 vs packed 0.55/0.63 with packed_minus_fp32 = 0", "value": "real, bounded to its frozen tasks"},
+    {"what": "the refusal machinery", "census_evidence": "182 REFUSED records plus 1,656 records with explicit non-claims", "value": "this is what makes the other six trustworthy"},
+    {"what": "the weightless unifier", "census_evidence": "not independently proven in this session", "value": "thesis, built, not yet benchmarked"},
+    {"what": "proven limits and corrections", "census_evidence": "77 RETRACTED and 182 REFUSED, all counted", "value": "the record of what does not work"}
+  ],
+
+  "the_smartest_next_moves__from_the_census_not_from_opinion": [
+    {"rank": 1, "action": "reduce the 1,101 UNCLASSIFIED records to a known tier", "why": "34.1% of the population is invisible to pricing. It is the largest single defect and it is pure bookkeeping, not research."},
+    {"rank": 2, "action": "CURSORBENCH has 59 records and 0 proven. Promote one to a real measured run or mark the family as resolved-not-achieved.", "why": "the census names the family with the worst proven-to-record ratio"},
+    {"rank": 3, "action": "statement insertion in the repair engine", "why": "worth 4 of 5 remaining coding bugs"},
+    {"rank": 4, "action": "add the third and fourth verifier kinds so two more environment shapes become safe to claim", "why": "each new postcondition kind widens the safe permanent-learning set, which is the actual product"},
+    {"rank": 5, "action": "re-run this census after every session so the price of the tree is a tracked number, not a story", "why": "a census that is not re-run decays into a claim"}
+  ],
+
+  "what_this_census_does_NOT_prove": [
+    "it does not verify that a PROVEN record is correct -- only that the record declares a passed check",
+    "it does not cover claims made outside governance JSON (code, docstrings, test names)",
+    "it is not a capability rate: it is a census of claims, and a count of claims is not a measure of skill",
+    "45 PROVEN records carry an explicit measured number; that is a small fraction of 3,228 and should be quoted as such"
+  ],
+
+  "cost": {"trained_parameters": 0, "external_model_calls": 0, "incremental_spend_usd": 0},
+  "truth_achieved": false
+}

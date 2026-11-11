@@ -1,0 +1,1791 @@
+{
+ "n": 130,
+ "success": 13,
+ "seconds": 327.5,
+ "success_rate": 10.0,
+ "tasks": [
+  {
+   "task": "ascending-numbers",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on the numbers in ascending order.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "bisect-angle",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Create a line that bisects the angle evenly in two, then press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "book-flight",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Book the shortest one-way flight from: Valdez, AK to: Roswell, NM on 12/28/2016.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "book-flight-nodelay",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Book the cheapest one-way flight from: Gainesville, FL to: Rock Springs, WY on 11/10/2016.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "button-delay",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click button ONE, wait 2 seconds, then click button TWO.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "TWO",
+    "disclose": false,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "buy-ticket",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Buy the ticket with the most expensive cost.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "chase-circle",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Keep your mouse inside the circle as it moves around.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "choose-date",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 09/28/2016 as the date and hit submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "09",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "choose-date-easy",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 12/26/2016 as the date and hit submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "12",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "choose-date-medium",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 11/09/2016 as the date and hit submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "11",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "choose-date-nodelay",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 05/14/2016 as the date and hit submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "05",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "choose-list",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select Belgium from the list and click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Belgium",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "circle-center",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find and click on the center of the circle, then press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-button",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on the \"Submit\" button.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Submit",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "click-button-sequence",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click button ONE, then click button TWO.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "TWO",
+    "disclose": false,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-checkboxes",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select nothing and click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "nothing",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": 0.8969
+  },
+  {
+   "task": "click-checkboxes-large",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select q2VjW, uPld, Qfj, My, eEfZp and click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "q2VjW",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": 0.10359444444444443
+  },
+  {
+   "task": "click-checkboxes-soft",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select words similar to petite, rabbit, actual, despise and click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "words similar to petite",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -0.2
+  },
+  {
+   "task": "click-checkboxes-transfer",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select R4o8Vre, Adby and click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "R4o8Vre",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": 0.51972
+  },
+  {
+   "task": "click-collapsible",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Expand the section below and click submit.",
+   "plan": "disclose_then_submit",
+   "plan_detail": {
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-collapsible-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Expand the sections below, to find and click on the link \"Nisl,\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Nisl",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-collapsible-2-nodelay",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Expand the sections below, to find and click on the link \"sed\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "sed",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-collapsible-nodelay",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Expand the section below and click submit.",
+   "plan": "disclose_then_submit",
+   "plan_detail": {
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-color",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on the  colored box.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-dialog",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Close the dialog box by clicking the \"x\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "x",
+    "disclose": false,
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.8971
+  },
+  {
+   "task": "click-dialog-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the button in the dialog box labeled \"Cancel\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Cancel",
+    "disclose": false,
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.8982
+  },
+  {
+   "task": "click-link",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on the link \"nunc.\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "nunc",
+    "disclose": false,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-menu",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select Gabrielle>Benny>Roseann",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Gabrielle",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "click-menu-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the \"Menu\" button, and then find and click on the item labeled \"Play\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Menu",
+    "disclose": false,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-option",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select ueS and click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "ueS",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": 0.8671
+  },
+  {
+   "task": "click-pie",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Expand the pie menu below and click on the item labeled \"3\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "3",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-pie-nodelay",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Expand the pie menu below and click on the item labeled \"9\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "9",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-scroll-list",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select Cuba from the scroll list and click Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-shades",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select all the shades of red and press Submit.",
+   "plan": "select_all_matching",
+   "plan_detail": {
+    "phrase": "shades of red",
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-shape",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on a small blue letter",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-tab",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on Tab #3.",
+   "plan": "click_nth_tab",
+   "plan_detail": {
+    "n": 3,
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.898
+  },
+  {
+   "task": "click-tab-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Switch between the tabs to find and click on the link \"morbi\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "morbi",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-tab-2-easy",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Switch between the tabs to find and click on the link \"lorem.\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "lorem",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-tab-2-hard",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Switch between the tabs to find and click on the link \"vitae\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "vitae",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-tab-2-medium",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Switch between the tabs to find and click on the link \"tellus\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "tellus",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "click-test",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the button.",
+   "plan": "click_single_button",
+   "plan_detail": {
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.8986
+  },
+  {
+   "task": "click-test-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click button ONE.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "ONE",
+    "disclose": false,
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.8986
+  },
+  {
+   "task": "click-test-transfer",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click button ONE.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "ONE",
+    "disclose": false,
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.8987
+  },
+  {
+   "task": "click-widget",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on a \"text\" widget.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "copy-paste",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Copy the text in the textarea below, paste it into the textbox and press Submit.",
+   "plan": "copy_paste",
+   "plan_detail": {
+    "source_index": 1,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "copy-paste-2",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Copy the text from the 1st text area below and paste it into the text input, then press Submit.",
+   "plan": "copy_paste",
+   "plan_detail": {
+    "source_index": 1,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "count-shape",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "How many aqua items are there?",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "count-sides",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Press the button that correctly denotes how many sides the shape has.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "daily-calendar",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Create a 60 mins event named \"Food\", between 12PM and 4PM.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Food",
+    "disclose": false,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-box",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag the smaller box so that it is completely inside the larger box.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-circle",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag the circle right then press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-cube",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Move the cube around so that \"4\" is the active side facing the user.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-items",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag Annnora to the 5th position.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-items-grid",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag Shana to the top right.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-shapes",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag all triangles into the black box.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-shapes-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag all circles into the left box, and everything else into the right box.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-single-shape",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Drag the item down then press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "drag-sort-numbers",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Sort the numbers in increasing order, starting with the lowest number at the top of the list.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "draw-circle",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "draw-line",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Draw a vertical line that runs through the dot, then press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Tillie and forward that email to Guinna.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-delete",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Charlotta and click the trash icon to delete it.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-forward",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Dido and forward that email to Susy.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-forward-nl",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Dalia is waiting for the email by Laural.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-forward-nl-turk",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Send the email from Alvera to Imogene.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-important",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Madonna and click the star icon to mark it as important.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-nl-turk",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Go ahead and reply to Francene with the words \"Neque. Bibendum in magna.\"",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-noscroll",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Nickie and click the trash icon to delete it.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-reply",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Kaile and reply to them with the text \"Nibh vitae lacus.\".",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "email-inbox-star-reply",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the email by Eadith and click the star icon to mark it as important.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "enter-date",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter 07/19/2012 as the date and hit submit.",
+   "plan": "enter_date",
+   "plan_detail": {
+    "text": "07/19/2012",
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "enter-password",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter the password \"1YXIW\" into both text fields and press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "enter-text",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter \"Nieves\" into the text field and press Submit.",
+   "plan": "type_literal",
+   "plan_detail": {
+    "text": "Nieves",
+    "submit": true
+   },
+   "done": true,
+   "reward": 0.8343
+  },
+  {
+   "task": "enter-text-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Type \"DANNIE\" in all lower case letters in the text input and press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "enter-text-dynamic",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter \"b10\" into the text field and press Submit.",
+   "plan": "type_literal",
+   "plan_detail": {
+    "text": "b10",
+    "submit": true
+   },
+   "done": true,
+   "reward": 0.8385
+  },
+  {
+   "task": "enter-time",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter 3:29 AM as the time and press submit.",
+   "plan": "enter_time",
+   "plan_detail": {
+    "text": "3:29 AM",
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "find-greatest",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find and pick the card with the greatest number, then press submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "the card with the greatest number",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "find-midpoint",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find and click on the shortest mid-point between the two points, then press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "find-word",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the 14th word in the paragraph, type that into the textbox and press \"Submit\".",
+   "plan": "word_by_index",
+   "plan_detail": {
+    "n": 14,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "focus-text",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Focus into the textbox.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "focus-text-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Focus into the 2nd input textbox.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "form-sequence",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 2 with the slider, click the 3rd checkbox, then hit Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "2 with the slider",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "form-sequence-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Check the 1st radio button and enter the number \"7\" into the 1st textbox.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "form-sequence-3",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Choose 6ft 1in from the dropdown, then click the button labeled \"No\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "No",
+    "disclose": false,
+    "submit": false
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "generate-number",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Generate a number less than 8, then press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "grid-coordinate",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on the grid coordinate (-2,1).",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "guess-number",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "highlight-text",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Highlight the text in the paragraph below and click submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "highlight-text-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Highlight the text in the 2nd paragraph and click submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "hot-cold",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find and click on the HOT area.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "hover-shape",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Keep the mouse hovered over the colored square.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "identify-shape",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the button that best describes the figure below.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "login-user",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter the username \"bernardine\" and the password \"csq\" into the text fields and press login.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "login-user-popup",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter the username \"keli\" and the password \"5Q\" into the text fields and press login.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "moving-items",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click as many moving circles as possible.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "multi-layouts",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Search for adventure movies directed by Riggs from year 1978.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "multi-orderings",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Search for paranoid movies directed by Knowles from year 2000.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "navigate-tree",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Navigate through the file tree. Find and click on the folder or file named \"Macie\".",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Macie",
+    "disclose": true,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "number-checkboxes",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Draw the number \"6\" in the checkboxes using the example on the right and press Submit when finished.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "odd-or-even",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Mark the numbers below as odd or even and press submit when done.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "order-food",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Order one of each item: Chicken wings, Chocolate cake",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "phone-book",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find Fred in the contact book and click on their phone number.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "read-table",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter the value of Last name into the text field and press Submit.",
+   "plan": "read_table",
+   "plan_detail": {
+    "label": "Last name",
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "read-table-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter the value that corresponds with each label into the form and submit when done.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "resize-textarea",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Resize the textarea so that the height is larger than its initial size then press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "right-angle",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Add a third point to create a right angle, then press submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "scroll-text",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Find the last word in the text area, enter it into the text field and hit Submit.",
+   "plan": "word_by_index",
+   "plan_detail": {
+    "n": -1,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "scroll-text-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Scroll the textarea to the top of the text hit submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "search-engine",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Use the textbox to enter \"Sergio\" and press \"Search\", then find and click the 1st search result.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Search",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "sign-agreement",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the cancel button.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "simon-says",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Push the buttons in the order displayed.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "simple-algebra",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Solve for x and type your answer into the textbox. Press Submit when done.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "simple-arithmetic",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Solve the math problem and type your answer into the textbox. Press submit when done.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "social-media",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "For the user @joye, click on the \"Copy link to Tweet\" button.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Copy link to Tweet",
+    "disclose": false,
+    "submit": false
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "social-media-all",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the \"Like\" button on all posts by @juan and then click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Like",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "social-media-some",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click the \"Retweet\" button on 1 post by @tula and then click Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "Retweet",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "stock-market",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Buy VIL stock when the price is less than $47.80.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "terminal",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Use the terminal below to delete a file ending with the extension .rb",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "text-editor",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Using the text editor, give everything the style bold and press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "text-transform",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Type the text below into the text field and press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "tic-tac-toe",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Playing as 'X', win a game of tic-tac-toe.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "unicode-test",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Click on the \"\u00c5\u008f\u2013\u00e6\u00b6\u02c6\" button.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "\u00c5\u008f\u2013\u00e6\u00b6\u02c6",
+    "disclose": false,
+    "submit": false
+   },
+   "done": true,
+   "reward": 0.8981
+  },
+  {
+   "task": "use-autocomplete",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter an item that starts with \"Faro\".",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "use-autocomplete-nodelay",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Enter an item that starts with \"Isl\" and ends with \"an\".",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "use-colorwheel",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select aqua with the color picker and hit Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "use-colorwheel-2",
+   "actions": 2,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select the following color  with the color picker and hit Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "the following color with the color pick",
+    "disclose": false,
+    "submit": true
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "use-slider",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 0 with the slider and hit Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "0 with the slider",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "use-slider-2",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Set the sliders to the combination [15,10,16] and submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  },
+  {
+   "task": "use-spinner",
+   "actions": 1,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Select 1 with the spinner and hit Submit.",
+   "plan": "click_named",
+   "plan_detail": {
+    "name": "1 with the spinner",
+    "disclose": false,
+    "submit": true
+   },
+   "done": true,
+   "reward": -1
+  },
+  {
+   "task": "visual-addition",
+   "actions": 0,
+   "rung": "ADDRESSED",
+   "error": null,
+   "goal": "Type the total number of blocks into the textbox and press Submit.",
+   "plan": "refuse",
+   "plan_detail": {
+    "why": "outside the grammar"
+   },
+   "done": false,
+   "reward": 0
+  }
+ ]
+}

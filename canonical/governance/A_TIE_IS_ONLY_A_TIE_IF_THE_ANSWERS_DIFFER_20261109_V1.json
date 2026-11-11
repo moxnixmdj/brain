@@ -1,0 +1,34 @@
+{
+  "round": 62,
+  "date": "2026-11-09",
+  "title": "The system was asking questions whose answer could not change the answer. Tested the input before asking.",
+  "the_observation": "r55-r61 treated every tie as a question that had to be asked. Measured this round, some ties have no consequence: the tied operations return the identical result on the input actually in front of them.",
+  "the_measurement": {
+    "file_with_duplicates": {"sort": ["a","b","z","z"], "sort -u": ["a","b","z"], "verdict": "the tie MATTERS"},
+    "file_without_duplicates": {"sort": ["a","b","z"], "sort -u": ["a","b","z"], "verdict": "the tie is EMPTY"},
+    "before_this_round": "both cases returned ASK, SEVERAL_OPERATIONS_TIE",
+    "after_this_round": "the empty tie is answered; the real tie is still asked"
+  },
+  "why_asking_in_the_empty_case_is_a_defect": "it is friction with no information behind it. 2026 counts over-clarification as a first-class error rate -- the Entity Binding study reports 0.0% over-clarification and argues the absence is what keeps clarification usable at all. A system that asks when the answer cannot change teaches the user to stop reading its questions, which destroys the value of the questions that DO matter.",
+  "the_mechanism": {
+    "function": "answer_by_equivalence(goal, cwd, db_path)",
+    "what_it_does": "evaluates every tied operation on the real input and compares the answers",
+    "if_they_agree": "answers, labelled decided_by=EXTENSIONAL_EQUIVALENCE",
+    "if_they_disagree": "returns None and the door asks",
+    "bounded": "only carried, read-only steps are evaluated. A writer cannot be compared by running it, because comparing it would perform it.",
+    "failures": "every failure returns None, and None is the ask direction -- the safe one"
+  },
+  "the_labelling_matters": "the answer carries 'decided_by': 'EXTENSIONAL_EQUIVALENCE' and the note 'this is not a selection win and must not be counted as one'. A result chosen because both operations agreed is evidence the question had no consequence, not evidence the system understood it. Any future measurement that counts these as correct selections would be inflating the number.",
+  "the_property_that_protects_it": "the decision is recomputed per call against the current file. Append a duplicate line to the same path and the same phrasing flips from ANSWERED to ASK -- pinned as a test, because a cached 'they agree' would become a false guarantee the moment its premise changed.",
+  "what_this_does_not_change": [
+    "the r55 ceiling: a sentence with no separating word still cannot be resolved by ranking",
+    "rank 1: there is still no model",
+    "the ask path: a real tie is still asked, and asking once still remembers forever (r58)"
+  ],
+  "regression": {"files": 24, "passed": 174, "xfailed": 1, "r46_baseline": "23/23 unchanged"},
+  "honest_verdict": {
+    "what_moved": "the system asks less and still never guesses. That is a real improvement in the only dimension this architecture controls.",
+    "what_did_not_move": "no model, no actuator, no planner. Nothing that turns a filing cabinet with a good gate into an agent.",
+    "the_discipline_that_made_this_possible": "the tie was not treated as a property of the sentence alone but tested against the world. Ten rounds of failures came from trusting the description instead of checking the input; this is the same move applied in the helpful direction."
+  }
+}

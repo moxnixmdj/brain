@@ -73,8 +73,12 @@ _STOP_WORDS = frozenset({
 
 _WORKFLOW_MEM_CACHE: dict[str, list[dict[str, Any]]] = {}
 _WORKFLOW_INDEX_CACHE: dict[str, dict[str, list[dict[str, Any]]]] = {}
+_WORKFLOW_MEM_STAMP: dict[str, tuple[int, int]] = {}
+
 _AUTO_SEEDED_DBS: set[str] = set()
 
+
+_INTENT_TOKEN = "__intent__"
 
 def _repo_root() -> pathlib.Path:
     return pathlib.Path(__file__).resolve().parents[2]
@@ -98,6 +102,11 @@ def _default_workflow_db() -> pathlib.Path:
 def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqlite3.Connection]:
     is_default = db_path is None and not os.environ.get("BRAIN_COMPILED_WORKFLOW_DB")
     target = db_path or _default_workflow_db()
+    # A path-shaped str is not a Path. Every caller that passed a str got away with it only
+    # while the file already existed, because sqlite3.connect() accepts a str. The first call
+    # that needed to CREATE the parent directory died on `.parent`. Normalise once, here.
+    if not isinstance(target, pathlib.Path):
+        target = pathlib.Path(target)
     target.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(str(target), timeout=10.0)
     conn.execute("PRAGMA journal_mode=WAL")
@@ -163,7 +172,7 @@ def _semantic_selector_from_dom(point_step: Mapping[str, Any], dom_elements: Seq
     if matched is None and target_hint:
         low = target_hint.lower()
         for el in dom_elements:
-            for field in ("aria", "name", "placeholder", "text", "id"):
+            for field in ("aria", "name", "placeholder", "text", "id", "automation_id", "label"):
                 val = str(el.get(field) or "").strip()
                 if val and val.lower() == low:
                     matched = el
@@ -175,7 +184,8 @@ def _semantic_selector_from_dom(point_step: Mapping[str, Any], dom_elements: Seq
         return None
 
     selector: dict[str, str] = {}
-    for key in ("role", "name", "aria", "placeholder", "tag", "type", "text"):
+    for key in ("role", "name", "aria", "placeholder", "tag", "type", "text",
+                "automation_id", "identifier", "label"):
         val = str(matched.get(key) or "").strip()
         if val:
             selector[key] = val[:200]
@@ -284,7 +294,21 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
                 "content": str(fw["content"]),
             })
 
-    has_direct_causal_shortcut = bool(elevated or inline_direct)
+    # MEASURED FAILURE (r83, hit immediately). `elevated` at this point holds only Rules
+    # A/B/C. A demonstrated `cli_exec` step is still sitting in raw_steps, so it could not
+    # count as the shortcut, every UI step survived, and Layer 3 produced 5 steps where it
+    # had produced 1. The rule "prune UI superseded by a direct effect" must also see a
+    # direct effect that is still IN the trace.
+    _direct_in_trace = any(
+        isinstance(st, Mapping)
+        and (str(st.get("layer") or "").lower() in {"cli", "cli_exec", "subprocess", "cli_pipeline",
+                                                    "semantic_dom", "sqlite_exec", "sqlite_query",
+                                                    "http_request", "confined_python_exec"}
+             or isinstance(st.get("argv"), list))
+        and st.get("undone") is not True
+        for st in raw_steps
+    )
+    has_direct_causal_shortcut = bool(elevated or inline_direct or _direct_in_trace)
 
     # Process explicit steps: prune UI steps superseded by direct HTTP/SQLite/file shortcuts,
     # prune failed/no-op exploratory CLI commands, and elevate remaining pixel steps to semantic DOM.
@@ -302,17 +326,27 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
             pruned_ui_steps += 1
             continue
 
+        # A raw UI step is anything that is NOT already a direct executable layer. The first
+        # version required layer=="pixel_ui" or type in {...}, so a step tagged
+        # {"layer": "click"} matched NEITHER and fell through every branch: zero steps
+        # elevated, dominant_layer "none", and no error. Measured on the L4 inbox demo.
         is_ui = (
-            layer in {"pixel_ui", "gui", "browser_ui", "mouse", "keyboard", "pixel_click", "ui_type", "ui_scroll"}
+            layer in {"pixel_ui", "gui", "browser_ui", "mouse", "keyboard", "pixel_click",
+                      "ui_type", "ui_scroll", "click", "type", "key", "scroll", "drag",
+                      "keypress", "wait", "screenshot"}
             or layer.startswith(("pixel_", "ui_"))
-            or op_type in {"click", "double_click", "move", "scroll", "type", "keypress", "drag", "wait"}
+            or op_type in {"click", "double_click", "move", "scroll", "type", "keypress",
+                           "drag", "wait"}
         )
         if is_ui and has_direct_causal_shortcut:
             pruned_ui_steps += 1
             continue
 
         if is_ui:
-            sem = _semantic_selector_from_dom(st, dom_elements)
+            probe = dict(st)
+            if layer in {"key", "type", "keypress"} and probe.get("text"):
+                probe.setdefault("value", probe["text"])
+            sem = _semantic_selector_from_dom(probe, dom_elements)
             if sem is not None:
                 elevated.append(sem)
             elif op_type not in {"move", "wait"}:
@@ -430,15 +464,32 @@ def _substitute_in_obj(obj: Any, mapping: Mapping[str, str]) -> Any:
     """Replace concrete parameter values inside nested step/postcondition structures."""
     if isinstance(obj, str):
         out = obj
+        # A hole name contains digits and letters that a later (or the same) value
+        # can match. Measured 2026-11-09 on `UPDATE items SET qty = 40 WHERE id = 1`:
+        # the value "1" was substituted INSIDE the hole "?num0", producing
+        # `SET qty = ?num?num0 WHERE id = ?num0` -- a program that cannot parse.
+        # Shield every hole already present before substituting any value.
+        holes_present: list[str] = []
+        for _h in {h for h in mapping.values() if h}:
+            if _h in out:
+                token = f"\x00{len(holes_present)}\x00"
+                holes_present.append(_h)
+                out = out.replace(_h, token)
         # Longest values first so URLs/paths are replaced whole before substrings
         for raw_val, hole in sorted(mapping.items(), key=lambda kv: -len(kv[0])):
             if raw_val and raw_val in out:
-                out = out.replace(raw_val, hole)
+                if raw_val.isdigit():
+                    # A bare number must match a whole token, or "1" eats the 1 in "12".
+                    out = re.sub(rf"(?<![0-9A-Za-z_]){re.escape(raw_val)}(?![0-9A-Za-z_])", lambda _m, _h=hole: _h, out)
+                else:
+                    out = out.replace(raw_val, hole)
             elif hole.startswith("?url") and raw_val.startswith(("http://", "https://")):
                 sp = urllib.parse.urlsplit(raw_val)
                 origin = f"{sp.scheme}://{sp.netloc}"
                 if origin and origin in out:
                     out = out.replace(origin, f"{{{{origin:{hole}}}}}")
+        for _i, _h in enumerate(holes_present):
+            out = out.replace(f"\x00{_i}\x00", _h)
         return out
     if isinstance(obj, list):
         return [_substitute_in_obj(x, mapping) for x in obj]
@@ -451,6 +502,75 @@ def _substitute_in_obj(obj: Any, mapping: Mapping[str, str]) -> Any:
         if sval in mapping:
             return mapping[sval]
     return obj
+
+
+def _rebase_step_paths(steps: Any, cwd: "str | pathlib.Path | None") -> Any:
+    """Move every file path in a compiled step under `cwd`.
+
+    MEASURED FAILURE (r80, second environment shape). A skill learned in
+    /tmp/envA wrote "restock.txt" at /tmp/envA/restock.txt. Replayed into /tmp/envB it
+    reported ok:True and the file was MISSING -- because the demonstrated absolute path was
+    baked into the step and never rebased. A skill that cannot be moved to a new directory is
+    not a skill in a new environment; it is a recording of an old one.
+
+    Behaviour: only BASENAMES are carried across. If the step's path already lives under
+    `cwd`, it is left alone. Directory structure inside the demonstrated tree is preserved
+    relative to that tree's root when cwd is given.
+    """
+    if cwd is None:
+        return steps
+    root = pathlib.Path(cwd).resolve()
+
+    def fix(p: str) -> str:
+        try:
+            rp = pathlib.Path(p)
+        except Exception:
+            return p
+        if not rp.is_absolute():
+            return str((root / rp))
+        try:
+            if root in rp.resolve().parents or rp.resolve() == root:
+                return str(rp)
+        except Exception:
+            pass
+        return str(root / rp.name)
+
+    def walk(obj: Any) -> Any:
+        if isinstance(obj, Mapping):
+            out = {}
+            for k, v in obj.items():
+                if str(k) in ("path", "db_path", "file", "target_path") and isinstance(v, str):
+                    out[k] = fix(v)
+                else:
+                    out[k] = walk(v)
+            return out
+        if isinstance(obj, list):
+            return [walk(x) for x in obj]
+        return obj
+
+    return walk(steps)
+
+
+class _Unused:
+    """kept so the original definition site below stays unchanged in the diff"""
+
+
+def _cookiejar_from(snapshot: Sequence[Mapping[str, Any]]) -> "http.cookiejar.CookieJar":
+    jar = http.cookiejar.CookieJar()
+    for c in snapshot:
+        try:
+            jar.set_cookie(http.cookiejar.Cookie(
+                0, str(c.get("name", "")), str(c.get("value", "")), None, False,
+                str(c.get("domain", "") or ""), True, True, str(c.get("path", "/") or "/"),
+                True, False, None, False, None, None, {}))
+        except Exception:
+            continue
+    return jar
+
+
+def json_safe(result: Mapping[str, Any]) -> dict[str, Any]:
+    """A result dict callers may store, log or hash. Removes live handles only."""
+    return {k: ("<live>" if k.startswith("_") else v) for k, v in result.items()}
 
 
 def _instantiate_obj(obj: Any, bindings: Mapping[str, str]) -> Any:
@@ -485,6 +605,48 @@ def _hole_pattern(hole: str) -> str:
     return r"(.+?)"
 
 
+_INTENT_PROBES = ("unique", "distinct", "different", "duplicate", "repeated",
+                  "repeating", "deduplicated", "count", "total", "number")
+
+
+def _intent_bearing_words(goal: str) -> set[str]:
+    """Words whose EXACT IDENTITY does not change the goal's intent.
+
+    Round 36 fixed recall so an already-stored specialist could survive a synonym. That
+    left the real defect in place: `anti_unify_workflow` freezes the literal adjective into
+    the skeleton AND the regex, so every skill compiled from then on is BORN a specialist
+    and has to be rescued at recall time. Measured 2026-11-09 -- the field has the same
+    answer: PolySkill (ICLR 2026) lifts cross-site reuse from <31% to 73% by separating a
+    skill's abstract GOAL from its concrete IMPLEMENTATION, and Memory Transfer Learning
+    (2026) finds high-level insights transfer while low-level traces induce NEGATIVE
+    transfer. Generalising after the fact is the wrong end of the pipeline.
+
+    A word is intent-bearing when swapping it for an unrelated probe leaves `query_kind`
+    reporting the SAME intent. "unique" is intent-bearing for `uniquelines` (so is
+    "distinct"); "lines" is not, because swapping it changes what is being counted. Such a
+    word carries no binding information -- it names the OPERATION, not the object -- so it
+    must not be a skeleton token a paraphrase has to reproduce.
+    """
+    intent = _intent_of(goal)
+    if intent is None:
+        return set()
+    out: set[str] = set()
+    for word in set(re.findall(r"[A-Za-z][A-Za-z-]+", goal)):
+        low = word.lower()
+        if low in _STOP_WORDS:
+            continue
+        for probe in _INTENT_PROBES:
+            if probe == low:
+                continue
+            alternative = re.sub(rf"\b{re.escape(word)}\b", probe, goal, count=1)
+            if alternative == goal:
+                continue
+            if _intent_of(alternative) == intent:
+                out.add(low)
+                break
+    return out
+
+
 def anti_unify_workflow(
     goal: str,
     elevated_steps: Sequence[Mapping[str, Any]],
@@ -497,6 +659,37 @@ def anti_unify_workflow(
     val_to_hole: dict[str, str] = {}
     param_order: list[str] = []
     counts: dict[str, int] = {}
+
+    # MEASURED FAILURE (r83): goal "show only the urgent messages" + step value "urgent"
+    # produced params: [] because "urgent" is not quoted, so the skill typed "urgent" forever.
+    # The right place to fix it is HERE and ONLY for values that were typed into a widget --
+    # never for a request body whose KEYS are field names. A generic word scan that rewrote
+    # every occurrence turned {"sku": "A-100"} into {"?str1": "?str0"} and broke the Layer 2
+    # result. Scope is everything.
+    _typed_values = set()
+    for _st in elevated_steps:
+        if isinstance(_st, Mapping) and str(_st.get("layer") or "") == "semantic_dom":
+            if _st.get("value"):
+                _typed_values.add(str(_st["value"]))
+    for _tok in sorted(set(str(goal).split()), key=lambda t: -len(t)):
+        _clean = _tok.strip(".,;:\\\"'!?")
+        if len(_clean) < 3 or _clean not in _typed_values:
+            continue
+        if _clean in {v for _, v in candidates}:
+            continue
+        # Anchor the hole where the VALUE goes, not where the first matching word sits.
+        # "show only the urgent messages" anchored at "urgent" gives
+        # "show only the ?str0 messages", which only binds goals that ALSO say "urgent".
+        # The hole belongs after the verb: "show only {X} messages".
+        _g = str(goal)
+        _verbs = ("show", "list", "filter", "display", "get", "find")
+        _low = _g.lower()
+        _vpos = min((_low.find(v + " ") for v in _verbs if _low.find(v + " ") >= 0), default=-1)
+        _tpos = _low.find(_clean.lower())
+        if _vpos >= 0 and 0 <= _vpos < _tpos:
+            candidates.append(("str_loose", _clean))
+        else:
+            candidates.append(("str", _clean))
 
     for kind, val in candidates:
         if not val or val in val_to_hole:
@@ -517,17 +710,44 @@ def anti_unify_workflow(
 
     # Build goal skeleton + anchored regex preserving exact occurrence order of holes in goal
     goal_clean = goal.strip().rstrip(".")
+    # Drop literals that are only ever DIGIT FRAGMENTS of a longer literal. "1" in
+    # "id 1 to 12" is a bare digit inside a number the goal already models as "12"; taking it
+    # as a second hole produced the skeleton `set id ?num0 to ?num1 and id 1 to 1?num0`.
+    _digits_only = all(v.strip().isdigit() for v in val_to_hole)
+    if _digits_only:
+        _longer = [v for v in val_to_hole if len(v) > 1]
+        for v in list(val_to_hole):
+            if len(v) == 1 and any(v in w and w != v for w in _longer):
+                # only drop it if EVERY occurrence sits inside an occurrence of a longer literal
+                starts, pos = [], 0
+                while (pos := goal_clean.find(v, pos)) >= 0:
+                    starts.append(pos); pos += 1
+                covered = bool(starts) and all(
+                    any(w.find(v) <= p < w.find(v) + len(w)
+                        for w in _longer
+                        for p in [goal_clean.find(w)] if p >= 0)
+                    for s_ in starts for p in [s_])
+                if covered:
+                    del val_to_hole[v]
+
     occ: list[tuple[int, int, str]] = []
-    for val, hole in sorted(val_to_hole.items(), key=lambda kv: -len(kv[0])):
+    # Longest literal first, then LEFT-MOST, and reject any candidate whose span merely
+    # TOUCHES an accepted span. The previous test `not (end <= a or pos >= b)` accepted a
+    # span that exactly abutted an accepted one, so the "1" inside "12" could claim a second
+    # occurrence after "12" had already taken that region. The skeleton then interleaved two
+    # conflicting holes and bind_goal_parameters could never match its own demonstration.
+    # Measured 2026-11-09: "set id 2 to 5 and id 1 to 12" produced the skeleton
+    # `set id ?num0 to ?num1 and id 1 to 1?num0 ...` and bound nothing.
+    for val, hole in sorted(val_to_hole.items(), key=lambda kv: (-len(kv[0]), kv[0])):
         start = 0
         while True:
             pos = goal_clean.find(val, start)
             if pos < 0:
                 break
             end = pos + len(val)
-            if not any(not (end <= a or pos >= b) for a, b, _ in occ):
+            if not any(pos < b and end > a for a, b, _ in occ):
                 occ.append((pos, end, hole))
-            start = end
+            start = pos + 1
     occ.sort(key=lambda t: t[0])
 
     skeleton_parts: list[str] = []
@@ -572,15 +792,40 @@ def anti_unify_workflow(
     abstract_steps = _substitute_in_obj(list(elevated_steps), val_to_hole)
     abstract_post = _substitute_in_obj(dict(postcondition), val_to_hole)
 
-    skel_words = sorted({
+    skel_words = {
         w for w in re.findall(r"[a-z]{2,}", re.sub(r"\?[a-z]+\d+", " ", goal_skeleton.lower()))
         if w not in _STOP_WORDS
-    })
+    }
+    # A SKILL MUST NOT BE BORN A SPECIALIST.
+    #
+    # The intent-bearing word names the OPERATION and carries no binding; requiring a
+    # paraphrase to reproduce it verbatim is what made "distinct" miss a skill taught on
+    # "unique". Dropping it here is the compile-time form of round 36's recall-time fix,
+    # so a newly taught skill is general in its own record rather than rescued later.
+    # The word stays in `goal_skeleton` (it is the readable name of the skill) and in
+    # `goal_regex` (recall widens exactly that one token); it is no longer a hard
+    # precondition on the caller's wording.
+    _drop = _intent_bearing_words(goal_clean)
+    skel_words = sorted(w for w in skel_words if w not in _drop)
+    # Removing the intent-bearing word can leave NO anchor at all (`how many unique lines
+    # in F` -> []), and an empty skeleton matches every skill, which is worse than a
+    # specialist: it is a false pass waiting to happen. The intent noun replaces the word
+    # it came from, so the record still carries exactly one hard requirement -- the right
+    # one. Recall admits a skill either by skeleton coverage or by `_same_intent`, so this
+    # stays reachable while refusing a different question.
+    _goal_intent = _intent_of(goal_clean)
+    if _goal_intent is not None:
+        skel_words = [w for w in skel_words if w != _INTENT_TOKEN]
+        skel_words = sorted(set(skel_words) | {_INTENT_TOKEN})
+        _intent_skeleton = True
+    else:
+        _intent_skeleton = False
 
     return {
         "goal_skeleton": goal_skeleton,
         "goal_regex": goal_regex,
         "skeleton_tokens": skel_words,
+        "skeleton_intent": _goal_intent if _intent_skeleton else None,
         "param_order": param_order,
         "abstract_steps": abstract_steps,
         "abstract_postcondition": abstract_post,
@@ -588,11 +833,540 @@ def anti_unify_workflow(
     }
 
 
+def _widen_intent_word(pattern: str, skill: Mapping[str, Any]) -> str:
+    r"""Let the ONE word that carries the skill's intent accept its synonyms.Let the ONE word that carries the skill's intent accept its synonyms.
+
+    Measured 2026-11-09: a skill taught as "how many unique lines in ?" had the regex
+    `how\s+many\s+unique\s+lines\s+in\s+(?P<path0>...)`. The intent index and the
+    candidate gate both worked; BINDING then failed, because the abstract goal was frozen
+    into one literal adjective. So "distinct", "different" and "duplicate-free" -- all of
+    which `query_kind` calls `uniquelines` -- could not bind.
+
+    This widens ONLY the intent-bearing word, and only to synonyms that the tree's own
+    intent classifier already treats as identical for this skill's intent. Every other
+    token in the pattern stays literal, so this cannot make an unrelated sentence match:
+    the path group, "how many", "lines" and "in" are unchanged.
+    """
+    intent = _intent_of(str(skill.get("goal_skeleton") or "").replace("?", ""))
+    if intent is None:
+        return pattern
+    synonyms: list[str] = []
+    probe = "how many {} lines in x"
+    for word in ("unique", "distinct", "different", "duplicate", "repeated", "repeating",
+                 "duplicate-free", "nonduplicate", "non-duplicate", "deduplicated"):
+        try:
+            if _intent_of(probe.format(word)) == intent:
+                synonyms.append(word)
+        except Exception:  # noqa: BLE001
+            continue
+    if len(synonyms) < 2:
+        return pattern
+    alternation = "(?:" + "|".join(re.escape(w) for w in synonyms) + ")"
+    widened = pattern
+    for word in synonyms:
+        literal = r"\s+".join(re.escape(part) for part in word.split())
+        if re.search(literal, widened, flags=re.IGNORECASE):
+            widened = re.sub(literal, alternation, widened, count=1, flags=re.IGNORECASE)
+            break
+    return widened
+
+
+def _bind_by_verb_selection(
+    skill: Mapping[str, Any], goal: str, cwd: str | pathlib.Path | None = None
+) -> dict[str, str] | None:
+    """Bindings for a candidate CHOSEN BY VERB rather than by wording.
+
+    The stored goal_regex is a regex over the SENTENCE the skill was taught with. A verb-
+    selected candidate only matched on "which program does this goal name", so its sentence
+    will not match by construction -- measured 2026-11-09: 'dedupe the lines in data.txt'
+    reached the candidate list and then died here with None, and recall returned nothing.
+
+    This binds the PARAMETERS the skill's steps actually reference, taking the first
+    path-shaped token in the goal for each ?pathN. It does NOT re-check the wording: the
+    verb was the check. Binding the wrong file is the remaining risk and it is real --
+    which is why this path is only reachable when both sentence indexes found nothing.
+    """
+    steps = skill.get("abstract_steps") or skill.get("steps") or []
+    needed: list[str] = []
+    for step in steps:
+        blob = json.dumps(step)
+        for name in re.findall(r"\?(path\d+|url\d+|name\d+)", blob):
+            key = "?" + name
+            if key not in needed:
+                needed.append(key)
+    if not needed:
+        return {}
+    paths = _path_shaped_tokens(goal, cwd)
+    if not paths:
+        return None
+    return {name: paths[min(i, len(paths) - 1)] for i, name in enumerate(needed)}
+
+
+def _path_shaped_tokens(goal: str, cwd: str | pathlib.Path | None = None) -> list[str]:
+    """Path-shaped tokens in an asked goal, chosen by whether a file is THERE.
+
+    The old rule was a regex over non-space characters: it split 'my data.txt' into 'my'
+    and 'data.txt', bound the fragment, and returned None at execution. It also bound
+    '/etc/passwd' out of 'unique lines of -rf /etc/passwd' -- a file that was named to be
+    rejected -- and the caller then ran sort over a file the user asked about but did not
+    name. Both are silent: one loses the task, the other answers the wrong one.
+
+    Resolution beats shape. A token is a path if it names an existing file, or if it looks
+    like a filename and contains no whitespace. Longest first, so 'my data.txt' wins over
+    its own prefix and a full path wins over a bare basename. Never dash-leading, and a
+    token that spans a metacharacter is never completed with the rest of the sentence:
+    'x.txt; rm -rf /' resolves through its existing prefix 'x.txt' or not at all.
+    """
+    # A dash-leading token means the sentence carries an OPTION. Under argv execution an
+    # option is not injectable, but it makes positional binding undecidable: in
+    # 'unique lines of -rf /etc/passwd' the existing file /etc/passwd is an option's
+    # argument, not the operand the goal names. Refuse rather than guess -- this is the
+    # data-parameter rule from ATR-2026-02601 / CVE-2026-25130 applied to our own binder.
+    if any(t.startswith("-") and len(t) > 1 for t in goal.split()):
+        return []
+    # A binding must be exactly one argument. A token that spans a shell metacharacter is a
+    # whole command written as one word ('x.txt|curl', 'x.txt;rm'), and taking its prefix
+    # would be the binder quietly deciding which half of the sentence was meant. Refuse.
+    if any(ch in goal for ch in "|;&`\n\r"):
+        return []
+
+    base = pathlib.Path(cwd) if cwd else None
+    found: list[str] = []
+
+    def _exists(tok: str) -> bool:
+        if not tok or tok.startswith("-"):
+            return False
+        cand = pathlib.Path(tok)
+        if cand.is_absolute():
+            return cand.exists()
+        return bool(base and (base / tok).exists())
+
+    # 1) existing files named anywhere in the sentence. Longest match first at each offset so
+    #    a spaced filename is taken whole. This is O(len) passes and only for candidates that
+    #    actually exist, which is what keeps '$(whoami' from ever being completed.
+    if base is not None or any(t.startswith("/") for t in goal.split()):
+        words = goal.split()
+        for i in range(len(words)):
+            acc = ""
+            for j in range(i, len(words)):
+                acc = words[j] if not acc else acc + " " + words[j]
+                tok = acc.rstrip(",;:|)&")
+                if _exists(tok) and tok not in found:
+                    found.append(tok)
+    # 2) fall back to non-space path-shaped tokens (no resolution possible)
+    if not found:
+        found = [t for t in re.findall(r"[^\s\"',;)]+", goal)
+                 if ("/" in t or "." in t) and not t.startswith("-")]
+    # longest first: a full path must beat its own basename, a spaced file its own prefix
+    found.sort(key=len, reverse=True)
+    return found
+
+
+# --------------------------------------------------------------------------------------------
+# r55: THE CEILING, AND THE ONLY TWO CORRECT ACTIONS LEFT.
+#
+# Measured this round on a 30-skill catalog: for 7 of 8 asks written in a user's own words, a
+# PERFECT bag-of-words selector still ties at the top. "tally the rows of" shares no content
+# word with "unique lines of" or "count the lines of": score 0, destination, thirty ways. A
+# broken clock cannot pick the hour.
+#
+# That is not a limitation of the cue table, of embeddings, or of model size. Those all
+# re-rank the same bits, and the bit that separates the candidates -- the word "count" --
+# is not in the sentence. 2026 says the same thing from the other side: when the instruction
+# and the environment cannot yield a unique binding, "the expected safe behavior is
+# clarification rather than execution" (Entity Binding Failures in Tool-Augmented Agents,
+# arXiv 2606.30531), and models answer directly anyway in >95% of ambiguous cases while
+# recognising the ambiguity when asked to judge it (ProactiveBench, MID-Bench).
+#
+# So there are exactly two correct behaviours and this module had neither:
+#   1. if nothing matches, ASK -- do not return None and let the caller invent a fallback;
+#   2. if several tie at the top, SHOW the ties -- do not silently take the first, which is
+#      what returned `sort` without `-u` for "dedupe the lines in" at |S|=4.
+# --------------------------------------------------------------------------------------------
+
+_ASK_VERB = "ASK__WHICH_OF_THESE_DID_YOU_MEAN"
+
+
+def _operation_signature(skill: Mapping[str, Any]) -> str:
+    """The program plus the flags that actually distinguish it. `sort` and `sort -u` are
+    different operations that share a verb; `sort -u` twice is one operation filed twice."""
+    steps = skill.get("abstract_steps") or []
+    if not steps or not isinstance(steps[0], Mapping):
+        return ""
+    argv = [str(a) for a in (steps[0].get("argv") or [])]
+    return " ".join(argv[:2])
+
+
+def select_or_ask(
+    goal: str,
+    *,
+    db_path: pathlib.Path | None = None,
+    max_listed: int = 5,
+) -> dict[str, Any]:
+    """Return either a decision or a question. Never a guess.
+
+    Three outcomes, and no fourth:
+
+        SELECTED  -- exactly one operation ties at the top
+        ASK       -- zero or several operations tie, or the sentence cannot separate them
+
+    The old path returned None (indistinguishable from "no skill exists") or silently took
+    the first candidate. Neither is identifiable downstream as "I could not tell", which is
+    why the defect survived r34-r54.
+    """
+    words = {w for w in re.findall(r"[a-z0-9]{2,}", goal.lower()) if w not in _STOP_WORDS}
+    rows = _load_cached_skills(db_path=db_path)
+    if not rows:
+        return {"schema": "SELECTION_V1", "verdict": "ASK", "reason": "NOTHING_TAUGHT",
+                "question": "I have not been taught any operation yet.", "asked": goal}
+
+    scored: list[tuple[int, Mapping[str, Any]]] = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            continue
+        skeleton = str(row.get("goal_skeleton") or "")
+        header = skeleton.split("?")[0]
+        row_words = {w for w in re.findall(r"[a-z0-9]{2,}", header.lower()) if w not in _STOP_WORDS}
+        scored.append((len(words & row_words), row))
+
+    if not scored:
+        return {"schema": "SELECTION_V1", "verdict": "ASK", "reason": "NOTHING_TAUGHT",
+                "question": "I have not been taught any operation yet.", "asked": goal}
+
+    best = max(s for s, _ in scored)
+    top = [r for s, r in scored if s == best]
+    signatures: list[str] = []
+    for r in top:
+        sig = _operation_signature(r)
+        if sig not in signatures:
+            signatures.append(sig)
+
+    if best > 0 and len(signatures) == 1:
+        return {
+            "schema": "SELECTION_V1", "verdict": "SELECTED", "asked": goal,
+            "skill_id": top[0].get("skill_id"), "operation": signatures[0],
+            "confidence": "unique_top", "tied": 1,
+        }
+
+    if len(signatures) == 1 and best == 0:
+        # every skill scores zero but there is only one distinct operation taught
+        return {
+            "schema": "SELECTION_V1", "verdict": "SELECTED", "asked": goal,
+            "skill_id": top[0].get("skill_id"), "operation": signatures[0],
+            "confidence": "only_one_operation_taught", "tied": 1,
+        }
+
+    options = signatures[:max_listed]
+    return {
+        "schema": "SELECTION_V1", "verdict": "ASK", "asked": goal,
+        "reason": ("NO_WORD_OVERLAP__CANNOT_CHOOSE" if best == 0
+                   else "SEVERAL_OPERATIONS_TIE"),
+        "question": f"Which of these did you mean: {', '.join(options)}?",
+        "options": options,
+        "tied": len(signatures),
+        "note": ("the sentence does not contain the information that separates these. "
+                 "Guessing would be a coin flip recorded as a decision."),
+    }
+
+
+
+def _refuse_if_operations_tie(skills: list[dict[str, Any]], goal: str) -> list[dict[str, Any]]:
+    """Return [] when the top of the candidate list holds more than one real operation."""
+    words = {w for w in re.findall(r"[a-z0-9]{2,}", goal.lower()) if w not in _STOP_WORDS}
+    scored: list[tuple[int, dict[str, Any]]] = []
+    for s in skills:
+        if not isinstance(s, Mapping):
+            continue
+        header = str(s.get("goal_skeleton") or "").split("?")[0]
+        row_words = {w for w in re.findall(r"[a-z0-9]{2,}", header.lower())
+                     if w not in _STOP_WORDS}
+        scored.append((len(words & row_words), s))
+    if not scored:
+        return skills
+    best = max(sc for sc, _ in scored)
+    if best == 0:
+        # No word evidence. Refusing here would also disable the verb-selection fallback,
+        # which reaches its candidate by program name rather than by wording (r50) -- measured:
+        # a 10-skill catalog went from answering correctly to returning None. The zero-overlap
+        # case is handled by the door (`answer_or_ask` -> select_or_ask -> ASK), not here.
+        return skills
+    top_sigs = {_operation_signature(s) for sc, s in scored if sc == best}
+    if len(top_sigs) > 1:
+        return []
+    return skills
+
+
+# --------------------------------------------------------------------------------------------
+# r58: LEARN THE DEFAULT. ASK ONCE, NOT EVERY TIME.
+#
+# r55-r57 made the system refuse a tie and raise it as a question. That is correct and it is
+# also, on its own, a regression in usefulness: a user who says "dedupe the lines in" twice
+# gets asked twice, having answered once. The missing piece is a table that remembers the
+# answer keyed by the PHRASE, not by the document (2026: "the conversation does not carry the
+# clarification across turns; the learned default carries it across requests").
+#
+# Where this deliberately diverges from the 2026 pattern: those systems learn a DEFAULT for a
+# missing FIELD (which document, which page) and apply it silently when confident. This one
+# resolves an OPERATION for a repeated PHRASE. Same shape, narrower scope, and it asserts no
+# confidence band -- one answer to one question, applied to that phrase and no other.
+# --------------------------------------------------------------------------------------------
+
+_CLARIFY_TABLE = "clarification_defaults"
+_CLARIFY_SCHEMA = """
+CREATE TABLE IF NOT EXISTS clarification_defaults (
+    phrase_key     TEXT PRIMARY KEY,
+    phrase          TEXT NOT NULL,
+    skill_id        TEXT NOT NULL,
+    operation       TEXT NOT NULL,
+    times_applied   INTEGER NOT NULL DEFAULT 0,
+    created_ns      INTEGER NOT NULL
+)
+"""
+
+
+def _phrase_key(goal: str) -> str:
+    """The user's words, minus the file they named, so the same phrasing under a different
+    path is the same question. Word-set and order-insensitive: 'dedupe the lines in' and
+    'in dedupe the lines' are one phrase."""
+    import re as _re
+    # Strip the operand before keying. "dedupe the lines in a.txt" and
+    # "dedupe the lines in b.log" are the same question; keeping the filename in the key
+    # made them two, which was measured immediately after the first write.
+    operand = set()
+    for tok in goal.split():
+        stripped = tok.strip("\"'(),;:!?")
+        if "/" in stripped or "." in stripped:
+            operand.add(stripped)
+            operand.update(part for part in _re.split(r"[/.]", stripped) if part)
+    words = [w for w in _re.findall(r"[a-z0-9]{2,}", goal.lower())
+             if w not in _STOP_WORDS and w not in {o.lower() for o in operand}]
+    return " ".join(sorted(words))
+
+
+def remember_clarification(goal: str, skill_id: str, *, db_path: pathlib.Path | None = None) -> dict[str, Any]:
+    """Record that, for this phrasing, the user chose this skill. One row per phrase."""
+    import sqlite3
+    import time as _time
+    target_db, conn = _connect_db(db_path)
+    try:
+        conn.execute(_CLARIFY_SCHEMA)
+        # the column is steps_json, not abstract_steps -- the row key and the column name differ
+        rows = conn.execute(
+            "SELECT steps_json FROM compiled_workflow_skills WHERE skill_id = ?", (skill_id,)
+        ).fetchall()
+        if not rows:
+            return {"schema": "CLARIFICATION_V1", "stored": False, "reason": "NO_SUCH_SKILL"}
+        op = " ".join([str(a) for a in (json.loads(rows[0][0])[0].get("argv") or [])][:2])
+        key = _phrase_key(goal)
+        if not key:
+            return {"schema": "CLARIFICATION_V1", "stored": False, "reason": "EMPTY_PHRASE"}
+        conn.execute(
+            "INSERT INTO clarification_defaults (phrase_key, phrase, skill_id, operation, times_applied, created_ns)"
+            " VALUES (?,?,?,?,0,?)"
+            " ON CONFLICT(phrase_key) DO UPDATE SET skill_id=excluded.skill_id,"
+            " operation=excluded.operation, phrase=excluded.phrase",
+            (key, goal.strip(), skill_id, op, _time.time_ns()),
+        )
+        conn.commit()
+        return {"schema": "CLARIFICATION_V1", "stored": True, "phrase_key": key,
+                "skill_id": skill_id, "operation": op}
+    finally:
+        conn.close()
+
+
+def _recall_clarification(goal: str, conn) -> tuple[str, str, str] | None:
+    try:
+        row = conn.execute(
+            "SELECT skill_id, operation, phrase FROM clarification_defaults WHERE phrase_key = ?",
+            (_phrase_key(goal),),
+        ).fetchone()
+    except sqlite3.Error:
+        return None
+    return (row[0], row[1], row[2]) if row else None
+
+
+# --------------------------------------------------------------------------------------------
+# r61: WIDEN THE GATE FROM ANSWER KIND TO OPERATION.
+#
+# Measured this round on the real record:
+#
+#     taught 'sort -u'          postcondition = {'kind': 'stdout_lines'}
+#     taught 'sort'             postcondition = {'kind': 'stdout_lines'}
+#
+# Identical. The postcondition describes how to check the OUTPUT SHAPE and says nothing about
+# which operation produced it, so "unique lines of" answered by plain `sort` verifies, and
+# returns the duplicates it was asked to remove. r60 measured 3/3 type-changing wrong picks
+# caught; this was the one it could not see.
+#
+# The fix is not a new oracle. It is one more field in the contract: the operation the
+# sub-goal commits to, and a check that the steps that actually ran are that operation.
+# "Distinct" goals already name something the steps must contain; this makes that name
+# load-bearing rather than decorative.
+# --------------------------------------------------------------------------------------------
+
+# goal phrasing -> an element the executed argv must contain for that phrasing to be honoured
+_OPERATION_COMMITMENTS = (
+    (("unique", "distinct", "dedupe", "dedup"), {"-u"}),
+    (("count", "tally", "number of lines", "how many"), None),   # count is a KIND, not a flag
+    (("sha256", "checksum"), None),
+)
+
+
+def infer_operation_commitment(goal: str) -> tuple[str, str] | None:
+    """Return ('contains', '<token>') when the goal's wording demands a specific flag.
+
+    Deliberately narrow. It returns a commitment only where the phrase names a behaviour the
+    argv can be checked for. Where the wording is silent, it returns None and the existing
+    kind check stands alone -- a gate that fires on wording it cannot verify is a gate that
+    rejects correct answers, which r53 already paid for once.
+    """
+    low = goal.lower()
+    for cues, required in _OPERATION_COMMITMENTS:
+        if required is None:
+            continue
+        if any(c in low for c in cues):
+            return ("contains", sorted(required)[0])
+    return None
+
+
+def verify_operation_commitment(
+    commitment: tuple[str, str] | None,
+    execution_result: Mapping[str, Any] | None,
+) -> tuple[bool, str]:
+    """Did the steps that actually ran honour the operation the goal named?"""
+    if commitment is None:
+        return True, "NO_OPERATION_COMMITMENT_IN_THE_GOAL"
+    relation, token = commitment
+    if execution_result is None:
+        return False, "OPERATION_COMMITMENT_UNVERIFIABLE__NO_EXECUTION"
+    argvs: list[list[str]] = []
+    for receipt in (execution_result.get("step_receipts") or []):
+        if isinstance(receipt, Mapping):
+            if receipt.get("argv"):
+                argvs.append([str(a) for a in receipt["argv"]])
+            for stage in (receipt.get("stages") or []):
+                argvs.append([str(a) for a in stage])
+    if not argvs:
+        return False, "OPERATION_COMMITMENT_UNVERIFIABLE__NO_ARGV"
+    hit = any(token in argv for argv in argvs)
+    if hit:
+        return True, f"OPERATION_COMMITTED:{token}"
+    return False, f"OPERATION_NOT_HONOURED__ASKED_FOR_{token}"
+
+
+# --------------------------------------------------------------------------------------------
+# r62: ASK ONLY WHEN THE ANSWER WOULD DIFFER.
+#
+# Measured: two tied operations do not always disagree on the input in front of them.
+#
+#     file WITH duplicates : sort -> [a,b,z,z]   sort -u -> [a,b,z]   tie MATTERS
+#     file with NO duplicates: sort -> [a,b,z]   sort -u -> [a,b,z]   tie is EMPTY
+#
+# Asking in the second case is friction with no information behind it. 2026 measures this as
+# over-clarification and treats it as a defect in its own right (the Entity Binding paper
+# reports 0.0% over-clarification and calls the absence important).
+#
+# So: when the top of the candidate list is tied, evaluate every tied operation on the real
+# input and compare the answers. If they agree, the choice does not exist and either may be
+# returned -- reported as decided by equivalence, so no downstream reader mistakes it for a
+# retrieval win. If they disagree, ask, and now the question is demonstrably load-bearing.
+#
+# BOUNDED ON PURPOSE. Only read-only carried steps are evaluated: an operation that writes
+# cannot be run for comparison, because comparing it would perform it. `_steps_are_all_carried`
+# is the existing read-only guarantee and is the gate used here, not a new one.
+# --------------------------------------------------------------------------------------------
+
+
+def answer_by_equivalence(
+    goal: str,
+    *,
+    cwd: str | pathlib.Path | None = None,
+    db_path: pathlib.Path | None = None,
+) -> dict[str, Any] | None:
+    """Return an ANSWERED record when all tied operations agree; else None.
+
+    None means "the tie is real" -- the caller asks. It never means the comparison failed
+    quietly: every failure mode returns None, and None is the safe direction.
+    """
+    words = {w for w in re.findall(r"[a-z0-9]{2,}", goal.lower()) if w not in _STOP_WORDS}
+    rows = [r for r in _load_cached_skills(db_path=db_path) if isinstance(r, Mapping)]
+    scored: list[tuple[int, Mapping[str, Any]]] = []
+    for row in rows:
+        header = str(row.get("goal_skeleton") or "").split("?")[0]
+        row_words = {w for w in re.findall(r"[a-z0-9]{2,}", header.lower())
+                     if w not in _STOP_WORDS}
+        scored.append((len(words & row_words), row))
+    if not scored:
+        return None
+    best = max(sc for sc, _ in scored)
+    top = [r for sc, r in scored if sc == best]
+    by_sig: dict[str, Mapping[str, Any]] = {}
+    for row in top:
+        by_sig.setdefault(_operation_signature(row), row)
+    if len(by_sig) < 2:
+        return None
+
+    outcomes: list[tuple[str, Any, Mapping[str, Any], Mapping[str, Any]]] = []
+    for sig, skill in by_sig.items():
+        bindings = _bind_by_verb_selection(skill, goal, cwd)
+        if bindings is None:
+            return None
+        steps = _instantiate_obj(skill["abstract_steps"], bindings)
+        if not _steps_are_all_carried(steps):
+            # a writer cannot be compared by running it
+            return None
+        res = execute_compiled_steps(steps, cwd=cwd)
+        if not res.get("ok"):
+            return None
+        ok, _why = verify_postcondition(skill.get("abstract_postcondition"),
+                                        cwd=cwd, execution_result=res)
+        if not ok:
+            return None
+        outcomes.append((sig, _contract_answer(skill.get("abstract_postcondition"), res), skill, res))
+
+    answers = [a for _s, a, _k, _r in outcomes]
+    if any(a != answers[0] for a in answers[1:]):
+        return None
+    sig, ans, skill, res = outcomes[0]
+    return {
+        "answer": ans,
+        "skill_id": skill.get("skill_id"),
+        "operation": sig,
+        "decided_by": "EXTENSIONAL_EQUIVALENCE",
+        "compared": [s for s, _a, _k, _r in outcomes],
+        "note": ("every tied operation returns the same answer on this input, so the choice "
+                 "does not exist here. This is not a selection win and must not be counted "
+                 "as one."),
+        "result": res,
+    }
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
     if not pattern:
         return None
     m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
+    if not m:
+        # The abstract goal was frozen into one literal adjective at compile time. Retry
+        # with the intent-bearing word widened to its synonyms; everything else stays
+        # exact, so this widens what a TAUGHT skill recognises, never what qualifies as
+        # a different skill.
+        m = re.match(_widen_intent_word(pattern, skill), goal.strip(), flags=re.IGNORECASE)
+    if not m and any(str(h).startswith("?str_loose") for h in (skill.get("param_order") or [])):
+        # A loose hole is a value whose position in the sentence is not fixed by the goal
+        # shape ("show only the urgent messages" / "... the messages about refund" /
+        # "... messages from alice"). Bind it as the FIRST content token that is not part of
+        # the frozen skeleton -- a stated heuristic, not a semantic parse.
+        _skel_words = {w.strip("?0123456789").lower()
+                       for w in str(skill.get("goal_skeleton") or "").split()}
+        _skip = _skel_words | {"the", "a", "an", "about", "from", "for", "with", "by", "in",
+                               "of", "on", "to", "and", "only", "all", "messages", "message"}
+        for w in goal.split():
+            c = w.strip(".,;:\\\"'!?")
+            if len(c) >= 3 and c.lower() not in _skip:
+                out_loose = {h: c for h in (skill.get("param_order") or [])
+                             if str(h).startswith("?str_loose")}
+                return out_loose or None
+        return None
     if not m:
         return None
     out: dict[str, str] = {}
@@ -646,6 +1420,78 @@ def _resolve_local_path(raw_path: str, cwd: pathlib.Path) -> pathlib.Path:
     return p if p.is_absolute() else (cwd / p)
 
 
+def _carrier_path(arg: str, work_dir: pathlib.Path) -> str:
+    """Rewrite a repo-relative argument into the path shape the CARRIER can actually see.
+
+    Measured 2026-11-09, and this is the defect that made a learned skill dead: the carrier
+    stages `workspace_root` as `/input`, copies it to `/work/project`, and runs the argv with
+    THAT as cwd. So the carrier's filesystem contains the workspace and nothing else. It has
+    never heard of the repository.
+
+        ["sort","-u","data.txt"]                                -> exit 0
+        ["sort","-u","canonical/astra_runtime/tmp/x/data.txt"]  -> exit 2   (no such file)
+
+    A skill compiled from a goal that named a repo-relative path therefore stores an argv the
+    carrier can never satisfy, and it fails as FAIL_CLOSED__CARRIER_DID_NOT_ESTABLISH_
+    CONFINEMENT -- which reads like a safety refusal and is really "file not found".
+
+    This function is a TRANSLATION, not a widening: it only rewrites a path that is inside
+    `work_dir`, because only those files are staged. A path outside the workspace is returned
+    UNCHANGED so the carrier refuses it exactly as before. Nothing gains reach.
+
+    Rules, in order:
+      * a token with no '/' is already workspace-relative -- unchanged.
+      * an absolute path under work_dir becomes its relative remainder.
+      * a relative path that resolves under work_dir becomes the relative remainder.
+      * anything else (absolute outside, '..' escape, a URL, a flag) is left alone.
+    """
+    if not arg or arg.startswith("-") or "://" in arg or "/" not in arg:
+        return arg
+    work = work_dir.resolve()
+
+    def _inside(p: pathlib.Path) -> bool:
+        try:
+            p.resolve().relative_to(work)
+            return True
+        except (ValueError, OSError):
+            return False
+
+    candidate = pathlib.Path(arg)
+    # 1. already workspace-relative -- but ONLY if the file is actually there.
+    #
+    # `relative_to` is a string operation, not an existence test: `w/canonical/x/y` is
+    # trivially "inside" `w`, so this branch used to accept a REPO-relative path, rewrite it
+    # to itself, and return. The carrier then failed with exit 2 and the failure surfaced as
+    # a confinement refusal. A path-shaped string is not a path.
+    if not candidate.is_absolute() and (work / candidate).exists() and _inside(work / candidate):
+        return str((work / candidate).resolve().relative_to(work))
+    # 2. absolute inside the workspace
+    if candidate.is_absolute() and candidate.exists() and _inside(candidate):
+        return str(candidate.resolve().relative_to(work))
+    # 3. A REPO-RELATIVE path. This is what a skill stores, and it is the case that made a
+    #    learned skill dead: `canonical/astra_runtime/tmp/x/data.txt` is meaningful to the
+    #    repository and meaningless inside a staged workspace. Resolve it against the CFG root
+    #    -- the nearest ancestor holding `.git` OR `canonical` -- and, only if that lands
+    #    inside the staged workspace, hand the carrier the relative remainder.
+    for base in _candidate_roots(work):
+        if (base / candidate).exists() and _inside(base / candidate):
+            return str((base / candidate).resolve().relative_to(work))
+    return arg
+
+
+def _candidate_roots(work: pathlib.Path) -> list[pathlib.Path]:
+    """Where a repo-relative path could be rooted, nearest first. Never guessed."""
+    roots: list[pathlib.Path] = []
+    for start in (work, pathlib.Path.cwd(), pathlib.Path(__file__).resolve()):
+        cur = start if start.is_dir() else start.parent
+        for parent in [cur, *cur.parents]:
+            if (parent / ".git").exists() or (parent / "canonical").is_dir():
+                if parent not in roots:
+                    roots.append(parent)
+                break
+    return roots
+
+
 def _subst_dynamic_tokens(val: Any, dyn: Mapping[str, str]) -> Any:
     """Substitute `{{hidden:csrf_token}}` or `{{json:token}}` from previous step responses."""
     if isinstance(val, str):
@@ -662,10 +1508,60 @@ def _subst_dynamic_tokens(val: Any, dyn: Mapping[str, str]) -> Any:
     return val
 
 
+def _carried_step_is_admissible(step: Mapping[str, Any]) -> bool:
+    """A cli_exec step may run only if the carrier would admit exactly this argv.
+
+    Deliberately conservative: any doubt, any missing argv, any program outside the
+    carrier's read-only set, any write flag -- False. The caller then emits the original
+    refusal rather than inventing a reason.
+    """
+    layer = str(step.get("layer") or "")
+    if layer == "cli_pipeline":
+        stages = step.get("stages")
+        if not isinstance(stages, (list, tuple)) or len(stages) < 2:
+            return False
+        try:
+            from canonical.runtime import admitted_confinement_execution_v1 as carrier
+            verdict = carrier.admission_verdict_for_pipe(
+                [[str(a) for a in st] for st in stages])
+        except Exception:  # noqa: BLE001 - an unaskable gate is not a pass
+            return False
+        return bool(verdict.get("admitted"))
+    argv = step.get("argv")
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return False
+    try:
+        from canonical.runtime import admitted_confinement_execution_v1 as carrier
+        verdict = carrier.admission_verdict([str(a) for a in argv])
+    except Exception:  # noqa: BLE001 - an unaskable gate is not a pass
+        return False
+    return bool(verdict.get("admitted"))
+
+
+def _steps_are_all_carried(steps: Sequence[Mapping[str, Any]]) -> bool:
+    """Every step is an argv the carrier would admit. Anything else is not carried.
+
+    Used by callers that must not fall back to an unconfined execution path for a
+    task shape the confinement rule covers. Conservative by construction: a step that
+    is not `cli_exec`, or whose argv the carrier would refuse, answers False.
+    """
+    if not steps:
+        return False
+    for step in steps:
+        if not isinstance(step, Mapping):
+            return False
+        if str(step.get("layer") or "") not in {"cli_exec", "cli_pipeline"}:
+            return False
+        if not _carried_step_is_admissible(step):
+            return False
+    return True
+
+
 def execute_compiled_steps(
     steps: Sequence[Mapping[str, Any]],
     *,
     cwd: str | pathlib.Path | None = None,
+    bindings: Mapping[str, str] | None = None,
 ) -> dict[str, Any]:
     """Execute concrete instantiated steps deterministically with zero model calls.
 
@@ -675,12 +1571,44 @@ def execute_compiled_steps(
     certify their effects or confine them.
     """
     from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    # MEASURED FAILURE (r83, Layer 4). Executing a compiled skill with an UNBOUND hole
+    # submitted the literal string "?str_loose0" to the server and returned ok:True.
+    # The filter was never applied: page stayed "Inbox - 5 shown", and the receipt for
+    # every step read ok:true. A hole that reaches the wire is a broken plan, not a
+    # running one, so it is refused BEFORE the first stage -- the same preflight rule
+    # this function already uses for inadmissible CLI.
+    if bindings:
+        steps = _instantiate_obj(list(steps), bindings)
+    _unbound: list[str] = []
+    def _scan(obj: Any) -> None:
+        if isinstance(obj, str):
+            if re.fullmatch(r"\?[a-z_]+\d+", obj):
+                _unbound.append(obj)
+        elif isinstance(obj, list):
+            for x in obj: _scan(x)
+        elif isinstance(obj, Mapping):
+            for k, v in obj.items(): _scan(k); _scan(v)
+    _scan(list(steps))
+    if _unbound:
+        return {"ok": False, "reason": f"UNBOUND_PARAMETERS:{sorted(set(_unbound))}",
+                "step_receipts": [], "executed_steps": 0}
+
+    # The refusal was "no admitted confinement exists". One does now (round 28 measured
+    # it: confined True, live_workspace_untouched True). So a cli_exec step is not
+    # refused -- it is ROUTED, and the routing decides. A step with no carrier verdict is
+    # still refused exactly as before: the default must stay fail-closed.
+    #
+    # `_carried` is checked against the carrier's own admission rules BEFORE anything
+    # runs, and the carrier re-checks them when it runs. This function adds no authority
+    # of its own; it only stops refusing the one thing that is now possible.
     for index, step in enumerate(steps):
         if isinstance(step, Mapping) and str(step.get("layer") or "") in {"cli_exec", "cli_pipeline"}:
-            return {"ok": False, "status": boundary.STATUS,
-                    "failure_class": boundary.FAILURE_CLASS,
-                    "reason": boundary.FAILURE_CLASS, "failed_step": index,
-                    "step_receipts": []}
+            if not _carried_step_is_admissible(step):
+                return {"ok": False, "status": boundary.STATUS,
+                        "failure_class": boundary.FAILURE_CLASS,
+                        "reason": boundary.FAILURE_CLASS, "failed_step": index,
+                        "step_receipts": []}
     work_dir = pathlib.Path(cwd).resolve() if cwd else pathlib.Path.cwd()
     step_receipts: list[dict[str, Any]] = []
     pending_dom_fills: dict[str, str] = {}
@@ -708,6 +1636,67 @@ def execute_compiled_steps(
                 "path": str(target), "bytes": target.stat().st_size,
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             })
+
+        elif layer == "cli_exec":
+            # Run it under the carrier the refusal was waiting for. The carrier's own
+            # invariants are the evidence: confined, live tree untouched, exit status.
+            # A step that gets here has already passed _carried_step_is_admissible.
+            from canonical.runtime import admitted_confinement_execution_v1 as _carrier
+            _raw_argv = [str(a) for a in (step.get("argv") or [])]
+            # The carrier cannot see the repository. Translate each argument that names a
+            # file inside the staged workspace into the workspace-relative form it can reach;
+            # leave everything else alone so the carrier's own refusal still applies.
+            _argv = [_raw_argv[0]] + [_carrier_path(a, work_dir) for a in _raw_argv[1:]] if _raw_argv else []
+            try:
+                _out = _carrier.execute_confined(_argv, workspace_root=str(work_dir))
+            except FileNotFoundError:
+                _out = {"pass": False, "status": "FAIL_CLOSED__PROGRAM_NOT_INSTALLED",
+                        "exit": None, "confined": None, "live_workspace_untouched": None}
+            _ok = _out.get("pass") is True
+            _empty = bool(_out.get("empty_result"))
+            step_receipts.append({
+                "step": idx, "layer": layer, "ok": _ok or _empty,
+                "empty_result": _empty,
+                "argv": _argv, "argv_asked": _raw_argv, "stdout": _out.get("stdout"),
+                "exit": _out.get("exit"),
+                "confined": _out.get("confined"),
+                "live_workspace_untouched": _out.get("live_workspace_untouched"),
+                "status": _out.get("status"),
+                "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
+            })
+            if not _ok and not _empty:
+                return {"ok": False, "status": str(_out.get("status") or boundary.STATUS),
+                        "failure_class": "CARRIED_CLI_STEP_FAILED",
+                        "reason": str(_out.get("status") or ""), "failed_step": idx,
+                        "step_receipts": step_receipts}
+
+        elif layer == "cli_pipeline":
+            # A PIPE OF ADMITTED READS (r43). Each stage is translated at the carrier
+            # boundary exactly like a cli_exec argument, then the pipe is built by the
+            # carrier from STRUCTURE -- the trace never supplies a command string.
+            from canonical.runtime import admitted_confinement_execution_v1 as _carrier
+            _raw_stages = [[str(a) for a in st] for st in (step.get("stages") or [])]
+            _stages = [[argv[0]] + [_carrier_path(a, work_dir) for a in argv[1:]] for argv in _raw_stages]
+            try:
+                _out = _carrier.execute_pipe_confined(_stages, workspace_root=str(work_dir))
+            except FileNotFoundError:
+                _out = {"pass": False, "status": "FAIL_CLOSED__PROGRAM_NOT_INSTALLED",
+                        "exit": None, "confined": None, "live_workspace_untouched": None}
+            _ok = _out.get("pass") is True
+            step_receipts.append({
+                "step": idx, "layer": layer, "ok": _ok,
+                "stages": _stages, "stages_asked": _raw_stages,
+                "stdout": _out.get("stdout"), "exit": _out.get("exit"),
+                "confined": _out.get("confined"),
+                "live_workspace_untouched": _out.get("live_workspace_untouched"),
+                "status": _out.get("status"),
+                "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
+            })
+            if not _ok:
+                return {"ok": False, "status": str(_out.get("status") or boundary.STATUS),
+                        "failure_class": "CARRIED_CLI_PIPE_FAILED",
+                        "reason": str(_out.get("status") or ""), "failed_step": idx,
+                        "step_receipts": step_receipts}
 
         elif layer == "sqlite_exec":
             db_file = _resolve_local_path(str(step["db_path"]), work_dir)
@@ -836,6 +1825,13 @@ def execute_compiled_steps(
                 current_dom_url = str(step["url"])
             op = str(step.get("op") or "").upper()
             sel = step.get("selector") if isinstance(step.get("selector"), Mapping) else {}
+            # MEASURED FAILURE (r83): the compiler emits a typing step as CLICK_SEMANTIC with
+            # a `value` (the box gets clicked, then typed into). The executor treated EVERY
+            # CLICK_SEMANTIC as a submit, so the value was dropped and the page came back
+            # unfiltered -- "Inbox - 5 shown" for a goal that wanted 3, reported ok:True.
+            # A semantic click that carries a value is a FILL.
+            if op == "CLICK_SEMANTIC" and step.get("value") is not None:
+                op = "FILL_SEMANTIC"
             if op == "FILL_SEMANTIC":
                 field_key = str(sel.get("name") or sel.get("aria") or sel.get("placeholder") or "")
                 if field_key:
@@ -922,7 +1918,22 @@ def execute_compiled_steps(
         else:
             return {"ok": False, "failed_step": idx, "reason": f"UNSUPPORTED_COMPILED_LAYER:{layer}", "step_receipts": step_receipts}
 
-    return {"ok": True, "step_receipts": step_receipts, "_http_opener": http_opener}
+    # The live opener must keep working for session-carrying verification, but a result dict
+    # that cannot be serialised is not a result. Return a JSON-safe cookie snapshot beside it
+    # and let the verifier rebuild an opener from that snapshot when it needs one.
+    try:
+        _ck = [{"name": c.name, "value": c.value, "domain": c.domain, "path": c.path}
+               for c in http_opener.handlers and [] or []]
+    except Exception:
+        _ck = []
+    try:
+        _jar = http_opener.__dict__.get("_cookies") or http_opener.__dict__.get("cookiejar")
+        _ck = [{"name": c.name, "value": c.value, "domain": getattr(c, "domain", ""),
+                "path": getattr(c, "path", "/")} for c in (_jar or [])]
+    except Exception:
+        pass
+    return {"ok": True, "step_receipts": step_receipts, "_http_opener": http_opener,
+            "cookies": _ck}
 
 
 def verify_postcondition(
@@ -996,6 +2007,10 @@ def verify_postcondition(
     if kind == "http_get_contains":
         url = str(postcondition["url"])
         opener = (execution_result or {}).get("_http_opener")
+        if not hasattr(opener, "open") and (execution_result or {}).get("cookies"):
+            # rebuilt from the JSON-safe snapshot
+            opener = urllib.request.build_opener(
+                urllib.request.HTTPCookieProcessor(_cookiejar_from((execution_result or {})["cookies"])))
         try:
             if opener is not None:
                 with opener.open(url, timeout=10) as resp:
@@ -1040,6 +2055,52 @@ def verify_postcondition(
             return False, f"POSTCONDITION_NOT_INTEGER:{out_txt!r}"
         return True, "STDOUT_INTEGER_VERIFIED"
 
+    if kind in ("stdout_lines", "stdout_text", "stdout_first_token",
+                "stdout_line_count_or_zero", "stdout_integer_value"):
+        receipts = list((execution_result or {}).get("step_receipts") or [])
+        if not receipts:
+            return False, "POSTCONDITION_NO_RECEIPTS"
+        out_txt = str(receipts[-1].get("stdout") or "")
+        if kind == "stdout_lines":
+            want = postcondition.get("equals")
+            got_lines = [ln for ln in out_txt.splitlines()]
+            if want is not None and got_lines != list(want):
+                return False, f"POSTCONDITION_LINES_MISMATCH:{got_lines[:3]!r}!={list(want)[:3]!r}"
+            return True, f"STDOUT_LINES_VERIFIED:{len(got_lines)}"
+        if kind == "stdout_text":
+            want = str(postcondition.get("equals") or "")
+            if want and out_txt.strip() != want.strip():
+                return False, "POSTCONDITION_TEXT_MISMATCH"
+            return True, f"STDOUT_TEXT_VERIFIED:{len(out_txt)}"
+        if kind == "stdout_integer_value":
+            parts = out_txt.strip().split()
+            if not parts:
+                if str(postcondition.get("equals")) == "0":
+                    return True, "STDOUT_INTEGER_VERIFIED:0"
+                return False, "POSTCONDITION_INTEGER_EMPTY"
+            try:
+                got_i = int(parts[0])
+            except ValueError:
+                return False, f"POSTCONDITION_NOT_INTEGER:{parts[0]!r}"
+            want_i = postcondition.get("equals", postcondition.get("expected"))
+            if want_i is not None and str(got_i) != str(want_i):
+                return False, f"POSTCONDITION_INTEGER_MISMATCH:{got_i}!={want_i}"
+            return True, f"STDOUT_INTEGER_VERIFIED:{got_i}"
+        if kind == "stdout_first_token":
+            parts = out_txt.split()
+            if not parts:
+                return False, "POSTCONDITION_FIRST_TOKEN_EMPTY"
+            want = postcondition.get("equals")
+            if want is not None and parts[0] != str(want):
+                return False, f"POSTCONDITION_FIRST_TOKEN_MISMATCH:{parts[0]!r}"
+            return True, f"STDOUT_FIRST_TOKEN_VERIFIED:{parts[0][:16]}"
+        # stdout_line_count_or_zero
+        got_n = len([ln for ln in out_txt.splitlines() if ln.strip()])
+        want_n = postcondition.get("equals", postcondition.get("expected"))
+        if want_n is not None and str(got_n) != str(want_n):
+            return False, f"POSTCONDITION_COUNT_MISMATCH:{got_n}!={want_n}"
+        return True, f"STDOUT_LINE_COUNT_VERIFIED:{got_n}"
+
     if kind == "stdout_equals":
         receipts = list((execution_result or {}).get("step_receipts") or [])
         if not receipts:
@@ -1069,6 +2130,37 @@ def verify_postcondition(
                     return False, f"POSTCONDITION_JSON_SUBSET_MISMATCH:{k}"
         return True, "HTTP_STATUS_JSON_VERIFIED"
 
+    if kind == "stdout_line_count":
+        # For a program whose output IS a set -- `sort -u`, `grep -f` -- the answer to
+        # "how many" is the number of non-empty lines it printed. Comparing its stdout
+        # to the number is a shape error, not a wrong answer.
+        expected_n = postcondition.get("equals", postcondition.get("count", postcondition.get("expected")))
+        receipts = list((execution_result or {}).get("step_receipts") or [])
+        # A step does NOT receive the previous step's stdout: every cli_exec step is launched
+        # independently through the carrier, and cli_pipeline is refused at the boundary. So
+        # for a multi-step sequence this "count" would be the line count of the LAST step's
+        # own output -- a number that describes the procedure, not the file. Measured
+        # 2026-11-09: `sort -u f` then `wc -l f` qualified then answered 1 for a 3-line
+        # answer. Refusing is correct; a confidently wrong answer is the worst outcome.
+        if len(receipts) > 1:
+            return False, "POSTCONDITION_STDOUT_LINE_COUNT_UNDEFINED_FOR_MULTI_STEP"
+        text = ""
+        for receipt in receipts:
+            text = str(receipt.get("stdout") or "")
+        if not text:
+            expected_n = expected_n  # fall through to the mismatch below with 0 lines
+        got = len([ln for ln in text.splitlines() if ln.strip()])
+        if got == 0:
+            # DO NOT "fix" this into a pass. `causal_ablation_pass = not pre_ok` requires
+            # this check to FAIL on empty receipts before the skill runs; allowing 0 to
+            # verify makes the ablation control silently invert and the ownership gate
+            # starts rejecting every skill (measured 2026-11-09). The price is that a
+            # genuinely empty result cannot be verified -- a known, named limit.
+            return False, "POSTCONDITION_STDOUT_LINE_COUNT_ZERO"
+        if expected_n is not None and str(got) != str(expected_n):
+            return False, f"POSTCONDITION_STDOUT_LINE_COUNT_MISMATCH:{got}!={expected_n}"
+        return True, f"STDOUT_LINE_COUNT_VERIFIED:{got}"
+
     if kind == "step_response_contains":
         expected = str(postcondition.get("contains") or "")
         receipts = list((execution_result or {}).get("step_receipts") or [])
@@ -1076,7 +2168,148 @@ def verify_postcondition(
             return False, "POSTCONDITION_RESPONSE_MISSING"
         return True, "STEP_RESPONSE_VERIFIED"
 
+    # ------------------------------------------------------------------ #
+    # Semantic UI postconditions.
+    #
+    # Measured 2026-11-09: the oracle had 10 kinds and every one of them was
+    # byte/row equality -- file, json, sqlite, http, stdout. Not one could read
+    # a GUI. That is why the computer-use family (compressed by
+    # SIX_BENCHMARK_PROXY_FAMILY_SCOPE_PARTITION_V2 to the single leaf
+    # BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001) has a verified mechanism, a
+    # frozen binding, and ZERO terminal results.
+    #
+    # The fix is not a vision model. It is the same move the compiler already
+    # makes when it elevates a pixel click to a semantic DOM selector: check the
+    # ACCESSIBILITY TREE, which is exact, cheap, deterministic and diffable.
+    #
+    # External corroboration, all 2026:
+    #   - Vercel agent-desktop (Oct 2026): acts on UIA refs, re-snapshots to
+    #     confirm; "refs are snapshot-scoped; a stale ref returns STALE_REF".
+    #   - Playwright MCP: "every state-changing action should have a postcondition";
+    #     a semantic check such as 'heading named Order confirmed is visible' is
+    #     less ambiguous than deciding whether pixels resemble a success page.
+    #   - xa11y / Cloudflare /accessibilityTree: the same convergence.
+    # ------------------------------------------------------------------ #
+    if kind == "stdout_line_count":
+        # Cannot be corrupted on disk: the stdout lives in the execution result. The
+        # negative control is the mismatched expectation the caller supplies
+        # (heldout_postcondition expects a specific count), which is how
+        # _sabotage_world already handles the other stdout kinds.
+        return True
+    if kind.startswith("ui_"):
+        nodes = _ui_nodes(postcondition, execution_result)
+        if nodes is None:
+            return False, "POSTCONDITION_UI_TREE_UNAVAILABLE"
+
+        if kind == "ui_element_present":
+            if _match_nodes(nodes, postcondition.get("match") or {}):
+                return True, "UI_ELEMENT_PRESENT_VERIFIED"
+            return False, "POSTCONDITION_UI_ELEMENT_ABSENT"
+
+        if kind == "ui_element_absent":
+            if _match_nodes(nodes, postcondition.get("match") or {}):
+                return False, "POSTCONDITION_UI_ELEMENT_STILL_PRESENT"
+            return True, "UI_ELEMENT_ABSENT_VERIFIED"
+
+        if kind == "ui_value_equals":
+            want = str(postcondition.get("equals") if "equals" in postcondition
+                       else postcondition.get("value"))
+            hits = _match_nodes(nodes, postcondition.get("match") or {})
+            if not hits:
+                return False, "POSTCONDITION_UI_ELEMENT_ABSENT"
+            for node in hits:
+                if str(node.get("value")) == want:
+                    return True, "UI_VALUE_VERIFIED"
+            got = [str(n.get("value")) for n in hits]
+            return False, f"POSTCONDITION_UI_VALUE_MISMATCH:{got}"
+
+        if kind == "ui_text_contains":
+            expected = str(postcondition.get("contains") or "")
+            if not expected:
+                return False, "POSTCONDITION_UI_TEXT_EMPTY"
+            for node in nodes:
+                if expected in str(node.get("name") or "") or expected in str(node.get("value") or ""):
+                    return True, "UI_TEXT_VERIFIED"
+            return False, "POSTCONDITION_UI_TEXT_MISSING"
+
+        if kind == "ui_element_state_equals":
+            want_state = str(postcondition.get("state") or "").lower()
+            want_val = postcondition.get("equals", postcondition.get("state_value", True))
+            hits = _match_nodes(nodes, postcondition.get("match") or {})
+            if not hits:
+                return False, "POSTCONDITION_UI_ELEMENT_ABSENT"
+            for node in hits:
+                if str(node.get(want_state)).lower() == str(want_val).lower():
+                    return True, "UI_STATE_VERIFIED"
+            return False, f"POSTCONDITION_UI_STATE_MISMATCH:{want_state}"
+
+        return False, f"UNSUPPORTED_POSTCONDITION_KIND:{kind}"
+
     return False, f"UNSUPPORTED_POSTCONDITION_KIND:{kind}"
+
+
+def _ui_nodes(postcondition: Mapping[str, Any],
+              execution_result: Mapping[str, Any] | None) -> list[Mapping[str, Any]] | None:
+    """Return the accessibility tree to check, or None when there is none.
+
+    None is deliberately distinct from []: an empty tree is a real observation
+    ('I looked and nothing was there'), a missing tree is not. A verifier that
+    cannot see must say so rather than answer.
+    """
+    raw = postcondition.get("ui_tree")
+    if raw is None:
+        raw = (execution_result or {}).get("ui_tree")
+    if raw is None:
+        return None
+    if isinstance(raw, Mapping):
+        raw = raw.get("nodes") or raw.get("tree") or []
+    # str and bytes ARE Sequence. Without this guard a malformed tree degraded to
+    # [] -- 'I looked and found nothing' -- instead of None, 'I could not look'.
+    # Those must never be the same answer.
+    if isinstance(raw, (str, bytes)) or not isinstance(raw, Sequence):
+        return None
+    return [n for n in raw if isinstance(n, Mapping)]
+
+
+_SELECTOR_KEYS = ("role", "name", "text", "automation_id", "identifier", "label")
+
+
+def _match_nodes(nodes: Sequence[Mapping[str, Any]],
+                 match: Mapping[str, Any]) -> list[Mapping[str, Any]]:
+    """Match on semantics -- role/name/label/identifier -- never coordinates.
+
+    `contains=True` switches name/text matching to substring. Substring matching
+    is opt-in because the loose form is how a wrong element gets accepted.
+    """
+    if not isinstance(match, Mapping):
+        return []
+    # An empty or non-semantic selector must match NOTHING. Silently ignoring an
+    # unknown key leaves an empty selector, which matches everything -- that is
+    # precisely how "click Save" gets satisfied by a coordinate. Caught by
+    # test_matching_is_on_semantics_never_coordinates.
+    semantic = {k: v for k, v in match.items() if k in _SELECTOR_KEYS}
+    if not semantic:
+        return []
+    match = semantic
+    substring = bool(match.get("contains"))
+    out: list[Mapping[str, Any]] = []
+    for node in nodes:
+        ok = True
+        for key in _SELECTOR_KEYS:
+            if key not in match:
+                continue
+            want = str(match[key])
+            got = str(node.get(key) if node.get(key) is not None else node.get("value"))
+            if substring and key in {"name", "text"}:
+                if want.lower() not in got.lower():
+                    ok = False
+                    break
+            elif want != got:
+                ok = False
+                break
+        if ok:
+            out.append(node)
+    return out
 
 
 def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool:
@@ -1099,6 +2332,21 @@ def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool
     if kind in {"http_get_contains", "step_response_contains"}:
         # Tested via mutated expected token in negative-control verification
         return True
+    if kind.startswith("ui_"):
+        # The tree lives in the postcondition, not on disk, so corrupt it in
+        # place. Without this the new kinds would be self-certifying: a verifier
+        # that cannot be made to say NO is not a verifier.
+        if kind in {"ui_element_present", "ui_value_equals", "ui_text_contains",
+                    "ui_element_state_equals"}:
+            if "ui_tree" in postcondition:
+                postcondition["ui_tree"] = []
+                return True
+            return False
+        if kind == "ui_element_absent":
+            # Sabotage an absence check by making the element appear.
+            postcondition["ui_tree"] = [dict(postcondition.get("match") or {"role": "sabotage"})]
+            return True
+        return False
     return False
 
 
@@ -1171,14 +2419,35 @@ def _clone_sqlite_twin_world(
             if not cols_info:
                 continue
             col_names = [str(c[1]) for c in cols_info]
+            # Bound `?` parameters are consumed IN THE ORDER THEY APPEAR across SET
+            # and WHERE. The previous code always used params[0] for every `?` and
+            # skipped `?` entirely in WHERE, so a two-parameter UPDATE
+            # ("SET qty = ? WHERE id = ?") seeded a twin row that the postcondition
+            # could not find: measured 2026-11-09, heldout_reason
+            # POSTCONDITION_SQLITE_NO_ROW. The compiler emits exactly this shape, so
+            # its preferred output could never qualify.
+            _params = list(step.get("params") or [])
+            _cursor = [0]
+
+            def _next_param() -> Any:
+                if _cursor[0] >= len(_params):
+                    return None
+                v = _params[_cursor[0]]
+                _cursor[0] += 1
+                return v
+
             set_targets: dict[str, Any] = {}
             for assign in set_clause.split(","):
                 if "=" in assign:
                     lhs, rhs = assign.split("=", 1)
                     cname = lhs.strip().strip('"`[]')
                     rval_raw = rhs.strip()
-                    if rval_raw == "?" and step.get("params"):
-                        rval = _instantiate_obj(step["params"][0], twin_bindings)
+                    if rval_raw == "?":
+                        _pv = _next_param()
+                        rval = (_instantiate_obj(_pv, twin_bindings)
+                                if _pv is not None else None)
+                        if rval is None:
+                            continue
                     else:
                         rval = str(_instantiate_obj(rval_raw, twin_bindings)).strip("'\"")
                     set_targets[cname] = rval
@@ -1190,7 +2459,12 @@ def _clone_sqlite_twin_world(
             ):
                 wc = wm.group(1).strip().strip('"`[]')
                 wv_raw = wm.group(2).strip()
-                if wv_raw != "?":
+                if wv_raw == "?":
+                    _pv = _next_param()
+                    if _pv is None:
+                        continue
+                    where_targets[wc] = str(_instantiate_obj(_pv, twin_bindings)).strip("'\"")
+                else:
                     where_targets[wc] = str(_instantiate_obj(wv_raw, twin_bindings)).strip("'\"")
 
             sample = src_con.execute(f"SELECT * FROM {table} LIMIT 1").fetchone()
@@ -1344,7 +2618,7 @@ def compile_and_qualify_skill(
     *,
     goal: str,
     trace: Mapping[str, Any] | Sequence[Mapping[str, Any]],
-    postcondition: Mapping[str, Any],
+    postcondition: Mapping[str, Any] | None = None,
     heldout_goal: str | None = None,
     heldout_cwd: str | pathlib.Path | None = None,
     heldout_setup: Callable[[pathlib.Path], None] | None = None,
@@ -1355,7 +2629,14 @@ def compile_and_qualify_skill(
     source_channel: str = "k2_or_sandbox_acquisition",
     db_path: pathlib.Path | None = None,
 ) -> dict[str, Any]:
-    """Compile one acquisition trace, qualify on untouched held-out + sabotage control, and persist."""
+    """Compile one acquisition trace, qualify on untouched held-out + sabotage control, and persist.
+
+    `postcondition=None` means: let the GOAL decide the answer type (infer_contract_from_goal).
+    That is the difference between a skill that answers what was asked and a skill that only
+    reports how many lines a program printed.
+    """
+    if postcondition is None:
+        postcondition = infer_contract_from_goal(goal)
     from canonical.runtime.memory_policy_v1 import can_write_memory
 
     if not can_write_memory():
@@ -1366,6 +2647,37 @@ def compile_and_qualify_skill(
             "status": "SKIPPED__MEMORY_POLICY_WRITE_DISABLED",
         }
     t0 = time.perf_counter_ns()
+    # TWO cli_exec STEPS ARE NOT A PIPELINE (r54).
+    #
+    # Each cli_exec step is executed independently with stdin=DEVNULL. A skill recorded as
+    # [sort -u <file>, wc -l] therefore runs sort, discards its output, then runs wc on an
+    # empty stdin, which prints 0 and exits 0. It compiled, qualified, executed, reported
+    # pass=true and STDOUT_INTEGER_VERIFIED:0, and the truth was 3. The same intent written
+    # as ONE cli_pipeline step answers 3. Both compiled before this guard existed.
+    #
+    # The carrier cannot catch it: confinement is real, the workspace is untouched, and wc
+    # exiting 0 on empty input is correct behaviour. The verifier cannot catch it: a wrong 0
+    # and a real empty file give the identical answer and the identical verification reason.
+    # The auditor cannot catch it: it refuses multi-step answers as NOT_AUDITABLE.
+    #
+    # So the refusal belongs here, at compile time, where the mistake is made. A step list
+    # with more than one cli_exec is either a pipe written as two steps (unexecutable as
+    # recorded) or two independent reads whose join the recorder never stated. Neither is a
+    # demonstration of a pipeline, and both are refused rather than answered.
+    _step_layers = [str(s.get("layer")) for s in (trace or []) if isinstance(s, Mapping)]
+    if _step_layers.count("cli_exec") > 1:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__MULTI_STEP_CLI_EXEC_IS_NOT_A_PIPELINE",
+            "reason": (
+                "cli_exec steps run with stdin closed, so a second cli_exec cannot read the "
+                "first one's output. Record the pipeline as one cli_pipeline step, or the two "
+                "reads as separate skills."
+            ),
+            "layers_recorded": _step_layers,
+        }
+
     elevated = elevate_trace_to_fastest_layer(trace)
     steps = elevated["elevated_steps"]
     if not steps:
@@ -1478,7 +2790,21 @@ def compile_and_qualify_skill(
         # straight out of this function, so a caller could not distinguish "this skill does not
         # transfer" from "this function is broken".
         try:
-            pre_ok, _ = verify_postcondition(inst_post, cwd=work_dir, execution_result={})
+            # EXPLICIT ABLATION (r45). The old form was `causal_ablation_pass = not pre_ok`
+            # against an EMPTY execution result, which is only meaningful when every
+            # postcondition kind happens to fail on an empty world. Measured 2026-11-09: the
+            # moment `stdout_line_count` was allowed to verify 0, every skill was refused
+            # with REQUIRED_TRUE_MISSING:causal_ablation_pass, because the control inverted
+            # silently. A control that infers itself from an unrelated check failing is
+            # fragile in a way its own tests cannot see.
+            #
+            # Now the ablation ASKS THE HELD-OUT WORLD DIRECTLY, with the same check that
+            # will be applied after the skill runs. If the goal's condition already holds
+            # before anything executes, the skill proved nothing.
+            pre_ok, _ = verify_postcondition(
+                inst_post, cwd=work_dir,
+                execution_result=_heldout_pre_state(inst_post, inst_steps, cwd=work_dir),
+            )
         except Exception as exc:  # noqa: BLE001 - any inability to check is a non-qualification
             return {
                 "schema": SCHEMA,
@@ -1675,8 +3001,26 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
     key = str(target_db)
     cached = _WORKFLOW_MEM_CACHE.get(key)
     if cached is not None:
-        conn.close()
-        return cached
+        # THE CACHE MUST NOT OUTLIVE THE FILE IT DESCRIBES.
+        #
+        # Measured 2026-11-09 and PROVEN, not inferred: replace a store file with a different
+        # one and this process keeps answering from the old one. Worse, every stat-based
+        # defence fails on this host: after `shutil.copyfile` the mtime_ns, ctime_ns, st_size
+        # and st_ino were ALL IDENTICAL, so a (mtime,size) or even (mtime,size,ctime,ino)
+        # stamp reports "same file" while the bytes differ. No stamp can be trusted here.
+        #
+        # So the rule is the simple one: a lookup re-reads. One small table, ~1 ms, versus a
+        # store that silently forgets everything taught to it after the first read in a
+        # process. The connection is closed first because it was opened before this decision
+        # and may hold a stale snapshot -- popping the cache and then querying THAT
+        # connection returned zero skills for a store that had one.
+        _WORKFLOW_MEM_CACHE.pop(key, None)
+        _WORKFLOW_INDEX_CACHE.pop(key, None)
+        try:
+            conn.close()
+        except Exception:  # noqa: BLE001 - a connection we are discarding
+            pass
+        target_db, conn = _connect_db(db_path)
     try:
         rows = conn.execute(
             """
@@ -1703,6 +3047,11 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             "artifact_sha256": r[8],
         })
     _WORKFLOW_MEM_CACHE[key] = out
+    try:
+        _st = target_db.stat()
+        _WORKFLOW_MEM_STAMP[key] = (_st.st_mtime_ns, _st.st_size)
+    except OSError:
+        _WORKFLOW_MEM_STAMP.pop(key, None)
     # Build O(1) rarest-anchor-token inverted index so lookup stays sub-millisecond at 10,000+ skills
     doc_freq: dict[str, int] = {}
     for sk in out:
@@ -1716,23 +3065,162 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
         else:
             anchor = min(toks, key=lambda t: (doc_freq.get(t, 0), -len(t), t))
             inv.setdefault(anchor, []).append(sk)
+    # SECOND AXIS: INTENT. The anchor index answers "which skill was taught with these
+    # WORDS", which cannot reach a skill taught on a synonym. This index answers "which
+    # skill was taught with this MEANING", using the tree's existing intent noun so both
+    # sentences the tree already calls `uniquelines` can find each other.
+    for sk in out:
+        # A skill may carry the intent TWICE -- as the reserved skeleton token (new skills)
+        # and as the abstract meaning of its readable skeleton (every skill, new or old).
+        # Index under the intent either way so a paraphrase can reach it whichever shape it
+        # was stored in. Old records are not migrated: reading both shapes is cheaper and
+        # cannot corrupt a record that already proved itself.
+        sk_intent = _intent_of(str(sk.get("goal_skeleton") or "").replace("?", ""))
+        if sk_intent is not None:
+            inv.setdefault("__INTENT__" + sk_intent, []).append(sk)
+        # WHICH PROGRAM this skill actually runs, indexed so a request phrased in the
+        # user's own words can still find it (r50). Read from the stored steps, not from
+        # the goal wording, so the index describes what the skill DOES.
+        sk_verb = _verb_of_skill_row(sk)
+        if sk_verb:
+            inv.setdefault("__BYVERB__" + sk_verb, []).append(sk)
     _WORKFLOW_INDEX_CACHE[key] = inv
     return out
 
 
-def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | None = None) -> list[dict[str, Any]]:
+def _intent_of(sentence: str) -> str | None:
+    """The abstract intent of a counting sentence, or None when it has none.
+
+    Deliberately narrow: `query_kind` is the tree's existing, tested intent noun for
+    "how many X" sentences. A sentence it does not classify gets no intent, so this can
+    never make two unrelated goals match -- it can only let two sentences that the
+    tree already calls the SAME question reach a skill taught on the other's wording.
+    """
+    try:
+        from canonical.runtime import computer_env_v1 as _cenv
+
+        return _cenv.query_kind(sentence)
+    except Exception:  # noqa: BLE001 - no intent is a safe answer; a wrong one is not
+        return None
+
+
+def _same_intent(skill: Mapping[str, Any], goal: str) -> bool:
+    taught = _intent_of(str(skill.get("goal_skeleton") or "").replace("?", ""))
+    asked = _intent_of(goal)
+    return taught is not None and taught == asked
+
+
+def _skeleton_matches(skill: Mapping[str, Any], goal_words: set[str], goal: str | None) -> bool:
+    """Does this skill's skeleton apply to this goal?
+
+    Two ways to qualify, and only two:
+      * every literal skeleton word appears in the goal (the original rule), and
+      * the reserved `__intent__` token, which stands for the goal's abstract intent and is
+        satisfied when `query_kind` reports the SAME intent for the skill and the question.
+
+    The intent token exists because the word that carries the intent ("unique") is exactly
+    the word a paraphrase changes ("distinct"), so requiring it literally is what made the
+    store a specialist. A skill with NO literal words left is not a wildcard: it still has to
+    clear the intent token, which is a real requirement. That distinction matters -- an empty
+    skeleton that matched everything would be worse than a specialist, because it would
+    answer questions it was never taught.
+    """
+    tokens = set(skill.get("skeleton_tokens") or [])
+    if not tokens:
+        return True
+    literal = {t for t in tokens if t != _INTENT_TOKEN}
+    words_cover = not literal or (literal <= goal_words)
+    intent_cover = False
+    if goal is not None:
+        taught = _intent_of(str(skill.get("goal_skeleton") or "").replace("?", ""))
+        asked = _intent_of(goal)
+        intent_cover = taught is not None and taught == asked
+    if _INTENT_TOKEN in tokens:
+        # The reserved token is a HARD requirement: it is the whole skeleton anchor.
+        return intent_cover
+    # Legacy shape (no intent token): literal coverage was the only rule, and it is what
+    # made "distinct" miss. Accept the intent as an ALTERNATIVE signal so a skill stored
+    # before this change becomes paraphrase-tolerant without a migration -- but keep the
+    # literal rule, because a goal with no recognisable intent must still reach a skill
+    # taught with the exact wording.
+    return words_cover or (intent_cover and literal)
+
+
+def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | None = None,
+                               *, goal: str | None = None) -> list[dict[str, Any]]:
+    """Candidate skills for a goal, matched by WORD and by INTENT.
+
+    `goal` is the original sentence and is REQUIRED for the intent axis. It is keyword-only
+    and defaulted so older call sites keep working, but with no sentence there is no intent
+    match -- the same fail-open shape as round 33's `_answer()` NameError: a rule that reads
+    a variable it was never given fails inside an except and never fires. Passed explicitly.
+    """
     target_db = db_path or _default_workflow_db()
     key = str(target_db)
-    if key not in _WORKFLOW_INDEX_CACHE:
-        _load_cached_skills(db_path)
+    # Always load. `_load_cached_skills` is where freshness lives, and this function used to
+    # skip it whenever an index existed -- so a store replaced on disk was served from a
+    # stale index and the candidate list came back empty for a skill that was right there.
+    _load_cached_skills(db_path)
     inv = _WORKFLOW_INDEX_CACHE.get(key) or {}
     candidates: list[dict[str, Any]] = list(inv.get("__ALL_EMPTY__") or [])
     seen_ids = {s["skill_id"] for s in candidates}
     for w in goal_words:
         for sk in inv.get(w) or ():
-            if sk["skill_id"] not in seen_ids:
+            if sk["skill_id"] not in seen_ids and _skeleton_matches(sk, goal_words, goal):
                 seen_ids.add(sk["skill_id"])
                 candidates.append(sk)
+    # THE INDEX IS KEYED ON SURFACE WORDS, SO A PARAPHRASE IS NEVER A CANDIDATE.
+    #
+    # Measured 2026-11-09: recall for "how many distinct lines in f" returned 0 candidates
+    # against a skill taught as "how many unique lines in f", even though
+    # `computer_env_v1.query_kind` calls BOTH sentences `uniquelines`. The intent check
+    # downstream therefore never ran -- it was guarded by a gate that had already dropped
+    # the skill. A filter that can never be reached is not a filter.
+    #
+    # Adding every stored skill for an intent match is the cost of correctness here: the
+    # store holds tens of skills, not millions, and the intersection is one `query_kind`
+    # call. If the store ever grows past a few thousand skills this must become a
+    # kind -> skill_ids index instead.
+    # ORDER IS MEANING. Building the intent from a sorted BAG of words produced
+    # "different how lines many pd txt", which `query_kind` reads as plain `lines` -- so
+    # "different" was silently dropped for an hour while "distinct" worked, because
+    # sorting happened to put "distinct" somewhere benign. Classify the SENTENCE, not the
+    # token set; the goal string is available and is the thing the classifier was written
+    # for.
+    asked_intent = _intent_of(goal) if goal else None
+    if asked_intent is not None:
+        for sk in inv.get("__INTENT__" + asked_intent) or ():
+            sk_intent = _intent_of(str(sk.get("goal_skeleton") or "").replace("?", ""))
+            if sk_intent is not None and sk_intent == asked_intent and sk["skill_id"] not in seen_ids:
+                seen_ids.add(sk["skill_id"])
+                candidates.append(sk)
+    # THIRD FALLBACK: SELECT BY VERB (r50).
+    #
+    # Measured 2026-11-09: requests phrased in a user's own words -- "dedupe the lines in",
+    # "how many lines are in", "flip each line of" -- scored 0 of 8, because both indexes
+    # above are keyed on the sentence. A miss returned None rather than a wrong verb, so
+    # there were zero misroutes; there was simply no selection at all.
+    #
+    # This runs ONLY after both sentence indexes have produced nothing, so it cannot change
+    # any existing hit. It is a vocabulary, not comprehension, and says so.
+    # NOTE THE CONDITION. The first version fired only when `candidates` was EMPTY, and a
+    # candidate found by INTENT (wrong meaning, right words) made it non-empty -- so the
+    # intent match SUPPRESSED the verb match. Measured 2026-11-09: "how many lines are in
+    # data.txt" bound via intent to `wc -l` and then died in the regex gate, while the verb
+    # fallback that could have bound it directly never ran. Adding the verb candidates
+    # unconditionally is safe because they still have to bind and execute.
+    if goal:
+        wanted_verb = infer_verb_from_goal(goal)
+        if wanted_verb:
+            for sk in (inv.get("__BYVERB__" + wanted_verb) or ()):
+                if sk["skill_id"] not in seen_ids:
+                    seen_ids.add(sk["skill_id"])
+                    # CHOSEN BY VERB, not by wording. The skeleton gate below exists to stop
+                    # a skill answering questions it was never taught; a verb-selected
+                    # candidate is already the answer to "which program does this goal
+                    # name", and re-applying the WORD gate to it is the same defect this
+                    # round is fixing one layer down. Marked so the gate can respect it.
+                    candidates.append(dict(sk, _selected_by="verb"))
     return candidates
 
 
@@ -1762,7 +3250,297 @@ def check_step_preconditions(steps: Sequence[Mapping[str, Any]], *, cwd: str | p
                 _ast.parse(code)
             except SyntaxError:
                 return False, "PRECONDITION_INVALID_PYTHON_SYNTAX"
+        elif layer == "sqlite_exec":
+            # A PRECONDITION THAT DOES NOT CHECK THE WORLD IT ACTS ON IS NOT ONE.
+            #
+            # Measured 2026-11-09: a skill compiled against table `items` matched the
+            # goal "set id 1 to 77 in other.sqlite", this function said
+            # PRECONDITIONS_OK, and the execution raised
+            # "sqlite3.OperationalError: no such table: items" out of the caller.
+            #
+            # ToolGate (ACL 2026) formalises each tool as a Hoare contract whose
+            # precondition gates invocation. The cheapest sound form of that for a
+            # SQL step is: the database exists and every table the statement names
+            # is really there. Check before writing, not after failing.
+            db_raw = st.get("db_path")
+            if db_raw:
+                _db = _resolve_local_path(str(db_raw), pathlib.Path(cwd) if cwd else pathlib.Path.cwd())
+                if not _db.is_file():
+                    return False, f"PRECONDITION_SQLITE_DB_MISSING:{_db.name}"
+                try:
+                    _names = _sqlite_tables_named(str(st.get("sql") or ""))
+                except Exception:
+                    _names = set()
+                if _names:
+                    _con = sqlite3.connect(str(_db), timeout=5.0)
+                    try:
+                        _have = {str(r[0]) for r in _con.execute(
+                            "SELECT name FROM sqlite_master WHERE type='table'")}
+                    finally:
+                        _con.close()
+                    _missing = sorted(n for n in _names if n not in _have)
+                    if _missing:
+                        return False, "PRECONDITION_SQLITE_TABLE_MISSING:" + ",".join(_missing)
     return True, "PRECONDITIONS_OK"
+
+
+_SQL_NOISE = {
+    "set", "where", "values", "into", "sqlite_master", "table", "select", "from",
+    "update", "insert", "delete", "primary", "key", "integer", "text", "real",
+    "blob", "null", "and", "or", "not", "in", "if", "exists", "as", "on", "by",
+}
+
+
+def _sqlite_tables_named(sql: str) -> set[str]:
+    """Tables a single SQL statement names, without a SQL parser.
+
+    Deliberately conservative: it returns names, and a name that is not a table is
+    caught by the check itself. It does not try to understand subqueries.
+    """
+    named: set[str] = set()
+    for m in re.finditer(r"\b(?:FROM|INTO|UPDATE|JOIN)\s+([A-Za-z_][A-Za-z0-9_]*)",
+                         sql, re.IGNORECASE):
+        tok = m.group(1)
+        if tok.lower() not in _SQL_NOISE:
+            named.add(tok)
+    return named
+
+
+def _heldout_pre_state(postcondition: Mapping[str, Any], steps, *,
+                       cwd: pathlib.Path | None = None) -> dict[str, Any]:
+    """The held-out world AS IT IS, before the skill runs -- for the causal ablation.
+
+    For contracts that read a FILE (file_contains, file_nonempty, ...) the pre-state is the
+    file's current contents. For contracts that read a PROCESS'S STDOUT there is no
+    pre-state: nothing has run, so no program has printed. Returning an empty receipt set
+    for those is honest -- and `verify_postcondition` already fails closed on it, which is
+    the behaviour the ablation needs. The difference from before is that this is now
+    STATED rather than inferred from whatever a generic empty check happened to do.
+    """
+    receipts: list[dict[str, Any]] = []
+    kind = str((postcondition or {}).get("kind") or "")
+    if kind.startswith("file_") and postcondition.get("path"):
+        target = pathlib.Path(str(postcondition["path"]))
+        if not target.is_absolute() and cwd is not None:
+            target = pathlib.Path(cwd) / target
+        if target.exists() and target.is_file():
+            try:
+                receipts.append({"step": -1, "layer": "pre_state",
+                                 "path": str(target),
+                                 "stdout": target.read_text(encoding="utf-8", errors="replace")})
+            except Exception:  # noqa: BLE001 - unreadable is unobservable, not a pass
+                receipts = []
+    return {"step_receipts": receipts, "pre_state": True}
+
+
+def infer_contract_from_goal(goal: str) -> dict[str, Any]:
+    """Choose the ANSWER TYPE from what the goal ASKS, not from what the teacher picked.
+
+    Measured r44/r45: every skill answered 'how many lines did the program print' because
+    the caller chose stdout_line_count for all 23 verbs. That made 'sha256 of <f>' answer
+    1 and 'contents of <f>' answer 7. The bottleneck was never the learner; it was that
+    nobody asked the goal what it wanted.
+
+    Deliberately simple and literal -- a wrong guess presented confidently is worse than an
+    honest default. This is a heuristic over English, not comprehension, and it is named as
+    such.
+    """
+    g = " ".join(str(goal or "").lower().split())
+    if not g:
+        return {"kind": "stdout_text"}
+    # Vocabulary widened 2026-11-09 against NATURAL phrasings, not the track's own goals.
+    # Measured honestly: the first version scored 23/27 on goals written the way a person
+    # would type them, missing 'crc', 'fingerprint', 'tally', 'size ... in lines'. The 23/23
+    # it scored on the track was a closed loop -- those goals were written to match it.
+    counting = ("how many", "count ", "count the", "number of", "tally", "size of",
+                "how much of", "line count", "what is the size")
+    digest = ("sha256", "sha1", "md5", "checksum", "cksum", "hash of", "digest of",
+              "crc", "fingerprint", "checksum of")
+    listing = ("first two lines", "last two lines", "lines containing", "lines matching",
+               "unique lines", "reverse each line", "reverse the order", "collapse repeats",
+               "number the lines", "first column")
+    if any(c in g for c in counting):
+        return {"kind": "stdout_integer_value"}
+    if any(d in g for d in digest):
+        return {"kind": "stdout_first_token"}
+    if any(l in g for l in listing):
+        return {"kind": "stdout_lines"}
+    return {"kind": "stdout_lines"}
+
+
+
+def answer_or_ask(
+    goal: str,
+    *,
+    cwd: str | pathlib.Path | None = None,
+    db_path: pathlib.Path | None = None,
+) -> dict[str, Any]:
+    """The door a caller should use. Execute if the sentence is enough; ask if it is not.
+
+    `recall_and_execute_workflow` returns None for everything it cannot do, and None is the
+    same value for "no skill has ever been taught", "the verbs conflict", and "the sentence
+    does not say which of these you meant". r55 measured that the last case is the common one:
+    7 of 8 asks in a user's own words tie at the top even for a perfect word selector.
+
+    A None that cannot be told apart from absence is not a refusal, it is a shrug. This
+    wrapper keeps the old function's contract untouched and adds the distinction:
+
+        answered     -- a skill ran and the answer verified
+        ask          -- nothing to run, or several operations tie, with the options named
+        unanswerable -- nothing could be tried for a reason that is not a choice
+    """
+    got = recall_and_execute_workflow(goal, cwd=cwd, db_path=db_path)
+    if got is not None:
+        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED", "answer": got.get("answer"),
+                "result": got}
+    # ASK ONCE, NOT EVERY TIME: a phrasing whose answer the user already gave is not
+    # ambiguous any more. The learned row is keyed by the PHRASE, never by the document, and
+    # it only decides WHICH of the taught skills to run -- the carrier still executes it and
+    # the postcondition still verifies it, so a bad remembered answer fails loudly rather
+    # than quietly.
+    _tdb, _conn = _connect_db(db_path)
+    try:
+        remembered = _recall_clarification(goal, _conn)
+    finally:
+        _conn.close()
+    if remembered is not None:
+        _sid, _op, _phrase = remembered
+        _rows = [r for r in _load_cached_skills(db_path=db_path) if r.get("skill_id") == _sid]
+        if _rows:
+            _skill = _rows[0]
+            _b = _bind_by_verb_selection(_skill, goal, cwd)
+            if _b is not None:
+                _steps = _instantiate_obj(_skill["abstract_steps"], _b)
+                _res = execute_compiled_steps(_steps, cwd=cwd)
+                if _res.get("ok"):
+                    _pc = _skill.get("abstract_postcondition")
+                    _ok, _why = verify_postcondition(_pc, cwd=cwd, execution_result=_res)
+                    if _ok:
+                        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED",
+                                "answer": _contract_answer(_pc, _res),
+                                "verification_reason": _why,
+                                "learned_from_clarification": {"phrase": _phrase,
+                                                               "operation": _op,
+                                                               "skill_id": _sid},
+                                "result": _res}
+    # r62: a tie that produces the same answer on this input is not a choice.
+    _eq = answer_by_equivalence(goal, cwd=cwd, db_path=db_path)
+    if _eq is not None:
+        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ANSWERED", "answer": _eq["answer"],
+                "decided_by": _eq["decided_by"], "compared": _eq["compared"],
+                "learned_from_clarification": None, "result": _eq["result"],
+                "note": _eq["note"]}
+    ask = select_or_ask(goal, db_path=db_path)
+    if ask.get("verdict") == "SELECTED":
+        # selected uniquely but execution failed; say so rather than offering a menu
+        return {"schema": "ANSWER_OR_ASK_V1", "verdict": "UNANSWERABLE",
+                "reason": "SELECTED_BUT_DID_NOT_RUN", "selected": ask.get("operation"),
+                "asked": goal}
+    return {"schema": "ANSWER_OR_ASK_V1", "verdict": "ASK", "question": ask.get("question"),
+            "options": ask.get("options", []), "reason": ask.get("reason"), "asked": goal}
+
+def answer_provenance(postcondition: Mapping[str, Any],
+                      execution_result: Mapping[str, Any],
+                      *, goal: str | None = None) -> dict[str, Any]:
+    """WHERE an answer came from, in a form a caller can check.
+
+    r46 ended with the warning that a typed answer must never stand as a factual claim
+    without its source, and that 23/23 correct is exactly the condition under which an
+    empty result starts to look like a finding. This is the source.
+
+    A number with no pedigree is indistinguishable from a guess that happens to be right.
+    """
+    receipts = list((execution_result or {}).get("step_receipts") or [])
+    steps = []
+    for receipt in receipts:
+        steps.append({
+            "layer": receipt.get("layer"),
+            "argv": receipt.get("argv") or receipt.get("stages"),
+            "argv_asked": receipt.get("argv_asked") or receipt.get("stages_asked"),
+            "exit": receipt.get("exit"),
+            "empty_result": bool(receipt.get("empty_result")),
+            "stdout_sha256": (hashlib.sha256(str(receipt.get("stdout") or "").encode()).hexdigest()
+                              if receipt.get("stdout") is not None else None),
+            "stdout_bytes": len(str(receipt.get("stdout") or "")),
+        })
+    empty = any(s["empty_result"] for s in steps)
+    return {
+        "schema": "ANSWER_PROVENANCE_V1",
+        "goal": goal,
+        "answer_type": str((postcondition or {}).get("kind") or ""),
+        "how_to_check": ("run the argv below against the same input; the answer must be "
+                         "reproducible from it and from nothing else"),
+        "steps": steps,
+        "workspace": str(execution_result.get("_workspace") or "") or None,
+        # WHAT THE ARGV READ, hashed at answer time. Without this the audit is
+        # re-derivation against a moving world (r48's stated limit).
+        "inputs": _snapshot_inputs(
+            (steps[0].get("argv") or []) if len(steps) == 1 else [],
+            pathlib.Path(execution_result["_workspace"]) if execution_result.get("_workspace") else None),
+        "empty_result": empty,
+        "claim": ("an EMPTY RESULT: this is 'nothing matched', not 'the tool failed'"
+                  if empty else "derived from the stdout hashes above"),
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+    }
+
+
+def _contract_answer(postcondition: Mapping[str, Any],
+                     execution_result: Mapping[str, Any]) -> Any:
+    """The value the skill's postcondition says is the answer, or None.
+
+    Deliberately narrow: it only speaks for contracts whose answer is unambiguous.
+    Anything else returns None so the caller keeps whatever it already had, rather
+    than this function inventing an answer for a contract it does not understand.
+    """
+    kind = str((postcondition or {}).get("kind") or "")
+    receipts = list((execution_result or {}).get("step_receipts") or [])
+    text = ""
+    for receipt in receipts:
+        if receipt.get("stdout") is not None:
+            text = str(receipt.get("stdout") or "")
+    if kind == "stdout_line_count":
+        n = len([ln for ln in text.splitlines() if ln.strip()])
+        return n if n > 0 else None
+    if kind == "stdout_integer":
+        stripped = text.strip()
+        return int(stripped) if stripped.isdigit() else None
+    # ---- TYPED ANSWERS (r45) ---------------------------------------------------------
+    # Until now a skill could only answer "how many lines did you print". Measured r44:
+    # all 23 verbs returned exactly that, 23/23, and 'sha256 of <f>' answered 1. The
+    # system had no way to return the lines, or the hash, or zero.
+    #
+    # These three kinds give the answer a TYPE. They are deliberately literal -- the raw
+    # text, not a parsed interpretation -- because a wrong parse presented confidently is
+    # worse than honest text.
+    if kind == "stdout_lines":
+        return [ln for ln in text.splitlines()]          # includes "" -> a real empty answer
+    if kind == "stdout_text":
+        return text                                      # verbatim, whitespace preserved
+    if kind == "stdout_first_token":
+        parts = text.split()
+        return parts[0] if parts else None               # e.g. the hash from `sha256sum <f>`
+    if kind == "stdout_integer_value":
+        # The INTEGER THE PROGRAM PRINTED, not the number of lines it printed.
+        # `wc -l f` prints "4 f" -- one line. Counting lines answers 1 and reports it as
+        # verified (measured r44). Parsing the leading integer answers 4, and on an empty
+        # file answers 0, so zero becomes sayable without touching stdout_line_count.
+        head = text.strip().split()
+        if not head:
+            return "" if "0" == str(postcondition.get("equals")) else None
+        try:
+            return int(head[0])
+        except ValueError:
+            return None
+    if kind == "stdout_line_count_or_zero":
+        # The count, INCLUDING zero. Deliberately a separate kind from stdout_line_count:
+        # that one must keep failing closed on empty because `causal_ablation_pass = not
+        # pre_ok` infers the control from it. This kind is for callers who asked a
+        # counting question and need 0 to be sayable.
+        return len([ln for ln in text.splitlines() if ln.strip()])
+    if kind == "stdout_equals":
+        return text if text else None
+    return None
 
 
 def recall_and_execute_workflow(
@@ -1770,8 +3548,17 @@ def recall_and_execute_workflow(
     *,
     cwd: str | pathlib.Path | None = None,
     db_path: pathlib.Path | None = None,
+    require_carried: bool = False,
 ) -> dict[str, Any] | None:
-    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
+    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check.
+
+    `require_carried=True` narrows the search to skills whose instantiated steps the
+    admitted carrier would run. It exists because the controller used to skip recall
+    entirely for "computer shape" goals -- a rule written when recall executed
+    unconfined. Since round 30 the carrier runs those steps, so the honest filter is
+    "is this skill carried", not "is this goal a computer shape". A skill that fails
+    the filter is skipped; the caller's existing refusal still applies.
+    """
     from canonical.runtime.memory_policy_v1 import can_read_memory
 
     if not can_read_memory():
@@ -1781,11 +3568,17 @@ def recall_and_execute_workflow(
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     previous_attempt = False
 
-    for skill in _candidate_skills_for_words(goal_words, db_path):
-        skel_tokens = set(skill.get("skeleton_tokens") or [])
-        if skel_tokens and not (skel_tokens <= goal_words):
+    for skill in _refuse_if_operations_tie(
+            _candidate_skills_for_words(goal_words, db_path, goal=goal), goal):
+        # ONE definition of "does this skeleton apply", shared with the candidate builder.
+        # The rule used to exist twice; both were once patched separately and the skill that
+        # gate one admitted was dropped by gate two.
+        if skill.get("_selected_by") != "verb" and not _skeleton_matches(skill, goal_words, goal):
             continue
         bindings = bind_goal_parameters(skill, goal)
+        if bindings is None and skill.get("_selected_by") == "verb":
+            # the sentence regex cannot match a candidate chosen by verb
+            bindings = _bind_by_verb_selection(skill, goal, cwd)
         if bindings is None:
             continue
         has_py = any(
@@ -1795,11 +3588,22 @@ def recall_and_execute_workflow(
         if has_py and any(any(ch in str(v) for ch in ("'", '"', "\n", "\r", "\\")) for v in bindings.values()):
             continue
         inst_steps = _instantiate_obj(skill["abstract_steps"], bindings)
+        if require_carried and not _steps_are_all_carried(inst_steps):
+            continue
         pre_ok, _ = check_step_preconditions(inst_steps, cwd=cwd)
         if not pre_ok:
             continue
         inst_post = _instantiate_obj(skill["abstract_postcondition"], bindings)
-        exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
+        # A learned skill matched the SENTENCE, not the WORLD. Measured 2026-11-09:
+        # a skill compiled against `items` matched the goal "set id 1 to 77 in
+        # other.sqlite" and raised OperationalError: no such table: items out of the
+        # caller. A shape mismatch is a refusal, not an exception -- the door turns an
+        # exception into COMPOSER_STEP_OUTCOME_UNCERTAIN and loses the reason.
+        try:
+            exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
+        except Exception as exc:  # noqa: BLE001 - any step failure is a candidate miss
+            last_error = f"{type(exc).__name__}:{exc}"
+            continue
         if exec_res.get("status") == boundary.STATUS:
             # Earlier candidate workflows may already have had effects even if
             # they failed their postconditions; do not claim otherwise.
@@ -1814,6 +3618,12 @@ def recall_and_execute_workflow(
             continue
         ok, reason = verify_postcondition(inst_post, cwd=cwd, execution_result=exec_res)
         if not ok:
+            continue
+        # r61: the postcondition checks what the answer LOOKS like. This checks that the
+        # operation the question named is the operation that ran.
+        _commit = infer_operation_commitment(goal)
+        _cok, _creason = verify_operation_commitment(_commit, exec_res)
+        if not _cok:
             continue
         # Record hit count asynchronously-safe in WAL
         target_db, conn = _connect_db(db_path)
@@ -1834,6 +3644,17 @@ def recall_and_execute_workflow(
             "artifact_sha256": skill["artifact_sha256"],
             "bindings": bindings,
             "verification_reason": reason,
+            # What the ANSWER is, per the skill's own contract. A set-printing program
+            # answers "how many" with the line count of what it printed, so returning its
+            # stdout as the answer would hand the caller a listing where it asked for a
+            # number. The verifier already computes this; report the same value the
+            # verification used rather than making every caller re-derive it.
+            "answer": _contract_answer(inst_post, exec_res),
+            "shape_audit": audit_answer_shape(goal, {"answer": _contract_answer(inst_post, exec_res)}),
+            "provenance": answer_provenance(
+                inst_post, dict(exec_res, _workspace=str(cwd or "")), goal=goal),
+            "carried_only": bool(require_carried),
+            "all_steps_carried": _steps_are_all_carried(inst_steps),
             "step_receipts": exec_res["step_receipts"],
             "elapsed_ms": round((time.perf_counter_ns() - t0) / 1e6, 3),
             "model_dependency_count": 0,
@@ -2031,3 +3852,265 @@ def prune_non_causal_steps_counterfactually(
         "k3_external_llm_calls": 0,
     }
 
+
+
+def audit_answer_by_rederivation(result: Mapping[str, Any]) -> dict[str, Any]:
+    """INDEPENDENT AUDIT: re-derive the answer from the recorded argv and compare.
+
+    r47 built provenance -- argv, exit, stdout hash. arXiv 2610.09581 shows why a receipt
+    is not an audit: a reader can retrieve every literal source correctly and still emit
+    unsupported attribution, 22 of 26 undetectable from the answer. The fix in that paper
+    is a DETERMINISTIC same-packet comparator that was grounded-correct throughout.
+
+    This is that comparator for one narrow case. It does not ask the skill anything. It
+    takes provenance.steps[*].argv, runs it itself, applies the SAME answer contract to
+    its OWN stdout, and compares. If they differ, the answer was not derivable from its
+    own stated source -- which is the definition of an unsupported finding.
+
+    Deliberately narrow: it re-derives from argv, so it can only audit contracts over a
+    process's stdout. A file-reading contract has no single argv to replay and is
+    reported NOT_AUDITABLE rather than silently passed.
+    """
+    provenance = dict((result or {}).get("provenance") or {})
+    steps = list(provenance.get("steps") or [])
+    if not steps:
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__NO_STEPS"}
+    if len(steps) != 1:
+        # A composite answer depends on more than one argv; replaying a subset would be a
+        # guess dressed as an audit.
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__MULTI_STEP"}
+    step = steps[0]
+    argv = step.get("argv")
+    if step.get("layer") == "cli_pipeline":
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__PIPELINE"}
+    if not isinstance(argv, (list, tuple)) or not argv:
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__NO_ARGV"}
+
+    contract = {"kind": provenance.get("answer_type") or ""}
+    # The recorded argv is the TRANSLATED form (`beta.txt`), which only resolves inside the
+    # workspace the carrier staged. Replaying it from the auditor's own cwd re-derives
+    # nothing and reports [] or None -- measured 2026-11-09: 20 of 23 answers appeared
+    # "not derivable" purely because the auditor looked in the wrong directory. An auditor
+    # that cannot resolve its own inputs must fail loudly, not produce a verdict.
+    replay_cwd = provenance.get("workspace")
+    if not replay_cwd or not pathlib.Path(str(replay_cwd)).is_dir():
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": "NOT_AUDITABLE__WORKSPACE_UNKNOWN",
+                "hint": "the recorded argv is workspace-relative; without the workspace "
+                        "it cannot be replayed, and guessing one would be a false audit"}
+    # DID THE INPUTS MOVE? r48's audit re-ran against the CURRENT filesystem, so a file
+    # that changed between answer and audit could silently flip the verdict either way.
+    # The snapshot was taken at answer time; comparing it now turns "it matched when I
+    # checked" into "it matched against THESE bytes". A mismatch does not mean the answer
+    # was wrong -- it means this audit cannot speak about it, and says so.
+    drifted: list[dict[str, Any]] = []
+    for record in (provenance.get("inputs") or []):
+        try:
+            now = hashlib.sha256(pathlib.Path(record["resolved"]).read_bytes()).hexdigest()
+        except OSError:
+            drifted.append({"path": record.get("path"), "change": "GONE"})
+            continue
+        if now != record.get("sha256"):
+            drifted.append({"path": record.get("path"), "change": "CONTENT_CHANGED",
+                            "was_sha256": record.get("sha256"), "now_sha256": now})
+    try:
+        proc = subprocess.run([str(a) for a in argv], capture_output=True, text=True,
+                              timeout=30, stdin=subprocess.DEVNULL, cwd=str(replay_cwd))
+        replay = {"step_receipts": [{"stdout": proc.stdout, "exit": proc.returncode}]}
+    except Exception as exc:  # noqa: BLE001 - an audit that cannot run is not a pass
+        return {"schema": "ANSWER_AUDIT_V1", "auditable": False,
+                "verdict": f"NOT_AUDITABLE__REPLAY_FAILED:{type(exc).__name__}"}
+
+    rederived = _contract_answer(contract, replay)
+    stated = (result or {}).get("answer")
+    same = rederived == stated
+    if drifted:
+        return {
+            "schema": "ANSWER_AUDIT_V1",
+            "auditable": False,
+            "verdict": "NOT_AUDITABLE__INPUTS_CHANGED_SINCE_THE_ANSWER",
+            "drift": drifted,
+            "would_have_said": ("ANSWER_MATCHES_ITS_SOURCE" if same
+                                else "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE"),
+            "note": ("the inputs are not the bytes the answer was derived from. The replay "
+                     "result below is about the CURRENT file and cannot confirm the answer."),
+            "answer_stated": stated,
+            "answer_rederived": rederived,
+        }
+    return {
+        "schema": "ANSWER_AUDIT_V1",
+        "auditable": True,
+        "verdict": "ANSWER_MATCHES_ITS_SOURCE" if same else "ANSWER_NOT_DERIVABLE_FROM_ITS_SOURCE",
+        "inputs_unchanged_since_answer": True,
+        "answer_stated": stated,
+        "answer_rederived": rederived,
+        "argv_replayed": [str(a) for a in argv],
+        "replay_exit": proc.returncode,
+        "method": "deterministic re-derivation; no model, no trust in the skill",
+    }
+
+
+def _snapshot_inputs(argv: Sequence[str], work_dir: pathlib.Path | None) -> list[dict[str, Any]]:
+    """Hash every file this argv names, so the answer can be audited later.
+
+    r48's closing limit: the auditor re-ran commands against the CURRENT filesystem, which
+    makes it re-derivation, not replay -- if the file changed, the verdict changes. The
+    2026 replay literature is blunt about why that is not enough (arXiv 2607.16200 is
+    reviewed as definitional; its referees note that re-execution is not replay).
+
+    This records what the argv READ, not what it did. A hash of the input at answer time
+    turns "the answer matched when I checked" into "the answer matched against THESE bytes".
+    Deliberately cheap: stat + sha256 of named files, no snapshotting of the world.
+    """
+    out: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for arg in list(argv)[1:]:
+        a = str(arg)
+        if not a or a.startswith("-"):
+            continue
+        candidate = pathlib.Path(a)
+        if not candidate.is_absolute() and work_dir is not None:
+            candidate = pathlib.Path(work_dir) / candidate
+        try:
+            if not candidate.is_file():
+                continue
+            key = str(candidate.resolve())
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({"path": str(candidate), "resolved": key,
+                        "sha256": hashlib.sha256(candidate.read_bytes()).hexdigest(),
+                        "bytes": candidate.stat().st_size})
+        except OSError:
+            continue
+    return out
+
+
+def audit_answer_shape(goal: str, result: Mapping[str, Any]) -> dict[str, Any]:
+    """SECOND AUDIT LAYER: does the answer have the SHAPE the goal asked for?
+
+    r48's audit checks derivation -- is the answer what the argv produces. Demonstrated
+    2026-11-09 that this is not enough: a skill whose goal says "count the lines" can hold
+    an argv of `sort -u` and the derivation audit says ANSWER_MATCHES_ITS_SOURCE while the
+    answer is ['apple','zebra'] and the truth was 3. Internally consistent, wrong for the
+    goal, audited clean.
+
+    This compares the goal's requested type against the answer's actual type. Cheap, and
+    it closes the shape half of that hole.
+
+    IT IS NOT A PROOF AND MUST NOT BE REPORTED AS ONE: a wrong answer of the RIGHT type
+    passes. "count the unique lines" against a goal of "count the lines" is an integer
+    either way.
+    """
+    want = str(infer_contract_from_goal(goal).get("kind") or "")
+    answer = (result or {}).get("answer")
+    if isinstance(answer, bool) or answer is None:
+        got = "none"
+    elif isinstance(answer, int):
+        got = "stdout_integer_value"
+    elif isinstance(answer, list):
+        got = "stdout_lines"
+    elif isinstance(answer, str):
+        got = "stdout_text_or_token"
+    else:
+        got = "unknown"
+    if want == "stdout_line_count_or_zero":
+        want = "stdout_integer_value"
+    compatible = (want == got) or (want == "stdout_first_token" and got == "stdout_text_or_token") \
+        or (want == "stdout_text" and got == "stdout_text_or_token")
+    return {
+        "schema": "ANSWER_SHAPE_AUDIT_V1",
+        "goal_requested_type": want,
+        "answer_actual_type": got,
+        "shape_matches": bool(compatible),
+        "verdict": "SHAPE_MATCHES_THE_GOAL" if compatible else "SHAPE_MISMATCH__GOAL_ASKED_FOR_A_DIFFERENT_KIND",
+        "honesty": ("a shape check only. A wrong answer of the correct type passes this and "
+                    "every derivation audit; nothing here verifies the CHOICE of command."),
+    }
+
+
+# --------------------------------------------------------------------------------------
+# TOOL SELECTION BY VERB, NOT BY SENTENCE (r50, 2026-11-09)
+#
+# Measured this round: recall scored 0 of 8 on requests phrased in a user's own words
+# ("dedupe the lines in", "how many lines are in", "flip each line of"). Not because it
+# chose the wrong verb -- a miss returns None, so there were ZERO misroutes -- but because
+# the whole goal string is the index key. The skill is found only by repeating the sentence
+# it was taught with.
+#
+# This is the 2026 metric the project had never computed: TOOL SELECTION CORRECTNESS,
+# "given the state and goal, did the agent choose the correct tool" (Prefix Executability,
+# arXiv 2610.40444). It is separable from argument validity and from execution, and it is
+# where an agent can be right for the wrong reason.
+#
+# The fix is deliberately small and honest: infer WHICH VERB the goal needs from its words,
+# then look up by that verb. It is a vocabulary, not understanding -- the same construct as
+# infer_contract_from_goal, and it fails the same way when the words are unfamiliar.
+# --------------------------------------------------------------------------------------
+
+_VERB_CUES: dict[str, tuple[str, ...]] = {
+    "sort": ("unique", "distinct", "dedupe", "deduplicate", "alphabeti", "sort", "order the lines"),
+    "wc": ("how many", "count", "tally", "number of", "line count", "size of", "how long"),
+    "sha256sum": ("sha256", "sha-256"),
+    "md5sum": ("md5",),
+    "cksum": ("checksum", "crc", "integrity"),
+    "cat": ("contents", "content of", "what is in", "show me the file", "read me",
+            "dump the contents", "let me see the file", "print out"),
+    "rev": ("reverse each", "flip each", "invert the character", "reverse the characters"),
+    "tac": ("reverse the order", "backwards", "bottom to top", "in reverse"),
+    "head": ("first", "top of", "start of", "beginning"),
+    "tail": ("last", "end of", "bottom of"),
+    "grep": ("lines containing", "lines matching", "grep", "search for", "which lines mention",
+             "find any line", "spot any"),
+    "nl": ("number the lines", "line numbers", "add numbers"),
+    "fold": ("fold", "wrap the long lines", "break the overlong"),
+    "fmt": ("reflow", "reformat", "tidy up"),
+    "expand": ("expand tabs", "tabs into spaces", "tabs to spaces", "replace tabs"),
+    "unexpand": ("unexpand", "spaces into tabs", "indentation to tabs"),
+    "cut": ("first column", "column one", "first character of every line"),
+    "od": ("octal dump", "dump the bytes", "raw bytes"),
+    "paste": ("paste", "concatenate the lines", "join the rows"),
+    "uniq": ("collapse repeats", "adjacent repeats", "consecutive duplicates",
+             "duplicate neighbours"),
+    "sed": ("replace", "swap", "change every instance", "substitute"),
+    "egrep": ("egrep",),
+    "fgrep": ("fgrep",),
+}
+
+
+def infer_verb_from_goal(goal: str) -> str | None:
+    """Which program does this goal name? Longest matching cue wins, ties go to the first.
+
+    A vocabulary, not comprehension. Measured: it turns 0/8 phrase-based selection into
+    whatever the cue table covers, and it will be wrong for phrasing outside the table --
+    which is why the result reports the cue it used rather than an unexplained string.
+    """
+    g = " ".join(str(goal or "").lower().split())
+    best: tuple[int, str] | None = None
+    for verb, cues in _VERB_CUES.items():
+        for cue in cues:
+            if cue in g and (best is None or len(cue) > best[0]):
+                best = (len(cue), verb)
+    return best[1] if best else None
+
+
+def _verb_of_skill_row(row: Mapping[str, Any]) -> str | None:
+    """The program a stored skill actually runs, read from its steps."""
+    # NOTE: the loaded row calls this `abstract_steps`, not `steps`. Measured 2026-11-09:
+    # reading "steps" returned None for every stored skill, so the verb index was silently
+    # empty and the fallback could never fire. A silently-empty index looks exactly like a
+    # working one that finds nothing.
+    steps = row.get("abstract_steps") or row.get("steps") or []
+    try:
+        first = steps[0] if isinstance(steps, (list, tuple)) else json.loads(steps)[0]
+    except Exception:  # noqa: BLE001
+        return None
+    if str(first.get("layer")) == "cli_pipeline":
+        stages = first.get("stages") or []
+        return str(stages[0][0]) if stages and stages[0] else None
+    argv = first.get("argv") or []
+    return str(argv[0]) if argv else None

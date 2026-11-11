@@ -1,0 +1,48 @@
+{
+  "round": 60,
+  "date": "2026-11-09",
+  "title": "The goal is now explicit. The optimal path is to attach a model behind the gate that already exists, not to build one.",
+  "stated_goal": "total computer use, including advanced software engineering, by the fastest and most optimal mechanism",
+  "decomposition": {
+    "1_carrier": {"have": true, "evidence": "argv exec, confined, no shell (r53)"},
+    "2_contract_gate": {"have": true, "evidence": "3 of 3 type-changing wrong picks caught, with no model attached (r60)"},
+    "3_memory": {"have": true, "evidence": "sqlite, permanent, exact undo (r59)"},
+    "4_model": {"have": false, "evidence": "0 parameters"},
+    "5_actuator": {"have": false, "evidence": "no display, no pointer, no GUI toolkit"},
+    "6_planner": {"have": false, "evidence": "two learned operations from one sentence -> None (r51)"}
+  },
+  "the_measurement_that_sets_the_path": {
+    "question": "if a model proposed the skill, could the substrate catch a wrong proposal?",
+    "results": [
+      {"proposal": "wc -l for 'unique lines of'", "ran_and_verified": true, "shape_audit": "SHAPE_MISMATCH", "caught": true},
+      {"proposal": "cat for 'sha256 of'", "ran_and_verified": true, "shape_audit": "SHAPE_MISMATCH", "caught": true},
+      {"proposal": "sort -u for 'count the lines of'", "ran_and_verified": true, "shape_audit": "SHAPE_MISMATCH", "caught": true}
+    ],
+    "score": "3/3 type-changing wrong picks caught",
+    "the_remaining_hole": "a wrong pick between two operations returning the SAME KIND of answer. 'sort' for 'unique lines of' returns lines: shape satisfied, answer wrong, measured. The model must never be the only decider."
+  },
+  "external_convergence_2026": {
+    "ToolGate (Findings of ACL 2026)": "Hoare-style pre/postconditions per tool; precondition gates invocation; postcondition decides whether the result may be committed; the symbolic state 'evolves only through verified tool executions, preventing invalid or hallucinated results from corrupting the world representation'. Parametric hallucination is its most prevalent failure at 8.4%.",
+    "Predefined-tool execution (EMNLP 2026 Industry)": "the model selects and parameterises tools from a fixed, schema-validated registry; executability and hallucination-suppression proved under stated assumptions; held across 276 agent executions",
+    "SIGIL (2026)": "verified loading of skills at <=0.495 ms local overhead; every loaded skill verified before execution",
+    "what_this_repo_contributes": "the gate is not a proposal here, it is running and measurable without a model. The catch rate is reproducible at zero cost."
+  },
+  "the_ranked_path": [
+    "1. attach a model to the SELECTION step only. Everything downstream verifies. This collapses the r55 tie ceiling, which no amount of vocabulary work can.",
+    "2. widen the gate from answer KIND to OPERATION. The same-kind hole is the remaining silent failure and it is a schema change, not a model change.",
+    "3. actuator last. GUI is blocked by grounding, not by a missing demonstration: 0-10% on unseen UIs, and 26.3% -> 8-10% after fine-tuning on 22.5K trajectories.",
+    "4. coding is step 1 plus a workspace. It needs no separate mechanism. Today it is 0."
+  ],
+  "what_is_explicitly_not_on_the_path": [
+    "teaching more operations -- measured destructive at |S|=4 (r52) and the tie source at |S|=5 (r57)",
+    "widening the cue table -- provably cannot beat the tie ceiling (r55)",
+    "claiming the substrate learns -- it files; the wipe test is decisive (r59)"
+  ],
+  "honest_verdict": {
+    "on_the_question_revolutionary_learning": "no. It is exact memory with an exact undo, which is better than fine-tuning on cost, reversibility and interference, and worse on everything that requires generalisation.",
+    "on_the_goal": "reachable in principle, not reachable from this repository alone, and the binding constraint is a model that this project does not contain and cannot grow.",
+    "the_useful_thing_that_was_built": "a gate. A model behind a gate is defensibly useful; a model without one is a guess with a receipt.",
+    "sentience": "unchanged. No evidence, no mechanism, no test that could settle it. The gate makes the system more honest, which is not the same as more aware."
+  },
+  "regression": {"files": 22, "passed": 160, "xfailed": 1, "r46_baseline": "23/23 unchanged"}
+}

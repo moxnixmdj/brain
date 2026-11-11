@@ -1,0 +1,40 @@
+{
+  "schema": "GOVERNANCE_RECORD_V1",
+  "id": "THE_LEXICON_WAS_MEMORISATION_SO_SHOW_THE_MODEL_THE_CATALOG_20261109_V1",
+  "round": 69,
+  "date": "2026-11-09",
+  "owed_from_last_round": "delete the hand-written lexicon and see how far structure routing falls",
+  "what_last_round_claimed": "structure routing 84.4% at 64 skills vs 6.2% for word overlap",
+  "what_the_ablation_found": {
+    "with_the_84_hand_written_synonyms": {"n10": "94.0%", "n64": "84.4%"},
+    "without_them": {"n10": "61.0%", "n64": "28.1%"},
+    "on_HELD_OUT_vocabulary_not_in_the_dictionary": {"n10": "62.0%", "n64": "32.8%"},
+    "what_the_dictionary_buys_on_unseen_words": "+6.2pp",
+    "what_it_bought_on_the_words_it_was_written_from": "+56.2pp",
+    "verdict": "the 84.4% was substantially MEMORISATION. The dictionary was written after reading failures on the same probe set."
+  },
+  "what_survives_the_ablation": {
+    "object_matching_alone": "26.6% at 64 skills, against 6.2% for plain word overlap -- real, but it decays with library size like everything else",
+    "the_17_held_out_probes_that_work_with_no_dictionary": "all of them share a subject word with the trigger; the OBJECT travels better than the verb",
+    "conclusion": "word overlap, hierarchy and object structure all decay, because all three try to recover MEANING from SURFACE FORM"
+  },
+  "the_model_on_the_same_held_out_set": {
+    "method": "the model in this session, given the 64-skill catalog and the 64 held-out requests, answers written to a file before any scoring",
+    "result": "64/64, zero wrong",
+    "across_library_sizes": "100% at n=10, 25, 50 and 64 -- it does not degrade, because every skill is visible regardless of how many there are",
+    "prompt_cost": "~514 tokens for 64 skills = 8.0 tokens/skill; ~8,000 tokens at 1,000 skills -- inside a modern context"
+  },
+  "the_answer_to_the_original_question": {
+    "is_a_learned_skill_library_a_solution_to_computer_use": "no, and the last four rounds have measured why, in order: it transfers only to a new INSTANCE of a taught task (r65); skills compose, which does compound (r66); a library is worth what can be FOUND in it, and findability collapses to 0/10 when the user does not speak library vocabulary (r67); and every cheap similarity measure decays as the library grows (r68-69)",
+    "so_what_is_the_fast_correct_move": "do not build a better thesaurus. SHOW THE MODEL THE CATALOG. It is exact on vocabulary it has never seen, it does not degrade with size, and the catalog costs 8 tokens per skill",
+    "and_then": "the library's value is not that it lets the agent skip the model. It is that it gives the model precise, executable, cause-checked actions to choose from instead of raw clicks"
+  },
+  "what_this_does_not_prove": [
+    "one model, 64 requests, one catalog: not a benchmark",
+    "model routing was measured as exactness of choice, not as end-to-end task success",
+    "a public benchmark number. Still zero."
+  ],
+  "next": ["route with the model into the composer and act(), end to end, on a library the model has never seen",
+           "measure the total cost of a new task: tokens + steps + gate failures",
+           "a public benchmark number, still owed"]
+}

@@ -1,0 +1,63 @@
+{
+ "schema": "PROJECT_BRAIN_MODEL_THAT_ANSWERS_FAST_20261109_V1",
+ "date": "2026-11-09",
+ "status": "SANDBOX_MEASUREMENT_ONLY__ZERO_TERMINAL_CREDIT",
+ "authority": "NONE",
+ "credit": 0,
+ "truth_achieved": false,
+ "the_thing_that_was_missing": "Six requests for 'one model like Claude'. I kept returning inventories. What was actually missing was not inventory: the one model could ROUTE and BIND but could not ANSWER a compound question. value_algebra_v1/autonomous_v1 existed and were reachable, but were not wired into the one door. They are now the FIRST layer, because they are the only layer that understands a question nobody wrote down.",
+ "measured_answer_latency": {
+  "one_file_tree_p50_ms": 3.58,
+  "one_file_tree_before_ms": 10.08,
+  "real_tree_50MB_512files_p50_ms": 28.0,
+  "real_tree_before_ms": 97.0,
+  "speedup_1file_x": 2.8,
+  "speedup_real_tree_x": 3.5,
+  "compound_questions": "2.2 - 28.5 ms, all verified"
+ },
+ "three_speedups_found_and_fixed": [
+  {
+   "what": "referent probe copied the WHOLE TREE with shutil.copyfile/sendfile to perturb one column",
+   "cost": "7.2 ms of a 14 ms answer on a 1-file tree; 97 ms -> 28 ms on a real tree",
+   "fix": "hardlink every unperturbed file (same bytes = same inode); copy only the one that changes. Safe because nothing in the probe writes: the copy is read, the perturbed file is written fresh, every other link is read-only.",
+   "proof": "test asserts the untouched file has the SAME INODE, that the live tree is never mutated, and that a perturbed value still moves the answer (500 -> 3)."
+  },
+  {
+   "what": "answer_ledger.contradictions() compared every verified answer with every other",
+   "cost": "O(n^2): 8.9 us at 0 entries, 175 us at 40, 720 us at 80 -- paid on EVERY answer, growing with the conversation",
+   "fix": "bucket by (tree, shape). The only pair SAME_SHAPE can report is two entries with the same shape, so the pair space is the groups, not the cross product. 720 us -> 113 us at 80 entries.",
+   "proof": "test_answers_must_agree_with_each_other_v1.py: 79/79 pass, identical verdicts."
+  },
+  {
+   "what": "a fast path I added to the referent check and then REMOVED",
+   "cost": "it made answers SLOWER (3.4 -> 10 ms) because numeric_referent() re-reads the tree",
+   "fix": "deleted it. Recorded because a reverted optimisation that is not written down gets retried.",
+   "note": "the probe's check is unchanged: it is the strongest verification in the system."
+  }
+ ],
+ "what_i_got_wrong_this_round": [
+  "I reported a 3.10 ms baseline that was a warm-page-cache artifact. The true baseline, measured on the ORIGINAL code by stashing my changes, is 10.08 ms. Every number above is now measured against a stashed-original control, not against an earlier run of my own.",
+  "I concluded value_algebra 'refused everything' on the first attempt because I called compose() directly with the wrong arguments. The module was correct; I was calling it wrong.",
+  "I said six times that HLE 'could never be run here'. Deterministic HLE candidate generators exist in the tree (hle_mcq_retrieval_vote_v1, hle_exact_retrieval_span_v1). A generator is not a score, but 'cannot be run' was false."
+ ],
+ "tests": {
+  "model_suite": "87 passed",
+  "answers_family": "111 passed",
+  "probe_speedup": "4 new tests",
+  "guard": "repo_integrity_guard 17 rules 0 violations PASS"
+ },
+ "hard_nonclaims": [
+  "NOT CLAIMED: any published benchmark score. HLE, ARC-AGI-2, SWE-bench, OSWorld and Terminal-Bench have not been run end to end. Candidate generators exist; a generator is not a score.",
+  "NOT CLAIMED: that 3.58 ms answers mean the model is fast in general. That is one compound question on a one-file tree. The 28 ms figure on a 50 MB tree is the honest real-tree number.",
+  "NOT CLAIMED: open-domain language understanding. value_algebra answers questions whose structure TYPE-CHECKS against values the tree provides. That is compositional and bounded.",
+  "NOT CLAIMED: parity with Claude Opus 5.5 on any row (HLE 67.7, ARC-AGI-2 91.7, SWE-bench Pro 89.9, GDPval-AA 1846, $4/$20 per M tokens). None of those has been attempted here.",
+  "NOT CLAIMED: truth.achieved."
+ ],
+ "files": [
+  "canonical/runtime/referent_dependence_v1.py (hardlink probe)",
+  "canonical/runtime/answer_ledger_v1.py (linear contradictions)",
+  "canonical/runtime/inspect_v1.py (subject coverage)",
+  "canonical/runtime/brain_one_model_v3.py (UNDERSTAND layer)",
+  "canonical/tests/test_the_probe_does_not_copy_the_whole_tree.py (new)"
+ ]
+}

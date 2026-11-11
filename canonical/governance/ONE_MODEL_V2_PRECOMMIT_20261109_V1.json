@@ -1,0 +1,74 @@
+{
+ "schema": "PROJECT_BRAIN_ONE_MODEL_V2_PRECOMMIT",
+ "date": "2026-11-09",
+ "status": "BUILT_AND_MEASURED__ZERO_CAPABILITY_CREDIT__NO_NEW_AUTHORITY",
+ "authority": "NONE",
+ "credit": 0,
+ "objective": "Compose the tree's existing weightless mechanisms into one door that routes, compiles closed-form families, learns from one observation, and prices its own refusals -- at microsecond latency.",
+ "what_this_is": "A composition, not a new capability. Every part it uses already existed and is named in `composed_from` below.",
+ "composed_from": [
+  "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json (141 entries, keywords + provides)",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json (443 routable identities)",
+  "canonical/runtime/h100_zero_learned_parametric_unary_v1.py (family synthesis, zero learned bytes)",
+  "the 2026-11-04 finding that a residue class must be witnessed twice (periodic gate)",
+  "canonical/runtime/associative_memory_v1.py Beta(1,1) importance prior (reused shape, not the module)",
+  "SOLUTION_INDEX.md load-bearing spine (informed which modules to compose rather than rewrite)"
+ ],
+ "measured": {
+  "route_goal_to_capability_p50_us": 12.7,
+  "compile_affine_p50_us": 7.6,
+  "compile_constant_p50_us": 3.4,
+  "solve_route_and_bind_p50_us": 18.6,
+  "absent_priced_refusal_p50_us": 41.4,
+  "bridge_token_p50_us": 32.9,
+  "acquire_close_a_gap_p50_us": 312.2,
+  "cold_process_to_answer_ms": 42.4,
+  "interpreter_startup_ms": 10.4,
+  "audit_2337_files_cold_ms": 4290,
+  "audit_2337_files_cached_ms": 9.2,
+  "audit_speedup_x": 465,
+  "archive_create_cold_ms": 670,
+  "archive_create_cached_ms": 11.3,
+  "archive_speedup_x": 59,
+  "parallel_threads_4_over_serial": 1.03,
+  "parallel_procs_2_over_serial": 0.55,
+  "closed_form_vs_tree_synthesizer_x": 9000,
+  "route_p50_us": 12.9,
+  "route_p95_us": 19.1,
+  "walk_16065_files_ms": 60.1,
+  "digest_incl_racy_hashing_ms": 67.1
+ },
+ "decisions_and_why": [
+  "A typo bridges only to a token that names a CAPABILITY, never to a keyword. `tree`->`three` and `tree`->`time` were false bridges that turned correct routes wrong; both came from prose keywords, and both are now impossible.",
+  "At most ONE edit, of kind INS/DEL/TRANS/SUB. Two-edit distance on four-letter words cannot distinguish a typo from a different word.",
+  "Coverage counts tokens the model has LEARNED. Without this, acquiring four bridges left coverage at 0.0, so `confident` stayed False and route returned None: the learned vocabulary existed but could never be used. This is what made the first end-to-end acquire close.",
+  "The plain route path keeps a fast branch for the common case of no unknown tokens; it costs 12.7 us versus 17.6 us when the learned-token scan always runs.",
+  "Parallelism rejected on measured evidence: threads +3%, processes -45% on 2 cores. Memoisation is kept instead and delivers 465x on the repeated workload.",
+  "The cache key hashes a write target's NAME and excludes both its existence and the cache directory itself; otherwise a key depends on its own contents and can never hit.",
+  "A typo may only bridge to a token that names a CAPABILITY, never to one borrowed from registry prose. `tree`->`three` and `tree`->`time` were false bridges that converted correct routes into wrong ones; both remain impossible now, while every true typo still resolves.",
+  "Coverage counts tokens the model has LEARNED. Before this, acquiring four bridges left coverage at 0.0, so `confident` stayed False and route returned None -- the learned vocabulary existed but could never be used. This is the change that made acquire close a gap end to end.",
+  "A write target's resolved path is excluded from any directory signature it falls inside. Excluding only its own slot was not enough: `output_path` inside `source_root` changed the directory signature on the first run, so the key differed from itself and every call missed, even in one process.",
+  "Files modified within 2 s are content-hashed rather than trusted by stat, because this filesystem is ext2/ext3 with ONE-SECOND mtime resolution: a same-size rewrite in the same second leaves the signature byte-identical and produced a stale HIT. Older files are stat-safe, so the rule costs ~7 ms per 16k files and only for recently-touched ones."
+ ],
+ "hard_nonclaims": [
+  "NOT CLAIMED: cross-instance transfer of what one process learns (measured 1/15).",
+  "NOT CLAIMED: solving everything. 42 of 49 probe goals served, 7 refused with a price.",
+  "NOT CLAIMED: frontier parity on open-domain tasks. Frontier parity is evidenced only on formally specifiable classes.",
+  "NOT CLAIMED: a neural network, embeddings, or learned parameters of any kind. weights: 0, learned bytes: 0.",
+  "NOT CLAIMED: that acquire is fast in absolute terms. 312 us is the most expensive operation in the model and it is still four orders of magnitude below a model call.",
+  "NOT CLAIMED: that the cache is correct against a filesystem whose clock is set backwards, or against a write that restores an older file's exact size and mtime. The racy window bounds the exposure; it does not eliminate adversarial mtime forgery."
+ ],
+ "files": [
+  "canonical/runtime/brain_one_model_v2.py",
+  "canonical/runtime/_one_model_index_v2.py (generated, byte-identical recompile)",
+  "canonical/tests/test_brain_one_model_v2.py",
+  "scripts/compile_one_model_index_v2.py",
+  "canonical/runtime/state/one_model_cache/ (generated receipts, pruned at 256)"
+ ],
+ "reproduce": [
+  "python3 scripts/compile_one_model_index_v2.py",
+  "python3 -m pytest canonical/tests/test_brain_one_model_v2.py -q",
+  "python3 -m canonical.runtime.brain_one_model_v2 route 'extract text from a pdf'",
+  "python3 -m canonical.runtime.brain_one_model_v2 compile --rows '[{\"x\":0,\"y\":1},{\"x\":1,\"y\":3}]' --at 100"
+ ]
+}
