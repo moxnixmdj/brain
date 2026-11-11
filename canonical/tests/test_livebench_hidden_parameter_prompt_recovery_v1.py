@@ -42,3 +42,32 @@ def test_legacy_base_can_mention_repeated_request():
     )
     got = recover_legacy_repeat_prompt(prompt)
     assert "including the repeated request" in got["prompt_to_repeat"]
+
+
+def test_legacy_livebench_exact_generator_prefix_rule_preserves_prior_constraints():
+    repeat = (
+        "First repeat the request word for word without change, then give your answer "
+        "(1. do not say any words or characters before repeating the request; "
+        "2. the request you need to repeat does not include this sentence)"
+    )
+    prefix = (
+        "The following are the beginning sentences of a news article from the Guardian.\n"
+        "-------\n"
+        "Article sentence one. Article sentence two.\n"
+        "-------\n"
+        "Please summarize based on the sentences provided. "
+        "Include keywords ['alpha', 'beta'] in the response. "
+    )
+    prompt = prefix + repeat + " Your answer must contain a title, wrapped in double angular brackets, such as <<poem of joy>>."
+    got = recover_legacy_repeat_prompt(prompt)
+    assert got["prompt_to_repeat"] == prefix.rstrip()
+    assert got["response_prefix"] == prefix.rstrip()
+    assert got["source"] == "VISIBLE_PROMPT_PREFIX_BEFORE_PINNED_LIVEBENCH_REPEAT_MARKER"
+    assert got["scope"] == "PINNED_LIVEBENCH_LEGACY_GENERATION_RULE_V1"
+
+
+def test_legacy_livebench_exact_rule_matches_historical_split_semantics():
+    marker = "First repeat the request word for word without change,"
+    prompt = "base before marker " + marker + " tail " + marker + " second tail"
+    got = recover_legacy_repeat_prompt(prompt)
+    assert got["prompt_to_repeat"] == prompt.split(marker)[0].rstrip()
