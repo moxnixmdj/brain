@@ -13,9 +13,11 @@ Current admitted scope:
 - exact-scope executable-skill candidates recomputed from already authenticated
   source episodes;
 - PROVEN_SUPERSET planning-scope claims only for STRUCTURAL_MATCH_V1 when every
-  source episode was independently proved non-effectful, the candidate is exact
-  re-induction, and its program is structurally closed. Reuse still passes the
-  runtime structural guard and fresh V12 execution verification.
+  source episode is independently proved either non-effectful or a verified
+  bound-capability-carrier effect whose accepted inner execution and effect
+  outcome were independently recomputed, the candidate is exact re-induction,
+  and its program is structurally closed. Reuse still passes the runtime
+  structural guard and fresh V12 execution verification.
 
 Effectful episodes are never replayed. The currently owned filesystem-effect
 class is verified by independent post-execution readback from the retained effect
@@ -863,11 +865,11 @@ def _assert_structurally_closed_candidate(candidate: Mapping[str, Any]) -> None:
         raise R3IndependentVerificationError("STRUCTURAL_MATCH_POSTCONDITION_NOT_DERIVABLE")
 
 
-def _assert_non_effectful_source_proof(
+def _assert_generalizable_source_proof(
     record: Mapping[str, Any],
     *,
     repo_root: str | Path,
-) -> None:
+) -> str:
     binding = record.get("verification_binding")
     if not isinstance(binding, Mapping):
         raise R3IndependentVerificationError("GENERALIZATION_SOURCE_BINDING_MISSING")
@@ -877,10 +879,28 @@ def _assert_non_effectful_source_proof(
         raise R3IndependentVerificationError("GENERALIZATION_SOURCE_VERIFICATION_INVALID")
     if document.get("independent_verifier_id") != INDEPENDENT_VERIFIER_ID:
         raise R3IndependentVerificationError("GENERALIZATION_SOURCE_VERIFIER_NOT_ADMITTED")
-    if document.get("verification_basis") != NON_EFFECTFUL_VERIFICATION_BASIS:
-        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_BASIS_NOT_ADMITTED")
-    if document.get("non_effectful_trace") is not True:
-        raise R3IndependentVerificationError("GENERALIZATION_SOURCE_NOT_PROVED_NON_EFFECTFUL")
+
+    basis = str(document.get("verification_basis") or "")
+    if (
+        basis == NON_EFFECTFUL_VERIFICATION_BASIS
+        and document.get("non_effectful_trace") is True
+    ):
+        return "NON_EFFECTFUL"
+
+    if (
+        basis == BOUND_CARRIER_VERIFICATION_BASIS
+        and document.get("bound_carrier_effectful_trace") is True
+        and document.get("effect_outcomes_reverified") is True
+        and document.get("trace_reverified") is True
+        and document.get("state_lineage_reverified") is True
+        and document.get("behavior_verified") is True
+        and document.get("exact_byte_bound") is True
+    ):
+        return "BOUND_CARRIER_EFFECTFUL"
+
+    raise R3IndependentVerificationError(
+        "GENERALIZATION_SOURCE_PROOF_CLASS_NOT_ADMITTED"
+    )
 
 
 def verify_skill_request(
@@ -964,13 +984,18 @@ def verify_skill_request(
                 or requested_predicate not in supported
             ):
                 raise R3IndependentVerificationError("GENERALIZATION_PREDICATE_NOT_ADMITTED")
-            for eid in source_ids:
-                _assert_non_effectful_source_proof(by_id[eid], repo_root=repo_root)
+            source_proof_classes = [
+                _assert_generalizable_source_proof(
+                    by_id[eid],
+                    repo_root=repo_root,
+                )
+                for eid in source_ids
+            ]
             _assert_structurally_closed_candidate(candidate)
             relation = "PROVEN_SUPERSET"
             scope_predicate = STRUCTURAL_MATCH_SCOPE_PREDICATE
             verification_basis = (
-                "EXACT_REINDUCTION_PLUS_NON_EFFECTFUL_SOURCE_PROOF_PLUS_"
+                "EXACT_REINDUCTION_PLUS_VERIFIED_SOURCE_PROOF_PLUS_"
                 "STRUCTURAL_MATCH_RUNTIME_GUARD"
             )
 
@@ -1007,7 +1032,13 @@ def verify_skill_request(
             "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
             "verification_basis": verification_basis,
             "structural_match_runtime_guard_verified": bool(generalization),
-            "non_effectful_source_proof_required": bool(generalization),
+            "non_effectful_source_proof_required": False,
+            "verified_source_proof_required": bool(generalization),
+            "generalization_source_proof_classes": (
+                sorted(source_proof_classes)
+                if generalization
+                else []
+            ),
         }
         return _emit_pair(
             stem="skill",
