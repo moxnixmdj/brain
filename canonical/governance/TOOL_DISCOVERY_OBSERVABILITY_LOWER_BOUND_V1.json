@@ -1,0 +1,22 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_OBSERVABILITY_LOWER_BOUND_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_UNIVERSAL_INFORMATION_THEORETIC_LOWER_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "theorem": "If two hidden worlds are identical under the exact allowed observation but have no common least-cost-valid terminal action, no deterministic policy restricted to that observation can be universally valid and globally least-cost across both worlds.",
+  "runtime": "canonical/runtime/tool_discovery_observability_lower_bound_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_observability_lower_bound_v1.py",
+  "scheduler_consequence": "Once identity scope is complete, matched evidence or additional information is irreducible only for equivalence classes satisfying this lower bound; universal-proof search should stop there.",
+  "hard_nonclaims": [
+    "NO_CLAIM_OPUS_WINS_OR_BRAIN_LOSES",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_ASSERTION_THAT_ANY_CURRENT_REAL_CASE_IS_IN_THE_MATCHED_ONLY_REGION_WITHOUT_A_WITNESS"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}

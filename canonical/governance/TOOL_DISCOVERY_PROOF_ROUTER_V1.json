@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_TOOL_DISCOVERY_PROOF_ROUTER_V2",
+  "date": "2026-10-03",
+  "status": "CANDIDATE_THREE_WAY_MINIMUM_REALITY_ROUTER__REQUIRES_INDEPENDENT_V8_OR_SUCCESSOR_IDENTITY_SCOPE_LOWER_BOUND_AND_PARTITION_V2_RECEIPTS__ZERO_CREDIT",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "inputs": [
+    "INDEPENDENTLY_VERIFIED_V8_OR_SUCCESSOR_POLICY",
+    "INDEPENDENTLY_VERIFIED_EXACT_COMMON_BRAIN_OPUS_AUTHORITY_IDENTITY_SCOPE_INSTANCE",
+    "INDEPENDENTLY_VERIFIED_OBSERVABILITY_LOWER_BOUND",
+    "INDEPENDENTLY_VERIFIED_OBSERVABILITY_PARTITION_V2"
+  ],
+  "rule": "UNIVERSAL_REGION_STAYS_ON_FORMAL_V8_OR_SUCCESSOR_PROOF_PATH__SAFE_PROBE_REGION_MUST_CONSUME_SAFE_DECISION_RELEVANT_OBSERVATION_BEFORE_COMPARATOR__ONLY_AFTER_SAFE_OBSERVATION_CLOSURE_MAY_INFORMATION_THEORETICALLY_AMBIGUOUS_DECISION_FRONTIERS_REQUEST_MATCHED_OPUS_EVIDENCE",
+  "runtime": "canonical/runtime/tool_discovery_proof_router_v1.py",
+  "tests": "canonical/tests/test_tool_discovery_proof_router_v1.py",
+  "current_live_dependencies": {
+    "v8_current_base_candidate_pr": 1191,
+    "v8_independent_verifier_pr": 1192,
+    "observability_partition_v2_pr": 1178,
+    "observability_partition_v2_verifier_pr": 1190,
+    "common_authority_theorem_candidate_pr": 1186,
+    "common_authority_instance_receipt": "OPEN__MUST_BE_SEPARATELY_INDEPENDENTLY_VERIFIED",
+    "lower_bound_theorem_candidate_pr": 1186
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_DEPENDENCY_IS_SELF_CERTIFIED",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_MATCHED_EVIDENCE_REQUEST_WHILE_SAFE_PROGRESS_EXISTS",
+    "NO_V6_OR_V7_POLICY_RECEIPT_ACCEPTED_AS_CURRENT_SOUNDNESS",
+    "NO_COMMON_AUTHORITY_INSTANCE_ASSUMED_FROM_THEOREM_ALONE"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
