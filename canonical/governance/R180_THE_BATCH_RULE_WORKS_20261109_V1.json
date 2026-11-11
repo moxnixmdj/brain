@@ -1,0 +1,36 @@
+{
+  "round": "r180",
+  "date": "2026-11-09",
+  "claim": "Five repairs measured once is visible on this instrument; one repair measured once is not. The batch rule is the correct working size.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "baseline_r177": {"passes": 366, "rate": 0.5631},
+    "r180": {"passes": 387, "rate": 0.5954},
+    "paired_pp": 3.23, "se_pp": 1.90, "t": 1.70,
+    "tasks_up": 15, "tasks_down": 9, "tasks_unchanged": 106,
+    "zero_tasks": 45
+  },
+  "batch_delivered": {
+    "count-shape": 0.8, "generate-number": 1.0, "odd-or-even": 1.0,
+    "button-delay": 1.0, "find-greatest": 1.0, "drag-sort-numbers": 1.0
+  },
+  "rule": {
+    "single_task_repair_worth_pp": 0.77,
+    "noise_band_pp": 2.7,
+    "batch_of_five_worth_pp": 3.85,
+    "verdict": "Repairs must be batched by the dozen: one is invisible, five is marginal, twelve should be decisive."
+  },
+  "series": [
+    {"round": "r171", "rate": 0.3385, "zeros": 76},
+    {"round": "r172", "rate": 0.3862, "zeros": 71},
+    {"round": "r173", "rate": 0.4215, "zeros": 65},
+    {"round": "r174", "rate": 0.5015, "zeros": 57},
+    {"round": "r176", "rate": 0.5154, "zeros": 54},
+    {"round": "r177", "rate": 0.5631, "zeros": 50},
+    {"round": "r178", "rate": 0.5462, "zeros": 48},
+    {"round": "r179", "rate": 0.5723, "zeros": 43},
+    {"round": "r180", "rate": 0.5954, "zeros": 45}
+  ],
+  "remaining_zeros": ["ascending-numbers","bisect-angle","book-flight","book-flight-nodelay","buy-ticket","chase-circle","click-button-sequence","click-menu-2","click-shades","click-shape","click-tab","click-widget","count-sides","daily-calendar","drag-box","drag-items-grid","drag-shapes-2","draw-circle","enter-time","find-midpoint","find-word","form-sequence","form-sequence-2","form-sequence-3","grid-coordinate","guess-number","hot-cold","hover-shape","login-user","login-user-popup","moving-items","multi-layouts","multi-orderings","number-checkboxes","order-food","phone-book","resize-textarea","right-angle","scroll-text","search-engine","stock-market","terminal","text-editor","tic-tac-toe","use-slider"],
+  "next_batch": "form-sequence x3, login-user x2, book-flight x2, multi-layouts/orderings = 9 tasks in two app families, then click-tab/click-shape/count-sides/right-angle/bisect-angle = 5 geometry-and-tab tasks."
+}
