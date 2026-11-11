@@ -1,0 +1,16 @@
+{
+  "schema": "PROJECT_BRAIN_R134_CLOSED_LOOP_NULL_V1",
+  "date": "2026-11-09",
+  "hypothesis": "this session's every real fix came from closing a loop (slider read-after-keystroke 0/6 -> 10/10; menu hover-then-observe). Therefore wrapping the verb planner in act->read-back->retry should raise reach above the open-loop 27.5%.",
+  "measurement": {"sample": "same seeded random 40", "open_loop": "11/40 = 27.5%", "closed_loop": "11/40 = 27.5%", "no_change_events_detected": 4},
+  "result": "NULL. No change. The retry loop fired four times and converted zero wins.",
+  "why_the_generalisation_was_wrong": "closing the loop helps when an action SILENTLY DOES NOTHING. That was the slider's failure mode (a drag that missed the track), and the menu's (a hover that needed to precede a click). It is not the dominant failure mode at 40-task scale, where tasks fail because the agent performs the WRONG action and the page changes anyway, or because it has no procedure at all. A retry on a wrong action repeats the wrong action.",
+  "the_distinction_that_matters": [
+    "SILENT NO-OP -> closed loop fixes it (verified: slider, menu)",
+    "WRONG ACTION -> closed loop cannot detect it without a goal-state check the agent does not have",
+    "NO PROCEDURE -> closed loop is irrelevant"
+  ],
+  "what_this_costs": "about one hour and four commits of work. It is recorded because a null result that is not written down gets re-tried in six months.",
+  "the_honest_state_of_the_project": "reach 27.5% on one 40-task sample, one episode each, with 8 goals refused and 21 attempted-but-failed. The two named next levers are (a) implement the verbs that parse but have no implementation (DRAW, MOVE, PUSH_SEQUENCE, and the click-dialog operand) at roughly 1.7 reach points each, and (b) fix the native-select cluster where five tasks failed on the same bug.",
+  "process_note": "the user asked 'you sure this is the smartest approach'. It was not, and the correct response was to test it quickly rather than defend it. The test took 36 seconds of wall clock and returned the answer."
+}
