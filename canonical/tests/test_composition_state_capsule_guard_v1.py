@@ -67,6 +67,21 @@ class Tests(unittest.TestCase):
         with self.assertRaisesRegex(guard.CompositionGuardError, "CONTRACT_ACTION_COUNT_MISMATCH"):
             guard.validate_plan(actions, p["composition_contract"], p["planning"]["initial_facts"])
 
+    def test_trace_action_drift_fails_closed(self):
+        p = planner.plan_actions(fixture())
+        trace = [{
+            "cycle": 0,
+            "plan": {"type": "read_file", "args": {"path": "forged.txt"}, "capability_id": "read"},
+            "result": {"path": "canonical/runtime/EXECUTOR_POLICY_V1.json"},
+        }]
+        with self.assertRaisesRegex(guard.CompositionGuardError, "TRACE_0_ACTION_MISMATCH"):
+            guard.rebuild_from_trace(
+                p["actions"],
+                p["composition_contract"],
+                p["planning"]["initial_facts"],
+                trace,
+            )
+
     def test_resume_rebuild(self):
         p = planner.plan_actions(fixture())
         trace = [{"cycle": 0, "plan": p["actions"][0], "result": {"path": "canonical/runtime/EXECUTOR_POLICY_V1.json"}}]

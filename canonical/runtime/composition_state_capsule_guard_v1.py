@@ -244,6 +244,10 @@ def rebuild_from_trace(
         record = trace[cycle]
         if not isinstance(record, Mapping) or record.get("cycle") != cycle:
             raise CompositionGuardError(f"TRACE_{cycle}_INVALID")
+        expected_action = actions[cycle]
+        recorded_action = record.get("plan")
+        if not isinstance(recorded_action, Mapping) or dict(recorded_action) != dict(expected_action):
+            raise CompositionGuardError(f"TRACE_{cycle}_ACTION_MISMATCH")
         row = validated["contract"][cycle]
         assert_action_ready(cap, row)
         cap = append_action_result(cap, row, record.get("result"))
