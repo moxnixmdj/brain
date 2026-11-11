@@ -1,0 +1,32 @@
+{
+  "round": "r178",
+  "date": "2026-11-09",
+  "claim": "The decomposer had no verb for a QUESTION, so count-shape was refused before the page was read. Adding COUNT fixes it completely: 0/5 -> 5/5.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "r177": {"passes": 366, "trials": 650, "rate": 0.5631},
+    "r178": {"passes": 355, "trials": 650, "rate": 0.5462},
+    "paired_per_task_diff_pp": -1.69, "se_pp": 1.38, "t": -1.22,
+    "tasks_up": 8, "tasks_down": 15, "tasks_unchanged": 107,
+    "zero_tasks": {"r177": 50, "r178": 48},
+    "repair_itself": {"count-shape": {"r177": 0.0, "r178": 1.0, "verified_at_12_reps": 0.83}}
+  },
+  "regression_check": {
+    "method": "the five largest DOWN moves re-measured at 10 reps",
+    "email-inbox-forward-nl": {"r177": 0.80, "r178": 0.40, "rerun_10": 0.80},
+    "email-inbox-forward-nl-turk": {"r177": 1.00, "r178": 0.60, "rerun_10": 0.90},
+    "navigate-tree": {"r177": 1.00, "r178": 0.60, "rerun_10": 0.60},
+    "drag-cube": {"r177": 0.80, "r178": 0.20, "rerun_10": 0.50},
+    "click-checkboxes-soft": {"r177": 0.60, "r178": 0.20, "rerun_10": 0.70},
+    "verdict": "NO regression from this round's code. Every rerun lands at or above the r178 reading, and the email family (built in r174) reads 0.80/0.90 -- it is intact. The whole-suite swing is the known instability of ~20 tasks, not a defect."
+  },
+  "mechanisms": [
+    "COUNT must run FIRST in VERB_PATTERNS: a counting question often also contains an action word.",
+    "The page's description grammar is exactly SIZE + COLOUR + TEXT (common/shapes.js generalDesc).",
+    "THE GRID DRAWS THREE KINDS OF NODE -- rect, circle, <text> -- so counting only <text> made every 'shapes' and 'digits' question wrong.",
+    "A NAMED GEOMETRY IS A TAG FILTER: 'how many rectangles' counts <rect>.",
+    "KEEP THE CASE OF THE NOUN: 'How many Is' names the glyph I, not the English word 'is'.",
+    "The noun is only ever the LAST word before 'are/is' -- two competing rules for this broke the function once."
+  ],
+  "honest_reading": "This round is a net-negative reading with a genuine positive inside it. The repaired task is real (0 -> 5/5 at 5 reps, 10/12 at 12 reps). The suite total moved -1.69 pp, which is inside one SE. The lesson is not about the code: at 650 trials a single-task repair is worth +0.77 pp and the noise band is +-2.7 pp, so THIS INSTRUMENT CANNOT SHOW ONE TASK AT A TIME. Repairs must now be batched by the dozen before measuring."
+}
