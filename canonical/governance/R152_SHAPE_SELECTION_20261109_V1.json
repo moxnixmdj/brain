@@ -1,0 +1,49 @@
+{
+  "schema": "PROJECT_BRAIN_R152_V1",
+  "date": "2026-11-09",
+  "round": "r152",
+  "what_was_asked_for": "make `-u` reachable for deduplication without building an alias table",
+  "what_was_found_instead": "no alias table was needed -- the machinery already had the token and the manual, and three separate bugs were deleting it",
+  "bug_1_the_output_name_deleted_the_intent": {
+    "measured": "_goal_token_info('deduplicate emails.txt into unique.txt') -> raw ['deduplicate','emails','txt','txt','unique'], noise {'email','uniques','txt','txts','emails','unique'}",
+    "consequence": "'unique' -- the only word matching sort's documented `--unique` -- was removed as filename noise, so flags_for_goal returned []",
+    "fix": "the INPUT filename is data; the OUTPUT filename is what the caller says they want. Output-name tokens are no longer folded into noise.",
+    "web_grounding": "2026 CLI-for-agents literature: agents read --help to learn flags, and consistent flag conventions let an agent try --output/--unique first. The help text was already being read; it was the token that had been deleted."
+  },
+  "bug_2_the_shape_search_stopped_at_the_first_file": {
+    "measured": "on 'deduplicate emails.txt into unique.txt' the first shape `sort emails.txt unique.txt` exits 0 and writes the target, so the loop returned recipe argv ['sort','{input}'] -- plain sort, which sorts and does not deduplicate",
+    "and_the_other_direction_is_worse": "keeping the LAST shape picked `sort --merge {input}`, which exits 0, writes the target, and does not sort at all",
+    "conclusion": "position is not evidence. Neither first nor last is right; only the bytes are right.",
+    "fix": "when the goal names a relation the input defines AND the program is that relation's own program, the shape is kept only if the relation verifier accepts its bytes. Otherwise the next shape is tried. Every other goal keeps the original first-file-wins behaviour."
+  },
+  "bug_3_my_own_repair_broke_eight_tests": {
+    "what_i_did": "first attempt added a best_shape replay inside the loop, which ran even when no goal was named",
+    "measured": "EnvironmentTests: 8 passed at baseline, 4 failed after -- gzip, bzip2 and xz actions stopped producing their file",
+    "second_attempt_worse": "the whole suite went from 135 s to >900 s (hang)",
+    "how_i_found_it": "git stash -> same 8 tests -> 8 passed. The baseline is the only thing that separates my damage from the code's own state.",
+    "resolution": "reverted the entire change, confirmed 8/8, then re-applied ONLY the two fixes that were independently proven, in one minimal edit. 8/8 preserved AND dedupe still closes."
+  },
+  "measured_final": {
+    "sort notes.txt into sorted.txt": "CLOSED, argv ['sort','{input}'], SORTED_PERMUTATION_OF_INPUT, 1.27 s",
+    "deduplicate emails.txt into unique.txt": "CLOSED, argv ['sort','--unique','{input}'], DEDUPLICATED_SET_OF_INPUT_LINES, 5.63 s",
+    "reverse each line of list.txt into rev.txt": "CLOSED, argv ['rev','{input}'], EACH_LINE_REVERSED, 6.0 s",
+    "count the lines in notes.txt": "refused, OPEN__A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING",
+    "write a summary of notes.txt into out.md": "refused, OPEN__FORMAT_CARRIES_NO_EVIDENCE",
+    "different_argv_for_different_goals": "sort and deduplicate use the SAME program and get DIFFERENT argv, chosen by the check rather than by position. That is the whole point."
+  },
+  "tests": {
+    "files": "test_computer_env_v1.py + test_text_relation_verifier_v1.py + test_an_unchecked_format_is_never_reported_as_verified_v1.py",
+    "result": "112 passed, 13 subtests, 3 failed",
+    "the_3": "TransferTests, the pre-existing contradiction documented in R148 -- they require _try_explore to call discover(), which test_computer_unconfined_route_guard_v1 forbids. Unchanged by this round."
+  },
+  "an_oom_worth_naming": {
+    "what": "one run of the honest set was killed at exit 137",
+    "isolated_to": "accumulated transfer-learning state in a reused store, NOT the relation path: the same goals ran clean with a fresh BRAIN_TRANSFER_LEARNING_STATE, and the memory limit was never approached",
+    "still_open": "count the lines in notes.txt uses a different route that probes every program against constructed files; it is expensive and was not exercised to completion here. Not a regression from this round, and not yet measured."
+  },
+  "what_is_not_claimed": [
+    "that computer use is solved. Two more goal families moved from impossible to checkable.",
+    "that the MiniWob number moved. It is untouched at 56.3%.",
+    "that recall fires on the second call. Measured from_memory=False with a 10x speedup; the speedup is real, the recall path is not yet explained."
+  ]
+}

@@ -455,9 +455,26 @@ def _stem(word: str) -> set[str]:
 
 
 def _goal_token_info(goal: str) -> tuple[list[str], set[str]]:
+    """Tokens the goal used, and tokens that are only an INPUT file's name.
+
+    A filename is not an instruction -- except when it is the OUTPUT name. Measured
+    2026-11-09 on "deduplicate emails.txt into unique.txt":
+        raw_toks = ['deduplicate','emails','txt','txt','unique']
+        noise    = {'email','uniques','txt','txts','emails','unique'}
+    so `unique` -- the one word matching sort's documented `--unique` -- was deleted,
+    and flags_for_goal returned []. The INPUT name is data; the OUTPUT name is what
+    the caller says they want, so it is not folded into noise.
+    """
     text = str(goal or "")
     noise: set[str] = set()
-    for name in _FILENAME.findall(text):
+    names = _FILENAME.findall(text)
+    out_name = ""
+    m = re.search(r"\b(?:into|to|as)\s+([\w./\-]*\.[a-z0-9]{1,6})\b", text, re.I)
+    if m:
+        out_name = m.group(1)
+    for name in names:
+        if name == out_name:
+            continue
         for tok in _WORD_RE.findall(name.lower()):
             noise |= _stem(tok)
     raw_toks = [tok for tok in _WORD_RE.findall(text.lower()) if len(tok) > 2 and tok not in _STOP]
@@ -568,6 +585,17 @@ def invocation_shapes(prog: str, src: str, target: str,
     return extra + shapes if values else shapes + extra
 
 
+def _relation_shapes_matter(goal: str | None, prog: str) -> bool:
+    """Is the goal one whose BYTES depend on which argv shape is used?"""
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as trv
+        if trv.relation_kind(goal or "") is None:
+            return False
+        return str(prog) in trv.canonical_programs(goal or "")
+    except Exception:  # noqa: BLE001 - never change an action's meaning
+        return False
+
+
 def program_actions(env: ComputerEnv,
                     programs: Sequence[str] | None = None,
                     target: str = "out.bin",
@@ -630,6 +658,38 @@ def program_actions(env: ComputerEnv,
                 captured = bool(proc.stdout) and not made(before)
                 if captured:
                     (env.root / target).write_bytes(proc.stdout)
+                if made(before) and _relation_shapes_matter(goal, prog):
+                    # A FILE APPEARING IS NOT THE SAME AS THE FILE BEING RIGHT.
+                    #
+                    # Measured 2026-11-09 on "deduplicate emails.txt into unique.txt":
+                    # the FIRST shape `sort emails.txt unique.txt` exits 0 and writes the
+                    # target, so the loop returned with argv ['sort','{input}'] -- plain
+                    # sort, which sorts and does NOT deduplicate. The shape that would
+                    # have worked, `sort --unique emails.txt`, was never reached because
+                    # a flagless form wins every race against a flagged one: both leave a
+                    # file behind. Measured the other way too: taking the LAST shape
+                    # picked `sort --merge`, which exits 0, writes the target, and does
+                    # not sort at all. Position is not evidence. The relation is.
+                    #
+                    # This applies ONLY when the goal names a relation the input defines
+                    # and the program is that relation's own program. Everywhere else the
+                    # first shape that leaves the target in place is kept, which is the
+                    # behaviour the rest of this file depends on and which 8 environment
+                    # tests pin.
+                    try:
+                        from canonical.runtime import text_relation_verifier_v1 as _trv
+                        if (_trv.verdict(goal or "", env.root / src,
+                                         env.root / target))[0]:
+                            env.recipes["run_" + prog] = {
+                                "program": prog,
+                                "argv": ["{input}" if a == src else a for a in argv],
+                                "stdout_to": target if captured else None,
+                                "target": target,
+                            }
+                            return True
+                        continue        # wrong bytes: try the next shape
+                    except Exception:  # noqa: BLE001 - fall through to ordinary handling
+                        pass
                 if made(before):
                     # Learning that stays in the sandbox is a party trick.
                     # The exact argv that worked is the difference between
