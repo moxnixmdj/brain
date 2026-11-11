@@ -1,0 +1,47 @@
+name: Verify H100 oracle-free role family V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/h100_oracle_free_role_family_v1.py"
+      - "canonical/tests/test_h100_oracle_free_role_family_v1.py"
+      - "canonical/governance/H100_ORACLE_FREE_ROLE_FAMILY_PRECOMMIT_V1.json"
+      - ".github/workflows/verify-h100-oracle-free-role-family-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Run falsification contract and capture exact output
+        id: contract
+        shell: bash
+        run: |
+          set +e
+          python -m pytest -q canonical/tests/test_h100_oracle_free_role_family_v1.py > oracle_free_role_family_pytest.txt 2>&1
+          code=$?
+          echo "$code" > oracle_free_role_family_exit_code.txt
+          cat oracle_free_role_family_pytest.txt
+          exit 0
+      - name: Upload diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: oracle-free-role-family-v1-diagnostic
+          path: |
+            oracle_free_role_family_pytest.txt
+            oracle_free_role_family_exit_code.txt
+      - name: Enforce falsification verdict
+        shell: bash
+        run: |
+          code="$(cat oracle_free_role_family_exit_code.txt)"
+          test "$code" -eq 0
