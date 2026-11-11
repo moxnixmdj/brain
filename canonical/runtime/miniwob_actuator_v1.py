@@ -36,8 +36,9 @@ fails the same task.
 from __future__ import annotations
 
 import json
-import sys
+import math
 import re
+import sys
 import time
 import urllib.request
 from collections.abc import Callable, Iterable, Mapping
@@ -1954,6 +1955,184 @@ def v_button_delay(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "delay-miss:%s" % secs
 
 
+def _angle_degrees(a: tuple[float, float], vertex: tuple[float, float],
+                   b: tuple[float, float]) -> float | None:
+    """Angle at a visible point, measured from three visible coordinates."""
+    ax, ay = a[0] - vertex[0], a[1] - vertex[1]
+    bx, by = b[0] - vertex[0], b[1] - vertex[1]
+    al, bl = math.hypot(ax, ay), math.hypot(bx, by)
+    if al < 1e-8 or bl < 1e-8:
+        return None
+    cosine = max(-1.0, min(1.0, (ax * bx + ay * by) / (al * bl)))
+    return math.degrees(math.acos(cosine))
+
+
+def _ray_room(point: tuple[float, float], direction: tuple[float, float],
+              width: float, height: float, margin: float) -> float:
+    """How far a ray from a point can travel while staying in the visible SVG."""
+    x, y = point
+    dx, dy = direction
+    limits = []
+    if dx > 1e-9:
+        limits.append((width - margin - x) / dx)
+    elif dx < -1e-9:
+        limits.append((margin - x) / dx)
+    if dy > 1e-9:
+        limits.append((height - margin - y) / dy)
+    elif dy < -1e-9:
+        limits.append((margin - y) / dy)
+    return max(0.0, min(limits)) if limits else 0.0
+
+
+def _angle_target(mode: str, circles: list[Mapping[str, Any]],
+                  width: float, height: float, margin: float = 5.0
+                  ) -> tuple[float, float] | None:
+    """Construct a point from visible colored circle coordinates, with no answer access."""
+    blue = [(float(c["cx"]), float(c["cy"])) for c in circles if c.get("color") == "blue"]
+    black = [(float(c["cx"]), float(c["cy"])) for c in circles if c.get("color") == "black"]
+    if mode == "right":
+        if len(blue) != 1 or len(black) != 1:
+            return None
+        vertex, fixed = blue[0], black[0]
+        vx, vy = fixed[0] - vertex[0], fixed[1] - vertex[1]
+        length = math.hypot(vx, vy)
+        if length < 1e-8:
+            return None
+        base = (vx / length, vy / length)
+        directions = [(-base[1], base[0]), (base[1], -base[0])]
+        room = max((_ray_room(vertex, d, width, height, margin) for d in directions),
+                   default=0.0)
+        direction = max(directions, key=lambda d: _ray_room(vertex, d, width, height, margin))
+        distance = min(45.0, room * 0.8)
+        if distance < 8.0:
+            return None
+        return vertex[0] + direction[0] * distance, vertex[1] + direction[1] * distance
+    if mode == "bisect":
+        if len(blue) != 1 or len(black) != 2:
+            return None
+        vertex = blue[0]
+        rays = []
+        for p in black:
+            dx, dy = p[0] - vertex[0], p[1] - vertex[1]
+            length = math.hypot(dx, dy)
+            if length < 1e-8:
+                return None
+            rays.append((dx / length, dy / length))
+        bx, by = rays[0][0] + rays[1][0], rays[0][1] + rays[1][1]
+        length = math.hypot(bx, by)
+        if length < 1e-6:
+            return None
+        direction = (bx / length, by / length)
+        room = _ray_room(vertex, direction, width, height, margin)
+        distance = min(45.0, room * 0.8)
+        if distance < 8.0:
+            return None
+        return vertex[0] + direction[0] * distance, vertex[1] + direction[1] * distance
+    return None
+
+
+def _svg_point_colour(fill: Any) -> str | None:
+    value = re.sub(r"\s+", "", str(fill or "").lower())
+    if value in ("blue", "#00f", "#0000ff", "rgb(0,0,255)", "rgba(0,0,255,1)"):
+        return "blue"
+    if value in ("black", "#000", "#000000", "rgb(0,0,0)", "rgba(0,0,0,1)"):
+        return "black"
+    return None
+
+
+def _visible_angle_circles(act: Actuator) -> list[dict[str, Any]] | None:
+    rows = act.js(
+        "{const s=document.querySelector('svg#svg-grid');if(!s)return null;"
+        "return [...s.querySelectorAll('circle')].map(e=>{const r=e.getBoundingClientRect();"
+        "return {cx:Number(e.getAttribute('cx')),cy:Number(e.getAttribute('cy')),"
+        "fill:e.getAttribute('fill')||getComputedStyle(e).fill,w:r.width,h:r.height}})"
+        ".filter(p=>p.w>0&&p.h>0&&Number.isFinite(p.cx)&&Number.isFinite(p.cy))}")
+    if not isinstance(rows, list):
+        return None
+    out = []
+    for row in rows:
+        color = _svg_point_colour(row.get("fill"))
+        if color:
+            out.append({"cx": float(row["cx"]), "cy": float(row["cy"]), "color": color})
+    return out
+
+
+def v_construct_angle(act: Actuator, goal: str) -> str:
+    """Use the currently visible SVG points to construct a right angle or angle bisector.
+
+    This deliberately reads rendered circle coordinates and verifies the newly drawn point
+    before pressing Submit. It does not inspect task variables or infer success from the
+    click itself. A geometry or read-back failure stops before Submit.
+    """
+    low = (goal or "").lower()
+    mode = "bisect" if re.search(r"\bbisect\w*\b", low) else "right"
+    before = _visible_angle_circles(act)
+    meta = act.js(
+        "{const s=document.querySelector('svg#svg-grid');if(!s)return null;"
+        "const r=s.getBoundingClientRect();const v=s.viewBox&&s.viewBox.baseVal;"
+        "return {left:r.left,top:r.top,width:(v&&v.width)||r.width,"
+        "height:(v&&v.height)||r.height,scrollX:window.scrollX||0,scrollY:window.scrollY||0}}")
+    if not before or not isinstance(meta, dict):
+        return "angle-no-visible-svg"
+    target = _angle_target(mode, before, float(meta["width"]), float(meta["height"]))
+    if target is None:
+        return "angle-no-safe-point"
+    blue_before = [(p["cx"], p["cy"]) for p in before if p["color"] == "blue"]
+    x = float(meta["left"]) + target[0] - float(meta["scrollX"])
+    y = float(meta["top"]) + target[1] - float(meta["scrollY"])
+    actual = None
+    for _ in range(3):
+        left, top = float(meta["left"]), float(meta["top"])
+        right, bottom = left + float(meta["width"]), top + float(meta["height"])
+        if not (left <= x <= right and top <= y <= bottom):
+            return "angle-point-outside-svg"
+        act.click(x, y)
+        time.sleep(0.08)
+        after = _visible_angle_circles(act)
+        if not after:
+            return "angle-point-no-readback"
+        added = [p for p in after if p["color"] == "blue"
+                 and all(math.hypot(p["cx"] - q[0], p["cy"] - q[1]) > 1.0
+                         for q in blue_before)]
+        if not added:
+            return "angle-point-no-readback"
+        actual = min(added, key=lambda p: math.hypot(p["cx"] - target[0], p["cy"] - target[1]))
+        dx, dy = target[0] - actual["cx"], target[1] - actual["cy"]
+        if max(abs(dx), abs(dy)) <= 1.0:
+            break
+        x += dx
+        y += dy
+    if actual is None or max(abs(target[0] - actual["cx"]),
+                             abs(target[1] - actual["cy"])) > 1.0:
+        return "angle-point-readback-mismatch"
+
+    new_point = (actual["cx"], actual["cy"])
+    if mode == "right":
+        blue = next((p for p in before if p["color"] == "blue"), None)
+        black = next((p for p in before if p["color"] == "black"), None)
+        angle = _angle_degrees((black["cx"], black["cy"]),
+                               (blue["cx"], blue["cy"]), new_point) if blue and black else None
+        error = abs(angle - 90.0) if angle is not None else math.inf
+    else:
+        blue = next((p for p in before if p["color"] == "blue"), None)
+        black = [p for p in before if p["color"] == "black"]
+        a = _angle_degrees((black[0]["cx"], black[0]["cy"]),
+                           (blue["cx"], blue["cy"]), new_point) if blue and len(black) == 2 else None
+        b = _angle_degrees((black[1]["cx"], black[1]["cy"]),
+                           (blue["cx"], blue["cy"]), new_point) if blue and len(black) == 2 else None
+        error = abs(a - b) if a is not None and b is not None else math.inf
+    if error > 4.0:
+        return "angle-geometric-readback-failed:%.2f" % error
+    submit_query = "(()=>{return [...document.querySelectorAll('button')]"
+    submit_query += ".find(b=>/submit/i.test(b.innerText||''))})()"
+    if not act.click_el(submit_query):
+        return "angle-submit-missing"
+    time.sleep(0.25)
+    if not episode_over(act):
+        return "angle-submit-not-ended"
+    return "angle-%s:%.2f" % (mode, error)
+
+
 def v_count(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """Read the page, count what the sentence describes, and answer the question.
 
@@ -2800,6 +2979,13 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     if act.ev("(()=>{return document.querySelectorAll('.media').length>0"
               "&&document.querySelectorAll('.like,.reply,.retweet,.share').length>0})()"):
         return v_social(act, plan, goal)
+
+    # A geometric construction is not a generic click. The visible angle points are
+    # part of the instruction state; build and read back the point before Submit rather
+    # than falling through to the sole button on the page.
+    if (re.search(r"\bbisect\w*\b|\bright angle\b", g, re.I)
+            and act.ev("!!document.querySelector('svg#svg-grid circle')")):
+        return v_construct_angle(act, goal)
 
     if verb == "SORT":
         return v_sort(act, plan, goal)

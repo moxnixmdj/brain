@@ -121,10 +121,11 @@
   ],
   "sentience": "No. These measurements show code execution, rule storage, and retrieval. They provide no evidence of subjective experience or sentience.",
   "smartest_next_steps": [
-    "Use the live-page evidence, not task source or hidden answer variables, to fix the shared angle-task failure: right-angle and bisect-angle both route to a generic click that presses Submit (sole-done, 0/5 each). Build the point from visible SVG geometry, read the point back, then submit.",
-    "Treat the login/booking and geometry/tab batches as tuning samples; do not report them as held-out transfer. After the angle fix, rerun the two tasks at 5 reps and also run regression checks before making any claim.",
-    "Then investigate the separate click-shape, click-tab, and count-sides misses from their rendered page state; one task-family fix must not be described as universal computer use.",
-    "For any proposed learning change, compare the unchanged/null policy and repaired policy on the same tasks with repeated runs and per-task diffs. Keep external memory as verified procedures with explicit preconditions and read-back.",
+    "Keep the real but narrow angle result: visible geometry plus checked read-back passed 20/20 on each of two task names across four 5-repetition runs. These are tuning tests, not held-out transfer.",
+    "The r181 full-suite rate remains 391/650 (60.15%) with 42 zero tasks; it was not rerun after the angle patch. Do not report a new 130-task aggregate from the small angle batches.",
+    "Next investigate the largest remaining coherent failure group: login/booking, 0/20 over four tasks. Read the rendered form state and confirmation after typing; the action label \"filled\" is not evidence the page accepted the values. Probe before patching.",
+    "Then address click-shape, click-tab, and count-sides from their live page state; keep each task family separate and rerun 5 repetitions with per-task outcomes.",
+    "For any proposed learning change, compare the unchanged/null policy and repaired policy on repeated runs with per-task diffs. Keep external memory as verified procedures with explicit preconditions and read-back.",
     "Do not claim permanent universal computer use, sentience, or world leadership from one successful case or a 0/2 coding benchmark."
   ],
   "commits": {
@@ -205,6 +206,67 @@
         }
       },
       "result_file": "/tmp/r182_geometry_5reps.json"
+    },
+    "angle_construction_fix": {
+      "problem_observed": "On unchanged code, right-angle and bisect-angle each scored 0/5. Both returned sole-done: the generic click path pressed the only visible Submit button without constructing a point.",
+      "method": "Compute a perpendicular point or internal angle-bisector point from the currently rendered SVG circles; click it; read the created SVG point back; verify the geometry; only then press Submit. No task source or hidden answer variable is read by the procedure.",
+      "runs": [
+        {
+          "run_id": "r182_angle_fix",
+          "passes": 10,
+          "trials": 10,
+          "invalid_page_identity_repetitions": 0
+        },
+        {
+          "run_id": "r182_angle_fix2",
+          "passes": 10,
+          "trials": 10,
+          "invalid_page_identity_repetitions": 0
+        },
+        {
+          "run_id": "r182_angle_fix3",
+          "passes": 10,
+          "trials": 10,
+          "invalid_page_identity_repetitions": 0
+        },
+        {
+          "run_id": "r182_angle_fix5",
+          "passes": 10,
+          "trials": 10,
+          "invalid_page_identity_repetitions": 0
+        }
+      ],
+      "combined": {
+        "passes": 40,
+        "trials": 40,
+        "invalid_page_identity_repetitions": 0,
+        "per_task": {
+          "right-angle": {
+            "passes": 20,
+            "trials": 20,
+            "reward_min": 0.9812742284,
+            "reward_max": 0.9998210234
+          },
+          "bisect-angle": {
+            "passes": 20,
+            "trials": 20,
+            "reward_min": 0.9564456306,
+            "reward_max": 0.9989419006
+          }
+        },
+        "classification": "Four 5-repetition runs on the same task names used to diagnose and tune the fix; not independent held-out transfer and not evidence for arbitrary computer use."
+      },
+      "tests": "19 total tests passed across operator-generalization and angle-geometry test files after the restoration; py_compile and git diff --check passed.",
+      "implementation": "canonical/runtime/miniwob_actuator_v1.py; canonical/tests/test_miniwob_angle_construction_v1.py",
+      "regression_audit": {
+        "failed_cleanup_run": {
+          "run_id": "r182_angle_fix4",
+          "result": "5/10: bisect-angle 5/5; right-angle 0/5",
+          "cause": "A cleanup removed the local room calculation while the target distance still used it, raising UnboundLocalError."
+        },
+        "repair": "Restored the room calculation; then reran the exact code and got 10/10. The failed run is excluded from the final-code total.",
+        "tests_after_repair": "19 passed; py_compile and git diff --check passed."
+      }
     }
   }
 }
