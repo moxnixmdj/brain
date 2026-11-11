@@ -1105,7 +1105,16 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     try:
         if filled:
             _btn = act.ev(
-                "(()=>{const b=[...document.querySelectorAll('button,input[type=submit],[role=button]')]"
+                # A SUBMIT CONTROL IS NOT ALWAYS A BUTTON.
+                #
+                # Measured 2026-11-09 on multi-layouts: the five layouts each render their
+                # own submit control, and the one this page sampled was a styled
+                # div.ui-submit with a click handler -- `button,input[type=submit],
+                # [role=button]` matched nothing and the checker never ran, so a form with
+                # every value correct scored 0 forever. The selector now includes the
+                # class-based control the corpus actually uses.
+                "(()=>{const b=[...document.querySelectorAll("
+                "'button,input[type=submit],[role=button],.ui-submit,.submit,.btn')]"
                 ".filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0});"
                 "const h=b.find(e=>/search|submit|find|go|book|continue/i.test("
                 "(e.id||'')+' '+(e.innerText||'')+' '+(e.value||'')));"
