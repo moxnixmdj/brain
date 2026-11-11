@@ -1,0 +1,18 @@
+{
+  "schema": "PROJECT_BRAIN_R119_SELF_HEALING_EFFECT_PINS_V1",
+  "date": "2026-11-09",
+  "problem": "the effect-class registry pinned subprocess.run call sites by LINE NUMBER through _LEGACY_LINE_REMAP. The remap maps 'current line at pin time' -> 'legacy line', so its KEYS go stale on any later edit and it can never heal. Measured: a +1 line insertion in astra_runtime.py moved every site (400->401, 862->863, ...) while the keys stayed put, so nothing matched and the gate raised LEGACY_VERIFIED_SITE_DISAPPEARED, making NINE test files uncollectable.",
+  "three_failed_attempts_before_the_working_one": [
+    "v1: resolve the stale line through _norm_key, then parse the current source for the enclosing function. Failed because _norm_key maps CURRENT->LEGACY (feeding it a legacy line returns it unchanged), and one of the six sites is at MODULE level so a function-keyed lookup cannot resolve it.",
+    "v2: match on (module, api, function) with ambiguity refusing. Failed for the same reason -- the function was still being looked up through the stale line.",
+    "v3 (working): re-derive the current->legacy correspondence at COMPILE TIME by pairing the module's current sites with its legacy pins IN ORDER, and only when the counts agree. Count agrees => correspondence exact, drift harmless. Count differs => a call was genuinely added or removed and the original refusal stands.",
+    "plus a fourth bug in v3: the derived remap was computed but the row builder still read the static one, so the failure simply moved to LEGACY_PRESERVATION_COUNT_MISMATCH. Fixed by feeding the derived pairs back into _LEGACY_LINE_REMAP."
+  ],
+  "principle": "the obligation a pin encodes is 'this module makes N calls to this API, each with a verified effect class'. It does NOT encode an address. Prove the obligation, not the address.",
+  "verification": {
+    "clean_tree": "compile OK, only benign identity remaps reported",
+    "drift_probe": "inserting one line at astra_runtime.py:3 -> previously FAILED with LEGACY_VERIFIED_SITE_DISAPPEARED, now SELF-HEALED OK",
+    "regression": "47 passed across strict bootstrap v1/v2, two-class authorizer, subprocess mediator, closed-loop repair spec, input-dependency gate"
+  },
+  "scope_limit": "the count must match. Adding or removing a subprocess.run site in a pinned module is still a refusal, by design -- that is a real change to the process universe, not drift."
+}
