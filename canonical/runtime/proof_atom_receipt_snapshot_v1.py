@@ -17,6 +17,7 @@ from canonical.runtime.proof_atom_receipt_index_v2 import (
     SEARCH_ROOTS,
     _blob_sha,
     _candidate_files,
+    _manifest_sha256,
     _source_class,
     build_index,
 )
@@ -76,6 +77,19 @@ def seal_candidate_universe(root: Path, files: Sequence[Path]) -> dict[str, Any]
     }
 
 
+def _index_compatible_manifest_sha256(seal: Mapping[str, Any]) -> str:
+    rows = [
+        (
+            str(row["path"]),
+            str(row["source_class"]),
+            str(row["git_blob_sha"]),
+            "",
+        )
+        for row in seal.get("scanned_files", [])
+    ]
+    return _manifest_sha256(rows)
+
+
 def _fail(*errors: str) -> dict[str, Any]:
     return {
         "schema": SCHEMA,
@@ -108,6 +122,10 @@ def build_snapshot(
         if int(index.get("scanned_file_count", -1)) != int(seal["scanned_file_count"]):
             return _fail("SCANNED_FILE_COUNT_MISMATCH")
 
+        sealed_index_manifest_sha256 = _index_compatible_manifest_sha256(seal)
+        if index.get("scanned_corpus_manifest_sha256") != sealed_index_manifest_sha256:
+            return _fail("SCANNED_CORPUS_MANIFEST_MISMATCH")
+
         manifest_map = {
             row["path"]: row["git_blob_sha"] for row in seal["scanned_files"]
         }
@@ -131,11 +149,13 @@ def build_snapshot(
             "errors": [],
             "proof_input_git_blob_shas": inputs,
             "repository_snapshot": seal,
+            "sealed_index_compatible_manifest_sha256": sealed_index_manifest_sha256,
             "index": index,
             "index_sha256": _canonical_digest(index),
             "rule": (
                 "POSITIVE_AND_NEGATIVE_DISCOVERY_CLAIMS_BOUND_TO_ONE_EXACT_GIT_SNAPSHOT__"
                 "EVERY_SCANNED_FILE_CONTENT_ADDRESSED__"
+                "INDEX_SCANNED_CORPUS_DIGEST_MUST_EQUAL_SEALED_UNIVERSE_DIGEST__"
                 "ZERO_MATCH_MEANS_ZERO_LITERAL_MATCHES_ONLY_WITHIN_THE_SEALED_CANDIDATE_UNIVERSE__"
                 "NO_SEMANTIC_SCOPE_METRIC_ACCEPTANCE_CAPABILITY_OR_FAMILY_CREDIT"
             ),
