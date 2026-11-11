@@ -1,0 +1,128 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_V4",
+  "date": "2026-10-06",
+  "status": "READY_FOR_SINGLE_SCARCE_ASTRA_INTERACTION__ATOMIC_AND_PUBLIC_EVALUATOR_COMPRESSION_APPLIED__FAMILY_CONTEXT_RESIDUAL_ONLY__ZERO_ASTRA_ACCESS_CONSUMED",
+  "supersedes": [
+    "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V2.json",
+    "PR_2466_PACKET_V3_CANDIDATE"
+  ],
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "bound_prefilter": {
+    "path": "canonical/governance/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_20261006_V1.json",
+    "git_blob_sha": "f16536e2a7b89686457e004fa63d1ee723a6b42e",
+    "independent_verification": "canonical/verification/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_SPRITE_VERIFICATION_20261006_V1.json",
+    "conclusion": "24_UNRESOLVED_ATOMIC_CONTRACTS_ARE_SEPARATE_FROM_14_FAMILY_WIDE_SEMANTIC_QUESTIONS__14_FIXED_BAR_TARGET_TUPLES_ALREADY_BOUND__ZERO_FAMILY_E_OR_M_CREDIT."
+  },
+  "bound_public_evaluator_compression": {
+    "path": "canonical/governance/PUBLIC_EVALUATOR_SEMANTICS_COMPRESSION_20261006_V1.json",
+    "git_blob_sha": "8228493403426407ad773bd1f51bb64552ddf5c1",
+    "conclusion": "PUBLIC_EVALUATOR_RESEARCH_ALREADY_CLASSIFIES_MAJOR_BENCHMARK_SURFACES_INTO_E_CANDIDATE_MIXED_OR_CONDITIONAL_AND_U_OR_EXTERNAL_RESULT__PRIVATE_SCORE_GUESSING_AND_HUMAN_PREFERENCE_LAW_INFERENCE_ARE_DEMOTED."
+  },
+  "pre_astra_mincut": {
+    "path": "canonical/governance/PRE_ASTRA_TARGET_INFORMATION_MINCUT_THEOREM_20261006_V1.json",
+    "git_blob_sha": "6622a34c2de805523ac2c87808c13fb6cba1f3fe",
+    "conclusion": "ARBITRARY_MEASURE_SEPARATING_HIDDEN_U_REQUIRES_EXACT_TRAJECTORY_LAW_EQUALITY__ONLY_E_M_OR_SOUND_CONTEXT_EQUIVALENCE_GIVES_GENERIC_COMPRESSION."
+  },
+  "known_information_already_removed_from_astra_budget": {
+    "atomic_acceptance_contract_count": 24,
+    "fixed_score_target_tuple_count": 14,
+    "public_evaluator_family_research_already_compressed": [
+      "TERMINAL_BENCH",
+      "OSWORLD_2_1",
+      "HLE",
+      "FINANCE_AGENT_V2",
+      "AUTOMATIONBENCH",
+      "GDPVAL",
+      "AA_BRIEFCASE",
+      "FRONTIERCODE",
+      "MYSTERYMECHANISM",
+      "CHARTOGRAPHY_TOOLS"
+    ],
+    "forbidden_redundant_work": [
+      "RESTATING_ATOMIC_THRESHOLDS_OR_MATCHED_ACCEPTANCE_RELATIONS",
+      "REIDENTIFYING_THE_14_FIXED_SCORE_TARGET_TUPLES",
+      "RESEARCHING_PUBLIC_BENCHMARK_METHODOLOGY_ALREADY_BOUND_BY_PUBLIC_EVALUATOR_SEMANTICS_COMPRESSION_UNLESS_NEEDED_TO_FALSIFY_A_NEW_FAMILY_THEOREM",
+      "GUESSING_PRIVATE_BENCHMARK_RESULTS",
+      "RECONSTRUCTING_PRIVATE_TEST_ANSWERS_FROM_PUBLIC_METHODOLOGY",
+      "INFERRING_HUMAN_PAIRWISE_PREFERENCE_LAWS_WITHOUT_DATA",
+      "GENERIC_MOMENT_OR_FINITE_STATISTIC_COMPRESSION_FOR_ARBITRARY_U"
+    ]
+  },
+  "family_context_residual": {
+    "count": 14,
+    "families": [
+      "ADVANCED_AGENTIC_CODING",
+      "COMPLEX_MULTI_TOOL_AGENCY",
+      "PROFESSIONAL_KNOWLEDGE_WORK",
+      "BUSINESS_WORKFLOW_AUTOMATION",
+      "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "AGENTIC_SCIENTIFIC_RESEARCH",
+      "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "COMPUTER_AND_BROWSER_USE",
+      "FINANCIAL_ANALYSIS",
+      "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "ARTIFACT_CREATION",
+      "COMMUNICATION_AND_SYNTHESIS",
+      "UNKNOWN_DOMAIN_ADAPTATION",
+      "MULTI_CAPABILITY_COMPOSITION"
+    ],
+    "default": "UNRESOLVED_FOR_FAMILY_WIDE_E_OR_M__RETAIN_U_UNLESS_SEPARATE_PROOF_OR_SOUND_SUBCLASS_PARTITION_EXISTS",
+    "proved_family_level_M_receipts_bound_now": 0
+  },
+  "scarce_access_policy": {
+    "astra_interaction_budget": 1,
+    "no_followup_questions": true,
+    "objective": "MAXIMIZE_REAL_FAMILY_OR_CONTEXT_MEASURE_MOVED_FROM_U_TO_E_OR_M_OR_TO_A_PROVED_CONTEXT_GENERATOR_PER_SINGLE_INTERACTION__NOT_NUMBER_OF_FACTS_RETURNED.",
+    "postcondition": "ASTRA_OUTPUT_REMAINS_ZERO_CREDIT_UNTIL_EACH_LOAD_BEARING_FACT_AND_THEOREM_STEP_IS_INDEPENDENTLY_RECONSTRUCTED_AND_CONTENT_ADDRESSED."
+  },
+  "astra_prompt": [
+    "This is one scarce interaction. Do not ask follow-up questions. Do not produce motivational prose, benchmark score restatement, or generic model-capability summaries.",
+    "The terminal goal is literal: Brain must permanently internalize, configure, verify, and own every useful Opus 5.5 capability at equal-or-better level. External knowledge may remain JIT; opaque external capability execution does not count as ownership.",
+    "Brain-side first principles already establish three L1 certification routes per context: E = complete explicit load-bearing evaluators and hard constraints; M = every admissible hidden L1 utility is proved monotone in a sound material outcome order plus dominance-preserving coupling; U = otherwise exact equality of full deployed Brain and target trajectory laws under the same context.",
+    "For arbitrary measure-separating hidden U, exact law equality is information-theoretically necessary. Do not propose generic moments, means, finite summaries, or other non-measure-determining statistics as a universal U shortcut.",
+    "Do not spend this interaction rediscovering the current 24 atomic acceptance contracts. They are already partitioned as 14 fixed bars, 4 matched noninferiority relations, 4 matched invariant audits, 1 direct scope audit, and 1 dependency proof. The 14 fixed-bar exact target tuples are already bound.",
+    "Do not spend this interaction repeating public benchmark-methodology research for Terminal-Bench, OSWorld 2.1, HLE, Finance Agent v2, AutomationBench, GDPval, AA-Briefcase, FrontierCode, MysteryMechanism, or Chartography unless a specific source fact is needed to falsify or prove a broader family/context semantic theorem. Existing research already separates E-candidate evaluator surfaces from mixed/private and external-result surfaces.",
+    "CRITICAL FIREWALL: an atomic benchmark, matched predicate, or invariant contract is not a whole-family E proof. Family/context E requires a complete evaluator and hard-constraint basis with a defensible completeness theorem. Attack every E candidate by constructing an omitted load-bearing quality, reliability, safety, authority, continuation, interaction, context, or task-contract dimension.",
+    "CRITICAL FIREWALL: family/context M requires that every admissible hidden L1 utility be monotone in an explicitly defined material partial order. Attack every M candidate with the smallest preference reversal, nonseparable interaction, tail-risk utility, hard-constraint utility, context-dependent preference, or other nonmonotone counterexample.",
+    "Your primary task is to partition the fourteen unresolved families into the broadest sound E subclasses, M subclasses, and residual U/UNRESOLVED subclasses. Prefer a truthful subclass partition to a false whole-family label.",
+    "Search for structural once-only theorems that cover many families: context generators, exact task-contract refinement, symmetry/invariance, bisimulation, trace equivalence, evaluator equivalence, dominance-preserving abstraction, or other transfer relations. State every load-bearing premise and the smallest boundary counterexample.",
+    "Use primary public sources for factual premises. Map every source to the exact proposition it supports. Source citations do not prove theorem steps; reconstruct the theorem independently.",
+    "Do not invent private benchmark outcomes, hidden Opus internals, inaccessible target distributions, or hidden preference functions.",
+    "Rank results by target-law information eliminated, not prose breadth. One sound generator covering thousands of contexts dominates a hundred descriptive facts.",
+    "Return the minimum information cut after your classification: STRUCTURAL_ONCE, PER_FAMILY, PER_CONTEXT, EXACT_TARGET_LAW_IRREDUCIBLE. For every residual U class, state exactly why E, M, and context-transfer attempts fail and what target-law information remains necessary.",
+    "Provide at least ten minimal counterexamples against your strongest proposed E, M, and transfer shortcuts.",
+    "End with exactly one highest-leverage action after independent verification, chosen by expected terminal truth-obligation contraction per unit scarce evidence cost."
+  ],
+  "required_output": {
+    "family_context_partition": "For all 14 families: exact E subclasses, M subclasses, U or unresolved subclasses, premise strength, coverage breadth, and confidence-free proof status.",
+    "E_completeness_basis": "Complete evaluator/hard-constraint basis per E subclass, completeness reasoning, primary-source premises, and omitted-dimension falsifier.",
+    "M_monotonicity_basis": "Material outcome order, admissible hidden utility class, all-utility monotonicity premise, coupling consequence, and preference-reversal falsifier.",
+    "context_generators": "Sound generator/quotient/transfer theorems with exact invariance premises, breadth, and boundary counterexample.",
+    "residual_U": "Residual classes, failed compression routes, and exact minimum target-law information.",
+    "information_cut": "STRUCTURAL_ONCE | PER_FAMILY | PER_CONTEXT | EXACT_TARGET_LAW_IRREDUCIBLE.",
+    "top_counterexamples": "At least 10 minimal falsifiers.",
+    "sourced_evidence": "Primary-source claim-to-source mapping only.",
+    "next_single_action": "Exactly one action after independent verification."
+  },
+  "truth_boundary": [
+    "ASTRA_OUTPUT_ZERO_CREDIT_UNTIL_INDEPENDENT_VERIFICATION",
+    "ATOMIC_E_SHAPE_DOES_NOT_IMPLY_FAMILY_E",
+    "PUBLIC_EVALUATOR_E_CANDIDATE_DOES_NOT_IMPLY_FAMILY_E",
+    "NO_FAMILY_M_WITHOUT_PROVED_ALL_UTILITY_MONOTONICITY",
+    "UNKNOWN_REMAINS_U_OR_UNRESOLVED",
+    "NO_PRIVATE_SCORE_INFERENCE",
+    "NO_WEAKENING_OF_TERMINAL_OBJECTIVE"
+  ],
+  "accounting": {
+    "astra_access_consumed_by_packet_creation": 0,
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

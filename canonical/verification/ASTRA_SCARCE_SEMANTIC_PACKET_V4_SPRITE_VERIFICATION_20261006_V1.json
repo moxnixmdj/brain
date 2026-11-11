@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_SCARCE_SEMANTIC_PACKET_V4_SPRITE_VERIFICATION_20261006_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_PASS__ATOMIC_AND_PUBLIC_EVALUATOR_COMPRESSION_BOUND__ZERO_ASTRA_ACCESS__ZERO_CREDIT",
+  "runner": {
+    "provider": "Sprites",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "workspace": "/home/sprite/astra_packet_v4_replay"
+  },
+  "exact_blobs": {
+    "verifier": {
+      "path": "canonical/runtime/astra_scarce_semantic_packet_v4_verifier.py",
+      "git_blob_sha": "8c53f8aba72fe954863ed497e2da2b874404b149"
+    },
+    "packet": {
+      "path": "canonical/governance/ASTRA_SCARCE_ACCESS_TARGET_SEMANTICS_CLASSIFICATION_PACKET_20261006_V4.json",
+      "git_blob_sha": "4ac38982ff8c299e1e342bd8156008fe0908d99c"
+    },
+    "prefilter": {
+      "path": "canonical/governance/PRE_ASTRA_ATOMIC_FAMILY_SEMANTIC_PREFILTER_20261006_V1.json",
+      "git_blob_sha": "f16536e2a7b89686457e004fa63d1ee723a6b42e"
+    },
+    "public_evaluator_compression": {
+      "path": "canonical/governance/PUBLIC_EVALUATOR_SEMANTICS_COMPRESSION_20261006_V1.json",
+      "git_blob_sha": "8228493403426407ad773bd1f51bb64552ddf5c1"
+    },
+    "pre_astra_mincut": {
+      "path": "canonical/governance/PRE_ASTRA_TARGET_INFORMATION_MINCUT_THEOREM_20261006_V1.json",
+      "git_blob_sha": "6622a34c2de805523ac2c87808c13fb6cba1f3fe"
+    }
+  },
+  "result": {
+    "pass": true,
+    "errors": [],
+    "family_count": 14,
+    "atomic_contract_count_removed_from_query_budget": 24,
+    "fixed_target_tuple_count_removed_from_query_budget": 14,
+    "public_evaluator_family_count_removed_from_query_budget": 10,
+    "astra_access_consumed": 0,
+    "terminal_credit_delta": 0
+  },
+  "verified_claim": "THE_SINGLE_SCARCE_ASTRA_PACKET_V4_IS_CONTENT_BOUND_TO_THE_VERIFIED_ATOMIC_FAMILY_PREFILTER__THE_CURRENT_PUBLIC_EVALUATOR_COMPRESSION__AND_THE_PRE_ASTRA_IRREDUCIBILITY_THEOREM__AND_RETAINS_ONLY_THE_14_FAMILY_CONTEXT_SEMANTIC_RESIDUALS_AS_ITS_PRIMARY_RESEARCH_TARGET.",
+  "hard_nonclaims": [
+    "NO_ASTRA_INTERACTION_EXECUTED",
+    "NO_FAMILY_CLASSIFIED_E_OR_M",
+    "NO_TARGET_CONTEXT_UNIVERSE_COMPLETENESS_PROVED",
+    "NO_ATOMIC_ACCEPTANCE_PREDICATE_CLOSED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "astra_access_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
