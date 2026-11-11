@@ -874,15 +874,20 @@ def score_arm(bridge: Any, task: str, arm: Any, seeds: Sequence[int]) -> dict[st
     if not bridge.load(task).get("ok"):
         raise BridgeError("PAGE_DID_NOT_RELOAD")
     bits, steps, refused, partial = [], 0, 0, 0
+    looked_before = int(getattr(arm, "searched", 0) or 0)
     for seed in seeds:
         outcome = run_episode(bridge, seed, arm)
         bits.append(1 if outcome["success"] else 0)
         steps += outcome["steps"]
         refused += 1 if outcome["refused"] else 0
         partial += 1 if outcome["partial"] else 0
-    return {"episodes": len(bits), "successes": sum(bits), "refused": refused, "partial_credit": partial,
-            "success_rate": round(sum(bits) / max(1, len(bits)), 4), "actions": steps,
-            "per_seed": "".join(str(b) for b in bits)}
+    scored = {"episodes": len(bits), "successes": sum(bits), "refused": refused, "partial_credit": partial,
+              "success_rate": round(sum(bits) / max(1, len(bits)), 4), "actions": steps,
+              "per_seed": "".join(str(b) for b in bits)}
+    if hasattr(arm, "searched"):
+        # of `actions`, the presses a program made only to bring out a target that was not on the page
+        scored["actions_spent_looking"] = int(arm.searched) - looked_before
+    return scored
 
 
 # --------------------------------------------------------------------------- #

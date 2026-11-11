@@ -270,12 +270,110 @@ def _named_decoy(seed):
     return _Page("The Help note is optional. Press Go.", rows, judge)
 
 
+def _any_boxes(seed, *, in_order=False, always=None):
+    """Tick every box the instruction names -- none, one or up to five of them -- then Submit. The names
+    come in no particular order. With `in_order` the page only pays when they were ticked in the order
+    they are named in."""
+    rng = random.Random(f"anyboxes:{seed}")
+    names = rng.sample(WORDS, 6)
+    count = always if always is not None else (3 if seed == 0 else rng.randint(0, 5))
+    wanted = rng.sample(names, count)
+    if seed == 0:
+        wanted.sort(key=names.index, reverse=True)       # where a first success is found, they are named last to first
+    rows = [("label", name, {"checked": False}) for name in names] + [("button", "Submit", {"id": "subbtn"})]
+
+    def judge(page, r):
+        if r < len(names):
+            page.rows[r]["extra"]["checked"] = not page.rows[r]["extra"]["checked"]
+            return None
+        ticked = [row["text"] for row in page.rows[:len(names)] if row["extra"]["checked"]]
+        pressed = [names[k] for k in page.clicked[:-1]]
+        return 1 if sorted(ticked) == sorted(wanted) and (not in_order or pressed == wanted) else -1
+    return _Page(f"Select {', '.join(wanted) if wanted else 'nothing'} and click Submit.", rows, judge, steps_allowed=14)
+
+
+def _boxes_in_the_order_named(seed):
+    return _any_boxes(seed, in_order=True)
+
+
+def _one_box(seed):
+    """The boxes page, but the instruction of the demonstration names exactly one box."""
+    return _any_boxes(seed, always=1 if seed == 0 else None)
+
+
+def _drawers(seed, *, one_open=False):
+    """Three drawers. Pulling one shows its two things and hides whatever was shown. The instruction names
+    one thing. A Close button, which is no drawer, ends everything badly. With `one_open` some drawer
+    stands open at the start, so the thing named is sometimes simply there."""
+    rng = random.Random(f"drawers:{seed}")
+    things = rng.sample(WORDS, 6)
+    target = rng.choice(things)
+
+    def inside(k):
+        return [dict(tag="span", text=thing, extra={"classes": "thing"}) for thing in things[2 * k: 2 * k + 2]]
+
+    def judge(page, r):
+        row = page.rows[r]
+        if row["extra"].get("classes") == "drawer":
+            page.pulled.append(row["text"])
+            page.rows[4:] = inside(r)
+            return None
+        if row["extra"].get("classes") == "shut":
+            return -1
+        return 1 if row["text"] == target else -1
+    rows = [("h4", f"Drawer {k + 1}", {"classes": "drawer"}) for k in range(3)] + [("button", "Close", {"classes": "shut"})]
+    page = _Page(f'Find "{target}" in the drawers and take it.', rows, judge, steps_allowed=12)
+    page.pulled = []
+    if one_open:
+        # on the instance a first success is found on, the open drawer is the one with the thing in it
+        page.rows[4:] = inside(things.index(target) // 2 if seed == 0 else rng.randrange(3))
+    return page
+
+
+def _drawers_one_open(seed):
+    return _drawers(seed, one_open=True)
+
+
+def _starts_and_ends(seed):
+    """Nine items, every beginning with every ending. `Take the item that starts with "Al" and ends with "on".`"""
+    rng = random.Random(f"ends:{seed}")
+    heads, tails = rng.sample(["Al", "Br", "Cl", "Di", "En"], 3), rng.sample(["ba", "am", "eo", "on", "ya"], 3)
+    items = [head + "x" + tail for head in heads for tail in tails]
+    rng.shuffle(items)
+    head, tail = rng.choice(heads), rng.choice(tails)
+    return _Page(f'Take the item that starts with "{head}" and ends with "{tail}".',
+                 [("li", item, {"classes": "pick"}) for item in items],
+                 lambda page, r: 1 if page.rows[r]["text"] == head + "x" + tail else -1)
+
+
+def _ledger(seed):
+    """A ledger of names and values side by side. `Enter the value of Town into the text field and press Submit.`
+    The value is on the page and not in the instruction."""
+    rng = random.Random(f"ledger:{seed}")
+    keys = rng.sample(["Colour", "Size", "Owner", "Town", "Year", "Shape"], 4)
+    values = rng.sample(WORDS, 4)
+    rows = []
+    for key, value in zip(keys, values):
+        rows += [("td", key, {}), ("td", value, {})]
+    rows += [("input", "", {"type": "text", "id": "tt", "value": ""}), ("button", "Submit", {"id": "subbtn"})]
+    asked = rng.randrange(4)
+
+    def judge(page, r):
+        if page.rows[r]["tag"] != "button":
+            return None
+        return 1 if page.rows[8]["extra"]["value"] == values[asked] else -1
+    return _Page(f"Enter the value of {keys[asked]} into the text field and press Submit.", rows, judge, steps_allowed=12)
+
+
 _TASKS = {"two-fields": _two_fields, "three-boxes": _three_boxes, "named-decoy": _named_decoy,
           "named-button": _named_button, "type-and-submit": _type_and_submit, "shout-and-submit": _shout_and_submit,
           "numbered-section": _numbered_section, "nth-box": _nth_box, "always-the-same": _always_the_same,
           "hidden-answer": _hidden_answer, "one-or-two": _one_or_two, "unsolvable": _unsolvable,
           "hidden-latch": _hidden_latch, "shout-or-whisper": _shout_or_whisper, "chatty-section": _chatty_section,
-          "shifting-section": _shifting_section, "mail-rows": _mail_rows, "widget-kind": _widget_kind}
+          "shifting-section": _shifting_section, "mail-rows": _mail_rows, "widget-kind": _widget_kind,
+          "any-boxes": _any_boxes, "boxes-in-the-order-named": _boxes_in_the_order_named, "one-box": _one_box,
+          "drawers": _drawers, "drawers-one-open": _drawers_one_open, "starts-and-ends": _starts_and_ends,
+          "ledger": _ledger}
 
 
 class StubBridge:
@@ -1043,7 +1141,9 @@ class OneMemoryTests(unittest.TestCase):
         page = _TASKS["three-boxes"](1003).observe()
         self.assertEqual(vs.mismatch(swallow, page["utterance"]), 0)             # distance alone says: a perfect fit
         self.assertEqual(vs.evidence(swallow, page["utterance"]), (0, 0))        # evidence says: nothing either way
-        supports, against = max((vs.evidence(skill, page["utterance"]) for skill in self.kept["three-boxes"].skills),
+        # (the names in the list are read off the page: a program that presses every box named reads them as values)
+        supports, against = max((vs.evidence(skill, page["utterance"], vs.Page(page))
+                                 for skill in self.kept["three-boxes"].skills),
                                 key=lambda pair: pair[0] - pair[1])
         self.assertGreater(supports - against, 0)
         origin, _ = self.library.choose(page)
@@ -1427,6 +1527,372 @@ class NeededStepsTests(unittest.TestCase):
         self.assertNotIn("steps_not_needed", shown["acquisition"])
 
 
+def _one_success_arm(task, *, practice=(), budget=3000):
+    bridge = StubBridge()
+    shown = tool.demonstrate(bridge, task, 0, action_budget=budget, search="guided")
+    assert shown["stage"] == tool.STAGE_DEMONSTRATED, (task, shown["stage"])
+    arm = tool.build_version_space_arm(bridge, task, shown["trace"], practice=list(practice),
+                                       action_budget=budget, tier=2, search="guided")
+    return arm, shown["trace"]
+
+
+class EveryOneTheInstructionMentionsTests(unittest.TestCase):
+    """"Press every box it names" is one step, however many it names."""
+
+    def test_being_mentioned_is_asked_of_the_instruction_itself_and_only_on_whole_words(self):
+        said = "Select Alba, Bram, Cleo, Dion and click Submit."
+        for name in ("Alba", "Bram", "Cleo", "Dion", "Submit"):
+            self.assertTrue(vs.mentioned_in(said, name), name)
+        # the third and fourth items are mentioned although no "between this word and that" cuts them out
+        self.assertEqual(vs.slots_returning(said, "Cleo"), [])
+        for absent in ("Sub", "Alb", "lba", "Enya", ""):
+            self.assertFalse(vs.mentioned_in(said, absent), absent)
+
+    def test_one_success_with_three_boxes_does_none_one_or_five(self):
+        arm, trace = _one_success_arm("any-boxes")
+        program = arm.skills.skills[0]
+        self.assertEqual(program.kinds, [vs.SET_STEP, "click"])
+        scored = tool.score_arm(StubBridge(), "any-boxes", arm, TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        counts = {_TASKS["any-boxes"](seed).utterance.count(",") for seed in TEST_SEEDS}
+        self.assertGreaterEqual(len(counts), 4)                                # the pages really differ in how many
+        self.assertTrue(any("nothing" in _TASKS["any-boxes"](seed).utterance for seed in TEST_SEEDS))
+        # the same presses replayed by position, or by a program of fixed length, do not do this
+        self.assertLess(tool.score_arm(StubBridge(), "any-boxes", tool.VerbatimArm(trace), TEST_SEEDS)["successes"], 5)
+
+    def test_the_step_selects_exactly_the_boxes_named_and_nothing_else(self):
+        page = vs.Page(_TASKS["any-boxes"](0).observe())
+        named = [i for i, e in enumerate(page.elements) if e["tag"] == "label" and vs.mentioned_in(page.instruction, e["text"])]
+        self.assertEqual(len(named), 3)
+        found = vs.set_descriptions(page, named)
+        self.assertTrue(found)
+        for description in found:
+            self.assertEqual(vs.matches(description, page), named)
+        self.assertEqual(vs.set_descriptions(page, named[:2]), [])              # two of the three named: not "all of them"
+        other = next(i for i, e in enumerate(page.elements) if e["tag"] == "label" and i not in named)
+        self.assertEqual(vs.set_descriptions(page, named + [other]), [])        # one that is not named: not "the named ones"
+        submit = next(i for i, e in enumerate(page.elements) if e["tag"] == "button")
+        self.assertEqual(vs.set_descriptions(page, named + [submit]), [])       # Submit is mentioned too, and is no box
+
+    def test_a_single_press_is_not_read_as_all_of_them(self):
+        arm, _ = _one_success_arm("one-box")
+        self.assertEqual(arm.skills.skills[0].kinds, ["click", "click"])
+        # ... and with practice on pages that name several, the second way is learned and then serves them all
+        practised, _ = _one_success_arm("one-box", practice=[500, 501, 502, 503])
+        self.assertIn([vs.SET_STEP, "click"], [program.kinds for program in practised.skills.skills])
+        some = [seed for seed in TEST_SEEDS if _TASKS["one-box"](seed).utterance.count(",") >= 1]
+        self.assertEqual(tool.score_arm(StubBridge(), "one-box", practised, some)["successes"], len(some))
+
+    def _last_to_first(self, task):
+        """A success on the first instance that went through the named boxes from the last on the page to the first."""
+        page = _TASKS[task](0)
+        named = page.utterance[len("Select "):page.utterance.index(" and click")].split(", ")
+        rows = [row["text"] for row in page.rows]
+        self.assertEqual(named, sorted(named, key=rows.index, reverse=True))    # that is also the order they are named in
+        plan = [f"click@{rows.index(name) + 2}" for name in named] + [f"click@{len(rows) + 1}"]
+        bridge = StubBridge()
+        replay = tool.replay_on_fresh_page(bridge, task, 0, plan)
+        self.assertTrue(replay["reproduced"])
+        return bridge, replay["trace"]
+
+    def test_whether_the_order_matters_is_asked_of_the_page_and_its_answer_is_kept(self):
+        # a page that does not care in which order its boxes are ticked: asked, it pays again, and "all of them" is read off
+        bridge, trace = self._last_to_first("any-boxes")
+        free = tool.build_version_space_arm(bridge, "any-boxes", trace, practice=[], action_budget=3000, tier=2, search="guided")
+        self.assertEqual((free.learning["order_questions"], free.learning["order_questions_answered_yes"]), (1, 1))
+        self.assertEqual(free.learning["order_question_actions"], len(trace) + 1)
+        self.assertEqual(free.skills.skills[0].kinds, [vs.SET_STEP, "click"])
+        self.assertEqual(tool.score_arm(StubBridge(), "any-boxes", free, TEST_SEEDS)["successes"], len(TEST_SEEDS))
+        # a page that pays only for the order named: asked, it does not pay, and the success is kept as it was
+        bridge, trace = self._last_to_first("boxes-in-the-order-named")
+        strict = tool.build_version_space_arm(bridge, "boxes-in-the-order-named", trace, practice=[], action_budget=3000,
+                                              tier=2, search="guided")
+        self.assertEqual((strict.learning["order_questions"], strict.learning["order_questions_answered_yes"]), (1, 0))
+        self.assertNotIn(vs.SET_STEP, strict.skills.skills[0].kinds)
+        self.assertEqual(len(strict.skills.skills[0].kinds), len(trace))
+        # and a success that already went in the order of the page is not asked about
+        arm, found = _one_success_arm("any-boxes")
+        if [a for _, a in found][:-1] == sorted([a for _, a in found][:-1], key=lambda a: int(a.split("@")[1])):
+            self.assertEqual(arm.learning["order_questions"], 0)
+
+    def test_a_record_that_left_a_named_box_out_or_took_another_in_is_not_this_program(self):
+        arm, trace = _one_success_arm("any-boxes")
+        program = arm.skills.skills[0]
+        self.assertEqual(program.kinds, [vs.SET_STEP, "click"])
+        ordered = sorted(trace[:-1], key=lambda step: int(step[1].split("@")[1]))
+        page = vs.Page(trace[0][0])
+        other = next(i for i, e in enumerate(page.elements) if e["tag"] == "label" and not vs.mentioned_in(page.instruction, e["text"]))
+        for wrong in (ordered[:-1] + [trace[-1]],                                           # one named box left out
+                      ordered + [(trace[0][0], f"click@{other}")] + [trace[-1]],            # one box nobody named
+                      ordered + [trace[-1], trace[-1]],                                     # something more after the end
+                      list(reversed(ordered)) + [trace[-1]]):                               # the named ones, last to first
+            self.assertFalse(program.add_success(wrong))
+        self.assertEqual(program.examples, 1)
+        self.assertTrue(program.add_success(ordered + [trace[-1]]))
+        self.assertEqual(program.examples, 2)
+
+    def test_reordering_is_only_ever_a_question(self):
+        trace = [(o, a) for o, a in _one_success_arm("any-boxes")[1]]
+        presses = [a for _, a in trace[:-1]]
+        backwards = [(o, a) for (o, _), a in zip(trace[:-1], reversed(presses))] + [trace[-1]]
+        asked = vs.page_order(backwards)
+        self.assertEqual(asked, sorted(presses, key=lambda a: int(a.split("@")[1])) + [trace[-1][1]])
+        self.assertIsNone(vs.page_order([(o, a) for (o, _), a in zip(trace[:-1], asked[:-1])] + [trace[-1]]))
+
+    def test_a_success_with_another_number_of_presses_is_the_same_program(self):
+        arm, _ = _one_success_arm("any-boxes", practice=[500, 501, 502, 503])
+        self.assertEqual(len(arm.skills.skills), 1)
+        self.assertEqual(arm.skills.skills[0].examples, 5)
+        self.assertEqual(arm.learning["own_success"], 4)
+        self.assertEqual(arm.learning["found_by_search"], 0)
+
+    def test_the_names_in_the_list_do_not_count_as_a_different_way_of_asking(self):
+        arm, _ = _one_success_arm("any-boxes")
+        program = arm.skills.skills[0]
+        for seed in TEST_SEEDS[:10]:
+            observation = _TASKS["any-boxes"](seed).observe()
+            if "nothing" in observation["utterance"]:
+                continue
+            page = vs.Page(observation)
+            self.assertLessEqual(vs.mismatch(program, page.instruction, page), 1, page.instruction)   # at most the comma
+            if page.instruction.count(",") != 2:
+                self.assertGreater(vs.mismatch(program, page.instruction), 1, page.instruction)       # without the page: unread
+
+
+class BroughtOutByThePressBeforeTests(unittest.TestCase):
+    """A press that was made to bring the next target out is remembered with that purpose."""
+
+    def test_one_success_in_one_drawer_finds_the_thing_in_any_drawer(self):
+        arm, trace = _one_success_arm("drawers")
+        program = arm.skills.skills[0]
+        self.assertEqual(program.kinds, ["click", "click"])
+        self.assertIsNone(program._reveal[0])
+        self.assertIsNotNone(program._reveal[1])
+        scored = tool.score_arm(StubBridge(), "drawers", arm, TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        self.assertGreater(arm.searched, 0)                                    # it did have to look
+        # without the purpose the same program only succeeds where the thing is in the drawer of the demonstration
+        program._reveal = [None] * len(program.kinds)
+        blind = tool.score_arm(StubBridge(), "drawers", vs.VersionSpaceArm(arm.skills, {}), TEST_SEEDS)
+        self.assertLess(blind["successes"], len(TEST_SEEDS) * 2 // 3)
+
+    def test_looking_presses_each_drawer_at_most_once_and_nothing_that_is_no_drawer(self):
+        arm, _ = _one_success_arm("drawers")
+        for seed in TEST_SEEDS:
+            bridge = StubBridge()
+            bridge.load("drawers")
+            outcome = tool.run_episode(bridge, seed, arm)
+            self.assertTrue(outcome["success"], seed)
+            self.assertEqual(len(bridge.page.pulled), len(set(bridge.page.pulled)), seed)
+            self.assertLessEqual(outcome["steps"], 4, seed)                     # three drawers and the thing: never more
+
+    def test_presses_made_only_to_look_are_counted_as_that_and_once(self):
+        arm, _ = _one_success_arm("drawers")
+        looking, steps = 0, 0
+        for seed in TEST_SEEDS:                                                # from the pages: drawers pulled, less the program's own pull
+            bridge = StubBridge()
+            bridge.load("drawers")
+            steps += tool.run_episode(bridge, seed, arm)["steps"]
+            looking += len(bridge.page.pulled) - 1
+        self.assertGreater(looking, 0)
+        for _ in range(2):                                                     # the same arm scored twice says the same twice
+            scored = tool.score_arm(StubBridge(), "drawers", arm, TEST_SEEDS)
+            self.assertEqual(scored["actions_spent_looking"], looking)
+            self.assertEqual(scored["actions"], steps)
+        self.assertNotIn("actions_spent_looking", tool.score_arm(StubBridge(), "drawers", tool.VerbatimArm([]), TEST_SEEDS[:2]))
+        # the one memory counts its looking the same way
+        library = vs.SkillLibrary()
+        library.add("drawers", arm.skills)
+        self.assertEqual(tool.score_arm(StubBridge(), "drawers", vs.LibraryArm(library), TEST_SEEDS)["actions_spent_looking"], looking)
+
+    def test_a_target_that_was_there_all_along_is_not_given_a_purpose_it_did_not_have(self):
+        arm, _ = _one_success_arm("two-fields")
+        for program in arm.skills.skills:
+            self.assertEqual(program._reveal, [None] * len(program.kinds))
+        arm, _ = _one_success_arm("any-boxes")
+        self.assertEqual(arm.skills.skills[0]._reveal, [None, None])
+        # two presses, the first on one of several elements of a kind, the second on a button that never was hidden
+        page = {"utterance": "Pick a side, then go.", "elements": [
+            _element(0, -1, "body"), _element(1, 0, "a", "Left", click=True, classes="side"),
+            _element(2, 0, "a", "Right", click=True, classes="side"), _element(3, 0, "button", "Go", click=True, id="go")]}
+        program = vs.VersionSpaceSkill()
+        self.assertTrue(program.add_success([(page, "click@1"), (page, "click@3")]))
+        self.assertIsNotNone(vs.family_of(vs.Page(page), 1))                    # there IS a kind to look through ...
+        self.assertEqual(program._reveal, [None, None])                        # ... and no reason to
+
+    def test_looking_stops(self):
+        arm, _ = _one_success_arm("drawers")
+        program = arm.skills.skills[0]
+        observation = _TASKS["drawers"](1001).observe()
+        drawers = {f"click@{e['index']}" for e in observation["elements"] if e.get("classes") == "drawer"}
+        run = vs.Execution(program)
+        pressed = []
+        for _ in range(40):                                                    # a page on which nothing ever comes out
+            action = run.next_action(observation)
+            if action is None:
+                break
+            pressed.append(action)
+        pulls = [action for action in pressed if action in drawers]
+        self.assertEqual(sorted(pulls), sorted(drawers))                       # every drawer once ...
+        self.assertEqual(run.searched, len(drawers) - 1)                       # ... one as the program's own step, the others looking
+        self.assertLessEqual(len(pressed), len(drawers) + 1)                   # and then at most one last guess
+        # a wall of thirty drawers and nothing behind any of them: the looking has an end of its own
+        wall = {"utterance": observation["utterance"], "elements": [_element(0, -1, "body")] + [
+            _element(k + 1, 0, "h4", f"Drawer {k + 1}", click=True, classes="drawer") for k in range(30)]}
+        run = vs.Execution(program)
+        pressed = []
+        for _ in range(60):
+            action = run.next_action(wall)
+            if action is None:
+                break
+            pressed.append(action)
+        self.assertEqual(run.searched, vs.MAX_REVEAL_PRESSES)
+        self.assertEqual(len(pressed), len(set(pressed)))
+
+    def test_a_program_that_cannot_begin_gives_way_to_one_that_can(self):
+        alone, _ = _one_success_arm("drawers-one-open")
+        self.assertEqual([program.kinds for program in alone.skills.skills], [["click"]])   # the thing was simply there
+        # where the thing is not in the open drawer, the program's own description finds nothing; a weaker one still points somewhere
+        hidden = [seed for seed in TEST_SEEDS if alone.skills.skills[0].begins(vs.Page(_TASKS["drawers-one-open"](seed).observe())) < 2]
+        self.assertGreater(len(hidden), 5)
+        self.assertLess(len(hidden), len(TEST_SEEDS))
+        self.assertEqual(tool.score_arm(StubBridge(), "drawers-one-open", alone, hidden)["successes"], 0)
+        arm, _ = _one_success_arm("drawers-one-open", practice=[500, 501, 502, 503, 504, 505])
+        shapes = sorted(program.kinds for program in arm.skills.skills)
+        self.assertEqual(shapes, [["click"], ["click", "click"]])               # ... and where it was not, a drawer was pulled first
+        self.assertEqual(arm.skills.skills[0].kinds, ["click"])                # the first one held is the one that cannot begin there
+        scored = tool.score_arm(StubBridge(), "drawers-one-open", arm, TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        # the choice itself, with one success behind each: the page decides, and without the page the first held is taken
+        pair = vs.SkillSet()
+        pair.add_success(tool.demonstrate(StubBridge(), "drawers-one-open", 0, action_budget=3000, search="guided")["trace"])
+        practice_hidden = next(seed for seed in range(500, 540)
+                               if pair.skills[0].begins(vs.Page(_TASKS["drawers-one-open"](seed).observe())) < 2)
+        shown = tool.demonstrate(StubBridge(), "drawers-one-open", practice_hidden, action_budget=3000, search="guided")
+        self.assertEqual(pair.add_success(shown["trace"]), "new_way")
+        self.assertEqual([program.examples for program in pair.skills], [1, 1])
+        for seed in hidden:
+            observation = _TASKS["drawers-one-open"](seed).observe()
+            self.assertEqual(pair.choose(observation["utterance"], observation).kinds, ["click", "click"], seed)
+            self.assertEqual(pair.choose(observation["utterance"]).kinds, ["click"], seed)
+
+    def test_a_press_that_was_not_needed_once_does_not_take_the_purpose_away(self):
+        arm, _ = _one_success_arm("drawers-one-open", practice=[500, 501, 502, 503, 504, 505])
+        two = next(program for program in arm.skills.skills if program.kinds == ["click", "click"])
+        there_all_along = [example for example in two._examples
+                           if vs.pick(two._targets[1][0], example[0][0]) is not None]
+        self.assertTrue(there_all_along)                                       # it did pull a drawer it need not have pulled
+        self.assertIsNotNone(two._reveal[1])
+
+    def test_a_success_reached_by_looking_is_not_kept_as_a_new_way(self):
+        arm, _ = _one_success_arm("drawers", practice=[500, 501, 502, 503])
+        self.assertEqual(arm.learning["own_success"], 4)
+        self.assertGreater(arm.learning["own_success_with_looking"], 0)
+        self.assertEqual(arm.learning["new_ways"], 0)
+        for program in arm.skills.skills:
+            self.assertEqual(program.kinds, ["click", "click"])
+
+
+def _flat_page(said, rows):
+    return {"utterance": said, "elements": [_element(0, -1, "body")] + [
+        _element(k + 1, 0, tag, text, click=True, **extra) for k, (tag, text, extra) in enumerate(rows)]}
+
+
+class ShapeOfARecordTests(unittest.TestCase):
+    """What a recorded success is read as, before anything is generalised."""
+    BOXES = [("label", "Alba", {"classes": "box"}), ("label", "Bram", {"classes": "box"}),
+             ("label", "Cleo", {"classes": "box"}), ("button", "Go", {})]
+
+    def test_a_record_that_typed_where_the_program_presses_is_another_program(self):
+        page = {"utterance": "Use the box, then go.", "elements": [
+            _element(0, -1, "body"), _element(1, 0, "input", "", click=True, type_=True, id="box", value=""),
+            _element(2, 0, "button", "Go", click=True, id="go")]}
+        program = vs.VersionSpaceSkill()
+        self.assertTrue(program.add_success([(page, "click@1"), (page, "click@2")]))
+        self.assertFalse(program.add_success([(page, "type@1=hello"), (page, "click@2")]))
+        self.assertEqual((program.examples, program.kinds, program.rejected_examples), (1, ["click", "click"], 1))
+
+    def test_presses_between_which_the_page_changed_are_not_read_as_one_step(self):
+        before = _flat_page("Select Alba, Cleo and click Go.", self.BOXES)
+        same = vs.VersionSpaceSkill()
+        self.assertTrue(same.add_success([(before, "click@1"), (before, "click@3"), (before, "click@4")]))
+        self.assertEqual(same.kinds, [vs.SET_STEP, "click"])
+        after = _flat_page("Select Alba, Cleo and click Go.", self.BOXES + [("div", "a note appeared", {})])
+        changed = vs.VersionSpaceSkill()
+        self.assertTrue(changed.add_success([(before, "click@1"), (after, "click@3"), (after, "click@4")]))
+        self.assertEqual(changed.kinds, ["click", "click", "click"])
+        self.assertIsNone(vs.page_order([(before, "click@3"), (after, "click@1"), (after, "click@4")]))
+
+    def test_a_success_only_the_narrower_reading_explains_is_taken_and_strikes_the_wider_one_out(self):
+        first = _flat_page("Select Alba, Cleo and click Go.", self.BOXES)
+        program = vs.VersionSpaceSkill()
+        self.assertTrue(program.add_success([(first, "click@1"), (first, "click@3"), (first, "click@4")]))
+        narrow = ("equals", "self", "classes", "box")
+        wide = [d for d in program._targets[0] if narrow not in d[0]]            # "every label it names"
+        self.assertTrue(wide)
+        self.assertLess(len(wide), len(program._targets[0]))                    # and "every label of class box it names"
+        # a page on which a label of ANOTHER class is named too, and the success left that one alone
+        second = _flat_page("Select Dion, Enya, Finn and click Go.", [
+            ("label", "Dion", {"classes": "note"}), ("label", "Enya", {"classes": "box"}),
+            ("label", "Finn", {"classes": "box"}), ("button", "Go", {})])
+        self.assertTrue(program.add_success([(second, "click@2"), (second, "click@3"), (second, "click@4")]))
+        self.assertEqual(program.examples, 2)
+        self.assertTrue(program._targets[0])
+        for description in program._targets[0]:
+            self.assertIn(narrow, description[0])
+        run = vs.Execution(program)
+        self.assertEqual([run.next_action(second) for _ in range(4)], ["click@2", "click@3", "click@4", None])
+
+    def test_an_element_alone_of_its_kind_still_has_a_kind(self):
+        page = vs.Page(_flat_page("Open it.", [("h4", "Drawer 1", {"classes": "drawer"}), ("button", "Go", {})]))
+        self.assertEqual(vs.matches(vs.family_of(page, 1), page), [1])
+        self.assertIsNone(vs.family_of(page, 2))                     # nothing to tell its kind by
+
+
+class StartsOrEndsWithTests(unittest.TestCase):
+    def test_an_item_is_found_by_how_it_starts_and_how_it_ends(self):
+        arm, trace = _one_success_arm("starts-and-ends")
+        scored = tool.score_arm(StubBridge(), "starts-and-ends", arm, TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        first = arm.skills.skills[0]._targets[0][0]
+        self.assertEqual(sorted(test[4] for test in first[0] if test[0] == "slot"), ["prefix", "suffix"])
+        self.assertLess(tool.score_arm(StubBridge(), "starts-and-ends", tool.VerbatimArm(trace), TEST_SEEDS)["successes"], 10)
+
+    def test_being_the_piece_goes_before_beginning_with_the_piece(self):
+        page = vs.Page({"utterance": 'Press the "Block" button.', "elements": [
+            _element(0, -1, "body"), _element(1, 0, "li", "Block @ann", click=True), _element(2, 0, "li", "Block", click=True)]})
+        whole = ((("slot", "self", "text", ("quoted", 0), "exact"),), None)
+        part = ((("slot", "self", "text", ("quoted", 0), "prefix"),), None)
+        self.assertEqual(vs.matches(whole, page), [2])
+        self.assertEqual(vs.matches(part, page), [1, 2])
+        self.assertLess(vs.preference(whole, [page]), vs.preference(part, [page]))
+        self.assertIn(part[0][0], vs.tests_true_of(page, 1))
+        self.assertNotIn(part[0][0], vs.tests_true_of(page, 2))                 # the whole text is not "a beginning"
+
+    def test_only_what_the_instruction_quotes_can_be_a_beginning_or_an_end(self):
+        page = vs.Page({"utterance": 'Press the Block button, or "B".', "elements": [
+            _element(0, -1, "body"), _element(1, 0, "li", "Block @ann", click=True)]})
+        self.assertFalse([t for t in vs.tests_true_of(page, 1) if t[0] == "slot" and t[4] in ("prefix", "suffix")])
+
+
+class CopiedFromWhereTheInstructionPointsTests(unittest.TestCase):
+    def test_the_value_next_to_the_name_the_instruction_gives_is_what_gets_typed(self):
+        arm, trace = _one_success_arm("ledger")
+        scored = tool.score_arm(StubBridge(), "ledger", arm, TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        typed = arm.skills.skills[0]._texts[0][0]
+        self.assertEqual(typed[0], "copy")
+        self.assertTrue(any(test[0] == "slot" for test in typed[1][0]))
+        # the word typed in the demonstration is on almost no other page
+        self.assertLess(tool.score_arm(StubBridge(), "ledger", tool.VerbatimArm(trace), TEST_SEEDS)["successes"], 10)
+
+    def test_a_program_that_copies_through_the_instruction_reads_that_word_as_a_value(self):
+        arm, _ = _one_success_arm("ledger")
+        program = arm.skills.skills[0]
+        for seed in TEST_SEEDS[:8]:
+            self.assertEqual(vs.mismatch(program, _TASKS["ledger"](seed).utterance), 0)
+
+
 @unittest.skipUnless(os.environ.get("MINIWOB_HTML_DIR") and shutil.which("node"),
                      "set MINIWOB_HTML_DIR (and MINIWOB_BRIDGE_NODE_MODULES) to run against the real pages")
 class RealPageTests(unittest.TestCase):
@@ -1541,6 +2007,67 @@ class RealBrowserTests(RealPageTests):
         self.assertNotIn("action_error", opened)
         self.assertNotEqual(tool.state_key(opened), tool.state_key(observation))
         self.assertFalse([e for e in opened["elements"] if e.get("classes") == "email-thread"])   # the list gave way to the message
+
+    def _success_by_hand(self, task, seed, plan):
+        """A plan read off the page by this test, kept only because the page itself pays for it on a fresh copy."""
+        replay = tool.replay_on_fresh_page(self.bridge, task, seed, plan)
+        self.assertTrue(replay["reproduced"], (task, seed, plan, replay["reason"]))
+        return replay["trace"]
+
+    def test_the_boxes_the_real_page_names_are_one_step_whatever_their_number(self):
+        self.bridge.load("click-checkboxes")
+        plan, shown_on = None, None
+        for seed in range(40):
+            observation = self.bridge.reset(seed)
+            named = [e["index"] for e in observation["elements"]
+                     if e["tag"] == "label" and vs.mentioned_in(observation["utterance"], e["text"])]
+            if len(named) >= 3:
+                submit = [e["index"] for e in observation["elements"] if e.get("id") == "subbtn"]
+                plan, shown_on = [f"click@{index}" for index in named + submit], seed
+                break
+        self.assertIsNotNone(plan)
+        skills = vs.SkillSet()
+        skills.add_success(self._success_by_hand("click-checkboxes", shown_on, plan))
+        self.assertEqual(skills.skills[0].kinds, [vs.SET_STEP, "click"])
+        seeds = list(range(1000, 1012))
+        self.bridge.load("click-checkboxes")
+        asked = {self.bridge.reset(seed)["utterance"].count(",") for seed in seeds}
+        self.assertGreaterEqual(len(asked), 3)                                  # the unseen pages name different numbers of boxes
+        scored = tool.score_arm(self.bridge, "click-checkboxes", vs.VersionSpaceArm(skills, {}), seeds)
+        self.assertEqual(scored["successes"], len(seeds))                       # the page's verdict, twelve times
+        self.assertEqual(scored["actions_spent_looking"], 0)
+
+    def test_a_link_behind_another_tab_of_the_real_page_is_looked_for_and_found(self):
+        self.bridge.load("click-tab-2")
+        trace = None
+        for seed in range(40):
+            observation = self.bridge.reset(seed)
+            wanted = tool.quoted_spans(observation["utterance"])[0]
+            if any(e.get("classes") == "alink" and e["text"] == wanted for e in observation["elements"]):
+                continue                                                        # the link is on the tab already open: nothing to learn from
+            tabs = [e["index"] for e in observation["elements"] if e.get("classes") == "ui-tabs-anchor"]
+            for tab in tabs:
+                self.bridge.reset(seed)
+                opened = self.bridge.act({"type": "click", "index": tab})
+                link = [e["index"] for e in opened["elements"] if e.get("classes") == "alink" and e["text"] == wanted]
+                if link:
+                    trace = self._success_by_hand("click-tab-2", seed, [f"click@{tab}", f"click@{link[0]}"])
+                    break
+            if trace:
+                break
+        self.assertIsNotNone(trace)
+        skills = vs.SkillSet()
+        skills.add_success(trace)
+        program = skills.skills[0]
+        self.assertEqual(program.kinds, ["click", "click"])
+        self.assertIsNotNone(program._reveal[1])                                # the tab was pressed to bring the link out
+        seeds = list(range(1000, 1012))
+        scored = tool.score_arm(self.bridge, "click-tab-2", vs.VersionSpaceArm(skills, {}), seeds)
+        self.assertEqual(scored["successes"], len(seeds))
+        self.assertGreater(scored["actions_spent_looking"], 0)                  # on some pages it was behind yet another tab
+        program._reveal = [None, None]                                          # the same program without the purpose
+        without = tool.score_arm(self.bridge, "click-tab-2", vs.VersionSpaceArm(skills, {}), seeds)
+        self.assertLess(without["successes"], len(seeds))
 
     def test_a_substrate_nobody_named_is_refused(self):
         with self.assertRaises(ValueError):
