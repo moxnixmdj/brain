@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_FOUR_MAXIMAL_KERNEL_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "source_bindings": {
+    "union25_archetypes_blob": "8c68e63bbc1e1b843f076dbcd8c4bfae11d4cc2a",
+    "union25_extension_blob": "d92256d2ebca72e67289e5861fcf8d005a026c0b",
+    "active15_reduction_blob": "7e169d546c12a43023ebbed719f2c94bf8dba51f",
+    "new_reduction_blob": "eeef455d840fe286e19302ea1b029824afddecf7"
+  },
+  "result": {
+    "prior_hard_signature_count": 20,
+    "maximal_kernel_count": 4,
+    "theorem": "THE_20_HARD_SIGNATURES_ARE_EXACTLY_THE_DOWNSET_OF_FOUR_MAXIMAL_COMPATIBLE_WIDTH_3_KERNELS",
+    "active15_unpadded_word_bound": 48,
+    "max_placeholder_highlight_word_cost": 8,
+    "combined_bound": 56,
+    "minimum_less_than_word_threshold": 100,
+    "remaining_margin": 44
+  },
+  "maximal_kernels": [
+    ["keywords:frequency", "keywords:letter_frequency", "change_case:capital_word_frequency"],
+    ["keywords:frequency", "keywords:letter_frequency", "change_case:english_capital"],
+    ["keywords:frequency", "keywords:letter_frequency", "change_case:english_lowercase"],
+    ["keywords:letter_frequency", "language:response_language", "change_case:capital_word_frequency"]
+  ],
+  "remaining_residuals": [
+    "SEMANTIC_CLOSURE_OF_THE_FOUR_PARAMETRIC_KERNELS",
+    "EXACT_LANGDETECT_STABILITY_OR_COUNTEREXAMPLE_CLASSIFICATION_FOR_NUMERIC_OVERLAYS"
+  ],
+  "credit": {
+    "acceptance": 0,
+    "family": 0,
+    "capability": 0,
+    "ownership": 0
+  }
+}
