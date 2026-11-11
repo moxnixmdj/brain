@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_RELATIONAL_REFINEMENT_COMPILER_V1_ACTIVATION",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__FAIL_CLOSED_RELATIONAL_REFINEMENT_COMPILER_INSTALLED__LOCAL_TESTS_13_OF_13_PASS__CONTENT_AND_SEMANTIC_BINDINGS_HARDENED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_claim": "C_UNIVERSAL_OBSERVABLE_BEHAVIOR_DOMINANCE_BINDING_V1",
+  "objective": "Materialize the missing machine-checked layer between existing content-addressed receipts and the independently verified finite-trace forward-simulation theorem. Compile exact state-conditioned local-refinement residuals without treating benchmark or matched-score parity as semantic refinement.",
+  "authorities": [
+    "canonical/governance/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_TERMINAL_REDUCER_20261005_V1.json",
+    "canonical/verification/OPUS55_COMPOSITIONAL_TRACE_REFINEMENT_WOLFRAM_VERIFICATION_20261005_V1.json",
+    "canonical/governance/OPUS55_SCHEMA_CLOSED_COMPOSITIONAL_TRACE_REFINEMENT_THEOREM_20261005_V1.json",
+    "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json",
+    "canonical/governance/OPUS55_OBSERVABLE_TRACE_SCOPE_SUPERSET_THEOREM_20261006_V1.json"
+  ],
+  "implementation": {
+    "runtime": {
+      "path": "canonical/runtime/relational_refinement_compiler_v1.py",
+      "git_blob_sha": "db465deb4d18bdd65bfcce5730ce8e1f4a511d2f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_relational_refinement_compiler_v1.py",
+      "git_blob_sha": "3812446a0669b204ed4a4e610e956587946da376"
+    }
+  },
+  "semantic_contract": {
+    "row": "Each transition row binds a precondition, target transition class, Brain macrostep contract, postcondition, evaluator-aware relation, scope/authority, cross-state carry, ownership, and a content-addressed local-refinement proof.",
+    "global": "Whole-trace candidate readiness additionally requires content-addressed trace-scope, initialization, constructor-preservation, terminal-preservation, and acceptance-order-soundness receipts.",
+    "evaluator_modes": [
+      "EXPLICIT",
+      "RESTRICTED_HIDDEN",
+      "UNRESTRICTED_HIDDEN"
+    ],
+    "hidden_unrestricted_rule": "UNRESTRICTED_HIDDEN requires a content-addressed observational-equivalence receipt; absence or weaker evidence fails closed.",
+    "forbidden_shortcut": "BENCHMARK_SCORE MATCHED_SCORE AGGREGATE_PARITY POINT_ESTIMATE ASSERTION_ONLY may not satisfy LOCAL_REFINEMENT.",
+    "content_address_rule": "Every receipt path must resolve under the repository root and its actual Git blob SHA-1 is recomputed from bytes; claimed SHA text alone never counts.",
+    "semantic_binding_rule": "Every row requires a separately content-addressed contract-binding JSON whose relation id, precondition, target transition, Brain macrostep, postcondition, evaluator binding, and evidence receipt references exactly match the compiled row.",
+    "global_binding_rule": "Whole-trace readiness requires a separately content-addressed global binding that exactly binds the target claim, relation id, and all global theorem receipts."
+  },
+  "local_verification": {
+    "result": "PASS_13_OF_13",
+    "environment": "LOCAL_PYTHON_UNITTEST_REPLAY",
+    "tests": [
+      "complete row plus global receipts reaches candidate-ready with zero credit",
+      "missing local refinement receipt remains open",
+      "benchmark score cannot substitute for local refinement",
+      "unrestricted hidden evaluator requires observational equivalence",
+      "restricted hidden evaluator requires utility-class and material-order receipts",
+      "missing constructor preservation blocks whole-trace readiness",
+      "duplicate row ids fail closed",
+      "invalid content address does not close a row",
+      "empty row universe fails closed",
+      "forged or mismatched claimed Git blob SHA fails closed against recomputed repository bytes",
+      "row contract binding mismatch fails closed",
+      "global contract binding mismatch fails closed",
+      "Git blob SHA preimage uses the required NUL separator and actual bytes"
+    ]
+  },
+  "truth_effect": {
+    "terminal_state_changed": false,
+    "acceptance_state_changed": false,
+    "capability_state_changed": false,
+    "ownership_state_changed": false,
+    "proof_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": [
+    "INDEPENDENTLY_REPLAY_EXACT_BRANCH_BYTES",
+    "COMPILE_EXISTING_ACCEPTANCE_AND_SCOPE_RECEIPTS_INTO_STATE_CONDITIONED_ROWS",
+    "MATERIALIZE_SHARED_EVALUATOR_AWARE_RELATION_R",
+    "RUN_COUNTERMODEL_SEARCH_ONLY_INSIDE_SOUNDLY_BOUND_ABSTRACTIONS",
+    "PROMOTE_NO_WHOLE_TRACE_CLAIM_UNTIL_ALL_GLOBAL_AND_LOCAL_RECEIPTS_CLOSE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EXISTING_BENCHMARK_PARITY_IS_LOCAL_REFINEMENT",
+    "NO_CLAIM_ALL_LOCAL_REFINEMENT_ROWS_ARE CURRENTLY CLOSED",
+    "NO_CLAIM_CONSTRUCTOR_PRESERVATION_OR_ACCEPTANCE_ORDER_SOUNDNESS_IS CURRENTLY PROVED GLOBALLY",
+    "NO_CLAIM_UNIVERSAL_COUNTERMODEL_GENERATION_IS DECIDABLE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_OR_TERMINAL_CREDIT",
+    "NO_CLAIM_A_CONTENT_ADDRESSED_RECEIPT_SUPPORTS_ARBITRARY_DECLARED_SEMANTICS_WITHOUT_EXACT_CONTRACT_BINDING"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "independent_verification_required": true
+}
