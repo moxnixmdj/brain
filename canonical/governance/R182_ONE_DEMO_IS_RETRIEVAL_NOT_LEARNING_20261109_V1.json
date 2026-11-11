@@ -1,0 +1,76 @@
+{
+  "id": "R182_ONE_DEMO_IS_RETRIEVAL_NOT_LEARNING_20261109_V1",
+  "date": "2026-11-09",
+  "question": "Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them? Can't we do this now? After we do this we have the most advanced coding agent on the planet.",
+  "short_answer": "No. One demonstration is retrieval of a stored rule, not permanent learning. It does not transfer across bug families, it does not survive sequential training, and it does not compose. We measured 0/2 on our own two bugs with the advanced actions already in the repo.",
+  "measured_facts": [
+    {
+      "fact": "Our own repair benchmark scores 0/2 on two self-authored bugs.",
+      "evidence": "canonical/runtime/swe_repair_benchmark_v1.py --json: cases=2 solved=0 accuracy_pct=0.0 trained_parameters=0 external_model_calls=0 spend_usd=0. Clean controls pass (3p / 5p); broken controls fail (2p1f / 2p3f); after repair unchanged. Both FAIL_CLOSED__CLOSED_LOOP_EXHAUSTED_WITHOUT_GREEN_SUITE. 74 and 130 candidates evaluated, $0.",
+      "file": "canonical/runtime/swe_repair_benchmark_v1.py"
+    },
+    {
+      "fact": "One stored rule solves a differently-shaped bug of the same class (retrieval, not learning).",
+      "evidence": "Demonstrated once: total = amount * rate // 1000 -> total = amount * rate / 1000. Applied to return subtotal - (subtotal * pct // 100): candidates 74 -> 1, after 2p1f -> 3p0f, mechanism operator_generalized. Correctly refused on paging off-by-one (2p3f) — a floor-division lesson is not a fix for an off-by-one. The rule was hand-derived and stored externally; the engine did not crystallize it from one demo inside the loop.",
+      "commit": "791f6b61 (r182), files canonical/swe_kernel/operator_generalization_v1.py + verified_skill_crystallizer_v1.py"
+    },
+    {
+      "fact": "One demonstration does not transfer across bug families.",
+      "evidence": "Same stored floor-division rule on paging_off_by_one: 2p3f fail, 75 candidates, refused. A rule is addressable by its sentence; it does not generalize to a different task family.",
+      "law": "r63: learning is real iff what is stored is a statement about the task. r175: memory is addressed by the sentence, so it does not transfer across episodes (0/4 recall)."
+    },
+    {
+      "fact": "Sequential fine-tuning forgets (not permanent learning).",
+      "evidence": "2026 mechanistic study (arXiv 2601.18699, 109B–1.5T, open + closed): Llama 4 Maverick 89.3% -> 67.2% after 3 subsequent tasks (-24.8 pp); 15-23% of attention heads severely disrupted; CKA drift 0.32-0.47; gradient alignment r=0.87 predicts forgetting. Earlier: LLaMA-2-13B GSM8K 28.8% -> 2% under naive SFT; full fine-tuning on facts -89%; LoRA on 1000 facts NaturalQuestions -71%.",
+      "law": "a policy that decays with unchanged code is a sample, not a policy."
+    },
+    {
+      "fact": "Atomic skill mastery does not compose.",
+      "evidence": "VLA-Arena (ICML 2026, arXiv 2512.22539): six SOTA models 66-93% on atomic skills, 0.00-0.01 chaining two mastered skills. SkillIndex-VLA (2026): pretrained VLAs degrade sharply on new compositions of familiar sub-skills. OSWorld multi-app orchestration: 12-20% success. OSWorld 2.0 long-horizon: best agent 20.6% (human 72.36%, median 1.6h per task).",
+      "law": "a demonstration teaches an instance, not a family. VLA-Arena: 66-93% atomic -> 0.00-0.01 chained."
+    },
+    {
+      "fact": "One episode is one sample, inside single-replicate noise.",
+      "evidence": "Batch rule: one repair ≈ +0.77 pp, noise band ±2.7 pp. σ² = σ²_b/n + σ²_w/(nT). Bjarnason 2026: 10 identical benchmark replicates span 2.2-6.0 pp; two identical systems differ by 3 pp about one time in six. G-theory: agent main effect <3% of variance.",
+      "law": "r178: at 650 trials one repair is +0.77 pp and the noise band is ±2.7 pp — batch by the dozen."
+    },
+    {
+      "fact": "The frontier is not us.",
+      "evidence": "SWE-bench Verified 2026: frontier models 76-96% claimed (Claude Opus 4.7 87.6%, Mythos Preview 93.9% self-reported, like-for-like mini-SWE-agent 76.8%). OSWorld-Verified computer-use top: 86.1% (Qwen3.8-Max), but long-horizon OSWorld 2.0 best: 20.6%. We are 0/2 on our own two bugs.",
+      "law": "a reach number is not a capability number. Never claim world leadership on a 0/2."
+    }
+  ],
+  "what_is_real": [
+    "Retrieval of verified rules works: one stored lesson, applied to new code of the same class, cut candidates 74->1 and solved the bug.",
+    "In-context demonstrations help within one context window: one similar trajectory adds ~29 TGC points on AppWorld (Aug 2026 research), but it is token-hungry and does not persist.",
+    "Frontier models are strong: SWE-bench Verified ~80%, OSWorld-Verified ~86% for the best.",
+    "Our code fixes are real and committed: token regex longest-first (//, **, //=, >>=, <<=, @) + GENERALIZABLE widened; 18/18 operator-generalization tests pass."
+  ],
+  "what_is_not_real": [
+    "One try = permanent learning. False: sequential fine-tuning forgets across all model scales; our own memory test 0/4 recall.",
+    "Transfer to arbitrary environments. False: one episode = one instance, not a new environment; VLA chaining 0.00-0.01.",
+    "Sentient creature. No: we were not trying to make one (r115/r163/r181 answer: no). Models do not 'experience' or learn permanently from one attempt.",
+    "Solve anything on a computer. False: best agents fail 80% of long-horizon multi-app workflows (OSWorld 2.0 20.6%).",
+    "We are the most advanced coding agent on the planet. False: 0/2 on our own two bugs, $0, zero model calls."
+  ],
+  "limiting_factors_first_principles": [
+    "One demonstration is one sample; σ² = σ²_b/n + σ²_w/(nT) means high variance. Batch by the dozen, not one at a time.",
+    "Memory is addressed by the sentence; it does not transfer across episodes (0/4 recall).",
+    "Weights and memory are different systems. One demo changes weights only after training steps (GEN-1.5: 59%->83% after ten steps), not at inference.",
+    "Composition fails: atomic mastery does not chain (0.00-0.01). Build retrieval over a skill library, not weight mutation from one try.",
+    "A repair never applied is not a repair. The null policy must fail before a pass counts.",
+    "An output filename in the goal is an instruction. Measure the baseline first; run unchanged code three times before calling it a fix."
+  ],
+  "smartest_things_to_do_ranked": [
+    "Finish the r181 sweep (66/130 running in background, log /tmp/r181.log) and commit its result when done.",
+    "Commit the r182 code fixes (done, 791f6b61) and this governance document.",
+    "Resume the 45-zero batch, one sweep at 5 reps per batch: login-user x2, book-flight x2, then geometry click-tab/click-shape/count-sides/right-angle/bisect-angle. Fix the family with the most zeros.",
+    "Build retrieval over verified rules (the thing that actually worked: 74->1 candidate), not weight mutation from one demonstration.",
+    "Continue the web-use budget (~34 searches remaining this segment): SWE-bench SOTA, continual forgetting, computer-use agents, VLA composition, evaluation variance already partially done.",
+    "Do not claim world leadership. We are 0/2 on our own bugs. The honest ceiling is borrowing a frontier model as the coding brain (~77-82% like-for-like), using their weights, not building a capability of our own."
+  ],
+  "verdict": "You are wrong. One demonstration is not permanent learning, it does not transfer, it does not compose, and it does not make us the most advanced coding agent on the planet. The smartest path is retrieval of verified rules, batched repairs by the dozen, and honest measurement — not rhetoric.",
+  "status": "committed",
+  "branch": "arena/cdfc4713-brain",
+  "commit": "791f6b61"
+}
