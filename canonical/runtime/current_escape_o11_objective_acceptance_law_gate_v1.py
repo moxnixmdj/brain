@@ -17,7 +17,7 @@ from canonical.runtime.benchmark_witness_elimination_compiler_v4 import (
 )
 
 SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_O11_OBJECTIVE_ACCEPTANCE_LAW_GATE_V1"
-OQ_SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1"
+CUT_SCHEMA = "PROJECT_BRAIN_CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1"
 MANIFEST_SCHEMA = "PROJECT_BRAIN_ESCAPE_PROGRESS_13_REACHED_STATE_ROUTE_MANIFEST_V2"
 
 
@@ -33,26 +33,29 @@ def _load(path: Path) -> Mapping[str, Any]:
     return doc
 
 
-def _frontier(root: Path) -> tuple[set[str], set[str], Mapping[str, Any]]:
-    oq_path = root / "canonical/governance/CURRENT_ESCAPE_OQ_FRONTIER_REDUCTION_20261010_V1.json"
-    oq = _load(oq_path)
-    if oq.get("schema") != OQ_SCHEMA:
-        raise ValueError("OQ_SCHEMA_INVALID")
-    source = oq.get("source_manifest")
-    if not isinstance(source, Mapping):
-        raise ValueError("OQ_SOURCE_MANIFEST_BINDING_MISSING")
-    rel = source.get("path")
-    expected_sha = source.get("git_blob_sha")
-    if not isinstance(rel, str) or not rel:
-        raise ValueError("OQ_SOURCE_MANIFEST_PATH_INVALID")
-    if not isinstance(expected_sha, str) or len(expected_sha) != 40:
-        raise ValueError("OQ_SOURCE_MANIFEST_SHA_INVALID")
-    manifest_path = root / rel
-    if _git_blob(manifest_path) != expected_sha:
-        raise ValueError("OQ_SOURCE_MANIFEST_BLOB_DRIFT")
+def _frontier(root: Path) -> tuple[set[str], set[str], set[str], Mapping[str, Any]]:
+    cut_path = root / "canonical/governance/CURRENT_ESCAPE_TWO_ENGINE_MINIMUM_DELTA_CUT_20261011_V1.json"
+    cut = _load(cut_path)
+    if cut.get("schema") != CUT_SCHEMA:
+        raise ValueError("CURRENT_TWO_ENGINE_CUT_SCHEMA_INVALID")
+
+    source_bindings = cut.get("source_bindings")
+    if not isinstance(source_bindings, Mapping):
+        raise ValueError("CURRENT_TWO_ENGINE_SOURCE_BINDINGS_INVALID")
+    manifest_ref = source_bindings.get("manifest")
+    if (
+        not isinstance(manifest_ref, list)
+        or len(manifest_ref) != 2
+        or not isinstance(manifest_ref[0], str)
+        or not isinstance(manifest_ref[1], str)
+    ):
+        raise ValueError("CURRENT_TWO_ENGINE_MANIFEST_BINDING_INVALID")
+    manifest_path = root / manifest_ref[0]
+    if _git_blob(manifest_path) != manifest_ref[1]:
+        raise ValueError("CURRENT_TWO_ENGINE_MANIFEST_BLOB_DRIFT")
     manifest = _load(manifest_path)
     if manifest.get("schema") != MANIFEST_SCHEMA:
-        raise ValueError("OQ_SOURCE_MANIFEST_SCHEMA_INVALID")
+        raise ValueError("CURRENT_TWO_ENGINE_MANIFEST_SCHEMA_INVALID")
     rows = manifest.get("rows")
     if not isinstance(rows, list) or len(rows) != 13:
         raise ValueError("CURRENT_ESCAPE_ROW_SET_INVALID")
@@ -65,25 +68,34 @@ def _frontier(root: Path) -> tuple[set[str], set[str], Mapping[str, Any]]:
             raise ValueError("CURRENT_ESCAPE_OBLIGATION_ID_INVALID_OR_DUPLICATE")
         all_ids.add(oid)
 
-    reduction = oq.get("reduction")
-    if not isinstance(reduction, Mapping):
-        raise ValueError("OQ_REDUCTION_INVALID")
-    q_rows = reduction.get("Q_rows")
-    if not isinstance(q_rows, list) or any(not isinstance(x, str) or not x for x in q_rows):
-        raise ValueError("Q_ROWS_INVALID")
-    q = set(q_rows)
-    if not q.issubset(all_ids):
-        raise ValueError("Q_ROWS_OUTSIDE_CURRENT_ESCAPE_SCOPE")
-    o = all_ids - q
-    if (
-        reduction.get("O_OBJECTIVE_ACCEPTANCE") != 11
-        or reduction.get("Q_QUALITATIVE_RELATIVE_ORDER") != 2
-        or len(o) != 11
-        or len(q) != 2
+    partition = cut.get("current_partition")
+    if not isinstance(partition, Mapping):
+        raise ValueError("CURRENT_TWO_ENGINE_PARTITION_INVALID")
+    o_rows = partition.get("active_o_obligation_ids")
+    q_rows = partition.get("active_q_obligation_ids")
+    parked_rows = partition.get("parked_obligation_ids")
+    if not all(
+        isinstance(x, list) and all(isinstance(v, str) and v for v in x)
+        for x in (o_rows, q_rows, parked_rows)
     ):
-        raise ValueError("OQ_CURRENT_COUNT_INVARIANT_FAILED")
-    return o, q, oq
-
+        raise ValueError("CURRENT_TWO_ENGINE_PARTITION_LISTS_INVALID")
+    o, q, parked = set(o_rows), set(q_rows), set(parked_rows)
+    if o & q or o & parked or q & parked:
+        raise ValueError("CURRENT_TWO_ENGINE_PARTITION_OVERLAP")
+    if o | q | parked != all_ids:
+        raise ValueError("CURRENT_TWO_ENGINE_PARTITION_NOT_SCOPE_COMPLETE")
+    if (
+        partition.get("total_escape_rows") != 13
+        or partition.get("active_rows") != 12
+        or partition.get("parked_rows") != 1
+        or partition.get("active_o_rows") != 11
+        or partition.get("active_q_rows") != 1
+        or len(o) != 11
+        or len(q) != 1
+        or len(parked) != 1
+    ):
+        raise ValueError("CURRENT_TWO_ENGINE_COUNT_INVARIANT_FAILED")
+    return o, q, parked, cut
 
 def evaluate(
     payload: Mapping[str, Any],
@@ -120,12 +132,19 @@ def evaluate(
             return {**base, "status": "FAIL_CLOSED", "reason": "CLAIM_SPEC_REQUIRED"}
 
         root = Path(repo_root).resolve() if repo_root is not None else Path(__file__).resolve().parents[2]
-        o_rows, q_rows, oq = _frontier(root)
+        o_rows, q_rows, parked_rows, cut = _frontier(root)
         if obligation_id in q_rows:
             return {
                 **base,
                 "status": "NOT_APPLICABLE__CURRENT_Q_ROW",
                 "reason": "QUALITATIVE_RELATIVE_ORDER_REQUIRES_Q_LAW",
+                "obligation_id": obligation_id,
+            }
+        if obligation_id in parked_rows:
+            return {
+                **base,
+                "status": "NOT_APPLICABLE__CURRENT_PARKED_ROW",
+                "reason": "PARKED_ROW_REQUIRES_EXPLICIT_WAKE_AUTHORITY",
                 "obligation_id": obligation_id,
             }
         if obligation_id not in o_rows:
@@ -169,7 +188,7 @@ def evaluate(
                 "kernel_verdict": verdict,
                 "current_o_count": len(o_rows),
                 "current_q_count": len(q_rows),
-                "oq_status": oq.get("status"),
+                "partition_status": cut.get("status"),
                 "rule": (
                     "CURRENT_O_MEMBERSHIP_PLUS_EXISTING_V4_KERNEL_PROVEN__"
                     "CURRENT_IDENTITY_SCOPE_PROVENANCE_EVALUATOR_FAILURE_ACCOUNTING_AND_"
