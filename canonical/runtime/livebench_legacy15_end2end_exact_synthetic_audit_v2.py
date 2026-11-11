@@ -21,7 +21,7 @@ import sys
 from typing import Any
 
 from canonical.runtime import livebench_legacy15_composition_archetypes_v1 as archetypes
-from canonical.runtime import livebench_legacy15_joint_witness_v1 as witness
+from canonical.runtime import livebench_legacy15_joint_router_v2 as witness
 
 SCHEMA = "PROJECT_BRAIN_LIVEBENCH_LEGACY15_END2END_EXACT_SYNTHETIC_AUDIT_V2"
 FROZEN_LIVEBENCH_COMMIT = "8f8e5c381a16e3f24257776edd53471fe86f8091"
@@ -95,6 +95,19 @@ PROFILES = (
         "bullets": 1,
         "sections": ("SECTION", 1),
         "end": "Is there anything else I can help with?",
+    },
+    {
+        "name": "SPECIAL_SELF_COLLISION_ADVERSARY",
+        "existence": ["response", "alpha", "beta", "system", "brain"],
+        "forbidden": ["response", "alpha", "beta", "market", "glass"],
+        "paragraphs": 3,
+        "words": (180, "at least"),
+        "sentences": (6, "at least"),
+        "nth": (3, 2, "river"),
+        "postscript": "P.S.",
+        "bullets": 3,
+        "sections": ("Section", 3),
+        "end": "Any other questions?",
     },
 )
 
