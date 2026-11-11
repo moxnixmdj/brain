@@ -1,0 +1,100 @@
+name: Verify adaptive terminal minimum cut v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/minimum_terminal_cut_solver_v2.py"
+      - "canonical/tests/test_minimum_terminal_cut_solver_v2.py"
+      - "canonical/runtime/terminal_adaptive_supertransaction_v1.py"
+      - "canonical/tests/test_terminal_adaptive_supertransaction_v1.py"
+      - "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_CUT_ACTIVATION_V1.json"
+      - ".github/workflows/verify-terminal-adaptive-minimum-cut-v1.yml"
+  push:
+    paths:
+      - "canonical/runtime/minimum_terminal_cut_solver_v2.py"
+      - "canonical/tests/test_minimum_terminal_cut_solver_v2.py"
+      - "canonical/runtime/terminal_adaptive_supertransaction_v1.py"
+      - "canonical/tests/test_terminal_adaptive_supertransaction_v1.py"
+      - "canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_CUT_ACTIVATION_V1.json"
+      - ".github/workflows/verify-terminal-adaptive-minimum-cut-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pins:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: |
+          python - <<'PY'
+          from canonical.runtime import terminal_adaptive_supertransaction_v1 as v
+          for p,h in v.PINNED.items():
+              assert v._blob(p)==h,(p,v._blob(p),h)
+          PY
+
+  solver:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python -m pytest -q canonical/tests/test_minimum_terminal_cut_solver_v2.py
+
+  supertransaction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [pins]
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python -m pytest -q canonical/tests/test_terminal_adaptive_supertransaction_v1.py
+      - run: python canonical/runtime/terminal_adaptive_supertransaction_v1.py > result.json
+      - run: |
+          python - <<'PY'
+          import json
+          x=json.load(open("result.json"))
+          assert x["pass"] is True,x
+          assert x["terminal_state"]["unresolved_predicates"]==26,x
+          assert x["terminal_state"]["root1_positive_gaps"]==0,x
+          assert x["causal_phase_upper_bound"]==2,x
+          assert x["automatic_finality"]["separate_manual_phase_required"] is False,x
+          assert len(x["zero_probability_deleted_routes"])==4,x
+          assert x["fresh_reality_authority"] is False,x
+          PY
+
+  governance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [solver, supertransaction]
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: ${{ github.event.pull_request.head.sha || github.sha }} }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: |
+          python - <<'PY'
+          import hashlib,json,pathlib
+          p=pathlib.Path
+          g=json.loads(p("canonical/governance/TERMINAL_ADAPTIVE_MINIMUM_CUT_ACTIVATION_V1.json").read_text())
+          def blob(path):
+              b=p(path).read_bytes()
+              return hashlib.sha1(b"blob "+str(len(b)).encode()+b"\0"+b).hexdigest()
+          impl=g["implementation"]
+          assert blob(impl["adaptive_cut_solver"]["path"])==impl["adaptive_cut_solver"]["git_blob_sha"]
+          assert blob(impl["adaptive_cut_solver"]["tests"])==impl["adaptive_cut_solver"]["tests_git_blob_sha"]
+          assert blob(impl["supertransaction"]["path"])==impl["supertransaction"]["git_blob_sha"]
+          assert blob(impl["supertransaction"]["tests"])==impl["supertransaction"]["tests_git_blob_sha"]
+          assert g["authority"]["scheduling_authority"] is False
+          assert g["authority"]["fresh_reality_authority"] is False
+          assert g["accounting"]["acceptance_credit_delta"]==0
+          PY
