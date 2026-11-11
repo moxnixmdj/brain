@@ -17,7 +17,8 @@ One list, default deny, three answers:
 
 * a call in `ALLOWED` runs;
 * a call in `ARGUMENT_CHECKED` runs only in its harmless form (a new process, not a new
-  namespace; a local socket, not a network one; a FIFO, not a device node);
+  namespace; a local or loopback socket, not netlink, packet or any other family; a FIFO, not a
+  device node);
 * a call in `REFUSED_BY_NAME` fails with EPERM -- these are named so that a reader can see the
   refusal is a decision and not an omission;
 * **every other call, including calls that do not exist yet, fails with ENOSYS.** ENOSYS and not
@@ -33,8 +34,8 @@ How the list was made
 Measured, then read. 2026-11-11, x86_64, Python 3.11.2, glibc 2.36: `python-ptrace` followed
 five batteries of ordinary work (files, archives, sqlite, subprocesses and their kills, threads,
 asyncio, local sockets, signals, timers, limits), a `/bin/sh` and a `bash` running fifty common
-commands, `pytest`, and the launcher's own `setpriv` step: 137 distinct calls. All of them are
-here except the five that must not be: `ptrace` and `unshare` (the tracer and the launcher, not
+commands, `pytest`, GNU `make`, and the launcher's own `setpriv` step: 139 distinct calls. All
+of them are here except the five that must not be: `ptrace` and `unshare` (the tracer and the launcher, not
 the work), `clone3` (answered ENOSYS on purpose, see above), `get_mempolicy`/`set_mempolicy`
 (libnuma probing; it recovers). The rest of `ALLOWED` is the older or newer spelling of a call
 that was measured (`stat` beside `newfstatat`, `pipe` beside `pipe2`), so that a different C
@@ -101,8 +102,13 @@ ALLOWED = {
         "sched_get_priority_max", "sched_get_priority_min", "getpriority", "setpriority",
         "getrusage", "times", "getrlimit", "setrlimit", "prlimit64",
     ),
+    # The set*id calls are here because `make` and every other posix_spawn(POSIX_SPAWN_RESETIDS)
+    # caller sets its effective ids to its real ids before each command (measured: GNU make 4.3
+    # fails with "Operation not permitted" without them). The worker holds no CAP_SETUID/SETGID
+    # and one mapped id, so the kernel lets these calls change nothing.
     "identity": (
         "getuid", "geteuid", "getgid", "getegid", "getgroups", "getresuid", "getresgid",
+        "setuid", "setgid", "setreuid", "setregid", "setresuid", "setresgid",
     ),
     "signals": (
         "rt_sigaction", "rt_sigprocmask", "rt_sigreturn", "rt_sigpending", "rt_sigsuspend",
@@ -118,8 +124,8 @@ ALLOWED = {
 # name -> (index of the argument that is read, what is required of it, in words)
 ARGUMENT_CHECKED = {
     "clone": (0, "no CLONE_NEW* flag: a new process or thread, never a new namespace"),
-    "socket": (0, "domain AF_UNIX only"),
-    "socketpair": (0, "domain AF_UNIX only"),
+    "socket": (0, "domain AF_UNIX, AF_INET or AF_INET6 only: the namespace owns one private loopback and nothing else"),
+    "socketpair": (0, "domain AF_UNIX, AF_INET or AF_INET6 only"),
     "mknod": (1, "file type S_IFIFO only: a named pipe, never a device node"),
     "mknodat": (2, "file type S_IFIFO only: a named pipe, never a device node"),
 }
@@ -131,8 +137,7 @@ REFUSED_BY_NAME = {
         "quotactl", "fanotify_init", "sync", "syncfs",
     ),
     "namespaces_and_identity": (
-        "unshare", "setns", "setuid", "setgid", "setreuid", "setregid", "setresuid", "setresgid",
-        "setfsuid", "setfsgid", "setgroups", "sethostname", "setdomainname",
+        "unshare", "setns", "setfsuid", "setfsgid", "setgroups", "sethostname", "setdomainname",
     ),
     "other_processes": (
         "ptrace", "process_vm_readv", "process_vm_writev", "kcmp", "pidfd_getfd", "process_madvise",
@@ -208,7 +213,7 @@ EPERM = 1
 ENOSYS = 38
 
 _CLONE_NEW_ANYTHING = 0x7E020000   # NEWNS | NEWCGROUP | NEWUTS | NEWIPC | NEWUSER | NEWPID | NEWNET
-_AF_UNIX = 1
+_AF_UNIX, _AF_INET, _AF_INET6 = 1, 2, 10
 _S_IFMT = 0o170000
 _S_IFIFO = 0o010000
 
@@ -266,8 +271,8 @@ def program(arch: str | None = None) -> list[tuple[int, int, int, int]]:
     prog += [(_JEQ, 0, 4, numbers["clone"]), (_LD_ABS, 0, 0, low(ARGUMENT_CHECKED["clone"][0])),
              (_JSET, 0, 1, _CLONE_NEW_ANYTHING), refuse, allow]
     for name in ("socket", "socketpair"):
-        prog += [(_JEQ, 0, 4, numbers[name]), (_LD_ABS, 0, 0, low(ARGUMENT_CHECKED[name][0])),
-                 (_JEQ, 0, 1, _AF_UNIX), allow, refuse]
+        prog += [(_JEQ, 0, 6, numbers[name]), (_LD_ABS, 0, 0, low(ARGUMENT_CHECKED[name][0])),
+                 (_JEQ, 2, 0, _AF_UNIX), (_JEQ, 1, 0, _AF_INET), (_JEQ, 0, 1, _AF_INET6), allow, refuse]
     for name in ("mknod", "mknodat"):
         prog += [(_JEQ, 0, 5, numbers[name]), (_LD_ABS, 0, 0, low(ARGUMENT_CHECKED[name][0])),
                  (_AND, 0, 0, _S_IFMT), (_JEQ, 0, 1, _S_IFIFO), allow, refuse]
