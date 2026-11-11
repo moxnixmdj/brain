@@ -1,0 +1,478 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "COPY_RENAME_AND_APPEND_A_LINE_AT_THE_FRONT_DOOR_BEHIND_A_WORD_CHECK_20261111_V1",
+ "action_intent_id": "COPY_RENAME_AND_APPEND_A_LINE_AT_THE_FRONT_DOOR_BEHIND_A_WORD_CHECK_20261111_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "COPY_RENAME_AND_APPEND_A_LINE_AT_THE_FRONT_DOOR_BEHIND_A_WORD_CHECK_20261111_V1",
+ "date": "2026-11-11",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "2d35496910ded9755de6a59b36a7f456dc0b7e10",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The front door refuses every request to change a file: 0 of the 60 edit and file-making requests of a frozen 32-task file set. Pull request #6602 adds sixteen file rows but cannot merge: the referee allows three new rows per change, its rows are selected by shared words and passed 13 of 96 requests with a wrong result, and its compiler change fails 15 of 51 existing world-binding tests on current main. This change adapts three of its rows, file.copy.v1, file.rename.v1 and file.line.appended.v1, to current main. Each row declares request_word_coverage: required, and the front door refuses, before anything is written, a request with a word the selected row does not account for. The compiler's writer rules (the destination is the one the sentence states; no input is taken from the world) become a contract a row opts into, so every row that existed before binds exactly as it did. Two defects of the append row, found by fresh instances, are fixed: a quoted line was appended with its quotation marks, and a sentence stating two lines had one of them dropped silently. Measured in a sandbox on this tree: the true-capability harness passes 2000 of 2000 fresh folders through the front door and fails three deliberate mutations; the frozen file set goes from 25 to 32 right with 0 wrong and no file changed in a run that was not right; the unified-model suite passes 137 of 137. Three rows, no model, no spend, no program started.",
+ "selected_route": "ADAPT_THREE_ROWS_OF_AN_UNMERGED_PULL_REQUEST__REFUSE_UNLESS_EVERY_WORD_OF_THE_SENTENCE_IS_ACCOUNTED_FOR__AND_MEASURE_ON_FRESH_FOLDERS",
+ "causal_blocker": "THE_FRONT_DOOR_REFUSES_EVERY_REQUEST_TO_CHANGE_A_FILE__AND_THE_ONE_PULL_REQUEST_THAT_ADDS_SUCH_ROWS_CANNOT_MERGE__IT_REGISTERS_SIXTEEN_ROWS_AT_ONCE__ITS_ROWS_ARE_SELECTED_BY_SHARED_WORDS_AND_PASSED_13_OF_96_REQUESTS_WITH_A_WRONG_RESULT__AND_ITS_COMPILER_CHANGE_FAILS_15_EXISTING_TESTS",
+ "expected_parent_change": "A_PLAIN_REQUEST_TO_COPY_A_FILE_TO_RENAME_A_FILE_OR_TO_APPEND_A_LINE_IS_CARRIED_OUT_AT_THE_FRONT_DOOR_EXACTLY_AS_STATED__AND_A_REQUEST_WITH_A_WORD_NO_ROW_ACCOUNTS_FOR_IS_REFUSED_BEFORE_ANYTHING_IS_WRITTEN",
+ "expected_parent_frontier_change": "THE_FRONT_DOOR_GAINS_ITS_FIRST_THREE_ROWS_THAT_CHANGE_FILES_ON_REQUEST__EACH_BEHIND_A_CHECK_THAT_THE_ROW_ACCOUNTS_FOR_EVERY_WORD__ZERO_CAPABILITY_CREDIT_UNTIL_THE_PUBLIC_RUNNER_RECEIPT_AND_THE_REFEREE_ADMIT_THE_COMMIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NO_BENCHMARK_CLAIM",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FRONT_DOOR_REFUSES_EVERY_REQUEST_TO_CHANGE_A_FILE__AND_THE_ONE_PULL_REQUEST_THAT_ADDS_SUCH_ROWS_CANNOT_MERGE__IT_REGISTERS_SIXTEEN_ROWS_AT_ONCE__ITS_ROWS_ARE_SELECTED_BY_SHARED_WORDS_AND_PASSED_13_OF_96_REQUESTS_WITH_A_WRONG_RESULT__AND_ITS_COMPILER_CHANGE_FAILS_15_EXISTING_TESTS",
+ "falsification_condition": "ONE_FRESH_INSTANCE_ON_WHICH_THE_FOLDER_AFTERWARDS_DIFFERS_BY_ONE_BYTE_OR_ONE_NAME_FROM_WHAT_THE_REQUEST_DETERMINES__OR_A_REQUEST_THAT_MUST_BE_REFUSED_IS_ANSWERED_OR_CHANGES_ANYTHING__OR_A_TEST_THAT_PASSES_ON_THE_BASE_COMMIT_FAILS_ON_THIS_ONE",
+ "stop_condition": "THE_TRUE_CAPABILITY_HARNESS_PASSES_ON_THE_PUBLIC_RUNNER__THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__AT_MOST_THREE_CAPABILITIES_ARE_REGISTERED__NO_PROTECTED_PATH_IS_TOUCHED__NO_FAMILY_IS_FLIPPED",
+ "explicit_user_authorization": "Owner decision in this session on 2026-11-11: asked what to work on next after instructing the merge of pull request #6656, the owner chose 'Both, rows first' -- land the other file rows three per pull request while the sandbox work is prepared. No instruction to merge this pull request has been given; it is opened for the owner's decision.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+   "canonical/capabilities/true/generators/file_change_request_gen_v1.py",
+   "canonical/capabilities/true/oracles/file_change_request_oracles_v1.py",
+   "canonical/runtime/file_change_true_capability_adapter_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/goal_compiler.py",
+   "canonical/runtime/goal_front_compiler_v1.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/runtime/bound_capabilities/file_ops.py",
+   "canonical/runtime/bound_capabilities/file_edit.py",
+   "canonical/runtime/bound_capabilities/stated_file_path.py",
+   "canonical/runtime/file_artifact_expectation_v1.py",
+   "canonical/runtime/verify_file_facts_provenance_v1.py",
+   "canonical/tests/test_the_line_to_add_is_what_the_sentence_states_v1.py",
+   "canonical/tests/test_a_copy_names_its_destination_v1.py",
+   "canonical/tests/test_a_writer_writes_only_the_file_the_sentence_names_v1.py",
+   "canonical/tests/test_file_ops_refuse_to_destroy_v1.py",
+   "canonical/tests/test_overwrite_consent_is_not_a_keyword_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "BEFORE_AND_AFTER_ON_THE_SAME_INSTRUMENTS__FROZEN_FILE_SET_THROUGH_THE_FRONT_DOOR_25_TO_32_RIGHT_0_WRONG__TRUE_CAPABILITY_HARNESS_2000_OF_2000_FRESH_FOLDERS__WITH_THE_WORD_CHECK_SWITCHED_OFF_THE_HARNESS_FAILS_AT_410_OF_500__WITH_THE_APPENDED_LINE_LOSING_ITS_NEWLINE_AT_408_OF_500__WITH_A_RENAME_THAT_LEAVES_THE_SOURCE_BEHIND_AT_400_OF_500__BEFORE_THE_TWO_ADAPTER_FIXES_THE_SAME_HARNESS_FAILED_AT_480_OF_500_AND_THEN_1997_OF_2000__WITH_THE_COMPILERS_WRITER_RULES_APPLIED_TO_EVERY_ROW_15_OF_51_WORLD_BINDING_TESTS_FAILED_AND_WITH_THE_RULES_OPT_IN_ALL_51_PASS"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS_ON_THIS_TREE__NOT_PUBLIC_RUNNER_EVIDENCE__FROZEN_FILE_SET_25_TO_32_RIGHT_0_WRONG_64_REFUSED_OF_96__THE_SEVEN_NEW_ARE_THREE_RENAMES_TWO_COPIES_TWO_APPENDS__NO_FILE_CHANGED_IN_A_RUN_THAT_WAS_NOT_RIGHT__TRUE_CAPABILITY_HARNESS_2000_OF_2000_FOR_THE_NEW_SPEC_AND_FOR_EACH_OF_THE_TEN_EXISTING_SPECS_IN_A_FRESH_CLONE__UNIFIED_MODEL_SUITE_137_OF_137__THE_R2_V2_SUITE_HAS_THE_SAME_SINGLE_FAILURE_AS_THE_BASE_COMMIT__31_TESTS_IN_5_FILES_FOR_THE_ROWS_PASS__FOUND_AND_NOT_FIXED_HERE__IN_A_CHECKOUT_THAT_HOLDS_LEFTOVER_TEMPORARY_PYTHON_FILES_THE_BASE_COMMITS_FRONT_DOOR_ANSWERS_what_is_not_the_sum_of_the_numbers_in_F_WITH_AN_EMPTY_VERIFIED_RESULT_FROM_python_source_dead_code_v1__A_FRESH_CHECKOUT_REFUSES_IT",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_BOUND_OBLIGATIONS_ARE_THE_COMPUTER_USE_ONES__THREE_FILE_OPERATIONS_IN_FIFTEEN_PHRASINGS_ARE_FAR_FROM_EITHER",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-11T17:29:29Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_ADDS_THREE_ROWS_WHOSE_MEASUREMENT_BECOMES_EVIDENCE_ONLY_ON_THE_PUBLIC_RUNNER",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "THREE_FILE_CHANGING_ROWS_THAT_REFUSE_UNLESS_EVERY_WORD_IS_ACCOUNTED_FOR",
+   "decisive_question": "DOES_THE_FOLDER_AFTERWARDS_HOLD_EXACTLY_WHAT_THE_REQUEST_DETERMINES__AND_IS_A_REQUEST_WITH_A_FOREIGN_WORD_REFUSED_WITH_NOTHING_CHANGED",
+   "falsifier_id": "ONE_FRESH_FOLDER_THAT_DIFFERS_BY_A_BYTE_OR_A_NAME__OR_A_REQUEST_THAT_MUST_BE_REFUSED_AND_IS_NOT",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_COUNTEREXAMPLES_THE_HARNESS_FOUND_WERE_FIXED_AND_PINNED_BY_A_TEST__A_QUOTED_LINE_APPENDED_WITH_ITS_MARKS_AND_A_SECOND_STATED_LINE_DROPPED__2000_FRESH_FOLDERS_THEN_PRODUCED_NONE__THE_KNOWN_LIMITS_ARE_STATED_IN_THE_SPEC__FIFTEEN_PHRASINGS_ONLY__NO_OVERWRITE_REQUESTS__A_WORD_WITH_AN_APOSTROPHE_IS_REFUSED"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "2d35496910ded9755de6a59b36a7f456dc0b7e10",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "A_PERSON_ASKS_IN_PLAIN_WORDS_TO_COPY_A_FILE_RENAME_A_FILE_OR_ADD_A_LINE__AND_EITHER_THE_FOLDER_HOLDS_EXACTLY_THAT_AFTERWARDS_OR_NOTHING_WAS_TOUCHED",
+  "selected_route": "ADAPT_THREE_ROWS_OF_AN_UNMERGED_PULL_REQUEST__REFUSE_UNLESS_EVERY_WORD_OF_THE_SENTENCE_IS_ACCOUNTED_FOR__AND_MEASURE_ON_FRESH_FOLDERS",
+  "selected_surviving_route": "ADAPT_THE_COPY_RENAME_AND_APPEND_ROWS_OF_PULL_REQUEST_6602_TO_CURRENT_MAIN__GATED_BY_WORD_COVERAGE__WITH_THE_WRITER_BINDING_RULES_MADE_OPT_IN",
+  "deleted_or_bypassed_paths": [
+   "THIRTEEN_OF_THE_SIXTEEN_ROWS_OF_PULL_REQUEST_6602__NOT_REGISTERED_HERE",
+   "ITS_CHANGES_TO_FIVE_MODULES_THAT_THESE_THREE_ROWS_DO_NOT_NEED__composer_route_v1__capability_selection_retrieval_v1__raw_goal_trace_acceptance_v1__brain_unified_model_v1__grounded_action_v1",
+   "ITS_CHANGES_TO_TWO_BYTE_PINNED_MODULES__astra_runtime_AND_capability_execution_trace_capsule_v1",
+   "ITS_WORKFLOW_CHANGE"
+  ],
+  "stop_condition": "THE_TRUE_CAPABILITY_HARNESS_PASSES_ON_THE_PUBLIC_RUNNER__THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__AT_MOST_THREE_CAPABILITIES_ARE_REGISTERED__NO_PROTECTED_PATH_IS_TOUCHED__NO_FAMILY_IS_FLIPPED",
+  "expected_parent_level_state_change": "THE_FRONT_DOOR_GAINS_ITS_FIRST_THREE_ROWS_THAT_CHANGE_FILES_ON_REQUEST__EACH_BEHIND_A_CHECK_THAT_THE_ROW_ACCOUNTS_FOR_EVERY_WORD__ZERO_CAPABILITY_CREDIT_UNTIL_THE_PUBLIC_RUNNER_RECEIPT_AND_THE_REFEREE_ADMIT_THE_COMMIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NO_BENCHMARK_CLAIM",
+  "why_selected_route_is_fastest_sufficient": "THE_ROWS_AND_THEIR_REFUSALS_ALREADY_EXIST_IN_AN_OPEN_PULL_REQUEST_WITH_TESTS__ADAPTING_THREE_OF_THEM_IS_LESS_WORK_AND_LESS_RISK_THAN_WRITING_FILE_WRITERS_AGAIN__THE_WORD_CHECK_REMOVES_THE_WRONG_PASSES__AND_THREE_IS_WHAT_THE_REFEREE_ADMITS_IN_ONE_CHANGE",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "ADAPT_THREE_ROWS_OF_PULL_REQUEST_6602_BEHIND_A_WORD_CHECK",
+   "LAND_PULL_REQUEST_6602_AS_IT_IS__REJECTED_REFEREE_FLOOD_RULE_13_WRONG_PASSES_15_FAILING_TESTS",
+   "TAKE_ALL_OF_ITS_INFRASTRUCTURE_AND_REGISTER_THREE_ROWS__REJECTED_FIVE_OF_ITS_MODULE_CHANGES_ARE_NOT_NEEDED_BY_THESE_ROWS_AND_TWO_TOUCH_BYTE_PINNED_FILES",
+   "WRITE_NEW_FILE_WRITERS_SELECTED_BY_TAUGHT_WORDS__REJECTED_FOR_NOW_THE_EXISTING_WRITERS_CARRY_REFUSALS_THAT_TOOK_TWENTY_TEST_FILES_TO_PIN",
+   "INFER_A_cp_OR_mv_COMMAND_AND_RUN_IT__IMPOSSIBLE_THE_DOOR_MAY_NOT_EXECUTE_PROGRAMS_WITHOUT_AN_ADMITTED_CARRIER"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-11T17:29:29Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_FRONT_DOOR_AS_IT_IS__IT_REFUSES_ALL_60_EDIT_AND_FILE_MAKING_REQUESTS_OF_THE_FROZEN_FILE_SET",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/live_brain_route_admission_v1.py",
+     "canonical/runtime/goal_compiler.py",
+     "canonical/runtime/computer_execution_boundary_v1.py",
+     "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://glama.ai/mcp/servers/AperionAI/shield/tools/copy_file",
+     "https://fastcopy.jp/help/fastcopy_eng.htm"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/moxnixmdj/brain/pull/6602",
+     "https://github.com/EhsanShahbazii/FileSystem_AI_Agent",
+     "https://github.com/virat013S/nlt",
+     "https://github.com/yauntyour/cell.cpp",
+     "https://github.com/sharmaprayaagraj/File-managing-system"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://fazm.ai/t/ai-agent-file-operations-reliability",
+     "https://wuu73.org/aiguide/coding-file-edits-agents/",
+     "https://barrasso.me/posts/2026-04-22-text-to-bash-with-shell-talk/",
+     "https://aipoch.com/agent-skills/file-management"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "natural language file operations rename copy append executed with verification refuse overwrite deterministic no LLM agent tool 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "natural language to shell command or file query without LLM rule-based grammar tool 2026 deterministic NL interface open source"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "AI coding agent file edit tool safety \"refuses to overwrite\" verify write read back atomic rename 2026 release"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "new 2026 filesystem tool for agents safe copy move append \"no overwrite\" verified writes natural language requests released"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "LAND_PULL_REQUEST_6602_AS_IT_IS__SIXTEEN_ROWS_SELECTED_BY_SHARED_WORDS",
+     "evidence": [
+      "https://github.com/moxnixmdj/brain/pull/6602"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "MEASURED_ON_THE_FROZEN_FILE_SET_17_RIGHT_AND_13_PASSED_WITH_A_WRONG_RESULT_OF_96__THREE_OF_THEM_CHANGED_OR_LOST_A_FILE",
+      "CAPABILITY_STRENGTH": "SIXTEEN_ROWS_AGAINST_THREE",
+      "WALL_CLOCK": "CANNOT_MERGE__THE_REFEREE_ALLOWS_THREE_NEW_ROWS_PER_CHANGE_AND_ITS_BRANCH_CONFLICTS_WITH_MAIN",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "ITS_COMPILER_CHANGE_FAILS_15_OF_51_EXISTING_WORLD_BINDING_TESTS_ON_CURRENT_MAIN",
+      "VERIFIABILITY": "ITS_DISK_RECHECK_CONFIRMS_WHAT_WAS_WRITTEN__NOT_THAT_IT_IS_WHAT_THE_SENTENCE_ASKED"
+     }
+    },
+    {
+     "route": "A_MODEL_CHOOSES_AMONG_FILE_TOOLS__FS_AGENT_AND_MODEL_DRIVEN_EDIT_TOOLS",
+     "evidence": [
+      "https://github.com/EhsanShahbazii/FileSystem_AI_Agent",
+      "https://wuu73.org/aiguide/coding-file-edits-agents/",
+      "https://github.com/yauntyour/cell.cpp"
+     ],
+     "qualification_evidence": [
+      "https://github.com/EhsanShahbazii/FileSystem_AI_Agent"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "UNMEASURABLE_HERE__A_MODEL_IN_THE_PRODUCER_PATH_IS_FORBIDDEN_BY_THE_OWNERSHIP_LAW",
+      "CAPABILITY_STRENGTH": "FAR_BROADER_ON_OPEN_ENGLISH",
+      "WALL_CLOCK": "A_MODEL_ROUND_TRIP_PER_REQUEST",
+      "INCREMENTAL_COST": "NEEDS_A_MODEL_BACKEND",
+      "RELIABILITY": "NONDETERMINISTIC__ITS_OWN_GUIDES_SAY_THE_AGENT_MAY_NOT_VERIFY_ITS_CHANGES",
+      "VERIFIABILITY": "THE_CHOICE_OF_TOOL_AND_ARGUMENTS_IS_NOT_RECOMPUTABLE"
+     }
+    },
+    {
+     "route": "DETERMINISTIC_TEMPLATES_EMIT_A_SHELL_COMMAND__SHELLTALK_AND_NLT",
+     "evidence": [
+      "https://barrasso.me/posts/2026-04-22-text-to-bash-with-shell-talk/",
+      "https://github.com/virat013S/nlt"
+     ],
+     "qualification_evidence": [
+      "https://github.com/virat013S/nlt"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "PICKS_A_TEMPLATE_BY_LEXICAL_SIMILARITY__THE_SELECTION_RULE_THAT_PRODUCED_THE_13_WRONG_PASSES_HERE",
+      "CAPABILITY_STRENGTH": "HUNDREDS_OF_COMMAND_TEMPLATES",
+      "WALL_CLOCK": "EMITS_cp_AND_mv_COMMAND_LINES_THAT_THE_FRONT_DOOR_MAY_NOT_EXECUTE_WITHOUT_AN_ADMITTED_CARRIER",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DETERMINISTIC",
+      "VERIFIABILITY": "THE_COMMAND_IS_INSPECTABLE__NOTHING_CHECKS_THE_FOLDER_AFTERWARDS_AGAINST_THE_SENTENCE"
+     }
+    },
+    {
+     "route": "A_FILE_TOOL_CALLED_WITH_STRUCTURED_ARGUMENTS_THAT_NEVER_OVERWRITES__MCP_COPY_FILE_AND_FASTCOPY",
+     "evidence": [
+      "https://glama.ai/mcp/servers/AperionAI/shield/tools/copy_file",
+      "https://fastcopy.jp/help/fastcopy_eng.htm",
+      "https://github.com/sharmaprayaagraj/File-managing-system"
+     ],
+     "qualification_evidence": [
+      "https://glama.ai/mcp/servers/AperionAI/shield/tools/copy_file"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "THE_SAME_SAFETY_PROPERTY_THE_ROWS_ALREADY_HAVE__FAILS_IF_THE_DESTINATION_EXISTS__VERIFIES_BY_HASH",
+      "CAPABILITY_STRENGTH": "TAKES_SOURCE_AND_DESTINATION_AS_ARGUMENTS_FROM_A_CALLER__DOES_NOT_READ_A_SENTENCE__WHICH_IS_THE_GAP_HERE",
+      "WALL_CLOCK": "WOULD_STILL_NEED_THE_SENTENCE_READ_AND_BOUND",
+      "INCREMENTAL_COST": "ZERO_FOR_THE_OPEN_ONES",
+      "RELIABILITY": "DETERMINISTIC",
+      "VERIFIABILITY": "EQUAL_ON_THE_WRITE__ABSENT_ON_THE_REQUEST"
+     }
+    }
+   ],
+   "negative_search_summary": "FOUR_QUERY_FAMILIES__EVERY_PUBLIC_ROUTE_FOUND_EITHER_PUTS_A_MODEL_BETWEEN_THE_SENTENCE_AND_THE_FILE_TOOL__OR_EMITS_A_COMMAND_LINE_FOR_SOMETHING_ELSE_TO_RUN__OR_IS_A_SAFE_FILE_TOOL_THAT_TAKES_ARGUMENTS_AND_READS_NO_SENTENCE__NONE_REFUSES_A_REQUEST_BECAUSE_A_WORD_OF_IT_IS_UNACCOUNTED_FOR",
+   "selected_route": "ADAPT_THE_COPY_RENAME_AND_APPEND_ROWS_OF_PULL_REQUEST_6602_TO_CURRENT_MAIN__GATED_BY_WORD_COVERAGE__WITH_THE_WRITER_BINDING_RULES_MADE_OPT_IN",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-11T17:29:29Z",
+    "max_age_hours": 2,
+    "selected_route": "ADAPT_THE_COPY_RENAME_AND_APPEND_ROWS_OF_PULL_REQUEST_6602_TO_CURRENT_MAIN__GATED_BY_WORD_COVERAGE__WITH_THE_WRITER_BINDING_RULES_MADE_OPT_IN",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import ctypes, errno, hashlib, os, pathlib, re, shutil; print(\"ok\")' returned ok"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "LINUX_RENAMEAT2_NOREPLACE",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the rename row uses renameat2 with RENAME_NOREPLACE and refuses elsewhere; 2000 of 2000 fresh instances passed on this Linux 6.1 kernel"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "FILE_ROW_SOURCES_UNDER_TEST",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "file_ops.py, file_edit.py and stated_file_path.py are in the tree being judged; verify_file_facts_provenance_v1.py --check replays the three rows"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "TRUE_CAPABILITY_HARNESS_V1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "execution_guard/true_capability_harness_v1.py ran all eleven specs at 2000 instances in a fresh clone of this tree; all passed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "THE_FOLDER_AFTERWARDS_IS_WHAT_THE_SENTENCE_SAID_OR_IT_IS_UNTOUCHED",
+   "proxy_goals_deleted": [
+    "RAISE_THE_COUNT_ON_THE_FROZEN_FILE_SET",
+    "LAND_ALL_SIXTEEN_ROWS",
+    "KEEP_EVERY_PHRASING_THE_UNMERGED_PULL_REQUEST_SERVED"
+   ],
+   "surviving_necessity": "A_ROW_THAT_WRITES_MUST_NOT_RUN_FOR_A_SENTENCE_IT_DOES_NOT_FULLY_ACCOUNT_FOR__A_DISK_RECHECK_ALONE_CONFIRMS_THE_WRITE_NOT_THE_REQUEST"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "THE_FRONT_DOOR_ON_THE_BASE_COMMIT_REFUSES_ALL_60_EDIT_AND_FILE_MAKING_REQUESTS",
+    "run_adapter_locally_ALREADY_WATCHES_DESTINATIONS_AND_GUARDS_TRANSITIONS",
+    "goal_compiler_ALREADY_BINDS_goal_text_path_file_or_dir_AND_auto_path",
+    "computer_execution_boundary_v1_ADMITS_IN_PROCESS_STDLIB_ADAPTERS"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_THREE_ROWS_THEIR_ADAPTERS_AND_THEIR_REFUSALS_FROM_PULL_REQUEST_6602",
+    "ITS_INDEPENDENT_DISK_RECHECK_file_artifact_expectation_v1",
+    "ITS_PROVENANCE_VERIFIER_AND_FOUR_OF_ITS_TEST_FILES",
+    "true_capability_harness_v1_AND_ITS_WORKFLOW"
+   ],
+   "capability_work_deleted": [
+    "THIRTEEN_ROWS_AND_FIVE_MODULE_CHANGES_NOT_NEEDED_HERE"
+   ],
+   "external_existing_routes_checked": [
+    "FS_AGENT_LETS_A_MODEL_CALL_FILE_TOOLS",
+    "SHELLTALK_AND_NLT_EMIT_COMMAND_LINES",
+    "MCP_COPY_FILE_AND_FASTCOPY_NEVER_OVERWRITE_BUT_TAKE_ARGUMENTS_NOT_SENTENCES"
+   ],
+   "surviving_gap": "FIFTEEN_PHRASINGS_OF_THREE_OPERATIONS__THE_ROWS_ARE_STILL_SELECTED_BY_SHARED_WORDS_AND_ONLY_THEN_CHECKED__THE_WORD_CHECK_COVERS_ONLY_ROWS_THAT_DECLARE_IT__THE_141_ROWS_THAT_EXISTED_BEFORE_DO_NOT__THE_KERNEL_LANE_DOES_NOT_KNOW_THE_NEW_EXPECTATION_TYPE_SO_THESE_ROWS_RUN_ONLY_THROUGH_THE_FRONT_DOORS_LOCAL_LANE"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_ROWS_EXIST_BUT_COULD_NOT_LAND_AND_WERE_NOT_SAFE_TO_LAND",
+   "evidence": [
+    "THE_REFEREE_VERDICT_ON_PULL_REQUEST_6602_HAS_ONE_VIOLATION__SIXTEEN_NEW_CAPABILITIES_IN_ONE_CHANGE_LIMIT_THREE",
+    "ON_THE_FROZEN_FILE_SET_ITS_TREE_PASSED_13_OF_96_REQUESTS_WITH_A_WRONG_RESULT",
+    "ITS_goal_compiler_APPLIED_TO_CURRENT_MAIN_FAILS_15_OF_51_TESTS_OF_test_goal_compiler_world_binding_v1__MAINS_OWN_COMPILER_PASSES_ALL_51"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_NEED__IMPOSSIBLE_CHANGING_A_FILE_IS_THE_REQUEST",
+    "BYPASS_THE_REFEREE_LIMIT__FORBIDDEN_AND_NOT_OFFERED",
+    "SUBSTITUTE_A_SHELL_COMMAND__THE_DOOR_MAY_NOT_RUN_ONE"
+   ],
+   "surviving_causal_blocker": "THE_ROWS_HAD_NO_CHECK_THAT_THEY_ACCOUNT_FOR_THE_SENTENCE__AND_THEIR_COMPILER_RULES_WERE_APPLIED_TO_ROWS_THAT_NEVER_ASKED_FOR_THEM"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADAPT_THREE_ROWS",
+    "THEN_GATE_THEM_BY_WORD_COVERAGE",
+    "THEN_MEASURE_ON_FRESH_FOLDERS_AND_FIX_WHAT_THE_MEASUREMENT_FINDS"
+   ],
+   "losing_routes_reason": "THE_WHOLE_PULL_REQUEST_LOSES_ON_THE_REFEREE_AND_ON_MEASURED_WRONG_PASSES__NEW_WRITERS_LOSE_ON_REDOING_PINNED_REFUSALS__EXTERNAL_ROUTES_LOSE_ON_A_MODEL_OR_ON_NEEDING_SOMETHING_ELSE_TO_RUN_A_COMMAND",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_EXISTING_TRUE_CAPABILITY_HARNESS_IS_USED_UNCHANGED__FOLDERS_ARE_GENERATED_BECAUSE_THE_TRUTH_MUST_BE_KNOWN_WITHOUT_READING_ANYTHING_BACK__THE_INDEPENDENT_ORACLE_COMPUTES_THE_FOLDER_FROM_THE_GENERATORS_DESCRIPTION_AND_NEVER_PARSES_THE_SENTENCE__EVERY_WRITE_IS_A_REAL_WRITE_ON_DISK_THROUGH_THE_FRONT_DOOR"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_QUESTION_ROWS_OF_PULL_REQUEST_6602_OVERLAP_THE_TAUGHT_WORDS_ROW_AND_NEED_NOT_LAND"
+   ],
+   "note": "EVERY_ROW_THAT_EXISTED_BEFORE_BINDS_AS_BEFORE__THE_WRITER_RULES_APPLY_ONLY_TO_ROWS_THAT_DECLARE_request_word_coverage_required",
+   "adjacent_capabilities_absorbed": [
+    "THE_FRONT_DOOR_REFUSES_A_WRITING_ROW_WHEN_THE_SENTENCE_PROMISES_A_FILE_THE_ROW_DOES_NOT_DECLARE_IT_WRITES"
+   ],
+   "fresh_reuse_plan": "THE_SAME_GATE_AND_THE_SAME_KIND_OF_SPEC_SERVE_THE_NEXT_ROWS__AND_THE_GATE_CAN_BE_DECLARED_ON_ROWS_THAT_EXISTED_BEFORE_ONE_MEASURED_ROW_AT_A_TIME"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_MEASURING_PULL_REQUEST_6602_AS_A_WHOLE"
+   ],
+   "search_stop_decision": "A_CORRECTNESS_SUFFICIENT_ROUTE_EXISTS_AND_PASSES_THE_HARNESS__THE_FRONTIER_WAS_REFRESHED_TODAY__NO_UNRESOLVED_PLAUSIBLE_DOMINATOR_REMAINS",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "THE_OWNER_DECIDES_WHETHER_TO_MERGE__THEN_EITHER_THE_NEXT_ROWS_OF_PULL_REQUEST_6602_THREE_AT_A_TIME__OR_THE_WORD_CHECK_FOR_THE_ROWS_THAT_EXISTED_BEFORE_IT__WHICH_IS_WHAT_THE_DEAD_CODE_FINDING_CALLS_FOR",
+ "prior_work_reused": [
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/goal_compiler.py",
+  "canonical/runtime/goal_front_compiler_v1.py",
+  "canonical/runtime/computer_execution_boundary_v1.py",
+  "execution_guard/true_capability_harness_v1.py"
+ ]
+}

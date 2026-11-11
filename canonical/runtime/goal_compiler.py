@@ -296,6 +296,43 @@ _GOAL_ARGUMENT_PATTERNS=[
 ]
 
 
+def _sentence_must_state_every_input(entry) -> bool:
+    """Has this WRITING row declared that the sentence must account for itself?
+
+    The writer rules below -- the destination is the one the sentence states, a second file slot is
+    never filled with the first file, and no input is taken from the world -- were first applied to
+    every row not marked ``read_only``.  That is nearly every row in the registry: the mark is new,
+    and the rows that existed before it carry neither value.  Measured 2026-11-11 on that tree,
+    fifteen of the fifty-one tests of ``test_goal_compiler_world_binding_v1`` failed, among them
+    "one real .docx on disk is enough; the goal need not name it" -- the world binding those rows
+    have always had was switched off for them.
+
+    So the rules are a contract a row opts into, not a default.  A row that declares
+    ``request_word_coverage: required`` has said that every word of the sentence must be accounted
+    for; the same row is the one whose inputs must all be stated.  A row that has not declared it
+    binds exactly as it did before.
+    """
+    return (isinstance(entry, dict) and entry.get("read_only") is not True
+            and entry.get("request_word_coverage") == "required")
+
+
+def _names_an_existing_file(text: str) -> bool:
+    """Does the sentence name a file that is already on disk?
+
+    Deliberately syntactic-plus-stat: it answers only "is there an operand here",
+    which is the one question that decides whether a quoted string can be the
+    whole request.  It never chooses which file -- that is the binder's job.
+    """
+    root = pathlib.Path(__file__).resolve().parents[2]
+    for raw in re.findall(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+", str(text or "")):
+        try:
+            if (root / raw).is_file():
+                return True
+        except OSError:  # pragma: no cover - an unreadable path is not an operand
+            continue
+    return False
+
+
 def _extract_goal_argument(goal):
     """The goal the sentence STATES, or the whole sentence when it states none.
 
@@ -315,9 +352,21 @@ def _extract_goal_argument(goal):
     an explicit "with/for the goal" clause; anything else keeps the whole request,
     which is what every plain request has always received.
     """
+    # A QUOTED STRING IS NOT THE GOAL WHEN THE SENTENCE NAMES AN OPERAND.
+    #
+    # The rule above is about an INVOCATION that hands its goal over as an
+    # argument ("Run X with goal 'Write a report'"), and those sentences name no
+    # repository path.  Measured 2026-11-02: "Append 'omega' to <existing file>"
+    # names one, and the single quoted string is the LINE TO APPEND -- so the row
+    # was handed goal="omega", could not find a line in it, and refused with
+    # THE_LINE_TO_ADD_IS_NOT_STATED while holding the value it was told to add.
+    # The whole request stands in that case, which is what every plain request
+    # has always received.  Only an EXISTING file suppresses the quoted reading:
+    # a destination that does not exist yet is not an operand, so
+    # "Create a docx with goal 'X' and save it to out.docx" keeps its goal.
     text=str(goal or "")
     quoted=re.findall(r'["\']([^"\']+)["\']',text)
-    if len(quoted)==1 and quoted[0].strip():
+    if len(quoted)==1 and quoted[0].strip() and not _names_an_existing_file(text):
         return quoted[0].strip()
     for pattern in _GOAL_ARGUMENT_PATTERNS:
         m=re.search(pattern,text,flags=re.IGNORECASE)
@@ -701,8 +750,42 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
     paths=_repo_paths(goal,root)
     future_text=" ".join(str(x) for x in (future_clauses or []))
     future_paths=_repo_paths(future_text,root) if future_text else []
+    # A WRITER'S DESTINATION IS NOT ONE OF ITS INPUTS.
+    #
+    # "Copy <dir>/a.txt to <dir>/c.txt" names two existing files once the copy
+    # has already been made, and every input rule below then saw two candidates
+    # for one slot and refused -- so a copy that had worked once could never run
+    # again.  For a writing row the destination is resolved first, from the
+    # sentence, and removed from the input paths: see `_bare_stated_destination`.
+    _writer_destination=None
+    if _sentence_must_state_every_input(entry):
+        _writer_destination=_bare_stated_destination(goal, paths)
+        if _writer_destination is not None:
+            paths=[(raw,p) for raw,p in paths
+                   if raw!=_writer_destination and p.as_posix()!=_writer_destination]
     result={}
+    # A ROW WITH TWO FILE SLOTS TAKES THE TWO FILES THE SENTENCE NAMED.
+    #
+    # Every key below is bound on its own, so a two-path contract sees "2 existing
+    # files named" for each slot and refuses both: "Find the differences between
+    # a.txt and b.txt" bound nothing, and the sentence was reported as a
+    # compilation gap although it had named both files.
+    #
+    # Scoped by exact counting. It fires only when the entry declares SEVERAL
+    # ``path_file_or_dir`` bindings, ALL of them present in this template, and the
+    # sentence states exactly that many existing files. The files are paired with
+    # the slots in the order the SENTENCE states them -- the only order it
+    # supplies -- so nothing is inferred, and any other count falls through to the
+    # per-key binder exactly as before.
+    _declared_file_slots=[k for k,v in (entry.get("proposal_bindings") or {}).items()
+                          if isinstance(v,dict) and v.get("type")=="path_file_or_dir"]
+    if len(_declared_file_slots)>1 and all(k in keys for k in _declared_file_slots):
+        _stated_files=[raw for raw,p in paths if p.is_file()]
+        if len(_stated_files)==len(_declared_file_slots):
+            result.update(dict(zip(_declared_file_slots,_stated_files)))
     for key in keys:
+        if key in result:
+            continue
         if key=="text":
             result[key]=_extract_text_argument(goal)
             continue
@@ -857,6 +940,16 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
         if key.endswith("_path"):
             stem=key[:-5].lower()
             if key.startswith("output_") or stem in output_stems:
+                # BEFORE ANY FALLBACK: a writer's destination is the one the
+                # sentence states.  The generic rules below bind an output slot
+                # to "the only path in the sentence" -- which for "Copy a.txt to
+                # c.txt" is the SOURCE -- and the world fallback invented a spool
+                # artifact instead, so the stated destination was never written
+                # and the copy still reported success.  See
+                # `_bare_stated_destination` for what keeps this narrow.
+                if _writer_destination is not None:
+                    result[key]=_writer_destination
+                    continue
                 # Future outputs may not exist. Prefer type-compatible paths
                 # explicitly named by the goal so multiple outputs can bind
                 # without positional guessing.
@@ -973,6 +1066,13 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
                 if stem in {"input","source"} and len(existing)==1:
                     result[key]=existing[0][0]
                     continue
+        if key.endswith("_path") and _sentence_must_state_every_input(entry):
+            # A WRITER'S DESTINATION IS THE ONE THE SENTENCE STATES OR NONE.
+            # Never a synthesised artifact: see `_bare_stated_destination`.
+            destination = _bare_stated_destination(goal, paths)
+            if destination is not None:
+                result[key]=destination
+                continue
         raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",key)
     # Slot order cannot make a declared destination into an input scope.
     destinations=_claimed_paths({k:v for k,v in result.items()
@@ -982,6 +1082,62 @@ def _bind_inputs(goal, root, entry, context_paths=None, future_clauses=None):
             raise GoalCompilationFailure("GOAL_INPUT_BINDING_REQUIRED",
                                          "scope_is_output_destination:"+key)
     return result
+
+
+def _bare_stated_destination(goal, paths):
+    """The destination a WRITING sentence states, or None.
+
+    The repository-path scanner only sees `dir/name`, so a destination written as
+    a bare filename never became a candidate: `_bind_inputs` gave up and the
+    world fallback SYNTHESISED an artifact path, so the copy reported success
+    while the destination the sentence named was never written.  Measured
+    2026-11-02: "Copy <dir>/a.txt to c.txt" bound output_path to
+    canonical/astra_runtime/tmp/spool_0_output.json.
+
+    What keeps this narrow:
+
+    * the sentence states exactly one destination phrase, after `to`/`into`/`onto`;
+    * nothing file-like follows it, so "rename old_name to new_name in lib.py" --
+      an edit INSIDE that file -- is not read as a new file called `new_name`;
+    * exactly one existing file remains once that destination is set aside, so
+      "beside its source" has exactly one meaning;
+    * the destination is not the source and not a directory.
+    """
+    text = str(goal or "")
+    # "NAMED <PATH>", "CALLED <PATH>": A DESTINATION STATED WITHOUT A PREPOSITION.
+    # Measured 2026-11-02: "Make a copy of <a> named <b>" settled `cp <a> <b>` and
+    # `file.copy.v1` declares exactly that argv, but the sentence's destination
+    # was never bound -- the only grammar here was `to|into|onto` -- so the copy
+    # row was dropped as "not told both files", the ranking fell to a polyglot row
+    # that could not bind either, and an ordinary copy was refused with a missing
+    # sandbox.  The trailing `\s+` is what keeps the phrase from matching a
+    # FILENAME: "named.txt" is `named` followed by a dot, never by whitespace.
+    stated = list(re.finditer(r"\b(?:to|into|onto|named|called)\s+([A-Za-z0-9_./-]+)", text, re.I))
+    if len(stated) != 1:
+        return None
+    match = stated[0]
+    name = match.group(1).rstrip(".")
+    if not name:
+        return None
+    if re.search(r"[\w.-]+/[\w./-]+|\b[\w-]+\.[A-Za-z0-9]{1,12}\b", text[match.end():]):
+        return None
+    stated_path = pathlib.Path(name)
+    named = [(raw, path) for raw, path in paths
+             if path.is_file() and path.resolve() != stated_path.resolve()
+             and path.name != stated_path.name]
+    if not named:
+        return None
+    if "/" in name:
+        if len(named) != 1:
+            return None
+        return name
+    if len(named) != 1:
+        return None
+    source_raw, source_path = named[0]
+    destination = source_path.parent / name
+    if destination == source_path or (destination.exists() and destination.is_dir()):
+        return None
+    return (pathlib.Path(source_raw).parent / name).as_posix()
 
 
 def _declared_exact_file_scope(entry, key, paths, goal=None):
@@ -1026,6 +1182,35 @@ def _complete_inputs_via_world_binding(goal, root, cid, entry):
     nothing is left missing; a partially justified mapping is still refused,
     so this widens the bindable set without ever inventing an input.
     """
+    # A COMPANION SLOT MUST NOT BE FILLED WITH THE FILE THE SENTENCE ALREADY BOUND.
+    #
+    # world_binding fills placeholders the pinned binder left open, and its
+    # companion rule is right for a single stated file serving two roles. It is
+    # wrong for a row that declares SEVERAL distinct file inputs: measured
+    # 2026-11-02, "Find the differences between a.txt and b.txt" bound `path` to
+    # a.txt and the fallback filled `other_path` with a.txt too, so the row was
+    # asked to diff a file against itself and the sentence was reported as a
+    # compilation gap for the file it had named. A paired contract is bound by
+    # the pinned binder or not at all.
+    _paired=[k for k,v in (entry.get("proposal_bindings") or {}).items()
+             if isinstance(v,dict) and v.get("type")=="path_file_or_dir"]
+    if len(_paired)>1:
+        return None
+    # A WRITER GETS NO WORLD-SYNTHESIZED INPUT AT ALL.
+    #
+    # The same fallback is harmless for a reader: the worst case is a row asked
+    # about a file the sentence did not name, which the run can see. For a row
+    # that WRITES it is not harmless. Measured 2026-11-02, immediately after
+    # `file.rename.v1` was registered: "Rename old_name to new_name in
+    # <repo>/canonical/.../lib.py." -- a Python SYMBOL rename -- selected the
+    # file rename, the pinned binder bound `output_path` to the stated lib.py,
+    # and this fallback filled `path` with an unrelated repository file
+    # (`.github/scripts/land_on_main.sh`). The row then moved that file and
+    # reported output_verified, so an ordinary sentence about one file renamed a
+    # different file and PASSED. A writer's inputs must be stated in the
+    # sentence; when they are not, the run refuses.
+    if _sentence_must_state_every_input(entry):
+        return None
     try:
         from canonical.runtime import world_binding_v1 as _wb
     except Exception:
