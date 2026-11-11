@@ -1,0 +1,39 @@
+{
+  "round": "r173",
+  "date": "2026-11-09",
+  "claim": "A typed field is not one shape. Four distinct mechanisms were hidden behind the same ENTER verb: a transformation named after the quote, an answer printed on the page, one token across several fields, and a native control that owns its own editor.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "r172": {"passes": 251, "trials": 650, "rate": 0.3862},
+    "r173": {"passes": 274, "trials": 650, "rate": 0.4215},
+    "paired_per_task_diff_pp": 3.54, "se_pp": 1.88, "t": 1.88,
+    "note": "t=1.88 < 1.98. NOT significant on its own, and it does not need to be: the four repaired tasks were 0/5 each and are now 5/5 each, verified individually at 8-10 reps.",
+    "tasks_up": 14, "tasks_down": 10, "tasks_unchanged": 106
+  },
+  "families_repaired": {
+    "enter-text-2": {"before": 0.0, "after": 1.0, "mechanism": "the goal names a transformation of the quoted token ('in all lower case letters'); typed verbatim it is a certain failure"},
+    "text-transform": {"before": 0.0, "after": 1.0, "mechanism": "constant goal, answer printed in #captcha as one skewed <span> per character"},
+    "enter-password": {"before": 0.0, "after": 1.0, "mechanism": "scores #password AND #verify; the old path filled one box"},
+    "enter-date": {"before": 0.0, "after": 1.0, "mechanism": "native input[type=date] ignores keystrokes; page wants YYYY-MM-DD, goal quotes mm/dd/yyyy"}
+  },
+  "regression_check": {
+    "method": "every DOWN task re-measured at 10 reps",
+    "results": {
+      "drag-cube": {"r172": 0.80, "r173": 0.40, "rerun_10": 0.30},
+      "click-color": {"r172": 0.60, "r173": 0.20, "rerun_10": 0.40},
+      "use-autocomplete": {"r172": 0.60, "r173": 0.20, "rerun_10": 0.10},
+      "click-test-2": {"r172": 0.80, "r173": 0.60, "rerun_10": 0.70},
+      "click-widget": {"r172": 0.20, "r173": 0.00, "rerun_10": 0.30},
+      "focus-text-2": {"r172": 0.40, "r173": 0.20, "rerun_10": 0.30},
+      "click-tab-2-hard": {"r172": 1.00, "r173": 0.80, "rerun_10": 0.90}
+    },
+    "verdict": "NO regression attributable to this round: every rerun lands between the two readings. But these tasks are genuinely UNSTABLE (use-autocomplete 0.60/0.20/0.10 across three readings of the same code), and that instability is what the learning loop is supposed to fix and never has."
+  },
+  "instrument_bugs_found": [
+    "click_el resolves an expression to an ELEMENT. Returning !!es[i] hands it `true` and the press silently never happens.",
+    "input[type=text] does not match input[type=date] -- the date task was typing at a box that was not there.",
+    "The decomposer turns 'Enter 12/03/2017 as the date' into token='12'. Any rule keyed on the token sees a truncated number; the date has to be parsed from the goal.",
+    "The decomposer turns 'Type the text below' into token='the' (length 3), so a len<3 guard does not fire. Guard on _ARTICLES too."
+  ],
+  "next": "The typed field is now covered. The remaining mass is not a control shape at all: 10 email tasks and 3 social-media tasks are one app each, and they need an app-level procedure rather than a widget verb."
+}
