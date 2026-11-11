@@ -1717,23 +1717,38 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     except Exception:  # noqa: BLE001 - no verifier is the old behaviour, not a crash
         _relation_goal = None
 
+    # WHAT THE SEARCH IS HANDED IS A LISTING, NOT A PATH.
+    #
+    # env.state() returns "notes.txt:43:870c73dc8fc8" -- names, sizes and a hash of
+    # each file. The first version of this predicate treated that string as a
+    # directory to walk: pathlib.Path(listing).is_dir() is False, produced stayed
+    # None, and the code FELL THROUGH TO `return True` on every call. So the
+    # relation-aware oracle added in r151 never executed once, and drive() stopped at
+    # the first action whose name appeared -- measured 2026-11-09, uppercase closed
+    # on plan ['run_sort'] in 8 of a 120-trial budget, was rejected by verification,
+    # and the retry loop banned one program at a time for 14 s.
+    #
+    # The predicate is evaluated inside the sandbox, so it reads the real file rather
+    # than parsing the listing. The listing check stays as the cheap pre-test because
+    # it is what says whether the target exists at all.
     def is_goal(snap: Any) -> bool:
         if target not in str(snap):
             return False
         if _relation_goal is None:
             return True
         try:
-            produced = None
-            for cand in pathlib.Path(str(snap)).rglob(target) if pathlib.Path(str(snap)).is_dir() else []:
-                produced = cand
-                break
-            if produced is None:
-                produced = pathlib.Path(str(snap)) if pathlib.Path(str(snap)).is_file() else None
-            if produced is None:
-                return True          # name-based fallback; _verify_plan still checks content
             src = pathlib.Path(seed_file) if seed_file else None
             if src is None or not src.is_file():
-                return True
+                return True          # nothing to relate to; _verify_plan still checks
+            # the live sandbox the search is acting in
+            produced = None
+            live = getattr(is_goal, "_env", None)
+            if live is not None:
+                candidate = pathlib.Path(live.root) / target
+                if candidate.is_file():
+                    produced = candidate
+            if produced is None:
+                return True          # target not read back yet: let verification judge
             ok, _why = _relation_goal.verdict(gap, src, produced)
             return bool(ok)
         except Exception:  # noqa: BLE001 - an unreadable snapshot is not a pass
@@ -1933,6 +1948,9 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
                 break
             # once a move has been shown to produce the wrong bytes, a
             # recalled plan is not allowed to put it back
+            # bind the live sandbox so is_goal can read the produced FILE rather
+            # than parse a listing string (see the comment on is_goal above)
+            is_goal._env = env          # type: ignore[attr-defined]
             outcome = tl.drive(
                 env,
                 usable,
