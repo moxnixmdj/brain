@@ -1,0 +1,41 @@
+name: verify-professional-quality-r1-root-subject-binding-v1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py
+      - canonical/tests/test_professional_quality_r1_root_subject_binding_verify_v1.py
+      - canonical/governance/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_20261010_V1.json
+      - canonical/verification/PROFESSIONAL_QUALITY_R1_ROOT_SUBJECT_BINDING_VERIFY_20261010_V1.json
+      - canonical/governance/CURRENT_PROFESSIONAL_QUALITY_EXECUTION.json
+      - canonical/governance/PROFESSIONAL_QUALITY_P1_V3_SAME_SUBJECT_ROOT_BINDING_WORKLIST_20261010_V2.json
+      - .github/workflows/verify-professional-quality-r1-root-subject-binding-v1.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile exact verifier
+        run: python -m py_compile canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py
+      - name: Run verifier regressions
+        run: python -m unittest canonical.tests.test_professional_quality_r1_root_subject_binding_verify_v1 -v
+      - name: Verify exact canonical R1 binding
+        run: |
+          python canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py > /tmp/r1.json
+          python - <<'PY'
+          import json
+          out=json.load(open("/tmp/r1.json"))
+          assert out["pass"] is True, out
+          assert out["root_subject_binding_authority"] is True, out
+          assert out["global_subject_identity_authority"] is False, out
+          assert out["quality_authority"] is False, out
+          assert out["terminal_authority"] is False, out
+          assert out["terminal_credit_delta"] == 0, out
+          print(json.dumps(out, sort_keys=True))
+          PY
