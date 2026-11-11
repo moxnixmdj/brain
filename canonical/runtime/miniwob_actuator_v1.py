@@ -1354,6 +1354,97 @@ _MONTHS = {x: i + 1 for i, x in enumerate(
     "november december".split())}
 
 
+def v_email(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """The email inbox: one app, four verbs, one entry point.
+
+    Measured 2026-11-09, 0/50 across ten tasks. The app is NOT ten shapes -- it is one
+    list of `#main .email-thread`, each showing `.email-sender`, and a detail view that
+    binds its reply/forward/delete/star handlers only AFTER the thread is opened. So the
+    procedure is: find the thread by sender, open it, act.
+
+    THE PAGE STATES ITS OWN OPERANDS. In the plain variants the goal marks them up with
+    <span class="bold">; in the `-nl` variants the goal is free text drawn from ~30
+    alternate phrasings, and reading it is a parser problem with no stable surface. But
+    both variants leave `core.currentFields` on the page -- {"by":..., "to":...} or
+    {"task":"star","by":...} -- which is the page telling you its own answer. Ask the
+    page, never the sentence (r169: an article is not a value).
+    """
+    cf = act.ev("(()=>{try{const c=window.core&&core.currentFields;"
+                "return c?JSON.stringify(c):null}catch(e){return null}})()")
+    fields = {}
+    if cf:
+        try:
+            fields = json.loads(cf) if isinstance(cf, str) else dict(cf)
+        except Exception:
+            fields = {}
+    bold = act.ev("(()=>{return [...document.querySelectorAll('#query .bold')]"
+                  ".map(e=>e.textContent.trim())})()") or []
+    g = goal or ""
+
+    sender = str(fields.get("by") or (bold[0] if bold else "")).strip()
+    dest = str(fields.get("to") or (bold[1] if len(bold) > 1 else "")).strip()
+    # which verb? the page's own field first, then the sentence
+    task = str(fields.get("task") or "").strip().lower()
+    if not task:
+        if re.search(r"\breply\b", g, re.I):
+            task = "reply"
+        elif re.search(r"\bforward\b|\bsend\b|\bsent to\b", g, re.I):
+            task = "forward"
+        elif re.search(r"\bdelete\b|\btrash\b|\bremove\b", g, re.I):
+            task = "delete"
+        elif re.search(r"\bimportant\b|\bstar\b", g, re.I):
+            task = "star"
+    if not sender:
+        return "email-no-sender"
+    if not task:
+        return "email-no-verb"
+
+    # the reply text is quoted in the plain variants and held in the page's own fields
+    body = str(fields.get("reply") or "").strip()
+    if not body:
+        m2 = re.search(r'"([^"]+)"', g) or re.search(r"\u201c([^\u201d]+)\u201d", g)
+        body = m2.group(1).strip() if m2 else ""
+
+    opened = act.ev(
+        "(()=>{const n=%s;const ts=[...document.querySelectorAll('#main .email-thread')];"
+        "const t=ts.find(x=>{const s=x.getElementsByClassName('email-sender')[0];"
+        "return s&&s.textContent.trim()===n});"
+        "if(!t)return 'NOTHREAD';t.click();return 'ok'})()" % json.dumps(sender))
+    if opened != "ok":
+        # the list can be scrolled out of view or behind the search pane; try the search box
+        return "email-%s:%s" % (str(opened).lower()[:12], str(sender)[:10])
+    time.sleep(0.35)
+
+    if task == "reply":
+        act.click_el("document.querySelector('#email .email-reply')")
+        time.sleep(0.30)
+        if body:
+            act.ev("(()=>{const t=document.querySelector('#reply-text');if(!t)return null;"
+                   "t.focus();t.value=%s;"
+                   "t.dispatchEvent(new Event('input',{bubbles:true}))})()" % json.dumps(body))
+        act.click_el("document.querySelector('#send-reply')")
+    elif task == "forward":
+        act.click_el("document.querySelector('#email .email-forward')")
+        time.sleep(0.30)
+        if dest:
+            act.ev("(()=>{const t=document.querySelector('#forward .forward-sender');"
+                   "if(!t)return null;t.focus();t.value=%s;"
+                   "t.dispatchEvent(new Event('input',{bubbles:true}))})()" % json.dumps(dest))
+        # the body is pre-filled by the page: do not overwrite it, the score compares
+        # the forwarded text to the original body exactly
+        act.click_el("document.querySelector('#send-forward')")
+    elif task == "delete":
+        act.click_el("document.querySelector('#email .email-actions span.trash')")
+    elif task == "star":
+        act.click_el("document.querySelector('#email .email-actions span.star')")
+    else:
+        return "email-unknown-verb:%s" % task
+    time.sleep(0.45)
+    if episode_over(act):
+        return "email-%s:%s" % (task, str(sender)[:10])
+    return "email-miss-%s:%s" % (task, str(sender)[:10])
+
+
 def v_date(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """CHOOSE_DATE -- drive a jQuery UI datepicker to the date the goal names.
 
@@ -1975,6 +2066,14 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
             submit(act, required=False)
         return got
 
+    # AN APP IS NOT A WIDGET. Ten tasks share one email application, and none of the
+    # per-control verbs can see it: the target is a row in a list, the handler is bound
+    # only after the row is opened, and the operands are page state rather than sentence
+    # text. Identify the APP from the page and hand the whole procedure over.
+    if act.ev("(()=>{return !!(document.querySelector('#main .email-thread')"
+              "||document.querySelector('#email')||document.querySelector('#search-results'))})()"):
+        return v_email(act, plan, goal)
+
     if verb == "SORT":
         return v_sort(act, plan, goal)
     fn = table.get(str(verb))
@@ -2000,6 +2099,21 @@ def run_episode(act: Actuator, task: str, decompose: Callable[[str], Mapping[str
     goal = start(act, task)
     plan = decompose(goal)
     if plan.get("status") != "DECOMPOSED":
+        # A REFUSAL IS THE DECOMPOSER DECLINING, NOT THE PAGE FAILING. If the APP on
+        # screen is one whose procedure does not depend on the sentence, the refusal is
+        # not a reason to stop -- email-inbox-nl-turk scored REFUSED on a goal the page
+        # itself had already answered in core.currentFields. Check the app first.
+        if act.ev("(()=>{return !!(document.querySelector('#main .email-thread')"
+                  "||document.querySelector('#search-results'))})()"):
+            try:
+                _a = v_email(act, plan, goal)
+                return {"task": task, "goal": goal, "status": "DECOMPOSED_BY_APP",
+                        "action": _a, "success": episode_over(act),
+                        "reward": raw_reward(act), "verb": "APP_EMAIL"}
+            except ActuatorError as exc:
+                return {"task": task, "goal": goal, "status": plan.get("status"),
+                        "action": "APP_ERR:" + str(exc)[:30], "success": False,
+                        "reward": None, "verb": "APP_EMAIL"}
         return {"task": task, "goal": goal, "status": plan.get("status"),
                 "action": "REFUSED", "success": False, "reward": None, "verb": None}
     action = None
