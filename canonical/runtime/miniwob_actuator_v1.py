@@ -1241,6 +1241,92 @@ def v_tabs(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "tabs"
 
 
+_MONTHS = {x: i + 1 for i, x in enumerate(
+    "january february march april may june july august september october "
+    "november december".split())}
+
+
+def v_date(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """CHOOSE_DATE -- drive a jQuery UI datepicker to the date the goal names.
+
+    Measured 2026-11-09, family 0/20 across four tasks.
+
+    THE INPUT IS readOnly. #datepicker cannot be typed into, and the page scores
+    `d3.select('#datepicker')[0][0].value === q` -- an EXACT string compare against the
+    goal's own date text. So filling the field is not the task; picking the day is.
+
+    THE PICKER OPENS ON A MOUSE PRESS, NOT ON ELEMENT.CLICK(). element.click() left
+    .ui-datepicker at display:none; a real press at the input's centre opened it. This is
+    the r170 lesson on a different control: a point is not an element, and here the
+    converse -- the element is not a point.
+
+    THE GRID SHOWS A MONTH THAT IS OFTEN NOT THE ONE ASKED FOR (opened on December 2016
+    while the goal read 11/15/2016), so navigate the header with prev/next until the
+    header matches, THEN take the day link. Other-month cells are
+    ui-state-disabled with no <a>, so a day number alone is not enough -- match a cell
+    that still has its link.
+
+    The day is taken by exact text, not by index: the widget zero-pads the value itself
+    (clicking 3 on April produced 04/03/2016), and the score is the exact string.
+    """
+    txt = goal or ""
+    got = act.ev("(()=>{const q=document.querySelector('#query');return q?q.innerText:''})()") or txt
+    md = re.search(r'(\d{1,2})\s*/\s*(\d{1,2})\s*/\s*(\d{4})', got)
+    if md:
+        mo, day, yr = int(md.group(1)), int(md.group(2)), int(md.group(3))
+    else:
+        mn = re.search(r'([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})', got)
+        if not mn or mn.group(1).lower() not in _MONTHS:
+            return "date-noparse"
+        mo, day, yr = _MONTHS[mn.group(1).lower()], int(mn.group(2)), int(mn.group(3))
+
+    inp = ("document.querySelector('#datepicker')"
+           "||document.querySelector('input[readonly]')"
+           "||document.querySelector('.ui-datepicker-trigger')")
+    if not act.ev("(()=>{return !!((()=>{try{return %s}catch(e){return null}})())})()" % inp):
+        return "date-noinput"
+    if act.ev("(()=>{const d=document.querySelector('.ui-datepicker');"
+              "return d?getComputedStyle(d).display!=='none':false})()") is not True:
+        b = act.box(inp)
+        if not b:
+            return "date-nobox"
+        act.click(b["cx"], b["cy"])
+        time.sleep(0.55)
+
+    for _ in range(30):
+        hdr = act.ev("(()=>{const t=document.querySelector('.ui-datepicker-title');"
+                     "return t?t.innerText:null})()")
+        if not hdr:
+            return "date-noheader"
+        hm = re.search(r'([A-Za-z]+)\s*(\d{4})', hdr)
+        if not hm or hm.group(1).lower() not in _MONTHS:
+            return "date-badheader:%s" % str(hdr)[:10]
+        cm, cy = _MONTHS[hm.group(1).lower()], int(hm.group(2))
+        if cm == mo and cy == yr:
+            break
+        # jQuery UI's own next/prev: this is the widget's navigation, not a guess
+        act.click_el("document.querySelector('.ui-datepicker-%s')"
+                     % ("next" if (cy, cm) < (yr, mo) else "prev"))
+        time.sleep(0.30)
+    else:
+        return "date-navfail"
+
+    ok = act.ev(
+        "(()=>{const d=String(%d);const tds=[...document.querySelectorAll("
+        "'.ui-datepicker-calendar td')];"
+        "const td=tds.find(x=>{const a=x.querySelector('a');"
+        "return a&&a.textContent.trim()===d&&!x.className.includes('other-month')});"
+        "if(!td)return 'NODAY';td.querySelector('a').click();return 'ok'})()" % day)
+    if ok != "ok":
+        return "date-noday:%s" % str(ok)[:10]
+    time.sleep(0.40)
+    if not episode_over(act):
+        submit(act, required=False)
+        time.sleep(0.25)
+    val = act.ev("document.querySelector('#datepicker').value")
+    return "date:%s" % (val or "?")
+
+
 def v_pie(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """EXPAND_AND_CLICK on a wheelnav (Raphael SVG) pie menu.
 
@@ -1748,13 +1834,19 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         "SET_SLIDERS": v_slider, "SCROLL_TO": v_scroll, "ENTER": v_type,
         "FIND_AND_TYPE": v_type, "DRAW": v_draw_line, "MOVE": v_move_cube,
         "PUSH_SEQUENCE": v_push_sequence, "FOCUS": v_focus, "SWITCH_TABS": v_tabs,
-        "EXPAND_AND_CLICK": v_expand, "CLICK": v_click,
+        "EXPAND_AND_CLICK": v_expand, "CLICK": v_click, "CHOOSE_DATE": v_date,
     }
     if verb == "DRAG":
         if "black box" in g.lower():
             return v_draw_shapes(act, goal)
         return v_drag_box(act, plan, goal)
     if verb == "SELECT":
+        # A DATEPICKER IS A SELECT AND NONE OF THE OTHER DRIVERS CAN SEE IT. The input is
+        # readOnly, so the generic path types at a field that refuses text; the score is
+        # the widget's own value string. Ask the page which shape it is, first.
+        if act.ev("(()=>{return !!document.querySelector('.ui-datepicker')"
+                  "||!!document.querySelector('input[readonly]')})()"):
+            return v_date(act, plan, goal)
         if op.get("path"):
             return v_menu(act, plan, goal)
         if op.get("colour"):
