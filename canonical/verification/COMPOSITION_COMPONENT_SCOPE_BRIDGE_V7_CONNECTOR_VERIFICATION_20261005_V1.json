@@ -1,0 +1,41 @@
+{
+  "schema":"PROJECT_BRAIN_COMPOSITION_COMPONENT_SCOPE_BRIDGE_V7_CONNECTOR_VERIFICATION_20261005_V1",
+  "date":"2026-10-05",
+  "status":"SEPARATE_CONNECTOR_RECOMPUTATION_PASS__DEBUGGING_COMPONENT_ONLY__ZERO_PARENT_CREDIT",
+  "subject":{"path":"canonical/governance/COMPOSITION_COMPONENT_SCOPE_BRIDGE_V7.json","git_blob_sha":"c6ec2a46bf8e271bafc6d4fd18a138cf67b657aa"},
+  "source_blobs":{
+    "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json":"661a57f839101fbf54c7e4edc76166c65ce9327d",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json":"62394e5b7d221ec9f69c3458f669e40e253a9d09",
+    "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json":"9efbf3e81e67fbd15e34be2fcd86fbfc626b246d",
+    "canonical/verification/RECOVERY_OPUS55_ZERO_REALITY_PUBLIC_RUNNER_VERIFICATION_20261003_V2.json":"981c8ac9b66ee7fccf5b531525849e29df9be483",
+    "canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json":"48a865f38f65be212df1cf0ba52d296b71cd003a",
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json":"a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+  },
+  "verified":{
+    "exactly_one_frozen_debugging_component":true,
+    "interface_literal":"coding+debugging+tool discovery",
+    "required_properties":["SCOPED_ACCEPTANCE_PROOF"],
+    "source_family_behavior_explicitly_includes_failure_diagnosis_and_falsification":true,
+    "source_protocol_dimensions_include_semantic_self_check_counterexample_localization_and_repair":true,
+    "source_scope_complete":true,
+    "source_objective_ceiling_or_floor":true,
+    "source_family_acceptance_closed":true,
+    "current_ledger_preserves_all_three_source_predicates_proved_and_scope_complete":true,
+    "adjacent_component_credit":false,
+    "parent_composition_credit":false
+  },
+  "verified_component_receipt":{
+    "receipt_id":"COMPOSITION_SCOPE_COMPLETE_BRIDGE::SELF_VERIFICATION_DEBUGGING_AND_RECOVERY::debugging::V1",
+    "component_id":"debugging",
+    "interface_id":"coding+debugging+tool discovery",
+    "proved_properties":["SCOPED_ACCEPTANCE_PROOF"],
+    "verified":true,
+    "independent_source_receipts":true,
+    "connector_recomputed":true,
+    "contamination_clean":true,
+    "acceptance_scoped":true,
+    "binds_frozen_claim":"MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1"
+  },
+  "hard_nonclaims":["NO_CODING_COMPONENT_CREDIT","NO_TOOL_DISCOVERY_COMPONENT_CREDIT_FROM_THIS_RECEIPT","NO_RECOVERY_COMPONENT_DELTA","NO_PARENT_MULTI_CAPABILITY_COMPOSITION_ACCEPTANCE","NO_ATOMIC_ACCEPTANCE_DELTA"],
+  "accounting":{"incremental_spend_usd":0,"new_reality_units_consumed":0,"terminal_cases_consumed":0,"acceptance_credit_delta":0,"family_credit_delta":0,"capability_credit_delta":0,"ownership_credit_delta":0}
+}
