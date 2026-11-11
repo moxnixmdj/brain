@@ -86,6 +86,18 @@ def main() -> int:
         for t in tasks:
             try:
                 row = M.run_episode(act, t, D.decompose)
+                # THE OUTCOME MUST COME FROM THE PAGE THAT WAS ASKED FOR.
+                #
+                # Measured 2026-11-09: a full-corpus run and an isolated probe were alive at
+                # the same time and both drove the same CDP browser. Each navigated the other's
+                # page away mid-episode, so a probe for `drag-sort-numbers` read a `login-user`
+                # goal and was scored on it. Nothing in the harness objected. Ten minutes of
+                # per-task numbers were mixtures of one task's goal and another task's reward.
+                # A single browser is a shared resource; an episode whose page is not the task
+                # asked for is not a measurement of that task and must be discarded loudly.
+                page = (act.ev("location.pathname") or "").rsplit("/", 1)[-1].replace(".html", "")
+                if page != t:
+                    raise RuntimeError("PAGE_IS_NOT_THE_TASK:%s!=%s" % (page, t))
                 ok = bool(row["success"])
                 act_name = str(row.get("action"))
                 rew = row.get("reward")
