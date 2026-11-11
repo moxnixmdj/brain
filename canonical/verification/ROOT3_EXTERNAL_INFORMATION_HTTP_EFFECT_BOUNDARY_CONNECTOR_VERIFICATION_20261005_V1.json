@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_EXTERNAL_INFORMATION_HTTP_EFFECT_BOUNDARY_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__EXACT_CANDIDATE_BYTES__SIX_LITERAL_EXTERNAL_BRIDGE_KINDS__MUTATING_URLOPEN_REJECTED_BEFORE_OBS_OR_TRANSPORT__ZERO_CREDIT",
+  "subject": {
+    "runtime_path": "canonical/runtime/astra_runtime.py",
+    "runtime_git_blob_sha": "2479705e6796b7a956504093b83887ac12bd5f3b",
+    "tests_path": "canonical/tests/test_astra_external_information_http_boundary_v1.py",
+    "tests_git_blob_sha": "972e82a93309731463d3b81719cea650884c47ed",
+    "governance_path": "canonical/governance/ROOT3_EXTERNAL_INFORMATION_HTTP_EFFECT_BOUNDARY_20261005_V1.json",
+    "governance_git_blob_sha": "0b0f93174eb96a6256af533d9db18c078c274ca8"
+  },
+  "connector_recomputation": {
+    "literal_external_tool_bridge_call_kinds": [
+      "http_get",
+      "package_name_search",
+      "planner",
+      "pypi_wheel_closure",
+      "python_source_tree",
+      "urlopen"
+    ],
+    "declared_external_tool_bridge_kind_registry": [
+      "http_get",
+      "package_name_search",
+      "planner",
+      "pypi_wheel_closure",
+      "python_source_tree",
+      "urlopen"
+    ],
+    "exact_set_match": true,
+    "unregistered_kind_gate_precedes_obs_authorization": true,
+    "urlopen_method_gate_precedes_obs_authorization": true,
+    "urlopen_body_gate_precedes_obs_authorization": true,
+    "urlopen_read_only_methods": ["GET", "HEAD"],
+    "urlopen_body_allowed": false,
+    "direct_raw_urllib_fallback_occurs_only_after_the_same_semantic_gate": true
+  },
+  "behavioral_regression_contract": [
+    "POST_WITH_BODY_MUST_FAIL_EXTERNAL_INFORMATION_HTTP_METHOD_FORBIDDEN_POST",
+    "DELETE_MUST_FAIL_EXTERNAL_INFORMATION_HTTP_METHOD_FORBIDDEN_DELETE",
+    "GET_WITH_BODY_MUST_FAIL_EXTERNAL_INFORMATION_HTTP_BODY_FORBIDDEN",
+    "UNKNOWN_EXTERNAL_KIND_MUST_FAIL_EXTERNAL_TOOL_KIND_UNREGISTERED",
+    "READ_ONLY_GET_STILL_REQUIRES_CONTINUOUS_OBS_INFORMATION_AUTHORITY"
+  ],
+  "truth_boundary": {
+    "proved": "THE CURRENT CANDIDATE REMOVES MUTATING HTTP FROM THE INFORMATION-ONLY URLOPEN AUTHORITY CLASS AND CLOSES DYNAMIC UNKNOWN EXTERNAL-BRIDGE KIND DISPATCH.",
+    "not_proved": "THE OTHER PROCESS IMPLEMENTING THE EXTERNAL BRIDGE CANNOT PERFORM UNDECLARED SIDE EFFECTS FOR AN ADMITTED READ-ONLY REQUEST.",
+    "next": "BIND_OR_SANDBOX_THE_EXTERNAL BRIDGE IMPLEMENTATION CONTRACT AND THEN PROJECT THE SIX KINDS INTO C2 MEDIATOR CLASSES."
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_EXTERNAL_TOOL_BRIDGE_OTHER_PROCESS_EFFECT_TOTALITY",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "errors": [],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
