@@ -1,0 +1,33 @@
+{
+  "round": "r176",
+  "date": "2026-11-09",
+  "claim": "social-media is not 'click the right button'. The checker walks EVERY post and fails on a wrong extra as hard as on a missing one, so the job is to leave the page in exactly one state.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "r174": {"passes": 326, "trials": 650, "rate": 0.5015},
+    "r176": {"passes": 335, "trials": 650, "rate": 0.5154},
+    "paired_per_task_diff_pp": 1.38, "se_pp": 1.68, "t": 0.82,
+    "significant": false,
+    "note": "The three repaired tasks went 0/5 -> 5/5 each, verified at 10 reps individually. The paired total reads t=0.82 because ten OTHER tasks drifted down by the same amount -- all of them tasks already known to be unstable at this sample size. The instrument, not the work, is again the limit.",
+    "zero_tasks": {"r174": 57, "r176": 54}
+  },
+  "families_repaired": {
+    "social-media (3 tasks)": {
+      "before": 0.0, "after": 1.0, "trials": 15,
+      "observations": [
+        "the operand order is not stable: -all/-some put the action first, plain social-media puts the user first",
+        "the LABEL is not the CLASS: Mute is li.menu-user, Block is li.block-user, Copy link to Tweet is li.copy",
+        "SIX of nine actions live in a ul.hide menu that must be opened first",
+        "plain social-media scores ON THE CLICK and compares the class name exactly, so there is no Submit"
+      ]
+    }
+  },
+  "bug_of_the_round": "A hardcoded four-action set ({like,reply,retweet,share}) was still running AFTER the label->class map resolved the action, and overwrote it. 'Mute' resolves to 'menu-user', which contains none of those four words, so every menu action returned social-bad-action while the map was correct. Two correct mechanisms in a row, with a dead one between them.",
+  "unstable_task_series": {
+    "click-menu": [0.80, 0.40, 0.40, 0.80, 0.40],
+    "click-collapsible-2-nodelay": [0.00, 0.40, 0.40, 0.80, 0.20],
+    "click-tab-2-hard": [0.60, 1.00, 1.00, 1.00, 0.60],
+    "count-sides": [0.20, 0.40, 0.60, 0.20],
+    "reading": "The same code reads 0.00-0.80 on click-collapsible-2-nodelay across five full runs. These are the tasks the learning store exists to stabilise, and they remain the honest ceiling on a 5-rep instrument."
+  }
+}
