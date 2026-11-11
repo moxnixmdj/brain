@@ -166,17 +166,31 @@ class Actuator:
                       {"type": t, "key": name, "code": name, "windowsVirtualKeyCode": vk})
 
     def drag(self, x0: float, y0: float, x1: float, y1: float, steps: int = 8) -> None:
+        """A DRAG IS A BUTTON THAT STAYS DOWN, AND CDP NEEDS TO BE TOLD SO ON EVERY MOVE.
+
+        Measured 2026-11-09: all eight drag tasks scored 0/3 and the cause was here, not
+        in the goal parsing. `drag-items` is a jQuery UI Sortable, whose `_mouseMove`
+        handler returns early unless the event reports a button still held. CDP's
+        Input.dispatchMouseEvent defaults `buttons` to 0, so a move carrying only
+        `"button": "left"` looks like a hover and the widget never starts dragging. The
+        gesture completed, released, and changed nothing -- 0/24 across the family while
+        the action string said "drag".
+
+        `buttons: 1` on the press and on every move is the bit that makes it a drag.
+        """
         self.call("Input.dispatchMouseEvent",
                   {"type": "mousePressed", "x": float(x0), "y": float(y0),
-                   "button": "left", "clickCount": 1})
+                   "button": "left", "buttons": 1, "clickCount": 1})
+        time.sleep(0.03)
         for i in range(1, steps + 1):
             self.call("Input.dispatchMouseEvent",
                       {"type": "mouseMoved", "x": float(x0 + (x1 - x0) * i / steps),
-                       "y": float(y0 + (y1 - y0) * i / steps), "button": "left"})
-            time.sleep(0.02)
+                       "y": float(y0 + (y1 - y0) * i / steps),
+                       "button": "left", "buttons": 1})
+            time.sleep(0.03)
         self.call("Input.dispatchMouseEvent",
                   {"type": "mouseReleased", "x": float(x1), "y": float(y1),
-                   "button": "left", "clickCount": 1})
+                   "button": "left", "buttons": 1, "clickCount": 1})
 
     def close(self) -> None:
         try:
@@ -445,13 +459,147 @@ def v_draw_shapes(act: Actuator, goal: str) -> str:
     return "dragshapes"
 
 
+_ORD = {"1st": 1, "first": 1, "2nd": 2, "second": 2, "3rd": 3, "third": 3,
+        "4th": 4, "fourth": 4, "5th": 5, "fifth": 5, "6th": 6, "sixth": 6}
+
+
 def v_drag_box(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """DRAG -- the source and the destination come from the sentence, not from an id.
+
+    Measured 2026-11-09: every one of the eight drag tasks scored 0/3 (0/24 total, the
+    largest single zero in the corpus) and this function was the reason. It read
+    `#draggableSmall` and `#draggableLarge` -- the element ids of exactly one page --
+    and every other drag task silently dragged the same two elements that were not
+    there, then pressed Submit. A transcription of one instance presented as a verb.
+
+    Two shapes are read here, both from words the instruction supplies:
+      "Drag <name> to the <Nth> position."   source is the element whose text is <name>,
+                                             destination is walk N-1 places down the
+                                             list of sibling items that share its x.
+      "Drag the smaller box ... larger box"  source is the smaller of the two boxes,
+                                             destination the larger one's top-left corner.
+    When neither shape is present it refuses rather than dragging something arbitrary.
+    """
+    g = (goal or "").lower()
+    cands = [c for c in candidates(act) if (c.get("t") or "").strip()]
+    # A DESTINATION IS ABSOLUTE OR RELATIVE, AND BOTH ARE STATED.
+    #
+    # Measured 2026-11-09: the corpus writes four shapes and this function read one.
+    #   "Drag X to the 4th position."   absolute, read before
+    #   "Drag X to the bottom."         absolute, last
+    #   "Drag X up by one position."    relative, current index minus one
+    #   "Drag X down by one position."  relative, current index plus one
+    # The three unread shapes were reported as drag-not-understood on a verb that was
+    # understood perfectly well.
+    m = re.search(r"drag\s+(.+?)\s+to\s+the\s+([\w]+)\s+position", g)
+    _rel = re.search(r"drag\s+(.+?)\s+(up|down)\s+by\s+(\w+)\s+position", g)
+    _bot = re.search(r"drag\s+(.+?)\s+to\s+the\s+bottom", g)
+    if _rel:
+        _want = _rel.group(1).strip()
+        _names = [c for c in cands if (c["t"] or "").strip().lower() == _want]
+        if not _names:
+            _names = [c for c in cands if _want and _want in (c["t"] or "").lower()]
+        if _names:
+            _src = sorted(_names, key=lambda c: c["a"])[0]
+            _col, _seen = [], set()
+            for c in sorted([c for c in cands if abs(c["cx"] - _src["cx"]) < 26],
+                            key=lambda c: c["cy"]):
+                k = (round(c["cx"]), round(c["cy"]))
+                if k not in _seen:
+                    _seen.add(k)
+                    _col.append(c)
+            _cur = next((i for i, c in enumerate(_col)
+                         if abs(c["cy"] - _src["cy"]) < 4), None)
+            _steps = _ORD.get(_rel.group(3), 1) or 1
+            if _cur is not None:
+                _tgt = max(0, _cur - _steps) if _rel.group(2) == "up" \
+                    else min(len(_col) - 1, _cur + _steps)
+                _step = (_col[1]["cy"] - _col[0]["cy"]) if len(_col) > 1 else 29
+                _sign = 1.0 if _col[_tgt]["cy"] >= _src["cy"] else -1.0
+                act.drag(_src["cx"], _src["cy"], _src["cx"],
+                         _col[_tgt]["cy"] + _step * 0.6 * _sign, steps=16)
+                time.sleep(0.30)
+                if not episode_over(act):
+                    submit(act, required=False)
+                return "drag-rel:%s%s%d" % (_want[:10], _rel.group(2), _steps)
+    if _bot:
+        _want = _bot.group(1).strip()
+        _names = [c for c in cands if (c["t"] or "").strip().lower() == _want]
+        if _names:
+            _src = sorted(_names, key=lambda c: c["a"])[0]
+            _col, _seen = [], set()
+            for c in sorted([c for c in cands if abs(c["cx"] - _src["cx"]) < 26],
+                            key=lambda c: c["cy"]):
+                k = (round(c["cx"]), round(c["cy"]))
+                if k not in _seen:
+                    _seen.add(k)
+                    _col.append(c)
+            if _col:
+                _step = (_col[1]["cy"] - _col[0]["cy"]) if len(_col) > 1 else 29
+                act.drag(_src["cx"], _src["cy"], _src["cx"],
+                         _col[-1]["cy"] + _step * 0.7, steps=18)
+                time.sleep(0.30)
+                if not episode_over(act):
+                    submit(act, required=False)
+                return "drag-bottom:%s" % _want[:12]
+    if m:
+        want = m.group(1).strip()
+        n = _ORD.get(m.group(2))
+        if n:
+            items = [c for c in cands if (c["t"] or "").strip().lower() == want]
+            if not items:
+                items = [c for c in cands if want and want in (c["t"] or "").lower()]
+            if items:
+                src = sorted(items, key=lambda c: c["a"])[0]
+                col = sorted([c for c in cands if abs(c["cx"] - src["cx"]) < 26],
+                             key=lambda c: c["cy"])
+                # de-duplicate nested elements that share a centre
+                seen, stack = set(), []
+                for c in col:
+                    key = (round(c["cx"]), round(c["cy"]))
+                    if key in seen:
+                        continue
+                    seen.add(key)
+                    stack.append(c)
+                if len(stack) >= n:
+                    # A SORTABLE MOVES THE ITEM PAST THE TARGET SLOT, NOT ONTO IT.
+                    #
+                    # Measured 2026-11-09: dragging the source onto the target slot's
+                    # centre left the order unchanged (jQuery UI resolves the drop to the
+                    # slot the item already occupies when the pointer lands exactly on a
+                    # boundary). Dragging to the target's centre PLUS most of one row
+                    # height lands the item in that slot: 'Drag Annis to the 4th position'
+                    # with Annis 3rd moved it to 4th and scored 1.
+                    step = (stack[1]["cy"] - stack[0]["cy"]) if len(stack) > 1 else 29
+                    dst = stack[n - 1]
+                    # the overshoot must be AWAY from where the item came from: moving an
+                    # item up needs the pointer above the slot, moving it down needs it
+                    # below. A fixed +0.6 row worked only when the target was lower.
+                    sign = 1.0 if dst["cy"] >= src["cy"] else -1.0
+                    act.drag(src["cx"], src["cy"], src["cx"],
+                             dst["cy"] + step * 0.6 * sign, steps=16)
+                    time.sleep(0.30)
+                    if not episode_over(act):
+                        submit(act, required=False)
+                    return "drag-pos:%s->%d" % (want[:12], n)
+                return "drag-pos-not-enough-items"
+            return "drag-pos-no-source"
+
     s = act.box("document.querySelector('#draggableSmall')")
     big = act.box("document.querySelector('#draggableLarge')")
     if s and big:
         act.drag(s["cx"], s["cy"], big["x"] + 3, big["y"] + 3, steps=6)
-    submit(act)
-    return "dragbox"
+        submit(act)
+        return "dragbox"
+    # last resort: two box-like candidates, smaller into larger
+    if "smaller" in g and "larger" in g:
+        boxes = sorted([c for c in cands if c["a"] > 400], key=lambda c: c["a"])
+        if len(boxes) >= 2:
+            act.drag(boxes[0]["cx"], boxes[0]["cy"],
+                     boxes[-1]["cx"], boxes[-1]["cy"], steps=8)
+            submit(act, required=False)
+            return "drag-size-inferred"
+    return "drag-not-understood"
 
 
 def v_draw_line(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
