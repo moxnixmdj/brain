@@ -1,0 +1,80 @@
+name: verify-livebench-public-description-inverter-v1
+
+on:
+  pull_request:
+    paths:
+      - "canonical/runtime/public_description_template_inverter_v1.py"
+      - "canonical/tests/test_public_description_template_inverter_v1.py"
+      - "canonical/governance/LIVEBENCH_PUBLIC_DESCRIPTION_INVERTER_BREAKTHROUGH_V1.json"
+      - ".github/workflows/verify-livebench-public-description-inverter-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run local inverter tests
+        run: |
+          python -m unittest -v canonical.tests.test_public_description_template_inverter_v1
+
+      - name: Fetch exact frozen LiveBench public scorer source
+        run: |
+          git clone -q https://github.com/LiveBench/LiveBench.git /tmp/LiveBench
+          git -C /tmp/LiveBench checkout -q 8f8e5c381a16e3f24257776edd53471fe86f8091
+          test "$(git -C /tmp/LiveBench rev-parse HEAD)" = "8f8e5c381a16e3f24257776edd53471fe86f8091"
+          test "$(git -C /tmp/LiveBench hash-object livebench/if_runner/instruction_following_eval/instructions.py)" = "4997bab885a676d92545fd91a9a20b48d234a2b2"
+          test "$(git -C /tmp/LiveBench hash-object livebench/if_runner/instruction_following_eval/instructions_registry.py)" = "903ed738398648c7cfac61d5ffa478c22f1f0891"
+
+      - name: Prove complete active legacy description surface
+        env:
+          PYTHONPATH: .
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from canonical.runtime.public_description_template_inverter_v1 import (
+              audit_registered_coverage,
+              extract_registry_bindings,
+              extract_templates,
+          )
+
+          root = Path("/tmp/LiveBench/livebench/if_runner/instruction_following_eval")
+          instructions = (root / "instructions.py").read_text(encoding="utf-8")
+          registry = (root / "instructions_registry.py").read_text(encoding="utf-8")
+
+          bindings = extract_registry_bindings(registry)
+          report = audit_registered_coverage(instructions, registry)
+          specs = extract_templates(instructions)
+          by_class = {s.class_name for s in specs}
+          active = set(bindings)
+
+          assert len(bindings) == 25, len(bindings)
+          assert sum(len(v) for v in bindings.values()) == 25
+          assert active <= by_class, sorted(active - by_class)
+          assert report["all_active_classes_have_description_templates"] is True
+          assert report["missing_active_classes"] == []
+          assert report["active_instruction_id_count"] == 25
+          assert report["active_instruction_class_count"] == 25
+
+          Path("legacy-description-surface-audit.json").write_text(
+              json.dumps(report, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(report, sort_keys=True))
+          PY
+
+      - name: Upload exact-source audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: livebench-public-description-inverter-v1-audit
+          path: legacy-description-surface-audit.json
