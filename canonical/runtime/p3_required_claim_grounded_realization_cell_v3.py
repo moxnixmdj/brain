@@ -15,6 +15,7 @@ from typing import Any, Mapping
 
 from canonical.runtime.selected_support_truth_certificate_v5 import evaluate as support_truth
 from canonical.runtime import synthesis_grounded_expression_ir_v1 as realizer
+from canonical.runtime.p3_declared_contract_surface_guard_v1 import validate_v3_input
 
 SCHEMA="PROJECT_BRAIN_P3_REQUIRED_CLAIM_GROUNDED_REALIZATION_CELL_V3"
 _REQUIRED_CONSTRAINTS={
@@ -65,6 +66,9 @@ def evaluate(payload:Mapping[str,Any])->dict[str,Any]:
     public=payload.get("v3_input")
     if not isinstance(public,Mapping):
         return _fail("V3_INPUT_REQUIRED")
+    contract_failure=validate_v3_input(public)
+    if contract_failure is not None:
+        return _fail(contract_failure)
     task=public.get("task")
     if not isinstance(task,Mapping):
         return _fail("TASK_REQUIRED")

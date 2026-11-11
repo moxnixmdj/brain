@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_P3_MAIN_ADMISSION_REQUIREMENT_PRESERVATION_TWO_SPRITE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "TWO_REMOTE_FOCUSED_REPLAYS_17_OF_17_EACH__ZERO_TERMINAL_CREDIT",
+  "base_main_commit": "0ef90c684cbffdfededdd1e704efc1dc1c20327a",
+  "verified_candidate_commit": "3908d6841916cddefd1d92801c6ec67e5ddcaf1f",
+  "source_blobs": {
+    "canonical/runtime/p3_declared_contract_surface_guard_v1.py": "ab5769c99d2e4b4f261b97b650a5947b809c4316",
+    "canonical/runtime/p3_real_context_v3_admission_v5.py": "92ffc34551e518dc3c0b1f4a54681dc4a67e09bc",
+    "canonical/runtime/p3_real_context_v3_admission_v6.py": "8b4f247eb8b252da436b3d5c497e96befdce76c2",
+    "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py": "fc069fdb2b49587a87b72deef4541ebeac37dfc3",
+    "canonical/tests/test_p3_main_contract_preservation_v1.py": "37a356e9a853f2f8b8678df688cf7112853a81b0",
+    "canonical/tests/test_p3_real_context_v3_admission_v5.py": "94c7ebf7d8455824449ca36c5b4af29e00dffbe4"
+  },
+  "root_cause": {
+    "observed_before_repair": "Current main P3 V6 returned pass true while ignoring explicit objective weights, incomplete objective weights, unknown task/outer requirements, named audience profiles and invalid V3 schemas. Two required claims weights A=1, B=100 returned input order A,B rather than binding weight order B,A.",
+    "actual_main_v6_blob_before_fix": "2a99dcc3dc791177153f2cd0704cb0cfd1dc5ad1",
+    "actual_main_v5_blob_before_fix": "e19249d57ac5df8633e6570318b45d4d589a607a",
+    "actual_main_required_v3_blob_before_fix": "dd0acc257ae5f68a41dfc13234d17cc527363d02"
+  },
+  "repairs": [
+    "Shared V3 schema/shape surface guard: unknown outer, V3 input, task, claim, evidence, provenance, profile and renderer requirements fail closed.",
+    "Only structurally explicit audience profile marker admitted on the bounded positive route; no implicit profile semantics asserted.",
+    "Explicit objective weights checked and applied before structural default; invalid/incomplete weights never fall through into unweighted positive admission.",
+    "V6 checks contract before calling V5, and preserves explicit-weight failures rather than taking required-only route.",
+    "Direct V3 required-claim route uses same declared contract surface guard."
+  ],
+  "focused_replay": [
+    {
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "original_v5_tests_passed": 10,
+      "new_adversarial_test_functions_passed": 7,
+      "failed": 0,
+      "total": 17
+    },
+    {
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "original_v5_tests_passed": 10,
+      "new_adversarial_test_functions_passed": 7,
+      "failed": 0,
+      "total": 17
+    }
+  ],
+  "specific_replayed_before_after": {
+    "weighted_inversion": {
+      "before": "PASS__STRUCTURAL_ORDER_A_B",
+      "after": "PASS__EXPLICIT_WEIGHT_ORDER_B_A"
+    },
+    "incomplete_weights": {
+      "before": "PASS__STRUCTURAL",
+      "after": "FAIL_CLOSED__OBJECTIVE_WEIGHTS_UNSATISFIED"
+    },
+    "unknown_task": {
+      "before": "PASS",
+      "after": "FAIL_CLOSED__UNMODELED_TASK_REQUIREMENTS"
+    },
+    "unknown_outer": {
+      "before": "PASS",
+      "after": "FAIL_CLOSED__UNMODELED_REAL_CONTEXT_ADMISSION_FIELDS"
+    },
+    "named_profile": {
+      "before": "PASS_ENGLISH_RESULT",
+      "after": "FAIL_CLOSED__AUDIENCE_PROFILE_SEMANTICS_UNMODELED"
+    },
+    "wrong_v3_schema": {
+      "before": "PASS__REQUIRED_V4",
+      "after": "FAIL_CLOSED__V3_INPUT_SCHEMA_INVALID"
+    }
+  },
+  "verification_scope": "Targeted zero-argument Python test-function replay in existing remote Sprites; pytest unavailable; dependencies fetched at main source snapshot e1065de... and verified unchanged between that commit and branch base.",
+  "hard_boundary": {
+    "real_target_scope_complete": false,
+    "opus55_noninferiority_proved": false,
+    "policy_adequacy_semantics_proved": false,
+    "production_end_to_end_liveness_verified": false,
+    "u_empty_authorized": false,
+    "abc_closed_authorized": false,
+    "terminal_authority": false,
+    "acceptance_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "next": "Subject patch to repository CI and independent review before merge. Then bind real target-domain policy adequacy; passing source-contract tests do not satisfy terminal reducer."
+}
