@@ -1,0 +1,17 @@
+{
+ "schema":"PROJECT_BRAIN_K6_STATIC_REFINEMENT_SUBOPTIMALITY_COUNTERMODEL_V1",
+ "date":"2026-10-06",
+ "status":"COUNTERMODEL__STATIC_COST_3__ADAPTIVE_WORST_CASE_COST_2__ZERO_CREDIT",
+ "worlds":["00","01","10","11"],
+ "required_actions":{"00":"a00","01":"a01","10":"a10","11":"a11"},
+ "probes":{
+  "r":{"cost":1,"obs":{"00":0,"01":0,"10":1,"11":1}},
+  "l":{"cost":1,"obs":{"00":0,"01":1,"10":0,"11":0}},
+  "q":{"cost":1,"obs":{"00":0,"01":0,"10":0,"11":1}}
+ },
+ "static":"r+l+q required; cost 3",
+ "adaptive":"r then l on branch 0 or q on branch 1; worst-case cost 2",
+ "falsifies":"GLOBAL_STATIC_SUBSET_IS_RESOURCE_MINIMUM",
+ "preserves":"V1 remains correct for static-subset optimization only",
+ "terminal_credit_delta":0
+}
