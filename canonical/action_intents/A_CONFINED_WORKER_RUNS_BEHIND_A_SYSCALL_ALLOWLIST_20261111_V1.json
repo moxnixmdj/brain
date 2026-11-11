@@ -1,0 +1,481 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_CONFINED_WORKER_RUNS_BEHIND_A_SYSCALL_ALLOWLIST_20261111_V1",
+ "action_intent_id": "A_CONFINED_WORKER_RUNS_BEHIND_A_SYSCALL_ALLOWLIST_20261111_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_CONFINED_WORKER_RUNS_BEHIND_A_SYSCALL_ALLOWLIST_20261111_V1",
+ "date": "2026-11-11",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "400ad21d0ef4208a20e1a1fe9228f5d9ff7655b7",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asked why the machine cannot simply be given coding experiences and learn from them. Traced on main: the learner exists and works when driven directly (the repair row with its own retained_learning setting fixed one bug by search, kept the lesson, and fixed the next six differently shaped instances of the same mistake from memory in one check each, all passing an independent audit), but the front door refuses every request that would run code with FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT, and OPTIMAL_PLAN_20261103_V1 counts that one status as 226 of the 233 failures behind the door. The door is closed because the only carrier in the tree is not qualified, and carrier_qualification_probe_v1 has reported two objections still standing since 2026-11-03: no syscall filter, and the worker runs the host's libc. This change removes the first as far as a producer can. One module declares a list (193 calls allowed, 5 allowed only in a harmless form, 63 refused by name with EPERM, every other call answered ENOSYS so the C library falls back, a caller that switches instruction set killed) and assembles it into a classic-BPF seccomp program with no dependency, byte-identical on every x86_64 host. The launcher installs it in the step that enters the worker's root, before env, setpriv and the workload; if it cannot be installed nothing runs. The probe stops searching the launcher's source for a word and asks the worker instead. No capability is added, no row is registered, the front door stays closed, carrier_qualified stays False, and the list is the producer's: whether it is the right list is a review this change cannot perform.",
+ "selected_route": "ADAPT_THE_EXISTING_NAMESPACE_LAUNCHER__INSTALL_A_DEFAULT_DENY_SECCOMP_ALLOWLIST_IN_THE_STEP_THAT_ENTERS_THE_WORKERS_ROOT__FAIL_CLOSED_IF_IT_CANNOT_BE_INSTALLED",
+ "causal_blocker": "THE_FRONT_DOOR_REFUSES_EVERY_REQUEST_THAT_WOULD_RUN_CODE_BECAUSE_NO_CONFINEMENT_IS_ADMITTED__AND_THE_ONLY_CARRIER_IN_THE_TREE_LETS_A_WORKER_CALL_ANY_KERNEL_ENTRY_POINT__THE_REVIEW_NAMES_THAT_AS_ONE_OF_TWO_OBJECTIONS_STILL_STANDING",
+ "expected_parent_change": "A_WORKER_STARTED_BY_THE_NAMESPACE_LAUNCHER_CAN_NO_LONGER_REACH_THE_KERNEL_ENTRY_POINTS_ESCAPES_ARE_WRITTEN_WITH__ONE_OF_THE_TWO_OBJECTIONS_THAT_KEEP_THE_FRONT_DOOR_CLOSED_TO_CODE_BECOMES_A_REVIEW_OF_ONE_LIST_INSTEAD_OF_AN_ABSENCE__EVERY_CONFINED_FLOW_THAT_PASSED_STILL_PASSES",
+ "expected_parent_frontier_change": "THE_CARRIER_PROBE_GOES_FROM_8_OF_10_ITEMS_OBSERVED_SATISFIED_TO_9_OF_10__THE_VERDICT_STAYS_CARRIER_NOT_QUALIFIED__ZERO_CAPABILITY_CREDIT__ZERO_FAMILY_CREDIT__NO_ROW_ADDED__NO_ROUTE_OPENED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FRONT_DOOR_REFUSES_EVERY_REQUEST_THAT_WOULD_RUN_CODE_BECAUSE_NO_CONFINEMENT_IS_ADMITTED__AND_THE_ONLY_CARRIER_IN_THE_TREE_LETS_A_WORKER_CALL_ANY_KERNEL_ENTRY_POINT__THE_REVIEW_NAMES_THAT_AS_ONE_OF_TWO_OBJECTIONS_STILL_STANDING",
+ "falsification_condition": "A_TEST_THAT_PASSES_ON_THE_BASE_COMMIT_FAILS_ON_THIS_ONE_FOR_A_REASON_OTHER_THAN_THE_ONE_PROBE_TEST_UPDATED_ON_PURPOSE__OR_A_COMMAND_THAT_RUNS_IN_THE_UNFILTERED_WORKER_IS_REFUSED_IN_THE_FILTERED_ONE__OR_A_WORKER_IS_OBSERVED_RUNNING_WITHOUT_A_FILTER__OR_A_CALL_ON_THE_NEVER_LIST_IS_ANSWERED_BY_THE_KERNEL",
+ "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_CAPABILITY_IS_REGISTERED__NO_ROUTE_IS_OPENED__carrier_qualified_STAYS_FALSE__NO_CONFINED_FLOW_THAT_PASSED_ON_THE_BASE_COMMIT_FAILS",
+ "explicit_user_authorization": "Owner decisions in this session on 2026-11-11. Asked what should come next, the owner chose 'Both, rows first': land the file rows and prepare the sandbox work. The rows (#6658) and the word check the owner chose after them (#6660) are merged; this is the sandbox work. Asked whether to merge pull request #6658, the owner answered 'Yes, and merge the next ones too': a standing instruction to merge the later pull requests of this session once the referee check-run conclusion is success, each merge to be disclosed in the report. Nothing merges over a red referee. This change opens no route and admits no carrier; that decision is not delegated and is not taken here.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/worker_syscall_allowlist_v1.py",
+   "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+   "canonical/tools/carrier_qualification_probe_v1.py",
+   "canonical/tests/test_a_confined_worker_runs_behind_a_syscall_allowlist_v1.py",
+   "canonical/verification/CARRIER_QUALIFICATION_PROBE_20261111_V1.json"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "BEFORE_AND_AFTER_IN_THE_SAME_WORKER_ON_THE_SAME_MACHINE__THE_ONLY_DIFFERENCE_BETWEEN_THE_TWO_TREES_IS_THE_FILTER__THE_UNFILTERED_WORKER_REPORTS_FILTER_MODE_0_AND_THE_KERNEL_ANSWERS_THE_SEVEN_SAMPLED_CALLS__THE_FILTERED_WORKER_REPORTS_FILTER_MODE_2_AND_EVERY_ONE_OF_THEM_IS_REFUSED__REMOVING_THE_INSTALL_STEP_OR_CHANGING_THE_LIST_MAKES_THE_NEW_TESTS_FAIL"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS__EACH_AGAINST_THE_BASE_COMMIT_400ad21d_ON_THE_SAME_INPUT__NOT_PUBLIC_RUNNER_EVIDENCE__CARRIER_PROBE_8_OF_10_TO_9_OF_10__INSIDE_THE_WORKER_FILTER_MODE_2__SEVEN_CALLS_THE_UNFILTERED_KERNEL_ANSWERS_ARE_REFUSED_WITH_EPERM_AND_clone3_WITH_ENOSYS__FIFTEEN_COMMANDS_RUN_IN_BOTH_WORKERS_PYTHON_FILE_PROCESS_SIGNAL_THREAD_AND_LIBRARY_BATTERIES_sh_bash_make_unittest_gcc_gpp_perl_AND_A_LOOPBACK_SERVER_13_SUCCEED_IN_BOTH_AND_node_AND_git_FAIL_IDENTICALLY_IN_BOTH_ON_THE_WORKERS_OWN_LIMITS__THE_37_TEST_FILES_THAT_TOUCH_THE_CARRIER_302_PASSED_26_FAILED_3_ERRORS_BEFORE__THE_SAME_AFTER_EXCEPT_THE_ONE_PROBE_TEST_REWRITTEN_ON_PURPOSE__TWO_REAL_BREAKS_WERE_FOUND_BY_THOSE_TESTS_AND_FIXED_BEFORE_THIS_INTENT__make_RESETS_ITS_IDS_BEFORE_EACH_COMMAND_AND_THE_LAUNCHERS_DECLARED_PRIVATE_LOOPBACK_NEEDS_INET_SOCKETS__THE_NEW_TEST_FILE_24_OF_24__FIVE_DELIBERATE_BREAKS_OF_THE_FILTER_OR_THE_INSTALL_STEP_EACH_FAIL_BETWEEN_4_AND_8_OF_THEM__LIST_MEASURED_FROM_147_DISTINCT_CALLS_IN_25_TRACES_140_CAN_PASS_7_ARE_CLOSED_ON_PURPOSE_58_MORE_WERE_ADDED_BY_JUDGEMENT_AND_NOT_OBSERVED",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_OBLIGATIONS_NAMED_ARE_COMPUTER_USE_OBLIGATIONS__NO_COMPUTER_USE_IS_POSSIBLE_WHILE_THE_FRONT_DOOR_MAY_NOT_RUN_A_PROGRAM__AND_IT_MAY_NOT_UNTIL_A_CARRIER_IS_REVIEWED_AND_ADMITTED__THIS_CHANGE_REMOVES_ONE_OF_THE_TWO_OBJECTIONS_STANDING_AGAINST_THE_ONLY_CARRIER_IN_THE_TREE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-11T21:18:24Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_NARROWS_WHAT_A_CONFINED_WORKER_MAY_ASK_OF_THE_KERNEL__IT_OPENS_NO_ROUTE_AND_QUALIFIES_NO_CARRIER",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "A_DEFAULT_DENY_SYSCALL_ALLOWLIST_INSTALLED_BEFORE_ANYTHING_RUNS_IN_THE_WORKER",
+   "decisive_question": "DOES_THE_WORKER_LOSE_THE_KERNEL_ENTRY_POINTS_ESCAPES_ARE_WRITTEN_WITH__WHILE_EVERY_CONFINED_FLOW_THAT_PASSED_STILL_PASSES",
+   "falsifier_id": "ONE_CONFINED_TEST_OR_COMMAND_THAT_PASSED_ON_THE_BASE_COMMIT_AND_FAILS_HERE__OR_ONE_WORKER_OBSERVED_WITHOUT_A_FILTER__OR_ONE_CALL_ON_THE_NEVER_LIST_ANSWERED_BY_THE_KERNEL",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_TWO_COUNTEREXAMPLES_THE_REPOSITORYS_OWN_TESTS_FOUND_WERE_FIXED_AND_ARE_PINNED_BY_THE_NEW_TEST_FILE__GNU_make_FAILED_WITH_OPERATION_NOT_PERMITTED_BECAUSE_IT_RESETS_ITS_EFFECTIVE_IDS_BEFORE_EVERY_COMMAND__AND_THE_LAUNCHERS_OWN_TEST_OF_ITS_PRIVATE_LOOPBACK_FAILED_BECAUSE_INET_SOCKETS_WERE_REFUSED__AFTER_BOTH_FIXES_THE_37_CARRIER_TEST_FILES_AND_THE_15_COMMANDS_GIVE_THE_SAME_RESULTS_AS_ON_THE_BASE_COMMIT"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "400ad21d0ef4208a20e1a1fe9228f5d9ff7655b7",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "CODE_NOBODY_HAS_READ_CAN_ONE_DAY_BE_RUN_BY_THE_MACHINE_WITHOUT_BEING_ABLE_TO_REACH_THE_KERNEL_ENTRY_POINTS_THAT_ESCAPES_USE__WHICH_IS_WHAT_STANDS_BETWEEN_THE_LEARNER_THAT_EXISTS_AND_THE_EXPERIENCE_IT_NEEDS",
+  "selected_route": "ADAPT_THE_EXISTING_NAMESPACE_LAUNCHER__INSTALL_A_DEFAULT_DENY_SECCOMP_ALLOWLIST_IN_THE_STEP_THAT_ENTERS_THE_WORKERS_ROOT__FAIL_CLOSED_IF_IT_CANNOT_BE_INSTALLED",
+  "selected_surviving_route": "ADAPT_THE_LAUNCHER_THE_REVIEW_ALREADY_EXAMINES__ONE_LIST_ASSEMBLED_INTO_CLASSIC_BPF_WITH_NO_DEPENDENCY__INSTALLED_BEFORE_ANYTHING_RUNS_IN_THE_WORKER__OBSERVED_FROM_INSIDE_THE_WORKER_BY_THE_PROBE",
+  "deleted_or_bypassed_paths": [
+   "OPENING_THE_FRONT_DOOR_TO_THE_REPAIR_ROW_NOW__NOT_DONE__THE_BOUNDARY_SAYS_NO_FLAG_OR_CALLER_MAY_GRANT_IT_AND_THE_PLAN_SAYS_AN_AGENT_MUST_NOT_ROUTE_AROUND_IT",
+   "BINDING_retained_learning_INTO_THE_ACTION_TEMPLATE_NOW__NOT_DONE__THE_ROW_IS_REFUSED_BEFORE_IT_RUNS_SO_THE_BINDING_WOULD_CONNECT_NOTHING",
+   "A_DENY_LIST_OF_KNOWN_DANGEROUS_CALLS__NOT_USED__EVERY_KERNEL_CALL_ADDED_LATER_WOULD_BE_OPEN_BY_DEFAULT",
+   "A_FILTER_COMPILED_BY_THE_HOSTS_libseccomp__NOT_USED__THE_BYTES_WOULD_DEPEND_ON_THE_LIBRARY_VERSION_SO_NO_ONE_HASH_COULD_NAME_THE_REVIEWED_PROGRAM__IT_IS_USED_AS_A_CROSS_CHECK_IN_THE_TESTS_INSTEAD",
+   "EPERM_AS_THE_DEFAULT_ANSWER__NOT_USED__THE_C_LIBRARY_FALLS_BACK_ON_ENOSYS_AND_BREAKS_ON_EPERM",
+   "A_TABLE_FOR_A_MACHINE_THAT_COULD_NOT_BE_TESTED_HERE__NOT_SHIPPED__ON_ANY_OTHER_ARCHITECTURE_THE_LAUNCHER_REFUSES_TO_START_A_WORKER"
+  ],
+  "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_CAPABILITY_IS_REGISTERED__NO_ROUTE_IS_OPENED__carrier_qualified_STAYS_FALSE__NO_CONFINED_FLOW_THAT_PASSED_ON_THE_BASE_COMMIT_FAILS",
+  "expected_parent_level_state_change": "THE_CARRIER_PROBE_GOES_FROM_8_OF_10_ITEMS_OBSERVED_SATISFIED_TO_9_OF_10__THE_VERDICT_STAYS_CARRIER_NOT_QUALIFIED__ZERO_CAPABILITY_CREDIT__ZERO_FAMILY_CREDIT__NO_ROW_ADDED__NO_ROUTE_OPENED",
+  "why_selected_route_is_fastest_sufficient": "THE_LAUNCHER_THE_PROBE_AND_THE_REVIEWS_CHECKLIST_ALREADY_EXIST_AND_SEVEN_OF_ITS_NINE_OBJECTIONS_ARE_ALREADY_ANSWERED__THE_MISSING_PIECE_IS_ONE_LIST_AND_ONE_INSTALL_STEP__NO_BINARY_HAS_TO_BE_FETCHED_AND_NO_HOST_FEATURE_BEYOND_SECCOMP_IS_NEEDED__EVERY_OTHER_CARRIER_FOUND_NEEDS_A_PROGRAM_OR_A_HARDWARE_FEATURE_THIS_HOST_DOES_NOT_HAVE_AND_WOULD_RESTART_THE_REVIEW_FROM_ZERO",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "ADAPT_THE_EXISTING_NAMESPACE_LAUNCHER_WITH_A_DEFAULT_DENY_ALLOWLIST_ASSEMBLED_HERE",
+   "REPLACE_THE_LAUNCHER_WITH_bubblewrap_OR_A_RUNTIME_BUILT_ON_IT__REJECTED_NO_SUCH_BINARY_ON_THE_HOST_AND_THE_SAME_SHARED_KERNEL_CLASS",
+   "A_MICROVM_OR_A_USERSPACE_KERNEL__REJECTED_HERE_NO_KVM_DEVICE_AND_NO_BINARY__STRONGER_IN_KIND_AND_NAMED_AS_SUCH",
+   "COMPILE_THE_FILTER_WITH_libseccomp__REJECTED_THE_BYTES_ARE_NOT_PINNABLE",
+   "A_DENY_LIST__REJECTED_NEW_CALLS_OPEN_BY_DEFAULT",
+   "LANDLOCK_ALONE__REJECTED_IT_RESTRICTS_FILES_AND_PORTS_NOT_WHICH_KERNEL_CALLS_ARE_REACHABLE"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-11T21:18:24Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_NAMESPACE_LAUNCHER_ON_THE_BASE_COMMIT__NAMESPACES_DROPPED_CAPABILITIES_NO_NEW_PRIVILEGES_AND_LIMITS__NO_SYSCALL_FILTER",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+     "canonical/runtime/brokered_workspace_execution_v1.py",
+     "canonical/runtime/computer_execution_boundary_v1.py",
+     "canonical/tools/carrier_qualification_probe_v1.py",
+     "REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md",
+     "OPTIMAL_PLAN_20261103_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://github.com/opencontainers/runtime-spec/pull/1087",
+     "https://github.com/google/gvisor/pull/15678",
+     "https://about.gitlab.com/blog/its-time-to-upgrade-docker-engine/",
+     "https://deepwiki.com/openai/codex/5.6-sandboxing-implementation"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/bugthesystem/agentjail",
+     "https://github.com/restyler/awesome-sandbox",
+     "https://fhiltscher.github.io/awesome-ai-coding-sandboxes/",
+     "https://pypi.org/project/python-ptrace/"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://dev.to/tamizuddin/containing-the-autonomous-mind-sub-second-sandboxing-and-risk-aware-review-for-ai-coding-agents-3adn",
+     "https://playciso.com/blog/agent-sandbox-comparison-srt-vs-alternatives-2026",
+     "https://blog.ofdeme.com/blog/isolated-execution-coding-agents/",
+     "https://rywalker.com/research/local-agent-sandboxes",
+     "https://emergent.sh/news/anthropic-launches-sandbox-runtime-ai-agent"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "sandbox for AI coding agent running untrusted code Linux user namespaces seccomp allowlist kernel escape io_uring nf_tables 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "bubblewrap vs gVisor vs Firecracker microVM vs Landlock vs nsjail comparison agent code execution sandbox 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "seccomp default action ENOSYS instead of EPERM clone3 glibc fallback runc docker default profile faccessat2"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "Anthropic sandbox-runtime OR OpenAI Codex linux sandbox seccomp landlock bubblewrap release 2026 agent sandboxing open source"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "REPLACE_THE_LAUNCHER_WITH_bubblewrap_OR_A_RUNTIME_BUILT_ON_IT__AS_CODEX_AND_ANTHROPICS_SANDBOX_RUNTIME_DO_ON_LINUX",
+     "evidence": [
+      "https://deepwiki.com/openai/codex/5.6-sandboxing-implementation",
+      "https://emergent.sh/news/anthropic-launches-sandbox-runtime-ai-agent",
+      "https://playciso.com/blog/agent-sandbox-comparison-srt-vs-alternatives-2026"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/zero_ambient_namespace_launcher_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "THE_SAME_KIND_OF_BOUNDARY__NAMESPACES_PLUS_A_SYSCALL_FILTER_ON_A_SHARED_KERNEL",
+      "CAPABILITY_STRENGTH": "A_WIDELY_USED_AND_OUTSIDE_REVIEWED_PROGRAM_INSTEAD_OF_A_LAUNCHER_REVIEWED_ONLY_HERE",
+      "WALL_CLOCK": "NO_bwrap_BINARY_ON_THIS_HOST__command_v_RETURNS_NOTHING__AND_THE_REVIEWS_SEVEN_ANSWERED_ITEMS_WOULD_HAVE_TO_BE_MEASURED_AGAIN",
+      "INCREMENTAL_COST": "A_HOST_PACKAGE_THE_SANDBOX_CANNOT_INSTALL",
+      "RELIABILITY": "MATURE",
+      "VERIFIABILITY": "ITS_FILTER_IS_SUPPLIED_BY_THE_CALLER_SO_THE_LIST_WOULD_STILL_HAVE_TO_BE_WRITTEN_AND_REVIEWED_HERE"
+     }
+    },
+    {
+     "route": "A_MICROVM_OR_A_USERSPACE_KERNEL__FIRECRACKER_OR_gVisor__A_BOUNDARY_THAT_DOES_NOT_SHARE_THE_HOST_KERNEL",
+     "evidence": [
+      "https://dev.to/tamizuddin/containing-the-autonomous-mind-sub-second-sandboxing-and-risk-aware-review-for-ai-coding-agents-3adn",
+      "https://blog.ofdeme.com/blog/isolated-execution-coding-agents/",
+      "https://github.com/restyler/awesome-sandbox"
+     ],
+     "qualification_evidence": [
+      "canonical/tools/carrier_qualification_probe_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "STRONGER_IN_KIND__A_KERNEL_BUG_REACHED_THROUGH_AN_ALLOWED_CALL_DOES_NOT_CROSS_IT",
+      "CAPABILITY_STRENGTH": "THE_ANSWER_THE_FIELD_GIVES_FOR_TRULY_UNTRUSTED_CODE",
+      "WALL_CLOCK": "NOT_AVAILABLE_HERE__THERE_IS_NO_KVM_DEVICE_ON_THIS_HOST_AND_NEITHER_BINARY_IS_PRESENT",
+      "INCREMENTAL_COST": "A_HOST_WITH_HARDWARE_VIRTUALIZATION_OR_A_BINARY_THAT_CANNOT_BE_FETCHED_HERE",
+      "RELIABILITY": "MATURE",
+      "VERIFIABILITY": "WOULD_REPLACE_THE_REVIEW_OF_A_LIST_WITH_THE_REVIEW_OF_A_HOST__NAMED_IN_THE_REVIEW_REQUEST_AS_THE_STRONGER_BOUNDARY_SO_THE_OWNER_CAN_CHOOSE_IT"
+     }
+    },
+    {
+     "route": "COMPILE_THE_FILTER_WITH_THE_HOSTS_libseccomp_INSTEAD_OF_ASSEMBLING_IT_HERE",
+     "evidence": [
+      "https://about.gitlab.com/blog/its-time-to-upgrade-docker-engine/"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_a_confined_worker_runs_behind_a_syscall_allowlist_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "THE_LIBRARY_RESOLVES_NAMES_TO_NUMBERS_ITSELF__USED_HERE_AS_A_CROSS_CHECK_OF_EVERY_NUMBER",
+      "CAPABILITY_STRENGTH": "THE_SAME_FILTER",
+      "WALL_CLOCK": "COMPARABLE",
+      "INCREMENTAL_COST": "A_HOST_LIBRARY_THAT_MUST_BE_PRESENT_AND_RECENT_ENOUGH__THE_CITED_FAILURE_IS_AN_OLD_ONE_NOT_KNOWING_faccessat2",
+      "RELIABILITY": "MATURE",
+      "VERIFIABILITY": "THE_BYTES_CHANGE_WITH_THE_LIBRARY_VERSION_SO_ONE_HASH_CANNOT_NAME_THE_PROGRAM_A_REVIEWER_APPROVED"
+     }
+    },
+    {
+     "route": "A_DENY_LIST_OF_KNOWN_DANGEROUS_CALLS_WITH_EVERYTHING_ELSE_ALLOWED",
+     "evidence": [
+      "https://github.com/bugthesystem/agentjail"
+     ],
+     "qualification_evidence": [
+      "https://github.com/bugthesystem/agentjail"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "BLOCKS_THE_SAME_NAMED_CALLS__MOUNT_AND_THE_NEW_MOUNT_API_chroot_io_uring_personality_clone3_unshare_setns_bpf_perf_userfaultfd",
+      "CAPABILITY_STRENGTH": "BREAKS_NOTHING_BY_OMISSION",
+      "WALL_CLOCK": "SHORTER_TO_WRITE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "EVERY_KERNEL_CALL_ADDED_AFTER_THE_LIST_WAS_WRITTEN_IS_OPEN",
+      "VERIFIABILITY": "A_REVIEWER_MUST_KNOW_EVERY_CALL_THAT_IS_NOT_ON_IT"
+     }
+    },
+    {
+     "route": "LANDLOCK_ALONE_AS_IN_THE_UNPRIVILEGED_RUNNERS",
+     "evidence": [
+      "https://fhiltscher.github.io/awesome-ai-coding-sandboxes/",
+      "https://rywalker.com/research/local-agent-sandboxes"
+     ],
+     "qualification_evidence": [
+      "https://rywalker.com/research/local-agent-sandboxes"
+     ],
+     "qualification_evidence_classes": [
+      "BROAD_WEB_OR_COMMUNITY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "RESTRICTS_WHICH_FILES_AND_PORTS_A_PROCESS_MAY_USE__NOT_WHICH_KERNEL_CALLS_IT_MAY_MAKE",
+      "CAPABILITY_STRENGTH": "A_DIFFERENT_QUESTION__THE_LAUNCHER_ALREADY_ANSWERS_IT_WITH_A_PRIVATE_ROOT",
+      "WALL_CLOCK": "SMALL",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DEPENDS_ON_THE_KERNELS_LANDLOCK_VERSION",
+      "VERIFIABILITY": "A_RULE_SET__COMPLEMENTARY_LATER"
+     }
+    }
+   ],
+   "negative_search_summary": "FOUR_QUERY_FAMILIES__THE_FIELDS_LOCAL_AGENT_SANDBOXES_ARE_NAMESPACES_PLUS_A_SYSCALL_FILTER_AND_SOMETIMES_LANDLOCK__THE_SAME_KIND_OF_BOUNDARY_AS_THIS_LAUNCHER_WITH_THE_FILTER__THE_STRONGER_KIND_IS_A_VIRTUAL_MACHINE_OR_A_USERSPACE_KERNEL_AND_NEEDS_WHAT_THIS_HOST_LACKS__THE_CONTAINER_RUNTIMES_MOVED_THEIR_DEFAULT_ANSWER_FROM_EPERM_TO_ENOSYS_SO_THAT_THE_C_LIBRARY_FALLS_BACK__AND_gVisor_DID_THE_SAME_IN_OCTOBER_2026__NO_PUBLIC_ROUTE_REMOVES_THE_NEED_TO_WRITE_AND_REVIEW_THE_LIST",
+   "selected_route": "ADAPT_THE_LAUNCHER_THE_REVIEW_ALREADY_EXAMINES__ONE_LIST_ASSEMBLED_INTO_CLASSIC_BPF_WITH_NO_DEPENDENCY__INSTALLED_BEFORE_ANYTHING_RUNS_IN_THE_WORKER__OBSERVED_FROM_INSIDE_THE_WORKER_BY_THE_PROBE",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-11T21:18:24Z",
+    "max_age_hours": 2,
+    "selected_route": "ADAPT_THE_LAUNCHER_THE_REVIEW_ALREADY_EXAMINES__ONE_LIST_ASSEMBLED_INTO_CLASSIC_BPF_WITH_NO_DEPENDENCY__INSTALLED_BEFORE_ANYTHING_RUNS_IN_THE_WORKER__OBSERVED_FROM_INSIDE_THE_WORKER_BY_THE_PROBE",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import ctypes, struct, hashlib; print(\"ok\")' returned ok; the module and the install step use nothing else"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "KERNEL_SECCOMP_FILTER_MODE",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "/proc/sys/kernel/seccomp/actions_avail lists kill_process, errno and allow on this host (Linux 6.1); a worker started by this tree reports filter mode 2"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "NAMESPACE_LAUNCHER_AND_ITS_PROBE",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/runtime/zero_ambient_namespace_launcher_v1.py starts a worker on this host and canonical/tools/carrier_qualification_probe_v1.py reports 8 of 10 on the base commit and 9 of 10 on this tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "THE_MACHINE_MAY_ONE_DAY_RUN_A_PROGRAM_AT_ITS_FRONT_DOOR_AND_SO_HAVE_THE_EXPERIENCES_ITS_LEARNER_NEEDS",
+   "proxy_goals_deleted": [
+    "MAKE_THE_PROBE_SAY_SATISFIED",
+    "OPEN_THE_ROUTE_IN_THIS_CHANGE",
+    "CLAIM_THE_CARRIER_IS_QUALIFIED"
+   ],
+   "surviving_necessity": "A_WORKER_THAT_CARRIES_UNREAD_CODE_MUST_NOT_BE_ABLE_TO_REACH_bpf_io_uring_keyctl_ptrace_NETLINK_OR_A_NEW_NAMESPACE__NAMESPACES_AND_DROPPED_CAPABILITIES_DO_NOT_DECIDE_THAT"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "THE_NAMESPACE_LAUNCHER_ALREADY_GIVES_A_PRIVATE_ROOT_PID_NET_IPC_AND_UTS_NAMESPACE_LIMITS_AND_NO_NEW_PRIVILEGES",
+    "THE_PROBE_ALREADY_MEASURES_TEN_ITEMS_OF_THE_REVIEWS_CHECKLIST",
+    "THE_RETAINED_LEARNER_AND_ITS_SESSION_ALREADY_EXIST_AND_WORK_WHEN_DRIVEN_DIRECTLY",
+    "A_CANDIDATE_ACTION_TEMPLATE_THAT_BINDS_retained_learning_ALREADY_EXISTS_AS_A_DRAFT"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_LAUNCHER_AND_ITS_SETUP_SCRIPT",
+    "THE_PROBE_AND_ITS_VERDICT_WORDS",
+    "THE_LAUNCHERS_OWN_TEST_HELPERS",
+    "THE_REVIEW_REQUEST_AS_THE_PLACE_WHERE_A_REVIEWER_IS_TOLD_WHAT_CHANGED"
+   ],
+   "capability_work_deleted": [
+    "A_SECOND_LAUNCHER",
+    "A_FILTER_PER_CALLER"
+   ],
+   "external_existing_routes_checked": [
+    "bubblewrap_AND_RUNTIMES_BUILT_ON_IT",
+    "nsjail_AND_agentjail",
+    "gVisor",
+    "Firecracker_AND_OTHER_MICROVMS",
+    "LANDLOCK_RUNNERS",
+    "THE_OCI_DEFAULT_PROFILE_AND_ITS_ENOSYS_RULE"
+   ],
+   "surviving_gap": "THE_LIST_IS_UNREVIEWED__THE_WORKER_STILL_RUNS_THE_HOSTS_LIBC__NO_ATTACK_CAMPAIGN_HAS_BEEN_RUN__ioctl_AND_prctl_ARE_ALLOWED_WHOLE__THREE_OTHER_LAUNCHERS_CARRY_THEIR_OWN_SETUP_SCRIPT_AND_ARE_NOT_FILTERED__x86_64_ONLY__THE_KERNEL_IS_SHARED"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_LAUNCHER_NEVER_INSTALLED_A_FILTER__NOTHING_ABOUT_THE_HOST_PREVENTS_ONE",
+   "evidence": [
+    "ON_THE_BASE_COMMIT_A_WORKER_REPORTS_FILTER_MODE_0_AND_THE_KERNEL_ANSWERS_A_NETLINK_SOCKET_io_uring_setup_personality_keyctl_setns_ptrace_AND_syncfs",
+    "THE_PROBE_HAS_REPORTED_seccomp_syscall_filter_NOT_SATISFIED_SINCE_20261103",
+    "A_REPAIR_REQUEST_AT_THE_FRONT_DOOR_RETURNS_FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_BOUNDARY__FORBIDDEN_AND_WRONG",
+    "BYPASS_BY_CALLING_THE_ADAPTER_DIRECTLY__THAT_IS_WHAT_THE_BOUNDARY_EXISTS_TO_STOP",
+    "SUBSTITUTE_ANOTHER_CARRIER__NONE_IS_AVAILABLE_ON_THIS_HOST"
+   ],
+   "surviving_causal_blocker": "THE_FRONT_DOOR_REFUSES_EVERY_REQUEST_THAT_WOULD_RUN_CODE_BECAUSE_NO_CONFINEMENT_IS_ADMITTED__AND_THE_ONLY_CARRIER_IN_THE_TREE_LETS_A_WORKER_CALL_ANY_KERNEL_ENTRY_POINT__THE_REVIEW_NAMES_THAT_AS_ONE_OF_TWO_OBJECTIONS_STILL_STANDING"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADAPT_THE_LAUNCHER_WITH_AN_ALLOWLIST_ASSEMBLED_HERE",
+    "THEN_MAKE_THE_PROBE_OBSERVE_IT_FROM_INSIDE_THE_WORKER",
+    "THEN_TELL_THE_REVIEWER_WHAT_TO_QUESTION"
+   ],
+   "losing_routes_reason": "EVERY_OTHER_CARRIER_NEEDS_A_BINARY_OR_A_HARDWARE_FEATURE_THIS_HOST_LACKS__A_DENY_LIST_LEAVES_NEW_CALLS_OPEN__A_LIBRARY_COMPILED_FILTER_CANNOT_BE_PINNED__LANDLOCK_ANSWERS_A_DIFFERENT_QUESTION",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_REPOSITORYS_OWN_CARRIER_TESTS_AND_THE_PROBE_ARE_USED_UNCHANGED_FOR_WHAT_MUST_STILL_PASS__ONE_PROBE_TEST_THAT_PINNED_THE_ABSENCE_OF_A_FILTER_IS_REWRITTEN_ON_PURPOSE_AND_SAYS_SO__THE_NEW_TESTS_ASK_A_REAL_WORKER_AND_INTERPRET_THE_SHIPPED_PROGRAM__THE_NUMBERS_ARE_COMPARED_WITH_THE_KERNEL_HEADER_AND_WITH_libseccomp__NONE_OF_THIS_IS_AN_INDEPENDENT_REVIEW"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "note": "EVERY_CALLER_OF_THE_LAUNCHER__THE_PERSISTENT_WORKER_IN_THE_BROKERED_WORKSPACE__AND_THE_READ_ONLY_LOCAL_FILE_QUERY_EXECUTOR_NOW_START_BEHIND_THE_FILTER_WITHOUT_ANY_CHANGE_OF_THEIR_OWN__THE_RESULT_OF_run_confined_GAINS_ONE_FIELD_THE_HASH_OF_THE_PROGRAM_IT_STARTED_BEHIND__THE_RECORD_OF_20261103_IS_KEPT_AND_A_NEW_DATED_RECORD_IS_ADDED_BESIDE_IT",
+   "adjacent_capabilities_absorbed": [],
+   "fresh_reuse_plan": "THE_THREE_OTHER_LAUNCHERS_CAN_INSTALL_THE_SAME_PROGRAM_WITH_THE_SAME_STEP__A_CALL_AN_ORDINARY_TOOL_NEEDS_IS_ADDED_BY_MEASURING_IT_AND_CHANGING_ONE_LINE_AND_THE_PINNED_HASH"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_DERIVING_THE_REVIEWS_CHECKLIST__THE_PROBE_ALREADY_HOLDS_IT"
+   ],
+   "search_stop_decision": "A_ROUTE_WITH_NO_MEASURED_LOSS_EXISTS__THE_FRONTIER_WAS_REFRESHED_TODAY__THE_STRONGER_CARRIERS_FOUND_ARE_NOT_AVAILABLE_ON_THIS_HOST_AND_ARE_NAMED",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN_AND_REPORT_IT__THEN_THE_SECOND_OBJECTION_A_PINNED_RUNTIME_INSTEAD_OF_THE_HOSTS_LIBC__THEN_AN_ATTACK_CAMPAIGN__THEN_THE_THREE_OTHER_LAUNCHERS_THAT_CARRY_THEIR_OWN_SETUP_SCRIPT__THE_REVIEW_AND_THE_ADMISSION_ARE_THE_OWNERS",
+ "prior_work_reused": [
+  "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+  "canonical/runtime/brokered_workspace_execution_v1.py",
+  "canonical/tools/carrier_qualification_probe_v1.py",
+  "canonical/tests/test_carrier_qualification_probe_v1.py",
+  "canonical/tests/test_zero_ambient_namespace_launcher_v1.py",
+  "REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md",
+  "OPTIMAL_PLAN_20261103_V1.md",
+  "canonical/verification/CARRIER_QUALIFICATION_PROBE_20261103_V1.json"
+ ]
+}
