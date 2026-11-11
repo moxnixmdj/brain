@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_12_BRAIN_BLOBS__TWO_FAMILY_LOCAL_PROMOTIONS_ELIGIBLE__ZERO_CREDIT",
+  "source_brain_pr": 926,
+  "source_brain_head": "7ad5dd42276a21dc0133d016178587a59d6ab709",
+  "exact_verified_brain_blobs": {
+    "canonical/governance/OPUS55_FAMILY_OWNERSHIP_PROMOTION_ELIGIBILITY_V1.json": "bde8087941a548228f603ba7cd0ef81a05fadcb9",
+    "canonical/runtime/opus55_family_ownership_promotion_eligibility_v1.py": "e893fecb72ae0473ddcac905db4fde135998b861",
+    "canonical/tests/test_opus55_family_ownership_promotion_eligibility_v1.py": "4cd9c70fff086a2f1f8e30c7f207e86a64595593",
+    "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json": "7fe34915c98a416c85ac8a62aa0ae6802b2ae39c",
+    "canonical/verification/GLOBAL_OWNERSHIP_POSTCONDITIONS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "e0dbd996c18bdb818693ab0d217d751594a03d0f",
+    "canonical/verification/OPUS55_ACCEPTANCE_CALIBRATION_AUDIT_20261002_V3.json": "c50034c670f797d91fa443d244853071f09bd37a",
+    "canonical/governance/TOOL_DISCOVERY_ACCEPTANCE_CEILING_WITNESS_V1.json": "60a7c1139cad315d977bf5ed97e708cc5ec3fcc7",
+    "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json": "cb3b7c4b6c4e1f2a0471c6b6be72c4ca9ebddc80",
+    "canonical/runtime/tool_discovery_information_safe_candidate.py": "64c02edd568d95ec5ed54b7b8122183ce5b82e17",
+    "canonical/runtime/delegation_whole_scope_candidate_v2.py": "f1a93ee66d90093de61dc17c6ebf2e24073df522",
+    "canonical/capabilities/opus55/OPUS55_SCOPED_SUBAGENT_DELEGATION_COORDINATION_V1.json": "92446c0ea1eb6801db58bd757ab62a24710d3b6b",
+    "canonical/verification/DELEGATION_TEMPORAL_CEILING_TRANSMUTATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "5023cc222a44f99b57785f5954cc95a29b739193"
+  },
+  "public_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 922,
+    "pull_request_head": "208bb90d8e2235316faafe5ffc93b308abec39ce",
+    "workflow_run_id": 37014840799,
+    "workflow_job_id": 110863060515,
+    "conclusion": "success",
+    "merge_commit": "a34ca897393d5111509191ae9f03499851d614eb"
+  },
+  "verified": [
+    "EXACT_12_OF_12_MIRRORED_BRAIN_GIT_BLOB_IDENTITIES_MATCH",
+    "FAIL_CLOSED_COUNTERFACTUALS_PASS",
+    "TOOL_DISCOVERY_FULL_PROTOCOL_OWNERSHIP_ELIGIBLE",
+    "SUBAGENT_DELEGATION_FULL_PROTOCOL_OWNERSHIP_ELIGIBLE",
+    "GLOBAL_DONOR_DEPENDENCE_VERIFIER_MUTATION_AND_COMPOSITION_POSTCONDITIONS_ZERO",
+    "PROJECTED_STRICT_OWNERSHIP_2_OF_19_TO_4_OF_19_IF_SEPARATELY_PROMOTED",
+    "TERMINAL_GOAL_REMAINS_FALSE",
+    "ZERO_NEW_REALITY_ZERO_TERMINAL_REPLAY_ZERO_INCREMENTAL_SPEND",
+    "ZERO_CREDIT_FROM_ELIGIBILITY_PROOF_ITSELF"
+  ],
+  "result": {
+    "eligible_family_count": 2,
+    "eligible_families": [
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "SUBAGENT_DELEGATION_AND_COORDINATION"
+    ],
+    "current_strict_owned_families": 2,
+    "projected_strict_owned_families_after_atomic_promotion": 4,
+    "remaining_unowned_families_after_atomic_promotion": 15,
+    "terminal_goal_achieved": false
+  },
+  "new_reality_units": 0,
+  "terminal_cases_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "promotion_authority": false,
+  "next": "BUILD_AND_INDEPENDENTLY_VERIFY_ATOMIC_2_TO_4_OWNERSHIP_PROMOTION_TRANSACTION"
+}
