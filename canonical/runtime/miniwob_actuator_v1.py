@@ -587,14 +587,122 @@ def v_type(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
             if _n:
                 submit(act, required=False)
                 return "type-labels:%d" % _n
+    # THE INSTRUCTION CAN NAME A TRANSFORMATION, NOT A LITERAL.
+    #
+    # Measured 2026-11-09 on `enter-text-2`: the goal reads
+    #   Type "MICHAEL" in all lower case letters in the text input and press Submit.
+    # and the page scores  t === expectedText  where expectedText is the quoted token with
+    # the named transformation applied. Typing the quoted token verbatim is a certain
+    # failure, and nothing before this looked at the words AFTER the quote. The rule is
+    # general: if the goal names a case/shape operation, apply it to the token.
+    if tok:
+        _g = goal or ""
+        _t = str(tok)
+        if re.search(r"all\s+upper|upper\s*case", _g, re.I):
+            _t = _t.upper()
+        elif re.search(r"all\s+lower|lower\s*case", _g, re.I):
+            _t = _t.lower()
+        elif re.search(r"capitali[sz]", _g, re.I):
+            _t = _t[:1].upper() + _t[1:].lower()
+        elif re.search(r"revers", _g, re.I):
+            _t = _t[::-1]
+        elif re.search(r"without\s+(?:any\s+)?spaces", _g, re.I):
+            _t = re.sub(r"\s+", "", _t)
+        op = dict(op)
+        op["token"] = _t
+        tok = _t
+    # THE ANSWER CAN BE PRINTED ON THE PAGE RATHER THAN QUOTED IN THE SENTENCE.
+    #
+    # Measured 2026-11-09 on `text-transform`: the goal is the constant
+    # "Type the text below into the text field and press Submit." -- there is no token at
+    # all, and the answer is a set of <span>s inside #captcha, one character each, each
+    # with its own skewX/skewY. The instruction's own words say where to look ("below").
+    # Read the spans in DOM order and concatenate; a captcha is a string the page shows
+    # you, so no OCR and no vision is needed.
+    if (not tok or len(str(tok).strip()) < 3
+            or str(tok).strip().lower() in _ARTICLES):
+        _shown = act.ev(
+            "(()=>{const c=document.querySelector('#captcha');"
+            "const es=c?[...c.children]:[];"
+            "if(!es.length)return null;"
+            "return es.map(e=>e.textContent).join('')})()")
+        if _shown and len(str(_shown).strip()) >= 2:
+            op = dict(op); op["token"] = str(_shown).strip(); tok = str(_shown).strip()
+
+    # ONE TOKEN, MANY FIELDS: "Enter the password X into BOTH text fields".
+    #
+    # Measured 2026-11-09 on `enter-password`, 0/30: the page scores
+    # (p === password && v === password) over #password AND #verify, and the old path
+    # filled only the first box, so the episode ended on a half-filled form.
+    if tok and re.search(r"\bboth\b|each (?:text )?field", (goal or ""), re.I):
+        _boxes = ("'input[type=text],input[type=password],input[type=date],"
+                  "input[type=time],input[type=number],input:not([type]),textarea'")
+        _f = act.ev(
+            "(()=>{return [...document.querySelectorAll(%s)]"
+            ".filter(e=>{const r=e.getBoundingClientRect();"
+            "return r.width>0&&r.height>0}).length})()" % _boxes)
+        if isinstance(_f, int) and _f >= 2:
+            _n = 0
+            for _i in range(min(_f, 6)):
+                _s = ("(()=>{const es=[...document.querySelectorAll(%s)]"
+                      ".filter(e=>{const r=e.getBoundingClientRect();"
+                      "return r.width>0&&r.height>0});"
+                      # click_el resolves an EXPRESSION TO AN ELEMENT. Returning
+                      # !!es[i] hands it `true`, and the press silently never happens.
+                      "return es[%d]||null})()" % (_boxes, _i))
+                if act.click_el(_s):
+                    act.type_text(str(tok))
+                    _n += 1
+            if _n:
+                submit(act, required=False)
+                return "type-both:%d" % _n
+
     if not tok or str(tok).strip().lower() in _ARTICLES or len(str(tok).strip()) < 3:
         _from_table = _table_lookup(act, goal)
         if _from_table:
             op = dict(op)
             op["token"] = _from_table
             tok = _from_table
+    # A DATE FIELD TAKES ISO AND THE PAGE REARRANGES IT.
+    #
+    # Measured 2026-11-09 on `enter-date`, 0/30: the goal quotes 12/03/2017 and the page
+    # does  value.split('-') -> t[1]+'/'+t[2]+'/'+t[0], i.e. it expects YYYY-MM-DD.
+    # Typing the quoted mm/dd/yyyy produced an empty split and a certain miss.
+    if tok and re.search(r"\bas the date\b|\bdate field\b", (goal or ""), re.I):
+        # PARSE THE GOAL, NOT THE TOKEN. The decomposer turns "Enter 12/03/2017 as the
+        # date..." into token='12' -- the first number it sees -- so the token can never
+        # match a date pattern. The date is in the sentence; take it from there.
+        _md = (re.search(r'(\d{1,2})\s*/\s*(\d{1,2})\s*/\s*(\d{4})', str(goal or ""))
+               or re.search(r'(\d{1,2})\s*/\s*(\d{1,2})\s*/\s*(\d{4})', str(tok)))
+        if _md:
+            _iso = "%s-%02d-%02d" % (_md.group(3), int(_md.group(1)), int(_md.group(2)))
+            op = dict(op); op["token"] = _iso; tok = _iso
+
+    # A NATIVE DATE INPUT IGNORES KEYSTROKES.
+    #
+    # Measured 2026-11-09 on `enter-date`: click_el focused input[type=date], type_text
+    # sent "2011-07-19", and the field read back ''. A typed value is not an accepted
+    # value -- the same law as r169, on a control where the browser owns the editor.
+    # Set the value through the element's own setter and fire the events the page
+    # listens for, then read it back before believing it.
+    if tok and re.search(r"^\d{4}-\d{2}-\d{2}$", str(tok)):
+        _did = act.ev(
+            "(()=>{const e=document.querySelector('input[type=date],input[type=time]');"
+            "if(!e)return null;e.focus();e.value=%s;"
+            "e.dispatchEvent(new Event('input',{bubbles:true}));"
+            "e.dispatchEvent(new Event('change',{bubbles:true}));"
+            "return e.value})()" % json.dumps(str(tok)))
+        if _did == str(tok):
+            submit(act, required=False)
+            time.sleep(0.25)
+            if episode_over(act):
+                return "type-date:%s" % str(tok)[:10]
+
     sel = ("textarea" if op.get("field") == "textarea"
-           else "input[type=text],input:not([type]),textarea")
+           # TYPE=DATE IS A TEXT FIELD. `input[type=text]` does not match it, so
+           # enter-date was reaching for a box that was not there and typing at nothing.
+           else ("input[type=text],input[type=date],input[type=time],"
+                 "input[type=number],input:not([type]),textarea"))
     if tok and act.click_el("document.querySelector('%s')" % sel):
         act.type_text(tok)
     submit(act)
