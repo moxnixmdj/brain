@@ -1,0 +1,22 @@
+name: Verify accepted selected effect-free leaves V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/accepted_three_selected_leaf_effect_audit_v1.py"
+      - "canonical/tests/test_accepted_three_selected_leaf_effect_audit_v1.py"
+      - ".github/workflows/verify-accepted-selected-effect-free-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python canonical/runtime/accepted_three_selected_leaf_effect_audit_v1.py
+      - run: python -m pytest -q canonical/tests/test_accepted_three_selected_leaf_effect_audit_v1.py
