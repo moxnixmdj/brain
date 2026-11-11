@@ -1,0 +1,97 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_FINE_TUNED_STORAGE_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__REAL_FINE_TUNED_DONOR_PACKED_TWICE_IDENTICALLY__COMPLETE_BUNDLE_UNDER_100MB__CAPABILITY_OPEN",
+  "donor": {
+    "model": "ahmed-masry/unichart-chartqa-960",
+    "revision": "e5eb1e52c1d775e0f3febaddc7fc3559e80cb989",
+    "source_file": "pytorch_model.bin",
+    "source_bytes": 809199995,
+    "source_sha256": "4407db60801a20bcf254946acfee6727491ef1739ad7b4d3abbf87b7c75e7229"
+  },
+  "exact_state": {
+    "tensor_names": 484,
+    "unique_storages": 483,
+    "alias_storage_count": 1,
+    "tied_aliases": [
+      "decoder.model.decoder.embed_tokens.weight",
+      "decoder.lm_head.weight"
+    ],
+    "unique_f32_elements": 201858168,
+    "unique_i64_elements": 200000,
+    "unique_storage_bytes": 809032672,
+    "official_transformers_4_28_1_state_identity": {
+      "state_keys": 484,
+      "unique_model_parameters": 201858168,
+      "missing_keys": 0,
+      "extra_keys": 0,
+      "shape_mismatches": 0
+    }
+  },
+  "transformation": {
+    "encoder_f32": "W4_AFFINE_GROUP256",
+    "decoder_and_other_f32": "W3_AFFINE_GROUP256",
+    "i64": "LOSSLESS",
+    "alias_policy": "PACK_PHYSICAL_STORAGE_ONCE",
+    "group_metadata": "FP16_SCALE_PLUS_FP16_OFFSET"
+  },
+  "source_blobs": {
+    "lowbit_runtime": "05bc12235d2082ae0cb554e79a46d77116ea3c22",
+    "lowbit_tests": "3851ca2b62f998c47ad4f25f6b4efd70938dafd4",
+    "chartqa_bin_runtime": "01828322dad3be26d9ac5dcb75988f847004a457",
+    "chartqa_bin_tests": "af70706c27fa2751cbf4bf8b9708d4603aa1474c",
+    "preservation_runner": "c7bb96a32d504131893f743307b3d95092be0517",
+    "preservation_runner_tests": "0109b33c696ee242be312a67beba322f4e7c1f41"
+  },
+  "isolated_sprite_verification": {
+    "sprite": "brain-heldout003-one-shot",
+    "lowbit_synthetic_tests": "10_OF_10_PASS_AFTER_NONFINITE_FIX",
+    "chartqa_bin_parser_tests": "2_OF_2_PASS_AFTER_SYNTHETIC_FIX",
+    "preservation_scorer_tests": "4_OF_4_PASS",
+    "clean_real_pack_runs": 2,
+    "clean_run_1": {
+      "output_bytes": 89874047,
+      "output_sha256": "2c42f4d3d30e0a6cbcc8cd86da5705d3e53a87acb082b5d53899aee91c8313fa"
+    },
+    "clean_run_2": {
+      "output_bytes": 89874047,
+      "output_sha256": "2c42f4d3d30e0a6cbcc8cd86da5705d3e53a87acb082b5d53899aee91c8313fa"
+    },
+    "deterministic_identity": true
+  },
+  "overinclusive_complete_bundle": {
+    "packed_checkpoint_bytes": 89874047,
+    "all_non_checkpoint_donor_repo_files_bytes": 5313202,
+    "total_bytes": 95187249,
+    "h100_budget_bytes": 100000000,
+    "margin_bytes": 4812751,
+    "pass": true
+  },
+  "theorem_boundary": {
+    "closes": [
+      "REAL_FINE_TUNED_DONOR_LOW_BIT_ARTIFACT_EXISTS",
+      "DETERMINISTIC_PACK_IDENTITY_ON_TWO_CLEAN_RUNS",
+      "COMPLETE_OVERINCLUSIVE_BUNDLE_LE_100000000_BYTES",
+      "OFFICIAL_MODEL_STATE_KEY_AND_SHAPE_IDENTITY"
+    ],
+    "remains_open": [
+      "LOW_BIT_CHARTQA_CAPABILITY_PRESERVATION",
+      "CHARTOGRAPHY_GE_89",
+      "FULL_H100_TERMINAL_CAPABILITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CAPABILITY_PRESERVATION_CLAIM",
+    "NO_CHARTOGRAPHY_THRESHOLD_CREDIT",
+    "NO_H100_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_CHARTQA_IMAGE_PREEXPOSURE_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_BEFORE_PACKED_MODEL_OUTPUTS__PUBLIC_NONTERMINAL__ZERO_CREDIT",
+  "repository": "vis-nlp/ChartQA",
+  "commit": "044eabfc306abfe9340c5741f0093aefc5973d06",
+  "images": [
+    {
+      "img": "3887.png",
+      "git_blob_sha": "6b76227ed5a987cee19438591055dc77b395407f",
+      "bytes": 75624
+    },
+    {
+      "img": "4576.png",
+      "git_blob_sha": "3afbd184d6db41971c8aea7f2401f41d7a7da492",
+      "bytes": 52899
+    },
+    {
+      "img": "5734.png",
+      "git_blob_sha": "3998b53207d7008d507e464217f8106fca889ce1",
+      "bytes": 37817
+    },
+    {
+      "img": "11756.png",
+      "git_blob_sha": "b8288b0cc65042862c7a3c464db31720e45a5d9e",
+      "bytes": 26647
+    },
+    {
+      "img": "13153.png",
+      "git_blob_sha": "55b57b72fa67cd22cd94c407a2c855c486807b61",
+      "bytes": 40710
+    },
+    {
+      "img": "multi_col_20933.png",
+      "git_blob_sha": "df0cece0bf4060d7d9ccce01f816825b6e4b7264",
+      "bytes": 43512
+    },
+    {
+      "img": "multi_col_972.png",
+      "git_blob_sha": "f65d80c6e4c2fa46872a46b2b2538f87268534e6",
+      "bytes": 53030
+    },
+    {
+      "img": "multi_col_60377.png",
+      "git_blob_sha": "301da080a9bc2cf8f9dad0589ba229a0ade71f05",
+      "bytes": 44799
+    },
+    {
+      "img": "multi_col_60563.png",
+      "git_blob_sha": "a34da3843daaed3880c8b745cd8b26ab5f19347d",
+      "bytes": 87518
+    },
+    {
+      "img": "multi_col_101153.png",
+      "git_blob_sha": "c31277ef04cbdcc31e296bcee38cd8d663f4606c",
+      "bytes": 54198
+    },
+    {
+      "img": "multi_col_80582.png",
+      "git_blob_sha": "aad34b57ea28950518790cf4adc989af7c292f3d",
+      "bytes": 44156
+    }
+  ],
+  "hard_rules": [
+    "NO_IMAGE_SUBSTITUTION_AFTER_PACKED_OUTPUTS",
+    "NO_CASE_DELETION_AFTER_OUTCOMES",
+    "NO_CHARTOGRAPHY_TERMINAL_CASES",
+    "ZERO_ACCEPTANCE_CAPABILITY_FAMILY_OWNERSHIP_AND_H100_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  }
+}
