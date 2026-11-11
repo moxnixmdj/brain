@@ -81,8 +81,24 @@ def _quoted(text: str) -> str | None:
 
 
 def _colour(text: str) -> str | None:
-    from canonical.runtime import appearance_address_v1 as appearance
-    for word in appearance.COLOURS:
+    """Colour words, from the one list this repo already keeps.
+
+    This used to be an absolute package import (`from canonical.runtime import ...`) executed
+    at call time. When the module is loaded from a file path -- which every measurement
+    harness in this project does -- that import raises ModuleNotFoundError, the exception
+    escapes decompose(), and the episode is recorded as a generic failure with no action
+    attempted. That silently removed every colour-operand goal from r137 while leaving the
+    other tasks intact, so the run looked like a capability loss and was really an import
+    bug. The sibling import is now guarded and falls back to a local list.
+    """
+    try:
+        from canonical.runtime import appearance_address_v1 as appearance   # noqa: PLC0415
+        colours = appearance.COLOURS
+    except Exception:
+        colours = ("black", "white", "red", "green", "blue", "yellow", "olive",
+                   "cyan", "magenta", "pink", "gray", "grey", "orange", "purple",
+                   "brown", "navy", "teal", "silver", "lime", "maroon")
+    for word in colours:
         if re.search(r"\b" + re.escape(word) + r"\b", text, re.I):
             return word
     return None

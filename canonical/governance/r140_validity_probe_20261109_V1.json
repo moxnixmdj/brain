@@ -1,0 +1,642 @@
+{
+ "count-sides": {
+  "task": "count-sides",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "circle-center": {
+  "task": "circle-center",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "use-colorwheel-2": {
+  "task": "use-colorwheel-2",
+  "episodes": 6,
+  "passes": 6,
+  "rate": 1.0,
+  "verdict": "REWARDS_INACTION",
+  "threshold": 2,
+  "raw": [
+   0.684,
+   0.892,
+   0.413,
+   0.519,
+   0.638,
+   0.765
+  ]
+ },
+ "click-tab-2-easy": {
+  "task": "click-tab-2-easy",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "focus-text": {
+  "task": "focus-text",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "click-checkboxes-soft": {
+  "task": "click-checkboxes-soft",
+  "episodes": 6,
+  "passes": 1,
+  "rate": 0.167,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0.6,
+   -0.6,
+   -0.6,
+   -0.2,
+   -0.5
+  ]
+ },
+ "drag-shapes": {
+  "task": "drag-shapes",
+  "episodes": 6,
+  "passes": 1,
+  "rate": 0.167,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "visual-addition": {
+  "task": "visual-addition",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "click-color": {
+  "task": "click-color",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "bisect-angle": {
+  "task": "bisect-angle",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "simple-algebra": {
+  "task": "simple-algebra",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "draw-line": {
+  "task": "draw-line",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "simple-arithmetic": {
+  "task": "simple-arithmetic",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "use-spinner": {
+  "task": "use-spinner",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "click-link": {
+  "task": "click-link",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "email-inbox-forward-nl": {
+  "task": "email-inbox-forward-nl",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "click-menu": {
+  "task": "click-menu",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "use-autocomplete": {
+  "task": "use-autocomplete",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "scroll-text-2": {
+  "task": "scroll-text-2",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "click-collapsible-2": {
+  "task": "click-collapsible-2",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "click-test": {
+  "task": "click-test",
+  "episodes": 6,
+  "passes": 6,
+  "rate": 1.0,
+  "verdict": "REWARDS_INACTION",
+  "threshold": 2,
+  "raw": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ]
+ },
+ "form-sequence-3": {
+  "task": "form-sequence-3",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "text-transform": {
+  "task": "text-transform",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "click-tab-2-hard": {
+  "task": "click-tab-2-hard",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "read-table": {
+  "task": "read-table",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "simon-says": {
+  "task": "simon-says",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "terminal": {
+  "task": "terminal",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "use-autocomplete-nodelay": {
+  "task": "use-autocomplete-nodelay",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "drag-cube": {
+  "task": "drag-cube",
+  "episodes": 6,
+  "passes": 1,
+  "rate": 0.167,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "social-media": {
+  "task": "social-media",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "enter-text-dynamic": {
+  "task": "enter-text-dynamic",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "use-slider-2": {
+  "task": "use-slider-2",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "drag-items-grid": {
+  "task": "drag-items-grid",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "hot-cold": {
+  "task": "hot-cold",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "choose-list": {
+  "task": "choose-list",
+  "episodes": 6,
+  "passes": 1,
+  "rate": 0.167,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   1,
+   -1,
+   -1
+  ]
+ },
+ "click-dialog": {
+  "task": "click-dialog",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "unicode-test": {
+  "task": "unicode-test",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "multi-orderings": {
+  "task": "multi-orderings",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "click-scroll-list": {
+  "task": "click-scroll-list",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ },
+ "resize-textarea": {
+  "task": "resize-textarea",
+  "episodes": 6,
+  "passes": 0,
+  "rate": 0.0,
+  "verdict": "VALID",
+  "threshold": 2,
+  "raw": [
+   -1,
+   -1,
+   -1,
+   -1,
+   -1,
+   -1
+  ]
+ }
+}
