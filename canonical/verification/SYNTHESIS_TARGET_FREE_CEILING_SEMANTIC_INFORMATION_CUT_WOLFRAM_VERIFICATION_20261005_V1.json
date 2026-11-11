@@ -1,0 +1,94 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_TARGET_FREE_CEILING_SEMANTIC_INFORMATION_CUT_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_KERNEL_PASS__FINITE_INDISTINGUISHABILITY_CORE_VERIFIED__SEMANTIC_PREMISE_BINDING_REMAINS_REPO_LEVEL__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_TARGET_FREE_CEILING_SEMANTIC_INFORMATION_CUT_20261005_V1.json",
+    "branch_commit": "0c6ecba2bbe0363b2477aa2fee6be27ee925e34c"
+  },
+  "verifier": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "model": {
+      "allowed_deterministic_outputs": [
+        "EMPTY",
+        "A_ONLY",
+        "B_ONLY"
+      ],
+      "hidden_completion_H_A": "SUCCESS_IFF_A_RETAINED",
+      "hidden_completion_H_B": "SUCCESS_IFF_B_RETAINED"
+    },
+    "exact_kernel_output": {
+      "allowed_policies": [
+        [],
+        [
+          "A"
+        ],
+        [
+          "B"
+        ]
+      ],
+      "deterministic_results": [
+        {
+          "output": [],
+          "success_H_A": 0,
+          "success_H_B": 0,
+          "worst_case": 0
+        },
+        {
+          "output": [
+            "A"
+          ],
+          "success_H_A": 1,
+          "success_H_B": 0,
+          "worst_case": 0
+        },
+        {
+          "output": [
+            "B"
+          ],
+          "success_H_A": 0,
+          "success_H_B": 1,
+          "worst_case": 0
+        }
+      ],
+      "deterministic_universal_policies": [],
+      "randomized_universal_guarantee_feasible": false
+    }
+  },
+  "verified_deductions": [
+    "NO_DETERMINISTIC_POLICY_WITH_BUDGET_AT_MOST_ONE_CAN_RETAIN_THE_UNIQUE_REQUIRED_UNIT_IN_BOTH_H_A_AND_H_B.",
+    "NO_RANDOMIZED_POLICY_OVER_THE_ALLOWED_OUTPUTS_CAN_ACHIEVE_SUCCESS_PROBABILITY_ONE_IN_BOTH_H_A_AND_H_B.",
+    "THEREFORE_IF_BOTH_HIDDEN_COMPLETIONS_REMAIN_CONSISTENT_WITH_THE_CURRENT_VISIBLE_PREMISES__UNIVERSAL_SCORE_ONE_CANNOT_FOLLOW_FROM_VISIBLE_INFORMATION_ALONE."
+  ],
+  "repo_level_premise_not_verified_by_kernel": {
+    "premise": "THE_CURRENT_FROZEN_SYNTHESIS_CONTRACT_DOES_NOT_CONTAIN_A_SCOPE_COMPLETE_SEMANTIC_ENTAILMENT_RULE_THAT_RULES_OUT_ONE_OF_THE_TWO_HIDDEN_DECISION_RELEVANCE_COMPLETIONS.",
+    "bound_sources": [
+      {
+        "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+        "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26"
+      },
+      {
+        "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+        "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+      },
+      {
+        "path": "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+        "git_blob_sha": "8206cb013b5cd0d653ffa70d1e867f8c4d4630b8"
+      }
+    ],
+    "verification_role": "STATIC_CONTENT_ADDRESSED_REPO_AUDIT__NOT_WOLFRAM_SEMANTICS"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
