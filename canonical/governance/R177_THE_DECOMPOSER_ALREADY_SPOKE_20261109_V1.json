@@ -1,0 +1,37 @@
+{
+  "round": "r177",
+  "date": "2026-11-09",
+  "claim": "Two verbs were already being produced correctly by the decomposer and had no dispatcher. The defect was not knowledge or memory -- it was a missing entry in a table.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "r176": {"passes": 335, "trials": 650, "rate": 0.5154},
+    "r177": {"passes": 366, "trials": 650, "rate": 0.5631},
+    "paired_per_task_diff_pp": 4.77, "se_pp": 1.73, "t": 2.76,
+    "significant": true,
+    "tasks_up": 17, "tasks_down": 5, "tasks_unchanged": 108,
+    "zero_tasks": {"r176": 54, "r177": 50}
+  },
+  "families_repaired": {
+    "copy-paste (2 tasks)": {"before": 0.0, "after": 1.0, "verb_was": "COPY_PASTE, DECOMPOSED, undispatched"},
+    "highlight-text (2 tasks)": {"before": 0.0, "after": 1.0, "verb_was": "HIGHLIGHT, DECOMPOSED, undispatched"}
+  },
+  "mechanisms": [
+    "COPY_PASTE: the source is a FIELD, not a clipboard -- read .value, write .value, read it back. Driving a real clipboard needs permissions the page never grants.",
+    "copy-paste-2 fills ALL three textareas and names one by position, so 'first non-empty' is wrong two times in three; the position is in #query .bold.",
+    "HIGHLIGHT is not a drag: the page scores window.getSelection().toString() with whitespace stripped, so a Range over the paragraph node is exact and survives line wrapping.",
+    "The ordinal is '2nd', not 'second' -- matching only the word left the index at 0.",
+    "The paragraph selector matched the CONTAINER (#randomText) and selected all three paragraphs at once (103-128 chars). A paragraph is a LEAF."
+  ],
+  "instrument_bugs_found": [
+    "A JS expression that throws returns null, and the caller's `or []` reads it as 'nothing found'. Every non-trivial expression now carries try/catch and returns ERR:<message>.",
+    "Patching by string index produced a duplicate function definition and then a stray 'done = act.ev(' line. Locate function bounds by line number, then compile before running."
+  ],
+  "series": [
+    {"round": "r171", "rate": 0.3385, "zero_tasks": 76},
+    {"round": "r172", "rate": 0.3862},
+    {"round": "r173", "rate": 0.4215},
+    {"round": "r174", "rate": 0.5015},
+    {"round": "r176", "rate": 0.5154},
+    {"round": "r177", "rate": 0.5631, "zero_tasks": 50}
+  ]
+}
