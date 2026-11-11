@@ -1,0 +1,28 @@
+name: Verify Root3 external bridge information-only V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/astra_runtime.py'
+      - 'canonical/runtime/root3_external_bridge_info_only_v1.py'
+      - 'canonical/tests/test_root3_external_bridge_info_only_v1.py'
+      - 'canonical/governance/ROOT3_EXTERNAL_BRIDGE_INFO_ONLY_CANDIDATE_V1.json'
+      - '.github/workflows/verify-root3-external-bridge-info-only-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run focused bridge tests
+        run: python -m pytest canonical/tests/test_root3_external_bridge_info_only_v1.py -q
+      - name: Run static bridge census
+        run: python canonical/runtime/root3_external_bridge_info_only_v1.py --astra-blob f4f0d3c0bfa412fb43485e3b9bc09b3cde263e6d

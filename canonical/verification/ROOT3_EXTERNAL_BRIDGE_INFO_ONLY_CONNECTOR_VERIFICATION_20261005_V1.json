@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_EXTERNAL_BRIDGE_INFO_ONLY_CONNECTOR_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CONNECTOR_RECOMPUTATION_PASS__REPOSITORY_BRIDGE_REQUEST_INTERFACE_INFORMATION_ONLY__ZERO_CREDIT",
+  "subject": {
+    "candidate_path": "canonical/governance/ROOT3_EXTERNAL_BRIDGE_INFO_ONLY_CANDIDATE_V1.json",
+    "candidate_git_blob_sha": "15f8a0666936f9ad49bca7a4f0a7bd921a4fe723",
+    "astra_runtime_path": "canonical/runtime/astra_runtime.py",
+    "astra_runtime_git_blob_sha": "f4f0d3c0bfa412fb43485e3b9bc09b3cde263e6d",
+    "runtime_path": "canonical/runtime/root3_external_bridge_info_only_v1.py",
+    "runtime_git_blob_sha": "a4d4e18b9510fe9ddff9b6cc433198b8eaad40a7",
+    "tests_path": "canonical/tests/test_root3_external_bridge_info_only_v1.py",
+    "tests_git_blob_sha": "4a644dbab6885822b0002f79b7d6cdc9e4b4d962"
+  },
+  "recomputation": {
+    "bridge_kinds": [
+      "http_get",
+      "package_name_search",
+      "planner",
+      "pypi_wheel_closure",
+      "python_source_tree",
+      "urlopen"
+    ],
+    "bridge_kind_count": 6,
+    "urlopen_bodyless_get_only": true,
+    "mutating_or_body_bearing_urlopen_denied_before_bridge_or_raw_transport": true,
+    "bridged_data_b64_forced_null": true
+  },
+  "checks": {
+    "astra_blob_matches_candidate": true,
+    "bridge_kind_set_exact": true,
+    "urlopen_information_only_guard_present": true,
+    "regression_test_present": true,
+    "static_census_test_present": true
+  },
+  "theorem_boundary": "PASS_FOR_REPOSITORY_SIDE_REQUEST_INTERFACE_ONLY__INDEPENDENT_EXTERNAL_BRIDGE_PROCESS_INTERNAL_EFFECT_TOTALITY_REMAINS_OPEN",
+  "hard_nonclaims": [
+    "NO_CLAIM_EXTERNAL_BRIDGE_PROCESS_INTERNAL_EFFECTS_ARE_MEDIATED",
+    "NO_FULL_C1_SCOPE_COMPLETENESS",
+    "NO_ROOT3_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

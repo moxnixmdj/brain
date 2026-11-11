@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_EXTERNAL_BRIDGE_INFO_ONLY_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MUTATING_URLOPEN_BYPASS_CLOSED__REPOSITORY_BRIDGE_REQUEST_INTERFACE_INFORMATION_ONLY__ZERO_CREDIT",
+  "objective": "Close the repository-side mutation-by-request hole in the external information bridge and freeze the exact six-kind bridge request interface while preserving external-process internal effects as an explicit C1 residual.",
+  "parent_c1": {
+    "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "parent_status": "C1_PARTIAL"
+  },
+  "subject": {
+    "astra_runtime": {
+      "path": "canonical/runtime/astra_runtime.py",
+      "git_blob_sha": "f4f0d3c0bfa412fb43485e3b9bc09b3cde263e6d"
+    }
+  },
+  "discovered_counterexample": {
+    "prior_behavior": "_bridge_aware_urlopen classified all urlopen requests as information EXACT_FETCH while forwarding method and optional body, allowing a non-GET/body-bearing request to cross an information-only bridge.",
+    "repair": "Reject method != GET or non-None body before _external_tool_bridge or raw urllib transport.",
+    "causal_effect": "A mutating HTTP request can no longer be smuggled through the urlopen information path."
+  },
+  "frozen_bridge_kinds": [
+    "http_get",
+    "urlopen",
+    "planner",
+    "package_name_search",
+    "python_source_tree",
+    "pypi_wheel_closure"
+  ],
+  "theorem_boundary": {
+    "proves": [
+      "ALL_CURRENT_EXTERNAL_TOOL_BRIDGE_CALLS_USE_LITERAL_KINDS",
+      "CURRENT_BRIDGE_KIND_SET_IS_EXACTLY_SIX",
+      "URLOPEN_TRANSPORT_IS_BODYLESS_GET_ONLY",
+      "NON_GET_OR_BODY_BEARING_URLOPEN_IS_REJECTED_BEFORE_ANY_BRIDGE_OR_RAW_NETWORK_INVOCATION"
+    ],
+    "does_not_prove": [
+      "INDEPENDENT_EXTERNAL_BRIDGE_PROCESS_INTERNAL_EFFECT_TOTALITY",
+      "FULL_C1_SCOPE_COMPLETENESS",
+      "C2_MEDIATOR_BINDINGS",
+      "C3_GRAPH_DOMINANCE"
+    ]
+  },
+  "runtime": "canonical/runtime/root3_external_bridge_info_only_v1.py",
+  "tests": "canonical/tests/test_root3_external_bridge_info_only_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
