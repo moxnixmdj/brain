@@ -1,0 +1,31 @@
+name: Verify recovery existing-contract factorization
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/governance/RECOVERY_EXISTING_CONTRACT_FACTORIZATION_AND_CONSERVATIVE_EXTENSION_20261005_V1.json
+      - canonical/tests/test_recovery_existing_contract_factorization_20261005_v1.py
+      - canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json
+      - canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json
+      - canonical/capabilities/opus55/INDEPENDENT_ACCEPTANCE_MODEL_EVIDENCE_V1.json
+      - canonical/runtime/independent_acceptance_model.py
+      - .github/workflows/verify-recovery-existing-contract-factorization-20261005-v1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - name: Verify factorization and conservative extension
+        run: python canonical/tests/test_recovery_existing_contract_factorization_20261005_v1.py
