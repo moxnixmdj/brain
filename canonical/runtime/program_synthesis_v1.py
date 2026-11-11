@@ -373,7 +373,21 @@ def verifier_version() -> str:
     # cache written before it existed.
     try:
         from canonical.runtime import text_relation_verifier_v1 as _trv
-        _relations = sorted(n for n, _ in _trv._RELATIONS) + [_trv._NEEDS_ORACLE.pattern]
+        # HASH THE CODE, NOT ONLY THE TABLE.
+        #
+        # The table names the relations and the code decides them, and a refusal is
+        # only as good as BOTH. Measured 2026-11-09: `verdict()` was corrected so a
+        # deduplicated file could be accepted in either order, the relation NAMES did
+        # not change, the version did not move, and the next discover() answered
+        # OPEN__EFFECT_NOT_VERIFIED in 0.3 s from a refusal written by the old logic.
+        _rel_src = ""
+        try:
+            _rel_src = hashlib.sha256(
+                _trv.__file__ and open(_trv.__file__, "rb").read() or b"").hexdigest()[:12]
+        except Exception:  # noqa: BLE001
+            _rel_src = "UNREADABLE"
+        _relations = sorted(n for n, _ in _trv._RELATIONS) + [
+            _trv._NEEDS_ORACLE.pattern, _rel_src]
     except Exception:  # noqa: BLE001 - absent module = no relation rules to hash
         _relations = []
     blob = json.dumps({

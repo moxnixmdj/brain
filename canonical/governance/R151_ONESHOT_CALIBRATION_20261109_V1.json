@@ -1,0 +1,47 @@
+{
+  "schema": "PROJECT_BRAIN_R151_V1",
+  "date": "2026-11-09",
+  "round": "r151",
+  "question_answered": "is one-shot-to-permanent skill acquisition ahead of the 2026 field, or is the field already there?",
+  "web_grounding": {
+    "one_shot_skills_no_benefit": {
+      "claim": "SkillsBench (Li et al., 2026) finds that ONE-SHOT generated skills provide NO BENEFIT ON AVERAGE; single-pass generation is insufficient",
+      "source": "arxiv.org/html/2604.20087v1 (SkillLearnBench, Apr 2026)"
+    },
+    "skill_libraries_conditional": {
+      "claim": "an evolving skill library beats a configuration-matched empty-library control by 5.7 to 18.6 percentage points, but the benefit is NEITHER UNIFORM NOR MONOTONIC across domains, and revision churn occurs -- repeated accepted edits without task recovery (gimp-add-alpha-channel succeeds 2 of 35 times)",
+      "source": "arxiv.org/pdf/2609.04869v1 (Sep 2026) + pith.science/paper/2609.04869"
+    },
+    "cross_origin_transfer": {"claim": "43.3% of GIMP skill retrievals target a skill created by a DIFFERENT task -- evidence of shared procedural memory, though not of causal transfer"},
+    "test_time_synthesis": {
+      "claim": "SkillTTA lifts SpreadsheetBench Pass@1 0.397 -> 0.505 and BigCodeBench 0.517 -> 0.651 with the solver model fixed; adaptation entirely through generated context, no weight updates",
+      "source": "arxiv.org/html/2605.16986v1 (May 2026)"
+    },
+    "where_the_sql_distinction_sits": "the paper's own diagnosis is that experience 'is typically transient: procedural knowledge acquired from ONE ROLLOUT is not systematically retained, refined, and reused'. That is exactly the gap this project closes by construction: 153 tests of fail-closed learning, and measured recall in 0.0 s across processes."
+  },
+  "the_honest_calibration": {
+    "against_the_field": "the retention half is ahead of the field. The field loses procedures between rollouts; this project does not.",
+    "against_the_user_s_thesis": "the generation half is NOT ahead. The field's finding -- one-shot skills give no benefit on average -- is the same result reached here from the other direction: a procedure learned from one rollout is worth exactly as much as the check that proved it. Where the machine could verify, learning transferred (8/8, 9/10, 6/6). Where it could not verify, it refused, and a refusal is not a skill.",
+    "so_the_thesis_is": "HALF RIGHT, AND THE RIGHT HALF IS THE ONE THE FIELD IS STILL LOSING. The missing half is not a better learner; it is verification coverage."
+  },
+  "what_was_built_this_round": {
+    "unique_split": "dedupe now has two relations chosen by the goal's own words: unique (order free, accepts `sort -u`) and unique_ordered (order preserved, accepts `awk '!seen[$0]++'`)",
+    "defect_found": "the ordered pattern used [^.]* which stops at the FIRST FULL STOP -- and every dedupe goal contains one, because the output is 'unique.txt'. The ordered variant therefore never matched and every goal silently took the unordered branch.",
+    "defect_found_2": "an earlier edit targeted text that had already changed, so the unique_ordered BRANCH was never inserted while the PATTERN was -- the kind matched and the logic did not, and four verdict tests returned the wrong message for a goal whose kind was correct",
+    "verify_plan_now_knows_the_goal": "_verify_plan(plan, suffix, target, programs) had no goal argument, so the multi-step path could never consult the relation verifier and every .txt search died on carries_content_evidence. It now takes goal= and seed_file= and the multi-step caller passes both. Proven by the rejection reason changing from bare 'FORMAT_CARRIES_NO_EVIDENCE:.txt' to 'FORMAT_CARRIES_NO_EVIDENCE:.txt/LOST_OR_INVENTED_A_DISTINCT_LINE' -- the relation check is running inside the search.",
+    "verifier_version_hashes_the_code": "the version hashed relation NAMES and the oracle pattern but not the logic. After verdict() was corrected, a refusal cached under the old logic was replayed in 0.3 s. It now hashes the relation module's source. This is the same law the function was written for -- anything cached on a refusal has to die with the rules -- applied to the part of the rules that is code."
+  },
+  "measured": {
+    "sort notes.txt into sorted.txt": "CLOSED, run_sort, SORTED_PERMUTATION_OF_INPUT, 0.33 s",
+    "reverse each line of list.txt into rev.txt": "CLOSED, run_rev, EACH_LINE_REVERSED, 0.08 s",
+    "reverse the lines of list.txt into rev2.txt": "CLOSED, run_tac, LINE_ORDER_REVERSED, 0.06 s",
+    "deduplicate emails.txt into unique.txt": "still refused. rejected ['run_uniq'] with LOST_OR_INVENTED_A_DISTINCT_LINE -- correct, because uniq removes only ADJACENT duplicates and leaves the file unchanged.",
+    "deduplicate ... keeping order": "still refused. rejected ['run_composite'] with STILL_CONTAINS_REPEATS -- correct."
+  },
+  "the_next_limiting_factor_and_why_it_is_not_a_relation": {
+    "found": "flags_for_goal('sort', 'deduplicate emails.txt into unique.txt') returns [] and no invocation shape carries -u. sort's manual documents -u as 'output only the first of an equal run', which is what dedupe means, but not in the word the goal used.",
+    "why_this_is_a_different_kind_of_fix": "a relation is a DEFINITION -- sort's output is correct iff it is a sorted permutation. A goal-to-flag alias ('deduplicate' -> -u) is a HEURISTIC. Adding heuristics is how an earlier channel in this file grew a strict list of exclusion rules and had to be deleted. So it must be added narrowly, with the manual's own words as justification and a test that the alias proposes a flag and still cannot accept a wrong output."
+  },
+  "tests": {"rerun": "test_text_relation_verifier_v1.py + test_computer_env_v1.py", "result": "98 passed, 3 failed", "the_3": "the pre-existing TransferTests contradiction documented in R148 -- unchanged by this round and not caused by it."},
+  "sentience": "no. Delete the stored recipes and only the recipes are lost."
+}

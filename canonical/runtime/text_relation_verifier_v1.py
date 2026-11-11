@@ -55,6 +55,25 @@ SCHEMA = "PROJECT_BRAIN_TEXT_RELATION_VERIFIER_V1"
 # "sort by length" (unsupported) does not silently become "sort".
 _RELATIONS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("strip_blank", re.compile(r"\b(strip|remove|drop)\b[^.]*\b(blank|empty)\b[^.]*\blines?\b", re.I)),
+    # "DEDUPLICATE" DOES NOT SAY IN WHAT ORDER, AND `uniq` CANNOT DO IT AT ALL.
+    #
+    # Measured: `uniq u.txt` removes only ADJACENT duplicates, so on
+    # banana/apple/cherry/apple/... it prints the file unchanged. A goal that wants
+    # the duplicate gone therefore cannot be closed by uniq, and a 121 s search over
+    # single programs was correctly refusing every candidate -- they all returned the
+    # input. The programs that can do it are `sort -u` (which reorders) and an
+    # order-preserving awk. Which one is CORRECT depends on the goal, so the goal's
+    # own words pick the relation:
+    #     "deduplicate X into unique.txt"              -> set equality, order free
+    #     "deduplicate X into unique.txt keeping order"-> a subsequence of the input
+    # The order marker must appear AFTER the dedupe word, anywhere in the sentence,
+    # and `[\s\S]` lets it cross punctuation and file names. An earlier version used
+    # `[^.]*`, which stops at the FIRST FULL STOP -- and every one of these goals
+    # contains one, because the output is "unique.txt". So the ordered variant never
+    # matched and every dedupe goal silently took the unordered branch.
+    ("unique_ordered", re.compile(
+        r"\b(dedup\w*|unique|remove\s+duplicates?)\b[\s\S]*?\b(keeping|keep|preserv\w*|"
+        r"same\s+order|original\s+order|in\s+order|order)\b", re.I)),
     ("unique", re.compile(r"\b(dedup\w*|unique|remove\s+duplicates?)\b", re.I)),
     # TWO DIFFERENT OPERATIONS SHARE THE WORD "REVERSE", AND CONFLATING THEM COST
     # 140 SECONDS OF SEARCH THAT COULD NOT SUCCEED.
@@ -174,7 +193,7 @@ def discriminates(goal: str, source: pathlib.Path) -> tuple[bool, str]:
         return (src != sorted(src),
                 "SOURCE_IS_UNSORTED" if src != sorted(src)
                 else "SOURCE_ALREADY_SORTED_SO_COPYING_PASSES")
-    if kind == "unique":
+    if kind in ("unique", "unique_ordered"):
         return (len(set(src)) != len(src),
                 "SOURCE_HAS_A_DUPLICATE" if len(set(src)) != len(src)
                 else "SOURCE_ALREADY_UNIQUE_SO_COPYING_PASSES")
@@ -243,6 +262,17 @@ def verdict(goal: str, source: pathlib.Path, output: pathlib.Path) -> tuple[bool
         want = list(reversed(src))
         return (out == want, "REVERSED_INPUT" if out == want
                 else "NOT_THE_REVERSE_OF_THE_INPUT")
+    if kind == "unique_ordered":
+        # ORDER IS REQUIRED HERE, so the output must be an order-preserving
+        # subsequence: each distinct line once, in the order it first appeared.
+        if len(set(out)) != len(out):
+            return False, "STILL_CONTAINS_REPEATS"
+        if set(out) != set(src):
+            return False, "LOST_OR_INVENTED_A_DISTINCT_LINE"
+        it = iter(src)
+        if not all(any(line == s for s in it) for line in out):
+            return False, "NOT_A_SUBSEQUENCE_OF_THE_INPUT"
+        return True, "DEDUPLICATED_IN_ORDER"
     if kind == "unique":
         # NO LINE MAY REPEAT ANYWHERE IN THE OUTPUT.
         #
@@ -257,11 +287,9 @@ def verdict(goal: str, source: pathlib.Path, output: pathlib.Path) -> tuple[bool
             return False, "STILL_CONTAINS_REPEATS"
         if set(out) != set(src):
             return False, "LOST_OR_INVENTED_A_DISTINCT_LINE"
-        # order-preserving subsequence: every output line appears in order in the input
-        it = iter(src)
-        if not all(any(line == s for s in it) for line in out):
-            return False, "NOT_A_SUBSEQUENCE_OF_THE_INPUT"
-        return True, "DEDUPLICATED_SUBSEQUENCE_OF_INPUT"
+        # ORDER IS UNSPECIFIED HERE, so it is not checked. Requiring it would
+        # reject `sort -u`, which is a correct deduplication.
+        return True, "DEDUPLICATED_SET_OF_INPUT_LINES"
     if kind == "upper":
         ok = out == [l.upper() for l in src]
         return ok, "UPPERCASED_INPUT" if ok else "NOT_THE_INPUT_UPPERCASED"
@@ -370,7 +398,7 @@ def probe_seed_name(goal: str, default: str = "input.txt") -> str:
 # it needed and its shortlist never named them, so a 126 s search could not succeed.
 _CANONICAL_PROGRAM = {
     "sort": "sort", "reverse": "rev", "reverse_each_line": "rev",
-    "reverse_lines": "tac", "unique": "uniq",
+    "reverse_lines": "tac", "unique": "sort", "unique_ordered": "awk",
     "upper": "tr", "lower": "tr", "head": "head", "tail": "tail",
     "strip_blank": "sed",
 }

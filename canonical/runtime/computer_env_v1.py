@@ -734,7 +734,10 @@ def programs_for(suffix: str, limit: int = 14) -> list[str]:
 
 
 def _verify_plan(plan: Sequence[str], suffix: str, target: str,
-                 programs: Sequence[str]) -> tuple[bool, str]:
+                 programs: Sequence[str],
+                 goal: str | None = None,
+                 seed_file: str | pathlib.Path | None = None
+                 ) -> tuple[bool, str]:
     """Run the plan again from scratch and check the file it made really is
     that format.
 
@@ -757,9 +760,9 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
         good, why = ps.verify_round_trip(out, suffix)
         if good and not ps.carries_content_evidence(suffix):
             from canonical.runtime import text_relation_verifier_v1 as trv
-            goal = locals().get("gap")
             if trv.admits(goal or "", suffix):
-                srcp = env.root / next(iter(env.seed), "input.txt")
+                srcp = (pathlib.Path(seed_file) if seed_file
+                        else env.root / next(iter(env.seed), "input.txt"))
                 good, why = trv.verdict(goal or "", srcp, out)
                 if not good:
                     return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix + "/" + str(why)
@@ -1850,7 +1853,8 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
         plan = list(outcome.get("plan") or [])
         if not plan:
             break
-        ok, why = _verify_plan(plan, suffix, target, progs)
+        ok, why = _verify_plan(plan, suffix, target, progs,
+                               goal=gap, seed_file=seed_file)
         if ok:
             keep(plan, "PASS__SEARCH_FOUND_AND_VERIFIED", why)
             forget_misses()
