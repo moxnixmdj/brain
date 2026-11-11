@@ -463,6 +463,51 @@ _ORD = {"1st": 1, "first": 1, "2nd": 2, "second": 2, "3rd": 3, "third": 3,
         "4th": 4, "fourth": 4, "5th": 5, "fifth": 5, "6th": 6, "sixth": 6}
 
 
+def v_sort(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """SORT -- the page states the values, the goal states the order, the gap is arithmetic.
+
+    Measured 2026-11-09: `drag-sort-numbers` returns SORT and dispatch had no handler, so
+    it raised VERB_NOT_IMPLEMENTED and the episode ended without touching the page. This
+    task reaches that branch on every rep, so "emitted but unreachable" was wrong.
+
+    BUBBLE SORT BY ADJACENT DRAGS, not placement at an absolute target. The sortable
+    resolves a drop against the slot the pointer lands in; a drag computed from a target
+    index drifts as rows move under it. Swapping neighbours one pair at a time is stable,
+    needs no absolute coordinate, and terminates:
+      ['76','-26','-42','15'] -> ['-42','-26','15','76'] in 4 moves, reward 1.
+    """
+    want_desc = bool(re.search(r"decreas|descend|largest", (goal or ""), re.I))
+    R = ("[...document.querySelectorAll('#sortable li')]"
+         ".map(e=>{const r=e.getBoundingClientRect();"
+         "return {t:e.innerText.trim(),y:r.y+r.height/2,x:r.x+r.width/2}})")
+    moves = 0
+    for _pass in range(12):
+        cur = act.ev(R) or []
+        if len(cur) < 2:
+            return "sort-no-list"
+        try:
+            vals = [float(re.sub(r"[^0-9.\-]", "", c["t"]) or 0) for c in cur]
+        except Exception:  # noqa: BLE001
+            return "sort-not-numeric"
+        target = sorted(vals, reverse=want_desc)
+        if vals == target:
+            break
+        swapped = False
+        for i in range(len(vals) - 1):
+            bad = (vals[i] < vals[i + 1]) if want_desc else (vals[i] > vals[i + 1])
+            if bad:
+                a, b = cur[i], cur[i + 1]
+                act.drag(a["x"], a["y"], a["x"], b["y"] + 10, steps=14)
+                time.sleep(0.18)
+                moves += 1
+                swapped = True
+                break
+        if not swapped:
+            break
+    submit(act, required=False)
+    return "sort-%s:%d-moves" % ("desc" if want_desc else "asc", moves)
+
+
 def v_drag_box(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """DRAG -- the source and the destination come from the sentence, not from an id.
 
@@ -1368,6 +1413,8 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
             submit(act, required=False)
         return got
 
+    if verb == "SORT":
+        return v_sort(act, plan, goal)
     fn = table.get(str(verb))
     if str(verb) in ("FIND", "RESOLVE"):
         # FIND used to fall through to CLICK, which with no quoted token clicks the sole
