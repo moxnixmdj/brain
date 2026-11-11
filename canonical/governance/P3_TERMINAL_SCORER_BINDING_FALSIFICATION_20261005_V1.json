@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_P3_TERMINAL_SCORER_BINDING_FALSIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FROZEN_P3_TERMINAL_SCORER_UNDERINSTRUMENTED__DETERMINISTIC_COUNTEREXAMPLE__ZERO_CREDIT",
+  "objective": "Falsify or preserve the historical Terminal-V3 EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 terminal receipt against the exact predeclared P3 mutation and required-check semantics.",
+  "bound_authorities": {
+    "p3_terminal_binding": {
+      "path": "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "git_blob_sha": "ad790afa864bd8f770c3d8a6e3ac901ed2843d26",
+      "required_checks_load_bearing": [
+        "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+        "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+        "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION"
+      ],
+      "required_mutations_load_bearing": [
+        "PROVENANCE_SWAP_OR_DROP",
+        "AUDIENCE_FORMAT_MISMATCH",
+        "DELETE_DECISION_RELEVANT_EVIDENCE"
+      ],
+      "mutation_acceptance": "ALL_APPLICABLE_LOAD_BEARING_P3_MUTATIONS_MUST_BE_DETECTED_OR_CAUSE_PARENT_TERMINAL_ACCEPTANCE_FAILURE"
+    },
+    "terminal_parent_binding": {
+      "path": "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json",
+      "git_blob_sha_on_branch_base": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+      "p3_mode": "CONTRACT_NATIVE",
+      "p3_case_count_per_parent": 30,
+      "bound_suite": {
+        "path": "canonical/runtime/contract_native_proof_suites.py",
+        "git_blob_sha": "0210790c7dd705ef328e1b55d529a30c5c6c3337"
+      },
+      "bound_candidate": {
+        "path": "canonical/runtime/contract_native_brain_candidate.py",
+        "git_blob_sha": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85"
+      }
+    },
+    "historical_independent_runner_verification": {
+      "path": "canonical/verification/TERMINAL_PARENT_PORTFOLIO_RUNNER_NO_ABORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "role": "VERIFIES_EXACT_BYTES_ORCHESTRATION_HIDDEN_ORACLE_ISOLATION_AND_REHEARSAL_PASS__DOES_NOT_ASSERT_P3_REQUIRED_MUTATION_SEMANTIC_COMPLETENESS"
+    }
+  },
+  "static_semantic_finding": {
+    "candidate_solve_synthesis_reads": [
+      "claim_id",
+      "role",
+      "support",
+      "format_constraints.max_claims"
+    ],
+    "candidate_solve_synthesis_does_not_read": [
+      "provenance",
+      "task.audience"
+    ],
+    "scorer_checks": [
+      "required_claim_ids_present",
+      "forbidden_claim_ids_absent",
+      "unknown_claim_ids_absent",
+      "uncertainty_ids_present_for_selected_conflicted_claims",
+      "max_claim_count",
+      "required_before_optional_order"
+    ],
+    "scorer_does_not_check": [
+      "source_provenance_preservation",
+      "audience_adaptation",
+      "decision_relevant_evidence_retention_as_distinct_from_required_claim_ids"
+    ]
+  },
+  "deterministic_falsifier": {
+    "path": "canonical/runtime/p3_terminal_scorer_binding_falsifier_v1.py",
+    "test_path": "canonical/tests/test_p3_terminal_scorer_binding_falsifier_v1.py",
+    "counterexample_classes": [
+      {
+        "mutation": "DROP_ALL_PUBLIC_EVIDENCE_PROVENANCE",
+        "expected_by_frozen_binding": "DETECTED_OR_PARENT_TERMINAL_FAILURE",
+        "actual_bound_candidate_dependency": "NONE",
+        "actual_bound_scorer_dependency": "NONE",
+        "predicted_verdict": "UNCHANGED_PASS_WHEN_ORIGINAL_CASE_PASSES"
+      },
+      {
+        "mutation": "SWAP_TASK_AND_EVIDENCE_AUDIENCE_LABEL",
+        "expected_by_frozen_binding": "AUDIENCE_FORMAT_MISMATCH_MUST_BE_DETECTED_WHEN_LOAD_BEARING",
+        "actual_bound_candidate_dependency": "NONE",
+        "actual_bound_scorer_dependency": "NONE",
+        "predicted_verdict": "UNCHANGED_PASS_WHEN_ORIGINAL_CASE_PASSES"
+      }
+    ]
+  },
+  "logical_consequence_if_independently_verified": {
+    "historical_raw_terminal_execution_bytes_preserved": true,
+    "historical_claim_selection_uncertainty_budget_evidence_preserved": true,
+    "historical_p3_whole_behavior_terminal_pass_entitled": false,
+    "historical_p3_receipt_may_not_prove": [
+      "PROVENANCE_PRESERVATION",
+      "AUDIENCE_ADAPTATION",
+      "DECISION_RELEVANT_COMPRESSION_RETENTION"
+    ],
+    "terminal_v3_exact_identity_reuse_as_whole_p3_behavior_receipt_entitled": false,
+    "valid_predicate_level_synthesis_scope_certificate_preserved": true,
+    "synthesis_matched_quality_performance_remains_open": true,
+    "underlying_capability_failure_proved": false,
+    "opus_inferiority_proved": false
+  },
+  "minimum_repair": {
+    "rule": "DO_NOT_REPLAY_TERMINAL_V3_OR RETROFIT A POST_RESULT SCORE. Build an independently verified P3 evaluator/candidate route that mechanically enforces every frozen P3 required check and mutation, then prove whole typed-input-domain scope or losslessly partition residuals before any new terminal evidence is authorized.",
+    "must_enforce": [
+      "PROVENANCE_PRESERVED_FOR_MATERIAL_CLAIMS",
+      "MATERIAL_CONFLICT_AND_UNCERTAINTY_PRESERVED",
+      "NO_DECISION_RELEVANT_EVIDENCE_DROPPED_UNDER_COMPRESSION",
+      "AUDIENCE_AND_FORMAT_CONSTRAINTS_PASS",
+      "PROVENANCE_SWAP_OR_DROP_MUTATION_KILLED",
+      "AUDIENCE_FORMAT_MISMATCH_MUTATION_KILLED",
+      "DELETE_DECISION_RELEVANT_EVIDENCE_MUTATION_KILLED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_SYNTHESIS_CAPABILITY_IS_ABSENT",
+    "NO_CLAIM_OPUS55_IS_BETTER",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_POST_HOC_RESCORING_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
