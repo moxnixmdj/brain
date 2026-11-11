@@ -891,6 +891,130 @@ def v_click(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 # ---------------------------------------------------------------------------------------
 # ROUTER  -- choose by the widget that is PRESENT, not by the verb word alone
 # ---------------------------------------------------------------------------------------
+_ROLE_WORDS = {
+    "origin": ("departurecity", "departure city", "origin", "from", "departure", "source"),
+    "destination": ("arrivalcity", "arrival city", "destination", "to", "arrival", "dest"),
+    "depart": ("departuredate", "departure date", "depart", "start date", "checkin", "on"),
+    "return": ("returndate", "return date", "return", "checkout", "back"),
+    "date": ("date", "day"),
+    "amount": ("amount", "total", "price", "sum", "value"),
+    "email": ("email", "mail", "user", "login", "account"),
+}
+
+
+def _control_identity(c: Mapping[str, Any]) -> str:
+    """Everything a control says about what it is, as one lowercase string.
+
+    Real applications name their inputs structurally, not narratively: the Alaska booking
+    page calls its departure field `SearchFields.DepartureCity`. Matching the goal's words
+    against the element's TEXT finds nothing there, because an empty input has no text.
+    """
+    return " ".join(str(c.get(k) or "") for k in
+                    ("id", "name", "declared", "placeholder", "aria", "type")).lower()
+
+
+def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """FILL_FORM -- bind the values a sentence states to the controls a page offers.
+
+    This is the general case of most computer use, and its absence was measured: the Alaska
+    flight page exposes SearchFields.DepartureCity / ArrivalCity / DepartureDate /
+    ReturnDate, the goal states all four values, and the pipeline answered UNSUPPORTED_VERB.
+
+    Binding is by ROLE, not by order: a field receives a value because its name or label
+    says what it is. A slot with no matching control is skipped and reported; a control that
+    matches two slots takes the first. Nothing is guessed into a field.
+    """
+    wanted = dict((plan.get("operand") or {}).get("slots") or {})
+    if not wanted:
+        return "fill-no-slots"
+
+    controls = act.ev(
+        "(()=>{const out=[];"
+        "for(const e of document.querySelectorAll('input,select,textarea')){"
+        "const r=e.getBoundingClientRect();"
+        "if(r.width<=0||r.height<=0)continue;"
+        "if(['hidden','submit','button','checkbox','radio','file'].includes(e.type))continue;"
+        "out.push({id:e.id||'',name:e.name||'',placeholder:e.placeholder||'',"
+        "aria:e.getAttribute('aria-label')||'',type:e.type||e.tagName.toLowerCase(),"
+        "declared:((typeof e.className==='string')?e.className:''),"
+        "cx:r.x+r.width/2,cy:r.y+r.height/2,a:r.width*r.height});}"
+        "return out})()") or []
+    if not controls:
+        return "fill-no-controls"
+
+    filled, skipped = [], []
+    used: set = set()
+    for role, value in wanted.items():
+        words = _ROLE_WORDS.get(role, (role,))
+        best, best_score = None, 0
+        for c in controls:
+            key = (c["cx"], c["cy"])
+            if key in used:
+                continue
+            ident = _control_identity(c)
+            score = sum(3 if w in ident else 0 for w in words)
+            if any(_norm_eq(w) == _norm_eq(c.get("id", "")) for w in words):
+                score += 4
+            if score > best_score:
+                best, best_score = c, score
+        if not best or best_score == 0:
+            skipped.append(role)
+            continue
+        used.add((best["cx"], best["cy"]))
+        # FOCUS IS NOT A CLICK. On the Alaska booking page a click on the date field leaves
+        # document.activeElement as BODY -- the page takes focus back -- so typing after a
+        # click wrote nothing and the action string still said "filled:depart=March 2". The
+        # correction is to assert the focus target and VERIFY it before typing, then verify
+        # the value after. A fill that cannot be read back is not a fill.
+        act.ev("(()=>{const e=document.elementFromPoint(%f,%f);"
+               "if(e)e.focus();})()" % (best["cx"], best["cy"]))
+        time.sleep(0.05)
+        focused = act.ev("(()=>{const e=document.activeElement;"
+                         "return e?(e.id||e.name||e.tagName):''})()")
+        act.ev("(()=>{const e=document.activeElement;"
+               "if(e&&e.value!==undefined){e.value='';"
+               "e.dispatchEvent(new Event('input',{bubbles:true}))}})()")
+        act.type_text(str(value))
+        act.ev("(()=>{const e=document.activeElement;if(e){"
+               "e.dispatchEvent(new Event('input',{bubbles:true}));"
+               "e.dispatchEvent(new Event('change',{bubbles:true}));"
+               "e.dispatchEvent(new Event('blur',{bubbles:true}))}})()")
+        time.sleep(0.10)
+        # FALLBACK, not replacement: if the keystrokes did not land, set the value directly.
+        landed = act.ev("(()=>{const e=document.getElementById(%s);"
+                        "if(!e)return null;return e.value;})()" % json.dumps(best["id"])) \
+            if best.get("id") else None
+        if not landed:
+            act.ev("(()=>{const e=document.getElementById(%s);"
+                   "if(!e)return;e.focus();e.value=%s;"
+                   "e.dispatchEvent(new Event('input',{bubbles:true}));"
+                   "e.dispatchEvent(new Event('change',{bubbles:true}));})()"
+                   % (json.dumps(best["id"]), json.dumps(str(value))))
+            time.sleep(0.06)
+            landed = act.ev("(()=>{const e=document.getElementById(%s);"
+                            "return e?e.value:null})()" % json.dumps(best["id"])) \
+                if best.get("id") else None
+        if not landed:
+            skipped.append(role + ":NOT_APPLIED")
+            continue
+        filled.append("%s=%s" % (role, value))
+
+    # submit, if the page has anything that looks like one
+    for sel in ("document.querySelector('input[type=submit]')",
+                "(()=>[...document.querySelectorAll('button,input[type=button],a')]"
+                ".find(b=>/find flights|search|submit|book|go|continue/i.test("
+                "(b.innerText||b.value||''))))()"):
+        if act.click_el(sel):
+            time.sleep(0.35)
+            break
+    return "filled:%s%s" % (";".join(filled) or "none",
+                            (";skipped:" + ",".join(skipped)) if skipped else "")
+
+
+def _norm_eq(text: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", str(text or "").lower())
+
+
 def colour_in_goal(goal: str) -> str | None:
     """A colour word in the goal text, if one is actually written there."""
     for w in ("black", "white", "red", "green", "blue", "yellow", "olive", "cyan",
@@ -933,6 +1057,7 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
             return got
 
     table = {
+        "FILL_FORM": v_fill_form,
         "SET_SLIDERS": v_slider, "SCROLL_TO": v_scroll, "ENTER": v_type,
         "FIND_AND_TYPE": v_type, "DRAW": v_draw_line, "MOVE": v_move_cube,
         "PUSH_SEQUENCE": v_push_sequence, "FOCUS": v_focus, "SWITCH_TABS": v_tabs,

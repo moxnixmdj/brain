@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R144_V1",
+  "date": "2026-11-09",
+  "round": "r144",
+  "question_this_answers": "does the system do anything at all in a NEW ARBITRARY ENVIRONMENT, not a MiniWob page?",
+  "the_environment": {
+    "name": "MiniWob++ flight domain, Alaska app (mobile web)",
+    "why_it_counts_as_new": "real booking application markup, no #area, no #subbtn, no fixed 160x160 layout, no 'quoted' token in the goal, 139 elements, fields named SearchFields.DepartureCity etc., 60s episode instead of 10-15s",
+    "note": "the provided wrapper.html iframes index.html but the iframe never loads here (src stays '', contentDocument is about:blank); index.html was driven directly"
+  },
+  "measured_before": {
+    "goal": "Book a return flight from New York to Las Vegas, departing March 2 and returning March 24.",
+    "decompose": "UNSUPPORTED_VERB",
+    "resolve": "NOT_FOUND, zero plan steps attempted",
+    "interpretation": "not a wrong action -- the system had nothing to say, on a page where all four values and all four controls were plainly present"
+  },
+  "measured_after": {
+    "decompose": "FILL_FORM with slots {origin: New York, destination: Las Vegas, depart: March 2, return: March 24}",
+    "dispatch": "filled all four",
+    "verified_in_dom": {"geo-from": "New York", "geo-to": "Las Vegas", "departure-date": "March 2", "return-date": "March 24"}
+  },
+  "what_was_added": {
+    "SLOT_PATTERNS + slots()": "goal_verb_decomposition_v1 reads (role, value) pairs out of an instruction. A sentence that names values but matches no known verb is a FORM FILL, not a refusal. This removes the single largest measured blindness.",
+    "v_fill_form": "binds each slot to the control whose id/name/placeholder/class matches the ROLE, by name and not by order, then types and verifies."
+  },
+  "two_instrument_faults_found_inside_this_round": [
+    "the first version clicked the field and typed into document.activeElement. On the Alaska page the click leaves activeElement as BODY, so the dates were never entered -- and the action string still said 'filled:depart=March 2'. Same defect class as every other one this session: an assertion that was never checked.",
+    "the correction asserts the focus target first, then verifies the value in the DOM afterwards, and falls back to setting it directly only if the keystrokes demonstrably did not land. A fill that cannot be read back is not counted as a fill."
+  ],
+  "what_is_NOT_claimed": [
+    "that the flight task is SOLVED. Filling the search form is the first of several steps (select a departing flight, select a returning flight, complete the booking), and core.validateForm checks the whole trajectory. No flight episode was scored 1.0.",
+    "that this generalises. It is one page, one goal, one app.",
+    "that the sandbox can test live web apps. The browser has no outbound network: github.com renders title='' with 3 elements."
+  ],
+  "the_first_principles_reading": "the system was not weak at learning; it was narrow at SEEING. It required #area, a 'quoted' token and a Submit button because those were the features of the benchmark it was built against. Remove that scaffolding and it produced nothing. The fix was not more learning -- it was a slot reader and a role-based binder, about 90 lines. That is the shape of the real limiting factor."
+}

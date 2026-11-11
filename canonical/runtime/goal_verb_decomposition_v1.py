@@ -85,6 +85,42 @@ VERB_PATTERNS = (
 )
 
 
+# A SLOT is a (field, value) pair the goal states and the page has a control for. This is
+# the general form of "fill in the form": most real computer use is this, and MiniWob's
+# fixed grammar hid it. Measured motivation: the Alaska flight page has fields named
+# SearchFields.DepartureCity / ArrivalCity / DepartureDate / ReturnDate and the goal
+# "Book a return flight from New York to Las Vegas, departing March 2 and returning
+# March 24" decomposed to verb=None -- the pipeline had nothing to say on a page where
+# every value and every field were plainly present.
+SLOT_PATTERNS = (
+    ("origin",      r"\bfrom\s+([A-Z][\w .'-]{1,30}?)(?=\s+to\b|\s*,|$)"),
+    ("destination", r"\bto\s+([A-Z][\w .'-]{1,30}?)(?=\s*(?:,|departing|returning|on\b|$))"),
+    ("destination", r"\bto\s+([A-Z][\w .'-]{1,30})"),
+    ("depart",      r"\bdeparting\s+(?:on\s+)?([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{4}-\d{2}-\d{2})"),
+    ("return",      r"\breturning\s+(?:on\s+)?([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{4}-\d{2}-\d{2})"),
+    ("date",        r"\bon\s+([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+)"),
+    ("amount",      r"\b(?:amount|total|price)\s+(?:of\s+)?([\d.,]+)"),
+    ("email",       r"([\w.+-]+@[\w-]+\.[\w.]+)"),
+)
+
+
+def slots(text: str) -> dict[str, str]:
+    """Everything the instruction states as a (role, value) pair.
+
+    This is deliberately a READER, not a planner: it says what the sentence supplies, and
+    leaves the decision of which control receives it to the resolver. A slot the page has no
+    control for is simply unused, which is why a sentence with extra words still works.
+    """
+    out: dict[str, str] = {}
+    for role, pattern in SLOT_PATTERNS:
+        if role in out:
+            continue
+        m = re.search(pattern, text)
+        if m:
+            out[role] = m.group(1).strip(" ,.")
+    return out
+
+
 def _number(text: str) -> int | None:
     m = re.search(r"(-?\d+)", text)
     return int(m.group(1)) if m else None
@@ -138,6 +174,13 @@ def decompose(goal: str) -> dict[str, Any]:
             verb = name
             break
     if verb is None:
+        found = slots(text)
+        if found:
+            # No known verb, but the instruction names concrete values. That is a form fill,
+            # and refusing it was the single largest measured blindness in this project: a
+            # booking page with four named fields was answered with UNSUPPORTED_VERB.
+            return {"schema": SCHEMA, "verb": "FILL_FORM", "status": "DECOMPOSED",
+                    "plan": "slots", "goal": text, "operand": {"slots": found}}
         return {"schema": SCHEMA, "verb": None, "status": "UNSUPPORTED_VERB",
                 "plan": None, "goal": text,
                 "reason": "no known verb appears in this goal"}
