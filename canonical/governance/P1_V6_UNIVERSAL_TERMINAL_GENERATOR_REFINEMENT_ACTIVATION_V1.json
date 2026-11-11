@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V6_UNIVERSAL_TERMINAL_GENERATOR_REFINEMENT_ACTIVATION_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXHAUSTIVE_30_CLASS_OLD_GENERATOR_TO_V6_REFINEMENT__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prove without replaying historical terminal cases that every structural case producible by the exact frozen contract-native P1 terminal generator is behaviorally contained in V6 after public-only normalization, including forward root-repair rescue and downstream symptom-repair rejection.",
+  "runtime": "canonical/runtime/p1_v6_universal_terminal_generator_refinement_v1.py",
+  "tests": "canonical/tests/test_p1_v6_universal_terminal_generator_refinement_v1.py",
+  "exact_dependencies": {
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/contract_native_brain_candidate.py": "afc18af1d1da6f25166c6cc57dcbc0cd3070bb85",
+    "canonical/runtime/terminal_parent_portfolio_runner_v1.py": "431b62e503a6a179f19339ae5e0ab6948424a650",
+    "canonical/governance/TERMINAL_PARENT_PORTFOLIO_RUNNER_BINDING_V1.json": "a1630299d29ea9c07e55b4314c07ddb3228c3287",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v6.py": "18d4de68ee8352410e986c318868642333ec085a",
+    "canonical/runtime/trajectory_failure_typed_ir_proof_v6.py": "0f41a36e6ad16722ce05b180e036fb921a2ef886",
+    "canonical/verification/P1_TYPED_CAUSAL_INTERVENTION_V6_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json": "1e722621db8f0f1cb3b9689e48d4bfe356dcb36e"
+  },
+  "theorem": {
+    "structural_equivalence_classes": 30,
+    "classes_by_difficulty": {
+      "1": 4,
+      "2": 5,
+      "3": 6,
+      "4": 7,
+      "5": 8
+    },
+    "repair_order_normalization": "PERMUTATION_ERASED_BY_UNIQUE_TARGET_RELATION",
+    "v6_domains": 6,
+    "exhaustive_refinement_checks": 540,
+    "historical_terminal_case_replay": false,
+    "historical_terminal_case_ids_consumed": 0
+  },
+  "proof_obligations": [
+    "OLD_REFERENCE_CANDIDATE_PASSES_EVERY_ABSTRACT_FROZEN_GENERATOR_CLASS",
+    "PUBLIC_ONLY_NORMALIZER_PRESERVES_CAUSAL_STEP",
+    "V6_CAUSE_AND_REPAIR_LOWER_EXACTLY_TO_OLD_REFERENCE_OUTPUT",
+    "V6_FORWARD_INTERVENTION_CLEARS_TERMINAL_CAUSAL_SLICE",
+    "DOWNSTREAM_SYMPTOM_ONLY_REPAIR_NEVER_CLEARS_ROOT_FAILURE",
+    "REPAIR_LIST_PERMUTATION_CANNOT_CHANGE_PROJECTION",
+    "ALL_SIX_V6_NORMALIZED_DOMAINS_PRESERVE_THE_REFINEMENT"
+  ],
+  "implication_if_verified": "THE_NARROW_P1_TERMINAL_GENERATOR_EXECUTION_CLASS_IS_NOT_A_REMAINING_V6_COMPATIBILITY_GAP__REMAINING_P1_SCOPE_WORK_IS_ONLY_THE_CLAIM_BOUND_RELATION_FROM_THE_FROZEN_THREE_DIRECT_SURFACE_SCOPES_TO_THE_COMBINED_V6_SEMANTIC_ENVELOPE_AND_THIS_UNIVERSAL_GENERATOR_SUBSET",
+  "forbidden_claims": [
+    "PRIVATE_BENCHMARK_POPULATION_EQUIVALENCE",
+    "P1_QUARANTINE_CLEARANCE_FROM_THIS_THEOREM_ALONE",
+    "CAPABILITY_OR_FAMILY_CREDIT_FROM_GENERATOR_REFINEMENT"
+  ],
+  "terminal_results_replayed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "next": "INDEPENDENTLY_VERIFY_EXACT_THEOREM_BYTES__THEN_RECOMPILE_V6_DIRECT_SURFACE_SCOPE_GATE_WITH_GENERATOR_COMPATIBILITY_NO_LONGER_OPEN__KEEP_PRIVATE_POPULATION_RELATION_FAIL_CLOSED"
+}
