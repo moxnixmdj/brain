@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_POSTWAVE_EVIDENCE_RECONCILIATION_INPUT_V1",
+  "date": "2026-10-02",
+  "status": "FROZEN_POSTWAVE_RECONCILIATION_INPUT__ZERO_CREDIT",
+  "execution_snapshot_commit": "821712c059b139f3494723dca6e8d0fc82ee59a4",
+  "terminal_result": "canonical/verification/TERMINAL_V3_ONE_SHOT_WAVE_RESULT_20261002_V1.json",
+  "current_binding_verification": "canonical/verification/CURRENT_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V2.json",
+  "reopened_routes": "canonical/governance/OPUS55_REOPENED_OBJECTIVE_ROUTE_RESIDUAL_V1.json",
+  "executor_manifest": "canonical/governance/TERMINAL_ROUTE_SPECIFIC_EXECUTOR_MANIFEST_V1.json",
+  "routes": [
+    {
+      "id": "DELEGATION_POSTWAVE_ATOMIC_CEILING",
+      "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+      "target_predicate": "DELEGATION_TERMINAL_SUCCESS_NONINFERIOR",
+      "binding_path": "canonical/governance/DELEGATION_T2_OBJECTIVE_TERMINAL_BINDING_V1.json",
+      "current_binding_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+      "execution_snapshot_binding_blob_sha": "a1e441567b132d71713ed55dfc51f01d8de112d1",
+      "observation_mode": "DIRECT_CEILING",
+      "expected_case_count": 132,
+      "authority_boundary": "ATOMIC_PREDICATE_CANDIDATE_ONLY__DOES_NOT_BY_ITSELF_PROMOTE_FAMILY"
+    },
+    {
+      "id": "RECOVERY_CAUSAL_POSTWAVE_SCOPE_EVIDENCE",
+      "family": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+      "target_predicate": "RECOVERY_CAUSAL_LOCALIZATION_NONINFERIOR",
+      "binding_path": "canonical/governance/P1_TRAJECTORY_T0_T2_MULTIPLEX_TERMINAL_BINDING_V1.json",
+      "current_binding_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+      "execution_snapshot_binding_blob_sha": "8703c6aa08227467a619a7ae90d0d61f8e54da39",
+      "observation_mode": "PARENT_MULTIPLEX_SCOPE_EVIDENCE",
+      "required_portfolios": ["T0", "T2"],
+      "authority_boundary": "SCOPE_VALID_POSTWAVE_EVIDENCE_ONLY__BOUND_OR_NONINFERIORITY_ADJUDICATION_REQUIRED_BEFORE_ATOMIC_CREDIT"
+    }
+  ],
+  "hard_rules": [
+    "DO_NOT_MUTATE_HISTORICAL_BINDING_FILES",
+    "CURRENT_BINDING_BYTES_MUST_EQUAL_EXECUTION_SNAPSHOT_BINDING_BYTES",
+    "CURRENT_BINDING_EXACT_BYTES_MUST_HAVE_INDEPENDENT_PUBLIC_RUNNER_PASS",
+    "EXECUTOR_MUST_BE_INDEPENDENTLY_BOUND_AND_CONSUMED_IN_V3",
+    "V3_WAVE_MUST_BE_IMMUTABLE_NO_REPLAY_NO_REPLACEMENT_NO_RESULT_FEEDBACK",
+    "FULL_PROTOCOL_REPLACEMENT_SCOPE_MUST_ALREADY_BE_DECLARED",
+    "NO_FAMILY_OR_PREDICATE_CREDIT_FROM_RECONCILIATION_ALONE"
+  ],
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
