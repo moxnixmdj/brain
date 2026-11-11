@@ -1641,6 +1641,145 @@ _COLOUR_WORDS = {"red", "orange", "yellow", "green", "blue", "purple", "violet",
                  "black", "white", "gray", "grey", "brown", "pink", "cyan", "magenta"}
 
 
+_ORD = {"1st": 1, "first": 1, "2nd": 2, "second": 2, "3rd": 3, "third": 3,
+        "4th": 4, "fourth": 4, "5th": 5, "fifth": 5}
+
+
+def _ordinal(text: str):
+    for k, v in _ORD.items():
+        if re.search(r"\b%s\b" % k, text, re.I):
+            return v
+    return None
+
+
+def v_form_sequence(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Two or three named controls, and every OTHER control must stay untouched.
+
+    Measured 2026-11-09: all three `form-sequence*` tasks at 0/30. Each page scores a
+    CONJUNCTION over the whole form:
+
+        form-sequence    slider == n AND exactly one checkbox checked AND it is the named one
+        form-sequence-2  the named radio checked AND the named textbox holds the number
+                         AND every other textbox is empty
+        form-sequence-3  the named <select> option AND the button labelled with that word
+
+    So this is not "find the control and click it" -- it is "leave the form in exactly one
+    state", which is the same total-condition shape as social-media. The positions are
+    words in the sentence ("the 2nd checkbox", "the 3rd textbox"), the values are quoted
+    numbers, and every other control must be cleared first.
+    """
+    g = goal or ""
+    low = g.lower()
+    did = []
+
+    # a jQuery UI slider named with a number: #slider + #val
+    m_sl = re.search(r"select\s+(-?\d+)\s+with the slider|set the slider to\s+(-?\d+)", low)
+    if m_sl:
+        n = int(m_sl.group(1) or m_sl.group(2))
+        ok = act.ev(
+            "(()=>{try{const e=document.querySelector('#slider');"
+            "if(!e)return 'NOSLIDER';"
+            "const jq=window.jQuery||window.$;"
+            "if(!jq)return 'NOJQ';"
+            "jq(e).slider('value',%d);"
+            "const v=document.querySelector('#val');"
+            "if(v)v.innerHTML=String(%d);"
+            "jq(e).trigger('change');"
+            "return jq(e).slider('value')}catch(err){return 'ERR:'+err.message}})()" % (n, n))
+        did.append("slider=%s" % ok)
+
+    # checkboxes: clear all, then check the NAMED one
+    if "checkbox" in low:
+        want = _ordinal(g)
+        ok = act.ev(
+            "(()=>{try{const es=[...document.querySelectorAll('input[type=checkbox]')];"
+            "es.forEach(e=>{if(e.checked){e.click()}});"
+            "const want=%s;"
+            "if(want===null)return 'NOORD';"
+            "const t=es[want-1];if(!t)return 'NOBOX';"
+            "if(!t.checked)t.click();"
+            "return (t.checked?1:0)+'/'+es.length}"
+            "catch(err){return 'ERR:'+err.message}})()" % ("null" if want is None else str(want)))
+        did.append("cb=%s" % ok)
+
+    # radio buttons: exactly the named one
+    if "radio" in low:
+        want = _ordinal(g)
+        ok = act.ev(
+            "(()=>{try{const es=[...document.querySelectorAll('input[type=radio]')];"
+            "const want=%s;if(want===null||!es[want-1])return 'NOORD';"
+            "es[want-1].click();return es[want-1].checked?1:0}"
+            "catch(err){return 'ERR:'+err.message}})()" % ("null" if want is None else str(want)))
+        did.append("radio=%s" % ok)
+
+    # a single quoted number into the named textbox, every other box empty
+    if "textbox" in low or "text field" in low or "input" in low:
+        # THE NUMBER IS QUOTED AND THE ORDINALS ARE NOT. "Check the 3rd radio button
+        # and enter the number \"-3\" into the 3rd textbox" -- an unanchored digit regex
+        # takes the 3 out of "3rd" and types 3 instead of -3.
+        m_n = (re.search(r'"(-?\d+)"', g) or re.search(r"\u201c(-?\d+)\u201d", g)
+               or re.search(r"number\s+(-?\d+)", g))
+        want = _ordinal(g)
+        if m_n and want:
+            ok = act.ev(
+                "(()=>{try{const es=[...document.querySelectorAll("
+                "'input[type=text],input:not([type])')].filter(e=>{"
+                "const r=e.getBoundingClientRect();return r.width>0&&r.height>0});"
+                "es.forEach(e=>{e.value=''});"
+                "const t=es[%d];if(!t)return 'NOBOX';"
+                "t.focus();t.value=%s;"
+                "t.dispatchEvent(new Event('input',{bubbles:true}));"
+                "t.dispatchEvent(new Event('change',{bubbles:true}));"
+                "return t.value}catch(err){return 'ERR:'+err.message}})()"
+                % (want - 1, json.dumps(m_n.group(1))))
+            did.append("text=%s" % ok)
+
+    # a named option in a <select>
+    # A SELECTRIC DROPDOWN IS GENERATED MARKUP OVER A HIDDEN <select>. The visible
+    # control is built by the plugin and the real select is display:none, so clicking the
+    # painted list is a different job; set the underlying select and fire 'change'.
+    # The element is #dropdown on form-sequence-3, not the #options used elsewhere.
+    if "dropdown" in low:
+        m_opt = re.search(r"^(?:choose|select|pick)\s+(.+?)\s+from the dropdown", low)
+        want = (m_opt.group(1).strip() if m_opt else "")
+        ok = act.ev(
+            "(()=>{try{const s=document.querySelector('#dropdown')"
+            "||document.querySelector('#options');"
+            "if(!s||!s.options)return 'NOSEL';"
+            "const want=%s;"
+            "const os=[...s.options];"
+            "const o=os.find(x=>x.textContent.trim().toLowerCase()===want)"
+            "||os.find(x=>x.textContent.trim().toLowerCase().includes(want));"
+            "if(!o)return 'NOOPT'+os.length;"
+            "s.selectedIndex=o.index;"
+            "s.dispatchEvent(new Event('change',{bubbles:true}));"
+            "if(!s.value)s.value=o.textContent.trim();"
+            "const jq=window.jQuery||window.$;"
+            "if(jq&&jq.fn&&jq.fn.selectric){try{jq(s).selectric('refresh')}catch(e){}}"
+            "return o.textContent.trim()}"
+            "catch(err){return 'ERR:'+err.message}})()" % json.dumps(want))
+        did.append("select=%s" % ok)
+
+    # a button labelled with a quoted word
+    m_btn = re.search(r'button labelled\s+"([^"]+)"', g, re.I)
+    if m_btn:
+        ok = act.ev(
+            "(()=>{try{const want=%s.toLowerCase();"
+            "const b=[...document.querySelectorAll('button')]"
+            ".find(x=>(x.textContent||'').trim().toLowerCase()===want);"
+            "if(!b)return 'NOBTN';b.click();return 'ok'}"
+            "catch(err){return 'ERR:'+err.message}})()" % json.dumps(m_btn.group(1)))
+        did.append("btn=%s" % ok)
+
+    time.sleep(0.20)
+    if not episode_over(act):
+        submit(act, required=False)
+        time.sleep(0.30)
+    if episode_over(act):
+        return "formseq:%s" % "|".join(did)[:48]
+    return "formseq-miss:%s" % "|".join(did)[:90]
+
+
 def v_find_value(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """Pick the card that holds the number the sentence describes.
 
@@ -2559,6 +2698,23 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     kinds = set(act.js(
         "[...document.querySelectorAll('input,select,textarea')]"
         ".map(e=>e.type||e.tagName.toLowerCase())") or [])
+    # A COMPOUND FORM IS MORE SPECIFIC THAN "the page has checkboxes". These pages score a
+    # conjunction over the WHOLE form (slider value AND one named checkbox AND nothing
+    # else), so the generic checkbox clicker leaves a stray value and loses. The specific
+    # matcher has to come first or it never runs -- form-sequence reads 'Select 3 with the
+    # slider, click the 2nd checkbox' and the checkbox guard swallowed it.
+    if (("checkbox" in kinds and act.ev("!!document.querySelector('#slider')"))
+            # A CONJUNCTION IS RECOGNISED BY THE GOAL, NOT BY ONE PAGE'S IDS. The radios
+            # on form-sequence-2 carry NO id at all ('#input-1' is a TEXTBOX there), so a
+            # guard keyed to that id never fired. Two named controls in one sentence is
+            # the signal.
+            or ("radio" in kinds and re.search(r"\bradio\b.*\btextbox\b", g, re.I))
+            or (act.ev("!!document.querySelector('#options')")
+                and act.ev("(()=>{return [...document.querySelectorAll('button')]"
+                           ".some(b=>/^[A-Za-z ]{3,}$/.test((b.textContent||'').trim())"
+                           "&&!/submit/i.test(b.textContent))})()"))):
+        return v_form_sequence(act, plan, goal)
+
     if "checkbox" in kinds and re.search(r"select", g, re.I):
         return v_checkboxes(act, plan, goal)
 
@@ -2599,7 +2755,7 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         "EXPAND_AND_CLICK": v_expand, "CLICK": v_click, "CHOOSE_DATE": v_date,
         "COPY_PASTE": v_copy_paste, "HIGHLIGHT": v_highlight, "COUNT": v_count,
         "GENERATE": v_generate, "ODD_EVEN": v_odd_even, "BUTTON_DELAY": v_button_delay,
-        "FIND_VALUE": v_find_value,
+        "FIND_VALUE": v_find_value, "FORM_SEQUENCE": v_form_sequence,
     }
     if verb == "DRAG":
         if "black box" in g.lower():

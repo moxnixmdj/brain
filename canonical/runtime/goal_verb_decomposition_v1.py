@@ -102,6 +102,12 @@ VERB_PATTERNS = (
     ("MOVE", r"\b(move|rotate|turn|spin)\b.*\b(cube|object|shape|item)\b|\b(cube|object)\b.*\b(rotate|turn)\b"),
     ("DRAG", r"\bdrag\b|\bdrop\b|\b(drag|move)\b.*\b(into|onto|around)\b"),
     ("ENTER", r"\b(enter|type|write|fill|input|put)\b"),
+    # TWO NAMED CONTROLS, EVERY OTHER CONTROL UNTOUCHED. These pages score a
+    # CONJUNCTION over the whole form, so FILL_FORM (which fills what it can and submits)
+    # leaves a stray value and loses. Measured 2026-11-09 on form-sequence*.
+    ("FORM_SEQUENCE", r"\b(?:select|set).{0,40}\bslider\b.*\bcheckbox\b|"
+                      r"\bradio button\b.*\btextbox\b|"
+                      r"\bdropdown\b.*\bbutton label(?:l)?ed\b"),
     ("SELECT", r"\bselect\b|\bchoose\b|\bpick\b"),
     ("FIND", r"\bfind\b|\blocate\b"),
     ("CLICK", r"\bclick\b|\bpress\b|\bhit\b|\btap\b|\bactivate\b|\bclick on\b|\bgo to\b"),
