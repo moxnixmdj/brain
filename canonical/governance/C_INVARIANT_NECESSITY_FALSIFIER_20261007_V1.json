@@ -1,0 +1,99 @@
+{
+  "schema": "PROJECT_BRAIN_C_INVARIANT_NECESSITY_FALSIFIER_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_TRUTH_REPAIR__C_NOT_INDEPENDENTLY_NECESSARY_IF_B_COVERS_ALL_ACTUAL_TARGET_CONTEXTS__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "source_bindings": {
+    "authority_v6": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V6.json",
+      "git_blob_sha": "fafde6e942a423798c8cadd0d2a2ccfe140a9f53"
+    },
+    "authority_v4": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V4.json",
+      "git_blob_sha": "4f9e7adefafd23268f590614b4a0b821fe0d6472"
+    },
+    "g_route": {
+      "path": "canonical/governance/G_ROUTE_FIVE_GENERATOR_DOMINANCE_RECONCILIATION_20261007_V1.json",
+      "git_blob_sha": "2bb66217cf42c737282428e053ad42033c30811b"
+    },
+    "transform_closure": {
+      "path": "canonical/governance/DOMINANCE_PRESERVING_TRANSFORM_CLOSURE_THEOREM_20261007_V1.json",
+      "git_blob_sha": "a16ec6380fdcaf6c140d531f6eef3cc3a67d98c7"
+    }
+  },
+  "semantic_dichotomy": {
+    "universal_reading": {
+      "definition": "C_REQUIRES_EVERY_ADMISSIBLE_TRANSFORM_TO_PRESERVE_THE_PREORDER_FOR_ALL_HYPOTHETICAL_SOURCE_LAWS_MU_NU",
+      "verdict": "TOO_STRONG_TO_BE_TERMINAL_NECESSARY",
+      "countermodel": {
+        "source_outcome_order": "0<1<2<3",
+        "actual_source_pair": {
+          "brain": 1,
+          "opus": 0,
+          "dominance": true
+        },
+        "transform_map": {
+          "0": 0,
+          "1": 1,
+          "2": 1,
+          "3": 0
+        },
+        "actual_target_pair": {
+          "brain": 1,
+          "opus": 0,
+          "dominance": true
+        },
+        "hypothetical_pair": {
+          "mu": 3,
+          "nu": 2,
+          "source_dominance": true,
+          "target_after_transform": {
+            "mu": 0,
+            "nu": 1,
+            "dominance": false
+          }
+        },
+        "terminal_relevance": "ACTUAL_BRAIN_DOMINATES_ACTUAL_OPUS_BEFORE_AND_AFTER_THE_TRANSFORM__UNIVERSAL_REFINEMENT_FAILS_ONLY_ON_A_HYPOTHETICAL_PAIR"
+      }
+    },
+    "actual_pair_reading": {
+      "definition": "C_REQUIRES_ONLY_THAT_THE_ACTUAL_DEPLOYED_BRAIN_OPUS_PAIR_REMAIN_DOMINANT_AFTER_EACH_ADMISSIBLE_TARGET_TRANSFORM",
+      "verdict": "NOT_INDEPENDENT_IF_B_QUANTIFIES_OVER_ALL_TRANSFORMED_TARGET_CONTEXTS",
+      "implication": "IF_EVERY_TRANSFORM_TARGET_CONTEXT_IS_INCLUDED_IN_B_AND_B_PROVES_ACTUAL_BRAIN_GE_OPUS_THERE__THE_ACTUAL_PAIR_PRESERVATION_CLAIM_IS_ALREADY_ENTAILED"
+    }
+  },
+  "theorem_candidate": {
+    "statement": "C_COMPOSITION_AND_TRANSFORM_CLOSURE_SHOULD_BE_A_PREFERRED_PROOF_TRANSPORT_ROUTE_FOR_DISCHARGING_B_OVER_GENERATED_CONTEXTS__NOT_AN_INDEPENDENT_TERMINAL_CONJUNCT__UNLESS_A_SEPARATE_TERMINAL_PROPERTY_NOT_ALREADY_CONTAINED_IN_B_OR_D_IS_IDENTIFIED",
+    "preserved": [
+      "USE_REFINEMENT_PRESERVING_TRANSFORM_CLOSURE_AS_A_HIGH_LEVERAGE_WAY_TO_PROVE_B_ON_MANY_CONTEXTS",
+      "KEEP_EVALUATOR_PULLBACK_AND_HARD_CONSTRAINT_PREIMAGE_CERTIFICATES_AS_SUFFICIENT_CLOSURE_MACHINERY",
+      "KEEP_COMPOSITION_SPECIFIC_CONTEXTS_INSIDE_A_TARGET_COVERAGE_AND_B_DISTRIBUTIONAL_DOMINANCE",
+      "KEEP_OWNERSHIP_AND_EFFECT_PROPERTIES_IN_D"
+    ],
+    "proposed_scheduler_effect": [
+      "DEMOTE_C_FROM_INDEPENDENT_TERMINAL_CONJUNCT_TO_B_PROOF_TRANSPORT_ROUTE",
+      "REQUIRE_C_ONLY_WHERE_IT_IS_THE_SELECTED_CHEAPEST_SOUND_ROUTE_TO_EXTEND_B",
+      "ALLOW_DIRECT_SCOPE_COMPLETE_B_CERTIFICATION_ON_TRANSFORMED_CONTEXTS_TO_BYPASS_GENERIC_C"
+    ]
+  },
+  "falsifiers": [
+    "EXHIBIT_A_TERMINALLY_RELEVANT_COMPOSITION_OR_TRANSFORM_PROPERTY_REQUIRED_BY_THE_OBJECTIVE_THAT_IS_NOT_ALREADY_INSIDE_COMPLETE_B_EVALUATOR_HARD_CONSTRAINT_SEMANTICS_AND_NOT_INSIDE_D_OWNERSHIP_EFFECT_SEMANTICS",
+    "SHOW_B_EXCLUDES_SOME_ADMISSIBLE_TRANSFORMED_TARGET_CONTEXT_BY_DEFINITION",
+    "SHOW_TERMINAL_SUCCESS_REQUIRES_UNIVERSAL_MONOTONICITY_ON_HYPOTHETICAL_NON_TARGET_LAWS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_B_IS_CURRENTLY_CLOSED",
+    "NO_CLAIM_GENERIC_TRANSFORM_CLOSURE_IS_USELESS",
+    "NO_CLAIM_ANY_CURRENT_OPEN_FAMILY_OR_TRUTH_IS_CLOSED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_C_INVARIANT_NECESSITY_FALSIFIER_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_FINITE_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/C_INVARIANT_NECESSITY_FALSIFIER_20261007_V1.json",
+    "governance_commit_sha": "967728a8096aec9c5832736b97c57d46fed6ed7f",
+    "branch": "obs/c-invariant-necessity-falsifier-20261007-v1"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "evaluated_code": "t[x_]:=Piecewise[{{0,x==0},{1,x==1},{1,x==2},{0,x==3}}]; <|actualSourceDominance->(1>=0),actualTargetDominance->(t[1]>=t[0]),hypotheticalSourceDominance->(3>=2),universalRefinementWitnessFails->Not[t[3]>=t[2]],transformedHypotheticalPair->{t[3],t[2]}|>",
+  "result": {
+    "actual_source_dominance": true,
+    "actual_target_dominance": true,
+    "hypothetical_source_dominance": true,
+    "universal_refinement_witness_fails": true,
+    "transformed_hypothetical_pair": [
+      0,
+      1
+    ]
+  },
+  "verified": [
+    "ACTUAL_BRAIN_OPUS_DOMINANCE_CAN_HOLD_BEFORE_AND_AFTER_A_TRANSFORM_WHILE_UNIVERSAL_REFINEMENT_PRESERVATION_FAILS_ON_ANOTHER_ORDERED_PAIR",
+    "THEREFORE_UNIVERSAL_REFINEMENT_PRESERVATION_IS_NOT_LOGICALLY_FORCED_BY_ACTUAL_PAIR_DOMINANCE"
+  ],
+  "boundary": [
+    "THIS_COUNTERMODEL_FALSIFIES_ONLY_INDEPENDENT_NECESSITY_OF_THE_UNIVERSAL_REFINEMENT_READING",
+    "THE_ACTUAL_PAIR_READING_REMAINS_A_SEMANTIC_ENTAILMENT_CLAIM_CONDITIONAL_ON_B_INCLUDING_ALL_TRANSFORMED_TARGET_CONTEXTS",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
