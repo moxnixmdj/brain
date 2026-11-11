@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_PROOF_ATOM_RECEIPT_INDEX_V1",
   "date": "2026-10-02",
-  "status": "CANDIDATE__CONTENT_ADDRESSED_40_ATOM_RECEIPT_INDEX__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__CONTENT_ADDRESSED_40_ATOM_RECEIPT_INDEX__DURABLE_DIAGNOSTIC_EXECUTION_PENDING__ZERO_CREDIT",
   "objective": "Index existing verification, capability, and governance evidence against the 40 canonical leaf proof atoms using exact literal occurrence and Git blob identity, so semantic review can start from the smallest existing-receipt candidate set without reacquiring reality.",
   "runtime": "canonical/runtime/proof_atom_receipt_index_v1.py",
   "tests": "canonical/tests/test_proof_atom_receipt_index_v1.py",
@@ -29,5 +29,14 @@
   "capability_credit_delta": 0,
   "family_credit_delta": 0,
   "execution_authority": false,
-  "promotion_authority": false
+  "promotion_authority": false,
+  "ci_execution": {
+    "workflow": ".github/workflows/verify-proof-atom-receipt-index-v1.yml",
+    "durable_diagnostics": true,
+    "previous_failed_runs": [
+      37030093289,
+      37034813787
+    ],
+    "previous_failures_disposition": "SUPERSEDED_BY_DURABLE_DIAGNOSTIC_WORKFLOW"
+  }
 }
