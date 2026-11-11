@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_EXACT_EVALUATOR_PROFILE_BINDING_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_HARDENING__FULL_FROZEN_EVALUATOR_RUNTIME_PROFILE_BOUND__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_ACCEPTANCE_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "repaired_fail_open": "HERMETIC_RUNTIME_ACCEPTED_ANY_PYTHON_3_12_PATCH_WHILE_REFERENCE_EXACT200_EVALUATOR_USED_3_12_10",
+  "reference_exact200": {
+    "runner_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2023,
+    "checkout_sha": "da386e81a634397a3051361ba2736279c9cc8c48",
+    "workflow_run_id": 37238529382,
+    "workflow_job_id": 111542376760,
+    "python": "3.12.10",
+    "nltk": "3.10.3",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "nltk_data_commit": "550b6625bcef1f2abff2ff770a5a0d272c9c6b2a",
+    "punkt_zip_blob": "da7ffbd1e6fd6cc5c2f6879c2d4da23c7691944c",
+    "punkt_tab_zip_blob": "5e5ff6137d5ee6025e400d1c3a7b21914c48b635",
+    "score_percent": 84.40416666666667,
+    "opus_floor_percent": 65.73775
+  },
+  "hardened_runtime": {
+    "path": "canonical/runtime/livebench_legacy15_hermetic_nltk_binding_v1.py",
+    "python": [
+      3,
+      12,
+      10
+    ],
+    "nltk_version": "3.10.3",
+    "nltk_wheel_sha256": "ff9598a8e20518ee0d557745890cc4435b9578489e2dcbc69c4f81fa060caf7c",
+    "punkt_archive_git_blobs": {
+      "tokenizers/punkt.zip": "da7ffbd1e6fd6cc5c2f6879c2d4da23c7691944c",
+      "tokenizers/punkt_tab.zip": "5e5ff6137d5ee6025e400d1c3a7b21914c48b635"
+    }
+  },
+  "consequence": "PROOFGRADE_POINTWISE_CHECKER_RUNTIME_NOW_FAILS_CLOSED_ON_PYTHON_PATCH_DRIFT_IN_ADDITION_TO_NLTK_WHEEL_PACKAGE_AND_PUNKT_DATA_DRIFT",
+  "hard_nonclaims": [
+    "NO_TERMINAL_ROWS_READ",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FULL_TERMINAL_GOAL_CLAIM"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
