@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_CERTIFICATE_GATED_EXACT_SYMBOLIC_DEPLOYED_ROUTE_BINDING_V1",
+  "date": "2026-10-07",
+  "status": "CANDIDATE_REAL_SELECTED_ROUTE_DEPLOYMENT_BINDING__REMOTE_REPLAY_PENDING__ZERO_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "deployment_entry": {
+    "path": "canonical/runtime/certificate_gated_exact_symbolic_deployed_route_v1.py",
+    "git_blob_sha": "05cd3de17a2b9d45c7335dcd60fc808abf8a983f",
+    "selected_entry": "run",
+    "override_surface": "NONE"
+  },
+  "router_core": {
+    "path": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+    "git_blob_sha": "4b99ef1e95e033badfb21ab7af7355122933224a"
+  },
+  "positive_admission": {
+    "path": "canonical/governance/EXACT_SYMBOLIC_ROUTER_ADMISSION_CERTIFICATE_20261007_V1.json",
+    "git_blob_sha": "5fbbce8f7fe59f6b090c6f97c1af16f1fff9231b",
+    "context_digest": "sha256:38460d8e0a4886575743a50829e19b8aee02911962b3b668f38867883338e76f"
+  },
+  "selected_route": {
+    "route_id": "accepted.exact_symbolic",
+    "runner_path": "canonical/obsolescence/run_exact_symbolic_v1.py",
+    "runner_git_blob_sha": "8f6f04fee00664b26ddf1a45a65698399c7ca6c3",
+    "route_governance_path": "canonical/governance/EXACT_SYMBOLIC_SELECTED_LEAF_ROUTE_20261007_V1.json",
+    "route_governance_git_blob_sha": "ba48f9024787e25308f9ad1dd74a83064f467865",
+    "adequacy_path": "canonical/capabilities/obsolescence/EXACT_SYMBOLIC_COMPUTATION_V1_ADJUDICATION.json",
+    "adequacy_git_blob_sha": "a691d49ef377fa216bbbeff70183112d65445463"
+  },
+  "fixed_context": {
+    "suite_path": "canonical/obsolescence/suites/EXACT_SYMBOLIC_COMPUTATION_SUITE_V1.json",
+    "suite_git_blob_sha": "1a0154d44963ce08ed78920978fb64ba054334cb",
+    "suite_sha256": "38460d8e0a4886575743a50829e19b8aee02911962b3b668f38867883338e76f",
+    "task_count": 12
+  },
+  "truth_effect": {
+    "router_is_in_actual_selected_route_call_chain": true,
+    "positive_admission_is_content_addressed": true,
+    "route_and_adequacy_are_content_addressed": true,
+    "remote_deployed_execution_observed": false,
+    "selected_cover_complete": false,
+    "complete_selected_context_ABC_closed": false,
+    "D_finality_closed": false,
+    "terminal": false
+  },
+  "promotion_rule": "SET_REMOTE_DEPLOYED_EXECUTION_OBSERVED_TRUE_ONLY_FROM_AN_EXACT_REMOTE_RUNNER_RECEIPT_BINDING_THE_DEPLOYMENT_ENTRY_ROUTER_RUNNER_SUITE_ADMISSION_AND_ADEQUACY_BLOBS_AND_OBSERVING_12_OF_12_PASS",
+  "hard_nonclaims": [
+    "NO_ADMISSION_OUTSIDE_OBS_EXACT_SYMBOLIC_001",
+    "NO_GENERAL_MATH_OR_REASONING_CLAIM",
+    "NO_SELECTED_COVER_COMPLETENESS_CLAIM",
+    "NO_GLOBAL_ROUTER_DEPLOYMENT_CLOSURE_FROM_THIS_FILE_ALONE",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
