@@ -1,0 +1,95 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_BAR_POPULATION_CONGRUENCE_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__COMPARATOR_BAR_POPULATION_BINDING_REOPENED__PROXY_SCORE_CANNOT_INHERIT_OFFICIAL_OPUS_BAR_WITHOUT_CONGRUENCE_PROOF__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "observed_canonical_claims": {
+    "scope_receipt": {
+      "path": "canonical/governance/LIVEBENCH_IF_2026_TERMINAL_SCOPE_TRUTH_REPAIR_V1.json",
+      "git_blob_sha": "330e4dba6176afa3aecd751a9bd0dba7d929bbde",
+      "opus_comparator_model": "claude-opus-5-5-max-effort",
+      "official_release": "2026_06_25",
+      "official_task_counts": "50_EACH_X_4_EQUALS_200",
+      "raw_opus_mean_percent": 65.73775
+    },
+    "proxy_receipt": {
+      "path": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "bc6c15e9b7d7f0bc7d6dbe8a2c8710ea61fb7127",
+      "population_id": "HF_REVISION_0868379C4B5CF62AEACAF8BE4F08FCED815C81BB__PARQUET_SHA256_A9BB97BBAF8788142C310BCB33D50E2F6F5DF8CBD8B8C3DB677816B06F0F4F25",
+      "selected_rows": 200,
+      "selected_release_date": "2024_11_25",
+      "verified_dispatch": "200_LEGACY_IFEVAL__0_MODERN_IFBENCH"
+    },
+    "minimum_cut_receipt": {
+      "path": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+      "git_blob_sha": "517410e5cf26bd748558c34b0300b1701e999136",
+      "threshold_percent": 65.73775,
+      "assumed_population_count": 200,
+      "current_cut": "132_FULL_SCORE_CASES_SUFFICIENT_IF_ALL_OTHERS_ZERO"
+    }
+  },
+  "formal_truth_repair": {
+    "definitions": [
+      "LET_P_O_BE_THE_POPULATION_ON_WHICH_OPUS_SCORE_65_73775_WAS_MEASURED",
+      "LET_P_B_BE_THE_POPULATION_ON_WHICH_BRAIN_SUCCESSOR_SCORE_IS_MEASURED",
+      "LET_S_M_P_DENOTE_MODEL_M_SCORE_ON_POPULATION_P"
+    ],
+    "invalid_inference": "S_BRAIN(P_B)_GE_S_OPUS(P_O)_DOES_NOT_IMPLY_S_BRAIN(P_O)_GE_S_OPUS(P_O)_WHEN_P_B_NE_P_O",
+    "reason": "BENCHMARK_SCORE_IS_A_FUNCTION_OF_BOTH_MODEL_AND_QUESTION_POPULATION",
+    "minimum_counterexample": "TWO_200_ROW_POPULATIONS_CAN_HAVE_IDENTICAL_TASK_COUNTS_YET_SWAP_ALL_EASY_AND_HARD_ROWS__PRESERVING_CARDINALITY_WHILE_REVERSING_MODEL_ORDER",
+    "consequence": "THE_132_CASE_MINIMUM_CUT_IS_VALID_ARITHMETIC_CONDITIONAL_ON_THE_TARGET_POPULATION__IT_IS_NOT_POPULATION_TRANSFER_AUTHORITY"
+  },
+  "first_party_nonidentity_evidence": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "readme_git_blob_sha": "24201c730e23a98ff01f1ce422b9fc899233646f",
+    "readme_fact": "LIVEBENCH_STATES_NOT_ALL_CURRENT_RELEASE_QUESTIONS_ARE_PUBLIC_ON_HUGGINGFACE_AND_DIRECTS_USERS_TO_AN_OLDER_PUBLIC_RELEASE",
+    "changelog_git_blob_sha": "97a0b6ffd845aec29f48f96ca24b96ac100e4162",
+    "changelog_fact": "INSTRUCTION_FOLLOWING_WAS_UPDATED_ON_2025_11_25_WITH_NEWER_ARTICLES_AND_NEW_MORE_DIFFICULT_INSTRUCTION_TYPES"
+  },
+  "acceptance_guard": {
+    "runtime": "canonical/runtime/livebench_bar_population_congruence_guard_v1.py",
+    "tests": "canonical/tests/test_livebench_bar_population_congruence_guard_v1.py",
+    "authorize_threshold_transfer_only_if_one_of": [
+      "EXACT_CONTENT_ADDRESSED_IDENTITY_P_B_EQUALS_P_O",
+      "INDEPENDENTLY_PROVED_SCORE_TRANSFER_THEOREM_FROM_P_B_TO_P_O",
+      "INDEPENDENTLY_PROVED_BRAIN_LOWER_BOUND_OVER_THE_ENTIRE_UNRESOLVED_OFFICIAL_POPULATION_CLASS"
+    ],
+    "explicitly_insufficient": [
+      "SAME_TOTAL_ROW_COUNT",
+      "SAME_50_PER_TASK_COUNTS",
+      "SAME_TASK_NAMES",
+      "SAME_SCORER_IMPLEMENTATION",
+      "SAME_PUBLIC_RELEASE_ARGUMENT_WITHOUT_ROW_IDENTITY"
+    ]
+  },
+  "scheduler_effect": [
+    "KEEP_PROXY_LEGACY_25_CONSTRUCTION_AS_USEFUL_PUBLIC_FALSIFICATION_WORK",
+    "DO_NOT_PROMOTE_PROXY_SCORE_GE_65_73775_TO_LIVEBENCH_IF_GE_65_7_ACCEPTANCE_UNLESS_CONGRUENCE_GUARD_PASSES",
+    "THE_FASTEST_IDENTITY_FREE_PATH_IS_TO_PRECOMMIT_A_RELEASE_AGNOSTIC_SUCCESSOR_AND_USE_AUTHORIZED_OFFICIAL_POPULATION_EXECUTION_OR_A_VALID_WORST_CASE_THEOREM",
+    "DO_NOT_DELETE_MODERN_IFBENCH_WORK_SOLELY_FROM_PROXY_DISPATCH_METADATA"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_PROXY_AND_OFFICIAL_POPULATIONS_ARE_DISJOINT",
+    "NO_CLAIM_THE_OFFICIAL_POPULATION_IS_MODERN_ONLY",
+    "NO_CLAIM_THE_PROXY_SCORE_IS_USELESS_FOR_DEVELOPMENT",
+    "NO_NEW_TERMINAL_CASE_CONTENT_READ",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
