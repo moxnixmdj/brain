@@ -64,6 +64,12 @@ SCHEMA = "PROJECT_BRAIN_GOAL_VERB_DECOMPOSITION_V1"
 # specific-before-general order is preserved. The patterns are still the same kind of
 # object; what changed is that they describe the ACT rather than one phrasing of it.
 VERB_PATTERNS = (
+    # A QUESTION IS A VERB. "How many small Qs are there?" contains none of the action
+    # words below, so it was refused before the page was ever read -- and the page is
+    # where the answer is. This goes FIRST because a counting question often also
+    # contains an action word ("how many green items ..."). Measured 2026-11-09 on
+    # count-shape, 0/30.
+    ("COUNT", r"\bhow many\b|\bcount the\b|\bwhat (?:is|are) the number of\b"),
     ("SET_SLIDERS", r"\bset the sliders?\b|\b(adjust|move) the sliders?\b"),
     ("SORT", r"\bsort\b|\border the (numbers|items)\b"),
     ("PUSH_SEQUENCE", r"\b(push|press|hit|tap|click|repeat|enter)\b.*\b(sequence|order|shown|displayed|pattern)\b"),

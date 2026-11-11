@@ -1636,6 +1636,138 @@ def v_date(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "date:%s" % (val or "?")
 
 
+_SIZE_WORDS = {"large", "small", "big", "little"}
+_COLOUR_WORDS = {"red", "orange", "yellow", "green", "blue", "purple", "violet",
+                 "black", "white", "gray", "grey", "brown", "pink", "cyan", "magenta"}
+
+
+def v_count(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Read the page, count what the sentence describes, and answer the question.
+
+    Measured 2026-11-09 on `count-shape`, 0/30 and REFUSED. The decomposer has no verb for
+    a QUESTION at all: "How many small Qs are there?" contains none of the 19 action
+    words, so it was refused before anything looked at the page.
+
+    THE PAGE DESCRIBES ITS OWN OBJECTS, and the description grammar is exactly three
+    parts (see common/shapes.js generalDesc): SIZE, COLOUR, TEXT/TYPE. The glyphs are SVG
+    <text> elements that carry `fill` and `font-size` -- 20px is large, 10px is small --
+    so every attribute the sentence can name is readable without vision.
+
+    THE ANSWER IS ENTERED BY PRESSING ONE OF FIVE OFFERED NUMBERS. The page renders the
+    true count and four decoys as buttons, so the count has to be exact: pressing a
+    decoy is a -1, not a retry.
+    """
+    g = goal or ""
+    low = g.lower()
+    want_col = next((c for c in _COLOUR_WORDS if re.search(r"\b%s\b" % c, low)), None)
+    if want_col == "violet":
+        want_col = "purple"
+    if want_col == "grey":
+        want_col = "gray"
+    want_size = None
+    if re.search(r"\blarge\b|\bbig\b", low):
+        want_size = "large"
+    elif re.search(r"\bsmall\b|\blittle\b", low):
+        want_size = "small"
+    # THE NOUN. The page's description grammar is SIZE + COLOUR + TEXT, and the text part
+    # is either a single character ("How many small Qs") or the literal word "item"
+    # ("How many green items"), which describes NOTHING and must not become a filter.
+    # Take the last word of the question as the noun and keep it only when it is one
+    # character -- anything longer is a class word the page never stores per glyph.
+    # THE NOUN CAN NAME A CLASS OF NODE, A SINGLE CHARACTER, OR NOTHING.
+    # The grid draws THREE kinds of node -- rect, circle, and <text> glyphs -- and the
+    # question can ask about any of them: "How many red shapes" counts all three,
+    # "How many digits" counts only numeric glyphs, "How many small Qs" counts one
+    # letter. Enumerating only <text> made every "shapes" and "digits" question wrong.
+    want_text = None
+    _noun = re.search(r"how many\s+(.+?)\s+(?:are|is)\b", low)
+    _noun_words = []
+    if _noun:
+        # KEEP CASE. "How many Is" and "How many 0s" name a GLYPH, and lowercasing turns
+        # "Is" into the English word "is" and "0s" into a token that matches no glyph.
+        # Only the colour and size words are case-insensitive; the rest is a symbol.
+        # ONE RULE, and the noun is only ever the LAST word: "small aqua ts" -> "ts".
+        # A single glyph may be written alone ("Q") or pluralised ("Qs", "0s", "Is");
+        # every other word is a class word ("items", "shapes", "rectangles") and is
+        # classified below, never treated as a glyph. Splitting these into two competing
+        # rules is what broke this function the first time.
+        _raw = [w.strip(".,;:!?") for w in re.split(r"\s+", _noun.group(1).strip())
+                if w.strip(".,;:!?")]
+        _raw = [w for w in _raw
+                if w.lower() not in _COLOUR_WORDS and w.lower() not in _SIZE_WORDS]
+        if _raw:
+            _lastn = _raw[-1]
+            if len(_lastn) == 1:
+                _noun_words = [_lastn]
+            elif len(_lastn) == 2 and _lastn.endswith("s") and _lastn[0].isalnum():
+                _noun_words = [_lastn[0]]
+            else:
+                _noun_words = [_lastn.lower()]
+    want_kind = None
+    if _noun_words:
+        _w = _noun_words[-1]
+        if _w in ("shapes", "shape", "items", "item", "objects", "object"):
+            pass                      # everything counts
+        elif _w in ("digits", "digit", "numbers", "number"):
+            want_kind = "digit"
+        elif _w in ("letters", "letter", "characters", "character"):
+            want_kind = "letter"
+        # A NAMED GEOMETRY IS A TAG FILTER. "How many rectangles" counts <rect>
+        # nodes, not every node -- copying the whole node set gave 9 where the offered
+        # answers were 1,3,5,8,9 and the truth was one of them.
+        elif _w.rstrip("s") in ("rectangle", "square", "box"):
+            want_kind = "rect"
+        elif _w.rstrip("s") in ("circle", "ring", "dot"):
+            want_kind = "circle"
+        elif _w.rstrip("s") in ("triangle", "polygon"):
+            want_kind = "polygon"
+        elif _w.rstrip("s") == "ellipse":
+            want_kind = "ellipse"
+        elif len(_w) == 1:
+            want_text = _w.upper()
+        elif _w.endswith("s") and len(_w) == 2:
+            want_text = _w[0].upper()
+
+    nodes = act.ev(
+        "(()=>{try{const out=[];"
+        "document.querySelectorAll('#area svg text,#area svg rect,#area svg circle,"
+        "#area svg ellipse,#area svg polygon').forEach(function(e){"
+        "const fs=parseFloat(e.getAttribute('font-size')||'10');"
+        "out.push({tag:e.tagName,t:(e.textContent||'').trim(),"
+        "col:(e.getAttribute('fill')||'').toLowerCase(),fs:fs})});"
+        "return out}catch(err){return 'ERR:'+err.message}})()")
+    if not isinstance(nodes, list):
+        return "count-nodes:%s" % str(nodes)[:16]
+    n = 0
+    for o in nodes:
+        col = str(o.get("col") or "")
+        txt = str(o.get("t") or "")
+        size = "large" if float(o.get("fs") or 10) >= 16 else "small"
+        if want_col and want_col not in col:
+            continue
+        if want_size and size != want_size:
+            continue
+        if want_text and txt.upper() != want_text:
+            continue
+        if want_kind == "digit" and not txt.isdigit():
+            continue
+        if want_kind == "letter" and not (txt.isalpha() and len(txt) == 1):
+            continue
+        if want_kind in ("rect", "circle", "polygon", "ellipse"):
+            if str(o.get("tag") or "").lower() != want_kind:
+                continue
+        n += 1
+    pressed = act.ev(
+        "(()=>{try{const bs=[...document.querySelectorAll('#count-buttons button')];"
+        "const b=bs.find(x=>(x.textContent||'').trim()===String(%d));"
+        "if(!b)return 'NOBTN:'+bs.map(x=>x.textContent.trim()).join(',');"
+        "b.click();return 'ok'}catch(err){return 'ERR:'+err.message}})()" % n)
+    time.sleep(0.40)
+    if episode_over(act):
+        return "count:%d" % n
+    return "count-miss:%d/%s" % (n, str(pressed)[:26])
+
+
 def v_highlight(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """Select the paragraph's text with a real Range, then Submit.
 
@@ -2291,7 +2423,7 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         "FIND_AND_TYPE": v_type, "DRAW": v_draw_line, "MOVE": v_move_cube,
         "PUSH_SEQUENCE": v_push_sequence, "FOCUS": v_focus, "SWITCH_TABS": v_tabs,
         "EXPAND_AND_CLICK": v_expand, "CLICK": v_click, "CHOOSE_DATE": v_date,
-        "COPY_PASTE": v_copy_paste, "HIGHLIGHT": v_highlight,
+        "COPY_PASTE": v_copy_paste, "HIGHLIGHT": v_highlight, "COUNT": v_count,
     }
     if verb == "DRAG":
         if "black box" in g.lower():
