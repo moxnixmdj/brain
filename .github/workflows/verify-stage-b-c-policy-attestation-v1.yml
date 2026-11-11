@@ -1,0 +1,21 @@
+name: Verify Stage-B/C policy attestation V1
+
+on:
+  pull_request:
+    paths:
+      - canonical/runtime/staged_policy_attestation_v1.py
+      - canonical/runtime/execution_authority_reducer_v4_policy_attested.py
+      - canonical/tests/test_execution_authority_v4_policy_attested.py
+      - canonical/governance/STAGE_B_C_POLICY_ATTESTATION_HARDENING_V1.json
+      - .github/workflows/verify-stage-b-c-policy-attestation-v1.yml
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run exact policy-attested authority tests
+        run: python -m unittest -v canonical.tests.test_execution_authority_v4_policy_attested
