@@ -1,0 +1,32 @@
+{
+  "round": "r174",
+  "date": "2026-11-09",
+  "claim": "The largest remaining block of zeros was not a control shape at all. It was one application, and the right unit of procedure is the app.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "r173": {"passes": 274, "trials": 650, "rate": 0.4215},
+    "r174": {"passes": 326, "trials": 650, "rate": 0.5015},
+    "paired_per_task_diff_pp": 8.00, "se_pp": 2.42, "t": 3.31,
+    "significant": true,
+    "tasks_up": 19, "tasks_down": 7, "tasks_unchanged": 104,
+    "zero_tasks": {"r173": 65, "r174": 57}
+  },
+  "families_repaired": {
+    "email (10 tasks)": {
+      "before": 0.0, "after": 0.98, "trials": 50,
+      "tasks": ["email-inbox", "email-inbox-delete", "email-inbox-forward", "email-inbox-forward-nl", "email-inbox-forward-nl-turk", "email-inbox-important", "email-inbox-nl-turk", "email-inbox-noscroll", "email-inbox-reply", "email-inbox-star-reply"]
+    }
+  },
+  "mechanisms": [
+    "ONE PROCEDURE, TEN GOALS: find the row in #main .email-thread by .email-sender, open it, then act. The action handlers are bound ONLY after the row is opened.",
+    "THE PAGE STATES ITS OWN OPERANDS: core.currentFields = {by,to} or {task,by}. The plain variants also mark them up with span.bold; the -nl variants are free text drawn from ~30 alternate phrasings with no stable surface. Reading the sentence was never necessary.",
+    "THE FORWARD BODY IS PRE-FILLED and scored against the original body exactly, so overwriting it is a certain miss.",
+    "A REFUSAL IS THE DECOMPOSER DECLINING, NOT THE PAGE FAILING: run_episode returned REFUSED before dispatch ever ran, so an app whose procedure does not depend on the sentence was being refused anyway."
+  ],
+  "regression_check": {
+    "method": "every DOWN task re-measured at 10 reps",
+    "phone-book": {"r173": 0.40, "r174": 0.00, "rerun_10": 0.10,
+                   "verdict": "NOT a regression. The identical failure signature resolve-not_found appears at 0.20, 0.40 and 0.10 across three readings of unchanged code. This task is unstable, which is the thing the learning loop exists to fix."}
+  },
+  "honest_reading": "The email result is large and repeatable (49/50 across ten tasks). The paired +8.00 pp is the honest total effect, and it is the one number in this round that clears significance on its own."
+}
