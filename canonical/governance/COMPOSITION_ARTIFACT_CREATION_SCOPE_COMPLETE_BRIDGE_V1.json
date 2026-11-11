@@ -1,0 +1,121 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSITION_ARTIFACT_CREATION_SCOPE_COMPLETE_BRIDGE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_NORMALIZED_COMPONENT_TO_FAMILY_IDENTITY_PLUS_PROVED_ARTIFACT_SCOPE_PARTITION__INDEPENDENT_BRIDGE_VERIFICATION_REQUIRED__ZERO_PARENT_OR_PERFORMANCE_CREDIT",
+  "objective": "Bind only the frozen MULTI_CAPABILITY_COMPOSITION `artifact creation` component to the scope-complete ARTIFACT_CREATION family partition. The binding uses exact identifier normalization, not synonymy, and does not transport `artifact production`, AA-Briefcase performance, or parent composition credit.",
+  "claim_id": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+  "component_binding": {
+    "component_id": "artifact creation",
+    "interface_id": "research+tool use+artifact creation",
+    "normalized_component_id": "ARTIFACT_CREATION",
+    "proved_properties_after_independent_verification": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ]
+  },
+  "authority": {
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "composition_manifest": {
+      "path": "canonical/governance/FROZEN_COMPOSITION_COMPONENT_INTERFACE_MANIFEST_V1.json",
+      "git_blob_sha": "9efbf3e81e67fbd15e34be2fcd86fbfc626b246d"
+    },
+    "behavioral_registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "artifact_scope_partition": {
+      "path": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json",
+      "git_blob_sha": "11aaa9915906511acf9f8a48e02b993b670fe44d"
+    },
+    "acceptance_evidence": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27"
+    }
+  },
+  "derivation": {
+    "component_normalization_rule": "UPPERCASE_AND_REPLACE_ASCII_SPACES_WITH_UNDERSCORES",
+    "normalized_frozen_component": "ARTIFACT_CREATION",
+    "source_family_id": "ARTIFACT_CREATION",
+    "normalization_identity": true,
+    "preexisting_family_contracts": [
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+    ],
+    "partition_exact_contract_set": [
+      "NATIVE_ARTIFACT_STRUCTURED_EDIT_PRESERVATION_001",
+      "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001"
+    ],
+    "no_uncovered_contracted_leaf": true,
+    "scope_predicate": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+    "scope_predicate_state": "PROVED",
+    "scope_complete": true,
+    "independent_or_objective": true,
+    "matched_performance_required_for_this_dependency_predicate": false,
+    "reason": "COMPOSITION_COMPONENT_SCOPED_PROOFS requires a scoped proof for each isolated component. Artifact family performance remains a separate acceptance predicate and is not transported."
+  },
+  "scope_guard": {
+    "included": [
+      "native structured artifact edit preservation",
+      "professional deliverable planning and revision judgment as an explicitly covered public-bar scope"
+    ],
+    "excluded": [
+      "ARTIFACT_PRODUCTION_COMPONENT",
+      "AA_BRIEFCASE_GE_1822_PERFORMANCE",
+      "GENERAL_MULTI_CAPABILITY_COMPOSITION_INTERACTION_SUCCESS",
+      "CROSS_CAPABILITY_STATE_HANDOFF_AND_ROLLBACK",
+      "ARBITRARY_UNCONTRACTED_NATIVE_FEATURES"
+    ],
+    "rule": "ONLY_THE_LITERAL_ARTIFACT_CREATION_COMPONENT_RECEIVES_SCOPED_ACCEPTANCE_PROOF; ARTIFACT_PRODUCTION_REMAINS_OPEN"
+  },
+  "candidate_receipt": {
+    "receipt_id": "COMPOSITION_SCOPE_COMPLETE_BRIDGE::ARTIFACT_CREATION::artifact_creation::V1",
+    "component_id": "artifact creation",
+    "interface_id": "research+tool use+artifact creation",
+    "proved_properties": [
+      "SCOPED_ACCEPTANCE_PROOF"
+    ],
+    "verified": false,
+    "independent": false,
+    "contamination_clean": true,
+    "acceptance_scoped": true,
+    "binds_frozen_claim": "MULTI_CAPABILITY_COMPOSITION::FROZEN_PROTOCOL_V1",
+    "source_family": "ARTIFACT_CREATION",
+    "source_scope_predicate": "ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT",
+    "source_scope_partition": "canonical/verification/ARTIFACT_UNCOVERED_SCOPE_PARTITION_PROOF_20261002_V1.json"
+  },
+  "expected_effect_after_independent_verification": {
+    "current_composition_scoped_proved_components_before": 4,
+    "newly_admissible_component": "artifact creation",
+    "projected_scoped_proved_components_after": 5,
+    "projected_open_components_after": 7,
+    "parent_component_dependency_predicate_closed": false,
+    "parent_composition_predicate_closed": false,
+    "strict_opus55_acceptance_delta": 0
+  },
+  "combination_note": "If this bridge and the separately independently verified evidence-synthesis bridge are both admitted against the same 4-of-12 base, the deterministic union projects 6-of-12 scoped proved and 6 open. This file alone claims only its own +1.",
+  "hard_rules": [
+    "NORMALIZED_FROZEN_COMPONENT_MUST_EQUAL_ARTIFACT_CREATION_EXACTLY",
+    "ARTIFACT_FAMILY_CONTRACT_SET_MUST_EQUAL_PARTITION_CONTRACT_SET_EXACTLY",
+    "ARTIFACT_SCOPE_PARTITION_MUST_KEEP_NO_UNCOVERED_CONTRACTED_LEAF_TRUE",
+    "CURRENT_LEDGER_MUST_KEEP_ARTIFACT_UNCOVERED_FORMAT_SCOPE_AUDIT_PROVED_SCOPE_COMPLETE_AND_INDEPENDENT_OR_OBJECTIVE",
+    "NO_ARTIFACT_PRODUCTION_SYNONYM_TRANSPORT",
+    "NO_AA_BRIEFCASE_PERFORMANCE_CREDIT",
+    "NO_PARENT_COMPOSITION_TERMINAL_SUCCESS_OR_INVARIANT_CREDIT",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_EXECUTION_OR_PROMOTION_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "next": "INDEPENDENTLY_VERIFY_EXACT_SOURCE_BYTES_AND_IDENTITY_CHAIN__IF_PASS_ADMIT_ONLY_THIS_COMPONENT_RECEIPT__UNION_WITH_ANY_OTHER independently VERIFIED NEW COMPONENT RECEIPTS__RERUN_EXACT_COMPOSITION_SLICER",
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
