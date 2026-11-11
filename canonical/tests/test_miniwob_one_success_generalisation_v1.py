@@ -901,6 +901,81 @@ class WholeRunTests(unittest.TestCase):
             tool.digest({"schema": "SOMETHING_ELSE"})
 
 
+class ReplayIsDoneStepByStepTests(unittest.TestCase):
+    def test_a_plan_that_names_an_element_that_is_not_there_is_not_a_success(self):
+        # two-button page: "Go" alone succeeds. A plan with a step on a 99th element would also end
+        # in success on a page that ignores what it cannot do -- and would record an impossible action.
+        bridge = StubBridge()
+        honest = tool.replay_on_fresh_page(bridge, "named-decoy", 0, ["click@3"])
+        self.assertTrue(honest["reproduced"])
+        bridge = StubBridge()
+        padded = tool.replay_on_fresh_page(bridge, "named-decoy", 0, ["click@99", "click@3"])
+        self.assertFalse(padded["reproduced"])
+        self.assertEqual(padded["reason"], "PLAN_NAMES_AN_ELEMENT_THAT_IS_NOT_ON_THE_PAGE")
+        self.assertEqual(bridge.acts, 0)
+        self.assertEqual(padded["trace"], [])
+
+    def test_a_plan_that_acts_on_something_that_cannot_take_the_action_is_not_a_success(self):
+        bridge = StubBridge()
+        typed = tool.replay_on_fresh_page(bridge, "named-decoy", 0, ["type@3=x", "click@3"])     # a button takes no text
+        self.assertFalse(typed["reproduced"])
+        self.assertEqual(typed["reason"], "PLAN_ACTS_ON_AN_ELEMENT_THAT_CANNOT_TAKE_THE_ACTION")
+        self.assertEqual(bridge.acts, 0)
+        pressed = tool.replay_on_fresh_page(StubBridge(), "named-decoy", 0, ["click@0", "click@3"])   # the page body
+        self.assertFalse(pressed["reproduced"])
+
+    def test_every_step_of_a_demonstration_is_on_the_page_it_was_recorded_with(self):
+        for task in sorted(_TASKS):
+            for search in tool.SEARCHES:
+                shown = tool.demonstrate(StubBridge(), task, 0, action_budget=3000, search=search)
+                for observation, action in shown["trace"] or []:
+                    wanted = tool.parse_action(action)
+                    element = observation["elements"][wanted["index"]]
+                    self.assertTrue(element.get("can_click" if wanted["type"] == "click" else "can_type"), (task, action))
+
+
+class OneTaskCannotSinkTheRunTests(unittest.TestCase):
+    class Breaks(StubBridge):
+        """A page that throws something nobody planned for, from its n-th action on."""
+
+        def __init__(self, at):
+            super().__init__()
+            self._at = at
+
+        def act(self, action):
+            if self.acts >= self._at:
+                raise RuntimeError("something nobody planned for")
+            return super().act(action)
+
+    def test_an_unexpected_error_is_recorded_against_the_task_and_what_was_measured_is_kept(self):
+        arms = ["verbatim", "version_space"]
+        whole = StubBridge()
+        clean = tool.measure_task(whole, "named-button", test_seeds=TEST_SEEDS[:10], action_budget=300, arm_names=arms)
+        early = tool.measure_task(self.Breaks(0), "named-button", test_seeds=TEST_SEEDS[:10], action_budget=300,
+                                  arm_names=arms)
+        self.assertEqual(early["stage"], tool.STAGE_NOT_RUNNING)
+        self.assertEqual(early["reason"], "TOOL_OR_LEARNER_ERROR")
+        self.assertEqual(early["error_type"], "RuntimeError")
+        self.assertNotIn("arms", early)
+        late = tool.measure_task(self.Breaks(whole.acts - 5), "named-button", test_seeds=TEST_SEEDS[:10],
+                                 action_budget=300, arm_names=arms)
+        self.assertEqual(late["stage"], tool.STAGE_DEMONSTRATED)
+        self.assertTrue(late["arms_incomplete"])
+        self.assertEqual(late["reason"], "TOOL_OR_LEARNER_ERROR")
+        self.assertEqual(late["arms"]["verbatim"]["per_seed"], clean["arms"]["verbatim"]["per_seed"])
+        self.assertNotIn("version_space", late["arms"])
+        summary = tool.summarise([early, late], arms)["all"]
+        self.assertEqual(summary["tasks"], 2)                                  # both stay in the denominator
+        self.assertEqual(summary["arms"]["version_space"]["tasks_scored"], 0)
+
+    def test_an_arm_nobody_defined_is_refused_before_anything_is_measured(self):
+        bridge = StubBridge()
+        with self.assertRaises(ValueError):
+            tool.measure_task(bridge, "named-button", test_seeds=TEST_SEEDS[:5], action_budget=300,
+                              arm_names=["verbatim", "telepathy"])
+        self.assertEqual(bridge.loads, 0)
+
+
 class KeptSkillTests(unittest.TestCase):
     def test_a_kept_skill_does_on_unseen_pages_exactly_what_the_scored_one_did(self):
         folder = tempfile.mkdtemp()

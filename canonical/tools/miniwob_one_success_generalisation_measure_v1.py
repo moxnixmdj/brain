@@ -630,8 +630,17 @@ def replay_on_fresh_page(bridge: Any, task: str, seed: int, plan: Sequence[str])
     for action in plan:
         if observation.get("done"):
             return {"reproduced": False, "trace": trace, "reason": "EPISODE_ENDED_BEFORE_THE_PLAN_DID"}
+        # Every step must be something that can be done on the page as it now is. A plan whose
+        # step names an element that is not there is not a shorter plan that happens to work: the
+        # page ignores that step, and what would be recorded is an action nobody could have taken.
+        wanted = parse_action(action)
+        elements = observation.get("elements") or []
+        if not 0 <= wanted["index"] < len(elements):
+            return {"reproduced": False, "trace": trace, "reason": "PLAN_NAMES_AN_ELEMENT_THAT_IS_NOT_ON_THE_PAGE"}
+        if not elements[wanted["index"]].get("can_click" if wanted["type"] == "click" else "can_type"):
+            return {"reproduced": False, "trace": trace, "reason": "PLAN_ACTS_ON_AN_ELEMENT_THAT_CANNOT_TAKE_THE_ACTION"}
         trace.append((observation, str(action)))
-        observation = bridge.act(parse_action(action))
+        observation = bridge.act(wanted)
     return {"reproduced": succeeded(observation), "trace": trace,
             "reason": None if succeeded(observation) else "PLAN_DID_NOT_END_IN_SUCCESS"}
 
@@ -907,6 +916,9 @@ def page_gate(bridge: Any, task: str, seeds: Sequence[int]) -> dict[str, Any]:
     return {"stage": None, "distinct_instances_in_gate": len(set(first.values()))}
 
 
+ARM_NAMES = ("random", "verbatim", "existing_compiler", "version_space", "version_space_blind", "version_space_practice")
+
+
 def keep_skills(skills_dir: str | None, task: str, arm_name: str, arm: Any) -> None:
     """Put what an arm learned where a later run can pick it up (one file per task and arm).
     What is kept is the learner's own object, byte for byte what was scored here."""
@@ -931,6 +943,8 @@ def kept_skills(skills_dir: str) -> dict[str, dict[str, Any]]:
 def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_budget: int,
                  arm_names: Sequence[str], practice: Sequence[int] = (), search: str = "blind",
                  skills_dir: str | None = None) -> dict[str, Any]:
+    if any(name not in ARM_NAMES for name in arm_names):
+        raise ValueError("ARM_UNKNOWN")
     row: dict[str, Any] = {"task": task, "split": split_of(task)}
     started = time.time()
     try:
@@ -975,12 +989,10 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
                                                               tier=int(acquired["tier"] or 0), search=search)
                 arm = one_success_arm if name == "version_space" else InstructionBlindArm(
                     one_success_arm, str(trace[0][0].get("utterance") or ""))
-            elif name == "version_space_practice":
+            else:
                 arm = build_version_space_arm(bridge, task, trace, practice=practice,
                                               action_budget=action_budget, tier=int(acquired["tier"] or 0),
                                               search=search)
-            else:
-                raise ValueError("ARM_UNKNOWN")
             if name in ("version_space", "version_space_practice"):
                 keep_skills(skills_dir, task, name, arm)
             scored = score_arm(bridge, task, arm, test_seeds)
@@ -988,9 +1000,12 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
                 if hasattr(arm, key):
                     scored[key] = getattr(arm, key)
             arms[name] = scored
-    except (BridgeHang, BridgeError) as error:
+    except Exception as error:  # noqa: BLE001 -- one task must not take the others' results with it
         bridge.restart()
-        why = "PAGE_HANGS" if isinstance(error, BridgeHang) else "PAGE_OR_BRIDGE_ERROR"
+        why = ("PAGE_HANGS" if isinstance(error, BridgeHang) else "PAGE_OR_BRIDGE_ERROR"
+               if isinstance(error, BridgeError) else "TOOL_OR_LEARNER_ERROR")
+        if why == "TOOL_OR_LEARNER_ERROR":
+            row["error_type"] = type(error).__name__
         if row.get("stage") == STAGE_DEMONSTRATED:
             # the demonstration stands; whatever arm was running when the page broke is simply absent
             row.update(arms_incomplete=True, reason=why, detail=str(error)[:200])
@@ -1113,7 +1128,7 @@ def seed_plan(test_episodes: int, practice_episodes: int) -> tuple[list[int], li
 def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, test_episodes: int,
         action_budget: int, arm_names: Sequence[str], practice_episodes: int = 0,
         progress: Callable[[str], None] | None = None, substrate: str = "jsdom",
-        search: str = "blind", skills_dir: str | None = None) -> dict[str, Any]:
+        search: str = "blind", skills_dir: str | None = None, rows_path: str | None = None) -> dict[str, Any]:
     if search not in SEARCHES:
         raise ValueError("SEARCH_UNKNOWN")
     names = list(tasks) if tasks else list_tasks(html_dir)
@@ -1126,6 +1141,9 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
             row = measure_task(bridge, name, test_seeds=test_seeds, action_budget=action_budget,
                                arm_names=arm_names, practice=practice, search=search, skills_dir=skills_dir)
             rows.append(row)
+            if rows_path:                       # a run that dies later keeps what it had finished
+                with open(rows_path, "a") as handle:
+                    handle.write(json.dumps(row, sort_keys=True) + "\n")
             if progress:
                 arms = {k: v["success_rate"] for k, v in (row.get("arms") or {}).items()}
                 progress(f"{name:<34} {row.get('split'):<11} {row.get('stage')} {arms or row.get('reason') or ''}")
@@ -1265,7 +1283,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     result = run(args.html_dir, args.node_modules_dir, tasks=names, test_episodes=args.test_episodes,
                  action_budget=args.action_budget, arm_names=args.arms, practice_episodes=args.practice_episodes,
                  progress=lambda line: print(line, flush=True), substrate=args.substrate, search=args.search,
-                 skills_dir=args.save_skills)
+                 skills_dir=args.save_skills, rows_path=(args.out + ".rows.jsonl") if args.out else None)
     if args.out:
         pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
     print(json.dumps(result["summary"], indent=1, sort_keys=True))
