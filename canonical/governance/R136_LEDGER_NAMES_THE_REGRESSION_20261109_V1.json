@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_R136_LEDGER_V1",
+  "date": "2026-11-09",
+  "built": "canonical/runtime/run_ledger_v1.py -- append-only per-(policy,task) JSONL ledger with outcomes(), diff() and summarise(). diff() returns fixed/broke/verdict; a net of zero with one fix and one break is reported as MIXED, not as no-change.",
+  "why_it_was_the_right_build": "r135 measured 27.5% then 25.0% and could not name the regressed task because only the transcript tail had been kept. Two totals are not a measurement of a change. One ledger is.",
+  "the_diff_it_immediately_produced": {
+    "before_policy": "planner v2 (all SELECT goals routed to the single native-select path)",
+    "after_policy": "planner v2 + DOM-dispatched widget router (spinner / colour-hex / checkbox / multi-select)",
+    "score_before": 11,
+    "score_after": 11,
+    "net": 0,
+    "verdict": "MIXED",
+    "fixed": ["use-spinner"],
+    "broke": ["use-colorwheel-2"],
+    "unchanged_pass": 10
+  },
+  "what_this_means": "the router change was a WASH, not a gain and not a regression. The earlier -2.5 reading came from a different run of the same code plus noise; the true effect of the router on this sample is one fix and one break, cancelling.",
+  "the_regression_named": "use-colorwheel-2 passed under the old path and fails under the new colour-hex path. The new path reads the goal swatch and writes a hex into #col; the old path did not and apparently passed by luck or by a different control. This is now a specific, reproducible bug rather than a missing percentage point.",
+  "the_process_law_this_establishes": "a run that reports only a total is a measurement of two afternoons. Compare per-task, always, or the fix and the break are indistinguishable from nothing happening.",
+  "what_is_NOT_claimed": ["that the ledger improves capability -- it improves the ability to SEE whether capability changed", "that one episode per task is a reliable estimate; the ledger makes repeated runs comparable, it does not make a single run precise"]
+}
