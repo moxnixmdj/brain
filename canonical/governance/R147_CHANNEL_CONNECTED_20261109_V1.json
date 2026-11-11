@@ -1,0 +1,40 @@
+{
+  "schema": "PROJECT_BRAIN_R147_V1",
+  "date": "2026-11-09",
+  "round": "r147",
+  "what_changed": "curriculum_v1._try_explore no longer returns an unconditional refusal. It reaches computer_env_v1.discover() when -- and only when -- unconfined_exploration_refusal() says the admitted-confinement carrier is available AND a temporary workspace can be created. Otherwise the original boundary refusal is returned unchanged.",
+  "measured_before": {
+    "tests": "106 passed, 3 failed",
+    "study(compress the input into out.gz)": "pass=False, FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+    "discover(same goal, same machine, seconds apart)": "closed=True, PASS__SINGLE_ACTION_FOUND_AND_VERIFIED, plan ['run_gzip'], 26 ms"
+  },
+  "measured_after": {
+    "tests": "109 passed, 13 subtests, 0 failed",
+    "study(compress the input into out.gz)": "pass=True, PASS__GAP_CLOSED, attempt PASS__RECALLED_AND_REVERIFIED, plan ['run_gzip']",
+    "study(extract text from a pdf file)": "pass=False, OPEN__NO_OUTPUT_FORMAT_IN_GAP",
+    "second_call_same_process": "PASS__RECALLED_AND_REVERIFIED, from_memory=True, actions_tried=0",
+    "fresh_process": "PASS__RECALLED_AND_REVERIFIED, from_memory=True",
+    "interpretation": "the recipe learned once is recalled and re-verified in a NEW PROCESS without re-searching. That is the permanent one-shot learning the thesis claims, working through the curriculum instead of beside it."
+  },
+  "the_bug_i_introduced_and_the_test_that_caught_it": {
+    "what_i_wrote": "out['actions_tried'] = max(1, len(plan))",
+    "why_it_is_wrong": "len(plan) is the length of the ANSWER, not the size of the SEARCH. It reported 1 for a discovery that examined 33 programs.",
+    "how_it_was_found": "the existing test test_the_channel_reports_how_many_actions_it_tried asserts actions_tried > 1 and failed",
+    "the_fix": "carry discover()'s own count (len(progs)) and report None when it is absent, because an unknown number must not be rendered as a plausible one",
+    "the_law": "a channel reports the work it did, never a number that merely looks right"
+  },
+  "guards_preserved": [
+    "the target-already-exists refusal",
+    "the question-is-not-a-format refusal",
+    "the no-evidence-format refusal (.txt/.md)",
+    "the compound-format refusal (.tar.gz)",
+    "the boundary refusal when the carrier is unavailable or no temporary workspace can be made"
+  ],
+  "what_is_NOT_claimed": [
+    "that this makes computer use solved. It connects ONE channel on ONE machine for a class of goals with a checkable output format.",
+    "that the other three channels (_try_with, _try_synthesize, _try_documentation) are connected. They still return the boundary refusal.",
+    "that this lifts the MiniWob reach number, which is a separate GUI path and unchanged at 56.3%.",
+    "that permanent learning is general. It is measured for goals whose success can be verified by a file of the requested format appearing."
+  ],
+  "why_this_round_matters_more_than_the_last_ten": "for eighteen rounds the gap was always a capability gap or a measurement error. This one was a wiring gap: the capability existed, was tested, ran in 26 ms, and the curriculum returned a constant. Finding it required running both ends of a call path separately and comparing them, which is the only method that could have found it."
+}

@@ -287,10 +287,98 @@ def _try_synthesize(gap: str) -> dict[str, Any]:
 
 
 def _try_explore(gap: str) -> dict[str, Any]:
-    """Refuse unconfined computer exploration until a boundary is admitted."""
+    """Explore a real environment, if one can actually be reached.
+
+    This channel used to return the boundary refusal unconditionally. That was correct when
+    it was written -- no execution path existed -- and it stopped being correct when
+    `computer_env_v1.discover()` started working. Measured on one machine, seconds apart:
+
+        discover("compress the input into out.gz")
+          -> closed=True, PASS__SINGLE_ACTION_FOUND_AND_VERIFIED,
+             plan ['run_gzip'], recipe gzip -c {input} > out.gz, 26 ms
+        study("compress the input into out.gz", channels=["explore"])
+          -> False, FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT
+
+    The capability was real and the curriculum returned a constant. This function now
+    reaches it, and keeps every guard in discover() intact: the target-already-exists
+    refusal, the question-not-a-format refusal, the no-evidence-format refusal, and the
+    compound-format refusal. Nothing here bypasses a check; it calls the checked path.
+
+    When discover() cannot run -- no confinement carrier and no temporary working
+    directory -- the boundary refusal is returned exactly as before, so this stays
+    fail-closed rather than fail-open.
+    """
     from canonical.runtime import computer_execution_boundary_v1 as boundary
-    return {"closed": False, "status": boundary.STATUS,
-            "detail": "Computer exploration requires admitted confinement."}
+
+    guard = unconfined_exploration_refusal()
+    if guard is not None:
+        return guard
+
+    try:
+        from canonical.runtime import computer_env_v1 as cenv
+    except Exception as exc:  # noqa: BLE001 - a channel never breaks a lesson
+        return {"closed": False, "status": "CHANNEL_UNAVAILABLE",
+                "detail": type(exc).__name__ + ":" + str(exc)[:160]}
+
+    try:
+        # learn=True so the recipe is remembered; discover() re-verifies on recall.
+        found = cenv.discover(gap, learn=True)
+    except Exception as exc:  # noqa: BLE001
+        return {"closed": False, "status": "CHANNEL_ERROR",
+                "detail": type(exc).__name__ + ":" + str(exc)[:160]}
+
+    closed = bool(found.get("closed"))
+    out = {"closed": closed,
+           "status": found.get("status") or "OPEN__EXPLORATION_FOUND_NOTHING",
+           "detail": found.get("detail"),
+           "plan": found.get("plan"),
+           "recipe": found.get("recipe"),
+           "suffix": found.get("suffix")}
+    if found.get("from_memory"):
+        out["from_memory"] = True
+    # HOW MANY SINGLE ACTIONS DID THIS ACTUALLY EXAMINE?
+    #
+    # The first version of this line wrote `max(1, len(plan))`, which is the length of the
+    # ANSWER, not the size of the SEARCH. It reported 1 for a discovery that examined 33
+    # programs, and an assertion in the test suite caught it. discover() already counts what
+    # it ran; a channel's job is to carry that number, never to invent one. When discover()
+    # does not say, the honest value is unknown -- and unknown is reported as None rather
+    # than as a plausible 1.
+    measured = found.get("actions_tried")
+    out["actions_tried"] = int(measured) if isinstance(measured, int) else None
+    return out
+
+
+def unconfined_exploration_refusal() -> dict[str, Any] | None:
+    """None if an environment can be reached; otherwise the refusal to return.
+
+    Two independent facts decide it, and BOTH must hold:
+      * the admitted-confinement carrier is available (admitted_confinement_execution_v1), and
+      * a temporary working directory can actually be created, because every action in
+        computer_env_v1 runs inside one.
+    A machine missing either keeps the original refusal. This function grants nothing the
+    carrier does not itself check.
+    """
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    def refuse(detail: str) -> dict[str, Any]:
+        return {"closed": False, "status": boundary.STATUS, "detail": detail}
+
+    try:
+        from canonical.runtime import admitted_confinement_execution_v1 as ace
+        admitted, why = ace.admits_automatic_execution("shell.command.run")
+    except Exception as exc:  # noqa: BLE001
+        return refuse("CARRIER_UNCHECKABLE:" + type(exc).__name__)
+    if not admitted:
+        return refuse("Carrier not admitted: " + str(why))
+
+    import tempfile
+    try:
+        with tempfile.TemporaryDirectory(prefix="brain-curriculum-probe-"):
+            pass
+    except Exception as exc:  # noqa: BLE001
+        return refuse("NO_TEMPORARY_WORKSPACE:" + type(exc).__name__)
+    return None
 
 
 def _try_documentation(gap: str) -> dict[str, Any]:
