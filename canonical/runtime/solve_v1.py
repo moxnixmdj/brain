@@ -149,7 +149,13 @@ def act(root: str, program: str, timeout: int = 120,
     the caller could not tell the difference.
     """
     try:
-        import confine_v1 as C
+        try:
+            import confine_v1 as C
+        except ModuleNotFoundError:
+            # `canonical/runtime` is on sys.path only when this file is run as a script. From a
+            # package import the line above raised, the except below swallowed it, and every
+            # program ran on the host -- the state this docstring says was left behind.
+            from canonical.runtime import confine_v1 as C
         if C.available():
             r = C.run(program, root, timeout=timeout, network=network)
             return {"exit": r.get("exit_status"), "out": r.get("output") or "",
