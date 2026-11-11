@@ -1,0 +1,33 @@
+{
+  "schema": "PROJECT_BRAIN_R160_TWO_THINGS_IN_ONE_SENTENCE_V1",
+  "date": "2026-11-09",
+  "round": "r160",
+  "family": "COMPUTER_AND_BROWSER_USE",
+  "headline_measurement": {
+    "protocol": "MiniWob++, all 130 tasks, 3 reps, 390 trials. Held-out split = the 90 tasks never used for any tuning decision across r130-r160.",
+    "heldout_90": {"r159": "41/270 = 0.1519", "r160": "54/270 = 0.2000", "delta": "+4.81 pp"},
+    "seen_40": {"r159": "72/120 = 0.6000", "r160": "68/120 = 0.5667", "delta": "-3.33 pp"},
+    "all_130": {"r159": "113/390 = 0.2897", "r160": "122/390 = 0.3128", "delta": "+2.31 pp"},
+    "reading": "The held-out gain exceeds the literature noise floor (median run-to-run SD 1.5 pp, arXiv 2602.07150). The seen-set decline is not interpretable at this n. The number that means something is the held-out one, and it moved."
+  },
+  "defects_fixed_the_same_shape_three_times": {
+    "class": "a status field that says yes when the payload says no",
+    "one": "resolve() returned status RESOLVED with a choice carrying no cx/cy. On email-inbox it returned a choice with no cx/cy at all; on another page it returned declared='click canvas' at (245,105) -- the instruction text. Guard: RESOLVED requires a pressable point, else UNCLICKABLE.",
+    "two": "plan_reference extracted the target and discarded the anchor. 'Find the email by Jeniece and click the star icon' planned [{'kind':'RELATION','value':'star','by':'shape'}]. resolve_scope(anchor,target) existed and was called by nothing in this shape -- the FOURTH unreachable door this session after _try_explore (r147), discover, and answer_query (r156). Routing rule: SCOPE first for '<verb> ... by <Name> ... <control> icon'.",
+    "three": "resolve_scope matched the target on own-text equality. <span class='star'> has own text ''. Now declared names (class/aria/title/alt/id) match on word boundaries INSIDE the anchor, only when exactly one element carries the name."
+  },
+  "single_task_evidence": {
+    "email-inbox-delete": {"r159": "0/3", "r160": "3/3"},
+    "email-inbox-important": {"r159": "0/3", "r160": "3/3"},
+    "email-inbox-star-reply": {"r159": "0/3", "r160": "2/3"},
+    "click-option": {"before_r158": "1/12", "after_r158": "12/12"}
+  },
+  "the_noise_floor_measured_in_this_session": {
+    "click-color_unchanged_code_three_runs": ["10/12", "7/12", "6/12"],
+    "mean": "7.7/12", "range": "6-10 = 17 percentage points",
+    "consequence": "A single-task 12-rep result is NOT evidence of a change when both readings sit inside 6-10/12. click-color 3/3 -> 0/3 in the 130-run is one draw, not a regression. The A/B that said 7/12 vs 8/12 was also noise.",
+    "law_added": "Before calling a per-task change a regression or a fix, measure the unchanged code three times on that same task. If the readings disagree with each other, the task cannot arbitrate."
+  },
+  "still_not_solved": ["email-inbox-reply 0/12 -- the reply flow needs typing into a reply box after opening the message", "85 blind tasks remain", "the held-out number is 0.2000, not a capability claim"],
+  "zero_credit_terminal": true
+}
