@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_R163_THE_LEARNING_LOOP_IS_NOT_CONNECTED_TO_COMPUTER_USE_V1",
+  "date": "2026-11-09",
+  "round": "r163",
+  "the_structural_finding": {
+    "statement": "The computer-use benchmark and the learning system have never been connected.",
+    "evidence": [
+      "grep learning|transfer|recipe|recall|store across every miniwob file -> NONE",
+      "grep miniwob across transfer_learning_v1.py and computer_env_v1.py -> NONE"
+    ],
+    "consequence": "Every MiniWob number reported in this project (0.1519, 0.2000, 0.1926, 0.3128) was measured on a STATELESS policy. The question 'does learning help computer use' has never been measured, in either direction."
+  },
+  "the_ceiling_of_the_learning_idea_on_miniwob": {
+    "measurement": "130 tasks x 3 reps, /tmp/r162_full130.json, per-rep action and reward available",
+    "unstable_varying_action_memory_could_stabilise": 7,
+    "unstable_fixed_action_memory_cannot_help": 6,
+    "already_stable_no_need": 34,
+    "never_solved_needs_a_parser": 83,
+    "if_every_varying_task_became_stable": "0.3128 -> 0.3487 = +3.6 pp",
+    "note": "This ceiling is SMALLER than the instrument's own resolution (9.19 pp at 390 trials, computed from sqrt(p(1-p)/(N*R)) with 80% power and alpha .05 two-sided). A perfect memory on this benchmark would be unmeasurable."
+  },
+  "the_six_tasks_that_refute_do_it_once_and_remember": {
+    "click-test-2": {"actions": ["sole-done","sole-done","sole-done"], "rewards": [1,-1,1]},
+    "sign-agreement": {"actions": ["sole-done","sole-done","sole-done"], "rewards": [0,1,1]},
+    "click-test-transfer": {"actions": ["sole-done","sole-done","sole-done"], "rewards": [-1,1,-1]},
+    "use-autocomplete-nodelay": {"actions": ["type","type","type"], "rewards": [-1,-1,1]},
+    "reading": "The SAME action earned opposite rewards on different random instances of the same task name. Storing the trajectory would encode the instance, not the rule, and would coincide with success often enough to look like learning."
+  },
+  "the_literature_agrees_and_i_fetched_it": {
+    "PolySkill (ICLR 2026)": "Skills as Action Traces 'implicitly encode the specifics of a single website's UI, making them fail when even minor elements change'. Skill reusability below 18% on unseen sites for prior methods; 31% for theirs.",
+    "EDGE (EMNLP 2026)": "'naive memory augmentation (EvolveR, GRPO+Mem0) degrades performance well below vanilla GRPO, confirming that unfiltered experience injection is unreliable.'",
+    "reSolve (arXiv 2608.28638, Aug 2026)": "'an evolution-time pass records one lucky trajectory that a fresh stochastic agent cannot reproduce at deployment' -- exactly use-autocomplete-nodelay, 1 win in 3 identical actions.",
+    "Survey on the Evolution of LLM Agent Memory (ACL 2026)": "three tiers Storage -> Reflection -> Experience; 'the passive storage of all trajectories leads to an accumulation of errors and the repetition of failures'; Experience 'compresses redundant trajectories into generalizable schemas'.",
+    "Scalable Environments Drive Generalizable Agents (arXiv 2605.18181)": "trajectory scaling vs task scaling vs ENVIRONMENT scaling; within a fixed rule set, more traces cannot produce cross-environment adaptation."
+  },
+  "the_honest_answer_to_the_recurring_question": {
+    "is_instant_learning_real": "yes, for verified shell commands: 1.21 s to learn `head`, 0.04 s to recall in another process, exact command preserved",
+    "does_it_solve_computer_use": "no. It is not connected to computer use, and its ceiling there is +3.6 pp even if perfect.",
+    "is_it_sentient": "no",
+    "where_the_mass_is": "83 of 130 tasks are never solved, and 43 of those refuse at the PARSER before any search or memory is involved"
+  },
+  "the_order_i_got_wrong": [
+    "I fixed tasks before measuring the instrument's resolution (9.19 pp); a single-task fix is worth ~1.1 pp and could never have shown up.",
+    "I extended the learning loop before checking the benchmark uses it at all.",
+    "I optimised retry counts while 83 tasks fail before the search runs."
+  ],
+  "zero_credit_terminal": true
+}
