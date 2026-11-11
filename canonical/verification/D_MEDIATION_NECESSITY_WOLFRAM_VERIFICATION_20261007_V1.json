@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_D_MEDIATION_NECESSITY_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_LOGICAL_COUNTERMODEL_PASS__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/D_MEDIATION_NECESSITY_FALSIFIER_20261007_V1.json",
+    "governance_commit_sha": "051d3a8ac67b15b7e4e019b62cc94bdcd0452d10",
+    "branch": "obs/d-mediation-necessity-falsifier-20261007-v1"
+  },
+  "verification_provider": "WOLFRAM_LANGUAGE",
+  "formula": "owned AND donorIndependent AND zeroSpend AND absoluteGates AND capabilityPass AND NOT mediated",
+  "wolfram_result": {
+    "satisfiable": true,
+    "witness": {
+      "owned": true,
+      "donorIndependent": true,
+      "zeroSpend": true,
+      "absoluteGates": true,
+      "capabilityPass": true,
+      "mediated": false
+    }
+  },
+  "interpretation": [
+    "THE_L2_ABSOLUTE_PROMOTION_PROPERTIES_AND_L1_CAPABILITY_PASS_ARE_LOGICALLY_COMPATIBLE_WITH_NO_UNIVERSAL_MEDIATION_PROPERTY",
+    "THEREFORE_MEDIATION_DOES_NOT_FOLLOW_FROM_THE_BOUND_TERMINAL_GATES_AS_A_PURE_LOGICAL_NECESSITY"
+  ],
+  "boundary": [
+    "THIS_DOES_NOT_PROVE_ANY_REAL_DIRECT_EFFECT_ROUTE_SATISFIES_THE_ABSOLUTE_GATES",
+    "A_REAL_ROUTE_STILL_REQUIRES_SOUND_EVIDENCE_FOR_SAFETY_AUTHORITY_FEASIBILITY_AND_OWNERSHIP",
+    "NO_TERMINAL_OR_ACCEPTANCE_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
