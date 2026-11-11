@@ -42,8 +42,10 @@ class _Page:
         elements = [_element(0, -1, "body"), _element(1, 0, "div", id="area")]
         for row in self.rows:
             extra = dict(row["extra"])
+            inside = extra.pop("inside", None)       # the row (by position) that contains this one, if any
             is_input = row["tag"] == "input" and extra.get("type", "text") == "text"
-            elements.append(_element(len(elements), 1, row["tag"], row["text"], click=True, type_=is_input, **extra))
+            elements.append(_element(len(elements), 1 if inside is None else inside + 2, row["tag"], row["text"],
+                                     click=True, type_=is_input, **extra))
         return {"utterance": self.utterance, "done": self.done, "raw_reward": self.reward, "reason": None,
                 "virtual_ms": 500 * (10 - self.left), "elements": elements, "js_errors": []}
 
@@ -133,6 +135,41 @@ def _chatty_section(seed):
     return page
 
 
+def _mail_rows(seed):
+    """A list of rows, each with a sender and the same two icons. The instruction names a sender;
+    the right click is the trash icon IN THAT ROW. Nothing about the icon itself says whose it is."""
+    rng = random.Random(f"mail:{seed}")
+    senders = rng.sample(WORDS, rng.randint(3, 5))
+    wanted = rng.choice(senders)
+    rows = []
+    for sender in senders:
+        base = len(rows)
+        rows.append(("div", "", {"classes": "email-thread"}))
+        rows.append(("span", sender, {"classes": "email-sender", "inside": base}))
+        rows.append(("span", rng.choice(WORDS).lower() + " news", {"classes": "email-subject", "inside": base}))
+        rows.append(("span", "", {"classes": "star", "inside": base}))
+        rows.append(("span", "", {"classes": "trash", "inside": base}))
+
+    def judge(page, r):
+        if page.rows[r]["extra"].get("classes") != "trash":
+            return None if page.rows[r]["extra"].get("classes") != "star" else -1
+        owner = page.rows[page.rows[r]["extra"]["inside"] + 1]["text"]
+        return 1 if owner == wanted else -1
+    return _Page(f"Find the email by {wanted} and click the trash icon to delete it.", rows, judge)
+
+
+def _widget_kind(seed):
+    """`Click on a "textarea" widget.`: the instruction names the KIND of element, not its label."""
+    rng = random.Random(f"widget:{seed}")
+    kinds = ["button", "textarea", "select", "h3", "label"]
+    rng.shuffle(kinds)
+    wanted = rng.choice(kinds)
+    rows = [("div", w.lower() + " note", {}) for w in rng.sample(WORDS, rng.randint(0, 2))]
+    rows += [(kind, "", {}) for kind in kinds]
+    return _Page(f'Click on a "{wanted}" widget.', rows,
+                 lambda page, r: (1 if page.rows[r]["tag"] == wanted else -1) if page.rows[r]["tag"] != "div" else None)
+
+
 def _hidden_latch(seed):
     """The same task, but opening the section changes nothing the observation shows."""
     return _numbered_section(seed, shows_that_it_opened=False)
@@ -185,7 +222,7 @@ _TASKS = {"named-button": _named_button, "type-and-submit": _type_and_submit, "s
           "numbered-section": _numbered_section, "nth-box": _nth_box, "always-the-same": _always_the_same,
           "hidden-answer": _hidden_answer, "one-or-two": _one_or_two, "unsolvable": _unsolvable,
           "hidden-latch": _hidden_latch, "shout-or-whisper": _shout_or_whisper, "chatty-section": _chatty_section,
-          "shifting-section": _shifting_section}
+          "shifting-section": _shifting_section, "mail-rows": _mail_rows, "widget-kind": _widget_kind}
 
 
 class StubBridge:
@@ -365,6 +402,88 @@ class SkillFromOneSuccessTests(unittest.TestCase):
     def test_past_the_last_step_there_is_no_action(self):
         skills, trace = self._skills("named-button")
         self.assertIsNone(skills.skills[0].act(len(trace), _TASKS["named-button"](9).observe()))
+
+
+class NamedByTheInstructionTests(unittest.TestCase):
+    """Two things an instruction can do besides quoting a label: name the element's neighbourhood, or its kind."""
+
+    def _one_success(self, task):
+        bridge = StubBridge()
+        trace, _ = _demonstrate(bridge, task)
+        skills = vs.SkillSet()
+        skills.add_success(trace)
+        return bridge, trace, skills
+
+    def test_nearest_is_the_candidate_sharing_the_deepest_container_with_the_named_element(self):
+        observation = _TASKS["mail-rows"](4).observe()
+        page = vs.Page(observation)
+        wanted = observation["utterance"].split(" by ")[1].split(" and ")[0]
+        rule = vs.slots_returning(observation["utterance"], wanted)[0]
+        trash = ((("equals", "self", "classes", "trash"),), ("nearest", "text", rule, "exact"))
+        picked = vs.pick(trash, page)
+        row = observation["elements"][picked]["parent"]
+        names = [e["text"] for e in observation["elements"] if e["parent"] == row and e.get("classes") == "email-sender"]
+        self.assertEqual(names, [wanted])                       # the icon picked sits in the named sender's row
+        self.assertEqual(observation["elements"][picked]["classes"], "trash")
+        # the row itself is "nearest" to its own sender too: a container of the named element counts as close
+        thread = ((("equals", "self", "classes", "email-thread"),), ("nearest", "text", rule, "exact"))
+        self.assertEqual(vs.pick(thread, page), row)
+        # no element named by the instruction on the page: the description selects nothing, it does not guess
+        nobody = ((("equals", "self", "classes", "trash"),), ("nearest", "text", ("quoted", 0), "exact"))
+        self.assertIsNone(vs.pick(nobody, page))
+
+    def test_two_candidates_equally_near_the_first_in_the_page_is_taken(self):
+        elements = [_element(0, -1, "body"), _element(1, 0, "div"),
+                    _element(2, 1, "div", classes="row"), _element(3, 2, "span", "Alba"),
+                    _element(4, 2, "span", classes="icon", click=True), _element(5, 2, "span", classes="icon", click=True),
+                    _element(6, 1, "div", classes="row"), _element(7, 6, "span", "Bram"),
+                    _element(8, 6, "span", classes="icon", click=True), _element(9, 6, "span", classes="icon", click=True)]
+        for wanted, expected in (("Alba", 4), ("Bram", 8)):
+            page = vs.Page({"utterance": f"Open the item of {wanted} now.", "elements": elements})
+            rule = vs.slots_returning(page.instruction, wanted)[0]
+            icon = ((("equals", "self", "classes", "icon"),), ("nearest", "text", rule, "exact"))
+            self.assertEqual(vs.matches(icon, page), [expected])
+        self.assertEqual(page.closeness(8, 7), 3)      # body, outer div, the row
+        self.assertEqual(page.closeness(4, 7), 2)      # body, outer div
+        self.assertEqual(page.closeness(7, 7), 4)      # an element is closest to itself
+
+    def test_the_named_row_wins_over_the_first_row_even_when_the_demonstration_was_in_the_first_row(self):
+        # the hardest single example: the named sender happened to be first, so "the first trash
+        # icon on the page" explains the click just as well as "the trash icon in that sender's row"
+        seed = next(s for s in range(300) if _TASKS["mail-rows"](s).rows[1]["text"] in _TASKS["mail-rows"](s).utterance)
+        bridge = StubBridge()
+        trace, _ = _demonstrate(bridge, "mail-rows", seed=seed)
+        self.assertEqual(trace[0][0]["elements"][tool.parse_action(trace[0][1])["index"]]["parent"], 2)   # first row
+        skills = vs.SkillSet()
+        skills.add_success(trace)
+        scored = tool.score_arm(bridge, "mail-rows", vs.VersionSpaceArm(skills, {}), TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+
+    def test_the_icon_in_the_row_of_the_named_sender_is_learned_from_one_success(self):
+        bridge, trace, skills = self._one_success("mail-rows")
+        scored = tool.score_arm(bridge, "mail-rows", vs.VersionSpaceArm(skills, {}), TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        # neither position nor the existing compiler can do it: every icon looks the same
+        self.assertLess(tool.score_arm(bridge, "mail-rows", tool.VerbatimArm(trace), TEST_SEEDS)["successes"],
+                        len(TEST_SEEDS) // 2)
+        self.assertLess(tool.score_arm(bridge, "mail-rows", tool.ExistingCompilerArm(trace), TEST_SEEDS)["successes"],
+                        len(TEST_SEEDS) // 2)
+        # and it is the instruction that carries it: with the old sender's name it goes to the old sender's row
+        blind = tool.InstructionBlindArm(vs.VersionSpaceArm(skills, {}), trace[0][0]["utterance"])
+        self.assertLess(tool.score_arm(bridge, "mail-rows", blind, TEST_SEEDS)["successes"], len(TEST_SEEDS) // 2)
+
+    def test_an_element_named_by_its_kind_is_found(self):
+        bridge, trace, skills = self._one_success("widget-kind")
+        scored = tool.score_arm(bridge, "widget-kind", vs.VersionSpaceArm(skills, {}), TEST_SEEDS)
+        self.assertEqual(scored["successes"], len(TEST_SEEDS))
+        self.assertLess(tool.score_arm(bridge, "widget-kind", tool.VerbatimArm(trace), TEST_SEEDS)["successes"],
+                        len(TEST_SEEDS) // 2)
+
+    def test_the_sender_name_is_treated_as_a_slot_when_choosing_between_programs(self):
+        bridge, trace, skills = self._one_success("mail-rows")
+        other = _TASKS["mail-rows"](77).utterance
+        self.assertNotEqual(other, trace[0][0]["utterance"])
+        self.assertEqual(vs.mismatch(skills.skills[0], other), 0)
 
 
 class MoreSuccessesTests(unittest.TestCase):

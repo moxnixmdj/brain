@@ -23,7 +23,11 @@ The language (all of it)
       a property of the element or of its parent / previous sibling / next sibling / label
       equals a constant (tag, type, id, classes, a single class, role, name, placeholder,
       for, title; or its text, full text, value);
-      or equals a SLOT of the instruction;
+      or equals a SLOT of the instruction (its text, full text or value; for the element
+      itself also its tag or type: "click on a textarea");
+  a position is: the n-th from the start or the end; the n-th where n is a number in the
+      instruction; or the one NEAREST, in the page tree, to an element the instruction names
+      ("the trash icon in the row of the sender it mentions").
   a slot is a rule for cutting a piece out of the instruction: the k-th quoted span, the text
       between two given tokens (or the start / the end), the k-th number;
   typed text is a slot (optionally upper- or lower-cased), a copy of a field of a described
@@ -170,6 +174,42 @@ class Page:
                 self._label.setdefault(target, index)
         self._slot_cache: dict[tuple[Any, ...], str | None] = {}
         self._atom_cache: dict[tuple[Any, ...], frozenset[int]] = {}
+        self._chain: list[tuple[int, ...]] = []
+        for index, element in enumerate(self.elements):
+            parent = int(element.get("parent", -1))
+            above = self._chain[parent] if 0 <= parent < index else ()
+            self._chain.append(above + (index,))
+        self._anchor_specs: list[tuple[Any, ...]] | None = None
+
+    def closeness(self, a: int, b: int) -> int:
+        """How deep in the page tree two elements still share a container (larger = closer)."""
+        shared = 0
+        for x, y in zip(self._chain[a], self._chain[b]):
+            if x != y:
+                break
+            shared += 1
+        return shared
+
+    def anchor_specs(self) -> list[tuple[Any, ...]]:
+        """Every (field, slot rule, mode) under which some element on this page is NAMED by the
+        instruction: its text is exactly a piece the rule cuts out of the instruction."""
+        if self._anchor_specs is None:
+            found: dict[tuple[Any, ...], None] = {}
+            for index in range(len(self.elements)):
+                for name in ("text", "full_text"):
+                    value = self.field(index, name)
+                    if not value or len(value) > MAX_CONTENT_LENGTH:
+                        continue
+                    if name == "full_text" and value == self.field(index, "text"):
+                        continue
+                    exact = slots_returning(self.instruction, value)
+                    for rule in exact:
+                        found.setdefault((name, rule, "exact"), None)
+                    if not exact:
+                        for rule in slots_returning(self.instruction, value, fold_case=True):
+                            found.setdefault((name, rule, "fold"), None)
+            self._anchor_specs = list(found)
+        return self._anchor_specs
 
     def field(self, index: int, name: str) -> str:
         element = self.elements[index]
@@ -249,6 +289,11 @@ def tests_true_of(page: Page, index: int) -> list[tuple[Any, ...]]:
             classes = page.field(other, "classes").split()
             if len(classes) > 1:
                 out += [("has_class", relation, c) for c in classes]
+            for name in ("tag", "type"):          # "click on a textarea": the instruction names the KIND
+                value = page.field(other, name)
+                if value:
+                    out += [("slot", relation, name, rule, "exact")
+                            for rule in slots_returning(page.instruction, value)]
         for name in CONTENT_FIELDS:
             value = page.field(other, name)
             if not value or len(value) > MAX_CONTENT_LENGTH:
@@ -295,6 +340,18 @@ def matches(description: Sequence[Any], page: Page) -> list[int]:
             return []
         n = int(value) - 1
         return [ordered[n]] if 0 <= n < len(ordered) else []
+    if kind == "nearest":
+        # among the elements passing the tests, the one that shares the deepest container with
+        # an element the instruction names: "the trash icon in the row of the sender it mentions"
+        anchors = page.passing(("slot", "self", position[1], position[2], position[3]))
+        if not anchors:
+            return []
+        best, best_score = None, -1
+        for candidate in ordered:
+            score = max(page.closeness(candidate, anchor) for anchor in anchors)
+            if score > best_score:
+                best, best_score = candidate, score
+        return [] if best is None else [best]
     raise ValueError("POSITION_KIND_UNKNOWN")
 
 
@@ -324,6 +381,10 @@ def descriptions_of(page: Page, index: int) -> list[tuple[Any, ...]]:
             for k, number in enumerate(numbers(page.instruction)):
                 if number == str(place + 1):
                     out.append((group, ("nth_slot", ("number", k))))
+            for name, rule, mode in page.anchor_specs():
+                near = (group, ("nearest", name, rule, mode))
+                if matches(near, page) == [index]:
+                    out.append(near)
         if len(out) >= MAX_HYPOTHESES_PER_STEP:
             break
     return out
@@ -331,8 +392,9 @@ def descriptions_of(page: Page, index: int) -> list[tuple[Any, ...]]:
 
 def preference(description: Sequence[Any], pages: Sequence[Page]) -> tuple[Any, ...]:
     tests, position = description
-    bound = any(_is_bound(t) for t in tests) or (position is not None and position[0] == "nth_slot")
-    by_place = position is not None and position[0] in ("nth", "nth_from_end")
+    kind = position[0] if position is not None else None
+    bound = any(_is_bound(t) for t in tests) or kind in ("nth_slot", "nearest")
+    by_place = kind in ("nth", "nth_from_end")
     quotes_content = any(_is_content_constant(t) for t in tests)
     if by_place:
         rank = 3
@@ -343,10 +405,17 @@ def preference(description: Sequence[Any], pages: Sequence[Page]) -> tuple[Any, 
     else:
         rank = 1
     bound_tests = [t for t in tests if _is_bound(t)]
-    # a tie between the instruction and the element itself explains more than a tie between
-    # the instruction and something that merely stands next to it
-    reach = 0 if any(t[1] == "self" for t in bound_tests) or not bound_tests else 1
-    slot_kinds = [t[3][0] for t in bound_tests]
+    # A tie between the instruction and the element itself explains more than a tie with what
+    # stands right next to it, and that more than "whatever is nearest to the thing it names".
+    if any(t[1] == "self" for t in bound_tests) or kind == "nth_slot":
+        reach = 0
+    elif bound_tests:
+        reach = 1
+    elif kind == "nearest":
+        reach = 2
+    else:
+        reach = 0
+    slot_kinds = [t[3][0] for t in bound_tests] + ([position[2][0]] if kind == "nearest" else [])
     slot_rank = 0 if "quoted" in slot_kinds else (1 if slot_kinds else 2)
     on_self = sum(1 for t in tests if t[1] == "self")
     crowd = sum(max(0, len(matches((tests, None), p)) - 1) for p in pages)
@@ -468,6 +537,8 @@ class VersionSpaceSkill:
                             rules.setdefault(tuple(test[3]), None)
                     if position is not None and position[0] == "nth_slot":
                         rules.setdefault(tuple(position[1]), None)
+                    if position is not None and position[0] == "nearest":
+                        rules.setdefault(tuple(position[2]), None)
             for expressions in self._texts:
                 for expression in expressions:
                     if expression[0] == "slot":
