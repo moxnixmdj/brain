@@ -1,0 +1,92 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT1_PROVIDER_BOUNDARY_ABLATION_V2",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__CAUSAL_PROVIDER_BOUNDARY_LAYER_OVER_CURRENT_CONTRASTIVE_SEMANTIC_GATE__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "base_commit_sha": "94d6c7ffd8a5f78ebe523e65aec93e44b6c86701",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "blocker": "EXTERNAL_CAPABILITY_PROVIDER_AMBIGUITY",
+  "reuses_current_main": {
+    "semantic_gate": {
+      "path": "canonical/runtime/root1_contrastive_semantic_gate_v1.py",
+      "git_blob_sha": "3737642f47b21b23d2892bd1ba14dbd6776ca256",
+      "role": "MEANING_SENSITIVE_8_PROBE_4_EFFECT_SEMANTIC_TRUTH_GATE"
+    },
+    "exact_subject_runner": {
+      "path": "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py",
+      "git_blob_sha": "96638f713bac92d47cae77db441a9d13770e7f1d",
+      "role": "LOCALHOST_ONLY_CONTENT_ADDRESSED_MODEL_EXECUTION_PRIMITIVES"
+    },
+    "brain_composer": {
+      "path": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py",
+      "git_blob_sha": "b766cefd5e7f23d2533ff49d1c259eb83a0a53f0",
+      "role": "ZERO_MODEL_CALL_FORMAL_CONSTRAINT_COMPOSITION_WITH_VERBATIM_SEED_PRESERVATION"
+    },
+    "formal_compiler": {
+      "path": "canonical/runtime/instruction_constraint_compiler_v1.py",
+      "git_blob_sha": "a4a3f87f827bd6f0f85fe70c77a1de5aa3237c6f",
+      "role": "EXACT_FORMAL_OVERLAY_VALIDATION"
+    }
+  },
+  "causal_design": {
+    "seed_route": "SAME_EXACT_SUBJECT_RECEIVES_EACH_CURRENT_CONTRASTIVE_SEMANTIC_PROBE_WITHOUT_FORMAL_OVERLAY",
+    "direct_route": "SAME_EXACT_SUBJECT_RECEIVES_THE_SAME_PROBE_PLUS_ITS_FROZEN_FORMAL_OVERLAY_IN_ONE_PROMPT",
+    "brain_route": "BRAIN_COMPOSER_RECEIVES_THE_SEED_ROUTE_OUTPUT_PLUS_THE_SAME_FORMAL_OVERLAY_WITH_ZERO_ADDITIONAL_MODEL_CALLS",
+    "paired_randomness": "SEED_AND_DIRECT_ROUTE_USE_THE_SAME_PER_PROBE_GENERATION_SEED_AND_SAME_RUNTIME_PARAMETERS",
+    "semantic_truth": "CURRENT_CONTRASTIVE_GATE_SCORES_SEED_AND_DIRECT_OUTPUTS",
+    "brain_semantic_truth": "BRAIN_ROUTE_INHERITS_SEED_SEMANTIC_RESULT_ONLY_WHEN_COMPOSER_PASS_PRESERVES_THE_EXACT_SEED_VERBATIM",
+    "formal_truth": "DIRECT_AND_BRAIN_OUTPUTS_ARE_VALIDATED_BY_THE_SAME_FROZEN_FORMAL_COMPILER",
+    "provider_test": "IF_THE_DIRECT_MODEL_ONLY_ROUTE_ALREADY_SUPPLIES_THE_BOUNDED_COMPOSED_TARGET_THEN_THIS_EXPERIMENT_MUST_NOT_ATTRIBUTE_THAT_TARGET_TO_THE_BRAIN_LAYER"
+  },
+  "formal_overlays": {
+    "PARA_A": "Response must start with \"<<<\".",
+    "PARA_B": "Response must end with \">>>\".",
+    "SIMPLE_A": "Response must start with \"[[[\".",
+    "SIMPLE_B": "Response must end with \"]]]\".",
+    "SUM_A": "Response must start with \"{{{\". Response must end with \"}}}\".",
+    "SUM_B": "Response must start with \"(((\".",
+    "STORY_A": "Response must end with \")))\".",
+    "STORY_B": "Response must start with \"###\". Response must end with \"%%%\"."
+  },
+  "pass_rule": {
+    "seed_semantic_pass": "8_OF_8_CURRENT_CONTRASTIVE_PROBES_PASS",
+    "brain_composed_pass": "8_OF_8_PRESERVE_SEED_VERBATIM_AND_PASS_THE_FROZEN_FORMAL_OVERLAY",
+    "provider_negative_control": "DIRECT_MODEL_ONLY_ROUTE_MUST_FAIL_AT_LEAST_2_OF_8_FULL_SEMANTIC_PLUS_FORMAL_CASES",
+    "causal_materiality": "AT_LEAST_2_CASES_ARE_RESCUED_BY_THE_BRAIN_ROUTE_AND_RESCUES_SPAN_AT_LEAST_2_OF_4_SEMANTIC_EFFECT_CLASSES",
+    "provider_already_capable_rejection": "DIRECT_ROUTE_PASSING_7_OR_8_CASES_REJECTS_BRAIN_OWNERSHIP_ATTRIBUTION_FROM_THIS_EXPERIMENT",
+    "meaning": "PASS_IS_A_BOUNDED_CAUSAL_PROVIDER_BOUNDARY_SIGNAL_FOR_SUBSTRATE_SELECTION_ONLY"
+  },
+  "why_this_is_not_duplicate_work": [
+    "CURRENT_MAIN_CONTRASTIVE_GATE_ESTABLISHES_BOUNDED_MEANING_SENSITIVITY_BUT_DOES_NOT_COMPARE_MODEL_ONLY_COMPOSITION_AGAINST_BRAIN_COMPOSITION",
+    "THIS_LAYER_REUSES_THAT_GATE_INSTEAD_OF_DEFINING_ANOTHER_SEMANTIC_SUITE",
+    "THIS_LAYER_ADDS_THE_CANONICAL_EXTERNAL_PROVIDER_NEGATIVE_CONTROL_REQUIRED_FOR_CAUSAL_OWNERSHIP_ATTRIBUTION",
+    "THE_EXACT_SUBJECT_RUNNER_IS_REUSED_INSTEAD_OF_REIMPLEMENTED"
+  ],
+  "hard_nonclaims": [
+    "NO_LIVEBENCH_SCORE_INHERITANCE",
+    "NO_CLAIM_OF_OPEN_WORLD_SEMANTIC_UNDERSTANDING",
+    "NO_CLAIM_ALL_LEGACY_IFEVAL_CHECKERS_ARE_COVERED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_CONTENT_OR_METADATA_USED",
+    "NO_FRESH_TERMINAL_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling_candidate": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  },
+  "independent_verification_required": true
+}
