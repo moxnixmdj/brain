@@ -37,6 +37,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime import universal_verified_adaptive_solver_v1 as v1
 from canonical.runtime import r3_bound_success_checkpoint_verifier_v1 as bound_success_verifier
 from canonical.runtime import r3_raw_success_checkpoint_verifier_v1 as raw_success_verifier
+from canonical.runtime import r3_direct_adequacy_success_verifier_v1 as direct_success_verifier
 from canonical.runtime import universal_verified_adaptive_solver_v4 as v4
 from canonical.runtime.capability_planner import PlanningFailure, plan_capabilities
 from canonical.runtime.resolved_capability_semantics_authenticator_v1 import (
@@ -614,6 +615,62 @@ def verify_episode_request(
         value_head = str(request.get("value_capsule_head_hash") or "")
         if len(fact_head) != 64 or len(value_head) != 64:
             raise R3IndependentVerificationError("EPISODE_CAPSULE_HEAD_INVALID")
+
+        if problem.get("verification_kind") == direct_success_verifier.VERIFICATION_KIND:
+            verdict = direct_success_verifier.verify_material(
+                problem=problem,
+                episode=episode,
+                trace=trace,
+                fact_capsule_head_hash=fact_head,
+                value_capsule_head_hash=value_head,
+                repo_root=repo_root,
+            )
+            if verdict.get("pass") is not True:
+                raise R3IndependentVerificationError(
+                    "DIRECT_ADEQUACY_SUCCESS_READBACK_VERIFICATION_FAILED:"
+                    + str(verdict.get("reason") or verdict.get("status") or "")
+                )
+            bindings = {
+                "problem_sha256": v1._digest(problem),
+                "episode_id": episode.get("episode_id"),
+                "scope_id": episode.get("scope_id"),
+                "program_sha256": episode.get("program_sha256"),
+                "trace_sha256": _sha(list(trace)),
+                "fact_capsule_head_hash": fact_head,
+                "value_capsule_head_hash": value_head,
+            }
+            if any(not isinstance(v, str) or not v for v in bindings.values()):
+                raise R3IndependentVerificationError("EPISODE_BINDING_FIELD_INVALID")
+            receipt = {
+                "schema": EPISODE_RECEIPT_SCHEMA,
+                **bindings,
+                "pass": True,
+                "conclusion": "success",
+                "behavior_verified": True,
+                "exact_byte_bound": True,
+                "verification_basis": verdict.get("verification_basis"),
+            }
+            verification = {
+                "schema": EPISODE_VERIFY_SCHEMA,
+                **bindings,
+                "pass": True,
+                "independent_verified": True,
+                "behavior_verified": True,
+                "exact_byte_bound": True,
+                "trace_reverified": True,
+                "state_lineage_reverified": True,
+                "effect_outcomes_reverified": True,
+                "non_effectful_trace": False,
+                "independent_verifier_id": INDEPENDENT_VERIFIER_ID,
+                "verification_basis": verdict.get("verification_basis"),
+            }
+            return _emit_pair(
+                stem="episode-r2-direct-adequacy-success",
+                receipt=receipt,
+                verification_core=verification,
+                repo_root=repo_root,
+                receipt_dir=receipt_dir,
+            )
 
         if problem.get("verification_kind") == raw_success_verifier.VERIFICATION_KIND:
             verdict = raw_success_verifier.verify_material(

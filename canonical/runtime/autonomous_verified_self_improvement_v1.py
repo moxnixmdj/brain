@@ -954,6 +954,195 @@ def advance_verification_queue(
     }
 
 
+
+_DIRECT_SUCCESS_BINDING_KEYS = (
+    "raw_task_contract_sha256",
+    "format",
+    "source_type",
+    "producer_id",
+    "json_path",
+    "source_sha256",
+    "source_json_sha256",
+    "input_path",
+    "input_sha256",
+    "spec_path",
+    "spec_sha256",
+    "markdown_path",
+    "visible_text_sha256",
+    "output_path",
+    "output_sha256",
+    "intent_path",
+    "expected_semantics_sha256",
+    "payload_sha256",
+    "execution_mode",
+)
+
+
+def _make_direct_adequacy_success_proof_capsule(
+    out: Mapping[str, Any],
+) -> dict[str, Any] | None:
+    """Retain only bounded direct-route proof metadata for later read-only R3 verification."""
+    if not isinstance(out, Mapping) or out.get("pass") is not True:
+        return None
+    fixed_status = _s(out.get("r2_fixed_point_status"))
+    if not fixed_status.startswith("PASS__R2_DIRECT_END_TO_END_ADEQUACY_CLOSED"):
+        return None
+    if (
+        out.get("semantic_acceptance_complete") is not True
+        or out.get("actual_goal_satisfaction_verified") is not True
+        or out.get("direct_adequacy_authority") is not True
+    ):
+        return None
+    route_id = _s(out.get("route_id"))
+    capability_id = _s(out.get("capability_id"))
+    goal_sha256 = _s(out.get("goal_sha256"))
+    if not route_id or not capability_id or len(goal_sha256) != 64:
+        return None
+
+    accepted = _items(out.get("accepted_raw_obligation_ids"))
+    count = out.get("raw_acceptance_obligation_count")
+    if (
+        not accepted
+        or isinstance(count, bool)
+        or not isinstance(count, int)
+        or count != len(accepted)
+    ):
+        return None
+
+    receipt = out.get("acceptance_receipt")
+    raw_result = out.get("raw_result")
+    if not isinstance(receipt, Mapping):
+        return None
+    independent = (
+        receipt.get("independent_verification")
+        if isinstance(receipt.get("independent_verification"), Mapping)
+        else (
+            raw_result.get("independent_verification")
+            if isinstance(raw_result, Mapping)
+            and isinstance(raw_result.get("independent_verification"), Mapping)
+            else receipt
+        )
+    )
+    if not isinstance(independent, Mapping):
+        return None
+
+    bindings: dict[str, Any] = {}
+    sources = [out]
+    if isinstance(raw_result, Mapping):
+        sources.append(raw_result)
+    for key in _DIRECT_SUCCESS_BINDING_KEYS:
+        for source in sources:
+            if key in source and source.get(key) is not None:
+                bindings[key] = deepcopy(source.get(key))
+                break
+
+    material = {
+        "schema": "PROJECT_BRAIN_DIRECT_ADEQUACY_SUCCESS_PROOF_V1",
+        "source_schema": _s(out.get("schema")) or None,
+        "source_status": _s(out.get("status")) or None,
+        "r2_fixed_point_status": fixed_status,
+        "route_id": route_id,
+        "capability_id": capability_id,
+        "selected_policy_id": _s(out.get("selected_policy_id")) or None,
+        "goal_sha256": goal_sha256,
+        "semantic_scope": _s(out.get("semantic_scope")) or None,
+        "accepted_raw_obligation_ids": accepted,
+        "raw_acceptance_obligation_count": count,
+        "route_bindings": bindings,
+        "independent_acceptance_sha256": _sha(dict(independent)),
+    }
+    _validate_retry_value(material, path="direct_success_proof")
+    raw = _canon(material).encode("utf-8")
+    if len(raw) > 64_000:
+        raise SelfImprovementError("DIRECT_SUCCESS_PROOF_CAPSULE_TOO_LARGE")
+    return {
+        "schema": "PROJECT_BRAIN_DIRECT_ADEQUACY_SUCCESS_PROOF_CAPSULE_V1",
+        "sha256": _sha(material),
+        "material": material,
+        "secret_scan": "PASS",
+    }
+
+
+def record_verified_direct_adequacy_success_observation(
+    out: Mapping[str, Any],
+    *,
+    surface: str,
+    state_path: str | Path = DEFAULT_STATE_PATH,
+    replay_context: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Queue verifier-gated R3 adaptation for an already-owned direct adequacy success."""
+    if not isinstance(out, Mapping) or out.get("pass") is not True:
+        raise SelfImprovementError("DIRECT_ADEQUACY_SUCCESS_REQUIRES_PASSING_OUTPUT")
+    if _s(surface) != "ADEQUATE_DECISION_DIRECT_SUCCESS":
+        raise SelfImprovementError("DIRECT_ADEQUACY_SUCCESS_SURFACE_INVALID")
+    proof_capsule = _make_direct_adequacy_success_proof_capsule(out)
+    if not isinstance(proof_capsule, Mapping):
+        raise SelfImprovementError("DIRECT_ADEQUACY_SUCCESS_PROOF_UNAVAILABLE")
+    replay_capsule = _make_retry_capsule(replay_context)
+    route_id = _s(out.get("route_id"))
+    goal_sha256 = _s(out.get("goal_sha256"))
+    core = {
+        "surface": "ADEQUATE_DECISION_DIRECT_SUCCESS",
+        "schema": _s(out.get("schema")) or None,
+        "status": _s(out.get("status")) or None,
+        "route_id": route_id,
+        "goal_sha256": goal_sha256,
+        "output_sha256": _sha(out),
+        "replay_capsule_sha256": replay_capsule["sha256"],
+        "proof_capsule_sha256": proof_capsule["sha256"],
+    }
+    oid = "observation:" + _sha(core)
+    state = load_state(state_path)
+    previous = state["observations"].get(oid)
+    state["observations"][oid] = {
+        **core,
+        "observation_id": oid,
+        "count": int(previous.get("count", 0)) + 1 if isinstance(previous, Mapping) else 1,
+        "replay_capsule": deepcopy(replay_capsule),
+        "proof_capsule": deepcopy(proof_capsule),
+        "learning_disposition": "PENDING_INDEPENDENT_DIRECT_ADEQUACY_EPISODE_VERIFICATION",
+        "frontier_expansion_required": False,
+        "permanent_nonlearnability_claimed": False,
+        "existing_capability_authority_unchanged": True,
+    }
+    work_id = _enqueue_improvement(
+        state,
+        kind="ADAPT_SUCCESS_TO_VERIFIABLE_EPISODE",
+        priority=45,
+        identity={
+            "surface": "ADEQUATE_DECISION_DIRECT_SUCCESS",
+            "route_id": route_id,
+            "goal_sha256": goal_sha256,
+        },
+        payload={
+            "observation_id": oid,
+            "surface": "ADEQUATE_DECISION_DIRECT_SUCCESS",
+            "output_sha256": core["output_sha256"],
+            "replay_capsule_sha256": core["replay_capsule_sha256"],
+            "replayable": True,
+            "proof_capsule_sha256": core["proof_capsule_sha256"],
+            "proof_available": True,
+            "required_result": "VERIFIED_DIRECT_ADEQUACY_EPISODE_OR_FAIL_CLOSED_DISPOSITION",
+        },
+    )
+    _refresh_stats(state)
+    _write_state(state, state_path)
+    return {
+        "schema": SCHEMA,
+        "status": "SUCCESS_OBSERVED__DIRECT_ADEQUACY_EPISODE_ADAPTER_QUEUED",
+        "pass": True,
+        "observation_id": oid,
+        "replay_capsule_sha256": core["replay_capsule_sha256"],
+        "proof_capsule_sha256": core["proof_capsule_sha256"],
+        "improvement_work_id": work_id,
+        "next_improvement_action": _next_improvement_from_state(state),
+        "new_improvement_work_enqueued": True,
+        "permanent_reuse_authorized": False,
+        "existing_capability_authority_unchanged": True,
+        "terminal_authority": False,
+    }
+
+
 def record_owned_direct_success_observation(
     out: Mapping[str, Any],
     *,
