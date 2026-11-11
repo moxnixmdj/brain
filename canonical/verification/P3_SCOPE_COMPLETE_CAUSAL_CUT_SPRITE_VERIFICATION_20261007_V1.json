@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_P3_SCOPE_COMPLETE_CAUSAL_CUT_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_SPRITE_EXACT_SOURCE_REPLAY_PASS__5_OF_5__EIGHT_COMPONENT_COMPOSITION_INSUFFICIENT__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_CUT_20261007_V1.json",
+    "git_blob_sha": "37c0246a4b9a231d3e5b0a306816077f55fcf8a9"
+  },
+  "synthesis_input": {
+    "path": "canonical/governance/P3_SCOPE_COMPLETE_CAUSAL_SYNTHESIS_INPUT_20261007_V1.json",
+    "git_blob_sha": "4ecec60e2b5ce971bb5fc900bc93dbbac194be84"
+  },
+  "test": {
+    "path": "canonical/tests/test_p3_scope_complete_causal_cut_20261007_v1.py",
+    "git_blob_sha": "0e3d0d406972ea11452e6cbce32d2c5cf462fec5"
+  },
+  "independent_carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-root3-current-byte-replay-20261007-v1",
+    "sprite_id": "sprite-5c9d5b63-1140-41a5-b9f0-1b9f6f29db9e",
+    "working_directory": "/home/sprite/p3_scope_complete_causal_cut_v1",
+    "result": "PASS_5_OF_5"
+  },
+  "verified": [
+    "ALL_DECLARED_SOURCE_BINDINGS_MATCH_EXACT_BYTES",
+    "EXACT_EIGHT_COMPONENT_SYNTHESIS_REPLAYS_NEW_PRIMITIVE_REQUIRED_AFTER_256_ARCHITECTURES",
+    "BOUNDED_REUSE_MECHANISMS_RETAIN_EXPLICIT_NON_SCOPE_COMPLETE_SEMANTIC_BOUNDARIES",
+    "FOUR_SURFACE_MISSING_EFFECT_LABELS_COLLAPSE_TO_ONE_UNIFIED_BUILD_TARGET_WITHOUT_CLAIMING_IMPLEMENTATION",
+    "NO_FALSE_NECESSITY_CLAIM_FOR_EXTERNAL_TARGET_INFORMATION_OR_GENERAL_NATURAL_LANGUAGE_ENGINE"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_UNIFIED_EFFECT_IMPLEMENTED",
+    "NO_U_EMPTY",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
