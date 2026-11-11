@@ -1,0 +1,57 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1",
+  "claim": "Asked through the front door in one of fifteen plain phrasings, a request to copy a file to a new name, to rename a file to a new name, or to append one line to a file leaves the folder holding exactly what the request determines and nothing else changed; the same request with a word no row accounts for, with a destination that already exists, or naming a file that is not there is refused and the folder is left byte for byte as it was.",
+  "input_class": "Folders of two to four text files with made-up bare names (four extensions), each holding zero to five lines of zero to four words, some non-ASCII, with or without a final newline; one request per folder drawn from five phrasings each of copy, rename and append (the generator's own tables), with source and destination in that folder; the appended line is one made-up token, or two or three made-up tokens in double quotes; 60 % plain requests, about 20 % with one of twenty foreign words inserted before the first name, about 10 % whose destination exists, 10 % whose named file is absent.",
+  "scope_limits": [
+    "NO phrasing outside the fifteen in the generator's tables; other wordings are mostly refused and that is not measured here",
+    "NO overwriting: a request that asks to replace an existing destination is never generated",
+    "NO directories as source or destination, no destination in another or a missing folder, no absolute paths, no path outside the repository",
+    "NO appended line that is an ordinary English word, contains a quotation mark, or spans lines",
+    "NO files above a few hundred bytes, no binary content, no symbolic links, no concurrent writers",
+    "NO claim about any other file operation, and nothing that starts a program"
+  ],
+  "solver": {
+    "module": "canonical/runtime/file_change_true_capability_adapter_v1.py",
+    "entry": "solve_through_the_front_door",
+    "kernels": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/goal_compiler.py",
+      "canonical/runtime/goal_front_compiler_v1.py",
+      "canonical/runtime/bound_capabilities/file_ops.py",
+      "canonical/runtime/bound_capabilities/file_edit.py",
+      "canonical/runtime/bound_capabilities/stated_file_path.py",
+      "canonical/runtime/file_artifact_expectation_v1.py"
+    ],
+    "note": "the adapter writes the described folder to a scratch path, asks the one front door, and reads the folder back; no file-changing logic is in it"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/file_change_request_gen_v1.py"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/file_change_request_oracles_v1.py",
+    "declared": [
+      {
+        "id": "FOLDER_BY_CONSTRUCTION",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "computed from the generator's description of the files and the request; parses no sentence, reads no file, imports no runtime module"
+      },
+      {
+        "id": "ASKED_AGAIN_RELATION",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "UNTOUCHED_AND_BY_THE_ROW",
+        "class": "PROPERTY",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "FOLDER_BY_CONSTRUCTION"
+  ],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "One fresh instance on which the folder afterwards differs by one byte or one name from what the request determines, or a request that must be refused is answered or changes anything, or a plain request in one of the fifteen phrasings is refused."
+}
