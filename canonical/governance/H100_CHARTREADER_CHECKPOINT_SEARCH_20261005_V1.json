@@ -1,0 +1,72 @@
+{
+  "schema": "PROJECT_BRAIN_H100_CHARTREADER_CHECKPOINT_SEARCH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CHECKPOINT_SEARCH_SATURATED_ON_CURRENT_PUBLIC_SURFACES__OWNER_ISSUE_CHANNEL_BLOCKED_BY_INTEGRATION_403__ZERO_CREDIT",
+  "target": "H100_CHARTREADER_COMPACT_VISION_CONTINGENCY",
+  "parent": {
+    "path": "canonical/governance/H100_CHARTREADER_DETECTOR_DECOMPOSITION_V1.json",
+    "git_blob_sha": "6df7a2003064be3e567bd258b73a1aedcca2e194"
+  },
+  "observations": [
+    {
+      "surface": "OFFICIAL_ZHIQIC_CHARTREADER_REPOSITORY",
+      "result": "README_REFERENCES_KPDetection_best.pkl_BUT_NO_CHECKPOINT_FILE_OR_DURABLE_DOWNLOAD_LINK_PRESENT",
+      "repository": "zhiqic/ChartReader",
+      "readme_git_blob_sha": "df3a400e42f2a5ec51b0ad2c6ca2c13b1fa33c3"
+    },
+    {
+      "surface": "GITHUB_GLOBAL_CODE_SEARCH",
+      "result": "KPDetection_best.pkl_FOUND_ONLY_AS_README_REFERENCE_IN_OFFICIAL_REPO_AND_ONE_FORK_COPY__NO_ARTIFACT_FOUND"
+    },
+    {
+      "surface": "PUBLIC_WEB_SEARCH",
+      "result": "NO_DURABLE_PUBLIC_PRETRAINED_KPDETECTION_OR_KPGROUPING_CHECKPOINT_LOCATED_ON_GITHUB_HUGGINGFACE_OR_INDEXED_PUBLIC_PAGES"
+    },
+    {
+      "surface": "OFFICIAL_REPOSITORY_ISSUES",
+      "result": "NO_EXISTING_RELEVANT_PRETRAINED_CHECKPOINT_ISSUE_FOUND"
+    },
+    {
+      "surface": "OWNER_ISSUE_OUTREACH_ATTEMPT",
+      "result": "NOT_SENT__GITHUB_CONNECTOR_CREATE_ISSUE_RETURNED_403_RESOURCE_NOT_ACCESSIBLE_BY_INTEGRATION",
+      "epistemic_rule": "DO_NOT_TREAT_BLOCKED_OUTREACH_AS_CONTACT_OR_DENIAL"
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "REPEAT_GITHUB_FILENAME_SEARCH_FOR_KPDetection_best.pkl",
+      "REPEAT_GENERIC_WEB_SEARCH_FOR_SAME_CHECKPOINT_WITHOUT_NEW_SOURCE_SIGNAL"
+    ],
+    "preserve": [
+      "OWNER_OR_AUTHOR_PROVIDED_CHECKPOINT_RECEIPT",
+      "NEW_DURABLE_PUBLIC_ARTIFACT_IF_DISCOVERED_LATER",
+      "RETRAIN_FROM_PUBLIC_DATA_ONLY_IF_SEPARATELY_JUSTIFIED_BY_ZERO_COST_COMPUTE_AND_SCOPE",
+      "ALTERNATE_SUB100MB_VISION_ROUTE_SEARCH"
+    ],
+    "checkpoint_state": "UNAVAILABLE_ON_CURRENT_VERIFIED_PUBLIC_SURFACES__NOT_PROVED_NONEXISTENT"
+  },
+  "h100_effect": {
+    "learned_rung_bytes": 0,
+    "rung_advance": false,
+    "reason": "STATIC_ARCHITECTURE_FIT_WITHOUT_PRETRAINED_WEIGHTS_IS_NOT_CAPABILITY"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CHECKPOINT_DOES_NOT_EXIST_PRIVATELY",
+    "NO_CLAIM_AUTHORS_REFUSED",
+    "NO_CLAIM_CHARTREADER_CAPABILITY_OWNED",
+    "NO_H100_ACCEPTANCE_CAPABILITY_FAMILY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "new_reality_units_consumed": 0,
+    "h100_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
