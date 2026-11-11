@@ -33,12 +33,15 @@ def _element(index, parent, tag, text="", *, click=False, type_=False, **extra):
 class _Page:
     """One instance of one stub task. `rows` are (tag, text, extra) under a single container."""
 
-    def __init__(self, utterance, rows, judge, *, steps_allowed=10):
+    def __init__(self, utterance, rows, judge, *, steps_allowed=10, hand=None):
         self.utterance = utterance
         self.rows = [dict(tag=tag, text=text, extra=dict(extra)) for tag, text, extra in rows]
         self.judge = judge          # (page, row_index) -> None | +1 | -1, called on every click
+        self.hand = hand            # (page, kind, row_index, word) -> None | +1 | -1, called on anything else the hand does
         self.done, self.reward, self.clicked = False, 0.0, []
         self.left = steps_allowed
+        self.holding, self.waited, self.done_by_hand = None, None, []
+        self.selection = None       # text that shows as selected, when a page selects any
 
     def observe(self):
         elements = [_element(0, -1, "body"), _element(1, 0, "div", id="area")]
@@ -48,25 +51,59 @@ class _Page:
             is_input = row["tag"] == "input" and extra.get("type", "text") == "text"
             elements.append(_element(len(elements), 1 if inside is None else inside + 2, row["tag"], row["text"],
                                      click=True, type_=is_input, **extra))
-        return {"utterance": self.utterance, "done": self.done, "raw_reward": self.reward, "reason": None,
+        seen = {"utterance": self.utterance, "done": self.done, "raw_reward": self.reward, "reason": None,
                 "virtual_ms": 500 * (10 - self.left), "elements": elements, "js_errors": []}
+        if self.holding is not None:
+            seen["holding"] = self.holding + 2
+        if self.waited is not None:
+            seen["waited_s"] = self.waited
+        if self.selection:
+            seen["selection"] = self.selection
+        return seen
 
     def act(self, action):
+        """Like the real bridges: a press and typing as before; the rest of the hand reaches the page
+        through `hand` (a page without one takes no notice of it); a hand that holds something can
+        only let go, and one that holds nothing cannot; whatever is asked, time passes."""
         if self.done:
             return self.observe()
-        row = action["index"] - 2
-        if 0 <= row < len(self.rows):
-            if action["type"] == "type":
-                self.rows[row]["extra"]["value"] = action["text"]
-            else:
-                self.clicked.append(row)
-                verdict = self.judge(self, row)
-                if verdict is not None:
-                    self.done, self.reward = True, float(verdict)
+        kind, problem, verdict = action["type"], None, None
+        if kind == "wait":
+            self.waited = action["seconds"]
+            self.done_by_hand.append((kind, None, str(action["seconds"])))
+            if self.hand is not None:
+                verdict = self.hand(self, kind, None, str(action["seconds"]))
+        elif kind not in ("click", "type", "hover", "grab", "drop", "triple", "nudge"):
+            problem = "UNKNOWN_ACTION"
+        elif (self.holding is not None) != (kind == "drop"):
+            problem = "THE_HAND_HOLDS_NOTHING" if kind == "drop" else "THE_HAND_IS_HOLDING_SOMETHING"
+        else:
+            row = action["index"] - 2
+            if 0 <= row < len(self.rows):
+                self.waited = None
+                if kind == "type":
+                    self.rows[row]["extra"]["value"] = action["text"]
+                elif kind == "click":
+                    self.clicked.append(row)
+                    verdict = self.judge(self, row)
+                else:
+                    word = action.get("text", "")
+                    if kind == "grab":
+                        self.holding = row
+                    elif kind == "drop":
+                        word, self.holding = str(self.holding), None        # what was let go of, by row
+                    self.done_by_hand.append((kind, row, word))
+                    if self.hand is not None:
+                        verdict = self.hand(self, kind, row, word)
+        if verdict is not None:
+            self.done, self.reward = True, float(verdict)
         self.left -= 1
         if self.left <= 0 and not self.done:
             self.done, self.reward = True, -1.0
-        return self.observe()
+        seen = self.observe()
+        if problem:
+            seen["action_error"] = problem
+        return seen
 
 
 def _named_button(seed):
@@ -365,7 +402,137 @@ def _ledger(seed):
     return _Page(f"Enter the value of {keys[asked]} into the text field and press Submit.", rows, judge, steps_allowed=12)
 
 
-_TASKS = {"two-fields": _two_fields, "three-boxes": _three_boxes, "named-decoy": _named_decoy,
+def _wait_between(seed):
+    """`Round 4: press Go, wait 7 seconds, then press Stop.` Only that wait, made between the two presses, pays.
+    The instruction holds a second number that is not the wait."""
+    rng = random.Random(f"wait:{seed}")
+    seconds = rng.randint(2, 9)
+    other = rng.choice([n for n in range(2, 10) if n != seconds])
+    rows = [("button", "Go", {"id": "go"}), ("button", "Stop", {"id": "stop"})]
+    state = {"went": False, "waited": None}
+
+    def judge(page, r):
+        if r == 0:
+            state["went"], state["waited"] = True, None
+            page.rows[0]["extra"]["focused"] = True          # a pressed button shows that it was pressed
+            return None
+        return 1 if state["went"] and state["waited"] == seconds else -1
+
+    def hand(page, kind, row, word):
+        if kind == "wait" and state["went"]:
+            state["waited"] = int(word)
+        return None
+    return _Page(f"Round {other}: press Go, wait {seconds} seconds, then press Stop.", rows, judge, hand=hand)
+
+
+def _carry(seed):
+    """`Drag Cleo onto Finn.` among four items in changing order. Presses do nothing."""
+    rng = random.Random(f"carry:{seed}")
+    names = rng.sample(WORDS, 4)
+    what, where = rng.sample(names, 2)
+    rows = [("div", name, {"classes": "item"}) for name in names]
+
+    def hand(page, kind, row, word):
+        if kind != "drop":
+            return None
+        return 1 if page.rows[int(word)]["text"] == what and page.rows[row]["text"] == where else -1
+    return _Page(f"Drag {what} onto {where}.", rows, lambda page, r: None, hand=hand)
+
+
+def _push(seed):
+    """`Move the block left.` One block among pebbles; the way to go is in the instruction."""
+    rng = random.Random(f"push:{seed}")
+    way = rng.choice(["up", "down", "left", "right"])
+    rows = [("div", "", {"classes": "pebble"}) for _ in range(rng.randint(0, 2))] + [("div", "", {"classes": "block"})]
+    rng.shuffle(rows)
+
+    def hand(page, kind, row, word):
+        if kind != "nudge":
+            return None
+        return 1 if page.rows[row]["extra"].get("classes") == "block" and word == way else -1
+    return _Page(f"Move the block {way}.", rows, lambda page, r: None, hand=hand)
+
+
+def _painted(seed):
+    """`Press the red box.` The boxes say nothing; colour is all that tells them apart."""
+    rng = random.Random(f"painted:{seed}")
+    colours = rng.sample(["red", "green", "blue", "black", "pink", "grey"], 4)
+    wanted = rng.choice(colours)
+    rows = [("div", "", {"classes": "tile", "colour": colour}) for colour in colours]
+    return _Page(f"Press the {wanted} box.", rows, lambda page, r: 1 if page.rows[r]["extra"]["colour"] == wanted else -1)
+
+
+def _point_then_press(seed):
+    """`Open Bram and choose Kira.` What is to be chosen is not on the page until the pointer rests on
+    what is to be opened; pressing what is to be opened is an answer, and the wrong one."""
+    rng = random.Random(f"point:{seed}")
+    tops, subs = rng.sample(WORDS[:6], 3), rng.sample(WORDS[6:], 3)
+    k = rng.randrange(3)
+    rows = [("div", top, {"classes": "top"}) for top in tops]
+
+    def hand(page, kind, row, word):
+        if kind == "hover" and row < 3:
+            del page.rows[3:]                                 # pointing at another closes what was open
+            page.rows.append(dict(tag="div", text=subs[row], extra={"classes": "sub"}))
+        return None
+
+    def judge(page, r):
+        return 1 if r >= 3 and page.rows[r]["text"] == subs[k] else -1
+    return _Page(f"Open {tops[k]} and choose {subs[k]}.", rows, judge, hand=hand)
+
+
+def _mark_and_submit(seed):
+    """`Select paragraph 2 and press Submit.` Three fast presses select a paragraph; one press anywhere
+    else takes the selection away."""
+    rng = random.Random(f"mark:{seed}")
+    n = rng.randint(1, 3)
+    rows = [("p", " ".join(rng.sample(WORDS, 3)), {}) for _ in range(3)] + [("button", "Submit", {"id": "subbtn"})]
+
+    def hand(page, kind, row, word):
+        if kind == "triple" and row < 3:
+            page.selection = page.rows[row]["text"]
+        return None
+
+    def judge(page, r):
+        if r != 3:
+            page.selection = None
+            return None
+        return 1 if page.selection == page.rows[n - 1]["text"] else -1
+    return _Page(f"Select paragraph {n} and press Submit.", rows, judge, hand=hand)
+
+
+def _point_twice_then_press(seed):
+    """`Open Bram, then Enya, and choose Kira.` A menu inside a menu: each opens under the pointer."""
+    rng = random.Random(f"point2:{seed}")
+    tops, mids, subs = rng.sample(WORDS[:4], 3), rng.sample(WORDS[4:8], 3), rng.sample(WORDS[8:], 3)
+    a, b, c = rng.randrange(3), rng.randrange(3), rng.randrange(3)
+    rows = [("div", top, {"classes": "top"}) for top in tops]
+
+    def hand(page, kind, row, word):
+        if kind != "hover":
+            return None
+        level = page.rows[row]["extra"]["classes"]
+        if level == "top":
+            del page.rows[3:]
+            if row == a:
+                page.rows.extend(dict(tag="div", text=mid, extra={"classes": "mid"}) for mid in mids)
+        elif level == "mid":
+            del page.rows[6:]
+            if row - 3 == b:
+                page.rows.extend(dict(tag="div", text=sub, extra={"classes": "sub"}) for sub in subs)
+        return None
+
+    def judge(page, r):
+        return 1 if page.rows[r]["extra"]["classes"] == "sub" and page.rows[r]["text"] == subs[c] else -1
+    return _Page(f"Open {tops[a]}, then {mids[b]}, and choose {subs[c]}.", rows, judge, hand=hand)
+
+
+_HAND_TASKS = {"point-twice-then-press": _point_twice_then_press, "wait-between": _wait_between, "carry": _carry, "push": _push, "point-then-press": _point_then_press,
+               "mark-and-submit": _mark_and_submit}
+
+_TASKS = {"point-twice-then-press": _point_twice_then_press, "wait-between": _wait_between, "carry": _carry, "push": _push, "painted": _painted,
+          "point-then-press": _point_then_press, "mark-and-submit": _mark_and_submit,
+          "two-fields": _two_fields, "three-boxes": _three_boxes, "named-decoy": _named_decoy,
           "named-button": _named_button, "type-and-submit": _type_and_submit, "shout-and-submit": _shout_and_submit,
           "numbered-section": _numbered_section, "nth-box": _nth_box, "always-the-same": _always_the_same,
           "hidden-answer": _hidden_answer, "one-or-two": _one_or_two, "unsolvable": _unsolvable,
@@ -822,6 +989,15 @@ class InstrumentTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             tool.seed_plan(20, tool.FIRST_TEST_SEED - tool.FIRST_PRACTICE_SEED + 1)   # practice would run into the scored ones
 
+    def test_the_scored_instances_can_be_moved_to_ones_nobody_has_looked_at(self):
+        test_seeds, practice = tool.seed_plan(20, 3, 1040)
+        self.assertEqual(test_seeds, list(range(1040, 1060)))
+        self.assertEqual(practice, [tool.FIRST_PRACTICE_SEED + i for i in range(3)])
+        self.assertEqual(tool.seed_plan(20, 3, None)[0], list(range(tool.FIRST_TEST_SEED, tool.FIRST_TEST_SEED + 20)))
+        for first in (tool.DEMO_SEED, tool.DEMO_SEED - 5, tool.FIRST_PRACTICE_SEED, tool.FIRST_PRACTICE_SEED - 10):
+            with self.assertRaises(ValueError, msg=first):
+                tool.seed_plan(20, 3, first)                       # they would take in the shown or the practised ones
+
     def test_replaying_positions_solves_a_page_that_never_changes_and_only_that(self):
         bridge = StubBridge()
         same, _ = _demonstrate(bridge, "always-the-same")
@@ -1027,9 +1203,9 @@ class ReplayIsDoneStepByStepTests(unittest.TestCase):
             for search in tool.SEARCHES:
                 shown = tool.demonstrate(StubBridge(), task, 0, action_budget=3000, search=search)
                 for observation, action in shown["trace"] or []:
-                    wanted = tool.parse_action(action)
-                    element = observation["elements"][wanted["index"]]
-                    self.assertTrue(element.get("can_click" if wanted["type"] == "click" else "can_type"), (task, action))
+                    self.assertIsNone(tool.cannot_be_done(observation, tool.parse_action(action)), (task, action))
+                if search == "blind":                      # a blind search presses and types; it has no other hand
+                    self.assertFalse([a for _, a in shown["trace"] or [] if tool.is_hand_action(a)], task)
 
 
 class OneTaskCannotSinkTheRunTests(unittest.TestCase):
@@ -1450,7 +1626,9 @@ class GuidedSearchTests(unittest.TestCase):
         shown = tool.demonstrate(bridge, "unsolvable", 0, action_budget=500, search="guided")
         self.assertEqual(shown["stage"], tool.STAGE_NO_SUCCESS)
         self.assertEqual(shown["acquisition"]["runs"][0]["status"], sx.FAIL_EXHAUSTED)
-        self.assertEqual(bridge.acts, 2)                           # both buttons, once each
+        # both buttons pressed, once each (each ends the episode); then, per button, the pointer moved onto
+        # it, three fast presses, four nudges, and taking hold of it with the one place to let go
+        self.assertEqual(bridge.acts, 2 + 2 * (1 + 1 + 4) + 2 * 2 + 1)
 
     def test_the_same_search_twice_is_the_same_search(self):
         first = tool.demonstrate(StubBridge(), "two-fields", 3, action_budget=5000, search="guided")
@@ -1893,6 +2071,458 @@ class CopiedFromWhereTheInstructionPointsTests(unittest.TestCase):
             self.assertEqual(vs.mismatch(program, _TASKS["ledger"](seed).utterance), 0)
 
 
+class WholeHandTests(unittest.TestCase):
+    """Pressing and typing are two of the things a hand does. The others: moving the pointer onto something,
+    pressing three times fast, taking hold and letting go, a short carry, and letting time pass."""
+
+    def _page(self, task, seed=0):
+        return _TASKS[task](seed)
+
+    def test_every_action_is_written_one_way_and_read_back(self):
+        for written, read in (("click@4", {"type": "click", "index": 4}), ("hover@4", {"type": "hover", "index": 4}),
+                              ("triple@0", {"type": "triple", "index": 0}), ("grab@12", {"type": "grab", "index": 12}),
+                              ("drop@3", {"type": "drop", "index": 3}),
+                              ("nudge@5=left", {"type": "nudge", "index": 5, "text": "left"}),
+                              ("type@2=a=b@c", {"type": "type", "index": 2, "text": "a=b@c"}),
+                              ("wait=7", {"type": "wait", "seconds": 7})):
+            self.assertEqual(tool.parse_action(written), read)
+            kind, index, word = vs._parse(written)
+            self.assertEqual(kind, read["type"])
+            self.assertEqual(index, read.get("index", -1))
+            self.assertEqual(word, str(read.get("text", read.get("seconds", ""))))
+
+    def test_what_is_not_an_action_is_refused(self):
+        for written in ("nudge@5=sideways", "wait=0", "wait=61", "wait=soon", "wait=-3", "press@3", "shove@1=up", "wait", ""):
+            with self.assertRaises(ValueError, msg=written):
+                tool.parse_action(written)
+        for written in ("press@3", "shove@1=up"):
+            with self.assertRaises(ValueError, msg=written):
+                vs._parse(written)
+
+    def test_the_rest_of_the_hand_is_offered_only_at_its_own_tier(self):
+        observation = self._page("wait-between").observe()
+        for tier in (0, 1, 2):
+            self.assertEqual(tool.offered_actions(observation, tier), ["click@2", "click@3"])
+        self.assertLess(tool.GUIDED_TIER, tool.HAND_TIER)                   # "found with presses and typing alone" is another tier
+        whole = tool.offered_actions(observation, tool.HAND_TIER)
+        self.assertEqual(whole[:2], ["click@2", "click@3"])
+        self.assertEqual(sorted(a for a in whole if tool.is_hand_action(a)), sorted(
+            [f"{kind}@{i}" for i in (2, 3) for kind in ("hover", "triple", "grab")]
+            + [f"nudge@{i}={way}" for i in (2, 3) for way in tool.NUDGE_WORDS]
+            + [f"wait={n}" for n in tool.wait_candidates(observation["utterance"])]))
+
+    def test_only_the_seconds_the_instruction_gives_are_offered_as_waits(self):
+        self.assertEqual(tool.wait_candidates("Round 4: press Go, wait 7 seconds, then press Stop."), [4, 7])
+        self.assertEqual(tool.wait_candidates("Wait 7 seconds, then 7 more; not 0, 61, 2.5, 1234 or the 3rd."), [7])
+        self.assertEqual(tool.wait_candidates("Click button ONE, wait 1 seconds, then click button TWO."), [1])
+        self.assertEqual(tool.wait_candidates("Wait 60 seconds."), [60])
+        self.assertEqual(tool.wait_candidates(""), [])
+
+    def test_a_hand_that_holds_something_can_only_let_go(self):
+        page = self._page("carry")
+        held = page.act({"type": "grab", "index": 3})
+        self.assertEqual(held["holding"], 3)
+        self.assertEqual(tool.offered_actions(held, tool.HAND_TIER), ["drop@2", "drop@4", "drop@5"])
+        self.assertEqual(tool.offered_actions(held, 0), ["drop@2", "drop@4", "drop@5"])
+        for wanted in ({"type": "click", "index": 2}, {"type": "grab", "index": 2}, {"type": "hover", "index": 2},
+                       {"type": "wait", "seconds": 2}, {"type": "type", "index": 2, "text": "x"}):
+            self.assertEqual(tool.cannot_be_done(held, wanted), "PLAN_ASKS_THE_HAND_FOR_WHAT_IT_CANNOT_DO_NOW", wanted)
+        self.assertIsNone(tool.cannot_be_done(held, {"type": "drop", "index": 2}))
+        free = self._page("carry").observe()
+        self.assertEqual(tool.cannot_be_done(free, {"type": "drop", "index": 2}), "PLAN_ASKS_THE_HAND_FOR_WHAT_IT_CANNOT_DO_NOW")
+        self.assertIsNone(tool.cannot_be_done(free, {"type": "wait", "seconds": 2}))
+        self.assertEqual(tool.cannot_be_done(free, {"type": "hover", "index": 99}), "PLAN_NAMES_AN_ELEMENT_THAT_IS_NOT_ON_THE_PAGE")
+        self.assertEqual(tool.cannot_be_done(free, {"type": "hover", "index": 0}), "PLAN_ACTS_ON_AN_ELEMENT_THAT_CANNOT_TAKE_THE_ACTION")
+
+    def test_an_option_of_a_list_is_picked_and_nothing_else(self):
+        observation = {"utterance": "", "done": False, "elements": [
+            _element(0, -1, "select", click=True), _element(1, 0, "option", "One", click=True),
+            _element(2, -1, "button", "Go", click=True, disabled=True)]}
+        offered = tool.offered_actions(observation, tool.HAND_TIER)
+        self.assertIn("click@1", offered)
+        self.assertEqual([a for a in offered if a.endswith("@1")], ["click@1"])
+        self.assertIn("grab@0", offered)
+        self.assertFalse([a for a in offered if "@2" in a])                       # a disabled thing is not reached for
+        self.assertEqual(tool.cannot_be_done(observation, {"type": "hover", "index": 1}),
+                         "PLAN_ACTS_ON_AN_ELEMENT_THAT_CANNOT_TAKE_THE_ACTION")
+        self.assertIsNone(tool.cannot_be_done(observation, {"type": "click", "index": 1}))
+
+    def test_holding_waiting_and_selected_text_make_the_same_page_another_place(self):
+        page = self._page("carry")
+        before = page.observe()
+        held = page.act({"type": "grab", "index": 3})
+        self.assertEqual(before["elements"], held["elements"])
+        self.assertNotEqual(tool.state_key(before), tool.state_key(held))
+        waiting = self._page("wait-between")
+        first = waiting.observe()
+        later = waiting.act({"type": "wait", "seconds": 4})
+        self.assertEqual(first["elements"], later["elements"])
+        self.assertNotEqual(tool.state_key(first), tool.state_key(later))
+        longer = self._page("wait-between").act({"type": "wait", "seconds": 7})
+        self.assertNotEqual(tool.state_key(longer), tool.state_key(later))
+        marking = self._page("mark-and-submit")
+        plain = marking.observe()
+        marked = marking.act({"type": "triple", "index": 3})
+        self.assertEqual(plain["elements"], marked["elements"])
+        self.assertNotEqual(tool.state_key(plain), tool.state_key(marked))
+
+    def test_a_page_with_none_of_that_has_the_key_it_always_had(self):
+        observation = self._page("named-button").observe()
+        import hashlib
+        import json
+        body = [observation.get("utterance"), False, False, observation.get("elements")]
+        self.assertEqual(tool.state_key(observation),
+                         hashlib.sha256(json.dumps(body, sort_keys=True, default=str).encode()).hexdigest()[:20])
+        self.assertEqual(tool.state_key(dict(observation, selection="")), tool.state_key(observation))
+
+    def test_the_stub_page_takes_no_notice_of_an_action_nobody_defined(self):
+        page = self._page("named-button")
+        seen = page.act({"type": "stroke", "index": 2})
+        self.assertEqual(seen["action_error"], "UNKNOWN_ACTION")
+        self.assertFalse(seen["done"])
+        self.assertEqual(page.clicked, [])
+        refused = page.act({"type": "drop", "index": 2})
+        self.assertEqual(refused["action_error"], "THE_HAND_HOLDS_NOTHING")
+        page.act({"type": "grab", "index": 2})
+        busy = page.act({"type": "click", "index": 3})
+        self.assertEqual(busy["action_error"], "THE_HAND_IS_HOLDING_SOMETHING")
+        self.assertEqual(page.clicked, [])
+
+
+class HandPriceTests(unittest.TestCase):
+    def _prices(self, observation):
+        prices = tool.GuidedPrices()
+        return {a: prices(observation, a)[0] for a in tool.offered_actions(observation, tool.HAND_TIER)}
+
+    def test_anything_but_pressing_and_typing_costs_more_than_a_whole_budget_of_those(self):
+        for task in sorted(_TASKS):
+            observation = _TASKS[task](0).observe()
+            priced = self._prices(observation)
+            dearest_plain = max(v for a, v in priced.items() if not tool.is_hand_action(a))
+            for action, price in priced.items():
+                if tool.is_hand_action(action):
+                    self.assertGreaterEqual(price, tool.POINT_PRICE, (task, action))
+                    self.assertLess(price, 2 * tool.HAND_PRICE, (task, action))
+                    if not action.startswith("hover@"):
+                        self.assertGreaterEqual(price, tool.HAND_PRICE, (task, action))
+            self.assertLess(dearest_plain * 5000, tool.POINT_PRICE, task)
+
+    def test_letting_go_costs_what_a_press_there_costs(self):
+        page = _TASKS["carry"](0)
+        free = page.observe()
+        plain = self._prices(free)
+        held = page.act({"type": "grab", "index": 2})
+        prices = tool.GuidedPrices()
+        for action in tool.offered_actions(held, tool.HAND_TIER):
+            self.assertEqual(prices(held, action)[0], plain["click@" + action.split("@")[1]], action)
+
+    def test_what_the_instruction_names_is_reached_for_first_with_the_rest_of_the_hand_too(self):
+        page = _TASKS["carry"](0)
+        observation = page.observe()
+        words = observation["utterance"].rstrip(".").split()
+        named = {e["index"] for e in observation["elements"] if e["text"] in (words[1], words[3])}
+        priced = self._prices(observation)
+        for index in (2, 3, 4, 5):
+            self.assertEqual(priced[f"grab@{index}"], tool.HAND_PRICE + (0 if index in named else 2), index)
+            self.assertEqual(priced[f"triple@{index}"], priced[f"grab@{index}"])
+
+    def test_pointing_at_what_the_instruction_names_is_the_cheapest_thing_the_rest_of_the_hand_does(self):
+        page = _TASKS["carry"](0)
+        observation = page.observe()
+        words = observation["utterance"].rstrip(".").split()
+        named = {e["index"] for e in observation["elements"] if e["text"] in (words[1], words[3])}
+        priced = self._prices(observation)
+        for index in (2, 3, 4, 5):
+            self.assertEqual(priced[f"hover@{index}"], tool.POINT_PRICE if index in named else tool.HAND_PRICE + 2, index)
+        self.assertEqual(tool.POINT_PRICE * 8, tool.HAND_PRICE)
+
+    def test_a_nudge_the_way_the_instruction_says_is_tried_before_the_other_three(self):
+        for seed in range(8):
+            observation = _TASKS["push"](seed).observe()
+            way = observation["utterance"].rstrip(".").split()[-1]
+            block = [e["index"] for e in observation["elements"] if e.get("classes") == "block"][0]
+            priced = self._prices(observation)
+            for other in tool.NUDGE_WORDS:
+                self.assertEqual(priced[f"nudge@{block}={other}"], tool.HAND_PRICE + (0 if other == way else 2), (seed, other))
+
+    def test_a_colour_the_instruction_names_names_the_element(self):
+        observation = _TASKS["painted"](0).observe()
+        wanted = observation["utterance"].split()[2]
+        priced = self._prices(observation)
+        for element in observation["elements"][2:]:
+            self.assertEqual(priced[f"click@{element['index']}"], 0 if element["colour"] == wanted else 1, element)
+
+    def test_a_wait_is_one_more_thing_the_hand_does(self):
+        observation = _TASKS["wait-between"](0).observe()
+        priced = self._prices(observation)
+        waits = [a for a in priced if a.startswith("wait=")]
+        self.assertEqual(len(waits), 2)
+        prices = tool.GuidedPrices()
+        for action in waits:
+            self.assertEqual(priced[action], tool.HAND_PRICE)
+            self.assertEqual(prices(observation, action), (tool.HAND_PRICE, 1))     # and it takes its turn before a button
+
+
+class SearchWithTheWholeHandTests(unittest.TestCase):
+    def test_each_page_that_needs_more_than_presses_gets_its_first_success(self):
+        for task in sorted(_HAND_TASKS):
+            for seed in range(4):
+                bridge = StubBridge()
+                shown = tool.demonstrate(bridge, task, seed, action_budget=600, search="guided")
+                self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, (task, seed))
+                self.assertEqual(shown["acquisition"]["tier"], tool.HAND_TIER, (task, seed))
+                actions = [a for _, a in shown["trace"]]
+                self.assertTrue([a for a in actions if tool.is_hand_action(a)], (task, seed))
+                page = _TASKS[task](seed)                                  # and the page itself pays for exactly those actions
+                for action in actions:
+                    page.act(tool.parse_action(action))
+                self.assertEqual(page.reward, 1.0, (task, seed, actions))
+
+    def test_the_successes_are_the_ones_the_pages_were_written_to_want(self):
+        want = {"wait-between": ["click", "wait", "click"], "carry": ["grab", "drop"], "push": ["nudge"],
+                "point-then-press": ["hover", "click"], "mark-and-submit": ["triple", "click"],
+                "point-twice-then-press": ["hover", "hover", "click"]}
+        for task, kinds in want.items():
+            shown = tool.demonstrate(StubBridge(), task, 0, action_budget=600, search="guided")
+            self.assertEqual([vs._parse(a)[0] for _, a in shown["trace"]], kinds, task)
+
+    def test_a_menu_inside_a_menu_is_walked_because_pointing_at_named_things_is_cheap(self):
+        for seed in range(4):
+            shown = tool.demonstrate(StubBridge(), "point-twice-then-press", seed, action_budget=60, search="guided")
+            self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, seed)
+        # priced like everything else the rest of the hand does, the same budget does not get two levels down
+        saved = tool.POINT_PRICE
+        tool.POINT_PRICE = tool.HAND_PRICE
+        try:
+            flat = tool.demonstrate(StubBridge(), "point-twice-then-press", 0, action_budget=60, search="guided")
+        finally:
+            tool.POINT_PRICE = saved
+        self.assertEqual(flat["stage"], tool.STAGE_NO_SUCCESS)
+
+    def test_a_blind_search_has_no_such_hand_and_finds_nothing_there(self):
+        for task in sorted(_HAND_TASKS):
+            shown = tool.demonstrate(StubBridge(), task, 0, action_budget=600, search="blind")
+            self.assertEqual(shown["stage"], tool.STAGE_NO_SUCCESS, task)
+
+    def test_a_page_that_presses_and_typing_solve_is_searched_exactly_as_before(self):
+        # the same search with the rest of the hand taken away: the same actions, in the same order
+        class Counting(StubBridge):
+            def __init__(self):
+                super().__init__()
+                self.log = []
+
+            def act(self, action):
+                self.log.append(dict(action))
+                return super().act(action)
+
+        for task in sorted(set(_TASKS) - set(_HAND_TASKS) - {"unsolvable"}):
+            with_hand = Counting()
+            shown = tool.demonstrate(with_hand, task, 0, action_budget=3000, search="guided")
+            without = Counting()
+            saved = tool.HAND_TIER
+            tool.HAND_TIER = tool.GUIDED_TIER
+            try:
+                plain = tool.demonstrate(without, task, 0, action_budget=3000, search="guided")
+            finally:
+                tool.HAND_TIER = saved
+            if plain["stage"] != tool.STAGE_DEMONSTRATED:
+                continue                                                    # nothing pressing and typing reach: see the test above
+            self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, task)
+            self.assertEqual(with_hand.log, without.log, task)
+            self.assertEqual(shown["acquisition"]["tier"], tool.GUIDED_TIER, task)
+            self.assertEqual(shown["acquisition"]["budget_spent"], plain["acquisition"]["budget_spent"], task)
+
+    def test_a_plan_that_lets_go_of_nothing_or_presses_while_holding_is_not_a_success(self):
+        bridge = StubBridge()
+        observation = _TASKS["carry"](0).observe()
+        words = observation["utterance"].rstrip(".").split()
+        what = [e["index"] for e in observation["elements"] if e["text"] == words[1]][0]
+        where = [e["index"] for e in observation["elements"] if e["text"] == words[3]][0]
+        self.assertTrue(tool.replay_on_fresh_page(bridge, "carry", 0, [f"grab@{what}", f"drop@{where}"])["reproduced"])
+        for plan in ([f"drop@{where}"], [f"grab@{what}", f"click@{where}"], [f"grab@{what}", f"grab@{where}"],
+                     [f"grab@{what}", "wait=3", f"drop@{where}"]):
+            bridge = StubBridge()
+            replay = tool.replay_on_fresh_page(bridge, "carry", 0, plan)
+            self.assertFalse(replay["reproduced"], plan)
+            self.assertEqual(replay["reason"], "PLAN_ASKS_THE_HAND_FOR_WHAT_IT_CANNOT_DO_NOW", plan)
+            self.assertEqual(bridge.acts, 1 if plan[0].startswith("grab") else 0, plan)     # it stops AT the step that cannot be done
+
+    def test_a_step_the_success_did_not_need_is_dropped_whatever_kind_it_is(self):
+        bridge = StubBridge()
+        observation = _TASKS["wait-between"](0).observe()
+        seconds = tool.wait_candidates(observation["utterance"])[1]
+        padded = ["hover@3", "click@2", "nudge@3=up", f"wait={seconds}", "click@3"]
+        replay = tool.replay_on_fresh_page(bridge, "wait-between", 0, padded)
+        self.assertTrue(replay["reproduced"])
+        needed = tool.needed_steps(bridge, "wait-between", 0, padded, replay["trace"])
+        self.assertEqual(needed["plan"], ["click@2", f"wait={seconds}", "click@3"])
+        self.assertEqual(needed["dropped"], 2)
+
+    def test_the_organ_that_knows_presses_and_text_refuses_a_success_made_with_more(self):
+        bridge = StubBridge()
+        shown = tool.demonstrate(bridge, "carry", 0, action_budget=600, search="guided")
+        arm = tool.ExistingCompilerArm(shown["trace"])
+        self.assertTrue(arm.outside_its_actions)
+        scored = tool.score_arm(StubBridge(), "carry", arm, TEST_SEEDS[:5])
+        self.assertEqual((scored["successes"], scored["refused"], scored["actions"]), (0, 5, 0))
+        plain = tool.ExistingCompilerArm(_demonstrate(StubBridge(), "named-button")[0])
+        self.assertFalse(plain.outside_its_actions)
+
+    def test_the_same_actions_at_the_same_places_are_recall_for_the_whole_hand_too(self):
+        shown = tool.demonstrate(StubBridge(), "carry", 0, action_budget=600, search="guided")
+        arm = tool.VerbatimArm(shown["trace"])
+        page = _TASKS["carry"](0)
+        observation = page.observe()
+        arm.begin(observation, 0)
+        for _, action in shown["trace"]:
+            self.assertEqual(arm.next_action(observation), action)
+            observation = page.act(tool.parse_action(action))
+        self.assertEqual(page.reward, 1.0)
+        self.assertLess(tool.score_arm(StubBridge(), "carry", arm, TEST_SEEDS)["successes"], len(TEST_SEEDS) // 2)
+
+    def test_a_whole_task_is_measured_with_every_arm(self):
+        row = tool.measure_task(StubBridge(), "carry", test_seeds=TEST_SEEDS[:10], action_budget=600,
+                                arm_names=tool.ARM_NAMES, practice=[500, 501], search="guided")
+        self.assertEqual(row["stage"], tool.STAGE_DEMONSTRATED)
+        self.assertNotIn("arms_incomplete", row)
+        self.assertEqual(sorted(row["arms"]), sorted(tool.ARM_NAMES))
+        self.assertEqual(row["arms"]["version_space"]["successes"], 10)
+        self.assertEqual(row["arms"]["existing_compiler"]["refused"], 10)
+        self.assertEqual(row["acquisition"]["tier"], tool.HAND_TIER)
+
+
+class LearnedWithTheWholeHandTests(unittest.TestCase):
+    """One success made with more than presses and typing, then pages never seen."""
+
+    def _learned(self, task, seed=0):
+        shown = tool.demonstrate(StubBridge(), task, seed, action_budget=600, search="guided")
+        self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, task)
+        skills = vs.SkillSet()
+        self.assertEqual(skills.add_success(shown["trace"]), "new_way")
+        return skills, shown["trace"]
+
+    def _score(self, task, arm):
+        return tool.score_arm(StubBridge(), task, arm, TEST_SEEDS)
+
+    def test_each_of_them_is_learned_from_one_success(self):
+        for task in sorted(_HAND_TASKS) + ["painted"]:
+            skills, trace = self._learned(task)
+            scored = self._score(task, vs.VersionSpaceArm(skills, {}))
+            self.assertEqual(scored["successes"], len(TEST_SEEDS), task)
+            # ... and doing again what was done, where it was done, mostly fails: the pages differ
+            self.assertLess(self._score(task, tool.VerbatimArm(trace))["successes"], len(TEST_SEEDS) * 2 // 3, task)
+
+    def test_the_seconds_are_read_from_the_instruction_and_from_the_right_place_in_it(self):
+        skills, trace = self._learned("wait-between")
+        program = skills.skills[0]
+        self.assertEqual(program.kinds, ["click", vs.WAIT_STEP, "click"])
+        self.assertEqual(program._targets[1], [vs.NOWHERE])
+        for seed in TEST_SEEDS[:10]:
+            page = _TASKS["wait-between"](seed)
+            observation = page.observe()
+            round_number, seconds = tool.wait_candidates(observation["utterance"])
+            self.assertEqual(program.act(1, observation), f"wait={seconds}", seed)
+        steps = program.describe()["steps"]
+        self.assertNotIn("text_expressions_left", steps[0])                # a press carries no word
+        self.assertGreaterEqual(steps[1]["text_expressions_left"], 1)      # the wait does: its seconds
+        self.assertTrue(steps[1]["first_text"])
+
+    def test_an_instruction_that_gives_no_seconds_gets_no_wait_that_nobody_can_make(self):
+        skills, trace = self._learned("wait-between")
+        program = skills.skills[0]
+        page = _TASKS["wait-between"](1003).observe()
+        odd = dict(page, utterance="Round two: press Go, wait a while, then press Stop.")
+        action = program.act(1, odd)
+        if action is not None:                                             # whatever it falls back on must be a wait
+            self.assertEqual(tool.parse_action(action)["type"], "wait")
+
+    def test_typing_is_not_read_as_a_press_that_brought_the_target_out(self):
+        def page(shown):
+            elements = [_element(0, -1, "body"), _element(1, 0, "div", id="area"),
+                        _element(2, 1, "input", click=True, type_=True, type="text", classes="field", value=""),
+                        _element(3, 1, "button", "Go", click=True, classes="go")]
+            if shown:
+                elements[2] = dict(elements[2], value="Kira")
+                elements.append(_element(4, 1, "div", "Kira", click=True, classes="hit"))
+            return {"utterance": 'Find "Kira" and press it.', "done": False, "raw_reward": 0, "elements": elements}
+        typed = vs.VersionSpaceSkill()
+        self.assertTrue(typed.add_success([(page(False), "type@2=Kira"), (page(True), "click@4")]))
+        self.assertEqual(typed.kinds, ["type", "click"])
+        self.assertEqual(typed._reveal, [None, None])
+        # the same record with a press where the typing was: there the press did bring it out
+        pressed = vs.VersionSpaceSkill()
+        self.assertTrue(pressed.add_success([(page(False), "click@3"), (page(True), "click@4")]))
+        self.assertIsNotNone(pressed._reveal[1])
+
+    def test_denied_the_instruction_the_wait_is_the_one_seen_once(self):
+        skills, trace = self._learned("wait-between")
+        blind = tool.InstructionBlindArm(vs.VersionSpaceArm(skills, {}), str(trace[0][0]["utterance"]))
+        scored = self._score("wait-between", blind)
+        self.assertLess(scored["successes"], len(TEST_SEEDS) // 2)
+
+    def test_a_word_that_is_no_way_to_go_gives_no_action_rather_than_one_nobody_can_take(self):
+        skills, trace = self._learned("push")
+        program = skills.skills[0]
+        self.assertEqual(program.kinds, ["nudge"])
+        page = _TASKS["push"](3).observe()
+        odd = dict(page, utterance="Move the block sideways.")
+        action = program.act(0, odd)
+        if action is not None:                                             # whatever it falls back on must be an action
+            self.assertIn(tool.parse_action(action)["text"], tool.NUDGE_WORDS)
+        self.assertTrue(vs._word_fits("nudge", "left"))
+        self.assertFalse(vs._word_fits("nudge", "sideways"))
+        self.assertFalse(vs._word_fits(vs.WAIT_STEP, "soon"))
+        self.assertFalse(vs._word_fits(vs.WAIT_STEP, "0"))
+        self.assertTrue(vs._word_fits(vs.WAIT_STEP, "1"))
+        self.assertTrue(vs._word_fits(vs.WAIT_STEP, "12"))
+        self.assertTrue(vs._word_fits("type", "anything at all"))
+
+    def test_what_is_taken_and_where_it_is_let_go_are_two_elements_read_from_two_places(self):
+        skills, trace = self._learned("carry")
+        program = skills.skills[0]
+        self.assertEqual(program.kinds, ["grab", "drop"])
+        for seed in TEST_SEEDS[:10]:
+            page = _TASKS["carry"](seed)
+            observation = page.observe()
+            words = observation["utterance"].rstrip(".").split()
+            first = program.act(0, observation)
+            self.assertEqual(observation["elements"][tool.parse_action(first)["index"]]["text"], words[1], seed)
+            held = page.act(tool.parse_action(first))
+            second = program.act(1, held)
+            self.assertEqual(held["elements"][tool.parse_action(second)["index"]]["text"], words[3], seed)
+
+    def test_the_colour_the_instruction_names_is_what_the_skill_goes_by(self):
+        skills, trace = self._learned("painted")
+        program = skills.skills[0]
+        first = program._targets[0][0]
+        self.assertTrue(any(test[0] == "slot" and test[2] == "colour" for test in first[0]), first)
+        # the same boxes with the colours taken off: nothing left to go by
+        page = _TASKS["painted"](1000).observe()
+        bare = dict(page, elements=[{k: v for k, v in e.items() if k != "colour"} for e in page["elements"]])
+        self.assertIsNone(program._action(0, vs.Page(bare), strong_only=True))
+
+    def test_a_step_of_the_wrong_kind_does_not_align_with_the_program(self):
+        skills, trace = self._learned("point-then-press")
+        program = skills.skills[0]
+        self.assertEqual(program.kinds, ["hover", "click"])
+        as_presses = [(observation, action.replace("hover@", "click@")) for observation, action in trace]
+        self.assertFalse(program.add_success(as_presses))
+        self.assertEqual(program.examples, 1)
+
+    def test_one_memory_holds_presses_and_the_rest_of_the_hand_side_by_side(self):
+        library = vs.SkillLibrary()
+        for task in ("carry", "named-button", "wait-between", "push"):
+            if task == "named-button":
+                skills = vs.SkillSet()
+                skills.add_success(_demonstrate(StubBridge(), task)[0])
+            else:
+                skills, _ = self._learned(task)
+            library.add(task, skills)
+        for task in ("carry", "named-button", "wait-between", "push"):
+            scored = tool.score_arm(StubBridge(), task, vs.LibraryArm(library), TEST_SEEDS[:12])
+            self.assertEqual(scored["successes"], 12, task)
+
+
 @unittest.skipUnless(os.environ.get("MINIWOB_HTML_DIR") and shutil.which("node"),
                      "set MINIWOB_HTML_DIR (and MINIWOB_BRIDGE_NODE_MODULES) to run against the real pages")
 class RealPageTests(unittest.TestCase):
@@ -2068,6 +2698,215 @@ class RealBrowserTests(RealPageTests):
         program._reveal = [None, None]                                          # the same program without the purpose
         without = tool.score_arm(self.bridge, "click-tab-2", vs.VersionSpaceArm(skills, {}), seeds)
         self.assertLess(without["successes"], len(seeds))
+
+    # ---- where a press lands, what the instruction is, what is seen ------------------------------------------
+    def test_a_button_whose_middle_is_covered_is_pressed_where_it_shows(self):
+        # two buttons placed at random; where they overlap the later one is on top. A hand asked for the one
+        # underneath presses the part of it that shows. (Its middle would press the other one.)
+        self.bridge.load("click-test-2")
+        tried = 0
+        for seed in range(200):
+            observation = self.bridge.reset(seed)
+            wanted = observation["utterance"].split()[-1].strip(".")
+            buttons = [e for e in observation["elements"] if e["tag"] == "button"]
+            asked = [b for b in buttons if b["text"] == wanted][0]
+            other = [b for b in buttons if b["text"] != wanted][0]
+            x, y = asked["box"][0] + asked["box"][2] / 2, asked["box"][1] + asked["box"][3] / 2
+            covered = (other["index"] > asked["index"] and other["box"][0] < x < other["box"][0] + other["box"][2]
+                       and other["box"][1] < y < other["box"][1] + other["box"][3])
+            if not covered:
+                continue
+            tried += 1
+            self.assertTrue(tool.succeeded(self.bridge.act({"type": "click", "index": asked["index"]})), seed)
+            if tried == 3:
+                break
+        self.assertEqual(tried, 3)
+
+    def test_the_instruction_is_the_one_the_benchmark_hands_to_an_agent(self):
+        # this page shows the colour as a sample inside the instruction on most instances; its own
+        # environment hands the agent the colour's name, and so does the bridge
+        self.bridge.load("click-color")
+        for seed in range(8):
+            observation = self.bridge.reset(seed)
+            words = observation["utterance"].rstrip(".").split()
+            self.assertEqual(words[:3] + words[4:], ["Click", "on", "the", "colored", "box"], observation["utterance"])
+            painted = [e for e in observation["elements"] if e.get("colour")]
+            self.assertEqual(len(painted), 4)
+            right = [e["index"] for e in painted if e["colour"] == words[3]]
+            self.assertEqual(len(right), 1, (seed, words[3], [e["colour"] for e in painted]))
+            self.assertTrue(tool.succeeded(self.bridge.act({"type": "click", "index": right[0]})), seed)
+
+    def test_the_fields_three_pages_return_beside_the_instruction_are_not_passed_on(self):
+        self.bridge.load("email-inbox-nl-turk")
+        observation = self.bridge.reset(0)
+        self.assertIsInstance(observation["utterance"], str)
+        self.assertGreater(len(observation["utterance"]), 10)
+        self.assertNotIn("fields", observation)
+
+    def test_an_action_made_of_several_presses_does_not_run_on_into_another_episode(self):
+        # When an episode ends the page covers itself with START, and a press there begins a new, different
+        # episode. Three fast presses on a wrong button once came back as a success: the first press failed
+        # the episode, the second began another, the third happened to be right in that one.
+        self.bridge.load("sign-agreement")
+        observation = self.bridge.reset(0)
+        self.assertIn("enter the name", observation["utterance"])
+        cancel = [e["index"] for e in observation["elements"] if e.get("id") == "cancel"][0]
+        once = self.bridge.act({"type": "click", "index": cancel})
+        self.assertTrue(tool.failed(once))                                    # no name was entered
+        self.bridge.reset(0)
+        thrice = self.bridge.act({"type": "triple", "index": cancel})
+        self.assertTrue(tool.failed(thrice))
+        self.assertEqual(thrice["utterance"], observation["utterance"])       # still the episode that was asked about
+        after = self.bridge.act({"type": "click", "index": cancel})
+        self.assertEqual(after["action_error"], "EPISODE_ALREADY_OVER")
+        self.assertTrue(tool.failed(after))
+
+    # ---- the rest of the hand, on the real pages -------------------------------------------------------------
+    def test_time_goes_by_when_the_hand_waits_and_only_then(self):
+        self.bridge.load("button-delay")
+        for seed in range(3):
+            observation = self.bridge.reset(seed)
+            seconds = tool.wait_candidates(observation["utterance"])[0]
+            one = [e["index"] for e in observation["elements"] if e.get("id") == "subbtn"][0]
+            two = [e["index"] for e in observation["elements"] if e.get("id") == "subbtn2"][0]
+            pressed = self.bridge.act({"type": "click", "index": one})
+            waited = self.bridge.act({"type": "wait", "seconds": seconds})
+            self.assertEqual(waited["waited_s"], seconds)
+            self.assertNotEqual(tool.state_key(waited), tool.state_key(pressed))
+            # the wait is measured from the press, so the press's own half second is part of it
+            self.assertEqual(waited["virtual_ms"] - observation["virtual_ms"], seconds * 1000)
+            done = self.bridge.act({"type": "click", "index": two})
+            self.assertTrue(tool.succeeded(done), seed)
+            self.assertNotIn("waited_s", done)
+            observation = self.bridge.reset(seed)                           # the same without the wait is not what was asked
+            self.bridge.act({"type": "click", "index": one})
+            self.assertFalse(tool.succeeded(self.bridge.act({"type": "click", "index": two})), seed)
+        refused = self.bridge.act({"type": "wait", "seconds": 0})
+        self.assertEqual(refused["action_error"], "WAIT_NOT_UNDERSTOOD")
+
+    def test_a_thing_is_taken_hold_of_carried_and_let_go(self):
+        self.bridge.load("drag-box")
+        observation = self.bridge.reset(0)
+        ids = {e.get("id"): e["index"] for e in observation["elements"] if e.get("id")}
+        nothing = self.bridge.act({"type": "drop", "index": ids["draggableLarge"]})
+        self.assertEqual(nothing["action_error"], "THE_HAND_HOLDS_NOTHING")
+        held = self.bridge.act({"type": "grab", "index": ids["draggableSmall"]})
+        self.assertEqual(held["holding"], ids["draggableSmall"])
+        busy = self.bridge.act({"type": "click", "index": ids["subbtn"]})
+        self.assertEqual(busy["action_error"], "THE_HAND_IS_HOLDING_SOMETHING")
+        self.assertFalse(busy["done"])
+        self.assertEqual(busy["holding"], ids["draggableSmall"])
+        let_go = self.bridge.act({"type": "drop", "index": ids["draggableLarge"]})
+        self.assertNotIn("holding", let_go)
+        small, large = let_go["elements"][ids["draggableSmall"]]["box"], let_go["elements"][ids["draggableLarge"]]["box"]
+        self.assertTrue(large[0] < small[0] and small[0] + small[2] < large[0] + large[2])
+        self.assertTrue(large[1] < small[1] and small[1] + small[3] < large[1] + large[3])
+        self.assertTrue(tool.succeeded(self.bridge.act({"type": "click", "index": ids["subbtn"]})))
+
+    def test_nothing_is_carried_from_one_episode_into_the_next(self):
+        self.bridge.load("drag-box")
+        observation = self.bridge.reset(0)
+        small = [e["index"] for e in observation["elements"] if e.get("id") == "draggableSmall"][0]
+        self.assertIn("holding", self.bridge.act({"type": "grab", "index": small}))
+        fresh = self.bridge.reset(0)
+        self.assertNotIn("holding", fresh)
+        self.assertEqual(tool.state_key(fresh), tool.state_key(observation))
+        submit = [e["index"] for e in fresh["elements"] if e.get("id") == "subbtn"][0]
+        self.assertNotIn("action_error", self.bridge.act({"type": "click", "index": submit}))
+
+    def test_a_thing_let_go_over_the_nth_of_a_list_becomes_the_nth_whichever_way_it_came(self):
+        self.bridge.load("drag-items")
+        ways = set()
+        for seed in range(12):
+            observation = self.bridge.reset(seed)
+            words = observation["utterance"].rstrip(".").split()
+            items = [e["index"] for e in observation["elements"] if e["tag"] == "div" and e["text"] and e["can_click"]
+                     and observation["elements"][e["parent"]]["tag"] == "li"]
+            now = [observation["elements"][i]["text"] for i in items].index(words[1]) + 1
+            rest = " ".join(words[2:])
+            if rest == "to the top":
+                goal = 1
+            elif rest == "to the bottom":
+                goal = len(items)
+            elif rest == "up by one position":
+                goal = now - 1
+            elif rest == "down by one position":
+                goal = now + 1
+            else:
+                goal = int("".join(ch for ch in words[4] if ch.isdigit()))
+            ways.add("up" if goal < now else "down")
+            self.bridge.act({"type": "grab", "index": items[now - 1]})
+            self.assertTrue(tool.succeeded(self.bridge.act({"type": "drop", "index": items[goal - 1]})),
+                            (seed, observation["utterance"], now, goal))
+        self.assertEqual(ways, {"up", "down"})
+
+    def test_a_short_carry_moves_a_shape_the_way_it_is_told(self):
+        self.bridge.load("drag-circle")
+        opposite = {"up": "down", "down": "up", "left": "right", "right": "left"}
+        for seed in range(4):
+            for right in (True, False):
+                observation = self.bridge.reset(seed)
+                way = observation["utterance"].split()[3]
+                circle = [e["index"] for e in observation["elements"] if e["tag"] == "circle"][0]
+                submit = [e["index"] for e in observation["elements"] if e.get("id") == "subbtn"][0]
+                moved = self.bridge.act({"type": "nudge", "index": circle, "text": way if right else opposite[way]})
+                before, after = observation["elements"][circle]["box"], moved["elements"][circle]["box"]
+                self.assertNotEqual(before[:2], after[:2])
+                self.assertEqual(tool.succeeded(self.bridge.act({"type": "click", "index": submit})), right, (seed, way))
+        refused = self.bridge.act({"type": "nudge", "index": 0, "text": "sideways"})
+        self.assertEqual(refused["action_error"], "NUDGE_NOT_UNDERSTOOD")
+
+    def test_three_fast_presses_select_a_paragraph_and_the_selection_is_seen(self):
+        self.bridge.load("highlight-text-2")
+        for seed in range(3):
+            observation = self.bridge.reset(seed)
+            self.assertNotIn("selection", observation)
+            which = int([ch for ch in observation["utterance"] if ch.isdigit()][0])
+            paragraphs = [e for e in observation["elements"] if e["tag"] == "p"]
+            marked = self.bridge.act({"type": "triple", "index": paragraphs[which - 1]["index"]})
+            self.assertEqual(marked["selection"].split(), paragraphs[which - 1]["text"].split())
+            self.assertEqual(marked["elements"], observation["elements"])
+            self.assertNotEqual(tool.state_key(marked), tool.state_key(observation))
+            submit = [e["index"] for e in marked["elements"] if e.get("id") == "subbtn"][0]
+            self.assertTrue(tool.succeeded(self.bridge.act({"type": "click", "index": submit})), seed)
+
+    def test_the_pointer_resting_on_a_menu_opens_it_and_a_press_there_is_an_answer(self):
+        self.bridge.load("click-menu")
+        deep = 0
+        for seed in range(12):
+            observation = self.bridge.reset(seed)
+            path = observation["utterance"].split(" ", 1)[1].split(">")
+            if len(path) < 2:
+                continue
+            deep += 1
+            for name in path[:-1]:
+                shown = [e["index"] for e in observation["elements"] if e["text"] == name and e["can_click"]]
+                self.assertTrue(shown, (seed, name))
+                before = len(observation["elements"])
+                observation = self.bridge.act({"type": "hover", "index": shown[0]})
+                self.assertFalse(observation["done"])
+                self.assertGreater(len(observation["elements"]), before)          # the menu under it has opened
+            leaf = [e["index"] for e in observation["elements"] if e["text"] == path[-1] and e["can_click"]]
+            self.assertTrue(tool.succeeded(self.bridge.act({"type": "click", "index": leaf[0]})), (seed, path))
+            observation = self.bridge.reset(seed)                                  # pressing what should only be opened ends it
+            first = [e["index"] for e in observation["elements"] if e["text"] == path[0] and e["can_click"]]
+            self.assertTrue(tool.failed(self.bridge.act({"type": "click", "index": first[0]})), (seed, path))
+        self.assertGreaterEqual(deep, 4)
+
+    def test_a_wait_read_from_the_instruction_is_learned_from_one_real_success(self):
+        self.bridge.load("button-delay")
+        observation = self.bridge.reset(0)
+        seconds = tool.wait_candidates(observation["utterance"])[0]
+        ids = {e.get("id"): e["index"] for e in observation["elements"] if e.get("id")}
+        trace = self._success_by_hand("button-delay", 0, [f"click@{ids['subbtn']}", f"wait={seconds}", f"click@{ids['subbtn2']}"])
+        skills = vs.SkillSet()
+        skills.add_success(trace)
+        self.assertEqual(skills.skills[0].kinds, ["click", vs.WAIT_STEP, "click"])
+        seeds = list(range(1000, 1012))
+        self.bridge.load("button-delay")
+        self.assertGreater(len({tool.wait_candidates(self.bridge.reset(seed)["utterance"])[0] for seed in seeds}), 1)
+        scored = tool.score_arm(self.bridge, "button-delay", vs.VersionSpaceArm(skills, {}), seeds)
+        self.assertEqual(scored["successes"], len(seeds))
 
     def test_a_substrate_nobody_named_is_refused(self):
         with self.assertRaises(ValueError):

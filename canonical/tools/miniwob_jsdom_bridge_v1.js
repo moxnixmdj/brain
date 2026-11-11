@@ -159,8 +159,16 @@ function observe() {
   }
   if (doc.body) walk(doc.body, -1);
   const g = (name) => { try { return win.eval(name); } catch (e) { return null; } };
+  // the instruction as the benchmark's own environment reads it for an agent (see the Chromium bridge)
+  let said = squash((doc.getElementById('query') || { textContent: '' }).textContent);
+  try {
+    const core = g('core');
+    const own = core && typeof core.getUtterance === 'function' ? core.getUtterance() : null;
+    const text = own && typeof own === 'object' ? own.utterance : own;
+    if (typeof text === 'string' && squash(text)) said = squash(text);
+  } catch (e) {}
   return {
-    utterance: squash((doc.getElementById('query') || { textContent: '' }).textContent),
+    utterance: said,
     done: !!g('WOB_DONE_GLOBAL'),
     raw_reward: Number(g('WOB_RAW_REWARD_GLOBAL')) || 0,
     reason: g('WOB_REWARD_REASON') || null,

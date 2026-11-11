@@ -103,8 +103,9 @@ SUBSTRATES = {
     },
     "chromium": {
         "script": CHROMIUM_BRIDGE_JS,
-        "description": ("headless Chromium: real layout and hit-testing, a click is a mouse press at the element's "
-                        "box, typing is key events; virtual clock; one small fixed window"),
+        "description": ("headless Chromium: real layout and hit-testing, a click is a mouse press on a part of "
+                        "the element that shows, typing is key events, and the hand can also hover, drag, nudge, "
+                        "press three times and wait; virtual clock; one small fixed window"),
         "version_keys": ("node", "browser", "puppeteer_core", "chromium_package", "step_ms", "epoch_ms", "viewport"),
         "is_a_browser": True,
     },
@@ -263,6 +264,13 @@ def state_key(observation: Mapping[str, Any]) -> str:
     to the same page at different times are the same place."""
     body = [observation.get("utterance"), bool(observation.get("done")), succeeded(observation),
             observation.get("elements")]
+    # Three things belong to the place and are in no element: what the hand has hold of, the seconds it
+    # has just let pass, and the text that shows as selected. With something held, after a wait, or with
+    # text selected, the same page is somewhere else. (Left out when there is nothing to say, so a page
+    # reached with presses and typing alone has the key it always had.)
+    beyond = [observation.get("holding"), observation.get("waited_s"), observation.get("selection") or None]
+    if any(value is not None for value in beyond):
+        body.append(beyond)
     return hashlib.sha256(json.dumps(body, sort_keys=True, default=str).encode()).hexdigest()[:20]
 
 
@@ -312,32 +320,93 @@ def type_candidates(observation: Mapping[str, Any], tier: int) -> list[str]:
     return out
 
 
+HAND_TIER = 3                            # everything the hand can do, not only pressing and typing
+AT_AN_ELEMENT = ("click", "hover", "grab", "drop", "triple")    # written  kind@index
+WITH_A_WORD = ("type", "nudge")                                 # written  kind@index=word
+NUDGE_WORDS = ("up", "down", "left", "right")
+MAX_WAIT_SECONDS = 60
+_WHOLE_NUMBER = re.compile(r"(?<![\w.])\d+(?![\w.])")
+
+
+def is_hand_action(action: str) -> bool:
+    """Anything other than a press and typing."""
+    return not str(action).startswith(("click@", "type@"))
+
+
+def wait_candidates(utterance: str) -> list[int]:
+    """How long might be waited: the whole numbers the instruction gives, read as seconds."""
+    out: list[int] = []
+    for found in _WHOLE_NUMBER.findall(utterance or ""):
+        if len(found) <= 3 and 0 < int(found) <= MAX_WAIT_SECONDS and int(found) not in out:
+            out.append(int(found))
+    return out
+
+
 def offered_actions(observation: Mapping[str, Any], tier: int) -> list[str]:
+    """What can be tried on this page. Tiers 0 to 2: pressing, and typing from a widening
+    vocabulary. Tier 3 (HAND_TIER) adds the rest of the hand: moving the pointer onto an element,
+    pressing it three times fast, taking hold of it, carrying it a short way up, down, left or
+    right, and letting the seconds the instruction speaks of go by. A hand that has hold of
+    something can do one thing only: let go of it over something else."""
     if observation.get("done"):
         return []
-    actions = []
-    for element in observation.get("elements") or []:
-        if element.get("can_click") and not element.get("disabled"):
-            actions.append(f"click@{element['index']}")
+    elements = observation.get("elements") or []
+    reachable = [e["index"] for e in elements if e.get("can_click") and not e.get("disabled")]
+    if observation.get("holding") is not None:
+        return [f"drop@{index}" for index in reachable if index != observation.get("holding")]
+    actions = [f"click@{index}" for index in reachable]
     texts = None
-    for element in observation.get("elements") or []:
+    for element in elements:
         if element.get("can_type"):
             if texts is None:
                 texts = type_candidates(observation, tier)
             for text in texts:
                 if text != str(element.get("value") or ""):
                     actions.append(f"type@{element['index']}={text}")
+    if tier >= HAND_TIER:
+        for index in reachable:
+            if elements[index].get("tag") == "option":       # an option is picked from its list; that is all
+                continue
+            actions += [f"hover@{index}", f"triple@{index}", f"grab@{index}"]
+            actions += [f"nudge@{index}={word}" for word in NUDGE_WORDS]
+        actions += [f"wait={seconds}" for seconds in wait_candidates(str(observation.get("utterance") or ""))]
     return actions
 
 
 def parse_action(action: str) -> dict[str, Any]:
-    kind, _, rest = str(action).partition("@")
-    if kind == "click":
-        return {"type": "click", "index": int(rest)}
-    if kind == "type":
-        index, _, text = rest.partition("=")
-        return {"type": "type", "index": int(index), "text": text}
+    text = str(action)
+    if text.startswith("wait="):
+        seconds = text[5:]
+        if not seconds.isdigit() or not 0 < int(seconds) <= MAX_WAIT_SECONDS:
+            raise ValueError("ACTION_NOT_UNDERSTOOD")
+        return {"type": "wait", "seconds": int(seconds)}
+    kind, _, rest = text.partition("@")
+    if kind in AT_AN_ELEMENT:
+        return {"type": kind, "index": int(rest)}
+    if kind in WITH_A_WORD:
+        index, _, word = rest.partition("=")
+        if kind == "nudge" and word not in NUDGE_WORDS:
+            raise ValueError("ACTION_NOT_UNDERSTOOD")
+        return {"type": kind, "index": int(index), "text": word}
     raise ValueError("ACTION_NOT_UNDERSTOOD")
+
+
+def cannot_be_done(observation: Mapping[str, Any], wanted: Mapping[str, Any]) -> str | None:
+    """Why this action cannot be taken on the page as it now is, or None when it can."""
+    holding = observation.get("holding") is not None
+    if holding != (wanted["type"] == "drop"):
+        return "PLAN_ASKS_THE_HAND_FOR_WHAT_IT_CANNOT_DO_NOW"       # hold and press at once; let go of nothing
+    if wanted["type"] == "wait":
+        return None
+    elements = observation.get("elements") or []
+    if not 0 <= wanted["index"] < len(elements):
+        return "PLAN_NAMES_AN_ELEMENT_THAT_IS_NOT_ON_THE_PAGE"
+    element = elements[wanted["index"]]
+    if wanted["type"] == "type":
+        able = element.get("can_type")
+    else:
+        able = element.get("can_click") and (wanted["type"] == "click" or element.get("tag") != "option")
+    return None if able else "PLAN_ACTS_ON_AN_ELEMENT_THAT_CANNOT_TAKE_THE_ACTION"
 
 
 # --------------------------------------------------------------------------- #
@@ -345,7 +414,7 @@ def parse_action(action: str) -> dict[str, Any]:
 # --------------------------------------------------------------------------- #
 SEARCHES = ("blind", "guided")
 PHRASE_WORDS = 6                        # the longest run of instruction words an element can be named by
-NAMING_ATTRIBUTES = ("id", "classes", "name", "title", "alt", "aria-label", "placeholder", "data-value")
+NAMING_ATTRIBUTES = ("id", "classes", "name", "title", "alt", "aria-label", "placeholder", "data-value", "colour")
 BUTTON_INPUT_TYPES = ("submit", "button", "image", "reset")
 
 
@@ -446,6 +515,10 @@ def literal_words(utterance: str) -> list[str]:
     return out
 
 
+HAND_PRICE = 1_000_000
+POINT_PRICE = HAND_PRICE // 8
+
+
 class GuidedPrices:
     """The price of trying each action, read off the instruction. An ORDER of trying, not a belief.
 
@@ -459,6 +532,19 @@ class GuidedPrices:
         1   the same once another field holds it; such a text in the other letter case
         3   any other word of the instruction; text found on the page
         +2  when the field already holds something
+
+    The rest of the hand (see `offered_actions`, tier 3)
+        POINT_PRICE for moving the pointer onto an element the instruction names: it commits to
+        nothing, and a menu that opens under the pointer is walked by doing it several times.
+        HAND_PRICE more than a press of the same element for anything else: the pointer onto an
+        element nobody named, three fast presses, taking hold, a nudge (+2 in a direction the
+        instruction does not name); HAND_PRICE for a wait. Letting go of what is held costs what
+        a press there would: the drag was paid for when the thing was taken.
+    POINT_PRICE is more than any run of presses and typing can add up to within a budget, and
+    HAND_PRICE is eight of it. So the order is: everything pressing and typing can reach; then
+    that again after pointing at up to seven named things; then after ONE other thing the hand
+    can do; then after two. A page that pressing and typing solve is searched exactly as it was
+    before the hand could do anything else.
 
     Typing what the instruction does not mark as a value is dearer than pressing anything,
     because there is so much more of it: every field times every word. In one state, equal
@@ -489,6 +575,8 @@ class GuidedPrices:
     def __call__(self, observation: Mapping[str, Any], action: str) -> tuple[int, int]:
         phrases, values, values_any_case, held, chosen, cursor_only, parents = self._read(observation)
         wanted = parse_action(action)
+        if wanted["type"] == "wait":
+            return HAND_PRICE, 1
         element = observation["elements"][wanted["index"]]
         if wanted["type"] == "type":
             text, own = wanted["text"], str(element.get("value") or "")
@@ -502,10 +590,18 @@ class GuidedPrices:
         button = is_button(element)
         turn = 2 if button else 1
         if wanted["index"] in cursor_only:
-            return 2, turn
-        if named_by_instruction(element, phrases):
-            return (1 if wanted["index"] in chosen else 0), turn
-        return (1 if button or is_picture(element, parents) else 2), turn
+            press = 2
+        elif named_by_instruction(element, phrases):
+            press = 1 if wanted["index"] in chosen else 0
+        else:
+            press = 1 if button or is_picture(element, parents) else 2
+        if wanted["type"] in ("click", "drop"):
+            return press, turn
+        if wanted["type"] == "hover" and press == 0:
+            return POINT_PRICE, turn
+        if wanted["type"] == "nudge" and wanted["text"] not in phrases:
+            press += 2
+        return HAND_PRICE + press, turn
 
 
 class SeedEnv:
@@ -535,24 +631,28 @@ class SeedEnv:
 # --------------------------------------------------------------------------- #
 # stage 1: one success, found by the machine, on one instance
 # --------------------------------------------------------------------------- #
-GUIDED_TIER = 2      # a guided search is offered everything the widest blind tier is offered
+GUIDED_TIER = 2      # what a guided search found with presses and typing alone is recorded under this tier
 
 
 def acquire_first_success_guided(bridge: Any, seed: int, *, action_budget: int) -> dict[str, Any]:
-    """The same actions as the widest blind tier, tried in the order `GuidedPrices` gives."""
+    """Everything the hand can do, tried in the order `GuidedPrices` gives: all that pressing and
+    typing reach first (the widest blind tier), the rest of the hand only after that. The tier
+    reported for a success is the narrowest that holds every action of it."""
     env = SeedEnv(bridge, seed, time_limit_ms=EXPLORATION_TIME_LIMIT_MS)
     result = explorer.explore_to_goal(
         env, [], is_goal=succeeded, is_dead=failed,
-        actions_of=lambda observation: offered_actions(observation, GUIDED_TIER), key_of=state_key,
+        actions_of=lambda observation: offered_actions(observation, HAND_TIER), key_of=state_key,
         order="cheapest", cost_of=GuidedPrices(), action_budget=int(action_budget), reset_cost=1, include_model=False)
-    runs = [{"tier": GUIDED_TIER, "status": result["status"], "budget_spent": int(result["budget_spent"]),
+    runs = [{"tier": HAND_TIER, "status": result["status"], "budget_spent": int(result["budget_spent"]),
              "acts": int(result["acts"]), "resets": int(result["resets"]),
              "states": int(result["state_count"]), "surprises": int(result["surprises"])}]
     found = bool(result["pass"])
+    with_the_hand = found and any(is_hand_action(a) for a in list(result["plan_cheapest"]) + list(result["plan_walked"]))
     return {"found": found,
             "plan": [str(a) for a in result["plan_cheapest"]] if found else None,
             "plan_walked": [str(a) for a in result["plan_walked"]] if found else None,
-            "tier": GUIDED_TIER if found else None, "budget_spent": int(result["budget_spent"]), "runs": runs,
+            "tier": (HAND_TIER if with_the_hand else GUIDED_TIER) if found else None,
+            "budget_spent": int(result["budget_spent"]), "runs": runs,
             "page_errors": sorted(set(env.page_errors))[:3]}
 
 
@@ -634,11 +734,9 @@ def replay_on_fresh_page(bridge: Any, task: str, seed: int, plan: Sequence[str])
         # step names an element that is not there is not a shorter plan that happens to work: the
         # page ignores that step, and what would be recorded is an action nobody could have taken.
         wanted = parse_action(action)
-        elements = observation.get("elements") or []
-        if not 0 <= wanted["index"] < len(elements):
-            return {"reproduced": False, "trace": trace, "reason": "PLAN_NAMES_AN_ELEMENT_THAT_IS_NOT_ON_THE_PAGE"}
-        if not elements[wanted["index"]].get("can_click" if wanted["type"] == "click" else "can_type"):
-            return {"reproduced": False, "trace": trace, "reason": "PLAN_ACTS_ON_AN_ELEMENT_THAT_CANNOT_TAKE_THE_ACTION"}
+        why_not = cannot_be_done(observation, wanted)
+        if why_not:
+            return {"reproduced": False, "trace": trace, "reason": why_not}
         trace.append((observation, str(action)))
         observation = bridge.act(wanted)
     return {"reproduced": succeeded(observation), "trace": trace,
@@ -744,16 +842,7 @@ class VerbatimArm:
             return None
         action = self._plan[self._at]
         self._at += 1
-        wanted = parse_action(action)
-        elements = observation.get("elements") or []
-        if wanted["index"] >= len(elements):
-            return None
-        element = elements[wanted["index"]]
-        if wanted["type"] == "click" and not element.get("can_click"):
-            return None
-        if wanted["type"] == "type" and not element.get("can_type"):
-            return None
-        return action
+        return None if cannot_be_done(observation, parse_action(action)) else action
 
 
 class InstructionBlindArm:
@@ -813,6 +902,16 @@ class ExistingCompilerArm:
         # The organ keeps instantiation private; there is no public entry that returns the
         # instantiated steps without also executing them over HTTP. Fail loudly if it moves.
         self._instantiate = getattr(organ, "_instantiate_obj")
+        # The organ knows two kinds of step, a press and typed text. A success that needed anything else
+        # of the hand is outside what it can take in; it then refuses every instance, and says so.
+        self.outside_its_actions = any(is_hand_action(action) for _, action in trace)
+        self.skill: dict[str, Any] = {}
+        self.parameters: list[Any] = []
+        self._steps: list[Mapping[str, Any]] = []
+        self._at = 0
+        self.refused = False
+        if self.outside_its_actions:
+            return
         steps: list[dict[str, Any]] = []
         for observation, action in trace:
             wanted = parse_action(action)
@@ -830,6 +929,9 @@ class ExistingCompilerArm:
         self.refused = False
 
     def begin(self, observation: Mapping[str, Any], seed: int) -> None:
+        if self.outside_its_actions:
+            self.refused, self._steps, self._at = True, [], 0
+            return
         bindings = self._organ.bind_goal_parameters(self.skill, str(observation.get("utterance") or ""))
         self.refused = bindings is None
         self._steps = [] if bindings is None else list(self._instantiate(self.skill["abstract_steps"], bindings))
@@ -1104,13 +1206,13 @@ def summarise_library(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
 
 def run_library(html_dir: str, node_modules_dir: str, *, skills_dir: str, arm_name: str, tasks: Sequence[str] | None,
                 test_episodes: int, substrate: str = "chromium",
-                progress: Callable[[str], None] | None = None) -> dict[str, Any]:
+                progress: Callable[[str], None] | None = None, first_test_seed: int | None = None) -> dict[str, Any]:
     kept = kept_skills(skills_dir).get(arm_name) or {}
     if not kept:
         raise ValueError("NO_KEPT_SKILLS_FOR_THIS_ARM")
     library = library_of(kept)
     names = list(tasks) if tasks else list_tasks(html_dir)
-    test_seeds, _ = seed_plan(test_episodes, 0)
+    test_seeds, _ = seed_plan(test_episodes, 0, first_test_seed)
     bridge = Bridge(html_dir, node_modules_dir, substrate=substrate)
     try:
         versions = bridge.versions()
@@ -1251,11 +1353,16 @@ def summarise(rows: Sequence[Mapping[str, Any]], arm_names: Sequence[str]) -> di
     return out
 
 
-def seed_plan(test_episodes: int, practice_episodes: int) -> tuple[list[int], list[int]]:
+def seed_plan(test_episodes: int, practice_episodes: int, first_test_seed: int | None = None) -> tuple[list[int], list[int]]:
     """Which instances are scored and which are practised on. The demonstration instance, the
     practice instances and the scored instances must never share a seed; if the requested
-    sizes would make them, this refuses instead of measuring recall and calling it transfer."""
-    test_seeds = [FIRST_TEST_SEED + i for i in range(int(test_episodes))]
+    sizes would make them, this refuses instead of measuring recall and calling it transfer.
+
+    `first_test_seed` moves the scored instances. Whoever changes the learner after reading
+    how it failed on some instances has made those instances part of what it was fitted to;
+    the next score has to come from instances nobody has looked at."""
+    first = FIRST_TEST_SEED if first_test_seed is None else int(first_test_seed)
+    test_seeds = [first + i for i in range(int(test_episodes))]
     practice = [FIRST_PRACTICE_SEED + i for i in range(int(practice_episodes))]
     if DEMO_SEED in test_seeds or DEMO_SEED in practice or set(test_seeds) & set(practice):
         raise ValueError("SEEN_AND_SCORED_INSTANCES_OVERLAP")
@@ -1265,11 +1372,12 @@ def seed_plan(test_episodes: int, practice_episodes: int) -> tuple[list[int], li
 def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, test_episodes: int,
         action_budget: int, arm_names: Sequence[str], practice_episodes: int = 0,
         progress: Callable[[str], None] | None = None, substrate: str = "jsdom",
-        search: str = "blind", skills_dir: str | None = None, rows_path: str | None = None) -> dict[str, Any]:
+        search: str = "blind", skills_dir: str | None = None, rows_path: str | None = None,
+        first_test_seed: int | None = None) -> dict[str, Any]:
     if search not in SEARCHES:
         raise ValueError("SEARCH_UNKNOWN")
     names = list(tasks) if tasks else list_tasks(html_dir)
-    test_seeds, practice = seed_plan(test_episodes, practice_episodes)
+    test_seeds, practice = seed_plan(test_episodes, practice_episodes, first_test_seed)
     bridge = Bridge(html_dir, node_modules_dir, substrate=substrate)
     try:
         versions = bridge.versions()
@@ -1397,6 +1505,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--tasks", nargs="*", help="task names (default: every page)")
     parser.add_argument("--only-split", choices=["development", "held_out"], help="restrict to one split")
     parser.add_argument("--test-episodes", type=int, default=20)
+    parser.add_argument("--first-test-seed", type=int, default=None,
+                        help=f"score on instances from this seed on (default {FIRST_TEST_SEED}); use ones nobody has looked at")
     parser.add_argument("--practice-episodes", type=int, default=3, help="extra instances the version_space_practice arm learns from")
     parser.add_argument("--action-budget", type=int, default=1500)
     parser.add_argument("--arms", nargs="*",
@@ -1420,7 +1530,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             parser.error("--html-dir is required")
         result = run_library(args.html_dir, args.node_modules_dir, skills_dir=args.library_from,
                              arm_name=args.library_arm, tasks=args.tasks, test_episodes=args.test_episodes,
-                             substrate=args.substrate, progress=lambda line: print(line, flush=True))
+                             substrate=args.substrate, progress=lambda line: print(line, flush=True),
+                             first_test_seed=args.first_test_seed)
         if args.out:
             pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
         print(json.dumps(result["summary"], indent=1, sort_keys=True))
@@ -1438,7 +1549,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     result = run(args.html_dir, args.node_modules_dir, tasks=names, test_episodes=args.test_episodes,
                  action_budget=args.action_budget, arm_names=args.arms, practice_episodes=args.practice_episodes,
                  progress=lambda line: print(line, flush=True), substrate=args.substrate, search=args.search,
-                 skills_dir=args.save_skills, rows_path=(args.out + ".rows.jsonl") if args.out else None)
+                 skills_dir=args.save_skills, rows_path=(args.out + ".rows.jsonl") if args.out else None,
+                 first_test_seed=args.first_test_seed)
     if args.out:
         pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
     print(json.dumps(result["summary"], indent=1, sort_keys=True))

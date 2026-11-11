@@ -72,7 +72,7 @@ from typing import Any, Mapping, Sequence
 
 SCHEMA = "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
 
-STRUCTURE_FIELDS = ("tag", "type", "id", "classes", "role", "name", "placeholder", "for", "title")
+STRUCTURE_FIELDS = ("tag", "type", "id", "classes", "role", "name", "placeholder", "for", "title", "colour")
 CONTENT_FIELDS = ("text", "full_text", "value")
 RELATIONS = ("self", "parent", "prev", "next", "label")
 MAX_CONTENT_LENGTH = 80
@@ -80,6 +80,11 @@ MAX_HYPOTHESES_PER_STEP = 6000
 MAX_BOUND_COPY_SOURCES = 24      # how many instruction-tied descriptions of a copied element are kept
 MAX_REVEAL_PRESSES = 12          # how many elements one step may press while looking for its target
 SET_STEP = "click_all"           # the step kind "press every element of one kind the instruction mentions"
+WAIT_STEP = "wait"               # the step kind "let time go by": it is done at no element
+AT_AN_ELEMENT = ("click", "hover", "grab", "drop", "triple")     # steps that are one thing done at one element
+WITH_A_WORD = ("type", "nudge", WAIT_STEP)                       # steps that carry a word: text, a direction, seconds
+NUDGE_WORDS = ("up", "down", "left", "right")
+NOWHERE: tuple[Any, ...] = ((), None)                            # stands where a step has no element to describe
 
 _TOKEN = re.compile(r"\w+(?:[-'./:@]\w+)*|[^\w\s]")
 _QUOTED = re.compile(r'"([^"]+)"|(?<![A-Za-z0-9])\'([^\']+)\'(?![A-Za-z0-9])')
@@ -333,7 +338,7 @@ def tests_true_of(page: Page, index: int) -> list[tuple[Any, ...]]:
             classes = page.field(other, "classes").split()
             if len(classes) > 1:
                 out += [("has_class", relation, c) for c in classes]
-            for name in ("tag", "type"):          # "click on a textarea": the instruction names the KIND
+            for name in ("tag", "type", "colour"):    # "click on a textarea", "the red box": the instruction names the KIND
                 value = page.field(other, name)
                 if value:
                     out += [("slot", relation, name, rule, "exact")
@@ -538,11 +543,27 @@ def expression_preference(expression: Sequence[Any]) -> tuple[Any, ...]:
 
 
 def _parse(action: str) -> tuple[str, int, str]:
-    kind, _, rest = str(action).partition("@")
-    if kind == "click":
-        return "click", int(rest), ""
+    """(kind, element, word). `wait=3` is done at no element (-1); `click@4` carries no word."""
+    whole = str(action)
+    if whole.startswith(WAIT_STEP + "="):
+        return WAIT_STEP, -1, whole[len(WAIT_STEP) + 1:]
+    kind, _, rest = whole.partition("@")
+    if kind in AT_AN_ELEMENT:
+        return kind, int(rest), ""
+    if kind not in WITH_A_WORD:
+        raise ValueError("ACTION_KIND_UNKNOWN")
     index, _, text = rest.partition("=")
-    return "type", int(index), text
+    return kind, int(index), text
+
+
+def _word_fits(kind: str, word: str) -> bool:
+    """Can this word be carried by a step of this kind? Any text can be typed; a nudge goes one
+    of four ways; a wait lasts a whole number of seconds."""
+    if kind == "nudge":
+        return word in NUDGE_WORDS
+    if kind == WAIT_STEP:
+        return word.isdigit() and int(word) > 0
+    return True
 
 
 # --------------------------------------------------------------------------- #
@@ -733,7 +754,7 @@ class VersionSpaceSkill:
         examples = self._examples + [aligned]
         targets, ranks, texts, reveal = self._fit(kinds, examples)
         unexplained = any(not t for t in targets) or any(
-            kind == "type" and not x for kind, x in zip(kinds, texts))
+            kind in WITH_A_WORD and not x for kind, x in zip(kinds, texts))
         if unexplained and self._examples:
             self.rejected_examples += 1
             return False
@@ -824,15 +845,19 @@ class VersionSpaceSkill:
                 ranks.append([0] * len(kept))
                 texts.append([])
                 continue
-            candidates: dict[tuple[Any, ...], None] = {}
-            for page, index, _ in seen:
-                for description in descriptions_of(page, index):
-                    candidates.setdefault(description, None)
-            kept = [d for d in candidates if all(pick(d, page) == index for page, index, _ in seen)]
-            kept.sort(key=lambda d: preference(d, pages))
-            targets.append(kept)
-            ranks.append([preference(d, pages)[0] for d in kept])
-            if kind == "type":
+            if kind == WAIT_STEP:
+                targets.append([NOWHERE])
+                ranks.append([0])
+            else:
+                candidates: dict[tuple[Any, ...], None] = {}
+                for page, index, _ in seen:
+                    for description in descriptions_of(page, index):
+                        candidates.setdefault(description, None)
+                kept = [d for d in candidates if all(pick(d, page) == index for page, index, _ in seen)]
+                kept.sort(key=lambda d: preference(d, pages))
+                targets.append(kept)
+                ranks.append([preference(d, pages)[0] for d in kept])
+            if kind in WITH_A_WORD:
                 pool = {}
                 for page, _, typed in seen:
                     for expression in expressions_for(page, typed):
@@ -849,7 +874,7 @@ class VersionSpaceSkill:
         # does not take the purpose away: it shows a press that was not needed, nothing more.)
         reveal: list[tuple[Any, ...] | None] = [None] * len(kinds)
         for step in range(1, len(kinds)):
-            if kinds[step] == SET_STEP or kinds[step - 1] != "click" or not targets[step]:
+            if kinds[step] in (SET_STEP, WAIT_STEP) or kinds[step - 1] != "click" or not targets[step]:
                 continue
             first = targets[step][0]
             brought_out = [example for example in examples if pick(first, example[step - 1][0]) is None]
@@ -879,18 +904,24 @@ class VersionSpaceSkill:
                     if page.elements[target].get("can_click"):
                         return f"click@{target}"
             return None
+        if kind == WAIT_STEP:
+            for expression in self._texts[step]:
+                text = evaluate(expression, page)
+                if text is not None and _word_fits(kind, text):
+                    return f"{WAIT_STEP}={text}"
+            return None
         target = self._target(step, page, strong_only=strong_only)
         if target is None:
             return None
         element = page.elements[target]
-        if kind == "click":
-            return f"click@{target}" if element.get("can_click") else None
-        if not element.get("can_type"):
+        if not element.get("can_type" if kind == "type" else "can_click"):
             return None
+        if kind in AT_AN_ELEMENT:
+            return f"{kind}@{target}"
         for expression in self._texts[step]:
             text = evaluate(expression, page)
-            if text is not None:
-                return f"type@{target}={text}"
+            if text is not None and _word_fits(kind, text):
+                return f"{kind}@{target}={text}"
         return None
 
     def act(self, step: int, observation: Mapping[str, Any]) -> str | None:
@@ -920,7 +951,7 @@ class VersionSpaceSkill:
         for step, kind in enumerate(self.kinds):
             entry: dict[str, Any] = {"kind": kind, "descriptions_left": len(self._targets[step]),
                                      "first": repr(self._targets[step][0]) if self._targets[step] else None}
-            if kind == "type":
+            if kind in WITH_A_WORD:
                 entry["text_expressions_left"] = len(self._texts[step])
                 entry["first_text"] = repr(self._texts[step][0]) if self._texts[step] else None
             if self._reveal[step] is not None:
