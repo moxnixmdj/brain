@@ -1,0 +1,34 @@
+{
+  "schema": "PROJECT_BRAIN_R121C_THREE_ZEROS_THREE_BROKEN_INSTRUMENTS_V1",
+  "date": "2026-11-09",
+  "round": "r121c",
+  "the_rule_that_this_round_vindicated": "never report a first zero without auditing the instrument",
+  "zeros_encountered_this_round": [
+    {
+      "zero": "0/10 success on click-option, runs 0-9 clicking four fixed blind positions",
+      "instrument_fault": "the MiniWob page had not been started. The harness shows a START overlay; WOB_DONE_GLOBAL is false until the episode begins. Every 'click' landed on the overlay.",
+      "not_a_capability_result": true
+    },
+    {
+      "zero": "0/12 success with action set {start, select:i, submit} held constant",
+      "instrument_fault": "the policy picked an ORDINAL radio index by seed. MiniWob reshuffles the option order and changes the option COUNT every episode, so an ordinal index is not a fixed cause and the design could not attribute anything.",
+      "not_a_capability_result": true
+    },
+    {
+      "zero": "0/4 success when the policy clicked the goal-named option by resolved label",
+      "instrument_fault": "radio geometry was read from one DOM snapshot and clicked later; when the option list length changed the coordinates mapped to a different index. Verified: clicking the label-correct radio produced checked=true on the correct index and still failed in trial 0 while succeeding in trial 1.",
+      "not_a_capability_result": true
+    }
+  ],
+  "what_IS_established_about_the_environment": {
+    "chromium": "HeadlessChrome/153.0.8010.0 relaunched successfully",
+    "cdp": "responsive (1+1 -> 2)",
+    "episodes_start": "yes, via real CDP mouse events on the START button",
+    "goal_readable": "yes, document.querySelector('#query').innerText",
+    "options_enumerable_with_labels": "yes, radio.closest('label').innerText; goal token resolves to the correct ordinal in the observed cases",
+    "selection_works": "yes, checked[] reflects the clicked radio",
+    "reward_channel_works": "yes, done/reward returned; observed rewards 0.8591-0.8913 on successes",
+    "residual_uncertainty": "whether a label-correct submission can fail for a reason OTHER than addressing -- trial 0 selected the named option and still returned done=false. This is unexplained and must not be assumed to be an addressing bug without a targeted test."
+  },
+  "consequence": "no GUI localisation accuracy number is claimed this round. The spectrum module was measured, and it correctly refused certification in 3 of 4 designs; in the design where it certified, it ranked the injected defect SECOND behind an incidental action."
+}
