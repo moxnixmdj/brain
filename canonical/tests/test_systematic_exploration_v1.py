@@ -198,6 +198,180 @@ class RouteQualityTests(unittest.TestCase):
         self.assertLessEqual(out["experiment_acts"], (length + 1) * 3)
 
 
+def cheapest_prices(table, price, start, dead=()):
+    """Lowest total price from `start` to every state, over the definition. The oracle for a priced search."""
+    best = {start: 0}
+    frontier = [start]
+    while frontier:                      # label-correcting; tiny tables, no need for a heap
+        node = frontier.pop()
+        if node in dead:
+            continue
+        for action, nxt in table[node].items():
+            offer = best[node] + price(node, action)
+            if nxt not in best or offer < best[nxt]:
+                best[nxt] = offer
+                frontier.append(nxt)
+    return best
+
+
+def first_tries(log):
+    """The experiments, in the order they were made: the first time each (state, action) was done."""
+    seen, out = set(), []
+    for pair in log:
+        if pair not in seen:
+            seen.add(pair)
+            out.append(pair)
+    return out
+
+
+class CheapestOrderTests(unittest.TestCase):
+    def test_nothing_dearer_than_the_goal_is_tried_before_the_goal_and_the_route_is_a_cheapest_one(self):
+        reached = 0
+        for seed in range(150):
+            rng = random.Random(5000 + seed)
+            states = rng.randrange(6, 30)
+            table = random_table(rng, states, ACTIONS)
+            fee = {(s, a): rng.choice([0, 0, 1, 2]) for s in range(states) for a in ACTIONS}
+            price = lambda s, a: fee[(s, a)]
+            goal = rng.randrange(1, states)
+            best = cheapest_prices(table, price, 0)
+            env = TableEnv(table, 0)
+            out = sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: s == goal, action_budget=10**6,
+                                     order="cheapest", cost_of=price)
+            if goal not in best:
+                self.assertEqual(out["status"], sx.FAIL_EXHAUSTED, seed)
+                continue
+            reached += 1
+            self.assertTrue(out["pass"], seed)
+            for plan in (out["plan_cheapest"], out["plan_walked"]):
+                fresh = TableEnv(table, 0)
+                for action in plan:
+                    fresh.act(action)
+                self.assertEqual(fresh.state(), goal, seed)
+            fresh = TableEnv(table, 0)
+            paid = 0
+            for action in out["plan_cheapest"]:
+                paid += price(fresh.state(), action)
+                fresh.act(action)
+            self.assertEqual(paid, best[goal], seed)                       # a cheapest route, by the definition
+            tries = first_tries(env.log)
+            self.assertEqual(len(tries), out["experiment_acts"], seed)      # no pair is an experiment twice
+            for state, action in tries:
+                self.assertLessEqual(best[state] + price(state, action), best[goal], (seed, state, action))
+        self.assertGreater(reached, 80)
+
+    def test_the_prices_are_an_order_and_never_a_filter(self):
+        for seed in range(20):
+            rng = random.Random(seed)
+            table = random_table(rng, 25, ACTIONS)
+            fee = {(s, a): rng.choice([0, 1, 5]) for s in range(25) for a in ACTIONS}
+            reachable = true_distances(table, 0)
+            env = TableEnv(table, 0)
+            out = sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: s == "nowhere", action_budget=10**6,
+                                     order="cheapest", cost_of=lambda s, a: fee[(s, a)])
+            self.assertEqual(out["status"], sx.FAIL_EXHAUSTED, seed)
+            self.assertEqual(set(env.log), {(s, a) for s in reachable for a in ACTIONS}, seed)
+
+    def test_a_free_run_is_followed_to_its_end_and_a_dead_end_backs_up_one_step(self):
+        # a binary tree, three deep, everything free: the order of first tries must be depth first
+        table, order = {}, []
+
+        def grow(name, depth):
+            if depth == 3:
+                table[name] = {"l": name, "r": name}
+                order.extend([(name, "l"), (name, "r")])
+                return
+            table[name] = {"l": name + "l", "r": name + "r"}
+            order.append((name, "l"))
+            grow(name + "l", depth + 1)
+            order.append((name, "r"))
+            grow(name + "r", depth + 1)
+        grow("", 0)
+        env = TableEnv(table, "")
+        out = sx.explore_to_goal(env, ["l", "r"], is_goal=lambda s: False, action_budget=10**6,
+                                 order="cheapest", cost_of=lambda s, a: 0)
+        self.assertEqual(out["status"], sx.FAIL_EXHAUSTED)
+        self.assertEqual(first_tries(env.log), order)
+
+    def test_what_must_be_paid_for_is_paid_for_in_the_shortest_sequence_first(self):
+        # three free steps in a row; at each of the three places one paid step leads off to a side room
+        table = {0: {"f": 1, "p": 10}, 1: {"f": 2, "p": 11}, 2: {"f": 2, "p": 12}}
+        table.update({room: {"f": room, "p": room} for room in (10, 11, 12)})
+        env = TableEnv(table, 0)
+        out = sx.explore_to_goal(env, ["p", "f"], is_goal=lambda s: False, action_budget=10**6,
+                                 order="cheapest", cost_of=lambda s, a: 1 if a == "p" else 0)
+        self.assertEqual(out["status"], sx.FAIL_EXHAUSTED)
+        self.assertEqual(first_tries(env.log), [
+            (0, "f"), (1, "f"), (2, "f"),                 # everything free, to the end of the run
+            (0, "p"), (10, "f"),                          # one unit: the payment nearest the start, and what it opens
+            (1, "p"), (11, "f"),
+            (2, "p"), (12, "f"),
+            (10, "p"), (11, "p"), (12, "p")])             # two units
+
+    def test_everything_free_is_tried_before_anything_is_paid_for(self):
+        # twelve free steps lead to the goal; at every one of them a paid step leads away
+        length = 12
+        table = {i: {"go": min(length, i + 1), "away": 100 + i} for i in range(length + 1)}
+        table.update({100 + i: {"go": 100 + i, "away": 100 + i} for i in range(length + 1)})
+        env = TableEnv(table, 0)
+        out = sx.explore_to_goal(env, ["away", "go"], is_goal=lambda s: s == length, action_budget=10**6,
+                                 order="cheapest", cost_of=lambda s, a: 0 if a == "go" else 1)
+        self.assertTrue(out["pass"])
+        self.assertEqual(env.log, [(i, "go") for i in range(length)])      # exactly the free run, nothing else
+        self.assertEqual(out["plan_cheapest"], ["go"] * length)
+
+    def test_turn_orders_equal_prices_in_one_state_and_nothing_else(self):
+        table = {0: {"a": 1, "b": 2, "c": 3}, 1: {"a": 1, "b": 1, "c": 1}, 2: {"a": 2, "b": 2, "c": 2},
+                 3: {"a": 3, "b": 3, "c": 3}}
+        turns = {"a": 2, "b": 0, "c": 1}
+        env = TableEnv(table, 0)
+        sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: False, action_budget=10**6, order="cheapest",
+                           cost_of=lambda s, a: (0, turns[a]))
+        at_start = [action for state, action in first_tries(env.log) if state == 0]
+        self.assertEqual(at_start, ["b", "c", "a"])
+        # a dearer action never jumps the queue because its turn is early
+        env = TableEnv(table, 0)
+        sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: False, action_budget=10**6, order="cheapest",
+                           cost_of=lambda s, a: (3 if a == "b" else 0, turns[a]))
+        self.assertEqual([action for state, action in first_tries(env.log) if state == 0], ["c", "a", "b"])
+
+    def test_a_free_step_into_a_dead_end_costs_a_reset_and_hides_nothing(self):
+        table = {0: {"a": 1, "b": 2, "c": 0}, 1: {"a": 1, "b": 1, "c": 1}, 2: {"a": 3, "b": 2, "c": 2},
+                 3: {"a": 3, "b": 3, "c": 3}}
+        env = TableEnv(table, 0, dead={1})                # TableEnv raises if anything is done in a dead state
+        out = sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: s == 3, is_dead=lambda s: s == 1,
+                                 action_budget=10**6, order="cheapest", cost_of=lambda s, a: 0 if a == "a" else 1)
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["plan_cheapest"], ["b", "a"])
+        self.assertEqual(env.log[0], (0, "a"))            # the free step was taken first, and it was a dead end
+        self.assertGreaterEqual(env.resets, 2)
+
+    def test_what_the_order_needs_is_demanded(self):
+        table = {0: {"a": 0}}
+        with self.assertRaises(ValueError):
+            sx.explore_to_goal(TableEnv(table, 0), ["a"], is_goal=lambda s: False, action_budget=5, order="cheapest")
+        with self.assertRaises(ValueError):
+            sx.explore_to_goal(TableEnv(table, 0), ["a"], is_goal=lambda s: False, action_budget=5,
+                               order="cheapest", cost_of=lambda s, a: 0.5)
+        with self.assertRaises(ValueError):
+            sx.explore_to_goal(TableEnv(table, 0), ["a"], is_goal=lambda s: False, action_budget=5,
+                               order="cheapest", cost_of=lambda s, a: -1)
+        with self.assertRaises(ValueError):
+            sx.explore_to_goal(TableEnv(table, 0), ["a"], is_goal=lambda s: False, action_budget=5,
+                               order="cheapest", cost_of=lambda s, a: 0, prior={"0": {"a": "0"}})
+        with self.assertRaises(ValueError):
+            sx.explore_to_goal(TableEnv(table, 0), ["a"], is_goal=lambda s: False, action_budget=5, order="dearest")
+
+    def test_the_budget_still_ends_the_search(self):
+        rng = random.Random(11)
+        table = random_table(rng, 40, ACTIONS)
+        env = TableEnv(table, 0)
+        out = sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: s == "nowhere", action_budget=9,
+                                 order="cheapest", cost_of=lambda s, a: 1)
+        self.assertEqual(out["status"], sx.OPEN_BUDGET)
+        self.assertLessEqual(len(env.log), 9)
+
+
 class DeathAndResetTests(unittest.TestCase):
     def _pit_world(self):
         # 0 -a-> 1 -a-> 2(goal);  b from anywhere falls into the pit, which only reset leaves

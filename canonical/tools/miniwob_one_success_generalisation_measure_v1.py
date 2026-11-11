@@ -73,6 +73,7 @@ import hashlib
 import json
 import os
 import pathlib
+import pickle
 import random
 import re
 import select
@@ -448,18 +449,22 @@ def literal_words(utterance: str) -> list[str]:
 class GuidedPrices:
     """The price of trying each action, read off the instruction. An ORDER of trying, not a belief.
 
-        0   typing, into an empty field, text the instruction puts in quotes or a word of it that
-            looks like a value (see `literal_words`); pressing something the instruction names
-        1   typing any other word of the instruction into an empty field; pressing a button or an
-            icon the instruction does not name; pressing something it names that already shows
-            as chosen
-        2   typing text found on the page; pressing anything else, including a text field
-            (typing into a field already puts the cursor there)
-        +2  typing into a field that already holds something
+    Pressing
+        0   something the instruction names, unless it already shows as chosen
+        1   a button or an icon the instruction does not name; something named that is chosen
+        2   anything else, a text field included (typing into a field already puts the cursor there)
+    Typing into an empty field
+        0   text the instruction puts in quotes, or a word of it spelled like a value
+            (see `literal_words`), that no other field holds yet
+        1   the same once another field holds it; such a text in the other letter case
+        3   any other word of the instruction; text found on the page
+        +2  when the field already holds something
 
-    In one state, equal prices are tried typing first, buttons last (a button is what usually
-    ends an episode). All of it is a guess about user interfaces in general, written after
-    reading MiniWoB++ pages, and all it can cost is actions: every offered action is still tried.
+    Typing what the instruction does not mark as a value is dearer than pressing anything,
+    because there is so much more of it: every field times every word. In one state, equal
+    prices are tried typing first, buttons last (a button is what usually ends an episode).
+    All of it is a guess about user interfaces in general, written after reading MiniWoB++
+    pages, and all it can cost is actions: every offered action is still tried.
     """
 
     def __init__(self) -> None:
@@ -471,25 +476,29 @@ class GuidedPrices:
             utterance = str(observation.get("utterance") or "")
             elements = observation.get("elements") or []
             parents = {int(e["parent"]) for e in elements if int(e.get("parent", -1)) >= 0}
-            free_text = set(quoted_spans(utterance)) | set(literal_words(utterance))
+            values = set(quoted_spans(utterance)) | set(literal_words(utterance))
+            held: dict[str, int] = {}
+            for e in elements:
+                if e.get("can_type") and str(e.get("value") or ""):
+                    held[str(e["value"])] = held.get(str(e["value"]), 0) + 1
             self._for = observation
-            self._context = (instruction_phrases(utterance), free_text, already_chosen(elements),
-                             focus_only(elements), parents)
+            self._context = (instruction_phrases(utterance), values, {v.lower() for v in values}, held,
+                             already_chosen(elements), focus_only(elements), parents)
         return self._context
 
     def __call__(self, observation: Mapping[str, Any], action: str) -> tuple[int, int]:
-        phrases, free_text, chosen, cursor_only, parents = self._read(observation)
+        phrases, values, values_any_case, held, chosen, cursor_only, parents = self._read(observation)
         wanted = parse_action(action)
         element = observation["elements"][wanted["index"]]
         if wanted["type"] == "type":
-            text = wanted["text"]
-            if text in free_text:
-                price = 0
-            elif " ".join(plain_words(text)) in phrases:
+            text, own = wanted["text"], str(element.get("value") or "")
+            if text in values:
+                price = 1 if held.get(text, 0) > (1 if own == text else 0) else 0
+            elif text.lower() in values_any_case:
                 price = 1
             else:
-                price = 2
-            return price + (2 if str(element.get("value") or "") else 0), 0
+                price = 3
+            return price + (2 if own else 0), 0
         button = is_button(element)
         turn = 2 if button else 1
         if wanted["index"] in cursor_only:
@@ -898,8 +907,30 @@ def page_gate(bridge: Any, task: str, seeds: Sequence[int]) -> dict[str, Any]:
     return {"stage": None, "distinct_instances_in_gate": len(set(first.values()))}
 
 
+def keep_skills(skills_dir: str | None, task: str, arm_name: str, arm: Any) -> None:
+    """Put what an arm learned where a later run can pick it up (one file per task and arm).
+    What is kept is the learner's own object, byte for byte what was scored here."""
+    if not skills_dir or not hasattr(arm, "skills"):
+        return
+    folder = pathlib.Path(skills_dir)
+    folder.mkdir(parents=True, exist_ok=True)
+    with open(folder / f"{task}__{arm_name}.pickle", "wb") as handle:
+        pickle.dump({"task": task, "arm": arm_name, "skills": arm.skills}, handle)
+
+
+def kept_skills(skills_dir: str) -> dict[str, dict[str, Any]]:
+    """{arm: {task: what `keep_skills` put away}}. Only read files this tool wrote itself."""
+    out: dict[str, dict[str, Any]] = {}
+    for path in sorted(pathlib.Path(skills_dir).glob("*__*.pickle")):
+        with open(path, "rb") as handle:
+            kept = pickle.load(handle)
+        out.setdefault(str(kept["arm"]), {})[str(kept["task"])] = kept["skills"]
+    return out
+
+
 def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_budget: int,
-                 arm_names: Sequence[str], practice: Sequence[int] = (), search: str = "blind") -> dict[str, Any]:
+                 arm_names: Sequence[str], practice: Sequence[int] = (), search: str = "blind",
+                 skills_dir: str | None = None) -> dict[str, Any]:
     row: dict[str, Any] = {"task": task, "split": split_of(task)}
     started = time.time()
     try:
@@ -950,6 +981,8 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
                                               search=search)
             else:
                 raise ValueError("ARM_UNKNOWN")
+            if name in ("version_space", "version_space_practice"):
+                keep_skills(skills_dir, task, name, arm)
             scored = score_arm(bridge, task, arm, test_seeds)
             for key in ("parameters", "learning"):
                 if hasattr(arm, key):
@@ -1080,7 +1113,7 @@ def seed_plan(test_episodes: int, practice_episodes: int) -> tuple[list[int], li
 def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, test_episodes: int,
         action_budget: int, arm_names: Sequence[str], practice_episodes: int = 0,
         progress: Callable[[str], None] | None = None, substrate: str = "jsdom",
-        search: str = "blind") -> dict[str, Any]:
+        search: str = "blind", skills_dir: str | None = None) -> dict[str, Any]:
     if search not in SEARCHES:
         raise ValueError("SEARCH_UNKNOWN")
     names = list(tasks) if tasks else list_tasks(html_dir)
@@ -1091,7 +1124,7 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
         rows = []
         for name in names:
             row = measure_task(bridge, name, test_seeds=test_seeds, action_budget=action_budget,
-                               arm_names=arm_names, practice=practice, search=search)
+                               arm_names=arm_names, practice=practice, search=search, skills_dir=skills_dir)
             rows.append(row)
             if progress:
                 arms = {k: v["success_rate"] for k, v in (row.get("arms") or {}).items()}
@@ -1215,6 +1248,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                         default=["random", "verbatim", "existing_compiler", "version_space", "version_space_blind",
                                  "version_space_practice"])
     parser.add_argument("--out", help="write the full result here")
+    parser.add_argument("--save-skills", help="directory to keep every learned skill in (one file per task and arm)")
     parser.add_argument("--digest-from", nargs="+",
                         help="print the digest of results written earlier (several files over disjoint tasks are joined)")
     args = parser.parse_args(argv)
@@ -1230,7 +1264,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         names = [n for n in names if split_of(n) == args.only_split]
     result = run(args.html_dir, args.node_modules_dir, tasks=names, test_episodes=args.test_episodes,
                  action_budget=args.action_budget, arm_names=args.arms, practice_episodes=args.practice_episodes,
-                 progress=lambda line: print(line, flush=True), substrate=args.substrate, search=args.search)
+                 progress=lambda line: print(line, flush=True), substrate=args.substrate, search=args.search,
+                 skills_dir=args.save_skills)
     if args.out:
         pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
     print(json.dumps(result["summary"], indent=1, sort_keys=True))

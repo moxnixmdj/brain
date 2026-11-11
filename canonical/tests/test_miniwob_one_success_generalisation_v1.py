@@ -13,9 +13,11 @@ from __future__ import annotations
 import os
 import random
 import shutil
+import tempfile
 import unittest
 
 from canonical.runtime import demonstration_version_space_v1 as vs
+from canonical.runtime import systematic_exploration_v1 as sx
 from canonical.tools import miniwob_one_success_generalisation_measure_v1 as tool
 
 WORDS = ["Alba", "Bram", "Cleo", "Dion", "Enya", "Finn", "Gwen", "Hugo", "Ines", "Jude", "Kira", "Lars"]
@@ -218,7 +220,58 @@ def _unsolvable(seed):
     return _Page("Nothing here works.", [("button", "No", {}), ("button", "Never", {})], lambda page, r: -1)
 
 
-_TASKS = {"named-button": _named_button, "type-and-submit": _type_and_submit, "shout-and-submit": _shout_and_submit,
+def _two_fields(seed):
+    """Two values, each named in the instruction, each into its own field, then the right button.
+    A third field and a second button are there to be wrong with."""
+    rng = random.Random(f"fields:{seed}")
+    user, secret = rng.choice(WORDS).lower(), rng.choice(WORDS)[:2].upper() + str(rng.randint(2, 9))
+    rows = [("label", "Username", {}), ("input", "", {"type": "text", "id": "username", "value": ""}),
+            ("label", "Password", {}), ("input", "", {"type": "text", "id": "password", "value": ""}),
+            ("label", "Notes", {}), ("input", "", {"type": "text", "id": "notes", "value": ""}),
+            ("button", "Cancel", {"id": "cancel"}), ("button", "Login", {"id": "subbtn"})]
+
+    def judge(page, r):
+        if page.rows[r]["tag"] != "button":
+            return None
+        if r == 6:
+            return -1
+        return 1 if (page.rows[1]["extra"]["value"] == user and page.rows[3]["extra"]["value"] == secret) else -1
+    return _Page(f'Enter the username "{user}" and the password "{secret}" into the text fields and press login.',
+                 rows, judge, steps_allowed=12)
+
+
+def _three_boxes(seed):
+    """Tick every named box, then Submit. The page pays PART of the reward for part of the boxes."""
+    rng = random.Random(f"boxes:{seed}")
+    names = rng.sample(WORDS, 5)
+    wanted = sorted(rng.sample(names, 3), key=names.index)
+    rows = [("label", name, {"checked": False}) for name in names] + [("button", "Submit", {"id": "subbtn"})]
+
+    def judge(page, r):
+        if r < len(names):
+            page.rows[r]["extra"]["checked"] = not page.rows[r]["extra"]["checked"]
+            return None
+        ticked = [row["text"] for row in page.rows[:len(names)] if row["extra"]["checked"]]
+        if any(name not in wanted for name in ticked):
+            return -1
+        return len(ticked) / len(wanted) if ticked else -1
+    return _Page(f"Select {', '.join(wanted)} and click Submit.", rows, judge, steps_allowed=12)
+
+
+def _named_decoy(seed):
+    """The instruction mentions a note nobody has to open. Opening it changes the page and decides nothing."""
+    rows = [("div", "Help", {}), ("button", "Go", {})]
+
+    def judge(page, r):
+        if r == 1:
+            return 1
+        page.rows[0]["text"] = "Help was opened"
+        return None
+    return _Page("The Help note is optional. Press Go.", rows, judge)
+
+
+_TASKS = {"two-fields": _two_fields, "three-boxes": _three_boxes, "named-decoy": _named_decoy,
+          "named-button": _named_button, "type-and-submit": _type_and_submit, "shout-and-submit": _shout_and_submit,
           "numbered-section": _numbered_section, "nth-box": _nth_box, "always-the-same": _always_the_same,
           "hidden-answer": _hidden_answer, "one-or-two": _one_or_two, "unsolvable": _unsolvable,
           "hidden-latch": _hidden_latch, "shout-or-whisper": _shout_or_whisper, "chatty-section": _chatty_section,
@@ -848,6 +901,39 @@ class WholeRunTests(unittest.TestCase):
             tool.digest({"schema": "SOMETHING_ELSE"})
 
 
+class KeptSkillTests(unittest.TestCase):
+    def test_a_kept_skill_does_on_unseen_pages_exactly_what_the_scored_one_did(self):
+        folder = tempfile.mkdtemp()
+        try:
+            arms = ["verbatim", "version_space", "version_space_practice"]
+            rows = {}
+            for task in ("named-button", "shout-or-whisper", "unsolvable"):
+                rows[task] = tool.measure_task(StubBridge(), task, test_seeds=TEST_SEEDS[:10], action_budget=600,
+                                               arm_names=arms, practice=[500, 501, 502, 503], skills_dir=folder)
+            kept = tool.kept_skills(folder)
+            self.assertEqual(set(kept), {"version_space", "version_space_practice"})       # only arms that learn
+            self.assertEqual(set(kept["version_space"]), {"named-button", "shout-or-whisper"})   # nothing for no success
+            for arm_name in kept:
+                for task, skills in kept[arm_name].items():
+                    again = tool.score_arm(StubBridge(), task, vs.VersionSpaceArm(skills, {}), TEST_SEEDS[:10])
+                    self.assertEqual(again["per_seed"], rows[task]["arms"][arm_name]["per_seed"], (task, arm_name))
+            # practice changed what is held for the task with two ways of doing it, and only there
+            self.assertGreater(len(kept["version_space_practice"]["shout-or-whisper"].skills),
+                               len(kept["version_space"]["shout-or-whisper"].skills))
+        finally:
+            shutil.rmtree(folder)
+
+    def test_nothing_is_written_unless_asked(self):
+        folder = tempfile.mkdtemp()
+        try:
+            tool.measure_task(StubBridge(), "named-button", test_seeds=TEST_SEEDS[:5], action_budget=300,
+                              arm_names=["version_space"])
+            self.assertEqual(os.listdir(folder), [])
+            self.assertEqual(tool.kept_skills(folder), {})
+        finally:
+            shutil.rmtree(folder)
+
+
 class MergeTests(unittest.TestCase):
     ARMS = ["verbatim", "version_space"]
 
@@ -880,6 +966,260 @@ class MergeTests(unittest.TestCase):
             tool.merge([base, {"schema": "SOMETHING_ELSE"}])
         with self.assertRaises(ValueError):
             tool.merge([])
+
+
+class FullRewardTests(unittest.TestCase):
+    """A page that pays part of the reward for part of the task has not been told the task was done."""
+
+    def _ended(self, reward):
+        return {"done": True, "raw_reward": reward, "elements": []}
+
+    def test_only_the_full_reward_is_a_success(self):
+        self.assertTrue(tool.succeeded(self._ended(1)))
+        self.assertTrue(tool.succeeded(self._ended(1.0)))
+        for reward in (0.999, 0.5, 1 / 3, 0.1, 0, -0.5, -1):
+            self.assertFalse(tool.succeeded(self._ended(reward)), reward)
+        self.assertFalse(tool.succeeded({"done": False, "raw_reward": 1}))
+
+    def test_part_of_the_reward_is_counted_and_is_a_failure(self):
+        self.assertTrue(tool.partly_rewarded(self._ended(1 / 3)))
+        self.assertTrue(tool.failed(self._ended(1 / 3)))
+        self.assertFalse(tool.partly_rewarded(self._ended(1)))
+        self.assertFalse(tool.partly_rewarded(self._ended(-1)))
+        self.assertFalse(tool.partly_rewarded({"done": False, "raw_reward": 0.5}))
+
+    class OneBoxThenSubmit:
+        """Ticks the first box the instruction names and submits: a third of the task, every time."""
+
+        def begin(self, observation, seed):
+            self.wanted = observation["utterance"].split()[1].strip(",")
+            self.step = 0
+
+        def next_action(self, observation):
+            self.step += 1
+            wanted = self.wanted if self.step == 1 else "Submit"
+            return "click@%d" % next(e["index"] for e in observation["elements"] if e["text"] == wanted)
+
+    def test_an_arm_that_does_a_third_of_the_task_scores_nothing_and_is_seen_doing_it(self):
+        scored = tool.score_arm(StubBridge(), "three-boxes", self.OneBoxThenSubmit(), TEST_SEEDS[:10])
+        self.assertEqual(scored["successes"], 0)
+        self.assertEqual(scored["partial_credit"], 10)
+        self.assertEqual(scored["per_seed"], "0" * 10)
+
+    def test_a_search_does_not_stop_at_part_of_the_reward(self):
+        for search in tool.SEARCHES:
+            bridge = StubBridge()
+            shown = tool.demonstrate(bridge, "three-boxes", 0, action_budget=3000, search=search)
+            self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, search)
+            page = _TASKS["three-boxes"](0)
+            for _, action in shown["trace"]:
+                page.act(tool.parse_action(action))
+            self.assertEqual(page.reward, 1.0, search)           # the page's definition, not the tool's word
+
+    def test_the_digest_carries_the_partial_count(self):
+        scored = tool.score_arm(StubBridge(), "three-boxes", self.OneBoxThenSubmit(), TEST_SEEDS[:10])
+        rows = [{"task": "three-boxes", "split": "held_out", "stage": tool.STAGE_DEMONSTRATED, "arms": {"a_third": scored}}]
+        result = {"schema": tool.SCHEMA, "authority": tool.AUTHORITY, "generated_utc": "t", "environment": {},
+                  "parameters": {}, "tasks": rows, "summary": {}}
+        kept = tool.digest(result)["tasks"][0]["arms"]["a_third"]
+        self.assertEqual(kept["partial_credit"], 10)
+        self.assertEqual(kept["successes"], 0)
+
+
+class GuidedPriceTests(unittest.TestCase):
+    """What the instruction makes cheap. Every expectation is read off the instruction and the page by hand."""
+
+    def _page(self):
+        elements = [
+            _element(0, -1, "body"),
+            _element(1, 0, "label", "Username", click=True, **{"for": "user"}),
+            _element(2, 0, "input", type_=True, click=True, id="user", type="text", value=""),
+            _element(3, 0, "input", type_=True, click=True, id="note", type="text", value="old"),
+            _element(4, 0, "label", "Remember", click=True, **{"for": "keep"}),
+            _element(5, 0, "input", click=True, id="keep", type="checkbox", checked=True),
+            _element(6, 0, "span", "Alba", click=True),
+            _element(7, 0, "span", "", click=True, classes="star"),
+            _element(8, 0, "span", "", click=True, classes="email-thread"),
+            _element(9, 0, "div", "unrelated", click=True),
+            _element(10, 0, "button", "Login", click=True),
+            _element(11, 0, "button", "Cancel", click=True),
+            _element(12, 0, "input", click=True, type="submit", value="Remember"),
+        ]
+        return {"utterance": 'Enter "kira" for Alba on 10/20/2017, click the star, tick Remember and press login. Then wait.',
+                "done": False, "elements": elements}
+
+    def test_typing(self):
+        price, page = tool.GuidedPrices(), self._page()
+        self.assertEqual(price(page, "type@2=kira"), (0, 0))            # quoted
+        self.assertEqual(price(page, "type@2=10/20/2017"), (0, 0))      # spelled like a value
+        self.assertEqual(price(page, "type@2=Alba"), (0, 0))            # a capital inside a sentence
+        self.assertEqual(price(page, "type@2=KIRA"), (1, 0))            # a value, in the other letter case
+        self.assertEqual(price(page, "type@2=star"), (3, 0))            # prose: dearer than pressing anything
+        self.assertEqual(price(page, "type@2=Then"), (3, 0))            # a capital that only starts a sentence
+        self.assertEqual(price(page, "type@2=unrelated"), (3, 0))       # found on the page, not in the instruction
+        self.assertEqual(price(page, "type@3=kira"), (2, 0))            # the field already holds something
+        self.assertEqual(price(page, "type@3=unrelated"), (5, 0))
+
+    def test_a_value_that_already_sits_in_a_field_is_no_longer_free_for_another(self):
+        page = self._page()
+        page["elements"][3]["value"] = "kira"
+        price = tool.GuidedPrices()
+        self.assertEqual(price(page, "type@2=kira"), (1, 0))            # field 3 holds it: try the other values first
+        self.assertEqual(price(page, "type@2=Alba"), (0, 0))
+        self.assertEqual(price(page, "type@3=kira"), (2, 0))            # its own content does not count against it
+
+    def test_one_price_list_serves_many_pages(self):
+        price, first, second = tool.GuidedPrices(), self._page(), self._page()
+        second["utterance"] = 'Enter "zed" and press Cancel.'
+        self.assertEqual(price(first, "type@2=kira"), (0, 0))
+        self.assertEqual(price(second, "type@2=kira"), (3, 0))          # not this page's instruction
+        self.assertEqual(price(second, "click@11"), (0, 2))
+        self.assertEqual(price(first, "click@11"), (1, 2))
+
+    def test_pressing(self):
+        price, page = tool.GuidedPrices(), self._page()
+        self.assertEqual(price(page, "click@6"), (0, 1))                # its text is a run of the instruction's words
+        self.assertEqual(price(page, "click@7"), (0, 1))                # its class is a word of the instruction
+        self.assertEqual(price(page, "click@8"), (1, 1))                # `email-thread` is not named; an icon all the same
+        self.assertEqual(price(page, "click@9"), (2, 1))                # nothing names it
+        self.assertEqual(price(page, "click@10"), (0, 2))               # a named button: free, and last in its state
+        self.assertEqual(price(page, "click@11"), (1, 2))               # a button nobody named
+        self.assertEqual(price(page, "click@12"), (0, 2))               # a button is named by what it shows
+        self.assertEqual(price(page, "click@4"), (1, 1))                # named, but its box is already ticked
+        self.assertEqual(price(page, "click@2"), (2, 1))                # pressing a text field only moves the cursor
+        self.assertEqual(price(page, "click@1"), (2, 1))                # and so does pressing its label
+
+    def test_pressing_a_text_field_or_its_label_is_never_cheap_however_it_is_named(self):
+        elements = [_element(0, -1, "body"),
+                    _element(1, 0, "label", "Username", click=True, **{"for": "username"}),
+                    _element(2, 0, "input", type_=True, click=True, id="username", type="text", value=""),
+                    _element(3, 0, "span", "Username", click=True)]
+        page = {"utterance": 'Enter "kira" into the Username field.', "done": False, "elements": elements}
+        price = tool.GuidedPrices()
+        self.assertEqual(price(page, "click@1"), (2, 1))       # named, and all it does is move the cursor
+        self.assertEqual(price(page, "click@2"), (2, 1))
+        self.assertEqual(price(page, "click@3"), (0, 1))       # the same word on something that is not a field's label
+        self.assertEqual(price(page, "type@2=kira"), (0, 0))
+
+    def test_values_are_recognised_by_spelling_alone(self):
+        self.assertEqual(tool.literal_words("Enter 10/20/2017 as the date and hit submit."), ["10/20/2017"])
+        self.assertEqual(tool.literal_words("Find the email by Celestyn and forward that email to Theresita."),
+                         ["Celestyn", "Theresita"])
+        self.assertEqual(tool.literal_words("Select Brazil. Then click Submit! Now."), ["Brazil", "Submit"])
+        self.assertEqual(tool.literal_words("press the button"), [])
+
+    def test_a_name_in_the_markup_counts_only_whole(self):
+        phrases = tool.instruction_phrases("Find the email and click the star icon.")
+        self.assertTrue(tool.named_by_instruction({"index": 0, "tag": "span", "text": "", "classes": "star"}, phrases))
+        self.assertTrue(tool.named_by_instruction({"index": 0, "tag": "span", "text": "", "classes": "big star"}, phrases))
+        self.assertFalse(tool.named_by_instruction({"index": 0, "tag": "div", "text": "", "classes": "email-thread"}, phrases))
+        self.assertTrue(tool.named_by_instruction({"index": 0, "tag": "div", "text": "", "id": "star-icon"}, phrases))
+        self.assertFalse(tool.named_by_instruction({"index": 0, "tag": "div", "text": "the starfish"}, phrases))
+
+
+class GuidedSearchTests(unittest.TestCase):
+    def test_what_the_instruction_names_is_found_for_a_fraction_of_the_blind_price(self):
+        blind = tool.demonstrate(StubBridge(), "two-fields", 0, action_budget=5000, search="blind")
+        guided = tool.demonstrate(StubBridge(), "two-fields", 0, action_budget=5000, search="guided")
+        self.assertEqual(blind["stage"], tool.STAGE_DEMONSTRATED)
+        self.assertEqual(guided["stage"], tool.STAGE_DEMONSTRATED)
+        cheap, dear = guided["acquisition"]["budget_spent"], blind["acquisition"]["budget_spent"]
+        self.assertLessEqual(cheap * 5, dear)
+        # and with a budget the guided search fits in three times over, the blind one finds nothing
+        self.assertEqual(tool.demonstrate(StubBridge(), "two-fields", 0, action_budget=cheap * 3,
+                                          search="blind")["stage"], tool.STAGE_NO_SUCCESS)
+        page = _TASKS["two-fields"](0)
+        for _, action in guided["trace"]:
+            page.act(tool.parse_action(action))
+        self.assertEqual(page.reward, 1.0)
+
+    def test_what_the_instruction_does_not_name_is_still_tried(self):
+        # nothing in "Press the right button." says which; the guided search has to get there by trying
+        for seed in range(6):
+            shown = tool.demonstrate(StubBridge(), "hidden-answer", seed, action_budget=50, search="guided")
+            self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, seed)
+            self.assertEqual(tool.parse_action(shown["trace"][0][1])["index"], 2 + seed % 3, seed)
+
+    def test_a_page_with_no_success_is_tried_out_completely(self):
+        bridge = StubBridge()
+        shown = tool.demonstrate(bridge, "unsolvable", 0, action_budget=500, search="guided")
+        self.assertEqual(shown["stage"], tool.STAGE_NO_SUCCESS)
+        self.assertEqual(shown["acquisition"]["runs"][0]["status"], sx.FAIL_EXHAUSTED)
+        self.assertEqual(bridge.acts, 2)                           # both buttons, once each
+
+    def test_the_same_search_twice_is_the_same_search(self):
+        first = tool.demonstrate(StubBridge(), "two-fields", 3, action_budget=5000, search="guided")
+        second = tool.demonstrate(StubBridge(), "two-fields", 3, action_budget=5000, search="guided")
+        self.assertEqual([a for _, a in first["trace"]], [a for _, a in second["trace"]])
+        self.assertEqual(first["acquisition"], second["acquisition"])
+
+    def test_an_unknown_search_is_refused(self):
+        with self.assertRaises(ValueError):
+            tool.acquire_first_success(StubBridge(), 0, action_budget=10, search="lucky")
+
+    def test_practice_searches_the_way_it_was_told_to(self):
+        spent = {}
+        for search in tool.SEARCHES:
+            bridge = StubBridge()
+            shown = tool.demonstrate(bridge, "shout-or-whisper", 0, action_budget=600, search=search)
+            arm = tool.build_version_space_arm(bridge, "shout-or-whisper", shown["trace"], practice=[500, 501, 502, 503],
+                                               action_budget=600, tier=2, search=search)
+            self.assertEqual(arm.learning["found_by_search"], 1, search)     # one practice page needed a search
+            spent[search] = arm.learning["search_actions"]
+        self.assertLess(spent["guided"] * 3, spent["blind"])
+
+    def test_a_skill_learned_from_a_guided_success_holds_on_unseen_instances(self):
+        bridge = StubBridge()
+        row = tool.measure_task(bridge, "two-fields", test_seeds=TEST_SEEDS[:10], action_budget=5000,
+                                arm_names=["verbatim", "version_space"], search="guided")
+        self.assertEqual(row["stage"], tool.STAGE_DEMONSTRATED)
+        self.assertEqual(row["arms"]["version_space"]["successes"], 10)
+        self.assertEqual(row["arms"]["verbatim"]["successes"], 0)
+
+
+class NeededStepsTests(unittest.TestCase):
+    def test_a_step_the_success_did_not_need_is_dropped_and_the_shorter_route_is_replayed(self):
+        bridge = StubBridge()
+        shown = tool.demonstrate(bridge, "named-decoy", 0, action_budget=50, search="guided")
+        self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED)
+        acquisition = shown["acquisition"]
+        self.assertEqual(acquisition["steps_found"], 2)            # the search opened the note it was told about
+        self.assertEqual(acquisition["steps_not_needed"], 1)
+        self.assertGreater(acquisition["necessity_check_actions"], 0)
+        self.assertEqual([a for _, a in shown["trace"]], ["click@3"])
+        self.assertEqual(shown["trace"][0][0]["elements"][2]["text"], "Help")     # seen on a page where the note is shut
+
+    def test_what_is_kept_pays_in_full_and_nothing_kept_can_be_left_out(self):
+        # judged by each page's own definition: the kept route earns the full reward, and the same
+        # route with any one step removed does not
+        for task, length in (("always-the-same", 2), ("two-fields", 3), ("three-boxes", 4), ("named-decoy", 1)):
+            shown = tool.demonstrate(StubBridge(), task, 0, action_budget=5000, search="guided")
+            self.assertEqual(shown["stage"], tool.STAGE_DEMONSTRATED, task)
+            actions = [tool.parse_action(a) for _, a in shown["trace"]]
+            self.assertEqual(len(actions), length, task)
+
+            def reward_of(steps):
+                page = _TASKS[task](0)
+                for step in steps:
+                    page.act(step)
+                return page.reward if page.done else 0.0
+            self.assertEqual(reward_of(actions), 1.0, task)
+            for left_out in range(len(actions)):
+                self.assertLess(reward_of(actions[:left_out] + actions[left_out + 1:]), 1.0, (task, left_out))
+
+    def test_only_a_route_that_pays_in_full_replaces_the_one_found(self):
+        # leaving out one box of three still ends the episode with a reward: a third less. It must stay in.
+        bridge = StubBridge()
+        plan = [a for _, a in tool.demonstrate(bridge, "three-boxes", 0, action_budget=5000, search="guided")["trace"]]
+        replay = tool.replay_on_fresh_page(bridge, "three-boxes", 0, plan)
+        needed = tool.needed_steps(bridge, "three-boxes", 0, plan, replay["trace"])
+        self.assertEqual(needed["plan"], plan)
+        self.assertEqual(needed["dropped"], 0)
+        self.assertEqual(needed["actions"], sum(len(plan) - 1 + 1 for _ in plan))   # each shorter plan, plus its reset
+
+    def test_a_blind_search_is_left_as_it_was(self):
+        shown = tool.demonstrate(StubBridge(), "named-button", 0, action_budget=300, search="blind")
+        self.assertNotIn("steps_not_needed", shown["acquisition"])
 
 
 @unittest.skipUnless(os.environ.get("MINIWOB_HTML_DIR") and shutil.which("node"),

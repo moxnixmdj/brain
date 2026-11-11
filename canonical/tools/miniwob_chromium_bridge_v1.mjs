@@ -161,7 +161,12 @@ function inPage(cfg) {
       rec.text = own;
       if (full && full !== own) rec.full_text = full.slice(0, 200);
       const hasBox = isOption(el) || (r.width > 0 && r.height > 0);
-      rec.can_click = hasBox && ((kids === 0) || NATIVE_CLICK.has(el.tagName) || own !== '');
+      // what the mouse can land on: an element none of whose children takes up any room is, to a mouse, a leaf
+      let roomy = 0;
+      for (let k = index + 1; k < out.length; k++) {
+        if (out[k].parent === index && (out[k].tag === 'option' || (out[k].box[2] > 0 && out[k].box[3] > 0))) roomy++;
+      }
+      rec.can_click = hasBox && ((roomy === 0) || NATIVE_CLICK.has(el.tagName) || own !== '');
       rec.can_type = hasBox && typed && el.disabled !== true && el.readOnly !== true;
       return full;
     }

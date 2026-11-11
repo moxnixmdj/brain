@@ -42,11 +42,13 @@ and too many of them end the run as NOT_REPEATABLE instead of pretending to have
     order="cheapest"    the caller prices every action where it is offered (`cost_of`, whole
                         numbers), and the next experiment is the untried action whose price
                         PLUS the price of the cheapest known way to where it is offered is
-                        lowest. Among equals the DEEPEST state goes first: a run of free
-                        actions is followed to its end, and when it ends badly the search backs
-                        up one step, not to the start. So everything reachable for nothing is
-                        tried, depth first, before anything is paid for; then everything
-                        reachable for one unit, depth first; and so on. The prices are an
+                        lowest. Among equals a FREE action goes before a paid one, free
+                        actions deepest state first, paid ones shallowest state first. So a
+                        run of free actions is followed to its end, and when it ends badly the
+                        search backs up one step, not to the start; and when something has to
+                        be paid for, it is paid for in the shortest sequence first. Everything
+                        reachable for nothing is tried before anything is paid for; then
+                        everything reachable for one unit; and so on. The prices are an
                         ORDER, never a filter: every offered action is still tried if the
                         budget lasts, so a bad price list costs actions and cannot hide a goal.
 
@@ -307,15 +309,19 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
 
     def pick_cheapest() -> tuple[str, str] | None:
         """The untried action with the lowest (price of getting there + its own price). Among
-        equals: the one furthest along (depth first: a free run is followed to its end, and a
-        dead end backs up one step), then the one where we already stand, then the earlier found."""
+        equals: a free action before a paid one; free actions furthest along first (a free run
+        is followed to its end, and a dead end backs up one step); paid actions nearest the
+        start first (the shortest sequence that needs the payment); then the one where we
+        already stand, then the earlier found."""
         total, hops, _ = priced_routes(root)
-        best: tuple[tuple[int, int, int, int], str, str] | None = None
+        best: tuple[tuple[int, int, int, int, int], str, str] | None = None
         for k, paid in total.items():
             offer = cheapest_untried(k)
             if offer is None:
                 continue
-            rank = (paid + offer[0], -hops[k], 0 if k == current else 1, found_at.get(k, 0))
+            is_paid = 1 if offer[0] > 0 else 0
+            rank = (paid + offer[0], is_paid, hops[k] if is_paid else -hops[k],
+                    0 if k == current else 1, found_at.get(k, 0))
             if best is None or rank < best[0]:
                 best = (rank, k, offer[1])
         return None if best is None else (best[1], best[2])
