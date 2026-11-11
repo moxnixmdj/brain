@@ -1,0 +1,21 @@
+{
+  "schema":"PROJECT_BRAIN_DOMAIN_ANCHOR_V2_CONNECTOR_CHECK",
+  "date":"2026-10-05",
+  "status":"PASS__5_SOURCE_ANCHORED__0_CLOSED__ZERO_CREDIT",
+  "subjects":{
+    "runtime":"1ecb8abb5c7eb99c30828257051d27105693f080",
+    "tests":"8b4267fc795bf6c4b884db2dd093386e496c10a4",
+    "governance":"13a133ba51224e98818bde040924ee1c27ed32dc"
+  },
+  "checks":{
+    "domain_count":5,
+    "source_anchored_count":5,
+    "source_incomplete_count":0,
+    "closed_count":0,
+    "healthcare_anchor_present":true,
+    "arxivmath_anchor_present":true,
+    "all_exhaustive_flags_false":true,
+    "all_mapping_flags_false":true
+  },
+  "acceptance_credit_delta":0
+}
