@@ -1,0 +1,24 @@
+name: Verify Astra calibration 001 evaluator V3
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/astra_behavioral_calibration_001_evaluator_v3.py"
+      - "canonical/tests/test_astra_behavioral_calibration_001_evaluator_v3.py"
+      - ".github/workflows/verify-astra-calibration-001-evaluator-v3.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m py_compile canonical/runtime/astra_behavioral_calibration_001_evaluator_v3.py
+      - run: python -m pytest -q canonical/tests/test_astra_behavioral_calibration_001_evaluator_v3.py
