@@ -15,10 +15,19 @@ wording. So this tool measures exactly that step and nothing else:
        seen, and gets ONE try on each of N unseen instances. A wrong click ends the episode.
 
 The environment is MiniWoB++ (Farama-Foundation/miniwob-plusplus, MIT; 130 task pages that
-originate in OpenAI's World of Bits). It is loaded by `miniwob_jsdom_bridge_v1.js` into a
-headless DOM with a virtual clock. That bridge is ELEMENT level: no layout, no pixels. A
-task that needs geometry does not run faithfully there and is counted as such -- the
-denominators below always say which tasks were left out and why.
+originate in OpenAI's World of Bits), on one of two substrates that take the same commands
+and return the same observation:
+
+    chromium   `miniwob_chromium_bridge_v1.mjs`: headless Chromium. Real layout and
+               hit-testing; a click is a mouse press at the element's box, typing is key
+               events; every episode is a freshly opened page; every element reports its box.
+    jsdom      `miniwob_jsdom_bridge_v1.js`: a headless DOM with no layout and no pixels. A
+               task that needs geometry does not run faithfully there.
+
+Both run on a virtual clock. The agent can click an element or type into one; it cannot
+hover, drag, scroll by itself or press single keys, so a task that needs those is expected
+to end with no first success, and is counted as such -- the denominators below always say
+which tasks were left out and why.
 
 Arms
 ----
@@ -46,7 +55,8 @@ Arms
 
 What a number here is not
 -------------------------
-Not a MiniWoB++ leaderboard entry (those act on pixels or a rendered DOM, in a browser) and
+Not a MiniWoB++ leaderboard entry (the success found on the demonstration instance comes from
+trying actions against the page's own reward, which a leaderboard agent is not given) and
 not a capability claim. The author of this tool is a language model that has read about
 MiniWoB++; the tasks are split by a hash of their name into a quarter that was looked at
 while building the arms and three quarters that were not, and the two are reported apart.
@@ -77,6 +87,23 @@ SCHEMA = "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_MEASUREMENT_V1"
 DIGEST_SCHEMA = "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_DIGEST_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
 BRIDGE_JS = pathlib.Path(__file__).with_name("miniwob_jsdom_bridge_v1.js")
+CHROMIUM_BRIDGE_JS = pathlib.Path(__file__).with_name("miniwob_chromium_bridge_v1.mjs")
+# Where the pages run. Same commands, same observation; what differs is what is underneath.
+SUBSTRATES = {
+    "jsdom": {
+        "script": BRIDGE_JS,
+        "description": "jsdom headless DOM, element-level actions, virtual clock; no layout, no pixels",
+        "version_keys": ("node", "jsdom", "fake_timers", "step_ms", "epoch_ms"),
+        "is_a_browser": False,
+    },
+    "chromium": {
+        "script": CHROMIUM_BRIDGE_JS,
+        "description": ("headless Chromium: real layout and hit-testing, a click is a mouse press at the element's "
+                        "box, typing is key events; virtual clock; one small fixed window"),
+        "version_keys": ("node", "browser", "puppeteer_core", "chromium_package", "step_ms", "epoch_ms", "viewport"),
+        "is_a_browser": True,
+    },
+}
 
 DEMO_SEED = 0
 FIRST_TEST_SEED = 1000
@@ -85,7 +112,7 @@ EXPLORATION_TIME_LIMIT_MS = 3_600_000   # the page's episode timer is lifted whi
 MAX_EPISODE_STEPS = 30
 DEVELOPMENT_MODULUS = 4
 
-STAGE_NOT_RUNNING = "PAGE_DOES_NOT_RUN_IN_HEADLESS_DOM"
+STAGE_NOT_RUNNING = "PAGE_DOES_NOT_RUN_HERE"
 STAGE_NOT_REPEATABLE = "SAME_SEED_GIVES_DIFFERENT_PAGE"
 STAGE_NO_SUCCESS = "NO_FIRST_SUCCESS_FOUND"
 STAGE_NOT_REPRODUCED = "FIRST_SUCCESS_NOT_REPRODUCED_ON_FRESH_PAGE"
@@ -107,8 +134,12 @@ class Bridge:
     """One `node` process holding one page. Line-delimited JSON, with a watchdog on every reply."""
 
     def __init__(self, html_dir: str, node_modules_dir: str = "", *, timeout: float = 20.0,
-                 node: str = "node") -> None:
-        self._argv = [node, str(BRIDGE_JS), str(html_dir)] + ([str(node_modules_dir)] if node_modules_dir else [])
+                 node: str = "node", substrate: str = "jsdom") -> None:
+        if substrate not in SUBSTRATES:
+            raise ValueError("SUBSTRATE_UNKNOWN")
+        self.substrate = substrate
+        script = SUBSTRATES[substrate]["script"]
+        self._argv = [node, str(script), str(html_dir)] + ([str(node_modules_dir)] if node_modules_dir else [])
         self._timeout = float(timeout)
         self._proc: subprocess.Popen[bytes] | None = None
         self._buffer = b""
@@ -133,7 +164,7 @@ class Bridge:
         while b"\n" not in self._buffer:
             left = deadline - time.time()
             if left <= 0:
-                self._proc.kill()
+                self._stop()
                 raise BridgeHang(f"NO_REPLY_TO_{str(message.get('cmd')).upper()}_IN_{int(self._timeout)}S")
             ready, _, _ = select.select([self._proc.stdout], [], [], left)
             if ready:
@@ -163,6 +194,20 @@ class Bridge:
     def act(self, action: Mapping[str, Any]) -> dict[str, Any]:
         return self._call(cmd="act", action=dict(action))
 
+    def _stop(self) -> None:
+        """End the process even when it is stuck. It is asked first (a bridge that holds a browser
+        ends the browser when asked), and killed only if it does not go."""
+        proc = self._proc
+        if proc is None or proc.poll() is not None:
+            return
+        try:
+            proc.terminate()
+            proc.wait(timeout=3)
+        except Exception:
+            pass
+        if proc.poll() is None:
+            proc.kill()
+
     def close(self) -> None:
         proc = self._proc
         if proc is None:
@@ -174,8 +219,7 @@ class Bridge:
                 proc.wait(timeout=3)
         except Exception:
             pass
-        if proc.poll() is None:
-            proc.kill()
+        self._stop()
         self._proc = None
 
 
@@ -712,6 +756,7 @@ def code_sha256() -> dict[str, str]:
     files = {
         "tool": pathlib.Path(__file__),
         "bridge": BRIDGE_JS,
+        "bridge_chromium": CHROMIUM_BRIDGE_JS,
         "version_space_learner": REPO / "canonical/runtime/demonstration_version_space_v1.py",
         "explorer": REPO / "canonical/runtime/systematic_exploration_v1.py",
         "existing_compiler": REPO / "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
@@ -796,10 +841,10 @@ def seed_plan(test_episodes: int, practice_episodes: int) -> tuple[list[int], li
 
 def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, test_episodes: int,
         action_budget: int, arm_names: Sequence[str], practice_episodes: int = 0,
-        progress: Callable[[str], None] | None = None) -> dict[str, Any]:
+        progress: Callable[[str], None] | None = None, substrate: str = "jsdom") -> dict[str, Any]:
     names = list(tasks) if tasks else list_tasks(html_dir)
     test_seeds, practice = seed_plan(test_episodes, practice_episodes)
-    bridge = Bridge(html_dir, node_modules_dir)
+    bridge = Bridge(html_dir, node_modules_dir, substrate=substrate)
     try:
         versions = bridge.versions()
         rows = []
@@ -820,8 +865,9 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
             "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
             "html_tree_sha256": html_tree_sha256(html_dir),
             "task_pages": len(list_tasks(html_dir)),
-            "substrate": "jsdom headless DOM, element-level actions, virtual clock; no layout, no pixels",
-            **{k: versions.get(k) for k in ("node", "jsdom", "fake_timers", "step_ms", "epoch_ms")},
+            "substrate": SUBSTRATES[substrate]["description"],
+            "substrate_name": substrate,
+            **{k: versions.get(k) for k in SUBSTRATES[substrate]["version_keys"]},
             "python": sys.version.split()[0],
             "code_sha256": code_sha256(),
         },
@@ -895,7 +941,10 @@ def digest(result: Mapping[str, Any]) -> dict[str, Any]:
         "schema": DIGEST_SCHEMA,
         "authority": AUTHORITY,
         "what_this_is": ("One success per task, found by the machine itself, then one try on each unseen instance. "
-                         "Element-level headless DOM, not a browser. Producer-run; not a leaderboard entry."),
+                         + ("Headless Chromium with real mouse and key input. "
+                            if SUBSTRATES.get(str(result["environment"].get("substrate_name")), {}).get("is_a_browser")
+                            else "Element-level headless DOM, not a browser. ")
+                         + "Producer-run; not a leaderboard entry."),
         "generated_utc": result["generated_utc"],
         "result_sha256": hashlib.sha256(body).hexdigest(),
         "environment": result["environment"],
@@ -910,7 +959,8 @@ def digest(result: Mapping[str, Any]) -> dict[str, Any]:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n", 1)[0])
     parser.add_argument("--html-dir", help="path to miniwob-plusplus/miniwob/html")
-    parser.add_argument("--node-modules-dir", default="", help="directory that contains node_modules with jsdom and @sinonjs/fake-timers")
+    parser.add_argument("--node-modules-dir", default="", help="directory that contains node_modules: jsdom and @sinonjs/fake-timers for jsdom, puppeteer-core and @sparticuz/chromium for chromium")
+    parser.add_argument("--substrate", choices=sorted(SUBSTRATES), default="jsdom", help="where the pages run")
     parser.add_argument("--tasks", nargs="*", help="task names (default: every page)")
     parser.add_argument("--only-split", choices=["development", "held_out"], help="restrict to one split")
     parser.add_argument("--test-episodes", type=int, default=20)
@@ -935,7 +985,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         names = [n for n in names if split_of(n) == args.only_split]
     result = run(args.html_dir, args.node_modules_dir, tasks=names, test_episodes=args.test_episodes,
                  action_budget=args.action_budget, arm_names=args.arms, practice_episodes=args.practice_episodes,
-                 progress=lambda line: print(line, flush=True))
+                 progress=lambda line: print(line, flush=True), substrate=args.substrate)
     if args.out:
         pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
     print(json.dumps(result["summary"], indent=1, sort_keys=True))

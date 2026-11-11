@@ -821,10 +821,11 @@ class WholeRunTests(unittest.TestCase):
 
     def test_a_result_names_the_bytes_it_came_from(self):
         hashes = tool.code_sha256()
-        self.assertEqual(set(hashes), {"tool", "bridge", "version_space_learner", "explorer", "existing_compiler"})
+        self.assertEqual(set(hashes), {"tool", "bridge", "bridge_chromium", "version_space_learner", "explorer",
+                                       "existing_compiler"})
         for name, value in hashes.items():
             self.assertRegex(value, r"^[0-9a-f]{64}$", name)
-        self.assertEqual(len(set(hashes.values())), 5)
+        self.assertEqual(len(set(hashes.values())), len(hashes))
 
     def test_the_split_is_a_fixed_function_of_the_task_name(self):
         self.assertEqual(tool.split_of("click-button"), tool.split_of("click-button"))
@@ -922,6 +923,83 @@ class RealPageTests(unittest.TestCase):
         self.assertTrue(tool.succeeded(self.bridge.act({"type": "click", "index": right[0]})))
         self.bridge.reset(0)
         self.assertTrue(tool.failed(self.bridge.act({"type": "click", "index": wrong[0]})))
+
+
+@unittest.skipUnless(os.environ.get("MINIWOB_HTML_DIR") and os.environ.get("MINIWOB_CHROMIUM_NODE_MODULES")
+                     and shutil.which("node"),
+                     "set MINIWOB_HTML_DIR and MINIWOB_CHROMIUM_NODE_MODULES to run against the real pages in Chromium")
+class RealBrowserTests(RealPageTests):
+    """The same pages in headless Chromium: everything asked of the headless DOM, and what only a browser does."""
+
+    def setUp(self):
+        self.bridge = tool.Bridge(os.environ["MINIWOB_HTML_DIR"], os.environ["MINIWOB_CHROMIUM_NODE_MODULES"],
+                                  substrate="chromium")
+
+    def test_it_says_which_browser_it_is(self):
+        versions = self.bridge.versions()
+        self.assertIn("Chrome", versions["browser"])
+        self.assertEqual(len(versions["viewport"]), 2)
+
+    def test_every_shown_element_reports_a_box_and_a_button_has_a_real_one(self):
+        self.bridge.load("click-button")
+        observation = self.bridge.reset(0)
+        for element in observation["elements"]:
+            self.assertEqual(len(element["box"]), 4)
+        buttons = [e for e in observation["elements"] if e["tag"] == "button"]
+        self.assertTrue(buttons)
+        for button in buttons:
+            self.assertGreater(button["box"][2], 5)
+            self.assertGreater(button["box"][3], 5)
+        tops = [b["box"][1] for b in buttons]
+        self.assertEqual(tops, sorted(tops))            # laid out down the page, in document order
+
+    def test_typing_goes_through_the_keyboard(self):
+        # A date field takes keystrokes part by part and reports ISO; only a browser does that.
+        self.bridge.load("enter-date")
+        observation = self.bridge.reset(0)
+        wanted = [t for t in tool.utterance_tokens(observation["utterance"]) if t.count("/") == 2][0]
+        month, day, year = wanted.split("/")
+        field = [e["index"] for e in observation["elements"] if e["can_type"]][0]
+        observation = self.bridge.act({"type": "type", "index": field, "text": wanted})
+        self.assertEqual(observation["elements"][field]["value"], f"{year}-{month}-{day}")
+        self.assertTrue(observation["elements"][field].get("focused"))
+
+    def test_typing_replaces_what_was_there(self):
+        self.bridge.load("enter-text")
+        observation = self.bridge.reset(0)
+        field = [e["index"] for e in observation["elements"] if e["can_type"]][0]
+        self.bridge.act({"type": "type", "index": field, "text": "first try"})
+        observation = self.bridge.act({"type": "type", "index": field, "text": "Second"})
+        self.assertEqual(observation["elements"][field]["value"], "Second")
+        observation = self.bridge.act({"type": "type", "index": field, "text": ""})
+        self.assertEqual(observation["elements"][field]["value"], "")
+
+    def test_the_first_look_at_a_page_is_already_drawn(self):
+        # The search icon is a picture named by the stylesheet. Before it arrives its box is empty.
+        # The very first look of a new browser must not be that look.
+        self.bridge.load("email-inbox")
+        first = self.bridge.reset(0)
+        icon = [e for e in first["elements"] if e.get("id") == "open-search"][0]
+        self.assertGreater(icon["box"][2], 0)
+        self.assertTrue(icon["can_click"])
+        self.assertNotIn("files_still_arriving", first)
+        self.assertEqual(tool.state_key(self.bridge.reset(0)), tool.state_key(first))
+
+    def test_an_element_below_the_fold_is_scrolled_to_and_then_pressed(self):
+        self.bridge.load("email-inbox")
+        observation = self.bridge.reset(0)
+        rows = [e for e in observation["elements"] if e.get("classes") == "email-thread"]
+        self.assertGreater(len(rows), 1)
+        last = rows[-1]
+        self.assertGreater(last["box"][1], rows[0]["box"][1])
+        opened = self.bridge.act({"type": "click", "index": last["index"]})
+        self.assertNotIn("action_error", opened)
+        self.assertNotEqual(tool.state_key(opened), tool.state_key(observation))
+        self.assertFalse([e for e in opened["elements"] if e.get("classes") == "email-thread"])   # the list gave way to the message
+
+    def test_a_substrate_nobody_named_is_refused(self):
+        with self.assertRaises(ValueError):
+            tool.Bridge(os.environ["MINIWOB_HTML_DIR"], "", substrate="a real person")
 
 
 if __name__ == "__main__":
