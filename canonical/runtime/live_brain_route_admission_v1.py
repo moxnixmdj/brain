@@ -2476,31 +2476,29 @@ def request_words_not_accounted_for(sentence: str, admission: Mapping[str, Any],
 # (3b9c5d1f) with 2,500 sentences drawn from a public corpus of shell requests written by other
 # people (nl2bash; none of it is vendored here):
 #
-#   * 292 sentences got an older row selected, bound and STARTED; 27 came back ``pass`` and 26 of
-#     those answer a different request.  "Print information about all users who are logged in"
-#     shares ``all`` and ``who`` with the python symbol index (score 8), ``source_root`` is filled
-#     with ``.``, the index of this repository is built and verified, and the door reports pass.
+#   * 292 sentences reached this point with an older row selected and bound; 27 came back
+#     ``pass`` and 26 of those answer a different request.  "Print information about all users
+#     who are logged in" shares ``all`` and ``who`` with the python symbol index (score 8),
+#     ``source_root`` is filled with ``.``, the index of this repository is built and verified,
+#     and the door reports pass.  16 of the 26 were chosen by the lexical match; 10 by the typed
+#     plan's git family, which the single word "history" or "status" starts.
 #   * three of the refused ones had already written a file where the sentence pointed --
 #     "... redirecting error messages to /dev/null" left a report at ``dev/null`` in the root --
 #     because the refusal came after the run.
 #
-# In every one of them the row was chosen by ``DETERMINISTIC_VERIFIED_CAPABILITY_MATCH`` -- shared
-# words -- and the words it shares are a small minority of what the sentence says.  The sentences
-# this repository's own instruments send to the same rows look different by a wide margin: the
-# heartbeat's 68 passing goals that reach this point, and the 49 passing sentences of the door's
-# own tests, are explained by their row except for at most a word or two ("Apply the jq filter
-# ... with jq and write the output to ..." leaves ``apply``).
-#
-# So a row chosen by shared words is asked, before it starts, how much of the request it explains:
+# In each of them the words the row shares with the sentence are a small minority of what the
+# sentence says.  So a row chosen by shared words is asked, before it starts, how much of the
+# request it explains:
 #
 #   explained     a content word the row was matched on, or that the row's own declaration uses
-#                 (keywords, provides, requires, result fields, argument names, the effect its
-#                 verification observed, words it declares it also serves, its id);
+#                 (keywords, provides, requires, result fields, the names of its arguments, the
+#                 effect its verification observed, words it declares it also serves, its id);
 #   unexplained   a content word nothing in the row says anything about;
-#   neither       closed-class words, numbers, paths, quoted text, identifiers, words that state
-#                 where a result goes, and every word the row BOUND AS DATA into one of its inputs
-#                 (a row that takes the sentence itself as an input reads its own data out of it,
-#                 so nothing of that sentence is unexplained HERE -- its adapter must refuse).
+#   neither       closed-class words, quantifiers, numbers, paths, quoted text, identifiers, words
+#                 that state where a result goes, and every word the row BOUND AS DATA into one
+#                 of its inputs (a row that takes the sentence itself as an input reads its own
+#                 data out of it, so nothing of that sentence is unexplained HERE -- its adapter
+#                 must refuse).
 #
 # When the unexplained words OUTNUMBER the explained ones the row is not what the sentence is
 # about, and the run is refused before it starts, naming both lists.
@@ -2508,15 +2506,29 @@ def request_words_not_accounted_for(sentence: str, admission: Mapping[str, Any],
 # Scope, stated as data and not as ids:
 #   * decisions whose ``compiler_mode`` is the lexical match -- a typed plan is chosen by a
 #     pattern grammar, not by counting words, and long task descriptions reach it legitimately;
-#   * plus any row that opts in with ``request_word_coverage: majority`` (a row whose typed
-#     family is itself triggered by one word; ``git.repository.operate.v1`` was started by the
-#     single word "history" in 12 of the 26 wrong passes);
-#   * never a row under the strict check above, and never a decision whose basis is that every
-#     word was read.
+#   * plus any row that opts in with ``request_word_coverage: majority`` (the git row does);
+#   * never a row under the strict check above, never a decision whose basis is that every word
+#     was read, and never a sentence that names the row by its id.
+#
+# Measured on the tree that carries this rule, each against main with the same input:
+#   * a fresh sample of 2,500 such sentences that took no part in designing the rule: pass
+#     33 -> 11 (2 of them right both times, so 31 wrong -> 9); sentences that started a row
+#     415 -> 57; files left in the repository root 2 -> 0; no sentence passes that did not before.
+#   * the heartbeat with one seed: 187 of 276 goals pass before and after, family by family, and
+#     60 of 60 out-of-scope goals stay refused.  At the public check's own size (50 per family,
+#     100 out of scope) 1,108 decisions are in scope and 3 are refused: each is the docx verifier
+#     chosen on the word "verify" for a knowledge-status goal, in a family that passes 0 of 6.
+#   * 215 test files that load this door or the registry (2,190 tests): none that passed fails.
+#
+# Two alternatives were measured and dropped.  Refusing a tie too would refuse 27 of those 1,108
+# heartbeat decisions ("Use jq to run the filter ..." explains two words and leaves two).
+# Reading the whole action template as declaration explains "expect", "field", "type" and
+# "value" for every row.
 #
 # What this is not: the strict check.  A sentence most of whose words a row does explain still
-# passes this one ("... in a tabular form" would, if only the form were asked for).  It removes
-# the selections where the row explains less than it leaves unexplained, and nothing else.
+# passes ("Show the status of the printer queue" reaches git status on a tie), and a row that
+# binds the sentence itself is untouched: ``evidence.claim_spec.bind.explicit_comparison.stdlib``
+# accounts for 6 of the 9 wrong passes that remain in the fresh sample.
 _LEXICAL_MATCH_COMPILER_MODE = "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH"
 _QUANTIFIER_WORDS = frozenset("all any each every some both either neither other another such only also just".split())
 _RESULT_DESTINATION_WORDS = frozenset(
