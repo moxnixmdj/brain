@@ -17,11 +17,18 @@ class P1CompositeProofRoleVerifierTests(unittest.TestCase):
         self.assertEqual(out["required_check_count"], 8)
         self.assertEqual(out["required_mutation_count"], 9)
         self.assertIn("V4_DROP_PROVENANCE_MUTATION_SURVIVES_SCORER", out["errors"])
+        self.assertIn("V4_UNFALSIFIABLE_DIAGNOSIS_MUTATION_SURVIVES_SCORER", out["errors"])
         ce = out["v4_drop_provenance_counterexample"]
         self.assertTrue(ce["counterexample_holds"], ce)
         self.assertGreater(ce["failed_check_receipt_lists_erased"], 0)
         self.assertEqual(ce["candidate_supporting_receipts"], [])
         self.assertTrue(ce["scorer_pass_after_mutation"])
+        diag = out["v4_unfalsifiable_diagnosis_counterexample"]
+        self.assertTrue(diag["counterexample_holds"], diag)
+        self.assertTrue(diag["baseline_pass"])
+        self.assertTrue(diag["scorer_pass_after_mutation"])
+        self.assertFalse(diag["mutated_diagnosis"]["falsifiable"])
+        self.assertEqual(diag["mutated_diagnosis"]["supporting_receipts"], [])
 
     def test_missing_check_fails_closed(self):
         c = copy.deepcopy(self.candidate())
