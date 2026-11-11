@@ -816,7 +816,7 @@ class TheProcessAroundTheSolver(unittest.TestCase):
         took = time.monotonic() - started
         self.assertEqual((run["finished"], run["stopped_at_the_wall_limit"]), (False, True))
         self.assertGreaterEqual(run["seconds"], 1.0)
-        self.assertLessEqual(run["seconds"], took)        # the seconds are those this run took
+        self.assertLessEqual(run["seconds"], took + 0.01)  # the seconds are those this run took, rounded to a hundredth
         self.assertLess(took, 10)
         self.assertNotIn("result", run)
         time.sleep(3.5)                                   # the child would have written its file by now
@@ -850,7 +850,7 @@ class TheProcessAroundTheSolver(unittest.TestCase):
         self.assertTrue(run["worker_error"].endswith("RuntimeError: no such organ\n"))
         self.assertNotIn("result", run)
         self.assertIsInstance(run["seconds"], float)
-        self.assertTrue(0 <= run["seconds"] <= took)
+        self.assertTrue(0 <= run["seconds"] <= took + 0.01)          # it is rounded to a hundredth, so it can sit just above
 
     def test_a_worker_that_says_nothing_is_not_finished(self):
         tool._WORKER = SILENT
