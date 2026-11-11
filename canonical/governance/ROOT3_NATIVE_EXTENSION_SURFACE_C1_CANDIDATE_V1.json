@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_NATIVE_EXTENSION_SURFACE_C1_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FINITE_IN_PROCESS_NATIVE_RISK_SET__ISOLATION_ROUTE_IDENTIFIED__ZERO_CREDIT",
+  "objective": "Reduce the C1 native-extension residual to a finite set of exact in-process capability adapters, then collapse those adapters into the already-finite child-process boundary instead of attempting open-ended proof of arbitrary native extension internals.",
+  "parent_c1": {
+    "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "git_blob_sha": "7e2a232d8c7c66d711e858cc75c647c5690a43eb"
+  },
+  "bound_registry": {
+    "path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+  },
+  "public_dependency_facts": [
+    {
+      "capability_id": "auto.pypi.msgpack",
+      "fact": "PINNED_CP312_MANYLINUX_WHEEL_IS_PLATFORM_SPECIFIC_CPYTHON_ARTIFACT",
+      "source": "https://pypi.org/project/msgpack/1.2.2/",
+      "registry_wheel": "msgpack-1.2.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl"
+    },
+    {
+      "capability_ids": [
+        "docx.document.create_from_json_record",
+        "docx.document.create.python_docx"
+      ],
+      "fact": "UBUNTU_NOBLE_PYTHON3_DOCX_1_1_0_DFSG_2_DEPENDS_ON_PYTHON3_LXML",
+      "source": "https://packages.ubuntu.com/noble/python3-docx"
+    },
+    {
+      "capability_id": "xlsx.table.verify_against_json_records",
+      "fact": "UBUNTU_NOBLE_PYTHON3_OPENPYXL_3_1_2_DFSG_6_DEPENDS_ON_PYTHON3_LXML",
+      "source": "https://packages.ubuntu.com/noble/python3-openpyxl"
+    },
+    {
+      "capability_id": "xlsx.table.create_from_json_records",
+      "fact": "UBUNTU_NOBLE_PYTHON3_XLSXWRITER_3_1_9_1_IS_ARCHITECTURE_ALL_AND_DEPENDS_ONLY_ON_PYTHON3",
+      "source": "https://packages.ubuntu.com/noble/python3-xlsxwriter"
+    }
+  ],
+  "finite_risky_capabilities": [
+    "auto.pypi.msgpack",
+    "docx.document.create_from_json_record",
+    "docx.document.create.python_docx",
+    "xlsx.table.verify_against_json_records"
+  ],
+  "finite_risky_adapters": [
+    "python_library_codec",
+    "docx_report_from_json",
+    "python_document_builder",
+    "xlsx_verify_openpyxl"
+  ],
+  "preferred_repair": [
+    "EXECUTE_THE_FOUR_RISKY_ADAPTER_MODULES_IN_ISOLATED_CHILD_PROCESSES_WITH_CONTENT_BOUND_JSON_INPUT_OUTPUT",
+    "DO_NOT_IMPORT_THEIR_NATIVE_EXTENSION_DEPENDENCIES_IN_THE_PARENT_RUNTIME",
+    "THEN_RECLASSIFY_NATIVE_EXTENSION_INTERNAL_EFFECTS_AS_A_SUBSET_OF_THE_ALREADY_FINITE_CHILD_PROCESS_RESIDUAL",
+    "SEPARATELY_SOURCE_AUDIT_PACKAGING_PURE_MODULES_FOR_CTYPES_CFFI_OR_DYNAMIC_NATIVE_LOADERS"
+  ],
+  "theorem_boundary": {
+    "proves": [
+      "CURRENT_DEFINITE_OR_REACHABLE_IN_PROCESS_NATIVE_EXTENSION_SURFACE_IS_FINITE_AT_THE_CAPABILITY_ADAPTER_LEVEL",
+      "FOUR_EXACT_CAPABILITY_ROUTES_REQUIRE_NATIVE_RISK_TREATMENT",
+      "FOUR_EXACT_ADAPTER_MODULES_ARE_THE_PREFERRED_ISOLATION_CUT"
+    ],
+    "does_not_prove": [
+      "NATIVE_EXTENSION_INTERNAL_EFFECTS_ARE_SAFE",
+      "PACKAGING_PURE_SOURCE_CANNOT_DLOPEN_NATIVE_CODE",
+      "ISOLATION_IS_INTEGRATED",
+      "FULL_C1_SCOPE_COMPLETENESS"
+    ]
+  },
+  "runtime": "canonical/runtime/root3_native_extension_surface_v1.py",
+  "tests": "canonical/tests/test_root3_native_extension_surface_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}

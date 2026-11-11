@@ -1,0 +1,45 @@
+name: Verify Root3 native extension classification V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'canonical/runtime/root3_native_extension_surface_v1.py'
+      - 'canonical/tests/test_root3_native_extension_surface_v1.py'
+      - 'canonical/governance/ROOT3_NATIVE_EXTENSION_SURFACE_C1_CANDIDATE_V1.json'
+      - 'canonical/verification/ROOT3_DIRECT_NATIVE_LOADER_CENSUS_CONNECTOR_VERIFICATION_20261005_V1.json'
+      - '.github/workflows/verify-root3-native-extension-classification-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify finite native-risk classification
+        run: python -m pytest canonical/tests/test_root3_native_extension_surface_v1.py -q
+      - name: Emit classification
+        run: python canonical/runtime/root3_native_extension_surface_v1.py
+      - name: Verify public package facts used by classification
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://pypi.org/pypi/msgpack/1.2.2/json > /tmp/msgpack.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/msgpack.json'))
+          want='msgpack-1.2.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl'
+          assert any(x['filename']==want for x in d['urls'])
+          print('MSGPACK_PLATFORM_WHEEL_PASS')
+          PY
+          curl -fsSL https://packages.ubuntu.com/noble/python3-docx > /tmp/docx.html
+          grep -F 'python3-lxml' /tmp/docx.html
+          curl -fsSL https://packages.ubuntu.com/noble/python3-openpyxl > /tmp/openpyxl.html
+          grep -F 'python3-lxml' /tmp/openpyxl.html
+          curl -fsSL https://packages.ubuntu.com/noble/python3-xlsxwriter > /tmp/xlsxwriter.html
+          grep -F 'Architecture' /tmp/xlsxwriter.html
