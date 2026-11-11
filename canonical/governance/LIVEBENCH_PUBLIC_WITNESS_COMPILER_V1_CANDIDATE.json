@@ -1,0 +1,87 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_WITNESS_COMPILER_V1_CANDIDATE",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__83_CHECKER_TOTAL_PUBLIC_DESCRIPTION_DETECTOR__34_EXACT_CONSTRUCTIVE_CLASSES__INDEPENDENT_VERIFICATION_QUEUED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "frozen_public_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "modern_instructions_blob": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "candidate": {
+    "runtime_path": "canonical/runtime/livebench_public_witness_compiler_v1.py",
+    "test_path": "canonical/tests/test_livebench_public_witness_compiler_v1.py",
+    "public_checker_classes_constructed": 34,
+    "public_checker_classes_total": 83,
+    "mode": "PROMPT_DERIVED_SINGLE_CHECKER_DETERMINISTIC_WITNESS",
+    "model_dependency_count": 0,
+    "network_used": false,
+    "incremental_spend_usd": 0,
+    "terminal_case_content_used": false,
+    "hidden_metadata_used": false,
+    "detector_path": "canonical/runtime/livebench_public_description_detector_v1.py",
+    "public_description_checker_coverage": 83,
+    "public_description_pattern_count": 86,
+    "routing_safety": "FAIL_CLOSED_IF_ANY_PINNED_PUBLIC_CHECKER_DESCRIPTION_IS_DETECTED_OUTSIDE_34_CONSTRUCTIVE_CLASSES__FAIL_CLOSED_IF_DETECTED_SUPPORTED_DESCRIPTION_IS_UNPARSED__FAIL_CLOSED_ON_MULTI_MATCH"
+  },
+  "threshold_cut": {
+    "population_count": 200,
+    "acceptance_threshold_percent": 65.7,
+    "minimum_pass_count": 132,
+    "prior_forced_fail_full_population_upper_percent": 64,
+    "prior_upper_pass_count": 128,
+    "minimum_additional_passes_required_to_remove_prior_ceiling": 4,
+    "note": "FOUR_ADDITIONAL_VALID_CASES_ARE_NECESSARY_AND_SUFFICIENT_TO_MOVE_128_OF_200_TO_132_OF_200__THIS_CANDIDATE_DOES_NOT_YET_PROVE_THAT_FOUR_TERMINAL_CASES_MATCH_SUPPORTED_SINGLE_CHECKER_CLASSES"
+  },
+  "safety": {
+    "terminal_case_73_plus_exposed": false,
+    "case_specific_handlers": false,
+    "hidden_instruction_id_used": false,
+    "hidden_kwargs_used": false,
+    "multi_checker_conjunctions": "FAIL_CLOSED",
+    "unsupported_descriptions": "FAIL_CLOSED",
+    "complete_public_description_detector_candidate": true,
+    "detector_checker_count": 83,
+    "detector_pattern_count": 86,
+    "unsupported_public_checker_behavior": "FAIL_CLOSED"
+  },
+  "next_minimum_proof_cut": [
+    "OBTAIN_INDEPENDENT_PASS_THAT_PINNED_ACTIVE_REGISTRIES_EQUAL_83_DETECTOR_CLASSES_AND_PINNED_BUILD_DESCRIPTION_AST_EQUALS_ALL_86_STORED_PATTERNS",
+    "OBTAIN_INDEPENDENT_EXACT_CHECK_FOLLOWING_PASS_FOR_ALL_34_CONSTRUCTIVE_SINGLE_CHECKER_WITNESSES",
+    "FREEZE_SUCCESSOR_ADAPTER_BEFORE_ANY_TERMINAL_REPLAY",
+    "AUTHORIZE_AT_MOST_ONE_REPLAY_OF_ALREADY_EXPOSED_CASES_1_TO_72",
+    "IF_REPLAY_RECOVERS_AT_LEAST_FOUR_PREVIOUS_FAILURES_WITH_NO_REGRESSION__REMOVE_PRIOR_64_PERCENT_CEILING",
+    "OTHERWISE_EXPAND_CONSTRUCTIVE_CHECKER_COVERAGE_OR_SAFE_JOINT_COMPOSITION_USING_ONLY_PUBLIC_SCORER_GRAMMAR"
+  ],
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "description_detector_proof_candidate": {
+    "source_registry": "canonical/governance/LIVEBENCH_PUBLIC_DESCRIPTION_ANCHOR_REGISTRY_V1.json",
+    "derivation": "ALL_83_ACTIVE_CLASSES_HAVE_LITERAL_ONLY_SELF_DESCRIPTION_PATTERN_ASSIGNMENTS__82_HAVE_ONE_PATTERN__NTHWORDJAPANESECHECKER_HAS_FOUR__86_TOTAL",
+    "independent_verifier_repo": "moxnixmdj/verification-capsule-runner",
+    "independent_verifier_pr": 1877,
+    "independent_verifier_head": "f872b12fe1fdc67bb30a72d8b85815db430cc73f",
+    "independent_verifier_status": "QUEUED__34_CLASS_EXACT_CHECKER_V3__NO_PASS_CLAIM_YET"
+  },
+  "public_distribution_leverage": {
+    "source": "allenai/IFBench public test at pinned commit 1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "row_count": 300,
+    "instruction_count_histogram": {
+      "1": 256,
+      "2": 44
+    },
+    "interpretation": "PUBLIC_UPSTREAM_ONLY__NOT_TERMINAL_DISTRIBUTION_PROOF__SUPPORTS_PRIORITY_OF_EXPANDING_SINGLE_CHECKER_CONSTRUCTORS_BEFORE_GENERAL_CONJUNCTION_SOLVER"
+  }
+}
