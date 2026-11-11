@@ -1,0 +1,136 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IF_MINIMUM_CHECKER_SURFACE_CUT_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_PINNED_PUBLIC_300_ROW_MINIMUM_TYPE_CUT__CONDITIONAL_ON_LIVEBENCH_POPULATION_BINDING__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Replace universal 58-modern-checker implementation with the smallest checker-type surface that is mathematically sufficient for the target threshold under the frozen IF scoring equation.",
+  "pinned_public_population": {
+    "repository": "allenai/IFBench",
+    "commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "path": "data/IFBench_test.jsonl",
+    "git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "rows": 300,
+    "modern_instruction_types": 58,
+    "row_arity_distribution": {
+      "1": 256,
+      "2": 44
+    }
+  },
+  "frozen_scorer": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "process_results_blob": "8ce01747887ec0792c8f024e1972e34ece781676",
+    "evaluation_lib_blob": "2c7bd1290031dbe4ae0f016c53255f4af0ec645b",
+    "equation": "PROMPT_SCORE = 0.5*ALL_INSTRUCTIONS_BOOLEAN + 0.5*MEAN(INDIVIDUAL_INSTRUCTION_BOOLEANS)"
+  },
+  "exact_optimization_model": {
+    "success_model": "SELECTED_CHECKER_TYPE_PASSES_UNIVERSALLY__UNSELECTED_TYPE_FAILS_PESSIMISTICALLY",
+    "single_row_scores": {
+      "selected": 1,
+      "unselected": 0
+    },
+    "pair_row_scores": {
+      "both_selected": 1,
+      "exactly_one_selected": 0.25,
+      "none_selected": 0
+    },
+    "method": "PAIR_GRAPH_CONNECTED_COMPONENT_ENUMERATION_PLUS_EXACT_CARDINALITY_DYNAMIC_PROGRAM",
+    "score_arithmetic": "INTEGER_X4__NO_FLOATING_POINT_THRESHOLD_DECISION"
+  },
+  "result": {
+    "threshold_percent": 65.7,
+    "exact_minimum_checker_type_count": 27,
+    "one_optimal_27_type_surface": [
+      "count:conjunctions",
+      "count:numbers",
+      "count:pronouns",
+      "count:punctuation",
+      "count:unique_word_count",
+      "count:word_count_range",
+      "format:emoji",
+      "format:line_indent",
+      "format:list",
+      "format:parentheses",
+      "format:quotes",
+      "format:sub-bullets",
+      "format:thesis",
+      "ratio:overlap",
+      "ratio:sentence_balance",
+      "ratio:sentence_type",
+      "ratio:sentence_words",
+      "ratio:stop_words",
+      "sentence:increment",
+      "sentence:keyword",
+      "words:alphabet",
+      "words:consonants",
+      "words:no_consecutive",
+      "words:odd_even_syllables",
+      "words:palindrome",
+      "words:paragraph_last_first",
+      "words:vowel"
+    ],
+    "score_components_27": {
+      "single_pass": 157,
+      "single_fail": 99,
+      "pair_both": 42,
+      "pair_one": 0,
+      "pair_none": 2
+    },
+    "guaranteed_score_percent_27": 66.33333333333333,
+    "best_possible_with_26_types": {
+      "score_percent": 64.41666666666667,
+      "score_components": {
+        "single_pass": 152,
+        "single_fail": 104,
+        "pair_both": 41,
+        "pair_one": 1,
+        "pair_none": 2
+      }
+    },
+    "theorem": "ON_THE_PINNED_300_ROW_PUBLIC_IFBENCH_POPULATION__27_TYPES_ARE_NECESSARY_AND_SUFFICIENT_UNDER_THE_TYPE_UNIVERSAL_SUCCESS_MODEL_TO_FORCE_AT_LEAST_65_7_PERCENT__26_TYPES_CANNOT"
+  },
+  "newly_bound_livebench_target_geometry": {
+    "path": "canonical/governance/LIVEBENCH_2026_06_25_OPUS55_IF_TARGET_GEOMETRY_V1.json",
+    "total_questions": 200,
+    "tasks": {
+      "paraphrase": 50,
+      "simplify": 50,
+      "story_generation": 50,
+      "summarize": 50
+    },
+    "opus55_exact_mean_percent": 65.73775,
+    "consequence": "THE_300_ROW_PUBLIC_CUT_MUST_NOT_BE_TREATED_AS_THE_200_QUESTION_TERMINAL_CUT_WITHOUT_A_SEPARATE_POPULATION_BINDING"
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_if_minimum_checker_surface_cut_v1.py",
+    "test_path": "canonical/tests/test_livebench_if_minimum_checker_surface_cut_v1.py"
+  },
+  "breakthrough": [
+    "FULL_58_TYPE_MODERN_CHECKER_COVERAGE_IS_NOT_MATHEMATICALLY_REQUIRED_ON_THE_PINNED_PUBLIC_POPULATION.",
+    "THE_PUBLIC_THRESHOLD_PROBLEM_COLLAPSES_TO_AN_EXACT_27_TYPE_SURFACE_UNDER_A_PESSIMISTIC_ZERO_SCORE_OUTSIDE_THE_SURFACE.",
+    "THE_ONLY_LOAD_BEARING_TRANSFER_FACT_NOW_NEEDED_FOR_THIS_COMPRESSION_IS_CONTENT_FREE_POPULATION_OR_SCORE_DOMINANCE_BINDING_TO_THE_200_QUESTION_LIVEBENCH_TARGET."
+  ],
+  "next_minimum_action": "PROVE_WITHOUT_READING_TERMINAL_PROMPT_TEXT_A CONTENT_FREE INSTRUCTION_TYPE_MULTISET_BINDING_OR SCORE_DOMINANCE RELATION FOR THE 200 LIVEBENCH QUESTIONS__THEN RUN THIS EXACT CUT ON THAT BOUND POPULATION",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_300_PUBLIC_IFBENCH_ROWS_EQUAL_THE_200_LIVEBENCH_TERMINAL_QUESTIONS",
+    "NO_TERMINAL_SCORE_CLAIM",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_UNEXPOSED_TERMINAL_PROMPT_OR_RESPONSE_CONTENT_READ"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
