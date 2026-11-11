@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_EXACT_COMPLETION_CUT_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXACT_RATIONAL_MINIMUM_WORK_SCORE_MASS_CUT__STRICT_RAW_OPUS_65_73775__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Turn the independently verified LiveBench partial-credit scorer algebra into an exact minimum-work scheduler that optimizes score mass rather than checker-count coverage.",
+  "reused_verified_basis": {
+    "score_runtime": "canonical/runtime/livebench_if_score_bound_v1.py",
+    "score_mass_cut": "canonical/governance/LIVEBENCH_IF_SCORE_MASS_MINIMUM_CUT_V1.json",
+    "score_mass_cut_status": "INDEPENDENTLY_VERIFIED__EXACT_PUBLIC_SCORER_ARITHMETIC",
+    "frozen_threshold_mass": "262951/2000",
+    "strict_raw_opus_mean_percent": "65.73775",
+    "rounded_display_percent": "65.7",
+    "strictness_rule": "USE_RAW_OPUS_EQUAL_TASK_MEAN_65_73775_FOR_NONINFERIORITY__DO_NOT_SUBSTITUTE_ROUNDED_65_7"
+  },
+  "breakthrough": {
+    "mathematical_fact": "FOR_n_INSTRUCTIONS__f(g)=g/(2n)_FOR_g<n__AND_f(n)=1__SO_THE_FINAL_PROVED_INSTRUCTION_HAS_MARGINAL_MASS_1/2+1/(2n)",
+    "old_scheduler_error": "PRIORITIZING_RAW_CHECKER_FREQUENCY_OR_UNIVERSAL_CHECKER_COVERAGE_IGNORES_THE_CASE_COMPLETION_BONUS_AND_CAN_SPEND_WORK_ON_DOMINATED_PARTIAL_CREDIT",
+    "new_scheduler": "EXACT_MULTI_CHOICE_KNAPSACK_OVER_PER_CASE_PARETO_OPTIONS_WITH_EXACT_FRACTION_ARITHMETIC",
+    "optimization_target": "MINIMUM_DECLARED_PROOF_WORK_SUCH_THAT_CONSERVATIVE_PROVED_SCORE_MASS_REACHES_THE_ACCEPTANCE_THRESHOLD",
+    "dominance_rule": "DELETE_ANY_STATE_WITH_NO_MORE_SCORE_AND_NO_LESS_COST_THAN_ANOTHER_STATE",
+    "float_epsilon_removed": true
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_exact_completion_cut_v1.py",
+    "tests": "canonical/tests/test_livebench_exact_completion_cut_v1.py",
+    "arithmetic": "fractions.Fraction",
+    "cost_model": "INDEPENDENT_CASE_LOCAL_ADDITIONAL_CHECKER_PROOFS",
+    "unrepresented_population_rows": "ZERO_LOWER_BOUND",
+    "unlisted_unresolved_checkers": "UNPROVABLE",
+    "binary_float_inputs": "FAIL_CLOSED"
+  },
+  "scope_boundary": {
+    "exact_under": [
+      "CASE_LOCAL_INDEPENDENT_ADDITIONAL_CHECKER_PROOF_COSTS",
+      "EXACT_NONNEGATIVE_COSTS",
+      "ALREADY_GUARANTEED_FOLLOWING_COUNTS",
+      "PUBLIC_VERIFIED_SCORER_ALGEBRA"
+    ],
+    "not_modeled": [
+      "ONE_ACTION_PROVING_MULTIPLE_CASES",
+      "CROSS_CASE_SHARED_IMPLEMENTATION_COST",
+      "NEGATIVE_OR_STOCHASTIC_COSTS"
+    ],
+    "rule": "CALLERS_MUST_NOT_TREAT_THE_RESULT_AS_GLOBAL_ACROSS_SHARED_ACTIONS_UNLESS_SHARED_ACTIONS_HAVE_FIRST_BEEN_COMPILED_INTO_AN_ADMISSIBLE_CASE_LOCAL_COST_MODEL"
+  },
+  "terminal_goal_delta": [
+    "USES_THE_STRICT_RAW_OPUS_5_5_EQUAL_TASK_MEAN_65_73775_NOT_THE_WEAKER_65_7_DISPLAY_PROXY",
+    "DELETES_BINARY_FLOAT_EPSILON_FROM_THE_NEW_SCORE_MASS_DECISION_SURFACE",
+    "EXPOSES_THE_HIGH_VALUE_CASE_COMPLETION_DISCONTINUITY_AS_A_FIRST_CLASS_SCHEDULING_SIGNAL",
+    "COMPUTES_THE_EXACT_CHEAPEST_PROOF_CUT_UNDER_THE_DECLARED_COST_MODEL",
+    "ALLOWS_IMPLEMENTATION_TO_STOP_AS_SOON_AS_PROVED_SCORE_MASS_IS_SUFFICIENT_INSTEAD_OF_CHASING_UNIVERSAL_CHECKER_COVERAGE"
+  ],
+  "contamination_firewall": [
+    "ZERO_UNEXPOSED_TERMINAL_CASE_CONTENT",
+    "ZERO_TERMINAL_CASE_IDS",
+    "ZERO_TERMINAL_KWARGS",
+    "NO_TERMINAL_DISTRIBUTION_INFERENCE",
+    "CALLER_SUPPLIED_PROVED_GUARANTEES_ONLY"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_ASSERT_THE_CURRENT_SUCCESSOR_REACHES_65_7",
+    "DOES_NOT_PROVE_ANY_TERMINAL_CASE_DISTRIBUTION",
+    "DOES_NOT_AUTHORIZE_FRESH_TERMINAL_EXECUTION",
+    "DOES_NOT_GRANT_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "DOES_NOT_SOLVE_SHARED_CROSS_CASE_IMPLEMENTATION_COSTS",
+    "DOES_NOT_TREAT_ONE_DECIMAL_LEADERBOARD_EQUIVALENCE_AS_STRICT_OPUS_NONINFERIORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "next": "INDEPENDENTLY_VERIFY_RUNTIME__THEN_FEED_ONLY_PRECOMMITTED_OR_BLINDLY_DERIVED_CASE_LOCAL_PROOF_COSTS__USE_THE_RESULT_TO_DELETE_DOMINATED_CHECKER_IMPLEMENTATION_WORK"
+}
