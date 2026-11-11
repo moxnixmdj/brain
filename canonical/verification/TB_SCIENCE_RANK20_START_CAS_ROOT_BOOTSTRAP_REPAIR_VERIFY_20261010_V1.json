@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_TB_SCIENCE_RANK20_START_CAS_ROOT_BOOTSTRAP_REPAIR_VERIFY_20261010_V1",
+  "date": "2026-10-10",
+  "status": "PASS__EXACT_ZERO_EXPOSURE_PATCH_STATIC_VERIFIED__PUBLIC_MERGE_PENDING",
+  "canonical_basis": {
+    "current_result_path": "canonical/verification/TB_SCIENCE_RANK20_V2_START_CAS_IMPORT_ABORT_TRUTH_20261010_V1.json",
+    "current_result_git_blob_sha": "ef93d358f4eb67aade536e886ae1a6cadb13adb0",
+    "current_ledger_path": "canonical/governance/TB_SCIENCE_CURRENT_SLOT_LEDGER_RECONCILIATION_20261010_V50.json",
+    "current_ledger_git_blob_sha": "2075c175f9d8c97422c57db1318837bfb004e032"
+  },
+  "public_candidate": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2607,
+    "branch": "repair/rank20-start-cas-root-bootstrap-20261010-v1",
+    "base_branch": "terminal-execution-v1",
+    "base_commit_sha": "ee3436705ea801a45bfc08d6b5d77f0b199e6c9c",
+    "head_commit_sha": "05e40fbcc28cccef11844c07f83d7f0742272aef",
+    "changed_files": 1,
+    "additions": 3,
+    "deletions": 2,
+    "path": "capsules/tb_science_rank20_20261010_v1/rank20_start_cas_v7.py",
+    "predecessor_git_blob_sha": "35cd4c7a31d5ffbafa755dcdf888c2dee1beeb1b",
+    "repaired_git_blob_sha": "dac9dc9e136c5b10ac25ee7987acbc2c11e9e979",
+    "merged": false
+  },
+  "exact_patch_semantics": {
+    "repository_root_resolved_before_dependency_imports": true,
+    "execution_guard_directory_preserved_on_sys_path": true,
+    "repository_root_added_to_sys_path": true,
+    "package_qualified_execution_guard_import_becomes_resolvable": true,
+    "activation_file_added": false,
+    "task_read_added": false,
+    "durable_start_added": false,
+    "retry_or_replacement_authority_added": false
+  },
+  "proof_scope": {
+    "class": "STATIC_EXACT_PATCH_AND_IMPORT_TOPOLOGY_VERIFICATION",
+    "runtime_reseal_pass": false,
+    "public_effective_authority": false,
+    "activation_authority": false,
+    "claim_epoch_remint_required": true
+  },
+  "rank20_state": {
+    "task_read": false,
+    "task_started": false,
+    "durable_start_cas_acquired": false,
+    "benchmark_trials_consumed": 0,
+    "total_benchmark_trials_consumed": 18
+  },
+  "required_next": [
+    "MERGE_OR_OTHERWISE_PROMOTE_PR_2607_ZERO_EXPOSURE_REPAIR_TO_TERMINAL_EXECUTION_BASE",
+    "MINT_FRESH_CLAIM_EPOCH_BOUND_TO_REPAIRED_START_CAS_BLOB",
+    "RESEAL_PUBLIC_BEHAVIOR_EPOCH_EXECUTION_CLAIM_AUTHORITY_LEDGER_AND_CURRENT_SURFACE",
+    "RUN_ZERO_EXPOSURE_INDEPENDENT_RESEAL_VERIFICATION",
+    "MINT_FRESH_ONE_FILE_ACTIVATION_AUTHORITY_ONLY_AFTER_RESEAL_PASS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_PUBLIC_REPAIR_IS_MERGED",
+    "NO_CURRENT_RANK20_EXECUTION_AUTHORITY",
+    "NO_CURRENT_RANK20_ACTIVATION_AUTHORITY",
+    "NO_RANK20_TASK_READ_OR_START",
+    "NO_BENCHMARK_TRIAL_CONSUMPTION_DELTA",
+    "NO_TERMINAL_CREDIT"
+  ],
+  "pass": true
+}
