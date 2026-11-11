@@ -1,0 +1,39 @@
+{
+  "schema": "PROJECT_BRAIN_R121E_LIVE_GEOMETRY_FIXES_REACH_V1",
+  "date": "2026-11-09",
+  "round": "r121e",
+  "headline": "the 20% reach number was measured with hard-coded coordinates. Reading geometry live from the live DOM gives 20/20 and 16/16 on two tasks that previously failed.",
+  "measurements": [
+    {
+      "task": "click-option",
+      "runs": 20,
+      "successes": 20,
+      "policy": "read #query goal text, resolve the named option by its label element, click that radio, then re-read #subbtn geometry and click Submit",
+      "prior_result_same_task_with_hardcoded_submit_y": "1/10 to 2/10",
+      "why_it_changed": "#subbtn y position depends on option count: y=132 when n=3, y=150 when n=4, y=168 when n=5, y=186 when n=6 (core.randi(2,7) options). A fixed y=133 misses whenever n>3.",
+      "spectrum_status": "NO_FAILURES_TO_ATTRIBUTE (correct: nothing failed)"
+    },
+    {
+      "task": "click-button",
+      "runs": 16,
+      "successes": 16,
+      "policy": "read the goal sentence, exact-match a button by its accessible text, click it",
+      "attempts_before_the_fix": "0/16, all failures, because the START overlay is #sync-task-cover in this task, not #subbtn, so the episode never began",
+      "spectrum_status": "NO_FAILURES_TO_ATTRIBUTE (correct: nothing failed)"
+    }
+  ],
+  "the_four_hardcoded_selectors_that_produced_false_zeros": [
+    "clicking four fixed screen positions before pressing START (episode never began)",
+    "an ordinal radio index chosen by seed on a page that reshuffles options and changes their count every episode",
+    "a hard-coded Submit y=133 on a page where Submit is pushed down by the option list (y=132 to y=186)",
+    "a hard-coded #subbtn for the START overlay on a task that uses #sync-task-cover"
+  ],
+  "revised_statement_about_reach": {
+    "old": "26/130 = 20.0% on MiniWob++",
+    "status_of_old_number": "measured under a policy that used hard-coded coordinates/selectors; it understates what the same addressing channel reaches when geometry is read live",
+    "new_number": "NOT YET MEASURED AT SCALE. Two tasks measured at 20/20 and 16/16. A full 130-task sweep has not been run this round and no replacement percentage is claimed.",
+    "honest_position": "2 tasks at 100% is not a 130-task rate. The only defensible claim is that two specific tasks the project previously failed are now solved reliably, and the cause of the earlier failures was addressing, not capability."
+  },
+  "the_general_lesson": "an agent that caches a coordinate is assuming a layout. MiniWob randomises option count, order and overlay id per task and per episode. Every cached address is a latent zero. Read geometry from the live DOM immediately before every action.",
+  "spectrum_module_status": "repeat_execution_spectrum_v1 correctly reported NO_FAILURES_TO_ATTRIBUTE on both fully-solved tasks, and correctly localised an injected defect at ochiai 1.0 in the one design where a defect existed (r121d). It has never yet been shown to localise a NATURAL failure, because with live geometry the policy no longer produces any on these two tasks."
+}
