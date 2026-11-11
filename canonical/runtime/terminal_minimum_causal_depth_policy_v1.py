@@ -6,6 +6,17 @@ capability, ownership, or acceptance credit.
 from __future__ import annotations
 from typing import Iterable, Mapping, Any
 
+try:
+    from .terminal_typed_minimum_certificate_basis_v1 import (
+        compile_basis as compile_typed_basis,
+        required_dimensions as typed_required_dimensions,
+    )
+except ImportError:
+    from terminal_typed_minimum_certificate_basis_v1 import (
+        compile_basis as compile_typed_basis,
+        required_dimensions as typed_required_dimensions,
+    )
+
 SCHEMA = "PROJECT_BRAIN_TERMINAL_CAUSAL_DEPTH_COLLAPSE_V1"
 
 UNRESOLVED = {
@@ -52,6 +63,26 @@ ZERO_REALITY = {
 "ACCOUNT_OR_PROTOCOL_FACT","SCOPE_CERTIFICATE","UPSTREAM_SCOPE_RECEIPT",
 }
 
+def _typed_basis_snapshot() -> dict[str, Any]:
+    basis=compile_typed_basis()
+    expected={
+        "predicate_count":26,
+        "root2_only_count":16,
+        "root3_only_count":7,
+        "root2_and_root3_count":3,
+        "typed_obligation_count":29,
+    }
+    for k,v in expected.items():
+        if basis.get(k) != v:
+            raise ValueError(f"STALE_TYPED_CERTIFICATE_BASIS:{k}:{basis.get(k)!r}!={v!r}")
+    if basis.get("execution_authority") is not False:
+        raise ValueError("TYPED_BASIS_EXECUTION_AUTHORITY_MUST_BE_FALSE")
+    if basis.get("promotion_authority") is not False:
+        raise ValueError("TYPED_BASIS_PROMOTION_AUTHORITY_MUST_BE_FALSE")
+    if basis.get("fresh_reality_authority") is not False:
+        raise ValueError("TYPED_BASIS_FRESH_REALITY_AUTHORITY_MUST_BE_FALSE")
+    return basis
+
 def validate_live_state(state: Mapping[str, Any]) -> None:
     expected = {
         "accepted_families":5,"open_families":14,"proved_atomic":12,
@@ -78,6 +109,7 @@ def filter_routes(routes: Iterable[Mapping[str, Any]]) -> list[dict[str, Any]]:
         r=dict(raw)
         p=r.get("predicate_id"); k=r.get("route_kind")
         if route_admissible(p,k,explicit_relative_bridge=bool(r.get("explicit_relative_bridge"))):
+            r["required_proof_dimensions"]=list(typed_required_dimensions(str(p)))
             out.append(r)
     return out
 
@@ -89,6 +121,7 @@ def compile_waves(
     fresh_reality_authorized: bool,
 ) -> dict[str, Any]:
     validate_live_state(state)
+    basis=_typed_basis_snapshot()
     admitted=filter_routes(routes)
     zero=[r for r in admitted if r["route_kind"] in ZERO_REALITY]
     fresh=[r for r in admitted if r["route_kind"] in FRESH_REALITY]
@@ -97,6 +130,20 @@ def compile_waves(
         "schema":SCHEMA,
         "wave0":{
             "parallel":True,
+            "typed_minimum_certificate_basis":{
+                "predicate_count":basis["predicate_count"],
+                "typed_obligation_count":basis["typed_obligation_count"],
+                "comparator_strength_obligations":sum(
+                    1 for x in basis["obligations"]
+                    if x["dimension"] == "COMPARATOR_STRENGTH"
+                ),
+                "scope_completeness_obligations":sum(
+                    1 for x in basis["obligations"]
+                    if x["dimension"] == "SCOPE_COMPLETENESS"
+                ),
+                "obligations":basis["obligations"],
+                "acceptance_credit_authorized":False,
+            },
             "typed_evidence_collapse":zero,
             "generic_precommit_isolation_kernel":{
                 "required":not generic_isolation_proved,

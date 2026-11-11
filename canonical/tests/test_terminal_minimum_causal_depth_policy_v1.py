@@ -32,6 +32,11 @@ def test_fresh_reality_is_blocked_without_both_gates():
     assert out["wave2"]["actions"] == []
     assert len(out["wave2"]["blocked_actions"]) == 1
     assert len(out["wave0"]["typed_evidence_collapse"]) == 1
+    basis=out["wave0"]["typed_minimum_certificate_basis"]
+    assert basis["typed_obligation_count"] == 29
+    assert basis["comparator_strength_obligations"] == 19
+    assert basis["scope_completeness_obligations"] == 10
+    assert out["wave0"]["typed_evidence_collapse"][0]["required_proof_dimensions"] == ["COMPARATOR_STRENGTH"]
 
 def test_fresh_reality_requires_isolation_too():
     routes=[{"predicate_id":"LIVEBENCH_IF_GE_65_7","route_kind":"FIXED_BAR_SCORE"}]
@@ -54,3 +59,22 @@ def test_dominance_prunes_only_known_mechanical_case():
     ]
     ids={x["id"] for x in dominance_prune(actions)}
     assert ids == {"b","unknown"}
+
+
+def test_mixed_predicate_route_is_typed_with_both_dimensions():
+    routes=[
+      {"predicate_id":"AGENCY_MATCHED_SUCCESS_NONINFERIOR",
+       "route_kind":"EXISTING_CONTENT_ADDRESSED_COMPARATOR_EVIDENCE"},
+    ]
+    out=filter_routes(routes)
+    assert out[0]["required_proof_dimensions"] == [
+        "COMPARATOR_STRENGTH","SCOPE_COMPLETENESS"
+    ]
+
+def test_root3_route_is_typed_scope_only():
+    routes=[
+      {"predicate_id":"FINANCE_UNCOVERED_SCOPE_AUDIT",
+       "route_kind":"SCOPE_CERTIFICATE"},
+    ]
+    out=filter_routes(routes)
+    assert out[0]["required_proof_dimensions"] == ["SCOPE_COMPLETENESS"]
