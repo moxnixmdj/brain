@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_ABC_REALITY_CUT_ORTHOGONAL_FACTORIZATION_CONNECTOR_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "PASS__MIXED_REALITY_CUT_FACTORED__5_CURRENT_PRIVATE_OR_TARGET_RELATIVE_CHANNELS__6_PUBLIC_EXECUTION_SURFACES__1_SHARED_CONTROLLER_FRONTIER__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/ABC_REALITY_CUT_ORTHOGONAL_FACTORIZATION_20261007_V1.json",
+    "git_blob_sha": "4225c32a76972a544567d5b63d37c5168497f4f3",
+    "branch": "abc-reality-cut-orthogonal-factorization-v1"
+  },
+  "exact_public_repository_bindings": {
+    "automationbench": {
+      "repo": "zapier/AutomationBench",
+      "path": "README.md",
+      "git_blob_sha": "680d7006e1a05e94c6ce208e91b13dd821d1554f"
+    },
+    "hle": {
+      "repo": "centerforaisafety/hle",
+      "path": "README.md",
+      "git_blob_sha": "a948c9512541fff702aaf5e0c8bc371fded3689c"
+    },
+    "chartography": {
+      "repo": "surge-ai/chartography",
+      "path": "README.md",
+      "git_blob_sha": "dc534fbfff5fa7f94cd62a567dc73e9747666725"
+    },
+    "terminal_bench_science": {
+      "repo": "harbor-framework/terminal-bench-science",
+      "path": "README.md",
+      "git_blob_sha": "8d9b86b814635ba0c3a0554e63cc3de8787cab43"
+    },
+    "osworld": {
+      "repo": "xlang-ai/OSWorld",
+      "path": "README.md",
+      "git_blob_sha": "31dc1a9edf3ad6ee74c5ea2440f7786f280822d2"
+    },
+    "terminal_bench": {
+      "repo": "harbor-framework/terminal-bench",
+      "path": "README.md",
+      "git_blob_sha": "69db12c8f70e3c8f5848f7cafb12899058071f9c"
+    }
+  },
+  "brain_controller_boundary_bindings": {
+    "harbor_session_adapter": {
+      "path": "canonical/runtime/harbor_brain_session_agent.py",
+      "historical_commit": "f442efb4f2592db20a1a381cd1335a2b62089b1f",
+      "git_blob_sha": "a32d01a95e40708f33a98bd89633db86292948ad",
+      "boundary": "POLLING_PER_STEP_GIT_COMMAND_RELAY__NOT_SELF_CONTAINED_GENERAL_CONTROLLER"
+    },
+    "certificate_gated_runtime": {
+      "path": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v1.py",
+      "historical_commit": "67df56b170b0b6950ef49d96f8bad5d38121e269",
+      "git_blob_sha": "4c923a53861c8dc29e5a69bf0bd8678f669d2702"
+    },
+    "certificate_gated_registry": {
+      "path": "canonical/governance/CERTIFICATE_GATED_SELECTED_ROUTE_RUNTIME_REGISTRY_V1.json",
+      "historical_commit": "9b19bfb3fadab1dcb3022ad26bfc6b57e2549b4e",
+      "git_blob_sha": "78ef7174fd7cdebb24f97882e8c325a5164f18cb",
+      "boundary": "CANARY_ONLY__SELECTED_COVER_COMPLETE_FALSE"
+    }
+  },
+  "verified_counts": {
+    "private_or_target_relative_channels": 5,
+    "public_benchmark_execution_surfaces": 6,
+    "shared_general_controller_frontier": 1,
+    "explicit_grader_dependency_classes": 2,
+    "compute_environment_classes": 3
+  },
+  "verified_classifications": [
+    "AUTOMATIONBENCH_PUBLIC600_HAS_PUBLIC_TASKS_OBJECTIVE_ASSERTION_SCORER_AND_CUSTOM_BASE_URL.",
+    "HLE_HAS_PUBLIC_REPOSITORY_AND_PUBLIC_HUGGINGFACE_DATASET__MODEL_JUDGE_DEPENDENCY_REMAINS_FOR_SHORT_ANSWER_SCORING.",
+    "CHARTOGRAPHY_HAS_PUBLIC_HARNESS_AND_FULL_HUGGINGFACE_DATASET__LEADERBOARD_JUDGE_DEPENDENCY_REMAINS.",
+    "TB_SCIENCE_HAS_PUBLIC_HARBOR_DATASET_AND_RUN_PATH.",
+    "OSWORLD_HAS_PUBLIC_REPOSITORY_DATA_AND_CUSTOM_OPENAI_BASE_URL.",
+    "TB4_HAS_PUBLIC_TAGGED_HARBOR_DATASET_AND_RUN_PATH.",
+    "THE_CURRENT_BRAIN_HARBOR_ADAPTER_IS_TRANSPORT_GLUE_REQUIRING_AN_EXTERNAL_LIVE_COMMAND_CONTROLLER.",
+    "THE_CERTIFICATE_GATED_RUNTIME_DOES_NOT_SUPPLY_AN_ARBITRARY_CONTEXT_CONTROLLER_BECAUSE_CURRENT_REGISTRY_SELECTED_COVER_COMPLETE_IS_FALSE."
+  ],
+  "conclusion": "THE_PREDECESSOR_NINE_LANE_SET_COVER_IS_A_VALID_MINIMUM_ONLY_FOR_ITS_MIXED_ACCESS_OR_EXECUTION_GRAPH__IT_MUST_NOT_BE_INTERPRETED_AS_NINE_INDEPENDENT_EXTERNAL_INFORMATION_CHANNELS.",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_FIVE_PRIVATE_CHANNELS_ARE_GLOBALLY_IRREDUCIBLE.",
+    "NO_CLAIM_PUBLIC_BENCHMARKS_ARE_CURRENTLY_EXECUTABLE_BY_BRAIN.",
+    "NO_CLAIM_GENERAL_CONTROLLER_EXISTS.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
