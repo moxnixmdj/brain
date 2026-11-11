@@ -1,0 +1,123 @@
+{
+  "schema": "PROJECT_BRAIN_OPUS55_OBSERVABLE_INTERFACE_CHANNEL_CHARACTERIZATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PRIMARY_SOURCE_BOUND__MODEL_INTERFACE_CHANNELS_CHARACTERIZED__SEMANTIC_TRANSFORM_COMPLETENESS_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Bind the model-level observable interaction channels of Claude Opus 5.5 from current first-party documentation, and separate that finite interface result from the stronger open semantic-family completeness claim.",
+  "primary_sources": [
+    {
+      "url": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "observed": [
+        "CLAUDE_OPUS_5_5_NATIVE_INPUT_TO_OUTPUT_IS_TEXT_AND_IMAGES_TO_TEXT",
+        "CONTEXT_WINDOW_IS_1M_TOKENS",
+        "MODEL_IS_ACTIVE_LATEST_AS_OF_THE_BOUND_SOURCE"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview",
+      "observed": [
+        "TOOL_USE_CONNECTS_CLAUDE_TO_EXTERNAL_TOOLS_AND_APIS",
+        "CLAUDE_RETURNS_STRUCTURED_TOOL_CALLS",
+        "CLIENT_TOOLS_ARE_EXECUTED_BY_THE_APPLICATION_AND_RESULTS_RETURN_AS_TOOL_RESULT",
+        "SERVER_TOOLS_ARE_EXECUTED_BY_ANTHROPIC_INFRASTRUCTURE"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool",
+      "observed": [
+        "BROWSER_USE_IS_EXPOSED_AS_A_TOOLSET",
+        "CLAUDE_READS_AND_ACTS_ON_LIVE_WEBPAGES_THROUGH_THE_TOOL_INTERFACE"
+      ]
+    },
+    {
+      "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool",
+      "observed": [
+        "COMPUTER_USE_IS_EXPOSED_AS_A_TOOLSET",
+        "SCREENSHOT_AND_COMPUTER_ACTIONS_ARE_TOOL_MEDIATED"
+      ]
+    }
+  ],
+  "model_level_channel_characterization": {
+    "native_semantic_inputs": [
+      "TEXT",
+      "IMAGE"
+    ],
+    "conversation_state_carriers": [
+      "MESSAGE_HISTORY",
+      "THINKING_BLOCK_STATE_WHERE_SUPPORTED",
+      "TOOL_RESULTS_RETURNED_IN_MESSAGE_CONTEXT"
+    ],
+    "native_or_structured_model_outputs": [
+      "TEXT_RESPONSE_CONTENT",
+      "STRUCTURED_TOOL_USE_SELECTION_AND_ARGUMENTS"
+    ],
+    "external_effect_channels": [
+      "CLIENT_TOOL_EXECUTION",
+      "SERVER_TOOL_EXECUTION",
+      "BROWSER_TOOLSET_EXECUTION",
+      "COMPUTER_TOOLSET_EXECUTION"
+    ],
+    "external_effect_semantics": "THE_MODEL_SELECTS_OR_SPECIFIES_A_TYPED_ACTION; THE_TOOL_RUNTIME_PERFORMS_THE_EXTERNAL_STATE_MUTATION_OR_OBSERVATION AND RETURNS_RESULT_STATE."
+  },
+  "proved_boundary": {
+    "channel_completeness_for_bound_model_api_surface": true,
+    "new_native_model_input_channel_beyond_text_or_image_observed": false,
+    "new_model_native_external_actuation_channel_outside_tool_mediation_observed": false,
+    "semantic_transform_family_completeness": false,
+    "all_claude_app_client_side_preprocessors_or_renderers_characterized": false,
+    "all_private_or_future_serving_surfaces_characterized": false
+  },
+  "relation_to_family_interface_candidate": {
+    "path": "canonical/governance/OPUS55_FAMILY_INTERFACE_COMPLETENESS_CHARACTERIZATION_20261005_V1.json",
+    "effect": [
+      "SUPPORT_INPUT_AND_ACTION_CHANNEL_PORTIONS_OF_THE_OBSERVABLE_BEHAVIOR_NORMAL_FORM",
+      "DO_NOT_BY_ITSELF_PROVE_THAT_EVERY_LOAD_BEARING_SEMANTIC_TRANSFORM_TYPES_INTO_THE_EXISTING_19_FAMILY_ONTOLOGY",
+      "DO_NOT_DISCHARGE_OPEN_WORLD_TARGET_DISCOVERY_COMPLETENESS"
+    ],
+    "remaining_load_bearing_question": "IS_EVERY_ADMISSIBLE_USEFUL_SEMANTIC_TRANSFORM_AVAILABLE_THROUGH_THE_BOUND_CHANNEL_GRAMMAR_LOSSLESSLY_TYPED_BY_THE_EXISTING_NONCOMPOSITION_FAMILIES_OR_CAN_A_CONSTRUCTIVE_UNTYPABLE_TRANSFORM_BE_EXHIBITED?"
+  },
+  "falsifiers": [
+    "FIRST_PARTY_OPUS55_MODEL_DOCUMENTATION_SHOWS_A_NATIVE_MODEL_INPUT_MODALITY_BEYOND_TEXT_AND_IMAGE.",
+    "FIRST_PARTY_OPUS55_MODEL_DOCUMENTATION_SHOWS_A_MODEL_NATIVE_EXTERNAL_ACTUATION_CHANNEL_NOT_MEDIATED_BY_TYPED_TOOL_OR_CLIENT_RUNTIME.",
+    "A_BOUND_TOOL_SURFACE_PERFORMS_A_LOAD_BEARING_SEMANTIC_TRANSFORM_INSIDE_THE_TARGET_MODEL_THAT_IS_NOT REPRESENTED_BY_THE_DECLARED_CHANNEL_CHARACTERIZATION."
+  ],
+  "scheduler_delta": {
+    "delete_if_independently_verified": [
+      "GENERIC_SEARCH_FOR_ADDITIONAL_CURRENT_OPUS55_MODEL_API_NATIVE_INPUT_OUTPUT_CHANNELS_WITHOUT_A_SOURCE_CHANGE"
+    ],
+    "preserve": [
+      "SEMANTIC_TRANSFORM_FAMILY_COMPLETENESS_FALSIFICATION",
+      "OPEN_WORLD_TARGET_DISCOVERY_COMPLETENESS",
+      "CONDITION_SPECIFIC_ACCEPTANCE_AND_PERFORMANCE_PARITY",
+      "OWNERSHIP_GATES"
+    ],
+    "wake_on": [
+      "NEW_OR_CHANGED_OPUS55_MODEL_OVERVIEW",
+      "NEW_NATIVE_INPUT_OR_OUTPUT_MODALITY",
+      "NEW_NON_TOOL_EXTERNAL_ACTUATION_INTERFACE",
+      "MATERIAL_SERVING_INTERFACE_CHANGE"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_INTERFACE_CHANNEL_COMPLETENESS_IMPLIES_CAPABILITY_SEMANTIC_COMPLETENESS",
+    "NO_CLAIM_ALL_CLAUDE_APP_CLIENT_FEATURES_ARE_MODEL_NATIVE",
+    "NO_CLAIM_ALL_PRIVATE_OR_FUTURE_OPUS55_SURFACES_ARE_ENUMERATED",
+    "NO_LITERAL_TERMINAL_FINALITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
