@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_HARBOR_CONTROL_MATERIALITY_TRANSPORT_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CONTENT_ADDRESSED_TRANSPORT_CANDIDATE__INDEPENDENT_REPLAY_REQUIRED__ZERO_CREDIT",
+  "old_independent_receipt": {
+    "path": "canonical/verification/CODING_CONTROL_RUNTIME_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verified_harbor_blob": "3d7d803bdd25df0379d81b360af3ea40da254771",
+    "verified_properties": [
+      "MODEL_ONLY_FINISH_REJECTED",
+      "PREMATURE_FINISH_REJECTED_AND_RECOVERY_SUPPORTED",
+      "FAILED_VERIFICATION_CANNOT_AUTHORIZE_FINISH",
+      "MAX_CYCLES_NEVER_FORCE_MODEL_FINALIZATION",
+      "BRAIN_CONFIGURATION_DURABLE_AND_LOAD_BEARING"
+    ]
+  },
+  "current_harbor_blob": "0fcce46d42d546a7e521c9ed93a56202203e337f",
+  "line_transport": {
+    "old_line_count": 72,
+    "new_line_count": 72,
+    "changed_line_count": 3,
+    "changes": [
+      {
+        "line": 42,
+        "old": "planned=astra_runtime._planner_post(prompt,timeout_s=20)",
+        "new": "planned=astra_runtime._terminal_owned_planner_post(prompt,timeout_s=20)",
+        "classification": "PROPOSAL_SOURCE_ONLY"
+      },
+      {
+        "line": 51,
+        "classification": "FINISHED_RESULT_DEPENDENCY_ACCOUNTING_ONLY",
+        "semantic_delta": "OPTIONAL_MODEL_PROPOSAL_TO_OWNED_LOCAL_MODEL_PROPOSAL__ADD_OWNED_1_UNOWNED_0"
+      },
+      {
+        "line": 59,
+        "classification": "BLOCKED_RESULT_DEPENDENCY_ACCOUNTING_ONLY",
+        "semantic_delta": "OPTIONAL_MODEL_PROPOSAL_TO_OWNED_LOCAL_MODEL_PROPOSAL__ADD_OWNED_1_UNOWNED_0"
+      }
+    ],
+    "unchanged_load_bearing_control_flow": [
+      "RENDER_POLICY_BLOCK",
+      "PLANNER_ACTION_ALLOWLIST",
+      "VALIDATE_FINISH",
+      "REJECT_FAILED_FINISH_GATE",
+      "VALIDATE_ENVIRONMENT_COMMAND",
+      "TRACE_RESULTS",
+      "MAX_CYCLES_FAIL_CLOSED"
+    ]
+  },
+  "unchanged_support_blobs": {
+    "canonical/runtime/coding_control_kernel_v1.py": "2b5cd4bebc28b8e7096f87aa63ffbb329a819057",
+    "canonical/runtime/harbor_command_policy.py": "a525773417291c7a4841bf35e1baff5370350d0d",
+    "canonical/runtime/harbor_environment_transport.py": "ec46f648214a37bb16025d5ef2593efdf59f0d79",
+    "canonical/capabilities/internalized/software_engineering/mini_swe_superpowers_v1/COMPOSED_CONFIGURATION_V1.json": "d63d7656c7da293a7c22c32042a4f03f2d13593d"
+  },
+  "deduction_if_independently_replayed": "THE_PREVIOUSLY_VERIFIED_BRAIN_CONTROL_MATERIALITY_ARGUMENT_TRANSPORTS_ACROSS_THE_HARBOR_CHANGE_BECAUSE_ALL_LOAD_BEARING_CONTROL_AND_CONFIGURATION_BYTES_ARE_UNCHANGED_AND_THE_ONLY_EXECUTION_CHANGE_REPLACES_THE_PROPOSAL_SOURCE_WITH_A_STRICTER_OWNED_LOCAL_SOURCE",
+  "hard_nonclaims": [
+    "NO_INDEPENDENT_REPLAY_CLAIM_FROM_THIS_ARTIFACT",
+    "NO_CLAIM_QWEN_SUBSTRATE_CAPABILITY_PARITY",
+    "NO_CLAIM_CURRENT_WHOLE_WITNESS_DONOR_INDEPENDENCE",
+    "NO_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
