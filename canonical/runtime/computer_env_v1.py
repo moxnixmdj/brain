@@ -756,7 +756,15 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
             return False, "PLAN_PRODUCED_NO_FILE"
         good, why = ps.verify_round_trip(out, suffix)
         if good and not ps.carries_content_evidence(suffix):
-            return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
+            from canonical.runtime import text_relation_verifier_v1 as trv
+            goal = locals().get("gap")
+            if trv.admits(goal or "", suffix):
+                srcp = env.root / next(iter(env.seed), "input.txt")
+                good, why = trv.verdict(goal or "", srcp, out)
+                if not good:
+                    return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix + "/" + str(why)
+            else:
+                return False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
         if good and not _input_matters(
                 (env.recipes.get(plan[-1]) or {}).get("argv") or [],
                 next(iter(env.seed), "input.txt"), target, out.read_bytes()):
@@ -967,7 +975,26 @@ def _single_step(programs: Sequence[str], suffix: str, target: str,
                 continue
             good, why = ps.verify_round_trip(out, suffix)
             if good and not ps.carries_content_evidence(suffix):
-                good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
+                # THE FORMAT ALONE PROVES NOTHING -- BUT THE RELATION TO THE INPUT CAN.
+                #
+                # carries_content_evidence('.txt') is False and must stay False: every
+                # text file opens as text, so the format is not evidence. That left 10 of
+                # 13 ordinary goals refused, including "sort notes.txt into sorted.txt".
+                #
+                # For a recognised relation the correct output is DEFINED by the input:
+                # a sort is correct iff its lines are a permutation of the input's and
+                # non-decreasing. No reference answer is needed, so the evidence comes
+                # from the pair of files rather than from the suffix. Goals naming a verb
+                # this module cannot decide (summarise, translate) still fall through to
+                # the original refusal below.
+                from canonical.runtime import text_relation_verifier_v1 as trv
+                if trv.admits(goal or "", suffix):
+                    srcp = env.root / src_name
+                    good, why = trv.verdict(goal or "", srcp, out)
+                    if not good:
+                        why = "FORMAT_CARRIES_NO_EVIDENCE:" + suffix + "/" + str(why)
+                else:
+                    good, why = False, "FORMAT_CARRIES_NO_EVIDENCE:" + suffix
             if good and not _uses_goal_value(
                     env.recipes.get("run_" + prog) or {}, goal):
                 good, why = False, "GOAL_VALUE_UNUSED"
@@ -1451,7 +1478,28 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     # by building a file that holds a known number of the thing and throwing
     # away every program that does not print it.  Refusing here hands the
     # goal to something that can answer it instead of closing it with a hash.
+    # A NAMED OUTPUT FILE PLUS A NAMED RELATION IS A CONSTRUCTION, NOT A QUESTION.
+    #
+    # query_kind matches its words ANYWHERE in the goal, including the output
+    # filename and the instruction verb, so it called three construction goals
+    # questions and refused them in ~0 ms:
+    #     "reverse the lines of list.txt into rev2.txt"   -> 'lines'
+    #     "deduplicate emails.txt into unique.txt"        -> 'uniquelines'  (from "unique.txt")
+    # The genuine questions it must keep refusing name NO output file:
+    #     "count the lines in a.txt"        -> 'lines'
+    #     "the different lines of a.txt"    -> 'uniquelines'
+    # So the discriminator is the presence of an output artifact, and the relation
+    # verifier already decides whether the named relation is one whose correct
+    # result the input defines. Both genuine questions still name no artifact and
+    # are still refused by the branch below.
     asked = query_kind(gap)
+    if asked is not None:
+        try:
+            from canonical.runtime import text_relation_verifier_v1 as _trvq
+            if _trvq.admits(gap, suffix):
+                asked = None
+        except Exception:  # noqa: BLE001
+            pass
     if asked is not None:
         return {"closed": False, "kind": asked,
                 "status": "OPEN__A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING",
@@ -1468,11 +1516,28 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     # the verdict was decided by the format before the first program ran.
     from canonical.runtime import program_synthesis_v1 as _ps
     if not _ps.carries_content_evidence(suffix):
-        return {"closed": False, "suffix": suffix,
-                "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
-                "detail": ("%s is any text; nothing in the bytes says it is the "
-                           "thing the goal named, so no verifier here can close it"
-                           % suffix)}
+        # THE SUFFIX IS NOT EVIDENCE. THE RELATION TO THE INPUT CAN BE.
+        #
+        # This guard fired in ~0 ms for 10 of 13 ordinary goals and decided the verdict
+        # before a single program ran -- which is correct when the only available check is
+        # "it opens as text", and wrong when the goal names a relation the input defines.
+        #
+        # "sort notes.txt into sorted.txt" is correct iff the output's lines are a
+        # permutation of the input's and non-decreasing. That is the definition of sort,
+        # not a heuristic, and it needs no reference answer. So a recognised relation is
+        # allowed PAST this guard, where the per-candidate check (_single_step /
+        # chain verifier) decides on the actual bytes. carries_content_evidence itself is
+        # unchanged and still says False for .txt/.md: a format still proves nothing.
+        #
+        # Goals whose verb needs a reference answer -- summarise, translate, rewrite --
+        # do not match a relation and are refused here exactly as before.
+        from canonical.runtime import text_relation_verifier_v1 as _trv
+        if not _trv.admits(gap, suffix):
+            return {"closed": False, "suffix": suffix,
+                    "status": "OPEN__FORMAT_CARRIES_NO_EVIDENCE",
+                    "detail": ("%s is any text; nothing in the bytes says it is the "
+                               "thing the goal named, so no verifier here can close it"
+                               % suffix)}
 
     # A COMPOUND FORMAT NEEDS TWO STEPS, AND THIS CHANNEL RESETS BETWEEN THEM.
     #
@@ -1522,7 +1587,64 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
     for _p in programs_for_goal(gap):
         if _p not in progs:
             progs.append(_p)
-    is_goal = lambda snap: target in str(snap)
+    # A NAMED RELATION'S OWN PROGRAM LEADS THE SHORTLIST.
+    # Suffix selection cannot reach it ('.txt' -> text viewers) and manual scoring
+    # drops it below the cut, so a plan using it could never be tried. It is still
+    # only a CANDIDATE: the plan must run and its bytes must satisfy the relation.
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as _trv2
+        for _p in reversed(_trv2.canonical_programs(gap)):
+            if _p in installed_programs():
+                if _p in progs:
+                    progs.remove(_p)
+                progs.insert(0, _p)
+    except Exception:  # noqa: BLE001
+        pass
+    # THE SEARCH ORACLE MUST BE ABLE TO TELL A RIGHT ANSWER FROM A WRONG ONE.
+    #
+    # This was `lambda snap: target in str(snap)` -- "did the file NAME appear".
+    # Nothing looked at the bytes, so for every goal the name alone does not
+    # settle, the search could only ever produce a plan that lines 1795-1797 then
+    # correctly downgraded to OPEN__EFFECT_NOT_VERIFIED. Measured 2026-11-09 on
+    # four text-relation goals with learn=True: 183 s of search, four
+    # OPEN__EFFECT_NOT_VERIFIED, not one closure -- while the same goals closed in
+    # ~0 ms on a single-action path. The search was not weak at learning; its
+    # oracle could not see the thing being asked for.
+    #
+    # For a goal naming a relation the input defines (sort/reverse/unique/upper/
+    # lower/head/tail/strip), the oracle now reads the produced file and asks
+    # whether the relation holds -- and refuses when the fixture cannot
+    # discriminate, so "copy the input" does not pass.
+    _relation_goal = None
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as _trv
+        if _trv.admits(gap, suffix):
+            _relation_goal = _trv
+    except Exception:  # noqa: BLE001 - no verifier is the old behaviour, not a crash
+        _relation_goal = None
+
+    def is_goal(snap: Any) -> bool:
+        if target not in str(snap):
+            return False
+        if _relation_goal is None:
+            return True
+        try:
+            produced = None
+            for cand in pathlib.Path(str(snap)).rglob(target) if pathlib.Path(str(snap)).is_dir() else []:
+                produced = cand
+                break
+            if produced is None:
+                produced = pathlib.Path(str(snap)) if pathlib.Path(str(snap)).is_file() else None
+            if produced is None:
+                return True          # name-based fallback; _verify_plan still checks content
+            src = pathlib.Path(seed_file) if seed_file else None
+            if src is None or not src.is_file():
+                return True
+            ok, _why = _relation_goal.verdict(gap, src, produced)
+            return bool(ok)
+        except Exception:  # noqa: BLE001 - an unreadable snapshot is not a pass
+            return False
+
     gkey = "goal"
 
     _fingerprint: dict[str, Any] | None = None

@@ -365,11 +365,23 @@ def verifier_version() -> str:
     wrong.  Anything cached on a refusal has to die with the rules, and the only
     version number that cannot go stale is a hash of the table it describes.
     """
+    # The text-relation rules decide closure for .txt/.md goals, so they are part
+    # of the rules too. Leaving them out means a refusal learned under the old
+    # rules survives the arrival of new ones -- the exact staleness this function
+    # exists to prevent. Measured 2026-11-09: after the relation verifier was
+    # added, three goals kept returning OPEN__EFFECT_NOT_VERIFIED in 0.0 s from a
+    # cache written before it existed.
+    try:
+        from canonical.runtime import text_relation_verifier_v1 as _trv
+        _relations = sorted(n for n, _ in _trv._RELATIONS) + [_trv._NEEDS_ORACLE.pattern]
+    except Exception:  # noqa: BLE001 - absent module = no relation rules to hash
+        _relations = []
     blob = json.dumps({
         "round_trip": sorted(_ROUND_TRIP.items()),
         "containers": sorted((n, o, s.hex()) for n, o, s in _CONTAINER_SIGNS),
         "owner": {k: sorted(v) for k, v in _CONTAINER_OWNER.items()},
         "format_only": sorted(_FORMAT_ONLY),
+        "text_relations": _relations,
     }, sort_keys=True, default=str)
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:12]
 
