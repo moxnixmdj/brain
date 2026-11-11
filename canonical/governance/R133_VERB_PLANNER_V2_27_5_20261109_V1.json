@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_R133_VERB_PLANNER_V2_V1",
+  "date": "2026-11-09",
+  "same_sample_three_times": [
+    {"policy": "5 hand-coded sentence patterns", "reach": "5/40 = 12.5%"},
+    {"policy": "verb-decomposition planner v1 (17 verbs parsed, 5 implemented)", "reach": "9/40 = 22.5%"},
+    {"policy": "verb-decomposition planner v2 (+DRAG on shapes, +SCROLL_TO, +multi-slider SET_SLIDERS)", "reach": "11/40 = 27.5%"}
+  ],
+  "the_three_verbs_added_and_what_each_required": [
+    {"verb": "DRAG into a container", "task": "drag-shapes", "implementation": "enumerate svg shapes by tag, read the black container's rect, drag each shape's centre to the container centre", "result": "PASS"},
+    {"verb": "SCROLL_TO", "task": "scroll-text-2", "implementation": "set textarea.scrollTop to scrollHeight or 0 directly from the goal direction", "result": "PASS", "note": "no drag, no guessing: the widget exposes scrollTop, which is the closed-loop-free way to satisfy a scroll goal"},
+    {"verb": "SET_SLIDERS (multi)", "task": "use-slider-2", "implementation": "for each of N sliders, focus the handle and arrow-key to the target, reading #val-N each step", "result": "PASS"}
+  ],
+  "the_rate_this_establishes": "three verb implementations produced five additional successes on a 40-task sample: roughly 1.7 reach points per verb. This is the first quantitative estimate of the return on implementing a verb, and it turns 'make more verbs work' from a slogan into a project plan.",
+  "what_is_still_refused_and_why": [
+    {"task": "count-sides", "reason": "requires counting a rendered polygon - visual, not textual"},
+    {"task": "bisect-angle", "reason": "geometric construction"},
+    {"task": "email-inbox-forward-nl", "reason": "multi-step stateful flow"},
+    {"task": "terminal", "reason": "shell command composition"},
+    {"task": "drag-items-grid", "reason": "spatial description as target"},
+    {"task": "multi-orderings", "reason": "multi-field search composition"},
+    {"task": "resize-textarea", "reason": "corner-handle resize drag"},
+    {"task": "click-dialog", "reason": "operand is the glyph x; the control is a DIV labelled Close"}
+  ],
+  "the_arithmetic_of_the_remaining_gap": "8 refusals + 21 attempts that failed = 29 of 40 not passing even though 32 were attempted. Coverage is now the smaller problem (80%); competence within a verb is the larger one (11/32 = 34%). The project plan is therefore: implement remaining verbs (about 1.7 points each) and deepen the competence of the verbs that already parse.",
+  "what_is_NOT_claimed": ["that 27.5% generalises past this sample", "that one episode per task is a reliable estimate", "any GDPval figure"]
+}
