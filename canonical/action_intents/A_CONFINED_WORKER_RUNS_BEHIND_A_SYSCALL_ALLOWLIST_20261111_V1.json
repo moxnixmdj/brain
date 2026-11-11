@@ -304,10 +304,12 @@
       "https://rywalker.com/research/local-agent-sandboxes"
      ],
      "qualification_evidence": [
-      "https://rywalker.com/research/local-agent-sandboxes"
+      "On this host /sys/kernel/security/lsm lists landlock and landlock_create_ruleset(NULL, 0, LANDLOCK_CREATE_RULESET_VERSION) returns 2: ABI 2 carries file-system access rights only (no network rule before ABI 4) and no rule about which kernel calls a process may make",
+      "https://github.com/navikt/cplt"
      ],
      "qualification_evidence_classes": [
-      "BROAD_WEB_OR_COMMUNITY"
+      "DIRECT_PROBE",
+      "CODE_OR_PACKAGE_REGISTRY"
      ],
      "resolution": "NON_DOMINATING",
      "comparison": {
@@ -315,7 +317,7 @@
       "CAPABILITY_STRENGTH": "A_DIFFERENT_QUESTION__THE_LAUNCHER_ALREADY_ANSWERS_IT_WITH_A_PRIVATE_ROOT",
       "WALL_CLOCK": "SMALL",
       "INCREMENTAL_COST": "ZERO",
-      "RELIABILITY": "DEPENDS_ON_THE_KERNELS_LANDLOCK_VERSION",
+      "RELIABILITY": "THIS_HOST_HAS_LANDLOCK_ABI_2__FILE_RULES_ONLY",
       "VERIFIABILITY": "A_RULE_SET__COMPLEMENTARY_LATER"
      }
     }
