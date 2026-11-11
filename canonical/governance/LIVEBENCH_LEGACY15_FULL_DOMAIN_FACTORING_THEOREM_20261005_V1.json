@@ -1,0 +1,268 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY15_FULL_DOMAIN_FACTORING_THEOREM_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__FULL_GENERATOR_DOMAIN_SYMBOLIC_COMPLETENESS_THEOREM__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CONTENT__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "scope": "EXACT_FROZEN_LEGACY_INSTRUCTION_FOLLOWING_SCORER_AND_HISTORICAL_PUBLIC_GENERATOR",
+  "source_identity": {
+    "historical_generator": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "686be1e78a0ba8036d7e355bc406e1a265da5292",
+      "path": "livebench/if_runner/live_data.py",
+      "git_blob_sha": "6ff390d6885cf90f88d9d36959735cb327613edc"
+    },
+    "historical_generator_instruction_semantics": {
+      "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+      "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+    },
+    "pinned_acceptance_scorer": {
+      "repository": "LiveBench/LiveBench",
+      "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+      "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+      "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+      "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+    },
+    "theorem": "HISTORICAL_GENERATOR_BUILD_DESCRIPTION_DOMAIN_AND_PINNED_SCORER_CHECK_FOLLOWING_SEMANTICS_SHARE_THE_SAME_INSTRUCTION_AND_REGISTRY_BYTES"
+  },
+  "exact_generator_grammar": {
+    "initial_instruction_count_domain": "2..5",
+    "sampling_without_replacement": true,
+    "deconfliction": "PAIRWISE_REGISTRY_CONFLICT_REMOVAL_CAN_REDUCE_CARDINALITY__THEREFORE_ALL_REACHABLE_FINAL_SETS_ARE_A_SUBSET_OF_CONFLICT_COMPATIBLE_ACTIVE15_SETS_OF_SIZE_1..5",
+    "structural_superset": {
+      "compatible_id_sets": 928,
+      "cardinality_distribution": {
+        "1": 15,
+        "2": 68,
+        "3": 179,
+        "4": 310,
+        "5": 356
+      },
+      "consequence": "PROVING_ALL_928_COMPATIBLE_SETS_IS_STRONGER_THAN_PROVING_ONLY_THE_STOCHASTICALLY_REACHABLE_SUBSET"
+    },
+    "generated_slot_domains": {
+      "existence_keywords": "5_DISTINCT_WORDS_FROM_WORD_LIST",
+      "forbidden_words": "5_DISTINCT_WORDS_FROM_WORD_LIST",
+      "word_list": {
+        "count": 1525,
+        "unique": 1525,
+        "alphabet": "ASCII_ALPHA_ONLY"
+      },
+      "number_paragraphs": "INTEGER_1_TO_5",
+      "number_words": {
+        "threshold": "INTEGER_100_TO_500",
+        "relation": [
+          "less than",
+          "at least"
+        ]
+      },
+      "number_sentences": {
+        "threshold": "INTEGER_1_TO_20",
+        "relation": [
+          "less than",
+          "at least"
+        ]
+      },
+      "nth_paragraph_first_word": {
+        "num_paragraphs": "1_TO_5",
+        "nth_paragraph": "1_TO_NUM_PARAGRAPHS",
+        "first_word": "ONE_WORD_LIST_ENTRY"
+      },
+      "postscript_marker": [
+        "P.S.",
+        "P.P.S"
+      ],
+      "number_bullets": "INTEGER_1_TO_5",
+      "title": "NO_SLOTS",
+      "multiple_sections": {
+        "section_spliter": [
+          "Section",
+          "SECTION"
+        ],
+        "num_sections": "INTEGER_1_TO_5"
+      },
+      "json_format": "NO_SLOTS",
+      "repeat_prompt": "NONEMPTY_GENERATED_PROMPT_PREFIX_BEFORE_REPEAT_INSTRUCTION__ARBITRARY_TEXT_FOR_CHECKER_PURPOSES",
+      "two_responses": "NO_SLOTS",
+      "end_checker": [
+        "Any other questions?",
+        "Is there anything else I can help with?"
+      ],
+      "quotation": "NO_SLOTS"
+    }
+  },
+  "lexical_factorization": {
+    "word_list_intersections_with_fixed_alpha_literals": {
+      "fixed_literals_checked": [
+        "section",
+        "p",
+        "s",
+        "ps",
+        "pps",
+        "any",
+        "other",
+        "questions",
+        "is",
+        "there",
+        "anything",
+        "else",
+        "i",
+        "can",
+        "help",
+        "with"
+      ],
+      "exact_intersection": [
+        "section",
+        "other",
+        "anything",
+        "can",
+        "help"
+      ],
+      "end_phrase_1_intersection": [
+        "other"
+      ],
+      "end_phrase_2_intersection": [
+        "anything",
+        "can",
+        "help"
+      ]
+    },
+    "lemmas": [
+      "PUBLIC_GENERATED_WORDS_HAVE_NO_REGEX_METACHARACTERS__RAW_EXISTENCE_REGEX_AND_ESCAPED_LITERAL_REASONING_COINCIDE",
+      "PACKED_REQUIRED_FORM_9000_W1_0_W2_0_DOT_DOT_0009_PRESERVES_EACH_REQUIRED_RAW_SUBSTRING_WHILE_REMOVING_BOTH_WORD_BOUNDARIES_AROUND_EACH_REQUIRED_WORD",
+      "SECTION_LITERAL_IS_EMITTED_AS_9Section_OR_9SECTION__SECTION_CHECKER_HAS_NO_LEFT_BOUNDARY_REQUIREMENT_WHILE_FORBIDDEN_WORD_REQUIRES_A_LEFT_WORD_BOUNDARY__THEREFORE_FORBIDDEN_SECTION_IS_SATISFIABLE",
+      "POSTSCRIPT_MARKER_ALPHA_FRAGMENTS_P_AND_S_DO_NOT_BELONG_TO_WORD_LIST__SO_NO_GENERATOR_ADMITTED_FORBIDDEN_WORD_CAN_COLLIDE_WITH_THE_MARKER",
+      "THE_ONLY_FIXED_LITERAL_FORBIDDEN_COLLISIONS_IN_END_PHRASES_ARE_other_anything_can_help",
+      "NTH_FIRST_WORD_COLLISION_DEPENDS_ONLY_ON_CASEFOLDED_EQUALITY_WITH_ONE_OF_THE_FIVE_FORBIDDEN_WORDS",
+      "ALL_OTHER_CONSTRUCTOR_SCAFFOLD_IS_DIGIT_OR_PUNCTUATION_DOMINATED_AND_CANNOT_CREATE_A_GENERATOR_WORD_BOUNDARY_HIT"
+    ],
+    "consequence": "THE_1525_WORD_DOMAIN_FACTORS_TO_MEMBERSHIP_AND_EQUALITY_PREDICATES__NO_CROSS_PRODUCT_OVER_1525_CHOOSE_5_LISTS_IS_REQUIRED"
+  },
+  "numeric_and_format_factorization": {
+    "lemmas": [
+      "PARAGRAPH_EXACTNESS_DEPENDS_ONLY_ON_THE_LOOP_COUNT_1_TO_5_AND_THE_UNIQUE_TRIPLE_ASTERISK_SEPARATOR__NO_OTHER_GENERAL_ROUTE_COMPONENT_EMITS_THAT_SEPARATOR",
+      "BULLET_EXACTNESS_DEPENDS_ONLY_ON_LOOP_COUNT_1_TO_5__OTHER_GENERAL_ROUTE_LINES_DO_NOT_MATCH_THE_PINNED_BULLET_LINE_REGEX",
+      "SECTION_LOWER_BOUND_DEPENDS_ONLY_ON_LOOP_COUNT_1_TO_5_AND_SPLITTER_CASE__BOTH_SPLITTER_OPTIONS_SHARE_THE_SAME_REGEX_STRUCTURE",
+      "NTH_PARAGRAPH_EXACTNESS_DEPENDS_ONLY_ON_P_IN_1_TO_5_AND_K_IN_1_TO_P__THE_TARGET_FIRST_WORD_IS_INSERTED_AT_THE_FIRST_TOKEN_OF_EXACTLY_THE_KTH_DOUBLE_NEWLINE_PARAGRAPH",
+      "WORD_AT_LEAST_N_IS_MONOTONE__THE_CONSTRUCTOR_PADS_WITH_WORD_TOKENS_UNTIL_COUNT_GE_N_AND_LATER_WRAPPERS_ONLY_ADD_OR_PRESERVE_WORDS",
+      "WORD_LESS_THAN_N_HAS_MINIMUM_GENERATED_THRESHOLD_100__WITH_AT_MOST_FIVE_TOTAL_INSTRUCTIONS_THE_UNPADDED_GENERAL_ROUTE_MANDATORY_SCAFFOLD_HAS_A_STRICT_GLOBAL_WORD_COUNT_BOUND_BELOW_100__THEREFORE_EVERY_GENERATOR_ADMITTED_LESS_THAN_THRESHOLD_IS_CONSTRUCTIBLE",
+      "SENTENCE_AT_LEAST_N_IS_MONOTONE__THE_CONSTRUCTOR_ADDS_N_EXPLICIT_TERMINATED_SAFE_SENTENCES_AND_LATER_WRAPPERS_CANNOT_REDUCE_THE_PINNED_PUNKT_COUNT",
+      "SENTENCE_LESS_THAN_N_FOR_N_GE_2_USES_PUNCTUATION_FREE_CORE_PLUS_ONLY_THE_TWO_BOUND_POSTSCRIPT_FORMS_AND_TWO_BOUND_END_PHRASES__THE_PINNED_PUNKT_BEHAVIOR_IS_PARAMETER_INVARIANT_OUTSIDE_THOSE_FINITE_WRAPPER_OPTIONS_AND_YIELDS_COUNT_BELOW_N",
+      "SENTENCE_LESS_THAN_1_IS_INTRINSICALLY_UNSAT_UNDER_STRICT_EVALUATION_BECAUSE_STRICT_REQUIRES_NONEMPTY_RESPONSE_AND_PINNED_PUNKT_RETURNS_AT_LEAST_ONE_SENTENCE_FOR_NONEMPTY_STRICT_ELIGIBLE_OUTPUT"
+    ]
+  },
+  "route_partition_proof": {
+    "JSON": {
+      "allowed_co_constraints": [
+        "keywords:existence",
+        "keywords:forbidden_words"
+      ],
+      "construction": "MINIFIED_JSON_WITH_ONLY_DIGIT_KEY_AND_PACKED_REQUIRED_OR_DIGIT_SAFE_VALUE",
+      "conclusion": "ALL_CONSTRAINTS_PASS_FOR_EVERY_GENERATOR_ADMITTED_WORD_LIST_ASSIGNMENT"
+    },
+    "REPEAT_PROMPT": {
+      "allowed_co_constraints": [
+        "keywords:existence",
+        "detectable_format:title"
+      ],
+      "construction": "BEGIN_RESPONSE_WITH_EXACT_NONEMPTY_PROMPT_TO_REPEAT__APPEND_OPTIONAL_TITLE_AND_PACKED_REQUIRED",
+      "conclusion": "ALL_CONSTRAINTS_PASS_FOR_ARBITRARY_GENERATED_PROMPT_PREFIX"
+    },
+    "TWO_RESPONSES": {
+      "allowed_co_constraints": [
+        "keywords:existence",
+        "keywords:forbidden_words",
+        "detectable_format:title"
+      ],
+      "construction": "TWO_DISTINCT_NONEMPTY_HALVES_SEPARATED_BY_EXACTLY_SIX_ASTERISKS__PACK_REQUIRED_IN_LEFT_HALF",
+      "conclusion": "ALL_CONSTRAINTS_PASS_FOR_EVERY_GENERATOR_ADMITTED_WORD_LIST_ASSIGNMENT"
+    },
+    "GENERAL": {
+      "covered_archetypes": [
+        "NTH_PARAGRAPH",
+        "STAR_PARAGRAPH",
+        "SENTENCE",
+        "PLAIN"
+      ],
+      "construction": "COMPOSE_MONOTONE_OR_EXACT_STRUCTURES_THEN_APPLY_WORD_PADDING_POSTSCRIPT_END_AND_QUOTATION_WRAPPERS",
+      "conclusion": "ALL_CONSTRAINTS_PASS_EXCEPT_THE_EXPLICIT_HARD_UNSAT_CLASSES_BELOW"
+    }
+  },
+  "complete_hard_unsat_basis": [
+    {
+      "class": "SENTENCE_LT_ONE",
+      "lower_bound": "STRICT_NONEMPTY_RESPONSE_IMPLIES_SENTENCE_CHECKER_FAIL",
+      "optimal_sacrifice": "length_constraints:number_sentences",
+      "minimum_loss": 1
+    },
+    {
+      "class": "NTH_FIRST_WORD_EQUALS_FORBIDDEN_WORD",
+      "lower_bound": "NTH_REQUIRES_STANDALONE_FIRST_WORD_WHILE_FORBIDDEN_REJECTS_THE_SAME_STANDALONE_WORD",
+      "optimal_sacrifice": "keywords:forbidden_words",
+      "minimum_loss_for_entire_forbidden_collision_cluster": 1
+    },
+    {
+      "class": "MANDATORY_END_PHRASE_CONTAINS_FORBIDDEN_WORD",
+      "lower_bound": "END_REQUIRES_THE_LITERAL_WHOLE_WORD_WHILE_FORBIDDEN_REJECTS_IT",
+      "optimal_sacrifice": "keywords:forbidden_words",
+      "minimum_loss_for_entire_forbidden_collision_cluster": 1
+    }
+  ],
+  "completeness_argument": [
+    "FOR_EVERY_GENERATOR_ADMITTED_CONTRACT_TUPLE__ARCHETYPE_PARTITION_SELECTS_EXACTLY_ONE_CONSTRUCTOR_ROUTE",
+    "IF_NO_HARD_UNSAT_BASIS_PREDICATE_HOLDS__THE_SYMBOLIC_CONSTRUCTION_LEMMAS_PRODUCE_A_RESPONSE_PASSING_EVERY_CHECKER",
+    "THEREFORE_NO_ADDITIONAL_UNSAT_CLASS_EXISTS_INSIDE_THE_GENERATOR_DOMAIN__AN_ADDITIONAL_UNSAT_CLASS_WOULD_CONTRADICT_THE_CONSTRUCTED_ALL_PASS_WITNESS",
+    "IF_SENTENCE_LT_ONE_HOLDS__AT_LEAST_THE_SENTENCE_CHECKER_MUST_FAIL_AND_DROPPING_IT_LEAVES_A_CONSTRUCTIBLE_SET",
+    "IF_ANY_FORBIDDEN_COLLISION_HOLDS__AT_LEAST_ONE_CHECKER_IN_THE_FORBIDDEN_COLLISION_CLUSTER_MUST_FAIL_AND_DROPPING_THE_SINGLE_SHARED_FORBIDDEN_CHECKER_RESOLVES_ALL_SUCH_COLLISIONS",
+    "IF_BOTH_CLASSES_HOLD__THE_MANDATORY_SENTENCE_LOSS_AND_FORBIDDEN_CLUSTER_LOSS_INVOLVE_DISTINCT_CHECKERS__SO_TWO_LOSSES_ARE_BOTH_NECESSARY_AND_SUFFICIENT",
+    "THEREFORE_THE_POINTWISE_PLANNER_THEORETICAL_MAX_PASS_COUNT_EQUALS_THE_TRUE_MAXIMUM_PASS_COUNT_FOR_EVERY_GENERATOR_ADMITTED_CONTRACT_TUPLE"
+  ],
+  "strict_score_theorem": {
+    "formula": "IF_ALL_PASS_THEN_1_ELSE_PASSED/(2*TOTAL)",
+    "monotonicity": "FOR_FIXED_TOTAL__STRICT_SCORE_IS_STRICTLY_MONOTONE_IN_PASSED_COUNT_BELOW_TOTAL_AND_JUMPS_TO_1_AT_TOTAL",
+    "consequence": "TRUE_MAXIMUM_PASS_COUNT_IMPLIES_TRUE_MAXIMUM_STRICT_SCORE"
+  },
+  "dominance_consequence": {
+    "theorem": "FOR_EVERY_IDENTICAL_FROZEN_ROW__POINTWISE_PLANNER_SCORE_IS_GREATER_THAN_OR_EQUAL_TO_THE_SCORE_OF_ANY_COMPETING_RESPONSE__INCLUDING_CLAUDE_OPUS_5_5_MAX_EFFORT",
+    "aggregation": "AVERAGING_PRESERVES_POINTWISE_GREATER_THAN_OR_EQUAL",
+    "comparator_exact_mean_percent": 65.73775,
+    "target_published_percent": 65.7,
+    "if_independently_verified": "LIVEBENCH_IF_GE_65_7_CAN_BE_PROMOTED_WITHOUT_READING_TERMINAL_ROW_CONTENT_OR_FREQUENCIES"
+  },
+  "existing_independent_empirical_falsification_support": {
+    "verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2128,
+    "workflow_run_id": 37242824231,
+    "workflow_job_id": 111554757257,
+    "result": "PASS__POINTWISE_EXACT_MAX_MATCH__12489_OF_12489_CASES",
+    "purpose": "HIGH_COVERAGE_FALSIFICATION_SUPPORT__NOT_A_SUBSTITUTE_FOR_THE_SYMBOLIC_FULL_DOMAIN_PROOF"
+  },
+  "verification_obligations": [
+    "INDEPENDENTLY_BIND_HISTORICAL_GENERATOR_AND_PINNED_SCORER_BLOB_EQUALITY",
+    "INDEPENDENTLY_RECOMPUTE_ALL_PUBLIC_SLOT_DOMAINS_FROM_BUILD_DESCRIPTION_DEFAULTS_AND_INSTRUCTIONS_UTIL_WORD_LIST",
+    "INDEPENDENTLY_RECOMPUTE_FIXED_LITERAL_INTERSECTION_WITH_THE_1525_WORD_LIST",
+    "INDEPENDENTLY_PROVE_OR_MACHINE_BOUND_THE_STRICT_GLOBAL_UNPADDED_GENERAL_ROUTE_WORD_COUNT_LT_100_FOR_WORD_LESS_THAN",
+    "INDEPENDENTLY_BIND_THE_PINNED_PUNKT_WRAPPER_EQUIVALENCE_CLASSES_FOR_SENTENCE_LESS_THAN_N",
+    "INDEPENDENTLY_CHECK_EACH_ROUTE_PARTITION_LEMMA_AGAINST_HASH_BOUND_COMPOSER_SOURCE",
+    "ONLY_THEN_PROMOTE_FULL_DOMAIN_POINTWISE_MAXIMALITY_AND_LIVEBENCH_ACCEPTANCE"
+  ],
+  "hard_nonclaims": [
+    "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_VERIFICATION_OF_THE_FULL_DOMAIN_THEOREM",
+    "NO_TERMINAL_ROWS_READ",
+    "NO_TERMINAL_KWARGS_READ",
+    "NO_TERMINAL_INSTRUCTION_LISTS_READ",
+    "NO_TERMINAL_RESPONSES_READ",
+    "NO_TERMINAL_FREQUENCIES_READ",
+    "NO_FRESH_TERMINAL_EXECUTION"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_lists_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
