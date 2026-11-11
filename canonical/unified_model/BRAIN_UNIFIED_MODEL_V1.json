@@ -30770,7 +30770,7 @@
     "source_executable": null,
     "source_module": "rendered_page_act",
     "source_path": "canonical/runtime/bound_capabilities/rendered_page_act.py",
-    "source_sha256": "b7b05cbae5271b25ea42c0e167aab943c7f0e953e38a4efd8dd4d20f6e8ac5fd",
+    "source_sha256": "80bc3d8c095a8ab104ddbc34291e5b20b0fa6d09ecb2a65adc161959f6da5878",
     "source_type": null
    },
    "provides": [
@@ -31110,16 +31110,16 @@
   "engines": 26,
   "knowledge_documents": 312,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6796,
+  "research_index_records": 6804,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 461,
-  "source_index_modules": 1990
+  "source_index_modules": 1992
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c31e7b8176a03fb85e5938ce279be7cecf096ab948af32917b2146129c17996d"
+  "value": "ef106a1e8b0a1014bc7a99cdd9b12e299d67e510ea180efc7c1e5c42e842575e"
  },
  "engines": [
   {
@@ -32336,12 +32336,13 @@
     "defaulted_keys": {},
     "dispatch_ops": [
      "click",
+     "focus",
      "press",
      "select",
      "type"
     ],
     "dispatch_phrases": [],
-    "sha256": "b7b05cbae5271b25ea42c0e167aab943c7f0e953e38a4efd8dd4d20f6e8ac5fd"
+    "sha256": "80bc3d8c095a8ab104ddbc34291e5b20b0fa6d09ecb2a65adc161959f6da5878"
    },
    "canonical/runtime/bound_capabilities/software_analysis_diagnose_and_architect_v1.py": {
     "defaulted_keys": {},
@@ -68984,7 +68985,7 @@
   "included_source_count": 1110,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "aca52b5d460e9309b970cf130e0de932bdd99d27e6f1fb5938870e00bffa8574"
+  "source_tree_digest": "b88c68d4d71208ce6bf8819648ca5947b73772cb00fc10047be4efa12bbbbd88"
  },
  "research_index": [
   {
@@ -111198,6 +111199,179 @@
     "route": 1,
     "v1": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R101_THE_FIRST_UI_ACTION_THE_MODEL_OWNS_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R101_THE_FIRST_UI_ACTION_THE_MODEL_OWNS_20261109_V1.json",
+   "schema": "",
+   "sha256": "07b46871184402647d64673643137f81e3f1363f43e9717b5d5b7f800b6c5b6a",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "acting": 1,
+    "action": 2,
+    "choosing": 1,
+    "exact": 1,
+    "first": 2,
+    "model": 2,
+    "owns": 2,
+    "r101": 1,
+    "separation": 1,
+    "ui": 2,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R102_THE_ACTUATOR_MOVED_THE_CLASS_IT_WAS_BUILT_FOR_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R102_THE_ACTUATOR_MOVED_THE_CLASS_IT_WAS_BUILT_FOR_20261109_V1.json",
+   "schema": "",
+   "sha256": "8706990409ee6e51bb3ad47f0d99243cc06860bcaa0ba1931f2ca9854713d489",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "actuator": 2,
+    "built": 2,
+    "class": 2,
+    "moved": 3,
+    "one": 1,
+    "r102": 1,
+    "total": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R103_THE_UNIT_OF_LEARNING_IS_A_FUNCTION_BODY_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R103_THE_UNIT_OF_LEARNING_IS_A_FUNCTION_BODY_20261109_V1.json",
+   "schema": "",
+   "sha256": "a2dcf5ebf511ad797cd8895ff03d4ea281482b20d440f4ce4650f223f7429ffa",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "body": 2,
+    "file": 1,
+    "function": 2,
+    "instant": 1,
+    "learning": 2,
+    "not": 2,
+    "r103": 1,
+    "task": 1,
+    "unit": 2,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R107_THE_CROSS_ELEMENT_WALL_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R107_THE_CROSS_ELEMENT_WALL_20261109_V1.json",
+   "schema": "",
+   "sha256": "39d28ca304101d076e578f27a0eff8d49e4e5c87a8fbd604e8e44994fa44d7d1",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "action": 1,
+    "cross": 1,
+    "cross-element": 1,
+    "different": 1,
+    "element": 1,
+    "live": 1,
+    "nodes": 1,
+    "quantity": 1,
+    "r107": 1,
+    "v1": 1,
+    "wall": 2
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R112_ZERO_TESTS_IS_NOT_SUCCESS_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R112_ZERO_TESTS_IS_NOT_SUCCESS_20261109_V1.json",
+   "schema": "PROJECT_BRAIN_R112_ZERO_TESTS_IS_NOT_SUCCESS_V1",
+   "sha256": "72f383825883cbe1d5b852c39257a30a16ffb93d39587ebde30512ba06999b78",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "not": 1,
+    "r112": 1,
+    "success": 1,
+    "tests": 1,
+    "v1": 1,
+    "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R113_FIVE_INSTRUMENT_FAULTS_AND_6_OF_6_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R113_FIVE_INSTRUMENT_FAULTS_AND_6_OF_6_20261109_V1.json",
+   "schema": "PROJECT_BRAIN_R113_FIVE_INSTRUMENT_FAULTS_V1",
+   "sha256": "b1676910ddf0f1336d9fc3e1deb99afd7b1914f526f6ae7da3b8b152352bf141",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "faults": 1,
+    "five": 1,
+    "instrument": 1,
+    "r113": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R116_HONEST_PASS_RESTORED_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R116_HONEST_PASS_RESTORED_20261109_V1.json",
+   "schema": "PROJECT_BRAIN_R116_HONEST_PASS_RESTORED_V1",
+   "sha256": "f6f2d84b9bf8b3bc98b14521ef8fec28d9096688f4c4c85bfbc958f476cd98bf",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "honest": 1,
+    "pass": 1,
+    "r116": 1,
+    "restored": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-09",
+   "id": "research:canonical/governance/R117_THE_SUITE_COULD_NOT_RUN_20261109_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/governance/R117_THE_SUITE_COULD_NOT_RUN_20261109_V1.json",
+   "schema": "PROJECT_BRAIN_R117_SUITE_COULD_NOT_RUN_V1",
+   "sha256": "e0da0b05d807a6865017a31c9180c834cce257dae882e7bceafb2d3e7e8ce915",
+   "status": "",
+   "terms": {
+    "20261109": 1,
+    "not": 1,
+    "r117": 1,
+    "run": 1,
+    "suite": 1,
+    "v1": 1
    }
   },
   {
@@ -174276,7 +174450,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/PROOF_COMPRESSION_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "schema": "PROJECT_BRAIN_PROOF_COMPRESSION_ACTIVATION_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
-   "sha256": "da58aa3ef555a449896bb51ed6a6a60dc97a1414b64aa681dc20a382a23ceaa0",
+   "sha256": "fcae3a50089068edb04312a5cfba6d8c0f5978ab4ac0af361a737a2536f8a658",
    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_13_OF_13_ACTIVATION_BLOBS__FAIL_CLOSED_WIR",
    "terms": {
     "20261002": 1,
@@ -174298,7 +174472,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "schema": "PROJECT_BRAIN_PROOF_COMPRESSION_KERNELS_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
-   "sha256": "10cb23412cc2cf49abaa0416d40fe64be95cd2e09f426c4ddb710495539bcf8c",
+   "sha256": "c075df017d95f5c068947c1c92cd1ef4a86e55261c980e6e20d29d7f6453dbb4",
    "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_7_OF_7_KERNEL_BLOBS__ALL_DETERMINISTIC_TES",
    "terms": {
     "20261002": 1,
@@ -277456,7 +277630,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/predicate_induction_v1.py",
-   "sha256": "7afec99e5205ab5f5794d60285485e0df0f32ee0d7a0cc342d9206501f41f5a7",
+   "sha256": "062bfdaf20a6a85fdbc7d3828f56943f516404654eab3f0d3517ba5fc056b3ca",
    "summary": "Induce a PREDICATE from ONE demonstration. No model. No second example.",
    "symbol_count": 4,
    "symbols": [
@@ -291983,7 +292157,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/root3_subprocess_effect_class_registry_v2.py",
-   "sha256": "dc3608de49991ec72a4605a6870b8e3d07725ddb9e5bcdb599a18f14bb499e63",
+   "sha256": "7bffeb67215c9700515f81d14dff4cf47da0ef48462d3a0d801021eed4d8c38b",
    "summary": "Conservative effect-class totalizer over Root3 whole-runtime process universe V2.",
    "symbol_count": 6,
    "symbols": [
@@ -296077,6 +296251,42 @@
     "statereadchannel": 1,
     "v1": 1,
     "widget_of": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/state_step_oracle_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/state_step_oracle_v1.py",
+   "sha256": "902cf4feae0e5e3221369f7750d2a5d6fda43da2625f3928162d863fb0e68ad3",
+   "summary": "A per-step oracle that can see a control's STATE, and checks the step against the goal.",
+   "symbol_count": 5,
+   "symbols": [
+    "_moved",
+    "goal_names",
+    "judged_step",
+    "read_state",
+    "state_facts"
+   ],
+   "terms": {
+    "against": 1,
+    "checks": 1,
+    "control": 1,
+    "goal": 1,
+    "goal_names": 1,
+    "judged_step": 1,
+    "moved": 1,
+    "oracle": 2,
+    "per-step": 1,
+    "read_state": 1,
+    "see": 1,
+    "state": 2,
+    "state_facts": 1,
+    "step": 2,
+    "v1": 1
    }
   },
   {
@@ -305111,6 +305321,39 @@
     "say": 1,
     "v1": 1,
     "verifier": 2
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/verify_before_submit_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/verify_before_submit_v1.py",
+   "sha256": "a85e0663072d577434aaadc09f27c06f70c23c4aeaa2c995e2906a2962ac5a09",
+   "summary": "Verify a step BEFORE submitting: act, diff, undo if the effect is absent.",
+   "symbol_count": 3,
+   "symbols": [
+    "_is_terminal",
+    "step_effect",
+    "verified_step"
+   ],
+   "terms": {
+    "absent": 1,
+    "act": 1,
+    "before": 2,
+    "diff": 1,
+    "effect": 1,
+    "is_terminal": 1,
+    "step": 1,
+    "step_effect": 1,
+    "submit": 1,
+    "submitting": 1,
+    "undo": 1,
+    "v1": 1,
+    "verified_step": 1,
+    "verify": 2
    }
   },
   {

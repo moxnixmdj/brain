@@ -1,0 +1,11 @@
+{
+ "records": [
+  {
+   "capability_id": "bridge_enumeration_v1_fixture",
+   "artifact_sha256": "b3f2876d26fe35c057eb4943d25672140297d226bd75e91764a6da570834200f",
+   "verification_paths": [
+    "canonical/runtime/state/tmp_bridge_enumeration_eb81ad1b8d/fixtures/a.txt"
+   ]
+  }
+ ]
+}

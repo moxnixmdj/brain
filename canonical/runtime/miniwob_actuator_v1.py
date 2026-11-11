@@ -1259,7 +1259,34 @@ def v_expand(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         m = re.search(r'"([^"]+)"', goal) or re.search(r"\u201c([^\u201d]+)\u201d", goal)
         tok = m.group(1).strip() if m else None
     if not tok:
-        return "expand-no-token"
+        # NOT EVERY EXPAND NAMES A LINK. "Expand the section below and click submit."
+        # names no target at all -- the instruction is to open the section and press the
+        # page's own submit. My r171 rewrite returned expand-no-token here and broke a task
+        # that had been passing 5/5 before it.
+        #
+        # AND AN ACCORDION HAS MORE THAN ONE HEADER. jQuery UI wraps EVERY direct child in
+        # one: this page has the <h3> AND the <p> that holds #subbtn. Clicking "every
+        # collapsed header" opens the section then closes it again, and the loop ended on
+        # the closed state. jQuery UI reports openness with aria-expanded, which IS valid
+        # CSS -- read that, and stop as soon as the page says a panel is open.
+        # (Also: `:visible` is a jQuery extension, not CSS. querySelectorAll(':visible')
+        # THROWS, and a probe that swallows the throw prints null as if it were a state.)
+        opened = 0
+        for _ in range(6):
+            if act.ev("document.querySelectorAll('#area .ui-accordion-header[aria-expanded=true]"
+                      ",#area [role=tab][aria-expanded=true]').length"):
+                break
+            h = act.ev(
+                "(()=>{const e=document.querySelector('#area .ui-accordion-header');"
+                "if(!e)return null;const r=e.getBoundingClientRect();"
+                "return {cx:r.x+r.width/2,cy:r.y+r.height/2}})()")
+            if not h:
+                break
+            act.click(h["cx"], h["cy"])
+            time.sleep(0.35)
+            opened += 1
+        submit(act, required=False)
+        return "expand-all-submit:%d" % opened
 
     heads = act.ev(
         # the arrow body was a BARE expression, so `(()=>[...].map(...)()` invoked the

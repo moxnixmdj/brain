@@ -35,7 +35,7 @@
   },
   "source_bindings": [
     {
-      "git_blob_sha": "57be54e83f4fdee2f19a7b64d01da3acdce7d940",
+      "git_blob_sha": "80f18a4411472bad7733a36a0a92070ea40ffa72",
       "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json"
     },
     {

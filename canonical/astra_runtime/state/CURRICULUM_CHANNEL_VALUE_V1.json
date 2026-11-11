@@ -1,0 +1,18 @@
+{
+  "compose": {
+    "helped": 0,
+    "trials": 5
+  },
+  "explore": {
+    "helped": 6,
+    "trials": 15
+  },
+  "knowledge": {
+    "helped": 3,
+    "trials": 15
+  },
+  "solve": {
+    "helped": 0,
+    "trials": 3
+  }
+}

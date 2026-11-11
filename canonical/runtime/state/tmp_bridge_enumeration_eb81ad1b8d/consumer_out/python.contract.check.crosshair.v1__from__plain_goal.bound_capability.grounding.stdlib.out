@@ -1,0 +1,10 @@
+{
+  "model_dependency_count": 0,
+  "oracle": "crosshair",
+  "returncode": 1,
+  "schema": "PROJECT_BRAIN_CROSSHAIR_CONTRACT_ORACLE_V1",
+  "status": "ORACLE_INCONCLUSIVE",
+  "target": "/home/user/brain/canonical/runtime/state/tmp_bridge_enumeration_eb81ad1b8d/out/plain_goal.bound_capability.grounding.stdlib.txt",
+  "violation_count": 0,
+  "violations": []
+}
