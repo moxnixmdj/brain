@@ -1,0 +1,43 @@
+{
+  "round": "r172",
+  "date": "2026-11-09",
+  "claim": "Every remaining zero is a missing control SHAPE, not a missing capability. Repairing a shape converts its whole family from 0.00 to ~1.00 on trials the fix was never tuned on; per-task swings of 0.60 at 5 reps are sampling noise, not decay.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page-identity enforced per rep, one CDP browser (exclusive)",
+    "baseline_r171": {"passes": 220, "trials": 650, "rate": 0.3385},
+    "r172": {"passes": 251, "trials": 650, "rate": 0.3862},
+    "paired_per_task_diff_pp": 4.77,
+    "se_pp": 2.27,
+    "t": 2.10,
+    "tasks_up": 14,
+    "tasks_down": 9,
+    "tasks_unchanged": 107
+  },
+  "families_repaired_this_round": {
+    "choose-date": {"tasks": ["choose-date", "choose-date-easy", "choose-date-medium", "choose-date-nodelay"], "before": 0.0, "after": 1.0, "trials": 24},
+    "click-pie": {"tasks": ["click-pie", "click-pie-nodelay"], "before": 0.0, "after": 0.95, "trials": 20},
+    "click-collapsible": {"tasks": ["click-collapsible", "click-collapsible-nodelay"], "before": 0.0, "after": 1.0, "trials": 16}
+  },
+  "regression_check": {
+    "method": "every task that moved DOWN was re-measured at 10 reps",
+    "results": {
+      "click-collapsible-2": {"r171": 0.40, "r172": 0.00, "rerun_10": 0.20},
+      "click-menu": {"r171": 0.80, "r172": 0.40, "rerun_10": 0.60},
+      "drag-items": {"r171": 0.40, "r172": 0.00, "rerun_10": 0.20},
+      "click-test-transfer": {"r171": 1.00, "r172": 0.60, "rerun_10": 0.80},
+      "click-checkboxes-soft": {"r171": 0.80, "r172": 0.20, "rerun_10": 0.50}
+    },
+    "verdict": "NO REGRESSION. Every rerun lands inside the interval between the two measurements. A 0.60 per-task move at 5 reps is 3 trials."
+  },
+  "mechanisms_found": [
+    "click-collapsible: a jQuery UI accordion wraps EVERY direct child as a header, so the page has the <h3> AND the <p> holding #subbtn. Clicking 'every collapsed header' opens then closes; the loop ended shut. Read aria-expanded and stop when a panel is open.",
+    "click-pie: the wheelnav starts COLLAPSED behind a spreader path (d='M78,78L78,78', zero length) and is STILL ANIMATING when visible (path length 22 -> 135 -> 212). getPointAtLength walks the sector OUTLINE, so elementFromPoint at 50% returns the NEIGHBOURING slice (261/400 sampled points hit-tested to slices 5 and 6). Fix: sweep the SVG bounds with elementFromPoint and take the centroid of the points the PAGE says belong to the slice.",
+    "choose-date: #datepicker is readOnly and the page scores an EXACT string compare of its value. The picker opens on a real mouse press, NOT element.click(). The grid opens on a month that is often not the one asked for; other-month cells are ui-state-disabled with no <a>."
+  ],
+  "instrument_bugs_found": [
+    "':visible' is a jQuery extension, not CSS: querySelectorAll(':visible') THROWS, and the probe printed null as if it were a state.",
+    "The action string was not truncated because it was empty -- 'expand-all-submit:' is exactly the 18 characters the runner printed. My own printout hid the count.",
+    "/tmp/r171_full130.json stores passes under 'passes', not 'ok'. A wrong accessor reported 130/130 zeros including tasks measured at 8/8."
+  ],
+  "next": "Shape census over all 130 pages, repair one family per shape, then a learning-vs-frozen A/B on held-out tasks, which the loop has never run."
+}
