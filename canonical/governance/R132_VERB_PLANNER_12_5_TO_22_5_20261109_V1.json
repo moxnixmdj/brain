@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_R132_VERB_PLANNER_V1",
+  "date": "2026-11-09",
+  "built": "canonical/runtime/goal_verb_decomposition_v1.py -- parses a goal sentence into (VERB, operand) instead of matching whole sentence patterns. 17 verbs; returns UNSUPPORTED_VERB with the goal text rather than falling through to a generic click.",
+  "why_this_was_the_right_build": "r130/r131 showed the dominant failure was that 28 of 40 tasks were never attempted. Reading all 130 task files showed the goals are not infinitely varied: ~45 sentence patterns reduce to ~16 verbs times a handful of operand kinds. Hard-coding sentence patterns gives coverage proportional to how many sentences someone wrote; parsing verbs gives coverage proportional to how many verbs the environment offers.",
+  "measurement_on_the_same_seeded_random_40": {
+    "before": {"reach": "5/40 = 12.5%", "attempted": "12/40", "success_given_attempt": "5/12"},
+    "after":  {"reach": "9/40 = 22.5%", "attempted": "32/40", "success_given_attempt": "9/32"},
+    "decomposition_coverage_before": "30% (5 hand-written sentence shapes)",
+    "decomposition_coverage_after": "80% (32/40 goals parse to a known verb)",
+    "delta": "+7 successes, +20 attempted tasks"
+  },
+  "the_honest_reading_of_success_given_attempt_DROPPING_from_42pct_to_28pct": "this is the correct behaviour of an honest planner, not a regression. The planner now attempts tasks for which it recognises the VERB but has no working implementation of that verb (DRAG on non-box widgets, DRAW, MOVE, SCROLL_TO, SET_SLIDERS on non-slider widgets). Those are counted as attempts and as failures. The previous 5/12 was measured only on the tasks whose whole sentence had been hand-coded, which is a tuned denominator.",
+  "the_two_factors_kept_separate": {
+    "coverage": "80% -- does the goal parse",
+    "competence": "9/32 = 28% -- when it parses, does the implemented verb work",
+    "product": "0.225",
+    "consequence": "the next gain must come from implementing verbs (competence), not from parsing more sentences (coverage), because coverage is already 80%"
+  },
+  "what_remains_refused_and_why_that_is_correct": [
+    {"task": "count-sides", "goal": "Press the button that correctly denotes how many sides the shape has", "reason": "requires counting a rendered shape; the count is visual, not textual"},
+    {"task": "bisect-angle", "reason": "requires geometric construction"},
+    {"task": "email-inbox-forward-nl", "reason": "requires multi-step state (open message, forward, choose recipient)"},
+    {"task": "terminal", "reason": "requires shell command composition"},
+    {"task": "click-dialog", "goal": "Close the dialog box by clicking the \"x\".", "reason": "the control is a DIV labelled 'Close'; the verb parser sees CLICK with operand x and the operand does not exist. This is a known operand-modality gap, not a parsing gap"},
+    {"task": "drag-items-grid", "reason": "drag target identified by spatial description (top right)"},
+    {"task": "multi-orderings", "reason": "requires multi-field search composition"},
+    {"task": "resize-textarea", "reason": "requires a resize drag on a corner handle"}
+  ],
+  "what_is_NOT_claimed": ["that 22.5% is the final reach -- it was measured once, one episode per task, on one 40-task sample", "that this generalises beyond MiniWob", "any GDPval figure"]
+}
