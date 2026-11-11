@@ -190,3 +190,4 @@ jobs:
 
 # carrier: main-only-self-hosted-linux-x64-brain-regression-latest-pending-plus-persistent-env-20261011-v8
 # receipt: log-and-check-summary-authoritative-for-canonicalization__artifact-storage-not-required
+# verification-probe: full-current-main-stable-pr-20261011-v1
