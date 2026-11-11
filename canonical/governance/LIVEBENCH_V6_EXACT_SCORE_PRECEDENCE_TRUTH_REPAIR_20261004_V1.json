@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_V6_EXACT_SCORE_PRECEDENCE_TRUTH_REPAIR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE_TRUTH_REPAIR__EXACT_EXECUTION_RECEIPTS_OVERRIDE_GENERIC_LOWER_BOUND_ABSTRACTION__RESTORE_V6_FORCED_FAIL__INDEPENDENT_META_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "conflict": {
+    "generic_repair": {
+      "path": "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+      "git_blob_sha": "359f740191e528f16b30ed6b893dad5caee5698d",
+      "valid_rule": "A_PROVED_SCORE_LOWER_BOUND_DOES_NOT_BY_ITSELF_PROVE_A_MATCHING_SCORE_UPPER_BOUND",
+      "scope": "GENERIC_CASES_WHERE_ONLY_LOWER_BOUND_EVIDENCE_EXISTS"
+    },
+    "exact_reconciliation": {
+      "path": "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_POST_PARTIAL_BOUND_REPAIR_RECONCILIATION_V1.json",
+      "git_blob_sha": "9dd848a76ad4edd5410c25c0c0bc1ca47b8f9226",
+      "finding": "THE_72_V6_CASES_HAVE_ACTUAL_FROZEN_SCORER_RESULTS_SCORE_0_0_WITH_SCORING_ERROR_NULL__NOT_MERELY_LOWER_BOUND_ZERO"
+    },
+    "unsound_later_revocation": {
+      "path": "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+      "git_blob_sha": "bbbe29ec26b1f96ba5538ca159f899e316b167e7",
+      "invalid_premise": "THE_72_CASE_CERTIFICATES_SUPPLIED_ONLY_PROVED_SCORE_LOWER_BOUNDS_OF_ZERO",
+      "disposition": "FALSE_FOR_THE_BOUND_V6_EXECUTION_RECEIPTS"
+    }
+  },
+  "direct_independent_execution_evidence": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "commit": "f3c439f329c7b481a8448a0619e7696111e05ecc",
+    "verification_script": "verify_livebench_v6_forced_fail_20261004.py",
+    "reconciliation_path": "subject/livebench_v6_forced_fail_20261004/reconciliation.json",
+    "reconciliation_git_blob_sha": "b1e14f11d97673a499f2d9a5e2c708d9aba969fb",
+    "execution_log_path": "subject/livebench_v6_forced_fail_20261004/execution.log",
+    "execution_log_git_blob_sha": "6c9c89cd2f7e977405017cb5ddfa8033126f4bf2",
+    "verification_assertions": [
+      "len(cases)==72",
+      "len(set(question_id))==72",
+      "all(float(case.score)==0.0)",
+      "all(case.scoring_error is None)",
+      "all(case.response_sha256==SHA256_EMPTY_BYTES)",
+      "observed_score_mass==0.0",
+      "remaining==128",
+      "full_population_upper_percent==64.0",
+      "64.0 < 65.7",
+      "terminal.status==FAIL_FORCED"
+    ]
+  },
+  "precedence_theorem": {
+    "rule": "WHEN_THE_SAME_CASE_HAS_AN_ACTUAL_EXECUTED_SCORER_RESULT_BOUND_TO_CONTENT_ADDRESSED_EXECUTION_EVIDENCE__THAT_OBSERVED_SCORE_IS_BOTH_A_LOWER_AND_UPPER_BOUND_FOR_THAT_EXECUTION AND DOMINATES A GENERIC LOWER_BOUND_ONLY ABSTRACTION",
+    "proof": [
+      "For each of the 72 V6 replay cases the independent execution log records the actual frozen scorer output score=0.0 and scoring_error=null.",
+      "An actual deterministic observed scalar score s for a completed scorer invocation implies exact case score interval [s,s] for that invocation.",
+      "Therefore every one of those 72 case upper bounds is 0.0, not the generic default 1.0 used when no upper-bound evidence exists.",
+      "The remaining 128 cases are conservatively upper-bounded by 1.0 each.",
+      "Maximum total score mass is therefore 72*0 + 128*1 = 128.",
+      "Maximum population mean is 128/200 = 0.64 = 64.0 percent.",
+      "64.0 percent is below both the historical display threshold 65.7 and the current exact comparator mean 65.73775.",
+      "Therefore the frozen V6 candidate is mathematically incapable of satisfying the LiveBench predicate without any case 73+ exposure."
+    ],
+    "generic_bug_fix_preserved": true,
+    "generic_default_upper_bound_when_only_lower_bound_known": 1.0,
+    "exact_observation_override": "CASE_UPPER_BOUND_EQUALS_ACTUAL_OBSERVED_SCORE_FOR_THE_BOUND_COMPLETED_SCORER_INVOCATION"
+  },
+  "corrected_scheduler_state": {
+    "frozen_v6_candidate": "PROVED_FALSE",
+    "further_case_73_plus_exposure_for_v6": false,
+    "livebench_measurement_uncertainty_for_v6": "RESOLVED_NEGATIVELY",
+    "livebench_local_root_class_for_v6": "ROOT1_POSITIVE_OPERATIVE_GAP__EXACT_FROZEN_CANDIDATE_ONLY",
+    "root1_positive_gap_count_projection": 1,
+    "root2_only_count_projection": 15,
+    "root3_only_count_projection": 7,
+    "root2_and_root3_count_projection": 3,
+    "root1_only": ["LIVEBENCH_IF_GE_65_7"],
+    "repair_target": "PRECOMMITTED_SUCCESSOR_GENERAL_SYSTEM_CONFIGURATION_OR_CAPABILITY__NO_UNEXPOSED_TERMINAL_TUNING"
+  },
+  "supersession": {
+    "supersedes_for_current_scheduling": [
+      "canonical/governance/LIVEBENCH_FORCED_FAIL_ROOT1_REVOCATION_20261004_V1.json",
+      "ANY_DERIVED_ROOT2_REBIND_WHOSE_ONLY_DELTA_IS_THE_FALSE_PREMISE_THAT_V6_CASE_SCORES_WERE_LOWER_BOUND_ONLY"
+    ],
+    "preserves": [
+      "canonical/governance/LIVEBENCH_PARTIAL_CREDIT_UPPER_BOUND_TRUTH_REPAIR_20261004_V1.json",
+      "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_POST_PARTIAL_BOUND_REPAIR_RECONCILIATION_V1.json",
+      "canonical/governance/LIVEBENCH_V6_FORCED_FAIL_BINDING_V1.json",
+      "canonical/governance/LIVEBENCH_LOCAL_ROOT_RECLASSIFICATION_V1.json",
+      "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json LIVEBENCH_ROOT1_PROJECTION",
+      "VERIFIED_200_LEGACY_IFEVAL_0_MODERN_IFBENCH_SCORER_SCOPE"
+    ]
+  },
+  "next_minimum_action": {
+    "target": "SUCCESSOR_THAT_PRODUCES_NONEMPTY_EXACT_LEGACY_IFEVAL_CONSTRAINT_WITNESSES_UNDER_THE_VERIFIED_25_TYPE_SCORER_SURFACE",
+    "why": "THE_FAILED_V6_PREFIX IS ALREADY DECIDED; MORE V6 MEASUREMENT HAS ZERO DECISION VALUE. THE LOAD_BEARING DELTA MUST CHANGE THE SUCCESSOR RESPONSE-PRODUCTION PATH.",
+    "minimum_preterminal_proof_sequence": [
+      "COMPLETE_VISIBLE_PARAMETER_RECOVERY_OR_FAIL_CLOSED_ROUTE_FOR_LEGACY_25",
+      "BUILD_DETERMINISTIC_LEGACY_CONSTRAINT_WITNESS_AND_COMPOSITION_SOLVER",
+      "EXACTLY_POSTVALIDATE_AGAINST_PINNED_PUBLIC_LEGACY_CHECKER_BYTES",
+      "FREEZE_SUCCESSOR_COMMIT_AND_SCOPE",
+      "REPLAY_ONLY_ALREADY_EXPOSED_72_CASES_UNDER_VALID ONE_USE AUTHORITY TO MEASURE CAUSAL DELTA",
+      "ONLY_CONSIDER_NEW_TERMINAL_CASES_AFTER_SUCCESSOR_PRECOMMIT_AND_SEPARATE_FRESH_REALITY_AUTHORITY"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_A_SUCCESSOR_ALREADY_PASSES",
+    "NO_GENERAL_SEMANTIC_CAPABILITY_CREDIT_FROM_THE_LIVEBENCH_SCORE_ONLY_LANE",
+    "NO_CASE_73_PLUS_CONTENT_READ",
+    "NO_NEW_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_executed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  },
+  "independent_meta_verification_required": true
+}
