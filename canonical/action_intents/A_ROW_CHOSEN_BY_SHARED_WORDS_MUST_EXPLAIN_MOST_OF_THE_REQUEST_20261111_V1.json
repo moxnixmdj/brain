@@ -400,7 +400,11 @@
     "DELETE",
     "BYPASS",
     "REUSE",
-    "ADAPT"
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
    ],
    "routes_ranked": [
     "ADAPT_THE_WORD_CHECK_INTO_A_MAJORITY_CHECK",
