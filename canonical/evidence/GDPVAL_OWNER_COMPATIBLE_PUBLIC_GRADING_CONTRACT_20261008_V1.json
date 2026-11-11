@@ -1,0 +1,89 @@
+{
+  "schema": "PROJECT_BRAIN_GDPVAL_OWNER_COMPATIBLE_PUBLIC_GRADING_CONTRACT_20261008_V1",
+  "date": "2026-10-08",
+  "status": "FRESH_PUBLIC_OWNER_CONTRACT_BOUND__PRESENTATION_AND_COMPARISON_SEMANTICS_BOUND__EXACT_PAIRWISE_PROMPT_AND_PREFERENCE_RELATION_OPEN__ZERO_CREDIT",
+  "evaluation": "GDPval-AA v2.1",
+  "sources": [
+    {
+      "authority": "Artificial Analysis",
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "retrieved": "2026-10-08",
+      "role": "CURRENT GDPVAL-AA V2.1 OWNER METHODOLOGY"
+    },
+    {
+      "authority": "OpenAI",
+      "url": "https://evals.openai.com/gdpval/grading",
+      "retrieved": "2026-10-08",
+      "role": "UPSTREAM GDPVAL GRADING BOUNDARY"
+    },
+    {
+      "authority": "OpenAI",
+      "url": "https://openai.com/index/gdpval/",
+      "retrieved": "2026-10-08",
+      "role": "UPSTREAM GDPVAL HUMAN-EXPERT GRADING DESCRIPTION"
+    }
+  ],
+  "bound_owner_contract": {
+    "task_count": 220,
+    "submission_type": "AGENTIC TASK COMPLETION WITH FILE OUTPUTS",
+    "pairwise": true,
+    "blind": true,
+    "same_task_for_both_submissions": true,
+    "random_anonymization_as_submission_a_b": true,
+    "judge_panel": [
+      "GPT-5.6 Sol medium reasoning",
+      "Gemini 3.8 Flash high reasoning",
+      "Claude Opus 5 high effort"
+    ],
+    "one_judge_sampled_per_comparison": true,
+    "judge_context": {
+      "initial_task": true,
+      "all_reference_files": true,
+      "all_submission_files": true
+    },
+    "document_presentation": {
+      "pdf_docx_pptx_xlsx_and_similar": "PARSED_AS_TEXT_AND_IMAGES",
+      "zip": "EXTRACT_EACH_FILE_AND_PARSE_SEPARATELY",
+      "audio_video": "ROUTED_TO_GEMINI_3_8_FLASH_NATIVE_MODALITY"
+    },
+    "grading_question_semantics": "WHICH_OF_SUBMISSION_A_AND_B_BETTER_RESPONDS_TO_THE_TASK",
+    "aggregation": "CROWD_BT_MAXIMUM_LIKELIHOOD",
+    "anchor": "DEEPSEEK_V4_1_FLASH_MAX_AT_1600",
+    "ties": "COUNT_AS_HALF_WINS_FOR_EACH_SIDE"
+  },
+  "upstream_authoritative_boundary": {
+    "standard": "PAIRWISE_HUMAN_EXPERT_PREFERENCES",
+    "rubric_llm_grading": "ROUGH_ESTIMATE_NOT_AUTHORITATIVE_STANDARD",
+    "human_experts": "SAME OCCUPATIONS AS THE TASKS",
+    "human_pairwise_inputs": "REQUEST_REFERENCE_FILES_AND_UNLABELED_WORK_DELIVERABLES",
+    "human_pairwise_output_classes": [
+      "BETTER",
+      "AS_GOOD_AS",
+      "WORSE"
+    ]
+  },
+  "logical_consequences": [
+    "GENERAL CROWD_BT METADATA DOES_NOT_IDENTIFY_THE_OWNER_PAIRWISE_PREFERENCE_RELATION",
+    "PUBLIC RUBRIC SUCCESS ALONE DOES_NOT_IMPLY_OWNER_PAIRWISE PREFERENCE DOMINANCE",
+    "THE OWNER RELATION IS CONSTRAINED TO A BLIND SAME-TASK COMPARISON OVER THE BOUND TASK REFERENCE AND SUBMISSION PRESENTATION",
+    "A STRONGER CERTIFICATE MAY BYPASS THE EXACT OWNER PROMPT ONLY IF IT PROVES DOMINANCE FOR EVERY OWNER-COMPATIBLE RELATION IN A SOUND OVERAPPROXIMATION"
+  ],
+  "still_open": [
+    "EXACT_ARTIFICIAL_ANALYSIS_PAIRWISE_GRADING_PROMPT",
+    "PROOF_THAT_THE_10453_PUBLIC_RUBRIC_CRITERIA_ARE_EXTENSIONALLY COMPLETE_FOR_ARTIFICIAL_ANALYSIS_PAIRWISE PREFERENCE",
+    "COMPLETE CURRENT OWNER PAIRWISE GRAPH",
+    "FREE CALLABLE OWNER GRADER ROUTE",
+    "SOUND OWNER-COMPATIBLE PREFERENCE ENVELOPE",
+    "220_OF_220 TASKWISE NECESSARY-PREFERENCE CERTIFICATES"
+  ],
+  "hard_nonclaims": [
+    "NO CLAIM THE PUBLIC OWNER CONTRACT DETERMINES A UNIQUE PREFERENCE RELATION",
+    "NO CLAIM THE RUBRIC CRITERIA EXHAUST SUBJECTIVE AND OBJECTIVE PAIRWISE CONSIDERATIONS",
+    "NO CLAIM OWNER PROMPT WORDING IS IRRELEVANT BEFORE ENVELOPE SOUNDNESS IS PROVED",
+    "NO GDPVAL ACCEPTANCE OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
