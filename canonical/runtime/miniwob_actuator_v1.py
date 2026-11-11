@@ -430,9 +430,109 @@ def v_scroll(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
                             "" if settled else "-short")
 
 
+_ARTICLES = {"the", "a", "an", "this", "that", "its", "of", "value", "text", "field"}
+
+
+def _table_lookup(act: Actuator, goal: str) -> str | None:
+    """When the goal names a LABEL, the value is in the page's own table.
+
+    Measured 2026-11-09 on `read-table`: the page is a two-column table
+    (First name -> Allys, Last name -> Hooper, Color -> olive, ...) and the goal is
+    "Enter the value of First name into the text field". The decomposer produced
+    ENTER with token='the' -- the article -- so the agent typed "the" into the box.
+    The label is right there in the sentence and the value is right there in the page.
+
+    The lookup is by the sentence's own words against the table's first column, and it
+    returns nothing when no row matches, so a page without a table is unaffected.
+    """
+    rows = act.ev("(()=>[...document.querySelectorAll('tr')]"
+                  ".map(r=>[...r.children].map(c=>c.innerText.trim())))()") or []
+    if not rows:
+        return None
+    g = (goal or "").lower()
+    best = None
+    for cells in rows:
+        if len(cells) < 2 or not cells[0]:
+            continue
+        label = cells[0].strip().lower()
+        if label and label in g:
+            if best is None or len(label) > len(best[0]):
+                best = (label, cells[1].strip())
+    if best:
+        return best[1]
+    # a table whose labels the sentence does not quote: use the sentence's own noun phrase
+    m = re.search(r"(?:value\s+of|the)\s+(.+?)\s+(?:into|in|to)\s+the\s+(?:text\s+)?(?:field|box|input)",
+                  (goal or ""), re.I)
+    if m:
+        want = m.group(1).strip().lower()
+        for cells in rows:
+            if len(cells) >= 2 and cells[0].strip().lower() == want:
+                return cells[1].strip()
+    return None
+
+
 def v_type(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     op = plan.get("operand") or {}
     tok = op.get("token")
+    # AN ARTICLE IS NOT A VALUE.
+    #
+    # token='the' means the decomposer found the verb but not the reference. Before
+    # typing a word that is plainly not the answer, read the page: a two-column table
+    # answers most of these outright.
+    # A FORM THAT ASKS FOR EVERY LABEL IS FILLED LABEL BY LABEL.
+    #
+    # Measured 2026-11-09 on `read-table-2`: "Enter the value that corresponds with each
+    # label into the form" -- the page shows a two-column table (Color => aqua,
+    # Year of Birth => 1993, ...) and a form with a labelled box per requested label.
+    # There is no single token to type; every box takes the value of the label beside it.
+    # Each box is read together with the nearest label text, the table answers that label,
+    # and the box receives the answer. A box whose label has no row is left alone.
+    if re.search(r"each label|all (?:the )?label", (goal or ""), re.I):
+        _rows = act.ev("(()=>[...document.querySelectorAll('tr')]"
+                       ".map(r=>[...r.children].map(c=>c.innerText.trim())))()") or []
+        _tbl = {}
+        for _cells in _rows:
+            if len(_cells) >= 2 and _cells[0]:
+                _tbl[_cells[0].strip().rstrip(":").lower()] = _cells[1].strip()
+        _boxes = act.ev(
+            "(()=>{const out=[];"
+            "for(const e of document.querySelectorAll('#form input[type=text],#form textarea')){"
+            "const r=e.getBoundingClientRect();if(r.width<=0||r.height<=0)continue;"
+            "let lab='';let p=e.parentElement;"
+            "for(let i=0;i<3&&p;i++){const l=p.querySelector('.label,label,td');"
+            "if(l&&l!==e){lab=l.innerText.trim();break}p=p.parentElement}"
+            "out.push({id:e.id||'',lab:lab.replace(/:$/,'').toLowerCase(),"
+            "cx:r.x+r.width/2,cy:r.y+r.height/2})}return out})()") or []
+        if _tbl and _boxes:
+            _n = 0
+            for _b in _boxes:
+                _v = None
+                if _b["lab"] and _b["lab"] in _tbl:
+                    _v = _tbl[_b["lab"]]
+                else:
+                    for _k, _val in _tbl.items():
+                        if _b["lab"] and (_b["lab"] in _k or _k in _b["lab"]):
+                            _v = _val
+                            break
+                if not _v:
+                    continue
+                _sel = ("document.getElementById(%s)" % json.dumps(_b["id"])) \
+                    if _b["id"] else \
+                    ("document.elementFromPoint(%f,%f)" % (_b["cx"], _b["cy"]))
+                act.ev("(()=>{const e=%s;if(!e)return;e.focus();e.value='';"
+                       "e.value=%s;e.dispatchEvent(new Event('input',{bubbles:true}));"
+                       "e.dispatchEvent(new Event('change',{bubbles:true}))})()"
+                       % (_sel, json.dumps(_v)))
+                _n += 1
+            if _n:
+                submit(act, required=False)
+                return "type-labels:%d" % _n
+    if not tok or str(tok).strip().lower() in _ARTICLES or len(str(tok).strip()) < 3:
+        _from_table = _table_lookup(act, goal)
+        if _from_table:
+            op = dict(op)
+            op["token"] = _from_table
+            tok = _from_table
     sel = ("textarea" if op.get("field") == "textarea"
            else "input[type=text],input:not([type]),textarea")
     if tok and act.click_el("document.querySelector('%s')" % sel):
