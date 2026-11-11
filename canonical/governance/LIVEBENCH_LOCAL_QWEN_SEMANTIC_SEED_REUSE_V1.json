@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LOCAL_QWEN_SEMANTIC_SEED_REUSE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__EXISTING_PINNED_LEARNED_STATE_REUSED_AS_GENERIC_LOCAL_SEMANTIC_SEED_PRODUCER__ZERO_TERMINAL_EXPOSURE__INDEPENDENT_LIVE_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "root1_gap": {
+    "frontier": "canonical/governance/LIVEBENCH_ROOT1_SEMANTIC_SEED_REPAIR_FRONTIER_V1.json",
+    "required_layer": "GENERAL_SEMANTIC_SEED_PRODUCTION",
+    "required_effects": [
+      "text.paraphrase.semantic_preserving",
+      "text.simplify.semantic_preserving",
+      "text.summarize.faithful",
+      "text.story.generate_instruction_grounded"
+    ],
+    "current_verified_bound_semantic_producer_count_at_frontier": 0
+  },
+  "breakthrough": {
+    "claim": "THE_BRAIN_ALREADY_OWNS_A_CONTENT_ADDRESSED_ZERO_INCREMENTAL_SPEND_LOCAL_LEARNED_STATE_WITH_VERIFIED_GENERAL_LANGUAGE_PROPOSAL BEHAVIOR; ROOT1 DOES_NOT_REQUIRE_NEW_TRAINING_OR_A_NEW_MODEL_ACQUISITION_BEFORE_TESTING_SEMANTIC_SEED_SUFFICIENCY.",
+    "reuse_not_invention": true,
+    "new_model_identity": false,
+    "new_training_required_for_this_candidate": false,
+    "new_terminal_data_required": false,
+    "adapter_role": "EXPOSE_EXISTING_PINNED_LOCAL_QWEN_CHAT_COMPLETION_AS_AN_UNTRUSTED_GENERIC_SEMANTIC_TEXT_PRODUCER",
+    "hard_nonclaim": "EXISTENCE_OF_THE_ROUTE_DOES_NOT_ESTABLISH_OPUS_5_5_EQUIVALENCE_OR_LIVEBENCH_THRESHOLD SUFFICIENCY."
+  },
+  "pinned_learned_state": {
+    "model_alias": "brain-qwen3.5-9b",
+    "model_file": "Qwen3.5-9B-M-TS-Q4_K_M.gguf",
+    "model_bytes": 5060174144,
+    "model_sha256": "f41c0a0c0e43bf721fb2da29374cd1a97271bac0bab08a9dc42964525e82350c",
+    "llama_cpp_commit": "bec4772f6a2527d371557b5d2032641e5ff7619c",
+    "endpoint": "http://127.0.0.1:8080/v1/chat/completions",
+    "incremental_spend_usd": 0,
+    "prior_independent_verification": [
+      "canonical/verification/TOOLATHLON_LOCAL_QWEN_TOOLCALL_PREFLIGHT_20261003_V1.json",
+      "canonical/verification/TB_SCIENCE_LOCAL_QWEN_PLANNER_REPAIR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json"
+    ],
+    "prior_observed_effects": [
+      "OPENAI_CHAT_COMPLETIONS_TOOL_CALL_CONTRACT_PASS",
+      "SCIENCE_STRUCTURED_SEMANTIC_PROPOSALS_6_OF_6_PASS"
+    ]
+  },
+  "candidate_runtime": {
+    "path": "canonical/runtime/local_qwen_semantic_seed_v1.py",
+    "git_blob_sha": "5240e0c5651da0539ab58773f89d503cd4959c9d",
+    "test_path": "canonical/tests/test_local_qwen_semantic_seed_v1.py",
+    "test_git_blob_sha": "2b9bc7d7966b6fe9ec7450668f46828d5590bf3f",
+    "transport": "PINNED_LOCAL_QWEN_LLAMA_CPP_CHAT_COMPLETION",
+    "network_scope": "LOOPBACK_ONLY",
+    "remote_generation_dependencies": 0,
+    "api_key_dependencies": 0,
+    "temperature": 0,
+    "authority": "UNTRUSTED_PRODUCER_ONLY"
+  },
+  "required_independent_live_verification": {
+    "terminal_cases": 0,
+    "test_domain": "NONTERMINAL_SYNTHETIC_SEMANTIC_CONTRACTS_ONLY",
+    "minimum_contracts": {
+      "paraphrase": 3,
+      "simplify": 3,
+      "summarize": 3,
+      "story_generation": 3,
+      "total": 12
+    },
+    "required_checks": [
+      "EXACT_ADAPTER_AND_GOVERNANCE_BLOB_BINDING",
+      "UNIT_TESTS_PASS",
+      "PINNED_LLAMA_CPP_COMMIT_MATCH",
+      "PINNED_QWEN_BYTES_SIZE_AND_SHA256_MATCH",
+      "LOOPBACK_ONLY_GENERATION",
+      "TWELVE_OF_TWELVE_LIVE_NONTERMINAL_GENERATIONS_RETURN_NONEMPTY_FINAL_TEXT",
+      "PARAPHRASE_CONTRACTS_PRESERVE_ALL_EXPLICIT_ANCHOR_FACTS_AND_AVOID_VERBATIM_IDENTITY",
+      "SIMPLIFY_CONTRACTS_PRESERVE_ALL_EXPLICIT_ANCHOR_FACTS_AND_REDUCE_DEFINED_SURFACE_COMPLEXITY",
+      "SUMMARIZE_CONTRACTS_PRESERVE_REQUIRED_ANCHORS_AND_MEET_DEFINED_COMPRESSION_BOUNDS",
+      "STORY_CONTRACTS_INCLUDE_ALL_REQUIRED_ENTITIES_EVENTS_AND_END_STATE",
+      "NO_REMOTE_GENERATION_ENDPOINT_OR_API_KEY",
+      "ZERO_TERMINAL_PROMPT_OR_RESPONSE_EXPOSURE"
+    ]
+  },
+  "if_verified_consequence": {
+    "general_semantic_seed_production_state": "EXISTENCE_PROVED_ON_PUBLIC_NONTERMINAL_CONTRACT_ENVELOPE",
+    "root1_delta": "DELETE_NEW_MODEL_OR_NEW_TRAINING_AS_A_PREREQUISITE_TO_LIVEBENCH_SEMANTIC_SEED_INTEGRATION",
+    "next": "COMPOSE_THE_VERIFIED_LOCAL_SEED_WITH_SEED_PRESERVING_PUBLIC_CONSTRAINT_APPLICATION_AND_MEASURE_ONLY_PUBLIC_NONTERMINAL SCORE_MASS BEFORE_ANY_TERMINAL_SUCCESSOR_FREEZE",
+    "acceptance_credit": 0,
+    "family_credit": 0,
+    "capability_credit": 0,
+    "ownership_credit": 0
+  },
+  "contamination_firewall": [
+    "NO_TERMINAL_PROMPT_TEXT",
+    "NO_TERMINAL_RESPONSE_TEXT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_TERMINAL_KWARGS",
+    "NO_PER_CASE_FAILURE_SPECIAL_CASING",
+    "PUBLIC_OR_SYNTHETIC_NONTERMINAL_SEMANTIC_CONTRACTS_ONLY"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_QWEN3_5_9B_EQUALS_OPUS_5_5",
+    "NO_CLAIM_LIVEBENCH_IF_GE_65_7_IS_CLOSED",
+    "NO_CLAIM_NONTERMINAL_12_OF_12_IMPLIES_TERMINAL_GENERALIZATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_BEFORE_SEPARATE_LOAD_BEARING_PROOF",
+    "NO_FRESH_TERMINAL_EXECUTION_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
