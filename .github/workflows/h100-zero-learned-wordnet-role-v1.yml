@@ -1,0 +1,33 @@
+name: H100 zero-learned WordNet lexical role V1
+
+on:
+  push:
+    branches:
+      - research/h100-zero-learned-lexical-acquisition-v1
+    paths:
+      - 'canonical/governance/H100_ZERO_LEARNED_LEXICAL_ACQUISITION_SOURCE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_LEXICAL_ROLE_PREEXPOSURE_V1.json'
+      - 'canonical/governance/H100_ZERO_LEARNED_WORDNET_ROLE_CANDIDATE_V1.json'
+      - 'canonical/runtime/h100_zero_learned_wordnet_role_v1.py'
+      - 'canonical/runtime/h100_zero_learned_wordnet_replay_v1.py'
+      - 'canonical/tests/test_h100_zero_learned_wordnet_role_v1.py'
+      - '.github/workflows/h100-zero-learned-wordnet-role-v1.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run parser fixture tests
+        run: python -m unittest canonical.tests.test_h100_zero_learned_wordnet_role_v1 -v
+      - name: Replay frozen lexical challenge against pinned WordNet
+        run: python canonical/runtime/h100_zero_learned_wordnet_replay_v1.py

@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_H100_ZERO_LEARNED_LEXICAL_ACQUISITION_SOURCE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_EXTERNAL_RAW_KNOWLEDGE_SOURCE__ZERO_LEARNED__ZERO_CREDIT",
+  "objective": "PIN_AN_INDEPENDENT_RAW_LEXICAL_KNOWLEDGE_SOURCE_FOR_UNSEEN_ROLE_CUE_ACQUISITION_WITHOUT_USING_ANY_LEARNED_SEMANTIC_PROVIDER",
+  "source": {
+    "repository": "nltk/wordnet",
+    "commit": "ce91915ae38a341ae845be4d825ef6003cddf395",
+    "upstream": "Princeton WordNet 3.0",
+    "files": {
+      "wn/data/wordnet-3.0/index.noun": "1a458379f794704c0e283d5204413732f1dbe65d",
+      "wn/data/wordnet-3.0/data.noun": "4575737e5b3b832f52c18842ff5e195d83deeb54",
+      "wn/data/wordnet-3.0/index.verb": "88806b2e0b56d2b1aa9f06e35e664ec0e3401240",
+      "wn/data/wordnet-3.0/data.verb": "2044482198d66167ae5654d87c9b6ed9c00fb280"
+    }
+  },
+  "classification": {
+    "persistent_learned_state": false,
+    "raw_external_knowledge": true,
+    "capability_provider": false,
+    "allowed_runtime_use": "LOOKUP_LEXICAL_SENSES_RELATIONS_AND_GLOSSES_ONLY",
+    "forbidden_runtime_use": [
+      "TASK_SPECIFIC_REASONING_FROM_EXTERNAL_MODEL",
+      "GENERATED_PLAN_OR_SOLUTION_FROM_EXTERNAL_PROVIDER",
+      "POST_HOC_SOURCE_SUBSTITUTION"
+    ]
+  },
+  "next_gates": [
+    "A_LEXICAL_LOOKUP_AND_RELATION_EXTRACTION_FROM_PINNED_WORDNET_BYTES",
+    "B_DETERMINISTIC_DEFINITION_OR_RELATION_TO_ROLE_COMPILATION",
+    "C_MANDATORY_ABSTENTION_WHEN_LEXICAL_EVIDENCE_DOES_NOT_IDENTIFY_DIRECTION"
+  ],
+  "accounting": {
+    "persistent_learned_bytes": 0,
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
