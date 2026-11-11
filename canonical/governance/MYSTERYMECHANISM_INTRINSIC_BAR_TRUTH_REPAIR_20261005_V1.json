@@ -1,0 +1,120 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_INTRINSIC_BAR_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TARGET_ACTOR_TRUTH_REPAIR__VALS_FALLBACK_ASSISTED_49_55_NOT_ADMISSIBLE_AS_INTRINSIC_OPUS55_BAR__NO_FALLBACK_CONSERVATIVE_BAR_49_10__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Repair the MysteryMechanism target threshold so the UNKNOWN_DOMAIN_ADAPTATION benchmark atom measures Claude Opus 5.5 rather than a mixed Opus 5.5 plus fallback-model deployed system.",
+  "exact_brain_bindings": {
+    "registry": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+      "git_blob_sha": "562536d9ba3f245a6bd24490a1eb3b30f27e0c3a"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "root2": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+      "git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f"
+    },
+    "boundary": {
+      "path": "canonical/governance/OPUS55_INTRINSIC_CAPABILITY_VS_DEPLOYMENT_PROFILE_BOUNDARY_20261005_V2.json",
+      "git_blob_sha": "9bac958e4db829f94d756cd94709d0c885d43e25"
+    },
+    "authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee"
+    }
+  },
+  "external_evidence": {
+    "benchmark_owner": {
+      "url": "https://www.vals.ai/models/anthropic_claude-opus-5-5",
+      "facts": [
+        "VALS_REPORTS_MYSTERYMECHANISM_49_55_PERCENT_PLUS_MINUS_3_36_WITH_OPUS55_RUN_USING_OPUS5_AND_OPUS4_8_SERVER_SIDE_FALLBACKS_FOR_REFUSALS",
+        "VALS_REPORTS_COUNTING_FALLBACK_ASSISTED_MYSTERYMECHANISM_TASKS_AS_FAILURES_CHANGES_SCORE_FROM_49_55_TO_49_10",
+        "VALS_REPORTS_OPUS55_EVALUATIONS_USED_MAX_COMPUTE_EFFORT_EXCEPT_TERMINAL_BENCH_2_1"
+      ]
+    },
+    "first_party_fallback_semantics": {
+      "url": "https://support.claude.com/en/articles/16049681-why-claude-switched-models-in-your-conversation-with-opus-5-or-opus-5-5",
+      "facts": [
+        "A_FALLBACK_RESPONSE_IS_PRODUCED_BY_A_DIFFERENT_RESPONDING_MODEL",
+        "ON_THE_CLAUDE_API_AUTOMATIC_SWITCHING_IS_NOT_ACTIVE_BY_DEFAULT_AND_FALLBACKS_MUST_BE_CONFIGURED",
+        "WITHOUT_CONFIGURED_API_FALLBACK_A_SAFEGUARD_REFUSAL_RETURNS_AS_THE_OPUS55_REQUEST_RESULT"
+      ]
+    }
+  },
+  "contradiction": {
+    "current_atom": "MYSTERYMECHANISM_GE_49_55",
+    "current_acceptance_literal": "MysteryMechanism >= 49.55% on comparable Vals setup.",
+    "current_public_reference_value": 49.55,
+    "current_target_boundary_rule": "FALLBACK_MODEL_OUTPUTS_ARE_EXCLUDED_FROM_INTRINSIC_OPUS55_CREDIT",
+    "proof": [
+      "THE_CURRENT_49_55_VALUE_IS_THE_VALS_SCORE_WITH_SERVER_SIDE_FALLBACKS_ENABLED",
+      "AT_LEAST_SOME_LOAD_BEARING_RESPONSES_IN_THAT_AGGREGATE_CAN_BE_ATTRIBUTED_TO_OPUS5_OR_OPUS4_8_RATHER_THAN_OPUS55",
+      "CURRENT_INTRINSIC_TARGET_SEMANTICS_EXCLUDE_THOSE_FALLBACK_OUTPUTS",
+      "THEREFORE_49_55_IS_NOT_AN_ADMISSIBLE_INTRINSIC_C55_FIXED_BAR_UNDER_THE_CURRENT_TARGET_BOUNDARY"
+    ]
+  },
+  "repaired_bar_candidate": {
+    "benchmark": "Vals MysteryMechanism",
+    "target_actor": "CLAUDE_OPUS_5_5_ONLY__FALLBACK_ASSISTED_CASES_SCORED_AS_FAILURES",
+    "conservative_score_percent": 49.1,
+    "uncertainty_note": "VALS_PUBLISHED_PLUS_MINUS_3_36_FOR_THE_FALLBACK_ASSISTED_49_55_ROW__NO_SEPARATE_UNCERTAINTY_FOR_THE_49_10_COUNTERFACTUAL_WAS FOUND_IN_THE_BOUND_OWNER_SOURCE",
+    "proposed_replacement_atom_id": "MYSTERYMECHANISM_C55_NO_FALLBACK_GE_49_10",
+    "relation_to_49_55": "STRICT_TARGET_DECONFOUNDING__NOT_A_CLAIM_THAT_THE_49_55_DEPLOYED_SYSTEM_SCORE_IS_INCORRECT",
+    "direct_opus_case_level_comparator_required_for_measured_mysterymechanism_scope": false
+  },
+  "migration_rule": {
+    "operation": "ATOMIC_REPLACEMENT_NOT_ADDITION",
+    "old_atom": "MYSTERYMECHANISM_GE_49_55",
+    "new_atom": "MYSTERYMECHANISM_C55_NO_FALLBACK_GE_49_10",
+    "total_atomic_predicate_count_after_migration": 38,
+    "current_proved_atomic_before_independent_migration": 14,
+    "current_unresolved_atomic_before_independent_migration": 24,
+    "acceptance_credit_delta_from_target_repair": 0,
+    "family_credit_delta_from_target_repair": 0,
+    "reason": "CORRECTING_THE_TARGET_BAR_DOES_NOT_PROVE_THE_BRAIN_ROUTE_MEETS_THE_CORRECTED_BAR"
+  },
+  "known_load_bearing_dependencies_to_rebind": [
+    "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_REGISTRY_V2.json",
+    "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+    "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+    "canonical/governance/ROOT2_18_WAKE_AWARE_EXECUTABLE_CUT_V3.json",
+    "ANY_CURRENT_OR_PENDING_RECEIPT_ACTION_HYPERGRAPH_OR_SCHEDULER_ARTIFACT_THAT_REFERENCES_MYSTERYMECHANISM_GE_49_55"
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "TREAT_49_55_FALLBACK_ASSISTED_VALS_SCORE_AS_INTRINSIC_OPUS55_FINALITY",
+      "SPEND_REALITY_OR_OWNER_EFFORT_SOLELY_TO_CLEAR_THE_0_45_POINT_FALLBACK_CONTRIBUTION"
+    ],
+    "preserve": [
+      "MYSTERYMECHANISM_SCOPE_REMAINS_OPEN_UNTIL_BRAIN_EVIDENCE_MEETS_THE_CORRECTED_INTRINSIC_BAR_OR_A_STRONGER_SCOPE_COMPLETE_PROOF_CLOSES_IT",
+      "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT_REMAINS_SEPARATE_AND_ALREADY_PROVED",
+      "ALL_EXISTING_FAIL_CLOSED_SCOPE_RULES"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_BRAIN_ALREADY_MEETS_49_10",
+    "NO_CLAIM_RAW_UNSAFE_OR_UNFILTERED_OPUS55_WOULD_SCORE_49_10",
+    "NO_CLAIM_49_55_DEPLOYED_SYSTEM_SCORE_IS_WRONG",
+    "NO_CHANGE_TO_CURRENT_14_OF_38_OR_5_OF_19_COUNTS_BEFORE_INDEPENDENT_ATOMIC_MIGRATION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_VERIFY_THE_BOUND_VALS_AND_FIRST_PARTY_FALLBACK_FACTS__THEN_ATOMICALLY_REPLACE_THE_49_55_MIXED_ACTOR_ATOM_WITH_THE_49_10_NO_FALLBACK_C55_ATOM_ACROSS_REGISTRY_PROTOCOL_SCHEDULERS_AND_ALL_REFERENCES__RECOMPUTE_ROOT2_WITH_ZERO_CREDIT_FROM_THE_TARGET_REPAIR_ITSELF"
+}
