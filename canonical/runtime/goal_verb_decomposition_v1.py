@@ -70,6 +70,22 @@ VERB_PATTERNS = (
     # contains an action word ("how many green items ..."). Measured 2026-11-09 on
     # count-shape, 0/30.
     ("COUNT", r"\bhow many\b|\bcount the\b|\bwhat (?:is|are) the number of\b"),
+    # A TIMED SEQUENCE IS NOT A CLICK. "Click button ONE, wait 3 seconds, then click
+    # button TWO" contains 'click' twice, so it routed to CLICK and pressed one button.
+    # Measured 2026-11-09 on button-delay, 0/30.
+    ("BUTTON_DELAY", r"\bclick\b.*\bwait\b.*\b(\d+(?:\.\d+)?)\s*seconds?\b"),
+    # MARKING A WHOLE TABLE IS NOT A CLICK EITHER -- every row needs its own decision.
+    ("ODD_EVEN", r"\bodd\s+or\s+even\b|\bmark the numbers\b"),
+    # PRESSING A GENERATOR UNTIL A CONDITION HOLDS. "Generate an even number, then press
+    # submit" was routed to FILL_FORM and pressed Submit on an empty field.
+    ("GENERATE", r"\bgenerate\b.*\bnumber\b"),
+    # A REFERENCE IS NOT A VALUE. "Find and pick the card with the greatest number" has a
+    # name-shaped verb (find) and no name -- FIND routes to the reference resolver, which
+    # returns not_found because the page holds NUMBERS in cards. The comparison is the
+    # instruction. Measured 2026-11-09 on find-greatest, 0/30.
+    ("FIND_VALUE", r"\b(greatest|largest|biggest|highest|maximum|smallest|least|lowest|"
+                   r"minimum|median)\b.*\b(number|value|card|integer|score)\b|"
+                   r"\bcard\b.*\b(greatest|largest|smallest|least)\b"),
     ("SET_SLIDERS", r"\bset the sliders?\b|\b(adjust|move) the sliders?\b"),
     ("SORT", r"\bsort\b|\border the (numbers|items)\b"),
     ("PUSH_SEQUENCE", r"\b(push|press|hit|tap|click|repeat|enter)\b.*\b(sequence|order|shown|displayed|pattern)\b"),

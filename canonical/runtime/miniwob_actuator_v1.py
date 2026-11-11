@@ -1641,6 +1641,180 @@ _COLOUR_WORDS = {"red", "orange", "yellow", "green", "blue", "purple", "violet",
                  "black", "white", "gray", "grey", "brown", "pink", "cyan", "magenta"}
 
 
+def v_find_value(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Pick the card that holds the number the sentence describes.
+
+    Measured 2026-11-09 on `find-greatest`, 0/30, action `find-done`: FIND routed to the
+    reference resolver, which looks for a NAME on the page. The page has no name -- it
+    has numbers in cards, and the sentence states a COMPARISON, not a reference.
+
+    A REFERENCE IS NOT A VALUE. "Find and pick the card with the greatest number" needs
+    arithmetic over the page's contents, which no resolver can do. Read every card, apply
+    the stated comparison, click the winning card, Submit. Clicking a card is also what
+    REVEALS it (the page sets class 'card' and hides the rest), so the click is the answer.
+    """
+    g = (goal or "").lower()
+    cards = act.ev(
+        "(()=>{try{const out=[];"
+        "document.querySelectorAll('#cardholder .card,.card,.cardholder div').forEach("
+        "function(e,i){const t=(e.textContent||'').trim();"
+        "const m=t.match(/-?\d+/);"
+        "if(!m)return;"
+        "out.push({i:i,v:parseInt(m[0],10),"
+        "di:e.getAttribute('data-index')})});"
+        "return out}catch(err){return 'ERR:'+err.message}})()")
+    if not isinstance(cards, list) or len(cards) < 2:
+        return "findval-nocards:%s" % str(cards)[:60]
+    vals = [c["v"] for c in cards]
+    if re.search(r"\bgreatest\b|\blargest\b|\bbiggest\b|\bhighest\b|\bmaximum\b|\bmax\b", g):
+        target = max(vals)
+    elif re.search(r"\bsmallest\b|\bleast\b|\blowest\b|\bminimum\b|\bmin\b", g):
+        target = min(vals)
+    elif re.search(r"\bmedian\b|\bmiddle\b|\bmidpoint\b", g):
+        target = sorted(vals)[len(vals) // 2]
+    else:
+        return "findval-norule"
+    pick = next(c for c in cards if c["v"] == target)
+    sel = ("(()=>{try{const es=[...document.querySelectorAll('#cardholder .card,.card')];"
+           "const di=%s;"
+           "const e=es.find(x=>x.getAttribute('data-index')===di);"
+           "if(!e)return 'NOCARD';e.click();return 'ok'}"
+           "catch(err){return 'ERR:'+err.message}})()" % json.dumps(str(pick["di"])))
+    got = act.ev(sel)
+    if got != "ok":
+        return "findval-click:%s" % str(got)[:16]
+    time.sleep(0.25)
+    submit(act, required=False)
+    time.sleep(0.35)
+    if episode_over(act):
+        return "findval:%d-of-%d" % (target, len(vals))
+    return "findval-miss:%d" % target
+
+
+def v_generate(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Press generate until the page shows a number that meets the stated condition.
+
+    Measured 2026-11-09 on `generate-number`, 0/30 with action `sole-button`: the agent
+    pressed Submit on an empty field. The page has a #generate button and a
+    #display-number; the goal states a property (odd / even / > 100 / negative), and the
+    produced value is REJECTED or accepted only after it exists. So this is a loop with
+    the page as the oracle: generate, read, test, repeat.
+
+    A GENERATOR IS NOT A CLICK. Reading the goal once and pressing one button cannot
+    satisfy a condition on a value the page has not produced yet.
+    """
+    g = (goal or "").lower()
+    want_odd = bool(re.search(r"\bodd\b", g))
+    want_even = bool(re.search(r"\beven\b", g))
+    want_pos = bool(re.search(r"\bpositive\b|greater than 0", g))
+    want_neg = bool(re.search(r"\bnegative\b", g))
+    gt = re.search(r"(?:greater than|more than|bigger than|larger than|>)\s*(-?\d+)", g)
+    lt = re.search(r"(?:less than|smaller than|fewer than|<)\s*(-?\d+)", g)
+    if not act.ev("(()=>{return !!(document.querySelector('#generate')"
+                  "||[...document.querySelectorAll('button')].find("
+                  "b=>/generate/i.test(b.textContent||'')))})()"):
+        return "gen-nobutton"
+    for i in range(60):
+        act.click_el("document.querySelector('#generate')||[...document.querySelectorAll("
+                     "'button')].find(b=>/generate/i.test(b.textContent||''))")
+        time.sleep(0.06)
+        v = act.ev("(()=>{const e=document.querySelector('#display-number');"
+                   "if(!e)return null;const m=(e.textContent||'').match(/-?\d+/);"
+                   "return m?parseInt(m[0],10):null})()")
+        if v is None:
+            return "gen-nonumber"
+        if want_odd and v % 2 == 0:
+            continue
+        if want_even and v % 2 != 0:
+            continue
+        if want_pos and v <= 0:
+            continue
+        if want_neg and v >= 0:
+            continue
+        if gt and v <= int(gt.group(1)):
+            continue
+        if lt and v >= int(lt.group(1)):
+            continue
+        act.click_el("document.querySelector('#submit')||document.querySelector('#subbtn')")
+        time.sleep(0.30)
+        if episode_over(act):
+            return "generated:%d" % v
+        return "gen-rejected:%d" % v
+    return "gen-timeout"
+
+
+def v_odd_even(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Mark every row odd or even, then Submit.
+
+    Measured 2026-11-09 on `odd-or-even`, 0/30. Every row carries its own number and two
+    buttons (.odd / .even); the checker re-reads ALL rows and scores the whole page, so
+    a single wrong row fails the episode. Decide each row from the number, not the
+    position, and press the row's own button.
+    """
+    n = act.ev(
+        "(()=>{try{let done=0;"
+        "const rows=[...document.querySelectorAll('.row')];"
+        "for(const r of rows){"
+        "const ne=r.querySelector('.display-number');"
+        "if(!ne)continue;"
+        "const m=(ne.textContent||'').match(/-?\\d+/);"
+        "if(!m)continue;"
+        "const v=parseInt(m[0],10);"
+        "const want=(v%2===0)?'.even':'.odd';"
+        "const b=r.querySelector(want);"
+        "if(b){b.click();done++}}"
+        "return done}catch(err){return 'ERR:'+err.message}})()")
+    if not isinstance(n, int):
+        return "oddeven-%s" % str(n)[:16]
+    submit(act, required=False)
+    time.sleep(0.35)
+    if episode_over(act):
+        return "oddeven:%d" % n
+    return "oddeven-miss:%d" % n
+
+
+def v_button_delay(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Click button ONE, wait exactly the stated number of seconds, click button TWO.
+
+    Measured 2026-11-09 on `button-delay`, 0/30 with `sole-button`. The page times the gap
+    between the two presses and scores the PERCENTAGE error against the delay named in the
+    sentence, so pressing one button (or both at once) is a certain miss.
+
+    THE DELAY IS IN THE SENTENCE, and the tolerance is a percentage, not an absolute --
+    so a wait that is slightly over is as good as slightly under, and there is no reason
+    to be clever about it: read the number, wait it, press.
+    """
+    g = goal or ""
+    m = re.search(r"wait\s+(\d+(?:\.\d+)?)\s*second", g, re.I)
+    if not m:
+        m = re.search(r"(\d+(?:\.\d+)?)\s*seconds?", g, re.I)
+    if not m:
+        return "delay-noparse"
+    secs = float(m.group(1))
+    # THE NAMES ARE IN THE LABELS AND THE IDS, and the ids are the page's own:
+    # #subbtn holds the text ONE, #subbtn2 holds TWO. Match the LABEL first because a
+    # generic id guess cannot know that #subbtn is button ONE.
+    one = ("(()=>{const bs=[...document.querySelectorAll('button,input[type=button]')];"
+           "const b=bs.find(x=>/^(one|1)$/i.test((x.textContent||'').trim()))"
+           "||bs.find(x=>/^(one|1)$/i.test((x.value||'').trim()))"
+           "||bs.find(x=>x.id==='one'||x.id==='button1');"
+           "if(!b)return false;b.click();return true})()")
+    two = ("(()=>{const bs=[...document.querySelectorAll('button,input[type=button]')];"
+           "const b=bs.find(x=>/^(two|2)$/i.test((x.textContent||'').trim()))"
+           "||bs.find(x=>/^(two|2)$/i.test((x.value||'').trim()))"
+           "||bs.find(x=>x.id==='two'||x.id==='button2');"
+           "if(!b)return false;b.click();return true})()")
+    if not act.ev(one):
+        return "delay-nobutton1"
+    time.sleep(secs)
+    if not act.ev(two):
+        return "delay-nobutton2"
+    time.sleep(0.40)
+    if episode_over(act):
+        return "delay:%s" % secs
+    return "delay-miss:%s" % secs
+
+
 def v_count(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """Read the page, count what the sentence describes, and answer the question.
 
@@ -2424,6 +2598,8 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         "PUSH_SEQUENCE": v_push_sequence, "FOCUS": v_focus, "SWITCH_TABS": v_tabs,
         "EXPAND_AND_CLICK": v_expand, "CLICK": v_click, "CHOOSE_DATE": v_date,
         "COPY_PASTE": v_copy_paste, "HIGHLIGHT": v_highlight, "COUNT": v_count,
+        "GENERATE": v_generate, "ODD_EVEN": v_odd_even, "BUTTON_DELAY": v_button_delay,
+        "FIND_VALUE": v_find_value,
     }
     if verb == "DRAG":
         if "black box" in g.lower():
