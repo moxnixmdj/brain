@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_NTH_DUAL_LOSS_CLOSURE_PRECOMMIT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "FROZEN_OUTCOME_BLIND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "base_commit": "b412e0ff68e1ac8833fc7d14145d7afd92585627",
+  "hypothesis": "THE_REMAINING_POINTWISE_COMPLETENESS_RISK_CONCENTRATES_IN_INTERACTIONS_NOT_YET_JOINTLY_EXHAUSTED__THE_SHARPEST_CURRENT_SEAM_IS_NTH_PARAGRAPH_STRUCTURE_CROSSED_WITH_SENTENCE_CONSTRUCTION_AND_THE_SHARED_FORBIDDEN_COLLISION_LOSS_COORDINATE",
+  "frozen_test_basis": {
+    "nth_positions": 15,
+    "sentence_class_representatives": [
+      "LESS_THAN_1",
+      "LESS_THAN_2",
+      "AT_LEAST_1",
+      "AT_LEAST_20"
+    ],
+    "reachable_lexical_signatures": 192,
+    "pressure_modes": [
+      "NONE",
+      "POSTSCRIPT_P_S",
+      "POSTSCRIPT_P_P_S",
+      "WORDS_LT_100",
+      "WORDS_GE_500",
+      "TITLE",
+      "QUOTATION",
+      "EXISTENCE_FULL_FORBIDDEN_OVERLAP"
+    ],
+    "exact_case_count": 92160,
+    "mandatory_loss_coordinates": [
+      "SENTENCE_ZERO_REQUIRES_SACRIFICE_NUMBER_SENTENCES",
+      "NTH_OR_END_FORBIDDEN_COLLISION_REQUIRES_ONE_SHARED_SACRIFICE_FORBIDDEN_WORDS"
+    ]
+  },
+  "external_semantics_binding": {
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "instructions_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "evaluation_main_blob": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "python": "3.12.10",
+    "nltk": "3.10.3"
+  },
+  "pass_condition": "ALL_92160_CASES_ATTAIN_THE_EXACT_THEORETICAL_POINTWISE_MAXIMUM_UNDER_THE_PINNED_STRICT_CHECKERS_AND_THE_PLANNER_SACRIFICE_SET_EQUALS_THE_PRECOMMITTED_TWO_COORDINATE_MINIMUM_CUT",
+  "fail_condition": "ANY_COMPOSER_OR_POINTWISE_MISMATCH_OR_ANY_EXACT_CHECKER_VECTOR_BELOW_THE_PRECOMMITTED_MAXIMUM_IS_A_COUNTEREXAMPLE_AND_INVALIDATES_THIS_SEAM_CLOSURE",
+  "promotion_rule": "A_PASS_CLOSES_ONLY_THIS_NTH_DUAL_LOSS_INTERACTION_SEAM__IT_GRANTS_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_AND_REQUIRES_SEPARATE_CONTENT_BOUND_VERIFICATION_PLUS_WIDER_COMPLETENESS_REDUCTION",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_consumed": 0,
+    "terminal_kwargs_consumed": 0,
+    "terminal_scores_consumed": 0,
+    "fresh_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
