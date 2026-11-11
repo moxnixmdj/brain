@@ -1,0 +1,73 @@
+{
+  "schema": "PROJECT_BRAIN_WHITEBOX_SEMANTIC_TEXT_CORE_PREEXPOSURE_V1",
+  "date": "2026-10-04",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION_OUTCOMES__PUBLIC_SYNTHETIC_NONTERMINAL__ZERO_CREDIT",
+  "objective": "TEST_ONE_SHARED_ZERO_LEARNED_LOCAL_TEXT_CORE_ON_BOUNDED_PARAPHRASE_SIMPLIFY_SUMMARIZE_AND_STORY_GENERATION_WITH_MECHANICALLY_AUDITABLE_SEMANTIC_CONTRACTS",
+  "terminal_cases_consumed": 0,
+  "terminal_prompt_content_used": false,
+  "task_families": {
+    "paraphrase": {
+      "contract": "OUTPUT_MUST_DIFFER_LEXICALLY_OR_SYNTACTICALLY_WHILE_BEING_DERIVED_ONLY_BY_A_DECLARED_REVERSIBLE_OR_TRUTH_PRESERVING_REWRITE",
+      "tasks": [
+        {"id":"P1","text":"All robins are birds.","required_rule":"ALL_EVERY"},
+        {"id":"P2","text":"If the alarm rings, then the guard wakes.","required_rule":"IF_THEN"},
+        {"id":"P3","text":"Mira is not late.","required_rule":"NEGATIVE_CONTRACTION"},
+        {"id":"P4","text":"Ada and Turing are researchers.","required_rule":"COORDINATE_SWAP"}
+      ]
+    },
+    "simplify": {
+      "contract": "OUTPUT_MUST_PRESERVE_ALL_NONPUNCTUATION_SOURCE_TOKENS_MODULO_DECLARED_CONTRACTION_EXPANSION_AND_REDUCE_A_FROZEN_COMPLEXITY_METRIC",
+      "tasks": [
+        {"id":"S1","text":"The reactor warmed rapidly; the operator reduced the power; the temperature stabilized."},
+        {"id":"S2","text":"The bridge isn't closed; traffic can still cross."},
+        {"id":"S3","text":"The test can't start; the sensor isn't ready."},
+        {"id":"S4","text":"The archive was large; the index was precise; retrieval was fast; errors were rare."}
+      ]
+    },
+    "summarize": {
+      "contract": "SUMMARY_MUST_BE_STRICTLY_EXTRACTIVE__EVERY_OUTPUT_SENTENCE_IS_AN_EXACT_SOURCE_SENTENCE__AND_OUTPUT_MUST_COMPRESS_MULTI_SENTENCE_INPUT",
+      "tasks": [
+        {"id":"U1","text":"Solar panels convert sunlight into electricity. Their output falls at night. Batteries can store daytime energy. Storage helps supply electricity after sunset.","max_sentences":2},
+        {"id":"U2","text":"The river flooded after three days of rain. Roads near the bank were closed. Emergency crews moved residents to higher ground. Water levels began falling on Tuesday.","max_sentences":2},
+        {"id":"U3","text":"The experiment compared two alloys. Alloy A resisted corrosion longer. Alloy B was cheaper to manufacture. The report recommends A for marine equipment.","max_sentences":2},
+        {"id":"U4","text":"A library digitized its oldest maps. Staff scanned each map at high resolution. The files were indexed by place and year. Researchers can now search the collection remotely.","max_sentences":2}
+      ]
+    },
+    "story_generation": {
+      "contract": "OUTPUT_MUST_USE_ONLY_EXPLICIT_STRUCTURED_FACTS_PLUS_A_FIXED NARRATIVE SCAFFOLD__EVERY_DECLARED CHARACTER GOAL OBSTACLE AND SETTING MUST APPEAR VERBATIM",
+      "tasks": [
+        {"id":"T1","character":"Nia","goal":"recover the lost compass","obstacle":"a flooded tunnel","setting":"an abandoned observatory"},
+        {"id":"T2","character":"Omar","goal":"deliver the medicine","obstacle":"a broken bridge","setting":"a mountain village"},
+        {"id":"T3","character":"Lin","goal":"repair the signal beacon","obstacle":"a violent storm","setting":"a research island"},
+        {"id":"T4","character":"Iris","goal":"return the glass key","obstacle":"a locked gate","setting":"a moonlit garden"}
+      ]
+    }
+  },
+  "pass_condition": {
+    "each_family_tasks_total": 4,
+    "each_family_tasks_pass_required": 4,
+    "all_families_required": true,
+    "abstention_allowed_outside_declared_envelope": true
+  },
+  "resource_boundary": {
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "network_during_scored_execution": false,
+    "incremental_spend_usd": 0
+  },
+  "hard_nonclaims": [
+    "FINITE_PUBLIC_SYNTHETIC_PASS_IS_NOT_OPEN_WORLD_LANGUAGE_GENERATION",
+    "NO_CLAIM_OF_LIVEBENCH_IF_THRESHOLD_CLOSURE",
+    "NO_CASE_73_OR_LATER",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_PARITY_WITH_OPUS_5_5_FROM_THIS POPULATION"
+  ],
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance": false,
+    "ownership": false
+  }
+}
