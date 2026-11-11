@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_PROOF_CARRYING_DOMINANCE_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "INDEPENDENT_REMOTE_REPLAY_PASS__22_OF_22__ZERO_TERMINAL_CREDIT",
+  "subject": "AA_BRIEFCASE_CURRENT_EPOCH_PROOF_CARRYING_DOMINANCE_ROUTE",
+  "executor": {
+    "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
+    "sprite_name": "brain-frontiercode-route-refresh-verify-20261008-v1",
+    "sprite_id": "sprite-516155ae-ce43-4477-bba9-ea126ee41fa1",
+    "working_directory": "/tmp/aa_briefcase_verify_3133"
+  },
+  "source_blobs": {
+    "dominance_runtime": {
+      "path": "canonical/runtime/aa_briefcase_scope_complete_dominance_v1.py",
+      "git_blob_sha": "fc62cc86598e304a5dafc8823b8ca43908bd1fc1"
+    },
+    "disjunctive_bridge_v3": {
+      "path": "canonical/runtime/aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
+      "git_blob_sha": "d810398d345d46230cdd695a376d041f58fe6809"
+    },
+    "scalar_bridge_v2": {
+      "path": "canonical/runtime/aa_briefcase_current_epoch_result_bridge_v2.py",
+      "git_blob_sha": "50c85c96bc0a6a73354349f05421572274d21cf5"
+    },
+    "dominance_tests": {
+      "path": "canonical/tests/test_aa_briefcase_scope_complete_dominance_v1.py",
+      "git_blob_sha": "c49b40319863f0c7f3bfee0ab683834e8f679c8c"
+    },
+    "bridge_v3_tests": {
+      "path": "canonical/tests/test_aa_briefcase_current_epoch_noninferiority_bridge_v3.py",
+      "git_blob_sha": "9bca3033620e8988ea7ea29ad36b8286c373f0de"
+    },
+    "bridge_v2_tests": {
+      "path": "canonical/tests/test_aa_briefcase_current_epoch_result_bridge_v2.py",
+      "git_blob_sha": "2b0b3a55ec0218e18b33f71e956637da2e93c798"
+    },
+    "grading_protocol": {
+      "path": "canonical/evidence/AA_BRIEFCASE_CURRENT_GRADING_PROTOCOL_20261008_V1.json",
+      "git_blob_sha": "5c77f294e09d4933e3a3175c46af225b414f4702"
+    },
+    "current_target": {
+      "path": "canonical/evidence/AA_BRIEFCASE_OPUS55_CURRENT_OWNER_TARGET_20261008_V2.json",
+      "git_blob_sha": "258f8d55dce3f2a664db7a95012e9cdc08886552"
+    }
+  },
+  "execution": {
+    "command": "python3 -m unittest -v canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 canonical.tests.test_aa_briefcase_current_epoch_noninferiority_bridge_v3 canonical.tests.test_aa_briefcase_current_epoch_result_bridge_v2",
+    "tests_run": 22,
+    "tests_passed": 22,
+    "failures": 0,
+    "errors": 0,
+    "result": "OK"
+  },
+  "verified_fail_closed_properties": [
+    "STALE CURRENT-TARGET DATE IS REJECTED",
+    "CURRENT GRADING-PROTOCOL MANIFEST DRIFT IS REJECTED",
+    "FEWER THAN 91 UNIQUE PRIVATE TASK IDS IS REJECTED",
+    "CHECK-ID SET ROOT DRIFT IS REJECTED",
+    "M ROUTE WITHOUT COMPLETE MONOTONE-CLASS VERIFICATION IS REJECTED",
+    "PAIRWISE U ROUTE OPUS_WIN IS REJECTED",
+    "BINARY RUBRIC U ROUTE REJECTS BRAIN_FAIL WHEN OPUS_PASS",
+    "BINARY RUBRIC U ROUTE ACCEPTS BRAIN_FAIL OPUS_FAIL AS NONINFERIOR",
+    "ACTUAL OWNER-ASSIGNED JUDGE MUST BE VERIFIED",
+    "ALL-BOUND-PANEL-JUDGES COVERAGE REQUIRES EXACTLY THREE PAIRWISE OUTCOMES",
+    "ALL-BOUND-PANEL-JUDGES PAIRWISE COVERAGE REJECTS ONE OPUS_WIN",
+    "ALL-BOUND-PANEL-JUDGES PAIRWISE COVERAGE PASSES WHEN ALL THREE ARE BRAIN_WIN_OR_TIE",
+    "MATCHED CURRENT-EPOCH ELO BELOW 1807 FAILS",
+    "MATCHED CURRENT-EPOCH ELO AT 1807 PASSES",
+    "ONE DIRECT-DOMINANCE RESULT MULTIPLEXES BOTH AA-BRIEFCASE PREDICATE ALIASES",
+    "DIRECT DOMINANCE DOES NOT CLAIM OFFICIAL OWNER ELO",
+    "HISTORICAL 1822 EPOCH IS NOT REWRITTEN"
+  ],
+  "remaining_external_fact": "AN AUTHENTICATED CURRENT-EPOCH SCOPE-COMPLETE PRIVATE AA_BRIEFCASE RECEIPT OR OWNER-EQUIVALENT DIRECT DOMINANCE ATTESTATION",
+  "hard_nonclaims": [
+    "NO PRIVATE AA_BRIEFCASE TASK OR RUBRIC BYTES WERE AVAILABLE TO THIS REPLAY",
+    "NO REAL BRAIN AA_BRIEFCASE PRIVATE RESULT WAS PRODUCED",
+    "NO AA_BRIEFCASE PREDICATE IS PROMOTED TRUE",
+    "NO FAMILY CAPABILITY OWNERSHIP OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "new_sprite_created": false,
+    "incremental_spend_usd": null,
+    "spend_measurement_available": false,
+    "fresh_target_model_queries": 0,
+    "private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

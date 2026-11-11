@@ -1,0 +1,32 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_OFFICIAL_GITHUB_OWNER_ANCHOR_V1",
+  "date": "2026-10-08",
+  "status": "LIVE_GITHUB_CONNECTOR_OWNER_ANCHOR_VERIFIED__ZERO_TERMINAL_CREDIT",
+  "owner": {
+    "login": "ArtificialAnalysis",
+    "github_node_id": "167712348",
+    "type": "Organization"
+  },
+  "live_repository_probe": {
+    "repository_full_name": "ArtificialAnalysis/Stirrup",
+    "repository_id": "1113476505",
+    "visibility": "public",
+    "default_branch": "main",
+    "clone_url": "https://github.com/ArtificialAnalysis/Stirrup.git",
+    "owner_login": "ArtificialAnalysis",
+    "owner_type": "Organization"
+  },
+  "official_domain_crosslink": {
+    "source": "https://stirrup.artificialanalysis.ai/",
+    "fact": "OFFICIAL ARTIFICIAL ANALYSIS DOCUMENTATION INSTRUCTS USERS TO CLONE https://github.com/ArtificialAnalysis/Stirrup.git"
+  },
+  "admissible_owner_origin_rule": "A FUTURE AA_BRIEFCASE ATTESTATION FETCHED AT AN EXACT COMMIT FROM A REPOSITORY WHOSE GITHUB OWNER LOGIN IS ArtificialAnalysis AND OWNER TYPE IS Organization MAY USE OFFICIAL_GITHUB_PUBLICATION AS OWNER-ORIGIN EVIDENCE, PROVIDED THE EXACT ATTESTATION BYTES MATCH THE RETURNED GIT BLOB SHA AND THE COMPLETE CORE PREDICATE PASSES.",
+  "hard_nonclaims": [
+    "NO REQUIRED AA_BRIEFCASE ATTESTATION FILE CURRENTLY EXISTS IN THE OFFICIAL ORGANIZATION.",
+    "NO AA_BRIEFCASE ACCEPTANCE OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "fresh_private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}

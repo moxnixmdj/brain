@@ -1,0 +1,60 @@
+{
+  "schema": "PROJECT_BRAIN_AA_BRIEFCASE_MINIMAL_OWNER_ATTESTATION_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "REMOTE_ISOLATED_REPLAY_PASS__38_OF_38__ZERO_TERMINAL_CREDIT",
+  "executor": {
+    "kind": "SPRITE_REMOTE_ISOLATED_RUNTIME",
+    "sprite_name": "brain-frontiercode-route-refresh-verify-20261008-v1",
+    "sprite_id": "sprite-516155ae-ce43-4477-bba9-ea126ee41fa1",
+    "working_directory": "/tmp/aa_briefcase_verify_3133"
+  },
+  "command": "python3 -m unittest -v canonical.tests.test_aa_briefcase_owner_signature_verifier_v1 canonical.tests.test_aa_briefcase_minimal_owner_attestation_v1 canonical.tests.test_aa_briefcase_scope_complete_dominance_v1 canonical.tests.test_aa_briefcase_current_epoch_noninferiority_bridge_v3 canonical.tests.test_aa_briefcase_current_epoch_result_bridge_v2",
+  "result": {
+    "tests_run": 38,
+    "tests_passed": 38,
+    "failures": 0,
+    "errors": 0,
+    "status": "OK"
+  },
+  "source_blobs": {
+    "minimal_owner_runtime": "85ae7f42d69d892a9d8c87d63ba14c56d669971d",
+    "minimal_owner_tests": "c36a289c046f9e3df3251cc82f6bb884ea7f8aee",
+    "current_epoch_bridge_v3": "ebde3d53f492f68edf060587c24ea18707330b30",
+    "current_epoch_bridge_v3_tests": "0eaf5c0c6523eea10cade6b1e24a3e7674bb0e63",
+    "scope_complete_dominance_runtime": "fc62cc86598e304a5dafc8823b8ca43908bd1fc1",
+    "scope_complete_dominance_tests": "ded5b73404f0fbe6fd77606be2b226e7525152c2",
+    "scalar_bridge_v2": "50c85c96bc0a6a73354349f05421572274d21cf5",
+    "scalar_bridge_v2_tests": "2b0b3a55ec0218e18b33f71e956637da2e93c798",
+    "owner_signature_runtime": "b9f04c53a23dc98a220a1f1d096b72da00d4f3c9",
+    "owner_signature_tests": "b8706a9a27b7e86fdb6b43874b5ff5d9031e9d47"
+  },
+  "verified": [
+    "REAL ED25519 SIGNATURE OVER CANONICAL STATEMENT BYTES IS VERIFIED WITH OPENSSL",
+    "MODIFIED STATEMENT OR SIGNATURE BYTES FAIL CLOSED",
+    "PUBLIC KEY MUST MATCH THE TARGET-BOUND OWNER TRUST ANCHOR",
+    "MISSING OWNER TRUST ANCHOR FAILS CLOSED",
+    "UNVERIFIED OWNER KEY IDENTITY OR WRONG BENCHMARK AUTHORIZATION FAILS CLOSED",
+    "MINIMAL OWNER ATTESTATION PASSES WITHOUT DISCLOSING PRIVATE TASK OR CHECK CONTENT",
+    "STALE EPOCH FAILS CLOSED",
+    "GRADING-PROTOCOL DRIFT FAILS CLOSED",
+    "INCOMPLETE PRIVATE SCOPE FAILS CLOSED",
+    "INCOMPLETE LOAD-BEARING CHECK SCOPE FAILS CLOSED",
+    "NEGATIVE NONINFERIORITY ATTESTATION FAILS CLOSED",
+    "ONE MINIMAL OWNER ATTESTATION MULTIPLEXES BOTH AA PREDICATE ALIASES",
+    "DETAILED E_M_U ROUTE REMAINS AVAILABLE",
+    "MATCHED ELO ROUTE REMAINS AVAILABLE"
+  ],
+  "remaining_external_fact": "ONE AUTHENTICATED ARTIFICIAL_ANALYSIS OWNER/AUTHORIZED-OPERATOR TRUST BOOTSTRAP PLUS ONE CURRENT-EPOCH SCOPE-COMPLETE NONINFERIORITY PUBLICATION OR SIGNED ATTESTATION__OR A STRONGER EXISTING ROUTE.",
+  "hard_nonclaims": [
+    "NO REAL OWNER SIGNATURE WAS AVAILABLE TO THIS TEST.",
+    "NO PRIVATE AA_BRIEFCASE CASES WERE CONSUMED.",
+    "NO PREDICATE FAMILY OR TERMINAL CREDIT."
+  ],
+  "accounting": {
+    "new_sprite_created": false,
+    "incremental_spend_usd": null,
+    "spend_measurement_available": false,
+    "fresh_private_benchmark_cases_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
