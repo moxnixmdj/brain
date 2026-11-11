@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_R143_V1",
+  "date": "2026-11-09",
+  "round": "r143",
+  "change": "reference_resolution_v1: resolve a referring expression to ONE element among look-alikes. Four kinds -- TEXT, SCOPE (anchor then target), RELATION (colour/shape/paint), ORDER (position). Returns RESOLVED / AMBIGUOUS / NOT_FOUND and never a silent guess. Wired into CLICK, FIND and the colour-reference path.",
+  "the_audit_that_motivated_it": {
+    "method": "every one of the 20 zero-rate tasks was read and grouped by WHY it failed, not by score",
+    "result": {"no_procedure": 8, "resolution": 7, "read_compute": 2, "other": 1},
+    "conclusion": "on 7 of 20 the procedure was already known and the actuator clicked a wrong-but-plausible sibling. That is not a learning gap and a demonstration would not close it."
+  },
+  "measured": {
+    "r142_reach": "95/190 = 0.5000  CI 0.4296-0.5704",
+    "r143_reach": "106/190 = 0.5579  CI 0.4868-0.6267",
+    "delta": "+11 episodes, +5.8 points, CI overlaps but the paired per-task comparison is unambiguous",
+    "sample": "/tmp/r130_sample.json, 40 tasks, 38 valid, 5 reps"
+  },
+  "per_task_attribution": {
+    "circle-center": "0/5 -> 5/5. The target is an <svg><circle>; every earlier candidate query used HTML selectors and could not see it, so the resolver fell through to the Submit button.",
+    "click-color": "0/5 -> 3/5. The instruction carries the target colour as PAINT in <div id=query-color>, never as a word. Added a painted-reference matcher: read the swatch from #query, then match the task-area element with equal computed background.",
+    "count-sides": "0/5 (REFUSED) -> 2/5. The FIND verb had no implementation but was declared, so r142's widened grammar routed goals into it and stopped. FIND now resolves.",
+    "click-collapsible-2": "0/5 -> 1/5. Links are hidden inside a collapsed jQuery accordion, so the honest answer at time zero is NOT_FOUND. Added expand-then-resolve: open a disclosure, look again.",
+    "use-autocomplete-nodelay": "2/5 -> 5/5",
+    "click-tab-2-hard": "4/5 -> 5/5",
+    "click-checkboxes-soft": "2/5 -> 1/5  REGRESSION",
+    "drag-cube": "5/5 -> 3/5  REGRESSION",
+    "use-autocomplete": "2/5 -> 1/5  REGRESSION"
+  },
+  "six_defects_found_by_probing_instead_of_guessing": [
+    "text_candidates used innerText, which is the whole SUBTREE: a wrapper div whose text is the page matched every word on screen. Now own-text (direct text nodes) is separate from shown text.",
+    "THE INSTRUCTION IS NOT THE TARGET: 'click on the link posuere' is itself a text node in #query, so the resolver clicked the instruction banner. Candidates are now restricted to #area and chrome is excluded.",
+    "controls with no text have NAMES: social-media renders .reply/.retweet/.like/.report as empty spans; the words in the goal are the class names. Added a declared-name tier (aria-label, title, id, className).",
+    "a reference value can be PAINTED: click-color states the target colour only as a styled swatch inside the instruction.",
+    "a circle is not a div: SVG figures were invisible to every selector used before.",
+    "a verb with no implementation must not SHADOW one that has: FIND was declared, unimplemented, and captured goals that used to reach CLICK."
+  ],
+  "the_discipline_this_round_imposed": "Six wrong patches in a row were written before the page was probed, and each one was plausible. What stopped it was dumping the actual candidates and reading the task source: every defect above was invisible to reasoning and obvious to a DOM dump. The rule recorded: PROBE BEFORE PATCH; a patch written from a hypothesis costs a round and teaches nothing.",
+  "what_is_NOT_claimed": [
+    "that 55.8% transfers anywhere. MiniWob++ only.",
+    "that resolution is solved. click-menu still 0/5, social-media still 0/5, hot-cold still 0/5 -- the SCOPE and menu paths are partly wired and partly wrong.",
+    "that the three regressions are noise. drag-cube 5/5 -> 3/5 is a real effect of the changed dispatch and has not been diagnosed."
+  ]
+}

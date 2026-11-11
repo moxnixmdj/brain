@@ -36,6 +36,7 @@ fails the same task.
 from __future__ import annotations
 
 import json
+import sys
 import re
 import time
 import urllib.request
@@ -204,19 +205,25 @@ def start(act: Actuator, task: str, settle: float = 0.40, watch: bool = True) ->
     b = act.box(cover)
     if b:
         act.click(b["cx"], b["cy"])
-    prev, stable, goal = -1, 0, ""
-    for _ in range(40):
+    # Goal settles when BOTH the DOM size and the text have stopped changing. An earlier
+    # version accepted the first non-empty read, and click-color publishes "Click on the
+    # <span>blue</span> colored box" in two steps -- the first read caught "Click on the
+    # colored box." with the colour missing, the parser found no colour, and the episode
+    # was scored as NOT_FOUND on a goal it had misread. Reading a goal once is not evidence
+    # the page has finished stating it.
+    prev_n, prev_g, stable, goal = -1, None, 0, ""
+    for _ in range(60):
         time.sleep(0.06)
         n = act.ev("document.querySelectorAll('*').length")
         g = (act.ev("(document.querySelector('#query')||{}).innerText||''") or "").strip()
-        if n == prev and g:
+        if n == prev_n and g and g == prev_g:
             stable += 1
         else:
             stable = 0
-        prev = n
+        prev_n, prev_g = n, g
         if g:
             goal = g
-        if stable >= 2:
+        if stable >= 3:
             break
     return goal
 
@@ -541,6 +548,39 @@ def v_push_sequence(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "simon:%s" % (",".join(str(x) for x in seq) or "none")
 
 
+def _resolve_and_click(act: Actuator, goal: str) -> str:
+    """Resolve the goal to ONE element and click it. Used by the ambiguous verbs.
+
+    Resolution is a separate module (reference_resolution_v1) because a wrong pick must not
+    be blamed on the actuator and vice versa. This function is the seam: it returns a string
+    that says what happened, including AMBIGUOUS and NOT_FOUND, which are results and not
+    excuses for clicking something anyway.
+    """
+    import importlib.util as _u
+    import os as _os
+    here = _os.path.dirname(_os.path.abspath(__file__))
+    name = "reference_resolution_v1"
+    R = sys.modules.get(name)
+    if R is None:
+        spec = _u.spec_from_file_location(name, _os.path.join(here, name + ".py"))
+        R = _u.module_from_spec(spec)
+        sys.modules[name] = R
+        spec.loader.exec_module(R)
+    out = R.resolve_with_expansion(act, goal)
+    if out["status"] != "RESOLVED":
+        return "resolve-%s%s" % (out["status"].lower(),
+                                 (":" + str([h.get("reasons") for h in out.get("history", [])][:1]))
+                                 if out.get("history") else "")
+    c = out["choice"]
+    act.click(c["cx"], c["cy"])
+    time.sleep(0.24)
+    # a control that reveals a menu needs a second click on the revealed item
+    if not episode_over(act):
+        return "%s:%s" % (str(out.get("by") or out["kind"]),
+                          (c.get("own") or c.get("shown") or c.get("declared") or "")[:24])
+    return "resolved-click-done"
+
+
 def v_menu(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     for p in (plan.get("operand") or {}).get("path") or []:
         hit = best_candidate(candidates(act), p)
@@ -766,23 +806,69 @@ def v_tabs(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 
 
 def v_expand(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
-    btn = [c for c in candidates(act) if c["tag"] in ("BUTTON", "A") and c["cy"] > 95]
-    if btn:
-        act.click(btn[0]["cx"], btn[0]["cy"])
-        time.sleep(0.26)
+    """EXPAND_AND_CLICK -- open every collapsible, then click the link the goal NAMES.
+
+    click-collapsible-2 renders several collapsed sections and hides the target link inside
+    one of them. The earlier version clicked the first button on the page and then looked for
+    the target: on that page the first button is a section header, so the target stayed
+    hidden and the task scored a flat 0 with a correct-looking action string. Opening ALL
+    headers first, then resolving the quoted name, is what the instruction actually says.
+
+    social-media has the same shape with rows: the goal names a user, so the click must be
+    resolved to that row rather than to the first button in the list.
+    """
     tok = (plan.get("operand") or {}).get("quoted")
+    if tok is None:
+        m = re.search(r'"([^"]+)"', goal) or re.search(r"\u201c([^\u201d]+)\u201d", goal)
+        tok = m.group(1).strip() if m else None
+
+    # 1. open every collapsible header before looking for the target
+    opened = 0
+    for _ in range(8):
+        headers = act.js(
+            "[...document.querySelectorAll('button,a,div,span,h1,h2,h3,h4,li')]"
+            ".filter(e=>{const r=e.getBoundingClientRect();"
+            "return r.width>4&&r.height>4&&r.y>40&&r.y<200&&e.children.length<3})"
+            ".map(e=>({t:(e.innerText||'').trim().slice(0,40),"
+            "cx:e.getBoundingClientRect().x+e.getBoundingClientRect().width/2,"
+            "cy:e.getBoundingClientRect().y+e.getBoundingClientRect().height/2}))"
+            ".filter(e=>e.t&&e.t.length<40).slice(0,8)") or []
+        if not headers:
+            break
+        if any(tok and tok.lower() in (h["t"] or "").lower() for h in headers):
+            break
+        h = headers[0]
+        act.click(h["cx"], h["cy"])
+        opened += 1
+        time.sleep(0.18)
+        if episode_over(act):
+            return "expand-clicked-header@%d" % opened
+
+    # 2. now the target should be reachable by name
     if tok:
         hit = best_candidate(candidates(act), tok)
         if hit:
             act.click(hit["cx"], hit["cy"])
             time.sleep(0.20)
-    submit(act)
-    return "expand"
+            if episode_over(act):
+                return "expanded+clicked:%s" % tok
+    submit(act, required=False)
+    return "expand-miss:%s" % tok
 
 
 def v_click(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     tok = (plan.get("operand") or {}).get("quoted")
+    if tok is None:
+        m = re.search(r'"([^"]+)"', goal) or re.search(r"\u201c([^\u201d]+)\u201d", goal)
+        tok = m.group(1).strip() if m else None
     if tok:
+        # resolution first: it knows about declared names, scoping and expansion
+        got = _resolve_and_click(act, goal)
+        if episode_over(act):
+            return "click-done"
+        if got.startswith(("resolved", "declared", "substring", "exact", "painted")):
+            submit(act, required=False)
+            return got
         hit = best_candidate(candidates(act), tok)
         if hit:
             act.click(hit["cx"], hit["cy"])
@@ -805,6 +891,16 @@ def v_click(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 # ---------------------------------------------------------------------------------------
 # ROUTER  -- choose by the widget that is PRESENT, not by the verb word alone
 # ---------------------------------------------------------------------------------------
+def colour_in_goal(goal: str) -> str | None:
+    """A colour word in the goal text, if one is actually written there."""
+    for w in ("black", "white", "red", "green", "blue", "yellow", "olive", "cyan",
+              "magenta", "pink", "gray", "grey", "orange", "purple", "brown", "navy",
+              "teal", "lime"):
+        if re.search(r"\b" + w + r"\b", goal or "", re.I):
+            return w
+    return None
+
+
 def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     verb = plan.get("verb")
     op = plan.get("operand") or {}
@@ -826,6 +922,16 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     if act.ev("!!document.querySelector('#math-problem')"):
         return v_read_and_compute(act, plan, goal)
 
+    # A goal that says "the colored box" but writes no colour carries its value as PAINT in
+    # the instruction itself. The painted matcher is the only thing that can read it, and it
+    # has to run before CLICK concludes there is no token.
+    if re.search(r"\bcolou?red\b", g, re.I) and colour_in_goal(g) is None:
+        got = _resolve_and_click(act, goal)
+        if episode_over(act) or not got.startswith("resolve-not"):
+            if not episode_over(act):
+                submit(act, required=False)
+            return got
+
     table = {
         "SET_SLIDERS": v_slider, "SCROLL_TO": v_scroll, "ENTER": v_type,
         "FIND_AND_TYPE": v_type, "DRAW": v_draw_line, "MOVE": v_move_cube,
@@ -842,7 +948,17 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         if op.get("colour"):
             return v_colour(act, plan, goal)
         return v_native_select(act, plan, goal)
+
     fn = table.get(str(verb))
+    if str(verb) in ("FIND", "RESOLVE"):
+        # FIND used to fall through to CLICK, which with no quoted token clicks the sole
+        # button on the page -- i.e. Submit -- and ends the episode before resolution is
+        # tried. "Find and click the center of the circle" resolved perfectly and then
+        # pressed Submit. Resolution has to run first; CLICK is the fallback, not the route.
+        got = _resolve_and_click(act, goal)
+        if episode_over(act):
+            return "find-done"
+        return got
     if fn is None:
         raise ActuatorError("VERB_NOT_IMPLEMENTED:" + str(verb))
     return fn(act, plan, goal)
