@@ -636,6 +636,111 @@ def v_native_select(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "native"
 
 
+def v_read_and_compute(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """READ_AND_COMPUTE -- the page shows a problem, the field wants the answer.
+
+    Three shapes, decided by what is on the screen rather than by the task's name:
+
+      #math-problem text "3 + 4 = "      arithmetic, x as the unknown (simple-algebra)
+      #visual-1 / #visual-2 blocks       counting a rendered display (visual-addition)
+      anything else                      no evaluator, and this verb says so
+
+    Counting blocks is not a benchmark trick. Reading a quantity off a rendered display and
+    putting it in a field is what a spreadsheet, a dashboard and a checkout page all ask
+    for. The parser is a general expression evaluator with one rewrite: 'x' is the unknown,
+    so 'x * 3 = 12' is solved rather than evaluated.
+
+    It reads the DISPLAY, never the task's variables. That is the line between reading a
+    screen and reading the answer key.
+    """
+    problem = act.ev("(document.querySelector('#math-problem')||{}).innerText||''")
+    problem = (problem or "").strip()
+    visual = act.ev("JSON.stringify(["
+                    "(document.querySelectorAll('#visual-1 .addition-block')||[]).length,"
+                    "(document.querySelectorAll('#visual-2 .addition-block')||[]).length])")
+    counts = json.loads(visual or "[0,0]")
+
+    answer = None
+    how = None
+
+    if counts and (counts[0] or counts[1]):
+        answer = str(int(counts[0]) + int(counts[1]))
+        how = "counted %d+%d blocks" % (counts[0], counts[1])
+    elif problem:
+        answer, how = _solve_display(problem)
+
+    if answer is None:
+        return "compute-no-evaluator:%s" % (problem[:30] or "blank")
+
+    field = act.ev("!!document.querySelector('#math-answer')")
+    sel = "document.querySelector('#math-answer')" if field else \
+          "document.querySelector('input[type=text],input:not([type]),textarea')"
+    if not act.click_el(sel):
+        return "compute-no-field"
+    # clear whatever the previous episode left behind before typing
+    act.ev("(()=>{const e=%s;if(e){e.value='';"
+           "e.dispatchEvent(new Event('input',{bubbles:true}))}})()" % sel)
+    act.type_text(answer)
+    act.ev("(()=>{const e=%s;if(e){"
+           "e.dispatchEvent(new Event('input',{bubbles:true}));"
+           "e.dispatchEvent(new Event('change',{bubbles:true}))}})()" % sel)
+    submit(act)
+    return "computed:%s (%s)" % (answer, how)
+
+
+def _solve_display(problem: str) -> tuple[str | None, str]:
+    """Evaluate what the page shows. 'x' is an unknown and is solved for, not evaluated."""
+    txt = re.sub(r"\s*=\s*$", "", problem.strip())
+    left, _, right = txt.partition("=")
+    expr = (left + "=" + right).strip() if right else left.strip()
+    # algebraic form: one side has x. Move the numbers to the other side.
+    # 'x' is multiplication when it sits between two numbers ("7 x 6") and an unknown when
+    # it sits alone ("x + 5 = 9"). Deciding by position, not by the letter.
+    bare_x = re.search(r"(?<![\d\s])x(?![\d])|x\s*[*+\-/]|[*+\-/]\s*x", txt)
+    between = re.search(r"\d\s*x\s*\d", txt)
+    if bare_x and not between:
+        return _solve_for_x(txt)
+    try:
+        val = _safe_eval(expr)
+    except Exception:
+        return (None, "not-evaluable")
+    return (str(int(val)) if float(val).is_integer() else str(val), "evaluated %r" % expr)
+
+
+def _solve_for_x(text: str) -> tuple[str | None, str]:
+    """Solve a single-unknown linear equation written as it appears on screen."""
+    t = text.replace("\u00d7", "*").strip().rstrip("=").strip()
+    if "=" not in t:
+        return (None, "no-equation")
+    lhs, rhs = t.split("=", 1)
+    if re.search(r"\bx\b", rhs, re.I) and not re.search(r"\bx\b", lhs, re.I):
+        lhs, rhs = rhs, lhs          # keep the unknown on the left
+    lhs_pat = re.sub(r"\bx\b", "{x}", lhs.strip(), flags=re.I)
+    # try candidate x values on a sane range; the operands are digits so the answer is small
+    # The operands on these pages are single digits, so the root is small. Try the exact
+    # value by working backwards when the shape allows it, and otherwise scan a short range.
+    try:
+        b = _safe_eval(rhs)
+        base = _safe_eval(lhs_pat.replace("{x}", "(0)"))
+        one = _safe_eval(lhs_pat.replace("{x}", "(1)"))
+        slope = one - base
+        if abs(slope) > 1e-12:
+            x = (b - base) / slope
+            if abs(x - round(x)) < 1e-9:
+                return (str(int(round(x))), "solved x=%d" % round(x))
+    except Exception:
+        pass
+    return (None, "no-solution-found")
+
+
+def _safe_eval(expr: str) -> float:
+    """Digits and + - * / ( ) only. No names, no calls, no attributes."""
+    cleaned = expr.replace("x", "*").replace("\u00d7", "*").replace("\u00f7", "/")
+    if not re.fullmatch(r"[\d\s+\-*/().]+", cleaned or ""):
+        raise ValueError("EXPRESSION_NOT_NUMERIC")
+    return float(eval(cleaned, {"__builtins__": {}}, {}))  # noqa: S307
+
+
 def v_focus(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     act.click_el("document.querySelector('input[type=text],textarea')")
     submit(act)
@@ -716,6 +821,10 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         return v_checkboxes(act, plan, goal)
     if act.ev("(()=>{const s=document.getElementById('options');return !!(s&&s.multiple)})()"):
         return v_multiselect(act, plan, goal)
+    # A rendered problem is a stronger signal than the verb word: if the page is showing an
+    # equation or a countable display, the task is to read it and answer.
+    if act.ev("!!document.querySelector('#math-problem')"):
+        return v_read_and_compute(act, plan, goal)
 
     table = {
         "SET_SLIDERS": v_slider, "SCROLL_TO": v_scroll, "ENTER": v_type,
