@@ -1,0 +1,135 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_20261005_V1",
+  "action_id": "SYNTHESIS_MATERIAL_ORDER_MONOTONICITY_20261005_V1",
+  "status": "ACTIVE_CANDIDATE__ZERO_REALITY_PROOF_COMPILATION",
+  "canonical_generation": "CURRENT_14_PROVED_24_OPEN_EPOCH",
+  "canonical_base_commit": "7c0c643ec358e895b7e49913a6ff9ef8b5e12c22",
+  "capability_target": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+  "action_kind": "COMPOSE_EXISTING_VERIFIED_PROOFS_AND_INDEPENDENT_SYMBOLIC_CHECK",
+  "blocker_lease_key": "CURRENT_14_24::SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR::MATERIAL_ORDER_AND_MONOTONICITY",
+  "expected_parent_frontier_change": "DISCHARGE_THE_FIRST_TWO_ZERO_REALITY_PROOF_OBLIGATIONS_OF_MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_WITHOUT_CLOSING_THE_PREDICATE",
+  "theory_invariants": {
+    "terminal_capability_target": "OPUS_5_5_USEFUL_CAPABILITY_OWNERSHIP_V1",
+    "knowledge_policy": "EXTERNAL_JIT",
+    "opus_acceptance_bar": "BRAIN_INTERNALIZED_CONFIGURED_ROUTE_GREATER_THAN_OR_EQUAL_TO_OPUS_5_5",
+    "provider_access_is_ownership": false,
+    "capability_invention": false
+  },
+  "ownership_tests": {
+    "applies_to_capability_promotion": false,
+    "reason": "PROOF_COMPILATION_ONLY__NO_NEW_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  },
+  "reasoning_durability": {
+    "real_objective": "REMOVE_UNNECESSARY_EXACT_SYNTHESIS_AGGREGATOR_WEIGHT_DISCOVERY_FROM_THE_LIVE_ROOT2_PATH",
+    "governing_invariants": [
+      "NO_FRESH_REALITY",
+      "NO_ACCEPTANCE_CREDIT",
+      "NO_TARGET_REBASE",
+      "NO_HIDDEN_DIMENSION_INVENTION"
+    ],
+    "material_premises": [
+      "FROZEN_PROTOCOL_DECLares_EXACTLY_SIX_SYNTHESIS_TASK_DIMENSIONS",
+      "INDEPENDENT_SCOPE_CERTIFICATE_PROVES_EXACT_UNION_COVERAGE_OF_THOSE_SIX_DIMENSIONS",
+      "MATCHED_QUALITY_IS_FROZEN_AS_MINIMUM_OF_FIVE_NON_COVERAGE_DIMENSIONS",
+      "REQUIRED_CLAIM_COVERAGE_IS_A_SEPARATE_SIXTH_COORDINATE",
+      "UNSUPPORTED_MATERIAL_CLAIMS_IS_A_SEPARATE_ALREADY_PROVED_ATOMIC_PREDICATE_AND_HARD_GATE"
+    ],
+    "evidence_refs": [
+      "canonical/governance/MATCHED_NONINFERIORITY_MONOTONE_ROUTE_CLASSIFICATION_20261005_V1.json",
+      "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "canonical/governance/SYNTHESIS_MATCHED_QUALITY_METRIC_CONTRACT_V1.json",
+      "canonical/governance/SYNTHESIS_DIMENSION_SCORERS_AND_STRICT_REDUCER_V1.json",
+      "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json"
+    ],
+    "conclusion": "IF_SOURCE_BINDINGS_HOLD__THE_OPEN_SYNTHESIS_MATCHED_PREDICATE_HAS_A_COMPLETE_SIX_COORDINATE_MATERIAL_ORDER_AND_ITS_FROZEN_Q_MIN_PLUS_COVERAGE_PROJECTION_IS_COORDINATEWISE_MONOTONE",
+    "selected_route": "SOURCE_BOUND_SET_IDENTITY_COMPOSITION_PLUS_WOLFRAM_MONOTONICITY_CHECK",
+    "rejected_material_alternatives": [
+      "REQUEST_EXACT_HIDDEN_SYNTHESIS_WEIGHTING",
+      "GENERATE_MATCHED_CASES_BEFORE_ZERO_REALITY_PROOF_SATURATION",
+      "REOPEN_ALREADY_PROVED_REQUIRED_CLAIM_COVERAGE_CEILING"
+    ],
+    "uncertainties": [
+      "TARGET_OUTCOME_DISTRIBUTION_OR_CONSERVATIVE_MASS_BOUNDS_REMAIN_OPEN",
+      "FULL_MASS_DOMINANCE_PRESERVING_COUPLING_REMAINS_OPEN"
+    ],
+    "assumptions": [],
+    "non_goals": [
+      "NO_SYNTHESIS_PREDICATE_CLOSURE",
+      "NO_OPUS_SCORE_INFERENCE",
+      "NO_BRAIN_SCORE_INFERENCE"
+    ],
+    "next_action": "FREEZE_CERTIFICATE_AND_SYMBOLIC_VERIFICATION__THEN_RECOMPUTE_THE_SYNTHESIS_ROOT2_RESIDUAL_TO_OUTCOME_MASS_AND_COUPLING_ONLY_IF_NO_OTHER_BLOCKER_SURVIVES",
+    "supersession_conditions": [
+      "FROZEN_SYNTHESIS_PROTOCOL_DIMENSIONS_CHANGE",
+      "MATCHED_QUALITY_AGGREGATOR_SEMANTICS_CHANGE",
+      "SCOPE_CERTIFICATE_IS_REVOKED_OR_WEAKENED"
+    ],
+    "supersedes": null
+  },
+  "recursive_obs": {
+    "search_before_invention": true,
+    "duplicate_search_result": "NO_EXISTING_SYNTHESIS_MATERIAL_ORDER_OR_MONOTONICITY_CERTIFICATE_FOUND_IN_CURRENT_COMMIT_OR_OPEN_PR_SEARCH",
+    "highest_leverage_live_parent": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "why_now": "LIVE_MONOTONE_ROUTE_CLASSIFICATION_NAMES_THESE_AS_ITS_FIRST_TWO_MINIMUM_NEXT_PROOF_OBLIGATIONS"
+  },
+  "behavioral_contract": {
+    "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+    "inputs": "Verified evidence units with provenance, user objective/audience, output constraints and required claims",
+    "environment_state": "Potentially large or conflicting evidence set with finite response/artifact budget",
+    "allowed_information": "Verified evidence and explicit user/rubric constraints",
+    "required_output_or_action": "Select, organize and express the necessary evidence so required claims are supported, material uncertainty/disagreement is preserved and irrelevant detail is omitted",
+    "success_condition": "Independent claim-support audit has no unsupported material claims, required coverage is complete, audience/format constraints pass, and compression does not delete decision-relevant evidence",
+    "failure_condition": "Unsupported synthesis, omitted required evidence, distorted disagreement/uncertainty, irrelevant verbosity, or audience/format mismatch",
+    "terminal_consequence": "Residual shared by communication, professional work, multidisciplinary/scientific research and artifacts",
+    "verification_route": "Fresh evidence bundles with hidden support graph; compare factual/coverage/compression metrics and human-independent rubric where possible",
+    "dependency_boundary": "Evidence storage/citation matching can be deterministic; salience/organization under bounded output is residual unless objective weights are explicit",
+    "scope": "Grounded evidence synthesis under audience and format constraints"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "NO_UNTOUCHED_CASE_READ__NO_TASK_EXECUTION__NO_PROMOTION"
+  },
+  "qualification_stage": "ZERO_REALITY_PREEXPOSURE_PROOF_COMPILATION",
+  "terminal_proof_control": {
+    "proof_obligation": "MATERIAL_VECTOR_COMPLETENESS_AND_COORDINATEWISE_MONOTONICITY",
+    "hole_type": "DEDUCTIVE",
+    "expected_certificate_or_receipt": "SOURCE_BOUND_CERTIFICATE_PLUS_INDEPENDENT_SYMBOLIC_KERNEL_RECEIPT",
+    "validator": "WOLFRAM_LANGUAGE_KERNEL_PLUS_EXACT_GIT_BLOB_BINDINGS",
+    "maximum_cheap_test_cost": "ZERO_TERMINAL_CASES",
+    "prerequisites": [
+      "CURRENT_FROZEN_PROTOCOL",
+      "CURRENT_SCOPE_CERTIFICATE",
+      "CURRENT_MATCHED_QUALITY_METRIC",
+      "CURRENT_DIMENSION_SCORERS"
+    ],
+    "contamination_risk": "NONE__NO_CASES_OR_RESULTS",
+    "reversibility": "FULLY_REVERSIBLE_CANDIDATE",
+    "falsification_condition": "ANY_MATERIAL_TARGET_DIMENSION_OUTSIDE_THE_SIX_VECTOR_OR_ANY_NONMONOTONE_FROZEN_AGGREGATION_RULE",
+    "critical_path_relation": "DIRECT_FIRST_TWO_OBLIGATIONS_OF_CURRENT_PRIMARY_SYNTHESIS_MONOTONE_ROUTE"
+  },
+  "continuous_obs": {
+    "dependency_inventory_complete": true,
+    "unknown_material_dependencies": [],
+    "stale_authority_absent": true,
+    "information_policy": "CURRENT_CANONICAL_ARTIFACTS_ONLY__NO_FRESH_REALITY"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0
+  },
+  "global_terminal_proof_cut": {
+    "proposed_action_membership": "ZERO_REALITY_DEDUCTIVE_SUBPROOF_OF_CURRENT_LIVE_SYNTHESIS_ROOT2_ROUTE",
+    "terminal_decision_value": "REDUCES_PROOF_DEPENDENCY_COUNT_WITHOUT_CHANGING_ACCEPTANCE_TRUTH"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}

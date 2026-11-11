@@ -1,0 +1,48 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_TARGET_FREE_COUPLING_CEILING_EQUIVALENCE_WOLFRAM_VERIFICATION_20261005_V1",
+  "date": "2026-10-05",
+  "status": "INDEPENDENT_SYMBOLIC_BOUNDARY_CHECK_PASS__GENERAL_ORDER_PROOF_BOUND_SEPARATELY__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/SYNTHESIS_TARGET_FREE_COUPLING_CEILING_EQUIVALENCE_20261005_V1.json",
+    "git_blob_sha": "f7df689ec2ec98ace0b9a8f1076c0fd562197456"
+  },
+  "independent_kernel": {
+    "provider": "WOLFRAM_LANGUAGE_KERNEL",
+    "check": "ENUMERATE_THE_6D_BOOLEAN_BOUNDARY_CUBE_AND_FIND_ALL_OUTCOMES_DOMINATING_TOP",
+    "code": "With[{outs = Tuples[{0,1},6], top = ConstantArray[1,6]}, {Select[outs, And@@Thread[# >= top]&], Length@Select[outs, And@@Thread[# >= top]&], Select[outs, And@@Thread[# >= top]&] === {top}}]",
+    "exact_output": "{{{1,1,1,1,1,1}},1,True}",
+    "result": "PASS__TOP_HAS_A_UNIQUE_DOMINATOR_ON_THE_BOUNDARY_CUBE"
+  },
+  "general_proof_boundary": {
+    "method": "ORDER_THEORETIC_ARGUMENT_NOT_FINITE_GRID_EXTRAPOLATION",
+    "statement": "IN_[0,1]^6_WITH_COORDINATEWISE_ORDER__b_GE_(1,...,1)_IMPLIES_EACH_b_i_GE_1_AND_b_i_LE_1__THEREFORE_b_i=1_FOR_ALL_i",
+    "role": "ESTABLISHES_THE_CONTINUOUS_DOMAIN_NECESSITY_USED_BY_THE_SUBJECT"
+  },
+  "negative_operational_canary": {
+    "brain_top_mass_less_than_one": true,
+    "adversarial_target_distribution": "DELTA_TOP",
+    "full_mass_dominance_coupling_possible": false,
+    "reason": "TARGET_TOP_MASS_CAN_ONLY_BE_TRANSPORTED_TO_BRAIN_TOP_EQUIVALENT_MASS"
+  },
+  "verified_consequence": [
+    "TARGET_FREE_MONOTONE_COUPLING_IS_EQUIVALENT_TO_A_BRAIN_TOP_MASS_CERTIFICATE",
+    "IF_BRAIN_TOP_MASS_IS_NOT_ALREADY_PROVED__SOME_TARGET_SPECIFIC_OUTCOME_INFORMATION_IS_INFORMATION_THEORETICALLY_NECESSARY",
+    "EXACT_HIDDEN_WEIGHT_INFORMATION_IS_STILL_UNNECESSARY"
+  ],
+  "hard_nonclaims": [
+    "NO_BRAIN_TOP_MASS_CERTIFICATE",
+    "NO_TARGET_OUTCOME_BOUND",
+    "NO_COUPLING_EXECUTION",
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
