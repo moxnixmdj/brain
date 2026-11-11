@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_KERNEL_EFFECT_UNIX_SOCKET_COUNTERMODEL_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_SPRITE_EXACT_BLOB_COUNTERMODEL_PASS__NETWORK_NAMESPACE_NOT_LOCAL_IPC_COMPLETE__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "path": "canonical/runtime/root3_kernel_effect_unix_socket_countermodel_v1.py",
+    "git_blob_sha": "04cfc6e56b1a9d57163e3a4fb297d832ed53a8ba"
+  },
+  "carrier": {
+    "provider": "SPRITES",
+    "sprite_name": "brain-h100-independent-replay-v1",
+    "sprite_id": "sprite-930163fb-72e8-4d9b-b810-2e29e52ec107",
+    "execution": "EXACT_GITHUB_BLOB_MATERIALIZATION_THEN_PYTHON3"
+  },
+  "result": {
+    "countermodel": true,
+    "child_returncode": 0,
+    "received": "Y"
+  },
+  "proved_falsification": "A_FILESYSTEM_NAMED_AF_UNIX_SOCKET_VISIBLE_TO_THE_CHILD_REMAINS_REACHABLE_AFTER_unshare_-Urn_EVEN_WITH_close_fds_TRUE__THEREFORE_NETWORK_NAMESPACE_PLUS_FD_HYGIENE_IS_NOT_A_SCOPE_COMPLETE_LOCAL_IPC_BOUNDARY.",
+  "repair_requirement": "HIDE_OR_DENY_UNDECLARED_LOCAL_IPC_ENDPOINTS_WITH_A_MINIMAL_MOUNT_VIEW_OR_KERNEL_ADDRESS_FAMILY_RESTRICTION_BEFORE_CREDITED_RUNTIME_START.",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_REPAIRED_MINIMAL_ROOT_OR_ADDRESS_FAMILY_ROUTE_IS_YET_PROVED",
+    "NO_ROOT3_ACCEPTANCE_CAPABILITY_OWNERSHIP_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
