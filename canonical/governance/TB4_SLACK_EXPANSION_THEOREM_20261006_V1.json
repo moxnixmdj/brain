@@ -1,0 +1,170 @@
+{
+  "schema": "PROJECT_BRAIN_TB4_SLACK_EXPANSION_THEOREM_20261006_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__ZERO_SLACK_REPAIRED_BY_RESOURCE_SCOPE_EXPANSION__ZERO_CREDIT",
+  "target_predicate": "CODING_TB4_GE_66_4",
+  "sources": {
+    "minimum_recovery_cut": {
+      "path": "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json",
+      "git_blob_sha": "fc5bb61b1b97e6aae46222b9de84e16797510bcc"
+    },
+    "recovery_identity_binding": {
+      "path": "canonical/governance/TB4_RECOVERY_TASK_IDENTITY_BINDING_20261006_V1.json",
+      "git_blob_sha": "b010a8bf7ece899230e259b46a8459922ab4d956"
+    },
+    "zero_spend_binding": {
+      "path": "canonical/governance/TB4_BUILDKITE_ZERO_SPEND_HARD_STOP_BINDING_20261006_V1.json",
+      "git_blob_sha": "ab9189847c148c16026dcd9dcc08f8a51333d0c0"
+    },
+    "prior_zero_slack_candidate": {
+      "path": "canonical/governance/TB4_ZERO_SLACK_THRESHOLD_THEOREM_20261006_V1.json",
+      "branch": "sol/tb4-zero-slack-threshold-theorem-20261006",
+      "git_blob_sha": "88a1bce55a52affc1cd1ae9f4a588ab4c85ed430"
+    }
+  },
+  "arithmetic": {
+    "total_task_count": 66,
+    "trials_per_task": 5,
+    "required_successes": 220,
+    "base_remaining_creditable_tasks": 36,
+    "buildkite_recovered_tasks": 8,
+    "current_creditable_tasks": 44,
+    "current_success_ceiling": 220,
+    "current_slack_slots": 0,
+    "remaining_resource_excluded_tasks_max": 4,
+    "generalized_formula": {
+      "k": "NUMBER_OF_ADDITIONAL_RESOURCE_EXCLUDED_TASKS_RECOVERED__INTEGER_0_TO_4",
+      "creditable_tasks": "44+k",
+      "success_ceiling": "5*(44+k)=220+5k",
+      "threshold_slack_slots": "5k",
+      "maximum_failed_or_unproved_slots_while_threshold_remains_attainable": "5k"
+    },
+    "table": [
+      {
+        "k": 0,
+        "creditable_tasks": 44,
+        "success_ceiling": 220,
+        "slack_slots": 0
+      },
+      {
+        "k": 1,
+        "creditable_tasks": 45,
+        "success_ceiling": 225,
+        "slack_slots": 5
+      },
+      {
+        "k": 2,
+        "creditable_tasks": 46,
+        "success_ceiling": 230,
+        "slack_slots": 10
+      },
+      {
+        "k": 3,
+        "creditable_tasks": 47,
+        "success_ceiling": 235,
+        "slack_slots": 15
+      },
+      {
+        "k": 4,
+        "creditable_tasks": 48,
+        "success_ceiling": 240,
+        "slack_slots": 20
+      }
+    ]
+  },
+  "remaining_resource_excluded_tasks": [
+    {
+      "task": "terminal-bench/fp8-rmsnorm-gemm",
+      "cpus": 4,
+      "memory_mb": 16384,
+      "storage_mb": 30720,
+      "gpus": 1,
+      "incremental_slack_if_recovered": 5
+    },
+    {
+      "task": "terminal-bench/jax-speedrun-gpu",
+      "cpus": 16,
+      "memory_mb": 32768,
+      "storage_mb": 1024000,
+      "gpus": 1,
+      "incremental_slack_if_recovered": 5
+    },
+    {
+      "task": "terminal-bench/live-database-cutover",
+      "cpus": 16,
+      "memory_mb": 16384,
+      "storage_mb": 20480,
+      "gpus": 0,
+      "incremental_slack_if_recovered": 5
+    },
+    {
+      "task": "terminal-bench/math-eval-grader",
+      "cpus": 8,
+      "memory_mb": 16384,
+      "storage_mb": 30720,
+      "gpus": 1,
+      "incremental_slack_if_recovered": 5
+    }
+  ],
+  "deduction": {
+    "prior_false_dichotomy": "ALL_220_CURRENT_SLOTS_OR_UNIVERSAL_DOMINANCE_ONLY",
+    "corrected_routes": [
+      "R_A__STRONGER_TASK_CONDITIONED_DOMINANCE_OR_OTHER_SOUND_UNIVERSAL_CERTIFICATE",
+      "R_B__EXPAND_CREDITABLE_TASK_SET_BY_BINDING_A_ZERO_INCREMENTAL_SPEND_PROTOCOL_COMPARABLE_CARRIER_FOR_ONE_OR_MORE_OF_THE_FOUR_REMAINING_RESOURCE_EXCLUDED_TASKS",
+      "R_C__SLOTWISE_THRESHOLD_EXECUTION_ONLY_AFTER_R_A_AND_R_B_INFORMATION_POSITIVE_WORK_IS_EXHAUSTED"
+    ],
+    "leverage": "EACH_ADDITIONAL_RECOVERED_TASK_CREATES_FIVE_FAILURE_SLOTS_OF_ERROR_BUDGET_WITHOUT_NEEDING_TO_IMPROVE_BRAIN_CAPABILITY_FIRST",
+    "minimum_useful_carrier_delta": "RECOVER_ANY_ONE_OF_THE_FOUR_REMAINING_TASKS",
+    "best_possible_carrier_delta": "RECOVER_ALL_FOUR__CREATE_20_SLOT_THRESHOLD_ERROR_BUDGET"
+  },
+  "h100_wake_condition": {
+    "status": "CONTENT_ADDRESSED_WAKE_CANDIDATE__RESOURCE_PROBE_ONLY__ZERO_TERMINAL_CASES",
+    "reason": "THE_PRIOR_H100_TERMINAL_PATH_WAS_DEMOTED_WITHOUT_A_WAKE. THE ZERO_SLACK RESULT CREATES_A_NEW_CAUSAL PATH: A RICHER EXISTING CARRIER MAY RECOVER GPU_OR_16_CPU_RESOURCE_EXCLUDED_TB4_TASKS AND CREATE SCORE SLACK.",
+    "permitted_first_probe": "READ_ONLY_OR_ZERO_CASE_RESOURCE_ENVELOPE_ONLY__CPU_MEMORY_DISK_GPU_AND_CONTAINER_SUPPORT",
+    "forbidden_until_separate_authority": [
+      "READ_TB4_TASK_INSTRUCTIONS",
+      "EXECUTE_TB4_TERMINAL_CASES",
+      "USE_PAID_CAPACITY",
+      "GENERAL_H100_CAPABILITY_RESEARCH_UNRELATED_TO_THE_FOUR_RESOURCE_EXCLUDED_TASKS"
+    ],
+    "pass_condition": "EXISTING_ZERO_INCREMENTAL_SPEND_CARRIER_MEETS_DECLARED_RESOURCE_METADATA_FOR_AT_LEAST_ONE_OF_THE_FOUR_TASKS_AND_PROTOCOL_COMPARABILITY_CAN_BE_PROVED",
+    "fail_condition": "NO_EXISTING_ZERO_INCREMENTAL_SPEND_CARRIER_CAN_RECOVER_ANY_ADDITIONAL_TASK_UNDER_DECLARED_RESOURCE_AND_PROTOCOL_SEMANTICS"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "TB4_ZERO_SLACK_AS_REASON_TO_REQUIRE_220_OF_220_WITHOUT_FIRST_SEARCHING_FOR_CARRIER_SCOPE_EXPANSION",
+      "GENERAL_H100_RESEARCH_WITHOUT_TB4_RESOURCE_RECOVERY_BINDING"
+    ],
+    "activate": [
+      "ZERO_CASE_EXISTING_CARRIER_RESOURCE_ENVELOPE_MATCH_AGAINST_THE_FOUR_REMAINING_RESOURCE_EXCLUDED_TASKS",
+      "TASK_CONDITIONED_DOMINANCE_SEARCH_IN_PARALLEL"
+    ],
+    "rank_order": [
+      "REUSE_EXISTING_ALREADY_RUNNING_ZERO_COST_CARRIER_METADATA_OR_PRIOR_RECEIPTS",
+      "ZERO_CASE_RESOURCE_PROBE_IF_NEEDED_AND_AUTHORIZED",
+      "PROTOCOL_EQUIVALENCE_FOR_ONLY_MATCHED_ADDITIONAL_TASKS",
+      "TERMINAL_TASK_EXECUTION_LAST"
+    ],
+    "next": "CHECK_EXISTING_CARRIERS_FOR_ONE_OR_MORE_OF_THE_FOUR_RESOURCE_ENVELOPES__STOP_AS_SOON_AS_NEW_SLACK_IS_PROVED__RECOMPUTE_THRESHOLD_ROUTE"
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ANY_ADDITIONAL_TASK_IS_CURRENTLY_RECOVERED",
+    "NO_CLAIM_ANY_TB4_TASK_PASSES",
+    "NO_TB4_SCORE_PROMOTION",
+    "NO_FRESH_TERMINAL_CASE_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": true,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
