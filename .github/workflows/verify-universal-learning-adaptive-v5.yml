@@ -1,0 +1,55 @@
+name: Verify universal learning adaptive router v5
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/UNIVERSAL_LEARNING_ADAPTIVE_ROUTER_V5.json"
+      - "canonical/action_intents/2026-10-04_UNIVERSAL_LEARNING_V5.json"
+      - "canonical/runtime/verified_probe_model_v5.py"
+      - "canonical/runtime/adaptive_experiment_planner_v5.py"
+      - "canonical/runtime/universal_learning_adaptive_router_v5.py"
+      - "canonical/tests/test_universal_learning_adaptive_router_v5.py"
+      - ".github/workflows/verify-universal-learning-adaptive-v5.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile V5 learning stack
+        run: |
+          python -m py_compile \
+            canonical/runtime/verified_probe_model_v5.py \
+            canonical/runtime/adaptive_experiment_planner_v5.py \
+            canonical/runtime/universal_learning_adaptive_router_v5.py
+      - name: Run V1 through V5 learning tests
+        run: |
+          python -m unittest \
+            canonical.tests.test_universal_learning_contract_v1 \
+            canonical.tests.test_universal_active_transfer_learner_v2 \
+            canonical.tests.test_universal_learning_active_router_v2 \
+            canonical.tests.test_universal_learning_decision_router_v3 \
+            canonical.tests.test_universal_learning_open_world_router_v4 \
+            canonical.tests.test_universal_learning_adaptive_router_v5 -v
+      - name: Verify exact V5 bindings and zero-credit boundary
+        run: |
+          python - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          gov=json.loads(Path("canonical/governance/UNIVERSAL_LEARNING_ADAPTIVE_ROUTER_V5.json").read_text())
+          for path,expected in gov["exact_bound_components"].items():
+              got=subprocess.check_output(["git","hash-object",path],text=True).strip()
+              assert got==expected,(path,got,expected)
+          assert gov["acceptance_credit_delta"]==0
+          assert gov["ownership_credit_delta"]==0
+          assert gov["fresh_reality_authority"] is False
+          PY
