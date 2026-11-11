@@ -1,0 +1,36 @@
+{
+  "schema": "PROJECT_BRAIN_R158_THE_ROUTE_SUBMITTED_NOTHING_V1",
+  "date": "2026-11-09",
+  "round": "r158",
+  "family": "COMPUTER_AND_BROWSER_USE",
+  "public_benchmark": "MiniWob++",
+  "target_task": "click-option",
+  "before": {"successes": 1, "runs": 12, "source": "R121_SPECTRUM_ATTRIBUTION_MEASURED_ON_MINIWOB_20261109_V1.json"},
+  "after": {"successes": 12, "runs": 12, "action": "checkboxes:1"},
+  "root_cause": {
+    "statement": "The verb SELECT routed to v_native_select, which drives a native <select id=options>. click-option has six radios and no #options. The driver found nothing, clicked nothing, and called submit(); the episode ended on a submit that selected nothing.",
+    "the_solver_was_never_wrong": "v_checkboxes called directly on the live page returned checkboxes:1 and reward 1. The route was wrong, not the matcher.",
+    "class": "SELECT had three page-specific drivers (menu, colour, native select) and no fallback. Any page in none of those three received a submit with nothing selected."
+  },
+  "fix": {
+    "one": "radio in input kinds and 'select' in goal -> v_checkboxes",
+    "two": "SELECT with no #options -> candidate resolution, then submit only if the episode is not already over"
+  },
+  "class_check": {"click-option": "12/12", "click-checkboxes": "12/12", "click-checkboxes-transfer": "12/12", "click-link": "12/12", "click-button": "12/12", "total": "60/60"},
+  "full_sample": {
+    "tasks": 40, "reps": 5, "file": "/tmp/r158_full.json",
+    "total_before_r145": "117/200 = 0.5850", "total_after_r158": "118/200 = 0.5900",
+    "net": "+1 trial",
+    "up": {"drag-cube": "+4", "count-sides": "+2", "click-tab-2-hard": "+2", "social-media": "+1"},
+    "down": {"use-autocomplete": "-3", "use-autocomplete-nodelay": "-2", "click-collapsible-2": "-1", "click-color": "-1", "click-checkboxes-soft": "-1"},
+    "attribution_warning": "drag-cube +4 is NOT attributable to this change. Nothing in this round touches dragging. The ups and downs together are the noise floor."
+  },
+  "the_series_that_was_noise": {"r140": 0.4263, "r141": 0.5000, "r142": 0.5000, "r143": 0.5579, "r145": 0.5632, "r158": 0.5900, "note": "No code change between most of these runs. 5 reps per task cannot distinguish a 0.55 policy from a 0.60 one."},
+  "law_added": "A single-task fix is real and verifiable to 12/12. A 5-rep sample cannot resolve it in the total. A reach number at this n is not a capability number.",
+  "what_this_does_not_prove": [
+    "that computer use is closer to solved -- this is one task class in one family of twelve open families",
+    "that the reach number improved -- the total moved by one trial out of two hundred",
+    "anything about GDPval-AA W_COVER, which remains OPEN and owner-gated"
+  ],
+  "zero_credit_terminal": true
+}
