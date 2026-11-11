@@ -58,11 +58,20 @@ _KEYWORDS_KEEP = _PYTHON_KEYWORDS_KEEP | frozenset({
     "TEXT", "REAL", "BLOB", "UNIQUE", "DEFAULT", "SELECT", "FROM", "WHERE", "INDEX", "ON",
 })
 
+# THE ALTERNATION IS TRIED LEFT TO RIGHT, SO THE LONGEST PYTHON OPERATOR MUST COME FIRST.
+# Measured 2026-11-09: '//=' tokenised as '/', '/=' and '//' as '/', '/', because '/=' and
+# the single-character '/' both preceded the two-character forms. A rule taught from
+#     total = amount * rate // 1000   ->   total = amount * rate / 1000
+# therefore stored the BUGGY skeleton verbatim -- two '/' tokens against one -- and
+# derive_operator_swap refused it as "more than one difference". The one lesson that
+# generalises, that floor division is not division, could never be extracted from the one
+# demonstration that contained it. Python has 60-odd operators and the fallback lexer knew
+# none of the multi-character ones.
 _TOKEN_RE = re.compile(
     r"""(?P<str>"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')"""
     r"""|(?P<ident>[A-Za-z_][A-Za-z0-9_]*)"""
     r"""|(?P<num>\b\d+(?:\.\d+)?\b)"""
-    r"""|(?P<op>==|!=|<=|>=|:=|\.\.=|\.\.|->|=>|\+=|-=|\*=|/=|\?\?|\?\.|[+\-*/%&|^~<>!=()\[\]{}.,:;?])"""
+    r"""|(?P<op>//=|>>=|<<=|\*\*=|==|!=|<=|>=|:=|\.\.=|\*\.|//|>>|<<|\*\*|->|=>|\+=|-=|\*=|/=|%=|&=|\|=|\^=|@=|\.\.|\?\?|\?\.|[+\-*/%&|^~<>!=()\[\]{}.,:;?@\\])"""
     r"""|(?P<ws>\s+)""",
     re.DOTALL,
 )

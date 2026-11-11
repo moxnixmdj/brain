@@ -46,8 +46,15 @@ SCHEMA = "PROJECT_BRAIN_OPERATOR_GENERALIZATION_V1"
 
 # Operators that mean the same thing across python/go/rust/typescript/java/cpp and may be
 # generalized. Anything else is refused rather than guessed at.
+# Floor division is not in this set and it should be: it is the single most common
+# truncation bug in money code, and 2026-11-09 a rule taught from
+# "amount * rate // 1000 -> amount * rate / 1000" was REFUSED here. The token was correct
+# by then (see _TOKEN_RE); the allowlist was the last gate. Widening is safe in the narrow
+# sense that this module only proposes: every candidate still goes to the caller's verifier,
+# and the refusal is what stops a proposal, not an acceptance.
 GENERALIZABLE = frozenset({
-    "<=", ">=", "<", ">", "==", "!=", "+", "-", "*", "/", "%",
+    "<=", ">=", "<", ">", "==", "!=", "+", "-", "*", "/", "//", "%", "**",
+    "&", "|", "^", "<<", ">>",
     "&&", "||", "and", "or", "not",
 })
 
