@@ -632,6 +632,31 @@ def mismatch(skill: "VersionSpaceSkill", instruction: str) -> int:
     return min((len(new ^ fixed_tokens(known, rules)) for known in skill.instructions()), default=len(new))
 
 
+def evidence(skill: "VersionSpaceSkill", instruction: str) -> tuple[int, int]:
+    """(for, against) that an instruction is of the kind this program was learned from.
+
+    For: the fixed WORDS it shares with one of the program's own instructions -- words the
+    program's slots do not account for. Against: fixed tokens only one of the two has. Among
+    the program's own instructions the most favourable one is taken.
+
+    `mismatch` alone (the "against" half) is enough inside one task, where every program was
+    learned from the same kind of sentence. Across tasks it is not: a program whose slot
+    swallows its whole instruction ("Go." read as "<the button's name>.") leaves no fixed word,
+    so nothing can ever differ and it would sit at distance zero from every page there is.
+    What it lacks is evidence FOR, and that is what is counted here.
+    """
+    rules = skill.slot_rules()
+    new = fixed_tokens(instruction, rules)
+    best: tuple[int, int] | None = None
+    for known in skill.instructions():
+        old = fixed_tokens(known, rules)
+        shared = sum(1 for token in new & old if token[:1].isalnum())
+        against = len(new ^ old)
+        if best is None or (shared - against, -against) > (best[0] - best[1], -best[1]):
+            best = (shared, against)
+    return best if best is not None else (0, len(new))
+
+
 class SkillSet:
     """Several programs for one task, because one task can present itself in several ways.
 
@@ -694,6 +719,87 @@ class VersionSpaceArm:
 
     def begin(self, observation: Mapping[str, Any], seed: int) -> None:
         self._skill = self.skills.choose(str(observation.get("utterance") or ""))
+        self._step = 0
+        self.refused = False
+
+    def next_action(self, observation: Mapping[str, Any]) -> str | None:
+        action = None if self._skill is None else self._skill.act(self._step, observation)
+        if action is None and self._step == 0:
+            self.refused = True
+        self._step += 1
+        return action
+
+
+# --------------------------------------------------------------------------- #
+# one memory for everything learned
+# --------------------------------------------------------------------------- #
+class SkillLibrary:
+    """Every program learned anywhere, in one memory, and nothing that says which task a page is.
+
+    A skill kept per task and handed back with the task's name answers a question nobody asks
+    twice: "what did I learn HERE?". A memory has to answer the other one: "I have never been
+    told what this page is -- what do I know that fits it?". The answer here uses nothing but
+    the page: programs are tried in the order of the evidence that the page's instruction is
+    of their kind (`evidence`: shared fixed words minus differing ones), and the first whose
+    opening step can be taken on this page acts.
+
+    `without` leaves out everything learned in the named places. That is how first sight is
+    measured: a page is met with the memory of every OTHER place and nothing of its own.
+    """
+
+    def __init__(self) -> None:
+        self.entries: list[tuple[str, int, VersionSpaceSkill]] = []      # (where learned, its place there, the program)
+
+    def add(self, origin: str, skills: SkillSet) -> None:
+        if any(held == str(origin) for held, _, _ in self.entries):
+            raise ValueError("ORIGIN_ALREADY_HELD")
+        for place, skill in enumerate(skills.skills):
+            self.entries.append((str(origin), place, skill))
+
+    def origins(self) -> list[str]:
+        return sorted({origin for origin, _, _ in self.entries})
+
+    def ranked(self, instruction: str, *, without: Sequence[str] = ()) -> list[tuple[int, str, VersionSpaceSkill]]:
+        """(evidence for minus against, where learned, program), best supported first; ties go
+        to less against, then to more successes behind the program, then to a fixed order so
+        that the same memory always answers alike."""
+        left_out = set(without)
+        rows = []
+        for origin, place, skill in self.entries:
+            if origin in left_out:
+                continue
+            supports, against = evidence(skill, instruction)
+            rows.append((against - supports, against, -skill.examples, origin, place, skill))
+        rows.sort(key=lambda row: row[:5])
+        return [(-row[0], row[3], row[5]) for row in rows]
+
+    def choose(self, observation: Mapping[str, Any], *, without: Sequence[str] = (),
+               look: int = 12) -> tuple[str | None, VersionSpaceSkill | None]:
+        """Where the acting program was learned, and the program. (None, None): nothing among
+        the `look` nearest can even begin on this page, and the honest move is to do nothing."""
+        instruction = str(observation.get("utterance") or "")
+        for _, origin, skill in self.ranked(instruction, without=without)[:max(1, int(look))]:
+            if skill.act(0, observation) is not None:
+                return origin, skill
+        return None, None
+
+
+class LibraryArm:
+    """One agent with one memory. It is given a page, never the name of the task."""
+    name = "library"
+
+    def __init__(self, library: SkillLibrary, *, without: Sequence[str] = ()) -> None:
+        self.library = library
+        self.without = tuple(without)
+        self.chosen_from: dict[str, int] = {}          # where the acting program had been learned -> episodes
+        self._skill: VersionSpaceSkill | None = None
+        self._step = 0
+        self.refused = False
+
+    def begin(self, observation: Mapping[str, Any], seed: int) -> None:
+        origin, self._skill = self.library.choose(observation, without=self.without)
+        key = origin if origin is not None else "NOTHING_HELD_BEGINS_HERE"
+        self.chosen_from[key] = self.chosen_from.get(key, 0) + 1
         self._step = 0
         self.refused = False
 

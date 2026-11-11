@@ -1009,6 +1009,126 @@ class KeptSkillTests(unittest.TestCase):
             shutil.rmtree(folder)
 
 
+class OneMemoryTests(unittest.TestCase):
+    """One agent holding everything learned, given pages and never the name of a task."""
+    TASKS = ["named-button", "type-and-submit", "shout-and-submit", "numbered-section", "shifting-section",
+             "chatty-section", "mail-rows", "widget-kind", "two-fields", "three-boxes", "nth-box", "always-the-same",
+             "one-or-two", "shout-or-whisper", "hidden-answer"]
+    SEEDS = TEST_SEEDS[:10]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.kept, cls.told = {}, {}
+        for task in cls.TASKS:
+            bridge = StubBridge()
+            shown = tool.demonstrate(bridge, task, 0, action_budget=3000, search="guided")
+            arm = tool.build_version_space_arm(bridge, task, shown["trace"], practice=[500, 501, 502],
+                                               action_budget=3000, tier=2, search="guided")
+            cls.kept[task] = arm.skills
+            cls.told[task] = tool.score_arm(StubBridge(), task, arm, cls.SEEDS)
+        cls.library = tool.library_of(cls.kept)
+        cls.rows = {r["task"]: r for r in tool.measure_library(
+            StubBridge(), cls.TASKS + ["hidden-latch", "unsolvable", "no-such-page"], cls.library, test_seeds=cls.SEEDS)}
+
+    def test_not_being_told_the_task_costs_nothing_on_any_task_that_was_learned(self):
+        for task in self.TASKS:
+            self.assertEqual(self.rows[task]["all_skills"]["per_seed"], self.told[task]["per_seed"], task)
+        # and it mostly knows where it learned what it is using
+        own = sum(1 for task in self.TASKS if next(iter(self.rows[task]["all_skills"]["chosen_from"])) == task)
+        self.assertGreaterEqual(own, len(self.TASKS) - 2)
+
+    def test_a_program_whose_slot_swallows_its_whole_instruction_does_not_answer_for_every_page(self):
+        # "Go." was learned as "<the button's name>.": no fixed word is left, so nothing can ever differ
+        swallow = self.kept["one-or-two"].skills[0]
+        page = _TASKS["three-boxes"](1003).observe()
+        self.assertEqual(vs.mismatch(swallow, page["utterance"]), 0)             # distance alone says: a perfect fit
+        self.assertEqual(vs.evidence(swallow, page["utterance"]), (0, 0))        # evidence says: nothing either way
+        supports, against = max((vs.evidence(skill, page["utterance"]) for skill in self.kept["three-boxes"].skills),
+                                key=lambda pair: pair[0] - pair[1])
+        self.assertGreater(supports - against, 0)
+        origin, _ = self.library.choose(page)
+        self.assertEqual(origin, "three-boxes")
+        self.assertEqual(self.rows["three-boxes"]["all_skills"]["chosen_from"], {"three-boxes": len(self.SEEDS)})
+
+    def test_first_sight_of_a_task_is_done_with_what_a_twin_taught_and_the_twin_is_named(self):
+        for task, twin in (("numbered-section", "shifting-section"), ("shifting-section", "numbered-section"),
+                           ("hidden-latch", "numbered-section")):
+            row = self.rows[task]["without_this_task"]
+            self.assertEqual(row["successes"], len(self.SEEDS), task)
+            self.assertEqual(row["chosen_from"], {twin: len(self.SEEDS)}, task)
+        self.assertFalse(self.rows["hidden-latch"]["has_own_skill"])
+        summary = tool.summarise_library(list(self.rows.values()))
+        block = summary["without_this_task"]
+        self.assertEqual(block["done_with_a_skill_learned_on"]["hidden-latch"], "numbered-section")
+        self.assertEqual(block["of_which_had_no_skill_of_their_own"], ["hidden-latch"])
+
+    def test_first_sight_without_anything_like_it_is_not_pretended(self):
+        for task in ("mail-rows", "two-fields", "always-the-same"):
+            row = self.rows[task]["without_this_task"]
+            self.assertEqual(row["successes"], 0, task)
+            self.assertNotIn(task, row["chosen_from"])
+        self.assertEqual(self.rows["unsolvable"]["all_skills"]["successes"], 0)
+
+    def test_what_is_left_out_is_really_left_out(self):
+        page = _TASKS["mail-rows"](1001).observe()
+        self.assertEqual(self.library.choose(page)[0], "mail-rows")
+        origins = [origin for _, origin, _ in self.library.ranked(page["utterance"], without=("mail-rows",))]
+        self.assertNotIn("mail-rows", origins)
+        self.assertEqual(len(origins), len(self.library.entries) - len(self.kept["mail-rows"].skills))
+
+    def test_a_better_supported_program_that_cannot_begin_on_the_page_is_passed_over(self):
+        page = _TASKS["named-button"](1002).observe()
+        page["utterance"] = 'Click on the "Zzyzx" button.'                        # reads like the task; names nothing here
+        ranked = self.library.ranked(page["utterance"])
+        first_origin, first = ranked[0][1], ranked[0][2]
+        self.assertEqual(first_origin, "named-button")
+        self.assertIsNone(first.act(0, page))
+        origin, skill = self.library.choose(page)
+        self.assertIsNotNone(skill)
+        self.assertNotEqual(origin, "named-button")
+        self.assertIsNotNone(skill.act(0, page))
+        self.assertEqual(self.library.choose(page, look=1), (None, None))        # told to look no further: it does nothing
+        arm = vs.LibraryArm(self.library)
+        arm.library = vs.SkillLibrary()                                           # an empty memory refuses, and says so
+        arm.begin(page, 0)
+        self.assertIsNone(arm.next_action(page))
+        self.assertTrue(arm.refused)
+        self.assertEqual(arm.chosen_from, {"NOTHING_HELD_BEGINS_HERE": 1})
+
+    def test_tasks_that_did_not_run_stay_in_the_count(self):
+        self.assertEqual(self.rows["no-such-page"]["stage"], tool.STAGE_NOT_RUNNING)
+        self.assertNotIn("all_skills", self.rows["no-such-page"])
+        summary = tool.summarise_library(list(self.rows.values()))
+        self.assertEqual(summary["tasks"], len(self.TASKS) + 3)
+        self.assertEqual(summary["tasks_with_a_skill_of_their_own"], len(self.TASKS))
+        self.assertEqual(summary["all_skills"]["tasks_scored"], len(self.TASKS) + 2)
+        done = summary["all_skills"]["tasks_at_or_above_90_percent"]
+        self.assertEqual(done, sum(1 for r in self.rows.values() if "all_skills" in r and r["all_skills"]["successes"] >= 9))
+        self.assertEqual(summary["all_skills"]["share_of_all_tasks_at_or_above_90_percent"],
+                         round(done / (len(self.TASKS) + 3), 4))
+
+    def test_one_place_is_held_once(self):
+        with self.assertRaises(ValueError):
+            self.library.add("mail-rows", self.kept["mail-rows"])
+
+    def test_library_results_join_only_when_they_are_one_run(self):
+        def result(tasks, seeds=3):
+            rows = tool.measure_library(StubBridge(), tasks, self.library, test_seeds=self.SEEDS[:seeds])
+            return {"schema": tool.LIBRARY_SCHEMA, "authority": tool.AUTHORITY, "environment": {"pages": "x"},
+                    "parameters": {"test_seeds": self.SEEDS[:seeds]}, "tasks": rows,
+                    "summary": tool.summarise_library(rows)}
+        whole = result(["mail-rows", "nth-box", "two-fields"])
+        joined = tool.merge_library([result(["two-fields"]), result(["nth-box", "mail-rows"])])
+        self.assertEqual(joined["summary"], whole["summary"])
+        self.assertEqual([r["task"] for r in joined["tasks"]], ["mail-rows", "nth-box", "two-fields"])
+        with self.assertRaises(ValueError):
+            tool.merge_library([result(["two-fields"]), result(["nth-box"], seeds=2)])
+        with self.assertRaises(ValueError):
+            tool.merge_library([result(["two-fields"]), result(["two-fields"])])
+        with self.assertRaises(ValueError):
+            tool.merge_library([result(["two-fields"]), {"schema": "SOMETHING_ELSE", "tasks": []}])
+
+
 class MergeTests(unittest.TestCase):
     ARMS = ["verbatim", "version_space"]
 

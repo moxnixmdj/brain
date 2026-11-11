@@ -1024,6 +1024,138 @@ def build_version_space_arm(bridge: Any, task: str, trace: Sequence[tuple[Mappin
 
 
 # --------------------------------------------------------------------------- #
+# one agent, one memory, never told which task it faces
+# --------------------------------------------------------------------------- #
+LIBRARY_SCHEMA = "BRAIN_MINIWOB_ONE_MEMORY_FOR_ALL_TASKS_V1"
+LIBRARY_CONDITIONS = ("all_skills", "without_this_task")
+
+
+def library_of(kept: Mapping[str, Any]) -> Any:
+    """Everything `keep_skills` put away for one arm, as a single memory."""
+    from canonical.runtime import demonstration_version_space_v1 as learner
+    library = learner.SkillLibrary()
+    for task in sorted(kept):
+        library.add(task, kept[task])
+    return library
+
+
+def measure_library(bridge: Any, tasks: Sequence[str], library: Any, *, test_seeds: Sequence[int],
+                    progress: Callable[[str], None] | None = None) -> list[dict[str, Any]]:
+    """Each task's unseen instances, met by ONE agent holding every kept skill.
+
+    all_skills          the agent is not told the task; it holds what was learned everywhere
+    without_this_task   the same memory with nothing learned on this task: first sight of it
+    One try per instance, the page's full reward the only judge, exactly as for the per-task arms.
+    """
+    from canonical.runtime import demonstration_version_space_v1 as learner
+    held = set(library.origins())
+    rows = []
+    for task in tasks:
+        row: dict[str, Any] = {"task": task, "split": split_of(task), "has_own_skill": task in held}
+        started = time.time()
+        try:
+            gate = page_gate(bridge, task, [DEMO_SEED] + list(test_seeds[:3]))
+            if gate["stage"]:
+                row.update(gate)
+            else:
+                for condition in LIBRARY_CONDITIONS:
+                    arm = learner.LibraryArm(library, without=(task,) if condition == "without_this_task" else ())
+                    scored = score_arm(bridge, task, arm, test_seeds)
+                    scored["chosen_from"] = dict(sorted(arm.chosen_from.items(), key=lambda item: (-item[1], item[0])))
+                    row[condition] = scored
+        except Exception as error:  # noqa: BLE001 -- recorded against the task, like everywhere else here
+            bridge.restart()
+            row.update(reason="PAGE_HANGS" if isinstance(error, BridgeHang) else "PAGE_OR_BRIDGE_ERROR"
+                       if isinstance(error, BridgeError) else "TOOL_OR_LEARNER_ERROR", detail=str(error)[:200])
+        row["seconds"] = round(time.time() - started, 2)
+        rows.append(row)
+        if progress:
+            progress(f"{task:<34} " + " ".join(
+                f"{c}={row[c]['successes']}/{row[c]['episodes']}<-{next(iter(row[c]['chosen_from']), None)}"
+                for c in LIBRARY_CONDITIONS if c in row) + (f" {row.get('stage') or row.get('reason') or ''}"))
+    return rows
+
+
+def summarise_library(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Counts over ALL tasks given. A task that did not run, or where nothing held could begin, counts as not done."""
+    out: dict[str, Any] = {"tasks": len(rows), "tasks_with_a_skill_of_their_own": sum(1 for r in rows if r.get("has_own_skill"))}
+    for condition in LIBRARY_CONDITIONS:
+        scored = [r for r in rows if condition in r]
+        done = sorted(r["task"] for r in scored if r[condition]["success_rate"] >= 0.9)
+        out[condition] = {
+            "tasks_scored": len(scored),
+            "tasks_at_or_above_90_percent": len(done),
+            "share_of_all_tasks_at_or_above_90_percent": round(len(done) / max(1, len(rows)), 4),
+            "mean_success_rate_over_all_tasks": round(sum(r[condition]["success_rate"] for r in scored) / max(1, len(rows)), 4),
+            "which": done,
+        }
+    first_sight = [r for r in rows if "without_this_task" in r and r["without_this_task"]["success_rate"] >= 0.9]
+    out["without_this_task"]["done_with_a_skill_learned_on"] = {
+        r["task"]: next(iter(r["without_this_task"]["chosen_from"]), None) for r in first_sight}
+    out["without_this_task"]["of_which_had_no_skill_of_their_own"] = sorted(
+        r["task"] for r in first_sight if not r.get("has_own_skill"))
+    return out
+
+
+def run_library(html_dir: str, node_modules_dir: str, *, skills_dir: str, arm_name: str, tasks: Sequence[str] | None,
+                test_episodes: int, substrate: str = "chromium",
+                progress: Callable[[str], None] | None = None) -> dict[str, Any]:
+    kept = kept_skills(skills_dir).get(arm_name) or {}
+    if not kept:
+        raise ValueError("NO_KEPT_SKILLS_FOR_THIS_ARM")
+    library = library_of(kept)
+    names = list(tasks) if tasks else list_tasks(html_dir)
+    test_seeds, _ = seed_plan(test_episodes, 0)
+    bridge = Bridge(html_dir, node_modules_dir, substrate=substrate)
+    try:
+        versions = bridge.versions()
+        rows = measure_library(bridge, names, library, test_seeds=test_seeds, progress=progress)
+    finally:
+        bridge.close()
+    return {
+        "schema": LIBRARY_SCHEMA,
+        "authority": AUTHORITY,
+        "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "environment": {
+            "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
+            "html_tree_sha256": html_tree_sha256(html_dir),
+            "substrate_name": substrate,
+            **{k: versions.get(k) for k in SUBSTRATES[substrate]["version_keys"]},
+            "python": sys.version.split()[0],
+            "code_sha256": code_sha256(),
+        },
+        "parameters": {"skills_from_arm": arm_name, "skills_held_for_tasks": sorted(kept),
+                       "programs_held": len(library.entries), "test_seeds": test_seeds,
+                       "max_episode_steps": MAX_EPISODE_STEPS, "full_reward": FULL_REWARD},
+        "producer_cognition_model_dependency_count": 0,
+        "tasks": rows,
+        "summary": summarise_library(rows),
+    }
+
+
+def merge_library(results: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
+    """Join library results over disjoint tasks. The same memory, pages and code, or nothing."""
+    first = results[0]
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for result in results:
+        if result.get("schema") != LIBRARY_SCHEMA:
+            raise ValueError("NOT_A_LIBRARY_RESULT_OF_THIS_TOOL")
+        if result.get("environment") != first.get("environment") or result.get("parameters") != first.get("parameters"):
+            raise ValueError("LIBRARY_RESULTS_FROM_DIFFERENT_RUNS")
+        for row in result["tasks"]:
+            if row["task"] in seen:
+                raise ValueError("TASK_MEASURED_TWICE")
+            seen.add(row["task"])
+            rows.append(dict(row))
+    rows.sort(key=lambda r: r["task"])
+    merged = {k: v for k, v in first.items() if k not in ("tasks", "summary")}
+    merged["tasks"] = [{k: v for k, v in r.items() if k != "seconds"} for r in rows]
+    merged["summary"] = summarise_library(rows)
+    return merged
+
+
+# --------------------------------------------------------------------------- #
 # the whole benchmark
 # --------------------------------------------------------------------------- #
 def html_tree_sha256(html_dir: str) -> str:
@@ -1269,7 +1401,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--save-skills", help="directory to keep every learned skill in (one file per task and arm)")
     parser.add_argument("--digest-from", nargs="+",
                         help="print the digest of results written earlier (several files over disjoint tasks are joined)")
+    parser.add_argument("--library-from", help="directory of kept skills: measure ONE agent holding all of them")
+    parser.add_argument("--library-arm", default="version_space_practice", help="which arm's kept skills to hold")
+    parser.add_argument("--library-join", nargs="+", help="print library results over disjoint tasks as one")
     args = parser.parse_args(argv)
+
+    if args.library_join:
+        loaded = [json.loads(pathlib.Path(path).read_text()) for path in args.library_join]
+        print(json.dumps(merge_library(loaded), indent=1, sort_keys=True))
+        return 0
+    if args.library_from:
+        if not args.html_dir:
+            parser.error("--html-dir is required")
+        result = run_library(args.html_dir, args.node_modules_dir, skills_dir=args.library_from,
+                             arm_name=args.library_arm, tasks=args.tasks, test_episodes=args.test_episodes,
+                             substrate=args.substrate, progress=lambda line: print(line, flush=True))
+        if args.out:
+            pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
+        print(json.dumps(result["summary"], indent=1, sort_keys=True))
+        return 0
 
     if args.digest_from:
         loaded = [json.loads(pathlib.Path(path).read_text()) for path in args.digest_from]
