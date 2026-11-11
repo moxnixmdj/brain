@@ -1,0 +1,19 @@
+name: Verify LiveBench Union25 lexical count kernel V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/livebench_union25_lexical_count_kernel_v1.py"
+      - "canonical/tests/test_livebench_union25_lexical_count_kernel_v1.py"
+      - ".github/workflows/verify-livebench-union25-lexical-count-kernel-v1.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m pytest -q canonical/tests/test_livebench_union25_lexical_count_kernel_v1.py
