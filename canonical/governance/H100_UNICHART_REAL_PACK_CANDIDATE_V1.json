@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_H100_UNICHART_REAL_PACK_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__REAL_PACKED_SUBJECT_CONSTRUCTION__ZERO_CREDIT__CAPABILITY_PRESERVATION_REQUIRED",
+  "objective": "Produce an actual self-contained UniChart persistent learned-state package below 100,000,000 bytes from the independently enumerated checkpoint, while preserving sensitive tensors at FP32 and granting zero H100 credit until nonterminal capability preservation passes.",
+  "source": {
+    "model": "ahmed-masry/unichart-base-960",
+    "revision": "baa206a05372f8c49778313abb7091e1d0c8e474",
+    "safetensors_sha256": "2faf9ef1ac62a290ea58c80e9e2454db4e3613579e7cb6167cb934a03c09664e",
+    "safetensors_bytes": 809095376,
+    "tensor_manifest_sha256": "8b32480b8f7981f3c8413941e522034f3779bef1187374f2ca836bc29af314c5",
+    "exact_f32_elements": 201858168,
+    "exact_i64_elements": 200000
+  },
+  "transformation": {
+    "group_size": 256,
+    "sensitive_f32_rule": "NUMEL_LE_4096_OR_BIAS_OR_LAYERNORM_OR_RELATIVE_POSITION_BIAS_TABLE",
+    "sensitive_f32_storage": "RAW_F32",
+    "large_encoder_storage": "W4_GROUPWISE_ASYMMETRIC_WITH_FP16_OFFSET_AND_FP16_SCALE",
+    "large_decoder_storage": "W3_GROUPWISE_ASYMMETRIC_WITH_FP16_OFFSET_AND_FP16_SCALE",
+    "i64_storage": "RAW_I64",
+    "exact_partition": {
+      "quantized_encoder_f32_elements": 74034720,
+      "quantized_decoder_f32_elements": 127595520,
+      "raw_sensitive_f32_elements": 227928,
+      "raw_i64_elements": 200000,
+      "sensitive_tensor_count": 281
+    },
+    "projected_complete_package_bytes": 95932420,
+    "projected_margin_bytes": 4067580,
+    "acceptance_rule": "ACTUAL_PACKAGE_BYTES_LE_100000000"
+  },
+  "required_evidence": [
+    "SOURCE_SAFETENSORS_SHA256_EXACT",
+    "REAL_PACKED_WEIGHTS_FILE",
+    "REAL_PACKAGE_BYTE_COUNT_INCLUDING_MANIFEST_AND_FULL_ANCILLARY_BUNDLE",
+    "PACKED_FILE_AND_MANIFEST_SHA256",
+    "PUBLIC_OR_NONTERMINAL_CHART_REASONING_CAPABILITY_PRESERVATION"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_REAL_PACK_EXISTS_BEFORE_WORKFLOW_OUTPUT",
+    "NO_CLAIM_QUANTIZATION_PRESERVES_CAPABILITY",
+    "NO_CHARTOGRAPHY_GE_89",
+    "NO_H100_CAPABILITY_OR_TERMINAL_CREDIT",
+    "LEARNED_BYTE_LADDER_REMAINS_AT_ZERO_UNTIL_CONSTRUCTIVE_ZERO_LEARNED_FAILURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "h100_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
