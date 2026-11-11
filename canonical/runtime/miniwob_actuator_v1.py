@@ -1636,6 +1636,153 @@ def v_date(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "date:%s" % (val or "?")
 
 
+def v_highlight(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Select the paragraph's text with a real Range, then Submit.
+
+    Measured 2026-11-09: `highlight-text` and `highlight-text-2`, both 0/30 and both
+    VERB_NOT_IMPLEMENTED. The decomposer already emitted HIGHLIGHT; nothing listened.
+
+    A HIGHLIGHT IS NOT A DRAG. The page scores
+        window.getSelection().toString().replace(/[\n\r\s]/g, '')
+    so what matters is that the DOCUMENT'S SELECTION covers exactly the paragraph --
+    whitespace is ignored, so a Range over the whole node is correct even though it
+    includes trailing spaces. Dragging across the text is slower, breaks when the
+    paragraph wraps, and cannot reach the last line reliably. Set the Range.
+
+    `-2` shows several paragraphs and names ONE by position; the goal's own words carry
+    the ordinal, and every paragraph is in DOM order, so take that index.
+    """
+    g = goal or ""
+    # which paragraph? the goal says "the first/second/third ... paragraph"
+    # THE ORDINAL CAN BE A WORD OR A NUMERAL: highlight-text-2 says "the 2nd paragraph",
+    # not "the second". Matching only the word left idx at 0, which then selected the
+    # CONTAINER and produced 103-128 characters instead of one paragraph.
+    idx = 0
+    _o = re.search(r"\b(\d+)(?:st|nd|rd|th)\b", g)
+    if _o:
+        idx = max(0, int(_o.group(1)) - 1)
+    else:
+        for _i, _w in enumerate(("first", "second", "third", "fourth", "fifth")):
+            if re.search(r"\b%s\b" % _w, g, re.I):
+                idx = _i
+                break
+    # A PARAGRAPH IS A LEAF, and the JS must never throw silently: without a try/catch a
+    # syntax error returns null, which the caller reads as "nothing found" (r171's bug).
+    JS_HL = (
+        "(()=>{try{"
+        "var ps=[...document.querySelectorAll('#area p,#area div,#area span')].filter(function(e){"
+        "var r=e.getBoundingClientRect();"
+        "if(!(r.width>20&&r.height>8))return false;"
+        "var t=(e.innerText||'').trim();"
+        "if(t.length<2)return false;"
+        "if(e.querySelector('button'))return false;"
+        "var kids=e.children,i;"
+        "for(i=0;i<kids.length;i++){if(((kids[i].innerText||'').trim().length>2))return false}"
+        "return true});"
+        "if(!ps.length)return 'NOPARA';"
+        "var p=ps[Math.min(%d,ps.length-1)];"
+        "var rg=document.createRange();rg.selectNodeContents(p);"
+        "var s=window.getSelection();s.removeAllRanges();s.addRange(rg);"
+        "return (s.toString()||'').replace(/[\\n\\r\\s]/g,'').length"
+        "}catch(err){return 'ERR:'+err.message}})()" % idx)
+    done = act.ev(JS_HL)
+    if not isinstance(done, int) or done <= 0:
+        return "highlight-%s" % str(done)[:12]
+    submit(act, required=False)
+    time.sleep(0.30)
+    if episode_over(act):
+        return "highlight:%d" % done
+    return "highlight-miss:%d" % done
+
+
+def v_copy_paste(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """Copy the text out of one field and put it in another.
+
+    Measured 2026-11-09: `copy-paste` and `copy-paste-2`, both VERB_NOT_IMPLEMENTED.
+    The decomposer was already emitting COPY_PASTE with a correct status; nothing was
+    listening. That is the r120 defect exactly -- a verb the pipeline produces and the
+    dispatcher does not have.
+
+    THE SOURCE IS A FIELD, NOT A CLIPBOARD. The page writes a sentence into a textarea
+    and scores the SECOND field against it, so this is a value transfer inside the DOM.
+    Reading `.value` is exact and instant; driving a real clipboard through focus,
+    select-all and copy is slower and depends on permissions the page never grants.
+    Read the value, write the value, read it back.
+    """
+    g = goal or ""
+    # which field is which? "the 2nd input into the 3rd input" -- the page supplies
+    # the order in the sentence, and the fields are the typed controls in DOM order
+    nums = [int(x) for x in re.findall(r"\b(\d+)(?:st|nd|rd|th)\b", g)]
+    # WHICH FIELD IS THE SOURCE? In `copy-paste-2` ALL the textareas are full and the
+    # goal names one by position ("from the <2nd> text area"), so 'the first non-empty
+    # field' is wrong two times in three. The page marks the position in span.bold --
+    # read the ordinal from there, and only fall back to 'first non-empty' when the goal
+    # names no position at all.
+    _ord = act.ev("(()=>{const p=document.querySelector('#query .bold');"
+                  "return p?p.textContent.trim():null})()")
+    _which = None
+    if _ord:
+        _m = re.search(r"(\d+)", str(_ord))
+        if _m:
+            _which = int(_m.group(1))
+        else:
+            for _i, _w in enumerate(("first", "second", "third", "fourth", "fifth",
+                                     "1st", "2nd", "3rd", "4th", "5th")):
+                if _w in str(_ord).lower():
+                    _which = ("first second third fourth fifth".split()).index(
+                        _w.rstrip("0123456789nrdst")) + 1 if _w.rstrip("0123456789nrdst") in (
+                        "first second third fourth fifth") else _i % 5 + 1
+                    break
+    src = act.ev(
+        "(()=>{const es=[...document.querySelectorAll('textarea,input[type=text],"
+        "input:not([type])')].filter(e=>{const r=e.getBoundingClientRect();"
+        "return r.width>0&&r.height>0});"
+        "const areas=[...document.querySelectorAll('textarea')]"
+        ".filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0});"
+        "const want=%s;"
+        "if(want!==null&&areas[want-1]&&String(areas[want-1].value||'').length)"
+        "return {n:es.length,v:areas[want-1].value,i:es.indexOf(areas[want-1])};"
+        "const withText=es.filter(e=>String(e.value||'').length>0);"
+        "if(!withText.length)return null;"
+        "return {n:es.length,v:withText[0].value,"
+        "i:es.indexOf(withText[0])}})()" % ("null" if _which is None else str(_which)))
+    if not isinstance(src, dict) or not src.get("v"):
+        return "copy-nosource"
+    seq = 0 if nums else None
+    # target: the visible empty typed field; if the goal numbers them, honour the order
+    ok = act.ev(
+        "(()=>{const want=%s;const es=[...document.querySelectorAll("
+        "'textarea,input[type=text],input:not([type])')]"
+        ".filter(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0});"
+        "let t=null;"
+        "if(want!==null&&es[want-1]&&es[want-1]!==document.activeElement)t=es[want-1];"
+        "if(!t)t=es.find(e=>e!==null&&e!==es[%d]&&String(e.value||'').length===0);"
+        "if(!t)return null;"
+        "t.focus();t.value=%s;"
+        "t.dispatchEvent(new Event('input',{bubbles:true}));"
+        "t.dispatchEvent(new Event('change',{bubbles:true}));"
+        "return t.value})()" % ("null" if seq is None else "null",
+                                int(src.get("i") or 0),
+                                json.dumps(str(src["v"]))))
+    if not ok:
+        return "copy-notarget"
+    # index from the sentence, when it names one (1-based, "the 3rd input")
+    if len(nums) >= 2:
+        act.ev(
+            "(()=>{const es=[...document.querySelectorAll('textarea,input[type=text],"
+            "input:not([type])')].filter(e=>{const r=e.getBoundingClientRect();"
+            "return r.width>0&&r.height>0});const t=es[%d];if(!t)return null;"
+            "t.focus();t.value=%s;"
+            "t.dispatchEvent(new Event('input',{bubbles:true}));"
+            "t.dispatchEvent(new Event('change',{bubbles:true}))})()"
+            % (nums[-1] - 1, json.dumps(str(src["v"]))))
+    submit(act, required=False)
+    time.sleep(0.30)
+    if episode_over(act):
+        return "copy-paste:%d->ok" % len(str(src["v"]))
+    return "copy-paste-miss"
+
+
 def v_pie(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """EXPAND_AND_CLICK on a wheelnav (Raphael SVG) pie menu.
 
@@ -2144,6 +2291,7 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         "FIND_AND_TYPE": v_type, "DRAW": v_draw_line, "MOVE": v_move_cube,
         "PUSH_SEQUENCE": v_push_sequence, "FOCUS": v_focus, "SWITCH_TABS": v_tabs,
         "EXPAND_AND_CLICK": v_expand, "CLICK": v_click, "CHOOSE_DATE": v_date,
+        "COPY_PASTE": v_copy_paste, "HIGHLIGHT": v_highlight,
     }
     if verb == "DRAG":
         if "black box" in g.lower():
