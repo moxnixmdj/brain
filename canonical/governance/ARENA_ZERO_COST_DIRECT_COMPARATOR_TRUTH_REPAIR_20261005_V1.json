@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_ARENA_ZERO_COST_DIRECT_COMPARATOR_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_SUPPLEMENT__ARENA_THIRD_ZERO_INCREMENTAL_COMPARATOR_ROUTE_NARROWED__ACCOUNT_SPECIFIC_DIRECT_SELECTABILITY_AND_HARNESS_IDENTITY_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target": {
+    "zero_reality_group": "F_SYNTHESIS_COMPARATOR_CERTIFICATE",
+    "predicate": "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+    "allowed_route": "EXACT_OPUS55_COMPARATOR_OR_SEPARATELY_VERIFIED_STRONGER_PROOF"
+  },
+  "bound_prior_authority": {
+    "audit": {
+      "path": "canonical/governance/EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V2.json",
+      "git_blob_sha": "1e8ba20f18671537f1d6f52d9ab7362ac5a761f2"
+    },
+    "independent_verification": {
+      "path": "canonical/verification/EXACT_OPUS_5_5_ZERO_COST_COMPARATOR_ACCESS_AUDIT_V2_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "31a313af6c68ad91345ac8e191ac7e5d5551883d"
+    },
+    "zero_reality_cut": {
+      "path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_V12.json",
+      "git_blob_sha": "2628f99626ca64f4d57920f732b19021f8cc34c2"
+    }
+  },
+  "new_public_first_party_facts": [
+    {
+      "id": "ARENA_DAILY_FREE_USAGE_CREDIT_BALANCE",
+      "url": "https://help.arena.ai/articles/5476762589-credit-sytem",
+      "observed_2026_10_05": "Arena states its usage system gives users a daily balance of usage credits that can be used for free; the 24-hour usage period begins with the first prompt and credits refresh after the limit interval.",
+      "proof_role": "ESTABLISH_GENERIC_USER_FACING_ZERO_INCREMENTAL_SPEND_USAGE_MECHANISM",
+      "scope_limit": "DOES_NOT_PROVE_EVERY_MODEL_IS_ACCOUNT_SELECTABLE_OR_THAT_A_GIVEN_MODEL_CONSUMES_AN_AFFORDABLE_NUMBER_OF_DAILY_CREDITS"
+    },
+    {
+      "id": "ARENA_DIRECT_SPECIFIC_MODEL_SELECTOR",
+      "url": "https://help.arena.ai/articles/1858200927-lmarena-experiments-new-model-selector",
+      "observed_2026_10_05": "Arena documents Direct and Side-by-Side model selectors that let a user select a specific model from Arena's model list.",
+      "proof_role": "ESTABLISH_EXACT_MODEL_SELECTION_MECHANISM_AT_UI_LEVEL",
+      "scope_limit": "DOES_NOT_PROVE_CLAUDE_OPUS_5_5_IS_VISIBLE_IN_THIS_USER'S_CURRENT DIRECT SELECTOR"
+    },
+    {
+      "id": "ARENA_CURRENT_CLAUDE_OPUS55_PLATFORM_PRESENCE",
+      "url": "https://arena.ai/leaderboard/agent/code",
+      "observed_2026_10_05": "Arena's October 2, 2026 Agent Arena Code leaderboard names Claude Opus 5.5 (High).",
+      "proof_role": "ESTABLISH_CURRENT_EXACT_VARIANT_PLATFORM_PRESENCE",
+      "scope_limit": "LEADERBOARD_PRESENCE_IS_NOT_ACCOUNT_LEVEL_DIRECT_OR_API_AVAILABILITY"
+    },
+    {
+      "id": "ARENA_CLAUDE_OPUS55_TEXT_PRESENCE",
+      "url": "https://arena.ai/company/leaderboard-changelog",
+      "observed_2026_10_05": "Arena's changelog says claude-opus-5.5-high was added to the Text Arena leaderboard on September 25, 2026 and Claude Opus 5.5 (High) to Agent Arena on September 27, 2026.",
+      "proof_role": "CROSS_CHECK_EXACT_VARIANT_PLATFORM_PRESENCE",
+      "scope_limit": "DOES_NOT_PROVE CURRENT DIRECT SELECTOR ENTITLEMENT"
+    }
+  ],
+  "deduction": {
+    "prior_unknown_narrowed": "ZERO_INCREMENTAL_COST_AT_ARENA_IS_NO_LONGER_A_PURELY_ACCOUNT_PLAN_OR_PURCHASE_HYPOTHESIS_FOR_THE_USER_FACING_SERVICE__A_FIRST_PARTY_DAILY_FREE_CREDIT_MECHANISM_EXISTS",
+    "exact_variant_presence": "CLAUDE_OPUS_5_5_HIGH_IS_CURRENTLY_PRESENT_ON_ARENA_SURFACES",
+    "exact_selection_mechanism": "DIRECT_MODE_SUPPORTS_SPECIFIC_MODEL_SELECTION",
+    "conjunction_verdict": "THIRD_CONDITIONAL_ZERO_INCREMENTAL_EXACT_OPUS55_ROUTE_IS_PLAUSIBLE_AT_ARENA_PLATFORM_LEVEL__ACCOUNT_SPECIFIC_SELECTABILITY_CREDIT_SUFFICIENCY_AND_HARNESS_IDENTITY_STILL_BLOCK_ADMISSION",
+    "why_not_admitted": [
+      "ACCOUNT_SPECIFIC_CURRENT_DIRECT_SELECTOR_HAS_NOT_BEEN_CONTENT_BOUND_TO_CLAUDE_OPUS_5_5_HIGH_OR_OTHER_REQUIRED_OPUS55_VARIANT",
+      "FREE_DAILY_CREDIT_BALANCE_HAS_NOT_BEEN_BOUND_TO_SUFFICIENT_CREDIT_FOR_THE_FROZEN_COMPARATOR_CERTIFICATE_WORKLOAD",
+      "REQUIRED_OPUS55_EFFORT_VARIANT_AND_HARNESS_RELATION_HAVE_NOT_BEEN PROVED_EQUIVALENT_TO_THE_FROZEN_TARGET",
+      "CASE_LEVEL_PROVENANCE_CAPTURE_AND_NO_FALLBACK_OR_MODEL_SUBSTITUTION_RECEIPT_HAVE_NOT_BEEN FROZEN"
+    ]
+  },
+  "minimum_next_observations": [
+    {
+      "id": "ARENA_DIRECT_ACCOUNT_SELECTOR_RECEIPT",
+      "action": "IN_AUTHENTICATED_ARENA_DIRECT_UI__CAPTURE_MODEL_SELECTOR_SHOWING_EXACT_CLAUDE_OPUS_5_5_VARIANT_AND_CURRENT_DAILY_CREDIT_STATE_WITHOUT_RUNNING_ANY_TERMINAL_CASE",
+      "fresh_terminal_reality": false,
+      "score_case_execution": false
+    },
+    {
+      "id": "ARENA_DIRECT_HARNESS_IDENTITY_BINDING",
+      "action": "BIND_SELECTED_ARENA_VARIANT_REASONING_EFFORT_CONTEXT_TOOL_AND_SYSTEM_HARNESS_TO_THE_FROZEN_OPUS55_COMPARATOR_REQUIREMENT__FAIL_CLOSED_ON_ANY_UNCONTROLLED_ROUTING_OR_VARIANT_MISMATCH",
+      "fresh_terminal_reality": false,
+      "score_case_execution": false
+    }
+  ],
+  "scheduler_delta": {
+    "delete": [
+      "GENERIC_SEARCH_FOR_WHETHER_ARENA_HAS_ANY_FREE_USER_USAGE_MECHANISM",
+      "GENERIC_SEARCH_FOR_WHETHER_ARENA_HAS_A_SPECIFIC_MODEL_SELECTOR",
+      "GENERIC_SEARCH_FOR_WHETHER_CLAUDE_OPUS_5_5_EXISTS_ON_CURRENT_ARENA_SURFACES"
+    ],
+    "preserve": [
+      "CURRENT_MAIN_TWO_ROUTE_RECONCILIATION_REMAINS_AUTHORITATIVE",
+      "ACCOUNT_SPECIFIC_EXACT_OPUS55_DIRECT_SELECTABILITY_RECEIPT",
+      "SUFFICIENT_FREE_CREDIT_RECEIPT_FOR_THE_REQUIRED_NON_SCORE_CERTIFICATE_STEP",
+      "HARNESS_AND_EFFORT_IDENTITY_OR_SCOPE_SAFE_STRONGER_PROOF",
+      "NO_TERMINAL_CASE_EXECUTION_BEFORE_EXPLICIT_FRESH_REALITY_AUTHORITY",
+      "API_ROUTE_REMAINS_SEPARATE_AND_ZERO_COST_UNPROVED"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_CLAUDE_OPUS_5_5_IS_CURRENTLY_SELECTABLE_IN_THE_USER_ACCOUNT",
+    "NO_CLAIM_FREE_DAILY_CREDITS_ARE_SUFFICIENT_FOR_ANY_MATCHED_TERMINAL_WAVE",
+    "NO_CLAIM_ARENA_API_IS_ZERO_COST",
+    "NO_CLAIM_ARENA_DIRECT_HARNESS_EQUALS_ANTHROPIC_API_OR_ANY_PUBLISHED_BENCHMARK_HARNESS",
+    "NO_COMPARATOR_EXECUTION",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_FINALITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "relationship_to_current_main": {
+    "current_main_reconciliation": {
+      "path": "canonical/governance/OPUS55_ZERO_INCREMENTAL_EXACT_COMPARATOR_ACCESS_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "3b0b1e6d0034b8e5fdc19ce1fc758f8610803d03",
+      "existing_routes": [
+        "ANTHROPIC_FIRST_PARTY_FREE_CREDIT_ROUTE",
+        "OPENROUTER_EXISTING_ACCOUNT_ANTHROPIC_PIN_ROUTE"
+      ]
+    },
+    "supplement": "ARENA_USER_FACING_DAILY_FREE_CREDIT_DIRECT_ROUTE",
+    "why_nonduplicate": "ARENA_HAS_A_SEPARATE_DAILY_FREE_USER_USAGE_MECHANISM_AND_SPECIFIC_MODEL_UI_ROUTE; IT DOES_NOT_DEPEND_ON_ANTHROPIC_API_NEW_USER_ELIGIBILITY_OR_OPENROUTER_PREEXISTING_BALANCE",
+    "current_route_count_if_admitted_as_candidate": 3
+  }
+}
