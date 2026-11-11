@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_SPRITES_ZERO_SPEND_CARRIER_GATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "AUTHENTICATED_ACCOUNT_GATE__TRIAL_ENDED__WAKE_FORBIDDEN_UNDER_HARD_ZERO_INCREMENTAL_SPEND__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "carrier": "FLY_IO_SPRITES",
+  "observed_sprite": {
+    "name": "brain-heldout003-one-shot",
+    "sprite_id": "sprite-8d2b5b77-3bc8-42ca-a8ea-de4c1b0a2589",
+    "observed_state": "cold",
+    "consequence": "METADATA_READ_ONLY__NO_WAKE_PERFORMED"
+  },
+  "authenticated_mail_evidence": {
+    "source_class": "CONNECTED_GMAIL_PROVIDER_ORIGIN_MESSAGES",
+    "trial_start": {
+      "date": "2026-09-04T12:24:51Z",
+      "subject": "[Fly.io] Your trial just started!",
+      "fact": "FREE_TRIAL_STARTED__7_DAYS_OR_2_TOTAL_MACHINE_RUNTIME_HOURS_WHICHEVER_FIRST"
+    },
+    "trial_end": {
+      "date": "2026-09-11T12:30:05Z",
+      "subject": "[Fly.io] Your trial ended",
+      "fact": "TRIAL_ENDED__PROVIDER_DIRECTS_ADD_CREDIT_CARD_FOR_PAY_AS_YOU_GO_CONTINUATION"
+    },
+    "post_end_payment_activation_receipt_found": false,
+    "later_support_trial_expiry": {
+      "date": "2026-10-04T12:24:47Z",
+      "subject": "Your Fly.io Standard email support plan has expired"
+    }
+  },
+  "current_public_pricing": {
+    "effective_date": "2026-10-01",
+    "source": "https://fly.io/pricing-update/",
+    "sprites_compute": "METERED_WHILE_ACTIVE",
+    "cpu_rate_usd_per_cpu_hour": 0.03825,
+    "memory_rate_usd_per_gb_hour": 0.021875,
+    "hot_storage_billed_while_awake": true
+  },
+  "deduction": {
+    "current_zero_incremental_wake_proved": false,
+    "current_trial_credit_proved": false,
+    "waking_existing_cold_sprite_under_hard_zero_spend_authorized": false,
+    "rule": "DO_NOT_WAKE_OR_EXEC_ON_SPRITE_UNLESS_A_NEW_ACCOUNT_SPECIFIC_CREDIT_OR_PREPAID_ALLOWANCE_RECEIPT_PROVES_MARGINAL_COST_ZERO"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "USE_EXISTING_COLD_SPRITE_AS_ASSUMED_FREE_BYPASS_FOR_GITHUB_QUEUE",
+      "INFER_ZERO_MARGINAL_COST_FROM_SPRITE_ALREADY_EXISTING",
+      "INFER_CURRENT_TRIAL_FROM_PUBLIC_THIRTY_DOLLAR_TRIAL_MARKETING"
+    ],
+    "preserve": [
+      "WAKE_ON_NEW_ACCOUNT_SPECIFIC_CREDIT_OR_PREPAID_ALLOWANCE_RECEIPT",
+      "USE_OTHER_PROVED_ZERO_COST_PUBLIC_RUNNERS_OR_TRIAL_CARRIERS"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ACCOUNT_HAS_NO_CREDIT_CARD",
+    "NO_CLAIM_ACCOUNT_HAS_ZERO_BALANCE",
+    "NO_CLAIM_SPRITE_CANNOT_RUN_THE_WORKLOAD",
+    "MAILBOX_ABSENCE_IS_NOT_COMPLETE_BILLING_STATE_PROOF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
