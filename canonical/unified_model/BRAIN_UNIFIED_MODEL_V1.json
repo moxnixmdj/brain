@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 306,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6702,
+  "research_index_records": 6703,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "60b137e84651b714cbc339a442b51a8c56a364a330773dfe973bb2a2fa3c6d75"
+  "value": "7ba852e59d0609d2c4d250351cfb41080f481a4c6b1c3c33c17f0500e9e0eed9"
  },
  "engines": [
   {
@@ -216773,6 +216773,32 @@
    }
   },
   {
+   "action_id": "A_TAUGHT_SKILL_DOES_NOT_DESTROY_WHAT_IT_NEVER_READ_20261111_V1",
+   "capability": false,
+   "date": "2026-11-11",
+   "id": "research:canonical/action_intents/A_TAUGHT_SKILL_DOES_NOT_DESTROY_WHAT_IT_NEVER_READ_20261111_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_TAUGHT_SKILL_DOES_NOT_DESTROY_WHAT_IT_NEVER_READ_20261111_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "5bb793958882fcc2fd2d295b5584d04067fe7689fc5e0c20c5404ca5ff7d1359",
+   "status": "",
+   "terms": {
+    "20261111": 1,
+    "a_taught_skill_does_not_destroy_what_it_never_read_20261111_v1": 1,
+    "adapt_the_existing_demonstration_to_skill_compiler__a_generalized_write_may_not_replace_content_it_never_read__a_taught_program_runs_in_the_namespace_sandbox_or_not_at_all": 1,
+    "destroy": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "never": 1,
+    "not": 1,
+    "one_wrong_pass_of_the_compiled_workflow_fallback_becomes_a_refusal__one_unconfined_execution_path_becomes_a_confined_one__zero_capability_credit__zero_family_credit__no_row_added__no_route_opened": 1,
+    "read": 1,
+    "skill": 1,
+    "taught": 1,
+    "the_front_doors_own_watch_once_mechanism_answered_pass_while_replacing_a_file_it_never_read__and_ran_a_taught_program_on_the_host_because_the_sandbox_import_only_resolves_when_the_file_is_run_as_a_script__so_teaching_the_machine_a_coding_action_once_was_either_destructive_or_unconfined": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_TEST_ARGV_TOKEN_IS_AN_ARGUMENT_NOT_A_PATH_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T00:00:00Z",
@@ -290914,7 +290940,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "605460098ba70713eb8de1e6606640491c8b90c46a19b052f6f2b76a47f53345",
+   "sha256": "78c3c611907bd4eb6ab986cef50565084fc4d460b0908540e1baa6884824a8bc",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
