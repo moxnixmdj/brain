@@ -1,0 +1,51 @@
+{
+  "schema": "PROJECT_BRAIN_R154_V1",
+  "date": "2026-11-09",
+  "round": "r154",
+  "task": "call-site audit for the goal/seed_file parameter class that had already bitten four times",
+  "audit_result": {
+    "verify_plan_call_sites": 2,
+    "recipe_of_call_sites": 2,
+    "program_actions_call_sites": 5,
+    "verdict": "all correct after r153 except one judged DELIBERATE: fingerprint_of() calls program_actions without a goal, and that is right -- the fingerprint is built from `actions` and random walks, so a goal-free shortlist is what makes the fingerprint comparable across goals that share a shape."
+  },
+  "the_cross_contamination_test_that_passed": {
+    "setup": "four goals on the SAME source file and the SAME program shortlist, so they share one fingerprint",
+    "result": "each got its own correct argv: sort -> ['sort',{input}], deduplicate -> ['sort','--unique',{input}], reverse -> ['rev',{input}]",
+    "why_it_holds": "recall() re-verifies every candidate plan through _verify_plan, so a plan for the wrong job is rejected and the next is tried. Memory proposes; verification disposes.",
+    "significance": "this is the design working. A shared fingerprint with per-goal verification is why transfer can be broad without being wrong."
+  },
+  "three_defects_found_by_measurement": {
+    "1_the_output_filename_poisoned_the_oracle_verb_list": {
+      "measured": "_NEEDS_ORACLE matched the word 'clean' inside the output name clean.txt, so 'strip blank lines from notes.txt into clean.txt' was refused in 0.0 s as requiring a reference answer",
+      "note": "this is the SAME defect class as r152, where 'unique' inside unique.txt was deleted as filename noise. I fixed one table and not the other.",
+      "fix": "relation_kind() now runs every verb check on the goal with its output name removed. A caller choosing to CALL a file clean.txt says nothing about what to DO.",
+      "verified": "7/7 cases, including the two that must stay refused: 'summarize notes.txt into summary.txt' -> None, 'clean up notes.txt into tidy.txt' -> None, 'sort items.txt into fixed.txt' -> sort"
+    },
+    "2_a_trailing_terminator_was_counted_as_a_line": {
+      "measured": "head --lines 3 on a 7-line file whose third line is blank returns 'banana\\napple\\n\\n' -- a CORRECT three-line answer. _lines() read it as two lines and returned NOT_THE_FIRST_3_LINES.",
+      "consequence": "head was searched for 289 seconds and refused, because the program that had already been found was judged wrong",
+      "fix": "exactly one trailing terminator is removed; further empty entries are real lines. 'a\\nb\\n' is 2 lines, 'a\\nb\\n\\n' is 3.",
+      "verified": "head 3 correct -> True FIRST_3_LINES; head-2-for-3 -> False NOT_THE_FIRST_3_LINES"
+    },
+    "3_six_full_searches_to_prove_one_thing": {
+      "measured": "the search found and verified `sort` on the head goal, correctly rejected its bytes, then _MAX_RETRIES=6 re-ran the whole 35-program search",
+      "contribution": "289 s of the head goal's cost",
+      "status": "NOT FIXED. After fix 2 the goal closes in 1.21 s so the retry cost no longer shows there, but it is still the cost of every goal that cannot be reached. Named, not repaired."
+    }
+  },
+  "reachability_table_before_and_after": {
+    "before": {"sort": "YES 1.18", "reverse_each_line": "YES 0.40", "reverse_lines": "YES 0.46", "unique": "YES 5.55", "unique_ordered": "no 49.8", "upper": "no 12.6", "lower": "no 24.1", "head": "no 287.2", "strip_blank": "no 0.0"},
+    "after": {"sort": "YES 1.28", "reverse_each_line": "YES 0.43", "reverse_lines": "YES 0.44", "unique": "YES 5.61", "head": "YES 1.21", "strip_blank": "no 25.5", "upper": "no 12.8", "lower": "no 25.0"},
+    "reach_before": "4 of 9", "reach_after": "5 of 8 tested",
+    "head": "289 s refused -> 1.21 s closed, receipt ['head','--lines','3','{input}']"
+  },
+  "the_three_refusals_and_why_they_are_honest": {
+    "tr_upper_lower": "tr needs TWO character-set arguments; goal_values only reads NUMBERS from a goal, and no goal contains '[:lower:]'. Every shape offered is therefore wrong for the job. The program exists and works; the goal does not supply its arguments.",
+    "sed_upper_lower_strip": "sed 's/.*/\\U&/' does the job with no extra argument, but sed is not in the shortlist for .txt and no shape supplies the expression. Making it work would need a relation -> shell-snippet table, which is a strict program -- the exact trap this file already fell out of once. KILLED before implementation.",
+    "the_principle": "the mechanism that works here is: a flag's DOCUMENTED words match the goal's words (--unique <- 'unique'). A transcription of what I happen to know (`sed s/.*/\\U&/`) is not a derivation, and adding it would make the machine look more capable while making it less honest."
+  },
+  "memory_still_holds": {"sort": "0.33 s mem=True", "head": "0.04 s mem=True", "deduplicate": "0.13 s mem=True"},
+  "tests": {"result": "102 passed, 13 subtests, 3 failed", "the_3": "the R148 curriculum/boundary contradiction, untouched by this round"},
+  "sentience": "no."
+}

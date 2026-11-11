@@ -105,9 +105,32 @@ _NEEDS_ORACLE = re.compile(
     r"improve|fix|clean|format|beautify|analysis|review|refactor)\b", re.I)
 
 
+def _strip_output_name(goal: str) -> str:
+    """The goal without its output filename.
+
+    THE OUTPUT NAME IS NOT AN INSTRUCTION, AND IT KEEPS BEING MISTAKEN FOR ONE.
+    Measured 2026-11-09, twice, in two different tables:
+        "deduplicate emails.txt into unique.txt"  -> "unique" deleted as filename noise
+                                                     (r152, flags_for_goal returned [])
+        "strip blank lines from notes.txt into clean.txt"
+                                                 -> "clean" matched the oracle-verb list
+                                                    and the goal was refused in 0.0 s as
+                                                    needing a reference answer
+    The caller chooses what to CALL the file; that choice says nothing about what to DO.
+    Every verb check here runs on the goal with the output name removed, so a file
+    called clean.txt, summary.md or fixed.py cannot decide whether a goal is checkable.
+    """
+    import re as _re
+    text = str(goal or "")
+    m = _re.search(r"\b(?:into|to|as)\s+[\w./\-]*\.[a-z0-9]{1,6}\b", text, _re.I)
+    if not m:
+        return text
+    return text[:m.start()] + " " + text[m.end():]
+
+
 def relation_kind(goal: str) -> str | None:
     """Which relation, if any, does this goal ask for. None = not decidable here."""
-    text = str(goal or "")
+    text = _strip_output_name(goal)
     if _NEEDS_ORACLE.search(text):
         return None
     for name, pattern in _RELATIONS:
@@ -129,9 +152,22 @@ def _lines(data: bytes) -> list[str]:
     reverse, dedupe or case-folding, so exactly one trailing empty entry is
     dropped on both sides before comparing.
     """
-    lines = data.decode("utf-8", "surrogateescape").splitlines()
-    if lines and lines[-1] == "":
-        lines = lines[:-1]
+    text = data.decode("utf-8", "surrogateescape")
+    # A LINE TERMINATOR IS NOT A LINE. AN EMPTY FINAL LINE IS.
+    #
+    # "a\nb\n" is two lines; "a\nb\n\n" is three, the third being empty. Dropping a
+    # trailing empty entry in both made them identical, and that broke `head`:
+    # measured 2026-11-09, `head --lines 3` on a 7-line file ending in a blank line
+    # returned "banana\napple\n\n" -- a CORRECT three-line answer -- and this
+    # function read it as two lines, so the goal was rejected as
+    # NOT_THE_FIRST_3_LINES and 289 s of search was spent failing to find a program
+    # that had already been found.
+    #
+    # Exactly one trailing terminator is removed (the one that ends the final line);
+    # any further empty entries are real lines and are kept.
+    if text.endswith("\n"):
+        text = text[:-1]
+    lines = text.split("\n") if text != "" else []
     return lines
 
 
