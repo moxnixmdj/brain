@@ -536,6 +536,61 @@ def v_drag_box(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     #   "Drag X down by one position."  relative, current index plus one
     # The three unread shapes were reported as drag-not-understood on a verb that was
     # understood perfectly well.
+    # A DIRECTION IS A DISTANCE IN PIXELS, AND THE PAGE ONLY CHECKS THE SIGN.
+    #
+    # Measured 2026-11-09 from drag-circle's own source: the checker compares the element's
+    # position to its initial box and rewards any movement with the right sign --
+    #   'right' -> currentCoords.x > initialCoords.x
+    # Nothing about magnitude is tested, so the drag only has to clear the widget's own
+    # slop. drag-single-shape, drag-circle and drag-items-grid all state a bare direction.
+    _dir = re.search(r"drag\s+(?:the\s+)?(.+?)\s+(up|down|left|right)\b(?!\s*by)", g)
+    if _dir and not re.search(r"by\s+\w+\s+position", g):
+        _what = _dir.group(1).strip()
+        _side = _dir.group(2)
+        # THE SHAPE IS NOT TEXT, SO IT IS NOT IN `candidates`.
+        #
+        # Measured 2026-11-09 on drag-circle: the circle sits at (61,105) as an SVG
+        # <circle>, and candidates() only queries button,a,li,div,span,input,label -- so
+        # the list held the instruction div (80,105) and this code dragged the sentence.
+        # Draggable geometry is read directly from the page for circle/rect/image/svg
+        # descendants, and only falls back to text candidates when there is none.
+        _geo = act.ev("(()=>{const out=[];"
+                      "for(const e of document.querySelectorAll('circle,rect,image,svg,polygon')){"
+                      "const r=e.getBoundingClientRect();"
+                      "if(r.width>6&&r.height>6){out.push({t:'',cx:r.x+r.width/2,cy:r.y+r.height/2,"
+                      "a:r.width*r.height})}}return out})()") or []
+        # THE SENTENCE ITSELF CONTAINS THE WORD IT NAMES.
+        #
+        # Measured 2026-11-09 on drag-circle: the candidate matching "circle" was
+        # 'Drag the circle left then press Submit.' at (80,25) -- the instruction div --
+        # and dragging it moved nothing. #query is the instruction and it can never be the
+        # thing to manipulate. It is excluded by position, using the element the page
+        # itself puts the instruction in.
+        _qbox = act.box("document.querySelector('#query')") or {}
+        def _is_instruction(c):
+            if not _qbox:
+                return False
+            return (_qbox.get("x", -1) <= c["cx"] <= _qbox.get("x", 0) + _qbox.get("w", 0)
+                    and _qbox.get("y", -1) <= c["cy"] <= _qbox.get("y", 0) + _qbox.get("h", 0))
+        _named = [c for c in cands if _what and _what in (c["t"] or "").lower()
+                  and (c.get("a") or 0) < 20000 and not _is_instruction(c)]
+        # the SVG canvas is also "geometry" and it is the largest thing on the page;
+        # the draggable is the SMALLEST element that can be seen -- a 784 px circle, not a
+        # 20800 px canvas. Sorting by area and taking the first picked the canvas and
+        # dragged nothing. The smallest is the shape.
+        _geo.sort(key=lambda c: c["a"])
+        _cand = _named or _geo or [c for c in cands if (c.get("a") or 0) > 100]
+        _cand = sorted(_cand, key=lambda c: c["a"])
+        if _cand:
+            _c = sorted(_cand, key=lambda c: c["a"])[0]
+            _D = 60
+            _dx = _D if _side == "right" else (-_D if _side == "left" else 0)
+            _dy = _D if _side == "down" else (-_D if _side == "up" else 0)
+            act.drag(_c["cx"], _c["cy"], _c["cx"] + _dx, _c["cy"] + _dy, steps=16)
+            time.sleep(0.30)
+            if not episode_over(act):
+                submit(act, required=False)
+            return "drag-dir:%s" % _side
     m = re.search(r"drag\s+(.+?)\s+to\s+the\s+([\w]+)\s+position", g)
     _rel = re.search(r"drag\s+(.+?)\s+(up|down)\s+by\s+(\w+)\s+position", g)
     _bot = re.search(r"drag\s+(.+?)\s+to\s+the\s+bottom", g)
