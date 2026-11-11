@@ -1,0 +1,30 @@
+name: Verify terminal theorem minimality falsifier V1
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/terminal_theorem_minimality_falsifier_v1.py"
+      - "canonical/tests/test_terminal_theorem_minimality_falsifier_v1.py"
+      - "canonical/governance/TERMINAL_FIRST_PRINCIPLES_THEORY_TOURNAMENT_20261006_V1.json"
+      - "canonical/governance/OWNED_TARGET_OUTCOME_FRONTIER_SIMULATION_20261006_V1.json"
+      - "canonical/governance/TERMINAL_OPEN32_OUTCOME_FRONTIER_ROLE_REBIND_20261006_V1.json"
+      - "canonical/runtime/owned_target_outcome_frontier_simulation_v1.py"
+      - "canonical/tests/test_owned_target_outcome_frontier_simulation_v1.py"
+      - ".github/workflows/verify-terminal-theorem-minimality-falsifier-v1.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m py_compile canonical/runtime/terminal_theorem_minimality_falsifier_v1.py canonical/runtime/owned_target_outcome_frontier_simulation_v1.py
+      - run: python -m pytest -q canonical/tests/test_terminal_theorem_minimality_falsifier_v1.py canonical/tests/test_owned_target_outcome_frontier_simulation_v1.py
