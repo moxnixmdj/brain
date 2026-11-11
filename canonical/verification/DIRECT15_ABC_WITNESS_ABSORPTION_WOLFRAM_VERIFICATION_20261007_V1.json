@@ -1,0 +1,28 @@
+{
+  "schema": "PROJECT_BRAIN_DIRECT15_ABC_WITNESS_ABSORPTION_WOLFRAM_VERIFICATION_V1",
+  "date": "2026-10-07",
+  "status": "INDEPENDENT_WOLFRAM_POINTWISE_LOGIC_PASS__SEMANTIC_BINDINGS_NOT_INDEPENDENTLY_REVERIFIED_HERE__ZERO_CREDIT",
+  "subject": {
+    "path": "canonical/governance/DIRECT15_ABC_WITNESS_ABSORPTION_TRUTH_REPAIR_20261007_V1.json",
+    "governance_commit_sha": "3c5c5f76849214cbca567e4e04295beb21d4e015",
+    "branch": "obs/direct15-abc-witness-absorption-20261007-v1"
+  },
+  "formula": "((ABC=>P1)&...&(ABC=>P15)) => (ABC=>(P1&...&P15))",
+  "wolfram_result": true,
+  "verified": [
+    "POINTWISE_ABSORPTION_LOGIC_FOR_FIFTEEN_NAMED_SLICES_IS_VALID",
+    "IF_EACH_DIRECT15_PREDICATE_IS_SOUNDLY_ENTAILED_BY_COMPLETE_ABC_FOR_ITS_BOUND_SCOPE__THE_FIFTEEN_TOP_LEVEL_LEAF_CONJUNCTS_ARE_LOGICALLY_REDUNDANT"
+  ],
+  "not_verified": [
+    "TARGET_TUPLE_AND_SCOPE_BINDING_FOR_EACH_DIRECT15_PREDICATE",
+    "EVALUATOR_OR_SCORE_REDUCER_RELATION_FOR_EACH_BENCHMARK",
+    "CURRENT_ABC_CLOSURE",
+    "ANY_DIRECT15_ACCEPTANCE_RESULT",
+    "D_L2_CLOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
