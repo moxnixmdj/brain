@@ -86,3 +86,24 @@ def test_integer_ratio_target_still_parses_as_float(monkeypatch):
 
     assert out["status"] == "PASS_CANDIDATE_SINGLE_CHECKER_WITNESS"
     assert seen["pct"] == 65.0
+
+
+
+def test_public_integer_valued_decimal_conjunction_count_is_solved():
+    prompt = (
+        "Use at least 4.0 different coordinating conjunctions in the response. "
+        "Explain the example."
+    )
+    assert detect(prompt) == ["count:conjunctions"]
+    out = solve(prompt)
+    assert out["status"] == "PASS_CANDIDATE_SINGLE_CHECKER_WITNESS"
+    assert out["checker_id"] == "count:conjunctions"
+    assert out["response"].split() == ["alpha", "and", "x0", "but", "x1", "or", "x2", "so", "x3"]
+
+
+def test_noninteger_decimal_conjunction_count_fails_closed():
+    prompt = "Use at least 4.5 different coordinating conjunctions in the response."
+    assert detect(prompt) == ["count:conjunctions"]
+    out = solve(prompt)
+    assert out["status"] == "FAIL_CLOSED"
+    assert out["error"] == "WITNESS_CONSTRUCTION_FAILED"
