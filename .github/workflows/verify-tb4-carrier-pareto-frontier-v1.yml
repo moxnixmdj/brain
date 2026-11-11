@@ -1,0 +1,28 @@
+name: Verify TB4 carrier Pareto frontier
+
+on:
+  pull_request:
+    paths:
+      - "canonical/governance/TB4_MINIMUM_CARRIER_RECOVERY_CUT_V1.json"
+      - "canonical/governance/TB4_CARRIER_PARETO_FRONTIER_V1.json"
+      - "canonical/runtime/tb4_carrier_pareto_frontier_v1.py"
+      - "canonical/tests/test_tb4_carrier_pareto_frontier_v1.py"
+      - ".github/workflows/verify-tb4-carrier-pareto-frontier-v1.yml"
+  push:
+    branches:
+      - "breakthrough/tb4-carrier-pareto-20261002"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run exhaustive frontier verifier
+        run: python canonical/runtime/tb4_carrier_pareto_frontier_v1.py
+      - name: Run fail-closed tests
+        run: python -m unittest canonical.tests.test_tb4_carrier_pareto_frontier_v1 -v
