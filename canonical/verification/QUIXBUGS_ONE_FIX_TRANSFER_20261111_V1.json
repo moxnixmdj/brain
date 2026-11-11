@@ -1,0 +1,2965 @@
+{
+ "all_other_fixes_then_this_bug": {
+  "as_taught": {
+   "bitcount": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "breadth_first_search": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "bucketsort": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "depth_first_search": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "detect_cycle": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "find_first_in_sorted": {
+    "lessons_given": 22,
+    "oracle_calls": 3,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "find_in_sorted": {
+    "lessons_given": 21,
+    "oracle_calls": 3,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "flatten": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "gcd": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "get_factors": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "hanoi": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "is_valid_parenthesization": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "kheapsort": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "knapsack": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "kth": {
+    "lessons_given": 22,
+    "oracle_calls": 3,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "lcs_length": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "levenshtein": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "lis": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "longest_common_subsequence": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "max_sublist_sum": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "mergesort": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "minimum_spanning_tree": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "next_palindrome": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "next_permutation": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "pascal": {
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "possible_change": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "powerset": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "quicksort": {
+    "from_the_lesson_of": [
+     "knapsack"
+    ],
+    "is_the_published_fix": false,
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": true,
+    "repaired": true,
+    "rules_held": 21,
+    "strategy": "narrowed_pattern"
+   },
+   "reverse_linked_list": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "rpn_eval": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "shortest_path_length": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "shortest_path_lengths": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "shortest_paths": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "shunting_yard": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "sieve": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "sqrt": {
+    "lessons_given": 22,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "subsequences": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "to_base": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "topological_ordering": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "wrap": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   }
+  },
+  "widest": {
+   "bitcount": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "breadth_first_search": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "bucketsort": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "depth_first_search": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "detect_cycle": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "find_first_in_sorted": {
+    "lessons_given": 22,
+    "oracle_calls": 5,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "find_in_sorted": {
+    "lessons_given": 21,
+    "oracle_calls": 5,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "flatten": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "gcd": {
+    "from_the_lesson_of": [
+     "shortest_path_lengths"
+    ],
+    "is_the_published_fix": false,
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": true,
+    "repaired": true,
+    "rules_held": 21,
+    "strategy": "narrowed_pattern"
+   },
+   "get_factors": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "hanoi": {
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "is_valid_parenthesization": {
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "kheapsort": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "knapsack": {
+    "from_the_lesson_of": [
+     "quicksort"
+    ],
+    "is_the_published_fix": true,
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": true,
+    "repaired": true,
+    "rules_held": 21,
+    "strategy": "operator_generalization"
+   },
+   "kth": {
+    "lessons_given": 22,
+    "oracle_calls": 3,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "lcs_length": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "levenshtein": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "lis": {
+    "lessons_given": 21,
+    "oracle_calls": 3,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "longest_common_subsequence": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "max_sublist_sum": {
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "mergesort": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "minimum_spanning_tree": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "next_palindrome": {
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "next_permutation": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "pascal": {
+    "lessons_given": 21,
+    "oracle_calls": 4,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "possible_change": {
+    "lessons_given": 22,
+    "oracle_calls": 4,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "powerset": {
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "quicksort": {
+    "from_the_lesson_of": [
+     "knapsack"
+    ],
+    "is_the_published_fix": false,
+    "lessons_given": 21,
+    "oracle_calls": 1,
+    "proposed": true,
+    "repaired": true,
+    "rules_held": 21,
+    "strategy": "narrowed_pattern"
+   },
+   "reverse_linked_list": {
+    "lessons_given": 21,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "rpn_eval": {
+    "lessons_given": 22,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "shortest_path_length": {
+    "lessons_given": 22,
+    "oracle_calls": 4,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "shortest_path_lengths": {
+    "lessons_given": 21,
+    "oracle_calls": 2,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "shortest_paths": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "shunting_yard": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "sieve": {
+    "lessons_given": 22,
+    "oracle_calls": 4,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "sqrt": {
+    "lessons_given": 22,
+    "oracle_calls": 5,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "subsequences": {
+    "lessons_given": 22,
+    "oracle_calls": 1,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "to_base": {
+    "lessons_given": 21,
+    "oracle_calls": 4,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 21
+   },
+   "topological_ordering": {
+    "lessons_given": 22,
+    "oracle_calls": 0,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   },
+   "wrap": {
+    "lessons_given": 22,
+    "oracle_calls": 4,
+    "proposed": false,
+    "repaired": false,
+    "rules_held": 22
+   }
+  }
+ },
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "census": {
+  "bitcount": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 124,
+    "test_count": 0
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": false,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "breadth_first_search": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 5
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "bucketsort": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 7
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "depth_first_search": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 5
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    0,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "detect_cycle": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "find_first_in_sorted": {
+   "buggy": {
+    "oracle_error": "TypeError",
+    "passed": false,
+    "returncode": null,
+    "test_count": null
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": false,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "find_in_sorted": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 7
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "flatten": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 7
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "gcd": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "get_factors": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 11
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "hanoi": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 8
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "is_valid_parenthesization": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 3
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "kheapsort": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 4
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "knapsack": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 9
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "kth": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 7
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "lcs_length": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 9
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "levenshtein": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "lis": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 12
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "longest_common_subsequence": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 10
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "max_sublist_sum": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "mergesort": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 14
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "minimum_spanning_tree": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 3
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "next_palindrome": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 5
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "next_permutation": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 8
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "pascal": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 5
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "possible_change": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 10
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    2,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "powerset": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 5
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    2,
+    2
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "quicksort": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 13
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "reverse_linked_list": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 3
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    0,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "rpn_eval": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "shortest_path_length": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 4
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "shortest_path_lengths": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 4
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "shortest_paths": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 3
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "shunting_yard": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    0,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "sieve": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 6
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "sqrt": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 124,
+    "test_count": 0
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": false,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "subsequences": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 12
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "to_base": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 10
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "topological_ordering": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 3
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    1,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  },
+  "wrap": {
+   "buggy": {
+    "oracle_error": null,
+    "passed": false,
+    "returncode": 1,
+    "test_count": 5
+   },
+   "buggy_fails_in_a_way_the_oracle_counts": true,
+   "lines_removed_and_added_by_the_fix": [
+    0,
+    1
+   ],
+   "with_the_published_fix_passes": true
+  }
+ },
+ "checks_of_the_tests": {
+  "a_leak_that_was_looked_for": "a new store of this organ starts by default from the rules the tree ships with; the stores used here are made empty, a test holds that, and what the shipped rules do by themselves is question (5)",
+  "seeded_faults_in_the_tool": "every one of 207 places tried with the 25 fast tests: 156 noticed; after new assertions 7 more; 44 remain, none of which changes a count that is reported (progress text, rounding of seconds, the import path, command-line help and output formatting, defaults that are overwritten before use, three equivalent forms of an edge case, and two constants only the five real-organ tests would notice, which were not part of this check)",
+  "tests": "30 for this tool: 25 put a stand-in where the organ and its oracle go and pin who is taught what, who is asked what, what counts as repaired and how it is counted; 5 run the real organ and the real oracle on four small programs written in the test"
+ },
+ "environment": {
+  "benchmark_sha256": "44fea01ec12ff8bc809fa719f089c38b8d15a35ddac7fa0eddcd2dfaeeac78bb",
+  "code_sha256": {
+   "organ_contract_and_oracle": "7a34e3d80ce60fc1139bc974bd756f7310188e7b33deb2163f3a6d66963ff0aa",
+   "organ_operator_generalization": "29350ecfadda7eb0db0708ba3e9bc2b4a85d7e6f0ce6115b1f66fe84233e08c2",
+   "organ_scope_learning": "c3a728270ffde3c1b6b781b6e5c6fa1a4f7145e2077bbec80cb4edebb22576a0",
+   "organ_store": "888dc4457fcb7e309e9af3e4a6b48c6b0757c5369588587fb9a81b8fdf4f70aa",
+   "test_measurement": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+   "tool": "f4b3f35cb5db7d076a92ee9cf3fd44c0446749ee2259036084beea744db689c2"
+  },
+  "python": "3.11.2",
+  "quixbugs_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "source": "github.com/jkoppel/QuixBugs (MIT), python_programs / correct_python_programs / python_testcases"
+ },
+ "every_pair_in_which_the_organ_ran_a_test": [
+  {
+   "bug": "find_in_sorted",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "kth",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 2
+  },
+  {
+   "bug": "lis",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "pascal",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "quicksort",
+   "lesson": "knapsack",
+   "repaired": true,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_first_in_sorted",
+   "lesson": "lis",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_first_in_sorted",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 2
+  },
+  {
+   "bug": "find_in_sorted",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "knapsack",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "lcs_length",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "longest_common_subsequence",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "pascal",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "possible_change",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "powerset",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "rpn_eval",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_length",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_lengths",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_paths",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "sieve",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "sqrt",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 2
+  },
+  {
+   "bug": "to_base",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "wrap",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_in_sorted",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "kth",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "as_taught",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_in_sorted",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "hanoi",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "is_valid_parenthesization",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "kth",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "lis",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "pascal",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "possible_change",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "quicksort",
+   "lesson": "knapsack",
+   "repaired": true,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_length",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "sieve",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "sqrt",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "to_base",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "wrap",
+   "lesson": "knapsack",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_first_in_sorted",
+   "lesson": "lis",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_first_in_sorted",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "find_in_sorted",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "knapsack",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "lcs_length",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "longest_common_subsequence",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "pascal",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "possible_change",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "powerset",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "rpn_eval",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "shortest_path_length",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_lengths",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_paths",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "sieve",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "sqrt",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "to_base",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "wrap",
+   "lesson": "max_sublist_sum",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "find_first_in_sorted",
+   "lesson": "mergesort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "gcd",
+   "lesson": "mergesort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "get_factors",
+   "lesson": "mergesort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "next_palindrome",
+   "lesson": "mergesort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "possible_change",
+   "lesson": "mergesort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "subsequences",
+   "lesson": "mergesort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_in_sorted",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 2
+  },
+  {
+   "bug": "hanoi",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "is_valid_parenthesization",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "knapsack",
+   "lesson": "quicksort",
+   "repaired": true,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "kth",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "next_palindrome",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "possible_change",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_length",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shunting_yard",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "sieve",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "sqrt",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "to_base",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "wrap",
+   "lesson": "quicksort",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "breadth_first_search",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "depth_first_search",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "find_first_in_sorted",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "gcd",
+   "lesson": "shortest_path_lengths",
+   "repaired": true,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "lis",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "max_sublist_sum",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "sqrt",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "to_base",
+   "lesson": "shortest_path_lengths",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "knapsack",
+   "lesson": "to_base",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_length",
+   "lesson": "to_base",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  },
+  {
+   "bug": "shortest_path_lengths",
+   "lesson": "to_base",
+   "repaired": false,
+   "setting": "widest",
+   "test_runs": 1
+  }
+ ],
+ "generated_utc": "2026-11-11T21:25:44Z",
+ "incremental_spend_usd": 0,
+ "lessons": {
+  "bitcount": {
+   "refused_because": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "n &= n - 1"
+    ],
+    "removed": [
+     "n ^= n - 1"
+    ]
+   }
+  },
+  "breadth_first_search": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "while queue:"
+    ],
+    "removed": [
+     "while True:"
+    ]
+   }
+  },
+  "bucketsort": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "for i, count in enumerate(counts):"
+    ],
+    "removed": [
+     "for i, count in enumerate(arr):"
+    ]
+   }
+  },
+  "depth_first_search": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "nodesvisited.add(node)"
+    ],
+    "removed": []
+   }
+  },
+  "detect_cycle": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "if hare is None or hare.successor is None:"
+    ],
+    "removed": [
+     "if hare.successor is None:"
+    ]
+   }
+  },
+  "find_first_in_sorted": {
+   "refused_because": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "while lo < hi:"
+    ],
+    "removed": [
+     "while lo <= hi:"
+    ]
+   }
+  },
+  "find_in_sorted": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return binsearch(mid + 1, end)"
+    ],
+    "removed": [
+     "return binsearch(mid, end)"
+    ]
+   }
+  },
+  "flatten": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "yield x"
+    ],
+    "removed": [
+     "yield flatten(x)"
+    ]
+   }
+  },
+  "gcd": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return gcd(b, a % b)"
+    ],
+    "removed": [
+     "return gcd(a % b, b)"
+    ]
+   }
+  },
+  "get_factors": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return [n]"
+    ],
+    "removed": [
+     "return []"
+    ]
+   }
+  },
+  "hanoi": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "steps.append((start, end))"
+    ],
+    "removed": [
+     "steps.append((start, helper))"
+    ]
+   }
+  },
+  "is_valid_parenthesization": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return depth == 0"
+    ],
+    "removed": [
+     "return True"
+    ]
+   }
+  },
+  "kheapsort": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "for x in arr[k:]:"
+    ],
+    "removed": [
+     "for x in arr:"
+    ]
+   }
+  },
+  "knapsack": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "UNDERDETERMINED",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "if weight <= j:"
+    ],
+    "removed": [
+     "if weight < j:"
+    ]
+   }
+  },
+  "kth": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "return kth(above, k - num_lessoreq)"
+    ],
+    "removed": [
+     "return kth(above, k)"
+    ]
+   }
+  },
+  "lcs_length": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "dp[i, j] = dp[i - 1, j - 1] + 1"
+    ],
+    "removed": [
+     "dp[i, j] = dp[i - 1, j] + 1"
+    ]
+   }
+  },
+  "levenshtein": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return levenshtein(source[1:], target[1:])"
+    ],
+    "removed": [
+     "return 1 + levenshtein(source[1:], target[1:])"
+    ]
+   }
+  },
+  "lis": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "longest = max(longest, length + 1)"
+    ],
+    "removed": [
+     "longest = length + 1"
+    ]
+   }
+  },
+  "longest_common_subsequence": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return a[0] + longest_common_subsequence(a[1:], b[1:])"
+    ],
+    "removed": [
+     "return a[0] + longest_common_subsequence(a[1:], b)"
+    ]
+   }
+  },
+  "max_sublist_sum": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_EXPRESSION"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "max_ending_here = max(0, max_ending_here + x)"
+    ],
+    "removed": [
+     "max_ending_here = max_ending_here + x"
+    ]
+   }
+  },
+  "mergesort": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "if len(arr) <= 1:"
+    ],
+    "removed": [
+     "if len(arr) == 0:"
+    ]
+   }
+  },
+  "minimum_spanning_tree": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "group_by_node[node] = group_by_node[u]"
+    ],
+    "removed": [
+     "group_by_node[node].update(group_by_node[u])"
+    ]
+   }
+  },
+  "next_palindrome": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "return [1] + (len(digit_list) - 1) * [0] + [1]"
+    ],
+    "removed": [
+     "return [1] + (len(digit_list)) * [0] + [1]"
+    ]
+   }
+  },
+  "next_permutation": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "if perm[i] < perm[j]:"
+    ],
+    "removed": [
+     "if perm[j] < perm[i]:"
+    ]
+   }
+  },
+  "pascal": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "for c in range(0, r + 1):"
+    ],
+    "removed": [
+     "for c in range(0, r):"
+    ]
+   }
+  },
+  "possible_change": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "if total < 0 or not coins:"
+    ],
+    "removed": [
+     "# Python 3",
+     "if total < 0:"
+    ]
+   }
+  },
+  "powerset": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "first, *rest = arr",
+     "return rest_subsets + [[first] + subset for subset in rest_subsets]"
+    ],
+    "removed": [
+     "first, *rest = arr #python3 just like car and cdr (in this case anyway..)",
+     "return [[first] + subset for subset in rest_subsets]"
+    ]
+   }
+  },
+  "quicksort": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "UNDERDETERMINED",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "greater = quicksort([x for x in arr[1:] if x >= pivot])"
+    ],
+    "removed": [
+     "greater = quicksort([x for x in arr[1:] if x > pivot])"
+    ]
+   }
+  },
+  "reverse_linked_list": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "NO_PROBES_APPLICABLE",
+    "scope": null
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "prevnode = node"
+    ],
+    "removed": []
+   }
+  },
+  "rpn_eval": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "op(token, b, a)"
+    ],
+    "removed": [
+     "op(token, a, b)"
+    ]
+   }
+  },
+  "shortest_path_length": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "distance + length_by_edge[node, nextnode]"
+    ],
+    "removed": [
+     "get(unvisited_nodes, nextnode) + length_by_edge[node, nextnode]"
+    ]
+   }
+  },
+  "shortest_path_lengths": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "length_by_path[i, k] + length_by_path[k, j]"
+    ],
+    "removed": [
+     "length_by_path[i, k] + length_by_path[j, k]"
+    ]
+   }
+  },
+  "shortest_paths": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "weight_by_node[v] = min("
+    ],
+    "removed": [
+     "weight_by_edge[u, v] = min("
+    ]
+   }
+  },
+  "shunting_yard": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "opstack.append(token)"
+    ],
+    "removed": []
+   }
+  },
+  "sieve": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "if all(n % p > 0 for p in primes):"
+    ],
+    "removed": [
+     "if any(n % p > 0 for p in primes):"
+    ]
+   }
+  },
+  "sqrt": {
+   "refused_because": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "while abs(x - approx ** 2) > epsilon:"
+    ],
+    "removed": [
+     "while abs(x - approx) > epsilon:"
+    ]
+   }
+  },
+  "subsequences": {
+   "refused_because": "NON_GENERALIZABLE_SNIPPET",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "return [[]]"
+    ],
+    "removed": [
+     "return []"
+    ]
+   }
+  },
+  "to_base": {
+   "refused_because": null,
+   "scope_the_rule_found_for_itself": {
+    "result": "RESOLVED",
+    "scope": "SCOPE_STATEMENT"
+   },
+   "stored": true,
+   "the_published_change": {
+    "put_in": [
+     "result = alphabet[i] + result"
+    ],
+    "removed": [
+     "result = result + alphabet[i]"
+    ]
+   }
+  },
+  "topological_ordering": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:"
+    ],
+    "removed": [
+     "if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:"
+    ]
+   }
+  },
+  "wrap": {
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+   "scope_the_rule_found_for_itself": null,
+   "stored": false,
+   "the_published_change": {
+    "put_in": [
+     "lines.append(text)"
+    ],
+    "removed": []
+   }
+  }
+ },
+ "not_done": [
+  "the tree's repair SOLVER (search over edits, with and without retained lessons) on these 40 bugs: that would say what the tree repairs, where this says what a lesson adds",
+  "the 18 fixes the organ refused to store were not taught some other way",
+  "whether the two repairs that are not the published fix are correct beyond their tests (they look it)",
+  "an independent re-run by anyone else"
+ ],
+ "parameters": {
+  "one_fix_teachers": null,
+  "recall_wall_limit_s": 240,
+  "scope_id": "quixbugs-python",
+  "seed": 0,
+  "settings": {
+   "as_taught": {
+    "allow_cross_scope_transfer": false,
+    "allow_operator_generalization": false,
+    "allow_scope_escalation": false
+   },
+   "widest": {
+    "allow_cross_scope_transfer": true,
+    "allow_operator_generalization": true,
+    "allow_scope_escalation": true
+   }
+  },
+  "timeout_s": 8
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "published_results_on_the_same_bugs": {
+  "language_models": [
+   {
+    "bugs_repaired_of_40": {
+     "ChatGPT": 31,
+     "GPT-4o": 38,
+     "O1-preview and O1-mini": 40
+    },
+    "source": "https://www.arxiv.org/pdf/2409.10033"
+   },
+   {
+    "bugs_repaired_of_40": {
+     "Code Llama": 37,
+     "Codex": 39,
+     "Phi-3 (3.8B)": 38,
+     "Qwen2.5-Coder-3B-Instruct": 38
+    },
+    "protocol": "a bug counts as fixed if at least one of 200 generated samples passes all tests",
+    "source": "https://arxiv.org/html/2508.16499v1"
+   }
+  ],
+  "note": "as stated on the cited pages, read 2026-11-11; not reproduced here; their protocols differ from each other and from this one (a model is asked to repair each bug; nothing is taught first)",
+  "reuse_of_past_fixes_on_real_projects": {
+   "finding": "if a repair approach only reuses the contents, the structure changes, or the name changes of past fixes, at most 2.1%, 12.5% and 3.8% of new bug fixes can be constructed that way",
+   "source": "https://cs.sjtu.edu.cn/~zhonghao/paper/potential.pdf"
+  }
+ },
+ "read_this_first": "THE CLAIM, IN THE CODING DOMAIN: let the system experience a fix once and it has learned it, so the next bug is repaired from what was learned. MEASURED with the tree's own organ for exactly that, NOT EDITED: VerifiedSkillStore (canonical/swe_kernel/verified_skill_crystallizer_v1.py) -- crystallize_code_fix takes one verified fix and stores a rule, recall_and_apply_verified proposes a patch for new source from the stored rules and accepts it only if the target's tests pass -- with its own test oracle (ProjectTestOracle), called the way the tree's production repair session calls them. THE BUGS: QuixBugs (github.com/jkoppel/QuixBugs), 40 small Python programs with a defect on one line each, their own tests and their published correct versions; nobody here wrote any of it, and it is the easiest setting program repair has. Checked first: all 40 buggy versions fail their tests and all 40 pass with the published fix applied. RESULT. (1) Of the 40 fixes the organ STORED 22 AS LESSONS AND REFUSED 18: 14 because the rule it formed did not pass the organ's own check on a mutated twin of the program, 3 because the buggy program does not finish within the 8 seconds its tests are given, so no failing test could be counted, 1 as not generalisable. (2) THE SAME BUG AGAIN, on a fresh copy: 22 of 22 repaired from memory. That part is real. (3) ONE FIX, THEN ANOTHER BUG: 22 lessons times the 39 other bugs is 858 pairs. With the organ's production defaults 1 pair is repaired; with every generalisation it offers switched on, 3. In the widest setting 19 of the 22 lessons repair no other bug, and no lesson repairs more than one. (4) ALL THE OTHER FIXES, THEN THIS BUG (21 or 22 lessons held at once): 1 of 40 with the defaults, 3 of 40 with everything on. (5) WHAT THE TREE SHIPS WITH as already learned (the 2 Python rules of its seed bundle), nothing taught here: 0 of 40. The transfers are listed under repairs_of_another_bug with the patch: two are a comparison made inclusive (< to <=, > to >=) carried to another comparison, one is two names exchanged; all three pass the target's tests, one is the published fix and two are other correct-looking fixes. So a lesson reaches another bug when the other bug is the same small change, and otherwise not. FOR SCALE, as reported in the papers listed under published_results_on_the_same_bugs and not reproduced here: language models repair 31 to 40 of these same 40 bugs with no lesson at all. Nothing here searches for a fix; the tree's repair solver, which does, was not run in this measurement (see not_done), so this says what a lesson adds, not what the tree can repair. Every recall got a store of its own holding only the lessons meant for it; in 'all the other fixes' the bug's own lesson is never among them (tested). No model is called anywhere. Producer-run in a sandbox; nobody else has repeated it.",
+ "repairs_of_another_bug": [
+  {
+   "bug": "quicksort",
+   "is_the_published_fix": false,
+   "lesson": "knapsack",
+   "scope_tier": "SCOPE_EXPRESSION",
+   "setting": "as_taught",
+   "strategy_of_the_organ": "narrowed_pattern",
+   "the_patch": {
+    "put_in": [
+     "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+    ],
+    "removed": [
+     "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+    ]
+   },
+   "the_published_fix_of_the_bug": {
+    "put_in": [
+     "greater = quicksort([x for x in arr[1:] if x >= pivot])"
+    ],
+    "removed": [
+     "greater = quicksort([x for x in arr[1:] if x > pivot])"
+    ]
+   },
+   "what_the_lesson_changed": {
+    "put_in": [
+     "if weight <= j:"
+    ],
+    "removed": [
+     "if weight < j:"
+    ]
+   }
+  },
+  {
+   "bug": "quicksort",
+   "is_the_published_fix": false,
+   "lesson": "knapsack",
+   "scope_tier": "SCOPE_EXPRESSION",
+   "setting": "widest",
+   "strategy_of_the_organ": "narrowed_pattern",
+   "the_patch": {
+    "put_in": [
+     "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+    ],
+    "removed": [
+     "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+    ]
+   },
+   "the_published_fix_of_the_bug": {
+    "put_in": [
+     "greater = quicksort([x for x in arr[1:] if x >= pivot])"
+    ],
+    "removed": [
+     "greater = quicksort([x for x in arr[1:] if x > pivot])"
+    ]
+   },
+   "what_the_lesson_changed": {
+    "put_in": [
+     "if weight <= j:"
+    ],
+    "removed": [
+     "if weight < j:"
+    ]
+   }
+  },
+  {
+   "bug": "knapsack",
+   "is_the_published_fix": true,
+   "lesson": "quicksort",
+   "scope_tier": "SCOPE_OPERATOR",
+   "setting": "widest",
+   "strategy_of_the_organ": "operator_generalization",
+   "the_patch": {
+    "put_in": [
+     "if weight <= j:"
+    ],
+    "removed": [
+     "if weight < j:"
+    ]
+   },
+   "the_published_fix_of_the_bug": {
+    "put_in": [
+     "if weight <= j:"
+    ],
+    "removed": [
+     "if weight < j:"
+    ]
+   },
+   "what_the_lesson_changed": {
+    "put_in": [
+     "greater = quicksort([x for x in arr[1:] if x >= pivot])"
+    ],
+    "removed": [
+     "greater = quicksort([x for x in arr[1:] if x > pivot])"
+    ]
+   }
+  },
+  {
+   "bug": "gcd",
+   "is_the_published_fix": false,
+   "lesson": "shortest_path_lengths",
+   "scope_tier": "SCOPE_EXPRESSION",
+   "setting": "widest",
+   "strategy_of_the_organ": "narrowed_pattern",
+   "the_patch": {
+    "put_in": [
+     "def gcd(b, a):"
+    ],
+    "removed": [
+     "def gcd(a, b):"
+    ]
+   },
+   "the_published_fix_of_the_bug": {
+    "put_in": [
+     "return gcd(b, a % b)"
+    ],
+    "removed": [
+     "return gcd(a % b, b)"
+    ]
+   },
+   "what_the_lesson_changed": {
+    "put_in": [
+     "length_by_path[i, k] + length_by_path[k, j]"
+    ],
+    "removed": [
+     "length_by_path[i, k] + length_by_path[j, k]"
+    ]
+   }
+  }
+ ],
+ "run_twice": {
+  "first_run_counts": {
+   "all_other_fixes_repaired": {
+    "as_taught": 1,
+    "widest": 3
+   },
+   "fixes_stored": 21,
+   "one_fix_pairs_repaired": {
+    "as_taught": [
+     1,
+     819
+    ],
+    "widest": [
+     3,
+     819
+    ]
+   }
+  },
+  "the_first_run": "made while other measurements used both processors: the same repairs in every question and setting, pair for pair; one fix fewer was stored (levenshtein: under load its failing tests did not finish in 8 seconds, so the organ refused it)",
+  "this_record": "the second run, made with nothing else running on the machine"
+ },
+ "same_bug_again": {
+  "as_taught": {
+   "depth_first_search": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "detect_cycle": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "find_in_sorted": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "gcd": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "get_factors": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "hanoi": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "is_valid_parenthesization": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "knapsack": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "lcs_length": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "levenshtein": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "lis": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "longest_common_subsequence": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "max_sublist_sum": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "mergesort": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "next_palindrome": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "next_permutation": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "pascal": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "powerset": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "quicksort": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "reverse_linked_list": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "shortest_path_lengths": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "to_base": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   }
+  },
+  "widest": {
+   "depth_first_search": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "detect_cycle": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "find_in_sorted": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "gcd": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "get_factors": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "hanoi": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "is_valid_parenthesization": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "knapsack": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "lcs_length": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "levenshtein": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "lis": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "longest_common_subsequence": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "max_sublist_sum": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "mergesort": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "next_palindrome": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "next_permutation": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "pascal": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "powerset": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "quicksort": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "reverse_linked_list": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "shortest_path_lengths": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   },
+   "to_base": {
+    "repaired": true,
+    "strategy": "statement",
+    "test_runs": 1
+   }
+  }
+ },
+ "schema": "BRAIN_QUIXBUGS_ONE_FIX_TRANSFER_DIGEST_V1",
+ "summary": {
+  "fixes_the_organ_refused_to_store": {
+   "FAILED_MUTATED_TWIN_VERIFICATION": [
+    "breadth_first_search",
+    "bucketsort",
+    "flatten",
+    "kheapsort",
+    "kth",
+    "minimum_spanning_tree",
+    "possible_change",
+    "rpn_eval",
+    "shortest_path_length",
+    "shortest_paths",
+    "shunting_yard",
+    "sieve",
+    "topological_ordering",
+    "wrap"
+   ],
+   "NON_GENERALIZABLE_SNIPPET": [
+    "subsequences"
+   ],
+   "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS": [
+    "bitcount",
+    "find_first_in_sorted",
+    "sqrt"
+   ]
+  },
+  "fixes_the_organ_stored_as_lessons": 22,
+  "lessons_whose_calibrated_copy_lost_the_rule": [],
+  "not_usable": [],
+  "programs": 40,
+  "python_rules_the_tree_ships_with": 2,
+  "settings": {
+   "as_taught": {
+    "all_other_fixes_then_this_bug": {
+     "lessons_given_and_different_rules_held": {
+      "least": [
+       21,
+       21
+      ],
+      "most": [
+       22,
+       22
+      ]
+     },
+     "of": 40,
+     "proposed_but_failed_the_second_check": [],
+     "recalls_that_lost_a_rule_on_the_way": [],
+     "recalls_with_a_problem": [],
+     "repaired": 1,
+     "test_runs": 27,
+     "which": {
+      "quicksort": {
+       "from_the_lesson_of": [
+        "knapsack"
+       ],
+       "is_the_published_fix": false,
+       "strategy": "narrowed_pattern"
+      }
+     }
+    },
+    "one_fix_then_another_bug": {
+     "by_strategy": {
+      "narrowed_pattern": 1
+     },
+     "lessons_that_repair_each_such_target": {
+      "quicksort": 1
+     },
+     "lessons_that_repair_no_other_bug": 21,
+     "lessons_tried": 22,
+     "of_which_with_the_published_fix": 0,
+     "other_bugs_repaired_per_lesson": {
+      "least": 0,
+      "middle": 0,
+      "most": 1
+     },
+     "pairs_repaired": 1,
+     "pairs_tried": 858,
+     "recalls_that_lost_a_rule_on_the_way": 0,
+     "recalls_with_a_problem": 0,
+     "targets_some_lesson_repairs": 1,
+     "test_runs": 27
+    },
+    "same_bug_again": {
+     "not_repaired": [],
+     "of": 22,
+     "repaired": 22
+    },
+    "what_the_tree_ships_with_then_this_bug": {
+     "of": 40,
+     "repaired": 0,
+     "rules_held": [
+      2
+     ],
+     "test_runs": 0,
+     "which": []
+    }
+   },
+   "widest": {
+    "all_other_fixes_then_this_bug": {
+     "lessons_given_and_different_rules_held": {
+      "least": [
+       21,
+       21
+      ],
+      "most": [
+       22,
+       22
+      ]
+     },
+     "of": 40,
+     "proposed_but_failed_the_second_check": [],
+     "recalls_that_lost_a_rule_on_the_way": [],
+     "recalls_with_a_problem": [],
+     "repaired": 3,
+     "test_runs": 70,
+     "which": {
+      "gcd": {
+       "from_the_lesson_of": [
+        "shortest_path_lengths"
+       ],
+       "is_the_published_fix": false,
+       "strategy": "narrowed_pattern"
+      },
+      "knapsack": {
+       "from_the_lesson_of": [
+        "quicksort"
+       ],
+       "is_the_published_fix": true,
+       "strategy": "operator_generalization"
+      },
+      "quicksort": {
+       "from_the_lesson_of": [
+        "knapsack"
+       ],
+       "is_the_published_fix": false,
+       "strategy": "narrowed_pattern"
+      }
+     }
+    },
+    "one_fix_then_another_bug": {
+     "by_strategy": {
+      "narrowed_pattern": 2,
+      "operator_generalization": 1
+     },
+     "lessons_that_repair_each_such_target": {
+      "gcd": 1,
+      "knapsack": 1,
+      "quicksort": 1
+     },
+     "lessons_that_repair_no_other_bug": 19,
+     "lessons_tried": 22,
+     "of_which_with_the_published_fix": 1,
+     "other_bugs_repaired_per_lesson": {
+      "least": 0,
+      "middle": 0,
+      "most": 1
+     },
+     "pairs_repaired": 3,
+     "pairs_tried": 858,
+     "recalls_that_lost_a_rule_on_the_way": 0,
+     "recalls_with_a_problem": 0,
+     "targets_some_lesson_repairs": 3,
+     "test_runs": 72
+    },
+    "same_bug_again": {
+     "not_repaired": [],
+     "of": 22,
+     "repaired": 22
+    },
+    "what_the_tree_ships_with_then_this_bug": {
+     "of": 40,
+     "repaired": 0,
+     "rules_held": [
+      2
+     ],
+     "test_runs": 0,
+     "which": []
+    }
+   }
+  },
+  "usable_as_targets": 40
+ },
+ "the_trees_own_earlier_record": {
+  "path": "canonical/verification/HISTORICAL_REPAIR_TRANSFER_20261101_V1.md",
+  "relation": "this measurement asks the same question of the same organ on 40 bugs nobody here chose, and gets the same answer",
+  "what_it_says": "two real historical issue pairs (boltons, more-itertools): one of two distinct held-out issues solved with teaching disabled and one of two with it enabled, learning hit: none -- \"no demonstrated distinct-issue success or speed advantage from teaching\"; the same issue again: 17.436 s and 65 subprocesses by search, 1.983 s and 3 subprocesses from memory"
+ }
+}
