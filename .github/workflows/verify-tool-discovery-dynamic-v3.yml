@@ -1,0 +1,28 @@
+name: Verify dynamic tool discovery V3
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - canonical/runtime/tool_discovery_dynamic_candidate_v3.py
+      - canonical/runtime/tool_discovery_dynamic_proof_v3.py
+      - canonical/tests/test_tool_discovery_dynamic_proof_v3.py
+      - .github/workflows/verify-tool-discovery-dynamic-v3.yml
+  push:
+    branches: [main]
+    paths:
+      - canonical/runtime/tool_discovery_dynamic_candidate_v3.py
+      - canonical/runtime/tool_discovery_dynamic_proof_v3.py
+      - canonical/tests/test_tool_discovery_dynamic_proof_v3.py
+      - .github/workflows/verify-tool-discovery-dynamic-v3.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m unittest -v canonical.tests.test_tool_discovery_dynamic_proof_v3
