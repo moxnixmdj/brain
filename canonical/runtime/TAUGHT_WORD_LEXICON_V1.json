@@ -1,0 +1,246 @@
+{
+ "schema": "PROJECT_BRAIN_TAUGHT_WORDS_V1_LEXICON",
+ "lessons_sha256": "d188d4b07811e9cf009279c5dad797cb2e286b04f66eb7443123b160398c3ee2",
+ "lesson_count": 23,
+ "lexicon": [
+  {
+   "words": [
+    "character"
+   ],
+   "parts": [
+    "characters"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "unique"
+   ],
+   "parts": [
+    "unique"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "blank"
+   ],
+   "parts": [
+    "blank"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "contain"
+   ],
+   "parts": [
+    "containing"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "longest"
+   ],
+   "parts": [
+    "max"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "largest"
+   ],
+   "parts": [
+    "max"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "smallest"
+   ],
+   "parts": [
+    "min"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "shortest"
+   ],
+   "parts": [
+    "min"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "after",
+    "first"
+   ],
+   "parts": [
+    "rest"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "different"
+   ],
+   "parts": [
+    "unique"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "distinct"
+   ],
+   "parts": [
+    "unique"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "empty"
+   ],
+   "parts": [
+    "blank"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "mention"
+   ],
+   "parts": [
+    "containing"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "biggest"
+   ],
+   "parts": [
+    "max"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "byte"
+   ],
+   "parts": [
+    "bytes"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "row"
+   ],
+   "parts": [
+    "lines"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "count"
+   ],
+   "parts": [
+    "count"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "add",
+    "up"
+   ],
+   "parts": [
+    "sum"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "word"
+   ],
+   "parts": [
+    "words"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "length"
+   ],
+   "parts": [
+    "lengths"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "sum"
+   ],
+   "parts": [
+    "sum"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "what"
+   ],
+   "parts": [],
+   "could_be": null
+  },
+  {
+   "words": [
+    "number"
+   ],
+   "parts": [
+    "numbers"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "line"
+   ],
+   "parts": [
+    "lines"
+   ],
+   "could_be": null
+  },
+  {
+   "words": [
+    "how",
+    "many"
+   ],
+   "parts": [
+    "count"
+   ],
+   "could_be": null
+  }
+ ],
+ "set_aside": [
+  {
+   "index": 22,
+   "lesson": "tell me the number of lines in t.txt",
+   "set_aside": "CONFLICTS_WITH_WHAT_THE_WORDS_ALREADY_MEAN",
+   "operations_with_these_answers": [
+    [
+     "count",
+     "lines"
+    ]
+   ]
+  }
+ ]
+}

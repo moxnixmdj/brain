@@ -11935,6 +11935,85 @@
     },
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
    }
+  },
+  "file.question.taught_words.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "taught_program_recomputed",
+     "field": "answer"
+    }
+   },
+   "adapter_module": "file_question_taught_words",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [],
+   "limitations": [
+    "Answers only when every word of the sentence is a word taught by example answers, a structure word, the file, or the text to look for. Otherwise it refuses and names the word.",
+    "Does not model word order or scope: two sentences with the same words are one request to it.",
+    "The fifteen operation parts are built in; only the words are learned. One word cannot have two meanings.",
+    "Lines end at a newline byte. Reads one UTF-8 file of at most 4 MiB inside the repository root; never writes and never starts a process."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "file.question.taught_words.answer"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "data",
+    "lessons_sha256",
+    "output_path",
+    "output_verified",
+    "path",
+    "program",
+    "schema",
+    "source_sha256",
+    "word_meanings"
+   ],
+   "selection": "Not chosen by shared words. The front door selects this row only when taught words account for every word of the sentence (canonical/runtime/taught_words_v1.py).",
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_question_taught_words.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001__RECEIPT.json",
+    "mission_path": "canonical/verification/TAUGHT_WORDS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-11",
+    "independence": "code-level only: expected answers are fixed by construction of the world and recomputed by a checker that shares no code with the producer; the row is reached through the real dispatcher with its declared expectation; agreement with wc and grep is checked where they exist. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_question_taught_words",
+     "world_answers": {
+      "how many unique lines": 5,
+      "sum of the numbers after the first": 42
+     }
+    },
+    "adapter_sha256": "c11a5fb9443cbccbcbff33fffd9308bd978b1ef7650a4f319c2030ab6e81cffc"
+   }
   }
  },
  "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"
