@@ -93,6 +93,18 @@ VERB_PATTERNS = (
 # March 24" decomposed to verb=None -- the pipeline had nothing to say on a page where
 # every value and every field were plainly present.
 SLOT_PATTERNS = (
+    # A QUOTED REFERENCE IS A SLOT.
+    #
+    # The seven patterns below describe a flight-booking form: "from X to Y departing Z".
+    # MiniWob is not that corpus. `Close the dialog box by clicking the "x".` states its
+    # reference with quote marks and matched none of them, so slots() returned {} and the
+    # no-verb fallback could never fire -- the sentence was refused as UNSUPPORTED_VERB
+    # with its reference sitting in plain sight. This pattern is placed first and is the
+    # only one whose shape is the markup of an instruction rather than the grammar of a
+    # domain: the sentence tells you what to act on by quoting it.
+    ("reference",   r'"([^"]{1,40})"'),
+    ("reference",   r"\u201c([^\u201d]{1,40})\u201d"),
+    ("reference",   r"'([^']{1,40})'"),
     ("origin",      r"\bfrom\s+([A-Z][\w .'-]{1,30}?)(?=\s+to\b|\s*,|$)"),
     ("destination", r"\bto\s+([A-Z][\w .'-]{1,30}?)(?=\s*(?:,|departing|returning|on\b|$))"),
     ("destination", r"\bto\s+([A-Z][\w .'-]{1,30})"),
@@ -127,8 +139,18 @@ def _number(text: str) -> int | None:
 
 
 def _quoted(text: str) -> str | None:
-    m = re.search(r'"([^"]*)"', text) or re.search(r"\u201c([^\u201d]*)\u201d", text)
-    return m.group(1).strip() if m else None
+    """The reference the sentence names, in any of the marks an instruction uses.
+
+    Measured 2026-11-09: this read double quotes and curly quotes only. `Playing as 'X'`
+    and `clicking the 'x'` were invisible to it, while `"x"` passed. Three of the public
+    tasks that were blind for a whole round carry the token in single quotes.
+    """
+    for pat in ('"([^"]*)"', "\u201c([^\u201d]*)\u201d", "'([^']*)'",
+                "\u2018([^\u2019]*)\u2019"):
+        m = re.search(pat, text)
+        if m and m.group(1).strip():
+            return m.group(1).strip()
+    return None
 
 
 def _colour(text: str) -> str | None:
@@ -175,6 +197,18 @@ def decompose(goal: str) -> dict[str, Any]:
             break
     if verb is None:
         found = slots(text)
+        # A NAMED REFERENCE PLUS AN ACTING WORD IS A FIND, NOT A FORM.
+        #
+        # "Close the dialog box by clicking the \"x\"." supplies a reference and an action.
+        # With only the FILL_FORM fallback it routed to the form filler, which looks for
+        # input fields and finds none. FIND already means "resolve this reference on the
+        # page and click it", which is what the sentence asks for; FILL_FORM means "put
+        # these values into controls", which it does not. The discriminator is the verb
+        # word in the sentence, not the presence of a reference.
+        if found.get("reference") and re.search(
+                r"\b(click|close|press|choose|select|pick|open|hit|tap)\b", lowered):
+            return {"schema": SCHEMA, "verb": "FIND", "status": "DECOMPOSED",
+                    "plan": "reference", "goal": text, "operand": {"token": found["reference"]}}
         if found:
             # No known verb, but the instruction names concrete values. That is a form fill,
             # and refusing it was the single largest measured blindness in this project: a
