@@ -1,0 +1,69 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_DIRECT_CANDIDATE_QUALIFICATION_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__POST_FREEZE_ZERO_LEARNED_QUALIFICATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "QUALIFY_A_ZERO_LEARNED_STEP_CASE_VISIBLE_TRANSCRIPT_CANDIDATE_AGAINST_THE_ALREADY_FROZEN_UNKNOWN_DOMAIN_EVALUATOR_GENERATOR_V2_AND_EXECUTION_HARNESS_BEFORE_ANY_PRODUCTION_BEACON",
+  "frozen_authority": {
+    "evaluator_family_blob": "52090daf78d12020af48c1b6ffaea056d9029e1b",
+    "hidden_scorer_blob": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "generator_v1_blob": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2_blob": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "generator_v2_freeze_blob": "6bf6042a7a36c12d6d5ebfc5d16ea23ed2befbb6",
+    "execution_harness_blob": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "execution_harness_freeze_blob": "3e3a87962c13ad4c76621508763fab74df25cb44",
+    "independent_verifier_repository": "moxnixmdj/verification-capsule-runner",
+    "evaluator_freeze_pr": 1827,
+    "generator_v2_freeze_pr": 1843,
+    "execution_harness_freeze_pr": 1838,
+    "generator_v2_verification_run": 37198664788,
+    "execution_harness_verification_run": 37198402658
+  },
+  "candidate": {
+    "path": "canonical/runtime/unknown_domain_direct_candidate_v1.py",
+    "tests": "canonical/tests/test_unknown_domain_direct_candidate_v1.py",
+    "entrypoint": "step(case_visible, transcript)",
+    "persistent_learned_bytes": 0,
+    "external_frontier_model_calls": 0,
+    "external_learned_capability_calls": 0,
+    "hidden_evaluator_imports": 0,
+    "transfer_method": "EXACT_PROGRAM_REUSE_PLUS_ENUMERATED_OPAQUE_FEATURE_ROLE_MAPPING_WITH_BOUNDED_SAFE_PROBES",
+    "calibrated_unknown_method": "COMMON_CONSEQUENCE_ELSE_MINIMUM_VISIBLE_SAFE_BINARY_DISCRIMINATOR_ELSE_WITNESSED_ABSTENTION"
+  },
+  "qualification": {
+    "production_cases_generated": 0,
+    "qualification_beacons": 3,
+    "cases_per_beacon": 27,
+    "required_case_passes": 81,
+    "all_cases_conjunctive": true,
+    "generator": "generate_qualification_fixture_population",
+    "hard_nonclaim": "QUALIFICATION_FIXTURES_ARE_NOT_PRODUCTION_OR_TERMINAL_CASES"
+  },
+  "next_if_independently_verified": "BIND_EXACT_CANDIDATE_BYTES_AND_CREATE_PREDICATE_LOCAL_ONE_USE_AUTHORITY_FOR_ONLY_THE_TWO_FROZEN_UNKNOWN_DOMAIN_LEAVES__THEN_GENERATE_ONE_POST_FREEZE_PRODUCTION_POPULATION",
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "exact_bound_components": {
+    "canonical/runtime/unknown_domain_direct_candidate_v1.py": "a2a77269a8175ce315b466035049da0f761b8734",
+    "canonical/tests/test_unknown_domain_direct_candidate_v1.py": "88cf44844b4d0f4e3e899d04205c87a7fc967b1d",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EVALUATOR_FAMILY_V1.json": "52090daf78d12020af48c1b6ffaea056d9029e1b",
+    "canonical/runtime/unknown_domain_direct_hidden_scorer_v1.py": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_GENERATOR_FREEZE_V1.json": "26108d0d06f7a308c3eaf4b9821ff0c4551dcda3",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v1.py": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_GENERATOR_FREEZE_V2.json": "6bf6042a7a36c12d6d5ebfc5d16ea23ed2befbb6",
+    "canonical/runtime/unknown_domain_direct_hidden_generator_v2.py": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "canonical/governance/UNKNOWN_DOMAIN_DIRECT_EXECUTION_HARNESS_FREEZE_V1.json": "3e3a87962c13ad4c76621508763fab74df25cb44",
+    "canonical/runtime/unknown_domain_direct_execution_harness_v1.py": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd"
+  }
+}
