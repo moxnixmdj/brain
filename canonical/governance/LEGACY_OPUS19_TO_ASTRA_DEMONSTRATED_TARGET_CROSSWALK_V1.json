@@ -1,0 +1,270 @@
+{
+  "schema": "PROJECT_BRAIN_LEGACY_OPUS19_TO_ASTRA_DEMONSTRATED_TARGET_CROSSWALK_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_19_LEGACY_ROWS_CLASSIFIED__13_ASTRA_TARGET_ROWS_COVERED_OR_GAP_MARKED__ZERO_CREDIT",
+  "target_registry": "canonical/capabilities/astra/ASTRA_DEMONSTRATED_CAPABILITY_TARGET_UNIVERSE_V1.json",
+  "legacy_registry": "canonical/capabilities/opus55/OPUS_5_5_USEFUL_CAPABILITY_ENVELOPE_V1.json",
+  "rule": "CROSSWALK_DOES_NOT_TRANSFER_ACCEPTANCE_AUTOMATICALLY__SCOPE_AND_STRENGTH_MUST_BE_PROVED_PER_ASTRA_TARGET_BEHAVIOR",
+  "astra_targets": [
+    {
+      "id": "SOFTWARE_ENGINEERING",
+      "legacy_support": [
+        "ADVANCED_AGENTIC_CODING"
+      ],
+      "coverage": "DIRECT_SEMANTIC_MATCH__STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "COMPUTER_AND_BROWSER_USE",
+      "legacy_support": [
+        "COMPUTER_AND_BROWSER_USE",
+        "BUSINESS_WORKFLOW_AUTOMATION"
+      ],
+      "coverage": "DIRECT_PLUS_SUBSCOPE__ASTRA_STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "WEB_RESEARCH_AND_BROWSING",
+      "legacy_support": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "COMMUNICATION_AND_SYNTHESIS",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "coverage": "COMPOSITE_PARTIAL__NO_SINGLE_LEGACY_FAMILY_PROVES_END_TO_END_TARGET"
+    },
+    {
+      "id": "SCIENCE_AND_DATA_ANALYSIS",
+      "legacy_support": [
+        "AGENTIC_SCIENTIFIC_RESEARCH",
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING"
+      ],
+      "coverage": "DIRECT_PLUS_REASONING_SUPPORT__ASTRA_STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "ADVANCED_MATHEMATICAL_REASONING",
+      "legacy_support": [
+        "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+        "EXACT_SYMBOLIC_COMPUTATION"
+      ],
+      "coverage": "PARTIAL__EXACT_SYMBOLIC_IS_BOUNDED_COMPONENT_NOT_GENERAL_MATH"
+    },
+    {
+      "id": "PROFESSIONAL_MULTI_STEP_KNOWLEDGE_WORK",
+      "legacy_support": [
+        "PROFESSIONAL_KNOWLEDGE_WORK",
+        "FINANCIAL_ANALYSIS",
+        "COMMUNICATION_AND_SYNTHESIS"
+      ],
+      "coverage": "DIRECT_PARENT_PLUS_SPECIALIZED_SUBSCOPES__ASTRA_STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "DOCUMENT_SPREADSHEET_PRESENTATION_CREATION",
+      "legacy_support": [
+        "ARTIFACT_CREATION"
+      ],
+      "coverage": "DIRECT_SEMANTIC_MATCH__VISUAL_AND_TEMPLATE_QUALITY_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "VISUAL_GROUNDING_AND_CREATIVE_BUILD",
+      "legacy_support": [
+        "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+        "ARTIFACT_CREATION",
+        "COMPUTER_AND_BROWSER_USE"
+      ],
+      "coverage": "COMPOSITE_PARTIAL__CREATIVE_BUILD_AND_VISUAL_JUDGMENT_NOT_CLOSED_BY_ANY_SINGLE_LEGACY_ROW"
+    },
+    {
+      "id": "MULTI_TOOL_WORKFLOW_EXECUTION",
+      "legacy_support": [
+        "COMPLEX_MULTI_TOOL_AGENCY",
+        "MULTI_CAPABILITY_COMPOSITION",
+        "TOOL_DISCOVERY_SELECTION_AND_LEARNING"
+      ],
+      "coverage": "DIRECT_COMPOSITE_MATCH__ASTRA_STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "INSTRUCTION_SCOPE_AND_AMBIGUITY_JUDGMENT",
+      "legacy_support": [
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "coverage": "DIRECT_SEMANTIC_MATCH__ASTRA_STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "GOAL_CONTINUITY_UNDER_STEERING",
+      "legacy_support": [
+        "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+        "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT"
+      ],
+      "coverage": "PARTIAL__CROSS_SESSION_MEMORY_IS_STRONGER_DIFFERENT_SCOPE_THAN_STEERING_CONTINUITY"
+    },
+    {
+      "id": "NOVEL_ENVIRONMENT_ADAPTATION",
+      "legacy_support": [
+        "UNKNOWN_DOMAIN_ADAPTATION"
+      ],
+      "coverage": "DIRECT_SEMANTIC_MATCH__ASTRA_STRENGTH_RECALIBRATION_REQUIRED"
+    },
+    {
+      "id": "CYBERSECURITY_PROBLEM_SOLVING",
+      "legacy_support": [],
+      "coverage": "LEGACY_TARGET_GAP__NO_DEDICATED_19_FAMILY_ROW"
+    }
+  ],
+  "legacy_rows": [
+    {
+      "id": "ADVANCED_AGENTIC_CODING",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "SOFTWARE_ENGINEERING"
+      ]
+    },
+    {
+      "id": "COMPLEX_MULTI_TOOL_AGENCY",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "MULTI_TOOL_WORKFLOW_EXECUTION"
+      ]
+    },
+    {
+      "id": "PROFESSIONAL_KNOWLEDGE_WORK",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "PROFESSIONAL_MULTI_STEP_KNOWLEDGE_WORK"
+      ]
+    },
+    {
+      "id": "BUSINESS_WORKFLOW_AUTOMATION",
+      "classification": "TARGET_SUBSCOPE_SUPPORT",
+      "astra_targets": [
+        "COMPUTER_AND_BROWSER_USE"
+      ]
+    },
+    {
+      "id": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+      "classification": "TARGET_COMPOSITE_SUPPORT",
+      "astra_targets": [
+        "WEB_RESEARCH_AND_BROWSING",
+        "SCIENCE_AND_DATA_ANALYSIS",
+        "ADVANCED_MATHEMATICAL_REASONING"
+      ]
+    },
+    {
+      "id": "AGENTIC_SCIENTIFIC_RESEARCH",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "SCIENCE_AND_DATA_ANALYSIS"
+      ]
+    },
+    {
+      "id": "VISION_AND_DENSE_DOCUMENT_UNDERSTANDING",
+      "classification": "TARGET_COMPOSITE_SUPPORT",
+      "astra_targets": [
+        "VISUAL_GROUNDING_AND_CREATIVE_BUILD"
+      ]
+    },
+    {
+      "id": "COMPUTER_AND_BROWSER_USE",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "COMPUTER_AND_BROWSER_USE",
+        "VISUAL_GROUNDING_AND_CREATIVE_BUILD"
+      ]
+    },
+    {
+      "id": "FINANCIAL_ANALYSIS",
+      "classification": "TARGET_SUBSCOPE_SUPPORT",
+      "astra_targets": [
+        "PROFESSIONAL_MULTI_STEP_KNOWLEDGE_WORK"
+      ]
+    },
+    {
+      "id": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "INSTRUCTION_SCOPE_AND_AMBIGUITY_JUDGMENT",
+        "GOAL_CONTINUITY_UNDER_STEERING"
+      ]
+    },
+    {
+      "id": "LONG_HORIZON_MEMORY_AND_CONTINUITY",
+      "classification": "ROUTE_COMPONENT_AND_STRONGER_ADJACENT_CAPABILITY",
+      "astra_targets": [
+        "GOAL_CONTINUITY_UNDER_STEERING"
+      ]
+    },
+    {
+      "id": "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "classification": "ROUTE_COMPONENT_NOT_CURRENT_ASTRA_TERMINAL_TARGET",
+      "astra_targets": [
+        "MULTI_TOOL_WORKFLOW_EXECUTION"
+      ]
+    },
+    {
+      "id": "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "classification": "ROUTE_COMPONENT_NOT_CURRENT_ASTRA_TERMINAL_TARGET",
+      "astra_targets": [
+        "SOFTWARE_ENGINEERING",
+        "MULTI_TOOL_WORKFLOW_EXECUTION"
+      ]
+    },
+    {
+      "id": "ARTIFACT_CREATION",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "DOCUMENT_SPREADSHEET_PRESENTATION_CREATION",
+        "VISUAL_GROUNDING_AND_CREATIVE_BUILD"
+      ]
+    },
+    {
+      "id": "COMMUNICATION_AND_SYNTHESIS",
+      "classification": "TARGET_SUBSCOPE_SUPPORT",
+      "astra_targets": [
+        "WEB_RESEARCH_AND_BROWSING",
+        "PROFESSIONAL_MULTI_STEP_KNOWLEDGE_WORK"
+      ]
+    },
+    {
+      "id": "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "classification": "ROUTE_COMPONENT_NOT_CURRENT_ASTRA_TERMINAL_TARGET",
+      "astra_targets": [
+        "WEB_RESEARCH_AND_BROWSING",
+        "MULTI_TOOL_WORKFLOW_EXECUTION"
+      ]
+    },
+    {
+      "id": "UNKNOWN_DOMAIN_ADAPTATION",
+      "classification": "TARGET_DIRECT_SUPPORT",
+      "astra_targets": [
+        "NOVEL_ENVIRONMENT_ADAPTATION"
+      ]
+    },
+    {
+      "id": "MULTI_CAPABILITY_COMPOSITION",
+      "classification": "TARGET_COMPOSITE_SUPPORT",
+      "astra_targets": [
+        "MULTI_TOOL_WORKFLOW_EXECUTION"
+      ]
+    },
+    {
+      "id": "EXACT_SYMBOLIC_COMPUTATION",
+      "classification": "ROUTE_COMPONENT_NOT_CURRENT_ASTRA_TERMINAL_TARGET",
+      "astra_targets": [
+        "ADVANCED_MATHEMATICAL_REASONING"
+      ]
+    }
+  ],
+  "findings": {
+    "legacy_family_count": 19,
+    "astra_target_count": 13,
+    "astra_targets_with_no_dedicated_legacy_family": [
+      "CYBERSECURITY_PROBLEM_SOLVING"
+    ],
+    "legacy_rows_not_terminal_targets_but_useful_route_components": [
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "EXACT_SYMBOLIC_COMPUTATION"
+    ],
+    "theorem": "THE_LEGACY_19_FAMILY_TARGET_SET_IS_NOT_SET_EQUIVALENT_TO_THE_CURRENT_ASTRA_DEMONSTRATED_TARGET_UNIVERSE__IT_CONTAINS_ROUTE_COMPONENTS_AS_TERMINAL_ROWS_AND_LACKS_A_DEDICATED_CYBERSECURITY_TARGET_ROW"
+  },
+  "credit_delta": 0,
+  "terminal": false
+}

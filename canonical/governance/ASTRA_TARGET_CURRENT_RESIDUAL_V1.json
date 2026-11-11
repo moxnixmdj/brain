@@ -1,0 +1,38 @@
+{
+  "schema": "PROJECT_BRAIN_ASTRA_TARGET_CURRENT_RESIDUAL_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MISSION_CORRECT_RESIDUAL__ZERO_CREDIT__ASTRA_STRENGTH_RECALIBRATION_REQUIRED",
+  "target_registry": "canonical/capabilities/astra/ASTRA_DEMONSTRATED_CAPABILITY_TARGET_UNIVERSE_V1.json",
+  "crosswalk": "canonical/governance/LEGACY_OPUS19_TO_ASTRA_DEMONSTRATED_TARGET_CROSSWALK_V1.json",
+  "counts": {
+    "astra_target_behaviors": 13,
+    "targets_with_any_legacy_route_support": 12,
+    "targets_without_dedicated_legacy_family": 1,
+    "legacy_terminal_rows": 19,
+    "legacy_rows_reclassified_as_route_components_not_current_terminal_targets": 4,
+    "astra_targets_terminally_closed_by_this_migration": 0
+  },
+  "first_principles_result": [
+    "CURRENT_19_FAMILY_OPUS_TARGET_IS_NOT_THE_SAME_SET_AS_THE_ASTRA_DEMONSTRATED_CAPABILITY_TARGET",
+    "OLD_OPUS_ACCEPTANCE_RECEIPTS_MAY_BE_REUSED_AS_EVIDENCE_BUT_CANNOT_AUTOMATICALLY_PROVE_ASTRA_EQUAL_OR_BETTER_STRENGTH",
+    "TWELVE_OF_THIRTEEN_ASTRA_TARGETS_HAVE_AT_LEAST_ONE_EXISTING_LEGACY_ROUTE_OR_COMPONENT_TO_REUSE",
+    "CYBERSECURITY_PROBLEM_SOLVING_IS_THE_ONLY_CURRENT_ASTRA_TARGET_WITH_ZERO_DEDICATED_LEGACY_FAMILY_SUPPORT",
+    "PASSING_ALL_OLD_38_PREDICATES_WOULD_NOT_BY_ITSELF_PROVE_THE_CURRENT_ASTRA_MISSION"
+  ],
+  "scheduling_cut": {
+    "stop_treating_as_independent_terminal_targets": [
+      "SUBAGENT_DELEGATION_AND_COORDINATION",
+      "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY",
+      "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
+      "EXACT_SYMBOLIC_COMPUTATION"
+    ],
+    "preserve_as_reusable_capabilities": true,
+    "do_not_destroy_prior_evidence": true,
+    "new_target_gap": "CYBERSECURITY_PROBLEM_SOLVING",
+    "next_highest_leverage_action": "INDEPENDENTLY_VERIFY_TARGET_REGISTRY_AND_CROSSWALK__THEN_RECOMPUTE_EQUAL_OR_BETTER_EVIDENCE_FOR_13_TARGETS_WITHOUT_RUNNING_NON_TARGET_LEGACY_PREDICATE_LANES"
+  },
+  "safety_scope_for_cybersecurity_gap": "DEFENSIVE_AUTHORIZED_ANALYSIS_AND_BENIGN_SECURITY_REASONING_ONLY_FOR_THIS_RECONCILIATION__NO_OFFENSIVE_EXECUTION_AUTHORIZED",
+  "acceptance_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "terminal": false
+}
