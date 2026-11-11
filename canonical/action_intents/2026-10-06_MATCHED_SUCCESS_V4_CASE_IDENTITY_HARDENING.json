@@ -1,0 +1,24 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "action_id": "MATCHED-SUCCESS-V4-CASE-IDENTITY-HARDENING-20261006",
+  "status": "ZERO_CREDIT_HARDENING__EXACT_BYTE_REPLAY_ALREADY_OBSERVED_ON_SOURCE_BRANCH",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "LANDED_V4_BOUND_TRANSPORTED_SEMANTICS_AND_TERMINAL_SEMANTICS_BUT_DID_NOT_BIND_TRUE_ABLATED_RESCUE_TO_A_SHARED_CASE_TEMPLATE_WITH_A_DISTINCT_ABLATED_CASE_PAYLOAD__SO_A_SEMANTIC_FLIP_COULD_BE_ASSERTED_WITHOUT_PROVING_A_REAL_SAME_TEMPLATE_CASE_MUTATION",
+  "selected_route": "PORT_ONLY_THE_INDEPENDENTLY_REPLAYED_CASE_IDENTITY_HARDENING_FROM_THE_SUPERSEDED_WORKER_BRANCH_ONTO_CURRENT_MAIN",
+  "source_exact_blobs": {
+    "runtime": "d2ff7fd2c0bff7ee6c9bff82af9cf06a2c273847",
+    "tests": "fb34c39fb15a09c723377ee8a3032e038204c2bd"
+  },
+  "observed_replay": "SEPARATE_SPRITE_EXACT_BYTE_PASS_10_OF_10",
+  "expected_delta": "DELETE_ABLATED_CASE_SUBSTITUTION_AND_CROSS_TEMPLATE_COUNTERMODELS_ONLY",
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "terminal_cases_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
