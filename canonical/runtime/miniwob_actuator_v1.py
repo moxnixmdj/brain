@@ -1039,6 +1039,19 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         ".map(e=>e.type||e.tagName.toLowerCase())") or [])
     if "checkbox" in kinds and re.search(r"select", g, re.I):
         return v_checkboxes(act, plan, goal)
+
+    # A RADIO IS A CHECKBOX THAT PERMITS ONE.
+    #
+    # Measured 2026-11-09 on the public task `click-option`: 1 success in 12 runs.
+    # The goal is "Select RzWv and click Submit." with six radios and NO <select>.
+    # The verb was SELECT, so dispatch went to v_native_select, which drives
+    # #options, found nothing, submitted with nothing checked, and scored -1.
+    # Called directly, v_checkboxes scored 1.0 on the first try -- the solver was
+    # never wrong, the ROUTE was. The matcher is "the page has radios and the goal
+    # names something to select", which is the same shape as the checkbox case and
+    # does not depend on the verb word.
+    if "radio" in kinds and "select" in g.lower():
+        return v_checkboxes(act, plan, goal)
     if act.ev("(()=>{const s=document.getElementById('options');return !!(s&&s.multiple)})()"):
         return v_multiselect(act, plan, goal)
     # A rendered problem is a stronger signal than the verb word: if the page is showing an
@@ -1072,7 +1085,21 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
             return v_menu(act, plan, goal)
         if op.get("colour"):
             return v_colour(act, plan, goal)
-        return v_native_select(act, plan, goal)
+        # THE VERB IS A CLAIM ABOUT THE PAGE, AND IT CAN BE WRONG.
+        #
+        # SELECT had three page-specific drivers and no fallback. On any page that is
+        # none of those three -- click-option's radios were exactly this -- v_native_select
+        # found no #options, dispatched nothing, and SUBMITTED. The episode ended on a
+        # submit that selected nothing, which is a -1 the route produced by itself.
+        # A driver that cannot find its own page feature must say so, not act anyway;
+        # the generic candidate click below then does the only thing that can be right
+        # without knowing more about the page: click what the goal names.
+        if act.ev("!!document.getElementById('options')"):
+            return v_native_select(act, plan, goal)
+        got = _resolve_and_click(act, goal)
+        if not episode_over(act):
+            submit(act, required=False)
+        return got
 
     fn = table.get(str(verb))
     if str(verb) in ("FIND", "RESOLVE"):
