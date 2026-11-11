@@ -1050,6 +1050,16 @@ class OneMemoryTests(unittest.TestCase):
         self.assertEqual(origin, "three-boxes")
         self.assertEqual(self.rows["three-boxes"]["all_skills"]["chosen_from"], {"three-boxes": len(self.SEEDS)})
 
+    def test_nothing_stands_against_an_instruction_a_program_was_learned_from(self):
+        # a program learned from several sentences is judged by the one that fits best, not the one that fits worst
+        program = max(self.kept["chatty-section"].skills, key=lambda skill: len(set(skill.instructions())))
+        known = sorted(set(program.instructions()))
+        self.assertGreater(len(known), 1)
+        for instruction in known:
+            supports, against = vs.evidence(program, instruction)
+            self.assertEqual(against, 0, instruction)
+            self.assertGreater(supports, 0, instruction)
+
     def test_first_sight_of_a_task_is_done_with_what_a_twin_taught_and_the_twin_is_named(self):
         for task, twin in (("numbered-section", "shifting-section"), ("shifting-section", "numbered-section"),
                            ("hidden-latch", "numbered-section")):

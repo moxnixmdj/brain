@@ -1,0 +1,4049 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "environment": {
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "chromium_package": "153.0.0",
+  "code_sha256": {
+   "bridge": "ccae9c03535c108193fc53f3204675ebd6a07ea5c90314f62f50b92adb69694f",
+   "bridge_chromium": "f774b2805d5a2cc2e6cea484435a26886110d4d1574ea05422f6c9966188bec9",
+   "existing_compiler": "c418b74861f99fd4e15a869b64ff044d180e5976ecd99b564a921b4ede1c6dbe",
+   "explorer": "a9b99b9ed1c4e790880d1ce9534ee14b9d5d8ae0e6b2d1c18e9218bd0b49dd53",
+   "tool": "f57190ab520a18e4ae94c28ce4a4069f92b128a682f18d630939c6f86f14f432",
+   "version_space_learner": "5c1ba727d8f8d5bb76ddf834954d1039a3a0d517a36d37d02dae9fccde2265bd"
+  },
+  "epoch_ms": 1767225600000,
+  "html_tree_sha256": "d5693b72ec82bae9041e40f5c9ae3c3c50201849d10c92ea6439967fd73529c8",
+  "node": "v22.22.3",
+  "puppeteer_core": "25.17.0",
+  "python": "3.11.2",
+  "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
+  "step_ms": 500,
+  "substrate_name": "chromium",
+  "viewport": [
+   480,
+   360
+  ]
+ },
+ "generated_utc": "2026-11-11T17:00:51Z",
+ "parameters": {
+  "full_reward": 1.0,
+  "max_episode_steps": 30,
+  "programs_held": 127,
+  "skills_from_arm": "version_space_practice",
+  "skills_held_for_tasks": [
+   "ascending-numbers",
+   "buy-ticket",
+   "choose-date-easy",
+   "choose-date-medium",
+   "choose-list",
+   "click-button",
+   "click-button-sequence",
+   "click-checkboxes",
+   "click-checkboxes-large",
+   "click-checkboxes-transfer",
+   "click-collapsible",
+   "click-collapsible-2",
+   "click-collapsible-2-nodelay",
+   "click-collapsible-nodelay",
+   "click-color",
+   "click-dialog",
+   "click-dialog-2",
+   "click-link",
+   "click-menu-2",
+   "click-option",
+   "click-pie",
+   "click-pie-nodelay",
+   "click-scroll-list",
+   "click-shape",
+   "click-tab",
+   "click-tab-2",
+   "click-tab-2-easy",
+   "click-tab-2-hard",
+   "click-tab-2-medium",
+   "click-test",
+   "click-test-2",
+   "click-test-transfer",
+   "click-widget",
+   "count-shape",
+   "count-sides",
+   "drag-shapes",
+   "email-inbox",
+   "email-inbox-delete",
+   "email-inbox-forward",
+   "email-inbox-forward-nl",
+   "email-inbox-important",
+   "email-inbox-nl-turk",
+   "email-inbox-noscroll",
+   "email-inbox-reply",
+   "email-inbox-star-reply",
+   "enter-date",
+   "enter-password",
+   "enter-text",
+   "enter-text-2",
+   "enter-text-dynamic",
+   "find-greatest",
+   "focus-text",
+   "focus-text-2",
+   "form-sequence-3",
+   "generate-number",
+   "grid-coordinate",
+   "identify-shape",
+   "login-user",
+   "login-user-popup",
+   "odd-or-even",
+   "phone-book",
+   "read-table",
+   "scroll-text-2",
+   "social-media",
+   "tic-tac-toe",
+   "unicode-test",
+   "use-autocomplete",
+   "use-autocomplete-nodelay",
+   "use-spinner"
+  ],
+  "test_seeds": [
+   1000,
+   1001,
+   1002,
+   1003,
+   1004,
+   1005,
+   1006,
+   1007,
+   1008,
+   1009,
+   1010,
+   1011,
+   1012,
+   1013,
+   1014,
+   1015,
+   1016,
+   1017,
+   1018,
+   1019
+  ]
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "read_this_first": "ONE agent holding every skill kept by run 3 (canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V3.json, arm version_space_practice: 127 programs learned on 69 tasks), given pages and never the name of a task. Every one of the 130 tasks, the same 20 unseen instances as run 3, one try each, the page's FULL reward the only judge. all_skills: the agent holds everything. without_this_task: the same memory with nothing that was learned on the task itself, i.e. the task is met for the first time. chosen_from says on which task the program that acted had been learned. The skills were produced by the tool at the code hashes recorded in V3; this measurement was run by a later build (hashes below) that adds the library and changes nothing the kept skills are made of. Producer-run. No task is held out: the producer had inspected these pages before. Not a leaderboard entry. What it does NOT show: a task with no first success of its own was never done at first sight (of_which_had_no_skill_of_their_own is empty), so transfer here reaches relatives of learned tasks and no further.",
+ "schema": "BRAIN_MINIWOB_ONE_MEMORY_FOR_ALL_TASKS_V1",
+ "summary": {
+  "all_skills": {
+   "mean_success_rate_over_all_tasks": 0.3819,
+   "share_of_all_tasks_at_or_above_90_percent": 0.2769,
+   "tasks_at_or_above_90_percent": 36,
+   "tasks_scored": 129,
+   "which": [
+    "ascending-numbers",
+    "choose-date-easy",
+    "choose-list",
+    "click-button",
+    "click-button-sequence",
+    "click-collapsible",
+    "click-collapsible-nodelay",
+    "click-dialog",
+    "click-dialog-2",
+    "click-link",
+    "click-option",
+    "click-pie",
+    "click-scroll-list",
+    "click-tab",
+    "click-tab-2-easy",
+    "click-tab-2-medium",
+    "click-test",
+    "click-test-2",
+    "click-test-transfer",
+    "email-inbox",
+    "email-inbox-delete",
+    "email-inbox-forward",
+    "email-inbox-important",
+    "email-inbox-noscroll",
+    "email-inbox-reply",
+    "email-inbox-star-reply",
+    "enter-date",
+    "enter-password",
+    "enter-text",
+    "enter-text-2",
+    "enter-text-dynamic",
+    "focus-text",
+    "focus-text-2",
+    "login-user",
+    "scroll-text-2",
+    "unicode-test"
+   ]
+  },
+  "tasks": 130,
+  "tasks_with_a_skill_of_their_own": 69,
+  "without_this_task": {
+   "done_with_a_skill_learned_on": {
+    "choose-date-easy": "choose-date-medium",
+    "choose-list": "click-scroll-list",
+    "click-button": "unicode-test",
+    "click-collapsible": "click-collapsible-nodelay",
+    "click-collapsible-nodelay": "click-collapsible",
+    "click-dialog": "click-test",
+    "click-option": "click-checkboxes-transfer",
+    "click-pie": "click-pie-nodelay",
+    "click-tab-2-easy": "click-tab-2",
+    "click-tab-2-medium": "click-tab-2",
+    "click-test": "click-test-2",
+    "click-test-2": "click-test-transfer",
+    "click-test-transfer": "click-test-2",
+    "email-inbox": "email-inbox-delete",
+    "email-inbox-forward": "email-inbox",
+    "email-inbox-important": "email-inbox-noscroll",
+    "email-inbox-noscroll": "email-inbox-forward",
+    "email-inbox-reply": "email-inbox-star-reply",
+    "email-inbox-star-reply": "email-inbox-important",
+    "enter-text": "enter-text-dynamic",
+    "enter-text-dynamic": "enter-text",
+    "focus-text": "click-test",
+    "login-user": "login-user-popup",
+    "unicode-test": "click-button"
+   },
+   "mean_success_rate_over_all_tasks": 0.2662,
+   "of_which_had_no_skill_of_their_own": [],
+   "share_of_all_tasks_at_or_above_90_percent": 0.1846,
+   "tasks_at_or_above_90_percent": 24,
+   "tasks_scored": 129,
+   "which": [
+    "choose-date-easy",
+    "choose-list",
+    "click-button",
+    "click-collapsible",
+    "click-collapsible-nodelay",
+    "click-dialog",
+    "click-option",
+    "click-pie",
+    "click-tab-2-easy",
+    "click-tab-2-medium",
+    "click-test",
+    "click-test-2",
+    "click-test-transfer",
+    "email-inbox",
+    "email-inbox-forward",
+    "email-inbox-important",
+    "email-inbox-noscroll",
+    "email-inbox-reply",
+    "email-inbox-star-reply",
+    "enter-text",
+    "enter-text-dynamic",
+    "focus-text",
+    "login-user",
+    "unicode-test"
+   ]
+  }
+ },
+ "tasks": [
+  {
+   "all_skills": {
+    "actions": 100,
+    "chosen_from": {
+     "ascending-numbers": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "ascending-numbers",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "bisect-angle",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "book-flight",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "book-flight-nodelay",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "button-delay",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "buy-ticket": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11001000100000010000",
+    "refused": 0,
+    "success_rate": 0.25,
+    "successes": 5
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "buy-ticket",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000100010100000010",
+    "refused": 0,
+    "success_rate": 0.2,
+    "successes": 4
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "chase-circle",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010000010000000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "choose-date",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010000010000000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 19,
+     "choose-date-medium": 1
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "choose-date-easy",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-medium": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 19,
+     "choose-date-medium": 1
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00100011001010001000",
+    "refused": 0,
+    "success_rate": 0.3,
+    "successes": 6
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "choose-date-medium",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00100011001010001000",
+    "refused": 0,
+    "success_rate": 0.3,
+    "successes": 6
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010000010000000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "choose-date-nodelay",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "choose-date-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010000010000000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "choose-list": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "choose-list",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-scroll-list": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "circle-center",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-button": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-button",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "unicode-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-button-sequence": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111101111",
+    "refused": 0,
+    "success_rate": 0.95,
+    "successes": 19
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-button-sequence",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 45,
+    "chosen_from": {
+     "click-checkboxes": 12,
+     "click-option": 8
+    },
+    "episodes": 20,
+    "partial_credit": 1,
+    "per_seed": "01011100110101011111",
+    "refused": 0,
+    "success_rate": 0.65,
+    "successes": 13
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-checkboxes",
+   "without_this_task": {
+    "actions": 52,
+    "chosen_from": {
+     "click-checkboxes-transfer": 12,
+     "click-option": 8
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "01011100110101011111",
+    "refused": 0,
+    "success_rate": 0.65,
+    "successes": 13
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 5,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-checkboxes-large",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 5,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 41,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 6,
+    "per_seed": "00000010000000000000",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "click-checkboxes-soft",
+   "without_this_task": {
+    "actions": 41,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 6,
+    "per_seed": "00000010000000000000",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 43,
+    "chosen_from": {
+     "click-checkboxes": 16,
+     "click-option": 4
+    },
+    "episodes": 20,
+    "partial_credit": 10,
+    "per_seed": "00100001100000011011",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-checkboxes-transfer",
+   "without_this_task": {
+    "actions": 43,
+    "chosen_from": {
+     "click-checkboxes": 16,
+     "click-option": 4
+    },
+    "episodes": 20,
+    "partial_credit": 10,
+    "per_seed": "00100001100000011011",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-collapsible": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-collapsible",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-collapsible-nodelay": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 29,
+    "chosen_from": {
+     "click-collapsible-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10100101010010110001",
+    "refused": 0,
+    "success_rate": 0.45,
+    "successes": 9
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-collapsible-2",
+   "without_this_task": {
+    "actions": 29,
+    "chosen_from": {
+     "click-collapsible-2-nodelay": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10100101010010110001",
+    "refused": 0,
+    "success_rate": 0.45,
+    "successes": 9
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 29,
+    "chosen_from": {
+     "click-collapsible-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10100101010010110001",
+    "refused": 0,
+    "success_rate": 0.45,
+    "successes": 9
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-collapsible-2-nodelay",
+   "without_this_task": {
+    "actions": 29,
+    "chosen_from": {
+     "click-collapsible-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10100101010010110001",
+    "refused": 0,
+    "success_rate": 0.45,
+    "successes": 9
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-collapsible": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-collapsible-nodelay",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-collapsible": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-color": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00101000100110000110",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-color",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00100011001001000000",
+    "refused": 0,
+    "success_rate": 0.25,
+    "successes": 5
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-dialog": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-dialog",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-dialog-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-dialog-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00001000010010000000",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-link": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-link",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00100010000100000001",
+    "refused": 0,
+    "success_rate": 0.2,
+    "successes": 4
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 18,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 2,
+     "click-checkboxes": 18
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 2,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "click-menu",
+   "without_this_task": {
+    "actions": 18,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 2,
+     "click-checkboxes": 18
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 2,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 46,
+    "chosen_from": {
+     "click-menu-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10101010001010000000",
+    "refused": 0,
+    "success_rate": 0.3,
+    "successes": 6
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-menu-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-option": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-option",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes-transfer": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-pie": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-pie",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-pie-nodelay": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-pie": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00111111101101111110",
+    "refused": 0,
+    "success_rate": 0.75,
+    "successes": 15
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-pie-nodelay",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-pie": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00111111101101111110",
+    "refused": 0,
+    "success_rate": 0.75,
+    "successes": 15
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 50,
+    "chosen_from": {
+     "click-scroll-list": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "click-scroll-list",
+   "without_this_task": {
+    "actions": 30,
+    "chosen_from": {
+     "choose-list": 10,
+     "click-checkboxes": 10
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10110000110011010101",
+    "refused": 0,
+    "success_rate": 0.5,
+    "successes": 10
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "click-shades",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-shape": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "01001000000101000000",
+    "refused": 0,
+    "success_rate": 0.2,
+    "successes": 4
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-shape",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-tab": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-tab",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 29,
+    "chosen_from": {
+     "click-tab-2": 16,
+     "click-tab-2-easy": 4
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11100101111010110101",
+    "refused": 0,
+    "success_rate": 0.65,
+    "successes": 13
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-tab-2",
+   "without_this_task": {
+    "actions": 36,
+    "chosen_from": {
+     "click-tab-2-easy": 4,
+     "click-tab-2-hard": 16
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11100101111010110101",
+    "refused": 0,
+    "success_rate": 0.65,
+    "successes": 13
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-tab-2-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-tab-2-easy",
+   "without_this_task": {
+    "actions": 26,
+    "chosen_from": {
+     "click-tab-2": 6,
+     "click-tab-2-hard": 14
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 25,
+    "chosen_from": {
+     "click-tab-2": 15,
+     "click-tab-2-easy": 5
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10111100100101100100",
+    "refused": 0,
+    "success_rate": 0.5,
+    "successes": 10
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-tab-2-hard",
+   "without_this_task": {
+    "actions": 25,
+    "chosen_from": {
+     "click-tab-2": 15,
+     "click-tab-2-easy": 5
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10111100100101100100",
+    "refused": 0,
+    "success_rate": 0.5,
+    "successes": 10
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-tab-2": 14,
+     "click-tab-2-easy": 6
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-tab-2-medium",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-tab-2": 14,
+     "click-tab-2-easy": 6
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-test",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111101111",
+    "refused": 0,
+    "success_rate": 0.95,
+    "successes": 19
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-test-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-transfer": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111101111",
+    "refused": 0,
+    "success_rate": 0.95,
+    "successes": 19
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111101111",
+    "refused": 0,
+    "success_rate": 0.95,
+    "successes": 19
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-test-transfer",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111101111",
+    "refused": 0,
+    "success_rate": 0.95,
+    "successes": 19
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-widget": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "01110011111111011111",
+    "refused": 0,
+    "success_rate": 0.8,
+    "successes": 16
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "click-widget",
+   "without_this_task": {
+    "actions": 19,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 1,
+     "click-test-2": 19
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00010000000001011101",
+    "refused": 1,
+    "success_rate": 0.3,
+    "successes": 6
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "copy-paste",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "copy-paste-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "count-shape": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10010000000000011000",
+    "refused": 0,
+    "success_rate": 0.2,
+    "successes": 4
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "count-shape",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-shape": 2,
+     "click-test-2": 18
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11000000101000000000",
+    "refused": 0,
+    "success_rate": 0.2,
+    "successes": 4
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "count-sides": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00001000001010011011",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "count-sides",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00001000001010011011",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "daily-calendar",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000010000",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "drag-box",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000010000",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "drag-circle",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010001010000000",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "drag-cube",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010001010000000",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 36,
+    "chosen_from": {
+     "click-dialog": 4,
+     "email-inbox-forward-nl": 16
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "drag-items",
+   "without_this_task": {
+    "actions": 36,
+    "chosen_from": {
+     "click-dialog": 4,
+     "email-inbox-forward-nl": 16
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "email-inbox-forward-nl": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "drag-items-grid",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "email-inbox-forward-nl": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "drag-shapes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000001101",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "drag-shapes",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000001101",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "drag-shapes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "drag-shapes-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "drag-shapes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "drag-single-shape",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10000000000000000000",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "drag-sort-numbers",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10000000000000000000",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "draw-circle",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "draw-line",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 56,
+    "chosen_from": {
+     "email-inbox-delete": 5,
+     "email-inbox-forward": 3,
+     "email-inbox-important": 7,
+     "email-inbox-reply": 5
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox",
+   "without_this_task": {
+    "actions": 56,
+    "chosen_from": {
+     "email-inbox-delete": 5,
+     "email-inbox-forward": 3,
+     "email-inbox-important": 7,
+     "email-inbox-reply": 5
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "email-inbox-delete": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "email-inbox-delete",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "email-inbox-important": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 80,
+    "chosen_from": {
+     "email-inbox-forward": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox-forward",
+   "without_this_task": {
+    "actions": 80,
+    "chosen_from": {
+     "email-inbox": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 58,
+    "chosen_from": {
+     "click-dialog": 3,
+     "email-inbox-forward-nl": 7,
+     "email-inbox-nl-turk": 3,
+     "email-inbox-noscroll": 7
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000100000000001000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "email-inbox-forward-nl",
+   "without_this_task": {
+    "actions": 49,
+    "chosen_from": {
+     "click-dialog": 3,
+     "email-inbox-nl-turk": 6,
+     "email-inbox-noscroll": 11
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000100000000001000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 62,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 1,
+     "email-inbox-forward-nl": 7,
+     "email-inbox-nl-turk": 4,
+     "email-inbox-noscroll": 7,
+     "generate-number": 1
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00100000000100000000",
+    "refused": 1,
+    "success_rate": 0.1,
+    "successes": 2
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "email-inbox-forward-nl-turk",
+   "without_this_task": {
+    "actions": 62,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 1,
+     "email-inbox-forward-nl": 7,
+     "email-inbox-nl-turk": 4,
+     "email-inbox-noscroll": 7,
+     "generate-number": 1
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00100000000100000000",
+    "refused": 1,
+    "success_rate": 0.1,
+    "successes": 2
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "email-inbox-important": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox-important",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "email-inbox-noscroll": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 62,
+    "chosen_from": {
+     "email-inbox-forward-nl": 4,
+     "email-inbox-nl-turk": 6,
+     "email-inbox-noscroll": 6,
+     "email-inbox-star-reply": 4
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000100010000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox-nl-turk",
+   "without_this_task": {
+    "actions": 74,
+    "chosen_from": {
+     "email-inbox-forward-nl": 5,
+     "email-inbox-noscroll": 11,
+     "email-inbox-star-reply": 4
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000100010000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 70,
+    "chosen_from": {
+     "email-inbox-forward": 7,
+     "email-inbox-important": 5,
+     "email-inbox-reply": 8
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox-noscroll",
+   "without_this_task": {
+    "actions": 70,
+    "chosen_from": {
+     "email-inbox-forward": 7,
+     "email-inbox-important": 5,
+     "email-inbox-reply": 8
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 80,
+    "chosen_from": {
+     "email-inbox-reply": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox-reply",
+   "without_this_task": {
+    "actions": 80,
+    "chosen_from": {
+     "email-inbox-star-reply": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 70,
+    "chosen_from": {
+     "email-inbox-important": 5,
+     "email-inbox-reply": 15
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "email-inbox-star-reply",
+   "without_this_task": {
+    "actions": 70,
+    "chosen_from": {
+     "email-inbox-important": 5,
+     "email-inbox-reply": 15
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-date": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "enter-date",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "choose-date-easy": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "enter-password": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "enter-password",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "login-user": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "enter-text",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-text-dynamic": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-text-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "enter-text-2",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "scroll-text-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "enter-text-dynamic",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-date": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "enter-time",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "enter-date": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "find-greatest": 20
+    },
+    "episodes": 20,
+    "partial_credit": 14,
+    "per_seed": "10001000100001100100",
+    "refused": 0,
+    "success_rate": 0.3,
+    "successes": 6
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "find-greatest",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "find-midpoint",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "find-word",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "focus-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "focus-text",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "focus-text-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "focus-text-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "focus-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "01010100000000001100",
+    "refused": 0,
+    "success_rate": 0.25,
+    "successes": 5
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 80,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "form-sequence",
+   "without_this_task": {
+    "actions": 80,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "form-sequence-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 360,
+    "chosen_from": {
+     "form-sequence-3": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10101111111011011111",
+    "refused": 0,
+    "success_rate": 0.8,
+    "successes": 16
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "form-sequence-3",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-menu-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 46,
+    "chosen_from": {
+     "generate-number": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "01110010111111110001",
+    "refused": 0,
+    "success_rate": 0.65,
+    "successes": 13
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "generate-number",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "find-greatest": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000010001010000000",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "grid-coordinate": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000100000001000",
+    "refused": 0,
+    "success_rate": 0.1,
+    "successes": 2
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "grid-coordinate",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-color": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "guess-number",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 26,
+    "chosen_from": {
+     "click-collapsible": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "highlight-text",
+   "without_this_task": {
+    "actions": 26,
+    "chosen_from": {
+     "click-collapsible": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "highlight-text-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "hot-cold",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "hover-shape",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "identify-shape": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111000100000000001",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "identify-shape",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "login-user-popup": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "login-user",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "login-user-popup": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 54,
+    "chosen_from": {
+     "login-user-popup": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10000111001000111001",
+    "refused": 0,
+    "success_rate": 0.45,
+    "successes": 9
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "login-user-popup",
+   "without_this_task": {
+    "actions": 54,
+    "chosen_from": {
+     "login-user": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "10000111001000111001",
+    "refused": 0,
+    "success_rate": 0.45,
+    "successes": 9
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "moving-items",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 18,
+     "email-inbox-forward-nl": 2
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "multi-layouts",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 18,
+     "email-inbox-forward-nl": 2
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "multi-orderings",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "navigate-tree",
+   "without_this_task": {
+    "actions": 0,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 20,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "number-checkboxes",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 80,
+    "chosen_from": {
+     "odd-or-even": 20
+    },
+    "episodes": 20,
+    "partial_credit": 7,
+    "per_seed": "00000000000100001001",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "odd-or-even",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 9,
+     "click-test-2": 11
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "order-food",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 9,
+     "click-test-2": 11
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 76,
+    "chosen_from": {
+     "phone-book": 20
+    },
+    "episodes": 20,
+    "partial_credit": 1,
+    "per_seed": "00100000101000000001",
+    "refused": 0,
+    "success_rate": 0.2,
+    "successes": 4
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "phone-book",
+   "without_this_task": {
+    "actions": 12,
+    "chosen_from": {
+     "NOTHING_HELD_BEGINS_HERE": 8,
+     "click-checkboxes": 12
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 8,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "read-table": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "read-table",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "read-table-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "resize-textarea",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "generate-number": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "right-angle",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "generate-number": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "scroll-text",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "scroll-text-2": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "scroll-text-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000100",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "search-engine",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 3,
+     "generate-number": 17
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000110000000001000",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "sign-agreement",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 3,
+     "generate-number": 17
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000110000000001000",
+    "refused": 0,
+    "success_rate": 0.15,
+    "successes": 3
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "simon-says",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "focus-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "simple-algebra",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "focus-text": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "simple-arithmetic",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 26,
+    "chosen_from": {
+     "social-media": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "01100010001100001000",
+    "refused": 0,
+    "success_rate": 0.3,
+    "successes": 6
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "social-media",
+   "without_this_task": {
+    "actions": 80,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "social-media-all",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "social-media-some",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00011110000110100111",
+    "refused": 0,
+    "success_rate": 0.5,
+    "successes": 10
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "stock-market",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00011110000110100111",
+    "refused": 0,
+    "success_rate": 0.5,
+    "successes": 10
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "count-sides": 2,
+     "generate-number": 18
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "terminal",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "count-sides": 2,
+     "generate-number": 18
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "errors": [
+    "Uncaught TypeError: Cannot read properties of undefined (reading 'italic')"
+   ],
+   "has_own_skill": false,
+   "reason": "PAGE_SCRIPT_ERRORS",
+   "split": "held_out",
+   "stage": "PAGE_DOES_NOT_RUN_HERE",
+   "task": "text-editor"
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "read-table": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "text-transform",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "read-table": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 68,
+    "chosen_from": {
+     "tic-tac-toe": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11000100100100110000",
+    "refused": 0,
+    "success_rate": 0.35,
+    "successes": 7
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "tic-tac-toe",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "generate-number": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-button": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "unicode-test",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-button": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11111111111111111111",
+    "refused": 0,
+    "success_rate": 1.0,
+    "successes": 20
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "use-autocomplete": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11110011111111111101",
+    "refused": 0,
+    "success_rate": 0.85,
+    "successes": 17
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "use-autocomplete",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "use-autocomplete-nodelay": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11110011111111111101",
+    "refused": 0,
+    "success_rate": 0.85,
+    "successes": 17
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 60,
+    "chosen_from": {
+     "use-autocomplete": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11110011111111111101",
+    "refused": 0,
+    "success_rate": 0.85,
+    "successes": 17
+   },
+   "has_own_skill": true,
+   "split": "held_out",
+   "task": "use-autocomplete-nodelay",
+   "without_this_task": {
+    "actions": 60,
+    "chosen_from": {
+     "use-autocomplete": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "11110011111111111101",
+    "refused": 0,
+    "success_rate": 0.85,
+    "successes": 17
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 20,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "development",
+   "task": "use-colorwheel",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 20,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 20,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "use-colorwheel-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 20,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00101000001000010010",
+    "refused": 0,
+    "success_rate": 0.25,
+    "successes": 5
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "use-slider",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00101000001000010010",
+    "refused": 0,
+    "success_rate": 0.25,
+    "successes": 5
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "use-slider-2",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 117,
+    "chosen_from": {
+     "use-spinner": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000001",
+    "refused": 0,
+    "success_rate": 0.05,
+    "successes": 1
+   },
+   "has_own_skill": true,
+   "split": "development",
+   "task": "use-spinner",
+   "without_this_task": {
+    "actions": 40,
+    "chosen_from": {
+     "click-checkboxes": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  },
+  {
+   "all_skills": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   },
+   "has_own_skill": false,
+   "split": "held_out",
+   "task": "visual-addition",
+   "without_this_task": {
+    "actions": 20,
+    "chosen_from": {
+     "click-test": 20
+    },
+    "episodes": 20,
+    "partial_credit": 0,
+    "per_seed": "00000000000000000000",
+    "refused": 0,
+    "success_rate": 0.0,
+    "successes": 0
+   }
+  }
+ ]
+}
