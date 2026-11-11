@@ -1,0 +1,29 @@
+{
+  "schema":"PROJECT_BRAIN_TERMINAL_FRONTIER_COMPILER_V3_LOCAL_REPLAY_20261006_V1",
+  "date":"2026-10-06",
+  "status":"LOCAL_ZERO_COST_REPLAY_PASS__NOT_INDEPENDENT__ZERO_CREDIT",
+  "exact_branch_blobs":{
+    "canonical/runtime/terminal_frontier_compiler_v3.py":"469d0f24114c4f80490b71e3d75e6bbcbfda3e52",
+    "canonical/tests/test_terminal_frontier_compiler_v3.py":"42d053b7d0ab42047b8be25552d0afaf1ae6ac61",
+    "canonical/governance/TERMINAL_FRONTIER_COMPILER_V3.json":"5d7e17fdc2784229a1ffd6d1fa32c0b956624fba"
+  },
+  "replay":{
+    "v2_v5_open_meta":8,
+    "v2_v6_open_meta":7,
+    "v3_v5_open_meta":8,
+    "v3_v6_open_meta":8,
+    "v6_performance_identity":"CREATIVE_DIAGRAM_SURFACE_NONINFERIOR__META",
+    "count_equal_identity_change_detected":true,
+    "result":"PASS"
+  },
+  "hard_nonclaims":[
+    "NO_INDEPENDENT_VERIFICATION",
+    "NO_SCHEDULING_AUTHORITY",
+    "NO_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_PREDICATE_CLOSURE"
+  ],
+  "incremental_spend_usd":0,
+  "acceptance_credit_delta":0,
+  "capability_credit_delta":0,
+  "ownership_credit_delta":0
+}
