@@ -1,0 +1,150 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_POST_UNKNOWN_DOMAIN_EXACT_TWO_EVENT_CUT_V3",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__ZERO_REALITY_STRUCTURAL_REDUCTION__9_ROOT3_PREDICATES__EXACT_TWO_EVENT_CLASSES__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Recompute the Root3 minimum nonduplicative wake frontier after independent promotion of UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT, and prove that exactly two authority-separated event classes suffice and are necessary.",
+  "authorities": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee",
+      "status": "ACTIVE_FAIL_CLOSED__TERMINAL_GOAL_NOT_ACHIEVED__14_OF_38_PROVED__24_OPEN"
+    },
+    "terminal_root_cause_state": {
+      "path": "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+      "git_blob_sha": "7c1ed0adf243b92abab2cbdb6ebced921dcbb860",
+      "status": "ACTIVE_FAIL_CLOSED__THREE_ROOT_MODEL__14_PROVED__24_UNRESOLVED"
+    },
+    "current_acceptance_ledger": {
+      "path": "canonical/governance/OPUS55_ACCEPTANCE_PREDICATE_EVIDENCE_BINDINGS_V2.json",
+      "git_blob_sha": "a3fd20e58fdbd9b86278b7de0c245de3063dce27",
+      "status": "AUTHORITY_RECONCILED__14_PROVED__24_UNRESOLVED__LIVEBENCH_CLEAN_POINTWISE_DOMINANCE_CLOSED__UNKNOWN_DOMAIN_V7_V8_INDEPENDENTLY_PROVED__ROOT1_INACTIVE"
+    },
+    "predecessor_root3_cut": {
+      "path": "canonical/governance/ROOT3_MINIMUM_ACTION_CUT_V2.json",
+      "git_blob_sha": "4d8ce78ebe312100bbfc524062199961c0c6479d",
+      "status": "CANDIDATE__POST_SYNTHESIS_SCOPE_RECLASSIFICATION__10_ROOT3_PREDICATES__3_EVENT_CLASSES__ZERO_CURRENT_RUNNABLE_ACTIONS__ZERO_CREDIT"
+    },
+    "root3_residual_compression": {
+      "path": "canonical/governance/ROOT3_RESIDUAL_COMPRESSION_V1.json",
+      "git_blob_sha": "5f3e5b7164f964fb1992b23f35069e3755673271",
+      "status": "ACTIVE_FAIL_CLOSED__SYNTHESIS_SCOPE_RECLASSIFIED_TO_ROOT2_ONLY__CURRENT_ROOT3_RESIDUALS_COMPRESSED__ZERO_CREDIT"
+    },
+    "matched_superportfolio_v2": {
+      "path": "canonical/governance/ROOT3_MATCHED_SUPERPORTFOLIO_MINIMUM_REALITY_BINDING_V2.json",
+      "git_blob_sha": "e886f262aa4b4946b290d636d336bf857afa946c",
+      "status": "CANDIDATE__POST_SYNTHESIS_SCOPE_RECLASSIFICATION__7_ROOT3_MATCHED_SCOPE_TARGETS_TO_ONE_FUTURE_SUPERPORTFOLIO_WAVE__ZERO_CREDIT"
+    },
+    "unknown_domain_acceptance_reduction": {
+      "path": "canonical/governance/UNKNOWN_DOMAIN_V7_WINDOWS_V8_ACCEPTANCE_REDUCTION_20261005_V1.json",
+      "git_blob_sha": "ebe8edcda3e0aa7dcffab6032834532a6f06c5f7",
+      "status": "CURRENT_AUTHORITY_PREDICATE_PROMOTION__INDEPENDENT_V8_PASS__CONCURRENT_LIVEBENCH_REBASED__14_PROVED__24_UNRESOLVED"
+    }
+  },
+  "verified_input_facts": {
+    "current_atomic_acceptance": "14_PROVED__24_UNRESOLVED",
+    "root1_positive_gaps": 0,
+    "root2_touching": 18,
+    "root3_touching": 9,
+    "unknown_domain_transfer_audit": "PROVED",
+    "predecessor_root3_touching": 10,
+    "predecessor_matched_scope_targets": 7,
+    "predecessor_direct_oracle": "4_FROZEN_LEAVES_ACROSS_2_PREDICATES",
+    "predecessor_composition_dependency": "8_OPEN_INTERFACES__EVENT_DRIVEN_ONLY"
+  },
+  "deduction": {
+    "removed_root3_predicate": {
+      "predicate_id": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+      "reason": "INDEPENDENT_V8_SCOPE_COMPLETE_PROMOTION",
+      "atomic_delta": -1
+    },
+    "current_root3_partition": [
+      {
+        "class": "MATCHED_SCOPE_TARGETS",
+        "predicate_count": 7,
+        "execution": "ONE_SHARED_FUTURE_SUPERPORTFOLIO_WAVE",
+        "fresh_reality_required": true
+      },
+      {
+        "class": "FINANCE_DIRECT_SCOPE",
+        "predicate_count": 1,
+        "leaf_count": 2,
+        "execution": "TWO_FROZEN_FINANCE_DIRECT_ORACLE_LEAVES",
+        "fresh_reality_required": true
+      },
+      {
+        "class": "COMPOSITION_DEPENDENCY",
+        "predicate_count": 1,
+        "open_interfaces": 8,
+        "execution": "RECOMPUTE_ONLY_FROM_UPSTREAM_SCOPE_COMPLETE_RECEIPTS",
+        "fresh_reality_required": false
+      }
+    ],
+    "arithmetic": "7_MATCHED_SCOPE + 1_FINANCE_DIRECT_SCOPE + 1_COMPOSITION_DEPENDENCY = 9_ROOT3_PREDICATES",
+    "direct_oracle_reduction": "4_LEAVES_ACROSS_2_PREDICATES -> 2_LEAVES_ACROSS_1_PREDICATE",
+    "event_class_reduction": "3_PREDECESSOR_EVENT_CLASSES -> 2_EXACT_EVENT_CLASSES"
+  },
+  "exact_minimum_event_classes": [
+    {
+      "id": "ROOT3_ZERO_REALITY_EVIDENCE_DELTA_EVENT",
+      "authority_domain": "ZERO_REALITY_ONLY",
+      "dispatch": [
+        "ON_NEW_INDEPENDENTLY_VERIFIED_LOSSLESS_EXHAUSTIVE_UNIVERSAL_SCOPE_CERTIFICATE__RUN_UNIVERSAL_SCOPE_CLOSURE_COMPILER_V1",
+        "ON_NEW_ACCEPTED_SCOPE_COMPLETE_UPSTREAM_FAMILY_RECEIPT__RECOMPUTE_8_OPEN_COMPOSITION_INTERFACES"
+      ],
+      "consequence": "MAY_DELETE_ROOT3_OBLIGATIONS_WITHOUT_CONSUMING_TERMINAL_CASES_OR_NEW_REALITY"
+    },
+    {
+      "id": "ROOT3_FRESH_REALITY_AUTHORIZED_EVENT",
+      "authority_domain": "EXPLICIT_FRESH_REALITY_AUTHORITY_REQUIRED",
+      "dispatch": [
+        "EXECUTE_ONE_SHARED_MATCHED_SUPERPORTFOLIO_WAVE_FOR_THE_7_SURVIVING_MATCHED_SCOPE_TARGETS",
+        "EXECUTE_THE_2_FROZEN_FINANCE_DIRECT_ORACLE_LEAVES_IN_PARALLEL"
+      ],
+      "consequence": "ONLY_LIVE_EXECUTION_CLASS__MUST_REMAIN_SEPARATE_FROM_ZERO_REALITY_DISPATCH"
+    }
+  ],
+  "minimality_proof": {
+    "lower_bound": "AT_LEAST_TWO_EVENT_CLASSES_ARE_REQUIRED_BECAUSE_ZERO_REALITY_EVIDENCE_PROCESSING_AND_FRESH_REALITY_EXECUTION_HAVE_DIFFERENT_AUTHORITY_PREDICATES; COLLAPSING_THEM_WOULD_PERMIT_OR_OBSCURE_UNAUTHORIZED_REALITY_CONSUMPTION.",
+    "upper_bound": "TWO_CLASSES_SUFFICE_BECAUSE_EVERY_SURVIVING_ROOT3_ACTION_IS_EITHER A ZERO_REALITY_RECOMPUTATION TRIGGERED_BY NEW VERIFIED EVIDENCE OR AN EXPLICITLY_AUTHORIZED FRESH_REALITY EXECUTION.",
+    "exact_minimum": 2,
+    "arithmetic_cross_check": "WOLFRAM_EVALUATOR_RETURNED_TRUE_FOR_7_PLUS_1_PLUS_1_EQUALS_9_AND_TWO_DISTINCT_AUTHORITY_CLASSES"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "SEPARATE_NEW_SCOPE_CERTIFICATE_EVENT_CLASS",
+      "SEPARATE_UPSTREAM_SCOPE_RECEIPT_EVENT_CLASS",
+      "UNKNOWN_DOMAIN_DIRECT_ORACLE_EXECUTION_FROM_ROOT3_FRESH_REALITY_BATCH"
+    ],
+    "replace_with": [
+      "ONE_TYPED_ROOT3_ZERO_REALITY_EVIDENCE_DELTA_EVENT",
+      "ONE_ROOT3_FRESH_REALITY_AUTHORIZED_EVENT"
+    ],
+    "current_runnable_actions": 0,
+    "wake_only_on_verified_delta_or_explicit_fresh_reality_authority": true
+  },
+  "hard_rules": [
+    "NO_FRESH_REALITY_FROM_THIS_REDUCTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_DIRECT_COMPOSITION_REALITY",
+    "NO_UNKNOWN_DOMAIN_DIRECT_ORACLE_WORK__PREDICATE_ALREADY_PROVED",
+    "NO_REPEAT_GENERIC_ROOT3_SEARCH_WITH_UNCHANGED_INPUTS",
+    "FRESH_REALITY_AUTHORITY_MUST_REMAIN_DISTINCT_FROM_ZERO_REALITY_EVIDENCE_PROCESSING",
+    "FAIL_CLOSED_IF_ANY_BOUND_AUTHORITY_BLOB_CHANGES"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true,
+  "next": "INDEPENDENTLY_VERIFY_BOUND_BLOBS_AND_THE_9_PREDICATE_PARTITION__THEN_ACTIVATE_AS_CURRENT_ROOT3_WAKE_FRONTIER_IF_AND_ONLY_IF_VERIFICATION_PASSES"
+}
