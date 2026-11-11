@@ -1,0 +1,71 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_IFBENCH58_ROW_DATE_QUANTIFIER_TRUTH_REPAIR_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__IFBENCH58_RECLASSIFICATION_FALSIFIED_BY_EXACT_ROW_DATE_BINDING__LEGACY25_RESTORED_LOAD_BEARING__ZERO_CREDIT__INDEPENDENT_REVIEW_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "falsified_candidate": {
+    "path": "canonical/governance/LIVEBENCH_2026_06_25_IFBENCH58_SCORER_ROUTE_RECONCILIATION_V1.json",
+    "source_commit": "e61e23c81d89239250237bf7a181bb00a9452238",
+    "invalid_inference": "USES_LEADERBOARD_RELEASE_2026_06_25_AS_IF_IT_WERE_EACH_QUESTION_livebench_release_date"
+  },
+  "exact_router_fact": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "router_blob": "b36561da5b54380c724c507462d0ee65feefeac8",
+    "selector": "question.category == instruction_following AND question.livebench_release_date < 2025-11-25",
+    "consequence": "DISPATCH_IS_A_FUNCTION_OF_PER_ROW_livebench_release_date__NOT_THE_LEADERBOARD_RELEASE_LABEL"
+  },
+  "independently_verified_population_fact": {
+    "path": "canonical/verification/LIVEBENCH_FROZEN_POPULATION_DISPATCH_METADATA_VERIFICATION_20261004_V1.json",
+    "binding_commit": "f44193ac1ee9faf242734e2d0d1462cd19a81b21",
+    "exact_dataset_revision": "0868379c4b5cf62aeacaf8be4f08fced815c81bb",
+    "parquet_sha256": "a9bb97bbaf8788142c310bcb33d50e2f6f5df8cbd8b8c3db677816b06f0f4f25",
+    "selected_rows": 200,
+    "selected_release_histogram": {
+      "2024-11-25": 200
+    },
+    "dispatch_boundary": "2025-11-25",
+    "verified_legacy_rows": 200,
+    "verified_modern_rows": 0,
+    "independent_runner": {
+      "repository": "moxnixmdj/verification-capsule-runner",
+      "pull_request": 1857,
+      "workflow_run_id": 37198950192,
+      "workflow_job_id": 111426482890,
+      "conclusion": "success"
+    }
+  },
+  "proof": [
+    "FOR_EACH_SELECTED_ROW_r__r.livebench_release_date_EQUALS_2024_11_25",
+    "2024_11_25_IS_STRICTLY_BEFORE_2025_11_25",
+    "THEREFORE_EACH_OF_THE_EXACT_200_SELECTED_ROWS_ENTERS_old_instruction_following_matches",
+    "THEREFORE_ZERO_OF_THE_EXACT_200_SELECTED_ROWS_REACH_THE_NORMAL_IFBENCH58_BRANCH",
+    "THE_LABEL_2026_06_25_IDENTIFIES_THE_PUBLIC_COMPARATOR_RELEASE_SELECTION__IT_DOES_NOT_OVERWRITE_THE_PER_ROW_livebench_release_date_FIELD"
+  ],
+  "scheduler_effect": {
+    "delete": [
+      "IFBENCH58_AS_LOAD_BEARING_SCORER_FOR_THE_EXACT_FROZEN_200",
+      "NEW_IFBENCH58_CONSTRUCTION_WORK_FOR_LIVEBENCH_IF_GE_65_7_UNLESS_THE_EXACT_FROZEN_POPULATION_OR_ROUTER_CHANGES"
+    ],
+    "restore": [
+      "LEGACY25_OR_A_STRONGER_SCOPE_SAFE_SUPERSET_CONSTRUCTION_FRONTIER",
+      "CURRENT_UNION25_ZERO_REALITY_WORK_AS_CONSERVATIVE_SCOPE_SAFE_REPAIR"
+    ],
+    "preserve_historical_modern_work": "GENERIC_CAPABILITY_RESEARCH_ONLY__ZERO_TERMINAL_MASS_FOR_THIS_FROZEN_PREDICATE"
+  },
+  "hard_rules": [
+    "DO_NOT_PROMOTE_FROM_THE_IFBENCH58_ROUTE_CANDIDATE",
+    "DO_NOT_TREAT_LEADERBOARD_RELEASE_DATE_AS_PER_ROW_DISPATCH_DATE",
+    "DO_NOT_READ_TERMINAL_PROMPT_RESPONSE_KWARGS_OR_TARGET_CASE_CONTENT",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT_FROM_THIS_TRUTH_REPAIR"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
