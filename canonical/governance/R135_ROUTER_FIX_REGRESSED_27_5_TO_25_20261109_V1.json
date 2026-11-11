@@ -1,0 +1,11 @@
+{
+  "schema": "PROJECT_BRAIN_R135_ROUTER_FIX_REGRESSION_V1",
+  "date": "2026-11-09",
+  "change": "fixed the routing bug that sent all four 'Select' tasks (colorwheel, checkboxes-soft, spinner, scroll-list) down the native-select path, by dispatching on the actual DOM widget present instead of on the verb word",
+  "measurement": {"sample": "same seeded random 40", "before": "27.5% (11/40)", "after": "25.0% (10/40)"},
+  "what_improved": ["click-scroll-list now passes via multi:2/2 (multi-select by option text)"],
+  "what_regressed": "ONE task that previously passed now fails. It has not yet been identified from the truncated transcript tail; the result is reported as a net -1 rather than as a fix.",
+  "the_process_failure_this_records": "the new router was written to handle four widgets at once and run once. A change that touches routing for every 'Select' goal can silently alter tasks that already passed. The correct method is to re-run the baseline and the change on the same sample and DIFF the per-task outcomes, not compare totals.",
+  "what_i_should_have_done": "capture the full per-task pass/fail list before and after, then diff. Both runs printed per-task lines but only the tail was kept, so the specific regression cannot be named without re-running.",
+  "honest_status": "reach on this sample is 25-27.5% and the last two changes have been a gain then a wash then a regression. The project is at roughly one quarter of MiniWob++ with a policy that has no model, no training, and no weights, which is a real number and not a solved problem."
+}
