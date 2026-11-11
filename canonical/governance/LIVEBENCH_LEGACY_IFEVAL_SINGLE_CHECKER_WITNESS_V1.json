@@ -1,0 +1,53 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_IFEVAL_SINGLE_CHECKER_WITNESS_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__25_TYPE_LEGACY_SINGLE_CHECKER_CONSTRUCTOR__ZERO_TERMINAL_CASES__INDEPENDENT_EXACT_CHECKER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "critical_path_condition": "LOAD_BEARING_IF_LIVEBENCH_ACTIVE_LEGACY_DISPATCH_TRUTH_REPAIR_V1_IS_INDEPENDENTLY_VERIFIED",
+  "frozen_public_authority": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_checker_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "legacy_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891"
+  },
+  "breakthrough": {
+    "prior_state": "PROMPT_ONLY_LEGACY_INVERTER_WITH_NO_GENERAL_CONSTRUCTIVE_WITNESS_LAYER",
+    "new_state": "DETERMINISTIC_VISIBLE_PROMPT_TO_WITNESS_CONSTRUCTORS_FOR_EVERY_ACTIVE_LEGACY_REGISTRY_CHECKER_TYPE_WHEN_PRESENT_ALONE",
+    "active_type_count": 25,
+    "model_dependency_count": 0,
+    "network_dependency_at_runtime": false,
+    "terminal_metadata_dependency": false
+  },
+  "runtime": {
+    "path": "canonical/runtime/livebench_legacy_ifeval_single_checker_witness_v1.py",
+    "inverter": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py",
+    "behavior": "EXACTLY_ONE_RECOGNIZED_CHECKER_OR_FAIL_CLOSED"
+  },
+  "next_minimum_action": [
+    "INDEPENDENTLY_INSTANTIATE_EACH_OF_THE_25_PINNED_PUBLIC_CHECKERS_WITH_SYNTHETIC_EXPLICIT_ARGS",
+    "RENDER_ITS_PUBLIC_DESCRIPTION",
+    "RUN_THIS_SOLVER_ON_THAT_DESCRIPTION",
+    "REQUIRE_THE_EXACT_PUBLIC_CHECK_FOLLOWING_TO_RETURN_TRUE_FOR_ALL_25_TYPES",
+    "THEN_COMPILE_MULTI_CHECKER_COMPOSITION_USING_THE_PUBLIC_CONFLICT_GRAPH_AND_EXACT_CHECKER_POSTVALIDATION"
+  ],
+  "hard_nonclaims": [
+    "SINGLE_CHECKER_COVERAGE_DOES_NOT_IMPLY_65_7",
+    "NO_MULTI_CHECKER_COMPOSITION_CLAIM",
+    "NO_TERMINAL_POPULATION_DISTRIBUTION_ASSUMPTION",
+    "NO_ACCEPTANCE_OR_CAPABILITY_CREDIT",
+    "NO_GENERAL_SEMANTIC_TEXT_CAPABILITY_CLAIM"
+  ],
+  "contamination_firewall": [
+    "NO_TERMINAL_PROMPTS",
+    "NO_TERMINAL_KWARGS",
+    "NO_TERMINAL_CASE_IDS",
+    "PUBLIC_PINNED_CHECKER_SOURCE_ONLY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "family_credit_delta": 0
+  }
+}
