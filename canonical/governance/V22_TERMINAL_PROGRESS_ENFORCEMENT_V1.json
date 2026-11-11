@@ -1,0 +1,85 @@
+{
+  "schema": "PROJECT_BRAIN_V22_TERMINAL_PROGRESS_ENFORCEMENT_V1",
+  "date": "2026-10-06",
+  "status": "CANDIDATE__TWO_STAGE_WORK_CLASSIFICATION_AND_CANONICAL_POSTCHANGE_CONTRACTION_ENFORCEMENT__ZERO_CREDIT_PENDING_INDEPENDENT_VERIFICATION",
+  "objective": "Reduce terminal-conversion latency by preventing guarded V22 work from being reported as progress unless canonical base-to-head truth or causal-cut state strictly contracts, while preserving falsification probes and constructive truth repair as explicit zero-progress classes.",
+  "verified_substrate": {
+    "terminal_progress_delta_gate": {
+      "runtime": "canonical/runtime/terminal_progress_delta_gate_v1.py",
+      "verification": "canonical/verification/TERMINAL_PROGRESS_DELTA_GATE_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json"
+    },
+    "v22_prewrite_admission": "execution_guard/v22_prewrite_admission.py",
+    "existing_partial_activation": "canonical/governance/V22_PREWRITE_ADMISSION_PARTIAL_ACTIVATION_20261006_V1.json"
+  },
+  "two_stage_policy": {
+    "prewrite_classes": [
+      "PROGRESS_CANDIDATE",
+      "FALSIFICATION_PROBE",
+      "TRUTH_REPAIR",
+      "CONTROL_PLANE"
+    ],
+    "progress_candidate": "MUST_DECLARE_EXPECTED_CONTRACTION_CLASS_AND_EXACT_TARGET_SET__ZERO_PREWRITE_PROGRESS_CREDIT__POSTCHANGE_EVIDENCE_REQUIRED",
+    "falsification_probe": "MAY_SEARCH_FOR_DECISIVE_COUNTEREXAMPLE_ON_A_CURRENT_TARGET__ZERO_PROGRESS_CREDIT",
+    "truth_repair": "REQUIRES_CONTENT_ADDRESSED_COUNTERMODEL__POSTCHANGE_CLASSIFICATION_REQUIRED__NEVER_COUNTS_AS_PROGRESS",
+    "control_plane": "ALLOWED_ONLY_FOR_CONTROL_PLANE_PREREQUISITE_MODE__ZERO_PROGRESS_CREDIT",
+    "postchange_progress": "DERIVE_BEFORE_AND_AFTER_STATE_FROM_CANONICAL_REPOSITORY_SOURCES__THEN_REQUIRE_INDEPENDENTLY_VERIFIED_TERMINAL_DELTA_GATE_TO_ADMIT_STRICT_CONTRACTION"
+  },
+  "canonical_state_sources": [
+    "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "canonical/governance/TERMINAL_ROOT_CAUSE_STATE_V1.json",
+    "canonical/governance/TERMINAL_FALSIFICATION_TOURNAMENT_CURRENT_INPUT_V1.json",
+    "canonical/governance/TERMINAL_FALSIFICATION_CONTROL_LOOP_V2.json"
+  ],
+  "state_derivation": {
+    "open_truth_obligations": "EXACT_UNION_OF_CURRENT_ROOT_PARTITION_ATOMIC_IDS_PLUS_BEHAVIORAL_QUOTIENT_META_TARGETS_PLUS_META_DORMANT_TARGETS__COUNTS_MUST_MATCH_POINTER",
+    "active_causal_interfaces": "CURRENT_SHARED_CAUSAL_INTERFACES_FROM_ACTIVE_POINTER",
+    "open_prerequisites": "NONPROVED_DEPENDENCIES_OF_ACTIVE_CONTROL_LOOP_CLAIMS",
+    "max_open_causal_depth": "LONGEST_PATH_THROUGH_ACTIVE_CLAIM_DEPENDENCIES",
+    "open_proof_node_count": "COUNT_OF_ACTIVE_CONTROL_LOOP_CLAIMS"
+  },
+  "anti_gaming": [
+    "BRANCH_AUTHORED_BEFORE_OR_AFTER_COUNTERS_ARE_IGNORED",
+    "PROGRESS_RECEIPT_MUST_BIND_EXACT_CANONICAL_BEFORE_STATE_AFTER_STATE_TARGET_DIGEST_AND_EFFECT_KIND",
+    "REFERENCED_RECEIPT_FILE_MUST_ITSELF_CONTAIN_THE_SAME_TRANSITION_BINDINGS",
+    "RECEIPT_GIT_BLOB_SHA_MUST_MATCH_BASE_OR_HEAD_REPOSITORY_BYTES",
+    "NONCONTRACTING_PROGRESS_FAILS_CLOSED",
+    "TRUTH_REPAIR_CANNOT_BE_REPORTED_AS_PROGRESS",
+    "UNCLASSIFIED_GUARDED_V22_WORK_FAILS_CLOSED"
+  ],
+  "implementation": {
+    "prewrite": "execution_guard/v22_prewrite_admission.py",
+    "canonical_state_and_postchange": "execution_guard/terminal_progress_enforcement.py",
+    "trusted_pr_validator": "execution_guard/enforce_terminal_progress_pr_v1.py",
+    "tests": [
+      "canonical/tests/test_v22_prewrite_admission_v1.py",
+      "canonical/tests/test_terminal_progress_enforcement_v1.py"
+    ],
+    "workflow": ".github/workflows/verify-terminal-progress-enforcement-v1.yml"
+  },
+  "hard_boundary": {
+    "provider_branch_protection_or_required_check_configuration_available": false,
+    "direct_main_repository_write_prevented": false,
+    "existing_drift_guard_weakened": false,
+    "consequence": "THIS_ADDS_A_TRUSTED_PR_CHECK_AND_GUARDED_WORK_CLASSIFICATION_BUT_CANNOT_CLAIM_PROVIDER_LEVEL_TOTAL_PREWRITE_ENFORCEMENT"
+  },
+  "hard_nonclaims": [
+    "NO_TERMINAL_PREDICATE_CLOSED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_EVERY_FALSIFICATION_PROBE_MUST_CONTRACT_STATE",
+    "NO_CLAIM_PROVIDER_LEVEL_DIRECT_WRITE_PREVENTION",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
