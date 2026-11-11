@@ -1,0 +1,81 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY25_WITNESS_COMPILER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__PUBLIC_LEGACY25_GRAMMAR_FRONTEND_AND_DETERMINISTIC_WITNESS_SEARCH__25_OF_25_RECOGNIZED__22_OF_25_CONSTRUCTIVE__3_LANGDETECT_FAMILIES_FAIL_CLOSED__ZERO_TERMINAL_CASES__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Exploit the corrected 2026 LiveBench IF binding to the legacy 25-checker registry by compiling the public description grammar into deterministic model-independent score-only witnesses, while failing closed anywhere exact public checker semantics are not locally reproduced.",
+  "public_binding": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "legacy_registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "legacy_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "legacy_evaluation_main_blob": "4a341984936c4d609644a3b77f8c030ac5aa7269",
+    "scope_truth_repair": "canonical/governance/LIVEBENCH_IF_2026_TERMINAL_SCOPE_TRUTH_REPAIR_V1.json"
+  },
+  "runtime": {
+    "compiler": "canonical/runtime/livebench_legacy25_witness_compiler_v1.py",
+    "adapter_candidate": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v5.py",
+    "tests": "canonical/tests/test_livebench_legacy25_witness_compiler_v1.py",
+    "search_strategy": "DETERMINISTIC_BOUNDED_PERMUTATION_SEARCH_OVER_PUBLIC_CONSTRAINT_TRANSFORMS_WITH_POSTCONSTRUCTION_SELF_VALIDATION",
+    "maximum_instruction_bundle_search_bound": 7
+  },
+  "coverage": {
+    "legacy_registry_instruction_types": 25,
+    "public_description_families_recognized": 25,
+    "constructive_model_independent_families": 22,
+    "fail_closed_families": [
+      "language:response_language",
+      "change_case:english_capital",
+      "change_case:english_lowercase"
+    ],
+    "fail_closed_reason": "THESE_PUBLIC_CHECKERS_DEPEND_ON_LANGDETECT; NO_SCORE_CREDIT_IS_CLAIMED_WITHOUT_THE_EXACT_VALIDATOR",
+    "repeat_prompt_route": "VISIBLE_PROMPT_PREFIX_RECOVERY_ONLY__PUBLIC_TEMPLATE_SUFFIX_REQUIRED",
+    "semantic_quality_claim": false
+  },
+  "local_verification": {
+    "python_compile": "PASS",
+    "unittest_methods": 5,
+    "single_family_constructive_variants": 26,
+    "langdetect_dependent_recognition_and_fail_closed_variants": 3,
+    "multi_constraint_compositions": 4,
+    "repeat_prompt_prefix_case": "PASS",
+    "forbidden_vs_required_negative_parse_case": "PASS",
+    "note": "SYNTHETIC_LOCAL_TESTS_VALIDATE_COMPILER_LOGIC_ONLY; THEY_ARE_NOT_TERMINAL_BENCHMARK_EVIDENCE"
+  },
+  "breakthrough_effect": {
+    "prior_runtime_mismatch": "GENERIC_COMPILER_COVERED_ONLY_A_SMALL_SUBSET_OF_THE_NOW_PROVED_LOAD_BEARING_LEGACY25_GRAMMAR",
+    "new_state": "A_DEDICATED_FRONTEND_NOW_RECOGNIZES_THE_COMPLETE_LOAD_BEARING_PUBLIC_LEGACY25_DESCRIPTION_SURFACE_AND_CAN_CONSTRUCT_SCORE_ONLY_WITNESSES_FOR_22_FAMILIES_WITHOUT_MODEL_INFERENCE",
+    "why_high_leverage": "THE_2026_SCOPE_TRUTH_REPAIR_REMOVED_58_MODERN_IFBENCH_CHECKERS_FROM_THIS_PREDICATE_CRITICAL_PATH; THIS_CHANGE_ATTACKS_THE_REMAINING_25_DIRECTLY_INSTEAD_OF_EXPANDING_GENERIC_RUNTIME_CAPABILITY"
+  },
+  "hard_nonclaims": [
+    "NO_CURRENT_200_CASE_LIVEBENCH_SCORE_CLAIM",
+    "NO_CASE_73_OR_LATER_READ_OR_EXPOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_OR_PROMOTION_CREDIT",
+    "NO_GENERAL_SEMANTIC_QUALITY_CLAIM",
+    "NO_LANGUAGE_FAMILY_SCORE_CLAIM_WITHOUT_EXACT_LANGDETECT_VALIDATION",
+    "NO_ASSUMPTION_THAT_SYNTHETIC_TESTS_EQUAL_FROZEN_TERMINAL_POPULATION"
+  ],
+  "required_next": [
+    "INDEPENDENTLY_VERIFY_CONSTRUCTED_WITNESSES_AGAINST_THE_PINNED_PUBLIC_LEGACY_CHECKER_IMPLEMENTATION",
+    "BIND_THE_VERIFIED_COMPILER_TO_ROOT2_ADAPTER_V5_ONLY_AFTER_EXACT_CHECKER_VERIFICATION",
+    "IF_INFORMATION_POSITIVE_REPLAY_IS_STILL_NEEDED_USE_ONLY_THE_ALREADY_EXPOSED_72_CASE_PREFIX_UNDER_A_NEW_PRECOMMITTED_CONTENT_ADDRESSED_ONE_USE_EPOCH",
+    "DO_NOT_EXPOSE_CASE_73_OR_LATER_FROM_THIS_CANDIDATE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "replay72": false,
+    "new_case_exposure": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
