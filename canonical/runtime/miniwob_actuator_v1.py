@@ -1241,6 +1241,82 @@ def v_tabs(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     return "tabs"
 
 
+def v_pie(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """EXPAND_AND_CLICK on a wheelnav (Raphael SVG) pie menu.
+
+    Measured 2026-11-09 on `click-pie`, 0/30 before this. Every step below was found by
+    printing what the code chose; each one alone was enough to score zero:
+
+      * THE WHEEL STARTS COLLAPSED at currentPercent 0 behind a centre spreader path.
+        Until it is pressed the slices exist with d="M78,78L78,78" -- zero length.
+      * IT IS STILL ANIMATING WHEN YOU CAN SEE IT. Raphael grows the slices over ~1 s;
+        a geometry read taken as soon as the spreader is pressed samples the animation
+        (path length 22 -> 135 -> 212). Sample until it stops changing.
+      * THE LABEL IS ON THE PAGE, NOT IN THE SENTENCE: #query wraps the answer in
+        span.bold, so the goal's own markup hands over the target.
+      * GETPOINTATLENGTH IS NOT A POINT INSIDE THE SHAPE. A donut sector's path is its
+        OUTLINE, so 50% of the length is the radial edge, and elementFromPoint there
+        returns the NEIGHBOURING slice (this page: 261/400 sampled points on the edge
+        hit-tested to slice 5 and 6, not the slice whose path they came from).
+        So do not compute a point -- ask the page which points belong to the slice by
+        sweeping the SVG bounds with elementFromPoint and taking the CENTROID of its own
+        hits. That is the same hit-test the click will use.
+      * SVGElement has no .click(); that is HTMLElement-only, and the throw is swallowed
+        by the caller's `or []`, which reads as "nothing found".
+    """
+    want = act.ev("(()=>{const b=document.querySelector('#query .bold');"
+                  "return b?b.textContent.trim():null})()")
+    if not want:
+        m = re.search(r'labeled\s*"?\s*([^".\u201d]+)', goal, re.I)
+        want = m.group(1).strip() if m else (plan.get("operand") or {}).get("quoted")
+    if not want:
+        return "pie-no-label"
+    sp = act.ev("(()=>{const e=[...document.querySelectorAll('[id$=-spreader]')]"
+                ".find(x=>x.getBoundingClientRect().width>0);"
+                "if(!e)return null;const r=e.getBoundingClientRect();"
+                "return {x:r.x+r.width/2,y:r.y+r.height/2}})()")
+    if not sp:
+        return "pie-no-spreader"
+    act.click(sp["x"], sp["y"])
+
+    sid = act.ev("(()=>{const want=%s;"
+                 "const t=[...document.querySelectorAll('[id*=-title-]')]"
+                 ".find(e=>e.textContent.trim()===want);"
+                 "return t?t.id.replace('-title-','-slice-'):''})()" % json.dumps(str(want)))
+    if not sid:
+        return "pie-nolabel:%s" % str(want)[:8]
+    # wait for Raphael's expansion animation to finish, then take the page's own hit-test
+    prev = -1.0
+    pt = None
+    for _ in range(24):
+        time.sleep(0.10)
+        r = act.ev(
+            "(()=>{const sid=%s;const s=document.getElementById(sid);"
+            "if(!s)return null;const L=s.getTotalLength();"
+            "const svg=document.querySelector('#divWheel svg');"
+            "if(!svg)return null;const R=svg.getBoundingClientRect();"
+            "let n=0,sx=0,sy=0;"
+            "for(let x=R.x;x<R.x+R.width;x+=3){for(let y=R.y;y<R.y+R.height;y+=3){"
+            "const el=document.elementFromPoint(x,y);"
+            "if(el&&el.id===sid){n++;sx+=x;sy+=y}}}"
+            "return {L:L,n:n,x:n?sx/n:0,y:n?sy/n:0}})()" % json.dumps(sid))
+        if not r:
+            continue
+        if r["n"] and prev > 0 and abs(r["L"] - prev) < 0.5:
+            pt = r
+            break
+        prev = r["L"]
+        if r["n"]:
+            pt = r
+    if not pt or not pt["n"]:
+        return "pie-nohit:%s" % str(want)[:8]
+    act.click(pt["x"], pt["y"])
+    time.sleep(0.45)
+    if episode_over(act):
+        return "pie-click:%s" % str(want)[:8]
+    return "pie-miss:%s" % str(want)[:8]
+
+
 def v_expand(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """EXPAND_AND_CLICK -- open the hidden sections, then click the link the goal NAMES.
 
@@ -1254,6 +1330,11 @@ def v_expand(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
         element.click() scored 1. A point is not an element -- the same defect that made
         phone-book fail.
     """
+    # A WHEEL IS NOT AN ACCORDION. One element in the DOM says which shape this is, so
+    # ask it before touching any header -- click-pie has no header to click at all.
+    if act.ev("document.querySelectorAll('[id*=-slice-]').length") > 2:
+        return v_pie(act, plan, goal)
+
     tok = (plan.get("operand") or {}).get("quoted")
     if tok is None:
         m = re.search(r'"([^"]+)"', goal) or re.search(r"\u201c([^\u201d]+)\u201d", goal)
