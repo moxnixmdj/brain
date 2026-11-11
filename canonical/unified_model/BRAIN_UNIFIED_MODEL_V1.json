@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 306,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6699,
+  "research_index_records": 6700,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 447,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "03312aca9885bd883b15cb92db8c01887c876978a27725d36f2026848fe4870f"
+  "value": "fdbfb98066d953046c3944f0a573a7ca91af778c32847049642ec9ece76da30d"
  },
  "engines": [
   {
@@ -68604,7 +68604,7 @@
   "included_source_count": 1108,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a26fbdd7c79f58dab5fa79790ebc0f02a163c1a8c9718455d5b38158b63621f2"
+  "source_tree_digest": "88a111755f6ddd0ba699d9d864bf89ec912d25e006ff0a853239ff414f370410"
  },
  "research_index": [
   {
@@ -216067,6 +216067,34 @@
    }
   },
   {
+   "action_id": "A_ROW_CHOSEN_BY_SHARED_WORDS_MUST_EXPLAIN_MOST_OF_THE_REQUEST_20261111_V1",
+   "capability": false,
+   "date": "2026-11-11",
+   "id": "research:canonical/action_intents/A_ROW_CHOSEN_BY_SHARED_WORDS_MUST_EXPLAIN_MOST_OF_THE_REQUEST_20261111_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_ROW_CHOSEN_BY_SHARED_WORDS_MUST_EXPLAIN_MOST_OF_THE_REQUEST_20261111_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6eb4df59eaec15b090f94bd4c13a8687114885c32d236a2e63d932d04899d5b5",
+   "status": "",
+   "terms": {
+    "20261111": 1,
+    "a_row_chosen_by_shared_words_must_explain_most_of_the_request_20261111_v1": 1,
+    "a_row_that_existed_before_the_word_check_is_chosen_on_one_or_two_shared_words__its_inputs_are_filled_from_the_world__it_runs__and_its_verifier_confirms_the_operation_not_the_request": 1,
+    "adapt_the_existing_word_check_into_a_majority_check_for_rows_chosen_by_shared_words__refuse_before_the_run_when_the_unexplained_words_outnumber_the_explained": 1,
+    "chosen": 1,
+    "explain": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "most": 1,
+    "must": 1,
+    "on_a_fresh_sample_of_2500_outside_sentences_the_wrong_passes_fall_from_31_to_9_and_the_sentences_that_start_a_row_from_415_to_57__zero_capability_credit__zero_family_credit__no_row_added": 1,
+    "request": 1,
+    "row": 1,
+    "shared": 1,
+    "v1": 1,
+    "words": 1
+   }
+  },
+  {
    "action_id": "A_SECOND_OPERAND_IS_THE_SAME_QUESTION_ASKED_TWICE_UNLESS_THE_PROGRAM_WRITES_TO_IT_V1_20261026_V1",
    "capability": false,
    "date": "2026-10-26",
@@ -262364,9 +262392,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "4de544d4a5ab4bb53a028f984c7397cd7f03d530a1d169cea71046c9bf576581",
+   "sha256": "a73b52e4703da38b6ad4a94a5b15327b60a3e84cf0e81f3b1773a2eaae4261c5",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 123,
+   "symbol_count": 128,
    "symbols": [
     "LocalExecutionFailure",
     "_ContextWorkspaceRoot",
