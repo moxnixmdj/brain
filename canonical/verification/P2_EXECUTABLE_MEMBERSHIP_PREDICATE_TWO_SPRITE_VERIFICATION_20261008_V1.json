@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_P2_EXECUTABLE_MEMBERSHIP_PREDICATE_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_10_OF_10_ON_TWO_SPRITES__STRICT_EXPLICIT_P2_ROOT_SOURCE_MEMBERSHIP_PREDICATE__ZERO_GLOBAL_CREDIT",
+  "subject": {
+    "runtime": {
+      "path": "canonical/runtime/p2_explicit_contract_membership_v1.py",
+      "git_blob_sha": "a6f357d952434692a809382d1cbd41f3c78a2af0"
+    },
+    "tests": {
+      "path": "canonical/tests/test_p2_explicit_contract_membership_predicate_binding_v1.py",
+      "git_blob_sha": "75f2f59d2bd507e16ec63c4014ed8f76e4b04c0c"
+    },
+    "adequacy_authenticator": {
+      "path": "canonical/runtime/p2_top_law_policy_adequacy_authenticator_v1.py",
+      "git_blob_sha": "ceb8f383c0760fd9d67b967e6edf528d6d6eff37"
+    },
+    "adequacy_theorem": {
+      "path": "canonical/governance/P2_EXPLICIT_SEMANTIC_CONTRACT_UNIVERSAL_TOP_LAW_20261007_V1.json",
+      "git_blob_sha": "decd0d46538a213f2e169c00c83fae09191a7ed3"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_run": 10,
+      "tests_passed": 10,
+      "result": "PASS"
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_run": 10,
+      "tests_passed": 10,
+      "result": "PASS"
+    }
+  ],
+  "verified": [
+    "VALID_STRICT_EXPLICIT_P2_ROOT_SOURCE_IS_RECOGNIZED",
+    "DUPLICATE_JSON_KEYS_FAIL_CLOSED",
+    "EXTRA_TASK_DIMENSIONS_FAIL_CLOSED",
+    "EXTRA_EVIDENCE_SEMANTICS_FAIL_CLOSED",
+    "EXTRA_EDIT_SEMANTICS_FAIL_CLOSED",
+    "DUPLICATE_FACT_IDS_FAIL_CLOSED",
+    "DUPLICATE_EDIT_IDS_FAIL_CLOSED",
+    "BOOLEAN_COST_IS_REJECTED_AS_NOT_AN_INTEGER_COST",
+    "WRONG_CONTRACT_FAILS_CLOSED",
+    "MEMBERSHIP_RECEIPT_IS_RECOMPUTED_FROM_SOURCE_BYTES_AND_SOURCE_ID"
+  ],
+  "soundness_boundary": {
+    "positive_implication": "COMPILER_PASS_ESTABLISHES_MEMBERSHIP_ONLY_IN_THE_STRICT_EXPLICIT_P2_JSON_SOURCE_SUBCLASS_OF_THE_EXISTING_PARAMETERIZED_P2_TOP_LAW_CLASS",
+    "free_form_professional_semantics_closed": false,
+    "extra_semantic_fields_projected_away": false,
+    "caller_membership_flag_accepted": false,
+    "root_task_authority_self_proved": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
