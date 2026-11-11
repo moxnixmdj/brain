@@ -1,0 +1,54 @@
+{
+  "schema": "PROJECT_BRAIN_R121D_SPECTRUM_LOCALISES_GUI_CAUSE_V1",
+  "date": "2026-11-09",
+  "headline": "first measured case in this project where a GUI fault was localised correctly from environment outcomes alone, with no oracle and no model",
+  "environment": {
+    "bench": "MiniWob++ click-option",
+    "browser": "HeadlessChrome/153.0.8010.0 via CDP 9222",
+    "grading_source": "read from the task page: click handler checks document.querySelector('#ch'+correctElement.index).checked and calls core.endEpisode(r, r>0)",
+    "note": "the grader was READ, not inferred. It checks the radio with the generated index."
+  },
+  "the_bug_that_produced_three_false_zeros": {
+    "symptom": "0/10, then 0/12, then 0/4, then 1/10, then 2/10 success while clicking the label-correct option",
+    "root_cause": "the Submit button was clicked at a hard-coded y coordinate. The task draws between 2 and 6 options (core.randi(2,7)), each pushing Submit down. Submit sits at y=132 for 3 options and y=186 for 6. The fixed click landed on empty space whenever the list was long.",
+    "fix": "read #subbtn.getBoundingClientRect() live, after the option click and layout change, then click its centre",
+    "result": "10/10 success with a label-correct policy",
+    "why_it_matters": "four separate times this round a zero looked like a capability limit and was an addressing error. The rule 'never report a first zero without auditing the instrument' earned its place again."
+  },
+  "the_controlled_experiment": {
+    "design": "12 runs. Every run took exactly {start, one option click, submit}. On runs where k%2==1 the option clicked was the neighbour of the goal-named one; otherwise it was the goal-named one. Nothing else varied.",
+    "runs": 12,
+    "successes": 6,
+    "failures": 6,
+    "injected_defect": "click the neighbouring option instead of the goal-named one",
+    "injected_runs_all_failed": true,
+    "honest_runs_all_succeeded": true
+  },
+  "result": {
+    "status": "SPECTRUM_SEPARATES",
+    "verified_coverage": true,
+    "ranked": [
+      {"action": "click:wrong", "ochiai": 1.0, "success_rate": 0.0, "runs_with": 6, "note": "THE INJECTED DEFECT, rank 1"},
+      {"action": "click:right", "ochiai": 0.0, "success_rate": 1.0, "runs_with": 6},
+      {"action": "start", "ochiai": 0.7071, "success_rate": 0.5, "runs_with": 12, "note": "non-discriminating, demoted"},
+      {"action": "submit", "ochiai": 0.7071, "success_rate": 0.5, "runs_with": 12, "note": "non-discriminating, demoted"}
+    ],
+    "named_cause": "click:wrong",
+    "named_cause_correct": true,
+    "ochiai_and_contrast_agree": true,
+    "margin": 1.0
+  },
+  "conditions_under_which_this_worked": [
+    "the action that caused the failure was under the policy's control and varied across runs",
+    "the causal action never co-occurred with success (0/6)",
+    "the action vocabulary was identical in every run",
+    "both Ochiai and the outcome-contrast statistic named the same action"
+  ],
+  "what_this_does_NOT_establish": [
+    "that the method works on real software GUIs, where the cause is not under the agent's control and does not vary by construction",
+    "that the 26/130 reach number changed -- this round did not re-measure it",
+    "that a general agent can be built on this: the experiment injected the defect, which a real failure does not do",
+    "any localisation accuracy rate: n=12, one task, one defect class"
+  ],
+  "honest_reading": "this is an existence proof that the GUI can supply a localisation signal through repeated execution, which is what Famas claimed and what this project's earlier 'no coverage spectrum' conclusion denied. It is NOT a capability number."
+}
