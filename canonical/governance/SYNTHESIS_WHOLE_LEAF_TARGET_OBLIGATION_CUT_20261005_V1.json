@@ -1,0 +1,119 @@
+{
+  "schema": "PROJECT_BRAIN_SYNTHESIS_WHOLE_LEAF_TARGET_OBLIGATION_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__WHOLE_SYNTHESIS_LEAF_UNIVERSALITY_NOT_CURRENT_TERMINAL_TARGET_OBLIGATION__FIVE_SCOPE_ROOTS_REMAIN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "objective": "Remove SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS from the terminal critical path without claiming the whole behavioral leaf is scope-complete. Preserve the exact six-dimension Communication/Synthesis target certificate and its still-open matched performance obligation.",
+  "exact_inputs": {
+    "target_behavior_scope_separation": {
+      "path": "canonical/governance/TARGET_BEHAVIOR_MECHANISM_SCOPE_SEPARATION_20261005_V1.json",
+      "git_blob_sha": "251cac9c9f7892e26ca90f2f5118f31e1df02099"
+    },
+    "synthesis_concurrency_reconciliation": {
+      "path": "canonical/governance/SYNTHESIS_LEAF_SCOPE_CONCURRENCY_CONFLICT_RECONCILIATION_20261005_V1.json",
+      "git_blob_sha": "4b1b9c7149eb040447b8dd1665366eccfbca60f4"
+    },
+    "synthesis_scope_certificate": {
+      "path": "canonical/governance/SYNTHESIS_SCOPE_CERTIFICATE_V1.json",
+      "git_blob_sha": "dea9028f92f111ee3c8be71615fa4b02e8a8bfb6"
+    },
+    "terminal_protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "62394e5b7d221ec9f69c3458f669e40e253a9d09"
+    },
+    "current_scope_frontier": {
+      "path": "canonical/governance/SIX_BENCHMARK_PROXY_SCOPE_REPAIR_FRONTIER_V3.json",
+      "git_blob_sha": "2442af340f6445c1c8fbba7d770461a4e20a0378"
+    }
+  },
+  "proof": {
+    "communication_and_synthesis_target": {
+      "proof_mode": "MATCHED_GROUNDED_SYNTHESIS_NONINFERIORITY",
+      "task_dimensions": [
+        "claim-to-source fidelity",
+        "required evidence coverage",
+        "uncertainty/disagreement preservation",
+        "audience adaptation",
+        "format/style constraints",
+        "compression without decision-relevant loss"
+      ],
+      "scope_certificate_target": "scope://opus55/SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR",
+      "scope_certificate_relation": "PROVEN_STRONGER",
+      "scope_certificate_coverage": "EXACT_UNION",
+      "every_dimension_formally_complete_for_all_admissible_target_inputs": true,
+      "consequence": "ROOT3_TARGET_SCOPE_IS_ALREADY_CLOSED__ROOT2_MATCHED_PERFORMANCE_REMAINS_OPEN"
+    },
+    "three_family_fanout": {
+      "behavior_id": "EVIDENCE_TO_AUDIENCE_SYNTHESIS_001",
+      "families": [
+        {
+          "family": "PROFESSIONAL_KNOWLEDGE_WORK",
+          "target_entailment": "NOT_PROVED"
+        },
+        {
+          "family": "MULTIDISCIPLINARY_TOOL_AUGMENTED_REASONING",
+          "target_entailment": "NOT_PROVED"
+        },
+        {
+          "family": "AGENTIC_SCIENTIFIC_RESEARCH",
+          "target_entailment": "NOT_PROVED"
+        }
+      ],
+      "consequence": "REGISTRY_INCIDENCE_CANNOT_CREATE_A_MANDATORY_WHOLE_LEAF_TARGET_OBLIGATION"
+    },
+    "cut_theorem": "A universal proof over the entire EVIDENCE_TO_AUDIENCE_SYNTHESIS_001 input domain is terminal-load-bearing only if at least one frozen Opus-5.5 target obligation requires that whole domain. The Communication/Synthesis target requires exactly six dimensions whose target scope is already independently certified; the three other current fanout edges do not have target entailment. Therefore the broader universal input-domain root is not a current terminal obligation.",
+    "distinction": "NOT_REQUIRED_FOR_CURRENT_TARGET_DOES_NOT_MEAN_WHOLE_LEAF_SCOPE_COMPLETE"
+  },
+  "scheduler_effect": {
+    "delete": [
+      "SYNTHESIS_TYPED_INPUT_DOMAIN_SCOPE_COMPLETENESS_FROM_TERMINAL_SCOPE_REPAIR_FRONTIER",
+      "PROVE_UNIVERSAL_TOTALITY_OVER_EVERY_ADMISSIBLE_SYNTHESIS_BEHAVIOR_INPUT_AS_A_PREREQUISITE_TO_CURRENT_TARGET_FINALITY"
+    ],
+    "preserve": [
+      "SYNTHESIS_SCOPE_CERTIFICATE_V1_PREDICATE_LEVEL_ROOT3_CLOSURE",
+      "SYNTHESIS_MATCHED_QUALITY_COVERAGE_NONINFERIOR_ROOT2_PERFORMANCE_WORK",
+      "ALL_SIX_FROZEN_COMMUNICATION_AND_SYNTHESIS_TARGET_DIMENSIONS",
+      "FAMILY_LEVEL_OBSERVABLE_SCOPE_AUDITS_FOR_PROFESSIONAL_REASONING_AND_SCIENTIFIC_FAMILIES"
+    ],
+    "reopen_if": [
+      "A_FROZEN_TARGET_BEHAVIOR_EXPLICITLY_REQUIRES_THE_WHOLE_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_INPUT_DOMAIN",
+      "AN_INDEPENDENT_ENTAILMENT_RECEIPT_PROVES_THE_WHOLE_LEAF_IS_A_NECESSARY_OBSERVABLE_CONSEQUENCE_OF_A_CURRENT_TARGET",
+      "THE_COMMUNICATION_AND_SYNTHESIS_PROTOCOL_EXPANDS_BEYOND_THE_SIX_CURRENT_CERTIFIED_DIMENSIONS"
+    ],
+    "scope_repair_root_count_before": 6,
+    "scope_repair_root_count_after": 5,
+    "acceptance_predicate_count_delta": 0,
+    "family_acceptance_delta": 0
+  },
+  "remaining_scope_roots": [
+    "BROWSER_VISUAL_STATE_TO_GROUNDED_ACTION_001",
+    "CAD_DRAWING_TO_GLOBAL_SOLID_TOPOLOGY_AND_ENVELOPE_001",
+    "ITERATIVE_RESEARCH_EVIDENCE_CONTROL_001",
+    "PROFESSIONAL_ARTIFACT_PLAN_AND_QUALITY_JUDGMENT_001",
+    "SPECIFICATION_TO_INDEPENDENT_ACCEPTANCE_MODEL_001"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EVIDENCE_TO_AUDIENCE_SYNTHESIS_001_WHOLE_INPUT_DOMAIN_IS_SCOPE_COMPLETE",
+    "NO_CLAIM_SYNTHESIS_MATCHED_PERFORMANCE_IS_CLOSED",
+    "NO_REMOVAL_OF_ANY_EXPLICIT_TARGET_DIMENSION_OR_BENCHMARK_THRESHOLD",
+    "NO_FAMILY_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_LITERAL_TERMINAL_FINALITY_CLAIM"
+  ],
+  "validator": "canonical/runtime/synthesis_whole_leaf_target_obligation_cut_v1.py",
+  "tests": "canonical/tests/test_synthesis_whole_leaf_target_obligation_cut_v1.py",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
