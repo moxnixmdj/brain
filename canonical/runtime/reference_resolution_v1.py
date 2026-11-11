@@ -278,6 +278,43 @@ class Resolver:
         This is ContextTwin: nine blocks each containing the word 'Report'. Without the
         anchor there is no answer, only a guess.
         """
+        # THE ANCHOR MUST BE ON THE PAGE BEFORE ANYTHING INSIDE IT IS ANSWERED.
+        #
+        # Measured 2026-11-09 on `phone-book`: the contact book shows ONE contact at a
+        # time behind a pager (First, <, 1, >, Last). Asked for "Dominga's address" the
+        # resolver matched a block by area, found an address inside it -- a DIFFERENT
+        # person's address -- and returned status RESOLVED. The caller clicked it, the
+        # task scored 0, and the action string said "SCOPE:4955 Mccray L...". That is the
+        # r155 defect again: a status that says yes when the payload says no.
+        #
+        # If the anchor text is not present, there is nothing to scope into. Refuse and
+        # let the caller page or fail; never answer about a neighbouring record.
+        # A PAGINATED LIST IS SEARCHED BY TURNING ITS PAGES.
+        #
+        # Measured 2026-11-09 on `phone-book`: the contact book shows one record per page
+        # and the pager is First / < / 1 / > / Last. Walking ">" found 'Marielle' after
+        # three advances. Refusing outright fixed the wrong-answer bug but still failed
+        # the task; advancing until the anchor appears is what the sentence asks for.
+        # Bounded, and it stops the moment the anchor is visible.
+        if _norm(anchor) not in _norm(self.act.ev("(document.body||{}).innerText||''") or ""):
+            _nxt = ("(()=>{const b=[...document.querySelectorAll('button,a,div,span')]"
+                    ".filter(e=>/^[>\u203a\u2192]$|^next$/i.test((e.innerText||'').trim()));"
+                    "if(!b.length)return '';const r=b[b.length-1].getBoundingClientRect();"
+                    "if(r.width<=0||r.height<=0)return '';"
+                    "return (r.x+r.width/2)+','+(r.y+r.height/2)})()")
+            for _ in range(40):
+                _b = self.act.ev(_nxt)
+                if not _b:
+                    break
+                _x, _y = [float(v) for v in str(_b).split(",")]
+                self.act.click(_x, _y)
+                time.sleep(0.18)
+                if _norm(anchor) in _norm(self.act.ev(
+                        "(document.body||{}).innerText||''") or ""):
+                    break
+        if _norm(anchor) not in _norm(self.act.ev("(document.body||{}).innerText||''") or ""):
+            return {"status": "NOT_FOUND", "kind": "SCOPE",
+                    "reason": "ANCHOR_NOT_ON_PAGE", "anchor": anchor, "candidates": []}
         blocks = [b for b in self.tree(container)
                   if b["vis"] and b["a"] > 0 and _norm(anchor) in _norm(b["t"])]
         if not blocks:
@@ -312,8 +349,31 @@ class Resolver:
                         if sum(1 for d in named if (d["cx"], d["cy"]) == (c["cx"], c["cy"])) == 1]
                 inside = uniq[:1]
             if len(inside) == 1:
+                _c = dict(inside[0])
+                # carry a selector: the handler may read `this.getAttribute('class')`,
+                # so the element itself has to be the click target, not its centre.
+                # "their phone number" names the class `phone`; "their address" names
+                # `address`. Match the sentence's word against the page's own classes.
+                _words = [w for w in re.split(r"\W+", _norm(target)) if len(w) > 3]
+                _avail = self.act.ev(
+                    "(()=>[...document.querySelectorAll('#contact a')]"
+                    ".map(e=>e.getAttribute('class')||''))()") or []
+                _pick = None
+                for _w in _words:
+                    for _a in _avail:
+                        if _a and (_a == _w or _a.startswith(_w) or _w.startswith(_a)):
+                            _pick = _a
+                            break
+                    if _pick:
+                        break
+                if _pick:
+                    _c["sel"] = "document.querySelector('a.%s')" % _pick
+                else:
+                    _cls = (_c.get("declared") or "").strip()
+                    if _cls and " " not in _cls:
+                        _c["sel"] = "document.querySelector('a.%s')" % _cls
                 return {"status": "RESOLVED", "kind": "SCOPE", "by": "anchor+target",
-                        "choice": inside[0], "anchor_box": block, "n": 1}
+                        "choice": _c, "anchor_box": block, "n": 1}
             if len(inside) > 1:
                 inside.sort(key=lambda c: c["a"])
                 return {"status": "AMBIGUOUS", "kind": "SCOPE", "by": "anchor+target",
@@ -445,11 +505,24 @@ def plan_reference(goal: str) -> list[dict[str, Any]]:
     # "by <name>" / "from <name>" anchor and a later control verb, which is how the
     # instruction itself is written, and it defers entirely to resolve_scope, whose
     # anchor+target discipline refuses when the pair is not unique.
-    _m = re.search(r"\b(?:by|from)\s+([A-Z][A-Za-z'\-]+)\b", goal)
+    # THE ANCHOR IS INTRODUCED BY MORE THAN "by".
+    #
+    # Measured 2026-11-09 on `phone-book`: "Find Freddi in the contact book and click on
+    # their address." The anchor is Freddi, introduced by "Find X in", and the target is
+    # the address. The rule below only accepted "by" and "from", so this goal fell through
+    # to flat text resolution and returned NO_TEXT_MATCH on a page that lists Freddi's
+    # address in plain sight. "Find <name> in" is the same sentence shape.
+    # case matters here: the corpus writes "Find Dominga ..." with a capital F at the
+    # start of the instruction, and the pattern was lowercase without re.I, so the anchor
+    # matched nothing and the plan was empty. Same one-character class of defect as the
+    # missing colon in the flight sentences.
+    _m = re.search(r"\b(?:by|from)\s+([A-Z][A-Za-z'\-]+)\b", goal) \
+        or re.search(r"\bfind\s+([A-Z][A-Za-z'\-]+)\b", goal, re.I)
     if _m:
         _anchor = _m.group(1).strip(" ,.")
         _tail = goal[_m.end():].lower()
-        _tm = re.search(r"\b(?:the\s+)?([a-z]+(?:\s+[a-z]+)?)\s+(?:icon|button|link|field)\b", _tail)
+        _tm = re.search(r"\b(?:the\s+)?([a-z]+(?:\s+[a-z]+)?)\s+(?:icon|button|link|field)\b", _tail) \
+            or re.search(r"\b(?:their|his|her|its)\s+([a-z]+(?:\s+[a-z]+)?)\b", _tail)
         _tgt = (_tm.group(1).split()[-1] if _tm else None)
         if _tgt and _anchor.lower() not in ("the", "a", "an"):
             steps.append({"kind": "SCOPE", "anchor": _anchor, "target": _tgt})

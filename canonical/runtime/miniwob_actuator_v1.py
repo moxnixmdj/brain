@@ -149,7 +149,23 @@ class Actuator:
             self.call("Input.dispatchMouseEvent",
                       {"type": t, "x": float(x), "y": float(y), "button": "left", "clickCount": 1})
 
-    def click_el(self, selector_js: str) -> bool:
+    def click_el(self, selector_js: str, dom: bool = False) -> bool:
+        """Press the element a selector names.
+
+        A POINT IS NOT AN ELEMENT. Measured 2026-11-09 on `phone-book`: the handler is
+          $('#contact a').on('click', function(){
+            var correctProperty = expectedDetails.property === this.getAttribute('class') ...
+          })
+        It reads `this`, so it needs a real element as the target. A CDP mouse event at
+        the element's centre produces one -- the browser hit-tests it -- but a page that
+        re-renders between the box measurement and the event, or that delegates the
+        handler, can lose that link. `dom=True` dispatches click() directly on the element
+        that matches, which is the element the handler expects.
+        """
+        if dom:
+            return bool(self.ev(
+                "(()=>{const e=%s;if(!e)return false;e.click();return true})()"
+                % selector_js))
         b = self.box(selector_js)
         if not b:
             return False
@@ -920,7 +936,11 @@ def _resolve_and_click(act: Actuator, goal: str) -> str:
                                  (":" + str([h.get("reasons") for h in out.get("history", [])][:1]))
                                  if out.get("history") else "")
     c = out["choice"]
-    act.click(c["cx"], c["cy"])
+    # the handler may read `this`; when the choice carries a selector, click the element
+    if c.get("sel"):
+        act.click_el(c["sel"], dom=True)
+    else:
+        act.click(c["cx"], c["cy"])
     time.sleep(0.24)
     # a control that reveals a menu needs a second click on the revealed item
     if not episode_over(act):
