@@ -15,6 +15,10 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime.proof_atom_receipt_index_v2 import (
     ROOT,
     SEARCH_ROOTS,
+    EXCLUDED_BASENAMES,
+    EXCLUDED_BASENAME_PREFIXES,
+    EXCLUDED_REL_PATHS,
+    TEXT_SUFFIXES,
     _blob_sha,
     _candidate_files,
     _source_class,
@@ -41,8 +45,40 @@ def _canonical_digest(value: Any) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def _tracked_candidate_paths(root: Path) -> list[str]:
+    """Enumerate every HEAD-tracked text blob eligible for the V2 candidate scan."""
+    out: list[str] = []
+    for rel_root in SEARCH_ROOTS:
+        raw = _git(root, "ls-tree", "-r", "-z", "HEAD", "--", rel_root)
+        for record in raw.split("\0"):
+            if not record:
+                continue
+            try:
+                _meta, rel = record.split("\t", 1)
+            except ValueError as exc:
+                raise RuntimeError(f"INVALID_GIT_LS_TREE_RECORD:{record!r}") from exc
+            p = Path(rel)
+            if p.suffix.lower() not in TEXT_SUFFIXES:
+                continue
+            if rel in EXCLUDED_REL_PATHS or p.name in EXCLUDED_BASENAMES:
+                continue
+            if any(p.name.startswith(prefix) for prefix in EXCLUDED_BASENAME_PREFIXES):
+                continue
+            out.append(rel)
+    return sorted(set(out))
+
+
 def seal_candidate_universe(root: Path, files: Sequence[Path]) -> dict[str, Any]:
     """Bind every scanned candidate file to HEAD and hash the ordered manifest."""
+    scanned_paths = sorted(p.relative_to(root).as_posix() for p in files)
+    tracked_paths = _tracked_candidate_paths(root)
+    if scanned_paths != tracked_paths:
+        missing = sorted(set(tracked_paths) - set(scanned_paths))
+        extra = sorted(set(scanned_paths) - set(tracked_paths))
+        raise RuntimeError(
+            "CANDIDATE_UNIVERSE_NOT_EXHAUSTIVE:"
+            f"missing_tracked={missing}:extra_worktree={extra}"
+        )
     manifest: list[dict[str, Any]] = []
     for path in sorted(files, key=lambda p: p.relative_to(root).as_posix()):
         rel = path.relative_to(root).as_posix()
