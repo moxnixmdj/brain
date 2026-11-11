@@ -1,0 +1,1 @@
+{"overapprox_cnf":[],"routes":[{"admission_cnf":[["P3_STRICT_TOPLAW_REGION"]],"route_id":"P3_BOUND_BINARY_REAL_CONTEXT_GROUNDED_DECISION_TOP_LAW_V1"}],"schema":"PROJECT_BRAIN_UNIVERSAL_RESIDUAL_SPEC_V1","scope_id":"scope://project-brain/universal-escape-v1","variables":["P3_STRICT_TOPLAW_REGION"]}

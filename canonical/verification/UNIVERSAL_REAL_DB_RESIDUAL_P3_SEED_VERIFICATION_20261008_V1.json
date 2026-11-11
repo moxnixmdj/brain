@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_UNIVERSAL_REAL_DB_RESIDUAL_P3_SEED_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS__FIRST_REAL_VERIFIED_DB_REGION_BOUND_INTO_UNIVERSAL_RESIDUAL__SAT_COMPLEMENT_WITNESS__ZERO_GLOBAL_CREDIT",
+  "branch": "research/universal-residual-unsat-certificate-20261008-v1",
+  "exact_blobs": {
+    "adapter": {
+      "path": "canonical/runtime/p3_verified_region_residual_adapter_v1.py",
+      "git_blob_sha": "7bec1fe72fc5b1e428b9c56bb32a36e00dd64562"
+    },
+    "adapter_tests": {
+      "path": "canonical/tests/test_p3_verified_region_residual_adapter_v1.py",
+      "git_blob_sha": "d91473abb4db3e5df44e5ef8f0210f5cb49599bd"
+    },
+    "p3_region": {
+      "path": "canonical/governance/P3_BOUND_BINARY_REAL_CONTEXT_TOP_LAW_REGION_20261008_V1.json",
+      "git_blob_sha": "e367ff0a5734e2430b0b5476bf073b4688c410e1"
+    },
+    "p3_region_verification": {
+      "path": "canonical/verification/P3_BINARY_EXPLICIT_TOP_LAW_REGION_TWO_SPRITE_VERIFICATION_20261008_V1.json",
+      "git_blob_sha": "05dd31a787eccec0311c8abd26f21c624d4deb66"
+    },
+    "seed_spec": {
+      "path": "canonical/governance/UNIVERSAL_REAL_DB_RESIDUAL_P3_SEED_20261008_V1.json",
+      "git_blob_sha": "43c09d5e1bbee24efbbb7f62b3c7efe96b91835c",
+      "sha256": "a49c711bdd9679b08f3a3c7771995e23d5cb05d67d23bc48278bc28cfab719e1"
+    }
+  },
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "tests_passed": 5,
+      "tests_run": 5
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "tests_passed": 5,
+      "tests_run": 5,
+      "exact_branch_blobs_reloaded_before_test": true
+    }
+  ],
+  "proved": {
+    "real_region_atom_exactly_bound": true,
+    "atom_id": "P3_STRICT_TOPLAW_REGION",
+    "region_id": "P3_BOUND_BINARY_REAL_CONTEXT_GROUNDED_DECISION_TOP_LAW_V1",
+    "region_membership_not_caller_asserted": true,
+    "region_theorem_independently_verified": true,
+    "brain_owned_policy_bound": true,
+    "target_comparator_required": false,
+    "single_region_residual_semantics": "TOP_AND_NOT_P3_STRICT_TOPLAW_REGION"
+  },
+  "compiled_seed_result": {
+    "semantic_status": "SAT_ON_DECLARED_BOUNDED_MODEL",
+    "residual_sha256": "0ce6c66cf02527d5f2d8c175e39e1acafe17c728116d7627ad19137a31257762",
+    "dimacs_variable_count": 3,
+    "dimacs_clause_count": 5,
+    "residual_model": {
+      "P3_STRICT_TOPLAW_REGION": false
+    }
+  },
+  "interpretation": "THE_CURRENT_MACHINE_VISIBLE_ESCAPE_AFTER_SUBTRACTING_THIS_ONE_VERIFIED_PARAMETERIZED_DB_REGION_IS_EXACTLY_THE_ABSTRACT_COMPLEMENT_WHERE_P3_STRICT_TOPLAW_REGION_IS_FALSE__THIS_DOES_NOT_ASSERT_ANYTHING_ELSE_ABOUT_THAT_COMPLEMENT",
+  "hard_nonclaims": [
+    "NO_CLAIM_THE_P3_REGION_COVERS_FREE_FORM_OR_GENERAL_P3",
+    "NO_CLAIM_THE_SINGLE_ATOM_BASIS_IS_GLOBALLY_BACKWARD_COMPLETE",
+    "NO_CLAIM_THE_CURRENT_GLOBAL_RESIDUAL_HAS_ONLY_ONE_SEMANTIC_DIMENSION",
+    "NO_GLOBAL_R_UNSAT",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "next": "ADD_ONLY_NEXT_EXACT_BYTE_VERIFIED_PARAMETERIZED_DB_REGION_AS_A_NEW_BOUND_ATOM_AND_RECOMPUTE_THE_SAME_MONOTONE_RESIDUAL",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CURRENT_TERMINAL_AUTHORITY_UNIVERSAL_POINTER_INTEGRITY_TWO_SPRITE_VERIFICATION_V1",
+  "date": "2026-10-08",
+  "status": "PASS_ON_TWO_SPRITES__ONE_STALE_UNIVERSAL_PRIMITIVE_POINTER_REPAIRED__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY.json",
+      "git_blob_sha": "3d73433cd177afa603b6e96f93bdbc8cf708f132"
+    },
+    "test": {
+      "path": "canonical/tests/test_current_terminal_authority_universal_pointer_integrity_v1.py",
+      "git_blob_sha": "e9fdda067f15f04a4d19fa8139652d66bc04cd84"
+    }
+  },
+  "repair": {
+    "field": "authoritative_sources.universal_escape_resolver_v2_active_planning_overlay.primitive_u_frontier.git_blob_sha",
+    "before": "8ab5cd358f460ca649ec3b0ac8eea56e87d7f838",
+    "after": "8340829830dc81095abd4d643a8be6894a39f2f3",
+    "actual_bound_path": "canonical/governance/CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1.json",
+    "semantic_file_unchanged": true
+  },
+  "verified_pointer_set": [
+    "CURRENT_PRIMITIVE_U_FRONTIER_20261007_V1",
+    "TERMINAL_EXECUTION_ROOT_20261007_V1",
+    "ABOVE_EXPONENTIAL_U_SINGLE_PRIMITIVE_RECONCILIATION_20261007_V2",
+    "GDPVAL_EVALUATION_LAW_MINIMUM_INFORMATION_CUT_20261008_V1",
+    "GDPVAL_EVALUATOR_FACING_QUOTIENT_U_ROUTE_20261008_V1"
+  ],
+  "verification": [
+    {
+      "provider": "Sprites",
+      "sprite": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "red_before_repair": {
+        "tests_run": 1,
+        "tests_failed": 1,
+        "mismatch": "8ab5cd358f460ca649ec3b0ac8eea56e87d7f838 != 8340829830dc81095abd4d643a8be6894a39f2f3"
+      },
+      "green_after_repair": {
+        "tests_run": 1,
+        "tests_passed": 1
+      }
+    },
+    {
+      "provider": "Sprites",
+      "sprite": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "exact_branch_blobs_reloaded": true,
+      "tests_run": 1,
+      "tests_passed": 1
+    }
+  ],
+  "proved": [
+    "THE_FIVE_SELECTED_LIVE_UNIVERSAL_ROUTE_POINTERS_IN_THE_REPAIRED_AUTHORITY_MATCH_THEIR_EXACT_REPOSITORY_BYTES",
+    "THE_PRE_REPAIR_AUTHORITY_FAILED_EXACT_BYTE_INTEGRITY_ON_THE_PRIMITIVE_U_FRONTIER_POINTER",
+    "THE_REPAIR_CHANGES_ONLY_THE_STALE_DECLARED_BLOB_ID_AND_DOES_NOT_CHANGE_THE_PRIMITIVE_FRONTIER_SEMANTICS"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_EVERY_POINTER_IN_THE_ENTIRE_AUTHORITY_FILE_WAS_EXHAUSTIVELY_AUDITED",
+    "NO_CLAIM_ALL_INBOUND_REFERENCES_TO_THE_OLD_AUTHORITY_BLOB_HAVE_BEEN ENUMERATED",
+    "NO_U_EMPTY_ABC_D_FINALITY_OR_TERMINAL_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_credit_delta": 0
+  }
+}
