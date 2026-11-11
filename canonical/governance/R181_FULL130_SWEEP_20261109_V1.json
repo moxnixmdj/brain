@@ -1,0 +1,2377 @@
+{
+  "comparison_to_r180": {
+    "delta_passes": 4,
+    "delta_rate_percentage_points": 0.6153846153846176,
+    "delta_zero_pass_tasks": -3,
+    "interpretation": "The aggregate rate change is within the previously measured +/-2.7 pp single-run noise band; do not claim this round is a clear aggregate improvement. The form-sequence family improved substantially, while several other task counts moved down.",
+    "r180": {
+      "passes": 387,
+      "rate": 0.5953846153846154,
+      "trials": 650,
+      "zero_pass_tasks": 45
+    },
+    "tasks_down": 11,
+    "tasks_unchanged": 109,
+    "tasks_up": 10
+  },
+  "date": "2026-11-09",
+  "id": "R181_FULL130_SWEEP_20261109_V1",
+  "instrument": {
+    "exclusive_cdp_browser": true,
+    "page_identity_checked_per_repetition": true,
+    "repetitions_per_task": 5,
+    "run_id": "r181",
+    "runner": "/tmp/sweep.py",
+    "tasks": 130
+  },
+  "invalid": [],
+  "per_task": {
+    "ascending-numbers": {
+      "actions": [
+        "simon:none",
+        "simon:none",
+        "simon:none",
+        "simon:none",
+        "simon:none"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "bisect-angle": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "book-flight": {
+      "actions": [
+        "filled:origin=VEL;dest",
+        "filled:origin=BWG;dest",
+        "filled:origin=WBQ;dest",
+        "filled:origin=Oakland;",
+        "filled:origin=Newtok;d"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "book-flight-nodelay": {
+      "actions": [
+        "filled:origin=Chignik;",
+        "filled:origin=Hot Spri",
+        "filled:origin=TRI;dest",
+        "filled:origin=LBE;dest",
+        "filled:origin=Flint;de"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "button-delay": {
+      "actions": [
+        "delay:1.0",
+        "delay:2.0",
+        "delay:1.0",
+        "delay:2.0",
+        "delay:3.0"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "buy-ticket": {
+      "actions": [
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "chase-circle": {
+      "actions": [
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "choose-date": {
+      "actions": [
+        "date:06/18/2016",
+        "date:12/02/2016",
+        "date:01/27/2016",
+        "date:12/03/2016",
+        "date:02/01/2016"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "choose-date-easy": {
+      "actions": [
+        "date:12/14/2016",
+        "date:12/22/2016",
+        "date:12/16/2016",
+        "date:12/29/2016",
+        "date:12/30/2016"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "choose-date-medium": {
+      "actions": [
+        "date:11/15/2016",
+        "date:12/29/2016",
+        "date:12/23/2016",
+        "date:11/20/2016",
+        "date:12/30/2016"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "choose-date-nodelay": {
+      "actions": [
+        "date:06/26/2016",
+        "date:05/13/2016",
+        "date:11/05/2016",
+        "date:01/14/2016",
+        "date:09/13/2016"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "choose-list": {
+      "actions": [
+        "native",
+        "native",
+        "native",
+        "native",
+        "native"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "circle-center": {
+      "actions": [
+        "RELATION:",
+        "RELATION:",
+        "RELATION:",
+        "RELATION:",
+        "RELATION:"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        0.9151471862576144,
+        0.9426670177416312,
+        0.9214325798681614,
+        0.9357175653466775,
+        0.9242385591585842
+      ]
+    },
+    "click-button": {
+      "actions": [
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-button-sequence": {
+      "actions": [
+        "sole-button",
+        "sole-button",
+        "sole-button",
+        "sole-button",
+        "sole-button"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "click-checkboxes": {
+      "actions": [
+        "checkboxes:5",
+        "checkboxes:4",
+        "checkboxes:3",
+        "checkboxes:0",
+        "checkboxes:3"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-checkboxes-large": {
+      "actions": [
+        "checkboxes:7",
+        "checkboxes:7",
+        "checkboxes:5",
+        "checkboxes:11",
+        "checkboxes:8"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-checkboxes-soft": {
+      "actions": [
+        "checkboxes:0",
+        "checkboxes:2",
+        "checkboxes:1",
+        "checkboxes:1",
+        "checkboxes:1"
+      ],
+      "passes": 2,
+      "reps": 5,
+      "rewards": [
+        0.6666666666666666,
+        0.5,
+        -0.2,
+        0,
+        -0.3333333333333333
+      ]
+    },
+    "click-checkboxes-transfer": {
+      "actions": [
+        "checkboxes:3",
+        "checkboxes:0",
+        "checkboxes:2",
+        "checkboxes:2",
+        "checkboxes:0"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-collapsible": {
+      "actions": [
+        "expand-all-submit:1",
+        "expand-all-submit:1",
+        "expand-all-submit:1",
+        "expand-all-submit:1",
+        "expand-all-submit:1"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-collapsible-2": {
+      "actions": [
+        "expand-click:venenatis",
+        "expand-miss:nulla",
+        "expand-miss:aliquam",
+        "expand-miss:Aliquam",
+        "expand-miss:nunc"
+      ],
+      "passes": 1,
+      "reps": 5,
+      "rewards": [
+        1,
+        0,
+        -1,
+        0,
+        0
+      ]
+    },
+    "click-collapsible-2-nodelay": {
+      "actions": [
+        "expand-miss:Ac,",
+        "expand-miss:integer",
+        "expand-click:Maecenas",
+        "expand-miss:ipsum",
+        "expand-miss:Non"
+      ],
+      "passes": 1,
+      "reps": 5,
+      "rewards": [
+        -1,
+        0,
+        1,
+        -1,
+        0
+      ]
+    },
+    "click-collapsible-nodelay": {
+      "actions": [
+        "expand-all-submit:1",
+        "expand-all-submit:1",
+        "expand-all-submit:1",
+        "expand-all-submit:1",
+        "expand-all-submit:1"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-color": {
+      "actions": [
+        "resolved-click-done",
+        "resolved-click-done",
+        "resolved-click-done",
+        "resolved-click-done",
+        "resolved-click-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-dialog": {
+      "actions": [
+        "find-done",
+        "find-done",
+        "find-done",
+        "find-done",
+        "find-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-dialog-2": {
+      "actions": [
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-link": {
+      "actions": [
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-menu": {
+      "actions": [
+        "menu:3",
+        "menu:3",
+        "menu:2",
+        "menu:2",
+        "resolve-not_found:[[]]"
+      ],
+      "passes": 4,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "click-menu-2": {
+      "actions": [
+        "TEXT:Menu",
+        "TEXT:Menu",
+        "TEXT:Menu",
+        "TEXT:Menu",
+        "TEXT:Menu"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "click-option": {
+      "actions": [
+        "checkboxes:1",
+        "checkboxes:1",
+        "checkboxes:1",
+        "checkboxes:1",
+        "checkboxes:1"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-pie": {
+      "actions": [
+        "pie-miss:P",
+        "pie-miss:8",
+        "pie-click:R",
+        "pie-click:P",
+        "pie-click:f"
+      ],
+      "passes": 3,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-pie-nodelay": {
+      "actions": [
+        "pie-click:s",
+        "pie-miss:q",
+        "pie-click:n",
+        "pie-click:d",
+        "pie-click:u"
+      ],
+      "passes": 4,
+      "reps": 5,
+      "rewards": [
+        1,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-scroll-list": {
+      "actions": [
+        "multi:2",
+        "multi:1",
+        "multi:1",
+        "multi:1",
+        "multi:1"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-shades": {
+      "actions": [
+        "colour-name",
+        "colour-name",
+        "colour-name",
+        "colour-name",
+        "colour-name"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "click-shape": {
+      "actions": [
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "click-tab": {
+      "actions": [
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "click-tab-2": {
+      "actions": [
+        "tab-link",
+        "tab-link",
+        "tab-link",
+        "tab-link",
+        "tab-link"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-tab-2-easy": {
+      "actions": [
+        "tab-link",
+        "tab-link",
+        "tab-link",
+        "tab-link",
+        "tab-link"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-tab-2-hard": {
+      "actions": [
+        "tab-link",
+        "tab-link",
+        "tab-link",
+        "tabs",
+        "tab-link"
+      ],
+      "passes": 4,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        0,
+        1
+      ]
+    },
+    "click-tab-2-medium": {
+      "actions": [
+        "tab-done",
+        "tab-done",
+        "tab-done",
+        "tab-link",
+        "tab-link"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-test": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-test-2": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-test-transfer": {
+      "actions": [
+        "sole-done",
+        "click-miss",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 3,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        1,
+        1,
+        1
+      ]
+    },
+    "click-widget": {
+      "actions": [
+        "click-miss",
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-miss"
+      ],
+      "passes": 1,
+      "reps": 5,
+      "rewards": [
+        0,
+        -1,
+        -1,
+        1,
+        0
+      ]
+    },
+    "copy-paste": {
+      "actions": [
+        "copy-paste:43->ok",
+        "copy-paste:63->ok",
+        "copy-paste:82->ok",
+        "copy-paste:34->ok",
+        "copy-paste:46->ok"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "copy-paste-2": {
+      "actions": [
+        "copy-paste:65->ok",
+        "copy-paste:47->ok",
+        "copy-paste:48->ok",
+        "copy-paste:53->ok",
+        "copy-paste:53->ok"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "count-shape": {
+      "actions": [
+        "count:2",
+        "count:1",
+        "count:1",
+        "count:1",
+        "count:2"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "count-sides": {
+      "actions": [
+        "count-miss:0/NOBTN:",
+        "count-miss:0/NOBTN:",
+        "count-miss:0/NOBTN:",
+        "count-miss:0/NOBTN:",
+        "count-miss:0/NOBTN:"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "daily-calendar": {
+      "actions": [
+        "fill-no-controls",
+        "fill-no-controls",
+        "fill-no-controls",
+        "fill-no-controls",
+        "fill-no-controls"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "drag-box": {
+      "actions": [
+        "dragbox",
+        "dragbox",
+        "dragbox",
+        "dragbox",
+        "dragbox"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "drag-circle": {
+      "actions": [
+        "drag-dir:right",
+        "drag-dir:right",
+        "drag-dir:right",
+        "drag-dir:right",
+        "drag-dir:up"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "drag-cube": {
+      "actions": [
+        "cube-2@36",
+        "cube-2@36",
+        "cube-miss-1",
+        "cube-2@36",
+        "cube-6@0"
+      ],
+      "passes": 1,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "drag-items": {
+      "actions": [
+        "drag-pos:nedda->2",
+        "drag-pos:dianemarie->3",
+        "drag-rel:corlydown1",
+        "drag-bottom:celinda",
+        "drag-pos:bert->5"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        0,
+        -1,
+        -1
+      ]
+    },
+    "drag-items-grid": {
+      "actions": [
+        "drag-dir:left",
+        "drag-not-understood",
+        "drag-dir:left",
+        "drag-dir:left",
+        "drag-dir:right"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "drag-shapes": {
+      "actions": [
+        "dragshapes",
+        "dragshapes",
+        "dragshapes",
+        "dragshapes",
+        "dragshapes"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "drag-shapes-2": {
+      "actions": [
+        "drag-dir:left",
+        "drag-dir:left",
+        "drag-dir:left",
+        "drag-dir:left",
+        "drag-dir:left"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "drag-single-shape": {
+      "actions": [
+        "drag-dir:right",
+        "drag-dir:right",
+        "drag-dir:left",
+        "drag-dir:up",
+        "drag-dir:left"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "drag-sort-numbers": {
+      "actions": [
+        "sort-asc:2-moves",
+        "sort-asc:1-moves",
+        "sort-asc:6-moves",
+        "sort-asc:3-moves",
+        "sort-asc:6-moves"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "draw-circle": {
+      "actions": [
+        "draw-horizontal",
+        "draw-horizontal",
+        "draw-horizontal",
+        "draw-horizontal",
+        "draw-horizontal"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -0.25,
+        -0.25,
+        -0.25,
+        -0.25,
+        -0.25
+      ]
+    },
+    "draw-line": {
+      "actions": [
+        "draw-vertical",
+        "draw-vertical",
+        "draw-horizontal",
+        "draw-vertical",
+        "draw-vertical"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox": {
+      "actions": [
+        "email-reply:Juana",
+        "email-forward:Amelie",
+        "email-reply:Anthia",
+        "email-star:Hildagarde",
+        "email-reply:Margery"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-delete": {
+      "actions": [
+        "email-delete:Lynda",
+        "email-delete:Sally",
+        "email-delete:Bryn",
+        "email-delete:Brietta",
+        "email-delete:Sella"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-forward": {
+      "actions": [
+        "email-forward:Clara",
+        "email-forward:Elyssa",
+        "email-forward:Sisile",
+        "email-forward:Barbi",
+        "email-forward:Lilith"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-forward-nl": {
+      "actions": [
+        "email-forward:Isobel",
+        "email-forward:Annabell",
+        "email-forward:Kristin",
+        "email-forward:Malory",
+        "email-forward:Nadine"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-forward-nl-turk": {
+      "actions": [
+        "email-forward:Nicky",
+        "email-forward:Jessi",
+        "email-forward:Katya",
+        "email-forward:Sheeree",
+        "email-no-verb"
+      ],
+      "passes": 4,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    "email-inbox-important": {
+      "actions": [
+        "email-star:Bidget",
+        "email-star:Joanie",
+        "email-star:Aline",
+        "email-star:Holly",
+        "email-star:Audy"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-nl-turk": {
+      "actions": [
+        "email-reply:Benni",
+        "email-reply:Xylina",
+        "email-star:Kelly",
+        "email-delete:Kamillah",
+        "email-reply:Joyan"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-noscroll": {
+      "actions": [
+        "email-forward:Carri",
+        "email-star:Talia",
+        "email-star:Bernice",
+        "email-delete:Timmie",
+        "email-star:Alyson"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-reply": {
+      "actions": [
+        "email-reply:Anallese",
+        "email-reply:Wileen",
+        "email-reply:Olia",
+        "email-reply:Cassey",
+        "email-reply:Abigale"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "email-inbox-star-reply": {
+      "actions": [
+        "email-star:Emelita",
+        "email-star:Laina",
+        "email-reply:Brittany",
+        "email-star:Susann",
+        "email-star:Sam"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "enter-date": {
+      "actions": [
+        "type-date:2014-07-24",
+        "type-date:2013-03-17",
+        "type-date:2016-12-14",
+        "type-date:2010-12-14",
+        "type-date:2015-06-21"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "enter-password": {
+      "actions": [
+        "type-both:2",
+        "type-both:2",
+        "type-both:2",
+        "type-both:2",
+        "type-both:2"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "enter-text": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "enter-text-2": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "enter-text-dynamic": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "enter-time": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "find-greatest": {
+      "actions": [
+        "findval:15-of-3",
+        "findval:13-of-3",
+        "findval:9-of-3",
+        "findval:14-of-3",
+        "findval:18-of-3"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "find-midpoint": {
+      "actions": [
+        "find-done",
+        "find-done",
+        "find-done",
+        "find-done",
+        "find-done"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "find-word": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "focus-text": {
+      "actions": [
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "focus-text-2": {
+      "actions": [
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT"
+      ],
+      "passes": 2,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ]
+    },
+    "form-sequence": {
+      "actions": [
+        "formseq:slider=10|cb=1",
+        "formseq:slider=6|cb=1/",
+        "formseq:slider=-6|cb=1",
+        "formseq:slider=9|cb=1/",
+        "formseq:slider=-2|cb=1"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "form-sequence-2": {
+      "actions": [
+        "formseq:radio=1|text=2",
+        "formseq:radio=1|text=3",
+        "formseq:radio=1|text=0",
+        "formseq:radio=1|text=2",
+        "formseq:radio=1|text=4"
+      ],
+      "passes": 4,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        -1,
+        1
+      ]
+    },
+    "form-sequence-3": {
+      "actions": [
+        "formseq-miss:select=6 ",
+        "formseq-miss:select=6f",
+        "formseq-miss:select=6 ",
+        "formseq-miss:select=6 ",
+        "formseq-miss:select=5f"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "generate-number": {
+      "actions": [
+        "generated:5",
+        "generated:6",
+        "generated:4",
+        "generated:2",
+        "generated:6"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "grid-coordinate": {
+      "actions": [
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "guess-number": {
+      "actions": [
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "highlight-text": {
+      "actions": [
+        "highlight:31",
+        "highlight:31",
+        "highlight:28",
+        "highlight:33",
+        "highlight:18"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "highlight-text-2": {
+      "actions": [
+        "highlight:45",
+        "highlight:35",
+        "highlight:30",
+        "highlight:29",
+        "highlight:33"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "hot-cold": {
+      "actions": [
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "hover-shape": {
+      "actions": [
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "identify-shape": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 1,
+      "reps": 5,
+      "rewards": [
+        -1,
+        1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "login-user": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "login-user-popup": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "moving-items": {
+      "actions": [
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss",
+        "click-miss"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "multi-layouts": {
+      "actions": [
+        "filled:genre=fantasy;d",
+        "filled:genre=urban;dir",
+        "filled:genre=comedy;di",
+        "filled:genre=paranoid;",
+        "filled:genre=paranoid;"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "multi-orderings": {
+      "actions": [
+        "filled:genre=saga;dire",
+        "filled:genre=comedy;di",
+        "filled:genre=surreal;d",
+        "filled:genre=romance;d",
+        "filled:genre=saga;dire"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "navigate-tree": {
+      "actions": [
+        "resolve-not_found:[['N",
+        "resolve-not_found:[['N",
+        "find-done",
+        "resolve-not_found:[['N",
+        "find-done"
+      ],
+      "passes": 2,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    "number-checkboxes": {
+      "actions": [
+        "draw-line-miss",
+        "draw-line-miss",
+        "draw-line-miss",
+        "draw-line-miss",
+        "draw-line-miss"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "odd-or-even": {
+      "actions": [
+        "oddeven:3",
+        "oddeven:3",
+        "oddeven:3",
+        "oddeven:3",
+        "oddeven:3"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "order-food": {
+      "actions": [
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "phone-book": {
+      "actions": [
+        "find-done",
+        "find-done",
+        "find-done",
+        "resolve-not_found:[['T",
+        "find-done"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -0.39999999999999997,
+        -0.39999999999999997,
+        -0.39999999999999997,
+        0,
+        -0.39999999999999997
+      ]
+    },
+    "read-table": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "read-table-2": {
+      "actions": [
+        "type-labels:2",
+        "type-labels:2",
+        "type-labels:2",
+        "type-labels:2",
+        "type-labels:2"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "resize-textarea": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "right-angle": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done",
+        "sole-done"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "scroll-text": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ]
+    },
+    "scroll-text-2": {
+      "actions": [
+        "scroll-bottom",
+        "scroll-bottom",
+        "scroll-bottom",
+        "scroll-top",
+        "scroll-bottom"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "search-engine": {
+      "actions": [
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "sign-agreement": {
+      "actions": [
+        "sole-done",
+        "sole-done",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT",
+        "self-grading:NO_SUBMIT"
+      ],
+      "passes": 2,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    "simon-says": {
+      "actions": [
+        "simon:2,1,3,2,3",
+        "simon:2,2,4",
+        "simon:2,3,1",
+        "simon:3,3,2",
+        "simon:4,1,3"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "simple-algebra": {
+      "actions": [
+        "computed:20 (solved x=",
+        "computed:39 (solved x=",
+        "computed:53 (solved x=",
+        "computed:83 (solved x=",
+        "computed:90 (solved x="
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "simple-arithmetic": {
+      "actions": [
+        "computed:10 (evaluated",
+        "computed:-6 (evaluated",
+        "computed:54 (evaluated",
+        "computed:-5 (evaluated",
+        "computed:-4 (evaluated"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "social-media": {
+      "actions": [
+        "social-click:reply/@va",
+        "social-click:embed/@la",
+        "social-click:embed/@ka",
+        "social-click:report/@l",
+        "social-click:block-use"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "social-media-all": {
+      "actions": [
+        "social:like/@aliquam/4",
+        "social:like/@amet/3",
+        "social:share/@nieves/5",
+        "social:reply/@praesent",
+        "social:reply/@renda/2"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "social-media-some": {
+      "actions": [
+        "social:share/@alan/2",
+        "social:share/@ashlea/1",
+        "social:retweet/@jerald",
+        "social:reply/@odio/1",
+        "social:share/@iaculis/"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "stock-market": {
+      "actions": [
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "terminal": {
+      "actions": [
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED",
+        "REFUSED"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    "text-editor": {
+      "actions": [
+        "sole-done",
+        "sole-button",
+        "sole-button",
+        "sole-button",
+        "sole-button"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "text-transform": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "tic-tac-toe": {
+      "actions": [
+        "fill-no-controls",
+        "fill-no-controls",
+        "fill-no-controls",
+        "fill-no-controls",
+        "fill-no-controls"
+      ],
+      "passes": 0,
+      "reps": 5,
+      "rewards": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "unicode-test": {
+      "actions": [
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done",
+        "click-done"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "use-autocomplete": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 2,
+      "reps": 5,
+      "rewards": [
+        1,
+        -1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "use-autocomplete-nodelay": {
+      "actions": [
+        "type",
+        "type",
+        "type",
+        "type",
+        "type"
+      ],
+      "passes": 4,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        -1
+      ]
+    },
+    "use-colorwheel": {
+      "actions": [
+        "colour-name",
+        "colour-name",
+        "colour-name",
+        "colour-name",
+        "colour-name"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        0.588235294117647,
+        0.5294117647058825,
+        0.6954248366013072,
+        0.792156862745098,
+        0.7607843137254902
+      ]
+    },
+    "use-colorwheel-2": {
+      "actions": [
+        "colourhex",
+        "colourhex",
+        "colourhex",
+        "colourhex",
+        "colourhex"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "use-slider": {
+      "actions": [
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]",
+        "resolve-not_found:[[]]"
+      ],
+      "passes": 1,
+      "reps": 5,
+      "rewards": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1
+      ]
+    },
+    "use-slider-2": {
+      "actions": [
+        "sliders",
+        "sliders",
+        "sliders",
+        "sliders",
+        "sliders"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "use-spinner": {
+      "actions": [
+        "spinner",
+        "spinner",
+        "spinner",
+        "spinner",
+        "spinner"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "visual-addition": {
+      "actions": [
+        "computed:11 (counted 7",
+        "computed:8 (counted 3+",
+        "computed:19 (counted 1",
+        "computed:6 (counted 4+",
+        "computed:14 (counted 6"
+      ],
+      "passes": 5,
+      "reps": 5,
+      "rewards": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "result": {
+    "invalid_page_identity_repetitions": 0,
+    "passes": 391,
+    "rate": 0.6015384615384616,
+    "trials": 650,
+    "zero_pass_tasks": 42
+  }
+}
