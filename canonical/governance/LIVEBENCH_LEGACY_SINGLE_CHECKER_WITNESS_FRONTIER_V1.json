@@ -1,0 +1,57 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_SINGLE_CHECKER_WITNESS_FRONTIER_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__25_OF_25_REGISTERED_LEGACY_FAMILIES_HAVE_DETERMINISTIC_SINGLE_CHECKER_WITNESS_ROUTES__EXACT_SCORER_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Close the asymmetric release-agnostic construction gap by adding a deterministic witness route for every active pinned legacy IFEval checker family, using only prompt-visible parameters recovered by the legacy inverter.",
+  "pinned_source": {
+    "repository": "LiveBench/LiveBench",
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_git_blob_sha": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_git_blob_sha": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_git_blob_sha": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b"
+  },
+  "implementation": {
+    "runtime": "canonical/runtime/livebench_legacy_single_checker_witness_v1.py",
+    "tests": "canonical/tests/test_livebench_legacy_single_checker_witness_v1.py",
+    "registered_family_routes": "25_OF_25",
+    "scope": "SINGLE_CHECKER_ONLY",
+    "terminal_data_used": false,
+    "hidden_kwargs_used": false,
+    "model_dependency_count": 0
+  },
+  "constructive_breakthrough": [
+    "LEGACY_PARAMETER_INVERSION_NO_LONGER_ENDS_AT_A_PARSE_TREE; EVERY_ACTIVE_REGISTERED_FAMILY_NOW_HAS_AN_EXECUTABLE_CANDIDATE_RESPONSE_CONSTRUCTOR",
+    "THE_PREVIOUS_RELEASE_AGNOSTIC_ASYMMETRY_MODERN_CONSTRUCTORS_VS_LEGACY_PARSE_ONLY_IS_REMOVED_AT_THE_SINGLE_CHECKER_LAYER",
+    "EXACT_SCORER_EXECUTION_CAN_NOW_FALSIFY_OR_VERIFY_25_FAMILY_CONSTRUCTION_DIRECTLY_WITHOUT_TERMINAL_CASE_CONTENT"
+  ],
+  "remaining_load_bearing_gates": [
+    "INDEPENDENTLY_RUN_EACH_CONSTRUCTOR_AGAINST_THE_EXACT_PINNED_LEGACY_CHECKER_IMPLEMENTATION",
+    "VERIFY_LANGUAGE_SAMPLES_UNDER_THE_PINNED_langdetect_DEPENDENCY",
+    "COMPOSE_MULTIPLE_SIMULTANEOUS_CHECKERS_WITH_CONFLICT_AWARE_SEARCH_AND_EXACT_POSTVALIDATION",
+    "DO_NOT_TRANSFER_PUBLIC_OR_SYNTHETIC_PASS_RATES_TO_THE_OFFICIAL_2026_COMPARATOR_WITHOUT_ADMISSIBLE POPULATION AUTHORITY",
+    "KEEP_SCORE_ONLY_EVIDENCE_SEPARATE_FROM_GENERAL_SEMANTIC_CAPABILITY_CREDIT"
+  ],
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_25_CANDIDATES_ALREADY_PASS_EXACT_CHECKERS",
+    "NO_MULTI_CHECKER_COMPOSITION_CLAIM",
+    "NO_OFFICIAL_2026_POPULATION_IDENTITY_CLAIM",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_NEW_TERMINAL_CASE_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
