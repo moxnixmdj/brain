@@ -1,0 +1,27 @@
+{
+  "schema": "PROJECT_BRAIN_PROOF_ATOM_CANDIDATE_UNIVERSE_COVERAGE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE__EXPLICIT_NEGATIVE_SEARCH_COVERAGE_BOUNDARY__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "objective": "Prevent sealed proof-atom zero-match results from being overread as corpus-wide absence by proving the exact configured candidate boundary and separately reporting oversize supported text, unsupported suffixes, and scan gaps.",
+  "runtime": "canonical/runtime/proof_atom_candidate_universe_coverage_v1.py",
+  "tests": "canonical/tests/test_proof_atom_candidate_universe_coverage_v1.py",
+  "source_index": "canonical/runtime/proof_atom_receipt_index_v2.py",
+  "source_snapshot": "canonical/runtime/proof_atom_receipt_snapshot_v1.py",
+  "hard_rules": [
+    "CONFIGURED_CANDIDATE_SELECTION_MUST_MATCH_INDEXER_EXACTLY",
+    "NON_UTF8_OR_UNREADABLE_CONFIGURED_CANDIDATE_FAILS_CLOSED",
+    "OVERSIZE_SUPPORTED_TEXT_MUST_BE_EXPLICIT_AND_BLOCK_SUPPORTED_TEXT_NEGATIVE_EXHAUSTIVENESS",
+    "UNSUPPORTED_SUFFIX_MUST_BE_EXPLICIT_AND_BLOCK_FULL_SEARCH_ROOT_NEGATIVE_EXHAUSTIVENESS",
+    "PROVENANCE_RESTATEMENT_EXCLUSIONS_REMAIN_EXPLICITLY_QUARANTINED",
+    "POSITIVE_LITERAL_MATCHES_REMAIN_CANDIDATE_POINTERS_ONLY",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "breakthrough": "SPLIT_NEGATIVE_SEARCH_AUTHORITY_INTO_CONFIGURED_CANDIDATE__SUPPORTED_TEXT__AND_FULL_SEARCH_ROOT_SCOPES__NO_SILENT_SCOPE_WIDENING",
+  "next": "INDEPENDENTLY_VERIFY_EXACT_RUNTIME_AND_TEST_BYTES__RUN_ON_THE_SAME_CLEAN_MAIN_COMMIT_AS_THE_SEALED_RECEIPT_SNAPSHOT__IF_SUPPORTED_TEXT_EXHAUSTIVENESS_IS_TRUE_THEN_FREEZE_ZERO_MATCH_CLAIMS_AT_THAT_SCOPE_ONLY__IF_FALSE_ROUTE_ONLY_THE_EXPLICIT_OVERSIZE_OR_SCAN_GAP_SET",
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
