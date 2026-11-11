@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_WHOLE_FAMILY_OWNERSHIP_CANDIDATE_V1",
+  "date": "2026-10-03",
+  "status": "CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "current_ownership_state": "OWNED_COMPONENT_NOT_FULL_FAMILY",
+  "proposed_state": "VERIFIED_OWNED_EQUAL_OR_BETTER",
+  "ownership_basis": {
+    "brain_owned_whole_scope_runtime": {
+      "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+    },
+    "universal_scope_verification": {
+      "path": "canonical/verification/DELEGATION_V4_UNIVERSAL_SCOPE_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "955ac8f4bd0db2527bfbb465fc8252df6d916156"
+    },
+    "acceptance_verification": {
+      "path": "canonical/verification/DELEGATION_ACCEPTANCE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "git_blob_sha": "d04f2a8c5594d261158835db1cae3822411b6b23"
+    },
+    "terminal_ceiling_witness": {
+      "path": "canonical/governance/DELEGATION_ACCEPTANCE_CEILING_WITNESS_V1.json",
+      "git_blob_sha": "cb3b7c4b6c4e1f2a0471c6b6be72c4ca9ebddc80"
+    },
+    "whole_dimension_verification": {
+      "path": "canonical/verification/DELEGATION_WHOLE_DIMENSION_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "ae24117149e6acdcc8c4db977f8460b89480f0b2"
+    },
+    "structural_variety_verification": {
+      "path": "canonical/verification/DELEGATION_STRUCTURAL_VARIETY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "c99c1fba7f006e065937b4a272d346efbbe2cb49"
+    },
+    "dynamic_reassignment_verification": {
+      "path": "canonical/verification/DYNAMIC_DELEGATION_REASSIGNMENT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+      "git_blob_sha": "b05d5dd02c741bad2dcabc05b82d94f36ae413ea"
+    }
+  },
+  "required_ownership_tests": {
+    "brain_owned_operative_mechanism": true,
+    "external_model_or_api_required": false,
+    "donor_runtime_required": false,
+    "frozen_acceptance_scope_complete": true,
+    "acceptance_equal_or_better": true,
+    "no_hidden_oracle_import": true,
+    "adaptive_reassignment_covered": true,
+    "multiworker_greater_than_two_covered": true,
+    "dependency_resource_evidence_fanin_covered": true
+  },
+  "hard_nonclaims": [
+    "NO_OWNERSHIP_CREDIT_FROM_THIS_CANDIDATE_WITHOUT_INDEPENDENT_VERIFICATION",
+    "NO_NEW_ACCEPTANCE_CREDIT",
+    "NO_FRESH_REALITY",
+    "NO_AUTONOMOUS_WAKE_CLAIM_OUTSIDE_FROZEN_OPUS55_FAMILY_SCOPE",
+    "NO_COGNITIVE_QUALITY_CLAIM_BEYOND_FROZEN_DELEGATION_PROTOCOL"
+  ],
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
