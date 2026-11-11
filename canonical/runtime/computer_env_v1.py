@@ -809,9 +809,28 @@ def _verify_plan(plan: Sequence[str], suffix: str, target: str,
     env = None
     try:
         from canonical.runtime import program_synthesis_v1 as ps
-        env = ComputerEnv()
+        # RE-VERIFY ON THE SAME INPUT THE PLAN IS SUPPOSED TO ACT ON.
+        #
+        # This constructed ComputerEnv() with no seed, so the plan was replayed against
+        # the default one-line sandbox file and then compared to the caller's real input.
+        # Measured 2026-11-09: a plan that closed on a 7-line file was recalled, replayed
+        # on a 1-line file, compared to the 7-line source, and rejected -- so recall could
+        # never return, from_memory was always False, and each repeat reported
+        # PASS__SINGLE_ACTION_FOUND_AND_VERIFIED with actions_tried=36 as though it had
+        # searched. The speed came from the fingerprint cache, not from memory of the plan.
+        env = ComputerEnv(seed_file=seed_file)
+        # THE REPLAY MUST BE TOLD THE GOAL, OR IT INVENTS A DIFFERENT COMMAND.
+        #
+        # Without goal=, invocation_shapes proposes no goal-derived flags, so a plan
+        # learned as `sort --unique {input}` was replayed as plain `sort {input}`, which
+        # sorts and does not deduplicate. The bytes were then correctly rejected and
+        # recall could never match -- measured 2026-11-09, deduplicate closed in 5.7 s
+        # and every repeat reported PASS__SINGLE_ACTION_FOUND_AND_VERIFIED with
+        # from_memory False. This is the THIRD call site where a parameter was added and
+        # not followed; the first was _verify_plan's own signature, the second was its
+        # seed. A plan's meaning depends on the goal that produced it.
         env.register(program_actions(env, programs=list(programs),
-                                     target=target))
+                                     target=target, goal=goal))
         for step in plan:
             env.act(step)
         out = env.root / target
@@ -1077,13 +1096,25 @@ def _single_step(programs: Sequence[str], suffix: str, target: str,
 
 
 def _recipe_of(plan: Sequence[str], suffix: str, target: str,
-               programs: Sequence[str]) -> dict[str, Any] | None:
-    """Replay the winning plan and keep the exact command that did it."""
+               programs: Sequence[str], goal: str | None = None,
+               seed_file: str | pathlib.Path | None = None
+               ) -> dict[str, Any] | None:
+    """Replay the winning plan and keep the exact command that did it.
+
+    THE RECIPE IS THE ONLY PART OF THIS SYSTEM THAT LEAVES THE SANDBOX, SO IT MUST
+    BE THE COMMAND THAT ACTUALLY DID THE JOB.
+
+    This replayed with no seed and no goal, so on a deduplication goal learned as
+    `sort --unique {input}` it re-derived plain `sort {input}` and reported THAT as
+    the winning command -- measured 2026-11-09, the stored recipe could not deduplicate
+    anything while the pass it accompanied was genuine. The pass was right and the
+    receipt was wrong, which is worse than useless: it is the thing a caller would run.
+    """
     env = None
     try:
-        env = ComputerEnv()
+        env = ComputerEnv(seed_file=seed_file)
         env.register(program_actions(env, programs=list(programs),
-                                     target=target))
+                                     target=target, goal=goal))
         for step in plan:
             env.act(step)
         for step in reversed(plan):
@@ -1809,9 +1840,19 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
             plan = list(row.get("plan") or [])
             if not plan:
                 continue
-            good, why = _verify_plan(plan, suffix, target, progs)
+            # RECALL MUST RE-VERIFY WITH THE SAME RULES THE SEARCH USED.
+            #
+            # This call passed no goal, so every recalled .txt plan was checked by
+            # carries_content_evidence, which is hard-False for .txt and must stay so.
+            # Recall therefore could NEVER succeed for a text-relation goal: measured
+            # 2026-11-09, a goal closed in 1.27 s was re-found in 0.10 s by searching
+            # again, reported from_memory=False, and never once took the recall path.
+            # The parameter was added at the SEARCH call site in r151 and missed here,
+            # which is why the symptom was a speedup instead of a replay.
+            good, why = _verify_plan(plan, suffix, target, progs,
+                                     goal=gap, seed_file=seed_file)
             if good:
-                return plan, why, _recipe_of(plan, suffix, target, progs)
+                return plan, why, _recipe_of(plan, suffix, target, progs, goal=gap, seed_file=seed_file)
         return None
 
     def keep(plan: list[str], status: str, why: str) -> None:
@@ -1920,7 +1961,7 @@ def _discover_impl(gap: str, budget: int = 120, seed: int = 11,
             forget_misses()
             return {"closed": True, "status": outcome.get("status"),
                     "plan": plan, "suffix": suffix, "target": target,
-                    "recipe": _recipe_of(plan, suffix, target, progs),
+                    "recipe": _recipe_of(plan, suffix, target, progs, goal=gap, seed_file=seed_file),
                     "actions_tried": tried, "verification": why,
                     "banned": sorted(banned), "from_memory": False,
                     "detail": "found it by acting: %s" % ", ".join(plan)}
