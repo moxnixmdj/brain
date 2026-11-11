@@ -1,0 +1,43 @@
+{
+  "schema": "PROJECT_BRAIN_R168_THE_INSTRUCTION_CONTAINS_THE_WORD_IT_NAMES_V1",
+  "date": "2026-11-09",
+  "rounds": "r166-r168",
+  "family": "COMPUTER_AND_BROWSER_USE",
+  "headline": {
+    "all_130": {"before": "122/390 = 0.3128", "after": "138/390 = 0.3538", "delta": "+4.10 pp"},
+    "heldout_90": {"before": "52/270 = 0.1926", "after": "64/270 = 0.2370", "delta": "+4.44 pp"},
+    "seen_40": {"before": "70/120 = 0.5833", "after": "74/120 = 0.6167", "delta": "+3.33 pp"},
+    "reading": "All three moved together, and the largest moves are on held-out tasks the tuning never touched. That is the signature of capability, not of a tuning-set artefact."
+  },
+  "the_significance_test_i_ran_against_my_own_result": {
+    "method": "paired per-task difference on the 90 held-out tasks",
+    "mean": "+0.0444", "se": "0.0231", "t": 1.93, "threshold": 1.98,
+    "ci95": "[-0.0013, +0.0901]",
+    "tasks_up": 7, "tasks_down": 3, "unchanged": 80,
+    "honest_verdict": "NOT significant at p<0.05 at this sample size. The aggregate gain cannot yet be separated from noise. The individual fixes below are verified separately at 8-10 reps with page identity checked and those stand on their own."
+  },
+  "the_three_defects_and_why_they_took_three_rounds": {
+    "1_the_shape_is_not_text": "candidates() queries button,a,li,div,span,input,label -- an SVG <circle> is not in it. Geometry now read from circle/rect/image/svg/polygon.",
+    "2_the_canvas_is_also_geometry": "that list holds both the <svg> (20800 px) and the <circle> (784 px). Taking the first picked the canvas. The smallest visible element is the draggable.",
+    "3_the_sentence_contains_the_word_it_names": "'Drag the circle left...' matched 'Drag the circle left then press Submit.' at (80,25) -- the #query instruction div -- and the code dragged the instruction. Excluding the page's own #query box was worth BOTH remaining drag tasks.",
+    "why_three_rounds": "Each was found by PRINTING WHAT THE CODE CHOSE, not by reasoning about it. Every round I reasoned instead, I changed the wrong thing and the number stayed at zero."
+  },
+  "gesture_defect_affecting_the_whole_family": {
+    "statement": "Input.dispatchMouseEvent defaults `buttons` to 0. jQuery UI Sortable's _mouseMove returns early unless the button is reported held, so every move looked like a hover.",
+    "evidence": "before ['Annora','Allys','Johnette','Belle','Roxi'] -> after ['Allys','Annora','Johnette','Belle','Roxi'] once buttons:1 is set",
+    "scope": "all 8 drag tasks scored 0/24 before this"
+  },
+  "verified_individually_at_high_rep": {
+    "drag-circle": "0/30 -> 8/8",
+    "drag-single-shape": "0/30 -> 8/8",
+    "drag-sort-numbers": "0/30 -> 10/10 (bubble sort by adjacent drags; placement by absolute target gave 1/10)",
+    "drag-items": "0/30 -> 6/12"
+  },
+  "still_zero_and_why": {
+    "drag-box": "runs the #draggableSmall/#draggableLarge path and scores 0 -- the two-box containment shape is not solved",
+    "drag-items-grid": "'Drag Amara to the bottom right' is a 2-D destination and only 1-D is implemented",
+    "table/read+compute (6 tasks)": "0/18, untouched this round",
+    "expand-then-click menu/pie (8 tasks)": "4/24, untouched this round"
+  },
+  "zero_credit_terminal": true
+}
