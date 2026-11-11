@@ -1,0 +1,88 @@
+{
+  "schema": "PROJECT_BRAIN_UNKNOWN_DOMAIN_V2_ADMISSIBLE_UNIVERSAL_PROOF_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__EXACT_FROZEN_V2__UNIVERSAL_OVER_ADMISSIBLE_EVALUATOR_DOMAIN__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "UNKNOWN_DOMAIN_UNCOVERED_TRANSFER_AUDIT",
+  "proof_kind_if_independently_verified_and_reduced": "SCOPE_COMPLETE_STRONGER_PROOF",
+  "exact_subjects": {
+    "candidate_v1_git_blob_sha": "a2a77269a8175ce315b466035049da0f761b8734",
+    "candidate_v2_git_blob_sha": "4470716f95a559a700e461262df909ae19a41651",
+    "generator_v1_git_blob_sha": "f974a4594c78e74693c7ba5a19f131dfa481b937",
+    "generator_v2_git_blob_sha": "d077028c9bde534dc4bc6eb0d1f776341f9d59f8",
+    "hidden_scorer_git_blob_sha": "e8cf5d1b5d311644725a751c15e6235958fb587d",
+    "execution_harness_git_blob_sha": "04fe06f4eed081c4cb6197b12f2d92bd396aeafd",
+    "evaluator_family_git_blob_sha": "52090daf78d12020af48c1b6ffaea056d9029e1b",
+    "generator_v2_freeze_git_blob_sha": "6bf6042a7a36c12d6d5ebfc5d16ea23ed2befbb6",
+    "candidate_v2_preexposure_git_blob_sha": "77018decd79e13168d14e2e5ed6ee319fa79d83c",
+    "candidate_v2_qualification_git_blob_sha": "a3574e1b8b2c33c0265c018dbb4872410e41de24",
+    "direct_protocol_git_blob_sha": "fd586455d582c38c7062ffe735f86cb9f2e803ab",
+    "generic_scope_compiler_git_blob_sha": "b208255789b14e44e86c82c196e06b5c41b3d039",
+    "universal_proof_git_blob_sha": "e75e2f20eabf75c8cda28849e62e98881b3adc61"
+  },
+  "critical_correction": {
+    "rejected_route": "POSTQUALIFICATION_GENERATOR_V3_AS_EVALUATOR_REPLACEMENT",
+    "reason": "GENERATOR_V2_WAS_EXPLICITLY_FROZEN_BEFORE_CANDIDATE_V2_QUALIFICATION__POST_HOC_EVALUATOR_MUTATION_IS_NOT_ADMISSIBLE",
+    "preserved_use_of_v3_research": "ONLY_AS_A_NONAUTHORITATIVE_RENAMING_WITNESS_AND_FALSIFIER_THAT_REVEALED_THE_HMAC_COLLISION_ASSUMPTION",
+    "current_route": "PROVE_THE_EXACT_FROZEN_V2_CANDIDATE_ON_EVERY_PACKET_IN_THE_ADMISSIBLE_FROZEN_EVALUATOR_FAMILY_DOMAIN"
+  },
+  "admissible_scope": {
+    "target_scope_id": "UNKNOWN_DOMAIN_DIRECT_FROZEN_V2_EVALUATOR_FAMILY",
+    "basis": "UNIVERSAL_FORMAL_SCOPE_PROOF",
+    "scope_relation_requested": "PROVEN_STRONGER",
+    "leaf_ids": [
+      "CROSS_DOMAIN_TRANSFER_OUTSIDE_MYSTERYMECHANISM_TASK_STRUCTURE",
+      "CALIBRATED_UNKNOWN_OR_ABSTENTION_ON_NONIDENTIFIABLE_OR_UNDERSPECIFIED_VARIANTS"
+    ],
+    "population_shape": "12_TRANSFER_PLUS_15_ABSTENTION__ALL_CASES_CONJUNCTIVE",
+    "transfer_primitive_families": 6,
+    "abstention_classes": 3,
+    "identifier_collision_resistance_assumed": false,
+    "generator_total_validity_for_every_secret_beacon_claimed": false,
+    "evaluator_invalid_packets_receive_candidate_capability_credit": false
+  },
+  "theorem_claim": "FOR_EVERY_EXACT_GENERATOR_V2_POPULATION_SATISFYING_THE_SEMANTIC_INVARIANTS_FROZEN_IN_EVALUATOR_FAMILY_V1_AND_GENERATOR_FREEZE_V2__THE_EXACT_FROZEN_CANDIDATE_V2_EXECUTED_THROUGH_THE_EXACT_FROZEN_HARNESS_RECEIVES_PASS_FROM_THE_EXACT_FROZEN_SCORER_ON_ALL_27_CASES",
+  "why_stronger_than_the_planned_one_use_run": [
+    "THE_PLANNED_PRODUCTION_ROUTE_OBSERVES_ONE_27_CASE_POPULATION",
+    "THE_THEOREM_COVERS_EVERY_ADMISSIBLE_EXACT_V2_POPULATION_WITHOUT_REPLAY_OR_CASE_REPLACEMENT",
+    "NO_TARGET_OUTCOME_OR_PRODUCTION_PACKET_IS_OBSERVED",
+    "THE_FROZEN_CANDIDATE_AND_EVALUATOR_BYTES_REMAIN_UNCHANGED"
+  ],
+  "required_independent_falsification": [
+    "RECHECK_EVERY_EXACT_SOURCE_BLOB",
+    "RECONSTRUCT_FROZEN_SCOPE_FROM_EVALUATOR_FAMILY_GENERATOR_FREEZE_PREEXPOSURE_QUALIFICATION_AND_DIRECT_PROTOCOL",
+    "VERIFY_COLLAPSED_REQUIRED_DISTINCT_SEMANTIC_SLOTS_ARE_OUTSIDE_THE_FROZEN_FAMILY_WITHOUT_ASSERTING_CRYPTOGRAPHIC_IMPOSSIBILITY",
+    "INDEPENDENTLY_REDERIVE_ALL_SIX_TRANSFER_NUMERIC_SEPARATION_ARGUMENTS",
+    "INDEPENDENTLY_REDERIVE_ALL_THREE_ABSTENTION_DECISION_ARGUMENTS",
+    "VERIFY_CANDIDATE_SCORER_AND_HARNESS_CONTROL_FLOW",
+    "VERIFY_ZERO_PRODUCTION_OR_TERMINAL_CASES_ARE_GENERATED_OR_READ",
+    "VERIFY_GENERIC_SCOPE_COMPILER_ACCEPTS_ONLY_AFTER_AN_INDEPENDENT_PROVEN_STRONGER_CERTIFICATE",
+    "KEEP_LEDGER_PROMOTION_SEPARATE"
+  ],
+  "authority": {
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false,
+    "family_credit": false,
+    "capability_credit": false,
+    "ownership_credit": false
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "production_cases_generated": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_CRYPTOGRAPHIC_NONCOLLISION_PROOF",
+    "NO_OPEN_WORLD_UNKNOWN_DOMAIN_GENERALIZATION",
+    "NO_EVALUATOR_MUTATION",
+    "NO_PRODUCTION_POPULATION_SUBSTITUTION_YET",
+    "NO_ACCEPTANCE_CREDIT_BEFORE_INDEPENDENT_SCOPE_AND_THEOREM_VERIFICATION_PLUS_SEPARATE_REDUCTION"
+  ]
+}
