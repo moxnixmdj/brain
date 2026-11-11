@@ -48,25 +48,40 @@ from typing import Any, Mapping
 SCHEMA = "PROJECT_BRAIN_GOAL_VERB_DECOMPOSITION_V1"
 
 # (verb, regex on the lowered goal). Order matters: more specific first.
+# VERB PATTERNS: written as AFFORDANCES, not as the benchmark's sentences.
+#
+# r141 measured what the old table was worth. Ten of nineteen paraphrases of goals the
+# system passes every time produced verb=None -- total refusal:
+#     "Press the button."                  refused   ("click" only)
+#     "Hit the button."                    refused
+#     "Rotate the cube so that 4 faces..." refused   ("move the cube around" only)
+#     "Press the buttons in the order..."  refused   ("push the buttons..." only)
+# That is the difference between storing a CLASS and storing a STRING. A human who has
+# clicked a button once can act on "press", "hit", "tap" and "activate", because what they
+# stored is "direct the pointing device at the control", not the sentence.
+#
+# So each verb now lists the verbs a person would accept for the same affordance, and the
+# specific-before-general order is preserved. The patterns are still the same kind of
+# object; what changed is that they describe the ACT rather than one phrasing of it.
 VERB_PATTERNS = (
-    ("SET_SLIDERS", r"\bset the sliders to the combination\b"),
-    ("SORT", r"\bsort the numbers\b"),
-    ("PUSH_SEQUENCE", r"\bpush the buttons in the order\b"),
-    ("SIMON", r"\b(repeat|memorize|watch the sequence)\b"),
-    ("COPY_PASTE", r"\bcopy the text\b.*\bpaste\b"),
-    ("FIND_AND_TYPE", r"\bfind the last word in the text area\b"),
-    ("SWITCH_TABS", r"\bswitch between the tabs\b"),
-    ("EXPAND_AND_CLICK", r"\bexpand the (pie menu|section)"),
-    ("HIGHLIGHT", r"\bhighlight the text\b"),
-    ("SCROLL_TO", r"\bscroll the textarea to the\b"),
-    ("FOCUS", r"\bfocus into the\b"),
-    ("DRAW", r"\bdraw (a|the number)\b"),
-    ("MOVE", r"\bmove the cube around\b"),
-    ("DRAG", r"\bdrag (the|all)\b"),
-    ("ENTER", r"\b(enter|type)\b"),
-    ("SELECT", r"\bselect\b"),
-    ("FIND", r"\bfind the\b"),
-    ("CLICK", r"\bclick\b"),
+    ("SET_SLIDERS", r"\bset the sliders?\b|\b(adjust|move) the sliders?\b"),
+    ("SORT", r"\bsort\b|\border the (numbers|items)\b"),
+    ("PUSH_SEQUENCE", r"\b(push|press|hit|tap|click|repeat|enter)\b.*\b(sequence|order|shown|displayed|pattern)\b"),
+    ("SIMON", r"\b(repeat|memorize|watch)\b.*\bsequence\b"),
+    ("COPY_PASTE", r"\bcopy\b.*\bpaste\b"),
+    ("FIND_AND_TYPE", r"\bfind\b.*\b(last|first)\b.*\bword\b"),
+    ("SWITCH_TABS", r"\bswitch\b.*\btabs?\b|\bg(o|et) to the .{0,20}tab\b"),
+    ("EXPAND_AND_CLICK", r"\bexpand\b|\bopen the (pie menu|section|accordion)\b"),
+    ("HIGHLIGHT", r"\bhighlight\b|\bselect the text\b"),
+    ("SCROLL_TO", r"\bscroll\b"),
+    ("FOCUS", r"\bfocus\b|\bput the cursor\b|\bclick into\b"),
+    ("DRAW", r"\bdraw\b|\bsketch\b|\btrace\b"),
+    ("MOVE", r"\b(move|rotate|turn|spin)\b.*\b(cube|object|shape|item)\b|\b(cube|object)\b.*\b(rotate|turn)\b"),
+    ("DRAG", r"\bdrag\b|\bdrop\b|\b(drag|move)\b.*\b(into|onto|around)\b"),
+    ("ENTER", r"\b(enter|type|write|fill|input|put)\b"),
+    ("SELECT", r"\bselect\b|\bchoose\b|\bpick\b"),
+    ("FIND", r"\bfind\b|\blocate\b"),
+    ("CLICK", r"\bclick\b|\bpress\b|\bhit\b|\btap\b|\bactivate\b|\bclick on\b|\bgo to\b"),
 )
 
 
