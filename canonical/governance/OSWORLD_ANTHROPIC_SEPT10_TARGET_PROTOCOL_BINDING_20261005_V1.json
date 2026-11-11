@@ -1,0 +1,124 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_ANTHROPIC_SEPT10_TARGET_PROTOCOL_BINDING_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__PRIMARY_TARGET_PROTOCOL_BOUND__GITLAB_SEPT10_IDENTITY_DERIVED__OSWORLD_PREDICATE_STILL_OPEN__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "objective": "Replace the vague Anthropic OSWorld identity/protocol residual with the exact target-side contract disclosed in the Claude Opus 5.5 System Card, compose it with the independently verified unique public September-10 GitLab state, and delete only the GitLab identity ambiguity while preserving every still-unproved comparability and Brain-score obligation.",
+  "canonical_bindings": {
+    "current_terminal_authority": {
+      "path": "canonical/governance/CURRENT_TERMINAL_AUTHORITY_V1.json",
+      "git_blob_sha": "9015b1fcacb40222f920c124986fcea63cc6e5ee"
+    },
+    "current_root2_compilation": {
+      "path": "canonical/governance/ROOT2_OUTPUT_ONLY_THRESHOLD_COMPILATION_V4.json",
+      "git_blob_sha": "07712a3e66b6048053a87c5a693b370512195d8f"
+    },
+    "prior_gitlab_reduction": {
+      "path": "canonical/governance/OSWORLD_GITLAB_SEPT10_PUBLIC_STATE_REDUCTION_V1.json",
+      "git_blob_sha": "d03a0a6d85148017c073b79ee78895cc94870eb3"
+    },
+    "prior_gitlab_independent_verification": {
+      "path": "canonical/verification/OSWORLD_GITLAB_SEPT10_PUBLIC_STATE_REDUCTION_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
+      "git_blob_sha": "ca58b9e09b2e0fa24d7c5781e93c55a6d46e2935"
+    }
+  },
+  "primary_target_evidence": {
+    "publisher": "Anthropic",
+    "document": "Claude Opus 5.5 System Card",
+    "published_date": "2026-09-22",
+    "canonical_url": "https://www.anthropic.com/claude-opus-5-5-system-card",
+    "original_pdf_url": "https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf",
+    "section": "8.13.3 OSWorld 2.0",
+    "directly_disclosed_contract": {
+      "task_count": 108,
+      "environment": "LIVE_UBUNTU_VM_VIA_SCREENSHOTS_MOUSE_KEYBOARD",
+      "partial_metric": "MEAN_PER_TASK_CREDIT_ACROSS_WEIGHTED_CHECKPOINTS",
+      "strict_metric": "FRACTION_OF_TASKS_WITH_EVERY_CHECKPOINT_SATISFIED",
+      "trial_rule": "PASS_AT_1_AVERAGED_OVER_FIVE_INDEPENDENT_RUNS",
+      "display_resolution": "1080P",
+      "maximum_action_steps_per_task": 500,
+      "reasoning_effort": "MAXIMUM",
+      "model_grader": "CLAUDE_OPUS_4_8_FOR_TASKS_REQUIRING_A_MODEL_GRADER",
+      "benchmark_snapshot_date": "2026-09-10",
+      "benchmark_snapshot_components": [
+        "TASK_FILES",
+        "TASK_ASSETS",
+        "COMPANION_WEB_APPLICATIONS"
+      ],
+      "context_harness": [
+        "RETAIN_EVERY_SCREENSHOT",
+        "SERVER_SIDE_CONTEXT_MANAGEMENT",
+        "COMPACT_CONVERSATION_AFTER_100K_TOKENS"
+      ],
+      "opus55_partial_score_pct": 81.8,
+      "opus55_strict_pass_pct": 48.7,
+      "comparability_statement": "RESULTS_ARE_NOT_DIRECTLY_COMPARABLE_TO_EARLIER_RELEASES_OR_OTHER_HARNESS_CONFIGURATIONS"
+    },
+    "launch_page_note": {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "current_table_label": "OSWorld 2.1",
+      "current_partial_score_pct": 81.8,
+      "precedence_rule": "SYSTEM_CARD_EXACT_SNAPSHOT_DATE_AND_HARNESS_DISCLOSURE_CONTROL_OVER_LATER_SHORT_TABLE_LABEL_FOR_REPRODUCTION"
+    }
+  },
+  "composition_theorem": {
+    "id": "ANTHROPIC_SEPT10_GITLAB_PUBLIC_STATE_IDENTITY_V1",
+    "premises": [
+      "ANTHROPIC_SYSTEM_CARD_STATES_THE_TARGET_RUN_USED_THE_2026_09_10_VERSION_OF_THE_BENCHMARK_COMPANION_WEB_APPLICATIONS",
+      "INDEPENDENT_PUBLIC_RUNNER_VERIFIED_TASK_WEB_GITLAB_LATEST_PUBLIC_COMMIT_AT_OR_BEFORE_2026_09_10_WAS_8655D651722F4254E59E813DE9F68A6732EA525C",
+      "INDEPENDENT_PUBLIC_RUNNER_VERIFIED_ZERO_TASK_WEB_GITLAB_COMMITS_FROM_2026_09_10_THROUGH_2026_09_20",
+      "TASK_WEB_GITLAB_IS_A_COMPANION_WEB_APPLICATION_USED_BY_THE_BOUND_OSWORLD_SETUP_REFERENCE"
+    ],
+    "conclusion": "FOR_THE_PUBLIC_TASK_WEB_GITLAB_COMPONENT_NAMED_BY_THE_BENCHMARK_SETUP__THE_ANTHROPIC_2026_09_10_TARGET_STATE_RESOLVES_TO_COMMIT_8655D651722F4254E59E813DE9F68A6732EA525C__NO_GENERIC_OR_OWNER_SIDE_GITLAB_REVISION_DISCOVERY_REMAINS",
+    "boundary": "THIS_DOES_NOT_PROVE_PRIVATE_UNDISCLOSED_PATCH_ABSENCE_OUTSIDE_THE_PUBLIC_BENCHMARK_COMPONENT_STATE__ANY_EVIDENCE_OF_SUCH_A_PATCH_REOPENS_IDENTITY"
+  },
+  "scheduler_effect_if_independently_verified": {
+    "delete": [
+      "ANTHROPIC_USED_THIS_EXACT_GITLAB_REVISION_OR_EQUIVALENT_STATE_AS_AN_OPEN_FACT",
+      "GENERIC_ANTHROPIC_OSWORLD_HARNESS_DISCOVERY",
+      "ASSUME_OFFICIAL_2026_09_16_OSWORLD_V2_1_TAG_IS_IDENTICAL_TO_THE_ANTHROPIC_2026_09_10_TARGET_SNAPSHOT"
+    ],
+    "replace_with_exact_open_cut": [
+      "RECOVER_AND_CONTENT_BIND_THE_2026_09_10_TASK_FILE_SNAPSHOT_USED_BY_TARGET",
+      "RECOVER_AND_CONTENT_BIND_THE_2026_09_10_TASK_ASSET_SNAPSHOT_USED_BY_TARGET",
+      "RECOVER_AND_CONTENT_BIND_REMAINING_2026_09_10_COMPANION_WEB_APP_STATES_REQUIRED_BY_THE_108_TASKS",
+      "REPRODUCE_1080P_AND_MAX_500_ACTION_STEPS_PER_TASK",
+      "REPRODUCE_RETAIN_EVERY_SCREENSHOT_AND_CONTEXT_COMPACTION_AFTER_100K_SEMANTICS_OR_PROVE_SCORE_SAFE_EQUIVALENCE",
+      "PROVIDE_CLAUDE_OPUS_4_8_GRADER_ROUTE_AT_ZERO_INCREMENTAL_SPEND_OR_PROVE_GRADER_EQUIVALENCE_FOR_MODEL_GRADED_TASKS",
+      "BIND_RUNTIME_IMAGES_NETWORK_SELF_HOST_AND_TOKEN_REACHABILITY_REQUIRED_BY_THE_SEPT10_TASKS",
+      "RUN_BRAIN_ON_THE_BOUND_COMPARABLE_108_TASK_TARGET_PROTOCOL_ONLY_AFTER_EXPLICIT_FRESH_REALITY_AUTHORITY",
+      "PROVE_BRAIN_PARTIAL_SCORE_GE_81_8_WITH_NO_UNRUN_TASK_SUBSTITUTION"
+    ],
+    "information_gain": "TARGET_SIDE_OSWORLD_PROTOCOL_IS_NO_LONGER_UNKNOWN_AS_A_GENERIC_OBJECT__THE_RESIDUAL_IS_A_FINITE_REPRODUCTION_AND_SCORE_CERTIFICATE_CUT"
+  },
+  "falsifiers": [
+    "PRIMARY_ANTHROPIC_SYSTEM_CARD_IS_REVISED_TO_A_DIFFERENT_OSWORLD_SNAPSHOT_DATE_OR_HARNESS",
+    "TASK_WEB_GITLAB_IS_PROVED_NOT_TO_BE_PART_OF_THE_COMPANION_WEB_APPLICATION_SET_USED_BY_THE_TARGET_RUN",
+    "A_TASK_WEB_GITLAB_COMMIT_OR_RELEASE_STATE_ACTIVE_ON_2026_09_10_IS_FOUND_THAT_INVALIDATES_THE_UNIQUE_PUBLIC_STATE_PROOF",
+    "ANTHROPIC_DISCLOSES_A_PRIVATE_GITLAB_PATCH_USED_IN_THE_TARGET_RUN"
+  ],
+  "hard_nonclaims": [
+    "NO_OSWORLD_PREDICATE_CLOSURE",
+    "NO_BRAIN_OSWORLD_SCORE",
+    "NO_CLAIM_THE_2026_09_16_OFFICIAL_OSWORLD_V2_1_RELEASE_EQUALS_THE_ANTHROPIC_2026_09_10_SNAPSHOT",
+    "NO_CLAIM_ALL_108_TASK_ASSET_AND_WEB_COMPONENT_IDENTITIES_ARE_BOUND",
+    "NO_CLAIM_OPUS_4_8_GRADER_ZERO_SPEND_ROUTE_EXISTS",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
