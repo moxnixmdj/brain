@@ -1,0 +1,64 @@
+{
+  "schema": "PROJECT_BRAIN_OPEN_RESEARCH_RESULT_EVIDENCE_V1",
+  "task_id": "PARENT_OPENENDED_FLOATING_POINT_SUMMATION_STABILITY_REAL_TASK_20260930_002",
+  "record_type": "EVIDENCE_PROVENANCE__NOT_A_CAPABILITY_CREDIT_OR_PROMOTION_CLAIM",
+  "status": "ANSWERED_WITH_VERIFIED_PROVENANCE__MODEL_INDEPENDENT",
+  "note": "Answered model-independently with stdlib IEEE 754 computations and an exact-rational independent verification. No frozen mission replayed; no Opus 5.5 credit asserted.",
+  "research_plan": [
+    "establish the authoritative rounding model (IEEE 754 binary64: 53-bit significand, machine epsilon 2^-52) via real stdlib computations",
+    "construct a workload combining severe cancellation and large dynamic range",
+    "compute ordinary sequential (naive) summation vs a numerically stable, correctly-rounded strategy (CPython math.fsum)",
+    "independently verify against exact rational arithmetic (fractions.Fraction) rounded to float",
+    "quantify relative error and state material limitations"
+  ],
+  "source_provenance": {
+    "authoritative_model": "IEEE 754 binary64 (double precision)",
+    "grounding_computations": {
+      "sys.float_info.dig": 15,
+      "sys.float_info.epsilon (2**-52)": 2.220446049250313e-16,
+      "math.ulp(1e16)": 2.0,
+      "note": "ULP(1e16)=2.0 means a +1.0 addend is below representable resolution once the accumulator reaches 1e16"
+    },
+    "stable_reference": "CPython math.fsum (correctly-rounded summation), part of the Python standard library"
+  },
+  "tool_provenance": {
+    "naive": "sequential left-to-right Python float accumulation",
+    "stable": "math.fsum (stdlib)",
+    "independent_verification": "fractions.Fraction exact rational summation, rounded to float",
+    "incremental_spend_usd": 0
+  },
+  "experiment": {
+    "workload": "[1e16] + [1.0]*1000 + [-1e16]",
+    "len": 1002,
+    "exact_rational_sum": "1000",
+    "naive_sequential_sum": 0.0,
+    "stable_fsum_sum": 1000.0,
+    "exact_float": 1000.0,
+    "abs_error_naive_vs_exact": 1000.0,
+    "relative_error_naive": 1.0,
+    "abs_error_stable_vs_exact": 0.0
+  },
+  "observations": [
+    "Naive sequential summation returns 0.0 where the exact answer is 1000.0 (100% relative error): every 1.0 addend is lost into the 1e16 accumulator because ULP(1e16)=2, then the trailing -1e16 cancels the magnitude.",
+    "math.fsum returns exactly 1000.0, matching the exact rational result.",
+    "The error is not accumulation of rounding noise alone; it is catastrophic loss of small addends under large dynamic range followed by cancellation."
+  ],
+  "decision": "YES. Ordinary sequential summation in 64-bit binary floating-point arithmetic can yield materially less accurate results than a numerically stable summation strategy for workloads combining severe cancellation and large dynamic range. In the executed workload the sequential sum lost the entire result (0.0 vs exact 1000.0; relative error 1.0), while the correctly-rounded strategy recovered it exactly.",
+  "limitations": [
+    "The result is demonstrated on a specific constructed workload that isolates cancellation + dynamic range; it shows the effect is real and can be total, not that every workload triggers it.",
+    "Severity depends on operand order and dynamic range; reordering (e.g., sorting by magnitude) or blocked/pairwise summation also mitigates it but are not guaranteed correctly-rounded.",
+    "math.fsum is the correctly-rounded reference for binary64; higher precision (e.g., exact rational, extended precision) trivially avoids the loss but changes the arithmetic model.",
+    "This is a bounded, decision-quality assessment of one numerical-stability relation; it does not by itself establish whole-family research parity or any Opus 5.5 credit."
+  ],
+  "independent_verification": {
+    "method": "fractions.Fraction exact rational summation rounded to float",
+    "exact_float": 1000.0,
+    "stable_equals_exact": true,
+    "naive_equals_exact": false,
+    "stable_within_half_ulp_of_exact": true
+  },
+  "model_dependency_count": 0,
+  "cognition_dependency_class": "DETERMINISTIC__STDLIB_IEEE754_AND_EXACT_RATIONAL",
+  "cognition_provenance_authority": "PROJECT_BRAIN_RUNTIME__MODEL_INDEPENDENT",
+  "recorded_utc": "2026-10-01T00:00:00Z"
+}

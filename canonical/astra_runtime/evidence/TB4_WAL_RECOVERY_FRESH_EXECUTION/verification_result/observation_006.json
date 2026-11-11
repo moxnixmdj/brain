@@ -1,0 +1,10 @@
+{
+  "command_sha256": "e93259ed52ed4df96f5714806a7dec23dc9558a05c3180e55cf32a31a594a927",
+  "duration_sec": 0.261,
+  "exit_code": 0,
+  "schema": "BRAIN_SESSION_MINI_SWE_OBSERVATION_V1",
+  "session_id": "wal-recovery-ordering-submit-20261001-v2",
+  "stderr": "",
+  "stdout": "SUBMISSION_WAL_AUTHORED_AUDIT_PASS\nHIGH_LSN_DURABLE_FIRST_PASS True\nCONCURRENT_WRITERS_PASS 64\nRECOVERY_5000_SECONDS 0.057875\nSUBMISSION_EMPTY_ENV_PASS\n===== SUBMISSION HASHES =====\nf4c33460b39655002f13c5bed45f54afd26e4052751b89d17cc0897132466ff5  /app/_stage_a.py\n7b2a4594b6290aff81f47a65b522f3ac6fbe5bdc0fc6eb5bd3a3277a472fd078  /app/_stage_b.py\nc4692f6162f653fa29036d28c386d8544763220dd4a81ee92d705cc9ad9be41f  /app/_stage_c.py\n85a5f04dab53def7c5969df97f3af1dd87bf6909db9f1f14ecb8fec954f87372  /app/_stage_d.py\n5fdc1f5550bfb082053027bcb57f84022f5bda0fd1c581d54b71153d43c32401  /app/_stage_e.py\n392dbe188db4ecfe5c89c6d9a6d4a81e56084e80db7f0bb678111c7804db4fdd  /app/app.py\ne7d4ab3aeaaa872312971e902a9b80fd38b5bbc08eacb717aaee943ff450f0e2  /app/checkpoint.py\n85429dd0430288290f2adf4403df0412e99025327aabc8d35f6c39c62690e74a  /app/config.py\n5300fb30b610a76bb7881fb5f8be248b319251652c9622b40611650958d3b319  /app/log_writer.py\n2ee6e72e18c8581822bdb121112413ff11318d8da394959b3390ae86adddfe7a  /app/metrics.py\na5732c957e5a2c4d19ba8c7349a4d9c81c4802426d7e0a105ea5e8cb51a119b2  /app/recovery.py\ne0317043a2781ace62d93784dd5d67b6516c47e70239f070a31e11f2aed0d931  /app/segment_manager.py\n26db8cd82b56a0f65e4eb717aa7660499fef2d5b8bf343dc13b700dde749a6ae  /app/serializer.py\n1571383fcd5b778762b5324c3c3bc89bbcae9525b57c01f8b2d6c61497567e92  /app/wal.py\n38d11fbc49b3028c1b66e4bd294f333a2098e48cc8a63ee89a122f368f5c3245  /app/wal_index.py\nFINAL_SUBMISSION_PREVERIFY_PASS\n",
+  "step": 6
+}
