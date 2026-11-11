@@ -33,6 +33,7 @@ def _canon(value: Any) -> bytes:
             sort_keys=True,
             separators=(",", ":"),
             ensure_ascii=False,
+            allow_nan=False,
         ).encode("utf-8")
     except (TypeError, ValueError) as exc:
         raise CapsuleError("NON_CANONICALIZABLE_VALUE") from exc
