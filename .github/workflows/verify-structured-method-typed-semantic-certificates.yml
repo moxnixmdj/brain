@@ -1,0 +1,42 @@
+name: Verify structured method typed semantic certificates
+
+on:
+  push:
+    branches:
+      - "chatgpt/structured-method-proof-carrying-edge-v1-20261005"
+    paths:
+      - "canonical/runtime/structured_method_edge_consequence_certificate_v1.py"
+      - "canonical/tests/test_structured_method_edge_consequence_certificate_v1.py"
+      - "canonical/runtime/structured_method_expression_ast_candidate_v2.py"
+      - "canonical/runtime/structured_method_expression_ast_proof_v2.py"
+      - "canonical/tests/test_structured_method_expression_ast_v2.py"
+      - "canonical/governance/STRUCTURED_METHOD_TYPED_SEMANTIC_CERTIFICATE_REDUCTION_20261005_V1.json"
+      - ".github/workflows/verify-structured-method-typed-semantic-certificates.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/structured_method_edge_consequence_certificate_v1.py"
+      - "canonical/tests/test_structured_method_edge_consequence_certificate_v1.py"
+      - "canonical/runtime/structured_method_expression_ast_candidate_v2.py"
+      - "canonical/runtime/structured_method_expression_ast_proof_v2.py"
+      - "canonical/tests/test_structured_method_expression_ast_v2.py"
+      - "canonical/governance/STRUCTURED_METHOD_TYPED_SEMANTIC_CERTIFICATE_REDUCTION_20261005_V1.json"
+      - ".github/workflows/verify-structured-method-typed-semantic-certificates.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Verify existing independent typed semantics
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_structured_method_expression_ast_v2
+      - name: Verify semantic edge consequence certificates
+        run: PYTHONPATH=. python -m unittest -v canonical.tests.test_structured_method_edge_consequence_certificate_v1
