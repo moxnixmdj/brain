@@ -1,0 +1,23 @@
+name: Verify coding debug tool discovery V1
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "canonical/runtime/matched_coding_debug_tool_discovery_v1.py"
+      - "canonical/tests/test_matched_coding_debug_tool_discovery_v1.py"
+      - "canonical/governance/MATCHED_CODING_DEBUG_TOOL_DISCOVERY_20261007_V1.json"
+      - ".github/workflows/verify-matched-coding-debug-tool-discovery-v1.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12.10"
+      - run: python -m pytest -q canonical/tests/test_matched_coding_debug_tool_discovery_v1.py
+      - run: python canonical/runtime/matched_coding_debug_tool_discovery_v1.py
