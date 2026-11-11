@@ -1,0 +1,42 @@
+{
+  "schema": "PROJECT_BRAIN_CONTRACT_NATIVE_PROOF_INFORMATION_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_FALSIFICATION_CONFIRMED__ZERO_TERMINAL_RESULT",
+  "exact_brain_blobs": {
+    "canonical/runtime/contract_native_proof_suites.py": "0210790c7dd705ef328e1b55d529a30c5c6c3337",
+    "canonical/runtime/audit_contract_native_proof_information_boundary.py": "4df3b685d1a1cc423e426cb8d956bd5e7d96e452",
+    "canonical/tests/test_contract_native_proof_information_boundary_audit.py": "6affd1989936687df1f3c3dbd35469147561bfe9"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pr": 650,
+    "verified_head": "5fea6cda22e0f082a069cd75f36bdec038c701a8",
+    "merge_commit": "c56fdfb38604c0f2ab561d3742fa5c45a89730ee",
+    "workflow_run_id": 36965729806,
+    "job_id": 110708953485,
+    "conclusion": "success"
+  },
+  "confirmed_findings": [
+    "P1_VISIBLE_FAULT_IDENTITY",
+    "P2_VISIBLE_GOLD_EDIT_EFFECTS",
+    "P3_EXPRESSION_NOT_LOAD_BEARING"
+  ],
+  "authority_effect": {
+    "generic_p1": "INADMISSIBLE_AS_WHOLE_CONTRACT_INFORMATION_SAFE_PROOF",
+    "generic_p2": "INADMISSIBLE_AS_SUBSTITUTE_FOR_CURRENT_INFORMATION_SAFE_P2_ROUTE",
+    "generic_p3": "INADMISSIBLE_AS_WHOLE_SELECT_ORGANIZE_EXPRESS_SYNTHESIS_PROOF",
+    "structured_method_p0": "NO_FINDING_FROM_THIS_AUDIT"
+  },
+  "newer_routes_not_invalidated": [
+    "canonical/governance/P2_PROFESSIONAL_QUALITY_T1_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "canonical/governance/P3_SYNTHESIS_T1_T3_MULTIPLEX_TERMINAL_BINDING_V1.json",
+    "canonical/runtime/trajectory_failure_typed_ir_candidate_v3.py"
+  ],
+  "execution_authority": false,
+  "promotion_authority": false,
+  "terminal_results_observed": 0,
+  "fresh_terminal_evidence_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0
+}
