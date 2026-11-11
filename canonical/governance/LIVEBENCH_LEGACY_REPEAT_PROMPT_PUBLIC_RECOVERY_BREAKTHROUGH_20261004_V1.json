@@ -1,0 +1,66 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_LEGACY_REPEAT_PROMPT_PUBLIC_RECOVERY_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CONNECTOR_RECOMPUTED_41_OF_41__REPRODUCIBLE_AUDIT_ADDED__INDEPENDENT_PUBLIC_RUNNER_PENDING__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "exact_scope": {
+    "terminal_scorer_scope": "LEGACY_IFEVAL_ONLY",
+    "active_legacy_types": 25,
+    "source_template_parameter_complete_types": 24,
+    "sole_source_template_nonrendered_parameter_type": "combination:repeat_prompt",
+    "tested_public_corpus": "google-research/google-research::instruction_following_eval/data/input_data.jsonl",
+    "tested_public_blob": "cbe52f6eecf3986fdac745b4acba4da1408eb146",
+    "tested_public_rows": 541,
+    "repeat_prompt_instances": 41
+  },
+  "recovered_subject": {
+    "runtime": "canonical/runtime/livebench_hidden_parameter_prompt_recovery_v1.py",
+    "runtime_git_blob_sha": "7b2c56bf9da9df5ba3dd916719fcf1e991cf5dc9",
+    "function": "recover_legacy_repeat_prompt",
+    "input": "VISIBLE_PROMPT_TEXT_ONLY",
+    "hidden_instruction_id_list_read": false,
+    "hidden_kwargs_read": false
+  },
+  "result": {
+    "exact_case_insensitive_recoveries": 41,
+    "failures": 0,
+    "coverage": "41/41",
+    "theorem": "FOR_EVERY_combination:repeat_prompt_INSTANCE_IN_THE_EXACT_PUBLIC_GOOGLE_IFEVAL_BLOB__VISIBLE_PROMPT_RECOVERY_RECONSTRUCTS_THE_SCORER_prompt_to_repeat_VALUE_EXACTLY_MODULO_CASE_AND_OUTER_WHITESPACE",
+    "critical_path_effect": "DELETE_THE_KNOWN_NONRENDERED_prompt_to_repeat_VALUE_AS_A_REQUIRED_EXTERNAL_OR_HIDDEN_RUNTIME_INPUT_FOR_THE_TESTED_PUBLIC_LEGACY_SURFACE"
+  },
+  "implementation": {
+    "audit": "canonical/verification_tools/audit_livebench_legacy_repeat_prompt_public_recovery_v1.py",
+    "audit_rule": "REQUIRE_EXACT_PUBLIC_BLOB__REQUIRE_541_ROWS__REQUIRE_41_REPEAT_PROMPT_INSTANCES__FAIL_ON_ANY_RECOVERY_MISMATCH"
+  },
+  "scheduler_rewrite": {
+    "delete": "SEARCH_FOR_A_HIDDEN_KWARGS_CHANNEL_FOR_combination:repeat_prompt_ON_THE_PUBLIC_LEGACY_ROUTE",
+    "remaining_load_bearing": [
+      "PARAPHRASE_COMPLETE_VISIBLE_PROMPT_RECOGNITION_FOR_THE_25_LEGACY_FAMILIES",
+      "EXACT_PARAMETER_RECOVERY_FOR_RECOGNIZED_PARAPHRASED_DESCRIPTIONS",
+      "DETERMINISTIC_RESPONSE_CONSTRUCTION_AND_EXACT_CHECKER_VALIDATION",
+      "CONTAMINATION_SAFE_BINDING_TO_THE_FROZEN_TERMINAL_POPULATION_BEFORE_ANY_ACCEPTANCE_CREDIT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO_CLAIM_ALL_541_PUBLIC_ROWS_ARE_CURRENTLY_RECOGNIZED_BY_THE_LEGACY_INVERTER",
+    "NO_CLAIM_PUBLIC_GOOGLE_IFEVAL_ROWS_EQUAL_THE_FROZEN_TERMINAL_LIVEBENCH_ROWS",
+    "NO_FROZEN_TERMINAL_PROMPTS_KWARGS_RESPONSES_OR_CASE_IDS_READ",
+    "NO_LIVEBENCH_SCORE_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": true,
+    "execution": false,
+    "fresh_reality": false,
+    "promotion": false,
+    "acceptance_credit": false
+  }
+}
