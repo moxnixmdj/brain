@@ -1,0 +1,24 @@
+name: Verify adaptive-cover exact-byte receipts v1
+on:
+  push:
+    branches:
+      - terminal-now/adaptive-cover-exact-byte-receipts-20261007-v1
+    paths:
+      - 'canonical/runtime/adaptive_cover_induction_gate_v1.py'
+      - 'canonical/tests/test_adaptive_cover_induction_gate_v1.py'
+      - '.github/workflows/verify-adaptive-cover-exact-byte-receipts-v1.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run exact adaptive-cover receipt canaries
+        run: |
+          set -euo pipefail
+          python -m pytest -q canonical/tests/test_adaptive_cover_induction_gate_v1.py
