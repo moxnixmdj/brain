@@ -1,0 +1,454 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_CERTIFICATE_REQUIREMENT_LEAF_GRAPH_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_RECURSIVE_REQUIREMENT_EXPANSION__TB4_EXISTING_RECEIPTS_COMPILED__ZERO_CREDIT",
+  "objective": "Expand the active 31-predicate / 15-certificate scheduling frontier into exact proof-obligation leaves without pricing unresolved downstream reality as zero.",
+  "source_frontier": "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V2.json",
+  "runtime": "canonical/runtime/terminal_proof_leaf_cut_v1.py",
+  "roots": [
+    "CURRENT_TERMINAL_CERTIFICATE_REQUIREMENTS"
+  ],
+  "nodes": [
+    {
+      "id": "CURRENT_TERMINAL_CERTIFICATE_REQUIREMENTS",
+      "kind": "AND",
+      "children": [
+        "CERT::MATCHED_SCOPE_BINDING_CERTIFICATE",
+        "CERT::FINANCE_JUDGMENT_SOURCE_CERTIFICATE",
+        "CERT::UNKNOWN_DOMAIN_JUDGMENT_SOURCE_CERTIFICATE",
+        "CERT::COMPOSITION_INTERFACE_RECEIPT_BINDING_CERTIFICATE",
+        "CERT::TB4_ATTAINABLE_ROUTE_CERTIFICATE",
+        "CERT::SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_CERTIFICATE",
+        "CERT::CODING_FRONTIER_PUBLIC_ROUTE_CERTIFICATE",
+        "CERT::PROFESSIONAL_ARTIFACT_PUBLIC_ROUTE_CERTIFICATE",
+        "CERT::HLE_PUBLIC_ROUTE_OR_SCOPE_COMPLETE_PROOF_CERTIFICATE",
+        "CERT::CHARTOGRAPHY_PUBLIC_ROUTE_CERTIFICATE",
+        "CERT::OSWORLD_PUBLIC_ROUTE_CERTIFICATE",
+        "CERT::FINANCE_PUBLIC_ROUTE_CERTIFICATE",
+        "CERT::MYSTERYMECHANISM_PUBLIC_ROUTE_CERTIFICATE",
+        "CERT::TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+        "CERT::DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE"
+      ]
+    },
+    {
+      "id": "CERT::MATCHED_SCOPE_BINDING_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+        "REQ::MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS"
+      ]
+    },
+    {
+      "id": "REQ::MATCHED_BRAIN_WITNESS_TARGET_ATOM_METRIC_BINDINGS_INDEPENDENT_PASS",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::MATCHED_BRAIN_WITNESS_SCOPE_RELATIONS_INDEPENDENT_PASS",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::FINANCE_JUDGMENT_SOURCE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS"
+      ]
+    },
+    {
+      "id": "REQ::BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_FINANCE_JUDGMENT_SOURCE_GATE_PASS",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::UNKNOWN_DOMAIN_JUDGMENT_SOURCE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS"
+      ]
+    },
+    {
+      "id": "REQ::BRAIN_OWNED_OR_PERMISSIVELY_INTERNALIZED_UNKNOWN_DOMAIN_JUDGMENT_SOURCE_GATE_PASS",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::COMPOSITION_INTERFACE_RECEIPT_BINDING_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::TWELVE_LITERAL_INTERFACES_BOUND_TO_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_RECEIPTS"
+      ]
+    },
+    {
+      "id": "CERT::TB4_ATTAINABLE_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220"
+      ]
+    },
+    {
+      "id": "CERT::SHARED_PUBLIC_BENCHMARK_ABI_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::COMPLETE_COMPARABLE_SCORE_PRODUCING_ROUTE_PER_FROZEN_PREDICATE"
+      ]
+    },
+    {
+      "id": "REQ::COMPLETE_COMPARABLE_SCORE_PRODUCING_ROUTE_PER_FROZEN_PREDICATE",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::CODING_FRONTIER_PUBLIC_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::FRONTIERCODE_ROUTE_BOUND",
+        "REQ::CURSORBENCH_ROUTE_BOUND"
+      ]
+    },
+    {
+      "id": "REQ::FRONTIERCODE_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::CURSORBENCH_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::PROFESSIONAL_ARTIFACT_PUBLIC_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::GDPVAL_AA_ROUTE_BOUND",
+        "REQ::AA_BRIEFCASE_PROWORK_ROUTE_BOUND",
+        "REQ::AA_BRIEFCASE_ARTIFACT_ROUTE_BOUND"
+      ]
+    },
+    {
+      "id": "REQ::GDPVAL_AA_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::AA_BRIEFCASE_PROWORK_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::AA_BRIEFCASE_ARTIFACT_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::HLE_PUBLIC_ROUTE_OR_SCOPE_COMPLETE_PROOF_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::HLE_CANONICAL_ROUTE_OR_UNCHANGED_PROTOCOL_SCOPE_COMPLETE_STRONGER_WITNESS"
+      ]
+    },
+    {
+      "id": "REQ::HLE_CANONICAL_ROUTE_OR_UNCHANGED_PROTOCOL_SCOPE_COMPLETE_STRONGER_WITNESS",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::CHARTOGRAPHY_PUBLIC_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::CHARTOGRAPHY_DATASET_SCORER_ROUTE_CARRIER_THRESHOLD_CONTAMINATION_ATTAINABILITY_BOUND"
+      ]
+    },
+    {
+      "id": "REQ::CHARTOGRAPHY_DATASET_SCORER_ROUTE_CARRIER_THRESHOLD_CONTAMINATION_ATTAINABILITY_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::OSWORLD_PUBLIC_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::SAME_HARNESS_COMPARABLE_OSWORLD_2_1_PARTIAL_ROUTE_BOUND"
+      ]
+    },
+    {
+      "id": "REQ::SAME_HARNESS_COMPARABLE_OSWORLD_2_1_PARTIAL_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::FINANCE_PUBLIC_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::FINANCE_ACCOUNTING_INDEX_ROUTE_BOUND",
+        "REQ::FINANCE_AGENT_V2_ROUTE_BOUND"
+      ]
+    },
+    {
+      "id": "REQ::FINANCE_ACCOUNTING_INDEX_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::FINANCE_AGENT_V2_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::MYSTERYMECHANISM_PUBLIC_ROUTE_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::MYSTERYMECHANISM_COMPARABLE_ROUTE_BOUND"
+      ]
+    },
+    {
+      "id": "REQ::MYSTERYMECHANISM_COMPARABLE_ROUTE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "CERT::TOOL_DISCOVERY_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL"
+      ]
+    },
+    {
+      "id": "CERT::DELEGATION_PROTOCOL_SCOPE_COMPLETENESS_CERTIFICATE",
+      "kind": "AND",
+      "children": [
+        "REQ::INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL"
+      ]
+    },
+    {
+      "id": "REQ::INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_TOOL_DISCOVERY_PROTOCOL",
+      "kind": "OR",
+      "children": [
+        "TOOL_SCOPE::EXACT_FUTURE_TARGET_UNIVERSE",
+        "TOOL_SCOPE::EXHAUSTIVE_FINITE_SUPERSET",
+        "TOOL_SCOPE::UNIVERSAL_FORMAL_SCOPE_PROOF"
+      ]
+    },
+    {
+      "id": "TOOL_SCOPE::EXACT_FUTURE_TARGET_UNIVERSE",
+      "kind": "IMPOSSIBLE"
+    },
+    {
+      "id": "TOOL_SCOPE::EXHAUSTIVE_FINITE_SUPERSET",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "TOOL_SCOPE::UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::INDEPENDENT_EXACT_COMPLETE_TARGET_CASE_UNIVERSE_OR_EXHAUSTIVE_FINITE_SUPERSET_OR_UNIVERSAL_FORMAL_SCOPE_PROOF_FOR_DELEGATION_PROTOCOL",
+      "kind": "OR",
+      "children": [
+        "DELEGATION_SCOPE::EXACT_FUTURE_TARGET_UNIVERSE",
+        "DELEGATION_SCOPE::EXHAUSTIVE_FINITE_SUPERSET",
+        "DELEGATION_SCOPE::UNIVERSAL_FORMAL_SCOPE_PROOF"
+      ]
+    },
+    {
+      "id": "DELEGATION_SCOPE::EXACT_FUTURE_TARGET_UNIVERSE",
+      "kind": "IMPOSSIBLE"
+    },
+    {
+      "id": "DELEGATION_SCOPE::EXHAUSTIVE_FINITE_SUPERSET",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "DELEGATION_SCOPE::UNIVERSAL_FORMAL_SCOPE_PROOF",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::TWELVE_LITERAL_INTERFACES_BOUND_TO_INDEPENDENT_CONTAMINATION_CLEAN_ACCEPTANCE_SCOPED_RECEIPTS",
+      "kind": "AND",
+      "children": [
+        "COMPOSITION_SCOPE::research",
+        "COMPOSITION_SCOPE::tool use",
+        "COMPOSITION_SCOPE::artifact creation",
+        "COMPOSITION_SCOPE::browser/computer action",
+        "COMPOSITION_SCOPE::memory",
+        "COMPOSITION_SCOPE::recovery",
+        "COMPOSITION_SCOPE::coding",
+        "COMPOSITION_SCOPE::debugging",
+        "COMPOSITION_SCOPE::tool discovery",
+        "COMPOSITION_SCOPE::delegation",
+        "COMPOSITION_SCOPE::evidence synthesis",
+        "COMPOSITION_SCOPE::artifact production"
+      ]
+    },
+    {
+      "id": "COMPOSITION_SCOPE::research",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::tool use",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::artifact creation",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::browser/computer action",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::memory",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::recovery",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::coding",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::debugging",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::tool discovery",
+      "kind": "PROVED"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::delegation",
+      "kind": "PROVED"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::evidence synthesis",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "COMPOSITION_SCOPE::artifact production",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "REQ::MACHINE_VERIFIED_TB4_ROUTE_UPPER_BOUND_GE_220",
+      "kind": "AND",
+      "children": [
+        "TB4::MINIMUM_8_TASK_SCORE_ARITHMETIC",
+        "TB4::RESOURCE_METADATA_INDEPENDENT_REPRODUCTION",
+        "TB4::TASK_IDENTITY_BINDING",
+        "TB4::ZERO_COST_CARRIER_BOUND",
+        "TB4::PROTOCOL_EQUIVALENCE_BOUND",
+        "TB4::ATTAINABILITY_RECOMPILED"
+      ]
+    },
+    {
+      "id": "TB4::MINIMUM_8_TASK_SCORE_ARITHMETIC",
+      "kind": "PROVED",
+      "evidence": "verification-capsule-runner PR961"
+    },
+    {
+      "id": "TB4::RESOURCE_METADATA_INDEPENDENT_REPRODUCTION",
+      "kind": "PROVED",
+      "evidence": "verification-capsule-runner PR961"
+    },
+    {
+      "id": "TB4::TASK_IDENTITY_BINDING",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "TB4::ZERO_COST_CARRIER_BOUND",
+      "kind": "OR",
+      "children": [
+        "TB4_CARRIER::STANDARD_HOSTED_RUNNER_DECLARED_LIMITS",
+        "TB4_CARRIER::STANDARD_HOSTED_RUNNER_LOWER_RESOURCE_OVERRIDE",
+        "TB4_CARRIER::ALTERNATIVE_ZERO_COST_CARRIER"
+      ]
+    },
+    {
+      "id": "TB4::PROTOCOL_EQUIVALENCE_BOUND",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "TB4::ATTAINABILITY_RECOMPILED",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN"
+    },
+    {
+      "id": "TB4_CARRIER::STANDARD_HOSTED_RUNNER_DECLARED_LIMITS",
+      "kind": "IMPOSSIBLE",
+      "evidence": "verification-capsule-runner PR958: Docker create with --cpus=8 rejected on 4-CPU hosted runner"
+    },
+    {
+      "id": "TB4_CARRIER::STANDARD_HOSTED_RUNNER_LOWER_RESOURCE_OVERRIDE",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN",
+      "note": "Must prove task boot plus protocol comparability under lower declared CPU limits without acceptance-case exposure."
+    },
+    {
+      "id": "TB4_CARRIER::ALTERNATIVE_ZERO_COST_CARRIER",
+      "kind": "LEAF",
+      "cost_state": "UNKNOWN",
+      "note": "Concrete $0 carrier satisfying required task execution semantics remains unbound."
+    }
+  ],
+  "rules": [
+    "CERTIFICATE_WRAPPERS_ARE_NOT_TERMINAL_LEAVES",
+    "UNRESOLVED_LEAVES_DEFAULT_TO_UNKNOWN_COST_NOT_ZERO",
+    "ONLY_INDEPENDENTLY_VERIFIED_OR_MECHANICALLY_SETTLED_FACTS_MAY_BE_PROVED_OR_IMPOSSIBLE",
+    "NO_ACCEPTANCE_CAPABILITY_FAMILY_EXECUTION_OR_PROMOTION_CREDIT"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "supersedes": "canonical/governance/TERMINAL_CERTIFICATE_REQUIREMENT_LEAF_GRAPH_V1.json",
+  "evidence_compilation": {
+    "tb4_minimum_carrier_recovery_cut": {
+      "public_runner_pr": 961,
+      "workflow_run_id": 37017018110,
+      "merge_commit": "6cb65d79713eaaabb3e465869d4755a78113fdfd",
+      "proved": [
+        "TB4::MINIMUM_8_TASK_SCORE_ARITHMETIC",
+        "TB4::RESOURCE_METADATA_INDEPENDENT_REPRODUCTION"
+      ],
+      "nonclaims": [
+        "TASK_IDENTITY_BINDING",
+        "CONCRETE_ZERO_COST_CARRIER",
+        "PROTOCOL_EQUIVALENCE",
+        "ATTAINABILITY_RECOMPILED"
+      ]
+    },
+    "tb4_docker_resource_limit_semantics": {
+      "public_runner_pr": 958,
+      "workflow_run_id": 37017338018,
+      "merge_commit": "3a42052bf0ebe37b2619b07449df35c9d09b9598",
+      "proved": [
+        "STANDARD_HOSTED_RUNNER_REJECTS_DECLARED_8_CPU_CONTAINER_LIMIT",
+        "GENERIC_16384_MIB_MEMORY_LIMIT_CAN_START_ON_CURRENT_RUNNER"
+      ],
+      "nonclaims": [
+        "LOWER_CPU_OVERRIDE_PROTOCOL_EQUIVALENCE",
+        "EXACT_TASK_BOOT",
+        "TERMINAL_BENCHMARK_CREDIT"
+      ]
+    }
+  },
+  "next": "DISCHARGE_REMAINING_32_SELECTED_UNKNOWN_COST_LEAVES__TB4_NOW_REDUCED_TO_TASK_IDENTITY_CARRIER_PROTOCOL_EQUIVALENCE_AND_ATTAINABILITY_RECOMPILE__RECOMPUTE_AFTER_EVERY_RECEIPT"
+}

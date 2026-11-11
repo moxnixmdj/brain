@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_TERMINAL_PROOF_LEAF_CUT_PUBLIC_RUNNER_VERIFICATION_20261002_V1",
+  "date": "2026-10-02",
+  "status": "INDEPENDENT_PUBLIC_RUNNER_PASS__EXACT_BLOBS__CANONICAL_31_PREDICATE_15_CERTIFICATE_FRONTIER__RECURSIVE_LEAF_CUT_FAILS_CLOSED_ON_UNKNOWN_REALITY__ZERO_CREDIT",
+  "objective": "Independently verify the active terminal-certificate authority repair, exact 31-predicate/15-certificate cut, recursive proof-leaf solver, and live requirement graph without converting unresolved downstream reality into zero cost.",
+  "brain_pull_request": 947,
+  "brain_branch": "breakthrough/recursive-terminal-proof-leaf-cut-v1-20261002",
+  "exact_brain_blobs": {
+    "canonical/runtime/terminal_proof_leaf_cut_v1.py": "42ddffef9d4fc0d3e6adf5888c1e4d8cbdeac6b5",
+    "canonical/tests/test_terminal_proof_leaf_cut_v1.py": "4aae680889a7a8aa7b0c597a2ae39821c424928d",
+    "canonical/governance/TERMINAL_CERTIFICATE_REQUIREMENT_LEAF_GRAPH_V1.json": "a0b9a077f1f3bde13e19893ed6dbb0fb4d0e1ee8",
+    "canonical/tests/test_terminal_certificate_requirement_leaf_graph_v1.py": "c1755527a567d566b576c5421f72d00163b3d87b",
+    "canonical/runtime/terminal_certificate_cut_v1.py": "7ad852e65e47a6ab3110b02dac402b126cac78b7",
+    "canonical/tests/test_terminal_certificate_cut_v2.py": "6efb4294ddd58d95b5bad7c3cb73676d5eb2e643",
+    "canonical/tests/test_terminal_certificate_activation_integrity_v1.py": "da19ad535a7079aaafcbc23f60c8a7a94c003f92",
+    "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V1.json": "a51ed8bf137a63792ed44a2f3d6ef3a8b1ae2669",
+    "canonical/governance/TERMINAL_CERTIFICATE_FRONTIER_V2.json": "dcdfd915b8dcfee94f5ebf214be8d39674f91445",
+    "canonical/governance/TERMINAL_CERTIFICATE_CUT_ACTIVATION_V2.json": "3c0b3bd21edd78e85eab5ff5af2ea5ae32e500b5"
+  },
+  "public_runner": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 973,
+    "head_sha": "ab0dd1eb0089217104abe10462b539b26e22363e",
+    "workflow_run_id": 37020609006,
+    "workflow_job_id": 110882414225,
+    "conclusion": "success"
+  },
+  "verified": [
+    "EXACT_10_OF_10_BRAIN_BLOB_IDENTITIES_MATCHED",
+    "RUNTIMES_COMPILE_ON_PYTHON_3_12",
+    "ACTIVE_FRONTIER_V2_IS_CANONICAL_AND_V1_IS_EXPLICITLY_SUPERSEDED",
+    "EXACT_CERTIFICATE_CUT_REQUIRES_ALL_15_CERTIFICATES_TO_COVER_31_UNRESOLVED_PREDICATES",
+    "TOOL_DISCOVERY_AND_DELEGATION_SCOPE_COMPLETENESS_CERTIFICATES_REMAIN_SEPARATE_AND_REQUIRED",
+    "RECURSIVE_AND_OR_LEAF_SOLVER_DEDUPLICATES_SHARED_LEAVES_AND_DELETES_IMPOSSIBLE_BRANCHES",
+    "UNKNOWN_REALITY_COST_IS_NEVER_PROMOTED_TO_EXACT_ZERO_COST",
+    "LIVE_60_NODE_REQUIREMENT_GRAPH_REMAINS_LOWER_BOUND_ONLY_WITH_UNKNOWN_COSTS",
+    "SEVEN_RECURSIVE_AND_LIVE_GRAPH_TEST_FUNCTIONS_PASS"
+  ],
+  "live_leaf_frontier": {
+    "nondominated_proof_alternative_count": 4,
+    "selected_leaf_count": 34,
+    "selected_unknown_cost_leaf_count": 34,
+    "lower_bound_reality_units": 0,
+    "upper_bound_reality_units": null,
+    "exact_optimality_proved": false
+  },
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_PROVE_ANY_OPEN_ACCEPTANCE_PREDICATE",
+    "LOWER_BOUND_ZERO_DOES_NOT_MEAN_ZERO_REALITY_IS_SUFFICIENT",
+    "UNKNOWN_COST_LEAVES_MUST_BE_DECOMPOSED_OR_BOUND_BEFORE_EXACT_MINIMUM_REALITY_CAN_BE CLAIMED",
+    "NO_FRESH_ACCEPTANCE_CASES_AUTHORIZED"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
