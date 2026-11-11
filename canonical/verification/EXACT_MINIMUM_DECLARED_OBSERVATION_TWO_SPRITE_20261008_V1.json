@@ -1,0 +1,55 @@
+{
+  "schema": "PROJECT_BRAIN_EXACT_MINIMUM_DECLARED_OBSERVATION_TWO_SPRITE_20261008_V1",
+  "date": "2026-10-08",
+  "status": "TWO_REMOTE_INDEPENDENT_FOCUSED_REPLAYS_PASS__ZERO_ACCEPTANCE_CREDIT",
+  "source_commit": "71af741de3a535590ca8dcb61f253636a5bf1972",
+  "files": {
+    "canonical/runtime/finite_observational_obstruction_reducer_v1.py": "99a466b58ee18afe6d337d1046823bb68cae6a8c",
+    "canonical/tests/test_finite_observational_obstruction_reducer_v1.py": "ff777e19bc2a46fcc352518d03f5241929977a4d",
+    "canonical/runtime/finite_identifiability.py": "c2bf32dd1e22f00a2fa08b043aa8275a07c05bed",
+    "canonical/runtime/effect_broker_receipt_resolver_v2.py": "7f4eeeb19def420d0014631b99c5e2dc3a30592e"
+  },
+  "method": {
+    "scope": "Finite caller-declared hypothesis regions H, candidates Q and policy coverage P with exact-byte-bound certificate references",
+    "objective": "minimize number of Q discriminators such that every observed equivalence class has a declared common policy",
+    "algorithm": "Enumerate Q subsets by nondecreasing cardinality; find first full common-policy cover. Exact for Q count <=12, otherwise report unproved (do not claim global minimum).",
+    "derived_operation": "Selected Q experiment IDs and declared policy for each derived observation class. No query to target model or external evaluator.",
+    "test_witness": "8 declared observations reduced to 1 in a predeclared scenario, preserving declared policy-cover correctness",
+    "nonclaim": "Does not prove policy adequacy, authoritative experiment semantics, Q sufficiency beyond declared library, target S_TRACE completeness, Opus 5.5 parity or terminal state."
+  },
+  "verification": [
+    {
+      "environment": "brain-abstract-cover-lift-verify-20261008-v1",
+      "sprite_id": "sprite-c6d765e0-f383-49a0-b78b-7863d8d4793d",
+      "runner": "Python importlib test-function replay, pytest not installed",
+      "passed": 22,
+      "total": 22,
+      "failed": 0
+    },
+    {
+      "environment": "brain-trace-parametricity-v1-verify",
+      "sprite_id": "sprite-077f9cab-5fc0-4387-88b1-ceaf2010ddf4",
+      "runner": "Independent Python importlib test-function replay, pytest not installed",
+      "passed": 22,
+      "total": 22,
+      "failed": 0
+    }
+  ],
+  "differential": {
+    "minimum_conflict_core": "140 deterministically seeded instances compared to separate exhaustive subset oracle",
+    "minimum_q_discriminator_subset": "110 deterministically seeded instances compared to separate exhaustive Q subset oracle",
+    "combined_tested_random_models": 250,
+    "failures_found": 0,
+    "limits": "Random small finite declared models; tests cannot certify semantic correctness of actual target policy."
+  },
+  "authority": {
+    "terminal_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "universal_scope_proved": false,
+    "real_target_adequacy_proved": false,
+    "independent_target_evaluator_proved": false,
+    "u_empty_authorized": false,
+    "terminal_authority": false
+  },
+  "next_required": "Authenticate mapped target scope and deployment-policy adequacy; use selected Q only when truthfully available and policy-changing; do not promote local finite results."
+}
