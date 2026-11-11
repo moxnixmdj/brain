@@ -32,14 +32,22 @@ the process: it is the classic way to walk around a filter written for one table
 How the list was made
 ---------------------
 Measured, then read. 2026-11-11, x86_64, Python 3.11.2, glibc 2.36: `python-ptrace` followed
-five batteries of ordinary work (files, archives, sqlite, subprocesses and their kills, threads,
-asyncio, local sockets, signals, timers, limits), a `/bin/sh` and a `bash` running fifty common
-commands, `pytest`, GNU `make`, and the launcher's own `setpriv` step: 139 distinct calls. All
-of them are here except the five that must not be: `ptrace` and `unshare` (the tracer and the launcher, not
-the work), `clone3` (answered ENOSYS on purpose, see above), `get_mempolicy`/`set_mempolicy`
-(libnuma probing; it recovers). The rest of `ALLOWED` is the older or newer spelling of a call
-that was measured (`stat` beside `newfstatat`, `pipe` beside `pipe2`), so that a different C
-library does not meet a closed door for the same request.
+five batteries of ordinary Python work (files, archives, sqlite, subprocesses and their kills,
+threads, asyncio, local sockets, signals, timers, limits), a `/bin/sh` and a `bash` running
+fifty common commands, `pytest`, GNU `make`, `gcc`, `g++`, `git`, `node`, `npm`, `perl`, and the
+launcher's own `setpriv` step: **147 distinct calls in 25 traces.**
+
+* 140 of them can pass (136 in `ALLOWED`, 4 in `ARGUMENT_CHECKED`).
+* 7 cannot, on purpose: `ptrace` and `unshare` (the tracer and the launcher, not the work);
+  `clone3` (answered ENOSYS so that the C library falls back to `clone`, whose flags can be
+  read); `get_mempolicy`/`set_mempolicy` (libnuma probing; it recovers); `io_uring_setup` and
+  `io_uring_enter` (node's event loop tries the ring and falls back to its thread pool).
+* The other 58 entries that can pass were **not observed**. They are the older or newer spelling
+  of a request that was (`stat` beside `newfstatat`, `pipe` beside `pipe2`, `fork` beside
+  `clone`, `setrlimit` beside `prlimit64`) or a call the kernel itself needs answered
+  (`exit` for a finishing thread, `restart_syscall`). They are here so that a different C
+  library does not meet a closed door for the same request -- and they are the part of the
+  list written by judgement rather than by measurement, so the part to read first.
 
 What this is not
 ----------------

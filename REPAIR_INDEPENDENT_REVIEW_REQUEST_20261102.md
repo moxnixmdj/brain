@@ -30,3 +30,23 @@ The existing namespace launcher is a research candidate, not a qualified carrier
 A real carrier requires a separately reviewed threat model and controlled host, pinned minimal runtime, isolation and effect/publication broker, aggregate limits, bounded output, termination and cleanup verification, and independently witnessed negative and legitimate-work tests. Qualification must cover the exact transport, file/effect boundaries, runtime, and lifecycle being admitted—not merely a locally generated configuration or a self-report from the worker. None of that evidence is created here.
 
 Only after appropriate review, admission, and carrier qualification should a new retained-repair action be integrated and a fabric-level teach/restart/reuse comparison be attempted. The enabled and disabled arms must share the same safety and independent acceptance checks. No capability, family, benchmark or terminal credit follows from this request.
+
+## Addendum 2026-11-11 — the launcher now has a syscall allowlist; it has not been reviewed
+
+**Producer statement. No authority, no verifier, no change to `carrier_qualified` (still `False`).** The paragraph above says the launcher "lacks reviewed syscall filtering". Until this date it lacked filtering altogether. It now has filtering; the word *reviewed* is still missing, and it is the reviewer's to supply or withhold.
+
+What changed, exactly:
+
+1. `canonical/runtime/worker_syscall_allowlist_v1.py` declares one list (193 calls allowed, 5 allowed only in a harmless form, 63 refused by name with `EPERM`, every other call answered `ENOSYS`, a caller that switches instruction set killed) and assembles it into a classic-BPF seccomp program. No dependency; the bytes are the same on every x86_64 host, so one hash names one program. `describe()` returns the lists and the hash; `decide(number, args)` runs the shipped program in the open for any call.
+2. `canonical/runtime/zero_ambient_namespace_launcher_v1.py` installs that program in the step that enters the worker's root (`_ENTER_ROOT_BEHIND_SYSCALL_FILTER`), before `env`, before `setpriv`, before the workload. If the program is absent, malformed or refused by the kernel, the step exits 126 and runs nothing. Both launch sites that use this launcher's setup script inherit it: `run_confined` and the persistent worker in `brokered_workspace_execution_v1`.
+3. `canonical/tools/carrier_qualification_probe_v1.py` no longer searches the launcher's source for a word. It asks the worker: is a filter in force, and are calls refused that the unfiltered kernel answers? Producer-run result on this tree: 9 of 10 items observed satisfied, `no_host_libraries` not satisfied, verdict unchanged (`CARRIER_NOT_QUALIFIED`). Record: `canonical/verification/CARRIER_QUALIFICATION_PROBE_20261111_V1.json`.
+
+What a reviewer should question, in the producer's own order of doubt:
+
+- **The list.** It was measured (a tracer followed ordinary Python, shell, `make`, `pytest`, `gcc`, `g++`, `git`, `node`, `npm` and `perl` work: 147 distinct calls in 25 traces, 140 of which can pass and 7 of which are closed on purpose) and then widened by hand with 58 calls that were **not observed**: the older and newer spellings of the same requests. Hand-widening is where a wrong entry would hide; the module's docstring names all of this.
+- **What is allowed whole.** `ioctl` and `prctl` are not filtered by argument. The worker has no device node beyond `/dev/null` and no terminal; that, not the filter, is what bounds them.
+- **Loopback sockets.** `AF_INET` and `AF_INET6` are allowed because the launcher's declared authority is a private loopback (`PRIVATE_NAMESPACE_LOOPBACK_ONLY`) and an existing test requires it. Netlink, packet and every other family are refused. A reviewer who wants the network stack unreachable should say so; the list changes in one line and that test changes with it.
+- **The other launchers.** `root3_bound_codec_child_executor_v1`, `root3_confined_shell_executor_v1` and `root3_pdf_raster_temp_executor_v1` carry their own copy of the setup script and are **not** behind this filter.
+- **One machine type.** x86_64 only. Elsewhere there is no table, therefore no filter, therefore the launcher refuses to start a worker.
+
+What this does not change: the worker still runs the host's libc and interpreter; no attack campaign has been run; no pinned minimal runtime exists. And the class of the boundary is unchanged: namespaces plus a syscall filter on a **shared kernel**. A kernel bug reachable through an allowed call still crosses it. A virtual machine boundary does not have that property, and nothing here claims to be one.

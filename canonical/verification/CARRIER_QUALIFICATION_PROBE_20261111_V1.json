@@ -1,0 +1,100 @@
+{
+ "schema": "CARRIER_QUALIFICATION_PROBE_V1",
+ "authority": "NONE -- PRODUCER-RUN SELF-REPORT, NOT CARRIER QUALIFICATION",
+ "machine": {
+  "platform": "linux",
+  "python": "3.11.2",
+  "namespace_broker_available": true
+ },
+ "checklist_source": "REPAIR_INDEPENDENT_REVIEW_REQUEST_20261102.md \u00a7 'Separate carrier qualification, still missing'",
+ "results": [
+  {
+   "probe": "host_filesystem_not_reachable",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "`ls /home/user/brain/.git` inside the worker -> exit 2, \"ls: cannot access '/home/user/brain/.git': No such file or directory\\n\"",
+   "reading": "the host working tree is not mounted; only /input and /work are",
+   "seconds": 0.12
+  },
+  {
+   "probe": "ambient_environment_clean",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "env inside worker: ['HOME=/work/tmp', 'PATH=/usr/local/bin:/usr/bin:/bin', 'PYTHONDONTWRITEBYTECODE=1', 'PYTHONPATH=/work/project', 'TMPDIR=/work/tmp']",
+   "reading": "no caller environment, no credentials, HOME is a private tmpfs",
+   "seconds": 0.12
+  },
+  {
+   "probe": "host_processes_invisible",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "ps -e rows='0'; kill -9 -1 -> 'sh: 1: kill: No such process'",
+   "reading": "private PID namespace: host processes are invisible and unsignalable",
+   "seconds": 0.12
+  },
+  {
+   "probe": "network_egress_refused",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "ip route rows='0'; /dev/tcp probe -> '0 | sh: 1: cannot create /dev/tcp/1.1.1.1/443: Directory nonexistent | rc=2 | '",
+   "reading": "no route out of the namespace and no reachable socket",
+   "seconds": 0.12
+  },
+  {
+   "probe": "descendant_cleanup_on_timeout",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "timed_out=True wall=2.1s; orphan's marker 14s later: absent",
+   "reading": "the grandchild's side effect never occurred: cleanup reaches descendants",
+   "seconds": 16.13
+  },
+  {
+   "probe": "output_bounded",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "`yes` -> ok=False blocked='WORKER_STATUS:CHILD_EXITED' retained=0 bytes",
+   "reading": "an unbounded producer is stopped and retains nothing",
+   "seconds": 0.93
+  },
+  {
+   "probe": "resource_limits_enforced",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "[786432, 32768, 64]",
+   "reading": "memory/pid/file/fd limits are enforced inside the worker",
+   "seconds": 0.12
+  },
+  {
+   "probe": "seccomp_syscall_filter",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "in the worker: filter_mode=2 no_new_privs=1 refused=['errno 1'] not_implemented=['errno 38'] ordinary=['answered']; allowlist 193 calls, 63 refused by name, sha256 26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+   "reading": "A FILTER IS IN FORCE AND REFUSES. Whether its list is the right list is a review of worker_syscall_allowlist_v1, which a probe cannot perform and the producer must not",
+   "seconds": 0.12
+  },
+  {
+   "probe": "no_host_libraries",
+   "verdict": "NOT_SATISFIED__OBSERVED",
+   "observation": "host runtime visible in worker: '/lib/x86_64-linux-gnu/libc.so.6 | /usr/bin/python3 | '",
+   "reading": "the worker runs the host's interpreter and libc read-only; a pinned minimal runtime is required for qualification and does not exist",
+   "seconds": 0.12
+  },
+  {
+   "probe": "carrier_reports_unqualified",
+   "verdict": "SATISFIED__OBSERVED",
+   "observation": "run_staged_confined_command reports carrier_qualified=False",
+   "reading": "the carrier still reports itself unqualified, which is correct",
+   "seconds": 0.12
+  }
+ ],
+ "summary": {
+  "satisfied": 9,
+  "not_satisfied": 1,
+  "not_tested": 0,
+  "unmeasurable": 0
+ },
+ "verdict": "CARRIER_NOT_QUALIFIED -- and this document cannot qualify it",
+ "what_a_verifier_must_do": [
+  "re-run this file on a host they control and compare verdicts item by item",
+  "add the two items no probe can settle: an ATTACK CAMPAIGN (this suite tests properties, not adversaries) and a PINNED MINIMAL RUNTIME (the worker runs the host's libc)",
+  "review the syscall allowlist itself (canonical/runtime/worker_syscall_allowlist_v1.py; its describe() and decide() answer for any call): the probe shows a filter is in force and refuses a sample, never that the 193 calls it allows are the right ones"
+ ],
+ "explicitly_not": [
+  "carrier qualification",
+  "an independent review",
+  "evidence that any capability may execute"
+ ],
+ "note": "Producer-run 2026-11-11 on the tree that adds canonical/runtime/worker_syscall_allowlist_v1.py and installs it in zero_ambient_namespace_launcher_v1 (x86_64, Linux 6.1, Python 3.11.2). Produced by canonical/tools/carrier_qualification_probe_v1.py, which is re-runnable in about eighteen seconds. It supersedes nothing: CARRIER_QUALIFICATION_PROBE_20261103_V1.json remains the record of the tree before the filter. This file is the INPUT to a review and can never be its output."
+}
