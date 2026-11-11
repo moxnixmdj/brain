@@ -8,7 +8,11 @@ something on the NEXT instance: same task, different page content, different ins
 wording. So this tool measures exactly that step and nothing else:
 
     1. on ONE instance of a task (the demonstration seed) the machine finds a success by
-       itself -- systematic exploration, the page's own reward as the only judge, no model;
+       itself -- systematic exploration, the page's own reward as the only judge, no model.
+       `--search blind` tries every offered action nearest the start first. `--search guided`
+       tries the same actions in another ORDER: what the instruction names first (an element
+       whose text is a run of the instruction's words; typing text the instruction quotes),
+       buttons after everything else that is named. Nothing is removed from what is tried;
     2. the success is replayed on a freshly loaded page under the page's own time limit, or
        it does not count;
     3. each arm turns that one trace into something it can apply to an instance it has not
@@ -226,8 +230,27 @@ class Bridge:
 # --------------------------------------------------------------------------- #
 # observations and actions
 # --------------------------------------------------------------------------- #
+FULL_REWARD = 1.0
+
+
 def succeeded(observation: Mapping[str, Any]) -> bool:
-    return bool(observation.get("done")) and float(observation.get("raw_reward") or 0) > 0
+    """The page ended the episode and gave its FULL reward.
+
+    Some MiniWoB++ pages pay part of the reward for part of the task: one ticked box of three
+    pays a third, any colour pays for how close it is, one page pays 0.1 for a wrong card.
+    "Any positive reward" is a common way to score these pages, and it is the wrong one for the
+    question asked here, which is whether the thing was DONE. Until 2026-11-11 this function
+    accepted any positive reward, and the two results written with it (..._V1.json and
+    ..._V2.json) are too generous on those pages. Episodes that were paid in part are counted
+    separately (`partial_credit`) and never as successes.
+    """
+    return bool(observation.get("done")) and float(observation.get("raw_reward") or 0) >= FULL_REWARD - 1e-9
+
+
+def partly_rewarded(observation: Mapping[str, Any]) -> bool:
+    """The page ended the episode with some reward, but not all of it. Counted, never as success."""
+    return (bool(observation.get("done")) and not succeeded(observation)
+            and float(observation.get("raw_reward") or 0) > 0)
 
 
 def failed(observation: Mapping[str, Any]) -> bool:
@@ -316,6 +339,166 @@ def parse_action(action: str) -> dict[str, Any]:
     raise ValueError("ACTION_NOT_UNDERSTOOD")
 
 
+# --------------------------------------------------------------------------- #
+# the order in which a guided search tries things
+# --------------------------------------------------------------------------- #
+SEARCHES = ("blind", "guided")
+PHRASE_WORDS = 6                        # the longest run of instruction words an element can be named by
+NAMING_ATTRIBUTES = ("id", "classes", "name", "title", "alt", "aria-label", "placeholder", "data-value")
+BUTTON_INPUT_TYPES = ("submit", "button", "image", "reset")
+
+
+def plain_words(text: Any) -> list[str]:
+    """Lower-case words with the punctuation at their edges dropped; `-` and `_` separate words."""
+    out = []
+    for raw in str(text or "").replace("-", " ").replace("_", " ").split():
+        word = raw.strip(_EDGE_PUNCTUATION).lower()
+        if word:
+            out.append(word)
+    return out
+
+
+def instruction_phrases(utterance: str) -> frozenset[str]:
+    """Every run of up to PHRASE_WORDS neighbouring words of the instruction."""
+    words = plain_words(utterance)
+    return frozenset(" ".join(words[i:j]) for i in range(len(words))
+                     for j in range(i + 1, min(len(words), i + PHRASE_WORDS) + 1))
+
+
+def is_button(element: Mapping[str, Any]) -> bool:
+    return (element.get("tag") == "button" or element.get("role") == "button"
+            or (element.get("tag") == "input" and str(element.get("type") or "").lower() in BUTTON_INPUT_TYPES))
+
+
+def named_by_instruction(element: Mapping[str, Any], phrases: frozenset[str]) -> bool:
+    """Does the instruction call this element by name? Its own text is a run of the instruction's
+    words; or what a button shows as its value is; or one of its names in the markup is (a whole
+    name, so class `star` is named by "click the star" and class `email-thread` is not named by
+    "the email")."""
+    own = " ".join(plain_words(element.get("text")))
+    if own and own in phrases:
+        return True
+    if is_button(element):
+        shown = " ".join(plain_words(element.get("value")))
+        if shown and shown in phrases:
+            return True
+    for attribute in NAMING_ATTRIBUTES:
+        value = str(element.get(attribute) or "")
+        for name in (value.split() if attribute == "classes" else [value]):
+            words = " ".join(plain_words(name))
+            if words and words in phrases:
+                return True
+    return False
+
+
+def already_chosen(elements: Sequence[Mapping[str, Any]]) -> set[int]:
+    """Elements that show as ticked or selected, and the labels that stand for them."""
+    chosen = {e["index"] for e in elements if e.get("checked") or e.get("selected")}
+    ids = {str(e.get("id")): e["index"] for e in elements if e.get("id")}
+    out = set(chosen)
+    for e in elements:
+        if e.get("tag") != "label":
+            continue
+        if ids.get(str(e.get("for") or "")) in chosen or any(c.get("parent") == e["index"] and c["index"] in chosen for c in elements):
+            out.add(e["index"])
+    return out
+
+
+def focus_only(elements: Sequence[Mapping[str, Any]]) -> set[int]:
+    """Elements a press merely puts the text cursor into: text fields, and the labels that stand
+    for them. Typing into a field already does that, so pressing one is never what was asked."""
+    fields = {e["index"] for e in elements if e.get("can_type")}
+    ids = {str(e.get("id")): e["index"] for e in elements if e.get("id")}
+    out = set(fields)
+    for e in elements:
+        if e.get("tag") == "label" and (ids.get(str(e.get("for") or "")) in fields
+                                        or any(c.get("parent") == e["index"] and c["index"] in fields for c in elements)):
+            out.add(e["index"])
+    return out
+
+
+def is_picture(element: Mapping[str, Any], parents: set[int]) -> bool:
+    """Nothing written on it and nothing inside it, yet it takes up room: an icon. Icons are for pressing."""
+    box = element.get("box")
+    return (not str(element.get("text") or "") and element["index"] not in parents and not element.get("can_type")
+            and element.get("tag") not in ("input", "select", "option", "textarea")
+            and (box is None or (box[2] > 0 and box[3] > 0)))
+
+
+_SENTENCE_END = (".", "!", "?")
+_LITERAL_MARKS = set("@/:#$%&*+=<>\\_~^|")
+
+
+def literal_words(utterance: str) -> list[str]:
+    """Words of the instruction that look like values rather than like prose, by spelling alone:
+    a digit, a symbol, or a capital letter anywhere but at the start of a sentence. No word list."""
+    out: list[str] = []
+    starts_sentence = True
+    for raw in (utterance or "").split():
+        word = raw.strip(_EDGE_PUNCTUATION)
+        if word and word not in out:
+            capital = any(ch.isupper() for ch in word)
+            if (any(ch.isdigit() for ch in word) or any(ch in _LITERAL_MARKS for ch in word)
+                    or (capital and not starts_sentence)):
+                out.append(word)
+        starts_sentence = raw.endswith(_SENTENCE_END)
+    return out
+
+
+class GuidedPrices:
+    """The price of trying each action, read off the instruction. An ORDER of trying, not a belief.
+
+        0   typing, into an empty field, text the instruction puts in quotes or a word of it that
+            looks like a value (see `literal_words`); pressing something the instruction names
+        1   typing any other word of the instruction into an empty field; pressing a button or an
+            icon the instruction does not name; pressing something it names that already shows
+            as chosen
+        2   typing text found on the page; pressing anything else, including a text field
+            (typing into a field already puts the cursor there)
+        +2  typing into a field that already holds something
+
+    In one state, equal prices are tried typing first, buttons last (a button is what usually
+    ends an episode). All of it is a guess about user interfaces in general, written after
+    reading MiniWoB++ pages, and all it can cost is actions: every offered action is still tried.
+    """
+
+    def __init__(self) -> None:
+        self._for: Any = None
+        self._context: Any = None
+
+    def _read(self, observation: Mapping[str, Any]) -> Any:
+        if self._for is not observation or self._context is None:     # one page is priced action by action
+            utterance = str(observation.get("utterance") or "")
+            elements = observation.get("elements") or []
+            parents = {int(e["parent"]) for e in elements if int(e.get("parent", -1)) >= 0}
+            free_text = set(quoted_spans(utterance)) | set(literal_words(utterance))
+            self._for = observation
+            self._context = (instruction_phrases(utterance), free_text, already_chosen(elements),
+                             focus_only(elements), parents)
+        return self._context
+
+    def __call__(self, observation: Mapping[str, Any], action: str) -> tuple[int, int]:
+        phrases, free_text, chosen, cursor_only, parents = self._read(observation)
+        wanted = parse_action(action)
+        element = observation["elements"][wanted["index"]]
+        if wanted["type"] == "type":
+            text = wanted["text"]
+            if text in free_text:
+                price = 0
+            elif " ".join(plain_words(text)) in phrases:
+                price = 1
+            else:
+                price = 2
+            return price + (2 if str(element.get("value") or "") else 0), 0
+        button = is_button(element)
+        turn = 2 if button else 1
+        if wanted["index"] in cursor_only:
+            return 2, turn
+        if named_by_instruction(element, phrases):
+            return (1 if wanted["index"] in chosen else 0), turn
+        return (1 if button or is_picture(element, parents) else 2), turn
+
+
 class SeedEnv:
     """One instance of one task as reset() / act() / state(), which is what the explorer drives."""
 
@@ -343,13 +526,39 @@ class SeedEnv:
 # --------------------------------------------------------------------------- #
 # stage 1: one success, found by the machine, on one instance
 # --------------------------------------------------------------------------- #
+GUIDED_TIER = 2      # a guided search is offered everything the widest blind tier is offered
+
+
+def acquire_first_success_guided(bridge: Any, seed: int, *, action_budget: int) -> dict[str, Any]:
+    """The same actions as the widest blind tier, tried in the order `GuidedPrices` gives."""
+    env = SeedEnv(bridge, seed, time_limit_ms=EXPLORATION_TIME_LIMIT_MS)
+    result = explorer.explore_to_goal(
+        env, [], is_goal=succeeded, is_dead=failed,
+        actions_of=lambda observation: offered_actions(observation, GUIDED_TIER), key_of=state_key,
+        order="cheapest", cost_of=GuidedPrices(), action_budget=int(action_budget), reset_cost=1, include_model=False)
+    runs = [{"tier": GUIDED_TIER, "status": result["status"], "budget_spent": int(result["budget_spent"]),
+             "acts": int(result["acts"]), "resets": int(result["resets"]),
+             "states": int(result["state_count"]), "surprises": int(result["surprises"])}]
+    found = bool(result["pass"])
+    return {"found": found,
+            "plan": [str(a) for a in result["plan_cheapest"]] if found else None,
+            "plan_walked": [str(a) for a in result["plan_walked"]] if found else None,
+            "tier": GUIDED_TIER if found else None, "budget_spent": int(result["budget_spent"]), "runs": runs,
+            "page_errors": sorted(set(env.page_errors))[:3]}
+
+
 def acquire_first_success(bridge: Any, seed: int, *, action_budget: int,
-                          tier_shares: Sequence[float] = (0.4, 0.3, 0.3)) -> dict[str, Any]:
+                          tier_shares: Sequence[float] = (0.4, 0.3, 0.3), search: str = "blind") -> dict[str, Any]:
     """Systematic exploration of ONE instance until the page itself reports success.
 
-    Typed text is tried in tiers (quoted text; any instruction word; any text on the page).
-    A later tier keeps the map the earlier one drew, so nothing is paid for twice.
+    Blind: typed text is tried in tiers (quoted text; any instruction word; any text on the
+    page). A later tier keeps the map the earlier one drew, so nothing is paid for twice.
+    Guided: see `acquire_first_success_guided`.
     """
+    if search not in SEARCHES:
+        raise ValueError("SEARCH_UNKNOWN")
+    if search == "guided":
+        return acquire_first_success_guided(bridge, seed, action_budget=action_budget)
     env = SeedEnv(bridge, seed, time_limit_ms=EXPLORATION_TIME_LIMIT_MS)
     model: dict[str, dict[str, str]] | None = None
     spent = 0
@@ -418,7 +627,25 @@ def replay_on_fresh_page(bridge: Any, task: str, seed: int, plan: Sequence[str])
             "reason": None if succeeded(observation) else "PLAN_DID_NOT_END_IN_SUCCESS"}
 
 
-def demonstrate(bridge: Any, task: str, seed: int, *, action_budget: int) -> dict[str, Any]:
+def needed_steps(bridge: Any, task: str, seed: int, plan: Sequence[str],
+                 trace: Sequence[tuple[Mapping[str, Any], str]]) -> dict[str, Any]:
+    """Which steps did the success need? Each step is left out in turn, last first, on a fresh
+    page. If the page still pays in full without it, the step was not a cause of the success
+    and is dropped. What comes back is again a route that succeeded on a fresh page -- the
+    shorter one -- together with what finding that out cost."""
+    kept, kept_trace, spent, dropped = [str(a) for a in plan], list(trace), 0, 0
+    position = len(kept) - 1
+    while position >= 0 and len(kept) > 1:
+        shorter = kept[:position] + kept[position + 1:]
+        replay = replay_on_fresh_page(bridge, task, seed, shorter)
+        spent += len(replay["trace"]) + 1
+        if replay["reproduced"]:
+            kept, kept_trace, dropped = shorter, replay["trace"], dropped + 1
+        position -= 1
+    return {"plan": kept, "trace": kept_trace, "actions": spent, "dropped": dropped}
+
+
+def demonstrate(bridge: Any, task: str, seed: int, *, action_budget: int, search: str = "blind") -> dict[str, Any]:
     """Find a success on one instance and make it happen again on a fresh page.
 
     The explorer reports the shortest route IN THE MAP IT DREW. When a page keeps state the
@@ -428,8 +655,8 @@ def demonstrate(bridge: Any, task: str, seed: int, *, action_budget: int) -> dic
     """
     if not bridge.load(task).get("ok"):
         return {"stage": STAGE_NOT_RUNNING, "reason": "PAGE_DID_NOT_RELOAD", "trace": None, "acquisition": None}
-    acquired = acquire_first_success(bridge, seed, action_budget=action_budget)
-    summary = {k: acquired[k] for k in ("found", "tier", "budget_spent", "runs", "page_errors")}
+    acquired = acquire_first_success(bridge, seed, action_budget=action_budget, search=search)
+    summary: dict[str, Any] = {k: acquired[k] for k in ("found", "tier", "budget_spent", "runs", "page_errors")}
     if not acquired["found"]:
         return {"stage": STAGE_NO_SUCCESS, "reason": None, "trace": None, "acquisition": summary}
     reason = None
@@ -439,8 +666,17 @@ def demonstrate(bridge: Any, task: str, seed: int, *, action_budget: int) -> dic
             break
         replay = replay_on_fresh_page(bridge, task, seed, plan)
         if replay["reproduced"]:
-            summary["route_used"] = "shortest_in_map" if source == "plan" else "as_walked"
-            return {"stage": STAGE_DEMONSTRATED, "reason": None, "trace": replay["trace"], "acquisition": summary}
+            summary["route_used"] = ("as_walked" if source == "plan_walked"
+                                     else "cheapest_in_map" if search == "guided" else "shortest_in_map")
+            trace = replay["trace"]
+            if search == "guided":
+                # a guided search does what the instruction names first, needed or not; keep what was needed
+                needed = needed_steps(bridge, task, seed, plan, trace)
+                trace = needed["trace"]
+                summary["steps_found"] = len(plan)
+                summary["steps_not_needed"] = needed["dropped"]
+                summary["necessity_check_actions"] = needed["actions"]
+            return {"stage": STAGE_DEMONSTRATED, "reason": None, "trace": trace, "acquisition": summary}
         reason = replay["reason"]
     return {"stage": STAGE_NOT_REPRODUCED, "reason": reason, "trace": None, "acquisition": summary}
 
@@ -611,21 +847,22 @@ def run_episode(bridge: Any, seed: int, arm: Any) -> dict[str, Any]:
             break
         observation = bridge.act(parse_action(action))
         steps += 1
-    return {"success": succeeded(observation), "steps": steps, "refused": bool(getattr(arm, "refused", False)),
-            "ended": bool(observation.get("done"))}
+    return {"success": succeeded(observation), "partial": partly_rewarded(observation), "steps": steps,
+            "refused": bool(getattr(arm, "refused", False)), "ended": bool(observation.get("done"))}
 
 
 def score_arm(bridge: Any, task: str, arm: Any, seeds: Sequence[int]) -> dict[str, Any]:
     """One try per unseen instance, on a page with no history."""
     if not bridge.load(task).get("ok"):
         raise BridgeError("PAGE_DID_NOT_RELOAD")
-    bits, steps, refused = [], 0, 0
+    bits, steps, refused, partial = [], 0, 0, 0
     for seed in seeds:
         outcome = run_episode(bridge, seed, arm)
         bits.append(1 if outcome["success"] else 0)
         steps += outcome["steps"]
         refused += 1 if outcome["refused"] else 0
-    return {"episodes": len(bits), "successes": sum(bits), "refused": refused,
+        partial += 1 if outcome["partial"] else 0
+    return {"episodes": len(bits), "successes": sum(bits), "refused": refused, "partial_credit": partial,
             "success_rate": round(sum(bits) / max(1, len(bits)), 4), "actions": steps,
             "per_seed": "".join(str(b) for b in bits)}
 
@@ -662,7 +899,7 @@ def page_gate(bridge: Any, task: str, seeds: Sequence[int]) -> dict[str, Any]:
 
 
 def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_budget: int,
-                 arm_names: Sequence[str], practice: Sequence[int] = ()) -> dict[str, Any]:
+                 arm_names: Sequence[str], practice: Sequence[int] = (), search: str = "blind") -> dict[str, Any]:
     row: dict[str, Any] = {"task": task, "split": split_of(task)}
     started = time.time()
     try:
@@ -670,7 +907,7 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
         if gate["stage"]:
             row.update(gate)
             return row
-        shown = demonstrate(bridge, task, DEMO_SEED, action_budget=action_budget)
+        shown = demonstrate(bridge, task, DEMO_SEED, action_budget=action_budget, search=search)
         acquired = shown["acquisition"]
         if acquired is not None:
             row["acquisition"] = acquired
@@ -704,12 +941,13 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
                 if one_success_arm is None:
                     one_success_arm = build_version_space_arm(bridge, task, trace, practice=(),
                                                               action_budget=action_budget,
-                                                              tier=int(acquired["tier"] or 0))
+                                                              tier=int(acquired["tier"] or 0), search=search)
                 arm = one_success_arm if name == "version_space" else InstructionBlindArm(
                     one_success_arm, str(trace[0][0].get("utterance") or ""))
             elif name == "version_space_practice":
                 arm = build_version_space_arm(bridge, task, trace, practice=practice,
-                                              action_budget=action_budget, tier=int(acquired["tier"] or 0))
+                                              action_budget=action_budget, tier=int(acquired["tier"] or 0),
+                                              search=search)
             else:
                 raise ValueError("ARM_UNKNOWN")
             scored = score_arm(bridge, task, arm, test_seeds)
@@ -731,10 +969,10 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
 
 
 def build_version_space_arm(bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any], str]], *,
-                            practice: Sequence[int], action_budget: int, tier: int) -> Any:
+                            practice: Sequence[int], action_budget: int, tier: int, search: str = "blind") -> Any:
     from canonical.runtime import demonstration_version_space_v1 as learner
     return learner.build_arm(bridge=bridge, task=task, trace=trace, practice_seeds=list(practice),
-                             action_budget=action_budget, tier=tier, tool=sys.modules[__name__])
+                             action_budget=action_budget, tier=tier, tool=sys.modules[__name__], search=search)
 
 
 # --------------------------------------------------------------------------- #
@@ -841,7 +1079,10 @@ def seed_plan(test_episodes: int, practice_episodes: int) -> tuple[list[int], li
 
 def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, test_episodes: int,
         action_budget: int, arm_names: Sequence[str], practice_episodes: int = 0,
-        progress: Callable[[str], None] | None = None, substrate: str = "jsdom") -> dict[str, Any]:
+        progress: Callable[[str], None] | None = None, substrate: str = "jsdom",
+        search: str = "blind") -> dict[str, Any]:
+    if search not in SEARCHES:
+        raise ValueError("SEARCH_UNKNOWN")
     names = list(tasks) if tasks else list_tasks(html_dir)
     test_seeds, practice = seed_plan(test_episodes, practice_episodes)
     bridge = Bridge(html_dir, node_modules_dir, substrate=substrate)
@@ -850,7 +1091,7 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
         rows = []
         for name in names:
             row = measure_task(bridge, name, test_seeds=test_seeds, action_budget=action_budget,
-                               arm_names=arm_names, practice=practice)
+                               arm_names=arm_names, practice=practice, search=search)
             rows.append(row)
             if progress:
                 arms = {k: v["success_rate"] for k, v in (row.get("arms") or {}).items()}
@@ -873,7 +1114,8 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
         },
         "parameters": {
             "demonstration_seed": DEMO_SEED, "test_seeds": test_seeds, "practice_seeds": practice,
-            "acquisition_action_budget": int(action_budget), "max_episode_steps": MAX_EPISODE_STEPS,
+            "acquisition_action_budget": int(action_budget), "first_success_search": search,
+            "max_episode_steps": MAX_EPISODE_STEPS,
             "exploration_time_limit_ms": EXPLORATION_TIME_LIMIT_MS,
             "split_rule": f"sha256(task name) mod {DEVELOPMENT_MODULUS} == 0 is development, the rest held out",
             "arms": list(arm_names),
@@ -933,6 +1175,7 @@ def digest(result: Mapping[str, Any]) -> dict[str, Any]:
             entry["distinct_test_instructions"] = r.get("distinct_test_instructions")
         if r.get("arms"):
             entry["arms"] = {name: {"successes": a["successes"], "episodes": a["episodes"], "refused": a["refused"],
+                                    **({"partial_credit": a["partial_credit"]} if a.get("partial_credit") else {}),
                                     **({"learning": a["learning"]} if "learning" in a else {})}
                              for name, a in r["arms"].items()}
         rows.append(entry)
@@ -961,6 +1204,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--html-dir", help="path to miniwob-plusplus/miniwob/html")
     parser.add_argument("--node-modules-dir", default="", help="directory that contains node_modules: jsdom and @sinonjs/fake-timers for jsdom, puppeteer-core and @sparticuz/chromium for chromium")
     parser.add_argument("--substrate", choices=sorted(SUBSTRATES), default="jsdom", help="where the pages run")
+    parser.add_argument("--search", choices=list(SEARCHES), default="blind",
+                        help="the order in which actions are tried while looking for the first success")
     parser.add_argument("--tasks", nargs="*", help="task names (default: every page)")
     parser.add_argument("--only-split", choices=["development", "held_out"], help="restrict to one split")
     parser.add_argument("--test-episodes", type=int, default=20)
@@ -985,7 +1230,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         names = [n for n in names if split_of(n) == args.only_split]
     result = run(args.html_dir, args.node_modules_dir, tasks=names, test_episodes=args.test_episodes,
                  action_budget=args.action_budget, arm_names=args.arms, practice_episodes=args.practice_episodes,
-                 progress=lambda line: print(line, flush=True), substrate=args.substrate)
+                 progress=lambda line: print(line, flush=True), substrate=args.substrate, search=args.search)
     if args.out:
         pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
     print(json.dumps(result["summary"], indent=1, sort_keys=True))

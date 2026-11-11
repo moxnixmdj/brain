@@ -39,7 +39,19 @@ and too many of them end the run as NOT_REPEATABLE instead of pretending to have
                         before the goal is first seen, so in a repeatable environment the
                         first route found is a SHORTEST one.
 
-Which untried action to take first is the one place a prior can enter. `effect_prior=True`
+    order="cheapest"    the caller prices every action where it is offered (`cost_of`, whole
+                        numbers), and the next experiment is the untried action whose price
+                        PLUS the price of the cheapest known way to where it is offered is
+                        lowest. Among equals the DEEPEST state goes first: a run of free
+                        actions is followed to its end, and when it ends badly the search backs
+                        up one step, not to the start. So everything reachable for nothing is
+                        tried, depth first, before anything is paid for; then everything
+                        reachable for one unit, depth first; and so on. The prices are an
+                        ORDER, never a filter: every offered action is still tried if the
+                        budget lasts, so a bad price list costs actions and cannot hide a goal.
+
+Which untried action to take first is the one place a prior can enter. `cost_of` above is the
+caller's prior, stated as numbers. `effect_prior=True`
 keeps a running count, per action CLASS, of how often trying it changed the state, and
 schedules untried actions in proportion to that rate (deterministically; no random numbers
 anywhere in this file). An action that has done nothing every time it was tried is tried
@@ -60,6 +72,7 @@ No model, no weights, no network, no randomness. `K3 = 0`, `$0`.
 """
 from __future__ import annotations
 
+import heapq
 import time
 from collections import deque
 from typing import Any, Callable, Iterable, Mapping, Sequence
@@ -166,7 +179,8 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
                     order: str = "nearest",
                     prior: Mapping[str, Mapping[str, str]] | None = None,
                     reset_cost: int = 1,
-                    include_model: bool = True) -> dict[str, Any]:
+                    include_model: bool = True,
+                    cost_of: Callable[[Any, str], float] | None = None) -> dict[str, Any]:
     """Explore until the goal is OBSERVED, the budget is spent, or nothing is left to try.
 
     env            reset() / act(action) / state(), exactly as `environment_learning_v1`.
@@ -176,7 +190,12 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
     key_of         observation -> identity of the state. Defaults to the shared `state_key`.
     action_class   action -> the class its effect statistics are pooled under.
     effect_prior   schedule untried actions by measured effect rate instead of declared order.
-    order          "nearest" (cheapest first solve) or "shallowest" (first route is a shortest one).
+    order          "nearest" (cheapest first solve), "shallowest" (first route is a shortest one)
+                   or "cheapest" (lowest total price first; needs `cost_of`).
+    cost_of        (observation, action) -> price, or (price, turn). The price is a whole
+                   number >= 0 and adds up along a route. `turn` only orders actions of equal
+                   price offered in the same state (lower first; declared order among equals).
+                   Only read by order="cheapest". An order of trying, never a reason not to try.
     prior          a model carried from elsewhere; it is travelled, checked, and corrected.
     reset_cost     what a reset is worth in actions. It decides between walking and resetting,
                    and every reset after the first is charged against `action_budget` at this
@@ -185,10 +204,15 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
 
     Returns what was learned and how it ended. `plan_walked` is the exact action sequence
     since the last reset that ended on the goal, so it replays from reset by construction;
-    `plan_shortest` is the shortest route to the same state in the learned model.
+    `plan_shortest` is the shortest route to the same state in the learned model, and under
+    order="cheapest" `plan_cheapest` is the lowest-priced one (fewest actions among equals).
     """
-    if order not in ("nearest", "shallowest"):
+    if order not in ("nearest", "shallowest", "cheapest"):
         raise ValueError("EXPLORATION_ORDER_INVALID")
+    if order == "cheapest" and cost_of is None:
+        raise ValueError("CHEAPEST_ORDER_NEEDS_PRICES")
+    if order == "cheapest" and prior:
+        raise ValueError("CHEAPEST_ORDER_TAKES_NO_CARRIED_MODEL")   # a carried state has no prices
     started = time.time()
     key = key_of or _default_key
     budget = max(0, int(action_budget))
@@ -199,6 +223,10 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
                                         for k, v in (prior or {}).items()}
     available: dict[str, tuple[str, ...]] = {}
     dead: set[str] = set()
+    prices: dict[str, dict[str, int]] = {}        # state -> action -> price, as quoted when first seen
+    by_price: dict[str, list[str]] = {}           # state -> its actions, cheapest first (declared order among equals)
+    first_untried: dict[str, int] = {}            # state -> how far down that list everything is already tried
+    found_at: dict[str, int] = {}                 # state -> order of discovery
     schedule = _EffectSchedule() if effect_prior else None
 
     counters = {"acts": 0, "resets": 0, "travel_acts": 0, "experiment_acts": 0,
@@ -219,6 +247,18 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
         if k not in available:
             offered = actions_of(observation) if actions_of is not None else static_actions
             available[k] = tuple(dict.fromkeys(str(a) for a in offered))
+            if order == "cheapest":
+                quoted: dict[str, int] = {}
+                turn: dict[str, float] = {}
+                for a in available[k]:
+                    asked = cost_of(observation, a)
+                    price_of_a, turn_of_a = asked if isinstance(asked, tuple) else (asked, 0)
+                    if int(price_of_a) != price_of_a or price_of_a < 0:
+                        raise ValueError("PRICES_ARE_WHOLE_NUMBERS_FROM_ZERO")
+                    quoted[a], turn[a] = int(price_of_a), float(turn_of_a)
+                prices[k] = quoted
+                by_price[k] = sorted(available[k], key=lambda a: (quoted[a], turn[a]))   # sorted() is stable
+                found_at[k] = len(found_at)
         if is_dead is not None and is_dead(observation):
             dead.add(k)
         model.setdefault(k, {})
@@ -236,6 +276,49 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
 
     def has_untried(k: str) -> bool:
         return bool(untried(k))
+
+    def cheapest_untried(k: str) -> tuple[int, str] | None:
+        if k in dead or k not in by_price:
+            return None
+        listed, known = by_price[k], model.get(k) or {}
+        i = first_untried.get(k, 0)
+        while i < len(listed) and listed[i] in known:      # a tried action stays tried
+            i += 1
+        first_untried[k] = i
+        return (prices[k][listed[i]], listed[i]) if i < len(listed) else None
+
+    def priced_routes(start: str) -> tuple[dict[str, int], dict[str, int], dict[str, tuple[str, str]]]:
+        """Lowest total price from `start` to every known state; fewest actions among equal prices."""
+        total: dict[str, int] = {start: 0}
+        hops: dict[str, int] = {start: 0}
+        came: dict[str, tuple[str, str]] = {}
+        heap = [(0, 0, start)]
+        while heap:
+            paid, steps, k = heapq.heappop(heap)
+            if (paid, steps) != (total[k], hops[k]) or k in dead:
+                continue
+            for action, nxt in (model.get(k) or {}).items():
+                offer = (paid + prices.get(k, {}).get(action, 1), steps + 1)
+                if nxt not in total or offer < (total[nxt], hops[nxt]):
+                    total[nxt], hops[nxt] = offer
+                    came[nxt] = (k, action)
+                    heapq.heappush(heap, (offer[0], offer[1], nxt))
+        return total, hops, came
+
+    def pick_cheapest() -> tuple[str, str] | None:
+        """The untried action with the lowest (price of getting there + its own price). Among
+        equals: the one furthest along (depth first: a free run is followed to its end, and a
+        dead end backs up one step), then the one where we already stand, then the earlier found."""
+        total, hops, _ = priced_routes(root)
+        best: tuple[tuple[int, int, int, int], str, str] | None = None
+        for k, paid in total.items():
+            offer = cheapest_untried(k)
+            if offer is None:
+                continue
+            rank = (paid + offer[0], -hops[k], 0 if k == current else 1, found_at.get(k, 0))
+            if best is None or rank < best[0]:
+                best = (rank, k, offer[1])
+        return None if best is None else (best[1], best[2])
 
     def finish(status: str, goal_key: str | None, **extra: Any) -> dict[str, Any]:
         reached = goal_key is not None
@@ -265,6 +348,15 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
                 "SHORTEST_GIVEN_REPEATABLE_ENVIRONMENT"
                 if order == "shallowest" and not counters["surprises"] and not prior
                 else "NOT_PROVEN_SHORTEST")
+            if order == "cheapest":
+                _, _, came = priced_routes(root)
+                route: list[str] = []
+                cursor = goal_key
+                while cursor != root and cursor in came:
+                    cursor, taken = came[cursor]
+                    route.append(taken)
+                route.reverse()
+                out["plan_cheapest"] = route if cursor == root else list(since_reset)
         if schedule is not None:
             out["effect_table"] = schedule.table()
         if include_model:
@@ -328,17 +420,35 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
         if too_surprised():
             return finish(OPEN_UNSTABLE, None)
 
-        here = untried(current)
-        can_experiment_here = bool(here) and here != ["?"]
-        if order == "nearest" and can_experiment_here:
-            # No search at all on this path: on a large table the common case must stay O(1).
-            observation = experiment_here()
-            if is_goal(observation):
-                return finish(PASS, current)
-            continue
-        from_root = _shortest_path(model, root, has_untried)
+        if order == "cheapest":
+            choice = pick_cheapest()
+            if choice is None:
+                return finish(OPEN_UNSTABLE if counters["surprises"] else FAIL_EXHAUSTED, None)
+            target, chosen = choice
+            if target == current:
+                observation, _, _ = step(chosen, travelling=False)
+                if is_goal(observation):
+                    return finish(PASS, current)
+                continue
+            # Go there (the walk below), then choose again: the map may have changed on the way.
+            from_root = _shortest_path(model, root, lambda k: k == target)
+            local = (None if current in dead
+                     else _shortest_path(model, current, lambda k: k == target))
+            can_experiment_here = False
+        else:
+            here = untried(current)
+            can_experiment_here = bool(here) and here != ["?"]
+            if order == "nearest" and can_experiment_here:
+                # No search at all on this path: on a large table the common case must stay O(1).
+                observation = experiment_here()
+                if is_goal(observation):
+                    return finish(PASS, current)
+                continue
+            from_root = _shortest_path(model, root, has_untried)
 
-        if order == "nearest" or from_root is None:
+        if order == "cheapest":
+            pass
+        elif order == "nearest" or from_root is None:
             if can_experiment_here:
                 observation = experiment_here()
                 if is_goal(observation):

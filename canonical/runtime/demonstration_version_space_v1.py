@@ -706,7 +706,8 @@ class VersionSpaceArm:
 
 
 def build_arm(*, bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any], str]],
-              practice_seeds: Sequence[int], action_budget: int, tier: int, tool: Any) -> VersionSpaceArm:
+              practice_seeds: Sequence[int], action_budget: int, tier: int, tool: Any,
+              search: str = "blind") -> VersionSpaceArm:
     """Start from one success. On each practice instance try what is held; if the page says
     no, find a success there by exploration and take that. Either way the only thing ever
     added is a trace the page itself rewarded."""
@@ -731,7 +732,7 @@ def build_arm(*, bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any]
                 log["new_ways"] += 1
             log["own_success"] += 1
             continue
-        shown = tool.demonstrate(bridge, task, seed, action_budget=action_budget)
+        shown = tool.demonstrate(bridge, task, seed, action_budget=action_budget, search=search)
         log["search_actions"] += int((shown["acquisition"] or {}).get("budget_spent") or 0)
         if shown["trace"] is None:
             log["no_success"] += 1
