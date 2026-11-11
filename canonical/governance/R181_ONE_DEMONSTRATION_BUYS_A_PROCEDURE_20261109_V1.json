@@ -1,0 +1,68 @@
+{
+ "round": "r181",
+ "date": "2026-11-09",
+ "claim": "Experience cannot be transferred by recording one demonstration of a compound action. It transfers only when the demonstration is compiled into a NAMED PROCEDURE with a checked precondition and a read-back. Measured in this round, not asserted.",
+ "question_asked": "'Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them?'",
+ "answer_no": {
+  "one_sentence": "Because in our own records a single episode contains ONE instance, and the thing that must generalise is the procedure. The episode is evidence; the procedure is the asset.",
+  "evidence": [
+   {
+    "finding": "r175: learn on episode 1, recall on episodes 2-5",
+    "result": "0/4",
+    "why": "memory is addressed by the sentence, and the sentence changes every episode"
+   },
+   {
+    "finding": "r175: strip the operands, store one signature",
+    "result": "1 signature for 4 episodes",
+    "why": "what is left after the operands are removed is the procedure -- that is the unit that can transfer"
+   },
+   {
+    "finding": "r180: five repairs as procedures (a loop, a whole-table pass, a timed sequence, a comparison, a question)",
+    "result": "+3.23 pp, t=1.70, 650 trials",
+    "why": "procedures are what moved the number; trajectories never did"
+   },
+   {
+    "finding": "r179/r181: every regression this session came from a ROUTE, not from a missing action",
+    "result": "drag-sort-numbers 1.00 -> 0.00; form-sequence 0/5 until the guard moved",
+    "why": "the action was already known; the dispatch order was wrong. One demonstration would have shown the action, not the route."
+   }
+  ]
+ },
+ "external": {
+  "single_demonstration": "GEN-1.5 (Aug 2026) reports 59% on ten new tasks from one demonstration, but 83% after ten training steps -- the demonstration changes the weights, it does not act at inference. On an independent testbed (VLA-Arena, ICML 2026) six state-of-the-art models dropped to 0.00-0.01 when asked to chain two skills each had already mastered.",
+  "evaluation_noise": "Bjarnason et al. 2026: ten identical full-benchmark replicates of the same system spanned 2.2-6.0 pp; two identical systems differ by three points about one time in six. Our own 650-trial SE is 1.90 pp and one repair is worth 0.77 pp."
+ },
+ "what_a_one_shot_CAN_buy": {
+  "worth": "up to +36.2 pp, measured r175",
+  "how": "write the PROCEDURE down as text a future run can read, with the precondition that selects it and the read-back that confirms it",
+  "not": "store the trajectory. 0/4 recall."
+ },
+ "arithmetic": "At 650 trials one demonstration-recording repair is +0.77 pp and the noise band is 2.7 pp. A procedure that fixes a FAMILY (5 tasks) is +3.85 pp, which is just outside the band. That is why the batch rule exists and why 'once' has to mean 'once per shape', not 'once per task'.",
+ "structural_finding": "VERB_PATTERNS is first-match-wins with ~24 entries and 21 goals match more than one pattern. r181 produced two more route defects of exactly that kind: SELECT above FORM_SEQUENCE swallowed 'Choose ... from the dropdown', and a page-shape guard in dispatch() ran before the verb table. Adding a capability does not add it -- it re-routes everything below it.",
+ "delivered_r181": [
+  {
+   "task": "form-sequence",
+   "before": "0.00",
+   "after": "1.00",
+   "shape": "conjunction over the whole form: slider value AND one named checkbox AND nothing else"
+  },
+  {
+   "task": "form-sequence-2",
+   "before": "0.00",
+   "after": "0.67",
+   "shape": "named radio AND named textbox AND every other textbox empty"
+  }
+ ],
+ "open": [
+  {
+   "task": "form-sequence-3",
+   "state": "0/6",
+   "cause": "jQuery selectric widget over a hidden <select>; checker compares $('select').val() to the option TEXT"
+  },
+  {
+   "task": "form-sequence-3 route",
+   "state": "fixed",
+   "detail": "SELECT sat above FORM_SEQUENCE; page says 'labeled', pattern said 'labelled'"
+  }
+ ]
+}
