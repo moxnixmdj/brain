@@ -1,0 +1,34 @@
+{
+  "round": "r175",
+  "date": "2026-11-09",
+  "claim": "The memory exists and is correct. It is addressed by the WRONG THING. Measured on real episodes: learning from one episode reaches 0 of the next 4, because the signature includes the operand, and the operand changes every episode. Strip the operands and the same five episodes collapse to ONE address.",
+  "why_this_matters": "This is the user's thesis tested as a mechanism rather than an opinion. 'Do it once and it is permanent' is exactly right; 'and it transfers' is exactly what the existing address prevents.",
+  "repository_finding": {
+    "existing_memory": "canonical/runtime/experience_v1.py (persistent, e-process gated, revocable) + answer_memory_v1.py",
+    "answer_memory_v1_own_docstring": "'AND IT WAS ALREADY SOLVED. experience_v1 records a recurring fact ... Nothing on the answer path read it.'",
+    "same_defect_again": "experience_v1 is read by nothing on the MiniWob path either: grep of miniwob_actuator_v1.py and miniwob_repeat_v1.py returns zero references."
+  },
+  "measurement": {
+    "store": "experience_v1.teach_resolution / recall_resolution, fresh temp state",
+    "goals": "five real goals from one task's five recorded episodes (email-inbox-reply)",
+    "learn_from_episode_1_then_recall_on_2_to_5": {"hits": 0, "attempts": 4},
+    "cause": "signature_of() includes every distinctive token, including the sender name and the quoted reply text",
+    "signature_episode_1": "convallis|email|find|reply|rozalin|text|them",
+    "signature_episode_2": "arcu|email|find|michel|reply|text|them",
+    "after_stripping_operands": {"distinct_signatures_across_5_episodes": 1}
+  },
+  "ceiling_from_todays_data_r174": {
+    "zero_tasks": 57,
+    "zero_with_identical_actions": 47,
+    "zero_with_varying_actions": 10,
+    "unstable_partial_tasks": 17,
+    "gain_if_every_partial_task_pinned_to_1.00_pp": 6.0,
+    "gain_if_every_identical_zero_got_a_rule_pp": 36.2,
+    "reading": "Memory can only act where the action VARIES. On 47 of 57 zero tasks the agent performed the same action on every rep and got the same failure -- there is no successful variant to remember. Memory's whole headroom today is 17 unstable tasks = 6.0 pp. The other 36.2 pp needs a written rule about a shape, which is what r172-r174 did."
+  },
+  "conclusion": {
+    "what_is_real": "instant learning, permanence, and non-parametric memory are all real and already built in this repo",
+    "what_is_wrong": "the memory is addressed by the sentence, so it does not transfer across episodes of the same task; and no memory can help where the action never varied",
+    "the_join_that_is_missing": "a memory addressed by control SHAPE with operands stripped, written by the winning action path, read before dispatch"
+  }
+}
