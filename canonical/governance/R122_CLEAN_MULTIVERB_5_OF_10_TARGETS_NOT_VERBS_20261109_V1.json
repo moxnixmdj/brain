@@ -1,0 +1,37 @@
+{
+  "schema": "PROJECT_BRAIN_R122_CLEAN_MULTIVERB_5_OF_10_V1",
+  "date": "2026-11-09",
+  "supersedes": "R121F (2/10) which measured a one-verb policy and R121G-style 3/10 which was contaminated by a start-up race",
+  "design": {
+    "policy": "one generic policy, six verbs: click-text, select-from-list, multi-select by comma/and, click-link-text, type-into-field, colour-match-by-computed-background, nested-menu A>B>C, plus submit",
+    "race_fixed": "the earlier NO-VERB failures were caused by reading #query before the episode populated it; the policy now polls up to 3s for a non-empty goal after starting",
+    "tasks": 10,
+    "live_bench": "MiniWob++ on 127.0.0.1:8893, HeadlessChrome/153 via CDP"
+  },
+  "score": "5/10",
+  "results": [
+    {"task": "click-button", "outcome": "PASS", "reward": 0.9994, "verb": "click-text"},
+    {"task": "click-option", "outcome": "PASS", "reward": 0.9774, "verb": "select-from-list"},
+    {"task": "click-checkboxes", "outcome": "PASS", "reward": 0.9328, "verb": "multi-select (3 named items)"},
+    {"task": "click-test", "outcome": "PASS", "reward": 0.9997, "verb": "click-button"},
+    {"task": "enter-text", "outcome": "PASS", "reward": 0.9688, "verb": "type"},
+    {"task": "click-link", "outcome": "FAIL", "verb": "click-link-text", "failure": "link text 'nunc' not exposed as a clickable element with accessible text", "class": "TARGET_ADDRESS"},
+    {"task": "click-dialog", "outcome": "FAIL", "verb": "click-text", "failure": "target is a glyph 'x', not text", "class": "TARGET_ADDRESS"},
+    {"task": "click-menu", "outcome": "FAIL", "verb": "nested-menu", "failure": "level 1 opened but submenu 'Ariana' never became hit-testable", "class": "TARGET_ADDRESS"},
+    {"task": "click-color", "outcome": "FAIL", "verb": "colour-match", "failure": "goal names a colour; no text target exists at all", "class": "TARGET_ADDRESS"},
+    {"task": "choose-list", "outcome": "FAIL", "verb": "select-from-list", "failure": "dropdown options are not in the DOM until the select is opened", "class": "TARGET_ADDRESS"}
+  ],
+  "finding": "all five failures have the same class. None is a missing verb: type, multi-select, click and submit all work. Every failure is a failure to LOCATE a target that is not a text-labelled element in the DOM.",
+  "why_click_color_is_decisive": "the goal is 'Click on the olive colored box'. There is no text to match, ever. No amount of stored procedure or instant learning can address an unlabelled visual target. This is the clean counterexample to 'learn it once and computer use is solved'.",
+  "relationship_to_literature": [
+    "MMBench-GUI (CVPR 2026): 'Accurate visual grounding is the primary driver of success'; 'Action-space bottlenecks: many failures stem from missing or overly coarse primitives, not perception alone' -- the two are separated, and this measurement lands on the grounding side",
+    "ComponentBench (COLM 2026): five critical interactions at 80% reliability imply a ~33% end-to-end ceiling -- memory does not raise a reliability ceiling it does not touch",
+    "ScratchWorld (2026): planning-mode 78.3% vs primitive-mode 14.5%; perception 90.5% vs single-step drag 23.3% -- reasoning is not the bottleneck for execution"
+  ],
+  "the_first_principles_statement": "learning is a multiplier on capability, not an addition to it. If grounding is g on a task, perfect memory gives g x 1.0 = g. The only way to move the product is to raise g.",
+  "what_is_NOT_claimed": [
+    "that 5/10 is the project's reach on MiniWob++ (130 tasks; this is a biased 10-task sample chosen because they are the ones the earlier policy failed)",
+    "that the other 120 tasks distribute like these",
+    "that the verb set is complete"
+  ]
+}
