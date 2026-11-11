@@ -1,0 +1,460 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_WORD_TAUGHT_BY_EXAMPLE_ANSWERS_BECOMES_AN_ANSWER_AT_THE_FRONT_DOOR_20261111_V1",
+ "action_intent_id": "A_WORD_TAUGHT_BY_EXAMPLE_ANSWERS_BECOMES_AN_ANSWER_AT_THE_FRONT_DOOR_20261111_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_WORD_TAUGHT_BY_EXAMPLE_ANSWERS_BECOMES_AN_ANSWER_AT_THE_FRONT_DOOR_20261111_V1",
+ "date": "2026-11-11",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "41aed71cbcbf66b860956dbb8802dd319ef0e826",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "On the base commit the front door (live_brain_route_admission_v1.solve) answers 0 of the 96 requests of a frozen 32-task file set, including 0 of its 36 questions about a file. This change adds one read-only row, file.question.taught_words.v1. Its reading of a sentence is not a keyword match: a lexicon of 28 words is learned from 23 lessons, each a sentence plus the right answer on two example files, and no word is given a meaning by hand. A sentence is answered only when every word of it is a taught word, a structure word, the file, or the text to look for; the value is recomputed from the file by a module that shares no code with the one that produced it. The usual path runs first and keeps every sentence it already answers; the new reading is tried only for a sentence the usual path did not answer and for which it executed nothing. Measured on this tree in a sandbox: the true-capability harness passes 2000 of 2000 fresh instances through the front door and fails both deliberate mutations of the solver; the frozen file set goes from 0 to 25 right with 0 wrong. One capability, one spec, no model, no spend, no program started, nothing written by the row.",
+ "selected_route": "LEARN_WORD_MEANINGS_FROM_SENTENCE_PLUS_ANSWER_LESSONS_AND_ANSWER_ONLY_WHEN_EVERY_WORD_OF_THE_SENTENCE_IS_ACCOUNTED_FOR",
+ "causal_blocker": "THE_FRONT_DOOR_SELECTS_AN_OPERATION_BY_THE_WORDS_A_SENTENCE_SHARES_WITH_A_ROW_AND_HAS_NO_MECHANISM_THAT_LEARNS_WHAT_A_WORD_MEANS__SO_A_QUESTION_ABOUT_A_FILE_IS_REFUSED_OR_ANSWERED_BY_AN_OPERATION_THE_SENTENCE_DID_NOT_ASK_FOR",
+ "expected_parent_change": "A_QUESTION_ABOUT_ONE_TEXT_FILE_MADE_OF_TAUGHT_WORDS_IS_ANSWERED_AT_THE_FRONT_DOOR_WITH_A_VALUE_THAT_A_SECOND_MODULE_RECOMPUTES__AND_A_NEW_WORD_IS_ADDED_BY_ONE_LESSON_RATHER_THAN_BY_EDITING_CODE",
+ "expected_parent_frontier_change": "THE_FRONT_DOOR_GAINS_ITS_FIRST_ROW_THAT_IS_SELECTED_BY_A_FULL_READING_OF_THE_SENTENCE_INSTEAD_OF_BY_SHARED_WORDS__ZERO_CAPABILITY_CREDIT_UNTIL_THE_PUBLIC_RUNNER_RECEIPT_AND_THE_REFEREE_ADMIT_THE_COMMIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NO_BENCHMARK_CLAIM",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FRONT_DOOR_SELECTS_AN_OPERATION_BY_THE_WORDS_A_SENTENCE_SHARES_WITH_A_ROW_AND_HAS_NO_MECHANISM_THAT_LEARNS_WHAT_A_WORD_MEANS__SO_A_QUESTION_ABOUT_A_FILE_IS_REFUSED_OR_ANSWERED_BY_AN_OPERATION_THE_SENTENCE_DID_NOT_ASK_FOR",
+ "falsification_condition": "ONE_FRESH_INSTANCE_ON_WHICH_THE_FRONT_DOOR_RETURNS_A_NUMBER_DIFFERENT_FROM_THE_ONE_THE_FILES_OWN_DESCRIPTION_DETERMINES__OR_RETURNS_ANY_ANSWER_FOR_A_SENTENCE_THAT_CONTAINS_AN_UNTAUGHT_WORD__OR_A_SENTENCE_THE_BASE_COMMIT_ANSWERED_THAT_THIS_COMMIT_ANSWERS_DIFFERENTLY",
+ "stop_condition": "THE_TRUE_CAPABILITY_HARNESS_PASSES_ON_THE_PUBLIC_RUNNER__THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_SIX_DOOR_TESTS_AND_THE_39_PROVENANCE_CHECKS_PASS__EXACTLY_ONE_CAPABILITY_IS_REGISTERED__NO_PROTECTED_PATH_IS_TOUCHED__NO_FAMILY_IS_FLIPPED",
+ "explicit_user_authorization": "Owner instructions in this session (2026-11-10 and 2026-11-11): say what is real and what is not about learning from one try; find the real limiting factors from first principles; kill bad ideas before implementing them; do the smartest thing in the fastest way; and, three times, 'This is very slow progress.' The owner gave no instruction to merge. This pull request is opened for the owner's decision.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/taught_words_v1.py",
+   "canonical/runtime/taught_words_check_v1.py",
+   "canonical/runtime/bound_capabilities/file_question_taught_words.py",
+   "canonical/runtime/TAUGHT_WORD_LESSONS_V1.json",
+   "canonical/runtime/TAUGHT_WORD_LEXICON_V1.json",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+   "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py",
+   "canonical/capabilities/true/oracles/file_question_taught_words_oracles_v1.py",
+   "canonical/runtime/taught_words_true_capability_adapter_v1.py",
+   "canonical/tests/test_taught_words_answer_at_the_front_door_v1.py",
+   "canonical/runtime/verify_taught_words_provenance_v1.py",
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001__RECEIPT.json"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "earlier_routes_exhausted_reason": "DELETE and BYPASS cannot answer a question. REUSE and INTEGRATE of the inherited inspect_v1.answer were measured on the base commit over 600 fresh instances of this input class: of 416 questions it answered 29 right, 18 with a wrong value, and refused 369. ADAPT, SUBSTITUTE, COMPOSE and CONFIGURE of the keyword-scored registry rows cannot supply the missing thing, which is a mechanism that learns what a word means from an answer; operator_acquisition_v1, acquired_operator_memory_v1, experience_v1, flywheel_v1 and macro_v1 were read and none does. What already existed is reused around the new primitive: run_adapter_locally, the typed-plan hook, route_admission, the true-capability harness and its public-runner workflow.",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "BEFORE_AND_AFTER_ON_THE_SAME_INSTRUMENTS__FROZEN_32_TASK_FILE_SET_THROUGH_THE_FRONT_DOOR_BASE_0_OF_96_THIS_TREE_25_OF_96_RIGHT_0_WRONG_ALL_25_THROUGH_THE_NEW_ROW__TRUE_CAPABILITY_HARNESS_2000_OF_2000_FRESH_INSTANCES_WITH_AN_OS_SEED__WITH_largest_AND_smallest_SWAPPED_IN_THE_SOLVER_THE_HARNESS_FAILS_AT_411_OF_500__WITH_A_READER_THAT_IGNORES_UNTAUGHT_WORDS_IT_FAILS_AT_340_OF_500__IN_THE_FIRST_MUTATION_THE_DOORS_OWN_RECOMPUTATION_TURNED_THE_WRONG_VALUES_INTO_REFUSALS"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS_ON_THIS_TREE__NOT_PUBLIC_RUNNER_EVIDENCE__FROZEN_FILE_SET_25_RIGHT_0_WRONG_71_REFUSED_OF_96__25_OF_ITS_36_QUESTIONS__NONE_OF_ITS_60_EDIT_AND_FILE_MAKING_REQUESTS__TRUE_CAPABILITY_HARNESS_2000_OF_2000__PROVENANCE_VERIFIER_39_OF_39__SIX_DOOR_TESTS_PASS__UNIFIED_MODEL_SUITE_137_TESTS_PASS__THE_R2_V2_SUITE_HAS_ONE_FAILURE_test_catalog_exposes_single_front_door_THAT_IS_IDENTICAL_ON_THE_BASE_COMMIT_IN_THE_SAME_SANDBOX__OF_12607_SENTENCES_OF_THE_PUBLIC_NL2BASH_SET_THE_LEXICON_READS_4_ALL_FOUR_AS_A_LINE_COUNT_WHICH_IS_WHAT_THEIR_AUTHORS_COMMAND_COMPUTES_AND_REFUSES_12603",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_BOUND_OBLIGATIONS_ARE_THE_COMPUTER_USE_ONES__THIS_ROW_ANSWERS_ONLY_READ_ONLY_QUESTIONS_ABOUT_ONE_TEXT_FILE_AND_IS_FAR_FROM_EITHER",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-11T16:19:47Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_ADDS_ONE_ROW_WHOSE_MEASUREMENT_BECOMES_EVIDENCE_ONLY_ON_THE_PUBLIC_RUNNER",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "A_LEXICON_LEARNED_FROM_SENTENCE_PLUS_ANSWER_LESSONS_READS_THE_WHOLE_SENTENCE_OR_REFUSES",
+   "decisive_question": "DOES_A_SENTENCE_OF_TAUGHT_WORDS_THAT_NO_LESSON_SHOWS_GET_THE_VALUE_THE_FILE_DETERMINES__AND_DOES_ONE_UNTAUGHT_WORD_GET_NO_ANSWER",
+   "falsifier_id": "ONE_FRESH_INSTANCE_WITH_A_WRONG_NUMBER__OR_AN_ANSWER_TO_A_SENTENCE_CONTAINING_AN_UNTAUGHT_WORD",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "2000_FRESH_INSTANCES_WITH_AN_OS_SEED_PRODUCED_NO_COUNTEREXAMPLE__BOTH_DELIBERATE_MUTATIONS_OF_THE_SOLVER_WERE_CAUGHT__THE_KNOWN_LIMITS_ARE_STATED_AS_SCOPE_LIMITS_IN_THE_SPEC_RATHER_THAN_HIDDEN__WORD_ORDER_IS_NOT_MODELLED_AND_ONE_WORD_CANNOT_HAVE_TWO_MEANINGS"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "41aed71cbcbf66b860956dbb8802dd319ef0e826",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "A_PERSON_ASKS_A_QUESTION_ABOUT_A_FILE_IN_WORDS_THE_SYSTEM_WAS_TAUGHT_AND_GETS_THE_RIGHT_NUMBER_OR_AN_HONEST_REFUSAL_THAT_NAMES_THE_WORD_IT_DOES_NOT_KNOW__AND_TEACHING_THAT_WORD_TAKES_ONE_SENTENCE_AND_TWO_EXAMPLE_FILES",
+  "selected_route": "LEARN_WORD_MEANINGS_FROM_SENTENCE_PLUS_ANSWER_LESSONS_AND_ANSWER_ONLY_WHEN_EVERY_WORD_OF_THE_SENTENCE_IS_ACCOUNTED_FOR",
+  "selected_surviving_route": "SYNTHESIZE_ONE_LEXICON_LEARNER_AND_ONE_READ_ONLY_ROW__AND_REUSE_THE_EXISTING_LOCAL_ADAPTER_DISPATCH_TYPED_PLAN_HOOK_ADMISSION_AND_TRUE_CAPABILITY_HARNESS_AROUND_THEM",
+  "deleted_or_bypassed_paths": [
+   "A_FIRST_LEARNER_THAT_PICKED_ONE_OF_SEVERAL_EQUALLY_GOOD_READINGS__IT_STORED_WRONG_MEANINGS_AND_WAS_REPLACED_BEFORE_THIS_CHANGE",
+   "A_HAND_WRITTEN_WORD_LIST_PER_OPERATION",
+   "LESSONS_STORED_WHOLE__MEASURED_TO_HELP_0_OF_18_OTHER_TASKS"
+  ],
+  "stop_condition": "THE_TRUE_CAPABILITY_HARNESS_PASSES_ON_THE_PUBLIC_RUNNER__THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_SIX_DOOR_TESTS_AND_THE_39_PROVENANCE_CHECKS_PASS__EXACTLY_ONE_CAPABILITY_IS_REGISTERED__NO_PROTECTED_PATH_IS_TOUCHED__NO_FAMILY_IS_FLIPPED",
+  "expected_parent_level_state_change": "THE_FRONT_DOOR_GAINS_ITS_FIRST_ROW_THAT_IS_SELECTED_BY_A_FULL_READING_OF_THE_SENTENCE_INSTEAD_OF_BY_SHARED_WORDS__ZERO_CAPABILITY_CREDIT_UNTIL_THE_PUBLIC_RUNNER_RECEIPT_AND_THE_REFEREE_ADMIT_THE_COMMIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NO_BENCHMARK_CLAIM",
+  "why_selected_route_is_fastest_sufficient": "IT_IS_THE_SMALLEST_CHANGE_FOUND_THAT_MAKES_THE_FRONT_DOOR_ANSWER_ANY_FILE_QUESTION_WITH_NO_WRONG_ANSWER_ON_FRESH_INSTANCES__AND_IT_GROWS_BY_LESSONS_INSTEAD_OF_BY_ROWS__THE_INHERITED_ROUTE_WAS_MEASURED_WRONG_ON_18_OF_416__THE_EXTERNAL_ROUTES_NEED_A_GRAMMAR_AND_A_RANKER_OR_EMIT_COMMANDS_THE_DOOR_MAY_NOT_RUN",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "LEARN_A_LEXICON_FROM_SENTENCE_PLUS_ANSWER_LESSONS_AND_REFUSE_UNLESS_EVERY_WORD_IS_ACCOUNTED_FOR",
+   "REUSE_inspect_v1_answer__REJECTED_MEASURED_29_RIGHT_18_WRONG_369_REFUSED_OF_416",
+   "ADD_KEYWORDS_OR_A_ROW_PER_OPERATION__REJECTED_SELECTION_BY_SHARED_WORDS_IS_THE_BLOCKER_AND_THE_REFEREE_ALLOWS_THREE_NEW_ROWS_PER_CHANGE",
+   "STORE_EACH_LESSON_WHOLE_AND_REPLAY_IT__REJECTED_MEASURED_TO_HELP_NO_OTHER_TASK",
+   "INFER_A_SHELL_COMMAND_FROM_THE_ENGLISH_AND_RUN_IT__IMPOSSIBLE_THE_DOOR_MAY_NOT_EXECUTE_PROGRAMS_WITHOUT_AN_ADMITTED_CARRIER"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-11T16:19:47Z",
+   "max_age_hours": 24,
+   "incumbent_route": "KEYWORD_SCORED_ROW_SELECTION_AT_THE_FRONT_DOOR__AND_INSPECT_V1_ANSWER_WITH_A_FIXED_LIST_OF_OPERATIONS",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/inspect_v1.py",
+     "canonical/runtime/operator_acquisition_v1.py",
+     "canonical/runtime/acquired_operator_memory_v1.py",
+     "canonical/runtime/experience_v1.py",
+     "canonical/runtime/goal_compiler.py",
+     "canonical/runtime/live_brain_route_admission_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://aclanthology.org/D13-1160.pdf",
+     "https://arxiv.org/abs/2309.16467",
+     "https://arxiv.org/html/1808.07625v1"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/percyliang/sempre",
+     "https://github.com/virat013S/nlt",
+     "https://github.com/getwyrd/nl-shell",
+     "https://github.com/TellinaTool/nl2bash",
+     "https://pypi.org/pypi/lark/json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://barrasso.me/posts/2026-04-22-text-to-bash-with-shell-talk/",
+     "https://the-decoder.com/study-explains-why-ai-agents-benefit-from-skills-and-when-they-fail/"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "semantic parser learned from question-answer pairs lexicon induction without neural network Python library (SippyCup OR SEMPRE OR \"learning from denotations\") 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "package registry lookups by name on pypi.org: sippycup, shelltalk, nlt, sempre, lark"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "natural language to shell command or file query without LLM rule-based grammar tool 2026 deterministic NL interface open source"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 new release tool learns meaning of words from examples answers natural language questions about text files programming by example no language model"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "REUSE_THE_INHERITED_inspect_v1_answer_FOR_FILE_QUESTIONS",
+     "evidence": [
+      "canonical/runtime/inspect_v1.py"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/inspect_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "MEASURED_ON_THE_BASE_COMMIT_OVER_600_FRESH_INSTANCES_OF_THIS_INPUT_CLASS__OF_416_QUESTIONS_29_RIGHT_18_ANSWERED_WITH_A_WRONG_VALUE_369_REFUSED",
+      "CAPABILITY_STRENGTH": "ANSWERS_A_PLAIN_LINE_COUNT_AND_LITTLE_ELSE_IN_THIS_CLASS__HAS_NO_WAY_TO_LEARN_A_WORD",
+      "WALL_CLOCK": "ALREADY_PRESENT",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "RETURNED_WRONG_VALUES_FOR_count_rows_AND_aggregate_min_ON_PLAIN_TEXT",
+      "VERIFIABILITY": "ITS_ACCOUNTING_CHECK_PASSED_THE_18_WRONG_VALUES"
+     }
+    },
+    {
+     "route": "PARSER_LEARNED_FROM_DENOTATIONS_WITH_A_HAND_WRITTEN_GRAMMAR_AND_A_LOG_LINEAR_RANKER__SEMPRE",
+     "evidence": [
+      "https://github.com/percyliang/sempre",
+      "https://aclanthology.org/D13-1160.pdf"
+     ],
+     "qualification_evidence": [
+      "https://github.com/percyliang/sempre"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "RETURNS_THE_TOP_RANKED_READING__ITS_PAPER_REPORTS_62_PERCENT_AND_31_PERCENT_ACCURACY_ON_ITS_TWO_SETS__NO_REFUSAL_CONTRACT",
+      "CAPABILITY_STRENGTH": "BROADER_LANGUAGE_COVERAGE_GIVEN_A_GRAMMAR_AND_THOUSANDS_OF_PAIRS",
+      "WALL_CLOCK": "A_JAVA_TOOLKIT_ABSENT_FROM_THIS_TREE__GRAMMAR_AUTHORING_AND_INTEGRATION_EXCEED_THIS_CHANGE",
+      "INCREMENTAL_COST": "ZERO_MONEY__ONE_FOREIGN_RUNTIME",
+      "RELIABILITY": "SPURIOUS_PROGRAMS_THAT_GIVE_THE_RIGHT_ANSWER_BY_ACCIDENT_ARE_ITS_DOCUMENTED_FAILURE",
+      "VERIFIABILITY": "THE_CHOSEN_READING_IS_A_SCORE__NOT_A_PROOF_THAT_EVERY_WORD_WAS_ACCOUNTED_FOR"
+     }
+    },
+    {
+     "route": "DETERMINISTIC_TEMPLATE_MATCHING_FROM_ENGLISH_TO_A_SHELL_COMMAND__SHELLTALK_AND_NLT",
+     "evidence": [
+      "https://barrasso.me/posts/2026-04-22-text-to-bash-with-shell-talk/",
+      "https://github.com/virat013S/nlt"
+     ],
+     "qualification_evidence": [
+      "https://github.com/virat013S/nlt"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "PICKS_A_TEMPLATE_BY_LEXICAL_SIMILARITY__THE_SAME_SELECTION_BY_SHARED_WORDS_THAT_IS_THE_CAUSAL_BLOCKER_HERE",
+      "CAPABILITY_STRENGTH": "HUNDREDS_OF_COMMAND_TEMPLATES_ACROSS_MANY_PROGRAMS_WHERE_THIS_ROW_COVERS_ONE_FAMILY_OF_QUESTIONS",
+      "WALL_CLOCK": "EMITS_A_COMMAND_LINE_THAT_THE_FRONT_DOOR_MAY_NOT_EXECUTE_WITHOUT_AN_ADMITTED_CARRIER__SO_IT_ANSWERS_NOTHING_HERE_TODAY",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DETERMINISTIC__ITS_AUTHOR_REPORTS_IT_STRUGGLES_WITH_AMBIGUOUS_INTENT",
+      "VERIFIABILITY": "THE_COMMAND_IS_INSPECTABLE__NOTHING_CHECKS_THAT_IT_IS_WHAT_THE_SENTENCE_ASKED"
+     }
+    },
+    {
+     "route": "A_SMALL_LOCAL_MODEL_PROPOSES_THE_COMMAND__NL_SHELL",
+     "evidence": [
+      "https://github.com/getwyrd/nl-shell"
+     ],
+     "qualification_evidence": [
+      "https://github.com/getwyrd/nl-shell"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "UNMEASURABLE_HERE__A_MODEL_IN_THE_PRODUCER_PATH_IS_FORBIDDEN_BY_THE_OWNERSHIP_LAW",
+      "CAPABILITY_STRENGTH": "HIGHER_ON_OPEN_ENGLISH_THAN_ANY_LEXICON_OF_28_WORDS",
+      "WALL_CLOCK": "SECONDS_PER_REQUEST_ON_A_GPU",
+      "INCREMENTAL_COST": "NEEDS_HARDWARE_THIS_PROJECT_DOES_NOT_SPEND_ON",
+      "RELIABILITY": "NONDETERMINISTIC",
+      "VERIFIABILITY": "THE_PROPOSAL_IS_NOT_RECOMPUTABLE"
+     }
+    }
+   ],
+   "negative_search_summary": "FOUR_QUERY_FAMILIES_AND_FIVE_REGISTRY_LOOKUPS__NO_PUBLIC_ROUTE_WAS_FOUND_THAT_LEARNS_WORD_MEANINGS_FROM_ANSWERS_WITHOUT_A_MODEL_AND_REFUSES_WHEN_A_WORD_IS_UNACCOUNTED__THE_RECENCY_QUERY_SURFACED_ONLY_MODEL_BASED_PRODUCTS__PYPI_HAS_NO_sempre_shelltalk_OR_nlt_PACKAGE_AND_ITS_sippycup_IS_AN_UNRELATED_ADAPTOR",
+   "selected_route": "SYNTHESIZE_ONE_LEXICON_LEARNER_AND_ONE_READ_ONLY_ROW__AND_REUSE_THE_EXISTING_LOCAL_ADAPTER_DISPATCH_TYPED_PLAN_HOOK_ADMISSION_AND_TRUE_CAPABILITY_HARNESS_AROUND_THEM",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-11T16:19:47Z",
+    "max_age_hours": 2,
+    "selected_route": "SYNTHESIZE_ONE_LEXICON_LEARNER_AND_ONE_READ_ONLY_ROW__AND_REUSE_THE_EXISTING_LOCAL_ADAPTER_DISPATCH_TYPED_PLAN_HOOK_ADMISSION_AND_TRUE_CAPABILITY_HARNESS_AROUND_THEM",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import json, hashlib, itertools, math, pathlib, re; print(\"ok\")' returned ok"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "TAUGHT_WORDS_SOURCES_UNDER_TEST",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/runtime/taught_words_v1.py, taught_words_check_v1.py and the adapter are in the tree being judged; verify_taught_words_provenance_v1.py --check reports 39/39"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "TRUE_CAPABILITY_HARNESS_V1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "execution_guard/true_capability_harness_v1.py self-test printed TRUE_CAPABILITY_HARNESS_SELF_TEST_PASS on this tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "THE_SENTENCE_IS_READ_WORD_BY_WORD_OR_NOT_ANSWERED__AND_WHAT_THE_SYSTEM_CAN_READ_GROWS_BY_TEACHING",
+   "proxy_goals_deleted": [
+    "RAISE_THE_COUNT_ON_THE_FROZEN_FILE_SET",
+    "ADD_A_KEYWORD_OR_A_PATTERN_FOR_EACH_MISSING_WORDING",
+    "REGISTER_ONE_ROW_PER_OPERATION"
+   ],
+   "surviving_necessity": "WITHOUT_A_WAY_TO_LEARN_WHAT_A_WORD_MEANS_EVERY_NEW_WORDING_IS_A_CODE_CHANGE_AND_EVERY_SHARED_WORD_IS_A_POSSIBLE_WRONG_OPERATION"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "inspect_v1_answer_TRIES_A_FIXED_LIST_OF_OPERATIONS_AND_WAS_MEASURED_ON_THIS_INPUT_CLASS",
+    "operator_acquisition_v1_LEARNS_AN_OPERATOR_FROM_WORKED_EXAMPLES_NOT_A_WORD_FROM_AN_ANSWER",
+    "experience_v1_flywheel_v1_AND_macro_v1_STORE_AND_REPLAY_WHOLE_EPISODES",
+    "goal_compiler_SCORES_ROWS_BY_SHARED_KEYWORDS"
+   ],
+   "reused_rather_than_rebuilt": [
+    "run_adapter_locally_EXECUTES_THE_ROW_UNDER_THE_EXISTING_EXECUTION_BOUNDARY",
+    "THE_TYPED_PLAN_HOOK_OF_THE_SOLVE_BODY_CARRIES_THE_PRESELECTED_ROW",
+    "swe_typed_plan_v1_LOADS_THE_VERIFIED_REGISTRY",
+    "route_admission_STILL_JUDGES_THE_ROUTE",
+    "true_capability_harness_v1_AND_ITS_WORKFLOW_MEASURE_IT"
+   ],
+   "capability_work_deleted": [
+    "THE_FIRST_LEARNER_THAT_BROKE_TIES_BY_CHOICE",
+    "A_PLAN_TO_REGISTER_SEVENTEEN_ROWS_IN_ONE_CHANGE"
+   ],
+   "external_existing_routes_checked": [
+    "SEMPRE_LEARNS_A_RANKED_PARSER_FROM_DENOTATIONS",
+    "SHELLTALK_AND_NLT_MATCH_TEMPLATES_AND_EMIT_COMMANDS",
+    "NL_SHELL_USES_A_LOCAL_MODEL",
+    "LARK_PARSES_A_GIVEN_GRAMMAR_AND_LEARNS_NOTHING"
+   ],
+   "surviving_gap": "28_WORDS_AND_15_BUILT_IN_OPERATION_PARTS__READ_ONLY_QUESTIONS_ABOUT_ONE_TEXT_FILE__NO_WORD_ORDER__ONE_WORD_CANNOT_HAVE_TWO_MEANINGS__A_WORD_CANNOT_BE_LEARNED_FOR_AN_OPERATION_THE_PARTS_CANNOT_EXPRESS__THE_LESSONS_THE_LEARNER_THE_CHECKER_AND_THE_ORACLES_COME_FROM_ONE_AGENT_SESSION"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "INTRINSIC__SELECTION_BY_SHARED_WORDS_CANNOT_TELL_how_many_lines_FROM_how_many_unique_lines",
+   "evidence": [
+    "THE_BASE_FRONT_DOOR_ANSWERS_0_OF_96_REQUESTS_OF_THE_FROZEN_FILE_SET",
+    "inspect_v1_answer_RETURNED_A_WRONG_VALUE_FOR_18_OF_416_FRESH_QUESTIONS_ON_THE_BASE_COMMIT",
+    "AN_OPEN_PULL_REQUEST_THAT_ADDS_SIXTEEN_KEYWORD_ROWS_ANSWERED_17_RIGHT_AND_13_WRONG_ON_THE_SAME_FILE_SET_AND_IS_STOPPED_BY_THE_REFEREE_FOR_ONE_REASON__SIXTEEN_NEW_CAPABILITIES_IN_ONE_CHANGE"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_QUESTION__IMPOSSIBLE_IT_IS_THE_REQUEST",
+    "BYPASS_BY_ASKING_THE_USER_FOR_A_COMMAND_LINE__REJECTED_THE_DOOR_MAY_NOT_RUN_IT",
+    "SUBSTITUTE_A_LONGER_KEYWORD_LIST__REJECTED_IT_IS_THE_SAME_SELECTION_RULE"
+   ],
+   "surviving_causal_blocker": "NO_MECHANISM_ASSIGNS_A_MEANING_TO_A_WORD_FROM_EVIDENCE_AND_REFUSES_WHEN_A_WORD_HAS_NONE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "LEARN_THE_LEXICON_FROM_LESSONS",
+    "THEN_ANSWER_ONLY_FULLY_READ_SENTENCES",
+    "THEN_RECOMPUTE_THE_VALUE_IN_A_SECOND_MODULE"
+   ],
+   "losing_routes_reason": "REUSE_OF_THE_INHERITED_ROUTE_LOSES_ON_MEASURED_WRONG_ANSWERS__MORE_KEYWORDS_LOSE_BECAUSE_THEY_ARE_THE_BLOCKER__WHOLE_LESSON_REPLAY_LOSES_BECAUSE_IT_TRANSFERS_TO_NOTHING__EXTERNAL_PARSERS_LOSE_ON_THE_REFUSAL_CONTRACT_OR_ON_NEEDING_EXECUTION_OR_A_MODEL",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_EXISTING_TRUE_CAPABILITY_HARNESS_IS_USED_UNCHANGED__ITS_INSTANCES_ARE_GENERATED_FILES_BECAUSE_THE_TRUTH_MUST_BE_KNOWN_WITHOUT_READING_THE_FILE_BACK__THE_INDEPENDENT_ORACLE_COMPUTES_THE_VALUE_FROM_THE_GENERATORS_LINE_BY_LINE_DESCRIPTION_AND_NEVER_PARSES_THE_SENTENCE__REAL_wc_AND_grep_ARE_COMPARED_IN_THE_PROVENANCE_VERIFIER_WHERE_THEY_EXIST"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_SIXTEEN_ROW_PULL_REQUEST_CAN_BE_RECUT_INTO_CHANGES_OF_AT_MOST_THREE_ROWS__ITS_QUESTION_ROWS_OVERLAP_THIS_ONE"
+   ],
+   "note": "THE_USUAL_PATH_STILL_RUNS_FIRST__A_ROW_THAT_ALREADY_ANSWERS_A_SENTENCE_KEEPS_IT__inspect_v1_IS_NOT_TOUCHED_AND_ITS_18_WRONG_VALUES_REMAIN_A_SEPARATE_DEFECT",
+   "adjacent_capabilities_absorbed": [
+    "A_REFUSAL_THAT_WAS_ONE_OR_TWO_WORDS_SHORT_NOW_NAMES_THOSE_WORDS"
+   ],
+   "fresh_reuse_plan": "THE_SAME_LEARNER_CAN_ATTACH_WORDS_TO_OTHER_PARTS_ONCE_THEY_EXIST__INCLUDING_PROGRAMS_RUN_UNDER_AN_ADMITTED_CARRIER__WHICH_IS_AN_OWNER_DECISION_AND_NOT_PART_OF_THIS_CHANGE"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_MEASURING_THE_FROZEN_FILE_SET_ON_BRANCHES_THAT_DO_NOT_CHANGE_THE_FRONT_DOOR"
+   ],
+   "search_stop_decision": "A_CORRECTNESS_SUFFICIENT_ROUTE_EXISTS_AND_PASSES_THE_HARNESS__THE_FRONTIER_WAS_REFRESHED_TODAY__NO_UNRESOLVED_PLAUSIBLE_DOMINATOR_REMAINS__FURTHER_SEARCH_WOULD_NOT_CHANGE_THE_DECISION_TO_LAND_ONE_ROW",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "THE_OWNER_DECIDES_WHETHER_TO_MERGE__THEN_RECUT_THE_SIXTEEN_ROW_PULL_REQUEST_INTO_CHANGES_OF_AT_MOST_THREE_ROWS_EACH_BEHIND_THE_WORD_COVERAGE_GATE__AND_PUT_THE_EXECUTION_CARRIER_DECISION_TO_THE_OWNER",
+ "prior_work_reused": [
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/swe_typed_plan_v1.py",
+  "canonical/runtime/goal_compiler.py",
+  "canonical/runtime/computer_execution_boundary_v1.py",
+  "execution_guard/true_capability_harness_v1.py"
+ ]
+}

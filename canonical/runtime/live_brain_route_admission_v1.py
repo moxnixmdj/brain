@@ -323,8 +323,63 @@ def _input_format_mismatch(cid: str, inputs: Any) -> str | None:
     return None
 
 
+# The admission rules a FULL TAUGHT READING overrides, and nothing else.  Each of the three guesses
+# what a sentence asks from a fixed list: a leading verb that usually means a change ("add ..."), a
+# command line inferred from the English ("how many lines" read as ``wc -l``, also for "how many
+# lines mention ERROR"), and a keyword score, which is zero for a row that declares no keywords.
+_RULES_A_FULL_TAUGHT_READING_OVERRIDES = frozenset({
+    "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE",
+    "NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
+    "R3_WEAK_EVIDENCE",
+})
+# While the taught-words row is tried, no command chain may be dispatched in its place.
+_COMPOSER_CLOSED: contextvars.ContextVar[bool] = contextvars.ContextVar("composer_closed_during_taught_attempt", default=False)
+
+
+def _every_word_is_taught(goal: str, selected: str) -> bool:
+    """True when ``selected`` is the taught-words row and its lexicon accounts for every word of the sentence.
+
+    When every word of a sentence has a meaning that was TAUGHT by example answers, and those
+    meanings make one read-only operation, the sentence has been read word by word and there is
+    nothing left to guess: "add up the numbers" is a sum because a lesson said so.  The reading is
+    recomputed here from the sentence; no label on a plan is trusted.  A sentence that really
+    carries a command line contains words nobody taught, so it never qualifies.
+    """
+    try:
+        from canonical.runtime import taught_words_v1 as taught
+        return selected == taught.CAPABILITY_ID and taught.read_request(goal, ROOT).get("ok") is True
+    except Exception:  # noqa: BLE001 - no exemption on a fault
+        return False
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
-    """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
+    """Judge one compiled route. Returns {"admitted": bool, ...evidence}.
+
+    The judgement is ``_route_admission_by_evidence``, unchanged.  One addition: a refusal by one of
+    ``_RULES_A_FULL_TAUGHT_READING_OVERRIDES`` is lifted for the taught-words row when its lexicon
+    accounts for every word of the sentence, and the admission records which rule was lifted.
+    """
+    admission = _route_admission_by_evidence(goal, compiled, registry)
+    if admission.get("admitted") is True:
+        return admission
+    rule = str(admission.get("rule") or "")
+    selected = str(admission.get("selected_capability") or compiled.get("selected_capability") or "")
+    if rule not in _RULES_A_FULL_TAUGHT_READING_OVERRIDES or not _every_word_is_taught(goal, selected):
+        return admission
+    lifted = dict(admission)
+    lifted.update({"admitted": True, "rule": None, "overrode_rule": rule, "selected_capability": selected,
+                   "admission_basis": "EVERY_WORD_OF_THE_SENTENCE_READ_BY_TAUGHT_MEANINGS"})
+    lifted.pop("reason", None)
+    for key in ("matched_tokens", "matched_from_paths_only", "semantic_matched_tokens", "goal_future_artifacts",
+                "capability_output_keys", "stated_object_roles", "capability_object_roles"):
+        lifted.setdefault(key, [])
+    lifted.setdefault("score", 0)
+    lifted.setdefault("capability_input_keys", ["goal", "path"])
+    return lifted
+
+
+def _route_admission_by_evidence(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    """Judge one compiled route by its evidence. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
     if isinstance(dag, Mapping) and dag.get("schema") == front.DAG_SCHEMA:
         return dag_admission(goal, compiled, dag, registry)
@@ -1133,8 +1188,9 @@ class LocalExecutionFailure(RuntimeError):
     pass
 
 
-def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
-    """The kernel's expectation semantics (field_nonempty / field_contains / field_equals)."""
+def _check_expectation(expect: Any, result: Mapping[str, Any], args: Mapping[str, Any] | None = None) -> None:
+    """The kernel's expectation semantics (field_nonempty / field_contains / field_equals), and one
+    expectation that is checked by a module other than the one that produced the result."""
     if expect is None:
         return
     if not isinstance(expect, Mapping):
@@ -1150,6 +1206,13 @@ def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
         ok = str(expect.get("value", "")) in str(value or "")
     elif typ == "field_equals":
         ok = value == expect.get("value")
+    elif typ == "taught_program_recomputed":
+        # The answer of the taught-words row is recomputed from the file by a module that shares
+        # no code with the one that produced it.
+        from canonical.runtime import taught_words_check_v1 as independent
+        ok, detail = independent.verify(expect, result, args or {}, ROOT)
+        if not ok:
+            raise LocalExecutionFailure("ACTION_EXPECTATION_FAILED:" + detail)
     else:
         raise LocalExecutionFailure("ACTION_EXPECTATION_TYPE_UNKNOWN:" + str(typ))
     if not ok:
@@ -1358,7 +1421,7 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure(str(exc)) from exc
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
-    _check_expectation(action.get("expect"), result)
+    _check_expectation(action.get("expect"), result, call_args)
     return result
 
 
@@ -3814,7 +3877,11 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
         # "something happened".  The promise is read by the one reader that decides what a
         # sentence promised, not by a token scan of the sentence.
         promised_file = bool(artifacts) or bool(_promised_source_files(goal)) \
-            or bool(_promised_source_roots(goal)) or _sentence_promises_a_change(goal)
+            or bool(_promised_source_roots(goal)) or (
+                _sentence_promises_a_change(goal)
+                # "add up the numbers" opens with a verb that usually means a change.  When every
+                # word of the sentence was read by taught meanings, it is a read-only question.
+                and not _every_word_is_taught(goal, str(result.get("compiled_capability_id") or "")))
         from canonical.runtime import execute_v1 as _kernel
         _moved_rows = _kernel._diff(before.get("files") or {}, after.get("files") or {})
         # ``changed`` is a BOOL ("did anything move"), not a list: three of the site's own
@@ -4374,10 +4441,15 @@ def _cached_composer_graph() -> dict[str, Any]:
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
+    Returns None at once while the taught-words row is being tried (``_COMPOSER_CLOSED``): that
+    attempt may run its one read-only row and nothing in its place.
+
     Returns None when composition cannot reach the goal, so the caller still
     reports the honest gap. Returns a real result only when every step of the
     chain ran and returned.
     """
+    if _COMPOSER_CLOSED.get():
+        return None
     try:
         from canonical.runtime import composer_route_v1 as croute
         from canonical.runtime import computer_execution_boundary_v1 as boundary
@@ -4913,6 +4985,22 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                      "FAIL_CLOSED", "REQUEST_INVALID", started, executed=False)
     with _with_workspace_root(request.get("workspace_root")):
         result = _solve_request(request)
+        # THE USUAL PATH FIRST.  A row that already answers a sentence keeps it, so nothing that
+        # passed before can change.  Only a sentence the usual path did NOT answer, and for which
+        # it executed nothing, is read with taught words -- and only when they account for every
+        # word of it (``_taught_words_plan``).
+        if (isinstance(result, dict) and result.get("pass") is not True
+                and result.get("executed") is not True and result.get("side_effects_may_exist") is not True):
+            _taught_result, _taught_reading = _answer_from_taught_words(request)
+            if _taught_result is not None:
+                _taught_result["usual_path_status"] = result.get("status")
+                result = _taught_result
+            elif isinstance(_taught_reading, Mapping) and _taught_reading.get("near"):
+                # One or two words stood between this sentence and an answer: name them, so the
+                # refusal says what to teach.
+                result.setdefault("taught_words_reading", {
+                    "schema": "TAUGHT_WORDS_READING_V1", "read": False,
+                    "reason": str(_taught_reading.get("reason"))[:240]})
         if "contract_checks" in request:
             result.setdefault("structured_contract_acceptance_complete", False)
             if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
@@ -5056,6 +5144,81 @@ def _decisive_typed_plan(goal: str) -> Any:
         return _typed_plan.build_plan(goal, ROOT)
     except Exception:  # noqa: BLE001 - a working guess beats a broken advisory
         return None
+def _taught_words_plan(goal: str) -> tuple[Any, Any]:
+    """A plan for the row that reads the sentence with TAUGHT WORDS, when they account for all of it.
+
+    WHY THIS IS NOT ANOTHER KEYWORD ROUTE.  The compiler picks a row by the words a sentence SHARES
+    with it, and nothing asks about the words it does not share.  Measured 2026-11-11 on the frozen
+    32-task file set: 13 of 30 passes were wrong for that reason ("how many unique lines" answered
+    with the number of lines).  This plan is admitted the other way round: only when every word of
+    the sentence is a word whose meaning was taught by example answers, a structure word, the file,
+    or the text to look for, and the meanings make exactly one operation
+    (``canonical/runtime/taught_words_v1.py``).  One unknown word and there is no plan: the usual
+    refusal stands, and it carries the word that was missing.
+
+    Returns ``(plan, reading)``; ``plan`` is ``(registry, admissible, compiled)`` or None.  Any fault
+    returns no plan.
+    """
+    try:
+        from canonical.runtime import taught_words_v1 as taught
+        reading = taught.read_request(goal, ROOT)
+        if reading.get("ok") is not True:
+            return None, dict(reading)
+        from canonical.runtime import swe_typed_plan_v1 as _typed
+        registry, _declared = _typed._fast_verified_registry_and_decls(ROOT, None)
+        admissible = _typed.goal_compiler._platform_admissible_registry(dict(registry))
+        entry = admissible.get(taught.CAPABILITY_ID)
+        if not isinstance(entry, Mapping):
+            return None, {"ok": False, "reason": "TAUGHT_WORDS_ROW_NOT_ADMISSIBLE"}
+        words = sorted(reading["meanings"])
+        compiled = {
+            "schema": _typed.SCHEMA, "capabilities": [taught.CAPABILITY_ID], "compiled_parts": [],
+            "score": len(words),
+            "match_evidence": {"goal_tokens": words, "matched_keywords": words, "matched_provides": [],
+                               "matched_requires": [], "matched_identity": [],
+                               "informative_requires": [], "nondiscriminating_requires": []},
+            "initial_facts": list(entry.get("requires") or []),
+            "finish_summary": "RAW_GOAL_COMPLETE",
+            "selected_capability": taught.CAPABILITY_ID,
+            "inputs": {"path": reading["path"], "goal": goal},
+            "compiler_mode": "TAUGHT_WORDS_READING_V1",
+            "target_effects": list(entry.get("provides") or []) or [taught.CAPABILITY_ID],
+        }
+        return (registry, admissible, compiled), dict(reading)
+    except Exception as exc:  # noqa: BLE001 - no plan beats a broken one
+        return None, {"ok": False, "reason": "TAUGHT_WORDS_FAULT:" + type(exc).__name__}
+
+
+def _answer_from_taught_words(request: Mapping[str, Any]) -> tuple[Any, Any]:
+    """``(result, reading)``.  ``result`` is the door's verified answer through the taught-words row,
+    or None when there is no such plan or it did not pass; the usual result then stands.
+    A request that carries its own contract checks or its own typed plan is never taken here."""
+    if "contract_checks" in request or request.get("_typed_swe_plan") is not None:
+        return None, None
+    plan, reading = _taught_words_plan(_request_goal(request))
+    if plan is None:
+        return None, reading
+    attempt = dict(request)
+    attempt["_typed_swe_plan"] = plan
+    _closed = _COMPOSER_CLOSED.set(True)
+    try:
+        result = _solve_body(attempt)
+    except Exception as exc:  # noqa: BLE001 - the usual result stands
+        return None, {"ok": False, "reason": "TAUGHT_WORDS_ATTEMPT_FAULT:" + type(exc).__name__}
+    finally:
+        _COMPOSER_CLOSED.reset(_closed)
+    if not isinstance(result, dict) or result.get("pass") is not True:
+        return None, {"ok": False, "near": True, "reason": "TAUGHT_WORDS_PLAN_DID_NOT_PASS:"
+                      + str((result or {}).get("status") if isinstance(result, Mapping) else "")[:160]}
+    result["taught_words_reading"] = {
+        "schema": "TAUGHT_WORDS_READING_V1", "word_meanings": reading.get("meanings"),
+        "operation": reading.get("parts"), "text_looked_for": reading.get("data"),
+        "lessons_sha256": reading.get("lessons_sha256"),
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
+    }
+    return result, reading
+
+
 def _request_goal(request: Any) -> str:
     """The sentence a request carries, for a Mapping request or a bare string.
 
