@@ -1,3085 +1,8 @@
 {
+ "schema": "BRAIN_QUIXBUGS_REPAIR_SOLVER_DIGEST_V1",
  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
- "census": {
-  "bitcount": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 124,
-    "test_count": 0
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": false,
-   "buggy_seconds": 8.02,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        n &= n - 1"
-      ],
-      "removed": [
-       "        n ^= n - 1"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.24,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 9
-   }
-  },
-  "breadth_first_search": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 5
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.28,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    while queue:"
-      ],
-      "removed": [
-       "    while True:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.21,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 5
-   }
-  },
-  "bucketsort": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 7
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.26,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    for i, count in enumerate(counts):"
-      ],
-      "removed": [
-       "    for i, count in enumerate(arr):"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.23,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 7
-   }
-  },
-  "depth_first_search": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 5
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.29,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            nodesvisited.add(node)"
-      ],
-      "removed": []
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 0
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 5
-   }
-  },
-  "detect_cycle": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        if hare is None or hare.successor is None:"
-      ],
-      "removed": [
-       "        if hare.successor is None:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "find_first_in_sorted": {
-   "buggy": {
-    "oracle_error": "TypeError",
-    "passed": false,
-    "returncode": null,
-    "test_count": null
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": false,
-   "buggy_seconds": 8.01,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    while lo < hi:"
-      ],
-      "removed": [
-       "    while lo <= hi:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.19,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 7
-   }
-  },
-  "find_in_sorted": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 7
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            return binsearch(mid + 1, end)"
-      ],
-      "removed": [
-       "            return binsearch(mid, end)"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.21,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 7
-   }
-  },
-  "flatten": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 7
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            yield x"
-      ],
-      "removed": [
-       "            yield flatten(x)"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.19,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 7
-   }
-  },
-  "gcd": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.23,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        return gcd(b, a % b)"
-      ],
-      "removed": [
-       "        return gcd(a % b, b)"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.21,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "get_factors": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 11
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.23,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    return [n]"
-      ],
-      "removed": [
-       "    return []"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 11
-   }
-  },
-  "hanoi": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 8
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        steps.append((start, end))"
-      ],
-      "removed": [
-       "        steps.append((start, helper))"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 8
-   }
-  },
-  "is_valid_parenthesization": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 3
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.2,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    return depth == 0"
-      ],
-      "removed": [
-       "    return True"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.19,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 3
-   }
-  },
-  "kheapsort": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 4
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    for x in arr[k:]:"
-      ],
-      "removed": [
-       "    for x in arr:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 4
-   }
-  },
-  "knapsack": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 9
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.23,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            if weight <= j:"
-      ],
-      "removed": [
-       "            if weight < j:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.21,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 9
-   }
-  },
-  "kth": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 7
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.23,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        return kth(above, k - num_lessoreq)"
-      ],
-      "removed": [
-       "        return kth(above, k)"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.19,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 7
-   }
-  },
-  "lcs_length": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 9
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "                dp[i, j] = dp[i - 1, j - 1] + 1"
-      ],
-      "removed": [
-       "                dp[i, j] = dp[i - 1, j] + 1"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 9
-   }
-  },
-  "levenshtein": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 1.74,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        return levenshtein(source[1:], target[1:])"
-      ],
-      "removed": [
-       "        return 1 + levenshtein(source[1:], target[1:])"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 1.69,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "lis": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 12
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            longest = max(longest, length + 1)"
-      ],
-      "removed": [
-       "            longest = length + 1"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.21,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 12
-   }
-  },
-  "longest_common_subsequence": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 10
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.56,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        return a[0] + longest_common_subsequence(a[1:], b[1:])"
-      ],
-      "removed": [
-       "        return a[0] + longest_common_subsequence(a[1:], b)"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.38,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 10
-   }
-  },
-  "max_sublist_sum": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        max_ending_here = max(0, max_ending_here + x)"
-      ],
-      "removed": [
-       "        max_ending_here = max_ending_here + x"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "mergesort": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 14
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.8,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    if len(arr) <= 1:"
-      ],
-      "removed": [
-       "    if len(arr) == 0:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 14
-   }
-  },
-  "minimum_spanning_tree": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 3
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "                group_by_node[node] = group_by_node[u]"
-      ],
-      "removed": [
-       "                group_by_node[node].update(group_by_node[u])"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 3
-   }
-  },
-  "next_palindrome": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 5
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.2,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    return [1] + (len(digit_list) - 1) * [0] + [1]"
-      ],
-      "removed": [
-       "    return [1] + (len(digit_list)) * [0] + [1]"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.19,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 5
-   }
-  },
-  "next_permutation": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 8
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "                if perm[i] < perm[j]:"
-      ],
-      "removed": [
-       "                if perm[j] < perm[i]:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 8
-   }
-  },
-  "pascal": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 5
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        for c in range(0, r + 1):"
-      ],
-      "removed": [
-       "        for c in range(0, r):"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 5
-   }
-  },
-  "possible_change": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 10
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.38,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [],
-      "removed": [
-       "# Python 3"
-      ]
-     },
-     {
-      "added": [
-       "    if total < 0 or not coins:"
-      ],
-      "removed": [
-       "    if total < 0:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 2
-   },
-   "fixed_seconds": 0.28,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 10
-   }
-  },
-  "powerset": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 5
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        first, *rest = arr"
-      ],
-      "removed": [
-       "        first, *rest = arr #python3 just like car and cdr (in this case anyway..)"
-      ]
-     },
-     {
-      "added": [
-       "        return rest_subsets + [[first] + subset for subset in rest_subsets]"
-      ],
-      "removed": [
-       "        return [[first] + subset for subset in rest_subsets]"
-      ]
-     }
-    ],
-    "lines_added": 2,
-    "lines_removed": 2
-   },
-   "fixed_seconds": 0.21,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 5
-   }
-  },
-  "quicksort": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 13
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    greater = quicksort([x for x in arr[1:] if x >= pivot])"
-      ],
-      "removed": [
-       "    greater = quicksort([x for x in arr[1:] if x > pivot])"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 13
-   }
-  },
-  "reverse_linked_list": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 3
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        prevnode = node"
-      ],
-      "removed": []
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 0
-   },
-   "fixed_seconds": 0.22,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 3
-   }
-  },
-  "rpn_eval": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "                op(token, b, a)"
-      ],
-      "removed": [
-       "                op(token, a, b)"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.23,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "shortest_path_length": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 4
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "                    distance + length_by_edge[node, nextnode]"
-      ],
-      "removed": [
-       "                    get(unvisited_nodes, nextnode) + length_by_edge[node, nextnode]"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 4
-   }
-  },
-  "shortest_path_lengths": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 4
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "                    length_by_path[i, k] + length_by_path[k, j]"
-      ],
-      "removed": [
-       "                    length_by_path[i, k] + length_by_path[j, k]"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 4
-   }
-  },
-  "shortest_paths": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 3
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            weight_by_node[v] = min("
-      ],
-      "removed": [
-       "            weight_by_edge[u, v] = min("
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 3
-   }
-  },
-  "shunting_yard": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            opstack.append(token)"
-      ],
-      "removed": []
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 0
-   },
-   "fixed_seconds": 0.19,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "sieve": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 6
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.22,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        if all(n % p > 0 for p in primes):"
-      ],
-      "removed": [
-       "        if any(n % p > 0 for p in primes):"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 6
-   }
-  },
-  "sqrt": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 124,
-    "test_count": 0
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": false,
-   "buggy_seconds": 8.02,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    while abs(x - approx ** 2) > epsilon:"
-      ],
-      "removed": [
-       "    while abs(x - approx) > epsilon:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.23,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 7
-   }
-  },
-  "subsequences": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 12
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.25,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        return [[]]"
-      ],
-      "removed": [
-       "        return []"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.22,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 12
-   }
-  },
-  "to_base": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 10
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.26,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "        result = alphabet[i] + result"
-      ],
-      "removed": [
-       "        result = result + alphabet[i]"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.23,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 10
-   }
-  },
-  "topological_ordering": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 3
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.24,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "            if set(ordered_nodes).issuperset(nextnode.incoming_nodes) and nextnode not in ordered_nodes:"
-      ],
-      "removed": [
-       "            if set(ordered_nodes).issuperset(nextnode.outgoing_nodes) and nextnode not in ordered_nodes:"
-      ]
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 1
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 3
-   }
-  },
-  "wrap": {
-   "buggy": {
-    "oracle_error": null,
-    "passed": false,
-    "returncode": 1,
-    "test_count": 5
-   },
-   "buggy_fails_in_a_way_the_oracle_counts": true,
-   "buggy_seconds": 0.21,
-   "can_be_a_target": true,
-   "fix": {
-    "hunks": [
-     {
-      "added": [
-       "    lines.append(text)"
-      ],
-      "removed": []
-     }
-    ],
-    "lines_added": 1,
-    "lines_removed": 0
-   },
-   "fixed_seconds": 0.2,
-   "with_the_published_fix": {
-    "oracle_error": null,
-    "passed": true,
-    "returncode": 0,
-    "test_count": 5
-   }
-  }
- },
- "environment": {
-  "benchmark_sha256": "44fea01ec12ff8bc809fa719f089c38b8d15a35ddac7fa0eddcd2dfaeeac78bb",
-  "code_sha256": {
-   "bench_tool": "f4b3f35cb5db7d076a92ee9cf3fd44c0446749ee2259036084beea744db689c2",
-   "organ_contract_and_oracle": "7a34e3d80ce60fc1139bc974bd756f7310188e7b33deb2163f3a6d66963ff0aa",
-   "organ_store": "888dc4457fcb7e309e9af3e4a6b48c6b0757c5369588587fb9a81b8fdf4f70aa",
-   "retained_repair_session": "3f742745fb672cc137fdb8dc300668e96668542f21bdaf22cb1f1dc984fe085b",
-   "solver": "fd96af03475835c7d87eac7281568c373e58a881cb3eac20389d8a57d29a0638",
-   "tool": "3418f080e077799b43568dac091c2a763628b97ab574c4feade4616e6e146454"
-  },
-  "processors": 2,
-  "python": "3.11.2",
-  "source": "github.com/jkoppel/QuixBugs (MIT), python_programs / correct_python_programs / python_testcases"
- },
  "generated_utc": "2026-11-11T22:45:19Z",
- "incremental_spend_usd": 0,
- "lessons": {
-  "bitcount": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS",
-   "skill_id": null
-  },
-  "breadth_first_search": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "bucketsort": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "depth_first_search": {
-   "crystallized": true,
-   "hole_count": 6,
-   "reason": null,
-   "skill_id": "skill_b8b0f9e4acc756b07bf6832a"
-  },
-  "detect_cycle": {
-   "crystallized": true,
-   "hole_count": 2,
-   "reason": null,
-   "skill_id": "skill_0715455c6cc35d9fd6d9510d"
-  },
-  "find_first_in_sorted": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS",
-   "skill_id": null
-  },
-  "find_in_sorted": {
-   "crystallized": true,
-   "hole_count": 8,
-   "reason": null,
-   "skill_id": "skill_01e338014eb332051647e808"
-  },
-  "flatten": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "gcd": {
-   "crystallized": true,
-   "hole_count": 3,
-   "reason": null,
-   "skill_id": "skill_9c32263e649abd95aa90350e"
-  },
-  "get_factors": {
-   "crystallized": true,
-   "hole_count": 7,
-   "reason": null,
-   "skill_id": "skill_8ce8aa9c024df2737b275c5c"
-  },
-  "hanoi": {
-   "crystallized": true,
-   "hole_count": 13,
-   "reason": null,
-   "skill_id": "skill_a6cb4b05019d95b8c313d9c7"
-  },
-  "is_valid_parenthesization": {
-   "crystallized": true,
-   "hole_count": 7,
-   "reason": null,
-   "skill_id": "skill_7b4a8863775d327f0519c044"
-  },
-  "kheapsort": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "knapsack": {
-   "crystallized": true,
-   "hole_count": 2,
-   "reason": null,
-   "skill_id": "skill_ea9b8d85ff6f8e05b756d23d"
-  },
-  "kth": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "lcs_length": {
-   "crystallized": true,
-   "hole_count": 4,
-   "reason": null,
-   "skill_id": "skill_710f5e9c5185ed4d7e9bb06c"
-  },
-  "levenshtein": {
-   "crystallized": true,
-   "hole_count": 4,
-   "reason": null,
-   "skill_id": "skill_e095f2b5cbe22f5486d8aa31"
-  },
-  "lis": {
-   "crystallized": true,
-   "hole_count": 3,
-   "reason": null,
-   "skill_id": "skill_b54c1a02bb21b98ae687cf9c"
-  },
-  "longest_common_subsequence": {
-   "crystallized": true,
-   "hole_count": 5,
-   "reason": null,
-   "skill_id": "skill_aee72fd5077be33a11a3e0f9"
-  },
-  "max_sublist_sum": {
-   "crystallized": true,
-   "hole_count": 2,
-   "reason": null,
-   "skill_id": "skill_db904fcb679db17c3741cc6e"
-  },
-  "mergesort": {
-   "crystallized": true,
-   "hole_count": 2,
-   "reason": null,
-   "skill_id": "skill_08196e6dd57184ed6e711c94"
-  },
-  "minimum_spanning_tree": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "next_palindrome": {
-   "crystallized": true,
-   "hole_count": 3,
-   "reason": null,
-   "skill_id": "skill_db5d23fd7742e4fd1a15728e"
-  },
-  "next_permutation": {
-   "crystallized": true,
-   "hole_count": 3,
-   "reason": null,
-   "skill_id": "skill_c54127c590de9c4bef3b064b"
-  },
-  "pascal": {
-   "crystallized": true,
-   "hole_count": 11,
-   "reason": null,
-   "skill_id": "skill_38cf60b6d3d0fcbaa168123e"
-  },
-  "possible_change": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "powerset": {
-   "crystallized": true,
-   "hole_count": 6,
-   "reason": null,
-   "skill_id": "skill_06f48ced0d789b66fb6d0dd8"
-  },
-  "quicksort": {
-   "crystallized": true,
-   "hole_count": 6,
-   "reason": null,
-   "skill_id": "skill_07448f87ae828dc247d62045"
-  },
-  "reverse_linked_list": {
-   "crystallized": true,
-   "hole_count": 5,
-   "reason": null,
-   "skill_id": "skill_228af9d2bc9a09a36e4cdafe"
-  },
-  "rpn_eval": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "shortest_path_length": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "shortest_path_lengths": {
-   "crystallized": true,
-   "hole_count": 4,
-   "reason": null,
-   "skill_id": "skill_4892a19ed42711f385a71c8a"
-  },
-  "shortest_paths": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "shunting_yard": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "sieve": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "sqrt": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS",
-   "skill_id": null
-  },
-  "subsequences": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "NON_GENERALIZABLE_SNIPPET",
-   "skill_id": null
-  },
-  "to_base": {
-   "crystallized": true,
-   "hole_count": 3,
-   "reason": null,
-   "skill_id": "skill_0d78dd428ccbf00917103534"
-  },
-  "topological_ordering": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  },
-  "wrap": {
-   "crystallized": false,
-   "hole_count": null,
-   "reason": "FAILED_MUTATED_TWIN_VERIFICATION",
-   "skill_id": null
-  }
- },
- "outcomes": {
-  "empty_memory": {
-   "bitcount": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": 0,
-    "second_check_passes": false,
-    "seconds": 8.1,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
-    "stopped_at_the_wall_limit": false
-   },
-   "breadth_first_search": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 904,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 163.9,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "bucketsort": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 544,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 121.62,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "depth_first_search": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 921,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 186.92,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "detect_cycle": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 967,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 181.93,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "find_first_in_sorted": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": 0,
-    "second_check_passes": false,
-    "seconds": 8.1,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
-    "stopped_at_the_wall_limit": false
-   },
-   "find_in_sorted": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1022,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 234.71,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "flatten": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 203,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 45.09,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "gcd": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 502,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 114.09,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "get_factors": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": false,
-    "lesson_kept_after": true,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "for i in range(2, int(n ** 1) + 1):"
-     ],
-     "removed": [
-      "for i in range(2, int(n ** 0.5) + 1):"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 31,
-    "repair_mode": null,
-    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
-    "repaired": true,
-    "searches": 1,
-    "second_check_passes": true,
-    "seconds": 8.7,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "hanoi": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1018,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 220.01,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "is_valid_parenthesization": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 986,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 212.6,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "kheapsort": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 203,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 45.89,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "knapsack": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": true,
-    "lesson_kept_after": true,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "if weight <= j:"
-     ],
-     "removed": [
-      "if weight < j:"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 69,
-    "repair_mode": null,
-    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
-    "repaired": true,
-    "searches": 1,
-    "second_check_passes": true,
-    "seconds": 19.38,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "kth": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 826,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 192.8,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "lcs_length": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 634,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 146.85,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "levenshtein": {
-    "file_changed": false,
-    "finished": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": null,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": null,
-    "second_check_passes": false,
-    "seconds": 19.39,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": null,
-    "stopped_at_the_wall_limit": false,
-    "worker_error": "ax_events,max_value_chars,env)} for t in tests]\n                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/qb/snap/canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py\", line 94, in _trace_one\n    raise ProvenanceError(\"TEST_TIMEOUT\")\n_brain_python_interprocedural_value_provenance_v1.py.ProvenanceError: TEST_TIMEOUT\n"
-   },
-   "lis": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1041,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 244.63,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "longest_common_subsequence": {
-    "file_changed": true,
-    "finished": false,
-    "is_the_published_fix": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "elif a[0] == b[-1]:",
-      "return a[0] + longest_common_subsequence(a[2:], b)"
-     ],
-     "removed": [
-      "elif a[0] == b[0]:",
-      "return a[0] + longest_common_subsequence(a[1:], b)"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": null,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": null,
-    "second_check_passes": false,
-    "seconds": 300.11,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": null,
-    "stopped_at_the_wall_limit": true
-   },
-   "max_sublist_sum": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 488,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 111.15,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "mergesort": {
-    "file_changed": true,
-    "finished": false,
-    "is_the_published_fix": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "j = 1",
-      "while i <= len(left) and j < len(right):"
-     ],
-     "removed": [
-      "j = 0",
-      "while i < len(left) and j < len(right):"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": null,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": null,
-    "second_check_passes": false,
-    "seconds": 300.1,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": null,
-    "stopped_at_the_wall_limit": true
-   },
-   "minimum_spanning_tree": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 535,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 104.19,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "next_palindrome": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1035,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 222.09,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "next_permutation": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1033,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 230.21,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "pascal": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": true,
-    "lesson_kept_after": true,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "for c in range(0, r + 1):"
-     ],
-     "removed": [
-      "for c in range(0, r):",
-      ""
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1035,
-    "repair_mode": "multistep_closed_loop_beam_search",
-    "repair_status": "PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH",
-    "repaired": true,
-    "searches": 1,
-    "second_check_passes": true,
-    "seconds": 228.55,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "possible_change": {
-    "file_changed": true,
-    "finished": false,
-    "is_the_published_fix": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "return 0 if coins is None else possible_change(coins, total - first) + possible_change(rest, total)"
-     ],
-     "removed": [
-      "return possible_change(coins, total - first) + possible_change(rest, total)"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": null,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": null,
-    "second_check_passes": false,
-    "seconds": 300.1,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": null,
-    "stopped_at_the_wall_limit": true
-   },
-   "powerset": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 465,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 104.88,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "quicksort": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": false,
-    "lesson_kept_after": true,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
-     ],
-     "removed": [
-      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 18,
-    "repair_mode": null,
-    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
-    "repaired": true,
-    "searches": 1,
-    "second_check_passes": true,
-    "seconds": 5.47,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "reverse_linked_list": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 505,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 92.92,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "rpn_eval": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 853,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 189.52,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "shortest_path_length": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 998,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 180.08,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "shortest_path_lengths": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1055,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 199.07,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "shortest_paths": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1012,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 188.54,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "shunting_yard": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1028,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 219.7,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "sieve": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": false,
-    "lesson_kept_after": false,
-    "lesson_not_kept_because": "FAILED_MUTATED_TWIN_VERIFICATION",
-    "lines_changed": {
-     "put_in": [
-      "if all((n % p > 0 for p in primes)):"
-     ],
-     "removed": [
-      "if any(n % p > 0 for p in primes):"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 36,
-    "repair_mode": null,
-    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
-    "repaired": true,
-    "searches": 1,
-    "second_check_passes": true,
-    "seconds": 9.05,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "sqrt": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": 0,
-    "second_check_passes": false,
-    "seconds": 8.09,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
-    "stopped_at_the_wall_limit": false
-   },
-   "subsequences": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 1039,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 245.04,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "to_base": {
-    "file_changed": true,
-    "finished": false,
-    "is_the_published_fix": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "alphabet = string.digits * string.ascii_uppercase + string.ascii_uppercase",
-      "while num > 1:"
-     ],
-     "removed": [
-      "alphabet = string.digits + string.ascii_uppercase",
-      "while num > 0:"
-     ]
-    },
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": null,
-    "repair_mode": null,
-    "repair_status": null,
-    "repaired": false,
-    "searches": null,
-    "second_check_passes": false,
-    "seconds": 300.1,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": null,
-    "stopped_at_the_wall_limit": true
-   },
-   "topological_ordering": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 871,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 164.13,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   },
-   "wrap": {
-    "file_changed": false,
-    "finished": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "memory_hit": false,
-    "memory_strategy": null,
-    "processes_started": 708,
-    "repair_mode": null,
-    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-    "repaired": false,
-    "searches": 1,
-    "second_check_passes": false,
-    "seconds": 189.92,
-    "solver_says_applied": false,
-    "solver_says_pass": false,
-    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-    "stopped_at_the_wall_limit": false
-   }
-  },
-  "other_fixes": {
-   "memory_asked": {
-    "bitcount": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.1
-    },
-    "breadth_first_search": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.35
-    },
-    "bucketsort": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.44
-    },
-    "depth_first_search": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.35
-    },
-    "detect_cycle": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.11
-    },
-    "find_first_in_sorted": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 32.77
-    },
-    "find_in_sorted": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.93
-    },
-    "flatten": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.1
-    },
-    "gcd": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": true,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.29
-    },
-    "get_factors": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.77
-    },
-    "hanoi": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.0
-    },
-    "is_valid_parenthesization": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.55
-    },
-    "kheapsort": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.45
-    },
-    "knapsack": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": true,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.05
-    },
-    "kth": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.53
-    },
-    "lcs_length": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.73
-    },
-    "levenshtein": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.69
-    },
-    "lis": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.39
-    },
-    "longest_common_subsequence": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.73
-    },
-    "max_sublist_sum": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.34
-    },
-    "mergesort": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.7
-    },
-    "minimum_spanning_tree": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.43
-    },
-    "next_palindrome": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.0
-    },
-    "next_permutation": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.74
-    },
-    "pascal": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.25
-    },
-    "possible_change": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 2.26
-    },
-    "powerset": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.36
-    },
-    "quicksort": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": true,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.65
-    },
-    "reverse_linked_list": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.1
-    },
-    "rpn_eval": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.06
-    },
-    "shortest_path_length": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.97
-    },
-    "shortest_path_lengths": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.58
-    },
-    "shortest_paths": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.83
-    },
-    "shunting_yard": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.35
-    },
-    "sieve": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.77
-    },
-    "sqrt": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 32.4
-    },
-    "subsequences": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.94
-    },
-    "to_base": {
-     "finished": true,
-     "lessons_given": 21,
-     "memory_proposes": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "seconds": 17.07
-    },
-    "topological_ordering": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 0.13
-    },
-    "wrap": {
-     "finished": true,
-     "lessons_given": 22,
-     "memory_proposes": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "seconds": 1.39
-    }
-   },
-   "solver_run_where_memory_proposes": {
-    "gcd": {
-     "file_changed": true,
-     "finished": true,
-     "is_the_published_fix": false,
-     "lesson_kept_after": null,
-     "lesson_not_kept_because": null,
-     "lessons_given": 21,
-     "lines_changed": {
-      "put_in": [
-       "def gcd(b, a):"
-      ],
-      "removed": [
-       "def gcd(a, b):"
-      ]
-     },
-     "memory_hit": true,
-     "memory_strategy": "narrowed_pattern",
-     "processes_started": 3,
-     "repair_mode": "scoped_retained_repair",
-     "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-     "repaired": true,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "searches": 0,
-     "second_check_passes": true,
-     "seconds": 2.13,
-     "solver_says_applied": true,
-     "solver_says_pass": true,
-     "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-     "stopped_at_the_wall_limit": false
-    },
-    "knapsack": {
-     "file_changed": true,
-     "finished": true,
-     "is_the_published_fix": true,
-     "lesson_kept_after": null,
-     "lesson_not_kept_because": null,
-     "lessons_given": 21,
-     "lines_changed": {
-      "put_in": [
-       "if weight <= j:"
-      ],
-      "removed": [
-       "if weight < j:"
-      ]
-     },
-     "memory_hit": true,
-     "memory_strategy": "operator_generalization",
-     "processes_started": 6,
-     "repair_mode": "scoped_retained_repair",
-     "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-     "repaired": true,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "searches": 0,
-     "second_check_passes": true,
-     "seconds": 2.67,
-     "solver_says_applied": true,
-     "solver_says_pass": true,
-     "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-     "stopped_at_the_wall_limit": false
-    },
-    "quicksort": {
-     "file_changed": true,
-     "finished": true,
-     "is_the_published_fix": false,
-     "lesson_kept_after": null,
-     "lesson_not_kept_because": null,
-     "lessons_given": 21,
-     "lines_changed": {
-      "put_in": [
-       "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
-      ],
-      "removed": [
-       "lesser = quicksort([x for x in arr[1:] if x < pivot])"
-      ]
-     },
-     "memory_hit": true,
-     "memory_strategy": "narrowed_pattern",
-     "processes_started": 5,
-     "repair_mode": "scoped_retained_repair",
-     "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-     "repaired": true,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "searches": 0,
-     "second_check_passes": true,
-     "seconds": 2.32,
-     "solver_says_applied": true,
-     "solver_says_pass": true,
-     "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-     "stopped_at_the_wall_limit": false
-    }
-   },
-   "solver_run_where_memory_proposes_nothing": {
-    "bucketsort": {
-     "file_changed": false,
-     "finished": true,
-     "lesson_kept_after": null,
-     "lesson_not_kept_because": null,
-     "lessons_given": 22,
-     "memory_hit": false,
-     "memory_strategy": null,
-     "processes_started": 543,
-     "repair_mode": null,
-     "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-     "repaired": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "searches": 1,
-     "second_check_passes": false,
-     "seconds": 127.0,
-     "solver_says_applied": false,
-     "solver_says_pass": false,
-     "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-     "stopped_at_the_wall_limit": false
-    },
-    "powerset": {
-     "file_changed": false,
-     "finished": true,
-     "lesson_kept_after": null,
-     "lesson_not_kept_because": null,
-     "lessons_given": 21,
-     "memory_hit": false,
-     "memory_strategy": null,
-     "processes_started": 466,
-     "repair_mode": null,
-     "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-     "repaired": false,
-     "rules_held": 21,
-     "rules_refused_on_the_way": 0,
-     "searches": 1,
-     "second_check_passes": false,
-     "seconds": 108.92,
-     "solver_says_applied": false,
-     "solver_says_pass": false,
-     "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-     "stopped_at_the_wall_limit": false
-    },
-    "rpn_eval": {
-     "file_changed": false,
-     "finished": true,
-     "lesson_kept_after": null,
-     "lesson_not_kept_because": null,
-     "lessons_given": 22,
-     "memory_hit": false,
-     "memory_strategy": null,
-     "processes_started": 855,
-     "repair_mode": null,
-     "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
-     "repaired": false,
-     "rules_held": 22,
-     "rules_refused_on_the_way": 0,
-     "searches": 1,
-     "second_check_passes": false,
-     "seconds": 192.6,
-     "solver_says_applied": false,
-     "solver_says_pass": false,
-     "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
-     "stopped_at_the_wall_limit": false
-    }
-   }
-  },
-  "same_bug_again": {
-   "get_factors": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "for i in range(2, int(n ** 1) + 1):"
-     ],
-     "removed": [
-      "for i in range(2, int(n ** 0.5) + 1):"
-     ]
-    },
-    "memory_hit": true,
-    "memory_strategy": "statement",
-    "processes_started": 3,
-    "repair_mode": "scoped_retained_repair",
-    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-    "repaired": true,
-    "rules_held": 1,
-    "searches": 0,
-    "second_check_passes": true,
-    "seconds": 1.9,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "knapsack": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "if weight <= j:"
-     ],
-     "removed": [
-      "if weight < j:"
-     ]
-    },
-    "memory_hit": true,
-    "memory_strategy": "statement",
-    "processes_started": 3,
-    "repair_mode": "scoped_retained_repair",
-    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-    "repaired": true,
-    "rules_held": 1,
-    "searches": 0,
-    "second_check_passes": true,
-    "seconds": 1.92,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "pascal": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": true,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "for c in range(0, r + 1):"
-     ],
-     "removed": [
-      "for c in range(0, r):",
-      ""
-     ]
-    },
-    "memory_hit": true,
-    "memory_strategy": "statement",
-    "processes_started": 3,
-    "repair_mode": "scoped_retained_repair",
-    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-    "repaired": true,
-    "rules_held": 1,
-    "searches": 0,
-    "second_check_passes": true,
-    "seconds": 1.86,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   },
-   "quicksort": {
-    "file_changed": true,
-    "finished": true,
-    "is_the_published_fix": false,
-    "lesson_kept_after": null,
-    "lesson_not_kept_because": null,
-    "lines_changed": {
-     "put_in": [
-      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
-     ],
-     "removed": [
-      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
-     ]
-    },
-    "memory_hit": true,
-    "memory_strategy": "statement",
-    "processes_started": 3,
-    "repair_mode": "scoped_retained_repair",
-    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
-    "repaired": true,
-    "rules_held": 1,
-    "searches": 0,
-    "second_check_passes": true,
-    "seconds": 1.86,
-    "solver_says_applied": true,
-    "solver_says_pass": true,
-    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
-    "stopped_at_the_wall_limit": false
-   }
-  }
- },
- "parameters": {
-  "check_bugs": 3,
-  "seed": 0,
-  "solver_arguments_for_one_bug": {
-   "output_path": "reports/solver.json",
-   "retained_learning": {
-    "allow_cross_scope_transfer": true,
-    "allow_operator_generalization": true,
-    "context": {
-     "dependencies": {},
-     "preconditions": {}
-    },
-    "contract": {
-     "schema_version": 1,
-     "scope_id": "quixbugs-python",
-     "verification_kind": "TEST_SUITE"
-    },
-    "db_path": "memory/skills.sqlite",
-    "enabled": true,
-    "target_path": "project/python_programs/NAME.py"
-   },
-   "source_root": "project",
-   "test_paths": [
-    "project/python_testcases/test_NAME.py"
-   ],
-   "timeout_s": 8
-  },
-  "timeout_s": 8,
-  "wall_limit_s": 300,
-  "workers": 2
- },
- "producer_cognition_model_dependency_count": 0,
- "programs": [
-  "bitcount",
-  "breadth_first_search",
-  "bucketsort",
-  "depth_first_search",
-  "detect_cycle",
-  "find_first_in_sorted",
-  "find_in_sorted",
-  "flatten",
-  "gcd",
-  "get_factors",
-  "hanoi",
-  "is_valid_parenthesization",
-  "kheapsort",
-  "knapsack",
-  "kth",
-  "lcs_length",
-  "levenshtein",
-  "lis",
-  "longest_common_subsequence",
-  "max_sublist_sum",
-  "mergesort",
-  "minimum_spanning_tree",
-  "next_palindrome",
-  "next_permutation",
-  "pascal",
-  "possible_change",
-  "powerset",
-  "quicksort",
-  "reverse_linked_list",
-  "rpn_eval",
-  "shortest_path_length",
-  "shortest_path_lengths",
-  "shortest_paths",
-  "shunting_yard",
-  "sieve",
-  "sqrt",
-  "subsequences",
-  "to_base",
-  "topological_ordering",
-  "wrap"
- ],
- "schema": "BRAIN_QUIXBUGS_REPAIR_SOLVER_MEASUREMENT_V1",
+ "read_this_first": "THE CLAIM, IN THE CODING DOMAIN: let the system experience a fix once and it has learned it; so show it the best fixes and it repairs what comes next. QUIXBUGS_ONE_FIX_TRANSFER_20261111_V1 asked this of the tree's retention organ by itself. THIS MEASUREMENT asks it of the tree's repair SOLVER -- its search together with that memory, not edited, called with the arguments the tree's own campaign gives it -- on all 40 QuixBugs bugs (one defect each, written by other people; nothing else in this tree mentions them). RESULT. With nothing taught the solver repairs 5 of 40 (get_factors, knapsack, pascal, quicksort, sieve); every repair counted was confirmed by asking the bug's own tests again after the solver was done. THE SAME BUG AGAIN: the 4 repairs that left a lesson were all repeated from memory on a fresh copy of the bug with no search, in 1.9 s and 3 processes each, where the search had taken 5.5 to 228.6 s and 18 to 1035 processes (the fifth repair, sieve, left no lesson: the organ refused it). THE OTHER FIXES TAUGHT FIRST: with the published fixes of all the other bugs offered as lessons (the organ accepted 22 of the 40), memory proposed a repair for 3 of the 40 bugs and all 3 were repaired without a search; 2 of them the solver repairs anyway, so the lessons added 1 bug (gcd): 6 of 40. Where memory proposed nothing the solver searched as it does with an empty memory (3 such bugs run in full: same outcome, processes started within 2 of each other). WHAT THE SOLVER DID NOT DO: 31 searches ended by themselves with no repair (27 after 45 to 245 s; 4 that had not ended at this measurement's limit of 300 s were run again alone and ended with no repair after 330 to 642 s); 3 bugs it would not start on because the buggy program never ends (bitcount, find_first_in_sorted, sqrt); on 1 (levenshtein) it raised an error of its own and stopped, both times it was run. A PILOT, NOT A RESULT: the solver's own bound on how many single changes it keeps per file, raised from its default 24 to its ceiling 128, on 6 of the unrepaired bugs: 1 of 6 repaired (next_permutation, in 12 s, run twice), the other 5 unchanged. FOR SCALE, published elsewhere and not reproduced here: language models repair 31 to 40 of these 40 bugs. WHAT THIS SAYS: remembering a repair is real here, exact and cheap, and what is remembered is that repair. What repairs a bug nobody has shown it is the search; the search finds 5 of 40, and 39 demonstrations of other repairs moved that to 6. Zero model calls, zero spend, no capability credit claimed. One run; nobody else has re-run it.",
  "summary": {
   "empty_memory": {
    "how_the_runs_ended": {
@@ -3167,46 +90,1719 @@
    "gcd"
   ]
  },
- "targets": [
-  "bitcount",
-  "breadth_first_search",
-  "bucketsort",
-  "depth_first_search",
-  "detect_cycle",
-  "find_first_in_sorted",
-  "find_in_sorted",
-  "flatten",
-  "gcd",
-  "get_factors",
-  "hanoi",
-  "is_valid_parenthesization",
-  "kheapsort",
-  "knapsack",
-  "kth",
-  "lcs_length",
-  "levenshtein",
-  "lis",
-  "longest_common_subsequence",
-  "max_sublist_sum",
-  "mergesort",
-  "minimum_spanning_tree",
-  "next_palindrome",
-  "next_permutation",
-  "pascal",
-  "possible_change",
-  "powerset",
-  "quicksort",
-  "reverse_linked_list",
-  "rpn_eval",
-  "shortest_path_length",
-  "shortest_path_lengths",
-  "shortest_paths",
-  "shunting_yard",
-  "sieve",
-  "sqrt",
-  "subsequences",
-  "to_base",
-  "topological_ordering",
-  "wrap"
- ]
+ "per_bug": {
+  "bitcount": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 8.1,
+    "processes_started": 1,
+    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
+    "searches": 0,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "breadth_first_search": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 163.9,
+    "processes_started": 904,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "bucketsort": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 121.62,
+    "processes_started": 544,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": {
+    "repaired": false,
+    "seconds": 127.0,
+    "processes_started": 543,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false,
+    "rules_held": 22,
+    "lessons_given": 22
+   }
+  },
+  "depth_first_search": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 186.92,
+    "processes_started": 921,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "detect_cycle": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 181.93,
+    "processes_started": 967,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "find_first_in_sorted": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 8.1,
+    "processes_started": 1,
+    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
+    "searches": 0,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "find_in_sorted": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 234.71,
+    "processes_started": 1022,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "flatten": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 45.09,
+    "processes_started": 203,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "gcd": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 114.09,
+    "processes_started": 502,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": true,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": {
+    "repaired": true,
+    "seconds": 2.13,
+    "processes_started": 3,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "narrowed_pattern",
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "def gcd(b, a):"
+     ],
+     "removed": [
+      "def gcd(a, b):"
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 21,
+    "lessons_given": 21
+   }
+  },
+  "get_factors": {
+   "nothing_taught": {
+    "repaired": true,
+    "seconds": 8.7,
+    "processes_started": 31,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+    "searches": 1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "for i in range(2, int(n ** 1) + 1):"
+     ],
+     "removed": [
+      "for i in range(2, int(n ** 0.5) + 1):"
+     ]
+    },
+    "lesson_kept_after": true,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true
+   },
+   "same_bug_again": {
+    "repaired": true,
+    "seconds": 1.9,
+    "processes_started": 3,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "statement",
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "for i in range(2, int(n ** 1) + 1):"
+     ],
+     "removed": [
+      "for i in range(2, int(n ** 0.5) + 1):"
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 1
+   },
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "hanoi": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 220.01,
+    "processes_started": 1018,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "is_valid_parenthesization": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 212.6,
+    "processes_started": 986,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "kheapsort": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 45.89,
+    "processes_started": 203,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "knapsack": {
+   "nothing_taught": {
+    "repaired": true,
+    "seconds": 19.38,
+    "processes_started": 69,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+    "searches": 1,
+    "memory_hit": false,
+    "is_the_published_fix": true,
+    "lines_changed": {
+     "put_in": [
+      "if weight <= j:"
+     ],
+     "removed": [
+      "if weight < j:"
+     ]
+    },
+    "lesson_kept_after": true,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true
+   },
+   "same_bug_again": {
+    "repaired": true,
+    "seconds": 1.92,
+    "processes_started": 3,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "statement",
+    "is_the_published_fix": true,
+    "lines_changed": {
+     "put_in": [
+      "if weight <= j:"
+     ],
+     "removed": [
+      "if weight < j:"
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 1
+   },
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": true,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": {
+    "repaired": true,
+    "seconds": 2.67,
+    "processes_started": 6,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "operator_generalization",
+    "is_the_published_fix": true,
+    "lines_changed": {
+     "put_in": [
+      "if weight <= j:"
+     ],
+     "removed": [
+      "if weight < j:"
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 21,
+    "lessons_given": 21
+   }
+  },
+  "kth": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 192.8,
+    "processes_started": 826,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "lcs_length": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 146.85,
+    "processes_started": 634,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "levenshtein": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 19.39,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": false,
+    "solver_says_pass": false,
+    "second_check_passes": false,
+    "the_error_the_solver_raised": "_brain_python_interprocedural_value_provenance_v1.py.ProvenanceError: TEST_TIMEOUT"
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "lis": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 244.63,
+    "processes_started": 1041,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "longest_common_subsequence": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 300.11,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "elif a[0] == b[-1]:",
+      "return a[0] + longest_common_subsequence(a[2:], b)"
+     ],
+     "removed": [
+      "elif a[0] == b[0]:",
+      "return a[0] + longest_common_subsequence(a[1:], b)"
+     ]
+    },
+    "stopped_at_the_wall_limit": true,
+    "finished": false,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "max_sublist_sum": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 111.15,
+    "processes_started": 488,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "mergesort": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 300.1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "j = 1",
+      "while i <= len(left) and j < len(right):"
+     ],
+     "removed": [
+      "j = 0",
+      "while i < len(left) and j < len(right):"
+     ]
+    },
+    "stopped_at_the_wall_limit": true,
+    "finished": false,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "minimum_spanning_tree": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 104.19,
+    "processes_started": 535,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "next_palindrome": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 222.09,
+    "processes_started": 1035,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "next_permutation": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 230.21,
+    "processes_started": 1033,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "pascal": {
+   "nothing_taught": {
+    "repaired": true,
+    "seconds": 228.55,
+    "processes_started": 1035,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__MULTISTEP_CLOSED_LOOP_BEAM_SEARCH",
+    "repair_mode": "multistep_closed_loop_beam_search",
+    "searches": 1,
+    "memory_hit": false,
+    "is_the_published_fix": true,
+    "lines_changed": {
+     "put_in": [
+      "for c in range(0, r + 1):"
+     ],
+     "removed": [
+      "for c in range(0, r):",
+      ""
+     ]
+    },
+    "lesson_kept_after": true,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true
+   },
+   "same_bug_again": {
+    "repaired": true,
+    "seconds": 1.86,
+    "processes_started": 3,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "statement",
+    "is_the_published_fix": true,
+    "lines_changed": {
+     "put_in": [
+      "for c in range(0, r + 1):"
+     ],
+     "removed": [
+      "for c in range(0, r):",
+      ""
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 1
+   },
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "possible_change": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 300.1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "return 0 if coins is None else possible_change(coins, total - first) + possible_change(rest, total)"
+     ],
+     "removed": [
+      "return possible_change(coins, total - first) + possible_change(rest, total)"
+     ]
+    },
+    "stopped_at_the_wall_limit": true,
+    "finished": false,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "powerset": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 104.88,
+    "processes_started": 465,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": {
+    "repaired": false,
+    "seconds": 108.92,
+    "processes_started": 466,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false,
+    "rules_held": 21,
+    "lessons_given": 21
+   }
+  },
+  "quicksort": {
+   "nothing_taught": {
+    "repaired": true,
+    "seconds": 5.47,
+    "processes_started": 18,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+    "searches": 1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+     ],
+     "removed": [
+      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+     ]
+    },
+    "lesson_kept_after": true,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true
+   },
+   "same_bug_again": {
+    "repaired": true,
+    "seconds": 1.86,
+    "processes_started": 3,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "statement",
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+     ],
+     "removed": [
+      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 1
+   },
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": true,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": {
+    "repaired": true,
+    "seconds": 2.32,
+    "processes_started": 5,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__SCOPED_RETAINED_PROPOSAL_PENDING_APPLICATION",
+    "repair_mode": "scoped_retained_repair",
+    "searches": 0,
+    "memory_hit": true,
+    "memory_strategy": "narrowed_pattern",
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+     ],
+     "removed": [
+      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+     ]
+    },
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true,
+    "rules_held": 21,
+    "lessons_given": 21
+   }
+  },
+  "reverse_linked_list": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 92.92,
+    "processes_started": 505,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "rpn_eval": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 189.52,
+    "processes_started": 853,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": {
+    "repaired": false,
+    "seconds": 192.6,
+    "processes_started": 855,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false,
+    "rules_held": 22,
+    "lessons_given": 22
+   }
+  },
+  "shortest_path_length": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 180.08,
+    "processes_started": 998,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "shortest_path_lengths": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 199.07,
+    "processes_started": 1055,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "shortest_paths": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 188.54,
+    "processes_started": 1012,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "shunting_yard": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 219.7,
+    "processes_started": 1028,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "sieve": {
+   "nothing_taught": {
+    "repaired": true,
+    "seconds": 9.05,
+    "processes_started": 36,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+    "searches": 1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "if all((n % p > 0 for p in primes)):"
+     ],
+     "removed": [
+      "if any(n % p > 0 for p in primes):"
+     ]
+    },
+    "lesson_kept_after": false,
+    "lesson_not_kept_because": "FAILED_MUTATED_TWIN_VERIFICATION",
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "sqrt": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 8.09,
+    "processes_started": 1,
+    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
+    "searches": 0,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "subsequences": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 245.04,
+    "processes_started": 1039,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "to_base": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 300.1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "alphabet = string.digits * string.ascii_uppercase + string.ascii_uppercase",
+      "while num > 1:"
+     ],
+     "removed": [
+      "alphabet = string.digits + string.ascii_uppercase",
+      "while num > 0:"
+     ]
+    },
+    "stopped_at_the_wall_limit": true,
+    "finished": false,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 21,
+    "different_rules_held": 21,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "topological_ordering": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 164.13,
+    "processes_started": 871,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  },
+  "wrap": {
+   "nothing_taught": {
+    "repaired": false,
+    "seconds": 189.92,
+    "processes_started": 708,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+    "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+    "searches": 1,
+    "memory_hit": false,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": false,
+    "second_check_passes": false
+   },
+   "same_bug_again": null,
+   "memory_with_the_other_fixes": {
+    "proposes_a_repair": false,
+    "lessons_given": 22,
+    "different_rules_held": 22,
+    "could_be_asked": true
+   },
+   "solver_with_the_other_fixes": null
+  }
+ },
+ "published_fixes_as_lessons": {
+  "bitcount": {
+   "stored": false,
+   "refused_because": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS"
+  },
+  "breadth_first_search": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "bucketsort": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "depth_first_search": {
+   "stored": true,
+   "refused_because": null
+  },
+  "detect_cycle": {
+   "stored": true,
+   "refused_because": null
+  },
+  "find_first_in_sorted": {
+   "stored": false,
+   "refused_because": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS"
+  },
+  "find_in_sorted": {
+   "stored": true,
+   "refused_because": null
+  },
+  "flatten": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "gcd": {
+   "stored": true,
+   "refused_because": null
+  },
+  "get_factors": {
+   "stored": true,
+   "refused_because": null
+  },
+  "hanoi": {
+   "stored": true,
+   "refused_because": null
+  },
+  "is_valid_parenthesization": {
+   "stored": true,
+   "refused_because": null
+  },
+  "kheapsort": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "knapsack": {
+   "stored": true,
+   "refused_because": null
+  },
+  "kth": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "lcs_length": {
+   "stored": true,
+   "refused_because": null
+  },
+  "levenshtein": {
+   "stored": true,
+   "refused_because": null
+  },
+  "lis": {
+   "stored": true,
+   "refused_because": null
+  },
+  "longest_common_subsequence": {
+   "stored": true,
+   "refused_because": null
+  },
+  "max_sublist_sum": {
+   "stored": true,
+   "refused_because": null
+  },
+  "mergesort": {
+   "stored": true,
+   "refused_because": null
+  },
+  "minimum_spanning_tree": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "next_palindrome": {
+   "stored": true,
+   "refused_because": null
+  },
+  "next_permutation": {
+   "stored": true,
+   "refused_because": null
+  },
+  "pascal": {
+   "stored": true,
+   "refused_because": null
+  },
+  "possible_change": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "powerset": {
+   "stored": true,
+   "refused_because": null
+  },
+  "quicksort": {
+   "stored": true,
+   "refused_because": null
+  },
+  "reverse_linked_list": {
+   "stored": true,
+   "refused_because": null
+  },
+  "rpn_eval": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "shortest_path_length": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "shortest_path_lengths": {
+   "stored": true,
+   "refused_because": null
+  },
+  "shortest_paths": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "shunting_yard": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "sieve": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "sqrt": {
+   "stored": false,
+   "refused_because": "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS"
+  },
+  "subsequences": {
+   "stored": false,
+   "refused_because": "NON_GENERALIZABLE_SNIPPET"
+  },
+  "to_base": {
+   "stored": true,
+   "refused_because": null
+  },
+  "topological_ordering": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  },
+  "wrap": {
+   "stored": false,
+   "refused_because": "FAILED_MUTATED_TWIN_VERIFICATION"
+  }
+ },
+ "the_repairs_read_one_by_one": {
+  "note": "read by the producer; 'repaired' in the counts means only that the solver said so, the file changed and the bug's own tests pass when asked again",
+  "knapsack": "the published fix (weight < j becomes weight <= j)",
+  "pascal": "the published fix (range(0, r) becomes range(0, r + 1))",
+  "sieve": "the published change (any becomes all) written with one more pair of brackets, which is why is_the_published_fix says false",
+  "quicksort": "another change with the same effect: the published fix lets elements equal to the pivot into 'greater' (x >= pivot), this one lets them into 'lesser' (x <= pivot)",
+  "get_factors": "another change: the loop runs up to n instead of up to its square root, so n itself is found as a factor. The factors come out right; the program is slower than with the published fix, which returns [n] at the end",
+  "gcd__the_one_bug_the_lessons_added": "def gcd(a, b) becomes def gcd(b, a): the two parameters change places, which turns the faulty recursion into Euclid's algorithm with the roles exchanged. Right in effect; not the published fix (gcd(b, a % b)). The earlier measurement shows which lesson it comes from: shortest_path_lengths"
+ },
+ "the_five_runs_that_did_not_end_in_the_main_run": {
+  "why": "in the main run four solver runs were stopped at this measurement's wall limit of 300 s and one ended with an error; a stopped run is not the solver's own answer, so the five were run again by themselves with a limit of 2400 s (same code, two at a time)",
+  "record": "copied from the run's own log lines as the producer read them; the result file of this side run was on the machine's scratch disk and was lost when the machine was reset before it was committed",
+  "outcomes": {
+   "longest_common_subsequence": {
+    "repaired": false,
+    "seconds": 475.83,
+    "processes_started": 1005,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
+   },
+   "mergesort": {
+    "repaired": false,
+    "seconds": 642.49,
+    "processes_started": 1033,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
+   },
+   "possible_change": {
+    "repaired": false,
+    "seconds": 329.53,
+    "processes_started": 1008,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
+   },
+   "to_base": {
+    "repaired": false,
+    "seconds": 433.65,
+    "processes_started": 680,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
+   },
+   "levenshtein": {
+    "repaired": false,
+    "seconds": 19.17,
+    "finished": false,
+    "the_error_the_solver_raised": "ProvenanceError: TEST_TIMEOUT",
+    "raised_in": "canonical/runtime/bound_capabilities/python_interprocedural_value_provenance_v1.py, _trace_one"
+   }
+  },
+  "so": "none of the five is a repair; the counts stand; the four stopped runs are searches that end with no repair when given the time"
+ },
+ "what_the_published_fixes_of_the_35_unrepaired_bugs_change": {
+  "note": "the producer's reading of the 35 published fixes, each bug in one group; it says what kind of change the missing repair is, not why the search missed it",
+  "two_things_already_on_the_line_change_places": [
+   "gcd",
+   "next_permutation",
+   "rpn_eval",
+   "shortest_path_lengths",
+   "to_base"
+  ],
+  "a_name_or_a_call_is_replaced_by_another_name_that_is_in_reach": [
+   "breadth_first_search",
+   "bucketsort",
+   "hanoi",
+   "shortest_path_length",
+   "topological_ordering"
+  ],
+  "an_existing_expression_gets_a_small_adjustment": [
+   "find_in_sorted",
+   "kheapsort",
+   "kth",
+   "lcs_length",
+   "longest_common_subsequence",
+   "next_palindrome",
+   "sqrt"
+  ],
+  "an_operator_or_a_constant_changes": [
+   "bitcount",
+   "find_first_in_sorted",
+   "is_valid_parenthesization",
+   "mergesort",
+   "subsequences"
+  ],
+  "an_expression_is_wrapped_unwrapped_added_to_or_cut": [
+   "detect_cycle",
+   "flatten",
+   "levenshtein",
+   "lis",
+   "max_sublist_sum",
+   "possible_change",
+   "powerset"
+  ],
+  "a_whole_statement_is_added": [
+   "depth_first_search",
+   "reverse_linked_list",
+   "shunting_yard",
+   "wrap"
+  ],
+  "a_statement_is_rewritten": [
+   "minimum_spanning_tree",
+   "shortest_paths"
+  ],
+  "counted": {
+   "two_things_already_on_the_line_change_places": 5,
+   "a_name_or_a_call_is_replaced_by_another_name_that_is_in_reach": 5,
+   "an_existing_expression_gets_a_small_adjustment": 7,
+   "an_operator_or_a_constant_changes": 5,
+   "an_expression_is_wrapped_unwrapped_added_to_or_cut": 7,
+   "a_whole_statement_is_added": 4,
+   "a_statement_is_rewritten": 2
+  }
+ },
+ "pilot_with_the_solvers_own_bound_widened": {
+  "what": "the solver reads mutations_per_file from its arguments (default 24, its own ceiling 128): how many single changes it keeps per file. Six unrepaired bugs whose published fix changes one small thing on one line were run again with 128; nothing else differs",
+  "repaired": [
+   "next_permutation"
+  ],
+  "next_permutation": {
+   "with_128_run_again_after_the_reset__this_record_is_the_runs_own": {
+    "repaired": true,
+    "seconds": 11.27,
+    "processes_started": 45,
+    "status": "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+    "repair_status": "PASS__PROVENANCE_GUIDED_COUPLED_REPAIR",
+    "searches": 1,
+    "memory_hit": false,
+    "is_the_published_fix": false,
+    "lines_changed": {
+     "put_in": [
+      "if not perm[j] < perm[i]:"
+     ],
+     "removed": [
+      "if perm[j] < perm[i]:"
+     ]
+    },
+    "lesson_kept_after": true,
+    "stopped_at_the_wall_limit": false,
+    "finished": true,
+    "solver_says_pass": true,
+    "second_check_passes": true
+   },
+   "with_128_the_first_time": {
+    "repaired": true,
+    "seconds": 11.65,
+    "processes_started": 45,
+    "record": "copied from the run's own log lines as the producer read them; the result file of this side run was on the machine's scratch disk and was lost when the machine was reset before it was committed"
+   },
+   "with_the_default_24_in_the_main_run": {
+    "repaired": false,
+    "seconds": 230.21,
+    "processes_started": 1033,
+    "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH"
+   },
+   "the_repair": "if perm[j] < perm[i] becomes if not perm[j] < perm[i]. The published fix is perm[i] < perm[j]; the two differ only when the two elements are equal",
+   "solver_arguments": {
+    "mutations_per_file": 128,
+    "output_path": "reports/solver.json",
+    "retained_learning": {
+     "allow_cross_scope_transfer": true,
+     "allow_operator_generalization": true,
+     "context": {
+      "dependencies": {},
+      "preconditions": {}
+     },
+     "contract": {
+      "schema_version": 1,
+      "scope_id": "quixbugs-python",
+      "verification_kind": "TEST_SUITE"
+     },
+     "db_path": "memory/skills.sqlite",
+     "enabled": true,
+     "target_path": "project/python_programs/next_permutation.py"
+    },
+    "source_root": "project",
+    "test_paths": [
+     "project/python_testcases/test_next_permutation.py"
+    ],
+    "timeout_s": 8
+   }
+  },
+  "the_other_five": {
+   "record": "copied from the run's own log lines as the producer read them; the result file of this side run was on the machine's scratch disk and was lost when the machine was reset before it was committed",
+   "with_128": {
+    "rpn_eval": {
+     "repaired": false,
+     "seconds": 201.66,
+     "processes_started": 849
+    },
+    "to_base": {
+     "repaired": false,
+     "seconds": 431.93,
+     "processes_started": 680
+    },
+    "find_in_sorted": {
+     "repaired": false,
+     "seconds": 248.01,
+     "processes_started": 1021
+    },
+    "bucketsort": {
+     "repaired": false,
+     "seconds": 126.97,
+     "processes_started": 542
+    },
+    "hanoi": {
+     "repaired": false,
+     "seconds": 247.94,
+     "processes_started": 1068
+    }
+   },
+   "with_the_default_24_in_the_main_run": {
+    "rpn_eval": {
+     "repaired": false,
+     "seconds": 189.52,
+     "processes_started": 853
+    },
+    "to_base": {
+     "repaired": false,
+     "seconds": 300.1,
+     "processes_started": null
+    },
+    "find_in_sorted": {
+     "repaired": false,
+     "seconds": 234.71,
+     "processes_started": 1022
+    },
+    "bucketsort": {
+     "repaired": false,
+     "seconds": 121.62,
+     "processes_started": 544
+    },
+    "hanoi": {
+     "repaired": false,
+     "seconds": 220.01,
+     "processes_started": 1018
+    }
+   }
+  },
+  "read": "a pilot on six bugs chosen by the producer after reading the fixes, so not a rate. It shows that for one bug the change that repairs it was within what the search can write and outside what its default bound lets it try; on the other five the wider bound changed neither the outcome nor, to within a few, the number of processes, so there the bound is not what stops it"
+ },
+ "for_scale_published_elsewhere": {
+  "note": "as stated on the cited pages, read 2026-11-11; not reproduced here; their protocols differ from each other and from this one",
+  "language_models_on_these_40_bugs": "31 (ChatGPT), 38 (GPT-4o), 40 (O1) in https://www.arxiv.org/pdf/2409.10033; 37 to 39 for four code models in https://arxiv.org/html/2508.16499v1; more in QUIXBUGS_ONE_FIX_TRANSFER_20261111_V1.json",
+  "skills_given_to_agents_2026": [
+   {
+    "source": "https://arxiv.org/html/2602.12670v1",
+    "says": "SkillsBench, 84 tasks, 7 agent-model pairs: skills written by people raise the pass rate by 16.2 points on average (4.5 in software engineering); skills the model writes for itself change it by -1.3"
+   },
+   {
+    "source": "https://arxiv.org/pdf/2605.23899",
+    "says": "skills extracted by models from their own experience help on average and lower the score in 25% of extractor-target pairings"
+   },
+   {
+    "source": "https://arxiv.org/html/2605.25430v1",
+    "says": "CODESKILL: a skill bank managed by a policy that was itself trained raises the average pass rate by 9.69 points over no skills"
+   },
+   {
+    "source": "https://arxiv.org/html/2604.27003v1",
+    "says": "raw trajectories reused on another task transfer negatively; abstracted ones transfer better; the harm falls on the cases the agent could not already solve"
+   }
+  ]
+ },
+ "checks_of_the_tests": {
+  "tests": "61 for this tool (canonical/tests/test_quixbugs_repair_solver_v1.py): 47 put a stand-in where the solver's process, the organ and the tests go and pin which bug is given to the solver with which store, what counts as repaired (the solver's word, a changed file and the bug's tests asked again -- all three), what counts as coming from memory, and how it is added up; 7 run real processes around a stand-in worker (stopped at the wall limit with everything it started, an answer after other output, a worker that dies, the tree it runs in); 7 run the real solver with the real organ on three small programs written for the tests",
+  "seeded_faults_in_the_tool": {
+   "how": "every place in the tool where a comparison, a boolean, a number, a short string or a one-line statement could be changed was changed, one at a time, and the tests were run: the stand-in tests for the measurement and the summary, the process tests for the process wrapper, and for the places only a real store can show, the real-solver tests",
+   "places": 526,
+   "noticed_by_the_tests_as_first_written": 472,
+   "noticed_after_assertions_were_added": 503,
+   "left": 23,
+   "what_is_left": "making a directory that the next call makes anyway (4); collecting a process after it was killed (1); the decimals of a time (1); a text-comparison option that does nothing on short texts (1); one worker or one item going through the pool instead of the plain loop, with the same outcome and the same number of runs at a time (3); what a missing time counts as (4); the command line's help text, flushing, printing of the summary, the layout of the output file and the main guard (9). None changes a reported count",
+   "record": "the counts are as the producer read them from the fault runs; the script and its result files were scratch and were lost in the reset. The assertions they led to are in the test file"
+  },
+  "leaks_that_were_looked_for": [
+   "the answer: each bug was laid out for the solver as the buggy program, its tests and their data and nothing else; none of the 90 projects laid out in the run held the correct programs (looked at on disk before the reset), and a test holds that no file the solver is given contains the repairing line",
+   "the bug's own lesson: with the other fixes taught first, each bug was offered 21 lessons if its own fix had been stored and 22 otherwise, its own never among them (asserted on this record when it was written; a test holds it)",
+   "the rules the tree ships with: every store used here starts empty (seed off), as in the earlier measurement",
+   "a repair that is only the solver's word: all 12 runs in which the solver said it had repaired also passed when the bug's tests were asked again by a fresh oracle on the file left on disk (asserted on this record when it was written)"
+  ]
+ },
+ "limits": [
+  "one run. Where the search was run twice it repeated itself: the three check bugs started 543/544, 465/466 and 853/855 processes with and without lessons and ended the same way; knapsack, quicksort and gcd had ended the same way in a trial of the tool before the full run. The tool was not changed between that trial and the run",
+  "two solver runs side by side on a two-processor machine: the seconds are not clean timings. Outcomes depend on time only through the 8 s limit for one run of a bug's tests and through the wall limit",
+  "the 8 s limit for one run of a bug's tests is this measurement's choice. The error on levenshtein is the solver's tracer running out of that limit; a longer limit was not tried",
+  "the solver was called with its default bounds, as the tree's own campaign calls it; the pilot shows that one of them matters for one bug",
+  "the lessons are the published fixes, i.e. the best demonstrations there are; the organ refused to store 18 of the 40 (14 FAILED_MUTATED_TWIN_VERIFICATION, 3 TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS, 1 NON_GENERALIZABLE_SNIPPET), so each bug was offered 21 or 22 lessons, never its own",
+  "no bug was held out: these are all 40, and the producer has now read all 40 published fixes, so any change made to the search from here on has to be scored on bugs the producer has not read",
+  "one-line defects in small programs: this says nothing direct about repairs across files",
+  "the machine was reset twice during this work; what is marked as copied from a log has no raw file behind it any more",
+  "nobody else has re-run this"
+ ],
+ "not_done": [
+  "the widened bound on all the unrepaired bugs, and the other bounds the solver takes",
+  "the kinds of change the search cannot write (two arguments changing places, another name in reach, one more or one less), added and scored on bugs nobody here has read",
+  "a proposer other than the tree's own search -- for instance a language model -- in front of the same checking and the same memory: that is the measurement that would say what this memory is worth under a strong proposer",
+  "the 18 fixes the organ refuses to store were not taught some other way",
+  "the solver's three refusals (a buggy program that never ends) and its error on levenshtein were recorded, not repaired: the organs were not edited"
+ ],
+ "environment": {
+  "benchmark_sha256": "44fea01ec12ff8bc809fa719f089c38b8d15a35ddac7fa0eddcd2dfaeeac78bb",
+  "code_sha256": {
+   "bench_tool": "f4b3f35cb5db7d076a92ee9cf3fd44c0446749ee2259036084beea744db689c2",
+   "organ_contract_and_oracle": "7a34e3d80ce60fc1139bc974bd756f7310188e7b33deb2163f3a6d66963ff0aa",
+   "organ_store": "888dc4457fcb7e309e9af3e4a6b48c6b0757c5369588587fb9a81b8fdf4f70aa",
+   "retained_repair_session": "3f742745fb672cc137fdb8dc300668e96668542f21bdaf22cb1f1dc984fe085b",
+   "solver": "fd96af03475835c7d87eac7281568c373e58a881cb3eac20389d8a57d29a0638",
+   "tool": "3418f080e077799b43568dac091c2a763628b97ab574c4feade4616e6e146454"
+  },
+  "processors": 2,
+  "python": "3.11.2",
+  "source": "github.com/jkoppel/QuixBugs (MIT), python_programs / correct_python_programs / python_testcases",
+  "quixbugs_commit": "4257f44b0ff1181dedaedee6a447e133219fcebf",
+  "code_commit": "7d68748ba8cf5c5872eb15132bf9cee37d6fa055"
+ },
+ "parameters": {
+  "check_bugs": 3,
+  "seed": 0,
+  "solver_arguments_for_one_bug": {
+   "output_path": "reports/solver.json",
+   "retained_learning": {
+    "allow_cross_scope_transfer": true,
+    "allow_operator_generalization": true,
+    "context": {
+     "dependencies": {},
+     "preconditions": {}
+    },
+    "contract": {
+     "schema_version": 1,
+     "scope_id": "quixbugs-python",
+     "verification_kind": "TEST_SUITE"
+    },
+    "db_path": "memory/skills.sqlite",
+    "enabled": true,
+    "target_path": "project/python_programs/NAME.py"
+   },
+   "source_root": "project",
+   "test_paths": [
+    "project/python_testcases/test_NAME.py"
+   ],
+   "timeout_s": 8
+  },
+  "timeout_s": 8,
+  "wall_limit_s": 300,
+  "workers": 2
+ },
+ "the_earlier_half": "canonical/verification/QUIXBUGS_ONE_FIX_TRANSFER_20261111_V1.json",
+ "the_raw_result_of_the_main_run": "this file as committed in ba2ad4bd (git show ba2ad4bd:canonical/verification/QUIXBUGS_REPAIR_SOLVER_20261111_V1.json)",
+ "producer_cognition_model_dependency_count": 0,
+ "incremental_spend_usd": 0
 }
