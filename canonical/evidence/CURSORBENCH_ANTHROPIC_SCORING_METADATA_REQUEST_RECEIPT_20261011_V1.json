@@ -1,0 +1,67 @@
+{
+  "schema": "PROJECT_BRAIN_CURSORBENCH_ANTHROPIC_SCORING_METADATA_REQUEST_RECEIPT_20261011_V1",
+  "date": "2026-10-11",
+  "status": "SENT_HOLDER_SIDE_NON_SENSITIVE_METADATA_REQUEST__PENDING_REPLY__ZERO_CREDIT",
+  "target_predicate": "CODING_CURSORBENCH_GE_57_8",
+  "recipient": {
+    "organization": "ANTHROPIC",
+    "address": "feedback@anthropic.com",
+    "public_contact_basis": "Anthropic publicly invites developers/researchers with evaluation feedback through this address."
+  },
+  "gmail": {
+    "message_id": "1a12a658d211cddf",
+    "thread_id": "1a12a658d211cddf",
+    "timestamp": "2026-10-11T09:57:40Z",
+    "subject": "CursorBench 4.0: request for non-sensitive result metadata",
+    "has_attachment": false,
+    "normalized_body_sha256": "cb97d45e115a99e60d46ed93d41f3e2ebb5d98ce657c0857dbcc3a4495df378f",
+    "normalized_body_bytes": 1411
+  },
+  "request_scope": [
+    "PER_TASK_SCORE_CONTRIBUTION_TYPE",
+    "TASK_OR_PASS_AGGREGATION_OR_WEIGHTING",
+    "SCORED_UNIT_COUNT_OR_DENOMINATOR_FOR_OPUS_5_5_CURSORBENCH_4_0_57_8",
+    "REDACTED_AGGREGATE_RESULT_RECORD_CHECKSUM_SIGNED_RECEIPT_OR_TABLE_ROW_WITHOUT_HIDDEN_TASK_CONTENTS",
+    "OR_PRECISE_CONFIRMATION_THAT_NONE_CAN_BE_SHARED"
+  ],
+  "explicit_exclusions": [
+    "NO_HELD_OUT_TASK_CONTENTS",
+    "NO_PRIVATE_REPOSITORIES",
+    "NO_SOLUTIONS",
+    "NO_PROMPTS",
+    "NO_GRADER_SENSITIVE_MATERIAL",
+    "NO_NEW_EVALUATION_RUN",
+    "NO_PAID_SERVICE"
+  ],
+  "scheduler": {
+    "state": "PENDING_ANTHROPIC_REPLY",
+    "same_information_retry_authority": false,
+    "on_positive_reply": "BIND_EXACT_REPLY_AND_RECOMPUTE_CURSORBENCH_SCORE_OR_ANCHOR_TRANSFER_ROUTE",
+    "on_precise_unavailable_reply": "CLOSE_ANTHROPIC_METADATA_ROUTE_UNDER_CURRENT_POLICY",
+    "on_no_reply": "NO_PROOF_STATE_CHANGE"
+  },
+  "proof_effect": {
+    "new_scoring_formula": false,
+    "new_target_result_artifact": false,
+    "new_brain_score_lower_bound": false,
+    "new_brain_ge_opus_relation": false,
+    "acceptance_state": "OPEN"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "hard_nonclaims": [
+    "NO_REPLY_INFERRED",
+    "NO_CLAIM_ANTHROPIC_POSSESSES_SHAREABLE_SCORING_METADATA",
+    "NO_CLAIM_BRAIN_CURSORBENCH_SCORE_IS_GE_57_8",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_PROMOTION_OR_TERMINAL_CREDIT"
+  ],
+  "promotion_authority": false,
+  "terminal_authority": false
+}
