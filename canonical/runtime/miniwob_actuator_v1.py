@@ -490,6 +490,12 @@ def v_scroll(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
                             "" if settled else "-short")
 
 
+_SOCIAL_MAP = {"share": "share", "share via dm": "share", "copy": "copy",
+                "copy link to tweet": "copy", "embed": "embed",
+                "embed tweet": "embed", "mute": "menu-user", "block": "block-user",
+                "block user": "block-user", "report": "report", "reply": "reply",
+                "retweet": "retweet", "like": "like"}
+
 _ARTICLES = {"the", "a", "an", "this", "that", "its", "of", "value", "text", "field"}
 
 
@@ -1354,6 +1360,110 @@ _MONTHS = {x: i + 1 for i, x in enumerate(
     "november december".split())}
 
 
+def v_social(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
+    """A feed with per-post action toggles: click <action> on <n> posts by <user>, then Submit.
+
+    Measured 2026-11-09 on `social-media-all` and `social-media-some`, both 0/30.
+
+    THE CHECKER IS A TOTAL CONDITION, NOT A LOCAL ONE. It walks EVERY
+    .reply/.retweet/.like/.share on the page and fails if a post that does not match
+    (user, action) is active, exactly as it fails if a matching one is not. So the job is
+    not "click the right button" -- it is "leave the page in exactly one state", and an
+    extra click is as fatal as a missing one. Take the matching set, click precisely those,
+    and count.
+
+    `-some` names HOW MANY posts ("on 1 post by @briana") and the count is a third
+    span.bold -- the page supplies every operand, including the quantity.
+    """
+    bold = act.ev("(()=>{return [...document.querySelectorAll('#query .bold')]"
+                  ".map(e=>e.textContent.trim())})()") or []
+    if len(bold) < 2:
+        return "social-no-operands"
+    # THE OPERAND ORDER IS NOT STABLE ACROSS THE FAMILY. `-all`/`-some` put the action
+    # first ("Click the \"Share\" button on all posts by @x"); plain `social-media` puts
+    # the USER first ("For the user @x, click on the \"Share\" button"). Classify each
+    # span by what it IS -- a @handle vs a verb -- instead of by where it sits.
+    # THE LABEL IS NOT THE CLASS. 'Mute' is <li class="menu-user">, 'Share via DM' is
+    # <li class="share">, 'Copy link to Tweet' is <li class="copy">. And SIX of the nine
+    # actions live inside a ul.hide "more" menu that has to be opened before they exist
+    # on screen. So resolve the label to a class by asking the page's own menu for it.
+    _LABEL2CLASS = _SOCIAL_MAP
+    ACT_WORDS = tuple(_LABEL2CLASS)
+    action, user = "", ""
+    _acts = [b for b in bold if str(b).strip().lower().strip() in _LABEL2CLASS]
+    _users = [b for b in bold if str(b).strip().startswith("@")]
+    if _acts:
+        action = _LABEL2CLASS[str(_acts[0]).strip().lower()]
+    if _users:
+        user = _users[0].strip()
+    rest = [b for b in bold[1:]]
+    want_n = None
+    for b in rest:
+        if re.fullmatch(r"\d+", str(b).strip()):
+            want_n = int(b)
+        elif not user and str(b).strip():
+            user = str(b).strip()
+    if not action:
+        return "social-no-action"
+    if not user:
+        return "social-no-user"
+    # (a hardcoded four-action set used to live here and OVERWROTE the resolved class.
+    #  'Mute' resolves to 'menu-user', which contains none of those four words, so every
+    #  menu action returned social-bad-action even though the map had it right.)
+
+    # THE PLAIN VARIANT SCORES ON THE CLICK ITSELF AND COMPARES THE CLASS NAME:
+    #   r = user === expectedUser && clickedElem === expectedAction
+    # so there is no Submit and no "active" toggling -- the element's class must BE the
+    # action. Detect it by whether the page has a Submit control at all.
+    _has_submit = act.ev("(()=>{return [...document.querySelectorAll('button')]"
+                         ".some(b=>/submit/i.test(b.textContent||''))})()")
+    if not _has_submit:
+        for _slot in ("first", "last"):
+            if want_n is None and _slot == "last":
+                break
+            _hit = act.ev(
+                "(()=>{const lim=%s,which=%s,a=%s,u=%s;"
+                "const posts=[...document.querySelectorAll('.media')];"
+                "const mine=posts.filter(p=>{const n=p.querySelector('.username');"
+                "return n&&n.textContent.trim()===u});"
+                "if(!mine.length)return 'NOUSER';"
+                "const list=which==='last'?mine.slice(-1):mine;"
+                "let n=0;"
+                "for(const p of list){if(lim!==null&&n>=lim)break;"
+                "let b=p.querySelector('.controls > .'+a)||p.querySelector('.'+a);"
+                "if(!b){const mo=p.querySelector('.controls .more');"
+                "if(mo){mo.click();b=p.querySelector('.'+a)}}"
+                "if(!b)continue;"
+                "b.click();n++;if(window.core&&core.endEpisode){break}}"
+                "return n})()" % ("null" if want_n is None else str(want_n),
+                                  json.dumps(_slot), json.dumps(action),
+                                  json.dumps(user)))
+            time.sleep(0.40)
+            if episode_over(act):
+                return "social-click:%s/%s" % (action, user[:10])
+        return "social-click-miss:%s/%s" % (action, user[:10])
+
+    # deselect everything first, then select exactly the matching set
+    act.ev("(()=>{document.querySelectorAll('.like,.reply,.retweet,.share')"
+           ".forEach(e=>e.classList.remove('active'))})()")
+    n = act.ev(
+        "(()=>{const u=%s,a=%s,lim=%s;let n=0;"
+        "for(const p of document.querySelectorAll('.media')){"
+        "const name=(p.querySelector('.username')||{}).textContent||'';"
+        "if(name.trim()!==u)continue;"
+        "if(lim!==null&&n>=lim)break;"
+        "const b=p.querySelector('.'+a);"
+        "if(b){b.classList.add('active');n++}}"
+        "return n})()" % (json.dumps(user), json.dumps(action),
+                          json.dumps(want_n)))
+    act.ev("(()=>{const s=[...document.querySelectorAll('button')]"
+           ".find(b=>/submit/i.test(b.textContent||''));if(s)s.click()})()")
+    time.sleep(0.45)
+    if episode_over(act):
+        return "social:%s/%s/%s" % (action, user[:10], n)
+    return "social-miss:%s/%s/n=%s" % (action, user[:10], n)
+
+
 def v_email(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     """The email inbox: one app, four verbs, one entry point.
 
@@ -2073,6 +2183,11 @@ def dispatch(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     if act.ev("(()=>{return !!(document.querySelector('#main .email-thread')"
               "||document.querySelector('#email')||document.querySelector('#search-results'))})()"):
         return v_email(act, plan, goal)
+
+    # a feed with per-post action toggles, checked as a TOTAL condition
+    if act.ev("(()=>{return document.querySelectorAll('.media').length>0"
+              "&&document.querySelectorAll('.like,.reply,.retweet,.share').length>0})()"):
+        return v_social(act, plan, goal)
 
     if verb == "SORT":
         return v_sort(act, plan, goal)
