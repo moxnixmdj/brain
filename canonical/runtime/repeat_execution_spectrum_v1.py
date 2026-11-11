@@ -58,6 +58,9 @@ NO_SEPARATION = "SPECTRUM_DOES_NOT_SEPARATE"
 INSUFFICIENT = "INSUFFICIENT_VARIANCE"
 NO_FAILURES = "NO_FAILURES_TO_ATTRIBUTE"
 NO_RUNS = "NO_RUNS"
+NO_DISCRIMINATOR = "NO_DISCRIMINATING_ACTION"
+NO_CONTRAST = "NO_OUTCOME_CONTRAST"
+SOURCES_DISAGREE = "OCHIAI_AND_CONTRAST_DISAGREE"
 
 
 class SpectrumError(ValueError):
@@ -72,6 +75,40 @@ def ochiai(runs_with: int, runs_total: int, failures_total: int, failures_with: 
     # failures_with <= failures_total and failures_with <= runs_with, so the value lies
     # in [0, 1]; clamp only to absorb floating point.
     return max(0.0, min(1.0, value))
+
+
+def contrast(rows: Sequence[Mapping[str, Any]], min_support: int = 2) -> dict[str, Any]:
+    """Rank by outcome contrast rather than by failure frequency.
+
+    r121 measured why this must exist. On MiniWob click-option the repeated spectrum
+    gave Ochiai 0.8040 to `submit` and 0.5222 to `select:1`/`select:2`. But `submit`
+    failed only in the runs that had already selected a wrong option (success rate
+    1/9), while `select:1` and `select:2` NEVER succeeded (0/3) and `select:0` did
+    (1/3). Ochiai's frequency term rewards ubiquity, so it named the frequent innocent
+    action. Co-occurrence with failure is not causation even across repeated runs.
+
+    Contrast asks the question the spectrum was supposed to answer: among runs that
+    contained this action, did ANY of them succeed? An action that never co-occurs
+    with success, while some other action does, is the discriminating suspect.
+    """
+    disc = [r for r in rows if r.get("discriminating")]
+    sufficiently_supported = [r for r in disc if r["runs_with"] >= min_support]
+    ever_succeeds = [r for r in disc if r["successes_with"] > 0]
+    never_succeeds = [r for r in sufficiently_supported if r["successes_with"] == 0]
+    never_succeeds.sort(key=lambda r: (-r["runs_with"], -r["failures_with"], str(r["action"])))
+    return {
+        "never_succeeds": never_succeeds,
+        "ever_succeeds": ever_succeeds,
+        "sufficient_support": sufficiently_supported,
+        "min_support": min_support,
+    }
+
+
+def _with_contrast(rows):
+    for row in rows:
+        row["success_rate"] = (round(row["successes_with"] / row["runs_with"], 6)
+                               if row["runs_with"] else None)
+    return rows
 
 
 def attribute(
@@ -108,14 +145,24 @@ def attribute(
     rows = []
     for key, runs_with in present.items():
         f_with = present_in_failure.get(key, 0)
+        # A DISCRIMINATOR varies across runs. An action present in every run is
+        # consistent with every outcome and therefore cannot explain the difference
+        # between them; an action present in no run cannot be reported at all.
+        # Measured on MiniWob click-option (r121): without this guard Ochiai ranks the
+        # ubiquitous `start` action first at 0.9574 purely because high counts inflate
+        # f/sqrt(n_runs*fails). That is a false attribution, not a localisation.
+        discriminating = 0 < runs_with < runs_total
         rows.append({
             "action": key,
             "runs_with": runs_with,
             "failures_with": f_with,
             "successes_with": runs_with - f_with,
+            "discriminating": discriminating,
             "ochiai": round(ochiai(runs_with, runs_total, failures_total, f_with), 6),
         })
-    rows.sort(key=lambda r: (-r["ochiai"], -r["failures_with"], r["runs_with"], str(r["action"])))
+    rows = _with_contrast(rows)
+    rows.sort(key=lambda r: (not r["discriminating"], -r["ochiai"], -r["failures_with"],
+                             r["runs_with"], str(r["action"])))
 
     base = {
         "schema": SCHEMA,
@@ -135,16 +182,38 @@ def attribute(
         return {**base, "status": INSUFFICIENT, "trusted": False,
                 "reason": "no actions were recorded"}
 
-    top = rows[0]["ochiai"]
+    top = rows[0]
     runner_up = rows[1]["ochiai"] if len(rows) > 1 else 0.0
-    if top <= 0.0 or top <= runner_up:
+    if not top["discriminating"]:
+        return {**base, "status": NO_DISCRIMINATOR, "trusted": False,
+                "reason": "no action varies with the outcome; every action either appears in "
+                          "all runs or in none, so the spectrum cannot separate a cause "
+                          "from a constant"}
+    if top["ochiai"] <= 0.0 or top["ochiai"] <= runner_up:
         return {**base, "status": NO_SEPARATION, "trusted": False,
                 "reason": "the top score does not exceed the next; the spectrum cannot "
                           "distinguish a responsible action from an incidental one"}
 
-    return {**base, "status": SEPARATED, "trusted": True,
-            "top": rows[0], "margin": round(top - runner_up, 6),
-            "reason": "top suspect strictly exceeds every other action"}
+    # Ochiai ranked something. Before certifying it, demand the outcome contrast.
+    con = contrast(rows)
+    never = con["never_succeeds"]
+    if not never:
+        return {**base, "status": NO_CONTRAST, "trusted": False, "contrast": con,
+                "reason": "no sufficiently supported action never co-occurs with success; "
+                          "the failure is not attributable to any single action"}
+    if top["action"] not in {r["action"] for r in never}:
+        return {**base, "status": SOURCES_DISAGREE, "trusted": False, "contrast": con,
+                "top": top, "contrast_top": never[0],
+                "reason": "Ochiai's top suspect co-occurs with success, so it cannot be the "
+                          "cause; the frequency term rewarded ubiquity. The contrast suspect "
+                          "is " + str(never[0]["action"]) + " and is reported instead, but the "
+                          "two statistics disagreeing means the attribution is not trusted"}
+
+    return {**base, "status": SEPARATED, "trusted": True, "contrast": con,
+            "top": never[0], "ochiai_top": top,
+            "margin": round(top["ochiai"] - runner_up, 6),
+            "reason": "Ochiai's top suspect is also an action that never co-occurs with "
+                      "success; both statistics agree"}
 
 
 def run_and_attribute(

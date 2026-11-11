@@ -1,0 +1,41 @@
+{
+  "schema": "PROJECT_BRAIN_R121_SPECTRUM_ATTRIBUTION_MEASURED_ON_MINIWOB_V1",
+  "date": "2026-11-09",
+  "what_was_built": "canonical/runtime/repeat_execution_spectrum_v1.py -- Famas-style (arXiv 2509.13782) repeat-execution spectrum attribution, producing the `verified_coverage` boolean that universal_learning_contract_v1.route_input gates on",
+  "instrument_state": {
+    "chromium": "HeadlessChrome/153.0.8010.0, relaunched from /home/user/browser_build with --remote-allow-origins=*",
+    "cdp": "127.0.0.1:9222, validated by Runtime.evaluate '1+1' -> 2",
+    "miniwob": "127.0.0.1:8893/html/miniwob/click-option.html",
+    "note": "an earlier connection attempt succeeded at TCP but never answered; the cause was the missing --remote-allow-origins flag, not a dead browser. A socket that connects is not a socket that responds."
+  },
+  "measurement": {
+    "task": "click-option",
+    "runs": 12,
+    "successes": 1,
+    "failures": 11,
+    "policy": "click START, then pick one of three ordinal radio positions by seed, then Submit. Runs 0-2 deliberately omitted the selection and submit.",
+    "raw_ochiai": {
+      "start": 0.9574,
+      "submit": 0.8040,
+      "select:1": 0.5222,
+      "select:2": 0.5222,
+      "select:0": 0.3482
+    },
+    "first_finding": "raw Ochiai named `start`, which was present in all 12 runs including the one success. An action consistent with every outcome cannot explain the difference between them. Fixed with a discriminator guard (0 < runs_with < runs_total).",
+    "second_finding": "after the guard, Ochiai named `submit` at 0.8040. But submit failed only in runs that had already chosen a wrong option (success rate 1/9), whereas select:1 and select:2 never succeeded (0/3) and select:0 did (1/3). Ochiai's frequency term rewards ubiquity and named the frequent innocent action. Co-occurrence with failure is not causation even across repeated runs.",
+    "resolution": "outcome contrast (does ANY run containing this action succeed) is now computed alongside Ochiai. Certified attribution requires BOTH to name the same action.",
+    "final_verdict_on_this_environment": "OCHIAI_AND_CONTRAST_DISAGREE -> verified_coverage = False"
+  },
+  "what_this_proves": [
+    "the GUI bench is live and a real MiniWob episode can be driven end to end by CDP",
+    "a MiniWob task CAN produce genuine outcome variance (1 success / 11 failures), which is the precondition Famas needs",
+    "spectrum attribution ALGORITHMS alone are insufficient here: two standard statistics disagree, and trusting either one alone would have manufactured a false cause",
+    "the module refuses rather than certifies, so no false verified_coverage entered the learning contract"
+  ],
+  "what_this_does_NOT_prove": [
+    "that repeat-execution attribution works on GUI tasks in general -- this is ONE task, ONE policy, 12 runs",
+    "that verified_coverage can be honestly True for a GUI step -- on this task it was False",
+    "any improvement in the 26/130 reach number, which this round did not re-measure"
+  ],
+  "the_open_question_this_exposes": "the spectum needs a policy that varies the SUSPECTED cause while holding everything else fixed. This policy varied the selection but added/removed the submit step at the same time, confounding the two. The next measurement must hold the action set constant across runs so only the candidate action varies."
+}
