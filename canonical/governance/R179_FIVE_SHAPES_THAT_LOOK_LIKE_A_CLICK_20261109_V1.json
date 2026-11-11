@@ -1,0 +1,33 @@
+{
+  "round": "r179",
+  "date": "2026-11-09",
+  "claim": "Five tasks were routed to a click-shaped verb and needed a completely different control structure. With them repaired, the route table itself became the next defect: 21 goal templates match more than one pattern, and first-match-wins silently re-routed a task that already worked.",
+  "measurement": {
+    "instrument": "full 130 tasks x 5 reps, page identity per rep, exclusive CDP browser",
+    "baseline_r177": {"passes": 366, "trials": 650, "rate": 0.5631},
+    "r179_measured": {"passes": 372, "trials": 650, "rate": 0.5723},
+    "paired_pp": 0.92, "se_pp": 2.13, "t": 0.43,
+    "note": "measured BEFORE the ordering regression was found; see regression below",
+    "zero_tasks": {"r177": 50, "r179": 43}
+  },
+  "families_repaired": {
+    "generate-number": {"before": 0.0, "after": 1.0, "shape": "a generator loop, not a click"},
+    "odd-or-even": {"before": 0.0, "after": 1.0, "shape": "a whole-table condition, not a click"},
+    "button-delay": {"before": 0.0, "after": 1.0, "shape": "a timed sequence, not a click"},
+    "find-greatest": {"before": 0.0, "after": 1.0, "shape": "a comparison over values, not a reference"},
+    "count-shape": {"before": 0.0, "after": 0.8, "shape": "a question, not an action (r178)"}
+  },
+  "regression_found_and_fixed": {
+    "task": "drag-sort-numbers",
+    "series": {"r174": 1.00, "r176": 1.00, "r177": 1.00, "r178": 1.00, "r179": 0.00, "rerun_10": 0.10},
+    "cause": "SORT the numbers ... starting with the LOWEST NUMBER matched the new FIND_VALUE pattern, and VERB_PATTERNS is FIRST-MATCH-WINS with FIND_VALUE placed above SORT. The task was silently re-routed to a verb that looks for cards.",
+    "fix": "FIND_VALUE moved below SORT; drag-sort-numbers 8/8 and find-greatest 8/8 after the move.",
+    "law": "ADDING A PATTERN TO A FIRST-MATCH-WINS TABLE IS A CHANGE TO EVERY PATTERN BELOW IT."
+  },
+  "audit": {
+    "goal_templates_matching_more_than_one_pattern": 21,
+    "after_fix_all_route_correctly": true,
+    "examples": ["Expand the sections below to find and click", "Click the Menu button and then find and click", "Copy the text ... paste it", "Move the cube around", "Highlight the text in the paragraph below and click submit"]
+  },
+  "instrument_bug_of_the_round": "A number regex written as /-\\\\d+/ requires a LEADING MINUS, so '7' never matched and the function reported 'no cards' on a page with three. Three consecutive patches were aimed at the escape instead of at the pattern."
+}
