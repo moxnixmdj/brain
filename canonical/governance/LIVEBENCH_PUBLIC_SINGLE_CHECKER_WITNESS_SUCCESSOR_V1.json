@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_PUBLIC_SINGLE_CHECKER_WITNESS_SUCCESSOR_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FAIL_CLOSED_SINGLE_CHECKER_SUCCESSOR__INDEPENDENT_PUBLIC_SCORER_VERIFICATION_PENDING__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target": "LIVEBENCH_IF_GE_65_7_ROOT1_SUCCESSOR_REPAIR",
+  "breakthrough": {
+    "statement": "Reuse independently verified public 58-checker pass-boundary witnesses as deterministic runtime constructions, but activate only when exactly one supported checker description is recognized.",
+    "nonregression": "Zero or multiple supported checker IDs fall back to frozen V3; conjunctions are not routed through the current V4 first-match compiler without composition proof.",
+    "why_it_matters": "This converts a large public structural subset from semantic generation into deterministic checker-witness construction while preserving fail-closed behavior on combinations."
+  },
+  "candidate": {
+    "compiler_path": "canonical/runtime/livebench_if_public_single_checker_witness_v1.py",
+    "adapter_path": "canonical/runtime/root2_livebench_if_astra_inference_adapter_v5.py",
+    "compiler_test_path": "canonical/tests/test_livebench_if_public_single_checker_witness_v1.py",
+    "adapter_test_path": "canonical/tests/test_root2_livebench_if_astra_inference_adapter_v5.py",
+    "supported_checker_id_count": 44,
+    "cognition_dependency_class": "MODEL_INDEPENDENT",
+    "model_dependency_count": 0,
+    "external_tools_required": false
+  },
+  "public_evidence": {
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "public_test_rows": 300,
+    "public_single_instruction_rows": 256,
+    "supported_id_single_row_mass": 222,
+    "supported_id_single_row_fraction_of_all_public_rows": 0.74,
+    "threshold_fraction": 0.657,
+    "threshold_row_equivalent_on_300": 197.1,
+    "support_mass_margin_rows": 24.9,
+    "interpretation": "THE_222_ROW_VALUE_IS_AN_ID_DISTRIBUTION_SUPPORT_TARGET_ONLY__IT_IS_NOT_YET_AN_OBSERVED_OFFICIAL_SCORER_PASS_COUNT"
+  },
+  "reused_verified_boundary": {
+    "brain_verification_path": "canonical/verification/LIVEBENCH_IF_58_CHECKER_BOUNDARY_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "status": "INDEPENDENT_PASS__58_OF_58_SYNTHETIC_GOOD_BAD_BOUNDARIES",
+    "verifier_merge_commit": "9411479d5bbb53a6bc9823bdb03207c004e36552",
+    "use": "GOOD_BOUNDARY_WITNESSES_ARE_DESIGN_INPUTS_ONLY__PARAMETERIZED_PROMPT_BINDING_REQUIRES_NEW_VERIFICATION"
+  },
+  "contamination_firewall": [
+    "NO_UNEXPOSED_TERMINAL_PROMPT_TEXT",
+    "NO_TERMINAL_CASE_IDS",
+    "NO_TERMINAL_KWARGS",
+    "NO_POST_FAILURE_TERMINAL_SPECIAL_CASING",
+    "PUBLIC_PINNED_SOURCE_ONLY"
+  ],
+  "hard_nonclaims": [
+    "DOES_NOT_CLAIM_222_PUBLIC_ROWS_CURRENTLY_PASS_THE_OFFICIAL_SCORER",
+    "DOES_NOT_BIND_THE_FROZEN_200_TERMINAL_CASES_TO_THE_300_PUBLIC_IFBENCH_ROWS",
+    "DOES_NOT_CLAIM_TERMINAL_SCORE_GE_65_7",
+    "DOES_NOT_CLOSE_LIVEBENCH",
+    "DOES_NOT_GRANT_FAMILY_CAPABILITY_OWNERSHIP_OR_ACCEPTANCE_CREDIT",
+    "DOES_NOT_AUTHORIZE_FRESH_TERMINAL_EXECUTION"
+  ],
+  "next_exact_proof": [
+    "RUN_CANDIDATE_AGAINST_ALL_300_PINNED_PUBLIC_IFBENCH_ROWS_WITH_EXACT_PINNED_LIVEBENCH_SCORER",
+    "COUNT_ACTUAL_PASS_BLOCK_FAIL_MASS_AND FAIL_CLOSED_ON_ANY FALSE_POSITIVE",
+    "VERIFY_V5_CONJUNCTION_AND_UNKNOWN_FALLBACK_IS_EXACT_V3",
+    "ONLY_AFTER_PUBLIC_SCORER_PASS_RECOMPUTE_THE_MINIMUM_TERMINAL_POPULATION_BINDING_RESIDUAL"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "scheduling": false,
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
