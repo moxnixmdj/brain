@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_GLOBAL_TERMINAL_CUT_EVIDENCE_SATURATION_V1",
+  "date": "2026-10-02",
+  "status": "EXISTING_ROUTE_SATURATION_ADVANCED__EXACT_CUT_NOT_YET_AUTHORIZED__ZERO_CAPABILITY_CREDIT",
+  "source_cut_input": "canonical/governance/GLOBAL_TERMINAL_MINIMUM_REALITY_CUT_INPUT_V1.json",
+  "rules": [
+    "EXTERNAL_ROUTE_DISCOVERY_IS_SPECIMEN_ONLY",
+    "NO_OWNERSHIP_CREDIT_FROM_DONOR_EXISTENCE",
+    "LICENSE_PROVENANCE_AND_SCOPE_MUST_BE_BOUND_BEFORE_WHITE_BOX_HARVEST",
+    "COMPARABLE_COSTS_OR_DOMINANCE_PROOFS_REQUIRED_BEFORE_EXACT_MINIMUM_CUT"
+  ],
+  "saturation": [
+    {
+      "distinction": "D_B_PROFESSIONAL_JUDGMENT_AND_COMMUNICATION",
+      "state": "CANDIDATE_OBSERVATION_EXISTS",
+      "observation": "MATCHED_DIRECT_VERIFICATION_OF_EXISTING_BRAIN_STIRRUP_ROUTE",
+      "evidence": "canonical/capabilities/opus55/OPUS55_PROFESSIONAL_WORK_STIRRUP_CONFIGURATION_V1.json",
+      "ownership_note": "BRAIN_CONFIGURED_VERIFICATION_PENDING"
+    },
+    {
+      "distinction": "D_B_VISION_DENSE_DOC_RESIDUAL",
+      "state": "OPEN_WHITE_BOX_SPECIMEN_FOUND",
+      "candidate": "zai-org/GLM-OCR",
+      "mechanism_scope": "OCR_PLUS_DOCUMENT_LAYOUT_ANALYSIS_PIPELINE",
+      "license": "CODE_APACHE_2_0__MODEL_MIT",
+      "source": "https://github.com/zai-org/glm-ocr"
+    },
+    {
+      "distinction": "D_C_GENERAL_MULTI_TOOL_COMPOSITION",
+      "state": "OPEN_WHITE_BOX_SPECIMEN_FOUND",
+      "candidate": "solvent-labs-org/metaorcha",
+      "mechanism_scope": "MULTI_PROTOCOL_AGENT_DISCOVERY_COMPOSITION_AND_VERIFICATION_PIPELINE",
+      "license": "APACHE_2_0",
+      "source": "https://github.com/solvent-labs-org/metaorcha"
+    },
+    {
+      "distinction": "D_D_UNKNOWN_DOMAIN_LEARNED_RESIDUAL",
+      "state": "OPEN_WHITE_BOX_SPECIMEN_FOUND",
+      "candidate": "doldam0/tmow",
+      "mechanism_scope": "TEST_TIME_ADAPTATION_TO_UNSEEN_DOMAINS_VIA_WORLD_MODEL_MIXTURE_AND_PROTOTYPE_REFINEMENT",
+      "license": "MIT",
+      "source": "https://github.com/doldam0/tmow"
+    },
+    {
+      "distinction": "D_SPEC_GENERAL_NAMED_METHOD_RULE_SET",
+      "state": "CANDIDATE_EXISTS__PROVENANCE_SCREEN_REQUIRED",
+      "candidate": "taomar/policyAIengine",
+      "mechanism_scope": "SOURCE_TRACEABLE_POLICY_RULE_EXTRACTION_AND_FORMALIZATION_USING_XACML_DMN_SBVR",
+      "license": "UNKNOWN_FROM_CURRENT_EVIDENCE__DO_NOT_HARVEST_YET",
+      "source": "https://github.com/taomar/policyAIengine"
+    },
+    {
+      "distinction": "D_CAUSE_GENERATION_NON_TELEMETRY",
+      "state": "OPEN_WHITE_BOX_SPECIMEN_FOUND",
+      "candidates": [
+        "coroot/coroot",
+        "phamquiluan/RCAEval"
+      ],
+      "mechanism_scope": "ROOT_CAUSE_ANALYSIS_OVER_LOGS_TRACES_METRICS_PROFILES_AND_MULTI_SOURCE_FAILURE_DATA",
+      "license_note": "COROOT_APACHE_2_0__RCAEval_LICENSE_PRESENT_BUT_EXACT_TERMS_REQUIRE_PINNED_PROVENANCE_SCREEN",
+      "sources": [
+        "https://github.com/coroot/coroot",
+        "https://github.com/phamquiluan/RCAEval"
+      ]
+    }
+  ],
+  "remaining_exact_cut_blockers": [
+    "PINNED_PROVENANCE_AND_LICENSE_RECEIPTS_FOR_EACH_EXTERNAL_CANDIDATE",
+    "EVIDENCE_BACKED_OBSERVATION_COVERAGE_BINDING_IN_CUT_INPUT",
+    "COMPARABLE_WALL_CLOCK_COSTS_OR_FORMAL_DOMINANCE_PROOFS",
+    "EXACT_MINIMUM_REALITY_CUT_SOLVER_RUN"
+  ],
+  "next": "PIN_AND_VERIFY_LICENSE_PROVENANCE__BIND_COVERAGE__PROVE_DOMINANCE_WHERE_POSSIBLE__THEN_RUN_EXACT_SOLVER",
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "incremental_spend_usd": 0
+}
