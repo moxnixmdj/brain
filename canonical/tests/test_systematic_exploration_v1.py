@@ -380,6 +380,74 @@ class ClickTargetTests(unittest.TestCase):
         self.assertEqual(arc_measure.action_class("A5"), "A5")
 
 
+class _StubRaw:
+    def __init__(self, grid, offered=(6,)):
+        self.frame = [[list(row) for row in grid]]
+        self.available_actions = list(offered)
+        self.state = type("State", (), {"name": "NOT_FINISHED"})()
+        self.levels_completed = 0
+
+
+class _StubBoard:
+    """A 4x4 board. Clicking the one cell of colour 2 recolours it; any other click does nothing."""
+
+    def __init__(self, lists_clicks=True, offered=(6,)):
+        self.grid = [[0, 0, 0, 0], [0, 2, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+        self.offered = offered
+        if lists_clicks:
+            action = type("Action", (), {"data": {"x": 1, "y": 1}})()
+            self._game = type("Game", (), {
+                "_get_valid_clickable_actions": lambda _self: [action]})()
+
+    @property
+    def observation_space(self):
+        return _StubRaw(self.grid, self.offered)
+
+    def click(self, x, y):
+        if self.grid[y][x] == 2:
+            self.grid[y][x] = 3
+        return _StubRaw(self.grid, self.offered)
+
+
+class _StubArcade:
+    def __init__(self, **board):
+        self.board = board
+
+    def make(self, game_id, seed=0):
+        return _StubBoard(**self.board)
+
+
+class ClickAbstractionCheckTests(unittest.TestCase):
+    """The instrument's check of itself must be able to fail."""
+
+    @staticmethod
+    def _check(arcade, **kwargs):
+        return arc_measure.click_abstraction_check(
+            arcade, ["zz00-0000"], click=lambda env, x, y: env.click(x, y), **kwargs)
+
+    def test_a_click_the_engine_lists_is_reached_by_a_region_target(self):
+        check = self._check(_StubArcade())
+        self.assertTrue(check["status"].startswith("PASS"), check)
+        self.assertEqual((check["engine_listed_clicks"], check["engine_listed_clicks_covered"]),
+                         (1, 1))
+        row = check["per_game"][0]
+        self.assertEqual((row["adapter_targets"], row["adapter_distinct_outcomes"]), (2, 2))
+
+    def test_an_abstraction_that_hides_the_listed_click_is_reported_as_a_fault(self):
+        check = self._check(_StubArcade(), targets_of=lambda grid: [(2, 2, 0)])
+        self.assertTrue(check["status"].startswith("FAULT"), check)
+        self.assertEqual((check["engine_listed_clicks"], check["engine_listed_clicks_covered"]),
+                         (1, 0))
+
+    def test_no_engine_list_or_no_clicking_is_never_reported_as_a_pass(self):
+        unlisted = self._check(_StubArcade(lists_clicks=False))
+        self.assertFalse(unlisted["per_game"][0]["engine_list_available"])
+        self.assertTrue(unlisted["status"].startswith("NOT_CHECKED"), unlisted)
+        keyboard_only = self._check(_StubArcade(offered=(1, 2)))
+        self.assertEqual(keyboard_only["games_offering_clicks"], 0)
+        self.assertTrue(keyboard_only["status"].startswith("NOT_CHECKED"), keyboard_only)
+
+
 class DigestTests(unittest.TestCase):
     """The committed evidence is a reduction of the tool's own output; the reduction is tested."""
 

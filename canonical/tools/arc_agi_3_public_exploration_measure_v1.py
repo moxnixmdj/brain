@@ -36,6 +36,15 @@ OFFLINE mode and the toolkit's own scorecard does the arithmetic. This file's ta
 levels and actions is compared with the scorecard's and a mismatch is an instrument fault
 that stops the run -- a number two counters disagree about is not reported.
 
+What the instrument checks about itself
+---------------------------------------
+A near-zero score is only worth reading if the adapter can reach what the game responds to.
+`--check-clicks` takes, at each game's first state, every click the ENGINE lists as valid and
+every target the adapter offers, each from a fresh copy of the game, and reports whether each
+listed click's outcome is also produced by one of the adapter's targets. It exits non-zero if
+the one-click-per-region abstraction hides a click the engine lists. It is made at the first
+state only, and nothing it reads is shown to an arm.
+
 What this is not
 ----------------
   * Not a leaderboard entry. The public games are a practice set, the runtime here is not
@@ -453,6 +462,71 @@ def run(environments_dir: str, multipliers: Sequence[float], seeds: Sequence[int
     }
 
 
+def _outcome(raw: Any) -> str:
+    """A frame, its state name and its level as one comparable key."""
+    frame = raw.frame[-1]
+    rows = frame.tolist() if hasattr(frame, "tolist") else frame
+    cells = json.dumps([[int(v) for v in row] for row in rows], separators=(",", ":"))
+    return "%s|%s|%d" % (hashlib.sha1(cells.encode()).hexdigest()[:16], raw.state.name,
+                         int(raw.levels_completed))
+
+
+def click_abstraction_check(
+    arc: Any, game_ids: Sequence[str], *, click: Callable[[Any, int, int], Any],
+    targets_of: Callable[[Sequence[Sequence[int]]], Sequence[tuple[int, int, int]]] = click_targets,
+) -> dict[str, Any]:
+    """Does one click per same-coloured region hide anything the engine says is clickable?
+
+    At the first state of each game that offers clicking, every click the ENGINE lists as valid
+    is taken from a fresh copy of the game, and so is every target the adapter offers. A listed
+    click is covered when the frame, state and level it leads to are also reached by one of the
+    adapter's targets. First state only: what the abstraction hides later is not examined.
+    """
+    per_game = []
+    for game_id in game_ids:
+        first = arc.make(game_id, seed=0)
+        raw = first.observation_space
+        if 6 not in [int(a) for a in raw.available_actions]:
+            continue
+        frame = raw.frame[-1]
+        grid = frame.tolist() if hasattr(frame, "tolist") else frame
+        try:
+            listed = sorted({(int(a.data["x"]), int(a.data["y"]))
+                             for a in first._game._get_valid_clickable_actions()})
+        except Exception:  # the engine's own list is private API: absent is reported, not guessed
+            listed = None
+        targets = [(int(x), int(y)) for x, y, _colour in targets_of(grid)]
+
+        def outcome_of(point: tuple[int, int]) -> str:
+            return _outcome(click(arc.make(game_id, seed=0), point[0], point[1]))
+
+        reached = {outcome_of(point) for point in targets}
+        listed_outcomes = [outcome_of(point) for point in (listed or [])]
+        per_game.append({
+            "game": game_id.split("-")[0],
+            "engine_list_available": listed is not None,
+            "engine_listed_clicks": len(listed or []),
+            "engine_distinct_outcomes": len(set(listed_outcomes)),
+            "adapter_targets": len(targets),
+            "adapter_distinct_outcomes": len(reached),
+            "engine_listed_clicks_covered": sum(o in reached for o in listed_outcomes),
+        })
+    listed_total = sum(g["engine_listed_clicks"] for g in per_game)
+    covered = sum(g["engine_listed_clicks_covered"] for g in per_game)
+    if listed_total == 0:
+        status = "NOT_CHECKED__THE_ENGINE_LISTED_NO_CLICK"
+    elif covered == listed_total:
+        status = "PASS__EVERY_CLICK_THE_ENGINE_LISTS_IS_REACHED_BY_AN_ADAPTER_TARGET"
+    else:
+        status = "FAULT__THE_CLICK_ABSTRACTION_HIDES_A_CLICK_THE_ENGINE_LISTS"
+    return {"scope": "FIRST_STATE_OF_EACH_GAME_ONLY", "status": status,
+            "games_offering_clicks": len(per_game),
+            "games_where_the_engine_lists_clicks": sum(g["engine_listed_clicks"] > 0
+                                                       for g in per_game),
+            "engine_listed_clicks": listed_total, "engine_listed_clicks_covered": covered,
+            "per_game": per_game}
+
+
 def digest(results: Sequence[tuple[str, dict[str, Any]]]) -> dict[str, Any]:
     """Several full results reduced to one small record that is worth committing.
 
@@ -538,6 +612,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument("--arms", nargs="+", default=list(ARMS), choices=ARMS)
     parser.add_argument("--games", nargs="*", default=None, help="game id prefixes; default all")
+    parser.add_argument("--check-clicks", action="store_true",
+                        help="do not play: check the adapter's click abstraction against the "
+                             "clicks the engine itself lists as valid (written to --out)")
     parser.add_argument("--out", default=None)
     args = parser.parse_args(argv)
 
@@ -556,6 +633,45 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     if not args.environments_dir:
         parser.error("--environments-dir is required unless --digest-from is given")
+
+    if args.check_clicks:
+        logging.disable(logging.CRITICAL)
+        from arc_agi import Arcade, OperationMode
+        from arcengine import GameAction
+
+        arc = Arcade(operation_mode=OperationMode.OFFLINE,
+                     environments_dir=args.environments_dir)
+        ids = sorted(e.game_id for e in arc.get_environments())
+        if args.games:
+            ids = [g for g in ids if any(g.startswith(prefix) for prefix in args.games)]
+        check = click_abstraction_check(
+            arc, ids, click=lambda env, x, y: env.step(GameAction.ACTION6,
+                                                       data={"x": x, "y": y}))
+        environments = environment_manifest(Path(args.environments_dir))
+        environments.pop("sha256", None)
+        record = {
+            "schema": SCHEMA + "_CLICK_ABSTRACTION_CHECK",
+            "authority": "NONE",
+            "measurement_class": "MEASURED_SANDBOX__PRODUCER_RUN__NOT_INDEPENDENT_VERIFICATION",
+            "date_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "instrument": {"arc_agi_version": _dist_version("arc-agi"),
+                           "arcengine_version": _dist_version("arcengine"),
+                           "python": platform.python_version(),
+                           "environments": environments, "games": ids},
+            "check": check,
+        }
+        for row in check["per_game"]:
+            print("%-5s engine lists %3d clicks (%3d outcomes)  adapter %3d targets "
+                  "(%3d outcomes)  covered %d/%d" % (
+                      row["game"], row["engine_listed_clicks"], row["engine_distinct_outcomes"],
+                      row["adapter_targets"], row["adapter_distinct_outcomes"],
+                      row["engine_listed_clicks_covered"], row["engine_listed_clicks"]))
+        print("%s  %d/%d" % (check["status"], check["engine_listed_clicks_covered"],
+                             check["engine_listed_clicks"]))
+        if args.out:
+            Path(args.out).write_text(json.dumps(record, indent=1, sort_keys=False) + "\n")
+            print("wrote", args.out)
+        return 0 if check["status"].startswith("PASS") else 1
 
     result = run(args.environments_dir, args.multipliers, args.seeds, args.arms, args.games,
                  progress=lambda text: print(text, flush=True))

@@ -19,14 +19,14 @@
  "weakens_existing_guard": false,
  "benchmark_or_family_rank_authority": false,
  "highest_leverage_now": true,
- "action_summary": "The owner asked whether instant learning in new arbitrary environments is already solved. Every number in the tree that says so was measured on environments written in the tree. This action measures the same learners where nobody here wrote the environment: the 25 public ARC-AGI-3 games (183 levels, no instructions, a recorded human action count per level), played offline through the official toolkit and scored by the toolkit's own scorecard, which the tool cross-checks against its own tally and refuses to report if they disagree (that check caught this tool's first error: a level reset is counted as an action). Result at 2, 5 and 20 times the human action count: uniform random play 0.127 to 0.136 (humans = 100), the existing first-contact learner environment_learning_v1 0.000 to 0.0015, i.e. at or below random, completing at most 1 of 183 levels. It also adds systematic_exploration_v1, a deterministic frontier explorer that never pays twice for the same experiment and shares the transfer_learning_v1 store. On the five families constructed in this tree it reaches the goal with 4.26 times fewer act calls than the existing learner (5.52 with an effect prior); on the public games it completes at most 2 of 183 levels. So a better explorer over the same state table is a real saving on small enumerable problems and is not what is missing. The measurement is an audit and a falsifier, not a target: no score is chased and no capability is claimed.",
+ "action_summary": "The owner asked whether instant learning in new arbitrary environments is already solved. Every number in the tree that says so was measured on environments written in the tree. This action measures the same learners where nobody here wrote the environment: the 25 public ARC-AGI-3 games (183 levels, no instructions, a recorded human action count per level), played offline through the official toolkit and scored by the toolkit's own scorecard, which the tool cross-checks against its own tally and refuses to report if they disagree (that check caught this tool's first error: a level reset is counted as an action). A second check asks whether the adapter can reach what the games respond to: at each game's first state all 50 clicks the engine itself lists as valid, across the 13 games where it lists any, lead to an outcome that one of the adapter's one-per-region click targets also reaches. Result at 2, 5 and 20 times the human action count: uniform random play 0.127 to 0.136 (humans = 100), the existing first-contact learner environment_learning_v1 0.000 to 0.0015, i.e. at or below random, completing at most 1 of 183 levels. It also adds systematic_exploration_v1, a deterministic frontier explorer that never pays twice for the same experiment and shares the transfer_learning_v1 store. On the five families constructed in this tree it reaches the goal with 4.26 times fewer act calls than the existing learner (5.52 with an effect prior); on the public games it completes at most 2 of 183 levels. So a better explorer over the same state table is a real saving on small enumerable problems and is not what is missing. The measurement is an audit and a falsifier, not a target: no score is chased and no capability is claimed.",
  "selected_route": "MEASURE_THE_EXISTING_LEARNERS_UNCHANGED_ON_ENVIRONMENTS_NOBODY_HERE_WROTE_AND_COMPOSE_A_NO_REPEAT_EXPLORER_WITH_THE_EXISTING_STORE",
  "causal_blocker": "EVERY_MEASUREMENT_OF_LEARNING_IN_A_NEW_ENVIRONMENT_IN_THIS_TREE_WAS_TAKEN_ON_ENVIRONMENTS_WRITTEN_IN_THIS_TREE__AND_THE_FIRST_CONTACT_LEARNER_STORES_STATE_TO_STATE_TRANSITIONS_THAT_PREDICT_NOTHING_ABOUT_A_STATE_IT_HAS_NOT_VISITED",
  "expected_parent_change": "THE_CLAIM_THAT_FIRST_CONTACT_IN_AN_ARBITRARY_ENVIRONMENT_IS_SOLVED_IS_REMOVED_BY_AN_OFFICIALLY_SCORED_MEASUREMENT__THE_MISSING_PIECE_IS_NARROWED_FROM_EXPLORATION_ORDER_TO_A_MODEL_THAT_PREDICTS_STATES_IT_HAS_NOT_VISITED",
  "expected_parent_frontier_change": "A_REPRODUCIBLE_ZERO_SPEND_INSTRUMENT_ON_UNAUTHORED_ENVIRONMENTS_EXISTS_IN_THE_TREE__FIRST_SOLVE_ACT_CALLS_ON_THE_FIVE_CONSTRUCTED_FAMILIES_FALL_4_26_TIMES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_MEASUREMENT_OF_LEARNING_IN_A_NEW_ENVIRONMENT_IN_THIS_TREE_WAS_TAKEN_ON_ENVIRONMENTS_WRITTEN_IN_THIS_TREE__AND_THE_FIRST_CONTACT_LEARNER_STORES_STATE_TO_STATE_TRANSITIONS_THAT_PREDICT_NOTHING_ABOUT_A_STATE_IT_HAS_NOT_VISITED",
  "falsification_condition": "THE_TOOLKIT_SCORECARD_DISAGREES_WITH_THE_TOOLS_TALLY__OR_AN_INDEPENDENT_RERUN_ON_THE_SAME_GAME_FILES_GIVES_A_DIFFERENT_SCORE_FOR_A_DETERMINISTIC_ARM__OR_THE_EXISTING_LEARNER_COMPLETES_MORE_LEVELS_THAN_UNIFORM_RANDOM_AT_THE_SAME_BUDGET__OR_THE_EXPLORER_PAYS_TWICE_FOR_ONE_STATE_ACTION_PAIR__OR_REPORTS_ABSENCE_WITHOUT_HAVING_TRIED_EVERYTHING_REACHABLE",
- "stop_condition": "21_NEW_TESTS_PASS__12_OF_12_SEEDED_FAULTS_ARE_KILLED_BY_THEM__REPO_INTEGRITY_GUARD_PASSES__NO_PINNED_OR_PROTECTED_PATH_TOUCHED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "stop_condition": "24_NEW_TESTS_PASS__17_OF_17_SEEDED_FAULTS_ARE_KILLED_BY_THEM__REPO_INTEGRITY_GUARD_PASSES__NO_PINNED_OR_PROTECTED_PATH_TOUCHED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
  "explicit_user_authorization": "Owner message of 2026-11-11 in this session: 'Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?' and 'you must think from first principles for everything so we can detect the real Limiting factors'. No merge was requested. $0 spend, no model in the producer path, no protected or SHA-pinned path touched, no sentience claim.",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -36,6 +36,7 @@
   "progress_evidence_paths": [
    "canonical/tools/arc_agi_3_public_exploration_measure_v1.py",
    "canonical/verification/ARC_AGI_3_PUBLIC_EXPLORATION_20261111_V1.json",
+   "canonical/verification/ARC_AGI_3_CLICK_ABSTRACTION_CHECK_20261111_V1.json",
    "canonical/runtime/systematic_exploration_v1.py",
    "canonical/tests/test_systematic_exploration_v1.py"
   ],
@@ -102,7 +103,7 @@
    "ANOTHER_ENVIRONMENT_FAMILY_WRITTEN_IN_THIS_TREE_AS_EVIDENCE_OF_ARBITRARY_ENVIRONMENTS",
    "EDITING_THE_SHA_PINNED_LEARNERS"
   ],
-  "stop_condition": "21_NEW_TESTS_PASS__12_OF_12_SEEDED_FAULTS_ARE_KILLED_BY_THEM__REPO_INTEGRITY_GUARD_PASSES__NO_PINNED_OR_PROTECTED_PATH_TOUCHED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "stop_condition": "24_NEW_TESTS_PASS__17_OF_17_SEEDED_FAULTS_ARE_KILLED_BY_THEM__REPO_INTEGRITY_GUARD_PASSES__NO_PINNED_OR_PROTECTED_PATH_TOUCHED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
   "expected_parent_level_state_change": "A_REPRODUCIBLE_ZERO_SPEND_INSTRUMENT_ON_UNAUTHORED_ENVIRONMENTS_EXISTS_IN_THE_TREE__FIRST_SOLVE_ACT_CALLS_ON_THE_FIVE_CONSTRUCTED_FAMILIES_FALL_4_26_TIMES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
   "why_selected_route_is_fastest_sufficient": "THE_PUBLIC_GAMES_RUN_OFFLINE_AT_500_TO_7600_STEPS_PER_SECOND_WITH_A_HUMAN_BASELINE_PER_LEVEL_SO_ONE_NINE_MINUTE_RUN_REPLACES_EVERY_SELF_AUTHORED_PROBE_OF_THE_SAME_CLAIM__THE_EXPLORER_IS_ONE_FILE_THAT_REUSES_THE_EXISTING_STORE",
   "iteration_limit": 4,
@@ -195,7 +196,7 @@
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
-   "synthetic_verification_necessity": "THE_SCORE_IS_READ_FROM_THE_OFFICIAL_TOOLKIT_SCORECARD_NOT_COMPUTED_HERE__THE_EXPLORER_IS_ADDITIONALLY_CHECKED_AGAINST_A_BREADTH_FIRST_ORACLE_WRITTEN_IN_THE_TEST_AND_BY_TWELVE_SEEDED_FAULTS__PRODUCER_RUN_ONLY_UNTIL_SOMEONE_ELSE_RERUNS_IT"
+   "synthetic_verification_necessity": "THE_SCORE_IS_READ_FROM_THE_OFFICIAL_TOOLKIT_SCORECARD_NOT_COMPUTED_HERE__THE_ADAPTERS_CLICK_ABSTRACTION_IS_CHECKED_AGAINST_THE_ENGINES_OWN_LIST_OF_VALID_CLICKS__THE_EXPLORER_IS_ADDITIONALLY_CHECKED_AGAINST_A_BREADTH_FIRST_ORACLE_WRITTEN_IN_THE_TEST_AND_BY_SEVENTEEN_SEEDED_FAULTS__PRODUCER_RUN_ONLY_UNTIL_SOMEONE_ELSE_RERUNS_IT"
   }
  },
  "v22_prewrite_admission": {
