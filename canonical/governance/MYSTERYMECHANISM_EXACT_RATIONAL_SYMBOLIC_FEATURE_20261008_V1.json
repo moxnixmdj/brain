@@ -1,0 +1,78 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_EXACT_RATIONAL_SYMBOLIC_FEATURE_V1",
+  "date": "2026-10-08",
+  "status": "CANDIDATE_EXACT_RATIONAL_V2_SUBGRAMMAR_FEATURE_COMPILER__ZERO_ACCEPTANCE_OR_TERMINAL_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "problem": "THE VERIFIED EXACT COEFFICIENT_POLYTOPE REQUIRES EXACT FEATURE ROWS. CURRENT MYSTERYMECHANISM V2 FEATURE TREES ARE EVALUATED WITH BINARY FLOATS, SO POINTWISE FEATURE VALUES CANNOT ENTER THE PROOF PATH WITHOUT A SEMANTICALLY EXACT COMPILER.",
+  "implementation": {
+    "runtime": "canonical/runtime/exact_rational_symbolic_feature_v1.py",
+    "tests": "canonical/tests/test_exact_rational_symbolic_feature_v1.py"
+  },
+  "exact_subgrammar": {
+    "leaves": [
+      "one",
+      "var"
+    ],
+    "unary": [
+      "neg",
+      "abs",
+      "square",
+      "sat",
+      "reciprocal"
+    ],
+    "binary": [
+      "add",
+      "sub",
+      "mul",
+      "stable_div",
+      "safe_div"
+    ],
+    "arithmetic": "fractions.Fraction",
+    "exact_input_encoding": "INTEGER_OR_EXACT_RATIONAL_DECIMAL_STRING_ONLY",
+    "intentionally_unsupported": [
+      "sqrt_abs",
+      "pow_abs_1_3",
+      "pow_abs_2_3",
+      "pow_abs_1_4",
+      "pow_abs_5_8",
+      "pow_abs_4_5",
+      "log1p_abs",
+      "exp",
+      "sin",
+      "cos"
+    ]
+  },
+  "composition": {
+    "upstream": "MYSTERYMECHANISM_SYMBOLIC_FEATURE_TREE_SELECTED_OR_ENUMERATED",
+    "this_stage": "COMPILE_TREE_AND_EXACT_RATIONAL_POINTS_TO_EXACT_FEATURE_ROWS_AND_QUERY_FEATURES",
+    "downstream": "canonical/runtime/exact_linear_parameter_polytope_v1.py",
+    "then": "canonical/runtime/interval_information_frontier_v1.py"
+  },
+  "causal_effect": {
+    "closed_gap": "BINARY_FLOAT_FEATURE_EVALUATION_NO_LONGER_REQUIRED_FOR_THE_SUPPORTED_RATIONAL_SUBGRAMMAR_PROOF_PATH",
+    "remaining_internal": [
+      "SOUND_ALGEBRAIC_INTERVAL_EVALUATION_FOR_FRACTIONAL_POWER_OPERATORS",
+      "TRANSCENDENTAL_OPERATOR_PROOF_SEMANTICS_OR_EXPLICIT_HEURISTIC_ONLY_ROUTING",
+      "FAMILY_OR_CELL_COVER_COMPLETENESS_FOR_THE_CLAIMED_REGION",
+      "OBSERVATION_NOISE_BOUNDING"
+    ],
+    "remaining_external": [
+      "PRIVATE_MYSTERYMECHANISM_SCOPE_OR_DIRECT_EVALUATION_FOR_TERMINAL_CREDIT"
+    ]
+  },
+  "hard_nonclaims": [
+    "NO CLAIM THE EXACT RATIONAL SUBGRAMMAR COVERS THE PRIVATE 222 MECHANISMS",
+    "NO CLAIM UNSUPPORTED V2 OPERATORS ARE EQUIVALENTLY REPRESENTED",
+    "NO CLAIM PUBLIC MYSTERYMECHANISM NOISE HAS A KNOWN FINITE BOUND",
+    "NO MYSTERYMECHANISM SCORE OR SUCCESS COUNT CLAIM",
+    "NO UNKNOWN_DOMAIN FAMILY CAPABILITY OR TERMINAL CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "fresh_target_reality_units_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "terminal_credit_delta": 0
+  }
+}
