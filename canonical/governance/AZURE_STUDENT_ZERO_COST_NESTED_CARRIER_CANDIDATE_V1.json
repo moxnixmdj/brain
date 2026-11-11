@@ -1,0 +1,82 @@
+{
+  "schema": "PROJECT_BRAIN_AZURE_STUDENT_ZERO_COST_NESTED_CARRIER_CANDIDATE_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__TECHNICAL_ENVELOPE_PUBLICLY_SUPPORTED__ACCOUNT_ELIGIBILITY_AND_QUOTA_UNBOUND__ZERO_CREDIT",
+  "objective": "Reuse one provably zero-incremental-cost Azure student carrier candidate for TB4 and OSWorld v2.1 nested-virtualization workloads if and only if account eligibility, credits, quota, capacity, and KVM preflight all pass.",
+  "potential_targets": [
+    "CODING_TB4_GE_66_4",
+    "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "public_sources": [
+    {
+      "authority": "Microsoft Azure",
+      "url": "https://azure.microsoft.com/en-us/pricing/offers/ms-azr-0170p",
+      "observed_fact": "Azure for Students offers eligible full-time higher-education students USD100 credit for 12 months with no credit card required; subscription disables when credit is exhausted unless explicitly upgraded."
+    },
+    {
+      "authority": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dv3-series",
+      "observed_fact": "Standard_D8_v3 provides 8 vCPU, 32 GiB memory, 200 GiB temp storage, x86-64, and nested virtualization support."
+    },
+    {
+      "authority": "Microsoft Learn",
+      "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/quotas",
+      "observed_fact": "Actual VM deployment requires both total regional vCPU quota and VM-family quota; quota is subscription- and region-specific."
+    }
+  ],
+  "envelope_comparison": {
+    "tb4_minimum_known_envelope": {
+      "vcpu": 8,
+      "memory_gib": 16,
+      "free_disk_gib": 50,
+      "docker_required": true
+    },
+    "azure_d8_v3_public_envelope": {
+      "vcpu": 8,
+      "memory_gib": 32,
+      "temp_storage_gib": 200,
+      "architecture": "x86_64",
+      "nested_virtualization": "SUPPORTED"
+    },
+    "static_resource_envelope_dominates_tb4_minimum": true,
+    "osworld_nested_virtualization_candidate": true
+  },
+  "account_specific_missing_facts": [
+    "USER_IS_CURRENTLY_ELIGIBLE_FOR_AZURE_FOR_STUDENTS",
+    "AZURE_FOR_STUDENTS_SUBSCRIPTION_IS_ACTIVATED",
+    "UNSPENT_CREDIT_BALANCE_IS_POSITIVE_AND_SUFFICIENT_FOR_THE_EXACT_RUN",
+    "TARGET_REGION_TOTAL_VCPU_QUOTA_GE_8",
+    "TARGET_REGION_DV3_OR_OTHER_SUPPORTED_FAMILY_QUOTA_GE_8",
+    "TARGET_REGION_CAPACITY_FOR_SUPPORTED_NESTED_VIRTUALIZATION_SIZE",
+    "LINUX_GUEST_EXPOSES_WORKING_KVM_TO_THE_REQUIRED_RUNTIME",
+    "HARD_SPENDING_LIMIT_PREVENTS_PAY_AS_YOU_GO_FALLTHROUGH",
+    "EXACT_RUN_COST_BOUND_FITS_REMAINING_CREDIT"
+  ],
+  "decision_rule": "DO_NOT_PROVISION_OR_AUTHORIZE_TERMINAL_EXECUTION_UNTIL_ALL_ACCOUNT_SPECIFIC_MISSING_FACTS_ARE VERIFIED__IF_ELIGIBILITY_OR_QUOTA_FAILS_CLOSE_THIS_ROUTE_WITHOUT_RETRY_SPAM",
+  "hard_nonclaims": [
+    "NO_CLAIM_USER_IS_AZURE_STUDENT_ELIGIBLE",
+    "NO_CLAIM_AN_AZURE_SUBSCRIPTION_EXISTS",
+    "NO_CLAIM_D8_V3_QUOTA_OR_CAPACITY_EXISTS",
+    "NO_CLAIM_THE_RUN_IS_CURRENTLY_ZERO_COST",
+    "NO_CLAIM_KVM_PREFLIGHT_HAS_RUN",
+    "NO_BENCHMARK_CASE_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_EXECUTION_PROMOTION_OR_FRESH_REALITY_AUTHORITY"
+  ],
+  "gmail_account_check": {
+    "date": "2026-10-04",
+    "result": "NO_AZURE_FOR_STUDENTS_OR_AZURE_SUBSCRIPTION_ACTIVATION_TRAIL_FOUND",
+    "interpretation": "ABSENCE_OF_EMAIL_IS_NOT_PROOF_OF_INELIGIBILITY_OR_NO_ACCOUNT"
+  },
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "VERIFY_ONLY_ACCOUNT_ELIGIBILITY_SUBSCRIPTION_CREDIT_QUOTA_CAPACITY_AND_KVM_PREFLIGHT__NO_VM_CREATION_BEFORE_HARD_ZERO_SPEND_IS_PROVED"
+}
