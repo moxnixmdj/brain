@@ -1,0 +1,44 @@
+{
+  "schema": "PROJECT_BRAIN_TARGET_QUOTIENT_STRUCTURAL_SUPERSET_WOLFRAM_VERIFICATION_20261006_V2",
+  "date": "2026-10-06",
+  "status": "INDEPENDENT_WOLFRAM_EXHAUSTIVE_FINITE_RESTRICTION_PASS__4096_CASES__ZERO_TERMINAL_CREDIT",
+  "subject": {
+    "governance": {
+      "path": "canonical/governance/TARGET_QUOTIENT_STRUCTURAL_SUPERSET_SUFFICIENCY_20261006_V2.json",
+      "git_blob_sha": "9abed2d41cebc7e00034388d534d7cf31654244b"
+    },
+    "runtime": {
+      "path": "canonical/runtime/target_quotient_structural_superset_v2.py",
+      "git_blob_sha": "0bba9f1617b1310e05d57dcf791fbd24f004d8cb"
+    },
+    "tests": {
+      "path": "canonical/tests/test_target_quotient_structural_superset_v2.py",
+      "git_blob_sha": "9ce996a23bb879deadf6b2e32cea418c7f71f76e"
+    }
+  },
+  "independent_provider": {
+    "provider": "WOLFRAM_LANGUAGE",
+    "universe_size": 4,
+    "cases_checked": 4096,
+    "counterexamples": 0,
+    "implication_verified": true,
+    "property_checked": "FOR_ALL_T_SUBSET_S__UNIVERSAL_PROPERTY_ON_S_IMPLIES_UNIVERSAL_PROPERTY_ON_T"
+  },
+  "verified": [
+    "EXACT_TARGET_MEMBERSHIP_ENUMERATION_IS_NOT_LOGICALLY_REQUIRED_IF_TARGET_INCLUSION_IN_A_SOUND_SUPERSET_IS_PROVED_NONCIRCULARLY",
+    "UNIVERSAL_DOMINANCE_AND_OTHER_UNIVERSAL_PROPERTIES_ON_THE_SUPERSET_RESTRICT_TO_THE_TARGET",
+    "THE_RUNTIME_CERTIFICATION_INTERFACE_DOES_NOT_ACCEPT_EXACT_TARGET_MEMBERSHIP"
+  ],
+  "hard_nonclaims": [
+    "NO_REAL_TARGET_SUBSET_RECEIPT_PROVED",
+    "NO_REAL_SUPERSET_SEMANTICS_COMPLETENESS_PROVED",
+    "NO_REAL_BRAIN_VS_OPUS55_SUPERSET_DOMINANCE_PROVED",
+    "NO_TRUTH_OBLIGATION_DELETED",
+    "NO_TERMINAL_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_credit_delta": 0
+  }
+}
