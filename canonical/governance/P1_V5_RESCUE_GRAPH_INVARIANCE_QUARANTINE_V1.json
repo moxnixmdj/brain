@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_P1_V5_RESCUE_GRAPH_INVARIANCE_QUARANTINE_V1",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_FAIL_CLOSED_COUNTEREXAMPLE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TRAJECTORY_CRITICAL_FAILURE_LOCALIZATION_001",
+  "target": {
+    "proof": "canonical/runtime/trajectory_failure_typed_ir_proof_v5.py",
+    "blob": "3fc600a8176dac250219e3d98b92cf93d8fceef5",
+    "verification": "canonical/verification/P1_TYPED_INTERVENTION_ENVELOPE_V5_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
+    "verification_blob": "9221744bafba669a8b596e2fcce63d4a5537654b"
+  },
+  "falsifier": "canonical/runtime/p1_v5_rescue_graph_invariance_counterexample_v1.py",
+  "tests": "canonical/tests/test_p1_v5_rescue_graph_invariance_counterexample_v1.py",
+  "claim_under_test": "P1_HETEROGENEOUS_INTERVENTION_RESCUE",
+  "counterexample": "CHANGE_TERMINAL_FAILED_RESOURCE_TO_AN_UPSTREAM_PREFAULT_RESOURCE_WHILE_HOLDING_PRECOMPUTED_INTERVENTION_MODEL_FIXED__V5_STILL_RETURNS_RESCUED_FOR_THE_SAME_ROOT_REPAIR",
+  "reason": "evaluate_intervention reads only _intervention_model.causal_status and required_root_repairs plus supplied repair identities; it does not execute the trajectory or recompute terminal state.",
+  "required_disposition_if_verified": [
+    "QUARANTINE_V5_HETEROGENEOUS_INTERVENTION_RESCUE_CREDIT",
+    "INVALIDATE_ANY_SCOPE_SUPERSET_VERDICT_DEPENDING_ON_V5_RESCUE_AS_EXECUTABLE_CAUSAL_EVIDENCE",
+    "PRESERVE_V5_FIRST_CLASS_SCOPE_AND_INFORMATION_BOUNDARY_EVIDENCE_WITHIN_THEIR_ACTUAL_SCOPE",
+    "USE_EXECUTABLE_CAUSAL_REPLAY_CARRIER_SUCH_AS_V6_BEFORE_RESTORATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "terminal_results_replayed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
