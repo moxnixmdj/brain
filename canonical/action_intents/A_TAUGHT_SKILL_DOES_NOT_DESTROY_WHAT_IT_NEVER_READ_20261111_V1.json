@@ -1,0 +1,502 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_TAUGHT_SKILL_DOES_NOT_DESTROY_WHAT_IT_NEVER_READ_20261111_V1",
+ "action_intent_id": "A_TAUGHT_SKILL_DOES_NOT_DESTROY_WHAT_IT_NEVER_READ_20261111_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_TAUGHT_SKILL_DOES_NOT_DESTROY_WHAT_IT_NEVER_READ_20261111_V1",
+ "date": "2026-11-11",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "e2a086871ec1e551b7d97682f0cc9a03ffac81f8",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asked, for the fifth time, why the machine cannot simply be shown a coding action once and then have it. The owner also said the solution already exists under a non-obvious name. It does: canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py ('Watch/Explore Once -> Permanent Skill') compiles one demonstration into a parameterized skill, demands a second distinct instance as proof, and the front door falls back to it when no row serves a request. So the owner's experiment was run through the front door on main. A file task taught once was then done on a new file (PASS__COMPILED_WORKFLOW_SKILL), and four trap sentences were refused. A coding action (rename a routine) gave two defects. Shown as the file after the edit, it compiled into 'replace the named file with the taught file', passed qualification because its postcondition was true of the taught file too, and at the front door replaced another file and answered PASS. Shown as a program, it did the right thing on a new file, but on the host: solve_v1.act imports the sandbox by a top-level name that resolves only when canonical/runtime is on sys.path, the except clause swallowed the error, and the receipt said confined False. This change adds one guard (a generalized write_text may create a file, fill an empty one, repeat itself, or update a file the same step wrote; it may not replace anything else), asks it both where a skill is qualified and where it is recalled, runs a taught program inside the existing namespace sandbox or refuses it before any earlier step writes, and lets act find the sandbox from a package import. No row is added, no route is opened, nothing that was refused becomes allowed.",
+ "selected_route": "ADAPT_THE_EXISTING_DEMONSTRATION_TO_SKILL_COMPILER__A_GENERALIZED_WRITE_MAY_NOT_REPLACE_CONTENT_IT_NEVER_READ__A_TAUGHT_PROGRAM_RUNS_IN_THE_NAMESPACE_SANDBOX_OR_NOT_AT_ALL",
+ "causal_blocker": "THE_FRONT_DOORS_OWN_WATCH_ONCE_MECHANISM_ANSWERED_PASS_WHILE_REPLACING_A_FILE_IT_NEVER_READ__AND_RAN_A_TAUGHT_PROGRAM_ON_THE_HOST_BECAUSE_THE_SANDBOX_IMPORT_ONLY_RESOLVES_WHEN_THE_FILE_IS_RUN_AS_A_SCRIPT__SO_TEACHING_THE_MACHINE_A_CODING_ACTION_ONCE_WAS_EITHER_DESTRUCTIVE_OR_UNCONFINED",
+ "expected_parent_change": "A_TASK_SHOWN_ONCE_BECOMES_A_SKILL_ONLY_IF_REPLAYING_IT_CANNOT_DESTROY_WHAT_IT_NEVER_READ__A_TAUGHT_PROGRAM_NO_LONGER_RUNS_WITH_THE_CALLERS_WHOLE_ACCOUNT__THE_FILE_TASK_AND_THE_PROGRAM_TASK_THAT_WORKED_STILL_WORK",
+ "expected_parent_frontier_change": "ONE_WRONG_PASS_OF_THE_COMPILED_WORKFLOW_FALLBACK_BECOMES_A_REFUSAL__ONE_UNCONFINED_EXECUTION_PATH_BECOMES_A_CONFINED_ONE__ZERO_CAPABILITY_CREDIT__ZERO_FAMILY_CREDIT__NO_ROW_ADDED__NO_ROUTE_OPENED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FRONT_DOORS_OWN_WATCH_ONCE_MECHANISM_ANSWERED_PASS_WHILE_REPLACING_A_FILE_IT_NEVER_READ__AND_RAN_A_TAUGHT_PROGRAM_ON_THE_HOST_BECAUSE_THE_SANDBOX_IMPORT_ONLY_RESOLVES_WHEN_THE_FILE_IS_RUN_AS_A_SCRIPT__SO_TEACHING_THE_MACHINE_A_CODING_ACTION_ONCE_WAS_EITHER_DESTRUCTIVE_OR_UNCONFINED",
+ "falsification_condition": "A_TEST_THAT_PASSES_ON_THE_BASE_COMMIT_FAILS_ON_THIS_ONE__OR_A_HEARTBEAT_REQUEST_THAT_PASSED_IS_LOST__OR_A_TAUGHT_WRITE_REPLACES_A_FILE_HOLDING_CONTENT_THE_STEP_COULD_NOT_HAVE_WRITTEN__OR_A_TAUGHT_PROGRAM_IS_OBSERVED_RUNNING_OUTSIDE_THE_SANDBOX__OR_A_CREATE_APPEND_OR_UPDATE_TASK_THAT_WORKED_IS_REFUSED",
+ "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_CAPABILITY_IS_REGISTERED__NO_ROUTE_IS_OPENED__THE_27_RELATED_TEST_FILES_AND_THE_HEARTBEAT_GIVE_THE_SAME_RESULTS_AS_ON_THE_BASE_COMMIT",
+ "explicit_user_authorization": "Owner instructions in this session. Repeated in every message since 2026-11-10: 'We already solved it. We have so many perfect solutions and have already built important things, but with non-obvious names. They exist somewhere' and 'Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them? Can't we do this now?' This change is the result of doing exactly that with the mechanism the repository already has. On 2026-11-11, asked whether to merge pull request #6658, the owner answered 'Yes, and merge the next ones too': a standing instruction to merge the later pull requests of this session once the referee check-run conclusion is success, each merge to be disclosed in the report. Nothing merges over a red referee. Whether a taught program may run at the front door at all before a carrier is admitted is the owner's decision; it is asked, not taken: this change only moves that execution from the host into the sandbox.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+   "canonical/runtime/solve_v1.py",
+   "canonical/tests/test_a_taught_skill_does_not_destroy_what_it_never_read_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "BEFORE_AND_AFTER_THROUGH_THE_SAME_FRONT_DOOR_ON_THE_SAME_INPUT__THE_ONLY_DIFFERENCE_BETWEEN_THE_TWO_TREES_IS_THIS_CHANGE__THE_FILE_THAT_WAS_REPLACED_IS_UNCHANGED__THE_RECEIPT_THAT_SAID_CONFINED_FALSE_SAYS_TRUE__REMOVING_EITHER_GUARD_THE_SANDBOX_REQUIREMENT_OR_THE_IMPORT_MAKES_THE_NEW_TESTS_FAIL"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS__EACH_AGAINST_THE_BASE_COMMIT_e2a08687_ON_THE_SAME_INPUT__NOT_PUBLIC_RUNNER_EVIDENCE__THROUGH_THE_FRONT_DOOR__A_RENAME_SHOWN_AS_THE_EDITED_FILE__BEFORE_QUALIFIED_AND_THE_DOOR_REPLACED_ANOTHER_FILE_AND_ANSWERED_PASS__AFTER_NOT_QUALIFIED_THE_DOOR_REFUSES_AND_THE_FILE_IS_UNCHANGED__THE_SAME_RENAME_SHOWN_AS_A_PROGRAM__RIGHT_ON_A_NEW_FILE_BEFORE_AND_AFTER__RECEIPT_CONFINED_FALSE_BEFORE_AND_TRUE_AFTER__A_FILE_TASK_TAUGHT_ONCE__ONE_RIGHT_AND_FOUR_TRAP_SENTENCES_REFUSED_BEFORE_AND_AFTER__A_TASK_WITH_A_COMMAND_STEP_CANNOT_BE_TAUGHT_BEFORE_OR_AFTER__27_TEST_FILES_THAT_TOUCH_THE_COMPILER_THE_SOLVER_AND_THEIR_CALLERS__176_PASSED_22_FAILED_1_ERROR_BEFORE_AND_THE_SAME_AFTER__ONE_FILE_TIMES_OUT_ON_BOTH_AND_DOES_NOT_IMPORT_EITHER_MODULE__HEARTBEAT_SEED_4242__127_OF_216_IN_SCOPE_REQUESTS_PASS_AND_60_OF_60_OUT_OF_SCOPE_REQUESTS_ARE_REFUSED__BEFORE_AND_AFTER__NO_FAMILY_DIFFERS__NEW_TEST_FILE_21_OF_21__SEVEN_DELIBERATE_BREAKS_EACH_FAIL_BETWEEN_1_AND_8_OF_THEM",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_OBLIGATIONS_NAMED_ARE_COMPUTER_USE_OBLIGATIONS__LEARNING_A_COMPUTER_TASK_FROM_ONE_DEMONSTRATION_COUNTS_TOWARD_THEM_ONLY_IF_A_LEARNED_TASK_CANNOT_ANSWER_PASS_WHILE_DESTROYING_A_FILE_AND_CANNOT_RUN_OUTSIDE_A_SANDBOX",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-11T22:34:40Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_NARROWS_WHAT_A_SKILL_LEARNED_FROM_ONE_DEMONSTRATION_MAY_DO__IT_OPENS_NO_ROUTE",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "A_GENERALIZED_WRITE_MAY_NOT_REPLACE_CONTENT_IT_NEVER_READ_AND_A_TAUGHT_PROGRAM_RUNS_IN_THE_SANDBOX_OR_NOT_AT_ALL",
+   "decisive_question": "DOES_THE_WRONG_PASS_BECOME_A_REFUSAL_AND_THE_HOST_EXECUTION_A_CONFINED_ONE__WHILE_EVERYTHING_THAT_PASSED_STILL_PASSES",
+   "falsifier_id": "ONE_RELATED_TEST_OR_HEARTBEAT_REQUEST_THAT_PASSED_ON_THE_BASE_COMMIT_AND_FAILS_HERE__OR_ONE_TAUGHT_WRITE_THAT_REPLACES_FOREIGN_CONTENT__OR_ONE_TAUGHT_PROGRAM_OBSERVED_ON_THE_HOST",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_27_TEST_FILES_THAT_IMPORT_THE_COMPILER_THE_SOLVER_OR_THEIR_CALLERS_GIVE_IDENTICAL_RESULTS_ON_BOTH_TREES__THE_HEARTBEAT_GIVES_127_OF_216_IN_SCOPE_AND_60_OF_60_OUT_OF_SCOPE_ON_BOTH__THE_CREATE_FILL_REPEAT_UPDATE_AND_APPEND_CASES_ARE_PINNED_AS_STILL_POSSIBLE_BY_THE_NEW_TESTS__ONE_LOSS_IS_KNOWN_AND_INTENDED__A_TAUGHT_WRITE_THAT_WAS_MEANT_TO_REPLACE_A_WHOLE_FOREIGN_FILE_IS_NOW_REFUSED_AND_MUST_BE_TAUGHT_AS_A_PROGRAM"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "e2a086871ec1e551b7d97682f0cc9a03ffac81f8",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "THE_OWNER_CAN_SHOW_THE_MACHINE_A_COMPUTER_TASK_ONCE_AND_HAVE_IT_DONE_ON_NEW_FILES_WITHOUT_THE_MACHINE_ANSWERING_PASS_OVER_A_FILE_IT_DESTROYED_AND_WITHOUT_TAUGHT_CODE_RUNNING_WITH_THE_OWNERS_WHOLE_ACCOUNT",
+  "selected_route": "ADAPT_THE_EXISTING_DEMONSTRATION_TO_SKILL_COMPILER__A_GENERALIZED_WRITE_MAY_NOT_REPLACE_CONTENT_IT_NEVER_READ__A_TAUGHT_PROGRAM_RUNS_IN_THE_NAMESPACE_SANDBOX_OR_NOT_AT_ALL",
+  "selected_surviving_route": "ADAPT_THE_COMPILER_THE_FRONT_DOOR_ALREADY_FALLS_BACK_TO__ONE_GUARD_ASKED_WHERE_A_SKILL_IS_QUALIFIED_AND_WHERE_IT_IS_RECALLED__AND_THE_EXISTING_SANDBOX_REACHED_BY_ITS_PACKAGE_PATH_WITH_NO_HOST_FALLBACK",
+  "deleted_or_bypassed_paths": [
+   "A_NEW_TEACH_BY_EXAMPLE_ROW__NOT_BUILT__THE_COMPILER_AND_THE_FRONT_DOORS_FALLBACK_ALREADY_DO_IT",
+   "REFUSING_EVERY_GENERALIZED_OVERWRITE__NOT_USED__IT_WOULD_STOP_A_TASK_FROM_UPDATING_THE_FILE_IT_WROTE_ITSELF",
+   "TRUSTING_THE_TEACHERS_POSTCONDITION_TO_BE_STRONG_ENOUGH__NOT_USED__THE_WRONG_PASS_HAPPENED_WITH_A_POSTCONDITION_THAT_WAS_TRUE",
+   "REFUSING_EVERY_TAUGHT_PROGRAM_UNTIL_A_CARRIER_IS_ADMITTED__NOT_TAKEN_HERE__IT_REMOVES_A_CAPABILITY_THAT_WORKS_AND_IS_THE_OWNERS_DECISION__IT_IS_ASKED",
+   "KEEPING_THE_HOST_FALLBACK_FOR_A_TAUGHT_PROGRAM__DELETED__AN_AUTOMATIC_ROUTE_DOES_NOT_RUN_A_PROGRAM_OUTSIDE_A_BOUNDARY",
+   "MOVING_THE_TAUGHT_PROGRAM_TO_THE_FILTERED_LAUNCHER_NOW__NOT_DONE__ITS_WORKER_SEES_A_STAGED_COPY_SO_A_STEPS_WRITES_WOULD_NOT_REACH_THE_PROJECT_WITHOUT_A_REDESIGN__NAMED_AS_NEXT"
+  ],
+  "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_CAPABILITY_IS_REGISTERED__NO_ROUTE_IS_OPENED__THE_27_RELATED_TEST_FILES_AND_THE_HEARTBEAT_GIVE_THE_SAME_RESULTS_AS_ON_THE_BASE_COMMIT",
+  "expected_parent_level_state_change": "ONE_WRONG_PASS_OF_THE_COMPILED_WORKFLOW_FALLBACK_BECOMES_A_REFUSAL__ONE_UNCONFINED_EXECUTION_PATH_BECOMES_A_CONFINED_ONE__ZERO_CAPABILITY_CREDIT__ZERO_FAMILY_CREDIT__NO_ROW_ADDED__NO_ROUTE_OPENED",
+  "why_selected_route_is_fastest_sufficient": "THE_COMPILER_THE_SECOND_INSTANCE_RULE_THE_FRONT_DOORS_FALLBACK_AND_THE_SANDBOX_ALL_EXIST__THE_WRONG_PASS_IS_ONE_MISSING_QUESTION_ASKED_OF_THE_WORLD_A_SKILL_IS_REPLAYED_IN__THE_HOST_EXECUTION_IS_ONE_IMPORT_THAT_DOES_NOT_RESOLVE__NO_NEW_MODULE_NO_ROW_AND_NO_DEPENDENCY_IS_NEEDED",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "ADAPT_THE_EXISTING_COMPILER_WITH_ONE_GUARD_AND_THE_EXISTING_SANDBOX",
+   "REFUSE_EVERY_GENERALIZED_OVERWRITE__REJECTED_LOSES_UPDATES_OF_A_FILE_THE_SAME_STEP_WROTE",
+   "REQUIRE_A_WHOLE_FILE_POSTCONDITION__REJECTED_AS_THE_ONLY_DEFENCE_A_GUARD_MUST_HOLD_WHEN_THE_POSTCONDITION_IS_WEAK",
+   "LIFT_THE_TRACE_INTO_A_STATE_AWARE_PROGRAM_BY_A_MODEL__REJECTED_A_MODEL_IN_CREDITED_COGNITION_IS_FORBIDDEN",
+   "VERIFY_A_RULE_ACROSS_MANY_TRAJECTORIES_BEFORE_KEEPING_IT__REJECTED_HERE_THE_REPOSITORY_ALREADY_DEMANDS_THE_SECOND_INSTANCE_AND_HAS_NO_CORPUS",
+   "RUN_THE_PROGRAM_IN_THE_FILTERED_LAUNCHER__DEFERRED_STAGED_WORKSPACE",
+   "REFUSE_TAUGHT_PROGRAMS_UNTIL_ADMISSION__THE_OWNERS_DECISION"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-11T22:34:40Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_COMPILER_ON_THE_BASE_COMMIT__A_GENERALIZED_WRITE_REPLACES_WHATEVER_IS_AT_THE_NAMED_PATH__A_TAUGHT_PROGRAM_GOES_THROUGH_act_AND_RUNS_ON_THE_HOST",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+     "canonical/runtime/solve_v1.py",
+     "canonical/runtime/confine_v1.py",
+     "canonical/runtime/live_brain_route_admission_v1.py",
+     "canonical/runtime/computer_execution_boundary_v1.py",
+     "canonical/tests/test_skill_qualification_requires_a_real_heldout_v1.py",
+     "PREREG_THE_GRAMMAR_CAN_ONLY_EXPRESS_WHAT_A_WRITER_KNOWS_20261104_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2609.30249",
+     "https://arxiv.org/html/2605.01293v1",
+     "https://arxiv.org/html/2609.36807v1",
+     "https://arxiv.org/html/2605.10999v1",
+     "https://arxiv.org/html/2606.07594",
+     "https://arxiv.org/pdf/2211.16605"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/yccm/SkillGen",
+     "https://mlb2251.github.io/stitch.pdf"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://alpeshnakrani.com/books/memory-systems-for-agents/procedural-memory-and-skill-libraries/",
+     "https://www.alphaxiv.org/abs/2504.06821",
+     "https://arxiv.org/html/2605.26112v1"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "learn reusable parameterized workflow from a single demonstration computer-use agent programming by demonstration verified replay 2026 arXiv"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "agent workflow memory OR skill induction programmatic skills composed of verified primitives macro actions generalize parameters failure modes 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "coding agent learns reusable skill from a single successful trajectory one-shot experience generalization failure verification 2026 arXiv"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "library learning program synthesis learn new abstractions from solved programs Stitch DreamCoder LILO compression anti-unification 2026 no neural model"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "REFUSE_EVERY_GENERALIZED_WRITE_THAT_WOULD_REPLACE_AN_EXISTING_FILE",
+     "evidence": [
+      "https://alpeshnakrani.com/books/memory-systems-for-agents/procedural-memory-and-skill-libraries/"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_a_taught_skill_does_not_destroy_what_it_never_read_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "ALSO_STOPS_THE_WRONG_PASS",
+      "CAPABILITY_STRENGTH": "LOSES_A_TASK_UPDATING_THE_FILE_IT_WROTE_ITSELF_AND_WRITING_THE_SAME_TEXT_TWICE__PINNED_AS_STILL_POSSIBLE_BY_THE_NEW_TESTS",
+      "WALL_CLOCK": "SHORTER",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "SIMPLER",
+      "VERIFIABILITY": "ONE_LINE"
+     }
+    },
+    {
+     "route": "MAKE_THE_TEACHER_SUPPLY_A_POSTCONDITION_THAT_SEES_THE_WHOLE_FILE_OR_RUNS_TESTS__A_WRITE_GATE_OF_SUCCESS_PLUS_TESTS",
+     "evidence": [
+      "https://alpeshnakrani.com/books/memory-systems-for-agents/procedural-memory-and-skill-libraries/",
+      "https://www.alphaxiv.org/abs/2504.06821"
+     ],
+     "qualification_evidence": [
+      "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "WOULD_CATCH_THIS_CASE_AND_THE_TOO_GENERAL_PROGRAM_AS_WELL",
+      "CAPABILITY_STRENGTH": "STRONGER_WHERE_THE_TEACHER_SUPPLIES_IT",
+      "WALL_CLOCK": "A_NEW_POSTCONDITION_KIND_AND_FOR_TESTS_A_DOOR_THAT_MAY_RUN_THEM__THE_DOOR_IS_CLOSED",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DEPENDS_ON_THE_TEACHER__THE_WRONG_PASS_HAPPENED_WITH_A_POSTCONDITION_THAT_WAS_TRUE",
+      "VERIFIABILITY": "COMPLEMENTARY__NAMED_AS_A_NEXT_STEP"
+     }
+    },
+    {
+     "route": "LIFT_THE_TRACE_INTO_A_STATE_AWARE_PROGRAM_WITH_PREDICATES_AND_BRANCHES_AS_NEURO_SYMBOLIC_SKILL_INDUCTION_DOES",
+     "evidence": [
+      "https://arxiv.org/html/2605.01293v1",
+      "https://arxiv.org/abs/2609.30249"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2605.01293v1"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "NAMES_THE_SAME_DEFECT__STATE_BLIND_PARAMETERIZED_SCRIPTS_FAIL_WHEN_THE_WORLD_DIFFERS",
+      "CAPABILITY_STRENGTH": "WOULD_TURN_THE_DEMONSTRATED_EDIT_INTO_A_PROGRAM_THAT_READS_THE_FILE",
+      "WALL_CLOCK": "A_SYNTHESIZER",
+      "INCREMENTAL_COST": "A_FOUNDATION_MODEL_WRITES_THE_PROGRAM__FORBIDDEN_IN_CREDITED_COGNITION_HERE",
+      "RELIABILITY": "REPORTED_ON_AGENT_BENCHMARKS",
+      "VERIFIABILITY": "NEEDS_AN_ENVIRONMENT_TO_RUN_VARIANTS_IN"
+     }
+    },
+    {
+     "route": "KEEP_A_RULE_ONLY_AFTER_IT_RECURS_ACROSS_MANY_TRAJECTORIES_AND_REPOSITORIES",
+     "evidence": [
+      "https://arxiv.org/html/2609.36807v1",
+      "https://arxiv.org/html/2605.10999v1"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2609.36807v1"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "THE_STRONGEST_PUBLISHED_PROTECTION_AGAINST_A_LESSON_THAT_ONLY_FITS_ITS_EXAMPLE",
+      "CAPABILITY_STRENGTH": "TRANSFERS_ACROSS_REPOSITORIES",
+      "WALL_CLOCK": "A_CORPUS_OF_SUCCESSFUL_AND_FAILED_TRAJECTORIES_THAT_DOES_NOT_EXIST_HERE",
+      "INCREMENTAL_COST": "A_MODEL_BASED_AGENT_TO_PRODUCE_THEM",
+      "RELIABILITY": "REPORTED",
+      "VERIFIABILITY": "THE_REPOSITORY_ALREADY_DEMANDS_THE_FIRST_STEP_OF_IT__A_SECOND_DISTINCT_INSTANCE"
+     }
+    },
+    {
+     "route": "RUN_THE_TAUGHT_PROGRAM_IN_THE_LAUNCHER_THAT_HAS_THE_SYSCALL_FILTER_INSTEAD_OF_confine_v1",
+     "evidence": [
+      "https://arxiv.org/html/2606.07594"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/zero_ambient_namespace_launcher_v1.py",
+      "canonical/runtime/confine_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "THE_SAME_RESULT_FOR_THE_PROGRAM",
+      "CAPABILITY_STRENGTH": "STRONGER_CONFINEMENT__THE_WORKER_ALSO_LOSES_THE_KERNEL_ENTRY_POINTS",
+      "WALL_CLOCK": "THE_LAUNCHERS_WORKER_SEES_A_STAGED_COPY__A_STEPS_WRITES_WOULD_NOT_REACH_THE_PROJECT_WITHOUT_A_REDESIGN_OF_THE_STEP",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "MEASURED_FOR_COMMANDS_NOT_FOR_IN_PLACE_EDITS",
+      "VERIFIABILITY": "NAMED_AS_THE_NEXT_STEP__OR_GIVE_confine_v1_THE_SAME_FILTER"
+     }
+    },
+    {
+     "route": "REFUSE_EVERY_TAUGHT_PROGRAM_AT_THE_DOOR_UNTIL_A_CARRIER_IS_ADMITTED__AS_COMMAND_STAGES_ARE",
+     "evidence": [
+      "https://arxiv.org/html/2605.26112v1"
+     ],
+     "qualification_evidence": [
+      "canonical/runtime/computer_execution_boundary_v1.py",
+      "canonical/tests/test_compiled_cli_confinement_guard_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "THE_STRICTEST_READING_OF_THE_DOORS_RULE",
+      "CAPABILITY_STRENGTH": "REMOVES_THE_ONLY_WAY_A_CODING_ACTION_SHOWN_ONCE_IS_DONE_ON_A_NEW_FILE",
+      "WALL_CLOCK": "ONE_LINE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "TRIVIAL",
+      "VERIFIABILITY": "THE_OWNERS_DECISION__ASKED_IN_THE_REPORT__THIS_CHANGE_ALREADY_REMOVES_THE_HOST_EXECUTION_EITHER_WAY"
+     }
+    }
+   ],
+   "negative_search_summary": "FOUR_QUERY_FAMILIES__ONE_DEMONSTRATION_BECOMES_A_REUSABLE_PROGRAM_IN_THE_PUBLISHED_SYSTEMS_ONLY_WITH_ACTION_PRIMITIVES_A_TESTABLE_SPECIFICATION_AND_AN_ENVIRONMENT_TO_RUN_VARIANTS_IN__AND_A_MODEL_WRITES_THE_PROGRAM__STATE_BLIND_PARAMETERIZED_SCRIPTS_ARE_A_NAMED_FAILURE_MODE__THE_COMMON_WRITE_GATE_IS_PARAMETERIZE_THE_LITERALS_THEN_RUN_TESTS_IN_A_SANDBOX__SKILLS_THAT_TRANSFER_ARE_KEPT_ONLY_AFTER_RECURRING_ACROSS_REPOSITORIES__NO_PUBLIC_ROUTE_TELLS_A_CREATED_FILE_FROM_AN_EDITED_ONE_FROM_A_SINGLE_AFTER_STATE__THE_WORLD_AT_REPLAY_TIME_IS_WHAT_CAN",
+   "selected_route": "ADAPT_THE_COMPILER_THE_FRONT_DOOR_ALREADY_FALLS_BACK_TO__ONE_GUARD_ASKED_WHERE_A_SKILL_IS_QUALIFIED_AND_WHERE_IT_IS_RECALLED__AND_THE_EXISTING_SANDBOX_REACHED_BY_ITS_PACKAGE_PATH_WITH_NO_HOST_FALLBACK",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-11T22:34:40Z",
+    "max_age_hours": 2,
+    "selected_route": "ADAPT_THE_COMPILER_THE_FRONT_DOOR_ALREADY_FALLS_BACK_TO__ONE_GUARD_ASKED_WHERE_A_SKILL_IS_QUALIFIED_AND_WHERE_IT_IS_RECALLED__AND_THE_EXISTING_SANDBOX_REACHED_BY_ITS_PACKAGE_PATH_WITH_NO_HOST_FALLBACK",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import re, pathlib, sqlite3; print(\"ok\")' returned ok; the guard uses nothing else"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "NAMESPACE_SANDBOX_confine_v1",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical.runtime.confine_v1.available() returned True on this host; a program run through it reported confined True in 81 ms, could not see /home/user or /etc/passwd, had no network, and its write inside the project persisted"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "DEMONSTRATION_TO_SKILL_COMPILER_AND_FRONT_DOOR_FALLBACK",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py compiled and qualified a file task on this host and live_brain_route_admission_v1.solve returned PASS__COMPILED_WORKFLOW_SKILL for a new instance of it"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "SHOW_ONCE_THEN_DONE_ON_NEW_FILES__WITH_NO_PASS_OVER_A_DESTROYED_FILE_AND_NO_TAUGHT_CODE_ON_THE_HOST",
+   "proxy_goals_deleted": [
+    "MAKE_THE_DEMONSTRATION_QUALIFY",
+    "KEEP_THE_PROGRAM_STEP_PASSING_AT_ANY_PRICE",
+    "COUNT_A_NEW_CAPABILITY"
+   ],
+   "surviving_necessity": "ONE_DEMONSTRATION_CANNOT_SAY_WHETHER_THE_TEACHER_CREATED_A_FILE_OR_EDITED_ONE__THE_WORLD_THE_SKILL_IS_REPLAYED_IN_CAN__AND_A_PROGRAM_THE_MACHINE_REPLAYS_BY_ITSELF_MUST_NOT_HOLD_THE_OWNERS_ACCOUNT"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "THE_DEMONSTRATION_TO_SKILL_COMPILER_AND_ITS_SECOND_INSTANCE_SABOTAGE_AND_OWNERSHIP_GATES",
+    "THE_FRONT_DOORS_COMPILED_WORKFLOW_FALLBACK",
+    "THE_PREFLIGHT_THAT_ALREADY_REFUSES_COMMAND_STAGES_BEFORE_ANY_STEP_RUNS",
+    "THE_NAMESPACE_SANDBOX_confine_v1_AND_ITS_STATEMENT_THAT_THE_CALLER_DECIDES_ABOUT_RUNNING_UNCONFINED",
+    "THE_ROWS_THAT_ALREADY_RENAME_A_SYMBOL"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_COMPILER",
+    "THE_PREFLIGHT",
+    "THE_SANDBOX",
+    "THE_BOUNDARYS_REFUSAL_STATUS",
+    "THE_HOLE_NAMES_THE_ANTI_UNIFIER_ALREADY_WRITES"
+   ],
+   "capability_work_deleted": [
+    "A_SECOND_TEACHING_MECHANISM",
+    "A_SECOND_SANDBOX"
+   ],
+   "external_existing_routes_checked": [
+    "PROGRAMMING_BY_DEMONSTRATION_FROM_ONE_DEMONSTRATION_WITH_A_VERIFICATION_ENVIRONMENT",
+    "RECORD_AND_REPLAY_SKILLS_WITH_STATE_CHECKS",
+    "STATE_AWARE_SKILL_INDUCTION",
+    "PROGRAMMATIC_SKILLS_VERIFIED_BY_REEXECUTION",
+    "WRITE_GATES_THAT_PARAMETERIZE_TRANSIENT_LITERALS",
+    "LIBRARY_LEARNING_BY_COMPRESSION"
+   ],
+   "surviving_gap": "A_TAUGHT_PROGRAM_THAT_IS_TOO_GENERAL_STILL_PASSES_A_WEAK_POSTCONDITION__NO_POSTCONDITION_KIND_SEES_A_WHOLE_FILE_OR_RUNS_TESTS__A_TASK_WITH_A_COMMAND_STEP_CANNOT_BE_TAUGHT_WHILE_THE_DOOR_IS_CLOSED__THE_SANDBOX_USED_HERE_HAS_NO_SYSCALL_FILTER_AND_IS_NOT_AN_ADMITTED_CARRIER__A_REQUEST_MUST_KEEP_THE_TAUGHT_SENTENCES_SKELETON__THE_QUALIFICATION_STILL_CONSUMES_THE_SECOND_INSTANCES_FILE"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_COMPILER_NEVER_LOOKED_AT_WHAT_A_GENERALIZED_WRITE_WAS_ABOUT_TO_REPLACE__AND_THE_SANDBOX_WAS_IMPORTED_BY_A_NAME_THAT_DOES_NOT_RESOLVE_FROM_A_PACKAGE",
+   "evidence": [
+    "THROUGH_THE_FRONT_DOOR_ON_THE_BASE_COMMIT_A_REQUEST_TO_RENAME_A_ROUTINE_IN_ONE_FILE_REPLACED_IT_WITH_THE_TAUGHT_FILE_AND_RETURNED_PASS__COMPILED_WORKFLOW_SKILL",
+    "ON_THE_BASE_COMMIT_THE_STEP_RECEIPT_OF_A_TAUGHT_PROGRAM_SAYS_CONFINED_FALSE",
+    "import_confine_v1_RAISES_ModuleNotFoundError_IN_A_PROCESS_THAT_IMPORTED_canonical_runtime_solve_v1"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_FALLBACK__LOSES_THE_FILE_TASK_THAT_WORKS",
+    "BYPASS_BY_TELLING_TEACHERS_TO_WRITE_BETTER_POSTCONDITIONS__THE_GUARD_MUST_NOT_DEPEND_ON_THE_TEACHER",
+    "SUBSTITUTE_THE_FILTERED_LAUNCHER__STAGED_WORKSPACE"
+   ],
+   "surviving_causal_blocker": "THE_FRONT_DOORS_OWN_WATCH_ONCE_MECHANISM_ANSWERED_PASS_WHILE_REPLACING_A_FILE_IT_NEVER_READ__AND_RAN_A_TAUGHT_PROGRAM_ON_THE_HOST_BECAUSE_THE_SANDBOX_IMPORT_ONLY_RESOLVES_WHEN_THE_FILE_IS_RUN_AS_A_SCRIPT__SO_TEACHING_THE_MACHINE_A_CODING_ACTION_ONCE_WAS_EITHER_DESTRUCTIVE_OR_UNCONFINED"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADAPT_THE_COMPILER_WITH_ONE_GUARD_AT_QUALIFICATION_AND_AT_RECALL",
+    "THEN_RUN_THE_TAUGHT_PROGRAM_IN_THE_SANDBOX_WITH_NO_HOST_FALLBACK",
+    "THEN_LET_act_FIND_THE_SANDBOX_FROM_A_PACKAGE_IMPORT"
+   ],
+   "losing_routes_reason": "A_BLANKET_REFUSAL_LOSES_LEGITIMATE_UPDATES__A_STRONGER_POSTCONDITION_DEPENDS_ON_THE_TEACHER__A_STATE_AWARE_LIFT_NEEDS_A_MODEL__MANY_TRAJECTORY_VERIFICATION_NEEDS_A_CORPUS__THE_FILTERED_LAUNCHER_NEEDS_A_WORKSPACE_REDESIGN",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_EFFECT_WAS_OBSERVED_THROUGH_THE_REAL_FRONT_DOOR_ON_REAL_FILES_BEFORE_AND_AFTER__THE_REPOSITORYS_OWN_27_RELATED_TEST_FILES_AND_ITS_HEARTBEAT_ARE_USED_UNCHANGED_FOR_WHAT_MUST_STILL_PASS__THE_NEW_TESTS_USE_REAL_FILES_AND_THE_REAL_SANDBOX__NONE_OF_THIS_IS_AN_INDEPENDENT_REVIEW"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "note": "EVERY_CALLER_OF_THE_COMPILER_INHERITS_BOTH_RULES__THE_FRONT_DOORS_FALLBACK_THE_SOLVERS_RECALL_THE_CLOSED_LOOP_CONTROLLER_AND_THE_AWAKE_LOOP__EVERY_CALLER_OF_solve_v1_act_NOW_REACHES_THE_SANDBOX_WHERE_ONE_EXISTS__act_KEEPS_ITS_DOCUMENTED_HOST_FALLBACK_WHERE_NONE_EXISTS",
+   "adjacent_capabilities_absorbed": [],
+   "fresh_reuse_plan": "THE_SAME_GUARD_FITS_ANY_FUTURE_STEP_KIND_THAT_WRITES_A_WHOLE_OBJECT_FIXED_AT_TEACHING_TIME"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_ARGUING_WHETHER_ONE_EXPERIENCE_IS_ENOUGH__THE_MECHANISM_WAS_RUN_INSTEAD"
+   ],
+   "search_stop_decision": "A_ROUTE_WITH_NO_MEASURED_LOSS_EXISTS__THE_FRONTIER_WAS_REFRESHED_TODAY__THE_PUBLISHED_SYSTEMS_THAT_GENERALIZE_FURTHER_NEED_A_MODEL_OR_A_CORPUS",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN_AND_REPORT_IT__THEN_ASK_THE_OWNER_WHETHER_A_TAUGHT_PROGRAM_MAY_RUN_AT_THE_DOOR_BEFORE_A_CARRIER_IS_ADMITTED__THEN_GIVE_THE_SANDBOX_USED_HERE_THE_SYSCALL_FILTER_THE_LAUNCHER_HAS__THEN_A_POSTCONDITION_THAT_CAN_SEE_A_WHOLE_FILE",
+ "prior_work_reused": [
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/runtime/solve_v1.py",
+  "canonical/runtime/confine_v1.py",
+  "canonical/runtime/computer_execution_boundary_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/tests/test_skill_qualification_requires_a_real_heldout_v1.py",
+  "canonical/tests/test_compiled_cli_confinement_guard_v1.py",
+  "canonical/tests/test_computer_unconfined_route_guard_v1.py"
+ ]
+}
