@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_IF_AUTHORITY_CAUSAL_CUT_V2",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__TEMPORAL_HANDOFF_MECHANICALLY_CLOSED_FOR_COMMIT_GATE_SURFACE__SEMANTIC_AND_ROUTE_COVERAGE_OPEN__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicates": [
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR"
+  ],
+  "repaired_causal_partition": [
+    "SEMANTIC_EXTRACTION_OR_NORMALIZATION_ERROR",
+    "POINT_IN_TIME_DETERMINISTIC_ENFORCEMENT_ERROR",
+    "TEMPORAL_AUTHORITY_HANDOFF_OR_LINEARIZATION_ERROR",
+    "TRUE_EXECUTION_ROUTE_BYPASS"
+  ],
+  "exact_candidate": {
+    "runtime": {
+      "path": "canonical/runtime/instruction_authority_invariant_v1.py",
+      "git_blob_sha": "78f4926de6da3f724c1ccd33b4ae83506cca5a0f"
+    },
+    "tests": {
+      "path": "canonical/tests/test_instruction_authority_invariant_v1.py",
+      "git_blob_sha": "0e4f24038da5ab3ee3adb25b92c22fb4614251df"
+    },
+    "base_main_sha": "82b5a70666442857b0e60324f8012c5bae310c02"
+  },
+  "mechanically_enforced_properties": [
+    "POINT_IN_TIME_EVALUATOR_NEVER_RETURNS_DURABLE_EXECUTION_AUTHORITY",
+    "ONE_USE_GRANT_BOUND_TO_EXACT_PROPOSAL_DIGEST",
+    "ONE_USE_GRANT_BOUND_TO_REQUIREMENT_EPOCH",
+    "ONE_USE_GRANT_BOUND_TO_NORMALIZED_AUTHORITY_STATE_DIGEST",
+    "ONE_USE_GRANT_BOUND_TO_REQUIREMENT_CONTRACT_DIGEST",
+    "ONE_USE_GRANT_BOUND_TO_REQUIRED_SCOPE_SET",
+    "COMMIT_REVALIDATES_CURRENT_NORMALIZED_AUTHORITY_STATE",
+    "GRANT_IS_CONSUMED_BEFORE_CONSEQUENTIAL_EFFECT",
+    "FAILED_EFFECT_CANNOT_REPLAY_SAME_GRANT",
+    "REQUIREMENT_STATE_CHANGE_IS_SERIALIZED_AGAINST_CONSEQUENTIAL_EFFECT",
+    "STALE_REPLAY_ACTION_SCOPE_AND_STATE_MISMATCHES_FAIL_CLOSED"
+  ],
+  "repaired_residual": {
+    "temporal_handoff_linearization": "CLOSED_FOR_EFFECTS_AND_REQUIREMENT_CHANGES_ROUTED_THROUGH_THIS_GATE_IF_TESTS_AND_INDEPENDENT_VERIFICATION_PASS",
+    "point_in_time_deterministic_enforcement": "CLOSED_FOR_NORMALIZED_GATE_SURFACE_IF_TESTS_AND_INDEPENDENT_VERIFICATION_PASS",
+    "semantic_extraction_completeness": "OPEN",
+    "universal_route_or_bypass_coverage": "OPEN"
+  },
+  "adversarial_tests": [
+    "POINT_IN_TIME_PASS_IS_NOT_DURABLE_EXECUTION_AUTHORITY",
+    "ONE_USE_EFFECT_COMMIT",
+    "REPLAY_REJECTED",
+    "REQUIREMENT_CHANGE_INVALIDATES_STALE_GRANT",
+    "ACTION_DIGEST_MISMATCH_REJECTED",
+    "STATE_DIGEST_MISMATCH_REJECTED",
+    "EFFECT_FAILURE_CONSUMES_GRANT",
+    "CONCURRENT_REQUIREMENT_CHANGE_CANNOT_INTERLEAVE_WITH_EFFECT"
+  ],
+  "scheduler_consequence": [
+    "DELETE_TEMPORAL_HANDOFF_AS_A_FREE_FORM_DESIGN_RESIDUAL_AFTER_VERIFIED_IMPLEMENTATION",
+    "KEEP_SEMANTIC_EXTRACTION_COMPLETENESS_OPEN",
+    "KEEP_UNIVERSAL_ROUTE_COVERAGE_OPEN",
+    "DO_NOT_CLAIM_IF_PREDICATE_CLOSURE_FROM_THIS_REPAIR_ALONE"
+  ],
+  "hard_nonclaims": [
+    "NO_SEMANTIC_EXTRACTION_PROOF",
+    "NO_UNIVERSAL_ROUTE_COVERAGE_PROOF",
+    "NO_MATCHED_OPUS55_NONINFERIORITY_PROOF",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
