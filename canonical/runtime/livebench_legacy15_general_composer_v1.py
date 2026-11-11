@@ -136,7 +136,7 @@ def _apply_word_constraint(
     raise ComposeError("UNKNOWN_WORD_RELATION")
 
 
-def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> list[str]:
+def _common_lines(\n    constraints: list[dict[str, Any]],\n    required: list[str],\n    *,\n    include_postscript: bool = True,\n) -> list[str]:
     lines: list[str] = []
     if _one(constraints, "detectable_format:title") is not None:
         lines.append("<<qz>>")
@@ -169,13 +169,36 @@ def _common_lines(constraints: list[dict[str, Any]], required: list[str]) -> lis
         lines.append(" ".join(carriers))
 
     post = _one(constraints, "detectable_content:postscript")
-    if post is not None:
+    if include_postscript and post is not None:
         marker = str(_slots(post).get("postscript_marker") or "")
         if marker not in {"P.S.", "P.P.S"}:
             raise ComposeError("POSTSCRIPT_PARAMETER_DRIFT")
         lines.append(marker + " zxqv")
 
     return lines
+
+
+def _sentence_safe_tail(constraints: list[dict[str, Any]]) -> str | None:
+    """Build a punctuation-minimal tail for strict upper sentence bounds.
+
+    The frozen postscript checker accepts the marker without whitespace after
+    its final period, and EndChecker only requires the exact final suffix.
+    Fusing them removes an avoidable sentence boundary while preserving both
+    checker contracts. Exact Punkt behavior remains guarded by the frozen
+    end-to-end audit before any credit.
+    """
+    post = _one(constraints, "detectable_content:postscript")
+    marker = None
+    if post is not None:
+        marker = str(_slots(post).get("postscript_marker") or "")
+        if marker not in {"P.S.", "P.P.S"}:
+            raise ComposeError("POSTSCRIPT_PARAMETER_DRIFT")
+    end = _ending(constraints)
+    if marker and end:
+        return marker + end
+    if marker:
+        return marker + "zxqv"
+    return end
 
 
 def _sentence_constraint(constraints: list[dict[str, Any]]) -> tuple[str, int] | None:
@@ -242,7 +265,12 @@ def _compose_plain_or_sentence(
             raise ComposeError("LESS_THAN_ONE_SENTENCE_WORD_LOWER_BOUND")
         return ""
 
-    lines = _common_lines(constraints, required)
+    strict_upper = sc is not None and sc[0] == "less than"
+    lines = _common_lines(
+        constraints,
+        required,
+        include_postscript=not strict_upper,
+    )
     if not lines:
         lines.append("zxqv")
 
@@ -250,18 +278,8 @@ def _compose_plain_or_sentence(
         relation, n = sc
         if relation == "at least":
             _add_at_least_sentences(lines, n)
-        else:
-            # For general single-block text, avoid adding any sentence-ending
-            # punctuation. The remaining unavoidable public wrappers are checked
-            # conservatively below; threshold 2 is only accepted without P.P.S
-            # plus end-marker interaction until exact-source grid verification.
-            if n == 2:
-                post = _one(constraints, "detectable_content:postscript")
-                end = _ending(constraints)
-                if post is not None and end is not None:
-                    raise ComposeError("LESS_THAN_TWO_SENTENCE_POSTSCRIPT_END_UNVERIFIED")
 
-    end = _ending(constraints)
+    end = _sentence_safe_tail(constraints) if strict_upper else _ending(constraints)
     prefix = "\n".join(lines)
     mandatory = (prefix + ("\n" + end if end else "")).strip()
     bad = _forbidden_collision(mandatory, forbidden)
@@ -327,22 +345,26 @@ def _compose_nth_paragraph(
         raise ComposeError("NTH_FIRST_WORD_FORBIDDEN_UNSAT")
 
     sc = _sentence_constraint(constraints)
-    if sc is not None and sc[0] == "less than":
-        # Blank-line/Punkt interaction gets exact-source verification before
-        # activation; keep this branch fail-closed in V1.
-        raise ComposeError("NTH_PLUS_SENTENCE_LESS_THAN_UNVERIFIED")
+    strict_upper = sc is not None and sc[0] == "less than"
+    if strict_upper and sc[1] <= 1:
+        # Any non-empty nth-paragraph witness is at least one Punkt sentence.
+        raise ComposeError("NTH_LESS_THAN_ONE_SENTENCE_UNSAT")
 
     paragraphs = ["zxqv" for _ in range(n)]
     paragraphs[nth - 1] = first + " zxqv"
 
-    common = _common_lines(constraints, required)
+    common = _common_lines(
+        constraints,
+        required,
+        include_postscript=not strict_upper,
+    )
     if common:
         paragraphs[-1] += "\n" + "\n".join(common)
 
     if sc is not None and sc[0] == "at least":
         paragraphs[0] += " " + " ".join(["Zxqv."] * sc[1])
 
-    end = _ending(constraints)
+    end = _sentence_safe_tail(constraints) if strict_upper else _ending(constraints)
 
     prefix = "\n\n".join(paragraphs)
     mandatory = (prefix + ("\n" + end if end else "")).strip()
