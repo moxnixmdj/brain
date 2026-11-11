@@ -1,0 +1,12 @@
+{
+  "schema":"PROJECT_BRAIN_TARGET_HOMOGENEITY_VERIFY_V1",
+  "date":"2026-10-07",
+  "status":"PASS__ZERO_CREDIT",
+  "subject_sha":"f94f9ca84e0a50aeeb67cd4b8797c510ffd9760f",
+  "verified":{
+    "opposite_worlds_possible":true,
+    "one_verdict_cannot_match_opposite_truths":true,
+    "homogeneity_equals_same_terminal_truth":true
+  },
+  "terminal_credit_delta":0
+}
