@@ -1,0 +1,59 @@
+{
+  "schema": "PROJECT_BRAIN_R156_V1",
+  "date": "2026-11-09",
+  "round": "r156",
+  "first_i_proved_my_own_last_claim": {
+    "law_from_r155": "a predicate with a fallback must be measured on the branch that runs",
+    "method": "instrumented text_relation_verifier_v1.verdict with a counter, ran a real discover()",
+    "result": "the relation branch inside is_goal EXECUTED 3 times during the search and REFUSED bytes once",
+    "conclusion": "r155's oracle is live, not dead code. Proving the branch rather than the output is what distinguishes this from the r151 mistake."
+  },
+  "the_taxonomy_that_answers_does_this_solve_everything": {
+    "format_magic_round_trip": {"verifiable": "YES", "example": "compress notes.txt into out.gz -> ['gzip','-c','{input}']"},
+    "text_relation_input_defines_answer": {"verifiable": "YES", "example": "sort notes.txt into a.txt -> ['sort','{input}']"},
+    "question_with_measurable_answer": {"verifiable": "NO before this round, YES after", "example": "count the lines in notes.txt -> 7"},
+    "needs_a_reference_answer": {"verifiable": "NO", "example": "write a summary of notes.txt into s.md"}
+  },
+  "the_third_unreachable_door_of_this_session": {
+    "capability": "computer_env_v1.answer_query",
+    "measured_directly": {"count the lines": "7 in 0.01 s", "count the words": "6 in 0.91 s", "the different lines": "6 in 0.01 s"},
+    "values_verified_independently": {"wc -l notes.txt": "7", "sort -u | wc -l": "6"},
+    "and_discover_refused_them": "OPEN__A_QUESTION_IS_NOT_CLOSED_BY_A_FILE_APPEARING in 0.00 s, never calling it",
+    "the_refusal_message_says": "'this route cannot answer questions -- answer_query does'",
+    "who_called_answer_query_from_a_decision_path": "nobody. Tools and tests only.",
+    "pattern": "third instance after curriculum._try_explore (r147) and the guarded release of discover itself: a working capability behind a refusal that points at it."
+  },
+  "why_the_fix_is_NOT_a_branch_inside_discover": {
+    "reason": "discover()'s closed=True is consumed by composer_route_v1 as DISCOVERED_BY_ACTING_AND_EFFECT_VERIFIED. A question's answer is a VALUE, not an artifact. Returning closed=True for a number would make one status mean two things and let a verified number travel on the artifact path -- the exact false claim that made md5sum an accepted answer to 'the different lines of a.txt'.",
+    "therefore": "the handoff is a separate module with a separate result shape: `answered`, and `closed` is ALWAYS False by construction."
+  },
+  "measured_after": {
+    "question_handoff_v1.route": {
+      "count the lines in notes.txt": "answered=True value=7 closed=False ANSWERED__VALUE_MEASURED",
+      "count the words in notes.txt": "answered=True value=6 closed=False",
+      "the different lines of notes.txt": "answered=True value=6 closed=False",
+      "write a summary of notes.txt into s.md": "answered=False NOT_A_QUESTION",
+      "compress notes.txt into out.gz": "answered=False NOT_A_QUESTION",
+      "count the lines in a.txt (no file)": "answered=False OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL"
+    },
+    "through_curriculum_v1.study(channels=['knowledge'])": {
+      "count the lines in notes.txt": "pass=True value=7 PASS__QUESTION_ANSWERED_BY_MEASUREMENT",
+      "the different lines of notes.txt": "pass=True value=6",
+      "count the words in notes.txt": "pass=True value=6",
+      "compress notes.txt into out.gz": "pass=False OPEN__JIT_KNOWLEDGE_INCOMPLETE_DATA (unchanged)",
+      "refused_correctly_when_run_from_a_directory_without_the_file": "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL"
+    },
+    "every_value_checked_against_the_tool_that_owns_it": "wc -l = 7, sort -u | wc -l = 6 -- agree"
+  },
+  "a_conflict_i_found_and_did_not_paper_over": {
+    "test": "test_computer_unconfined_route_guard_v1::test_controller_does_not_run_unconfined_query_or_archive",
+    "what_it_asserts": "on goal 'count lines in notes.txt' the controller must be BLOCKED and cenv.answer_query must not be called",
+    "what_happens": "controller returns PASS__ANSWERED_UNDER_ADMITTED_CONFINEMENT, cenv.answer_query is NOT called, and the source file is unchanged",
+    "which_side_is_answering": "confined_query_bridge_v1 -- a different, admitted route that mutates nothing",
+    "is_it_mine": "NO. Measured identical with my changes stashed at HEAD.",
+    "why_i_did_not_fix_it": "the test expects the unconfined route to be blocked, and it IS blocked; a second admitted route answers the same goal. Deciding whether that is a violation is a boundary decision of the same kind recorded in R148, and I will not pick the convenient side of it. Named here so it is not lost."
+  },
+  "regression": {"files": "test_curriculum_v1 + test_computer_unconfined_route_guard_v1", "with_changes": "12 failed, 32 passed", "stashed": "12 failed, 32 passed", "verdict": "no regression"},
+  "tests_added": {"file": "canonical/tests/test_a_question_is_handed_off_not_answered_with_an_artifact_v1.py", "count": 6, "result": "6 passed", "pins": ["a countable question is answered with a value", "the value agrees with wc -l", "an answered question NEVER reports closed", "a missing file is refused not guessed", "an artifact goal is not a question", "discover() still refuses the same goal with the same status"]},
+  "sentience": "no."
+}

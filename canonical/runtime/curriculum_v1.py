@@ -184,6 +184,40 @@ def query_for(gap: str) -> str:
 
 def _try_knowledge(gap: str, min_sources: int, min_kinds: int = 2,
                    timeout: int = 12) -> dict[str, Any]:
+    # A QUESTION ABOUT A LOCAL FILE IS NOT A JOB FOR THE WEB.
+    #
+    # The rest of this channel asks the world which program can do the job, then runs
+    # it here. For "count the lines in notes.txt" that is the wrong instrument twice
+    # over: the answer is one arithmetic fact about a local file, and the program that
+    # measures it (wc) is already installed. Measured 2026-11-09 before this: the
+    # channel returned OPEN__KNOWLEDGE_NAMED_NO_PROGRAM after a network round trip,
+    # while computer_env_v1.answer_query answered the identical goal in 0.01 s with
+    # the value 7 -- verified against `wc -l` independently.
+    #
+    # The handoff reports `answered`, never `closed`: a number is not an artifact,
+    # and a curriculum `pass` here means "this question of this kind can be answered
+    # on this machine", which is exactly the capability worth owning.
+    try:
+        from canonical.runtime import question_handoff_v1 as qh
+        if qh.is_question(gap):
+            got = qh.route(gap)
+            if got.get("answered"):
+                return {"closed": True,
+                        "status": "PASS__QUESTION_ANSWERED_BY_MEASUREMENT",
+                        "value": got.get("value"),
+                        "kind": got.get("kind"),
+                        "input": got.get("input"),
+                        "detail": "measured %s from %s"
+                                  % (got.get("value"), got.get("input"))}
+            # not answerable here: report why, and let the channel fall through to
+            # the web route rather than swallowing the reason
+            if got.get("status") == "OPEN__NO_EXISTING_INPUT_FILE_IN_GOAL":
+                return {"closed": False, "status": got.get("status"),
+                        "detail": "a question about a file needs the file, and the "
+                                  "goal names none that exists on this machine"}
+    except Exception:  # noqa: BLE001 - a channel must never break a lesson
+        pass
+
     from canonical.runtime import jit_knowledge_v1 as jit
     # try the phrasing that searches well, not only the one that was written
     queries = [gap, query_for(gap)]
