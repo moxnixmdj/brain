@@ -1,0 +1,61 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_REPEAT_PROMPT_TOTALITY_CANDIDATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__UNIVERSAL_REPEAT_TEXT_IDENTITY_REDUCTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Delete arbitrary repeat_prompt article/prompt text identity as a load-bearing dimension of the remaining universal post-sacrifice construction proof.",
+  "basis": {
+    "repeat_checker_semantics": "VALUE_STRIP_LOWER_STARTSWITH_PROMPT_TO_REPEAT_STRIP_LOWER",
+    "active15_conflict_graph": "REPEAT_PROMPT_CAN_COEXIST_ONLY_WITH_KEYWORDS_EXISTENCE_AND_DETECTABLE_FORMAT_TITLE",
+    "composer_semantics": "PROMPT_TO_REPEAT_STRIP_IS_ALWAYS_FIRST__EXISTENCE_AND_TITLE_WITNESSES_APPEND_ONLY",
+    "universal_conclusion": "EVERY_NONEMPTY_VISIBLE_PROMPT_TO_REPEAT_STRING_IS_REPEAT_CHECKER_SATISFYING_WITH_ALL_FOUR_COMPATIBLE_REPEAT_STRUCTURAL_SETS",
+    "deleted_requirement": "ENUMERATE_OR_QUOTIENT_ARBITRARY_REPEAT_PROMPT_ARTICLE_TEXT_IDENTITIES"
+  },
+  "subjects": {
+    "runtime_path": "canonical/runtime/livebench_legacy15_repeat_prompt_totality_v1.py",
+    "test_path": "canonical/tests/test_livebench_legacy15_repeat_prompt_totality_v1.py",
+    "composer_path": "canonical/runtime/livebench_legacy15_contract_composer_v2.py",
+    "composer_git_blob_sha": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "slot_feasibility_path": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py",
+    "slot_feasibility_git_blob_sha": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+    "archetype_path": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py",
+    "archetype_git_blob_sha": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "visible_compiler_path": "canonical/runtime/livebench_legacy15_visible_prompt_compiler_v1.py",
+    "visible_compiler_git_blob_sha": "6e4ae278c4ba81cf0fb589d4e948384d1bd61ae2",
+    "exact_postvalidator_path": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+    "exact_postvalidator_git_blob_sha": "8c34701f5a63acf5aef88e8ea060be2d70571c23",
+    "pinned_livebench_instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2"
+  },
+  "interaction_with_current_livebench_proof": {
+    "minimum_cut": "ONLY_SENTENCE_ZERO_AND_FORBIDDEN_COLLISION_ARE_MANDATORY_LOSS_COORDINATES",
+    "numeric_quotient": "WORD_AND_SENTENCE_NUMERIC_DOMAINS_ALREADY_PARAMETRICALLY_COLLAPSED",
+    "visible_prompt_compiler": "PROMPT_TO_REPEAT_RECOVERED_FROM_VISIBLE_HISTORICAL_PROMPT_SEMANTICS",
+    "delta": "REMOVES_REPEAT_PROMPT_TEXT_IDENTITY_FROM_REMAINING_CONSTRUCTOR_COMPLETENESS_OBLIGATION"
+  },
+  "required_independent_verification": [
+    "BIND_EXACT_SUBJECT_BLOBS",
+    "BIND_EXACT_PINNED_REPEAT_CHECKER_SOURCE",
+    "RE_DERIVE_ALL_FOUR_REPEAT_COMPATIBLE_ACTIVE15_SETS",
+    "FALSIFY_WITH_ADVERSARIAL_UNICODE_WHITESPACE_MULTILINE_AND_REPEAT_MARKER_PROMPTS",
+    "REQUIRE_ALL_FOUR_COMPOSER_ROUTES_TO_PASS_EXACT_PINNED_CHECKERS",
+    "CONFIRM_ZERO_TERMINAL_ROWS_HIDDEN_KWARGS_FREQUENCIES_OR_TARGET_SCORES"
+  ],
+  "hard_nonclaims": [
+    "NO_FULL_LIVEBENCH_POINTWISE_COMPLETENESS_CLAIM_FROM_THIS_LEMMA_ALONE",
+    "NO_LIVEBENCH_ACCEPTANCE_PROMOTION",
+    "NO_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_TERMINAL_CASE_EXECUTION_OR_EXPOSURE"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
