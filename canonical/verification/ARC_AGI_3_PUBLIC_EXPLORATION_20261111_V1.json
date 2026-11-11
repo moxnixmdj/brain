@@ -11,6 +11,13 @@
     5.0,
     20.0
    ]
+  },
+  {
+   "sha256": "ff6e83c9b3f6e858621ceb1f5a4e9b2824c97c412a81f4433a2e07cc15f90762",
+   "date_utc": "2026-11-11T12:39:31Z",
+   "budget_multipliers": [
+    100.0
+   ]
   }
  ],
  "instrument": {
@@ -252,6 +259,54 @@
    "levels_completed_mean": 0.0,
    "levels_completed_min": 0,
    "levels_completed_max": 0,
+   "levels_total": 183
+  },
+  {
+   "budget_multiplier": 100.0,
+   "arm": "random",
+   "runs": 3,
+   "official_score_mean": 0.1465,
+   "official_score_min": 0.0224,
+   "official_score_max": 0.222,
+   "levels_completed_mean": 7.0,
+   "levels_completed_min": 6,
+   "levels_completed_max": 8,
+   "levels_total": 183
+  },
+  {
+   "budget_multiplier": 100.0,
+   "arm": "as_is",
+   "runs": 3,
+   "official_score_mean": 0.0015,
+   "official_score_min": 0.0,
+   "official_score_max": 0.0036,
+   "levels_completed_mean": 1.67,
+   "levels_completed_min": 1,
+   "levels_completed_max": 2,
+   "levels_total": 183
+  },
+  {
+   "budget_multiplier": 100.0,
+   "arm": "nearest",
+   "runs": 1,
+   "official_score_mean": 0.0017,
+   "official_score_min": 0.0017,
+   "official_score_max": 0.0017,
+   "levels_completed_mean": 2.0,
+   "levels_completed_min": 2,
+   "levels_completed_max": 2,
+   "levels_total": 183
+  },
+  {
+   "budget_multiplier": 100.0,
+   "arm": "nearest+prior",
+   "runs": 1,
+   "official_score_mean": 0.1156,
+   "official_score_min": 0.1156,
+   "official_score_max": 0.1156,
+   "levels_completed_mean": 5.0,
+   "levels_completed_min": 5,
+   "levels_completed_max": 5,
    "levels_total": 183
   }
  ],
@@ -641,6 +696,153 @@
    "levels_total": 183,
    "actions": 16804,
    "completed_levels_as_game_level_actions_over_human": [],
+   "levels_not_completed_by_reason": {
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED": 24,
+    "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY": 1
+   }
+  },
+  {
+   "arm": "random",
+   "budget_multiplier": 100.0,
+   "seed": 0,
+   "official_score": 0.1951,
+   "levels_completed": 8,
+   "levels_total": 183,
+   "actions": 94688,
+   "completed_levels_as_game_level_actions_over_human": [
+    "cd82:L0:473/55",
+    "ft09:L0:1290/43",
+    "ft09:L1:1108/12",
+    "lp85:L0:706/17",
+    "r11l:L0:12/22",
+    "sp80:L0:1262/39",
+    "vc33:L0:93/7",
+    "vc33:L1:344/18"
+   ],
+   "levels_not_completed_by_reason": {
+    "BUDGET_SPENT": 25
+   }
+  },
+  {
+   "arm": "random",
+   "budget_multiplier": 100.0,
+   "seed": 1,
+   "official_score": 0.222,
+   "levels_completed": 7,
+   "levels_total": 183,
+   "actions": 92898,
+   "completed_levels_as_game_level_actions_over_human": [
+    "cd82:L0:865/55",
+    "ft09:L0:1776/43",
+    "lp85:L0:1274/17",
+    "r11l:L0:7/22",
+    "r11l:L1:771/33",
+    "sp80:L0:580/39",
+    "vc33:L0:125/7"
+   ],
+   "levels_not_completed_by_reason": {
+    "BUDGET_SPENT": 25
+   }
+  },
+  {
+   "arm": "random",
+   "budget_multiplier": 100.0,
+   "seed": 2,
+   "official_score": 0.0224,
+   "levels_completed": 6,
+   "levels_total": 183,
+   "actions": 95215,
+   "completed_levels_as_game_level_actions_over_human": [
+    "cd82:L0:805/55",
+    "ft09:L0:1561/43",
+    "lf52:L0:1895/32",
+    "r11l:L0:66/22",
+    "sp80:L0:2087/39",
+    "vc33:L0:301/7"
+   ],
+   "levels_not_completed_by_reason": {
+    "BUDGET_SPENT": 25
+   }
+  },
+  {
+   "arm": "as_is",
+   "budget_multiplier": 100.0,
+   "seed": 0,
+   "official_score": 0.001,
+   "levels_completed": 2,
+   "levels_total": 183,
+   "actions": 90207,
+   "completed_levels_as_game_level_actions_over_human": [
+    "r11l:L0:306/22",
+    "vc33:L0:401/7"
+   ],
+   "levels_not_completed_by_reason": {
+    "BUDGET_SPENT": 25
+   }
+  },
+  {
+   "arm": "as_is",
+   "budget_multiplier": 100.0,
+   "seed": 1,
+   "official_score": 0.0036,
+   "levels_completed": 2,
+   "levels_total": 183,
+   "actions": 90096,
+   "completed_levels_as_game_level_actions_over_human": [
+    "r11l:L0:161/22",
+    "vc33:L0:435/7"
+   ],
+   "levels_not_completed_by_reason": {
+    "BUDGET_SPENT": 25
+   }
+  },
+  {
+   "arm": "as_is",
+   "budget_multiplier": 100.0,
+   "seed": 2,
+   "official_score": 0.0,
+   "levels_completed": 1,
+   "levels_total": 183,
+   "actions": 89812,
+   "completed_levels_as_game_level_actions_over_human": [
+    "r11l:L0:1412/22"
+   ],
+   "levels_not_completed_by_reason": {
+    "BUDGET_SPENT": 25
+   }
+  },
+  {
+   "arm": "nearest",
+   "budget_multiplier": 100.0,
+   "seed": 0,
+   "official_score": 0.0017,
+   "levels_completed": 2,
+   "levels_total": 183,
+   "actions": 97498,
+   "completed_levels_as_game_level_actions_over_human": [
+    "lp85:L0:139/17",
+    "m0r0:L0:2652/30"
+   ],
+   "levels_not_completed_by_reason": {
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED": 24,
+    "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY": 1
+   }
+  },
+  {
+   "arm": "nearest+prior",
+   "budget_multiplier": 100.0,
+   "seed": 0,
+   "official_score": 0.1156,
+   "levels_completed": 5,
+   "levels_total": 183,
+   "actions": 92924,
+   "completed_levels_as_game_level_actions_over_human": [
+    "cd82:L0:4396/55",
+    "lp85:L0:17/17",
+    "sp80:L0:269/39",
+    "sp80:L1:2949/58",
+    "tn36:L0:729/32"
+   ],
    "levels_not_completed_by_reason": {
     "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED": 24,
     "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY": 1
