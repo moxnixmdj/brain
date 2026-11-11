@@ -371,6 +371,31 @@ _RENAME_OLD_NEW = re.compile(
     + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b",
     re.IGNORECASE,
 )
+# "lines 13 to 14", "lines 13-14", "line 7" (one line is both ends of a region).
+_STATED_LINES = re.compile(
+    r"\blines?\s+(\d+)(?:\s*(?:-|\u2013|\bto\b|\bthrough\b|\buntil\b|\.\.)\s*(\d+))?\b", re.IGNORECASE)
+
+
+def _innermost_function_spanning(tree: ast.AST, first: int, last: int) -> str:
+    """Dotted name of the innermost function whose lines include ``first``..``last``, or ''."""
+    best = ""
+
+    def visit(node: ast.AST, prefix: str) -> None:
+        nonlocal best
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                name = prefix + child.name
+                if child.lineno <= first and last <= (child.end_lineno or child.lineno):
+                    if not isinstance(child, ast.ClassDef) and child.lineno < first:
+                        best = name
+                    visit(child, name + ".")
+            else:
+                visit(child, prefix)
+
+    visit(tree, "")
+    return best
+
+
 _NAMED_NEW = re.compile(
     r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+"
     r"([A-Za-z_][A-Za-z0-9_]*)\b", re.IGNORECASE,
@@ -1190,6 +1215,36 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef)) and _node.name == _host:
                     _fn = _node
                     break
+            # A STATED LINE RANGE OUTRANKS A GUESSED BLOCK.
+            #
+            # Measured 2026-11-11 through the front door on main 62fa7efa:
+            #   "Extract the function compute from the module <f> lines 13 to 14 into a new
+            #    function named scale."  -> start_line=13, end_line=13, PASS.
+            #   The same sentence with "lines 13 to 16" -> the same single line, PASS.
+            # Nothing had read the numbers.  No earlier rule bound them on this lane, so the
+            # self-contained-block search below returned the smallest block it could find, and
+            # that block happened to begin on the stated line.  A sentence that states its
+            # region is not asking for a guess: the numbers are bound as written, and a region
+            # that splits a statement is the adapter's refusal to make, not a reason to pick
+            # another one.  Without a named host the lines say which function they are in.
+            _stated_lines = _STATED_LINES.search(str(goal or ""))
+            if _stated_lines:
+                _first = int(_stated_lines.group(1))
+                _last = int(_stated_lines.group(2) or _stated_lines.group(1))
+                _host_of_lines = _host or _innermost_function_spanning(_src_tree, _first, _last)
+                out["start_line"] = {"value": _first, "rule": "SPAN_IS_THE_STATED_LINES",
+                                     "evidence": _stated_lines.group(0)}
+                out["end_line"] = {"value": _last, "rule": "SPAN_IS_THE_STATED_LINES",
+                                   "evidence": _stated_lines.group(0)}
+                if _host_of_lines and "qualname" in keys and "qualname" not in out:
+                    out["qualname"] = {"value": _host_of_lines,
+                                       "rule": "QUALNAME_FROM_ENCLOSING_FUNCTION" if not _host
+                                       else "QUALNAME_IS_THE_STATED_FUNCTION",
+                                       "evidence": sources[0]}
+                if "module" in keys and "module" not in out:
+                    out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                     "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
+                _fn = None      # nothing below may replace a stated region with a found one
             if _fn is not None:
                 _params = {a.arg for a in list(_fn.args.args) + list(_fn.args.kwonlyargs)
                            + list(getattr(_fn.args, "posonlyargs", []))}
