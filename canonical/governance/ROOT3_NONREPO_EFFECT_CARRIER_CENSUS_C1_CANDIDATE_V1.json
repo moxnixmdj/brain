@@ -1,0 +1,125 @@
+{
+  "schema": "PROJECT_BRAIN_ROOT3_NONREPO_EFFECT_CARRIER_CENSUS_C1_CANDIDATE_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__NONREPO_20_CAPABILITIES_COLLAPSED_TO_3_EFFECT_CARRIER_CLASSES__C1_STILL_OPEN__ZERO_CREDIT",
+  "objective": "Replace package-manager source labels with the actual coarse execution/effect-carrier classes used by every current non-repo bound capability, on exact content-addressed adapter bytes.",
+  "parent": {
+    "path": "canonical/governance/ROOT3_EFFECT_CHANNEL_REGISTRY_C1_CANDIDATE_V2.json",
+    "main_commit": "67d5fe62220f513fd84690bd3b6ae6309537b8b0"
+  },
+  "subject": {
+    "registry_path": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "registry_git_blob_sha": "7badee4878700f2cd4176beb8319d2a6a0bdf782"
+  },
+  "expected_nonrepo_source_types": [
+    "apt",
+    "npm",
+    "pypi",
+    "system_tool"
+  ],
+  "expected_nonrepo_capability_ids": [
+    "archive.verify.tar_gz.gnu",
+    "auto.apt.zint",
+    "auto.npm.dfinity-cbor",
+    "auto.npm.msgpack-msgpack",
+    "auto.pypi.bson-modern",
+    "auto.pypi.msgpack",
+    "document.convert.markdown_pdf.pandoc_weasyprint",
+    "docx.document.create_from_json_record",
+    "docx.document.create.python_docx",
+    "image.code.decode.zbarimg",
+    "image.qr.generate.qrencode",
+    "json.query.jq",
+    "math.numeric_expression.sympy",
+    "pdf.extract.ocr.tesseract",
+    "pdf.extract.text.pypdf",
+    "sqlite.table.verify_against_json_records",
+    "web.browser.rendered.capture.chromedriver",
+    "xlsx.table.create_from_json_records",
+    "xlsx.table.verify_against_json_records",
+    "yaml.to_json.yq"
+  ],
+  "adapter_carrier_map": {
+    "python_library_codec": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "pdf_pypdf": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "numeric_expression_sympy": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "docx_report_from_json": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "python_document_builder": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "xlsx_table_xlsxwriter": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "xlsx_verify_openpyxl": "IN_PROCESS_THIRD_PARTY_PYTHON",
+    "cli_command": "CHILD_PROCESS_TOOL",
+    "archive_verify_gnu_tar": "CHILD_PROCESS_TOOL",
+    "node_library_codec": "CHILD_PROCESS_TOOL",
+    "pandoc_weasyprint": "CHILD_PROCESS_TOOL",
+    "pdf_ocr_tesseract": "CHILD_PROCESS_TOOL",
+    "jq_query": "CHILD_PROCESS_TOOL",
+    "sqlite_verify_cli": "CHILD_PROCESS_TOOL",
+    "yq_yaml_json": "CHILD_PROCESS_TOOL",
+    "browser_chromedriver": "EXTERNAL_BROWSER_BRIDGE"
+  },
+  "adapter_blobs": {
+    "python_library_codec": "e9b9f5c4991ba1f11b9f377a275b3e17bad22886",
+    "pdf_pypdf": "b63f658d269078f37f8a67be31ce4993b6cf3fcc",
+    "numeric_expression_sympy": "443e3386f11156e55635556b6e8f8ad7d7733592",
+    "docx_report_from_json": "9667232f07cd1d285ecd598d85d8cdcf3f990701",
+    "python_document_builder": "e3840df1b3b6de0b53288be622aad8d6799aadb1",
+    "xlsx_table_xlsxwriter": "b8a6d0f0553ffec468676b24f87d56aeb01cea17",
+    "xlsx_verify_openpyxl": "93c84e524dd01eace5b059f00d7c0c020f36c57c",
+    "cli_command": "6782773801cd8f2258e4368a4debbe6e66c4a393",
+    "archive_verify_gnu_tar": "18c484e973e0becf6abf883463a7dc174d0bcd22",
+    "node_library_codec": "0babcf3adf7762b5e24d9c8be4f8ecb3a7b2e805",
+    "pandoc_weasyprint": "1d7e867bb4837b7589d8346c85fe97db4c1166be",
+    "pdf_ocr_tesseract": "4fb3853a28974b30e8c5c36f85815cdb71fc243c",
+    "jq_query": "f0b644274c1ffbff7ea5adb81e07e00435d2ac4c",
+    "sqlite_verify_cli": "339c6e5cd3e1804a43dd3632deb713b61f6344a4",
+    "yq_yaml_json": "8dce9a679d51153e0e779e4fcc5380a1ce106637",
+    "browser_chromedriver": "6edaad1d9d23700a55d988c891d4ef41b8191c4b"
+  },
+  "static_classification_contract": {
+    "IN_PROCESS_THIRD_PARTY_PYTHON": "ADAPTER_CONTAINS_NO_SUBPROCESS_TOKEN_ON_EXACT_BYTES",
+    "CHILD_PROCESS_TOOL": "ADAPTER_CONTAINS_SUBPROCESS_RUN_OR_POPEN_ON_EXACT_BYTES",
+    "EXTERNAL_BROWSER_BRIDGE": "ADAPTER_CONTAINS_SUBPROCESS_POPEN_PLUS_LOCALHOST_WEBDRIVER_HTTP_CLIENT_ON_EXACT_BYTES"
+  },
+  "expected_counts": {
+    "nonrepo_capabilities": 20,
+    "unique_nonrepo_adapters": 16,
+    "IN_PROCESS_THIRD_PARTY_PYTHON": 8,
+    "CHILD_PROCESS_TOOL": 11,
+    "EXTERNAL_BROWSER_BRIDGE": 1
+  },
+  "theorem_boundary": {
+    "proves": [
+      "CURRENT_NONREPO_CAPABILITY_UNIVERSE_IS_FINITE_AND_EXACTLY_20",
+      "CURRENT_NONREPO_SOURCE_LABELS_COLLAPSE_TO_EXACTLY_3_COARSE_EFFECT_CARRIER_CLASSES",
+      "EVERY_CLASSIFICATION_IS_BOUND_TO_EXACT_ADAPTER_BYTES"
+    ],
+    "does_not_prove": [
+      "IN_PROCESS_THIRD_PARTY_INTERNAL_EFFECT_TOTALITY",
+      "NATIVE_EXTENSION_INTERNAL_EFFECT_MEDIATION",
+      "CHILD_PROCESS_INTERNAL_EFFECT_MEDIATION",
+      "EXTERNAL_BROWSER_BRIDGE_EFFECT_MEDIATION",
+      "C1_SCOPE_COMPLETENESS",
+      "C2_MEDIATOR_BINDINGS",
+      "C3_GRAPH_DOMINANCE"
+    ]
+  },
+  "next_residuals": [
+    "SPLIT_IN_PROCESS_THIRD_PARTY_PYTHON_INTO_PURE_PYTHON_VS_NATIVE_EXTENSION_AND_PROVE_OR_FORBID_MATERIAL_EFFECTS",
+    "BOUND_OR_SANDBOX_CHILD_PROCESS_TOOL_EFFECTS_AT_THE_PROCESS_BOUNDARY",
+    "BOUND_CHROMEDRIVER_PLUS_BROWSER_PROCESS_EFFECTS_AT_THE_EXTERNAL_BROWSER_BRIDGE",
+    "THEN_RECOMPUTE_C1_SCOPE_COMPLETENESS"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
