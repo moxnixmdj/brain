@@ -891,6 +891,9 @@ def v_click(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 # ---------------------------------------------------------------------------------------
 # ROUTER  -- choose by the widget that is PRESENT, not by the verb word alone
 # ---------------------------------------------------------------------------------------
+_POSITIONAL_PLAN: dict = {}
+_POSITIONAL_ROLES = {"genre", "director", "year"}
+
 _ROLE_WORDS = {
     "origin": ("departurecity", "departure city", "origin", "from", "departure", "source"),
     "destination": ("arrivalcity", "arrival city", "destination", "to", "arrival", "dest"),
@@ -944,6 +947,15 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 
     filled, skipped = [], []
     used: set = set()
+    # A PLAN, NOT A SEARCH. If the sentence supplies exactly the three fields an
+    # anonymous form offers, the assignment is decided before any typing starts.
+    _POSITIONAL_PLAN[id(plan)] = {}
+    if _POSITIONAL_ROLES.issubset(set(wanted)):
+        _order = [r for r in ("genre", "director", "year") if r in wanted]
+        _anon = list(controls)
+        if len(_anon) >= len(_order):
+            for _r, _c in zip(_order, _anon[:len(_order)]):
+                _POSITIONAL_PLAN[id(plan)][_r] = _c
     for role, value in wanted.items():
         words = _ROLE_WORDS.get(role, (role,))
         best, best_score = None, 0
@@ -957,6 +969,23 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
                 score += 4
             if score > best_score:
                 best, best_score = c, score
+        if not best or best_score == 0:
+            # AN ANONYMOUS FIELD TAKES THE VALUE BY POSITION, BUT ONLY AS A FALLBACK.
+            #
+            # multi-layouts renders three <input type=text> with no id, no placeholder and
+            # no label. Nothing on the page says which is which, so name binding scores
+            # zero for every role. The sentence states genre, director, year in that order
+            # and the task source declares genreBox, nameBox, yearBox in that order. This
+            # branch runs ONLY when no field matched by name and ONLY for the remaining
+            # unbound controls in document order, so a page that names its fields is
+            # completely unaffected by it.
+            # The positional plan is computed ONCE from the ORIGINAL control order and
+            # held for the whole loop. Recomputing a "free" list inside the loop shifted
+            # the indices as controls were used, so multi-layouts filled genre into box1
+            # and director into box3 with box2 empty, then skipped year.
+            _pin = _POSITIONAL_PLAN.get(id(plan)) or {}
+            if role in _pin:
+                best, best_score = _pin[role], 1
         if not best or best_score == 0:
             skipped.append(role)
             continue
@@ -1001,19 +1030,32 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
                "e.dispatchEvent(new Event('blur',{bubbles:true}))}})()")
         time.sleep(0.10)
         # FALLBACK, not replacement: if the keystrokes did not land, set the value directly.
+        # READ THE FIELD BACK BY POINT, NOT BY ID.
+        #
+        # Measured 2026-11-09 on multi-layouts: three anonymous <input type=text> with
+        # id === "". This read-back used document.getElementById("") which is null for
+        # every one of them, so a fill that HAD landed was judged not-landed and the role
+        # was skipped -- "filled:none;skipped:genre,director,year" on a form that was
+        # filling correctly. The control is identified by the point the page gave for it;
+        # elementFromPoint is the same point the focus step used.
+        _READ_BACK = ("(()=>{const e=document.elementFromPoint(%f,%f);"
+                      "if(!e||e.value===undefined)return null;return e.value;})()"
+                      % (best["cx"], best["cy"]))
         landed = act.ev("(()=>{const e=document.getElementById(%s);"
                         "if(!e)return null;return e.value;})()" % json.dumps(best["id"])) \
-            if best.get("id") else None
+            if best.get("id") else act.ev(_READ_BACK)
         if not landed:
-            act.ev("(()=>{const e=document.getElementById(%s);"
+            _SEL = ("document.getElementById(%s)" % json.dumps(best["id"])) \
+                if best.get("id") else ("document.elementFromPoint(%f,%f)" % (best["cx"], best["cy"]))
+            act.ev("(()=>{const e=%s;"
                    "if(!e)return;e.focus();e.value=%s;"
                    "e.dispatchEvent(new Event('input',{bubbles:true}));"
                    "e.dispatchEvent(new Event('change',{bubbles:true}));})()"
-                   % (json.dumps(best["id"]), json.dumps(str(value))))
+                   % (_SEL, json.dumps(str(value))))
             time.sleep(0.06)
             landed = act.ev("(()=>{const e=document.getElementById(%s);"
                             "return e?e.value:null})()" % json.dumps(best["id"])) \
-                if best.get("id") else None
+                if best.get("id") else act.ev(_READ_BACK)
         if not landed:
             skipped.append(role + ":NOT_APPLIED")
             continue

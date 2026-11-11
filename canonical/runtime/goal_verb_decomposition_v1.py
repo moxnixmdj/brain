@@ -125,6 +125,18 @@ SLOT_PATTERNS = (
     ("date",        r"\bon\s+([\w]+\s+\d{1,2}|\d{1,2}\s+[\w]+|\d{1,2}/\d{1,2}/\d{4})"),
     ("amount",      r"\b(?:amount|total|price)\s+(?:of\s+)?([\d.,]+)"),
     ("email",       r"([\w.+-]+@[\w-]+\.[\w.]+)"),
+    # THE SENTENCE STATES ITS FIELDS IN THE SAME ORDER THE FORM OFFERS THEM.
+    #
+    # Measured 2026-11-09 on `multi-layouts` and `multi-orderings`: the goal is
+    # "Search for horror movies directed by Michael from year 1982." and the page is
+    # three anonymous <input type=text> with no id, no placeholder and no label in the
+    # rendered layout. Nothing on the page says which box is which, so role-by-name
+    # binding cannot work and reported UNSUPPORTED_VERB instead. The sentence supplies
+    # three references in order and the form offers three boxes in order; the task's own
+    # source declares them in exactly that order (genreBox, nameBox, yearBox).
+    ("genre",       r"\b(?:for|about)\s+(\w+)\s+(?:movies?|films?)\b"),
+    ("director",    r"\bdirected\s+by\s+([A-Z][\w'-]{1,20})"),
+    ("year",        r"\bfrom\s+year\s+(\d{4})"),
 )
 
 
