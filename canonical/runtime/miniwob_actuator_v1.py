@@ -283,8 +283,8 @@ def submit(act: Actuator, settle: float = 0.25, required: bool = True) -> bool:
     for sel in ("document.querySelector('#subbtn')",
                 "document.querySelector('#controls button')",
                 "document.querySelector('button[type=submit]')",
-                "(()=>[...document.querySelectorAll('button')]"
-                ".find(b=>/submit|done/i.test(b.innerText||'')))()"):
+                "(()=>{return [...document.querySelectorAll('button')]"
+                ".find(b=>/submit|done/i.test(b.innerText||''))})()"):
         if act.click_el(sel):
             time.sleep(settle)
             return True
@@ -294,23 +294,67 @@ def submit(act: Actuator, settle: float = 0.25, required: bool = True) -> bool:
 
 
 def candidates(act: Actuator) -> list[dict[str, Any]]:
+    """Everything on the page that can be pressed, EXCEPT the instruction.
+
+    THE INSTRUCTION CONTAINS THE WORD IT NAMES.
+    Measured 2026-11-09 in two different families: "Drag the circle left..." matched the
+    candidate 'Drag the circle left then press Submit.' at (80,25), and "Select
+    Jaquelyn>Nonna" matched 'Nonna' to the sentence at (80,25) as well -- the #query box.
+    Both drivers then acted on the sentence. Fixing it in the drag path only, as I did
+    first, left the menu path broken; the exclusion belongs in the reader every verb uses.
+    #query can never be the thing to manipulate, and neither can anything drawn on top of
+    it, so a candidate whose centre falls inside the #query box is dropped.
+    """
     return act.js(
-        "[...document.querySelectorAll('button,a,li,div,span,input,label')]"
+        "(()=>{const q=document.querySelector('#query');"
+        "const qb=q?q.getBoundingClientRect():null;"
+        "return [...document.querySelectorAll('button,a,li,div,span,input,label')]"
         ".filter(e=>{const r=e.getBoundingClientRect();return r.width>4&&r.height>4})"
+        # THE TEST IS CONTAINMENT, NOT THE CENTRE POINT.
+        #
+        # Measured 2026-11-09 on click-collapsible-2: the chosen candidate was the ENTIRE
+        # PAGE div (33600 px) because it contains the instruction text mixed with the
+        # section bodies, so a substring match on a short token matched the whole document.
+        # Testing whether a candidate's CENTRE lies inside #query passed, because the page
+        # div's centre is below the query box. What matters is that the candidate CONTAINS
+        # #query -- a wrapper of the instruction is not a control.
+        ".filter(e=>{if(!qb)return true;if(e.contains(q))return false;"
+        "const r=e.getBoundingClientRect();if(r.width*r.height>30000)return false;"
+        "const cx=r.x+r.width/2,cy=r.y+r.height/2;"
+        "return !(cx>=qb.x&&cx<=qb.x+qb.width&&cy>=qb.y&&cy<=qb.y+qb.height)})"
         ".map(e=>{const r=e.getBoundingClientRect();"
         "return {t:(e.innerText||'').trim(),cx:r.x+r.width/2,cy:r.y+r.height/2,"
-        "a:r.width*r.height,tag:e.tagName}}).slice(0,160)") or []
+        "a:r.width*r.height,tag:e.tagName}})})().slice(0,160)") or []
 
 
 def best_candidate(cands: Iterable[Mapping[str, Any]], text: str) -> Mapping[str, Any] | None:
     """Exact match first, then case-insensitive, then substring; smallest area wins."""
+    """Exact match first, then case-insensitive, then WHOLE-WORD substring, then any.
+
+    A SHORT TOKEN MATCHED A WHOLE PARAGRAPH. Measured 2026-11-09 on click-collapsible-2:
+    the goal names the link "non" and the third tier (`text in c["t"]`) matched the
+    enclosing paragraph, whose text happens to contain "non" -- a 10488 px block instead
+    of the 297 px link. Sorting by area does not help when only one candidate matches.
+    A whole-word match is tried first, and a substring match must not be more than four
+    times longer than the token, so a short word can no longer select a paragraph.
+    """
     cands = list(cands)
+    low = (text or "").lower().strip()
     for pred in (lambda c: c["t"] == text,
-                 lambda c: c["t"].lower() == text.lower(),
-                 lambda c: text.lower() in c["t"].lower()):
+                 lambda c: c["t"].lower() == low):
         hits = [c for c in cands if c["t"] and pred(c)]
         if hits:
             return sorted(hits, key=lambda c: c["a"])[0]
+    word = [c for c in cands
+            if c["t"] and re.search(r"(?:^|[^\w])" + re.escape(low) + r"(?:$|[^\w])",
+                                    c["t"].lower())]
+    if word:
+        return sorted(word, key=lambda c: c["a"])[0]
+    hits = [c for c in cands
+            if c["t"] and low and low in c["t"].lower()
+            and len(c["t"]) <= max(24, 4 * len(low))]
+    if hits:
+        return sorted(hits, key=lambda c: c["a"])[0]
     return None
 
 
@@ -461,8 +505,8 @@ def _table_lookup(act: Actuator, goal: str) -> str | None:
     The lookup is by the sentence's own words against the table's first column, and it
     returns nothing when no row matches, so a page without a table is unaffected.
     """
-    rows = act.ev("(()=>[...document.querySelectorAll('tr')]"
-                  ".map(r=>[...r.children].map(c=>c.innerText.trim())))()") or []
+    rows = act.ev("(()=>{return [...document.querySelectorAll('tr')]"
+                  ".map(r=>[...r.children].map(c=>c.innerText.trim()))})()") or []
     if not rows:
         return None
     g = (goal or "").lower()
@@ -504,8 +548,8 @@ def v_type(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
     # Each box is read together with the nearest label text, the table answers that label,
     # and the box receives the answer. A box whose label has no row is left alone.
     if re.search(r"each label|all (?:the )?label", (goal or ""), re.I):
-        _rows = act.ev("(()=>[...document.querySelectorAll('tr')]"
-                       ".map(r=>[...r.children].map(c=>c.innerText.trim())))()") or []
+        _rows = act.ev("(()=>{return [...document.querySelectorAll('tr')]"
+                       ".map(r=>[...r.children].map(c=>c.innerText.trim()))})()") or []
         _tbl = {}
         for _cells in _rows:
             if len(_cells) >= 2 and _cells[0]:
@@ -950,13 +994,37 @@ def _resolve_and_click(act: Actuator, goal: str) -> str:
 
 
 def v_menu(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
-    for p in (plan.get("operand") or {}).get("path") or []:
-        hit = best_candidate(candidates(act), p)
+    """SELECT a path through a nested menu.
+
+    A SUBMENU OPENS ON A REAL POINTER MOVE, NOT ON A SYNTHETIC EVENT.
+    Measured 2026-11-09 on `click-menu`: the page is `$('#menu').menu({...})`, jQuery UI
+    Menu, which opens a submenu on the jQuery `mouseenter` it synthesises from a genuine
+    mousemove. Dispatching MouseEvent('mouseover') from page script did nothing, the
+    submenu stayed collapsed, and the next path token was matched against whatever text
+    happened to be at that point -- usually the task cover. With three real
+    Input.dispatchMouseEvent moves onto each level, two- and three-level paths scored 1:
+        Mireielle>Muriel              1
+        Thia>Madelin>Vilma            1
+        Yolande>Rosalia>Stephie       1
+    The click is issued only on the final token; intermediate levels are hovered.
+    """
+    path = list((plan.get("operand") or {}).get("path") or [])
+    if not path:
+        return "menu-no-path"
+    for i, tok in enumerate(path):
+        hit = best_candidate(candidates(act), tok)
         if not hit:
-            return "menu-miss"
-        act.click(hit["cx"], hit["cy"])
-        time.sleep(0.28)
-    return "menu"
+            return "menu-miss:%s" % str(tok)[:12]
+        for _ in range(3):
+            act.call("Input.dispatchMouseEvent",
+                     {"type": "mouseMoved", "x": float(hit["cx"]),
+                      "y": float(hit["cy"]), "buttons": 0})
+            time.sleep(0.10)
+        time.sleep(0.30)
+        if i == len(path) - 1:
+            act.click(hit["cx"], hit["cy"])
+            time.sleep(0.30)
+    return "menu:%d" % len(path)
 
 
 def v_colour(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
@@ -1174,54 +1242,65 @@ def v_tabs(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 
 
 def v_expand(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
-    """EXPAND_AND_CLICK -- open every collapsible, then click the link the goal NAMES.
+    """EXPAND_AND_CLICK -- open the hidden sections, then click the link the goal NAMES.
 
-    click-collapsible-2 renders several collapsed sections and hides the target link inside
-    one of them. The earlier version clicked the first button on the page and then looked for
-    the target: on that page the first button is a section header, so the target stayed
-    hidden and the task scored a flat 0 with a correct-looking action string. Opening ALL
-    headers first, then resolving the quoted name, is what the instruction actually says.
-
-    social-media has the same shape with rows: the goal names a user, so the click must be
-    resolved to that row rather than to the first button in the list.
+    Measured 2026-11-09 on `click-collapsible-2`: the page is a jQuery UI Accordion,
+    h3.ui-accordion-header with aria-expanded. Two things had to be right and both were
+    wrong before this:
+      * the headers must be CLICKED ONE AT A TIME -- the accordion closes the previously
+        open panel, so the target is only reachable while its own section is open;
+      * the target is a <span> inside the panel and the score comes from clicking THE
+        ELEMENT. A CDP mouse event at its centre scored 0 on the same page where
+        element.click() scored 1. A point is not an element -- the same defect that made
+        phone-book fail.
     """
     tok = (plan.get("operand") or {}).get("quoted")
     if tok is None:
         m = re.search(r'"([^"]+)"', goal) or re.search(r"\u201c([^\u201d]+)\u201d", goal)
         tok = m.group(1).strip() if m else None
+    if not tok:
+        return "expand-no-token"
 
-    # 1. open every collapsible header before looking for the target
-    opened = 0
-    for _ in range(8):
-        headers = act.js(
-            "[...document.querySelectorAll('button,a,div,span,h1,h2,h3,h4,li')]"
-            ".filter(e=>{const r=e.getBoundingClientRect();"
-            "return r.width>4&&r.height>4&&r.y>40&&r.y<200&&e.children.length<3})"
-            ".map(e=>({t:(e.innerText||'').trim().slice(0,40),"
-            "cx:e.getBoundingClientRect().x+e.getBoundingClientRect().width/2,"
-            "cy:e.getBoundingClientRect().y+e.getBoundingClientRect().height/2}))"
-            ".filter(e=>e.t&&e.t.length<40).slice(0,8)") or []
-        if not headers:
-            break
-        if any(tok and tok.lower() in (h["t"] or "").lower() for h in headers):
-            break
-        h = headers[0]
+    heads = act.ev(
+        # the arrow body was a BARE expression, so `(()=>[...].map(...)()` invoked the
+        # map's result as a function and returned undefined. It has to return.
+        "(()=>{return [...document.querySelectorAll('h3.ui-accordion-header,h4.ui-accordion-header,"
+        ".ui-accordion-header,[role=tab]')].map(e=>{const r=e.getBoundingClientRect();"
+        "return {cx:r.x+r.width/2,cy:r.y+r.height/2,exp:e.getAttribute('aria-expanded')}})})()"
+    ) or []
+    if not heads:
+        heads = act.ev(
+            "(()=>{return [...document.querySelectorAll('#area button,#area div,#area h1,"
+            "#area h2,#area h3')].filter(e=>{const r=e.getBoundingClientRect();"
+            "return r.width>20&&r.height>6&&(e.innerText||'').trim()}).map(e=>{"
+            "const r=e.getBoundingClientRect();"
+            "return {cx:r.x+r.width/2,cy:r.y+r.height/2}})})()"
+        ) or []
+
+    for h in heads:
         act.click(h["cx"], h["cy"])
-        opened += 1
-        time.sleep(0.18)
-        if episode_over(act):
-            return "expand-clicked-header@%d" % opened
-
-    # 2. now the target should be reachable by name
-    if tok:
-        hit = best_candidate(candidates(act), tok)
-        if hit:
-            act.click(hit["cx"], hit["cy"])
-            time.sleep(0.20)
+        time.sleep(0.30)
+        # the target only exists while its section is open
+        el = act.ev(
+            # compare with punctuation REMOVED ON BOTH SIDES. The goal quotes
+            # "scelerisque" and the span reads "scelerisque." -- an exact test failed on
+            # the full stop for every token in this task.
+            "(()=>{const norm=x=>(x||'').trim().toLowerCase().replace(/[.,;:!?]+$/,'');"
+            "const want=norm(%s);"
+            "for(const e of document.querySelectorAll('#area a,#area span,#area div')){"
+            "if(norm(e.innerText)===want){"
+            "const r=e.getBoundingClientRect();"
+            "if(r.width>0&&r.height>0){e.setAttribute('data-agent-target','1');"
+            "return 'ok'}}}return ''})()" % json.dumps(tok))
+        if el:
+            # THE ELEMENT, NOT ITS CENTRE: the accordion re-renders on animation frames
+            # and a coordinate resolved a moment earlier can land on the panel instead.
+            act.ev("(()=>{const e=document.querySelector('[data-agent-target=\"1\"]');"
+                   "if(e)e.click()})()")
+            time.sleep(0.45)
             if episode_over(act):
-                return "expanded+clicked:%s" % tok
-    submit(act, required=False)
-    return "expand-miss:%s" % tok
+                return "expand-click:%s" % str(tok)[:12]
+    return "expand-miss:%s" % str(tok)[:12]
 
 
 def v_click(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
@@ -1456,9 +1535,9 @@ def v_fill_form(act: Actuator, plan: Mapping[str, Any], goal: str) -> str:
 
     # submit, if the page has anything that looks like one
     for sel in ("document.querySelector('input[type=submit]')",
-                "(()=>[...document.querySelectorAll('button,input[type=button],a')]"
+                "(()=>{return [...document.querySelectorAll('button,input[type=button],a')]"
                 ".find(b=>/find flights|search|submit|book|go|continue/i.test("
-                "(b.innerText||b.value||''))))()"):
+                "(b.innerText||b.value||'')))})()"):
         if act.click_el(sel):
             time.sleep(0.35)
             break
