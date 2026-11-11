@@ -1,0 +1,46 @@
+{
+  "schema":"PROJECT_BRAIN_V16_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_VERIFY_V6",
+  "date":"2026-10-07",
+  "status":"INDEPENDENT_WOLFRAM_PASS__THIRTEEN_CERTIFICATE_REGIONS__CURRENT_V16_BOUND__NONEXHAUSTION_PRESERVED__ZERO_CREDIT",
+  "subject":{
+    "path":"canonical/governance/V16_DB_EXISTING_EVIDENCE_SATURATION_MANIFEST_20261007_V5.json",
+    "git_blob_sha":"6637b23cd90f3df20ec87f817ef38d1eb233ea79"
+  },
+  "authority":{
+    "path":"canonical/governance/CURRENT_TERMINAL_AUTHORITY_V16.json",
+    "git_blob_sha":"c1bc4543860be08f9014f69a212ba2222d8dba7c"
+  },
+  "independent_provider":{
+    "provider":"WOLFRAM_LANGUAGE",
+    "result":{
+      "Cardinality13":true,
+      "BasePreserved":true,
+      "EscapeMonotonicityTautology":true,
+      "NonExhaustionCountermodel":true,
+      "PairwiseDistinctAdditions":true,
+      "AdditionsOutsideBase":true
+    },
+    "formal_checks":{
+      "cardinality":"Length[Union[Range[10],{11,12,13}]]==13",
+      "base_preservation":"SubsetQ[Union[Range[10],{11,12,13}],Range[10]]",
+      "escape_monotonicity":"TautologyQ[Implies[s && !(d || p || q || r), s && !d],{s,d,p,q,r}]",
+      "nonexhaustion_countermodel":"B={1..10}, additions={11,12,13}, S={1..14}; union has 13 members and is a strict subset of S"
+    }
+  },
+  "verified_consequence":[
+    "THE_TEN_REGION_BASE_PLUS_THREE_DISTINCT_CERTIFIED_ADDITIONS_HAS_CERTIFICATE_CARDINALITY_THIRTEEN.",
+    "ADDING_THE_THREE_SOUND_REGIONS_CANNOT_ENLARGE_THE_RESIDUAL_ESCAPE_SET.",
+    "THE_THIRTEEN_CERTIFICATE_COUNT_DOES_NOT_IMPLY_SEMANTIC_DISJOINTNESS_OR EXHAUSTION_OF_THE_CLOSED_TARGET_TRACE_SCOPE.",
+    "THE_CURRENT_V16_AUTHORITY_BINDING_IS_c1bc4543860be08f9014f69a212ba2222d8dba7c."
+  ],
+  "supersedes_for_current_ledger":{
+    "path":"canonical/verification/V16_DB_EXISTING_EVIDENCE_SATURATION_WOLFRAM_CONNECTOR_VERIFY_20261007_V5.json",
+    "reason":"THE_PRIOR_RECEIPT_BINDS_A_SUPERSEDED_12_REGION_MANIFEST_AND_OLD_V16_AUTHORITY_BLOB."
+  },
+  "hard_nonclaims":[
+    "NO_CLAIM_THE_THIRTEEN_CERTIFICATE_REGIONS_ARE_SEMANTICALLY_DISJOINT.",
+    "NO_CLAIM_THIRTEEN_REGIONS_EXHAUST_D_B_OR_THE_TARGET_TRACE_SCOPE.",
+    "NO_ABC_D_FINALITY_OR_TERMINAL_CREDIT."
+  ],
+  "accounting":{"incremental_spend_usd":0,"fresh_reality_units_consumed":0,"terminal_credit_delta":0}
+}
