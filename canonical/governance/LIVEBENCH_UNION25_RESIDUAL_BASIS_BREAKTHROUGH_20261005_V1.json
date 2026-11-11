@@ -1,0 +1,80 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_UNION25_RESIDUAL_BASIS_BREAKTHROUGH_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_BREAKTHROUGH__UNION25_EXTRA10_REDUCED_TO_SMALL_EXPLICIT_RESIDUAL__ZERO_ACCEPTANCE_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "public_scope": {
+    "active15": 15,
+    "union25": 25,
+    "extra10": [
+      "keywords:frequency",
+      "keywords:letter_frequency",
+      "language:response_language",
+      "detectable_content:number_placeholders",
+      "detectable_format:constrained_response",
+      "detectable_format:number_highlighted_sections",
+      "change_case:capital_word_frequency",
+      "change_case:english_capital",
+      "change_case:english_lowercase",
+      "punctuation:no_comma"
+    ]
+  },
+  "source_bindings": {
+    "scope_runtime_blob": "8af85028ca49a2abd4561a915927b8f67fa9a069",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "langdetect_version_to_bind_independently": "1.0.9"
+  },
+  "proved_from_pinned_checker_semantics": {
+    "placeholders": "THE_EXACT_REGEX_COUNTS_EMPTY_SQUARE_BRACKETS__SO_N_COPIES_OF_[]_SATISFY_1_TO_4_WITH_ZERO_WORD_ZERO_LETTER_ZERO_SENTENCE_LOAD",
+    "highlights": "THE_EXACT_REGEX_COUNTS_*+*_AS_NONEMPTY_HIGHLIGHT__INLINE_PLACEMENT_ADDS_ZERO_WORD_ZERO_LETTER_ZERO_SENTENCE_LOAD_AND_NEED_NOT_CREATE_A_BULLET",
+    "constrained_response": "REGISTRY_CONFLICTS_THIS_FAMILY_WITH_EVERY_OTHER_FAMILY__SO_IT_IS_AN_ISOLATED_DIRECT_WITNESS_BRANCH",
+    "case_section_collision": {
+      "english_lowercase": "IMPOSSIBLE_WITH_EITHER_CASE_SENSITIVE_PUBLIC_SECTION_SPLITTER_Because_BOTH_REQUIRE_AN_UPPERCASE_S",
+      "english_capital": "IMPOSSIBLE_WITH_MIXED_CASE_Section__COMPATIBLE_WITH_UPPERCASE_SECTION_AT_THE_CASE_LEVEL"
+    },
+    "repeat_no_comma_collision": "REPEAT_PROMPT_PLUS_NO_COMMA_HAS_A_MANDATORY_LOSS_IFF_THE_FORCED_VISIBLE_REPEAT_PREFIX_CONTAINS_A_COMMA"
+  },
+  "detector_separation_breakthrough": {
+    "fact": "LANGDETECT_1_0_9_REMOVES_MATCHING_EMAIL_STRINGS_BEFORE_NGRAM_EXTRACTION_WHILE_LIVEBENCH_STRUCTURAL_AND_FREQUENCY_CHECKERS_SCORE_THE_ORIGINAL_RESPONSE",
+    "nth_first_word_carrier": "TARGET.0@00",
+    "nth_effect": "ParagraphFirstWordCheck_STOPS_AT_THE_DOT_AND_SEES_TARGET",
+    "postscript_carriers": ["P.S.@00", "P.P.S@00"],
+    "postscript_effect": "THE_FROZEN_POSTSCRIPT_REGEXES_ACCEPT_THESE_SUFFIXES",
+    "letter_at_least_carrier": "LLLL@00",
+    "keyword_at_least_carrier": "ONE_KEYWORD_OCCURRENCE_PER_EMAIL_TOKEN",
+    "consequence_if_exact_package_binding_passes": "MANDATORY_NTH_POSTSCRIPT_AND_AT_LEAST_FREQUENCY_ALPHA_CAN_BE_MADE_INVISIBLE_TO_LANGUAGE_DETECTION_WITHOUT_BEING_INVISIBLE_TO_THEIR_OWN_CHECKERS"
+  },
+  "new_residual_basis": [
+    "EXACT_LANGDETECT_1_0_9_MAIL_CLEANING_BINDING",
+    "30_LANGUAGE_DETECTOR_CARRIER_BANK",
+    "LESS_THAN_LETTER_FREQUENCY_VERSUS_FORCED_VISIBLE_LETTER_FLOOR_AND_CARRIER_LETTER_COUNT",
+    "LESS_THAN_KEYWORD_FREQUENCY_VERSUS_FORCED_RAW_KEYWORD_OCCURRENCES_AND_ENGLISH_CASE_CARRIER",
+    "CAPITAL_WORD_FREQUENCY_VERSUS_EXACT_PINNED_NLTK_WORD_TOKENIZATION",
+    "ENGLISH_CASE_VERSUS_CASE_SENSITIVE_SECTION_SPLITTER",
+    "REPEAT_PREFIX_COMMA_VERSUS_NO_COMMA",
+    "COMPOSITION_WITH_THE_EXISTING_ACTIVE15_MINIMUM_CUT"
+  ],
+  "critical_path_change": {
+    "stop": "DO_NOT_ENUMERATE_THE_RAW_EXTRA10_SLOT_CARTESIAN_PRODUCT",
+    "start": "VERIFY_THE_SMALL_RESIDUAL_BASIS_AND_BUILD_THE_FINITE_LANGUAGE_CARRIER_BANK",
+    "why": "MOST_NEW_FAMILIES_ARE_DIRECT_OR_SEPARABLE__THE_REMAINING_INTERACTIONS_ARE_EXPLICIT_SMALL_COLLISION_COORDINATES"
+  },
+  "hard_nonclaims": [
+    "LANGDETECT_SOURCE_BYTES_ARE_NOT_YET_CONTENT_BOUND_IN_THE_BRAIN",
+    "THE_30_LANGUAGE_CARRIER_BANK_IS_NOT_YET_VERIFIED",
+    "UNION25_POINTWISE_OPTIMALITY_IS_NOT_YET_PROVED",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT"
+  ],
+  "accounting": {
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_responses_read": 0,
+    "terminal_frequencies_read": 0,
+    "target_scores_read": 0,
+    "incremental_spend_usd": 0,
+    "acceptance_credit_delta": 0
+  }
+}
