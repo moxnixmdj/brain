@@ -3,6 +3,8 @@ import hashlib, json, math, os, pathlib, shutil, socket, stat, subprocess, tempf
 from collections.abc import Mapping, Sequence
 from typing import Any
 
+from canonical.runtime import worker_syscall_allowlist_v1 as _syscalls
+
 SCHEMA='PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1'
 _ALLOWED_ENV={'LANG','LC_ALL','TZ','PYTHONHASHSEED','PYTHONDONTWRITEBYTECODE','PYTHONPATH'}
 
@@ -151,9 +153,42 @@ IP_BIN="$(command -v ip)"; PYTHON_BIN="$(command -v python3)"
 ulimit -t "$CPU_S"; ulimit -v "$MEM_KB"; ulimit -f "$FILE_KB"; ulimit -n "$NOFILE"; ulimit -u "$PIDS"
 # Enter the same root with the syscall; minimal hosts need no chroot utility.
 # Reset cwd before exec so it cannot retain a directory outside the new root.
+# The same step installs the seccomp syscall allowlist, so nothing that runs in
+# the new root -- env, setpriv, the workload, its children -- runs without it.
 # The trusted setup still execs setpriv before any workload code is executed.
-exec "$PYTHON_BIN" -I -c 'import os,sys; os.chroot(sys.argv[1]); os.chdir("/"); os.execv(sys.argv[2],sys.argv[2:])' "$ROOT" /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
+exec "$PYTHON_BIN" -I -c '@@ENTER_ROOT_BEHIND_SYSCALL_FILTER@@' "$ROOT" '@@SYSCALL_FILTER_HEX@@' /usr/bin/env -i PATH=/usr/bin:/bin HOME=/tmp PROJECT_BRAIN_BROKER_FD="$BROKER" "$@"
 '''
+
+# Runs as the last trusted step, in the host interpreter that was loaded before the root changed.
+# argv: new root, the filter as hex (`worker_syscall_allowlist_v1.filter_hex`), then the command.
+# prctl 38 = PR_SET_NO_NEW_PRIVS (the kernel requires it before an unprivileged filter),
+# prctl 22 = PR_SET_SECCOMP with 2 = SECCOMP_MODE_FILTER. The filter survives every later exec and
+# is inherited by every child; it can be narrowed afterwards, never removed.
+# FAIL CLOSED: no bytes, malformed bytes or a kernel that refuses them -> exit 126, nothing is run.
+_ENTER_ROOT_BEHIND_SYSCALL_FILTER = r'''import ctypes,os,sys
+raw=bytes.fromhex(sys.argv[2])
+libc=ctypes.CDLL(None,use_errno=True)
+libc.prctl.argtypes=[ctypes.c_int]+[ctypes.c_ulong]*4
+os.chroot(sys.argv[1]); os.chdir("/")
+buf=ctypes.create_string_buffer(raw,len(raw))
+prog=type("sock_fprog",(ctypes.Structure,),{"_fields_":[("len",ctypes.c_ushort),("filter",ctypes.c_void_p)]})(len(raw)//8,ctypes.addressof(buf))
+installed=len(raw)>=8 and len(raw)%8==0 and libc.prctl(38,1,0,0,0)==0 and libc.prctl(22,2,ctypes.addressof(prog),0,0)==0
+if not installed: os._exit(126)
+os.execv(sys.argv[3],sys.argv[3:])'''
+
+
+def syscall_filter_hex()->str:
+    """The allowlist for this machine, or '' where none exists (the worker then refuses to start)."""
+    try: return _syscalls.filter_hex()
+    except _syscalls.SyscallFilterUnavailable: return ''
+
+def syscall_filter_sha256()->str|None:
+    """What a run was started behind; None means no worker can start on this machine."""
+    raw=syscall_filter_hex()
+    return hashlib.sha256(bytes.fromhex(raw)).hexdigest() if raw else None
+
+assert "'" not in _ENTER_ROOT_BEHIND_SYSCALL_FILTER   # it travels inside single quotes
+_SETUP=_SETUP.replace('@@ENTER_ROOT_BEHIND_SYSCALL_FILTER@@',_ENTER_ROOT_BEHIND_SYSCALL_FILTER).replace('@@SYSCALL_FILTER_HEX@@',syscall_filter_hex())
 
 
 
@@ -174,6 +209,7 @@ def resolve_system_binary(name):
 
 def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     p=canonical_policy(policy); lim=p['limits']
+    if not syscall_filter_hex(): raise NamespaceConfinementError('SYSCALL_FILTER_UNAVAILABLE_FOR_ARCH:'+_syscalls.machine())
     required_names=['unshare','mount','python3','setpriv','ip','bash','env']
     resolved={name:resolve_system_binary(name) for name in required_names}
     missing=[name for name,path in resolved.items() if not path]
@@ -225,4 +261,4 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     raw=b''.join(broker); status='CHILD_EXITED'
     if timed_out: status='WALLCLOCK_LIMIT_EXCEEDED'
     elif overflow[0]: status='BROKER_OUTPUT_LIMIT_EXCEEDED'
-    return {'schema':SCHEMA,'status':status,'policy_sha256':policy_sha256(p),'returncode':rc,'wallclock_ms':round((time.monotonic()-started)*1000,3),'broker_bytes':len(raw),'broker_sha256':hashlib.sha256(raw).hexdigest(),'broker_payload':raw,'material_effects_committed':0,'execution_authority':False,'promotion_authority':False,'fresh_reality_authority':False}
+    return {'schema':SCHEMA,'status':status,'policy_sha256':policy_sha256(p),'returncode':rc,'wallclock_ms':round((time.monotonic()-started)*1000,3),'broker_bytes':len(raw),'broker_sha256':hashlib.sha256(raw).hexdigest(),'broker_payload':raw,'syscall_filter_sha256':syscall_filter_sha256(),'material_effects_committed':0,'execution_authority':False,'promotion_authority':False,'fresh_reality_authority':False}
