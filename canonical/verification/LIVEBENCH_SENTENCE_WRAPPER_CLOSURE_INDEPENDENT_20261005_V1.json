@@ -1,0 +1,84 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_SENTENCE_WRAPPER_CLOSURE_INDEPENDENT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "PASS__INDEPENDENT_2880_SENTENCE_WRAPPER_POINTWISE_CLOSURE",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "brain_subject": {
+    "pull_request": 1969,
+    "branch": "breakthrough/livebench-sentence-wrapper-closure-20261005-sol",
+    "sentence_wrapper_falsifier_blob": "a4d83e0963df023273218382fe77cf7a5f9f7822",
+    "archetypes_blob": "0dbef76a6189a3cdc21ce3dae97ef6921e333b34",
+    "slot_feasibility_blob": "7477f5ea5bdeac3595ee2784a38d078fe2f385b0",
+    "composer_v2_blob": "d73ec366b32252996258eae6d10d67d4d6a5e042",
+    "pointwise_planner_blob": "71e637c70edf1c582e28ea38b3b798965c803a06"
+  },
+  "independent_verifier": {
+    "repository": "moxnixmdj/verification-capsule-runner",
+    "pull_request": 2142,
+    "merged_commit": "e32cac1674c6b23829fe83c94e425d2d6f08345d",
+    "workflow_name": "Verify LiveBench composer V2",
+    "workflow_run_id": 37243999761,
+    "job_id": 111558155102,
+    "job_conclusion": "success",
+    "runner_os": "macOS 14",
+    "python": "3.12.10",
+    "nltk_version": "3.10.3",
+    "artifact_id": 11318116835,
+    "artifact_name": "livebench-composer-v2-verification",
+    "artifact_zip_sha256": "842e25995dbb6150e2c72764ce56c8633e1db019c6d4229c1f40ac67a4632b5a"
+  },
+  "pinned_livebench": {
+    "commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "instructions_blob": "4997bab885a676d92545fd91a9a20b48d234a2b2",
+    "registry_blob": "903ed738398648c7cfac61d5ffa478c22f1f0891",
+    "instructions_util_blob": "1f0dc0eaa05bd0f72f82f8183b90276ea4d2a87b",
+    "evaluation_main_blob": "4a341984936c4d609644a3b77f8c030ac5aa7269"
+  },
+  "coverage": {
+    "total_cases": 2880,
+    "wrapper_cases": 720,
+    "word_pressure_cases": 1440,
+    "structure_pressure_cases": 720,
+    "composer_full_exact_pass": 2808,
+    "proved_sentence_zero_unsat": 72,
+    "pointwise_exact_max_match": 2880,
+    "failure_count": 0
+  },
+  "closed_seam": [
+    "ALL_PUBLIC_SENTENCE_THRESHOLDS_1_TO_20",
+    "BOTH_SENTENCE_RELATIONS_AT_LEAST_AND_LESS_THAN",
+    "END_ABSENT_OR_EITHER_FROZEN_END_PHRASE",
+    "POSTSCRIPT_ABSENT_OR_P_S_OR_P_P_S",
+    "QUOTE_ABSENT_OR_PRESENT",
+    "WORD_PRESSURE_AT_LEAST_500_AND_LESS_THAN_100",
+    "MAX_BULLET_AND_SECTION_PRESSURE_WITH_BOTH_SECTION_SPLITTERS"
+  ],
+  "meaning": [
+    "THE_PREVIOUSLY_UNJOINED_SENTENCE_UPPER_BOUND_VS_END_AND_POSTSCRIPT_PUNCTUATION_SEAM_IS_CLOSED_ON_THE_EXACT_PINNED_CHECKERS",
+    "EVERY_SATISFIABLE_CASE_IN_THIS_CROSS_PRODUCT_PASSES_ALL_ACTIVE_CHECKERS",
+    "EVERY_STRICT_SENTENCE_LESS_THAN_ONE_CASE_HAS_EXACT_POINTWISE_MAXIMUM_EQUAL_TO_TOTAL_CHECKERS_MINUS_THE_INTRINSICALLY_IMPOSSIBLE_SENTENCE_CHECKER",
+    "THE_POINTWISE_PLANNER_MATCHES_ITS_CLAIMED_EXACT_MAXIMUM_ON_ALL_2880_CASES"
+  ],
+  "hard_nonclaims": [
+    "THIS_RECEIPT_DOES_NOT_BY_ITSELF_PROVE_THE_FULL_PUBLIC_GENERATOR_SLOT_CARTESIAN_QUOTIENT",
+    "THIS_RECEIPT_DOES_NOT_BY_ITSELF_GRANT_LIVEBENCH_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "THE_BRAIN_REPOSITORY_PR_WORKFLOW_FAILED_BEFORE_EXECUTING_STEPS_AND_IS_NOT_USED_AS_SEMANTIC_EVIDENCE"
+  ],
+  "next_load_bearing_proof": {
+    "obligation": "PROVE_A_COMPLETE_PARAMETER_QUOTIENT_FOR_THE_REMAINING_NUMERIC_AND_STRUCTURAL_DIMENSIONS_AND_BIND_IT_TO_THE_ALREADY_VERIFIED_928_ID_SETS_192_LEXICAL_SIGNATURES_AND_POINTWISE_OPTIMALITY",
+    "highest_leverage_lemma": "PROVE_THE_MAXIMUM_MANDATORY_WORD_COUNT_OF_ANY_CONFLICT_COMPATIBLE_GENERAL_ACTIVE15_SCAFFOLD_IS_STRICTLY_BELOW_THE_PUBLIC_MINIMUM_WORD_THRESHOLD_100_THUS_COLLAPSING_ALL_LESS_THAN_WORD_THRESHOLDS_TO_ONE_UNIVERSAL_CLASS",
+    "reason": "THIS_REMOVES_401_REDUNDANT_UPPER_BOUND_WORD_STATES_PARAMETRICALLY_AND_TURNS_THE_REMAINING_COMPLETENESS_PROOF_INTO_STRUCTURAL_INDEPENDENCE_PLUS_MONOTONE_LOWER_BOUND_PADDING"
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "terminal_rows_read": 0,
+    "terminal_kwargs_read": 0,
+    "terminal_instruction_id_lists_read": 0,
+    "target_scores_read": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
