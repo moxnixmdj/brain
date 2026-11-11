@@ -1,0 +1,46 @@
+{
+  "schema": "PROJECT_BRAIN_R146_V1",
+  "date": "2026-11-09",
+  "round": "r146",
+  "the_measurement": {
+    "same_goal": "compress the input into out.gz",
+    "same_machine": true,
+    "seconds_apart": true,
+    "direct_call": {
+      "function": "computer_env_v1.discover(goal, learn=False)",
+      "closed": true,
+      "status": "PASS__SINGLE_ACTION_FOUND_AND_VERIFIED",
+      "plan": ["run_gzip"],
+      "recipe": {"program": "gzip", "argv": ["gzip", "-c", "{input}"], "stdout_to": "out.gz", "target": "out.gz"},
+      "wall_clock_ms": 26
+    },
+    "through_the_curriculum": {
+      "function": "curriculum_v1.study(goal, channels=['explore'])",
+      "pass": false,
+      "status": "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+      "attempts": [["explore", "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"]]
+    },
+    "conclusion": "the capability is real, tested and fast. The curriculum that is supposed to reach it returns a constant."
+  },
+  "why_the_refusal_exists_and_why_it_is_NOT_a_bug_to_remove": {
+    "written_before": "_try_explore and its three siblings were written when no execution channel was admitted",
+    "the_scars_recorded_in_the_same_file": [
+      "questions were reported closed: discover('the different lines of a.txt') -> plan run_md5sum, which prints a hash the goal never asked for",
+      "compound .tar.gz burned 95s of search and then reported PASS with an EMPTY plan",
+      "a goal naming an existing file spent 48.7s running 442 actions (5,046 subprocesses) to refuse",
+      ".txt/.md carry no evidence -- every text file passes, so the verdict is decided by the format before any program runs"
+    ],
+    "so": "connecting the channels naively would re-admit exactly these four failure modes. The correct fix is a channel that calls discover() and keeps every one of those guards, with the confinement question answered by admitted_confinement_execution_v1 rather than hardcoded."
+  },
+  "corrections_to_my_own_prior_statement": {
+    "i_said_at_r144_r145": "the flight task cannot be scored and no non-MiniWob environment exists here",
+    "what_is_true": "computer_env_v1.py (3,017 lines) IS a scorable non-MiniWob environment, and it works: program actions are discovered from PATH, executed as real subprocesses, and their argv recorded as recipes. I said it did not exist because I did not look, then nearly rebuilt it a third time.",
+    "and_i_said_last_round": "'connecting the four channels' was the highest-value action",
+    "what_is_true": "it IS the highest-value action, but not as a bare unbolt: the four guards in computer_env_v1 document four measured ways the channel lies when it runs. The connection must preserve them."
+  },
+  "the_environment_check": {
+    "confinement": {"chroot": false, "bwrap": false, "firejail": false, "unshare": true, "mount_namespace": true, "can_remount_root_readonly": false},
+    "namespace_broker_available": true,
+    "note": "subprocess execution inside a temp directory works without chroot. The confinement question is about executing UNTRUSTED commands on the live tree; a temp-dir sandbox is a different and weaker claim, and the guards are what make the difference safe."
+  }
+}
