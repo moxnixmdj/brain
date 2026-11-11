@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_MYSTERYMECHANISM_PROSPECTIVE_SELECTION_GATE_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE_TRUTH_REPAIR__RESERVED_VALIDATION_REMOVED_FROM_MODEL_SELECTION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_predicate": "MYSTERYMECHANISM_GE_49_55",
+  "root_class": "ROOT2_ONLY",
+  "problem": {
+    "source": "canonical/runtime/mysterymechanism_separable_transform_v1.py",
+    "finding": "V1_REMOVES_ONE_ROW_FROM_COEFFICIENT_FIT_BUT_USES_THAT_ROWS_PREDICTION_ERROR_IN_THE_TRANSFORM_PAIR_SELECTION_KEY",
+    "consequence": "THE_ROW_DESCRIBED_AS_PROSPECTIVE_VALIDATION_IS_NOT_AN_INDEPENDENT_FALSIFIER_OF_MODEL_SELECTION",
+    "credit_impact": "ZERO_CURRENT_ACCEPTANCE_CREDIT_REVOKED_BECAUSE_V1_ALREADY_CLAIMED_ZERO_ACCEPTANCE_FAMILY_CAPABILITY_AND_OWNERSHIP_CREDIT"
+  },
+  "repair": {
+    "runtime_path": "canonical/runtime/mysterymechanism_separable_transform_v2.py",
+    "test_path": "canonical/tests/test_mysterymechanism_separable_transform_v2.py",
+    "workflow_path": ".github/workflows/verify-mysterymechanism-prospective-selection-v2.yml",
+    "information_flow": [
+      "REMOVE_RESERVED_ROW_BEFORE_LIBRARY_CONSTRUCTION",
+      "BUILD_AND_DEDUPLICATE_TRANSFORM_LIBRARIES_ON_FIT_ROWS_ONLY",
+      "SCREEN_ALL_TRANSFORM_PAIRS_WITH_FIT_ROWS_ONLY",
+      "SELECT_STRUCTURE_WITH_INNER_LEAVE_ONE_OUT_ON_FIT_ROWS_ONLY",
+      "EXPOSE_RESERVED_INPUT_AND_TARGET_EXACTLY_ONCE_AFTER_STRUCTURE_SELECTION",
+      "FAIL_CLOSED_IF_FIT_INNER_LOO_OR_PROSPECTIVE_ERROR_EXCEEDS_FROZEN_0_08_DEVELOPMENT_GATE",
+      "REFIT_COEFFICIENTS_ON_ALL_VISIBLE_ROWS_ONLY_AFTER_PROSPECTIVE_GATE_PASSES"
+    ],
+    "screening": {
+      "all_transform_pairs_fit_only": true,
+      "selection_search": "EXACT_BRANCH_AND_BOUND_OVER_FIT_ONLY_INNER_LOO",
+      "lower_bound": "FIT_NRMSE_PLUS_COMPLEXITY_PENALTY",
+      "stopping_rule": "STOP_ONLY_WHEN_NEXT_FIT_ONLY_LOWER_BOUND_EXCEEDS_INCUMBENT_FINAL_SELECTION_SCORE",
+      "prospective_validation_influences_candidate_set": false,
+      "prospective_validation_influences_structure_selection": false
+    },
+    "development_gate": {
+      "fit_nrmse_max": 0.08,
+      "inner_loo_nrmse_max": 0.08,
+      "prospective_validation_nrmse_max": 0.08,
+      "benchmark_threshold_claim": false,
+      "purpose": "FAIL_CLOSED_STABILITY_GATE_ONLY__NOT_MYSTERYMECHANISM_ACCEPTANCE_THRESHOLD"
+    }
+  },
+  "breakthrough": {
+    "deleted_false_shortcut": "TREATING_POST_SELECTION_HELD_ROW_SCORING_AS_PROSPECTIVE_VALIDATION",
+    "new_capability": "TRUE_PRESELECTION_HOLDOUT_FALSIFICATION_WITH_EXACT_FIT_ONLY_BRANCH_AND_BOUND_STRUCTURE_SEARCH",
+    "terminal_leverage": "MYSTERYMECHANISM_IS_A_LIVE_ROOT2_PREDICATE_AND_ALSO_REMAINS_THE_SEPARATE_OPEN_PREDICATE_IN_UNKNOWN_DOMAIN_ADAPTATION_AFTER_UNKNOWN_DOMAIN_TRANSFER_AUDIT",
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "required_independent_verification": [
+    "BIND_EXACT_V1_V2_AND_TEST_BLOBS",
+    "REPRODUCE_THE_RESERVED_TARGET_MUTATION_TEST_AND_REQUIRE_SELECTION_FINGERPRINT_INVARIANCE",
+    "REPRODUCE_THE_RESERVED_INPUT_MUTATION_TEST_AND_REQUIRE_LIBRARY_SIZE_AND_SELECTION_FINGERPRINT_INVARIANCE",
+    "REQUIRE_HOSTILE_RESERVED_TARGET_TO_FAIL_CLOSED_WITH_NO_CANDIDATE_OR_EXPRESSION",
+    "REQUIRE_EXACT_SEPARABLE_SURFACE_TO_PASS_INNER_LOO_AND_PROSPECTIVE_GATE",
+    "CONFIRM_ZERO_PRIVATE_MYSTERYMECHANISM_MECHANISMS_SCORES_OR_TARGET_RESULTS_ARE_READ_OR_EMBEDDED"
+  ],
+  "next_if_verified": "MAKE_V2_THE_ONLY_ELIGIBLE_SEPARABLE_STRUCTURE_SELECTION_GATE_FOR_FUTURE_MYSTERYMECHANISM_ACTIVE_EXECUTION__THEN_FALSIFY_ON_PUBLIC_AND_SYNTHETIC_OUT_OF_GRAMMAR_FAMILIES_BEFORE_ANY_FRESH_BENCHMARK_ACTION",
+  "hard_nonclaims": [
+    "NO_MYSTERYMECHANISM_GE_49_55_PROOF",
+    "NO_PRIVATE_BENCHMARK_SCORE",
+    "NO_TERMINAL_CASE_EXECUTION",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_CLAIM_THAT_0_08_IS_THE_PRIVATE_BENCHMARK_THRESHOLD"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
