@@ -1,0 +1,83 @@
+{
+  "schema": "PROJECT_BRAIN_LIVEBENCH_RATIO_CONJUNCTION_BREAKTHROUGH_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__VISIBLE_PROMPT_ONLY_FULL_CONJUNCTION_12_OF_12_ON_PINNED_PUBLIC_RATIO_POPULATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_TERMINAL_CASES__ZERO_CREDIT",
+  "target_predicate": "LIVEBENCH_IF_GE_65_7",
+  "objective": "Lift the existing ratio:overlap score-equivalence reduction from single-checker success to complete co-occurring-checker satisfaction on the entire pinned public ratio:overlap population, without reading hidden kwargs or raw reference_text during construction.",
+  "public_sources": {
+    "ifbench_repository": "allenai/IFBench",
+    "ifbench_commit": "1c40f0c10d9b5c5c2f10a175a28007ebb64f7f4d",
+    "ifbench_test_path": "data/IFBench_test.jsonl",
+    "ifbench_test_git_blob_sha": "a8e343ed928d8b4e649b9dba651fed7757ccacc3",
+    "livebench_repository": "LiveBench/LiveBench",
+    "livebench_commit": "8f8e5c381a16e3f24257776edd53471fe86f8091",
+    "checker_path": "livebench/if_runner/ifbench/instructions.py",
+    "checker_git_blob_sha": "02b2dfeb50f036b89bec3df34522c73f756d8f44"
+  },
+  "construction": {
+    "runtime_path": "canonical/runtime/livebench_ratio_conjunction_solver_v1.py",
+    "test_path": "canonical/tests/test_livebench_ratio_conjunction_solver_v1.py",
+    "inference_inputs": [
+      "VISIBLE_COMPOSITE_PROMPT"
+    ],
+    "hidden_kwargs_read_during_construction": false,
+    "raw_reference_text_read_during_construction": false,
+    "model_dependency_count": 0,
+    "network_used": false,
+    "supported_public_companion_grammar": [
+      "RATIO_OVERLAP_SINGLETON",
+      "RATIO_OVERLAP_PLUS_SENTENCE_KEYWORD",
+      "WORDS_CONSONANTS_PLUS_RATIO_OVERLAP"
+    ],
+    "method": [
+      "RECOVER_NORMALIZED_BASE_AND_VISIBLE_TARGET_FROM_KNOWN_PUBLIC_RENDERED_GRAMMAR",
+      "USE_ONLY_WITHIN_NONWHITESPACE_REFERENCE_SPANS_AS_CERTIFIED_HIT_MASS",
+      "SEPARATE_SPANS_WITH DISTINCT ABSENT PRIVATE_USE SENTINELS SO CROSS_BOUNDARY_TRIGRAMS ARE CERTIFIED NONHITS",
+      "FOR_SENTENCE_KEYWORD_EMIT N_MINUS_1 SENTINEL_PERIOD SENTENCES AND PLACE KEYWORD IN SENTENCE N",
+      "FOR_CONSONANT_COMPANION REQUIRE THE EXACT ASCII_CONSONANT_CLUSTER_PREDICATE ON THE SINGLE_WHITESPACE_FREE OUTPUT_WORD",
+      "SEARCH SENTINEL_TAIL_LENGTH UNTIL THE EXACT NORMALIZED_REFERENCE_OVERLAP ENTERS THE PLUS_MINUS_2_PERCENT BAND"
+    ]
+  },
+  "new_deduction": {
+    "prior_state": "PUBLIC_RATIO_CHECKER_12_OF_12_CONSTRUCTIVE_PASS_BUT_MULTI_INSTRUCTION_PROMPT_COMPOSITION_NOT_PROVED",
+    "current_candidate": "ALL_12_PINNED_PUBLIC_RATIO_OVERLAP_PROMPTS_HAVE_VISIBLE_PROMPT_ONLY WITNESSES THAT SATISFY RATIO_OVERLAP AND EVERY CO_OCCURRING PUBLIC CHECKER",
+    "critical_30_sentence_case": "MULTI_SPAN_HIT_MASS_ELIMINATES_THE_SINGLE_SPAN_CEILING_AND_REACHES_23_PERCENT_WHILE_PRESERVING_30_SENTENCE_KEYWORD_PLACEMENT"
+  },
+  "verification_target": {
+    "public_ratio_rows": 12,
+    "expected_full_prompt_pass_rows": 12,
+    "expected_failures": 0,
+    "construction_must_precede_hidden_kwargs_audit": true,
+    "official_raw_reference_score_must_be_inside_tolerance": true,
+    "every_companion_checker_must_pass": true
+  },
+  "residual_after_if_verified": [
+    "FROZEN_TERMINAL_LIVEBENCH_DATASET_EQUIVALENCE_OR_SCOPE_SAFE_GRAMMAR_BINDING",
+    "OTHER_PUBLIC_IF_CHECKER_FAMILIES_OUTSIDE_RATIO_OVERLAP",
+    "FULL_SUCCESSOR_PRECOMMIT_AND_INDEPENDENT_VERIFICATION",
+    "FRESH_REALITY_AUTHORITY_BEFORE_ANY_NEW_TERMINAL_CASE",
+    "LIVEBENCH_ACCEPTANCE"
+  ],
+  "hard_nonclaims": [
+    "NO_UNEXPOSED_TERMINAL_CASE_CONTENT_USED",
+    "NO_FROZEN_TERMINAL_DATASET_EQUIVALENCE",
+    "NO_CLAIM_THAT_PUBLIC_12_OF_12_EQUALS_TERMINAL_ACCEPTANCE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO EXECUTION PROMOTION OR FRESH REALITY AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_terminal_cases_exposed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "authority": {
+    "execution": false,
+    "promotion": false,
+    "fresh_reality": false,
+    "acceptance_credit": false
+  }
+}
