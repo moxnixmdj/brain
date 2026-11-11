@@ -1,0 +1,114 @@
+{
+  "schema": "PROJECT_BRAIN_DELEGATION_SCOPE_EQUIVALENCE_RELATION_V2",
+  "date": "2026-10-02",
+  "status": "CANDIDATE_CURRENT_BLOB_UNIVERSAL_SCOPE_RELATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "behavior_id": "TASK_TO_DELEGATION_GRAPH_001",
+  "family": "SUBAGENT_DELEGATION_AND_COORDINATION",
+  "supersedes_after_independent_verification": "canonical/governance/TASK_TO_DELEGATION_SCOPE_RELATION_V1.json",
+  "exact_sources": {
+    "registry": {
+      "path": "canonical/governance/BEHAVIORAL_CONTRACT_REGISTRY_V1.json",
+      "git_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31"
+    },
+    "protocols": {
+      "path": "canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json",
+      "git_blob_sha": "eb4bca0fe6a015d49d2854998fbe046c979c7ea9"
+    },
+    "candidate": {
+      "path": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "git_blob_sha": "f1a93ee66d90093de61dc17c6ebf2e24073df522"
+    },
+    "primary_oracle": {
+      "path": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+      "git_blob_sha": "928466401b36e4f3b09c517950cc050432a0616f"
+    },
+    "structural_oracle": {
+      "path": "canonical/runtime/delegation_structural_variety_proof_v3.py",
+      "git_blob_sha": "f5e1f45519278ed2cafa27d23b8602b0a362a492"
+    },
+    "scope_gate": {
+      "path": "canonical/runtime/scope_equivalent_proof_gate_v2.py",
+      "git_blob_sha": "2d05172becfc559de3ff1e4e5623c5180028be1b"
+    },
+    "gate_input": {
+      "path": "canonical/governance/TASK_TO_DELEGATION_SCOPE_EQUIVALENT_PROOF_GATE_V2_INPUT.json",
+      "git_blob_sha": "fed1fcd1d1c7da7842a7daa0f0879e52334942a8"
+    },
+    "reconciliation": {
+      "path": "canonical/governance/ABSOLUTE_DOMINANCE_SCOPE_COMPLETENESS_RECONCILIATION_V1.json",
+      "git_blob_sha": "ec2d931860e7cd7d9f73a658706f8c33fca3a10d"
+    }
+  },
+  "registry_continuity": {
+    "historical_registry_blob_sha": "afa00109031d638fef32cc3fe10be18786605c39",
+    "current_registry_blob_sha": "ee187f611a0e82b2de495ee377682f39bc31dd31",
+    "task_to_delegation_contract_row_semantically_identical": true,
+    "family_mapping_before": [
+      "TASK_TO_DELEGATION_GRAPH_001"
+    ],
+    "family_mapping_now": [
+      "TASK_TO_DELEGATION_GRAPH_001"
+    ],
+    "rule": "ONLY_THE_TASK_TO_DELEGATION_GRAPH_001_CONTRACT_ROW_AND_EXACT_FAMILY_MAPPING_ARE_LOAD_BEARING_FOR_THIS_CONTINUITY_CHECK"
+  },
+  "exact_contract_boundary": {
+    "inputs": [
+      "EXPLICIT_TASK_REQUIREMENT_AND_DEPENDENCY_GRAPH",
+      "DECLARED_WORKER_OR_TOOL_CAPABILITIES",
+      "CURRENT_STATE",
+      "CONCURRENCY_AND_RESOURCE_CONSTRAINTS",
+      "EVIDENCE_OWNERSHIP_RULES",
+      "LIVE_RECEIPTS"
+    ],
+    "required_outputs": [
+      "PARTITION_ONLY_REQUIRED_USEFULLY_PARALLELIZABLE_WORK",
+      "OWNER_ASSIGNMENT",
+      "DEPENDENCY_AND_FANIN_GRAPH",
+      "RECEIPT_DRIVEN_REASSIGNMENT"
+    ],
+    "success_and_failure_dimensions": [
+      "CORRECTNESS",
+      "LOWER_WALL_CLOCK_OR_HIGHER_EVIDENCE_COVERAGE_THAN_CONTROLLED_BASELINE",
+      "NO_DUPLICATE_WORK",
+      "NO_CONFLICTING_WRITES",
+      "NO_LOST_PROVENANCE",
+      "NO_DEPENDENCY_VIOLATION",
+      "NO_IDLE_CRITICAL_PATH",
+      "CAPABILITY_COMPATIBLE_ASSIGNMENT",
+      "COMPLETE_FANIN_EVIDENCE"
+    ]
+  },
+  "universal_scope_argument": {
+    "target_population": "FROZEN_SUBAGENT_DELEGATION_AND_COORDINATION_PROTOCOL_AS_MAPPED_TO_ITS_SOLE_ACTIVE_RESIDUAL_CONTRACT_TASK_TO_DELEGATION_GRAPH_001",
+    "candidate_population": "ARBITRARY_FINITE_EXPLICIT_MONOTONIC_FACT_TASK_GRAPHS_WITH_DECLARED_CAPABILITIES_RESOURCES_EVIDENCE_RULES_AND_LIVE_RECEIPTS",
+    "population_relation": "CANDIDATE_SUPERSET_PROVEN",
+    "environment_relation": "EXACT",
+    "information_relation": "EXACT_CANDIDATE_VISIBLE_INFORMATION",
+    "oracle_relation": "CANDIDATE_STRONGER_PROVEN",
+    "unresolved_required_dimensions": [],
+    "proof_obligations": [
+      "FINITE_DECLARED_STEP_SET_IS_EXHAUSTIVELY_SEARCHED_OVER_ALL_FACT_ADVANCING_DISTINCT_STEP_SEQUENCES",
+      "NONNEGATIVE_DECLARED_COSTS_MAKE_FIRST_SCHEDULABLE_GOAL_POPPED_BY_COST_COUNT_LEX_ORDER_GLOBALLY_MINIMAL",
+      "ALL_CAPABILITY_AND_RESOURCE_FEASIBLE_PARALLEL_MATCHINGS_ARE_ENUMERATED",
+      "BFS_OVER_COMPLETED_TASK_SUBSETS_RETURNS_MINIMUM_WAVE_FEASIBLE_SCHEDULE",
+      "DIRECT_DEPENDENCIES_DERIVED_FROM_FIRST_PRODUCERS_ARE_COMPLETE_FOR_MONOTONIC_FACT_CONTRACTS",
+      "EVIDENCE_OWNERSHIP_AND_ANCESTOR_FANIN_ARE_COMPUTED_FOR_EVERY_SELECTED_AND_COMPLETED_STEP",
+      "ALL_FROZEN_LOAD_BEARING_RECEIPT_CLASSES_RECOMPUTE_EFFECTIVE_STEPS_WORKERS_CAPABILITIES_OR_RESOURCE_CAPACITIES",
+      "COMPLETED_TASKS_ARE_EXCLUDED_FROM_REEXECUTION_AND_RECEIPT_PROVENANCE_IS_EMITTED",
+      "CANDIDATE_USES_ONLY_EXPLICIT_CONTRACT_INFORMATION_AND_NO_HIDDEN_ORACLE_FIELDS"
+    ]
+  },
+  "hard_nonclaims": [
+    "DOES_NOT_COVER_IMPLICIT_UNKNOWN_STEP_SEMANTICS_OUTSIDE_THE_FROZEN_CONTRACT",
+    "DOES_NOT_INFER_UNDECLARED_WORKER_OR_TOOL_CAPABILITIES",
+    "DOES_NOT_CLAIM_CONSTANT_OR_POLYNOMIAL_RUNTIME",
+    "DOES_NOT_BY_ITSELF_CLOSE_DELEGATION_ACCEPTANCE",
+    "DOES_NOT_TREAT_132_EXECUTED_CASES_AS_EXHAUSTIVE_ENUMERATION"
+  ],
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "family_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false
+}
