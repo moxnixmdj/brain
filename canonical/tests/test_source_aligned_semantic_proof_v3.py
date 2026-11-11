@@ -47,8 +47,10 @@ class SourceAlignedSemanticProofV3Tests(unittest.TestCase):
             decision_basis=[atom],
             policy_conditions={"exception_policy":{"op":"ATOM","id":atom}},
         )
-        self.assertEqual(out["status"],"COMMON_POLICY_CERTIFIED")
-        self.assertEqual(out["certified_common_policies"],["exception_policy"])
+        self.assertEqual(out["status"],"POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED")
+        self.assertEqual(out["entailed_policy_conditions"],["exception_policy"])
+        self.assertEqual(out["certified_common_policies"],[])
+        self.assertEqual(out["rejected_policy_adequacy_bindings"][0]["reason"],"ADEQUACY_BINDING_MISSING")
 
     def test_wrong_context_digest_fails_closed(self):
         ctx,_=self._typed(True)
@@ -137,8 +139,10 @@ class SourceAlignedSemanticProofV3Tests(unittest.TestCase):
                 }
             },
         )
-        self.assertEqual(out["status"],"COMMON_POLICY_CERTIFIED")
-        self.assertEqual(out["certified_common_policies"],["exception_branch"])
+        self.assertEqual(out["status"],"POLICY_CONDITION_ENTAILED__ADEQUACY_UNAUTHENTICATED")
+        self.assertEqual(out["entailed_policy_conditions"],["exception_branch"])
+        self.assertEqual(out["certified_common_policies"],[])
+        self.assertEqual(out["rejected_policy_adequacy_bindings"][0]["reason"],"ADEQUACY_BINDING_MISSING")
 
 
 if __name__=="__main__":
