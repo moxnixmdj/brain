@@ -1,0 +1,62 @@
+{
+  "schema": "PROJECT_BRAIN_IF_AUTHORITY_TEMPORAL_LINEARIZATION_REPAIR_CUT_20261005_V1",
+  "date": "2026-10-05",
+  "status": "CANDIDATE__MINIMUM_TEMPORAL_REPAIR_CONTRACT__ZERO_CREDIT__INDEPENDENT_VERIFICATION_REQUIRED",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "target_family": "INSTRUCTION_FOLLOWING_SCOPE_AND_JUDGMENT",
+  "target_predicates": [
+    "IF_ZERO_CRITICAL_AUTHORITY_VIOLATIONS",
+    "IF_SCOPE_BOUNDARY_NONINFERIOR"
+  ],
+  "repaired_causal_model": {
+    "statement": "For a consequential action effect, an authority violation implies at least one of: semantic normalization error; point-in-time deterministic enforcement error; temporal authorization handoff/linearization error; or execution/state-transition bypass of the authoritative path.",
+    "purpose": "Make requirement-change adaptation a temporal property rather than a snapshot-only property."
+  },
+  "minimum_contract": {
+    "grant_binding_fields": [
+      "action_digest",
+      "requirement_epoch",
+      "normalized_authority_state_digest",
+      "required_scope_set",
+      "unique_grant_id"
+    ],
+    "issuance_rule": "Grant issuance is permitted only after the point-in-time normalized authority invariant passes for the exact bound action and state.",
+    "commit_rule": "A consequential effect may count as routed only if the grant is checked against the CURRENT authoritative epoch/state at its commit linearization point and is consumed at most once.",
+    "revocation_rule": "Any authority-affecting requirement change creates a new epoch/state digest; old-epoch grants fail closed.",
+    "replay_rule": "A consumed grant cannot authorize a second consequential effect.",
+    "mismatch_rule": "Action, scope, epoch, or state-digest mismatch fails closed.",
+    "non_atomic_rule": "If the effect cannot be coupled to the current-state consume transition, the handoff is not proved and remains explicit."
+  },
+  "reuse_policy": {
+    "one_use_primitive": "Reuse generic one-use primitives only for uniqueness when their exact repository/carrier assumptions match.",
+    "exact_transition_pattern": "Reuse the execution_authority_reducer exact-transition pattern as design evidence, not as instruction-family proof.",
+    "no_scope_inheritance": true
+  },
+  "closure_condition": "The temporal residual closes only after an independently verified implementation or formal trace theorem proves the minimum contract over the claimed instruction-authority execution surface.",
+  "scheduler_consequence": [
+    "DO_NOT_BUILD_ANOTHER_GENERAL_AUTHORIZATION_SYSTEM.",
+    "PATCH_OR_WRAP_THE_PR1802_POINT_IN_TIME_GATE_WITH_THE_SMALLEST_CURRENT_STATE_ONE_USE_COMMIT_LAYER.",
+    "VERIFY_STALE_EPOCH, REPLAY, ACTION_MISMATCH, STATE_DIGEST_MISMATCH, AND REQUIREMENT_CHANGE_INTERLEAVING ADVERSARIAL TRACES.",
+    "THEN RETURN ROOT3 WORK TO SEMANTIC_EXTRACTION COMPLETENESS AND UNIVERSAL ROUTE COVERAGE."
+  ],
+  "hard_nonclaims": [
+    "NO_IMPLEMENTATION_PASS_YET",
+    "NO_IF_PREDICATE_CLOSURE",
+    "NO_ACCEPTANCE_FAMILY_CAPABILITY_OR_OWNERSHIP_CREDIT",
+    "NO_FRESH_REALITY_AUTHORITY"
+  ],
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  },
+  "scheduling_authority": false,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "independent_verification_required": true
+}
