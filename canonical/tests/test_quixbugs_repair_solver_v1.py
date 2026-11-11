@@ -9,11 +9,14 @@ one class at the end runs the real solver with the real organ on three small pro
 """
 from __future__ import annotations
 
+import inspect
 import json
+import os
 import pathlib
 import shutil
 import sys
 import tempfile
+import threading
 import time
 import unittest
 
@@ -61,7 +64,7 @@ class FakeSolver:
         self.stopped_having_written_the_fix: set = set()
         self.breaks: set = set()                        # the worker dies
         self.searches_though_memory_fits: set = set()
-        self.seconds: dict = {}
+        self.seconds: dict = {}                         # name, or (question, name) -> seconds the run says it took
         self.calls: list = []
 
     def __call__(self, where, args, wall_limit_s):
@@ -91,7 +94,8 @@ class FakeSolver:
             if teaching is not None:
                 retained["teaching"] = teaching
             return {"finished": True, "stopped_at_the_wall_limit": False,
-                    "seconds": self.seconds.get(name, 0.5 if hit else 20.0), "processes_started": 3 if hit else 60,
+                    "seconds": self.seconds.get((where.parent.name, name), self.seconds.get(name, 0.5 if hit else 20.0)),
+                    "processes_started": 3 if hit else 60,
                     "result": {"pass": passed, "applied": passed, "status": status, "repair_status": status + "__DETAIL",
                                "repair_mode": "scoped_retained_repair" if hit else None,
                                "repair_search_invocations": searches, "retained_learning": retained}}
@@ -341,7 +345,7 @@ class WithAStandInSolver(unittest.TestCase):
                          (2, ["add_one", "at_most"], 1))
 
     def test_a_run_that_was_stopped_or_broke_is_not_a_repair_and_is_counted_as_what_it_was(self):
-        self.solver.stopped = {"at_least"}
+        self.solver.stopped = {"at_least", "capped"}
         self.solver.breaks = {"add_one"}
         measured = self._measure(wall_limit_s=33)
         stopped, broken = (measured["outcomes"]["empty_memory"][name] for name in ("at_least", "add_one"))
@@ -352,17 +356,27 @@ class WithAStandInSolver(unittest.TestCase):
         self.assertEqual(broken["worker_error"], "Traceback: the worker died")
         self.assertNotIn("worker_error", stopped)
         summary = tool.summarise(measured)["empty_memory"]
-        self.assertEqual(summary["how_the_runs_ended"],
-                         {"OPEN__FAKE": 1, "PASS__FAKE": 1, "STOPPED_AT_THE_WALL_LIMIT": 1, "WORKER_FAILED": 1})
+        self.assertEqual(summary["how_the_runs_ended"], {"PASS__FAKE": 1, "STOPPED_AT_THE_WALL_LIMIT": 2, "WORKER_FAILED": 1})
         self.assertEqual((summary["repaired"], summary["of"]), (1, 4))
 
     def test_the_seconds_are_the_runs_own_and_the_middle_one_is_of_the_repairs(self):
         self.solver.can_find = {"add_one", "at_most", "capped"}
-        self.solver.seconds = {"add_one": 5.0, "at_most": 50.0, "capped": 9.0, "at_least": 111.0}
+        self.solver.seconds = {"add_one": 5.04, "at_most": 50.0, "capped": 9.0, "at_least": 111.0}
         summary = tool.summarise(self._measure())
-        self.assertEqual(summary["empty_memory"]["seconds_in_all"], 175.0)
+        self.assertEqual(summary["empty_memory"]["seconds_in_all"], 175.0)             # 175.04, to one decimal
         self.assertEqual(summary["empty_memory"]["seconds_of_the_middle_repair"], 9.0)
         self.assertEqual(summary["same_bug_again"]["seconds_of_the_middle_repair_by_search"], 9.0)
+
+    def test_of_an_even_number_of_repairs_the_middle_is_the_upper_one(self):
+        self.solver.can_find = set(NAMES)
+        self.solver.seconds = {"add_one": 5.0, "at_most": 50.0, "capped": 9.0, "at_least": 111.0}
+        summary = tool.summarise(self._measure())
+        self.assertEqual(summary["empty_memory"]["repaired"], 4)
+        self.assertEqual(summary["empty_memory"]["seconds_of_the_middle_repair"], 50.0)
+        self.assertEqual(tool._middle([3.0, 1.0]), 3.0)
+        self.assertEqual(tool._middle([4.0, 1.0, 3.0, 2.0, 5.0]), 3.0)
+        self.assertEqual(tool._middle([7.0]), 7.0)
+        self.assertIsNone(tool._middle([]))
 
     def test_the_middle_of_nothing_is_nothing(self):
         self.solver.can_find = set()
@@ -406,10 +420,13 @@ class WithAStandInSolver(unittest.TestCase):
 
     def test_a_repair_of_the_same_bug_that_searched_again_is_not_from_memory(self):
         self.solver.searches_though_memory_fits = {"add_one"}
+        self.solver.seconds = {("same_bug_again", "add_one"): 7.0}
         measured = self._measure()
         summary = tool.summarise(measured)["same_bug_again"]
         self.assertEqual((summary["asked"], summary["repaired"], summary["of_which_from_memory_with_no_search"]), (2, 2, 1))
         self.assertEqual(summary["not_from_memory"], ["add_one"])
+        self.assertEqual(measured["outcomes"]["same_bug_again"]["add_one"]["seconds"], 7.0)
+        self.assertEqual(summary["seconds_of_the_middle_repair_from_memory"], 0.5)     # of the one repair that did come from memory
 
     def test_the_same_bug_not_repaired_the_second_time_is_seen(self):
         calls = {"n": 0}
@@ -591,6 +608,30 @@ class WithAStandInSolver(unittest.TestCase):
         self.assertEqual(one["lessons"], two["lessons"])
         self.assertEqual(list(two["outcomes"]["empty_memory"]), list(NAMES))      # each outcome under its own name, in order
 
+    def test_as_many_runs_at_a_time_as_there_are_workers_and_no_more(self):
+        real, lock = self.solver, threading.Lock()
+        running, most = {"now": 0}, {}
+
+        def watched(where, args, wall_limit_s):
+            question = where.parent.name
+            with lock:
+                running["now"] += 1
+                most[question] = max(most.get(question, 0), running["now"])
+            time.sleep(0.15)
+            try:
+                return real(where, args, wall_limit_s)
+            finally:
+                with lock:
+                    running["now"] -= 1
+
+        for workers, expected in ((1, 1), (2, 2), (3, 3)):
+            most.clear()
+            tool.measure(self.root, list(NAMES), self.dir / "work", workers=workers, check_bugs=0, solve_with=watched,
+                         propose_with=self.proposer)
+            self.assertEqual(most["empty_memory"], expected, workers)                  # four bugs
+            self.assertEqual(most["same_bug_again"], min(expected, 2), workers)        # two bugs
+            self.assertEqual(most["other_fixes_full"], min(expected, 2), workers)      # two bugs
+
     def test_progress_is_said_for_every_run(self):
         lines: list = []
         self._measure(progress=lines.append, check_bugs=1)
@@ -637,6 +678,10 @@ class WithAStandInSolver(unittest.TestCase):
         self.assertEqual((written["producer_cognition_model_dependency_count"], written["incremental_spend_usd"]), (0, 0))
         self.assertEqual(written["environment"]["benchmark_sha256"], bench.benchmark_sha256(self.root, sorted(EVERY)))
         self.assertEqual(written["environment"]["code_sha256"], tool.code_sha256())
+        self.assertEqual(sorted(written["environment"]), ["benchmark_sha256", "code_sha256", "processors", "python", "source"])
+        self.assertEqual(written["environment"]["python"], sys.version.split()[0])
+        self.assertEqual(written["environment"]["processors"], os.cpu_count())
+        self.assertIn("github.com/jkoppel/QuixBugs", written["environment"]["source"])
         self.assertEqual(written["summary"], tool.summarise(written))
         self.assertEqual(written["summary"]["what_the_lessons_added"], ["capped"])
         self.assertTrue((self.dir / "cli" / "empty_memory" / "add_one").is_dir())
@@ -646,12 +691,23 @@ class WithAStandInSolver(unittest.TestCase):
         tool.solve, tool.propose = self.solver, self.proposer
         out = self.dir / "out.json"
         tool.main(["--quixbugs-dir", str(self.root), "--work-dir", str(self.dir / "cli"), "--programs", "capped", "add_one",
-                   "--check-bugs", "0", "--out", str(out)])
+                   "--out", str(out)])
         written = json.loads(out.read_text())
         self.assertEqual(written["programs"], ["capped", "add_one"])
-        self.assertEqual((written["parameters"]["timeout_s"], written["parameters"]["wall_limit_s"], written["parameters"]["workers"]),
-                         (8, 300, 2))
+        self.assertEqual({key: written["parameters"][key] for key in ("timeout_s", "wall_limit_s", "workers", "check_bugs", "seed")},
+                         {"timeout_s": 8, "wall_limit_s": 300, "workers": 2, "check_bugs": 3, "seed": 0})
         self.assertEqual(sorted({call["name"] for call in self.solver.calls}), ["add_one", "capped"])
+
+    def test_the_command_line_must_be_told_where_the_benchmark_is(self):
+        with self.assertRaises(SystemExit):
+            tool.main(["--out", str(self.dir / "out.json")])
+        self.assertFalse((self.dir / "out.json").exists())
+
+    def test_a_call_without_options_gets_the_stated_protocol(self):
+        defaults = {name: parameter.default for name, parameter in inspect.signature(tool.measure).parameters.items()
+                    if parameter.default is not inspect.Parameter.empty}
+        self.assertEqual({key: defaults[key] for key in ("timeout_s", "wall_limit_s", "workers", "check_bugs", "seed")},
+                         {"timeout_s": 8, "wall_limit_s": 300, "workers": 2, "check_bugs": 3, "seed": 0})
 
     def test_the_hashes_are_of_the_code_that_is_measured_and_of_the_code_that_measures(self):
         import hashlib
@@ -724,7 +780,7 @@ print('\n' + json.dumps({'result': {'mode': mode, 'where': where, 'args': json.l
 DYING = r"""
 import sys
 print('half a line')
-sys.stderr.write('Traceback (most recent call last):\nRuntimeError: no such organ\n')
+sys.stderr.write('x' * 1000 + '\nTraceback (most recent call last):\nRuntimeError: no such organ\n')
 sys.exit(3)
 """
 SILENT = "pass\n"
@@ -732,7 +788,7 @@ IMPORTING = r"""
 import json, os, sys
 import canonical.tools.quixbugs_repair_solver_measure_v1 as found
 print(json.dumps({'result': {'file': found.__file__, 'cwd': os.getcwd(), 'no_bytecode': os.environ.get('PYTHONDONTWRITEBYTECODE'),
-                             'first_on_the_path': os.environ['PYTHONPATH'].split(os.pathsep)[0]},
+                             'path': os.environ['PYTHONPATH'].split(os.pathsep)},
                   'seconds': 0.0, 'processes_started': 0}))
 """
 
@@ -743,9 +799,14 @@ class TheProcessAroundTheSolver(unittest.TestCase):
     def setUp(self):
         self.dir = pathlib.Path(tempfile.mkdtemp(prefix="solver-process-test-"))
         self._worker = tool._WORKER
+        self._path = os.environ.get("PYTHONPATH")
 
     def tearDown(self):
         tool._WORKER = self._worker
+        if self._path is None:
+            os.environ.pop("PYTHONPATH", None)
+        else:
+            os.environ["PYTHONPATH"] = self._path
         shutil.rmtree(self.dir, ignore_errors=True)
 
     def test_a_run_past_the_wall_limit_is_stopped_with_everything_it_started(self):
@@ -755,6 +816,7 @@ class TheProcessAroundTheSolver(unittest.TestCase):
         took = time.monotonic() - started
         self.assertEqual((run["finished"], run["stopped_at_the_wall_limit"]), (False, True))
         self.assertGreaterEqual(run["seconds"], 1.0)
+        self.assertLessEqual(run["seconds"], took)        # the seconds are those this run took
         self.assertLess(took, 10)
         self.assertNotIn("result", run)
         time.sleep(3.5)                                   # the child would have written its file by now
@@ -770,13 +832,25 @@ class TheProcessAroundTheSolver(unittest.TestCase):
             self.assertEqual(run["result"], {"mode": mode, "where": str(self.dir), "args": args})
             self.assertEqual(json.loads((self.dir / "reports" / f"{mode}.args.json").read_text()), args)
 
+    def test_a_place_that_is_not_there_yet_is_made(self):
+        tool._WORKER = TALKATIVE
+        where = self.dir / "not" / "there" / "yet"
+        run = tool.solve(where, {"a": 1}, 30)
+        self.assertTrue(run["finished"], run)
+        self.assertEqual(json.loads((where / "reports" / "solve.args.json").read_text()), {"a": 1})
+
     def test_a_worker_that_dies_is_not_finished_and_its_last_words_are_kept(self):
         tool._WORKER = DYING
+        started = time.monotonic()
         run = tool.solve(self.dir, {}, 30)
+        took = time.monotonic() - started
         self.assertEqual((run["finished"], run["stopped_at_the_wall_limit"], run["worker_returncode"]), (False, False, 3))
         self.assertIn("RuntimeError: no such organ", run["worker_error"])
+        self.assertEqual(len(run["worker_error"]), 400)                # the end of what it said, not all of it
+        self.assertTrue(run["worker_error"].endswith("RuntimeError: no such organ\n"))
         self.assertNotIn("result", run)
         self.assertIsInstance(run["seconds"], float)
+        self.assertTrue(0 <= run["seconds"] <= took)
 
     def test_a_worker_that_says_nothing_is_not_finished(self):
         tool._WORKER = SILENT
@@ -790,7 +864,17 @@ class TheProcessAroundTheSolver(unittest.TestCase):
         self.assertEqual(pathlib.Path(run["result"]["file"]).resolve(), pathlib.Path(tool.__file__).resolve())
         self.assertEqual(pathlib.Path(run["result"]["cwd"]).resolve(), REPO.resolve())
         self.assertEqual(run["result"]["no_bytecode"], "1")
-        self.assertEqual(pathlib.Path(run["result"]["first_on_the_path"]).resolve(), REPO.resolve())
+        self.assertEqual(pathlib.Path(run["result"]["path"][0]).resolve(), REPO.resolve())
+
+    def test_this_tree_comes_first_on_the_path_whatever_was_on_it(self):
+        tool._WORKER = IMPORTING
+        os.environ["PYTHONPATH"] = "/somewhere/else"
+        run = tool.solve(self.dir, {}, 60)
+        self.assertTrue(run["finished"], run)
+        self.assertEqual(run["result"]["path"], [str(tool.REPO), "/somewhere/else"])
+        os.environ.pop("PYTHONPATH")
+        run = tool.solve(self.dir, {}, 60)
+        self.assertEqual(run["result"]["path"], [str(tool.REPO)])
 
 
 class WithTheRealSolverAndTheRealOrgan(unittest.TestCase):
