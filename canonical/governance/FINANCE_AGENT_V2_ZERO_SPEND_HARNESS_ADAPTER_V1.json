@@ -1,7 +1,7 @@
 {
   "schema": "PROJECT_BRAIN_FINANCE_AGENT_V2_ZERO_SPEND_HARNESS_ADAPTER_V1",
   "date": "2026-10-04",
-  "status": "CANDIDATE__RETRY_SAFE_PROVIDER_BOUNDARY_GUARD_INTEGRATION__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "status": "CANDIDATE__RETRY_SAFE_PROVIDER_BOUNDARY_GUARD_INTEGRATION__ABORT_CLEANUP_HARDENED__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
   "target_predicate": "FINANCE_AGENT_V2_GE_58_59",
   "exact_upstream_source": {
     "repository": "vals-ai/finance-agent-v2",
@@ -12,16 +12,18 @@
       "EDGARSearch._execute_search invokes aiohttp.ClientSession.post to https://api.sec-api.io/full-text-search",
       "PriceHistory._fetch invokes aiohttp.ClientSession.get to https://api.tiingo.com"
     ],
-    "retry_consequence": "INTERCEPT_LOWER_LEVEL_CLIENT_OR_HTTP_BOUNDARY_SO_RETRY_ATTEMPTS_CANNOT_BYPASS_GUARD"
+    "retry_consequence": "INTERCEPT_LOWER_LEVEL_CLIENT_OR_HTTP_BOUNDARY_SO_RETRY_ATTEMPTS_CANNOT_BYPASS_GUARD",
+    "commit_sha": "502aab6fdaa3fb9294905c7453f89882baa8d39b",
+    "tavily_python_version": "0.7.23"
   },
   "brain_subject": {
     "adapter_runtime": {
       "path": "canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py",
-      "git_blob_sha": "c90d2e693621ae0a268e3c4f96bbdbfdcc827ec2"
+      "git_blob_sha": "a5ba517904d0511444bbeff443e0fdbcdb1b50f6"
     },
     "adapter_tests": {
       "path": "canonical/tests/test_finance_agent_v2_zero_spend_adapter_v1.py",
-      "git_blob_sha": "81d49edb2e7d265a14d2780eb8cad7b6adcb6435"
+      "git_blob_sha": "a0ea700811dce8fb78a3013174ad541ccab91e18"
     },
     "provider_guard": {
       "path": "canonical/runtime/zero_spend_provider_guard_v1.py",
@@ -49,7 +51,10 @@
     "RETRY_ATTEMPTS_CROSS_LOWER_LEVEL_GUARD_BOUNDARIES",
     "MISSING_FREE_ONLY_ACCOUNT_SNAPSHOT_FAILS_CLOSED",
     "QUOTA_PAYMENT_OVERAGE_OR_COST_SIGNAL_FAILS_CLOSED",
-    "PATCHES_ARE_REVERSIBLE"
+    "PATCHES_ARE_REVERSIBLE",
+    "POST_RESPONSE_GUARD_FAILURE_EXITS_ALREADY_ENTERED_HTTP_CONTEXT_BEFORE_PROPAGATION",
+    "PINNED_TAVILY_0_7_23_ASYNC_CLIENT_SEARCH_IS_RUNTIME_PATCHABLE_WITHOUT_PROVIDER_NETWORK_CALL",
+    "HOST_SUFFIX_SPOOF_CANNOT_BE_RECLASSIFIED_AS_SEC_API_OR_TIINGO"
   ],
   "proposed_root2_delta_if_independently_verified": [
     "DELETE_FINANCE_AGENT_V2_HARNESS_GUARD_INTEGRATION_AS_UNKNOWN",
@@ -72,7 +77,8 @@
     "NO_CLAIM_VALS_APPROVAL_OR_SUITE_ID_EXISTS",
     "NO_BENCHMARK_CASE_EXECUTION",
     "NO_SCORE_ACCEPTANCE_CAPABILITY_OR_OWNERSHIP_CREDIT",
-    "NO_FRESH_REALITY_AUTHORITY"
+    "NO_FRESH_REALITY_AUTHORITY",
+    "NO_CLAIM_OBSERVER_FAILURE_CAN_LEAVE_PROVIDER_RESPONSE_CONTEXT_OPEN"
   ],
   "accounting": {
     "incremental_spend_usd": 0,
