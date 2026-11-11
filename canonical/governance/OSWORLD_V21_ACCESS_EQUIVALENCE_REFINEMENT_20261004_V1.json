@@ -1,0 +1,77 @@
+{
+  "schema": "PROJECT_BRAIN_OSWORLD_V21_ACCESS_EQUIVALENCE_REFINEMENT_20261004_V1",
+  "date": "2026-10-04",
+  "status": "CANDIDATE__FIRST_PARTY_ZERO_REALITY_ROUTE_REFINEMENT__ZERO_CREDIT__NO_CASE_EXPOSURE",
+  "target_predicate": "OSWORLD_2_1_PARTIAL_GE_81_8",
+  "authority_base": {
+    "root2_inventory": "canonical/governance/ROOT2_FIXED_BAR_ROUTE_INVENTORY_V1.json",
+    "route_compression": "canonical/governance/ROOT2_CHARTOGRAPHY_OSWORLD_ROUTE_COMPRESSION_20261003_V1.json",
+    "zero_case_boot_verification": "canonical/verification/OSWORLD_V21_ZERO_CASE_BOOT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+    "base_commit": "570e6581a75a3b6af0b76f7b3c4efa695891e7e0"
+  },
+  "first_party_facts": [
+    {
+      "source": "xlang-ai/OSWorld-V2 benchmark release and public evaluation documentation",
+      "fact": "osworld-v2.1 is the active recommended release and pins OSWorld code, gated task classes, gated complete assets, website code, and provider images for comparability."
+    },
+    {
+      "source": "xlangai/osworld_v2_tasks Hugging Face dataset",
+      "fact": "Official task classes are a publicly listed gated dataset; access requires login and accepting conditions that share contact information. This is not evidence of a paid or undiscoverable private test universe."
+    },
+    {
+      "source": "xlangai/osworld_v2_assets_gated Hugging Face dataset",
+      "fact": "Official complete assets are a publicly listed gated dataset; access requires login and accepting conditions that share contact information."
+    },
+    {
+      "source": "xlang-ai/OSWorld-V2 README and v2.1 evaluation guide",
+      "fact": "The official comparable route explicitly permits self-hosting Task-Web/OSWorld-web@osworld-v2.1 and requires self-hosted GitLab plus a private token for GitLab-backed tasks."
+    },
+    {
+      "source": "canonical/verification/OSWORLD_V21_ZERO_CASE_BOOT_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
+      "fact": "The pinned Docker runtime already boots on the verified zero-cost public runner with KVM and exposes the screenshot endpoint without consuming terminal cases."
+    }
+  ],
+  "deductions": {
+    "removed_or_narrowed": [
+      "GENERIC_OSWORLD_VERSION_DISCOVERY",
+      "GENERIC_PROVIDER_IMAGE_DISCOVERY",
+      "GENERIC_ZERO_COST_KVM_CARRIER_DISCOVERY_FOR_THE_ALREADY_VERIFIED_BOOT_ROUTE",
+      "MYSTERIOUS_PRIVATE_DATASET_INTERPRETATION_OF_GATED_TASKS_AND_ASSETS",
+      "GENERIC_WEBSITE_EQUIVALENCE_SEARCH_WHEN_EXACT_TAGGED_SELF_HOSTING_IS_FIRST_PARTY_ADMITTED"
+    ],
+    "remaining_exact_residuals": [
+      "AUTHORIZED_HUGGINGFACE_ACCOUNT_ACCEPTANCE_FOR_XLANGAI_OSWORLD_V2_TASKS_AT_OSWORLD_V2_1",
+      "AUTHORIZED_HUGGINGFACE_ACCOUNT_ACCEPTANCE_FOR_XLANGAI_OSWORLD_V2_ASSETS_GATED_AT_OSWORLD_V2_1",
+      "SELF_HOST_TASK_WEB_OSWORLD_WEB_AT_EXACT_OSWORLD_V2_1_TAG_AND_BIND_WEBSITE_HOST_SUFFIX",
+      "SELF_HOST_GITLAB_FOR_GITLAB_BACKED_TASKS_AND_BIND_PRIVATE_TOKEN_WITHOUT_NONZERO_INCREMENTAL_SPEND",
+      "ZERO_CASE_END_TO_END_CONFIGURATION_VALIDATION_ACROSS_TASK_ASSET_WEBSITE_GITLAB_AND_PINNED_VM_ROUTE",
+      "EVENTUAL_BRAIN_SCORE_GE_81_8_AFTER_ZERO_REALITY_FIXED_POINT"
+    ],
+    "access_classification": "ACCOUNT_CONSENT_AND_CONFIGURATION_STATE__NOT_PROVED_FREE-OF-ACCOUNT-ACTION__NOT A CAPABILITY GAP",
+    "monetary_conclusion": "NO MONETARY CHARGE IS ESTABLISHED BY THE FIRST_PARTY GATE PAGES THEMSELVES__DO NOT INFER ACCOUNT ACCESS UNTIL ACCEPTED"
+  },
+  "root_effect": {
+    "root1": "UNCHANGED_INACTIVE",
+    "root2": "OPEN__ACCESS_AND_PROTOCOL_RESIDUAL_SHARPLY_NARROWED",
+    "root3": "UNCHANGED"
+  },
+  "hard_rules": [
+    "DO_NOT_AUTO_ACCEPT THIRD_PARTY ACCOUNT TERMS WITHOUT USER-AUTHORIZED ACCOUNT ACTION",
+    "DO_NOT READ OR EXECUTE TERMINAL TASK CONTENT",
+    "DO_NOT INFER GATED ACCESS FROM PUBLIC LISTING",
+    "DO_NOT INFER END_TO_END EQUIVALENCE UNTIL ZERO_CASE CONFIGURATION VALIDATION PASSES",
+    "ZERO_INCREMENTAL_SPEND",
+    "ZERO_ACCEPTANCE_FAMILY_CAPABILITY_OWNERSHIP_CREDIT"
+  ],
+  "terminal_cases_consumed": 0,
+  "new_reality_units_consumed": 0,
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "family_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "ownership_credit_delta": 0,
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false,
+  "next": "INDEPENDENTLY VERIFY THE FIRST_PARTY ACCESS-CLASSIFICATION FACTS__THEN REQUEST OR USE ALREADY-AUTHORIZED HUGGINGFACE GATE ACCESS__SELF_HOST EXACT V2_1 WEBSITE/GITLAB__RUN ZERO_CASE END_TO_END CONFIG VALIDATION__ONLY THEN PRESERVE OSWORLD FOR MINIMUM REALITY BRAIN SCORE"
+}
