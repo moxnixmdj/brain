@@ -1,0 +1,21 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-03",
+  "intent_id": "TOOL_DISCOVERY_OBSERVABILITY_LOWER_BOUND_V1",
+  "objective": "Freeze a zero-credit information-theoretic lower bound for the exact open Tool Discovery predicate so universal-scope candidates cannot confuse identity completeness with capability observability completeness.",
+  "target_predicate": "TOOL_LEARNING_SUCCESS_ROUTE_NONINFERIOR",
+  "allowed_changes": [
+    "ADD_ZERO_CREDIT_GOVERNANCE_LOWER_BOUND",
+    "ADD_MACHINE_CHECKABLE_RUNTIME_THEOREM",
+    "ADD_ADVERSARIAL_TESTS"
+  ],
+  "forbidden_changes": [
+    "NO_ACCEPTANCE_CREDIT",
+    "NO_FAMILY_CREDIT",
+    "NO_TERMINAL_REPLAY",
+    "NO_PROMOTION",
+    "NO_EXECUTION_AUTHORITY",
+    "NO_TARGET_WEAKENING"
+  ],
+  "incremental_spend_usd": 0
+}
