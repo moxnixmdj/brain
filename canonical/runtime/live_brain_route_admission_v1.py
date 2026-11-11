@@ -2468,6 +2468,155 @@ def request_words_not_accounted_for(sentence: str, admission: Mapping[str, Any],
     return out
 
 
+# ---- A ROW CHOSEN BY SHARED WORDS MUST EXPLAIN MOST OF THE REQUEST ---------------------------
+#
+# The check above is opt-in: a row declares ``request_word_coverage: required`` and from then on
+# answers only sentences whose every word it accounts for.  The rows that existed before it never
+# opted in, and they are the ones a stranger's sentence reaches.  Measured 2026-11-11 on main
+# (3b9c5d1f) with 2,500 sentences drawn from a public corpus of shell requests written by other
+# people (nl2bash; none of it is vendored here):
+#
+#   * 292 sentences got an older row selected, bound and STARTED; 27 came back ``pass`` and 26 of
+#     those answer a different request.  "Print information about all users who are logged in"
+#     shares ``all`` and ``who`` with the python symbol index (score 8), ``source_root`` is filled
+#     with ``.``, the index of this repository is built and verified, and the door reports pass.
+#   * three of the refused ones had already written a file where the sentence pointed --
+#     "... redirecting error messages to /dev/null" left a report at ``dev/null`` in the root --
+#     because the refusal came after the run.
+#
+# In every one of them the row was chosen by ``DETERMINISTIC_VERIFIED_CAPABILITY_MATCH`` -- shared
+# words -- and the words it shares are a small minority of what the sentence says.  The sentences
+# this repository's own instruments send to the same rows look different by a wide margin: the
+# heartbeat's 68 passing goals that reach this point, and the 49 passing sentences of the door's
+# own tests, are explained by their row except for at most a word or two ("Apply the jq filter
+# ... with jq and write the output to ..." leaves ``apply``).
+#
+# So a row chosen by shared words is asked, before it starts, how much of the request it explains:
+#
+#   explained     a content word the row was matched on, or that the row's own declaration uses
+#                 (keywords, provides, requires, result fields, argument names, the effect its
+#                 verification observed, words it declares it also serves, its id);
+#   unexplained   a content word nothing in the row says anything about;
+#   neither       closed-class words, numbers, paths, quoted text, identifiers, words that state
+#                 where a result goes, and every word the row BOUND AS DATA into one of its inputs
+#                 (a row that takes the sentence itself as an input reads its own data out of it,
+#                 so nothing of that sentence is unexplained HERE -- its adapter must refuse).
+#
+# When the unexplained words OUTNUMBER the explained ones the row is not what the sentence is
+# about, and the run is refused before it starts, naming both lists.
+#
+# Scope, stated as data and not as ids:
+#   * decisions whose ``compiler_mode`` is the lexical match -- a typed plan is chosen by a
+#     pattern grammar, not by counting words, and long task descriptions reach it legitimately;
+#   * plus any row that opts in with ``request_word_coverage: majority`` (a row whose typed
+#     family is itself triggered by one word; ``git.repository.operate.v1`` was started by the
+#     single word "history" in 12 of the 26 wrong passes);
+#   * never a row under the strict check above, and never a decision whose basis is that every
+#     word was read.
+#
+# What this is not: the strict check.  A sentence most of whose words a row does explain still
+# passes this one ("... in a tabular form" would, if only the form were asked for).  It removes
+# the selections where the row explains less than it leaves unexplained, and nothing else.
+_LEXICAL_MATCH_COMPILER_MODE = "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH"
+_QUANTIFIER_WORDS = frozenset("all any each every some both either neither other another such only also just".split())
+_RESULT_DESTINATION_WORDS = frozenset(
+    "save saves saved saving write writes written writing store stores stored storing output outputs result results report reports".split())
+_ROW_DECLARATION_FIELDS = ("keywords", "provides", "requires", "result_fields", "handles_verbs")
+
+
+def _word_stem(word: str) -> str:
+    """A deliberately small stem: plural, -ing, -ed and a final e.  Applied to both sides alike."""
+    for suffix in ("ings", "ing", "ed", "es", "s"):
+        if word.endswith(suffix) and len(word) - len(suffix) >= 3:
+            word = word[: len(word) - len(suffix)]
+            break
+    return word[:-1] if len(word) > 3 and word.endswith("e") else word
+
+
+def _words_in(value: Any, into: set[str]) -> set[str]:
+    if isinstance(value, str):
+        into.update(_WORD_RE.findall(value.lower()))
+    elif isinstance(value, Mapping):
+        for key, item in value.items():
+            _words_in(str(key), into)
+            _words_in(item, into)
+    elif isinstance(value, (list, tuple, set, frozenset)):
+        for item in value:
+            _words_in(item, into)
+    elif value is not None and not isinstance(value, bool):
+        into.update(_WORD_RE.findall(str(value).lower()))
+    return into
+
+
+def _row_declared_vocabulary(capability_id: str, entry: Mapping[str, Any]) -> set[str]:
+    """Stems of every word the row's own declaration uses to say what it takes, does and returns."""
+    words: set[str] = set()
+    for field in _ROW_DECLARATION_FIELDS:
+        _words_in(entry.get(field), words)
+    # The NAMES of the row's arguments and bindings, not the registry format's own words: read whole,
+    # every action template would explain "expect", "field", "type" and "value" for every row.
+    template = entry.get("action_template")
+    if isinstance(template, Mapping) and isinstance(template.get("args"), Mapping):
+        _words_in(list(template["args"].keys()), words)
+    if isinstance(entry.get("proposal_bindings"), Mapping):
+        _words_in(list(entry["proposal_bindings"].keys()), words)
+    # Words the row declares it serves without their taking part in selection; only the words, never
+    # the evidence recorded beside them.
+    _words_in(list((entry.get("request_words_also_served") or {}).get("words") or ()), words)
+    verification = entry.get("verification")
+    if isinstance(verification, Mapping):
+        _words_in(verification.get("observed_effect"), words)
+    _words_in(str(capability_id), words)
+    return {_word_stem(word) for word in words}
+
+
+def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], inputs: Any,
+                                   capability_id: str, entry: Mapping[str, Any]) -> tuple[list[str], list[str]]:
+    """``(explained, unexplained)`` content words of ``sentence`` for the selected row, in sentence order."""
+    vocabulary = _row_declared_vocabulary(capability_id, entry)
+    vocabulary.update(_word_stem(str(token).lower()) for token in (admission.get("matched_tokens") or ()))
+    bound_as_data = _words_in(inputs if isinstance(inputs, Mapping) else {}, set())
+    explained: list[str] = []
+    unexplained: list[str] = []
+    for raw in _QUOTED_TEXT_RE.sub(" ", str(sentence or "")).split():
+        word = raw.strip(".,;:!?()[]{}")
+        if not word or _PATHLIKE_WORD_RE.search(word):
+            continue
+        if "_" in word.strip("_") or word.startswith(("--", "$")):
+            continue  # an identifier, a flag or a variable is a name, not a request
+        for token in _WORD_RE.findall(word.lower()):
+            if (token in _CLOSED_CLASS_WORDS or token in _QUANTIFIER_WORDS
+                    or token in _RESULT_DESTINATION_WORDS or token.isdigit()
+                    or token in explained or token in unexplained):
+                continue
+            if _word_stem(token) in vocabulary:
+                explained.append(token)
+            elif token not in bound_as_data:
+                unexplained.append(token)
+    return explained, unexplained
+
+
+def row_chosen_by_words_explains_too_little(sentence: str, admission: Mapping[str, Any], compiled: Mapping[str, Any],
+                                            capability_id: str, entry: Mapping[str, Any]) -> tuple[list[str], list[str]] | None:
+    """``(explained, unexplained)`` when the row must be refused before it starts, else ``None``."""
+    if not entry or entry.get("request_word_coverage") == "required":
+        return None  # the strict check owns that row
+    if str(admission.get("admission_basis") or "") == "EVERY_WORD_OF_THE_SENTENCE_READ_BY_TAUGHT_MEANINGS":
+        return None  # nothing is unexplained by construction
+    if capability_id and str(capability_id) in str(sentence or ""):
+        # "Run the <capability id>." states the row's identity; it was not guessed from shared words
+        # (canonical/tests/test_a_provisional_pass_says_why_it_is_provisional_v1.py reaches every row so).
+        return None
+    mode = str(compiled.get("compiler_mode") or admission.get("compiler_mode") or "")
+    if mode != _LEXICAL_MATCH_COMPILER_MODE and entry.get("request_word_coverage") != "majority":
+        return None
+    explained, unexplained = request_words_explained_by_row(
+        sentence, admission, compiled.get("inputs"), capability_id, entry)
+    if len(unexplained) > len(explained):
+        return explained, unexplained
+    return None
+
+
 def promised_files_this_row_does_not_write(admission: Mapping[str, Any], inputs: Any,
                                            entry: Mapping[str, Any]) -> list[str]:
     """Files the sentence promises that the selected row does not declare it writes.
@@ -5894,6 +6043,20 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
             refused["refused_before_execution"] = True
             refused["promised_files_not_written"] = list(_unwritten)
             return refused
+    # A ROW CHOSEN BY SHARED WORDS IS ASKED HOW MUCH OF THE REQUEST IT EXPLAINS, BEFORE THE RUN
+    # (see ``request_words_explained_by_row``).
+    _too_little = row_chosen_by_words_explains_too_little(normalized, admission, compiled, _declared, _declared_entry)
+    if _too_little is not None:
+        _explained, _unexplained = _too_little
+        refused = _fail(
+            task_id, "FAIL_CLOSED__MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY",
+            "MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY:%s:explained=%s:unexplained=%s"
+            % (_declared, ",".join(_explained), ",".join(_unexplained)),
+            started, compiled_capability_id=_declared, executed=False)
+        refused["refused_before_execution"] = True
+        refused["explained_request_words"] = list(_explained)
+        refused["unexplained_request_words"] = list(_unexplained)
+        return refused
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
     promised_roots = _promised_source_roots(normalized)

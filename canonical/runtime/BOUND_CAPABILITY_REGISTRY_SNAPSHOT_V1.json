@@ -3026,6 +3026,19 @@
         "git.working_tree.inspect",
         "git.commit.create"
       ],
+      "request_word_coverage": "majority",
+      "request_words_also_served": {
+        "required_by": [
+          "canonical/tests/test_a_question_about_the_repository_is_answered_by_the_repository_v1.py :: What changed since the last commit?",
+          "canonical/tests/test_a_pending_inventory_row_is_not_an_answer_v1.py :: Who last changed line 2 of <file>?",
+          "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py :: Who last changed the function line_total in <file>?"
+        ],
+        "words": [
+          "changed",
+          "function",
+          "since"
+        ]
+      },
       "requires": [
         "git.repository.available"
       ],
@@ -8306,6 +8319,14 @@
         "python.source.change_impact.test_selection",
         "python.source.change_impact.testselect.v1"
       ],
+      "request_words_also_served": {
+        "required_by": [
+          "canonical/tests/test_the_answer_must_be_the_effect_that_was_stated_v1.py :: Which tests do I need to run after changing <file>?"
+        ],
+        "words": [
+          "run"
+        ]
+      },
       "requires": [],
       "result_fields": [
         "adapter",
