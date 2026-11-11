@@ -1,0 +1,30 @@
+{
+  "schema": "PROJECT_BRAIN_VERIFICATION_RUNNER_QUEUE_EMERGENCY_20261005_V1",
+  "date": "2026-10-05",
+  "status": "ACTIVE_INFRASTRUCTURE_BOTTLENECK__2500_QUEUED_RUNS_OBSERVED__DO_NOT_CONFUSE_QUEUEING_WITH_PROOF_FAILURE",
+  "repository": "moxnixmdj/verification-capsule-runner",
+  "observed": {
+    "queued_workflow_runs": 2500,
+    "in_progress_workflow_runs_reported": 3
+  },
+  "affected_frozen_run": {
+    "workflow_run_id": 37245427311,
+    "head_sha": "afd2b8990ac969bfd08bfe8ab52975507788028b",
+    "state": "QUEUED"
+  },
+  "operational_rule": [
+    "DO_NOT_RETRIGGER_UNCHANGED_VERIFIERS_WHILE_EQUIVALENT_RUN_IS_QUEUED",
+    "DO_NOT_PUSH_RUNNER_MAIN_FOR_NONESSENTIAL_CHANGES",
+    "PREFER_BRANCH_AND_PATH_SCOPED_WORKFLOWS_FOR_NEW_VERIFICATION",
+    "USE_REMOTE_ZERO_REALITY_REPLAYS_FOR_FALSIFICATION_AND_CORROBORATION_ONLY__DO_NOT_RELAX_FROZEN_PROMOTION_GATES_POST_OUTCOME"
+  ],
+  "interpretation": "RUNNER_QUEUE_IS_A_WALL_CLOCK_CARRIER_FAILURE__NOT_EVIDENCE_FOR_OR_AGAINST_THE_BOUND_CAPABILITY_CLAIM",
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "terminal_cases_consumed": 0,
+    "acceptance_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0
+  }
+}
