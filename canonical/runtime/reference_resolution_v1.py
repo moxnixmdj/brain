@@ -67,6 +67,22 @@ COLOUR_WORDS = (
 _SHAPE_WORDS = ("circle", "square", "box", "triangle", "rectangle", "star", "rect", "polygon")
 
 
+def _declared_names(c: Mapping[str, Any], want: str) -> bool:
+    """Does the page declare this control by the word the goal used?
+
+    class/aria-label/title/alt/id, matched on word boundaries so "star" does not match
+    "starving" and "trash" does not match "trashcan-2". The goal word may carry a suffix
+    ("star icon"), so the declaration is required to CONTAIN the goal word, not equal it.
+    """
+    if not want:
+        return False
+    for key in ("declared", "cls", "aria", "title", "alt", "id"):
+        val = _norm(str(c.get(key) or ""))
+        if val and re.search(r"(?:^|[\s_\-])" + re.escape(want) + r"(?:$|[\s_\-])", val):
+            return True
+    return False
+
+
 def _norm(text: Any) -> str:
     return re.sub(r"\s+", " ", str(text or "")).strip().lower()
 
@@ -272,11 +288,29 @@ class Resolver:
         # a sibling panel of the same row. So walk outward: smallest block that holds both.
         blocks.sort(key=lambda b: b["a"])
         want = _norm(target)
+        # An icon is named by the page, not by its text.
+        #
+        # Measured 2026-11-09 on `email-inbox`: the goal says "click the star icon", the row
+        # holds <span class="star"> with NO text, and own-text matching therefore found
+        # nothing -- TARGET_NOT_INSIDE_ANCHOR on a page where the target was present and
+        # correctly nested. The page declares the control's name in class/aria-label/title/
+        # alt/id; the goal uses the same word. This is the same mechanism as a CLI flag whose
+        # documented words match the goal, which is the one that worked in r154: the match is
+        # on declared names, not on a table of what I happen to know about email pages.
+        # A declared match is only accepted inside the anchor and only when exactly one
+        # element carries it, so it cannot turn a guess into a click.
         for block in blocks[:12]:
+            box = (lambda c: block["x"] <= c["cx"] <= block["x"] + block["w"]
+                   and block["y"] <= c["cy"] <= block["y"] + block["h"])
             inside = [c for c in self.text_candidates("button,a,li,div,span,input,label")
-                      if c["vis"] and _norm(c.get("own") or "") == want
-                      and block["x"] <= c["cx"] <= block["x"] + block["w"]
-                      and block["y"] <= c["cy"] <= block["y"] + block["h"]]
+                      if c["vis"] and _norm(c.get("own") or "") == want and box(c)]
+            if not inside:
+                declared = [c for c in self.text_candidates("button,a,li,div,span,input,label")
+                            if c["vis"] and box(c) and _declared_names(c, want)]
+                named = [c for c in declared if c.get("cx") is not None]
+                uniq = [c for c in named
+                        if sum(1 for d in named if (d["cx"], d["cy"]) == (c["cx"], c["cy"])) == 1]
+                inside = uniq[:1]
             if len(inside) == 1:
                 return {"status": "RESOLVED", "kind": "SCOPE", "by": "anchor+target",
                         "choice": inside[0], "anchor_box": block, "n": 1}
@@ -398,6 +432,29 @@ def plan_reference(goal: str) -> list[dict[str, Any]]:
     quoted = re.findall(r'"([^"]+)"', goal) or re.findall(r"\u201c([^\u201d]+)\u201d", goal)
     quoted = [q.strip() for q in quoted if q.strip()]
 
+    # ANCHOR + TARGET: "Find the email by Jeniece and click the star icon."
+    #
+    # The sentence names TWO things: a row (the anchor) and a control inside it (the
+    # target). plan_reference used to extract only the target -- it returned
+    # [{'kind':'RELATION','value':'star','by':'shape'}] for the goal above, discarding
+    # Jeniece entirely and then resolving "star" by shape on the whole page, where it
+    # found the instruction text. resolve_scope(anchor, target) already existed and was
+    # called for nothing in this shape.
+    #
+    # This is a ROUTING rule, not a task rule: it fires on the sentence having a
+    # "by <name>" / "from <name>" anchor and a later control verb, which is how the
+    # instruction itself is written, and it defers entirely to resolve_scope, whose
+    # anchor+target discipline refuses when the pair is not unique.
+    _m = re.search(r"\b(?:by|from)\s+([A-Z][A-Za-z'\-]+)\b", goal)
+    if _m:
+        _anchor = _m.group(1).strip(" ,.")
+        _tail = goal[_m.end():].lower()
+        _tm = re.search(r"\b(?:the\s+)?([a-z]+(?:\s+[a-z]+)?)\s+(?:icon|button|link|field)\b", _tail)
+        _tgt = (_tm.group(1).split()[-1] if _tm else None)
+        if _tgt and _anchor.lower() not in ("the", "a", "an"):
+            steps.append({"kind": "SCOPE", "anchor": _anchor, "target": _tgt})
+            # the anchor+target pair is tried FIRST and, if it resolves, is the answer;
+            # later steps stay as fallbacks so a refusal is not the end of the plan
     # SCOPE: "For the user @leonie, click on the 'Report' button."
     m = re.search(r"for the (?:user|person|account)\s+(\S+?)\s*,", goal, re.I)
     if m and quoted:
@@ -544,6 +601,22 @@ def resolve_painted_reference(act: Any) -> dict[str, Any]:
             "choice": tied[0], "candidates": tied[:12], "n": len(tied), "reference": want}
 
 
+def _clickable(choice: Any) -> bool:
+    """A RESOLVED without coordinates is not a resolution -- it is a status string.
+
+    Measured 2026-11-09 on the public task `email-inbox`: resolve_with_expansion returned
+    status RESOLVED with a choice carrying no cx/cy at all, and on the next page a
+    `declared: 'click canvas'` element at (245,105) -- the instruction, not a mail row.
+    The caller clicks c["cx"], so a choice without coordinates either raises or clicks
+    at a phantom. Every surface that reports RESOLVED must carry a point that can be
+    pressed, or it must not report RESOLVED.
+    """
+    if not isinstance(choice, dict):
+        return False
+    cx, cy = choice.get("cx"), choice.get("cy")
+    return isinstance(cx, (int, float)) and isinstance(cy, (int, float))
+
+
 def resolve(act: Any, goal: str) -> dict[str, Any]:
     """Resolve a goal to ONE element, or say why it cannot.
 
@@ -559,7 +632,9 @@ def resolve(act: Any, goal: str) -> dict[str, Any]:
         got = resolve_painted_reference(act)
         attempts.append({"step": {"kind": "RELATION", "value": "painted", "by": "reference"},
                          "status": got.get("status"), "reason": got.get("reason")})
-        if got["status"] == "RESOLVED":
+        if got["status"] == "RESOLVED" and not _clickable(got.get("choice")):
+            attempts.append({"status": "UNCLICKABLE", "reason": "RESOLVED_WITHOUT_COORDINATES"})
+        elif got["status"] == "RESOLVED":
             return {"status": "RESOLVED", "kind": "RELATION", "choice": got["choice"],
                     "attempts": attempts, "by": "painted-reference"}
         if got["status"] == "AMBIGUOUS":
@@ -580,6 +655,11 @@ def resolve(act: Any, goal: str) -> dict[str, Any]:
             continue
         attempts.append({"step": step, "status": got.get("status"),
                          "n": got.get("n"), "reason": got.get("reason")})
+        if got["status"] == "RESOLVED" and not _clickable(got.get("choice")):
+            # A status without a pressable point is not a resolution. Demote it and go on.
+            attempts.append({"step": step, "status": "UNCLICKABLE",
+                             "reason": "RESOLVED_WITHOUT_COORDINATES"})
+            continue
         if got["status"] == "RESOLVED":
             return {"status": "RESOLVED", "kind": kind, "choice": got["choice"],
                     "attempts": attempts}
