@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 394,
+  "knowledge_documents": 395,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6787,
+  "research_index_records": 6788,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8bcf5d33e28534297899c63c67691fe5b516b54607d374b42981c80d8b502ce7"
+  "value": "077e5df4ee29dc1c0555c9d009710605acc60bf77d39695ccc1942a2e4f10752"
  },
  "engines": [
   {
@@ -44814,6 +44814,84 @@
     "incidental",
     "rename",
     "set"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5273,
+   "headings": [
+    "An owned attribute rename is set aside, and the second showing's injection dies",
+    "1. Predictions, declared before the measurement ran",
+    "2. What landed",
+    "3. Why the declared candidate was killed before implementation",
+    "4. Discipline",
+    "5. Next"
+   ],
+   "kind": "DOCUMENT",
+   "path": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1.md",
+   "sha256": "4d6efd4f798c40c862ffa9659f4c6ae21f323b499bcd73c09c12f8384700a6fe",
+   "summary": "**2026-11-12.** Base `ff810a5b`. Branch `arena/4688253e-brain`. Follows #6788.",
+   "terms": {
+    "1.isset": 4,
+    "62": 3,
+    "6788": 5,
+    "all": 4,
+    "any": 4,
+    "attribute": 7,
+    "before": 6,
+    "both": 5,
+    "candidate": 3,
+    "dies": 3,
+    "diff": 5,
+    "engine": 3,
+    "exactly": 4,
+    "example": 6,
+    "examples": 6,
+    "extra": 4,
+    "file": 3,
+    "first": 3,
+    "form": 4,
+    "fresh": 6,
+    "held": 5,
+    "held_out": 6,
+    "injection": 3,
+    "is_set": 4,
+    "lesson": 3,
+    "name": 3,
+    "named": 4,
+    "never": 4,
+    "now": 3,
+    "one": 6,
+    "one-showing": 4,
+    "only": 3,
+    "refused": 8,
+    "rename": 9,
+    "same": 3,
+    "second": 6,
+    "seen": 5,
+    "self._stop_event.is_set": 3,
+    "set": 3,
+    "showing": 5,
+    "showings": 8,
+    "standing": 3,
+    "strict": 9,
+    "tables": 3,
+    "teacher": 4,
+    "tried": 10,
+    "two": 3,
+    "unchanged": 5
+   },
+   "title": "An owned attribute rename is set aside, and the second showing's injection dies",
+   "title_terms": [
+    "aside",
+    "attribute",
+    "dies",
+    "injection",
+    "owned",
+    "rename",
+    "second",
+    "set",
+    "showing"
    ]
   },
   {
@@ -75407,10 +75485,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1196,
+  "included_source_count": 1197,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "10c9336ebcf87d59854bdfb2e708fa8af7806095d59e4a9c57085aa5bdaec847"
+  "source_tree_digest": "5ff3bf3b5a6a730bfd7730bd80db53bf2f8d36cd15fd03f35a0bfa8095631888"
  },
  "research_index": [
   {
@@ -219495,6 +219573,31 @@
     "role": 2,
     "supply": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c9b6e12c84f6a5f05a9eb269b4ab5844eececcf028daaeef40a3e64ac7f32978",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "an_owned_attribute_rename_is_set_aside_20261112_v1": 1,
+    "aside": 1,
+    "attribute": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "held_out_at_2_showings__diff_4_to_0__extra_4_to_0__tried_same_161__fresh_and_seen_at_2_unchanged__one_showing_tables_byte_identical__zero_wrong_writes_at_two_showings_on_all_tracked_sets": 1,
+    "owned": 1,
+    "rename": 1,
+    "set": 1,
+    "set_aside_the_owned_attribute_rename_by_ownership_store_context__mirroring_the_variable_form__declare_four_predictions_and_push_before_measuring__measure_once__kill_the_support_counting_candidate_pre_implementation": 1,
+    "the_second_showings_injection_side__an_owned_attribute_rename_in_one_teachers_commit_entered_the_lesson_because_no_example_had_code_of_its_form_to_dissent_and_support_counting_cannot_see_a_tangle_that_coincides_with_honest_text": 1,
+    "v1": 1
    }
   },
   {
