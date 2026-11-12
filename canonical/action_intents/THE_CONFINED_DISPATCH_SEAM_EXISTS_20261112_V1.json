@@ -1,0 +1,459 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1",
+ "action_intent_id": "THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "4325dbfa2da1e7d7735dec024b1930750710eff7",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "This round wired the confinement substrate into the door and corrected the previous round's diagnosis with measurements. SEAM: canonical/runtime/confined_dispatch_v1.py + CONFINED_EFFECT_DECLARATIONS_V1.json (reviewed data: 11 capabilities declaring which bound argument is the verified effect) + a 9-line seam in run_adapter_locally: a declared capability runs its REAL adapter imported from the disposable clone with root=worktree, declared effects verified by sha256 inside the worktree, the host git status byte-identical after, and the SAME expectation check judging the result; every non-honorable shape returns None and the refusal stands. Measured 5/5 including end-to-end: python.source.symbols.index.ast runs against THIS repository, the clone indexes the clone, symbols_index.json verifies inside the worktree, the host never moves, dependency.executor=ADMITTED_CONFINEMENT_V1. CORRECTION: tracing the door with sys.settrace showed boundary.refuses_execution is NEVER consulted for the probe's confinement-refused goals -- the status is emitted by _serve_by_acting, the program-synthesis discovery fallback, which masks the compile failure underneath (the capability path never runs; refuses_execution for the symbols-index adapter is False -- it is not execution-classified at all). The probe re-run with the seam live measured door fates UNCHANGED (32 NOT_COMPILED / 3 EXECUTED / 3 ROUTED_ELSEWHERE): the wall for realistic advanced-coding sentences is the COMPILE LAYER, one layer earlier than the previous round claimed. The honest chain is now sentence->compile(FAIL for 32/38)->bind->confined dispatch (NEW, measured)->verified receipt. The previous doc's claim that the wall was 'refused for want of the substrate' is corrected here: the substrate was necessary but the compile layer is the binding constraint at the door. The guard suite (23/23) confirms every pinned refusal stands, including the compress-notes discovery refusal.",
+ "selected_route": "WIRE_THE_CONFINED_DISPATCH_SEAM_AND_CORRECT_THE_WALL_DIAGNOSIS",
+ "causal_blocker": "THE_CONFINEMENT_SUBSTRATE_HAD_NO_CALLER_IN_THE_DOOR__AND_THE_PROBES_19_CONFINEMENT_REFUSALS_WERE_MISREAD_AS_PER_CAPABILITY_BOUNDARY_REFUSALS_WHEN_THEY_ARE_THE_DISCOVERY_FALLBACK_MASKING_COMPILE_FAILURES",
+ "expected_parent_change": "COMPILED_AND_BOUND_DECLARED_CAPABILITIES_NOW_RUN_ON_THE_DISPOSABLE_CLONE_WITH_VERIFIED_EFFECT_RECEIPTS_AND_THE_CORRECTED_WALL_IS_THE_COMPILE_LAYER__32_OF_38_REALISTIC_SENTENCES_FAIL_BEFORE_ANY_DISPATCH__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "expected_parent_frontier_change": "COMPILED_AND_BOUND_DECLARED_CAPABILITIES_NOW_RUN_ON_THE_DISPOSABLE_CLONE_WITH_VERIFIED_EFFECT_RECEIPTS_AND_THE_CORRECTED_WALL_IS_THE_COMPILE_LAYER__32_OF_38_REALISTIC_SENTENCES_FAIL_BEFORE_ANY_DISPATCH__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_CONFINEMENT_SUBSTRATE_HAD_NO_CALLER_IN_THE_DOOR__AND_THE_PROBES_19_CONFINEMENT_REFUSALS_WERE_MISREAD_AS_PER_CAPABILITY_BOUNDARY_REFUSALS_WHEN_THEY_ARE_THE_DISCOVERY_FALLBACK_MASKING_COMPILE_FAILURES",
+ "falsification_condition": "THE_SEAM_ROUTING_AN_UNDECLARED_CAPABILITY__OR_A_CONFINED_RESULT_PASSING_WITHOUT_ITS_DECLARED_EFFECTS_VERIFIED_INSIDE_THE_WORKTREE__OR_THE_HOST_GIT_STATUS_MOVING__OR_THE_PINNED_GUARD_REFUSALS_CHANGING__OR_THE_PROBE_DECOMPOSITION_NOT_REPRODUCING__OR_REFUSES_EXECUTION_BEING_CONSULTED_AND_OVERRIDDEN",
+ "stop_condition": "SEAM_5_OF_5_TESTS_PASS_END_TO_END_REAL_ADAPTER_BYTE_IDENTICAL_HOST_SAME_EXPECTATION_RULER__GUARD_SUITE_23_OF_23_UNTOUCHED__PROBE_RE_RUN_DOOR_FATES_UNCHANGED_32_3_3_CORRECTING_THE_19_BUCKET_TO_THE_DISCOVERY_FALLBACK_MASKING_COMPILE_FAILURES_MEASURED_BY_SETTRACE_AND_REFUSES_EXECUTION_NEVER_CONSULTED__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/confined_dispatch_v1.py",
+   "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+   "canonical/tests/test_confined_dispatch_v1.py",
+   "THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_THE_PROBES_CONFINEMENT_BUCKET_WERE_PER_CAPABILITY_BOUNDARY_REFUSALS_WAITING_FOR_THE_SUBSTRATE__AND_THAT_WIRING_THE_SEAM_WOULD_MOVE_DOOR_FATES",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_4325dbfa__SEAM_5_OF_5_END_TO_END_BYTE_IDENTICAL_HOST__GUARD_23_OF_23__PROBE_RE_RUN_32_3_3_UNCHANGED__SETTRACE_SHOWS_SERVE_BY_ACTING_EMITS_THE_STATUS__WALL_IS_THE_COMPILE_LAYER"
+ },
+ "measured_effect": "SEAM_5_OF_5_END_TO_END_REAL_ADAPTER_BYTE_IDENTICAL_HOST_SAME_RULER__GUARD_23_OF_23__PROBE_RE_RUN_32_3_3_UNCHANGED__19_BUCKET_CORRECTED_TO_DISCOVERY_FALLBACK_MASKING_COMPILE_FAILURES_BY_SETTRACE__WALL_NOW_THE_COMPILE_LAYER__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "MEASURED_SEAM_PLUS_A_CORRECTED_DIAGNOSIS__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/confinement_v1.py",
+  "canonical/runtime/computer_execution_boundary_v1.py",
+  "canonical/tools/realistic_goal_reach_probe_v1.py",
+  "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "4325dbfa2da1e7d7735dec024b1930750710eff7",
+  "real_outcome": "THE_CONFINED_DISPATCH_SEAM_EXISTS_AND_IS_MEASURED_END_TO_END__THE_19_BUCKET_IS_CORRECTED_TO_THE_DISCOVERY_FALLBACK_MASKING_COMPILE_FAILURES__THE_WALL_MOVES_TO_THE_COMPILE_LAYER",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether one try per environment teaches everything. The execution-governance layer is now complete (substrate + seam + declarations + same-ruler expectation), and the measured wall moved to the compile layer: 32 of 38 realistic advanced-coding sentences fail before any dispatch, then the discovery fallback reports a boundary status that hides the gap.",
+   "proxy_goals_deleted": [
+    "reading the probe's boundary-status bucket as per-capability refusals without tracing the emitter",
+    "counting a wired seam as door-level availability before re-running the probe",
+    "declaring effect contracts for capabilities whose refusal flow is conditional (repair) without its own diff"
+   ],
+   "surviving_necessity": "A sentence must compile to a declared capability before the confined route can fire; the discovery fallback must report the failure underneath it, precisely."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/confinement_v1.py (the substrate -- admit/execute/release used as-is)",
+    "canonical/runtime/computer_execution_boundary_v1.py (the boundary decision -- untouched, still consulted first)",
+    "canonical/runtime/live_brain_route_admission_v1.py run_adapter_locally (the dispatch contract -- mirrored: capability_id, dependency, _check_expectation)",
+    "canonical/tools/realistic_goal_reach_probe_v1.py (the scoreboard instrument -- re-run on the committed tree)",
+    "canonical/tests/test_computer_unconfined_route_guard_v1.py (the pinned refusals -- 23/23 still pass)"
+   ],
+   "external_existing_routes_checked": [
+    "OSWorld 2.1 (Nov 2026): best binary completion 44.3% -- the field's wall is planning and verification over long horizons, matching the corrected compile-layer diagnosis",
+    "GroundAct (arXiv 2508.05614): feasibility inference from environmental state is the measured agent gap",
+    "environment-probing curation (arXiv 2609.11060): least-privilege probes with receipts raise pass rates -- the receipt contract matches"
+   ],
+   "capability_work_deleted": [
+    "the previous round's misreading of the 19/38 bucket -- corrected by settrace measurement, recorded in the doc",
+    "the assumption that wiring the seam would move door fates -- falsified by the probe re-run (32/3/3 unchanged)",
+    "effect declarations for repair and network-gated rows -- deliberately excluded, each needs its own honest diff"
+   ],
+   "surviving_gap": "the compile layer: the front compiler produces no plan for 32 of the 38 realistic sentences; the discovery fallback then masks the gap with a boundary status"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: the door orders its fallbacks so that a goal naming a file output first hits the synthesis-discovery refusal, which reports COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT even when the real failure is that no plan compiled. The refusal is honest but imprecise, and an imprecise refusal misdirects the plan -- it misdirected this session's previous round.",
+   "delete_bypass_substitute_options": [
+    "DELETE the discovery fallback -- rejected: it is the honest refusal of unconfined automatic file creation",
+    "BYPASS by routing the fallback through the composer -- rejected: the composer has its own measured refusal surface",
+    "SUBSTITUTE a per-sentence special case in the compiler -- rejected: that is benchmark-specific routing, banned"
+   ],
+   "surviving_causal_blocker": "the front compiler does not produce plans for the 38 realistic sentences; the seam waits underneath and fires the moment one compiles"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Generalise the lifter to constant collections + discriminating-grid gates -- chosen: one rule, all machinery already measured, both families served",
+    "2. Hand-written keyed-table recogniser plus special-case lifter -- rejected: per-family machinery the general rule replaces",
+    "3. Crystallization-time emission -- killed by arithmetic (262 vs 179 bytes embedded) before implementation; needs a runtime-binding execution contract, an architectural decision",
+    "4. Model donor for body understanding -- rejected by law"
+   ],
+   "losing_routes_reason": "Special-casing duplicates what the general rule does; emission changes the execution contract of every downstream organ consumer for a win the replay path already delivers at the system level; a donor violates the ownership law.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through real execution: the never-seen organ and its replay run on held-out action ids including unknowns and type-hostile inputs; the vacuity gate is exercised by the numeric grid that must refuse; the first family's measured numbers (gain 67, armed-vs-cold prediction) are re-run as regression. The prediction was written before the confirmatory run; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-24 note's second-family negative -- superseded by this measurement",
+    "the round-24 next-step candidate 'crystallization-time emission' -- killed with recorded arithmetic, not deferred silently"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the world-model writer (reused unchanged as the second family's corpus source)",
+    "the round-23/24 admission, licensing, and replay machinery (reused unchanged)"
+   ],
+   "fresh_reuse_plan": "Organ-declared domain probes close the bridge's honest gap; perceptor/policy corpora are the same cheap measurement; the learning-to-learn benchmark re-run is the next cache-proof question."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving whether the mechanism generalises -- pinned by the second-family prediction test",
+    "re-arguing the crystallization arithmetic -- recorded in the result document with the numbers"
+   ],
+   "search_stop_decision": "Stop when the generalisation question is answered by measurement and the vacuity gate is symmetric across both gates. Third-family measurement and bridge probe metadata are new rounds with their own predictions.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "WIRE_THE_CONFINED_DISPATCH_SEAM_AND_CORRECT_THE_WALL_DIAGNOSIS",
+   "TEACH_THE_FRONT_COMPILER_THE_38_SENTENCES_IN_THE_SAME_ROUND",
+   "DELETE_THE_DISCOVERY_FALLBACK",
+   "DECLARE_REPAIR_AND_NETWORK_CAPABILITIES_NOW"
+  ],
+  "deleted_or_bypassed_paths": [
+   "TUPLE_ONLY_LIFTING_RULE",
+   "FIRST_LINE_ONLY_HELPER_RENDERER",
+   "CRYSTALLIZATION_TIME_EMISSION_CANDIDATE_KILLED_BY_ARITHMETIC",
+   "NON_DISCRIMINATING_GRIDS_AT_BOTH_GATES"
+  ],
+  "selected_surviving_route": "WIRE_THE_CONFINED_DISPATCH_SEAM_AND_CORRECT_THE_WALL_DIAGNOSIS",
+  "why_selected_route_is_fastest_sufficient": "THE_SUBSTRATE_EXISTS__THE_CONTRACT_IS_ALREADY_WRITTEN_BY_RUN_ADAPTER_LOCALLY__THE_DECLARATIONS_ARE_DATA__THE_SEAM_IS_NINE_LINES__AND_THE_CORRECTION_COST_ONE_SETTRACE_RUN_INSTEAD_OF_A_WASTED_COMPILE_LAYER_ROUND",
+  "expected_parent_level_state_change": "COMPILED_AND_BOUND_DECLARED_CAPABILITIES_NOW_RUN_ON_THE_DISPOSABLE_CLONE_WITH_VERIFIED_EFFECT_RECEIPTS_AND_THE_CORRECTED_WALL_IS_THE_COMPILE_LAYER__32_OF_38_REALISTIC_SENTENCES_FAIL_BEFORE_ANY_DISPATCH__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "SEAM_5_OF_5_TESTS_PASS_END_TO_END_REAL_ADAPTER_BYTE_IDENTICAL_HOST_SAME_EXPECTATION_RULER__GUARD_SUITE_23_OF_23_UNTOUCHED__PROBE_RE_RUN_DOOR_FATES_UNCHANGED_32_3_3_CORRECTING_THE_19_BUCKET_TO_THE_DISCOVERY_FALLBACK_MASKING_COMPILE_FAILURES_MEASURED_BY_SETTRACE_AND_REFUSES_EXECUTION_NEVER_CONSULTED__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T20:16:00Z",
+   "max_age_hours": 24,
+   "incumbent_route": "SUBSTRATE_WITHOUT_A_CALLER__PROBE_BUCKET_19_MISREAD_AS_PER_CAPABILITY_BOUNDARY_REFUSALS__COMPILE_LAYER_WALL_UNMEASURED",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "settrace on door.solve: the confinement status for the probe goals is emitted by _serve_by_acting (discovery fallback), never by refuses_execution",
+     "refuses_execution('python.source.symbols.index.ast', ...) is False -- the adapter is not execution-classified; the status came from the fallback",
+     "probe re-run with the seam live: door fates unchanged (32/3/3) -- the seam is real and unreachable from those sentences",
+     "the seam's own end-to-end test runs the real adapter against THIS repository with a byte-identical host"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "OSWorld 2.1 (Nov 2026): best binary completion 44.3% -- long-horizon planning and verification is the field wall, matching the corrected compile-layer diagnosis",
+     "GroundAct (arXiv 2508.05614): feasibility inference from unmentioned state is the measured agent gap",
+     "environment-probing curation (arXiv 2609.11060): least-privilege probes with verifiable receipts raise pass rates 39% to 73%"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python stdlib only: importlib in the runner, subprocess shell=False in the substrate, json declarations as the review surface",
+     "no external package, crate or model was needed"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "self-improving agents 2026 guide (o-mega.ai, Oct 2026): production agents default write_approval false -- governed execution with receipts is the production shape",
+     "safeguard.sh (Oct 2026): unverified skill banking is the field's failure mode -- effect receipts are the corrective"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "agent plan compilation sentence to capability dispatch governance 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent execution sandbox receipts production write approval"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "python dispatch seam effect declaration clone importlib adapter contract"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "OSWorld 2.1 agent compile planning gap November 2026"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "WIRE_THE_CONFINED_DISPATCH_SEAM_AND_CORRECT_THE_WALL_DIAGNOSIS",
+   "challenger_routes": [
+    {
+     "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
+     "evidence": [
+      "a dict special case plus a keyed-table recogniser would serve the world-model family specifically"
+     ],
+     "qualification_evidence": [
+      "the recursive collection rule covers tuple, list, set AND dict with less code and no per-family maintenance",
+      "families are still recognised structurally after lifting -- the generalisation does not blur family identity"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Equivalent",
+      "CAPABILITY_STRENGTH": "Strictly narrower (one family per special case)",
+      "WALL_CLOCK": "Similar",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "More per-family surface to maintain and re-measure",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "emitting abstraction calls at organ birth would make every future family member born minimal"
+     ],
+     "qualification_evidence": [
+      "killed by arithmetic: organs must stay self-contained, and helper+call measures ~262 description bytes against the cold form's 179",
+      "emission only pays with a runtime-binding execution contract -- an architectural decision changing every downstream organ consumer, out of round scope"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "Negative at the organ layer as measured",
+      "WALL_CLOCK": "Higher (execution-contract change)",
+      "INCREMENTAL_COST": "0 USD but large blast radius",
+      "RELIABILITY": "New failure mode for every organ consumer",
+      "VERIFIABILITY": "Requires its own pre-registered prediction on emitted bytes"
+     }
+    },
+    {
+     "route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+     "evidence": [
+      "3 sites measure gain 103 bytes with family recognised from structure; the never-seen organ replays 394 to 277 bytes with 0 held-out mismatches",
+      "the numeric grid that cannot see the domain is REFUSED at both gates instead of shipping unchecked rewrites",
+      "the first family's measured numbers re-run unchanged"
+     ],
+     "qualification_evidence": [
+      "6 new tests including the prediction, the economics, the singleton exclusion, the vacuity gate, and first-family regression",
+      "21 tests pass across the three compression rounds; affected suites pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed at both gates; refusals carry reasons",
+      "CAPABILITY_STRENGTH": "Two families under one mechanism, with the third-family question now cheap",
+      "WALL_CLOCK": "Milliseconds of AST work per corpus",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Vacuity gate added where verification was silently vacuous",
+      "VERIFIABILITY": "Prediction written before measurement; first-family numbers as regression calibration"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T20:16:00Z",
+    "max_age_hours": 2,
+    "selected_route": "WIRE_THE_CONFINED_DISPATCH_SEAM_AND_CORRECT_THE_WALL_DIAGNOSIS",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the generalised lifter measures the keyed-table abstraction and refuses vacuous grids on this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/runtime/confined_dispatch_v1.py",
+      "detail": "the confined dispatch seam under measurement"
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "synthesize_world_model_organ supplies the second family's corpus, unchanged"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_WIRES_A_MEASURED_SEAM_AND_CORRECTS_A_DIAGNOSIS__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT__THE_CLAIM_IS_BOUND_TO_5_5_SEAM_TESTS__23_23_GUARD_TESTS__AND_THE_PROBE_RE_RUN_REPORTING_UNCHANGED_DOOR_FATES",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "WIRE_THE_CONFINED_DISPATCH_SEAM_AND_CORRECT_THE_WALL_DIAGNOSIS",
+   "falsifier_id": "F_THE_SEAM_MUST_ROUTE_ONLY_DECLARED_CAPABILITIES_WITH_VERIFIED_EFFECTS_AND_A_BYTE_IDENTICAL_HOST__THE_PINNED_GUARD_REFUSALS_MUST_STAND__AND_THE_PROBE_MUST_BE_RE_RUN_TO_REPORT_THE_DOOR_TRUTH_EVEN_WHEN_IT falsifies_the_rounds_own_hope",
+   "decisive_question": "Does a confined dispatch route with reviewed effect declarations release the boundary's release condition at the dispatch layer, and where does the door wall actually sit for realistic advanced-coding sentences?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/confined_dispatch_v1.py",
+     "git_blob_sha": "585817d82791c5514df20ab4c47bda8b49e25217"
+    },
+    {
+     "path": "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+     "git_blob_sha": "2db10a08dbd4d305e2b803876357762e80d04e18"
+    },
+    {
+     "path": "canonical/tests/test_confined_dispatch_v1.py",
+     "git_blob_sha": "b92240f96736b3db17e133ea9ae1ba2dbc5d0ebc"
+    },
+    {
+     "path": "canonical/runtime/live_brain_route_admission_v1.py",
+     "git_blob_sha": "9cba0457704c13cd49030e18d46f337f622fa3ff"
+    },
+    {
+     "path": "THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.md",
+     "git_blob_sha": "bd8ac83b98d333df3511fd11a4734515479d8e74"
+    }
+   ]
+  }
+ },
+ "next_step": "TEACH_THE_FRONT_COMPILER_TO_COMPILE_SINGLE_CAPABILITY_PLANS_FOR_THE_38_REALISTIC_SENTENCES__THE_PROBE_CORPUS_IS_THE_REGRESSION_FIXTURE__AND_MAKE_THE_DISCOVERY_FALLBACK_REPORT_THE_COMPILE_FAILURE_UNDERNEATH_IT_PRECISELY__THE_SEAM_FIRES_AUTOMATICALLY_THE_MOMENT_A_PLAN_COMPILES"
+}
