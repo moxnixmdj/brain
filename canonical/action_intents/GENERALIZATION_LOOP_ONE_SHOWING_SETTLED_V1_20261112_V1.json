@@ -100,7 +100,7 @@
    "SYNTHESIZING_A_SECOND_SHOWING_AUTOMATICALLY__REQUIRES_KNOWING_VALID_VARIATIONS_WHICH_IS_THE_SAME_PROBLEM",
    "MORE_ENVIRONMENTS_AS_STRATEGY__MEASURED_ZERO_OF_FIVE_CROSS_KIND_TRANSFER"
   ],
-  "stop_condition": "TEN_TESTS_PASS__PROBE_4_OF_4_WITH_ORACLE__69_REGRESSION_TESTS_PASS__ZERO_MODEL_DEPENDENCY",
+  "stop_condition": "Stop when the new suite (10 tests) passes, the probe reports 4/4 with oracle and 1/4+3/4 without, over-generalization is refused, and the 69 pre-existing taught-edit tests pass unchanged.",
   "expected_parent_level_state_change": "Generalization from one showing is automatic and settled by evidence instead of waiting for a second showing.",
   "why_selected_route_is_fastest_sufficient": "REUSE composes three proven mechanisms (wider, settlement discipline, asymmetric protocol) with only integration added. No new algebra, no new hypothesis space, no new oracle machinery. All earlier routes (DELETE, BYPASS) remove nothing relevant; ADAPT/SUBSTITUTE modify nothing; COMPOSE is the integration itself.",
   "iteration_limit": 2,
@@ -139,27 +139,9 @@
    "fresh_reuse_plan": "THE_LOOP_REUSES_WIDER_AND_THE_ASYMMETRIC_PROTOCOL_WITH_ONLY_INTEGRATION_ADDED"
   },
   "obs_obs": {
-   "obs_inherited_system": "edit_by_example, settled_admission, settlement_v1",
-   "obs_solution": {
-    "deletion_first_order_applied": [
-     "DELETE",
-     "BYPASS",
-     "REUSE",
-     "SUBSTITUTE",
-     "WHITE_BOX_HARVEST",
-     "COMPOSE",
-     "CONFIGURE",
-     "INTEGRATE"
-    ],
-    "implementation_still_necessary": true,
-    "losing_routes_reason": "SYNTHESIZING_SECOND_SHOWING_REQUIRES_VALID_VARIATION_KNOWLEDGE; MORE_EXAMPLES_DO_NOT_WIDEN_THE_SPACE",
-    "routes_ranked": [
-     "REUSE_WIDER_PLUS_SETTLEMENT__SELECTED",
-     "SYNTHESIZE_SECOND_SHOWING__REJECTED",
-     "MORE_EXAMPLES__REJECTED"
-    ]
-   },
-   "obs_verification": "TEN_TESTS_PASS__PROBE_4_OF_4__69_REGRESSION_PASS__ZERO_MODEL_DEPENDENCY"
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "THE_WIDER_COMPUTATION_AND_THE_ASYMMETRIC_PROTOCOL_WERE_MEASURED_ONCE_ON_THE_4_SITE_CORPUS_AND_DRIVE_THE_LOOP_TABLE",
+   "search_stop_decision": "STOPPED_WHEN_THE_PROBE_REPORTED_4_OF_4_WITH_ORACLE_AND_1_OF_4_PLUS_3_REFUSED_WITHOUT_AND_OVER_GENERALIZATION_WAS_REFUSED_AND_69_REGRESSION_TESTS_PASSED"
   },
   "obs_solution": {
    "deletion_first_order_applied": [
@@ -180,7 +162,11 @@
     "MORE_EXAMPLES__REJECTED"
    ]
   },
-  "obs_verification": "TEN_TESTS_PASS__PROBE_4_OF_4__69_REGRESSION_PASS__ZERO_MODEL_DEPENDENCY"
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The 4-site corpus and the pairs over-generalization arm are synthetic fixtures built in-process by the probe and the test suite. No files are written, no processes started, no network used. The 10 tests run everywhere with stdlib only."
+  }
  },
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
