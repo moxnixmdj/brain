@@ -43,6 +43,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import pathlib
 import shlex
@@ -59,6 +60,19 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 #: the rest narrow what counts as success.
 PREDICATE_FIELDS = ("argv", "command")
 SHELL_PREFIXES = frozenset({"set", "export", "cd", "source", ".", "env", "if", "for", "while", "(", "{", "echo"})
+
+#: Tokens that only a shell gives meaning to. Found INSIDE an argv list they are the
+#: fragments of a command LINE that was split early, so what runs is not what was declared:
+#: `["jq", "-r", ".capabilities", "|", "keys"]` hands `|` to jq as an argument and exits 2.
+#: `predicate_of` already refuses these in a string `command` for exactly this reason; a
+#: list is the same defect with the split already done.
+SHELL_OPERATOR_TOKENS = frozenset({"|", "||", "&&", ";", ">", "<", ">>", "&", "2>&1"})
+
+#: A leading `NAME=value` token is the environment a shell sets for the command that
+#: follows it, not a binary. Measured 2026-11-12: reading it as argv[0] reported 30
+#: runnable claims as BINARY_ABSENT -- the harness failing to read the declaration, not the
+#: declaration being unrunnable.
+ENV_ASSIGNMENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=")
 
 EXPECTATION_FIELDS = (
     "expect_exit",
@@ -123,52 +137,165 @@ def _sha256_file(path: pathlib.Path) -> str | None:
         return None
 
 
+def _split_env_prefix(argv: list[str]) -> tuple[dict[str, str], list[str]]:
+    """Peel leading `NAME=value` tokens off a command line. Returns (env, rest)."""
+    env: dict[str, str] = {}
+    index = 0
+    while index < len(argv) and ENV_ASSIGNMENT.match(argv[index]):
+        name, _, value = argv[index].partition("=")
+        env[name] = value
+        index += 1
+    return env, argv[index:]
+
+
+def _program_absence(program: str) -> str:
+    """Name WHY a declared program that is not in the tree and not on PATH cannot run.
+
+    A path-shaped program is a claim about THIS repository (or about a machine that no
+    longer exists); a bare name is a claim about a provisioned tool. Those have different
+    fixes, so they get different reasons.
+    """
+    if "/" in program or program.endswith((".py", ".sh")):
+        return "DECLARED_PROGRAM_ABSENT:" + program
+    return "BINARY_ABSENT:" + program
+
+
 def run_predicate(spec: Mapping[str, Any], *, cwd: pathlib.Path | None = None,
                   timeout: float = 30.0) -> dict[str, Any]:
-    """Execute `spec` and say what happened. FAIL is a real possibility, which is the point."""
+    """Execute `spec` and say what happened. FAIL is a real possibility, which is the point.
+
+    Measured 2026-11-12 on this tree: 595 of the 605 discovered predicates declared NO
+    expectation field, and 52 of those exited non-zero -- 37 at exit 1, 14 at exit 2, one
+    `npm run gate` at 254 -- while being recorded as PASS. PASS therefore meant "a process
+    started", not "the claim held", and FAIL was reachable only through the 10 specs (1.7%)
+    that carried an expectation. That contradicts this module's own contract ("deliberately
+    able to go red: a metric that cannot decrease is not a metric"), so an undeclared
+    expectation is now treated as the strictest one: a verification command that does not
+    exit 0 did not verify. A receipt that expects a non-zero exit says so with `expect_exit`
+    -- that is what the field is for, and a negative control that does not declare itself is
+    indistinguishable from a broken claim.
+
+    FAIL here means "the declared verification does not hold on this tree". It does not
+    claim to know why: `exit` and `stderr` are carried so the cause -- a falsified claim, a
+    stale path, an unprovisioned sandbox -- can be triaged instead of guessed.
+    """
     argv = [str(a) for a in (spec.get("argv") or [])]
     if not argv:
-        return {"verdict": "FAIL", "reason": "EMPTY_ARGV"}
+        return {"verdict": "FAIL", "reason": "EMPTY_ARGV", "expectations": []}
+    expectations = [field for field in EXPECTATION_FIELDS if field in spec]
     if argv[0] in SHELL_PREFIXES:
         # `set -euo pipefail cmd` is a shell script prefix. Running argv[0] alone would test
         # `set`, which always succeeds -- a false PASS on a claim never exercised.
-        return {"verdict": "UNRUNNABLE", "reason": "SHELL_SCRIPT_PREFIX:" + argv[0]}
+        return {"verdict": "UNRUNNABLE", "reason": "SHELL_SCRIPT_PREFIX:" + argv[0],
+                "expectations": expectations}
+    if any("${" in token for token in argv):
+        # `argv: ["${input.argv}"]` is a template nobody filled in. Calling that an absent
+        # binary hides the real fact, which is that no command was ever declared.
+        return {"verdict": "UNRUNNABLE", "reason": "UNFILLED_TEMPLATE:" + argv[0][:80],
+                "expectations": expectations}
+    for token in argv[1:]:
+        if token in SHELL_OPERATOR_TOKENS:
+            return {"verdict": "UNRUNNABLE", "reason": "SHELL_OPERATORS_IN_ARGV:" + token,
+                    "expectations": expectations}
+    env_prefix, rest = _split_env_prefix(argv)
+    if not rest:
+        return {"verdict": "UNRUNNABLE",
+                "reason": "ENV_ASSIGNMENT_WITHOUT_COMMAND:" + argv[0],
+                "expectations": expectations}
+    program = rest[0]
     try:
-        present = shutil.which(argv[0]) is not None or pathlib.Path(argv[0]).exists()
+        on_path = shutil.which(program) is not None
     except (OSError, ValueError):
-        present = False
-    if not present:
-        # An absent binary is not a pass and not a failure of the claim: it is untestable here.
-        return {"verdict": "UNRUNNABLE", "reason": "BINARY_ABSENT:" + argv[0]}
+        on_path = False
+    if not on_path:
+        # Not on PATH. The tree may still contain it, and WHICH of these it is decides
+        # whether the fix is a chmod, a `./`, a provisioned tool, or deleting a receipt that
+        # points at a program nobody committed. One `BINARY_ABSENT` string for all four made
+        # 110 unrunnable claims unactionable.
+        candidate = pathlib.Path(program)
+        if not candidate.is_absolute() and cwd is not None:
+            candidate = cwd / program
+        try:
+            exists_here = candidate.exists()
+        except (OSError, ValueError):
+            exists_here = False
+        if exists_here and not os.access(candidate, os.X_OK):
+            # Present in the tree at mode 644. Running `python3 <it>` instead would test a
+            # DIFFERENT command than the receipt declared, so this stays unrunnable rather
+            # than borrowing a PASS from a command nobody claimed.
+            return {"verdict": "UNRUNNABLE",
+                    "reason": "DECLARED_PROGRAM_NOT_EXECUTABLE:" + program,
+                    "expectations": expectations}
+        if exists_here and "/" not in program:
+            # Executable, but a bare filename is resolved through PATH by execvp -- and by a
+            # shell -- never through the working directory, so the declared command genuinely
+            # does not run. Rewriting it to `./x` would invent a command nobody declared.
+            return {"verdict": "UNRUNNABLE",
+                    "reason": "BARE_FILENAME_NOT_ON_PATH:" + program,
+                    "expectations": expectations}
+        if not exists_here:
+            # An absent program is not a pass and not a failure of the claim: untestable here.
+            return {"verdict": "UNRUNNABLE", "reason": _program_absence(program),
+                    "expectations": expectations}
+        # Otherwise it exists and is executable where the record says it is. `shutil.which`
+        # missed it because which resolves a relative path against the AUDIT's own cwd, not
+        # against the record's, and subprocess chdirs to `cwd` before exec, so the declared
+        # command does run. Found by test_the_same_program_becomes_runnable_when_the_tree_
+        # makes_it_executable, which failed until this branch existed.
+    child_env = None
+    if env_prefix:
+        child_env = dict(os.environ)
+        child_env.update(env_prefix)
     try:
-        proc = subprocess.run(argv, capture_output=True, timeout=timeout, cwd=cwd)
+        proc = subprocess.run(rest, capture_output=True, timeout=timeout, cwd=cwd,
+                              env=child_env)
+    except subprocess.TimeoutExpired:
+        # Named with its budget, because "unmeasurable within 30s" is a fact about this
+        # instrument, not about the claim. A bare exception class name reads as a crash and
+        # hides that the fix is the budget. 19 of 605 predicates land here once env-prefixed
+        # commands are actually run, including two that invoke the whole test suite.
+        return {"verdict": "UNRUNNABLE", "reason": f"TIMEOUT_BUDGET_{timeout:g}s",
+                "expectations": expectations}
     except (OSError, subprocess.SubprocessError) as exc:
-        return {"verdict": "UNRUNNABLE", "reason": f"{type(exc).__name__}:{exc}"[:200]}
+        return {"verdict": "UNRUNNABLE", "reason": f"{type(exc).__name__}:{exc}"[:200],
+                "expectations": expectations}
     # Tools do not all produce UTF-8. Replacing undecodable bytes keeps the expectation
     # checkable instead of turning a decode error into an exception inside the audit.
     proc.stdout = (proc.stdout or b"").decode("utf-8", "replace")
     proc.stderr = (proc.stderr or b"").decode("utf-8", "replace")
 
+    # What actually ran, carried on every verdict so a PASS can be told apart from a
+    # process that merely started. Without `expectations` the report cannot distinguish
+    # "the claim was checked and held" from "nothing was checked and nothing failed".
+    ran = {"exit": proc.returncode, "expectations": expectations,
+           "env_prefix": sorted(env_prefix) or None}
+
     if "expect_exit" in spec and int(proc.returncode) != int(spec["expect_exit"]):
         return {"verdict": "FAIL",
                 "reason": f"EXIT {proc.returncode} != {spec['expect_exit']}",
-                "stdout": proc.stdout[:400], "stderr": proc.stderr[:400]}
+                "stdout": proc.stdout[:400], "stderr": proc.stderr[:400], **ran}
+    if "expect_exit" not in spec and proc.returncode != 0:
+        # THE FIX. Before this, 52 receipts whose declared verification exited non-zero
+        # were recorded as PASS, because no expectation meant nothing could contradict them.
+        return {"verdict": "FAIL",
+                "reason": f"EXIT {proc.returncode} WITHOUT_EXPECTATION",
+                "stdout": proc.stdout[:400], "stderr": proc.stderr[:400], **ran}
     needle = spec.get("expect_stdout_contains")
     if needle is not None and str(needle) not in proc.stdout:
         return {"verdict": "FAIL", "reason": f"STDOUT MISSING {needle!r}",
-                "stdout": proc.stdout[:400]}
+                "stdout": proc.stdout[:400], **ran}
     version = spec.get("expect_version")
     if version is not None and str(version) not in (proc.stdout + proc.stderr):
         return {"verdict": "FAIL", "reason": f"VERSION MISSING {version!r}",
-                "stdout": proc.stdout[:400], "stderr": proc.stderr[:400]}
+                "stdout": proc.stdout[:400], "stderr": proc.stderr[:400], **ran}
     digest = spec.get("expect_stdout_sha256")
     if digest is not None and hashlib.sha256(proc.stdout.encode()).hexdigest() != str(digest):
-        return {"verdict": "FAIL", "reason": "STDOUT SHA MISMATCH"}
+        return {"verdict": "FAIL", "reason": "STDOUT SHA MISMATCH", **ran}
     for name, want in dict(spec.get("expect_file_sha256") or {}).items():
         got = _sha256_file(pathlib.Path(name))
         if got != want:
-            return {"verdict": "FAIL", "reason": f"FILE SHA MISMATCH:{name}"}
-    return {"verdict": "PASS", "reason": None, "stdout": proc.stdout[:200]}
+            return {"verdict": "FAIL", "reason": f"FILE SHA MISMATCH:{name}", **ran}
+    return {"verdict": "PASS", "reason": None, "stdout": proc.stdout[:200], **ran}
 
 
 # ---------------------------------------------------------------------------
@@ -558,6 +685,15 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
     for item in predicates:
         counts[item["verdict"]] = counts.get(item["verdict"], 0) + 1
 
+    # A PASS is not one thing. Split it, because the difference is the whole measurement:
+    # `pass_checked` is a claim somebody wrote a predicate for, `pass_started` is a process
+    # that launched and exited 0 with nothing asserted about its output. Reporting only the
+    # sum is how 10 checked claims were read as 495 verified ones.
+    pass_checked = sum(1 for item in predicates
+                       if item["verdict"] == "PASS" and item.get("expectations"))
+    pass_started = counts.get("PASS", 0) - pass_checked
+    declaring = sum(1 for item in predicates if item.get("expectations"))
+
     # A layer that re-executes its own records can contradict them, and a contradiction must be
     # able to gate the same way a predicate FAIL does -- otherwise the audit is green by
     # construction, which is the one property this instrument exists to not have.
@@ -570,6 +706,9 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
         "predicates_run": len(predicates),
         "predicate_verdicts": counts,
         "predicate_results": predicates,
+        "predicates_declaring_an_expectation": declaring,
+        "pass_checked": pass_checked,
+        "pass_started": pass_started,
         "layer_failures": layer_failures,
         "red": bool(counts.get("FAIL")) or bool(layer_failures),
     }
@@ -602,9 +741,34 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"{'':16}error: {layer['error']}")
         if args.audit:
             print(f"\npredicates run: {report['predicates_run']}  {report['predicate_verdicts']}")
-            for item in report["predicate_results"]:
-                if item["verdict"] != "PASS":
-                    print(f"  {item['verdict']:11} {' '.join(item['argv'])[:50]:52} {item.get('reason')}")
+            print(f"  declaring an expectation: {report['predicates_declaring_an_expectation']}"
+                  f" of {report['predicates_run']}")
+            print(f"  PASS because it was CHECKED: {report['pass_checked']}")
+            print(f"  PASS because it only STARTED (exit 0, nothing asserted):"
+                  f" {report['pass_started']}")
+            failures = [item for item in report["predicate_results"]
+                        if item["verdict"] == "FAIL"]
+            unrunnable = [item for item in report["predicate_results"]
+                          if item["verdict"] == "UNRUNNABLE"]
+            if failures:
+                print(f"\n  FAIL -- the declared verification does not hold on this tree:")
+                for item in failures:
+                    print(f"    exit={str(item.get('exit')):>4} "
+                          f"{' '.join(str(a) for a in item['argv'])[:64]:66} "
+                          f"{item.get('reason')}")
+            if unrunnable:
+                print(f"\n  UNRUNNABLE -- grouped by cause, because the causes have "
+                      f"different fixes:")
+                grouped: dict[str, list[str]] = {}
+                for item in unrunnable:
+                    cause = str(item.get("reason") or "?").split(":")[0]
+                    grouped.setdefault(cause, []).append(
+                        " ".join(str(a) for a in item["argv"])[:70])
+                for cause in sorted(grouped, key=lambda c: -len(grouped[c])):
+                    examples = grouped[cause]
+                    print(f"    {len(examples):4d}  {cause}")
+                    for line in sorted(set(examples))[:3]:
+                        print(f"          {line}")
         else:
             print("\n(run with --audit to execute the predicates that exist)")
     return 1 if report["red"] else 0
