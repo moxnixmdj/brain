@@ -1,0 +1,4380 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "environment": {
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "chromium_package": "153.0.0",
+  "code_sha256": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "12217ec6beb50419fe1bbe470130c334f92dd64d10c32c03f89e515552c24a44",
+   "explorer": "a9b99b9ed1c4e790880d1ce9534ee14b9d5d8ae0e6b2d1c18e9218bd0b49dd53",
+   "tool": "953e15e746b409e578da4903eb3baa669aae987e17b84422bc9cc637500cd11d",
+   "version_space_learner": "73aef38b18534d9100e895b027ee8c300643c9265f52f0d1fb9ba6b4cda6bed9"
+  },
+  "epoch_ms": 1767225600000,
+  "html_tree_sha256": "d5693b72ec82bae9041e40f5c9ae3c3c50201849d10c92ea6439967fd73529c8",
+  "node": "v22.22.3",
+  "puppeteer_core": "25.17.0",
+  "python": "3.11.2",
+  "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
+  "step_ms": 500,
+  "substrate": "headless Chromium: real layout and hit-testing, a click is a mouse press on a part of the element that shows, typing is key events, and the hand can also hover, drag, nudge, press three times and wait; virtual clock; one small fixed window",
+  "substrate_name": "chromium",
+  "task_pages": 130,
+  "viewport": [
+   480,
+   360
+  ]
+ },
+ "generated_utc": "2026-11-12T20:43:45Z",
+ "incremental_spend_usd": 0,
+ "parameters": {
+  "acquisition_action_budget": 1500,
+  "arms": [
+   "version_space",
+   "verbatim",
+   "version_space_blind",
+   "random"
+  ],
+  "demonstration_seed": 0,
+  "exploration_time_limit_ms": 3600000,
+  "first_success_search": "blind",
+  "max_episode_steps": 30,
+  "practice_seeds": [
+   500,
+   501,
+   502
+  ],
+  "split_rule": "sha256(task name) mod 4 == 0 is development, the rest held out",
+  "test_seeds": [
+   1080,
+   1081,
+   1082,
+   1083,
+   1084,
+   1085,
+   1086,
+   1087,
+   1088,
+   1089
+  ]
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "read_this_first": "REPLICATION RUN, 2026-11-12, on seeds nobody had used. 50 MiniWoB++ pages, the first 50 by name, 10 instances each from seeds 1080-1089 (run 5 used 1060-1079; seeds 1040-1059 were the pilot). HeadlessChrome/153.0.8010.0 via miniwob_chromium_bridge_v1.mjs, real mouse, page's full reward the only judge, 30-second page limit. NOT the same task set as run 5 (that used all 130), so compare arms WITHIN this run, and compare the ORDERING against V5 rather than the absolute numbers. What it does: it shows the ordering of the ladder reproduces on instances that did not exist when the learner was written -- version_space over verbatim over random, and the same skill denied the instruction falls back. What it does NOT show: 50 pages is not 130, 17 of the 50 had no first success and are counted as such, and no new mechanism was added, so nothing here extends the capability.",
+ "schema": "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_MEASUREMENT_V1",
+ "summary": {
+  "all": {
+   "arms": {
+    "random": {
+     "episodes": 330,
+     "mean_task_success_rate": 0.1667,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.12,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.02,
+     "successes": 55,
+     "tasks_at_100_percent": 1,
+     "tasks_at_or_above_90_percent": 1,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 10,
+     "tasks_scored": 33
+    },
+    "verbatim": {
+     "episodes": 330,
+     "mean_task_success_rate": 0.3576,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.152,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.16,
+     "successes": 118,
+     "tasks_at_100_percent": 8,
+     "tasks_at_or_above_90_percent": 8,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 10,
+     "tasks_scored": 33
+    },
+    "version_space": {
+     "episodes": 330,
+     "mean_task_success_rate": 0.7636,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.688,
+     "refused_episodes": 1,
+     "share_of_all_tasks_at_or_above_90_percent": 0.42,
+     "successes": 252,
+     "tasks_at_100_percent": 21,
+     "tasks_at_or_above_90_percent": 21,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 13,
+     "tasks_at_zero": 0,
+     "tasks_scored": 33
+    },
+    "version_space_blind": {
+     "episodes": 330,
+     "mean_task_success_rate": 0.4061,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.216,
+     "refused_episodes": 1,
+     "share_of_all_tasks_at_or_above_90_percent": 0.16,
+     "successes": 134,
+     "tasks_at_100_percent": 8,
+     "tasks_at_or_above_90_percent": 8,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 4,
+     "tasks_scored": 33
+    }
+   },
+   "demonstrated": 33,
+   "one_success_skills_where_replay_is_not_enough": {
+    "of_which_fail_when_denied_the_instruction": 13,
+    "of_which_still_succeed_although_the_instruction_changes": 0,
+    "of_which_still_succeed_when_denied_the_instruction": 0,
+    "tasks_at_or_above_90_percent": 13,
+    "tasks_that_succeed_without_an_instruction_that_changes": []
+   },
+   "stages": {
+    "DEMONSTRATED": 33,
+    "NO_FIRST_SUCCESS_FOUND": 17
+   },
+   "tasks": 50,
+   "tasks_a_fixed_replay_already_solves": 8,
+   "tasks_that_need_generalisation": 25
+  },
+  "development": {
+   "arms": {
+    "random": {
+     "episodes": 90,
+     "mean_task_success_rate": 0.1,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.0667,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.0,
+     "successes": 9,
+     "tasks_at_100_percent": 0,
+     "tasks_at_or_above_90_percent": 0,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 2,
+     "tasks_scored": 9
+    },
+    "verbatim": {
+     "episodes": 90,
+     "mean_task_success_rate": 0.4111,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.1167,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.1875,
+     "successes": 37,
+     "tasks_at_100_percent": 3,
+     "tasks_at_or_above_90_percent": 3,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 2,
+     "tasks_scored": 9
+    },
+    "version_space": {
+     "episodes": 90,
+     "mean_task_success_rate": 0.7889,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.6833,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.375,
+     "successes": 71,
+     "tasks_at_100_percent": 6,
+     "tasks_at_or_above_90_percent": 6,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 3,
+     "tasks_at_zero": 0,
+     "tasks_scored": 9
+    },
+    "version_space_blind": {
+     "episodes": 90,
+     "mean_task_success_rate": 0.4778,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.2167,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.1875,
+     "successes": 43,
+     "tasks_at_100_percent": 3,
+     "tasks_at_or_above_90_percent": 3,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 1,
+     "tasks_scored": 9
+    }
+   },
+   "demonstrated": 9,
+   "one_success_skills_where_replay_is_not_enough": {
+    "of_which_fail_when_denied_the_instruction": 3,
+    "of_which_still_succeed_although_the_instruction_changes": 0,
+    "of_which_still_succeed_when_denied_the_instruction": 0,
+    "tasks_at_or_above_90_percent": 3,
+    "tasks_that_succeed_without_an_instruction_that_changes": []
+   },
+   "stages": {
+    "DEMONSTRATED": 9,
+    "NO_FIRST_SUCCESS_FOUND": 7
+   },
+   "tasks": 16,
+   "tasks_a_fixed_replay_already_solves": 3,
+   "tasks_that_need_generalisation": 6
+  },
+  "held_out": {
+   "arms": {
+    "random": {
+     "episodes": 240,
+     "mean_task_success_rate": 0.1917,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.1368,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.0294,
+     "successes": 46,
+     "tasks_at_100_percent": 1,
+     "tasks_at_or_above_90_percent": 1,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 8,
+     "tasks_scored": 24
+    },
+    "verbatim": {
+     "episodes": 240,
+     "mean_task_success_rate": 0.3375,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.1632,
+     "refused_episodes": 0,
+     "share_of_all_tasks_at_or_above_90_percent": 0.1471,
+     "successes": 81,
+     "tasks_at_100_percent": 5,
+     "tasks_at_or_above_90_percent": 5,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 8,
+     "tasks_scored": 24
+    },
+    "version_space": {
+     "episodes": 240,
+     "mean_task_success_rate": 0.7542,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.6895,
+     "refused_episodes": 1,
+     "share_of_all_tasks_at_or_above_90_percent": 0.4412,
+     "successes": 181,
+     "tasks_at_100_percent": 15,
+     "tasks_at_or_above_90_percent": 15,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 10,
+     "tasks_at_zero": 0,
+     "tasks_scored": 24
+    },
+    "version_space_blind": {
+     "episodes": 240,
+     "mean_task_success_rate": 0.3792,
+     "mean_task_success_rate_where_replay_is_not_enough": 0.2158,
+     "refused_episodes": 1,
+     "share_of_all_tasks_at_or_above_90_percent": 0.1471,
+     "successes": 91,
+     "tasks_at_100_percent": 5,
+     "tasks_at_or_above_90_percent": 5,
+     "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+     "tasks_at_zero": 3,
+     "tasks_scored": 24
+    }
+   },
+   "demonstrated": 24,
+   "one_success_skills_where_replay_is_not_enough": {
+    "of_which_fail_when_denied_the_instruction": 10,
+    "of_which_still_succeed_although_the_instruction_changes": 0,
+    "of_which_still_succeed_when_denied_the_instruction": 0,
+    "tasks_at_or_above_90_percent": 10,
+    "tasks_that_succeed_without_an_instruction_that_changes": []
+   },
+   "stages": {
+    "DEMONSTRATED": 24,
+    "NO_FIRST_SUCCESS_FOUND": 10
+   },
+   "tasks": 34,
+   "tasks_a_fixed_replay_already_solves": 5,
+   "tasks_that_need_generalisation": 19
+  }
+ },
+ "tasks": [
+  {
+   "acquisition": {
+    "budget_spent": 49,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 35,
+      "budget_spent": 49,
+      "resets": 15,
+      "states": 10,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 13,
+     "episodes": 10,
+     "partial_credit": 3,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 50,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 50,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 57,
+           "first": "((('equals', 'self', 'tag', 'text'), ('equals', 'self', 'classes', 'text')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 30,
+           "first": "((('equals', 'self', 'tag', 'rect'), ('equals', 'self', 'classes', 'rect')), None)",
+           "kind": "click",
+           "target_is_brought_out_by_pressing": "((('equals', 'self', 'tag', 'text'), ('equals', 'self', 'classes', 'text')), None)"
+          },
+          {
+           "descriptions_left": 30,
+           "first": "((('equals', 'self', 'tag', 'rect'), ('equals', 'self', 'classes', 'rect')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 22,
+           "first": "((('equals', 'self', 'tag', 'rect'), ('equals', 'self', 'classes', 'rect')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 6,
+           "first": "((('equals', 'self', 'tag', 'rect'), ('equals', 'self', 'classes', 'rect')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 50,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@4",
+     "click@4",
+     "click@4",
+     "click@4",
+     "click@4"
+    ],
+    "length": 5,
+    "utterance": "Click on the numbers in ascending order."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 5.87,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "ascending-numbers",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 511,
+      "budget_spent": 600,
+      "resets": 90,
+      "states": 74,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 812,
+      "budget_spent": 900,
+      "resets": 89,
+      "states": 132,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 22.42,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "bisect-angle"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 451,
+      "budget_spent": 600,
+      "resets": 150,
+      "states": 70,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 291,
+      "budget_spent": 450,
+      "resets": 160,
+      "states": 130,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 1
+     },
+     {
+      "acts": 299,
+      "budget_spent": 450,
+      "resets": 152,
+      "states": 252,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 1,
+      "tier": 2
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 73.2,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "book-flight-nodelay"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 451,
+      "budget_spent": 600,
+      "resets": 150,
+      "states": 70,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 291,
+      "budget_spent": 450,
+      "resets": 160,
+      "states": 130,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 1
+     },
+     {
+      "acts": 299,
+      "budget_spent": 450,
+      "resets": 152,
+      "states": 252,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 1,
+      "tier": 2
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 71.91,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "book-flight"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 15,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 10,
+      "budget_spent": 15,
+      "resets": 6,
+      "states": 5,
+      "status": "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 1.06,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "button-delay"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 11,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 9,
+      "budget_spent": 11,
+      "resets": 3,
+      "states": 4,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0001000000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 21,
+           "first": "((('equals', 'self', 'classes', 'buy-ticket'), ('equals', 'self', 'text', 'Book for $130')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0010100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@26"
+    ],
+    "length": 1,
+    "utterance": "Buy the ticket with the cheapest cost."
+   },
+   "distinct_test_instructions": 3,
+   "seconds": 4.73,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "buy-ticket",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 19,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 19,
+      "budget_spent": 19,
+      "resets": 1,
+      "states": 20,
+      "status": "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 0.74,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "chase-circle"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 588,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 434,
+      "budget_spent": 588,
+      "resets": 155,
+      "states": 83,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 26,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 30,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 30,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 31,
+           "first": "((('equals', 'self', 'tag', 'p'), ('slot', 'next', 'text', ('between', 'hit', '.'), 'fold')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'classes', 'ui-state-default'), ('slot', 'self', 'text', ('number', 1), 'exact')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'hit', '.'), 'fold')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 30,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3",
+     "click@88",
+     "click@5"
+    ],
+    "length": 3,
+    "utterance": "Select 12/24/2016 as the date and hit submit."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 34.04,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "choose-date-easy",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 739,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 443,
+      "budget_spent": 600,
+      "resets": 158,
+      "states": 84,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 102,
+      "budget_spent": 139,
+      "resets": 38,
+      "states": 102,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 24,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 30,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 30,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 31,
+           "first": "((('equals', 'self', 'tag', 'p'), ('slot', 'next', 'text', ('between', 'hit', '.'), 'fold')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'classes', 'ui-state-default'), ('slot', 'self', 'text', ('number', 1), 'exact')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'hit', '.'), 'fold')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1110110001",
+     "refused": 0,
+     "success_rate": 0.6,
+     "successes": 6
+    },
+    "version_space_blind": {
+     "actions": 30,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3",
+     "click@73",
+     "click@5"
+    ],
+    "length": 3,
+    "utterance": "Select 12/17/2016 as the date and hit submit."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 42.96,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "choose-date-medium",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 442,
+      "budget_spent": 600,
+      "resets": 159,
+      "states": 85,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 707,
+      "budget_spent": 900,
+      "resets": 194,
+      "states": 145,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 57.15,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "choose-date-nodelay"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 442,
+      "budget_spent": 600,
+      "resets": 159,
+      "states": 85,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 707,
+      "budget_spent": 900,
+      "resets": 194,
+      "states": 145,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 56.03,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "choose-date"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 30,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 20,
+      "budget_spent": 30,
+      "resets": 11,
+      "states": 8,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 18,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100101000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "verbatim": {
+     "actions": 17,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 162,
+           "first": "((('equals', 'self', 'tag', 'option'), ('slot', 'self', 'text', ('between', 'Select', 'from'), 'exact')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 67,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'click', '.'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000010",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5",
+     "click@10"
+    ],
+    "length": 2,
+    "utterance": "Select Somalia from the list and click Submit."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 4.6,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "choose-list",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 550,
+      "budget_spent": 600,
+      "resets": 51,
+      "states": 51,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 854,
+      "budget_spent": 900,
+      "resets": 47,
+      "states": 72,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 17.98,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "circle-center"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 9,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 6,
+      "budget_spent": 9,
+      "resets": 4,
+      "states": 5,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 2,
+           "first": "((('equals', 'self', 'tag', 'button'), ('mentioned', 'self', 'text')), None)",
+           "kind": "click_all"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3",
+     "click@4"
+    ],
+    "length": 2,
+    "utterance": "Click button ONE, then click button TWO."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 4.78,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-button-sequence",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 5,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 3,
+      "budget_spent": 5,
+      "resets": 3,
+      "states": 4,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1000100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0001100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 135,
+           "first": "((('equals', 'self', 'tag', 'button'), ('slot', 'self', 'text', ('between', '\"', '\"'), 'exact')), ('nearest', 'text', ('quoted', 0), 'exact'))",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0101110010",
+     "refused": 0,
+     "success_rate": 0.5,
+     "successes": 5
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5"
+    ],
+    "length": 1,
+    "utterance": "Click on the \"No\" button."
+   },
+   "distinct_test_instructions": 6,
+   "seconds": 3.85,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-button",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 393,
+      "budget_spent": 600,
+      "resets": 208,
+      "states": 110,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 655,
+      "budget_spent": 900,
+      "resets": 246,
+      "states": 222,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 48.54,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "click-checkboxes-large"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 425,
+      "budget_spent": 600,
+      "resets": 176,
+      "states": 85,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 686,
+      "budget_spent": 900,
+      "resets": 215,
+      "states": 144,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 35.4,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "click-checkboxes-soft"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 405,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 314,
+      "budget_spent": 405,
+      "resets": 92,
+      "states": 33,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 37,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000100",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 40,
+     "episodes": 10,
+     "partial_credit": 1,
+     "per_seed": "0100000000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space": {
+     "actions": 27,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 2,
+           "first": "((('equals', 'self', 'tag', 'label'), ('mentioned', 'self', 'text')), None)",
+           "kind": "click_all"
+          },
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'click', '.'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 6,
+     "per_seed": "0000000100",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@4",
+     "click@6",
+     "click@8",
+     "click@10"
+    ],
+    "length": 4,
+    "utterance": "Select PgDpH3, IeevAR, T3XZr and click Submit."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 14.93,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "click-checkboxes-transfer",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 435,
+      "budget_spent": 600,
+      "resets": 166,
+      "states": 76,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 706,
+      "budget_spent": 900,
+      "resets": 195,
+      "states": 107,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 36.44,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "click-checkboxes"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 62,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 41,
+      "budget_spent": 62,
+      "resets": 22,
+      "states": 13,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 11,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 28,
+     "actions_spent_looking": 8,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 255,
+           "first": "((('equals', 'self', 'id', 'ui-id-3'), ('equals', 'self', 'classes', 'ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 129,
+           "first": "((('equals', 'self', 'classes', 'alink'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click",
+           "target_is_brought_out_by_pressing": "((('equals', 'self', 'tag', 'h3'), ('equals', 'self', 'classes', 'ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons')), None)"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 40,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000010",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5",
+     "click@16"
+    ],
+    "length": 2,
+    "utterance": "Expand the sections below, to find and click on the link \"ut.\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 8.81,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "click-collapsible-2-nodelay",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 62,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 41,
+      "budget_spent": 62,
+      "resets": 22,
+      "states": 13,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 11,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 28,
+     "actions_spent_looking": 8,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 255,
+           "first": "((('equals', 'self', 'id', 'ui-id-3'), ('equals', 'self', 'classes', 'ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 129,
+           "first": "((('equals', 'self', 'classes', 'alink'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click",
+           "target_is_brought_out_by_pressing": "((('equals', 'self', 'tag', 'h3'), ('equals', 'self', 'classes', 'ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons')), None)"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 40,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000010",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5",
+     "click@16"
+    ],
+    "length": 2,
+    "utterance": "Expand the sections below, to find and click on the link \"ut.\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 9.75,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-collapsible-2",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 12,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 8,
+      "budget_spent": 12,
+      "resets": 5,
+      "states": 6,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 15,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000010",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 249,
+           "first": "((('equals', 'self', 'classes', 'ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons'), ('slot', 'next', 'full_text', ('between', 'click', '.'), 'fold')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 63,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'click', '.'), 'fold')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3",
+     "click@8"
+    ],
+    "length": 2,
+    "utterance": "Expand the section below and click submit."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 6.87,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "click-collapsible-nodelay",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 12,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 8,
+      "budget_spent": 12,
+      "resets": 5,
+      "states": 6,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 15,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100000001",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 249,
+           "first": "((('equals', 'self', 'classes', 'ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons'), ('slot', 'next', 'full_text', ('between', 'click', '.'), 'fold')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 63,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'click', '.'), 'fold')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3",
+     "click@8"
+    ],
+    "length": 2,
+    "utterance": "Expand the section below and click submit."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 7.52,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "click-collapsible",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 5,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 3,
+      "budget_spent": 5,
+      "resets": 3,
+      "states": 3,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0110000101",
+     "refused": 0,
+     "success_rate": 0.4,
+     "successes": 4
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000110000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 43,
+           "first": "((('equals', 'self', 'classes', 'color'), ('slot', 'self', 'colour', ('between', 'the', 'colored'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000110000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5"
+    ],
+    "length": 1,
+    "utterance": "Click on the white colored box."
+   },
+   "distinct_test_instructions": 7,
+   "seconds": 4.48,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-color",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 5,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 3,
+      "budget_spent": 5,
+      "resets": 3,
+      "states": 3,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010110000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 193,
+           "first": "((('equals', 'self', 'classes', 'ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close'), ('slot', 'self', 'tag', ('between', 'the', 'in'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0010110000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010110000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@6"
+    ],
+    "length": 1,
+    "utterance": "Click the button in the dialog box labeled \"x\"."
+   },
+   "distinct_test_instructions": 3,
+   "seconds": 8.15,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-dialog-2",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 5,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 3,
+      "budget_spent": 5,
+      "resets": 3,
+      "states": 3,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010000100",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 162,
+           "first": "((('equals', 'self', 'classes', 'ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close'), ('slot', 'self', 'text', ('between', None, 'the'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@6"
+    ],
+    "length": 1,
+    "utterance": "Close the dialog box by clicking the \"x\"."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 8.14,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "click-dialog",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 6,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 4,
+      "budget_spent": 6,
+      "resets": 3,
+      "states": 3,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100000000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 9,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000001000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 66,
+           "first": "((('equals', 'self', 'classes', 'alink'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000001000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5"
+    ],
+    "length": 1,
+    "utterance": "Click on the link \"In\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 4.6,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-link",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 23,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 16,
+      "budget_spent": 23,
+      "resets": 8,
+      "states": 7,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000010000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100010001",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 95,
+           "first": "((('equals', 'self', 'id', 'open-menu'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 93,
+           "first": "((('equals', 'self', 'classes', 'ui-menu-item-wrapper'), ('slot', 'self', 'text', ('quoted', 1), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0100010001",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100010001",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3",
+     "click@15"
+    ],
+    "length": 2,
+    "utterance": "Click the \"Menu\" button, and then find and click on the item labeled \"Zoom In\"."
+   },
+   "distinct_test_instructions": 4,
+   "seconds": 8.8,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-menu-2",
+   "test_instances_identical_to_demonstration": 1
+  },
+  {
+   "acquisition": {
+    "budget_spent": 9,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 5,
+      "budget_spent": 9,
+      "resets": 5,
+      "states": 2,
+      "status": "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 1.59,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "click-menu"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 146,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 111,
+      "budget_spent": 146,
+      "resets": 36,
+      "states": 12,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1100000000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 11,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 48,
+           "first": "((('equals', 'self', 'tag', 'label'), ('slot', 'self', 'text', ('between', 'Select', 'and'), 'exact')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'click', '.'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000001100",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@12",
+     "click@14"
+    ],
+    "length": 2,
+    "utterance": "Select yMbdWAR and click Submit."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 9.95,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-option",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 66,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 39,
+      "budget_spent": 66,
+      "resets": 28,
+      "states": 4,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0101100001",
+     "refused": 0,
+     "success_rate": 0.4,
+     "successes": 4
+    },
+    "verbatim": {
+     "actions": 15,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 86,
+           "first": "((('equals', 'self', 'tag', 'path'), ('equals', 'self', 'colour', '#f06529')), ('nearest', 'full_text', ('quoted', 0), 'exact'))",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 57,
+           "first": "((('equals', 'self', 'id', 'wheelnav-divWheel-slice-2'), ('equals', 'self', 'colour', '#e34c26')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0001100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0001100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5",
+     "click@25"
+    ],
+    "length": 2,
+    "utterance": "Expand the pie menu below and click on the item labeled \"J\"."
+   },
+   "distinct_test_instructions": 9,
+   "seconds": 12.56,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-pie-nodelay",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 66,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 39,
+      "budget_spent": 66,
+      "resets": 28,
+      "states": 4,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 15,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000001000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space": {
+     "actions": 20,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 86,
+           "first": "((('equals', 'self', 'tag', 'path'), ('equals', 'self', 'colour', '#f06529')), ('nearest', 'full_text', ('quoted', 0), 'exact'))",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 57,
+           "first": "((('equals', 'self', 'id', 'wheelnav-divWheel-slice-2'), ('equals', 'self', 'colour', '#e34c26')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0001100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "version_space_blind": {
+     "actions": 20,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0001100000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5",
+     "click@25"
+    ],
+    "length": 2,
+    "utterance": "Expand the pie menu below and click on the item labeled \"J\"."
+   },
+   "distinct_test_instructions": 9,
+   "seconds": 41.07,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-pie",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1076,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 432,
+      "budget_spent": 600,
+      "resets": 169,
+      "states": 134,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 367,
+      "budget_spent": 476,
+      "resets": 110,
+      "states": 180,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 2,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 30,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 28,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 26,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 3,
+           "first": "((('equals', 'self', 'tag', 'option'), ('mentioned', 'self', 'text')), None)",
+           "kind": "click_all"
+          },
+          {
+           "descriptions_left": 44,
+           "first": "((('equals', 'self', 'classes', 'secondary-action'), ('slot', 'self', 'text', ('between', 'click', '.'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@6",
+     "click@11",
+     "click@13"
+    ],
+    "length": 3,
+    "utterance": "Select Brazil, Mauritania from the scroll list and click Submit."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 26.97,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "click-scroll-list",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 417,
+      "budget_spent": 600,
+      "resets": 184,
+      "states": 115,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 699,
+      "budget_spent": 900,
+      "resets": 202,
+      "states": 212,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 30.89,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "click-shades"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 23,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 12,
+      "budget_spent": 23,
+      "resets": 12,
+      "states": 3,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0001010000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 6,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1000000000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 100,
+           "first": "((('equals', 'self', 'colour', 'red'), ('slot', 'self', 'text', ('between', 'small', None), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0000011010",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000010010",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@15"
+    ],
+    "length": 1,
+    "utterance": "Click on a small p"
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 4.24,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-shape",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 8,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 5,
+      "budget_spent": 8,
+      "resets": 4,
+      "states": 4,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 9,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000001000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 66,
+           "first": "((('equals', 'self', 'classes', 'alink'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000001000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@10"
+    ],
+    "length": 1,
+    "utterance": "Switch between the tabs to find and click on the link \"In\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 6.24,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-tab-2-easy",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 16,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 9,
+      "budget_spent": 16,
+      "resets": 8,
+      "states": 8,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000010000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 6,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 9,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 66,
+           "first": "((('equals', 'self', 'classes', 'alink'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0000010000",
+     "refused": 1,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space_blind": {
+     "actions": 9,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 1,
+     "success_rate": 0.0,
+     "successes": 0
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@18"
+    ],
+    "length": 1,
+    "utterance": "Switch between the tabs to find and click on the link \"Purus\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 6.24,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-tab-2-hard",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 3,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 2,
+      "budget_spent": 3,
+      "resets": 2,
+      "states": 3,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1000010000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1110100101",
+     "refused": 0,
+     "success_rate": 0.6,
+     "successes": 6
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 38,
+           "first": "((('equals', 'self', 'id', 'ui-id-2'), ('equals', 'self', 'classes', 'ui-tabs-anchor')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1110100101",
+     "refused": 0,
+     "success_rate": 0.6,
+     "successes": 6
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1110100101",
+     "refused": 0,
+     "success_rate": 0.6,
+     "successes": 6
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@7"
+    ],
+    "length": 1,
+    "utterance": "Switch between the tabs to find and click on the link \"aliquam\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 4.77,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-tab-2-medium",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 67,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 45,
+      "budget_spent": 67,
+      "resets": 23,
+      "states": 8,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 18,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "verbatim": {
+     "actions": 11,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000000",
+     "refused": 0,
+     "success_rate": 0.0,
+     "successes": 0
+    },
+    "version_space": {
+     "actions": 28,
+     "actions_spent_looking": 8,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 38,
+           "first": "((('equals', 'self', 'id', 'ui-id-2'), ('equals', 'self', 'classes', 'ui-tabs-anchor')), None)",
+           "kind": "click"
+          },
+          {
+           "descriptions_left": 129,
+           "first": "((('equals', 'self', 'classes', 'alink'), ('slot', 'self', 'text', ('quoted', 0), 'exact')), None)",
+           "kind": "click",
+           "target_is_brought_out_by_pressing": "((('equals', 'self', 'tag', 'a'), ('equals', 'self', 'classes', 'ui-tabs-anchor')), None)"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 40,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000010",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@7",
+     "click@20"
+    ],
+    "length": 2,
+    "utterance": "Switch between the tabs to find and click on the link \"ut.\"."
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 7.81,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-tab-2",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 1,
+      "budget_spent": 1,
+      "resets": 1,
+      "states": 2,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0110000000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0011101000",
+     "refused": 0,
+     "success_rate": 0.4,
+     "successes": 4
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 95,
+           "first": "((('equals', 'self', 'classes', 'ui-tabs-anchor'), ('slot', 'self', 'text', ('between', 'on', '.'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0011101000",
+     "refused": 0,
+     "success_rate": 0.4,
+     "successes": 4
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5"
+    ],
+    "length": 1,
+    "utterance": "Click on Tab #1."
+   },
+   "distinct_test_instructions": 3,
+   "seconds": 5.09,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-tab",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 1,
+      "budget_spent": 1,
+      "resets": 1,
+      "states": 2,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100100101",
+     "refused": 0,
+     "success_rate": 0.4,
+     "successes": 4
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 72,
+           "first": "((('equals', 'self', 'id', 'subbtn'), ('slot', 'self', 'tag', ('between', 'Click', 'ONE'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3"
+    ],
+    "length": 1,
+    "utterance": "Click button ONE."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 3.24,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-test-2",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 1,
+      "budget_spent": 1,
+      "resets": 1,
+      "states": 2,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0100010011",
+     "refused": 0,
+     "success_rate": 0.4,
+     "successes": 4
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 72,
+           "first": "((('equals', 'self', 'id', 'subbtn'), ('slot', 'self', 'tag', ('between', 'Click', 'ONE'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3"
+    ],
+    "length": 1,
+    "utterance": "Click button ONE."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 3.54,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-test-transfer",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 1,
+      "budget_spent": 1,
+      "resets": 1,
+      "states": 2,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 24,
+           "first": "((('equals', 'self', 'id', 'subbtn'), ('slot', 'self', 'tag', ('between', 'the', '.'), 'exact')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111111111",
+     "refused": 0,
+     "success_rate": 1.0,
+     "successes": 10
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@3"
+    ],
+    "length": 1,
+    "utterance": "Click the button."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 3.87,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-test",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 1,
+      "budget_spent": 1,
+      "resets": 1,
+      "states": 2,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0001010000",
+     "refused": 0,
+     "success_rate": 0.2,
+     "successes": 2
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1001111101",
+     "refused": 0,
+     "success_rate": 0.7,
+     "successes": 7
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 47,
+           "first": "((('slot', 'self', 'tag', ('quoted', 0), 'exact'), ('equals', 'self', 'text', 'U')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1001110001",
+     "refused": 0,
+     "success_rate": 0.5,
+     "successes": 5
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1001110001",
+     "refused": 0,
+     "success_rate": 0.5,
+     "successes": 5
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@4"
+    ],
+    "length": 1,
+    "utterance": "Click on a \"textarea\" widget."
+   },
+   "distinct_test_instructions": 5,
+   "seconds": 3.96,
+   "split": "held_out",
+   "stage": "DEMONSTRATED",
+   "task": "click-widget",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 41,
+      "budget_spent": 55,
+      "resets": 15,
+      "states": 6,
+      "status": "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 280,
+      "budget_spent": 450,
+      "resets": 171,
+      "states": 66,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 1
+     },
+     {
+      "acts": 661,
+      "budget_spent": 995,
+      "resets": 335,
+      "states": 190,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 2
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 50.93,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "copy-paste-2"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 13,
+      "budget_spent": 18,
+      "resets": 6,
+      "states": 4,
+      "status": "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT",
+      "surprises": 0,
+      "tier": 0
+     },
+     {
+      "acts": 294,
+      "budget_spent": 450,
+      "resets": 157,
+      "states": 74,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 1
+     },
+     {
+      "acts": 742,
+      "budget_spent": 1032,
+      "resets": 291,
+      "states": 278,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 2
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 47.59,
+   "split": "development",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "copy-paste"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 21,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 11,
+      "budget_spent": 21,
+      "resets": 11,
+      "states": 5,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000001",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 6,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0000000001",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 51,
+           "first": "((('equals', 'self', 'tag', 'button'), ('equals', 'self', 'text', '2')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "1111110000",
+     "refused": 0,
+     "success_rate": 0.6,
+     "successes": 6
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "1111110000",
+     "refused": 0,
+     "success_rate": 0.6,
+     "successes": 6
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@15"
+    ],
+    "length": 1,
+    "utterance": "How many large rectangles are there?"
+   },
+   "distinct_test_instructions": 10,
+   "seconds": 4.05,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "count-shape",
+   "test_instances_identical_to_demonstration": 0
+  },
+  {
+   "acquisition": {
+    "budget_spent": 2,
+    "found": true,
+    "page_errors": [],
+    "route_used": "shortest_in_map",
+    "runs": [
+     {
+      "acts": 2,
+      "budget_spent": 2,
+      "resets": 1,
+      "states": 2,
+      "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": 0
+   },
+   "arms": {
+    "random": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0010000000",
+     "refused": 0,
+     "success_rate": 0.1,
+     "successes": 1
+    },
+    "verbatim": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0101100000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space": {
+     "actions": 10,
+     "actions_spent_looking": 0,
+     "episodes": 10,
+     "learning": {
+      "found_by_search": 0,
+      "new_ways": 0,
+      "no_success": 0,
+      "order_question_actions": 0,
+      "order_questions": 0,
+      "order_questions_answered_yes": 0,
+      "own_success": 0,
+      "own_success_with_looking": 0,
+      "practice_instances": 0,
+      "search_actions": 0,
+      "skills": {
+       "examples": 1,
+       "per_program": [
+        {
+         "examples": 1,
+         "rejected_examples": 0,
+         "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1",
+         "steps": [
+          {
+           "descriptions_left": 55,
+           "first": "((('slot', 'self', 'tag', ('between', 'the', 'that'), 'exact'), ('equals', 'self', 'text', '3')), None)",
+           "kind": "click"
+          }
+         ]
+        }
+       ],
+       "programs": 1,
+       "schema": "BRAIN_DEMONSTRATION_VERSION_SPACE_V1"
+      }
+     },
+     "partial_credit": 0,
+     "per_seed": "0101100000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    },
+    "version_space_blind": {
+     "actions": 10,
+     "episodes": 10,
+     "partial_credit": 0,
+     "per_seed": "0101100000",
+     "refused": 0,
+     "success_rate": 0.3,
+     "successes": 3
+    }
+   },
+   "demonstration": {
+    "actions": [
+     "click@5"
+    ],
+    "length": 1,
+    "utterance": "Press the button that correctly denotes how many sides the shape has."
+   },
+   "distinct_test_instructions": 1,
+   "seconds": 3.68,
+   "split": "development",
+   "stage": "DEMONSTRATED",
+   "task": "count-sides",
+   "test_instances_identical_to_demonstration": 10
+  },
+  {
+   "acquisition": {
+    "budget_spent": 1500,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 389,
+      "budget_spent": 600,
+      "resets": 212,
+      "states": 66,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 6,
+      "tier": 0
+     },
+     {
+      "acts": 304,
+      "budget_spent": 450,
+      "resets": 147,
+      "states": 116,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 1
+     },
+     {
+      "acts": 304,
+      "budget_spent": 450,
+      "resets": 147,
+      "states": 164,
+      "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+      "surprises": 0,
+      "tier": 2
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 41.58,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "daily-calendar"
+  },
+  {
+   "acquisition": {
+    "budget_spent": 3,
+    "found": false,
+    "page_errors": [],
+    "runs": [
+     {
+      "acts": 3,
+      "budget_spent": 3,
+      "resets": 1,
+      "states": 2,
+      "status": "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT",
+      "surprises": 0,
+      "tier": 0
+     }
+    ],
+    "tier": null
+   },
+   "seconds": 0.8,
+   "split": "held_out",
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "drag-box"
+  }
+ ]
+}

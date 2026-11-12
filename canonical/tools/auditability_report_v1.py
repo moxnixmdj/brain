@@ -630,7 +630,23 @@ def bottleneck(root: pathlib.Path) -> dict[str, Any]:
             "note": (f"openness {rel['openness']['r_with_success']:+.2f} "
                      f"-> {rel['openness']['partial_r_controlling_for_cost']:+.2f} controlling for "
                      f"cost; cost {rel['cost']['r_with_success']:+.2f}; verdict {rel['verdict']}"),
-            "rerun": result["feasibility"]["status"]}
+            "rerun": result["feasibility"]["status"],
+            "replication": _replication_note()}
+
+
+def _replication_note() -> str:
+    """Did the ordering reproduce on instances nobody had used? One line, or the reason not."""
+    try:
+        from canonical.tools import one_success_where_it_counts_v1 as L
+        check = L.replication_check()
+    except Exception as exc:                      # pragma: no cover
+        return f"error:{type(exc).__name__}"
+    if not check.get("available"):
+        return "no replication on file"
+    if check.get("ordering_reproduces"):
+        return (f"ordering reproduces on {check['pages']} pages, seeds "
+                f"{check['test_seeds'][0]}+ ({check['replication_run']})")
+    return f"ORDERING DOES NOT REPRODUCE ({check['replication_run']})"
 
 
 #: The one corpus read by TWO paths below: an explicit branch (which is the only place the
