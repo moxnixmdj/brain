@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 312,
+  "knowledge_documents": 313,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6706,
+  "research_index_records": 6707,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "df187bb1a3c99e5242924b3e1437d58812b48f29d1a335d0a99ac6866e811fde"
+  "value": "9b85656f0cc2cdc4127bb82ea8c2b941a0d27ea0660c4e276088c527447519c1"
  },
  "engines": [
   {
@@ -55905,6 +55905,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 16131,
+   "headings": [
+    "What a success teaches about *when*",
+    "1. The sentence, split at the joint that carries the weight",
+    "2. The measurement",
+    "A. One success",
+    "B. The same learner, once outcomes include failures",
+    "C. What this machine actually records",
+    "D. The registry's own premises",
+    "3. Where this changes the plan, in the right direction",
+    "4. What is wrong in the original sentence, stated plainly",
+    "4b. One independent cross-check, because the claim is load-bearing",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_A_SUCCESS_TEACHES_20261112_V1.md",
+   "sha256": "f55178c8f66a64a567dc63acd5d087cf3e6f4917dc0eff8e989723591430d736",
+   "summary": "**2026-11-12.** Base `dd67c1f4`. Branch `arena/b2f83018-brain`. Round 3 of the owner's question.",
+   "terms": {
+    "200": 7,
+    "25": 6,
+    "about": 7,
+    "action": 11,
+    "all": 6,
+    "applicability": 7,
+    "because": 6,
+    "both": 7,
+    "cannot": 11,
+    "capabilities": 6,
+    "capability": 7,
+    "cases": 7,
+    "change": 6,
+    "demonstration": 9,
+    "demonstrations": 10,
+    "empty": 7,
+    "every": 10,
+    "experience": 8,
+    "failure": 8,
+    "failures": 7,
+    "learner": 10,
+    "machine": 6,
+    "needs": 10,
+    "no": 15,
+    "not": 26,
+    "nothing": 6,
+    "once": 6,
+    "one": 33,
+    "only": 10,
+    "own": 6,
+    "owner": 8,
+    "plan": 6,
+    "premise": 7,
+    "probe": 6,
+    "real": 6,
+    "registry": 7,
+    "requirement": 6,
+    "same": 9,
+    "says": 6,
+    "so": 8,
+    "space": 9,
+    "state": 14,
+    "states": 6,
+    "success": 15,
+    "successes": 6,
+    "tree": 7,
+    "two": 7,
+    "wrong": 7
+   },
+   "title": "What a success teaches about *when*",
+   "title_terms": [
+    "about",
+    "success",
+    "teaches"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 49006,
    "headings": [
     "Where the solutions actually live",
@@ -69060,10 +69138,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1114,
+  "included_source_count": 1115,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a792b7a698beb5793fddd646e644ca807e6f440aaa9d5dd54c23c7e0eb455b6d"
+  "source_tree_digest": "b682a2f9d11a26a135ceaf4ff19ede268dbe239a6afe9f023e226da1493784e8"
  },
  "research_index": [
   {
@@ -227372,6 +227450,28 @@
     "source": 2,
     "v1": 2,
     "wave_seven_receipt_prose_family_gets_a_suite_v1_20261024_v1": 2
+   }
+  },
+  {
+   "action_id": "WHAT_A_SUCCESS_TEACHES_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/WHAT_A_SUCCESS_TEACHES_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHAT_A_SUCCESS_TEACHES_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "36b0b7d93da09a62a985d5b0658ccd3a0c378b65e1701e9978485df8bf47750e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measure_applicability_identifiability_and_price_the_registry_premises": 1,
+    "no_capability_credit__no_terminal_credit__no_family_flipped__a_named_blind_premise_set_and_a_named_missing_evidence_class": 1,
+    "registered_capabilities_whose_precondition_neither_a_capability_produces_nor_any_sensor_decides_plus_a_macro_store_that_retains_only_successes_so_the_one_evidence_class_that_can_narrow_applicability_is_never_kept": 1,
+    "success": 1,
+    "teaches": 1,
+    "v1": 1,
+    "what_a_success_teaches_20261112_v1": 1
    }
   },
   {
