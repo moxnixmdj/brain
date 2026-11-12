@@ -1,0 +1,813 @@
+{
+ "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T22:58:20Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "baseline": {
+  "askings": 440,
+  "edited": 140,
+  "developers_changes_not_imports": 1674,
+  "right_not_imports": 386,
+  "organ_changes": 408,
+  "not_what_the_developers_did": 14,
+  "questions": 408,
+  "same": 211,
+  "different": 0,
+  "left": 197,
+  "extra": 1,
+  "learn_time_refusals": 0,
+  "classes": {
+   "NO_FORM_IN_FILE": 168,
+   "EDITED": 140,
+   "IMPORT_ONLY_EXAMPLE": 60,
+   "BLOCK_SHAPE": 25,
+   "NAME_NOT_AVAILABLE": 22,
+   "CONFLICTING_CONTEXT": 15,
+   "OTHER": 10
+  },
+  "strict_coverage": 0.2306,
+  "strict_precision": 0.9461,
+  "marker_same_share": 0.5172,
+  "share_edited": 0.3182
+ },
+ "classes": {
+  "IMPORT_ONLY_EXAMPLE": {
+   "askings_of_this_class": 60,
+   "askings_where_the_example_itself_cannot_be_read": 60,
+   "askings_left_that_an_operator_could_reach": 0,
+   "what_the_class_is": "the example differs only in import lines; the algebra learns only expression changes",
+   "what_it_costs_to_really_buy_it": "an import rewrite operator: apply the same import-line change. Mechanically checkable (the module resolves). No search, no oracle. This is the cheapest class in the tree.",
+   "coverage_on_those_askings_alone": null,
+   "precision_on_those_askings_alone": null,
+   "changes_this_class_could_ever_recover": 0,
+   "corpus_strict_coverage_if_lifted": 0.2306,
+   "corpus_marker_same_if_lifted": 0.5172,
+   "organ_changes_added": 0,
+   "not_what_the_developers_did_added": 0,
+   "strict_coverage_gain_pp": 0.0
+  },
+  "NAME_NOT_AVAILABLE": {
+   "askings_of_this_class": 22,
+   "askings_where_the_example_itself_cannot_be_read": 0,
+   "askings_left_that_an_operator_could_reach": 22,
+   "what_the_class_is": "the new code reads a name the file does not define, import or receive",
+   "what_it_costs_to_really_buy_it": "a bring-from-the-example's-imports rule. Cheap when the example's own file imported the name; a project-graph operation when it did not.",
+   "coverage_on_those_askings_alone": 0.964,
+   "precision_on_those_askings_alone": 0.8295,
+   "changes_this_class_could_ever_recover": 107,
+   "corpus_strict_coverage_if_lifted": 0.2945,
+   "corpus_marker_same_if_lifted": 0.5172,
+   "organ_changes_added": 129,
+   "not_what_the_developers_did_added": 22,
+   "strict_coverage_gain_pp": 6.39
+  },
+  "CONFLICTING_CONTEXT": {
+   "askings_of_this_class": 15,
+   "askings_where_the_example_itself_cannot_be_read": 15,
+   "askings_left_that_an_operator_could_reach": 0,
+   "what_the_class_is": "the same code was changed in one place and left alone in another",
+   "what_it_costs_to_really_buy_it": "not an operator at all: this is genuinely underdetermined by one showing, and the document's own answer is a second demonstration chosen to settle it.",
+   "coverage_on_those_askings_alone": null,
+   "precision_on_those_askings_alone": null,
+   "changes_this_class_could_ever_recover": 0,
+   "corpus_strict_coverage_if_lifted": 0.2306,
+   "corpus_marker_same_if_lifted": 0.5172,
+   "organ_changes_added": 0,
+   "not_what_the_developers_did_added": 0,
+   "strict_coverage_gain_pp": 0.0
+  },
+  "BLOCK_SHAPE": {
+   "askings_of_this_class": 25,
+   "askings_where_the_example_itself_cannot_be_read": 25,
+   "askings_left_that_an_operator_could_reach": 0,
+   "what_the_class_is": "the change adds, removes or reshapes whole statements",
+   "what_it_costs_to_really_buy_it": "a new algebra of statement-level edits plus a test oracle. This is the expensive one and the reason it is ranked last here rather than first.",
+   "coverage_on_those_askings_alone": null,
+   "precision_on_those_askings_alone": null,
+   "changes_this_class_could_ever_recover": 0,
+   "corpus_strict_coverage_if_lifted": 0.2306,
+   "corpus_marker_same_if_lifted": 0.5172,
+   "organ_changes_added": 0,
+   "not_what_the_developers_did_added": 0,
+   "strict_coverage_gain_pp": 0.0
+  }
+ },
+ "ranked_by_measured_gain": [
+  "NAME_NOT_AVAILABLE",
+  "BLOCK_SHAPE",
+  "CONFLICTING_CONTEXT",
+  "IMPORT_ONLY_EXAMPLE"
+ ],
+ "per_pull_request": {
+  "openimis/openimis-be-core_py#414": {
+   "baseline": {
+    "askings": 30,
+    "edited": 6,
+    "developers_changes_not_imports": 315,
+    "right_not_imports": 121,
+    "organ_changes": 121,
+    "not_what_the_developers_did": 0,
+    "questions": 290,
+    "same": 116,
+    "different": 0,
+    "left": 174,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "NO_FORM_IN_FILE": 19,
+     "EDITED": 6,
+     "IMPORT_ONLY_EXAMPLE": 5
+    },
+    "strict_coverage": 0.3841,
+    "strict_precision": 1.0,
+    "marker_same_share": 0.4,
+    "share_edited": 0.2
+   },
+   "lifted": {
+    "IMPORT_ONLY_EXAMPLE": {
+     "askings": 5,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 5,
+     "classes": {
+      "IMPORT_ONLY_EXAMPLE": 5
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "torproject/stem#155": {
+   "baseline": {
+    "askings": 30,
+    "edited": 30,
+    "developers_changes_not_imports": 50,
+    "right_not_imports": 45,
+    "organ_changes": 45,
+    "not_what_the_developers_did": 0,
+    "questions": 45,
+    "same": 45,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "EDITED": 30
+    },
+    "strict_coverage": 0.9,
+    "strict_precision": 1.0,
+    "marker_same_share": 1.0,
+    "share_edited": 1.0
+   },
+   "lifted": {}
+  },
+  "testing-cabal/testtools#335": {
+   "baseline": {
+    "askings": 20,
+    "edited": 12,
+    "developers_changes_not_imports": 44,
+    "right_not_imports": 12,
+    "organ_changes": 12,
+    "not_what_the_developers_did": 0,
+    "questions": 8,
+    "same": 0,
+    "different": 0,
+    "left": 8,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "EDITED": 12,
+     "NO_FORM_IN_FILE": 8
+    },
+    "strict_coverage": 0.2727,
+    "strict_precision": 1.0,
+    "marker_same_share": 0.0,
+    "share_edited": 0.6
+   },
+   "lifted": {}
+  },
+  "kuangjiafa/automagician#55": {
+   "baseline": {
+    "askings": 30,
+    "edited": 1,
+    "developers_changes_not_imports": 40,
+    "right_not_imports": 0,
+    "organ_changes": 1,
+    "not_what_the_developers_did": 1,
+    "questions": 10,
+    "same": 0,
+    "different": 0,
+    "left": 10,
+    "extra": 1,
+    "learn_time_refusals": 0,
+    "classes": {
+     "BLOCK_SHAPE": 10,
+     "IMPORT_ONLY_EXAMPLE": 10,
+     "NO_FORM_IN_FILE": 9,
+     "EDITED": 1
+    },
+    "strict_coverage": 0.0,
+    "strict_precision": 0.0,
+    "marker_same_share": 0.0,
+    "share_edited": 0.0333
+   },
+   "lifted": {
+    "IMPORT_ONLY_EXAMPLE": {
+     "askings": 10,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 10,
+     "classes": {
+      "IMPORT_ONLY_EXAMPLE": 10
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    },
+    "BLOCK_SHAPE": {
+     "askings": 10,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 10,
+     "classes": {
+      "BLOCK_SHAPE": 10
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "RedHatInsights/advisor-backend#80": {
+   "baseline": {
+    "askings": 30,
+    "edited": 25,
+    "developers_changes_not_imports": 55,
+    "right_not_imports": 50,
+    "organ_changes": 50,
+    "not_what_the_developers_did": 0,
+    "questions": 55,
+    "same": 50,
+    "different": 0,
+    "left": 5,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "EDITED": 25,
+     "NO_FORM_IN_FILE": 5
+    },
+    "strict_coverage": 0.9091,
+    "strict_precision": 1.0,
+    "marker_same_share": 0.9091,
+    "share_edited": 0.8333
+   },
+   "lifted": {}
+  },
+  "Cytomine-ULiege/Cytomine-python-client#61": {
+   "baseline": {
+    "askings": 30,
+    "edited": 20,
+    "developers_changes_not_imports": 85,
+    "right_not_imports": 50,
+    "organ_changes": 50,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "EDITED": 20,
+     "NO_FORM_IN_FILE": 10
+    },
+    "strict_coverage": 0.5882,
+    "strict_precision": 1.0,
+    "marker_same_share": null,
+    "share_edited": 0.6667
+   },
+   "lifted": {}
+  },
+  "unifyai/ivy#26932": {
+   "baseline": {
+    "askings": 30,
+    "edited": 17,
+    "developers_changes_not_imports": 70,
+    "right_not_imports": 17,
+    "organ_changes": 17,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "EDITED": 17,
+     "NO_FORM_IN_FILE": 13
+    },
+    "strict_coverage": 0.2429,
+    "strict_precision": 1.0,
+    "marker_same_share": null,
+    "share_edited": 0.5667
+   },
+   "lifted": {}
+  },
+  "InterDigitalInc/CompressAI-Vision#40": {
+   "baseline": {
+    "askings": 30,
+    "edited": 0,
+    "developers_changes_not_imports": 35,
+    "right_not_imports": 0,
+    "organ_changes": 0,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "IMPORT_ONLY_EXAMPLE": 25,
+     "BLOCK_SHAPE": 5
+    },
+    "strict_coverage": 0.0,
+    "strict_precision": null,
+    "marker_same_share": null,
+    "share_edited": 0.0
+   },
+   "lifted": {
+    "IMPORT_ONLY_EXAMPLE": {
+     "askings": 25,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 25,
+     "classes": {
+      "IMPORT_ONLY_EXAMPLE": 25
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    },
+    "BLOCK_SHAPE": {
+     "askings": 5,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 5,
+     "classes": {
+      "BLOCK_SHAPE": 5
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "inveniosoftware/invenio-pidstore#189": {
+   "baseline": {
+    "askings": 30,
+    "edited": 0,
+    "developers_changes_not_imports": 115,
+    "right_not_imports": 0,
+    "organ_changes": 0,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "IMPORT_ONLY_EXAMPLE": 20,
+     "BLOCK_SHAPE": 5,
+     "NO_FORM_IN_FILE": 5
+    },
+    "strict_coverage": 0.0,
+    "strict_precision": null,
+    "marker_same_share": null,
+    "share_edited": 0.0
+   },
+   "lifted": {
+    "IMPORT_ONLY_EXAMPLE": {
+     "askings": 20,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 20,
+     "classes": {
+      "IMPORT_ONLY_EXAMPLE": 20
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    },
+    "BLOCK_SHAPE": {
+     "askings": 5,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 5,
+     "classes": {
+      "BLOCK_SHAPE": 5
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "nipy/nibabel#1609": {
+   "baseline": {
+    "askings": 30,
+    "edited": 0,
+    "developers_changes_not_imports": 70,
+    "right_not_imports": 0,
+    "organ_changes": 0,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "NO_FORM_IN_FILE": 30
+    },
+    "strict_coverage": 0.0,
+    "strict_precision": null,
+    "marker_same_share": null,
+    "share_edited": 0.0
+   },
+   "lifted": {}
+  },
+  "jupyter/jupyter-sphinx#301": {
+   "baseline": {
+    "askings": 30,
+    "edited": 0,
+    "developers_changes_not_imports": 110,
+    "right_not_imports": 0,
+    "organ_changes": 0,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "NO_FORM_IN_FILE": 30
+    },
+    "strict_coverage": 0.0,
+    "strict_precision": null,
+    "marker_same_share": null,
+    "share_edited": 0.0
+   },
+   "lifted": {}
+  },
+  "fulcrumgenomics/fgpyo#300": {
+   "baseline": {
+    "askings": 30,
+    "edited": 2,
+    "developers_changes_not_imports": 220,
+    "right_not_imports": 2,
+    "organ_changes": 3,
+    "not_what_the_developers_did": 1,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "NO_FORM_IN_FILE": 18,
+     "BLOCK_SHAPE": 5,
+     "CONFLICTING_CONTEXT": 5,
+     "EDITED": 2
+    },
+    "strict_coverage": 0.0091,
+    "strict_precision": 0.6667,
+    "marker_same_share": null,
+    "share_edited": 0.0667
+   },
+   "lifted": {
+    "CONFLICTING_CONTEXT": {
+     "askings": 5,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 5,
+     "classes": {
+      "CONFLICTING_CONTEXT": 5
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    },
+    "BLOCK_SHAPE": {
+     "askings": 5,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 5,
+     "classes": {
+      "BLOCK_SHAPE": 5
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "Prekzursil/env-inspector#72": {
+   "baseline": {
+    "askings": 30,
+    "edited": 7,
+    "developers_changes_not_imports": 280,
+    "right_not_imports": 34,
+    "organ_changes": 46,
+    "not_what_the_developers_did": 12,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "NO_FORM_IN_FILE": 13,
+     "CONFLICTING_CONTEXT": 10,
+     "EDITED": 7
+    },
+    "strict_coverage": 0.1214,
+    "strict_precision": 0.7391,
+    "marker_same_share": null,
+    "share_edited": 0.2333
+   },
+   "lifted": {
+    "CONFLICTING_CONTEXT": {
+     "askings": 10,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 10,
+     "classes": {
+      "CONFLICTING_CONTEXT": 10
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "apache/libcloud#2217": {
+   "baseline": {
+    "askings": 30,
+    "edited": 12,
+    "developers_changes_not_imports": 30,
+    "right_not_imports": 12,
+    "organ_changes": 12,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "EDITED": 12,
+     "OTHER": 10,
+     "NO_FORM_IN_FILE": 8
+    },
+    "strict_coverage": 0.4,
+    "strict_precision": 1.0,
+    "marker_same_share": null,
+    "share_edited": 0.4
+   },
+   "lifted": {
+    "OTHER": {
+     "askings": 10,
+     "edited": 0,
+     "developers_changes_not_imports": 0,
+     "right_not_imports": 0,
+     "organ_changes": 0,
+     "not_what_the_developers_did": 0,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 10,
+     "classes": {
+      "OTHER": 10
+     },
+     "strict_coverage": null,
+     "strict_precision": null,
+     "marker_same_share": null,
+     "share_edited": 0.0
+    }
+   }
+  },
+  "arigatoexpress/Project-Go-Forward#483": {
+   "baseline": {
+    "askings": 30,
+    "edited": 8,
+    "developers_changes_not_imports": 155,
+    "right_not_imports": 43,
+    "organ_changes": 51,
+    "not_what_the_developers_did": 0,
+    "questions": 0,
+    "same": 0,
+    "different": 0,
+    "left": 0,
+    "extra": 0,
+    "learn_time_refusals": 0,
+    "classes": {
+     "NAME_NOT_AVAILABLE": 22,
+     "EDITED": 8
+    },
+    "strict_coverage": 0.2774,
+    "strict_precision": 0.8431,
+    "marker_same_share": null,
+    "share_edited": 0.2667
+   },
+   "lifted": {
+    "NAME_NOT_AVAILABLE": {
+     "askings": 22,
+     "edited": 22,
+     "developers_changes_not_imports": 111,
+     "right_not_imports": 107,
+     "organ_changes": 129,
+     "not_what_the_developers_did": 22,
+     "questions": 0,
+     "same": 0,
+     "different": 0,
+     "left": 0,
+     "extra": 0,
+     "learn_time_refusals": 0,
+     "classes": {
+      "EDITED": 22
+     },
+     "strict_coverage": 0.964,
+     "strict_precision": 0.8295,
+     "marker_same_share": null,
+     "share_edited": 1.0
+    }
+   }
+  }
+ },
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "terminal_authority": false,
+ "code_sha256": {
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py": "ada1c5ed3422eee55d2e2ea65bb8afe56cdc1613895726499335cd32bdb7e0f0",
+  "canonical/tools/repeated_change_one_example_measure_v1.py": "f6c22132a60d0a9400563049c2a3456ebcc6de6968efa34dda173825673c816c",
+  "canonical/tools/edits_repeated_across_projects_v1.py": "f6cd4bc264cbc268d8f88a80600a02d6e78cf028e400c9bea29d2c15a6b3196f",
+  "canonical/tools/which_fix_moves_generalization_v1.py": "be1e38ece63e57725795dccfe8486fd004562f11a5e8ab1e1e96acc9fb88bb8f"
+ },
+ "pulls_sha256": "0eae235f84f05b31d2f564670e402d57fc1eaea8c95411c4d72bac44e0e43312",
+ "pull_requests": [
+  "openimis/openimis-be-core_py#414",
+  "torproject/stem#155",
+  "testing-cabal/testtools#335",
+  "kuangjiafa/automagician#55",
+  "RedHatInsights/advisor-backend#80",
+  "Cytomine-ULiege/Cytomine-python-client#61",
+  "unifyai/ivy#26932",
+  "InterDigitalInc/CompressAI-Vision#40",
+  "inveniosoftware/invenio-pidstore#189",
+  "nipy/nibabel#1609",
+  "jupyter/jupyter-sphinx#301",
+  "fulcrumgenomics/fgpyo#300",
+  "Prekzursil/env-inspector#72",
+  "apache/libcloud#2217",
+  "arigatoexpress/Project-Go-Forward#483"
+ ],
+ "seconds": 54.7,
+ "arms": {
+  "baseline": {
+   "what_it_is": "the organ with the kept-name exemption switched off, so the gain is attributable",
+   "askings": 330,
+   "share_edited": 0.2727,
+   "strict_coverage": 0.2082,
+   "strict_precision": 0.9241,
+   "marker_same_share": 0.2836,
+   "organ_changes": 290,
+   "not_what_the_developers_did": 14
+  },
+  "call_shape": {
+   "what_it_is": "a rename that leaves the arguments alone (pure rename + the organ's own gate)",
+   "askings": 330,
+   "share_edited": 0.4242,
+   "strict_coverage": 0.2999,
+   "strict_precision": 0.9461,
+   "marker_same_share": 0.617,
+   "organ_changes": 408,
+   "not_what_the_developers_did": 14
+  },
+  "extend_import": {
+   "what_it_is": "extend the import the file already has with the name the lesson needs",
+   "askings": 330,
+   "share_edited": 0.1,
+   "strict_coverage": 0.1305,
+   "strict_precision": 0.8038,
+   "marker_same_share": 0.0,
+   "organ_changes": 209,
+   "not_what_the_developers_did": 41
+  },
+  "both": {
+   "what_it_is": "extend_import first, then call_shape on whatever is still refused",
+   "askings": 330,
+   "share_edited": 0.4909,
+   "strict_coverage": 0.3831,
+   "strict_precision": 0.913,
+   "marker_same_share": 0.617,
+   "organ_changes": 540,
+   "not_what_the_developers_did": 47
+  }
+ }
+}

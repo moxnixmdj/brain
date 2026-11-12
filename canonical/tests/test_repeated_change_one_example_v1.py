@@ -266,11 +266,45 @@ USED_ANOTHER_WAY = ("class U:\n    def test_c(self):\n        self.assertEquals(
 
 
 def test_a_use_the_example_did_not_show_makes_the_organ_refuse_the_file_or_leave_that_use_alone():
+    """The check that a new callee takes the arguments of the call site, and the two ways through it.
+
+    `assertEquals` is a name the standard library kept for `assertEqual`, so a call of another shape
+    is no longer refused: the callee is the same function and takes what it always took.  The
+    refusal this test was written for is still what happens to a change between two *different*
+    names, and `test_a_rename_between_two_different_names_is_still_refused_for_another_call_shape`
+    holds it.
+    """
     whole, why = measure.the_organ(USED_ANOTHER_WAY, EXAMPLE_BEFORE, EXAMPLE_AFTER)
-    assert whole is None and why.startswith("refused: line 6 of the file has self.assertEquals called with 3 arguments")
+    assert why is None
+    assert "self.assertEqual(h(), 'x', 'said when it fails')" in whole
     got, why = measure.the_organ_leaving_the_rest(USED_ANOTHER_WAY, EXAMPLE_BEFORE, EXAMPLE_AFTER)
     assert why is None
-    assert "self.assertEqual(h(), 'x')\n" in got and "self.assertEquals(h(), 'x', 'said when it fails')" in got
+    assert got == whole
+
+
+def test_a_rename_between_two_different_names_is_still_refused_for_another_call_shape():
+    """`yaml.load` -> `yaml.safe_load` has the same shape as an alias and must keep being refused."""
+    before = "import yaml\n\n\ndef settings(h):\n    return yaml.load(h)\n"
+    after = before.replace("load(", "safe_load(")
+    target = ("import yaml\n\n\ndef mine(h):\n    return yaml.load(h, Loader=yaml.FullLoader)\n")
+    whole, why = measure.the_organ(target, before, after)
+    assert whole is None
+    assert "called with 1 argument and the keyword Loader" in why, why
+    assert "may not work with the new code" in why, why
+
+
+def test_the_alias_exception_is_only_for_a_rename_and_only_for_a_kept_name():
+    """Two guards on one exemption: the shape must be a rename, and the pair must be a kept name."""
+    from canonical.swe_kernel.taught_actions import kept_under_an_old_name_v1 as kept
+    from canonical.swe_kernel.taught_actions import edit_by_example_v1 as organ
+    assert kept.alias_of("assertEquals", "assertEqual")
+    assert kept.alias_of("assertRaisesRegexp", "assertRaisesRegex")
+    assert not kept.alias_of("load", "safe_load")
+    reshaped_before = "import unittest\n\n\nclass T(unittest.TestCase):\n    def test_a(self):\n        self.assertEquals(f(1), 2)\n"
+    reshaped_after = ("import unittest\n\n\nclass T(unittest.TestCase):\n    def test_a(self):\n"
+                      "        self.assertEqual(f(1), 2, 'why')\n")
+    rules = organ.learn(reshaped_before, reshaped_after)
+    assert all(organ.kept_alias(rule) is None for rule in rules)
 
 
 def test_leaving_the_rest_changes_what_the_whole_file_way_changes_when_every_use_was_shown():

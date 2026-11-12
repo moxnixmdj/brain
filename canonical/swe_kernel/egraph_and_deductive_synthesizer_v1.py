@@ -3274,12 +3274,73 @@ def propose_egraph_algebraic_rewrites(source_text: str, rule: dict[str, Any] | A
 
     # Collect maximal arithmetic expressions (and their BinOp sub-expressions) with source spans
     expr_nodes: list[ast.expr] = []
+    aug_nodes: list[ast.AugAssign] = []
     for nd in ast.walk(tree):
         if isinstance(nd, (ast.BinOp, ast.UnaryOp)) and _span(nd) is not None:
             expr_nodes.append(nd)
+        elif isinstance(nd, ast.AugAssign) and isinstance(nd.target, ast.Name) and _span(nd) is not None:
+            aug_nodes.append(nd)
 
     proposals: list[str] = []
     seen: set[str] = {source_text}
+    # Map simple initial assignments `var = <init_expr>` in the same function/module for AugAssign folding
+    init_assigns: dict[str, ast.expr] = {}
+    for nd in ast.walk(tree):
+        if (
+            isinstance(nd, ast.Assign)
+            and len(nd.targets) == 1
+            and isinstance(nd.targets[0], ast.Name)
+            and isinstance(nd.value, ast.expr)
+        ):
+            init_assigns.setdefault(nd.targets[0].id, nd.value)
+
+    for aug in aug_nodes:
+        sp = _span(aug)
+        if sp is None or not isinstance(aug.target, ast.Name):
+            continue
+        lhs_expr = init_assigns.get(aug.target.id, ast.Name(id=aug.target.id, ctx=ast.Load()))
+        synth_binop = ast.BinOp(left=lhs_expr, op=aug.op, right=aug.value)
+        eg = EGraph()
+        leaf_src: dict[int, tuple[int, str]] = {}
+        root_cid = _ast_expr_to_egraph(eg, synth_binop, leaf_src)
+        _saturate_algebraic_egraph(eg, rounds=3)
+        matches = _match_pattern_in_eclass(eg, before_expr, root_cid, holes, {})
+        for env in matches[:4]:
+            hole_texts: dict[str, str] = {}
+            ok = True
+            for h in holes:
+                cid_h = env.get(h)
+                txt_h = _extract_eclass_source(eg, cid_h, leaf_src) if cid_h is not None else None
+                if not txt_h:
+                    ok = False
+                    break
+                hole_texts[h] = txt_h
+            if not ok:
+                continue
+            try:
+                repl_ast = _instantiate_after_ast(after_expr, hole_texts)
+                repl_txt = ast.unparse(repl_ast)
+            except Exception:
+                continue
+            s_idx, e_idx = sp
+            cand_stmts: list[str] = [f"{aug.target.id} = {repl_txt}"]
+            if isinstance(repl_ast, ast.BinOp) and isinstance(aug.op, (ast.Add, ast.Sub)) and isinstance(repl_ast.op, (ast.Add, ast.Sub)):
+                op_sym = "-=" if isinstance(repl_ast.op, ast.Sub) else "+="
+                val_sp = _span(aug.value)
+                rhs_txt = source_text[val_sp[0]:val_sp[1]] if val_sp is not None else ast.unparse(repl_ast.right)
+                cand_stmts.insert(0, f"{aug.target.id} {op_sym} {rhs_txt}")
+            for cand_stmt in cand_stmts:
+                patched = source_text[:s_idx] + cand_stmt + source_text[e_idx:]
+                if patched in seen:
+                    continue
+                try:
+                    ast.parse(patched)
+                except SyntaxError:
+                    continue
+                seen.add(patched)
+                proposals.append(patched)
+                break
+
     for target_expr in expr_nodes:
         sp = _span(target_expr)
         if sp is None:

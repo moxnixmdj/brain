@@ -244,7 +244,12 @@ def propose_operator_swaps(
         return
     seen: set[str] = set()
     emitted = 0
-    for swap in derive_swap_family(rule):
+    swap_list = list(derive_swap_family(rule))
+    aug_eligible = {"+", "-", "*", "/", "%"}
+    for sw in list(swap_list):
+        if sw["from"] in aug_eligible and sw["to"] in aug_eligible:
+            swap_list.append({"from": sw["from"] + "=", "to": sw["to"] + "="})
+    for swap in swap_list:
         src_op, dst_op = swap["from"], swap["to"]
         for idx in _occurrences(source_text, src_op, language=language):
             if emitted >= limit:

@@ -101,6 +101,8 @@ import sys
 import time
 import tokenize
 
+from . import kept_under_an_old_name_v1 as kept_under_an_old_name
+
 SIMPLE_STATEMENTS = (ast.Assign, ast.AugAssign, ast.AnnAssign, ast.Return, ast.Expr, ast.Raise, ast.Assert,
                      ast.Delete, ast.Pass, ast.Import, ast.ImportFrom, ast.Global, ast.Nonlocal, ast.Break,
                      ast.Continue)
@@ -1260,13 +1262,75 @@ def said(use):
 SHOWN = object()
 
 
-def written_with(rule, node, bound, text):
-    """The new text for the node the rule makes at this place, without reading the file around it.
+def renamed_only(rule):
+    """True when the rule differs from what it fits in one written name and nothing else.
 
-    It is `written_for` with nothing to lean on, which is exactly right here: the question is what name the change
-    puts in place of the old one, and that does not depend on the rest of the file.
+    Read off the two patterns, not guessed: same shape everywhere, one written name or constant
+    different.  `self.assertEquals -> self.assertEqual` is one; anything that touches an argument
+    list, adds a call, or reshapes the expression is not.
+
+    On its own this says nothing about whether the change is safe -- `yaml.load -> yaml.safe_load`
+    has exactly the same shape, and a test in this repo holds that one as a refusal.  It only says
+    that a change *of this kind* is possible, which is what makes it worth asking
+    `kept_under_an_old_name` about the pair.
     """
-    return written_for(rule, node, bound, text)[0]
+    if rule.kind != "expression":
+        return False
+    different = []
+
+    def same(was, now, where):
+        if was[0] != now[0]:
+            return False
+        if was[0] == "?":
+            return True
+        if was[0] == "N":
+            if was[1] != now[1] or {name for name, _ in was[2]} != {name for name, _ in now[2]}:
+                return False
+            mine = dict(was[2])
+            return all(same(mine[name], inner, where + (name,)) for name, inner in now[2])
+        if was[0] == "L":
+            return len(was[1]) == len(now[1]) and all(same(one, other, where)
+                                                      for one, other in zip(was[1], now[1]))
+        if was[1] != now[1]:
+            different.append((was[1], now[1]))
+        return True
+
+    if not same(rule.pattern, rule.template, ()):
+        return False
+    if len(different) != 1:
+        return False
+    was, now = different[0]
+    return was.startswith("'") and now.startswith("'") and "'" not in was[1:-1] + now[1:-1]
+
+
+def kept_alias(rule):
+    """The two names when the rule renames only, and they are one name the standard library kept.
+
+    `None` for every other rule, including a rename between two names that are not that.  This is
+    the whole of the exemption's evidence: the shape says "renamed and nothing else", and the
+    recorded list says the two names are one function.  Either alone is not enough -- the shape
+    cannot tell `assertEquals` from `yaml.load`, and the names alone say nothing about what the
+    example actually changed.
+    """
+    if not renamed_only(rule):
+        return None
+    pair = []
+
+    def names(was, now):
+        if was[0] == "N":
+            mine = dict(was[2])
+            for name, inner in now[2]:
+                names(mine[name], inner)
+        elif was[0] == "L":
+            for one, other in zip(was[1], now[1]):
+                names(one, other)
+        elif was[1] != now[1]:
+            pair.append((was[1].strip("'"), now[1].strip("'")))
+
+    names(rule.pattern, rule.template)
+    if len(pair) != 1 or not kept_under_an_old_name.alias_of(*pair[0]):
+        return None
+    return pair[0]
 
 
 def made_use(rule, node, bound, text):
@@ -1279,12 +1343,11 @@ def made_use(rule, node, bound, text):
     use = text.use_of(node)
     if use is None:
         return None
-    made = written_with(rule, node, bound, text)
     try:
-        new = ast.parse(made, mode="eval").body
-    except (SyntaxError, ValueError):
+        made = ast.parse(written_for(rule, node, bound, text)[0], mode="eval").body
+    except (SyntaxError, ValueError, KeyError, Refused):
         return use
-    return use if isinstance(new, ast.Call) else None
+    return use if isinstance(made, ast.Call) else None
 
 
 def shown_by_the_file(rule, text, use, node):
@@ -1297,7 +1360,7 @@ def shown_by_the_file(rule, text, use, node):
     if use is None or rule.kind != "expression" or blanks_in(rule.template):
         return False                      # the new code varies here, so there is no one name to look for
     try:
-        made = ast.parse(written_with(rule, node, {}, text), mode="eval").body
+        made = ast.parse(written_for(rule, node, {}, text)[0], mode="eval").body
     except (SyntaxError, ValueError, KeyError, Refused):
         return False
     callee = ast.unparse(made.func if isinstance(made, ast.Call) else made)
@@ -1312,19 +1375,20 @@ def shown_by_the_file(rule, text, use, node):
     return False
 
 
-def unshown_use(rule, text, node, bound=None):
+def unshown_use(rule, text, node):
     """`SHOWN` when the code at `node` is used a way the examples showed; otherwise that use.
 
     A function replaced where it was called one way says nothing about calls of another form: the new function
     may not take those arguments.  So a call must have a number of plain arguments the examples showed and no
     keyword they did not show, and code that is not called must have been shown not called.
 
-    A file that already calls the new code the way this place calls the old one has answered that question for
-    itself.  That is a showing, so the use counts as shown -- the same widening a second example gives, read off
-    the file instead of off another example.  Shown with two arguments and with four still says nothing about
-    three, unless the file itself shows three.
+    Two names the standard library kept for each other are the one exception, and only because the
+    callee is the same function: `assertEquals` shown with two arguments says nothing about a call
+    with three, but `assertEqual` takes what `assertEquals` took, so there is nothing to be unsure
+    about.  `kept_alias` answers for a change that renames and nothing else, and refuses to answer
+    for `yaml.load -> yaml.safe_load`, which that check must keep refusing.
     """
-    if rule.kind != "expression":
+    if rule.kind != "expression" or kept_alias(rule) is not None:
         return SHOWN
     use, calls = text.use_of(node), [shown for shown in rule.uses if shown is not None]
     if use is None:
@@ -1332,7 +1396,7 @@ def unshown_use(rule, text, node, bound=None):
     if use[0] in {count for count, _ in calls} and use[1] <= frozenset().union(*[named for _, named in calls]):
         return SHOWN
     if shown_by_the_file(rule, text, use, node):
-        return SHOWN
+        return SHOWN               # the file already calls the new code this way, at a place the change leaves alone
     return use
 
 
