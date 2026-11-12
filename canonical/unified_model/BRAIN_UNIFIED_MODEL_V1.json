@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 339,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6743,
+  "research_index_records": 6744,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e54b626064646fcebf9970ff8e3f5dea332f07a0521be1a48ee87ce8e5e0ebb1"
+  "value": "c47825ce99437feb278cc1e81a0db358794d166af7c834c03135e29554019003"
  },
  "engines": [
   {
@@ -153098,6 +153098,25 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/EXPERT_FIXES_DOSE_RESPONSE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EXPERT_FIXES_DOSE_RESPONSE_20261112_V1.json",
+   "schema": "BRAIN_EXPERT_FIXES_DOSE_RESPONSE_RECORD_V1",
+   "sha256": "36154be6747e988c94021ba9321040c0d6fea05c22aab13c0fb193103d8d18bf",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "dose": 1,
+    "expert": 1,
+    "fixes": 1,
+    "response": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EXPERT_FIX_REPETITION_SWEBENCH_VERIFIED_20261112_V1.json",
@@ -182042,7 +182061,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
    "schema": "BRAIN_REPEATED_CHANGE_ONE_EXAMPLE_RECORD_V1",
-   "sha256": "a41160da935f4894a69f540a155dbada02aca4856f3feabfd6c500137bb926f2",
+   "sha256": "99ef1f91e9ba1629a30d19e65e9a375a91460e1a8b3cf588a241154caeda72ee",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -222436,7 +222455,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0b17963d5772d883d31ef6d55f713f030b744d7ef643808974f2b683bf5563eb",
+   "sha256": "89a1e6393902b4f4a6937f0a280625ca17009e8f7574546e89e481a0c57203c2",
    "status": "",
    "terms": {
     "20261111": 1,
