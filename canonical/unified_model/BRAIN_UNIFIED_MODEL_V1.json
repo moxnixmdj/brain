@@ -31229,16 +31229,16 @@
   "engines": 26,
   "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6791,
+  "research_index_records": 6792,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1972
+  "source_index_modules": 1973
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cc2b4f67ea075bb27c8ec8ef1ab734169bed913b18e6d9a1885965e196e6434e"
+  "value": "ff7ed01055365c07f20dbcda598807c3dc28905a7cde4b8d0e19539b83c5daa8"
  },
  "engines": [
   {
@@ -159516,6 +159516,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FUNCTION_FOUND_FROM_TASK_TEXT_V1",
+   "sha256": "5865accf11a87d3eb0c69745f31cdad7daf1e7615c7d8ace26e800ecdbb2a3b5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "found": 1,
+    "function": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -227649,7 +227670,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "936b6975ea067c994d4e05a99a05025dc78b88d9d4e58c5de54ce929130b2b1b",
+   "sha256": "cadc1f1ec212cdc88616b15bac3db46e3b7eebb534e475ec0a06324e97941b53",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -239953,7 +239974,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "b5ecfba1d7324d593b9f91d12f194c7848a3f888773da34f342e1c24715ffb96",
+   "sha256": "d25a8f874fbceb8e039add5affdbdb3665496d33043122acb28bfe7137fc6d0b",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 19,
    "symbols": [
@@ -263617,6 +263638,48 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/function_the_task_text_points_at_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/function_the_task_text_points_at_v1.py",
+   "sha256": "c607fe3ad8a2347957926a448602a00b94d4d076c39071b253b825fec52cf6d0",
+   "summary": "Which function of a file a task's text points at, and the first few changes to try in each.",
+   "symbol_count": 8,
+   "symbols": [
+    "Function",
+    "_parsed",
+    "candidates",
+    "functions_of",
+    "order",
+    "text_of",
+    "words",
+    "written_into"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "each": 1,
+    "few": 1,
+    "file": 1,
+    "first": 1,
+    "function": 3,
+    "functions_of": 1,
+    "order": 1,
+    "parsed": 1,
+    "points": 2,
+    "task": 2,
+    "text": 2,
+    "text_of": 1,
+    "try": 1,
+    "v1": 1,
+    "words": 1,
+    "written_into": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/g0_finite_typed_rule_synthesis.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -265581,9 +265644,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "8a819674b9b4e0968f198fb096291aae87e08961ffa526837b08338458f1cba0",
+   "sha256": "7ad424ffbfe2353f71bf26070a3d3c6a5d3aeff8489c14083ead059cd8dee603",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 90,
+   "symbol_count": 91,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -272174,7 +272237,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "c1413ae6b615fad247cddb752e19c0380907634fe6507497e71782101e29b02b",
+   "sha256": "9edb92232149249b1d5145aa7dad4e6aec4b44686568b567a9ee0770ea54b820",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 130,
    "symbols": [
@@ -300795,7 +300858,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "78c3c611907bd4eb6ab986cef50565084fc4d460b0908540e1baa6884824a8bc",
+   "sha256": "0bba15acac3238b0778a5ac57a86fb838d1705107410f6c0d59fbb8432fe88bd",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
