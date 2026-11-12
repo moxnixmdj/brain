@@ -30,12 +30,28 @@ grouped and smoothed (SUPPORT_EDGES, MADE_EDGES, SHRINK), which was fixed before
 
 It is the ranking step of Getafix (Bader et al., OOPSLA 2019), where a fix pattern is ranked by
 how it fared on earlier fixes, with the fare counted leave-one-group-out.
+
+What was found: DO NOT WIRE THIS IN AS IT STANDS
+------------------------------------------------
+Measured 2026-11-12 (canonical/verification/EDIT_KIND_CHOICE_20261112_V1.json), with the counts
+made on the 64 development bugs of HumanEvalFix and every one of them ordered with the counts of
+the other 63: the published fix is among the first 200 candidates for 20 bugs in the learner's own
+order, for 18 in the counted order with the shares added up and for 18 with the largest share. The
+rule set beforehand was that the counted order must have it there for more bugs; it has not, and
+no scored run was made. The counted order moves single fixes a long way both ways (place 91 to 3,
+place 12 to 2,918): 92 cases of an operator holding the fix, spread over 617 cells, are too few to
+say which kind of operator to trust.
+
+The two orders are right about different bugs. `in_turns` takes them alternately; where the fix
+then stands is written down in the same record, for the development bugs only and seen only after
+the rule had spoken, so it is a lead and not a result.
 """
 from __future__ import annotations
 
 import ast
+import itertools
 import warnings
-from typing import Any, Callable, Iterator, Mapping, Sequence
+from typing import Any, Callable, Iterable, Iterator, Mapping, Sequence
 
 from canonical.runtime import edit_kind_learning_v1 as kinds
 
@@ -219,3 +235,16 @@ def ranking(lessons: kinds.Lessons, source: str, table: Table | None = None, *, 
     if how not in (SUM, MOST):
         raise ValueError(f"how must be {SUM!r} or {MOST!r}")
     return ordered(shares(lessons, source, table, at_most=at_most), how if table is not None else None)
+
+
+def in_turns(first: Iterable[tuple[str, float, Any]], second: Iterable[tuple[str, float, Any]]) -> Iterator[tuple[str, float, Any]]:
+    """Two orders of candidates taken alternately: the first of the one, the first of the other,
+    the second of the one, and so on. A candidate already given is not given a second time, and
+    the order that came to it gives nothing in that round. When one order has run out the other
+    goes on alone. Nothing is read from either order before it is asked for."""
+    taken: set[str] = set()
+    for pair in itertools.zip_longest(first, second):
+        for item in pair:
+            if item is not None and item[0] not in taken:
+                taken.add(item[0])
+                yield item

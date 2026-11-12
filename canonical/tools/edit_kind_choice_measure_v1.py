@@ -64,7 +64,14 @@ BUDGET = 200
 RANKS = (1, 10, 100, 200)
 DIRECTIONS = ("forwards", "backwards")
 VOTES, COUNTED = "votes", "counted"       # the learner's own order; the order by the counts
-EXPECTED = "NOT YET WRITTEN"              # replaced before the scored run; see the record
+IN_TURNS = "in_turns"                     # the learner's order and a counted order taken alternately
+# The rule set before step two, and what became of it. It stands here so that a scored run made
+# after this carries it in its record.
+EXPECTED = ("NO SCORED RUN WAS MADE ON 2026-11-12. The rule set before the development bugs were ordered: if neither way of putting the "
+            "counted shares together has the published fix within the first 200 candidates for more development bugs than the learner's own "
+            "order, the scored bugs are not touched. Found: the learner's order 20 of 64, the shares added up 18, the largest share 18. "
+            "Whoever makes the scored run after this is testing an order its own development bugs spoke against, and should write here "
+            "first what would make them drop it.")
 
 
 # --------------------------------------------------------------------------- #
@@ -110,13 +117,27 @@ def place_of(order: Sequence[tuple[str, float, Any]], wanted: str, compiles: dic
     return None
 
 
+def programs_only(order: Sequence[tuple[str, float, Any]], compiles: dict[str, bool]):
+    """The candidates of an order that are programs, in that order, one at a time as they are asked for."""
+    for item in order:
+        if item[0] not in compiles:
+            compiles[item[0]] = kinds.is_a_program(item[0])
+        if compiles[item[0]]:
+            yield item
+
+
 def places_of_the_fix(bug: Mapping[str, Any], lessons: kinds.Lessons, table: choice.Table) -> dict[str, Any]:
+    """Where the published fix stands in the learner's own order, in the two counted orders, and
+    when the learner's order and a counted one are taken in turns (the learner's turn first)."""
     published = ast.unparse(ast.parse(bug["fixed"]))
     found = choice.shares(lessons, bug["buggy"], table)
     compiles: dict[str, bool] = {}
-    return {"candidates": len(found), VOTES: place_of(choice.ordered(found, None), published, compiles),
-            choice.SUM: place_of(choice.ordered(found, choice.SUM), published, compiles),
-            choice.MOST: place_of(choice.ordered(found, choice.MOST), published, compiles)}
+    orders = {how: choice.ordered(found, None if how == VOTES else how) for how in (VOTES, choice.SUM, choice.MOST)}
+    out: dict[str, Any] = {"candidates": len(found), **{how: place_of(order, published, compiles) for how, order in orders.items()}}
+    out[IN_TURNS] = {how: None if out[VOTES] is None else
+                     place_of(choice.in_turns(programs_only(orders[VOTES], compiles), programs_only(orders[how], compiles)), published, compiles)
+                     for how in (choice.SUM, choice.MOST)}
+    return out
 
 
 def places_summary(per_bug: Mapping[str, Mapping[str, Any]], budget: int = BUDGET) -> dict[str, Any]:
@@ -127,12 +148,22 @@ def places_summary(per_bug: Mapping[str, Mapping[str, Any]], budget: int = BUDGE
                     "published_fix_within": {str(rank): sum(1 for place in found if place <= rank) for rank in (1, 10, 50, 100, budget, 1000)},
                     "place_median": statistics.median(found) if found else None,
                     "mean_of_one_over_the_place": round(sum(1.0 / place for place in found) / max(1, len(per_bug)), 4)}
+    cuts = (1, 10, 50, 100, budget, 1000)
     for how in (choice.SUM, choice.MOST):
         both = [(row[VOTES], row[how]) for row in per_bug.values() if row[VOTES] is not None]
         out[how]["against_the_votes"] = {"nearer_the_front": sum(1 for old, new in both if new < old), "further_back": sum(1 for old, new in both if new > old),
                                          "the_same_place": sum(1 for old, new in both if new == old),
                                          "came_within_the_budget": sum(1 for old, new in both if old > budget >= new),
                                          "fell_out_of_the_budget": sum(1 for old, new in both if old <= budget < new)}
+        # what no order has: for each bug the better of its two places, as if something knew which order to trust
+        out[how]["the_better_of_it_and_the_votes"] = {"published_fix_within": {str(rank): sum(1 for old, new in both if min(old, new) <= rank) for rank in cuts}}
+        if all(IN_TURNS in row for row in per_bug.values()):
+            turns = [row[IN_TURNS][how] for row in per_bug.values() if row[IN_TURNS][how] is not None]
+            out[how]["taken_in_turns_with_the_votes"] = {
+                "published_fix_within": {str(rank): sum(1 for place in turns if place <= rank) for rank in cuts},
+                "place_median": statistics.median(turns) if turns else None,
+                "came_within_the_budget": sum(1 for row in per_bug.values() if row[VOTES] is not None and row[VOTES] > budget >= row[IN_TURNS][how]),
+                "fell_out_of_the_budget": sum(1 for row in per_bug.values() if row[VOTES] is not None and row[VOTES] <= budget < row[IN_TURNS][how])}
     return out
 
 

@@ -212,3 +212,44 @@ def test_a_way_of_putting_shares_together_that_does_not_exist_is_refused():
 
 def test_a_program_that_cannot_be_read_has_no_candidates():
     assert choice.ranking(lessons_of(a=MINUS_TO_PLUS), "def f(:\n", None) == [] and choice.shares(lessons_of(a=MINUS_TO_PLUS), "def f(:\n") == {}
+
+
+# ----------------------------------------------------------------------------- two orders taken in turns
+def order_of(*names):
+    return [(name, 1.0, {}) for name in names]
+
+
+def test_two_orders_are_taken_alternately_and_no_candidate_is_given_twice():
+    got = [name for name, _, _ in choice.in_turns(order_of("a", "b", "c", "d"), order_of("d", "a", "e", "f"))]
+    assert got == ["a", "d", "b", "c", "e", "f"]
+    # the first order's turn comes first, and a candidate both give stands where the earlier of the two put it
+    assert [name for name, _, _ in choice.in_turns(order_of("x", "y"), order_of("x", "y"))] == ["x", "y"]
+    assert [name for name, _, _ in choice.in_turns(order_of("x", "y"), order_of("y", "x"))] == ["x", "y"]
+    assert [name for name, _, _ in choice.in_turns(order_of("y", "x"), order_of("x", "y"))] == ["y", "x"]
+
+
+def test_when_one_order_has_run_out_the_other_goes_on_alone():
+    assert [name for name, _, _ in choice.in_turns(order_of("a"), order_of("b", "c", "d"))] == ["a", "b", "c", "d"]
+    assert [name for name, _, _ in choice.in_turns(order_of("a", "b", "c"), order_of())] == ["a", "b", "c"]
+    assert list(choice.in_turns(order_of(), order_of())) == []
+
+
+def test_a_candidate_at_place_n_of_either_order_is_within_twice_n_taken_in_turns():
+    first, second = order_of(*"abcdefgh"), order_of(*"hgfedcba")
+    turns = [name for name, _, _ in choice.in_turns(first, second)]
+    for name in "abcdefgh":
+        nearest = min("abcdefgh".index(name), "hgfedcba".index(name)) + 1
+        assert turns.index(name) + 1 <= 2 * nearest
+    assert sorted(turns) == list("abcdefgh")
+
+
+def test_nothing_is_read_from_an_order_before_it_is_asked_for():
+    read = []
+
+    def slowly(*names):
+        for name in names:
+            read.append(name)
+            yield (name, 1.0, {})
+
+    turns = choice.in_turns(slowly("a", "b", "c"), slowly("p", "q", "r"))
+    assert read == [] and next(turns)[0] == "a" and next(turns)[0] == "p" and read == ["a", "p"]

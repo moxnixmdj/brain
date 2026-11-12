@@ -74,6 +74,45 @@ def test_the_places_of_a_fix_are_given_under_the_votes_and_both_ways_of_the_coun
     assert measure.places_of_the_fix(OUT_OF_REACH, memory(), table)[measure.VOTES] is None
 
 
+def test_taken_in_turns_the_fix_stands_within_twice_its_better_place_and_only_programs_are_counted():
+    table = choice.Table(measure.put_together(measure.counted_on([PLUS], memory())))
+    got = measure.places_of_the_fix(TWO_PLACES, memory(), table)
+    for how in (choice.SUM, choice.MOST):
+        assert 1 <= got[measure.IN_TURNS][how] <= 2 * min(got[measure.VOTES], got[how])
+    assert measure.places_of_the_fix(OUT_OF_REACH, memory(), table)[measure.IN_TURNS] == {choice.SUM: None, choice.MOST: None}
+    compiles = {}
+    order = [("def f(:\n", 3.0, {}), ("x = 1", 2.0, {}), ("y = (", 1.5, {}), ("z = 2", 1.0, {})]
+    assert [text for text, _, _ in measure.programs_only(order, compiles)] == ["x = 1", "z = 2"] and compiles["y = ("] is False
+    # what cannot be a program takes no turn: the fix is second, not fourth
+    turns = choice.in_turns(measure.programs_only(order, compiles), measure.programs_only(list(reversed(order)), compiles))
+    assert measure.place_of(turns, "x = 1", compiles) == 1
+    turns = choice.in_turns(measure.programs_only(order, compiles), measure.programs_only(list(reversed(order)), compiles))
+    assert measure.place_of(turns, "z = 2", compiles) == 2
+
+
+def test_the_better_of_two_places_and_the_place_in_turns_are_counted_for_each_way():
+    per_bug = {"a": {"votes": 300, "sum": 150, "most": 5, "in_turns": {"sum": 299, "most": 10}},
+               "b": {"votes": 10, "sum": 250, "most": 250, "in_turns": {"sum": 19, "most": 19}},
+               "c": {"votes": None, "sum": None, "most": None, "in_turns": {"sum": None, "most": None}},
+               "d": {"votes": 150, "sum": 1200, "most": 1, "in_turns": {"sum": 290, "most": 2}}}
+    summary = measure.places_summary(per_bug, 200)
+    assert summary["sum"]["the_better_of_it_and_the_votes"]["published_fix_within"] == {"1": 0, "10": 1, "50": 1, "100": 1, "200": 3, "1000": 3}
+    assert summary["most"]["the_better_of_it_and_the_votes"]["published_fix_within"]["1"] == 1
+    turns = summary["sum"]["taken_in_turns_with_the_votes"]
+    assert turns["published_fix_within"] == {"1": 0, "10": 0, "50": 1, "100": 1, "200": 1, "1000": 3} and turns["place_median"] == 290
+    assert turns["came_within_the_budget"] == 0 and turns["fell_out_of_the_budget"] == 1
+    turns = summary["most"]["taken_in_turns_with_the_votes"]
+    assert turns["published_fix_within"]["200"] == 3 and turns["came_within_the_budget"] == 1 and turns["fell_out_of_the_budget"] == 0
+    # a record made before the places in turns were written down is still summed up, without them
+    old = {name: {key: value for key, value in row.items() if key != "in_turns"} for name, row in per_bug.items()}
+    assert "taken_in_turns_with_the_votes" not in measure.places_summary(old, 200)["sum"]
+    assert measure.places_summary(old, 200)["sum"]["the_better_of_it_and_the_votes"]["published_fix_within"]["200"] == 3
+
+
+def test_the_rule_set_beforehand_and_what_became_of_it_go_into_any_scored_run():
+    assert "NO SCORED RUN WAS MADE" in measure.EXPECTED and "20 of 64" in measure.EXPECTED and "18" in measure.EXPECTED
+
+
 def test_what_the_places_come_to_and_which_way_is_chosen():
     per_bug = {"a": {"votes": 300, "sum": 150, "most": 5}, "b": {"votes": 10, "sum": 10, "most": 250},
                "c": {"votes": None, "sum": None, "most": None}, "d": {"votes": 201, "sum": 200, "most": 1}}
@@ -258,6 +297,8 @@ def test_step_two_orders_every_development_bug_with_the_counts_of_the_others(fil
     assert record["step"] == "places" and list(record["per_bug"]) == ["Python/901", "Python/902", "Python/903"] and record["how_chosen"] in (choice.SUM, choice.MOST)
     assert record["per_bug"]["Python/901"]["votes"] == 1 and record["per_bug"]["Python/903"]["votes"] is None
     assert record["summary"]["votes"]["published_fix_among_the_candidates"] == 2 and len(record["counts_sha256"]) == 1
+    assert record["per_bug"]["Python/901"]["in_turns"] == {"sum": 1, "most": 1} and record["per_bug"]["Python/903"]["in_turns"] == {"sum": None, "most": None}
+    assert record["summary"]["sum"]["taken_in_turns_with_the_votes"]["published_fix_within"]["200"] == 2
     with pytest.raises(SystemExit):
         measure.main(common + ["--places", "--out", str(tmp_path / "x.json")])
     with pytest.raises(SystemExit):
