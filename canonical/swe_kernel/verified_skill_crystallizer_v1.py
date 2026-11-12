@@ -1128,6 +1128,8 @@ class VerifiedSkillStore:
 
         from canonical.runtime.memory_policy_v1 import can_read_memory, can_write_memory
 
+        substrate_unavailable = False
+        substrate_reason = ""
         if not can_read_memory():
             return None
 
@@ -1522,6 +1524,7 @@ class VerifiedSkillStore:
             # Bridges Rust block tail-expressions (no `return`) and structural idioms (`len(x)` <-> `x.len()` / `x.length` / `x.size()`).
             try:
                 from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+                    CstSubstrateUnavailable,
                     recall_across_languages_cst,
                 )
 
@@ -1560,8 +1563,17 @@ class VerifiedSkillStore:
                             "verification": verification,
                             "whole_task_correctness_proved": False,
                         }
+            except CstSubstrateUnavailable as exc:
+                # The cross-language capability needs an importable Tree-Sitter substrate. Absent,
+                # nothing was measured, so this must not read as "the lesson did not transfer".
+                substrate_unavailable = True
+                substrate_reason = str(exc) or "TREE_SITTER_SUBSTRATE_MISSING"
             except Exception:
                 pass
+        if substrate_unavailable:
+            return {"substrate_unavailable": True, "reason": substrate_reason,
+                    "measured": False, "capability": "CROSS_LANGUAGE_CST_SKELETON",
+                    "remedy": "python3 scripts/restore_substrate_v1.py"}
         return None
 
     def narrow_rule_scope(
