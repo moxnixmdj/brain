@@ -135,6 +135,8 @@ def test_instrument_defects_fail_closed_without_scoring_claims() -> None:
         assert out["verdict"] == "INSTRUMENT_INVALID", override
         assert "claims" not in out
         assert out["preflight_errors"]
+        if override.get("held_out_scorer_hash") == "d" * 64:
+            assert "SCORER_NOT_HELD_OUT" in out["preflight_errors"]
 
 
 def test_unmeasured_claims_are_never_inferred() -> None:

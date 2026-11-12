@@ -401,7 +401,7 @@ def calibration_controls() -> dict[str, dict[str, Any]]:
     cases["scorer_leak_must_fail_closed"] = (
         _exp({"cold": _arm(cold), "warm": _arm([1.0] * n),
               "cache_only": _arm(cold), "random": _arm([12.0] * n)},
-             held_out_scorer_hash="demo-bytes"),
+             held_out_scorer_hash="d" * 64),
         "INSTRUMENT_INVALID",
     )
     cases["missing_cache_arm_must_fail_closed"] = (
