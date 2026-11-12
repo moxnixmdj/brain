@@ -1,0 +1,213 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "INPUTS_MUST_BE_KEPT_BEFORE_THE_ACTION_20261112_V1",
+ "action_intent_id": "INPUTS_MUST_BE_KEPT_BEFORE_THE_ACTION_20261112_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "INPUTS_MUST_BE_KEPT_BEFORE_THE_ACTION_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "56b0541e80b864fd0242f6e3cf90c9c815e3b5b3",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Move receipt file snapshots before adapter invocation so overwritten/deleted input bytes survive and newly created outputs are not mislabeled as inputs.",
+ "selected_route": "REUSE_SNAPSHOT_HELPER_BEFORE_EACH_ADAPTER_INVOCATION",
+ "causal_blocker": "The standard receipt lane snapshots after execution, capturing post-state instead of the input a mutating action consumed.",
+ "expected_parent_change": "Standard contract receipts retain pre-invocation bytes for existing direct file arguments even when the action mutates or deletes them.",
+ "expected_parent_frontier_change": "Input provenance reliability improved on bounded file-argument scope; zero learning, benchmark, family, or terminal credit.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The standard receipt lane snapshots after execution, capturing post-state instead of the input a mutating action consumed.",
+ "falsification_condition": "A receipt records overwritten bytes, loses a deleted input, includes a newly created output as input, or empty-argument receipt shape changes.",
+ "stop_condition": "Seven new executor-level cases pass, neighboring receipt tests pass, unified model and required PR guards pass.",
+ "explicit_user_authorization": "Owner directive 2026-11-12: instant learning in arbitrary new environments is already solved, so giving the model the smartest actions once yields permanent mastery and total computer use -- what is true, what is wrong, what are the real limiting factors, and the fastest optimal path. Standing directives honored: first principles, kill bad ideas before implementing, assume a million mistakes and prevent them, reuse what exists under non-obvious names, maximize web use, $0 spend, zero model dependency, push and merge.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/tests/test_receipt_pre_execution_inputs_v1.py"
+  ],
+  "route_class": "INTEGRATE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "POST_EXECUTION_FILE_DIGESTS_ARE_NOT_PRE_EXECUTION_INPUT_DIGESTS",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "New tests before patch: 6 failed / 1 passed. After patch: 71 receipt-related tests pass; 83 existing edit-kind/environment tests pass. Existing ambiguity probe: 33 of 34 candidates match one demonstration, 27 of them fail the three-assertion suite. Local measurements only, not independent verification."
+ },
+ "measured_effect": "New tests before patch: 6 failed / 1 passed. After patch: 71 receipt-related tests pass; 83 existing edit-kind/environment tests pass. Existing ambiguity probe: 33 of 34 candidates match one demonstration, 27 of them fail the three-assertion suite.",
+ "load_bearing_primary": {
+  "interpretation": "Discharges no obligation and claims no benchmark gain. Correct pre-state capture is evidence plumbing for reusable coding experiences; the inherited constructive-gap unlock value is an admission convention, not a measured task-score improvement.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ]
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "56b0541e80b864fd0242f6e3cf90c9c815e3b5b3",
+  "real_outcome": "Standard contract receipts retain pre-invocation bytes for existing direct file arguments even when the action mutates or deletes them.",
+  "required_capability": "Capture bounded direct file arguments before the executed adapter can change them.",
+  "obs_goal": {
+   "real_outcome": "Preserve truthful input provenance instead of confusing persistent records with learned mastery.",
+   "proxy_goals_deleted": [
+    "counting stored episodes as generalization",
+    "counting generated output bytes as inputs",
+    "claiming sentience from memory"
+   ],
+   "surviving_necessity": "Retain the input the action actually consumed, with correctness and transfer tested separately."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/capability_receipt_lane_v1.py execute_and_receipt, _probe_invoke, snapshot_inputs",
+    "corpus_run_20261112.py snapshots before mutation already, but standard lane did not",
+    "canonical/runtime/edit_kind_learning_v1.py",
+    "canonical/runtime/environment_learning_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "https://arxiv.org/abs/2611.14505 (Continual-ARC)",
+    "https://arxiv.org/abs/2610.34043 (KEEL)",
+    "https://github.com/scaleapi/SWE-bench_Pro-os (official evaluation repository)"
+   ],
+   "capability_work_deleted": [
+    "No new learner or environment abstraction",
+    "No corpus admission or registry promotion",
+    "No attempt to learn arbitrary actions from fixtures"
+   ],
+   "surviving_gap": "No general directory/dependency snapshot or independent store-restoring verifier; no held-out learning comparison run this round."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific ordering defect in the standard contract receipt executor.",
+   "delete_bypass_substitute_options": [
+    "DELETE post-execution snapshot",
+    "REUSE existing snapshot_inputs before each invocation",
+    "BYPASS by separate fixture runner rejected: it leaves the standard path wrong",
+    "SUBSTITUTE a new store rejected: existing store suffices"
+   ],
+   "surviving_causal_blocker": "The standard receipt lane snapshots after execution, capturing post-state instead of the input a mutating action consumed."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE_SNAPSHOT_HELPER_BEFORE_EACH_ADAPTER_INVOCATION",
+    "Post-hoc snapshot (rejected by overwrite/delete tests)",
+    "Separate custom runner only (rejected: standard executor remains broken)"
+   ],
+   "losing_routes_reason": "After mutation the original bytes may be irrecoverable; a new store does not fix call order.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Temporary adapters exercise the actual receipt executor and declared registry fallback. Read stored bytes, result hashes, side effects, absent success receipts, and unchanged empty-argument shape. They are bounded regression tests, not independent verification or task-performance evidence."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "post-execution snapshot in standard receipt lane"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "snapshot_inputs reused before adapter execution"
+   ],
+   "fresh_reuse_plan": "Preserve task environment and use an external acceptance runner before any reusable skill admission."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "No repeated broad fixture-seeding census",
+    "No general learning-system rewrite"
+   ],
+   "search_stop_decision": "Six pre-fix failing cases localize a specific call-order defect; stop after fixing and validating neighboring cases.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REUSE_SNAPSHOT_HELPER_BEFORE_EACH_ADAPTER_INVOCATION",
+   "SNAPSHOT_AFTER_ACTION",
+   "CUSTOM_RUNNER_ONLY"
+  ],
+  "deleted_or_bypassed_paths": [
+   "SNAPSHOT_AFTER_ACTION",
+   "CUSTOM_RUNNER_ONLY"
+  ],
+  "selected_surviving_route": "REUSE_SNAPSHOT_HELPER_BEFORE_EACH_ADAPTER_INVOCATION",
+  "why_selected_route_is_fastest_sufficient": "Reuses snapshot_inputs with a local invocation wrapper; no schema redesign, new store, new learner, or tolerance change.",
+  "expected_parent_level_state_change": "Input provenance reliability improved on bounded file-argument scope; zero learning, benchmark, family, or terminal credit.",
+  "stop_condition": "Seven new executor-level cases pass, neighboring receipt tests pass, unified model and required PR guards pass.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Bounded evidence-preservation defect repair reusing the current store; no acquisition or supplier selection."
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "proof_state_reachability": "Correct pre-state capture prevents false experience provenance; no proof-state, terminal, or benchmark movement is asserted.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "P_INPUTS_MUST_BE_KEPT_BEFORE_THE_ACTION_20261112_V1",
+   "falsifier_id": "F_MUTATE_OR_DELETE_THE_INPUT_BEFORE_SNAPSHOT",
+   "decisive_question": "Does the standard receipt executor retain bytes from before each invocation and exclude files created by that invocation?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_receipt_pre_execution_inputs_v1.py",
+     "git_blob_sha": "7bfaef79119b10b72d9fd7c2d5bb908a2d0071d7"
+    }
+   ]
+  },
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION"
+ }
+}
