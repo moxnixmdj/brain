@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 389,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6783,
+  "research_index_records": 6784,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d5f5cc94869f86f91cc42c27cd8facd49daae44f2e01a5f9f2a6d1c70098730d"
+  "value": "5de97cb4050f013bdc74d9db7382e5f2ce189c9f80f682ccd0daffe2a787f0fd"
  },
  "engines": [
   {
@@ -232303,6 +232303,30 @@
    }
   },
   {
+   "action_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7bd17076fec6a736a5d2072b65b59c7f7f8904f070d040f7eb6b6f6ffbc4fdee",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "chroot": 1,
+    "every_confined_execution_died_when_the_harness_ran_under_a_venv_because_confine_v1_spawned_sys_executable_into_a_chroot_that_only_mounts_usr_bin_lib_lib64_so_the_helpers_own_post_chroot_program_spawn_raised_filenotfound_error_before_any_program_line_ran_and_the_receipt_read_like_the_taught_program_failed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "port_the_brokers_chroot_visible_interpreter_rule_into_confine_v1_at_the_helper_launch_and_pin_both_ends_the_unit_pin_on_the_launch_argv_and_the_front_door_teach_apply_integration_pin_under_the_venv_that_failed_on_base": 1,
+    "python": 1,
+    "ran": 1,
+    "the_chroot_ran_a_python_that_was_not_in_it_20261112_v1": 1,
+    "the_harness_fault_class_that_impersonates_a_program_failure_is_closed_at_the_confinement_launcher_and_measured_at_both_ends__the_one_shot_loop_has_a_failable_pin_through_the_production_door__three_candidate_instruments_were_killed_by_measurement_before_code__zero_spend__no_benchmark_row_moved__truth_achieved_stays_false": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -252501,10 +252525,11 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "f12d50da3b587ad41fb99ff23cdab370f293174b29408314a39c90abdc804682",
+   "sha256": "a9b944feb840b8d513356a85ce391be6ede86d7fd2b8d04b84abd60559cc0961",
    "summary": "Candidate namespace/chroot launcher; not an admitted security boundary.",
-   "symbol_count": 3,
+   "symbol_count": 4,
    "symbols": [
+    "_python_in_chroot",
     "available",
     "run",
     "run_readonly"
@@ -252519,6 +252544,7 @@
     "launcher": 1,
     "namespace": 1,
     "not": 1,
+    "python_in_chroot": 1,
     "run": 1,
     "run_readonly": 1,
     "security": 1,
