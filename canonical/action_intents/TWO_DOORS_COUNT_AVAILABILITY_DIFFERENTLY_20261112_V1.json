@@ -1,0 +1,274 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1",
+ "action_intent_id": "TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1",
+ "action_kind": "RECONCILE_FRONTIER",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Round 4 counted 54 of 145 capabilities NOT_CALLABLE at grounded_action_v1.act and made binding arity/selector defaults the top availability item. This round pre-registered five predictions, then measured the SAME 145 keyword goals at BOTH layers: the chain executor (act) and the sentence door (live_brain_route_admission_v1.solve), from a disposable clone so the tree's own state files never moved. Act reproduces round 4 (SELECTED 64 / NOT_CALLABLE 53 / PRECONDITION 12). The door has no binding class at all: EXECUTED 24, COMPILED_TO_SELF_BUT_FAILED 39 (self total 63), NOT_COMPILED 52 with statuses compilation-gap 33 + effect-unserved 17 + confinement 2, ROUTED_ELSEWHERE 26. The layers disagree in both directions (3 act-refused reach execution at the door; 17 act-selected are refused at the door; precondition-executed cell is empty). Predictions: P1 (door strictly more) FALSIFIED 63<=64, P2 (more than half of 53 routed elsewhere) FALSIFIED 26/53=49%, P3 (door failures are plan/selection) HOLDS, P4 (git salad row executes) FALSIFIED -- realistic git sentences pass separately, measured (read the git log compiles git.repository.operate.v1, op=log, executed and verified), P5 (<=5 raises) HOLDS at 4. The four most-advanced dispatcher sentences were then traced to their exact gates: the extract-constant sentence was one article away from its family trigger ('extract constant' vs 'extract the constant') and this round adds the measured phrase so _resolve_family admits python.swe.transform_and_synthesize.v1 with operation=extract_constant and build_plan is decisive (4/4 pins); diagnose-the-root-cause needs the derivation phrase 'find the root cause' and ends at the deliberate confinement boundary (find_root_cause runs the suite, not static); ruff-lint has no lint operation in polyglot's enum and needs a diff_path plus an admitted command path; format-with-ruff reaches the composer and stops at the same boundary. The fix shipped is the one phrase whose whole chain then reaches its next NAMED gate (the egraph baseline probe SIGKILL rc=-9); everything else is documented with file:line evidence, not guessed at.",
+ "selected_route": "DUAL_LAYER_CENSUS_WITH_PRE_REGISTERED_PREDICTIONS_AND_THE_ONE_MEASURED_PHRASE_WHOLE_CHAIN_REACHES_ITS_NEXT_NAMED_GATE",
+ "causal_blocker": "AVAILABILITY_WAS_CENSUSED_AT_ONLY_ONE_OF_THE_TREE_TWO_DOORS__ACT_IS_THE_STEP_EXECUTOR_AND_ITS_54_IS_THE_CHAIN_LAYER_NUMBER__THE_SENTENCE_DOOR_WHERE_OWNER_REQUESTS_ARRIVE_HAS_NO_BINDING_STATUS_AND_FAILS_AT_PLAN_SELECTION_AND_EFFECT_CLAIMING_INSTEAD",
+ "expected_parent_change": "THE_TOP_AVAILABILITY_ITEM_IS_NOW_SCOPED_PER_DOOR__ACT_KEEPS_ARITY_AND_SELECTOR_DEFAULTS_AS_ITS_OWN_TOP_ITEM__THE_DOOR_TOP_ITEM_IS_SENTENCE_SHAPE_COVERAGE_AND_THE_ADMITTED_CONFINEMENT_PATH__AND_THE_EXTRACT_CONSTANT_SENTENCE_CLAIMS_ITS_FAMILY_END_TO_END_AT_THE_TYPED_PLAN",
+ "expected_parent_frontier_change": "AVAILABILITY_IS_MEASURED_AS_A_PROPERTY_OF_A_DOOR_NOT_OF_A_CAPABILITY__THE_CENSUS_PROBE_IS_COMMITTED_AND_REPRODUCIBLE_FROM_A_DISPOSABLE_CLONE__THE_FOUR_DISPATCHER_SENTENCES_ARE_TRACED_TO_NAMED_GATES_WITH_FILE_LINE_EVIDENCE__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_CREDIT__TRUTH_ACHIEVED_STAYS_FALSE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::AVAILABILITY_WAS_CENSUSED_AT_ONLY_ONE_OF_THE_TREE_TWO_DOORS__ACT_IS_THE_STEP_EXECUTOR_AND_ITS_54_IS_THE_CHAIN_LAYER_NUMBER__THE_SENTENCE_DOOR_WHERE_OWNER_REQUESTS_ARRIVE_HAS_NO_BINDING_STATUS_AND_FAILS_AT_PLAN_SELECTION_AND_EFFECT_CLAIMING_INSTEAD",
+ "falsification_condition": "ANY_PREDICTION_SILENTLY_REWRITTEN_AFTER_THE_RUN__OR_THE_CENSUS_NOT_REPRODUCIBLE_FROM_A_DISPOSABLE_CLONE__OR_THE_EXTRACT_CONSTANT_SENTENCE_REGRESSING_TO_UNSERVED__OR_A_METAPHOR_OR_QUESTION_CLAIMING_THE_SWE_FAMILY__OR_THE_REALISTIC_GIT_CONTROL_STOPPING_TO_PASS_AT_THE_DOOR",
+ "stop_condition": "FIVE_PRE_REGISTERED_PREDICTIONS_REPORTED_EXACTLY_AS_MEASURED_INCLUDING_THREE_FALSIFICATIONS__145_GOALS_AT_BOTH_LAYERS_FROM_A_CLEAN_CLONE__THE_PHRASE_FIX_PINS_4_OF_4_WITH_METAPHOR_AND_QUESTION_GUARDS_HOLDING__REFEREE_AND_ADMISSION_PASS__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive 2026-11-12: determine what is real about instant learning and advanced coding/computer-use actions, kill bad ideas before implementation, think from first principles, maximize use of the latest research, and always push and merge completed work. This change executes round 8's standing prescription -- grow the operator space deliberately and pay for it in code -- as one priced, pre-registered measurement. Zero spend, zero model dependency, no governance change, no sentience claim.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tests/test_a_near_miss_phrase_is_still_the_sentence_it_states_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "earlier_routes_exhausted_reason": "ACT_LAYER_CENSUS_REPRODUCED_AND_SCOPED__REALISTIC_SENTENCE_SPOTS_DONE_BY_ROUND4_FOR_FOUR_CAPS__NO_ENUM_OR_CANDIDATE_SELECTOR_EXISTS_TO_PATCH__THE_PHRASE_TABLES_ARE_MEASURED_PER_SENTENCE_AND_ONLY_WHOLE_CHAINS_ARE_TOUCHED",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "ROUND4_IMPLICIT_PREMISE_THAT_THE_54_BINDING_FAILURES_DESCRIBE_THE_DOOR_THE_OWNER_ARRIVES_AT__FALSIFIED_BY_THE_DUAL_CENSUS:THE_DOOR_HAS_NO_BINDING_CLASS_AND_26_OF_53_ACT_REFUSALS_REACH_A_CAPABILITY",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "EXECUTED_ON_THIS_COMMIT__145_GOALS_AT_BOTH_DOORS_FROM_A_DISPOSABLE_CLONE_480_8S__ACT_64_53_12_REPRODUCES_ROUND4__DOOR_24_39_52_26_NO_BINDING_STATUS__P1_FALSIFIED_63_LE_64__P2_FALSIFIED_26_OF_53__P3_HOLDS_PLAN_AND_SELECTION_DOMINANT__P4_FALSIFIED_SALAD_GIT_ROW_UNSERVED_REALISTIC_GIT_CONTROL_PASSES__P5_HOLDS_4_RAISES__EXTRACT_CONSTANT_SENTENCE_NOW_CLAIMS_SWE_TRANSFORM_FAMILY_RESOLVES_ADMITTED_OPERATION_EXTRACT_CONSTANT__METAPHOR_AND_QUESTION_GUARDS_HOLD__NEXT_GATE_EGRAPH_BASELINE_SIGKILL_RC_MINUS_9"
+ },
+ "measured_effect": "ACT_64_53_12_REPRODUCED__DOOR_24_39_52_26_NO_BINDING_STATUS__P1_P2_P4_FALSIFIED_P3_P5_HEld__27_UNREACHABLE_AT_BOTH__3_ACT_REFUSED_REACH_EXECUTION__17_ACT_SELECTED_REFUSED_AT_DOOR__FOUR_DISPATCHERS_TRACED_TO_NAMED_GATES__EXTRACT_CONSTANT_CLAIMS_FAMILY_RESOLVES_ADMITTED_OPERATION_EXTRACT_CONSTANT__NEXT_GATE_EGRAPH_BASELINE_SIGKILL_RC_MINUS_9__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_BENCHMARK__THE_CENSUS_IS_THE_LIMITING_FACTOR_MEASUREMENT_ROUND4_PROMISED_AND_THE_PHRASE_FIX_IS_ONE_PRICED_PROCEDURE_WHOSE_CHAIN_WAS_MEASURED_TO_ITS_NEXT_NAMED_GATE__THE_TOP_ITEM_IS_NOW_PER_DOOR_AND_THE_CONFINEMENT_PATH_IS_NAMED_RATHER_THAN_GUESSED",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/13",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/taught_words_v1.py::run/ALL_OPERATIONS/learn/teach/solve (the reference-design learner, extended by one reducer)",
+  "canonical/runtime/taught_words_check_v1.py::recompute (the independent recomputation, extended by one branch)",
+  "one_lesson_buys_a_word_not_an_operator_probe_20261112.py (round 8's refused-lesson measurement, its unteachable example moved to `mode`)",
+  "canonical/tests/test_taught_words_answer_at_the_front_door_v1.py (the door's taught-words recomputation path, reused unchanged)",
+  "canonical/runtime/verify_taught_words_provenance_v1.py (39-check receipt, re-run --write)"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
+  "canonical_base_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
+  "real_outcome": "CENSUS_RUN_AND_REPORTED:145_GOALS_AT_ACT_AND_AT_THE_SENTENCE_DOOR_FROM_A_DISPOSABLE_CLONE__ACT_REPRODUCES_ROUND4_64_53_12__DOOR_HAS_NO_BINDING_STATUS_24_39_52_26__P1_P2_P4_FALSIFIED_P3_P5_HELD__THE_ONE_MEASURED_PHRASE_FIX_SHIPPED_WITH_4_OF_4_PINS",
+  "required_capability": "DUAL_LAYER_AVAILABILITY_MEASUREMENT_AND_SENTENCE_SHAPE_FAMILY_CLAIMING",
+  "obs_goal": "ADJUDICATE_ROUND4_54_BINDING_FAILURES_AT_THE_DOOR_THE_OWNER_SENTENCES_ACTUALLY_ARRIVE_AT",
+  "obs_capability": "AVAILABILITY_IS_MEASURED_PER_DOOR_ACT_VERSUS_SENTENCE_DOOR_WITH_PRE_REGISTERED_PREDICTIONS",
+  "obs_blocker": "THE_CENSUS_HAD_ONLY_EVER_RUN_AT_GROUNDED_ACTION_ACT_THE_STEP_EXECUTOR_WHILE_THE_FRONT_DOOR_FAILS_AT_PLAN_SELECTION_AND_EFFECT_CLAIMING",
+  "obs_solution": "ONE_COMMITTED_PROBE_RUNS_EVERY_GOAL_AT_BOTH_LAYERS_FROM_A_CLONE_FIVE_PREDICTIONS_WRITTEN_THEN_RUN_AND_THE_FOUR_DISPATCHER_SENTENCES_TRACED_TO_NAMED_GATES_WITH_THE_SINGLE_PHRASE_FIX_WHOLE_CHAIN_REACHING_ITS_NEXT_GATE",
+  "obs_verification": "CENSUS_145_OF_145_ROWS_480_8S_FROM_DISPOSABLE_CLONE__4_NEW_TESTS_PASS__METAPHOR_AND_QUESTION_GUARDS_HOLD__REALISTIC_GIT_CONTROL_PASSES_AT_THE_DOOR__PRODUCE_AND_CONSUME_AGREE",
+  "obs_inherited_system": "LIVE_BRAIN_ROUTE_ADMISSION_SOLVE_WIRES_THE_SWE_DERIVATION_MERGE_AT_LINE_2116_CONDITIONAL_ON_IS_SWE_REQUEST_AND_SWE_CID_PREFIXES__ACT_NEVER_IMPORTS_DECLARED_INPUT_DERIVATION__FAMILY_CLAIMS_LIVE_IN_SWEE_TYPED_PLAN_FAMILIES_AND_RESOLVE_FAMILY",
+  "obs_obs": "THREE_OF_FIVE_PREDICTIONS_WERE_FALSIFIED_AND_ARE_REPORTED_AS_FALSIFIED__THE_SALAD_CORPUS_INFLATES_THE_DOOR_COMPILATION_GAP_EXACTLY_AS_ROUND4_WARNED_FOR_ACT__REALISTIC_SENTENCES_WERE_MEASURED_SEPARATELY",
+  "routes_considered": [
+   "ACT_LAYER_ARITY_AND_SELECTOR_DEFAULTS_FIX__STILL_ROUND4_TOP_ITEM_FOR_ACT_ONLY__DEFERRED_AS_THE_DOOR_BLOCKER_IS_DIFFERENT",
+   "KEYWORD_TABLES_AS_FAMILY_TRIGGERS__REJECTED__BROAD_NOUNS_METAPHOR_CLAIM_THE_WRONG_FAMILY_THE_GUARDS_EXIST_PRECISELY_FOR_THIS",
+   "ONE_PHRASE_TABLE_PATCH_PER_SENTENCE__ACCEPTED_ONLY_WHOLE_CHAIN_MEASURED_TO_ITS_NEXT_NAMED_GATE_THE_EXTRACT_CONSTANT_CASE",
+   "ADMITTED_CONFINEMENT_PATH_FOR_DYNAMIC_OPERATIONS__NAMED_AS_THE_GOVERNANCE_ITEM_NOT_SILENTLY_SKIPPED"
+  ],
+  "deleted_or_bypassed_paths": [],
+  "selected_surviving_route": "DUAL_LAYER_CENSUS_PLUS_THE_MEASURED_PHRASE_FIX",
+  "why_selected_route_is_fastest_sufficient": "THE_CENSUS_ANSWERS_THE_PLAN_DRIVING_QUESTION_WITH_FIVE_PRE_REGISTERED_PREDICTIONS_IN_ONE_RUN_FROM_A_CLONE_AND_THE_PHRASE_FIX_IS_THE_ONLY_ONE_OF_THE_FOUR_DISPATCHER_CHAINS_WHOSE_EVERY_GATE_IS_MEASURED_AND_WHOLESALE_IMPROVABLE_WITHOUT_TOUCHING_A_SAFETY_BOUNDARY",
+  "expected_parent_level_state_change": "AVAILABILITY_IS_MEASURED_AS_A_PROPERTY_OF_A_DOOR_NOT_OF_A_CAPABILITY__THE_CENSUS_PROBE_IS_COMMITTED_AND_REPRODUCIBLE_FROM_A_DISPOSABLE_CLONE__THE_FOUR_DISPATCHER_SENTENCES_ARE_TRACED_TO_NAMED_GATES_WITH_FILE_LINE_EVIDENCE__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_CREDIT__TRUTH_ACHIEVED_STAYS_FALSE",
+  "stop_condition": "FIVE_PRE_REGISTERED_PREDICTIONS_REPORTED_EXACTLY_AS_MEASURED_INCLUDING_THREE_FALSIFICATIONS__145_GOALS_AT_BOTH_LAYERS_FROM_A_CLEAN_CLONE__THE_PHRASE_FIX_PINS_4_OF_4_WITH_METAPHOR_AND_QUESTION_GUARDS_HOLDING__REFEREE_AND_ADMISSION_PASS__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T17:27:49Z",
+   "max_age_hours": 24,
+   "incumbent_route": "ROUND_9_OPERATOR_SPACE_MEDIAN_REDUCER__AND_BEFORE_IT_ROUND4_ACT_LAYER_CENSUS__WHOSE_54_NOT_CALLABLE_WAS_A_CHAIN_EXECUTOR_NUMBER_WAS_READ_AS_THE_AVAILABILITY_NUMBER",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_AND_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md census: 54 of 145 NOT_CALLABLE at grounded_action_v1.act -- reproduced this round at 53 with the same fates",
+     "declared_input_derivation_v1.binding_view wired only at live_brain_route_admission_v1.solve line 2116 under is_swe_request and SWE_CID_PREFIXES -- act imports it nowhere (grep verified)",
+     "door.solve spot checks: read the git log / show the status of the repository / Show the last three git commits all PASS with git.repository.operate.v1 op=log executed and verified while act returns PRECONDITION on the same sentence",
+     "egraph_and_deductive_synthesizer_v1 baseline probe SIGKILL rc=-9 on full-suite discover -- PROJECT_TEST_BASELINE_UNMEASURABLE at line 104"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "BOUND_CAPABILITY_REGISTRY_V1.json polyglot row operation enum is parse_tree_sitter/ts_extract_symbols/ts_symbol_callers/ts_symbol_find_refs/ts_edit_by_example -- no lint operation exists for run ruff lint",
+     "python.review.diff_static_triage admit refuses BINDING_REFUSED:diff_path:0_type_compatible_existing_files_named -- it reviews an existing diff, a lint request states none",
+     "STATIC_DIAGNOSE_OPERATIONS at computer_execution_boundary_v1.py line 114 does not contain find_root_cause -- the adapter runs run_suite_and_explain_failures, execution by design"
+    ],
+    "BROAD_WEB_AND_COMMUNITY": [
+     "arXiv 2603.14248 Why Do LLM-based Web Agents Fail? A Hierarchical Planning Perspective (2026): failures decompose into planning/execution/replanning; with human-authored plans executors reach only 38.5 percent plan completion -- execution is the bottleneck",
+     "arXiv 2609.38108 Do LLM Agents Execute the Plans They Declare? (2026): the Plan Declaration-Execution Gap -- selection and execution failures must be attributed separately, final success alone cannot distinguish them"
+    ]
+   },
+   "query_families": [
+    "CAPABILITY_VECTOR",
+    "RECENT_MEASUREMENT"
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_EXPENSIVE_EXECUTION"
+   ],
+   "unresolved_plausible_dominators": [
+    "EGRAPH_BASELINE_SIGKILL_RC_MINUS_9_BLOCKS_THE_EXTRACT_CHAIN_AFTER_THE_FIX",
+    "ADMITTED_CONFINEMENT_PATH_FOR_DYNAMIC_OPERATIONS_BLOCKS_FORMAT_LINT_AND_DIAGNOSE_RUN_SENTENCES_BY_DESIGN",
+    "ACT_LAYER_ARITY_AND_SELECTOR_DEFAULTS_REMAIN_OPEN_FOR_CHAIN_AND_MACRO_STEPS_53_NOT_CALLABLE_REPRODUCED",
+    "DIAGNOSE_AND_POLYGLOT_TARGET_EXTRACTION_SHAPES_STILL_REFUSE_REALISTIC_PATHS"
+   ],
+   "selected_route": "DUAL_LAYER_CENSUS_PLUS_THE_MEASURED_PHRASE_FIX",
+   "challenger_routes": [
+    {
+     "route": "ACT_LAYER_ARITY_AND_SELECTOR_DEFAULTS",
+     "why_not_selected": "RIGHT_FOR_ACT_53_NOT_CALLABLE_BUT_THE_DOOR_DOMINANT_FAILURES_ARE_PLAN_AND_EFFECT_CLAIMING_SO_IT_IS_NOT_THE_FRONT_DOOR_TOP_ITEM"
+    },
+    {
+     "route": "KEYWORD_DERIVED_FAMILY_TRIGGERS",
+     "why_not_selected": "BROAD_NOUNS_METAPHOR_CLAIM_WRONG_FAMILIES_THE_GOVERNING_CLAUSE_GUARDS_WERE_BUILT_TO_STOP_EXACTLY_THAT"
+    },
+    {
+     "route": "ADMITTED_CONFINEMENT_PATH",
+     "why_not_selected": "GOVERNANCE_SCALE_REVIEW_REQUIRED_BOUNDARY_DOCSTRING_SAYS_NO_FLAG_GRANTS_AUTHORITY_NOT_A_PHRASE_TABLE_CHANGE"
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T17:27:49Z",
+    "max_age_hours": 2,
+    "selected_route": "DUAL_LAYER_CENSUS_PLUS_THE_MEASURED_PHRASE_FIX",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the census probe, the new tests, and the intent checks all executed in this sandbox on this commit"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.runtime.swe_typed_plan_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the _FAMILIES trigger edit and its four pins pass on this commit; metaphor and question sentences claim nothing"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "INDEPENDENT_VERIFIER"
+      ]
+     },
+     {
+      "dependency": "disposable git clone for the census",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "git clone --quiet --no-local executed 145 rows at both layers in 480.8 s with zero writes to the working tree"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_PRICES_ONE_ITERATION_OF_GROWING_THE_TAUGHT_WORDS_HYPOTHESIS_LANGUAGE__THE_CLAIM_IS_BOUND_TO_SEVEN_PRE_REGISTERED_PREDICTIONS_AND_TO_AN_INDEPENDENT_RECOMPUTATION_THAT_CAN_STILL_SAY_NO__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "ONE_LESSON_BUYS_A_MEDIAN_WORD_ONCE_THE_CODE_ADDS_THE_REDUCER",
+   "falsifier_id": "F_THE_LESSON_MUST_BE_REFUSED_UNDER_THE_OLD_ALGEBRA_AND_TAUGHT_AFTER_THE_REDUCER__HELD_OUT_ANSWERS_MUST_MATCH_PRE_WRITTEN_ORACLES__THE_INDEPENDENT_CHECKER_MUST_REJECT_THE_UPPER_MEDIAN",
+   "decisive_question": "Does the same two-example median lesson that the old algebra sets aside teach exactly one word once one reducer is added in code, with five pre-oracled held-out requests answered correctly, the independent checker still rejecting a wrong median, and no seed word changed?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_a_near_miss_phrase_is_still_the_sentence_it_states_v1.py",
+     "git_blob_sha": "f80fb2655da6c6ac092daa18f4c81dd90ff236c9"
+    }
+   ]
+  }
+ },
+ "next_step": "EGraph baseline scalability so the extract chain finishes measured__then diagnose/polyglot target extraction shapes__then act-layer arity and selector defaults for chain steps__then the admitted confinement path as governance__then B1 donor distilled prior at zero model"
+}
