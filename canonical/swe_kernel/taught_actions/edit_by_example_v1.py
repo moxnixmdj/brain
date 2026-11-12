@@ -1260,11 +1260,13 @@ def fitting(rules, text, what, skip=None, torn=True):
     return found
 
 
-def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False, skip=None):
+def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False, skip=None,
+            example=None):
     """Apply the rules to every place that fits.  Returns (new text, number of places changed).
 
     Code used a way no example showed stops the whole edit, unless `leave_unshown` asks for it to be left as it is.
-    Code for which `skip` is true is not looked at.
+    Code for which `skip` is true is not looked at.  `example`, when given, also renames the name that example
+    renamed everywhere this file reads it from the same module (`swaps_to_make`); those places count.
     """
     text = Text(source_text, what)
     places, unshown = [], {}
@@ -1277,9 +1279,10 @@ def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown
     for rule, found in unshown.values():
         if not leave_unshown:
             raise not_shown(rule, found, text, what)
-    if not places:
+    swapped = swaps_to_make(text, example, None) if example is not None else []
+    if not places and not swapped:
         return source_text, 0
-    return written(text, places, what, check_names), len(places)
+    return written(text, places, what, check_names, example=example), len(places) + len(swapped)
 
 
 # What a changed place is replaced by to see whether a check notices that code failing.  It raises, when it is
@@ -1456,6 +1459,229 @@ def aliases_to_follow(text, places, fail_at):
     return found
 
 
+class Swapped:
+    """A read of a name whose import the examples renamed, reached another way round than the example reached it."""
+
+    kind = "expression"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+class SwappedLine:
+    """The import line of a name the examples renamed, on a file that reads that name as a bare name."""
+
+    kind = "statement"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+def _imported_from(tree):
+    """Every name a module is imported to bind, by module: name in the module -> name it is bound as."""
+    found = {}
+    for statement in tree.body:
+        if isinstance(statement, ast.ImportFrom) and not statement.level and statement.module:
+            for alias in statement.names:
+                if alias.name != "*":
+                    found.setdefault(statement.module, {})[alias.name] = alias.asname or alias.name
+        elif isinstance(statement, ast.Import):
+            for alias in statement.names:
+                found.setdefault(alias.name, {})[alias.name.split(".")[0]] = (
+                    alias.asname or alias.name.split(".")[0])
+    return found
+
+
+def _module_names(tree):
+    """Every module imported at the top, and the name it is bound as here."""
+    found = {}
+    for statement in tree.body:
+        if isinstance(statement, ast.Import):
+            for alias in statement.names:
+                found[alias.asname or alias.name.split(".")[0]] = alias.name
+    return found
+
+
+def _swap_candidates(example):
+    """Ways the examples might be showing that a name changed inside a module.  Each is a guess still.
+
+    Two ways round are possible.  The examples may import the name itself (``from m import old``) or import
+    the module and read ``m.old``; either way what a demonstration of this kind says is: inside module ``m``,
+    ``old`` is now ``new``.  Nothing here is accepted yet -- `swaps_of` keeps only a guess that reproduces the
+    example's own second file, which is the same test the rules get before any file is touched.
+    """
+    was, now = _imported_from(example.old.tree), _imported_from(example.new.tree)
+    for module, names_was in was.items():
+        names_now = now.get(module, {})
+        gone = {inner: bound for inner, bound in names_was.items() if inner not in names_now}
+        came = {inner: bound for inner, bound in names_now.items() if inner not in names_was}
+        if len(gone) == 1 and len(came) == 1:
+            inner_was, inner_now = next(iter(gone)), next(iter(came))
+            yield (module, inner_was, inner_now, True)
+    aliases = _module_names(example.old.tree)
+    after_of = {id(before): after for levels in example.places for before, after in levels}
+    for name, module in aliases.items():
+        for node in ast.walk(example.old.tree):
+            if not (isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name)
+                    and node.value.id == name):
+                continue
+            after = after_of.get(id(node))
+            if isinstance(after, ast.Attribute) and after.attr != node.attr:
+                yield (module, node.attr, after.attr, False)
+
+
+def _swap_places(text, module, old, new, shown_uses=None, fail_at=None):
+    """Every place in `text` that reads `old` from `module`, and what each becomes when it reads `new`.
+
+    How a file reaches the module decides the form of the change, and nothing else does.  A file that binds
+    the name itself (``from m import old``) has that alias and its reads renamed, exactly as the example
+    renamed its own.  A file that imports the module (``import m``) has every ``m.old`` become ``m.new``,
+    which is the same fact about the module written the other way round.  A file that does neither is not
+    touched.  A file that binds the old name itself, or reaches it through anything that is not this module,
+    is left alone: the demonstration says what the module holds, not what a local name means.
+    """
+    if text.anything:
+        return []                                    # a `*` import: where a name comes from is not knowable here
+    bindings = _imported_from(text.tree)
+    bound_as = (bindings.get(module) or {}).get(old)
+    aliases = {name for name, reaches in _module_names(text.tree).items() if reaches == module}
+    if bound_as is None and not aliases:
+        return []
+    if bound_as is not None and new in text.defined:
+        return []                                    # the new name already means something in this file
+    if any(isinstance(node, ast.Name) and node.id == old and not isinstance(node.ctx, ast.Load)
+           for node in ast.walk(text.tree)):
+        return []                                    # the file binds the old name itself: not ours to rename
+    if any(isinstance(node, (ast.Global, ast.Nonlocal)) and old in node.names
+           for node in ast.walk(text.tree)):
+        return []
+    if bound_as is not None and any(
+            isinstance(node, ast.Name) and node.id == old and isinstance(node.ctx, ast.Load)
+            and text.local_at(node, old) for node in ast.walk(text.tree)):
+        return []                                    # the same spelling is a local name somewhere here
+    found = []
+    if bound_as is not None:
+        for statement in text.tree.body:
+            if not (isinstance(statement, ast.ImportFrom) and not statement.level
+                    and statement.module == module):
+                continue
+            if not any((alias.asname or alias.name) == old and not alias.asname
+                       for alias in statement.names):
+                continue
+            names = [ast.alias(name=new) if (alias.asname or alias.name) == old and not alias.asname
+                     else alias for alias in statement.names]
+            line = ast.unparse(ast.ImportFrom(module=statement.module, names=names, level=0))
+            found.append((text.span(statement), statement, SwappedLine(line), {}))
+        for node in ast.walk(text.tree):
+            if (isinstance(node, ast.Name) and node.id == old and isinstance(node.ctx, ast.Load)
+                    and (fail_at is None or node is not fail_at[1]) and not text.local_at(node, old)):
+                found.append((text.span(node), node, Swapped(new), {}))
+    for node in ast.walk(text.tree):
+        if not (isinstance(node, ast.Attribute) and node.attr == old and isinstance(node.value, ast.Name)
+                and node.value.id in aliases):
+            continue
+        if fail_at is not None and node is fail_at[1]:
+            continue
+        if text.local_at(node.value, node.value.id):
+            continue
+        if shown_uses is not None and text.use_of(node) not in shown_uses:
+            continue                                 # the example showed this name used another way
+        found.append((text.span(node), node, Swapped(node.value.id + "." + new), {}))
+    return found
+
+
+def swaps_of(example):
+    """What one example teaches about a name that changed inside a module: (module, old, new, by_name).
+
+    A guess is kept only when applying it to the example's own first file turns it into the example's own
+    second file, byte for byte.  That is the same test the rules are put to before any file is touched, so
+    an example that renames a name *and* does other work teaches nothing here: it cannot be reproduced by
+    a rename alone.  An example whose only change is the rename is exactly what this operator is for, and
+    it is answered from the demonstration, in code, without a question to anybody.
+    """
+    for module, old, new in (candidate[:3] for candidate in _swap_candidates(example)):
+        shown_uses = _shown_uses(example, module, old)
+        places = _swap_places(example.old, module, old, new, shown_uses)
+        if not places:
+            continue
+        try:
+            written = written_once(example.old, places, example.label, check_names=False)
+        except (Refused, RecursionError):
+            continue
+        if written.encode("utf-8") == example.new.raw:
+            return (module, old, new, shown_uses)    # the example was nothing but this rename
+        if _rename_only(example, places, old, new):
+            return (module, old, new, shown_uses)    # the example was this rename among other work
+    return None
+
+
+def _shown_uses(example, module, old):
+    """How the example itself used the name it renamed: a call with how many arguments, or not a call at all.
+
+    A rename is not always a plain substitution.  ``yaml.load(fp, loader=...)`` becoming ``yaml.safe_load``
+    is a different program, because the new name does not take what the old one took.  The example is the
+    only evidence there is about that, so a place used another way than the example used it is left alone.
+    """
+    aliases = {name for name, reaches in _module_names(example.old.tree).items() if reaches == module}
+    used = set()
+    for node in ast.walk(example.old.tree):
+        if isinstance(node, ast.Name) and node.id == old:
+            used.add(example.old.use_of(node))
+        if isinstance(node, ast.Attribute) and node.attr == old and isinstance(node.value, ast.Name) \
+                and node.value.id in aliases:
+            used.add(example.old.use_of(node))
+    return used or None
+
+
+def _rename_only(example, places, old, new):
+    """Did the example's own change take the old name away and put the new one in its place, and nothing else?
+
+    The example may also do other work; that work is taught by its own rules.  What is asked here is only
+    what this operator would claim: every place the example read the old name is rewritten by the swap, and
+    the new file reads the new name and never the old one.  A demonstration that renames nothing, or that
+    leaves a read of the old name standing, does not teach a rename.
+    """
+    shown = {span for span, node, _, _ in places
+             if not isinstance(node, ast.ImportFrom) and not isinstance(node, ast.Import)}
+    reads = set()
+    for node in ast.walk(example.old.tree):
+        if isinstance(node, ast.Name) and node.id == old:
+            reads.add(id(node))
+        if isinstance(node, ast.Attribute) and node.attr == old:
+            reads.add(id(node))
+    if not reads:
+        return False
+    covered = {id(node) for _, node, _, _ in places}
+    if not reads <= covered:
+        return False
+    if any(isinstance(node, ast.Name) and node.id == old for node in ast.walk(example.new.tree)):
+        return False
+    if not any(isinstance(node, ast.Name) and node.id == new for node in ast.walk(example.new.tree)):
+        return False
+    return True
+
+
+def swaps_to_make(text, example, fail_at=None):
+    """Every place in this file that reads the example's old name from the same module, reading it as the new one."""
+    taught = swaps_of(example)
+    if taught is None:
+        return []
+    module, old, new, shown_uses = taught
+    return _swap_places(text, module, old, new, shown_uses, fail_at)
+
+
 def renames_to_add(text, places, fail_at):
     """Places that rename a read left pointing at nothing, after the examples renamed its import.
 
@@ -1501,10 +1727,19 @@ def renames_to_add(text, places, fail_at):
     return found
 
 
-def written(text, places, what="the file", check_names=True, fail_at=None):
-    """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
-    return written_once(text, places + renames_to_add(text, places, fail_at)
-                        + aliases_to_follow(text, places, fail_at), what, check_names, fail_at)
+def written(text, places, what="the file", check_names=True, fail_at=None, example=None):
+    """`written_once`, with the leftover reads of a renamed import following their renamed definition.
+
+    When `example` is given, a name that example renamed is also renamed everywhere this file reads it
+    from the same module (`swaps_to_make`), which is the rename an example with one changed file cannot
+    otherwise repeat: the rule fits only the reading it was shown, and every other reading is left.
+    """
+    placed = places + renames_to_add(text, places, fail_at) + aliases_to_follow(text, places, fail_at)
+    if example is not None:
+        taken = [span for span, _, _, _ in placed]
+        placed = placed + [one for one in swaps_to_make(text, example, fail_at)
+                           if not any(start <= one[0][0] and one[0][1] <= end for start, end in taken)]
+    return written_once(text, placed, what, check_names, fail_at)
 
 
 def written_once(text, places, what="the file", check_names=True, fail_at=None):
@@ -1544,6 +1779,10 @@ def written_once(text, places, what="the file", check_names=True, fail_at=None):
             elif isinstance(rule, Renamed):
                 new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
             elif isinstance(rule, Rebound):
+                new_text, parsed = rule.new, ast.parse(rule.new).body[0]
+            elif isinstance(rule, Swapped):
+                new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
+            elif isinstance(rule, SwappedLine):
                 new_text, parsed = rule.new, ast.parse(rule.new).body[0]
             else:
                 new_text, parsed = written_for(rule, node, bound, text)
@@ -1647,8 +1886,8 @@ def edit_by_example(target_text, before_text, after_text):
     return repeated(learn(before_text, after_text), target_text, "the example")
 
 
-def repeated(rules, target_text, shown_by, leave_unshown=False):
-    result, count = rewrite(rules, target_text, leave_unshown=leave_unshown)
+def repeated(rules, target_text, shown_by, leave_unshown=False, example=None):
+    result, count = rewrite(rules, target_text, leave_unshown=leave_unshown, example=example)
     if count == 0:
         raise Refused("nothing in the file has the form %s changed (%s); a part of that form may vary "
                       "only where two changed places differ" % (shown_by, "; ".join(str(rule) for rule in rules)))
