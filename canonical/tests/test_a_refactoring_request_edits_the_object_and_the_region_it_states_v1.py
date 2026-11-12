@@ -142,9 +142,17 @@ class TheObjectTheSentenceNames(unittest.TestCase):
             with self.subTest(tag):
                 path = _file("variable_" + tag)
                 result = door.solve({"task_id": "REFACTOR_variable_" + tag, "goal": template % _rel(path)})
-                self.assertIsNot(result.get("pass"), True, result.get("status"))
-                self.assertIsNot(result.get("executed"), True, "a row ran for a sentence it cannot answer")
-                self.assertEqual(path.read_text(encoding="utf-8"), SOURCE, "the file was edited")
+                text = path.read_text(encoding="utf-8")
+                self.assertIn("def compute(a, b, verbose=False):", text, "the FUNCTION was renamed")
+                self.assertNotEqual(result.get("compiled_capability_id"), "python.refactor.rename_symbol.v1")
+                if result.get("pass") is True:
+                    # The quoted sentence is one the door was taught (see the taught-actions test):
+                    # then it is the VARIABLE that is renamed.
+                    self.assertEqual(result.get("status"), "PASS__COMPILED_WORKFLOW_SKILL")
+                    self.assertEqual(text, SOURCE.replace("tmp", "product"))
+                else:
+                    self.assertIsNot(result.get("executed"), True, "a row ran for a sentence it cannot answer")
+                    self.assertEqual(text, SOURCE, "the file was edited")
 
     def test_the_renames_that_were_right_are_still_done(self):
         path = _file("function")
@@ -228,6 +236,42 @@ class TheRegionTheSentenceStates(unittest.TestCase):
                 self.assertEqual([ast.unparse(s) for s in helper.body],
                                  ["tmp = a * b", "scaled = tmp / 3600", "return scaled"])
                 self.assertEqual(_run(text, "compute(3, 4)"), _run(SOURCE, "compute(3, 4)"))
+
+    def test_a_name_the_sentence_states_is_not_replaced_by_a_placeholder(self):
+        # On main the first sentence answered PASS with a function called ``_extracted_helper``.
+        # Binding the lines must not carry that to sentences that used to be refused.
+        for tag, template in (
+            ("host", "Extract the function compute from the module %s lines 11 to 12 into a new function scale."),
+            ("nohost", "refactor %s: extract the lines 11 to 12 into a new function scale"),
+            ("called", "extract lines 11 to 12 of %s into a helper called scale"),
+        ):
+            with self.subTest(tag):
+                result, text = self._extract("unread_" + tag, template)
+                self.assertIsNot(result.get("pass"), True, result.get("status"))
+                self.assertNotIn("_extracted_helper", text)
+                self.assertEqual(text, SOURCE)
+
+    def test_a_sentence_that_names_nothing_still_gets_the_placeholder(self):
+        from canonical.runtime import goal_front_compiler_v1 as front
+        stated = front.states_a_name_the_placeholder_would_replace
+        for sentence, expected in (
+            ("Extract the loop in the function total in a/b/util.py into a helper.", False),
+            ("Extract the region in a/b/util.py into a new helper function.", False),
+            ("Extract the loop in the function total in a/b/util.py.", False),
+            ("Extract lines 3 to 4 of a/b/util.py into a new function scale", True),
+            ("Extract lines 3 to 4 of a/b/util.py into a helper called scale.", True),
+            ("Move it into the module, then extract the loop into a helper", False),
+        ):
+            self.assertIs(stated(sentence), expected, sentence)
+        path = BASE / "placeholder" / "util.py"
+        shutil.rmtree(path.parent, ignore_errors=True)
+        path.parent.mkdir(parents=True)
+        path.write_text("def total(xs):\n    acc = 0\n    for x in xs:\n        acc = acc + x\n    return acc\n",
+                        encoding="utf-8")
+        result = door.solve({"task_id": "REFACTOR_placeholder",
+                             "goal": "Extract the loop in the function total in %s into a helper." % _rel(path)})
+        self.assertIs(result.get("pass"), True, result.get("status"))
+        self.assertIn("def _extracted_helper(", path.read_text(encoding="utf-8"))
 
     def test_the_function_that_holds_the_lines(self):
         tree = ast.parse(SOURCE)
