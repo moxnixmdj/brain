@@ -5530,7 +5530,12 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                 )
 
                 if not _is_honest_contract_refusal(result):
-                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
+                    _declined: list[dict[str, Any]] = []
+                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""), refusals=_declined)
+                    if recalled is None and _declined:
+                        # The sentence WAS taught, and the taught action declined this case.  The
+                        # refusal above stands; this says why, in the action's own words.
+                        result["taught_action_declined"] = _declined[:3]
                     from canonical.runtime import computer_execution_boundary_v1 as boundary
                     if recalled is not None and recalled.get("status") == boundary.STATUS:
                         # The primary route preceded this fallback and may have had
