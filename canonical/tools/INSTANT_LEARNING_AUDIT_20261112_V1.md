@@ -320,3 +320,79 @@ the remaining budget would buy nothing. Saying so is the correct terminal answer
 **What this does not claim.** No capability credit, no terminal credit, no benchmark movement. One
 demonstration still settles nothing; what changed is that the *next* experience can now be chosen,
 the world can actually be re-perceived, and a different environment can actually be acted in.
+
+## 7.5 The "permanent reachability limit" was double-counting, not a limit
+
+§7.4 ended with what looked like a hard boundary on learning: after two real chosen contrasts the
+learner reported `AMBIGUOUS` with two survivors, and the selector reported that **no reachable state
+could ever separate them**. That was written up as an honest permanent limit. It was wrong.
+
+The two survivors were:
+
+```
+('manifest.json.available',)
+('manifest.json.available', 'structured.json.available')
+```
+
+`world_probe_v1` decides `manifest.json` as "a `.json` file whose name contains *manifest*" and
+`structured.json` as "a `.json` file". **Every world satisfying the first satisfies the second.** So
+the second literal is redundant and those two survivors are **one requirement spelled twice**. The
+system was reporting ignorance where its own evidence already gave certainty — withholding `required`
+and leaving a plan unscoped that it had in fact fully characterised.
+
+### The repair is background knowledge, not more experience
+
+The implication is not learned from trajectories and must not be — it is derivable from the sensor's
+**own kind declarations**, before any example exists. `fact_entailment_v1` reads `_FILE_KINDS` from
+`world_probe_v1` (never a copy, so it cannot drift from the sensor) and derives the implication
+relation. `applicability_v1` now counts **distinct requirements up to logical equivalence** instead
+of counting spellings. This is the *implication-reducible* pruning of Cropper & Hocquette's
+hypothesis-space preprocessing (arXiv 2506.06739): a literal implied by another literal in the same
+body is redundant, and removing it is sound and example-independent.
+
+Measured on the live kind table: **19 kinds, 33 implications, 4 equivalence pairs** (`json` =
+`structured.json` = `candidate.response_or_fields`; `pdf` = `pdf.file.image_only`).
+
+### Soundness was attacked, not assumed
+
+An unsound implication would **delete a real requirement** and let a plan run where it fails — the
+false-lesson failure mode. So:
+
+* The first rule written read an empty suffix set as "matches nothing" and produced **38 bogus
+  equivalences** including `artifact.file == docx`. Empty means **any file** — the weakest
+  constraint, never the strongest. Fixed and pinned by a test.
+* Every one of the 33 claimed implications was then falsification-tested through the **real
+  `probe_effect` on real directories**: **0 violations**.
+* A property test checks reduction never changes an admission decision on any realisable world.
+* Mutual implication gets one canonical representative; without it, reducing `{json, structured}`
+  would delete **both** literals and weaken the requirement to nothing. Mutation-tested.
+* Unknown facts are never reduced away.
+
+### Measured on the real executor
+
+Same probe, same real directories, same two real runs as §7.4:
+
+| arm | queries | survivors | identified | learned requirement | held-out |
+|---|---|---|---|---|---|
+| passive repetition | 8 | 6 | no | `[]` — scopes nothing | 1/3 |
+| **chosen contrast** | **2** | **1** | **YES** | **`manifest.json.available`** | **1/1** |
+| fewest-survivors (killed) | 8 | 4 | no | `archive.tar_gz.available` — false | 0/2 |
+
+**The same experience now yields identification instead of permanent ambiguity.** No extra runs, no
+extra queries — only counting what is actually distinct. All 10 probe verdict checks true.
+
+### Guards
+
+* Fresh baseline on this base **1f/86p** → with 13 new tests **1f/99p** — **NEW FAILURES: NONE**.
+* **Four mutations, all killed**: empty-set direction inverted → 2 failures; counting spellings
+  again → 2; equivalence class deleted entirely → 1; non-transitive spec rule → 5.
+* A transitive-closure loop was written first; a mutation deleting it killed **no** test, and
+  measurement showed it added **0** pairs to the 33 direct ones. `_spec_implies` is provably
+  transitive, so the loop was **deleted as dead code** and replaced by an all-triples property test.
+* Live battery unchanged **3/4**.
+
+**Why this matters for "learn it once".** The bottleneck was not only how much experience the agent
+gets — it was that the agent **threw away certainty it already had** by treating two spellings of one
+requirement as two open questions. Every redundant literal inflates the space exponentially and
+manufactures ambiguity that no amount of experience can resolve. Removing them is free, sound, and
+strictly reduces the number of experiences needed. No capability or terminal credit claimed.

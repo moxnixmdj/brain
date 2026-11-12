@@ -180,7 +180,9 @@ def candidate_requirements(
     ])
     for state, ok in rows:
         space.observe((state,), ok)
-    return tuple(sorted(tuple(sorted(as_set(h))) for h in survivors(space)))
+    from canonical.runtime.fact_entailment_v1 import distinct_requirements
+
+    return distinct_requirements([as_set(h) for h in survivors(space)])
 
 
 def learn(
@@ -244,17 +246,27 @@ def learn(
         )
 
     sets = [as_set(h) for h in alive]
-    ordered_survivors = tuple(sorted(tuple(sorted(s)) for s in sets))
-    general = tuple(sorted(min(sets, key=len)))
-    specific = tuple(sorted(max(sets, key=len)))
-    status = IDENTIFIED if len(alive) == 1 else AMBIGUOUS
+    # Count DISTINCT requirements, not spellings. Two survivors can denote the same set of
+    # satisfying worlds: `manifest.json` is decided as "a .json named manifest" and
+    # `structured.json` as "a .json", so the first implies the second and
+    # {manifest, structured} IS {manifest}. Measured: that pair was reported AMBIGUOUS and the
+    # selector reported no reachable state could ever split it -- a permanent fake limit that
+    # withheld `required` even though the evidence already determined it. Reducing by the
+    # sensor's own implications removes the redundant literal without removing any requirement.
+    from canonical.runtime.fact_entailment_v1 import distinct_requirements, reduce_requirement
+
+    reduced = distinct_requirements(sets)
+    ordered_survivors = reduced
+    general = tuple(sorted(min(reduced, key=len)))
+    specific = tuple(sorted(max(reduced, key=len)))
+    status = IDENTIFIED if len(reduced) == 1 else AMBIGUOUS
     return Boundary(
         schema=SCHEMA,
         status=status,
         required=general if status == IDENTIFIED else None,
         most_general=general,
         most_specific=specific,
-        survivor_count=len(alive),
+        survivor_count=len(reduced),
         successes=len(successes),
         failures=len(failures),
         candidate_facts=keys,
