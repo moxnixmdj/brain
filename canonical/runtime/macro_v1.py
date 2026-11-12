@@ -246,6 +246,23 @@ def record(clauses, steps, where: str = "", *, context=None) -> bool:
     return True
 
 
+def vocabulary_gap(key: str):
+    """The proof that observed facts cannot express this plan's need, or None.
+
+    Reads the same retained evidence as `applicability`, so the two can never disagree about what
+    was seen. A non-None answer means experience alone cannot fix this plan's scope: a new
+    observable is required. It changes no admission decision -- withholding on undetermined
+    evidence is the ban this store has already met four times.
+    """
+    from canonical.runtime.applicability_v1 import vocabulary_gap as _gap
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+
+    if not key or not can_read_memory():
+        return None
+    entry = (_load().get("macros") or {}).get(key)
+    return _gap(_evidence_rows(entry)) if isinstance(entry, dict) else None
+
+
 def next_contrast(key: str, candidate_states=()):
     """What to try next to learn WHERE this plan applies, or why nothing can be learned yet.
 
