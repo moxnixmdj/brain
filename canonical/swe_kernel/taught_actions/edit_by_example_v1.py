@@ -200,6 +200,56 @@ def is_import(statement):
     return isinstance(statement, (ast.Import, ast.ImportFrom))
 
 
+def imports_of(tree):
+    """Names a module binds by import at its top, each with where it comes from: (module, name in it or None).
+
+    A name imported from two different places is kept as coming from nowhere, so it never counts as the same.
+    """
+    found, stack = {}, list(tree.body)
+    while stack:
+        statement = stack.pop()
+        if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            continue
+        for alias in statement.names if is_import(statement) else ():
+            if isinstance(statement, ast.Import):
+                name = alias.asname or alias.name.split(".")[0]
+                origin = (alias.name if alias.asname else name, None)
+            else:
+                name, origin = alias.asname or alias.name, ("." * statement.level + (statement.module or ""), alias.name)
+            if name != "*":
+                found[name] = origin if found.get(name, origin) == origin else None
+        for name in ("body", "orelse", "finalbody"):
+            stack.extend(getattr(statement, name, []))
+        for handler in getattr(statement, "handlers", []):
+            stack.extend(handler.body)
+    return found
+
+
+def bound_by(function):
+    """Names a function binds for itself: its parameters and what its body assigns, imports or defines."""
+    given = function.args
+    names = {one.arg for one in given.posonlyargs + given.args + given.kwonlyargs
+             + [extra for extra in (given.vararg, given.kwarg) if extra]}
+    outside, stack = set(), list(function.body) if isinstance(function.body, list) else [function.body]
+    while stack:
+        part = stack.pop()
+        if isinstance(part, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            names.add(part.name)
+            continue
+        if isinstance(part, ast.Lambda):
+            continue
+        if isinstance(part, (ast.Global, ast.Nonlocal)):
+            outside.update(part.names)
+        elif isinstance(part, ast.Name) and not isinstance(part.ctx, ast.Load):
+            names.add(part.id)
+        elif is_import(part):
+            names.update((alias.asname or alias.name).split(".")[0] for alias in part.names)
+        elif isinstance(part, ast.ExceptHandler) and part.name:
+            names.add(part.name)
+        stack.extend(ast.iter_child_nodes(part))
+    return names - outside
+
+
 class Text:
     """A source file: its bytes, its tree, and where each node sits in the bytes."""
 
@@ -214,6 +264,28 @@ class Text:
         self.starts = [0] + [found.end() for found in re.finditer(rb"\r\n|\r|\n", self.raw)]
         self.above = {id(child): node for node in ast.walk(self.tree) for child in ast.iter_child_nodes(node)}
         self.defined, self.anything = module_names(self.tree)
+        self.imports, self.bound = imports_of(self.tree), {}
+
+    def local_at(self, node, name):
+        """Is `name`, read at `node`, a parameter or variable of a function around it?"""
+        while id(node) in self.above:
+            node = self.above[id(node)]
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+                if id(node) not in self.bound:
+                    self.bound[id(node)] = bound_by(node)
+                if name in self.bound[id(node)]:
+                    return True
+        return False
+
+    def use_of(self, node):
+        """How an expression is used where it stands: None when it is not called, else the form of the call as
+        (number of plain arguments, the names of its keyword arguments with '*' and '**' for unpacked ones)."""
+        parent = self.above.get(id(node))
+        if isinstance(parent, ast.Call) and parent.func is node:
+            return (sum(not isinstance(one, ast.Starred) for one in parent.args),
+                    frozenset(one.arg or "**" for one in parent.keywords)
+                    | ({"*"} if any(isinstance(one, ast.Starred) for one in parent.args) else frozenset()))
+        return None
 
     def span(self, node):
         return (self.starts[node.lineno - 1] + node.col_offset, self.starts[node.end_lineno - 1] + node.end_col_offset)
@@ -425,6 +497,8 @@ class Rule:
         self.lines = sorted(before.lineno for before, _ in pairs)
         self.needs = set()               # names the new code reads that the old code did not
         self.own = set()                 # names the new code binds for itself
+        self.uses = set()                # how the changed code was used where the examples changed it
+        self.origins = {}                # imported names the old code reads, and where each was imported from
 
     def __str__(self):
         number = {}
@@ -514,7 +588,16 @@ def rule_for(group, changed):
 def stands_alone(rule, changed):
     """Refuse a rule whose places only work together with other changes.  Fills in what the rule needs."""
     for before, after in rule.pairs:
-        label, new = changed.home[id(before)].label, changed.home[id(before)].new
+        label, new, old = changed.home[id(before)].label, changed.home[id(before)].new, changed.home[id(before)].old
+        if rule.kind == "expression":
+            rule.uses.add(old.use_of(before))
+        kept = {}
+        fits(rule.pattern, before, kept)
+        inside = {id(part) for blank in kept.values() for part in ast.walk(blank)}
+        for part in ast.walk(before):
+            if (isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and id(part) not in inside
+                    and part.id in old.imports and not old.local_at(part, part.id)):
+                rule.origins.setdefault(part.id, set()).add(old.imports[part.id])
         assigned_before, read_before = names_of(before)
         assigned_after, read_after = names_of(after)
         if assigned_before != assigned_after and not (is_import(before) and is_import(after)
@@ -658,6 +741,30 @@ def written_for(rule, node, bound, text):
     raise Refused("the change does not fit the code at line %d" % node.lineno)
 
 
+def shown_like_this(rule, text, node):
+    """Is the code at `node` used the way changed places of the examples were, and are the imported names it reads
+    the same imports?
+
+    A function replaced in calls of one form says nothing about calls of another form: the new function may not
+    take those arguments.  So a call must have no keyword argument the examples did not show, and a number of
+    plain arguments between the fewest and the most they showed; code that is not called must have been shown not
+    called.  And a name that is an imported module in the example says nothing about a variable of the same name.
+    """
+    if rule.kind == "expression":
+        use, calls = text.use_of(node), [shown for shown in rule.uses if shown is not None]
+        if use is None:
+            if None not in rule.uses:
+                return False
+        elif (not calls or not use[1] <= frozenset().union(*[named for _, named in calls])
+              or not min(count for count, _ in calls) <= use[0] <= max(count for count, _ in calls)):
+            return False
+    for part in ast.walk(node):
+        if isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in rule.origins:
+            if text.imports.get(part.id) not in rule.origins[part.id] or text.local_at(part, part.id):
+                return False
+    return True
+
+
 def rewrite(rules, source_text, what="the file", check_names=True):
     """Apply the rules to every place that fits.  Returns (new text, number of places changed)."""
     text = Text(source_text, what)
@@ -666,7 +773,7 @@ def rewrite(rules, source_text, what="the file", check_names=True):
         fitting = []
         for rule in rules:
             bound = {}
-            if fits(rule.pattern, node, bound):
+            if fits(rule.pattern, node, bound) and shown_like_this(rule, text, node):
                 fitting.append((rule, bound))
         if len(fitting) > 1:
             raise Refused("two changes of the example both fit the code at line %d of %s" % (node.lineno, what))
