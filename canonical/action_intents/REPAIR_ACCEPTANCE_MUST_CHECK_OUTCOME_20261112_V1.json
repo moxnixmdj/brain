@@ -7,7 +7,7 @@
   "route_id": "REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1",
   "date": "2026-11-12",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "94a105fe7e33fc54b49da8245b173181faf51957",
+  "canonical_base_commit": "6469dbbb5fc6c2a45e9461495c1bdd91d575a824",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -134,7 +134,7 @@
       "NEGATIVE_CONTROLS_MUST_REMAIN_REJECTED"
     ],
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "94a105fe7e33fc54b49da8245b173181faf51957",
+    "canonical_base_commit": "6469dbbb5fc6c2a45e9461495c1bdd91d575a824",
     "real_outcome": "Prevent eight registered repair capabilities from accepting known failed repairs merely because an output artifact was written.",
     "required_capability": "RELIABLE_REPAIR_OUTCOME_ACCEPTANCE_AS_A_CONSTRUCTIVE_DEPENDENCY_OF_THE_GENERAL_REUSABLE_PROBLEM_SOLVING_FRONTIER",
     "obs_goal": {
