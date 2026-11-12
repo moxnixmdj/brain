@@ -378,6 +378,8 @@ def execute_swe_coding_episode(
             scope_id=scope_id,
             context=context,
             allow_cross_scope_transfer=True,
+            allow_operator_generalization=True,
+            allow_scope_escalation=True,
         )
         recalled_info = recalled
         if recalled is None:
@@ -760,10 +762,14 @@ def run_swe_bridge_experiment() -> dict[str, Any]:
             ),
         }
 
+        problem2_report = run_problem2_generalization_suite()
+        checks["problem2_generalization_suite_all_ok"] = bool(problem2_report.get("all_ok") is True)
+
         return {
             "schema": SCHEMA,
             "all_ok": all(checks.values()),
             "checks": checks,
+            "problem2_generalization": problem2_report,
             "episodes": {
                 "ep_swe_1": {
                     "pass": ep1["pass"],
@@ -797,6 +803,213 @@ def run_swe_bridge_experiment() -> dict[str, Any]:
             },
             "truth": {"achieved": False},
         }
+
+
+def run_problem2_generalization_suite() -> dict[str, Any]:
+    """Verify Problem 2 (Generalization across similar tasks) across Layers A, B, and C."""
+    from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
+        anti_unify_workflow,
+        anti_unify_workflow_examples,
+        bind_goal_parameters,
+        compile_and_qualify_skill,
+        recall_and_execute_workflow,
+    )
+    from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
+    from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
+        anti_unify_code_rule_pair,
+    )
+
+    # Layer A: Front-door intent-scoped counting & singular/plural symbol enumeration
+    repo_root = pathlib.Path(__file__).resolve().parents[2]
+    assoc_mem_path = repo_root / "canonical/astra_runtime/state/ASSOCIATIVE_MEMORY_V1.json"
+    assoc_before = assoc_mem_path.read_bytes() if assoc_mem_path.is_file() else None
+    reports_dir = repo_root / "canonical/astra_runtime/tmp/typed_swe_reports"
+    reports_before = set(reports_dir.glob("*")) if reports_dir.is_dir() else set()
+    try:
+        r_fn_count = solve_or_learn({
+            "goal": "Read the file canonical/swe_kernel/verified_skill_crystallizer_v1.py and count how many functions it contains",
+            "learn": False,
+        })
+        r_cls_count = solve_or_learn({
+            "goal": "How many classes does canonical/swe_kernel/verified_skill_crystallizer_v1.py contain?",
+            "learn": False,
+        })
+        r_fn_names = solve_or_learn({
+            "goal": "List the function names in canonical/runtime/solve_v1.py",
+            "learn": False,
+        })
+        r_cls_names = solve_or_learn({
+            "goal": "List the class names in canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+            "learn": False,
+        })
+    finally:
+        if assoc_before is not None:
+            assoc_mem_path.write_bytes(assoc_before)
+        if reports_dir.is_dir():
+            for rp in set(reports_dir.glob("*")) - reports_before:
+                try:
+                    rp.unlink()
+                except OSError:
+                    pass
+    ans_cls_names = r_cls_names.get("answer")
+    cls_val = ans_cls_names.get("value") if isinstance(ans_cls_names, Mapping) else ans_cls_names
+    ans_fn_names = r_fn_names.get("answer")
+    fn_val = ans_fn_names.get("value") if isinstance(ans_fn_names, Mapping) else ans_fn_names
+
+    layer_a_checks = {
+        "function_count_excludes_classes": (
+            bool(r_fn_count.get("pass"))
+            and isinstance(r_fn_count.get("answer"), int)
+            and isinstance(r_cls_count.get("answer"), int)
+            and int(r_fn_count["answer"]) > int(r_cls_count["answer"]) >= 1
+        ),
+        "class_count_excludes_functions": (
+            bool(r_cls_count.get("pass")) and int(r_cls_count.get("answer") or 0) == 1
+        ),
+        "list_function_names_routes_to_ast_audit": (
+            bool(r_fn_names.get("pass"))
+            and r_fn_names.get("compiled_capability_id") == "python.source.audit.ast"
+            and isinstance(fn_val, list)
+            and "solve" in fn_val
+        ),
+        "list_class_names_routes_to_ast_audit": (
+            bool(r_cls_names.get("pass"))
+            and r_cls_names.get("compiled_capability_id") == "python.source.audit.ast"
+            and cls_val == ["VerifiedSkillStore"]
+        ),
+    }
+
+    # Layer B: Polymorphic workflow parameter binding + two-showing plain-word LGG + opposing-verb refusal
+    sk_http = anti_unify_workflow(
+        "Submit service=billing_api and env=staging to http://127.0.0.1:8000/console",
+        [{"layer": "http_request", "method": "POST", "url": "http://127.0.0.1:8000/submit", "form": {"service": "billing_api", "env": "staging"}}],
+        {"kind": "http_json_subset", "expected": {"ok": True, "service": "billing_api", "env": "staging"}},
+    )
+    expected_http_bind = {
+        "?str0": "auth_gateway",
+        "?str1": "prod",
+        "?url0": "http://127.0.0.1:8000/console",
+    }
+    http_variants = [
+        "Submit service=auth_gateway and env=prod to http://127.0.0.1:8000/console",
+        "Submit env=prod and service=auth_gateway to http://127.0.0.1:8000/console",
+        "Post service: auth_gateway, env: prod to http://127.0.0.1:8000/console",
+        "To http://127.0.0.1:8000/console send env=prod and service=auth_gateway",
+    ]
+    http_binds_ok = all(bind_goal_parameters(sk_http, g) == expected_http_bind for g in http_variants)
+
+    with tempfile.TemporaryDirectory() as td:
+        p = pathlib.Path(td)
+        wf_db = p / "wf_skills.sqlite"
+        qual = compile_and_qualify_skill(
+            goal="Create table accounts in ledger.sqlite",
+            trace=[
+                {"layer": "sqlite_exec", "db_path": "ledger.sqlite", "sql": "CREATE TABLE IF NOT EXISTS accounts (id INTEGER PRIMARY KEY, name TEXT)"},
+                {"layer": "sqlite_exec", "db_path": "ledger.sqlite", "sql": "INSERT INTO accounts (name) VALUES ('init')"},
+            ],
+            postcondition={"kind": "sqlite_row_exists", "db_path": "ledger.sqlite", "sql": "SELECT name FROM accounts WHERE name = 'init';", "expected_row": ["init"]},
+            heldout_goal="Create table invoices in billing.sqlite",
+            heldout_cwd=p,
+            db_path=wf_db,
+        )
+        hit_orders = recall_and_execute_workflow("Create table orders in store.sqlite", cwd=p, db_path=wf_db)
+        hit_shipments = recall_and_execute_workflow("In store2.sqlite initialize table shipments", cwd=p, db_path=wf_db)
+        refused_drop = recall_and_execute_workflow("Drop table orders in store.sqlite", cwd=p, db_path=wf_db)
+        lgg_wf = anti_unify_workflow_examples(
+            {
+                "goal": "Create table accounts in ledger.sqlite",
+                "steps": [{"layer": "sqlite_exec", "db_path": "ledger.sqlite", "sql": "CREATE TABLE accounts (id INT)"}],
+                "postcondition": {"kind": "sqlite_row_exists", "db_path": "ledger.sqlite", "sql": "SELECT 1", "expected_row": [1]},
+            },
+            {
+                "goal": "Create table invoices in billing.sqlite",
+                "steps": [{"layer": "sqlite_exec", "db_path": "billing.sqlite", "sql": "CREATE TABLE invoices (id INT)"}],
+                "postcondition": {"kind": "sqlite_row_exists", "db_path": "billing.sqlite", "sql": "SELECT 1", "expected_row": [1]},
+            },
+        )
+
+    layer_b_checks = {
+        "reordered_kv_and_verb_synonyms_bind": http_binds_ok,
+        "two_showing_plain_word_skill_qualified": bool(qual.get("pass") is True),
+        "third_plain_word_goal_recalled_and_verified": bool(hit_orders and hit_orders.get("pass") is True),
+        "reordered_clause_and_verb_synonym_recalled": bool(hit_shipments and hit_shipments.get("pass") is True),
+        "opposing_verb_refused": refused_drop is None,
+        "anti_unify_workflow_examples_generalizes_both": bool(lgg_wf.get("generalized_across_both") is True),
+    }
+
+    # Layer C: 6-variant structural/algebraic code repair transfer + 2-example statement-frame LGG
+    with tempfile.TemporaryDirectory() as td_c:
+        pc = pathlib.Path(td_c)
+        store_c = VerifiedSkillStore(pc / "code_skills.sqlite", seed=False)
+        test_code_c = (
+            "import unittest\nfrom billing import calc\nclass T(unittest.TestCase):\n"
+            "    def test_d(self):\n        self.assertAlmostEqual(calc(100.0, 0.15), 85.0)\n"
+            "        self.assertAlmostEqual(calc(200.0, 0.25), 150.0)\n"
+        )
+        v1 = make_python_unittest_verifier(test_code_c, scope_id="s1", module_name="billing")
+        v2 = make_python_unittest_verifier(test_code_c, scope_id="s2", module_name="billing")
+        cryst_c = store_c.crystallize_code_fix(
+            before_snippet="def calc(gross, rate):\n    return gross + (gross * rate)\n",
+            after_snippet="def calc(gross, rate):\n    return gross - (gross * rate)\n",
+            language="python",
+            error_class="AssertionError",
+            training_verifier=v1,
+            contract={
+                "schema_version": 1,
+                "scope_id": "s1",
+                "verification_kind": "TEST_SUITE",
+                "dependencies": {},
+                "preconditions": {},
+            },
+        )
+        ctx_c = {"dependencies": {}, "preconditions": {}}
+        code_variants = {
+            "same_return": "def calc(amt, disc):\n    return amt + (amt * disc)\n",
+            "assign_then_return": "def calc(gross, rate):\n    net = gross + (gross * rate)\n    return net\n",
+            "wrapped_in_max": "def calc(gross, rate):\n    return max(0.0, gross + (gross * rate))\n",
+            "commuted_add": "def calc(gross, rate):\n    return (rate * gross) + gross\n",
+            "factored_distributive": "def calc(gross, rate):\n    return gross * (1.0 + rate)\n",
+            "aug_assign": "def calc(gross, rate):\n    net = gross\n    net += (gross * rate)\n    return net\n",
+        }
+        variant_hits: dict[str, bool] = {}
+        for v_name, v_src in code_variants.items():
+            h = store_c.recall_and_apply_verified(
+                source_text=v_src,
+                language="python",
+                error_class="AssertionError",
+                verifier=v2,
+                required_verification_kind="TEST_SUITE",
+                scope_id="s2",
+                context=ctx_c,
+                allow_cross_scope_transfer=True,
+                allow_operator_generalization=True,
+                allow_scope_escalation=True,
+            )
+            variant_hits[v_name] = h is not None
+
+    lgg_code = anti_unify_code_rule_pair(
+        "def f(gross, rate):\n    return gross + (gross * rate)\n",
+        "def f(gross, rate):\n    return gross - (gross * rate)\n",
+        "def g(base, pct):\n    net = base + (base * pct)\n    return net\n",
+        "def g(base, pct):\n    net = base - (base * pct)\n    return net\n",
+    )
+    layer_c_checks = {
+        "training_fix_crystallized": bool(cryst_c.get("crystallized") is True),
+        **{f"variant_{k}": v for k, v in variant_hits.items()},
+        "two_example_code_lgg_extracted": lgg_code is not None,
+    }
+
+    all_ok = (
+        all(layer_a_checks.values())
+        and all(layer_b_checks.values())
+        and all(layer_c_checks.values())
+    )
+    return {
+        "all_ok": all_ok,
+        "layer_a_front_door": layer_a_checks,
+        "layer_b_workflow_skills": layer_b_checks,
+        "layer_c_code_repair_skills": layer_c_checks,
+    }
 
 
 def main(argv: Sequence[str] | None = None) -> int:
