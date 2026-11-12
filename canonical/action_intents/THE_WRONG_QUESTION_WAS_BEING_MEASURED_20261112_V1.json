@@ -5,36 +5,16 @@
  "action_summary": "A guard that claimed to keep forged capabilities from being proposed was appending them at score 0.0, where they survived into the ambiguity gate and vetoed decisive matches. Six lines stop a zero-score row from gating a matched one.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
-  "causal_evidence": "MEASURED_ON_b86e1823__NETWORK_HTTP_AVAILABLE_UNDECIDABLE_WHILE_pypi_org_npm_AND_api_github_com_ANSWERED_200__SUBJECTS_STRIPPED_ONE_QUALIFIER__KNOWLEDGE_JSON_FETCH_EXTERNAL_REFUSED_NOT_CALLABLE_WHILE_ITS_URL_WAS_IN_THE_SENTENCE__COMPILE_AGAINST_LIVE_REGISTRY_PRODUCED_THREE_TYPED_FETCHES_AND_A_SYMPY_CYCLE__214_PREEXISTING_SUBSET_FAILURES_BEFORE_AND_AFTER__NINE_TESTS_PASS",
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-  "conversation_memory_is_authority": false,
-  "false_claim_removed": "THAT_A_PREMISE_THE_SENSOR_CANNOT_DECIDE_IS_A_PREMISE_THAT_IS_NOT_TRUE__AND_THAT_THE_RANKING_DOOR_IS_THE_FRONT_DOOR",
-  "incremental_spend_usd": 0,
-  "laws_read_this_session": [
-   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
-   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
-   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
-   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
-   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
-   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
-   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
-   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
-   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
-   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-   "AGENTS.md"
-  ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/runtime/world_probe_v1.py",
-   "canonical/runtime/world_binding_v1.py",
-   "canonical/tests/test_a_fact_the_machine_could_not_decide_on_a_machine_that_had_it_v1.py",
-   "THE_DOOR_THAT_WAS_ALREADY_WORKING_20261112_V1.md"
-  ],
-  "route_class": "REUSE"
+   "canonical/runtime/grounded_action_v1.py",
+   "canonical/tests/test_expressibility_of_ordinary_computer_tasks_v1.py",
+   "expressibility_of_ordinary_computer_tasks_v1.py",
+   "THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1.md"
+  ]
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
@@ -51,7 +31,21 @@
  "governance_change": false,
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
- "load_bearing_primary": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__THE_ROUTING_GAP_IT_CLOSES_IS_A_PRECONDITION_FOR_EVERY_CODING_AND_COMPUTER_USE_OBLIGATION_RATHER_THAN_EVIDENCE_AGAINST_ANY_ONE_OF_THEM__A_SYSTEM_THAT_VERIFIES_A_DIFFERENT_QUESTION_THAN_THE_ONE_ASKED_CANNOT_CREDIT_ITSELF_WITH_ANSWERING_ANY_OF_THEM",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
+ },
  "measured_effect": "expressible 11 -> 15 of 30; VERIFIED 2 -> 5 of which 1 of 5 answered its question by inspection; 155-row keyword census 64 -> 62 selected, A/B owed and named.",
  "next_step": "Make VERIFIED_ACTION unavailable unless the returned object is about the object the sentence named. UNJUDGED already exists in the code and is unused.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
