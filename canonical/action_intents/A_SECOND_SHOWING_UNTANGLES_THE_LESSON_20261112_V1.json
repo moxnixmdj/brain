@@ -7,7 +7,7 @@
  "route_id": "A_SECOND_SHOWING_UNTANGLES_THE_LESSON_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "8238d6375fb2c6afbf824a757d47983f28167f55",
+ "canonical_base_commit": "419d20666a09a8eba9109a52c603cfa5299b4c4d",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -107,7 +107,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "8238d6375fb2c6afbf824a757d47983f28167f55",
+  "canonical_base_commit": "419d20666a09a8eba9109a52c603cfa5299b4c4d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_SECOND_SHOWING_IS_NOW_A_MEASURED_TWO_SIDED_LAW__IT_REMOVES_TANGLE_WHERE_ANY_EXAMPLES_UNTOUCHED_CODE_DISSENTS_AND_INJECTS_TANGLE_WHERE_ONLY_THE_NEW_TEACHER_CARRIES_A_HABIT__FRESH_STRICT_SAME_RATE_79_TO_95_PERCENT",
