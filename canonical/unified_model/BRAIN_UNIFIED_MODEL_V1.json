@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 396,
+  "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6792,
+  "research_index_records": 6794,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f563f2169a3e0cac8b8431e61b0eeb9a62f7b480b91163b700c8831cd7f04bc8"
+  "value": "cad5c40df39acd36e612ac7a702ab08ee288a865ab81e8d4146f1014b35829b9"
  },
  "engines": [
   {
@@ -62339,6 +62339,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11245,
+   "headings": [
+    "Which fix actually works",
+    "1. What was asked, and what I refused to assume",
+    "2. Finding one: the roadmap counted targets, not opportunities",
+    "3. Finding two: the ceiling, so no gain can be oversold",
+    "4. Finding three: the four arms, measured",
+    "5. What this changes about the route",
+    "6. Why the exemption is sound, and what it is not",
+    "7. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHICH_FIX_ACTUALLY_WORKS_20261112_V1.md",
+   "sha256": "8853b552fbd8bf90a5f52d8b0b9e9ff1344fabded7fd9d54a249bf5ef3fb690a",
+   "summary": "**2026-11-12.** Base `8238d637`. Branch `arena/4ec3698d-brain`. Answers Problem 2: *similar task → adapt the knowledge.* The learner was changed, and the change is measured.",
+   "terms": {
+    "15": 9,
+    "22": 7,
+    "50": 8,
+    "60": 8,
+    "about": 5,
+    "algebra": 5,
+    "all": 5,
+    "askings": 11,
+    "because": 6,
+    "both": 8,
+    "cannot": 7,
+    "change": 5,
+    "changes": 11,
+    "class": 7,
+    "corpus": 6,
+    "coverage": 5,
+    "else": 5,
+    "exactly": 7,
+    "example": 7,
+    "examples": 5,
+    "exemption": 5,
+    "file": 5,
+    "first": 5,
+    "five": 5,
+    "gain": 11,
+    "import-only": 5,
+    "kind": 7,
+    "marker": 11,
+    "measured": 5,
+    "must": 7,
+    "name": 10,
+    "new": 6,
+    "no": 10,
+    "not": 22,
+    "nothing": 7,
+    "one": 15,
+    "only": 7,
+    "operator": 9,
+    "organ": 11,
+    "other": 7,
+    "pp": 8,
+    "precision": 8,
+    "refusal": 6,
+    "rename": 6,
+    "same": 10,
+    "so": 12,
+    "strict": 7,
+    "wrong": 10
+   },
+   "title": "Which fix actually works",
+   "title_terms": [
+    "actually",
+    "fix",
+    "works"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 19706,
    "headings": [
     "Why not just give it a try — the addendum the question deserves",
@@ -75560,10 +75634,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1198,
+  "included_source_count": 1199,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9f3e0e9ae0df86adcdfc9da74bfb86762d4f64a3fa7aed487646ee8c0977927b"
+  "source_tree_digest": "9ac66a8eb39f96b915ea4a3d90f11ff8a76a4c3b373f976cfee18e74c4150d0d"
  },
  "research_index": [
   {
@@ -205163,6 +205237,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
+   "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
+   "sha256": "49bb5a1d996964834923bf8fa726399d0ed30c6063576182a7dd68b1a63159a4",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "fix": 1,
+    "generalization": 1,
+    "moves": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -222026,6 +222118,35 @@
     "recall_read_only_128_lessons_per_language_chosen_by_reuse_count_before_any_was_matched__so_a_lesson_kept_after_128_reused_ones_was_stored_reported_crystallized_and_never_read_again__and_the_harvest_that_runs_a_projects_tests_inside_the_solver_called_setup_and_never_teardown__so_a_per_test_alarm_stayed_armed_in_the_solver": 1,
     "stays": 1,
     "usable": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c6873667143931d5d28e0338e45c0904c8f6ebdd3349def681eac2319c7260c2",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_kept_name_is_the_same_function_so_its_call_shape_cannot_matter_20261112_v1": 1,
+    "call": 1,
+    "cannot": 1,
+    "exempt_a_rename_between_two_documented_delegating_aliases_from_the_call_shape_check": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "kept": 1,
+    "matter": 1,
+    "name": 1,
+    "same": 1,
+    "shape": 1,
+    "so": 1,
+    "strict_coverage_0_2082_to_0_2999__per_question_share_0_2836_to_0_6170__precision_up__wrong_changes_unchanged_at_14__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "the_organ_refused_a_rename_wherever_a_call_site_had_a_shape_the_example_did_not_show__its_reason_is_that_the_new_function_may_not_take_those_arguments__which_is_exactly_wrong_when_the_two_names_are_one_function": 1,
     "v1": 1
    }
   },
@@ -239890,7 +240011,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "b5ecfba1d7324d593b9f91d12f194c7848a3f888773da34f342e1c24715ffb96",
+   "sha256": "d25a8f874fbceb8e039add5affdbdb3665496d33043122acb28bfe7137fc6d0b",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 19,
    "symbols": [
@@ -265560,9 +265681,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "8a819674b9b4e0968f198fb096291aae87e08961ffa526837b08338458f1cba0",
+   "sha256": "7ad424ffbfe2353f71bf26070a3d3c6a5d3aeff8489c14083ead059cd8dee603",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 90,
+   "symbol_count": 91,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -272153,7 +272274,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "c1413ae6b615fad247cddb752e19c0380907634fe6507497e71782101e29b02b",
+   "sha256": "9edb92232149249b1d5145aa7dad4e6aec4b44686568b567a9ee0770ea54b820",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 130,
    "symbols": [
@@ -300774,7 +300895,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "78c3c611907bd4eb6ab986cef50565084fc4d460b0908540e1baa6884824a8bc",
+   "sha256": "0bba15acac3238b0778a5ac57a86fb838d1705107410f6c0d59fbb8432fe88bd",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
