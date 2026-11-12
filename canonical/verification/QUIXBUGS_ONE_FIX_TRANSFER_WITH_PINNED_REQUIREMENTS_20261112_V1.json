@@ -1,0 +1,192 @@
+{
+ "schema": "BRAIN_QUIXBUGS_ONE_FIX_TRANSFER_WITH_PINNED_REQUIREMENTS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T01:10:26Z",
+ "read_this_first": [
+  "Why this run: the tree pins its kernel requirements (requirements/software_engineering_kernel_v1.txt: tree_sitter, tree_sitter_languages, hypothesis, crosshair-tool, z3-solver, pytest 8.4.2). None was installed when the record of 11 November was made, and without them the tree-sitter stage of the memory's recall raises TREE_SITTER_SUBSTRATE_MISSING and is skipped.",
+  "What was done: the requirements were installed with their hashes checked into a side directory, put on the path, and the same tool was run again on the same 40 QuixBugs programs.",
+  "Result: unchanged. With every other published fix taught first, the memory repairs 3 of 40 bugs (gcd, knapsack, quicksort) as before; one fix repairs another bug in 3 of 819 pairs (3 of 858 before; one fix fewer was stored this time).",
+  "One run. Nobody else has re-run it."
+ ],
+ "with_the_pinned_requirements": {
+  "fixes_stored_as_lessons": 21,
+  "fixes_refused": {
+   "FAILED_MUTATED_TWIN_VERIFICATION": [
+    "breadth_first_search",
+    "bucketsort",
+    "flatten",
+    "kheapsort",
+    "kth",
+    "minimum_spanning_tree",
+    "possible_change",
+    "rpn_eval",
+    "shortest_path_length",
+    "shortest_paths",
+    "shunting_yard",
+    "sieve",
+    "topological_ordering",
+    "wrap"
+   ],
+   "NON_GENERALIZABLE_SNIPPET": [
+    "subsequences"
+   ],
+   "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS": [
+    "bitcount",
+    "find_first_in_sorted",
+    "mergesort",
+    "sqrt"
+   ]
+  },
+  "as_taught": {
+   "the_same_bug_again": [
+    21,
+    21
+   ],
+   "one_fix_then_another_bug_pairs_repaired_of_pairs_tried": [
+    1,
+    819
+   ],
+   "by_strategy": {
+    "narrowed_pattern": 1
+   },
+   "all_other_fixes_then_this_bug": [
+    1,
+    40,
+    [
+     "quicksort"
+    ]
+   ]
+  },
+  "widest": {
+   "the_same_bug_again": [
+    21,
+    21
+   ],
+   "one_fix_then_another_bug_pairs_repaired_of_pairs_tried": [
+    3,
+    819
+   ],
+   "by_strategy": {
+    "narrowed_pattern": 2,
+    "operator_generalization": 1
+   },
+   "all_other_fixes_then_this_bug": [
+    3,
+    40,
+    [
+     "gcd",
+     "knapsack",
+     "quicksort"
+    ]
+   ]
+  }
+ },
+ "without_them_11_november": {
+  "fixes_stored_as_lessons": 22,
+  "fixes_refused": {
+   "FAILED_MUTATED_TWIN_VERIFICATION": [
+    "breadth_first_search",
+    "bucketsort",
+    "flatten",
+    "kheapsort",
+    "kth",
+    "minimum_spanning_tree",
+    "possible_change",
+    "rpn_eval",
+    "shortest_path_length",
+    "shortest_paths",
+    "shunting_yard",
+    "sieve",
+    "topological_ordering",
+    "wrap"
+   ],
+   "NON_GENERALIZABLE_SNIPPET": [
+    "subsequences"
+   ],
+   "TRAINING_BASELINE_DID_NOT_EXECUTE_FAILING_TESTS": [
+    "bitcount",
+    "find_first_in_sorted",
+    "sqrt"
+   ]
+  },
+  "as_taught": {
+   "the_same_bug_again": [
+    22,
+    22
+   ],
+   "one_fix_then_another_bug_pairs_repaired_of_pairs_tried": [
+    1,
+    858
+   ],
+   "by_strategy": {
+    "narrowed_pattern": 1
+   },
+   "all_other_fixes_then_this_bug": [
+    1,
+    40,
+    [
+     "quicksort"
+    ]
+   ]
+  },
+  "widest": {
+   "the_same_bug_again": [
+    22,
+    22
+   ],
+   "one_fix_then_another_bug_pairs_repaired_of_pairs_tried": [
+    3,
+    858
+   ],
+   "by_strategy": {
+    "narrowed_pattern": 2,
+    "operator_generalization": 1
+   },
+   "all_other_fixes_then_this_bug": [
+    3,
+    40,
+    [
+     "gcd",
+     "knapsack",
+     "quicksort"
+    ]
+   ]
+  }
+ },
+ "checked_apart": "With the side directory on the path canonical.runtime.tree_sitter_swe_kernel_v1.parser_for('python') parses and canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 imports; without it parser_for raises TREE_SITTER_SUBSTRATE_MISSING.",
+ "not_checked": "Whether the tree-sitter stage was reached and proposed anything during this run: no repair is recorded under a tree-sitter strategy. The repair solver itself (5 of 40) was not run again with the requirements; its search files do not name these packages.",
+ "environment": {
+  "benchmark_sha256": "44fea01ec12ff8bc809fa719f089c38b8d15a35ddac7fa0eddcd2dfaeeac78bb",
+  "code_sha256": {
+   "organ_contract_and_oracle": "7a34e3d80ce60fc1139bc974bd756f7310188e7b33deb2163f3a6d66963ff0aa",
+   "organ_operator_generalization": "29350ecfadda7eb0db0708ba3e9bc2b4a85d7e6f0ce6115b1f66fe84233e08c2",
+   "organ_scope_learning": "c3a728270ffde3c1b6b781b6e5c6fa1a4f7145e2077bbec80cb4edebb22576a0",
+   "organ_store": "888dc4457fcb7e309e9af3e4a6b48c6b0757c5369588587fb9a81b8fdf4f70aa",
+   "test_measurement": "f89e53e6d67b3530f8bbf3c34ef187b6702198949e9e8764587a4e0a51881f97",
+   "tool": "f4b3f35cb5db7d076a92ee9cf3fd44c0446749ee2259036084beea744db689c2"
+  },
+  "python": "3.11.2",
+  "source": "github.com/jkoppel/QuixBugs (MIT), python_programs / correct_python_programs / python_testcases"
+ },
+ "parameters": {
+  "one_fix_teachers": null,
+  "recall_wall_limit_s": 240,
+  "scope_id": "quixbugs-python",
+  "seed": 0,
+  "settings": {
+   "as_taught": {
+    "allow_cross_scope_transfer": false,
+    "allow_operator_generalization": false,
+    "allow_scope_escalation": false
+   },
+   "widest": {
+    "allow_cross_scope_transfer": true,
+    "allow_operator_generalization": true,
+    "allow_scope_escalation": true
+   }
+  },
+  "timeout_s": 8
+ },
+ "model_calls": 0,
+ "incremental_spend_usd": 0
+}
