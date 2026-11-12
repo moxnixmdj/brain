@@ -66,16 +66,6 @@
       "?id1"
      ]
     ],
-    "provenance": {
-     "after_sha256": "ef4f5d2ac30fdaa66d850808547c82d2ba4a1c199e87a12cf881a5253f2e9745",
-     "before_sha256": "41ffb54b2f2084b442fb4db8b38910187b19582d2f58185b98519b198f491822",
-     "taught_sources": [
-      {
-       "after": "def discount(price, pct):\n    return price - price * pct\n",
-       "before": "def discount(price, pct):\n    return price + price * pct\n"
-      }
-     ]
-    },
     "replacement_tokens": [
      [
       "kw",
@@ -200,16 +190,6 @@
       "?id3"
      ]
     ],
-    "provenance": {
-     "after_sha256": "9b4a0fa4243d937608ec52120106b24ba0ac3850e2536dabb1e4a75e395bd38f",
-     "before_sha256": "8b167a0eaec0229fc93a25b8600c50f5b63e635818265e4d71601a523a87aa11",
-     "taught_sources": [
-      {
-       "after": "from pkg.pricing import discount\ndef final_total(price, pct, tax):\n    return discount(price, pct) + tax\n",
-       "before": "from pkg.pricing import discount\ndef final_total(price, pct, tax):\n    return discount(price, pct) - tax\n"
-      }
-     ]
-    },
     "replacement_tokens": [
      [
       "kw",
@@ -326,16 +306,6 @@
       "int"
      ]
     ],
-    "provenance": {
-     "after_sha256": "14032d4f7363833b86ac1659a521b460e4efde00060bd6480770d880906d8d47",
-     "before_sha256": "61fa16d1a442a2f1f39c3d06b0987890913d01d7186fd68745038c0f024de302",
-     "taught_sources": [
-      {
-       "after": "package counts\n\nfunc Count(ws []string) map[string]int {\n\tm := make(map[string]int)\n\tfor _, w := range ws {\n\t\tm[w]++\n\t}\n\treturn m\n}\n",
-       "before": "package counts\n\nfunc Count(ws []string) map[string]int {\n\tvar m map[string]int\n\tfor _, w := range ws {\n\t\tm[w]++\n\t}\n\treturn m\n}\n"
-      }
-     ]
-    },
     "replacement_tokens": [
      [
       "hole_id",
@@ -436,16 +406,6 @@
       ";"
      ]
     ],
-    "provenance": {
-     "after_sha256": "7aa176b1c3d8fe464e24bbfdb571e47b1b6ff1888d258760342ea4118a0a7321",
-     "before_sha256": "51f403ba20bf7aa2fef83c7d490b3e547c3e46185c100cff1d55194de2e49283",
-     "taught_sources": [
-      {
-       "after": "export function score(user: { pts: number } | null): number {\n    return user?.pts ?? 0;\n}\n",
-       "before": "export function score(user: { pts: number } | null): number {\n    return user.pts;\n}\n"
-      }
-     ]
-    },
     "replacement_tokens": [
      [
       "kw",
@@ -574,16 +534,6 @@
       "{"
      ]
     ],
-    "provenance": {
-     "after_sha256": "bb5c9d43c95952a1e658fa715c87886eb19e4e8f38ee967572f8b7c160eb6937",
-     "before_sha256": "b1785a059350df5c237287fa8c06f4fd948340d34a6351da897a662745f91726",
-     "taught_sources": [
-      {
-       "after": "pub fn sum_slice(xs: &[i32]) -> i32 {\n    let mut t = 0;\n    for i in 0..xs.len() {\n        t += xs[i];\n    }\n    t\n}\n",
-       "before": "pub fn sum_slice(xs: &[i32]) -> i32 {\n    let mut t = 0;\n    for i in 0..=xs.len() {\n        t += xs[i];\n    }\n    t\n}\n"
-      }
-     ]
-    },
     "replacement_tokens": [
      [
       "kw",

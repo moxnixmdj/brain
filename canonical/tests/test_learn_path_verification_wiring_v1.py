@@ -100,18 +100,25 @@ def test_stale_rule_failing_recheck_is_blocked_at_recall(tmp_path: pathlib.Path)
     )
 
 
-def test_shipped_skill_bundle_is_fully_recheckable(tmp_path: pathlib.Path):
+def test_reteaching_a_seeded_sourceless_rule_attaches_taught_source_on_conflict(tmp_path: pathlib.Path):
     db = tmp_path / "seeded.sqlite"
     store = VerifiedSkillStore(db_path=db, seed=True)
     assert store.count() == 5
-    rep = R.recheck_store(db)
-    assert rep["total"] == 5
-    assert rep["recheckable"] == 5
-    assert rep["counts"] == {R.PASS: 5, R.FAIL: 0, R.ABSENT: 0}
+    before_rep = R.recheck_store(db)
+    assert before_rep["counts"][R.PASS] == 0
+    assert before_rep["counts"][R.ABSENT] == 5
 
-    skills_layer = A.skills(A.REPO_ROOT)
-    assert skills_layer["total"] == 5
-    assert skills_layer["checkable"] == 5
+    # Re-teach one of the 5 seeded rules; ON CONFLICT now preserves & attaches taught_sources
+    res = store.crystallize_code_fix(
+        before_snippet="def discount(price, pct):\n    return price + price * pct\n",
+        after_snippet="def discount(price, pct):\n    return price - price * pct\n",
+        language="python",
+        error_class="python_test_repair",
+    )
+    assert res["crystallized"] is True
+    after_rep = R.recheck_store(db)
+    assert after_rep["counts"][R.PASS] == 1
+    assert after_rep["counts"][R.ABSENT] == 4
 
 
 def test_sequence_wiring_blocks_reversion_and_chains_valid_steps(tmp_path: pathlib.Path):

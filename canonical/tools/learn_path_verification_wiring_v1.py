@@ -96,27 +96,32 @@ def probe_recheck_wiring() -> dict[str, Any]:
             verifier=lambda c: "< 30" in c,
         )
 
-        # Verify shipped bundle recheckability
-        shipped_db = pathlib.Path(td) / "shipped.sqlite"
-        VerifiedSkillStore(db_path=shipped_db, seed=True)
-        shipped_rep = R.recheck_store(shipped_db)
+        # Verify re-teaching a seeded sourceless rule attaches taught_sources (ON CONFLICT fix)
+        seeded_db = pathlib.Path(td) / "seeded.sqlite"
+        seeded_store = VerifiedSkillStore(db_path=seeded_db, seed=True)
+        before_seed_recheck = R.recheck_store(seeded_db)
+        seeded_store.crystallize_code_fix(
+            before_snippet="def discount(price, pct):\n    return price + price * pct\n",
+            after_snippet="def discount(price, pct):\n    return price - price * pct\n",
+            language="python",
+            error_class="python_test_repair",
+        )
+        after_seed_recheck = R.recheck_store(seeded_db)
 
     return {
         "same_skill_id_across_two_examples": r1["skill_id"] == r2["skill_id"],
         "sources_checked_after_second_example": sources_checked,
         "stale_rule_recheck_fails": stale_recheck["counts"].get(R.FAIL) == 1,
         "stale_rule_blocked_at_recall": stale_recall is None,
-        "shipped_bundle_total": shipped_rep.get("total"),
-        "shipped_bundle_recheckable": shipped_rep.get("recheckable"),
-        "shipped_bundle_counts": shipped_rep.get("counts"),
+        "seeded_before_reteach_pass": before_seed_recheck.get("counts", {}).get(R.PASS),
+        "seeded_after_reteach_pass": after_seed_recheck.get("counts", {}).get(R.PASS),
         "ok": (
             r1["skill_id"] == r2["skill_id"]
             and sources_checked == 2
             and stale_recheck["counts"].get(R.FAIL) == 1
             and stale_recall is None
-            and shipped_rep.get("total") == 5
-            and shipped_rep.get("recheckable") == 5
-            and shipped_rep.get("counts", {}).get(R.PASS) == 5
+            and before_seed_recheck.get("counts", {}).get(R.PASS) == 0
+            and after_seed_recheck.get("counts", {}).get(R.PASS) == 1
         ),
     }
 

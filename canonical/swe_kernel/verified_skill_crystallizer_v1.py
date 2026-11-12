@@ -1425,6 +1425,8 @@ class VerifiedSkillStore:
             if _recheck._rule_sources(rule):
                 if _recheck.recheck(rule).get("verdict") == _recheck.FAIL:
                     continue
+            elif _recheck.self_witness(rule).get("verdict") == _recheck.FAIL:
+                continue
             recorded = rule.get('contract')
             if required_verification_kind != 'CALLER_PREDICATE' and (recorded is None or rule.get('record_version') != 1):
                 continue
