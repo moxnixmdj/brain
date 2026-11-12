@@ -31229,16 +31229,16 @@
   "engines": 26,
   "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6792,
+  "research_index_records": 6793,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1972
+  "source_index_modules": 1973
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d8f84d2905d490ecc83a8b8f2845ec434ee004afbbeed52009f8adcdd28c8337"
+  "value": "79b3944535ce9b27e280fa445f8a4037f24cae169d52c80b07a40beecb718105"
  },
  "engines": [
   {
@@ -47323,7 +47323,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 7356,
+   "bytes": 7352,
    "headings": [
     "Problem 2 Status: Partial Progress, Not Solved",
     "Executive verdict",
@@ -47335,7 +47335,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "FINAL_SOLUTION_SUMMARY.md",
-   "sha256": "d2cd34802901db4da67ff558c096ea812bdd68a1e1c19634fee29713ddb23bc7",
+   "sha256": "8d82f9448295db9eaaa70daa1758327b7de92714bbaf24ac88a2f0005889ff70",
    "summary": "**Audit date:** 2026-11-12 **Authority:** NONE — repository measurements, not independent verification. **`truth.achieved`:** `false`.",
    "terms": {
     "11": 3,
@@ -75615,7 +75615,7 @@
   "included_source_count": 1199,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "11316764464440469f2b36afa8b74a0d7cdc6e18e557b2d92d5042686aa41cac"
+  "source_tree_digest": "671540b9b233a65dea3d87218a9f887126b3778ab7ccba50c91ac388f7d64733"
  },
  "research_index": [
   {
@@ -159484,6 +159484,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FUNCTION_FOUND_FROM_TASK_TEXT_V1",
+   "sha256": "5865accf11a87d3eb0c69745f31cdad7daf1e7615c7d8ace26e800ecdbb2a3b5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "found": 1,
+    "function": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -227617,7 +227638,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "936b6975ea067c994d4e05a99a05025dc78b88d9d4e58c5de54ce929130b2b1b",
+   "sha256": "cadc1f1ec212cdc88616b15bac3db46e3b7eebb534e475ec0a06324e97941b53",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -227838,7 +227859,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f764c673ff9a39ec27ea5ae7423e496a01e6f65f2d19da118ba1c4c1d76fe563",
+   "sha256": "5e490a1f7a945a90af49d1e722a69950852e6e7ba69c32a3b514d95d2c82528c",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -263624,6 +263645,48 @@
     "scoring": 1,
     "v1": 1,
     "weighted": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/function_the_task_text_points_at_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/function_the_task_text_points_at_v1.py",
+   "sha256": "c607fe3ad8a2347957926a448602a00b94d4d076c39071b253b825fec52cf6d0",
+   "summary": "Which function of a file a task's text points at, and the first few changes to try in each.",
+   "symbol_count": 8,
+   "symbols": [
+    "Function",
+    "_parsed",
+    "candidates",
+    "functions_of",
+    "order",
+    "text_of",
+    "words",
+    "written_into"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "each": 1,
+    "few": 1,
+    "file": 1,
+    "first": 1,
+    "function": 3,
+    "functions_of": 1,
+    "order": 1,
+    "parsed": 1,
+    "points": 2,
+    "task": 2,
+    "text": 2,
+    "text_of": 1,
+    "try": 1,
+    "v1": 1,
+    "words": 1,
+    "written_into": 1
    }
   },
   {
