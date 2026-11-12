@@ -481,10 +481,35 @@ def external_environment(root: pathlib.Path) -> dict[str, Any]:
             "contradictions": result["contradictions"]}
 
 
+def bottleneck(root: pathlib.Path) -> dict[str, Any]:
+    """Which explanation of the external-environment result survives a confound check.
+
+    The intuitive story -- "vague demonstrations transfer badly" -- is measured and rejected
+    (r = +0.18, wrong sign; +0.12 once first-success cost is held fixed). What survives is
+    whether a demonstration could be found at all. Reporting the rejected story as a bottleneck
+    would send the next pass in the wrong direction, which is why it is a layer here.
+    """
+    try:
+        from canonical.tools import what_a_demonstration_leaves_open_v1 as W
+        result = W.report()
+    except Exception as exc:                      # pragma: no cover
+        return {"layer": "bottleneck", "total": None, "checkable": None,
+                "error": f"{type(exc).__name__}:{exc}"[:120]}
+    rel = result["relationships"]
+    if rel.get("verdict") == "TOO_FEW_PAGES":
+        return {"layer": "bottleneck", "total": rel["n"], "checkable": 0,
+                "note": "too few pages to separate the explanations"}
+    return {"layer": "bottleneck", "total": rel["n"], "checkable": 1,
+            "note": (f"openness {rel['openness']['r_with_success']:+.2f} "
+                     f"-> {rel['openness']['partial_r_controlling_for_cost']:+.2f} controlling for "
+                     f"cost; cost {rel['cost']['r_with_success']:+.2f}; verdict {rel['verdict']}"),
+            "rerun": result["feasibility"]["status"]}
+
+
 def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any]:
     layers = [capabilities(root), skills(root), process_sites(root), test_modules(root),
               binary_predicates(root), receipts(root), rules_execute(root),
-              external_environment(root)]
+              external_environment(root), bottleneck(root)]
     for layer in layers:
         total, checkable = layer.get("total"), layer.get("checkable")
         layer["auditability"] = (round(checkable / total, 4)
