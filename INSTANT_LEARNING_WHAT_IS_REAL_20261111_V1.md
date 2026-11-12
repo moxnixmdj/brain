@@ -278,6 +278,88 @@ One test, `test_semantic_unification_v1.py::test_join_admission_direction_is_not
 it also fails on the base commit with my changes stashed. It is pre-existing, one of the 344 in
 the honest baseline, and is not attributed to this work.
 
+## 4c. Addendum 2: I built the generalization gate and measured it. It works. There is nothing to gate.
+
+§4b concluded the binding constraint was that nothing demands an abstraction work on code it was
+not fit on. I implemented that demand and measured it.
+
+`sleep_abstract` takes a new, backward-compatible `heldout_sources=` argument: a candidate must now
+rewrite at least `min_heldout_sites` sites in a corpus it was **not** fit on before it may be
+admitted. Default `None` means shipped behaviour is unchanged.
+
+To keep the measurement from being circular I used a **three-way split**, since gating on a set and
+then measuring generalization on that same set would be true by construction:
+
+```
+FIT       40 files   generate candidates, measure Delta B_exec   (fitting)
+VALIDATE  40 files   gate admission: candidate must fire here    (gating)
+TEST      40 files   never seen by fitting OR gating             (measurement)
+```
+
+Interleaved (`i % 3`) so all three sets span the same alphabetical region and the same subsystems.
+
+```
+arm        admit  rejected  fit-rw  val-rw  test-rw   ok
+-----------------------------------------------------------
+ungated        1         0       1       0        0  True
+gated          0         1       0       0        0  True
+                                              verdict: TOO_STRICT
+```
+
+**The gate works.** It was handed one candidate and it rejected that candidate — correctly, since
+that concept fires on 0 of 40 validation files. The mechanism is sound and is now in the tree.
+
+**But there was one candidate.** Not one hundred. Across earlier runs, 40 real files yield between
+1 and 6 candidates. So "add generalization pressure" was the right *principle* and the wrong
+*bottleneck*: a filter over one candidate cannot produce a library. §6 is re-ranked accordingly.
+
+### The actual bottleneck, and where the machinery for it already is
+
+Candidate identity in `sleep_abstract` is an **exact `ast.dump` match after alpha-renaming**. Two
+occurrences are "the same structure" only if they are syntactically identical once variables are
+renamed. Real code reuses structure *with variations* — a different literal, an extra term, a
+reordered operand — so exact-match anti-unification finds almost nothing across files. That is why
+1–6 candidates come out of 40 files, and why the ones that do come out are file-local idioms that
+fire nowhere else.
+
+The tree already contains the machine that handles *differing* subtrees:
+`higher_order_plotkin_lgg`, a Higher-Order Plotkin anti-unifier that lifts differing closed
+subtrees to value holes and differing open subtrees to higher-order callable parameters. It is
+real, and it is unreachable:
+
+```python
+# concept_library_v1.py, higher_order_plotkin_lgg
+ordered_loop = list(dict.fromkeys([*lb_ord1, *lb_ord2]))
+if not ordered_loop:
+    return None      # <-- every straight-line function exits here
+```
+
+Measured directly on the flagship shape from
+`THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md` — three period-table
+programs differing only by their tuple literal:
+
+```
+higher_order_plotkin_lgg(p3, p7) -> None
+```
+
+Not "found nothing". It refuses to look, because an induced period table has no loop. So the one
+mechanism that could abstract the project's own flagship failure is gated off for exactly that
+shape, and the reachable mechanism (exact-match) structurally cannot find it.
+
+Three independent gates, all now measured, all pointing at the same thing: **the compressor can
+only rediscover syntax it already matches exactly**. G1 constants (measured, harmful to fix),
+G2 `math.*` purity, G3 totality, plus the straight-line LGG gate. Fixing admission was never going
+to help, because almost nothing reaches admission.
+
+### A mistake of my own, recorded
+
+First run of this probe reported `REGRESSES` with `UNDEFINED:all,enumerate,isinstance,len,list,max`
+against the shipped wake path. That was a bug in **my probe**, not in the library:
+`_undefined_names` used `dir(__builtins__)`, and `__builtins__` is a *dict* inside an imported
+module, so `dir()` returned dict methods instead of builtin names. The rewrite was correct. I
+nearly reported a live correctness bug in shipped code that did not exist — the same class of
+error as the toy-corpus overclaim in §4, caught the same way, by checking before asserting.
+
 ## 5. Where the outside world actually is (2026-11), so "most advanced on the planet" is calibrated
 
 | Benchmark | Top of the board | Human | What it really says |
@@ -323,30 +405,35 @@ Two more external facts that bound the whole plan:
 
 ### Ranked moves
 
-**1. Put generalization into the objective.** (today's finding — this is now the binding
-constraint, and it supersedes the gate work I proposed earlier in the day)
-The compressor already admits (6 concepts on real code) and already rewrites its own corpus. What
-it never does is fire on a program it was not fit on: **0/20 held-out files, two split
-strategies**. Nothing in `sleep_abstract` asks it to. Concretely: split every corpus, admit only
-abstractions that compress *both* halves, and treat the held-out compression ratio as the
-admission score instead of `Delta B_exec`. The probe to reuse is
-`compression_real_corpus_probe_20261111_v1.py` — the harness, the teach/held control, and the
-parse/import/undefined-name checks are already written.
-*Falsification:* if held-out-gated admission yields 0 concepts on the real corpus, then the
-representation itself is the wall (G2/G3 territory) and the gates go back to the top of the list.
-Either outcome is informative; only one of them means the compression path is viable.
+**1. Make anti-unification see differing subtrees.** (the binding constraint, measured today)
+Everything else in this list is downstream of this. `sleep_abstract` identifies candidates by
+**exact `ast.dump` match after alpha-renaming**, so 40 real files yield 1–6 candidates and every
+one of them is a file-local idiom. The generalizing machine — `higher_order_plotkin_lgg`, which
+lifts differing subtrees to holes and to higher-order parameters — is already written and already
+wired into Stage 2B, and it returns `None` at `if not ordered_loop` for any straight-line
+function. Measured on the project's own flagship shape: `LGG(p3, p7) -> None`.
+*The experiment:* remove that one gate, run it over the 40-file corpus, and count candidates
+before vs after. Keep the held-out gate from §4c on, and require the new candidates to fire on
+VALIDATE and then TEST.
+*Falsification:* if removing the gate yields no new candidates that survive held-out gating, then
+exact-match was never the limit and the wall is the 4-hole arity cap plus the purity whitelist —
+in which case stop and write the corpus differently rather than tuning further.
 
-**2. Fix the organ bridge so multi-statement organs can enter `G_t`.**
+**2. Keep the held-out gate on.** It is in the tree now (`heldout_sources=`), it is backward
+compatible, and it demonstrably rejects non-generalizing candidates. It admitted nothing today
+only because one candidate reached it. Whatever produces candidates next must pass through it, and
+the acceptance bar is TEST rewrites, never VALIDATE rewrites.
+
+**3. Fix the organ bridge so multi-statement organs can enter `G_t`.**
 The library already supports statement-bodied concepts (`is_stmt_fn`, `render_helper_def`); only
 the one-word bridge predicate `len(fn.body) == 1 and isinstance(fn.body[0], ast.Return)` rejects
-them. Separately, `higher_order_plotkin_lgg` — a real Higher-Order Plotkin anti-unifier — returns
-`None` at `if not ordered_loop` before it will look at any straight-line function, so the
-multi-statement path is unreachable for straight-line code. Gate it on held-out compression, not
-on corpus compression: admitting one-off organs is how a library becomes a template menu.
+them. Do this after move 1, and gate it on held-out compression: admitting one-off organs is how a
+library becomes a template menu.
 
 *Demoted:* relaxing the totality gate (G3) and the `math.*` purity whitelist (G2) is no longer
-first. 6 concepts already get through the gates; opening more gates grows a library that does not
-generalize. It is worth doing only after move 1 exists to measure the result against.
+first, and neither is "put generalization in the objective" as I first wrote it. Generalization
+pressure is necessary but it filters ~1 candidate, so it cannot be the first move. The order is:
+generate more candidates, then gate them.
 
 **3. Make `G_t` growth the project's primary metric, and make CI fail when it is 0.**
 Every learning claim in this repo is currently argued from solve counts and speedups, which is

@@ -173,8 +173,14 @@ def _undefined_names(src: str) -> tuple[bool, str]:
             for d in node.decorator_list:
                 bound |= _bound_names(d)
     used = _uses_name(tree)
-    builtins = set(dir(__builtins__)) if isinstance(__builtins__, dict) else set(dir(__builtins__))
-    missing = sorted(n for n in used - bound - builtins if not n.startswith("__"))
+    # `__builtins__` is a MODULE in `__main__` and a DICT inside an imported module, so
+    # `dir(__builtins__)` silently returns dict methods instead of builtin names when this helper
+    # is imported. That produced a false UNDEFINED:<builtin names> report against a rewrite that
+    # was correct. Import the module explicitly.
+    import builtins as _bi
+
+    builtin_names = set(dir(_bi))
+    missing = sorted(n for n in used - bound - builtin_names if not n.startswith("__"))
     if missing:
         return False, "UNDEFINED:" + ",".join(missing[:6])
     return True, ""

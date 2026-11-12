@@ -708,6 +708,41 @@ def _expr_node_count(node: ast.AST) -> int:
     return sum(1 for _ in ast.walk(node) if isinstance(_, ast.expr))
 
 
+def _count_replaceable_sites(
+    mods: Sequence[ast.Module],
+    canon_ast: ast.expr,
+    node_count: int,
+    existing_ids: frozenset[str],
+) -> int:
+    """Count sites across `mods` that a candidate would rewrite. Counting, not rewriting: used to
+    score a candidate against a corpus it was NOT fit on, which is the only way to tell a reusable
+    abstraction from an idiom that happens to recur in the corpus it came from."""
+    target_dump = ast.dump(canon_ast, include_attributes=False)
+    total = 0
+    for mod in mods:
+        for fn in [n for n in ast.walk(mod) if isinstance(n, ast.FunctionDef)]:
+            bound_v = frozenset(
+                {a.arg for a in fn.args.args}
+                | {
+                    t.id
+                    for st in ast.walk(fn)
+                    if isinstance(st, ast.Assign)
+                    for t in st.targets
+                    if isinstance(t, ast.Name)
+                }
+            )
+            for node in ast.walk(fn):
+                if not isinstance(node, ast.expr) or _expr_node_count(node) != node_count:
+                    continue
+                c_res = _canonicalize_pure_subtree(node, bound_v, existing_ids)
+                if c_res is None:
+                    continue
+                c_ast, _h, _a = c_res
+                if ast.dump(c_ast, include_attributes=False) == target_dump:
+                    total += 1
+    return total
+
+
 def _can_render_modules(mods: Sequence[ast.Module]) -> bool:
     """True if every module survives `ast.unparse`. Used to skip a candidate whose corpus cannot
     be rendered, instead of letting one unparseable file kill the whole sleep phase."""
@@ -2027,9 +2062,32 @@ class CompoundingConceptLibrary:
         *,
         min_nodes: int = 5,
         max_new_concepts: int = 6,
+        heldout_sources: Sequence[str] | None = None,
+        min_heldout_sites: int = 1,
     ) -> dict[str, Any]:
-        """DreamCoder/Stitch Sleep phase: anti-unify subtrees across `program_sources` with `Delta B_exec < 0`."""
+        """DreamCoder/Stitch Sleep phase: anti-unify subtrees across `program_sources` with `Delta B_exec < 0`.
+
+        `heldout_sources` adds the generalization pressure the objective otherwise lacks. The
+        corpus objective (`Delta B_exec < 0`, Stitch node-savings) only ever rewards fitting the
+        corpus it was handed, and nothing in it asks whether an abstraction works anywhere else.
+        Measured 2026-11-11 on this repository's own sources: 6 concepts admitted, 6 and 3 files
+        of the fitting corpus rewritten, **0 of 20 held-out files**. When `heldout_sources` is
+        given, a candidate must additionally rewrite at least `min_heldout_sites` sites in a
+        corpus it was not fit on before it may be admitted.
+
+        The held-out corpus gates admission; it is NOT where generalization is measured. A
+        three-way split (fit / validate / test) is required to measure whether the gate transfers.
+        """
         existing_ids = frozenset(self._concepts.keys())
+        heldout_mods: list[ast.Module] = []
+        if heldout_sources:
+            for src in heldout_sources:
+                if not isinstance(src, str) or not src.strip():
+                    continue
+                try:
+                    heldout_mods.append(canonicalize_ast_via_egraph(ast.parse(src)))
+                except SyntaxError:
+                    continue
         parsed_programs: list[ast.Module] = []
         for src in program_sources:
             if not isinstance(src, str) or not src.strip():
@@ -2040,7 +2098,8 @@ class CompoundingConceptLibrary:
                 continue
 
         if not parsed_programs:
-            return {"schema": SCHEMA, "admitted_count": 0, "admitted": [], "total_concepts": len(self._concepts)}
+            return {"schema": SCHEMA, "admitted_count": 0, "admitted": [], "total_concepts": len(self._concepts),
+                "rejected_by_heldout": []}
 
         # Collect candidate canonicalized pure subtrees across all function bodies
         candidates: dict[str, dict[str, Any]] = {}
@@ -2101,6 +2160,7 @@ class CompoundingConceptLibrary:
                 _rendered_baseline.append(ast.unparse(_m))
             except (ValueError, SyntaxError, RecursionError):
                 continue
+        _rejected_heldout: list[dict[str, Any]] = []
         baseline_corpus_src = "\n\n".join(_rendered_baseline)
         baseline_bytes = executable_ast_bytes(baseline_corpus_src)
         admitted: list[dict[str, Any]] = []
@@ -2199,6 +2259,17 @@ class CompoundingConceptLibrary:
             if not ok_ver:
                 continue
 
+            heldout_sites = None
+            if heldout_mods:
+                heldout_sites = _count_replaceable_sites(
+                    heldout_mods, cand["canon_ast"], int(cand["node_count"]), existing_ids
+                )
+                if heldout_sites < int(min_heldout_sites):
+                    _rejected_heldout.append(
+                        {"expr_src": expr_src, "heldout_sites": heldout_sites}
+                    )
+                    continue
+
             entry = ConceptEntry(
                 concept_id=cid,
                 arity=arity,
@@ -2212,7 +2283,10 @@ class CompoundingConceptLibrary:
             )
             self._concepts[cid] = entry
             self._compiled_asts[cid] = ast.parse(expr_src, mode="eval")
-            admitted.append(entry.to_dict())
+            row = entry.to_dict()
+            if heldout_sites is not None:
+                row["heldout_sites"] = heldout_sites
+            admitted.append(row)
 
         # Stage 2: Higher-Order Algorithmic / Multi-Statement Function Skeleton Anti-Unification
         if len(admitted) < max_new_concepts:
@@ -2338,6 +2412,7 @@ class CompoundingConceptLibrary:
             "admitted_count": len(admitted),
             "admitted": admitted,
             "total_concepts": len(self._concepts),
+            "rejected_by_heldout": _rejected_heldout,
         }
 
 
