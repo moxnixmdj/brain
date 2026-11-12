@@ -235,12 +235,29 @@ class Text:
                     return True
         return False
 
-    def inside_operator(self, node):
-        """Is `node` an operand, or the thing a call, attribute or subscript is taken from?"""
+    def room(self, node):
+        """The least tightness an expression needs to stand where `node` stands without brackets."""
         parent = self.above.get(id(node))
-        return (isinstance(parent, (ast.BinOp, ast.UnaryOp, ast.BoolOp, ast.Compare, ast.Await, ast.Starred, ast.IfExp))
-                or (isinstance(parent, (ast.Attribute, ast.Subscript)) and parent.value is node)
-                or (isinstance(parent, ast.Call) and parent.func is node))
+        if isinstance(parent, ast.BinOp):
+            first = parent.right if isinstance(parent.op, ast.Pow) else parent.left
+            return tightness(parent) + (0 if first is node else 1)
+        if isinstance(parent, ast.UnaryOp):
+            return tightness(parent)
+        if isinstance(parent, ast.BoolOp):
+            return tightness(parent) + 1
+        if isinstance(parent, (ast.Compare, ast.Starred)):
+            return 6
+        if isinstance(parent, ast.IfExp):
+            return 1 if parent.orelse is node else 2
+        if (isinstance(parent, ast.Await) or (isinstance(parent, (ast.Attribute, ast.Subscript)) and parent.value is node)
+                or (isinstance(parent, ast.Call) and parent.func is node)):
+            return 15
+        return 0
+
+    def bracketed(self, node):
+        """Is `node` written directly inside its own pair of brackets?"""
+        start, end = self.span(node)
+        return self.raw[:start].rstrip()[-1:] == b"(" and self.raw[end:].lstrip()[:1] == b")"
 
     def comments(self):
         """Byte positions of every comment."""
@@ -382,7 +399,7 @@ def cut_at_blanks(pattern, node, text):
 
     def find(part, value):
         if part[0] == "?":
-            spots.append((text.span(value), part[1], tightness(value) if text.inside_operator(value) else 0))
+            spots.append((text.span(value), part[1], 0 if text.bracketed(value) else text.room(value)))
         elif part[0] == "N" and isinstance(value, ast.AST):
             for name, inner in part[2]:
                 find(inner, getattr(value, name, None))
@@ -590,6 +607,8 @@ def written_for(rule, node, bound, text):
             else:
                 inner, needed = text.of(bound[piece]), next(room)
                 loose = not isinstance(bound[piece], ATOMS) if every else tightness(bound[piece]) < needed
+                if isinstance(bound[piece], (ast.Tuple, ast.GeneratorExp)) and inner[:1] == "(" and inner[-1:] == ")":
+                    loose = False        # it brought its own brackets
                 parts.append("(%s)" % inner if loose else inner)
         written = "".join(parts)
         parsed = parse_like(node, rule.kind, written)
@@ -637,8 +656,8 @@ def rewrite(rules, source_text, what="the file", check_names=True):
         for (start, end), node, rule, bound in places:
             written, parsed = written_for(rule, node, bound, text)
             looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
-            if ((looser and text.inside_operator(node)) if attempt == 0 else looser if attempt == 1
-                    else rule.kind == "expression" and not isinstance(parsed, ATOMS)):
+            if ((rule.kind == "expression" and tightness(parsed) < text.room(node)) if attempt == 0
+                    else looser if attempt == 1 else rule.kind == "expression" and not isinstance(parsed, ATOMS)):
                 written = "(%s)" % written
             out += [text.raw[at:start], written.encode("utf-8")]
             at = end

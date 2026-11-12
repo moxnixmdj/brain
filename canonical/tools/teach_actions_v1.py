@@ -119,6 +119,89 @@ LESSONS: list[dict] = [
                 "    return sorted(lines, key=len)[-1]\n")},
         },
     },
+    {
+        "action": "edit_by_example_v1",
+        "parameters": ("target", "before", "after"),
+        "said_as": [
+            "edit {target} the way {before} was changed into {after}",
+            "make the same change in {target} that turned {before} into {after}",
+        ],
+        "answers": "edited {target} the way {before} was changed into {after}",
+        "first_example": {
+            "before": {
+                "lessons_q7/shown_q7/earlier.py": (
+                    "import unittest\n"
+                    "\n"
+                    "\n"
+                    "class LedgerTest(unittest.TestCase):\n"
+                    "    def test_total(self):\n"
+                    "        self.assertEquals(total([1, 2]), 3)\n"
+                    "        self.assertTrue(total([]) == 0)\n"
+                    "\n"
+                    "    def test_names(self):\n"
+                    "        self.assertEquals(names(), ['a', 'b'], 'names differ')\n"),
+                "lessons_q7/shown_q7/later.py": (
+                    "import unittest\n"
+                    "\n"
+                    "\n"
+                    "class LedgerTest(unittest.TestCase):\n"
+                    "    def test_total(self):\n"
+                    "        self.assertEqual(total([1, 2]), 3)\n"
+                    "        self.assertTrue(total([]) == 0)\n"
+                    "\n"
+                    "    def test_names(self):\n"
+                    "        self.assertEqual(names(), ['a', 'b'], 'names differ')\n"),
+                "lessons_q7/suite_q7.py": (
+                    "import unittest\n"
+                    "\n"
+                    "\n"
+                    "class RatesTest(unittest.TestCase):\n"
+                    "    def test_rate(self):\n"
+                    "        self.assertEquals(rate(2), 0.5)  # half\n"
+                    "        outcome = self.assertEquals(rate(4), 0.25, msg='quarter')\n"
+                    "        other.assertEquals(outcome, None)\n"),
+            },
+            "after": {"lessons_q7/suite_q7.py": (
+                "import unittest\n"
+                "\n"
+                "\n"
+                "class RatesTest(unittest.TestCase):\n"
+                "    def test_rate(self):\n"
+                "        self.assertEqual(rate(2), 0.5)  # half\n"
+                "        outcome = self.assertEqual(rate(4), 0.25, msg='quarter')\n"
+                "        other.assertEquals(outcome, None)\n")},
+        },
+        "second_example": {
+            "request": {"target": "checks/orders.py", "before": "checks/shown/as_it_was.py",
+                        "after": "checks/shown/as_it_is.py"},
+            "before": {
+                "checks/shown/as_it_was.py": (
+                    "def settle(total, rate):\n"
+                    "    if total == None:\n"
+                    "        return 0\n"
+                    "    missing = rate.value == None\n"
+                    "    return total == 0 or missing\n"),
+                "checks/shown/as_it_is.py": (
+                    "def settle(total, rate):\n"
+                    "    if total is None:\n"
+                    "        return 0\n"
+                    "    missing = rate.value is None\n"
+                    "    return total == 0 or missing\n"),
+                "checks/orders.py": (
+                    "def last(order, fallback):\n"
+                    "    while order.parent == None:  # top of the chain\n"
+                    "        order = order.following\n"
+                    "    unset = (order.note or fallback) == None\n"
+                    "    return unset == False\n"),
+            },
+            "after": {"checks/orders.py": (
+                "def last(order, fallback):\n"
+                "    while order.parent is None:  # top of the chain\n"
+                "        order = order.following\n"
+                "    unset = (order.note or fallback) is None\n"
+                "    return unset == False\n")},
+        },
+    },
 ]
 
 
