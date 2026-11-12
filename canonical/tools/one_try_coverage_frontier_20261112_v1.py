@@ -196,6 +196,9 @@ def report(record: dict[str, Any] | None = None) -> dict[str, Any]:
         "frontier": frontier(record),
         "limits": [
             "The counts are the record's, not a new run; the organ was not re-measured.",
+            "The record is a snapshot at 2026-11-12T17:19:18Z. edit_by_example_v1.py changed "
+            "again in PR #6778 (+122 lines), so 'run 2' is not the organ now; re-run the writer "
+            "before quoting these as current rates.",
             "No test was run in the record: precision is agreement with the developers.",
             "One record of fifteen pull requests, found because they repeat one change.",
             "Refusal counts are askings, not changes: fixing a class does not recover every "
@@ -228,8 +231,8 @@ def main(argv: list[str] | None = None) -> int:
           f"{'edited/asked':>14} {'organ changes':>13}")
     names = {
         "older_organ_whole_file": "older organ (run 1)",
-        "current_whole_file": "current organ (run 2)",
-        "current_leave_unshown": "leave unshown (run 3)",
+        "current_whole_file": "record run 2 (17:19Z)",
+        "current_leave_unshown": "record run 3 (17:19Z)",
         "ceiling_every_try_kept": "every try kept (run 6)",
     }
     for key, row in rep["dose"].items():
