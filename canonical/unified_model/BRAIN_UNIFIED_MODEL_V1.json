@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 356,
+  "knowledge_documents": 357,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6763,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "851a28e57365b983f05dc1081e2ce695bc2ca8d7b8efae8245ca67d32721d6dc"
+  "value": "b1df287557757a660873f9c37786e09eb00145350f3a1c81c28f3c0f247782c0"
  },
  "engines": [
   {
@@ -59375,6 +59375,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 19706,
+   "headings": [
+    "Why not just give it a try — the addendum the question deserves",
+    "1. What changed on the record since the last answer (same day)",
+    "2. The chain between \"give it a try\" and \"it learns permanently\"",
+    "3. What \"the most advanced coding agent on the planet\" would actually require — priced",
+    "4. So — am I right or wrong? (the literal scorecard, updated)",
+    "5. Kill list (now with external measurement, not just argument)",
+    "6. Receipts and re-runs (2026-11-12, this tree)",
+    "7. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHY_NOT_JUST_GIVE_IT_THE_TRY_20261112_V1.md",
+   "sha256": "10311a42bbbdbc191151381da02420f48058ac10c502851111a6ee52b408d5c7",
+   "summary": "**2026-11-12, second asking.** Branch `arena/bab32a2a-brain`. Authority: **NONE**. `truth.achieved` stays `false`. $0 incremental spend. Zero model dependency in every result-bearing path. This is an addendum, not a duplicate: the full scorecard, the 2026 frontier evidence and the ranked plan live in `WHAT_2026_SAYS_ABOUT_THIS_20261112_V1.md` (merged in #6734, on `main`). This note does two things",
+   "terms": {
+    "10": 9,
+    "149": 5,
+    "19": 6,
+    "2026": 9,
+    "38": 9,
+    "actions": 6,
+    "additive": 6,
+    "advanced": 7,
+    "advanced-coding": 6,
+    "after": 6,
+    "agent": 15,
+    "arxiv": 8,
+    "because": 6,
+    "boundary": 5,
+    "capabilities": 8,
+    "capability": 6,
+    "coding": 6,
+    "confinement": 7,
+    "days": 6,
+    "door": 13,
+    "each": 9,
+    "lessons": 6,
+    "link": 18,
+    "literal": 6,
+    "machine": 9,
+    "measured": 14,
+    "model": 8,
+    "most": 10,
+    "no": 21,
+    "not": 32,
+    "now": 17,
+    "one": 23,
+    "only": 12,
+    "owner": 13,
+    "real": 10,
+    "realistic": 6,
+    "receipts": 8,
+    "refusal": 8,
+    "run": 7,
+    "same": 6,
+    "skills": 6,
+    "step": 6,
+    "today": 7,
+    "tree": 11,
+    "try": 7,
+    "two": 9,
+    "verified": 6,
+    "wall": 6
+   },
+   "title": "Why not just give it a try — the addendum the question deserves",
+   "title_terms": [
+    "addendum",
+    "deserves",
+    "give",
+    "just",
+    "not",
+    "question",
+    "try"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 8168,
    "headings": [
     "Project Brain Canonical",
@@ -72433,10 +72511,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1158,
+  "included_source_count": 1159,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "149b74c2346a771adc2477a70e41da6638cf702b51c2f7986cbe60f8ef93c62b"
+  "source_tree_digest": "1a6c2a23ccb66b4876dc2a0579f61fa250a55a326fd11480a8aa601ad3155e60"
  },
  "research_index": [
   {
