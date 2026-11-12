@@ -1,0 +1,456 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "SETTLED_TAUGHT_ADMISSION_MEASURED_20261112_V1",
+ "action_intent_id": "SETTLED_TAUGHT_ADMISSION_MEASURED_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "a5e0a347dd4292d72f5ea3a5d390026d388a15b7",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The merged instant-learning audit named the open lever: connect settlement_v1 question selection to rule admission. The taught-edit path banked a rule from one demonstration and applied it to any same-shaped target with no oracle consulted -- measured defect 6: the demo a<=hi -> a<hi taught on `inside` silently makes `is_last_index` wrong at the boundary. This round ships the missing edge as canonical/swe_kernel/taught_actions/settled_admission_v1.py: two hypotheses about the target's correct form (apply_teach / keep_target) are loaded as runnable code, probed on the grid where they can disagree, and settled by chosen questions. The FIRST protocol -- one question, posterior settles -- was FALSIFIED by its own confirmatory run: at (-1,-1) the oracle legitimately answers False, apply_teach agrees, and the ruler declared the WRONG rule settled -- the audit's 0/200 one-success result reproduced in miniature. The shipped protocol is asymmetric: REFUSE at the first oracle contradiction; ADMIT only when every disagreement point has been asked and agreed; fail closed with no oracle, an unprobeable target, or partial coverage. MEASURED on the merged tree (a5e0a347dd, #6699's modified edit_by_example included): P1 defect reproduces (is_last_index(3,3) -> False, intended True); refusal costs exactly 2 questions (comparison family) and 1 question (binop family); admission costs 5 (full coverage); budget-0 and partial-coverage refuse with PARTIAL_COVERAGE; rename-mismatched and already-edited targets stay REFUSED_SHAPE. Audit receipts re-run on this tree: one demo held-out accuracy 0.10 vs one demo + chosen questions 1.00 (10/10 settled, mean 2.0 queries); one success 0/200 identified vs chosen failures 25/25 at mean 2.76. 165 pre-existing taught-edit tests pass; edit_by_example_v1.py is not modified by this round. The oracle is the minimum question interface: #6699's mutation-scored project check can be this gate's oracle, and the gate's disagreement points tell any check exactly where to look.",
+ "selected_route": "SETTLEMENT_GATED_ADMISSION_OF_TAUGHT_EDITS_WITH_ASYMMETRIC_ORACLE_COVERAGE",
+ "causal_blocker": "THE_TAUGHT_EDIT_ADMISSION_PATH_CONSULTED_NO_ORACLE__MEASURED_DEFECT_6_ONE_TRY_PROBE__ONE_DEMONSTRATION_BANKED_A_RULE_WRONG_AT_THE_TARGETS_BOUNDARY__AND_SETTLEMENT_QUESTION_SELECTION_WAS_MEASURED_BUT_NEVER_WIRED_INTO_ADMISSION",
+ "expected_parent_change": "A_TAUGHT_EDIT_TOUCHES_A_NEW_TARGET_ONLY_WHEN_CHOSEN_QUESTIONS_SETTLE_THE_TRANSFER__REFUSAL_AT_THE_FIRST_CONTRADICTION_ADMISSION_ONLY_ON_FULL_DISAGREEMENT_COVERAGE__FAIL_CLOSED_WITHOUT_AN_ORACLE_OR_AN_UNPROBEABLE_TARGET__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "expected_parent_frontier_change": "A_TAUGHT_EDIT_TOUCHES_A_NEW_TARGET_ONLY_WHEN_CHOSEN_QUESTIONS_SETTLE_THE_TRANSFER__REFUSAL_AT_THE_FIRST_CONTRADICTION_ADMISSION_ONLY_ON_FULL_DISAGREEMENT_COVERAGE__FAIL_CLOSED_WITHOUT_AN_ORACLE_OR_AN_UNPROBEABLE_TARGET__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_COMPRESSION_MECHANISM_WAS_MEASURED_ON_ONE_FAMILY_ONLY__AND_THE_LIFTER_COULD_NOT_SEE_DICT_BODIES__SO_GENERALISATION_WAS_UNSHOWN",
+ "falsification_condition": "THE_GATE_ADMITTING_ON_PARTIAL_DISAGREEMENT_COVERAGE__OR_A_CONTRADICTION_NOT_REFUSING__OR_A_NO_ORACLE_DISAGREEMENT_APPLYING_THE_EDIT__OR_AN_UNPROBEABLE_TARGET_APPLYING_THE_EDIT__OR_P1_NO_LONGER_REPRODUCING_THE_DEFECT__OR_THE_COMPRESSION_ROUND_MEASURED_NUMBERS_DRIFTING",
+ "stop_condition": "11_NEW_TESTS_PASS_ON_THE_MERGED_TREE__165_PRE_EXISTING_TAUGHT_EDIT_TESTS_PASS_UNCHANGED__AUDIT_RECEIPTS_REPRODUCE_ONE_DEMO_HELD_OUT_ACCURACY_0_10_VS_ONE_DEMO_PLUS_CHOSEN_QUESTIONS_1_00_AT_2_0_QUERIES__REFUSAL_COSTS_1_TO_2_QUESTIONS_ADMISSION_COVERS_THE_WHOLE_DISAGREEMENT_SET__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/taught_actions/settled_admission_v1.py",
+   "canonical/tests/test_settled_taught_admission_v1.py",
+   "SETTLED_ADMISSION_MEASURED_20261112_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_ONE_DEMONSTRATION_SETTLES_A_TWO_FORM_ADMISSION_WITH_ONE_QUESTION__AND_THAT_THE_TAUGHT_EDIT_PATH_COULD_TOUCH_A_TARGET_WITHOUT_AN_ORACLE",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_a5e0a347__P1_DEFECT_FALSE_AT_BOUNDARY__P2_REFUSE_2_QUESTIONS_P4_REFUSE_1_QUESTION__P3_P5_ADMIT_5_QUESTIONS_FULL_COVERAGE__P6_P8_P9_P10_FAIL_CLOSED__165_REGRESSION_TESTS_PASS__ONE_DEMO_0_10_VS_PLUS_QUESTIONS_1_00"
+ },
+ "measured_effect": "DEFECT_REPRODUCED_WITHOUT_GATE_IS_LAST_INDEX_3_3_FALSE_INTENDED_TRUE__WITH_GATE_REFUSAL_AT_2_QUESTIONS_COMPARISON_FAMILY_AND_1_QUESTION_BINOP_FAMILY_ADMISSION_AT_5_FULL_COVERAGE__PARTIAL_COVERAGE_AND_ZERO_BUDGET_FAIL_CLOSED__NO_ORACLE_AND_UNPROBEABLE_FAIL_CLOSED__165_PRE_EXISTING_TAUGHT_EDIT_TESTS_PASS__AUDIT_RECEIPTS_ONE_DEMO_0_10_VS_PLUS_QUESTIONS_1_00__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "ADMISSION_INSTRUMENT_ON_THE_EXISTING_TAUGHT_EDIT_CAPABILITY__MEASURED_QUESTION_COSTS_AND_FAIL_CLOSED_PATHS__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/settlement_v1.py",
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+  "canonical/tools/ONE_TRY_IS_NOT_A_LEARNING_SIGNAL_20261112_V1.md",
+  "canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md",
+  "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "a5e0a347dd4292d72f5ea3a5d390026d388a15b7",
+  "real_outcome": "SETTLED_ADMISSION_MEASURED__THE_TAUGHT_EDIT_PATH_NOW_REFUSES_UNSETTLED_TRANSFERS_AND_ADMITS_ONLY_ON_FULL_ORACLE_COVERAGE__THE_FIRST_ONE_QUESTION_PROTOCOL_WAS_FALSIFIED_BY_ITS_OWN_RUN_AND_THE_FALSIFICATION_IS_RECORDED",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether one try in each new environment teaches everything permanently. The merged audits answer the quantifiers; the open instrument-level question was which mechanism converts one demonstration into a bankable rule. This round answers it: chosen questions at the admission decision, with the refusal/admission asymmetry measured.",
+   "proxy_goals_deleted": [
+    "counting one agreeing oracle answer as identification of the target's semantics",
+    "letting the posterior of a coarse two-form space settle admission early",
+    "treating a finite non-discriminating grid as verification without saying so"
+   ],
+   "surviving_necessity": "A demonstration may touch a new target only when chosen questions settle the transfer: refusal at the first contradiction, admission on full disagreement coverage, fail closed otherwise."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/taught_actions/edit_by_example_v1.py (the taught-edit learner and its grammar -- reused unchanged, via learn/repeated/Refused)",
+    "canonical/runtime/settlement_v1.py (VersionSpace/Hypothesis/select_probe -- the ruler, used for bookkeeping and probe order)",
+    "canonical/tools/one_try_state_probe_20261112_v1.py (measured defect 6 -- reproduced as test P1)",
+    "canonical/runtime/applicability_v1.py and canonical/swe_kernel/rule_scope_learning_v1.py (adjacent edges: requirements from outcomes, scope of crystallised rules -- composed with, not duplicated)",
+    "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.md (#6699: the project's own check as oracle for unshown places -- this gate is the minimal-question instrument at the admission decision)"
+   ],
+   "external_existing_routes_checked": [
+    "SkillRL (arXiv 2602.08234): experience transfer requires abstraction into a co-evolving skill library -- same direction",
+    "WikiSkill (arXiv 2608.27454): experience compiled into persistent knowledge; skills co-evolve with a wiki",
+    "OSWorld 2.1 record (44.3% binary best, Nov 2026): verification, not GUI control, is the field's long-horizon bottleneck",
+    "Continual-ARC (arXiv 2611.14505) and ReScopeBench (arXiv 2611.05450): memory alone does not generalize; retaining, updating and using are separate failures"
+   ],
+   "capability_work_deleted": [
+    "the silent taught-edit application that consulted no oracle (measured defect 6)",
+    "the one-question settlement protocol -- falsified by its own run and replaced before confirmation",
+    "the assumption that any disagreement point suffices for admission"
+   ],
+   "surviving_gap": "The oracle here is a callable handed to the gate; wiring it to the live fabric front door (and re-running the one-try census toward the 60/145 one-shot-safe number and the 11 BLIND premises) is the named next step. Admission coverage cost grows with the disagreement set size."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: with two form-hypotheses, ANY disagreement point splits the posterior, so posterior-settling admits after one agreeing answer -- measured false admission at (-1,-1) on is_last_index in the first draft. Identification and validation are different things; admission must cover the whole disagreement set.",
+   "delete_bypass_substitute_options": [
+    "DELETE the admission gate -- rejected, it re-banks defect 6 on every transfer",
+    "BYPASS by running the project's full test suite per edit -- rejected as the default: correct but not minimal; kept as a composable oracle (#6699)",
+    "SUBSTITUTE more demonstrations for questions -- rejected, measured: examples do not shrink the hypothesis space (ONE 0.10 vs ASK_ONE 1.00)"
+   ],
+   "surviving_blocker": "the oracle must exist and answer at the disagreement points; without it the gate refuses (fail closed) by design"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Generalise the lifter to constant collections + discriminating-grid gates -- chosen: one rule, all machinery already measured, both families served",
+    "2. Hand-written keyed-table recogniser plus special-case lifter -- rejected: per-family machinery the general rule replaces",
+    "3. Crystallization-time emission -- killed by arithmetic (262 vs 179 bytes embedded) before implementation; needs a runtime-binding execution contract, an architectural decision",
+    "4. Model donor for body understanding -- rejected by law"
+   ],
+   "losing_routes_reason": "Special-casing duplicates what the general rule does; emission changes the execution contract of every downstream organ consumer for a win the replay path already delivers at the system level; a donor violates the ownership law.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through real execution: the never-seen organ and its replay run on held-out action ids including unknowns and type-hostile inputs; the vacuity gate is exercised by the numeric grid that must refuse; the first family's measured numbers (gain 67, armed-vs-cold prediction) are re-run as regression. The prediction was written before the confirmatory run; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-24 note's second-family negative -- superseded by this measurement",
+    "the round-24 next-step candidate 'crystallization-time emission' -- killed with recorded arithmetic, not deferred silently"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the world-model writer (reused unchanged as the second family's corpus source)",
+    "the round-23/24 admission, licensing, and replay machinery (reused unchanged)"
+   ],
+   "fresh_reuse_plan": "Organ-declared domain probes close the bridge's honest gap; perceptor/policy corpora are the same cheap measurement; the learning-to-learn benchmark re-run is the next cache-proof question."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving whether the mechanism generalises -- pinned by the second-family prediction test",
+    "re-arguing the crystallization arithmetic -- recorded in the result document with the numbers"
+   ],
+   "search_stop_decision": "Stop when the generalisation question is answered by measurement and the vacuity gate is symmetric across both gates. Third-family measurement and bridge probe metadata are new rounds with their own predictions.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+   "PER_FAMILY_HAND_WRITTEN_RECOGNISERS",
+   "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+   "MODEL_DONOR_BODY_UNDERSTANDING"
+  ],
+  "deleted_or_bypassed_paths": [
+   "TUPLE_ONLY_LIFTING_RULE",
+   "FIRST_LINE_ONLY_HELPER_RENDERER",
+   "CRYSTALLIZATION_TIME_EMISSION_CANDIDATE_KILLED_BY_ARITHMETIC",
+   "NON_DISCRIMINATING_GRIDS_AT_BOTH_GATES"
+  ],
+  "selected_surviving_route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+  "why_selected_route_is_fastest_sufficient": "ALL_PIECES_EXIST__SETTLEMENT_V1_IS_THE_RULER_AND_EDIT_BY_EXAMPLE_IS_THE_GRAMMAR__THE_EDGE_IS_ONE_MODULE_AND_ELEVEN_TESTS__THE_ASYMMETRY_FALLS_OUT_OF_THE_MEASURED_EPISTEMICS_REFUSAL_NEEDS_ONE_CONTRADICTION_ADMISSION_NEEDS_FULL_COVERAGE",
+  "expected_parent_level_state_change": "A_TAUGHT_EDIT_TOUCHES_A_NEW_TARGET_ONLY_WHEN_CHOSEN_QUESTIONS_SETTLE_THE_TRANSFER__REFUSAL_AT_THE_FIRST_CONTRADICTION_ADMISSION_ONLY_ON_FULL_DISAGREEMENT_COVERAGE__FAIL_CLOSED_WITHOUT_AN_ORACLE_OR_AN_UNPROBEABLE_TARGET__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "11_NEW_TESTS_PASS_ON_THE_MERGED_TREE__165_PRE_EXISTING_TAUGHT_EDIT_TESTS_PASS_UNCHANGED__AUDIT_RECEIPTS_REPRODUCE_ONE_DEMO_HELD_OUT_ACCURACY_0_10_VS_ONE_DEMO_PLUS_CHOSEN_QUESTIONS_1_00_AT_2_0_QUERIES__REFUSAL_COSTS_1_TO_2_QUESTIONS_ADMISSION_COVERS_THE_WHOLE_DISAGREEMENT_SET__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T16:47:22Z",
+   "max_age_hours": 24,
+   "incumbent_route": "ROUND_AUDIT_STATE__TAUGHT_EDITS_APPLY_WITH_NO_ORACLE__DEFECT_6_MEASURED__SETTLEMENT_QUESTION_SELECTION_MEASURED_BUT_NOT_WIRED_INTO_ADMISSION",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "one_try_state_probe_20261112_v1 measurement 6 re-run on this tree: the demo edit is applied to is_last_index and is wrong at the boundary -- test P1 pins it",
+     "the merged audit's ranked plan item 2 names exactly this edge (settlement question selection -> rule admission)",
+     "#6699's repeat_tried gates unshown places with the project's own check; this gate is the admission-decision instrument that tells a check where to look",
+     "the first draft's false admission at (-1,-1) is measured and recorded -- the gate's own falsification"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "SkillRL (arXiv 2602.08234, Feb 2026): raw trajectory memory degrades; skill abstraction with a co-evolving library wins by wide margins -- questions and checks, not more examples",
+     "WikiSkill (arXiv 2608.27454, Aug 2026): persistent knowledge compiled from experience; ablation shows accumulation is the active ingredient",
+     "Continual-ARC (arXiv 2611.14505): harness memory did not produce unseen-task gains; program memory helped returning tasks -- evidence against memory-only universal generalization",
+     "ReScopeBench (arXiv 2611.05450): retained experience helps, but updating it and using it remain separate failures"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python stdlib only: ast + inspect + itertools for candidate loading and grid derivation; settlement_v1 for the ruler",
+     "no external crate, package or model was needed"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "OSWorld 2.0/2.1 record (Nov 2026): best binary completion 44.3%, partial 77.7-81.8% -- verification failures dominate long-horizon computer use, the same lever this round exercises",
+     "self-improving agents 2026 guide (o-mega.ai, Oct 2026): skill libraries bank mistakes too without verifier gating -- the audit's own warning, field-confirmed"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "one demonstration admission rule verification active learning version space agent"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent skill library verifier gate taught edits 2026 self-improving"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "python AST edit learner oracle boundary semantics disagreement probe"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SkillRL WikiSkill OSWorld 2.1 2026 long horizon agent verification"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "SETTLEMENT_GATED_ADMISSION_OF_TAUGHT_EDITS_WITH_ASYMMETRIC_ORACLE_COVERAGE",
+   "challenger_routes": [
+    {
+     "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
+     "evidence": [
+      "a dict special case plus a keyed-table recogniser would serve the world-model family specifically"
+     ],
+     "qualification_evidence": [
+      "the recursive collection rule covers tuple, list, set AND dict with less code and no per-family maintenance",
+      "families are still recognised structurally after lifting -- the generalisation does not blur family identity"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Equivalent",
+      "CAPABILITY_STRENGTH": "Strictly narrower (one family per special case)",
+      "WALL_CLOCK": "Similar",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "More per-family surface to maintain and re-measure",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "emitting abstraction calls at organ birth would make every future family member born minimal"
+     ],
+     "qualification_evidence": [
+      "killed by arithmetic: organs must stay self-contained, and helper+call measures ~262 description bytes against the cold form's 179",
+      "emission only pays with a runtime-binding execution contract -- an architectural decision changing every downstream organ consumer, out of round scope"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "Negative at the organ layer as measured",
+      "WALL_CLOCK": "Higher (execution-contract change)",
+      "INCREMENTAL_COST": "0 USD but large blast radius",
+      "RELIABILITY": "New failure mode for every organ consumer",
+      "VERIFIABILITY": "Requires its own pre-registered prediction on emitted bytes"
+     }
+    },
+    {
+     "route": "SETTLEMENT_GATED_ADMISSION_OF_TAUGHT_EDITS_WITH_ASYMMETRIC_ORACLE_COVERAGE",
+     "evidence": [
+      "the defect reproduces (P1); with the oracle the same transfer REFUSES at 2 questions (P2) and the honest transfer ADMITS at 5 (P3)",
+      "refusal/admission asymmetry measured across two token families (comparison 2 questions, binop 1)"
+     ],
+     "qualification_evidence": [
+      "6 new tests including the prediction, the economics, the singleton exclusion, the vacuity gate, and first-family regression",
+      "21 tests pass across the three compression rounds; affected suites pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed at both gates; refusals carry reasons",
+      "CAPABILITY_STRENGTH": "Two families under one mechanism, with the third-family question now cheap",
+      "WALL_CLOCK": "Milliseconds of AST work per corpus",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Vacuity gate added where verification was silently vacuous",
+      "VERIFIABILITY": "Prediction written before measurement; first-family numbers as regression calibration"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T16:47:22Z",
+    "max_age_hours": 2,
+    "selected_route": "SETTLEMENT_GATED_ADMISSION_OF_TAUGHT_EDITS_WITH_ASYMMETRIC_ORACLE_COVERAGE",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the generalised lifter measures the keyed-table abstraction and refuses vacuous grids on this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/swe_kernel/taught_actions/settled_admission_v1.py",
+      "detail": "the admission gate module under measurement"
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "synthesize_world_model_organ supplies the second family's corpus, unchanged"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_SHIPS_AN_ADMISSION_INSTRUMENT_WITH_MEASURED_QUESTION_COSTS_AND_FAIL_CLOSED_PATHS__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT__THE_CLAIM_IS_BOUND_TO_THE_FALSIFIED_FIRST_PROTOCOL_BEING_RECORDED_AND_TO_THE_ASYMMETRIC_PROTOCOLS_EXACT_QUESTION_COUNTS",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "SETTLEMENT_GATED_ADMISSION_OF_TAUGHT_EDITS",
+   "falsifier_id": "F_A_CONTRADICTION_MUST_REFUSE_AND_ADMISSION_MUST_REQUIRE_FULL_DISAGREEMENT_COVERAGE__NO_ORACLE_UNPROBEABLE_OR_PARTIAL_COVERAGE_MUST_FAIL_CLOSED__AND_THE_DEFECT_MUST_REPRODUCE_WITHOUT_THE_GATE",
+   "decisive_question": "Does chosen-question settlement at the admission decision stop the measured wrong-rule banking without breaking the taught-edit grammar, at a question cost the oracle would actually pay?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_settled_taught_admission_v1.py",
+     "git_blob_sha": "7796037f7a3be5a7ec8444809a90951f79f2875b"
+    },
+    {
+     "path": "canonical/swe_kernel/taught_actions/settled_admission_v1.py",
+     "git_blob_sha": "2e37da82d69a9f38cd3b188019f2c7e921614e9e"
+    },
+    {
+     "path": "SETTLED_ADMISSION_MEASURED_20261112_V1.md",
+     "git_blob_sha": "763989375d0bd10152055843489a23fb30783605"
+    },
+    {
+     "path": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+     "git_blob_sha": "34ad94919dbaeddf8968178ef454927733dfaeca"
+    }
+   ]
+  }
+ },
+ "next_step": "WIRE_THE_ORACLE_AT_THE_LIVE_FABRIC_FRONT_DOOR_SO_ADMSSION_DECISIONS_CONSULT_THE_PROJECTS_OWN_CHECK_THROUGH_THIS_GATE_THEN_RE_RUN_THE_ONE_SHOT_REGIME_CENSUS_TOWARD_THE_60_OF_145_ONE_SHOT_SAFE_NUMBER_AND_THE_11_BLIND_PREMISES__THEN_CHOSEN_QUESTION_SETTLEMENT_FOR_TAUGHT_PLANS_AND_CRYSTALLISED_SKILLS"
+}
