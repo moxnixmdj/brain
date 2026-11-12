@@ -84,6 +84,63 @@ def _outputs_of(receipt):
     return outs
 
 
+#: Ceiling on precondition facts sensed before a chain runs. Bounds the per-chain cost of the
+#: snapshot; the universe is the declared `requires` of the capabilities that could serve these
+#: clauses, which is small in practice.
+MAX_PRECONDITION_FACTS = 64
+
+
+def precondition_context(clauses, root, goal, extra_capability_ids=()):
+    """The facts observed TRUE **before** the plan runs. Never the facts it produced.
+
+    WHY NOT `established`. `chain_v1` starts `established` empty and fills it from each verified
+    step's `provides`. By the end of a successful chain it holds exactly the effects the plan
+    itself created, and by the end of a failed chain it holds a shorter prefix of them. Handing
+    that to a learner as "the state" would teach a CIRCULAR requirement -- "this plan requires the
+    effects this plan produces" -- which is true of every success and false of every failure by
+    construction. It would look like a perfectly identified boundary and would then withhold the
+    plan in every fresh state, because a fresh state has none of those effects yet. That is
+    `false lesson propagation`: a spurious causal lesson drawn from a handful of trajectories and
+    applied where it does not hold.
+
+    So the snapshot is taken here, before the first side effect, from the world itself: the
+    declared `requires` of the capabilities that could serve these clauses, each decided by
+    `world_probe_v1`. A fact the perceiver cannot decide is simply absent -- it is not guessed,
+    and it cannot become a spurious discriminator.
+
+    Fail-open by construction: any error returns None, and a None context means macro_v1 behaves
+    exactly as it did before this existed.
+    """
+    try:
+        from canonical.runtime import grounded_action_v1 as GA
+        from canonical.runtime import world_probe_v1 as WP
+
+        registry = GA.load_registry()
+        wanted = {str(cid) for cid in (extra_capability_ids or ()) if cid}
+        for clause in clauses or ():
+            for candidate in GA.keyword_candidates(str(clause), registry, k=8):
+                cid = str(candidate.get("capability_id") or "")
+                if cid:
+                    wanted.add(cid)
+        facts = set()
+        for cid in sorted(wanted):
+            entry = registry.get(cid)
+            if isinstance(entry, dict):
+                facts.update(str(f) for f in (entry.get("requires") or ()) if f)
+        if not facts:
+            return frozenset()
+        observed = set()
+        for fact in sorted(facts)[:MAX_PRECONDITION_FACTS]:
+            try:
+                if WP.probe_effect(fact, goal=str(goal), goal_paths=(), root=root).get("true") is True:
+                    observed.add(fact)
+            except Exception:
+                continue
+        return frozenset(observed)
+    except Exception:
+        return None
+
+
 def run(goal, root=None, memory=True, max_steps=8):
     """Plan a chain from one sentence, bind it fully, then execute it."""
     root = Path(root) if root is not None else ROOT
@@ -110,6 +167,27 @@ def run(goal, root=None, memory=True, max_steps=8):
         except Exception:
             macro = None
     used_macro = False
+
+    # Taken BEFORE the first side effect, and reused unchanged for both the success and the
+    # failure record, so the two are descriptions of the same starting state.
+    preconditions = None
+    macro_out_of_scope = False
+    if memory and len(clauses) >= 2:
+        remembered = []
+        if isinstance(macro, dict):
+            remembered = [step.get("capability_id") for step in (macro.get("plan") or [])
+                          if isinstance(step, dict)]
+        preconditions = precondition_context(clauses, root, goal, remembered)
+        # The offer is withdrawn only where the retained evidence says the plan does not apply.
+        # An undetermined or ambiguous boundary withdraws nothing.
+        if isinstance(macro, dict) and preconditions is not None:
+            try:
+                from canonical.runtime import macro_v1 as MC
+                if not MC.applicable(str(macro.get("key") or ""), preconditions):
+                    macro_out_of_scope = True
+                    macro = None
+            except Exception:
+                pass
 
     for index, clause in enumerate(clauses):
         prefer = None
@@ -142,7 +220,7 @@ def run(goal, root=None, memory=True, max_steps=8):
             if isinstance(macro, dict):
                 try:
                     from canonical.runtime import macro_v1 as MC
-                    MC.note_failure(str(macro.get("key") or ""))
+                    MC.note_failure(str(macro.get("key") or ""), context=preconditions)
                 except Exception:
                     pass
             break
@@ -158,13 +236,17 @@ def run(goal, root=None, memory=True, max_steps=8):
     if memory and failed_at is None and len(clauses) >= 2:
         try:
             from canonical.runtime import macro_v1 as MC
-            learned = MC.record(clauses, steps)
+            learned = MC.record(clauses, steps, context=preconditions)
         except Exception:
             learned = None
     return {
         "schema": SCHEMA,
         "ok": failed_at is None and bool(steps),
         "used_macro": bool(used_macro),
+        "macro_withheld_out_of_scope": bool(macro_out_of_scope),
+        "preconditions_observed": (
+            None if preconditions is None else sorted(preconditions)
+        ),
         "macro_recorded": bool(learned),
         "goal": goal,
         "clause_count": len(clauses),
