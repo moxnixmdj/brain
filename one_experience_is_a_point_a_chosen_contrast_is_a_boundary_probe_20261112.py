@@ -248,11 +248,14 @@ def main() -> int:
         "chosen_contrast_scopes": bool(chosen["most_general"]),
         "chosen_uses_fewer_queries": chosen["queries_after_the_demonstration"] < passive["queries_after_the_demonstration"],
         "chosen_beats_the_killed_heuristic": chosen["survivors_final"] < fewest["survivors_final"],
-        # The remaining ambiguity is real, not a defect: manifest.json cannot exist without
-        # structured.json, so those two requirements are indistinguishable in EVERY reachable
-        # world. The selector must say so and stop rather than spend the rest of the budget.
-        "stopped_at_the_reachability_limit": any(
-            t.get("status") == CS.NO_INFORMATIVE_STATE for t in chosen["trace"]),
+        # CORRECTED FINDING. This arm used to end AMBIGUOUS with two survivors that no reachable
+        # state could split, and that was recorded as a permanent reachability limit. It was not
+        # one: `manifest.json` implies `structured.json` by the sensor's own kind specs, so
+        # {manifest, structured} IS {manifest} -- one requirement spelled twice. Reducing by that
+        # entailment turns the SAME two real runs into identification. The limit was double-counting.
+        "chosen_contrast_identifies": chosen["identified"],
+        "repetition_still_never_identifies": not passive["identified"],
+        "the_killed_heuristic_still_never_identifies": not fewest["identified"],
         "unreachable_states_were_detected_not_recorded": report["distinct_reachable"] < report["requested_subsets"],
         "held_out_prediction_perfect": bool(chosen["held_out_total"]) and chosen["held_out_correct"] == chosen["held_out_total"],
     }
