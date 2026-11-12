@@ -32,41 +32,51 @@ boundary is what stops this becoming a table of guesses.
 
 from __future__ import annotations
 
-#: (the object the old name is read from, the old name, the name it is an alias of).
-#: The object is spelled as code reads it, `self` included, because `self.assertEquals` and
-#: `self.assertRaisesRegexp` are how the deprecation actually appears; `None` means any object,
-#: used only where the old name was never anything but the alias.
-ALIASES: tuple[tuple[str | None, str, str], ...] = (
-    # unittest: deprecated aliases, removed in 3.12, aliased back for 3.11 (bpo-45162).
-    (None, "assertEquals", "assertEqual"),
-    (None, "assertNotEquals", "assertNotEqual"),
-    (None, "assertAlmostEquals", "assertAlmostEqual"),
-    (None, "assertNotAlmostEquals", "assertNotAlmostEqual"),
-    (None, "assertRegexpMatches", "assertRegex"),
-    (None, "assertNotRegexpMatches", "assertNotRegex"),
-    (None, "assertRaisesRegexp", "assertRaisesRegex"),
-    (None, "failUnlessEqual", "assertEqual"),
-    (None, "failIfEqual", "assertNotEqual"),
-    (None, "failUnlessAlmostEqual", "assertAlmostEqual"),
-    (None, "failIfAlmostEqual", "assertNotAlmostEqual"),
-    (None, "failUnless", "assertTrue"),
-    (None, "failIf", "assertFalse"),
-    (None, "failUnlessRaises", "assertRaises"),
-    (None, "assert_", "assertTrue"),
-    # logging: `Logger.warn` was deprecated in favour of `Logger.warning`.
-    (None, "warn", "warning"),
+#: (the old name, the name it is an alias of, where that is written down).
+#:
+#: The object is deliberately NOT part of the key. The deprecation appears as `self.assertEquals`
+#: on one project's class and as `self.assertRaisesRegexp` on another, and the alias is a property
+#: of the *name*, not of the object it is read from. Keying on the object would silently miss every
+#: spelling the record did not happen to contain.
+#:
+#: Every entry is a name the owning library documents as a deprecated alias AND that delegates:
+#: unittest's aliases are installed by `deprecated_func(*args, **kwargs)`, and `Logger.warn` is
+#: `def warn(self, msg, *args, **kwargs): ...; self.warning(msg, *args, **kwargs)`. Both therefore
+#: forward *every* argument, which is what makes "the same function, so it takes what it always
+#: took" true rather than assumed. An entry whose replacement has a fixed parameter list would not
+#: qualify, however plainly the documentation called it a rename.
+ALIASES: tuple[tuple[str, str, str], ...] = (
+    # unittest, deprecated in 3.1/3.2/3.5 and removed under bpo-45162, slated for 3.12.
+    # Source: docs.python.org/3.1/library/unittest.html "Deprecated aliases", and the
+    # 3.12 What's New removal list.
+    ("assertEquals", "assertEqual", "unittest docs, deprecated aliases"),
+    ("assertNotEquals", "assertNotEqual", "unittest docs, deprecated aliases"),
+    ("assertAlmostEquals", "assertAlmostEqual", "unittest docs, deprecated aliases"),
+    ("assertNotAlmostEquals", "assertNotAlmostEqual", "unittest docs, deprecated aliases"),
+    ("assertRegexpMatches", "assertRegex", "unittest docs, deprecated aliases"),
+    ("assertNotRegexpMatches", "assertNotRegex", "unittest docs, deprecated aliases"),
+    ("assertRaisesRegexp", "assertRaisesRegex", "unittest docs, deprecated aliases"),
+    ("failUnlessEqual", "assertEqual", "unittest docs, deprecated aliases"),
+    ("failIfEqual", "assertNotEqual", "unittest docs, deprecated aliases"),
+    ("failUnlessAlmostEqual", "assertAlmostEqual", "unittest docs, deprecated aliases"),
+    ("failIfAlmostEqual", "assertNotAlmostEqual", "unittest docs, deprecated aliases"),
+    ("failUnless", "assertTrue", "unittest docs, deprecated aliases"),
+    ("failIf", "assertFalse", "unittest docs, deprecated aliases"),
+    ("failUnlessRaises", "assertRaises", "unittest docs, deprecated aliases"),
+    ("assert_", "assertTrue", "unittest docs, deprecated aliases"),
+    # logging: `Logger.warn` warns and then calls `self.warning(msg, *args, **kwargs)`.
+    ("warn", "warning", "logging docs, Logger.warn deprecated"),
 )
 
 
 def alias_of(old: str, new: str) -> bool:
     """True when `old` and `new` are two names of the same thing, one kept for compatibility."""
-    return any(old == was and new == now for _, was, now in ALIASES)
+    return any(old == was and new == now for was, now, _ in ALIASES)
 
 
-def known_rename(pattern_name: str, template_name: str) -> bool:
-    """True when a rule that only renames `pattern_name` to `template_name` is a compatibility alias.
-
-    Only a rename is ever considered: `alias_of` is asked about the pair, and the caller has already
-    checked that nothing but the written name differs between the two patterns.
-    """
-    return alias_of(pattern_name, template_name)
+def where(old: str, new: str) -> str | None:
+    """The record that makes `alias_of(old, new)` true, so a refusal can point at it."""
+    for was, now, source in ALIASES:
+        if old == was and new == now:
+            return source
+    return None

@@ -2,7 +2,7 @@
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "action_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
  "action_intent_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
- "action_kind": "CAPABILITY_EXTENSION_MEASURED",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "route_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
  "date": "2026-11-12",
@@ -20,7 +20,7 @@
  "benchmark_or_family_rank_authority": false,
  "highest_leverage_now": true,
  "action_summary": "Problem 2, taken literally: a similar task must be adaptable from one demonstration. The tree's own roadmap ranked the next operators by how often each refusal is asked. Priced instead of counted, that order was wrong: the 60-asking class offers ZERO reachable askings (the example itself cannot be read, so no apply-time operator exists), and the class with the biggest headline gain (+6.39 pp) loses precision 0.9241 -> 0.8038, adds 41 wrong changes against 14, and drives the per-question share to zero. Neither was shipped. The loss was somewhere else: the organ refuses a change wherever a call site has a shape the example did not show, because the new function may not take those arguments. That is right for a reshape and wrong for a rename between two names the standard library kept for each other -- assertEquals IS assertEqual, so it takes what it always took. That exemption is now in the organ, with a closed list of documented aliases. Measured on the shipped organ over the same 330 askings: strict coverage 0.2082 -> 0.2999, precision 0.9241 -> 0.9461, per-question share 0.2836 -> 0.6170, wrong changes 14 -> 14. This is a measured extension of an existing mechanism, not a new learner and not a sentience claim.",
- "selected_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_ALIASES_FROM_THE_CALL_SHAPE_CHECK_BECAUSE_THE_CALLEE_DID_NOT_CHANGE",
+ "selected_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_DELEGATING_ALIASES_FROM_THE_CALL_SHAPE_CHECK",
  "causal_blocker": "THE_ORGAN_REFUSED_A_RENAME_WHEREVER_A_CALL_SITE_HAD_A_SHAPE_THE_EXAMPLE_DID_NOT_SHOW__ITS_REASON_IS_THAT_THE_NEW_FUNCTION_MAY_NOT_TAKE_THOSE_ARGUMENTS__WHICH_IS_EXACTLY_WRONG_WHEN_THE_TWO_NAMES_ARE_ONE_FUNCTION",
  "expected_parent_change": "THE_ORGAN_STOPS_REFUSING_A_CHANGE_IT_HAD_NO_REASON_TO_REFUSE__A_CALL_SITE_OF_ANOTHER_SHAPE_IS_EDITED_WHEN_THE_TWO_NAMES_ARE_ONE_FUNCTION",
  "expected_parent_frontier_change": "STRICT_COVERAGE_0_2082_TO_0_2999__PER_QUESTION_SHARE_0_2836_TO_0_6170__PRECISION_UP__WRONG_CHANGES_UNCHANGED_AT_14__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
@@ -100,8 +100,8 @@
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_ORGAN_ADAPTS_A_CHANGE_IT_SHOWED_ONCE_TO_A_CALL_SITE_OF_ANOTHER_SHAPE_WHEN_THE_TWO_NAMES_ARE_ONE_FUNCTION__AND_STILL_REFUSES_WHEN_THEY_ARE_NOT",
-  "selected_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_ALIASES_FROM_THE_CALL_SHAPE_CHECK_BECAUSE_THE_CALLEE_DID_NOT_CHANGE",
-  "selected_surviving_route": "PRICE_THE_ROADMAP_FIRST_THEN_BUY_ONLY_THE_CLASS_THAT_COSTS_NOTHING",
+  "selected_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_DELEGATING_ALIASES_FROM_THE_CALL_SHAPE_CHECK",
+  "selected_surviving_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_DELEGATING_ALIASES_FROM_THE_CALL_SHAPE_CHECK",
   "deleted_or_bypassed_paths": [
    "AN_IMPORT_ONLY_OPERATOR (measured: 0 reachable askings, the example itself cannot be read)",
    "A_BLOCK_SHAPE_OPERATOR (measured: 0 reachable askings, same reason)",
@@ -118,11 +118,6 @@
    "INFER_SAFE_RENAMES_STRUCTURALLY (rejected: the repo's own test caught it in one run)",
    "EXEMPT_ONLY_A_CLOSED_LIST_OF_DOCUMENTED_ALIASES (chosen)"
   ],
-  "route_frontier": {
-   "discovery_required": false,
-   "not_applicable_reason": "EVIDENCE_PRESERVATION_OF_A_FALSIFICATION__NO_NEW_CAPABILITY_IS_CLAIMED_AND_NO_EXTERNAL_ROUTE_IS_ADOPTED",
-   "challenger_routes": []
-  },
   "obs_goal": {
    "real_outcome": "KNOW_WHETHER_WHICH_DEMONSTRATION_IS_GIVEN_CAN_BE_CHOSEN_FROM_DATA_AVAILABLE_BEFORE_THE_OUTCOME",
    "proxy_goals_deleted": [
@@ -189,6 +184,236 @@
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
    "synthetic_verification_necessity": "THE_ONLY_ORACLE_IS_WHAT_THE_PEOPLE_ON_THOSE_PROJECTS_ACTUALLY_DID__NO_TEST_OF_THOSE_PROJECTS_IS_RUN__AND_THE_RECORD_SAYS_SO"
+  },
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T23:06:15Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_ORGAN_ON_THE_BASE_COMMIT_REFUSES_A_CHANGE_WHEREVER_A_CALL_SITE_HAS_A_SHAPE_THE_EXAMPLE_DID_NOT_SHOW__50_OF_440_ASKINGS_ON_THE_RECORDED_CORPUS__STRICT_COVERAGE_0_2082_ON_THE_330_READABLE_ONES",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+     "canonical/tools/repeated_change_one_example_measure_v1.py",
+     "canonical/tools/which_fix_moves_generalization_v1.py",
+     "canonical/tests/test_one_showing_is_literal_two_showings_are_general_v1.py",
+     "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3.1/library/unittest.html (Deprecated aliases table)",
+     "https://docs.python.org/3.11/whatsnew/3.11.html (bpo-45162 removals)",
+     "https://github.com/python/cpython/pull/28268"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://bugzilla.redhat.com/show_bug.cgi?id=2034205 (assertRaisesRegexp alias removal, mass rebuild)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://codereview.doctor/features/python/best-practice/avoid-deprecated-testcase-assertions",
+     "https://pythonresources.com/guides/python-3-11-end-of-life/"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "one-shot demonstration generalisation call-shape refusal safe rename"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "python unittest deprecated aliases assertEquals assertRaisesRegexp same method bpo-45162"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "Python 3.12 removal long deprecated unittest aliases whatsnew"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "logging Logger.warn deprecated forwards to warning signature"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "challenger_routes": [
+    {
+     "route": "INFER_SAFE_RENAMES_FROM_THE_RULE_SHAPE_ALONE",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+      "https://docs.python.org/3.1/library/unittest.html"
+     ],
+     "qualification_evidence": [
+      "measured on this host: assertEquals->assertEqual and yaml.load->yaml.safe_load produce the same rule shape, neither is a re-export and neither keeps its docstring; the repo's own test_one_showing_is_literal_two_showings_are_general caught the first version of this exemption in one run"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "WRONG: IT EXEMPTS yaml.load -> yaml.safe_load, WHICH IS A GENUINE BEHAVIOUR CHANGE",
+      "CAPABILITY_STRENGTH": "HIGHER COVERAGE BUT ON WRONG CHANGES",
+      "WALL_CLOCK": "SAME",
+      "INCREMENTAL_COST": "SAME",
+      "RELIABILITY": "FAILS THE PROJECT'S OWN HELD TEST",
+      "VERIFIABILITY": "CANNOT BE VERIFIED FROM THE PAIR OF NAMES"
+     }
+    },
+    {
+     "route": "EXEMPT_EVERY_SINGLE_ATTRIBUTE_RENAME",
+     "evidence": [
+      "canonical/tests/test_one_showing_is_literal_two_showings_are_general_v1.py"
+     ],
+     "qualification_evidence": [
+      "measured on this host: same failure as above, plus 22 test failures in the first attempt"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "WRONG: SAME REASON",
+      "CAPABILITY_STRENGTH": "SAME",
+      "WALL_CLOCK": "SAME",
+      "INCREMENTAL_COST": "SAME",
+      "RELIABILITY": "BREAKS A HELD REFUSAL",
+      "VERIFIABILITY": "SAME"
+     }
+    },
+    {
+     "route": "ASK_THE_INTERPRETER_TO_PROVE_THE_TWO_NAMES_ARE_ONE_FUNCTION",
+     "evidence": [
+      "canonical/tools/repeated_change_one_example_measure_v1.py"
+     ],
+     "qualification_evidence": [
+      "measured on this host: the 15 projects' dependencies are not installed and the recorded corpus is offline; import resolution fails for most targets, and even where it succeeds unittest's aliases are delegating wrappers, so `is` identity is false for a genuine alias"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "SAME",
+      "CAPABILITY_STRENGTH": "NO HIGHER THAN THE LIST",
+      "WALL_CLOCK": "SECONDS TO MINUTES PER TARGET",
+      "INCREMENTAL_COST": "SAME",
+      "RELIABILITY": "NEEDS AN ENVIRONMENT PER TARGET PROJECT",
+      "VERIFIABILITY": "SAME"
+     }
+    },
+    {
+     "route": "KEEP_REFUSING_AND_SHOW_THE_USE_IN_A_SECOND_EXAMPLE",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+      "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md"
+     ],
+     "qualification_evidence": [
+      "measured: the refusal itself tells the owner to show the use; it works, and it costs the owner a demonstration per call shape, which is exactly what the owner asked to stop paying"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "SAME",
+      "CAPABILITY_STRENGTH": "SAME COVERAGE ONLY IF EVERY SHAPE IS SHOWN",
+      "WALL_CLOCK": "HUMAN OR AGENT WORK PER CALL SHAPE",
+      "INCREMENTAL_COST": "SAME",
+      "RELIABILITY": "SAME",
+      "VERIFIABILITY": "SAME"
+     }
+    }
+   ],
+   "why_no_external_route": "THE_DECISION_IS_ABOUT_WHAT_A_NAMED_FUNCTION_IS__THE_OWNING_LIBRARY_DOCUMENTS_IT_AND_NOTHING_OUTSIDE_THE_LIBRARY_CAN_KNOW_IT_BETTER",
+   "unresolved_plausible_dominators": [],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "negative_search_summary": "THE_OWNING_LIBRARY_DOCUMENTATION_IS_THE_ONLY_AUTHORITY_ON_WHAT_A_NAMED_FUNCTION_IS__NO_STRUCTURAL_READING_NOR_INTERPRETER_PROBE_SEPARATES_A_DELEGATING_ALIAS_FROM_A_DIFFERENT_FUNCTION_RELIABLY_AND_OFFLINE__THE_REMAINING_ROUTE_THAT_WORKS_IS_A_CLOSED_CHECKABLE_LIST_WITH_PROVENANCE",
+   "selected_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_DELEGATING_ALIASES_FROM_THE_CALL_SHAPE_CHECK",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T23:06:24Z",
+    "max_age_hours": 2,
+    "selected_route": "EXEMPT_A_RENAME_BETWEEN_TWO_DOCUMENTED_DELEGATING_ALIASES_FROM_THE_CALL_SHAPE_CHECK",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import ast, tokenize, re, builtins, json, inspect, logging, unittest; print(\"ok\")' returned ok; the program and its new list use nothing outside the standard library"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_ORGAN_AND_ITS_NEW_ALIAS_LIST",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/taught_actions/edit_by_example_v1.py imports kept_under_an_old_name_v1 and 63 tests across the organ suites and the new suite pass on this host; assertEquals edits a three-argument call it never showed, yaml.load still refuses one with a keyword"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_CORPUS_AND_BOTH_SCORERS",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/tools/which_fix_moves_generalization_v1.py reproduced the recorded histogram on the refetched 15 pull requests / 89 files and scored 330 readable askings; the baseline arm with the exemption switched off reproduced 0.2082 exactly, which is what makes the 0.2999 attributable"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "OWNING_LIBRARY_DOCUMENTATION_FOR_BOTH_ALIAS_FAMILIES",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "https://docs.python.org/3.1/library/unittest.html lists the deprecated aliases; https://docs.python.org/3.11/whatsnew/3.11.html and python/cpython#28268 record the removals; inspect.getsource(logging.Logger.warn) on this host shows it calls self.warning(msg, *args, **kwargs), so it forwards every argument"
+      ],
+      "evidence_classes": [
+       "OFFICIAL_PRIMARY",
+       "DIRECT_PROBE"
+      ]
+     }
+    ],
+    "note": "NO_NETWORK_AND_NO_THIRD_PARTY_PACKAGE_IS_NEEDED_AT_RUN_TIME__THE_ALIAS_LIST_IS_IN_THE_TREE"
+   }
   }
  },
  "v22_prewrite_admission": {
@@ -236,12 +461,7 @@
   }
  },
  "next_step": "TWO_OPERATORS_REMAIN_AND_THE_TREE_KNOWS_THEIR_PRICE: THE_NARROW_IMPORT_EXTENSION (22 REACHABLE ASKINGS, BUYS COVERAGE ONLY IN THE FORM THAT EXTENDS AN IMPORT THE FILE ALREADY HAS) AND A PROJECT CHECK THAT SETTLES EVERY TRY, WHICH WOULD TURN AGREEMENT WITH THE PEOPLE INTO CORRECTNESS AND IS NOT DONE BY ANYONE HERE. THE 26.6 PERCENT CEILING SAYS WHAT NEITHER CAN REACH: EXAMPLES THE ALGEBRA CANNOT READ AND CHANGES THE DEMONSTRATED KIND DOES NOT NAME.",
- "route_frontier": {
-  "discovery_required": false,
-  "not_applicable_reason": "A_MEASURED_EXTENSION_OF_AN_EXISTING_MECHANISM__NO_EXTERNAL_ROUTE_IS_ADOPTED",
-  "challenger_routes": []
- },
- "causal_evidence": "MEASURED_2026-11-12_ON_THE_SAME_15_MERGED_PULL_REQUESTS_89_FILES_AND_330_READABLE_ASKINGS__SHIPPED_ORGAN_STRICT_COVERAGE_0_2999_PRECISION_0_9461_PER_QUESTION_0_6170_WRONG_14__SAME_ORGAN_WITH_THE_EXEMPTION_SWITCHED_OFF_0_2082_0_9241_0_2836_14__ATTRIBUTION_EDITED_90_TO_140_EXACTLY_THE_50_CALL_SHAPE_ASKINGS_AND_NO_FORM_IN_FILE_STAYS_168__CEILING_A_PERFECT_LEARNER_OF_THE_DEMONSTRATED_KIND_TOPS_OUT_AT_342_OF_1287_0_266_ALL_PULLS_AND_342_OF_411_0_832_ON_THE_5_WHOSE_KIND_IS_KNOWN__THE_INFERENCE_WAS_TRIED_AND_REFUSED: ASSERTEQUALS_TO_ASSERTEQUAL_AND_YAML_LOAD_TO_YAML_SAFE_LOAD_HAVE_THE_SAME_SHAPE_AND_NO_STRUCTURAL_READING_SEPARATES_THEM_SO_THE_EXEMPTION_IS_A_CLOSED_DOCUMENTED_ALIAS_LIST_AND_THE_REPO_OWN_TEST_CAUGHT_THE_FIRST_VERSION_IN_ONE_RUN",
+ "causal_evidence": "MEASURED_2026-11-12_ON_THE_SAME_15_MERGED_PULL_REQUESTS_89_FILES_AND_330_READABLE_ASKINGS__SHIPPED_ORGAN_STRICT_COVERAGE_0_2999_PRECISION_0_9461_PER_QUESTION_0_6170_WRONG_14__SAME_ORGAN_WITH_THE_EXEMPTION_SWITCHED_OFF_0_2082_0_9241_0_2836_14__ATTRIBUTION_EDITED_90_TO_140_EXACTLY_THE_50_CALL_SHAPE_ASKINGS_AND_NO_FORM_IN_FILE_STAYS_168__CEILING_A_PERFECT_LEARNER_OF_THE_DEMONSTRATED_KIND_TOPS_OUT_AT_342_OF_1287_0_266_ALL_PULLS_AND_342_OF_411_0_832_ON_THE_5_WHOSE_KIND_IS_KNOWN__THE_INFERENCE_WAS_TRIED_AND_REFUSED: ASSERTEQUALS_TO_ASSERTEQUAL_AND_YAML_LOAD_TO_YAML_SAFE_LOAD_HAVE_THE_SAME_SHAPE_AND_NO_STRUCTURAL_READING_SEPARATES_THEM_SO_THE_EXEMPTION_IS_A_CLOSED_DOCUMENTED_ALIAS_LIST_AND_THE_REPO_OWN_TEST_CAUGHT_THE_FIRST_VERSION_IN_ONE_RUN__PROVENANCE_BOTH_ALIAS_FAMILIES_CONFIRMED_TO_DELEGATE_EVERY_ARGUMENT_SO_THE_CALLEE_CANNOT_HAVE_CHANGED_WHAT_IT_ACCEPTS",
  "tournament": {
   "proposal_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER",
   "decisive_question": "DOES_EXEMPTING_A_RENAME_BETWEEN_TWO_DOCUMENTED_ALIASES_FROM_THE_CALL_SHAPE_CHECK_RAISE_WHAT_ONE_DEMONSTRATION_RECOVERS_WITHOUT_ADDING_A_WRONG_CHANGE",
