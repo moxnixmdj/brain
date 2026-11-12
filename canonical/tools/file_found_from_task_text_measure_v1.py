@@ -365,6 +365,17 @@ def earlier_kept(function_record: Mapping[str, Any], place_record: Mapping[str, 
     return sorted(out)
 
 
+def refused(records: Mapping[str, Mapping[str, Any]], submissions_with_patches: int, submissions_then: int) -> str | None:
+    """Why this input is not counted, or None. Both happened: a pull request record without the text of the expert's file, and fewer
+    submissions on disk than the record this one is compared with was counted from. Either makes the counts smaller without a word."""
+    broken = sorted(task for task, record in records.items() if "files" not in record or any(row.get("fetch_error") for row in record["files"]))
+    if broken:
+        return f"{len(broken)} pull request records were not fetched whole; fetch them again: {broken[:8]}"
+    if submissions_with_patches != submissions_then:
+        return f"{submissions_with_patches} submissions with patches are here; the function record was counted with {submissions_then}; fetch them again"
+    return None
+
+
 def code_sha256() -> dict[str, str]:
     names = ("canonical/tools/file_found_from_task_text_measure_v1.py", "canonical/runtime/file_the_task_text_points_at_v1.py",
              "canonical/runtime/function_the_task_text_points_at_v1.py", "canonical/runtime/quoted_in_the_task_text_v1.py",
@@ -404,9 +415,9 @@ def main(argv: Sequence[str] | None = None) -> int:
             if task in passed and task in offered and offered[task] not in passed[task]:
                 passed[task].append(offered[task])
     records = {task: json.loads((args.pull_requests_dir / f"{task}.json").read_text()) for task in tasks}
-    broken = sorted(task for task, record in records.items() if "files" not in record or any(row.get("fetch_error") for row in record["files"]))
-    if broken:
-        raise SystemExit(f"{len(broken)} pull request records were not fetched whole; fetch them again: {broken[:8]}")
+    reason = refused(records, len(with_patches), function_record["submissions_with_patches"])
+    if reason:
+        raise SystemExit(reason)
     issues = content.statements(args.statements_dir, tasks)
     other = function_measure.other_text_of(sorted(issues))
     jobs = []
