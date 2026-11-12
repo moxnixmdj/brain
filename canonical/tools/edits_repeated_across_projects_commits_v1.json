@@ -1968,6 +1968,466 @@
      "commits": []
     }
    ]
+  },
+  "fresh": {
+   "collected": "2026-11-12T20:26:05Z",
+   "kinds": [
+    {
+     "kind": "fail_unless",
+     "searched for": "failUnless assertTrue",
+     "marker": "failUnless(",
+     "answers": 30,
+     "looked at": 6,
+     "commits": [
+      {
+       "project": "collective/collective.portlet.embed",
+       "commit": "79679d727a5f295707f06f495c2c7632b8156dc7",
+       "parent": "642ab82c8b0b0a08e88782680b86bf5690ef1575",
+       "files": [
+        "collective/portlet/embed/tests/test_portlet.py"
+       ]
+      },
+      {
+       "project": "plone/plone.folder",
+       "commit": "4dd064f700b9bfae7ba83c27dccf5ce484b50411",
+       "parent": "3ca95fa198ba28fe8ab8fa63a81b19a5be0236c9",
+       "files": [
+        "src/plone/folder/tests/test_dict_interface.py",
+        "src/plone/folder/tests/test_integration.py",
+        "src/plone/folder/tests/test_ordering_adapters.py",
+        "src/plone/folder/tests/test_partialordering.py",
+        "src/plone/folder/tests/test_unorderedordering.py",
+        "src/plone/folder/tests/test_webdav.py"
+       ]
+      },
+      {
+       "project": "arnabmaji1981/scikit-image",
+       "commit": "b8334e85c800c7bdf3068c96ffd932c6ac2a2819",
+       "parent": "fbda63962a34f2d62d41fdd404edc49aef215319",
+       "files": [
+        "skimage/morphology/tests/test_watershed.py"
+       ]
+      },
+      {
+       "project": "userzimmermann/django-piston3",
+       "commit": "1de8a70383547d98a3002845a831636e42c5a0cf",
+       "parent": "26d79f3c7f9101aa41a4809f3b3c2deeaf93222b",
+       "files": [
+        "tests/test_project/apps/testapp/tests.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "fail_if",
+     "searched for": "failIf assertFalse",
+     "marker": "failIf(",
+     "answers": 30,
+     "looked at": 4,
+     "commits": [
+      {
+       "project": "james00209/mongodb-mongo-python-driver",
+       "commit": "ec22172030a323ca98354d75f605cf1ab3fecfed",
+       "parent": "529c4897f58662a255b458e30e5b84bc21c589fe",
+       "files": [
+        "test/test_binary.py",
+        "test/test_code.py",
+        "test/test_connection.py",
+        "test/test_gridfs.py",
+        "test/test_master_slave_connection.py"
+       ]
+      },
+      {
+       "project": "sonic-net/sonic-snmpagent",
+       "commit": "6bc7412bafa5980ac7442785ed6dc60cb76ce1fb",
+       "parent": "84e76ed10b4ceb76505c1e4a207ffa1ea8882cac",
+       "files": [
+        "tests/test_PDUHeader.py"
+       ]
+      },
+      {
+       "project": "pvdro/uc-mongodb-mongo-python-driver",
+       "commit": "ec22172030a323ca98354d75f605cf1ab3fecfed",
+       "parent": "529c4897f58662a255b458e30e5b84bc21c589fe",
+       "files": [
+        "test/test_binary.py",
+        "test/test_code.py",
+        "test/test_connection.py",
+        "test/test_gridfs.py",
+        "test/test_master_slave_connection.py"
+       ]
+      },
+      {
+       "project": "morglinF/UTC-timezones",
+       "commit": "ec22172030a323ca98354d75f605cf1ab3fecfed",
+       "parent": "529c4897f58662a255b458e30e5b84bc21c589fe",
+       "files": [
+        "test/test_binary.py",
+        "test/test_code.py",
+        "test/test_connection.py",
+        "test/test_gridfs.py",
+        "test/test_master_slave_connection.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "assert_underscore",
+     "searched for": "assert_ assertTrue",
+     "marker": ".assert_(",
+     "answers": 30,
+     "looked at": 12,
+     "commits": []
+    },
+    {
+     "kind": "smart_str",
+     "searched for": "smart_text smart_str",
+     "marker": "smart_text(",
+     "answers": 13,
+     "looked at": 8,
+     "commits": [
+      {
+       "project": "dbca-wa/prs",
+       "commit": "3b16bfeabffce0853366b5195e2d64ead4b8509b",
+       "parent": "f7f56e8f70782a8612f6003cbc3dff3472ee73d6",
+       "files": [
+        "prs2/referral/utils.py"
+       ]
+      },
+      {
+       "project": "django-import-export/django-import-export",
+       "commit": "aa9284fac637b461bb9657270ef2df6f17ca1800",
+       "parent": "b76c0940a13d818543583010f4fe63610bd2a954",
+       "files": [
+        "import_export/widgets.py"
+       ]
+      },
+      {
+       "project": "achillis2/django-import-export",
+       "commit": "aa9284fac637b461bb9657270ef2df6f17ca1800",
+       "parent": "b76c0940a13d818543583010f4fe63610bd2a954",
+       "files": [
+        "import_export/widgets.py"
+       ]
+      },
+      {
+       "project": "AlexSamak/django-import-export",
+       "commit": "aa9284fac637b461bb9657270ef2df6f17ca1800",
+       "parent": "b76c0940a13d818543583010f4fe63610bd2a954",
+       "files": [
+        "import_export/widgets.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "scipy_imread",
+     "searched for": "scipy.misc.imread imageio",
+     "marker": "misc.imread(",
+     "answers": 3,
+     "looked at": 3,
+     "commits": [
+      {
+       "project": "mxcube/lucid3",
+       "commit": "158df2e29d8d15a074f886a02725e7a581ee4e6e",
+       "parent": "506a6b7f38103c885dabbb81066fc567517ef7f9",
+       "files": [
+        "lucid3/lucid_core.py",
+        "tests/test_lucid.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "np_object",
+     "searched for": "np.object deprecated",
+     "marker": "np.object",
+     "answers": 30,
+     "looked at": 8,
+     "commits": [
+      {
+       "project": "vlevorato/dsbox",
+       "commit": "3c96e3c976eb70627bbdda898f2eb3bc712a4ea5",
+       "parent": "405abdebcfba23d608d0feebc2e3a69439334e7f",
+       "files": [
+        "dsbox/operators/bq_unit.py"
+       ]
+      },
+      {
+       "project": "SWE-Gym-Raw/triton-inference-server__server",
+       "commit": "e4e25d1e3ca85eca3ad31dfae884aabb1b1e9639",
+       "parent": "580c062170e9a26b695576924f1f4e8fdcde1897",
+       "files": [
+        "qa/L0_string_io/string_client_test.py",
+        "qa/python_models/string/model.py",
+        "qa/python_models/string_fixed/model.py"
+       ]
+      },
+      {
+       "project": "niftylab/laygo2",
+       "commit": "70620aaa97411214afee657cffdf690940e74150",
+       "parent": "658294019d7a3b2fef67d5b0f0e5f06ce6161891",
+       "files": [
+        "laygo2/object/physical.py"
+       ]
+      },
+      {
+       "project": "TechForce-Lyron0785/triton-inference-server-server",
+       "commit": "e4e25d1e3ca85eca3ad31dfae884aabb1b1e9639",
+       "parent": "580c062170e9a26b695576924f1f4e8fdcde1897",
+       "files": [
+        "qa/L0_string_io/string_client_test.py",
+        "qa/python_models/string/model.py",
+        "qa/python_models/string_fixed/model.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "np_alltrue",
+     "searched for": "np.alltrue np.all",
+     "marker": "np.alltrue(",
+     "answers": 30,
+     "looked at": 8,
+     "commits": [
+      {
+       "project": "QijingZheng/VaspBandUnfolding",
+       "commit": "4859dc2a486bf433ec4fb486d57c993996bfe290",
+       "parent": "7bee24a5cc9bfec9da48394fd8aa368aabd5da9b",
+       "files": [
+        "aewfc.py",
+        "paw.py",
+        "procar.py",
+        "unfold.py",
+        "vaspwfc.py"
+       ]
+      },
+      {
+       "project": "sdypy/sdypy-EMA",
+       "commit": "957ba1c81c30e977eed9322b765aec24eff197e2",
+       "parent": "c4254ef9be05b151f75d21b449d6bd5718d5f6fc",
+       "files": [
+        "tests/test_tools/test_MCF.py"
+       ]
+      },
+      {
+       "project": "pmgbergen/porepy",
+       "commit": "7945b4d5d4c387650274d0882f6461315e256f92",
+       "parent": "ffa95c5fb4c1f6aadb9c7b7aa0ee00fbd41adb44",
+       "files": [
+        "tests/numerics/fv/test_fvutils.py",
+        "tests/utils/test_setmembership.py"
+       ]
+      },
+      {
+       "project": "TUD-RST/symbtools",
+       "commit": "60e7f2aff88836555c9f19bcaba700bb908128e2",
+       "parent": "0dad1da6b6da3520db8a7f4a00ba54acf97ca5dd",
+       "files": [
+        "symbtools/meshtools.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "tf_session",
+     "searched for": "tf.Session compat.v1",
+     "marker": "tf.Session(",
+     "answers": 0,
+     "looked at": 0,
+     "commits": []
+    },
+    {
+     "kind": "tf_placeholder",
+     "searched for": "tf.placeholder compat.v1",
+     "marker": "tf.placeholder(",
+     "answers": 0,
+     "looked at": 0,
+     "commits": []
+    },
+    {
+     "kind": "qt_exec",
+     "searched for": "exec_ exec deprecated",
+     "marker": ".exec_()",
+     "answers": 1,
+     "looked at": 1,
+     "commits": []
+    },
+    {
+     "kind": "os_errno",
+     "searched for": "os.errno errno",
+     "marker": "os.errno",
+     "answers": 30,
+     "looked at": 5,
+     "commits": [
+      {
+       "project": "ray-project/ray",
+       "commit": "c9819a721d5d58543a87f9eba959cd05d98d6076",
+       "parent": "2887dac427a1a21d5400105c6380d107fb2b3e9d",
+       "files": [
+        "python/ray/tempfile_services.py"
+       ]
+      },
+      {
+       "project": "merlinepedra/RAY-1",
+       "commit": "c9819a721d5d58543a87f9eba959cd05d98d6076",
+       "parent": "2887dac427a1a21d5400105c6380d107fb2b3e9d",
+       "files": [
+        "python/ray/tempfile_services.py"
+       ]
+      },
+      {
+       "project": "swe-train/ray-project__ray",
+       "commit": "c9819a721d5d58543a87f9eba959cd05d98d6076",
+       "parent": "2887dac427a1a21d5400105c6380d107fb2b3e9d",
+       "files": [
+        "python/ray/tempfile_services.py"
+       ]
+      },
+      {
+       "project": "instabase/ray",
+       "commit": "c9819a721d5d58543a87f9eba959cd05d98d6076",
+       "parent": "2887dac427a1a21d5400105c6380d107fb2b3e9d",
+       "files": [
+        "python/ray/tempfile_services.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "urllib_quote",
+     "searched for": "urllib.quote urllib.parse.quote",
+     "marker": "urllib.quote(",
+     "answers": 30,
+     "looked at": 12,
+     "commits": [
+      {
+       "project": "ren-yeung/baojia",
+       "commit": "76c6a7039a1a112bb91816b0d5cfbad2ea0908e7",
+       "parent": "88745796330d2b20f526d4beba6c16aab1ed569f",
+       "files": [
+        "app/routes/auth.py"
+       ]
+      },
+      {
+       "project": "MatthijsBurgh/epydoc",
+       "commit": "d25212d06b8b54f63c811bb1a67ddab9003cab6d",
+       "parent": "b00d3b100c63fca3260b2f82c1e40f8b2767a8e0",
+       "files": [
+        "src/epydoc/docwriter/html.py"
+       ]
+      },
+      {
+       "project": "k21971/EvilBot",
+       "commit": "753ee328bbfaa469571f2e3982df67e96eeb50a0",
+       "parent": "462e35ce689cd56eacfcd79aea38173ec7b916a2",
+       "files": [
+        "beholder.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "xrange",
+     "searched for": "xrange range python3",
+     "marker": "xrange(",
+     "answers": 2,
+     "looked at": 2,
+     "commits": [
+      {
+       "project": "Nabla-NTNU/nablaweb",
+       "commit": "8bf72e05386f8a7d993bd78e5a1f506a6ffa6504",
+       "parent": "d8974a8b767ee73e88bec033772c466c0788bfbb",
+       "files": [
+        "nablaweb/content/templatetags/listutil.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "raw_input",
+     "searched for": "raw_input input python3",
+     "marker": "raw_input(",
+     "answers": 2,
+     "looked at": 2,
+     "commits": [
+      {
+       "project": "privong/Astronomy",
+       "commit": "a059eb13c84ebda486db2c1d882eb920534d3a84",
+       "parent": "0df885d465f93f418ff5b7cf91158aca6db214ce",
+       "files": [
+        "DataReduction/Optical/opt_red.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "basestring",
+     "searched for": "basestring str python3",
+     "marker": "basestring)",
+     "answers": 2,
+     "looked at": 2,
+     "commits": [
+      {
+       "project": "jeremylowery/kcontrol",
+       "commit": "289672511f6a273955fd36c2dd6a1200b4f54c8f",
+       "parent": "532c994a3d5686dadd6432870b95bd54ca3c5b5a",
+       "files": [
+        "kcontrol/Controls/DatePicker.py"
+       ]
+      },
+      {
+       "project": "yemel/trustcircle",
+       "commit": "1808466f29d871146c59e7121c86c0ad7e21d185",
+       "parent": "6687f0007a277dedc68aa88a30d6037af184a491",
+       "files": [
+        "emails/views.py"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "mpl_get_cmap",
+     "searched for": "get_cmap matplotlib colormaps",
+     "marker": "get_cmap(",
+     "answers": 21,
+     "looked at": 6,
+     "commits": [
+      {
+       "project": "GeorgiiMakarov/Golden_Fleece",
+       "commit": "a45cedf23430e8524e6199892a96728b56d765c2",
+       "parent": "dbc5cb75d057a5dfb09dcbe854df96cd62fbc638",
+       "files": [
+        "cpu-baseline/simulate.py"
+       ]
+      },
+      {
+       "project": "MarkBarsoumMarkarian/kidney-fibrosis-grader",
+       "commit": "583ecff8fade85928f96e823f7f4eaffb13f7163",
+       "parent": "e62876657c910b8ce6daae395c15d65ef2893b21",
+       "files": [
+        "app.py"
+       ]
+      },
+      {
+       "project": "wkentaro/imgviz",
+       "commit": "b008576d73ee60e607b0ddf32d0f31fdbe90447f",
+       "parent": "ca6ade57476a8285630951c554094f97ca81bc9a",
+       "files": [
+        "imgviz/depth.py"
+       ]
+      },
+      {
+       "project": "nipreps/niworkflows",
+       "commit": "4a4df326d032807d53bd16443504251a8ae2f6de",
+       "parent": "fb211e201bc9c7e22f7fb296a2259f4c8053209f",
+       "files": [
+        "niworkflows/viz/plots.py"
+       ]
+      }
+     ]
+    }
+   ]
   }
  }
 }
