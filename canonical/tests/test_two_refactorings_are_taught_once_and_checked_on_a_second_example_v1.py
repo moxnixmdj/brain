@@ -19,6 +19,7 @@ Pinned here:
 """
 from __future__ import annotations
 
+import ast
 import json
 import pathlib
 import random
@@ -297,10 +298,13 @@ def test_every_skill_in_the_tracked_bundle_is_one_of_the_programs() -> None:
         (step,) = skill["abstract_steps"]
         assert step["layer"] == "confined_python_exec"
         request_line = next(line for line in step["code"].splitlines() if line.startswith("REQUEST = "))
-        values = request_line.split("(", 1)[1].split(")", 1)[0].split(", ")
+        values = ast.literal_eval(request_line.split("=", 1)[1].split("#")[0].strip())
+        if len(values) == 2 and isinstance(values[1], tuple):   # a program of several actions: (action, values)
+            assert values[0] in {lesson["does"] for lesson in teach.LESSONS if "does" in lesson}
+            values = values[1]
         # every value of the request is a hole inside a string literal ...
-        assert sorted(value.strip('"') for value in values) == sorted(skill["param_order"])
-        assert all(value.startswith('"') and value.endswith('"') for value in values)
+        assert sorted(values) == sorted(skill["param_order"])
+        assert all(isinstance(value, str) for value in values)
         # ... and there is no hole anywhere else in the program
         assert not re.search(r"\?(?:str|path|num|url)\d", step["code"].replace(request_line, ""))
 
