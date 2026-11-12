@@ -1,0 +1,322 @@
+{
+ "schema": "BRAIN_FIX_CONTENT_IN_TASK_TEXT_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T22:24:18Z",
+ "read_this_first": "The lists built in this tree are ordered by what fixes of other programs looked like, and reach a small test-passing repair within 200 candidates for 16 of 80 real tasks (SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json): a piece taken out is reached, a piece put in is not. This asks where what a small fix is WRITTEN WITH can be read, and the answer is: in the task's own text, for about half of it. The 159 small passing patches of the 80 tasks bring 102 names and constants (other than 0, 1, 2, True, False, None, '') into the statement they change. The issue text of the task mentions 50 of them (49%) as a whole word; the issue text of another task mentions 2 (2%). The text is short (median 156.5 words) and names little: the pool of things it mentions that the program could supply has a median of 16, where the changed files hold a median of 213 names. Of the 55 tasks whose small passing patches all put something in or exchange a leaf and that no list here reaches within 200, the content of a small passing patch is at hand for 31: 11 want nothing the changed statement does not already hold, 5 want only small constants, and for 15 every wanted name is among the first 10 of the pool. For 4 more it is further down the pool, and for 20 the text does not name it. With another task's text the 15 become 0, so the count is 16: what needs no text. The text also points at the line. Ordered by the names on them that the issue mentions, the changed line is the first line of the definition for 18 of the 80 tasks, among the first 3 for 36, the first 5 for 48, the first 10 for 57 (median 25 lines); counted from the top it is 2, 11, 15, 29, and with another task's text 7, 14, 17, 34. The issue quotes the changed line as it was for 18 tasks and the line as a passing patch leaves it for 10; with another task's text, 0 and 0. Rule written beforehand: at hand for at least 24 of the 55 (so that 40 of 80 can be reached in the best case) means a list that takes its content from the task text is the next thing to build and to count the same way; fewer than 12 means it is not. It came to 31: build it. 7 of the 7 things expected beforehand held. Worked out afterwards from the same run: of the 31 tasks with the content at hand, the line of such a patch is among the first 3 for 14 and the first 5 for 18; and of the 10 tasks whose issue quotes the patched line, 9 are tasks no list here reaches. So the ceiling of a list that reads the task text is 31 more tasks, and what it reaches within 200 tries depends on how it orders the kinds of piece, which this did not count. The function was given, as before. No test was run and no model was called. One machine; nobody else has re-run this count.",
+ "what_was_asked": "Whether the content of a small fix (the names and constants it brings in) and the line it changes can be read from the issue text of the task, counted on the small test-passing patches of 80 real tasks, and against the text of another task.",
+ "what_was_run": {
+  "the tool": "canonical/tools/fix_content_in_task_text_measure_v1.py at commit 703a9328dd61199d7bf0d9ef8b137aab977a3b0e. What was expected and the rule were committed at 5443d2d4, before anything was counted.",
+  "the patches": "the 159 small passing patches of the 80 tasks, read as in the earlier record from the 73 submissions with patches at github.com/SWE-bench/experiments 05ad61feb9c9f334dc340baea7c4f31cf7854274",
+  "the issue texts": "github.com/hyang0129/onlycodes at 7548222e5f33b4e760b3cbeb193e5403f8e2e6cc, problems/swe/swebench-verified (500 task files). Checked against github.com/Junjie4/distillation at 5475dd3f75b23e203a48c066653e76b5b3e8ef43: 200 tasks stand in both, and for 200 the words are the same in the same order. Both are other people's copies of the benchmark; the benchmark's own host could not be reached from here.",
+  "a mention": "a whole word that is the same letter for letter; a number standing alone; a string of three characters or more as written",
+  "the pool": "what the issue text mentions that the files the expert changed hold, or that is a Python builtin; the most mentioned first, then the first mentioned",
+  "the other text": "the issue text of the task 40 further on in the sorted list of the 80",
+  "seconds": 167.5
+ },
+ "summary": {
+  "tasks": 80,
+  "tasks_by_what_is_at_hand_for_the_best_patch": {
+   "nothing wanted": 35,
+   "small constants only": 6,
+   "pointed to, among the first of the pool": 15,
+   "pointed to, further down the pool": 4,
+   "not pointed to": 20
+  },
+  "tasks_that_only_put_in_or_exchange_and_were_not_reached": 55,
+  "of_those_with_the_content_at_hand": 31,
+  "of_those_by_class": {
+   "nothing wanted": 11,
+   "small constants only": 5,
+   "pointed to, among the first of the pool": 15,
+   "pointed to, further down the pool": 4,
+   "not pointed to": 20
+  },
+  "by_shape_of_the_passing_patch": {
+   "one piece put in": {
+    "tasks_with_such_a_passing_patch": 46,
+    "nothing wanted": 7,
+    "small constants only": 5,
+    "pointed to, among the first of the pool": 15,
+    "pointed to, further down the pool": 4,
+    "not pointed to": 15
+   },
+   "one leaf exchanged": {
+    "tasks_with_such_a_passing_patch": 19,
+    "nothing wanted": 6,
+    "small constants only": 3,
+    "pointed to, among the first of the pool": 1,
+    "pointed to, further down the pool": 0,
+    "not pointed to": 9
+   },
+   "one piece taken out": {
+    "tasks_with_such_a_passing_patch": 23,
+    "nothing wanted": 23,
+    "small constants only": 0,
+    "pointed to, among the first of the pool": 0,
+    "pointed to, further down the pool": 0,
+    "not pointed to": 0
+   }
+  },
+  "wanted_leaves_that_are_not_small_constants": 102,
+  "of_them_mentioned_in_the_issue_text": 50,
+  "median_size_of_the_pool": 16.0,
+  "median_names_the_changed_files_hold": 213.0,
+  "median_names_of_the_definition": 26.0,
+  "median_share_of_the_names_of_the_definition_mentioned": 0.165,
+  "median_words_of_the_issue_text": 156.5,
+  "median_lines_of_the_definition": 25.0,
+  "tasks_whose_changed_line_is_among_the_first": {
+   "1": 18,
+   "3": 36,
+   "5": 48,
+   "10": 57
+  },
+  "the_same_counted_from_the_top_of_the_definition": {
+   "1": 2,
+   "3": 11,
+   "5": 15,
+   "10": 29
+  },
+  "tasks_with_the_line_as_it_was_quoted": 18,
+  "tasks_with_the_line_as_patched_quoted": 10
+ },
+ "with_another_tasks_text": {
+  "tasks": 80,
+  "tasks_by_what_is_at_hand_for_the_best_patch": {
+   "nothing wanted": 35,
+   "small constants only": 6,
+   "pointed to, among the first of the pool": 0,
+   "pointed to, further down the pool": 0,
+   "not pointed to": 39
+  },
+  "tasks_that_only_put_in_or_exchange_and_were_not_reached": 55,
+  "of_those_with_the_content_at_hand": 16,
+  "of_those_by_class": {
+   "nothing wanted": 11,
+   "small constants only": 5,
+   "pointed to, among the first of the pool": 0,
+   "pointed to, further down the pool": 0,
+   "not pointed to": 39
+  },
+  "by_shape_of_the_passing_patch": {
+   "one piece put in": {
+    "tasks_with_such_a_passing_patch": 46,
+    "nothing wanted": 7,
+    "small constants only": 5,
+    "pointed to, among the first of the pool": 0,
+    "pointed to, further down the pool": 0,
+    "not pointed to": 34
+   },
+   "one leaf exchanged": {
+    "tasks_with_such_a_passing_patch": 19,
+    "nothing wanted": 6,
+    "small constants only": 3,
+    "pointed to, among the first of the pool": 0,
+    "pointed to, further down the pool": 0,
+    "not pointed to": 10
+   },
+   "one piece taken out": {
+    "tasks_with_such_a_passing_patch": 23,
+    "nothing wanted": 23,
+    "small constants only": 0,
+    "pointed to, among the first of the pool": 0,
+    "pointed to, further down the pool": 0,
+    "not pointed to": 0
+   }
+  },
+  "wanted_leaves_that_are_not_small_constants": 102,
+  "of_them_mentioned_in_the_issue_text": 2,
+  "median_size_of_the_pool": 6.0,
+  "median_names_the_changed_files_hold": 213.0,
+  "median_names_of_the_definition": 26.0,
+  "median_share_of_the_names_of_the_definition_mentioned": 0.0,
+  "median_words_of_the_issue_text": 156.5,
+  "median_lines_of_the_definition": 23.5,
+  "tasks_whose_changed_line_is_among_the_first": {
+   "1": 7,
+   "3": 14,
+   "5": 17,
+   "10": 34
+  },
+  "the_same_counted_from_the_top_of_the_definition": {
+   "1": 2,
+   "3": 11,
+   "5": 15,
+   "10": 29
+  },
+  "tasks_with_the_line_as_it_was_quoted": 0,
+  "tasks_with_the_line_as_patched_quoted": 0
+ },
+ "rule": {
+  "written_before": "The earlier rule asks for a small passing patch within the first 200 candidates for 40 of the 80 tasks before a repair run on real projects is built; 16 are there. Take the 55 tasks whose small passing patches all put something in or exchange a leaf and that no list here reaches within 200. If for at least 24 of them the content of a small passing patch is at hand (so that 16 + 24 = 40 can be reached in the best case), a list that takes its content from the task text is the next thing to build, and to count the same way: the place of the same patches, the same 200. If for fewer than 12, the task text does not hold what small fixes are written with, and such a list is not built. From 12 to 23: undecided; it is not built on this count alone. Whatever the number, the same count with another task's text must come out clearly lower, or the count says nothing about the text.",
+  "tasks_with_the_content_at_hand": 31,
+  "the_same_with_another_tasks_text": 16,
+  "the_text_says_something_about_its_task": true,
+  "verdict": "build the list that takes its content from the task text, and count it the same way"
+ },
+ "what_was_expected_and_what_came": {
+  "tasks of the 55 that only put in or exchange and that no list reaches within 200, with the content of a small passing patch at hand": {
+   "expected": [16, 40],
+   "came": 31,
+   "held": true
+  },
+  "the same with another task's issue text": {
+   "expected": [3, 16],
+   "came": 16,
+   "held": true
+  },
+  "tasks of the 46 with a put-in passing patch for which what one of those brings in is at hand or further down the pool": {
+   "expected": [20, 38],
+   "came": 31,
+   "held": true
+  },
+  "median size of the pool": {
+   "expected": [10, 60],
+   "came": 16.0,
+   "held": true
+  },
+  "median share of the names of the definition that the issue text mentions": {
+   "expected": [0.15, 0.5],
+   "came": 0.165,
+   "held": true
+  },
+  "tasks of 80 whose changed line is among the first 5 lines of the definition in the order the issue text gives": {
+   "expected": [20, 50],
+   "came": 48,
+   "held": true
+  },
+  "tasks of 80 for which the changed line as it was is quoted in the issue text": {
+   "expected": [5, 25],
+   "came": 18,
+   "held": true
+  },
+  "held": "7 of 7"
+ },
+ "worked_out_afterwards": {
+  "note": "From the same run, not among the things expected beforehand.",
+  "tasks_with_the_content_at_hand": 31,
+  "of_them_with_the_line_of_such_a_patch_among_the_first_3": 14,
+  "among_the_first_5": 18,
+  "places_in_the_pool_of_the_pointed_ones": [
+   1,
+   2,
+   2,
+   2,
+   3,
+   3,
+   4,
+   5,
+   5,
+   5,
+   6,
+   8,
+   8,
+   9,
+   9
+  ],
+  "tasks_whose_issue_quotes_the_patched_line": ["django__django-11066", "django__django-11163", "django__django-15368", "django__django-15814", "django__django-16255", "pydata__xarray-4629", "pydata__xarray-6721", "scikit-learn__scikit-learn-11578", "sympy__sympy-13372", "sympy__sympy-22714"],
+  "of_them_not_reached_by_any_list_before": 9,
+  "tasks_whose_issue_quotes_the_line_as_it_was_and_that_no_list_reached": 16
+ },
+ "checks": {
+  "tests": "canonical/tests/test_fix_content_in_task_text_measure_v1.py",
+  "the control": "the same count with another task's issue text: what the numbers would be if the text said nothing about its task"
+ },
+ "what_this_does_not_show": ["How many tries a list that reads the task text needs. The content is at hand for 31 tasks; a list must still choose the kind of piece and where in the line it goes, and that was not counted.", "How a run would find the function. It was given, as in the earlier record.", "That the text helps when it does not name the thing. A mention is a whole word, letter for letter; a text that describes what is missing without naming it counts as not pointing.", "The order of lines is rough: a line of documentation inside the definition counts as a line unless it begins with a quote, so the place of the changed line is if anything too far down.", "That a passing patch is right, or that the issue texts of this benchmark are like tasks elsewhere: published audits found the solution outlined in the issue for a third of the resolved tasks of this benchmark (arXiv 2410.06992).", "One machine, the producer's count. Nobody else has re-run it."],
+ "to_run_it_again": ["python3 canonical/tools/expert_fix_pull_request_collector_v1.py --ids-file ids.json --out-dir /tmp/swe/pulls   # ids.json: the keys of per_task in PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json", "python3 canonical/tools/passing_patch_shape_measure_v1.py --fetch --cache-dir /tmp/rank/experiments", "curl -sL https://codeload.github.com/hyang0129/onlycodes/tar.gz/7548222e5f33b4e760b3cbeb193e5403f8e2e6cc | tar -xz -C /tmp/iss; curl -sL https://codeload.github.com/Junjie4/distillation/tar.gz/5475dd3f75b23e203a48c066653e76b5b3e8ef43 | tar -xz -C /tmp/iss", "python3 canonical/tools/fix_content_in_task_text_measure_v1.py --cache-dir /tmp/rank/experiments --pull-requests-dir /tmp/swe/pulls --statements-dir /tmp/iss/onlycodes-7548222e5f33b4e760b3cbeb193e5403f8e2e6cc/problems/swe/swebench-verified --second-copy-dir /tmp/iss/distillation-5475dd3f75b23e203a48c066653e76b5b3e8ef43/dataset --out /tmp/rank/content.json"],
+ "model_calls": 0,
+ "programs_run": 0,
+ "tests_run": 0,
+ "incremental_spend_usd": 0,
+ "code_sha256": {
+  "canonical/tools/fix_content_in_task_text_measure_v1.py": "b4833e51b32bc1f14f1a4318cf9903da0580110fcf973fa2d77cc30c5fde2054",
+  "canonical/tools/small_passing_patch_place_measure_v1.py": "5f28a4861460715ddb3ec2604491f557ed14609dfedf45eb69943a9711187f8d",
+  "canonical/tools/passing_patch_shape_measure_v1.py": "d9d1209301b13eeaf2ba1f4822d378f14eaa6ab5ff7bf533b9367d241e22613e",
+  "canonical/runtime/fix_shape_v1.py": "4f5a873fbcaaf40c087da61262de9665d9c832f38091df2793a91625a05523b0",
+  "canonical/runtime/take_out_v1.py": "30fdefdbc8fd2364995f928af7a6c83c047af18e2cb29d23ea975da0ff8f031e",
+  "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4"
+ },
+ "per_task_key": "[what is at hand for the best patch, its place in the pool, the shape of that patch, the size of the pool, the best place of a changed line in the order the issue gives, the same from the top, lines of the definition, the issue quotes the line as it was, the issue quotes the line as patched, reached by the earlier lists within 200]",
+ "per_task": {
+  "astropy__astropy-12907": ["nothing wanted", null, "one leaf exchanged", 9, 26, 26, 27, false, false, false],
+  "astropy__astropy-14309": ["nothing wanted", null, "one piece put in", 41, 2, 23, 23, true, false, false],
+  "django__django-11066": ["pointed to, among the first of the pool", 5, "one piece put in", 24, 1, 14, 97, true, true, false],
+  "django__django-11119": ["not pointed to", null, "one piece put in", 7, 4, 13, 13, false, false, false],
+  "django__django-11133": ["pointed to, among the first of the pool", 3, "one piece put in", 7, 3, 3, 7, false, false, false],
+  "django__django-11163": ["small constants only", null, "one piece put in", 18, 4, 18, 23, true, true, false],
+  "django__django-11299": ["not pointed to", null, "one piece put in", 31, 10, 10, 18, false, false, false],
+  "django__django-12125": ["not pointed to", null, "one leaf exchanged", 16, 7, 11, 11, false, false, false],
+  "django__django-12155": ["small constants only", null, "one piece put in", 15, 1, 10, 12, false, false, false],
+  "django__django-12209": ["nothing wanted", null, "one piece taken out", 30, 3, 18, 41, false, false, false],
+  "django__django-12262": ["not pointed to", null, "one leaf exchanged", 12, 30, 20, 43, false, false, false],
+  "django__django-12708": ["nothing wanted", null, "one leaf exchanged", 15, 2, 6, 8, false, false, false],
+  "django__django-13023": ["not pointed to", null, "one piece put in", 16, 4, 8, 9, false, false, false],
+  "django__django-13028": ["nothing wanted", null, "one piece taken out", 45, 1, 3, 7, false, false, true],
+  "django__django-13786": ["nothing wanted", null, "one piece taken out", 14, 4, 7, 39, false, false, false],
+  "django__django-14140": ["nothing wanted", null, "one piece taken out", 11, 3, 6, 15, true, false, false],
+  "django__django-14434": ["nothing wanted", null, "one piece put in", 9, 19, 18, 21, false, false, false],
+  "django__django-14493": ["pointed to, among the first of the pool", 6, "one piece put in", 14, 4, 16, 36, false, false, false],
+  "django__django-14672": ["pointed to, among the first of the pool", 3, "one piece put in", 26, 1, 3, 3, false, false, false],
+  "django__django-15278": ["not pointed to", null, "one piece put in", 14, 1, 3, 6, false, false, false],
+  "django__django-15315": ["nothing wanted", null, "one piece taken out", 23, 1, 2, 2, false, false, true],
+  "django__django-15368": ["pointed to, among the first of the pool", 1, "one piece put in", 38, 2, 33, 45, false, true, false],
+  "django__django-15380": ["not pointed to", null, "one leaf exchanged", 24, 1, 7, 30, true, false, false],
+  "django__django-15741": ["not pointed to", null, "one piece put in", 7, 5, 25, 38, false, false, false],
+  "django__django-15814": ["pointed to, further down the pool", 35, "one piece put in", 35, 11, 31, 64, true, true, false],
+  "django__django-15863": ["not pointed to", null, "one leaf exchanged", 9, 64, 60, 91, false, false, false],
+  "django__django-16082": ["nothing wanted", null, "one piece put in", 15, 1, 1, 1, false, false, false],
+  "django__django-16255": ["pointed to, among the first of the pool", 9, "one piece put in", 17, 5, 7, 10, true, true, false],
+  "django__django-16485": ["nothing wanted", null, "one leaf exchanged", 5, 1, 75, 91, false, false, true],
+  "django__django-16527": ["pointed to, among the first of the pool", 8, "one piece put in", 16, 1, 21, 22, false, false, false],
+  "django__django-16901": ["small constants only", null, "one piece put in", 5, 20, 17, 50, false, false, false],
+  "django__django-17087": ["not pointed to", null, "one leaf exchanged", 12, 3, 5, 13, false, false, false],
+  "matplotlib__matplotlib-13989": ["not pointed to", null, "one piece put in", 30, 141, 277, 421, false, false, false],
+  "matplotlib__matplotlib-23412": ["nothing wanted", null, "one piece put in", 36, 5, 5, 10, false, false, true],
+  "matplotlib__matplotlib-24026": ["nothing wanted", null, "one piece taken out", 13, 2, 53, 88, true, false, false],
+  "matplotlib__matplotlib-25122": ["nothing wanted", null, "one piece taken out", 9, 7, 94, 103, false, false, false],
+  "matplotlib__matplotlib-26113": ["nothing wanted", null, "one leaf exchanged", 77, 39, 217, 314, false, false, false],
+  "psf__requests-1142": ["nothing wanted", null, "one piece taken out", 4, 2, 2, 8, false, false, true],
+  "psf__requests-1724": ["not pointed to", null, "one piece put in", 31, 1, 20, 49, false, false, false],
+  "psf__requests-2317": ["not pointed to", null, "one leaf exchanged", 10, 1, 36, 44, true, false, false],
+  "pydata__xarray-3095": ["pointed to, further down the pool", 11, "one piece put in", 20, 2, 27, 34, false, false, false],
+  "pydata__xarray-4075": ["small constants only", null, "one piece put in", 18, 1, 3, 6, false, false, false],
+  "pydata__xarray-4094": ["pointed to, among the first of the pool", 9, "one leaf exchanged", 24, 2168, 1473, 3100, false, false, false],
+  "pydata__xarray-4629": ["pointed to, further down the pool", 18, "one piece put in", 19, 13, 8, 24, true, true, false],
+  "pydata__xarray-6721": ["nothing wanted", null, "one piece taken out", 61, 2, 4, 9, true, true, true],
+  "pydata__xarray-7233": ["nothing wanted", null, "one piece taken out", 24, 37, 67, 72, false, false, false],
+  "pylint-dev__pylint-6903": ["small constants only", null, "one piece put in", 20, 14, 18, 19, false, false, false],
+  "pytest-dev__pytest-10081": ["nothing wanted", null, "one piece taken out", 20, 5, 7, 25, false, false, true],
+  "pytest-dev__pytest-5262": ["not pointed to", null, "one piece put in", 39, 4, 1, 25, false, false, false],
+  "pytest-dev__pytest-6202": ["nothing wanted", null, "one piece taken out", 26, 1, 19, 54, true, false, true],
+  "pytest-dev__pytest-7205": ["not pointed to", null, "one piece put in", 51, 10, 15, 18, true, false, false],
+  "pytest-dev__pytest-7432": ["nothing wanted", null, "one piece put in", 20, 2, 13, 38, false, false, false],
+  "pytest-dev__pytest-7521": ["not pointed to", null, "one piece put in", 26, 15, 15, 20, false, false, false],
+  "pytest-dev__pytest-7982": ["nothing wanted", null, "one piece taken out", 4, 2, 9, 10, false, false, true],
+  "scikit-learn__scikit-learn-11578": ["pointed to, among the first of the pool", 4, "one piece put in", 61, 26, 134, 161, true, true, false],
+  "scikit-learn__scikit-learn-13124": ["not pointed to", null, "one piece put in", 28, 8, 2, 25, false, false, false],
+  "scikit-learn__scikit-learn-14496": ["pointed to, among the first of the pool", 5, "one piece put in", 26, 11, 108, 128, true, false, false],
+  "scikit-learn__scikit-learn-15100": ["nothing wanted", null, "one piece taken out", 18, 8, 20, 23, false, false, true],
+  "sphinx-doc__sphinx-7440": ["nothing wanted", null, "one piece taken out", 11, 15, 23, 28, false, false, true],
+  "sphinx-doc__sphinx-7910": ["nothing wanted", null, "one piece taken out", 23, 3, 52, 75, true, false, false],
+  "sphinx-doc__sphinx-9320": ["nothing wanted", null, "one piece put in", 16, 1, 16, 22, false, false, false],
+  "sphinx-doc__sphinx-9698": ["not pointed to", null, "one leaf exchanged", 11, 2, 15, 19, false, false, false],
+  "sympy__sympy-12096": ["pointed to, among the first of the pool", 2, "one piece put in", 15, 3, 10, 32, false, false, false],
+  "sympy__sympy-13372": ["pointed to, further down the pool", 27, "one piece put in", 28, 9, 19, 45, false, true, false],
+  "sympy__sympy-13480": ["not pointed to", null, "one leaf exchanged", 17, 1, 30, 43, true, false, false],
+  "sympy__sympy-13647": ["nothing wanted", null, "one piece taken out", 10, 6, 6, 6, false, false, true],
+  "sympy__sympy-15017": ["small constants only", null, "one leaf exchanged", 6, 12, 12, 13, false, false, true],
+  "sympy__sympy-15349": ["nothing wanted", null, "one leaf exchanged", 10, 33, 42, 55, false, false, false],
+  "sympy__sympy-15875": ["nothing wanted", null, "one piece taken out", 11, 31, 30, 33, false, false, true],
+  "sympy__sympy-18189": ["pointed to, among the first of the pool", 8, "one piece put in", 11, 27, 78, 195, false, false, false],
+  "sympy__sympy-18763": ["not pointed to", null, "one piece put in", 14, 4, 3, 7, false, false, false],
+  "sympy__sympy-19495": ["nothing wanted", null, "one piece taken out", 11, 2, 18, 19, false, false, false],
+  "sympy__sympy-19637": ["pointed to, among the first of the pool", 2, "one piece put in", 8, 2, 26, 84, false, false, false],
+  "sympy__sympy-20801": ["nothing wanted", null, "one piece taken out", 7, 7, 7, 22, false, false, true],
+  "sympy__sympy-22456": ["nothing wanted", null, "one piece taken out", 7, 29, 27, 37, false, false, true],
+  "sympy__sympy-22714": ["pointed to, among the first of the pool", 2, "one piece put in", 19, 1, 29, 42, true, true, false],
+  "sympy__sympy-23534": ["pointed to, among the first of the pool", 5, "one piece put in", 7, 36, 194, 195, false, false, false],
+  "sympy__sympy-23824": ["nothing wanted", null, "one leaf exchanged", 14, 218, 210, 228, false, false, false],
+  "sympy__sympy-24443": ["nothing wanted", null, "one piece taken out", 12, 1, 11, 21, false, false, false],
+  "sympy__sympy-24539": ["nothing wanted", null, "one piece put in", 17, 4, 5, 6, false, false, false]
+ }
+}
