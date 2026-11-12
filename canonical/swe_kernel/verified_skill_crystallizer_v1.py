@@ -841,6 +841,43 @@ def verify_rule_on_mutated_twin(
 # 3. Persistent SQLite WAL Verified Skill Store
 # ---------------------------------------------------------------------------
 
+def _merge_taught_sources(retained: dict[str, Any], incoming_rule: Mapping[str, Any]) -> None:
+    """Preserve and union `provenance.taught_sources` across re-teaching and bundle imports."""
+    inc_prov = incoming_rule.get("provenance")
+    if not isinstance(inc_prov, Mapping):
+        return
+    ret_prov = retained.get("provenance")
+    merged_prov: dict[str, Any] = dict(ret_prov) if isinstance(ret_prov, Mapping) else {}
+    existing_sources: list[dict[str, str]] = []
+    for src in (merged_prov.get("taught_sources") or ()):
+        if isinstance(src, Mapping) and "before" in src:
+            pair = {"before": str(src["before"]), "after": str(src.get("after") or "")}
+            if pair not in existing_sources:
+                existing_sources.append(pair)
+    one = merged_prov.get("training_example")
+    if isinstance(one, Mapping) and "before" in one:
+        pair = {"before": str(one["before"]), "after": str(one.get("after") or "")}
+        if pair not in existing_sources:
+            existing_sources.append(pair)
+    for src in (inc_prov.get("taught_sources") or ()):
+        if isinstance(src, Mapping) and "before" in src:
+            pair = {"before": str(src["before"]), "after": str(src.get("after") or "")}
+            if pair not in existing_sources:
+                existing_sources.append(pair)
+    inc_one = inc_prov.get("training_example")
+    if isinstance(inc_one, Mapping) and "before" in inc_one:
+        pair = {"before": str(inc_one["before"]), "after": str(inc_one.get("after") or "")}
+        if pair not in existing_sources:
+            existing_sources.append(pair)
+    if existing_sources:
+        merged_prov["taught_sources"] = existing_sources
+    for sha_key in ("before_sha256", "after_sha256"):
+        if not merged_prov.get(sha_key) and inc_prov.get(sha_key):
+            merged_prov[sha_key] = inc_prov[sha_key]
+    if merged_prov:
+        retained["provenance"] = merged_prov
+
+
 class VerifiedSkillStore:
     """SQLite WAL store of scoped hypotheses; retrieval always re-verifies."""
 
@@ -870,11 +907,37 @@ class VerifiedSkillStore:
         contract: Mapping[str, Any] | None = None,
         training_verifier: Callable | None = None,
         origin: str | None = None,
+        precondition_field: str | None = None,
+        precondition_accessor: Callable[[str], Any] | None = None,
+        oracle: Callable[[str, Any], Any] | None = None,
+        probes: Sequence[Any] | None = None,
     ) -> dict[str, Any]:
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
         if not can_write_memory():
             return {"crystallized": False, "reason": "MEMORY_POLICY_WRITE_DISABLED"}
+        precondition_evidence: dict[str, Any] | None = None
+        if precondition_field is not None or precondition_accessor is not None:
+            from canonical.swe_kernel import skill_precondition_presence_v1 as _precond
+
+            gate_out = _precond.gate(
+                before_snippet,
+                after_snippet,
+                field=precondition_field or "observable",
+                accessor=precondition_accessor,
+            )
+            if not gate_out.get("may_learn"):
+                return {
+                    "crystallized": False,
+                    "reason": f"PRECONDITION_DEFECT_{gate_out.get('verdict')}",
+                    "precondition": gate_out,
+                }
+            precondition_evidence = {
+                "field": gate_out.get("field"),
+                "verdict": gate_out.get("verdict"),
+                "before": gate_out.get("before"),
+                "after": gate_out.get("after"),
+            }
         contract = normalize_contract(contract)
         training = None
         if contract is not None:
@@ -919,6 +982,29 @@ class VerifiedSkillStore:
         if contract is not None and not any(c == after_snippet for c in itertools.islice(
                 iter_crystallized_code_rule_candidates(before_snippet, rule), 64)):
             return {"crystallized": False, "reason": "RULE_DOES_NOT_REPRODUCE_VERIFIED_EXAMPLE"}
+        if oracle is not None or probes is not None:
+            from canonical.tools import rule_generalization_probe_v1 as _probe
+
+            probe_out = _probe.probe_rule(
+                before_snippet,
+                after_snippet,
+                oracle=oracle,
+                probes=probes,
+                victim_snippet=before_snippet,
+                rule=rule,
+            )
+            if probe_out.get("verdict") != _probe.HOLDS:
+                return {
+                    "crystallized": False,
+                    "reason": f"ORACLE_PROBE_{probe_out.get('verdict')}:{probe_out.get('reason')}",
+                    "oracle_probe": probe_out,
+                }
+            rule["oracle_probe"] = {
+                "verdict": probe_out["verdict"],
+                "probes_checked": len(probe_out.get("probes") or ()),
+            }
+        if precondition_evidence is not None:
+            rule["precondition_presence"] = precondition_evidence
         rule['record_version'] = 1
         rule['state'] = 'ACTIVE'
         rule['contract'] = contract
@@ -940,6 +1026,15 @@ class VerifiedSkillStore:
             'after_sha256': source_sha256(after_snippet),
             'taught_sources': [{'before': before_snippet, 'after': after_snippet}],
         }
+        from canonical.swe_kernel import skill_recheck_v1 as _recheck
+
+        recheck_out = _recheck.recheck(rule)
+        if recheck_out.get("verdict") != _recheck.PASS:
+            return {
+                "crystallized": False,
+                "reason": f"SKILL_RECHECK_{recheck_out.get('verdict')}:{recheck_out.get('reason')}",
+                "recheck": recheck_out,
+            }
         if contract is not None:
             rule['skill_id'] = skill_identity(rule)
         conn = _connect(self.db_path)
@@ -953,7 +1048,7 @@ class VerifiedSkillStore:
                 # Re-learning a rule on a second machine is evidence about BOTH machines, so the
                 # provenance grows instead of the newest origin overwriting the older one.
                 row = conn.execute(
-                    "SELECT provenance_json FROM crystallized_skills WHERE skill_id = ?",
+                    "SELECT provenance_json, pattern_json FROM crystallized_skills WHERE skill_id = ?",
                     (rule["skill_id"],),
                 ).fetchone()
                 try:
@@ -963,19 +1058,41 @@ class VerifiedSkillStore:
                 if not any(isinstance(p, Mapping) and p.get("origin") == entry["origin"
                            ] for p in provenance):
                     provenance.append(entry)
+                rule_to_store: dict[str, Any] = dict(rule)
+                if row and row[1]:
+                    try:
+                        existing_rule = json.loads(row[1])
+                    except (TypeError, ValueError):
+                        existing_rule = None
+                    if isinstance(existing_rule, dict):
+                        _merge_taught_sources(existing_rule, rule)
+                        for preserve_key in (
+                            "record_version",
+                            "parameters",
+                            "training_verification",
+                            "twin_verification",
+                            "training_baseline",
+                            "precondition_presence",
+                            "oracle_probe",
+                        ):
+                            if preserve_key in rule and preserve_key not in existing_rule:
+                                existing_rule[preserve_key] = rule[preserve_key]
+                        if existing_rule.get("state") != "INVALIDATED":
+                            existing_rule["state"] = rule.get("state", "ACTIVE")
+                        rule_to_store = existing_rule
                 conn.execute(
                     "INSERT INTO crystallized_skills "
                     "(skill_id, domain, language, error_class, skeleton_fp, pattern_json, created_ts, verified_hits, provenance_json) "
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) "
                     "ON CONFLICT(skill_id) DO UPDATE SET verified_hits = verified_hits + excluded.verified_hits, "
-                    "provenance_json = excluded.provenance_json",
+                    "provenance_json = excluded.provenance_json, pattern_json = excluded.pattern_json",
                     (
                         rule["skill_id"],
                         rule["domain"],
                         rule["language"],
                         rule["error_class"],
                         rule["skeleton_fp"],
-                        json.dumps(rule, separators=(",", ":")),
+                        json.dumps(rule_to_store, separators=(",", ":")),
                         time.time(),
                         int(training is not None),
                         json.dumps(provenance, separators=(",", ":")),
@@ -1108,6 +1225,8 @@ class VerifiedSkillStore:
         allow_cross_scope_transfer: bool = False,
         now_world_fingerprint: Mapping[str, Any] | None = None,
         suspect_lines: Sequence[int] | None = None,
+        prior_sources: Sequence[str] | None = None,
+        precondition_accessor: Callable[[str], Any] | None = None,
     ) -> dict[str, Any] | None:
         """Propose only within recorded applicability and actual current assurance.
 
@@ -1144,6 +1263,18 @@ class VerifiedSkillStore:
             raw_sl = context.get("suspect_lines")
             if isinstance(raw_sl, Sequence) and not isinstance(raw_sl, (str, bytes)):
                 eff_suspect_lines = [int(ln) for ln in raw_sl if isinstance(ln, int) and ln > 0]
+
+        eff_prior_sources: list[str] = [str(s) for s in (prior_sources or ()) if isinstance(s, str)]
+        if not eff_prior_sources and isinstance(context, Mapping):
+            raw_ps = context.get("prior_sources")
+            if isinstance(raw_ps, Sequence) and not isinstance(raw_ps, (str, bytes)):
+                eff_prior_sources = [str(s) for s in raw_ps if isinstance(s, str)]
+
+        eff_precond_accessor = precondition_accessor
+        if eff_precond_accessor is None and isinstance(context, Mapping):
+            cand_acc = context.get("precondition_accessor")
+            if callable(cand_acc):
+                eff_precond_accessor = cand_acc
 
         lang = language.lower()
         rules = _load_rules(self.db_path, lang)
@@ -1235,6 +1366,23 @@ class VerifiedSkillStore:
                 if cand is None or cand in seen_candidates:
                     continue
                 seen_candidates.add(cand)
+                if eff_precond_accessor is not None:
+                    from canonical.swe_kernel import skill_precondition_presence_v1 as _precond
+
+                    rec_pre = rule.get("precondition_presence") if isinstance(rule.get("precondition_presence"), Mapping) else {}
+                    pre_out = _precond.defect_is_present(
+                        source_text,
+                        cand,
+                        field=str(rec_pre.get("field") or "observable"),
+                        accessor=eff_precond_accessor,
+                    )
+                    if pre_out.get("verdict") not in _precond.PERMITS_LEARNING:
+                        continue
+                    if "before" in rec_pre and rec_pre.get("before") is not None:
+                        exp_before = tuple(rec_pre["before"]) if isinstance(rec_pre["before"], list) else rec_pre["before"]
+                        got_before = tuple(pre_out.get("before")) if isinstance(pre_out.get("before"), list) else pre_out.get("before")
+                        if got_before != exp_before:
+                            continue
                 batch.append(cand)
             if not batch:
                 return None, False
@@ -1265,12 +1413,19 @@ class VerifiedSkillStore:
                     return None, True
             return None, False
 
+        from canonical.swe_kernel import skill_recheck_v1 as _recheck
+
         for rule in ordered:
             if str(rule.get("skill_id") or "") in stale_ids:
                 continue
             if rule.get('state') not in (None, 'ACTIVE') or not applicable(
                 rule.get('contract'), scope_id, context, allow_cross_scope=allow_cross_scope_transfer
             ):
+                continue
+            if _recheck._rule_sources(rule):
+                if _recheck.recheck(rule).get("verdict") == _recheck.FAIL:
+                    continue
+            elif _recheck.self_witness(rule).get("verdict") == _recheck.FAIL:
                 continue
             recorded = rule.get('contract')
             if required_verification_kind != 'CALLER_PREDICATE' and (recorded is None or rule.get('record_version') != 1):
@@ -1279,7 +1434,7 @@ class VerifiedSkillStore:
                 continue
 
             learned_scope = str(rule.get("learned_scope") or "SCOPE_ALGEBRAIC")
-            seen_candidates: set[str] = {source_text}
+            seen_candidates: set[str] = {source_text, *eff_prior_sources}
             invalidated_mid_run = False
 
             # Stage 1 (`SCOPE_STATEMENT`): fast direct context-anchored unification (< 100 us)
@@ -1837,6 +1992,7 @@ class VerifiedSkillStore:
                     # Transported counterexamples may invalidate a live record;
                     # an older active bundle must never reactivate local invalidation.
                     retained = json.loads(old_pattern)
+                    _merge_taught_sources(retained, rule)
                     if rule.get('state') == 'INVALIDATED':
                         retained['state'] = 'INVALIDATED'
                         counterexamples = retained.setdefault('counterexamples', [])
@@ -1864,7 +2020,7 @@ class VerifiedSkillStore:
         finally:
             conn.close()
         # Any cached rule list for this store is now stale; a stale cache would hide an import.
-        for key in [k for k in _MEM_SKILLS if k.startswith(f"{self.db_path}::")]:
+        for key in [k for k in _MEM_SKILLS if k.startswith((f"{self.db_path}::", f"{self.db_path.resolve()}::"))]:
             _MEM_SKILLS.pop(key, None)
         return {"accepted": accepted, "merged": merged,
                 "refused": len(refusals), "refusals": refusals}
@@ -1925,6 +2081,136 @@ class VerifiedSkillStore:
                 return True
         finally:
             conn.close()
+
+    def audit_sequence_interference(
+        self,
+        source_text: str,
+        *,
+        language: str,
+        error_class: str | None = None,
+    ) -> dict[str, Any]:
+        """Run `skill_sequence_verify_v1.verify_all_pairs` over active stored rules."""
+        from canonical.swe_kernel import skill_sequence_verify_v1 as _seq
+
+        active = [
+            r for r in self.lookup_rules(language, error_class=error_class)
+            if r.get("state") in (None, "ACTIVE")
+        ]
+        return _seq.verify_all_pairs(source_text, active)
+
+    def apply_verified_sequence(
+        self,
+        *,
+        source_text: str,
+        language: str,
+        verifier: Callable[[str], bool],
+        rules: Sequence[Mapping[str, Any]] | None = None,
+        error_class: str | None = None,
+        max_steps: int = 4,
+    ) -> dict[str, Any]:
+        """Apply a sequence of rules verified by both `skill_sequence_verify_v1` and `verifier`."""
+        from canonical.swe_kernel import skill_sequence_verify_v1 as _seq
+
+        if rules is not None:
+            seq_out = _seq.verify_sequence(source_text, rules)
+            if seq_out.get("verdict") != _seq.PASS:
+                return {**seq_out, "verified": False}
+            final_text = str(seq_out.get("result") or source_text)
+            ver = evaluate(verifier, final_text, "CALLER_PREDICATE", "")
+            return {
+                **seq_out,
+                "verified": ver is not None,
+                "verification": ver,
+                "whole_task_correctness_proved": False,
+            }
+
+        history: list[str] = [source_text]
+        applied_rules: list[dict[str, Any]] = []
+        current = source_text
+        active_by_id = {
+            str(r.get("skill_id") or ""): r
+            for r in self.lookup_rules(language, error_class=error_class)
+        }
+        for _ in range(max(1, int(max_steps))):
+            hit = self.recall_and_apply_verified(
+                source_text=current,
+                language=language,
+                error_class=error_class,
+                verifier=verifier,
+                prior_sources=history,
+            )
+            if hit is None:
+                break
+            sid = str(hit.get("skill_id") or "")
+            rule_obj = active_by_id.get(sid)
+            if rule_obj is not None:
+                applied_rules.append(rule_obj)
+            current = str(hit["patched_source"])
+            history.append(current)
+
+        if not applied_rules:
+            return {
+                "verdict": _seq.NO_CHANGE,
+                "reason": "NO_APPLICABLE_VERIFIED_STEP",
+                "steps": [],
+                "source": source_text,
+                "result": source_text,
+                "verified": False,
+            }
+        seq_out = _seq.verify_sequence(source_text, applied_rules)
+        return {
+            **seq_out,
+            "verified": seq_out.get("verdict") == _seq.PASS,
+            "whole_task_correctness_proved": False,
+        }
+
+    def probe_skill_on_victim(
+        self,
+        skill_id: str,
+        victim_snippet: str,
+        *,
+        oracle: Callable[[str, Any], Any] | None,
+        probes: Sequence[Any] | None,
+        invalidate_on_break: bool = True,
+    ) -> dict[str, Any]:
+        """Execute a stored rule on a held-out victim via `rule_generalization_probe_v1` and invalidate on BREAKS."""
+        from canonical.tools import rule_generalization_probe_v1 as _probe
+
+        conn = _connect(self.db_path)
+        try:
+            row = conn.execute(
+                "SELECT pattern_json FROM crystallized_skills WHERE skill_id = ?",
+                (skill_id,),
+            ).fetchone()
+        finally:
+            conn.close()
+        if row is None:
+            return {"ok": False, "verdict": _probe.NO_RULE, "reason": "SKILL_NOT_FOUND", "skill_id": skill_id}
+        rule = json.loads(row[0])
+        sources = (rule.get("provenance") or {}).get("taught_sources") or []
+        before_s = str(sources[0].get("before") or "") if sources and isinstance(sources[0], Mapping) else ""
+        after_s = str(sources[0].get("after") or "") if sources and isinstance(sources[0], Mapping) else ""
+        outcome = _probe.probe_rule(
+            before_s,
+            after_s,
+            oracle=oracle,
+            probes=probes,
+            victim_snippet=victim_snippet,
+            rule=rule,
+        )
+        invalidated = False
+        if outcome.get("verdict") == _probe.BREAKS and invalidate_on_break:
+            invalidated = self.invalidate(
+                skill_id,
+                f"ORACLE_PROBE_BREAKS:{outcome.get('reason')}",
+                counterexample_sha256=source_sha256(victim_snippet),
+            )
+        return {
+            **outcome,
+            "ok": True,
+            "skill_id": skill_id,
+            "invalidated": invalidated,
+        }
 
     def crystallize_verified_fix(
         self,
