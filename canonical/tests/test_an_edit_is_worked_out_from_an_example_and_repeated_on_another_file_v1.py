@@ -44,9 +44,10 @@ ASSERTS = ("class T:\n"
            "        self.assertEquals(name, 'x')\n")
 NONE_BEFORE = "def f(total, rate):\n    if total == None:\n        return 0\n    return rate.x == None\n"
 NONE_AFTER = "def f(total, rate):\n    if total is None:\n        return 0\n    return rate.x is None\n"
-HAS_KEY = ("a = d.has_key(k)\nb = e.f.has_key('x')\n", "a = k in d\nb = 'x' in e.f\n")
-POWER = ("a = pow(x, 2)\nb = pow(y.z, 2)\n", "a = x ** 2\nb = y.z ** 2\n")
-FIRST = ("a = first(x)\nb = first(y[0])\n", "a = x[0]\nb = y[0][0]\n")
+# The third line of each shows the result called: a use that was not shown is refused, and the generated code below calls it.
+HAS_KEY = ("a = d.has_key(k)\nb = e.f.has_key('x')\nc = g.has_key(m)(1)\n", "a = k in d\nb = 'x' in e.f\nc = (m in g)(1)\n")
+POWER = ("a = pow(x, 2)\nb = pow(y.z, 2)\nc = pow(w, 2)(1)\n", "a = x ** 2\nb = y.z ** 2\nc = (w ** 2)(1)\n")
+FIRST = ("a = first(x)\nb = first(y[0])\nc = first(w)(1)\n", "a = x[0]\nb = y[0][0]\nc = w[0](1)\n")
 JOIN = ("import os\nx = os.path.join(a, b)\ny = os.path.join(c.d, 'e')\n",
         "import os\nfrom pathlib import Path\nx = Path(a) / b\ny = Path(c.d) / 'e'\n")
 
@@ -120,7 +121,8 @@ def test_only_the_places_that_fit_are_changed_and_everything_else_keeps_its_byte
               "        value = self.assertEquals(a, b, msg='why')\r\n"
               "        other.assertEquals(a, b)\r\n"
               "        note = 'self.assertEquals(1, 1)'   # caf\u00e9\r\n")
-    edited = by_example.edit_by_example(target, ASSERTS, ASSERTS.replace("assertEquals", "assertEqual"))
+    shown = ASSERTS + "        self.assertEquals(name, 'y', msg='named')\n"      # the keyword is used below, so it is shown
+    edited = by_example.edit_by_example(target, shown, shown.replace("assertEquals", "assertEqual"))
     assert edited == (target.replace("self.assertEquals( len", "self.assertEqual( len")
                       .replace("value = self.assertEquals", "value = self.assertEqual"))
 
@@ -299,13 +301,13 @@ def test_the_program_refuses_without_writing(tmp_path, monkeypatch, capsys) -> N
     monkeypatch.chdir(tmp_path)
     for name, text in (("t.py", "x = 1\n"), ("a.py", NONE_BEFORE), ("b.py", NONE_AFTER)):
         (tmp_path / name).write_text(text, encoding="utf-8")
-    assert by_example.main(("t.py", "a.py", "b.py")) == 3
+    assert by_example.main(("edit", ("t.py", "a.py", "b.py"))) == 3
     assert capsys.readouterr().out.startswith("REFUSED: nothing in the file has the form")
     assert (tmp_path / "t.py").read_text(encoding="utf-8") == "x = 1\n"
-    assert by_example.main(("../t.py", "a.py", "b.py")) == 3
+    assert by_example.main(("edit", ("../t.py", "a.py", "b.py"))) == 3
     assert "must be a path inside the project" in capsys.readouterr().out
     (tmp_path / "t.py").write_text("if v == None:\n    pass\n", encoding="utf-8")
-    assert by_example.main(("t.py", "a.py", "b.py")) == 0
+    assert by_example.main(("edit", ("t.py", "a.py", "b.py"))) == 0
     assert capsys.readouterr().out == "edited t.py the way a.py was changed into b.py\n"
     assert (tmp_path / "t.py").read_text(encoding="utf-8") == "if v is None:\n    pass\n"
 

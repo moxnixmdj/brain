@@ -181,6 +181,30 @@ specified in `THE_PRIOR_IS_THE_WHOLE_GAME_20261112_V1.md` §5 Program C. That re
 long-horizon bet and this round does not change its priority relative to the two items above, both
 of which are cheaper and land sooner.
 
+### 3b. Correction, added 2026-11-12 by round 4 — this section overstates its own claim
+
+The paragraph above calls the 11 blind premises *"the highest expected capability gain per hour
+available today"*. That sentence does not survive measurement. It is kept above unedited because
+the error is instructive, and corrected here:
+
+| Claim in §3 | Round-4 measurement |
+|---|---|
+| the premise is the blocker | it is the **first** blocker: 10/10 rejected `PRECONDITION_NOT_TRUE_OF_WORLD` |
+| closing it unblocks them | only **3/10**; **7/10** then fail `NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES` |
+| this is the highest-gain item | **no** — a 145-capability census gives 54 binding failures vs 12 premise failures |
+
+The 11 premises are **12 capabilities, 8% of the registry**. Binding is **54, 37%** — four and a
+half times larger, and it was never counted here. The probe-artifact caveat recorded in round 3 is
+resolved: realistic sentences reproduce the binding failures.
+
+Round 4 also found that the audit was hiding a real defect: `world_probe_v1._kinds_of` matched
+file kinds as substrings, so `chart.raster.*` declared itself a Python-AST consumer and was
+eliminated by any goal naming an image — **7 of 8 tested capabilities eliminated before selection,
+0 of 8 after the repair**. A capability eliminated before it can be tried is not learnable at all,
+which is a stronger reason to fix interfaces than anything in §3.
+
+Full argument and numbers: `A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md`.
+
 ---
 
 ## 4. What is wrong in the original sentence, stated plainly
