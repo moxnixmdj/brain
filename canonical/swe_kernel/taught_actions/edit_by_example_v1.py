@@ -1124,6 +1124,12 @@ def learn_all(examples, wide=False):
     rules = []
     for group in groups:
         rule = rule_for(group, changed)
+        if rule is None and all(is_import(levels[0][0]) and is_import(levels[0][1]) for levels in group):
+            # The examples changed their import lines different ways, or another example's untouched
+            # import speaks against the line: an import is each file's own bookkeeping, so no rule is
+            # learned for these lines and nothing of the code-level lesson is lost.  What the new code
+            # needs still arrives per target through the recorded origins, gated as always.
+            continue
         if rule is None:
             first = group[0][0][0]
             raise Refused("line %d of %s was changed, but the same code was left alone, or changed another way, "
@@ -1507,6 +1513,42 @@ def aliases_to_follow(text, places, fail_at):
     return found
 
 
+def aliases_to_add(text, places, fail_at):
+    """The file's own from-import line, extended with a needed name whose origin the lesson knows.
+
+    A standing bring (a name the examples' files import from one unambiguous place, with no line any
+    example added) is skipped where the file already imports from that module -- reshaping an existing
+    line is the file's own.  This is that reshaping: when exactly one plain from-import line of the very
+    module stands in the file, no place already rewrites it, and the name is free, the one alias the
+    person would have added is added where they would have added it.  Anything less certain adds nothing.
+    """
+    taken = {id(node) for _, node, _, _ in places}
+    found, considered = [], set()
+    for (_, node, rule, _) in places:
+        if isinstance(rule, (Renamed, Rebound)) or (fail_at is not None and node is fail_at[1]):
+            continue
+        for name in sorted(rule.needs):
+            if (name not in getattr(rule, "standing", ()) or name not in rule.bring or name in considered
+                    or name in text.defined or text.provides(name, node)):
+                continue
+            considered.add(name)
+            statement = ast.parse(rule.bring[name]).body[0]
+            if not isinstance(statement, ast.ImportFrom):
+                continue
+            inner = statement.names[0].name
+            lines = [one for one in ast.walk(text.tree)
+                     if isinstance(one, ast.ImportFrom) and not one.level and one.module == statement.module
+                     and all(alias.name != "*" for alias in one.names)]
+            if len(lines) != 1 or id(lines[0]) in taken or any(
+                    (alias.asname or alias.name) == name for alias in lines[0].names):
+                continue
+            names = list(lines[0].names) + [ast.alias(name=inner, asname=None if inner == name else name)]
+            line = ast.unparse(ast.ImportFrom(module=lines[0].module, names=names, level=0))
+            taken.add(id(lines[0]))
+            found.append((text.span(lines[0]), lines[0], Rebound(line), {}))
+    return found
+
+
 def renames_to_add(text, places, fail_at):
     """Places that rename a read left pointing at nothing, after the examples renamed its import.
 
@@ -1554,8 +1596,9 @@ def renames_to_add(text, places, fail_at):
 
 def written(text, places, what="the file", check_names=True, fail_at=None):
     """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
-    return written_once(text, places + renames_to_add(text, places, fail_at)
-                        + aliases_to_follow(text, places, fail_at), what, check_names, fail_at)
+    added = renames_to_add(text, places, fail_at) + aliases_to_follow(text, places, fail_at)
+    added += aliases_to_add(text, places + added, fail_at)
+    return written_once(text, places + added, what, check_names, fail_at)
 
 
 def written_once(text, places, what="the file", check_names=True, fail_at=None):
