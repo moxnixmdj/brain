@@ -27,18 +27,18 @@
    "created": 1793264684.326955,
    "helped": 0,
    "id": "g1025082313878",
-   "last_seen": 1794495677.4076278,
+   "last_seen": 1794496666.5398252,
    "resolved": false,
    "trials": 0,
-   "what": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2",
-   "why": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2"
+   "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
+   "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
   "g1051569409963": {
    "cost": 1.0,
    "created": 1793297609.2061357,
    "helped": 0,
    "id": "g1051569409963",
-   "last_seen": 1794495068.6796045,
+   "last_seen": 1794496748.4917228,
    "resolved": false,
    "trials": 1,
    "what": "probe:--output|--input",
@@ -71,9 +71,9 @@
    "created": 1793297609.1969573,
    "helped": 0,
    "id": "g1067294585537",
-   "last_seen": 1794495068.6995358,
+   "last_seen": 1794496748.5198512,
    "resolved": false,
-   "trials": 8,
+   "trials": 12,
    "what": "probe:--output=|positional",
    "why": "empirical cli probe"
   },
@@ -93,9 +93,9 @@
    "created": 1793297609.1961474,
    "helped": 0,
    "id": "g116784418683",
-   "last_seen": 1794495068.7214866,
+   "last_seen": 1794496748.549506,
    "resolved": false,
-   "trials": 12,
+   "trials": 18,
    "what": "probe:>|positional",
    "why": "empirical cli probe"
   },
@@ -225,9 +225,9 @@
    "created": 1793264466.9918926,
    "helped": 0,
    "id": "g248600897844",
-   "last_seen": 1794495068.708282,
+   "last_seen": 1794496748.5317435,
    "resolved": false,
-   "trials": 4,
+   "trials": 6,
    "what": "probe:--out|positional",
    "why": "empirical cli probe"
   },
@@ -302,9 +302,9 @@
    "created": 1793264466.991594,
    "helped": 0,
    "id": "g296367416154",
-   "last_seen": 1794495068.7039537,
+   "last_seen": 1794496748.5257664,
    "resolved": false,
-   "trials": 4,
+   "trials": 6,
    "what": "probe:--outfile|positional",
    "why": "empirical cli probe"
   },
@@ -357,7 +357,7 @@
    "created": 1793264466.9956858,
    "helped": 0,
    "id": "g329815205364",
-   "last_seen": 1794495068.6823316,
+   "last_seen": 1794496748.4955368,
    "resolved": false,
    "trials": 2,
    "what": "probe:--output|--data",
@@ -445,7 +445,7 @@
    "created": 1793266064.38011,
    "helped": 0,
    "id": "g421844338923",
-   "last_seen": 1794495068.6808882,
+   "last_seen": 1794496748.4935036,
    "resolved": false,
    "trials": 1,
    "what": "probe:-o|-d",
@@ -544,7 +544,7 @@
    "created": 1793266064.3790646,
    "helped": 0,
    "id": "g482551162764",
-   "last_seen": 1794495068.6753902,
+   "last_seen": 1794496748.4862158,
    "resolved": false,
    "trials": 1,
    "what": "probe:--output|stdin",
@@ -608,11 +608,11 @@
   "g551150868865": {
    "cost": 1.0,
    "created": 1793297609.2022235,
-   "helped": 4,
+   "helped": 6,
    "id": "g551150868865",
-   "last_seen": 1794495068.7265377,
+   "last_seen": 1794496748.5556517,
    "resolved": false,
-   "trials": 7,
+   "trials": 11,
    "what": "probe:>|stdin",
    "why": "empirical cli probe"
   },
@@ -918,9 +918,9 @@
    "created": 1793297609.2007535,
    "helped": 0,
    "id": "g84707193898",
-   "last_seen": 1794495068.7168517,
+   "last_seen": 1794496748.5437741,
    "resolved": false,
-   "trials": 4,
+   "trials": 6,
    "what": "probe:--file|positional",
    "why": "empirical cli probe"
   },
@@ -940,7 +940,7 @@
    "created": 1793264466.9942186,
    "helped": 0,
    "id": "g869610903178",
-   "last_seen": 1794495068.6768277,
+   "last_seen": 1794496748.4881167,
    "resolved": false,
    "trials": 2,
    "what": "probe:--outfile|stdin",
@@ -956,6 +956,17 @@
    "trials": 3,
    "what": "probe:>|positional",
    "why": "empirical cli probe"
+  },
+  "g8e45f0babc3246eadf6208a33463e37ca07acb25180e27c9758eb56ee8f302af": {
+   "cost": 1.0,
+   "created": 1794496082.0886269,
+   "helped": 0,
+   "id": "g8e45f0babc3246eadf6208a33463e37ca07acb25180e27c9758eb56ee8f302af",
+   "last_seen": 1794496082.0886269,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator root6ede673e7751"
   },
   "g941143180589": {
    "cost": 1.0,
@@ -1100,6 +1111,17 @@
    "what": "retry",
    "why": "unknown_operator roota8b34bd3ce02"
   },
+  "gb34ea227eb0b04be5e179b63a1a3103d0c798806278bb39a9198dd3ec4e704ad": {
+   "cost": 1.0,
+   "created": 1794496081.492799,
+   "helped": 0,
+   "id": "gb34ea227eb0b04be5e179b63a1a3103d0c798806278bb39a9198dd3ec4e704ad",
+   "last_seen": 1794496081.492799,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root66b12e69b598"
+  },
   "gbb1d3a932eb1a9138ad8b6510c3cf5ba77ac4a73ab5c695ad9ea943ae26ee425": {
    "cost": 1.0,
    "created": 1794495950.937028,
@@ -1111,6 +1133,17 @@
    "what": "retry",
    "why": "unknown_operator root3da35617f83b"
   },
+  "gbd1c2af394fb2f49835f9bc0f16693623fd9814f3c1d05acbbf39ec7bad52a17": {
+   "cost": 1.0,
+   "created": 1794496084.9687698,
+   "helped": 1,
+   "id": "gbd1c2af394fb2f49835f9bc0f16693623fd9814f3c1d05acbbf39ec7bad52a17",
+   "last_seen": 1794496084.9991043,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator root8fe5fd19bb40"
+  },
   "gc2111bc0c8d323fb1ee346b606a0413cf32c53c11ce6c4437246386be73773bd": {
    "cost": 1.0,
    "created": 1794494227.282479,
@@ -1121,6 +1154,17 @@
    "trials": 0,
    "what": "about",
    "why": "unknown_operator root996d0c94ac90"
+  },
+  "gc54a2849cc6d5647544a701c64fdbd7d5e7802a182a90069e595df395a7c933f": {
+   "cost": 1.0,
+   "created": 1794496081.495328,
+   "helped": 0,
+   "id": "gc54a2849cc6d5647544a701c64fdbd7d5e7802a182a90069e595df395a7c933f",
+   "last_seen": 1794496081.495328,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root66b12e69b598"
   },
   "gd017788ab2e8ec97d330bee5aa1a2b5f5b24df5103b1c8c94c12437a6e953c40": {
    "cost": 1.0,

@@ -2,8 +2,27 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1794494711.3382552,
+   "last_seen": 1794496393.0991244,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -94,8 +113,10 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1794494711.463853,
+   "last_seen": 1794496393.2624476,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,
@@ -120,8 +141,9 @@
   },
   "auto.pypi.msgpack|bound_pypi_install_failed": {
    "first_seen": 1794494700.5311034,
-   "last_seen": 1794495337.5388606,
+   "last_seen": 1794496383.2793586,
    "observations": [
+    -1,
     -1,
     -1,
     -1
@@ -177,8 +199,9 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1794494710.3137314,
+   "last_seen": 1794496392.5188076,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -549,8 +572,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1794494710.1698408,
+   "last_seen": 1794496392.3642335,
    "observations": [
+    1,
     1,
     1,
     1,

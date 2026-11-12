@@ -31227,15 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-<<<<<<< HEAD
-  "knowledge_documents": 316,
+  "knowledge_documents": 323,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6711,
-=======
-  "knowledge_documents": 322,
-  "receipt_backed_capabilities": 294,
-  "research_index_records": 6731,
->>>>>>> origin/main
+  "research_index_records": 6732,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31244,11 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-<<<<<<< HEAD
-  "value": "83fa8731b72fb5ab0d2e9d0c0bad14351ea8587a667024bd8a259d24e71d11be"
-=======
-  "value": "7bdb1939516ec58dfbf7d28c373cc7230b414ed69aae36106650ac2c5f6c4eef"
->>>>>>> origin/main
+  "value": "4dbedf394dc6816d503d6859a774325f968c00cf3fd02cbbe8b7e47f4716a630"
  },
  "engines": [
   {
@@ -69911,17 +69901,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-<<<<<<< HEAD
-  "included_source_count": 1118,
+  "included_source_count": 1125,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3059ff6ff72bffdb7922a08a225f88bcd9fe9dea487376d3ad8c265e47851d9a"
-=======
-  "included_source_count": 1124,
-  "incremental_spend_usd": 0,
-  "network_calls": 0,
-  "source_tree_digest": "3ee449bdc514bbea1994ff46f1956eb1c855926b73add1c00742304995e9e666"
->>>>>>> origin/main
+  "source_tree_digest": "b9a46e96dc6fc34a5a3a803147b00e0ab6edaa00940ba948210aa732ca812f80"
  },
  "research_index": [
   {
@@ -225016,7 +224999,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "2b7efcf58ebc90cc22678d1edec2b17cbe0b031126580d7fd4d44e39d39dc02c",
+   "sha256": "0cad2091819348d4d750227fddffc8181f5f97bb12272615043060dc5f119f78",
    "status": "",
    "terms": {
     "20261112": 1,

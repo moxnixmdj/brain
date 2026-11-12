@@ -239,11 +239,11 @@
   "mission_id": "R9CENSUS",
   "next_action_index": 3,
   "plan_sha256": "03e36dce04e2e1b1e00610dcf9b95119d3ca5b9fa6924cb26b8ffca0ff9610cd",
-  "resume_count": 6,
+  "resume_count": 7,
   "rewind_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "live-raw-goal-controller",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-11-12T14:40:56.152197+00:00"
+  "updated_at_utc": "2026-11-12T15:09:04.903092+00:00"
 }
