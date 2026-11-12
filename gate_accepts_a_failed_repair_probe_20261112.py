@@ -56,6 +56,45 @@ TEST_PATHS = ["test_calc.py"]
 LEGACY_EXPECT: dict[str, Any] = {"type": "field_equals", "field": "output_verified", "value": True}
 TASK_TEXT = "make test_calc.py pass"
 
+#: The POSITIVE control. Every test above asks the gate to reject a failure, and a gate that
+#: rejects *everything* passes all of them. This fixture is the other direction: `return x + x`
+#: is wrong for `square`, and `Add -> Mult` is in the search grammar (`_BINOP_SWAPS`), so the
+#: repair `x * x` is reachable inside the same budgets. The live predicate must ACCEPT it.
+#:
+#: Measured 2026-11-12: five repair solvers return `pass == True` here and the live registry
+#: accepts 5/5, so the round-7 narrowing did not disable the repair surface.
+#:
+#: `return x` (no operator) is deliberately NOT used: the grammar has no name-to-binop rule, so
+#: every adapter correctly reports OPEN and the fixture would have "shown" that repointing
+#: broke repair. That mistake was made and is recorded rather than hidden.
+REPAIRABLE_FIXTURE: dict[str, str] = {
+    "calc.py": "def square(x):\n    return x + x\n",
+    "test_calc.py": (
+        "from calc import square\n\n\n"
+        "def test_square():\n"
+        "    assert square(3) == 9\n"
+        "    assert square(4) == 16\n"
+    ),
+}
+
+#: Only the solvers. The two acceptance controllers are excluded on purpose: they gate on a
+#: measurement receipt / request contract this fixture does not supply, so they answer
+#: `pass == False` even though a patch exists. That is correct fail-closed behaviour -- and the
+#: legacy transport predicate accepted both, which is the defect round 7 removed.
+REPAIR_SOLVERS: tuple[str, ...] = (
+    "python.patch.search.test_guided.ast.v1",
+    "python.software.repair.loop.coupled.ast.v1",
+    "python.software.repair.loop.strict_progress.ast.v1",
+    "python.software.repair.loop.test_guided.ast.v1",
+    "python.software.repair.guided.provenance.coupled.v1",
+)
+
+#: The two controllers, measured separately so their refusal is evidence and not an omission.
+ACCEPTANCE_CONTROLLERS: tuple[str, ...] = (
+    "python.software.repair.measured_acceptance.v1",
+    "python.software.repair.semantic_acceptance.v1",
+)
+
 #: capability_id -> (adapter module, args). Every one of these is a DEFINITE case in round 5.
 CASES: dict[str, tuple[str, dict[str, Any]]] = {
     "python.patch.search.test_guided.ast.v1": (
@@ -132,15 +171,16 @@ def apply_predicate(expect: Mapping[str, Any], result: Mapping[str, Any]) -> boo
     raise ValueError(f"UNSUPPORTED_EXPECT_TYPE:{kind}")
 
 
-def _materialise() -> pathlib.Path:
+def _materialise(fixture: Mapping[str, str] | None = None) -> pathlib.Path:
     root = pathlib.Path(tempfile.mkdtemp(prefix="failed_repair_"))
-    for name, body in FIXTURE.items():
+    for name, body in (FIXTURE if fixture is None else fixture).items():
         (root / name).write_text(body, encoding="utf-8")
     return root
 
 
-def _one(capability_id: str, module_name: str, args: Mapping[str, Any]) -> dict[str, Any]:
-    root = _materialise()
+def _one(capability_id: str, module_name: str, args: Mapping[str, Any],
+         fixture: Mapping[str, str] | None = None) -> dict[str, Any]:
+    root = _materialise(fixture)
     started = time.time()
     try:
         module = _load(module_name)
@@ -181,6 +221,65 @@ def _one(capability_id: str, module_name: str, args: Mapping[str, Any]) -> dict[
     }
 
 
+def run_positive_control() -> dict[str, Any]:
+    """The missing half: a repair that IS reachable must still be ACCEPTED by the live gate.
+
+    A gate that rejects everything rejects every failed repair too, so the failure path alone
+    cannot distinguish a corrected gate from a disabled one. This executes the same adapters on
+    a defect whose repair is inside the mutation grammar and requires the LIVE predicate to
+    accept the verified result. It also records what the legacy predicate did, and measures the
+    two acceptance controllers separately because their refusal on this fixture is correct.
+    """
+    if str(REPO_ROOT) not in sys.path:
+        sys.path.insert(0, str(REPO_ROOT))
+    solvers = [
+        _one(cid, *CASES[cid], fixture=REPAIRABLE_FIXTURE) for cid in REPAIR_SOLVERS
+    ]
+    controllers = [
+        _one(cid, *CASES[cid], fixture=REPAIRABLE_FIXTURE) for cid in ACCEPTANCE_CONTROLLERS
+    ]
+    ran = [r for r in solvers if r["ran"]]
+    ran_ctrl = [r for r in controllers if r["ran"]]
+    return {
+        "probe": "gate_accepts_a_reachable_repair",
+        "authority": "NONE",
+        "executed": True,
+        "model_dependency_count": 0,
+        "incremental_spend_usd": 0,
+        "fixture": REPAIRABLE_FIXTURE,
+        "fixture_note": (
+            "return x + x is wrong for square, and Add -> Mult is in _BINOP_SWAPS, so x * x is "
+            "reachable inside the same candidate budgets. The live predicate must accept it."
+        ),
+        "records": solvers,
+        "controller_records": controllers,
+        "summary": {
+            "solvers": len(solvers),
+            "ran": len(ran),
+            "found_and_verified_repair": sum(1 for r in ran if r["passed"] is True),
+            "registry_accepts_the_repair": sum(1 for r in ran if r["registry_accepts"] is True),
+            "registry_rejects_a_real_repair": sum(
+                1 for r in ran if r["passed"] is True and r["registry_accepts"] is False
+            ),
+            "legacy_accepts_the_repair": sum(1 for r in ran if r["legacy_accepts"] is True),
+            "controllers_ran": len(ran_ctrl),
+            "controllers_fail_closed": sum(1 for r in ran_ctrl if r["passed"] is False),
+            "controllers_the_live_gate_rejects": sum(
+                1 for r in ran_ctrl if r["registry_accepts"] is False
+            ),
+            "controllers_the_legacy_gate_accepted": sum(
+                1 for r in ran_ctrl if r["legacy_accepts"] is True
+            ),
+        },
+        "hard_nonclaims": [
+            "ONE_REPAIRABLE_FIXTURE__NOT_A_REPAIR_COMPLETENESS_MEASURE",
+            "NO_ADAPTER_CHANGED",
+            "NO_ACCEPTANCE_CREDIT",
+            "NO_TRUTH_ACHIEVED",
+        ],
+    }
+
+
 def run() -> dict[str, Any]:
     if str(REPO_ROOT) not in sys.path:
         sys.path.insert(0, str(REPO_ROOT))
@@ -216,13 +315,14 @@ def run() -> dict[str, Any]:
                 1 for r in ran if r["declared_result_fields"]
             ),
         },
+        "positive_control": run_positive_control()["summary"],
         "hard_nonclaims": [
             "NO_CAPABILITY_RE_REGISTERED",
             "NO_ADAPTER_CHANGED",
             "NO_ACCEPTANCE_CREDIT",
             "NO_TRUTH_ACHIEVED",
             "NO_GENERAL_REPAIR_COMPLETENESS",
-            "MEASURES_THE_FAILURE_PATH_ONLY",
+            "FAILURE_PATH_PLUS_ONE_REPAIRABLE_FIXTURE__NOT_A_COMPLETENESS_MEASURE",
         ],
     }
 
@@ -253,6 +353,24 @@ def main(argv: list[str] | None = None) -> int:
           f"{s['pass_declared_in_result_fields']:>3}")
     if s["failed_to_run"]:
         print(f"  adapters that could not run                              {s['failed_to_run']:>4}")
+
+    p = report["positive_control"]
+    print()
+    print("The same gate, fed a repair that IS reachable (positive control)")
+    print("=" * 72)
+    print(f"  repair solvers executed                                  {p['ran']:>4}")
+    print(f"  found and verified a real repair                         "
+          f"{p['found_and_verified_repair']:>4}")
+    print(f"  the LIVE predicate accepts the repair                    "
+          f"{p['registry_accepts_the_repair']:>4}")
+    print(f"  the LIVE predicate REJECTS a real repair                 "
+          f"{p['registry_rejects_a_real_repair']:>4}")
+    print(f"  acceptance controllers that fail closed (correct)        "
+          f"{p['controllers_fail_closed']:>4}")
+    print(f"  ...the LIVE gate rejects them                            "
+          f"{p['controllers_the_live_gate_rejects']:>4}")
+    print(f"  ...the LEGACY gate accepted them                         "
+          f"{p['controllers_the_legacy_gate_accepted']:>4}")
 
     if args.list:
         print()
