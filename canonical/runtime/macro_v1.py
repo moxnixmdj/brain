@@ -45,6 +45,9 @@ import time
 from pathlib import Path
 
 SCHEMA = "PROJECT_BRAIN_MACRO_V1"
+# The environment where a plan was PROVED, stored on the entry. Absent on
+# entries written before this field existed, and absent means "unaddressed".
+WHERE_THE_PLAN_WAS_PROVED = "proved_where"
 RUNTIME = Path(__file__).resolve().parent
 STATE = RUNTIME / "state" / "chain_macros_v1.json"
 
@@ -125,8 +128,13 @@ def lookup(clauses):
     return {"key": key, "plan": plan, "record": got}
 
 
-def record(clauses, steps) -> bool:
-    """Remember a plan that finished. Only finished plans are worth keeping."""
+def record(clauses, steps, where: str = "") -> bool:
+    """Remember a plan that finished. Only finished plans are worth keeping.
+
+    `where` names the environment the plan was PROVED in. Evidence is counted
+    against this address, so a failure observed somewhere else can neither
+    discredit this plan nor delete it. Omitted -> exactly the old behaviour.
+    """
     from canonical.runtime.memory_policy_v1 import can_write_memory
 
     if not can_write_memory():
@@ -154,12 +162,13 @@ def record(clauses, steps) -> bool:
             "successes": 1,
             "created": now,
             "last_used": now,
+            WHERE_THE_PLAN_WAS_PROVED: str(where or "").strip().lower(),
         }
     _save(data)
     return True
 
 
-def note_failure(key: str) -> bool:
+def note_failure(key: str, where: str = "") -> bool:
     """A failure is EVIDENCE ABOUT AN INSTANCE, not a verdict on the plan.
 
     FORTH SIGHTING OF THE SAME ERROR, and it keeps arriving because the
@@ -175,6 +184,33 @@ def note_failure(key: str) -> bool:
     the evidence against it outweighs the evidence for it, which is the
     e-process rule this codebase already uses elsewhere: no single run
     decides anything.
+
+    FIFTH SIGHTING, AND THE COARSEST ONE YET: THE ENVIRONMENT.
+
+    The same bug, one level up. `signature` is deliberately invariant to
+    everything except the verbs and the file kinds, so it contains no
+    environment at all. Measured: a job proved on a machine that has the
+    binaries and a job proved on a machine that does not are the SAME KEY,
+    and the same macro. So environment B inherits A's plan, and -- worse --
+    B's failures are counted against A's successes until A's knowledge is
+    gone. Measured on this module: `record` once on A (successes=1), two
+    `note_failure` calls on B, and `lookup` on A returns None. One
+    environment destroyed another's knowledge, and A was right all along.
+
+    THE REPAIR IS NOT A SMALLER UNIT OF MEMORY. Narrowing the key again is
+    the same move that produced every previous sighting. What the key
+    cannot know, the FAILURE can say: a caller who knows where it ran
+    passes `where`, and evidence is then counted PER ENVIRONMENT. Nothing
+    is generalised by assumption and nothing is thrown away by accident.
+
+        note_failure(key)             -- unchanged, counts for everyone
+        note_failure(key, "b.example") -- counts only for b.example
+
+    A plan proved on A is not harmed by B's failures, and B keeps its own
+    ledger. That is experience_v1's rule applied to this organ: the unit of
+    memory is the ENVIRONMENT-SPECIFIC PATHOLOGY, not the task. When the
+    caller says nothing, behaviour is exactly what it was -- this adds an
+    address, it does not change the policy.
     """
     if not key:
         return False
@@ -186,6 +222,20 @@ def note_failure(key: str) -> bool:
     macros = data.get("macros") or {}
     entry = macros.get(key)
     if not isinstance(entry, dict):
+        return False
+    env = str(where or "").strip().lower()
+    proved_where = str(entry.get(WHERE_THE_PLAN_WAS_PROVED) or "").strip().lower()
+    # ADDRESSED EVIDENCE. A failure observed somewhere OTHER than where the
+    # plan was proved is a fact about that somewhere, and may never override
+    # the successes of a place it did not observe.
+    other_environment = bool(env) and bool(proved_where) and env != proved_where
+    if other_environment:
+        per_env = entry.get("failures_by_environment")
+        per_env = dict(per_env) if isinstance(per_env, dict) else {}
+        per_env[env] = int(per_env.get(env) or 0) + 1
+        entry["failures_by_environment"] = per_env
+        entry["failures"] = int(entry.get("failures") or 0) + 1
+        _save(data)
         return False
     entry["failures"] = int(entry.get("failures") or 0) + 1
     if int(entry.get("failures") or 0) > int(entry.get("successes") or 0):

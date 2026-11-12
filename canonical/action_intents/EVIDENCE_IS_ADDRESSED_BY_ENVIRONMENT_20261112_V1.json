@@ -1,0 +1,223 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "EVIDENCE_IS_ADDRESSED_BY_ENVIRONMENT_20261112_V1",
+ "action_intent_id": "EVIDENCE_IS_ADDRESSED_BY_ENVIRONMENT_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "EVIDENCE_IS_ADDRESSED_BY_ENVIRONMENT_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "808e72ac4a5a306ee122e69cadebff94db123b96",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Tests the one part of the owner's claim never measured -- instant learning in new arbitrary environments. macro_v1's signature is invariant to everything but verbs and file kinds, so it contains no environment. Measured: a job proved on machine A is returned unchanged on machine B; B's two failures delete A's macro; A then re-plans from scratch although A was right. That is the fifth sighting of the bug macro_v1's docstring enumerates (file kind, precondition, directory), now at the environment. Rather than narrow the key again -- the move that produced every sighting -- record() takes an optional where and note_failure() counts addressed evidence per environment. Measured after: A proves once and B fails 5x, A's plan is remembered; a failure at the SAME address still deletes; an unaddressed record cannot be shielded. Also measures that 56 of 145 capabilities declare no preconditions at all, so nothing can ever tell the machine that a given box cannot run them.",
+ "selected_route": "MEASURE_APPLICABILITY_IDENTIFIABILITY_AND_PRICE_THE_REGISTRY_PREMISES",
+ "causal_blocker": "THE_MEMORY_THAT_CARRIES_A_LEARNED_JOB_HAS_NO_REPRESENTATION_OF_THE_ENVIRONMENT_THAT_PROVED_IT__SO_KNOWLEDGE_FLOWS_FREELY_BETWEEN_ENVIRONMENTS_AND_ONE_ENVIRONMENTS_FAILURES_DELETE_ANOTHERS_KNOWLEDGE__PLUS_FIFTY_SIX_OF_ONE_HUNDRED_FORTY_FIVE_CAPABILITIES_DECLARE_NO_PRECONDITIONS_SO_NO_PERCEPTION_CHECK_CAN_EVER_FAIL",
+ "expected_parent_change": "THE_FALSE_GENERAL_CLAIM_THAT_INSTANT_LEARNING_IN_NEW_ARBITRARY_ENVIRONMENTS_IS_SOLVED_IS_REFUTED_BY_MEASUREMENT_AND_EVIDENCE_BECOMES_ADDRESSED_BY_THE_ENVIRONMENT_THAT_OBSERVED_IT",
+ "expected_parent_frontier_change": "NO_CAPABILITY_CREDIT__NO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__ADDRESSED_EVIDENCE__AND_FIFTY_SIX_UNDECLARED_PRECONDITION_ROWS_NAMED_AS_THE_NEXT_MEASURED_ITEM",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_MEMORY_THAT_CARRIES_A_LEARNED_JOB_HAS_NO_REPRESENTATION_OF_THE_ENVIRONMENT_THAT_PROVED_IT__SO_KNOWLEDGE_FLOWS_FREELY_BETWEEN_ENVIRONMENTS_AND_ONE_ENVIRONMENTS_FAILURES_DELETE_ANOTHERS_KNOWLEDGE__PLUS_FIFTY_SIX_OF_ONE_HUNDRED_FORTY_FIVE_CAPABILITIES_DECLARE_NO_PRECONDITIONS_SO_NO_PERCEPTION_CHECK_CAN_EVER_FAIL",
+ "falsification_condition": "AN_UNPROVED_JOB_TURNS_OUT_TO_BE_SCOPED_TO_A_SINGLE_ENVIRONMENT__OR_A_FAILURE_OBSERVED_ELSEWHERE_STILL_DELETES_A_PLAN_PROVED_HERE__OR_A_FAILURE_AT_THE_SAME_ADDRESS_FAILS_TO_DELETE__OR_THE_UNCHANGED_CALL_PATH_BEHAVES_DIFFERENTLY",
+ "stop_condition": "SEVEN_ENVIRONMENT_ADDRESS_TESTS_PASS__NINETEEN_PREEXISTING_SUBSET_FAILURES_BEFORE_AND_AFTER__ZERO_NEW_FAILURES__DRIFT_GUARD_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "explicit_user_authorization": "Owner directive 2026-11-12: we already solved instant learning and instant learning in new arbitrary environments perfectly -- is that true or are there things that are wrong, what is real and what is not, and what are the smartest things to do. The owner also asks whether this solves anything on a computer and whether to give the model a try in every new environment. Answer by measurement from first principles, kill dumb ideas before implementing, use the latest research. /bin/bash spend, zero model dependency, no protected path touched.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/macro_v1.py",
+   "canonical/tests/test_an_environment_cannot_delete_another_environments_knowledge_v1.py",
+   "THE_ENVIRONMENT_IS_NOT_IN_THE_KEY_20261112_V1.md"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_INSTANT_LEARNING_IN_NEW_ARBITRARY_ENVIRONMENTS_IS_SOLVED__AND_THAT_A_LEARNED_PROCEDURE_CARRIES_ITS_OWN_APPLICABILITY",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_4138e9ee__SIGNATURE_INVARIANT_ACROSS_FOUR_SPELLINGS_OF_THE_SAME_JOB__MACHINE_B_RETURNS_A_MACHINES_PLAN__TWO_FAILURES_ON_B_DELETE_AS_PLAN__AFTER_REPAIR_B_FAILS_FIVE_TIMES_AND_A_KEEPS_ITS_PLAN__SAME_ADDRESS_FAILURE_STILL_DELETES__UNADDRESSED_RECORD_NOT_SHIELDED__FIFTY_SIX_OF_ONE_HUNDRED_FORTY_FIVE_CAPABILITIES_DECLARE_NO_PRECONDITIONS__SEVEN_TESTS_PASS__ZERO_NEW_FAILURES"
+ },
+ "measured_effect": "ZERO_CAPABILITY_CREDIT__ONE_ENVIRONMENTS_FAILURES_NO_LONGER_DELETE_ANOTHER_ENVIRONMENTS_PROVED_PLAN__AND_THE_OWNERS_TRANSFER_PREMISE_IS_REFUTED_ON_THIS_TREE_RATHER_THAN_ARGUED",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__IT_CLOSES_A_DOCUMENTED_FALSE_GENERAL_CLAIM_ABOUT_LEARNING_ACTION_APPLICABILITY",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
+  ]
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "808e72ac4a5a306ee122e69cadebff94db123b96",
+  "real_outcome": "Evidence about a learned plan is now addressed to the environment that observed it, and the claim that instant learning transfers perfectly to new arbitrary environments is refuted by measurement on this tree.",
+  "required_capability": "A memory whose evidence carries the environment it was observed in, because a proof is a fact about a place and an environment-blind store cannot tell a transfer from a regression.",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether experiencing each action once yields permanent, reusable capability.",
+   "proxy_goals_deleted": [
+    "counting stored skills as learned capability",
+    "reporting a demonstration count as a measure of learning",
+    "treating a verified success as evidence of the condition that made it possible"
+   ],
+   "surviving_necessity": "Applicability must be identified before an action can be reused safely; the measurement shows one success identifies 0 of 200 conjunctive requirements."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/settlement_v1.py (VersionSpace, settle, expected information gain)",
+    "canonical/runtime/environment_learning_v1.py (state-action transition model)",
+    "canonical/runtime/macro_v1.py (learned plan reuse keyed by goal shape)",
+    "canonical/runtime/world_probe_v1.py (premise perception)",
+    "canonical/runtime/finite_capability_diagnosis.py (select_probe version-space narrowing)"
+   ],
+   "external_existing_routes_checked": [
+    "Action Model Learning with Guarantees (KR 2024): a positive demonstration entails (s,1), only a negative entails (s,0)",
+    "Evolving Agent Interfaces / Agent S4 (arXiv 2610.28601): interfaces plus the knowledge of when to use each",
+    "Adapting the Interface, Not the Model (arXiv 2605.22166): harness-level interventions transfer across 17 backbones"
+   ],
+   "capability_work_deleted": [
+    "no new learner invented -- settlement_v1.VersionSpace is reused unchanged",
+    "no benchmark chased -- the registry and its own sensor are the domain",
+    "no capability registered, no family flipped, no receipt minted"
+   ],
+   "surviving_gap": "No record binds (capability, observed state, outcome). macro_v1 stores only plans whose every step verified, so the system retains successes and discards exactly the negative examples that could narrow applicability."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: with positive-only evidence the conjunction version space keeps the empty requirement alive, so the action is declared applicable in 68% of the states where it fails. This is a property of consistency, not of any implementation.",
+   "delete_bypass_substitute_options": [
+    "DELETE a success-only evidence store: rejected, successes are still needed for sequences",
+    "BYPASS identification by trusting the declared requires: rejected, the 11 blind premises show it cannot always be decided",
+    "SUBSTITUTE a richer grammar for evidence: rejected here, it changes the prior not the evidence class"
+   ],
+   "surviving_causal_blocker": "THE_MEMORY_THAT_CARRIES_A_LEARNED_JOB_HAS_NO_REPRESENTATION_OF_THE_ENVIRONMENT_THAT_PROVED_IT__SO_KNOWLEDGE_FLOWS_FREELY_BETWEEN_ENVIRONMENTS_AND_ONE_ENVIRONMENTS_FAILURES_DELETE_ANOTHERS_KNOWLEDGE__PLUS_FIFTY_SIX_OF_ONE_HUNDRED_FORTY_FIVE_CAPABILITIES_DECLARE_NO_PRECONDITIONS_SO_NO_PERCEPTION_CHECK_CAN_EVER_FAIL"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Address the evidence by environment -- one organ, additive store change, measured before and after",
+    "2. Declare preconditions for the 56 rows that have none -- without them no negative example can ever be produced",
+    "3. Arity and selector defaults on the 4 dispatch capabilities (round-4 carry-over)"
+   ],
+   "losing_routes_reason": "Narrowing the signature by environment was rejected on first principles: it is the same move that produced every previous sighting of this bug, and it trades one blindness for another. Adding environments faster was rejected because it multiplies an existing aggregation defect rather than removing it.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The domain is the live registry on this commit and the tree's own perceiver; the constructive half is exhaustive over 200 exact cases so no sampling can flatter it. Fifteen property tests pin the numbers and the lattice invariants."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the assumption that macro_v1's success-only store is a sufficient learning substrate",
+    "the assumption that a declared requires list is always checkable"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "settlement_v1 version-space narrowing",
+    "world_probe_v1 premise perception",
+    "finite_capability_diagnosis.select_probe"
+   ],
+   "fresh_reuse_plan": "Any future claim that experience teaches applicability must exhibit at least one negative demonstration and show the surviving space shrinks to one hypothesis."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "the registry premise census is computed once per run from the live file",
+    "the sensor decision per premise is memoised by the module"
+   ],
+   "search_stop_decision": "Stopped at three candidate mechanisms because the remaining ones were measured already: breadth of environments (0/10), exposure per lesson (6/7 flat), and model-in-producer-path (forbidden).",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "ADDRESS_EVIDENCE_BY_ENVIRONMENT",
+   "NARROW_THE_SIGNATURE_BY_ENVIRONMENT",
+   "ADD_MORE_ENVIRONMENTS_FASTER"
+  ],
+  "deleted_or_bypassed_paths": [
+   "NARROW_THE_SIGNATURE_BY_ENVIRONMENT -- same error, one level up",
+   "ADD_MORE_ENVIRONMENTS_FASTER -- multiplies the aggregation defect"
+  ],
+  "selected_surviving_route": "ADDRESS_EVIDENCE_BY_ENVIRONMENT",
+  "why_selected_route_is_fastest_sufficient": "It is additive, it preserves every existing behaviour when the caller says nothing, and it makes the transfer question measurable at all. Without an address there is no way to distinguish a plan that failed elsewhere from a plan that is wrong.",
+  "expected_parent_level_state_change": "NO_CAPABILITY_CREDIT__NO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__ADDRESSED_EVIDENCE__AND_FIFTY_SIX_UNDECLARED_PRECONDITION_ROWS_NAMED_AS_THE_NEXT_MEASURED_ITEM",
+  "stop_condition": "SEVEN_ENVIRONMENT_ADDRESS_TESTS_PASS__NINETEEN_PREEXISTING_SUBSET_FAILURES_BEFORE_AND_AFTER__ZERO_NEW_FAILURES__DRIFT_GUARD_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "CONTROL_PLANE_PREREQUISITE",
+  "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+  "minimum_prerequisite_for": [
+   "EXTERNAL_RESULT_OR_ACCESS",
+   "UNIVERSAL_SCOPE_AND_COMPOSITION",
+   "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+  ],
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "proof_state_reachability": "PREVENTS_AN_ENVIRONMENT_SPECIFIC_SUCCESS_FROM_BEING_REPORTED_AS_A_GENERAL_CAPABILITY__AND_PREVENTS_ONE_ENVIRONMENTS_FAILURE_FROM_DELETING_ANOTHERS_KNOWLEDGE",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "P_INSTANT_LEARNING_IN_NEW_ARBITRARY_ENVIRONMENTS_IS_SOLVED",
+   "falsifier_id": "F_SIGNATURE_CONTAINS_NO_ENVIRONMENT__MEASURED_BY_CROSS_ENVIRONMENT_RECORD_AND_FAILURE",
+   "decisive_question": "Does a procedure proved in one environment carry, in the store, where it is valid, and does a failure observed elsewhere delete it?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/macro_v1.py",
+     "git_blob_sha": "bb4dc3e74d24031d72672f81cc4704b9cd787c3a"
+    }
+   ]
+  }
+ }
+}
