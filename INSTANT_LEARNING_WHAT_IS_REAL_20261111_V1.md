@@ -360,6 +360,81 @@ module, so `dir()` returned dict methods instead of builtin names. The rewrite w
 nearly reported a live correctness bug in shipped code that did not exist — the same class of
 error as the toy-corpus overclaim in §4, caught the same way, by checking before asserting.
 
+## 4d. Addendum 3: I opened the anti-unifier to straight-line code. Nothing came out.
+
+Following §4c, I measured the headroom first (there is no point removing a gate without checking
+what is behind it), in this repository's own 40 fit files:
+
+```
+multi-statement functions (1-4 args, body >= 2)
+  straight-line:     117        eligible pairs: 489
+  loop-containing:    40        eligible pairs:  28     (all that is reachable today)
+median function size 63 AST nodes, max 377
+```
+
+17.5× more pairs behind the gate, at tractable sizes. I opened it
+(`STRAIGHT_LINE_LGG_ENABLED`, default `False`) and re-ran the same three-way split, held-out gate
+ON in both arms so the only difference is the pool:
+
+```
+arm    admit  rejected  fit-rw  val-rw  TEST-rw   ok
+-------------------------------------------------------
+off        0         1       0       0        0  True
+on         0         1       0       0        0  True     verdict: NO_GAIN
+```
+
+Identical. 489 eligible pairs produced **zero** additional candidates. The `ordered_loop` gate was
+not the bottleneck: the anti-unifier returns `None` for these pairs further in — at
+`_anti_unify_stmt_list` and at the admission filters — not at the gate I removed. Per my own
+pre-registration, this is **not** counted as a fix and the switch stays off.
+
+### What three refutations in one day add up to
+
+| Hypothesis | Result |
+|---|---|
+| Constants are not hole-eligible, so nothing can be compressed | **Harmful.** 6 admissions → 0 on real code |
+| The objective has no generalization term | **True but not binding.** The gate works and filters ~1 candidate |
+| The anti-unifier cannot see straight-line code | **NO_GAIN.** 489 pairs → 0 new candidates |
+
+Three different mechanisms, three null results, one common factor: **every one of them was tested
+against human-authored Python source files.**
+
+That is the finding, and it is a corpus problem, not an algorithm problem.
+
+**Library learning pays off on corpora that are not already factored.** DreamCoder's headline
+gains — +19.6 REGEX, +62.46 CLEVR, +29.73 LOGO — come from programs written in a minimal DSL where
+every solution rebuilds its primitives from scratch, so shared structure is abundant and *unnamed*.
+Stitch and LILO operate on the same kind of corpus. That is the setting where "compress the corpus
+into abstractions" has something to compress.
+
+Human-authored Python is the opposite case. Reuse is already expressed — as function calls, as
+imports, as classes, as methods. The abstractions have already been named and factored out, by
+people. Running a library learner over it is asking it to rediscover structure that is already
+spelled out, and the measurement says it finds almost none: 1–6 candidates per 40 files, all of
+them file-local idioms.
+
+The evidence for this is already in hand, measured today, with the same machine:
+
+- **Unfactored corpus** (three flat programs differing only by a literal): the admitted concept
+  compressed a **held-out program carrying a literal it had never seen** — 12 → 6 AST nodes,
+  execution-equivalent on 43 probe inputs. It generalized.
+- **Factored corpus** (40 real source files): 0 of 40 held-out files, twice, under two split
+  strategies.
+
+Same compressor, same day. The difference is the corpus.
+
+**So the compressor is probably not broken — it is pointed at the wrong input.** The right corpus
+is the machine's own output: synthesized programs are flat and repetitive by construction, which is
+exactly the unfactored shape library learning needs. That is also precisely DreamCoder's
+wake–sleep setting: the solver emits flat programs during wake, sleep compresses them, and the
+resulting library makes the next solve cheaper. The loop is the point, and the loop needs the
+solver's output, not the programmer's.
+
+This is stated as a hypothesis with the contrast above as its evidence, not as an established
+fact. It is the next experiment, and it is a **corpus routing** change — which file list gets
+handed to `sleep_abstract` — not another algorithm change, so it is cheap to run and cheap to
+revert.
+
 ## 5. Where the outside world actually is (2026-11), so "most advanced on the planet" is calibrated
 
 | Benchmark | Top of the board | Human | What it really says |
@@ -405,19 +480,18 @@ Two more external facts that bound the whole plan:
 
 ### Ranked moves
 
-**1. Make anti-unification see differing subtrees.** (the binding constraint, measured today)
-Everything else in this list is downstream of this. `sleep_abstract` identifies candidates by
-**exact `ast.dump` match after alpha-renaming**, so 40 real files yield 1–6 candidates and every
-one of them is a file-local idiom. The generalizing machine — `higher_order_plotkin_lgg`, which
-lifts differing subtrees to holes and to higher-order parameters — is already written and already
-wired into Stage 2B, and it returns `None` at `if not ordered_loop` for any straight-line
-function. Measured on the project's own flagship shape: `LGG(p3, p7) -> None`.
-*The experiment:* remove that one gate, run it over the 40-file corpus, and count candidates
-before vs after. Keep the held-out gate from §4c on, and require the new candidates to fire on
-VALIDATE and then TEST.
-*Falsification:* if removing the gate yields no new candidates that survive held-out gating, then
-exact-match was never the limit and the wall is the 4-hole arity cap plus the purity whitelist —
-in which case stop and write the corpus differently rather than tuning further.
+**1. Point the compressor at unfactored programs.** (the corpus hypothesis, §4d)
+Three mechanism fixes were refuted today against human-authored source. The remaining difference
+that has actually been measured is the corpus: the same compressor generalized fine on a flat
+unfactored corpus (12 → 6 nodes on an unseen instance, execution-equivalent) and did not generalize
+at all on 40 real source files. Concretely: hand `sleep_abstract` the machine's own synthesized
+programs — flat, repetitive, abstractions not yet named — instead of repository source. The
+relevant call sites already exist (`sentient_cognitive_core_v1.py:2183`
+`verified_programs_buffer`; `recursive_self_architect_v1.py:2734` `ring1_sources`;
+`brain_unified_model_v1.py:1796`, which currently sweeps in every non-test `.py` file).
+*Falsification:* if an unfactored machine-generated corpus still yields 0 held-out-surviving
+concepts, the compression path is not viable in this tree and effort moves to §5's
+requirement-elicitation finding. Report it and stop; do not tune further.
 
 **2. Keep the held-out gate on.** It is in the tree now (`heldout_sources=`), it is backward
 compatible, and it demonstrably rejects non-generalizing candidates. It admitted nothing today

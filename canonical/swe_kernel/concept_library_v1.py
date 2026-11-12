@@ -112,6 +112,36 @@ _SAFE_DICT_MUT_METHODS: frozenset[str] = frozenset({"setdefault", "pop", "update
 # ---------------------------------------------------------------------------
 CONSTANT_HOLES_ENABLED: bool = False
 
+# ---------------------------------------------------------------------------
+# Straight-line anti-unification in the sleep phase.
+#
+# `higher_order_plotkin_lgg` is the only mechanism in the tree that lifts DIFFERING subtrees to
+# holes; everything else identifies candidates by exact `ast.dump` match after alpha-renaming, and
+# exact match finds 1-6 candidates per 40 real files, all of them file-local idioms.
+#
+# That mechanism returns None at `if not ordered_loop` for any function without a loop, so it never
+# sees straight-line code. Measured headroom in this repository's own sources (40 files):
+#   117 straight-line multi-statement functions vs 40 loop-containing
+#   489 eligible pairs vs 28   (17.5x more behind the gate)
+# Median function size 63 AST nodes, max 377 -- tractable.
+#
+# STATUS: REFUTED (2026-11-11). NO_GAIN. DO NOT ENABLE WITHOUT A NEW MEASUREMENT.
+#
+# `compression_straight_line_lgg_probe_20261111_v1.py`, same three-way split as the held-out gate
+# probe (40 fit / 40 validate / 40 test, interleaved), held-out gate ON in both arms:
+#
+#     arm  admit  rejected  fit-rw  val-rw  TEST-rw
+#     off      0         1       0       0        0
+#     on       0         1       0       0        0       verdict: NO_GAIN
+#
+# Opening the gate to 489 eligible pairs instead of 28 produced ZERO additional candidates. The
+# gate was not the bottleneck; the anti-unifier returns None for these pairs for reasons further
+# in (`_anti_unify_stmt_list` and the admission filters), not at `ordered_loop`.
+#
+# Kept default OFF so the negative result stays reproducible. Not a fix; see the probe documents.
+# ---------------------------------------------------------------------------
+STRAIGHT_LINE_LGG_ENABLED: bool = False
+
 
 class UnsafeOrUnsupportedAST(ValueError):
     """Raised when an AST node is impure, oversized, or unsupported by pure evaluation."""
@@ -1154,7 +1184,13 @@ def higher_order_plotkin_lgg(
     loop_bound = lb_set1 | lb_set2
     ordered_loop = list(dict.fromkeys([*lb_ord1, *lb_ord2]))
     if not ordered_loop:
-        return None
+        # No loop-bound variables, so no higher-order callable parameter can be discovered: every
+        # differing closed subtree becomes a value hole instead. That is the correct generalization
+        # for straight-line code, and it is unreachable while this returns None. Downstream is safe
+        # with an empty `ordered_loop`: `captured` is empty, so `_anti_unify_expr` always takes the
+        # value-hole branch.
+        if not STRAIGHT_LINE_LGG_ENABLED:
+            return None
 
     val_holes: dict[tuple[str, str], str] = {}
     fn_holes: dict[tuple[str, str, tuple[str, ...]], str] = {}
@@ -2358,13 +2394,19 @@ class CompoundingConceptLibrary:
 
             # Stage 2B: Higher-Order Plotkin Anti-Unification (`LGG(fn_i, fn_j)` lifting differing operators to `_fn0`)
             if len(admitted) < max_new_concepts:
+                # With straight-line LGG enabled the pool is every multi-statement function, not
+                # only loop-containing ones: that is the 489-vs-28 pair headroom measured above.
+                # Same 12-function cap, so the O(n^2) pair loop is bounded exactly as before.
                 loop_fns: list[ast.FunctionDef] = [
                     fn
                     for mod in parsed_programs
                     for fn in ast.walk(mod)
                     if isinstance(fn, ast.FunctionDef)
                     and not fn.decorator_list
-                    and any(isinstance(sub, (ast.For, ast.While)) for sub in ast.walk(fn))
+                    and (
+                        any(isinstance(sub, (ast.For, ast.While)) for sub in ast.walk(fn))
+                        or (STRAIGHT_LINE_LGG_ENABLED and len(fn.body) >= 2)
+                    )
                 ]
                 for i_fn in range(min(len(loop_fns), 12)):
                     if len(admitted) >= max_new_concepts:
