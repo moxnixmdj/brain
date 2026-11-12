@@ -5,16 +5,36 @@
  "action_summary": "A guard that claimed to keep forged capabilities from being proposed was appending them at score 0.0, where they survived into the ambiguity gate and vetoed decisive matches. Six lines stop a zero-score row from gating a matched one.",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "agent_orientation": {
+  "causal_evidence": "MEASURED_ON_0bd7cf0f__30_ORDINARY_COMPUTER_TASKS_GAVE_11_EXPRESSIBLE_AND_19_AMBIGUOUS__TWO_FORGED_ROWS_AT_SCORE_0_0_BLOCKED_git_history_bisect_regression_v1_AT_SCORE_26_3__AFTER_THE_FIX_15_EXPRESSIBLE_14_AMBIGUOUS__AUDIT_OF_THE_FIVE_VERIFIED_TASKS_BY_READING_THEIR_RECEIPTS_FOUND_ONE_THAT_ANSWERED_ITS_QUESTION",
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_FORGED_CAPABILITY_APPENDED_AT_SCORE_ZERO_IS_REGISTERED_BUT_NEVER_PROPOSED___AND_THAT_VERIFIED_ACTION_MEANS_THE_QUESTION_WAS_ANSWERED",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
    "canonical/runtime/grounded_action_v1.py",
    "canonical/tests/test_expressibility_of_ordinary_computer_tasks_v1.py",
    "expressibility_of_ordinary_computer_tasks_v1.py",
    "THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1.md"
-  ]
+  ],
+  "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
