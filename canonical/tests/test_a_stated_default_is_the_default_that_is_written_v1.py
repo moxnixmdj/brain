@@ -143,6 +143,26 @@ def test_a_value_that_would_replace_an_attribute_the_body_reads_is_refused(ask, 
     assert after == LINE_TOTAL
 
 
+def test_the_row_whose_default_is_none_by_law_binds_nothing_when_a_value_is_given() -> None:
+    from canonical.runtime.live_integrated_brain_v1 import load_verified_registry
+    entry = load_verified_registry()["python.refactor.add_parameter.v1"]
+    shutil.rmtree(SCRATCH, ignore_errors=True)
+    SCRATCH.mkdir(parents=True)
+    try:
+        (SCRATCH / "calc.py").write_text(LINE_TOTAL, encoding="utf-8")
+        rel = (SCRATCH / "calc.py").relative_to(ROOT).as_posix()
+
+        def bound(words: str):
+            got = derivation.derive("Add a parameter qty %s to the function line_total in %s" % (words, rel), entry, ROOT)
+            return (got.get("new_param") or {}).get("value")
+
+        assert bound("with a default value") == "qty"
+        assert bound("with the default 3") is None
+        assert bound("with the default one") is None
+    finally:
+        shutil.rmtree(SCRATCH, ignore_errors=True)
+
+
 def test_the_adapter_names_the_attribute_it_will_not_replace(tmp_path) -> None:
     (tmp_path / "pkg").mkdir()
     (tmp_path / "pkg" / "calc.py").write_text(LINE_TOTAL, encoding="utf-8")

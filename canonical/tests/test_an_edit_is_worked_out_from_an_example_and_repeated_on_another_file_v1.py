@@ -143,6 +143,19 @@ def test_a_blank_keeps_the_code_that_stood_there_with_brackets_only_where_needed
                                       "p = a + a\ndef f(b):\n    return b + b\n") == "s = c - d + (c - d)\nr = (y + y) * z\n"
 
 
+def test_text_that_parses_to_something_else_is_not_accepted() -> None:
+    before, after = "a = pair(x, y)\nb = pair(u.v, 1)\n", "a = x, y\nb = u.v, 1\n"
+    assert rules(before, after) == ["pair(?1, ?2) -> ?1, ?2"]
+    # Written without brackets, ``f(p, q)`` parses -- as a call with two arguments.  That is not the edit.
+    assert by_example.edit_by_example("r = f(pair(p, q))\n", before, after) == "r = f((p, q))\n"
+
+
+def test_rules_that_do_not_reproduce_their_example_are_not_used(monkeypatch) -> None:
+    monkeypatch.setattr(by_example, "rewrite", lambda found, text, *rest, **more: (text, 0))   # an edit that edits nothing
+    with pytest.raises(by_example.Refused, match="do not reproduce the example"):
+        by_example.learn(NONE_BEFORE, NONE_AFTER)
+
+
 def test_the_same_blank_twice_needs_the_same_code_twice() -> None:
     edited = by_example.edit_by_example("k = k + 1\nm = n + 1\nself.n = self.n + 1\n", "x = x + 1\ny = y + 1\n", "x += 1\ny += 1\n")
     assert edited == "k += 1\nm = n + 1\nself.n += 1\n"
