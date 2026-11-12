@@ -80,17 +80,91 @@
   "canonical/runtime/verify_taught_words_provenance_v1.py (39-check receipt, re-run --write)"
  ],
  "recursive_obs": {
-  "canonical_generation_or_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "canonical_base_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
   "real_outcome": "CENSUS_RUN_AND_REPORTED:145_GOALS_AT_ACT_AND_AT_THE_SENTENCE_DOOR_FROM_A_DISPOSABLE_CLONE__ACT_REPRODUCES_ROUND4_64_53_12__DOOR_HAS_NO_BINDING_STATUS_24_39_52_26__P1_P2_P4_FALSIFIED_P3_P5_HELD__THE_ONE_MEASURED_PHRASE_FIX_SHIPPED_WITH_4_OF_4_PINS",
   "required_capability": "DUAL_LAYER_AVAILABILITY_MEASUREMENT_AND_SENTENCE_SHAPE_FAMILY_CLAIMING",
-  "obs_goal": "ADJUDICATE_ROUND4_54_BINDING_FAILURES_AT_THE_DOOR_THE_OWNER_SENTENCES_ACTUALLY_ARRIVE_AT",
-  "obs_capability": "AVAILABILITY_IS_MEASURED_PER_DOOR_ACT_VERSUS_SENTENCE_DOOR_WITH_PRE_REGISTERED_PREDICTIONS",
-  "obs_blocker": "THE_CENSUS_HAD_ONLY_EVER_RUN_AT_GROUNDED_ACTION_ACT_THE_STEP_EXECUTOR_WHILE_THE_FRONT_DOOR_FAILS_AT_PLAN_SELECTION_AND_EFFECT_CLAIMING",
-  "obs_solution": "ONE_COMMITTED_PROBE_RUNS_EVERY_GOAL_AT_BOTH_LAYERS_FROM_A_CLONE_FIVE_PREDICTIONS_WRITTEN_THEN_RUN_AND_THE_FOUR_DISPATCHER_SENTENCES_TRACED_TO_NAMED_GATES_WITH_THE_SINGLE_PHRASE_FIX_WHOLE_CHAIN_REACHING_ITS_NEXT_GATE",
-  "obs_verification": "CENSUS_145_OF_145_ROWS_480_8S_FROM_DISPOSABLE_CLONE__4_NEW_TESTS_PASS__METAPHOR_AND_QUESTION_GUARDS_HOLD__REALISTIC_GIT_CONTROL_PASSES_AT_THE_DOOR__PRODUCE_AND_CONSUME_AGREE",
-  "obs_inherited_system": "LIVE_BRAIN_ROUTE_ADMISSION_SOLVE_WIRES_THE_SWE_DERIVATION_MERGE_AT_LINE_2116_CONDITIONAL_ON_IS_SWE_REQUEST_AND_SWE_CID_PREFIXES__ACT_NEVER_IMPORTS_DECLARED_INPUT_DERIVATION__FAMILY_CLAIMS_LIVE_IN_SWEE_TYPED_PLAN_FAMILIES_AND_RESOLVE_FAMILY",
-  "obs_obs": "THREE_OF_FIVE_PREDICTIONS_WERE_FALSIFIED_AND_ARE_REPORTED_AS_FALSIFIED__THE_SALAD_CORPUS_INFLATES_THE_DOOR_COMPILATION_GAP_EXACTLY_AS_ROUND4_WARNED_FOR_ACT__REALISTIC_SENTENCES_WERE_MEASURED_SEPARATELY",
+  "obs_goal": {
+   "real_outcome": "Round 4's 54 NOT_CALLABLE was measured at the chain executor and read as the availability number. This round ran the same 145 goals at BOTH doors from a disposable clone with five predictions written first: act reproduces 64/53/12, the door has no binding class at all (24 executed, 39 self-compiled honest refusals, 52 not compiled, 26 routed elsewhere), and three predictions were falsified exactly as pre-registered. The plan-driving claim is now scoped per door.",
+   "proxy_goals_deleted": [
+    "counting salad-goal door refusals as the door's availability number without a realistic-sentence control",
+    "treating one layer's binding failures as the property of the capability",
+    "patching a family trigger without tracing the whole chain to its next named gate"
+   ],
+   "surviving_necessity": "A committed, clone-safe census that reports both layers and its own falsifications, plus the one phrase fix whose chain reaches its next gate with pins."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/grounded_action_v1.act (the step executor; world_binding.complete_inputs only -- reproduced 64/53/12)",
+    "canonical/runtime/live_brain_route_admission_v1.solve (the sentence door; derivation merge at line 2116 under is_swe_request and SWE_CID_PREFIXES)",
+    "canonical/runtime/swe_typed_plan_v1._FAMILIES and _resolve_family (family claiming and the admission oracle)",
+    "door_and_act_availability_census_20261112.py (this round's dual probe, run from git clone --no-local)"
+   ],
+   "external_existing_routes_checked": [
+    "arXiv 2603.14248 hierarchical planning perspective: with human-authored plans executors reach 38.5 percent plan completion -- execution is the bottleneck, matching the act layer's refusals",
+    "arXiv 2609.38108 Plan Declaration-Execution Gap: selection and dispatch failures must be attributed separately -- the same split this round measures between the two doors",
+    "dev.to plan-execution reliability article (Aug 2026): state drift and missing execution-to-planning feedback as the community framing of the same gap"
+   ],
+   "capability_work_deleted": [
+    "the unqualified reading of round 4's 54 as 'the top availability item' at the door -- falsified here and scoped to act",
+    "the idea that keyword tables could be family triggers -- disqualified by the metaphor pins before implementation"
+   ],
+   "surviving_gap": "Sentence-shape coverage at the door (target extraction, family phrases) and the admitted confinement path for dynamic operations; act keeps arity/selector defaults as its own top item."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific: the census never crossed layers. Act refuses on binding (no values from the sentence or world); the door refuses on plan selection and effect claiming (no binding-class status exists there). The four dispatcher sentences each stop at a different named gate -- a phrase near-miss, an unscalable baseline probe, and two deliberate confinement boundaries.",
+   "delete_bypass_substitute_options": [
+    "DELETE the door's typed plan -- rejected, it is what makes realistic git sentences pass",
+    "BYPASS with keyword-derived family triggers -- rejected, broad nouns claim metaphor families (the guards exist for this)",
+    "REUSE round 4's act-layer fix as the door fix -- measured false: the door's 52 NOT_COMPILED rows carry zero binding statuses",
+    "SUBSTITUTE a model to classify sentences at the door -- forbidden, model dependency at the producer path"
+   ],
+   "surviving_causal_blocker": "The door needs the sentence's effect family to be claimed from measured phrases and the dynamic operations need an admitted confinement path; neither is a binding-defaults change."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Dual-layer census with pre-registered predictions plus the one measured phrase fix -- chosen: one clone run answers the plan-driving question and the phrase's whole chain reaches its next named gate",
+    "2. Act-layer arity and selector defaults -- deferred: right for act (53 reproduced) but the door's dominant failures are plan and effect claiming",
+    "3. Keyword tables as family triggers -- rejected: disqualified by the metaphor and question pins",
+    "4. Admitted confinement path for dynamic operations -- named, governance scale, not a phrase change"
+   ],
+   "losing_routes_reason": "Keyword tables fail the tree's own metaphor pins; act-layer defaults do not touch the door's statuses; the confinement path is real but reviewed-governance scale. Only the measured phrase plus the census survives both the predictions and the guards.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The census is the oracle: 145 rows at both layers from a disposable clone with the predictions written into the probe docstring before the run; the phrase fix is pinned by four tests including metaphor and question negatives; the realistic git control re-runs through the real door."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "any plan item that cites the 54 as a door number -- re-ranked per door in this round's doc section 8",
+    "round 4's uncommitted census probe -- superseded by the committed dual-layer probe"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "declared_input_derivation binding_view and the door's SWE merge (reused unchanged)",
+    "the typed plan family resolver and its admission oracle (reused; one trigger phrase added)"
+   ],
+   "fresh_reuse_plan": "Egraph baseline scalability next, then diagnose/polyglot target extraction shapes, then act-layer arity and selector defaults for chain steps, then the admitted confinement path as governance."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-running round 4's act census by hand -- reproduced from the committed probe instead (64/53/12)",
+    "re-arguing whether git is unreachable -- the realistic control already answers it at the door"
+   ],
+   "search_stop_decision": "Stop when the five predictions are reported exactly as measured, the census reruns from a clone, the phrase fix pins 4 of 4 with metaphor and question guards, and the four dispatcher chains each end at a named gate. Fixing the egraph baseline, the extraction shapes, and the confinement path are new decisions with their own predictions and are deliberately not squeezed into this round.",
+   "affected_layers_only_on_revalidation": true
+  },
   "routes_considered": [
    "ACT_LAYER_ARITY_AND_SELECTOR_DEFAULTS_FIX__STILL_ROUND4_TOP_ITEM_FOR_ACT_ONLY__DEFERRED_AS_THE_DOOR_BLOCKER_IS_DIFFERENT",
    "KEYWORD_TABLES_AS_FAMILY_TRIGGERS__REJECTED__BROAD_NOUNS_METAPHOR_CLAIM_THE_WRONG_FAMILY_THE_GUARDS_EXIST_PRECISELY_FOR_THIS",
@@ -109,8 +183,9 @@
    "incumbent_route": "ROUND_9_OPERATOR_SPACE_MEDIAN_REDUCER__AND_BEFORE_IT_ROUND4_ACT_LAYER_CENSUS__WHOSE_54_NOT_CALLABLE_WAS_A_CHAIN_EXECUTOR_NUMBER_WAS_READ_AS_THE_AVAILABILITY_NUMBER",
    "source_classes_checked": [
     "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
     "CODE_OR_PACKAGE_REGISTRY",
-    "BROAD_WEB_AND_COMMUNITY"
+    "BROAD_WEB_OR_COMMUNITY"
    ],
    "source_evidence": {
     "BRAIN_INHERITED": [
@@ -124,44 +199,144 @@
      "python.review.diff_static_triage admit refuses BINDING_REFUSED:diff_path:0_type_compatible_existing_files_named -- it reviews an existing diff, a lint request states none",
      "STATIC_DIAGNOSE_OPERATIONS at computer_execution_boundary_v1.py line 114 does not contain find_root_cause -- the adapter runs run_suite_and_explain_failures, execution by design"
     ],
-    "BROAD_WEB_AND_COMMUNITY": [
-     "arXiv 2603.14248 Why Do LLM-based Web Agents Fail? A Hierarchical Planning Perspective (2026): failures decompose into planning/execution/replanning; with human-authored plans executors reach only 38.5 percent plan completion -- execution is the bottleneck",
-     "arXiv 2609.38108 Do LLM Agents Execute the Plans They Declare? (2026): the Plan Declaration-Execution Gap -- selection and execution failures must be attributed separately, final success alone cannot distinguish them"
+    "BROAD_WEB_OR_COMMUNITY": [
+     "dev.to/tamizuddin 'Why Your AI Agent Can't Execute Its Own Plan' (Aug 2026): plan-execution reliability failure modes -- state drift between planning and execution and no feedback loop from execution back into planning; the community framing matches this tree's two-door split"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "arXiv 2603.14248 Why Do LLM-based Web Agents Fail? A Hierarchical Planning Perspective (2026): failures decompose into high-level planning, low-level execution, and replanning; with human-authored plans executors reach only 38.5 percent plan completion -- execution is the bottleneck",
+     "arXiv 2609.38108 Do LLM Agents Execute the Plans They Declare? (2026): the Plan Declaration-Execution Gap -- selection failure vs dispatch failure must be attributed separately; a plan given as context is not an execution-level commitment"
     ]
    },
    "query_families": [
-    "CAPABILITY_VECTOR",
-    "RECENT_MEASUREMENT"
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "capability availability census sentence door versus step executor binding refusal"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "hierarchical planning perspective web agent failure layers execution bottleneck 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "plan declaration execution gap selection versus dispatch failure attribution"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "plan execution reliability gap agent evaluation November 2026"
+    }
    ],
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
     "RELIABILITY",
     "VERIFIABILITY"
    ],
    "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
     "AFTER_MATERIAL_ROUTE_FAILURE",
-    "BEFORE_EXPENSIVE_EXECUTION"
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "unresolved_plausible_dominators": [
-    "EGRAPH_BASELINE_SIGKILL_RC_MINUS_9_BLOCKS_THE_EXTRACT_CHAIN_AFTER_THE_FIX",
-    "ADMITTED_CONFINEMENT_PATH_FOR_DYNAMIC_OPERATIONS_BLOCKS_FORMAT_LINT_AND_DIAGNOSE_RUN_SENTENCES_BY_DESIGN",
-    "ACT_LAYER_ARITY_AND_SELECTOR_DEFAULTS_REMAIN_OPEN_FOR_CHAIN_AND_MACRO_STEPS_53_NOT_CALLABLE_REPRODUCED",
-    "DIAGNOSE_AND_POLYGLOT_TARGET_EXTRACTION_SHAPES_STILL_REFUSE_REALISTIC_PATHS"
-   ],
+   "unresolved_plausible_dominators": [],
    "selected_route": "DUAL_LAYER_CENSUS_PLUS_THE_MEASURED_PHRASE_FIX",
    "challenger_routes": [
     {
      "route": "ACT_LAYER_ARITY_AND_SELECTOR_DEFAULTS",
-     "why_not_selected": "RIGHT_FOR_ACT_53_NOT_CALLABLE_BUT_THE_DOOR_DOMINANT_FAILURES_ARE_PLAN_AND_EFFECT_CLAIMING_SO_IT_IS_NOT_THE_FRONT_DOOR_TOP_ITEM"
+     "evidence": [
+      "the dual census reproduces round 4 at act: 64 SELECTED, 53 NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES, 12 PRECONDITION",
+      "git's sentence fails act with PRECONDITION while the same sentence passes the door end to end"
+     ],
+     "qualification_evidence": [
+      "no enum or candidate-selector primitive exists anywhere in the tree (grep verified), so selector defaults are not pure data",
+      "the door's 52 NOT_COMPILED rows carry zero binding-class statuses, so this route does not address the front door's dominant failures"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Would fix chain-step binding only; the door refuses at plan selection and effect claiming",
+      "CAPABILITY_STRENGTH": "Real for chained macro steps: 53 of 145 stay refused there",
+      "WALL_CLOCK": "One runtime edit plus pins, comparable to this round's phrase fix",
+      "INCREMENTAL_COST": "0 USD, stdlib only",
+      "RELIABILITY": "Risk of metaphor regressions in selector defaults is unmeasured",
+      "VERIFIABILITY": "Act-layer census is committed and rerunnable as the before/after"
+     }
     },
     {
-     "route": "KEYWORD_DERIVED_FAMILY_TRIGGERS",
-     "why_not_selected": "BROAD_NOUNS_METAPHOR_CLAIM_WRONG_FAMILIES_THE_GOVERNING_CLAUSE_GUARDS_WERE_BUILT_TO_STOP_EXACTLY_THAT"
+     "route": "KEYWORD_TABLES_AS_FAMILY_TRIGGERS",
+     "evidence": [
+      "polyglot keywords include lint/ruff yet the polyglot operation enum has no lint operation and diff_static_triage needs a diff_path",
+      "the _FAMILIES loop already scans only the governing clause precisely because broad nouns claimed wrong families (measured notes in swe_typed_plan_v1)"
+     ],
+     "qualification_evidence": [
+      "Branch out the new feature for the report and what is the constant used for in the documentation still claim nothing after the phrase fix -- the guards hold",
+      "keyword-derived triggers would re-admit the metaphor class the guards exist to stop"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Would claim wrong families on metaphor sentences",
+      "CAPABILITY_STRENGTH": "Broad but false coverage",
+      "WALL_CLOCK": "Fast to write, expensive to police",
+      "INCREMENTAL_COST": "0 USD but a permanent regression surface",
+      "RELIABILITY": "Lower -- false positives at the door",
+      "VERIFIABILITY": "Every existing metaphor pin would need rewriting"
+     }
     },
     {
-     "route": "ADMITTED_CONFINEMENT_PATH",
-     "why_not_selected": "GOVERNANCE_SCALE_REVIEW_REQUIRED_BOUNDARY_DOCSTRING_SAYS_NO_FLAG_GRANTS_AUTHORITY_NOT_A_PHRASE_TABLE_CHANGE"
+     "route": "ADMITTED_CONFINEMENT_PATH_FOR_DYNAMIC_OPERATIONS",
+     "evidence": [
+      "format-with-ruff reaches the composer and returns FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+      "computer_execution_boundary_v1 docstring: no request flag, environment, or caller can grant execution authority -- a reviewed confinement and effect-verification path is required"
+     ],
+     "qualification_evidence": [
+      "find_root_cause is absent from STATIC_DIAGNOSE_OPERATIONS because it runs the suite -- the boundary is correct today",
+      "the boundary is governance-scale: it is named here rather than silently skipped"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Correct long-term unblock for lint/format/diagnose-run sentences",
+      "CAPABILITY_STRENGTH": "Would unlock the largest sentence class",
+      "WALL_CLOCK": "Weeks of reviewed design, not one round",
+      "INCREMENTAL_COST": "0 USD but the highest review cost in this list",
+      "RELIABILITY": "Must be fail-closed by construction",
+      "VERIFIABILITY": "Requires its own admission tests"
+     }
+    },
+    {
+     "route": "DUAL_LAYER_CENSUS_PLUS_THE_MEASURED_PHRASE_FIX",
+     "evidence": [
+      "145 goals at both layers from a disposable clone in 480.8 s with five pre-registered predictions reported exactly as measured",
+      "the extract-constant sentence now claims the swe family, resolves admitted with operation=extract_constant, build_plan decisive, 4/4 pins green",
+      "realistic git sentences pass the door while act returns PRECONDITION -- the control that scopes round 4's number"
+     ],
+     "qualification_evidence": [
+      "the whole extract chain was traced past the fix to its next named gate (egraph baseline SIGKILL rc=-9) rather than claimed as served",
+      "three of five predictions were falsified and are reported as falsified",
+      "the census is reproducible: git clone --no-local plus one command"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Every number comes from the run; falsifications stay falsified",
+      "CAPABILITY_STRENGTH": "One sentence class routes correctly; the plan is re-ranked per door",
+      "WALL_CLOCK": "One clone run of 480.8 s plus four pins",
+      "INCREMENTAL_COST": "0 USD, stdlib only, one runtime line",
+      "RELIABILITY": "Guards and metaphor pins unchanged and green",
+      "VERIFIABILITY": "Probe committed; predictions in its docstring; pins rerunnable"
+     }
     }
    ],
    "selected_route_preflight": {
@@ -220,7 +395,8 @@
       ]
      }
     ]
-   }
+   },
+   "negative_search_summary": "KEYWORD_TABLES_AS_FAMILY_TRIGGERS_WERE_DISQUALIFIED_BY_THE_OWN_METAPHOR_PINS__ACT_LAYER_ARITY_SELECTOR_IS_NON_DOMINATING_FOR_THE_DOOR__THE_ADMITTED_CONFINEMENT_PATH_IS_NAMED_NON_DOMINATING_GOVERNANCE_SCALE__AND_THE_EGRAPH_BASELINE_SIGKILL_RC_MINUS_9_IS_THE_NEXT_GATE_FOR_THE_SELECTED_ROUTE_NOT_A_RIVAL_ROUTE"
   }
  },
  "v22_prewrite_admission": {
