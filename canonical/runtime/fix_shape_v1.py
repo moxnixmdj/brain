@@ -53,6 +53,12 @@ One change is made on the owner of the block and not inside it, the else that is
 recognised here directly. The test file holds all of this against the full list of candidates.
 
 Nothing here runs a program or a test. It reads two texts.
+
+What was found
+--------------
+Measured 2026-11-12 (canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json): at most one
+statement is changed by 92% of the HumanEvalFix development fixes and 93% of the ConDefects fixes,
+and by 34% of the 500 expert fixes of SWE-bench Verified; 59%, 46% and 8% can be listed.
 """
 from __future__ import annotations
 

@@ -31,7 +31,25 @@ tool, and the tool was committed in that state.
 
 What was found
 --------------
-See WHAT_WAS_FOUND below and canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json.
+Measured 2026-11-12 (canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json), no test run:
+
+                                        HumanEvalFix   ConDefects   SWE-bench Verified
+                                        development                 expert fixes
+  fixes counted                               64          2,863          500
+  at most one statement                       59 (92%)    2,669 (93%)    169 (34%)
+  can be listed (a ceiling)                   38 (59%)    1,326 (46%)     40 (8%)
+  one piece taken out                         11            255            7
+
+Of the 500 expert fixes 331 change several statements, several places or several files, and of
+the 292 larger ones that stay in one file 190 are written with a name or constant the file does
+not hold. Cut into their smallest pieces the 500 are 2,178 pieces; 677 can be listed, and for 54
+tasks every piece can. So on real projects the ceiling is about 8% for one small change and 11%
+for any number of them, before asking how long the lists are. The rule for real projects (50 of
+500) was not met: no repair run is built there with such lists. The rule for one piece put in (6
+of 64) was met with 7; it was not built. 5 of the 13 things expected beforehand held.
+
+It bounds reaching the expert's fix. Whether a smaller right repair exists where the expert's
+fix is large was not measured.
 
 Usage
 -----
@@ -87,8 +105,6 @@ EXPECTED: dict[str, Any] = {
                          "fixes can be listed. Below that such lists have their ceiling in sight there, and what comes next has to make "
                          "several changes that belong together."},
 }
-
-WHAT_WAS_FOUND: dict[str, Any] = {}
 
 
 # --------------------------------------------------------------------------- #
