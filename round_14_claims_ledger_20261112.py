@@ -67,12 +67,21 @@ _TREE = {
         (r := _learner_report())["summary"]["structural_change_learned"] is False,
         "a change that adds a statement is refused",
     ),
+    "independent_verification_exists": lambda: (
+        (n := _verification_records()) >= 250,
+        f"{n} OIDC-attested independent verification records in the tree",
+    ),
     "no_parametric_channel_in_registry": lambda: (
         (hits := _weight_capabilities())[0] == 0,
         f"{hits[0]} of {hits[1]} registered capabilities update weights"
         + (f": {hits[2][:5]}" if hits[0] else ""),
     ),
 }
+
+
+def _verification_records() -> int:
+    return len(list((REPO_ROOT / "canonical/astra_runtime/evidence").glob(
+        "CAPABILITY__*__INDEPENDENT_VERIFICATION.json")))
 
 
 def _weight_capabilities() -> tuple[int, int, list[str]]:
