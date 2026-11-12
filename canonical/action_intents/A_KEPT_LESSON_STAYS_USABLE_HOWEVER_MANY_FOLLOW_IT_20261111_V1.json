@@ -1,0 +1,502 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1",
+ "action_intent_id": "A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1",
+ "date": "2026-11-11",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "62fa7efa0532313d612a3991826c90624cb5b77b",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asked again why the machine cannot be given the most advanced coding actions, once each, and then have them for good. The repository already owns the mechanism for that: canonical/swe_kernel/verified_skill_crystallizer_v1.py (VerifiedSkillStore), reached in production through canonical/swe_kernel/retained_repair_session_v1.py. So it was given the experiences instead of an argument: real single-file commits from public projects, one at a time in history order, each graded against the maintainers' own result. Two defects in owned code came out of that. (1) The query that feeds recall ended in LIMIT 128, ordered by reuse count: once 128 lessons had each been reused, every later lesson was stored, reported crystallized, and never read again; with no reuse the oldest lessons dropped out instead. (2) The harvest that runs a project's tests inside the solver called setUp and never tearDown, so a per-test alarm stayed armed in the solver. This change removes the cut, keeps the order, and ends each harvested test the way unittest ends it. It does not make a lesson help on a problem it was not taught on. That was measured too and is unchanged: of the 549 real code changes in the last 600 single-file commits of psf/requests, none could be produced from the earlier lessons before it was shown, on the base commit and on this one alike; 191 of the 549 could be kept as a lesson at all. The honest reading of highest_leverage_now, which the admission gate requires to be true: this is the highest-leverage change that is certain today on the question the owner asked; the larger lever is what the repair search can reach and how applicable lessons are ranked, and it is named under next_step, not claimed here.",
+ "selected_route": "DELETE_THE_128_LESSON_CUT_FROM_THE_QUERY_THAT_FEEDS_RECALL__KEEP_ITS_ORDER__AND_ADAPT_THE_TEST_HARVEST_SO_THAT_EACH_PROJECT_TEST_IT_RUNS_IS_ENDED_AS_UNITTEST_ENDS_IT__TEAR_DOWN_WHEN_SET_UP_SUCCEEDED__CLEANUPS_ALWAYS",
+ "causal_blocker": "RECALL_READ_ONLY_128_LESSONS_PER_LANGUAGE_CHOSEN_BY_REUSE_COUNT_BEFORE_ANY_WAS_MATCHED__SO_A_LESSON_KEPT_AFTER_128_REUSED_ONES_WAS_STORED_REPORTED_CRYSTALLIZED_AND_NEVER_READ_AGAIN__AND_THE_HARVEST_THAT_RUNS_A_PROJECTS_TESTS_INSIDE_THE_SOLVER_CALLED_setUp_AND_NEVER_tearDown__SO_A_PER_TEST_ALARM_STAYED_ARMED_IN_THE_SOLVER",
+ "expected_parent_change": "EVERY_LESSON_THE_STORE_KEPT_IS_OFFERED_TO_RECALL_WHEREVER_IT_RANKS_AND_HOWEVER_MANY_OTHERS_EXIST__THE_ORDER_OF_PREFERENCE_IS_UNCHANGED__A_PROJECT_TEST_THE_SOLVER_RUNS_IS_TAKEN_DOWN_BEFORE_THE_SOLVER_CONTINUES__NOTHING_THAT_PASSED_STOPS_PASSING",
+ "expected_parent_frontier_change": "ONE_SILENT_LOSS_OF_KEPT_LESSONS_REMOVED__ONE_SOURCE_OF_SOLVER_INTERRUPTION_REMOVED__ZERO_CAPABILITY_CREDIT__ZERO_FAMILY_CREDIT__NO_ROW_ADDED__NO_ROUTE_OPENED__THE_MEASURED_ABSENCE_OF_TRANSFER_TO_PROBLEMS_A_LESSON_WAS_NOT_TAUGHT_ON_IS_UNCHANGED_AND_IS_NOT_CLAIMED_TO_CHANGE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::RECALL_READ_ONLY_128_LESSONS_PER_LANGUAGE_CHOSEN_BY_REUSE_COUNT_BEFORE_ANY_WAS_MATCHED__SO_A_LESSON_KEPT_AFTER_128_REUSED_ONES_WAS_STORED_REPORTED_CRYSTALLIZED_AND_NEVER_READ_AGAIN__AND_THE_HARVEST_THAT_RUNS_A_PROJECTS_TESTS_INSIDE_THE_SOLVER_CALLED_setUp_AND_NEVER_tearDown__SO_A_PER_TEST_ALARM_STAYED_ARMED_IN_THE_SOLVER",
+ "falsification_condition": "A_TEST_THAT_PASSES_ON_THE_BASE_COMMIT_FAILS_ON_THIS_ONE__OR_A_STORED_ACTIVE_LESSON_THAT_MATCHES_A_SOURCE_IS_NOT_OFFERED_TO_RECALL__OR_THE_ORDER_IN_WHICH_APPLICABLE_LESSONS_ARE_TRIED_DIFFERS_FROM_THE_BASE_COMMIT_FOR_A_STORE_OF_AT_MOST_128_LESSONS__OR_THE_HARVEST_RUNS_A_TEST_CASE_setUp_THAT_SUCCEEDS_WITHOUT_RUNNING_ITS_tearDown_AND_CLEANUPS__OR_THE_HARVEST_RETURNS_DIFFERENT_EXAMPLES_THAN_ON_THE_BASE_COMMIT",
+ "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_RECOMPILES_TO_THE_COMMITTED_ARTIFACT__NO_CAPABILITY_IS_REGISTERED__NO_ROUTE_IS_OPENED__THE_57_RELATED_TEST_FILES_GIVE_THE_SAME_RESULTS_AS_ON_THE_BASE_COMMIT__THE_OWNER_DECIDES_THE_MERGE",
+ "explicit_user_authorization": "Owner instructions in this session, sent three times in the same words: 'What is wrong? Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them? Can't we do this now?' and 'You should kill all the bad and dumb ideas before you waste time implementing them. You must do everything only the right way.' This session reported both defects to the owner twice and offered this pull request; the owner answered by repeating the question. The owner has not approved the pull request in words and has given this session no instruction to merge. The pull request is therefore opened for the owner to decide, and this session does not merge it: the repository asks for auto-merge under the referee, and this session's platform does not allow the auto option (README section 9).",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+   "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+   "canonical/tests/test_a_lesson_stays_usable_however_many_follow_it_v1.py",
+   "canonical/tests/test_a_solve_ends_what_a_project_test_started_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "THE_SAME_EIGHT_TESTS_ON_THE_BASE_COMMIT_AND_HERE__SEVEN_FAIL_THERE_FOR_THE_STATED_REASON_AND_PASS_HERE__THE_ONLY_DIFFERENCE_BETWEEN_THE_TWO_TREES_IS_THIS_CHANGE__PUTTING_THE_CUT_BACK_FAILS_THREE_OF_THEM__REMOVING_THE_FINALLY_BLOCK_FAILS_FOUR__THE_ORACLE_FOR_THE_REAL_HISTORY_REPLAY_IS_THE_MAINTAINERS_OWN_RESULTING_FILE_NOT_ANYTHING_THIS_PRODUCER_WROTE"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS_2026_11_11__NOT_PUBLIC_RUNNER_EVIDENCE__EACH_AGAINST_THE_BASE_COMMIT_62fa7efa_ON_THE_SAME_INPUT__THE_8_NEW_TESTS__BASE_7_FAIL_1_PASS__THE_ONE_THAT_PASSES_ON_BOTH_PINS_THE_UNCHANGED_ORDER_OF_PREFERENCE__HERE_8_PASS__STORE_OF_131_LESSONS_EACH_REUSED_ONCE__BASE_LESSONS_129_130_131_STORED_AND_NOT_REUSABLE__HERE_REUSABLE__STORE_OF_130_LESSONS_NEVER_REUSED__BASE_THE_TWO_OLDEST_NOT_REUSABLE__HERE_ALL_REUSABLE__REAL_HISTORY_REPLAY__THE_LAST_600_SINGLE_FILE_COMMITS_OF_A_PUBLIC_PROJECT_psf_requests_GRADED_AGAINST_THE_MAINTAINERS_OWN_RESULT__549_REAL_CODE_CHANGES__191_KEPT_AS_LESSONS_ON_BOTH_TREES__THE_SAME_COMMIT_AGAIN__BASE_128_OF_191__LESSONS_1_TO_128_128_OF_128__LESSONS_129_TO_191_0_OF_63__HERE_191_OF_191__A_LATER_COMMIT_PRODUCED_FROM_EARLIER_LESSONS_BEFORE_BEING_SHOWN__0_OF_549_ON_BOTH_TREES__VERIFIER_CALLS_PER_RECALL_MEDIAN_AND_MAX__BASE_17_AND_66__HERE_18_AND_79__A_PROJECT_SUITE_WITH_A_PER_TEST_ALARM__BASE_LIFE_CYCLE_setUp_setUp_AND_THE_ALARM_STILL_ARMED_AFTER_THE_HARVEST__HERE_setUp_tearDown_cleanup_TWICE_AND_NO_ALARM__SAME_EXAMPLES_HARVESTED__57_TEST_FILES_THAT_NAME_THE_TWO_MODULES_OR_THEIR_CALLERS__686_TESTS__BASE_623_PASS_63_FAIL__HERE_THE_SAME__NO_TEST_DIFFERS__COST_OF_READING_EVERY_LESSON__A_RECALL_THAT_FINDS_NOTHING_ON_A_126_LINE_SOURCE__128_LESSONS_0_12_S__1000_LESSONS_0_9_S__4000_LESSONS_3_5_S__AND_ONE_VERIFIER_CALL_PER_CANDIDATE_A_LESSON_PROPOSES__4000_LESSONS_OF_ONE_SHAPE_MADE_4000_CALLS_WHERE_THE_BASE_MADE_128",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_THREE_OBLIGATIONS_NAMED_ARE_THE_CODING_OBLIGATIONS__A_REPAIR_PATH_THAT_SILENTLY_STOPS_READING_ITS_OWN_LESSONS_AND_CAN_BE_INTERRUPTED_BY_A_PROJECT_TESTS_ALARM_IS_A_GAP_ON_THE_WAY_TO_THEM__CLOSING_IT_MOVES_NO_SCORE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-11T23:40:42Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_REMOVES_A_SILENT_LOSS_OF_KEPT_LESSONS_AND_A_LEAK_FROM_A_PROJECTS_TESTS_INTO_THE_SOLVER__IT_OPENS_NO_ROUTE",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "tournament": {
+   "proposal_id": "EVERY_KEPT_LESSON_IS_READ_BY_RECALL_AND_EVERY_HARVESTED_TEST_IS_TAKEN_DOWN",
+   "decisive_question": "DOES_A_LESSON_KEPT_AFTER_THE_128TH_BECOME_USABLE_AND_DOES_A_PROJECT_TESTS_ALARM_STOP_OUTLIVING_THE_HARVEST__WHILE_EVERYTHING_THAT_PASSED_STILL_PASSES",
+   "falsifier_id": "ONE_RELATED_TEST_THAT_PASSED_ON_THE_BASE_COMMIT_AND_FAILS_HERE__OR_ONE_KEPT_ACTIVE_LESSON_NOT_OFFERED_TO_RECALL__OR_ONE_SUCCESSFUL_setUp_WITHOUT_ITS_tearDown",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_57_TEST_FILES_THAT_NAME_THE_TWO_MODULES_OR_THEIR_CALLERS_GIVE_IDENTICAL_RESULTS_ON_BOTH_TREES__686_TESTS__623_PASS_AND_63_FAIL_ON_EACH__THE_FAILURES_ARE_THE_SAME_TESTS_ON_BOTH_AND_PREDATE_THIS_CHANGE__THE_SEEDED_STORE_HOLDS_2_PYTHON_LESSONS_AND_NO_TRACKED_STORE_HOLDS_MORE_THAN_128_SO_NO_EXISTING_STORE_CHANGES_BEHAVIOUR"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "62fa7efa0532313d612a3991826c90624cb5b77b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "A_CODING_LESSON_THE_MACHINE_KEPT_IS_STILL_READ_THE_NEXT_TIME_ITS_SHAPE_APPEARS_HOWEVER_MANY_LESSONS_IT_HOLDS__AND_REPAIRING_A_PROJECT_DOES_NOT_LEAVE_THAT_PROJECTS_TEST_TIMERS_RUNNING_INSIDE_THE_MACHINE",
+  "selected_route": "DELETE_THE_128_LESSON_CUT_FROM_THE_QUERY_THAT_FEEDS_RECALL__KEEP_ITS_ORDER__AND_ADAPT_THE_TEST_HARVEST_SO_THAT_EACH_PROJECT_TEST_IT_RUNS_IS_ENDED_AS_UNITTEST_ENDS_IT__TEAR_DOWN_WHEN_SET_UP_SUCCEEDED__CLEANUPS_ALWAYS",
+  "selected_surviving_route": "ONE_CLAUSE_REMOVED_FROM_verified_skill_crystallizer_v1__load_rules__AND_ONE_FINALLY_BLOCK_ADDED_TO_whitebox_introspector_and_trace_synthesizer_v1_harvest_live_io_examples__NO_NEW_MODULE__NO_NEW_CAPABILITY__NO_ROUTE_OPENED",
+  "deleted_or_bypassed_paths": [
+   "THE_128_LESSON_CUT__DELETED",
+   "A_CUT_MOVED_AFTER_MATCHING__NOT_BUILT__IT_MOVES_THE_LOCK_OUT_TO_A_LARGER_STORE",
+   "A_LITERAL_TOKEN_INDEX__NOT_BUILT__MATCHING_TIME_IS_NOT_THE_DEFECT_AND_AN_UNSOUND_INDEX_LOSES_LESSONS_SILENTLY",
+   "A_LESSON_UTILITY_ESTIMATE_AND_PRUNING__NOT_BUILT__THE_STORE_RECORDS_NO_FAILED_TRIALS_TO_ESTIMATE_FROM",
+   "RUNNING_HARVESTED_TESTS_THROUGH_unittest_run__NOT_USED__IT_CHANGES_WHICH_TESTS_RUN",
+   "A_CHILD_PROCESS_FOR_THE_HARVEST__NOT_BUILT__THE_HARVEST_RETURNS_LIVE_OBJECTS"
+  ],
+  "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_RECOMPILES_TO_THE_COMMITTED_ARTIFACT__NO_CAPABILITY_IS_REGISTERED__NO_ROUTE_IS_OPENED__THE_57_RELATED_TEST_FILES_GIVE_THE_SAME_RESULTS_AS_ON_THE_BASE_COMMIT__THE_OWNER_DECIDES_THE_MERGE",
+  "expected_parent_level_state_change": "ONE_SILENT_LOSS_OF_KEPT_LESSONS_REMOVED__ONE_SOURCE_OF_SOLVER_INTERRUPTION_REMOVED__ZERO_CAPABILITY_CREDIT__ZERO_FAMILY_CREDIT__NO_ROW_ADDED__NO_ROUTE_OPENED__THE_MEASURED_ABSENCE_OF_TRANSFER_TO_PROBLEMS_A_LESSON_WAS_NOT_TAUGHT_ON_IS_UNCHANGED_AND_IS_NOT_CLAIMED_TO_CHANGE",
+  "why_selected_route_is_fastest_sufficient": "THE_FIRST_DEFECT_IS_ONE_CLAUSE_AND_DELETING_IT_IS_THE_FIRST_ROUTE_IN_THE_ORDER__NO_EXISTING_STORE_HOLDS_MORE_THAN_128_LESSONS_SO_NOTHING_THAT_WORKS_TODAY_CHANGES__THE_SECOND_DEFECT_IS_TWO_CALLS_THE_STANDARD_LIBRARY_DOCUMENTS__BOTH_ARE_VERIFIED_BY_TESTS_THAT_FAIL_ON_THE_BASE_COMMIT__EVERY_CHALLENGER_FOUND_IS_EITHER_THE_SAME_DEFECT_AT_A_LARGER_SIZE_OR_A_LARGER_BUILD_THAT_NEEDS_THIS_FIRST",
+  "iteration_limit": 3,
+  "routes_considered": [
+   "DELETE_THE_CUT_AND_KEEP_THE_ORDER__SELECTED",
+   "APPLY_THE_CUT_AFTER_MATCHING__REJECTED_THE_LOCK_OUT_MOVES_AND_DOES_NOT_END",
+   "INDEX_BY_REQUIRED_LITERAL_TOKENS__REJECTED_FOR_NOW_NOT_THE_DEFECT_AND_NOT_YET_SOUND_FOR_EVERY_RECALL_STAGE",
+   "CURATE_THE_STORE__REJECTED_FOR_NOW_NO_FAILURE_COUNTS_TO_DECIDE_FROM",
+   "RAISE_THE_NUMBER__REJECTED_SAME_DEFECT",
+   "CALL_tearDown_AND_THE_CLEANUPS_IN_unittest_ORDER__SELECTED",
+   "USE_unittest_TestCase_run__REJECTED_CHANGES_WHICH_TESTS_THE_HARVEST_RUNS",
+   "HARVEST_IN_A_CHILD_PROCESS__REJECTED_FOR_NOW_A_REDESIGN_THAT_LOSES_LIVE_ARGUMENT_OBJECTS"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-11T23:40:42Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_BASE_COMMIT__RECALL_READS_THE_128_LESSONS_WITH_THE_MOST_REUSE_AND_THEN_THE_NEWEST__THE_HARVEST_CALLS_setUp_AND_THE_TEST_METHOD_AND_NOTHING_ELSE",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+     "canonical/swe_kernel/retained_repair_session_v1.py",
+     "canonical/swe_kernel/rule_expiry_v1.py",
+     "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
+     "canonical/tests/test_solver_leaves_no_import_shadow_v1.py",
+     "canonical/tests/test_a_lesson_learned_here_reaches_there_v1.py",
+     "canonical/tests/test_historical_repair_transfer_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/unittest.html",
+     "https://cdn.aaai.org/AAAI/1993/AAAI93-044.pdf",
+     "https://arxiv.org/html/2605.24050v1",
+     "https://arxiv.org/pdf/2605.05726",
+     "https://arxiv.org/html/2605.13716",
+     "https://arxiv.org/html/2609.36807v1",
+     "https://arxiv.org/html/2607.29658",
+     "https://arxiv.org/html/2605.25430v1",
+     "https://shangwenwang.github.io/files/ICSE-20.pdf"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/semgrep/semgrep/tree/develop/src/prefiltering",
+     "https://github.com/ast-grep/ast-grep",
+     "https://pypi.org/project/ast-grep-py/"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://articles.phantom-byte.com/agent-skill-library-rotting-at-100-entries.html",
+     "https://www.centerconsulting.com/ai-library/papers/2026-demystifying-agent-skills",
+     "https://blog.rodolpheg.xyz/posts/semgrep-architecture/",
+     "https://deepwiki.com/semgrep/semgrep/2-core-architecture",
+     "https://sites.cc.gatech.edu/fac/ashwin/papers/er-93-08.pdf"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "utility problem explanation-based learning Minton learned rules slow down match cost more rules worse performance"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "automated program repair fix pattern mining rule library size overfitting plausible but incorrect patches more templates more wrong patches"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "agent skill library scaling 2026 retrieval degrades as number of skills grows new skills never retrieved top-k benchmark"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "Semgrep rule prefiltering performance thousands of rules skip rules that cannot match file optimization"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "KEEP_A_CUT_BUT_APPLY_IT_AFTER_MATCHING__THE_FIRST_128_LESSONS_THAT_APPLY",
+     "evidence": [
+      "https://cdn.aaai.org/AAAI/1993/AAAI93-044.pdf",
+      "https://sites.cc.gatech.edu/fac/ashwin/papers/er-93-08.pdf"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_a_lesson_stays_usable_however_many_follow_it_v1.py",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "A_LESSON_IS_STILL_UNREAD_WHEN_128_BETTER_ESTABLISHED_LESSONS_ALSO_APPLY__THE_LOCK_OUT_MOVES_FROM_128_LESSONS_TO_A_LARGER_STORE__IT_DOES_NOT_END",
+      "CAPABILITY_STRENGTH": "BOUNDS_VERIFIER_CALLS_AT_THE_BASE_FIGURE",
+      "WALL_CLOCK": "A_COUNTER_THREADED_THROUGH_THE_RECALL_LOOP_AND_ITS_STAGES",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "MORE_CODE_IN_THE_HOT_LOOP_OF_A_LOAD_BEARING_KERNEL",
+      "VERIFIABILITY": "NEEDS_A_STORE_WHERE_MORE_THAN_128_LESSONS_APPLY_TO_ONE_SOURCE"
+     }
+    },
+    {
+     "route": "INDEX_LESSONS_BY_THE_LITERAL_TOKENS_THEIR_PATTERN_REQUIRES__AS_A_STATIC_ANALYSER_PREFILTERS_RULES",
+     "evidence": [
+      "https://blog.rodolpheg.xyz/posts/semgrep-architecture/",
+      "https://deepwiki.com/semgrep/semgrep/2-core-architecture",
+      "https://cdn.aaai.org/AAAI/1993/AAAI93-044.pdf"
+     ],
+     "qualification_evidence": [
+      "https://github.com/semgrep/semgrep/tree/develop/src/prefiltering",
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "CODE_OR_PACKAGE_REGISTRY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "DOES_NOT_ADDRESS_THE_DEFECT__IT_SHORTENS_MATCHING_AND_LEAVES_THE_CUT__AND_A_LITERAL_PREFILTER_IS_NOT_A_NECESSARY_CONDITION_FOR_THE_OPERATOR_SWAP_AND_CROSS_LANGUAGE_STAGES",
+      "CAPABILITY_STRENGTH": "THE_RIGHT_NEXT_STEP_ONCE_A_STORE_HOLDS_THOUSANDS__MATCHING_WAS_MEASURED_AT_0_9_MS_PER_LESSON",
+      "WALL_CLOCK": "A_NEW_INDEX_AND_ITS_SOUNDNESS_PROOF_PER_RECALL_STAGE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "AN_UNSOUND_PREFILTER_LOSES_LESSONS_SILENTLY__THE_SAME_FAILURE_AS_THE_ONE_BEING_REMOVED",
+      "VERIFIABILITY": "DIFFERENTIAL_AGAINST_THE_UNFILTERED_SCAN"
+     }
+    },
+    {
+     "route": "KEEP_THE_STORE_SMALL_BY_DISCARDING_OR_MERGING_LESSONS__CURATION",
+     "evidence": [
+      "https://cdn.aaai.org/AAAI/1993/AAAI93-044.pdf",
+      "https://arxiv.org/html/2605.13716",
+      "https://arxiv.org/html/2605.25430v1",
+      "https://arxiv.org/html/2605.24050v1"
+     ],
+     "qualification_evidence": [
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "canonical/tests/test_a_lesson_stays_usable_however_many_follow_it_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "A_DECIDED_AND_REPORTED_REMOVAL_IS_HONEST__THE_BASE_BEHAVIOUR_IS_NEITHER__IT_KEEPS_THE_ROW_REPORTS_SUCCESS_AND_NEVER_READS_IT",
+      "CAPABILITY_STRENGTH": "PUBLISHED_SYSTEMS_THAT_STAY_STABLE_AS_A_LIBRARY_GROWS_DO_PRUNE_AND_MERGE__WORTH_BUILDING_ON_TOP_OF_A_STORE_THAT_READS_WHAT_IT_KEEPS",
+      "WALL_CLOCK": "A_UTILITY_ESTIMATE_PER_LESSON_NEEDS_TRIAL_AND_FAILURE_COUNTS_THE_STORE_DOES_NOT_RECORD",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "DEPENDS_ON_THE_ESTIMATE",
+      "VERIFIABILITY": "NEEDS_A_HELD_OUT_STREAM_OF_REPAIRS"
+     }
+    },
+    {
+     "route": "RAISE_THE_NUMBER",
+     "evidence": [
+      "https://articles.phantom-byte.com/agent-skill-library-rotting-at-100-entries.html"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_a_lesson_stays_usable_however_many_follow_it_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "THE_SAME_DEFECT_AT_A_LARGER_STORE",
+      "CAPABILITY_STRENGTH": "NONE_BEYOND_THE_NEW_NUMBER",
+      "WALL_CLOCK": "ONE_TOKEN",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "UNCHANGED",
+      "VERIFIABILITY": "THE_NEW_TESTS_USE_300_LESSONS_AND_FAIL_FOR_ANY_CUT_BELOW_THAT"
+     }
+    },
+    {
+     "route": "RUN_EACH_TEST_CASE_THROUGH_unittest_TestCase_run_INSTEAD_OF_CALLING_ITS_STEPS",
+     "evidence": [
+      "https://docs.python.org/3/library/unittest.html"
+     ],
+     "qualification_evidence": [
+      "https://docs.python.org/3/library/unittest.html",
+      "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "THE_LIFE_CYCLE_WOULD_BE_THE_LIBRARYS_OWN",
+      "CAPABILITY_STRENGTH": "CHANGES_WHICH_TESTS_THE_HARVEST_EXECUTES__run_HONOURS_SKIPS_AND_EXPECTED_FAILURES_AND_NEEDS_ONE_INSTANCE_PER_METHOD__THE_HARVEST_ALSO_RUNS_PLAIN_CLASSES_THAT_HAVE_NO_run",
+      "WALL_CLOCK": "TWO_PATHS_INSTEAD_OF_ONE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "MAY_CHANGE_THE_EXAMPLES_HARVESTED_AND_SO_THE_REPAIRS_FOUND",
+      "VERIFIABILITY": "NEEDS_THE_WHOLE_REPAIR_SUITE_COMPARED"
+     }
+    },
+    {
+     "route": "RUN_THE_HARVEST_IN_A_CHILD_PROCESS_SO_NOTHING_A_TEST_STARTS_CAN_REACH_THE_SOLVER",
+     "evidence": [
+      "https://docs.python.org/3/library/unittest.html"
+     ],
+     "qualification_evidence": [
+      "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+      "canonical/tests/test_solver_leaves_no_import_shadow_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "REMOVES_THE_WHOLE_FAMILY__IMPORT_SHADOWS_TIMERS_PATCHES",
+      "CAPABILITY_STRENGTH": "THE_HARVEST_HANDS_BACK_LIVE_ARGUMENT_OBJECTS__A_CHILD_CAN_ONLY_RETURN_WHAT_SERIALISES__SOME_EXAMPLES_WOULD_BE_LOST",
+      "WALL_CLOCK": "A_REDESIGN_OF_THE_HARVEST_AND_ITS_RECORDER",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "STRONGER_ISOLATION__AT_THE_PRICE_OF_A_PROCESS_PER_HARVEST",
+      "VERIFIABILITY": "NEEDS_THE_WHOLE_REPAIR_SUITE_COMPARED"
+     }
+    }
+   ],
+   "negative_search_summary": "SIX_SEARCHES_IN_FOUR_QUERY_FAMILIES_PLUS_TWO_REGISTRY_LOOKUPS__A_STORE_OF_LEARNED_RULES_THAT_SLOWS_OR_STARVES_AS_IT_GROWS_IS_THE_UTILITY_PROBLEM_OF_1988__THE_PUBLISHED_ANSWERS_ARE_SHARED_MATCHING_AND_DISCARDING_RULES_ON_PURPOSE__THE_2026_AGENT_LITERATURE_REPORTS_THE_SAME_SHAPE_FOR_SKILL_LIBRARIES__SELECTION_PRECISION_FALLS_AS_THE_LIBRARY_GROWS_AND_THE_SYSTEMS_THAT_HOLD_UP_PRUNE_AND_MERGE__NO_SOURCE_FOUND_DEFENDS_AN_UNREPORTED_CUT_BY_POPULARITY_TAKEN_BEFORE_MATCHING__NO_SOURCE_FOUND_OFFERS_A_READY_INDEX_THAT_IS_SOUND_FOR_THIS_STORES_OPERATOR_SWAP_AND_CROSS_LANGUAGE_STAGES__THE_STANDARD_LIBRARY_DOCUMENTS_THE_TEST_LIFE_CYCLE_THE_HARVEST_NOW_FOLLOWS",
+   "selected_route": "ONE_CLAUSE_REMOVED_FROM_verified_skill_crystallizer_v1__load_rules__AND_ONE_FINALLY_BLOCK_ADDED_TO_whitebox_introspector_and_trace_synthesizer_v1_harvest_live_io_examples__NO_NEW_MODULE__NO_NEW_CAPABILITY__NO_ROUTE_OPENED",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-11T23:40:42Z",
+    "max_age_hours": 2,
+    "selected_route": "ONE_CLAUSE_REMOVED_FROM_verified_skill_crystallizer_v1__load_rules__AND_ONE_FINALLY_BLOCK_ADDED_TO_whitebox_introspector_and_trace_synthesizer_v1_harvest_live_io_examples__NO_NEW_MODULE__NO_NEW_CAPABILITY__NO_ROUTE_OPENED",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "on this host at the stamped time: python 3.11.2 sqlite 3.40.1 setitimer True; the change uses nothing outside the standard library"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "VERIFIED_SKILL_STORE_AND_TEST_HARVEST_ON_THE_BASE_COMMIT",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "on a clean copy of the base commit at the stamped time, VerifiedSkillStore taught one lesson and recalled it on a renamed copy, and harvest_live_io_examples returned the example of a one-test unittest suite: store taught True recalled True | harvest returned [((2,), 4)]"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "KEPT_MEANS_READ__AND_A_REPAIR_LEAVES_NOTHING_OF_THE_PROJECT_RUNNING_IN_THE_MACHINE",
+   "proxy_goals_deleted": [
+    "MAKE_A_REPLAY_COUNT_LOOK_BETTER",
+    "CLAIM_THAT_ONE_EXPERIENCE_TEACHES_A_SKILL",
+    "COUNT_A_NEW_CAPABILITY"
+   ],
+   "surviving_necessity": "A_STORE_THAT_REPORTS_A_LESSON_KEPT_MUST_READ_IT__OTHERWISE_GIVING_THE_MACHINE_MORE_EXPERIENCE_CHANGES_NOTHING_AFTER_THE_128TH_AND_NOBODY_IS_TOLD__AND_A_SOLVER_THAT_RUNS_FOREIGN_TESTS_IN_ITS_OWN_PROCESS_MUST_END_THEM"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "THE_VERIFIED_SKILL_STORE_AND_ITS_RECALL_STAGES",
+    "THE_RETAINED_REPAIR_SESSION_THAT_CALLS_IT_IN_PRODUCTION",
+    "THE_RULE_EXPIRY_AUDIT_RECALL_CONSULTS",
+    "THE_TEST_HARVEST_AND_ITS_EXISTING_RESTORE_OF_sys_path_AND_sys_modules",
+    "THE_PINNED_HISTORICAL_REPAIR_CURRICULUM"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_STORE",
+    "ITS_ORDER_OF_PREFERENCE",
+    "THE_HARVEST",
+    "THE_STANDARD_LIBRARYS_OWN_TEST_LIFE_CYCLE"
+   ],
+   "capability_work_deleted": [
+    "A_SECOND_LESSON_STORE",
+    "A_NEW_RETRIEVAL_INDEX"
+   ],
+   "external_existing_routes_checked": [
+    "SHARED_MATCHING_FOR_LARGE_LEARNED_RULE_SETS",
+    "DISCARDING_LEARNED_RULES_OF_LOW_UTILITY",
+    "LITERAL_PREFILTERING_OF_PATTERN_RULES",
+    "SKILL_LIBRARY_MAINTENANCE_BY_PRUNING_AND_MERGING",
+    "SKILL_RULES_KEPT_ONLY_WHEN_THEY_RECUR_ACROSS_REPOSITORIES",
+    "THE_unittest_LIFE_CYCLE"
+   ],
+   "surviving_gap": "A_LESSON_STILL_DOES_NOT_HELP_ON_A_PROBLEM_IT_WAS_NOT_TAUGHT_ON__READING_EVERY_LESSON_COSTS_TIME_IN_PROPORTION_TO_THEIR_NUMBER_AND_ONE_VERIFIER_CALL_PER_CANDIDATE__A_LARGE_STORE_OF_BROAD_LESSONS_UNDER_A_WEAK_TEST_SUITE_HAS_MORE_CHANCES_TO_PASS_A_WRONG_REWRITE__NOT_MEASURED__THE_STORE_RECORDS_NO_FAILED_TRIALS_SO_IT_CANNOT_RANK_BY_SUCCESS_RATE__THE_ORDER_OF_PREFERENCE_IS_ONLY_REREAD_WHEN_THE_STORE_CHANGES__setUpClass_AND_tearDownClass_ARE_STILL_NOT_RUN_BY_THE_HARVEST"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__ONE_CLAUSE_IN_ONE_QUERY_AND_ONE_MISSING_CALL_PAIR_IN_ONE_LOOP",
+   "evidence": [
+    "ON_THE_BASE_COMMIT_LESSONS_129_130_AND_131_OF_A_STORE_WHOSE_FIRST_128_WERE_EACH_REUSED_ARE_STORED_AND_CANNOT_BE_APPLIED_TO_A_RENAMED_COPY_OF_THEIR_OWN_SOURCE",
+    "ON_THE_BASE_COMMIT_THE_TWO_OLDEST_OF_130_NEVER_REUSED_LESSONS_CANNOT_BE_APPLIED",
+    "ON_THE_BASE_COMMIT_A_HARVEST_OVER_A_TWO_TEST_SUITE_LOGS_setUp_setUp_AND_LEAVES_THE_SUITES_ALARM_ARMED_WITH_ITS_FULL_TIME"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_CUT__TAKEN",
+    "BYPASS_BY_KEEPING_STORES_UNDER_128__THAT_IS_THE_OPPOSITE_OF_WHAT_THE_OWNER_ASKED_FOR",
+    "SUBSTITUTE_A_SMARTER_SELECTION__A_LARGER_BUILD_THAT_NEEDS_THE_CUT_GONE_FIRST"
+   ],
+   "surviving_causal_blocker": "RECALL_READ_ONLY_128_LESSONS_PER_LANGUAGE_CHOSEN_BY_REUSE_COUNT_BEFORE_ANY_WAS_MATCHED__SO_A_LESSON_KEPT_AFTER_128_REUSED_ONES_WAS_STORED_REPORTED_CRYSTALLIZED_AND_NEVER_READ_AGAIN__AND_THE_HARVEST_THAT_RUNS_A_PROJECTS_TESTS_INSIDE_THE_SOLVER_CALLED_setUp_AND_NEVER_tearDown__SO_A_PER_TEST_ALARM_STAYED_ARMED_IN_THE_SOLVER"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "DELETE_THE_CUT_AND_KEEP_THE_ORDER",
+    "THEN_END_EACH_HARVESTED_TEST_IN_unittest_ORDER"
+   ],
+   "losing_routes_reason": "A_MOVED_OR_LARGER_CUT_KEEPS_THE_DEFECT__AN_INDEX_AND_A_CURATION_POLICY_ARE_LARGER_BUILDS_THAT_DO_NOT_REMOVE_IT__unittest_run_AND_A_CHILD_PROCESS_CHANGE_WHAT_THE_HARVEST_RETURNS",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_EFFECT_WAS_OBSERVED_ON_REAL_COMMITS_OF_A_PUBLIC_PROJECT_GRADED_BY_THE_MAINTAINERS_OWN_RESULT_BEFORE_AND_AFTER__THE_REPOSITORYS_OWN_RELATED_TEST_FILES_ARE_USED_UNCHANGED_FOR_WHAT_MUST_STILL_PASS__THE_NEW_TESTS_BUILD_A_REAL_STORE_ON_DISK_AND_A_REAL_PROJECT_WITH_A_REAL_unittest_SUITE_AND_A_REAL_INTERVAL_TIMER__NOTHING_IS_STUBBED"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "note": "EVERY_CALLER_OF_recall_and_apply_verified_AND_lookup_rules_NOW_SEES_EVERY_KEPT_LESSON__THE_RETAINED_REPAIR_SESSION_THE_CROSS_LANGUAGE_LOOKUP_AND_THE_SCOPE_CALIBRATION__EVERY_CALLER_OF_harvest_live_io_examples_INHERITS_THE_TAKE_DOWN__NOTHING_ELSE_IS_TOUCHED",
+   "adjacent_capabilities_absorbed": [],
+   "fresh_reuse_plan": "THE_HISTORY_REPLAY_USED_HERE_IS_THE_INSTRUMENT_FOR_ANY_LATER_CHANGE_TO_WHAT_A_LESSON_IS_OR_HOW_LESSONS_ARE_RANKED__ITS_SOURCE_IS_IN_THE_PULL_REQUEST"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_ARGUING_WHETHER_ONE_EXPERIENCE_IS_ENOUGH__THE_STORE_WAS_GIVEN_THE_EXPERIENCES_INSTEAD"
+   ],
+   "search_stop_decision": "A_ROUTE_WITH_NO_MEASURED_LOSS_EXISTS__THE_FRONTIER_WAS_REFRESHED_TODAY__EVERY_CHALLENGER_IS_THE_SAME_DEFECT_AGAIN_OR_A_LARGER_BUILD_THAT_NEEDS_THIS_FIRST",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "THE_OWNER_DECIDES_THE_MERGE__THIS_SESSION_DOES_NOT_MERGE__THEN_REFUSE_A_SYNTHESIZED_REPAIR_THAT_CANNOT_PREDICT_ITS_OWN_HELD_OUT_EXAMPLES__THEN_RECORD_FAILED_TRIALS_PER_LESSON_AND_RANK_APPLICABLE_LESSONS_UNDER_A_COUNTED_REPORTED_BUDGET__THEN_WIDEN_WHAT_THE_REPAIR_SEARCH_CAN_REACH",
+ "prior_work_reused": [
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+  "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+  "canonical/swe_kernel/retained_repair_session_v1.py",
+  "canonical/swe_kernel/rule_expiry_v1.py",
+  "canonical/tests/test_solver_leaves_no_import_shadow_v1.py",
+  "canonical/tests/test_a_lesson_learned_here_reaches_there_v1.py"
+ ]
+}

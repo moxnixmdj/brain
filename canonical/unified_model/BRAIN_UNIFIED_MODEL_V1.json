@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 306,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6703,
+  "research_index_records": 6704,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7ba852e59d0609d2c4d250351cfb41080f481a4c6b1c3c33c17f0500e9e0eed9"
+  "value": "d090c5bfdce4676db06e7a0d6432b0ee7ee5cd2262dea6308f38c016350aa9ba"
  },
  "engines": [
   {
@@ -213943,6 +213943,33 @@
     "those": 2,
     "v1": 2,
     "wrong": 2
+   }
+  },
+  {
+   "action_id": "A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1",
+   "capability": false,
+   "date": "2026-11-11",
+   "id": "research:canonical/action_intents/A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3bf0f45694b1b63406a0fede3fb97924e78c044c1f2e1eef7e994f13c32dde46",
+   "status": "",
+   "terms": {
+    "20261111": 1,
+    "a_kept_lesson_stays_usable_however_many_follow_it_20261111_v1": 1,
+    "delete_the_128_lesson_cut_from_the_query_that_feeds_recall__keep_its_order__and_adapt_the_test_harvest_so_that_each_project_test_it_runs_is_ended_as_unittest_ends_it__tear_down_when_set_up_succeeded__cleanups_always": 1,
+    "follow": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "however": 1,
+    "kept": 1,
+    "lesson": 1,
+    "many": 1,
+    "one_silent_loss_of_kept_lessons_removed__one_source_of_solver_interruption_removed__zero_capability_credit__zero_family_credit__no_row_added__no_route_opened__the_measured_absence_of_transfer_to_problems_a_lesson_was_not_taught_on_is_unchanged_and_is_not_claimed_to_change": 1,
+    "recall_read_only_128_lessons_per_language_chosen_by_reuse_count_before_any_was_matched__so_a_lesson_kept_after_128_reused_ones_was_stored_reported_crystallized_and_never_read_again__and_the_harvest_that_runs_a_projects_tests_inside_the_solver_called_setup_and_never_teardown__so_a_per_test_alarm_stayed_armed_in_the_solver": 1,
+    "stays": 1,
+    "usable": 1,
+    "v1": 1
    }
   },
   {
