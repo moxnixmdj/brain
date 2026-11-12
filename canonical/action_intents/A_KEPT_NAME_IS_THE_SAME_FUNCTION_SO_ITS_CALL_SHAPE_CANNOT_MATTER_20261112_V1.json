@@ -7,7 +7,7 @@
  "route_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+ "canonical_base_commit": "f4ae6a8f38afa185cdc0fe0eef09be19fe131eb0",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -96,7 +96,7 @@
   "canonical/runtime/finite_capability_diagnosis.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+  "canonical_base_commit": "f4ae6a8f38afa185cdc0fe0eef09be19fe131eb0",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_ORGAN_ADAPTS_A_CHANGE_IT_SHOWED_ONCE_TO_A_CALL_SITE_OF_ANOTHER_SHAPE_WHEN_THE_TWO_NAMES_ARE_ONE_FUNCTION__AND_STILL_REFUSES_WHEN_THEY_ARE_NOT",
