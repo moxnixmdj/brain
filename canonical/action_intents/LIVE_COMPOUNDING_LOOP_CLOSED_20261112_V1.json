@@ -7,7 +7,7 @@
  "route_id": "LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "d677e54e4db450638ee61d84e799f4ef1622ec54",
+ "canonical_base_commit": "522fee20f1039bdef646ea64d6a95ea65b1846a9",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -96,7 +96,7 @@
  ],
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "d677e54e4db450638ee61d84e799f4ef1622ec54",
+  "canonical_base_commit": "522fee20f1039bdef646ea64d6a95ea65b1846a9",
   "real_outcome": "THE_LOOP_CLOSES_ON_THE_LIVE_ENTRY_POINT__FIVE_MEASURED_DEFECTS_FOUND_AND_FIXED_WITH_NO_GATE_WIDENED__LIVE_CURVE_1_1_0_2_2_0_3_3_1__NEVER_SEEN_PROGRAM_394_TO_277_BYTES_WITH_0_HELD_OUT_MISMATCHES__CROSS_KIND_COMPOUNDING_UNCHANGED_NEGATIVE",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "obs_goal": {
@@ -196,7 +196,7 @@
   ],
   "selected_surviving_route": "LIVE_ENTRY_DOMAIN_DERIVATION_WITH_UNCHANGED_GATES",
   "why_selected_route_is_fastest_sufficient": "It needs no new knowledge and no new authority: the domain is already inside the corpus, both gates are untouched, and the change is one derivation function plus four small call-site fixes.",
-  "expected_parent_level_state_change": "THE_COMPRESSION_REPLAY_LOOP_RUNS_ON_THE_LIVE_ENTRY_POINT__THREE_WORLD_MODEL_ORGANS_ADMIT_THREE_STORED_PROGRAMS_AND_ONE_ABSTRACTION__THE_NEVER_SEEN_FOURTH_REPLAYS_30_PERCENT_SMALLER_WITH_ZERO_BEHAVIOUR_CHANGES_AND_NO_HUMAN_NAMING_A_DOMAIN",
+  "expected_parent_level_state_change": "ONE_MORE_MEASURED_PATH_BY_WHICH_EXPERIENCE_COMPOUNDS_OUTSIDE_A_TEST_HARNESS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__CROSS_KIND_COMPOUNDING_STAYS_THE_PINNED_NEGATIVE",
   "stop_condition": "9_NEW_TESTS_PASS__44_TESTS_PASS_ACROSS_THE_FOUR_SUITES_THAT_OWN_THE_MECHANISM__145_ACROSS_THE_TEN_SUITES_IMPORTING_THE_THREE_CHANGED_MODULES__REFEREE_PASS_0_VIOLATIONS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
   "route_frontier": {
    "discovery_required": true,
@@ -262,7 +262,7 @@
     "BEFORE_SCARCE_GATE_SPEND"
    ],
    "unresolved_plausible_dominators": [],
-   "selected_route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+   "selected_route": "LIVE_ENTRY_DOMAIN_DERIVATION_WITH_UNCHANGED_GATES",
    "challenger_routes": [
     {
      "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
@@ -335,9 +335,9 @@
     }
    ],
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-12T15:56:01Z",
+    "checked_at_utc": "2026-11-12T20:20:06Z",
     "max_age_hours": 2,
-    "selected_route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+    "selected_route": "LIVE_ENTRY_DOMAIN_DERIVATION_WITH_UNCHANGED_GATES",
     "status": "READY",
     "all_required_dependencies_ready": true,
     "execution_dependencies_complete": true,
