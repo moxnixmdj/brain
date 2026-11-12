@@ -152,6 +152,10 @@ def lift_shape(source: str, entrypoint: str | None = None) -> dict[str, Any] | N
         "param_names": param_names + arg_names,
         "arity": len(param_names) + len(arg_names),
         "call_args_src": call_args,
+        # The lifted argument texts as a LIST. `call_args_src` cannot be split back apart --
+        # a tuple parameter contains commas -- and a caller that reassembles call arguments from
+        # a joined string will silently corrupt any constant that is itself a tuple.
+        "param_values_src": list(lifter.param_values),
         "entry_fn_src": ast.unparse(fn),
         "entry_fn_name": entrypoint,
         "arg_names": arg_names,
@@ -417,3 +421,148 @@ def licensed_table_policy(library: Any) -> dict[str, Any] | None:
                 "gain_bytes": gain,
             }
     return None
+
+
+def _library_abstractions(library: Any) -> list[dict[str, Any]]:
+    """The library's admitted abstractions, re-derived into replayable form.
+
+    A statement-function entry with a family is an admitted abstraction; its rendered helper IS
+    the shared shape. The shape key is recomputed here from the rendered bytes rather than
+    trusted from a stored field, because a library that cannot be re-read from its own persisted
+    content is not content-addressed, it is rumoured.
+    """
+    out: list[dict[str, Any]] = []
+    try:
+        entries = list(library.concepts())
+    except Exception:
+        return out
+    for e in entries:
+        try:
+            if not str(getattr(e, "family", "") or ""):
+                continue
+            if not getattr(e, "is_stmt_fn", False) or not str(getattr(e, "body_stmts", "") or "").strip():
+                continue
+            rendered = e.render_helper_def()
+            lifted = lift_shape(rendered)
+            if lifted is None:
+                continue
+            fn = _entry_fn(rendered, _helper_name_of(rendered))
+            if fn is None:
+                continue
+            out.append({
+                "concept_id": str(e.concept_id),
+                "shape_key": lifted["shape_key"],
+                "helper_src": rendered,
+                "param_names": tuple(str(p) for p in (e.param_names or ())),
+                "n_lifted": max(0, len(e.param_names or ()) - len(lifted["arg_names"])),
+                "arity": int(getattr(e, "arity", 0) or 0),
+            })
+        except Exception:
+            continue
+    return out
+
+
+def rewrite_source_with_abstractions(
+    source: str,
+    library: Any,
+    *,
+    probes: Sequence[Any] = _PROBE_INPUTS,
+) -> dict[str, Any] | None:
+    """Wake replay: rewrite a solved program to CALL an admitted abstraction.
+
+    Round 24 closed the loop the round-23 note named: admission without replay is an append-only
+    log. The wake pass in `concept_library_v1` handled single-expression concepts only and
+    silently skipped statement-function abstractions -- which are the ONLY entries the library
+    admits by compression, so the replay step could never fire on the library's real content.
+
+    The rewrite is shape-matched and measured, never pattern-hoped:
+      * the target function's lifted shape must EQUAL the abstraction's shape (argument names
+        included -- unifying what cannot be verified is how a menu entry gets called a match);
+      * the rewritten program is executed against the probe grid with the abstraction as its
+        prelude -- the runtime condition the rewrite claims -- and ANY disagreement or exception
+        refuses the whole rewrite (fail-closed, never partially rewritten);
+      * the rewrite must strictly reduce `description_bytes`. A replay that does not shrink the
+        program is decoration, and decoration is not reuse.
+
+    Returns a report dict on success, None on any refusal.
+    """
+    if library is None:
+        return None
+    abstractions = _library_abstractions(library)
+    if not abstractions:
+        return None
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return None
+    fns = [n for n in tree.body if isinstance(n, ast.FunctionDef)]
+    if not fns:
+        return None
+    concept_ids = {a["concept_id"] for a in abstractions}
+    helpers: dict[str, str] = {}
+    changes: list[dict[str, Any]] = []
+    work = ast.parse(source)  # mutable copy
+    for fn in [n for n in work.body if isinstance(n, ast.FunctionDef)]:
+        if fn.name in concept_ids:
+            continue
+        lifted = lift_shape(source, fn.name)
+        if lifted is None:
+            continue
+        match = next((a for a in abstractions if a["shape_key"] == lifted["shape_key"]), None)
+        if match is None:
+            continue
+        if len(lifted["arg_names"]) != 1:
+            continue  # the probe grid is single-argument; refusing beats pretending
+        call_args = ", ".join(list(lifted["param_values_src"]) + list(lifted["arg_names"]))
+        prelude = "\n".join(
+            h for cid_, h in
+            [(a["concept_id"], a["helper_src"]) for a in abstractions if a["concept_id"] == match["concept_id"]]
+        )
+        orig_fn_src = ast.get_source_segment(source, fn) or ast.unparse(fn)
+        new_fn_src = f"def {fn.name}({', '.join(lifted['arg_names'])}):\n    return {match['concept_id']}({call_args})\n"
+        orig_exec = _exec_fn(orig_fn_src, fn.name)
+        new_exec = _exec_fn(new_fn_src, fn.name, prelude=prelude)
+        if orig_exec is None or new_exec is None:
+            return None
+        for x in probes:
+            try:
+                a = orig_exec(x)
+                b = new_exec(x)
+            except Exception:
+                return None
+            if a != b:
+                return None
+        before = description_bytes(orig_fn_src)
+        after = description_bytes(new_fn_src)
+        if after >= before:
+            return None
+        # The checked artifact IS the returned artifact: the function that lands is parsed from
+        # the exact string whose behaviour and bytes were just measured. Round 24's first draft
+        # built the AST separately with parameter NAME references instead of the inlined
+        # constants, so it verified one program and returned another -- the same class of defect
+        # as reporting a cost that omits the questions you asked.
+        new_fn = ast.parse(new_fn_src).body[0]
+        work.body[work.body.index(fn)] = ast.fix_missing_locations(new_fn)
+        helpers[match["concept_id"]] = match["helper_src"]
+        changes.append({
+            "function": fn.name,
+            "concept_id": match["concept_id"],
+            "bytes_before": int(before),
+            "bytes_after": int(after),
+            "bytes_saved": int(before - after),
+        })
+    if not changes:
+        return None
+    try:
+        final = ast.unparse(work) + "\n"
+        # the full rewritten module must still compile with the helpers prepended
+        exec(compile("\n".join(helpers.values()) + "\n" + final, "<replay>", "exec"), {"math": math})
+    except Exception:
+        return None
+    return {
+        "source": final,
+        "helpers": helpers,
+        "changes": changes,
+        "bytes_before": sum(c["bytes_before"] for c in changes),
+        "bytes_after": sum(c["bytes_after"] for c in changes),
+    }
