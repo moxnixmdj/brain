@@ -31229,16 +31229,16 @@
   "engines": 26,
   "knowledge_documents": 329,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6738,
+  "research_index_records": 6739,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1962
+  "source_index_modules": 1963
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3c2aeec4b5cbc673cdf6e71220acc7cdc18c612351fc58edfabe9c35e0628652"
+  "value": "0c14c0083b07fb36e06247ed684ca9fc7cec95d00462e41537674861d3a8a74c"
  },
  "engines": [
   {
@@ -215834,6 +215834,30 @@
    }
   },
   {
+   "action_id": "A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e7939892f7f02dc66da9170d21371baf5bf027a12fa051c56a03e0b1212f6afb",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_failure_is_a_context_not_a_ban_20261112_v1": 1,
+    "ban": 1,
+    "context": 1,
+    "failure": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no_new_capability_registered__no_family_flipped__no_terminal_credit__an_existing_learning_substrate_gains_a_scoped_applicability_condition_and_stops_discarding_working_plans": 1,
+    "not": 1,
+    "scope_a_remembered_plan_by_the_states_its_outcomes_happened_in": 1,
+    "the_macro_store_retained_outcomes_without_the_state_they_happened_in_so_it_could_only_keep_or_ban_a_plan_globally_and_never_learn_where_it_applies_which_is_the_quantity_the_owner_claims_one_exposure_teaches": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -233301,6 +233325,45 @@
     "significance": 1,
     "v1": 1,
     "validity": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/applicability_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/applicability_v1.py",
+   "sha256": "9ccd986829390e5caa8143d5717f1d85be2c3546775e31581ae027232520ab8b",
+   "summary": "Learn WHEN a remembered plan applies, from outcomes in context.",
+   "symbol_count": 8,
+   "symbols": [
+    "Boundary",
+    "admits",
+    "as_set",
+    "conjunction",
+    "explains_failure",
+    "learn",
+    "normalise_state",
+    "survivors"
+   ],
+   "terms": {
+    "admits": 1,
+    "applicability": 1,
+    "applies": 1,
+    "as_set": 1,
+    "boundary": 1,
+    "conjunction": 1,
+    "context": 1,
+    "explains_failure": 1,
+    "learn": 2,
+    "normalise_state": 1,
+    "outcomes": 1,
+    "plan": 1,
+    "remembered": 1,
+    "survivors": 1,
+    "v1": 1
    }
   },
   {
@@ -267805,14 +267868,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/macro_v1.py",
-   "sha256": "dcbeb1520ad5ed38cfb08733034156a661926d838e614cfdc95e18ac01773a0e",
+   "sha256": "50d757c187430fdaf67554f9952d21d190e796cf6721f288cbbbb86ab2aa84d6",
    "summary": "Learn a plan from having done the work, then reuse it.",
-   "symbol_count": 12,
+   "symbol_count": 16,
    "symbols": [
+    "_append_evidence",
+    "_boundary",
     "_distinctive",
     "_load",
     "_save",
     "_state_path",
+    "applicability",
+    "applicable",
     "clause_shape",
     "forget",
     "lookup",
@@ -267823,6 +267890,10 @@
     "stats"
    ],
    "terms": {
+    "append_evidence": 1,
+    "applicability": 1,
+    "applicable": 1,
+    "boundary": 1,
     "clause_shape": 1,
     "distinctive": 1,
     "done": 1,
