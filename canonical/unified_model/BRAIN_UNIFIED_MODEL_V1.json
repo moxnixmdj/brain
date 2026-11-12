@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 349,
+  "knowledge_documents": 350,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6760,
+  "research_index_records": 6761,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b4f8985c79c58d8d5880417b15c8fa4b4687d3c7642cb046e244d8450fa866cf"
+  "value": "e78be440c7ef5a9502c050bf60bfedf9ab8b12e596e517727af15cb195ad6f77"
  },
  "engines": [
   {
@@ -45275,6 +45275,80 @@
     "period",
     "ramp",
     "table"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4433,
+   "headings": [
+    "A read left behind by a renamed import follows it",
+    "1. What was built",
+    "2. The measurement, same tracked sets",
+    "3. Receipts",
+    "4. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_READ_LEFT_BEHIND_BY_A_RENAMED_IMPORT_FOLLOWS_IT_20261112_V1.md",
+   "sha256": "84dd8d9214997b52a3b60864f6342bb8d882c157e952537eebdce95c1180321a",
+   "summary": "**2026-11-12.** Base `8439f609`. Branch `arena/f0beac73-brain`. Follows #6719.",
+   "terms": {
+    "11": 3,
+    "122": 2,
+    "125": 2,
+    "14": 2,
+    "147": 2,
+    "150": 2,
+    "6719": 2,
+    "after": 2,
+    "all": 3,
+    "already": 3,
+    "also": 2,
+    "argument": 3,
+    "bare": 2,
+    "binding": 2,
+    "binds": 2,
+    "call": 2,
+    "canonical": 3,
+    "edit": 3,
+    "every": 4,
+    "example": 3,
+    "file": 6,
+    "files": 5,
+    "follows": 7,
+    "import": 13,
+    "left": 4,
+    "line": 6,
+    "map": 5,
+    "module": 3,
+    "name": 11,
+    "never": 3,
+    "no": 6,
+    "nothing": 5,
+    "now": 4,
+    "old": 7,
+    "one": 6,
+    "only": 3,
+    "person": 5,
+    "read": 10,
+    "refusal": 7,
+    "refused": 5,
+    "rename": 6,
+    "rule": 3,
+    "same": 8,
+    "seen": 3,
+    "so": 4,
+    "stands": 3,
+    "three": 4,
+    "tried": 4
+   },
+   "title": "A read left behind by a renamed import follows it",
+   "title_terms": [
+    "behind",
+    "follows",
+    "import",
+    "left",
+    "read",
+    "renamed"
    ]
   },
   {
@@ -71887,10 +71961,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1151,
+  "included_source_count": 1152,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a92bd9b56320e33dcf18350c41a751855c273d639d16c3ae07fd8a14809543e2"
+  "source_tree_digest": "7a8f412bcbf26bc43d7a3cced7af4d788879d39d37a8ab4c138ea22dd00b91bb"
  },
  "research_index": [
   {
@@ -219311,6 +219385,32 @@
     "upper": 3,
     "v1": 2,
     "write": 2
+   }
+  },
+  {
+   "action_id": "A_READ_LEFT_BEHIND_BY_A_RENAMED_IMPORT_FOLLOWS_IT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_READ_LEFT_BEHIND_BY_A_RENAMED_IMPORT_FOLLOWS_IT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_READ_LEFT_BEHIND_BY_A_RENAMED_IMPORT_FOLLOWS_IT_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "edb79f75b4855fbafbd94494fb190392086a1801a157ba4203c4f6d1c6dfefce",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_read_left_behind_by_a_renamed_import_follows_it_20261112_v1": 1,
+    "adapt_the_taught_program_so_a_read_no_rule_reaches_follows_the_import_the_examples_renamed__map_read_off_the_rewritten_import_line__nothing_follows_where_the_map_is_unsure": 1,
+    "behind": 1,
+    "follows": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "import": 1,
+    "left": 1,
+    "on_the_held_out_commits_repeat_rises_122_to_125_of_169__refused_files_fall_14_to_11_and_6_to_3__tried_rises_147_to_150__zero_statements_touched_that_people_left_alone__two_of_three_files_byte_identical_to_the_person": 1,
+    "read": 1,
+    "renamed": 1,
+    "three_held_out_files_were_refused_whole_because_a_read_the_rules_cannot_reach_still_used_a_name_whose_import_the_example_renamed__the_refusal_protected_a_file_that_is_a_certain_nameerror_either_way": 1,
+    "v1": 1
    }
   },
   {
