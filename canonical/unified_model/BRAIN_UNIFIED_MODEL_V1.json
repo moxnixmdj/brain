@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 316,
+  "knowledge_documents": 317,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6728,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4477d85c8efa8e91e32aed729d5c04ea356ae1a7cb76482aa3ddd09043218346"
+  "value": "c0d24c418b06c6f67a8708dd3bc90fa3058de73cc11454daf72598420f19d79a"
  },
  "engines": [
   {
@@ -50477,6 +50477,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7626,
+   "headings": [
+    "One lesson buys a word, not an operator",
+    "1. Why one lesson is enough — and what that reason actually is",
+    "2. What no number of demonstrations can buy",
+    "3. Which is why \"give it a try everywhere\" plateaus",
+    "4. What this says to do next",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_LESSON_BUYS_A_WORD_NOT_AN_OPERATOR_20261112_V1.md",
+   "sha256": "32cf534612a87f207cf983c2d83e527ef8507941db98cdfc42ce8b7ec4f2638c",
+   "summary": "**2026-11-12.** Base `6ac2a539`. Branch `arena/413458f8-brain`. Round 8.",
+   "terms": {
+    "10": 4,
+    "14": 3,
+    "added": 3,
+    "against": 5,
+    "algebra": 6,
+    "already": 5,
+    "answer": 5,
+    "answered": 4,
+    "answers": 3,
+    "because": 6,
+    "bounded": 3,
+    "capability": 3,
+    "correctly": 5,
+    "enough": 4,
+    "every": 4,
+    "example": 5,
+    "experience": 4,
+    "here": 5,
+    "learned": 4,
+    "learner": 6,
+    "lesson": 16,
+    "lexicon": 4,
+    "many": 4,
+    "new": 7,
+    "no": 7,
+    "nobody": 4,
+    "not": 20,
+    "nothing": 4,
+    "number": 4,
+    "one": 29,
+    "only": 8,
+    "operation": 4,
+    "operator": 9,
+    "own": 4,
+    "part": 4,
+    "parts": 6,
+    "plus": 4,
+    "records": 7,
+    "same": 4,
+    "sentence": 5,
+    "space": 9,
+    "t.txt": 6,
+    "ten": 4,
+    "thousand": 4,
+    "tree": 5,
+    "two": 7,
+    "word": 8,
+    "words": 4
+   },
+   "title": "One lesson buys a word, not an operator",
+   "title_terms": [
+    "buys",
+    "lesson",
+    "not",
+    "one",
+    "operator",
+    "word"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 23968,
    "headings": [
     "ONE-SHOT PLAN V3 — MAKE THE ALIVE CREATURE WHOLE",
@@ -69368,10 +69444,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1118,
+  "included_source_count": 1119,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "092ecb91f1c489f7df4792b2938db0b63da7516076c6b1280d3d08ae0375f8b2"
+  "source_tree_digest": "6799e42392e6a4f05e39c12274f17d93b573026a1fc719cecc89f71724f9a910"
  },
  "research_index": [
   {
