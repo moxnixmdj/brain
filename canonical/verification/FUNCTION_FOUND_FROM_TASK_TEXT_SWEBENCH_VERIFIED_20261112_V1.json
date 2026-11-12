@@ -6,6 +6,7 @@
   "The list that writes the fix does not carry like that. With the function given, a line quoted in the issue makes a passing patch within 20 candidates for 8 of the 78 tasks the list was shaped on and for 3 of the 261 others (3 of the 185 of them that have a passing patch within one statement). The two groups differ in more than that, the 80 being the tasks with a small passing patch, so the fall cannot be put on one cause. With another task's text: 0 of 339.",
   "With only the file given, 10 of those 11 tasks are still reached within the same 20 candidates (5 for each of the first 4 functions). The lists counted earlier (the learner, pieces taken out) keep 3 of their 15 when they are spent on the first function: within 200 candidates 23 of the 80 with the function given, 10 with the file given.",
   "The rule written before counting gives: start from the file and the task text; next, count finding the file. 10 of 10 expectations held; two sat on the edge of their range (3 tasks outside the 80, expected 3 to 30; the control's 19.2%, expected 3% to 20%).",
+  "A round of 34 seeded faults was made on the organ and the measure: the tests as they were caught 32; two tests were added and a second round caught 34 of 34.",
   "Not counted: finding the file, which needs the projects' trees; whether a candidate passes when the tests are run; the 161 tasks of the 500 that have no recorded passing patch inside one function of a file the expert changed."
  ],
  "schema": "BRAIN_FUNCTION_FOUND_FROM_TASK_TEXT_V1",
@@ -459,8 +460,233 @@
   "The earlier lists were not made again with the file given: their recorded places with the function given are kept for the tasks whose function is the first in the order.",
   "The list of quoted lines was written while looking at the 80; the order of the functions was written before any rank was seen.",
   "A passing patch is one that a submission's published verdict calls resolved; published audits find about one in eight such patches wrong.",
-  "No round of seeded faults was made on this tool."
+  "The seeded faults are faults of this organ and this measure only; the lists and tools they call were not seeded."
  ],
+ "seeded_faults": {
+  "what": "canonical/tools/seeded_faults_function_found_v1.py replaces one piece of text of the organ or of the measure by a wrong one, in a copy of the tree, and runs the two test files; a fault is caught when a test fails. Two tests are left out of the run: canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_record_was_counted_with_the_files_as_they_are; canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_record_says_how_many_seeded_faults_the_tests_caught",
+  "first_round": {
+   "seeded": 34,
+   "caught": 32,
+   "survived": [
+    "the scorer counts shared words instead of weighing them",
+    "a task reached only with the file is counted as kept"
+   ],
+   "tests": "the two test files as they were when the record was first written"
+  },
+  "what_was_done_about_the_survivors": "Two tests were added: a rare word outweighs several words that stand in nearly every function; a task reached only with the file given is not counted as kept. Neither survivor changes a counted number: the scorer in the tree is the weighing one, and no task is reached with the file given only.",
+  "second_round": {
+   "seeded": 34,
+   "caught": 34,
+   "survived": [],
+   "tests": "with the two tests added"
+  },
+  "faults": [
+   {
+    "fault": "the order is the wrong way round",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_the_function_the_text_names_comes_first"
+   },
+   {
+    "fault": "ties go from the bottom",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_text_with_nothing_in_common_leaves_the_order_of_the_file"
+   },
+   {
+    "fault": "the parts of an identifier are not words",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_an_identifier_is_a_word_whole_and_in_its_parts"
+   },
+   {
+    "fault": "a part of any length is a word",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_plain_small_word_is_not_given_twice_and_short_parts_are_left_out"
+   },
+   {
+    "fault": "Python's own words are kept",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_pythons_own_words_are_left_out"
+   },
+   {
+    "fault": "the class does not count for its methods",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_the_name_of_the_class_counts_for_its_methods"
+   },
+   {
+    "fault": "a function begins at its def, not at its first decorator",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_function_begins_at_its_first_decorator_and_ends_at_its_last_line"
+   },
+   {
+    "fault": "a function inside an if or a try is not found",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_function_inside_an_if_or_a_try_is_found_too"
+   },
+   {
+    "fault": "a class is a function too",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_every_function_is_found_from_the_top_and_a_class_is_not_one"
+   },
+   {
+    "fault": "one candidate too many for each function",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_there_are_at_most_so_many_for_each_function_and_so_many_functions"
+   },
+   {
+    "fault": "one function too many gets candidates",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_candidates_come_function_by_function_in_the_order_of_the_text"
+   },
+   {
+    "fault": "candidates are made from the file's order, not the text's",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_candidates_come_function_by_function_in_the_order_of_the_text"
+   },
+   {
+    "fault": "the function's last line stays when it is written back",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_method_keeps_its_depth_and_an_empty_line_gets_no_spaces"
+   },
+   {
+    "fault": "the depth is lost when a function is written back",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_method_keeps_its_depth_and_an_empty_line_gets_no_spaces"
+   },
+   {
+    "fault": "an empty line gets the depth's spaces",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_a_method_keeps_its_depth_and_an_empty_line_gets_no_spaces"
+   },
+   {
+    "fault": "a function's text is not moved to the margin",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_the_task_text_points_at_v1.py::test_the_text_of_a_method_is_moved_to_the_margin_and_can_be_read_alone"
+   },
+   {
+    "fault": "the scorer counts shared words instead of weighing them",
+    "file": "canonical/runtime/function_the_task_text_points_at_v1.py",
+    "caught_in_the_first_round": false,
+    "by": "73 passed, 1 deselected in 0.40s"
+   },
+   {
+    "fault": "places are counted from 0",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_place_in_is_the_first_wanted_one_from_one"
+   },
+   {
+    "fault": "the worst function of a task is taken, not the best",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_part_counts_the_best_function_of_each_task"
+   },
+   {
+    "fault": "within n means below n",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_part_counts_the_best_function_of_each_task"
+   },
+   {
+    "fault": "the rule asks for seven tenths, not two thirds",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_rule_reads_the_share_kept[0.667-start from the file]"
+   },
+   {
+    "fault": "the rule's lower bound is a half",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_rule_reads_the_share_kept[0.34-undecided]"
+   },
+   {
+    "fault": "one task outside the 80 is not enough to say it carries",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_rule_says_apart_whether_the_list_carries_to_tasks_it_was_not_shaped_on"
+   },
+   {
+    "fault": "the other text is the task's own",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_other_text_is_the_next_task_of_the_same_project"
+   },
+   {
+    "fault": "a change outside every function counts as a function",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_patch_outside_every_function_or_over_several_is_counted_as_not_one_function"
+   },
+   {
+    "fault": "the earlier lists keep their whole 200",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_earlier_lists_keep_a_task_only_where_its_function_is_the_first"
+   },
+   {
+    "fault": "for the lower bound any first function is enough",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_task_with_small_patches_in_two_functions_is_a_range"
+   },
+   {
+    "fault": "a patch to a test file counts as a change",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_patch_that_also_changes_a_test_is_still_one_function"
+   },
+   {
+    "fault": "with the file given the other task's text is used",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_task_whose_issue_quotes_the_fix_is_reached_first_with_the_function_and_with_the_file"
+   },
+   {
+    "fault": "the tasks shaped on and the others change places",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_the_summary_splits_the_tasks_shaped_on_from_the_rest"
+   },
+   {
+    "fault": "the share kept is of all tasks, not of the reached",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_part_counts_what_is_kept_when_only_the_file_is_given"
+   },
+   {
+    "fault": "the rank from another text is the rank from the own text",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_another_tasks_text_reaches_nothing_and_ranks_another_function_first"
+   },
+   {
+    "fault": "from the top is counted from 0",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": true,
+    "by": "canonical/tests/test_function_found_from_task_text_measure_v1.py::test_a_task_whose_issue_quotes_the_fix_is_reached_first_with_the_function_and_with_the_file"
+   },
+   {
+    "fault": "a task reached only with the file is counted as kept",
+    "file": "canonical/tools/function_found_from_task_text_measure_v1.py",
+    "caught_in_the_first_round": false,
+    "by": "73 passed, 1 deselected in 0.40s"
+   }
+  ]
+ },
  "earlier_records_used": [
   "canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
   "canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json"

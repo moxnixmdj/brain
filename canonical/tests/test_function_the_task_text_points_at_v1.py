@@ -240,3 +240,14 @@ def test_what_is_written_back_is_the_patched_function_in_the_tree():
     after = ast.parse(pointer.written_into(SOURCE, function, made))
     method = next(node for node in ast.walk(after) if isinstance(node, ast.FunctionDef) and node.name == "_rename")
     assert ast.unparse(method) == made
+
+
+# --------------------------------------------------------------------------- #
+# added after the round of seeded faults (canonical/tools/seeded_faults_function_found_v1.py):
+# a scorer that only counted the shared words got past the tests above
+# --------------------------------------------------------------------------- #
+def test_a_rare_word_outweighs_several_words_that_stand_in_nearly_every_function():
+    common = "    return common1, common2, common3, common4\n\n\n"
+    source = "".join(f"def filler_{n}():\n{common}" for n in range(5)) + "def target():\n    return common1, rare\n"
+    assert named(pointer.order(source, "common1 common2 common3 common4 rare"))[0] == "target"      # it shares two words, each filler four
+    assert named(pointer.order(source, "common1 common2 common3 common4"))[0] == "filler_0"

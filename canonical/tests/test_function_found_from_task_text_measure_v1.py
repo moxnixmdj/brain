@@ -380,3 +380,30 @@ def test_afterwards_the_tasks_reached_and_the_other_way_of_spending_the_earlier_
     spread = sorted(name for name, at in earlier.items() if at is not None and at <= each
                     and any(found["small"] and found["rank"] <= 4 for found in per_task.get(name, {}).get("functions", [])))
     assert after["earlier_lists_spread_over_the_first_4_functions_45_candidates_each"] == {"tasks_kept": len(spread), "which": spread}
+
+
+# --------------------------------------------------------------------------- #
+# added after the round of seeded faults (canonical/tools/seeded_faults_function_found_v1.py):
+# counting a task reached only with the file given as kept got past the tests above
+# --------------------------------------------------------------------------- #
+def test_a_task_reached_only_with_the_file_given_is_not_counted_as_kept():
+    per_task = {"a__a-1": task([row(place=2)], file_given=2), "a__a-2": task([row(place=None)], file_given=4)}
+    found = measure.part(per_task, sorted(per_task))
+    assert found["reached_with_the_function_given"] == 1 and found["of_them_still_reached_with_the_file_given"] == 1
+    assert found["share_kept"] == 1.0 and found["reached_with_the_file_given_only"] == 1
+    assert found["file_given__tasks_with_a_passing_patch_among_the_20"] == 2
+
+
+def test_the_seeded_faults_are_each_one_piece_of_text_that_stands_once():
+    from canonical.tools import seeded_faults_function_found_v1 as seeded
+    assert len(seeded.FAULTS) == 34 and len({what for what, _, _, _ in seeded.FAULTS}) == 34
+    for what, name, old, new in seeded.FAULTS:
+        assert (ROOT / name).read_text(encoding="utf-8").count(old) == 1, what
+        assert old != new
+
+
+def test_the_record_says_how_many_seeded_faults_the_tests_caught(stored):
+    found = stored["seeded_faults"]
+    assert found["first_round"]["seeded"] == found["second_round"]["seeded"] == 34
+    assert found["first_round"]["caught"] == 34 - len(found["first_round"]["survived"])
+    assert found["second_round"]["caught"] == 34 - len(found["second_round"]["survived"])
