@@ -7,7 +7,9 @@ rewrite rules, and makes the same change in another file.  The first word of ``R
 * ``edit``      -- one example, given as its two files, is repeated on a third file at once;
 * ``remember``  -- one example is added to a lesson file, which is made when it is not there yet;
 * ``repeat``    -- what a lesson file holds is repeated on a file, all of it or nothing;
-* ``repeat_shown`` -- the same, but code used a way the lesson did not show is left as it is.
+* ``repeat_shown`` -- the same, but code used a way the lesson did not show is left as it is;
+* ``repeat_tried`` -- the same, and what the lesson did not show is tried, one place at a time, against
+  a check: a Python file of the project that is run (its tests, or the file as a script).
 
 How a rule is worked out.  Every place where the two files of an example differ is found, down to the
 smallest expression, keyword argument or one-line statement that holds the difference.  That piece
@@ -32,6 +34,18 @@ Where a rule is applied.  A rule says no more than the examples showed:
   another number of arguments, with a keyword they did not show, or not called where they called it --
   may not work with the new code.  Nothing is changed then, and the refusal names the lines.  An example
   that shows that use, changed or left alone, settles it; or the request can say to leave the rest alone.
+
+What a try is.  One example cannot say which parts of the changed code matter: ``self.thread.isAlive()``
+shown once says nothing about ``t.isAlive()``.  ``repeat_tried`` also reads the lesson more widely -- each
+part the change merely copied, when it starts from a variable, may be any other code -- and tries the
+places only that reading fits, together with the uses nobody showed.  A try is kept only when two runs
+agree: no test of the check that passed on the file as it is fails with the place changed, and a test
+that passes with it fails when that place is made to fail.  A check that passes either way says nothing
+about that place, and the place stays as it was.  What a check settled is added to the lesson as a new
+example -- a kept place widens the lesson, a failing one speaks against the wider reading -- and the
+places the check could not settle are written in the example as ``not settled``, so they count neither
+as changed nor as left alone the next time.  The check itself decides nothing else: a file that fails
+the check as it is edited only where the lesson's own examples or the kept tries reach.
 
 Refused, and nothing is written:
 
@@ -795,12 +809,12 @@ def copied_parts(text, before, after):
 def stand_in(value, marks):
     """A copy of code in which every expression whose shape is in `marks` is replaced by its mark."""
     if isinstance(value, ast.expr) and shape(value, ctx=False) in marks:
-        return ast.Name(id=marks[shape(value, ctx=False)], ctx=ast.Load())
+        return ast.copy_location(ast.Name(id=marks[shape(value, ctx=False)], ctx=ast.Load()), value)
     if isinstance(value, ast.AST):
         copy = type(value)()
         for name in value._fields:
             setattr(copy, name, stand_in(getattr(value, name, None), marks))
-        return copy
+        return ast.copy_location(copy, value) if hasattr(value, "lineno") else copy
     if isinstance(value, list):
         return [stand_in(item, marks) for item in value]
     return value
@@ -1279,14 +1293,18 @@ def remember(lesson, before, after):
 MOST_TRIED = 8                   # places tried in one file; any further ones are left as they are
 CHECK_SECONDS = 20               # the longest one run of the check may take
 ALL_CHECKS_SECONDS = 90          # the longest all runs of one request may take
-NOTHING_RAN = 5                  # how the runner ends when the check holds no test it can run
+CHECK_SAID = "TESTS OF THE CHECK THAT FAILED: "
 
-# Runs a check file in a fresh interpreter.  A file with an ``if __name__ == "__main__":`` block is run as a
-# script.  Any other is run as a test file: every ``unittest.TestCase`` class in it and every function whose name
-# starts with ``test`` and that takes no arguments.  When a file to edit is named, its text is read from standard
-# input instead of from disk wherever the project imports it, so a text can be tried without being written.
+# Runs a check file in a fresh interpreter and prints, last, the tests of it that failed.
+#
+# A file that holds tests is run as a test file: every ``unittest.TestCase`` class in it and every function whose
+# name starts with ``test`` and that takes no arguments.  A file without tests that has an
+# ``if __name__ == "__main__":`` block is run as a script, and counts as one test.
+#
+# When a file to edit is named, its text is read from standard input instead of from disk wherever the project
+# imports it, so a text can be tried without being written.
 RUNNER = r"""
-import ast, importlib.machinery, inspect, os, sys, types, unittest
+import ast, importlib.machinery, inspect, json, os, sys, traceback, types, unittest
 check, edited = sys.argv[1], sys.argv[2]
 text = sys.stdin.buffer.read() if edited else None
 same = lambda one, other: os.path.realpath(one) == os.path.realpath(other)
@@ -1297,72 +1315,99 @@ if edited:
         return self.source_to_code(text, path) if same(path, edited) else usual(self, name)
     importlib.machinery.SourceFileLoader.get_code = get_code
 source = text if edited and same(check, edited) else open(check, "rb").read()
-script = any(isinstance(part, ast.If) and "__name__" in ast.dump(part.test) and "__main__" in ast.dump(part.test)
-             for part in ast.parse(source).body)
 folder, parts = os.path.dirname(os.path.abspath(check)), [os.path.splitext(os.path.basename(check))[0]]
-while not script and os.path.isfile(os.path.join(folder, "__init__.py")):
+while os.path.isfile(os.path.join(folder, "__init__.py")):
     folder, parts = os.path.dirname(folder), [os.path.basename(folder)] + parts
-name = "__main__" if script else ".".join(parts)
 sys.path.insert(0, folder)
-module = types.ModuleType(name)
-module.__file__ = check
-if not script:
-    module.__package__ = ".".join(parts[:-1])
-sys.modules[name] = module
 sys.argv = [check]
-exec(compile(source, check, "exec"), module.__dict__)
-if not script:
-    tests = unittest.TestSuite()
-    for label, value in list(vars(module).items()):
-        if isinstance(value, type) and issubclass(value, unittest.TestCase) and value.__module__ == name:
-            tests.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(value))
-        elif label.startswith("test") and inspect.isfunction(value) and value.__module__ == name and not any(
-                given.default is given.empty and given.kind not in (given.VAR_POSITIONAL, given.VAR_KEYWORD)
-                for given in inspect.signature(value).parameters.values()):
-            tests.addTest(unittest.FunctionTestCase(value))
-    if not tests.countTestCases():
-        sys.exit(%d)
-    sys.exit(0 if unittest.TextTestRunner(stream=sys.stderr, verbosity=0).run(tests).wasSuccessful() else 1)
-""" % NOTHING_RAN
+
+def run(name, package):
+    module = types.ModuleType(name)
+    module.__file__ = check
+    if package is not None:
+        module.__package__ = package
+    sys.modules[name] = module
+    try:
+        exec(compile(source, check, "exec"), module.__dict__)
+    except SystemExit as stop:
+        return module, stop.code not in (None, 0)
+    except BaseException:
+        traceback.print_exc()
+        return module, True
+    return module, False
+
+def ended(failed):
+    sys.stderr.flush()
+    print("\n" + %r + json.dumps(None if failed is None else sorted(failed)), flush=True)
+    os._exit(0)
+
+module, broke = run(".".join(parts), ".".join(parts[:-1]))
+if broke:
+    ended(["reading the check itself"])
+tests = unittest.TestSuite()
+for label, value in list(vars(module).items()):
+    if isinstance(value, type) and issubclass(value, unittest.TestCase) and value.__module__ == module.__name__:
+        tests.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(value))
+    elif label.startswith("test") and inspect.isfunction(value) and value.__module__ == module.__name__ and not any(
+            given.default is given.empty and given.kind not in (given.VAR_POSITIONAL, given.VAR_KEYWORD)
+            for given in inspect.signature(value).parameters.values()):
+        tests.addTest(unittest.FunctionTestCase(value))
+if tests.countTestCases():
+    outcome = unittest.TextTestRunner(stream=sys.stderr, verbosity=0).run(tests)
+    ended([str(test) for test, _ in outcome.failures + outcome.errors] + [str(test) for test in outcome.unexpectedSuccesses])
+if any(isinstance(part, ast.If) and "__name__" in ast.dump(part.test) and "__main__" in ast.dump(part.test)
+       for part in ast.parse(source).body):
+    ended(["the script"] if run("__main__", None)[1] else [])
+ended(None)
+""" % CHECK_SAID
 
 
 class Check:
-    """A Python file that is run to see whether the project still works."""
+    """A Python file that is run to see what of the project works."""
 
     def __init__(self, path, edited):
-        self.path, self.edited, self.slowest = path, edited, 0.0
+        self.path, self.edited, self.slowest, self.said = path, edited, 0.0, ""
         self.until = time.monotonic() + ALL_CHECKS_SECONDS
 
     def time_left(self):
         return self.until - time.monotonic() > 2 * self.slowest + 1
 
-    def passes(self, text=None):
-        """Run the check; with `text`, as if the file to edit held that text.  Returns (passed, what it said)."""
+    def failing(self, text=None):
+        """Run the check; with `text`, as if the file to edit held that text.  Returns the tests that failed.
+
+        A run that does not come to an end counts as one failed test.  `self.said` keeps what a failing run said.
+        """
         started = time.monotonic()
         try:
             ran = subprocess.run([sys.executable, "-B", "-c", RUNNER, self.path, "" if text is None else self.edited],
                                  input=b"" if text is None else text.encode("utf-8"), capture_output=True,
                                  timeout=max(1.0, min(CHECK_SECONDS, self.until - started)))
         except subprocess.TimeoutExpired:
-            raise Refused("%s took too long (one run may take %d seconds, all runs %d); nothing was changed"
-                          % (self.path, CHECK_SECONDS, ALL_CHECKS_SECONDS))
+            self.said = "it took longer than %d seconds" % CHECK_SECONDS
+            return frozenset(["coming to an end"])
         self.slowest = max(self.slowest, time.monotonic() - started)
-        if ran.returncode == NOTHING_RAN:
-            raise Refused("%s holds no test that can be run here: no unittest class and no test function without "
-                          "arguments, and it is not a script; nothing was changed" % self.path)
-        lines = [line.strip() for line in (ran.stdout + b"\n" + ran.stderr).decode("utf-8", "replace").splitlines()
+        lines = [line.strip() for line in (ran.stderr + b"\n" + ran.stdout).decode("utf-8", "replace").splitlines()
                  if line.strip()]
-        telling = [line for line in lines if re.match(r"[A-Za-z_][\w.]*(Error|Exception|Exit|Warning|Fails)\b", line)]
-        return ran.returncode == 0, (telling or lines or ["it ended with status %d" % ran.returncode])[-1][:90]
+        failed = ["coming to an end"]
+        if lines and lines[-1].startswith(CHECK_SAID):
+            failed = json.loads(lines.pop()[len(CHECK_SAID):])
+        if failed is None:
+            raise Refused("%s holds nothing that can be run here: no unittest class, no test function without "
+                          "arguments, and it is not a script; nothing was changed" % self.path)
+        if failed:
+            telling = [line for line in lines if re.match(r"[A-Za-z_][\w.]*(Error|Exception|Exit|Fails)\b", line)]
+            self.said = (telling or lines or ["it ended with status %d" % ran.returncode])[-1][:90]
+        return frozenset(failed)
 
 
 def repeat_tried(path, lesson, check_path):
     """Repeat what a lesson shows on a file, and try what it does not show, keeping what a check settles.
 
     Tried are the places `repeat` refuses or passes over: code the lesson changed but used another way here, and
-    code that fits only the wider reading of the lesson (`wider`).  A tried place is kept when the check passes
-    with it changed and fails when that code is made to fail; a check that does not notice the code failing says
-    nothing about it.  What was kept is added to the lesson as an example, so the next file needs no try.
+    code that fits only the wider reading of the lesson (`wider`).  A tried place is kept when no test of the
+    check that passed before fails with it, and a test that passes with it fails when that code is made to fail;
+    a check that does not notice the code failing says nothing about it.  A file that was tried is added to the
+    lesson as an example, so that what the check settled needs no try the next time.
     """
     target, source = read_python(path, "the file to edit")
     lesson_file, examples, origins = lesson_examples(lesson)
@@ -1386,59 +1431,63 @@ def repeat_tried(path, lesson, check_path):
             return None
 
     written(text, shown)                 # what the lesson shows must be writable by itself, or the refusal says why
-    can, unsettled, against, kept = [], [], [], []
+    trying, unsettled, against, kept = [], [], [], []
     for place in tries:
-        if (len(can) < MOST_TRIED and with_places(can + [place]) is not None
-                and with_places(can + [place], place) is not None):
-            can.append(place)
+        if (len(trying) < MOST_TRIED and with_places(trying + [place]) is not None
+                and with_places(trying + [place], place) is not None):
+            trying.append(place)
         else:
             unsettled.append(place)
-    if not shown and not can:
+    if not shown and not trying:
         raise Refused("nothing in the file has the form the lesson changed (%s), also not when what the change "
                       "copied may be other code" % "; ".join(str(rule) for rule in rules))
-    check = Check(check_path, path)
-    as_it_is, said_first = check.passes()
-    everything, said_then = check.passes(with_places(can))
-    if everything:
-        for place in can:
-            if check.time_left() and not check.passes(with_places(can, place))[0]:
-                kept.append(place)
-            else:
-                unsettled.append(place)
-    elif not as_it_is:
-        raise Refused("%s fails on %s as it is (%s) and still fails after the change (%s); nothing was changed"
-                      % (check_path, path, said_first, said_then))
-    else:
-        if shown and not check.passes(with_places([]))[0]:
-            raise Refused("%s passes on %s as it is and fails after the change the lesson shows at line %d (%s); "
-                          "nothing was changed" % (check_path, path, shown[0][1].lineno, said_then))
-        for place in can:
-            if not check.time_left() or with_places(kept + [place]) is None:
-                unsettled.append(place)
-            elif not check.passes(with_places(kept + [place]))[0]:
-                against.append(place)
-            elif check.passes(with_places(kept + [place], place))[0]:
-                unsettled.append(place)
-            else:
-                kept.append(place)
     lines = lambda places: ", ".join(str(place[1].lineno) for place in sorted(places, key=lambda place: place[0]))
+    check = Check(check_path, path)
+    before = check.failing()
+    if "coming to an end" in before:
+        raise Refused("%s does not come to an end on %s as it is (%s); nothing was changed" % (check_path, path, check.said))
+
+    def broken_by(places):
+        """The tests that passed on the file as it is and fail with these places changed; None when unknown."""
+        edited = with_places(places)
+        return None if edited is None or not check.time_left() else check.failing(edited) - before
+
+    broken = broken_by(trying)
+    for place in list(trying) if broken else []:
+        rest = [other for other in trying if other is not place]
+        less = broken_by(rest)
+        if less is not None and less < broken:
+            trying, broken, said_against = rest, less, check.said
+            against.append(place)
+            if not broken:
+                break
+    if broken is None or broken:         # what the tries break cannot be laid at single places: none of them is kept
+        unsettled, trying = unsettled + trying, []
+        if shown and (broken_by([]) or check.failing(with_places([])) - before):
+            raise Refused("%s fails after the change the lesson shows at line %s (%s) and not before; nothing was "
+                          "changed" % (check_path, lines(shown), check.said))
+    fails_now = check.failing(with_places(trying)) if trying else frozenset()
+    for place in trying:
+        if check.time_left() and check.failing(with_places(trying, place)) - fails_now:
+            kept.append(place)
+        else:
+            unsettled.append(place)
     if not shown and not kept:
-        raise Refused("nothing was changed: %s"
-                      % ("%s fails with line %s changed (%s)" % (check_path, lines(against), said_then) if against
-                         else "%s passes whether or not the code at line %s fails, so it says nothing about that "
-                              "code" % (check_path, lines(unsettled))))
+        raise Refused("nothing was changed: %s" % (
+            "%s fails with line %s changed (%s)" % (check_path, lines(against), said_against) if against
+            else "%s passes or fails the same whether or not the code at line %s fails, so it says nothing "
+                 "about that code" % (check_path, lines(unsettled))))
     final = with_places(kept)
     if final is None:
-        raise Refused("the places that passed cannot be written together; nothing was changed")
+        raise Refused("the places the check settled cannot be written together; nothing was changed")
     target.write_bytes(final.encode("utf-8"))
-    passed, said_last = check.passes()
-    if not passed:
+    if check.failing() - before:
         target.write_bytes(source.encode("utf-8"))
-        raise Refused("%s fails on the edited file (%s); nothing was changed" % (check_path, said_last))
+        raise Refused("%s fails on the edited file (%s) and not before; nothing was changed" % (check_path, check.said))
     if kept or against:
         told = ["a try on %s that %s settled" % (path, check_path)]
-        told += ["kept line %s: the check passes with it and fails when that code fails" % lines(kept)] if kept else []
-        told += ["left line %s: the check fails with it changed" % lines(against)] if against else []
+        told += ["kept line %s: a test that passes with it fails when that code fails" % lines(kept)] if kept else []
+        told += ["left line %s: a test fails with it changed" % lines(against)] if against else []
         told += ["not settled, line %s" % lines(unsettled)] if unsettled else []
         try:
             lesson_file.write_bytes(lesson_text(

@@ -433,9 +433,9 @@ def test_nothing_in_a_lesson_is_ever_run(project, capsys) -> None:
 # ----------------------------------------------------------------------------- the lessons and the front door
 
 
-def test_one_program_serves_four_taught_actions() -> None:
+def test_one_program_serves_five_taught_actions() -> None:
     mine = [lesson for lesson in teach.LESSONS if lesson.get("program", lesson["action"]) == "edit_by_example_v1"]
-    assert sorted(lesson["does"] for lesson in mine) == ["edit", "remember", "repeat", "repeat_shown"]
+    assert sorted(lesson["does"] for lesson in mine) == ["edit", "remember", "repeat", "repeat_shown", "repeat_tried"]
     own_line = next(line for line in (teach.PROGRAMS / "edit_by_example_v1.py").read_text(encoding="utf-8").splitlines()
                     if line.startswith("REQUEST = "))
     for lesson in mine:
@@ -448,7 +448,8 @@ def test_one_program_serves_four_taught_actions() -> None:
     assert {"remember in ?path0 the way ?path1 was changed into ?path2",
             "remember in ?path0 also the way ?path1 was changed into ?path2",
             "edit ?path0 the way ?path1 remembers",
-            "edit ?path0 the way ?path1 remembers and leave the rest alone"} <= skeletons
+            "edit ?path0 the way ?path1 remembers and leave the rest alone",
+            "edit ?path0 the way ?path1 remembers and try the rest with ?path2"} <= skeletons
 
 
 def test_the_teaching_tool_compares_a_lesson_file_by_what_it_holds(tmp_path) -> None:
