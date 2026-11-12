@@ -1,12 +1,13 @@
 {
  "schema": "BRAIN_HUMANEVALFIX_EDIT_KIND_TRANSFER_RECORD_V1",
  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
- "generated_utc": "2026-11-12T00:55:08Z",
+ "generated_utc": "2026-11-12T01:10:39Z",
  "read_this_first": [
   "What was asked: a learner is shown fixes of OTHER bugs, once each, keeps the kind of change, and proposes changed programs for a bug it was never shown; the bug's tests accept or reject them one at a time.",
   "Scored on 100 HumanEvalFix bugs drawn by a seeded draw before anything was run; none of them was read or run before the learner was frozen at commit cba323856bc2.",
   "With the fixes of all other bugs as lessons (203 lessons): 62 of 100 repaired within 1000 candidates; 27 of those are the published fix, 26 are another program that answers like the published fix on every extra input, 9 pass the tests and are wrong on some extra input.",
   "With the 40 QuixBugs fixes alone (other authors, other programs): 58 of 100 repaired; 13 the published fix, 37 the same answers on every extra input, 8 wrong on some extra input.",
+  "Control: the same lessons shown backwards (from the fixed program to the buggy one) repair 56 of 100 with all other fixes (62 as fixes) and 39 of 100 with the QuixBugs fixes alone (58 as fixes). So most of what carries over is the shape of a small change, whichever way round; which way a fix goes adds 6 bugs net with many lessons and 19 with 40 lessons from elsewhere. The tests do the choosing.",
   "A program that passes its tests is not therefore right. \"Right as far as checked\" means: the published fix, or the same answers as the published fix on the HumanEval+ Mini inputs for that function (5 to 109 inputs).",
   "These are not leaderboard numbers. The published HumanEvalFix scores are for a model that writes ONE program without running anything; here up to 1000 candidates are run against the tests.",
   "One run, one machine, by the producer. Nobody else has re-run it."
@@ -583,6 +584,1824 @@
    }
   }
  },
+ "control_the_same_lessons_shown_backwards": {
+  "what": "Every lesson shown from the fixed program to the buggy one: the same programs, the same sizes of change, no fix. Same bugs, same budget, same code.",
+  "all_other_fixes": {
+   "bugs": 100,
+   "repaired": 56,
+   "repaired_within": {
+    "1": 3,
+    "10": 20,
+    "100": 47,
+    "1000": 56,
+    "200": 49
+   },
+   "the_repair_is_the_published_fix": 22,
+   "the_repair_is_another_program": 34,
+   "of_those_same_answers_on_every_extra_input": 25,
+   "of_those_a_different_answer_on_some_extra_input": 9,
+   "of_those_not_compared": 0,
+   "repaired_and_right_as_far_as_checked": 47,
+   "published_fix_among_the_candidates": 34,
+   "published_fix_within": {
+    "1": 1,
+    "10": 8,
+    "100": 31,
+    "1000": 33,
+    "200": 32
+   },
+   "candidates_median": 1391.5,
+   "by_bug_type": {
+    "excess logic": {
+     "bugs": 19,
+     "published_fix_among_the_candidates": 4,
+     "repaired": 8,
+     "the_repair_is_the_published_fix": 4
+    },
+    "function misuse": {
+     "bugs": 6,
+     "published_fix_among_the_candidates": 0,
+     "repaired": 2,
+     "the_repair_is_the_published_fix": 0
+    },
+    "missing logic": {
+     "bugs": 19,
+     "published_fix_among_the_candidates": 2,
+     "repaired": 4,
+     "the_repair_is_the_published_fix": 1
+    },
+    "operator misuse": {
+     "bugs": 14,
+     "published_fix_among_the_candidates": 9,
+     "repaired": 10,
+     "the_repair_is_the_published_fix": 2
+    },
+    "value misuse": {
+     "bugs": 30,
+     "published_fix_among_the_candidates": 14,
+     "repaired": 24,
+     "the_repair_is_the_published_fix": 10
+    },
+    "variable misuse": {
+     "bugs": 12,
+     "published_fix_among_the_candidates": 5,
+     "repaired": 8,
+     "the_repair_is_the_published_fix": 5
+    }
+   }
+  },
+  "another_benchmark": {
+   "bugs": 100,
+   "repaired": 39,
+   "repaired_within": {
+    "1": 1,
+    "10": 10,
+    "100": 28,
+    "1000": 39,
+    "200": 37
+   },
+   "the_repair_is_the_published_fix": 10,
+   "the_repair_is_another_program": 29,
+   "of_those_same_answers_on_every_extra_input": 24,
+   "of_those_a_different_answer_on_some_extra_input": 5,
+   "of_those_not_compared": 0,
+   "repaired_and_right_as_far_as_checked": 34,
+   "published_fix_among_the_candidates": 10,
+   "published_fix_within": {
+    "1": 1,
+    "10": 7,
+    "100": 9,
+    "1000": 10,
+    "200": 9
+   },
+   "candidates_median": 187.0,
+   "by_bug_type": {
+    "excess logic": {
+     "bugs": 19,
+     "published_fix_among_the_candidates": 3,
+     "repaired": 5,
+     "the_repair_is_the_published_fix": 3
+    },
+    "function misuse": {
+     "bugs": 6,
+     "published_fix_among_the_candidates": 0,
+     "repaired": 1,
+     "the_repair_is_the_published_fix": 0
+    },
+    "missing logic": {
+     "bugs": 19,
+     "published_fix_among_the_candidates": 0,
+     "repaired": 2,
+     "the_repair_is_the_published_fix": 0
+    },
+    "operator misuse": {
+     "bugs": 14,
+     "published_fix_among_the_candidates": 1,
+     "repaired": 7,
+     "the_repair_is_the_published_fix": 1
+    },
+    "value misuse": {
+     "bugs": 30,
+     "published_fix_among_the_candidates": 2,
+     "repaired": 17,
+     "the_repair_is_the_published_fix": 2
+    },
+    "variable misuse": {
+     "bugs": 12,
+     "published_fix_among_the_candidates": 4,
+     "repaired": 7,
+     "the_repair_is_the_published_fix": 4
+    }
+   }
+  },
+  "curve_by_number_of_lessons": {
+   "10": {
+    "draws": 200,
+    "published_fix_among_the_candidates": 14,
+    "repaired": 39,
+    "repaired_share": 0.195,
+    "the_repair_is_the_published_fix": 13
+   },
+   "100": {
+    "draws": 200,
+    "published_fix_among_the_candidates": 49,
+    "repaired": 91,
+    "repaired_share": 0.455,
+    "the_repair_is_the_published_fix": 32
+   },
+   "3": {
+    "draws": 200,
+    "published_fix_among_the_candidates": 4,
+    "repaired": 15,
+    "repaired_share": 0.075,
+    "the_repair_is_the_published_fix": 4
+   },
+   "30": {
+    "draws": 200,
+    "published_fix_among_the_candidates": 21,
+    "repaired": 68,
+    "repaired_share": 0.34,
+    "the_repair_is_the_published_fix": 16
+   }
+  },
+  "lessons": {
+   "from_quixbugs": 40,
+   "given": 204,
+   "operators": 1925,
+   "taught_nothing": []
+  },
+  "per_bug": {
+   "Python/1": {
+    "all_other_fixes": {
+     "first_pass_rank": 3,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 32,
+     "candidates": 2450
+    },
+    "another_benchmark": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 405
+    }
+   },
+   "Python/100": {
+    "all_other_fixes": {
+     "first_pass_rank": 4,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 485
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 79
+    }
+   },
+   "Python/101": {
+    "all_other_fixes": {
+     "first_pass_rank": 23,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 101,
+     "candidates": 1991
+    },
+    "another_benchmark": {
+     "first_pass_rank": 18,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 196
+    }
+   },
+   "Python/102": {
+    "all_other_fixes": {
+     "first_pass_rank": 25,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 25,
+     "candidates": 1032
+    },
+    "another_benchmark": {
+     "first_pass_rank": 19,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 19,
+     "candidates": 120
+    }
+   },
+   "Python/105": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2242
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 330
+    }
+   },
+   "Python/107": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2345
+    },
+    "another_benchmark": {
+     "first_pass_rank": 185,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 433
+    }
+   },
+   "Python/108": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1720
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 374
+    }
+   },
+   "Python/109": {
+    "all_other_fixes": {
+     "first_pass_rank": 88,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 88,
+     "candidates": 3034
+    },
+    "another_benchmark": {
+     "first_pass_rank": 40,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 40,
+     "candidates": 683
+    }
+   },
+   "Python/11": {
+    "all_other_fixes": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 31,
+     "candidates": 1560
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 260
+    }
+   },
+   "Python/110": {
+    "all_other_fixes": {
+     "first_pass_rank": 130,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1741
+    },
+    "another_benchmark": {
+     "first_pass_rank": 88,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 248
+    }
+   },
+   "Python/114": {
+    "all_other_fixes": {
+     "first_pass_rank": 354,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 2286
+    },
+    "another_benchmark": {
+     "first_pass_rank": 281,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 460
+    }
+   },
+   "Python/118": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2568
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 421
+    }
+   },
+   "Python/120": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1197
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 123
+    }
+   },
+   "Python/121": {
+    "all_other_fixes": {
+     "first_pass_rank": 13,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 13,
+     "candidates": 1292
+    },
+    "another_benchmark": {
+     "first_pass_rank": 61,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 139
+    }
+   },
+   "Python/122": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 862
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 100
+    }
+   },
+   "Python/123": {
+    "all_other_fixes": {
+     "first_pass_rank": 59,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 59,
+     "candidates": 2044
+    },
+    "another_benchmark": {
+     "first_pass_rank": 144,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 254
+    }
+   },
+   "Python/124": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2977
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 355
+    }
+   },
+   "Python/125": {
+    "all_other_fixes": {
+     "first_pass_rank": 31,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 31,
+     "candidates": 1700
+    },
+    "another_benchmark": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 5,
+     "candidates": 190
+    }
+   },
+   "Python/127": {
+    "all_other_fixes": {
+     "first_pass_rank": 41,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 2905
+    },
+    "another_benchmark": {
+     "first_pass_rank": 145,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 520
+    }
+   },
+   "Python/128": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1747
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 294
+    }
+   },
+   "Python/130": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2301
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 395
+    }
+   },
+   "Python/132": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2322
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 492
+    }
+   },
+   "Python/133": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1156
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 106
+    }
+   },
+   "Python/134": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1275
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 133
+    }
+   },
+   "Python/135": {
+    "all_other_fixes": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 5,
+     "candidates": 1683
+    },
+    "another_benchmark": {
+     "first_pass_rank": 9,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 9,
+     "candidates": 206
+    }
+   },
+   "Python/136": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2463
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 499
+    }
+   },
+   "Python/138": {
+    "all_other_fixes": {
+     "first_pass_rank": 71,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 390
+    },
+    "another_benchmark": {
+     "first_pass_rank": 13,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 53
+    }
+   },
+   "Python/14": {
+    "all_other_fixes": {
+     "first_pass_rank": 2,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 2,
+     "candidates": 1335
+    },
+    "another_benchmark": {
+     "first_pass_rank": 2,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 2,
+     "candidates": 160
+    }
+   },
+   "Python/140": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2730
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 549
+    }
+   },
+   "Python/141": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 3393
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 543
+    }
+   },
+   "Python/143": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2540
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 417
+    }
+   },
+   "Python/144": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2088
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 458
+    }
+   },
+   "Python/145": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2014
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 467
+    }
+   },
+   "Python/147": {
+    "all_other_fixes": {
+     "first_pass_rank": 396,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 2484
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 650
+    }
+   },
+   "Python/149": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1406
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 147
+    }
+   },
+   "Python/15": {
+    "all_other_fixes": {
+     "first_pass_rank": 182,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 483
+    },
+    "another_benchmark": {
+     "first_pass_rank": 37,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 67
+    }
+   },
+   "Python/150": {
+    "all_other_fixes": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 5,
+     "candidates": 1921
+    },
+    "another_benchmark": {
+     "first_pass_rank": 1,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 1,
+     "candidates": 175
+    }
+   },
+   "Python/154": {
+    "all_other_fixes": {
+     "first_pass_rank": 18,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 2525
+    },
+    "another_benchmark": {
+     "first_pass_rank": 12,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 624
+    }
+   },
+   "Python/156": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": 1254,
+     "candidates": 2319
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 378
+    }
+   },
+   "Python/157": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 731
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 95
+    }
+   },
+   "Python/158": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 181
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 26
+    }
+   },
+   "Python/159": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1365
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 169
+    }
+   },
+   "Python/16": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 175
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 31
+    }
+   },
+   "Python/163": {
+    "all_other_fixes": {
+     "first_pass_rank": 606,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1577
+    },
+    "another_benchmark": {
+     "first_pass_rank": 117,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 317
+    }
+   },
+   "Python/17": {
+    "all_other_fixes": {
+     "first_pass_rank": 358,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1285
+    },
+    "another_benchmark": {
+     "first_pass_rank": 56,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 129
+    }
+   },
+   "Python/18": {
+    "all_other_fixes": {
+     "first_pass_rank": 24,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1377
+    },
+    "another_benchmark": {
+     "first_pass_rank": 145,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 262
+    }
+   },
+   "Python/19": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 2553
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 189
+    }
+   },
+   "Python/20": {
+    "all_other_fixes": {
+     "first_pass_rank": 6,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 6,
+     "candidates": 2361
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 501
+    }
+   },
+   "Python/21": {
+    "all_other_fixes": {
+     "first_pass_rank": 426,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1578
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 182
+    }
+   },
+   "Python/22": {
+    "all_other_fixes": {
+     "first_pass_rank": 10,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 654
+    },
+    "another_benchmark": {
+     "first_pass_rank": 54,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 93
+    }
+   },
+   "Python/23": {
+    "all_other_fixes": {
+     "first_pass_rank": 4,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 7,
+     "candidates": 183
+    },
+    "another_benchmark": {
+     "first_pass_rank": 3,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 3,
+     "candidates": 27
+    }
+   },
+   "Python/24": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 561
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 84
+    }
+   },
+   "Python/25": {
+    "all_other_fixes": {
+     "first_pass_rank": 65,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 65,
+     "candidates": 1692
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 323
+    }
+   },
+   "Python/26": {
+    "all_other_fixes": {
+     "first_pass_rank": 2,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 25,
+     "candidates": 1320
+    },
+    "another_benchmark": {
+     "first_pass_rank": 3,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 3,
+     "candidates": 151
+    }
+   },
+   "Python/27": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 109
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 15
+    }
+   },
+   "Python/28": {
+    "all_other_fixes": {
+     "first_pass_rank": 19,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 19,
+     "candidates": 159
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 19
+    }
+   },
+   "Python/29": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 550
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 66
+    }
+   },
+   "Python/3": {
+    "all_other_fixes": {
+     "first_pass_rank": 1,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 33,
+     "candidates": 868
+    },
+    "another_benchmark": {
+     "first_pass_rank": 49,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 81
+    }
+   },
+   "Python/30": {
+    "all_other_fixes": {
+     "first_pass_rank": 14,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 15,
+     "candidates": 330
+    },
+    "another_benchmark": {
+     "first_pass_rank": 3,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 46
+    }
+   },
+   "Python/32": {
+    "all_other_fixes": {
+     "first_pass_rank": 38,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 2849
+    },
+    "another_benchmark": {
+     "first_pass_rank": 11,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 387
+    }
+   },
+   "Python/35": {
+    "all_other_fixes": {
+     "first_pass_rank": 16,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 16,
+     "candidates": 874
+    },
+    "another_benchmark": {
+     "first_pass_rank": 2,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 115
+    }
+   },
+   "Python/37": {
+    "all_other_fixes": {
+     "first_pass_rank": 213,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 213,
+     "candidates": 2736
+    },
+    "another_benchmark": {
+     "first_pass_rank": 258,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 258,
+     "candidates": 608
+    }
+   },
+   "Python/4": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1279
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 169
+    }
+   },
+   "Python/40": {
+    "all_other_fixes": {
+     "first_pass_rank": 7,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 2272
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 433
+    }
+   },
+   "Python/41": {
+    "all_other_fixes": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 5,
+     "candidates": 115
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 16
+    }
+   },
+   "Python/43": {
+    "all_other_fixes": {
+     "first_pass_rank": 6,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1303
+    },
+    "another_benchmark": {
+     "first_pass_rank": 123,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 216
+    }
+   },
+   "Python/45": {
+    "all_other_fixes": {
+     "first_pass_rank": 7,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 266
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 32
+    }
+   },
+   "Python/46": {
+    "all_other_fixes": {
+     "first_pass_rank": 2,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 74,
+     "candidates": 2320
+    },
+    "another_benchmark": {
+     "first_pass_rank": 133,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 400
+    }
+   },
+   "Python/47": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1207
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 182
+    }
+   },
+   "Python/49": {
+    "all_other_fixes": {
+     "first_pass_rank": 3,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 3,
+     "candidates": 1160
+    },
+    "another_benchmark": {
+     "first_pass_rank": 70,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 120
+    }
+   },
+   "Python/5": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1201
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 190
+    }
+   },
+   "Python/51": {
+    "all_other_fixes": {
+     "first_pass_rank": 30,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1002
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 92
+    }
+   },
+   "Python/52": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 629
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 58
+    }
+   },
+   "Python/53": {
+    "all_other_fixes": {
+     "first_pass_rank": 44,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 302
+    },
+    "another_benchmark": {
+     "first_pass_rank": 12,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 56
+    }
+   },
+   "Python/54": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 176
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 24
+    }
+   },
+   "Python/58": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1213
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 185
+    }
+   },
+   "Python/60": {
+    "all_other_fixes": {
+     "first_pass_rank": 22,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 160
+    },
+    "another_benchmark": {
+     "first_pass_rank": 27,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 31
+    }
+   },
+   "Python/61": {
+    "all_other_fixes": {
+     "first_pass_rank": 21,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 36,
+     "candidates": 1337
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 125
+    }
+   },
+   "Python/62": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 518
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 71
+    }
+   },
+   "Python/63": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1486
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 176
+    }
+   },
+   "Python/64": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 890
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 146
+    }
+   },
+   "Python/65": {
+    "all_other_fixes": {
+     "first_pass_rank": 19,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 19,
+     "candidates": 1979
+    },
+    "another_benchmark": {
+     "first_pass_rank": 5,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 5,
+     "candidates": 268
+    }
+   },
+   "Python/66": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 862
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 104
+    }
+   },
+   "Python/69": {
+    "all_other_fixes": {
+     "first_pass_rank": 276,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1776
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 330
+    }
+   },
+   "Python/70": {
+    "all_other_fixes": {
+     "first_pass_rank": 1,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 19,
+     "candidates": 1964
+    },
+    "another_benchmark": {
+     "first_pass_rank": 121,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 232
+    }
+   },
+   "Python/74": {
+    "all_other_fixes": {
+     "first_pass_rank": 24,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 24,
+     "candidates": 1324
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 238
+    }
+   },
+   "Python/78": {
+    "all_other_fixes": {
+     "first_pass_rank": 1,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 1,
+     "candidates": 1475
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 226
+    }
+   },
+   "Python/81": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 4423
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 658
+    }
+   },
+   "Python/82": {
+    "all_other_fixes": {
+     "first_pass_rank": 16,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 16,
+     "candidates": 1809
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 181
+    }
+   },
+   "Python/84": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 674
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 90
+    }
+   },
+   "Python/85": {
+    "all_other_fixes": {
+     "first_pass_rank": 12,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 12,
+     "candidates": 967
+    },
+    "another_benchmark": {
+     "first_pass_rank": 76,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 139
+    }
+   },
+   "Python/86": {
+    "all_other_fixes": {
+     "first_pass_rank": 29,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 29,
+     "candidates": 805
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 91
+    }
+   },
+   "Python/88": {
+    "all_other_fixes": {
+     "first_pass_rank": 15,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": 33,
+     "candidates": 709
+    },
+    "another_benchmark": {
+     "first_pass_rank": 47,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 100
+    }
+   },
+   "Python/89": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1457
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 234
+    }
+   },
+   "Python/9": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1193
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 194
+    }
+   },
+   "Python/90": {
+    "all_other_fixes": {
+     "first_pass_rank": 13,
+     "repaired": true,
+     "is_the_published_fix": true,
+     "published_fix_rank": 13,
+     "candidates": 526
+    },
+    "another_benchmark": {
+     "first_pass_rank": 50,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 83
+    }
+   },
+   "Python/92": {
+    "all_other_fixes": {
+     "first_pass_rank": 47,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 1960
+    },
+    "another_benchmark": {
+     "first_pass_rank": 124,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 244
+    }
+   },
+   "Python/93": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1730
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 337
+    }
+   },
+   "Python/96": {
+    "all_other_fixes": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 1624
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 288
+    }
+   },
+   "Python/99": {
+    "all_other_fixes": {
+     "first_pass_rank": 10,
+     "repaired": true,
+     "is_the_published_fix": false,
+     "published_fix_rank": null,
+     "candidates": 3033
+    },
+    "another_benchmark": {
+     "first_pass_rank": null,
+     "repaired": false,
+     "is_the_published_fix": null,
+     "published_fix_rank": null,
+     "candidates": 606
+    }
+   }
+  },
+  "bug_by_bug_against_the_lessons_shown_as_fixes": {
+   "all_other_fixes": {
+    "repaired_both_ways": 55,
+    "repaired_only_when_shown_as_fixes": 7,
+    "repaired_only_when_shown_backwards": 1,
+    "repaired_neither_way": 37,
+    "which_only_as_fixes": [
+     "Python/62",
+     "Python/66",
+     "Python/107",
+     "Python/108",
+     "Python/130",
+     "Python/134",
+     "Python/145"
+    ],
+    "which_only_backwards": [
+     "Python/21"
+    ]
+   },
+   "another_benchmark": {
+    "repaired_both_ways": 39,
+    "repaired_only_when_shown_as_fixes": 19,
+    "repaired_only_when_shown_backwards": 0,
+    "repaired_neither_way": 42,
+    "which_only_as_fixes": [
+     "Python/11",
+     "Python/20",
+     "Python/28",
+     "Python/40",
+     "Python/41",
+     "Python/51",
+     "Python/61",
+     "Python/62",
+     "Python/69",
+     "Python/74",
+     "Python/78",
+     "Python/82",
+     "Python/99",
+     "Python/100",
+     "Python/108",
+     "Python/130",
+     "Python/140",
+     "Python/145",
+     "Python/147"
+    ],
+    "which_only_backwards": []
+   }
+  },
+  "code_sha256_is_the_same_as_the_scored_run": true
+ },
  "development_sample_before_the_freeze": {
   "what": "16 of the 64 development bugs, run once with the learner as it was before the one change made because of them (a statement may be put into an else-branch that is not there yet). Not a score: these bugs were read.",
   "all_other_fixes": {
@@ -654,7 +2473,8 @@
   "The learner applies every operator at every place it fits. It does not look at which lines the failing test runs.",
   "A fix that needs a word, a number or a fact that is in no other fix and nowhere in the program cannot be proposed.",
   "A fix in two places at once is kept as one large change and applies almost nowhere else.",
-  "Whether hand-written mutation operators (the tree's own solver) would repair as many of these bugs was not measured."
+  "Whether hand-written mutation operators (the tree's own solver) would repair as many of these bugs was not measured.",
+  "These bugs were made by hand, in both directions of every kind of change (logic taken out as often as put in). That may be why lessons shown backwards do nearly as well with many lessons; among fixes of real bugs the two directions are not equally common."
  ],
  "per_bug": {
   "Python/1": {
