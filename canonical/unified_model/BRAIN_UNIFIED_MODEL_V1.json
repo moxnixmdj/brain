@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 389,
+  "knowledge_documents": 390,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6784,
+  "research_index_records": 6785,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1970
+  "source_index_modules": 1971
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5de97cb4050f013bdc74d9db7382e5f2ce189c9f80f682ccd0daffe2a787f0fd"
+  "value": "cd14f9567ecb2a7443bc6d9815e3eabee4c9be4ef2448b41be74461816e3005d"
  },
  "engines": [
   {
@@ -46093,6 +46093,81 @@
     "certified",
     "domain",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9818,
+   "headings": [
+    "Choose the demonstrations that apply",
+    "1. What \"chosen\" does, and why it is allowed",
+    "2. The mechanism, in nine lines",
+    "3. The trade-off, stated rather than hidden",
+    "4. What this does not solve",
+    "5. What is real and what is not",
+    "6. The smartest path, in order",
+    "7. The 2026 literature says the same thing",
+    "8. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "CHOOSE_THE_DEMONSTRATIONS_THAT_APPLY_20261112_V1.md",
+   "sha256": "48cefafda37004af359d694234cc10fa59ed51e360fd6135447ff2e79b5c36bb",
+   "summary": "**2026-11-12 · branch `arena/c3653209-brain` · authority NONE · measurement only**",
+   "terms": {
+    "15": 8,
+    "2-arg": 5,
+    "all": 4,
+    "all-pair": 5,
+    "arxiv": 4,
+    "average": 4,
+    "baseline": 4,
+    "call": 6,
+    "canonical": 4,
+    "change": 5,
+    "changed": 5,
+    "changes": 8,
+    "check": 4,
+    "chosen": 6,
+    "code": 6,
+    "coverage": 7,
+    "demonstration": 10,
+    "demonstrations": 6,
+    "developers": 5,
+    "edited": 4,
+    "every": 7,
+    "false": 5,
+    "files": 7,
+    "learner": 8,
+    "more": 9,
+    "no": 12,
+    "not": 26,
+    "one": 12,
+    "only": 5,
+    "oracle": 7,
+    "own": 6,
+    "pair": 18,
+    "pairs": 5,
+    "places": 9,
+    "policy": 5,
+    "precision": 8,
+    "pull": 5,
+    "record": 7,
+    "rule": 5,
+    "same": 9,
+    "second": 8,
+    "selection": 9,
+    "shape": 5,
+    "so": 5,
+    "target": 15,
+    "tests": 6,
+    "two": 11,
+    "use": 6
+   },
+   "title": "Choose the demonstrations that apply",
+   "title_terms": [
+    "apply",
+    "choose",
+    "demonstrations"
    ]
   },
   {
@@ -74990,10 +75065,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1191,
+  "included_source_count": 1192,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "133e5ad9f9d3c6d30d8e2709f4059f65c1f926cab8d69723a794fe43196e02d5"
+  "source_tree_digest": "651acaeea04e5bbae953873c294e582122a8b11cc68c31e74e2db95f74da8a40"
  },
  "research_index": [
   {
@@ -158359,6 +158434,27 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/FIX_CONTENT_IN_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FIX_CONTENT_IN_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FIX_CONTENT_IN_TASK_TEXT_RECORD_V1",
+   "sha256": "ddd2aeffeae685049880c32d6605d0b06702c7f66ff6c4c59eb8ca66c8c7c714",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "content": 1,
+    "fix": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json",
@@ -179074,6 +179170,26 @@
     "solver": 1,
     "v1": 1,
     "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/QUOTED_LINE_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/QUOTED_LINE_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_QUOTED_LINE_PLACE_RECORD_V1",
+   "sha256": "d4f9ba6411830caecb45f5caefb9a36f17e1f75dcfe014521819daf4c4d28ac2",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "line": 1,
+    "place": 1,
+    "quoted": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
    }
   },
   {
@@ -226868,7 +226984,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "1f96797e854e13e97f6022839755eac3f2c790f4537947806515240a8941261f",
+   "sha256": "936b6975ea067c994d4e05a99a05025dc78b88d9d4e58c5de54ce929130b2b1b",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -232300,30 +232416,6 @@
     "the_check_is_part_of_the_choice_not_a_gate_v1": 1,
     "v1": 1,
     "verify_could_reject_a_wrong_answer_and_nothing_consulted_it_while_choosing__with_a_lossy_groups_the_search_returned_150_150_with_west_missing_and_verify_said_false_on_exactly_that_result": 1
-   }
-  },
-  {
-   "action_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7bd17076fec6a736a5d2072b65b59c7f7f8904f070d040f7eb6b6f6ffbc4fdee",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "chroot": 1,
-    "every_confined_execution_died_when_the_harness_ran_under_a_venv_because_confine_v1_spawned_sys_executable_into_a_chroot_that_only_mounts_usr_bin_lib_lib64_so_the_helpers_own_post_chroot_program_spawn_raised_filenotfound_error_before_any_program_line_ran_and_the_receipt_read_like_the_taught_program_failed": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "not": 1,
-    "port_the_brokers_chroot_visible_interpreter_rule_into_confine_v1_at_the_helper_launch_and_pin_both_ends_the_unit_pin_on_the_launch_argv_and_the_front_door_teach_apply_integration_pin_under_the_venv_that_failed_on_base": 1,
-    "python": 1,
-    "ran": 1,
-    "the_chroot_ran_a_python_that_was_not_in_it_20261112_v1": 1,
-    "the_harness_fault_class_that_impersonates_a_program_failure_is_closed_at_the_confinement_launcher_and_measured_at_both_ends__the_one_shot_loop_has_a_failable_pin_through_the_production_door__three_candidate_instruments_were_killed_by_measurement_before_code__zero_spend__no_benchmark_row_moved__truth_achieved_stays_false": 1,
-    "v1": 1
    }
   },
   {
@@ -252525,11 +252617,10 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "a9b944feb840b8d513356a85ce391be6ede86d7fd2b8d04b84abd60559cc0961",
+   "sha256": "f12d50da3b587ad41fb99ff23cdab370f293174b29408314a39c90abdc804682",
    "summary": "Candidate namespace/chroot launcher; not an admitted security boundary.",
-   "symbol_count": 4,
+   "symbol_count": 3,
    "symbols": [
-    "_python_in_chroot",
     "available",
     "run",
     "run_readonly"
@@ -252544,7 +252635,6 @@
     "launcher": 1,
     "namespace": 1,
     "not": 1,
-    "python_in_chroot": 1,
     "run": 1,
     "run_readonly": 1,
     "security": 1,
@@ -288239,6 +288329,57 @@
     "prompt": 2,
     "qualitative": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/quoted_in_the_task_text_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/quoted_in_the_task_text_v1.py",
+   "sha256": "94e11c31db33c4c89af0d03b5509c300d642711faa235fd119b2f787bbb2964b",
+   "summary": "Every program that is this one with one line written as the task's own text writes it.",
+   "symbol_count": 12,
+   "symbols": [
+    "_first_word",
+    "_has_body",
+    "_in_place",
+    "_indent",
+    "_is_documentation",
+    "_next_to",
+    "_parsed",
+    "candidates",
+    "code_lines",
+    "pointed_at",
+    "read_as_code",
+    "statement_lines"
+   ],
+   "terms": {
+    "candidates": 1,
+    "code_lines": 1,
+    "every": 1,
+    "first_word": 1,
+    "has_body": 1,
+    "in_place": 1,
+    "indent": 1,
+    "is_documentation": 1,
+    "line": 1,
+    "next_to": 1,
+    "one": 2,
+    "own": 1,
+    "parsed": 1,
+    "pointed_at": 1,
+    "program": 1,
+    "quoted": 1,
+    "read_as_code": 1,
+    "statement_lines": 1,
+    "task": 2,
+    "text": 2,
+    "v1": 1,
+    "writes": 1,
+    "written": 1
    }
   },
   {
