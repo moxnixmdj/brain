@@ -24,10 +24,10 @@
   "mission_id": "SEQ_A_EXACT_LITERAL_RESPONSE_0",
   "next_action_index": 1,
   "plan_sha256": "e91b5bef4e87b4f3371afd2d0f9c48e86db7e7a5d6c645b4d904ba4d3604fae1",
-  "resume_count": 1,
+  "resume_count": 3,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "live-raw-goal-controller",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-10-29T09:30:52.373725+00:00"
+  "updated_at_utc": "2026-11-12T15:27:07.156941+00:00"
 }
