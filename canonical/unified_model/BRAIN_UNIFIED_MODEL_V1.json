@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 338,
+  "knowledge_documents": 339,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6743,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "10baf3c752eab8b71b1c48e96fa97cc7ffb525c19aa5b69be5006c72a93850b0"
+  "value": "e54b626064646fcebf9970ff8e3f5dea332f07a0521be1a48ee87ce8e5e0ebb1"
  },
  "engines": [
   {
@@ -44821,6 +44821,79 @@
     "finds",
     "instance",
     "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4603,
+   "headings": [
+    "A demonstration with no arguments is a constant",
+    "What this says about the question",
+    "The fix, named and deliberately not shipped",
+    "What this costs the story so far",
+    "Receipts",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_DEMONSTRATION_WITH_NO_ARGUMENTS_IS_A_CONSTANT_20261112_V1.md",
+   "sha256": "16826921ad06810196b20d7b48cee99bb7cc41e469b95f21e5b4cba05abfd8da",
+   "summary": "**2026-11-12.** Base `05c9d45f`. Branch `arena/d3d05f45-brain`. Round 17.",
+   "terms": {
+    "145": 2,
+    "16": 2,
+    "17": 2,
+    "294": 2,
+    "296": 8,
+    "about": 2,
+    "any": 2,
+    "arguments": 4,
+    "base": 2,
+    "been": 2,
+    "blind": 2,
+    "canonical": 2,
+    "capabilities": 3,
+    "capability": 3,
+    "change": 4,
+    "constant": 4,
+    "curated": 2,
+    "declared": 2,
+    "depth": 2,
+    "did": 2,
+    "each": 5,
+    "every": 3,
+    "exact": 3,
+    "experiences": 3,
+    "input": 3,
+    "inputs": 3,
+    "instance": 6,
+    "layer": 3,
+    "module": 4,
+    "no": 4,
+    "not": 12,
+    "nothing": 3,
+    "one": 5,
+    "only": 3,
+    "plan": 3,
+    "record": 3,
+    "registry": 4,
+    "round": 6,
+    "run": 4,
+    "same": 4,
+    "so": 4,
+    "solved": 4,
+    "times": 3,
+    "try": 3,
+    "variation": 3,
+    "verified": 10,
+    "vs": 3,
+    "zero": 4
+   },
+   "title": "A demonstration with no arguments is a constant",
+   "title_terms": [
+    "arguments",
+    "constant",
+    "demonstration",
+    "no"
    ]
   },
   {
@@ -71045,10 +71118,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1140,
+  "included_source_count": 1141,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9033bccced442c602b74407ad87eb4645a6c0d84c0dc82bf90621f99df20f022"
+  "source_tree_digest": "1c19c411c274c9077581fe569824f8dd96b9201b8e6bf67e11025400a2450c7c"
  },
  "research_index": [
   {
