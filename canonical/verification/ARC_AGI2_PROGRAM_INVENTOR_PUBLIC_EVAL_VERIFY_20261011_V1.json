@@ -1,0 +1,68 @@
+{
+  "schema": "PROJECT_BRAIN_ARC_AGI2_PROGRAM_INVENTOR_PUBLIC_EVAL_VERIFY_20261011_V1",
+  "date": "2026-10-11",
+  "status": "FALSIFICATION_COMPLETE__ZERO_OF_120__FIXED_V16_PRIMITIVE_COMPOSITION_INSUFFICIENT",
+  "preexposure": "canonical/governance/ARC_AGI2_PUBLIC_EVAL_PROGRAM_INVENTOR_PREEXPOSURE_20261011_V2.json",
+  "v1_invalidation": "canonical/governance/ARC_AGI2_PROGRAM_INVENTOR_AUDIT_V1_INVALIDATION_20261011_V1.json",
+  "dataset": {
+    "repository": "arcprize/ARC-AGI-2",
+    "commit": "f3283f727488ad98fe575ea6a5ac981e4a188e49",
+    "split": "data/evaluation",
+    "task_count": 120,
+    "corpus_sha256": "ddb0a9f8794407f47ff9dc692ef7d3e578ddd503c92f555a4f38b509b0ba05aa"
+  },
+  "subject": {
+    "branch": "successor/general-visual-program-inventor-v1-20261011",
+    "inventor_blob_sha": "c090fb50b00bdc285680b49ca7c95ce618e23826",
+    "adapter_blob_sha": "617e9b97f2092af4e2c31e3cfcbc0bae4dd9ffd7",
+    "arc_v16_runtime_blob_sha": "f48469c2d54b6698cadabef05f9078dd5902853c",
+    "aggregate_evaluator_blob_sha": "ee4f1660df12df7967e8631a90cc3c9e505871b9"
+  },
+  "search": {
+    "max_depth": 3,
+    "attempts": 2,
+    "max_semantic_states_per_depth": 4000,
+    "max_equivalent_programs_per_semantics": 4,
+    "max_grid_cells": 10000,
+    "workers": 8,
+    "aggregate_generated_program_count": 941018,
+    "aggregate_semantic_states_by_depth": {
+      "1": 2087,
+      "2": 20853,
+      "3": 180713
+    },
+    "max_generated_program_count_single_task": 13650
+  },
+  "result": {
+    "exact_tasks_solved": 0,
+    "exact_task_solve_rate": 0.0,
+    "tasks_with_exact_training_program": 0,
+    "invention_status_counts": {
+      "GRAMMAR_EXHAUSTED__REPRESENTATION_EXPANSION_REQUIRED": 120
+    },
+    "wall_clock_seconds": 122.48816975999944,
+    "result_sha256": "edb7e736923dc5a26ab997775f1400ecfd194cdf271a6bfacf2e46da19be6962"
+  },
+  "causal_interpretation": {
+    "falsified": "COMPOSITION_OF_THE_FROZEN_V16_PARAMETER_FREE_PRIMITIVE_LIBRARY_THROUGH_DEPTH_3_IS_ADEQUATE_FOR_MATERIAL_ARC_AGI2_PUBLIC_GENERALIZATION",
+    "not_falsified": [
+      "PROGRAM_INDUCTION_WITH_A_RICHER_REPRESENTATION_LANGUAGE",
+      "AUTONOMOUS_NEW_PRIMITIVE_OR_LATENT_REPRESENTATION_INVENTION",
+      "PARAMETERIZED_RELATIONAL_PROGRAM_SYNTHESIS",
+      "COUNTEREXAMPLE_GUIDED_REPRESENTATION_EXPANSION"
+    ],
+    "next_action": "MOVE_CRITICAL_PATH_FROM_DEEPER_FIXED_GRAMMAR_SEARCH_TO_AUTONOMOUS_REPRESENTATION_AND_PRIMITIVE_INVENTION_USING_NON_EVAL_ACQUISITION_DATA"
+  },
+  "information_policy_observed": {
+    "task_ids_emitted": false,
+    "task_grids_emitted": false,
+    "task_programs_emitted": false,
+    "per_task_results_emitted": false
+  },
+  "external_learned_capability_calls": 0,
+  "donor_runtime_required": false,
+  "capability_credit_delta": 0,
+  "arc_parity_credit_delta": 0,
+  "promotion_authority": false,
+  "terminal_credit_delta": 0
+}

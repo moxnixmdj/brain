@@ -1,0 +1,32 @@
+name: ARC novelty compiler public training probe
+
+on:
+  push:
+    branches:
+      - successor/arc-novelty-compiler-v1-20261011
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests for ARC repair slice
+        run: python -m pytest -q canonical/tests/test_arc_novelty_compiler_v1.py canonical/tests/test_arc_novelty_compiler_public_probe_v1.py
+      - name: Fetch official ARC-AGI-1 public corpus
+        run: git clone --depth 1 https://github.com/fchollet/ARC-AGI.git /tmp/ARC-AGI
+      - name: Measure on public training set
+        run: |
+          python canonical/evaluation/arc_novelty_compiler_public_probe_v1.py \
+            /tmp/ARC-AGI/data/training \
+            --out /tmp/arc_novelty_probe_v1.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arc-novelty-compiler-public-training-probe-v1
+          path: /tmp/arc_novelty_probe_v1.json
