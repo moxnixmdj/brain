@@ -1,0 +1,229 @@
+{
+ "action_id": "PROBLEM_2_GENERALIZATION_AND_ITS_CEILING_20261112_V1",
+ "action_intent_id": "PROBLEM_2_GENERALIZATION_AND_ITS_CEILING_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "A second memory beside the exact-recall one: formatting verbs, singular/plural inflection, filler and file-literal removal, and an ORDER-PRESERVING (verb, source, target) direction component. Injected before the candidate loop so a remembered procedure must still pass preconditions, binding and verification; learning only from VERIFIED receipts.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "causal_evidence": "MEASURED_ON_53c80d83__11_OF_11_PARAPHRASES_ANSWERED_WITH_MEMORY_OFF__4_OF_6_REFUSED_TASKS_HAVE_NO_CAPABILITY_IN_THE_145_ROW_REGISTRY__OLD_KEY_COLLIDES_convert_yaml_to_json_WITH_convert_json_to_yaml",
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_PROBLEM_2_IS_A_MATCHING_FAILURE__MEASURED_AS_A_COVERAGE_CEILING_WHERE_CAPABILITIES_DO_NOT_EXIST_AND_ALREADY_GENERALIZED_WHERE_THEY_DO",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/procedure_memory_v1.py",
+   "canonical/runtime/grounded_action_v1.py",
+   "canonical/tests/test_problem_2_generalization_v1.py",
+   "problem_2_generalization_benchmark_v1.py",
+   "PROBLEM_2_GENERALIZATION_20261112_V1.md"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Generalization was reported as a matching failure. Measured: 11 of 11 paraphrases are answered with memory OFF, and 4 of the 6 refused tasks have NO capability in the registry at all. The ceiling is what the machine can DO, not what it can find. The old key also collapses opposite directions (convert yaml to json == convert json to yaml) and memory could not reach a task the router missed.",
+ "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "Generalization was reported as a matching failure. Measured: 11 of 11 paraphrases are answered with memory OFF, and 4 of the 6 refused tasks have NO capability in the registry at all. The ceiling is what the machine can DO, not what it can find. The old key also collapses opposite directions (convert yaml to json == convert json to yaml) and memory could not reach a task the router missed.",
+ "date": "2026-11-12",
+ "expected_parent_change": "Memory can reach a paraphrase the router misses (mechanism, zero testable targets today); opposite-direction collisions are eliminated; failures can no longer teach.",
+ "expected_parent_frontier_change": "The blocking cause of the reported Problem 2 is identified as coverage rather than matching, and the memory mechanism that would exploit new capabilities is built and tested. No capability registered, no family rank.",
+ "explicit_user_authorization": false,
+ "falsification_condition": "If a paraphrase of an EXISTING capability can be shown to fail without memory and succeed with it, then memory already has testable targets and the zero-testable-target finding is wrong.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__IT_IDENTIFIES_THE_BLOCKING_CAUSE_OF_THE_REPORTED_PROBLEM_2_AS_COVERAGE_RATHER_THAN_MATCHING_AND_BUILDS_THE_MECHANISM_THAT_WILL_EXPLOIT_NEW_CAPABILITIES_WITHOUT_MAKING_WRONG_ANSWERS_FASTER",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Mechanism built and pinned; 0 testable rescue targets on this commit because the paraphrases of existing capabilities already route. Coverage ceiling measured at 4/6.",
+ "next_step": "Build the four missing ordinary capabilities (csv column arithmetic, zip, xlsx column arithmetic, docx to text); each converts a permanent AMBIGUOUS into a candidate, and the memory built here then has something to carry.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "recursive_obs": {
+  "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
+   "LEAVE_UNDECIDABLE -- it was being read as false"
+  ],
+  "expected_parent_level_state_change": "The blocking cause of the reported Problem 2 is identified as coverage rather than matching, and the memory mechanism that would exploit new capabilities is built and tested. No capability registered, no family rank.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE recall_resolution -- rejected: it still serves the exact case and costs nothing",
+    "BYPASS the router by calling the remembered capability directly -- rejected: that answers without checking preconditions, which is how a memory becomes a liability",
+    "SUBSTITUTE embeddings -- rejected: a dependency, a model, and the weaker signal for near-duplicate skills",
+    "ADOPT a second memory that proposes candidates into the existing loop"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC -- grounded_action_v1.act() and experience_v1, the front door and store this repository actually uses.",
+   "surviving_causal_blocker": "The key sorted words (so opposite directions collided and every paraphrase was a new question) and the remembered id could only choose among survivors (so a miss could never be reached). Both are in the selection path, not in the registry."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "no embedder and no model -- the whole mechanism is a tokenizer, an ordered-pair detector and a set comparison",
+    "no second store -- a `procedures` section in the existing experience file, so nothing is migrated",
+    "no new fallback path -- the candidate is injected into the existing loop and judged by it"
+   ],
+   "existing_inherited_routes_checked": [
+    "experience_v1.teach_resolution / recall_resolution (the exact-recall path, left intact)",
+    "grounded_action_v1.act candidate loop, precondition probe and binding",
+    "h100_computer_use_registry_v1 (4 generic primitives, not relevant here)"
+   ],
+   "external_existing_routes_checked": [
+    "SkillRet / skill-retrieval literature: token overlap is high-precision for near-duplicate skills, dense embeddings overgeneralise",
+    "skill shadowing and library drift: retrieval precision falls 29.6% -> 3.3% as pools grow",
+    "PolySkill: separating a skill's abstract goal from its implementation is what makes it transfer"
+   ],
+   "surviving_gap": "Nothing in the tree distinguished opposite directions or let memory propose a candidate the router did not already reach."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "counting paraphrases as evidence that memory generalizes, when the router answered them",
+    "treating 'similar task' as a matching failure without asking whether the capability exists",
+    "crediting a remembered procedure for a route the front door already found"
+   ],
+   "real_outcome": "A generalized procedure memory that preserves direction, folds formatting verbs, survives inflection, and is only allowed to learn from verified receipts -- plus a measured ceiling showing that four of six refused ordinary tasks have no capability behind them at all.",
+   "surviving_necessity": "The ceiling cannot be lifted by matching, so the next action is building capabilities, not improving retrieval."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "experience_v1 state file and its cache",
+    "grounded_action_v1 selection gate and its zero-score rule",
+    "world_probe_v1 precondition probe applied to the remembered candidate"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "the assumption that `recall_resolution` is how memory reaches a task -- it can only tie-break"
+   ],
+   "fresh_reuse_plan": "On a new machine the procedure memory is empty and costs nothing; the exact recall path behaves exactly as before."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "signature computed once per sentence",
+    "candidate list ranked by Jaccard over components, top three only"
+   ],
+   "search_stop_decision": "Stopped at three candidate mechanisms: embeddings (rejected -- a dependency, a model, and the literature says it is the weaker signal here), rewriting the old key in place (rejected -- it would migrate a store that currently works), and a second memory that is only a candidate source (adopted, because it is the only one bounded by the existing safety rules)."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Embeddings cost a dependency and a model for a signal the literature says is weaker on near-duplicate skills; rewriting the old key in place would migrate a store that works.",
+   "routes_ranked": [
+    "1. A second memory with an order-preserving (verb, source, target) direction, folded formatting verbs, a plural-safe stemmer and literals dropped",
+    "2. Inject its candidates BEFORE the candidate loop so the existing probe, binder and verifier judge them",
+    "3. Learn only from VERIFIED receipts"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The effect is measured end to end on the real front door and the real registry: 11 paraphrases routed with memory off, six refused tasks checked against the 145-row registry for a capability that could serve them, and the opposite-direction collision reproduced against the old key. The tests re-run the front door rather than mocking it, and declare the tool substrate instead of assuming it."
+  },
+  "real_outcome": "PROCEDURE_MEMORY_THAT_GENERALIZES_OVER_WORDING_INFLECTION_AND_DIRECTION__AND_A_MEASURED_CEILING_OF_FOUR_MISSING_CAPABILITIES_BEHIND_SIX_REFUSED_TASKS",
+  "required_capability": "A sensor that answers UNKNOWN as its own value, so that a premise nobody can see is not silently counted as false, and a binder that either binds a stated value or reports that it cannot, never neither.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  },
+  "routes_considered": [
+   "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
+   "ADD_A_NETWORK_PERMISSION",
+   "LEAVE_UNDECIDABLE_AND_DOCUMENT_IT"
+  ],
+  "selected_surviving_route": "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
+  "stop_condition": "SEVEN_TESTS_PASS_TWO_SKIP_WITH_DECLARED_SUBSTRATE__THREE_MEASUREMENTS_RUN__CENSUS_AND_COVERAGE_RECHECKED__DRIFT_GUARD_PASS__ZERO_CAPABILITIES_REGISTERED",
+  "why_selected_route_is_fastest_sufficient": "Both are one function each, both are measured at the front door before and after, and both replace silence with an answer. Neither adds a capability, a permission, or a model."
+ },
+ "route_id": "PROBLEM_2_GENERALIZATION_AND_ITS_CEILING_20261112_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "MEASURE_APPLICABILITY_IDENTIFIABILITY_AND_PRICE_THE_REGISTRY_PREMISES",
+ "stop_condition": "SEVEN_TESTS_PASS_TWO_SKIP_WITH_DECLARED_SUBSTRATE__THREE_MEASUREMENTS_RUN__CENSUS_AND_COVERAGE_RECHECKED__DRIFT_GUARD_PASS__ZERO_CAPABILITIES_REGISTERED",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "minimum_prerequisite_for": [
+   "EXTERNAL_RESULT_OR_ACCESS",
+   "UNIVERSAL_SCOPE_AND_COMPOSITION",
+   "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+  ],
+  "mode": "CONTROL_PLANE_PREREQUISITE",
+  "proof_state_reachability": "PREVENTS_AN_UNKNOWN_PREMISE_FROM_BEING_TREATED_AS_A_REFUTED_ONE__AND_PREVENTS_A_STATED_VALUE_FROM_BEING_DROPPED_WITHOUT_A_REPORT",
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "37ebc24b38206b2a7780742f2fe0b72ca5dd993f",
+     "path": "canonical/runtime/procedure_memory_v1.py"
+    },
+    {
+     "git_blob_sha": "4ef5eac1438b42a6ca55a2f9b19dbe25ef6d70dd",
+     "path": "canonical/runtime/grounded_action_v1.py"
+    }
+   ],
+   "decisive_question": "Do paraphrases of an existing capability fail without memory, and can a remembered procedure rescue them?",
+   "falsifier_id": "F_FIND_A_PARAPHRASE_OF_AN_EXISTING_CAPABILITY_THAT_FAILS_WITHOUT_MEMORY",
+   "known_counterexamples_checked": true,
+   "proposal_id": "P_PARAPHRASES_ALREADY_ROUTE_AND_MISSES_ARE_MISSING_CAPABILITIES"
+  }
+ },
+ "weakens_existing_guard": false
+}
