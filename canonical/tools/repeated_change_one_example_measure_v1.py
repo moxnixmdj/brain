@@ -159,13 +159,24 @@ def _alarm(signum, frame):
 
 def the_organ(target: str, example_before: str, example_after: str) -> tuple[str | None, str | None]:
     """(the edited text, None) or (None, why not). The organ's own refusal is given in its words."""
+    return _asked(lambda organ: organ.edit_by_example(target, example_before, example_after))
+
+
+def the_organ_leaving_the_rest(target: str, example_before: str, example_after: str) -> tuple[str | None, str | None]:
+    """The organ's other way of repeating (its `repeat_shown`): code that is used a way the example
+    did not show is left as it is, and the rest is changed. Added after the first two runs had
+    been seen, when another session had changed the organ so that it refuses such a file whole."""
+    return _asked(lambda organ: organ.repeated(organ.learn(example_before, example_after), target, "the example", leave_unshown=True))
+
+
+def _asked(ask: Callable[[Any], str]) -> tuple[str | None, str | None]:
     from canonical.swe_kernel.taught_actions import edit_by_example_v1 as organ
     previous = signal.signal(signal.SIGALRM, _alarm)
     signal.alarm(CALL_LIMIT_S)
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            return organ.edit_by_example(target, example_before, example_after), None
+            return ask(organ), None
     except organ.Refused as why:
         return None, "refused: " + str(why)
     except TookTooLong:
@@ -419,6 +430,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--pulls", type=pathlib.Path, default=None, help="the file --collect wrote")
     parser.add_argument("--out", type=pathlib.Path, default=None)
     parser.add_argument("--no-two-examples", action="store_true")
+    parser.add_argument("--leave-unshown", action="store_true", help="the organ's other way of repeating: code used a way the example did not show is left as it is")
     args = parser.parse_args(argv)
     if args.collect is not None:
         pulls = collect()
@@ -429,13 +441,15 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("--pulls and --out, or --collect")
     pulls = json.loads(args.pulls.read_text(encoding="utf-8"))
     started = time.time()
-    per_pull = measure(pulls, two_examples=not args.no_two_examples, say=lambda line: print(line, flush=True))
+    per_pull = measure(pulls, organ=the_organ_leaving_the_rest if args.leave_unshown else the_organ,
+                       two_examples=not args.no_two_examples, say=lambda line: print(line, flush=True))
     summary = summarise(per_pull)
     for row in per_pull.values():
         for question in ("itself", "one_example", "two_examples", "elsewhere"):
             row[question] = rates(row[question])
     record = {"schema": SCHEMA, "authority": AUTHORITY, "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
               "organ": ORGAN, "queries": [list(query) for query in QUERIES],
+              "way_of_repeating": "what the example did not show is left as it is" if args.leave_unshown else "the whole file or nothing",
               "parameters": {"per_query": PER_QUERY, "results_read": RESULTS_READ, "min_files": MIN_FILES, "max_files_in_all": MAX_FILES_IN_ALL,
                              "files": FILES, "fewest_files": FEWEST_FILES, "max_bytes": MAX_BYTES, "seed": SEED, "call_limit_s": CALL_LIMIT_S},
               "code_sha256": code_sha256(), "pulls_sha256": hashlib.sha256(args.pulls.read_bytes()).hexdigest(),

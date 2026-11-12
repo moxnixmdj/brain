@@ -260,6 +260,27 @@ def test_an_organ_that_takes_too_long_is_stopped_and_said_so(monkeypatch):
     assert time.time() - started < 4
 
 
+USED_ANOTHER_WAY = ("class U:\n    def test_c(self):\n        self.assertEquals(h(), 'x')\n\n"
+                    "    def test_d(self):\n        self.assertEquals(h(), 'x', 'said when it fails')\n")
+
+
+def test_a_use_the_example_did_not_show_makes_the_organ_refuse_the_file_or_leave_that_use_alone():
+    whole, why = measure.the_organ(USED_ANOTHER_WAY, EXAMPLE_BEFORE, EXAMPLE_AFTER)
+    assert whole is None and why.startswith("refused: line 6 of the file has self.assertEquals called with 3 arguments")
+    got, why = measure.the_organ_leaving_the_rest(USED_ANOTHER_WAY, EXAMPLE_BEFORE, EXAMPLE_AFTER)
+    assert why is None
+    assert "self.assertEqual(h(), 'x')\n" in got and "self.assertEquals(h(), 'x', 'said when it fails')" in got
+
+
+def test_leaving_the_rest_changes_what_the_whole_file_way_changes_when_every_use_was_shown():
+    assert measure.the_organ_leaving_the_rest(TARGET_BEFORE, EXAMPLE_BEFORE, EXAMPLE_AFTER) == measure.the_organ(TARGET_BEFORE, EXAMPLE_BEFORE, EXAMPLE_AFTER)
+
+
+def test_leaving_the_rest_still_refuses_a_file_with_nothing_of_that_form():
+    got, why = measure.the_organ_leaving_the_rest("x = 1\n", EXAMPLE_BEFORE, EXAMPLE_AFTER)
+    assert got is None and why.startswith("refused: nothing in the file has the form the example changed")
+
+
 # ----------------------------------------------------------------------------- which files are used
 def test_a_file_is_used_only_when_python_reads_it_and_its_code_changed():
     assert measure.usable(BEFORE, AFTER)
