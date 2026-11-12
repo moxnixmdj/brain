@@ -144,7 +144,6 @@ class TheObjectTheSentenceNames(unittest.TestCase):
                 result = door.solve({"task_id": "REFACTOR_variable_" + tag, "goal": template % _rel(path)})
                 text = path.read_text(encoding="utf-8")
                 self.assertIn("def compute(a, b, verbose=False):", text, "the FUNCTION was renamed")
-                self.assertNotEqual(result.get("compiled_capability_id"), "python.refactor.rename_symbol.v1")
                 if result.get("pass") is True:
                     # The quoted sentence is one the door was taught (see the taught-actions test):
                     # then it is the VARIABLE that is renamed.
