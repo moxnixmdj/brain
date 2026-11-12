@@ -990,7 +990,15 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
             proven = _derived_value(key)
             inputs[key] = proven if isinstance(proven, int) and proven >= 1 else 0
         elif is_extract and key == "new_name":
-            inputs[key] = "_extracted_helper"
+            # The placeholder is for a sentence that names nothing ("... into a helper.").  A
+            # sentence that goes on after "into" with a word of its own has stated a name this
+            # binder did not read, and a function called something else is not what it asked for.
+            # Measured 2026-11-11 on main 62fa7efa: "... lines 13 to 14 into a new function
+            # scale." -> PASS, and the function was named ``_extracted_helper``.
+            if states_a_name_the_placeholder_would_replace(goal):
+                still.append((key, exc))
+            else:
+                inputs[key] = "_extracted_helper"
         else:
             still.append((key, exc))
     remaining: list[tuple[str, BaseException]] = []
@@ -1263,6 +1271,22 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
 # The rule is narrow on purpose: it applies to a BARE token only.  A quoted value is the
 # caller stating it, and a key that denotes a version (`version_field`) is asking for one.
 _VERSION_FRAGMENT = re.compile(r"^v\d+$")
+
+
+# Words that describe the extracted function without naming it.
+_UNNAMED_HELPER_WORDS = frozenset({
+    "a", "an", "the", "new", "helper", "function", "method", "routine", "separate", "own", "its",
+    "private", "small", "local", "standalone", "top", "level", "module",
+})
+
+
+def states_a_name_the_placeholder_would_replace(goal: str) -> bool:
+    """True when what follows the last "into" holds a word that is not a description of a helper."""
+    tail = re.search(r"\binto\b(?!.*\binto\b)(.*)$", str(goal or ""), re.I | re.S)
+    if not tail:
+        return False
+    return any(word.lower() not in _UNNAMED_HELPER_WORDS
+               for word in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", tail.group(1)))
 
 
 _LINE_RANGE_RE = re.compile(
