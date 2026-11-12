@@ -970,6 +970,77 @@ def rename_undone(before_text, after_text):
     return after_text
 
 
+def restructures_put_back(before_text, after_text):
+    """The example's second file with the changes no rule can carry put back, and where they stood.
+
+    A person often reshapes a statement in the same commit as the edits worth teaching -- the tangled-commit
+    phenomenon again, in its second form.  A reshaped statement cannot be a lesson (one showing underdetermines
+    it), and refusing the whole example loses every mechanical edit beside it.  So each changed place that
+    cannot hold a rule is put back to how the first file had it, and its span is handed over as unsettled:
+    not evidence of anything, neither a change to learn nor code left alone that could speak against a rule.
+
+    Returns (the second file to learn from, the unsettled spans in the first file).  When nothing can be
+    localized (whole statements came or went at the top), or nothing learnable remains, or the put-back text
+    does not parse, the second file comes back as it came, so the old refusal stands.
+    """
+    came_as = (after_text, ())
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return came_as
+    try:
+        places = changed_places(before_tree, after_tree)
+    except RecursionError:
+        return came_as
+    bad = {}
+    for old, new, trail in places:
+        try:
+            levels_of(old, new, trail)
+        except Refused:
+            pair = None
+            for above, below in trail + ((old, new),):
+                if isinstance(above, ast.stmt) and isinstance(below, ast.stmt):
+                    pair = (above, below)
+            if pair is None:
+                return came_as        # whole statements came or went at the top; nothing to localize
+            bad[where(pair[1])] = pair
+    if not bad:
+        return came_as
+
+    def starts(text):
+        lines, offsets, total = text.splitlines(keepends=True), [], 0
+        for line in lines:
+            offsets.append(total)
+            total += len(line)
+        return offsets
+
+    def whole(node):
+        """A statement's span including its decorators, as (first line, column, last line, column)."""
+        first = node.decorator_list[0] if getattr(node, "decorator_list", None) else None
+        if first is not None:
+            return (first.lineno, max(first.col_offset - 1, 0), node.end_lineno, node.end_col_offset)
+        return where(node)
+
+    offsets_before, offsets_after = starts(before_text), starts(after_text)
+    spans = []
+    for key in sorted(bad, reverse=True):
+        kept, put_back = bad[key]
+        kept_span, put_back_span = whole(kept), whole(put_back)
+        head = offsets_after[put_back_span[0] - 1] + put_back_span[1]
+        tail = offsets_after[put_back_span[2] - 1] + put_back_span[3]
+        was = before_text[offsets_before[kept_span[0] - 1] + kept_span[1]:
+                          offsets_before[kept_span[2] - 1] + kept_span[3]]
+        after_text = after_text[:head] + was + after_text[tail:]
+        spans.append(kept_span)
+    try:
+        put_back_tree = ast.parse(after_text)
+    except SyntaxError:
+        return came_as
+    if ast.dump(put_back_tree) == ast.dump(before_tree):
+        return came_as                # the whole example was the reshaping; it teaches nothing repeatable
+    return after_text, tuple(sorted(spans))
+
+
 def learn_all(examples, wide=False):
     """The rules that turn every example's first file into its second.  `examples` is a list of (before, after) texts.
 
@@ -981,9 +1052,12 @@ def learn_all(examples, wide=False):
     With `wide`, returns (the rules, their wider readings); see `wider`.
     """
     several = len(examples) > 1
-    shown = [Shown(example[0], rename_undone(example[0], example[1]),
-                   "example %d" % number if several else "the example", example[2:] and example[2])
-             for number, example in enumerate(examples, 1)]
+    shown = []
+    for number, example in enumerate(examples, 1):
+        after, set_aside = restructures_put_back(example[0], rename_undone(example[0], example[1]))
+        given = tuple(example[2]) if example[2:] and example[2] else ()
+        shown.append(Shown(example[0], after, "example %d" % number if several else "the example",
+                           given + set_aside))
     changed = Changed(shown)
     groups = []
     for example in shown:
