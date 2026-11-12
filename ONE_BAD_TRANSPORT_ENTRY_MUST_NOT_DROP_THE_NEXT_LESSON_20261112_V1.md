@@ -31,6 +31,9 @@ ran. No imported lesson is promoted to greater assurance by this change.
 - **Before patch: 14 failed, 1 passed.**
 - **After patch: 15 passed.**
 - With transport round-trip and learn-path wiring neighbors: **33 passed** locally.
+- Expanded transport, wiring, scoped restart, parameterized-skill and load-bearing admission checks:
+  **79 passed** locally. Unified-model verification: **33/33**; repository integrity: **0 violations**.
+  These are focused producer-local checks, not a full-suite run or independent verification.
 
 Twelve malformed-value cases each place the bad entry before a valid one. The tests assert the
 named refusal and successful import, reopen the receiver store, and actually recall the retained
