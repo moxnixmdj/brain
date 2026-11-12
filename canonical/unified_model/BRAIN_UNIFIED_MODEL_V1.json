@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "09ef939d14dad6090a1fd404cd297e08769872a70a6fa3a410df5c2b7a4222b9"
+  "value": "c40be4b25c9b53eb89bc3f708fc90c15728af3c57def3a6bdcd72d1228e678f9"
  },
  "engines": [
   {
@@ -232298,7 +232298,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_WALL_WAS_NOT_THE_WALL_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "849880d443a2ae07a805aacc232ea2347133f8813229af36748d95c4a4f09924",
+   "sha256": "15d9149a21c746ad581cb66fa594b42399697308a6e0af50b8da6e18452fca33",
    "status": "",
    "terms": {
     "20261112": 1,
