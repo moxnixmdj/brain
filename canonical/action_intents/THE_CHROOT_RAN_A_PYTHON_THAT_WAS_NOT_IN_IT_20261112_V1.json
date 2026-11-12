@@ -1,0 +1,410 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
+ "action_intent_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
+ "action_kind": "RECONCILE_FRONTIER",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "03ac3628f401304841cc50d85a6f2261707f153d",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The standing question asked whether one try -> permanent skill is solved and what the open limiting factor now is. This round answered by executing the loop instead of re-reading it, and by fixing the harness fault the execution exposed. Through the unified front door (solve_or_learn, learn=True) on the tracked bundle: a one-example teaching wrote a CHANGE_LEARNED_FROM_EXAMPLES_V1 lesson (teach pass, PASS__TIER0_COMPILED_SKILL_RECALL, 204.6 ms), and a second call edited a file created after the teaching (str(x) -> repr(x), same status) -- four executions, four passes across raw recall and the front door, stdout_equals verified, hit_count 2/2 in the live sqlite (the tracked bundle's exported hit_count stays 0; the sqlite is the counter, recorded as a measurement trap). The refusals were named: a coordinated rename example declined with 'cannot be repeated one place at a time'; learn=False skips Tier0 by design (already pinned elsewhere, verified before not re-pinning). The new front-door test then FAILED under a venv interpreter, and the failure was the harness: confine_v1.run() launched its helper with sys.executable, the helper chroots into a root that mounts only /usr /bin /lib /lib64 plus the project, and helper.py's own post-chroot spawn of the program raised FileNotFoundError before any program line ran -- every confined run exited 1 with a harness traceback that read like the taught program failing. Fix: _python_in_chroot() in confine_v1, the exact rule brokered_workspace_execution_v1 already follows (prefer /usr/bin/python3, /bin/python3, sys.executable only under a mounted prefix), applied at the helper launch so the helper carries a chroot-visible interpreter for both spawns. Pinned both ends: ChrootInterpreterTests asserts the launch argv never contains a venv interpreter, and the front-door test is the integration pin because it runs under the venv that failed on base. Siblings surveyed, deliberately not fixed: zero_ambient_namespace_launcher_v1 execs caller argv after chroot (creature_runtime passes sys.executable) -- same class, unmeasured, named next. Two candidate instruments killed by measurement before code: converting receipts' output_sha256 into expect_file_sha256 (only 28 records carry both argv and a digest, 25 unrunnable here, 3 runnable wrote to a cleaned parent -- would move ~3 records) and blanket expect_exit:0 on the 442 started passes (relabels without adding failure power; the audit already fails nonzero without it). State adjudicated with probes: THE_SYSTEM_ALREADY_WORKS's mechanism claims are true (4-tier entry demonstrated end to end; bundle/db/transfer/verify state present; auto-seed from the tracked bundle with content-sha, skill_id and ownership-receipt checks re-read and already pinned), while the skeptical line stands on the audit's 1.7% checkable fraction and on identification (one showing underdetermines: fresh-set diff/extra falsified; the rename refusal is the same boundary at engine level). Batteries after merging origin/main (03ac3628): confine+front-door+refactorings 103 passed 6 subtests; the other session's three new suites 72 passed; total 175 passed 0 failed this round; zero spend; tracked state restored after every learn=True run.",
+ "selected_route": "PORT_THE_BROKERS_CHROOT_VISIBLE_INTERPRETER_RULE_INTO_CONFINE_V1_AT_THE_HELPER_LAUNCH_AND_PIN_BOTH_ENDS_THE_UNIT_PIN_ON_THE_LAUNCH_ARGV_AND_THE_FRONT_DOOR_TEACH_APPLY_INTEGRATION_PIN_UNDER_THE_VENV_THAT_FAILED_ON_BASE",
+ "causal_blocker": "EVERY_CONFINED_EXECUTION_DIED_WHEN_THE_HARNESS_RAN_UNDER_A_VENV_BECAUSE_CONFINE_V1_SPAWNED_SYS_EXECUTABLE_INTO_A_CHROOT_THAT_ONLY_MOUNTS_USR_BIN_LIB_LIB64_SO_THE_HELPERS_OWN_POST_CHROOT_PROGRAM_SPAWN_RAISED_FILENOTFOUND_ERROR_BEFORE_ANY_PROGRAM_LINE_RAN_AND_THE_RECEIPT_READ_LIKE_THE_TAUGHT_PROGRAM_FAILED",
+ "expected_parent_change": "CONFINE_V1_LAUNCHES_ITS_HELPER_WITH_AN_INTERPRETER_THE_CHROOT_WILL_CONTAIN__A_VENV_SYS_EXECUTABLE_NO_LONGER_REACHES_THE_POST_CHROOT_SPAWN__THE_FRONT_DOOR_TEACH_THEN_APPLY_PATH_ON_THE_TRACKED_BUNDLE_IS_PINNED_WITH_PASS_TIER0_COMPILED_SKILL_RECALL_AND_THE_RENAME_REFUSAL_ITS_REASON__NO_LESSON_LEVEL_BEHAVIOR_CHANGED",
+ "expected_parent_frontier_change": "THE_HARNESS_FAULT_CLASS_THAT_IMPERSONATES_A_PROGRAM_FAILURE_IS_CLOSED_AT_THE_CONFINEMENT_LAUNCHER_AND_MEASURED_AT_BOTH_ENDS__THE_ONE_SHOT_LOOP_HAS_A_FAILABLE_PIN_THROUGH_THE_PRODUCTION_DOOR__THREE_CANDIDATE_INSTRUMENTS_WERE_KILLED_BY_MEASUREMENT_BEFORE_CODE__ZERO_SPEND__NO_BENCHMARK_ROW_MOVED__TRUTH_ACHIEVED_STAYS_FALSE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_CONFINED_EXECUTION_DIED_WHEN_THE_HARNESS_RAN_UNDER_A_VENV_BECAUSE_CONFINE_V1_SPAWNED_SYS_EXECUTABLE_INTO_A_CHROOT_THAT_ONLY_MOUNTS_USR_BIN_LIB_LIB64_SO_THE_HELPERS_OWN_POST_CHROOT_PROGRAM_SPAWN_RAISED_FILENOTFOUND_ERROR_BEFORE_ANY_PROGRAM_LINE_RAN_AND_THE_RECEIPT_READ_LIKE_THE_TAUGHT_PROGRAM_FAILED",
+ "falsification_condition": "THE_LAUNCH_ARGV_CONTAINING_A_VENV_INTERPRETER_AGAIN__OR_THE_FRONT_DOOR_TEST_FAILING_UNDER_A_VENV_AGAIN_WITH_FILENOTFOUND_IN_THE_HELPER__OR_ANY_TAUGHT_PROGRAM_TEST_REGRESSING__OR_A_SIBLING_CHROOT_SITE_SILENTLY_FIXED_WITHOUT_ITS_OWN_MEASURED_ROUND__OR_THE_INTENT_INHERITING_TEMPLATE_TEXT_THAT_DESCRIBES_ANOTHER_ROUND__OR_ANY_OF_THE_DERIVED_BINDING_FIELDS_DRIFTING_FROM_GIT",
+ "stop_condition": "CHROOT_INTERPRETER_UNIT_PIN_GREEN_AND_FRONT_DOOR_TEACH_APPLY_AND_RENAME_REFUSAL_PINS_GREEN_UNDER_THE_VENV__CONFINEMENT_AND_TAUGHT_REFACTORING_NEIGHBOR_SUITES_GREEN_AFTER_MERGING_ORIGIN_MAIN__INTENT_BINDINGS_CURRENT_AND_GOAL_HIERARCHY_GUARD_PASS__CLEAN_CLONE_ARTIFACT_RECOMPILES__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive 2026-11-12 (standing): determine what is real about instant learning and advanced coding/computer-use actions, kill bad ideas before implementation, think from first principles, maximize use of the latest 2026 research, and always push and merge completed work. This change is the harness-fidelity and front-door-pin half of that order: execute the one-shot loop through the production door instead of re-reading documents about it, repair the confinement launcher fault that made every confined run under a venv read as a program failure, and pin both ends. Zero-spend runtime repair with pins; no governance change; no capability credit; no sentience claim.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_EXECUTION_OF_A_CLAIMED_PATH_PLUS_HARNESS_FAULT_REPAIR",
+  "progress_evidence_paths": [
+   "canonical/tests/test_confine_mount_failure_v1.py",
+   "canonical/tests/test_the_front_door_teaches_and_applies_what_the_bundle_ships_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "earlier_routes_exhausted_reason": "THE_FRONT_DOOR_TIER0_STATUS_AND_THE_SHIPPED_REMEMBER_EDIT_PAIR_THROUGH_SOLVE_OR_LEARN_HAD_NO_TEST__THE_OLDER_DOOR_SOLVE_BRANCH_AND_DIRECT_RECALL_WERE_PINNED_ELSEWHERE_VERIFIED_BEFORE_DECIDING_NOT_TO_REPIN__THE_VENV_CHROOT_DEFECT_WAS_INVISIBLE_WHILE_TESTS_RAN_ON_A_SYSTEM_INTERPRETER__THE_DIGEST_AND_BLANKET_EXPECT_EXIT_INSTRUMENTS_WERE_MEASURED_AND_KILLED_BEFORE_CODE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_TAUGHT_PROGRAM_FAILING_UNDER_A_VENV_WAS_A_PROGRAM_FAILURE__FALSIFIED_MEASURED:THE_HELPER_SPAWNED_A_PYTHON_PATH_ABSENT_FROM_THE_CHROOT_SO_NO_PROGRAM_LINE_RAN_AND_THE_FIX_IS_THE_BROKERS_OWN_CHROOT_VISIBLE_INTERPRETER_RULE__ALSO_THE_TRACKED_BUNDLES_EXPORTED_HIT_COUNT_AS_A_USAGE_COUNTER__MEASURED:LIVE_SQLITE_SAID_2_WHILE_THE_BUNDLE_SAY_0",
+  "laws_read_this_session": [],
+  "causal_evidence": "EXECUTED_ON_THIS_COMMIT__TEACH_THROUGH_SOLVE_OR_LEARN_PASS_TIER0_COMPILED_SKILL_RECALL_204_6_MS_LESSON_WRITTEN__APPLY_TO_A_NEVER_SEEN_FILE_PASS_SAME_STATUS_STR_TO_REPR__RAW_RECALL_170_9_MS_AND_149_6_MS__HIT_COUNT_2_2_IN_THE_LIVE_SQLITE_WHILE_THE_TRACKED_BUNDLE_EXPORT_SAYS_0__RENAME_EXAMPLE_REFUSED_CANNOT_BE_REPEATED_ONE_PLACE_AT_A_TIME__BEFORE_FIX_UNDER_VENV_EVERY_CONFINED_RUN_EXIT_1_AT_HELPER_PY_75_FILENOTFOUND_ERROR_AND_NO_PROGRAM_LINE_RAN__AFTER_FIX_THE_SAME_RUNS_PASS__UNIT_PIN_LAUNCH_ARGV_HAS_NO_VENV_AND_ONE_SYSTEM_PYTHON__BATTERIES_103_PLUS_72_PASSED_0_FAILED__THREE_CANDIDATE_INSTRUMENTS_KILLED_BY_MEASUREMENT__STATE_RESTORED_AFTER_EVERY_LEARN_TRUE_RUN"
+ },
+ "measured_effect": "BEFORE_UNDER_VENV_EVERY_CONFINED_RUN_EXIT_1_AT_HELPER_PY_75_FILENOTFOUND_ERROR_PROGRAM_NEVER_STARTED__AFTER_THE_SAME_RUNS_PASS_FRONT_DOOR_TEACH_204_6_MS_AND_APPLY_STR_TO_REPR_AND_RAW_RECALL_170_9_MS_AND_149_6_MS__HIT_COUNT_2_2_IN_THE_LIVE_SQLITE_BUNDLE_EXPORT_STAYS_0__RENAME_EXAMPLE_REFUSED_WITH_CANNOT_BE_REPEATED_ONE_PLACE_AT_A_TIME__UNIT_PIN_ARGV_NO_VENV_AND_ONE_SYSTEM_PYTHON__BATTERIES_103_PLUS_72_PASSED_0_FAILED__DIGEST_CONVERSION_KILLED_28_CANDIDATES_25_UNRUNNABLE_3_WORTHLESS__EXPECT_EXIT_RELABEL_KILLED__LEARN_FALSE_REPIN_KILLED_ALREADY_PINNED__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_BENCHMARK__THE_LIMITING_FACTORS_NAMED_THIS_ROUND:THE_ONE_SHOT_LOOP_IS_REAL_AND_NOW_PINNED_THROUGH_THE_PRODUCTION_DOOR_BUT_PERMANENCE_RESTS_ON_TWO_UNFINISHED_FRACTIONS_THE_AUDITS_1_7_PERCENT_CHECKABLE_EVIDENCE_AND_IDENTIFICATION_ONE_SHOWING_UNDERDETERMINES_INTENT__PLUS_A_NEW_CLASS_MEASURED_HERE_HARNESS_FIDELITY_A_VENV_BROKE_EVERY_CONFINED_RUN_WHILE_LESSON_LEVEL_TESTS_STAYED_GREEN__THE_NAMESPACE_LAUNCHER_SIBLING_IS_NAMED_NEXT_NOT_SMUGGLED",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/13",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/confine_v1.py::run (helper launch, adapted in place -- chroot-visible interpreter)",
+  "canonical/runtime/brokered_workspace_execution_v1.py::_python_in_chroot (the rule itself, ported unchanged)",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py::recall_and_execute_workflow/_connect_db/import_workflow_bundle (Tier0 recall, auto-seed, tamper-checked import, reused unchanged)",
+  "canonical/runtime/live_brain_route_admission_v1.py::solve_or_learn (the front door, reused unchanged)",
+  "canonical/tests/test_two_refactorings_are_taught_once_and_checked_on_a_second_example_v1.py (taught_door isolation pattern: BRAIN_COMPILED_WORKFLOW_DB env + bundle import into a temp db, reused for the new fixture)",
+  "derive_action_intent_20261112.py (the intent binder, reused: spec + template + git binding)"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "03ac3628f401304841cc50d85a6f2261707f153d",
+  "real_outcome": "THE_FRONT_DOOR_TIER0_TEACH_APPLY_PATH_EXECUTED_AND_PINNED_AND_THE_CONFINEMENT_LAUNCHER_VENV_FAULT_MEASURED_CLOSED_AND_PINNED__THREE_CANDIDATE_INSTRUMENTS_KILLED_BY_MEASUREMENT_BEFORE_CODE__175_TESTS_PASSED_0_FAILED_AFTER_MERGING_ORIGIN_MAIN",
+  "required_capability": "HARNESS_FIDELITY_OF_CONFINED_EXECUTION_AND_FRONT_DOOR_TIER0_PATH_PINNING",
+  "obs_goal": {
+   "real_outcome": "The standing question asked whether one try becomes a permanent skill and what the open limiting factor now is. Rather than re-read the 'you were right' documents, this round executed the loop through solve_or_learn on the tracked bundle (teach 204.6 ms, apply to a never-seen file, four of four passes) and pinned the path no existing test covered. The execution immediately exposed a harness fault -- every confined run under a venv died before the program started -- which is now fixed and pinned at both ends.",
+   "proxy_goals_deleted": [
+    "deciding the loop works from documents instead of executing it through the production door",
+    "treating the tracked bundle's exported hit_count as the usage counter",
+    "reading the venv FileNotFoundError as the taught program failing"
+   ],
+   "surviving_necessity": "A pin on the controller's own Tier0 status through solve_or_learn with the shipped remember/edit pair, and a confinement launcher that spawns an interpreter the chroot will contain -- both fail on base, both pass after."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/confine_v1.py::run helper launch (pre-fix spawned sys.executable into a root mounting only /usr /bin /lib /lib64 -- measured broken under a venv)",
+    "canonical/runtime/brokered_workspace_execution_v1.py::_python_in_chroot :345 (already correct at three sites; the rule was ported, not invented)",
+    "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py:589-604 (Tier0 gate on learn and computer_shape; PASS__TIER0_COMPILED_SKILL_RECALL named only by the controller, unpinned)",
+    "canonical/runtime/live_brain_route_admission_v1.py:5560 (older door.solve branch PASS__COMPILED_WORKFLOW_SKILL -- already pinned by taught_door, verified before not re-pinned)",
+    "test_optimal_unified_creature_and_prc2_v1 (learn=False zero-memory isolation -- already pinned, verified before not re-pinned)"
+   ],
+   "external_existing_routes_checked": [
+    "CPython subprocess.Popen raises FileNotFoundError when argv[0] does not exist at spawn time -- the helper's post-chroot crash signature",
+    "brokered_workspace_execution_v1._python_in_chroot precedent (prefer /usr/bin/python3, /bin/python3, sys.executable only under a mounted prefix)",
+    "zero_ambient_namespace_launcher_v1._ENTER_ROOT_BEHIND_SYSCALL_FILTER does os.execv(sys.argv[3], ...) after chroot with callers passing sys.executable -- same class, unmeasured, named next",
+    "2026 literature: WICL/RoboScript arXiv 2611.12885 (one demo + receipts -> 83.4%), OSWorld 2.0 arXiv 2606.29537 (best 20.6% binary, skip-verification failure mode), Who-Verifies arXiv 2610.11464 (score cannot certify a verifier) -- convergence with the audit's thesis"
+   ],
+   "capability_work_deleted": [
+    "sys.executable as the confinement helper's interpreter (replaced by _python_in_chroot at the launch)",
+    "the assumption that tests running on a system interpreter exercise the interpreter path production uses"
+   ],
+   "surviving_gap": "zero_ambient_namespace_launcher_v1 still execs caller argv after chroot (creature_runtime passes sys.executable) -- unmeasured, named next; the audit's 442 started passes still carry no per-claim needles (digest conversion killed this round); cross-kind compounding stays pinned negative (1525 vs 1525 environment calls)."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific: confine_v1 and the broker both spawn interpreters into roots with fewer mounts than the host; only the broker had the rule. Invisible while every test ran on a system python -- the venv case never executed in CI's chosen interpreter.",
+   "delete_bypass_substitute_options": [
+    "DELETE the confinement -- rejected: it is what makes taught programs admissible at all",
+    "BYPASS by running the taught program unconfined under a venv -- rejected: converts a harness fault into a real exposure",
+    "SUBSTITUTE by requiring a system python for all tests -- rejected: hides the defect from every venv user and CI instead of fixing the launcher"
+   ],
+   "surviving_causal_blocker": "The same class survives in zero_ambient_namespace_launcher_v1 where caller argv is exec'd after chroot; it is named as its own measured round rather than fixed blind."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Port the broker's _python_in_chroot rule into confine_v1 at the helper launch and pin both ends -- chosen: one function fixes both spawns (the helper carries its own sys.executable into the chroot), the unit pin and the venv front-door test both fail on base",
+    "2. Require system python for tests -- rejected: hides the defect from every venv and CI instead of fixing the launcher",
+    "3. Bind-mount sys.prefix into the chroot -- rejected: widens the confinement boundary to satisfy a launcher bug",
+    "4. Fix the namespace-launcher sibling in the same round -- deferred by name: it execs caller argv post-chroot and needs its own measured pins"
+   ],
+   "losing_routes_reason": [
+    "require-system-python hides the defect rather than closing it",
+    "mounting the venv widens the boundary for a bug that is in interpreter selection",
+    "blanket expect_exit:0 and digest conversion were killed by measurement before code (28 candidates / 25 unrunnable / relabel without failure power)"
+   ],
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The measurements are the oracle: the venv front-door run (teach pass, apply pass, real file edits, hit counts read from sqlite), the rename refusal with its reason, the unit pin over the launch argv, and the 175-test battery all run against the real door, the real bundle and the real confinement -- no mock stands in for a taught program."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "any receipt or log attributing a helper.py FileNotFoundError to the taught program -- superseded by _python_in_chroot",
+    "readers treating the tracked bundle's exported hit_count as usage -- superseded by the live sqlite counter (measured 2 vs 0)",
+    "the assumption that lesson-level green tests exercise the interpreter production uses -- superseded by the venv integration pin"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "brokered_workspace_execution_v1._python_in_chroot -- absorbed as the rule, unchanged",
+    "taught_door fixture isolation (BRAIN_COMPILED_WORKFLOW_DB + bundle import) -- reused for the new front-door fixture",
+    "auto-seed and tamper-checked bundle import in _connect_db -- re-read and left as-is (already pinned by the bundle tests)"
+   ],
+   "fresh_reuse_plan": "REUSE: the ported interpreter rule, the door, the recall path and the fixture pattern; nothing in the lesson engine, the bundle or the door changed this round."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving why the venv run failed -- the helper.py:75 FileNotFoundError trace is recorded in the round doc instead of re-run",
+    "re-checking whether learn=False should consult skills -- test_optimal_unified_creature already pins zero-memory isolation; recorded, not re-tested",
+    "re-surveying broker sys.executable sites -- confirmed normalized at three sites and cached in the doc"
+   ],
+   "search_stop_decision": "Stop when the front-door pins are green under the venv, the unit pin fails on base and passes after, the neighbor batteries stay green, and the intent bindings check current. The namespace-launcher sibling, the 442-claims census and the pytest fallback are new decisions with their own measurements and are deliberately not squeezed in.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REQUIRE_SYSTEM_PYTHON_FOR_ALL_TESTS__REJECTED__hides the defect from every venv and every CI that installs pytest into the interpreter it runs with",
+   "ADD_SYS_PREFIX_TO_MOUNTS_SO_THE_VENV_IS_BIND_MOUNTED_IN__REJECTED__widens the confinement boundary to satisfy a launcher bug; least privilege says fix the interpreter choice, not the mounts",
+   "BLANKET_EXPECT_EXIT_0_ON_THE_442_STARTED_PASSES__KILLED_BY_MEASUREMENT__relabels without adding failure power; the audit already fails nonzero without it",
+   "CONVERT_RECEIPTS_OUTPUT_SHA256_INTO_EXPECT_FILE_SHA256__KILLED_BY_MEASUREMENT__28 candidates, 25 unrunnable here, 3 runnable wrote to a cleaned parent -- would move about 3 records",
+   "FIX_CONFINE_AND_THE_NAMESPACE_LAUNCHER_TOGETHER__DEFERRED_BY_NAME__the launcher execs caller argv post-chroot and needs its own measured round with pins"
+  ],
+  "deleted_or_bypassed_paths": [
+   "canonical/runtime/confine_v1.py::helper-launch-sys.executable (replaced by _python_in_chroot at the helper spawn)"
+  ],
+  "selected_surviving_route": "PORT_THE_BROKERS_CHROOT_VISIBLE_INTERPRETER_RULE_INTO_CONFINE_V1_AT_THE_HELPER_LAUNCH_PLUS_TWO_END_PINS_UNIT_ON_LAUNCH_ARGV_AND_FRONT_DOOR_TEACH_APPLY_UNDER_THE_VENV",
+  "why_selected_route_is_fastest_sufficient": "ONE_FUNCTION_PORTED_FROM_THE_BROKER_FIXES_BOTH_SPAWNS_BECAUSE_THE_HELPER_CARRIES_ITS_OWN_SYS_EXECUTABLE_INTO_THE_CHROOT__THE_UNIT_PIN_FAILS_ON_BASE_AND_THE_FRONT_DOOR_TEST_FAILS_ON_BASE_UNDER_A_VENV_SO_BOTH_ENDS_ARE_MEASURED__THE_ALTERNATIVES_REQUIRE_SYSTEM_PYTHON_HIDE_THE_DEFECT_OR_WIDEN_THE_MOUNT_SET_AND_DESERVE_THEIR_OWN_ROUNDS",
+  "expected_parent_level_state_change": "THE_HARNESS_FAULT_CLASS_THAT_IMPERSONATES_A_PROGRAM_FAILURE_IS_CLOSED_AT_THE_CONFINEMENT_LAUNCHER_AND_MEASURED_AT_BOTH_ENDS__THE_ONE_SHOT_LOOP_HAS_A_FAILABLE_PIN_THROUGH_THE_PRODUCTION_DOOR__THREE_CANDIDATE_INSTRUMENTS_WERE_KILLED_BY_MEASUREMENT_BEFORE_CODE__ZERO_SPEND__NO_BENCHMARK_ROW_MOVED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "stop_condition": "CHROOT_INTERPRETER_UNIT_PIN_GREEN_AND_FRONT_DOOR_TEACH_APPLY_AND_RENAME_REFUSAL_PINS_GREEN_UNDER_THE_VENV__CONFINEMENT_AND_TAUGHT_REFACTORING_NEIGHBOR_SUITES_GREEN_AFTER_MERGING_ORIGIN_MAIN__INTENT_BINDINGS_CURRENT_AND_GOAL_HIERARCHY_GUARD_PASS__CLEAN_CLONE_ARTIFACT_RECOMPILES__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T21:45:00Z",
+   "max_age_hours": 24,
+   "incumbent_route": "CONFINE_V1_HELPER_LAUNCH_WITH_SYS_EXECUTABLE_AND_THE_UNQUESTIONED_ASSUMPTION_THAT_TESTS_RUNNING_ON_A_SYSTEM_INTERPRETER_EXERCISE_THE_INTERPRETER_PATH_PRODUCTION_USES",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "21 s TestCase fixture refused at 20.3 s (rc=-9 at the deadline) on 8439f609 -- the suite was runnable, the gate quit",
+     "function-style test files returned set() in 0.0 s while test files existed -- Python 3.11 unittest collects TestCase subclasses only (loader.py:120-124)",
+     "the extract-constant showcase at canonical/astra_runtime/tmp passed the door on exactly this vacuous baseline -- PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED over nothing measured",
+     "three suite sites all call _run_cmd without timeout: _collect_project_bad_tests, _verify_no_new_test_failures, _run_project_tests (memoize :665 and add_thread_pool :728 call the runner with no baseline at all)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "CPython subprocess.Popen raises FileNotFoundError when the executable is absent at spawn -- the helper crash signature",
+     "confine_v1._MOUNTS = (/usr, /bin, /lib, /lib64) -- the venv path is outside every mount",
+     "brokered_workspace_execution_v1.py:345 _python_in_chroot -- the ported rule"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Who-Verifies-the-Verifier arXiv 2610.11464 (NeurIPS 2026 workshop): an always-pass collapsed grader trains skills just as well -- downstream score cannot certify a verifier",
+     "Work2Skill (2026-10): human GUI demonstrations into SKILL.md gain only +3.1 to +10.5 points -- skill libraries help a little per demonstration, they do not remove the gap"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "WICL/RoboScript arXiv 2611.12885 (2026-11-09): one demonstration plus rehearsal and receipts -> 83.4% mean over 50 RoboTwin tasks, above a 50-demonstration trained policy",
+     "OSWorld 2.0 arXiv 2606.29537 with the 2026-10 v2.1 board: best binary 44-49% on long-horizon workflows; named failure pattern includes skipping verification"
+    ],
+    "BRAIN_INHERIFIED": [
+     "confine_v1.run pre-fix launched the helper with sys.executable; helper.py:75 post-chroot spawn raised FileNotFoundError under /tmp/btvenv -- every confined run exited 1 before any program line",
+     "brokered_workspace_execution_v1._python_in_chroot already implements the correct rule at three sites",
+     "controller Tier0 status PASS__TIER0_COMPILED_SKILL_RECALL named only by the controller (grep) -- no test asserted it before this round",
+     "taught_door covers the older door.solve branch and direct recall covers the lesson pair -- neither drove solve_or_learn with the shipped pair"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "confine chroot sys.executable venv FileNotFoundError helper post-chroot spawn"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "chroot visible python interpreter bind mounts unshare helper launch"
+    },
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "one demonstration permanent skill front door tier0 compiled workflow recall 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "OSWorld long horizon computer use verification skip 2026 state of the art"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent memory skill store product one shot lesson persistence 2026"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "PORT_THE_BROKERS_CHROOT_VISIBLE_INTERPRETER_RULE_INTO_CONFINE_V1_AT_THE_HELPER_LAUNCH_PLUS_TWO_END_PINS_UNIT_ON_LAUNCH_ARGV_AND_FRONT_DOOR_TEACH_APPLY_UNDER_THE_VENV",
+   "challenger_routes": [
+    {
+     "route": "REQUIRE_SYSTEM_PYTHON_FOR_ALL_TESTS",
+     "evidence": [
+      "every existing taught test passed on a system interpreter, which is why the venv break was invisible"
+     ],
+     "qualification_evidence": [
+      "CI installs pytest into the interpreter it runs with; mandating system python would hide the defect from exactly the environments that hit it"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Leaves the launcher broken under every venv",
+      "CAPABILITY_STRENGTH": "Same pins would pass while production venvs still die",
+      "WALL_CLOCK": "Same",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "New operational constraint instead of a fix",
+      "VERIFIABILITY": "The venv pin would have to be deleted to stay green"
+     }
+    },
+    {
+     "route": "BIND_MOUNT_SYS_PREFIX_SO_THE_VENV_EXISTS_IN_THE_CHROOT",
+     "evidence": [
+      "the helper mounts only /usr /bin /lib /lib64 plus the project; the venv lives under /tmp"
+     ],
+     "qualification_evidence": [
+      "mounting caller-chosen prefixes widens the confinement boundary to satisfy a launcher bug; least privilege says fix the interpreter choice"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Would make venv runs work but exposes arbitrary host prefixes",
+      "CAPABILITY_STRENGTH": "Broader exposure for the same capability",
+      "WALL_CLOCK": "Extra mounts per run",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Larger mount surface is a new failure and escape surface",
+      "VERIFIABILITY": "Boundary change would need its own qualification"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T21:45:00Z",
+    "max_age_hours": 2,
+    "selected_route": "PORT_THE_BROKERS_CHROOT_VISIBLE_INTERPRETER_RULE_INTO_CONFINE_V1_AT_THE_HELPER_LAUNCH_PLUS_TWO_END_PINS_UNIT_ON_LAUNCH_ARGV_AND_FRONT_DOOR_TEACH_APPLY_UNDER_THE_VENV",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the venv front-door run, the rename refusal, the unit pin and the 175-test battery all executed in this sandbox on this commit"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.runtime.confine_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "_python_in_chroot at the helper launch; ChrootInterpreterTests pins the launch argv and fails on base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "INDEPENDENT_VERIFIER"
+      ]
+     },
+     {
+      "dependency": "canonical.runtime.live_brain_route_admission_v1.solve_or_learn",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "teach and apply both return PASS__TIER0_COMPILED_SKILL_RECALL under the venv with the shipped bundle pair"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   },
+   "negative_search_summary": "REQUIRING_SYSTEM_PYTHON_HIDES_THE_DEFECT_FROM_EVERY_VENV__WIDENING_MOUNTS_TO_SATISFY_A_LAUNCHER_BUG_VIOLATES_LEAST_PRIVILEGE__BLANKET_EXPECT_EXIT_0_RELABELS_WITHOUT_FAILURE_POWER__DIGEST_CONVERSION_MOVES_THREE_RECORDS__THE_NAMESPACE_LAUNCHER_SIBLING_NEEDS_ITS_OWN_MEASURED_ROUND"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_PRICES_ONE_HONESTY_REPAIR_OF_THE_ACCEPTANCE_GATE_ITSELF__THE_CLAIM_IS_BOUND_TO_SIX_PINS_AND_TO_CONTROLS_THAT_CAN_STILL_SAY_NO__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "THE_GATE_THAT_MEASURES_NOTHING_MUST_REFUSE_BY_NAME",
+   "falsifier_id": "F_THE_LESSON_MUST_BE_REFUSED_UNDER_THE_OLD_ALGEBRA_AND_TAUGHT_AFTER_THE_REDUCER__HELD_OUT_ANSWERS_MUST_MATCH_PRE_WRITTEN_ORACLES__THE_INDEPENDENT_CHECKER_MUST_REJECT_THE_UPPER_MEDIAN",
+   "decisive_question": "Does a runnable 21 s suite get measured inside a reviewed 300 s budget, does a function-style suite that loads zero tests refuse by name instead of passing silently, do empty and out-of-scope projects still proceed, and does the extract showcase pass only against a measured TestCase suite?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_confine_mount_failure_v1.py",
+     "git_blob_sha": "b5d325ffb3660d6c383f6353cc3c9f1d9bcc8ef1"
+    },
+    {
+     "path": "canonical/tests/test_the_front_door_teaches_and_applies_what_the_bundle_ships_v1.py",
+     "git_blob_sha": "0933808188fd11abac35e94ea0687785ae0f66a9"
+    }
+   ]
+  }
+ },
+ "next_step": "Claims census for the 442 started passes -- what needle each claim could assert, then write expectations (digest conversion killed by measurement this round)__then zero_ambient_namespace_launcher_v1 post-chroot execv of caller argv (same venv class, unmeasured, own round with pins)__then pytest fallback for the egraph gate (#6743 named next)__then feed the teach corpus into the live compounding loop (round 26 next, larger)"
+}
