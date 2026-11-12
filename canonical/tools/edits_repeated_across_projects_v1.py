@@ -351,7 +351,7 @@ def repeated(by_example, rules, readings, text, way):
         return None
 
 
-def measure(which, out):
+def measure(which, out, showings=1):
     by_example = engine()
     sets = json.loads(COMMITS.read_text())["sets"]
     report = {}
@@ -362,20 +362,21 @@ def measure(which, out):
                 for way in ("strict", "shown", "tried")}
         totals = {"kinds": 0, "kinds unlearned": 0, "files": 0, "files unreadable": 0}
         for kind in chosen["kinds"]:
-            if len(kind["commits"]) < 2:
+            if len(kind["commits"]) < showings + 1:
                 continue
             totals["kinds"] += 1
-            teacher = kind["commits"][0]
-            shown_before = file_at(teacher["project"], teacher["parent"], teacher["files"][0])
-            shown_after = file_at(teacher["project"], teacher["commit"], teacher["files"][0])
+            shown = []
+            for teacher in kind["commits"][:showings]:
+                shown_before = file_at(teacher["project"], teacher["parent"], teacher["files"][0])
+                shown_after = file_at(teacher["project"], teacher["commit"], teacher["files"][0])
+                shown.append((shown_before.decode("utf-8"), shown_after.decode("utf-8")))
             try:
-                rules, readings = by_example.learn_all(
-                    [(shown_before.decode("utf-8"), shown_after.decode("utf-8"))], wide=True)
+                rules, readings = by_example.learn_all(shown, wide=True)
             except (by_example.Refused, RecursionError) as why:
                 totals["kinds unlearned"] += 1
                 print("%-22s not learned: %s" % (kind["kind"], str(why)[:90]), flush=True)
                 continue
-            for commit in kind["commits"][1:]:
+            for commit in kind["commits"][showings:]:
                 for path in commit["files"]:
                     before = file_at(commit["project"], commit["parent"], path).decode("utf-8")
                     person = file_at(commit["project"], commit["commit"], path).decode("utf-8")
@@ -396,8 +397,9 @@ def measure(which, out):
                         for key, value in count.items():
                             ways[way][key] += value
         report[name] = {"totals": totals, "ways": ways}
-        print("\n== %s: %d kinds (%d not learned), %d files" % (name, totals["kinds"], totals["kinds unlearned"],
-                                                                totals["files"]))
+        print("\n== %s%s: %d kinds (%d not learned), %d files" % (
+            name, "" if showings == 1 else " at %d showings" % showings, totals["kinds"],
+            totals["kinds unlearned"], totals["files"]))
         for way, count in ways.items():
             print("%-7s questions %3d  same %3d  different %2d  left %3d  extra %2d  refused files %2d"
                   % (way, count["questions"], count["same"], count["different"], count["left"], count["extra"],
@@ -412,6 +414,8 @@ def main(argv=None):
     parser.add_argument("command", choices=("collect", "fetch", "measure"))
     parser.add_argument("which", nargs="?")
     parser.add_argument("--json")
+    parser.add_argument("--showings", type=int, default=1,
+                        help="how many of the kind's commits are read together as the lesson (default 1)")
     options = parser.parse_args(argv)
     if options.command == "collect":
         if options.which not in KINDS:
@@ -422,7 +426,7 @@ def main(argv=None):
         missing = fetch(options.which)
         print("files that could not be had: %d" % missing)
         return 1 if missing else 0
-    measure(options.which, options.json)
+    measure(options.which, options.json, max(1, options.showings))
     return 0
 
 
