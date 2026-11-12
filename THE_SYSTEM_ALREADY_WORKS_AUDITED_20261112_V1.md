@@ -67,6 +67,41 @@ re-derived:
 
 ---
 
+## 3b. Addendum, appended after this audit was written (#6773 base moved)
+
+Between the audit's writing (20:44Z) and its merge, two things landed on main:
+
+1. **`LEARN_PATH_VERIFICATION_WIRING_20261112_V1.md` (#6755, 2026-11-12)** — already cited
+   above (recheck-at-recall, precondition presence, sequence interference, generalization
+   probe, bundle 5/5 checkable). A genuine, additive repair of four dead gates.
+2. **`canonical/swe_kernel/swe_self_improvement_bridge_v1.py` (#6769, merged 2026-11-12**
+   **after the audit text was frozen)** — the first end-to-end run of the formal loop on SWE
+   repair problems found in `canonical/analysis/SWE_SELF_IMPROVEMENT_BRIDGE_20261112_V1.md`:
+   subprocess `unittest` verifier with failing-baseline pre-condition; taught repair
+   crystallized (`recheck=PASS`, `oracle_probe=HOLDS`); cross-scope recall in scope_b that
+   induced and authenticated one Pareto-active `VERIFIED_EXECUTABLE_SKILL`; unseen scope_c
+   reused it with `reuse_first=True`, `fallback_used=False`, distractor pruned 3→2; four
+   fail-closed counterfactuals refused. **Material limits:** all three scopes are one
+   repair class (`x + x//10 → x - x//10`, discount-shaped), one synthetic environment,
+   teaching example supplied by the harness, and — discriminating point — **the run happened
+   inside a `tempfile.TemporaryDirectory()`; `SELF_IMPROVEMENT_STATE_V1.json` still does not
+   and never has existed in this checkout.** No real repository code was repaired; no door
+   execution occurred; the 19/38 confinement wall, the 0/56 fixture count, and the empty
+   corpus are all unchanged by this bridge.
+
+The addendum changes one of the audit's verdicts to the narrower truth:
+
+> "The end-to-end half is unproven" → **"demonstrated end-to-end in a disposable synthetic
+> workspace (#6769); not yet persisted in this checkout, not yet on a real repository, not
+> through the door."**
+
+It does not change §3's bottom line, the owner decisions (§4), or the verdict: permanence
+here is literal, verified, retirement-governed, and has never yet been earned *by the front
+door on real work*. If #6769-shaped bridges run on real repair material from this repository
+and the receipts persist, that is the first honest proof point — and the audit invites it.
+
+---
+
 ## 4. Standing owner decisions (unchanged)
 
 1. **Effect adoption** (#6750 §2.1): adopt admitted effects into the host (Design A, with
