@@ -1,0 +1,397 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_question_taught_words.py",
+ "adapter_sha256": "c11a5fb9443cbccbcbff33fffd9308bd978b1ef7650a4f319c2030ab6e81cffc",
+ "capability_id": "file.question.taught_words.v1",
+ "check_count": 39,
+ "checks": [
+  {
+   "lessons": 23,
+   "name": "the stored lexicon is what the lessons give",
+   "ok": true,
+   "set_aside": [
+    "tell me the number of lines in t.txt"
+   ],
+   "words_known": 28
+  },
+  {
+   "accepted": 22,
+   "name": "every accepted lesson is reproduced on its own files",
+   "ok": true,
+   "reproduced": 22
+  },
+  {
+   "adapter_returned": 7,
+   "expected_by_construction": 7,
+   "name": "answers: how many lines are in notes.txt",
+   "ok": true,
+   "operation": [
+    "count",
+    "lines"
+   ],
+   "recomputed_by_the_checker": 7,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 2,
+   "expected_by_construction": 2,
+   "name": "answers: how many blank lines are in notes.txt",
+   "ok": true,
+   "operation": [
+    "blank",
+    "count",
+    "lines"
+   ],
+   "recomputed_by_the_checker": 2,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 5,
+   "expected_by_construction": 5,
+   "name": "answers: how many unique lines are in notes.txt",
+   "ok": true,
+   "operation": [
+    "count",
+    "lines",
+    "unique"
+   ],
+   "recomputed_by_the_checker": 5,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 3,
+   "expected_by_construction": 3,
+   "name": "answers: how many lines contain ERROR in notes.txt",
+   "ok": true,
+   "operation": [
+    "containing",
+    "count",
+    "lines"
+   ],
+   "recomputed_by_the_checker": 3,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 13,
+   "expected_by_construction": 13,
+   "name": "answers: how many words are in notes.txt",
+   "ok": true,
+   "operation": [
+    "count",
+    "words"
+   ],
+   "recomputed_by_the_checker": 13,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 70,
+   "expected_by_construction": 70,
+   "name": "answers: how many characters are in notes.txt",
+   "ok": true,
+   "operation": [
+    "characters",
+    "count"
+   ],
+   "recomputed_by_the_checker": 70,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 19,
+   "expected_by_construction": 19,
+   "name": "answers: what is the length of the longest line in notes.txt",
+   "ok": true,
+   "operation": [
+    "lengths",
+    "lines",
+    "max"
+   ],
+   "recomputed_by_the_checker": 19,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 542,
+   "expected_by_construction": 542,
+   "name": "answers: what is the sum of the numbers in numbers.txt",
+   "ok": true,
+   "operation": [
+    "numbers",
+    "sum"
+   ],
+   "recomputed_by_the_checker": 542,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 9,
+   "expected_by_construction": 9,
+   "name": "answers: how many unique words are in notes.txt",
+   "ok": true,
+   "operation": [
+    "count",
+    "unique",
+    "words"
+   ],
+   "recomputed_by_the_checker": 9,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 2,
+   "expected_by_construction": 2,
+   "name": "answers: how many unique lines contain ERROR in notes.txt",
+   "ok": true,
+   "operation": [
+    "containing",
+    "count",
+    "lines",
+    "unique"
+   ],
+   "recomputed_by_the_checker": 2,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 6,
+   "expected_by_construction": 6,
+   "name": "answers: how many lines are in notes.txt after the first",
+   "ok": true,
+   "operation": [
+    "count",
+    "lines",
+    "rest"
+   ],
+   "recomputed_by_the_checker": 6,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 3,
+   "expected_by_construction": 3,
+   "name": "answers: how many words contain ERROR in notes.txt",
+   "ok": true,
+   "operation": [
+    "containing",
+    "count",
+    "words"
+   ],
+   "recomputed_by_the_checker": 3,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 2,
+   "expected_by_construction": 2,
+   "name": "answers: how many lines mention 'disk full' in notes.txt",
+   "ok": true,
+   "operation": [
+    "containing",
+    "count",
+    "lines"
+   ],
+   "recomputed_by_the_checker": 2,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 0,
+   "expected_by_construction": 0,
+   "name": "answers: what is the length of the shortest line in notes.txt after the first",
+   "ok": true,
+   "operation": [
+    "lengths",
+    "lines",
+    "min",
+    "rest"
+   ],
+   "recomputed_by_the_checker": 0,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 42,
+   "expected_by_construction": 42,
+   "name": "answers: what is the sum of the numbers in numbers.txt after the first",
+   "ok": true,
+   "operation": [
+    "numbers",
+    "rest",
+    "sum"
+   ],
+   "recomputed_by_the_checker": 42,
+   "shown_in_a_lesson": true
+  },
+  {
+   "adapter_returned": 20,
+   "expected_by_construction": 20,
+   "name": "answers: what is the largest number in numbers.txt after the first",
+   "ok": true,
+   "operation": [
+    "max",
+    "numbers",
+    "rest"
+   ],
+   "recomputed_by_the_checker": 20,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 4,
+   "expected_by_construction": 4,
+   "name": "answers: how many unique numbers are in numbers.txt",
+   "ok": true,
+   "operation": [
+    "count",
+    "numbers",
+    "unique"
+   ],
+   "recomputed_by_the_checker": 4,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 533,
+   "expected_by_construction": 533,
+   "name": "answers: what is the sum of the unique numbers in numbers.txt",
+   "ok": true,
+   "operation": [
+    "numbers",
+    "sum",
+    "unique"
+   ],
+   "recomputed_by_the_checker": 533,
+   "shown_in_a_lesson": false
+  },
+  {
+   "adapter_returned": 4,
+   "expected_by_construction": 4,
+   "name": "answers: what is the smallest number in numbers.txt",
+   "ok": true,
+   "operation": [
+    "min",
+    "numbers"
+   ],
+   "recomputed_by_the_checker": 4,
+   "shown_in_a_lesson": true
+  },
+  {
+   "name": "refuses an unknown word",
+   "ok": true,
+   "refusal": "TAUGHT_WORDS_DO_NOT_ACCOUNT_FOR_THE_SENTENCE:UNKNOWN_WORD:today",
+   "sentence": "how many lines are in notes.txt today"
+  },
+  {
+   "name": "refuses a negation",
+   "ok": true,
+   "refusal": "TAUGHT_WORDS_DO_NOT_ACCOUNT_FOR_THE_SENTENCE:UNKNOWN_WORD:not",
+   "sentence": "how many lines are not blank in notes.txt"
+  },
+  {
+   "name": "refuses a word that needs its partner",
+   "ok": true,
+   "refusal": "TAUGHT_WORDS_DO_NOT_ACCOUNT_FOR_THE_SENTENCE:WORD_ONLY_KNOWN_TOGETHER_WITH:how:many",
+   "sentence": "how lines are in notes.txt"
+  },
+  {
+   "name": "refuses two things to look at",
+   "ok": true,
+   "refusal": "TAUGHT_WORDS_DO_NOT_ACCOUNT_FOR_THE_SENTENCE:NOT_EXACTLY_ONE_THING_TO_LOOK_AT",
+   "sentence": "how many words are in the longest line in notes.txt"
+  },
+  {
+   "name": "refuses a request to change the file",
+   "ok": true,
+   "refusal": "TAUGHT_WORDS_DO_NOT_ACCOUNT_FOR_THE_SENTENCE:UNKNOWN_WORD:delete",
+   "sentence": "delete the blank lines in notes.txt"
+  },
+  {
+   "name": "refuses a file that is not text",
+   "ok": true,
+   "refusal": "NOT_UTF8_TEXT",
+   "sentence": "how many lines are in binary.bin"
+  },
+  {
+   "name": "refuses a directory",
+   "ok": true,
+   "refusal": "PATH_NOT_A_REGULAR_FILE",
+   "sentence": "how many lines are in <directory>"
+  },
+  {
+   "name": "refuses a report path",
+   "ok": true,
+   "refusal": "READ_ONLY_CAPABILITY_REFUSES_OUTPUT_PATH",
+   "sentence": "how many lines are in notes.txt"
+  },
+  {
+   "name": "refuses a path outside the repository",
+   "ok": true,
+   "refusal": "PATH_OUTSIDE_REPOSITORY"
+  },
+  {
+   "name": "refuses a sentence that names another file",
+   "ok": true,
+   "refusal": "SENTENCE_DOES_NOT_NAME_EXACTLY_THIS_FILE"
+  },
+  {
+   "caught_as": "TAUGHT_ANSWER_RECOMPUTED_DIFFERENTLY:claimed=6:recomputed=5",
+   "name": "the checker confirms a right answer and catches one that is off by one",
+   "ok": true
+  },
+  {
+   "adapter_returned": 7,
+   "name": "agrees with wc -l",
+   "ok": true,
+   "program_printed": "7"
+  },
+  {
+   "adapter_returned": 13,
+   "name": "agrees with wc -w",
+   "ok": true,
+   "program_printed": "13"
+  },
+  {
+   "adapter_returned": 71,
+   "name": "agrees with wc -c",
+   "ok": true,
+   "program_printed": "71"
+  },
+  {
+   "adapter_returned": 3,
+   "name": "agrees with grep -c ERROR",
+   "ok": true,
+   "program_printed": "3"
+  },
+  {
+   "compared": 4480,
+   "disagreements": 0,
+   "name": "the producer and the checker agree on every operation",
+   "ok": true
+  },
+  {
+   "files": 4,
+   "name": "nothing in the world was written",
+   "ok": true
+  },
+  {
+   "name": "the teacher entry refuses one example file and a wrong answer, and keeps a good lesson",
+   "ok": true,
+   "one_file": "TWO_EXAMPLE_FILES_NEEDED",
+   "taught": {
+    "size": [
+     "bytes",
+     "count"
+    ]
+   },
+   "wrong_answer": "NO_OPERATION_I_CAN_PERFORM_GIVES_THESE_ANSWERS"
+  }
+ ],
+ "checks_ok": 39,
+ "claim": "answers a file question only when taught words account for every word of the sentence, with the value of the operation those words make, and refuses anything else by name",
+ "incremental_spend_usd": 0,
+ "independence": "code-level only: expected answers are literals fixed by construction of a world this file builds; the row is reached through the real dispatcher with its declared expectation; the checker shares no code with the producer; wc and grep are compared where they exist. Producer, checker and verifier come from one agent session.",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001",
+ "mission_path": "canonical/verification/TAUGHT_WORDS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "383f67decde764967ff352736dd28d946aa96d056406792e8429654770440069",
+ "model_dependency_count": 0,
+ "pinned_sha256": {
+  "canonical/runtime/TAUGHT_WORD_LESSONS_V1.json": "b1a98d78dc6110fe718457b2a01197adb09f4f128657c7feb49f43bec436bf08",
+  "canonical/runtime/TAUGHT_WORD_LEXICON_V1.json": "95fa4fcb151953608e06aa91f758454c3a625f6148f8cfefa6ea4227dce27b01",
+  "canonical/runtime/bound_capabilities/file_question_taught_words.py": "c11a5fb9443cbccbcbff33fffd9308bd978b1ef7650a4f319c2030ab6e81cffc",
+  "canonical/runtime/taught_words_check_v1.py": "1719bbbb378634000214e558a301d474d77c9164ed9e411c13fa2e3c63e91634",
+  "canonical/runtime/taught_words_v1.py": "620fa38346b0864ec1dafea451c76858348a80e39427438a81c70ee1639e91ed"
+ },
+ "producer": "arena agent session, 2026-11-11",
+ "replay": "python3 canonical/runtime/verify_taught_words_provenance_v1.py --check",
+ "schema": "PROJECT_BRAIN_TAUGHT_WORDS_PROVENANCE_V1",
+ "status": "COMPLETE"
+}

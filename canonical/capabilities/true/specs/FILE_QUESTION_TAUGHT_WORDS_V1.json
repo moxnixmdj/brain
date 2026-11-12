@@ -1,0 +1,55 @@
+{
+  "schema": "TRUE_CAPABILITY_SPEC_V1",
+  "capability_id": "FILE_QUESTION_TAUGHT_WORDS_V1",
+  "claim": "Asked through the front door, a sentence that names one UTF-8 text file and is otherwise made only of words whose meaning was taught by example answers gets the whole number those words determine for that file (how many, how many different, how many blank, how many containing a stated text, the sum, the largest, the smallest, the length of the longest or shortest line, each optionally after the first); the same sentence with one untaught word in it gets no answer.",
+  "input_class": "Files of 2-14 lines of 0-7 space-separated words (some lines blank, some repeated, some carrying one of four upper-case tokens, some words non-ASCII), with or without a final newline, or files of 2-12 integers from -50 to 999 laid out one to three per line; one question per file drawn from the count / unique / blank / containing / sum / largest / smallest / line-length / after-the-first family, worded from the generator's own phrase tables (which use synonyms: rows, different, distinct, empty, mention, biggest, add up, count the); about 30 % of instances have one of twenty untaught words inserted at a random position.",
+  "scope_limits": [
+    "NO sentence outside the generator's phrase tables: the lexicon holds 28 words and anything else is refused, which is measured only for one inserted word",
+    "NO word order: 'after the first' is never combined with another filter, because the row applies its parts in one fixed order and English does not",
+    "NO whitespace-only lines, tabs, carriage returns, non-UTF-8 bytes, files above 4 MiB, directories, or two files in one sentence",
+    "NO claim that the lessons are sufficient to learn any further word; the learner is not measured here, only the answers the stored lexicon gives",
+    "NO operation that changes a file, and nothing that starts a program"
+  ],
+  "solver": {
+    "module": "canonical/runtime/taught_words_true_capability_adapter_v1.py",
+    "entry": "solve_through_the_front_door",
+    "kernels": [
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/runtime/taught_words_v1.py",
+      "canonical/runtime/taught_words_check_v1.py",
+      "canonical/runtime/bound_capabilities/file_question_taught_words.py",
+      "canonical/runtime/TAUGHT_WORD_LESSONS_V1.json",
+      "canonical/runtime/TAUGHT_WORD_LEXICON_V1.json"
+    ],
+    "note": "the adapter writes the described file to a scratch path and asks the one front door; no reading logic is in it"
+  },
+  "generator": {
+    "module": "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py"
+  },
+  "oracles": {
+    "module": "canonical/capabilities/true/oracles/file_question_taught_words_oracles_v1.py",
+    "declared": [
+      {
+        "id": "VALUE_BY_CONSTRUCTION",
+        "class": "ANALYTIC_CLOSED_FORM",
+        "lineage": "computed from the generator's line-by-line description of the file and the structured question; parses no sentence, reads no file, imports no runtime module"
+      },
+      {
+        "id": "DOUBLED_FILE_RELATION",
+        "class": "METAMORPHIC",
+        "lineage": "none"
+      },
+      {
+        "id": "ANSWER_ENVELOPE",
+        "class": "PROPERTY",
+        "lineage": "none"
+      }
+    ]
+  },
+  "independent_oracle_ids": [
+    "VALUE_BY_CONSTRUCTION"
+  ],
+  "min_instances": 500,
+  "pass_threshold": 1.0,
+  "falsification_condition": "One fresh instance on which the front door returns a number different from the one the file's own description determines, or returns any answer for a sentence that contains an untaught word, or answers the question through a row other than file.question.taught_words.v1."
+}

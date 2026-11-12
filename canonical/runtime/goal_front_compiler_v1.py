@@ -990,7 +990,15 @@ def derive_declared_inputs(goal: str, unbound: list[tuple[str, BaseException]], 
             proven = _derived_value(key)
             inputs[key] = proven if isinstance(proven, int) and proven >= 1 else 0
         elif is_extract and key == "new_name":
-            inputs[key] = "_extracted_helper"
+            # The placeholder is for a sentence that names nothing ("... into a helper.").  A
+            # sentence that goes on after "into" with a word of its own has stated a name this
+            # binder did not read, and a function called something else is not what it asked for.
+            # Measured 2026-11-11 on main 62fa7efa: "... lines 13 to 14 into a new function
+            # scale." -> PASS, and the function was named ``_extracted_helper``.
+            if states_a_name_the_placeholder_would_replace(goal):
+                still.append((key, exc))
+            else:
+                inputs[key] = "_extracted_helper"
         else:
             still.append((key, exc))
     remaining: list[tuple[str, BaseException]] = []
@@ -1100,6 +1108,19 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
     """Bind one input key the pinned binder cannot. Raises GoalCompilationFailure when absent."""
     paths = gc._repo_paths(goal, root)
     if key in _PATH_FILE_KEYS:
+        # A DESTINATION IS NOT A CANDIDATE SOURCE.
+        #
+        # "Copy <dir>/a.txt to <dir>/c.txt" names two existing files as soon as
+        # the copy has been made once, so this binder saw two candidates for the
+        # source slot and refused the sentence it had already served -- the
+        # second run of a working copy failed as an ambiguity.  For a writing row
+        # the destination is the one the sentence states, and it is removed
+        # before the source is chosen.
+        if (entry or {}).get("read_only") is not True:
+            destination = gc._bare_stated_destination(goal, paths)
+            if destination is not None:
+                paths = [(raw, p) for raw, p in paths
+                         if raw != destination and p.as_posix() != destination]
         files = [raw for raw, p in paths if p.is_file()]
         if len(files) == 1:
             return files[0]
@@ -1250,6 +1271,22 @@ def bind_typed_key(goal: str, key: str, root: pathlib.Path, entry: Mapping[str, 
 # The rule is narrow on purpose: it applies to a BARE token only.  A quoted value is the
 # caller stating it, and a key that denotes a version (`version_field`) is asking for one.
 _VERSION_FRAGMENT = re.compile(r"^v\d+$")
+
+
+# Words that describe the extracted function without naming it.
+_UNNAMED_HELPER_WORDS = frozenset({
+    "a", "an", "the", "new", "helper", "function", "method", "routine", "separate", "own", "its",
+    "private", "small", "local", "standalone", "top", "level", "module",
+})
+
+
+def states_a_name_the_placeholder_would_replace(goal: str) -> bool:
+    """True when what follows the last "into" holds a word that is not a description of a helper."""
+    tail = re.search(r"\binto\b(?!.*\binto\b)(.*)$", str(goal or ""), re.I | re.S)
+    if not tail:
+        return False
+    return any(word.lower() not in _UNNAMED_HELPER_WORDS
+               for word in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", tail.group(1)))
 
 
 _LINE_RANGE_RE = re.compile(
@@ -1861,6 +1898,31 @@ def bind_all_inputs(goal: str, entry: Mapping[str, Any], root: pathlib.Path, con
     named_destinations = _named_output_destinations(goal, entry, keys, root)
     taken: set[str] = set(named_destinations)
     pending_input_paths: list[str] = []
+    # A ROW THAT DECLARES TWO FILE SLOTS BINDS THE TWO FILES THE SENTENCE NAMED.
+    #
+    # Each key below is bound through a SHADOW contract carrying only that key, so
+    # a two-path row presents one empty slot at a time and every binder refuses:
+    # "Compare a.txt and b.txt" failed at the FIRST key with
+    # `path:2_type_compatible_existing_files_named`, nothing was marked taken, and
+    # the failure was reported as though the sentence had named no usable file.
+    #
+    # Scoped by exact counting, so no other row moves: this fires only when the
+    # entry declares SEVERAL ``path_file_or_dir`` bindings AND the sentence names
+    # exactly that many existing files that are not destinations. The values are
+    # taken in the order the sentence states them, which is the only order the
+    # sentence supplies -- nothing is paired, no role is inferred, and any other
+    # count falls through to the per-key path unchanged.
+    multi_file_keys = [k for k, v in (entry.get("proposal_bindings") or {}).items()
+                       if isinstance(v, Mapping) and v.get("type") == "path_file_or_dir"]
+    if len(multi_file_keys) > 1:
+        stated_files = [raw for raw, p in gc._repo_paths(goal, root)
+                        if p.is_file() and raw not in named_destinations]
+        if len(stated_files) == len(multi_file_keys):
+            for _key, _value in zip(multi_file_keys, stated_files):
+                inputs[_key] = _value
+                taken.add(_value)
+            pinned_keys = [k for k in pinned_keys if k not in inputs]
+            typed_keys = [k for k in typed_keys if k not in inputs]
     for key in pinned_keys:
         shadow = dict(entry)
         shadow["action_template"] = {"args": {key: "${input." + key + "}"}}
@@ -2032,6 +2094,25 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
     # crash in the compiler, not a refusal.  A compiler that crashes is not a compiler that
     # fails closed, so the type is settled here rather than at each call site.
     root = pathlib.Path(root)
+    # A WRITER'S STATED DESTINATION IS NOT A COLLISION TO BE REBOUND.
+    #
+    # F13 below moves a colliding output to a spool artifact, which is right for a
+    # report that must not sit on top of its input.  It is wrong for a row whose
+    # whole job is to write where the sentence said: measured 2026-11-02, "Copy
+    # <dir>/a.txt to <dir>/c.txt" -- with c.txt already present from the previous
+    # run -- had its destination moved to
+    # canonical/astra_runtime/tmp/spool_0_output.json, so the copy reported
+    # success and the stated destination was never touched.  A writer keeps the
+    # destination it was given; whether that destination may be written is the
+    # adapter's decision (it refuses an existing file the sentence did not ask to
+    # overwrite), never a reason to write somewhere else.
+    _stated_writer_destination = None
+    if isinstance(entry, Mapping) and entry.get("read_only") is not True:
+        try:
+            _stated_writer_destination = gc._bare_stated_destination(
+                goal, gc._repo_paths(goal, root))
+        except Exception:  # noqa: BLE001 - a failed parse simply keeps the old path
+            _stated_writer_destination = None
     input_paths = {str(v) for k, v in inputs.items() if k.endswith("_path") and not _is_output_key(k, entry)}
     if inputs.get("source_root") and inputs.get("module"):
         input_paths.add(str(pathlib.PurePosixPath(str(inputs["source_root"])) / str(inputs["module"])))
@@ -2098,6 +2179,8 @@ def repair_output_collisions(goal: str, inputs: dict[str, Any], root: pathlib.Pa
         # goes.  The discriminator is the one already used here: does the CAPABILITY edit source?  A
         # row that only reports on source may not be handed a source file as its output, whatever the
         # sentence wanted, and the remedy is F13's unchanged.
+        if _stated_writer_destination is not None and value == _stated_writer_destination:
+            continue
         if (not edits_source and value.endswith(_SOURCE_SUFFIXES)
                 and value in _stated_move_destinations(goal)
                 and spool is not None and cycle is not None):
@@ -2203,8 +2286,133 @@ def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int
 _FALLBACK_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
 
-def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> list[tuple[int, int, str, dict[str, Any]]]:
-    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal."""
+def _states_a_file_destination(goal: str) -> bool:
+    """Does the sentence say WHERE a file is to be written?
+
+    Purely syntactic, so it can run in the ranker, which holds no repository
+    root.  Same shape as `goal_compiler._bare_stated_destination`: exactly one
+    `to`/`into`/`onto` phrase, and nothing file-like after it.  "Rename old_name
+    to new_name in lib.py" fails the second test, which is the whole point -- the
+    trailing file says the change is INSIDE that file, so it is a symbol rename
+    and not a file rename.
+    """
+    text = str(goal or "")
+    # "NAMED <PATH>" / "CALLED <PATH>" states a destination without a
+    # preposition, and it is how an ordinary person asks for a copy.  Measured
+    # 2026-11-02: "Make a copy of <a> named <b>" was refused with a missing
+    # sandbox, and the reason was here -- `file.copy.v1` is a one-file-out
+    # writer, this predicate said the sentence states no destination, and the
+    # row was therefore not even a CANDIDATE.  The trailing `\s+` is what keeps
+    # the phrase from reading a FILENAME: "named.txt" is `named` followed by a
+    # dot, never by whitespace, so a destination called named.txt keeps binding
+    # exactly as it did.
+    stated = list(re.finditer(r"\b(?:to|into|onto|named|called)\s+([A-Za-z0-9_./-]+)", text, re.I))
+    if len(stated) != 1:
+        return False
+    tail = text[stated[0].end():]
+    return not re.search(r"[\w.-]+/[\w./-]+|\b[\w-]+\.[A-Za-z0-9]{1,12}\b", tail)
+
+
+#: Verbs a sentence uses when the payload REPLACES what is in the file.
+_REPLACEMENT_VERBS = frozenset({"write", "save", "output", "put", "store", "create"})
+
+
+def _replaces_the_whole_content(goal: str) -> bool:
+    """Does this sentence state a payload that replaces the file's content?"""
+    try:
+        from canonical.runtime import capability_selection_retrieval_v1 as _selection
+        if not _selection._states_a_payload_and_its_destination(goal):
+            return False
+    except Exception:  # noqa: BLE001 - an unreadable sentence states nothing
+        return False
+    for raw in str(goal or "").lower().replace("?", " ").split():
+        word = raw.strip(".,:;!\"'`()[]")
+        if not word:
+            continue
+        return word in _REPLACEMENT_VERBS
+    return False
+
+
+def _declares_a_destination_slot(entry: Mapping[str, Any]) -> bool:
+    """Does the row have anywhere to put a path the sentence names as output?"""
+    keys: set[str] = set()
+    for block in ((entry.get("proposal_bindings") or {}),
+                  ((entry.get("action_template") or {}).get("args") or {})):
+        if isinstance(block, Mapping):
+            keys |= {str(k) for k in block}
+    for argv in (((entry.get("computes_command") or {}).get("argvs")) or []):
+        for token in (argv or []):
+            keys.update(re.findall(r"\$\{([A-Za-z0-9_]+)", str(token)))
+    return any(_is_output_key(key, entry) for key in keys)
+
+
+def _takes_more_paths_than_the_row_can_write(goal: str, entry: Mapping[str, Any]) -> bool:
+    """A mutating one-file row is not the row for a two-path sentence.
+
+    Only mutating rows are filtered: a read-only row produces a value, and a
+    sentence may name a place for that value without making the row wrong.
+    Only rows without a destination slot are filtered: a row that declares one
+    is exactly the row the second path belongs to.
+    """
+    if not entry.get("handles_verbs"):
+        return False
+    if _declares_a_destination_slot(entry):
+        return False
+    try:
+        paths = gc._repo_paths(goal, _FALLBACK_ROOT) or []
+    except Exception:  # noqa: BLE001 - an unparseable sentence names no extra path
+        return False
+    return len({str(p) for p in paths}) >= 2
+
+
+def _takes_exactly_one_stated_file(entry: Mapping[str, Any]) -> bool:
+    """A row whose whole contract is: one file in, nothing else out.
+
+    `file.backup.v1` (a `.bak` beside the file) and the in-place editors
+    (`file.uppercased.v1`, `file.line.appended.v1`) declare exactly
+    {goal_text, path_file_or_dir}.  A sentence that states a PAYLOAD and a
+    DESTINATION has two operands, so it cannot be a request about one file --
+    and measured 2026-11-02, "Write the line 'PROJECT BRAIN' to the file
+    <out>" was composed from the append row, which then raised because <out>
+    did not exist yet.  The row that owns that sentence is the writer.
+    """
+
+    bindings = entry.get("proposal_bindings") or {}
+    if not isinstance(bindings, Mapping):
+        return False
+    types = sorted(str((spec or {}).get("type")) for spec in bindings.values()
+                   if isinstance(spec, Mapping))
+    return types == ["goal_text", "path_file_or_dir"]
+
+
+def _writes_the_one_stated_file(entry: Mapping[str, Any]) -> bool:
+    """A row whose contract is exactly: one file in, one file out, nothing else.
+
+    Structurally identified rather than by id, so the rule survives renaming and
+    covers the next row of this shape.  `file.copy.v1` and `file.rename.v1`
+    declare exactly {goal_text, path_file_or_dir, auto_path}."""
+
+    bindings = entry.get("proposal_bindings") or {}
+    if not isinstance(bindings, Mapping) or entry.get("read_only") is True:
+        return False
+    types = sorted(str((spec or {}).get("type")) for spec in bindings.values()
+                   if isinstance(spec, Mapping))
+    return types == ["auto_path", "goal_text", "path_file_or_dir"]
+
+
+def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]],
+                      constraint_text: str | None = None) -> list[tuple[int, int, str, dict[str, Any]]]:
+    """Candidates ranked by the pinned scorer on prose tokens only; constraints see the full goal.
+
+    `goal` may be a selection text with stated values blanked (F31).  A
+    STRUCTURAL constraint still has to see the sentence, because the thing it
+    tests is the paths -- measured 2026-11-02: "Compress <d>/a.txt into
+    <d>/a.tar.gz" lost its destination when passed as selection text, so the
+    one-file rule below could not count two paths and the gzip row stayed a
+    candidate for a sentence it cannot honour.  `constraint_text` carries the
+    real sentence for those tests only.
+    """
+    sentence = str(constraint_text if constraint_text is not None else goal)
     out = []
     for cid, entry in sorted(registry.items()):
         if not isinstance(entry, Mapping) or entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
@@ -2219,6 +2427,47 @@ def ranked_candidates(goal: str, registry: Mapping[str, Mapping[str, Any]]) -> l
             if not (surface_word and surface_word in own):
                 continue
         if not gc._structured_binary_format_match(goal, entry)[0]:
+            continue
+        # A FILE-TO-FILE WRITER MUST BE TOLD BOTH FILES.
+        #
+        # Scoring is lexical, and "Rename old_name to new_name in lib.py" shares
+        # `rename` with a file rename. Measured 2026-11-02: that sentence -- a
+        # Python SYMBOL rename -- selected `file.rename.v1` over
+        # `python.refactor.rename_symbol.v1` on the word alone, and the writer
+        # then refused (or, before the refusals existed, moved a file nobody
+        # named). A sentence that states no destination file is not a request to
+        # write one, so such a row is not a candidate for it.
+        if _writes_the_one_stated_file(entry) and not _states_a_file_destination(goal):
+            continue
+        # ...and a ONE-FILE row is not the row for a payload-plus-destination
+        # sentence, which has two operands.  See `_takes_exactly_one_stated_file`.
+        # "Add a line containing delta to <f>" is ALSO a payload plus a
+        # destination, and it IS a one-file request -- so the rule above is
+        # scoped to the verbs that REPLACE a file's content.  Measured without
+        # that scope: the append row was filtered out of the one sentence it
+        # exists for.
+        if _takes_exactly_one_stated_file(entry) and _replaces_the_whole_content(goal):
+            continue
+        # A ROW THAT WRITES ONE FILE IS NOT THE ROW FOR A SENTENCE THAT NAMES
+        # TWO AND HAS NOWHERE TO PUT THE SECOND.
+        #
+        # Measured 2026-11-02: "Compress <d>/a.txt into <d>/a.tar.gz" named a
+        # source and a destination.  The gzip row declares a single file and no
+        # destination slot -- it computes `gzip <file>`, which writes
+        # `<file>.gz` and removes the source -- so the second path had nowhere
+        # to go.  Its declared argv was honoured by DELETING the source and
+        # writing a differently-named archive (the adapter now refuses that, but
+        # a refusal is the wrong answer from the wrong route).  With the tar row
+        # that can write the named archive present, both rows scored the same
+        # and the choice went ambiguous, so the sentence was served by neither.
+        #
+        # The test is structural and does not bind anything: a MUTATING row is
+        # excluded when it declares no destination slot and the sentence names
+        # more paths than it can take.  A read-only row is untouched (a value
+        # with a place to go is a different sentence), and so is a one-path
+        # sentence -- "Add a line containing delta to <f>" names one file and
+        # keeps the append row.
+        if _takes_more_paths_than_the_row_can_write(sentence, entry):
             continue
         score, specificity, evidence = score_capability(goal, cid, entry)
         if score > 0:
@@ -2319,10 +2568,37 @@ def _is_catch_all(entry: Mapping[str, Any]) -> bool:
     names = input_keys(entry)
     if not names:
         return True
+    # A SLOT THE ROW ITSELF DECLARES AS THE WHOLE REQUEST IS A WHOLE-REQUEST SLOT,
+    # whatever it is called.  `spec` and `objective` are not in the name list
+    # above, but both are declared `goal_text` -- they receive the entire
+    # sentence -- so a row whose only real input is one of them binds anything.
+    # Measured 2026-11-02: "Compare a.txt and b.txt" tied at 4 with
+    # evidence.claim_relation.generic_units.stdlib on the single word "compare",
+    # the tie went to the row that takes `spec`, and the sentence was refused as
+    # having no capability although a row existed that binds the two files it
+    # named.
+    #
+    # The name list stays as it is: a `text`/`prompt`/`query` slot may carry a
+    # PAYLOAD, and a payload is a real binding. Only an explicit `goal_text`
+    # declaration is treated as the whole request, and a row that also binds a
+    # file still returns False below on that file's name.
+    declared_whole = {key for key, spec in (entry.get("proposal_bindings") or {}).items()
+                      if isinstance(spec, Mapping) and spec.get("type") == "goal_text"}
+    # Only for a row that declares such a slot, and only for the slot kinds that
+    # are artifacts rather than statements: an `effect_result` is a value an
+    # earlier step produces and an `auto_path` is a path the runtime synthesizes,
+    # so neither is evidence that the row understood the sentence. Every other
+    # row -- including every row that binds a file -- is judged exactly as before
+    # by the name list.
+    artifact_slots = {key for key, spec in (entry.get("proposal_bindings") or {}).items()
+                      if isinstance(spec, Mapping)
+                      and spec.get("type") in {"effect_result", "auto_path"}}
     for name in names:
-        if name in _WHOLE_REQUEST_INPUTS:
+        if name in _WHOLE_REQUEST_INPUTS or name in declared_whole:
             continue
         if _is_output_key(name, entry):
+            continue
+        if declared_whole and name in artifact_slots:
             continue
         return False
     return True
@@ -2793,6 +3069,53 @@ def _compile_clauses(clauses: list[str], admissible: Mapping[str, Mapping[str, A
     }
 
 
+def _ranked_by_the_command_the_sentence_states(
+        goal: str, registry: Mapping[str, Mapping[str, Any]]
+) -> list[tuple[int, int, str, dict[str, Any]]]:
+    """The row that DECLARES the command this sentence states, if exactly one does.
+
+    Lexical ranking cannot select a row whose vocabulary the sentence does not
+    share, and "Read <path>" is the measurement: `composer_route.extract_argv`
+    settles `cat <path>` for it, `file.contents.v1` declares in the registry that
+    it computes exactly that argv in process, and the row was never offered
+    because it does not contain the word "read".  The sentence therefore reached
+    no capability and was refused for a sandbox it did not need.
+
+    This is a fallback, never a replacement: it runs only when the lexical
+    ranking produced NOTHING, and it declines when two rows declare the same
+    command -- a tie between rows is not evidence about which one was meant.
+    """
+    try:
+        from canonical.runtime import composer_route_v1 as _composer_route
+        from canonical.runtime import declared_command_equivalence_v1 as _declared
+
+        argv = _composer_route.extract_argv(str(goal or ""))
+        if not argv:
+            return []
+        matches = []
+        for cid, entry in sorted(registry.items()):
+            if not isinstance(entry, Mapping):
+                continue
+            if entry.get("status") != "VERIFIED_BOUND_CAPABILITY":
+                continue
+            matched = _declared.matched_template(entry, argv)
+            if matched is None:
+                continue
+            matches.append((cid, entry, matched))
+        if len(matches) != 1:
+            return []
+        cid, entry, matched = matches[0]
+        return [(1, 0, cid, {
+            "matched_tokens": [],
+            "matched_provides": [],
+            "matched_keywords": [],
+            "declared_command": {"argv": list(argv), "template": matched.get("template")},
+            "selection_rule": "THE_SENTENCE_STATES_A_COMMAND_THIS_ROW_COMPUTES",
+        })]
+    except Exception:  # noqa: BLE001 - a failed match is simply no fallback
+        return []
+
+
 def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], root: pathlib.Path) -> dict[str, Any]:
     """Front compile. Returns the pinned compiler's shape plus ``front_compiler`` metadata."""
     rules: list[str] = []
@@ -2881,7 +3204,15 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
     selection_text = without_stated_text_value(text)
     if selection_text != text:
         rules.append("F31_STATED_TEXT_VALUE_NOT_TASK_PROSE")
-    ranked = ranked_candidates(selection_text, registry)
+    ranked = ranked_candidates(selection_text, registry, constraint_text=text)
+    if not ranked:
+        # F32: the sentence STATES a command and exactly one row declares that it
+        # computes it.  Measured 2026-11-02: "Read <path>" states `cat <path>`,
+        # `file.contents.v1` declares it, and the word "read" is in neither the
+        # row's keywords nor its effects -- so the request reached no capability.
+        ranked = _ranked_by_the_command_the_sentence_states(selection_text, registry)
+        if ranked:
+            rules.append("F32_STATED_COMMAND_SELECTS_THE_ROW_THAT_COMPUTES_IT")
     best_cid = ranked[0][2] if ranked else None
     spool: set[str] = set()
     try:
@@ -2889,6 +3220,40 @@ def _compile_goal_body(goal: str, admissible: Mapping[str, Mapping[str, Any]], r
         pinned_failure = None
     except GoalCompilationFailure as exc:
         compiled, pinned_failure = None, exc
+
+    # F32b: THE ROW THE SENTENCE STATES A COMMAND FOR, WHEN THE SCORER'S PICK
+    # COULD NOT BIND ITS OWN INPUTS.
+    #
+    # F32 above runs only when the lexical ranking produced NOTHING.  Measured
+    # 2026-11-02, "What files are in <D>?": the ranking produced something --
+    # `file.diff.v1`, a row that wants TWO files -- and the pinned compiler then
+    # failed with GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH:file.diff.v1:
+    # other_path:0_type_compatible_existing_files_named, so the fallback never
+    # ran and a directory listing that `file.directory_listing.v1` declares it
+    # computes (and prints byte-identically to `ls -A`) reached no capability.
+    #
+    # The rule is the same one `_first_fillable` applies at execution time, moved
+    # one layer earlier: a pick that cannot fill its own contract is not a pick.
+    # It is deliberately narrow -- it fires ONLY on a compile failure, it uses
+    # the same single-row-declares-it test as F32 (a tie is not evidence), and
+    # the row it substitutes is compiled by the SAME pinned compiler against a
+    # registry holding nothing else, so no new binder and no new scoring is
+    # introduced.  If that compile also fails, the original failure stands.
+    if compiled is None:
+        _declared_rows = _ranked_by_the_command_the_sentence_states(selection_text, registry)
+        if _declared_rows:
+            _cid = _declared_rows[0][2]
+            try:
+                _narrowed = dict(gc.compile_goal(selection_text, {_cid: registry[_cid]}, root))
+            except GoalCompilationFailure:
+                _narrowed = None
+            except Exception:  # noqa: BLE001 - a fallback that raises is no fallback
+                _narrowed = None
+            if _narrowed and _narrowed.get("selected_capability") == _cid:
+                compiled = _narrowed
+                pinned_failure = None
+                best_cid = _cid
+                rules.append("F32B_ROW_THAT_COMPUTES_THE_STATED_COMMAND_BEATS_A_PICK_THAT_COULD_NOT_BIND")
 
     # Reject bogus compound splits where an observation sentence named a real path
     # and an anaphoric imperative sentence ("Fix it...", "Migrate it...") had zero

@@ -261,9 +261,23 @@ def _load_rules(db_path: pathlib.Path, language: str) -> list[dict[str, Any]]:
             cached = _MEM_SKILLS.get(key)
             if cached is not None and cached[0] == identity:
                 return cached[1]
+            # EVERY STORED LESSON IS READ. THE ORDER SAYS WHICH IS TRIED FIRST, NEVER WHICH EXISTS.
+            #
+            # This query ended in `LIMIT 128` until 2026-11-11. Measured that day: lessons 1..128,
+            # each reused once, kept working; lessons 129, 130 and 131 were stored, reported
+            # `crystallized: True`, and could never be recalled, because a reused lesson outranks
+            # a new one and the cut came before any lesson was matched against the source. With
+            # no reuse at all the cut fell on the other end: of 130 lessons the two oldest were
+            # no longer offered. Either way a lesson that was kept was silently never read again.
+            #
+            # A bound on the work of one recall belongs after matching, where it can be counted
+            # and reported, not here, where it decides which lessons exist. Reading all of them
+            # costs time in proportion to their number (one sandbox measurement the same day:
+            # about 0.9 ms per lesson on a 126-line source when nothing applies) and one
+            # verifier call for every candidate a lesson proposes.
             rows = conn.execute(
                 "SELECT pattern_json FROM crystallized_skills WHERE domain='swe_code_repair' AND language=? "
-                "ORDER BY verified_hits DESC, created_ts DESC LIMIT 128", (language,)).fetchall()
+                "ORDER BY verified_hits DESC, created_ts DESC", (language,)).fetchall()
             rules = [json.loads(row[0]) for row in rows]
             _MEM_SKILLS[key] = (identity, rules)
             return rules

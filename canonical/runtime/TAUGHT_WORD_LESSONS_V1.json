@@ -1,0 +1,311 @@
+{
+ "schema": "PROJECT_BRAIN_TAUGHT_WORDS_V1_LESSONS",
+ "note": "Each lesson is a sentence and the right answer on two example files. Nothing here says which operation gives the answer or what any word means. Lessons 1-12 are first wordings of the 2026-11-10 file-task set; lesson 13 adds one modifier; lessons 14-23 teach other words for parts already known and were written after seeing which words were refused. Lesson 23 is set aside by the learner (one word, two meanings) and is kept as the record of that limit.",
+ "example_files": {
+  "t1": "caf\u00e9 omega alpha sigma beta delta kappa pi ERROR\n\ngamma alpha\ngamma omega\nERROR omega mu\n\n\n\nERROR sigma alpha\ngamma alpha\nkappa beta omega kappa omega\ngamma beta gamma mu\nERROR sigma alpha\ngamma theta theta\nsigma pi\ndelta\nERROR delta sigma omega\nalpha gamma\nERROR omega mu\nERROR pi alpha\nERROR pi alpha\ndelta gamma delta sigma omega alpha\nERROR pi\nERROR gamma\nomega\n",
+  "n1": "584\n158\n281\n78\n143\n49\n161\n143\n158\n164\n92\n42\n176\n77\n49\n",
+  "t2": "caf\u00e9 delta mu alpha sigma mu kappa alpha ERROR\nERROR delta beta\npi\nsigma beta omega delta sigma omega\nERROR mu beta\nERROR pi delta\nERROR pi mu\nERROR delta delta kappa\nERROR beta mu\nERROR pi\ngamma mu\nbeta sigma beta omega delta\ngamma gamma alpha\nERROR pi mu\nERROR theta gamma\nERROR alpha sigma gamma\nERROR delta\nERROR gamma\nsigma gamma gamma delta\nERROR mu beta\ngamma mu\nsigma\nERROR pi\n",
+  "n2": "572\n140\n147\n115\n266\n59\n147\n30\n47\n111\n54\n229\n168\n159\n47\n59\n"
+ },
+ "lessons": [
+  {
+   "sentence": "how many lines are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 25
+    },
+    {
+     "file": "t2",
+     "answer": 23
+    }
+   ]
+  },
+  {
+   "sentence": "how many words are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 65
+    },
+    {
+     "file": "t2",
+     "answer": 73
+    }
+   ]
+  },
+  {
+   "sentence": "how many characters are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 366
+    },
+    {
+     "file": "t2",
+     "answer": 385
+    }
+   ]
+  },
+  {
+   "sentence": "how many unique lines are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 18
+    },
+    {
+     "file": "t2",
+     "answer": 19
+    }
+   ]
+  },
+  {
+   "sentence": "how many blank lines are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 4
+    },
+    {
+     "file": "t2",
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "sentence": "how many lines contain ERROR in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 10
+    },
+    {
+     "file": "t2",
+     "answer": 15
+    }
+   ]
+  },
+  {
+   "sentence": "what is the length of the longest line in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 48
+    },
+    {
+     "file": "t2",
+     "answer": 46
+    }
+   ]
+  },
+  {
+   "sentence": "what is the sum of the numbers in n.txt",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 2355
+    },
+    {
+     "file": "n2",
+     "answer": 2350
+    }
+   ]
+  },
+  {
+   "sentence": "what is the largest number in n.txt",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 584
+    },
+    {
+     "file": "n2",
+     "answer": 572
+    }
+   ]
+  },
+  {
+   "sentence": "how many numbers are in n.txt",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 15
+    },
+    {
+     "file": "n2",
+     "answer": 16
+    }
+   ]
+  },
+  {
+   "sentence": "what is the smallest number in n.txt",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 42
+    },
+    {
+     "file": "n2",
+     "answer": 30
+    }
+   ]
+  },
+  {
+   "sentence": "what is the length of the shortest line in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 0
+    },
+    {
+     "file": "t2",
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "sentence": "what is the sum of the numbers in n.txt after the first",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 1771
+    },
+    {
+     "file": "n2",
+     "answer": 1778
+    }
+   ]
+  },
+  {
+   "sentence": "how many different lines are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 18
+    },
+    {
+     "file": "t2",
+     "answer": 19
+    }
+   ]
+  },
+  {
+   "sentence": "how many distinct words are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 12
+    },
+    {
+     "file": "t2",
+     "answer": 12
+    }
+   ]
+  },
+  {
+   "sentence": "how many empty lines are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 4
+    },
+    {
+     "file": "t2",
+     "answer": 0
+    }
+   ]
+  },
+  {
+   "sentence": "how many lines mention ERROR in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 10
+    },
+    {
+     "file": "t2",
+     "answer": 15
+    }
+   ]
+  },
+  {
+   "sentence": "what is the biggest number in n.txt",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 584
+    },
+    {
+     "file": "n2",
+     "answer": 572
+    }
+   ]
+  },
+  {
+   "sentence": "how many bytes are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 367
+    },
+    {
+     "file": "t2",
+     "answer": 386
+    }
+   ]
+  },
+  {
+   "sentence": "how many rows are in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 25
+    },
+    {
+     "file": "t2",
+     "answer": 23
+    }
+   ]
+  },
+  {
+   "sentence": "count the lines in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 25
+    },
+    {
+     "file": "t2",
+     "answer": 23
+    }
+   ]
+  },
+  {
+   "sentence": "add up the numbers in n.txt",
+   "examples": [
+    {
+     "file": "n1",
+     "answer": 2355
+    },
+    {
+     "file": "n2",
+     "answer": 2350
+    }
+   ]
+  },
+  {
+   "sentence": "tell me the number of lines in t.txt",
+   "examples": [
+    {
+     "file": "t1",
+     "answer": 25
+    },
+    {
+     "file": "t2",
+     "answer": 23
+    }
+   ]
+  }
+ ]
+}

@@ -127,8 +127,17 @@ def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqli
         _AUTO_SEEDED_DBS.add(str(target))
         bundle_p = default_workflow_bundle_path()
         if bundle_p.is_file():
-            row = conn.execute("SELECT COUNT(*) FROM compiled_workflow_skills").fetchone()
-            if not row or int(row[0]) == 0:
+            # Seed when the tracked bundle holds a skill this database lacks -- not only when the
+            # database is empty.  With the empty-only rule, a checkout that had ever stored one
+            # skill never received anything taught later, and nothing said so.
+            try:
+                _bundled = {str(item.get("skill_id")) for item in
+                            (json.loads(bundle_p.read_text(encoding="utf-8")).get("skills") or [])
+                            if isinstance(item, Mapping)}
+            except Exception:  # noqa: BLE001 - an unreadable bundle seeds nothing
+                _bundled = set()
+            _held = {str(r[0]) for r in conn.execute("SELECT skill_id FROM compiled_workflow_skills")}
+            if _bundled - _held:
                 conn.close()
                 try:
                     import_workflow_bundle(bundle_p, db_path=target)
@@ -662,6 +671,95 @@ def _subst_dynamic_tokens(val: Any, dyn: Mapping[str, str]) -> Any:
     return val
 
 
+def _sandbox_for_taught_programs() -> Any | None:
+    """The namespace sandbox a taught program runs in, or None where this machine cannot start one.
+
+    A `confined_python_exec` step is replayed by automatic routes: the front door's fallback, the
+    awake loop, the qualification of a new skill.  It used to go through `solve_v1.act`, whose
+    `import confine_v1` resolves only when `canonical/runtime` itself is on `sys.path`.  From a
+    package import it raised `ModuleNotFoundError`, `act` fell back to the host, and the taught
+    program ran with the caller's whole account (measured 2026-11-11 at the front door; the receipt
+    said `confined: False`).  Here the program runs inside the sandbox or it does not run.
+    """
+    try:
+        from canonical.runtime import confine_v1 as _confine
+        return _confine if _confine.available() else None
+    except Exception:  # noqa: BLE001 - no sandbox is an answer, not a crash
+        return None
+
+
+def _text_a_skill_could_have_written(template: str, holes: Sequence[str], text: str) -> bool:
+    """True when `text` is the step's own content template filled in with *some* values.
+
+    Each hole stands for one value on one line; a hole that occurs twice must hold the same value.
+    """
+    names = sorted({str(h) for h in holes if str(h).startswith("?")}, key=len, reverse=True)
+    if not names:
+        return template == text
+    parts: list[str] = []
+    seen: set[str] = set()
+    pos = 0
+    for m in re.finditer("|".join(re.escape(n) for n in names), template):
+        parts.append(re.escape(template[pos:m.start()]))
+        group = "h_" + re.sub(r"\W", "_", m.group(0)[1:])
+        parts.append(f"(?P={group})" if group in seen else f"(?P<{group}>[^\\n]*?)")
+        seen.add(group)
+        pos = m.end()
+    parts.append(re.escape(template[pos:]))
+    return re.fullmatch("".join(parts), text) is not None
+
+
+def content_a_generalized_write_would_destroy(
+    abstract_steps: Sequence[Mapping[str, Any]],
+    inst_steps: Sequence[Mapping[str, Any]],
+    *,
+    cwd: str | pathlib.Path | None = None,
+) -> str | None:
+    """Name the first file a generalized `write_text` would replace without ever having read it.
+
+    A `write_text` step holds the whole file as it was written at teaching time, with the goal's
+    values turned into holes.  That is the right record of "create this file".  It is the wrong
+    record of an *edit*: shown `shapes.py` after a rename, the compiled skill is "replace the named
+    file with shapes.py", and its postcondition ("the file contains `def <new name>(`") still holds.
+    Measured 2026-11-11 through the front door: asked to rename a routine in `geom.py`, the skill
+    replaced `geom.py` with the taught file, and the door answered PASS.
+
+    One demonstration cannot say whether the teacher created or edited.  The world it is replayed in
+    can: a file that already exists, holds something, and is neither what the step is about to write
+    nor something this same step could have written with other values, is content the skill never
+    read.  Replacing it is refused.  Creating a file, filling an empty one, appending, writing the
+    same text again and updating a file this skill wrote before all stay possible.
+
+    Returns the path (as the step names it), or None when nothing would be destroyed.
+    """
+    work_dir = pathlib.Path(cwd).resolve() if cwd else pathlib.Path.cwd()
+    for abstract, inst in zip(abstract_steps, inst_steps):
+        if not isinstance(abstract, Mapping) or not isinstance(inst, Mapping):
+            continue
+        if str(inst.get("layer") or "") != "python_file_op":
+            continue
+        if str(inst.get("op") or "write_text") == "append_text":
+            continue
+        try:
+            target = _resolve_local_path(str(inst["path"]), work_dir)
+        except Exception:  # noqa: BLE001 - an unresolvable target is left to the executor to refuse
+            continue
+        if not target.exists():
+            continue
+        try:
+            existing = target.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            return str(inst.get("path"))  # a directory, or bytes that are not text: never replace
+        if not existing.strip() or existing == str(inst.get("content") or ""):
+            continue
+        template = str(abstract.get("content") or "")
+        holes = re.findall(r"\?[a-z]+\d+", template)
+        if _text_a_skill_could_have_written(template, holes, existing):
+            continue
+        return str(inst.get("path"))
+    return None
+
+
 def execute_compiled_steps(
     steps: Sequence[Mapping[str, Any]],
     *,
@@ -675,8 +773,14 @@ def execute_compiled_steps(
     certify their effects or confine them.
     """
     from canonical.runtime import computer_execution_boundary_v1 as boundary
+    sandbox: Any | None = None
     for index, step in enumerate(steps):
-        if isinstance(step, Mapping) and str(step.get("layer") or "") in {"cli_exec", "cli_pipeline"}:
+        layer = str(step.get("layer") or "") if isinstance(step, Mapping) else ""
+        if layer == "confined_python_exec" and sandbox is None:
+            sandbox = _sandbox_for_taught_programs()
+        if layer in {"cli_exec", "cli_pipeline"} or (layer == "confined_python_exec" and sandbox is None):
+            # A taught program without a sandbox is refused here, before any earlier step has
+            # written anything -- the same rule, for the same reason, as a command-line stage.
             return {"ok": False, "status": boundary.STATUS,
                     "failure_class": boundary.FAILURE_CLASS,
                     "reason": boundary.FAILURE_CLASS, "failed_step": index,
@@ -896,26 +1000,28 @@ def execute_compiled_steps(
             code = str(step.get("code") or "")
             if not code.strip():
                 return {"ok": False, "failed_step": idx, "reason": "EMPTY_CONFINED_PYTHON_CODE", "step_receipts": step_receipts}
-            from canonical.runtime import solve_v1 as _solve_rt
-            act_res = _solve_rt.act(
-                str(work_dir),
+            if sandbox is None:  # unreachable after the preflight; kept so the rule cannot rot
+                return {"ok": False, "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
+                        "reason": boundary.FAILURE_CLASS, "failed_step": idx, "step_receipts": step_receipts}
+            run = sandbox.run(
                 code,
+                str(work_dir),
                 timeout=int(step.get("timeout") or 30),
                 network=bool(step.get("network", False)),
             )
-            if act_res.get("exit") != 0 or act_res.get("timed_out"):
+            if run.get("exit_status") != 0 or run.get("verdict") != "OK" or run.get("confined") is not True:
                 return {
                     "ok": False,
                     "failed_step": idx,
-                    "reason": f"CONFINED_PYTHON_EXIT_{act_res.get('exit')}:{str(act_res.get('err') or act_res.get('out') or '')[:200]}",
+                    "reason": f"CONFINED_PYTHON_EXIT_{run.get('exit_status')}:{str(run.get('output') or run.get('detail') or '')[:200]}",
                     "step_receipts": step_receipts,
                 }
             step_receipts.append({
                 "step": idx,
                 "layer": layer,
                 "ok": True,
-                "confined": bool(act_res.get("confined")),
-                "stdout": str(act_res.get("out") or "")[:400],
+                "confined": True,
+                "stdout": str(run.get("output") or "")[:400],
                 "elapsed_us": (time.perf_counter_ns() - t0) // 1000,
             })
 
@@ -1470,6 +1576,22 @@ def compile_and_qualify_skill(
             else _instantiate_obj(generalized["abstract_postcondition"], heldout_bindings)
         )
 
+        # 0. A write that would replace content it never read was an edit shown as its result.
+        #    Refused before anything runs, so the second instance's file is still there to look at.
+        destroyed = content_a_generalized_write_would_destroy(
+            generalized["abstract_steps"], inst_steps, cwd=work_dir)
+        if destroyed is not None:
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__HELDOUT_WOULD_REPLACE_CONTENT_THE_SKILL_NEVER_READ",
+                "path": destroyed,
+                "detail": "The step writes the whole file as it was at teaching time. The second "
+                          "instance's file holds something else, which the step would replace "
+                          "without reading it. Teach an edit as a program that reads the file.",
+                "heldout_distinct_from_training_instance": bool(heldout_distinct),
+            }
+
         # 1. Causal ablation (before running the derived skill, goal postcondition must NOT already hold!)
         #
         # A held-out world that cannot even be queried (a missing table) is a failed
@@ -1770,8 +1892,16 @@ def recall_and_execute_workflow(
     *,
     cwd: str | pathlib.Path | None = None,
     db_path: pathlib.Path | None = None,
+    refusals: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any] | None:
-    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
+    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check.
+
+    ``refusals``, when given, collects one entry for every skill whose sentence matched the goal
+    exactly and which then did not complete -- with the reason its own step gave.  The return
+    value is unchanged (``None`` when nothing passed), so a caller that does not ask sees nothing
+    new; a caller that does can tell "nothing was taught for this sentence" from "it was taught,
+    and the taught action declined this case".
+    """
     from canonical.runtime.memory_policy_v1 import can_read_memory
 
     if not can_read_memory():
@@ -1798,6 +1928,8 @@ def recall_and_execute_workflow(
         pre_ok, _ = check_step_preconditions(inst_steps, cwd=cwd)
         if not pre_ok:
             continue
+        if content_a_generalized_write_would_destroy(skill["abstract_steps"], inst_steps, cwd=cwd) is not None:
+            continue
         inst_post = _instantiate_obj(skill["abstract_postcondition"], bindings)
         exec_res = execute_compiled_steps(inst_steps, cwd=cwd)
         if exec_res.get("status") == boundary.STATUS:
@@ -1811,9 +1943,15 @@ def recall_and_execute_workflow(
                     "step_receipts": exec_res.get("step_receipts") or []}
         previous_attempt = True
         if not exec_res.get("ok"):
+            if refusals is not None:
+                refusals.append({"skill_id": skill.get("skill_id"), "goal_skeleton": skill.get("goal_skeleton"),
+                                 "reason": str(exec_res.get("reason") or "")[:300]})
             continue
         ok, reason = verify_postcondition(inst_post, cwd=cwd, execution_result=exec_res)
         if not ok:
+            if refusals is not None:
+                refusals.append({"skill_id": skill.get("skill_id"), "goal_skeleton": skill.get("goal_skeleton"),
+                                 "reason": str(reason)[:300]})
             continue
         # Record hit count asynchronously-safe in WAL
         target_db, conn = _connect_db(db_path)

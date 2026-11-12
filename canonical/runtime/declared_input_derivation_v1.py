@@ -371,6 +371,31 @@ _RENAME_OLD_NEW = re.compile(
     + _QUOTE + r"([A-Za-z_][A-Za-z0-9_]*)" + _QUOTE + r"\b",
     re.IGNORECASE,
 )
+# "lines 13 to 14", "lines 13-14", "line 7" (one line is both ends of a region).
+_STATED_LINES = re.compile(
+    r"\blines?\s+(\d+)(?:\s*(?:-|\u2013|\bto\b|\bthrough\b|\buntil\b|\.\.)\s*(\d+))?\b", re.IGNORECASE)
+
+
+def _innermost_function_spanning(tree: ast.AST, first: int, last: int) -> str:
+    """Dotted name of the innermost function whose lines include ``first``..``last``, or ''."""
+    best = ""
+
+    def visit(node: ast.AST, prefix: str) -> None:
+        nonlocal best
+        for child in ast.iter_child_nodes(node):
+            if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                name = prefix + child.name
+                if child.lineno <= first and last <= (child.end_lineno or child.lineno):
+                    if not isinstance(child, ast.ClassDef) and child.lineno < first:
+                        best = name
+                    visit(child, name + ".")
+            else:
+                visit(child, prefix)
+
+    visit(tree, "")
+    return best
+
+
 _NAMED_NEW = re.compile(
     r"\b(?:new\s+(?:function|parameter|symbol|name)\s+named|named)\s+"
     r"([A-Za-z_][A-Za-z0-9_]*)\b", re.IGNORECASE,
@@ -827,6 +852,60 @@ def stated_git_operation_verb(goal: str) -> str | None:
     return verb if verb in _GIT_SUBCOMMANDS else None
 
 
+# WHAT AN ADD-A-PARAMETER SENTENCE SAYS ABOUT THE DEFAULT.
+#
+# Measured 2026-11-12 through the front door: "add a parameter 'unit' with the default 1 to the
+# function 'compute' in <file>" answered PASS and wrote ``unit=None``.  So did "defaulting to 1" and
+# "with default value 'kg'".  The rule below read only ``default = X``, ``default of X`` and
+# ``default is X``; every other wording fell through to ``None`` and was still labelled
+# ADD_PARAMETER_DEFAULT_STATED.  A parameter with another default than the one asked for is a
+# different function, and the door reported it as done.
+#
+# A sentence can say three things, and they are kept apart:
+#   stated   a literal value is given, in any of the usual wordings;
+#   none     no value is given ("with a default value", or no word "default" at all): the adapter's
+#            own law applies, as before;
+#   unread   a value is given in a form this rule does not read ("the default one", "the default
+#            DEFAULT_RATE", "off by default").  Then nothing is bound and the binder refuses.
+_DEFAULT_LITERAL = r"[-+]?[0-9]+(?:\.[0-9]+)?(?:[eE][-+]?[0-9]+)?|True|False|None|'[^']*'|\"[^\"]*\""
+_DEFAULT_VALUE_FIRST = re.compile(
+    r"(?<![\w.'\"])(%s)\s+(?:as\s+(?:the\s+|its\s+|a\s+)?|by\s+)default\b" % _DEFAULT_LITERAL, re.I)
+_DEFAULT_ON_THE_NAME = re.compile(
+    r"\bparameter\s+[`\"']?[A-Za-z_][A-Za-z0-9_]*[`\"']?\s*=\s*(%s)(?=$|\s|[,.;)](?:\s|$))" % _DEFAULT_LITERAL, re.I)
+_DEFAULT_CUE = re.compile(r"\bdefault(?:s|ing)?\b(?:\s+value)?", re.I)
+_DEFAULT_VALUE_AFTER = re.compile(
+    r"\s*(?:[=:]\s*|(?:of|is|to|set\s+to|equal\s+to|being)\s+)?(%s)(?=$|\s|[,.;)](?:\s|$))" % _DEFAULT_LITERAL, re.I)
+_DEFAULT_NOTHING_AFTER = re.compile(
+    r"\s*(?:$|[.,;)]|(?:to|in|into|on|for|of|at|inside|within)\s+(?:the\s+|a\s+)?"
+    r"(?:function|method|class|def|module|file|[A-Za-z0-9_./-]+\.py)\b)", re.I)
+
+
+def _as_python_literal(value: str) -> str:
+    """``true`` and ``none`` are said in any case; Python spells them one way."""
+    return {"true": "True", "false": "False", "none": "None"}.get(value.lower(), value)
+
+
+def stated_parameter_default(goal: str) -> tuple[str, str | None]:
+    """("stated", literal), ("none", None) or ("unread", the words that follow)."""
+    text = str(goal or "")
+    for pattern in (_DEFAULT_VALUE_FIRST, _DEFAULT_ON_THE_NAME):
+        found = pattern.search(text)
+        if found:
+            return "stated", _as_python_literal(found.group(1))
+    if re.search(r"\bby\s+default\b", text, re.I):
+        return "unread", "by default"
+    cue = _DEFAULT_CUE.search(text)
+    if not cue:
+        return "none", None
+    rest = text[cue.end():]
+    found = _DEFAULT_VALUE_AFTER.match(rest)
+    if found:
+        return "stated", _as_python_literal(found.group(1))
+    if _DEFAULT_NOTHING_AFTER.match(rest):
+        return "none", None
+    return "unread", " ".join(rest.split()[:4])
+
+
 def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str, dict[str, Any]]:
     """Evidence-backed values for declared slots.  Ambiguity => no row at all."""
     args = ((entry.get("action_template") or {}).get("args") or {})
@@ -1190,6 +1269,36 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
                 if isinstance(_node, (ast.FunctionDef, ast.AsyncFunctionDef)) and _node.name == _host:
                     _fn = _node
                     break
+            # A STATED LINE RANGE OUTRANKS A GUESSED BLOCK.
+            #
+            # Measured 2026-11-11 through the front door on main 62fa7efa:
+            #   "Extract the function compute from the module <f> lines 13 to 14 into a new
+            #    function named scale."  -> start_line=13, end_line=13, PASS.
+            #   The same sentence with "lines 13 to 16" -> the same single line, PASS.
+            # Nothing had read the numbers.  No earlier rule bound them on this lane, so the
+            # self-contained-block search below returned the smallest block it could find, and
+            # that block happened to begin on the stated line.  A sentence that states its
+            # region is not asking for a guess: the numbers are bound as written, and a region
+            # that splits a statement is the adapter's refusal to make, not a reason to pick
+            # another one.  Without a named host the lines say which function they are in.
+            _stated_lines = _STATED_LINES.search(str(goal or ""))
+            if _stated_lines:
+                _first = int(_stated_lines.group(1))
+                _last = int(_stated_lines.group(2) or _stated_lines.group(1))
+                _host_of_lines = _host or _innermost_function_spanning(_src_tree, _first, _last)
+                out["start_line"] = {"value": _first, "rule": "SPAN_IS_THE_STATED_LINES",
+                                     "evidence": _stated_lines.group(0)}
+                out["end_line"] = {"value": _last, "rule": "SPAN_IS_THE_STATED_LINES",
+                                   "evidence": _stated_lines.group(0)}
+                if _host_of_lines and "qualname" in keys and "qualname" not in out:
+                    out["qualname"] = {"value": _host_of_lines,
+                                       "rule": "QUALNAME_FROM_ENCLOSING_FUNCTION" if not _host
+                                       else "QUALNAME_IS_THE_STATED_FUNCTION",
+                                       "evidence": sources[0]}
+                if "module" in keys and "module" not in out:
+                    out["module"] = {"value": pathlib.PurePosixPath(sources[0]).name,
+                                     "rule": "MODULE_IS_THE_STATED_FILE", "evidence": sources[0]}
+                _fn = None      # nothing below may replace a stated region with a found one
             if _fn is not None:
                 _params = {a.arg for a in list(_fn.args.args) + list(_fn.args.kwonlyargs)
                            + list(getattr(_fn.args, "posonlyargs", []))}
@@ -1606,7 +1715,9 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
         _added = [n for n in dict.fromkeys(_ADDED_PARAM.findall(str(goal or "")))
                   if _NAME_RE.match(n)]
         _host = str((out.get("symbol") or out.get("qualname") or {}).get("value") or "")
-        if len(_added) == 1 and _host:
+        # This row's default is ``None`` by its own law.  A sentence that gives a default value, read
+        # or not, asks for something this row does not do.
+        if len(_added) == 1 and _host and stated_parameter_default(str(goal or ""))[0] == "none":
             for _f in [f for f in sources if f.endswith(".py")]:
                 _tf = _tree_of(root, _f)
                 if _tf is None:
@@ -1865,15 +1976,16 @@ def derive(goal: str, entry: Mapping[str, Any], root: pathlib.Path) -> dict[str,
             r"\badd\s+(?:a\s+|an\s+|optional\s+)*parameter\s+[`\"']?([A-Za-z_][A-Za-z0-9_]*)[`\"']?",
             goal_str, re.I,
         )
-        if ap_m and _NAME_RE.match(ap_m.group(1)):
+        _default_state, _default_value = stated_parameter_default(goal_str)
+        if ap_m and _NAME_RE.match(ap_m.group(1)) and _default_state != "unread":
             out["param_name"] = {"value": ap_m.group(1), "rule": "ADD_PARAMETER_NAME_STATED", "evidence": ap_m.group(1)}
-            def_m = re.search(
-                r"\bdefault(?:\s+value)?\s*(?:=|of|is)\s*([0-9]+(?:\.[0-9]+)?|True|False|None|'[^']*'|\"[^\"]*\")",
-                goal_str, re.I,
-            )
             if "default_expr" in keys:
-                d_val = def_m.group(1) if def_m else "None"
-                out["default_expr"] = {"value": d_val, "rule": "ADD_PARAMETER_DEFAULT_STATED", "evidence": d_val}
+                if _default_state == "stated":
+                    out["default_expr"] = {"value": _default_value, "rule": "ADD_PARAMETER_DEFAULT_STATED",
+                                           "evidence": _default_value}
+                else:
+                    out["default_expr"] = {"value": "None", "rule": "ADD_PARAMETER_DEFAULT_NOT_STATED",
+                                           "evidence": "the sentence gives no default value"}
     if {"function_name", "signature", "body_expr", "target_module"} <= keys:
         fn_spec = re.search(
             r"\b(?:add|implement|create|synthesize)\s+(?:a\s+|the\s+)?function\s+"

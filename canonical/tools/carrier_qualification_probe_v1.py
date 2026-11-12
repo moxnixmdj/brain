@@ -30,6 +30,21 @@ So the review is not wrong — it is **out of date on 7 items and exactly right 
 reviewer cannot tell which is which from the request, and neither can the next session: the
 correction has been nobody's job. That is what this file is for.
 
+UPDATE 2026-11-11 -- the filter item moved, and what moved is narrower than it sounds
+-------------------------------------------------------------------------------------
+The launcher now installs a seccomp allowlist (`canonical/runtime/worker_syscall_allowlist_v1.py`)
+in the same step that enters the worker's root, so nothing in the worker runs without it. The
+probe therefore stops reading the launcher's *text* for the word and **asks the worker**: is a
+filter in force, and does it refuse calls the kernel would otherwise have answered?
+
+    seccomp filter ................... PRESENT AND ENFORCING (observed inside the worker)
+    host libraries shipped ........... STILL PRESENT. The review is still right.
+
+The review asked for "**reviewed** syscall filtering". A probe can observe *filtering*. It cannot
+observe *reviewed*: whether that list is the right list is a judgement about 193 allowed calls,
+and it belongs to someone who did not write them. That is now item three of
+`what_a_verifier_must_do`. One objection of the nine still holds exactly as written.
+
 WHAT THIS IS NOT
 ----------------
 This is a **producer-run self-report**. The review states in its own words that a self-report
@@ -195,20 +210,68 @@ def _probe_resource_limits(ws, _):
             "memory/pid/file/fd limits are enforced inside the worker")
 
 
+# Asked inside the worker. Every call below is one the kernel answers with something OTHER than
+# the filter's answer when no filter is in force. Measured on the unfiltered launcher (main
+# 400ad21d, this machine): netlink socket -> a descriptor, io_uring_setup -> EFAULT, personality
+# -> answered, keyctl -> ENOKEY, setns -> EBADF, ptrace -> ESRCH, syncfs -> EBADF, clone3 ->
+# EINVAL. So EPERM / ENOSYS here is the filter speaking and not a missing capability.
+# (`unshare(CLONE_NEWUSER)` is deliberately absent: a chrooted worker gets EPERM for it with or
+# without a filter, so it would have proved nothing.) None of the calls changes anything.
+_SYSCALL_QUESTIONS = r"""
+import ctypes, json
+libc = ctypes.CDLL(None, use_errno=True)
+libc.syscall.restype = ctypes.c_long
+def ask(number, *args):
+    ctypes.set_errno(0)
+    result = libc.syscall(ctypes.c_long(number), *[ctypes.c_long(a) for a in args])
+    return "errno %d" % ctypes.get_errno() if result == -1 else "answered"
+print(json.dumps({
+    "filter_mode": libc.prctl(21, 0, 0, 0, 0),          # PR_GET_SECCOMP: 2 = a filter is in force
+    "no_new_privs": libc.prctl(39, 0, 0, 0, 0),         # PR_GET_NO_NEW_PRIVS
+    "refused": {
+        "socket(AF_NETLINK)": ask(41, 16, 3, 0),
+        "io_uring_setup": ask(425, 0, 0),
+        "personality(query)": ask(135, 0xffffffff),
+        "keyctl(get thread keyring)": ask(250, 0, -1, 0),
+        "setns(no such fd)": ask(308, -1, 0),
+        "ptrace(peek, no such pid)": ask(101, 1, 0, 0, 0),
+        "syncfs(no such fd)": ask(306, -1),
+    },
+    "not_implemented": {"clone3": ask(435, 0, 0)},
+    "ordinary": {"getpid": ask(39), "socket(AF_UNIX)": ask(41, 1, 1, 0)},
+}))
+"""
+
+
 def _probe_seccomp(ws, _):
-    """Review: 'lacks reviewed syscall filtering'. This is the item the repository has NOT
-    fixed, and the probe reports it as unsatisfied on purpose."""
-    pgrep = subprocess.run(["grep", "-rln", "seccomp", "--include=*.py",
-                            str(ROOT / "canonical/runtime")], capture_output=True, text=True)
-    launcher = ROOT / "canonical/runtime/zero_ambient_namespace_launcher_v1.py"
-    src = launcher.read_text(encoding="utf-8") if launcher.exists() else ""
-    has_filter = "seccomp" in src.lower()
-    hits = [h for h in pgrep.stdout.split("\n") if h.strip()]
-    return (SATISFIED if has_filter else NOT_SATISFIED,
-            "files mentioning seccomp under canonical/runtime: %d; launcher names it: %s"
-            % (len(hits), has_filter),
-            "NO SYSCALL FILTER. Namespaces + dropped capabilities + no-new-privs are not a "
-            "syscall allowlist, and the review is right to require one")
+    """Review: 'lacks reviewed syscall filtering'. Observed in the worker, not read from source:
+    a filter is in force, it refuses a sample of calls the kernel would have answered, it answers
+    'not implemented' where the C library must fall back, and ordinary calls still go through.
+    What this cannot show is the word 'reviewed'."""
+    import platform
+    if platform.machine().lower() != "x86_64":
+        return (UNMEASURABLE, "the questions use x86_64 call numbers; this is %s" % platform.machine(),
+                "no table for this machine: the launcher refuses to start a worker here")
+    from canonical.runtime import worker_syscall_allowlist_v1 as allowlist
+    r = _run(ws, ["python3", "-I", "-c", _SYSCALL_QUESTIONS])
+    try:
+        seen = json.loads(str(r.get("stdout") or "").strip().splitlines()[-1])
+    except (ValueError, IndexError):
+        return (NOT_SATISFIED, "the worker gave no answer: exit %s, %r" % (r.get("exit"), str(r.get("stderr"))[:80]),
+                "a filter that cannot be observed is not counted as one")
+    ok = (seen.get("filter_mode") == 2 and seen.get("no_new_privs") == 1
+          and all(v == "errno 1" for v in seen["refused"].values())
+          and all(v == "errno 38" for v in seen["not_implemented"].values())
+          and all(v == "answered" for v in seen["ordinary"].values()))
+    listed = allowlist.describe()
+    return (SATISFIED if ok else NOT_SATISFIED,
+            "in the worker: filter_mode=%s no_new_privs=%s refused=%s not_implemented=%s ordinary=%s; "
+            "allowlist %d calls, %d refused by name, sha256 %s"
+            % (seen.get("filter_mode"), seen.get("no_new_privs"), sorted(set(seen["refused"].values())),
+               sorted(set(seen["not_implemented"].values())), sorted(set(seen["ordinary"].values())),
+               listed["allowed_count"], listed["refused_by_name_count"], listed["filter_sha256"]),
+            "A FILTER IS IN FORCE AND REFUSES. Whether its list is the right list is a review of "
+            "worker_syscall_allowlist_v1, which a probe cannot perform and the producer must not")
 
 
 def _probe_host_libraries(ws, _):
@@ -295,8 +358,9 @@ def main() -> int:
             "add the two items no probe can settle: an ATTACK CAMPAIGN (this suite tests "
             "properties, not adversaries) and a PINNED MINIMAL RUNTIME (the worker runs the "
             "host's libc)",
-            "decide whether a syscall allowlist is required; if it is, this carrier cannot be "
-            "qualified as it stands, because it has none",
+            "review the syscall allowlist itself (canonical/runtime/worker_syscall_allowlist_v1.py; "
+            "its describe() and decide() answer for any call): the probe shows a filter is in force "
+            "and refuses a sample, never that the 193 calls it allows are the right ones",
         ],
         "explicitly_not": [
             "carrier qualification",

@@ -1,0 +1,63 @@
+{
+ "adapter_path": "canonical/runtime/bound_capabilities/file_edit.py",
+ "adapter_sha256": "153c5ef30c7fa34489900d19145ef32ae2545146b844e500976459485b60a847",
+ "capability_id": "file.line.appended.v1",
+ "checks": [
+  {
+   "expected": "alpha\nbeta\nGamma Delta\nomega\n",
+   "name": "the file on disk is exactly the expected bytes",
+   "ok": true,
+   "on_disk": "alpha\nbeta\nGamma Delta\nomega\n"
+  },
+  {
+   "adapter_reported": "4e626d77684abacec0323dabbf9eab14531db8f4da4aea4fe2fd45aa6ad3a80b",
+   "name": "the adapter's own digest is the digest of those bytes",
+   "ok": true,
+   "recomputed_here": "4e626d77684abacec0323dabbf9eab14531db8f4da4aea4fe2fd45aa6ad3a80b"
+  },
+  {
+   "adapter_reported": "6f2f7aed3b596b1e97df87d7593dc14be33dd1286fb83367e3de34f68397ec6d",
+   "name": "the adapter reports the pre-image it actually read",
+   "ok": true
+  },
+  {
+   "adapter_returned": true,
+   "name": "the edit reports itself verified",
+   "ok": true
+  },
+  {
+   "name": "a second run reports unchanged rather than writing again",
+   "ok": true
+  },
+  {
+   "expects": "REFUSES_TO_REWRITE_SOURCE_CODE_IN_PLACE",
+   "name": "refuses to rewrite source code in place",
+   "ok": true,
+   "refused_with": "REFUSES_TO_REWRITE_SOURCE_CODE_IN_PLACE:.py"
+  },
+  {
+   "expects": "PATH_OUTSIDE_REPOSITORY",
+   "name": "refuses a file outside the repository",
+   "ok": true,
+   "refused_with": "PATH_OUTSIDE_REPOSITORY"
+  },
+  {
+   "expects": "PATH_NOT_STATED_IN_THE_SENTENCE",
+   "name": "refuses a file the sentence does not name",
+   "ok": true,
+   "refused_with": "PATH_NOT_STATED_IN_THE_SENTENCE:edit_append.txt"
+  }
+ ],
+ "claim": "appends the stated line to the stated file, atomically, reads it back and digests both ends, and refuses an unstated line and a request to remove something",
+ "independence": "code-level only: the expected answers are computed from a world this file builds with the standard library, and the adapters are reached through the real dispatcher rather than imported",
+ "independent_personnel_verification": false,
+ "mission_id": "ASTRA-VERIFY-FILE-APPEND-001",
+ "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+ "mission_sha256": "24a5c88965f2fbd21fb1f81f688b81df7354d7d043a743209034b0d88bb585ab",
+ "producer": "arena agent session, 2026-11-02",
+ "replay": "python3 canonical/runtime/verify_file_facts_provenance_v1.py --check file.line.appended.v1",
+ "schema": "PROJECT_BRAIN_FILE_FACTS_PROVENANCE_V1",
+ "status": "COMPLETE",
+ "verified_at": "2026-11-11T17:11:28Z",
+ "world": "canonical/astra_runtime/tmp/file_facts_provenance_v1"
+}

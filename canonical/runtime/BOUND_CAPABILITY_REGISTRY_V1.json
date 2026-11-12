@@ -3072,6 +3072,19 @@
     "git.working_tree.inspect",
     "git.commit.create"
    ],
+   "request_word_coverage": "majority",
+   "request_words_also_served": {
+    "words": [
+     "changed",
+     "function",
+     "since"
+    ],
+    "required_by": [
+     "canonical/tests/test_a_question_about_the_repository_is_answered_by_the_repository_v1.py :: What changed since the last commit?",
+     "canonical/tests/test_a_pending_inventory_row_is_not_an_answer_v1.py :: Who last changed line 2 of <file>?",
+     "canonical/tests/test_a_capability_may_not_overwrite_the_file_it_reads_v1.py :: Who last changed the function line_total in <file>?"
+    ]
+   },
    "requires": [
     "git.repository.available"
    ],
@@ -7942,6 +7955,14 @@
     "python.source.change_impact.test_selection",
     "python.source.change_impact.testselect.v1"
    ],
+   "request_words_also_served": {
+    "words": [
+     "run"
+    ],
+    "required_by": [
+     "canonical/tests/test_the_answer_must_be_the_effect_that_was_stated_v1.py :: Which tests do I need to run after changing <file>?"
+    ]
+   },
    "requires": [],
    "result_fields": [
     "adapter",
@@ -11935,6 +11956,393 @@
     },
     "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json"
    }
+  },
+  "file.question.taught_words.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "taught_program_recomputed",
+     "field": "answer"
+    }
+   },
+   "adapter_module": "file_question_taught_words",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [],
+   "limitations": [
+    "Answers only when every word of the sentence is a word taught by example answers, a structure word, the file, or the text to look for. Otherwise it refuses and names the word.",
+    "Does not model word order or scope: two sentences with the same words are one request to it.",
+    "The fifteen operation parts are built in; only the words are learned. One word cannot have two meanings.",
+    "Lines end at a newline byte. Reads one UTF-8 file of at most 4 MiB inside the repository root; never writes and never starts a process."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "file.question.taught_words.answer"
+   ],
+   "read_only": true,
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "data",
+    "lessons_sha256",
+    "output_path",
+    "output_verified",
+    "path",
+    "program",
+    "schema",
+    "source_sha256",
+    "word_meanings"
+   ],
+   "selection": "Not chosen by shared words. The front door selects this row only when taught words account for every word of the sentence (canonical/runtime/taught_words_v1.py).",
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_question_taught_words.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001__RECEIPT.json",
+    "mission_path": "canonical/verification/TAUGHT_WORDS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-11",
+    "independence": "code-level only: expected answers are fixed by construction of the world and recomputed by a checker that shares no code with the producer; the row is reached through the real dispatcher with its declared expectation; agreement with wc and grep is checked where they exist. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_question_taught_words",
+     "world_answers": {
+      "how many unique lines": 5,
+      "sum of the numbers after the first": 42
+     }
+    },
+    "adapter_sha256": "c11a5fb9443cbccbcbff33fffd9308bd978b1ef7650a4f319c2030ab6e81cffc"
+   }
+  },
+  "file.copy.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "copy",
+     "goal": "${input.goal}",
+     "path": "${input.path}",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "output_path",
+     "source_state": "retained",
+     "same_as_source": true
+    }
+   },
+   "adapter_module": "file_ops",
+   "computes_command": {
+    "argvs": [
+     [
+      "cp",
+      "${path}",
+      "${output_path}"
+     ]
+    ],
+    "answer_field": "destination_path",
+    "note": "performed in process with pathlib; no shell and no subprocess"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "copy the file",
+    "copy to",
+    "make a copy",
+    "duplicate the file"
+   ],
+   "limitations": [
+    "Writes only the destination the sentence states, and only inside the repository.",
+    "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    },
+    "output_path": {
+     "type": "auto_path",
+     "suffix": ""
+    }
+   },
+   "provides": [
+    "copy.file"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+    "modules": [
+     "ctypes",
+     "errno",
+     "hashlib",
+     "os",
+     "pathlib",
+     "re",
+     "sys"
+    ],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COPY-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: a world is built with known bytes and the result is read back and digested. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_ops",
+     "command": "copy"
+    },
+    "adapter_sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28"
+   },
+   "request_word_coverage": "required"
+  },
+  "file.line.appended.v1": {
+   "computes_command": {
+    "argvs": [
+     [
+      "sed",
+      "-i",
+      "$a ${line}",
+      "${path}"
+     ]
+    ],
+    "answer_field": "answer",
+    "note": "performed in process by rewriting the file atomically and reading it back; no shell and no subprocess. `$a ${line}` is a literal `$a ` followed by the stated line, so this declaration covers appending THAT line and nothing else -- a substitution at the same position does not match."
+   },
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "append_line",
+     "goal": "${input.goal}",
+     "path": "${input.path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "after_sha256",
+     "path_field": "path",
+     "path_input": "path"
+    }
+   },
+   "adapter_module": "file_edit",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "add a line containing",
+    "append a line",
+    "add a line to the file",
+    "append the line"
+   ],
+   "handles_verbs": [
+    "add",
+    "append",
+    "insert"
+   ],
+   "limitations": [
+    "Declares the command line it is byte-identical to (sed -i '$a <stated line>'), checked against the real program. The declaration covers only that subcommand -- a substitution does not match -- and it stops at one case: sed's $a addresses the LAST LINE, so on an EMPTY file sed appends nothing while this row adds the line, which is the useful reading and is stated rather than hidden.",
+    "Refuses when the line to add is not stated in the sentence, rather than inventing one.",
+    "Rewrites the stated file in place, atomically, and reads it back; refuses source code, non-UTF-8 files, files outside the repository, and any file the sentence does not name."
+   ],
+   "platforms": [
+    "linux",
+    "darwin",
+    "windows"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    }
+   },
+   "provides": [
+    "edit.file.append_line"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "after_line_count",
+    "after_sha256",
+    "answer",
+    "before_line_count",
+    "before_sha256",
+    "byte_count",
+    "command",
+    "output_verified",
+    "path",
+    "schema",
+    "unchanged"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_edit.py",
+    "modules": [],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-APPEND-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: the expected bytes are computed before the write, the temporary file is digested, and the source is re-read and re-digested after the atomic move. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_edit",
+     "command": "append_line"
+    },
+    "adapter_sha256": "153c5ef30c7fa34489900d19145ef32ae2545146b844e500976459485b60a847"
+   },
+   "request_word_coverage": "required"
+  },
+  "file.rename.v1": {
+   "action_template": {
+    "type": "invoke_capability",
+    "args": {
+     "command": "rename",
+     "goal": "${input.goal}",
+     "path": "${input.path}",
+     "output_path": "${input.output_path}"
+    },
+    "expect": {
+     "type": "file_sha256_matches",
+     "field": "destination_sha256",
+     "path_field": "destination_path",
+     "path_input": "output_path",
+     "source_state": "absent",
+     "same_as_source": true
+    }
+   },
+   "adapter_module": "file_ops",
+   "computes_command": {
+    "argvs": [
+     [
+      "mv",
+      "${path}",
+      "${output_path}"
+     ]
+    ],
+    "answer_field": "destination_path",
+    "note": "performed in process using an atomic non-replacing rename on Linux; no shell and no subprocess"
+   },
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "rename the file",
+    "rename to",
+    "move the file",
+    "change the name"
+   ],
+   "limitations": [
+    "Writes only the destination the sentence states, and only inside the repository.",
+    "Refuses an existing destination unless the sentence asks to overwrite or replace, refuses the source as its own destination, and reads the result back to verify the bytes.",
+    "Non-overwriting rename uses Linux renameat2(RENAME_NOREPLACE) and refuses where that atomic primitive is unavailable."
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "proposal_bindings": {
+    "goal": {
+     "type": "goal_text"
+    },
+    "path": {
+     "type": "path_file_or_dir"
+    },
+    "output_path": {
+     "type": "auto_path",
+     "suffix": ""
+    }
+   },
+   "provides": [
+    "rename.file"
+   ],
+   "requires": [],
+   "result_fields": [
+    "adapter",
+    "answer",
+    "byte_count",
+    "command",
+    "destination_path",
+    "destination_sha256",
+    "output_verified",
+    "path",
+    "schema",
+    "source_sha256"
+   ],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/file_ops.py",
+    "modules": [
+     "ctypes",
+     "errno",
+     "hashlib",
+     "os",
+     "pathlib",
+     "re",
+     "sys"
+    ],
+    "type": "python_stdlib",
+    "version_family": "3.x"
+   },
+   "status": "VERIFIED_BOUND_CAPABILITY",
+   "verification": {
+    "receipt_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-RENAME-001__RECEIPT.json",
+    "mission_path": "canonical/verification/FILE_FACTS_PROVENANCE_MISSION_V1.md",
+    "producer": "arena agent session, 2026-11-02",
+    "independence": "code-level only: a world is built with known bytes and the result is read back and digested. NOT independent-personnel verification",
+    "independent_personnel_verification": false,
+    "observed_effect": {
+     "adapter": "file_ops",
+     "command": "rename"
+    },
+    "adapter_sha256": "fa4e19a81841f1d2fdd19ac0154210e64cbde149dbb8c712423afa50df410b28"
+   },
+   "request_word_coverage": "required"
   }
  },
  "schema": "PROJECT_BRAIN_BOUND_CAPABILITY_REGISTRY_V1"

@@ -60,6 +60,7 @@ Zero credit, zero spend, zero models.
 """
 from __future__ import annotations
 
+import importlib
 import ast
 import contextlib
 import contextvars
@@ -259,11 +260,18 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
 # both roles at once.  So the identifier may not be continued by `/` or by a
 # dotted suffix.  Measured: without this the role rule never fired.
 _NAME_END = r"(?![./][A-Za-z0-9_])"
+# A name may be written in quotes or backticks: "the variable 'tmp'" names a variable exactly as
+# "the variable tmp" does.  Measured 2026-11-11: the quoted form stated no role at all, so the
+# rule below never ran for it.
+_NAME = r"[`\x27\"]?(?:[A-Za-z_][A-Za-z0-9_]*)"
 _ROLE_WORDS: tuple[tuple[str, "re.Pattern[str]"], ...] = (
-    ("PARAMETER", re.compile(r"\b(?:parameter|argument|kwarg|keyword\s+argument)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
-    ("LOCAL", re.compile(r"\b(?:local\s+variable|variable)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
-    ("SYMBOL", re.compile(r"\b(?:function|method|class|symbol|def)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
+    ("PARAMETER", re.compile(r"\b(?:parameter|argument|kwarg|keyword\s+argument)\s+" + _NAME + _NAME_END, re.I)),
+    ("LOCAL", re.compile(r"\b(?:local\s+variable|variable)\s+" + _NAME + _NAME_END, re.I)),
+    ("SYMBOL", re.compile(r"\b(?:function|method|class|symbol|def)\s+" + _NAME + _NAME_END, re.I)),
 )
+# A parameter or a variable is never where an edit happens; it is what the edit is about.  A
+# function, a method or a class can be either ("rename the function f", "... in the function f").
+_OPERAND_ROLES = frozenset({"PARAMETER", "LOCAL"})
 # The row's own declaration of what it edits, in the registry's existing slots.
 _ROLE_SLOTS: tuple[tuple[str, frozenset[str]], ...] = (
     ("PARAMETER", frozenset({"old_param", "new_param", "param", "parameter", "param_name"})),
@@ -298,9 +306,37 @@ def object_role_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     """
     stated = stated_object_roles(goal)
     declared = declared_object_roles(entry)
-    if stated and declared and not (stated & declared):
+    if object_roles_a_row_cannot_answer(stated, declared):
         return ["OBJECT_ROLE_MISMATCH:" + "+".join(sorted(stated)) + "!=" + "+".join(sorted(declared))]
     return []
+
+
+def object_roles_a_row_cannot_answer(stated: set[str], declared: set[str]) -> set[str]:
+    """The roles a sentence states that a row with these declared roles has no slot for.
+
+    Two cases, and nothing else:
+
+    * the row declares none of the stated roles (the original rule); or
+    * the sentence names a parameter or a variable and the row cannot hold one.
+
+    The second case was measured on main 62fa7efa, three sentences out of three:
+
+        "rename the variable tmp to product in the function compute in <f>"
+          -> python.refactor.rename_symbol.v1, admitted because the sentence ALSO says
+             "function" -> PASS, and the FUNCTION was renamed: ``def product(a, b, ...)``.
+
+    The sentence states two roles: the variable is what the rename is about, the function is
+    where.  A row that declares only the second can bind every slot it has and still not be
+    able to touch the object of the sentence.  Sharing one role is therefore not enough when
+    the role left over is an operand.
+
+    A sentence that states no role, and a row that declares none, are untouched as before.
+    """
+    if not stated or not declared:
+        return set()
+    if not (stated & declared):
+        return set(stated)
+    return (stated & _OPERAND_ROLES) - declared
 
 
 def declared_object_roles(entry: Mapping[str, Any]) -> set[str]:
@@ -323,8 +359,63 @@ def _input_format_mismatch(cid: str, inputs: Any) -> str | None:
     return None
 
 
+# The admission rules a FULL TAUGHT READING overrides, and nothing else.  Each of the three guesses
+# what a sentence asks from a fixed list: a leading verb that usually means a change ("add ..."), a
+# command line inferred from the English ("how many lines" read as ``wc -l``, also for "how many
+# lines mention ERROR"), and a keyword score, which is zero for a row that declares no keywords.
+_RULES_A_FULL_TAUGHT_READING_OVERRIDES = frozenset({
+    "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE",
+    "NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
+    "R3_WEAK_EVIDENCE",
+})
+# While the taught-words row is tried, no command chain may be dispatched in its place.
+_COMPOSER_CLOSED: contextvars.ContextVar[bool] = contextvars.ContextVar("composer_closed_during_taught_attempt", default=False)
+
+
+def _every_word_is_taught(goal: str, selected: str) -> bool:
+    """True when ``selected`` is the taught-words row and its lexicon accounts for every word of the sentence.
+
+    When every word of a sentence has a meaning that was TAUGHT by example answers, and those
+    meanings make one read-only operation, the sentence has been read word by word and there is
+    nothing left to guess: "add up the numbers" is a sum because a lesson said so.  The reading is
+    recomputed here from the sentence; no label on a plan is trusted.  A sentence that really
+    carries a command line contains words nobody taught, so it never qualifies.
+    """
+    try:
+        from canonical.runtime import taught_words_v1 as taught
+        return selected == taught.CAPABILITY_ID and taught.read_request(goal, ROOT).get("ok") is True
+    except Exception:  # noqa: BLE001 - no exemption on a fault
+        return False
+
+
 def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
-    """Judge one compiled route. Returns {"admitted": bool, ...evidence}."""
+    """Judge one compiled route. Returns {"admitted": bool, ...evidence}.
+
+    The judgement is ``_route_admission_by_evidence``, unchanged.  One addition: a refusal by one of
+    ``_RULES_A_FULL_TAUGHT_READING_OVERRIDES`` is lifted for the taught-words row when its lexicon
+    accounts for every word of the sentence, and the admission records which rule was lifted.
+    """
+    admission = _route_admission_by_evidence(goal, compiled, registry)
+    if admission.get("admitted") is True:
+        return admission
+    rule = str(admission.get("rule") or "")
+    selected = str(admission.get("selected_capability") or compiled.get("selected_capability") or "")
+    if rule not in _RULES_A_FULL_TAUGHT_READING_OVERRIDES or not _every_word_is_taught(goal, selected):
+        return admission
+    lifted = dict(admission)
+    lifted.update({"admitted": True, "rule": None, "overrode_rule": rule, "selected_capability": selected,
+                   "admission_basis": "EVERY_WORD_OF_THE_SENTENCE_READ_BY_TAUGHT_MEANINGS"})
+    lifted.pop("reason", None)
+    for key in ("matched_tokens", "matched_from_paths_only", "semantic_matched_tokens", "goal_future_artifacts",
+                "capability_output_keys", "stated_object_roles", "capability_object_roles"):
+        lifted.setdefault(key, [])
+    lifted.setdefault("score", 0)
+    lifted.setdefault("capability_input_keys", ["goal", "path"])
+    return lifted
+
+
+def _route_admission_by_evidence(goal: str, compiled: Mapping[str, Any], registry: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    """Judge one compiled route by its evidence. Returns {"admitted": bool, ...evidence}."""
     dag = compiled.get("capability_dag")
     if isinstance(dag, Mapping) and dag.get("schema") == front.DAG_SCHEMA:
         return dag_admission(goal, compiled, dag, registry)
@@ -351,6 +442,39 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
     if effect_error:
         return {"schema": SCHEMA, "admitted": False, "rule": effect_error,
                 "compiler_mode": mode, "selected_capability": selected}
+    # A READ-ONLY ROW MUST NOT BE THE ANSWER TO A SENTENCE THAT ASKS TO CHANGE THE FILE.
+    #
+    # Lexical overlap cannot see intent: "Delete the last line of <f>" contains
+    # "line", which is the token a line-count row legitimately provides.  Measured
+    # 2026-11-02 on the ordinary-phrasing probe: that sentence selected
+    # `file.line_count.v1`, ran it, and was reported as
+    # FAIL_CLOSED__NO_OBSERVED_EFFECT -- an execution answering a request to edit
+    # with a reading of the file.  Nothing was destroyed (the row never writes its
+    # input), which is exactly why the refusal belongs here rather than in the
+    # adapter: the route was wrong, not the effect.
+    #
+    # Scoped twice, so no other row moves.  Only a row that DECLARES
+    # ``read_only: true`` is judged, and only a sentence whose own leading verb is
+    # a mutation word is refused.  An unidentified verb keeps today's behaviour,
+    # which is what keeps this from becoming a vocabulary the registry has to
+    # satisfy before it can route at all.
+    #
+    # A DECLARATION OUTRANKS THE VERB.  "Sort the lines of <f>" opens with a word
+    # this table calls a mutation, but the command the sentence states is
+    # `sort <f>`, which only prints.  When the row declares exactly that argv, the
+    # sentence's own command is the better evidence about what it asks for, and
+    # the verb is not consulted.  A row that does not declare it keeps the refusal.
+    if entry.get("read_only") is True:
+        from canonical.runtime import declared_command_equivalence_v1 as _declared_read
+        _mutation = None
+        if _declared_read.matched_template(entry, composer_route.extract_argv(goal)) is None:
+            _mutation = _leading_mutation_word(goal)
+        if _mutation is not None:
+            return {"schema": SCHEMA, "admitted": False,
+                    "rule": "READ_ONLY_CAPABILITY_FOR_A_SENTENCE_THAT_ASKS_TO_CHANGE_THE_FILE",
+                    "compiler_mode": mode, "selected_capability": selected,
+                    "goal_verb": _mutation,
+                    "reason": "the sentence asks to %s; this row only reports what it reads" % _mutation}
     # An inventory row is keyed by the path of a file in THIS repository, so it can
     # only be chosen by a sentence that names that file.  Lexical overlap with a
     # filename is not evidence about the goal: it is evidence that the filename
@@ -391,6 +515,24 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {"schema": SCHEMA, "admitted": False,
                 "rule": "WRITE_WOULD_DISCARD_CONTENT_THE_SENTENCE_PROMISED_TO_KEEP",
                 "compiler_mode": mode, "selected_capability": selected}
+    # A ROW THAT PERFORMS ONE OPERATION IS NOT THE ROW FOR A DIFFERENT ONE.
+    #
+    # `handles_verbs` is the row's own declaration of the mutations it performs.
+    # Measured 2026-11-02 without it: "Delete the last line of <f>" was admitted
+    # to `file.line.appended.v1` on the shared word "line", so a request to
+    # REMOVE was routed to a row that only ever adds. That row refused -- the
+    # right outcome from the wrong route, which is the shape that later becomes a
+    # false pass. A row that declares no verbs is unaffected.
+    _handles = {str(verb).lower() for verb in (entry.get("handles_verbs") or [])}
+    if _handles:
+        _opening = _leading_mutation_word(goal)
+        if (_opening is not None and _opening not in _handles
+                and not (_opening in _GENERIC_TRANSFORMATION_VERBS
+                         and _names_the_rows_own_verb(goal, _handles))):
+            return {"schema": SCHEMA, "admitted": False,
+                    "rule": "THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM",
+                    "compiler_mode": mode, "selected_capability": selected,
+                    "handles": sorted(_handles), "asked_for": _opening}
     if (not capability_selection.is_computed_answer_delivery(goal)
             and not capability_selection.is_ast_code_edit_request(goal)
             and composer_route.extract_argv(goal) is not None):
@@ -408,7 +550,27 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         _command_slots = {s for s in _slots
                           if s == "argv" or s.endswith("_argv")
                           or s in ("command", "command_line", "cmd")}
-        if _slots and not _command_slots:
+        # A ROW THAT COMPUTES THE COMMAND'S ANSWER DOES NOT IGNORE THE COMMAND.
+        #
+        # The rule above refuses a capability with no command slot because such a
+        # capability answers nothing the sentence asked for.  That is true of a
+        # row whose contribution is lexical.  It is not true of a row that
+        # declares -- in the registry, one token at a time -- that it computes
+        # exactly this argv's answer in process.  Measured 2026-11-02: "Count the
+        # lines in <file>" extracts `wc -l <file>`, so the row that returns that
+        # number was refused by this gate, and the refusal surfaced as
+        # FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT -- the
+        # sentence was told a sandbox was missing when the machine had the answer
+        # and was not allowed to give it.
+        #
+        # The declaration is matched against the sentence's own argv position by
+        # position, so it cannot authorize a different command.  `$`-prefixed
+        # template tokens are the operands the row takes as inputs; every other
+        # token must equal the stated token, including the program name.  A row
+        # that declares nothing keeps the refusal exactly as before.
+        from canonical.runtime import declared_command_equivalence_v1 as _declared_commands
+        if _slots and not _command_slots and _declared_commands.matched_template(
+                entry, composer_route.extract_argv(goal)) is None:
             return {"schema": SCHEMA, "admitted": False,
                     "rule": "NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND",
                     "compiler_mode": mode, "selected_capability": selected}
@@ -482,7 +644,7 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         # ...and the contract must bind the object the sentence is ABOUT.
         stated_roles = stated_object_roles(goal)
         declared_roles = declared_object_roles(entry)
-        if stated_roles and declared_roles and not (stated_roles & declared_roles):
+        if object_roles_a_row_cannot_answer(stated_roles, declared_roles):
             return {**base, "admitted": False, "rule": "OBJECT_ROLE_MISMATCH",
                     "stated_object_roles": sorted(stated_roles),
                     "capability_object_roles": sorted(declared_roles),
@@ -535,6 +697,39 @@ def route_admission(goal: str, compiled: Mapping[str, Any], registry: Mapping[st
         return {**base, "admitted": False, "rule": "R1_PATH_TOKENS_ONLY"}
     if futures and not output_keys:
         return {**base, "admitted": False, "rule": "R2_OUTPUT_ARTIFACT_UNSERVED"}
+    # A SENTENCE THAT STATES A COMMAND, AND THE ONE ROW THAT DECLARES IT COMPUTES
+    # THAT COMMAND, IS EVIDENCE ABOUT THE ASK.
+    #
+    # The declaration is already trusted in the opposite direction: this gate
+    # REFUSES a row with no command slot for a sentence that states a command
+    # (NO_COMMAND_SLOT_FOR_THE_STATED_COMMAND), and it lets a declaration outrank
+    # a mutation verb.  Trusting it only to refuse made the rule one-sided.
+    # Measured 2026-11-02: "What files are in <D>?" settles `ls -A <D>`,
+    # `file.directory_listing.v1` declares exactly that argv, and the route was
+    # refused R13_DECLARED_INPUT_UNBINDABLE:path -- not because the row was wrong
+    # (it produces those bytes) but because the sentence shares no vocabulary
+    # with the row's keywords.  A sentence's own command is the strongest
+    # statement it can make about what it wants, and it is re-derived by the same
+    # acceptance layer that re-derives every other argv.
+    #
+    # Three limits, all already project rules: the match is positional, so the
+    # declaration cannot authorize a different command; exactly ONE row in the
+    # live registry may declare it, because a tie between rows is not evidence
+    # (the same rule F32 uses); and every refusal above this line still stands --
+    # this can only supply the lexical evidence a thin sentence lacks, never
+    # displace a refusal about the operation, the mutation, or the payload.
+    _stated_argv = composer_route.extract_argv(goal)
+    if _stated_argv is not None and len(semantic) <= 1:
+        from canonical.runtime import declared_command_equivalence_v1 as _declared_evidence
+        _declaring = [cid for cid, other in sorted(registry.items())
+                      if isinstance(other, Mapping)
+                      and _declared_evidence.matched_template(other, _stated_argv) is not None]
+        if _declaring == [str(selected)]:
+            return {**base, "admitted": True, "rule": None,
+                    "admission_basis": "THE_SENTENCE_STATES_A_COMMAND_THIS_ROW_DECLARES_IT_COMPUTES",
+                    "stated_argv": list(_stated_argv),
+                    "declared_template": (_declared_evidence.matched_template(entry, _stated_argv) or {}).get("template")}
+
     if len(semantic) <= 1:
         # ...unless the binder already knows WHY: then the string is the slot, not a verdict on
         # the sentence.  Same refusal, same place in the chain, a cause the caller can act on.
@@ -1133,7 +1328,7 @@ class LocalExecutionFailure(RuntimeError):
     pass
 
 
-def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
+def _check_expectation(expect: Any, result: Mapping[str, Any], args: Mapping[str, Any] | None = None) -> None:
     """The kernel's expectation semantics (field_nonempty / field_contains / field_equals)."""
     if expect is None:
         return
@@ -1150,6 +1345,18 @@ def _check_expectation(expect: Any, result: Mapping[str, Any]) -> None:
         ok = str(expect.get("value", "")) in str(value or "")
     elif typ == "field_equals":
         ok = value == expect.get("value")
+    elif typ in ("file_sha256_matches", "file_observation_matches", "taught_program_recomputed"):
+        if typ == "file_sha256_matches":
+            from canonical.runtime import file_artifact_expectation_v1 as independent
+        elif typ == "taught_program_recomputed":
+            # The answer of the taught-words row is recomputed from the file by a module that shares
+            # no code with the one that produced it.
+            from canonical.runtime import taught_words_check_v1 as independent
+        else:
+            from canonical.runtime import file_observation_expectation_v1 as independent
+        ok, detail = independent.verify(expect, result, args or {}, ROOT)
+        if not ok:
+            raise LocalExecutionFailure("ACTION_EXPECTATION_FAILED:" + detail)
     else:
         raise LocalExecutionFailure("ACTION_EXPECTATION_TYPE_UNKNOWN:" + str(typ))
     if not ok:
@@ -1358,7 +1565,7 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure(str(exc)) from exc
     result.setdefault("capability_id", cid)
     result["dependency"] = {"type": str(source.get("type") or ""), "modules": list(modules), "executor": LOCAL_EXECUTION_PROOF}
-    _check_expectation(action.get("expect"), result)
+    _check_expectation(action.get("expect"), result, call_args)
     return result
 
 
@@ -2205,6 +2412,283 @@ _CHANGE_IMPACT_REQUEST_RE = re.compile(
     r"\bwhich tests?\b[^.\n]{0,60}?\b(?:run|runs|need|needs|affected|impact\w*)\b|"
     r"\baffected tests?\b|\bimpact\w*\b[^.\n]{0,20}\btests?\b|"
     r"\btests?\b[^.\n]{0,30}\baffected\b", re.IGNORECASE)
+
+
+# THE WORDS THE SENTENCE USES ARE ASKED BEFORE THE RUN, LIKE THE ANSWER AND THE AUTHORITY ARE.
+#
+# A row wins a sentence by the tokens it MATCHED.  Nothing asked about the tokens it did not
+# match.  Measured 2026-11-11 with 32 everyday file requests in three wordings, each judged by an
+# oracle that never sees the run: 30 sentences passed and 13 of the 30 were wrong.  "how many
+# unique lines are in F" matched how/many/lines, bound F, ran ``file.line_count.v1`` and returned
+# the total; "compress F with bzip2" ran gzip and removed F; "make F executable" made a backup.
+# Each time the row did exactly what the row does and its declared expectation verified.  The
+# word that made the sentence a different request -- "unique", "bzip2", "executable" -- was in
+# the sentence and in no part of the decision.
+#
+# The rule is the smallest one with no such case.  Every word of the sentence must be accounted
+# for by one of:
+#   the router    it is a token the row was matched on;
+#   the row       it is a word of the row's own declared ``keywords``;
+#   a path        it belongs to a path, a file name, or text the sentence quotes;
+#   the adapter   the row binds the sentence itself (``goal_text``) and its adapter reads the
+#                 word as data (the line to append) -- by the adapter's own reading, not a
+#                 second one written here;
+#   the language  it is a closed-class English word, which carries no request of its own.
+# Any other word is a request this row was not chosen for.  The run is refused BEFORE it starts
+# and the refusal names the word, so the gap is exact and one declaration closes it.
+#
+# Scope: a row that declares ``request_word_coverage: required``.  That is data in the row, not
+# an id here.  Rows reached through typed plans, compositions and repair loops carry their own
+# acceptance (a test suite, a typed contract) and are untouched.
+#
+# What this is not: proof that the row answers the sentence.  A request that differs only in
+# closed-class words or word order ("what are the lines" against "how many lines") passes it.
+_CLOSED_CLASS_WORDS = frozenset("""
+a an the of in on at to into onto from for by with as about inside within under over between through
+i me my we us our you your it its this that these those they them their which who whom whose what
+is are was were be been being am do does did have has had can could will would shall should may might must
+and or but so then if than how many much when where why there here please tell called named file files path
+""".split())
+_QUOTED_TEXT_RE = re.compile(r"""[\"'`][^\"'`\n]*[\"'`]""")
+_PATHLIKE_WORD_RE = re.compile(r"[/\\]|\.[A-Za-z0-9]{1,5}$")
+_WORD_RE = re.compile(r"[a-z0-9]+")
+
+
+def _adapter_data_words(sentence: str, entry: Mapping[str, Any]) -> set[str]:
+    """Words the row's own adapter reads out of the sentence as data, by the adapter's own reading."""
+    bindings = entry.get("proposal_bindings") or {}
+    if not any(isinstance(b, Mapping) and b.get("type") == "goal_text" for b in bindings.values()):
+        return set()
+    try:
+        module = importlib.import_module("canonical.runtime.bound_capabilities." + str(entry.get("adapter_module")))
+    except Exception:  # an adapter that cannot be imported accounts for nothing
+        return set()
+    words: set[str] = set()
+    stated = getattr(module, "STATED_TEXT", None) or getattr(module, "_STATED_TEXT", None)
+    match = stated.search(sentence) if hasattr(stated, "search") else None
+    if match:
+        words.update(_WORD_RE.findall(match.group(0).lower()))
+    # An adapter that reads the text to search for with a function rather than one pattern
+    # ("Which files in <d> contain beta?"): the value it reads is data, by its own reading.
+    reader = getattr(module, "_stated_search_text", None)
+    if callable(reader):
+        try:
+            words.update(_WORD_RE.findall(str(reader(sentence)).lower()))
+        except Exception:  # noqa: BLE001 - the adapter states no search text here
+            pass
+    return words
+
+
+def request_words_not_accounted_for(sentence: str, admission: Mapping[str, Any],
+                                    entry: Mapping[str, Any]) -> list[str]:
+    """The words of ``sentence`` that nothing in the decision accounts for, in sentence order."""
+    accounted = set(_CLOSED_CLASS_WORDS)
+    for key in ("matched_tokens", "matched_from_paths_only"):
+        accounted.update(str(token).lower() for token in (admission.get(key) or ()))
+    for phrase in (entry.get("keywords") or ()):
+        accounted.update(_WORD_RE.findall(str(phrase).lower()))
+    # Words the row declares it serves without their taking part in SELECTION ("Read <file>",
+    # "Give me the number of lines in <file>"): each comes from a sentence the row's own tests require.
+    for word in ((entry.get("request_words_also_served") or {}).get("words") or ()):
+        accounted.update(_WORD_RE.findall(str(word).lower()))
+    accounted |= _adapter_data_words(str(sentence or ""), entry)
+    out: list[str] = []
+    for raw in _QUOTED_TEXT_RE.sub(" ", str(sentence or "")).split():
+        word = raw.strip(".,;:!?()[]{}")
+        if not word or _PATHLIKE_WORD_RE.search(word):
+            continue
+        for token in _WORD_RE.findall(word.lower()):
+            if token not in accounted and token not in out:
+                out.append(token)
+    return out
+
+
+# ---- A ROW CHOSEN BY SHARED WORDS MUST EXPLAIN MOST OF THE REQUEST ---------------------------
+#
+# The check above is opt-in: a row declares ``request_word_coverage: required`` and from then on
+# answers only sentences whose every word it accounts for.  The rows that existed before it never
+# opted in, and they are the ones a stranger's sentence reaches.  Measured 2026-11-11 on main
+# (3b9c5d1f) with 2,500 sentences drawn from a public corpus of shell requests written by other
+# people (nl2bash; none of it is vendored here):
+#
+#   * 292 sentences reached this point with an older row selected and bound; 27 came back
+#     ``pass`` and 26 of those answer a different request.  "Print information about all users
+#     who are logged in" shares ``all`` and ``who`` with the python symbol index (score 8),
+#     ``source_root`` is filled with ``.``, the index of this repository is built and verified,
+#     and the door reports pass.  16 of the 26 were chosen by the lexical match; 10 by the typed
+#     plan's git family, which the single word "history" or "status" starts.
+#   * three of the refused ones had already written a file where the sentence pointed --
+#     "... redirecting error messages to /dev/null" left a report at ``dev/null`` in the root --
+#     because the refusal came after the run.
+#
+# In each of them the words the row shares with the sentence are a small minority of what the
+# sentence says.  So a row chosen by shared words is asked, before it starts, how much of the
+# request it explains:
+#
+#   explained     a content word the row was matched on, or that the row's own declaration uses
+#                 (keywords, provides, requires, result fields, the names of its arguments, the
+#                 effect its verification observed, words it declares it also serves, its id);
+#   unexplained   a content word nothing in the row says anything about;
+#   neither       closed-class words, quantifiers, numbers, paths, quoted text, identifiers, words
+#                 that state where a result goes, and every word the row BOUND AS DATA into one
+#                 of its inputs (a row that takes the sentence itself as an input reads its own
+#                 data out of it, so nothing of that sentence is unexplained HERE -- its adapter
+#                 must refuse).
+#
+# When the unexplained words OUTNUMBER the explained ones the row is not what the sentence is
+# about, and the run is refused before it starts, naming both lists.
+#
+# Scope, stated as data and not as ids:
+#   * decisions whose ``compiler_mode`` is the lexical match -- a typed plan is chosen by a
+#     pattern grammar, not by counting words, and long task descriptions reach it legitimately;
+#   * plus any row that opts in with ``request_word_coverage: majority`` (the git row does);
+#   * never a row under the strict check above, never a decision whose basis is that every word
+#     was read, and never a sentence that names the row by its id.
+#
+# Measured on the tree that carries this rule, each against main with the same input:
+#   * a fresh sample of 2,500 such sentences that took no part in designing the rule: pass
+#     33 -> 11 (2 of them right both times, so 31 wrong -> 9); sentences that started a row
+#     415 -> 57; files left in the repository root 2 -> 0; no sentence passes that did not before.
+#   * the heartbeat with one seed: 187 of 276 goals pass before and after, family by family, and
+#     60 of 60 out-of-scope goals stay refused.  At the public check's own size (50 per family,
+#     100 out of scope) 1,108 decisions are in scope and 3 are refused: each is the docx verifier
+#     chosen on the word "verify" for a knowledge-status goal, in a family that passes 0 of 6.
+#   * 215 test files that load this door or the registry (2,190 tests): none that passed fails.
+#
+# Two alternatives were measured and dropped.  Refusing a tie too would refuse 27 of those 1,108
+# heartbeat decisions ("Use jq to run the filter ..." explains two words and leaves two).
+# Reading the whole action template as declaration explains "expect", "field", "type" and
+# "value" for every row.
+#
+# What this is not: the strict check.  A sentence most of whose words a row does explain still
+# passes ("Show the status of the printer queue" reaches git status on a tie), and a row that
+# binds the sentence itself is untouched: ``evidence.claim_spec.bind.explicit_comparison.stdlib``
+# accounts for 6 of the 9 wrong passes that remain in the fresh sample.
+_LEXICAL_MATCH_COMPILER_MODE = "DETERMINISTIC_VERIFIED_CAPABILITY_MATCH"
+_QUANTIFIER_WORDS = frozenset("all any each every some both either neither other another such only also just".split())
+_RESULT_DESTINATION_WORDS = frozenset(
+    "save saves saved saving write writes written writing store stores stored storing output outputs result results report reports".split())
+_ROW_DECLARATION_FIELDS = ("keywords", "provides", "requires", "result_fields", "handles_verbs")
+
+
+def _word_stem(word: str) -> str:
+    """A deliberately small stem: plural, -ing, -ed and a final e.  Applied to both sides alike."""
+    for suffix in ("ings", "ing", "ed", "es", "s"):
+        if word.endswith(suffix) and len(word) - len(suffix) >= 3:
+            word = word[: len(word) - len(suffix)]
+            break
+    return word[:-1] if len(word) > 3 and word.endswith("e") else word
+
+
+def _words_in(value: Any, into: set[str]) -> set[str]:
+    if isinstance(value, str):
+        into.update(_WORD_RE.findall(value.lower()))
+    elif isinstance(value, Mapping):
+        for key, item in value.items():
+            _words_in(str(key), into)
+            _words_in(item, into)
+    elif isinstance(value, (list, tuple, set, frozenset)):
+        for item in value:
+            _words_in(item, into)
+    elif value is not None and not isinstance(value, bool):
+        into.update(_WORD_RE.findall(str(value).lower()))
+    return into
+
+
+def _row_declared_vocabulary(capability_id: str, entry: Mapping[str, Any]) -> set[str]:
+    """Stems of every word the row's own declaration uses to say what it takes, does and returns."""
+    words: set[str] = set()
+    for field in _ROW_DECLARATION_FIELDS:
+        _words_in(entry.get(field), words)
+    # The NAMES of the row's arguments and bindings, not the registry format's own words: read whole,
+    # every action template would explain "expect", "field", "type" and "value" for every row.
+    template = entry.get("action_template")
+    if isinstance(template, Mapping) and isinstance(template.get("args"), Mapping):
+        _words_in(list(template["args"].keys()), words)
+    if isinstance(entry.get("proposal_bindings"), Mapping):
+        _words_in(list(entry["proposal_bindings"].keys()), words)
+    # Words the row declares it serves without their taking part in selection; only the words, never
+    # the evidence recorded beside them.
+    _words_in(list((entry.get("request_words_also_served") or {}).get("words") or ()), words)
+    verification = entry.get("verification")
+    if isinstance(verification, Mapping):
+        _words_in(verification.get("observed_effect"), words)
+    _words_in(str(capability_id), words)
+    return {_word_stem(word) for word in words}
+
+
+def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], inputs: Any,
+                                   capability_id: str, entry: Mapping[str, Any]) -> tuple[list[str], list[str]]:
+    """``(explained, unexplained)`` content words of ``sentence`` for the selected row, in sentence order."""
+    vocabulary = _row_declared_vocabulary(capability_id, entry)
+    vocabulary.update(_word_stem(str(token).lower()) for token in (admission.get("matched_tokens") or ()))
+    bound_as_data = _words_in(inputs if isinstance(inputs, Mapping) else {}, set())
+    explained: list[str] = []
+    unexplained: list[str] = []
+    for raw in _QUOTED_TEXT_RE.sub(" ", str(sentence or "")).split():
+        word = raw.strip(".,;:!?()[]{}")
+        if not word or _PATHLIKE_WORD_RE.search(word):
+            continue
+        if "_" in word.strip("_") or word.startswith(("--", "$")):
+            continue  # an identifier, a flag or a variable is a name, not a request
+        for token in _WORD_RE.findall(word.lower()):
+            if (token in _CLOSED_CLASS_WORDS or token in _QUANTIFIER_WORDS
+                    or token in _RESULT_DESTINATION_WORDS or token.isdigit()
+                    or token in explained or token in unexplained):
+                continue
+            if _word_stem(token) in vocabulary:
+                explained.append(token)
+            elif token not in bound_as_data:
+                unexplained.append(token)
+    return explained, unexplained
+
+
+def row_chosen_by_words_explains_too_little(sentence: str, admission: Mapping[str, Any], compiled: Mapping[str, Any],
+                                            capability_id: str, entry: Mapping[str, Any]) -> tuple[list[str], list[str]] | None:
+    """``(explained, unexplained)`` when the row must be refused before it starts, else ``None``."""
+    if not entry or entry.get("request_word_coverage") == "required":
+        return None  # the strict check owns that row
+    if str(admission.get("admission_basis") or "") == "EVERY_WORD_OF_THE_SENTENCE_READ_BY_TAUGHT_MEANINGS":
+        return None  # nothing is unexplained by construction
+    if capability_id and str(capability_id) in str(sentence or ""):
+        # "Run the <capability id>." states the row's identity; it was not guessed from shared words
+        # (canonical/tests/test_a_provisional_pass_says_why_it_is_provisional_v1.py reaches every row so).
+        return None
+    mode = str(compiled.get("compiler_mode") or admission.get("compiler_mode") or "")
+    if mode != _LEXICAL_MATCH_COMPILER_MODE and entry.get("request_word_coverage") != "majority":
+        return None
+    explained, unexplained = request_words_explained_by_row(
+        sentence, admission, compiled.get("inputs"), capability_id, entry)
+    if len(unexplained) > len(explained):
+        return explained, unexplained
+    return None
+
+
+def promised_files_this_row_does_not_write(admission: Mapping[str, Any], inputs: Any,
+                                           entry: Mapping[str, Any]) -> list[str]:
+    """Files the sentence promises that the selected row does not declare it writes.
+
+    Measured 2026-11-11 on the frozen file set: "Convert the file <d>/notes.txt to uppercase into
+    <d>/upper.txt" selected the in-place uppercase row, which rewrote notes.txt; only afterwards did
+    the door notice that upper.txt was missing.  Every word of that sentence is accounted for, so the
+    word gate passes it: what is not accounted for is the FILE.  A row declares what it writes -- an
+    output slot it was bound to, or the input its expectation re-reads (plus a declared suffix).  A
+    promised file outside that set cannot come from this row, and a row that writes must not run
+    first to find that out.  Read-only rows are left alone: running them damages nothing.
+    """
+    promised = [str(path) for path in (admission.get("goal_future_artifacts") or ()) if path]
+    if not promised or entry.get("read_only") is True:
+        return []
+    inputs = inputs if isinstance(inputs, Mapping) else {}
+    written: set[str] = set()
+    for key, binding in (entry.get("proposal_bindings") or {}).items():
+        if isinstance(binding, Mapping) and binding.get("type") == "auto_path" and isinstance(inputs.get(key), str):
+            written.add(os.path.normpath(inputs[key]))
+    expect = (entry.get("action_template") or {}).get("expect") or {}
+    source = inputs.get(str(expect.get("path_input") or ""))
+    if isinstance(source, str) and source:
+        written.add(os.path.normpath(source + str(expect.get("path_suffix") or "")))
+    return [path for path in promised if os.path.normpath(path) not in written]
 
 
 _STATED_EFFECTS: tuple[tuple[re.Pattern[str], re.Pattern[str], str], ...] = (
@@ -3814,7 +4298,11 @@ def observed_effect_errors(goal: str, before: Mapping[str, Any],
         # "something happened".  The promise is read by the one reader that decides what a
         # sentence promised, not by a token scan of the sentence.
         promised_file = bool(artifacts) or bool(_promised_source_files(goal)) \
-            or bool(_promised_source_roots(goal)) or _sentence_promises_a_change(goal)
+            or bool(_promised_source_roots(goal)) or (
+                _sentence_promises_a_change(goal)
+                # "add up the numbers" opens with a verb that usually means a change.  When every
+                # word of the sentence was read by taught meanings, it is a read-only question.
+                and not _every_word_is_taught(goal, str(result.get("compiled_capability_id") or "")))
         from canonical.runtime import execute_v1 as _kernel
         _moved_rows = _kernel._diff(before.get("files") or {}, after.get("files") or {})
         # ``changed`` is a BOOL ("did anything move"), not a list: three of the site's own
@@ -4269,6 +4757,72 @@ def _composed_holds_up(composed: dict[str, Any], goal: str, future_artifacts: li
     return composed
 
 
+# Words that may precede the real verb in an ordinary request.  Only the
+# sentence's own leading action is read here; the list is politeness and
+# interrogative scaffolding, not a vocabulary of tasks.
+_LEADING_FILLER = frozenset({
+    "please", "can", "could", "would", "will", "you", "u", "i", "we", "let", "lets",
+    "let's", "help", "me", "us", "now", "then", "just", "kindly", "go", "ahead",
+    "and", "also", "hello", "hi", "hey", "try", "to", "quickly", "simply",
+})
+
+# Verbs that ask for the named file to be CHANGED.  A read-only row cannot serve
+# one.  Deliberately small and literal: an unrecognized verb is not refused, so a
+# missing word cannot break a route -- it only leaves the old behaviour in place.
+_MUTATING_VERBS = frozenset({
+    "delete", "remove", "rm", "erase", "drop", "add", "append", "insert", "put",
+    "write", "save", "rename", "mv", "move", "copy", "cp", "compress", "zip",
+    "tar", "sort", "reverse", "uppercase", "lowercase", "capitalise", "capitalize",
+    "edit", "replace", "substitute", "truncate", "modify", "change", "update",
+    "create", "make", "mkdir", "touch", "clear", "empty", "wipe", "strip",
+    "reformat", "format", "split", "merge", "combine", "concatenate", "backup",
+    "restore", "chmod", "chown", "convert", "rewrite", "fix", "repair", "patch",
+})
+
+
+# Verbs that name a CHANGE without naming WHAT the change is.  "Convert <f> to
+# uppercase" and "Reformat <f> as JSON" state their operation in the phrase after
+# "to"/"into"/"as", not in the opening word, so the opening word cannot be the
+# whole claim.  Measured 2026-11-02: `file.uppercased.v1` declares
+# `handles_verbs: ["uppercase"]`, the sentence "Convert <f> to uppercase" opened
+# with "convert", and the row was refused with
+# THE_SENTENCE_ASKS_FOR_AN_OPERATION_THIS_ROW_DOES_NOT_PERFORM -- a correct rule
+# applied to a word that states no operation of its own.  The sentence then fell
+# through to the composer, which reached the general shell row and refused for
+# missing confinement: a request the machine can serve, lost to grammar.
+_GENERIC_TRANSFORMATION_VERBS = frozenset({
+    "convert", "change", "transform", "turn", "rewrite", "reformat",
+})
+
+
+def _names_the_rows_own_verb(goal: str, handles: set[str]) -> bool:
+    """Does the sentence state, elsewhere, the operation this row declares?
+
+    The declared verb has to appear as a word of the sentence.  "Convert <f> to
+    uppercase" names `uppercase`, so the row that performs uppercase is the row
+    the sentence asked for; "Convert <f> to JSON" names no declared verb here, so
+    nothing is admitted by this path.
+    """
+    words = {raw.strip(".,:;!\"'`()[]").lower()
+             for raw in str(goal or "").lower().replace("?", " ").split()}
+    return bool(words & handles)
+
+
+def _leading_mutation_word(goal: str) -> str | None:
+    """The mutation verb the sentence opens with, or None.
+
+    Only the leading action is read.  A verb that appears later usually governs a
+    different object ("Count the lines in <f> and write the total to <o>"), and
+    refusing on any occurrence would forbid reading a file for a report.
+    """
+    for raw in str(goal or "").lower().replace("?", " ").split():
+        word = raw.strip(".,:;!\"'`()[]")
+        if not word or word in _LEADING_FILLER:
+            continue
+        return word if word in _MUTATING_VERBS else None
+    return None
+
+
 def _states_an_executable_form(goal: str, admission: Mapping[str, Any] | None = None) -> bool:
     """Does the sentence itself state the form the work must take?
 
@@ -4374,10 +4928,15 @@ def _cached_composer_graph() -> dict[str, Any]:
 def _try_composed(task_id: str, goal: str, started: int) -> dict[str, Any] | None:
     """Close a goal by chaining capabilities, when no single one matches.
 
+    Returns None at once while the taught-words row is being tried (``_COMPOSER_CLOSED``): that
+    attempt may run its one read-only row and nothing in its place.
+
     Returns None when composition cannot reach the goal, so the caller still
     reports the honest gap. Returns a real result only when every step of the
     chain ran and returned.
     """
+    if _COMPOSER_CLOSED.get():
+        return None
     try:
         from canonical.runtime import composer_route_v1 as croute
         from canonical.runtime import computer_execution_boundary_v1 as boundary
@@ -4913,6 +5472,22 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                      "FAIL_CLOSED", "REQUEST_INVALID", started, executed=False)
     with _with_workspace_root(request.get("workspace_root")):
         result = _solve_request(request)
+        # THE USUAL PATH FIRST.  A row that already answers a sentence keeps it, so nothing that
+        # passed before can change.  Only a sentence the usual path did NOT answer, and for which
+        # it executed nothing, is read with taught words -- and only when they account for every
+        # word of it (``_taught_words_plan``).
+        if (isinstance(result, dict) and result.get("pass") is not True
+                and result.get("executed") is not True and result.get("side_effects_may_exist") is not True):
+            _taught_result, _taught_reading = _answer_from_taught_words(request)
+            if _taught_result is not None:
+                _taught_result["usual_path_status"] = result.get("status")
+                result = _taught_result
+            elif isinstance(_taught_reading, Mapping) and _taught_reading.get("near"):
+                # One or two words stood between this sentence and an answer: name them, so the
+                # refusal says what to teach.
+                result.setdefault("taught_words_reading", {
+                    "schema": "TAUGHT_WORDS_READING_V1", "read": False,
+                    "reason": str(_taught_reading.get("reason"))[:240]})
         if "contract_checks" in request:
             result.setdefault("structured_contract_acceptance_complete", False)
             if result.get("pass") is True and result["structured_contract_acceptance_complete"] is not True:
@@ -4955,7 +5530,12 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                 )
 
                 if not _is_honest_contract_refusal(result):
-                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
+                    _declined: list[dict[str, Any]] = []
+                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""), refusals=_declined)
+                    if recalled is None and _declined:
+                        # The sentence WAS taught, and the taught action declined this case.  The
+                        # refusal above stands; this says why, in the action's own words.
+                        result["taught_action_declined"] = _declined[:3]
                     from canonical.runtime import computer_execution_boundary_v1 as boundary
                     if recalled is not None and recalled.get("status") == boundary.STATUS:
                         # The primary route preceded this fallback and may have had
@@ -5056,6 +5636,81 @@ def _decisive_typed_plan(goal: str) -> Any:
         return _typed_plan.build_plan(goal, ROOT)
     except Exception:  # noqa: BLE001 - a working guess beats a broken advisory
         return None
+def _taught_words_plan(goal: str) -> tuple[Any, Any]:
+    """A plan for the row that reads the sentence with TAUGHT WORDS, when they account for all of it.
+
+    WHY THIS IS NOT ANOTHER KEYWORD ROUTE.  The compiler picks a row by the words a sentence SHARES
+    with it, and nothing asks about the words it does not share.  Measured 2026-11-11 on the frozen
+    32-task file set: 13 of 30 passes were wrong for that reason ("how many unique lines" answered
+    with the number of lines).  This plan is admitted the other way round: only when every word of
+    the sentence is a word whose meaning was taught by example answers, a structure word, the file,
+    or the text to look for, and the meanings make exactly one operation
+    (``canonical/runtime/taught_words_v1.py``).  One unknown word and there is no plan: the usual
+    refusal stands, and it carries the word that was missing.
+
+    Returns ``(plan, reading)``; ``plan`` is ``(registry, admissible, compiled)`` or None.  Any fault
+    returns no plan.
+    """
+    try:
+        from canonical.runtime import taught_words_v1 as taught
+        reading = taught.read_request(goal, ROOT)
+        if reading.get("ok") is not True:
+            return None, dict(reading)
+        from canonical.runtime import swe_typed_plan_v1 as _typed
+        registry, _declared = _typed._fast_verified_registry_and_decls(ROOT, None)
+        admissible = _typed.goal_compiler._platform_admissible_registry(dict(registry))
+        entry = admissible.get(taught.CAPABILITY_ID)
+        if not isinstance(entry, Mapping):
+            return None, {"ok": False, "reason": "TAUGHT_WORDS_ROW_NOT_ADMISSIBLE"}
+        words = sorted(reading["meanings"])
+        compiled = {
+            "schema": _typed.SCHEMA, "capabilities": [taught.CAPABILITY_ID], "compiled_parts": [],
+            "score": len(words),
+            "match_evidence": {"goal_tokens": words, "matched_keywords": words, "matched_provides": [],
+                               "matched_requires": [], "matched_identity": [],
+                               "informative_requires": [], "nondiscriminating_requires": []},
+            "initial_facts": list(entry.get("requires") or []),
+            "finish_summary": "RAW_GOAL_COMPLETE",
+            "selected_capability": taught.CAPABILITY_ID,
+            "inputs": {"path": reading["path"], "goal": goal},
+            "compiler_mode": "TAUGHT_WORDS_READING_V1",
+            "target_effects": list(entry.get("provides") or []) or [taught.CAPABILITY_ID],
+        }
+        return (registry, admissible, compiled), dict(reading)
+    except Exception as exc:  # noqa: BLE001 - no plan beats a broken one
+        return None, {"ok": False, "reason": "TAUGHT_WORDS_FAULT:" + type(exc).__name__}
+
+
+def _answer_from_taught_words(request: Mapping[str, Any]) -> tuple[Any, Any]:
+    """``(result, reading)``.  ``result`` is the door's verified answer through the taught-words row,
+    or None when there is no such plan or it did not pass; the usual result then stands.
+    A request that carries its own contract checks or its own typed plan is never taken here."""
+    if "contract_checks" in request or request.get("_typed_swe_plan") is not None:
+        return None, None
+    plan, reading = _taught_words_plan(_request_goal(request))
+    if plan is None:
+        return None, reading
+    attempt = dict(request)
+    attempt["_typed_swe_plan"] = plan
+    _closed = _COMPOSER_CLOSED.set(True)
+    try:
+        result = _solve_body(attempt)
+    except Exception as exc:  # noqa: BLE001 - the usual result stands
+        return None, {"ok": False, "reason": "TAUGHT_WORDS_ATTEMPT_FAULT:" + type(exc).__name__}
+    finally:
+        _COMPOSER_CLOSED.reset(_closed)
+    if not isinstance(result, dict) or result.get("pass") is not True:
+        return None, {"ok": False, "near": True, "reason": "TAUGHT_WORDS_PLAN_DID_NOT_PASS:"
+                      + str((result or {}).get("status") if isinstance(result, Mapping) else "")[:160]}
+    result["taught_words_reading"] = {
+        "schema": "TAUGHT_WORDS_READING_V1", "word_meanings": reading.get("meanings"),
+        "operation": reading.get("parts"), "text_looked_for": reading.get("data"),
+        "lessons_sha256": reading.get("lessons_sha256"),
+        "model_dependency_count": 0, "incremental_spend_usd": 0,
+    }
+    return result, reading
+
+
 def _request_goal(request: Any) -> str:
     """The sentence a request carries, for a Mapping request or a bare string.
 
@@ -5419,6 +6074,40 @@ def _solve_body(request: Mapping[str, Any]) -> dict[str, Any]:
         refused["refused_before_execution"] = True
         refused["stated_authority_errors"] = [
             "STATED_SOURCE_CHANGE_NOT_PERFORMABLE_BY_CAPABILITY:" + _declared]
+        return refused
+    # THE WORDS ARE ASKED LAST OF THE THREE, AND STILL BEFORE THE RUN (see ``request_words_not_accounted_for``).
+    if _declared_entry.get("request_word_coverage") == "required":
+        _unaccounted = request_words_not_accounted_for(normalized, admission, _declared_entry)
+        if _unaccounted:
+            refused = _fail(
+                task_id, "FAIL_CLOSED__REQUEST_WORD_NOT_ACCOUNTED_FOR_BY_CAPABILITY",
+                "REQUEST_WORD_NOT_ACCOUNTED_FOR_BY_CAPABILITY:%s:%s" % (_declared, ",".join(_unaccounted)),
+                started, compiled_capability_id=_declared, executed=False)
+            refused["refused_before_execution"] = True
+            refused["unaccounted_request_words"] = list(_unaccounted)
+            return refused
+        _unwritten = promised_files_this_row_does_not_write(admission, compiled.get("inputs"), _declared_entry)
+        if _unwritten:
+            refused = _fail(
+                task_id, "FAIL_CLOSED__PROMISED_FILE_NOT_WRITTEN_BY_CAPABILITY",
+                "PROMISED_FILE_NOT_WRITTEN_BY_CAPABILITY:%s:%s" % (_declared, ",".join(_unwritten)),
+                started, compiled_capability_id=_declared, executed=False)
+            refused["refused_before_execution"] = True
+            refused["promised_files_not_written"] = list(_unwritten)
+            return refused
+    # A ROW CHOSEN BY SHARED WORDS IS ASKED HOW MUCH OF THE REQUEST IT EXPLAINS, BEFORE THE RUN
+    # (see ``request_words_explained_by_row``).
+    _too_little = row_chosen_by_words_explains_too_little(normalized, admission, compiled, _declared, _declared_entry)
+    if _too_little is not None:
+        _explained, _unexplained = _too_little
+        refused = _fail(
+            task_id, "FAIL_CLOSED__MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY",
+            "MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY:%s:explained=%s:unexplained=%s"
+            % (_declared, ",".join(_explained), ",".join(_unexplained)),
+            started, compiled_capability_id=_declared, executed=False)
+        refused["refused_before_execution"] = True
+        refused["explained_request_words"] = list(_explained)
+        refused["unexplained_request_words"] = list(_unexplained)
         return refused
     promised_sources = _promised_source_files(normalized)
     source_digests_before = {raw: _source_digest(raw) for raw in promised_sources}
