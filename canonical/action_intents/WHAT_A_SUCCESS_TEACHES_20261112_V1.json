@@ -7,7 +7,7 @@
  "route_id": "WHAT_A_SUCCESS_TEACHES_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "fea6498cf78c99f53bee82d64b800b4f4707689b",
+ "canonical_base_commit": "1fc3eb14d4eabbd007e868cdb679ae126373067a",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -76,7 +76,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "fea6498cf78c99f53bee82d64b800b4f4707689b",
+  "canonical_base_commit": "1fc3eb14d4eabbd007e868cdb679ae126373067a",
   "real_outcome": "The claim that one successful demonstration teaches an action's applicability is refuted by measurement over this tree's own version space, and the registry's 11 blind premises are named.",
   "required_capability": "A retained, symmetric record of attempted capability application -- including the state it was attempted in and the refusal that came back -- because only a negative example can narrow an applicability condition.",
   "obs_goal": {

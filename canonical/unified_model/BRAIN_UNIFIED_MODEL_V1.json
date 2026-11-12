@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f2e7fc40bc4a809584e7c0460b1269054298aa0e541e7a570ba4720ad04c28e6"
+  "value": "2c07d238b4926a2692c4860fbc5322b3fa451a977a73e7d3836cb6407f00bb1a"
  },
  "engines": [
   {
@@ -227386,7 +227386,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHAT_A_SUCCESS_TEACHES_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "72dde783db17f3477c21705a4694ee481b231e6fa073d66eaddfd950e3aef3bd",
+   "sha256": "3894288418894075f0ccc0325f9371ddc6933c5685507aefdfc88f4d9f67644b",
    "status": "",
    "terms": {
     "20261112": 1,
