@@ -7,7 +7,9 @@ rewrite rules, and makes the same change in another file.  The first word of ``R
 * ``edit``      -- one example, given as its two files, is repeated on a third file at once;
 * ``remember``  -- one example is added to a lesson file, which is made when it is not there yet;
 * ``repeat``    -- what a lesson file holds is repeated on a file, all of it or nothing;
-* ``repeat_shown`` -- the same, but code used a way the lesson did not show is left as it is.
+* ``repeat_shown`` -- the same, but code used a way the lesson did not show is left as it is;
+* ``repeat_tried`` -- the same, and what the lesson did not show is tried, one place at a time, against
+  a check: a Python file of the project that is run (its tests, or the file as a script).
 
 How a rule is worked out.  Every place where the two files of an example differ is found, down to the
 smallest expression, keyword argument or one-line statement that holds the difference.  That piece
@@ -32,6 +34,18 @@ Where a rule is applied.  A rule says no more than the examples showed:
   another number of arguments, with a keyword they did not show, or not called where they called it --
   may not work with the new code.  Nothing is changed then, and the refusal names the lines.  An example
   that shows that use, changed or left alone, settles it; or the request can say to leave the rest alone.
+
+What a try is.  One example cannot say which parts of the changed code matter: ``self.thread.isAlive()``
+shown once says nothing about ``t.isAlive()``.  ``repeat_tried`` also reads the lesson more widely -- each
+part the change merely copied, when it starts from a variable, may be any other code -- and tries the
+places only that reading fits, together with the uses nobody showed.  A try is kept only when two runs
+agree: no test of the check that passed on the file as it is fails with the place changed, and a test
+that passes with it fails when that place is made to fail.  A check that passes either way says nothing
+about that place, and the place stays as it was.  What a check settled is added to the lesson as a new
+example -- a kept place widens the lesson, a failing one speaks against the wider reading -- and the
+places the check could not settle are written in the example as ``not settled``, so they count neither
+as changed nor as left alone the next time.  The check itself decides nothing else: a file that fails
+the check as it is edited only where the lesson's own examples or the kept tries reach.
 
 Refused, and nothing is written:
 
@@ -78,7 +92,9 @@ import io
 import json
 import pathlib
 import re
+import subprocess
 import sys
+import time
 import tokenize
 
 SIMPLE_STATEMENTS = (ast.Assign, ast.AugAssign, ast.AnnAssign, ast.Return, ast.Expr, ast.Raise, ast.Assert,
@@ -224,6 +240,21 @@ def module_names(tree):
     return defined, anything
 
 
+def made_at_top(tree):
+    """Names of the functions and classes a module defines at its top level."""
+    made, stack = set(), list(tree.body)
+    while stack:
+        statement = stack.pop()
+        if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            made.add(statement.name)
+            continue
+        for name in ("body", "orelse", "finalbody"):
+            stack.extend(getattr(statement, name, []))
+        for handler in getattr(statement, "handlers", []):
+            stack.extend(handler.body)
+    return made
+
+
 def is_import(statement):
     return isinstance(statement, (ast.Import, ast.ImportFrom))
 
@@ -293,6 +324,7 @@ class Text:
         self.above = {id(child): node for node in ast.walk(self.tree) for child in ast.iter_child_nodes(node)}
         self.defined, self.anything = module_names(self.tree)
         self.imports, self.bound = imports_of(self.tree), {}
+        self.made = made_at_top(self.tree)
 
     def local_at(self, node, name):
         """Is `name`, read at `node`, a parameter or variable of a function around it?"""
@@ -537,6 +569,42 @@ def root_of(node):
     return node if isinstance(node, ast.Name) else None
 
 
+def where(node):
+    """Where a piece of code stands in its file: (first line, column, last line, column)."""
+    return (node.lineno, node.col_offset, node.end_lineno, node.end_col_offset)
+
+
+def overlap(one, other):
+    return (one[0], one[1]) < (other[2], other[3]) and (other[0], other[1]) < (one[2], one[3])
+
+
+def sort_of(text, node):
+    """What an expression starts from (``a`` in ``a.b[0].c()``): 'local' for a parameter or variable of a function,
+    lambda or comprehension around it, 'top variable' for a name the file assigns at its top, 'made' for a function
+    or class the file defines, 'imported module', 'imported name', 'built in' or 'unknown'.  None for code that
+    does not start from a name."""
+    root = root_of(node)
+    if root is None:
+        return None
+    name, above = root.id, root
+    if text.local_at(root, name):
+        return "local"
+    while id(above) in text.above:
+        above = text.above[id(above)]
+        if isinstance(above, (ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp)) and any(
+                isinstance(part, ast.Name) and part.id == name
+                for loop in above.generators for part in ast.walk(loop.target)):
+            return "local"
+    if name in text.imports:
+        origin = text.imports[name]
+        return "imported module" if origin and origin[1] is None else "imported name"
+    if name in text.made:
+        return "made"
+    if name in text.defined:
+        return "top variable"
+    return "built in" if hasattr(builtins, name) else "unknown"
+
+
 def imported_here(text, node):
     """Does the expression start from a name the file imports at its top (and no function around it rebinds)?"""
     root = root_of(node)
@@ -614,8 +682,8 @@ def rule_at(pairs, changed):
 class Shown:
     """One example: a file as it was and as it became, and the places where the two differ."""
 
-    def __init__(self, before_text, after_text, label="the example"):
-        self.label, self.before_text = label, before_text
+    def __init__(self, before_text, after_text, label="the example", unsettled=()):
+        self.label, self.before_text, self.unsettled = label, before_text, [tuple(place) for place in unsettled]
         self.old, self.new = Text(before_text, label + "'s first file"), Text(after_text, label + "'s second file")
         whole_old, whole_new = list(self.old.tree.body), list(self.new.tree.body)
         imports, self.only_old, self.only_new = import_changes(self.old.tree, self.new.tree)
@@ -626,6 +694,10 @@ class Shown:
         self.places = places_of(self.old.tree, self.new.tree, label) + [[pair] for pair in imports]
         self.old.tree.body, self.new.tree.body = whole_old, whole_new
 
+    def says_nothing_about(self, node):
+        """Is this code at, in or around a place that a try left unsettled?  Then it is not evidence of anything."""
+        return any(overlap(where(node), place) for place in self.unsettled)
+
 
 class Changed:
     """What the examples changed: every unit of their first files by kind, what each changed unit became,
@@ -635,7 +707,8 @@ class Changed:
         self.candidates, self.into, self.home = {}, {}, {}
         for shown in examples:
             for node in units(shown.old.tree):
-                self.candidates.setdefault(type(node).__name__, []).append(node)
+                if not shown.says_nothing_about(node):
+                    self.candidates.setdefault(type(node).__name__, []).append(node)
             for levels in shown.places:
                 for before, after in levels:
                     self.into[id(before)] = after
@@ -696,6 +769,84 @@ def stands_alone(rule, changed):
             rule.own |= {one.arg for one in ast.walk(part.args) if isinstance(one, ast.arg)}
 
 
+# What a part of changed code must start from to count as something that could have been any other value.
+MAY_VARY = ("local", "top variable")
+
+
+def may_vary(text, node):
+    """Could this part of an example's code as well have been another value?  True when it starts from a variable.
+
+    Something imported, a function or class, a built-in name or a constant is taken to be what the change is about.
+    """
+    return isinstance(node, (ast.Name, ast.Attribute, ast.Subscript, ast.Call)) and sort_of(text, node) in MAY_VARY
+
+
+def copied_parts(text, before, after):
+    """The outermost parts of `before` that stand unchanged in `after` and may vary.  The function of a call is
+    never such a part as a whole: of ``box.get(key)`` only ``box`` and ``key`` are."""
+    held = {shape(part, ctx=False) for part in ast.walk(after) if isinstance(part, ast.expr)}
+    found = []
+
+    def walk(node):
+        if isinstance(node, ast.JoinedStr):
+            return
+        for name in node._fields:
+            value = getattr(node, name, None)
+            for child in value if isinstance(value, list) else [value]:
+                if not isinstance(child, ast.AST):
+                    continue
+                if (isinstance(child, ast.expr) and not (isinstance(node, ast.Call) and name == "func")
+                        and isinstance(getattr(child, "ctx", None), (ast.Load, type(None)))
+                        and shape(child, ctx=False) in held and may_vary(text, child)):
+                    found.append(child)
+                else:
+                    walk(child)
+
+    walk(before)
+    return found
+
+
+def stand_in(value, marks):
+    """A copy of code in which every expression whose shape is in `marks` is replaced by its mark."""
+    if isinstance(value, ast.expr) and shape(value, ctx=False) in marks:
+        return ast.copy_location(ast.Name(id=marks[shape(value, ctx=False)], ctx=ast.Load()), value)
+    if isinstance(value, ast.AST):
+        copy = type(value)()
+        for name in value._fields:
+            setattr(copy, name, stand_in(getattr(value, name, None), marks))
+        return ast.copy_location(copy, value) if hasattr(value, "lineno") else copy
+    if isinstance(value, list):
+        return [stand_in(item, marks) for item in value]
+    return value
+
+
+def wider(rule, changed):
+    """The rule read more widely: every part the change merely copied may be other code.  None when that is no rule.
+
+    One changed place cannot say which of its parts matter.  This reading takes each part that stands unchanged in
+    the new code and starts from a variable to be a blank, as a second place that differed there would have made
+    it.  Code an example left alone still speaks against it.  Nobody showed this reading, so it is never used
+    unasked: code that fits only it is changed only when a check settles that place (`repeat_tried`).
+    """
+    before, after = rule.pairs[0]
+    parts = copied_parts(changed.home[id(before)].old, before, after)
+    marks = {}
+    for part in parts:
+        marks.setdefault(shape(part, ctx=False), "\0%d" % len(marks))
+    if not marks:
+        return None
+    reading = rule_at(list(rule.pairs) + [(stand_in(before, marks), stand_in(after, marks))], changed)
+    if reading is None or blanks_in(reading.pattern) == blanks_in(rule.pattern):
+        return None
+    reading.pairs = list(rule.pairs)
+    reading.lines = rule.lines
+    try:
+        stands_alone(reading, changed)
+    except Refused:
+        return None
+    return reading
+
+
 def import_changes(old_tree, new_tree):
     """Take changed top-level import lines out of both trees.
 
@@ -725,15 +876,19 @@ def without_imports(tree, shapes):
     return [shape(statement) for statement in tree.body if not (is_import(statement) and shape(statement) in shapes)]
 
 
-def learn_all(examples):
+def learn_all(examples, wide=False):
     """The rules that turn every example's first file into its second.  `examples` is a list of (before, after) texts.
 
     Several examples are read as one: places changed the same way are put together across them, a blank appears
     where two such places differ, and code that any one of them left alone speaks against a rule that fits it.
+    An example may be (before, after, places): code at those places of `before` was not settled when the example
+    was made, and counts neither as changed nor as left alone.
+
+    With `wide`, returns (the rules, their wider readings); see `wider`.
     """
     several = len(examples) > 1
-    shown = [Shown(before, after, "example %d" % number if several else "the example")
-             for number, (before, after) in enumerate(examples, 1)]
+    shown = [Shown(example[0], example[1], "example %d" % number if several else "the example", example[2:] and example[2])
+             for number, example in enumerate(examples, 1)]
     changed = Changed(shown)
     groups = []
     for example in shown:
@@ -755,10 +910,13 @@ def learn_all(examples):
         stands_alone(rule, changed)
         rules.append(rule)
     for example in shown:
-        replayed, _ = rewrite(rules, example.before_text, example.label + "'s first file", check_names=False)
+        replayed, _ = rewrite(rules, example.before_text, example.label + "'s first file", check_names=False,
+                              skip=example.says_nothing_about)
         if without_imports(ast.parse(replayed), example.only_old) != without_imports(example.new.tree, example.only_new):
             raise Refused("the rules worked out from %s do not reproduce %s"
                           % ("the examples" if several else "the example", example.label))
+    if wide:
+        return rules, [reading for reading in (wider(rule, changed) for rule in rules) if reading is not None]
     return rules
 
 
@@ -878,37 +1036,69 @@ def not_shown(rule, found, text, what):
                       "those uses" if others else "that use"))
 
 
-def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False):
-    """Apply the rules to every place that fits.  Returns (new text, number of places changed).
-
-    Code used a way no example showed stops the whole edit, unless `leave_unshown` asks for it to be left as it is.
-    """
-    text = Text(source_text, what)
-    places, unshown = [], {}
+def fitting(rules, text, what, skip=None, torn=True):
+    """Every piece of the file a rule fits, in source order: (its bytes, the code, the rule, what each blank holds,
+    `SHOWN` or the use the examples did not show).  Code that two rules fit is refused, or passed over when not `torn`."""
+    found = []
     for node in units(text.tree):
-        fitting = []
+        if skip is not None and skip(node):
+            continue
+        fit = []
         for rule in rules:
             bound = {}
             if fits(rule.pattern, node, bound) and same_names(rule, text, node, bound):
-                fitting.append((rule, bound))
-        if len(fitting) > 1:
+                fit.append((rule, bound))
+        if len(fit) > 1 and torn:
             raise Refused("two changes of the example both fit the code at line %d of %s" % (node.lineno, what))
-        if fitting:
-            use = unshown_use(fitting[0][0], text, node)
-            if use is not SHOWN:
-                if use not in [seen for seen, _ in unshown.setdefault(id(fitting[0][0]), (fitting[0][0], []))[1]]:
-                    unshown[id(fitting[0][0])][1].append((use, node))
-                continue
-            places.append((text.span(node), node) + fitting[0])
+        if len(fit) == 1:
+            found.append((text.span(node), node) + fit[0] + (unshown_use(fit[0][0], text, node),))
+    return found
+
+
+def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False, skip=None):
+    """Apply the rules to every place that fits.  Returns (new text, number of places changed).
+
+    Code used a way no example showed stops the whole edit, unless `leave_unshown` asks for it to be left as it is.
+    Code for which `skip` is true is not looked at.
+    """
+    text = Text(source_text, what)
+    places, unshown = [], {}
+    for span, node, rule, bound, use in fitting(rules, text, what, skip):
+        if use is not SHOWN:
+            if use not in [seen for seen, _ in unshown.setdefault(id(rule), (rule, []))[1]]:
+                unshown[id(rule)][1].append((use, node))
+            continue
+        places.append((span, node, rule, bound))
     for rule, found in unshown.values():
         if not leave_unshown:
             raise not_shown(rule, found, text, what)
-    places.sort(key=lambda place: place[0])
+    if not places:
+        return source_text, 0
+    return written(text, places, what, check_names), len(places)
+
+
+# What a changed place is replaced by to see whether a check notices that code failing.  It raises, when it is
+# evaluated, an error of the kinds a wrong change raises, so whatever would swallow those swallows it as well.
+FAILURE = ("type('ChangedCodeFails', (TypeError, AttributeError, ValueError, LookupError), {})"
+           "('this code was made to fail, to see whether the check notices')")
+FAILS = "(_ for _ in ()).throw(%s)" % FAILURE
+
+
+def failing(node, kind):
+    """Text that fails where `node` would have run, or None for code that is not run by itself (an assignment's target)."""
+    if kind == "statement":
+        return "raise " + FAILURE
+    if kind == "keyword":
+        return "%s=%s" % (node.arg, FAILS)
+    return FAILS if isinstance(getattr(node, "ctx", ast.Load()), ast.Load) else None
+
+
+def written(text, places, what="the file", check_names=True, fail_at=None):
+    """The file's text with every place rewritten by its rule; the place `fail_at` is made to fail instead."""
+    places = sorted(places, key=lambda place: place[0])
     for earlier, later in zip(places, places[1:]):
         if later[0][0] < earlier[0][1]:
             raise Refused("two places to change overlap at line %d of %s" % (later[1].lineno, what))
-    if not places:
-        return source_text, 0
     for _, node, rule, bound in places:
         used = {part.id if isinstance(part, ast.Name) else part.arg for blank in bound.values()
                 for part in ast.walk(blank) if isinstance(part, (ast.Name, ast.arg))}
@@ -924,12 +1114,18 @@ def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown
     for attempt in (0, 1, 2):
         out, at, swap = [], 0, {}
         for (start, end), node, rule, bound in places:
-            written, parsed = written_for(rule, node, bound, text)
-            looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
-            if ((rule.kind == "expression" and tightness(parsed) < text.room(node)) if attempt == 0
-                    else looser if attempt == 1 else rule.kind == "expression" and not isinstance(parsed, ATOMS)):
-                written = "(%s)" % written
-            out += [text.raw[at:start], written.encode("utf-8")]
+            if fail_at is not None and node is fail_at[1]:
+                new_text = failing(node, rule.kind)
+                parsed = None if new_text is None else parse_like(node, rule.kind, new_text)
+                if parsed is None:
+                    raise Refused("the code at line %d of %s cannot be made to fail by itself" % (node.lineno, what))
+            else:
+                new_text, parsed = written_for(rule, node, bound, text)
+                looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
+                if ((rule.kind == "expression" and tightness(parsed) < text.room(node)) if attempt == 0
+                        else looser if attempt == 1 else rule.kind == "expression" and not isinstance(parsed, ATOMS)):
+                    new_text = "(%s)" % new_text
+            out += [text.raw[at:start], new_text.encode("utf-8")]
             at = end
             swap[id(node)] = parsed
         result = b"".join(out + [text.raw[at:]]).decode("utf-8")
@@ -939,8 +1135,9 @@ def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown
             continue
         if shape(again) == shape(text.tree, swap):
             if check_names:
-                names_still_hold(text, again, places, what)
-            return result, len(places)
+                names_still_hold(text, again, [place for place in places if fail_at is None or place[1] is not fail_at[1]],
+                                 what)
+            return result
     raise Refused("the edited text of %s does not parse to the intended code" % what)
 
 
@@ -1001,6 +1198,7 @@ def read_python(path, what):
 
 LESSON_FORMAT = "CHANGE_LEARNED_FROM_EXAMPLES_V1"
 LESSON_SUFFIX = ".lesson"
+UNSETTLED = "not settled"
 
 
 def described(rules):
@@ -1019,59 +1217,284 @@ def described(rules):
 
 
 def lesson_examples(path):
-    """The examples a lesson file holds, as (before, after) texts.  Refuses a file that is not a sound lesson."""
+    """The examples a lesson file holds, each as (before, after) or (before, after, places a try left unsettled),
+    and who showed each.  Returns (path, examples, shown by); the two lists are None when the file is not there.
+    Refuses a file that is not a sound lesson."""
     target = inside_project(path, "the lesson file")
     if not target.name.endswith(LESSON_SUFFIX):
         raise Refused("a lesson file's name ends in %s" % LESSON_SUFFIX)
     if not target.is_file():
-        return target, None
+        return target, None, None
     try:
         held = json.loads(target.read_bytes().decode("utf-8"))
     except (UnicodeDecodeError, ValueError):
         held = None
-    examples = held.get("examples") if isinstance(held, dict) and held.get("format") == LESSON_FORMAT else None
-    if (not isinstance(examples, list) or not examples or not all(
+    kept = held.get("examples") if isinstance(held, dict) and held.get("format") == LESSON_FORMAT else None
+    if (not isinstance(kept, list) or not kept or not all(
             isinstance(example, dict) and all(
                 isinstance(example.get(side), list) and all(isinstance(line, str) for line in example[side])
-                for side in ("before", "after")) for example in examples)):
+                for side in ("before", "after")) for example in kept)):
         raise Refused("%s exists and is not a lesson file" % path)
-    pairs = [("".join(example["before"]), "".join(example["after"])) for example in examples]
+    examples = []
+    for example in kept:
+        before, places = "".join(example["before"]), example.get(UNSETTLED, [])
+        if (not isinstance(places, list) or (UNSETTLED in example and not places) or not all(
+                isinstance(place, list) and len(place) == 4 and all(type(number) is int for number in place)
+                for place in places)):
+            raise Refused("%s exists and is not a lesson file" % path)
+        examples.append((before, "".join(example["after"])) + ((tuple(tuple(place) for place in places),) if places else ()))
+        if places:
+            try:
+                stand = {where(node) for node in units(ast.parse(before))}
+            except (SyntaxError, ValueError):
+                stand = set()
+            if not set(examples[-1][2]) <= stand:
+                raise Refused("%s names a place that is no piece of code in its own example; it was changed by hand. "
+                              "Remember its examples again" % path)
     try:
-        taught = described(learn_all(pairs))
+        taught = described(learn_all(examples))
     except Refused as why:
         raise Refused("the examples in %s no longer give rules (%s); it was changed by hand, or written by another "
                       "version of this action. Remember its examples again" % (path, why))
     if held.get("teaches") != taught:
         raise Refused("%s says it teaches something other than what its examples show; it was changed by hand, or "
                       "written by another version of this action. Remember its examples again" % path)
-    return target, pairs
+    return target, examples, [example.get("shown by") for example in kept]
 
 
-def lesson_text(pairs, origins):
+def lesson_text(examples, origins):
     """The bytes of a lesson file.  Raises Refused when the examples, read as one, do not give rules."""
-    rules = learn_all(pairs)
+    rules = learn_all(examples)
     held = {"format": LESSON_FORMAT,
             "what this is": "A change worked out from examples, kept to be repeated on other files. "
                             "'teaches' is checked against 'examples' every time the lesson is used.",
             "teaches": described(rules),
-            "examples": [{"shown by": origin, "before": before.splitlines(keepends=True),
-                          "after": after.splitlines(keepends=True)} for (before, after), origin in zip(pairs, origins)]}
+            "examples": [dict([("shown by", origin), ("before", example[0].splitlines(keepends=True)),
+                               ("after", example[1].splitlines(keepends=True))]
+                              + ([(UNSETTLED, [list(place) for place in example[2]])] if example[2:] and example[2] else []))
+                         for example, origin in zip(examples, origins)]}
     return (json.dumps(held, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
 
 
 def remember(lesson, before, after):
     """Add one example to a lesson file, making the file when it is not there.  Returns (path, bytes to write)."""
-    target, pairs = lesson_examples(lesson)
+    target, examples, origins = lesson_examples(lesson)
     _, earlier = read_python(before, "the example's first file")
     _, later = read_python(after, "the example's second file")
-    origins = []
-    if pairs is None:
-        pairs = []
-    else:
-        origins = [example.get("shown by") for example in json.loads(target.read_bytes().decode("utf-8"))["examples"]]
-        if (earlier, later) in pairs:
-            raise Refused("%s already holds this example" % lesson)
-    return target, lesson_text(pairs + [(earlier, later)], origins + ["%s -> %s" % (before, after)])
+    if examples is None:
+        examples, origins = [], []
+    elif any(example[:2] == (earlier, later) for example in examples):
+        raise Refused("%s already holds this example" % lesson)
+    return target, lesson_text(examples + [(earlier, later)], origins + ["%s -> %s" % (before, after)])
+
+
+# ----------------------------------------------------------------------------- what a check settles
+
+MOST_TRIED = 8                   # places tried in one file; any further ones are left as they are
+CHECK_SECONDS = 20               # the longest one run of the check may take
+ALL_CHECKS_SECONDS = 90          # the longest all runs of one request may take
+CHECK_SAID = "TESTS OF THE CHECK THAT FAILED: "
+
+# Runs a check file in a fresh interpreter and prints, last, the tests of it that failed.
+#
+# A file that holds tests is run as a test file: every ``unittest.TestCase`` class in it and every function whose
+# name starts with ``test`` and that takes no arguments.  A file without tests that has an
+# ``if __name__ == "__main__":`` block is run as a script, and counts as one test.
+#
+# When a file to edit is named, its text is read from standard input instead of from disk wherever the project
+# imports it, so a text can be tried without being written.
+RUNNER = r"""
+import ast, importlib.machinery, inspect, json, os, sys, traceback, types, unittest
+check, edited = sys.argv[1], sys.argv[2]
+text = sys.stdin.buffer.read() if edited else None
+same = lambda one, other: os.path.realpath(one) == os.path.realpath(other)
+if edited:
+    usual = importlib.machinery.SourceFileLoader.get_code
+    def get_code(self, name):
+        path = self.get_filename(name)
+        return self.source_to_code(text, path) if same(path, edited) else usual(self, name)
+    importlib.machinery.SourceFileLoader.get_code = get_code
+source = text if edited and same(check, edited) else open(check, "rb").read()
+folder, parts = os.path.dirname(os.path.abspath(check)), [os.path.splitext(os.path.basename(check))[0]]
+while os.path.isfile(os.path.join(folder, "__init__.py")):
+    folder, parts = os.path.dirname(folder), [os.path.basename(folder)] + parts
+sys.path.insert(0, folder)
+sys.argv = [check]
+
+def run(name, package):
+    module = types.ModuleType(name)
+    module.__file__ = check
+    if package is not None:
+        module.__package__ = package
+    sys.modules[name] = module
+    try:
+        exec(compile(source, check, "exec"), module.__dict__)
+    except SystemExit as stop:
+        return module, stop.code not in (None, 0)
+    except BaseException:
+        traceback.print_exc()
+        return module, True
+    return module, False
+
+def ended(failed):
+    sys.stderr.flush()
+    print("\n" + %r + json.dumps(None if failed is None else sorted(failed)), flush=True)
+    os._exit(0)
+
+module, broke = run(".".join(parts), ".".join(parts[:-1]))
+if broke:
+    ended(["reading the check itself"])
+tests = unittest.TestSuite()
+for label, value in list(vars(module).items()):
+    if isinstance(value, type) and issubclass(value, unittest.TestCase) and value.__module__ == module.__name__:
+        tests.addTests(unittest.defaultTestLoader.loadTestsFromTestCase(value))
+    elif label.startswith("test") and inspect.isfunction(value) and value.__module__ == module.__name__ and not any(
+            given.default is given.empty and given.kind not in (given.VAR_POSITIONAL, given.VAR_KEYWORD)
+            for given in inspect.signature(value).parameters.values()):
+        tests.addTest(unittest.FunctionTestCase(value))
+if tests.countTestCases():
+    outcome = unittest.TextTestRunner(stream=sys.stderr, verbosity=0).run(tests)
+    ended([str(test) for test, _ in outcome.failures + outcome.errors] + [str(test) for test in outcome.unexpectedSuccesses])
+if any(isinstance(part, ast.If) and "__name__" in ast.dump(part.test) and "__main__" in ast.dump(part.test)
+       for part in ast.parse(source).body):
+    ended(["the script"] if run("__main__", None)[1] else [])
+ended(None)
+""" % CHECK_SAID
+
+
+class Check:
+    """A Python file that is run to see what of the project works."""
+
+    def __init__(self, path, edited):
+        self.path, self.edited, self.slowest, self.said = path, edited, 0.0, ""
+        self.until = time.monotonic() + ALL_CHECKS_SECONDS
+
+    def time_left(self):
+        return self.until - time.monotonic() > 2 * self.slowest + 1
+
+    def failing(self, text=None):
+        """Run the check; with `text`, as if the file to edit held that text.  Returns the tests that failed.
+
+        A run that does not come to an end counts as one failed test.  `self.said` keeps what a failing run said.
+        """
+        started = time.monotonic()
+        try:
+            ran = subprocess.run([sys.executable, "-B", "-c", RUNNER, self.path, "" if text is None else self.edited],
+                                 input=b"" if text is None else text.encode("utf-8"), capture_output=True,
+                                 timeout=max(1.0, min(CHECK_SECONDS, self.until - started)))
+        except subprocess.TimeoutExpired:
+            self.said = "it took longer than %d seconds" % CHECK_SECONDS
+            return frozenset(["coming to an end"])
+        self.slowest = max(self.slowest, time.monotonic() - started)
+        lines = [line.strip() for line in (ran.stderr + b"\n" + ran.stdout).decode("utf-8", "replace").splitlines()
+                 if line.strip()]
+        failed = ["coming to an end"]
+        if lines and lines[-1].startswith(CHECK_SAID):
+            failed = json.loads(lines.pop()[len(CHECK_SAID):])
+        if failed is None:
+            raise Refused("%s holds nothing that can be run here: no unittest class, no test function without "
+                          "arguments, and it is not a script; nothing was changed" % self.path)
+        if failed:
+            telling = [line for line in lines if re.match(r"[A-Za-z_][\w.]*(Error|Exception|Exit|Fails)\b", line)]
+            self.said = (telling or lines or ["it ended with status %d" % ran.returncode])[-1][:90]
+        return frozenset(failed)
+
+
+def repeat_tried(path, lesson, check_path):
+    """Repeat what a lesson shows on a file, and try what it does not show, keeping what a check settles.
+
+    Tried are the places `repeat` refuses or passes over: code the lesson changed but used another way here, and
+    code that fits only the wider reading of the lesson (`wider`).  A tried place is kept when no test of the
+    check that passed before fails with it, and a test that passes with it fails when that code is made to fail;
+    a check that does not notice the code failing says nothing about it.  A file that was tried is added to the
+    lesson as an example, so that what the check settled needs no try the next time.
+    """
+    target, source = read_python(path, "the file to edit")
+    lesson_file, examples, origins = lesson_examples(lesson)
+    if examples is None:
+        raise Refused("the lesson file does not exist")
+    if not inside_project(check_path, "the check").is_file() or not check_path.endswith(".py"):
+        raise Refused("the check must be a Python file that exists")
+    rules, readings = learn_all(examples, wide=True)
+    text = Text(source, "the file")
+    found = fitting(rules, text, "the file")
+    shown = [place[:4] for place in found if place[4] is SHOWN]
+    tries = [place[:4] for place in found if place[4] is not SHOWN]
+    taken = {id(place[1]) for place in found}
+    tries += [place[:4] for place in fitting(readings, text, "the file", lambda node: id(node) in taken, torn=False)]
+    tries.sort(key=lambda place: place[0])
+
+    def with_places(places, fail_at=None):
+        try:
+            return written(text, shown + places, fail_at=fail_at)
+        except Refused:
+            return None
+
+    written(text, shown)                 # what the lesson shows must be writable by itself, or the refusal says why
+    trying, unsettled, against, kept = [], [], [], []
+    for place in tries:
+        if (len(trying) < MOST_TRIED and with_places(trying + [place]) is not None
+                and with_places(trying + [place], place) is not None):
+            trying.append(place)
+        else:
+            unsettled.append(place)
+    if not shown and not trying:
+        raise Refused("nothing in the file has the form the lesson changed (%s), also not when what the change "
+                      "copied may be other code" % "; ".join(str(rule) for rule in rules))
+    lines = lambda places: ", ".join(str(place[1].lineno) for place in sorted(places, key=lambda place: place[0]))
+    check = Check(check_path, path)
+    before = check.failing()
+    if "coming to an end" in before:
+        raise Refused("%s does not come to an end on %s as it is (%s); nothing was changed" % (check_path, path, check.said))
+
+    def broken_by(places):
+        """The tests that passed on the file as it is and fail with these places changed; None when unknown."""
+        edited = with_places(places)
+        return None if edited is None or not check.time_left() else check.failing(edited) - before
+
+    broken = broken_by(trying)
+    for place in list(trying) if broken else []:
+        rest = [other for other in trying if other is not place]
+        less = broken_by(rest)
+        if less is not None and less < broken:
+            trying, broken, said_against = rest, less, check.said
+            against.append(place)
+            if not broken:
+                break
+    if broken is None or broken:         # what the tries break cannot be laid at single places: none of them is kept
+        unsettled, trying = unsettled + trying, []
+        if shown and (broken_by([]) or check.failing(with_places([])) - before):
+            raise Refused("%s fails after the change the lesson shows at line %s (%s) and not before; nothing was "
+                          "changed" % (check_path, lines(shown), check.said))
+    fails_now = check.failing(with_places(trying)) if trying else frozenset()
+    for place in trying:
+        if check.time_left() and check.failing(with_places(trying, place)) - fails_now:
+            kept.append(place)
+        else:
+            unsettled.append(place)
+    if not shown and not kept:
+        raise Refused("nothing was changed: %s" % (
+            "%s fails with line %s changed (%s)" % (check_path, lines(against), said_against) if against
+            else "%s passes or fails the same whether or not the code at line %s fails, so it says nothing "
+                 "about that code" % (check_path, lines(unsettled))))
+    final = with_places(kept)
+    if final is None:
+        raise Refused("the places the check settled cannot be written together; nothing was changed")
+    target.write_bytes(final.encode("utf-8"))
+    if check.failing() - before:
+        target.write_bytes(source.encode("utf-8"))
+        raise Refused("%s fails on the edited file (%s) and not before; nothing was changed" % (check_path, check.said))
+    if kept or against:
+        told = ["a try on %s that %s settled" % (path, check_path)]
+        told += ["kept line %s: a test that passes with it fails when that code fails" % lines(kept)] if kept else []
+        told += ["left line %s: a test fails with it changed" % lines(against)] if against else []
+        told += ["not settled, line %s" % lines(unsettled)] if unsettled else []
+        try:
+            lesson_file.write_bytes(lesson_text(
+                examples + [(source, final, tuple(sorted(where(place[1]) for place in unsettled)))],
+                origins + ["; ".join(told)]))
+        except Refused:
+            pass                         # the lesson cannot hold this file beside its other examples; it stays as it was
 
 
 def main(request):
@@ -1082,20 +1505,26 @@ def main(request):
             target, text = read_python(path, "the file to edit")
             _, earlier = read_python(before, "the example's first file")
             _, later = read_python(after, "the example's second file")
-            written = edit_by_example(text, earlier, later).encode("utf-8")
+            written_bytes = edit_by_example(text, earlier, later).encode("utf-8")
             done = "edited %s the way %s was changed into %s" % (path, before, after)
         elif action == "remember":
             lesson, before, after = values
-            target, written = remember(lesson, before, after)
+            target, written_bytes = remember(lesson, before, after)
             done = "remembered in %s the way %s was changed into %s" % (lesson, before, after)
         elif action in ("repeat", "repeat_shown"):
             path, lesson = values
             target, text = read_python(path, "the file to edit")
-            _, pairs = lesson_examples(lesson)
-            if pairs is None:
+            _, examples, _ = lesson_examples(lesson)
+            if examples is None:
                 raise Refused("the lesson file does not exist")
-            written = repeated(learn_all(pairs), text, "the lesson", leave_unshown=action == "repeat_shown").encode("utf-8")
+            written_bytes = repeated(learn_all(examples), text, "the lesson",
+                                     leave_unshown=action == "repeat_shown").encode("utf-8")
             done = "edited %s the way %s remembers%s" % (path, lesson, " and left the rest alone" if action == "repeat_shown" else "")
+        elif action == "repeat_tried":
+            path, lesson, check = values
+            repeat_tried(path, lesson, check)
+            print("edited %s the way %s remembers and tried the rest with %s" % (path, lesson, check))
+            return 0
         else:
             raise Refused("this program does not know the action %r" % (action,))
     except Refused as why:
@@ -1105,7 +1534,7 @@ def main(request):
         print("REFUSED: the code is nested too deeply to compare")
         return 3
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_bytes(written)
+    target.write_bytes(written_bytes)
     print(done)
     return 0
 
