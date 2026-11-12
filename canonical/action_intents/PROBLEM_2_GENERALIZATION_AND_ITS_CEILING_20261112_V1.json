@@ -78,13 +78,86 @@
    "LEAVE_UNDECIDABLE -- it was being read as false"
   ],
   "expected_parent_level_state_change": "The blocking cause of the reported Problem 2 is identified as coverage rather than matching, and the memory mechanism that would exploit new capabilities is built and tested. No capability registered, no family rank.",
-  "obs_blocker": "experience_v1.signature_of sorts distinctive words, so opposite directions collide and every paraphrase is a new question; and the remembered id is consulted only among survivors, so it can never rescue a miss.",
-  "obs_capability": "PROCEDURE_MEMORY_V1 + problem_2_generalization_benchmark_v1",
-  "obs_goal": "Make a similar-but-not-identical task reachable from one previous experience.",
-  "obs_inherited_system": "experience_v1 (untouched exact-recall path), grounded_action_v1.act candidate loop, world_probe preconditions.",
-  "obs_obs": "The benchmark declares its tool substrate; without yq and pyyaml it reports the absence instead of reporting a routing failure.",
-  "obs_solution": "An order-preserving (verb, source, target) direction, folded formatting verbs, a plural-safe stemmer, and injection before the candidate loop. Verified-only learning.",
-  "obs_verification": "11/11 paraphrases answered with memory OFF; 0 testable rescue targets; 4/6 refused tasks have no capability behind them. 7 tests pass, 2 skip with the substrate named.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE recall_resolution -- rejected: it still serves the exact case and costs nothing",
+    "BYPASS the router by calling the remembered capability directly -- rejected: that answers without checking preconditions, which is how a memory becomes a liability",
+    "SUBSTITUTE embeddings -- rejected: a dependency, a model, and the weaker signal for near-duplicate skills",
+    "ADOPT a second memory that proposes candidates into the existing loop"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC -- grounded_action_v1.act() and experience_v1, the front door and store this repository actually uses.",
+   "surviving_causal_blocker": "The key sorted words (so opposite directions collided and every paraphrase was a new question) and the remembered id could only choose among survivors (so a miss could never be reached). Both are in the selection path, not in the registry."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "no embedder and no model -- the whole mechanism is a tokenizer, an ordered-pair detector and a set comparison",
+    "no second store -- a `procedures` section in the existing experience file, so nothing is migrated",
+    "no new fallback path -- the candidate is injected into the existing loop and judged by it"
+   ],
+   "existing_inherited_routes_checked": [
+    "experience_v1.teach_resolution / recall_resolution (the exact-recall path, left intact)",
+    "grounded_action_v1.act candidate loop, precondition probe and binding",
+    "h100_computer_use_registry_v1 (4 generic primitives, not relevant here)"
+   ],
+   "external_existing_routes_checked": [
+    "SkillRet / skill-retrieval literature: token overlap is high-precision for near-duplicate skills, dense embeddings overgeneralise",
+    "skill shadowing and library drift: retrieval precision falls 29.6% -> 3.3% as pools grow",
+    "PolySkill: separating a skill's abstract goal from its implementation is what makes it transfer"
+   ],
+   "surviving_gap": "Nothing in the tree distinguished opposite directions or let memory propose a candidate the router did not already reach."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "counting paraphrases as evidence that memory generalizes, when the router answered them",
+    "treating 'similar task' as a matching failure without asking whether the capability exists",
+    "crediting a remembered procedure for a route the front door already found"
+   ],
+   "real_outcome": "A generalized procedure memory that preserves direction, folds formatting verbs, survives inflection, and is only allowed to learn from verified receipts -- plus a measured ceiling showing that four of six refused ordinary tasks have no capability behind them at all.",
+   "surviving_necessity": "The ceiling cannot be lifted by matching, so the next action is building capabilities, not improving retrieval."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "experience_v1 state file and its cache",
+    "grounded_action_v1 selection gate and its zero-score rule",
+    "world_probe_v1 precondition probe applied to the remembered candidate"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "the assumption that `recall_resolution` is how memory reaches a task -- it can only tie-break"
+   ],
+   "fresh_reuse_plan": "On a new machine the procedure memory is empty and costs nothing; the exact recall path behaves exactly as before."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "signature computed once per sentence",
+    "candidate list ranked by Jaccard over components, top three only"
+   ],
+   "search_stop_decision": "Stopped at three candidate mechanisms: embeddings (rejected -- a dependency, a model, and the literature says it is the weaker signal here), rewriting the old key in place (rejected -- it would migrate a store that currently works), and a second memory that is only a candidate source (adopted, because it is the only one bounded by the existing safety rules)."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Embeddings cost a dependency and a model for a signal the literature says is weaker on near-duplicate skills; rewriting the old key in place would migrate a store that works.",
+   "routes_ranked": [
+    "1. A second memory with an order-preserving (verb, source, target) direction, folded formatting verbs, a plural-safe stemmer and literals dropped",
+    "2. Inject its candidates BEFORE the candidate loop so the existing probe, binder and verifier judge them",
+    "3. Learn only from VERIFIED receipts"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The effect is measured end to end on the real front door and the real registry: 11 paraphrases routed with memory off, six refused tasks checked against the 145-row registry for a capability that could serve them, and the opposite-direction collision reproduced against the old key. The tests re-run the front door rather than mocking it, and declare the tool substrate instead of assuming it."
+  },
   "real_outcome": "PROCEDURE_MEMORY_THAT_GENERALIZES_OVER_WORDING_INFLECTION_AND_DIRECTION__AND_A_MEASURED_CEILING_OF_FOUR_MISSING_CAPABILITIES_BEHIND_SIX_REFUSED_TASKS",
   "required_capability": "A sensor that answers UNKNOWN as its own value, so that a premise nobody can see is not silently counted as false, and a binder that either binds a stated value or reports that it cannot, never neither.",
   "route_frontier": {

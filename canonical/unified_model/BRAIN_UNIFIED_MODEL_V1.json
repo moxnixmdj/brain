@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4dd1dc43310743bd394b6064cdfa18450d6807ae2c3d3264795942f511d2ee14"
+  "value": "f5b83bb445ebd9de802b4b2d143b834b578b039afa888ae0cd1e8056bf3c6256"
  },
  "engines": [
   {
@@ -229954,7 +229954,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/PROBLEM_2_GENERALIZATION_AND_ITS_CEILING_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "9e2fc9789ba19e29cef77a934acf7ac2ea7d8f02d405a9cbd531e7fd84dcd81e",
+   "sha256": "f197be62441d79f2abb0a9f1f13972f3d26db7190b4ffad8be497f86ad9357bc",
    "status": "",
    "terms": {
     "11": 2,
