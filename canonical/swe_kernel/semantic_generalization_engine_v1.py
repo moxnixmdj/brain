@@ -1,26 +1,13 @@
-"""Semantic Generalization Engine — enables true generalization via semantic similarity.
+"""Prototype lexical retrieval over stored task experiences; not a solver.
 
-Solves the fundamental limitation of keyword-based strategy retrieval by:
-1. Encoding tasks into semantic embeddings (TF-IDF + n-gram features)
-2. Retrieving similar experiences by cosine similarity in semantic space
-3. Adapting strategies compositionally for novel but semantically similar tasks
+Task descriptions are represented by hand-expanded synonyms, word and character
+n-grams, and sparse TF-IDF-like weights. Cosine similarity ranks stored records.
+The returned strategy is a candidate suggestion only: this module does not execute
+a task, establish that a retrieved procedure applies, or verify an outcome.
 
-Based on 2026 state-of-the-art (ERL, ReasoningBank, ExpWeaver):
-- ERL: Distills trajectories into reusable heuristics
-- ReasoningBank: Strategic guardrails from success AND failure
-- ExpWeaver: Latent RAG for experience retrieval (16.32% cross-domain transfer)
-
-Architecture:
-  Task → Embed → Retrieve Similar → Adapt Strategy → Execute
-
-This enables the system to generalize from:
-  "count functions in solve_v1.py" → "count classes in main.py"
-  "fix bug in login.py" → "fix error in auth.py"
-
-Usage:
-  engine = SemanticGeneralizationEngine()
-  similar_experiences = engine.retrieve_similar("novel task description", top_k=5)
-  adapted_strategy = engine.adapt_strategy(similar_experiences, novel_task)
+The legacy method name ``generalize_and_solve`` is retained for compatibility, but
+its result is retrieval plus strategy assembly—not a solved task or a proof of
+transfer. Similarity scores are not correctness probabilities.
 """
 from __future__ import annotations
 
@@ -36,12 +23,10 @@ from collections import Counter
 SCHEMA = "BRAIN_SEMANTIC_GENERALIZATION_ENGINE_V1"
 
 class SemanticGeneralizationEngine:
-    """Enables true generalization via semantic similarity and compositional reasoning.
-    
-    Extends strategy extraction with:
-    - Semantic embeddings for tasks (TF-IDF + n-gram features)
-    - Cosine similarity retrieval in semantic space
-    - Compositional strategy adaptation for novel tasks
+    """Retrieve lexical-neighbor experiences and assemble a candidate suggestion.
+
+    This does not execute or verify the target task. TF-IDF-like overlap is not a
+    correctness score, and the hand-written synonym table limits vocabulary coverage.
     """
     
     def __init__(
@@ -56,7 +41,7 @@ class SemanticGeneralizationEngine:
             Path(__file__).parent.parent / "astra_runtime" / "generalization" / "TASK_EMBEDDINGS_V1.json"
         )
         
-        # Synonym groups for semantic expansion
+        # Hand-written synonym groups for lexical query expansion
         self.synonyms = {
             "count": ["count", "enumerate", "find", "identify", "list", "get", "retrieve"],
             "function": ["function", "functions", "method", "methods", "subroutine", "subroutines", "def", "definition"],
@@ -209,18 +194,18 @@ class SemanticGeneralizationEngine:
         outcome: str,
         strategy: dict[str, Any] | None = None
     ) -> dict[str, Any]:
-        """Store a new experience with its semantic embedding.
-        
+        """Persist an experience and its sparse lexical feature vector.
+
         Args:
             task_description: Description of the task
             trajectory: List of actions taken
             outcome: "success" or "failure"
-            strategy: Optional extracted strategy (from strategy extractor)
-            
+            strategy: Optional strategy metadata
+
         Returns:
             Stored experience with ID
         """
-        # Compute semantic embedding
+        # Compute lexical feature vector
         embedding = self._embed_task(task_description)
         
         # Create experience record
@@ -255,15 +240,10 @@ class SemanticGeneralizationEngine:
         top_k: int = 5,
         min_similarity: float = 0.3
     ) -> list[dict[str, Any]]:
-        """Retrieve most similar experiences using semantic similarity.
-        
-        Args:
-            task_description: Novel task description
-            top_k: Number of experiences to retrieve
-            min_similarity: Minimum cosine similarity threshold
-            
-        Returns:
-            List of similar experiences sorted by similarity
+        """Rank stored experiences by cosine similarity of lexical feature vectors.
+
+        This ranking is a retrieval heuristic, not a probability that an experience
+        applies or that its strategy is correct.
         """
         # Compute embedding for novel task
         novel_embedding = self._embed_task(task_description)
@@ -291,17 +271,11 @@ class SemanticGeneralizationEngine:
         similar_experiences: list[dict[str, Any]],
         novel_task: str
     ) -> dict[str, Any] | None:
-        """Adapt strategies from similar experiences for the novel task.
-        
-        Uses compositional reasoning to combine strategies from multiple
-        similar experiences into a unified approach for the novel task.
-        
-        Args:
-            similar_experiences: Retrieved similar experiences
-            novel_task: The novel task description
-            
-        Returns:
-            Adapted strategy or None if no suitable strategy found
+        """Assemble a candidate suggestion from retrieved records.
+
+        The current implementation selects the highest-ranked successful strategy
+        and counts repeated action strings. It does not execute that strategy or
+        validate that it applies to the novel task.
         """
         if not similar_experiences:
             return None
@@ -357,16 +331,10 @@ class SemanticGeneralizationEngine:
         task_description: str,
         top_k: int = 5
     ) -> dict[str, Any]:
-        """Complete generalization pipeline: retrieve similar + adapt strategy.
-        
-        This is the main entry point for using semantic generalization.
-        
-        Args:
-            task_description: Novel task to solve
-            top_k: Number of similar experiences to consider
-            
-        Returns:
-            Result with retrieved experiences and adapted strategy
+        """Retrieve neighbors and return a candidate strategy suggestion.
+
+        The legacy name is preserved, but this method does not solve, execute, or
+        verify the requested task.
         """
         # Retrieve similar experiences
         similar = self.retrieve_similar(task_description, top_k=top_k)

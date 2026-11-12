@@ -1,17 +1,9 @@
-"""Automatic generalization from one showing, settled by evidence.
+"""Candidate-rule settlement tests for one synthetic Python edit family.
 
-`canonical/swe_kernel/taught_actions/generalization_loop_v1.py` computes the literal
-and wider hypotheses from one showing and settles their disagreement with an oracle.
-These tests pin the five measured behaviours:
-
-  G1  wider correct + oracle      -> ADMIT_WIDER_SETTLED (generalization transfers)
-  G2  wider correct + no oracle   -> REFUSE_UNSETTLED (fail closed, no guess banked)
-  G3  literal and wider agree     -> ADMIT_AGREEMENT (no question needed)
-  G4  wider wrong + oracle        -> REFUSE (oracle rejects the over-generalization)
-  G5  no wider reading exists     -> ADMIT_LITERAL_MAXIMAL (literal is maximal)
-
-Plus: the 4-site generalization from ONE showing (vs 1/4 for raw literal) and the
-unlearnable-demonstration propagation.
+The loop computes literal and wider candidates but requires an oracle to admit any
+candidate. Agreement is not correctness; neither is absence of a wider reading.
+The tests cover oracle-confirmed candidates, fail-closed behavior, and the known
+wrong-agreement counterexample. They do not establish generalization across projects.
 """
 from __future__ import annotations
 
@@ -24,6 +16,7 @@ from canonical.swe_kernel.taught_actions.generalization_loop_v1 import (
     ADMIT_WIDER_SETTLED,
     REFUSE_NEITHER_CONFIRMED,
     REFUSE_UNSETTLED,
+    REFUSE_UNVERIFIED,
     REFUSED_SHAPE,
     settle_generalization,
 )
@@ -59,19 +52,39 @@ def test_g2_wider_correct_without_oracle_fails_closed():
     assert "Fail closed" in result["why"]
 
 
-def test_g3_agreement_needs_no_question():
+def test_g3_agreement_without_oracle_is_only_a_candidate_not_an_admission():
     result = settle_generalization(NONE_BEFORE, NONE_AFTER, TARGETS["the_same_name"], oracle=None)
-    assert result["action"] == ADMIT_AGREEMENT
-    assert result["edited_text"] is not None
-    assert "product is None" in result["edited_text"]
+    assert result["action"] == REFUSE_UNVERIFIED
+    assert result["edited_text"] is None
+    assert "product is None" in result["candidate_text"]
     assert result["probes_asked"] == []
 
 
-def test_g4_wider_wrong_with_oracle_is_refused():
-    """`pairs(n) = n * 2` must stay *2; wider would make it *3. The oracle rejects it."""
+def test_g3_agreement_with_oracle_is_admitted_only_after_confirmation():
+    result = settle_generalization(
+        NONE_BEFORE, NONE_AFTER, TARGETS["the_same_name"], oracle=_oracle_is_none
+    )
+    assert result["action"] == ADMIT_AGREEMENT
+    assert "product is None" in result["edited_text"]
+    assert result["probes_asked"] == ["agreement"]
+
+
+def test_g4_agreement_that_is_wrong_is_refused_without_oracle():
+    """Equal candidates can both be wrong; agreement is not a correctness signal."""
     before = "def f(a):\n    return a * 2\n"
     after = "def f(a):\n    return a * 3\n"
-    target = "def pairs(n):\n    return n * 2\n"
+    target = "def g(a):\n    return a * 2\n"
+    result = settle_generalization(before, after, target, oracle=None)
+    assert result["action"] == REFUSE_UNVERIFIED
+    assert result["edited_text"] is None
+    assert "a * 3" in result["candidate_text"]
+
+
+def test_g4_wrong_agreed_candidate_is_refused_by_oracle():
+    """The oracle rejects the shared `*3` candidate for a target that must stay `*2`."""
+    before = "def f(a):\n    return a * 2\n"
+    after = "def f(a):\n    return a * 3\n"
+    target = "def g(a):\n    return a * 2\n"
 
     def oracle_pairs(t: str, edited: str) -> bool:
         return "* 2" in edited
@@ -79,17 +92,43 @@ def test_g4_wider_wrong_with_oracle_is_refused():
     result = settle_generalization(before, after, target, oracle=oracle_pairs)
     assert result["action"] == REFUSE_NEITHER_CONFIRMED
     assert result["edited_text"] is None
-    assert "wider" in result["probes_asked"]
+    assert result["probes_asked"] == ["agreement"]
 
 
-def test_g5_no_wider_reading_literal_is_maximal():
+def test_g4_wrong_wider_candidate_is_refused_when_literal_does_not_fit():
+    """The wider candidate is rejected even when the literal rule cannot apply."""
+    before = "def f(a):\n    return a * 2\n"
+    after = "def f(a):\n    return a * 3\n"
+    target = "def pairs(n):\n    return n * 2\n"
+    result = settle_generalization(
+        before, after, target, oracle=lambda _target, edited: "* 2" in edited
+    )
+    assert result["action"] == REFUSE_NEITHER_CONFIRMED
+    assert result["edited_text"] is None
+    assert result["probes_asked"] == ["wider"]
+
+
+def test_g5_literal_maximal_without_oracle_is_refused_unverified():
     before = "import yaml\n\ndef read(stream):\n    return yaml.load(stream)\n"
     after = "import yaml\n\ndef read(stream):\n    return yaml.safe_load(stream)\n"
     target = "import yaml\n\ndef read(h):\n    return yaml.load(h)\n"
     result = settle_generalization(before, after, target, oracle=None)
+    assert result["action"] == REFUSE_UNVERIFIED
+    assert result["edited_text"] is None
+    assert "yaml.safe_load(h)" in result["candidate_text"]
+
+
+def test_g5_literal_maximal_with_oracle_is_admitted():
+    before = "import yaml\n\ndef read(stream):\n    return yaml.load(stream)\n"
+    after = "import yaml\n\ndef read(stream):\n    return yaml.safe_load(stream)\n"
+    target = "import yaml\n\ndef read(h):\n    return yaml.load(h)\n"
+    result = settle_generalization(
+        before, after, target,
+        oracle=lambda target, edited: "yaml.safe_load(h)" in edited,
+    )
     assert result["action"] == ADMIT_LITERAL_MAXIMAL
-    assert result["edited_text"] is not None
     assert "yaml.safe_load(h)" in result["edited_text"]
+    assert result["probes_asked"] == ["literal"]
 
 
 def test_one_showing_generalizes_to_all_four_sites_with_oracle():
@@ -106,22 +145,22 @@ def test_one_showing_generalizes_to_all_four_sites_with_oracle():
     assert edited == 4
 
 
-def test_one_showing_without_oracle_reaches_only_the_agreement_site():
-    """Without an oracle, only the site where literal and wider agree is admitted.
-
-    The other three are REFUSE_UNSETTLED -- the system knows what it does not know,
-    which is the fail-closed property the whole design rests on.
-    """
+def test_one_showing_without_oracle_refuses_every_unverified_candidate():
+    """No candidate is admitted without an oracle, even when both rules agree."""
     admitted = 0
-    refused = 0
+    unsettled = 0
+    unverified = 0
     for target in TARGETS.values():
         result = settle_generalization(NONE_BEFORE, NONE_AFTER, target, oracle=None)
         if result["edited_text"] is not None:
             admitted += 1
         elif result["action"] == REFUSE_UNSETTLED:
-            refused += 1
-    assert admitted == 1
-    assert refused == 3
+            unsettled += 1
+        elif result["action"] == REFUSE_UNVERIFIED:
+            unverified += 1
+    assert admitted == 0
+    assert unsettled == 3
+    assert unverified == 1
 
 
 def test_unlearnable_demonstration_propagates():

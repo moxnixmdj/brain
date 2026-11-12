@@ -3,9 +3,11 @@
 **2026-11-12.** Branch `arena/64168b10-brain`. Authority **NONE**. `truth.achieved` stays
 `false`. No capability registered. $0 spend. Zero model dependency in every result-bearing path.
 
-This round answers the owner's question — *Problem 2: Generalization (NOT SOLVED)* — by
-building the missing integration, not by arguing. The mechanism existed (`wider()` in
-`edit_by_example_v1`); nothing used it automatically or safely. Now something does.
+This round tests a narrow mechanism related to the owner's question — *Problem 2:
+Generalization (NOT SOLVED)*. The mechanism existed (`wider()` in `edit_by_example_v1`);
+this adds candidate comparison and fail-closed settlement for one Python edit family.
+It is a bounded experiment, not a solution to generalization across coding tasks or
+computer environments.
 
 ---
 
@@ -26,7 +28,7 @@ question five times on 2026-11-12; the verdicts below are re-verified on this tr
 | "New arbitrary environments" | **FALSE as stated** | 1/15 genuine transfer on distinct instances; front door 8/149 (5.4%) |
 | Cross-kind compounding | **FALSE (pinned)** | 0/5 across kinds; NO_COMPOUNDING at 10 held-out kinds |
 | Sentience | **NOT MEASURED, NOT CLAIMED** | nothing in the tree measures it; every receipt carries the non-claim |
-| The direction is revolutionary | **PARTLY TRUE** | verifier-gated learning is the shape the whole 2026 field converged on (SkillRL, SICA 17→53, DGM 20→50); the novelty here is the refusal discipline, not the loop |
+| The direction is promising | **PARTLY TRUE** | Several 2026 studies explore feedback and verified skill reuse, but reported gains are mixed and harness-dependent; this repository's measurements are narrow and do not establish a universal learning advantage |
 
 **Why "once" cannot buy "everything" — from first principles.** A demonstration is not a
 specification. One example is at most one constraint per observation; exact identification
@@ -36,16 +38,19 @@ the hypothesis space (1→2→3 examples all 6/7). The prior generalises; the ex
 selects. **One try is enough exactly when the interface and the verifier already do the
 generalising** — when the prior is pre-loaded.
 
-**The smartest things to do** (ranked by measured leverage, not opinion):
-1. **Chosen questions, not more examples.** One demo + 2 chosen questions → 100% (10/10).
-   Two adversarially-chosen showings → general (4/4). A million repetitions → nothing.
-2. **Widen the interface/verifier regime.** A typed interface against a declared contract
-   is a pre-loaded hypothesis space. `npm test` means the same thing in ten thousand repos;
-   pixels do not. This is the only large 2026 gain (Agent S4: 3.8× by evolving interfaces).
-3. **Wire the oracle at the front door.** 8/149 admitted; the largest red cluster is the
-   door, not the learner. Nothing downstream can be measured until this moves.
-4. **Donor-distilled prior** (bounded acquisition, donor deleted, held-out qualification).
-   The only lawful route to a shared space no person wrote.
+**The smartest next steps** (ranked by measured leverage, with scopes attached):
+1. **Choose examples by target-relevant structure, not by volume.** The merged 15-PR
+   code-edit measurement reports 61.78% pooled developer-change coverage for its
+   self-simulated pair selector versus 23.12% for all pairs, at 87.42% precision; five
+   PRs still have zero coverage and project tests were not run. This is promising, not
+   universal.
+2. **Require a real verifier before applying a candidate.** The one-demo + two-question
+   10/10 result and the 4/4 edit-shape result each cover narrow hypothesis spaces. If a
+   sound oracle is unavailable, keep the candidate unapproved and ask for information.
+3. **Expand the learner's operator coverage only where measured refusal cases justify it.**
+   Better example selection cannot invent transformations outside the rule language.
+4. **Then run preregistered held-out evaluations across independent code families and GUI
+   tasks.** Report transfer, precision, refusals, false edits, and regressions separately.
 
 **Explicitly not on the list:** breadth of environments as a strategy (measured 0/5
 transfer), growing a static skill catalogue (92/98 inert per SWE-Skills-Bench), sentience
@@ -53,23 +58,28 @@ as a target (nothing measures it).
 
 ---
 
-## 2. Problem 2, defined precisely
+## 2. Problem 2 and the narrow probe
 
-> **Problem 1: Exact Recall (SOLVED)** — same task again → instant. 8.13× measured.
-> **Problem 2: Generalization (NOT SOLVED)** — similar task → adapt. Exact matches only.
+> **Problem 1: Exact Recall (SOLVED for its measured case)** — same task again → instant;
+> 8.13× reported.
+> **Problem 2: Generalization (NOT SOLVED)** — adapt to similar tasks; exact matches alone
+> are not enough.
 
-"Similar" means: same defect, different names/shapes. The measured state was:
+The broad Problem 2 is not defined by one edit family. This round operationalizes only
+one small slice: changing `== None` to `is None` across four synthetic Python target
+shapes. The counts below mean “the string-rewrite learner produced a changed output,”
+not “an independent verifier proved it correct.”
 
-| mechanism | 1 showing | 2 showings |
+| mechanism in this narrow probe | 1 showing | 2 showings |
 |---|---|---|
-| `edit_by_example` literal | 1/4 unseen sites | — |
-| `edit_by_example` wider (computed, unused) | 4/4 (hypothesis) | 4/4 (fact) |
-| `settled_admission` (target question) | refuses without oracle | — |
+| `edit_by_example` literal | 1/4 target strings changed | — |
+| `edit_by_example` wider candidate | 4/4 target strings changed (candidate only) | 4/4 target strings changed |
+| `settled_admission` (separate target question) | refuses without oracle | — |
 
-The gap was not the algebra — `wider()` already computes the generalization candidate
-from one showing. The gap was that **nothing settled it**: no automatic computation,
-no evidence check, no fail-closed refusal. The user had to know to provide a second
-showing. That is the problem this round solves.
+`wider()` computes a candidate from one showing. This round adds a small settlement
+interface around that candidate and measures it on the same synthetic family. Neither
+the rewrite count nor the string-predicate oracle establishes correctness for arbitrary
+targets, projects, or task types; Problem 2 remains open.
 
 ---
 
@@ -79,50 +89,57 @@ showing. That is the problem this round solves.
 generalization loop. From one showing it computes both hypotheses and settles them:
 
 ```
-learn literal + wider from 1 showing
+learn literal + wider candidates from 1 showing
   -> apply both to target
-  -> agree?          ADMIT (no question)
-  -> no wider?       ADMIT literal (maximal)
-  -> disagree, no oracle?  REFUSE_UNSETTLED (fail closed)
-  -> disagree, oracle?     ask about wider first;
-                           admit on confirmation, fall back to literal,
-                           refuse when neither is confirmed
+  -> no candidate fits?     REFUSED_SHAPE
+  -> candidate(s), no oracle? REFUSE_UNSETTLED or REFUSE_UNVERIFIED
+  -> candidate(s), oracle?  ask about distinct candidate(s);
+                            admit only a confirmed candidate,
+                            refuse when none is confirmed
 ```
 
-The oracle is the minimum question interface: `oracle(target_text, edited_text) -> bool`.
-One question settles the generalization. The asymmetric protocol (admit on confirmation,
-refuse on contradiction) is the same discipline as `settled_admission_v1`, applied to
-the rule question instead of the target question.
+The oracle interface is `oracle(target_text, edited_text) -> bool`. A positive response
+is only as sound as the supplied oracle; the loop itself does not provide one. It asks
+once per distinct candidate in the small literal/wider hypothesis set and admits only a
+confirmed candidate. This is not a substitute for project tests, a specification, or
+independent outcome verification.
 
 ### 3.1 The measurement
 
 `generalization_loop_probe_20261112.py` — same 4-site corpus, three arms:
 
-| arm | edited | refused | meaning |
-|---|---|---|---|
-| raw literal (before) | **1/4** | 3/4 | exact recall only — Problem 2 as stated |
-| loop + oracle (this round) | **4/4** | 0/4 | generalization, settled by evidence |
-| loop, no oracle | 1/4 | **3/4 REFUSE_UNSETTLED** | knows what it does not know |
+| arm | admitted edit | refused | meaning |
+|---|---:|---:|---|
+| raw literal (before) | **1/4** | 3/4 | narrow rewrite reach, not broad Problem 2 |
+| loop + scripted oracle | **4/4** | 0/4 | candidate accepted by a string predicate |
+| loop, no oracle | **0/4** | 3/4 REFUSE_UNSETTLED + 1/4 REFUSE_UNVERIFIED | fails closed, including agreement |
 
-Plus the over-generalization arm: `pairs(n) = n * 2` must stay `*2`; wider would make it
-`*3`. The loop asks the oracle, the oracle rejects wider, and the loop **refuses** —
-the silent wrongness of defect 6 (`is_last_index`) cannot happen through this path.
+The test oracle is deliberately simple: `_oracle_is_none` checks for the expected text,
+and the over-generalization oracle checks that `* 2` remains in the output. These are
+string predicates, not independently executed specifications. The over-generalization
+arm shows that the control flow can refuse a rejected candidate; it does not establish
+that a real project oracle will be available or sound. Agreement and “no wider reading”
+are not correctness evidence: without an oracle they now return an unverified candidate
+preview and no admitted edit.
 
 ### 3.2 What this does and does not solve
 
-**Solves:** the rule-generalization question. One showing now reaches 4/4 unseen sites
-automatically, with evidence, instead of waiting for a second showing. Without evidence
-it refuses and names the disagreement — the fail-closed property.
+**Demonstrates:** a candidate-rule settlement pattern on one synthetic edit family.
+Four target strings receive an admitted rewrite when the supplied predicate accepts
+its candidate. Without that predicate, all four are refused: three are unsettled and
+one has literal/wider agreement but remains unverified. The predicate is a string-level
+test, not an independent program test suite, so 4/4 is not evidence of correctness
+across real projects.
 
-**Does not solve:** the target-applicability question. When literal and wider agree,
-the loop admits without asking whether the edit should be applied at all. That is
-`settled_admission_v1`'s domain (apply vs keep, settled by function-execution probes).
-The two modules compose: generalization_loop settles *which rule*; settled_admission
-settles *whether to apply it*. Together they are the complete generalization solution.
+**Does not solve:** broad Problem 2. The loop does not establish target applicability,
+robustness to other edit operators, cross-kind transfer, arbitrary-environment coverage,
+or safe execution. `settled_admission_v1` addresses a separate apply-vs-keep question,
+but composing two narrow mechanisms does not make them a complete generalization
+solution.
 
-**Does not claim:** cross-kind compounding (still 0/5), arbitrary-environment coverage
-(still 8/149), permanence under drift, sentience. The loop generalises within one
-edit family, which is exactly the scope Problem 2 defines.
+**Does not claim:** cross-kind compounding (measured 0/5), arbitrary-environment
+coverage (front door 8/149), permanence under drift, sentience, or universal computer
+use. This is one synthetic edit family and one four-shape probe.
 
 ---
 
@@ -154,23 +171,31 @@ The alternatives were killed before implementation:
 
 ## 5. What is real and what is not, after this round
 
-**Real (measured):** exact recall (8.13×); per-kind transfer (8/15, 6.33×); two-showings
-generalization (4/4); oracle-settled target admission (settled_admission, 11 tests);
-**now: automatic rule generalization from one showing, settled by evidence (4/4 with
-oracle, 1/4 + 3/4 fail-closed without, over-generalization refused).**
+**Real, within the recorded scopes:** exact recall (8.13× on its measured case); per-kind
+transfer (8/15 one-trial, 6.33×); target-aware example selection (61.78% pooled coverage
+and 87.42% precision on one 15-PR corpus); two-showing generalization (4/4 on one
+synthetic edit family); and this loop's 4/4 string-level result with its supplied
+predicate. These are different measurements and are not evidence for one universal
+learner.
 
-**Not real (measured, pinned):** one-try identification (0.10 accuracy); one-success
-applicability (0/200); cross-kind compounding (0/5); arbitrary-environment coverage
-(8/149 front door); permanence under drift; sentience.
+**Not established:** broad one-demo identification (one try leaves 14.1/47 hypotheses,
+with 10% held-out leader accuracy); one-success applicability (0/200); cross-kind
+compounding (0/5); arbitrary-environment coverage (front door 8/149); safe transfer to
+unseen projects; permanence under drift; sentience.
 
 **Smartest next steps, ranked:**
-1. **Wire the oracle at the front door** — give live fabric paths the oracle interface;
-   re-run the one-try census. Target: 8/149 → measured.
-2. **Compose the two settlement modules** — generalization_loop (which rule) +
-   settled_admission (whether to apply) as one call at the front door.
-3. **Per-place settlement** — the loop currently settles whole edits; per-place would
-   keep 3 correct generalizations when wider is wrong on 1 of 4 places.
-4. **Donor-distilled prior** — the only route to a shared space no person wrote.
+1. **Evaluate example selection on held-out real repairs.** The 15-PR result is a
+   promising multiplier, but its 87.42% precision is agreement with developers, not
+   correctness, and no project test suites were run.
+2. **Add a real verifier before any edit is admitted.** Prefer target-project tests and
+   explicit invariants; test both intended change and regressions. If no oracle exists,
+   preserve ambiguity and refuse rather than promote a guessed rule.
+3. **Measure operator gaps and acquire the smallest missing operators.** Keep the
+   selection policy separate from the learner's expressivity; it cannot pick a rule
+   that the learner cannot represent.
+4. **Only then run broader, preregistered cross-family and GUI evaluations.** Report
+   coverage, precision, false edits/refusals, regressions, and per-task results. Do not
+   infer arbitrary computer-use capability from one code-edit corpus.
 
 ---
 
@@ -178,7 +203,7 @@ applicability (0/200); cross-kind compounding (0/5); arbitrary-environment cover
 
 ```bash
 python3 generalization_loop_probe_20261112.py
-python3 -m pytest canonical/tests/test_generalization_loop_v1.py -q          # 10 passed
+python3 -m pytest canonical/tests/test_generalization_loop_v1.py -q          # 14 passed
 python3 -m pytest canonical/tests/test_one_showing_is_literal_two_showings_are_general_v1.py \
     canonical/tests/test_settled_taught_admission_v1.py \
     canonical/tests/test_an_edit_is_worked_out_from_an_example_and_repeated_on_another_file_v1.py -q  # 69 passed

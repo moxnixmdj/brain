@@ -1,37 +1,20 @@
 #!/usr/bin/env python3
-"""Automatic generalization from one showing, settled by evidence.
+"""Candidate-rule settlement from one showing; a narrow experiment, not a solution.
 
-Why this exists
----------------
-Measured 2026-11-12 (`ONE_SHOWING_IS_LITERAL_TWO_SHOWINGS_ARE_GENERAL_20261112_V1.md`):
-one showing gives a literal rule (`product == None -> product is None`, 1/4 unseen sites);
-two showings give a general rule (`?1 == None -> ?1 is None`, 4/4). The gap is not the
-mechanism -- `edit_by_example_v1.wider()` already computes the generalization candidate
-from one showing -- it is that nothing uses it automatically or safely:
+Measured 2026-11-12 on one synthetic Python edit family: `edit_by_example_v1.wider()`
+can produce a rule that transforms four target shapes, but can also over-generalize
+(e.g. changing `* 2` to `* 3`). Neither candidate agreement nor the absence of a wider
+reading proves that an edit is correct or applicable.
 
-* literal is too narrow: refuses valid generalizations (`invoice.paid == None`);
-* wider is too broad: fires where it should not (`pairs(n) = n * 2` -> `n * 3`);
-* neither is automatically correct, and the system waits for the user to provide a
-  second showing instead of settling the question itself.
+This module computes literal and wider candidates. It returns no admitted edit without
+an oracle. With an oracle, it asks about the wider candidate first, falls back to the
+literal candidate after contradiction, and refuses if no candidate is confirmed. The
+oracle is trusted input (`oracle(target_text, edited_text) -> bool`); a weak or scripted
+predicate cannot establish real-world correctness. No file is written or executed here.
 
-This module closes that gap. From one showing it computes both hypotheses --
-**literal** (exact) and **wider** (generalized) -- applies both to the target, and:
-
-1. **Agreement** (both produce the same edit, or both refuse) -> admit, no question.
-2. **No wider reading exists** -> literal is maximal; apply it directly.
-3. **Disagreement, no oracle** -> refuse, fail closed; the disagreement is recorded
-   as the questions worth asking.
-4. **Disagreement, oracle present** -> ask the oracle about the wider edit first
-   (the generalization hypothesis). Admit wider on confirmation; fall back to
-   literal on contradiction; refuse when neither is confirmed.
-
-The oracle is the minimum question interface: `oracle(target_text, edited_text) -> bool`,
-"is this edit correct?" It is whatever can answer that -- a test, a teacher, a spec.
-One question settles the generalization; the asymmetric protocol (admit on confirmation,
-refuse on contradiction) is the same discipline as `settled_admission_v1`, applied to
-the rule question instead of the target question.
-
-Authority NONE. Zero model dependency. $0 spend. `truth.achieved` stays false.
+This is a candidate-selection helper for one operator family, not generalization across
+arbitrary coding or computer-use tasks. Authority NONE; zero model dependency; $0 spend;
+`truth.achieved` stays false.
 """
 from __future__ import annotations
 
@@ -45,6 +28,7 @@ ADMIT_LITERAL_MAXIMAL = "ADMIT_LITERAL_MAXIMAL"
 ADMIT_WIDER_SETTLED = "ADMIT_WIDER_SETTLED"
 ADMIT_LITERAL_SETTLED = "ADMIT_LITERAL_SETTLED"
 REFUSE_UNSETTLED = "REFUSE_UNSETTLED"
+REFUSE_UNVERIFIED = "REFUSE_UNVERIFIED"
 REFUSE_NEITHER_CONFIRMED = "REFUSE_NEITHER_CONFIRMED"
 REFUSED_SHAPE = "REFUSED_SHAPE"
 
@@ -77,7 +61,7 @@ def settle_generalization(
 
     literal_text = _try_apply(rules, target_text)
 
-    # No wider reading: literal is already maximally general.
+    # No wider reading: the literal candidate is the only hypothesis, not a verified edit.
     if not readings:
         if literal_text is None:
             return {
@@ -86,22 +70,46 @@ def settle_generalization(
                 "rule_descriptions": [str(r) for r in rules],
                 "wider_descriptions": [],
                 "edited_text": None,
+                "candidate_text": None,
                 "probes_asked": [],
                 "terminal_authority": False,
             }
+        if oracle is None:
+            return {
+                "action": REFUSE_UNVERIFIED,
+                "why": "the literal candidate is maximally general but no oracle verified its correctness",
+                "rule_descriptions": [str(r) for r in rules],
+                "wider_descriptions": [],
+                "edited_text": None,
+                "candidate_text": literal_text,
+                "probes_asked": [],
+                "terminal_authority": False,
+            }
+        if oracle(target_text, literal_text):
+            return {
+                "action": ADMIT_LITERAL_MAXIMAL,
+                "why": "no wider reading exists and the oracle confirmed the literal candidate",
+                "rule_descriptions": [str(r) for r in rules],
+                "wider_descriptions": [],
+                "edited_text": literal_text,
+                "candidate_text": literal_text,
+                "probes_asked": ["literal"],
+                "terminal_authority": False,
+            }
         return {
-            "action": ADMIT_LITERAL_MAXIMAL,
-            "why": "no wider reading exists; the literal rule is maximally general and fits the target",
+            "action": REFUSE_NEITHER_CONFIRMED,
+            "why": "the oracle rejected the only available literal candidate",
             "rule_descriptions": [str(r) for r in rules],
             "wider_descriptions": [],
-            "edited_text": literal_text,
-            "probes_asked": [],
+            "edited_text": None,
+            "candidate_text": literal_text,
+            "probes_asked": ["literal"],
             "terminal_authority": False,
         }
 
     wider_text = _try_apply(readings, target_text)
 
-    # Agreement: both hypotheses produce the same edit (or both refuse).
+    # Agreement resolves which hypothesis to ask about, not whether it is correct.
     if literal_text == wider_text:
         if literal_text is None:
             return {
@@ -110,16 +118,40 @@ def settle_generalization(
                 "rule_descriptions": [str(r) for r in rules],
                 "wider_descriptions": [str(r) for r in readings],
                 "edited_text": None,
+                "candidate_text": None,
                 "probes_asked": [],
                 "terminal_authority": False,
             }
+        if oracle is None:
+            return {
+                "action": REFUSE_UNVERIFIED,
+                "why": "literal and wider agree, but agreement does not verify the candidate; no oracle was given",
+                "rule_descriptions": [str(r) for r in rules],
+                "wider_descriptions": [str(r) for r in readings],
+                "edited_text": None,
+                "candidate_text": literal_text,
+                "probes_asked": [],
+                "terminal_authority": False,
+            }
+        if oracle(target_text, literal_text):
+            return {
+                "action": ADMIT_AGREEMENT,
+                "why": "literal and wider agree and the oracle confirmed their shared candidate",
+                "rule_descriptions": [str(r) for r in rules],
+                "wider_descriptions": [str(r) for r in readings],
+                "edited_text": literal_text,
+                "candidate_text": literal_text,
+                "probes_asked": ["agreement"],
+                "terminal_authority": False,
+            }
         return {
-            "action": ADMIT_AGREEMENT,
-            "why": "literal and wider agree on the target; no generalization question arises",
+            "action": REFUSE_NEITHER_CONFIRMED,
+            "why": "the oracle rejected the candidate on which literal and wider agree",
             "rule_descriptions": [str(r) for r in rules],
             "wider_descriptions": [str(r) for r in readings],
-            "edited_text": literal_text,
-            "probes_asked": [],
+            "edited_text": None,
+            "candidate_text": literal_text,
+            "probes_asked": ["agreement"],
             "terminal_authority": False,
         }
 

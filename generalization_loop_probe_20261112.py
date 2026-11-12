@@ -6,7 +6,8 @@ learner never saw):
 
   A. raw literal (`edit_by_example` alone)          -> 1/4 edited, 3/4 refused
   B. loop + oracle (wider computed, settled)        -> 4/4 edited
-  C. loop, no oracle (fail closed)                  -> 1/4 admitted, 3/4 REFUSE_UNSETTLED
+  C. loop, no oracle (fail closed)                  -> 0/4 admitted; 3 unsettled,
+                                                        1 unverified agreement refused
 
 Plus the over-generalization arm: a target where wider is wrong (`pairs` must stay
 `*2`); the loop must refuse it when the oracle says so.
@@ -86,6 +87,8 @@ def run() -> dict[str, Any]:
             "loop_no_oracle_admitted": sum(1 for v in loop_no_oracle.values() if v["edited"]),
             "loop_no_oracle_refused_unsettled": sum(
                 1 for v in loop_no_oracle.values() if v["action"] == "REFUSE_UNSETTLED"),
+            "loop_no_oracle_refused_unverified": sum(
+                1 for v in loop_no_oracle.values() if v["action"] == "REFUSE_UNVERIFIED"),
             "over_generalization_refused": over["edited_text"] is None,
         },
         "hard_nonclaims": [
@@ -112,6 +115,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  loop + oracle edited                             {s['loop_oracle_edited']:>4}")
     print(f"  loop, no oracle: admitted                        {s['loop_no_oracle_admitted']:>4}")
     print(f"  loop, no oracle: refused unsettled               {s['loop_no_oracle_refused_unsettled']:>4}")
+    print(f"  loop, no oracle: refused unverified              {s['loop_no_oracle_refused_unverified']:>4}")
     print(f"  over-generalization refused                      {str(s['over_generalization_refused']):>4}")
     return 0
 

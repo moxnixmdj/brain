@@ -19,14 +19,14 @@
  "weakens_existing_guard": false,
  "benchmark_or_family_rank_authority": false,
  "highest_leverage_now": true,
- "action_summary": "Automatic generalization from one showing, settled by evidence. Computes literal and wider hypotheses from one demonstration via edit_by_example.wider, applies both to the target, admits on agreement, refuses fail-closed without an oracle, and settles disagreement with one oracle question (admit wider on confirmation, fall back to literal on contradiction). One showing now reaches 4/4 unseen sites with oracle (was 1/4 raw literal), 1/4 + 3/4 fail-closed without, over-generalization refused.",
+ "action_summary": "Candidate-rule settlement from one showing for one synthetic Python edit family. Computes literal and wider candidates via edit_by_example.wider. No edit is admitted without an oracle, including when candidates agree or no wider reading exists. With a supplied string-predicate oracle, 4/4 synthetic target shapes receive edits; without an oracle 0/4 are admitted (3 REFUSE_UNSETTLED, 1 REFUSE_UNVERIFIED). Agreement is not correctness; this is not a solution to broad Problem 2.",
  "selected_route": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
  "causal_blocker": "Problem 2 Generalization NOT SOLVED: one showing gives a literal rule (1/4 unseen sites); the wider generalization candidate is computed by edit_by_example.wider but nothing uses it automatically or safely. The user must provide a second showing. Over-generalization (pairs *2 -> *3) is unchecked.",
- "expected_parent_change": "One showing reaches 4/4 unseen sites automatically with oracle settlement; without oracle it admits 1/4 and refuses 3/4 fail-closed with named reason; over-generalization is refused when the oracle contradicts it.",
+ "expected_parent_change": "Under a scripted string-predicate oracle, 4/4 synthetic target strings receive candidate edits; without an oracle 0/4 are admitted (3 REFUSE_UNSETTLED, 1 REFUSE_UNVERIFIED). Agreement and absence of a wider reading are not treated as correctness. The scripted over-generalization candidate is rejected. One synthetic edit family; no broad Problem 2 claim.",
  "expected_parent_frontier_change": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_VERIFIED_AT_ZERO_MODEL_DEPENDENCY__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Problem 2 Generalization NOT SOLVED: one showing gives a literal rule (1/4 unseen sites); the wider generalization candidate is computed by edit_by_example.wider but nothing uses it automatically or safely. The user must provide a second showing. Over-generalization (pairs *2 -> *3) is unchecked.",
- "falsification_condition": "Any of: (a) loop with oracle does not reach 4/4 on the 4-site corpus; (b) loop without oracle admits more than the agreement site; (c) over-generalization (pairs) is admitted when oracle says keep; (d) existing taught-edit tests regress.",
- "stop_condition": "Stop when the new suite (10 tests) passes, the probe reports 4/4 with oracle and 1/4+3/4 without, over-generalization is refused, and the 69 pre-existing taught-edit tests pass unchanged.",
+ "falsification_condition": "Any of: (a) the loop with its scripted predicate fails to produce 4/4 on the synthetic four-shape corpus; (b) no-oracle mode returns an admitted edited_text for any candidate, including agreement or no-wider cases; (c) the scripted over-generalization candidate is admitted when the predicate rejects it; (d) existing taught-edit tests regress.",
+ "stop_condition": "Stop when all 14 generalization-loop tests pass, the probe reports 4/4 candidate edits with the scripted predicate and 0/4 admitted without an oracle (3 REFUSE_UNSETTLED, 1 REFUSE_UNVERIFIED), the over-generalization candidate is refused by the predicate, and the 69 pre-existing taught-edit tests pass unchanged.",
  "explicit_user_authorization": "Owner directive 2026-11-12: Focus on solving Problem 2 (Generalization) perfectly with the smartest solutions in the fastest way. Think from first principles. Maximize web use. $0 spend, zero model dependency.",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -58,7 +58,7 @@
    "AGENTS.md"
   ]
  },
- "measured_effect": "TEN_GENERALIZATION_LOOP_TESTS_PASS__PROBE_4_OF_4_WITH_ORACLE_1_OF_4_PLUS_3_REFUSED_WITHOUT__OVER_GENERALIZATION_REFUSED__SIXTY_NINE_PRE_EXISTING_TAUGHT_EDIT_TESTS_PASS__ZERO_MODEL_DEPENDENCY__ZERO_SPEND",
+ "measured_effect": "FOURTEEN_GENERALIZATION_LOOP_TESTS_PASS__PROBE_4_OF_4_WITH_SCRIPTED_PREDICATE__ZERO_OF_FOUR_ADMITTED_WITHOUT_ORACLE__THREE_UNSETTLED_ONE_UNVERIFIED__OVER_GENERALIZATION_CANDIDATE_REJECTED__SIXTY_NINE_PRE_EXISTING_TAUGHT_EDIT_TESTS_PASS__ZERO_MODEL_DEPENDENCY__ZERO_SPEND",
  "load_bearing_primary": {
   "constructive_gap_for_open_obligation_ids": [
    "AUTOMATIONBENCH_GE_40",
@@ -92,7 +92,7 @@
   "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERALIZATION_FROM_ONE_SHOWING",
-  "real_outcome": "One showing reaches 4/4 unseen sites automatically with oracle settlement; without oracle admits 1/4 and refuses 3/4 fail-closed; over-generalization refused.",
+  "real_outcome": "Under a scripted string-predicate oracle, 4/4 synthetic target strings receive candidate edits; without an oracle 0/4 are admitted (3 REFUSE_UNSETTLED, 1 REFUSE_UNVERIFIED). Agreement and absence of a wider reading are not treated as correctness. The scripted over-generalization candidate is rejected. One synthetic edit family; no broad Problem 2 claim.",
   "selected_route": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
   "selected_surviving_route": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
   "deleted_or_bypassed_paths": [
@@ -100,7 +100,7 @@
    "SYNTHESIZING_A_SECOND_SHOWING_AUTOMATICALLY__REQUIRES_KNOWING_VALID_VARIATIONS_WHICH_IS_THE_SAME_PROBLEM",
    "MORE_ENVIRONMENTS_AS_STRATEGY__MEASURED_ZERO_OF_FIVE_CROSS_KIND_TRANSFER"
   ],
-  "stop_condition": "Stop when the new suite (10 tests) passes, the probe reports 4/4 with oracle and 1/4+3/4 without, over-generalization is refused, and the 69 pre-existing taught-edit tests pass unchanged.",
+  "stop_condition": "Stop when all 14 generalization-loop tests pass, the probe reports 4/4 candidate edits with the scripted predicate and 0/4 admitted without an oracle (3 REFUSE_UNSETTLED, 1 REFUSE_UNVERIFIED), the over-generalization candidate is refused by the predicate, and the 69 pre-existing taught-edit tests pass unchanged.",
   "expected_parent_level_state_change": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_VERIFIED_AT_ZERO_MODEL_DEPENDENCY__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
   "why_selected_route_is_fastest_sufficient": "REUSE composes three proven mechanisms (wider, settlement discipline, asymmetric protocol) with only integration added. No new algebra, no new hypothesis space, no new oracle machinery. All earlier routes (DELETE, BYPASS) remove nothing relevant; ADAPT/SUBSTITUTE modify nothing; COMPOSE is the integration itself.",
   "iteration_limit": 2,
@@ -906,7 +906,9 @@
      "https://peps.python.org/pep-0695/ -- the type alias statement, which is why a 3.12-era vendored file is unparseable on 3.11.2"
     ]
    },
-   "unresolved_plausible_dominators": []
+   "unresolved_plausible_dominators": [],
+   "real_outcome": "Under a scripted string-predicate oracle, 4/4 synthetic target strings receive candidate edits; without an oracle 0/4 are admitted (3 REFUSE_UNSETTLED, 1 REFUSE_UNVERIFIED). Agreement and absence of a wider reading are not treated as correctness. The scripted over-generalization candidate is rejected. One synthetic edit family; no broad Problem 2 claim.",
+   "search_stop_decision": "STOPPED_AFTER_14_TESTS_PASS__4_OF_4_SYNTHETIC_CANDIDATE_EDITS_WITH_SCRIPTED_PREDICATE__ZERO_OF_FOUR_ADMITTED_WITHOUT_ORACLE__THREE_UNSETTLED_ONE_UNVERIFIED__OVER_GENERALIZATION_REJECTED_BY_PREDICATE__69_REGRESSION_TESTS_PASS"
   },
   "obs_goal": {
    "proxy_goals_deleted": [
@@ -935,7 +937,7 @@
   "obs_obs": {
    "affected_layers_only_on_revalidation": true,
    "analysis_steps_deleted_or_cached": "THE_WIDER_COMPUTATION_AND_THE_ASYMMETRIC_PROTOCOL_WERE_MEASURED_ONCE_ON_THE_4_SITE_CORPUS_AND_DRIVE_THE_LOOP_TABLE",
-   "search_stop_decision": "STOPPED_WHEN_THE_PROBE_REPORTED_4_OF_4_WITH_ORACLE_AND_1_OF_4_PLUS_3_REFUSED_WITHOUT_AND_OVER_GENERALIZATION_WAS_REFUSED_AND_69_REGRESSION_TESTS_PASSED"
+   "search_stop_decision": "STOPPED_AFTER_14_TESTS_PASS__4_OF_4_SYNTHETIC_CANDIDATE_EDITS_WITH_SCRIPTED_PREDICATE__ZERO_OF_FOUR_ADMITTED_WITHOUT_ORACLE__THREE_UNSETTLED_ONE_UNVERIFIED__OVER_GENERALIZATION_REJECTED_BY_PREDICATE__69_REGRESSION_TESTS_PASS"
   },
   "obs_solution": {
    "deletion_first_order_applied": [
@@ -959,7 +961,7 @@
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
-   "synthetic_verification_necessity": "The 4-site corpus and the pairs over-generalization arm are synthetic fixtures built in-process by the probe and the test suite. No files are written, no processes started, no network used. The 10 tests run everywhere with stdlib only."
+   "synthetic_verification_necessity": "The four target shapes and over-generalization case are synthetic string fixtures. The 14 pytest tests exercise candidate selection and refusal policy; the probe uses no model or external network. No target program or real project test suite is executed, and these checks do not independently establish correctness."
   }
  },
  "v22_prewrite_admission": {
