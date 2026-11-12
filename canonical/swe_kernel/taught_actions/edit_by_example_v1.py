@@ -900,6 +900,147 @@ def without_imports(tree, shapes):
     return [shape(statement) for statement in tree.body if not (is_import(statement) and shape(statement) in shapes)]
 
 
+def rename_undone(before_text, after_text):
+    """The example's second file with an incidental local rename undone, or the second file as it came.
+
+    A person sometimes renames a local variable in the same commit as the edit worth teaching; the rename is
+    identity-specific and poisons the lesson.  When the second file binds exactly one plainly assigned name the
+    first does not, and the first binds exactly one such name the second dropped, and neither name is ever an
+    import, a def, a class, a parameter, or a global/nonlocal in its file, the new name is put back to the old
+    one everywhere it stands as a bare name.  The result is the same program; only the lesson becomes visible.
+    """
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return after_text
+
+    def all_names(tree):
+        found = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Name):
+                found.add(node.id)
+            elif isinstance(node, ast.arg):
+                found.add(node.arg)
+            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                found.add(node.name)
+            elif isinstance(node, ast.alias):
+                found.add((node.asname or node.name).split(".")[0])
+            elif isinstance(node, (ast.Global, ast.Nonlocal)):
+                found.update(node.names)
+        return found
+
+    olds = {name for name in all_names(before_tree) - all_names(after_tree) if not hasattr(builtins, name)}
+    news = {name for name in all_names(after_tree) - all_names(before_tree) if not hasattr(builtins, name)}
+    if len(olds) != 1 or len(news) != 1:
+        return after_text
+    old, new = olds.pop(), news.pop()
+
+    def plainly_assigned(tree, name):
+        stored = False
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Global, ast.Nonlocal)) and name in node.names:
+                return False
+            if isinstance(node, ast.alias) and (node.asname or node.name).split(".")[0] == name:
+                return False
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and node.name == name:
+                return False
+            if isinstance(node, ast.arg) and node.arg == name:
+                return False
+            if isinstance(node, ast.Name) and node.id == name and isinstance(node.ctx, ast.Store):
+                stored = True
+        return stored
+
+    if not plainly_assigned(before_tree, old) or not plainly_assigned(after_tree, new):
+        return after_text
+    lines = after_text.splitlines(keepends=True)
+    starts, total = [], 0
+    for line in lines:
+        starts.append(total)
+        total += len(line)
+    spans = sorted(((starts[node.lineno - 1] + node.col_offset, starts[node.end_lineno - 1] + node.end_col_offset)
+                    for node in ast.walk(after_tree) if isinstance(node, ast.Name) and node.id == new), reverse=True)
+    came_as = after_text
+    for head, tail in spans:
+        after_text = after_text[:head] + old + after_text[tail:]
+    try:
+        if ast.dump(ast.parse(after_text)) == ast.dump(before_tree):
+            return came_as        # the whole example was the rename; it teaches nothing repeatable
+    except SyntaxError:
+        return came_as
+    return after_text
+
+
+def restructures_put_back(before_text, after_text):
+    """The example's second file with the changes no rule can carry put back, and where they stood.
+
+    A person often reshapes a statement in the same commit as the edits worth teaching -- the tangled-commit
+    phenomenon again, in its second form.  A reshaped statement cannot be a lesson (one showing underdetermines
+    it), and refusing the whole example loses every mechanical edit beside it.  So each changed place that
+    cannot hold a rule is put back to how the first file had it, and its span is handed over as unsettled:
+    not evidence of anything, neither a change to learn nor code left alone that could speak against a rule.
+
+    Returns (the second file to learn from, the unsettled spans in the first file).  When nothing can be
+    localized (whole statements came or went at the top), or nothing learnable remains, or the put-back text
+    does not parse, the second file comes back as it came, so the old refusal stands.
+    """
+    came_as = (after_text, ())
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return came_as
+    try:
+        places = changed_places(before_tree, after_tree)
+    except RecursionError:
+        return came_as
+    bad = {}
+    for old, new, trail in places:
+        try:
+            levels_of(old, new, trail)
+        except Refused:
+            pair = None
+            for above, below in trail + ((old, new),):
+                if isinstance(above, ast.stmt) and isinstance(below, ast.stmt):
+                    pair = (above, below)
+            if pair is None:
+                return came_as        # whole statements came or went at the top; nothing to localize
+            bad[where(pair[1])] = pair
+    if not bad:
+        return came_as
+
+    def starts(text):
+        lines, offsets, total = text.splitlines(keepends=True), [], 0
+        for line in lines:
+            offsets.append(total)
+            total += len(line)
+        return offsets
+
+    def whole(node):
+        """A statement's span including its decorators, as (first line, column, last line, column)."""
+        first = node.decorator_list[0] if getattr(node, "decorator_list", None) else None
+        if first is not None:
+            return (first.lineno, max(first.col_offset - 1, 0), node.end_lineno, node.end_col_offset)
+        return where(node)
+
+    offsets_before, offsets_after = starts(before_text), starts(after_text)
+    spans = []
+    for key in sorted(bad, reverse=True):
+        kept, put_back = bad[key]
+        kept_span, put_back_span = whole(kept), whole(put_back)
+        head = offsets_after[put_back_span[0] - 1] + put_back_span[1]
+        tail = offsets_after[put_back_span[2] - 1] + put_back_span[3]
+        was = before_text[offsets_before[kept_span[0] - 1] + kept_span[1]:
+                          offsets_before[kept_span[2] - 1] + kept_span[3]]
+        after_text = after_text[:head] + was + after_text[tail:]
+        spans.append(kept_span)
+    try:
+        put_back_tree = ast.parse(after_text)
+    except SyntaxError:
+        return came_as
+    if ast.dump(put_back_tree) == ast.dump(before_tree):
+        return came_as                # the whole example was the reshaping; it teaches nothing repeatable
+    return after_text, tuple(sorted(spans))
+
+
 def learn_all(examples, wide=False):
     """The rules that turn every example's first file into its second.  `examples` is a list of (before, after) texts.
 
@@ -911,8 +1052,12 @@ def learn_all(examples, wide=False):
     With `wide`, returns (the rules, their wider readings); see `wider`.
     """
     several = len(examples) > 1
-    shown = [Shown(example[0], example[1], "example %d" % number if several else "the example", example[2:] and example[2])
-             for number, example in enumerate(examples, 1)]
+    shown = []
+    for number, example in enumerate(examples, 1):
+        after, set_aside = restructures_put_back(example[0], rename_undone(example[0], example[1]))
+        given = tuple(example[2]) if example[2:] and example[2] else ()
+        shown.append(Shown(example[0], after, "example %d" % number if several else "the example",
+                           given + set_aside))
     changed = Changed(shown)
     groups = []
     for example in shown:
