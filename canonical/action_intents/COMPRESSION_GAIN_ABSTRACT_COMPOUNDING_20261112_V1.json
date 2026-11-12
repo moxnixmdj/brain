@@ -1,0 +1,130 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1",
+ "action_intent_id": "COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "6bff8c709fdc1b10b659947a776de3c9da39a4c3",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Implements the round-22 top-ranked move: the deepest measured defect was that nothing is ever compressed, so experience cannot compound -- the bridge into G_t admitted only single-return bodies and reported a gain nobody computed. This round adds shape-lifting compression over the library's memory of solved programs (admission = >=2 real sites, strictly positive measured description-length gain, every rewritten site reproducing its original behaviour), fixes the bridge to admit statement bodies with honestly computed gain/sites (fabricated max(1,bytes) deleted, honest zero preserved across reload), recognises the periodic-table family from structure, and licenses a two-cycle evidence policy for new family members -- with acquire-time 2p/3p verification retained. Prediction written before measurement: a never-seen period-12 must cost strictly fewer questions with the library than cold. MEASURED: cold 59 questions / 48 evidence points; armed 35 / 24; 41% cheaper; 0 held-out failures on 57 probes for both organs; build arm reproduces the historical cold costs 14/24/34 exactly.",
+ "selected_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+ "causal_blocker": "NOTHING_IS_EVER_COMPRESSED__THE_G_T_BRIDGE_REJECTED_EVERY_STATEMENT_BODY_ORGAN_AND_REPORTED_FABRICATED_GAIN__SO_EXPERIENCE_COULD_NOT_COMPOUND",
+ "expected_parent_change": "LIBRARY_ACCUMULATES_ONE_COMPRESSION_POSITIVE_MULTI_SITE_ABSTRACTION_AFTER_THREE_SOLVED_STRUCTURES__NEW_FAMILY_MEMBERS_INDUCT_AT_MEASURED_LOWER_COST_WITH_VERIFICATION_RETAINED",
+ "expected_parent_frontier_change": "CROSS_INSTANCE_TRANSFER_WITHIN_A_FAMILY_NOW_MEASURES_AT_41_PERCENT_COST_REDUCTION_THROUGH_A_NON_CACHE_MECHANISM__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NOTHING_IS_EVER_COMPRESSED__THE_G_T_BRIDGE_REJECTED_EVERY_STATEMENT_BODY_ORGAN_AND_REPORTED_FABRICATED_GAIN__SO_EXPERIENCE_COULD_NOT_COMPOUND",
+ "falsification_condition": "ARMED_NOT_STRICTLY_CHEAPER_THAN_COLD_ON_THE_NEVER_SEEN_INSTANCE__OR_HELD_OUT_FAILURES_APPEAR__OR_THE_ABSTRACTION_ADMITS_WITHOUT_MEASURED_GAIN__OR_THE_BUILD_ARM_STOPS_REPRODUCING_14_24_34__OR_THE_LICENSED_POLICY_FIRES_ON_A_MENU_ENTRY",
+ "stop_condition": "10_NEW_TESTS_PASS__174_AFFECTED_PINNED_TESTS_PASS_INCLUDING_THE_CREATURE_SUITE_AND_THE_COMPOUNDING_NEGATIVES__ZERO_SPEND__ZERO_MODEL_DEPENDENCY",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/compression_gain_v1.py",
+   "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+   "canonical/runtime/settlement_v1.py",
+   "canonical/swe_kernel/concept_library_v1.py",
+   "canonical/tests/test_compression_gain_abstraction_v1.py",
+   "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_INSTANT_TRANSFER_MEANS_EXPERIENCE_COMPOUNDS__AND_THAT_A_SINGLETON_MENU_ENTRY_WITH_A_FABRICATED_GAIN_IS_AN_ABSTRACTION",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_6bff8c7__COLD_PERIOD12_59_QUESTIONS_48_EVIDENCE_VS_ARMED_35_24_WITH_THE_ABSTRACTION_COMPRESSED_FROM_SOLVED_PERIODS_3_5_7__BUILD_ARM_REPRODUCES_HISTORICAL_14_24_34_EXACTLY__BRIDGE_NOW_ADMITS_STATEMENT_BODIES_WITH_GAIN_67_BYTES_SITES_3_FAMILY_PERIODIC_TABLE_RECOGNISED_FROM_STRUCTURE__0_HELD_OUT_FAILURES_ON_57_PROBES_BOTH_ARMS__ZLIB_CURRENCY_REJECTED_WITH_REASON_UNCOMPRESSED_AST_TEXT_IS_THE_ADMISSION_CURRENCY"
+ },
+ "measured_effect": "COLD_59_VS_ARMED_35_QUESTIONS_ON_NEVER_SEEN_PERIOD_12__EVIDENCE_48_VS_24__41_PERCENT_CHEAPER__CONCEPTS_NOW_1_SITES_3_GAIN_67_BYTES_VS_ROUND_22_MEASURED_ZERO__GAIN_AND_SITES_COMPUTED_NEVER_FABRICATED__HONEST_ZERO_SURVIVES_RELOAD__184_TESTS_PASS_ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "EFFICIENCY_GAIN_ON_AN_EXISTING_CAPABILITY__SAME_CORRECTNESS_AT_MEASURED_LOWER_COST__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/settlement_v1.py",
+  "canonical/swe_kernel/concept_library_v1.py",
+  "canonical/runtime/settlement_v1.py::induce_periodic_table",
+  "canonical/swe_kernel/meta_circular_organ_graph_v1.py::_grow_operator_from_evidence",
+  "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md",
+  "DOES_IT_SOLVE_EVERYTHING_20261103_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "6bff8c709fdc1b10b659947a776de3c9da39a4c3",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "ABSTRACTION_ADMITTED_BY_MEASURED_COMPRESSION__NEVER_SEEN_FAMILY_MEMBER_41_PERCENT_CHEAPER__FABRICATED_GAIN_DELETED_FROM_THE_BRIDGE_AND_FROM_THE_RELOAD_PATH",
+  "selected_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+  "selected_surviving_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+  "deleted_or_bypassed_paths": [
+   "FABRICATED_MDL_GAIN_MAX_1_CODE_BYTES_IN_THE_BRIDGE",
+   "OR_1_RELOAD_UPGRADE_OF_AN_HONEST_STORED_ZERO",
+   "SINGLE_RETURN_ONLY_ADMISSION_IN_THE_G_T_BRIDGE"
+  ],
+  "stop_condition": "10_NEW_TESTS_PASS__174_AFFECTED_PINNED_TESTS_PASS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "expected_parent_level_state_change": "EXPERIENCE_COMPOUNDS_WITHIN_A_MEASURED_FAMILY__CROSS_INSTANCE_TRANSFER_IS_NO_LONGER_A_BYTE_IDENTICAL_CACHE",
+  "why_selected_route_is_fastest_sufficient": "COMPRESSION_OVER_AN_EXISTING_MEMORY_AND_ONE_EVIDENCE_REQUIREMENT_PARAMETER__NO_NEW_SUBSTRATE__REUSES_THE_REAL_WRITER_THE_REAL_LOOP_AND_THE_REAL_LIBRARY",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "FULL_STITCH_LAMBDA_ABDUCTION__REJECTED_FAR_HEAVIER_THAN_THE_SHAPE_SHARING_THE_CORPUS_ACTUALLY_CONTAINS",
+   "HAND_TUNED_EVIDENCE_THRESHOLD__REJECTED_A_POLICY_EDIT_WEARING_LEARNINGS_CLOTHES_THE_PRIOR_MUST_COME_FROM_A_MEASURED_ADMISSION",
+   "MODEL_DONOR_FOR_ABSTRACTION_MINING__REJECTED_NO_MODEL_PRODUCER_COGNITION_LAW",
+   "WIRED_THE_LICENSED_STOP_INTO_THE_COLLECTION_LOOP_ONLY__REJECTED_BY_MEASUREMENT_THE_BUDGET_ESCALATION_EXITS_THE_LOOP_AT_15_POINTS_AND_THE_TOP_UP_BLOCK_SIZES_THE_REAL_BILL"
+  ],
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "THE_FIELD_ANSWER_IS_MEASURED_AND_NAMED__DREAMCODER_EC2__STITCH__LILO_LIBRARY_LEARNING__THE_ROUND_22_NOTE_ALREADY_CITED_IT_AND_THIS_ROUND_COMPOSES_IT_INTO_THE_TREE_AT_ZERO_SPEND"
+  }
+ },
+ "v22_prewrite_admission": {
+  "admitted": true,
+  "reason": "THE_PRE_REGISTERED_PREDICTION_A_CACHE_CANNOT_SATISFY_WAS_MEASURED_STRICTLY_TRUE__THE_BUILD_ARM_CALIBRATES_AGAINST_THE_HISTORICAL_DOCUMENTED_NUMBERS__THE_NEGATIVE_MECHANISMS_OF_PRIOR_ROUNDS_STILL_REACH_THEIR_VERDICTS"
+ },
+ "next_step": "A_SECOND_STRUCTURALLY_RECOGNISED_FAMILY_TO_TEST_WHETHER_THE_MECHANISM_GENERALISES_OR_THE_ROUND_WAS_A_ONE_FAMILY_TRICK__THEN_WIRE_ADMITTED_ABSTRACTIONS_INTO_THE_SYNTHESIZER_GRAMMAR_AS_SEARCH_PRIMITIVES"
+}

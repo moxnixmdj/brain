@@ -740,8 +740,16 @@ def induce_periodic_table(
     observations: Sequence[tuple[tuple[Any, ...], Any]],
     *,
     max_period: int = 64,
+    min_compression: float = 4.0,
 ) -> dict[str, Any] | None:
     """Find the smallest period-table hypothesis that explains the evidence exactly.
+
+    `min_compression` is the evidence factor the block must clear -- the "at least four times its
+    own size" induction guard. The default is the cold rule and every existing caller keeps it. A
+    LOWER factor is admissible only when a measured prior licenses it: `licensed_table_policy`
+    returns one only for a compression-positive, multi-site, verified library abstraction of this
+    family. Lowering the factor without such a prior is how a shorter sample talks itself into a
+    pattern, which is the exact failure the 4x rule exists to prevent.
 
     A ramp like `x mod k` can be recovered by inducing its parameter, but a ramp is a SHAPE I wrote
     down. A function that repeats an arbitrary block -- period 3, values `[5, -2, 7]`, forever -- is
@@ -796,7 +804,7 @@ def induce_periodic_table(
             # evidence -- a fixed number here would be another ceiling on learning, and a fixed
             # threshold of 16 already cost a full round. Requiring the block to be at most a quarter of
             # the observations means the claim must cover at least four times its own size.
-            if len(pairs) < 4 * period:
+            if len(pairs) < min_compression * period:
                 continue
             return {
                 "period": period,
