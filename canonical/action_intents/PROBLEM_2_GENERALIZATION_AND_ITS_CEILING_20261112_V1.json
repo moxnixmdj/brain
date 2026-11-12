@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Generalization was reported as a matching failure. Measured: 11 of 11 paraphrases are answered with memory OFF, and 4 of the 6 refused tasks have NO capability in the registry at all. The ceiling is what the machine can DO, not what it can find. The old key also collapses opposite directions (convert yaml to json == convert json to yaml) and memory could not reach a task the router missed.",
- "canonical_base_commit": "92cf96e8d7425b800f2e8d7e4f4c390281ceafbf",
+ "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -71,7 +71,7 @@
  "next_step": "Build the four missing ordinary capabilities (csv column arithmetic, zip, xlsx column arithmetic, docx to text); each converts a permanent AMBIGUOUS into a candidate, and the memory built here then has something to carry.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "recursive_obs": {
-  "canonical_base_commit": "92cf96e8d7425b800f2e8d7e4f4c390281ceafbf",
+  "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
