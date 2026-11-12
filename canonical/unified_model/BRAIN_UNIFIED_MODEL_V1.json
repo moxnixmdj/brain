@@ -31233,12 +31233,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1972
+  "source_index_modules": 1973
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2956c77e423c6eebfdea8b17467197d7d809dc2b3c8084d244be8da4ef2f16ac"
+  "value": "f563f2169a3e0cac8b8431e61b0eeb9a62f7b480b91163b700c8831cd7f04bc8"
  },
  "engines": [
   {
@@ -159432,6 +159432,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FUNCTION_FOUND_FROM_TASK_TEXT_V1",
+   "sha256": "5865accf11a87d3eb0c69745f31cdad7daf1e7615c7d8ace26e800ecdbb2a3b5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "found": 1,
+    "function": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -227565,7 +227586,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "936b6975ea067c994d4e05a99a05025dc78b88d9d4e58c5de54ce929130b2b1b",
+   "sha256": "cadc1f1ec212cdc88616b15bac3db46e3b7eebb534e475ec0a06324e97941b53",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -233042,30 +233063,6 @@
     "the_check_is_part_of_the_choice_not_a_gate_v1": 1,
     "v1": 1,
     "verify_could_reject_a_wrong_answer_and_nothing_consulted_it_while_choosing__with_a_lossy_groups_the_search_returned_150_150_with_west_missing_and_verify_said_false_on_exactly_that_result": 1
-   }
-  },
-  {
-   "action_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7804713b5e7f51bc22d263e9c983c1c1ca6cbcf3cdb9cdf39bfe9dbe0a418384",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "chroot": 1,
-    "every_confined_execution_died_when_the_harness_ran_under_a_venv_because_confine_v1_spawned_sys_executable_into_a_chroot_that_only_mounts_usr_bin_lib_lib64_so_the_helpers_own_post_chroot_program_spawn_raised_filenotfound_error_before_any_program_line_ran_and_the_receipt_read_like_the_taught_program_failed": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "not": 1,
-    "port_the_brokers_chroot_visible_interpreter_rule_into_confine_v1_at_the_helper_launch_and_pin_both_ends_the_unit_pin_on_the_launch_argv_and_the_front_door_teach_apply_integration_pin_under_the_venv_that_failed_on_base": 1,
-    "python": 1,
-    "ran": 1,
-    "the_chroot_ran_a_python_that_was_not_in_it_20261112_v1": 1,
-    "the_harness_fault_class_that_impersonates_a_program_failure_is_closed_at_the_confinement_launcher_and_measured_at_both_ends__the_one_shot_loop_has_a_failable_pin_through_the_production_door__three_candidate_instruments_were_killed_by_measurement_before_code__zero_spend__no_benchmark_row_moved__truth_achieved_stays_false": 1,
-    "v1": 1
    }
   },
   {
@@ -253293,11 +253290,10 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "a9b944feb840b8d513356a85ce391be6ede86d7fd2b8d04b84abd60559cc0961",
+   "sha256": "f12d50da3b587ad41fb99ff23cdab370f293174b29408314a39c90abdc804682",
    "summary": "Candidate namespace/chroot launcher; not an admitted security boundary.",
-   "symbol_count": 4,
+   "symbol_count": 3,
    "symbols": [
-    "_python_in_chroot",
     "available",
     "run",
     "run_readonly"
@@ -253312,7 +253308,6 @@
     "launcher": 1,
     "namespace": 1,
     "not": 1,
-    "python_in_chroot": 1,
     "run": 1,
     "run_readonly": 1,
     "security": 1,
@@ -263553,6 +263548,48 @@
     "scoring": 1,
     "v1": 1,
     "weighted": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/function_the_task_text_points_at_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/function_the_task_text_points_at_v1.py",
+   "sha256": "c607fe3ad8a2347957926a448602a00b94d4d076c39071b253b825fec52cf6d0",
+   "summary": "Which function of a file a task's text points at, and the first few changes to try in each.",
+   "symbol_count": 8,
+   "symbols": [
+    "Function",
+    "_parsed",
+    "candidates",
+    "functions_of",
+    "order",
+    "text_of",
+    "words",
+    "written_into"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "each": 1,
+    "few": 1,
+    "file": 1,
+    "first": 1,
+    "function": 3,
+    "functions_of": 1,
+    "order": 1,
+    "parsed": 1,
+    "points": 2,
+    "task": 2,
+    "text": 2,
+    "text_of": 1,
+    "try": 1,
+    "v1": 1,
+    "words": 1,
+    "written_into": 1
    }
   },
   {
