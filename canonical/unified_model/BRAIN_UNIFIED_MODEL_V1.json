@@ -21952,7 +21952,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "fd586b0a9ef466db2d255f3fa12f739c9e273be541cb9f2808845c8ed2561971",
+    "evidence_sha256": "50240b9e8a0578245641eafae44a4e33baa9a69238479495be3cc820f2082678",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 327,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6733,
+  "research_index_records": 6737,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dce5f783fe653bdbaf116c08a85eacab551faaf8fd37adf2d48a26c72c35319e"
+  "value": "b39cefe1d45d57308d495244b7168f17901452627cf2edee95442d03af053c42"
  },
  "engines": [
   {
@@ -44748,6 +44748,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 15310,
+   "headings": [
+    "A new part costs code; one lesson buys the word",
+    "1. The measurement, with the predictions written first",
+    "2. What this settles about the owner's sentence",
+    "3. Scorecard: real vs wrong, as of this commit",
+    "4. The external state, refreshed 2026-11-12 (max web, latest first)",
+    "5. The limiting factors, ranked, and the smartest next moves",
+    "6. On \"a sentient creature\"",
+    "7. Receipts",
+    "8. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md",
+   "sha256": "6bbf8f5fa21c90649e5e5fb763e7c20c28cc995c9015ccc9bd84af5aae75c031",
+   "summary": "**2026-11-12.** Base `c4724d90`. Branch `arena/9914f9a5-brain`. Round 9 of today's series — and the round that executes round 8's prescription instead of restating it.",
+   "terms": {
+    "10": 12,
+    "100": 5,
+    "14": 5,
+    "15": 7,
+    "2026": 6,
+    "39": 8,
+    "action": 5,
+    "after": 6,
+    "algebra": 6,
+    "before": 5,
+    "buys": 5,
+    "cannot": 6,
+    "canonical": 6,
+    "code": 9,
+    "every": 8,
+    "everything": 9,
+    "experience": 10,
+    "false": 7,
+    "family": 7,
+    "files": 6,
+    "first": 7,
+    "held": 8,
+    "held-out": 6,
+    "here": 6,
+    "independent": 6,
+    "lesson": 16,
+    "measured": 9,
+    "median": 18,
+    "new": 9,
+    "no": 23,
+    "not": 15,
+    "now": 9,
+    "number": 8,
+    "one": 26,
+    "only": 8,
+    "own": 7,
+    "owner": 6,
+    "part": 11,
+    "parts": 6,
+    "real": 6,
+    "refused": 7,
+    "round": 24,
+    "same": 8,
+    "tasks": 6,
+    "true": 9,
+    "two": 7,
+    "vs": 6,
+    "word": 10
+   },
+   "title": "A new part costs code; one lesson buys the word",
+   "title_terms": [
+    "buys",
+    "code",
+    "costs",
+    "lesson",
+    "new",
+    "one",
+    "part",
+    "word"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 11004,
    "headings": [
     "A perfect action is not an available action",
@@ -54035,83 +54115,6 @@
     "never",
     "reached",
     "settled"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 3408,
-   "headings": [
-    "Verified skills do not compose just because each one verified",
-    "What was measured",
-    "What was added",
-    "Tests — 9, green",
-    "One more thing measured, not fixed",
-    "Why this is the right next increment"
-   ],
-   "kind": "DOCUMENT",
-   "path": "SKILLS_DONT_COMPOSE_20261112_V1.md",
-   "sha256": "6ff018bdd4d9e362bf9462b2d541c89411853249be5c4f4bf803c4be96017200",
-   "summary": "**2026-11-12.** Branch `arena/3778edad-brain`. Authority **NONE**. `truth.achieved` = `false`.",
-   "terms": {
-    "10": 10,
-    "added": 2,
-    "also": 2,
-    "both": 2,
-    "cannot": 3,
-    "change": 2,
-    "changed": 3,
-    "check": 2,
-    "crystallized": 2,
-    "each": 4,
-    "earlier": 2,
-    "edit": 2,
-    "empty": 2,
-    "every": 5,
-    "exit": 2,
-    "fail": 4,
-    "false": 2,
-    "falsifiable": 2,
-    "first": 2,
-    "had": 2,
-    "itself": 2,
-    "local": 2,
-    "makes": 2,
-    "measured": 3,
-    "more": 3,
-    "no": 2,
-    "no-op": 2,
-    "not": 11,
-    "nothing": 3,
-    "one": 5,
-    "pair": 4,
-    "pass": 4,
-    "passes": 3,
-    "reports": 3,
-    "return": 6,
-    "revert": 3,
-    "rule": 9,
-    "rules": 4,
-    "sequence": 8,
-    "single": 3,
-    "skills": 4,
-    "so": 3,
-    "state": 3,
-    "step": 12,
-    "store": 3,
-    "two": 3,
-    "verdict": 3,
-    "verified": 4
-   },
-   "title": "Verified skills do not compose just because each one verified",
-   "title_terms": [
-    "because",
-    "compose",
-    "each",
-    "just",
-    "not",
-    "one",
-    "skills",
-    "verified"
    ]
   },
   {
@@ -70200,7 +70203,7 @@
   "included_source_count": 1129,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "073ff3a1298cf6180298e76181e64cdd64fa16a9ed039fb9a7ed208509db6e66"
+  "source_tree_digest": "12838d9de7c6cbe2164c4ef1fa1f4146d9194e3c1bbf1aecf4f458aa8d1e49e9"
  },
  "research_index": [
   {
@@ -158769,6 +158772,24 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/HUMANEVALFIX_EXPERIENCE_STREAM_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HUMANEVALFIX_EXPERIENCE_STREAM_20261112_V1.json",
+   "schema": "BRAIN_HUMANEVALFIX_EXPERIENCE_STREAM_RECORD_V1",
+   "sha256": "0bb2286bb2b77cd124d33d08a0330abac960ae3a10482ad19279c8370eb45212",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "experience": 1,
+    "humanevalfix": 1,
+    "stream": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/HUMANEVALFIX_RECORDED_PROPOSALS_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/HUMANEVALFIX_RECORDED_PROPOSALS_20261112_V1.json",
@@ -158780,6 +158801,24 @@
     "humanevalfix": 1,
     "proposals": 1,
     "recorded": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/HUMANEVALFIX_REPAIR_SOLVER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HUMANEVALFIX_REPAIR_SOLVER_20261112_V1.json",
+   "schema": "BRAIN_HUMANEVALFIX_REPAIR_SOLVER_RECORD_V1",
+   "sha256": "c0c32384b7ade49b549b416ae2d7915249e04e5cea0e06146e930c07fb239d2f",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "humanevalfix": 1,
+    "repair": 1,
+    "solver": 1,
     "v1": 1
    }
   },
@@ -181074,6 +181113,25 @@
     "counterexample": 1,
     "known": 1,
     "repair": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+   "schema": "BRAIN_REPEATED_CHANGE_ONE_EXAMPLE_RECORD_V1",
+   "sha256": "a41160da935f4894a69f540a155dbada02aca4856f3feabfd6c500137bb926f2",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "change": 1,
+    "example": 1,
+    "one": 1,
+    "repeated": 1,
     "v1": 1
    }
   },
@@ -216322,6 +216380,34 @@
    }
   },
   {
+   "action_id": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2ed2483d0ffdee228b3330f6369b057cc68c5f7106196015f51d5e5630969a52",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_new_part_costs_code_one_lesson_buys_the_word_20261112_v1": 1,
+    "add_the_median_reducer_and_measure_that_one_lesson_buys_one_word": 1,
+    "buys": 1,
+    "code": 1,
+    "costs": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lesson": 1,
+    "new": 1,
+    "one": 1,
+    "part": 1,
+    "the_lesson_loop_is_now_parts_code_plus_word_lesson_plus_recomputed_recall_measured_end_to_end_at_zero_model_dependency__no_benchmark_row_moved__no_capability_credit__truth_achieved_stays_false": 1,
+    "the_median_lesson_was_set_aside_under_the_old_algebra_because_no_operation_fits_its_example_answers__experience_cannot_add_a_part_to_the_hypothesis_language": 1,
+    "v1": 1,
+    "word": 1
+   }
+  },
+  {
    "action_id": "A_PART_OF_A_FILE_MEASURED_IN_A_UNIT_THE_SENTENCE_STATES_IS_ANSWERED_IN_THAT_UNIT_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -221381,7 +221467,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c54f958c7e682c173d7a2a6b797c47df2bb813bf8e5aee8fa54126044bbd9388",
+   "sha256": "0b17963d5772d883d31ef6d55f713f030b744d7ef643808974f2b683bf5563eb",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -296171,7 +296257,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/taught_words_check_v1.py",
-   "sha256": "1719bbbb378634000214e558a301d474d77c9164ed9e411c13fa2e3c63e91634",
+   "sha256": "333288cf9869d8c20af10a11faf4c9292a36466ad9716d6702ed874530f9e7e1",
    "summary": "Recompute a taught-words answer from the file, without the code that produced it.",
    "symbol_count": 2,
    "symbols": [
@@ -296230,7 +296316,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/taught_words_v1.py",
-   "sha256": "620fa38346b0864ec1dafea451c76858348a80e39427438a81c70ee1639e91ed",
+   "sha256": "1977c4e951dd4cefe9cf7a1107b7e6befcf1d552dc80c3ba8259da08d3e8237a",
    "summary": "Taught words: word meanings learned from example answers, and file questions answered from them.",
    "symbol_count": 19,
    "symbols": [
