@@ -1,0 +1,27 @@
+{
+  "concepts": {
+    "c_x_2e186aced488": {
+      "arity": 7,
+      "body_expr": "",
+      "body_stmts": "table = _p0\nrow = table.get(str(action_id))\nif row is None:\n    return {_p1: False, _p2: None, _p3: None, _p4: {}}\nout = dict(row)\nout[_p5] = True\nreturn out",
+      "concept_id": "c_x_2e186aced488",
+      "corpus_sites": 3,
+      "disconfirmations": 0,
+      "domain_kind": "any",
+      "family": "keyed_table_lookup",
+      "mdl_gain_bytes": 103,
+      "param_names": [
+        "_p0",
+        "_p1",
+        "_p2",
+        "_p3",
+        "_p4",
+        "_p5",
+        "action_id"
+      ],
+      "uses": 0,
+      "verified_hits": 1
+    }
+  },
+  "schema": "PROJECT_BRAIN_COMPOUNDING_CONCEPT_LIBRARY_V1"
+}
