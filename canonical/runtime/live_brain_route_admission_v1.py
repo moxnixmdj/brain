@@ -2644,6 +2644,11 @@ def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], 
                     or token in _RESULT_DESTINATION_WORDS or token.isdigit()
                     or token in explained or token in unexplained):
                 continue
+            if token in ("name", "names") and explained and explained[-1] in (
+                "function", "functions", "class", "classes", "method", "methods",
+                "symbol", "symbols", "import", "imports", "module", "modules",
+            ):
+                continue
             if _word_stem(token) in vocabulary:
                 explained.append(token)
             elif token not in bound_as_data:
@@ -4645,8 +4650,9 @@ def _close_observations(result: dict[str, Any], goal: str,
         try:
             from canonical.runtime import answer_shape_v1 as _answer_shape
             from canonical.runtime import swe_typed_plan_v1 as _tp_shape
-            _answer_shape.lift_named_answer(result)
-            answer_errors = _answer_shape.deliver(_tp_shape._strip_pasted_test_output(goal), result, ROOT)
+            _clean_shape_goal = _tp_shape._strip_pasted_test_output(goal)
+            _answer_shape.lift_named_answer(result, _clean_shape_goal)
+            answer_errors = _answer_shape.deliver(_clean_shape_goal, result, ROOT)
         except Exception:  # noqa: BLE001 - a projection fault must never change a verdict
             answer_errors = []
     if answer_errors:
