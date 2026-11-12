@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 361,
+  "knowledge_documents": 362,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6765,
+  "research_index_records": 6766,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3325db865690f1cb5c0d3070fc6fb68e8cd5025bdd5e1680cbc52031b9186f85"
+  "value": "742989d88f5bceb0f5e1bc106a87a560657476a61c026f6721d3c754aa09df54"
  },
  "engines": [
   {
@@ -57601,6 +57601,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8025,
+   "headings": [
+    "The gate measured nothing and called it green",
+    "0. Which question this answers",
+    "1. Before — both failure modes measured on `8439f609`",
+    "2. The fix — one constant, one named refusal, one scope rule",
+    "3. After — measured on this branch",
+    "4. Regression ledger",
+    "5. What this does not claim — next steps, named",
+    "6. Tie-back"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1.md",
+   "sha256": "af844298a5b4efd4d8d3b70f6f144c0fa3996a93cdfa867681bf2352c55f4f74",
+   "summary": "Date: 2026-11-12. Branch: `arena/de512e04-brain` (branched from `8439f609`, merged `ac6364e8` before commit). Engine file: `canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py`.",
+   "terms": {
+    "20": 4,
+    "20.0": 4,
+    "21": 4,
+    "300": 3,
+    "300.0": 4,
+    "after": 4,
+    "all": 4,
+    "any": 5,
+    "baseline": 5,
+    "before": 6,
+    "both": 3,
+    "brain": 3,
+    "budget": 5,
+    "canonical": 6,
+    "claim": 4,
+    "door": 6,
+    "edit": 5,
+    "empty": 6,
+    "file": 4,
+    "files": 8,
+    "gate": 9,
+    "measured": 10,
+    "measurement": 4,
+    "named": 6,
+    "no": 8,
+    "not": 9,
+    "nothing": 5,
+    "now": 6,
+    "one": 7,
+    "only": 6,
+    "own": 5,
+    "passed": 5,
+    "proceeds": 5,
+    "project": 6,
+    "pytest": 4,
+    "refusal": 5,
+    "round": 5,
+    "scope": 4,
+    "sites": 4,
+    "suite": 12,
+    "suites": 5,
+    "test": 8,
+    "testcase": 5,
+    "tests": 11,
+    "three": 6,
+    "timeout": 4,
+    "tree": 4,
+    "whose": 4
+   },
+   "title": "The gate measured nothing and called it green",
+   "title_terms": [
+    "called",
+    "gate",
+    "green",
+    "measured",
+    "nothing"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6040,
    "headings": [
     "THE GRAMMAR CAN NOW FIND WHAT NO WRITER KNEW",
@@ -72819,10 +72895,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1163,
+  "included_source_count": 1164,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5c13eb081d2e31a41030b51e465d04d3cd339bd5a8779ef3a98ac2e900257bbd"
+  "source_tree_digest": "8b5123c85edd6d8244e7e9a5b51310fa950945d8290bb86c89de3a8d66e0a902"
  },
  "research_index": [
   {
@@ -230126,6 +230202,31 @@
     "the_derivation_read_the_word_beside_the_noun_as_the_noun__rename_the_public_function_total_in_canonical_runtime_util_py_to_sum_all_was_refused_r3_weak_evidence_because_qualname_was_derived_as_public_the_grammar_knew_only_name_function_and_the_file_defines_only_total__the_row_python_refactor_rename_symbol_v1_exists_and_serves_the_same_sentence_about_one_file__measured_2026_10_31_advanced_sentence_35": 1,
     "the_function_name_is_the_one_the_file_defines_v1_20261031_v1": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7eb6bf2cfa1bb8edf2abcd0a4839c0f8e27970dd1d8de74c2330b9b4f537275c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "called": 1,
+    "explicit_300_s_budget_at_all_three_suite_sites_plus_a_named_empty_measurement_refusal_scoped_to_discoverys_own_traversal": 1,
+    "gate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "green": 1,
+    "measured": 1,
+    "nothing": 1,
+    "the_gate_has_three_measured_modes_not_two_real_plus_one_rubber_stamp__the_empty_measurement_is_a_named_refusal__the_slow_suite_is_measured_inside_a_reviewed_budget_or_refused_fail_closed__the_scope_rule_mirrors_the_loader_so_files_discovery_cannot_see_are_not_evidence__no_benchmark_row_moved__no_capability_credit__truth_achieved_stays_false": 1,
+    "the_gate_measured_nothing_and_called_it_green_20261112_v1": 1,
+    "the_project_test_baseline_inherited_a_20_second_helper_default_refusing_every_suite_longer_than_20_s_while_test_files_the_unittest_loader_cannot_collect_loaded_zero_tests_and_the_gate_read_the_empty_result_as_green_rubber_stamping_the_edit": 1,
+    "v1": 1
    }
   },
   {
