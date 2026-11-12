@@ -62,12 +62,52 @@ P4. **No one-showing regression.** @1 wrong does not rise on any set
 
 ## Results (filled after the single measurement run)
 
-_pending_
+**P1 FALSIFIED. P2 FALSIFIED. P3 HELD. P4 HELD.** Recorded, not erased.
+
+Every corpus number is byte-identical to T33 — the mechanism caused no corpus
+movement in either direction:
+
+| set @showings | strict same/diff/left/extra (ref) | tried same/diff/left/extra (ref) |
+|---|---|---|
+| fresh @1 | 83/6/16/13 (1) | 93/6/6/13 (0) |
+| held_out @1 | 156/0/77/0 (14) | 196/1/36/0 (3) |
+| seen @1 | 30/0/73/0 (1) | 69/2/32/0 (0) |
+| fresh @2 | 62/0/3/0 (0) | 62/0/3/0 (0) |
+| held_out @2 | 158/0/18/0 (4) | 161/0/15/0 (2) |
+| seen @2 | 48/0/6/0 (1) | 51/0/3/0 (0) |
+
+Why P1 fell. Two errors in the declaration, both found by re-diagnosis after
+the run:
+
+1. **Set mis-mapping.** utcnow lives in *seen*, yaml_safe_load in *seen*,
+   mpl_get_cmap in *fresh* — not all in held_out as declared. P2 was therefore
+   aimed at the wrong table from the start.
+2. **The real pair disagrees in substance, not just in imports.** Example 1
+   rewrites `datetime.utcnow()` → `datetime.now(datetime.UTC)`; example 2
+   rewrites it → `datetime.now(timezone.utc)` *and* tangles in an unrelated
+   `st.dataframe(use_container_width=True → width="stretch")` edit. The import
+   set-aside worked exactly as built — utcnow's refusal changed from the
+   spurious "same code was left alone elsewhere" (import dissent read as lesson
+   dissent) to the true "the rules worked out from the examples do not
+   reproduce example 2" (the two people did different things). No import
+   mechanism can or should bridge two different replacement texts; writing
+   either variant would contradict one example. **This refusal is correct.**
+
+What survives falsification: the principle and the mechanism are right and
+pinned by unit tests (clean import widening end-to-end; forced import dissent
+dropped without poisoning the lesson). On this corpus no kind at two showings
+was blocked *only* by imports — the one suspected kind was also blocked by a
+genuine disagreement the old refusal message had masked. The mechanism's
+measurable value here is diagnostic honesty (the refusal now names the real
+cause) plus zero-regression generality for future corpora where import-only
+dissent does occur.
 
 ## What this does not claim
 
 Pure-addition reshapings (yaml_safe_load, set_daemon) are untouched and still
-refuse. mpl_get_cmap stays refused on purpose. The honest frame stands: the 8.13x
+refuse (T35 ground). mpl_get_cmap stays refused on purpose (needs-gate).
+utcnow stays refused on purpose (the examples disagree). The honest frame
+stands: the 8.13x
 figure is cached exact recall; there is no any-action-once capability and no
 sentience; improvement comes only from mechanisms like this one — declared,
 measured once, and kept honest when a prediction falsifies.
