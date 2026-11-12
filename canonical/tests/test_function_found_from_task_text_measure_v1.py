@@ -324,3 +324,59 @@ def test_the_record_was_counted_with_the_files_as_they_are(stored):
 
 def test_the_record_begins_with_what_to_read_first(stored):
     assert next(iter(stored)) == "read_this_first" and len(stored["read_this_first"]) >= 5
+
+
+# --------------------------------------------------------------------------- #
+# what was counted after the result was seen, counted again from the rows
+# --------------------------------------------------------------------------- #
+def _best(rows, key):
+    values = [found[key] for found in rows if found[key] is not None]
+    return min(values) if values else None
+
+
+def _split(rows_of, tasks):
+    return {"tasks": len(tasks), "first": sum(_best(rows_of[name], "rank") == 1 for name in tasks),
+            "among_the_first_4": sum(_best(rows_of[name], "rank") <= 4 for name in tasks),
+            "first_with_another_tasks_text": sum(_best(rows_of[name], "rank_other_text") == 1 for name in tasks)}
+
+
+def test_afterwards_the_tasks_outside_the_80_that_one_statement_could_reach(stored):
+    passing_rows = json.loads(measure.PASSING_RECORD.read_text())["per_task"]
+    rows_of = {name: found["functions"] for name, found in stored["per_task"].items() if found["functions"]}
+    outside = [name for name in rows_of if name not in set(stored["shaped_on"]) and passing_rows[name][4]]
+    after = stored["afterwards"]
+    assert after["tasks_outside_the_80_with_a_passing_patch_within_one_statement"] == len(outside)
+    assert after["of_them_reached_within_20_with_the_function_given"] == sum(_best(rows_of[name], "place") is not None for name in outside)
+
+
+def test_afterwards_the_splits_by_code_line_and_by_size_of_the_file(stored):
+    per_task = stored["per_task"]
+    rows_of = {name: found["functions"] for name, found in per_task.items() if found["functions"]}
+    after = stored["afterwards"]
+    assert after["by_whether_the_issue_has_a_code_line"]["none"] == _split(rows_of, [name for name in rows_of if per_task[name]["code_lines"] == 0])
+    assert after["by_whether_the_issue_has_a_code_line"]["one_or_more"] == _split(rows_of, [name for name in rows_of if per_task[name]["code_lines"] > 0])
+    size = {name: min(found["functions_in_the_file"] for found in rows) for name, rows in rows_of.items()}
+    bounds = {"1 to 9": (1, 9), "10 to 39": (10, 39), "40 to 99": (40, 99), "100 and more": (100, 10 ** 9)}
+    for label, (low, high) in bounds.items():
+        assert after["by_functions_in_the_file"][label] == _split(rows_of, [name for name in rows_of if low <= size[name] <= high])
+    assert sum(found["tasks"] for found in after["by_functions_in_the_file"].values()) == stored["summary"][measure.ALL]["tasks"]
+    single = [name for name in rows_of if len(rows_of[name]) == 1]
+    assert after["tasks_with_exactly_one_function_that_holds_a_passing_patch"] == {
+        **_split(rows_of, single), "first_from_the_top": sum(rows_of[name][0]["from_the_top"] == 1 for name in single)}
+
+
+def test_afterwards_the_tasks_reached_and_the_other_way_of_spending_the_earlier_lists(stored):
+    per_task = stored["per_task"]
+    after = stored["afterwards"]
+    reached = {name for name, found in per_task.items() if _best(found["functions"], "place") is not None}
+    assert set(after["the_tasks_reached"]) == reached
+    assert after["of_the_500"]["reached_within_20_with_the_function_given"] == len(reached) == stored["summary"][measure.ALL]["reached_with_the_function_given"]
+    assert after["of_the_500"]["with_the_file_given"] == sum(1 for found in per_task.values() if found["file_given"] is not None)
+    for name, found in after["the_tasks_reached"].items():
+        assert found["place_with_the_file_given"] == per_task[name]["file_given"] and found["shaped_on"] == (name in stored["shaped_on"])
+        assert (found["place_with_the_file_given"] is not None) <= (found["rank_of_the_function"] <= 4)
+    earlier = {name: found[2] for name, found in json.loads(measure.PLACE_RECORD.read_text())["per_task"].items()}
+    each = (measure.BUDGET - measure.FIRST) // 4
+    spread = sorted(name for name, at in earlier.items() if at is not None and at <= each
+                    and any(found["small"] and found["rank"] <= 4 for found in per_task.get(name, {}).get("functions", [])))
+    assert after["earlier_lists_spread_over_the_first_4_functions_45_candidates_each"] == {"tasks_kept": len(spread), "which": spread}
