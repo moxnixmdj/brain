@@ -47,17 +47,25 @@ def test_the_registry_the_front_door_sees_is_pinned(census):
 
 
 def test_binding_is_the_largest_blocker_by_far(census):
-    """Not by a little. 61 against 9 is the whole argument of the round."""
+    """Not by a little. 63 against 2 is the whole argument of round 8.
+
+    ROUND 9 RETRACTION, kept in the code so it cannot be forgotten: round 9 showed this
+    census feeds each capability its own keywords, and that five keywords are not a
+    request. `json.query.jq` was counted here as NOT_BINDABLE and is answered VERIFIED by
+    a real sentence. So 63 is an UPPER BOUND on machinery defects, not a count of them,
+    and "binding is the largest blocker" is a claim about the census, not the machine.
+    The census remains useful; it is no longer sufficient to rank work.
+    """
     not_bindable = census["counts"].get("3_NOT_BINDABLE", 0)
     unknown = census["counts"].get("4_BLOCKED_BY_UNKNOWN", 0)
-    assert not_bindable == 61, not_bindable
-    assert unknown == 9, unknown
+    assert not_bindable == 63, not_bindable
+    assert unknown == 2, unknown
     assert not_bindable > 6 * unknown
 
 
 def test_blocked_by_false_is_small_and_kept_separate(census):
     """A premise the world says is FALSE is a correct refusal, not a defect."""
-    assert census["counts"].get("5_BLOCKED_BY_FALSE", 0) == 2
+    assert census["counts"].get("5_BLOCKED_BY_FALSE", 0) == 6
 
 
 def test_the_buckets_account_for_every_row(census):
@@ -81,24 +89,24 @@ def test_closing_every_blind_premise_does_not_make_anything_work(counterfactual)
     SELECTED, and **none of the three then runs without an error**. The premise
     was never the binding constraint; binding is.
     """
-    assert counterfactual["unknown_blocked"] == 9
-    assert counterfactual["became_selected"] == 3
+    assert counterfactual["unknown_blocked"] == 2
+    assert counterfactual["became_selected"] == 2
     assert counterfactual["became_selected_and_ran_without_error"] == 0, (
         "a capability now works once its blind premise is assumed -- that would "
         "mean the blind premises ARE load-bearing after all, and this round's "
         "conclusion is wrong")
 
 
-def test_the_six_that_stay_blocked_are_blocked_for_a_different_reason(counterfactual):
-    """They do not become usable; they become BINDABLE failures instead."""
-    stayed = [r for r in counterfactual["rows"] if r["then"] != "SELECTED"]
-    assert len(stayed) == 6
-    assert all(r["then"] == "NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES" for r in stayed)
-    assert all(r.get("missing") for r in stayed)
+def test_every_one_that_becomes_selected_still_fails(counterfactual):
+    """Selection is not success. A capability can be chosen and still be unable.
 
-
-def test_the_three_that_are_selected_still_fail(counterfactual):
-    """Selection is not success. A capability can be chosen and still be unable."""
+    Corrected in round 9: the original figures (9 blocked, 3 selected, 6 stayed) were
+    measured with ROOT pointing at /home instead of the repository, so every file-shaped
+    premise resolved against a directory that is not the tree. With the root fixed, 2
+    premises are undecidable and BOTH become selected and THEN FAIL -- which is the same
+    conclusion reached from different numbers. The old numbers are kept in the document,
+    not silently deleted.
+    """
     selected = [r for r in counterfactual["rows"] if r["then"] == "SELECTED"]
-    assert len(selected) == 3
+    assert len(selected) == counterfactual["became_selected"]
     assert all(str(r.get("status")).startswith("ACTION_FAILED") for r in selected)
