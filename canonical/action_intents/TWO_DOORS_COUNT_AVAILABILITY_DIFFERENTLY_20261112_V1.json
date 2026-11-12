@@ -7,7 +7,7 @@
  "route_id": "TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "65578066e92e5d6815725b0f5c486faae41f23d6",
+ "canonical_base_commit": "93f4f6b3754f3ba69d4a9633cdbea0af476517d9",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -81,7 +81,7 @@
  ],
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "65578066e92e5d6815725b0f5c486faae41f23d6",
+  "canonical_base_commit": "93f4f6b3754f3ba69d4a9633cdbea0af476517d9",
   "real_outcome": "CENSUS_RUN_AND_REPORTED:145_GOALS_AT_ACT_AND_AT_THE_SENTENCE_DOOR_FROM_A_DISPOSABLE_CLONE__ACT_REPRODUCES_ROUND4_64_53_12__DOOR_HAS_NO_BINDING_STATUS_24_39_52_26__P1_P2_P4_FALSIFIED_P3_P5_HELD__THE_ONE_MEASURED_PHRASE_FIX_SHIPPED_WITH_4_OF_4_PINS",
   "required_capability": "DUAL_LAYER_AVAILABILITY_MEASUREMENT_AND_SENTENCE_SHAPE_FAMILY_CLAIMING",
   "obs_goal": {
