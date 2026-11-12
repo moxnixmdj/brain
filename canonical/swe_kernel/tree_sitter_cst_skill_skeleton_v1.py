@@ -32,6 +32,24 @@ from canonical.runtime import tree_sitter_swe_kernel_v1 as tsk
 
 SCHEMA = "PROJECT_BRAIN_TREE_SITTER_CST_SKILL_SKELETON_V1"
 
+
+class CstSubstrateUnavailable(RuntimeError):
+    """The Tree-Sitter substrate is absent, so this capability cannot be exercised at all.
+
+    Distinct from "no candidate applied". Both used to present as an empty iterator, and the
+    difference is the difference between a broken mechanism and an uninstalled dependency.
+    Measured 2026-11-12: `tree_sitter` absent from the image meant a Python lesson transferred
+    to **none** of six languages, which reads exactly like a failed learner. With the pinned
+    substrate restored (`scripts/restore_substrate_v1.py`) it transfers to **all six**. A
+    capability that reports failure when it is merely unmeasured is a false negative, and it
+    cost this tree a purple capability it actually had.
+    """
+
+    def __init__(self, language: str, detail: str = "") -> None:
+        super().__init__(f"TREE_SITTER_SUBSTRATE_MISSING:{language}" + (f":{detail}" if detail else ""))
+        self.language = language
+        self.detail = detail
+
 CODE_LANGUAGES = ("python", "rust", "go", "typescript", "javascript", "java", "cpp")
 
 _CANON_OP = {
@@ -752,7 +770,13 @@ def _direct_cst_changed_expr_pair(
     try:
         pt = tsk.parse_bytes(src_lang, pat_raw)
         rt = tsk.parse_bytes(src_lang, rep_raw)
-    except Exception:
+    except Exception as exc:
+        # The stdlib AST is a legitimate fallback for Python SOURCES, but it produces a
+        # Python-shaped skeleton that a non-Python target can never be unified against. Letting
+        # that happen reports "the lesson does not transfer" when in fact no transfer was
+        # attempted. Measured 2026-11-12: absent substrate -> 0 of 6 languages; restored -> 6/6.
+        if not _substrate_present():
+            raise CstSubstrateUnavailable(src_lang, type(exc).__name__) from exc
         return _python_stdlib_ast_changed_pair(pat_raw.decode("utf-8", errors="replace"), rep_raw.decode("utf-8", errors="replace"), synth_to_hole) if src_lang == "python" else None
     if getattr(pt.root_node, "has_error", False) or getattr(rt.root_node, "has_error", False):
         return _python_stdlib_ast_changed_pair(pat_raw.decode("utf-8", errors="replace"), rep_raw.decode("utf-8", errors="replace"), synth_to_hole) if src_lang == "python" else None
@@ -1257,6 +1281,16 @@ def _iter_python_guard_statement_candidates(
                 return
 
 
+def _substrate_present() -> bool:
+    """Is the Tree-Sitter substrate importable? Checked at call time, not import time."""
+    try:
+        from tree_sitter import Parser  # noqa: F401
+        from tree_sitter_languages import get_language  # noqa: F401
+    except Exception:
+        return False
+    return True
+
+
 def iter_cst_skeleton_candidates(
     source_text: str,
     rule: Mapping[str, Any],
@@ -1293,7 +1327,11 @@ def iter_cst_skeleton_candidates(
     raw = source_text.encode("utf-8")
     try:
         tree = tsk.parse_bytes(lang, raw)
-    except Exception:
+    except Exception as exc:
+        # A missing substrate is not "this rule does not apply". Propagate it so the caller can
+        # say UNAVAILABLE instead of reporting a capability failure it never measured.
+        if not _substrate_present():
+            raise CstSubstrateUnavailable(lang, type(exc).__name__) from exc
         if lang == "python":
             yield from _iter_python_stdlib_ast_candidates(source_text, skeleton_pairs, max_candidates=max_candidates, suspect_lines=suspect_set if (suspect_set := [int(ln) for ln in (suspect_lines or ()) if isinstance(ln, int) and ln > 0]) else None)
         return
@@ -1561,13 +1599,19 @@ def recall_across_languages_cst(
             if sid and sid in seen_skills:
                 continue
             seen_skills.add(sid)
-            for cand in iter_cst_skeleton_candidates(
-                source_text,
-                rule,
-                target_language=tgt,
-                minimize=minimize,
-                suspect_lines=suspect_lines,
-            ):
+            try:
+                candidates = list(iter_cst_skeleton_candidates(
+                    source_text,
+                    rule,
+                    target_language=tgt,
+                    minimize=minimize,
+                    suspect_lines=suspect_lines,
+                ))
+            except CstSubstrateUnavailable:
+                # Nothing was measured. Reporting "no transfer" here is a false negative about a
+                # capability the tree does have once its pinned substrate is restored.
+                raise
+            for cand in candidates:
                 try:
                     ok = bool(verifier(cand))
                 except Exception:
