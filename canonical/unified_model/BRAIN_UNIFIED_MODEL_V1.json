@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 396,
+  "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6793,
+  "research_index_records": 6794,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dd1bb283512f23d1bc93ee42aecd3947a51cf4796796f87ee6718e0125d2afb3"
+  "value": "cad5c40df39acd36e612ac7a702ab08ee288a865ab81e8d4146f1014b35829b9"
  },
  "engines": [
   {
@@ -62339,6 +62339,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11245,
+   "headings": [
+    "Which fix actually works",
+    "1. What was asked, and what I refused to assume",
+    "2. Finding one: the roadmap counted targets, not opportunities",
+    "3. Finding two: the ceiling, so no gain can be oversold",
+    "4. Finding three: the four arms, measured",
+    "5. What this changes about the route",
+    "6. Why the exemption is sound, and what it is not",
+    "7. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHICH_FIX_ACTUALLY_WORKS_20261112_V1.md",
+   "sha256": "8853b552fbd8bf90a5f52d8b0b9e9ff1344fabded7fd9d54a249bf5ef3fb690a",
+   "summary": "**2026-11-12.** Base `8238d637`. Branch `arena/4ec3698d-brain`. Answers Problem 2: *similar task → adapt the knowledge.* The learner was changed, and the change is measured.",
+   "terms": {
+    "15": 9,
+    "22": 7,
+    "50": 8,
+    "60": 8,
+    "about": 5,
+    "algebra": 5,
+    "all": 5,
+    "askings": 11,
+    "because": 6,
+    "both": 8,
+    "cannot": 7,
+    "change": 5,
+    "changes": 11,
+    "class": 7,
+    "corpus": 6,
+    "coverage": 5,
+    "else": 5,
+    "exactly": 7,
+    "example": 7,
+    "examples": 5,
+    "exemption": 5,
+    "file": 5,
+    "first": 5,
+    "five": 5,
+    "gain": 11,
+    "import-only": 5,
+    "kind": 7,
+    "marker": 11,
+    "measured": 5,
+    "must": 7,
+    "name": 10,
+    "new": 6,
+    "no": 10,
+    "not": 22,
+    "nothing": 7,
+    "one": 15,
+    "only": 7,
+    "operator": 9,
+    "organ": 11,
+    "other": 7,
+    "pp": 8,
+    "precision": 8,
+    "refusal": 6,
+    "rename": 6,
+    "same": 10,
+    "so": 12,
+    "strict": 7,
+    "wrong": 10
+   },
+   "title": "Which fix actually works",
+   "title_terms": [
+    "actually",
+    "fix",
+    "works"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 19706,
    "headings": [
     "Why not just give it a try — the addendum the question deserves",
@@ -75560,10 +75634,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1198,
+  "included_source_count": 1199,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9f3e0e9ae0df86adcdfc9da74bfb86762d4f64a3fa7aed487646ee8c0977927b"
+  "source_tree_digest": "9ac66a8eb39f96b915ea4a3d90f11ff8a76a4c3b373f976cfee18e74c4150d0d"
  },
  "research_index": [
   {
@@ -205163,6 +205237,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
+   "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
+   "sha256": "49bb5a1d996964834923bf8fa726399d0ed30c6063576182a7dd68b1a63159a4",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "fix": 1,
+    "generalization": 1,
+    "moves": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -222030,6 +222122,35 @@
    }
   },
   {
+   "action_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c6873667143931d5d28e0338e45c0904c8f6ebdd3349def681eac2319c7260c2",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_kept_name_is_the_same_function_so_its_call_shape_cannot_matter_20261112_v1": 1,
+    "call": 1,
+    "cannot": 1,
+    "exempt_a_rename_between_two_documented_delegating_aliases_from_the_call_shape_check": 1,
+    "function": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "kept": 1,
+    "matter": 1,
+    "name": 1,
+    "same": 1,
+    "shape": 1,
+    "so": 1,
+    "strict_coverage_0_2082_to_0_2999__per_question_share_0_2836_to_0_6170__precision_up__wrong_changes_unchanged_at_14__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "the_organ_refused_a_rename_wherever_a_call_site_had_a_shape_the_example_did_not_show__its_reason_is_that_the_new_function_may_not_take_those_arguments__which_is_exactly_wrong_when_the_two_names_are_one_function": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_LAW_CAN_BE_SYNTHESISED_NOT_JUST_CHOSEN_FROM_A_LIST_20261104",
    "capability": false,
    "date": "2026-11-04",
@@ -233063,30 +233184,6 @@
     "the_check_is_part_of_the_choice_not_a_gate_v1": 1,
     "v1": 1,
     "verify_could_reject_a_wrong_answer_and_nothing_consulted_it_while_choosing__with_a_lossy_groups_the_search_returned_150_150_with_west_missing_and_verify_said_false_on_exactly_that_result": 1
-   }
-  },
-  {
-   "action_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "e26b76929b9da2e322cadc1c599caed28cf7e8db0f28672ae7dd34ea8a339546",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "chroot": 1,
-    "every_confined_execution_died_when_the_harness_ran_under_a_venv_because_confine_v1_spawned_sys_executable_into_a_chroot_that_only_mounts_usr_bin_lib_lib64_so_the_helpers_own_post_chroot_program_spawn_raised_filenotfound_error_before_any_program_line_ran_and_the_receipt_read_like_the_taught_program_failed": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "not": 1,
-    "port_the_brokers_chroot_visible_interpreter_rule_into_confine_v1_at_the_helper_launch_and_pin_both_ends_the_unit_pin_on_the_launch_argv_and_the_front_door_teach_apply_integration_pin_under_the_venv_that_failed_on_base": 1,
-    "python": 1,
-    "ran": 1,
-    "the_chroot_ran_a_python_that_was_not_in_it_20261112_v1": 1,
-    "the_harness_fault_class_that_impersonates_a_program_failure_is_closed_at_the_confinement_launcher_and_measured_at_both_ends__the_one_shot_loop_has_a_failable_pin_through_the_production_door__three_candidate_instruments_were_killed_by_measurement_before_code__zero_spend__no_benchmark_row_moved__truth_achieved_stays_false": 1,
-    "v1": 1
    }
   },
   {
@@ -253314,11 +253411,10 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "a9b944feb840b8d513356a85ce391be6ede86d7fd2b8d04b84abd60559cc0961",
+   "sha256": "f12d50da3b587ad41fb99ff23cdab370f293174b29408314a39c90abdc804682",
    "summary": "Candidate namespace/chroot launcher; not an admitted security boundary.",
-   "symbol_count": 4,
+   "symbol_count": 3,
    "symbols": [
-    "_python_in_chroot",
     "available",
     "run",
     "run_readonly"
@@ -253333,7 +253429,6 @@
     "launcher": 1,
     "namespace": 1,
     "not": 1,
-    "python_in_chroot": 1,
     "run": 1,
     "run_readonly": 1,
     "security": 1,

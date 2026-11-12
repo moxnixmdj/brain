@@ -55,9 +55,17 @@ YAML_FULL_LEFT_ALONE = (
     "import yaml\n\n\ndef plain(a):\n    return yaml.safe_load(a)\n\n\ndef trusted(c):\n    return yaml.load(c, Loader=yaml.FullLoader)\n")
 YAML_TARGET = ("import yaml\n\n\ndef settings(handle):\n    return yaml.load(handle)  # ours\n\n\n"
                "def theirs(handle):\n    return yaml.load(handle, Loader=yaml.FullLoader)\n")
-EQUALS_TWO = became("class T:\n    def test_a(self):\n        self.assertEquals(add(1, 2), 3)\n", "assertEquals", "assertEqual")
-EQUALS_THREE = became("class U:\n    def test_b(self):\n        self.assertEquals(name(), 'x', 'the name')\n", "assertEquals", "assertEqual")
-EQUALS_NAMED = became("class V:\n    def test_c(self):\n        self.assertEquals(size(), 4, msg='the size')\n", "assertEquals", "assertEqual")
+# `assertEquals` -> `assertEqual` is a name the standard library kept, and a kept name is no longer
+# refused for another call shape: the callee is the same function, so `kept_under_an_old_name_v1`
+# says there is nothing to be unsure about. The principle below is about a change between two
+# *different* names, so the vehicle has to be one of those, and `self.thread.isAlive` ->
+# `self.thread.is_alive` is one: a different method, not an alias of the old one.
+EQUALS_TWO = became("import threading\n\n\nclass T:\n    def alive(self):\n"
+                    "        return self.thread.isAlive()\n", "self.thread.isAlive", "self.thread.is_alive")
+EQUALS_THREE = became("import threading\n\n\nclass U:\n    def wait(self, timeout):\n"
+                      "        return self.thread.isAlive(timeout)\n", "self.thread.isAlive", "self.thread.is_alive")
+EQUALS_NAMED = became("import threading\n\n\nclass V:\n    def state(self, extra):\n"
+                      "        return self.thread.isAlive(extra='now')\n", "self.thread.isAlive", "self.thread.is_alive")
 CLOCK = became("import time\n\n\ndef run(job):\n    started = time.clock()\n    job()\n    return time.clock() - started\n",
                "time.clock", "time.perf_counter")
 JOIN = ("import os\n\n\ndef cache(root, name):\n    return os.path.join(root, name)\n\n\ndef log(base):\n    return os.path.join(base, 'run.log')\n",
@@ -189,18 +197,20 @@ def test_this_is_the_call_the_new_function_does_not_take() -> None:
 
 
 def test_a_use_is_shown_when_any_example_showed_it() -> None:
-    assert rules(EQUALS_TWO, EQUALS_THREE, EQUALS_NAMED) == ["self.assertEquals -> self.assertEqual"]
-    target = ("class W:\n    def test_d(self):\n        self.assertEquals(a, b)\n        self.assertEquals(a, b, 'why')\n"
-              "        self.assertEquals(a, b, msg='why')\n")
-    with pytest.raises(by_example.Refused, match="line 4 of the file has self.assertEquals called with 3 arguments"):
+    assert rules(EQUALS_TWO, EQUALS_THREE, EQUALS_NAMED) == ["self.thread.isAlive -> self.thread.is_alive"]
+    target = ("import threading\n\n\nclass W:\n    def a(self):\n        return self.thread.isAlive()\n\n\n"
+              "    def b(self, timeout):\n        return self.thread.isAlive(timeout)\n\n\n"
+              "    def c(self, extra):\n        return self.thread.isAlive(extra='now')\n")
+    with pytest.raises(by_example.Refused, match="line 10 of the file has self.thread.isAlive called with 1 argument"):
         repeated(target, EQUALS_TWO)
-    with pytest.raises(by_example.Refused, match="line 5 of the file .* the keyword msg; the examples showed it "
-                                                 "called with 2 arguments, called with 3 arguments"):
+    with pytest.raises(by_example.Refused, match="line 14 of the file .* the keyword extra; the examples showed it "
+                                                 "called with 0 arguments, called with 1 argument"):
         repeated(target, EQUALS_TWO, EQUALS_THREE)
-    assert repeated(target, EQUALS_TWO, EQUALS_THREE, EQUALS_NAMED) == target.replace("assertEquals", "assertEqual")
-    # Shown with two and with three arguments is not shown with four ...
-    with pytest.raises(by_example.Refused, match="called with 4 arguments"):
-        repeated("class X:\n    def test_e(self):\n        self.assertEquals(a, b, c, d)\n", EQUALS_TWO, EQUALS_THREE)
+    assert repeated(target, EQUALS_TWO, EQUALS_THREE, EQUALS_NAMED) == target.replace("isAlive", "is_alive")
+    # Shown with no and with one argument is not shown with two ...
+    with pytest.raises(by_example.Refused, match="called with 2 arguments"):
+        repeated("import threading\n\n\nclass X:\n    def d(self):\n        return self.thread.isAlive(a, b)\n",
+                 EQUALS_TWO, EQUALS_THREE)
     # ... and shown with two and with four is not shown with three: nothing between two showings is assumed.
     apart = became("import shapes\n\nflat = shapes.area(w, h)\nsolid = shapes.area(w, h, d, unit)\n", "shapes.area", "shapes.size")
     assert rules(apart) == ["shapes.area -> shapes.size"]
