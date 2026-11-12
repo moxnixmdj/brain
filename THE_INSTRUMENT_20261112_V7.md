@@ -102,3 +102,22 @@ self-evaluated verifier"*, 2610.11464).
 **The creature:** a creature is something whose self-model can be shown false. Before this PR,
 nothing in this tree could show it. Now one command can, on five layers, and it exits 1 when it
 catches a lie.
+
+
+---
+
+## Note for whoever regenerates the model artifact
+
+`canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json` must be compiled in a **clean checkout**,
+not a working tree. The compiler globs root `*.md` as knowledge documents, so an untracked file
+in your tree changes the count (316 → 321), changes the digest, and fails CI while passing
+locally. Measured today, in both directions:
+
+```sh
+git clone --depth 1 -b <branch> <remote> /tmp/clean && cd /tmp/clean
+python3 canonical/runtime/compile_brain_unified_model_v1.py
+cp canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json <your tree>/canonical/unified_model/
+```
+
+`canonical/runtime/compile_brain_unified_model_v1.py` was left untouched: `/canonical/runtime/`
+is a load-bearing-admission path and a comment is not worth an action intent.
