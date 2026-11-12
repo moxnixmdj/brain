@@ -77,6 +77,9 @@ EXPECTED: dict[str, Any] = {
         fix_shape.TAKEN_OUT: [0.03, 0.08], fix_shape.PUT_IN: [0.10, 0.20], fix_shape.LEAF: [0.20, 0.35], "can be listed": [0.25, 0.45]},
     "swe_bench_verified_of_500": {
         fix_shape.TAKEN_OUT: [0, 10], "can be listed": [10, 40], "at most one statement, in one file": [75, 150]},
+    "swe_bench_verified_cut_into_pieces": {
+        "written": "2026-11-12 about 19:16 UTC, AFTER the count of whole fixes above had been seen and before any fix was cut into pieces here",
+        "tasks of which every piece can be listed, of 500": [60, 110], "share of the pieces that can be listed": [0.25, 0.40]},
     "rules": {
         "one piece put in": "A family that puts one piece in is built for HumanEvalFix only if at least 6 of the 64 development fixes are "
                             "one piece put in, of at most 3 nodes, written with what the program holds or Python has built in.",
@@ -129,6 +132,48 @@ def of_pull_request(record: Mapping[str, Any]) -> dict[str, Any]:
     except ValueError as error:
         return {**out, "shape": fix_shape.UNREADABLE, "kind": str(error)[:120]}
     return {**out, **fix_shape.shape(row["before"], after)}
+
+
+def pieces_of_pull_request(record: Mapping[str, Any]) -> dict[str, Any]:
+    """The same fix cut into its smallest independent pieces (expert_fix_repetition_measure_v1:
+    for each piece the unit with every other piece already made, and the unit as the expert left
+    it), each piece given its shape. "Held" is what the changed files held BEFORE the fix, so a
+    name that another piece of the same fix brings in is not held. Definitions and files added or
+    removed are whole things, not pieces, and cannot be listed."""
+    from canonical.tools import expert_fix_repetition_measure_v1 as repetition
+    task = repetition.task_from_pull_request(record)
+    held: set = set()
+    for row in record.get("files", []):
+        if not row.get("is_test") and row.get("is_python") and row.get("before"):
+            try:
+                held |= fix_shape.atoms(ast.parse(row["before"]))
+            except (SyntaxError, ValueError, RecursionError):
+                pass
+    shapes = [fix_shape.shape(piece["pre"], piece["post"], held=held) for piece in task["pieces"]]
+    listed = [found["shape"] in fix_shape.SHAPES and fix_shape.can_be_listed(found) for found in shapes]
+    return {"pieces": len(shapes), "whole_things": len(task["whole_things"]), "problems": len(task["problems"]),
+            "pieces_that_can_be_listed": sum(listed), "shapes": dict(collections.Counter(found["shape"] for found in shapes)),
+            "every_piece_can_be_listed": bool(shapes) and all(listed) and not task["whole_things"] and not task["problems"]}
+
+
+def summarise_pieces(rows: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]:
+    whole = [row for row in rows.values() if row["every_piece_can_be_listed"]]
+    shapes: collections.Counter = collections.Counter()
+    for row in rows.values():
+        shapes.update(row["shapes"])
+    pieces = sum(row["pieces"] for row in rows.values())
+    can = sum(row["pieces_that_can_be_listed"] for row in rows.values())
+
+    def how_many(row: Mapping[str, Any]) -> str:
+        return str(row["pieces"]) if row["pieces"] <= 3 else "4 or more"
+
+    return {"tasks": len(rows), "tasks_with_a_problem": sum(1 for row in rows.values() if row["problems"]),
+            "tasks_with_a_whole_thing": sum(1 for row in rows.values() if row["whole_things"]),
+            "pieces": pieces, "pieces_that_can_be_listed": can, "share_of_pieces_that_can_be_listed": round(can / pieces, 4) if pieces else None,
+            "pieces_by_shape": {name: shapes[name] for name in fix_shape.SHAPES + SET_ASIDE if shapes[name]},
+            "tasks_of_which_every_piece_can_be_listed": len(whole),
+            "of_those_by_number_of_pieces": dict(sorted(collections.Counter(how_many(row) for row in whole).items())),
+            "all_tasks_by_number_of_pieces": dict(sorted(collections.Counter(how_many(row) for row in rows.values()).items()))}
 
 
 # --------------------------------------------------------------------------- #
@@ -191,7 +236,9 @@ def against_the_full_list(pairs: Mapping[str, tuple[str, str]], at_most: int | N
             return False
         return any(text == wanted for text, _, _ in take_out.candidates(whole))
 
-    names = sorted(pairs)[:at_most] if at_most else sorted(pairs)
+    names = sorted(pairs)
+    if at_most is not None:                                           # spread over the whole set, not its first names
+        names = names[::max(1, len(names) // at_most)][:at_most] if at_most > 0 else []
     apart: list[str] = []
     said = collections.Counter()
     for name in names:
@@ -232,7 +279,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--humanevalfix", type=pathlib.Path, help="humanevalpack.jsonl, the Python split; only the development bugs are read")
     parser.add_argument("--condefects", type=pathlib.Path, help="a checkout of ConDefects")
     parser.add_argument("--pull-requests-dir", type=pathlib.Path, help="one JSON file per task, as the collector wrote them")
-    parser.add_argument("--check-pairs", type=int, default=400, help="how many ConDefects pairs to decide the long way as well")
+    parser.add_argument("--check-pairs", type=int, default=60, help="how many ConDefects pairs to decide the long way as well (some seconds each)")
     parser.add_argument("--out", required=True, type=pathlib.Path)
     args = parser.parse_args(argv)
 
@@ -272,6 +319,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             "can_be_listed_by_project": dict(collections.Counter(
                 records[name].get("repo", "?") for name, row in rows.items() if row["shape"] in fix_shape.SHAPES and fix_shape.can_be_listed(row)))}
         record["per_fix"]["swe_bench_verified"] = {name: _row(row) for name, row in rows.items()}
+        cut = {name: pieces_of_pull_request(found) for name, found in records.items()}
+        record["sets"]["swe_bench_verified_cut_into_pieces"] = summarise_pieces(cut)
+        record["per_fix"]["swe_bench_verified_cut_into_pieces"] = {
+            name: [row["pieces"], row["pieces_that_can_be_listed"], row["whole_things"], row["every_piece_can_be_listed"]] for name, row in cut.items()}
+        record["per_fix_key_cut_into_pieces"] = "[pieces, pieces that can be listed, whole things, every piece can be listed]"
+        print("cut into pieces", json.dumps(record["sets"]["swe_bench_verified_cut_into_pieces"]), flush=True)
         print("swe-bench verified", json.dumps(record["sets"]["swe_bench_verified"]["by_shape"]), flush=True)
 
     record["seconds"] = round(time.time() - started, 1)

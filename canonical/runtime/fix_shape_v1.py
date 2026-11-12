@@ -311,9 +311,9 @@ def _changed_inside(left_a: list, left_b: list) -> bool:
     return len(left_a) == len(left_b) and any(type(s) is type(t) and _is_compound(s) for s, t in zip(left_a, left_b))
 
 
-def _shape(before: ast.Module, after: ast.Module, buggy: str, fixed: str) -> dict[str, Any]:
+def _shape(before: ast.Module, after: ast.Module, buggy: str, fixed: str, held: set | None = None) -> dict[str, Any]:
     found = descend(before, after)
-    program = atoms(before)
+    program = atoms(before) if held is None else held
     block_a, block_b = found["block"]
     _, left_a, left_b = window(block_a, block_b)
     hit = taken_out(found)
@@ -356,17 +356,19 @@ def _shape(before: ast.Module, after: ast.Module, buggy: str, fixed: str) -> dic
     return {**out, "shape": ONE_PLACE, "kind": "statements rewritten"}
 
 
-def shape(buggy: str, fixed: str) -> dict[str, Any]:
+def shape(buggy: str, fixed: str, held: set | None = None) -> dict[str, Any]:
     """The shape of the fix that turns `buggy` into `fixed`: {"shape", "kind", "needs", "nodes"}.
     `nodes` is the size of the piece taken out or put in, else of what the place holds afterwards.
-    "not_listed" is true when a statement was too large to ask take_out_v1 about it."""
+    "not_listed" is true when a statement was too large to ask take_out_v1 about it.
+    `held` says what counts as held (as `atoms` gives it) when `buggy` is only a part of the
+    program, or already has other changes made; without it, it is what `buggy` is written with."""
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             before, after = ast.parse(buggy), ast.parse(fixed)
         if same(before, after):
             return {"shape": SAME, "kind": None, "needs": NOTHING, "nodes": 0}
-        return _shape(before, after, buggy, fixed)
+        return _shape(before, after, buggy, fixed, held)
     except (SyntaxError, ValueError, RecursionError, MemoryError) as error:
         return {"shape": UNREADABLE, "kind": type(error).__name__, "needs": None, "nodes": None}
 
