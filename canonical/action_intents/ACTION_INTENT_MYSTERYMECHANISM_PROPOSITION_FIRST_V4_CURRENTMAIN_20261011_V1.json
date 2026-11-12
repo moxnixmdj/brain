@@ -1,0 +1,269 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "MYSTERYMECHANISM-PROPOSITION-FIRST-V4-CURRENTMAIN-20261011-SOL",
+  "date": "2026-10-11",
+  "status": "ACTIVE_RECONCILIATION__ZERO_CREDIT__NO_FRESH_REALITY",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "724399aa19bc906693c495a84a6278c3d0f408b7",
+  "terminal_objective": "PERMANENTLY_INTERNALIZE_CONFIGURE_VERIFY_AND_OWN_ALL_USEFUL_OPUS_5_5_CAPABILITIES_AT_EQUAL_OR_BETTER_LEVEL__KNOWLEDGE_EXTERNAL_JIT_ONLY",
+  "active_program": "OPUS_5_5_ALL_FAMILY_OBSOLESCENCE_CAMPAIGN_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "MYSTERYMECHANISM_CAPABILITY_RELATION_AND_BRANDED_RECEIPT_ARE_NOT_YET_SEPARATED_ON_A_CURRENTMAIN_FAIL_CLOSED_SOLVER_FRONTIER",
+  "action_kind": "RECONCILE_FRONTIER",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::MYSTERYMECHANISM_CAPABILITY_RELATION_AND_BRANDED_RECEIPT_ARE_NOT_YET_SEPARATED_ON_A_CURRENTMAIN_FAIL_CLOSED_SOLVER_FRONTIER",
+  "expected_parent_frontier_change": "Preserve the general capability target while removing Vals authorization from the Mystery capability-relation critical path, integrating the fail-closed V4 structural-identifiability asset on current main, and keeping the capability relation open until a typed scope-entailment edge is proved.",
+  "highest_leverage_now": true,
+  "stop_condition": "Current-main Mystery work has a verified V4 fail-closed solver asset and a proposition-first B/C/O reconciliation that wake-gates only the branded receipt, rejects same-information retries, selects scope-entailment proof/falsification as the next information action, and grants zero benchmark/capability/ownership/terminal credit.",
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "probe_id": null,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "orthogonal_recurrence_count": 0,
+  "precommitted_acceptance_gate_exception": false,
+  "theory_invariants": {
+    "benchmark_is_measurement_not_capability": true,
+    "branded_statistic_capability_relation_and_ownership_are_distinct": true,
+    "no_exact_statistic_from_generic_capability": true,
+    "no_capability_closure_without_typed_scope_entailment": true,
+    "external_runtime_cognition_in_credited_producer_path": 0,
+    "incremental_spend_usd": 0
+  },
+  "ownership_tests": [
+    "ZERO_EXTERNAL_MODEL_RUNTIME_COGNITION",
+    "NO_HIDDEN_CAPABILITY_PROVIDER_TEST",
+    "BRAIN_CONFIGURED_VERIFICATION_TEST",
+    "UNKNOWN_COGNITION_PROVENANCE_FAIL_CLOSED"
+  ],
+  "reasoning_durability": {
+    "receipt_required": true,
+    "artifact": "canonical/governance/MYSTERYMECHANISM_PROPOSITION_FIRST_MINIMUM_PROOF_FRONTIER_20261011_V1.json",
+    "chat_only_authority": false
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "BRAIN_OWNERSHIP_OF_CREDITED_UNKNOWN_MECHANISM_RECOVERY_CAPABILITY"
+    ],
+    "proof_state_reachability": "Reconciles the benchmark-derived obligation into separately typed branded-statistic, capability-relation, and ownership propositions; preserves the exact branded receipt as wake-gated while making the immediately executable scope-entailment proof/falsification route explicit.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false,
+      "total_families": 19,
+      "total_atomic": 38,
+      "historical_atomic_registry_count": 38,
+      "deleted_nonnecessary_atomic_count": 2,
+      "current_load_bearing_atomic_count": 36
+    },
+    "tournament": {
+      "proposal_id": "P_SEPARATE_MYSTERY_CAPABILITY_PROOF_FROM_BRANDED_RECEIPT_AND_INTEGRATE_V4",
+      "falsifier_id": "F_FIND_REQUIRED_LITERAL_BRANDED_STATISTIC_OR_PROVE_NO_SCOPE_ENTAILMENT_FROM_CURRENT_EVIDENCE",
+      "decisive_question": "Is the external Vals receipt required to prove the current Mystery-derived capability relation, or can an admissible typed scope-entailment certificate establish the capability proposition without the branded statistic?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "Known counterexamples are already represented by the canonical identifiability lower bound, public-scope saturation, and V4 structural false-positive falsification; this reconciliation creates no new target-reality evidence."
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "724399aa19bc906693c495a84a6278c3d0f408b7",
+    "real_outcome": "Minimize wall-clock time to a truthful Mystery-derived capability comparison by separating the branded Vals receipt from the capability proposition and reusing the strongest fail-closed Brain-owned solver asset already built.",
+    "required_capability": "UNKNOWN_MECHANISM_RECOVERY_WITH_BOUNDED_ACTIVE_EXPERIMENTATION_AND_STRUCTURAL_IDENTIFIABILITY",
+    "obs_goal": {
+      "real_outcome": "Prove or falsify the capability relation with the minimum sufficient information, not reproduce a branded benchmark procedure unless its exact statistic is independently required.",
+      "proxy_goals_deleted": [
+        "GET_VALS_API_KEY_AS_DEFAULT_CRITICAL_PATH",
+        "REPEAT_UNCHANGED_PUBLIC_SCOPE_SEARCH",
+        "TREAT_THREE_PUBLIC_WALKTHROUGHS_AS_PRIVATE_SCOPE_PROOF",
+        "TREAT_V4_SOLVER_IMPROVEMENT_AS_BENCHMARK_CREDIT"
+      ],
+      "surviving_necessity": "A typed scope-bound entailment edge from admissible Brain-owned evidence to the Mystery capability relation, or a proof that current public semantics cannot provide one."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/laws/BENCHMARK_MEASUREMENT_VS_CAPABILITY_PROOF_LAW_V2.md",
+        "canonical/runtime/capability_proof_compression_optimizer_v1.py",
+        "canonical/governance/MYSTERYMECHANISM_IDENTIFIABILITY_LOWER_BOUND_20261007_V1.json",
+        "canonical/governance/MYSTERYMECHANISM_PUBLIC_SCOPE_SUPERSET_SEARCH_SATURATION_20261005_V1.json",
+        "canonical/governance/MYSTERYMECHANISM_INTERVAL_INFORMATION_FRONTIER_20261008_V1.json"
+      ],
+      "external_existing_routes_checked": [
+        "Vals hosted MysteryMechanism receipt route",
+        "Vals public aggregate benchmark payload",
+        "existing Vals authorization request"
+      ],
+      "capability_work_deleted": [
+        "V3_UNCONSTRAINED_CANDIDATE_READY_AS_STRUCTURAL_CONFIDENCE",
+        "WAIT_FOR_EXTERNAL_AUTHORIZATION_AS_ACTIVE_CAPABILITY_WORK"
+      ],
+      "surviving_gap": "Current evidence does not yet prove a scope relation sufficient to close the capability comparison."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "SCOPE_ENTAILMENT_INFORMATION_GAP_NOT_SOLVER_COMPUTE_OR_AUTHENTICATION_DISCOVERY",
+      "delete_bypass_substitute_options": [
+        "separate exact branded receipt B from capability relation C",
+        "reuse V4 fail-closed structural identifiability",
+        "prove or falsify a benchmark-independent scope-entailment edge",
+        "wake exact Vals receipt only for literal branded-statistic need"
+      ],
+      "surviving_causal_blocker": "NO_PROVED_TYPED_SCOPE_EDGE_CURRENTLY_CONNECTS_BRAIN_OWNED_UNKNOWN_MECHANISM_RECOVERY_EVIDENCE_TO_THE_FULL_REQUIRED_CAPABILITY_RELATION"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "PROVE_OR_FALSIFY_SCOPE_BOUND_CAPABILITY_ENTAILMENT",
+        "V4_GENERAL_CAPABILITY_DEVELOPMENT_WITH_ZERO_CLOSURE_AUTHORITY",
+        "VALS_OWNER_RECEIPT_ONLY_IF_LITERAL_B_STATISTIC_IS_ACTIVE",
+        "REPEAT_PUBLIC_SEARCH_REJECTED"
+      ],
+      "losing_routes_reason": "Vals authorization waits on an external event and is not necessary for C unless a literal B objective is active; unchanged public search is saturated; public examples and V4 alone have zero scope-closure authority.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "V3/V4 regression tests are required only to verify solver behavior and the structural false-positive repair; they do not create benchmark or capability-comparison credit."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "VALS_API_KEY_HUNT_AS_CURRENT_CAPABILITY_CRITICAL_PATH",
+        "V3_STRUCTURALLY_AMBIGUOUS_FINALIZATION_AS_PREFERRED_ASSET"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "benchmark measurement versus capability proof law V2",
+        "capability proof compression optimizer V1",
+        "Mystery exact linear coefficient polytope",
+        "Mystery noisy interval information frontier",
+        "Mystery V4 structural identifiability repair"
+      ],
+      "fresh_reuse_plan": "Reuse V4 as a zero-model, fail-closed mechanism-recovery asset while requiring a separate typed scope proof before any capability-relation closure."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "reused credential exhaustion result",
+        "reused public-scope saturation result",
+        "reused identifiability theorem",
+        "reused existing global proposition-first controller",
+        "transplanted existing V3/V4 research commits instead of reinventing them"
+      ],
+      "search_stop_decision": "Stop unchanged API-key hunting and same-source public-scope searching; next information work is only a genuinely new scope-entailment proof/falsifier.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "PROVE_OR_FALSIFY_SCOPE_BOUND_CAPABILITY_ENTAILMENT",
+      "V4_GENERAL_CAPABILITY_DEVELOPMENT",
+      "VALS_OWNER_RECEIPT_WAIT",
+      "REPEAT_UNCHANGED_PUBLIC_SCOPE_SEARCH"
+    ],
+    "deleted_or_bypassed_paths": [
+      "EXTERNAL_WAIT_AS_ACTIVE_WORK",
+      "PUBLIC_PRIVATE_SCORE_SUBSTITUTION",
+      "THREE_PUBLIC_EXAMPLES_AS_SCOPE_COMPLETE_PROOF",
+      "STRUCTURALLY_AMBIGUOUS_V3_FINALIZATION"
+    ],
+    "selected_surviving_route": "PROVE_OR_FALSIFY_SCOPE_BOUND_CAPABILITY_ENTAILMENT",
+    "why_selected_route_is_fastest_sufficient": "It is immediately executable, costs no new reality or money, directly attacks the only missing implication needed for C, and either produces an admissible scope edge or proves the no-new-information boundary without waiting for Vals.",
+    "expected_parent_level_state_change": "Preserve the general capability target while removing Vals authorization from the Mystery capability-relation critical path, integrating the fail-closed V4 structural-identifiability asset on current main, and keeping the capability relation open until a typed scope-entailment edge is proved.",
+    "stop_condition": "Current-main Mystery work has a verified V4 fail-closed solver asset and a proposition-first B/C/O reconciliation that wake-gates only the branded receipt, rejects same-information retries, selects scope-entailment proof/falsification as the next information action, and grants zero benchmark/capability/ownership/terminal credit.",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER action over already-canonical evidence and already-built V3/V4 assets; no new supplier, provider, or execution route is being selected."
+    }
+  },
+  "behavioral_contract": {
+    "behavior_id": "MYSTERYMECHANISM_PROPOSITION_FIRST_RECONCILIATION_V1",
+    "inputs": [
+      "current canonical benchmark/capability proof laws",
+      "current Mystery evidence receipts",
+      "V3/V4 solver artifacts"
+    ],
+    "environment_state": "current-main repository state only; no private MysteryMechanism task access",
+    "allowed_information": [
+      "public/canonical Mystery evidence",
+      "repository-owned V3/V4 code and tests",
+      "public aggregate Vals metadata already observed"
+    ],
+    "required_output_or_action": "current-main V4 asset plus a zero-credit B/C/O-separated Mystery proof frontier",
+    "success_condition": "Focused regressions pass and the reconciliation preserves all hard nonclaims while selecting only the immediate scope-entailment information action.",
+    "failure_condition": "Any private-task inference, score promotion, external-model runtime cognition, structural false-positive acceptance, or benchmark/capability proposition conflation.",
+    "terminal_consequence": "None directly; zero credit. Only future admissible evidence may close C, B, O, or terminal state.",
+    "verification_route": "local deterministic unittest/py_compile plus repository drift guard with inherited failures separated from branch-introduced failures",
+    "dependency_boundary": "stdlib/local Brain code; zero Vals credential; zero external model cognition",
+    "scope": "MysteryMechanism-derived capability comparison and V3/V4 asset only"
+  },
+  "prequalification_controls": {
+    "applies": false,
+    "reason": "No untouched private qualification evidence is exposed or consumed and no Opus-level ownership promotion is claimed."
+  },
+  "qualification_stage": "DEVELOPMENT_AND_RECONCILIATION_ONLY__NO_PRIVATE_QUALIFICATION",
+  "terminal_proof_control": {
+    "proof_obligation": "Separate B/C/O and preserve only sound routes to C.",
+    "hole_type": "SCOPE_ENTAILMENT",
+    "expected_certificate_or_receipt": "typed scope-bound entailment edge or fail-closed no-current-proof result",
+    "validator": "canonical V2 benchmark/capability law plus focused regression tests",
+    "maximum_cheap_test_cost": "local deterministic tests only",
+    "prerequisites": [
+      "current canonical laws",
+      "existing Mystery evidence",
+      "V4 solver asset"
+    ],
+    "contamination_risk": "none from private tasks because none are accessed",
+    "reversibility": "fully reversible Git branch",
+    "falsification_condition": "V4 regression fails or proposition separation permits unsupported closure",
+    "critical_path_relation": "directly targets C without waiting on B"
+  },
+  "continuous_obs": {
+    "required": true,
+    "canonical_base_commit": "724399aa19bc906693c495a84a6278c3d0f408b7",
+    "material_unknowns": [
+      "whether a sound scope-entailment edge for C exists under current public semantics"
+    ],
+    "stale_authority_absent": true,
+    "valid_proof_action_priority": "PROVE_OR_FALSIFY_SCOPE_BOUND_CAPABILITY_ENTAILMENT"
+  },
+  "reality_query_admission": {
+    "verdict": "NO_REALITY_QUERY_REQUIRED",
+    "reason": "This reconciliation uses existing canonical/public evidence and local deterministic solver falsification only."
+  },
+  "global_terminal_proof_cut": {
+    "action_membership": "NOT_APPLICABLE__NO_UNTOUCHED_SOURCE_READ_OR_TERMINAL_REALITY_QUERY",
+    "fresh_terminal_reality_units_consumed": 0
+  },
+  "accounting": {
+    "incremental_spend_usd": 0,
+    "new_reality_units_consumed": 0,
+    "private_mysterymechanism_cases_consumed": 0,
+    "benchmark_score_credit_delta": 0,
+    "acceptance_credit_delta": 0,
+    "family_credit_delta": 0,
+    "capability_credit_delta": 0,
+    "ownership_credit_delta": 0,
+    "terminal_credit_delta": 0
+  },
+  "execution_authority": false,
+  "promotion_authority": false,
+  "fresh_reality_authority": false
+}
