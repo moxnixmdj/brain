@@ -8,6 +8,10 @@ A lesson is: a program that does the action once (its ``REQUEST`` line holds the
 example), the sentences the action may be asked with, the line the program prints when it is done,
 and a second example with different values.
 
+One program may serve several actions.  Such a lesson names the program, says which of its actions it
+is (``does``) and gives the values of its first example itself; the program's ``REQUEST`` line is then
+written from the lesson before anything is run or taught.
+
 For every lesson this tool
 
 1. checks that each taught value occurs once in the program, inside a string literal -- the compiler
@@ -121,6 +125,9 @@ LESSONS: list[dict] = [
     },
     {
         "action": "edit_by_example_v1",
+        "does": "edit",
+        "first_request": {"target": "lessons_q7/suite_q7.py", "before": "lessons_q7/shown_q7/earlier.py",
+                          "after": "lessons_q7/shown_q7/later.py"},
         "parameters": ("target", "before", "after"),
         "said_as": [
             "edit {target} the way {before} was changed into {after}",
@@ -139,7 +146,7 @@ LESSONS: list[dict] = [
                     "        self.assertTrue(total([]) == 0)\n"
                     "\n"
                     "    def test_names(self):\n"
-                    "        self.assertEquals(names(), ['a', 'b'], 'names differ')\n"),
+                    "        self.assertEquals(names(), ['a', 'b'], msg='names differ')\n"),
                 "lessons_q7/shown_q7/later.py": (
                     "import unittest\n"
                     "\n"
@@ -150,7 +157,7 @@ LESSONS: list[dict] = [
                     "        self.assertTrue(total([]) == 0)\n"
                     "\n"
                     "    def test_names(self):\n"
-                    "        self.assertEqual(names(), ['a', 'b'], 'names differ')\n"),
+                    "        self.assertEqual(names(), ['a', 'b'], msg='names differ')\n"),
                 "lessons_q7/suite_q7.py": (
                     "import unittest\n"
                     "\n"
@@ -205,13 +212,164 @@ LESSONS: list[dict] = [
 ]
 
 
+# ----------------------------------------------------------------------------- a change kept in a lesson file
+
+LESSON_NOTE = ("A change worked out from examples, kept to be repeated on other files. "
+               "'teaches' is checked against 'examples' every time the lesson is used.")
+
+
+def _lines(text: str) -> list[str]:
+    return text.splitlines(keepends=True)
+
+
+def _kept(teaches: list[dict], *examples: tuple[str, str, str]) -> dict:
+    """A lesson file as the action writes it: what it teaches, and the examples (shown by, before, after)."""
+    return {"format": "CHANGE_LEARNED_FROM_EXAMPLES_V1", "what this is": LESSON_NOTE, "teaches": teaches,
+            "examples": [{"shown by": shown_by, "before": _lines(before), "after": _lines(after)}
+                         for shown_by, before, after in examples]}
+
+
+def _as_file(lesson: dict) -> str:
+    return json.dumps(lesson, indent=1, ensure_ascii=False) + "\n"
+
+
+SUITE_WAS = ("import unittest\n"
+             "\n"
+             "\n"
+             "class LedgerTest(unittest.TestCase):\n"
+             "    def test_total(self):\n"
+             "        self.assertEquals(total([1, 2]), 3)\n"
+             "        self.assertTrue(total([]) == 0)\n")
+SUITE_IS = SUITE_WAS.replace("assertEquals", "assertEqual")
+NAMED_WAS = ("import unittest\n"
+             "\n"
+             "\n"
+             "class NamesTest(unittest.TestCase):\n"
+             "    def test_names(self):\n"
+             "        self.assertEquals(names(), ['a', 'b'], msg='names differ')\n")
+NAMED_IS = NAMED_WAS.replace("assertEquals", "assertEqual")
+EQUALS_ONE = {"change": "self.assertEquals -> self.assertEqual", "shown": ["called with 2 arguments"]}
+EQUALS_TWO = {"change": "self.assertEquals -> self.assertEqual",
+              "shown": ["called with 2 arguments", "called with 2 arguments and the keyword msg"]}
+
+UNSET_WAS = ("def settle(total, rate):\n"
+             "    if total == None:\n"
+             "        return 0\n"
+             "    missing = rate.value == None\n"
+             "    return total == 0 or missing\n")
+UNSET_IS = UNSET_WAS.replace("== None", "is None")
+GIVEN_WAS = ("def pick(first, second):\n"
+             "    if first != None:\n"
+             "        return first\n"
+             "    return second if second.value != None else 0\n")
+GIVEN_IS = GIVEN_WAS.replace("!= None", "is not None")
+UNSET = {"change": "?1 == None -> ?1 is None"}
+GIVEN = {"change": "?1 != None -> ?1 is not None"}
+
+LESSONS += [
+    {
+        "action": "remember_a_change_v1",
+        "program": "edit_by_example_v1",
+        "does": "remember",
+        "parameters": ("lesson", "before", "after"),
+        "first_request": {"lesson": "lessons_q7/kept_q7/equal_q7.lesson", "before": "lessons_q7/shown_q7/was_q7.py",
+                          "after": "lessons_q7/shown_q7/became_q7.py"},
+        "said_as": [
+            "remember in {lesson} the way {before} was changed into {after}",
+            "remember in {lesson} also the way {before} was changed into {after}",
+        ],
+        "answers": "remembered in {lesson} the way {before} was changed into {after}",
+        "first_example": {                      # the lesson file is not there yet: it is made
+            "before": {"lessons_q7/shown_q7/was_q7.py": SUITE_WAS, "lessons_q7/shown_q7/became_q7.py": SUITE_IS},
+            "after_json": {"lessons_q7/kept_q7/equal_q7.lesson": _kept(
+                [EQUALS_ONE], ("lessons_q7/shown_q7/was_q7.py -> lessons_q7/shown_q7/became_q7.py", SUITE_WAS, SUITE_IS))},
+        },
+        "second_example": {                     # the lesson file holds one example: a second is added to it
+            "request": {"lesson": "notes/unset.lesson", "before": "checks/given/as_it_was.py",
+                        "after": "checks/given/as_it_is.py"},
+            "before": {
+                "notes/unset.lesson": _as_file(_kept([UNSET], ("earlier/was.py -> earlier/is.py", UNSET_WAS, UNSET_IS))),
+                "checks/given/as_it_was.py": GIVEN_WAS,
+                "checks/given/as_it_is.py": GIVEN_IS,
+            },
+            "after_json": {"notes/unset.lesson": _kept(
+                [UNSET, GIVEN], ("earlier/was.py -> earlier/is.py", UNSET_WAS, UNSET_IS),
+                ("checks/given/as_it_was.py -> checks/given/as_it_is.py", GIVEN_WAS, GIVEN_IS))},
+        },
+    },
+    {
+        "action": "repeat_a_remembered_change_v1",
+        "program": "edit_by_example_v1",
+        "does": "repeat",
+        "parameters": ("target", "lesson"),
+        "first_request": {"target": "lessons_q7/rates_q7.py", "lesson": "lessons_q7/kept_q7/equal_q7.lesson"},
+        "said_as": ["edit {target} the way {lesson} remembers"],
+        "answers": "edited {target} the way {lesson} remembers",
+        "first_example": {                      # a lesson of two examples; the second showed the keyword
+            "before": {
+                "lessons_q7/kept_q7/equal_q7.lesson": _as_file(_kept(
+                    [EQUALS_TWO], ("one/was.py -> one/is.py", SUITE_WAS, SUITE_IS),
+                    ("two/was.py -> two/is.py", NAMED_WAS, NAMED_IS))),
+                "lessons_q7/rates_q7.py": (
+                    "import unittest\n"
+                    "\n"
+                    "\n"
+                    "class RatesTest(unittest.TestCase):\n"
+                    "    def test_rate(self):\n"
+                    "        self.assertEquals(rate(2), 0.5)  # half\n"
+                    "        outcome = self.assertEquals(rate(4), 0.25, msg='quarter')\n"
+                    "        other.assertEquals(outcome, None)\n"),
+            },
+            "after": {"lessons_q7/rates_q7.py": (
+                "import unittest\n"
+                "\n"
+                "\n"
+                "class RatesTest(unittest.TestCase):\n"
+                "    def test_rate(self):\n"
+                "        self.assertEqual(rate(2), 0.5)  # half\n"
+                "        outcome = self.assertEqual(rate(4), 0.25, msg='quarter')\n"
+                "        other.assertEquals(outcome, None)\n")},
+        },
+        "second_example": {
+            "request": {"target": "checks/orders.py", "lesson": "notes/unset.lesson"},
+            "before": {
+                "notes/unset.lesson": _as_file(_kept(
+                    [UNSET, GIVEN], ("earlier/was.py -> earlier/is.py", UNSET_WAS, UNSET_IS),
+                    ("later/was.py -> later/is.py", GIVEN_WAS, GIVEN_IS))),
+                "checks/orders.py": (
+                    "def last(order, fallback):\n"
+                    "    while order.parent == None:  # top of the chain\n"
+                    "        order = order.following\n"
+                    "    unset = (order.note or fallback) != None\n"
+                    "    return unset == False\n"),
+            },
+            "after": {"checks/orders.py": (
+                "def last(order, fallback):\n"
+                "    while order.parent is None:  # top of the chain\n"
+                "        order = order.following\n"
+                "    unset = (order.note or fallback) is not None\n"
+                "    return unset == False\n")},
+        },
+    },
+]
+
+
 class LessonError(Exception):
     """A lesson that must not be taught as written."""
 
 
 def program_and_request(lesson: dict) -> tuple[str, dict[str, str]]:
     """The program text and the values of its first example, read from its ``REQUEST`` line."""
-    text = (PROGRAMS / (lesson["action"] + ".py")).read_text(encoding="utf-8")
+    text = (PROGRAMS / (lesson.get("program", lesson["action"]) + ".py")).read_text(encoding="utf-8")
+    if "does" in lesson:
+        lines = text.splitlines(keepends=True)
+        at = [number for number, line in enumerate(lines) if line.startswith("REQUEST = ")]
+        if len(at) != 1 or tuple(lesson["first_request"]) != tuple(lesson["parameters"]):
+            raise LessonError("%s: the program needs one REQUEST line, and the lesson one first value for each "
+                              "parameter, in order" % lesson["action"])
+        lines[at[0]] = "REQUEST = (%s, (%s,))\n" % (json.dumps(lesson["does"]), ", ".join(
+            json.dumps(lesson["first_request"][name]) for name in lesson["parameters"]))
+        text = "".join(lines)
     values = None
     for node in ast.parse(text).body:
         if isinstance(node, ast.Assign) and [getattr(t, "id", None) for t in node.targets] == ["REQUEST"]:
@@ -219,6 +377,9 @@ def program_and_request(lesson: dict) -> tuple[str, dict[str, str]]:
                 values = ast.literal_eval(node.value)
             except ValueError:
                 values = None
+            if "does" in lesson:
+                values = values[1] if (isinstance(values, tuple) and len(values) == 2
+                                       and values[0] == lesson["does"]) else None
     if (not isinstance(values, tuple) or len(values) != len(lesson["parameters"])
             or not all(isinstance(value, str) and value for value in values)):
         raise LessonError("%s: REQUEST must be a tuple of %d string literals"
@@ -244,9 +405,18 @@ def _world(directory: pathlib.Path, files: dict[str, str]) -> pathlib.Path:
     return directory
 
 
-def _differences(directory: pathlib.Path, expected: dict[str, str]) -> list[str]:
-    return [name for name, content in expected.items()
-            if not (directory / name).is_file() or (directory / name).read_bytes() != content.encode("utf-8")]
+def _differences(directory: pathlib.Path, example: dict) -> list[str]:
+    """Files of an example that are not what the lesson expects: by bytes (``after``) or as JSON (``after_json``)."""
+    wrong = [name for name, content in example.get("after", {}).items()
+             if not (directory / name).is_file() or (directory / name).read_bytes() != content.encode("utf-8")]
+    for name, content in example.get("after_json", {}).items():
+        try:
+            same = json.loads((directory / name).read_bytes().decode("utf-8")) == content
+        except (OSError, ValueError):
+            same = False
+        if not same:
+            wrong.append(name)
+    return wrong
 
 
 def teach(bundle_path: pathlib.Path) -> dict:
@@ -265,7 +435,7 @@ def teach(bundle_path: pathlib.Path) -> dict:
             first = _world(scratch / ("first_%d" % number), lesson["first_example"]["before"])
             ran = compiler.execute_compiled_steps(trace, cwd=first)
             done, why = compiler.verify_postcondition(postcondition, cwd=first, execution_result=ran) if ran.get("ok") else (False, ran.get("reason"))
-            if not done or _differences(first, lesson["first_example"]["after"]):
+            if not done or _differences(first, lesson["first_example"]):
                 raise LessonError("%s: the first example did not come out as the lesson says (%s)" % (lesson["action"], why))
 
             second = lesson["second_example"]
@@ -277,7 +447,7 @@ def teach(bundle_path: pathlib.Path) -> dict:
                     source_channel="taught_action_program", db_path=database)
                 if verdict.get("pass") is not True:
                     raise LessonError("%s: %r did not qualify: %s" % (lesson["action"], sentence, verdict.get("status")))
-                wrong = _differences(world, second["after"])
+                wrong = _differences(world, second)
                 if wrong:
                     raise LessonError("%s: the second example passed its postcondition but %s is not what the lesson expects"
                                       % (lesson["action"], ", ".join(wrong)))

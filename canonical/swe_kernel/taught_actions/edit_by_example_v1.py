@@ -43,11 +43,14 @@ This repeats a change.  It does not check that the change is right for the code 
 The edit replaces only the bytes of the places that fit a rule.  Everything else in the file,
 including comments and layout, stays as it was.
 """
-REQUEST = ("lessons_q7/suite_q7.py", "lessons_q7/shown_q7/earlier.py", "lessons_q7/shown_q7/later.py")  # file to edit, example before, example after
+# What to do, and with which files: ("edit", (file to edit, example before, example after)),
+# ("remember", (lesson file, example before, example after)) or ("repeat", (file to edit, lesson file)).
+REQUEST = ("edit", ("lessons_q7/suite_q7.py", "lessons_q7/shown_q7/earlier.py", "lessons_q7/shown_q7/later.py"))
 
 import ast
 import builtins
 import io
+import json
 import pathlib
 import re
 import sys
@@ -922,18 +925,26 @@ def names_still_hold(text, edited, places, what):
 
 def edit_by_example(target_text, before_text, after_text):
     """`target_text` changed the way `before_text` was changed into `after_text`."""
-    rules = learn(before_text, after_text)
+    return repeated(learn(before_text, after_text), target_text, "the example")
+
+
+def repeated(rules, target_text, shown_by):
     result, count = rewrite(rules, target_text)
     if count == 0:
-        raise Refused("nothing in the file has the form the example changed (%s); a part of that form may vary "
-                      "only where two changed places of the example differ" % "; ".join(str(rule) for rule in rules))
+        raise Refused("nothing in the file has the form %s changed (%s); a part of that form may vary "
+                      "only where two changed places differ" % (shown_by, "; ".join(str(rule) for rule in rules)))
     return result
 
 
-def read_python(path, what):
+def inside_project(path, what):
     target = pathlib.Path(path)
     if target.is_absolute() or ".." in target.parts:
         raise Refused("%s must be a path inside the project" % what)
+    return target
+
+
+def read_python(path, what):
+    target = inside_project(path, what)
     if not target.is_file():
         raise Refused("%s does not exist" % what)
     try:
@@ -942,21 +953,111 @@ def read_python(path, what):
         raise Refused("%s is not UTF-8 text" % what)
 
 
-def main(request):
-    path, before, after = request
+# ----------------------------------------------------------------------------- a lesson kept in a file
+
+LESSON_FORMAT = "CHANGE_LEARNED_FROM_EXAMPLES_V1"
+LESSON_SUFFIX = ".lesson"
+
+
+def described(rules):
+    """What a lesson teaches, for a reader: each change, and how the changed code was used where it was shown."""
+    out = []
+    for rule in rules:
+        entry = {"change": str(rule)}
+        if rule.kind == "expression" and rule.uses != {None}:
+            entry["shown"] = sorted(said(use) for use in rule.uses)
+        names = {name: sorted(import_said(name, origin) if origin else "more than one import" for origin in origins)
+                 for name, origins in sorted({**rule.origins, **rule.brought}.items())}
+        if names:
+            entry["imports"] = names
+        out.append(entry)
+    return out
+
+
+def lesson_examples(path):
+    """The examples a lesson file holds, as (before, after) texts.  Refuses a file that is not a sound lesson."""
+    target = inside_project(path, "the lesson file")
+    if not target.name.endswith(LESSON_SUFFIX):
+        raise Refused("a lesson file's name ends in %s" % LESSON_SUFFIX)
+    if not target.is_file():
+        return target, None
     try:
-        target, text = read_python(path, "the file to edit")
-        _, earlier = read_python(before, "the example's first file")
-        _, later = read_python(after, "the example's second file")
-        result = edit_by_example(text, earlier, later)
+        held = json.loads(target.read_bytes().decode("utf-8"))
+    except (UnicodeDecodeError, ValueError):
+        held = None
+    examples = held.get("examples") if isinstance(held, dict) and held.get("format") == LESSON_FORMAT else None
+    if (not isinstance(examples, list) or not examples or not all(
+            isinstance(example, dict) and all(
+                isinstance(example.get(side), list) and all(isinstance(line, str) for line in example[side])
+                for side in ("before", "after")) for example in examples)):
+        raise Refused("%s exists and is not a lesson file" % path)
+    pairs = [("".join(example["before"]), "".join(example["after"])) for example in examples]
+    if held.get("teaches") != described(learn_all(pairs)):
+        raise Refused("%s says it teaches something other than what its examples show; it was changed by hand, or "
+                      "written by another version of this action. Remember its examples again" % path)
+    return target, pairs
+
+
+def lesson_text(pairs, origins):
+    """The bytes of a lesson file.  Raises Refused when the examples, read as one, do not give rules."""
+    rules = learn_all(pairs)
+    held = {"format": LESSON_FORMAT,
+            "what this is": "A change worked out from examples, kept to be repeated on other files. "
+                            "'teaches' is checked against 'examples' every time the lesson is used.",
+            "teaches": described(rules),
+            "examples": [{"shown by": origin, "before": before.splitlines(keepends=True),
+                          "after": after.splitlines(keepends=True)} for (before, after), origin in zip(pairs, origins)]}
+    return (json.dumps(held, indent=1, ensure_ascii=False) + "\n").encode("utf-8")
+
+
+def remember(lesson, before, after):
+    """Add one example to a lesson file, making the file when it is not there.  Returns (path, bytes to write)."""
+    target, pairs = lesson_examples(lesson)
+    _, earlier = read_python(before, "the example's first file")
+    _, later = read_python(after, "the example's second file")
+    origins = []
+    if pairs is None:
+        pairs = []
+    else:
+        origins = [example.get("shown by") for example in json.loads(target.read_bytes().decode("utf-8"))["examples"]]
+        if (earlier, later) in pairs:
+            raise Refused("%s already holds this example" % lesson)
+    return target, lesson_text(pairs + [(earlier, later)], origins + ["%s -> %s" % (before, after)])
+
+
+def main(request):
+    action, values = request
+    try:
+        if action == "edit":
+            path, before, after = values
+            target, text = read_python(path, "the file to edit")
+            _, earlier = read_python(before, "the example's first file")
+            _, later = read_python(after, "the example's second file")
+            written = edit_by_example(text, earlier, later).encode("utf-8")
+            done = "edited %s the way %s was changed into %s" % (path, before, after)
+        elif action == "remember":
+            lesson, before, after = values
+            target, written = remember(lesson, before, after)
+            done = "remembered in %s the way %s was changed into %s" % (lesson, before, after)
+        elif action == "repeat":
+            path, lesson = values
+            target, text = read_python(path, "the file to edit")
+            _, pairs = lesson_examples(lesson)
+            if pairs is None:
+                raise Refused("the lesson file does not exist")
+            written = repeated(learn_all(pairs), text, "the lesson").encode("utf-8")
+            done = "edited %s the way %s remembers" % (path, lesson)
+        else:
+            raise Refused("this program does not know the action %r" % (action,))
     except Refused as why:
         print("REFUSED: %s" % why)
         return 3
     except RecursionError:
         print("REFUSED: the code is nested too deeply to compare")
         return 3
-    target.write_bytes(result.encode("utf-8"))
-    print("edited %s the way %s was changed into %s" % (path, before, after))
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(written)
+    print(done)
     return 0
 
 
