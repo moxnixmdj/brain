@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "canonical/runtime/verify_brain_unified_model_v1.py",
+    "--seed",
+    "20261112"
+  ],
+  "as_designed": true,
+  "expect_identical": true,
+  "experience": "unified_model_seed_replays",
+  "identical": true,
+  "incremental_spend_usd": 0,
+  "independent_verifier": null,
+  "kind": "REPRODUCIBILITY_RECEIPT",
+  "kind_of_artefact": "replayable_experience",
+  "model_dependency_count": 0,
+  "ran_by": "arena-agent-20261112",
+  "runs": [
+    {
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "fc75db256450c163c4341060b690522060e71b3639327e742dbeb344f7eee77f"
+    },
+    {
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "fc75db256450c163c4341060b690522060e71b3639327e742dbeb344f7eee77f"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_REPRODUCIBILITY_RECEIPT_V1",
+  "verdict": "REPRODUCED",
+  "verified": false
+}
