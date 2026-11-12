@@ -15,7 +15,8 @@ This probe teaches it exactly one lesson and measures what that one experience b
 The third question is the one that matters. The module's own words: *the fifteen parts are built in;
 only the words are learned.* A lesson is not evidence about an unknown operation — it is a choice
 among operations that already exist. That is why one example is enough here, and why no number of
-examples would ever teach `median`.
+examples would ever teach `mode`. (Round 8 measured this with `median`; the next round added the
+median operator in code — the only thing that can add an operator — and moved this pin to `mode`.)
 
 Authority NONE. Runs the shipped learner in-process against its own seed lessons plus one live
 lesson written to a temporary directory. Writes nothing into the repository, starts no process,
@@ -46,7 +47,10 @@ LIVE_LESSON: dict[str, Any] = {
 
 #: A new word that stands for an operation the learner does not have. No demonstration can teach it,
 #: and the point of the probe is that it still refuses — correctly — instead of guessing.
-UNTEACHABLE = "what is the median number in n.txt"
+#: (Round 8 originally used `median` here. The next round added the median operator to the algebra
+#: as a code change — the only thing that can add an operator — so the still-unteachable example is
+#: now `mode`, which no part can express. See A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md.)
+UNTEACHABLE = "what is the mode number in n.txt"
 
 LINE_WORDS = ("lines", "line", "rows", "row")
 
