@@ -222,11 +222,13 @@ def _lines(text: str) -> list[str]:
     return text.splitlines(keepends=True)
 
 
-def _kept(teaches: list[dict], *examples: tuple[str, str, str]) -> dict:
-    """A lesson file as the action writes it: what it teaches, and the examples (shown by, before, after)."""
+def _kept(teaches: list[dict], *examples: tuple) -> dict:
+    """A lesson file as the action writes it: what it teaches, and the examples (shown by, before, after,
+    and -- for an example a try made -- the places of its first file a check left unsettled)."""
     return {"format": "CHANGE_LEARNED_FROM_EXAMPLES_V1", "what this is": LESSON_NOTE, "teaches": teaches,
-            "examples": [{"shown by": shown_by, "before": _lines(before), "after": _lines(after)}
-                         for shown_by, before, after in examples]}
+            "examples": [dict([("shown by", example[0]), ("before", _lines(example[1])), ("after", _lines(example[2]))]
+                              + ([("not settled", example[3])] if example[3:] else []))
+                         for example in examples]}
 
 
 def _as_file(lesson: dict) -> str:
@@ -407,6 +409,103 @@ LESSONS += [
                 "    if trusted:\n"
                 "        return yaml.load(handle, Loader=yaml.FullLoader)\n"
                 "    return yaml.safe_load(handle)\n")},
+        },
+    },
+]
+
+WATCH_WAS = ("import threading\n"
+             "\n"
+             "\n"
+             "class Watch_q7:\n"
+             "    def __init__(self):\n"
+             "        self.thread_q7 = threading.Thread(target=print)\n"
+             "\n"
+             "    def busy_q7(self):\n"
+             "        return self.thread_q7.isAlive()\n")
+WATCH_IS = WATCH_WAS.replace("isAlive", "is_alive")
+POOL_WAS = "def running_q7(threads):\n    return [t for t in threads if t.isAlive()]\n"
+POOL_CHECK = ("import threading\n"
+              "import unittest\n"
+              "\n"
+              "import pool_q7\n"
+              "\n"
+              "\n"
+              "class PoolTest_q7(unittest.TestCase):\n"
+              "    def test_running_q7(self):\n"
+              "        finished = threading.Thread(target=print)\n"
+              "        finished.start()\n"
+              "        finished.join()\n"
+              "        self.assertEqual(pool_q7.running_q7([finished]), [])\n")
+AGENT_WAS = ("import threading\n"
+             "\n"
+             "\n"
+             "class Agent:\n"
+             "    def __init__(self):\n"
+             "        self.worker = threading.Thread(target=print)\n"
+             "\n"
+             "    def busy(self):\n"
+             "        return self.worker.isAlive()\n")
+AGENT_IS = AGENT_WAS.replace("isAlive", "is_alive")
+LEVEL_WAS = ("def active(jobs):\n"
+             "    return [job for job in jobs if job.isAlive()]\n"
+             "\n"
+             "\n"
+             "def forgotten(job):\n"
+             "    return job.isAlive()\n")
+LEVEL_CHECK = ("import threading\n"
+               "import unittest\n"
+               "\n"
+               "import level\n"
+               "\n"
+               "\n"
+               "class LevelTest(unittest.TestCase):\n"
+               "    def test_active(self):\n"
+               "        ended = threading.Thread(target=print)\n"
+               "        ended.start()\n"
+               "        ended.join()\n"
+               "        self.assertEqual(level.active([ended]), [])\n")
+WATCHED = {"change": "self.thread_q7.isAlive -> self.thread_q7.is_alive", "shown": ["called with 0 arguments"]}
+AGENTS = {"change": "self.worker.isAlive -> self.worker.is_alive", "shown": ["called with 0 arguments"]}
+ANY_ALIVE = {"change": "?1.isAlive -> ?1.is_alive", "shown": ["called with 0 arguments"]}
+
+LESSONS += [
+    {
+        "action": "try_what_a_lesson_did_not_show_v1",
+        "program": "edit_by_example_v1",
+        "does": "repeat_tried",
+        "parameters": ("target", "lesson", "check"),
+        "first_request": {"target": "lessons_q7/pool_q7.py", "lesson": "lessons_q7/kept_q7/alive_q7.lesson",
+                          "check": "lessons_q7/check_q7.py"},
+        "said_as": ["edit {target} the way {lesson} remembers and try the rest with {check}"],
+        "answers": "edited {target} the way {lesson} remembers and tried the rest with {check}",
+        "first_example": {                      # `t.isAlive()` fits only the wider reading; the check settles it
+            "before": {
+                "lessons_q7/kept_q7/alive_q7.lesson": _as_file(_kept(
+                    [WATCHED], ("shown_q7/watch_was.py -> shown_q7/watch_is.py", WATCH_WAS, WATCH_IS))),
+                "lessons_q7/pool_q7.py": POOL_WAS,
+                "lessons_q7/check_q7.py": POOL_CHECK,
+            },
+            "after": {"lessons_q7/pool_q7.py": POOL_WAS.replace("isAlive", "is_alive")},
+            "after_json": {"lessons_q7/kept_q7/alive_q7.lesson": _kept(
+                [ANY_ALIVE], ("shown_q7/watch_was.py -> shown_q7/watch_is.py", WATCH_WAS, WATCH_IS),
+                ("a try on lessons_q7/pool_q7.py that lessons_q7/check_q7.py settled; kept line 2: a test "
+                 "that passes with it fails when that code fails",
+                 POOL_WAS, POOL_WAS.replace("isAlive", "is_alive")))},
+        },
+        "second_example": {                     # a use the check never runs stays as it was, named "not settled"
+            "request": {"target": "floor/level.py", "lesson": "notes/alive.lesson", "check": "floor/check_level.py"},
+            "before": {
+                "notes/alive.lesson": _as_file(_kept(
+                    [AGENTS], ("earlier/was.py -> earlier/is.py", AGENT_WAS, AGENT_IS))),
+                "floor/level.py": LEVEL_WAS,
+                "floor/check_level.py": LEVEL_CHECK,
+            },
+            "after": {"floor/level.py": LEVEL_WAS.replace("if job.isAlive()", "if job.is_alive()")},
+            "after_json": {"notes/alive.lesson": _kept(
+                [ANY_ALIVE], ("earlier/was.py -> earlier/is.py", AGENT_WAS, AGENT_IS),
+                ("a try on floor/level.py that floor/check_level.py settled; kept line 2: a test that passes "
+                 "with it fails when that code fails; not settled, line 6",
+                 LEVEL_WAS, LEVEL_WAS.replace("if job.isAlive()", "if job.is_alive()"), [[6, 11, 6, 22]]))},
         },
     },
 ]

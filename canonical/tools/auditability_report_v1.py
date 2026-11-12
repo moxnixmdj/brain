@@ -372,9 +372,53 @@ def binary_predicates(root: pathlib.Path) -> dict[str, Any]:
             "auditability": round(checkable / total, 4) if total else None}
 
 
+def receipts(root: pathlib.Path) -> dict[str, Any]:
+    """Receipts that name the program that measured them, and whether it still exists.
+
+    Measured 2026-11-12: 67 receipts carry `measurement_program_sha256` and none names a
+    locatable program, so the field is unfalsifiable in every instance. A layer that scores
+    0 here is not "no receipts" -- it is "receipts that cannot be contradicted".
+    """
+    try:
+        from canonical.tools import receipt_program_identity_v1 as R
+    except Exception as exc:                      # pragma: no cover
+        return {"layer": "receipts", "total": None, "checkable": None,
+                "error": f"{type(exc).__name__}:{exc}"[:120]}
+    report = R.scan(root)
+    total = sum(report["counts"].values())
+    checkable = report["checkable"]
+    return {"layer": "receipts", "total": total, "checkable": checkable,
+            "note": (f"MATCH {report['counts'].get('MATCH', 0)}, "
+                     f"MISMATCH {report['counts'].get('MISMATCH', 0)}, "
+                     f"no locatable program {report['counts'].get('NO_PROGRAM', 0)}"),
+            "receipts": report["counts"]}
+
+
+def rules_execute(root: pathlib.Path) -> dict[str, Any]:
+    """Do stored rules survive being EXECUTED against a spec, or only re-checked structurally?
+
+    The six other layers all verify consistency: a rule still applies, a hash still matches, a
+    pin still resolves. Consistency is cheap. This layer asks whether applying the learned edit
+    preserves the behaviour the program already had, on a victim the rule was never taught on.
+    """
+    try:
+        from canonical.tools import rule_generalization_probe_v1 as P
+    except Exception as exc:                      # pragma: no cover
+        return {"layer": "rules_execute", "total": None, "checkable": None,
+                "error": f"{type(exc).__name__}:{exc}"[:120]}
+
+    demo = P.demonstrate()
+    total = len(demo)
+    checkable = sum(1 for v in demo.values() if v["verdict"] in (P.HOLDS, P.BREAKS))
+    broken = [k for k, v in demo.items() if v["verdict"] == P.BREAKS]
+    return {"layer": "rules_execute", "total": total, "checkable": checkable,
+            "note": f"{checkable}/{total} executed against an oracle; "
+                    f"{len(broken)} broke behaviour ({', '.join(broken) or 'none'})"}
+
+
 def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any]:
     layers = [capabilities(root), skills(root), process_sites(root), test_modules(root),
-              binary_predicates(root)]
+              binary_predicates(root), receipts(root), rules_execute(root)]
     for layer in layers:
         total, checkable = layer.get("total"), layer.get("checkable")
         layer["auditability"] = (round(checkable / total, 4)

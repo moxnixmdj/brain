@@ -170,9 +170,9 @@ def test_asked_to_leave_the_rest_alone_the_uses_that_were_shown_are_changed_and_
         by_example.rewrite(found, target)
     assert by_example.rewrite(found, target, leave_unshown=True) == (
         "import yaml\na = yaml.safe_load(one)\nb = yaml.load(two, Loader=yaml.Loader)\nc = yaml.load\nd = yaml.safe_load(three)\n", 2)
-    # Every other refusal still stands: the name the new code needs is still asked for.
-    with pytest.raises(by_example.Refused, match="the change uses 'Path'"):
-        by_example.rewrite(by_example.learn_all([JOIN]), "import os\nx = os.path.join(a, b)\n", leave_unshown=True)
+    # A name the new code needs is no longer refused when the examples added its import: it is brought.
+    assert by_example.rewrite(by_example.learn_all([JOIN]), "import os\nx = os.path.join(a, b)\n",
+                              leave_unshown=True) == ("import os\nfrom pathlib import Path\nx = Path(a) / b\n", 1)
     only_unshown = "import yaml\nb = yaml.load(two, Loader=yaml.Loader)\n"
     assert by_example.rewrite(found, only_unshown, leave_unshown=True) == (only_unshown, 0)
     with pytest.raises(by_example.Refused, match="nothing in the file has the form"):
@@ -253,12 +253,14 @@ def test_a_blank_that_stood_for_variables_does_not_stand_for_an_imported_module(
 @pytest.mark.parametrize("head,reason", [
     ("import os\nclass Path:\n    pass\n", "the change uses 'Path', which the examples get by `from pathlib import Path`"),
     ("import os\nfrom shapes import Path\n", "the change uses 'Path', which the examples get by `from pathlib import Path`"),
-    ("import os\n", "the change uses 'Path', which the file does not define"),
 ])
 def test_a_name_the_new_code_brings_must_be_the_import_the_examples_used(head, reason) -> None:
     body = "\n\ndef report(out, day):\n    return os.path.join(out, day)\n"
     with pytest.raises(by_example.Refused, match=reason):
         repeated(head + body, JOIN)
+    # A file that does not bind 'Path' at all gets the import the examples added, where it can be found.
+    assert repeated("import os\n" + body, JOIN) == (
+        "import os\nfrom pathlib import Path\n" + body.replace("os.path.join(out, day)", "Path(out) / day"))
     with pytest.raises(by_example.Refused, match="at line 5 of the file that name is something else"):
         repeated("import os\nfrom pathlib import Path\n\ndef report(out, day, Path):\n    return os.path.join(out, day)\n", JOIN)
     good = "import os\nfrom pathlib import Path\n" + body
@@ -433,9 +435,9 @@ def test_nothing_in_a_lesson_is_ever_run(project, capsys) -> None:
 # ----------------------------------------------------------------------------- the lessons and the front door
 
 
-def test_one_program_serves_four_taught_actions() -> None:
+def test_one_program_serves_five_taught_actions() -> None:
     mine = [lesson for lesson in teach.LESSONS if lesson.get("program", lesson["action"]) == "edit_by_example_v1"]
-    assert sorted(lesson["does"] for lesson in mine) == ["edit", "remember", "repeat", "repeat_shown"]
+    assert sorted(lesson["does"] for lesson in mine) == ["edit", "remember", "repeat", "repeat_shown", "repeat_tried"]
     own_line = next(line for line in (teach.PROGRAMS / "edit_by_example_v1.py").read_text(encoding="utf-8").splitlines()
                     if line.startswith("REQUEST = "))
     for lesson in mine:
@@ -448,7 +450,8 @@ def test_one_program_serves_four_taught_actions() -> None:
     assert {"remember in ?path0 the way ?path1 was changed into ?path2",
             "remember in ?path0 also the way ?path1 was changed into ?path2",
             "edit ?path0 the way ?path1 remembers",
-            "edit ?path0 the way ?path1 remembers and leave the rest alone"} <= skeletons
+            "edit ?path0 the way ?path1 remembers and leave the rest alone",
+            "edit ?path0 the way ?path1 remembers and try the rest with ?path2"} <= skeletons
 
 
 def test_the_teaching_tool_compares_a_lesson_file_by_what_it_holds(tmp_path) -> None:
