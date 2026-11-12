@@ -293,9 +293,10 @@ def test_an_import_changed_together_with_its_uses_is_repeated_when_every_use_is_
     assert rules(before, after) == ["old_name(?1) -> new_name(?1)", "from m import old_name -> from m import new_name"]
     assert by_example.edit_by_example("from m import old_name\nq = old_name(7)\n", before, after) == (
         "from m import new_name\nq = new_name(7)\n")
-    # ... and when the file imports the name another way, the calls are not changed on their own
-    with pytest.raises(by_example.Refused, match="the change uses 'new_name'"):
-        by_example.edit_by_example("from m import other, old_name\nq = old_name(7)\n", before, after)
+    # ... and when the file lists the name among others on its import line, the one alias follows
+    # the renamed uses right where it stands, exactly as the example renamed its own
+    assert by_example.edit_by_example("from m import other, old_name\nq = old_name(7)\n", before, after) == (
+        "from m import other, new_name\nq = new_name(7)\n")
 
 
 def test_the_program_refuses_without_writing(tmp_path, monkeypatch, capsys) -> None:
