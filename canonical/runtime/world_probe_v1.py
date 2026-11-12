@@ -109,8 +109,13 @@ _RUNTIME_KINDS = {
     # `network` is not an executable, but it is decided the same way this table
     # already decides things: ask the world, answer yes or no, never guess.
     # `_decide_runtime` special-cases it below because `shutil.which("network")`
-    # can never be anything but None.
+    # can never be anything but None. `pypi` is likewise a route, not a binary;
+    # `structured.release_claim` rides the network route; `git.repository` is
+    # decided by the git binary the operate adapter actually shells out to.
     "network": "network",
+    "pypi": "pypi",
+    "structured.release_claim": "network",
+    "git.repository": "git",
 }
 
 
@@ -168,6 +173,77 @@ def _network_reachable() -> dict:
             continue
     return {"true": False, "how": "network_tcp_unreachable",
             "evidence": None, "tried": tried}
+
+
+# The same instrument, scoped to one host. `pypi.live_metadata.available` and
+# `pypi.selection.available` both mean "this machine can reach the pypi index at
+# all" -- the live-metadata fetch and the selection read are the adapter's job
+# and stay fail-closed there; this decides the PRECONDITION, so a plan can be
+# formed. Probing pypi.org does not answer for any other host and does not
+# answer "may I fetch" -- it answers "is the route up", never guessing.
+_PYPI_PROBES = (("pypi.org", 443),)
+_PYPI_TIMEOUT_S = 3.0
+
+
+def _pypi_reachable() -> dict:
+    import socket
+    import time as _time
+
+    started = _time.monotonic()
+    tried = []
+    for host, port in _PYPI_PROBES:
+        if _time.monotonic() - started > _PYPI_TIMEOUT_S * 2:
+            break
+        tried.append(host)
+        try:
+            with socket.create_connection((host, port), timeout=_PYPI_TIMEOUT_S):
+                return {"true": True, "how": "pypi_tcp_reachable",
+                        "evidence": host, "tried": tried}
+        except Exception:
+            continue
+    return {"true": False, "how": "pypi_tcp_unreachable",
+            "evidence": None, "tried": tried}
+
+
+# A raster chart reader is available when the libraries it imports exist and the
+# OCR binary it calls exists -- measured on the imports the adapters actually
+# make (`PIL.Image` in the scene graph) and the executable they shell out to
+# (`tesseract` for positioned OCR). ABSENCE IS INFORMATION: "this box cannot
+# read raster charts" is a true and useful answer, and it names the missing
+# piece instead of shrugging. A fact that used to be BLIND -- indistinguishable
+# from "I have no idea" -- is now a decision either way.
+_SUBSYSTEM_KINDS = {
+    "chart": {"imports": ("PIL",), "executables": ("tesseract",)},
+    # `chart.question.<X>.available` names the question, not a suffix chain:
+    # the base does not END with `.question`, so `_subjects` cannot strip down
+    # to `chart`. These two rows are the same subsystem probed the same way,
+    # written out explicitly so the answer stays reviewable data.
+    "chart.question.binary_phase_solvus": {"imports": ("PIL",),
+                                           "executables": ("tesseract",)},
+    "chart.question.legend_linear_intersection": {"imports": ("PIL",),
+                                                  "executables": ("tesseract",)},
+}
+
+
+def _decide_subsystem(subject, _goal_paths, _root):
+    spec = _SUBSYSTEM_KINDS.get(subject)
+    if spec is None:
+        return None
+    missing = []
+    for module in spec.get("imports", ()):
+        try:
+            __import__(module)
+        except Exception:
+            missing.append("module:%s" % module)
+    for exe in spec.get("executables", ()):
+        if shutil.which(exe) is None:
+            missing.append("executable:%s" % exe)
+    if missing:
+        return {"true": False, "how": "subsystem_probed",
+                "evidence": "missing " + ", ".join(missing)}
+    return {"true": True, "how": "subsystem_probed",
+            "evidence": ",".join(spec.get("imports", ()))
+            + "+" + ",".join(spec.get("executables", ())) + " present"}
 
 # Facts so basic they are easy to overlook and fatal to miss. The
 # computer-use capabilities require `project_present` and `files_known`,
@@ -264,7 +340,8 @@ def _subjects(effect: str) -> list[str]:
     out = [base]
     suffixes = (".file", ".corpus", ".runtime", ".text", ".http", ".https",
                 ".network", ".live_metadata", ".selection", ".query",
-                ".question", ".series", ".candidate")
+                ".question", ".series", ".candidate", ".x_value", ".y_value",
+                ".label")
     changed = True
     while changed:
         changed = False
@@ -307,9 +384,15 @@ def _decide_runtime(subject, _goal_paths, _root):
     if exe is None:
         return None
     # `network` is not an executable; it is a route. Same table, different
-    # instrument, same contract: answer, never guess.
+    # instrument, same contract: answer, never guess. `pypi` is the same kind
+    # of route, scoped to the pypi index. `structured.release_claim` rides the
+    # network route too: the claim is obtained over HTTP from the product's
+    # official source, so the machine-level precondition is the route, and the
+    # claim's content is verified by the adapter when it runs.
     if exe == "network":
         return _network_reachable()
+    if exe == "pypi":
+        return _pypi_reachable()
     hit = shutil.which(exe)
     if hit:
         return {"true": True, "how": "path_executable", "evidence": hit}
@@ -353,6 +436,9 @@ def probe_effect(effect, goal="", goal_paths=(), root=None):
 
     for subject in _subjects(e):
         decided = _decide_file(subject, goal_paths, root)
+        if decided is not None:
+            return decided
+        decided = _decide_subsystem(subject, goal_paths, root)
         if decided is not None:
             return decided
         decided = _decide_runtime(subject, goal_paths, root)
