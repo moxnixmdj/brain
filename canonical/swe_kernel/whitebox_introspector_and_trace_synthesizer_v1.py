@@ -322,12 +322,31 @@ def harvest_live_io_examples(
                             except Exception:
                                 continue
                         for m in t_methods:
+                            # WHAT A TEST'S setUp STARTS, ITS OWN tearDown ENDS -- IN THIS PROCESS.
+                            #
+                            # These test files run in the solver's interpreter. Until 2026-11-11
+                            # setUp was called and tearDown never was, so whatever a project's
+                            # tests arm per test stayed armed inside Brain after the harvest
+                            # returned. Measured that day: a suite that sets a per-test alarm in
+                            # setUp and cancels it in tearDown left the alarm armed with its
+                            # full time remaining, to expire later in the solver's own code.
+                            #
+                            # The order is unittest's own: tearDown only when setUp succeeded,
+                            # the registered cleanups in every case.
+                            set_up_done = False
                             try:
                                 if hasattr(inst, "setUp"):
                                     inst.setUp()
+                                set_up_done = True
                                 getattr(inst, m)()
                             except Exception:
                                 pass
+                            finally:
+                                for closer in (("tearDown",) if set_up_done else ()) + ("doCleanups",):
+                                    try:
+                                        getattr(inst, closer, lambda: None)()
+                                    except Exception:
+                                        pass
     finally:
         _restore_project_modules(project_names, stashed_modules)
         sys.dont_write_bytecode = old_dwb

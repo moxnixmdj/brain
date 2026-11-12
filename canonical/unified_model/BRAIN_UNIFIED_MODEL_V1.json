@@ -27078,7 +27078,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
-    "source_sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c",
+    "source_sha256": "5f73aaa5acb00ca0bedee1a967f7fbdb9325076aaf30faf1ed3595569bd7190d",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "de75a2eaafb41bdb41734496c3d3ee119754df4cd860c48eb4a26ebdd3f3a2e8"
+  "value": "646b59353a8658a6fc2d6553f52ec29e89f09df57126e8d1db423cd1b8cf7e1d"
  },
  "engines": [
   {
@@ -32248,7 +32248,7 @@
     },
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c"
+    "sha256": "5f73aaa5acb00ca0bedee1a967f7fbdb9325076aaf30faf1ed3595569bd7190d"
    },
    "canonical/runtime/bound_capabilities/python_source_complexity.py": {
     "defaulted_keys": {},
@@ -68605,7 +68605,7 @@
   "included_source_count": 1108,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0d9e8abb42b3fd17b52c40171bfe94b764739c84f71f606b385668cc28c3417e"
+  "source_tree_digest": "68d187a5ddb8e93edc8741f0e79ff067c0b2f089b908b84fbaf6308f09364fc6"
  },
  "research_index": [
   {
@@ -211636,33 +211636,6 @@
    }
   },
   {
-   "action_id": "AN_EDIT_IS_WORKED_OUT_FROM_AN_EXAMPLE_AND_A_STATED_DEFAULT_IS_WRITTEN_AS_STATED_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/AN_EDIT_IS_WORKED_OUT_FROM_AN_EXAMPLE_AND_A_STATED_DEFAULT_IS_WRITTEN_AS_STATED_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/AN_EDIT_IS_WORKED_OUT_FROM_AN_EXAMPLE_AND_A_STATED_DEFAULT_IS_WRITTEN_AS_STATED_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "505252e0dfa2904fec1556bc4520134912fb3e619c45ac39014d22c53b6b72cc",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "an_edit_is_worked_out_from_an_example_and_a_stated_default_is_written_as_stated_20261112_v1": 1,
-    "default": 1,
-    "edit": 1,
-    "every_action_the_front_door_can_do_was_written_down_by_a_writer__showing_it_an_edit_taught_it_nothing__and_add_a_parameter_answered_pass_with_the_default_none_when_the_sentence_stated_another_default": 1,
-    "example": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "one_taught_action_whose_rule_comes_from_the_example_and_not_from_a_writer__eleven_wrong_passes_of_add_a_parameter_become_right_or_refused__no_request_that_passed_is_lost": 1,
-    "out": 1,
-    "stated": 2,
-    "teach_one_self_contained_program_that_works_an_edit_out_from_a_before_and_after_pair_of_files_through_the_existing_compiler_and_sandbox__and_adapt_the_add_parameter_binding_so_a_stated_default_is_written_as_stated_or_the_request_is_refused": 1,
-    "v1": 1,
-    "worked": 1,
-    "written": 1
-   }
-  },
-  {
    "action_id": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -213970,6 +213943,33 @@
     "those": 2,
     "v1": 2,
     "wrong": 2
+   }
+  },
+  {
+   "action_id": "A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1",
+   "capability": false,
+   "date": "2026-11-11",
+   "id": "research:canonical/action_intents/A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9d9169cc00c317fc60060001791111af44e32d6b6e38d10c737b83a6a9f51fc3",
+   "status": "",
+   "terms": {
+    "20261111": 1,
+    "a_kept_lesson_stays_usable_however_many_follow_it_20261111_v1": 1,
+    "delete_the_128_lesson_cut_from_the_query_that_feeds_recall__keep_its_order__and_adapt_the_test_harvest_so_that_each_project_test_it_runs_is_ended_as_unittest_ends_it__tear_down_when_set_up_succeeded__cleanups_always": 1,
+    "follow": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "however": 1,
+    "kept": 1,
+    "lesson": 1,
+    "many": 1,
+    "one_silent_loss_of_kept_lessons_removed__one_source_of_solver_interruption_removed__zero_capability_credit__zero_family_credit__no_row_added__no_route_opened__the_measured_absence_of_transfer_to_problems_a_lesson_was_not_taught_on_is_unchanged_and_is_not_claimed_to_change": 1,
+    "recall_read_only_128_lessons_per_language_chosen_by_reuse_count_before_any_was_matched__so_a_lesson_kept_after_128_reused_ones_was_stored_reported_crystallized_and_never_read_again__and_the_harvest_that_runs_a_projects_tests_inside_the_solver_called_setup_and_never_teardown__so_a_per_test_alarm_stayed_armed_in_the_solver": 1,
+    "stays": 1,
+    "usable": 1,
+    "v1": 1
    }
   },
   {
@@ -247548,11 +247548,10 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "0813cc961b1e2d839285c2f019c8feb50dd8f6ae443efbcb1bc431a734cf2753",
+   "sha256": "6fb4f26ac2e1b9a0154d0de7801aca38fbbe2a62a8ee6457ceed9b540c242727",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 23,
+   "symbol_count": 21,
    "symbols": [
-    "_as_python_literal",
     "_defining_module",
     "_derive_edits",
     "_derive_swe_kernel_inputs",
@@ -247573,12 +247572,10 @@
     "is_swe_request",
     "stated_existing_files",
     "stated_git_operation_verb",
-    "stated_git_operations",
-    "stated_parameter_default"
+    "stated_git_operations"
    ],
    "terms": {
     "adapter_defaulted_keys": 1,
-    "as_python_literal": 1,
     "bind": 1,
     "binding_view": 1,
     "capability": 1,
@@ -247606,7 +247603,6 @@
     "stated_existing_files": 1,
     "stated_git_operation_verb": 1,
     "stated_git_operations": 1,
-    "stated_parameter_default": 1,
     "tree_of": 1,
     "typed": 1,
     "v1": 1
