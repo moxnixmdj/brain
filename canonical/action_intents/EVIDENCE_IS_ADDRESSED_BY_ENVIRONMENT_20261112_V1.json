@@ -7,7 +7,7 @@
  "route_id": "EVIDENCE_IS_ADDRESSED_BY_ENVIRONMENT_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "fe07e7910f21bed905fb1ce3e0f54dcd9eadf5c8",
+ "canonical_base_commit": "808e72ac4a5a306ee122e69cadebff94db123b96",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -76,7 +76,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "fe07e7910f21bed905fb1ce3e0f54dcd9eadf5c8",
+  "canonical_base_commit": "808e72ac4a5a306ee122e69cadebff94db123b96",
   "real_outcome": "Evidence about a learned plan is now addressed to the environment that observed it, and the claim that instant learning transfers perfectly to new arbitrary environments is refuted by measurement on this tree.",
   "required_capability": "A memory whose evidence carries the environment it was observed in, because a proof is a fact about a place and an environment-blind store cannot tell a transfer from a regression.",
   "obs_goal": {

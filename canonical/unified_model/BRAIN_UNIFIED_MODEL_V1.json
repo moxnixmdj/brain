@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 324,
+  "knowledge_documents": 325,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6733,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "27deb0599ac660d41aca1288aa24a28da40fc10e12dbf8f83c509e9d4f574904"
+  "value": "594f44967fe77d8b6c86809cb8abb7c5d1496ab0b5cbb47701b43264eb015503"
  },
  "engines": [
   {
@@ -53567,6 +53567,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 3174,
+   "headings": [
+    "A taught rule is not a shown rule",
+    "What was done, not argued",
+    "The defect, in one line",
+    "The fix",
+    "Tests — 10 new, all green, three of them prove FAIL",
+    "The bug this pass found in my own instrument",
+    "What the answer to the question now is, with a number attached"
+   ],
+   "kind": "DOCUMENT",
+   "path": "REPCHECK_20261112_V1.md",
+   "sha256": "a05960ac48155001becfade3421f590814a7b229f6f0ab2d46b9b51ba47bb93b",
+   "summary": "**2026-11-12.** Branch `arena/02b5ae8a-brain`. Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "02b5ae8a-brain": 1,
+    "10": 1,
+    "2026-11-12": 1,
+    "able": 1,
+    "about": 1,
+    "absent": 6,
+    "after_sha256": 2,
+    "before": 2,
+    "before_sha256": 2,
+    "cannot": 2,
+    "demonstration": 2,
+    "exits": 2,
+    "fail": 9,
+    "five": 2,
+    "found": 2,
+    "instrument": 2,
+    "line": 2,
+    "measurement": 3,
+    "mechanism": 2,
+    "missing": 3,
+    "moved": 3,
+    "never": 5,
+    "new": 2,
+    "no": 3,
+    "none": 3,
+    "not": 7,
+    "now": 6,
+    "number": 2,
+    "pass": 8,
+    "provenance": 2,
+    "re-executable": 2,
+    "reported": 2,
+    "returns": 3,
+    "rewrite": 2,
+    "rule": 10,
+    "rules": 7,
+    "same": 2,
+    "so": 3,
+    "source": 5,
+    "stale": 2,
+    "store": 3,
+    "stored": 9,
+    "taught": 5,
+    "text": 2,
+    "total": 2,
+    "under": 2,
+    "verdict": 2,
+    "zero": 2
+   },
+   "title": "A taught rule is not a shown rule",
+   "title_terms": [
+    "not",
+    "rule",
+    "shown",
+    "taught"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 11022,
    "headings": [
     "Retained repair through the fabric — unadmitted trace, 2026-11-02",
@@ -69974,10 +70048,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1126,
+  "included_source_count": 1127,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "da803a6fd9873ec0c70ffbd5b69c09f09f7c97a87e1d8584ac05b8633e089385"
+  "source_tree_digest": "c1e93b53f9c5efc665fad7b8a0f806f0c31faf118ce304581590340e252e511f"
  },
  "research_index": [
   {
@@ -220808,7 +220882,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/EVIDENCE_IS_ADDRESSED_BY_ENVIRONMENT_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "9b466d32cae1d256e2080cac23e43af7153fc1600ffacd4381f09e703f91d170",
+   "sha256": "1fe9a536c2a297133a2459b0ea98c1fb8a77c74dbc29d819d5aca3bb2b6829d3",
    "status": "",
    "terms": {
     "20261112": 1,
