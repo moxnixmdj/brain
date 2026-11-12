@@ -1,0 +1,31 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+  "date": "2026-10-11",
+  "status": "FROZEN_CANDIDATE__INDEPENDENT_VERIFICATION_REQUIRED__ZERO_CREDIT",
+  "action_id": "CODING_V6_SOFTWARE_ACCEPTANCE_SPECIFICATION_V1",
+  "source_frontier": "canonical/governance/CURRENT_FRONTIERCODE_CAPABILITY_FIRST_RECONCILIATION_20261011_V1.json",
+  "mission": "Compile explicit software requests into typed critical acceptance predicates, bind only independent executable verifiers, preserve unbound semantics explicitly, and prevent test-pass from masquerading as complete request acceptance.",
+  "reuse": [
+    "canonical/runtime/goal_compiler.py::decompose_goal",
+    "canonical/runtime/independent_acceptance_model.py::assess",
+    "PYTHON_STDLIB_FILESYSTEM_HASH_COMPILE_AND_SUBPROCESS_VERIFICATION"
+  ],
+  "proved_if_verified": [
+    "EXPLICIT_REQUEST_CLAUSES_TO_TYPED_ACCEPTANCE_PREDICATES",
+    "FILE_EXISTENCE_ABSENCE_TEXT_COMPILE_TEST_AND_SCOPE_VERIFIER_BINDING",
+    "UNBOUND_SEMANTIC_CLAUSES_FAIL_CLOSED",
+    "PASSING_EXISTING_TEST_CANNOT_OVERRIDE_UNBOUND_REQUEST_SEMANTICS",
+    "CANDIDATE_REPAIR_COMPLETION_ONLY_WHEN_ALL_CRITICAL_PREDICATES_ARE_BOUND_AND_PASS"
+  ],
+  "external_general_purpose_model_runtime_dependency_count": 0,
+  "donor_general_purpose_model_runtime_dependency_count": 0,
+  "frontiercode_cases_consumed": 0,
+  "benchmark_score_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "hard_nonclaims": [
+    "NO_ARBITRARY_NATURAL_LANGUAGE_SEMANTIC_COMPLETENESS",
+    "NO_HIDDEN_REQUIREMENT_INFERENCE",
+    "NO_GENERAL_MERGEABILITY_AUTHORITY",
+    "NO_FRONTIERCODE_SCORE"
+  ]
+}
