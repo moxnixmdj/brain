@@ -61,8 +61,62 @@ LADDER = (
 )
 
 
+#: The full-scale runs. `newest()` among these is the one to quote for the headline.
+GENERALISATION_GLOB = "MINIWOB_ONE_SUCCESS_GENERALISATION_*_V*.json"
+
+#: Runs that re-check an existing result on instances nobody had used. They use a different task
+#: set, so they are quoted for ORDERING only -- never for the headline number.
+REPLICATION_GLOB = "MINIWOB_REPLICATION_*.json"
+
+
 def runs() -> list[pathlib.Path]:
-    return sorted(VERIFICATION.glob("MINIWOB_ONE_SUCCESS_GENERALISATION_*_V*.json"))
+    return sorted(VERIFICATION.glob(GENERALISATION_GLOB))
+
+
+def replications() -> list[pathlib.Path]:
+    return sorted(VERIFICATION.glob(REPLICATION_GLOB))
+
+
+def replication_check() -> dict[str, Any]:
+    """Does the ladder's ORDERING reproduce on instances that did not exist when it was learned?
+
+    A headline from one run is a result; the same ordering from an independent run on fresh
+    instances is a finding. This compares the newest replication to the newest full run and
+    reports agreement as a boolean rather than leaving two tables for the reader to compare.
+
+    Only the ordering is compared, deliberately: the replication uses 50 pages and the full run
+    130, so the absolute rates are not expected to match and quoting them side by side invites
+    exactly the kind of cross-run comparison both files' `read_this_first` forbids.
+    """
+    reps = replications()
+    if not reps:
+        return {"available": False}
+    rep = json.loads(reps[-1].read_text())
+    full = newest()[1]
+    rep_arms, full_arms = _arms(rep), _arms(full)
+
+    pairs = (("version_space", "verbatim"), ("version_space", "random"),
+             ("version_space", "version_space_blind"), ("verbatim", "random"))
+    checks = []
+    for high, low in pairs:
+        def rate(arms, arm):
+            stats = arms.get(arm)
+            return (stats or {}).get("mean_task_success_rate_where_replay_is_not_enough")
+        a, b = rate(rep_arms, high), rate(rep_arms, low)
+        c, e = rate(full_arms, high), rate(full_arms, low)
+        if None in (a, b, c, e):
+            continue
+        checks.append({"ordering": f"{high} > {low}", "replication": a > b, "full_run": c > e})
+    return {
+        "available": True,
+        "replication_run": reps[-1].name,
+        "full_run": newest()[0].name,
+        "pages": len(rep.get("tasks") or []),
+        "test_seeds": (rep.get("parameters") or {}).get("test_seeds", [])[:2],
+        "browser": (rep.get("environment") or {}).get("browser"),
+        "checks": checks,
+        "ordering_reproduces": all(c["replication"] and c["full_run"] for c in checks) if checks else None,
+    }
 
 
 def _load(path: pathlib.Path) -> dict[str, Any]:
@@ -177,6 +231,7 @@ def report() -> dict[str, Any]:
     record["ladder"] = ladder(path, data)
     record["contradictions"] = contradictions(record)
     record["runs_on_file"] = [p.name for p in runs()]
+    record["replication"] = replication_check()
     return record
 
 
