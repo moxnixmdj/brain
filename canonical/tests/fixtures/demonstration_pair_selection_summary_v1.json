@@ -1,0 +1,5083 @@
+{
+ "schema": "DEMONSTRATION_PAIR_SELECTION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T22:20:05Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "organ_sha256": "0cca78be744eec9b3f86f7fca1eea0338cfe5497be9c57cc236cf1095e0d75b7",
+ "corpus_sha256": "0eae235f84f05b31d2f564670e402d57fc1eaea8c95411c4d72bac44e0e43312",
+ "baseline_record": "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+ "baseline_two_example_coverage": 0.2396,
+ "collect": "python3 canonical/tools/repeated_change_one_example_measure_v1.py --collect /tmp/pulls.json --as-recorded-in canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+ "summary": {
+  "pull_requests": 15,
+  "pairs": 220,
+  "all_pairs": {
+   "right": 769,
+   "developers_changes": 3326,
+   "organ_changes": 828,
+   "coverage": 0.231209,
+   "precision": 0.928744
+  },
+  "path": {
+   "right": 40,
+   "developers_changes": 218,
+   "organ_changes": 43,
+   "coverage": 0.183486,
+   "precision": 0.930233
+  },
+  "largest": {
+   "right": 35,
+   "developers_changes": 177,
+   "organ_changes": 38,
+   "coverage": 0.19774,
+   "precision": 0.921053
+  },
+  "chosen": {
+   "right": 139,
+   "developers_changes": 225,
+   "organ_changes": 159,
+   "coverage": 0.617778,
+   "precision": 0.874214
+  },
+  "best": {
+   "right": 137,
+   "developers_changes": 215,
+   "organ_changes": 157,
+   "coverage": 0.637209,
+   "precision": 0.872611
+  },
+  "mean_coverage_per_pull_request": {
+   "all_pairs": 0.257603,
+   "chosen": 0.497907,
+   "best": 0.549418
+  },
+  "chosen_is_oracle_best": 12,
+  "chosen_over_all_pairs": 2.6719,
+  "chosen_over_oracle": 0.9695
+ },
+ "per_pull_request": [
+  {
+   "name": "openimis/openimis-be-core_py#414",
+   "files": [
+    "core/migrations/0034_remove_user_legacy_id_remove_user_validity_from_and_more.py",
+    "core/models/history_model.py",
+    "core/datetimes/test_ad_datetime.py",
+    "core/datetimes/test_shared.py",
+    "core/tests/test_utils.py",
+    "core/tests/test_abs_calculation_rule.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 63,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 27,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 54,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 45,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 63,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 8,
+     "pred_files": 3,
+     "right_not_imports": 8,
+     "developers_changes_not_imports": 27,
+     "organ_changes": 8,
+     "right": 8,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.296296,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 36,
+     "pred_files": 3,
+     "right_not_imports": 36,
+     "developers_changes_not_imports": 54,
+     "organ_changes": 36,
+     "right": 36,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.666667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 45,
+     "pred_files": 4,
+     "right_not_imports": 45,
+     "developers_changes_not_imports": 45,
+     "organ_changes": 45,
+     "right": 45,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 63,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 3,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 18,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 9,
+     "pred_files": 4,
+     "right_not_imports": 9,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 9,
+     "right": 9,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 8,
+     "pred_files": 3,
+     "right_not_imports": 8,
+     "developers_changes_not_imports": 27,
+     "organ_changes": 8,
+     "right": 8,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.296296,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 36,
+     "pred_files": 4,
+     "right_not_imports": 36,
+     "developers_changes_not_imports": 36,
+     "organ_changes": 36,
+     "right": 36,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 36,
+     "pred_files": 3,
+     "right_not_imports": 36,
+     "developers_changes_not_imports": 54,
+     "organ_changes": 36,
+     "right": 36,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.666667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 45,
+     "pred_files": 4,
+     "right_not_imports": 45,
+     "developers_changes_not_imports": 45,
+     "organ_changes": 45,
+     "right": 45,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     2,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 3,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 18,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     1,
+     5
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 63,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     1,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 45,
+    "pred_files": 4,
+    "right_not_imports": 45,
+    "developers_changes_not_imports": 45,
+    "organ_changes": 45,
+    "right": 45,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     1,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 45,
+    "pred_files": 4,
+    "right_not_imports": 45,
+    "developers_changes_not_imports": 45,
+    "organ_changes": 45,
+    "right": 45,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "kind": "an old name of a test method",
+   "query": "assertEquals assertEqual",
+   "title": "MERGING feature/fix-assertEquals into develop",
+   "seconds": 2.0
+  },
+  {
+   "name": "torproject/stem#155",
+   "files": [
+    "test/unit/client/cell.py",
+    "test/unit/descriptor/certificate.py",
+    "stem/util/test_tools.py",
+    "test/integ/control/controller.py",
+    "test/unit/util/connection.py",
+    "test/unit/descriptor/remote.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 1,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.428571,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 1,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.142857,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 1,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.428571,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 5,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 2,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.666667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 1,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.428571,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 1,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 5,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.2,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 1,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.142857,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     2,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 5,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     3,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 1,
+    "pred_files": 1,
+    "right_not_imports": 1,
+    "developers_changes_not_imports": 5,
+    "organ_changes": 1,
+    "right": 1,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.2,
+    "precision": 1.0
+   },
+   "chosen": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 4,
+    "pred_files": 2,
+    "right_not_imports": 4,
+    "developers_changes_not_imports": 6,
+    "organ_changes": 4,
+    "right": 4,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.666667,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 4,
+    "pred_files": 2,
+    "right_not_imports": 4,
+    "developers_changes_not_imports": 6,
+    "organ_changes": 4,
+    "right": 4,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.666667,
+    "precision": 1.0
+   },
+   "kind": "an old name of a test method, second",
+   "query": "assertRaisesRegexp assertRaisesRegex",
+   "title": "fix: replace assertRaisesRegexp with assertRaisesRegex",
+   "seconds": 7.4
+  },
+  {
+   "name": "testing-cabal/testtools#335",
+   "files": [
+    "testtools/tests/test_compat.py",
+    "testtools/tests/matchers/test_filesystem.py",
+    "testtools/tests/test_testcase.py",
+    "testtools/tests/test_testsuite.py",
+    "testtools/tests/samplecases.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.222222,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 3,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.666667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.222222,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 3,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 3,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.666667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.222222,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 3,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 3,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.666667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 3,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 3,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 3,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     1,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 3,
+    "pred_files": 3,
+    "right_not_imports": 3,
+    "developers_changes_not_imports": 9,
+    "organ_changes": 3,
+    "right": 3,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.333333,
+    "precision": 1.0
+   },
+   "largest": {
+    "pair": [
+     2,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 2,
+    "pred_files": 3,
+    "right_not_imports": 2,
+    "developers_changes_not_imports": 3,
+    "organ_changes": 2,
+    "right": 2,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.666667,
+    "precision": 1.0
+   },
+   "chosen": {
+    "pair": [
+     0,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 3,
+    "pred_files": 3,
+    "right_not_imports": 3,
+    "developers_changes_not_imports": 9,
+    "organ_changes": 3,
+    "right": 3,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.333333,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 3,
+    "pred_files": 3,
+    "right_not_imports": 3,
+    "developers_changes_not_imports": 3,
+    "organ_changes": 3,
+    "right": 3,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "kind": "an old name of a test method, second",
+   "query": "assertRaisesRegexp assertRaisesRegex",
+   "title": "Replace deprecated assertRaisesRegexp with assertRaisesRegex",
+   "seconds": 4.6
+  },
+  {
+   "name": "kuangjiafa/automagician#55",
+   "files": [
+    "test/test_database.py",
+    "src/automagician/classes.py",
+    "src/automagician/process_job.py",
+    "src/automagician/small_functions.py",
+    "test/test_small_functions.py",
+    "src/automagician/update_job.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 5,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 5,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: line 805 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 3 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 2,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: line 1 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 2 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 5,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 805 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: line 805 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 805 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: line 1 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 2 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 5,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 1 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     1,
+     2
+    ],
+    "learnable": false,
+    "refused": "Refused: line 805 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 5,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "best": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 5,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "kind": "an old name of a logging method",
+   "query": "logger.warn logger.warning",
+   "title": "\ud83e\uddf9 Replace deprecated logger.warn with logger.warning",
+   "seconds": 1.6
+  },
+  {
+   "name": "RedHatInsights/advisor-backend#80",
+   "files": [
+    "api/advisor/api/scripts/import_content.py",
+    "api/advisor/tasks/kafka_utils.py",
+    "api/advisor/tasks/management/commands/tasks_service.py",
+    "api/advisor/api/management/commands/import_content.py",
+    "api/advisor/tasks/management/commands/stale_job_timeout.py",
+    "api/advisor/tasks/management/commands/tasks_sync_playbook_content.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 2,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.142857,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 4,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.75,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the rules worked out from the examples do not reproduce example 2",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 2,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.142857,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 1,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the rules worked out from the examples do not reproduce example 2",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 1,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 2,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.111111,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the rules worked out from the examples do not reproduce example 2",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 3,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 6,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the rules worked out from the examples do not reproduce example 1",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the rules worked out from the examples do not reproduce example 1",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 2,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.111111,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     0,
+     3
+    ],
+    "learnable": false,
+    "refused": "Refused: the rules worked out from the examples do not reproduce example 2",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     0,
+     3
+    ],
+    "learnable": false,
+    "refused": "Refused: the rules worked out from the examples do not reproduce example 2",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 3,
+    "pred_files": 4,
+    "right_not_imports": 3,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 3,
+    "right": 3,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.75,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 3,
+    "pred_files": 4,
+    "right_not_imports": 3,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 3,
+    "right": 3,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.75,
+    "precision": 1.0
+   },
+   "kind": "an old name of a logging method",
+   "query": "logger.warn logger.warning",
+   "title": "Logger.warn() is deprecated, use logger.warning() instead",
+   "seconds": 3.2
+  },
+  {
+   "name": "Cytomine-ULiege/Cytomine-python-client#61",
+   "files": [
+    "cytomine/models/imagegroup.py",
+    "cytomine/models/model.py",
+    "cytomine/cytomine_job.py",
+    "cytomine/models/collection.py",
+    "cytomine/models/storage.py",
+    "cytomine/models/project.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 4,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 4,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 10,
+     "pred_files": 4,
+     "right_not_imports": 10,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 10,
+     "right": 10,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 8,
+     "pred_files": 4,
+     "right_not_imports": 8,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 8,
+     "right": 8,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.888889,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 8,
+     "pred_files": 4,
+     "right_not_imports": 8,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 8,
+     "right": 8,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.888889,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 14,
+     "pred_files": 4,
+     "right_not_imports": 14,
+     "developers_changes_not_imports": 15,
+     "organ_changes": 14,
+     "right": 14,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.933333,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 13,
+     "pred_files": 4,
+     "right_not_imports": 13,
+     "developers_changes_not_imports": 13,
+     "organ_changes": 13,
+     "right": 13,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 4,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 4,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 13,
+     "pred_files": 4,
+     "right_not_imports": 13,
+     "developers_changes_not_imports": 13,
+     "organ_changes": 13,
+     "right": 13,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 4,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 4,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 10,
+     "pred_files": 4,
+     "right_not_imports": 10,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 10,
+     "right": 10,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 10,
+     "pred_files": 4,
+     "right_not_imports": 10,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 10,
+     "right": 10,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 8,
+     "pred_files": 4,
+     "right_not_imports": 8,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 8,
+     "right": 8,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.888889,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     2,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 13,
+    "pred_files": 4,
+    "right_not_imports": 13,
+    "developers_changes_not_imports": 13,
+    "organ_changes": 13,
+    "right": 13,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "largest": {
+    "pair": [
+     2,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 13,
+    "pred_files": 4,
+    "right_not_imports": 13,
+    "developers_changes_not_imports": 13,
+    "organ_changes": 13,
+    "right": 13,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "chosen": {
+    "pair": [
+     1,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 14,
+    "pred_files": 4,
+    "right_not_imports": 14,
+    "developers_changes_not_imports": 15,
+    "organ_changes": 14,
+    "right": 14,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.933333,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     1,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 13,
+    "pred_files": 4,
+    "right_not_imports": 13,
+    "developers_changes_not_imports": 13,
+    "organ_changes": 13,
+    "right": 13,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "kind": "a call written the old way",
+   "query": "super() without arguments",
+   "title": "refactor: super without arguments",
+   "seconds": 1.9
+  },
+  {
+   "name": "unifyai/ivy#26932",
+   "files": [
+    "ivy/functional/ivy/experimental/sparse_array.py",
+    "ivy/functional/backends/jax/device.py",
+    "ivy/functional/backends/paddle/device.py",
+    "ivy/functional/backends/tensorflow/device.py",
+    "ivy_tests/test_ivy/test_stateful/test_converters.py",
+    "ivy/functional/backends/torch/device.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 12,
+     "pred_files": 4,
+     "right_not_imports": 12,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 12,
+     "right": 12,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 12,
+     "pred_files": 4,
+     "right_not_imports": 12,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 12,
+     "right": 12,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 12,
+     "pred_files": 4,
+     "right_not_imports": 12,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 12,
+     "right": 12,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 12,
+     "pred_files": 4,
+     "right_not_imports": 12,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 12,
+     "right": 12,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 4,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.166667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 4,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.166667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 4,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.166667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 4,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.166667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 4,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.166667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 4,
+     "right_not_imports": 2,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.166667,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     1,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 2,
+    "pred_files": 4,
+    "right_not_imports": 2,
+    "developers_changes_not_imports": 12,
+    "organ_changes": 2,
+    "right": 2,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.166667,
+    "precision": 1.0
+   },
+   "largest": {
+    "pair": [
+     0,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 4,
+    "pred_files": 4,
+    "right_not_imports": 4,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 4,
+    "right": 4,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "chosen": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 12,
+    "pred_files": 4,
+    "right_not_imports": 12,
+    "developers_changes_not_imports": 12,
+    "organ_changes": 12,
+    "right": 12,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 12,
+    "pred_files": 4,
+    "right_not_imports": 12,
+    "developers_changes_not_imports": 12,
+    "organ_changes": 12,
+    "right": 12,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "kind": "a call written the old way",
+   "query": "super() without arguments",
+   "title": "fix: Consider using `super()` without arguments.",
+   "seconds": 2.9
+  },
+  {
+   "name": "InterDigitalInc/CompressAI-Vision#40",
+   "files": [
+    "compressai_vision/evaluators/tf_evaluation_utils/np_box_list_ops.py",
+    "compressai_vision/evaluators/tf_evaluation_utils/metrics.py",
+    "compressai_vision/evaluators/tf_evaluation_utils/np_box_mask_list_ops.py",
+    "compressai_vision/evaluators/tf_evaluation_utils/per_image_evaluation.py",
+    "compressai_vision/evaluators/tf_evaluation_utils/object_detection_evaluation.py",
+    "compressai_vision/evaluators/tf_evaluation_utils/np_box_list.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 0,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 0,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 0,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 0,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 83 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 0,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     1,
+     5
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     3,
+     4
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 0,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "best": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "kind": "a library taken out",
+   "query": "Remove six",
+   "title": "fix: remove dependency on six",
+   "seconds": 0.9
+  },
+  {
+   "name": "inveniosoftware/invenio-pidstore#189",
+   "files": [
+    "examples/app.py",
+    "invenio_pidstore/models.py",
+    "invenio_pidstore/proxies.py",
+    "invenio_pidstore/minters.py",
+    "invenio_pidstore/__init__.py",
+    "invenio_pidstore/alembic/f615cee99600_create_pidstore_branch.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 1,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 22,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: line 511 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 1,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 511 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 1,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: line 511 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 0,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 511 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 1,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 22,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 22,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the two files of example 2 hold the same code, apart from import lines that were added or removed",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 22,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     0,
+     4
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 22,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     1,
+     4
+    ],
+    "learnable": false,
+    "refused": "Refused: line 511 of example 1 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 0,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 1,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "best": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": false,
+    "refused": "Refused: the two files of example 1 hold the same code, apart from import lines that were added or removed",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 1,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "kind": "a library taken out",
+   "query": "Remove six",
+   "title": "Remove usage of `six`",
+   "seconds": 0.4
+  },
+  {
+   "name": "nipy/nibabel#1609",
+   "files": [
+    "nibabel/cifti2/tests/test_cifti2io_header.py",
+    "nibabel/tests/test_minc1.py",
+    "nibabel/cmdline/utils.py",
+    "nibabel/deprecator.py",
+    "nibabel/nifti1.py",
+    "nibabel/tests/test_parrec.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 11,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 11,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 11,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 10,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 10,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     4,
+     5
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 8,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 11,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "best": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 11,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "kind": "text put together another way",
+   "query": "Use f-strings",
+   "title": "STY: Use f-strings",
+   "seconds": 6.5
+  },
+  {
+   "name": "jupyter/jupyter-sphinx#301",
+   "files": [
+    "tests/conftest.py",
+    "jupyter_sphinx/__init__.py",
+    "jupyter_sphinx/execute.py",
+    "jupyter_sphinx/thebelab.py",
+    "tests/test_execute.py",
+    "jupyter_sphinx/utils.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 18,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 16,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 15,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 18,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 18,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 17,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 11,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 20,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 15,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 9,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 18,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 8,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 17,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 11,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     1,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 18,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 9,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 18,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "best": {
+    "pair": [
+     0,
+     1
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 0,
+    "pred_files": 4,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 18,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "kind": "text put together another way",
+   "query": "Use f-strings",
+   "title": "fix: refactor: use f-strings for string formatting in multiple files",
+   "seconds": 1.8
+  },
+  {
+   "name": "fulcrumgenomics/fgpyo#300",
+   "files": [
+    "fgpyo/sam/builder.py",
+    "fgpyo/sam/clipping.py",
+    "fgpyo/util/metric.py",
+    "tests/fgpyo/test_sequence.py",
+    "fgpyo/fasta/builder.py",
+    "tests/fgpyo/util/test_types.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": false,
+     "refused": "Refused: line 305 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 28,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: line 305 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 7,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 305 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 28,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: line 305 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 29,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 35 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 28,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: two places to change overlap at line 242 of example 2's first file",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 19,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 4,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 40,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.025,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 4,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 41,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 35 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 40,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 4,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 19,
+     "organ_changes": 2,
+     "right": 1,
+     "not_what_the_developers_did": 1,
+     "coverage": 0.052632,
+     "precision": 0.5
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 12,
+     "pred_files": 4,
+     "right_not_imports": 5,
+     "developers_changes_not_imports": 20,
+     "organ_changes": 12,
+     "right": 5,
+     "not_what_the_developers_did": 7,
+     "coverage": 0.25,
+     "precision": 0.416667
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 35 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 19,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 4,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 41,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.02439,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 35 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 40,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 35 of example 2 adds, removes or reshapes whole statements; only a change inside one expression or one simple statement can be learned",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 41,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     0,
+     4
+    ],
+    "learnable": false,
+    "refused": "Refused: line 305 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 29,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": false,
+    "refused": "Refused: line 305 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 7,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 12,
+    "pred_files": 4,
+    "right_not_imports": 5,
+    "developers_changes_not_imports": 20,
+    "organ_changes": 12,
+    "right": 5,
+    "not_what_the_developers_did": 7,
+    "coverage": 0.25,
+    "precision": 0.416667
+   },
+   "best": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 12,
+    "pred_files": 4,
+    "right_not_imports": 5,
+    "developers_changes_not_imports": 20,
+    "organ_changes": 12,
+    "right": 5,
+    "not_what_the_developers_did": 7,
+    "coverage": 0.25,
+    "precision": 0.416667
+   },
+   "kind": "types written another way",
+   "query": "PEP 585 generics",
+   "title": "chore: migrate type annotations to PEP 585 built-in generics",
+   "seconds": 2.1
+  },
+  {
+   "name": "Prekzursil/env-inspector#72",
+   "files": [
+    "tests/test_core_coverage_providers_wsl.py",
+    "scripts/security_helpers.py",
+    "tests/test_service_coverage_branches.py",
+    "env_inspector_gui/dialogs.py",
+    "env_inspector_core/models.py",
+    "tests/test_cli.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 1,
+     "pred_files": 4,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 40,
+     "organ_changes": 1,
+     "right": 1,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.025,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 39,
+     "pred_files": 4,
+     "right_not_imports": 28,
+     "developers_changes_not_imports": 45,
+     "organ_changes": 38,
+     "right": 28,
+     "not_what_the_developers_did": 10,
+     "coverage": 0.622222,
+     "precision": 0.736842
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 306 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 42,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 7,
+     "pred_files": 4,
+     "right_not_imports": 5,
+     "developers_changes_not_imports": 53,
+     "organ_changes": 7,
+     "right": 5,
+     "not_what_the_developers_did": 2,
+     "coverage": 0.09434,
+     "precision": 0.714286
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 68 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 40,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: line 464 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 31,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 306 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 28,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: two places to change overlap at line 35 of example 1's first file",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 39,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 68 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 26,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: line 306 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 33,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 37,
+     "pred_files": 4,
+     "right_not_imports": 26,
+     "developers_changes_not_imports": 44,
+     "organ_changes": 36,
+     "right": 26,
+     "not_what_the_developers_did": 10,
+     "coverage": 0.590909,
+     "precision": 0.722222
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 68 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 31,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: line 306 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 41,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 306 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 28,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: line 68 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 39,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     3,
+     4
+    ],
+    "learnable": false,
+    "refused": "Refused: line 306 of example 1 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 41,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "largest": {
+    "pair": [
+     2,
+     3
+    ],
+    "learnable": false,
+    "refused": "Refused: line 306 of example 2 was changed, but the same code was left alone, or changed another way, elsewhere in the examples",
+    "pred": 0,
+    "pred_files": 0,
+    "right_not_imports": 0,
+    "developers_changes_not_imports": 33,
+    "organ_changes": 0,
+    "right": 0,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "chosen": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 39,
+    "pred_files": 4,
+    "right_not_imports": 28,
+    "developers_changes_not_imports": 45,
+    "organ_changes": 38,
+    "right": 28,
+    "not_what_the_developers_did": 10,
+    "coverage": 0.622222,
+    "precision": 0.736842
+   },
+   "best": {
+    "pair": [
+     0,
+     2
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 39,
+    "pred_files": 4,
+    "right_not_imports": 28,
+    "developers_changes_not_imports": 45,
+    "organ_changes": 38,
+    "right": 28,
+    "not_what_the_developers_did": 10,
+    "coverage": 0.622222,
+    "precision": 0.736842
+   },
+   "kind": "types written another way",
+   "query": "PEP 585 generics",
+   "title": "fix(codacy): downgrade PEP 585 generics for E1136 false positives",
+   "seconds": 2.8
+  },
+  {
+   "name": "apache/libcloud#2217",
+   "files": [
+    "libcloud/common/openstack_identity.py",
+    "libcloud/dns/base.py",
+    "libcloud/dns/drivers/route53.py",
+    "libcloud/common/aws.py",
+    "libcloud/common/google.py",
+    "libcloud/dns/drivers/auroradns.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 4,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.75,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 4,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.75,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 4,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.75,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 4,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.75,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": false,
+     "refused": "Refused: the edited text of example 1's first file does not parse to the intended code",
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 4,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 1.0,
+     "precision": 1.0
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 3,
+     "pred_files": 4,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 4,
+     "organ_changes": 3,
+     "right": 3,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.75,
+     "precision": 1.0
+    }
+   ],
+   "path": {
+    "pair": [
+     3,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 4,
+    "pred_files": 4,
+    "right_not_imports": 4,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 4,
+    "right": 4,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "largest": {
+    "pair": [
+     0,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 3,
+    "pred_files": 4,
+    "right_not_imports": 3,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 3,
+    "right": 3,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.75,
+    "precision": 1.0
+   },
+   "chosen": {
+    "pair": [
+     0,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 4,
+    "pred_files": 4,
+    "right_not_imports": 4,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 4,
+    "right": 4,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "best": {
+    "pair": [
+     0,
+     3
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 4,
+    "pred_files": 4,
+    "right_not_imports": 4,
+    "developers_changes_not_imports": 4,
+    "organ_changes": 4,
+    "right": 4,
+    "not_what_the_developers_did": 0,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "kind": "a call that is no longer to be used",
+   "query": "datetime.utcnow",
+   "title": "Replace deprecated datetime.utcnow() (9 call sites)",
+   "seconds": 6.1
+  },
+  {
+   "name": "arigatoexpress/Project-Go-Forward#483",
+   "files": [
+    "database/firestore_client.py",
+    "tools/crm_tools.py",
+    "structured_logging.py",
+    "conversation_memory.py",
+    "chat_history.py",
+    "lead_management.py"
+   ],
+   "pairs": [
+    {
+     "pair": [
+      0,
+      1
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 6,
+     "pred_files": 2,
+     "right_not_imports": 4,
+     "developers_changes_not_imports": 20,
+     "organ_changes": 6,
+     "right": 6,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.2,
+     "precision": 0.666667
+    },
+    {
+     "pair": [
+      0,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 4,
+     "pred_files": 1,
+     "right_not_imports": 3,
+     "developers_changes_not_imports": 20,
+     "organ_changes": 4,
+     "right": 4,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.15,
+     "precision": 0.75
+    },
+    {
+     "pair": [
+      0,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 2,
+     "pred_files": 1,
+     "right_not_imports": 1,
+     "developers_changes_not_imports": 18,
+     "organ_changes": 2,
+     "right": 2,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.055556,
+     "precision": 0.5
+    },
+    {
+     "pair": [
+      0,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 14,
+     "pred_files": 3,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 12,
+     "organ_changes": 14,
+     "right": 14,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.916667,
+     "precision": 0.785714
+    },
+    {
+     "pair": [
+      0,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 16,
+     "pred_files": 3,
+     "right_not_imports": 12,
+     "developers_changes_not_imports": 14,
+     "organ_changes": 15,
+     "right": 15,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.857143,
+     "precision": 0.8
+    },
+    {
+     "pair": [
+      1,
+      2
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 15,
+     "pred_files": 2,
+     "right_not_imports": 13,
+     "developers_changes_not_imports": 29,
+     "organ_changes": 15,
+     "right": 15,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.448276,
+     "precision": 0.866667
+    },
+    {
+     "pair": [
+      1,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 13,
+     "pred_files": 2,
+     "right_not_imports": 11,
+     "developers_changes_not_imports": 27,
+     "organ_changes": 13,
+     "right": 13,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.407407,
+     "precision": 0.846154
+    },
+    {
+     "pair": [
+      1,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 8,
+     "pred_files": 1,
+     "right_not_imports": 7,
+     "developers_changes_not_imports": 21,
+     "organ_changes": 8,
+     "right": 8,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.333333,
+     "precision": 0.875
+    },
+    {
+     "pair": [
+      1,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 10,
+     "pred_files": 1,
+     "right_not_imports": 8,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 9,
+     "right": 9,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.347826,
+     "precision": 0.888889
+    },
+    {
+     "pair": [
+      2,
+      3
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 11,
+     "pred_files": 1,
+     "right_not_imports": 10,
+     "developers_changes_not_imports": 27,
+     "organ_changes": 11,
+     "right": 11,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.37037,
+     "precision": 0.909091
+    },
+    {
+     "pair": [
+      2,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 23,
+     "pred_files": 3,
+     "right_not_imports": 20,
+     "developers_changes_not_imports": 21,
+     "organ_changes": 23,
+     "right": 23,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.952381,
+     "precision": 0.869565
+    },
+    {
+     "pair": [
+      2,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 25,
+     "pred_files": 3,
+     "right_not_imports": 21,
+     "developers_changes_not_imports": 23,
+     "organ_changes": 24,
+     "right": 24,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.913043,
+     "precision": 0.875
+    },
+    {
+     "pair": [
+      3,
+      4
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 21,
+     "pred_files": 3,
+     "right_not_imports": 18,
+     "developers_changes_not_imports": 19,
+     "organ_changes": 21,
+     "right": 21,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.947368,
+     "precision": 0.857143
+    },
+    {
+     "pair": [
+      3,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 23,
+     "pred_files": 3,
+     "right_not_imports": 19,
+     "developers_changes_not_imports": 21,
+     "organ_changes": 22,
+     "right": 22,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.904762,
+     "precision": 0.863636
+    },
+    {
+     "pair": [
+      4,
+      5
+     ],
+     "learnable": true,
+     "refused": null,
+     "pred": 0,
+     "pred_files": 0,
+     "right_not_imports": 0,
+     "developers_changes_not_imports": 15,
+     "organ_changes": 0,
+     "right": 0,
+     "not_what_the_developers_did": 0,
+     "coverage": 0.0,
+     "precision": null
+    }
+   ],
+   "path": {
+    "pair": [
+     3,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 21,
+    "pred_files": 3,
+    "right_not_imports": 18,
+    "developers_changes_not_imports": 19,
+    "organ_changes": 21,
+    "right": 21,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.947368,
+    "precision": 0.857143
+   },
+   "largest": {
+    "pair": [
+     0,
+     5
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 16,
+    "pred_files": 3,
+    "right_not_imports": 12,
+    "developers_changes_not_imports": 14,
+    "organ_changes": 15,
+    "right": 15,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.857143,
+    "precision": 0.8
+   },
+   "chosen": {
+    "pair": [
+     2,
+     5
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 25,
+    "pred_files": 3,
+    "right_not_imports": 21,
+    "developers_changes_not_imports": 23,
+    "organ_changes": 24,
+    "right": 24,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.913043,
+    "precision": 0.875
+   },
+   "best": {
+    "pair": [
+     2,
+     4
+    ],
+    "learnable": true,
+    "refused": null,
+    "pred": 23,
+    "pred_files": 3,
+    "right_not_imports": 20,
+    "developers_changes_not_imports": 21,
+    "organ_changes": 23,
+    "right": 23,
+    "not_what_the_developers_did": 0,
+    "coverage": 0.952381,
+    "precision": 0.869565
+   },
+   "kind": "a call that is no longer to be used",
+   "query": "datetime.utcnow",
+   "title": "Replace deprecated datetime.utcnow across app modules",
+   "seconds": 4.2
+  }
+ ],
+ "limits": [
+  "One corpus: 15 merged pull requests found because they repeat one change, six files each, no test of any of the fifteen projects run.",
+  "The corpus was re-fetched from GitHub at the commits the record names and every file checked against its recorded SHA-256 before measurement.",
+  "Precision is agreement with the developers, not correctness.",
+  "The chosen pair is selected by running the shipped learner on the target files' before-text only; the oracle 'best' reads their after-text and is a ceiling.",
+  "'chosen' is not the pair that is right, only the pair that applies most; its precision is lower than an arbitrary pair's.",
+  "Refusals are the learner's; the five pull requests at zero are an algebra gap, not a selection failure.",
+  "The organ is the one in this tree; its hash is recorded. A later change to it needs this measurement re-run."
+ ]
+}
