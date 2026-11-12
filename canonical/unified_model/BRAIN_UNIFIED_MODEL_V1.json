@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 368,
+  "knowledge_documents": 369,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6768,
+  "research_index_records": 6769,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e48af3fa9720344b8ef6a246efb57d3c8fbd3cc14eedf123929b70494bbc9fc6"
+  "value": "8a2a93a53e6e17336eb3b4afc23629d88071b1620edbbccfbf23317577ae7cb4"
  },
  "engines": [
   {
@@ -58436,6 +58436,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9480,
+   "headings": [
+    "The loop was open at the live entry",
+    "1. What the live path did before this round",
+    "2. What was built, and why each step is the smallest correct one",
+    "3. The measurement",
+    "4. What this does not claim",
+    "5. The plain answer to *\"why can't we just give it the actions once?\"*",
+    "6. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_LOOP_WAS_OPEN_AT_THE_LIVE_ENTRY_20261112_V1.md",
+   "sha256": "7044dae5f526a6b632c6b179db56b47827ff56738fb7aed654db179448c9a6f0",
+   "summary": "**2026-11-12.** Base `d677e54e`. Branch `arena/91d09142-brain`. Round 26.",
+   "terms": {
+    "25": 4,
+    "about": 4,
+    "abstraction": 4,
+    "anything": 4,
+    "behaviour": 5,
+    "both": 5,
+    "bytes": 4,
+    "canonical": 6,
+    "capability": 4,
+    "corpus": 5,
+    "curve": 4,
+    "derived": 4,
+    "different": 4,
+    "domain": 8,
+    "each": 4,
+    "entry": 4,
+    "every": 4,
+    "family": 12,
+    "gate": 4,
+    "helper": 4,
+    "honest": 4,
+    "id": 4,
+    "library": 5,
+    "live": 15,
+    "loop": 5,
+    "measured": 4,
+    "measurement": 5,
+    "never-seen": 5,
+    "no": 17,
+    "not": 11,
+    "nothing": 4,
+    "now": 5,
+    "once": 4,
+    "one": 22,
+    "only": 4,
+    "organ": 5,
+    "organs": 7,
+    "path": 9,
+    "probe": 6,
+    "program": 5,
+    "programs": 5,
+    "refused": 5,
+    "replay": 7,
+    "round": 9,
+    "same": 5,
+    "tests": 7,
+    "three": 8,
+    "two": 5
+   },
+   "title": "The loop was open at the live entry",
+   "title_terms": [
+    "entry",
+    "live",
+    "loop",
+    "open"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5430,
    "headings": [
     "The twelve-entry menu was deciding which functions exist",
@@ -73359,10 +73433,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1170,
+  "included_source_count": 1171,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4a37e55d6462a33f9257baf77478bab3ff93f56f8b17be4989f15d27b214a322"
+  "source_tree_digest": "72ef9343580982ce8c3b1f951afde6f62821f6fcf6c8f6a1c6af83cca8b7d459"
  },
  "research_index": [
   {
@@ -226481,6 +226555,30 @@
    }
   },
   {
+   "action_id": "LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a5a96ff99de2ded5a12109438070d33eb92bcfec4dbf039a5a6ff765b47c59f5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "closed": 1,
+    "compounding": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "live": 1,
+    "live_compounding_loop_closed_20261112_v1": 1,
+    "live_entry_domain_derivation_with_unchanged_gates": 1,
+    "loop": 1,
+    "one_more_measured_path_by_which_experience_compounds_outside_a_test_harness__zero_capability_credit__zero_terminal_credit__no_family_flipped__cross_kind_compounding_stays_the_pinned_negative": 1,
+    "the_compression_loop_was_measured_only_with_a_human_supplied_probe_domain_and_never_through_the_live_entry_point__which_had_one_library_slot__no_domain__and_a_stratum_gate_that_excluded_the_family_it_was_built_for": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "LIVE_ORGAN_ALGEBRA_POLICY_ON_BOARD_20261104_V1",
    "capability": false,
    "date": "2026-11-04",
@@ -230392,7 +230490,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "59d263f3a90b95389908870998ab0b02b714c97061d0ea23cf054be813efb2ca",
+   "sha256": "5a427e18ba97357ad4ddbb98c9a03058d7cfeba7a5de43a86a9bf75c3d4a9191",
    "status": "",
    "terms": {
     "20261112": 1,

@@ -1409,8 +1409,36 @@ def instantiate_plotkin_lgg(
     )
 
 
-def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int = 4) -> str | None:
-    """Wake: replace matching subtrees with admitted `G_t` calls. Nested helpers, no new `_q`."""
+def _probes_for(source: str, probes: Sequence[Any] | None = None) -> Sequence[Any]:
+    """The probe domain a replay is checked on: the caller's, else one derived from the source.
+
+    A replay that cannot see its own domain is not checkable, and an uncheckable replay is exactly
+    what the vacuity gate exists to refuse. Deriving the domain from the source keeps that gate
+    firing while removing the human from the loop.
+    """
+    if probes is not None:
+        return probes
+    from canonical.swe_kernel import compression_gain_v1 as _cg
+
+    return _cg.derive_probe_domain([source]) or _cg._PROBE_INPUTS
+
+
+def rewrite_source_with_concepts(
+    source: str,
+    library: Any,
+    *,
+    max_concepts: int = 4,
+    probes: Sequence[Any] | None = None,
+) -> str | None:
+    """Wake: replace matching subtrees with admitted `G_t` calls. Nested helpers, no new `_q`.
+
+    `probes` is the domain the abstraction replay is checked on. When it is omitted the replay
+    derives its own domain from the target source (`compression_gain_v1.derive_probe_domain`)
+    instead of falling back to the numeric grid -- which answered a string-keyed program
+    identically on every probe, so the vacuity gate refused a rewrite it should have been able to
+    check. This function used to accept no domain at all, which is why the wake entry was the one
+    place the second family could never replay through.
+    """
     src = str(source or "")
     if not src.strip() or library is None or not hasattr(library, "concepts"):
         return None
@@ -1433,9 +1461,24 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
         try:
             from canonical.swe_kernel import compression_gain_v1 as _cg
 
-            return _cg.rewrite_source_with_abstractions(src, library)
+            report = _cg.rewrite_source_with_abstractions(
+                src, library, probes=_probes_for(src, probes)
+            )
         except Exception:
             return None
+        # ONE return type, and EXECUTABLE. This branch used to hand back the replay's REPORT DICT
+        # while every other path returns source text, so a caller that exec'd the result exec'd a
+        # dict. Returning the source alone is not enough either: the rewritten program CALLS the
+        # concept, and the concept's helper lives beside it, so the text names a function that is
+        # not there (`NameError: c_x_...` at first use). The helper prelude is prepended, which is
+        # exactly the string the engine compiled and behaviour-checked before returning it --
+        # checked artifact equals returned artifact, no second construction.
+        if not report:
+            return None
+        prelude = "\n".join(
+            str(h).rstrip() + "\n" for h in (report.get("helpers") or {}).values()
+        )
+        return prelude + str(report.get("source") or "")
     try:
         tree = ast.parse(src)
     except SyntaxError:
@@ -1491,7 +1534,7 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
         try:
             from canonical.swe_kernel import compression_gain_v1 as _cg
 
-            replayed = _cg.rewrite_source_with_abstractions(src, library)
+            replayed = _cg.rewrite_source_with_abstractions(src, library, probes=_probes_for(src, probes))
         except Exception:
             replayed = None
         if replayed is not None:
