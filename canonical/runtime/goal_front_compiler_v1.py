@@ -2249,6 +2249,14 @@ def prose_only(goal: str) -> str:
 
 _ECOSYSTEM_WORD = re.compile(r"(?i)\b(?:pypi|npm|node(?:\.js|js)?|apt)\b|python library|javascript library|ubuntu package|debian package")
 _SURFACE_WORD = {"npm_node": "npm", "pypi_python": "pypi", "apt": "apt"}
+_ENUM_NOUN_NAMES_RE = re.compile(r"(?i)\b(function|class|method|import|symbol)s?\s+names\b")
+
+
+def _normalize_enum_noun_names(prose: str) -> str:
+    def _repl(m: re.Match[str]) -> str:
+        stem = m.group(1).lower()
+        return "classes" if stem == "class" else f"{stem}s"
+    return _ENUM_NOUN_NAMES_RE.sub(_repl, prose)
 
 
 def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int, int, dict[str, Any]]:
@@ -2269,14 +2277,14 @@ def score_capability(goal: str, cid: str, entry: Mapping[str, Any]) -> tuple[int
     request was refused with DAG_STEP_WEAK_EVIDENCE.
     """
     prose = prose_only(goal)
-    scored_text = prose
+    scored_text = _normalize_enum_noun_names(prose)
     surface_ok, surface_evidence = gc._execution_surface_constraint_match(prose, entry)
     if not surface_ok:
         own = gc._tokens(entry.get("keywords", [])) | gc._tokens(cid) | gc._tokens(entry.get("provides", []))
         surface_word = _SURFACE_WORD.get(str((surface_evidence or {}).get("required_surface")))
         if not (surface_word and surface_word in own):
-            return gc._score(prose, cid, entry)
-        scored_text = _ECOSYSTEM_WORD.sub(" ", prose)
+            return gc._score(scored_text, cid, entry)
+        scored_text = _ECOSYSTEM_WORD.sub(" ", scored_text)
     return gc._score(scored_text, cid, entry)
 
 

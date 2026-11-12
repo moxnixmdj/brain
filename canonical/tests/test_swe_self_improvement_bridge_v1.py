@@ -1,9 +1,12 @@
 """Tests for `canonical/swe_kernel/swe_self_improvement_bridge_v1.py`."""
 from __future__ import annotations
 
+import io
 import json
 import pathlib
 import tempfile
+import unittest
+from contextlib import redirect_stdout
 
 from canonical.runtime import autonomous_verified_self_improvement_v1 as self_improvement
 from canonical.swe_kernel.swe_self_improvement_bridge_v1 import (
@@ -11,6 +14,7 @@ from canonical.swe_kernel.swe_self_improvement_bridge_v1 import (
     execute_swe_coding_episode,
     main,
     make_python_unittest_verifier,
+    run_problem2_generalization_suite,
     run_swe_bridge_experiment,
 )
 
@@ -113,8 +117,45 @@ def test_end_to_end_teaching_induction_and_unseen_transfer() -> None:
         assert state["reuse"][admitted_sid]["successes"] == 1
 
 
-def test_cli_json_entrypoint(capsys) -> None:
-    rc = main(["--json"])
+def test_problem2_generalization_suite_all_layers_pass() -> None:
+    p2 = run_problem2_generalization_suite()
+    assert p2["all_ok"] is True, p2
+    assert all(p2["layer_a_front_door"].values()), p2["layer_a_front_door"]
+    assert all(p2["layer_b_workflow_skills"].values()), p2["layer_b_workflow_skills"]
+    assert all(p2["layer_c_code_repair_skills"].values()), p2["layer_c_code_repair_skills"]
+
+
+def test_cli_json_entrypoint(capsys=None) -> None:
+    if capsys is not None:
+        rc = main(["--json"])
+        assert rc == 0
+        out = json.loads(capsys.readouterr().out)
+        assert out["all_ok"] is True
+        return
+    buf = io.StringIO()
+    with redirect_stdout(buf):
+        rc = main(["--json"])
     assert rc == 0
-    out = json.loads(capsys.readouterr().out)
+    out = json.loads(buf.getvalue())
     assert out["all_ok"] is True
+
+
+class TestSweSelfImprovementBridgeV1(unittest.TestCase):
+    def test_bridge(self) -> None:
+        test_swe_bridge_experiment_all_checks_pass()
+
+    def test_verifier(self) -> None:
+        test_unittest_verifier_distinguishes_failing_and_passing_candidates()
+
+    def test_end_to_end_transfer(self) -> None:
+        test_end_to_end_teaching_induction_and_unseen_transfer()
+
+    def test_problem2_generalization(self) -> None:
+        test_problem2_generalization_suite_all_layers_pass()
+
+    def test_cli(self) -> None:
+        test_cli_json_entrypoint()
+
+
+if __name__ == "__main__":
+    unittest.main()
