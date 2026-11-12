@@ -638,6 +638,7 @@ class Rule:
         self.objects = objects_in(pattern)   # blanks that stand for the object an attribute is read from
         self.imported_objects = set()    # those of them that stood for something imported in an example
         self.bring = {}                  # names the new code needs, and the import line an example added for each
+        self.standing = set()            # bring entries read off the examples' standing imports, not added lines
         self.take = {}                   # names the examples' change made unused, and the import line each removed
 
     def __str__(self):
@@ -867,6 +868,7 @@ def wider(rule, changed):
     except Refused:
         return None
     reading.bring = {name: line for name, line in rule.bring.items() if name in reading.needs}
+    reading.standing = {name for name in rule.standing if name in reading.needs}
     reading.take = dict(rule.take)
     return reading
 
@@ -1085,6 +1087,26 @@ def learn_all(examples, wide=False):
     for rule in rules:
         rule.bring = {name: sorted(added[name])[0] for name in rule.needs
                       if name in added and len(added[name]) == 1}
+        # A needed name no example added a line for, but the examples' own files import from one
+        # unambiguous absolute place: the lesson knows the origin, so the same import is brought.
+        # At rewrite time the line is skipped where an import place of that very file already comes
+        # to bind the name, and the resolution gate still decides whether it may enter a project.
+        for name in sorted(rule.needs - set(rule.bring)):
+            origins = rule.brought.get(name)
+            if not origins or len(origins) != 1:
+                continue
+            origin = next(iter(origins))
+            if origin is None:
+                continue
+            module, inner = origin
+            if not module or module.startswith("."):
+                continue
+            rule.standing.add(name)
+            if inner is None:
+                rule.bring[name] = "import %s" % module if module == name else "import %s as %s" % (module, name)
+            else:
+                rule.bring[name] = ("from %s import %s" % (module, name) if inner == name
+                                    else "from %s import %s as %s" % (module, inner, name))
     removed = {}
     for example in shown:
         for name, lines in example.removed_lines.items():
@@ -1295,12 +1317,32 @@ def imports_to_add(text, places, what, fail_at=None, must_resolve=True):
     `must_resolve` is off only when an example is replayed on its own first file, where the import plainly was.
     """
     needed = {}
+    will_bind = set()
+    for _, node, rule, _ in places:
+        if isinstance(rule, Rebound):
+            statement = ast.parse(rule.new).body[0]
+            for alias in statement.names:
+                will_bind.add(alias.asname or (alias.name.split(".")[0]
+                              if isinstance(statement, ast.Import) else alias.name))
+        elif is_import(node):
+            for _, came_to in getattr(rule, "pairs", ()):
+                if is_import(came_to):
+                    for alias in came_to.names:
+                        will_bind.add(alias.asname or (alias.name.split(".")[0]
+                                      if isinstance(came_to, ast.Import) else alias.name))
     for _, node, rule, _ in places:
         if fail_at is not None and node is fail_at[1]:
             continue
         for name in sorted(rule.needs):
-            if name not in rule.bring or text.provides(name, node):
+            if name not in rule.bring or name in will_bind or text.provides(name, node):
                 continue
+            if name in getattr(rule, "standing", ()):
+                # A line read off the examples' standing imports enters only a file with no import
+                # relationship of its own with that module; reshaping an existing line is the file's.
+                statement = ast.parse(rule.bring[name]).body[0]
+                module = (statement.module or "") if isinstance(statement, ast.ImportFrom) else statement.names[0].name
+                if any(origin and origin[0] == module for origin in text.imports.values()):
+                    continue
             if text.local_at(node, name):
                 raise Refused("the change at line %d of %s uses '%s', and a function around that code binds that "
                               "name for itself; the import the examples added cannot reach it" % (node.lineno, what, name))
@@ -1339,6 +1381,79 @@ class Renamed:
 
     def __init__(self, new):
         self.new = new
+
+
+class Rebound:
+    """An import line whose one alias the rules rename everywhere it is read: the alias follows."""
+
+    kind = "statement"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+def aliases_to_follow(text, places, fail_at):
+    """The import alias of a name the rules rename at its every read: the alias is renamed on its line.
+
+    The examples renamed a name and rewrote their own import of it in place.  This file imports the old
+    name from the same module, but on a line also listing other names, where the examples' whole-line
+    rewrite cannot reach.  When every read of the old name sits inside a place being rewritten, the new
+    name is free, and exactly one line binds the old one, that one alias is renamed where it stands --
+    exactly what the examples did to theirs.  Anything less certain leaves the line alone."""
+    wanted = {}
+    for (_, node, rule, _) in places:
+        if isinstance(rule, (Renamed, Rebound)) or (fail_at is not None and node is fail_at[1]):
+            continue
+        olds, news = set(), set()
+        for was, came_to in getattr(rule, "pairs", ()):
+            if is_import(was) or is_import(came_to):
+                continue
+            olds |= {part.id for part in ast.walk(was) if isinstance(part, ast.Name)}
+            news |= {part.id for part in ast.walk(came_to) if isinstance(part, ast.Name)}
+        olds, news = olds - news, news - olds
+        if len(olds) != 1 or len(news) != 1:
+            continue
+        old, new = olds.pop(), news.pop()
+        origins = rule.brought.get(new)
+        if not origins or len(origins) != 1 or None in origins:
+            continue
+        module, inner = next(iter(origins))
+        came_from = text.imports.get(old)
+        if not module or inner is None or not came_from or came_from[0] != module or came_from[1] is None:
+            continue
+        wanted.setdefault(old, set()).add((new, inner))
+    wanted = {old: min(pair) for old, pair in wanted.items() if len(pair) == 1}
+    found = []
+    for old, (new, inner) in sorted(wanted.items()):
+        if new in text.defined:
+            continue
+        lines = [node for node in ast.walk(text.tree)
+                 if isinstance(node, ast.ImportFrom) and not node.level and node.module == text.imports[old][0]
+                 and any((alias.asname or alias.name) == old and alias.name == text.imports[old][1]
+                         for alias in node.names)]
+        if len(lines) != 1 or any(line is node for line in lines for _, node, _, _ in places):
+            continue
+        others = ast.Module(body=[one for one in text.tree.body if one is not lines[0]], type_ignores=[])
+        elsewhere, anything = module_names(others)
+        if anything or old in elsewhere or new in elsewhere:
+            continue
+        spans = [span for span, _, _, _ in places]
+        reads = [part for part in ast.walk(text.tree) if isinstance(part, ast.Name) and part.id == old]
+        if any(not isinstance(part.ctx, ast.Load) for part in reads) or any(
+                not any(start <= text.span(part)[0] and text.span(part)[1] <= end for start, end in spans)
+                for part in reads) or any(text.local_at(part, old) for part in reads):
+            continue
+        names = [ast.alias(name=inner, asname=None if inner == new else new)
+                 if (alias.asname or alias.name) == old else alias for alias in lines[0].names]
+        line = ast.unparse(ast.ImportFrom(module=lines[0].module, names=names, level=0))
+        found.append((text.span(lines[0]), lines[0], Rebound(line), {}))
+    return found
 
 
 def renames_to_add(text, places, fail_at):
@@ -1388,7 +1503,8 @@ def renames_to_add(text, places, fail_at):
 
 def written(text, places, what="the file", check_names=True, fail_at=None):
     """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
-    return written_once(text, places + renames_to_add(text, places, fail_at), what, check_names, fail_at)
+    return written_once(text, places + renames_to_add(text, places, fail_at)
+                        + aliases_to_follow(text, places, fail_at), what, check_names, fail_at)
 
 
 def written_once(text, places, what="the file", check_names=True, fail_at=None):
@@ -1427,6 +1543,8 @@ def written_once(text, places, what="the file", check_names=True, fail_at=None):
                     raise Refused("the code at line %d of %s cannot be made to fail by itself" % (node.lineno, what))
             elif isinstance(rule, Renamed):
                 new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
+            elif isinstance(rule, Rebound):
+                new_text, parsed = rule.new, ast.parse(rule.new).body[0]
             else:
                 new_text, parsed = written_for(rule, node, bound, text)
                 looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
