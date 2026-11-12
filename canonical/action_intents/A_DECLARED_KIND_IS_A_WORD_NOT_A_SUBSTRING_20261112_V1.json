@@ -215,7 +215,7 @@
    "counterexample_receipts": [
     {
      "path": "canonical/runtime/world_probe_v1.py",
-     "git_blob_sha": "MEASURED_IN_THIS_PR"
+     "git_blob_sha": "2ff49b2fef92cb6f79d557d009adcb608ad78fd3"
     }
    ]
   }
