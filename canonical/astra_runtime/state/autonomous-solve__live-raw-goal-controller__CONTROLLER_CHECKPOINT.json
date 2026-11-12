@@ -1,0 +1,139 @@
+{
+  "completed_actions": [
+    {
+      "cycle": 0,
+      "declared_plan": {
+        "args": {
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "capability_id": "archive.tar_gz.create_from_manifest",
+          "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+          "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz"
+        },
+        "expect": {
+          "field": "output_verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "archive_tarfile",
+        "capability_id": "archive.tar_gz.create_from_manifest",
+        "dependency": {
+          "module": "tarfile",
+          "modules": [
+            "tarfile"
+          ],
+          "python_version": "3.11.2",
+          "status": "LOCAL_VERIFIED",
+          "type": "python_stdlib"
+        },
+        "member_count": 1,
+        "members": [
+          "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+        ],
+        "output_bytes": 21866,
+        "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+        "output_sha256": "09d432df2966e8ff8714224d8ca3efa0ab5695e244cc81d304e07e32fc2c1e2d",
+        "output_verified": true,
+        "source_sha256": {
+          "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde"
+        }
+      }
+    },
+    {
+      "cycle": 1,
+      "declared_plan": {
+        "args": {
+          "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "plan": {
+        "args": {
+          "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+          "capability_id": "archive.verify.tar_gz.gnu",
+          "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+        },
+        "expect": {
+          "field": "verified",
+          "type": "field_equals",
+          "value": true
+        },
+        "type": "invoke_capability"
+      },
+      "result": {
+        "adapter": "archive_verify_gnu_tar",
+        "archive_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+        "archive_sha256": "09d432df2966e8ff8714224d8ca3efa0ab5695e244cc81d304e07e32fc2c1e2d",
+        "capability_id": "archive.verify.tar_gz.gnu",
+        "dependency": {
+          "executable": "tar",
+          "resolved_path": "/usr/bin/tar",
+          "status": "LOCAL_VERIFIED",
+          "type": "system_tool"
+        },
+        "manifest_path": "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json",
+        "manifest_sha256": "52d51ec2699176791c15e3fc9d2fc2818fd636905dbb650450f2bc39939f8fde",
+        "member_count": 1,
+        "members": [
+          "canonical/action_intents/A_WRONG_SHAPED_MANIFEST_IS_A_NAMED_CONTRACT_ERROR_NOT_A_CRASH_V1_20261024_V1.json"
+        ],
+        "output_path": "canonical/astra_runtime/tmp/brain_out__archive_tar_gz_create_from_manifest__96531b3330.tar.gz",
+        "output_sha256": "09d432df2966e8ff8714224d8ca3efa0ab5695e244cc81d304e07e32fc2c1e2d",
+        "verified": true
+      }
+    },
+    {
+      "cycle": 2,
+      "declared_plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "plan": {
+        "args": {
+          "summary": "COMPOUND_GOAL_COMPLETE"
+        },
+        "type": "finish"
+      },
+      "result": {
+        "summary": "COMPOUND_GOAL_COMPLETE",
+        "type": "finish"
+      }
+    }
+  ],
+  "created_at_utc": "2026-11-12T15:20:29.744343+00:00",
+  "last_rewind_reason": "DURABLE_EFFECT_INVALID_OR_MISSING",
+  "last_rewound_from_action_index": 0,
+  "mission_id": "autonomous-solve",
+  "next_action_index": 3,
+  "plan_sha256": "ad3f9c2b039abecb65010fc70b590230d5ca157bab96e74202f9672338b23d66",
+  "resume_count": 2,
+  "rewind_count": 2,
+  "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
+  "status": "COMPLETE",
+  "step_id": "live-raw-goal-controller",
+  "test_interrupt_injected": false,
+  "updated_at_utc": "2026-11-12T15:26:24.144215+00:00"
+}

@@ -1,22 +1,44 @@
 {
  "gaps": {
+  "g013545cd720223e0e3c8c52e88d4a289fb97572d4ed8b924ba78a49293a501cf": {
+   "cost": 1.0,
+   "created": 1794495951.0077376,
+   "helped": 0,
+   "id": "g013545cd720223e0e3c8c52e88d4a289fb97572d4ed8b924ba78a49293a501cf",
+   "last_seen": 1794495951.0077376,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator root0658906fe09f"
+  },
+  "g0cca4033825288a4e936d719dd601c92445e26b80903cac9386c7e7cf28833ed": {
+   "cost": 1.0,
+   "created": 1794494227.7690299,
+   "helped": 0,
+   "id": "g0cca4033825288a4e936d719dd601c92445e26b80903cac9386c7e7cf28833ed",
+   "last_seen": 1794494227.7690299,
+   "resolved": false,
+   "trials": 0,
+   "what": "notes",
+   "why": "unknown_operator root4661266c9f51"
+  },
   "g1025082313878": {
    "cost": 1.0,
    "created": 1793264684.326955,
    "helped": 0,
    "id": "g1025082313878",
-   "last_seen": 1793264684.5930302,
+   "last_seen": 1794497309.9869864,
    "resolved": false,
    "trials": 0,
-   "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
-   "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+   "what": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2",
+   "why": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
   "g1051569409963": {
    "cost": 1.0,
    "created": 1793297609.2061357,
    "helped": 0,
    "id": "g1051569409963",
-   "last_seen": 1793297609.2498972,
+   "last_seen": 1794496748.4917228,
    "resolved": false,
    "trials": 1,
    "what": "probe:--output|--input",
@@ -49,9 +71,9 @@
    "created": 1793297609.1969573,
    "helped": 0,
    "id": "g1067294585537",
-   "last_seen": 1793297609.2640884,
+   "last_seen": 1794496748.5198512,
    "resolved": false,
-   "trials": 4,
+   "trials": 12,
    "what": "probe:--output=|positional",
    "why": "empirical cli probe"
   },
@@ -71,9 +93,9 @@
    "created": 1793297609.1961474,
    "helped": 0,
    "id": "g116784418683",
-   "last_seen": 1793297609.2794843,
+   "last_seen": 1794496748.549506,
    "resolved": false,
-   "trials": 6,
+   "trials": 18,
    "what": "probe:>|positional",
    "why": "empirical cli probe"
   },
@@ -82,7 +104,7 @@
    "created": 1793264802.120144,
    "helped": 0,
    "id": "g141732298032",
-   "last_seen": 1793264802.148411,
+   "last_seen": 1794498243.142556,
    "resolved": false,
    "trials": 0,
    "what": "practice:json_query_jq",
@@ -104,7 +126,7 @@
    "created": 1793266400.9063885,
    "helped": 0,
    "id": "g180142073164",
-   "last_seen": 1793266400.9350917,
+   "last_seen": 1794498243.146308,
    "resolved": false,
    "trials": 0,
    "what": "practice:python_ast_patch_search",
@@ -121,6 +143,39 @@
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
+  "g18dfbba74f614087bc8f20a2782da7a5c198963a4541f8b7fdae17b9ed7bae83": {
+   "cost": 1.0,
+   "created": 1794494390.5340219,
+   "helped": 0,
+   "id": "g18dfbba74f614087bc8f20a2782da7a5c198963a4541f8b7fdae17b9ed7bae83",
+   "last_seen": 1794494390.5340219,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root5678b5415ecc"
+  },
+  "g19cf25068f8a321af6ff62b1fb7d4de75b12066cc2a80ac50c87c2dff84fde52": {
+   "cost": 1.0,
+   "created": 1794494227.470053,
+   "helped": 0,
+   "id": "g19cf25068f8a321af6ff62b1fb7d4de75b12066cc2a80ac50c87c2dff84fde52",
+   "last_seen": 1794494227.470053,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator roote089d9474ee8"
+  },
+  "g20ff1c1d8441b0db5a2b8605238c04ab761abf87bc4b0049f5475c654dfafa19": {
+   "cost": 1.0,
+   "created": 1794495950.7883563,
+   "helped": 0,
+   "id": "g20ff1c1d8441b0db5a2b8605238c04ab761abf87bc4b0049f5475c654dfafa19",
+   "last_seen": 1794495950.7883563,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootbffeca5d9ebe"
+  },
   "g222975461607": {
    "cost": 1.0,
    "created": 1793271690.7518563,
@@ -131,6 +186,17 @@
    "trials": 0,
    "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
    "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+  },
+  "g23b84168528ee93fd7655ffb0eed53ba0475f5bf10db35e374a26455e301b7ac": {
+   "cost": 1.0,
+   "created": 1794495950.963087,
+   "helped": 0,
+   "id": "g23b84168528ee93fd7655ffb0eed53ba0475f5bf10db35e374a26455e301b7ac",
+   "last_seen": 1794495950.963087,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root40ee419d72a5"
   },
   "g246678589635": {
    "cost": 1.0,
@@ -159,9 +225,9 @@
    "created": 1793264466.9918926,
    "helped": 0,
    "id": "g248600897844",
-   "last_seen": 1793264467.0389726,
+   "last_seen": 1794496748.5317435,
    "resolved": false,
-   "trials": 2,
+   "trials": 6,
    "what": "probe:--out|positional",
    "why": "empirical cli probe"
   },
@@ -175,6 +241,17 @@
    "trials": 0,
    "what": "transcribe the audio in this recording to text",
    "why": "raw goal compilation gap"
+  },
+  "g259081f949419279e13640be41685c0312d2a865486cd22d5a5a8ff68a3d02e0": {
+   "cost": 1.0,
+   "created": 1794495950.7901018,
+   "helped": 0,
+   "id": "g259081f949419279e13640be41685c0312d2a865486cd22d5a5a8ff68a3d02e0",
+   "last_seen": 1794495950.7901018,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootbffeca5d9ebe"
   },
   "g284143994353": {
    "cost": 1.0,
@@ -203,7 +280,7 @@
    "created": 1793264802.1206748,
    "helped": 0,
    "id": "g288056558996",
-   "last_seen": 1793264802.1488872,
+   "last_seen": 1794498243.1444206,
    "resolved": false,
    "trials": 0,
    "what": "practice:python_fault_localize",
@@ -225,11 +302,22 @@
    "created": 1793264466.991594,
    "helped": 0,
    "id": "g296367416154",
-   "last_seen": 1793264467.040924,
+   "last_seen": 1794496748.5257664,
    "resolved": false,
-   "trials": 2,
+   "trials": 6,
    "what": "probe:--outfile|positional",
    "why": "empirical cli probe"
+  },
+  "g299ba0c93a40a211e68f505510b4688cc021d98acd4c4b2fd810607811a3d94b": {
+   "cost": 1.0,
+   "created": 1794494227.394448,
+   "helped": 0,
+   "id": "g299ba0c93a40a211e68f505510b4688cc021d98acd4c4b2fd810607811a3d94b",
+   "last_seen": 1794494227.394448,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator rootd1ddcb3ed5cf"
   },
   "g320504364511": {
    "cost": 1.0,
@@ -241,6 +329,17 @@
    "trials": 0,
    "what": "extract text from the pdf file /tmp/none.pdf",
    "why": "raw goal compilation gap"
+  },
+  "g326b2df58c71811d76f7434144a45782d9130388f5563e5d524041a7bc7cbfef": {
+   "cost": 1.0,
+   "created": 1794495950.6646342,
+   "helped": 0,
+   "id": "g326b2df58c71811d76f7434144a45782d9130388f5563e5d524041a7bc7cbfef",
+   "last_seen": 1794495950.6646342,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator rootaec6728f2baf"
   },
   "g328299222626": {
    "cost": 1.0,
@@ -258,11 +357,22 @@
    "created": 1793264466.9956858,
    "helped": 0,
    "id": "g329815205364",
-   "last_seen": 1793264467.0428555,
+   "last_seen": 1794496748.4955368,
    "resolved": false,
    "trials": 2,
    "what": "probe:--output|--data",
    "why": "empirical cli probe"
+  },
+  "g3700392acbc902738c36e3dd799f7814fb4cff2f1bfadc88c9cd7f45e876e765": {
+   "cost": 1.0,
+   "created": 1794494227.693348,
+   "helped": 0,
+   "id": "g3700392acbc902738c36e3dd799f7814fb4cff2f1bfadc88c9cd7f45e876e765",
+   "last_seen": 1794494227.693348,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator roota944a3650d21"
   },
   "g373341029941": {
    "cost": 1.0,
@@ -308,6 +418,17 @@
    "what": "practice:python_fault_localize",
    "why": "live learning cycle"
   },
+  "g3c0af3b8e1c5ee9e939590ff776031b7c5507bb845fb5b71ee80b6725edfd184": {
+   "cost": 1.0,
+   "created": 1794494227.5238636,
+   "helped": 0,
+   "id": "g3c0af3b8e1c5ee9e939590ff776031b7c5507bb845fb5b71ee80b6725edfd184",
+   "last_seen": 1794494227.5238636,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root37c5416eb8e0"
+  },
   "g40774542697": {
    "cost": 1.0,
    "created": 1793292754.2838254,
@@ -324,11 +445,22 @@
    "created": 1793266064.38011,
    "helped": 0,
    "id": "g421844338923",
-   "last_seen": 1793266064.4222333,
+   "last_seen": 1794496748.4935036,
    "resolved": false,
    "trials": 1,
    "what": "probe:-o|-d",
    "why": "empirical cli probe"
+  },
+  "g422ad6fce913cd7da98bd4394c1435fd6c1f37980cf1da79973b872ae5f32277": {
+   "cost": 1.0,
+   "created": 1794494391.150514,
+   "helped": 0,
+   "id": "g422ad6fce913cd7da98bd4394c1435fd6c1f37980cf1da79973b872ae5f32277",
+   "last_seen": 1794494391.150514,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator rootfc0ad1739484"
   },
   "g435729428781": {
    "cost": 1.0,
@@ -412,7 +544,7 @@
    "created": 1793266064.3790646,
    "helped": 0,
    "id": "g482551162764",
-   "last_seen": 1793266064.4205732,
+   "last_seen": 1794496748.4862158,
    "resolved": false,
    "trials": 1,
    "what": "probe:--output|stdin",
@@ -476,11 +608,11 @@
   "g551150868865": {
    "cost": 1.0,
    "created": 1793297609.2022235,
-   "helped": 2,
+   "helped": 6,
    "id": "g551150868865",
-   "last_seen": 1793297609.282899,
+   "last_seen": 1794496748.5556517,
    "resolved": false,
-   "trials": 3,
+   "trials": 11,
    "what": "probe:>|stdin",
    "why": "empirical cli probe"
   },
@@ -665,7 +797,7 @@
    "created": 1793264802.119693,
    "helped": 0,
    "id": "g703274280680",
-   "last_seen": 1793264802.1480136,
+   "last_seen": 1794498243.1405585,
    "resolved": false,
    "trials": 0,
    "what": "practice:math_numeric_sympy",
@@ -737,6 +869,17 @@
    "what": "practice:math_numeric_sympy",
    "why": "live learning cycle"
   },
+  "g7e5e853bc198475473e1a55d4f2784d24ac3c2454856375a6146d9c7ceeb6031": {
+   "cost": 1.0,
+   "created": 1794495950.7030454,
+   "helped": 0,
+   "id": "g7e5e853bc198475473e1a55d4f2784d24ac3c2454856375a6146d9c7ceeb6031",
+   "last_seen": 1794495950.7030454,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator root39892feedaef"
+  },
   "g807026147686": {
    "cost": 1.0,
    "created": 1793437571.7157106,
@@ -775,18 +918,29 @@
    "created": 1793297609.2007535,
    "helped": 0,
    "id": "g84707193898",
-   "last_seen": 1793297609.2763896,
+   "last_seen": 1794496748.5437741,
    "resolved": false,
-   "trials": 2,
+   "trials": 6,
    "what": "probe:--file|positional",
    "why": "empirical cli probe"
+  },
+  "g848df3c0837b2442e9ed59dc4d0d0f5da3fe7ad68ca258d4940715cade9e0eee": {
+   "cost": 1.0,
+   "created": 1794494227.4725668,
+   "helped": 0,
+   "id": "g848df3c0837b2442e9ed59dc4d0d0f5da3fe7ad68ca258d4940715cade9e0eee",
+   "last_seen": 1794494227.4725668,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator roote089d9474ee8"
   },
   "g869610903178": {
    "cost": 1.0,
    "created": 1793264466.9942186,
    "helped": 0,
    "id": "g869610903178",
-   "last_seen": 1793264467.0507057,
+   "last_seen": 1794496748.4881167,
    "resolved": false,
    "trials": 2,
    "what": "probe:--outfile|stdin",
@@ -802,6 +956,17 @@
    "trials": 3,
    "what": "probe:>|positional",
    "why": "empirical cli probe"
+  },
+  "g8e45f0babc3246eadf6208a33463e37ca07acb25180e27c9758eb56ee8f302af": {
+   "cost": 1.0,
+   "created": 1794496082.0886269,
+   "helped": 0,
+   "id": "g8e45f0babc3246eadf6208a33463e37ca07acb25180e27c9758eb56ee8f302af",
+   "last_seen": 1794496082.0886269,
+   "resolved": false,
+   "trials": 0,
+   "what": "revenue",
+   "why": "unknown_operator root6ede673e7751"
   },
   "g941143180589": {
    "cost": 1.0,
@@ -901,6 +1066,226 @@
    "trials": 1,
    "what": "probe:--outfile|stdin",
    "why": "empirical cli probe"
+  },
+  "g9cdda730cbcee06b7f91373cfebd9ddda2ce85510fe12338a39d9cb4326d0c5d": {
+   "cost": 1.0,
+   "created": 1794494227.5259686,
+   "helped": 0,
+   "id": "g9cdda730cbcee06b7f91373cfebd9ddda2ce85510fe12338a39d9cb4326d0c5d",
+   "last_seen": 1794494227.5259686,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root37c5416eb8e0"
+  },
+  "g9cf9fdc607398a4ad976c5e7ba4d2833e9412b0f852a524971d5c298d9cf7b89": {
+   "cost": 1.0,
+   "created": 1794495950.8360593,
+   "helped": 0,
+   "id": "g9cf9fdc607398a4ad976c5e7ba4d2833e9412b0f852a524971d5c298d9cf7b89",
+   "last_seen": 1794495950.8360593,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator rootafcb3f429980"
+  },
+  "gb263651b7eacea941fae3621a258a396d9a06920e4b0655b594e107b2ce42ebb": {
+   "cost": 1.0,
+   "created": 1794495950.98596,
+   "helped": 0,
+   "id": "gb263651b7eacea941fae3621a258a396d9a06920e4b0655b594e107b2ce42ebb",
+   "last_seen": 1794495950.98596,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root8295a36d07b3"
+  },
+  "gb2f8399ca75f1796711261427e1d0fb6deb864f865b83067f8e134de0eddb81a": {
+   "cost": 1.0,
+   "created": 1794494227.7339528,
+   "helped": 0,
+   "id": "gb2f8399ca75f1796711261427e1d0fb6deb864f865b83067f8e134de0eddb81a",
+   "last_seen": 1794494227.7339528,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator roota8b34bd3ce02"
+  },
+  "gb34ea227eb0b04be5e179b63a1a3103d0c798806278bb39a9198dd3ec4e704ad": {
+   "cost": 1.0,
+   "created": 1794496081.492799,
+   "helped": 0,
+   "id": "gb34ea227eb0b04be5e179b63a1a3103d0c798806278bb39a9198dd3ec4e704ad",
+   "last_seen": 1794496081.492799,
+   "resolved": false,
+   "trials": 0,
+   "what": "profit",
+   "why": "unknown_operator root66b12e69b598"
+  },
+  "gbb1d3a932eb1a9138ad8b6510c3cf5ba77ac4a73ab5c695ad9ea943ae26ee425": {
+   "cost": 1.0,
+   "created": 1794495950.937028,
+   "helped": 0,
+   "id": "gbb1d3a932eb1a9138ad8b6510c3cf5ba77ac4a73ab5c695ad9ea943ae26ee425",
+   "last_seen": 1794495950.937028,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root3da35617f83b"
+  },
+  "gbd1c2af394fb2f49835f9bc0f16693623fd9814f3c1d05acbbf39ec7bad52a17": {
+   "cost": 1.0,
+   "created": 1794496084.9687698,
+   "helped": 1,
+   "id": "gbd1c2af394fb2f49835f9bc0f16693623fd9814f3c1d05acbbf39ec7bad52a17",
+   "last_seen": 1794496084.9991043,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator root8fe5fd19bb40"
+  },
+  "gc2111bc0c8d323fb1ee346b606a0413cf32c53c11ce6c4437246386be73773bd": {
+   "cost": 1.0,
+   "created": 1794494227.282479,
+   "helped": 0,
+   "id": "gc2111bc0c8d323fb1ee346b606a0413cf32c53c11ce6c4437246386be73773bd",
+   "last_seen": 1794494227.282479,
+   "resolved": false,
+   "trials": 0,
+   "what": "about",
+   "why": "unknown_operator root996d0c94ac90"
+  },
+  "gc54a2849cc6d5647544a701c64fdbd7d5e7802a182a90069e595df395a7c933f": {
+   "cost": 1.0,
+   "created": 1794496081.495328,
+   "helped": 0,
+   "id": "gc54a2849cc6d5647544a701c64fdbd7d5e7802a182a90069e595df395a7c933f",
+   "last_seen": 1794496081.495328,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root66b12e69b598"
+  },
+  "gd017788ab2e8ec97d330bee5aa1a2b5f5b24df5103b1c8c94c12437a6e953c40": {
+   "cost": 1.0,
+   "created": 1794494227.3612792,
+   "helped": 0,
+   "id": "gd017788ab2e8ec97d330bee5aa1a2b5f5b24df5103b1c8c94c12437a6e953c40",
+   "last_seen": 1794494227.3612792,
+   "resolved": false,
+   "trials": 0,
+   "what": "files",
+   "why": "unknown_operator rootbb886a16d028"
+  },
+  "gddc33b7088ee9d6aaa2c4f0c825a6394a15455208dfa556d9acccfbe03fdb946": {
+   "cost": 1.0,
+   "created": 1794495950.9045143,
+   "helped": 0,
+   "id": "gddc33b7088ee9d6aaa2c4f0c825a6394a15455208dfa556d9acccfbe03fdb946",
+   "last_seen": 1794495950.9045143,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root144a4efec079"
+  },
+  "gdf289cd6d46c433692f992639412cafa1ae2d9f975f8d15700bbe05e9d286372": {
+   "cost": 1.0,
+   "created": 1794494390.5363297,
+   "helped": 0,
+   "id": "gdf289cd6d46c433692f992639412cafa1ae2d9f975f8d15700bbe05e9d286372",
+   "last_seen": 1794494390.5363297,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator root5678b5415ecc"
+  },
+  "ge1b1c4955a5e20dfa14256fa272b198d5b51fe56af5592bfe2a583052ad0748a": {
+   "cost": 1.0,
+   "created": 1794495950.8378599,
+   "helped": 0,
+   "id": "ge1b1c4955a5e20dfa14256fa272b198d5b51fe56af5592bfe2a583052ad0748a",
+   "last_seen": 1794495950.8378599,
+   "resolved": false,
+   "trials": 0,
+   "what": "margin",
+   "why": "unknown_operator rootafcb3f429980"
+  },
+  "ge49b08f1fa5f0cdaabe14053edb9717014e8961309468d38a547719d313cdd30": {
+   "cost": 1.0,
+   "created": 1794495977.148332,
+   "helped": 0,
+   "id": "ge49b08f1fa5f0cdaabe14053edb9717014e8961309468d38a547719d313cdd30",
+   "last_seen": 1794495977.148332,
+   "resolved": false,
+   "trials": 0,
+   "what": "zzzz",
+   "why": "unknown_operator rootbedfc5469eec"
+  },
+  "ge620a315d58d3df747ac59a407189261c2786f390c850eede2f14c896c1cb4c4": {
+   "cost": 1.0,
+   "created": 1794498181.7448015,
+   "helped": 1,
+   "id": "ge620a315d58d3df747ac59a407189261c2786f390c850eede2f14c896c1cb4c4",
+   "last_seen": 1794498181.773068,
+   "resolved": true,
+   "trials": 1,
+   "what": "spreadv",
+   "why": "unknown_operator root5b390d825531"
+  },
+  "gf063631c810106903207d60961c506bbad524d5437cb5d8ecf66373d3ca94ab5": {
+   "cost": 1.0,
+   "created": 1794495950.7342746,
+   "helped": 0,
+   "id": "gf063631c810106903207d60961c506bbad524d5437cb5d8ecf66373d3ca94ab5",
+   "last_seen": 1794495950.7342746,
+   "resolved": false,
+   "trials": 0,
+   "what": "define",
+   "why": "unknown_operator root9d92d46e6edf"
+  },
+  "gf216beb4dfe777f90aef165b7789d3a7c772a093dab422b99e17f0c67e2259e2": {
+   "cost": 1.0,
+   "created": 1794494227.649512,
+   "helped": 0,
+   "id": "gf216beb4dfe777f90aef165b7789d3a7c772a093dab422b99e17f0c67e2259e2",
+   "last_seen": 1794494227.649512,
+   "resolved": false,
+   "trials": 0,
+   "what": "retry",
+   "why": "unknown_operator root8c50cb195912"
+  },
+  "gf4e636a0b0fc80bf6346f358c26f74b7b35ce12cbb509f0a0c8e37084124ce36": {
+   "cost": 1.0,
+   "created": 1794494227.6034315,
+   "helped": 0,
+   "id": "gf4e636a0b0fc80bf6346f358c26f74b7b35ce12cbb509f0a0c8e37084124ce36",
+   "last_seen": 1794494227.6034315,
+   "resolved": false,
+   "trials": 0,
+   "what": "lines",
+   "why": "unknown_operator root3171eee6accb"
+  },
+  "gfecc13c6c1cbc1abea485a0a36ff898e02d2e2bcf38a40f313369d8813a4e2b3": {
+   "cost": 1.0,
+   "created": 1794494258.5879457,
+   "helped": 0,
+   "id": "gfecc13c6c1cbc1abea485a0a36ff898e02d2e2bcf38a40f313369d8813a4e2b3",
+   "last_seen": 1794494258.5879457,
+   "resolved": false,
+   "trials": 0,
+   "what": "zzzz",
+   "why": "unknown_operator root7e4a2f883f0c"
+  },
+  "gfed073cebb4192a5aba86be95d317a21cc5f5c541f7e5d1bde4f111ef4fc95d4": {
+   "cost": 1.0,
+   "created": 1794494393.8911777,
+   "helped": 1,
+   "id": "gfed073cebb4192a5aba86be95d317a21cc5f5c541f7e5d1bde4f111ef4fc95d4",
+   "last_seen": 1794494393.916321,
+   "resolved": true,
+   "trials": 1,
+   "what": "median",
+   "why": "unknown_operator root5393aeedfb44"
   }
  },
  "schema": "PROJECT_BRAIN_IGNORANCE_LEDGER_V1"

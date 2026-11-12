@@ -183,3 +183,30 @@ def test_the_binary_identity_corpus_is_fully_checkable():
     assert layer["total"] >= 1
     assert layer["checkable"] == layer["total"]
     assert layer["auditability"] == 1.0
+
+
+# ---------------------------------------------------------------------------
+# a missing measurement must not look like a confident zero
+# ---------------------------------------------------------------------------
+def test_an_unmeasurable_layer_reports_None_not_zero(monkeypatch, tmp_path):
+    """Learned the hard way: with no pytest installed this layer reported 0/0, which reads
+    as 'nothing to see' when the truth is 'could not measure'."""
+    import subprocess
+
+    class FakeCompleted:
+        stdout = ""
+        stderr = "/usr/bin/python3: No module named pytest\n"
+        returncode = 1
+
+    def fake_run(*a, **k):
+        return FakeCompleted()
+
+    tests_dir = tmp_path / "canonical" / "tests"
+    tests_dir.mkdir(parents=True)
+    monkeypatch.setattr(A.subprocess, "run", fake_run)
+
+    layer = A.test_modules(tmp_path)
+    assert layer["total"] is None
+    assert layer["checkable"] is None
+    assert layer["error"] == "PYTEST_NOT_INSTALLED"
+    assert layer.get("auditability") is None

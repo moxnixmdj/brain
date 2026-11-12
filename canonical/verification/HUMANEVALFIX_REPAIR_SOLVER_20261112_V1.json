@@ -1,0 +1,1558 @@
+{
+ "schema": "BRAIN_HUMANEVALFIX_REPAIR_SOLVER_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T14:18:13Z",
+ "read_this_first": [
+  "The question: on unseen small bugs that come with tests, is the edit-kind learner better than the repair solver this tree already had? Measured like for like: the same 100 HumanEvalFix bugs (drawn by seed 20261111 before the learner was frozen), the same tests, the same judge.",
+  "The solver (canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py, nothing taught, its own default bounds): 53 of 100 pass the tests; 36 are right as far as checked (20 are the published fix); 17 pass the tests and answer wrongly on an input the tests do not have.",
+  "The learner on the same bugs, taught the other 203 fixes: 62 pass the tests, 53 right as far as checked. Taught the 40 QuixBugs fixes only: 58, 50 right.",
+  "Bug by bug (learner taught the other 203 fixes): both 40, the solver alone 13, the learner alone 22, neither 25. Either: 75; either, right as far as checked: 57.",
+  "Counting only repairs that are right as far as checked: the learner 53, the solver 36, both 31, either 58. The learner is ahead here as it was on QuixBugs (20 against 5). Of the 13 bugs only the solver repairs, 4 are right and 9 only fit the tests. So the solver adds 5 right repairs to the learner's 53; the learner adds 22 to the solver's 36. Keep both, the learner in front.",
+  "What the solver writes when no small change passes: 17 of its 53 repairs change more than one line, and 13 of those 17 are wrong on an extra input. 11 of them restate constants of the tests, for example: if string == 'aaaaAAAAaaaa': return 1. The tests accept them; they are not repairs.",
+  "Its one-line repairs are another matter: 36, of which 32 are right as far as checked.",
+  "One run, one machine, by the producer. Nobody else has re-run it. Zero model calls."
+ ],
+ "summary": {
+  "bugs": 100,
+  "usable": 100,
+  "repaired": 53,
+  "the_repair_is_the_published_fix": 20,
+  "right_as_far_as_checked": 36,
+  "passes_and_is_wrong_on_an_extra_input": 17,
+  "solver_said_pass_but_the_second_check_did_not": [],
+  "how_the_runs_ended": {
+   "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE": 1,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH": 44,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE": 53,
+   "STOPPED_AT_THE_WALL_LIMIT": 2
+  },
+  "repairs_that_change_one_line": {
+   "count": 36,
+   "right_as_far_as_checked": 32,
+   "wrong_on_an_extra_input": [
+    "Python/3",
+    "Python/20",
+    "Python/40",
+    "Python/127"
+   ]
+  },
+  "repairs_that_change_more_than_one_line": {
+   "count": 17,
+   "right_as_far_as_checked": [
+    "Python/52",
+    "Python/63",
+    "Python/99",
+    "Python/138"
+   ],
+   "wrong_on_an_extra_input": 13,
+   "restate_constants_of_the_tests__read_by_the_producer_not_computed": [
+    "Python/16",
+    "Python/19",
+    "Python/24",
+    "Python/27",
+    "Python/28",
+    "Python/47",
+    "Python/54",
+    "Python/124",
+    "Python/132",
+    "Python/150",
+    "Python/157"
+   ]
+  },
+  "processes_started_by_the_solver": {
+   "bugs_it_finished": 98,
+   "median": 122.5,
+   "mean": 237.9,
+   "in_all": 23316
+  },
+  "seconds_in_all": 6226.7,
+  "by_bug_type": {
+   "excess logic": {
+    "bugs": 19,
+    "repaired": 6
+   },
+   "function misuse": {
+    "bugs": 6,
+    "repaired": 5
+   },
+   "missing logic": {
+    "bugs": 19,
+    "repaired": 6
+   },
+   "operator misuse": {
+    "bugs": 14,
+    "repaired": 10
+   },
+   "value misuse": {
+    "bugs": 30,
+    "repaired": 22
+   },
+   "variable misuse": {
+    "bugs": 12,
+    "repaired": 4
+   }
+  }
+ },
+ "beside_the_edit_kind_learner": {
+  "all_other_fixes": {
+   "bugs": 100,
+   "the_solver": 53,
+   "the_learner": 62,
+   "both": 40,
+   "the_solver_alone": [
+    "Python/16",
+    "Python/19",
+    "Python/21",
+    "Python/24",
+    "Python/27",
+    "Python/29",
+    "Python/47",
+    "Python/52",
+    "Python/54",
+    "Python/63",
+    "Python/124",
+    "Python/132",
+    "Python/157"
+   ],
+   "the_learner_alone": 22,
+   "neither": 25,
+   "either": 75,
+   "either_right_as_far_as_checked": 57
+  },
+  "another_benchmark": {
+   "bugs": 100,
+   "the_solver": 53,
+   "the_learner": 58,
+   "both": 37,
+   "the_solver_alone": [
+    "Python/16",
+    "Python/19",
+    "Python/21",
+    "Python/24",
+    "Python/25",
+    "Python/27",
+    "Python/29",
+    "Python/45",
+    "Python/47",
+    "Python/52",
+    "Python/54",
+    "Python/63",
+    "Python/124",
+    "Python/132",
+    "Python/134",
+    "Python/157"
+   ],
+   "the_learner_alone": 21,
+   "neither": 26,
+   "either": 74,
+   "either_right_as_far_as_checked": 57
+  }
+ },
+ "what_was_checked": {
+  "repaired": "the solver says pass and applied, the file on disk changed, and the changed program passes the bug's tests once more in a fresh interpreter. The acceptance field main's audit found to accept a failed repair (output_verified) is not read.",
+  "right_as_far_as_checked": "the repair is the published fix, or it answers like the published fix on every input of HumanEval+ Mini for that problem (inputs the bug's tests do not have).",
+  "the_tool": "canonical/tools/humanevalfix_repair_solver_measure_v1.py; 9 tests in canonical/tests/test_humanevalfix_repair_solver_v1.py",
+  "the_solver_was_not_edited": {
+   "canonical/tools/humanevalfix_repair_solver_measure_v1.py": "5593efc78e56b26b2781052b3e49b4a8dfc39229f5907068ca104548e6b45d27",
+   "canonical/tools/quixbugs_repair_solver_measure_v1.py": "3418f080e077799b43568dac091c2a763628b97ab574c4feade4616e6e146454",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py": "fd96af03475835c7d87eac7281568c373e58a881cb3eac20389d8a57d29a0638",
+   "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py": "9e5c69564e1f52a63ffbc5132d3b1b7f9807cbf31d4a3b0cb57a5317165b1273"
+  },
+  "either_right_as_far_as_checked_in_beside_the_edit_kind_learner": "takes the solver's repair where the solver repaired, else the learner's (57). In the block that counts right repairs only, 'either' is the bugs for which at least one of the two has a right repair (58)."
+ },
+ "limits": [
+  "One run. Two shards ran side by side on a two-core machine; 2 bugs were stopped at the solver's 300 s wall limit and count as not repaired.",
+  "1 bug ended FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE: the solver refused it before searching. It counts as not repaired.",
+  "'Right as far as checked' is a lower bar than right: it is agreement on a finite set of extra inputs.",
+  "The solver ran with nothing taught and its default bounds. A wider bound was tried on QuixBugs only (1 more of 35).",
+  "HumanEvalFix bugs are single small changes in short functions, with the tests at hand. Nothing here says anything about tasks whose tests are hidden or whose fix spans files.",
+  "An earlier answer said '8 solver repairs restate the tests' constants'. That was a partial count at 56 of 100 bugs and it counted repairs of three lines or more. The final counts are the ones above.",
+  "An earlier answer called the solver 'about as good as the learner' on these bugs. That was at 56 of 100 bugs and counted repairs that pass the tests. On right repairs over all 100 the learner is ahead, 53 against 36."
+ ],
+ "run": {
+  "which": "scored",
+  "timeout_s": 8,
+  "wall_limit_s": 300,
+  "solver_arguments_for_one_bug": {
+   "source_root": "project",
+   "test_paths": [
+    "project/test_prog.py"
+   ],
+   "output_path": "reports/solver.json",
+   "timeout_s": 8
+  },
+  "nothing_taught": true,
+  "benchmark": {
+   "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+   "extra_inputs_sha256": "78fbba8865b20c5a979cda6e02fd72538e1762e65980af7d1a6e93c3e87e93af"
+  },
+  "run_at_commit": "942ee3c5",
+  "model_calls": 0,
+  "incremental_spend_usd": 0
+ },
+ "per_bug_key": "[repaired, right as far as checked, is the published fix, processes started, seconds, status, lines removed, lines put in]",
+ "per_bug": {
+  "Python/1": [
+   true,
+   true,
+   false,
+   8,
+   3.49,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "current_depth = 0"
+   ],
+   [
+    "current_depth = -1"
+   ]
+  ],
+  "Python/3": [
+   true,
+   false,
+   false,
+   9,
+   3.63,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "balance = 0"
+   ],
+   [
+    "balance = 1"
+   ]
+  ],
+  "Python/4": [
+   false,
+   false,
+   false,
+   37,
+   8.63,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/5": [
+   false,
+   false,
+   false,
+   119,
+   28.39,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/9": [
+   false,
+   false,
+   false,
+   28,
+   8.63,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/11": [
+   true,
+   true,
+   false,
+   8,
+   3.38,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if i == j:"
+   ],
+   [
+    "if not i == j:"
+   ]
+  ],
+  "Python/14": [
+   true,
+   true,
+   false,
+   10,
+   3.7,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for i in range(len(string) - 1):"
+   ],
+   [
+    "for i in range(len(string) - 0):"
+   ]
+  ],
+  "Python/15": [
+   true,
+   true,
+   true,
+   15,
+   5.15,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return ' '.join([str(x) for x in range(n)])"
+   ],
+   [
+    "return ' '.join([str(x) for x in range(n + 1)])"
+   ]
+  ],
+  "Python/16": [
+   true,
+   false,
+   false,
+   11,
+   5.43,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return len(set(string))"
+   ],
+   [
+    "if string == 'aaaaAAAAaaaa':",
+    "return 1",
+    "return len(string and 'abcde')"
+   ]
+  ],
+  "Python/17": [
+   true,
+   true,
+   true,
+   16,
+   5.42,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "note_map = {'o': 3, 'o|': 2, '.|': 1}"
+   ],
+   [
+    "note_map = {'o': 4, 'o|': 2, '.|': 1}"
+   ]
+  ],
+  "Python/18": [
+   true,
+   true,
+   false,
+   11,
+   4.04,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for i in range(len(string) - len(substring)):"
+   ],
+   [
+    "for i in range(len(string) + len(substring)):"
+   ]
+  ],
+  "Python/19": [
+   true,
+   false,
+   false,
+   643,
+   156.24,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "value_map = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9}",
+    "return ' '.join([x for x in numbers.split(' ') if x])"
+   ],
+   [
+    "if numbers >= 'three':",
+    "return numbers",
+    "elif numbers < 'one':",
+    "return numbers and 'zero four five seven eight nine'",
+    "return 'zero one two three four five six'"
+   ]
+  ],
+  "Python/20": [
+   true,
+   false,
+   false,
+   14,
+   4.82,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if new_distance > distance:"
+   ],
+   [
+    "if not new_distance > distance:"
+   ]
+  ],
+  "Python/21": [
+   true,
+   true,
+   true,
+   12,
+   4.4,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return [(x - min_number) / (max_number + min_number) for x in numbers]"
+   ],
+   [
+    "return [(x - min_number) / (max_number - min_number) for x in numbers]"
+   ]
+  ],
+  "Python/22": [
+   false,
+   false,
+   false,
+   9,
+   3.73,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/23": [
+   true,
+   true,
+   false,
+   10,
+   3.63,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return len(string) - 1"
+   ],
+   [
+    "return len(string) - 0"
+   ]
+  ],
+  "Python/24": [
+   true,
+   false,
+   false,
+   96,
+   24.45,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for i in reversed(range(n)):",
+    "if n - i == 0:",
+    "return i"
+   ],
+   [
+    "if not n % 7:",
+    "return n // 7",
+    "return n // 2"
+   ]
+  ],
+  "Python/25": [
+   true,
+   true,
+   true,
+   11,
+   9.96,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "i = 0"
+   ],
+   [
+    "i = 2"
+   ]
+  ],
+  "Python/26": [
+   true,
+   true,
+   true,
+   8,
+   3.52,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return [n for n in numbers if c[n] < 1]"
+   ],
+   [
+    "return [n for n in numbers if c[n] <= 1]"
+   ]
+  ],
+  "Python/27": [
+   true,
+   false,
+   false,
+   11,
+   5.96,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return string.lower()"
+   ],
+   [
+    "if string == 'Hello!':",
+    "return 'hELLO!'",
+    "return string and 'tHESE VIOLENT DELIGHTS HAVE VIOLENT ENDS'"
+   ]
+  ],
+  "Python/28": [
+   true,
+   false,
+   false,
+   17,
+   6.68,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return ' '.join(strings)"
+   ],
+   [
+    "if sorted(strings) == strings:",
+    "return (strings or '') and 'xyz'",
+    "return 'xyzwk'"
+   ]
+  ],
+  "Python/29": [
+   true,
+   true,
+   true,
+   10,
+   4.64,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return [x for x in strings if x.endswith(prefix)]"
+   ],
+   [
+    "return [x for x in strings if x.startswith(prefix)]"
+   ]
+  ],
+  "Python/30": [
+   false,
+   false,
+   false,
+   51,
+   11.58,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/32": [
+   false,
+   false,
+   false,
+   null,
+   300.1,
+   "STOPPED_AT_THE_WALL_LIMIT",
+   null,
+   null
+  ],
+  "Python/35": [
+   true,
+   true,
+   false,
+   16,
+   5.33,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if e < m:"
+   ],
+   [
+    "if not e < m:"
+   ]
+  ],
+  "Python/37": [
+   false,
+   false,
+   false,
+   447,
+   97.41,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/40": [
+   true,
+   false,
+   false,
+   8,
+   3.36,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for i in range(1, len(l)):"
+   ],
+   [
+    "for i in range(-1, len(l)):"
+   ]
+  ],
+  "Python/41": [
+   true,
+   true,
+   true,
+   14,
+   4.56,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return n ** 3"
+   ],
+   [
+    "return n ** 2"
+   ]
+  ],
+  "Python/43": [
+   false,
+   false,
+   false,
+   246,
+   59.39,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/45": [
+   true,
+   true,
+   false,
+   11,
+   4.52,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return a * h / 0.5"
+   ],
+   [
+    "return a * h * 0.5"
+   ]
+  ],
+  "Python/46": [
+   false,
+   false,
+   false,
+   764,
+   174.16,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/47": [
+   true,
+   false,
+   false,
+   503,
+   116.43,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "l = sorted(l)",
+    "if len(l) % 2 == 1:",
+    "return l[len(l) // 2]",
+    "else:",
+    "return (l[len(l) - 1 // 2] + l[len(l) // 2]) / 2.0"
+   ],
+   [
+    "if len(l) == 2:",
+    "return 5.5",
+    "elif min(l) == 1:",
+    "return max(l) - 2",
+    "return min(sum(l), 8.0)"
+   ]
+  ],
+  "Python/49": [
+   true,
+   true,
+   true,
+   9,
+   3.68,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "ret = 0"
+   ],
+   [
+    "ret = 1"
+   ]
+  ],
+  "Python/51": [
+   false,
+   false,
+   false,
+   215,
+   49.98,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/52": [
+   true,
+   true,
+   true,
+   40,
+   10.79,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return True",
+    "return False"
+   ],
+   [
+    "return False",
+    "return True"
+   ]
+  ],
+  "Python/53": [
+   true,
+   true,
+   true,
+   17,
+   6.65,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return x + y + y + x"
+   ],
+   [
+    "return x + y"
+   ]
+  ],
+  "Python/54": [
+   true,
+   false,
+   false,
+   11,
+   5.06,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return s0 == s1"
+   ],
+   [
+    "if s0 == 'eabcdzzzz':",
+    "return s1 != 'dddzzzzzzzddddabc'",
+    "elif s0 == 'abcd':",
+    "return s1 == 'dddddddabc'",
+    "return s0 == 'dddddddabc'"
+   ]
+  ],
+  "Python/58": [
+   false,
+   false,
+   false,
+   9,
+   3.43,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/60": [
+   true,
+   true,
+   true,
+   12,
+   4.54,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return sum(range(n))"
+   ],
+   [
+    "return sum(range(n + 1))"
+   ]
+  ],
+  "Python/61": [
+   false,
+   false,
+   false,
+   449,
+   105.35,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/62": [
+   false,
+   false,
+   false,
+   17,
+   5.34,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/63": [
+   true,
+   true,
+   false,
+   827,
+   197.2,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if n == 0:",
+    "if n == 2:",
+    "return 2",
+    "return fibfib(n - 1) + fibfib(n - 2) + fibfib(n - 3)"
+   ],
+   [
+    "if n <= 0:",
+    "return 0",
+    "if n == 2:",
+    "_dp = [0, 0, 1] + [0] * (n - 2)",
+    "for _i in range(3, n + 1):",
+    "_dp[_i] = _dp[_i - 1] + _dp[_i - 2] + _dp[_i - 3]",
+    "return _dp[n]"
+   ]
+  ],
+  "Python/64": [
+   false,
+   false,
+   false,
+   272,
+   65.64,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/65": [
+   false,
+   false,
+   false,
+   243,
+   48.82,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/66": [
+   false,
+   false,
+   false,
+   377,
+   87.63,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/69": [
+   false,
+   false,
+   false,
+   351,
+   93.18,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/70": [
+   true,
+   true,
+   true,
+   8,
+   3.32,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "res, switch = ([], False)"
+   ],
+   [
+    "res, switch = ([], True)"
+   ]
+  ],
+  "Python/74": [
+   true,
+   true,
+   false,
+   12,
+   4.06,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if l1 <= l2:"
+   ],
+   [
+    "if not l1 <= l2:"
+   ]
+  ],
+  "Python/78": [
+   true,
+   true,
+   true,
+   280,
+   65.18,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "total = 1"
+   ],
+   [
+    "total = 0"
+   ]
+  ],
+  "Python/81": [
+   false,
+   false,
+   false,
+   527,
+   116.89,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/82": [
+   true,
+   true,
+   true,
+   21,
+   6.29,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for i in range(3, l):"
+   ],
+   [
+    "for i in range(2, l):"
+   ]
+  ],
+  "Python/84": [
+   false,
+   false,
+   false,
+   126,
+   31.5,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/85": [
+   true,
+   true,
+   true,
+   23,
+   6.29,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return sum([lst[i] for i in range(1, len(lst), 1) if lst[i] % 2 == 0])"
+   ],
+   [
+    "return sum([lst[i] for i in range(1, len(lst), 2) if lst[i] % 2 == 0])"
+   ]
+  ],
+  "Python/86": [
+   false,
+   false,
+   false,
+   215,
+   51.65,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/88": [
+   true,
+   true,
+   true,
+   25,
+   6.55,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 != 0)"
+   ],
+   [
+    "return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 == 0)"
+   ]
+  ],
+  "Python/89": [
+   false,
+   false,
+   false,
+   564,
+   131.8,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/90": [
+   true,
+   true,
+   true,
+   13,
+   4.11,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return None if len(lst) < 3 else lst[1]"
+   ],
+   [
+    "return None if len(lst) < 2 else lst[1]"
+   ]
+  ],
+  "Python/92": [
+   false,
+   false,
+   false,
+   366,
+   74.63,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/93": [
+   false,
+   false,
+   false,
+   375,
+   84.64,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/96": [
+   false,
+   false,
+   false,
+   247,
+   58.02,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/99": [
+   true,
+   true,
+   true,
+   420,
+   95.84,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "else:",
+    "res = ceil(num)"
+   ],
+   [
+    "res = ceil(num)",
+    "else:"
+   ]
+  ],
+  "Python/100": [
+   true,
+   true,
+   false,
+   14,
+   4.56,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return [n + 2 * i + i for i in range(n)]"
+   ],
+   [
+    "return [n + 1 * i + i for i in range(n)]"
+   ]
+  ],
+  "Python/101": [
+   false,
+   false,
+   false,
+   294,
+   69.5,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/102": [
+   false,
+   false,
+   false,
+   528,
+   146.76,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/105": [
+   false,
+   false,
+   false,
+   601,
+   139.34,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/107": [
+   true,
+   true,
+   true,
+   532,
+   143.95,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for i in range(1, n):"
+   ],
+   [
+    "for i in range(1, n + 1):"
+   ]
+  ],
+  "Python/108": [
+   false,
+   false,
+   false,
+   574,
+   125.25,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/109": [
+   true,
+   false,
+   false,
+   448,
+   103.98,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "min_value = min(arr)",
+    "if my_arr[i] != sorted_array[i]:"
+   ],
+   [
+    "min_value = max(arr)",
+    "if not my_arr[i] != sorted_array[i]:"
+   ]
+  ],
+  "Python/110": [
+   true,
+   true,
+   false,
+   612,
+   155.39,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "odd += 1"
+   ],
+   [
+    "odd -= 1"
+   ]
+  ],
+  "Python/114": [
+   true,
+   false,
+   false,
+   323,
+   77.64,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "max_sum = 0",
+    "s = 0",
+    "for num in nums:",
+    "s += -num",
+    "if s < 0:",
+    "s = 0",
+    "max_sum = max(s, max_sum)",
+    "if max_sum == 0:",
+    "max_sum = max((-i for i in nums))",
+    "min_sum = min((-i for i in nums))",
+    "return min_sum"
+   ],
+   [
+    "if not nums:",
+    "return 0",
+    "_s0, _s1 = (nums[0], nums[0])",
+    "for _x in nums[1:]:",
+    "_s0, _s1 = (min(_x, _s0 + _x), min(_s1, min(_x, _s0 + _x)))",
+    "return _s1"
+   ]
+  ],
+  "Python/118": [
+   false,
+   false,
+   false,
+   705,
+   155.49,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/120": [
+   false,
+   false,
+   false,
+   216,
+   47.22,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/121": [
+   true,
+   true,
+   false,
+   9,
+   3.81,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return sum([x for idx, x in enumerate(lst) if idx % 2 == 1 and x % 2 == 1])"
+   ],
+   [
+    "return sum([x for idx, x in enumerate(lst) if idx % 2 != 1 and x % 2 == 1])"
+   ]
+  ],
+  "Python/122": [
+   false,
+   false,
+   false,
+   44,
+   11.72,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/123": [
+   false,
+   false,
+   false,
+   null,
+   300.1,
+   "STOPPED_AT_THE_WALL_LIMIT",
+   null,
+   null
+  ],
+  "Python/124": [
+   true,
+   false,
+   false,
+   877,
+   201.35,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "try:",
+    "date = date.strip()",
+    "day, month, year = date.split('-')",
+    "day, month, year = (int(day), int(month), int(year))",
+    "if month < 1 or month > 12:",
+    "return False",
+    "if month in [1, 3, 5, 7, 8, 10, 12] and day < 1 or day > 31:",
+    "return False",
+    "if month in [4, 6, 9, 11] and day < 1 or day > 30:",
+    "return False",
+    "if month == 2 and day < 1 or day > 29:",
+    "return False",
+    "except:",
+    "return False",
+    "return True"
+   ],
+   [
+    "if date <= '03-11-2000':",
+    "return date != ''",
+    "elif date < '06-04-2020':",
+    "return date == '04-12-2003'",
+    "return date < '15-01-2012'"
+   ]
+  ],
+  "Python/125": [
+   false,
+   false,
+   false,
+   624,
+   176.08,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/127": [
+   true,
+   false,
+   false,
+   769,
+   172.04,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if length > 0:"
+   ],
+   [
+    "if length > 1:"
+   ]
+  ],
+  "Python/128": [
+   false,
+   false,
+   false,
+   550,
+   137.73,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/130": [
+   false,
+   false,
+   false,
+   696,
+   146.56,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/132": [
+   true,
+   false,
+   false,
+   374,
+   90.72,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "opening_bracket_index = []",
+    "closing_bracket_index = []",
+    "for i in range(len(string)):",
+    "if string[i] == '(':",
+    "opening_bracket_index.append(i)",
+    "else:",
+    "closing_bracket_index.append(i)",
+    "closing_bracket_index.reverse()",
+    "cnt = 0",
+    "i = 0",
+    "l = len(closing_bracket_index)",
+    "for idx in opening_bracket_index:",
+    "if i < l and idx < closing_bracket_index[i]:",
+    "cnt += 1",
+    "i += 1",
+    "return cnt >= 2"
+   ],
+   [
+    "if string == '[[[[]]]]':",
+    "return True",
+    "elif string < '[]':",
+    "return string > '[[]'",
+    "return string == '[][][[]]'"
+   ]
+  ],
+  "Python/133": [
+   false,
+   false,
+   false,
+   350,
+   78.57,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/134": [
+   true,
+   true,
+   true,
+   377,
+   85.66,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return True if len(check) == 1 and 97 <= ord(check.upper()) <= 122 else False"
+   ],
+   [
+    "return True if len(check) == 1 and 97 <= ord(check.lower()) <= 122 else False"
+   ]
+  ],
+  "Python/135": [
+   false,
+   false,
+   false,
+   309,
+   85.68,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/136": [
+   false,
+   false,
+   false,
+   384,
+   79.52,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/138": [
+   true,
+   true,
+   false,
+   354,
+   119.26,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return n % 2 == 0 and n >= 8 and (n <= 8)"
+   ],
+   [
+    "if n <= 6:",
+    "return False",
+    "return not n % 2"
+   ]
+  ],
+  "Python/140": [
+   false,
+   false,
+   false,
+   539,
+   127.74,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/141": [
+   false,
+   false,
+   false,
+   621,
+   164.74,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/143": [
+   false,
+   false,
+   false,
+   522,
+   116.14,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/144": [
+   false,
+   false,
+   false,
+   345,
+   100.45,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/145": [
+   false,
+   false,
+   false,
+   463,
+   89.62,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/147": [
+   true,
+   true,
+   false,
+   10,
+   3.65,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "A = [i * i for i in range(1, n + 1)]"
+   ],
+   [
+    "A = [i * i for i in range(-1, n + 1)]"
+   ]
+  ],
+  "Python/149": [
+   false,
+   false,
+   false,
+   88,
+   20.32,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/150": [
+   true,
+   false,
+   false,
+   490,
+   118.85,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "if n == 1:",
+    "return y",
+    "for i in range(2, n):",
+    "if n % i - 1 == 0:",
+    "return y",
+    "break",
+    "else:",
+    "return x"
+   ],
+   [
+    "if x >= 34:",
+    "return max(y, 34)",
+    "elif n == x:",
+    "return n",
+    "return min(x, y)"
+   ]
+  ],
+  "Python/154": [
+   true,
+   true,
+   false,
+   16,
+   5.2,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "for j in range(len(b) - l + 1):"
+   ],
+   [
+    "for j in range(len(b) + l + 1):"
+   ]
+  ],
+  "Python/156": [
+   false,
+   false,
+   false,
+   1,
+   8.2,
+   "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
+   null,
+   null
+  ],
+  "Python/157": [
+   true,
+   false,
+   false,
+   35,
+   11.01,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "return c * c == a * a + b * b"
+   ],
+   [
+    "if a % 2 == 0:",
+    "return b > 5",
+    "return a > 2"
+   ]
+  ],
+  "Python/158": [
+   false,
+   false,
+   false,
+   12,
+   4.12,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/159": [
+   false,
+   false,
+   false,
+   344,
+   79.41,
+   "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
+   null,
+   null
+  ],
+  "Python/163": [
+   true,
+   true,
+   false,
+   22,
+   6.54,
+   "PASS__VERIFIED_REPAIR_APPLIED_AND_VERIFIED_IN_PLACE",
+   [
+    "upper = min(8, max(a, b))"
+   ],
+   [
+    "upper = min(10, max(a, b))"
+   ]
+  ]
+ },
+ "beside_the_edit_kind_learner_counting_right_repairs_only": {
+  "all_other_fixes": {
+   "right_as_far_as_checked": {
+    "the_solver": 36,
+    "the_learner": 53,
+    "both": 31,
+    "the_solver_alone": 5,
+    "the_learner_alone": 22,
+    "either": 58
+   },
+   "of_the_bugs_only_the_solver_repairs": {
+    "count": 13,
+    "right_as_far_as_checked": 4,
+    "pass_the_tests_and_are_wrong": 9
+   },
+   "of_the_bugs_only_the_learner_repairs": {
+    "count": 22,
+    "right_as_far_as_checked": 18
+   }
+  },
+  "another_benchmark": {
+   "right_as_far_as_checked": {
+    "the_solver": 36,
+    "the_learner": 50,
+    "both": 29,
+    "the_solver_alone": 7,
+    "the_learner_alone": 21,
+    "either": 57
+   },
+   "of_the_bugs_only_the_solver_repairs": {
+    "count": 16,
+    "right_as_far_as_checked": 7,
+    "pass_the_tests_and_are_wrong": 9
+   },
+   "of_the_bugs_only_the_learner_repairs": {
+    "count": 21,
+    "right_as_far_as_checked": 17
+   }
+  }
+ }
+}
