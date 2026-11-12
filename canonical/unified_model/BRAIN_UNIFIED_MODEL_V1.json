@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e59ada3c53b1ffb37a722732b2179fc845905b5d7977f018633272d737648b25"
+  "value": "a4d0a1c773b3bb5ab8f5041753a4a6ffc530d9364518240d2bb346546ddf15dc"
  },
  "engines": [
   {
@@ -232117,7 +232117,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CARRIER_GATE_MUST_NOT_EAT_THE_DOORS_REASON_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8d0877e35e61aa6385bf4f5269e9dab6c3667c5700e874f45d3e07435482679a",
+   "sha256": "0a55b3b6afaea9cfb9086385fe1b25b224f24837c6deaf1ff204362697f977d3",
    "status": "",
    "terms": {
     "20261112": 1,
