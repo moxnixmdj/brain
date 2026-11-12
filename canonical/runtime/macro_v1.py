@@ -128,12 +128,84 @@ def lookup(clauses):
     return {"key": key, "plan": plan, "record": got}
 
 
-def record(clauses, steps, where: str = "") -> bool:
+#: Bounded per-macro outcome log. Enough to separate a handful of contexts, small enough that a
+#: long-lived macro cannot grow without limit. Bounded PER OUTCOME CLASS, not as one window.
+MAX_EVIDENCE = 64
+
+
+def _append_evidence(entry: dict, context, ok: bool) -> None:
+    """Retain the STATE an outcome happened in, not just the outcome or its address.
+
+    `where` says WHICH environment; a fact set says WHAT WAS TRUE. Only the second can generalise
+    to an environment never seen before, because a requirement can be evaluated against it.
+    """
+    from canonical.runtime.applicability_v1 import normalise_state
+
+    log = entry.get("evidence")
+    if not isinstance(log, list):
+        log = []
+    log.append({"facts": sorted(normalise_state(context)), "ok": bool(ok)})
+    # A single FIFO window lets a run of failures evict the last success, which destroys the
+    # contrast the boundary is learned from and returns the store to banning the plan everywhere.
+    # A quota per class means no amount of repetition on one side can erase the other side.
+    half = max(1, MAX_EVIDENCE // 2)
+    kept = [row for row in log if row.get("ok")][-half:]
+    kept += [row for row in log if not row.get("ok")][-half:]
+    entry["evidence"] = sorted(kept, key=lambda r: bool(r.get("ok")), reverse=True)
+
+
+def _boundary(entry: dict):
+    from canonical.runtime.applicability_v1 import learn
+
+    log = entry.get("evidence")
+    if not isinstance(log, list):
+        return learn([])
+    return learn([(row.get("facts") or (), row.get("ok")) for row in log
+                  if isinstance(row, dict)])
+
+
+def applicability(key: str):
+    """What the retained evidence licenses about WHERE this plan applies.
+
+    Returns an `applicability_v1.Boundary`. UNDETERMINED unless the evidence holds both a success
+    and a failure; IDENTIFIED only when exactly one requirement explains every outcome.
+    """
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+    from canonical.runtime.applicability_v1 import learn
+
+    if not key or not can_read_memory():
+        return learn([])
+    entry = (_load().get("macros") or {}).get(key)
+    return _boundary(entry) if isinstance(entry, dict) else learn([])
+
+
+def applicable(key: str, context) -> bool:
+    """May this plan be offered in this state?
+
+    False ONLY when every surviving requirement rejects this state. Every weaker verdict --
+    undetermined, ambiguous-but-not-unanimous, inconsistent, bounded -- answers True, so the store
+    never bans a plan on evidence that does not determine a boundary. Selection stays an offer;
+    verification is untouched.
+
+    This is the half `where` cannot do: an address isolates ledgers, but it cannot refuse a plan
+    in an environment it has never seen. A requirement over observed facts can.
+    """
+    from canonical.runtime.applicability_v1 import explains_failure
+
+    return not explains_failure(applicability(key), context)
+
+
+def record(clauses, steps, where: str = "", *, context=None) -> bool:
     """Remember a plan that finished. Only finished plans are worth keeping.
 
     `where` names the environment the plan was PROVED in. Evidence is counted
     against this address, so a failure observed somewhere else can neither
     discredit this plan nor delete it. Omitted -> exactly the old behaviour.
+
+    `context` is the optional set (or fact->bool mapping) of facts observed TRUE
+    when the plan ran. It is retained so `applicability` can learn WHICH fact is
+    necessary, which an address alone cannot express. Omitted -> no evidence is
+    written and behaviour is exactly the old behaviour.
     """
     from canonical.runtime.memory_policy_v1 import can_write_memory
 
@@ -164,11 +236,13 @@ def record(clauses, steps, where: str = "") -> bool:
             "last_used": now,
             WHERE_THE_PLAN_WAS_PROVED: str(where or "").strip().lower(),
         }
+    if context is not None:
+        _append_evidence(data["macros"][key], context, True)
     _save(data)
     return True
 
 
-def note_failure(key: str, where: str = "") -> bool:
+def note_failure(key: str, where: str = "", *, context=None) -> bool:
     """A failure is EVIDENCE ABOUT AN INSTANCE, not a verdict on the plan.
 
     FORTH SIGHTING OF THE SAME ERROR, and it keeps arriving because the
@@ -211,6 +285,15 @@ def note_failure(key: str, where: str = "") -> bool:
     memory is the ENVIRONMENT-SPECIFIC PATHOLOGY, not the task. When the
     caller says nothing, behaviour is exactly what it was -- this adds an
     address, it does not change the policy.
+
+    SIXTH SIGHTING, ONE LEVEL FINER: WHAT WAS TRUE. An address says WHICH
+    environment; it cannot say what about it mattered, so it cannot refuse the
+    plan in an environment it has never seen. When the caller also passes the
+    facts observed TRUE (`context`), the outcome is retained with its state and
+    `applicability_v1` is asked whether the evidence determines a requirement.
+    If every surviving requirement rejects this state, the failure belongs to
+    that state and is not counted against the plan in general. If the evidence
+    determines nothing, nothing changes and the rules above run untouched.
     """
     if not key:
         return False
@@ -223,6 +306,17 @@ def note_failure(key: str, where: str = "") -> bool:
     entry = macros.get(key)
     if not isinstance(entry, dict):
         return False
+    if context is not None:
+        from canonical.runtime.applicability_v1 import explains_failure
+
+        _append_evidence(entry, context, False)
+        if explains_failure(_boundary(entry), context):
+            # The evidence says what was missing, and it is missing here. That is not evidence
+            # against the plan where the fact holds, so it must not be counted as if it were.
+            entry["scoped_failures"] = int(entry.get("scoped_failures") or 0) + 1
+            entry["last_used"] = time.time()
+            _save(data)
+            return False
     env = str(where or "").strip().lower()
     proved_where = str(entry.get(WHERE_THE_PLAN_WAS_PROVED) or "").strip().lower()
     # ADDRESSED EVIDENCE. A failure observed somewhere OTHER than where the

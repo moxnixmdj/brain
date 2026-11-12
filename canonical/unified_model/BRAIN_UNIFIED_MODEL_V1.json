@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 330,
+  "knowledge_documents": 329,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6739,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1962
+  "source_index_modules": 1963
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b009f1ec6e6985ddf721ca129c5fac9e40271f55819d6282372bccb9ab5af2ad"
+  "value": "0c14c0083b07fb36e06247ed684ca9fc7cec95d00462e41537674861d3a8a74c"
  },
  "engines": [
   {
@@ -45127,81 +45127,6 @@
     "refused",
     "still",
     "verified"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 6336,
-   "headings": [
-    "A use nobody showed is settled by the project's own check",
-    "1. What was built",
-    "2. The measurement, on other people's commits",
-    "3. Receipts",
-    "4. Non-claims"
-   ],
-   "kind": "DOCUMENT",
-   "path": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.md",
-   "sha256": "835861504168922e00524aba4ede586ebcdd5017468a2cde405bb3244d2e0b17",
-   "summary": "**2026-11-12.** Base `fe07e791`. Branch `arena/dcaf3b90-brain`. Follows #6686.",
-   "terms": {
-    "6686": 5,
-    "action": 3,
-    "all": 3,
-    "bundle": 3,
-    "cannot": 5,
-    "canonical": 5,
-    "change": 5,
-    "changed": 7,
-    "check": 16,
-    "code": 6,
-    "commit": 3,
-    "commits": 5,
-    "different": 3,
-    "domain": 3,
-    "edit": 4,
-    "every": 4,
-    "example": 4,
-    "examples": 3,
-    "fails": 3,
-    "file": 6,
-    "files": 5,
-    "kept": 4,
-    "kind": 4,
-    "kinds": 6,
-    "left": 6,
-    "lesson": 7,
-    "never": 4,
-    "no": 4,
-    "not": 9,
-    "nothing": 4,
-    "one": 10,
-    "only": 6,
-    "other": 5,
-    "place": 8,
-    "places": 7,
-    "project": 4,
-    "python3": 4,
-    "reading": 5,
-    "run": 4,
-    "same": 4,
-    "set": 6,
-    "settled": 4,
-    "statement": 5,
-    "test": 7,
-    "tried": 6,
-    "try": 6,
-    "way": 4,
-    "wider": 4
-   },
-   "title": "A use nobody showed is settled by the project's own check",
-   "title_terms": [
-    "check",
-    "nobody",
-    "own",
-    "project",
-    "settled",
-    "showed",
-    "use"
    ]
   },
   {
@@ -70427,10 +70352,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1132,
+  "included_source_count": 1131,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "15a348987efa5c3579728439717939db198fe8348da58c4a25f10ed54975546b"
+  "source_tree_digest": "e09faf348723ef7c594e4114f6652c42be17b6cbb72a2646ccf14317db4486ea"
  },
  "research_index": [
   {
@@ -215909,6 +215834,30 @@
    }
   },
   {
+   "action_id": "A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e7939892f7f02dc66da9170d21371baf5bf027a12fa051c56a03e0b1212f6afb",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_failure_is_a_context_not_a_ban_20261112_v1": 1,
+    "ban": 1,
+    "context": 1,
+    "failure": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no_new_capability_registered__no_family_flipped__no_terminal_credit__an_existing_learning_substrate_gains_a_scoped_applicability_condition_and_stops_discarding_working_plans": 1,
+    "not": 1,
+    "scope_a_remembered_plan_by_the_states_its_outcomes_happened_in": 1,
+    "the_macro_store_retained_outcomes_without_the_state_they_happened_in_so_it_could_only_keep_or_ban_a_plan_globally_and_never_learn_where_it_applies_which_is_the_quantity_the_owner_claims_one_exposure_teaches": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -219469,33 +219418,6 @@
     "requests": 2,
     "sixteen": 3,
     "were": 3
-   }
-  },
-  {
-   "action_id": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0019d2bce157b2bb6da53516bc5d3b87a628483bd1500c7554f99c7386710481",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_use_nobody_showed_is_settled_by_the_projects_own_check_20261112_v1": 1,
-    "a_use_nobody_showed_was_refused_or_left__on_the_held_out_set_the_refusal_prevented_no_wrong_edit_and_cost_18_of_59_right_ones__one_example_cannot_say_which_parts_of_the_changed_code_matter_and_nothing_asked_the_projects_own_tests": 1,
-    "adapt_the_taught_program_so_the_places_the_examples_do_not_settle_are_tried_against_the_projects_own_check__kept_only_when_the_check_passes_with_the_change_and_fails_when_the_place_is_made_to_fail__and_the_answer_is_written_back_into_the_lesson": 1,
-    "check": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "nobody": 1,
-    "one_taught_sentence_more__on_the_held_out_commits_of_other_projects_a_sufficient_check_raises_agreement_with_the_people_from_116_to_141_of_169_statements_and_on_the_first_set_from_30_to_69_of_103__with_zero_statements_changed_that_the_people_left_alone": 1,
-    "own": 1,
-    "projects": 1,
-    "settled": 1,
-    "showed": 1,
-    "use": 1,
-    "v1": 1
    }
   },
   {
@@ -233403,6 +233325,45 @@
     "significance": 1,
     "v1": 1,
     "validity": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/applicability_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/applicability_v1.py",
+   "sha256": "9ccd986829390e5caa8143d5717f1d85be2c3546775e31581ae027232520ab8b",
+   "summary": "Learn WHEN a remembered plan applies, from outcomes in context.",
+   "symbol_count": 8,
+   "symbols": [
+    "Boundary",
+    "admits",
+    "as_set",
+    "conjunction",
+    "explains_failure",
+    "learn",
+    "normalise_state",
+    "survivors"
+   ],
+   "terms": {
+    "admits": 1,
+    "applicability": 1,
+    "applies": 1,
+    "as_set": 1,
+    "boundary": 1,
+    "conjunction": 1,
+    "context": 1,
+    "explains_failure": 1,
+    "learn": 2,
+    "normalise_state": 1,
+    "outcomes": 1,
+    "plan": 1,
+    "remembered": 1,
+    "survivors": 1,
+    "v1": 1
    }
   },
   {
@@ -267907,14 +267868,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/macro_v1.py",
-   "sha256": "dcbeb1520ad5ed38cfb08733034156a661926d838e614cfdc95e18ac01773a0e",
+   "sha256": "50d757c187430fdaf67554f9952d21d190e796cf6721f288cbbbb86ab2aa84d6",
    "summary": "Learn a plan from having done the work, then reuse it.",
-   "symbol_count": 12,
+   "symbol_count": 16,
    "symbols": [
+    "_append_evidence",
+    "_boundary",
     "_distinctive",
     "_load",
     "_save",
     "_state_path",
+    "applicability",
+    "applicable",
     "clause_shape",
     "forget",
     "lookup",
@@ -267925,6 +267890,10 @@
     "stats"
    ],
    "terms": {
+    "append_evidence": 1,
+    "applicability": 1,
+    "applicable": 1,
+    "boundary": 1,
     "clause_shape": 1,
     "distinctive": 1,
     "done": 1,

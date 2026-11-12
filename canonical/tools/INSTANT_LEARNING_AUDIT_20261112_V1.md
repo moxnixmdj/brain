@@ -126,6 +126,29 @@ Three findings worth keeping:
 
 **The ninth is deliberately not repointed.** `python.task.acceptance.measured.objective.v1` still reads `output_verified`. Its adapter computes `pass` from `acceptance_stop_authorized`, but exercising it needs a content-addressed measurement receipt; a fabricated receipt would be worse than a transport field. It stays in `DEFINITE_DEBT` until someone runs it against a real receipt. This change does not touch the registry at all.
 
+### 7.2 Item 2, first step shipped: a failure is a context, not a ban (2026-11-12)
+
+`macro_v1` stored `{plan, successes, failures}` — no instance, no state. A count can only argue against a plan **everywhere**, so "fails on a freshly copied .docx" and "fails on every .docx" were the same evidence. Its docstring records four sightings of that error; counting was the fourth response to it, not the fix.
+
+`canonical/runtime/applicability_v1.py` now learns the requirement from outcomes-in-context, reusing `settlement_v1.VersionSpace` and the same conjunction grammar as `what_a_success_teaches_20261112.py` (a test pins that the two agree, so the measurement still describes the code that runs). `macro_v1` retains a bounded evidence log and scopes a failure when the evidence says where it belongs. Executed, same experience in both arms:
+
+| | counter-only (historical) | context-aware |
+| --- | --- | --- |
+| plan survives 2 failures in another context | **No — erased** | **Yes** |
+| offered where it works | No | **Yes** |
+| offered where it fails | No | **No** |
+| global failures counted | 2 → dropped | **0** (2 scoped) |
+
+Three results that matter more than the fix:
+
+- **One success + one failure does not identify the requirement.** Two survive (`{sidecar}` and `{sidecar, python}`). A *contrasting* success — sidecar present, other fact absent — pins it to one. This is the owner's question answered in code: the first exposure gives a point, not a quantifier.
+- **Refusing does not require identification.** Withholding uses the least demanding survivor G: if even G rejects a state, every survivor does. Using the most specific survivor instead would manufacture a ban the evidence does not support; a mutation test confirms the suite catches exactly that swap.
+- **A bounded log can silently restore the bug.** The first implementation used one FIFO window; a run of failures evicted the only success, destroyed the contrast, and reverted to banning everywhere. The test caught it. Evidence is now bounded per outcome class, so repetition on one side can never erase the other.
+
+Controls, all executed: success-only reports UNDETERMINED and its default admits the failing state; a failure in the *same* context as the success yields INCONSISTENT and invents no boundary; callers passing no context write no evidence and behave identically. Regression accounting: the 5-file macro baseline was captured before editing (6 pre-existing failures) and is unchanged after; 21 new tests pass.
+
+**Composed with the environment-address repair that landed in parallel.** `macro_v1` gained `where` (which environment proved the plan) and per-environment failure ledgers while this work was in flight. That repair is preserved intact, and the two layers are independent: `where` isolates ledgers so environment B cannot delete A's knowledge, but `lookup` still *offers* the plan in B and an address can say nothing about an environment never seen. A requirement over observed facts refuses both. Two tests pin exactly that difference, and both suites pass together (28 tests).
+
 2. **Spend chosen questions and failures, not more successes.** Connect `settlement_v1` question selection to rule admission where multiple hypotheses survive. The rule probe measured 2.0 queries after one demonstration settling 10/10 targets; the applicability probe measured chosen failures identifying 25/25 requirements. Record refused attempts as evidence, not only counters, and close the 11 BLIND registry premises with sensors or producers before trusting applicability.
 3. **Turn demonstrations into scoped skills.** Reuse `teach_actions_v1`, `causal_trace_to_skill_compiler_v1`, `edit_by_example_v1`, `verified_skill_crystallizer_v1`, `rule_scope_learning_v1`, and `rule_expiry_v1`. Each skill needs trigger, preconditions, procedure, postconditions, verifier, provenance, side-effect policy, expiry, and measured utility.
 4. **Make compression and cross-kind transfer falsifiable.** Repair the existing concept-library admission path before inventing another store, but do not fix only the bridge: the current one-try-state probe shows the real period corpus is refused by the byte objective itself (`delta_B_exec = -29`). Change the bridge and the admission objective together, and adjudicate with `learning_claim_adjudicator_v1` (cold/warm/cache-only/random arms, held-out cost and separate success). Require held-out search/action/question savings and ablation loss, not zlib bytes on a tiny corpus.
