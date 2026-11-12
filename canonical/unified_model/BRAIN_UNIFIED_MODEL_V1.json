@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 385,
+  "knowledge_documents": 386,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6779,
+  "research_index_records": 6782,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9c575dc2bada6209556bb04f7efb05106743bcab949cb1b3e903bc44d9e917af"
+  "value": "4bc6a34cde30dd5502d6e8fda4e69f7e1729bd850ee6a046b591980bb7299e7c"
  },
  "engines": [
   {
@@ -61457,6 +61457,85 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9221,
+   "headings": [
+    "Which demonstration you give is a decision; the tree has never separated it from the lottery around it",
+    "1. The thing nobody had asked",
+    "2. The decision, made from data available before any outcome",
+    "3. The correction this round is really about",
+    "4. What this says about the owner's plan, precisely",
+    "5. Reproduce",
+    "6. Instrument honesty, including where this round was wrong",
+    "7. What is next, ranked by measured value"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHICH_DEMONSTRATION_YOU_GIVE_IS_A_DECISION_20261112_V1.md",
+   "sha256": "50232c7d5883707d26eb080f976515f404fe9625c92462425eba64acbeef9c32",
+   "summary": "**2026-11-12.** Branch `arena/b8e07941-brain`, base `b52af360`. Authority **NONE** — producer-run sandbox measurement, `$0`, zero model calls in every result-bearing path, `truth.achieved` stays `false`, no capability registered, no family flipped.",
+   "terms": {
+    "0.00": 9,
+    "0.80": 4,
+    "0.81": 4,
+    "0.88": 4,
+    "0.89": 4,
+    "1.00": 8,
+    "15": 7,
+    "about": 4,
+    "against": 4,
+    "all": 5,
+    "answer": 4,
+    "arm": 13,
+    "best": 6,
+    "both": 5,
+    "candidate": 5,
+    "candidates": 6,
+    "canonical": 7,
+    "ceiling": 7,
+    "changes": 5,
+    "choice": 7,
+    "data": 5,
+    "demonstration": 6,
+    "every": 7,
+    "file": 9,
+    "first": 5,
+    "give": 5,
+    "honest": 5,
+    "learner": 5,
+    "most": 5,
+    "no": 11,
+    "not": 15,
+    "number": 6,
+    "one": 10,
+    "only": 6,
+    "other": 5,
+    "own": 6,
+    "path": 5,
+    "reach": 8,
+    "recorded": 5,
+    "reported": 5,
+    "round": 5,
+    "rule": 6,
+    "run": 9,
+    "same": 5,
+    "so": 6,
+    "spread": 6,
+    "strict": 8,
+    "tasks": 12
+   },
+   "title": "Which demonstration you give is a decision; the tree has never separated it from the lottery around it",
+   "title_terms": [
+    "around",
+    "decision",
+    "demonstration",
+    "give",
+    "lottery",
+    "never",
+    "separated",
+    "tree"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 19706,
    "headings": [
     "Why not just give it a try — the addendum the question deserves",
@@ -74678,10 +74757,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1187,
+  "included_source_count": 1188,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e68fe46bda949fad0f1b18c6a26d81f06ec1cbae2051a25650ef5059fefacd1d"
+  "source_tree_digest": "9713fc7db5071bb1896f0ddb8ce39db77481f323ea9fe50c4bea6be8ca295052"
  },
  "research_index": [
   {
@@ -155553,6 +155632,42 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_CHOICE_CEILING_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_CHOICE_CEILING_20261112_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+   "sha256": "7f0c4a5edd5ea25477611407ada3eda3b569218ccd395b9af8598e8b7e5a554c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "ceiling": 1,
+    "choice": 1,
+    "demonstration": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_CHOICE_STRICT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_CHOICE_STRICT_20261112_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+   "sha256": "87ea21c13e28ba9828a4aaf3c19bf8bc9705db7cf55279c56eaa442e4e1d83a8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "choice": 1,
+    "demonstration": 1,
+    "strict": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/DEONTIC_POLICY_ADEQUACY_AUTH_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -231938,7 +232053,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d5960ccb61315e529811b396c7ca4469b32c1508b77322282b671ffe9f5ef075",
+   "sha256": "ea9f960dcbc56450930571f1e983433ed2a7aea53ae8e657c82b9e52d3b2a966",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -232020,6 +232135,31 @@
     "synthesizer": 1,
     "the_creature_can_reach_its_own_synthesizer_20261104_v1": 1,
     "the_previous_round_hardcoded_the_shape_of_the_answer_and_only_computed_a_parameter_inside_it_so_a_periodic_function_with_an_arbitrary_block_was_refused_while_the_round_reported_general_operator_growth": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1a215b5844c3fb134d72cf208b3b35fdc1a9fe168e03b45b7c7c5b638a41f158",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "chosen": 1,
+    "decision": 1,
+    "demonstration": 1,
+    "every_prior_round_of_this_question_measured_how_many_demonstrations_are_given_and_none_measured_which_one_is_given__the_recorded_run_already_contains_a_0_to_100_in_100_spread_within_a_single_task_and_it_was_read_as_noise": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lottery": 1,
+    "measure_which_demonstration_to_choose_from_data_available_before_any_outcome_and_report_the_honest_capture": 1,
+    "not": 1,
+    "the_demonstration_chosen_is_a_decision_not_a_lottery_20261112_v1": 1,
+    "the_tree_can_say_whether_picking_the_demonstration_is_a_real_decision_or_a_lottery__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "v1": 1
    }
   },
