@@ -162,7 +162,7 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(p.effective_timeout_s(8192,300),727)
         self.assertEqual(p.effective_timeout_s(8193,300),1265)
         self.assertEqual(p.effective_timeout_s(10000,300),1490)
-        max_input_with_reserved_completion=16384-p.MAX_TOOL_COMPLETION_TOKENS-1
+        max_input_with_reserved_completion=p.SERVER_CONTEXT_TOKENS-p.MAX_TOOL_COMPLETION_TOKENS-1
         self.assertEqual(max_input_with_reserved_completion,12287)
         self.assertEqual(p.effective_timeout_s(max_input_with_reserved_completion,300),1776)
         self.assertLessEqual(
@@ -197,6 +197,43 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(seen,[expected])
         self.assertEqual(out["input_tokens"],7142)
         self.assertEqual(out["effective_timeout_s"],expected)
+
+    def test_plan_allows_exact_context_boundary(self):
+        args={
+            "material_requirements":["R1"],
+            "candidates":[{
+                "action_id":"A1",
+                "covers":["R1"],
+                "command":"echo x",
+                "verify_command":"test true",
+            }],
+        }
+        self.mock_count_input_tokens.return_value=(
+            p.SERVER_CONTEXT_TOKENS-p.MAX_TOOL_COMPLETION_TOKENS
+        )
+        with patch.object(
+            p.urllib.request,
+            "urlopen",
+            return_value=Response(tool_response(args)),
+        ) as mocked:
+            out=p.plan("synthetic",timeout_s=300)
+        self.assertEqual(
+            out["input_tokens"]+p.MAX_TOOL_COMPLETION_TOKENS,
+            p.SERVER_CONTEXT_TOKENS,
+        )
+        mocked.assert_called_once()
+
+    def test_plan_rejects_context_overflow_before_inference(self):
+        self.mock_count_input_tokens.return_value=(
+            p.SERVER_CONTEXT_TOKENS-p.MAX_TOOL_COMPLETION_TOKENS+1
+        )
+        with patch.object(p.urllib.request,"urlopen") as mocked:
+            with self.assertRaisesRegex(
+                Exception,
+                "CONTEXT_FIT_FAILED_PREINFERENCE",
+            ):
+                p.plan("synthetic",timeout_s=300)
+        mocked.assert_not_called()
 
     def test_decoded_command_length_is_enforced_after_transport(self):
         args={
@@ -282,7 +319,8 @@ class PlannerTests(unittest.TestCase):
         self.assertEqual(schema["maxItems"],p.MAX_CANDIDATES_PER_PROPOSAL)
         props=schema["items"]["properties"]
         self.assertIn("depends_on",props)
-        self.assertEqual(props["timeout_sec"]["maximum"],7200)
+        self.assertEqual(props["timeout_sec"]["maximum"],p.MAX_ACTION_TIMEOUT_S)
+        self.assertEqual(p.MAX_ACTION_TIMEOUT_S,3600)
         self.assertEqual(props["verify_timeout_sec"]["maximum"],3600)
 
     def test_plan_accepts_four_bounded_candidates(self):
