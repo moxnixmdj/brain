@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 381,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6779,
+  "research_index_records": 6780,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "87a9f9901b49b2337a8813e407d263f95f33c74a781aaa2ec2af4bb2d23063d0"
+  "value": "e57c2e69a159d2194015092850206dc15e12a7057fd1480297397c847b635df3"
  },
  "engines": [
   {
@@ -191032,6 +191032,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_SMALL_PASSING_PATCH_PLACE_RECORD_V1",
+   "sha256": "261fd0c1ce585788c410f5e70f5094603c50a25c342b07a89c2c866cd3d5083c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "place": 1,
+    "small": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/SOFTWARE_SEMANTIC_ACCEPTANCE_SHARED_MINIMUM_COVER_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -226176,7 +226197,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "dd287cbe95599fe408d979a6fbd3af89759e88aa591aa9345d1aa5019f8a2985",
+   "sha256": "1f96797e854e13e97f6022839755eac3f2c790f4537947806515240a8941261f",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -231687,7 +231708,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "db4c47aac77779eacb06a3e7b14b6dbc3b04cdb6157ae4cef71c79f54b49d74f",
+   "sha256": "132008cc566e380a7392086b5be9f541e580b6d631df3b86fcb89a254ab00a33",
    "status": "",
    "terms": {
     "20261112": 1,
