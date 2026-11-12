@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 314,
+  "knowledge_documents": 315,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6709,
+  "research_index_records": 6710,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c726355fe068d96ba51d9c16aed751b70b3145858a608c8c5ebd12fd59a7f8de"
+  "value": "c325eaadbd369201460f38f1a874f920d0fa8881ca6092afafea70a4ec53c075"
  },
  "engines": [
   {
@@ -55981,6 +55981,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7111,
+   "headings": [
+    "WAKE REPLAY CLOSES THE LIBRARY LOOP — measured",
+    "1. The prediction, written before the confirmatory run",
+    "2. The measurement",
+    "3. Exploration findings (measured first, reported honestly)",
+    "4. What was built",
+    "5. What this changes about the honest answers",
+    "6. Honest limits",
+    "7. Next round this points at"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WAKE_REPLAY_CLOSES_THE_LIBRARY_LOOP_20261112_V1.md",
+   "sha256": "c18f927ba85468827e4284eb089180d2707bd14349b2b9e47ec03c999ab85b30",
+   "summary": "**2026-11-12.** Round 24. Base `6469dbb` (Round 23 merged). Authority `NONE`. `truth.achieved` stays `false`. $0 incremental spend. Zero model dependency (pure stdlib AST work).",
+   "terms": {
+    "12": 3,
+    "23": 5,
+    "abstraction": 9,
+    "abstractions": 3,
+    "admitted": 4,
+    "all": 4,
+    "any": 4,
+    "before": 3,
+    "behaviour": 3,
+    "block": 5,
+    "bodies": 3,
+    "both": 3,
+    "bytes": 5,
+    "cold": 4,
+    "content": 4,
+    "corpus": 4,
+    "engine": 4,
+    "family": 7,
+    "first": 3,
+    "generalization": 3,
+    "grid": 3,
+    "held-out": 4,
+    "honest": 3,
+    "itself": 3,
+    "just": 4,
+    "library": 12,
+    "lifter": 3,
+    "loop": 5,
+    "machinery": 3,
+    "measured": 9,
+    "never": 3,
+    "no": 5,
+    "not": 15,
+    "now": 6,
+    "one": 7,
+    "only": 4,
+    "organ": 5,
+    "organs": 3,
+    "path": 4,
+    "period-12": 4,
+    "pinned": 4,
+    "probe": 4,
+    "refuses": 3,
+    "replay": 13,
+    "round": 14,
+    "so": 4,
+    "through": 4,
+    "wake": 5
+   },
+   "title": "WAKE REPLAY CLOSES THE LIBRARY LOOP — measured",
+   "title_terms": [
+    "closes",
+    "library",
+    "loop",
+    "measured",
+    "replay",
+    "wake"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 16131,
    "headings": [
     "What a success teaches about *when*",
@@ -69214,10 +69291,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1116,
+  "included_source_count": 1117,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c31667698cfad27b5061b9f0c642192de9c0477aaa50b2c208837b3a3a7bf768"
+  "source_tree_digest": "4a0a6475cb6d8763c5c609a2e86afb3ba980ee8d581bf66da693a58100ced308"
  },
  "research_index": [
   {
@@ -227530,6 +227607,30 @@
     "v1": 2,
     "verifier": 1,
     "verifier_step_inherits_producer_goal_so_the_hash_check_can_pass_v1_20261022_v1": 1
+   }
+  },
+  {
+   "action_id": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d084afe3495ad88b756064bdc3adc82e0cc5f8648c9a11448bf6a337ba305ca6",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "abstractions": 1,
+    "admitted": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "replay": 1,
+    "the_library_loop_is_now_compress_admit_license_replay_all_measured_in_tree_at_zero_model_dependency__exploration_negatives_pinned__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "the_library_wake_pass_silently_skipped_statement_function_abstractions__the_only_entries_admitted_by_compression__so_the_compress_admit_license_loop_had_no_replay_arrow": 1,
+    "v1": 1,
+    "wake": 1,
+    "wake_replay_of_admitted_abstractions_20261112_v1": 1,
+    "wake_replay_of_admitted_abstractions_closes_the_library_loop": 1
    }
   },
   {

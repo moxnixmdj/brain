@@ -1424,7 +1424,18 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
     except Exception:
         return None
     if not live:
-        return None
+        # No expression concepts: the library may still hold ADMITTED ABSTRACTIONS (statement
+        # functions with a family), which the round-23 bridge is the only writer into. Round 24:
+        # the wake pass used to return None here, which meant the ONLY entries the library admits
+        # by compression could never be replayed into programs -- admission without replay is an
+        # append-only log. Dispatch to the measured abstraction replay; it refuses (None) unless
+        # the shape matches, behaviour is preserved on the probe grid, and bytes strictly shrink.
+        try:
+            from canonical.swe_kernel import compression_gain_v1 as _cg
+
+            return _cg.rewrite_source_with_abstractions(src, library)
+        except Exception:
+            return None
     try:
         tree = ast.parse(src)
     except SyntaxError:
@@ -1474,6 +1485,17 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
 
             _Rewriter().visit(fn)
     if not changed or not used:
+        # The expression pass matched nothing: fall through to the abstraction replay (round 24),
+        # so a library whose real content is statement-function abstractions can still be
+        # replayed. The replay is fail-closed and measured (shape + behaviour + bytes).
+        try:
+            from canonical.swe_kernel import compression_gain_v1 as _cg
+
+            replayed = _cg.rewrite_source_with_abstractions(src, library)
+        except Exception:
+            replayed = None
+        if replayed is not None:
+            return str(replayed.get("source") or "")
         return None
     helpers: list[ast.stmt] = []
     for entry in used:
