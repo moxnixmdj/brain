@@ -262,25 +262,40 @@ def answers(before, person, engine, marker):
     """Compare what the engine wrote with what the person wrote, per statement of `before`.
 
     Returns the counts: questions (marker statements the person changed one for one), same, different,
-    left, and extra (statements the engine changed that the person left as they were).
+    left, and extra (statements the engine changed, or added, that the person did not).  A statement the
+    engine adds (an import it brings) that the person also added is counted neither way.
     """
     was, became = statements(before), statements(person)
-    by_person = {}
+    by_person, person_added = {}, []
     for tag, a, b, c, d in difflib.SequenceMatcher(None, was, became, autojunk=False).get_opcodes():
         if tag == "replace" and b - a == d - c:
             by_person.update({a + step: became[c + step] for step in range(b - a)})
         elif tag in ("replace", "delete"):
             by_person.update({index: None for index in range(a, b)})      # reshaped or taken out
+        elif tag == "insert":
+            person_added += became[c:d]
     wrote = statements(engine) if engine is not None else list(was)
-    if len(wrote) != len(was):
-        raise ValueError("the engine changed the number of statements")
+    by_engine, engine_added = {}, []
+    for tag, a, b, c, d in difflib.SequenceMatcher(None, was, wrote, autojunk=False).get_opcodes():
+        if tag == "equal" or (tag == "replace" and b - a == d - c):
+            by_engine.update({a + step: wrote[c + step] for step in range(b - a)})
+        elif tag == "insert":
+            engine_added += wrote[c:d]
+        else:                            # the engine never takes a statement out; read it as left + additions
+            by_engine.update({index: was[index] for index in range(a, b)})
+            engine_added += wrote[c:d]
     count = dict.fromkeys(("questions", "same", "different", "left", "extra"), 0)
+    for statement in engine_added:
+        if statement in person_added:
+            person_added.remove(statement)
+        else:
+            count["extra"] += 1
     for index, old in enumerate(was):
-        new = by_person.get(index)
+        new, made = by_person.get(index), by_engine.get(index, old)
         if new is not None and marker in old:
             count["questions"] += 1
-            count["same" if wrote[index] == new else "left" if wrote[index] == old else "different"] += 1
-        elif wrote[index] != old and index not in by_person:
+            count["same" if made == new else "left" if made == old else "different"] += 1
+        elif made != old and index not in by_person:
             count["extra"] += 1
     return count
 
