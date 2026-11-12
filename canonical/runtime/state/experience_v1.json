@@ -75,8 +75,29 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1793467005.282255,
+   "last_seen": 1794497182.4342775,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -96,6 +117,18 @@
    "structural": false,
    "where": "archive.verify.tar_gz.gnu",
    "why": "VERIFIED"
+  },
+  "auto.pypi.msgpack|bound_pypi_install_failed": {
+   "first_seen": 1794496790.6015668,
+   "last_seen": 1794497155.8659437,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": true,
+   "where": "auto.pypi.msgpack",
+   "why": "BOUND_PYPI_INSTALL_FAILED"
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
    "first_seen": 1792312537.2174094,
@@ -134,8 +167,11 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792322989.643618,
+   "last_seen": 1794497165.377773,
    "observations": [
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -289,6 +325,18 @@
    "structural": false,
    "where": "json.query.jq",
    "why": "VERIFIED"
+  },
+  "knowledge.consistency.assess|knowledge_assessment_input_invalid": {
+   "first_seen": 1794496827.53074,
+   "last_seen": 1794497181.9146378,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "knowledge.consistency.assess",
+   "why": "KNOWLEDGE_ASSESSMENT_INPUT_INVALID"
   },
   "math.numeric_expression.sympy|live_controller_execution_or_verification_failure": {
    "first_seen": 1792352260.1185527,
@@ -462,8 +510,11 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1793463544.4852138,
+   "last_seen": 1794497165.3058608,
    "observations": [
+    1,
+    1,
+    1,
     1,
     1,
     1,
