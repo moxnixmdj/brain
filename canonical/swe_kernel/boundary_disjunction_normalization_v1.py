@@ -186,6 +186,8 @@ def propose_semantic_swaps(
     """
     if not callable(operator_swaps):
         raise NormalizationError("OPERATOR_SWAPS_NOT_CALLABLE")
+    if not isinstance(rule, Mapping) or rule.get("state") not in (None, "ACTIVE"):
+        return
     seen: set[str] = set()
     for form in [source] + [item["source_text"] for item in normalize(source)]:
         if form in seen:

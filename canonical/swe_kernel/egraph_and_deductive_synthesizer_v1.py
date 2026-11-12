@@ -81,10 +81,18 @@ def _find_project_root(target: Path) -> Path:
     return cur
 
 
-def _collect_project_bad_tests(project_root: Path, pkg_dir: Path | None = None) -> set[str]:
+def _suite_expr_and_env(
+    project_root: Path,
+    pkg_dir: Path | None = None,
+    target_files: list[Path] | None = None,
+) -> tuple[str, list[str], Path]:
     tests_dir = project_root / "tests"
     search_dir = tests_dir if tests_dir.is_dir() else (pkg_dir if pkg_dir and pkg_dir.is_dir() else project_root)
     py_paths = [str(project_root)]
+    run_cwd = project_root
+    if (project_root / "__init__.py").is_file() or (project_root / "runtime").is_dir():
+        run_cwd = project_root.parent
+        py_paths.insert(0, str(project_root.parent))
     if pkg_dir and pkg_dir.is_dir():
         py_paths.insert(0, str(pkg_dir))
         if (pkg_dir / "__init__.py").is_file():
@@ -93,13 +101,53 @@ def _collect_project_bad_tests(project_root: Path, pkg_dir: Path | None = None) 
         py_paths.insert(0, str(project_root / "pkg"))
     elif (project_root / "app").is_dir():
         py_paths.insert(0, str(project_root / "app"))
+
+    all_test_files = sorted(search_dir.glob("test*.py")) if search_dir.is_dir() else []
+    if len(all_test_files) <= 60:
+        return f"unittest.defaultTestLoader.discover({str(search_dir)!r})", py_paths, run_cwd
+
+    stems = [
+        p.stem for p in (target_files or [])
+        if isinstance(p, Path) and p.suffix == ".py" and p.stem != "__init__"
+    ]
+    direct: list[str] = []
+    indirect: list[str] = []
+    if stems:
+        pat = re.compile(r"\b(?:" + "|".join(re.escape(s) for s in stems) + r")\b")
+        for tf in all_test_files:
+            if tf.name in {p.name for p in (target_files or []) if isinstance(p, Path)}:
+                direct.append(tf.name)
+                continue
+            try:
+                txt = tf.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
+            if pat.search(txt):
+                if any(s in tf.stem or s.replace("_v1", "") in tf.stem for s in stems):
+                    direct.append(tf.name)
+                else:
+                    indirect.append(tf.name)
+    selected = (direct + indirect)[:6]
+    suite_expr = (
+        "unittest.TestSuite([unittest.defaultTestLoader.discover("
+        f"{str(search_dir)!r}, pattern=_fn) for _fn in {selected!r}])"
+    )
+    return suite_expr, py_paths, run_cwd
+
+
+def _collect_project_bad_tests(
+    project_root: Path,
+    pkg_dir: Path | None = None,
+    target_files: list[Path] | None = None,
+) -> set[str]:
+    suite_expr, py_paths, run_cwd = _suite_expr_and_env(project_root, pkg_dir, target_files)
     probe = (
         f"import json, sys, unittest; sys.path.extend({py_paths!r}); "
-        f"suite = unittest.defaultTestLoader.discover({str(search_dir)!r}); "
+        f"suite = {suite_expr}; "
         "res = unittest.TestResult(); suite.run(res); "
         "sys.stdout.write(json.dumps([t.id() for t, _ in (res.failures + res.errors)]))"
     )
-    rc, out, _ = _run_cmd([sys.executable, "-B", "-P", "-c", probe], cwd=project_root)
+    rc, out, _ = _run_cmd([sys.executable, "-B", "-P", "-c", probe], cwd=run_cwd)
     if rc != 0 or not out.strip():
         raise RuntimeError("PROJECT_TEST_BASELINE_UNMEASURABLE")
     try:
@@ -114,15 +162,7 @@ def _verify_no_new_test_failures(
     before_bad: set[str],
     edited_py_files: list[Path] | None = None,
 ) -> tuple[bool, str]:
-    py_paths = [str(project_root)]
-    if pkg_dir and pkg_dir.is_dir():
-        py_paths.insert(0, str(pkg_dir))
-        if (pkg_dir / "__init__.py").is_file():
-            py_paths.insert(0, str(pkg_dir.parent))
-    elif (project_root / "pkg").is_dir():
-        py_paths.insert(0, str(project_root / "pkg"))
-    elif (project_root / "app").is_dir():
-        py_paths.insert(0, str(project_root / "app"))
+    suite_expr, py_paths, run_cwd = _suite_expr_and_env(project_root, pkg_dir, edited_py_files)
     for ef in (edited_py_files or []):
         if ef.is_file() and ef.suffix == ".py":
             src_txt = ef.read_text(encoding="utf-8")
@@ -139,41 +179,35 @@ def _verify_no_new_test_failures(
                     f"spec = importlib.util.spec_from_file_location('_chk_mod', {str(ef)!r}); "
                     "mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)"
                 )
-                rc_i, out_i, err_i = _run_cmd([sys.executable, "-B", "-P", "-c", imp_check], cwd=project_root)
+                rc_i, out_i, err_i = _run_cmd([sys.executable, "-B", "-P", "-c", imp_check], cwd=run_cwd)
                 if rc_i != 0:
                     return False, (out_i + "\n" + err_i).strip()
-    tests_dir = project_root / "tests"
-    search_dir = tests_dir if tests_dir.is_dir() else (pkg_dir if pkg_dir and pkg_dir.is_dir() else project_root)
     runner_code = (
         f"import json, sys, unittest; sys.path.extend({py_paths!r}); "
         f"before = set({sorted(before_bad)!r}); "
-        f"suite = unittest.defaultTestLoader.discover({str(search_dir)!r}); "
+        f"suite = {suite_expr}; "
         "res = unittest.TestResult(); suite.run(res); "
         "new_bad = [(t.id(), tb) for t, tb in (res.failures + res.errors) if t.id() not in before]; "
         "sys.stdout.write(json.dumps({'ok': not new_bad, 'detail': new_bad[0][1][-300:] if new_bad else ''})); "
         "raise SystemExit(0 if not new_bad else 1)"
     )
-    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", runner_code], cwd=project_root)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", runner_code], cwd=run_cwd)
     return rc == 0, (out + "\n" + err).strip()
 
 
-def _run_project_tests(project_root: Path, pkg_dir: Path | None = None) -> tuple[bool, str]:
-    tests_dir = project_root / "tests"
-    search_dir = tests_dir if tests_dir.is_dir() else project_root
-    py_paths = [str(project_root)]
-    if pkg_dir and pkg_dir.is_dir():
-        py_paths.insert(0, str(pkg_dir))
-    elif (project_root / "pkg").is_dir():
-        py_paths.insert(0, str(project_root / "pkg"))
-    elif (project_root / "app").is_dir():
-        py_paths.insert(0, str(project_root / "app"))
+def _run_project_tests(
+    project_root: Path,
+    pkg_dir: Path | None = None,
+    target_files: list[Path] | None = None,
+) -> tuple[bool, str]:
+    suite_expr, py_paths, run_cwd = _suite_expr_and_env(project_root, pkg_dir, target_files)
     runner_code = (
         f"import io, sys, unittest; sys.path[:0] = {py_paths!r}; "
-        f"suite = unittest.defaultTestLoader.discover({str(search_dir)!r}); "
+        f"suite = {suite_expr}; "
         "buf = io.StringIO(); res = unittest.TextTestRunner(stream=buf, verbosity=1).run(suite); "
         "sys.stdout.write(buf.getvalue()); raise SystemExit(0 if res.wasSuccessful() else 1)"
     )
-    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_code], cwd=project_root)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_code], cwd=run_cwd)
     return rc == 0, (out + "\n" + err).strip()
 
 
@@ -559,7 +593,7 @@ def egraph_optimize_function(target: Path, fn_name: str | None = None) -> dict[s
 
     # Dynamic comparisons run on a deadline in a child, never in the caller.
     proj = _find_project_root(target)
-    before_bad = _collect_project_bad_tests(proj, target.parent)
+    before_bad = _collect_project_bad_tests(proj, target.parent, [target])
     measurement = _compare_in_child(original, updated, target, fn.name, is_int_range)
     if not measurement.get('equivalent'):
         return {"verified": False, "gate": "FAIL", "reason": "EGRAPH_EQUIVALENCE_OR_MEASUREMENT_FAILED", "detail": measurement}
@@ -1203,7 +1237,7 @@ def author_verified_tests(
         test_file.parent.mkdir(parents=True, exist_ok=True)
         new_test = "import unittest\n" + imp_stmt + block + '\n\nif __name__ == "__main__":\n    unittest.main()\n'
 
-    before_bad = _collect_project_bad_tests(proj, mod_path.parent) if orig_test is not None else set()
+    before_bad = _collect_project_bad_tests(proj, mod_path.parent, [mod_path, test_file]) if orig_test is not None else set()
     ast.parse(new_test)
     test_file.write_text(new_test, encoding="utf-8")
 
@@ -1344,7 +1378,8 @@ def synthesize_feature_transform(target: Path, goal: str, secondary_target: Path
     original = target.read_text(encoding="utf-8")
     tree = ast.parse(original)
     proj = _find_project_root(target)
-    before_bad = _collect_project_bad_tests(proj, target.parent)
+    t_files = [target] + ([secondary_target] if secondary_target is not None else [])
+    before_bad = _collect_project_bad_tests(proj, target.parent, t_files)
 
     # A. Add CLI flag (`--verbose`, `--dry-run`, etc.) using `argparse`
     m_flag = re.search(r"(--[A-Za-z0-9][A-Za-z0-9_-]*)", goal)
@@ -1950,7 +1985,8 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
     low = goal.lower()
     proj = _find_project_root(target)
     pkg_scope = (target / "pkg") if (target.is_dir() and (target / "pkg").is_dir()) else (target if target.is_dir() else target.parent)
-    before_bad = _collect_project_bad_tests(proj, pkg_scope)
+    t_files = [target] if target.is_file() else []
+    before_bad = _collect_project_bad_tests(proj, pkg_scope, t_files)
 
     # 1. Split `<pkg>/calc.py` into one module per function / concern (keeping re-exports in `calc.py` so callers stay 100% green!)
     if "one module per" in low or ("split" in low and target.is_file() and "smaller functions" not in low):
@@ -2145,10 +2181,14 @@ def structural_refactor_python(target: Path, goal: str) -> dict[str, Any]:
         tree = ast.parse(original)
         m_cname = re.search(r"\b(?:named|as|into|to)\s+`?([A-Z][A-Z0-9_]+)`?", goal)
         const_name = m_cname.group(1) if m_cname else "EXTRACTED_CONSTANT"
-        # Find first non-trivial numeric literal inside a function body
+        m_fn_scope = re.search(r"\bfunction\s+`?([A-Za-z_]\w*)`?", goal)
+        scoped_fn_name = m_fn_scope.group(1) if m_fn_scope else None
+        # Find first non-trivial numeric literal inside a function body (scoped to the named function if stated)
         lit_val: int | float | None = None
         for fn in tree.body:
             if isinstance(fn, ast.FunctionDef):
+                if scoped_fn_name and fn.name != scoped_fn_name:
+                    continue
                 for n in ast.walk(fn):
                     if isinstance(n, ast.Constant) and isinstance(n.value, (int, float)) and not isinstance(n.value, bool) and n.value not in (0, 1):
                         lit_val = n.value
@@ -3135,6 +3175,8 @@ def _instantiate_after_ast(expr: ast.expr, hole_texts: dict[str, str]) -> ast.ex
 
 def propose_egraph_algebraic_rewrites(source_text: str, rule: dict[str, Any] | Any) -> list[str]:
     """Propose congruence-closed algebraic expression rewrites across any statement context in `source_text`."""
+    if isinstance(rule, dict) and rule.get("state") not in (None, "ACTIVE"):
+        return []
     pair = _extract_rule_expr_pair(rule)
     if pair is None:
         return []

@@ -175,6 +175,8 @@ def cross_language_candidates(
         rules = store.lookup_rules(source_language)
     out: list[dict[str, Any]] = []
     for rule in rules:
+        if not isinstance(rule, Mapping) or rule.get("state") not in (None, "ACTIVE"):
+            continue
         ok, why = is_lexical_rule(rule)
         if not ok:
             continue
