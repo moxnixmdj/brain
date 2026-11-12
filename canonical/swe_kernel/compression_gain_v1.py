@@ -37,6 +37,11 @@ from typing import Any, Sequence
 #: shape licenses nothing: an unnamed family is not a family.
 FAMILY_PERIODIC_TABLE = "periodic_table"
 
+#: A helper whose body looks a value up in a lifted table by a runtime key -- `table.get(key)`
+#: with a None branch, or `table[key]` on a non-literal key. This is the world-model writer's
+#: emitted shape (machinery identical across organs, one dict literal of per-organ data).
+FAMILY_KEYED_TABLE = "keyed_table_lookup"
+
 #: Probe grid for the behaviour-preservation check. Both the original program and its rewritten
 #: form run in the same namespace on the same inputs; any disagreement refuses the abstraction.
 _PROBE_INPUTS = tuple(list(range(-9, 26)) + [0.5, -2.5, 17.5])
@@ -68,20 +73,51 @@ class _LiftConstants(ast.NodeTransformer):
         self.param_values: list[str] = []  # source text of each lifted argument expression
         self._tuple_stack = 0
 
-    @staticmethod
-    def _is_literal(node: ast.AST) -> bool:
+    def _is_literal(self, node: ast.AST) -> bool:
+        """A literal, recursively: a constant, a signed constant, or a collection literal whose
+        every element/key/value is itself a literal. The recursion is what lets a world-model's
+        whole nested table dict lift as ONE parameter -- the same move the tuple rule makes for
+        period blocks, generalised to every constant collection.
+
+        `None`, `True` and `False` are EXCLUDED even though they parse as constants: they are
+        singleton sentinels in control positions (`row is None`, `out['known'] = True`), and
+        lifting them turns the machinery's own structure into a parameter -- measured: the
+        world-model helper then renders with `if row is _p1:` and the abstraction stops being
+        the shared machinery at all. Data tables so far carry numbers and strings; a table whose
+        data genuinely contains booleans will refuse to lift wholesale, which is an honest
+        refusal until a caller argues otherwise with a measured corpus."""
         if isinstance(node, ast.Constant):
-            return True
-        return (
-            isinstance(node, ast.UnaryOp)
-            and isinstance(node.op, (ast.USub, ast.UAdd))
-            and isinstance(node.operand, ast.Constant)
-        )
+            return node.value is not None and not isinstance(node.value, bool)
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.USub, ast.UAdd)):
+            return isinstance(node.operand, ast.Constant) and not isinstance(
+                node.operand.value, bool
+            )
+        if isinstance(node, ast.Tuple):
+            return all(self._is_literal(e) for e in node.elts)
+        if isinstance(node, (ast.List, ast.Set)):
+            return all(self._is_literal(e) for e in node.elts)
+        if isinstance(node, ast.Dict):
+            return all(
+                (k is None or self._is_literal(k)) and self._is_literal(v)
+                for k, v in zip(node.keys, node.values)
+            )
+        return False
 
     def _take(self, src: str) -> ast.Name:
         name = f"_p{len(self.param_values)}"
         self.param_values.append(src)
         return ast.Name(id=name, ctx=ast.Load())
+
+    def _visit_collection(self, node: ast.AST) -> ast.AST:
+        if self._tuple_stack == 0 and node.elts and all(self._is_literal(e) for e in node.elts):
+            return ast.copy_location(self._take(ast.unparse(node)), node)
+        return self._descend(node)
+
+    def _descend(self, node: ast.AST) -> ast.AST:
+        self._tuple_stack += 1
+        node = self.generic_visit(node)  # type: ignore[assignment]
+        self._tuple_stack -= 1
+        return node
 
     def visit_Tuple(self, node: ast.Tuple) -> ast.AST:
         if self._tuple_stack == 0 and node.elts and all(
@@ -89,10 +125,21 @@ class _LiftConstants(ast.NodeTransformer):
         ):
             src = ast.unparse(node)
             return ast.copy_location(self._take(src), node)
-        self._tuple_stack += 1
-        node = self.generic_visit(node)  # type: ignore[assignment]
-        self._tuple_stack -= 1
-        return node
+        return self._descend(node)
+
+    def visit_List(self, node: ast.List) -> ast.AST:
+        return self._visit_collection(node)
+
+    def visit_Set(self, node: ast.Set) -> ast.AST:
+        return self._visit_collection(node)
+
+    def visit_Dict(self, node: ast.Dict) -> ast.AST:
+        if self._tuple_stack == 0 and node.values and all(
+            (k is None or self._is_literal(k)) and self._is_literal(v)
+            for k, v in zip(node.keys, node.values)
+        ):
+            return ast.copy_location(self._take(ast.unparse(node)), node)
+        return self._descend(node)
 
     def visit_UnaryOp(self, node: ast.UnaryOp) -> ast.AST:
         if self._tuple_stack == 0 and isinstance(node.op, (ast.USub, ast.UAdd)) and isinstance(
@@ -102,6 +149,13 @@ class _LiftConstants(ast.NodeTransformer):
         return self.generic_visit(node)  # type: ignore[return-value]
 
     def visit_Constant(self, node: ast.Constant) -> ast.AST:
+        # The same singleton exclusion as `_is_literal`, applied to bare constants: `None`,
+        # `True` and `False` in control positions (`row is None`, `out['known'] = True`) are the
+        # machinery's own structure. Lifting them measured out as self-defeating -- the
+        # abstraction grew a parameter that every site passes as the same singleton, and the
+        # schema dict shredded into per-key parameters.
+        if node.value is None or isinstance(node.value, bool):
+            return node
         return ast.copy_location(self._take(ast.unparse(node)), node)
 
 
@@ -133,9 +187,19 @@ def lift_shape(source: str, entrypoint: str | None = None) -> dict[str, Any] | N
     param_names = tuple(f"_p{i}" for i in range(len(lifter.param_values)))
     arg_names = tuple(a.arg for a in fn.args.args)
     helper_name = "_cand_abstraction"
+    # Indent EVERY line of each statement. Prefixing only the first line produced
+    # `if row is None:` with its body at the same indentation -- a SyntaxError swallowed by the
+    # try below and reported as "no shape". Multi-line statements have been liftable inputs
+    # since the world-model lifter landed; only single-line corpora ever hid this.
     helper_src = (
         f"def {helper_name}({', '.join(param_names + arg_names)}):\n"
-        + "\n".join("    " + ast.unparse(ast.fix_missing_locations(s)) for s in new_body)
+        + "\n".join(
+            "\n".join(
+                ("    " + ln) if ln.strip() else ln
+                for ln in ast.unparse(ast.fix_missing_locations(s)).splitlines()
+            )
+            for s in new_body
+        )
         + "\n"
     )
     try:
@@ -185,6 +249,18 @@ def family_of(helper_src: str) -> str | None:
                 and any(isinstance(a, ast.BinOp) and isinstance(a.op, ast.Div) for a in sub.args)
             ):
                 return FAMILY_PERIODIC_TABLE
+    # Keyed-table lookup: a `.get(...)` on a bare table name, with the None branch that
+    # distinguishes a lookup-with-default from a plain indexing. Recognised from the call
+    # structure, never from a name someone typed.
+    for node in ast.walk(tree):
+        if (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and node.func.attr == "get"
+            and isinstance(node.func.value, ast.Name)
+            and any(isinstance(cmp, ast.Compare) for cmp in ast.walk(tree))
+        ):
+            return FAMILY_KEYED_TABLE
     return None
 
 
@@ -245,6 +321,7 @@ def compress_corpus(
     sources: Sequence[str],
     *,
     entrypoints: Sequence[str] | None = None,
+    probes: Sequence[Any] | None = None,
 ) -> dict[str, Any]:
     """Compress a corpus of solved programs into admissible abstractions.
 
@@ -253,11 +330,19 @@ def compress_corpus(
       * rewriting the members with the helper strictly reduces total `B_exec` description length
         (the repo's own metric, `executable_ast_bytes`) -- `gain_bytes > 0`, computed, never
         asserted;
-      * every rewritten member reproduces its original program's outputs on the probe grid.
+      * every rewritten member reproduces its original program's outputs on the probe grid;
+      * the probe grid DISCRIMINATES: the originals must produce at least two distinct outputs
+        across the grid. A grid every input answers identically verifies nothing -- agreeing
+        vacuously is how a forged abstraction would sail through, so a non-discriminating grid
+        refuses admission instead of pretending to check. Domains that the default numeric grid
+        cannot see (string-keyed tables, structural inputs) must be probed with caller-supplied
+        `probes`; the bridge has no domain knowledge and correctly admits nothing it cannot
+        probe.
 
     Everything else is returned under `refusals` with its reason, because a refusal that does not
     say why cannot be learned from.
     """
+    grid = list(probes) if probes is not None else list(_PROBE_INPUTS)
     eps = list(entrypoints) if entrypoints is not None else [None] * len(sources)
     groups: dict[str, dict[str, Any]] = {}
     refusals: list[dict[str, Any]] = []
@@ -311,6 +396,7 @@ def compress_corpus(
             continue
         family = family_of(helper_named)
         preserved = True
+        discriminating = False
         for m, r in zip(g["members"], rewritten_srcs):
             orig_fn = _exec_fn(m["source"], m["fn_name"])
             # The rewritten member calls the abstraction, so the helper is its prelude: this is
@@ -322,13 +408,15 @@ def compress_corpus(
                     "shape_key": g["shape_key"][:64], "reason": "MEMBER_DID_NOT_COMPILE",
                 })
                 break
-            for x in _PROBE_INPUTS:
+            outputs = set()
+            for x in grid:
                 try:
                     a = orig_fn(x)
                     b = new_fn(x)
                 except Exception:
                     preserved = False
                     break
+                outputs.add(repr(a))
                 if a != b:
                     preserved = False
                     break
@@ -338,7 +426,20 @@ def compress_corpus(
                     "reason": "REWRITE_CHANGED_BEHAVIOUR_REFUSED",
                 })
                 break
+            if len(outputs) >= 2:
+                discriminating = True
         if not preserved:
+            continue
+        if not discriminating:
+            # Every probe answered identically on the originals: the equality checks above were
+            # vacuous, so nothing was verified. Admitting here would be passing a forged entry
+            # through a gate that never looked.
+            refusals.append({
+                "shape_key": g["shape_key"][:64],
+                "reason": "PROBE_GRID_NON_DISCRIMINATING",
+                "sites": len(g["members"]),
+                "grid_size": len(grid),
+            })
             continue
         abstractions.append({
             "concept_id": concept_id,
@@ -481,6 +582,10 @@ def rewrite_source_with_abstractions(
       * the rewritten program is executed against the probe grid with the abstraction as its
         prelude -- the runtime condition the rewrite claims -- and ANY disagreement or exception
         refuses the whole rewrite (fail-closed, never partially rewritten);
+      * the probe grid must DISCRIMINATE the original (>= 2 distinct outputs across the grid) --
+        the same rule admission enforces. A string-keyed table probed with floats answers every
+        input identically, so a vacuous grid refuses rather than shipping an unchecked rewrite;
+        callers whose domain the numeric grid cannot see supply `probes`;
       * the rewrite must strictly reduce `description_bytes`. A replay that does not shrink the
         program is decoration, and decoration is not reuse.
 
@@ -524,6 +629,7 @@ def rewrite_source_with_abstractions(
         new_exec = _exec_fn(new_fn_src, fn.name, prelude=prelude)
         if orig_exec is None or new_exec is None:
             return None
+        seen_outputs: list[Any] = []
         for x in probes:
             try:
                 a = orig_exec(x)
@@ -532,6 +638,12 @@ def rewrite_source_with_abstractions(
                 return None
             if a != b:
                 return None
+            seen_outputs.append(a)
+        # Discrimination, measured on the ORIGINAL: a grid the original answers identically
+        # verified nothing, so the rewrite refuses rather than shipping unchecked. The equality
+        # loop above stays fail-closed per probe; this is the vacuity gate.
+        if len({repr(o) for o in seen_outputs}) < 2:
+            return None
         before = description_bytes(orig_fn_src)
         after = description_bytes(new_fn_src)
         if after >= before:

@@ -1,14 +1,14 @@
 {
  "entries": {
   "m1": {
-   "accesses": 6590,
-   "blamed": 1448,
+   "accesses": 7359,
+   "blamed": 1688,
    "content": "/tmp/brain-cli-reg-cik5wdk5/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793264467.0945606,
-   "credited": 1551,
+   "credited": 1747,
    "id": "m1",
    "kind": "acquired_capability",
-   "last_accessed": 1793825125.0457926,
+   "last_accessed": 1794496011.825772,
    "tags": [
     "/tmp/brain-cli-reg-cik5wdk5/regme",
     "cli"
@@ -31,14 +31,14 @@
    ]
   },
   "m10": {
-   "accesses": 12953,
-   "blamed": 1563,
+   "accesses": 13386,
+   "blamed": 1674,
    "content": "/tmp/brain-cli-reg-770jz7z_/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793297609.314542,
-   "credited": 3207,
+   "credited": 3298,
    "id": "m10",
    "kind": "acquired_capability",
-   "last_accessed": 1793825125.0476952,
+   "last_accessed": 1794494843.4144328,
    "tags": [
     "/tmp/brain-cli-reg-770jz7z_/regme",
     "cli"
@@ -121,15 +121,106 @@
     "tmp"
    ]
   },
+  "m13": {
+   "accesses": 306,
+   "blamed": 123,
+   "content": "/tmp/brain-cli-reg-ln9m6bkm/regme regme -o ${input.output_path} -d ${input.text}",
+   "created": 1794495067.9311109,
+   "credited": 88,
+   "id": "m13",
+   "kind": "acquired_capability",
+   "last_accessed": 1794496011.825772,
+   "tags": [
+    "/tmp/brain-cli-reg-ln9m6bkm/regme",
+    "cli"
+   ],
+   "terms": [
+    "acquir",
+    "acquire",
+    "acquired",
+    "acquired_capability",
+    "brain-cli-reg-ln9m6bkm",
+    "capability",
+    "cli",
+    "input",
+    "output",
+    "output_path",
+    "path",
+    "regme",
+    "text",
+    "tmp"
+   ]
+  },
+  "m14": {
+   "accesses": 306,
+   "blamed": 123,
+   "content": "/tmp/brain-cli-reg-pz9masi_/regme regme -o ${input.output_path} -d ${input.text}",
+   "created": 1794495068.0075924,
+   "credited": 88,
+   "id": "m14",
+   "kind": "acquired_capability",
+   "last_accessed": 1794496011.825772,
+   "tags": [
+    "/tmp/brain-cli-reg-pz9masi_/regme",
+    "cli"
+   ],
+   "terms": [
+    "acquir",
+    "acquire",
+    "acquired",
+    "acquired_capability",
+    "brain-cli-reg-pz9masi",
+    "brain-cli-reg-pz9masi_",
+    "capability",
+    "cli",
+    "input",
+    "output",
+    "output_path",
+    "path",
+    "regme",
+    "text",
+    "tmp"
+   ]
+  },
+  "m15": {
+   "accesses": 306,
+   "blamed": 123,
+   "content": "/tmp/brain-cli-reg-2ut7dudp/regme regme -o ${input.output_path} -d ${input.text}",
+   "created": 1794495068.1093547,
+   "credited": 88,
+   "id": "m15",
+   "kind": "acquired_capability",
+   "last_accessed": 1794496011.825772,
+   "tags": [
+    "/tmp/brain-cli-reg-2ut7dudp/regme",
+    "cli"
+   ],
+   "terms": [
+    "acquir",
+    "acquire",
+    "acquired",
+    "acquired_capability",
+    "brain-cli-reg-2ut7dudp",
+    "capability",
+    "cli",
+    "input",
+    "output",
+    "output_path",
+    "path",
+    "regme",
+    "text",
+    "tmp"
+   ]
+  },
   "m2": {
-   "accesses": 8830,
-   "blamed": 1609,
+   "accesses": 9304,
+   "blamed": 1731,
    "content": "/tmp/brain-cli-reg-swdba71u/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793264467.158527,
-   "credited": 2054,
+   "credited": 2165,
    "id": "m2",
    "kind": "acquired_capability",
-   "last_accessed": 1793825125.0467544,
+   "last_accessed": 1794495990.47523,
    "tags": [
     "/tmp/brain-cli-reg-swdba71u/regme",
     "cli"
@@ -152,14 +243,14 @@
    ]
   },
   "m3": {
-   "accesses": 9830,
-   "blamed": 1936,
+   "accesses": 10377,
+   "blamed": 2093,
    "content": "/tmp/brain-cli-reg-xn_guh_e/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793264467.2400823,
-   "credited": 2693,
+   "credited": 2826,
    "id": "m3",
    "kind": "acquired_capability",
-   "last_accessed": 1793825125.0472322,
+   "last_accessed": 1794496011.825772,
    "tags": [
     "/tmp/brain-cli-reg-xn_guh_e/regme",
     "cli"
@@ -184,14 +275,14 @@
    ]
   },
   "m4": {
-   "accesses": 3803,
-   "blamed": 225,
+   "accesses": 3855,
+   "blamed": 238,
    "content": "add ten",
    "created": 1793265249.2641826,
-   "credited": 1322,
+   "credited": 1355,
    "id": "m4",
    "kind": "procedure",
-   "last_accessed": 1793506029.965422,
+   "last_accessed": 1794496011.032973,
    "tags": [
     "unclassified|moved"
    ],
@@ -238,14 +329,14 @@
    ]
   },
   "m6": {
-   "accesses": 9087,
-   "blamed": 1966,
+   "accesses": 9738,
+   "blamed": 2159,
    "content": "/tmp/brain-cli-reg-rficng_7/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1793266064.5255597,
-   "credited": 2440,
+   "credited": 2592,
    "id": "m6",
    "kind": "acquired_capability",
-   "last_accessed": 1793825125.0461757,
+   "last_accessed": 1794496011.3147113,
    "tags": [
     "/tmp/brain-cli-reg-rficng_7/regme",
     "cli"
@@ -299,14 +390,14 @@
    ]
   },
   "m8": {
-   "accesses": 1098,
-   "blamed": 18,
+   "accesses": 1117,
+   "blamed": 34,
    "content": "rewrite the malformed def",
    "created": 1793271386.405867,
    "credited": 501,
    "id": "m8",
    "kind": "procedure",
-   "last_accessed": 1793506031.0329473,
+   "last_accessed": 1794496014.2533405,
    "tags": [
     "unclassified|fixed"
    ],
@@ -326,14 +417,14 @@
    ]
   },
   "m9": {
-   "accesses": 1019,
-   "blamed": 18,
+   "accesses": 1038,
+   "blamed": 34,
    "content": "rewrite the malformed def",
    "created": 1793290330.7458298,
    "credited": 445,
    "id": "m9",
    "kind": "procedure",
-   "last_accessed": 1793506031.0329473,
+   "last_accessed": 1794496014.253965,
    "tags": [
     "unclassified|fixed"
    ],
@@ -353,6 +444,6 @@
    ]
   }
  },
- "next_id": 13,
+ "next_id": 16,
  "schema": "PROJECT_BRAIN_ASSOCIATIVE_MEMORY_V1"
 }

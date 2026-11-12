@@ -2,8 +2,27 @@
  "cells": {
   "archive.tar_gz.create_from_manifest|verified": {
    "first_seen": 1792312443.2875447,
-   "last_seen": 1792322989.8236697,
+   "last_seen": 1794494711.3382552,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -75,8 +94,10 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1793467005.282255,
+   "last_seen": 1794494711.463853,
    "observations": [
+    1,
+    1,
     1,
     1,
     1,
@@ -97,6 +118,18 @@
    "where": "archive.verify.tar_gz.gnu",
    "why": "VERIFIED"
   },
+  "auto.pypi.msgpack|bound_pypi_install_failed": {
+   "first_seen": 1794494700.5311034,
+   "last_seen": 1794495337.5388606,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": true,
+   "where": "auto.pypi.msgpack",
+   "why": "BOUND_PYPI_INSTALL_FAILED"
+  },
   "document.convert.markdown_pdf.pandoc_weasyprint|blocker": {
    "first_seen": 1792312537.2174094,
    "last_seen": 1792313073.615255,
@@ -108,6 +141,16 @@
    "structural": false,
    "where": "document.convert.markdown_pdf.pandoc_weasyprint",
    "why": "Blocker"
+  },
+  "document.convert.markdown_pdf.pandoc_weasyprint|bound_apt_metadata_not_found": {
+   "first_seen": 1794495578.276555,
+   "last_seen": 1794495578.2765572,
+   "observations": [
+    -1
+   ],
+   "structural": false,
+   "where": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "why": "BOUND_APT_METADATA_NOT_FOUND"
   },
   "docx.document.create_from_json_record|blocker": {
    "first_seen": 1792313840.6015184,
@@ -134,8 +177,9 @@
   },
   "docx.document.verify.intent_ooxml|verified": {
    "first_seen": 1792312443.1245909,
-   "last_seen": 1792322989.643618,
+   "last_seen": 1794494710.3137314,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -270,6 +314,22 @@
    "where": "image.extract.ocr.tesseract",
    "why": "BOUND_CAPABILITY_SOURCE_UNSUPPORTED"
   },
+  "image.extract.ocr.tesseract|bound_system_tool_missing": {
+   "first_seen": 1794495577.8284273,
+   "last_seen": 1794495584.5261753,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "image.extract.ocr.tesseract",
+   "why": "BOUND_SYSTEM_TOOL_MISSING"
+  },
   "json.query.jq|verified": {
    "first_seen": 1792352260.1766033,
    "last_seen": 1792352610.0267751,
@@ -290,6 +350,19 @@
    "where": "json.query.jq",
    "why": "VERIFIED"
   },
+  "knowledge.consistency.assess|knowledge_assessment_input_invalid": {
+   "first_seen": 1794495575.2572873,
+   "last_seen": 1794495579.1296952,
+   "observations": [
+    -1,
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "knowledge.consistency.assess",
+   "why": "KNOWLEDGE_ASSESSMENT_INPUT_INVALID"
+  },
   "math.numeric_expression.sympy|live_controller_execution_or_verification_failure": {
    "first_seen": 1792352260.1185527,
    "last_seen": 1792352505.5778987,
@@ -306,6 +379,20 @@
    "structural": false,
    "where": "math.numeric_expression.sympy",
    "why": "LIVE_CONTROLLER_EXECUTION_OR_VERIFICATION_FAILURE"
+  },
+  "orchestration.verify.bridge_enumeration.v1|verified": {
+   "first_seen": 1794495573.394807,
+   "last_seen": 1794495584.2348077,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "orchestration.verify.bridge_enumeration.v1",
+   "why": "VERIFIED"
   },
   "pdf.extract.text.pypdf|bound_pypi_install_failed": {
    "first_seen": 1792312518.9164147,
@@ -462,8 +549,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1793463544.4852138,
+   "last_seen": 1794494710.1698408,
    "observations": [
+    1,
     1,
     1,
     1,

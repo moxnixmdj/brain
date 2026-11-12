@@ -100,13 +100,16 @@
     }
   ],
   "created_at_utc": "2026-11-04T20:45:10.296637+00:00",
+  "last_rewind_reason": "DURABLE_EFFECT_INVALID_OR_MISSING",
+  "last_rewound_from_action_index": 0,
   "mission_id": "KIND06",
   "next_action_index": 2,
   "plan_sha256": "9b0e18d44b3f89960f0a7356f56ef2487b3eb386d918d9615433edb79e92fe20",
-  "resume_count": 0,
+  "resume_count": 1,
+  "rewind_count": 1,
   "schema": "PROJECT_BRAIN_CONTROLLER_CHECKPOINT_V1",
   "status": "COMPLETE",
   "step_id": "live-raw-goal-controller",
   "test_interrupt_injected": false,
-  "updated_at_utc": "2026-11-04T20:45:11.151670+00:00"
+  "updated_at_utc": "2026-11-12T14:36:00.902903+00:00"
 }
