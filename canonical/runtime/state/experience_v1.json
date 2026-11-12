@@ -115,8 +115,16 @@
   },
   "archive.verify.tar_gz.gnu|verified": {
    "first_seen": 1792316179.6037304,
-   "last_seen": 1794496393.2624476,
+   "last_seen": 1794498873.9062946,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -170,8 +178,9 @@
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|bound_apt_metadata_not_found": {
    "first_seen": 1794495578.276555,
-   "last_seen": 1794497216.2045805,
+   "last_seen": 1794498873.3389716,
    "observations": [
+    -1,
     -1,
     -1
    ],
@@ -344,8 +353,13 @@
   },
   "image.extract.ocr.tesseract|bound_system_tool_missing": {
    "first_seen": 1794495577.8284273,
-   "last_seen": 1794497221.8826413,
+   "last_seen": 1794498873.6490562,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -387,8 +401,9 @@
   },
   "knowledge.consistency.assess|knowledge_assessment_input_invalid": {
    "first_seen": 1794495575.2572873,
-   "last_seen": 1794497216.449337,
+   "last_seen": 1794498872.678347,
    "observations": [
+    -1,
     -1,
     -1,
     -1,
