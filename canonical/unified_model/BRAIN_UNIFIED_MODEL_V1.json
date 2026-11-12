@@ -31229,16 +31229,16 @@
   "engines": 26,
   "knowledge_documents": 394,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6788,
+  "research_index_records": 6789,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1971
+  "source_index_modules": 1972
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f72f6fbff5d9a0b934a706fc5e892e8089a1a143bd48160b80741d81d026192d"
+  "value": "18b608f56d0220d0c53b247812c6c20fcf0b5ae716b27265121fb2cd070d1f15"
  },
  "engines": [
   {
@@ -159275,6 +159275,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FUNCTION_FOUND_FROM_TASK_TEXT_V1",
+   "sha256": "5865accf11a87d3eb0c69745f31cdad7daf1e7615c7d8ace26e800ecdbb2a3b5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "found": 1,
+    "function": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -227365,7 +227386,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "936b6975ea067c994d4e05a99a05025dc78b88d9d4e58c5de54ce929130b2b1b",
+   "sha256": "730ff3d9b939227b8ea5419a37b503296be4371d29f9c8dc098e87f64567c2f2",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -263282,6 +263303,48 @@
     "scoring": 1,
     "v1": 1,
     "weighted": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/function_the_task_text_points_at_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/function_the_task_text_points_at_v1.py",
+   "sha256": "c607fe3ad8a2347957926a448602a00b94d4d076c39071b253b825fec52cf6d0",
+   "summary": "Which function of a file a task's text points at, and the first few changes to try in each.",
+   "symbol_count": 8,
+   "symbols": [
+    "Function",
+    "_parsed",
+    "candidates",
+    "functions_of",
+    "order",
+    "text_of",
+    "words",
+    "written_into"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "each": 1,
+    "few": 1,
+    "file": 1,
+    "first": 1,
+    "function": 3,
+    "functions_of": 1,
+    "order": 1,
+    "parsed": 1,
+    "points": 2,
+    "task": 2,
+    "text": 2,
+    "text_of": 1,
+    "try": 1,
+    "v1": 1,
+    "words": 1,
+    "written_into": 1
    }
   },
   {
