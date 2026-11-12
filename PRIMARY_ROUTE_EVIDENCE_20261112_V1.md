@@ -1,0 +1,20 @@
+# Primary route evidence behind fallback refusals
+
+Producer diagnostic, 2026-11-12, base `513d23fc`. No capability or independent verification claim.
+
+On a disposable clone, the 38 sentences in `canonical/tools/realistic_goal_reach_probe_v1.py` were separately sent to the public solver and to `_solve_request`. Public responses contained 21 confinement statuses; 18 of those corresponding primary calls returned a different failure. The calls were separate, not paired within a single execution, so these are diagnostic observations, not a causal controlled benchmark or a measure of learning. Earlier reports treating the entire public bucket as primary confinement failures overstate that particular blocker. Confinement remains essential wherever untrusted actions actually run.
+
+Ten primary calls reported `STEP_RAISED_OUTCOME_UNKNOWN`. Nine had composer chains containing the intended capabilities and reported missing source/index root exceptions. Examination of step arguments found that paths used as roots sometimes named output files or individual test files. This does not establish that the chains would complete, verify the requested outcome, or learn from success if a root were supplied. In particular, treating a file's parent or an implicit current directory as the requested workspace can silently change scope; a root-binding change needs controlled fixtures, explicit workspace authority, correct output binding and end-to-end acceptance checks.
+
+The small change in this PR preserves the full primary verdict under `primary_result` when either acting or workflow fallback returns the confinement refusal. The existing outer status and safety behavior remain unchanged, and `served_after` remains for compatibility. The result may contain paths, arguments and other primary-route diagnostics just as the primary response could; callers must handle this evidence accordingly. This is an observability fix, not additional execution, verified task completion, learning, or proof of consciousness.
+
+## A small root-binding counterfactual
+
+On 2026-11-12, two corpus sentences were each run in separate fresh temporary workspaces containing one Python file. Both arms explicitly set `workspace_root`; the intervention arm temporarily substituted `source_root='.'` in the composer binder for that call only. This is an experiment, not a shipped binding policy. Neither arm established independent correctness of outputs.
+
+* Python symbol index: baseline raised `PYTHON_INDEX_ROOT_MISSING`; intervention produced an index containing one file and one symbol, but the primary result was `FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED`. The public fallback remained a confinement refusal. Producing an index is not verified completion.
+* Incremental tree-sitter index: baseline raised `SOURCE_ROOT_MISSING`; intervention's first parse produced output but reported `tree_sitter_available=false`, and the next step raised `TREE_SITTER_SUBSTRATE_IDENTITY_UNAVAILABLE`. The public fallback remained a confinement refusal.
+
+Thus fixing that binding alone did not deliver an accepted solution in either case. Two tiny fixtures and two sentences are insufficient to generalize, and the experiment does not test adverse paths or every repair chain. Do not infer a capability gain or that every machine lacks the tree-sitter substrate.
+
+Next experiment: in isolated workspaces with explicitly supplied roots and outputs, compare baseline and a narrowly scoped binder change on both named and unseen goals. Measure actual postcondition verification, unintended effects, wrong-scope refusals and changes in held-out task completion. Reject the change if it merely moves errors downstream or widens scope. Keep unconfined execution blocked.

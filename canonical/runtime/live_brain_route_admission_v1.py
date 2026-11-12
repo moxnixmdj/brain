@@ -5505,6 +5505,10 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                     if acted is not None:
                         acted["elapsed_ns"] = perf_counter_ns() - started
                         acted["served_after"] = str(result.get("status") or "")
+                        # The fallback refusal is not the primary route's diagnosis.
+                        # Keep its complete evidence (including bindings and unknown
+                        # effects) rather than replacing it with the boundary verdict.
+                        acted["primary_result"] = dict(result)
                         # The fallback did not run, but the earlier route may have.
                         # Never turn unknown or prior effects into an executed=False claim.
                         acted["fallback_executed"] = False
@@ -5546,6 +5550,7 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                                 "executed": True if result.get("executed") is True else None,
                                 "side_effects_may_exist": True,
                                 "served_after": str(result.get("status") or ""),
+                                "primary_result": dict(result),
                                 "semantic_acceptance_complete": False,
                                 "elapsed_ns": perf_counter_ns() - started}
                     if recalled is not None and recalled.get("pass") is True:
