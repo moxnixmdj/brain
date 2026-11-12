@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 313,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6707,
+  "research_index_records": 6708,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9b85656f0cc2cdc4127bb82ea8c2b941a0d27ea0660c4e276088c527447519c1"
+  "value": "ea0caff0aa7d658df1ff03ef90ea414ed22cf562182aded7565796203f4edf96"
  },
  "engines": [
   {
@@ -69141,7 +69141,7 @@
   "included_source_count": 1115,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b682a2f9d11a26a135ceaf4ff19ede268dbe239a6afe9f023e226da1493784e8"
+  "source_tree_digest": "bc74f27d54530f00890c8a5cf5b65418056150808fd7ce3fb8e1ebe48a20c461"
  },
  "research_index": [
   {
@@ -223197,6 +223197,31 @@
     "v1": 2,
     "verb": 2,
     "were": 2
+   }
+  },
+  {
+   "action_id": "REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "521314cbfade015fc07b37892c730d069321ce7527452d34f6308f82dfa2744e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "acceptance": 1,
+    "check": 1,
+    "eight_repair_capabilities_accept_a_failed_repair_because_the_registry_checks_output_file_written_not_the_adapters_declared_boolean_outcome": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "one_measured_false-acceptance_path_removed__no_benchmark_row_moved__no_capability_or_terminal_credit": 1,
+    "outcome": 1,
+    "repair": 1,
+    "repair_acceptance_must_check_outcome_20261112_v1": 1,
+    "reuse_the_adapters_measured_boolean_outcome_and_existing_runtime_expect_checker": 1,
+    "v1": 1
    }
   },
   {

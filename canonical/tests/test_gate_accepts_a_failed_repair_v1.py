@@ -69,11 +69,14 @@ def test_an_unsupported_expect_type_is_refused_rather_than_guessed():
     raise AssertionError("an unknown predicate type was silently accepted")
 
 
-def test_every_case_is_a_real_bound_capability():
+def test_every_case_is_a_real_bound_capability_with_outcome_acceptance():
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))["capabilities"]
     for capability_id in CASES:
         assert capability_id in registry, capability_id
-        assert registry[capability_id]["action_template"]["expect"]["field"] == "output_verified"
+        entry = registry[capability_id]
+        expect = entry["action_template"]["expect"]
+        assert expect == {"field": "pass", "type": "field_equals", "value": True}
+        assert "pass" in entry["result_fields"]
 
 
 def test_every_adapter_ran():
@@ -91,22 +94,41 @@ def test_the_honest_answer_is_no_repair_everywhere():
     assert all(r["status"].startswith("OPEN__") for r in records)
 
 
-def test_the_registry_predicate_accepts_every_one_of_them():
-    """This is the defect. If it ever stops being true, the bug was fixed and this test should go."""
+def test_the_registry_predicate_rejects_every_executed_failed_repair():
     records = _report()["records"]
-    rejected = [r["capability_id"] for r in records if not r["registry_accepts"]]
-    assert not rejected, rejected
-
-
-def test_the_corrected_predicate_rejects_every_one_of_them():
-    records = _report()["records"]
-    accepted = [r["capability_id"] for r in records if r["corrected_accepts"]]
+    accepted = [r["capability_id"] for r in records if r["registry_accepts"]]
     assert not accepted, accepted
 
 
-def test_the_two_predicates_disagree_on_every_executed_case():
+def test_the_registered_predicate_matches_the_corrected_predicate():
+    records = _report()["records"]
+    disagreements = [
+        r["capability_id"] for r in records
+        if r["registry_accepts"] != r["corrected_accepts"]
+    ]
+    assert not disagreements, disagreements
+
+
+def test_the_production_expect_checker_rejects_failure_and_accepts_success():
+    from canonical.runtime.grounded_action_v1 import _check_expect
+
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))["capabilities"]
+    for capability_id in CASES:
+        expect = registry[capability_id]["action_template"]["expect"]
+        ok, _ = _check_expect(expect, {
+            "pass": False,
+            "output_verified": True,
+            "status": "OPEN__NO_VERIFIED_REPAIR",
+        })
+        assert not ok, capability_id
+        ok, _ = _check_expect(expect, {"pass": True, "status": "PASS"})
+        assert ok, capability_id
+
+
+def test_the_registered_gate_rejects_all_eight_known_failure_paths():
     summary = _report()["summary"]
-    assert summary["ran"] > 0
-    assert summary["registry_accepts_the_failure"] == summary["ran"]
+    assert summary["ran"] == 8
+    assert summary["honest_answer_no_repair"] == summary["ran"]
+    assert summary["registry_accepts_the_failure"] == 0
     assert summary["corrected_rejects_the_failure"] == summary["ran"]
     assert summary["pass_declared_in_result_fields"] == summary["ran"]
