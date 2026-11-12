@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9f33dad8c6e26e306339da88e766165d3c7859c2743539bb997c8a4e5ee70b8b"
+  "value": "8cce742ff13eef17404798afb88e1c58ceede04fd0fbeda4fdfa094a1cc51d67"
  },
  "engines": [
   {
@@ -52951,7 +52951,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 15251,
+   "bytes": 15899,
    "headings": [
     "One try covers a fraction",
     "1. The measurement nobody had read as a dosage",
@@ -52962,14 +52962,15 @@
     "6. What is real, what is not",
     "7. The sentient-creature question, directly",
     "8. The smartest path, in order",
-    "9. Receipts"
+    "9. The record is a snapshot, not a standing claim",
+    "10. Receipts"
    ],
    "kind": "DOCUMENT",
    "path": "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md",
-   "sha256": "eb89c991f3c87deaa838c76daa1c01951132fe190c6f42c15a05aaaa0b0093d8",
+   "sha256": "bd2ef94107f62359619c82b915819a76c6dda82ae2091bcfca83281ebd9f0ca6",
    "summary": "**2026-11-12 · branch `arena/7aa1248a-brain` · authority NONE · measurement only**",
    "terms": {
-    "10": 5,
+    "10": 6,
     "15": 15,
     "440": 8,
     "50": 7,
@@ -52983,12 +52984,12 @@
     "arxiv": 8,
     "askings": 11,
     "change": 10,
+    "changed": 7,
     "changes": 13,
-    "claim": 6,
+    "claim": 7,
     "code": 7,
     "coding": 9,
     "coverage": 9,
-    "current": 6,
     "demonstration": 12,
     "developers": 6,
     "every": 6,
@@ -53000,7 +53001,7 @@
     "model": 7,
     "most": 8,
     "no": 20,
-    "not": 46,
+    "not": 49,
     "one": 28,
     "only": 7,
     "operator": 13,
@@ -53010,9 +53011,9 @@
     "pp": 7,
     "precision": 10,
     "real": 8,
-    "record": 6,
+    "record": 16,
     "right": 6,
-    "run": 6,
+    "run": 12,
     "same": 7,
     "second": 10,
     "tests": 7,
@@ -74760,7 +74761,7 @@
   "included_source_count": 1188,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9713fc7db5071bb1896f0ddb8ce39db77481f323ea9fe50c4bea6be8ca295052"
+  "source_tree_digest": "f204e41635f489e49d0fc6e29c39c3df9c8cd8a722a933e1c7de31f8bb77454b"
  },
  "research_index": [
   {
@@ -232053,7 +232054,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ede586c0cdf7dc89a7beaaa0ce972bac94382236afbbf9aa714b7b2efe75f5df",
+   "sha256": "621ea84673589e6d0f0220cce599c5c7e111e833493d1c5ab105bc1b8280e78a",
    "status": "",
    "terms": {
     "20261112": 1,
