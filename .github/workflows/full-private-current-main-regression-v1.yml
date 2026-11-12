@@ -1,0 +1,109 @@
+name: Full private current-main regression
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/full-private-current-main-regression-v1.yml'
+      - 'canonical/**'
+      - 'tests/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/full-private-current-main-regression-v1.yml'
+      - 'canonical/**'
+      - 'tests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  full-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Define exact first-party Brain regression universe
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json, os
+          root=Path(".")
+          surfaces=[]
+          surfaces += sorted((root/"canonical/tests").rglob("test_*.py"))
+          surfaces += sorted((root/"canonical/runtime").glob("test_*.py"))
+          surfaces += sorted((root/"tests").glob("test_*.py"))
+          research=root/"canonical/research/professional_quality_20261009/package/test_professional_quality_closure_normal_form_v1.py"
+          if research.is_file():
+              surfaces.append(research)
+          rel=[p.as_posix() for p in surfaces]
+          if len(rel)!=len(set(rel)):
+              raise SystemExit("DUPLICATE_TEST_PATH")
+          forbidden=[p for p in rel if "/upstream/" in p or "/vendored/" in p or p.startswith("canonical/capabilities/internalized/")]
+          if forbidden:
+              raise SystemExit("EXCLUDED_TEST_ADMITTED:"+json.dumps(forbidden))
+          if not rel:
+              raise SystemExit("EMPTY_TEST_UNIVERSE")
+          Path("/tmp/brain-regression-test-files.json").write_text(json.dumps(rel,indent=2)+"\n")
+          print(json.dumps({"test_file_count":len(rel),"head_sha":os.environ.get("GITHUB_SHA")},sort_keys=True))
+          PY
+
+      - name: Run full first-party Brain system regression
+        shell: bash
+        run: |
+          set -o pipefail
+          rc=0
+          python -m pytest -q             canonical/tests             canonical/runtime             tests             canonical/research/professional_quality_20261009/package/test_professional_quality_closure_normal_form_v1.py             2>&1 | tee /tmp/full-regression.txt || rc=$?
+          printf '%s' "$rc" > /tmp/full-regression-rc
+          exit "$rc"
+
+      - name: Build fail-closed regression receipt
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          universe=pathlib.Path("/tmp/brain-regression-test-files.json")
+          output=pathlib.Path("/tmp/full-regression.txt")
+          rc_path=pathlib.Path("/tmp/full-regression-rc")
+          test_files=json.loads(universe.read_text()) if universe.exists() else []
+          rc=int(rc_path.read_text()) if rc_path.exists() else None
+          text=output.read_text(errors="replace") if output.exists() else ""
+          passed=(bool(test_files) and rc==0)
+          receipt={
+            "schema":"PROJECT_BRAIN_FULL_PRIVATE_CURRENT_MAIN_REGRESSION_RECEIPT_V1",
+            "head_sha":os.environ.get("GITHUB_SHA"),
+            "event":os.environ.get("GITHUB_EVENT_NAME"),
+            "test_file_count":len(test_files),
+            "pytest_returncode":rc,
+            "pass":passed,
+            "status":"PASS__FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION" if passed else "FAIL_CLOSED__FULL_PRIVATE_CURRENT_MAIN_FULL_SYSTEM_REGRESSION",
+            "output_tail":text[-8000:],
+            "quality_authority":False,
+            "acceptance_authority":False,
+            "promotion_authority":False,
+            "terminal_authority":False,
+            "terminal_credit_delta":0,
+            "incremental_spend_usd":0
+          }
+          pathlib.Path("full-private-current-main-regression-receipt.json").write_text(json.dumps(receipt,indent=2,sort_keys=True)+"\n")
+          print(json.dumps({k:receipt[k] for k in ("head_sha","test_file_count","pytest_returncode","pass","status")},sort_keys=True))
+          PY
+
+      - name: Upload regression receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-private-current-main-regression-receipt
+          path: full-private-current-main-regression-receipt.json
+          if-no-files-found: error
