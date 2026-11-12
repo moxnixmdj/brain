@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 397,
+  "knowledge_documents": 398,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6794,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cad5c40df39acd36e612ac7a702ab08ee288a865ab81e8d4146f1014b35829b9"
+  "value": "c33d535b144bf3a65593031b8e7d63ab9dc8749de0b2110110e80972e42d101f"
  },
  "engines": [
   {
@@ -61463,6 +61463,88 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9253,
+   "headings": [
+    "Two operators buy thirteen points, and neither one is a solved Problem 2",
+    "What was asked, and what this measures",
+    "The measurement",
+    "What the two operators are, mechanically",
+    "What this does to the two halves of Problem 2",
+    "What is still not solved",
+    "What the 2026 evidence says about this shape of answer",
+    "The answer to the larger question",
+    "Reproduce",
+    "Limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "TWO_OPERATORS_BUY_THIRTEEN_POINTS_20261112_V1.md",
+   "sha256": "ce13d0507cb7f0829a2dd506240db3036213f19d3aa59d77b3f05b7286547351",
+   "summary": "**2026-11-12 · measured on the same 15 pull requests and 89 files as the pair-selection record**",
+   "terms": {
+    "155": 5,
+    "50": 5,
+    "55": 6,
+    "674": 5,
+    "applied": 4,
+    "arm": 4,
+    "because": 8,
+    "call": 5,
+    "canonical": 4,
+    "change": 9,
+    "changes": 12,
+    "class": 4,
+    "demonstration": 7,
+    "developers": 7,
+    "different": 4,
+    "example": 10,
+    "f-string": 7,
+    "keep": 4,
+    "measured": 6,
+    "measurement": 5,
+    "more": 5,
+    "name": 4,
+    "no": 9,
+    "not": 28,
+    "number": 4,
+    "one": 14,
+    "one-example": 4,
+    "only": 4,
+    "operator": 16,
+    "operators": 6,
+    "organ": 4,
+    "other": 4,
+    "per": 4,
+    "precision": 7,
+    "problem": 4,
+    "pull": 10,
+    "receiver": 4,
+    "rename": 10,
+    "request": 5,
+    "requests": 5,
+    "same": 7,
+    "selection": 5,
+    "shape": 5,
+    "shipped": 4,
+    "target": 7,
+    "test": 7,
+    "than": 5,
+    "two": 9
+   },
+   "title": "Two operators buy thirteen points, and neither one is a solved Problem 2",
+   "title_terms": [
+    "buy",
+    "neither",
+    "one",
+    "operators",
+    "points",
+    "problem",
+    "solved",
+    "thirteen",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 3354,
    "headings": [
     "Two replayable fixture exercises — not two verified corpus admissions",
@@ -75634,10 +75716,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1199,
+  "included_source_count": 1200,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9ac66a8eb39f96b915ea4a3d90f11ff8a76a4c3b373f976cfee18e74c4150d0d"
+  "source_tree_digest": "c7bf4cf542d863bb854426c028a3a42bc54f73eb673ba03a74d239ee67697b9c"
  },
  "research_index": [
   {
@@ -222129,7 +222211,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c6873667143931d5d28e0338e45c0904c8f6ebdd3349def681eac2319c7260c2",
+   "sha256": "8de94c627ad257b8e1dea9ae6cd4693ef26690054fc42a5a9f03eebd522c2de5",
    "status": "",
    "terms": {
     "20261112": 1,
