@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 320,
+  "knowledge_documents": 321,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6729,
+  "research_index_records": 6728,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fd659f5e59ab27ba4a7cfd95e76ffb25b7033fdcef5349b0bb9861716f056c16"
+  "value": "7e90b755a8ef1c94c58d1d73e937e48614d1a4d90a3da19126b8f0dbc557f4b9"
  },
  "engines": [
   {
@@ -50477,6 +50477,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5715,
+   "headings": [
+    "One example is a point; a test is a quantifier",
+    "1. Why the ratio is not an accident of this fixture",
+    "2. Why the repair loop already knows this",
+    "3. The two laws, together",
+    "4. What to do, unchanged and now priced",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_EXAMPLE_IS_A_POINT_A_TEST_IS_A_QUANTIFIER_20261112_V1.md",
+   "sha256": "900216b71a5c94af6dffba8a189f546b75158f912c04b51dfb0a3674f07dc53d",
+   "summary": "**2026-11-12.** Base `f8e6d2ea`. Branch `arena/29f1e2b9-brain`. Round 10.",
+   "terms": {
+    "33": 2,
+    "34": 2,
+    "90": 2,
+    "95": 2,
+    "acceptance": 2,
+    "action": 3,
+    "all": 3,
+    "already": 2,
+    "also": 4,
+    "asked": 2,
+    "assertions": 2,
+    "because": 3,
+    "bind": 2,
+    "bindings": 3,
+    "branch": 2,
+    "buys": 2,
+    "candidate": 3,
+    "cannot": 3,
+    "consistent": 3,
+    "demonstration": 12,
+    "domain": 6,
+    "every": 3,
+    "exactly": 3,
+    "experience": 3,
+    "gate": 3,
+    "grade": 3,
+    "lesson": 3,
+    "loop": 3,
+    "never": 3,
+    "no": 4,
+    "not": 10,
+    "once": 3,
+    "one": 19,
+    "only": 4,
+    "operator": 4,
+    "point": 5,
+    "program": 4,
+    "programs": 4,
+    "quantifier": 3,
+    "repair": 3,
+    "round": 6,
+    "score": 4,
+    "space": 6,
+    "suite": 4,
+    "test": 8,
+    "they": 5,
+    "would": 4,
+    "wrong": 5
+   },
+   "title": "One example is a point; a test is a quantifier",
+   "title_terms": [
+    "example",
+    "one",
+    "point",
+    "quantifier",
+    "test"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7626,
    "headings": [
     "One lesson buys a word, not an operator",
@@ -69671,10 +69746,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1122,
+  "included_source_count": 1123,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3e9390321516ab966f9d427d62e9ae094e4ae48ea8e92f7fd7c53f2e9bcf8abc"
+  "source_tree_digest": "ac84a513ac0bee17d462754518773ee862bdfc5e2d2eef3d6c391dc8579ae10f"
  },
  "research_index": [
   {
@@ -214178,39 +214253,6 @@
     "said": 3,
     "status": 2,
     "ten": 2
-   }
-  },
-  {
-   "action_id": "A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE_A_SECOND_SHOWING_WIDENS_IT_AND_A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE_A_SECOND_SHOWING_WIDENS_IT_AND_A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE_A_SECOND_SHOWING_WIDENS_IT_AND_A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "31fc37839817dd4546617150ec9ce09b480d248d324013c6761a9c784fe33cfb",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_change_shown_once_is_kept_in_a_lesson_file_a_second_showing_widens_it_and_a_use_not_shown_is_not_changed_unasked_20261112_v1": 1,
-    "a_change_shown_once_was_not_kept__the_example_had_to_be_handed_over_with_every_request__only_one_example_could_be_read__and_on_a_project_the_program_was_not_developed_on_it_wrote_a_call_the_new_function_does_not_accept_and_reported_it_done": 1,
-    "adapt_the_taught_program_so_several_examples_are_read_as_one_and_are_kept_in_a_lesson_file__and_so_a_rule_is_applied_only_to_code_that_is_about_the_same_things_and_is_used_the_way_an_example_showed__through_the_existing_compiler_sandbox_and_teaching_tool": 1,
-    "change": 1,
-    "changed": 1,
-    "file": 1,
-    "four_taught_sentences_more__on_commits_of_projects_the_program_was_not_developed_on_no_edit_differs_from_the_humans_and_none_is_made_where_the_human_made_none__at_a_measured_cost_in_edits_that_are_no_longer_made_unasked": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "kept": 1,
-    "lesson": 1,
-    "not": 2,
-    "once": 1,
-    "second": 1,
-    "showing": 1,
-    "shown": 2,
-    "unasked": 1,
-    "use": 1,
-    "v1": 1,
-    "widens": 1
    }
   },
   {
