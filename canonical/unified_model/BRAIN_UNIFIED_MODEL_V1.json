@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 344,
+  "knowledge_documents": 345,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6748,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a3e2062c07c6ea7d0332d3a3aaa10d73a6af2b5f976643832c5ea6c333d06d56"
+  "value": "8e505768793dae9c43156d801cb5f00e779f80c85df74bb6741edea52be26812"
  },
  "engines": [
   {
@@ -54337,6 +54337,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5708,
+   "headings": [
+    "The rule was refuted, and kept firing",
+    "1. The good news, measured first",
+    "2. The defect: enforcement lived in a call site, not in the primitive",
+    "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py:1126",
+    "3. The fix, and the fix I rejected",
+    "4. A refutation is knowledge, so it must travel",
+    "5. Regression evidence",
+    "What this changes about the answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "REFUTED_BUT_STILL_FIRING_20261112_V1.md",
+   "sha256": "8de8d7cf100371a117751198d64a083c521435ce5988b4ab66ae078aaa03b7a4",
+   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "100": 2,
+    "13": 2,
+    "14": 2,
+    "50": 3,
+    "about": 2,
+    "active": 2,
+    "after": 2,
+    "answer": 2,
+    "applies": 2,
+    "apply": 2,
+    "bundle": 3,
+    "c_out": 4,
+    "caller": 3,
+    "counterexample": 5,
+    "enforcement": 3,
+    "fail": 3,
+    "false": 5,
+    "fix": 3,
+    "fresh": 3,
+    "invalidated": 8,
+    "main": 4,
+    "measured": 3,
+    "must": 3,
+    "new": 5,
+    "none": 5,
+    "not": 12,
+    "one": 9,
+    "oracle": 3,
+    "pass": 4,
+    "permanent": 3,
+    "primitive": 5,
+    "public": 3,
+    "python": 4,
+    "read": 4,
+    "refused": 3,
+    "refuted": 6,
+    "repair": 3,
+    "rule": 14,
+    "same": 3,
+    "so": 4,
+    "state": 9,
+    "still": 5,
+    "store": 4,
+    "tests": 4,
+    "tree": 3,
+    "true": 6,
+    "two": 3,
+    "verifier": 3
+   },
+   "title": "The rule was refuted, and kept firing",
+   "title_terms": [
+    "firing",
+    "kept",
+    "refuted",
+    "rule"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6335,
    "headings": [
     "Repair candidate broker — unadmitted draft",
@@ -71511,10 +71586,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1146,
+  "included_source_count": 1147,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9db8682bb175149f2eb509383ecc2a0ea2fa1d8e87d6a62428fa0b0979004071"
+  "source_tree_digest": "84ca6d1a38d085b0404e4738fcb89ab219cd6e8282e50fc8eef66b8f91a2ab4a"
  },
  "research_index": [
   {
