@@ -132,9 +132,14 @@ def program_and_request(lesson: dict) -> tuple[str, dict[str, str]]:
     values = None
     for node in ast.parse(text).body:
         if isinstance(node, ast.Assign) and [getattr(t, "id", None) for t in node.targets] == ["REQUEST"]:
-            values = ast.literal_eval(node.value)
-    if not isinstance(values, tuple) or len(values) != len(lesson["parameters"]):
-        raise LessonError("%s: no REQUEST line with %d values" % (lesson["action"], len(lesson["parameters"])))
+            try:
+                values = ast.literal_eval(node.value)
+            except ValueError:
+                values = None
+    if (not isinstance(values, tuple) or len(values) != len(lesson["parameters"])
+            or not all(isinstance(value, str) and value for value in values)):
+        raise LessonError("%s: REQUEST must be a tuple of %d string literals"
+                          % (lesson["action"], len(lesson["parameters"])))
     request = dict(zip(lesson["parameters"], values))
     literals = [t.string for t in tokenize.generate_tokens(io.StringIO(text).readline) if t.type == tokenize.STRING]
     for key, value in request.items():
