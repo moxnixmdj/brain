@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 371,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6771,
+  "research_index_records": 6772,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c901d07ac1fd054c2503329fe835f2c84f030f1c84cce268807bde526ca8e30b"
+  "value": "a7e541fb52f46b85c4a5efe5e03984a0acdfe9febaedf4ea2afde3411e01c41e"
  },
  "engines": [
   {
@@ -156927,7 +156927,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json",
    "schema": "BRAIN_FIX_SHAPE_CENSUS_RECORD_V1",
-   "sha256": "d22e98532204ee635e860628e9786c70800e9091b2c8cf50acbcf2b94b1d013f",
+   "sha256": "6a3e5681bb2000c039a300988e60e000354cb3b8ae301453202f1d11924cda0d",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -171597,6 +171597,26 @@
     "refiner": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_PASSING_PATCH_SHAPE_RECORD_V1",
+   "sha256": "f25358f059698f4c4d127c17e0b16e3aadbe3d30d07aa1f91cdd7f4bb0de5185",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "shape": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
    }
   },
   {
@@ -225314,7 +225334,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "66bcb1dd0b2b4b7675d3d699cc190fb2af034daae0edc895c14883ab24501f5e",
+   "sha256": "dd287cbe95599fe408d979a6fbd3af89759e88aa591aa9345d1aa5019f8a2985",
    "status": "",
    "terms": {
     "20261111": 1,
