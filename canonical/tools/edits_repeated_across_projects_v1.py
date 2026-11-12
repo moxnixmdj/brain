@@ -24,8 +24,14 @@ How it is measured.  The first commit of a kind is the showing: its first kept f
 Every kept file of the kind's other commits is a file to edit, as it was before the person there changed
 it.  What the engine writes is compared with what that person wrote, one statement at a time (a statement
 with a block under it counts by its first line): the statements holding the marker that the person changed
-are the questions.  For each: the engine wrote the same, wrote something else, or left it; and, apart from
-those, statements the engine changed that the person did not.
+one for one are the questions.  For each: the engine wrote the same, wrote something else, or left it; and,
+apart from those, statements the engine changed that the person did not (`extra`), which are wrong edits.
+
+Three ways of using the lesson are measured: `strict` is the `repeat` action, which refuses the whole file
+when any fitting place is used a way the example did not show; `shown` is `repeat_shown`, which changes
+the shown uses and leaves the rest; `tried` is `repeat_tried` with a check that settles every try -- the
+most such a check can give, counting its `same` (tries a sufficient check keeps, rightly) and its `extra`
+(tries only a sufficient check would catch; an insufficient one lets them through).
 
 This measures agreement with people on changes of one kind.  It runs no test and solves no task.
 Zero model calls.  Nothing here gives authority to anything.
@@ -255,8 +261,8 @@ def statements(text):
 def answers(before, person, engine, marker):
     """Compare what the engine wrote with what the person wrote, per statement of `before`.
 
-    Returns the counts: questions (marker statements the person changed), same, different, left, and
-    extra (statements the engine changed that the person left as they were).
+    Returns the counts: questions (marker statements the person changed one for one), same, different,
+    left, and extra (statements the engine changed that the person left as they were).
     """
     was, became = statements(before), statements(person)
     by_person = {}
@@ -265,20 +271,100 @@ def answers(before, person, engine, marker):
             by_person.update({a + step: became[c + step] for step in range(b - a)})
         elif tag in ("replace", "delete"):
             by_person.update({index: None for index in range(a, b)})      # reshaped or taken out
-    wrote = statements(engine) if engine is not None else was
+    wrote = statements(engine) if engine is not None else list(was)
     if len(wrote) != len(was):
         raise ValueError("the engine changed the number of statements")
     count = dict.fromkeys(("questions", "same", "different", "left", "extra"), 0)
     for index, old in enumerate(was):
-        asked = index in by_person and by_person[index] is not None and marker in old
-        if asked:
+        new = by_person.get(index)
+        if new is not None and marker in old:
             count["questions"] += 1
-            count["same" if wrote[index] == by_person[index] else "left" if wrote[index] == old else "different"] += 1
+            count["same" if wrote[index] == new else "left" if wrote[index] == old else "different"] += 1
         elif wrote[index] != old and index not in by_person:
             count["extra"] += 1
-        elif wrote[index] != old and by_person[index] is None:
-            count["different"] += 0      # the person reshaped it; not a question, not held against the engine
     return count
+
+
+# ----------------------------------------------------------------------------- the three ways of repeating
+
+
+def engine():
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT))
+    from canonical.swe_kernel.taught_actions import edit_by_example_v1
+    return edit_by_example_v1
+
+
+def repeated(by_example, rules, readings, text, way):
+    """The engine's text for one file, or None where it refuses.  `way` is strict, shown or tried."""
+    try:
+        if way in ("strict", "shown"):
+            return by_example.rewrite(rules, text, leave_unshown=way == "shown")[0]
+        held = by_example.Text(text, "the file")
+        found = by_example.fitting(rules, held, "the file")
+        places = [place[:4] for place in found]                        # every fit, shown or not: all are tried
+        taken = {id(place[1]) for place in found}
+        places += [place[:4] for place in by_example.fitting(readings, held, "the file",
+                                                             lambda node: id(node) in taken, torn=False)]
+        return by_example.written(held, places) if places else text
+    except (by_example.Refused, RecursionError):
+        return None
+
+
+def measure(which, out):
+    by_example = engine()
+    sets = json.loads(COMMITS.read_text())["sets"]
+    report = {}
+    for name, chosen in sets.items():
+        if which not in (None, name):
+            continue
+        ways = {way: dict.fromkeys(("questions", "same", "different", "left", "extra", "refused files"), 0)
+                for way in ("strict", "shown", "tried")}
+        totals = {"kinds": 0, "kinds unlearned": 0, "files": 0, "files unreadable": 0}
+        for kind in chosen["kinds"]:
+            if len(kind["commits"]) < 2:
+                continue
+            totals["kinds"] += 1
+            teacher = kind["commits"][0]
+            shown_before = file_at(teacher["project"], teacher["parent"], teacher["files"][0])
+            shown_after = file_at(teacher["project"], teacher["commit"], teacher["files"][0])
+            try:
+                rules, readings = by_example.learn_all(
+                    [(shown_before.decode("utf-8"), shown_after.decode("utf-8"))], wide=True)
+            except (by_example.Refused, RecursionError) as why:
+                totals["kinds unlearned"] += 1
+                print("%-22s not learned: %s" % (kind["kind"], str(why)[:90]), flush=True)
+                continue
+            for commit in kind["commits"][1:]:
+                for path in commit["files"]:
+                    before = file_at(commit["project"], commit["parent"], path).decode("utf-8")
+                    person = file_at(commit["project"], commit["commit"], path).decode("utf-8")
+                    try:
+                        statements(before), statements(person)
+                    except (RecursionError, ValueError):
+                        totals["files unreadable"] += 1
+                        continue
+                    totals["files"] += 1
+                    for way in ways:
+                        wrote = repeated(by_example, rules, readings, before, way)
+                        try:
+                            count = answers(before, person, wrote, kind["marker"])
+                        except (ValueError, RecursionError):
+                            totals["files unreadable"] += 1
+                            continue
+                        ways[way]["refused files"] += wrote is None
+                        for key, value in count.items():
+                            ways[way][key] += value
+        report[name] = {"totals": totals, "ways": ways}
+        print("\n== %s: %d kinds (%d not learned), %d files" % (name, totals["kinds"], totals["kinds unlearned"],
+                                                                totals["files"]))
+        for way, count in ways.items():
+            print("%-7s questions %3d  same %3d  different %2d  left %3d  extra %2d  refused files %2d"
+                  % (way, count["questions"], count["same"], count["different"], count["left"], count["extra"],
+                     count["refused files"]), flush=True)
+    if out:
+        pathlib.Path(out).write_text(json.dumps(report, indent=1) + "\n")
+    return report
 
 
 def main(argv=None):
@@ -296,7 +382,8 @@ def main(argv=None):
         missing = fetch(options.which)
         print("files that could not be had: %d" % missing)
         return 1 if missing else 0
-    raise SystemExit("measure: not written yet")
+    measure(options.which, options.json)
+    return 0
 
 
 if __name__ == "__main__":
