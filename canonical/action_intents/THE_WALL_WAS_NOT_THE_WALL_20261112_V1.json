@@ -1,467 +1,467 @@
 {
- "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
- "action_id": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1",
- "action_intent_id": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1",
- "action_kind": "REAL_CAPABILITY_ACQUISITION",
- "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
- "route_id": "WHAT_ACTUALLY_BLOCKS_THE_FRONT_DOOR_20261112_V1",
- "date": "2026-11-12",
- "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "dcbbba05ea306fffa2c0b4883da73e6ea91cc696",
- "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
- "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
- "incremental_spend_usd": 0,
- "terminal_credit_delta": 0,
- "capability_credit_delta": 0,
- "governance_change": false,
- "user_authorized_governance_change": false,
- "weakens_existing_guard": false,
- "benchmark_or_family_rank_authority": false,
- "highest_leverage_now": true,
- "action_summary": "The owner asked a fifth time why the most advanced coding actions cannot be given once and kept. Four documents written on 2026-11-12 (#6733, #6734, #6736, #6744) pointed at one obstacle -- FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT, 19 of 38 realistic advanced-coding sentences, with confinement_v1.py built as its release condition and 'wire the seam' priced as the next work item. None of them ran the counterfactual, which this tree's own law says is the only instrument that finds a cause rather than a symptom. This round runs it. First re-measured on this base: the wall had GROWN to 21 of 38 (the 19 was already stale when quoted a fourth time). Then canonical/tools/lift_the_refusal_and_see_what_remains_v1.py -- four stages in disposable git clone --no-local clones, host git status byte-identical throughout -- and the result refutes the chain: S1 lifting computer_execution_boundary_v1.refuses_execution buys 0 of 21 (21 of 21 still refuse). Instrumenting every emitter of the status string found the dominant source is NOT the boundary: it is live_brain_route_admission_v1._serve_by_acting, an automatic-computer-discovery refusal that stamps the boundary's status, firing for 18 of 21. Underneath, composer_route_v1.execute_chain and live_integrated_brain_v1 both RE-DERIVED the boundary's rule from its three small predicates instead of asking refuses_execution, which its docstring calls the single decision every execution site must use -- so with the boundary lifted, 3 of 21 still refused with the boundary's status, emitted by a copy no change to the boundary can reach. A release condition admitted once would have been silently ignored, and the wiring diff four documents recommended would have measured as ineffective and been reverted. FIXED additively: _chain_refuses and _plan_refuses now ask the decision (the repair row split repair=False then repair=True, exactly as its docstring specifies). Pinned by canonical/tests/test_one_decision_spelled_once_v1, 7/7: every one of 153 registry ids moves with a substituted decision, no runtime module re-derives the rule, every existing refusal is byte-identical, and the lift now propagates (S1 21->18, S2 3->0) while S0 stays 21. LAST, the thing nobody had tried: S3 binds the arguments each capability's own action_template declares, and python.source.symbols.index.ast and python.source.taint_flow.v1 execute end to end with output_verified True -- two full capabilities working at the point 21 of 21 refusals had said the obstacle was confinement. THE LIMITING FACTOR IS BINDING, NOT CONFINEMENT, and the label was the defect: three different refusals emitted one status string, so nine rounds measured the label.",
- "selected_route": "MEASURE_WHICH_REFUSAL_IS_ACTUALLY_FIRING_BEFORE_BUILDING_ITS_RELEASE_CONDITION",
- "causal_blocker": "THREE_DISTINCT_REFUSALS_EMITTED_ONE_STATUS_STRING_AND_TWO_EXECUTION_SITES_RE_DERIVED_THE_BOUNDARY_RULE_INSTEAD_OF_ASKING_IT__SO_NINE_ROUNDS_MEASURED_A_LABEL_AND_BUILT_A_RELEASE_CONDITION_FOR_A_REFUSAL_THAT_BUYS_0_OF_21_WHEN_LIFTED",
- "expected_parent_change": "ONE_EXECUTION_DECISION_SPELLED_ONCE__THE_BOUNDARY_OWNING_IT__EVERY_EXISTING_REFUSAL_BYTE_IDENTICAL__A_REUSABLE_COUNTERFACTUAL_INSTRUMENT_THAT_REFUSES_TO_RUN_ON_A_DIRTY_TREE__THE_BINDING_BEFORE_CONFINEMENT_ORDER_MEASURED__TWO_CAPABILITIES_EXECUTING_END_TO_END_WITH_VERIFIED_EFFECTS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
- "expected_parent_frontier_change": "THE_CONFINEMENT_WALL_IS_DISPLACED_FROM_THE_NEXT_WORK_ITEM_TO_THE_LAST__BINDING_IS_MEASURED_AS_THE_LIMITING_FACTOR__NO_SCOREBOARD_MOVED__TRUTH_ACHIEVED_STAYS_FALSE",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THREE_DISTINCT_REFUSALS_EMITTED_ONE_STATUS_STRING_AND_TWO_EXECUTION_SITES_RE_DERIVED_THE_BOUNDARY_RULE_INSTEAD_OF_ASKING_IT__SO_NINE_ROUNDS_MEASURED_A_LABEL_AND_BUILT_A_RELEASE_CONDITION_FOR_A_REFUSAL_THAT_BUYS_0_OF_21_WHEN_LIFTED",
- "falsification_condition": "S1_LIFTING_THE_BOUNDARY_DECISION_MOVING_A_SINGLE_VERDICT__OR_S2_LEAVING_A_CONFINEMENT_REFUSAL_STANDING__OR_ANY_EXISTING_REFUSAL_CHANGING_SHAPE_BY_THIS_ROUND__OR_THE_153_REGISTRY_IDS_NOT_MOVING_WITH_A_SUBSTITUTED_DECISION__OR_HOST_GIT_STATUS_MOVING_DURING_EITHER_INSTRUMENT_RUN__OR_THE_TWO_S3_WORKING_CAPABILITIES_NOT_REPRODUCING_OUTPUT_VERIFIED_TRUE",
- "stop_condition": "COUNTERFACTUAL_RUN_TWICE_BEFORE_AND_AFTER_THE_FIX__S0_21_TO_21__S1_21_TO_18__S2_3_TO_0__S3_TWO_WORKING__TEST_7_OF_7__HOST_UNTOUCHED_TRUE__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
- "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' and 'YOU SURE THIS THE SMARTEST APPROACH?' $0 spend, no protected or SHA-pinned path touched, no governance change, no sentience claim.",
- "agent_orientation": {
-  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
-  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
-  "progress_evidence_paths": [
-   "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
-   "canonical/tests/test_one_decision_spelled_once_v1.py",
-   "canonical/runtime/composer_route_v1.py",
-   "canonical/runtime/live_integrated_brain_v1.py",
-   "THE_WALL_WAS_NOT_THE_WALL_20261112_V1.md"
-  ],
-  "route_class": "REUSE",
-  "producer_cognition_model_dependency_count": 0,
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1",
+  "action_intent_id": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "WHAT_ACTUALLY_BLOCKS_THE_FRONT_DOOR_20261112_V1",
+  "date": "2026-11-12",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "b52af3606df8ab39e72bbc81a6e7120be0eff42f",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "incremental_spend_usd": 0,
-  "conversation_memory_is_authority": false,
-  "laws_read_this_session": [
-   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
-   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
-   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
-   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
-   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
-   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
-   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
-   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
-   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
-   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
-   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-   "AGENTS.md"
-  ]
- },
- "measured_effect": {
-  "instrument": "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
-  "corpus_size": 21,
-  "before_fix": {
-   "S0_confinement": 21,
-   "S1_confinement": 21,
-   "S2_confinement": 3,
-   "S3_works": 2
-  },
-  "after_fix": {
-   "S0_confinement": 21,
-   "S1_confinement": 18,
-   "S2_confinement": 0,
-   "S3_works": 2
-  },
-  "passes_at_every_stage": 0,
-  "host_untouched": true,
-  "test_result": "7 of 7"
- },
- "load_bearing_primary": {
-  "interpretation": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM__THE_CLAIM_THAT_THE_CONFINEMENT_SEAM_IS_THE_BLOCKER__REFUTED_BY_LIFTING_IT_AND_MEASURING_0_OF_21__NOTHING_RELEASED_BY_THE_FIX",
-  "open_obligation_ids": [],
-  "scope_complete_discharge": false,
-  "success_probability_lcb": "1",
-  "wall_clock_cost_ub": 1,
-  "expected_obligation_discharge_lcb": "0",
-  "expected_obligation_unlock_lcb": "1",
-  "constructive_gap_for_open_obligation_ids": [
-   "AUTOMATIONBENCH_GE_40",
-   "CHARTOGRAPHY_TOOLS_GE_89",
-   "CODING_CURSORBENCH_GE_57_8",
-   "CODING_TB4_GE_66_4",
-   "FINANCE_ACCOUNTING_INDEX_GE_61",
-   "FINANCE_AGENT_V2_GE_58_59",
-   "HLE_TOOLS_GE_67_7",
-   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
-   "OSWORLD_2_1_PARTIAL_GE_81_8",
-   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
-   "PROWORK_GDPVAL_GE_1846",
-   "TB_SCIENCE_GE_58_7"
-  ]
- },
- "recursive_obs": {
-  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "dcbbba05ea306fffa2c0b4883da73e6ea91cc696",
-  "real_outcome": "THE_CONFINEMENT_SEAM_IS_MEASURED_AS_NOT_THE_BLOCKER__LIFTING_IT_BUYS_0_OF_21__THE_DOMINANT_EMITTER_OF_THAT_STATUS_IS_A_DIFFERENT_REFUSAL_SITE__AND_THE_EXECUTION_DECISION_WAS_SPELLED_THREE_TIMES_SO_A_RELEASE_CONDITION_COULD_NOT_PROPAGATE__NOW_SPELLED_ONCE_WITH_EVERY_EXISTING_REFUSAL_UNCHANGED",
-  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "obs_goal": {
-   "real_outcome": "Owner asks why the most advanced coding actions cannot be given once and kept. Four documents from earlier the same day priced wiring the confinement seam as the next item. This round ran the counterfactual that none of them ran and found the seam is not the blocker: lifting it buys 0 of 21.",
-   "proxy_goals_deleted": [
-    "wiring the confinement seam because four documents agreed on it (measured: 0 of 21 verdicts move)",
-    "treating the status string FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT as naming one mechanism (three separate sites emit it)",
-    "building more release-condition substrate before measuring which refusal is actually firing"
-   ],
-   "surviving_necessity": "One execution decision, owned by the boundary, whose release condition propagates to every caller -- measured by substitution across all 153 registry ids -- with binding measured as the limiting factor."
-  },
-  "obs_capability": {
-   "existing_inherited_routes_checked": [
-    "canonical/runtime/computer_execution_boundary_v1.py (the single-decision contract, honored not weakened)",
-    "canonical/runtime/composer_route_v1.py and live_integrated_brain_v1.py (the two callers that re-derived the rule)",
-    "canonical/runtime/live_brain_route_admission_v1.py._serve_by_acting (the dominant emitter of the status, found by instrumentation)",
-    "canonical/tools/realistic_goal_reach_probe_v1.py (the corpus, re-run first: 21 of 38, not the published 19)",
-    "what_actually_blocks_the_front_door.md + its test (the counterfactual law this round finally applied)"
-   ],
-   "external_existing_routes_checked": [
-    "OSWorld 2.1 (Nov 2026): best binary completion 44.3% (Opus 5.5 48.7% per leaderboard) -- the field's wall is tracking constraints and verification, not performing actions",
-    "IJCAI-26 test-time-scaling survey and the NeurIPS-26 TTCL workshop scope: memory consolidation and applicability, not action libraries",
-    "SkillTTA (arXiv 2605.16986): task-specific synthesis from retrieved traces beats static skill libraries"
-   ],
-   "capability_work_deleted": [
-    "the intended fix (wire the confinement seam) -- deleted by its own counterfactual before any code was written",
-    "a first counterfactual patch that truncated the boundary module and deleted a helper, which produced 13 false AttributeError failures -- instrument discarded and rebuilt as a three-line replacement, because an instrument must not create the effect it measures",
-    "the assumption that the 19-of-38 figure published the same day was current (it was 21 by the time it was quoted)"
-   ],
-   "surviving_gap": "binding: how a sentence's stated material reaches the arguments a capability declares. 2 of 21 now execute once bound; 5 more reach their real next obstacle (tool absent, interface requirement, safety refusal). Confinement remains genuinely needed for repair loops and shell execution -- 1 to 3 rows, last."
-  },
-  "obs_blocker": {
-   "intrinsic_or_path_specific": "Intrinsic to the tree, not path-specific: an execution policy that is written out at three call sites cannot be released, because changing the owner of the rule changes nothing at the copies. The deeper blocker the measurement then exposed is that the label was doing the work: nine rounds measured a status string and concluded about a mechanism.",
-   "delete_bypass_substitute_options": [
-    "DELETE the boundary refusal -- rejected: it is the tree's honest refusal to run code unconfined, and this round pins every existing refusal unchanged",
-    "BYPASS by lifting _serve_by_acting -- rejected: it guards automatic discovery, broader than any one capability's declared effects, and is not an agent's decision to make",
-    "SUBSTITUTE more substrate for the missing measurement -- rejected: this is what four documents did",
-    "SUBSTITUTE a truncated-module patch for a minimal one -- done first by accident, measured as producing 13 false failures, and discarded"
-   ],
-   "surviving_causal_blocker": "The decision was spelled three times: two callers re-derived it, so 3 of 21 sentences refused with the boundary's own status from a copy the boundary cannot reach. Now spelled once (7/7 pinned)."
-  },
-  "obs_solution": {
-   "deletion_first_order_applied": [
-    "DELETE",
-    "BYPASS",
-    "REUSE",
-    "SUBSTITUTE",
-    "WHITE_BOX_HARVEST",
-    "COMPOSE",
-    "CONFIGURE",
-    "INTEGRATE"
-   ],
-   "routes_ranked": [
-    "1. Run the counterfactual before building anything -- chosen: it refuted the planned work in 8.9 s and cost one instrument",
-    "2. De-duplicate the decision so a future release propagates -- chosen: additive, 7/7 pinned, refusals byte-identical",
-    "3. Bind declared arguments and measure the gain -- chosen: 2 of 21 execute end to end, the largest single move measured this round",
-    "4. Wire the confinement seam -- rejected by measurement: 0 of 21",
-    "5. Lift the automatic-discovery refusal -- rejected: not an agent's decision, and it is 18 of the 21"
-   ],
-   "losing_routes_reason": "Wiring the seam was the top-ranked route in four documents and is refuted by its own counterfactual. Lifting discovery would release real authority this round has no mandate for. De-duplication and binding are additive, keep every refusal, and are measured.",
-   "implementation_still_necessary": true
-  },
-  "obs_verification": {
-   "direct_real_effect_verification_considered": true,
-   "existing_oracle_considered": true,
-   "synthetic_verification_necessity": "The oracle is the door itself: the instrument asks the real front door in disposable clones, before and after the fix, and the fix's claim is a substitution experiment over all 153 registry ids plus byte-identical refusal shapes. It can fail in both directions -- S0 rising would mean the fix released something, S1 not falling would mean the de-duplication did not land. Both were measured; S0 stayed 21 and S1 fell 21 to 18."
-  },
-  "obs_inherited_system": {
-   "downstream_work_to_delete_or_supersede": [
-    "the 'wire the seam' work item in WHY_NOT_JUST_GIVE_IT_THE_TRY_20261112_V1.md section 3 step 1 -- refuted",
-    "WHY_NOT_JUST_GIVE_IT_THE_TRY's scorecard line calling the confinement bucket 'the current wall' -- now measured as 0 of 21 when lifted",
-    "this round's own first instrument draft -- truncated a module, produced 13 false failures, discarded"
-   ],
-   "adjacent_capabilities_absorbed": [
-    "the composer and live_integrated_brain now share the boundary's decision instead of carrying copies",
-    "the 21-sentence corpus is carried as data inside the instrument so it re-runs without the other probe"
-   ],
-   "fresh_reuse_plan": "The S3 binding table is the next instrument's starting point: it names which capability needs which declared argument, which is exactly the binding work the measurement ranks above confinement."
-  },
-  "obs_obs": {
-   "analysis_steps_deleted_or_cached": [
-    "re-arguing what the confinement wall is -- replaced by a re-runnable four-stage counterfactual",
-    "counting refusals by status string -- shown to be the exact error, since three sites emit one string",
-    "re-deriving whether a fix propagates -- pinned by substitution across 153 registry ids"
-   ],
-   "search_stop_decision": "Stop when the counterfactual answers the question the census could not, and the fix is measured to propagate without releasing anything. Binding the declared arguments for the remaining rows is a new round with its own prediction.",
-   "affected_layers_only_on_revalidation": true
-  },
-  "routes_considered": [
-   "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
-   "WIRE_THE_CONFINEMENT_SEAM",
-   "LIFT_THE_AUTOMATIC_DISCOVERY_REFUSAL",
-   "BIND_DECLARED_ARGUMENTS_AND_MEASURE"
-  ],
-  "deleted_or_bypassed_paths": [
-   "WIRE_THE_CONFINEMENT_SEAM_REFUTED_BY_ITS_OWN_COUNTERFACTUAL",
-   "TRUNCATE_THE_BOUNDARY_MODULE_COUNTERFACTUAL_PRODUCED_13_FALSE_FAILURES",
-   "ASSUME_ONE_STATUS_STRING_NAMES_ONE_MECHANISM"
-  ],
-  "selected_surviving_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
-  "why_selected_route_is_fastest_sufficient": "IT_REFUTED_THE_PLANNED_WORK_IN_8_9_SECONDS_INSTEAD_OF_A_SESSION__IT_FOUND_THE_DOMINANT_EMITTER_AND_THE_TWO_RE_DERIVING_CALLERS__IT_COSTS_ONE_STDLIB_TOOL_THAT_RE_RUNS__AND_IT_TURNED_A_NINE_ROUND_STALE_CONCLUSION_INTO_A_FALSIFIED_ONE_WITH_THE_FIX_MEASURED",
-  "expected_parent_level_state_change": "THE_CONFINEMENT_WALL_IS_DISPLACED_FROM_THE_NEXT_WORK_ITEM_TO_THE_LAST__BINDING_IS_MEASURED_AS_THE_LIMITING_FACTOR__NO_SCOREBOARD_MOVED__TRUTH_ACHIEVED_STAYS_FALSE",
-  "stop_condition": "COUNTERFACTUAL_RUN_TWICE_BEFORE_AND_AFTER_THE_FIX__S0_21_TO_21__S1_21_TO_18__S2_3_TO_0__S3_TWO_WORKING__TEST_7_OF_7__HOST_UNTOUCHED_TRUE__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
-  "route_frontier": {
-   "discovery_required": true,
-   "checked_at_utc": "2026-11-12T20:38:31Z",
-   "max_age_hours": 24,
-   "incumbent_route": "BOUNDARY_STATE__19_OF_38_REALISTIC_ADVANCED_CODING_GOALS_REFUSED_WITH_COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT__SEAM_PRICED_AS_THE_NEXT_WORK_ITEM_BY_FOUR_DOCUMENTS",
-   "source_classes_checked": [
-    "BRAIN_INHERITED",
-    "OFFICIAL_PRIMARY",
-    "CODE_OR_PACKAGE_REGISTRY",
-    "BROAD_WEB_OR_COMMUNITY"
-   ],
-   "source_evidence": {
-    "BRAIN_INHERITED": [
-     "realistic_goal_reach_probe re-run on this base: 21 of 38 confine, not the published 19",
-     "four-stage counterfactual: S0 21, S1 21, S2 3, S3 2 work -- lifting the boundary buys 0",
-     "instrumentation of every emitter: _serve_by_acting fires 18 of 21; the boundary's decision 3 of 21",
-     "with the boundary lifted, 3 of 21 still refuse with the same status from composer_route_v1:4089"
-    ],
-    "OFFICIAL_PRIMARY": [
-     "OSWorld 2.1 (Nov 2026): best binary completion 44.3% -- the field's wall is verification and constraint tracking",
-     "NeurIPS-26 TTCL workshop scope: consolidation of trajectories into reusable skills, applicability first",
-     "IJCAI-26 data-efficient-learning survey: experience augmentation and interface design over action libraries"
-    ],
-    "CODE_OR_PACKAGE_REGISTRY": [
-     "python stdlib only for the instrument: subprocess, tempfile, json, pathlib",
-     "git clone --no-local is the disposable-clone mechanism, the same convention the census uses"
-    ],
-    "BROAD_WEB_OR_COMMUNITY": [
-     "SkillTTA (arXiv 2605.16986): task-specific synthesis beats static skills -- consistent with binding over libraries"
-    ]
-   },
-   "query_families": [
-    {
-     "intent": "CAPABILITY_VECTOR",
-     "query": "agent execution boundary release condition confinement 2026"
-    },
-    {
-     "intent": "SUPPLIER_OR_PRODUCT",
-     "query": "OSWorld 2.1 computer use leaderboard November 2026 verification failure modes"
-    },
-    {
-     "intent": "IMPLEMENTATION_FORM",
-     "query": "single decision policy enforcement multiple call sites refactor"
-    },
-    {
-     "intent": "RECENCY_OR_NEW_RELEASE",
-     "query": "test-time continual learning agents NeurIPS 2026 skill consolidation"
-    }
-   ],
-   "comparison_dimensions": [
-    "CORRECTNESS",
-    "CAPABILITY_STRENGTH",
-    "WALL_CLOCK",
-    "INCREMENTAL_COST",
-    "RELIABILITY",
-    "VERIFIABILITY"
-   ],
-   "refresh_triggers": [
-    "BEFORE_EXPENSIVE_EXECUTION",
-    "AFTER_MATERIAL_ROUTE_FAILURE",
-    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
-    "BEFORE_SCARCE_GATE_SPEND"
-   ],
-   "unresolved_plausible_dominators": [],
-   "selected_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
-   "challenger_routes": [
-    {
-     "route": "WIRE_THE_CONFINEMENT_SEAM",
-     "evidence": [
-      "confinement_v1.py exists and measures 9/9; the boundary's docstring names the release condition"
-     ],
-     "qualification_evidence": [
-      "lifting the boundary's own decision moves 0 of 21 verdicts; the seam is not the blocker"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "DISQUALIFIED",
-     "comparison": {
-      "CORRECTNESS": "Would have released nothing",
-      "CAPABILITY_STRENGTH": "0 of 21",
-      "WALL_CLOCK": "Hours",
-      "INCREMENTAL_COST": "0 USD",
-      "RELIABILITY": "No change",
-      "VERIFIABILITY": "No measurable gain to verify"
-     }
-    },
-    {
-     "route": "LIFT_THE_AUTOMATIC_DISCOVERY_REFUSAL",
-     "evidence": [
-      "_serve_by_acting fires for 18 of 21 sentences"
-     ],
-     "qualification_evidence": [
-      "it is a genuine authority decision over automatic computer discovery, broader than any declared effect; not an agent's call"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "DISQUALIFIED",
-     "comparison": {
-      "CORRECTNESS": "Releases real authority",
-      "CAPABILITY_STRENGTH": "High but unmandated",
-      "WALL_CLOCK": "Minutes",
-      "INCREMENTAL_COST": "0 USD",
-      "RELIABILITY": "Unacceptable",
-      "VERIFIABILITY": "Cannot be verified without an owner decision"
-     }
-    },
-    {
-     "route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
-     "evidence": [
-      "counterfactual run twice (before and after the fix): S0 21->21, S1 21->18, S2 3->0, S3 2 work",
-      "7/7 test pinning substitution across 153 registry ids and byte-identical refusals",
-      "host_untouched True over 311 s in the second run"
-     ],
-     "qualification_evidence": [
-      "repo_integrity_guard 17 rules 0 violations; load-bearing admission PASS; orientation verify ok",
-      "test_composer_route_v1 failure set identical to base dcbbba05 (10 of 10, pre-existing)"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "SELECTED",
-     "comparison": {
-      "CORRECTNESS": "Every refusal unchanged and pinned",
-      "CAPABILITY_STRENGTH": "2 of 21 executing end to end after binding",
-      "WALL_CLOCK": "8.9 s to refute the planned work",
-      "INCREMENTAL_COST": "0 USD, stdlib",
-      "RELIABILITY": "Substitution experiment, both directions measured",
-      "VERIFIABILITY": "Re-runnable by anyone"
-     }
-    }
-   ],
-   "selected_route_preflight": {
-    "checked_at_utc": "2026-11-12T20:38:31Z",
-    "max_age_hours": 2,
-    "selected_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
-    "status": "READY",
-    "all_required_dependencies_ready": true,
-    "execution_dependencies_complete": true,
-    "failed_dependencies": [],
-    "execution_dependencies": [
-     {
-      "dependency": "CPython 3.11 standard library runtime",
-      "kind": "LOCAL_RUNTIME",
-      "required": true,
-      "volatility": "STATIC",
-      "scope": "LOCAL",
-      "evidence_scope": "LOCAL",
-      "status": "READY",
-      "evidence": [
-       "the instrument and the test execute in this sandbox at the current base"
-      ],
-      "evidence_classes": [
-       "DIRECT_PROBE"
-      ]
-     },
-     {
-      "dependency": "git",
-      "kind": "LOCAL_RUNTIME",
-      "required": true,
-      "volatility": "STATIC",
-      "scope": "LOCAL",
-      "evidence_scope": "LOCAL",
-      "status": "READY",
-      "evidence": [
-       "git clone --no-local succeeded for every stage; host status byte-identical after"
-      ],
-      "evidence_classes": [
-       "DIRECT_PROBE"
-      ]
-     },
-     {
-      "dependency": "canonical.runtime.computer_execution_boundary_v1",
-      "kind": "CODE_ARTIFACT",
-      "required": true,
-      "volatility": "STATIC",
-      "scope": "GLOBAL",
-      "evidence_scope": "GLOBAL",
-      "status": "READY",
-      "evidence": [
-       "refuses_execution imported by both callers; substitution drives all 153 registry ids"
-      ],
-      "evidence_classes": [
-       "DIRECT_PROBE",
-       "BRAIN_INHERITED"
-      ],
-      "path": "canonical/runtime/computer_execution_boundary_v1.py",
-      "detail": "the single decision this round de-duplicated"
-     }
-    ]
-   }
-  }
- },
- "v22_prewrite_admission": {
-  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-  "mode": "ACTIVE_INTERFACE",
-  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
-  "target_truth_obligations": [
-   "AUTOMATIONBENCH_GE_40",
-   "CHARTOGRAPHY_TOOLS_GE_89",
-   "CODING_CURSORBENCH_GE_57_8",
-   "CODING_TB4_GE_66_4",
-   "FINANCE_ACCOUNTING_INDEX_GE_61",
-   "FINANCE_AGENT_V2_GE_58_59",
-   "HLE_TOOLS_GE_67_7",
-   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
-   "OSWORLD_2_1_PARTIAL_GE_81_8",
-   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
-   "PROWORK_GDPVAL_GE_1846",
-   "TB_SCIENCE_GE_58_7"
-  ],
-  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_FALSIFIES_A_FALSE_GENERAL_CLAIM_ABOUT_WHICH_REFUSAL_BLOCKS_THE_ADVANCED_CODING_CAPABILITIES_AND_DEDUPLICATES_ONE_EXECUTION_DECISION_WITH_ZERO_RELEASES__THE_CLAIM_IS_BOUND_TO_A_RE_RUNNABLE_FOUR_STAGE_COUNTERFACTUAL_AND_A_7_OF_7_SUBSTITUTION_TEST",
-  "fresh_reality_authority": false,
   "terminal_credit_delta": 0,
-  "currentness": {
-   "accepted_families": 5,
-   "open_families": 14,
-   "proved_atomic": 14,
-   "unresolved_atomic": 22,
-   "root1_positive_gap_count": 0,
-   "root2_touching_count": 17,
-   "root3_touching_count": 8,
-   "meta_envelope_open_count": 8,
-   "total_open_truth_obligations": 30,
-   "terminal": false
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "The owner asked a fifth time why the most advanced coding actions cannot be given once and kept. Four documents written on 2026-11-12 (#6733, #6734, #6736, #6744) pointed at one obstacle -- FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT, 19 of 38 realistic advanced-coding sentences, with confinement_v1.py built as its release condition and 'wire the seam' priced as the next work item. None of them ran the counterfactual, which this tree's own law says is the only instrument that finds a cause rather than a symptom. This round runs it. First re-measured on this base: the wall had GROWN to 21 of 38 (the 19 was already stale when quoted a fourth time). Then canonical/tools/lift_the_refusal_and_see_what_remains_v1.py -- four stages in disposable git clone --no-local clones, host git status byte-identical throughout -- and the result refutes the chain: S1 lifting computer_execution_boundary_v1.refuses_execution buys 0 of 21 (21 of 21 still refuse). Instrumenting every emitter of the status string found the dominant source is NOT the boundary: it is live_brain_route_admission_v1._serve_by_acting, an automatic-computer-discovery refusal that stamps the boundary's status, firing for 18 of 21. Underneath, composer_route_v1.execute_chain and live_integrated_brain_v1 both RE-DERIVED the boundary's rule from its three small predicates instead of asking refuses_execution, which its docstring calls the single decision every execution site must use -- so with the boundary lifted, 3 of 21 still refused with the boundary's status, emitted by a copy no change to the boundary can reach. A release condition admitted once would have been silently ignored, and the wiring diff four documents recommended would have measured as ineffective and been reverted. FIXED additively: _chain_refuses and _plan_refuses now ask the decision (the repair row split repair=False then repair=True, exactly as its docstring specifies). Pinned by canonical/tests/test_one_decision_spelled_once_v1, 7/7: every one of 153 registry ids moves with a substituted decision, no runtime module re-derives the rule, every existing refusal is byte-identical, and the lift now propagates (S1 21->18, S2 3->0) while S0 stays 21. LAST, the thing nobody had tried: S3 binds the arguments each capability's own action_template declares, and python.source.symbols.index.ast and python.source.taint_flow.v1 execute end to end with output_verified True -- two full capabilities working at the point 21 of 21 refusals had said the obstacle was confinement. THE LIMITING FACTOR IS BINDING, NOT CONFINEMENT, and the label was the defect: three different refusals emitted one status string, so nine rounds measured the label.",
+  "selected_route": "MEASURE_WHICH_REFUSAL_IS_ACTUALLY_FIRING_BEFORE_BUILDING_ITS_RELEASE_CONDITION",
+  "causal_blocker": "THREE_DISTINCT_REFUSALS_EMITTED_ONE_STATUS_STRING_AND_TWO_EXECUTION_SITES_RE_DERIVED_THE_BOUNDARY_RULE_INSTEAD_OF_ASKING_IT__SO_NINE_ROUNDS_MEASURED_A_LABEL_AND_BUILT_A_RELEASE_CONDITION_FOR_A_REFUSAL_THAT_BUYS_0_OF_21_WHEN_LIFTED",
+  "expected_parent_change": "ONE_EXECUTION_DECISION_SPELLED_ONCE__THE_BOUNDARY_OWNING_IT__EVERY_EXISTING_REFUSAL_BYTE_IDENTICAL__A_REUSABLE_COUNTERFACTUAL_INSTRUMENT_THAT_REFUSES_TO_RUN_ON_A_DIRTY_TREE__THE_BINDING_BEFORE_CONFINEMENT_ORDER_MEASURED__TWO_CAPABILITIES_EXECUTING_END_TO_END_WITH_VERIFIED_EFFECTS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "expected_parent_frontier_change": "THE_CONFINEMENT_WALL_IS_DISPLACED_FROM_THE_NEXT_WORK_ITEM_TO_THE_LAST__BINDING_IS_MEASURED_AS_THE_LIMITING_FACTOR__NO_SCOREBOARD_MOVED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THREE_DISTINCT_REFUSALS_EMITTED_ONE_STATUS_STRING_AND_TWO_EXECUTION_SITES_RE_DERIVED_THE_BOUNDARY_RULE_INSTEAD_OF_ASKING_IT__SO_NINE_ROUNDS_MEASURED_A_LABEL_AND_BUILT_A_RELEASE_CONDITION_FOR_A_REFUSAL_THAT_BUYS_0_OF_21_WHEN_LIFTED",
+  "falsification_condition": "S1_LIFTING_THE_BOUNDARY_DECISION_MOVING_A_SINGLE_VERDICT__OR_S2_LEAVING_A_CONFINEMENT_REFUSAL_STANDING__OR_ANY_EXISTING_REFUSAL_CHANGING_SHAPE_BY_THIS_ROUND__OR_THE_153_REGISTRY_IDS_NOT_MOVING_WITH_A_SUBSTITUTED_DECISION__OR_HOST_GIT_STATUS_MOVING_DURING_EITHER_INSTRUMENT_RUN__OR_THE_TWO_S3_WORKING_CAPABILITIES_NOT_REPRODUCING_OUTPUT_VERIFIED_TRUE",
+  "stop_condition": "COUNTERFACTUAL_RUN_TWICE_BEFORE_AND_AFTER_THE_FIX__S0_21_TO_21__S1_21_TO_18__S2_3_TO_0__S3_TWO_WORKING__TEST_7_OF_7__HOST_UNTOUCHED_TRUE__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' and 'YOU SURE THIS THE SMARTEST APPROACH?' $0 spend, no protected or SHA-pinned path touched, no governance change, no sentience claim.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
+      "canonical/tests/test_one_decision_spelled_once_v1.py",
+      "canonical/runtime/composer_route_v1.py",
+      "canonical/runtime/live_integrated_brain_v1.py",
+      "THE_WALL_WAS_NOT_THE_WALL_20261112_V1.md"
+    ],
+    "route_class": "REUSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
   },
-  "tournament": {
-   "proposal_id": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING_ANY_RELEASE_CONDITION",
-   "falsifier_id": "F_LIFTING_THE_BOUNDARY_DECISION_MOVING_A_SINGLE_VERDICT__OR_ANY_EXISTING_REFUSAL_CHANGING_SHAPE__OR_THE_153_REGISTRY_IDS_NOT_MOVING_WITH_A_SUBSTITUTED_DECISION__OR_HOST_GIT_STATUS_MOVING_DURING_A_RUN",
-   "decisive_question": "Does lifting the execution boundary's own refusal, in a disposable clone, change any of the 21 verdicts four documents called blocked by it?",
-   "known_counterexamples_checked": true,
-   "counterexample_receipts": [
-    {
-     "path": "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
-     "git_blob_sha": "0702d4c6c6d13af74a401e1cd315b1601f9e8cbe"
+  "measured_effect": {
+    "instrument": "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
+    "corpus_size": 21,
+    "before_fix": {
+      "S0_confinement": 21,
+      "S1_confinement": 21,
+      "S2_confinement": 3,
+      "S3_works": 2
     },
-    {
-     "path": "canonical/tests/test_one_decision_spelled_once_v1.py",
-     "git_blob_sha": "309c237b1a1ff9664ea56458afc25f76bc5c3417"
+    "after_fix": {
+      "S0_confinement": 21,
+      "S1_confinement": 18,
+      "S2_confinement": 0,
+      "S3_works": 2
     },
-    {
-     "path": "canonical/runtime/composer_route_v1.py",
-     "git_blob_sha": "e6c28644766a49dea5f4f36450af181311673548"
+    "passes_at_every_stage": 0,
+    "host_untouched": true,
+    "test_result": "7 of 7"
+  },
+  "load_bearing_primary": {
+    "interpretation": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM__THE_CLAIM_THAT_THE_CONFINEMENT_SEAM_IS_THE_BLOCKER__REFUTED_BY_LIFTING_IT_AND_MEASURING_0_OF_21__NOTHING_RELEASED_BY_THE_FIX",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "b52af3606df8ab39e72bbc81a6e7120be0eff42f",
+    "real_outcome": "THE_CONFINEMENT_SEAM_IS_MEASURED_AS_NOT_THE_BLOCKER__LIFTING_IT_BUYS_0_OF_21__THE_DOMINANT_EMITTER_OF_THAT_STATUS_IS_A_DIFFERENT_REFUSAL_SITE__AND_THE_EXECUTION_DECISION_WAS_SPELLED_THREE_TIMES_SO_A_RELEASE_CONDITION_COULD_NOT_PROPAGATE__NOW_SPELLED_ONCE_WITH_EVERY_EXISTING_REFUSAL_UNCHANGED",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "Owner asks why the most advanced coding actions cannot be given once and kept. Four documents from earlier the same day priced wiring the confinement seam as the next item. This round ran the counterfactual that none of them ran and found the seam is not the blocker: lifting it buys 0 of 21.",
+      "proxy_goals_deleted": [
+        "wiring the confinement seam because four documents agreed on it (measured: 0 of 21 verdicts move)",
+        "treating the status string FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT as naming one mechanism (three separate sites emit it)",
+        "building more release-condition substrate before measuring which refusal is actually firing"
+      ],
+      "surviving_necessity": "One execution decision, owned by the boundary, whose release condition propagates to every caller -- measured by substitution across all 153 registry ids -- with binding measured as the limiting factor."
     },
-    {
-     "path": "canonical/runtime/live_integrated_brain_v1.py",
-     "git_blob_sha": "4ee0a5783bc27165bab778e793ef287eb5a4c99e"
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/computer_execution_boundary_v1.py (the single-decision contract, honored not weakened)",
+        "canonical/runtime/composer_route_v1.py and live_integrated_brain_v1.py (the two callers that re-derived the rule)",
+        "canonical/runtime/live_brain_route_admission_v1.py._serve_by_acting (the dominant emitter of the status, found by instrumentation)",
+        "canonical/tools/realistic_goal_reach_probe_v1.py (the corpus, re-run first: 21 of 38, not the published 19)",
+        "what_actually_blocks_the_front_door.md + its test (the counterfactual law this round finally applied)"
+      ],
+      "external_existing_routes_checked": [
+        "OSWorld 2.1 (Nov 2026): best binary completion 44.3% (Opus 5.5 48.7% per leaderboard) -- the field's wall is tracking constraints and verification, not performing actions",
+        "IJCAI-26 test-time-scaling survey and the NeurIPS-26 TTCL workshop scope: memory consolidation and applicability, not action libraries",
+        "SkillTTA (arXiv 2605.16986): task-specific synthesis from retrieved traces beats static skill libraries"
+      ],
+      "capability_work_deleted": [
+        "the intended fix (wire the confinement seam) -- deleted by its own counterfactual before any code was written",
+        "a first counterfactual patch that truncated the boundary module and deleted a helper, which produced 13 false AttributeError failures -- instrument discarded and rebuilt as a three-line replacement, because an instrument must not create the effect it measures",
+        "the assumption that the 19-of-38 figure published the same day was current (it was 21 by the time it was quoted)"
+      ],
+      "surviving_gap": "binding: how a sentence's stated material reaches the arguments a capability declares. 2 of 21 now execute once bound; 5 more reach their real next obstacle (tool absent, interface requirement, safety refusal). Confinement remains genuinely needed for repair loops and shell execution -- 1 to 3 rows, last."
     },
-    {
-     "path": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1.md",
-     "git_blob_sha": "cbb70e5810c698194e1db723ea19506524b46ae1"
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic to the tree, not path-specific: an execution policy that is written out at three call sites cannot be released, because changing the owner of the rule changes nothing at the copies. The deeper blocker the measurement then exposed is that the label was doing the work: nine rounds measured a status string and concluded about a mechanism.",
+      "delete_bypass_substitute_options": [
+        "DELETE the boundary refusal -- rejected: it is the tree's honest refusal to run code unconfined, and this round pins every existing refusal unchanged",
+        "BYPASS by lifting _serve_by_acting -- rejected: it guards automatic discovery, broader than any one capability's declared effects, and is not an agent's decision to make",
+        "SUBSTITUTE more substrate for the missing measurement -- rejected: this is what four documents did",
+        "SUBSTITUTE a truncated-module patch for a minimal one -- done first by accident, measured as producing 13 false failures, and discarded"
+      ],
+      "surviving_causal_blocker": "The decision was spelled three times: two callers re-derived it, so 3 of 21 sentences refused with the boundary's own status from a copy the boundary cannot reach. Now spelled once (7/7 pinned)."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1. Run the counterfactual before building anything -- chosen: it refuted the planned work in 8.9 s and cost one instrument",
+        "2. De-duplicate the decision so a future release propagates -- chosen: additive, 7/7 pinned, refusals byte-identical",
+        "3. Bind declared arguments and measure the gain -- chosen: 2 of 21 execute end to end, the largest single move measured this round",
+        "4. Wire the confinement seam -- rejected by measurement: 0 of 21",
+        "5. Lift the automatic-discovery refusal -- rejected: not an agent's decision, and it is 18 of the 21"
+      ],
+      "losing_routes_reason": "Wiring the seam was the top-ranked route in four documents and is refuted by its own counterfactual. Lifting discovery would release real authority this round has no mandate for. De-duplication and binding are additive, keep every refusal, and are measured.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The oracle is the door itself: the instrument asks the real front door in disposable clones, before and after the fix, and the fix's claim is a substitution experiment over all 153 registry ids plus byte-identical refusal shapes. It can fail in both directions -- S0 rising would mean the fix released something, S1 not falling would mean the de-duplication did not land. Both were measured; S0 stayed 21 and S1 fell 21 to 18."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "the 'wire the seam' work item in WHY_NOT_JUST_GIVE_IT_THE_TRY_20261112_V1.md section 3 step 1 -- refuted",
+        "WHY_NOT_JUST_GIVE_IT_THE_TRY's scorecard line calling the confinement bucket 'the current wall' -- now measured as 0 of 21 when lifted",
+        "this round's own first instrument draft -- truncated a module, produced 13 false failures, discarded"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "the composer and live_integrated_brain now share the boundary's decision instead of carrying copies",
+        "the 21-sentence corpus is carried as data inside the instrument so it re-runs without the other probe"
+      ],
+      "fresh_reuse_plan": "The S3 binding table is the next instrument's starting point: it names which capability needs which declared argument, which is exactly the binding work the measurement ranks above confinement."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "re-arguing what the confinement wall is -- replaced by a re-runnable four-stage counterfactual",
+        "counting refusals by status string -- shown to be the exact error, since three sites emit one string",
+        "re-deriving whether a fix propagates -- pinned by substitution across 153 registry ids"
+      ],
+      "search_stop_decision": "Stop when the counterfactual answers the question the census could not, and the fix is measured to propagate without releasing anything. Binding the declared arguments for the remaining rows is a new round with its own prediction.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
+      "WIRE_THE_CONFINEMENT_SEAM",
+      "LIFT_THE_AUTOMATIC_DISCOVERY_REFUSAL",
+      "BIND_DECLARED_ARGUMENTS_AND_MEASURE"
+    ],
+    "deleted_or_bypassed_paths": [
+      "WIRE_THE_CONFINEMENT_SEAM_REFUTED_BY_ITS_OWN_COUNTERFACTUAL",
+      "TRUNCATE_THE_BOUNDARY_MODULE_COUNTERFACTUAL_PRODUCED_13_FALSE_FAILURES",
+      "ASSUME_ONE_STATUS_STRING_NAMES_ONE_MECHANISM"
+    ],
+    "selected_surviving_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
+    "why_selected_route_is_fastest_sufficient": "IT_REFUTED_THE_PLANNED_WORK_IN_8_9_SECONDS_INSTEAD_OF_A_SESSION__IT_FOUND_THE_DOMINANT_EMITTER_AND_THE_TWO_RE_DERIVING_CALLERS__IT_COSTS_ONE_STDLIB_TOOL_THAT_RE_RUNS__AND_IT_TURNED_A_NINE_ROUND_STALE_CONCLUSION_INTO_A_FALSIFIED_ONE_WITH_THE_FIX_MEASURED",
+    "expected_parent_level_state_change": "THE_CONFINEMENT_WALL_IS_DISPLACED_FROM_THE_NEXT_WORK_ITEM_TO_THE_LAST__BINDING_IS_MEASURED_AS_THE_LIMITING_FACTOR__NO_SCOREBOARD_MOVED__TRUTH_ACHIEVED_STAYS_FALSE",
+    "stop_condition": "COUNTERFACTUAL_RUN_TWICE_BEFORE_AND_AFTER_THE_FIX__S0_21_TO_21__S1_21_TO_18__S2_3_TO_0__S3_TWO_WORKING__TEST_7_OF_7__HOST_UNTOUCHED_TRUE__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-12T20:38:31Z",
+      "max_age_hours": 24,
+      "incumbent_route": "BOUNDARY_STATE__19_OF_38_REALISTIC_ADVANCED_CODING_GOALS_REFUSED_WITH_COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT__SEAM_PRICED_AS_THE_NEXT_WORK_ITEM_BY_FOUR_DOCUMENTS",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "realistic_goal_reach_probe re-run on this base: 21 of 38 confine, not the published 19",
+          "four-stage counterfactual: S0 21, S1 21, S2 3, S3 2 work -- lifting the boundary buys 0",
+          "instrumentation of every emitter: _serve_by_acting fires 18 of 21; the boundary's decision 3 of 21",
+          "with the boundary lifted, 3 of 21 still refuse with the same status from composer_route_v1:4089"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "OSWorld 2.1 (Nov 2026): best binary completion 44.3% -- the field's wall is verification and constraint tracking",
+          "NeurIPS-26 TTCL workshop scope: consolidation of trajectories into reusable skills, applicability first",
+          "IJCAI-26 data-efficient-learning survey: experience augmentation and interface design over action libraries"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "python stdlib only for the instrument: subprocess, tempfile, json, pathlib",
+          "git clone --no-local is the disposable-clone mechanism, the same convention the census uses"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "SkillTTA (arXiv 2605.16986): task-specific synthesis beats static skills -- consistent with binding over libraries"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "agent execution boundary release condition confinement 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "OSWorld 2.1 computer use leaderboard November 2026 verification failure modes"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "single decision policy enforcement multiple call sites refactor"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "test-time continual learning agents NeurIPS 2026 skill consolidation"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
+      "challenger_routes": [
+        {
+          "route": "WIRE_THE_CONFINEMENT_SEAM",
+          "evidence": [
+            "confinement_v1.py exists and measures 9/9; the boundary's docstring names the release condition"
+          ],
+          "qualification_evidence": [
+            "lifting the boundary's own decision moves 0 of 21 verdicts; the seam is not the blocker"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Would have released nothing",
+            "CAPABILITY_STRENGTH": "0 of 21",
+            "WALL_CLOCK": "Hours",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "No change",
+            "VERIFIABILITY": "No measurable gain to verify"
+          }
+        },
+        {
+          "route": "LIFT_THE_AUTOMATIC_DISCOVERY_REFUSAL",
+          "evidence": [
+            "_serve_by_acting fires for 18 of 21 sentences"
+          ],
+          "qualification_evidence": [
+            "it is a genuine authority decision over automatic computer discovery, broader than any declared effect; not an agent's call"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Releases real authority",
+            "CAPABILITY_STRENGTH": "High but unmandated",
+            "WALL_CLOCK": "Minutes",
+            "INCREMENTAL_COST": "0 USD",
+            "RELIABILITY": "Unacceptable",
+            "VERIFIABILITY": "Cannot be verified without an owner decision"
+          }
+        },
+        {
+          "route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
+          "evidence": [
+            "counterfactual run twice (before and after the fix): S0 21->21, S1 21->18, S2 3->0, S3 2 work",
+            "7/7 test pinning substitution across 153 registry ids and byte-identical refusals",
+            "host_untouched True over 311 s in the second run"
+          ],
+          "qualification_evidence": [
+            "repo_integrity_guard 17 rules 0 violations; load-bearing admission PASS; orientation verify ok",
+            "test_composer_route_v1 failure set identical to base dcbbba05 (10 of 10, pre-existing)"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Every refusal unchanged and pinned",
+            "CAPABILITY_STRENGTH": "2 of 21 executing end to end after binding",
+            "WALL_CLOCK": "8.9 s to refute the planned work",
+            "INCREMENTAL_COST": "0 USD, stdlib",
+            "RELIABILITY": "Substitution experiment, both directions measured",
+            "VERIFIABILITY": "Re-runnable by anyone"
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-12T20:38:31Z",
+        "max_age_hours": 2,
+        "selected_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CPython 3.11 standard library runtime",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "the instrument and the test execute in this sandbox at the current base"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "git",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "git clone --no-local succeeded for every stage; host status byte-identical after"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "canonical.runtime.computer_execution_boundary_v1",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "refuses_execution imported by both callers; substitution drives all 153 registry ids"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ],
+            "path": "canonical/runtime/computer_execution_boundary_v1.py",
+            "detail": "the single decision this round de-duplicated"
+          }
+        ]
+      }
     }
-   ]
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_FALSIFIES_A_FALSE_GENERAL_CLAIM_ABOUT_WHICH_REFUSAL_BLOCKS_THE_ADVANCED_CODING_CAPABILITIES_AND_DEDUPLICATES_ONE_EXECUTION_DECISION_WITH_ZERO_RELEASES__THE_CLAIM_IS_BOUND_TO_A_RE_RUNNABLE_FOUR_STAGE_COUNTERFACTUAL_AND_A_7_OF_7_SUBSTITUTION_TEST",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING_ANY_RELEASE_CONDITION",
+      "falsifier_id": "F_LIFTING_THE_BOUNDARY_DECISION_MOVING_A_SINGLE_VERDICT__OR_ANY_EXISTING_REFUSAL_CHANGING_SHAPE__OR_THE_153_REGISTRY_IDS_NOT_MOVING_WITH_A_SUBSTITUTED_DECISION__OR_HOST_GIT_STATUS_MOVING_DURING_A_RUN",
+      "decisive_question": "Does lifting the execution boundary's own refusal, in a disposable clone, change any of the 21 verdicts four documents called blocked by it?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
+          "git_blob_sha": "0702d4c6c6d13af74a401e1cd315b1601f9e8cbe"
+        },
+        {
+          "path": "canonical/tests/test_one_decision_spelled_once_v1.py",
+          "git_blob_sha": "309c237b1a1ff9664ea56458afc25f76bc5c3417"
+        },
+        {
+          "path": "canonical/runtime/composer_route_v1.py",
+          "git_blob_sha": "e6c28644766a49dea5f4f36450af181311673548"
+        },
+        {
+          "path": "canonical/runtime/live_integrated_brain_v1.py",
+          "git_blob_sha": "4ee0a5783bc27165bab778e793ef287eb5a4c99e"
+        },
+        {
+          "path": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1.md",
+          "git_blob_sha": "cbb70e5810c698194e1db723ea19506524b46ae1"
+        }
+      ]
+    }
   }
- }
 }
