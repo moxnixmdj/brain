@@ -41,6 +41,7 @@ deliberately able to go red: a metric that cannot decrease is not a metric.
 from __future__ import annotations
 
 import argparse
+import datetime as _dt
 import hashlib
 import json
 import os
@@ -520,8 +521,7 @@ def binary_predicates(root: pathlib.Path) -> dict[str, Any]:
     This is the one layer that is fully checkable by construction, so it is the reference
     point: 100% here and 0% elsewhere is the gap this instrument exists to make visible.
     """
-    corpus = (root / "canonical" / "tools" / "predicates"
-              / "binary_identity_predicates_20261112_v1.json")
+    corpus = root / BINARY_PREDICATE_CORPUS
     if not corpus.exists():
         return {"layer": "binary_identity", "total": 0, "checkable": 0,
                 "error": "CORPUS_ABSENT"}
@@ -649,6 +649,96 @@ def _replication_note() -> str:
     return f"ORDERING DOES NOT REPRODUCE ({check['replication_run']})"
 
 
+#: The one corpus read by TWO paths below: an explicit branch (which is the only place the
+#: entry `name` survives) and the generic JSON walk (because `predicate_of` also accepts `arg`).
+#: Named once so the walk can skip what the explicit branch already yielded. Measured
+#: 2026-11-12 before the skip existed: the file declares 5 predicates and the iteration yielded
+#: 10, so the report's "10 predicates declare an expectation" was 5 predicates counted twice --
+#: the most flattering number in the report was the wrong one, by exactly 2x.
+BINARY_PREDICATE_CORPUS = ("canonical/tools/predicates/"
+                           "binary_identity_predicates_20261112_v1.json")
+
+
+def _iter_predicate_specs(root: pathlib.Path) -> Iterable[tuple[str, dict[str, Any], dict[str, Any]]]:
+    """Yield `(source, extra_fields, spec)` for every executable check declared under `root`.
+
+    One check per RECORD, not per dict: a record's `verification` block is part of the record,
+    and descending into it would visit the same predicate twice and inflate the count, which
+    would make the instrument report more evidence than exists.
+
+    `audit(run=True)` and `declaration_floor` both iterate THIS and nothing else, so the
+    static floor cannot drift from the corpus the executed audit actually runs. A gate that
+    measured a different set of records than the instrument would be decoration: it could
+    stay green while the thing it claims to protect got worse.
+    """
+    corpus = root / BINARY_PREDICATE_CORPUS
+    if corpus.exists():
+        try:
+            entries = (json.loads(corpus.read_text(encoding="utf-8")) or {}).get("predicates") or []
+        except (OSError, ValueError):
+            entries = []
+        for entry in entries:
+            if not isinstance(entry, dict):
+                continue
+            spec = predicate_of({"argv": entry.get("arg") or entry.get("argv"),
+                                 **{k: v for k, v in entry.items() if k.startswith("expect_")}})
+            if spec is not None:
+                yield BINARY_PREDICATE_CORPUS, {"name": entry.get("name")}, spec
+    for path, payload in _iter_json(root / "canonical"):
+        if str(path.relative_to(root)) == BINARY_PREDICATE_CORPUS:
+            continue        # already yielded above, with the entry name attached
+        stack = [payload]
+        while stack:
+            node = stack.pop()
+            if isinstance(node, dict):
+                spec = predicate_of(node)
+                if spec is not None:
+                    yield str(path.relative_to(root)), {}, spec
+                    continue                      # a predicate is a leaf: do not descend
+                stack.extend(node.values())
+            elif isinstance(node, list):
+                stack.extend(node)
+
+
+def declaration_floor(root: pathlib.Path = REPO_ROOT) -> dict[str, Any]:
+    """Count declared predicates WITHOUT executing anything. Two seconds, no side effects.
+
+    WHY THIS AND NOT THE FAIL COUNT
+    -------------------------------
+    `--audit` executes 605 commands and takes ~13 minutes, writes into the tree it measures
+    (live_audit.json and .html, a controller checkpoint, experience_v1.json), and its verdicts
+    depend on what the machine has installed: 8 of its 58 failures name another machine's
+    filesystem outright, and 19 predicates land in the 30s timeout budget. A CI gate on that
+    number would be flaky by construction, and a flaky gate gets muted, which is worse than no
+    gate.
+
+    What is machine-independent is the DECLARATION: whether a record asked for anything to be
+    checked. That is a property of JSON on disk, identical on every runner, and it is the
+    limiting factor -- measured 2026-11-12, 595 of 605 predicates (98.3%) declare no
+    expectation, so 98.3% of the corpus could only ever be contradicted by its exit code and
+    never by its output. This counts that, so the fraction can only be ratcheted down.
+    """
+    total = 0
+    declaring = 0
+    per_source: dict[str, int] = {}
+    for source, _extra, spec in _iter_predicate_specs(root):
+        total += 1
+        if any(field in spec for field in EXPECTATION_FIELDS):
+            declaring += 1
+        else:
+            per_source[source] = per_source.get(source, 0) + 1
+    return {
+        "schema": SCHEMA,
+        "authority": "NONE",
+        "measurement": "DECLARATION_FLOOR",
+        "predicates_declared": total,
+        "declaring_an_expectation": declaring,
+        "declaring_none": total - declaring,
+        "fraction_checked": round(declaring / total, 4) if total else None,
+        "worst_sources": sorted(per_source.items(), key=lambda kv: (-kv[1], kv[0]))[:10],
+    }
+
+
 def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any]:
     layers = [capabilities(root), skills(root), process_sites(root), test_modules(root),
               binary_predicates(root), receipts(root), rules_execute(root),
@@ -661,41 +751,10 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
 
     predicates: list[dict[str, Any]] = []
     if run:
-        corpus = (root / "canonical" / "tools" / "predicates"
-                  / "binary_identity_predicates_20261112_v1.json")
-        if corpus.exists():
-            try:
-                entries = (json.loads(corpus.read_text(encoding="utf-8")) or {}).get("predicates") or []
-            except (OSError, ValueError):
-                entries = []
-            for entry in entries:
-                if not isinstance(entry, dict):
-                    continue
-                spec = predicate_of({"argv": entry.get("arg") or entry.get("argv"),
-                                     **{k: v for k, v in entry.items() if k.startswith("expect_")}})
-                if spec is None:
-                    continue
-                result = run_predicate(spec, cwd=root)
-                predicates.append({"source": "canonical/tools/predicates/"
-                                             "binary_identity_predicates_20261112_v1.json",
-                                   "name": entry.get("name"), "argv": spec["argv"], **result})
-        for path, payload in _iter_json(root / "canonical"):
-            # One check per RECORD, not per dict. A record's `verification` block is part of
-            # the record; walking into it visits the same predicate twice and inflates the
-            # count, which would make the instrument report more evidence than exists.
-            stack = [payload]
-            while stack:
-                node = stack.pop()
-                if isinstance(node, dict):
-                    spec = predicate_of(node)
-                    if spec is not None:
-                        result = run_predicate(spec, cwd=root)
-                        predicates.append({"source": str(path.relative_to(root)),
-                                           "argv": spec["argv"], **result})
-                        continue                      # a predicate is a leaf: do not descend
-                    stack.extend(node.values())
-                elif isinstance(node, list):
-                    stack.extend(node)
+        for source, extra, spec in _iter_predicate_specs(root):
+            result = run_predicate(spec, cwd=root)
+            predicates.append({"source": source, **extra,
+                               "argv": spec["argv"], **result})
 
     counts = {"PASS": 0, "FAIL": 0, "UNRUNNABLE": 0}
     for item in predicates:
@@ -730,13 +789,152 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
     }
 
 
+def floor_gate(floor: Mapping[str, Any], baseline_path: str | None) -> dict[str, Any]:
+    """Compare a fresh `declaration_floor` measurement against a committed baseline.
+
+    Ratchet: `declaring_none` may fall -- falling is the whole point -- but it may not rise.
+    The floor lives in a file in the tree rather than as a number in this source so that
+    lowering it is a deliberate act visible in a diff, with a reason attached.
+
+    FAILS CLOSED. A missing, unreadable or malformed baseline is a failure, not a pass: a gate
+    that quietly succeeds when its own reference is absent is the same defect this module was
+    just repaired for -- reporting success for a comparison that never happened.
+    """
+    current = int(floor.get("declaring_none") or 0)
+    out = {"measurement": dict(floor), "declaring_none": current}
+    if baseline_path is None:
+        return {**out, "verdict": "MEASURED", "reason": "NO_BASELINE_GIVEN"}
+    path = pathlib.Path(baseline_path)
+    try:
+        baseline = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        return {**out, "verdict": "BASELINE_UNUSABLE",
+                "reason": f"{type(exc).__name__}:{exc}"[:160], "baseline_path": str(path)}
+    if not isinstance(baseline, Mapping):
+        return {**out, "verdict": "BASELINE_UNUSABLE", "reason": "BASELINE_NOT_AN_OBJECT",
+                "baseline_path": str(path)}
+    try:
+        allowed = int(baseline["declaring_none"])
+    except (KeyError, TypeError, ValueError):
+        return {**out, "verdict": "BASELINE_UNUSABLE",
+                "reason": "BASELINE_HAS_NO_declaring_none", "baseline_path": str(path)}
+    if current > allowed:
+        return {**out, "verdict": "REGRESSED", "baseline": allowed, "baseline_path": str(path),
+                "reason": (f"declaring_none {current} > floor {allowed}: {current - allowed} "
+                           f"more declared verification(s) now ask for nothing to be checked")}
+    if current < allowed:
+        # An improvement that is not written down is spendable headroom. A ratchet that only
+        # blocks rises ABOVE A FROZEN BASELINE lets a gain be spent back one step at a time,
+        # every step green: that is a documented failure, not a hypothetical -- AutoBot-AI
+        # #14498 (2026-08-17) lost 344 lines exactly this way and fixed it by re-baselining on
+        # every shrink so that ceiling == baseline == actual, always. So the floor must equal
+        # the measurement, and locking it in is one command, printed here.
+        return {**out, "verdict": "IMPROVED_NOT_LOCKED_IN", "baseline": allowed,
+                "baseline_path": str(path),
+                "reason": (f"declaring_none fell {allowed} -> {current}, but the floor still "
+                           f"allows {allowed - current} unchecked declaration(s) back. Lock the "
+                           f"gain in: python3 canonical/tools/auditability_report_v1.py "
+                           f"--floor --write-baseline {path}")}
+    return {**out, "verdict": "HELD", "baseline": allowed, "baseline_path": str(path),
+            "reason": f"declaring_none {current} == floor {allowed}"}
+
+
+#: Prose the builder does not invent. Regenerating a floor must update the measurement and keep
+#: the reasoning a human wrote, or every re-baseline silently deletes the justification.
+BASELINE_PROSE_FIELDS = ("what_this_gates", "why_not_the_fail_count", "declares_nothing_about",
+                         "correction_20261112", "not_deduplicated", "reading")
+
+
+def write_baseline(path: pathlib.Path, root: pathlib.Path = REPO_ROOT) -> dict[str, Any]:
+    """Write the floor document from a live measurement, so no number is ever hand-typed.
+
+    Prose already in the file is preserved; measured fields, provenance and the ranked source
+    list are recomputed. Lowering the floor stays a deliberate act visible in a diff -- this
+    only removes the part where a human retypes a number and can get it wrong.
+    """
+    floor = declaration_floor(root)
+    existing: dict[str, Any] = {}
+    try:
+        loaded = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(loaded, dict):
+            existing = loaded
+    except (OSError, ValueError):
+        existing = {}
+    try:
+        head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True,
+                              cwd=root, timeout=30).stdout.strip() or "UNRESOLVED"
+    except (OSError, subprocess.SubprocessError):
+        head = "UNRESOLVED"
+    doc: dict[str, Any] = {key: existing[key] for key in BASELINE_PROSE_FIELDS
+                           if key in existing}
+    doc.update({
+        "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
+        "authority": ("NONE -- a measurement of this tree, not a verification receipt and not "
+                      "independent verification of anything"),
+        "producer": "canonical/tools/auditability_report_v1.py --floor --write-baseline",
+        "carrier": "SANDBOX",
+        "measured_at_git_head": head,
+        "measured_on": _dt.date.today().isoformat(),
+        "how_reproduced": [
+            "python3 canonical/tools/auditability_report_v1.py --floor",
+            f"python3 canonical/tools/auditability_report_v1.py --floor --baseline {path}",
+        ],
+        "floor": {key: floor[key] for key in ("predicates_declared", "declaring_an_expectation",
+                                              "declaring_none", "fraction_checked")},
+        "declaring_none": floor["declaring_none"],
+        "worst_sources_at_measurement": [{"source": source, "declaring_none": n}
+                                         for source, n in floor["worst_sources"]],
+    })
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(doc, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return doc
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--audit", action="store_true",
                         help="also RUN every checkable predicate and report what currently holds")
+    parser.add_argument("--floor", action="store_true",
+                        help="count declared predicates that ask for nothing to be checked. "
+                             "Static: no command is executed, nothing is written, ~2s.")
+    parser.add_argument("--baseline", default=None,
+                        help="with --floor: gate against this committed floor document. "
+                             "Fails closed if it is absent or malformed.")
+    parser.add_argument("--write-baseline", default=None, metavar="PATH",
+                        help="with --floor: write the floor document at PATH from a live "
+                             "measurement, preserving the prose already in it. This is how a "
+                             "gain is locked in instead of becoming spendable headroom.")
     parser.add_argument("--root", default=str(REPO_ROOT))
     parser.add_argument("--json", action="store_true")
     args = parser.parse_args(argv)
+
+    if args.floor:
+        floor = declaration_floor(pathlib.Path(args.root))
+        if args.write_baseline:
+            doc = write_baseline(pathlib.Path(args.write_baseline), pathlib.Path(args.root))
+            print(f"wrote {args.write_baseline}")
+            print(f"  predicates declared        {doc['floor']['predicates_declared']}")
+            print(f"  declaring an expectation   {doc['floor']['declaring_an_expectation']}")
+            print(f"  declaring NONE (the floor) {doc['floor']['declaring_none']}")
+            print(f"  measured at git head       {doc['measured_at_git_head']}")
+            print("\n  authority NONE -- a measurement, not a verification receipt")
+            return 0
+        gate = floor_gate(floor, args.baseline)
+        if args.json:
+            print(json.dumps(gate, indent=2, sort_keys=True))
+        else:
+            print("declaration floor: how much declared verification asks for nothing to be "
+                  "checked\n")
+            print(f"  predicates declared        {floor['predicates_declared']}")
+            print(f"  declaring an expectation   {floor['declaring_an_expectation']}"
+                  f"   ({floor['fraction_checked']})")
+            print(f"  declaring NONE             {floor['declaring_none']}")
+            if floor["worst_sources"]:
+                print("\n  most declarations-without-a-check, by source file:")
+                for source, n in floor["worst_sources"]:
+                    print(f"    {n:4d}  {source}")
+            print(f"\n  {gate['verdict']}: {gate['reason']}")
+        return 0 if gate["verdict"] in ("HELD", "MEASURED") else 1
 
     report = audit(pathlib.Path(args.root), run=args.audit)
 

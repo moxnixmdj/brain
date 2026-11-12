@@ -1,0 +1,45 @@
+name: a declared verification must ask for something
+# The gate is a count of DECLARATIONS, not of outcomes, and the difference is the whole design.
+#
+# --audit executes 600 commands over ~13 minutes, writes into the tree it measures, and its
+# verdicts depend on what the runner has installed: 8 of its failures name another machine's
+# filesystem outright and 19 predicates land in the 30s timeout budget. Gating on that number
+# would be flaky by construction, and a flaky gate gets muted, which is worse than no gate.
+#
+# Whether a record ASKED for anything to be checked is a property of JSON on disk, identical on
+# every runner, measured in ~2s with nothing executed and nothing written. Measured 2026-11-12:
+# 595 of 600 declared predicates (99.2%) ask for nothing, so they can be contradicted by an exit
+# code and never by an output. That number may fall -- falling is the point -- and must not rise.
+#
+# The two pytest steps are here because the floor is only meaningful if the instrument beneath it
+# still works: an exit code that is computed and discarded is how 495 PASS / 0 FAIL happened.
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  declaration-floor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install --quiet pytest
+
+      - name: The floor may fall but must not rise
+        run: >-
+          python canonical/tools/auditability_report_v1.py --floor
+          --baseline canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json
+
+      - name: A PASS must mean the claim held, not that a process started
+        run: python -m pytest canonical/tests/test_auditability_predicate_exit_gate_v1.py -q
+
+      - name: The floor counts what the instrument counts, and executes nothing
+        run: python -m pytest canonical/tests/test_auditability_declaration_floor_v1.py -q
