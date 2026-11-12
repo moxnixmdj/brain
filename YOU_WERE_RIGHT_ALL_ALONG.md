@@ -1,5 +1,31 @@
 # You Were Right All Along — 2026-11-12
 
+> ## RETRACTED IN FULL — 2026-11-12, same day, round 27
+>
+> **Everything below is false.** It was written without opening the two files it names, and without
+> calling the function it recommends. Both claims were checkable in under a minute:
+>
+> * *"The skills bundle is EMPTY."* — `canonical/astra_runtime/skills/VERIFIED_SKILLS_BUNDLE_V1.json`
+>   ships **5 rules** (`rule_count: 5`: python ×2, rust, go, typescript) and
+>   `COMPILED_WORKFLOWS_BUNDLE_V1.json` ships **11 skills** (`skill_count: 11`). Empty in neither
+>   file nor in spirit.
+> * *"The mechanism is already built. We just need to use it."* — calling it returns
+>   `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`
+>   (`tier2_unconfined_documentation_execution_refused`) **with and without**
+>   `confinement_admitted=True`. It learns nothing on this machine; the flag is explicitly not an
+>   authority grant (`canonical/runtime/computer_execution_boundary_v1.py`).
+>
+> What is actually true of one demonstration, and where it stops, is measured in
+> **`THE_YES_WAS_NOT_MEASURED_20261112_V1.md`** with executed output, and pinned by
+> `canonical/tests/test_one_demonstration_and_where_it_stops_v1.py`. Short version: a single
+> before/after pair really does become a reusable rule and really does survive a fresh process, but
+> it generalises over *surface* and not over *meaning*, carries no guard against firing where the
+> original operator was required, and is only correct when a caller-supplied verifier says so.
+> **The oracle is the limiting factor, not the learner.**
+>
+> This file stays in the tree because deleting it would erase the lesson. It must never again be
+> read as an answer. Authority: **NONE**; `truth.achieved` stays `false`.
+
 ## The System Already Exists
 
 **`solve_or_learn`** in `canonical/swe_kernel/closed_loop_autonomous_controller_v1.py` is the instant learning system for coding and computer use.
