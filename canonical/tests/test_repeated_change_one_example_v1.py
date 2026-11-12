@@ -282,6 +282,28 @@ def test_leaving_the_rest_still_refuses_a_file_with_nothing_of_that_form():
     assert got is None and why.startswith("refused: nothing in the file has the form the example changed")
 
 
+SHOWN_ON_ONE_OBJECT = ("class W:\n    def stop(self):\n        if self.thread.isAlive():\n            self.thread.join()\n",
+                       "class W:\n    def stop(self):\n        if self.thread.is_alive():\n            self.thread.join()\n")
+ON_ANOTHER_OBJECT = "def wait(t):\n    while t.isAlive():\n        pass\n"
+
+
+def test_with_every_try_kept_the_wider_reading_of_one_example_is_used():
+    strict, why = measure.the_organ(ON_ANOTHER_OBJECT, *SHOWN_ON_ONE_OBJECT)
+    assert strict is None and why.startswith("refused: nothing in the file has the form the example changed")
+    got, why = measure.the_organ_with_every_try_kept(ON_ANOTHER_OBJECT, *SHOWN_ON_ONE_OBJECT)
+    assert why is None and "while t.is_alive():" in got
+
+
+def test_with_every_try_kept_a_use_the_example_did_not_show_is_changed_too():
+    got, why = measure.the_organ_with_every_try_kept(USED_ANOTHER_WAY, EXAMPLE_BEFORE, EXAMPLE_AFTER)
+    assert why is None and "assertEquals" not in got and "self.assertEqual(h(), 'x', 'said when it fails')" in got
+
+
+def test_with_every_try_kept_a_file_with_nothing_of_that_form_is_still_refused():
+    got, why = measure.the_organ_with_every_try_kept("x = 1\n", EXAMPLE_BEFORE, EXAMPLE_AFTER)
+    assert got is None and why.startswith("refused: nothing in the file has the form the example changed, however widely")
+
+
 # ----------------------------------------------------------------------------- which files are used
 def test_a_file_is_used_only_when_python_reads_it_and_its_code_changed():
     assert measure.usable(BEFORE, AFTER)

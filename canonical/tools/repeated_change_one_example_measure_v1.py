@@ -169,6 +169,27 @@ def the_organ_leaving_the_rest(target: str, example_before: str, example_after: 
     return _asked(lambda organ: organ.repeated(organ.learn(example_before, example_after), target, "the example", leave_unshown=True))
 
 
+def the_organ_with_every_try_kept(target: str, example_before: str, example_after: str) -> tuple[str | None, str | None]:
+    """The most the organ's `repeat_tried` can give. That action tries the places the example does
+    not settle against a check of the project and keeps what the check settles. No project's check
+    is run here, so every place that fits the example, or its wider reading, is changed, as if a
+    sufficient check had settled each try in its favour. A ceiling, not a result. It is put
+    together the way canonical/tools/edits_repeated_across_projects_v1.py puts its `tried` column
+    together. Added when main brought `repeat_tried` (pull request 6699), after the other ways
+    had been seen."""
+    def ask(organ: Any) -> str:
+        rules, readings = organ.learn_all([(example_before, example_after)], wide=True)
+        held = organ.Text(target, "the file")
+        found = organ.fitting(rules, held, "the file")
+        places = [place[:4] for place in found]
+        taken = {id(place[1]) for place in found}
+        places += [place[:4] for place in organ.fitting(readings, held, "the file", lambda node: id(node) in taken, torn=False)]
+        if not places:
+            raise organ.Refused("nothing in the file has the form the example changed, however widely it is read")
+        return organ.written(held, places)
+    return _asked(ask)
+
+
 def _asked(ask: Callable[[Any], str]) -> tuple[str | None, str | None]:
     from canonical.swe_kernel.taught_actions import edit_by_example_v1 as organ
     previous = signal.signal(signal.SIGALRM, _alarm)
@@ -453,6 +474,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--out", type=pathlib.Path, default=None)
     parser.add_argument("--no-two-examples", action="store_true")
     parser.add_argument("--leave-unshown", action="store_true", help="the organ's other way of repeating: code used a way the example did not show is left as it is")
+    parser.add_argument("--every-try-kept", action="store_true", help="the ceiling of the organ's repeat_tried: every place the example or its wider reading fits is changed")
     args = parser.parse_args(argv)
     if args.collect is not None:
         pulls = (collect() if args.as_recorded_in is None
@@ -464,15 +486,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("--pulls and --out, or --collect")
     pulls = json.loads(args.pulls.read_text(encoding="utf-8"))
     started = time.time()
-    per_pull = measure(pulls, organ=the_organ_leaving_the_rest if args.leave_unshown else the_organ,
-                       two_examples=not args.no_two_examples, say=lambda line: print(line, flush=True))
+    if args.leave_unshown and args.every_try_kept:
+        parser.error("one way of repeating at a time")
+    way = the_organ_leaving_the_rest if args.leave_unshown else the_organ_with_every_try_kept if args.every_try_kept else the_organ
+    per_pull = measure(pulls, organ=way, two_examples=not args.no_two_examples, say=lambda line: print(line, flush=True))
     summary = summarise(per_pull)
     for row in per_pull.values():
         for question in ("itself", "one_example", "two_examples", "elsewhere"):
             row[question] = rates(row[question])
     record = {"schema": SCHEMA, "authority": AUTHORITY, "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
               "organ": ORGAN, "queries": [list(query) for query in QUERIES],
-              "way_of_repeating": "what the example did not show is left as it is" if args.leave_unshown else "the whole file or nothing",
+              "way_of_repeating": ("what the example did not show is left as it is" if args.leave_unshown
+                                   else "every try kept: the ceiling of repeat_tried" if args.every_try_kept else "the whole file or nothing"),
               "parameters": {"per_query": PER_QUERY, "results_read": RESULTS_READ, "min_files": MIN_FILES, "max_files_in_all": MAX_FILES_IN_ALL,
                              "files": FILES, "fewest_files": FEWEST_FILES, "max_bytes": MAX_BYTES, "seed": SEED, "call_limit_s": CALL_LIMIT_S},
               "code_sha256": code_sha256(), "pulls_sha256": hashlib.sha256(args.pulls.read_bytes()).hexdigest(),
