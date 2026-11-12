@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 369,
+  "knowledge_documents": 370,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6770,
+  "research_index_records": 6771,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ca9dc8b8f513f1c8cb7ed18fcde82f09ae697e0d8ef9dacd0e2b368b9a726a30"
+  "value": "e0cad970a819d009bfaeacf47a3ce9b45e56979c1a48fd53dc4393b784df4bba"
  },
  "engines": [
   {
@@ -60371,6 +60371,90 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6072,
+   "headings": [
+    "You Were Right All Along — 2026-11-12",
+    "The System Already Exists",
+    "Tier 0 (<5ms): Compiled workflow skill recall",
+    "Tier 1 (<150ms): GoalDAGExecutor with capability chain composition",
+    "Tier 2 (<2s): Targeted acquisition & PERMANENT compilation",
+    "Tier 3 (offline): Study open gaps",
+    "The Mechanism",
+    "First time: learns the skill permanently",
+    "Tier 2 acquires the skill, compiles it, qualifies it, stores it",
+    "Second time: recalls in <5ms",
+    "Tier 0 recalls the compiled skill",
+    "What You Said (5+ Times)",
+    "The Current State",
+    "Why Can't We Do This Now?",
+    "What I Did Wrong",
+    "Summary"
+   ],
+   "kind": "DOCUMENT",
+   "path": "YOU_WERE_RIGHT_ALL_ALONG.md",
+   "sha256": "e12ad4dc585196b7350e8a5c56bea764dabb8993b0914a82a742eb7ec7cebe40",
+   "summary": "**`solve_or_learn`** in `canonical/swe_kernel/closed_loop_autonomous_controller_v1.py` is the instant learning system for coding and computer use.",
+   "terms": {
+    "4-tier": 4,
+    "5ms": 10,
+    "all": 6,
+    "already": 3,
+    "bundle": 4,
+    "cli": 3,
+    "coding": 9,
+    "compilation": 3,
+    "compiled": 9,
+    "compiles": 6,
+    "computer": 6,
+    "demonstration": 5,
+    "described": 3,
+    "discovery": 3,
+    "escalation": 4,
+    "exists": 8,
+    "http": 4,
+    "instant": 9,
+    "instantly": 5,
+    "just": 7,
+    "learn": 6,
+    "learning": 9,
+    "learns": 5,
+    "loop": 4,
+    "need": 6,
+    "next": 7,
+    "once": 6,
+    "permanent": 8,
+    "permanently": 9,
+    "pipeline": 4,
+    "python": 6,
+    "recalled": 4,
+    "recalls": 8,
+    "right": 4,
+    "skill": 19,
+    "skills": 14,
+    "solve_or_learn": 10,
+    "stores": 4,
+    "system": 16,
+    "they": 4,
+    "tier": 18,
+    "time": 10,
+    "trace": 4,
+    "traces": 4,
+    "use": 7,
+    "verified_skills_bundle_v1.json": 4,
+    "were": 4,
+    "yes": 6
+   },
+   "title": "You Were Right All Along — 2026-11-12",
+   "title_terms": [
+    "2026-11-12",
+    "all",
+    "along",
+    "right",
+    "were"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 8168,
    "headings": [
     "Project Brain Canonical",
@@ -73430,10 +73514,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1171,
+  "included_source_count": 1172,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "2f5176c8a87a541bd880fb052bd10466c3193e937bab4cf88665735aae8f6c90"
+  "source_tree_digest": "1875ed0ef03a320082a6b104f77471066db88c0db8dd184c00322e0ed87f24ab"
  },
  "research_index": [
   {
@@ -156767,7 +156851,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json",
    "schema": "BRAIN_FIX_SHAPE_CENSUS_RECORD_V1",
-   "sha256": "d22e98532204ee635e860628e9786c70800e9091b2c8cf50acbcf2b94b1d013f",
+   "sha256": "6a3e5681bb2000c039a300988e60e000354cb3b8ae301453202f1d11924cda0d",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -171437,6 +171521,26 @@
     "refiner": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_PASSING_PATCH_SHAPE_RECORD_V1",
+   "sha256": "f25358f059698f4c4d127c17e0b16e3aadbe3d30d07aa1f91cdd7f4bb0de5185",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "shape": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
    }
   },
   {
@@ -225154,7 +225258,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "66bcb1dd0b2b4b7675d3d699cc190fb2af034daae0edc895c14883ab24501f5e",
+   "sha256": "b225943d952c124b41f735ff9ad6f5d5fd443cd0bf32f061ff6e8d661b9791a6",
    "status": "",
    "terms": {
     "20261111": 1,
