@@ -7,7 +7,7 @@
  "route_id": "A_FRESH_SET_DECLARED_FIRST_MEASURES_GENERALIZATION_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "0bd7cf0f0765865d770ffc91a201dfdef8b9c5ef",
+ "canonical_base_commit": "b52af3606df8ab39e72bbc81a6e7120be0eff42f",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -108,7 +108,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "0bd7cf0f0765865d770ffc91a201dfdef8b9c5ef",
+  "canonical_base_commit": "b52af3606df8ab39e72bbc81a6e7120be0eff42f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_GENERALIZATION_CLAIM_IS_NOW_A_MEASURED_NUMBER_WITH_TWO_FALSIFIED_PREDICTIONS_LEFT_STANDING__79_PERCENT_FIRST_CONTACT_BYTE_MATCH_ON_NEVER_SEEN_KINDS__AND_TWO_NEWLY_NAMED_BOUNDARIES__INTENT_TANGLE_AND_PLURAL_REPLACEMENTS",
