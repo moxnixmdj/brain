@@ -416,9 +416,37 @@ def rules_execute(root: pathlib.Path) -> dict[str, Any]:
                     f"{len(broken)} broke behaviour ({', '.join(broken) or 'none'})"}
 
 
+def external_environment(root: pathlib.Path) -> dict[str, Any]:
+    """The one layer measured on environments nobody in this repository wrote.
+
+    Every other layer audits this tree's own claims about itself. This one reads the MiniWoB++
+    runs: 130 pages, the page's own reward as the only judge, scored on instances nobody had
+    looked at when the learner was written. It sat unread for five passes while the same
+    question was argued from literature.
+    """
+    try:
+        from canonical.tools import one_success_where_it_counts_v1 as L
+    except Exception as exc:                      # pragma: no cover
+        return {"layer": "external_environment", "total": None, "checkable": None,
+                "error": f"{type(exc).__name__}:{exc}"[:120]}
+    try:
+        result = L.report()
+    except FileNotFoundError:
+        return {"layer": "external_environment", "total": 0, "checkable": 0,
+                "note": "no recorded run; the claim is unmeasured here"}
+    flat = result["where_replay_is_not_enough"]
+    return {"layer": "external_environment", "total": len(result["ladder"]),
+            "checkable": len([r for r in result["ladder"] if r["present"]]),
+            "note": (f"{result['run']}: one success {flat['one_success']:.1%} vs replay "
+                     f"{flat['replay']:.1%} where replay is not enough; denied the instruction "
+                     f"{flat['denied_the_instruction']:.1%}"),
+            "contradictions": result["contradictions"]}
+
+
 def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any]:
     layers = [capabilities(root), skills(root), process_sites(root), test_modules(root),
-              binary_predicates(root), receipts(root), rules_execute(root)]
+              binary_predicates(root), receipts(root), rules_execute(root),
+              external_environment(root)]
     for layer in layers:
         total, checkable = layer.get("total"), layer.get("checkable")
         layer["auditability"] = (round(checkable / total, 4)

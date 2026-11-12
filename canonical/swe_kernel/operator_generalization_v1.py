@@ -240,6 +240,8 @@ def propose_operator_swaps(
     Each candidate changes exactly one occurrence, so the caller's verifier judges a minimal
     edit and a wrong proposal cannot cascade.
     """
+    if not isinstance(rule, Mapping) or rule.get("state") not in (None, "ACTIVE"):
+        return
     seen: set[str] = set()
     emitted = 0
     for swap in derive_swap_family(rule):
