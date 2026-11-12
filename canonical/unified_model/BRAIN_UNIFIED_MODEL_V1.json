@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6a59ba0ae0828ef8d2842d3fb349846a373e299804f3dc4b0a00ad5630b61823"
+  "value": "2890555348c02813edf4c72a3008d0922e506854c267e936d0f0b76d01a39033"
  },
  "engines": [
   {
@@ -224421,7 +224421,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ffb09efb46ce291830f2ba5c59c9300db218325dd0ca32a882aa051ca8a9ca62",
+   "sha256": "1ccad50b3b18b7c6de2612176b9a4bc241afcab31f31230cc3fc0e82cac22cee",
    "status": "",
    "terms": {
     "20261111": 1,
