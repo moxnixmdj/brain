@@ -1,0 +1,44 @@
+name: a skill's scope must be earned not declared
+
+# Problem 2, gated. The ledger answers two questions by running the shipped skills rather than
+# reading their prose: which declared fields actually constrain where a rule applies, and whether
+# any skill may be called GENERALIZING under applicability_v1's own law (a caller may only withhold
+# a plan on IDENTIFIED).
+#
+# It runs in 0.07s, reads one JSON file, writes nothing and executes no declared command, so it is
+# machine-independent and cannot be flaky. It is deliberately NOT gated on how many skills fire: a
+# firing is a property of this sandbox's tokenizer and corpus, and a flaky gate gets muted, which is
+# worse than no gate because it manufactures the appearance of a constraint.
+#
+# What IS gated: the positive control (perturbing the matcher must change behaviour, else every
+# DECORATIVE verdict is an artefact of a broken apply path), and the earnability of the label (a
+# record carrying states and a contrasting failure must be labelled GENERALIZING, else 0-of-5 is a
+# constant rather than a measurement).
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skill-scope-ledger-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  skill-scope-ledger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Measure which fields decide where a skill applies
+        run: python canonical/swe_kernel/skill_scope_ledger_v1.py
+      - name: Pin the positive control and the earnable label
+        run: |
+          python -m pip install pytest
+          python -m pytest -q canonical/tests/test_skill_scope_ledger_v1.py
