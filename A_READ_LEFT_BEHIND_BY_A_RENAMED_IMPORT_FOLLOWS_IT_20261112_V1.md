@@ -54,7 +54,7 @@ inside its own project, each refused naming the import. The seen set did not mov
 ## 3. Receipts
 
 ```
-pytest -q canonical/tests/test_a_read_left_behind_by_a_renamed_import_follows_it_v1.py   12 passed
+pytest -q canonical/tests/test_a_read_left_behind_by_a_renamed_import_follows_it_v1.py   11 passed
 pytest -q  (all eight taught-action test files)                                        280 passed
 PYTHONPATH=. python3 canonical/tools/teach_actions_v1.py     11 skills, bundle ab4366dc… (re-taught)
 python3 canonical/tools/edits_repeated_across_projects_v1.py measure held_out|seen       the table
