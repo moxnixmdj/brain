@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a1ad5479e1f56fd896f6df9fb53bcb7f4c4f9c0907a7049fe26b9a701fc2a42a"
+  "value": "44d8946a3822c04827ab6cfa408ecfdf7645cfd158bf1f98200b5fd23945b367"
  },
  "engines": [
   {
@@ -55231,7 +55231,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 5289,
+   "bytes": 6085,
    "headings": [
     "What changed this time",
     "The answer, still",
@@ -55241,11 +55241,12 @@
     "`canonical/tests/test_auditability_report_v1.py` — 17 tests, all green",
     "The honest numbers, corrected",
     "What this means for your sentence",
-    "Right or wrong"
+    "Right or wrong",
+    "Note for whoever regenerates the model artifact"
    ],
    "kind": "DOCUMENT",
    "path": "THE_INSTRUMENT_20261112_V7.md",
-   "sha256": "32c3455345a320cdd3253a2030d7c9404391fa7176edc291c82210edb720b836",
+   "sha256": "d03edaf02656e78a3c9c7906020e052fa4c3f8d010eb9a4f5e1057c9556f54ba",
    "summary": "**2026-11-12, seventh pass.** Branch `arena/43ebc5a7-brain`. Authority **NONE**. $0. `truth.achieved` = `false`.",
    "terms": {
     "0.0": 3,
@@ -55256,15 +55257,13 @@
     "42": 2,
     "603": 2,
     "ability": 2,
-    "actually": 2,
     "all": 3,
-    "audit": 2,
-    "auditability": 2,
     "before": 3,
-    "canonical": 3,
+    "canonical": 9,
     "capabilities": 3,
     "check": 3,
     "checkable": 4,
+    "clean": 3,
     "command": 3,
     "demonstration": 5,
     "fail": 5,
@@ -55277,7 +55276,7 @@
     "modules": 3,
     "moves": 3,
     "none": 3,
-    "not": 9,
+    "not": 11,
     "now": 3,
     "number": 3,
     "one": 9,
@@ -55286,12 +55285,14 @@
     "predicates": 4,
     "records": 4,
     "right": 4,
+    "runtime": 3,
     "set": 3,
     "skills": 4,
-    "so": 3,
+    "so": 4,
     "tests": 4,
-    "tree": 6,
+    "tree": 9,
     "true": 4,
+    "unified_model": 3,
     "unrunnable": 3,
     "verified": 3,
     "verify": 3,
@@ -69366,7 +69367,7 @@
   "included_source_count": 1118,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b986d31a425c0fb1143294833a742d76f17aa672ed4813a3d8327010ceeb6dd2"
+  "source_tree_digest": "56c552132af9e57556a3370b33c1a4f22a1c0ae8b8710f20ef7554728274a19f"
  },
  "research_index": [
   {
