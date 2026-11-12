@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "592e576193757346d713c92533d1fd3992a3c04b7f36a3f24bbb45760893fec5"
+  "value": "4384287629011d8b2da4865498311da79512ae2cceb72b614f82d8af3976f109"
  },
  "engines": [
   {
@@ -229151,7 +229151,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_RECEIPT_NEVER_KEPT_THE_INPUT_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7e44dd010380b854f3193936b94605ea3902a748e3aca73faba9bca4b0696f89",
+   "sha256": "de85b02ee784ba8540c7badfec1facda8f87d2d446a4b215e2a45876b72953bb",
    "status": "",
    "terms": {
     "20261112": 1,

@@ -7,7 +7,7 @@
  "route_id": "THE_RECEIPT_NEVER_KEPT_THE_INPUT_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "79df0c78c8f0c6bab7d604cdf14dbe7a10ee1508",
+ "canonical_base_commit": "aa513512ffb33ef7c2c390e281ab010af62acfd3",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -34,9 +34,7 @@
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
-   "canonical/runtime/global_open_world_extrapolator_v1.py",
-   "canonical/tests/test_meta_circular_global_sentient_creature_v1.py"
+   "canonical/tests/test_receipt_input_snapshot_v1.py"
   ],
   "route_class": "COMPOSE",
   "producer_cognition_model_dependency_count": 0,
@@ -96,7 +94,7 @@
   "execution_guard/goal_target_binding_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "79df0c78c8f0c6bab7d604cdf14dbe7a10ee1508",
+  "canonical_base_commit": "aa513512ffb33ef7c2c390e281ab010af62acfd3",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_REGEX_FREE_EVOI_EXTRAPOLATION_SYNTHESIZED_VERIFIERS_AND_INSTRUMENTAL_POLICY",
@@ -240,7 +238,12 @@
    "decisive_question": "DOES_THE_CREATURE_INDUCE_UNSEEN_GRAMMARS_COMPOSE_ORGANS_SYNTHESIZE_NON_SUM_INVARIANTS_EXPAND_WITHOUT_ENGLISH_KEYWORDS_AND_CHOOSE_ZERO_REWARD_UNLOCKING_TOOLS",
    "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
    "known_counterexamples_checked": true,
-   "counterexample_receipts": [],
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_receipt_input_snapshot_v1.py",
+     "git_blob_sha": "caeecfb405c54c7c800cc6d23d55ed02934b4cb0"
+    }
+   ],
    "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
   }
  },
