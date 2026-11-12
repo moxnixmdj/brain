@@ -657,7 +657,7 @@ def executable_ast_bytes(source_text: str) -> int:
             n.body = self._clean(n.body)
             return self.generic_visit(n)
 
-    cleaned = _StripDoc().visit(copy.deepcopy(tree))
+    cleaned = _StripDoc().visit(tree)
     ast.fix_missing_locations(cleaned)
     return len(zlib.compress(ast.unparse(cleaned).encode("utf-8"), level=9))
 
@@ -1059,14 +1059,19 @@ def higher_order_plotkin_lgg(
     - Open differing subtrees referencing loop-bound variables `(b_0, ...)` lift to higher-order
       callable parameters `_fn{m}(b_0, ...)`, discovering abstractions such as `fold_scan(xs, init, step_fn)`.
     """
+    if (
+        fn1.decorator_list
+        or fn2.decorator_list
+        or len(fn1.args.args) != len(fn2.args.args)
+        or len(fn1.body) != len(fn2.body)
+    ):
+        return None
     n1 = _normalize_function_for_plotkin_lgg(fn1)
     n2 = _normalize_function_for_plotkin_lgg(fn2)
     if n1 is None or n2 is None:
         return None
     cf1, lb_set1, lb_ord1 = n1
     cf2, lb_set2, lb_ord2 = n2
-    if len(cf1.args.args) != len(cf2.args.args) or len(cf1.body) != len(cf2.body):
-        return None
     if ast.dump(cf1, include_attributes=False) == ast.dump(cf2, include_attributes=False):
         return None
 
@@ -2102,13 +2107,19 @@ class CompoundingConceptLibrary:
         baseline_bytes = executable_ast_bytes(baseline_corpus_src)
         admitted: list[dict[str, Any]] = []
 
-        for cand in viable:
+        for cand in viable[:24]:
             if len(admitted) >= max_new_concepts:
                 break
             expr_src = str(cand["expr_src"])
             arity = int(cand["arity"])
             cid = "concept_" + hashlib.sha256(f"{arity}:{expr_src}".encode("utf-8")).hexdigest()[:8]
             if cid in self._concepts:
+                continue
+            if any(f"_v{i}[" in expr_src for i in range(arity)):
+                continue
+            ncount_c = int(cand["node_count"])
+            max_possible_sites = len(cand["occurrences"])
+            if (max_possible_sites - 1) * ncount_c - (max_possible_sites + 1) * arity - (max_possible_sites + 2) <= 0:
                 continue
 
             # Rewrite matching non-overlapping subtrees across corpus to measure exact `Delta B_exec`
@@ -2279,14 +2290,19 @@ class CompoundingConceptLibrary:
 
             # Stage 2B: Higher-Order Plotkin Anti-Unification (`LGG(fn_i, fn_j)` lifting differing operators to `_fn0`)
             if len(admitted) < max_new_concepts:
-                loop_fns: list[ast.FunctionDef] = [
-                    fn
-                    for mod in parsed_programs
-                    for fn in ast.walk(mod)
-                    if isinstance(fn, ast.FunctionDef)
-                    and not fn.decorator_list
-                    and any(isinstance(sub, (ast.For, ast.While)) for sub in ast.walk(fn))
-                ]
+                loop_fns: list[ast.FunctionDef] = []
+                seen_loop_fn_dumps: set[str] = set()
+                for mod in parsed_programs:
+                    for fn in ast.walk(mod):
+                        if (
+                            isinstance(fn, ast.FunctionDef)
+                            and not fn.decorator_list
+                            and any(isinstance(sub, (ast.For, ast.While)) for sub in ast.walk(fn))
+                        ):
+                            fdump = ast.dump(fn, include_attributes=False)
+                            if fdump not in seen_loop_fn_dumps:
+                                seen_loop_fn_dumps.add(fdump)
+                                loop_fns.append(fn)
                 for i_fn in range(min(len(loop_fns), 12)):
                     if len(admitted) >= max_new_concepts:
                         break
