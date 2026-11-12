@@ -63,7 +63,16 @@
    "LEAVE_UNDECIDABLE -- it was being read as false"
   ],
   "expected_parent_level_state_change": "Ordinary computer tasks that route: 11/30 -> 15/30. AMBIGUOUS 19 -> 15.",
-  "obs_blocker": "Twenty ordinary computer tasks out of thirty never routed; all twenty were AMBIGUOUS rather than routeless, and two forged capabilities appended at 0.0 were the reason. Of the five that did report VERIFIED, one answered its question.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE the forged append entirely -- rejected: a forged capability must be proposable when nothing else fits, which is the reason the append exists.",
+    "BYPASS by lowering DECISIVE_MARGIN_RATIO -- rejected: that would make every near-miss decisive and turn ambiguity into wrong answers.",
+    "SUBSTITUTE a tie-break on score -- rejected: a zero-score row has no score to break a tie with.",
+    "ADOPT the narrow rule: a zero-score survivor may not gate a positive-scored one."
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC -- it is in grounded_action_v1.act(), the front door this repository actually uses, and it is triggered by any sentence whose best keyword match is accompanied by an appended forged row.",
+   "surviving_causal_blocker": "A row that was never a candidate decided the election, because selection refuses when the margin is undecidable and a 0.0 row makes every margin undecidable."
+  },
   "obs_capability": {
    "capability_work_deleted": [
     "no new learner invented -- settlement_v1.VersionSpace is reused unchanged",
@@ -113,8 +122,22 @@
    ],
    "search_stop_decision": "Stopped at three candidate mechanisms because the remaining ones were measured already: breadth of environments (0/10), exposure per lesson (6/7 flat), and model-in-producer-path (forbidden)."
   },
-  "obs_solution": "A zero-score survivor may be proposed only when nothing scored. Kept as six lines in grounded_action_v1.act().",
-  "obs_verification": "30 ordinary tasks: expressible 11 -> 15, AMBIGUOUS 19 -> 15. Audited receipts by reading them: 1 of 5 answered. 7/7 new tests.",
+  "obs_solution": {
+   "deletion_first_order_applied": true,
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Deleting the append removes the ability to propose a forged capability at all; lowering the margin gate converts ambiguity into confident wrong answers; a score tie-break has nothing to compare.",
+   "routes_ranked": [
+    "DELETE_FORGED_APPEND",
+    "BYPASS_MARGIN_GATE",
+    "SUBSTITUTE_SCORE_TIEBREAK",
+    "ADOPT_ZERO_SCORE_CANNOT_GATE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The effect is measured end to end on thirty ordinary computer tasks and the 155-row keyword census, both run against the real registry on this commit. The seven tests re-run the front door rather than mocking it."
+  },
   "real_outcome": "A_FORGED_ZERO_SCORE_ROW_NO_LONGER_VETOES_A_DECISIVE_MATCH__AND_VERIFIED_ACTION_IS_NAMED_AS_A_POSTCONDITION_NOT_AN_ANSWER__1_OF_5_AUDITED_VERIFIED_TASKS_ANSWERED_ITS_QUESTION",
   "required_capability": "A sensor that answers UNKNOWN as its own value, so that a premise nobody can see is not silently counted as false, and a binder that either binds a stated value or reports that it cannot, never neither.",
   "route_frontier": {
