@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 396,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6793,
+  "research_index_records": 6791,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7881c443d6b15271db58bab7e483363beedd5a4401a80c39b82e8433d77e0a61"
+  "value": "14c3a5eaf2b3ca815c6cae23fc5e7548fd50acf02b05bf8eef71efcf3ad9e7d6"
  },
  "engines": [
   {
@@ -45951,6 +45951,85 @@
     "showing",
     "teacher",
     "untangles"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 13129,
+   "headings": [
+    "A SKILL'S SCOPE IS ITS SYNTAX, NOT ITS CLASS",
+    "0. The verdict, in one line",
+    "1. What was measured",
+    "2. The evidence unit is the actual bug",
+    "3. The label is earnable — otherwise 0-of-5 is a constant",
+    "-> boundary IDENTIFIED, required == [\"pytest\"], label GENERALIZING",
+    "4. Why this is the smartest route to Problem 2, and the routes I killed",
+    "What November 2026 says, independently",
+    "5. Am I right or wrong?",
+    "6. Next, ranked",
+    "7. Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.md",
+   "sha256": "d0368e06d8757af27bc879b6965bfd270abdcc6cebc7aa14f6f217279fff5b6e",
+   "summary": "**Date:** 2026-11-12 · **Branch:** `arena/643fffe7-brain` · **Base:** `f20945b20e` **Authority: NONE.** Sandbox measurement, not independent verification. **Cost:** $0 · **Model calls in the producer path:** 0",
+   "terms": {
+    "10": 5,
+    "2026": 5,
+    "all": 5,
+    "arxiv": 5,
+    "because": 10,
+    "but": 6,
+    "caller": 5,
+    "canonical": 6,
+    "change": 5,
+    "class": 9,
+    "corpus": 4,
+    "declared": 5,
+    "decorative": 5,
+    "each": 8,
+    "every": 11,
+    "evidence": 6,
+    "exactly": 4,
+    "failure": 5,
+    "false": 4,
+    "fields": 8,
+    "generalization": 6,
+    "generalizing": 4,
+    "killed": 6,
+    "measured": 8,
+    "no": 13,
+    "not": 28,
+    "nothing": 7,
+    "one": 21,
+    "only": 11,
+    "own": 5,
+    "owner": 5,
+    "probes": 7,
+    "problem": 6,
+    "pytest": 7,
+    "python": 7,
+    "record": 8,
+    "rule": 12,
+    "same": 8,
+    "scope": 5,
+    "shipped": 6,
+    "skill": 15,
+    "skills": 9,
+    "so": 11,
+    "state": 16,
+    "still": 5,
+    "succeeded": 5,
+    "tree": 10,
+    "two": 7
+   },
+   "title": "A SKILL'S SCOPE IS ITS SYNTAX, NOT ITS CLASS",
+   "title_terms": [
+    "class",
+    "not",
+    "scope",
+    "skill",
+    "syntax"
    ]
   },
   {
@@ -62260,80 +62339,6 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 11245,
-   "headings": [
-    "Which fix actually works",
-    "1. What was asked, and what I refused to assume",
-    "2. Finding one: the roadmap counted targets, not opportunities",
-    "3. Finding two: the ceiling, so no gain can be oversold",
-    "4. Finding three: the four arms, measured",
-    "5. What this changes about the route",
-    "6. Why the exemption is sound, and what it is not",
-    "7. Receipts"
-   ],
-   "kind": "DOCUMENT",
-   "path": "WHICH_FIX_ACTUALLY_WORKS_20261112_V1.md",
-   "sha256": "8853b552fbd8bf90a5f52d8b0b9e9ff1344fabded7fd9d54a249bf5ef3fb690a",
-   "summary": "**2026-11-12.** Base `8238d637`. Branch `arena/4ec3698d-brain`. Answers Problem 2: *similar task → adapt the knowledge.* The learner was changed, and the change is measured.",
-   "terms": {
-    "15": 9,
-    "22": 7,
-    "50": 8,
-    "60": 8,
-    "about": 5,
-    "algebra": 5,
-    "all": 5,
-    "askings": 11,
-    "because": 6,
-    "both": 8,
-    "cannot": 7,
-    "change": 5,
-    "changes": 11,
-    "class": 7,
-    "corpus": 6,
-    "coverage": 5,
-    "else": 5,
-    "exactly": 7,
-    "example": 7,
-    "examples": 5,
-    "exemption": 5,
-    "file": 5,
-    "first": 5,
-    "five": 5,
-    "gain": 11,
-    "import-only": 5,
-    "kind": 7,
-    "marker": 11,
-    "measured": 5,
-    "must": 7,
-    "name": 10,
-    "new": 6,
-    "no": 10,
-    "not": 22,
-    "nothing": 7,
-    "one": 15,
-    "only": 7,
-    "operator": 9,
-    "organ": 11,
-    "other": 7,
-    "pp": 8,
-    "precision": 8,
-    "refusal": 6,
-    "rename": 6,
-    "same": 10,
-    "so": 12,
-    "strict": 7,
-    "wrong": 10
-   },
-   "title": "Which fix actually works",
-   "title_terms": [
-    "actually",
-    "fix",
-    "works"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
    "bytes": 19706,
    "headings": [
     "Why not just give it a try — the addendum the question deserves",
@@ -75558,7 +75563,7 @@
   "included_source_count": 1198,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "56190d2cadfee92f1b77c02ef1ba30c063f75f5ce6ff13befa2e0d1d361604ec"
+  "source_tree_digest": "9f3e0e9ae0df86adcdfc9da74bfb86762d4f64a3fa7aed487646ee8c0977927b"
  },
  "research_index": [
   {
@@ -192276,6 +192281,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_SKILL_SCOPE_LEDGER_V1",
+   "sha256": "a3ac984b9d63d28a73e207d1ab0c4c151b456ef8722b429d18e9c46fbbb7378e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "ledger": 1,
+    "scope": 1,
+    "skill": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -205119,24 +205142,6 @@
   {
    "action_id": "",
    "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
-   "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
-   "sha256": "49bb5a1d996964834923bf8fa726399d0ed30c6063576182a7dd68b1a63159a4",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "fix": 1,
-    "generalization": 1,
-    "moves": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -205309,47 +205314,6 @@
     "v1": 1,
     "white": 1,
     "zero": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
-   "schema": "",
-   "sha256": "84c982419be34eac3b691da1a553bbf5a3822f9d04bf41d2d48cc244446483c7",
-   "status": "",
-   "terms": {
-    "311": 1,
-    "9.2.0": 1,
-    "finite": 1,
-    "pytest": 1,
-    "search.cpython": 1,
-    "test": 1,
-    "verifier": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
-   "schema": "",
-   "sha256": "34350ba7b0b496fcfa22a7b144587c838fac47f2fcf7ce12d60eb0010fa734e7",
-   "status": "",
-   "terms": {
-    "311": 1,
-    "9.2.0": 1,
-    "causal": 1,
-    "falsification": 1,
-    "owned": 1,
-    "pytest": 1,
-    "test": 1,
-    "v1.cpython": 1
    }
   },
   {
@@ -222045,35 +222009,6 @@
    }
   },
   {
-   "action_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0b7c88a5e0c625d21d3c2ade6bf90b6983246b919a51d37eb6a3394dded94534",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_kept_name_is_the_same_function_so_its_call_shape_cannot_matter_20261112_v1": 1,
-    "call": 1,
-    "cannot": 1,
-    "exempt_a_rename_between_two_documented_delegating_aliases_from_the_call_shape_check": 1,
-    "function": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "kept": 1,
-    "matter": 1,
-    "name": 1,
-    "same": 1,
-    "shape": 1,
-    "so": 1,
-    "strict_coverage_0_2082_to_0_2999__per_question_share_0_2836_to_0_6170__precision_up__wrong_changes_unchanged_at_14__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
-    "the_organ_refused_a_rename_wherever_a_call_site_had_a_shape_the_example_did_not_show__its_reason_is_that_the_new_function_may_not_take_those_arguments__which_is_exactly_wrong_when_the_two_names_are_one_function": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "A_LAW_CAN_BE_SYNTHESISED_NOT_JUST_CHOSEN_FROM_A_LIST_20261104",
    "capability": false,
    "date": "2026-11-04",
@@ -224784,6 +224719,31 @@
     "value": 3,
     "were": 4,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "38770032f94fb56376c9af04dc264e95d6370b0eb6e01fa9017a15ead0fd7ef9",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_skills_scope_is_its_syntax_not_its_class_20261112_v1": 1,
+    "class": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measure_which_declared_fields_actually_constrain_where_a_skill_applies_and_label_every_skill_by_the_tree_s_own_applicability_law_rather_than_build_a_new_learner": 1,
+    "not": 1,
+    "scope": 1,
+    "skills": 1,
+    "syntax": 1,
+    "the_skill_store_records_successes_as_a_count_without_the_state_they_happened_in_so_no_scope_claim_can_be_identified_and_the_fields_that_name_a_skill_s_class_constrain_nothing_which_leaves_exact_recall_wearing_the_name_of_generalization": 1,
+    "the_tree_can_distinguish_exact_recall_from_generalization_in_its_own_skill_store_and_can_name_the_one_missing_evidence_unit__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1
    }
   },
   {
