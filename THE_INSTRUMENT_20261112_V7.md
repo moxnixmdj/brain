@@ -41,7 +41,7 @@ the property nothing else in this tree has.
 `binary_identity` at 100% is the reference: a check that can be contradicted, everywhere it is
 declared. `capabilities` at 0% is 294 records marked verified, none of which can fail.
 
-### `canonical/verification/BINARY_IDENTITY_PREDICATES_20261112_V1.json`
+### `canonical/tools/predicates/binary_identity_predicates_20261112_v1.json`
 
 Five real predicates over the binaries this tree actually drives — tar 1.34, git 2.39.5,
 Python 3.11.2, node v22.22.3, jq 1.6. Not identity hashes kept as records: assertions that can be

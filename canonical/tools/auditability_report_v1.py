@@ -323,8 +323,8 @@ def binary_predicates(root: pathlib.Path) -> dict[str, Any]:
     This is the one layer that is fully checkable by construction, so it is the reference
     point: 100% here and 0% elsewhere is the gap this instrument exists to make visible.
     """
-    corpus = (root / "canonical" / "verification"
-              / "BINARY_IDENTITY_PREDICATES_20261112_V1.json")
+    corpus = (root / "canonical" / "tools" / "predicates"
+              / "binary_identity_predicates_20261112_v1.json")
     if not corpus.exists():
         return {"layer": "binary_identity", "total": 0, "checkable": 0,
                 "error": "CORPUS_ABSENT"}
@@ -351,8 +351,8 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
 
     predicates: list[dict[str, Any]] = []
     if run:
-        corpus = (root / "canonical" / "verification"
-                  / "BINARY_IDENTITY_PREDICATES_20261112_V1.json")
+        corpus = (root / "canonical" / "tools" / "predicates"
+                  / "binary_identity_predicates_20261112_v1.json")
         if corpus.exists():
             try:
                 entries = (json.loads(corpus.read_text(encoding="utf-8")) or {}).get("predicates") or []
@@ -366,8 +366,8 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
                 if spec is None:
                     continue
                 result = run_predicate(spec, cwd=root)
-                predicates.append({"source": "canonical/verification/"
-                                             "BINARY_IDENTITY_PREDICATES_20261112_V1.json",
+                predicates.append({"source": "canonical/tools/predicates/"
+                                             "binary_identity_predicates_20261112_v1.json",
                                    "name": entry.get("name"), "argv": spec["argv"], **result})
         for path, payload in _iter_json(root / "canonical"):
             # One check per RECORD, not per dict. A record's `verification` block is part of
