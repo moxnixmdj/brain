@@ -7,7 +7,7 @@
   "route_id": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1",
   "date": "2026-11-12",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "c4724d905f689d3af46359653f43bc4b606b944c",
+  "canonical_base_commit": "68ae14f75c8ed217ea8f9c3871fb64f87f9ec1b7",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -84,7 +84,7 @@
   ],
   "recursive_obs": {
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "c4724d905f689d3af46359653f43bc4b606b944c",
+    "canonical_base_commit": "68ae14f75c8ed217ea8f9c3871fb64f87f9ec1b7",
     "real_outcome": "ONE_REDUCER_ADDED_IN_CODE__THE_SAME_TWO_EXAMPLE_LESSON_NOW_TEACHES_THE_WORD_MEDIAN__FIVE_PRE_ORACLED_HELD_OUT_REQUESTS_ANSWERED__INDEPENDENT_CHECKER_TWO_SIDED__THE_PRICED_PROCEDURE_FOR_GROWING_THE_OPERATOR_SPACE_IS_MEASURED",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "obs_goal": {
