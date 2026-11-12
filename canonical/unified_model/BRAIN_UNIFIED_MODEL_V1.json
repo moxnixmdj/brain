@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 397,
+  "knowledge_documents": 396,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6793,
+  "research_index_records": 6792,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1972
+  "source_index_modules": 1973
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6971d1b03e446f72bdd9762d3b716ee6b219d20e805cb3763003ae58b5da1cec"
+  "value": "f563f2169a3e0cac8b8431e61b0eeb9a62f7b480b91163b700c8831cd7f04bc8"
  },
  "engines": [
   {
@@ -62339,80 +62339,6 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 11245,
-   "headings": [
-    "Which fix actually works",
-    "1. What was asked, and what I refused to assume",
-    "2. Finding one: the roadmap counted targets, not opportunities",
-    "3. Finding two: the ceiling, so no gain can be oversold",
-    "4. Finding three: the four arms, measured",
-    "5. What this changes about the route",
-    "6. Why the exemption is sound, and what it is not",
-    "7. Receipts"
-   ],
-   "kind": "DOCUMENT",
-   "path": "WHICH_FIX_ACTUALLY_WORKS_20261112_V1.md",
-   "sha256": "8853b552fbd8bf90a5f52d8b0b9e9ff1344fabded7fd9d54a249bf5ef3fb690a",
-   "summary": "**2026-11-12.** Base `8238d637`. Branch `arena/4ec3698d-brain`. Answers Problem 2: *similar task → adapt the knowledge.* The learner was changed, and the change is measured.",
-   "terms": {
-    "15": 9,
-    "22": 7,
-    "50": 8,
-    "60": 8,
-    "about": 5,
-    "algebra": 5,
-    "all": 5,
-    "askings": 11,
-    "because": 6,
-    "both": 8,
-    "cannot": 7,
-    "change": 5,
-    "changes": 11,
-    "class": 7,
-    "corpus": 6,
-    "coverage": 5,
-    "else": 5,
-    "exactly": 7,
-    "example": 7,
-    "examples": 5,
-    "exemption": 5,
-    "file": 5,
-    "first": 5,
-    "five": 5,
-    "gain": 11,
-    "import-only": 5,
-    "kind": 7,
-    "marker": 11,
-    "measured": 5,
-    "must": 7,
-    "name": 10,
-    "new": 6,
-    "no": 10,
-    "not": 22,
-    "nothing": 7,
-    "one": 15,
-    "only": 7,
-    "operator": 9,
-    "organ": 11,
-    "other": 7,
-    "pp": 8,
-    "precision": 8,
-    "refusal": 6,
-    "rename": 6,
-    "same": 10,
-    "so": 12,
-    "strict": 7,
-    "wrong": 10
-   },
-   "title": "Which fix actually works",
-   "title_terms": [
-    "actually",
-    "fix",
-    "works"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
    "bytes": 19706,
    "headings": [
     "Why not just give it a try — the addendum the question deserves",
@@ -75634,10 +75560,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1199,
+  "included_source_count": 1198,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9ac66a8eb39f96b915ea4a3d90f11ff8a76a4c3b373f976cfee18e74c4150d0d"
+  "source_tree_digest": "9f3e0e9ae0df86adcdfc9da74bfb86762d4f64a3fa7aed487646ee8c0977927b"
  },
  "research_index": [
   {
@@ -159506,6 +159432,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FUNCTION_FOUND_FROM_TASK_TEXT_V1",
+   "sha256": "5865accf11a87d3eb0c69745f31cdad7daf1e7615c7d8ace26e800ecdbb2a3b5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "found": 1,
+    "function": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FUTURE_MATCHED_SCOPE_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -205216,24 +205163,6 @@
   {
    "action_id": "",
    "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
-   "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
-   "sha256": "49bb5a1d996964834923bf8fa726399d0ed30c6063576182a7dd68b1a63159a4",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "fix": 1,
-    "generalization": 1,
-    "moves": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -222101,35 +222030,6 @@
    }
   },
   {
-   "action_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c6873667143931d5d28e0338e45c0904c8f6ebdd3349def681eac2319c7260c2",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_kept_name_is_the_same_function_so_its_call_shape_cannot_matter_20261112_v1": 1,
-    "call": 1,
-    "cannot": 1,
-    "exempt_a_rename_between_two_documented_delegating_aliases_from_the_call_shape_check": 1,
-    "function": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "kept": 1,
-    "matter": 1,
-    "name": 1,
-    "same": 1,
-    "shape": 1,
-    "so": 1,
-    "strict_coverage_0_2082_to_0_2999__per_question_share_0_2836_to_0_6170__precision_up__wrong_changes_unchanged_at_14__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
-    "the_organ_refused_a_rename_wherever_a_call_site_had_a_shape_the_example_did_not_show__its_reason_is_that_the_new_function_may_not_take_those_arguments__which_is_exactly_wrong_when_the_two_names_are_one_function": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "A_LAW_CAN_BE_SYNTHESISED_NOT_JUST_CHOSEN_FROM_A_LIST_20261104",
    "capability": false,
    "date": "2026-11-04",
@@ -227686,7 +227586,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "936b6975ea067c994d4e05a99a05025dc78b88d9d4e58c5de54ce929130b2b1b",
+   "sha256": "cadc1f1ec212cdc88616b15bac3db46e3b7eebb534e475ec0a06324e97941b53",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -263648,6 +263548,48 @@
     "scoring": 1,
     "v1": 1,
     "weighted": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/function_the_task_text_points_at_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/function_the_task_text_points_at_v1.py",
+   "sha256": "c607fe3ad8a2347957926a448602a00b94d4d076c39071b253b825fec52cf6d0",
+   "summary": "Which function of a file a task's text points at, and the first few changes to try in each.",
+   "symbol_count": 8,
+   "symbols": [
+    "Function",
+    "_parsed",
+    "candidates",
+    "functions_of",
+    "order",
+    "text_of",
+    "words",
+    "written_into"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "each": 1,
+    "few": 1,
+    "file": 1,
+    "first": 1,
+    "function": 3,
+    "functions_of": 1,
+    "order": 1,
+    "parsed": 1,
+    "points": 2,
+    "task": 2,
+    "text": 2,
+    "text_of": 1,
+    "try": 1,
+    "v1": 1,
+    "words": 1,
+    "written_into": 1
    }
   },
   {
