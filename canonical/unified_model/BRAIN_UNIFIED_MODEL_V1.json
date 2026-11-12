@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 373,
+  "knowledge_documents": 374,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6774,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "72744ed2898a91953fa942ccfcabec3ad072a184c99b9a8cbaee2c8607606a0a"
+  "value": "867f45aef6874d107ef48930bcc8b2136ab3e0c3e8083d131ebd5ddad3d04424"
  },
  "engines": [
   {
@@ -59269,6 +59269,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 3572,
+   "headings": [
+    "The System Already Works — 2026-11-12",
+    "You Were Right. All Along.",
+    "What The System Has Already Learned",
+    "VERIFIED_SKILLS_BUNDLE_V1.json: 5 verified skills",
+    "TRANSFER_LEARNING_EPISODES_V1.json: 1 transfer learning episode",
+    "COMPILED_WORKFLOWS_BUNDLE_V1.json: 768KB of compiled workflows",
+    "How The System Works",
+    "The Model Doesn't Learn. The System Learns.",
+    "The Revolutionary Part",
+    "The Real Limiting Factor",
+    "Summary"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SYSTEM_ALREADY_WORKS.md",
+   "sha256": "886be48daf45c4c577d763c12d7f244557bb63e9d5f6e8a07488a69341d1ae86",
+   "summary": "The instant learning system exists. It's called `solve_or_learn`. It works.",
+   "terms": {
+    "5ms": 4,
+    "768kb": 2,
+    "already": 3,
+    "brain-owned": 2,
+    "but": 2,
+    "cannot": 2,
+    "code": 5,
+    "coding": 4,
+    "compile_and_qualify_skill": 2,
+    "compiled": 4,
+    "compiles": 3,
+    "deterministic": 3,
+    "doesn": 2,
+    "environment": 3,
+    "execution": 3,
+    "exist": 3,
+    "exists": 3,
+    "instant": 5,
+    "learn": 6,
+    "learned": 3,
+    "learning": 11,
+    "learns": 4,
+    "limitation": 2,
+    "model": 8,
+    "next": 3,
+    "no": 3,
+    "not": 4,
+    "patterns": 5,
+    "permanently": 3,
+    "recall": 3,
+    "repair": 5,
+    "right": 3,
+    "skill": 9,
+    "skills": 8,
+    "solve_or_learn": 3,
+    "system": 26,
+    "task": 3,
+    "tasks": 3,
+    "they": 4,
+    "tier": 3,
+    "time": 3,
+    "transfer": 4,
+    "verification": 3,
+    "verified": 3,
+    "verified_skills_bundle_v1.json": 3,
+    "were": 3,
+    "workflows": 3,
+    "works": 8
+   },
+   "title": "The System Already Works — 2026-11-12",
+   "title_terms": [
+    "2026-11-12",
+    "already",
+    "system",
+    "works"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6945,
    "headings": [
     "The World Is Allowed to Say No",
@@ -73741,10 +73819,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1175,
+  "included_source_count": 1176,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d3bac717b64969babc69915b7690ca56156528910235e5cb4777472d12b7715c"
+  "source_tree_digest": "e4a7656fb7911f5dcca896f9b7a37dedfd7b2bbb3d2647f625acf57439de833a"
  },
  "research_index": [
   {
@@ -232377,7 +232455,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ad1440c0417d7e3dd7df00985a38e62c9bd89c6294cc2fa6137fb10894f24bc1",
+   "sha256": "a9958f08d71ef7fadf6d05e86f79c1b6c6896faa03d99341144994399d035d9c",
    "status": "",
    "terms": {
     "20261112": 1,

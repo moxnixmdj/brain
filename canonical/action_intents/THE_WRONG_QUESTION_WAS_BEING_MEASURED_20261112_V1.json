@@ -38,7 +38,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
- "canonical_base_commit": "4c05cd4d900092186784e8981ec4919c1196277a",
+ "canonical_base_commit": "af306ce7f5f4315d4821e5079a5765d95bf0f038",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -56,7 +56,7 @@
  "next_step": "Make VERIFIED_ACTION unavailable unless the returned object is about the object the sentence named. UNJUDGED already exists in the code and is unused.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "recursive_obs": {
-  "canonical_base_commit": "4c05cd4d900092186784e8981ec4919c1196277a",
+  "canonical_base_commit": "af306ce7f5f4315d4821e5079a5765d95bf0f038",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
