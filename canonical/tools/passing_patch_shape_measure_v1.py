@@ -78,7 +78,7 @@ ELSEWHERE, NOT_APPLIED, NOT_EXAMINED, NO_PYTHON = ("another file than the expert
 CLASSES = ("can be listed", "one statement, not listable", fix_shape.ONE_PLACE, fix_shape.SEVERAL_PLACES, census.SEVERAL_FILES)
 
 EXPECTED: dict[str, Any] = {
-    "written": "2026-11-12 about 20:37 UTC, before this tool had read a patch or a verdict. To learn their format one file of patches "
+    "written": "2026-11-12 about 20:31 UTC, before this tool had read a patch or a verdict. To learn their format one file of patches "
                "(its first patch) and one file of verdicts (its counts) had been looked at by hand.",
     "share of submissions that resolve a task, mean over the tasks of a class of the expert's fix": {
         "can be listed": [0.65, 0.85], "one statement, not listable": [0.55, 0.75], fix_shape.ONE_PLACE: [0.40, 0.60],
