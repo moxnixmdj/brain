@@ -306,6 +306,61 @@ def description_bytes(source_text: str) -> int:
     return len(ast.unparse(cleaned))
 
 
+#: Types whose values a corpus literal can be probed with as-is. A bool is deliberately out: the
+#: lifter treats booleans as machinery structure, and probing a keyed table with `True` probes a
+#: key the writer never emits.
+_PROBE_LITERAL_TYPES = (str, int, float)
+
+
+def derive_probe_domain(sources: Sequence[str], *, limit: int = 256) -> list[Any]:
+    """Probe inputs derived from the CORPUS ITSELF -- the only version that can run unattended.
+
+    Round 25 ends on an honest gap, in its own words: *"the bridge stays SKILL-only and correctly
+    admits nothing it cannot probe ... callers whose domain the numeric grid cannot see supply
+    `probes`"*. That is a measurement of the decompressor with a human in the loop. A learner that
+    needs a human to name the domain is not the mechanism the owner asked for, and the default
+    numeric grid refuses every string-keyed table, so the live path admits nothing.
+
+    The domain is not hidden: it is in the corpus. A body can only branch on data it mentions, so
+    every string, int and float literal the corpus contains is an input the corpus itself says is
+    meaningful -- `'w'`, `'known'`, `'mean_cost'`, `'n'`, `1.0`. Deriving from the corpus is a
+    PRIOR, not an oracle: it is the same move `settlement.derive_probe_space` already makes for
+    numeric hypotheses, applied to the literals the lifter has just decided are data.
+
+    Honestly bounded: a derived grid is weaker than a supplied one. It cannot contain an input the
+    corpus never mentions, so it cannot by itself discover that an organ is wrong about an unseen
+    action -- which is why the discrimination and behaviour gates below stay exactly as strict, and
+    why the derived path is reported separately from the supplied path in every measurement. What
+    it buys is closure: admission can now fire with nobody naming the domain, and every refusal
+    still carries its reason.
+
+    Deterministic (first appearance order, no set iteration), so two runs over one corpus produce
+    one domain.
+    """
+    out: list[Any] = []
+    for src in sources:
+        try:
+            tree = ast.parse(str(src))
+        except (SyntaxError, ValueError):
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Constant):
+                continue
+            value = node.value
+            if isinstance(value, bool) or not isinstance(value, _PROBE_LITERAL_TYPES):
+                continue
+            if not value and isinstance(value, str) and value == "":
+                continue  # the empty string is added below, so it is one probe and not a duplicate
+            if any(type(value) is type(seen) and seen == value for seen in out):
+                continue
+            out.append(value)
+            if len(out) >= limit:
+                return out
+    if "" not in out and len(out) < limit:
+        out.append("")
+    return out
+
+
 def _exec_fn(source: str, entrypoint: str, *, prelude: str | None = None) -> Any | None:
     ns: dict[str, Any] = {"math": math}
     try:
@@ -408,15 +463,26 @@ def compress_corpus(
                     "shape_key": g["shape_key"][:64], "reason": "MEMBER_DID_NOT_COMPILE",
                 })
                 break
+            # PARTIAL functions, compared on their agreement set. Two programs are the same
+            # function when they agree wherever either is defined. The earlier rule demanded that
+            # BOTH return on every probe and read any exception as a disagreement, which quietly
+            # made "agrees everywhere it is defined" unmeasurable for exactly the corpus whose
+            # domain the grid cannot fully cover: a table indexed by `int(x0)` raises on 0.5, and
+            # identical programs were then refused as "changed behaviour" (measured: the periodic
+            # family refused under a corpus-derived grid purely because the grid held an integer
+            # the table does not cover). Exceptions are still compared: they are outcomes.
             outputs = set()
             for x in grid:
                 try:
-                    a = orig_fn(x)
-                    b = new_fn(x)
-                except Exception:
-                    preserved = False
-                    break
-                outputs.add(repr(a))
+                    a: Any = ("VALUE", orig_fn(x))
+                except Exception as exc:
+                    a = ("RAISED", type(exc).__name__)
+                try:
+                    b: Any = ("VALUE", new_fn(x))
+                except Exception as exc:
+                    b = ("RAISED", type(exc).__name__)
+                if a[0] == "VALUE":
+                    outputs.add(repr(a[1]))
                 if a != b:
                     preserved = False
                     break
@@ -456,6 +522,71 @@ def compress_corpus(
             "_member_sources": [m["source"] for m in g["members"]],
         })
     return {"abstractions": abstractions, "refusals": refusals}
+
+
+def admit_corpus_abstraction(
+    sources: Sequence[str],
+    *,
+    entrypoints: Sequence[str] | None = None,
+    probes: Sequence[Any] | None = None,
+) -> dict[str, Any]:
+    """`compress_corpus` with the probe domain defaulted from the CORPUS, not from a float grid.
+
+    This is the one admission call the live path makes. It exists because a caller-supplied probe
+    list is a human in the loop: the round-25 bridge supplied none, so the numeric default grid ran
+    against a string-keyed table, every probe answered identically, and the vacuity gate -- which is
+    correct -- refused every organ. Measured on the live path: three structurally identical
+    world-model organs registered through `register_organ` admitted nothing, and the library stayed
+    empty (see `canonical/tools/one_try_compounding_probe_v1`).
+
+    Defaulting the domain does not loosen a single gate. It changes which inputs the SAME two gates
+    (behaviour preservation and discrimination) are evaluated on, and it reports which domain was
+    used so a measurement can never conflate the derived path with the supplied one.
+    """
+    srcs = [str(s) for s in sources]
+    eps = list(entrypoints) if entrypoints is not None else [None] * len(srcs)
+    if probes is not None:
+        grid = list(probes)
+        domain = "SUPPLIED"
+    else:
+        grid = derive_probe_domain(srcs)
+        domain = "DERIVED_FROM_CORPUS"
+    if not grid:
+        return {
+            "abstractions": [],
+            "refusals": [{"reason": "NO_PROBE_DOMAIN_IN_CORPUS", "sites": len(srcs)}],
+            "probe_domain": domain,
+            "probe_count": 0,
+        }
+    try:
+        res = compress_corpus(srcs, entrypoints=eps, probes=grid)
+    except Exception as exc:  # fail-closed: a corpus the compressor cannot read admits nothing
+        return {
+            "abstractions": [],
+            "refusals": [{"reason": "COMPRESSION_RAISED", "detail": type(exc).__name__}],
+            "probe_domain": domain,
+            "probe_count": len(grid),
+        }
+    res["probe_domain"] = domain
+    res["probe_count"] = len(grid)
+    return res
+
+
+def concept_id_for_source(source: str) -> str:
+    """A collision-free identifier for a STORED program (not an abstraction).
+
+    The round-25 bridge built this id as `"c_" + organ_id.replace("organ_skill_", "")[:18]`. An
+    organ id is `organ_<stratum>_<sha[:20]>`, so after the ten-character `organ_skill_` prefix and
+    an eighteen-character truncation exactly `organ_sk` was left: EVERY SKILL organ in the tree
+    mapped to the single id `c_organ_skill_`, so the library could hold one stored program no
+    matter how many were offered -- measured, three structurally different organs produced three
+    identical ids and one slot. A memory that can hold one item has no reuse to compound.
+
+    Hashing the source itself makes distinct programs distinct and keeps replays stable across
+    processes, because the id is a function of the bytes and of nothing else.
+    """
+    digest = hashlib.sha1(str(source).strip().encode("utf-8")).hexdigest()[:16]
+    return f"c_o_{digest}"
 
 
 def helper_body_stmts(abstraction: dict[str, Any]) -> str:
@@ -629,16 +760,23 @@ def rewrite_source_with_abstractions(
         new_exec = _exec_fn(new_fn_src, fn.name, prelude=prelude)
         if orig_exec is None or new_exec is None:
             return None
+        # Same partial-function rule as admission: agreement wherever either form is defined, and
+        # an exception is an outcome to be compared, not a refusal. A replay must never turn a
+        # program that raised into one that answers.
         seen_outputs: list[Any] = []
         for x in probes:
             try:
-                a = orig_exec(x)
-                b = new_exec(x)
-            except Exception:
-                return None
+                a: Any = ("VALUE", orig_exec(x))
+            except Exception as exc:
+                a = ("RAISED", type(exc).__name__)
+            try:
+                b: Any = ("VALUE", new_exec(x))
+            except Exception as exc:
+                b = ("RAISED", type(exc).__name__)
             if a != b:
                 return None
-            seen_outputs.append(a)
+            if a[0] == "VALUE":
+                seen_outputs.append(a[1])
         # Discrimination, measured on the ORIGINAL: a grid the original answers identically
         # verified nothing, so the rewrite refuses rather than shipping unchecked. The equality
         # loop above stays fail-closed per probe; this is the vacuity gate.

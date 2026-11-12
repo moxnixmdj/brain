@@ -95,13 +95,24 @@ def test_a_never_seen_organ_replays_through_the_admitted_abstraction():
         assert "_block" in cold_src and "_n" in cold_src
 
         lib = _build_library(tmp)
-        report = rewrite_source_with_concepts(cold_src, lib)
-        assert report is not None, "the wake pass refused to replay an admitted abstraction"
+        # The wake entry returns SOURCE TEXT -- one return type on every path. It used to hand
+        # back the replay engine's report dict on the abstraction branch, so a caller that exec'd
+        # the result exec'd a dict; the report itself is asserted directly against the engine.
+        direct = cg.rewrite_source_with_abstractions(cold_src, lib)
+        assert direct is not None, "the replay engine refused an admitted abstraction"
+        report = direct
         assert any(
             c["concept_id"].startswith("c_x_") for c in report["changes"]
         ), report
         # the rewritten program CALLS the abstraction and no longer carries the block inline
         rewritten = str(report["source"])
+        entry_return = rewrite_source_with_concepts(cold_src, lib)
+        assert isinstance(entry_return, str), entry_return
+        # the entry returns the abstraction helper AND the module that calls it, so `_block`
+        # survives inside the helper -- it is the machinery, stored once, which is the point.
+        assert "c_x_" in entry_return
+        assert entry_return.rstrip().endswith("x0)")
+        assert "_block" not in entry_return.rsplit("def run(", 1)[-1]
         assert "c_x_" in rewritten
         assert "_block" not in rewritten
         # measured: strictly fewer description bytes, computed not asserted
@@ -172,10 +183,10 @@ def test_replay_refuses_a_library_entry_that_would_change_behaviour():
         grown = g._grow_operator_from_evidence(_seeds(oracle12), oracle12, "op::p12_probe")
         assert grown is not None
         organ, _ = grown
-        report = rewrite_source_with_concepts(organ.source_code, lib)
-        if report is not None:
+        rewritten = rewrite_source_with_concepts(organ.source_code, lib)
+        if rewritten is not None:
             # if anything is returned, it must be the GOOD abstraction's rewrite, never c_wrong
-            assert "c_wrong" not in str(report.get("source")), report
+            assert "c_wrong" not in str(rewritten), rewritten
         # and a direct replay against ONLY the forged entry must refuse outright
         forged_only = CompoundingConceptLibrary(pathlib.Path(tmp) / "forged.json")
         forged_only.admit_verified_concept(e)
@@ -213,9 +224,9 @@ def test_expression_concepts_and_abstractions_coexist_in_one_library():
         grown = g._grow_operator_from_evidence(_seeds(oracle12), oracle12, "op::p12")
         assert grown is not None
         organ, _ = grown
-        report = rewrite_source_with_concepts(organ.source_code, lib)
-        assert report is not None
+        rewritten = rewrite_source_with_concepts(organ.source_code, lib)
+        assert rewritten is not None
         # the wake entry returns the rewritten SOURCE; the expression concept must not appear,
         # the abstraction call must
-        assert "c_never_matches" not in report
-        assert "c_x_" in report
+        assert "c_never_matches" not in rewritten
+        assert "c_x_" in rewritten
