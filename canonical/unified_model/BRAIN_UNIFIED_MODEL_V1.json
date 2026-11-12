@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 385,
+  "knowledge_documents": 386,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6781,
+  "research_index_records": 6784,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "19dc4edbe3efdb90847ec9b2c5374ab7e01d643720495dfa9f1a777fbd373d13"
+  "value": "83f64cbd9ef502100053e3269df0b734eaa2072be6b13aa20f2f16452ea9f9a5"
  },
  "engines": [
   {
@@ -61456,6 +61456,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11245,
+   "headings": [
+    "Which fix actually works",
+    "1. What was asked, and what I refused to assume",
+    "2. Finding one: the roadmap counted targets, not opportunities",
+    "3. Finding two: the ceiling, so no gain can be oversold",
+    "4. Finding three: the four arms, measured",
+    "5. What this changes about the route",
+    "6. Why the exemption is sound, and what it is not",
+    "7. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHICH_FIX_ACTUALLY_WORKS_20261112_V1.md",
+   "sha256": "8853b552fbd8bf90a5f52d8b0b9e9ff1344fabded7fd9d54a249bf5ef3fb690a",
+   "summary": "**2026-11-12.** Base `8238d637`. Branch `arena/4ec3698d-brain`. Answers Problem 2: *similar task → adapt the knowledge.* The learner was changed, and the change is measured.",
+   "terms": {
+    "15": 9,
+    "22": 7,
+    "50": 8,
+    "60": 8,
+    "about": 5,
+    "algebra": 5,
+    "all": 5,
+    "askings": 11,
+    "because": 6,
+    "both": 8,
+    "cannot": 7,
+    "change": 5,
+    "changes": 11,
+    "class": 7,
+    "corpus": 6,
+    "coverage": 5,
+    "else": 5,
+    "exactly": 7,
+    "example": 7,
+    "examples": 5,
+    "exemption": 5,
+    "file": 5,
+    "first": 5,
+    "five": 5,
+    "gain": 11,
+    "import-only": 5,
+    "kind": 7,
+    "marker": 11,
+    "measured": 5,
+    "must": 7,
+    "name": 10,
+    "new": 6,
+    "no": 10,
+    "not": 22,
+    "nothing": 7,
+    "one": 15,
+    "only": 7,
+    "operator": 9,
+    "organ": 11,
+    "other": 7,
+    "pp": 8,
+    "precision": 8,
+    "refusal": 6,
+    "rename": 6,
+    "same": 10,
+    "so": 12,
+    "strict": 7,
+    "wrong": 10
+   },
+   "title": "Which fix actually works",
+   "title_terms": [
+    "actually",
+    "fix",
+    "works"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 19706,
    "headings": [
     "Why not just give it a try — the addendum the question deserves",
@@ -74677,10 +74751,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1187,
+  "included_source_count": 1188,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6d80a00cbc602805cc6d3ad6ad86b455b4bb805ac66aae60fc0e805221e13388"
+  "source_tree_digest": "97acd030543b5596d67ce9a8636c400973a40a2015e5c4c75cba3bebccc9412a"
  },
  "research_index": [
   {
@@ -204182,6 +204256,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json",
+   "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
+   "sha256": "49bb5a1d996964834923bf8fa726399d0ed30c6063576182a7dd68b1a63159a4",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "fix": 1,
+    "generalization": 1,
+    "moves": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -204354,6 +204446,47 @@
     "v1": 1,
     "white": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
+   "schema": "",
+   "sha256": "84c982419be34eac3b691da1a553bbf5a3822f9d04bf41d2d48cc244446483c7",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.2.0": 1,
+    "finite": 1,
+    "pytest": 1,
+    "search.cpython": 1,
+    "test": 1,
+    "verifier": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
+   "schema": "",
+   "sha256": "34350ba7b0b496fcfa22a7b144587c838fac47f2fcf7ce12d60eb0010fa734e7",
+   "status": "",
+   "terms": {
+    "311": 1,
+    "9.2.0": 1,
+    "causal": 1,
+    "falsification": 1,
+    "owned": 1,
+    "pytest": 1,
+    "test": 1,
+    "v1.cpython": 1
    }
   },
   {
