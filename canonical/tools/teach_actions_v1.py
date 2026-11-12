@@ -435,9 +435,8 @@ def program_and_request(lesson: dict) -> tuple[str, dict[str, str]]:
                 values = ast.literal_eval(node.value)
             except ValueError:
                 values = None
-            if "does" in lesson:
-                values = values[1] if (isinstance(values, tuple) and len(values) == 2
-                                       and values[0] == lesson["does"]) else None
+            if "does" in lesson:        # the line written above: (action, values)
+                values = values[1] if isinstance(values, tuple) and len(values) == 2 else None
     if (not isinstance(values, tuple) or len(values) != len(lesson["parameters"])
             or not all(isinstance(value, str) and value for value in values)):
         raise LessonError("%s: REQUEST must be a tuple of %d string literals"

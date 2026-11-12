@@ -198,9 +198,15 @@ def test_a_use_is_shown_when_any_example_showed_it() -> None:
                                                  "called with 2 arguments, called with 3 arguments"):
         repeated(target, EQUALS_TWO, EQUALS_THREE)
     assert repeated(target, EQUALS_TWO, EQUALS_THREE, EQUALS_NAMED) == target.replace("assertEquals", "assertEqual")
-    # Shown with two and with three arguments is not shown with four.
+    # Shown with two and with three arguments is not shown with four ...
     with pytest.raises(by_example.Refused, match="called with 4 arguments"):
         repeated("class X:\n    def test_e(self):\n        self.assertEquals(a, b, c, d)\n", EQUALS_TWO, EQUALS_THREE)
+    # ... and shown with two and with four is not shown with three: nothing between two showings is assumed.
+    apart = became("import shapes\n\nflat = shapes.area(w, h)\nsolid = shapes.area(w, h, d, unit)\n", "shapes.area", "shapes.size")
+    assert rules(apart) == ["shapes.area -> shapes.size"]
+    with pytest.raises(by_example.Refused, match="called with 3 arguments; the examples showed it called with 2 arguments, "
+                                                 "called with 4 arguments"):
+        repeated("import shapes\n\nroom = shapes.area(x, y, z)\n", apart)
 
 
 def test_a_rule_about_a_whole_call_does_not_ask_how_its_result_is_used() -> None:
@@ -443,6 +449,16 @@ def test_one_program_serves_four_taught_actions() -> None:
             "remember in ?path0 also the way ?path1 was changed into ?path2",
             "edit ?path0 the way ?path1 remembers",
             "edit ?path0 the way ?path1 remembers and leave the rest alone"} <= skeletons
+
+
+def test_the_teaching_tool_compares_a_lesson_file_by_what_it_holds(tmp_path) -> None:
+    (tmp_path / "kept.lesson").write_text('{\n "b": [1, 2],\n  "a": "x"}', encoding="utf-8")
+    assert teach._differences(tmp_path, {"after_json": {"kept.lesson": {"a": "x", "b": [1, 2]}}}) == []
+    assert teach._differences(tmp_path, {"after_json": {"kept.lesson": {"a": "x", "b": [1, 3]}}}) == ["kept.lesson"]
+    assert teach._differences(tmp_path, {"after_json": {"none.lesson": {}}}) == ["none.lesson"]
+    (tmp_path / "broken.lesson").write_text("{", encoding="utf-8")
+    assert teach._differences(tmp_path, {"after_json": {"broken.lesson": {}}, "after": {"kept.lesson": "other"}}) == [
+        "kept.lesson", "broken.lesson"]
 
 
 @pytest.mark.parametrize("damage", [
