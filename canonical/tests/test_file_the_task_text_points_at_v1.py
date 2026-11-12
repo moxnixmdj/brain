@@ -227,3 +227,35 @@ def test_no_file_no_function_or_no_code_line_gives_no_candidate():
     only = {"setup.py": SOURCES["setup.py"]}
     assert finder.candidates(documents(only), only.__getitem__, TEXT) == []
     assert finder.candidates(documents(), SOURCES.__getitem__, "Store.save writes to the wrong database") == []
+
+
+# --------------------------------------------------------------------------- #
+# added after the round of seeded faults (canonical/tools/seeded_faults_file_found_v1.py):
+# looking only at the first place a name stands, and leaving the class of a method out of its
+# words, both got past the tests above
+# --------------------------------------------------------------------------- #
+def test_a_name_that_first_stands_inside_a_longer_one_is_still_found_where_it_stands_whole():
+    assert finder.named("pkg/util/helpers.py", "in myutil/helpers.py, and then in util/helpers.py") == finder.WRITTEN_OUT
+    assert finder.named("pkg/util/helpers.py", "xhelpers.py is fine, helpers.py is not") == finder.FILE_NAME_ONLY
+    assert finder.named("pkg/util/helpers.py", "myutil.helpers and util.helpers") == finder.WRITTEN_OUT
+    assert finder.named("pkg/util/helpers.py", "myutil/helpers.py and xhelpers.py") == finder.FILE_NAME_ONLY      # helpers.py of another directory
+    assert finder.named("pkg/util/helpers.py", "xhelpers.py and myhelpers.py") == finder.NOT_NAMED
+
+
+ALPHA = "class Alpha:\n    def run(self, value):\n        result = compute(value)\n        return result\n"
+BETA = "class Beta:\n    def run(self, value):\n        result = compute(value)\n        return result\n"
+ABOUT_BETA = "Beta gives the wrong result.\n```\nresult = compute(value, strict=True)\n```\n"
+
+
+def test_the_class_a_method_stands_in_is_among_the_words_of_the_method():
+    both = {"pkg/classes.py": ALPHA + "\n\n" + BETA}
+    made = finder.candidates(documents(both), both.__getitem__, ABOUT_BETA)
+    assert made and made[0][1].name == "Beta.run"
+    assert [(function, text) for _, function, text in made] == pointer.candidates(both["pkg/classes.py"], ABOUT_BETA)
+
+
+def test_across_files_the_method_of_the_class_the_text_names_comes_first():
+    sources = {"pkg/one.py": ALPHA, "pkg/two.py": BETA}
+    made = finder.candidates(documents(sources), sources.__getitem__, ABOUT_BETA, files_tried=2, in_order=["pkg/one.py", "pkg/two.py"])
+    assert (made[0][0], made[0][1].name) == ("pkg/two.py", "Beta.run")
+    assert {(path, function.name) for path, function, _ in made} == {("pkg/one.py", "Alpha.run"), ("pkg/two.py", "Beta.run")}

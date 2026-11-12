@@ -10,9 +10,12 @@ is one piece of text replaced by a wrong one in a COPY of the tree's canonical/r
 canonical/tools; the two test files of the organ and the measure are run on the copy; a fault is
 caught when a test fails.
 
-Two tests are left out of the run, for the reasons given there: the one that compares the files'
-hashes with the hashes in the record fails for every changed file whatever the change is, and the
-one that reads this round's own result out of the record cannot pass before the round is made.
+Three tests are left out of the run. Two for the reasons given there: the one that compares the
+files' hashes with the hashes in the record fails for every changed file whatever the change is,
+and the one that reads this round's own result out of the record cannot pass before the round is
+made. The third is the test that every fault's text stands once in its file: it fails as soon as
+ANY fault is seeded, because the text is then gone. A first run of this round had it in and came
+out as 64 caught of 64, six of them by that test alone; with it left out the six got past.
 
 A fault that gets past is a place where the tests do not pin the behaviour down. It is reported,
 not hidden: see `survived` in the output.
@@ -35,7 +38,8 @@ ORGAN = "canonical/runtime/file_the_task_text_points_at_v1.py"
 MEASURE = "canonical/tools/file_found_from_task_text_measure_v1.py"
 TESTS = ("canonical/tests/test_file_the_task_text_points_at_v1.py", "canonical/tests/test_file_found_from_task_text_measure_v1.py")
 LEFT_OUT = ("canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_was_made_by_the_code_in_the_tree",
-            "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_says_how_many_seeded_faults_the_tests_caught")
+            "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_says_how_many_seeded_faults_the_tests_caught",
+            "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_seeded_faults_are_each_one_piece_of_text_that_stands_once")
 RECORDS = ("FILE_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json", "FUNCTION_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
            "PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json", "SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json")
 

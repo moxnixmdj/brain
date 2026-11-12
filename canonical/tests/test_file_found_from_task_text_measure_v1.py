@@ -539,3 +539,38 @@ def test_the_record_says_how_many_seeded_faults_the_tests_caught(written):
     assert sorted(row["fault"] for row in last["rows"] if not row["caught"]) == sorted(last["survived"])
     assert last["left_out_of_the_run"] == list(seeded.LEFT_OUT)
     assert found["tests_added_after_the_first_round"] == [name for name in found["tests_added_after_the_first_round"] if (ROOT / name.split("::")[0]).exists()]
+
+
+# --------------------------------------------------------------------------- #
+# added after the round of seeded faults: four faults of the measure got past the tests above
+# (the other text's candidates made from the task's own text; a task reached twice counted
+# twice; one small function standing first being enough for the earlier lists; a base commit
+# read from the middle of a line)
+# --------------------------------------------------------------------------- #
+def test_another_text_that_finds_the_file_and_quotes_nothing_reaches_nothing():
+    names_the_file = "Store.load returns a, see pkg/store.py"
+    found = one([IN_SAVE], other=names_the_file)
+    assert found["expert_other_text"] == 1 and found["place"] == 1 and found["place_other_text"] is None
+
+
+def test_another_text_that_quotes_the_line_is_counted_as_reaching_it():
+    assert one([IN_SAVE], other=TEXT)["place_other_text"] == 1
+
+
+def test_a_task_the_chain_and_the_earlier_lists_both_reach_is_one_task():
+    found = measure.summarise(PER_TASK, ["a__b-1"], ["a__b-1", "c__d-2"])
+    assert found["chain__which"] == ["a__b-1"] and found["earlier_lists__which"] == ["a__b-1", "c__d-2"]
+    assert found["of_the_500_from_the_tree_and_the_text_alone"] == 2
+
+
+def test_the_earlier_lists_do_not_keep_a_task_with_a_small_function_that_does_not_stand_first():
+    place_record = {"per_task": {"t-1": [0, 0, 5], "t-2": [0, 0, 5]}}
+    function_record = {"per_task": {"t-1": {"functions": [{"rank": 1, "small": True}, {"rank": 3, "small": True}]},
+                                    "t-2": {"functions": [{"rank": 1, "small": True}, {"rank": 3, "small": False}]}}}
+    assert measure.earlier_kept(function_record, place_record) == ["t-2"]
+
+
+def test_a_base_commit_quoted_inside_the_statement_is_not_the_base_commit(tmp_path):
+    (tmp_path / "a__b-1.yaml").write_text("problem_statement: |\n  base_commit: " + "9f" * 20 + "\nbase_commit: " + "0a" * 20 + "\n")
+    (tmp_path / "a__b-2.yaml").write_text("problem_statement: |\n  base_commit: " + "9f" * 20 + "\n")
+    assert measure.base_commits(tmp_path, ["a__b-1", "a__b-2"]) == {"a__b-1": "0a" * 20}
