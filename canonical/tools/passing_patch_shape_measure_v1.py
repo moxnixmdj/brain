@@ -240,11 +240,13 @@ def narrowed(before: str, after: str, spans: Sequence[tuple[int, int]]) -> tuple
     while front < most and a[front] == b[front]:
         front += 1
     back = 0
-    while back < most - front and a[len(a) - 1 - back] == b[len(b) - 1 - back]:
+    while back < most and a[len(a) - 1 - back] == b[len(b) - 1 - back]:
         back += 1
+    # lines that are the same on both sides of what was put in (an empty line, mostly) can be counted to the front or to the back
+    ways = {(front, min(back, most - front)), (min(front, most - back), back)}
     delta = len(b) - len(a)
     for first, last in spans:
-        if not (first - 1 <= front and len(a) - back <= last):
+        if not any(first - 1 <= ahead and len(a) - behind <= last for ahead, behind in ways):
             continue
         part_before = textwrap.dedent("\n".join(a[first - 1:last]))
         part_after = textwrap.dedent("\n".join(b[first - 1:last + delta]))
