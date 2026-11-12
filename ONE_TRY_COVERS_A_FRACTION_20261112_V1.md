@@ -33,11 +33,11 @@ demonstration; every other drawn file is a place to repeat it. The organ is
 `canonical/swe_kernel/taught_actions/edit_by_example_v1.py`: no model, no weights, nothing taught
 except the one example.
 
-| organ, one example | coverage of the developers' changes | precision of what it changed | edited / asked |
+| organ at the record's run, one example | coverage of the developers' changes | precision of what it changed | edited / asked |
 |---|---:|---:|---:|
 | older organ (run 1) | 23.18% (388/1674) | 96.82% (396/409) | 142/440 |
-| **current organ (run 2)** | **15.83% (265/1674)** | **95.45% (273/286)** | **87/440** |
-| current, leave-unshown-alone (run 3) | 17.50% (293/1674) | 95.86% (301/314) | 95/440 |
+| **record run 2 (organ at 17:19Z)** | **15.83% (265/1674)** | **95.45% (273/286)** | **87/440** |
+| record run 3, leave-unshown-alone | 17.50% (293/1674) | 95.86% (301/314) | 95/440 |
 | ceiling, every try kept (run 6) | 23.30% (390/1674) | 96.84% (398/411) | 144/440 |
 
 `coverage = right changes / the developers' changes`. `precision = right changes / the organ's
@@ -49,8 +49,8 @@ quoted one while arguing about the other.
 | organ | one example | two examples | second example buys |
 |---|---:|---:|---:|
 | older organ | 23.18% | 32.74% (1089/3326) | **+9.56 pp** |
-| current organ | 15.83% | 23.96% (797/3326) | **+8.13 pp** |
-| current, leave unshown | 17.50% | 26.97% (897/3326) | **+9.47 pp** |
+| record run 2 | 15.83% | 23.96% (797/3326) | **+8.13 pp** |
+| record run 3, leave unshown | 17.50% | 26.97% (897/3326) | **+9.47 pp** |
 | ceiling | 23.30% | 32.17% (1070/3326) | **+8.87 pp** |
 
 The marginal value of a **second** demonstration is stable at **eight to ten points of
@@ -59,7 +59,7 @@ is not a switch that turns a skill on.
 
 ## 2. One example is not one number
 
-Per pull request, current organ, one example:
+Per pull request, record run 2, one example:
 
 - recovers **nothing** on **5 of 15** pull requests;
 - recovers **at most 1%** on **6 of 15**;
@@ -73,7 +73,7 @@ kinds and kinds outside the algebra.
 ## 3. The refusals are the roadmap
 
 Every refusal in the record is the learner's own sentence. Grouped over the 440 askings of the
-current organ, one example:
+record's run 2, one example:
 
 | class | askings | share | what it means |
 |---|---:|---:|---|
@@ -201,9 +201,18 @@ The order matters: 1 makes the signal true; 2–5 raise coverage where the mecha
 works; 6 spends the second example where it pays; 7 is the expensive fallback, not the first
 move.
 
-## 9. Receipts
+## 9. The record is a snapshot, not a standing claim
+
+PR #6778 (`73352c10`) changed `edit_by_example_v1.py` by 122 lines **after** this record was
+produced. "Run 2" is therefore the organ as it stood at 17:19Z on 2026-11-12, not the organ on
+`main` now. The numbers above are exact for the record and must not be quoted as the current
+organ's rates until the writer is re-run. The tool says so in its `limits`; this section says it
+where a reader will see it.
+
+## 10. Receipts
 
 - Record: `canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json`
+  (a snapshot at 2026-11-12T17:19:18Z; `edit_by_example_v1.py` changed again in #6778)
   (15 PRs, 89 files, 440 one-example askings, 870 two-example askings; generated
   2026-11-12T17:19:18Z; authority `NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT`).
 - Reader: `canonical/tools/one_try_coverage_frontier_20261112_v1.py` (`--json` writes the whole
