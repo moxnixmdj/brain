@@ -205,8 +205,12 @@ def candidates(source: str, *, checked: bool = True) -> list[tuple[str, int, str
             continue
         if text in seen or (checked and not kinds.is_a_program(text)):
             continue
+        try:
+            fewer = whole - size(ast.parse(text))
+        except (SyntaxError, ValueError, RecursionError):           # only when not checked: a text that cannot even be read
+            continue
         seen.add(text)
-        out.append((text, whole - size(ast.parse(text)), kind))
+        out.append((text, fewer, kind))
     out.sort(key=lambda item: item[1])                              # stable: equal pieces stay in the order of the program
     return out
 

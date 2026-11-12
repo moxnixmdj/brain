@@ -25,7 +25,11 @@ The shapes, the first that fits
                              or the statement is of another kind
   several statements at one place     one unbroken run of statements (or one clause of a try or
                              a match) added, removed or rewritten
-  several places             more than one run, or more than one part of a compound statement
+  several places             more than one run, more than one part of a compound statement, or
+                             a run in which a compound statement was kept and changed inside
+
+The line between the last two is rough. The line that matters is above them: the first five
+shapes change at most one statement.
 
 and what the new piece needs that the place it goes to does not hold
 --------------------------------------------------------------------
@@ -292,6 +296,21 @@ def _leaf(found: dict[str, Any], old: set, program: set) -> dict[str, Any] | Non
     return None
 
 
+def _is_compound(statement: ast.AST) -> bool:
+    return any(_holds_blocks(getattr(statement, field, None)) for field in statement._fields)
+
+
+def _changed_inside(left_a: list, left_b: list) -> bool:
+    """A run of statements rewritten is more than one place when a compound statement in it was
+    kept and changed inside: a definition that stands on both sides under its name, or, in two
+    runs of equal length, a compound statement where one of its kind stood."""
+    def named(run: list) -> set:
+        return {(type(statement), statement.name) for statement in run if isinstance(statement, _DEFINITIONS)}
+    if named(left_a) & named(left_b):
+        return True
+    return len(left_a) == len(left_b) and any(type(s) is type(t) and _is_compound(s) for s, t in zip(left_a, left_b))
+
+
 def _shape(before: ast.Module, after: ast.Module, buggy: str, fixed: str) -> dict[str, Any]:
     found = descend(before, after)
     program = atoms(before)
@@ -313,11 +332,11 @@ def _shape(before: ast.Module, after: ast.Module, buggy: str, fixed: str) -> dic
         if found["expression"] is not None:
             old, new = found["expression"]
             return {**out, "shape": EXPRESSION, "kind": None, "needs": needs(atoms(new), atoms(old), program), "nodes": _nodes(new)}
-        compound = any(_holds_blocks(getattr(node, field, None)) for node in (a, b) for field in node._fields)
+        compound = any(_is_compound(statement) for statement in (left_a[0], left_b[0]))
         if found["fields"] is None:
-            if compound:
+            if a is left_a[0] and compound:
                 return {**out, "shape": ONE_PLACE, "kind": "a compound statement of another kind"}
-            return {**out, "shape": STATEMENT, "kind": "another kind of statement"}
+            return {**out, "shape": STATEMENT, "kind": "another kind of statement" if a is left_a[0] else "the head of a compound statement" if compound else None}
         if any(_holds_blocks(getattr(node, field, None)) for node in (a, b) for field in found["fields"]):
             if found["places"] > 1:
                 return {**out, "shape": SEVERAL_PLACES, "kind": "more than one part of a compound statement"}
@@ -332,6 +351,8 @@ def _shape(before: ast.Module, after: ast.Module, buggy: str, fixed: str) -> dic
         return {**out, "shape": ONE_PLACE, "kind": "statements taken out", "needs": NOTHING, "nodes": _nodes(left_a)}
     if not left_a:
         return {**out, "shape": ONE_PLACE, "kind": "definitions put in" if all(isinstance(item, _DEFINITIONS) for item in left_b) else "statements put in"}
+    if _changed_inside(left_a, left_b):
+        return {**out, "shape": SEVERAL_PLACES, "kind": "a compound statement changed inside, and more"}
     return {**out, "shape": ONE_PLACE, "kind": "statements rewritten"}
 
 
