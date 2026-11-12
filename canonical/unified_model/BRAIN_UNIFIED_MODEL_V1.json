@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 396,
+  "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6791,
+  "research_index_records": 6792,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "14c3a5eaf2b3ca815c6cae23fc5e7548fd50acf02b05bf8eef71efcf3ad9e7d6"
+  "value": "c89f3235daa879e44a0bf48a1606b09062e926e29b4b553942281d3670594658"
  },
  "engines": [
   {
@@ -46105,6 +46105,90 @@
     "settled",
     "showed",
     "use"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 14435,
+   "headings": [
+    "One demonstration does not generalise by being repeated. It generalises by being *widened by evidence* — and the leftover is not an algebra gap",
+    "1. The claim under test, said exactly",
+    "2. What is real (re-measured this round, not quoted)",
+    "2.1 The number's denominator is honest",
+    "2.2 A change that looks free is not free",
+    "3. Where the missing 76.5% actually is",
+    "4. Why \"give it the smartest actions once and it learns permanently\" cannot close the gap",
+    "5. What to do next, in order, and what not to do",
+    "6. The scorecard, unchanged where it must be"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_20261112_V1.md",
+   "sha256": "38fa2c2d02090275a851cbcd7e4810214fddafe9fc7dd02bb72e36702722690d",
+   "summary": "**Problem 2, measured.** Branch base `642bcd6661`. Verification record: `canonical/verification/A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_20261112_V1.json`.",
+   "terms": {
+    "0.0": 5,
+    "10": 6,
+    "about": 5,
+    "algebra": 8,
+    "already": 8,
+    "answer": 7,
+    "arguments": 6,
+    "because": 6,
+    "better": 6,
+    "change": 15,
+    "changed": 7,
+    "code": 6,
+    "corpus": 7,
+    "coverage": 6,
+    "demonstration": 28,
+    "denominator": 6,
+    "each": 8,
+    "every": 9,
+    "evidence": 7,
+    "exposure": 5,
+    "file": 19,
+    "files": 7,
+    "four": 5,
+    "identifies": 6,
+    "measured": 5,
+    "name": 7,
+    "never": 5,
+    "no": 11,
+    "not": 50,
+    "nothing": 15,
+    "number": 7,
+    "one": 21,
+    "only": 6,
+    "organ": 11,
+    "over": 6,
+    "own": 6,
+    "precision": 6,
+    "problem": 9,
+    "pull": 7,
+    "questions": 7,
+    "same": 12,
+    "so": 11,
+    "than": 6,
+    "three": 7,
+    "two": 7,
+    "use": 7,
+    "whole": 6,
+    "yes": 6
+   },
+   "title": "One demonstration does not generalise by being repeated. It generalises by being *widened by evidence* — and the leftover is not an algebra gap",
+   "title_terms": [
+    "algebra",
+    "being",
+    "demonstration",
+    "evidence",
+    "gap",
+    "generalise",
+    "generalises",
+    "leftover",
+    "not",
+    "one",
+    "repeated",
+    "widened"
    ]
   },
   {
@@ -75560,10 +75644,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1198,
+  "included_source_count": 1199,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9f3e0e9ae0df86adcdfc9da74bfb86762d4f64a3fa7aed487646ee8c0977927b"
+  "source_tree_digest": "e5e4a77118ef8e4d26c5753b446b3073bafe3fa7ecff9b56303df039acaf23e0"
  },
  "research_index": [
   {
@@ -145793,6 +145877,28 @@
     "preflight": 1,
     "public": 1,
     "route": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_20261112_V1.json",
+   "schema": "A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_V1",
+   "sha256": "177a9fe38604ed869c7fec7e2fd6a2ef9963eb2e3528c5103cf7de1057fb1723",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "did": 1,
+    "examples": 1,
+    "file": 1,
+    "not": 1,
+    "show": 1,
+    "shown": 1,
+    "use": 1,
     "v1": 1
    }
   },
