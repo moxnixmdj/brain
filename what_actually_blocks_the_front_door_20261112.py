@@ -51,7 +51,18 @@ import os
 from pathlib import Path
 
 SCHEMA = "WHAT_ACTUALLY_BLOCKS_THE_FRONT_DOOR_V1"
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parent
+# The census splits unknown from false by re-probing each blocked premise ALONE. A premise
+# about the goal's own file is legitimately false with no goal and legitimately true with
+# one, so the re-probe must carry the same goal paths the front door used -- otherwise the
+# two buckets trade rows (measured: 9 unknown / 2 false became 2 unknown / 6 false).
+def _goal_paths(goal):
+    """The same paths the front door derives from the sentence -- no more, no fewer."""
+    from canonical.runtime import goal_compiler as _gc
+    try:
+        return [str(p[0]) for p in _gc._repo_paths(goal, ROOT)]
+    except Exception:
+        return []
 
 
 def registry():
@@ -65,7 +76,7 @@ def sentence_for(cid, entry, words=5):
     return " ".join(kw) if kw else str(cid).replace(".", " ").replace("_", " ")
 
 
-def classify(cid, receipt, registry_doc):
+def classify(cid, receipt, registry_doc, goal=""):
     """Which bucket this capability fell into, from the front door's own receipt."""
     from canonical.runtime import world_probe_v1 as WP
 
@@ -80,7 +91,9 @@ def classify(cid, receipt, registry_doc):
     if why == "PRECONDITION_NOT_TRUE_OF_WORLD":
         blocked = row.get("blocked") or []
         undecidable = [b for b in blocked
-                       if WP.probe_effect(b, root=ROOT)["how"] == "UNDECIDABLE__NOT_ESTABLISHED"]
+                       if WP.probe_effect(b, root=ROOT, goal=goal,
+                                          goal_paths=_goal_paths(goal))["how"]
+                       == "UNDECIDABLE__NOT_ESTABLISHED"]
         return "4_BLOCKED_BY_UNKNOWN" if undecidable else "5_BLOCKED_BY_FALSE"
     if why == "NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES":
         return "3_NOT_BINDABLE"
@@ -118,7 +131,7 @@ def census(registry_doc=None):
                 counts["9_ACT_RAISED"] += 1
                 buckets["9_ACT_RAISED"].append(cid)
                 continue
-            bucket = classify(cid, receipt, doc)
+            bucket = classify(cid, receipt, doc, goal=sentence_for(cid, entry))
             counts[bucket] += 1
             buckets[bucket].append(cid)
             rows.append({"capability_id": cid, "bucket": bucket,
@@ -145,9 +158,10 @@ def unwedge_unknown_premises(registry_doc=None):
     out = []
     for cid in sorted(census(doc)["buckets"].get("4_BLOCKED_BY_UNKNOWN") or []):
         need = list(orphans.get(cid) or [])
-        receipt = GA.act(sentence_for(cid, doc.get(cid)), memory=False,
-                         bridge=False, computer_use=False,
-                         established_effects=need)
+        sentence = sentence_for(cid, doc.get(cid))
+        receipt = GA.act(sentence, memory=False,
+                      bridge=False, computer_use=False,
+                      established_effects=need)
         if str(receipt.get("capability_id")) == str(cid):
             out.append({"capability_id": cid, "assumed": need,
                         "then": "SELECTED", "status": receipt.get("status"),
