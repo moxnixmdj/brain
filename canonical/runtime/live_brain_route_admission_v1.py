@@ -5401,6 +5401,52 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
     return True
 
 
+#: Statuses that say nothing about WHY a request was refused.  `FAIL_CLOSED` alone is the
+#: request-validation path; an empty status means no decision was reached at all.
+_UNINFORMATIVE_STATUSES = frozenset({"", "FAIL_CLOSED"})
+
+
+def _decided_before_the_carrier_gate(attempted: Mapping[str, Any]) -> bool:
+    """Did the door already decide WHY this request cannot be served?
+
+    THE DEFECT THIS EXISTS TO STOP, MEASURED 2026-11-12.
+
+    `_serve_by_acting` below is a CARRIER rule disguised as a fallback.  It fires whenever a
+    sentence names an output suffix the program synthesizer can verify -- `.json` mostly -- and
+    when it fires it returned a brand-new result whose status was always
+    `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`, keeping the door's own
+    already-computed reason only in `served_after`.
+
+    Measured on the 39 realistic advanced-coding sentences of
+    `canonical/tools/realistic_goal_reach_probe_v1.py`, in a disposable clone:
+
+        before   21 of 39 carried the carrier status, and 18 of those 21 had ALREADY been
+                 refused for a different, specific reason -- a stated path outside the
+                 workspace, an unbound declared input, a request most of which no capability
+                 explains, a chain that was not verified ...
+        after     9 of the 21 report the reason that was actually computed.  The other 12 stay
+                 exactly as they were, for a reason that is itself a safety property: their
+                 earlier attempt reports `executed: True` or `side_effects_may_exist: True`, so
+                 the fact that work may already have happened outranks any tidier label.  Three
+                 more never reached the door's own decision and keep the carrier status.
+
+    WHY THIS MATTERS BEYOND THE COUNT.  Two documents merged the same day reached opposite
+    diagnoses of this same wall -- one counted "binding, 54 capabilities" at the step executor,
+    the other counted "no binding-shaped status exists at the door".  Both were reading the
+    LABEL.  A carrier status standing in front of a binding refusal makes the binding work look
+    like a carrier problem, which is how a round of engineering gets aimed at the wrong seam.
+
+    WHAT IS NOT WEAKENED.  The refusal still refuses: `pass` stays False, nothing executes, and
+    the carrier status is not removed from the record -- it moves to `carrier_gate` beside
+    `served_after`, so a reader who wants it still has it.  No route is opened and no authority
+    is granted; the door merely stops discarding the reason it had.
+    """
+    if str(attempted.get("status") or "") in _UNINFORMATIVE_STATUSES:
+        return False
+    return not (attempted.get("executed") is True
+                or attempted.get("side_effects_may_exist") is True)
+
+
 def _serve_by_acting(request: Mapping[str, Any]) -> dict[str, Any] | None:
     """Refuse the unconfined discovery fallback until an admitted boundary exists.
 
@@ -5519,6 +5565,25 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                         acted["executed"] = result.get("executed")
                         if "side_effects_may_exist" in result:
                             acted["side_effects_may_exist"] = result["side_effects_may_exist"]
+                        # THE CARRIER GATE MUST NOT SPEAK OVER A REASON ALREADY FOUND.
+                        # `_serve_by_acting` answers about the execution boundary; this branch
+                        # is a carrier rule that fires on the output suffix a sentence names.
+                        # When the door has already decided why the request cannot be served --
+                        # and nothing has executed -- that decision is the honest answer and is
+                        # kept.  The carrier status is not deleted: it is recorded under
+                        # `carrier_gate`, beside the `served_after` this branch always wrote, so
+                        # no reader loses the fact that the boundary was consulted and refused.
+                        acted["carrier_gate"] = {k: acted.get(k)
+                                                 for k in ("status", "failure_class", "detail")}
+                        if _decided_before_the_carrier_gate(result):
+                            kept = dict(acted)
+                            kept.update(dict(result))
+                            kept["elapsed_ns"] = acted["elapsed_ns"]
+                            kept["served_after"] = acted["served_after"]
+                            kept["fallback_executed"] = False
+                            kept["carrier_gate"] = acted["carrier_gate"]
+                            kept["refusal_precedes_the_carrier_gate"] = True
+                            return kept
                         return acted
             except Exception:
                 # An unavailable safety check cannot authorize an alternate execution.
