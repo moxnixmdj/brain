@@ -7,7 +7,7 @@
   "route_id": "FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1",
   "date": "2026-11-11",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "5c1580565579b0aff833986e1ea1494fe27f24ea",
+  "canonical_base_commit": "aec51eb214426215ea24b846ec25c569636825c7",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -164,7 +164,7 @@
     "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "5c1580565579b0aff833986e1ea1494fe27f24ea",
+    "canonical_base_commit": "aec51eb214426215ea24b846ec25c569636825c7",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "real_outcome": "THE_TREE_KNOWS_WHAT_ITS_FIRST_CONTACT_LEARNERS_DO_IN_ENVIRONMENTS_IT_DID_NOT_WRITE_AND_STOPS_PAYING_TWICE_FOR_THE_SAME_EXPERIMENT",

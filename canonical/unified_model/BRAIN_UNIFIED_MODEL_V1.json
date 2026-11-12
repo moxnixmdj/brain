@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 379,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6775,
+  "research_index_records": 6776,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "badb3f351a500562689a79c1d7a0db04c92b242d0f8753ed11f7879132776285"
+  "value": "f373950451c93d61930aa3cba398d82ee51dc184cb15f0289d4b2403a1996799"
  },
  "engines": [
   {
@@ -190840,6 +190840,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_SMALL_PASSING_PATCH_PLACE_RECORD_V1",
+   "sha256": "261fd0c1ce585788c410f5e70f5094603c50a25c342b07a89c2c866cd3d5083c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "place": 1,
+    "small": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/SOFTWARE_SEMANTIC_ACCEPTANCE_SHARED_MINIMUM_COVER_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -225984,7 +226005,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "dd287cbe95599fe408d979a6fbd3af89759e88aa591aa9345d1aa5019f8a2985",
+   "sha256": "7215555733ea44ceb0abf04f48fe6bc383883b3eb99e6c0629c4aeb0ed14bd56",
    "status": "",
    "terms": {
     "20261111": 1,
