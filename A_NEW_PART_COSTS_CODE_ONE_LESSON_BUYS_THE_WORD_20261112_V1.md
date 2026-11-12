@@ -95,7 +95,7 @@ bound capabilities). Nothing here contradicts any of those; the algebra grew by 
 | A success teaches when the action applies | **FALSE** | 0/200 identified; the general survivor says "always" in 68% of failing states |
 | More environments make the next kind cheaper | **FALSE, twice** | 1525 = 1525 byte-identical; learning-to-learn 3/10 vs a coin flip |
 | Experience can add an operator | **FALSE, now by construction** | prediction 1 this round: the lesson was refused until code added the part |
-| The gate would keep what is learned | **TRUE for 8 repair caps, FALSE was the defect** | 8/8 failures now rejected after #6678/#6680; 1 debt entry left deliberately |
+| The gate would keep what is learned | **TRUE for 9 repair caps, FALSE was the defect** | 8/8 failures rejected after #6678/#6680; the ninth was repointed on main while this round was in flight -- re-measured here: DEFINITE = 0 |
 | "Everything on a computer, perfectly, permanently" | **CATEGORY ERROR** | 8/149 reachable; RLI failures 45.6% *quality*; OSWorld failures *verification* |
 | It is becoming a sentient creature | **NOT MEASURED, NOT THE OBJECTIVE** | the only measurable half — experience changes competence on new problems — is negative across kinds |
 
