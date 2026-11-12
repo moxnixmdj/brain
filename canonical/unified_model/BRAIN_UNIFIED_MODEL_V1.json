@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 327,
+  "knowledge_documents": 328,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6737,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b39cefe1d45d57308d495244b7168f17901452627cf2edee95442d03af053c42"
+  "value": "2627c43a2a18c8159912e292f9fe9c52bd2fe8a5bb5d3ff28e42546f0a3e1ff8"
  },
  "engines": [
   {
@@ -51286,6 +51286,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5460,
+   "headings": [
+    "One showing is literal; two showings are general",
+    "1. Why the second showing is not just \"more of the same\"",
+    "2. The ceiling, again, in the same shape as round 9",
+    "3. What to do with this",
+    "4. Receipts",
+    "5. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_SHOWING_IS_LITERAL_TWO_SHOWINGS_ARE_GENERAL_20261112_V1.md",
+   "sha256": "db837f27c690ceed3e8779491198ec30463e8bae3eda5bf4d4fa3d4cec5cf012",
+   "summary": "**2026-11-12.** Base `2540a6ed`. Branch `arena/6f3845ae-brain`. Round 13.",
+   "terms": {
+    "about": 4,
+    "actually": 2,
+    "add": 2,
+    "adds": 2,
+    "after": 4,
+    "algebra": 2,
+    "all": 2,
+    "alone": 3,
+    "already": 2,
+    "because": 2,
+    "both": 3,
+    "bought": 2,
+    "branch": 2,
+    "call": 4,
+    "canonical": 2,
+    "capability": 2,
+    "code": 6,
+    "defect": 3,
+    "demonstration": 3,
+    "different": 5,
+    "edited": 3,
+    "example": 7,
+    "examples": 6,
+    "file": 8,
+    "four": 4,
+    "here": 3,
+    "learner": 7,
+    "leaves": 3,
+    "loader": 5,
+    "no": 6,
+    "none": 9,
+    "not": 11,
+    "nothing": 4,
+    "one": 18,
+    "refused": 4,
+    "round": 4,
+    "rule": 6,
+    "same": 5,
+    "second": 10,
+    "showing": 9,
+    "showings": 3,
+    "shown": 3,
+    "space": 3,
+    "three": 3,
+    "two": 5,
+    "whole": 3,
+    "yaml.load": 5,
+    "yaml.safe_load": 3
+   },
+   "title": "One showing is literal; two showings are general",
+   "title_terms": [
+    "general",
+    "literal",
+    "one",
+    "showing",
+    "showings",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7956,
    "headings": [
     "One try buys a rule that is wrong",
@@ -70200,10 +70275,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1129,
+  "included_source_count": 1130,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "12838d9de7c6cbe2164c4ef1fa1f4146d9194e3c1bbf1aecf4f458aa8d1e49e9"
+  "source_tree_digest": "54a553dae19174a8c600af64822a39c8ef9527e87cb7c42a05a8c3d2943e8fb8"
  },
  "research_index": [
   {
