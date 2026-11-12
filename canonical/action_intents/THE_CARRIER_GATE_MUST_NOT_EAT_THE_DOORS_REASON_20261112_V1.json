@@ -7,7 +7,7 @@
   "route_id": "THE_CARRIER_GATE_MUST_NOT_EAT_THE_DOORS_REASON_20261112_V1",
   "date": "2026-11-12",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "54cf56de70ea6e159119c932a8427a4cbef43b27",
+  "canonical_base_commit": "8238d6375fb2c6afbf824a757d47983f28167f55",
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -94,7 +94,7 @@
     "execution_guard/goal_target_binding_v1.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "54cf56de70ea6e159119c932a8427a4cbef43b27",
+    "canonical_base_commit": "8238d6375fb2c6afbf824a757d47983f28167f55",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
     "real_outcome": "A refused request reports the reason the door actually found whenever that reason is informative and no work may have happened; the carrier status is recorded under carrier_gate rather than deleted. No refusal is lifted: pass is unchanged at 3/39 and the pass set is identical.",
