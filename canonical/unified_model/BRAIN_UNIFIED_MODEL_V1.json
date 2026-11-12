@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 378,
+  "knowledge_documents": 379,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6775,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9e9d22385d487106dcc8788cd3712ec6b1ee6faebffb0c194ed763d5fd8b4c7a"
+  "value": "badb3f351a500562689a79c1d7a0db04c92b242d0f8753ed11f7879132776285"
  },
  "engines": [
   {
@@ -58889,6 +58889,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 18207,
+   "headings": [
+    "The multiplier is not the multiplicand",
+    "1. The sentence, already run as an experiment",
+    "2. First principles: why \"once\" cannot be the mechanism",
+    "3. What 2026 actually measured about this exact idea",
+    "4. Real vs not — the scorecard",
+    "5. The mechanisms, under their non-obvious names, with their actual state",
+    "6. The smartest things to do, in order",
+    "7. Kill these, now",
+    "8. On the sentient creature",
+    "9. Receipts and non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_MULTIPLIER_IS_NOT_THE_MULTIPLICAND_20261112_V1.md",
+   "sha256": "ed55125d246609de24891f33632a5e4938ef5ba1a634c2ef97e5e70e0de0097b",
+   "summary": "**2026-11-12.** Branch `arena/0e568329-brain`. Authority **NONE**. `truth.achieved` stays `false`. $0, zero model calls in every result-bearing path. This answers the owner's question directly and prices it with the tree's own landed records; it does not claim a capability, register one, or widen a gate.",
+   "terms": {
+    "10": 5,
+    "100": 6,
+    "2026": 5,
+    "39": 8,
+    "40": 18,
+    "49": 6,
+    "advanced": 7,
+    "agent": 7,
+    "arxiv": 13,
+    "bug": 8,
+    "bugs": 8,
+    "capability": 7,
+    "control": 6,
+    "every": 6,
+    "exact": 7,
+    "experience": 11,
+    "external": 7,
+    "fix": 6,
+    "fixed": 6,
+    "harness": 7,
+    "learning": 6,
+    "lessons": 10,
+    "measured": 16,
+    "memory": 8,
+    "no": 20,
+    "not": 53,
+    "once": 6,
+    "one": 23,
+    "operator": 6,
+    "other": 7,
+    "over": 6,
+    "own": 11,
+    "permanent": 6,
+    "published": 6,
+    "quixbugs": 9,
+    "real": 16,
+    "repaired": 6,
+    "right": 8,
+    "run": 8,
+    "same": 10,
+    "skill": 6,
+    "skills": 7,
+    "target": 7,
+    "tasks": 10,
+    "transfer": 7,
+    "tree": 12,
+    "under": 7,
+    "wrong": 7
+   },
+   "title": "The multiplier is not the multiplicand",
+   "title_terms": [
+    "multiplicand",
+    "multiplier",
+    "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6679,
    "headings": [
     "The one-shot regime is 41% of the bound surface",
@@ -74138,10 +74214,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1180,
+  "included_source_count": 1181,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d616819f32c7f1f007f5f7d49f7423e9eef6c199283221cdef19f27511dc63d1"
+  "source_tree_digest": "eabdb7924efa2ea16aa3142613aa6114210bbe45188e37edd3e9fae0470b2b6b"
  },
  "research_index": [
   {
