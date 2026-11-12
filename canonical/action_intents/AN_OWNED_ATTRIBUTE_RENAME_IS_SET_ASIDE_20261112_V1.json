@@ -7,7 +7,7 @@
  "route_id": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
+ "canonical_base_commit": "92cf96e8d7425b800f2e8d7e4f4c390281ceafbf",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -107,7 +107,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
+  "canonical_base_commit": "92cf96e8d7425b800f2e8d7e4f4c390281ceafbf",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_TWO_SHOWING_PROTOCOL_HAS_ZERO_WRONG_WRITES_ON_ALL_TRACKED_SETS__THE_INJECTION_SIDE_OF_THE_SECOND_SHOWING_LAW_IS_CLOSED_FOR_OWNED_ATTRIBUTE_RENAMES_BY_THE_OWNERSHIP_PRINCIPLE",
