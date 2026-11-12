@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d8c532b225835b8c879a890d14df5ad90851800d87417ba9f5f0e8c75acdf509"
+  "value": "fc302b489fb5b9872ef6c0c7a42cc544f90b778ad2948795d1e132ac3470e1df"
  },
  "engines": [
   {
@@ -230915,7 +230915,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "6d83fe20ded3a941621997c9ab1ceaf9f26bcaec82f3186aa0fe8a8bb33cd6a8",
+   "sha256": "a143a51505c26328a2a39ba18feb2e49ea9e85512de7dd4475f39213c14329f2",
    "status": "",
    "terms": {
     "20261112": 1,
