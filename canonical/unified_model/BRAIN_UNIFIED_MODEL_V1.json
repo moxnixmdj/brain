@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 347,
+  "knowledge_documents": 348,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6751,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "55a29b0a97b7c557c49579b3df1a8ea8f4ad734056b9eac2b3b5dfccd4f4e31b"
+  "value": "0150dc6b05e2db01114d18b4f4cb52c47170d8774d0c00b80d7ce3a7043edae8"
  },
  "engines": [
   {
@@ -56378,6 +56378,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5852,
+   "headings": [
+    "The capability was there. The substrate wasn't.",
+    "1. The claim under test",
+    "2. The reason, found by following it down",
+    "3. Same lesson, substrate restored",
+    "4. The second defect this exposed: silence",
+    "5. The tests are honest in both worlds",
+    "What this changes about the answer",
+    "What is genuinely load-bearing from here"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_CAPABILITY_WAS_INSTALLED_NOT_BROKEN_20261112_V1.md",
+   "sha256": "c58c4c7645a9157000b1cecd313129bc9db786da32b6ce1c1305fe7694904053",
+   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "about": 5,
+    "absent": 4,
+    "answer": 3,
+    "before": 4,
+    "candidates": 4,
+    "cannot": 3,
+    "cap": 4,
+    "capability": 7,
+    "claim": 3,
+    "cross_language_cst_skeleton": 6,
+    "exists": 3,
+    "failing": 3,
+    "false": 4,
+    "file": 3,
+    "here": 4,
+    "hit": 8,
+    "image": 3,
+    "languages": 3,
+    "last": 4,
+    "len": 3,
+    "lesson": 3,
+    "link": 3,
+    "measured": 4,
+    "mechanism": 4,
+    "never": 5,
+    "no": 10,
+    "none": 3,
+    "not": 7,
+    "now": 3,
+    "one": 10,
+    "other": 3,
+    "pass": 4,
+    "passes": 4,
+    "present": 3,
+    "python": 5,
+    "restore_substrate_v1.py": 3,
+    "return": 3,
+    "rule": 4,
+    "run": 3,
+    "rust": 3,
+    "six": 3,
+    "so": 3,
+    "substrate": 10,
+    "test": 4,
+    "transfer": 6,
+    "tree_sitter": 4,
+    "true": 5,
+    "xs": 4
+   },
+   "title": "The capability was there. The substrate wasn't.",
+   "title_terms": [
+    "capability",
+    "substrate",
+    "wasn"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10460,
    "headings": [
     "THE CREATURE CAN REACH ITS OWN SYNTHESIZER",
@@ -71734,10 +71808,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1149,
+  "included_source_count": 1150,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9ed21d9b69c564813b784f82591c929a9291a97539ceccf57f89ae63790d0798"
+  "source_tree_digest": "3c04b47907c17cb687fe2932cf93cf77bc1c1c912be6ea26232b09ee86802b68"
  },
  "research_index": [
   {
