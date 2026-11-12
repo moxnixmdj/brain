@@ -67,11 +67,12 @@ def test_an_import_of_something_that_cannot_be_found_is_refused_by_name():
     # and the file is left exactly as it was: repeated() raises before anything is written
 
 
-def test_an_import_the_example_did_not_add_is_still_only_a_demand():
-    # Both example files import html; nothing was added, so a file without it is refused as before.
+def test_an_import_the_example_did_not_add_is_brought_from_where_the_examples_had_it():
+    # Both example files import html, so nothing was added -- but the lesson knows the one absolute
+    # place the name comes from, and brings the same import instead of refusing a plain demand.
     example = (ESCAPE[0].replace("import cgi\n", "import cgi\nimport html\n"), ESCAPE[1])
-    with pytest.raises(by_example.Refused, match="the change uses 'html', which the file does not define"):
-        _repeat(TARGET, example)
+    edited = _repeat(TARGET, example)
+    assert "import html\n" in edited and "html.escape(name)" in edited
 
 
 def test_a_relative_import_the_example_added_is_not_carried_to_another_project():
