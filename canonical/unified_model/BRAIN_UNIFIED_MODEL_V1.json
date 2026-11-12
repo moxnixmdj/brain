@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 333,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6740,
+  "research_index_records": 6741,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6bac3ff2a367f3b268d58372b71e038edd0c694e275fc826552dd6607ad3106f"
+  "value": "3b287109ce0cd0947bc5d44ef258771fc885cfbc9820fcb6d8d251722e580f25"
  },
  "engines": [
   {
@@ -228120,6 +228120,31 @@
    }
   },
   {
+   "action_id": "THE_STATE_A_PLAN_IS_JUDGED_IN_MUST_PRECEDE_IT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_STATE_A_PLAN_IS_JUDGED_IN_MUST_PRECEDE_IT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_STATE_A_PLAN_IS_JUDGED_IN_MUST_PRECEDE_IT_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3c6d40dc2a3b47efae0332a39b4e58847c1069082a0065f9cc10d35b2e4a4ed1",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "feed_the_live_executor_a_pre_state_snapshot_and_gate_the_offer_on_it": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "judged": 1,
+    "must": 1,
+    "no_new_capability_registered__no_family_flipped__no_terminal_credit__an_owned_learner_becomes_reachable_on_the_primary_executor_and_a_circular_learning_rule_is_refuted_by_execution_before_it_can_ship": 1,
+    "plan": 1,
+    "precede": 1,
+    "state": 1,
+    "the_applicability_learner_had_no_live_caller_passing_a_state_so_it_accumulated_zero_evidence_in_production_and_the_obvious_state_to_pass_is_the_set_of_effects_the_plan_itself_produced_which_fabricates_a_circular_requirement_that_refuses_every_cold_start": 1,
+    "the_state_a_plan_is_judged_in_must_precede_it_20261112_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_SURFACE_THAT_WORKS_KEEPS_WORKING_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -245105,14 +245130,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/chain_v1.py",
-   "sha256": "98720828e28c575d33d399ffa1d8fb83500e359e020a127304c5bd77243d517b",
+   "sha256": "f4e7acc3f2c44df52ffb6a6bd2234fb1428e2b4adb41401d77719530900507c4",
    "summary": "One sentence, many steps: the machine plans a chain and then runs it.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "_load",
     "_outputs_of",
     "_provides_of",
     "decompose",
+    "precondition_context",
     "run"
    ],
    "terms": {
@@ -245124,6 +245150,7 @@
     "one": 1,
     "outputs_of": 1,
     "plans": 1,
+    "precondition_context": 1,
     "provides_of": 1,
     "run": 1,
     "runs": 1,
