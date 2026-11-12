@@ -170,9 +170,9 @@ def test_asked_to_leave_the_rest_alone_the_uses_that_were_shown_are_changed_and_
         by_example.rewrite(found, target)
     assert by_example.rewrite(found, target, leave_unshown=True) == (
         "import yaml\na = yaml.safe_load(one)\nb = yaml.load(two, Loader=yaml.Loader)\nc = yaml.load\nd = yaml.safe_load(three)\n", 2)
-    # Every other refusal still stands: the name the new code needs is still asked for.
-    with pytest.raises(by_example.Refused, match="the change uses 'Path'"):
-        by_example.rewrite(by_example.learn_all([JOIN]), "import os\nx = os.path.join(a, b)\n", leave_unshown=True)
+    # A name the new code needs is no longer refused when the examples added its import: it is brought.
+    assert by_example.rewrite(by_example.learn_all([JOIN]), "import os\nx = os.path.join(a, b)\n",
+                              leave_unshown=True) == ("import os\nfrom pathlib import Path\nx = Path(a) / b\n", 1)
     only_unshown = "import yaml\nb = yaml.load(two, Loader=yaml.Loader)\n"
     assert by_example.rewrite(found, only_unshown, leave_unshown=True) == (only_unshown, 0)
     with pytest.raises(by_example.Refused, match="nothing in the file has the form"):
@@ -253,12 +253,14 @@ def test_a_blank_that_stood_for_variables_does_not_stand_for_an_imported_module(
 @pytest.mark.parametrize("head,reason", [
     ("import os\nclass Path:\n    pass\n", "the change uses 'Path', which the examples get by `from pathlib import Path`"),
     ("import os\nfrom shapes import Path\n", "the change uses 'Path', which the examples get by `from pathlib import Path`"),
-    ("import os\n", "the change uses 'Path', which the file does not define"),
 ])
 def test_a_name_the_new_code_brings_must_be_the_import_the_examples_used(head, reason) -> None:
     body = "\n\ndef report(out, day):\n    return os.path.join(out, day)\n"
     with pytest.raises(by_example.Refused, match=reason):
         repeated(head + body, JOIN)
+    # A file that does not bind 'Path' at all gets the import the examples added, where it can be found.
+    assert repeated("import os\n" + body, JOIN) == (
+        "import os\nfrom pathlib import Path\n" + body.replace("os.path.join(out, day)", "Path(out) / day"))
     with pytest.raises(by_example.Refused, match="at line 5 of the file that name is something else"):
         repeated("import os\nfrom pathlib import Path\n\ndef report(out, day, Path):\n    return os.path.join(out, day)\n", JOIN)
     good = "import os\nfrom pathlib import Path\n" + body

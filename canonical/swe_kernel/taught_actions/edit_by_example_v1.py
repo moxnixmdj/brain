@@ -68,8 +68,11 @@ A change of a bare name or a bare number is never a rule by itself; it is kept t
 expression or statement around it.  Renaming is a different action, which looks at scopes.
 
 An ``import`` line at the top of the file that an example changed in place (same module, other
-names) is repeated like any other one-line statement.  ``import`` lines an example added or removed
-are not repeated: they are read as what the new code needs, and the file to edit must provide it.
+names) is repeated like any other one-line statement.  An ``import`` line an example added is brought
+along with the change when the new code needs its name, the file to edit does not provide that name
+anywhere, and the import can be found where the edit is made -- the standard library or the project
+itself; nothing is imported or run to decide that.  Where it cannot be found, the refusal names the
+import.  ``import`` lines an example removed are not repeated.
 
 A lesson file is JSON.  It holds the examples whole, line by line, and under ``teaches`` what they give:
 each change, the ways the changed code was used, the imports it leans on.  ``teaches`` is for the reader;
@@ -88,6 +91,7 @@ REQUEST = ("edit", ("lessons_q7/suite_q7.py", "lessons_q7/shown_q7/earlier.py", 
 
 import ast
 import builtins
+import importlib.machinery
 import io
 import json
 import pathlib
@@ -633,6 +637,7 @@ class Rule:
         self.brought = {}                # imported names only the new code reads, and where each was imported from
         self.objects = objects_in(pattern)   # blanks that stand for the object an attribute is read from
         self.imported_objects = set()    # those of them that stood for something imported in an example
+        self.bring = {}                  # names the new code needs, and the import line an example added for each
 
     def __str__(self):
         number = {}
@@ -693,6 +698,14 @@ class Shown:
                 ", apart from import lines that were added or removed" if self.only_old or self.only_new else ""))
         self.places = places_of(self.old.tree, self.new.tree, label) + [[pair] for pair in imports]
         self.old.tree.body, self.new.tree.body = whole_old, whole_new
+        self.added_lines = {}            # names an added import line binds, and that line as the example wrote it
+        for statement in self.new.tree.body:
+            if (is_import(statement) and shape(statement) in self.only_new
+                    and not (isinstance(statement, ast.ImportFrom) and statement.level)):
+                for alias in statement.names:
+                    if alias.name != "*":
+                        name = alias.asname or (alias.name.split(".")[0] if isinstance(statement, ast.Import) else alias.name)
+                        self.added_lines.setdefault(name, set()).add(self.new.of(statement))
 
     def says_nothing_about(self, node):
         """Is this code at, in or around a place that a try left unsettled?  Then it is not evidence of anything."""
@@ -844,6 +857,7 @@ def wider(rule, changed):
         stands_alone(reading, changed)
     except Refused:
         return None
+    reading.bring = {name: line for name, line in rule.bring.items() if name in reading.needs}
     return reading
 
 
@@ -909,10 +923,18 @@ def learn_all(examples, wide=False):
                                                "the examples" if several else "the example"))
         stands_alone(rule, changed)
         rules.append(rule)
+    added = {}
+    for example in shown:
+        for name, lines in example.added_lines.items():
+            added.setdefault(name, set()).update(lines)
+    for rule in rules:
+        rule.bring = {name: sorted(added[name])[0] for name in rule.needs
+                      if name in added and len(added[name]) == 1}
     for example in shown:
         replayed, _ = rewrite(rules, example.before_text, example.label + "'s first file", check_names=False,
                               skip=example.says_nothing_about)
-        if without_imports(ast.parse(replayed), example.only_old) != without_imports(example.new.tree, example.only_new):
+        shapes = example.only_old | example.only_new
+        if without_imports(ast.parse(replayed), shapes) != without_imports(example.new.tree, shapes):
             raise Refused("the rules worked out from %s do not reproduce %s"
                           % ("the examples" if several else "the example", example.label))
     if wide:
@@ -1093,9 +1115,67 @@ def failing(node, kind):
     return FAILS if isinstance(getattr(node, "ctx", ast.Load()), ast.Load) else None
 
 
+def import_resolves(line):
+    """Can the import this line names be found where the edit is made?  Nothing is imported or run."""
+    statement = ast.parse(line).body[0]
+    tops = ({alias.name.split(".")[0] for alias in statement.names} if isinstance(statement, ast.Import)
+            else {(statement.module or "").split(".")[0]})
+    for top in tops:
+        if top not in sys.stdlib_module_names and importlib.machinery.PathFinder().find_spec(
+                top, [str(pathlib.Path.cwd())] + sys.path) is None:
+            return top
+    return None
+
+
+def imports_to_add(text, places, what, fail_at=None, must_resolve=True):
+    """The import lines the examples added that this edit needs: the file does not provide the name, the
+    examples added exactly one line for it, and that line's module can be found here.  Raises where it cannot.
+
+    `must_resolve` is off only when an example is replayed on its own first file, where the import plainly was.
+    """
+    needed = {}
+    for _, node, rule, _ in places:
+        if fail_at is not None and node is fail_at[1]:
+            continue
+        for name in sorted(rule.needs):
+            if name not in rule.bring or text.provides(name, node):
+                continue
+            if text.local_at(node, name):
+                raise Refused("the change at line %d of %s uses '%s', and a function around that code binds that "
+                              "name for itself; the import the examples added cannot reach it" % (node.lineno, what, name))
+            line = rule.bring[name]
+            top = import_resolves(line) if must_resolve else None
+            if top is not None:
+                raise Refused("the change needs `%s`, as the examples added, and nothing named '%s' can be found "
+                              "in this project; nothing was changed" % (line, top))
+            needed[name] = line
+    return needed
+
+
+def import_insert_at(text):
+    """The byte where added import lines go: after the last top-level import, else after the docstring, else 0."""
+    last = None
+    for statement in text.tree.body:
+        if is_import(statement):
+            last = statement
+    if last is None and text.tree.body and isinstance(text.tree.body[0], ast.Expr)             and isinstance(text.tree.body[0].value, ast.Constant) and isinstance(text.tree.body[0].value.value, str):
+        last = text.tree.body[0]
+    if last is None:
+        return 0
+    return text.starts[last.end_lineno] if last.end_lineno < len(text.starts) else len(text.raw)
+
+
 def written(text, places, what="the file", check_names=True, fail_at=None):
-    """The file's text with every place rewritten by its rule; the place `fail_at` is made to fail instead."""
+    """The file's text with every place rewritten by its rule; the place `fail_at` is made to fail instead.
+
+    An import line the examples added is inserted when the new code needs its name and the file does not
+    provide it -- only where that import can be found (`imports_to_add`)."""
     places = sorted(places, key=lambda place: place[0])
+    brought = imports_to_add(text, places, what, fail_at, must_resolve=check_names)
+    block = "".join(line + "\n" for line in sorted(set(brought.values()))).encode("utf-8")
+    where_block = import_insert_at(text)
+    if block and where_block == len(text.raw) and not text.raw.endswith((b"\n", b"\r")):
+        block = b"\n" + block
     for earlier, later in zip(places, places[1:]):
         if later[0][0] < earlier[0][1]:
             raise Refused("two places to change overlap at line %d of %s" % (later[1].lineno, what))
@@ -1112,7 +1192,7 @@ def written(text, places, what="the file", check_names=True, fail_at=None):
             if start <= position < end and not any(first <= position < last for first, last in kept):
                 raise Refused("a comment inside the code at line %d of %s would be lost" % (node.lineno, what))
     for attempt in (0, 1, 2):
-        out, at, swap = [], 0, {}
+        out, at, swap, shift = [], 0, {}, 0
         for (start, end), node, rule, bound in places:
             if fail_at is not None and node is fail_at[1]:
                 new_text = failing(node, rule.kind)
@@ -1125,15 +1205,31 @@ def written(text, places, what="the file", check_names=True, fail_at=None):
                 if ((rule.kind == "expression" and tightness(parsed) < text.room(node)) if attempt == 0
                         else looser if attempt == 1 else rule.kind == "expression" and not isinstance(parsed, ATOMS)):
                     new_text = "(%s)" % new_text
-            out += [text.raw[at:start], new_text.encode("utf-8")]
+            encoded = new_text.encode("utf-8")
+            if end <= where_block:
+                shift += len(encoded) - (end - start)
+            out += [text.raw[at:start], encoded]
             at = end
             swap[id(node)] = parsed
-        result = b"".join(out + [text.raw[at:]]).decode("utf-8")
+        joined = b"".join(out + [text.raw[at:]])
+        if block:
+            there = where_block + shift
+            joined = joined[:there] + block + joined[there:]
+        result = joined.decode("utf-8")
         try:
             again = ast.parse(result)
         except (SyntaxError, ValueError):
             continue
-        if shape(again) == shape(text.tree, swap):
+        whole = list(again.body)
+        for line in sorted(set(brought.values())):
+            wanted = shape(ast.parse(line).body[0])
+            for statement in again.body:
+                if shape(statement) == wanted:
+                    again.body = [other for other in again.body if other is not statement]
+                    break
+        same = shape(again) == shape(text.tree, swap)
+        again.body = whole
+        if same:
             if check_names:
                 names_still_hold(text, again, [place for place in places if fail_at is None or place[1] is not fail_at[1]],
                                  what)
