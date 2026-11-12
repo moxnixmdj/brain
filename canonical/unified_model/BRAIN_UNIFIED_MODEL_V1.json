@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 380,
+  "knowledge_documents": 381,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6777,
+  "research_index_records": 6779,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "23bdabb9d850858ac28b72c22b67945608146a90e537e9f2b0d5e7ccab691afb"
+  "value": "e48972a0b9ec8544cb6ae4b3d2fd400e30ce4f3081e9fd30320c369413bdfd7a"
  },
  "engines": [
   {
@@ -51146,6 +51146,82 @@
     "about",
     "itself",
     "not",
+    "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5927,
+   "headings": [
+    "I was wrong about the block. The lane was open, and the result replicates.",
+    "1. What I got wrong",
+    "2. The measurement, on instances that did not exist before",
+    "3. What this does and does not settle",
+    "4. Shipped",
+    "Answers"
+   ],
+   "kind": "DOCUMENT",
+   "path": "I_WAS_WRONG_ABOUT_THE_BLOCK_20261112_V1.md",
+   "sha256": "f82a3ee05cab00478195650b97a80861847b604151c6e6d3b4b99cb73c032bbe",
+   "summary": "**2026-11-12.** Authority **NONE** (producer-run measurement in this sandbox). `truth.achieved` = `false`.",
+   "terms": {
+    "17": 4,
+    "50": 6,
+    "all": 4,
+    "arm": 3,
+    "beats": 3,
+    "both": 5,
+    "bridge": 4,
+    "browser": 3,
+    "check": 3,
+    "did": 3,
+    "false": 4,
+    "feasibility": 4,
+    "first": 5,
+    "fresh": 3,
+    "full": 3,
+    "had": 4,
+    "instances": 6,
+    "lane": 3,
+    "learner": 3,
+    "measurement": 4,
+    "newest": 3,
+    "no": 6,
+    "nobody": 3,
+    "not": 13,
+    "now": 6,
+    "one": 6,
+    "only": 5,
+    "open": 3,
+    "ordering": 4,
+    "page": 3,
+    "pages": 9,
+    "pass": 4,
+    "produced": 4,
+    "random": 4,
+    "real": 3,
+    "recorded": 3,
+    "replication": 3,
+    "run": 8,
+    "runs": 8,
+    "same": 6,
+    "seeds": 4,
+    "so": 4,
+    "still": 3,
+    "success": 7,
+    "true": 4,
+    "used": 4,
+    "verbatim": 3,
+    "version_space": 4
+   },
+   "title": "I was wrong about the block. The lane was open, and the result replicates.",
+   "title_terms": [
+    "about",
+    "block",
+    "lane",
+    "open",
+    "replicates",
+    "result",
     "wrong"
    ]
   },
@@ -74291,10 +74367,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1182,
+  "included_source_count": 1183,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "53cc1eef0dd7aa8517dedc17d70ba1a6400c9c23fdaf7a4b1a39e2a524622486"
+  "source_tree_digest": "f4965bdbbc0cf4d31d951d22ceca344de36a1937a755c8b0061eb6a72784a44a"
  },
  "research_index": [
   {
@@ -166275,6 +166351,23 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
+   "schema": "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_MEASUREMENT_V1",
+   "sha256": "2f9e3888e4a8b375301f9b7e4aff74f5f36ca2c3ace49ded8d2562050d260751",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "miniwob": 1,
+    "replication": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/MINIWOB_WHOLE_HAND_PILOT_20261111_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/MINIWOB_WHOLE_HAND_PILOT_20261111_V1.json",
@@ -229810,6 +229903,31 @@
     "v1": 2,
     "values": 2,
     "verifier": 2
+   }
+  },
+  {
+   "action_id": "REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "dcf2a43354defa06f721e4943779a48e54b591ecabf6c8b7a77aef56e6503510",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_feasibility_check_that_inspects_the_environment_instead_of_exercising_the_tool_reports_false_negatives_and_had_already_misled_one_pass_into_declaring_the_lane_closed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "one": 1,
+    "replicate": 1,
+    "replicate_one_success_on_unseen_seeds_20261112_v1": 1,
+    "rerun_the_existing_learner_unchanged_on_fresh_seeds_and_compare_ordering_only": 1,
+    "seeds": 1,
+    "success": 1,
+    "the_one_demonstration_link_now_has_two_independent_measurements_on_disjoint_seeds_with_identical_ordering": 1,
+    "unseen": 1,
+    "v1": 1
    }
   },
   {
