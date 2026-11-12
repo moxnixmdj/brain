@@ -351,7 +351,7 @@
    "program_printed": "3"
   },
   {
-   "compared": 4480,
+   "compared": 5600,
    "disagreements": 0,
    "name": "the producer and the checker agree on every operation",
    "ok": true
@@ -387,8 +387,8 @@
   "canonical/runtime/TAUGHT_WORD_LESSONS_V1.json": "b1a98d78dc6110fe718457b2a01197adb09f4f128657c7feb49f43bec436bf08",
   "canonical/runtime/TAUGHT_WORD_LEXICON_V1.json": "95fa4fcb151953608e06aa91f758454c3a625f6148f8cfefa6ea4227dce27b01",
   "canonical/runtime/bound_capabilities/file_question_taught_words.py": "c11a5fb9443cbccbcbff33fffd9308bd978b1ef7650a4f319c2030ab6e81cffc",
-  "canonical/runtime/taught_words_check_v1.py": "1719bbbb378634000214e558a301d474d77c9164ed9e411c13fa2e3c63e91634",
-  "canonical/runtime/taught_words_v1.py": "620fa38346b0864ec1dafea451c76858348a80e39427438a81c70ee1639e91ed"
+  "canonical/runtime/taught_words_check_v1.py": "333288cf9869d8c20af10a11faf4c9292a36466ad9716d6702ed874530f9e7e1",
+  "canonical/runtime/taught_words_v1.py": "1977c4e951dd4cefe9cf7a1107b7e6befcf1d552dc80c3ba8259da08d3e8237a"
  },
  "producer": "arena agent session, 2026-11-11",
  "replay": "python3 canonical/runtime/verify_taught_words_provenance_v1.py --check",

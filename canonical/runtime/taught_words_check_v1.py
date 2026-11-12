@@ -14,7 +14,7 @@ import pathlib
 import re
 
 _UNITS = {"lines", "words", "characters", "bytes", "numbers"}
-_REDUCERS = {"count", "sum", "max", "min"}
+_REDUCERS = {"count", "sum", "max", "min", "median"}
 _KNOWN = _UNITS | _REDUCERS | {"rest", "containing", "blank", "unique", "lengths"}
 
 
@@ -81,6 +81,9 @@ def recompute(program, data, raw):
             total += t
         return total
     ordered = sorted(things)
+    if way == "median":
+        # Lower middle element, decided here without the producer's code.
+        return ordered[len(ordered) // 2]
     return ordered[-1] if way == "max" else ordered[0]
 
 
