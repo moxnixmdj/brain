@@ -1,0 +1,872 @@
+{
+ "schema": "BRAIN_EDIT_KIND_CHOICE_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T18:06:13Z",
+ "read_this_first": "The step named last time as the next gain without a model, a better choice among the learner's candidates, was built and did not gain. An order counted from further experience (on 64 bugs whose fixes are known: how often an operator of a given kind, with so many lessons behind it and so many candidates, holds the published fix) has the published fix among the first 200 candidates for 18 of those 64 bugs, each ordered with the counts of the other 63. The learner's own order by votes has it there for 20. The rule written down before the bugs were ordered said: if the counted order does not have it there for more bugs, the 100 scored bugs are not touched. They were not. No test was run for this record: it is about where the published fix stands, not about repairs. One run, one machine, by the producer; nobody else has re-run it.",
+ "what_was_asked": "With the same 2,864 lessons and the same 200 candidates a bug, does an order counted from experience of a second sort bring more published fixes to the front than the learner's votes?",
+ "what_was_done": [
+  "Step one: for each of the 64 development bugs of HumanEvalFix every operator of the lessons that makes candidates in the buggy program was tried, and it was counted whether the published fix is among its candidates, by kind of operator, lessons behind it and candidates made. Done for the lessons shown forwards and, for the control of a scored run that was then not made, backwards.",
+  "Step two: every development bug was ordered with the counts of the other 63, in two ways of putting an operator's chance together for a candidate (the lessons added up; the largest single share), and the place of its published fix written down beside its place in the learner's own order.",
+  "The rule, set before step two: if neither way has the published fix within the first 200 for more development bugs than the learner's order, no scored run.",
+  "After the rule had spoken, one more read-off on the same 64 bugs: the learner's order and the counted order taken in turns, and for each bug the better of its two places."
+ ],
+ "the_rule_and_what_became_of_it": {
+  "published_fix_within_the_first_200_of_64": {
+   "the_learners_order_by_votes": 20,
+   "counted_lessons_added_up": 18,
+   "counted_largest_share": 18
+  },
+  "verdict": "NO SCORED RUN",
+  "scored_bugs_touched": 0
+ },
+ "the_places": {
+  "bugs": 64,
+  "published_fix_among_the_candidates_at_all": 32,
+  "published_fix_within": {
+   "the_learners_order_by_votes": {
+    "1": 0,
+    "10": 6,
+    "50": 11,
+    "100": 17,
+    "200": 20,
+    "1000": 28
+   },
+   "counted_lessons_added_up": {
+    "1": 0,
+    "10": 4,
+    "50": 12,
+    "100": 16,
+    "200": 18,
+    "1000": 24
+   },
+   "counted_largest_share": {
+    "1": 0,
+    "10": 4,
+    "50": 13,
+    "100": 16,
+    "200": 18,
+    "1000": 23
+   }
+  },
+  "place_of_the_middle_bug_that_has_it": {
+   "the_learners_order_by_votes": 85.5,
+   "counted_lessons_added_up": 94.5,
+   "counted_largest_share": 114.0
+  },
+  "counted_lessons_added_up_against_the_votes": {
+   "nearer_the_front": 15,
+   "further_back": 17,
+   "the_same_place": 0,
+   "came_within_the_budget": 5,
+   "fell_out_of_the_budget": 7
+  },
+  "counted_largest_share_against_the_votes": {
+   "nearer_the_front": 13,
+   "further_back": 18,
+   "the_same_place": 1,
+   "came_within_the_budget": 5,
+   "fell_out_of_the_budget": 7
+  },
+  "moved_furthest_forward_by_the_counts": [
+   {
+    "bug": "Python/72",
+    "place_by_votes": 91,
+    "place_by_counts": 3
+   },
+   {
+    "bug": "Python/87",
+    "place_by_votes": 51,
+    "place_by_counts": 2
+   },
+   {
+    "bug": "Python/112",
+    "place_by_votes": 66,
+    "place_by_counts": 3
+   },
+   {
+    "bug": "Python/152",
+    "place_by_votes": 244,
+    "place_by_counts": 18
+   }
+  ],
+  "moved_furthest_back_by_the_counts": [
+   {
+    "bug": "Python/13",
+    "place_by_votes": 12,
+    "place_by_counts": 2918
+   },
+   {
+    "bug": "Python/111",
+    "place_by_votes": 2,
+    "place_by_counts": 143
+   },
+   {
+    "bug": "Python/76",
+    "place_by_votes": 44,
+    "place_by_counts": 1406
+   },
+   {
+    "bug": "Python/75",
+    "place_by_votes": 80,
+    "place_by_counts": 1765
+   }
+  ]
+ },
+ "seen_after_the_rule_had_spoken__a_lead_not_a_result": {
+  "the_two_orders_taken_in_turns__published_fix_within": {
+   "1": 0,
+   "10": 5,
+   "50": 14,
+   "100": 21,
+   "200": 24,
+   "1000": 28
+  },
+  "in_turns_against_the_votes": {
+   "came_within_the_budget": 5,
+   "fell_out_of_the_budget": 1
+  },
+  "the_better_of_the_two_places_for_each_bug__published_fix_within": {
+   "1": 0,
+   "10": 9,
+   "50": 17,
+   "100": 23,
+   "200": 25,
+   "1000": 28
+  },
+  "what_it_says": "The two orders are right about different bugs: taken in turns the published fix is within 200 for 24 of the 64, and 25 if something knew for each bug which order to trust, against 20 and 18 for either alone. Four bugs of 64 is within what chance does at this size, and it was looked at after the first answer was known."
+ },
+ "the_counts": {
+  "lessons_shown_forwards": {
+   "development_bugs": 64,
+   "bugs_with_the_published_fix_among_the_candidates": 32,
+   "operators_that_fitted_a_bug": 157382,
+   "of_which_held_its_published_fix": 92,
+   "in_a_thousand": 0.58,
+   "cells_with_a_count": 617,
+   "by_lessons_behind_the_operator": {
+    "1 lesson": {
+     "fitted": 130809,
+     "held_the_fix": 33,
+     "in_a_thousand": 0.25
+    },
+    "2": {
+     "fitted": 11645,
+     "held_the_fix": 5,
+     "in_a_thousand": 0.43
+    },
+    "3 or 4": {
+     "fitted": 7577,
+     "held_the_fix": 9,
+     "in_a_thousand": 1.19
+    },
+    "5 to 9": {
+     "fitted": 4108,
+     "held_the_fix": 16,
+     "in_a_thousand": 3.89
+    },
+    "10 to 29": {
+     "fitted": 2264,
+     "held_the_fix": 15,
+     "in_a_thousand": 6.63
+    },
+    "30 and more": {
+     "fitted": 979,
+     "held_the_fix": 14,
+     "in_a_thousand": 14.3
+    }
+   },
+   "by_candidates_the_operator_makes": {
+    "1 candidate": {
+     "fitted": 30576,
+     "held_the_fix": 40,
+     "in_a_thousand": 1.31
+    },
+    "2": {
+     "fitted": 22539,
+     "held_the_fix": 14,
+     "in_a_thousand": 0.62
+    },
+    "3 to 5": {
+     "fitted": 28486,
+     "held_the_fix": 14,
+     "in_a_thousand": 0.49
+    },
+    "6 to 10": {
+     "fitted": 20487,
+     "held_the_fix": 7,
+     "in_a_thousand": 0.34
+    },
+    "11 to 30": {
+     "fitted": 31703,
+     "held_the_fix": 10,
+     "in_a_thousand": 0.32
+    },
+    "31 to 100": {
+     "fitted": 17847,
+     "held_the_fix": 4,
+     "in_a_thousand": 0.22
+    },
+    "more than 100": {
+     "fitted": 5744,
+     "held_the_fix": 3,
+     "in_a_thousand": 0.52
+    }
+   },
+   "seconds": 432.4
+  },
+  "lessons_shown_backwards": {
+   "development_bugs": 64,
+   "bugs_with_the_published_fix_among_the_candidates": 27,
+   "operators_that_fitted_a_bug": 73245,
+   "of_which_held_its_published_fix": 97,
+   "in_a_thousand": 1.32,
+   "cells_with_a_count": 550,
+   "by_lessons_behind_the_operator": {
+    "1 lesson": {
+     "fitted": 58979,
+     "held_the_fix": 30,
+     "in_a_thousand": 0.51
+    },
+    "2": {
+     "fitted": 5774,
+     "held_the_fix": 9,
+     "in_a_thousand": 1.56
+    },
+    "3 or 4": {
+     "fitted": 4006,
+     "held_the_fix": 7,
+     "in_a_thousand": 1.75
+    },
+    "5 to 9": {
+     "fitted": 2167,
+     "held_the_fix": 16,
+     "in_a_thousand": 7.38
+    },
+    "10 to 29": {
+     "fitted": 1746,
+     "held_the_fix": 18,
+     "in_a_thousand": 10.31
+    },
+    "30 and more": {
+     "fitted": 573,
+     "held_the_fix": 17,
+     "in_a_thousand": 29.67
+    }
+   },
+   "by_candidates_the_operator_makes": {
+    "1 candidate": {
+     "fitted": 16696,
+     "held_the_fix": 49,
+     "in_a_thousand": 2.93
+    },
+    "2": {
+     "fitted": 12650,
+     "held_the_fix": 14,
+     "in_a_thousand": 1.11
+    },
+    "3 to 5": {
+     "fitted": 13815,
+     "held_the_fix": 12,
+     "in_a_thousand": 0.87
+    },
+    "6 to 10": {
+     "fitted": 10106,
+     "held_the_fix": 8,
+     "in_a_thousand": 0.79
+    },
+    "11 to 30": {
+     "fitted": 13198,
+     "held_the_fix": 9,
+     "in_a_thousand": 0.68
+    },
+    "31 to 100": {
+     "fitted": 5062,
+     "held_the_fix": 3,
+     "in_a_thousand": 0.59
+    },
+    "more than 100": {
+     "fitted": 1718,
+     "held_the_fix": 2,
+     "in_a_thousand": 1.16
+    }
+   },
+   "seconds": 149.8
+  },
+  "grouping_fixed_before_any_count": {
+   "support_edges": [
+    1,
+    2,
+    3,
+    5,
+    10,
+    30
+   ],
+   "made_edges": [
+    1,
+    2,
+    3,
+    6,
+    11,
+    31,
+    101
+   ],
+   "shrink": 20.0
+  },
+  "why_they_are_too_few": "With the lessons forwards 92 cases of an operator holding the fix stand against 157,382 fits, spread over 617 cells. What the counts say clearly (an operator with 30 lessons behind it holds the fix some 50 times as often as one with a single lesson) the learner's votes already use; what they could add, which KIND of operator to trust, rests on a handful of cases a kind."
+ },
+ "what_this_does_not_show": [
+  "Not that no order can do better. One way of counting, with a grouping fixed beforehand and never tuned, on 64 bugs. More bugs with known fixes, or a different grouping, were not tried; tuning the grouping on the same 64 bugs would have fitted them.",
+  "Not what was named last time in so many words. The next step then read: go by how near a lesson is to the bug. What was built goes by how often a kind of operator has held the fix of a bug like these. Nearness of the lesson's program to the bug's program was not tried.",
+  "Not repairs. No test was run. A candidate that is not the published fix can pass the tests, and in the dose record 55 bugs were repaired while the published fix stood within 200 for 34.",
+  "Nothing about bugs in real projects: these are short functions with one seeded bug each.",
+  "The count records were made with the tool as it stood before the verdict text and the read-off in turns were added to it; the code that counts did not change. The places were made twice, before and after that addition, and are the same bug for bug.",
+  "One run on one machine by the producer. Nobody else has re-run it."
+ ],
+ "sources": {
+  "lessons": {
+   "source": "github.com/appmlk/ConDefects",
+   "commit": "43f0834a82c5e3bc4516c079fe7765f63b1a15cd",
+   "pairs": 2864,
+   "pairs_sha256": "6f64229c6cce4a082f71260e70e43f7897ed9651927beb44f147d4db5315cae8"
+  },
+  "benchmark": {
+   "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+   "extra_inputs_sha256": null
+  },
+  "records": {
+   "EDIT_KIND_CHOICE_PLACES_20261112_V1.json": "7367d551a23a3a8d75e9b17fbff9d347d0d887f3412c3258fc8625801d7b1fa5",
+   "EDIT_KIND_CHOICE_COUNTS_FORWARDS_20261112_V1.json": "262d5c6ecbac0a65852b15cdacefeb993619f58f0d2958339b7b08ac3ba59c75",
+   "EDIT_KIND_CHOICE_COUNTS_BACKWARDS_20261112_V1.json": "7cd2baa7680562e17c5cd37e583f3afe9ed140cdb73cb2f37aca60cd304ec428"
+  },
+  "code_sha256_when_the_places_were_made": {
+   "canonical/tools/edit_kind_choice_measure_v1.py": "fd47b184b3a58e173808fbfe8301754b1ccda59a710a64a3eedc041917a031fa",
+   "canonical/runtime/edit_kind_choice_v1.py": "0f0bff2fd7c2520ac7ea0809d0cd36fe411efdcdf0ef378878bb8b8aec1b7b45",
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/tools/expert_fixes_dose_response_measure_v1.py": "1871413484ff019e45fe157b703fdb1bdbb601f5f622b8b455a7d5a1d9e0a52a",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_experience_stream_measure_v1.py": "77a5d7fd8beb77e42d7662a1b298bf43970aa2fe062dbdb74e244503e12dad8a",
+   "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09"
+  }
+ },
+ "to_run_it_again": [
+  "git clone https://github.com/appmlk/ConDefects.git CD && git -C CD checkout 43f0834a82c5e3bc4516c079fe7765f63b1a15cd",
+  "python3 canonical/tools/edit_kind_choice_measure_v1.py --condefects CD --humanevalfix humanevalpack.jsonl --count --direction forwards --out counts.json",
+  "python3 canonical/tools/edit_kind_choice_measure_v1.py --condefects CD --humanevalfix humanevalpack.jsonl --places --direction forwards --counts counts.json --out places.json"
+ ],
+ "model_calls": 0,
+ "per_bug_key": "for each development bug: candidates, the place of the published fix by votes, by the counts added up, by the largest share, and with the votes and each counted order taken in turns; null when the published fix is not among the candidates",
+ "per_bug": {
+  "Python/0": [
+   48437,
+   193,
+   109,
+   193,
+   160,
+   285
+  ],
+  "Python/2": [
+   3843,
+   4,
+   30,
+   32,
+   7,
+   7
+  ],
+  "Python/6": [
+   52693,
+   326,
+   5278,
+   5826,
+   484,
+   490
+  ],
+  "Python/7": [
+   12137,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/8": [
+   36529,
+   7,
+   6,
+   2,
+   12,
+   4
+  ],
+  "Python/10": [
+   44623,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/12": [
+   36043,
+   384,
+   60,
+   60,
+   94,
+   94
+  ],
+  "Python/13": [
+   11675,
+   12,
+   2918,
+   2918,
+   22,
+   22
+  ],
+  "Python/31": [
+   21604,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/33": [
+   4081,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/34": [
+   2632,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/36": [
+   59487,
+   548,
+   54,
+   54,
+   78,
+   78
+  ],
+  "Python/38": [
+   68825,
+   12469,
+   14781,
+   14781,
+   19786,
+   19786
+  ],
+  "Python/39": [
+   53823,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/42": [
+   6768,
+   10,
+   218,
+   341,
+   18,
+   18
+  ],
+  "Python/44": [
+   27086,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/48": [
+   20544,
+   72,
+   30,
+   34,
+   53,
+   60
+  ],
+  "Python/50": [
+   42045,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/55": [
+   26207,
+   27,
+   20,
+   36,
+   32,
+   44
+  ],
+  "Python/56": [
+   35241,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/57": [
+   9954,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/59": [
+   64823,
+   59,
+   819,
+   1021,
+   97,
+   97
+  ],
+  "Python/67": [
+   35679,
+   7,
+   44,
+   43,
+   12,
+   11
+  ],
+  "Python/68": [
+   48686,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/71": [
+   62461,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/72": [
+   48520,
+   91,
+   3,
+   3,
+   6,
+   6
+  ],
+  "Python/73": [
+   38183,
+   13984,
+   15293,
+   15293,
+   24070,
+   24070
+  ],
+  "Python/75": [
+   71975,
+   80,
+   1765,
+   1755,
+   129,
+   130
+  ],
+  "Python/76": [
+   31459,
+   44,
+   1406,
+   2835,
+   71,
+   72
+  ],
+  "Python/77": [
+   9547,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/79": [
+   6508,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/80": [
+   44474,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/83": [
+   9234,
+   159,
+   55,
+   49,
+   86,
+   81
+  ],
+  "Python/87": [
+   45619,
+   51,
+   2,
+   3,
+   3,
+   5
+  ],
+  "Python/91": [
+   37318,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/94": [
+   53098,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/95": [
+   68597,
+   378,
+   413,
+   394,
+   619,
+   619
+  ],
+  "Python/97": [
+   13979,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/98": [
+   31093,
+   47,
+   26,
+   24,
+   38,
+   37
+  ],
+  "Python/103": [
+   36476,
+   18,
+   224,
+   505,
+   29,
+   27
+  ],
+  "Python/104": [
+   40193,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/106": [
+   56074,
+   163,
+   772,
+   869,
+   270,
+   273
+  ],
+  "Python/111": [
+   58161,
+   2,
+   143,
+   150,
+   3,
+   3
+  ],
+  "Python/112": [
+   27453,
+   66,
+   3,
+   3,
+   5,
+   5
+  ],
+  "Python/113": [
+   68283,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/115": [
+   28143,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/116": [
+   9994,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/117": [
+   58521,
+   616,
+   80,
+   78,
+   119,
+   115
+  ],
+  "Python/119": [
+   50771,
+   324,
+   34,
+   38,
+   57,
+   63
+  ],
+  "Python/126": [
+   36414,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/129": [
+   60256,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/131": [
+   40319,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/137": [
+   63364,
+   1300,
+   1372,
+   1372,
+   2076,
+   2076
+  ],
+  "Python/139": [
+   45279,
+   9,
+   30,
+   41,
+   13,
+   13
+  ],
+  "Python/142": [
+   45112,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/146": [
+   48831,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/148": [
+   56353,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/151": [
+   15895,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/152": [
+   20596,
+   244,
+   18,
+   18,
+   29,
+   29
+  ],
+  "Python/153": [
+   57219,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/155": [
+   34834,
+   2241,
+   17461,
+   17461,
+   3412,
+   3428
+  ],
+  "Python/160": [
+   40812,
+   399,
+   278,
+   278,
+   433,
+   433
+  ],
+  "Python/161": [
+   55435,
+   null,
+   null,
+   null,
+   null,
+   null
+  ],
+  "Python/162": [
+   9810,
+   null,
+   null,
+   null,
+   null,
+   null
+  ]
+ }
+}

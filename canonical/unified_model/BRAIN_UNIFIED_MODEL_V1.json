@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 348,
+  "knowledge_documents": 347,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6751,
+  "research_index_records": 6759,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1965
+  "source_index_modules": 1968
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0150dc6b05e2db01114d18b4f4cb52c47170d8774d0c00b80d7ce3a7043edae8"
+  "value": "3e0f3ce4367d2b771ce6b495f3ad75610de0f57f3db37a6d5f4c09d253d61487"
  },
  "engines": [
   {
@@ -56378,80 +56378,6 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 5852,
-   "headings": [
-    "The capability was there. The substrate wasn't.",
-    "1. The claim under test",
-    "2. The reason, found by following it down",
-    "3. Same lesson, substrate restored",
-    "4. The second defect this exposed: silence",
-    "5. The tests are honest in both worlds",
-    "What this changes about the answer",
-    "What is genuinely load-bearing from here"
-   ],
-   "kind": "DOCUMENT",
-   "path": "THE_CAPABILITY_WAS_INSTALLED_NOT_BROKEN_20261112_V1.md",
-   "sha256": "c58c4c7645a9157000b1cecd313129bc9db786da32b6ce1c1305fe7694904053",
-   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`.",
-   "terms": {
-    "about": 5,
-    "absent": 4,
-    "answer": 3,
-    "before": 4,
-    "candidates": 4,
-    "cannot": 3,
-    "cap": 4,
-    "capability": 7,
-    "claim": 3,
-    "cross_language_cst_skeleton": 6,
-    "exists": 3,
-    "failing": 3,
-    "false": 4,
-    "file": 3,
-    "here": 4,
-    "hit": 8,
-    "image": 3,
-    "languages": 3,
-    "last": 4,
-    "len": 3,
-    "lesson": 3,
-    "link": 3,
-    "measured": 4,
-    "mechanism": 4,
-    "never": 5,
-    "no": 10,
-    "none": 3,
-    "not": 7,
-    "now": 3,
-    "one": 10,
-    "other": 3,
-    "pass": 4,
-    "passes": 4,
-    "present": 3,
-    "python": 5,
-    "restore_substrate_v1.py": 3,
-    "return": 3,
-    "rule": 4,
-    "run": 3,
-    "rust": 3,
-    "six": 3,
-    "so": 3,
-    "substrate": 10,
-    "test": 4,
-    "transfer": 6,
-    "tree_sitter": 4,
-    "true": 5,
-    "xs": 4
-   },
-   "title": "The capability was there. The substrate wasn't.",
-   "title_terms": [
-    "capability",
-    "substrate",
-    "wasn"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
    "bytes": 10460,
    "headings": [
     "THE CREATURE CAN REACH ITS OWN SYNTHESIZER",
@@ -71808,10 +71734,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1150,
+  "included_source_count": 1149,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3c04b47907c17cb687fe2932cf93cf77bc1c1c912be6ea26232b09ee86802b68"
+  "source_tree_digest": "9ed21d9b69c564813b784f82591c929a9291a97539ceccf57f89ae63790d0798"
  },
  "research_index": [
   {
@@ -153161,6 +153087,83 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/EDIT_KIND_CHOICE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EDIT_KIND_CHOICE_20261112_V1.json",
+   "schema": "BRAIN_EDIT_KIND_CHOICE_RECORD_V1",
+   "sha256": "281df7da75a315082ed6dae873771ad117c2d8f44bf1d46ca3e4ff46529367d6",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "choice": 1,
+    "edit": 1,
+    "kind": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/EDIT_KIND_CHOICE_COUNTS_BACKWARDS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EDIT_KIND_CHOICE_COUNTS_BACKWARDS_20261112_V1.json",
+   "schema": "BRAIN_EDIT_KIND_CHOICE_MEASURE_V1",
+   "sha256": "7cd2baa7680562e17c5cd37e583f3afe9ed140cdb73cb2f37aca60cd304ec428",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "backwards": 1,
+    "choice": 1,
+    "counts": 1,
+    "edit": 1,
+    "kind": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/EDIT_KIND_CHOICE_COUNTS_FORWARDS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EDIT_KIND_CHOICE_COUNTS_FORWARDS_20261112_V1.json",
+   "schema": "BRAIN_EDIT_KIND_CHOICE_MEASURE_V1",
+   "sha256": "262d5c6ecbac0a65852b15cdacefeb993619f58f0d2958339b7b08ac3ba59c75",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "choice": 1,
+    "counts": 1,
+    "edit": 1,
+    "forwards": 1,
+    "kind": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/EDIT_KIND_CHOICE_PLACES_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EDIT_KIND_CHOICE_PLACES_20261112_V1.json",
+   "schema": "BRAIN_EDIT_KIND_CHOICE_MEASURE_V1",
+   "sha256": "7367d551a23a3a8d75e9b17fbff9d347d0d887f3412c3258fc8625801d7b1fa5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "choice": 1,
+    "edit": 1,
+    "kind": 1,
+    "places": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-05",
    "id": "research:canonical/verification/EFFECT_BROKER_RECEIPT_RESOLVER_V2_LOCAL_VERIFICATION_20261005_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -189817,6 +189820,61 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/TAKE_OUT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/TAKE_OUT_20261112_V1.json",
+   "schema": "BRAIN_TAKE_OUT_RECORD_V1",
+   "sha256": "2ddb4e4595d3205a1fd30dd03662bcaea60b4b54741c9d7a826a413207f54aec",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "out": 1,
+    "take": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/TAKE_OUT_DEVELOPMENT_BUGS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/TAKE_OUT_DEVELOPMENT_BUGS_20261112_V1.json",
+   "schema": "BRAIN_TAKE_OUT_MEASURE_V1",
+   "sha256": "72bda1a9e2346e96b894c85ed6a31b6064c08b88df38e3e718d377b46a80da1f",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "bugs": 1,
+    "development": 1,
+    "out": 1,
+    "take": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/TAKE_OUT_SCORED_BUGS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/TAKE_OUT_SCORED_BUGS_20261112_V1.json",
+   "schema": "BRAIN_TAKE_OUT_MEASURE_V1",
+   "sha256": "f997b6722541a8d1f9f12515905da761d2e29baa16f63127f5a9321dcf78d3b6",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "bugs": 1,
+    "out": 1,
+    "scored": 1,
+    "take": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-05",
    "id": "research:canonical/verification/TARGET_AGNOSTIC_UNIVERSAL_DOMAIN_IMPOSSIBILITY_WOLFRAM_VERIFICATION_20261005_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -215569,6 +215627,51 @@
    }
   },
   {
+   "action_id": "AN_UNEXPRESSIBLE_PRECONDITION_IS_NOT_IGNORANCE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/AN_UNEXPRESSIBLE_PRECONDITION_IS_NOT_IGNORANCE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_UNEXPRESSIBLE_PRECONDITION_IS_NOT_IGNORANCE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "df4dfa8f3909e528c9e2b063c1293a476a4ce8870898b0aa51052fb88c9a7f63",
+   "status": "",
+   "terms": {
+    "20": 1,
+    "20261112": 1,
+    "an_unexpressible_precondition_is_not_ignorance_20261112_v1": 1,
+    "because": 1,
+    "cause": 1,
+    "changed": 1,
+    "docx.intent.json": 1,
+    "extra": 1,
+    "fact": 1,
+    "facts": 1,
+    "failed": 1,
+    "gave": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 1,
+    "identical": 1,
+    "ignorance": 1,
+    "inconsistent": 1,
+    "just": 1,
+    "no": 3,
+    "no_new_capability_registered__no_family_flipped__no_terminal_credit__an_owned_learner_becomes_reachable_on_the_primary_executor_and_a_circular_learning_rule_is_refuted_by_execution_before_it_can_ship": 1,
+    "not": 1,
+    "nothing": 1,
+    "offered": 1,
+    "opposite": 1,
+    "outcomes": 1,
+    "plan": 1,
+    "precondition": 1,
+    "real": 3,
+    "runs": 1,
+    "sensed": 1,
+    "sensor": 1,
+    "sidecar": 1
+   }
+  },
+  {
    "action_id": "AN_UNQUOTED_COMMAND_LINE_IS_A_PROGRAM_OR_IT_IS_NOT_A_COMMAND_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -223242,7 +223345,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "787a26e70f3713f68f77f6df2433d810a598ae518cc0d30498884d62c01f42e0",
+   "sha256": "040daec06be35aa0415264f742f226b3486aa9c5921aa0ce1ca8e161296c820a",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -235145,9 +235248,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/applicability_v1.py",
-   "sha256": "139c8496bb9bec18c2bf11d5855ac60f931a55b86affc56c06aaf70535aa8116",
+   "sha256": "dc7af8ef5922666bfc4c642563a64fef9058bd95269a850dd481cdf86bc76028",
    "summary": "Learn WHEN a remembered plan applies, from outcomes in context.",
-   "symbol_count": 9,
+   "symbol_count": 10,
    "symbols": [
     "Boundary",
     "admits",
@@ -235157,7 +235260,8 @@
     "explains_failure",
     "learn",
     "normalise_state",
-    "survivors"
+    "survivors",
+    "vocabulary_gap"
    ],
    "terms": {
     "admits": 1,
@@ -235175,7 +235279,8 @@
     "plan": 1,
     "remembered": 1,
     "survivors": 1,
-    "v1": 1
+    "v1": 1,
+    "vocabulary_gap": 1
    }
   },
   {
@@ -246582,14 +246687,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/chain_v1.py",
-   "sha256": "cedfd31ba72d22f312bb31281895500c06b5fad990300d2c72493c15fbbd4cea",
+   "sha256": "a9ff88cc7c02db581d0ba0ef5ca35100196c4c43faab630127d2e2750fb34dce",
    "summary": "One sentence, many steps: the machine plans a chain and then runs it.",
-   "symbol_count": 7,
+   "symbol_count": 8,
    "symbols": [
     "_load",
     "_next_contrast",
     "_outputs_of",
     "_provides_of",
+    "_vocabulary_gap",
     "decompose",
     "precondition_context",
     "run"
@@ -246610,7 +246716,8 @@
     "runs": 1,
     "sentence": 1,
     "steps": 1,
-    "v1": 1
+    "v1": 1,
+    "vocabulary_gap": 1
    }
   },
   {
@@ -253928,6 +254035,54 @@
     "fail-closed": 1,
     "gate": 2,
     "string_set": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/edit_kind_choice_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/edit_kind_choice_v1.py",
+   "sha256": "0f0bff2fd7c2520ac7ea0809d0cd36fe411efdcdf0ef378878bb8b8aec1b7b45",
+   "summary": "Which change to try first, counted from the same fixes that gave the changes.",
+   "symbol_count": 10,
+   "symbols": [
+    "Counts",
+    "Table",
+    "bucket",
+    "count_program",
+    "fitting",
+    "in_turns",
+    "kind_of",
+    "ordered",
+    "ranking",
+    "shares"
+   ],
+   "terms": {
+    "bucket": 1,
+    "change": 1,
+    "changes": 1,
+    "choice": 1,
+    "count_program": 1,
+    "counted": 1,
+    "counts": 1,
+    "edit": 1,
+    "first": 1,
+    "fitting": 1,
+    "fixes": 1,
+    "gave": 1,
+    "in_turns": 1,
+    "kind": 1,
+    "kind_of": 1,
+    "ordered": 1,
+    "ranking": 1,
+    "same": 1,
+    "shares": 1,
+    "table": 1,
+    "try": 1,
     "v1": 1
    }
   },
@@ -269771,9 +269926,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/macro_v1.py",
-   "sha256": "8e9bdb8ce90d6763be6959131dea588e7354374394a69dfe24627d6839dd40df",
+   "sha256": "c7ed6c968b28a606d5db8b323c33a6e554ff6c7639c322950d04a57983c58b58",
    "summary": "Learn a plan from having done the work, then reuse it.",
-   "symbol_count": 18,
+   "symbol_count": 19,
    "symbols": [
     "_append_evidence",
     "_boundary",
@@ -269792,7 +269947,8 @@
     "note_failure",
     "record",
     "signature",
-    "stats"
+    "stats",
+    "vocabulary_gap"
    ],
    "terms": {
     "append_evidence": 1,
@@ -269820,6 +269976,7 @@
     "state_path": 1,
     "stats": 1,
     "v1": 1,
+    "vocabulary_gap": 1,
     "work": 1
    }
   },
@@ -278508,6 +278665,41 @@
     "receipts": 1,
     "v1": 1,
     "verify_precommit_isolation_receipt": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/precondition_discovery_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/precondition_discovery_v1.py",
+   "sha256": "3e85f8e9ea96c2b4a796f0cd14c33cd9a000bea6f29042a994e6a5ea8eb6a555",
+   "summary": "Discover an observable that separates worlds the current facts call identical.",
+   "symbol_count": 5,
+   "symbols": [
+    "Discovery",
+    "_files",
+    "_suffixes",
+    "discover",
+    "holds"
+   ],
+   "terms": {
+    "call": 1,
+    "current": 1,
+    "discover": 2,
+    "discovery": 2,
+    "facts": 1,
+    "files": 1,
+    "holds": 1,
+    "identical": 1,
+    "observable": 1,
+    "precondition": 1,
+    "separates": 1,
+    "suffixes": 1,
+    "v1": 1,
+    "worlds": 1
    }
   },
   {
@@ -298160,6 +298352,49 @@
     "unknown": 1,
     "v1": 1,
     "yet": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/take_out_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/take_out_v1.py",
+   "sha256": "0f85df3493d5239131065db77c4f649df5ad861ad971398cdb04a40f125639ae",
+   "summary": "Every program that is this one with one piece taken out. No lesson is needed for it.",
+   "symbol_count": 8,
+   "symbols": [
+    "_changes",
+    "_is_documentation",
+    "_is_read",
+    "_put",
+    "_spots",
+    "candidates",
+    "in_order",
+    "size"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "every": 1,
+    "in_order": 1,
+    "is_documentation": 1,
+    "is_read": 1,
+    "lesson": 1,
+    "needed": 1,
+    "no": 1,
+    "one": 2,
+    "out": 2,
+    "piece": 1,
+    "program": 1,
+    "put": 1,
+    "size": 1,
+    "spots": 1,
+    "take": 1,
+    "taken": 1,
+    "v1": 1
    }
   },
   {
