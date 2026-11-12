@@ -1,0 +1,256 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1",
+ "action_intent_id": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner split the problem into exact recall, which is solved and shipped, and generalization, which is not, and asked that the second be solved in the fastest correct way. The tree already holds the first-principles answer in canonical/runtime/applicability_v1, which is wired into macro_v1, precondition_discovery_v1 and contrast_selection_v1 and states that the missing quantity is not more demonstrations but the STATE each outcome happened in, and that a caller may only withhold a plan on IDENTIFIED. The skill store never asks it anything. This round measures what actually decides where a shipped skill applies, by perturbing or deleting one declared field at a time and re-running the rule over a probe corpus of eight sources declared before any measurement: six of the eight fields, including language, error_class and domain, are DECORATIVE on all five skills, and only pattern_tokens and replacement_tokens constrain behaviour. The positive control is what makes that mean something -- perturbing the matcher does change behaviour, in the same run, on the same corpus. Every shipped skill carries verified_hits 1 and zero states, so applicability_v1 returns UNDETERMINED for five of five and none may be called generalizing under the tree's own law. A count is not a state; growing it to a thousand would add no scope. The expected stronger result was NOT found and is recorded as a negative: no rule rewrote another language's bytes, each refused seven of eight probes, and those refusals come from the token matcher rather than from the declared class, because a refusal from syntax can say only that the text did not match and never that the match is outside the class. Narrowness is not a scope. Nothing here claims a capability: the deliverable is an instrument, a ledger, a label that can be earned, and the price of the observation that would earn it.",
+ "selected_route": "MEASURE_WHICH_DECLARED_FIELDS_ACTUALLY_CONSTRAIN_WHERE_A_SKILL_APPLIES_AND_LABEL_EVERY_SKILL_BY_THE_TREE_S_OWN_APPLICABILITY_LAW_RATHER_THAN_BUILD_A_NEW_LEARNER",
+ "causal_blocker": "THE_SKILL_STORE_RECORDS_SUCCESSES_AS_A_COUNT_WITHOUT_THE_STATE_THEY_HAPPENED_IN_SO_NO_SCOPE_CLAIM_CAN_BE_IDENTIFIED_AND_THE_FIELDS_THAT_NAME_A_SKILL_S_CLASS_CONSTRAIN_NOTHING_WHICH_LEAVES_EXACT_RECALL_WEARING_THE_NAME_OF_GENERALIZATION",
+ "expected_parent_change": "A_ZERO_SPEND_LEDGER_THAT_SAYS_WHICH_FIELDS_DECIDE_APPLICABILITY_WHETHER_A_SKILL_S_EVIDENCE_CAN_SUPPORT_A_SCOPE_AT_ALL_AND_WHICH_SKILLS_MAY_BE_CALLED_GENERALIZING__PLUS_THE_PRICED_OBSERVATION_THAT_WOULD_EARN_THE_LABEL",
+ "expected_parent_frontier_change": "THE_TREE_CAN_DISTINGUISH_EXACT_RECALL_FROM_GENERALIZATION_IN_ITS_OWN_SKILL_STORE_AND_CAN_NAME_THE_ONE_MISSING_EVIDENCE_UNIT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_SKILL_STORE_RECORDS_SUCCESSES_AS_A_COUNT_WITHOUT_THE_STATE_THEY_HAPPENED_IN_SO_NO_SCOPE_CLAIM_CAN_BE_IDENTIFIED_AND_THE_FIELDS_THAT_NAME_A_SKILL_S_CLASS_CONSTRAIN_NOTHING_WHICH_LEAVES_EXACT_RECALL_WEARING_THE_NAME_OF_GENERALIZATION",
+ "falsification_condition": "PERTURBING_THE_MATCHER_FIELDS_ALSO_CHANGES_NOTHING_WHICH_WOULD_MAKE_EVERY_DECORATIVE_VERDICT_AN_ARTEFACT_OF_A_BROKEN_APPLY_PATH__OR_A_RECORD_CARRYING_STATES_AND_A_CONTRASTING_FAILURE_IS_NOT_LABELLED_GENERALIZING_WHICH_WOULD_MAKE_ZERO_OF_FIVE_A_CONSTANT__OR_THE_LEDGER_INVENTS_A_STATE_FOR_A_RECORD_THAT_CARRIES_NONE__OR_A_REFUSAL_IS_REPORTED_AS_A_FIRING__OR_THE_DECLARATION_FLOOR_MOVES_OFF_595",
+ "stop_condition": "THE_LEDGER_AND_ITS_26_TESTS_ARE_IN_THE_TREE__THE_POSITIVE_CONTROL_IS_PINNED_SO_DECORATIVE_MEANS_SOMETHING__THE_LABEL_IS_SHOWN_TO_BE_EARNABLE_OTHERWISE_ZERO_OF_FIVE_IS_A_CONSTANT__8_OF_8_MUTATIONS_KILLED_WITH_THE_SUITE_GREEN_FIRST__THE_EXPECTED_OVER_APPLICATION_THAT_WAS_NOT_FOUND_IS_RECORDED_AS_A_NEGATIVE_RESULT__THE_DECLARATION_FLOOR_IS_STILL_HELD_AT_595__REPO_INTEGRITY_GUARD_PASSES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "explicit_user_authorization": "PARAPHRASE, NOT A QUOTATION. On 2026-11-12 the owner stated that exact recall is solved with an 8.13x speedup and generalization is not, and asked that generalization be solved perfectly with the smartest solutions in the fastest way; asked again whether one experience of the smartest action teaches it permanently and so solves any computer use; asked what is real and what is not; asked that every step be checked with YOU SURE THIS IS THE SMARTEST APPROACH, that bad ideas be killed before implementation, that the web be used maximally for the latest research because the model's training is old, that existing solutions in the tree with non-obvious names be found and reused rather than reinvented, and that the work always be pushed and merged. No governance change, no guard weakened, no credit claimed, no protected path touched, no sentience claim. Zero dollars, zero model calls in the producer path.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/skill_scope_ledger_v1.py",
+   "canonical/tests/test_skill_scope_ledger_v1.py",
+   "canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
+   "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.md",
+   "canonical/runtime/applicability_v1.py"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_LEARNED_SKILL_S_DECLARED_LANGUAGE_ERROR_CLASS_AND_DOMAIN_CONSTRAIN_WHERE_IT_APPLIES__MEASURED_FALSE__ALL_THREE_CAN_BE_OVERWRITTEN_WITH_A_CLASS_THE_RULE_NEVER_CLAIMED_OR_DELETED_WITH_ZERO_CHANGE_IN_BEHAVIOUR_ON_AN_EIGHT_PROBE_CORPUS_DECLARED_IN_ADVANCE",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+  ],
+  "causal_evidence": "MEASURED_2026-11-12_IN_AN_ARENA_SESSION_SANDBOX__LEDGER_RUNS_IN_0.07_SECONDS_OVER_THE_FIVE_SHIPPED_SKILLS__SIX_OF_EIGHT_FIELDS_DECORATIVE_ON_ALL_FIVE_AND_BOTH_MATCHER_FIELDS_ENFORCING_ON_ALL_FIVE_SO_THE_POSITIVE_CONTROL_HELD__EVERY_SKILL_HAS_verified_hits_1_AND_ZERO_STATES_SO_applicability_v1.learn_RETURNS_UNDETERMINED__NO_CONTRASTING_OUTCOME_FOR_FIVE_OF_FIVE__A_SYNTHETIC_RECORD_WITH_STATES_AND_TWO_CONTRASTING_FAILURES_YIELDS_IDENTIFIED_REQUIRED_pytest_AND_THE_LABEL_GENERALIZING_SO_THE_LABEL_IS_EARNABLE__26_TESTS_PASS__8_OF_8_MUTATIONS_KILLED__152_PASSED_ACROSS_EIGHT_SUITES__DECLARATION_FLOOR_HELD_AT_595__verify_brain_unified_model_v1_33_OF_33",
+  "earlier_routes_exhausted_reason": "REUSE was done first and is what shipped: applicability_v1, VersionSpace.select_probe and the crystallizer's own apply path were called rather than reimplemented. More demonstrations was killed by the tree's own measurement -- one demo leaves 14.1 of 47 hypotheses fitting and identifies 0 of 10, three demos identify 5 of 10, while one demo plus chosen probes identifies 10 of 10 in a mean of 2.0 queries. Similarity retrieval without a check was killed by the measured 67.5 percent false-accept rate on the general boundary. A new learner was killed because one exists, is wired, and has thirteen importers. Model-driven create-improve-merge was killed because it needs model calls and rejection-sampling training and cannot be verified here."
+ },
+ "measured_effect": "FIVE_SKILLS_MEASURED_IN_0.07_SECONDS__ZERO_MAY_BE_CALLED_GENERALIZING__FIVE_LABELLED_EXACT_MATCH_ONLY__SIX_OF_EIGHT_FIELDS_DECORATIVE_ON_ALL_FIVE__TWO_MATCHER_FIELDS_ENFORCING_ON_ALL_FIVE__POSITIVE_CONTROL_HELD_ON_ALL__EACH_RULE_FIRES_ON_EXACTLY_ONE_OF_EIGHT_PROBES__ZERO_CONTRASTING_FAILURES_RECORDED__EVIDENCE_UNIT_IS_A_COUNT_WITHOUT_STATES_FOR_FIVE_OF_FIVE__26_TESTS_PASS__8_OF_8_MUTATIONS_KILLED__152_PASSED_ACROSS_THE_EIGHT_SUITES_TOUCHING_THIS_MACHINERY__DECLARATION_FLOOR_STILL_HELD_AT_595",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_VALUE_IS_A_LABEL_LAW_AND_A_MEASUREMENT_THAT_SEPARATES_EXACT_RECALL_FROM_GENERALIZATION_IN_THE_TREE_S_OWN_RECORDS_WHICH_IS_EVIDENCE_HYGIENE_NOT_AN_OBLIGATION_DISCHARGE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/applicability_v1.py (the learner, called not reimplemented; its verdicts are the label law)",
+  "canonical/runtime/settlement_v1.py VersionSpace.select_probe (one notion of information gain, not a second)",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py apply_crystallized_code_rule (the apply path under measurement)",
+  "canonical/astra_runtime/skills/VERIFIED_SKILLS_BUNDLE_V1.json (read unchanged; never edited)",
+  "canonical/tools/auditability_report_v1.py --floor (re-run to prove this round added no unchecked declaration)",
+  "what_a_success_teaches_20261112.py (the 0-of-200 and 25-of-25 measurements this round's framing rests on)"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "THE_TREE_CAN_SAY_WHICH_OF_ITS_LEARNED_SKILLS_HAVE_A_SCOPE_THAT_CAN_BE_CONTRADICTED_AND_WHICH_ARE_EXACT_RECALL_WEARING_THE_NAME_OF_GENERALIZATION",
+  "selected_route": "MEASURE_WHICH_DECLARED_FIELDS_ACTUALLY_CONSTRAIN_WHERE_A_SKILL_APPLIES_AND_LABEL_EVERY_SKILL_BY_THE_TREE_S_OWN_APPLICABILITY_LAW_RATHER_THAN_BUILD_A_NEW_LEARNER",
+  "selected_surviving_route": "RUN_THE_EXISTING_APPLY_PATH_OVER_A_CORPUS_DECLARED_IN_ADVANCE_WITH_ONE_FIELD_PERTURBED_AT_A_TIME_AND_LABEL_EACH_SKILL_WITH_THE_TREE_S_OWN_LEARNER",
+  "deleted_or_bypassed_paths": [
+   "CLAIMING_A_GO_RULE_REWRITES_PYTHON_BYTES__DELETED_AFTER_MEASUREMENT__IT_REFUSED__THE_NEGATIVE_RESULT_IS_RECORDED",
+   "BUILDING_A_NEW_GENERALIZATION_LEARNER__DELETED__applicability_v1_EXISTS_IS_WIRED_AND_HAS_THIRTEEN_IMPORTERS",
+   "BUYING_GENERALIZATION_WITH_MORE_DEMONSTRATIONS__DELETED__THE_TREE_MEASURED_ZERO_OF_TEN_IDENTIFIED_FROM_ONE_DEMO_AND_TEN_OF_TEN_FROM_TWO_CHOSEN_PROBES",
+   "INFERRING_A_STATE_FROM_THE_RULE_S_OWN_LANGUAGE_FIELD__DELETED__THAT_LETS_A_RECORD_SCOPE_ITSELF_WHICH_IS_THE_CIRCULARITY_BEING_MEASURED",
+   "EDITING_THE_SHIPPED_BUNDLE_TO_ADD_A_SCOPE_FIELD__DELETED__THE_BUNDLE_IS_READ_ONLY_EVIDENCE_AND_IS_SUPERSEDED_BY_A_DERIVED_LEDGER",
+   "REPORTING_A_REFUSAL_AS_A_SCOPE__DELETED__SYNTAX_CAN_SAY_THE_TEXT_DID_NOT_MATCH_NOT_THAT_THE_MATCH_IS_OUTSIDE_THE_CLASS"
+  ],
+  "stop_condition": "THE_LEDGER_AND_ITS_26_TESTS_ARE_IN_THE_TREE__THE_POSITIVE_CONTROL_IS_PINNED_SO_DECORATIVE_MEANS_SOMETHING__THE_LABEL_IS_SHOWN_TO_BE_EARNABLE_OTHERWISE_ZERO_OF_FIVE_IS_A_CONSTANT__8_OF_8_MUTATIONS_KILLED_WITH_THE_SUITE_GREEN_FIRST__THE_EXPECTED_OVER_APPLICATION_THAT_WAS_NOT_FOUND_IS_RECORDED_AS_A_NEGATIVE_RESULT__THE_DECLARATION_FLOOR_IS_STILL_HELD_AT_595__REPO_INTEGRITY_GUARD_PASSES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "expected_parent_level_state_change": "THE_TREE_CAN_DISTINGUISH_EXACT_RECALL_FROM_GENERALIZATION_IN_ITS_OWN_SKILL_STORE_AND_CAN_NAME_THE_ONE_MISSING_EVIDENCE_UNIT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "why_selected_route_is_fastest_sufficient": "It runs the apply path that already exists over eight sources declared in advance and finishes in 0.07 seconds, so the answer is a measurement rather than an argument, and it reuses the learner whose verdicts are already the tree's law, so the label needs no new authority to be believed.",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "MEASURE_WHICH_FIELDS_CONSTRAIN_APPLICABILITY_AND_LABEL_BY_THE_EXISTING_LAW (selected)",
+   "BUY_GENERALIZATION WITH MORE DEMONSTRATIONS (rejected: 0 of 10 identified from one, 5 of 10 from three)",
+   "SIMILARITY_RETRIEVAL_OVER_SKILL_EMBEDDINGS (rejected: 67.5 percent false-accepts on the general boundary)",
+   "MODEL_DRIVEN_CREATE_IMPROVE_MERGE (rejected: needs model calls and cannot be verified here)"
+  ],
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "EVIDENCE_PRESERVATION_OF_A_MEASURED_FALSIFICATION_PLUS_AN_INSTRUMENT_OVER_AN_EXISTING_APPLY_PATH__NO_NEW_CAPABILITY_IS_CLAIMED_NO_EXTERNAL_ROUTE_IS_ADOPTED_AND_NO_SPEND_IS_REQUESTED__THE_EXTERNAL_RECORD_WAS_READ_AND_IS_CITED_IN_THE_CLAIM_DOCUMENT",
+   "challenger_routes": []
+  },
+  "obs_goal": {
+   "real_outcome": "KNOW_WHETHER_A_LEARNED_SKILL_S_APPLICABILITY_IS_CONSTRAINED_BY_ANYTHING_THAT_COULD_CONTRADICT_IT_OR_ONLY_BY_ITS_OWN_TOKEN_PATTERN",
+   "proxy_goals_deleted": [
+    "MAKING_THE_SKILL_BUNDLE_LOOK_VERIFIED (a proxy: verified_hits reads like verification and is a tally)"
+   ],
+   "surviving_necessity": "EXACT_RECALL_AND_GENERALIZATION_ARE_CURRENTLY_INDISTINGUISHABLE_IN_THE_RECORD_AND_THE_OWNER_S_QUESTION_TURNS_ENTIRELY_ON_THE_DIFFERENCE"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_PROVENANCE_UNIT_OMITS_THE_STATE_SO_THE_LEARNER_REFUSES_BY_DESIGN_AND_THE_CLASS_FIELDS_ARE_ONLY_A_RETRIEVAL_KEY_HELD_BY_THE_CALLER",
+   "delete_bypass_substitute_options": [
+    "EDITING_THE_SHIPPED_BUNDLE_TO_ADD_STATES_WAS_REJECTED__IT_IS_EVIDENCE_AND_EVIDENCE_IS_SUPERSEDED_NOT_REWRITTEN"
+   ],
+   "surviving_causal_blocker": "NO_RECORDED_SKILL_CARRIES_A_CONTRASTING_OUTCOME_SO_THE_LABEL_CANNOT_BE_EARNED_FROM_THE_EXISTING_RECORDS_ONLY_FROM_NEW_OBSERVATIONS"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/applicability_v1.py (13 importers, 5 test files)",
+    "canonical/runtime/settlement_v1.py VersionSpace.select_probe",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py apply_crystallized_code_rule and verify_rule_on_mutated_twin",
+    "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py:1129 (the production caller, which does filter by lookup key)"
+   ],
+   "external_existing_routes_checked": [
+    "SkillLearnBench arXiv 2604.20087 (one-shot coverage 54.92 accuracy 20.00; no method leads across tasks)",
+    "SkillComposer ICLR 2026 arXiv 2606.06079 (merge drives generalization; uncontrolled extraction degrades below the no-skill baseline)",
+    "GSE arXiv 2608.06153 (local skill updates overfit; a skill relation graph lifts recall 31.8 to 180 percent)",
+    "Atomic Skills arXiv 2604.05013 (an atomic skill must be independently evaluatable with minimal ambiguity)",
+    "K2-Agent ICLR 2026 (generalization comes from execution feedback in the SRLR loop, not from the single demo)",
+    "PolySkill ICLR 2026 (hierarchical abstraction, held-out GitLab 66.2)",
+    "arXiv 2609.26499 (one-shot generalization 30 of 45 trials; 50 percent duration cut on redo)"
+   ],
+   "capability_work_deleted": [
+    "NO_NEW_LEARNER_AND_NO_NEW_CAPABILITY_PRIMITIVE__THE_ROUND_ADDS_AN_INSTRUMENT_A_LEDGER_AND_A_LABEL_LAW"
+   ],
+   "surviving_gap": "THE_STORE_S_EVIDENCE_UNIT_IS_A_COUNT__UNTIL_PROVENANCE_CARRIES_state_AND_succeeded_NO_SCOPE_CAN_BE_IDENTIFIED_HOWEVER_MANY_SUCCESSES_ARE_RECORDED"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_IMPLICATION_THAT_verified_hits_EVIDENCES_A_SCOPE__SUPERSEDED_BY_A_DERIVED_LEDGER_THE_BUNDLE_ITSELF_UNTOUCHED"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "THE_LEDGER_NOW_OWNS_THE_APPLICABILITY_QUESTION_FOR_SKILLS_SO_THE_SELF_WITNESS_TRANSPORT_CHECK_AND_THIS_SCOPE_CHECK_CANNOT_BE_CONFLATED"
+   ],
+   "fresh_reuse_plan": "RE_RUN_THE_LEDGER_ON_EVERY_CHANGE_TO_THE_BUNDLE_THE_CRYSTALLIZER_OR_APPLICABILITY_AND_REPORT_THE_LABEL_COUNTS_NEXT_TO_THE_VERIFIED_HITS_TALLY_THEY_QUALIFY"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "THE_FIELD_PERTURBATION_SWEEP_WAS_PROTOTYPED_ONCE_IN_0.4_SECONDS_AND_REUSED_RATHER_THAN_RE_DERIVED"
+   ],
+   "search_stop_decision": "STOPPED_LOOKING_FOR_AN_OVER_APPLICATION_DEMONSTRATION_AFTER_THE_CROSS_LANGUAGE_PROBES_WERE_REFUSED_AND_RECORDED_THE_NEGATIVE_RESULT_INSTEAD_OF_WIDENING_THE_CORPUS_UNTIL_SOMETHING_FIRED",
+   "affected_layers_only_on_revalidation": true
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "MORE_DEMONSTRATIONS_LOSES_ON_THE_TREE_S_OWN_MEASUREMENT__SIMILARITY_LOSES_ON_THE_MEASURED_FALSE_ACCEPT_RATE__A_NEW_LEARNER_LOSES_BECAUSE_ONE_IS_WIRED__MODEL_DRIVEN_EVOLUTION_LOSES_ON_ZERO_MODEL_DEPENDENCE_AND_ON_THE_EXTERNAL_EVIDENCE_THAT_UNCONTROLLED_EXTRACTION_DEGRADES_BELOW_NO_SKILL",
+   "routes_ranked": [
+    "MEASURE_WHICH_FIELDS_CONSTRAIN_AND_LABEL_BY_THE_EXISTING_LAW (selected)",
+    "BUY_THE_BOUNDARY_WITH_CHOSEN_PROBES (next round, needs the evidence unit first)",
+    "MORE_DEMONSTRATIONS",
+    "SIMILARITY_RETRIEVAL",
+    "MODEL_DRIVEN_SKILL_EVOLUTION"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_ORACLE_FOR_APPLICABILITY_IS_THE_RULE_S_OWN_BEHAVIOUR_OVER_A_CORPUS_DECLARED_IN_ADVANCE_SO_NO_PROJECT_SEMANTICS_ARE_NEEDED_AND_NONE_ARE_CLAIMED__A_SYNTHETIC_RECORD_IS_NECESSARY_FOR_THE_LABEL_LAW_BECAUSE_NO_REAL_RECORD_CARRIES_STATES_SO_THE_EARNABLE_CASE_COULD_NOT_OTHERWISE_BE_TESTED_AT_ALL"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-12T23:08:52Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FLIPS_NO_FAMILY",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "tournament": {
+   "proposal_id": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS",
+   "decisive_question": "DOES_ANYTHING_OTHER_THAN_A_SKILL_S_TOKEN_PATTERN_CONSTRAIN_WHERE_IT_APPLIES_AND_CAN_ANY_SHIPPED_SKILL_BE_CALLED_GENERALIZING_UNDER_THE_TREE_S_OWN_APPLICABILITY_LAW",
+   "falsifier_id": "PERTURBING_THE_MATCHER_ALSO_CHANGES_NOTHING_OR_A_RECORD_WITH_STATES_AND_A_CONTRASTING_FAILURE_IS_NOT_LABELLED_GENERALIZING_OR_THE_LEDGER_INVENTS_A_STATE",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_CIRCULARITY_COUNTEREXAMPLE_WAS_CONSIDERED_BEFORE_SHIPPING__A_RECORD_SCOPING_ITSELF_FROM_ITS_OWN_LANGUAGE_FIELD__AND_IS_PINNED_RED_BY_test_a_count_is_not_a_state_AND_BY_MUTATION_M3_WHICH_THE_SUITE_KILLS"
+  }
+ },
+ "next_step": "RECORD_STATES_NOT_COUNTS_IN_THE_SKILL_STORE_S_PROVENANCE_UNIT__THEN_WIRE_price_next_probe_INTO_THE_RECHECK_PATH_SO_THE_BOUNDARY_IS_BOUGHT_WITH_TWO_OBSERVATIONS_INSTEAD_OF_TEN_DEMONSTRATIONS__THEN_MAKE_THE_CLASS_FIELDS_CONSTRAINTS_INSIDE_THE_RULE_AFTER_NOT_BEFORE_THE_EVIDENCE_UNIT_EXISTS",
+ "route_frontier": {
+  "discovery_required": false,
+  "not_applicable_reason": "EVIDENCE_PRESERVATION_OF_A_MEASURED_FALSIFICATION__NO_NEW_CAPABILITY_IS_CLAIMED_AND_NO_EXTERNAL_ROUTE_IS_ADOPTED",
+  "challenger_routes": []
+ }
+}
