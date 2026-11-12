@@ -182,3 +182,67 @@ def test_main_writes_a_record_and_runs_nothing(tmp_path, capsys):
     assert record["per_fix"]["swe_bench_verified"]["a__b-1"] == [fix_shape.PUT_IN, "one inside", fix_shape.BUILT_IN, 2]
     assert record["expected_before"] == census.EXPECTED and set(record["code_sha256"]) >= {"canonical/runtime/fix_shape_v1.py"}
     assert "WROTE" in capsys.readouterr().out
+
+
+# --------------------------------------------------------------------------- #
+# a fix cut into its pieces
+# --------------------------------------------------------------------------- #
+TWO_BEFORE = "def f(a, b):\n    c = a\n    return c\n\n\ndef g(a):\n    return a\n"
+TWO_PATCH = "@@ -1,7 +1,7 @@\n def f(a, b):\n-    c = a\n+    c = abs(a)\n     return c\n \n \n def g(a):\n-    return a\n+    return a + zz"
+
+
+def test_a_fix_in_two_places_is_two_pieces_each_with_its_shape():
+    whole = census.of_pull_request({"files": [changed(before=TWO_BEFORE, patch=TWO_PATCH)]})
+    assert whole["shape"] == fix_shape.SEVERAL_PLACES
+    cut = census.pieces_of_pull_request({"instance_id": "a__b-1", "repo": "a/b", "files": [changed(before=TWO_BEFORE, patch=TWO_PATCH)]})
+    assert (cut["pieces"], cut["whole_things"], cut["problems"]) == (2, 0, 0)
+    assert cut["shapes"] == {fix_shape.PUT_IN: 2}
+    assert cut["pieces_that_can_be_listed"] == 1 and cut["every_piece_can_be_listed"] is False       # `zz` is held nowhere
+
+
+def test_every_piece_can_be_listed_when_each_needs_nothing_new():
+    patch = TWO_PATCH.replace("return a + zz", "return a + 1")
+    cut = census.pieces_of_pull_request({"instance_id": "a__b-1", "repo": "a/b", "files": [changed(before=TWO_BEFORE, patch=patch)]})
+    assert cut["pieces_that_can_be_listed"] == 2 and cut["every_piece_can_be_listed"] is True
+
+
+def test_a_name_that_another_piece_of_the_same_fix_brings_in_is_not_held():
+    """Both pieces use `zz`. Each piece is looked at with the other already made, so `zz` stands in
+    the unit; it still does not count, because the file did not hold it before the fix."""
+    before = "def f(a, b):\n    c = a\n    d = b\n    return c + d\n"
+    patch = "@@ -1,4 +1,4 @@\n def f(a, b):\n-    c = a\n-    d = b\n+    c = a + zz\n+    d = b + zz\n     return c + d"
+    cut = census.pieces_of_pull_request({"instance_id": "a__b-1", "repo": "a/b", "files": [changed(before=before, patch=patch)]})
+    assert cut["pieces"] == 2 and cut["pieces_that_can_be_listed"] == 0
+    held_here = fix_shape.shape("x = a\ny = zz\n", "x = a + zz\ny = zz\n")
+    not_held = fix_shape.shape("x = a\ny = zz\n", "x = a + zz\ny = zz\n", held={("name", "a")})
+    assert (held_here["needs"], not_held["needs"]) == (fix_shape.HELD, fix_shape.NEW)
+
+
+def test_a_definition_added_is_a_whole_thing_and_cannot_be_listed():
+    before = "def f(a):\n    return a\n"
+    patch = "@@ -1,2 +1,6 @@\n def f(a):\n-    return a\n+    return a + 1\n+\n+\n+def k():\n+    return 1"
+    cut = census.pieces_of_pull_request({"instance_id": "a__b-1", "repo": "a/b", "files": [changed(before=before, patch=patch)]})
+    assert cut["whole_things"] == 1 and cut["pieces_that_can_be_listed"] == cut["pieces"] == 1 and cut["every_piece_can_be_listed"] is False
+
+
+def test_a_pull_request_that_cannot_be_read_has_no_piece_that_can_be_listed():
+    cut = census.pieces_of_pull_request({"instance_id": "a__b-1", "error": "404", "files": []})
+    assert cut["pieces"] == 0 and cut["problems"] == 1 and cut["every_piece_can_be_listed"] is False
+    nothing = census.pieces_of_pull_request({"instance_id": "a__b-1", "files": [changed("docs/x.rst")]})
+    assert nothing["pieces"] == 0 and nothing["every_piece_can_be_listed"] is False
+
+
+def test_summarise_pieces():
+    rows = {
+        "a": {"pieces": 1, "whole_things": 0, "problems": 0, "pieces_that_can_be_listed": 1, "shapes": {fix_shape.LEAF: 1}, "every_piece_can_be_listed": True},
+        "b": {"pieces": 2, "whole_things": 0, "problems": 0, "pieces_that_can_be_listed": 2, "shapes": {fix_shape.PUT_IN: 2}, "every_piece_can_be_listed": True},
+        "c": {"pieces": 5, "whole_things": 1, "problems": 0, "pieces_that_can_be_listed": 3, "shapes": {fix_shape.PUT_IN: 3, fix_shape.EXPRESSION: 2}, "every_piece_can_be_listed": False},
+        "d": {"pieces": 0, "whole_things": 0, "problems": 1, "pieces_that_can_be_listed": 0, "shapes": {}, "every_piece_can_be_listed": False},
+    }
+    told = census.summarise_pieces(rows)
+    assert (told["tasks"], told["tasks_with_a_problem"], told["tasks_with_a_whole_thing"]) == (4, 1, 1)
+    assert (told["pieces"], told["pieces_that_can_be_listed"], told["share_of_pieces_that_can_be_listed"]) == (8, 6, 0.75)
+    assert told["pieces_by_shape"] == {fix_shape.PUT_IN: 5, fix_shape.LEAF: 1, fix_shape.EXPRESSION: 2}
+    assert told["tasks_of_which_every_piece_can_be_listed"] == 2 and told["of_those_by_number_of_pieces"] == {"1": 1, "2": 1}
+    assert told["all_tasks_by_number_of_pieces"] == {"0": 1, "1": 1, "2": 1, "4 or more": 1}
+    assert census.summarise_pieces({})["share_of_pieces_that_can_be_listed"] is None

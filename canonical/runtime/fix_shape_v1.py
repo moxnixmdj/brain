@@ -46,9 +46,9 @@ How "among the candidates" is decided without listing them for a whole file
 ---------------------------------------------------------------------------
 Two programs that differ are the same outside the innermost block of statements that holds every
 difference, and within that block outside one run of statements. Every change take_out_v1 makes
-touches one statement of one block. So only that statement is handed to take_out_v1, with one
-neighbour beside it so that "its block keeps a statement" is judged as in the whole program, and
-with the check that a candidate compiles made on the whole fixed program instead of on the part.
+touches one statement of one block. So only that statement is handed to take_out_v1, with a
+`pass` beside it where its block holds more, so that "its block keeps a statement" is judged as in
+the whole program, and with the check that a candidate compiles made on the whole program.
 One change is made on the owner of the block and not inside it, the else that is dropped; it is
 recognised here directly. The test file holds all of this against the full list of candidates.
 
@@ -249,12 +249,8 @@ def taken_out(found: dict[str, Any], *, backwards: bool = False) -> tuple[str, i
     if _nodes(left_from) > TOO_LARGE_TO_LIST:
         found["not_listed"] = True
         return None
-    if front > 0:                                                     # one neighbour, so that the block keeps a statement where it does
-        body_from, body_to = [block_from[front - 1]] + left_from, [block_from[front - 1]] + left_to
-    elif front + 1 < len(block_from):
-        body_from, body_to = left_from + [block_from[front + 1]], left_to + [block_from[front + 1]]
-    else:
-        body_from, body_to = left_from, left_to
+    beside = [ast.Pass()] if len(block_from) > 1 else []              # stands for the neighbours, so that the block keeps a statement where it does
+    body_from, body_to = beside + left_from, beside + left_to
     wanted = _module_text(body_to)
     for text, fewer, kind in take_out.candidates(_module_text(body_from), checked=False):
         if text == wanted:

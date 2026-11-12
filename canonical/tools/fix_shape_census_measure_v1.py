@@ -319,13 +319,17 @@ def main(argv: Sequence[str] | None = None) -> int:
             "can_be_listed_by_project": dict(collections.Counter(
                 records[name].get("repo", "?") for name, row in rows.items() if row["shape"] in fix_shape.SHAPES and fix_shape.can_be_listed(row)))}
         record["per_fix"]["swe_bench_verified"] = {name: _row(row) for name, row in rows.items()}
-        cut = {name: pieces_of_pull_request(found) for name, found in records.items()}
+        print("swe-bench verified", json.dumps(record["sets"]["swe_bench_verified"]["by_shape"]), flush=True)
+        cut = {}
+        for done, (name, found) in enumerate(records.items()):
+            cut[name] = pieces_of_pull_request(found)
+            if (done + 1) % 100 == 0:
+                print("cut into pieces:", done + 1, "tasks,", round(time.time() - started, 1), "s", flush=True)
         record["sets"]["swe_bench_verified_cut_into_pieces"] = summarise_pieces(cut)
         record["per_fix"]["swe_bench_verified_cut_into_pieces"] = {
             name: [row["pieces"], row["pieces_that_can_be_listed"], row["whole_things"], row["every_piece_can_be_listed"]] for name, row in cut.items()}
         record["per_fix_key_cut_into_pieces"] = "[pieces, pieces that can be listed, whole things, every piece can be listed]"
         print("cut into pieces", json.dumps(record["sets"]["swe_bench_verified_cut_into_pieces"]), flush=True)
-        print("swe-bench verified", json.dumps(record["sets"]["swe_bench_verified"]["by_shape"]), flush=True)
 
     record["seconds"] = round(time.time() - started, 1)
     args.out.parent.mkdir(parents=True, exist_ok=True)
