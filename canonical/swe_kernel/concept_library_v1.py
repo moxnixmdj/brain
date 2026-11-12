@@ -91,14 +91,24 @@ _SAFE_DICT_MUT_METHODS: frozenset[str] = frozenset({"setdefault", "pop", "update
 # ---------------------------------------------------------------------------
 # Constant abstraction in the sleep phase.
 #
-# Measured 2026-11-11 (`compression_binding_constraint_probe_20261111_v1.py`): with this OFF,
-# `sleep_abstract` admits ZERO abstractions on corpora whose members differ only by a literal,
-# because holes are drawn from `ast.Name` alone. Differing-by-a-literal is the commonest way two
-# real programs differ, so the compressor could only rediscover structure canonicalization had
-# already removed. `G_t` stays empty and nothing compounds.
+# STATUS: REFUTED ON REAL CODE (2026-11-11). DO NOT FLIP WITHOUT A NEW MEASUREMENT.
 #
-# The switch exists so the baseline stays measurable after the fix lands. It is not a feature
-# flag: flip it to True and delete it once the referee is green.
+# The idea: with this OFF, holes are drawn from `ast.Name` alone, so programs differing only by a
+# literal canonicalize to different keys and cannot be compressed together.
+#
+#   TOY CORPORA   `compression_binding_constraint_probe_20261111_v1.py`, 4 constructed families:
+#                 0/4 admitted with this OFF; 1/4 with it ON, and that one halved a held-out
+#                 program (shrink 0.5) execution-equivalently. Looked like the fix.
+#   REAL CORPUS   `compression_real_corpus_probe_20261111_v1.py`, 40 of this repository's own
+#                 non-test Python files, 20 held out, two split strategies:
+#                   OFF -> 6 concepts admitted, 6 and 3 teach files rewritten, 0/20 held out
+#                   ON  -> 0 concepts admitted
+#                 Making constants hole-eligible raises candidate arity, and arity is penalised
+#                 twice (Stitch node-savings law subtracts (k+1)*arity; the canonicalizer caps
+#                 holes at 4). On real code that drives admissions to zero.
+#
+# So constant holes buy one toy family and cost every real one. The switch stays OFF, kept only so
+# the negative result is reproducible. The real defect is elsewhere: see the two probe documents.
 # ---------------------------------------------------------------------------
 CONSTANT_HOLES_ENABLED: bool = False
 
@@ -696,6 +706,17 @@ def _freeze_output(val: Any, depth: int = 0) -> Any:
 
 def _expr_node_count(node: ast.AST) -> int:
     return sum(1 for _ in ast.walk(node) if isinstance(_, ast.expr))
+
+
+def _can_render_modules(mods: Sequence[ast.Module]) -> bool:
+    """True if every module survives `ast.unparse`. Used to skip a candidate whose corpus cannot
+    be rendered, instead of letting one unparseable file kill the whole sleep phase."""
+    try:
+        for m in mods:
+            ast.unparse(m)
+    except (ValueError, SyntaxError, RecursionError):
+        return False
+    return True
 
 
 def _canonicalize_pure_subtree(
@@ -2040,6 +2061,15 @@ class CompoundingConceptLibrary:
                     if canon is None:
                         continue
                     canon_ast, hole_vars, _arg_nodes = canon
+                    try:
+                        # `ast.unparse` cannot render every real program: nested same-quote
+                        # f-strings raise ValueError on Python 3.11, measured on this repository's
+                        # own sources. A candidate we cannot render can never be admitted, but an
+                        # uncaught raise here kills the whole sleep phase and every other
+                        # candidate in the corpus with it. Skip the candidate, not the round.
+                        ast.unparse(canon_ast)
+                    except (ValueError, SyntaxError, RecursionError):
+                        continue
                     dump_key = ast.dump(canon_ast, include_attributes=False)
                     entry = candidates.setdefault(
                         dump_key,
@@ -2061,7 +2091,17 @@ class CompoundingConceptLibrary:
         ]
         viable.sort(key=lambda d: (-(len(d["occurrences"]) - 1) * d["node_count"], d["expr_src"]))
 
-        baseline_corpus_src = "\n\n".join(ast.unparse(m) for m in parsed_programs)
+        # `ast.unparse` cannot render every real program (nested same-quote f-strings raise
+        # ValueError on Python 3.11, measured on this repository's own sources). A module we
+        # cannot render is excluded from the byte baseline rather than being allowed to abort the
+        # sleep phase for the entire corpus.
+        _rendered_baseline: list[str] = []
+        for _m in parsed_programs:
+            try:
+                _rendered_baseline.append(ast.unparse(_m))
+            except (ValueError, SyntaxError, RecursionError):
+                continue
+        baseline_corpus_src = "\n\n".join(_rendered_baseline)
         baseline_bytes = executable_ast_bytes(baseline_corpus_src)
         admitted: list[dict[str, Any]] = []
 
@@ -2114,6 +2154,8 @@ class CompoundingConceptLibrary:
                 continue
             params_str = ", ".join(f"_v{i}" for i in range(arity))
             concept_def_src = f"def {cid}({params_str}):\n    return {expr_src}\n\n"
+            if not _can_render_modules(rewritten_mods):
+                continue
             after_corpus_src = concept_def_src + "\n\n".join(ast.unparse(m) for m in rewritten_mods)
             after_bytes = executable_ast_bytes(after_corpus_src)
             # Stitch exact AST node-savings law: U(c) = (k - 1)*|E| - (k + 1)*arity - (k + 2) > 0

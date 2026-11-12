@@ -215,6 +215,69 @@ demonstration, not a mandate. The next gate to open is named in §6.
 
 ---
 
+## 4b. Addendum, same day: I tested my own fix on real code and it failed
+
+The §4 result was one family out of three, on four programs I wrote. That is the weakest evidence
+for the strongest claim, because a corpus of hand-made programs is exactly the input where
+"discovered shared structure" and "I wrote the same shape twice" are indistinguishable.
+
+`brain_unified_model_v1.py:1796` feeds `sleep_abstract` **every non-test `.py` file in a
+repository**, so the corpus can be real code. I wrote
+`compression_real_corpus_probe_20261111_v1.py` to do that on this repository: 40 files to teach,
+20 held out, with two split strategies — `blocked` (different subsystems) and `interleaved`
+(every 3rd file, same subsystems) — so that "0 held-out rewrites" cannot be waved off as "the
+held-out files are from a different part of the tree".
+
+```
+split         arm  admit  teach-rw  held-rw  all-ok  verdict
+------------------------------------------------------------------
+blocked       off      6         6        0    True  REGRESSES
+blocked       on       0         0        0    True  EMPTY
+interleaved   off      6         3        0    True  REGRESSES
+interleaved   on       0         0        0    True  EMPTY
+```
+
+`teach-rw` is the control that makes `held-rw` interpretable: it proves the wake path works, so
+"0 held-out rewrites" means *does not generalize*, not *is broken*.
+
+**Two findings, and the first one is about my own work.**
+
+**1. My constant-holes change is refuted on real code.** 6 concepts admitted with it off, **0**
+with it on. Making constants hole-eligible raises candidate arity, and arity is punished twice:
+the Stitch node-savings law subtracts `(k+1)*arity`, and the canonicalizer caps holes at 4. On
+toy programs that costs nothing; on real programs it drives admissions to zero. Had I flipped the
+switch on the strength of §4, I would have destroyed the only working admissions the system has.
+The switch stays `False`, with the refutation recorded at the definition so nobody flips it.
+
+**2. The compressor fits its corpus and generalizes to nothing.** This is the finding that
+matters, and it is now measured rather than argued:
+
+- It **admits** — 6 concepts. `G_t` is not empty because admission is broken.
+- Those concepts **rewrite their own corpus** — 6 files in one split, 3 in the other.
+- They fire on **0 of 20 held-out files, in both splits**.
+
+That is the definition of a template menu, measured at the place the system would actually run.
+And the reason is visible in the objective, not in any bug: `sleep_abstract` maximizes compression
+of the corpus it was handed (`Delta B_exec < 0`, Stitch node-savings). **There is no held-out term
+anywhere in it.** An objective that only rewards fitting gets you fitting. Stitch and DreamCoder
+get generalization from a *prior* over unseen programs (`P(L)`, `P(p|L)`, plus a recognition
+model); LILO gets it by refusing any abstraction that is not compressive. This tree has the
+compression filter and none of the generalization pressure.
+
+So the ranking in §6 changes. Move 1 is no longer "open the next admission gate" — the gates are
+not the binding constraint, since 6 concepts already get through. The binding constraint is that
+**nothing in the system ever demands that a learned abstraction work on a program it was not fit
+on.**
+
+Two robustness fixes did land on the way, both in shipped code paths and both needed to run the
+compressor on real input at all: `ast.unparse` cannot render some real f-strings on Python 3.11
+(nested same-quote), and an uncaught raise there aborted the entire sleep phase for the whole
+corpus. Candidates and modules that cannot be rendered are now skipped instead of fatal.
+
+One test, `test_semantic_unification_v1.py::test_join_admission_direction_is_not_claimed`, fails —
+it also fails on the base commit with my changes stashed. It is pre-existing, one of the 344 in
+the honest baseline, and is not attributed to this work.
+
 ## 5. Where the outside world actually is (2026-11), so "most advanced on the planet" is calibrated
 
 | Benchmark | Top of the board | Human | What it really says |
@@ -260,21 +323,30 @@ Two more external facts that bound the whole plan:
 
 ### Ranked moves
 
-**1. Open the next admission gate, not the first one that looked broken.** (today's finding)
-The compressor's real filter should be *compressive*, as in Stitch and LILO. Right now three
-stricter filters sit in front of it and reject real structure: totality-over-a-fixed-grid (G3),
-the `math.*` purity whitelist (G2), and — until the switch is on — constants (G1).
-*Next experiment, pre-registered:* relax G3 to "total on the domain the concept is admitted for"
-(the entry already carries `domain_kind`), and widen G2 to a whitelist of pure `math` functions.
-*Falsification:* if F1 and F4 then admit concepts that do **not** compress a held-out literal, the
-gates were protective, not obstructive — revert and keep them.
+**1. Put generalization into the objective.** (today's finding — this is now the binding
+constraint, and it supersedes the gate work I proposed earlier in the day)
+The compressor already admits (6 concepts on real code) and already rewrites its own corpus. What
+it never does is fire on a program it was not fit on: **0/20 held-out files, two split
+strategies**. Nothing in `sleep_abstract` asks it to. Concretely: split every corpus, admit only
+abstractions that compress *both* halves, and treat the held-out compression ratio as the
+admission score instead of `Delta B_exec`. The probe to reuse is
+`compression_real_corpus_probe_20261111_v1.py` — the harness, the teach/held control, and the
+parse/import/undefined-name checks are already written.
+*Falsification:* if held-out-gated admission yields 0 concepts on the real corpus, then the
+representation itself is the wall (G2/G3 territory) and the gates go back to the top of the list.
+Either outcome is informative; only one of them means the compression path is viable.
 
 **2. Fix the organ bridge so multi-statement organs can enter `G_t`.**
-The library already supports statement-bodied concepts (`is_stmt_fn`, `render_helper_def`);
-only the one-word bridge predicate `len(fn.body) == 1 and isinstance(fn.body[0], ast.Return)`
-rejects them. This is the defect the 2026-11-04 document identified. It is a one-function change
-and it is downstream-ready. Do it **after** move 1, and gate it on the same compressive test —
-admitting one-off organs is how a library becomes a template menu.
+The library already supports statement-bodied concepts (`is_stmt_fn`, `render_helper_def`); only
+the one-word bridge predicate `len(fn.body) == 1 and isinstance(fn.body[0], ast.Return)` rejects
+them. Separately, `higher_order_plotkin_lgg` — a real Higher-Order Plotkin anti-unifier — returns
+`None` at `if not ordered_loop` before it will look at any straight-line function, so the
+multi-statement path is unreachable for straight-line code. Gate it on held-out compression, not
+on corpus compression: admitting one-off organs is how a library becomes a template menu.
+
+*Demoted:* relaxing the totality gate (G3) and the `math.*` purity whitelist (G2) is no longer
+first. 6 concepts already get through the gates; opening more gates grows a library that does not
+generalize. It is worth doing only after move 1 exists to measure the result against.
 
 **3. Make `G_t` growth the project's primary metric, and make CI fail when it is 0.**
 Every learning claim in this repo is currently argued from solve counts and speedups, which is
