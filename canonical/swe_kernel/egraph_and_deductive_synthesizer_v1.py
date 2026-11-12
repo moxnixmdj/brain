@@ -29,6 +29,53 @@ def _run_cmd(argv: list[str], cwd: Path, timeout: float = 20.0) -> tuple[int, st
     return (int(rc) if rc is not None else 124), out_b.decode("utf-8", errors="replace"), err_b.decode("utf-8", errors="replace")
 
 
+#: Budget for ONE measurement of a project's own test suite -- the baseline
+#: before an edit, the verification after it, and the runner they share.  The
+#: implicit 20 s helper default refused every project whose suite takes longer
+#: than 20 s: measured 2026-11-12, a 21 s fixture suite died at 20.3 s with
+#: PROJECT_TEST_BASELINE_UNMEASURABLE while it was still running (rc=-9 at the
+#: deadline).  300 s is the reviewed budget for this gate; past it the
+#: measurement still refuses -- fail-closed, never partial, and never silently
+#: empty (a suite that loads nothing while test files exist refuses by name,
+#: see BASELINE_NO_DISCOVERABLE_TESTS).
+BASELINE_BUDGET_S = 300.0
+
+#: Exit code a suite child uses to say "test files exist here and I loaded
+#: zero tests" -- an empty measurement, not a green one.
+_BASELINE_EMPTY_MARKER = "BASELINE_NO_DISCOVERABLE_TESTS"
+
+
+def _test_files_present(search_dir: Path) -> bool:
+    """True when unittest discovery's OWN scope holds test-shaped files.
+
+    Mirrors the loader's traversal: direct ``test*.py`` / ``*_test.py`` files at
+    this level, descending only into importable packages (directories with an
+    ``__init__.py``) -- a non-package directory is invisible to ``discover``, so
+    files inside one are not evidence that this measurement was empty.
+    """
+    try:
+        if not search_dir.is_dir():
+            return False
+        for entry in search_dir.iterdir():
+            if entry.is_file() and entry.suffix == ".py" and (
+                    entry.name.startswith("test") or entry.name.endswith("_test.py")):
+                return True
+            if entry.is_dir() and (entry / "__init__.py").is_file() and _test_files_present(entry):
+                return True
+    except OSError:
+        return False
+    return False
+
+
+def _empty_measurement(rc: int, err: str, search_dir: Path) -> tuple[int, bool]:
+    """Classify a child's exit: (effective rc, refusal-due-to-empty-measurement)."""
+    if rc == 3 and _BASELINE_EMPTY_MARKER in err:
+        if _test_files_present(search_dir):
+            return rc, True
+        return 0, False  # an empty project: nothing to measure, nothing to refuse
+    return rc, False
+
+
 def _compare_in_child(before: str, after: str, target: Path, symbol: str, integer_range: bool, *, timeout: float = 30) -> dict[str, Any]:
     payload = {'before': before, 'after': after, 'target': str(target), 'symbol': symbol, 'integer_range': integer_range}
     worker = r"""
@@ -97,9 +144,16 @@ def _collect_project_bad_tests(project_root: Path, pkg_dir: Path | None = None) 
         f"import json, sys, unittest; sys.path.extend({py_paths!r}); "
         f"suite = unittest.defaultTestLoader.discover({str(search_dir)!r}); "
         "res = unittest.TestResult(); suite.run(res); "
-        "sys.stdout.write(json.dumps([t.id() for t, _ in (res.failures + res.errors)]))"
+        "sys.stdout.write(json.dumps([t.id() for t, _ in (res.failures + res.errors)])); "
+        "empty = suite.countTestCases() == 0; "
+        f"sys.stderr.write({_BASELINE_EMPTY_MARKER + chr(10)!r} if empty else ''); "
+        "raise SystemExit(3 if empty else 0)"
     )
-    rc, out, _ = _run_cmd([sys.executable, "-B", "-P", "-c", probe], cwd=project_root)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", probe],
+                            cwd=project_root, timeout=BASELINE_BUDGET_S)
+    rc, empty_refusal = _empty_measurement(rc, err, search_dir)
+    if empty_refusal:
+        raise RuntimeError("PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE")
     if rc != 0 or not out.strip():
         raise RuntimeError("PROJECT_TEST_BASELINE_UNMEASURABLE")
     try:
@@ -151,9 +205,15 @@ def _verify_no_new_test_failures(
         "res = unittest.TestResult(); suite.run(res); "
         "new_bad = [(t.id(), tb) for t, tb in (res.failures + res.errors) if t.id() not in before]; "
         "sys.stdout.write(json.dumps({'ok': not new_bad, 'detail': new_bad[0][1][-300:] if new_bad else ''})); "
-        "raise SystemExit(0 if not new_bad else 1)"
+        "empty = suite.countTestCases() == 0; "
+        f"sys.stderr.write({_BASELINE_EMPTY_MARKER + chr(10)!r} if empty else ''); "
+        "raise SystemExit(3 if empty else (0 if not new_bad else 1))"
     )
-    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", runner_code], cwd=project_root)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", runner_code],
+                            cwd=project_root, timeout=BASELINE_BUDGET_S)
+    rc, empty_refusal = _empty_measurement(rc, err, search_dir)
+    if empty_refusal:
+        return False, "PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE"
     return rc == 0, (out + "\n" + err).strip()
 
 
@@ -171,9 +231,16 @@ def _run_project_tests(project_root: Path, pkg_dir: Path | None = None) -> tuple
         f"import io, sys, unittest; sys.path[:0] = {py_paths!r}; "
         f"suite = unittest.defaultTestLoader.discover({str(search_dir)!r}); "
         "buf = io.StringIO(); res = unittest.TextTestRunner(stream=buf, verbosity=1).run(suite); "
-        "sys.stdout.write(buf.getvalue()); raise SystemExit(0 if res.wasSuccessful() else 1)"
+        "sys.stdout.write(buf.getvalue()); "
+        "empty = suite.countTestCases() == 0; "
+        f"sys.stderr.write({_BASELINE_EMPTY_MARKER + chr(10)!r} if empty else ''); "
+        "raise SystemExit(3 if empty else (0 if res.wasSuccessful() else 1))"
     )
-    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_code], cwd=project_root)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_code],
+                            cwd=project_root, timeout=BASELINE_BUDGET_S)
+    rc, empty_refusal = _empty_measurement(rc, err, search_dir)
+    if empty_refusal:
+        return False, "PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE"
     return rc == 0, (out + "\n" + err).strip()
 
 
