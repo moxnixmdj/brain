@@ -153,6 +153,168 @@ def test_a_stale_bundle_cannot_reactivate_a_locally_refuted_rule(refuted):
 
 
 # ---------------------------------------------------------------------------
+# all 9 sibling candidate-generator & cross-language paths
+# ---------------------------------------------------------------------------
+def test_every_candidate_generator_refuses_a_refuted_rule(refuted):
+    from canonical.swe_kernel.boundary_disjunction_normalization_v1 import (
+        propose_semantic_swaps,
+    )
+    from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
+        propose_egraph_algebraic_rewrites,
+    )
+    from canonical.swe_kernel.operator_generalization_v1 import propose_operator_swaps
+    from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+        iter_cst_skeleton_candidates,
+    )
+    from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
+        anti_unify_code_rule,
+        iter_crystallized_code_rule_candidates,
+        narrow_rule_at_apply_time,
+    )
+
+    store, _ = refuted
+    rule = store.lookup_rules("python")[0]
+    assert rule["state"] == "INVALIDATED"
+    assert list(iter_crystallized_code_rule_candidates(VICTIM, rule)) == []
+    assert narrow_rule_at_apply_time(rule) is None
+    assert list(propose_operator_swaps(VICTIM, rule)) == []
+    assert list(
+        propose_semantic_swaps(
+            "def tier(a):\n    return a < 50 or a == 50\n",
+            rule,
+            operator_swaps=propose_operator_swaps,
+        )
+    ) == []
+    assert list(
+        iter_cst_skeleton_candidates(
+            "fn tier(a: i32) -> bool { a <= 50 }\n",
+            rule,
+            target_language="rust",
+        )
+    ) == []
+
+    alg_rule = anti_unify_code_rule(
+        "def f(a, b):\n    return a * b + a * 1\n",
+        "def f(a, b):\n    return a * (b + 1)\n",
+    )
+    assert propose_egraph_algebraic_rewrites("def g(x, y):\n    return x * y + x\n", alg_rule) != []
+    alg_rule["state"] = "INVALIDATED"
+    assert propose_egraph_algebraic_rewrites("def g(x, y):\n    return x * y + x\n", alg_rule) == []
+
+
+def test_cross_language_recall_transfers_active_rule_and_refuses_refuted_across_all_six_languages(tmp_path):
+    """One active Python lesson transfers across all 6 other languages; once refuted, all 6 refuse."""
+    from canonical.swe_kernel.language_neutral_skill_bridge_v1 import (
+        cross_language_candidates,
+        recall_across_languages,
+    )
+    from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+        recall_across_languages_cst,
+    )
+
+    store = VerifiedSkillStore(db_path=tmp_path / "poly.sqlite", seed=False)
+    res = store.crystallize_code_fix(
+        before_snippet="def f(xs, cap):\n    return len(xs) <= cap\n",
+        after_snippet="def f(xs, cap):\n    return len(xs) < cap\n",
+        language="python",
+        error_class="boundary",
+    )
+    skill_id = res["skill_id"]
+
+    targets = {
+        "rust": "fn g(xs: &[i32], cap: usize) -> bool {\n    xs.len() <= cap\n}\n",
+        "go": "package p\nfunc g(xs []int, cap int) bool {\n    return len(xs) <= cap\n}\n",
+        "typescript": "export function g(xs: number[], cap: number): boolean {\n    return xs.length <= cap;\n}\n",
+        "javascript": "function g(xs, cap) {\n    return xs.length <= cap;\n}\n",
+        "java": "class C {\n    static boolean g(java.util.List<Integer> xs, int cap) {\n        return xs.size() <= cap;\n    }\n}\n",
+        "cpp": "#include <vector>\nbool g(const std::vector<int>& xs, std::size_t cap) {\n    return xs.size() <= cap;\n}\n",
+    }
+
+    # Positive control: while ACTIVE, the single Python lesson transfers across all 6 languages.
+    for lang, src in targets.items():
+        hit = store.recall_and_apply_verified(
+            source_text=src, language=lang, verifier=lambda c: "<" in c and "<=" not in c
+        )
+        assert hit is not None, f"expected active rule to transfer to {lang}"
+
+    # Refute the Python rule on a spec counterexample where the cap is inclusive.
+    ref = store.refine_scope_from_counterexample(
+        skill_id,
+        {"label": "inclusive_cap", "language": "python", "source_text": "def h(items, limit):\n    return len(items) <= limit\n"},
+        verifier=lambda c: "<=" in c,
+    )
+    assert ref["action"] == "INVALIDATED"
+
+    # Negative control: once INVALIDATED, neither lexical bridge, CST bridge, nor any of the 6 target languages may fire.
+    assert cross_language_candidates(store, source_language="python", target_language="javascript") == []
+    assert recall_across_languages(
+        store,
+        source_text="function g(a, b) { return a <= b; }\n",
+        target_language="javascript",
+        verifier=lambda c: True,
+    ) is None
+    assert recall_across_languages_cst(
+        store,
+        source_text=targets["rust"],
+        target_language="rust",
+        verifier=lambda c: True,
+    ) is None
+    for lang, src in targets.items():
+        assert store.recall_and_apply_verified(
+            source_text=src, language=lang, verifier=lambda c: True
+        ) is None, f"refuted rule still fired in {lang}"
+
+
+def test_egraph_synthesizer_impact_slices_large_test_suite_and_scopes_extract_constant(tmp_path):
+    """Rank #1 from TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1: >60 test files slice to impacted tests."""
+    from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
+        structural_refactor_python,
+    )
+
+    pkg = tmp_path / "pkg"
+    tests = tmp_path / "tests"
+    pkg.mkdir()
+    tests.mkdir()
+    (pkg / "__init__.py").write_text("", encoding="utf-8")
+    mod = pkg / "pricing.py"
+    mod.write_text(
+        "def stated_token(x):\n    return x[1]\n\n"
+        "def compute_fee(amount):\n    return amount * 42\n",
+        encoding="utf-8",
+    )
+    # Create 64 unrelated test files + 1 referencing test file (> 60 threshold).
+    for idx in range(64):
+        (tests / f"test_unrelated_{idx:03d}.py").write_text(
+            "import unittest\nclass T(unittest.TestCase):\n    def test_ok(self):\n        self.assertEqual(1, 1)\n",
+            encoding="utf-8",
+        )
+    (tests / "test_pricing.py").write_text(
+        "import unittest\nfrom pkg.pricing import stated_token, compute_fee\n"
+        "class TP(unittest.TestCase):\n"
+        "    def test_both(self):\n"
+        "        self.assertEqual(stated_token(['a', 'b']), 'b')\n"
+        "        self.assertEqual(compute_fee(2), 84)\n",
+        encoding="utf-8",
+    )
+
+    # 1. Scoping to `stated_token` (which has only `1`, not a magic constant) refuses cleanly without stealing `42` from `compute_fee`.
+    r_no_magic = structural_refactor_python(
+        mod, "refactor the function stated_token in pkg/pricing.py to extract the constant"
+    )
+    assert r_no_magic["verified"] is False
+    assert r_no_magic["reason"] == "NO_MAGIC_CONSTANT_FOUND"
+
+    # 2. Scoping to `compute_fee` extracts `42` into `EXTRACTED_CONSTANT` and verifies the sliced test suite.
+    r_ok = structural_refactor_python(
+        mod, "refactor the function compute_fee in pkg/pricing.py to extract the constant"
+    )
+    assert r_ok["verified"] is True
+    assert r_ok["operation"] == "extract_constant"
+    assert r_ok["constant_value"] == 42
+    assert "EXTRACTED_CONSTANT = 42" in mod.read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
 # the probe runs, is exercised here every time, and now agrees the hole is closed
 # ---------------------------------------------------------------------------
 def test_the_probe_reports_enforcement_and_exits_zero():
@@ -162,6 +324,8 @@ def test_the_probe_reports_enforcement_and_exits_zero():
     assert report["refutation_action"] == "INVALIDATED"
     assert report["public_view_includes_refuted"] is True
     assert report["primitive_applies_refuted_rule"] is False
+    assert report["any_path_applies_refuted_rule"] is False
+    assert all(v is False for v in report["cross_language_recall_fires_by_lang"].values())
     assert report["recall_strict_refused"] is True
     assert report["recall_permissive_refused"] is True
     assert probe.main([]) == 0

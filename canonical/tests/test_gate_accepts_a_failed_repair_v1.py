@@ -185,10 +185,10 @@ def test_the_repairable_fixture_really_is_repairable_and_really_is_broken():
     with tempfile.TemporaryDirectory(prefix="repairable_") as tmp:
         (Path(tmp) / "test_calc.py").write_text(REPAIRABLE_FIXTURE["test_calc.py"], encoding="utf-8")
         (Path(tmp) / "calc.py").write_text(repaired, encoding="utf-8")
-        good = subprocess.run([sys.executable, "-c", probe], cwd=tmp,
+        good = subprocess.run([sys.executable, "-B", "-c", probe], cwd=tmp,
                               capture_output=True, text=True, timeout=120)
         (Path(tmp) / "calc.py").write_text(REPAIRABLE_FIXTURE["calc.py"], encoding="utf-8")
-        bad = subprocess.run([sys.executable, "-c", probe], cwd=tmp,
+        bad = subprocess.run([sys.executable, "-B", "-c", probe], cwd=tmp,
                              capture_output=True, text=True, timeout=120)
     assert good.returncode == 0, good.stderr[-400:]
     assert bad.returncode != 0, "the starting fixture already passes: there is nothing to repair"
