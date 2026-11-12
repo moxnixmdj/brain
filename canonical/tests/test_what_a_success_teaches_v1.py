@@ -155,9 +155,17 @@ def test_the_registry_totals_match_the_document():
     reg = M.measure_registry(caps)
     assert reg["capabilities"] == 145
     assert reg["precondition_facts"] == 125
-    assert reg["fact_classes"] == {"PROVIDED": 100, "SENSED": 14, "BLIND": 11}
-    assert reg["capabilities_with_blind_precondition"] == 10
-    assert reg["capabilities_fully_decidable_now"] == 135
+    # 2026-11-12, `arena/156d21d6-brain`: nine facts that round 3 measured BLIND
+    # are now decided by honest sensors (git route, pypi route, network route,
+    # five chart-subsystem probes -- chart answered FALSE here: PIL and
+    # tesseract are absent, and absence is information). One fact stays blind
+    # on purpose: `source.candidate.provenance.verified` has no producer and no
+    # honest sensor (a file scan would fabricate "verified"). The pins before
+    # this round said SENSED 14 / BLIND 11 and were already stale against the
+    # tree (the network sensor had moved one fact without a pin update).
+    assert reg["fact_classes"] == {"PROVIDED": 100, "SENSED": 24, "BLIND": 1}
+    assert reg["capabilities_with_blind_precondition"] == 2
+    assert reg["capabilities_fully_decidable_now"] == 143
 
 
 def test_the_blind_premises_are_precisely_the_ones_nothing_claims():
