@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 331,
+  "knowledge_documents": 332,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6739,
+  "research_index_records": 6740,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d94aeb00b01f70cd4d7018762d0fd535a7c10828045f4657051d7324363a01ac"
+  "value": "c790cf9fc345fae5be0d9ce83fd1a89392735c604dcaa749824cba7a2459fa3d"
  },
  "engines": [
   {
@@ -45204,6 +45204,81 @@
     "refused",
     "still",
     "verified"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6336,
+   "headings": [
+    "A use nobody showed is settled by the project's own check",
+    "1. What was built",
+    "2. The measurement, on other people's commits",
+    "3. Receipts",
+    "4. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.md",
+   "sha256": "835861504168922e00524aba4ede586ebcdd5017468a2cde405bb3244d2e0b17",
+   "summary": "**2026-11-12.** Base `fe07e791`. Branch `arena/dcaf3b90-brain`. Follows #6686.",
+   "terms": {
+    "6686": 5,
+    "action": 3,
+    "all": 3,
+    "bundle": 3,
+    "cannot": 5,
+    "canonical": 5,
+    "change": 5,
+    "changed": 7,
+    "check": 16,
+    "code": 6,
+    "commit": 3,
+    "commits": 5,
+    "different": 3,
+    "domain": 3,
+    "edit": 4,
+    "every": 4,
+    "example": 4,
+    "examples": 3,
+    "fails": 3,
+    "file": 6,
+    "files": 5,
+    "kept": 4,
+    "kind": 4,
+    "kinds": 6,
+    "left": 6,
+    "lesson": 7,
+    "never": 4,
+    "no": 4,
+    "not": 9,
+    "nothing": 4,
+    "one": 10,
+    "only": 6,
+    "other": 5,
+    "place": 8,
+    "places": 7,
+    "project": 4,
+    "python3": 4,
+    "reading": 5,
+    "run": 4,
+    "same": 4,
+    "set": 6,
+    "settled": 4,
+    "statement": 5,
+    "test": 7,
+    "tried": 6,
+    "try": 6,
+    "way": 4,
+    "wider": 4
+   },
+   "title": "A use nobody showed is settled by the project's own check",
+   "title_terms": [
+    "check",
+    "nobody",
+    "own",
+    "project",
+    "settled",
+    "showed",
+    "use"
    ]
   },
   {
@@ -70508,10 +70583,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1133,
+  "included_source_count": 1134,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9c692af98c16ee2f220d4f2e2bee91debe565ae1348480c115ee28e1772e81c2"
+  "source_tree_digest": "35680374ac01142239e80025f1a0b7b377f75a3083e4604002eaa7292c643d72"
  },
  "research_index": [
   {
@@ -219574,6 +219649,33 @@
     "requests": 2,
     "sixteen": 3,
     "were": 3
+   }
+  },
+  {
+   "action_id": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b7d1d3342cd909a920a6023e298165a5cb84a486c0d3c82d4af17d8f814abde8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_use_nobody_showed_is_settled_by_the_projects_own_check_20261112_v1": 1,
+    "a_use_nobody_showed_was_refused_or_left__on_the_held_out_set_the_refusal_prevented_no_wrong_edit_and_cost_18_of_59_right_ones__one_example_cannot_say_which_parts_of_the_changed_code_matter_and_nothing_asked_the_projects_own_tests": 1,
+    "adapt_the_taught_program_so_the_places_the_examples_do_not_settle_are_tried_against_the_projects_own_check__kept_only_when_the_check_passes_with_the_change_and_fails_when_the_place_is_made_to_fail__and_the_answer_is_written_back_into_the_lesson": 1,
+    "check": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "nobody": 1,
+    "one_taught_sentence_more__on_the_held_out_commits_of_other_projects_a_sufficient_check_raises_agreement_with_the_people_from_116_to_141_of_169_statements_and_on_the_first_set_from_30_to_69_of_103__with_zero_statements_changed_that_the_people_left_alone": 1,
+    "own": 1,
+    "projects": 1,
+    "settled": 1,
+    "showed": 1,
+    "use": 1,
+    "v1": 1
    }
   },
   {

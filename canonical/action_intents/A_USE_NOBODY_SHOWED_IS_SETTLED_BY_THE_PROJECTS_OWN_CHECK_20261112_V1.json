@@ -1,0 +1,479 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1",
+ "action_intent_id": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asks why the system cannot be shown an advanced coding action once and then keep it for good. After the previous change a change shown once is kept in a lesson file and repeated, but a use nobody showed is refused: measured on the held-out commits of other projects, that refusal prevented no wrong edit and cost 18 of 59 right ones. This change lets the project's own check settle what the examples do not: beside the proven rules the lesson is read more widely (each part the change merely copied, when it starts from a variable, may be any other code), the places only that reading fits and the uses nobody showed are tried one at a time, and a try is kept only when two runs agree: no test that passed on the file as it is fails with the place changed, and a test that passes with it fails when that place is made to fail. A check that passes either way settles nothing and the place stays as it was. The check's answer is written back into the lesson as a new example, with the unsettled places named, so the next file needs no try. One new action on the same program, taught as one sentence through the existing compiler; no registry row, no change to the front door, no governance change.",
+ "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_THE_PLACES_THE_EXAMPLES_DO_NOT_SETTLE_ARE_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK__KEPT_ONLY_WHEN_THE_CHECK_PASSES_WITH_THE_CHANGE_AND_FAILS_WHEN_THE_PLACE_IS_MADE_TO_FAIL__AND_THE_ANSWER_IS_WRITTEN_BACK_INTO_THE_LESSON",
+ "causal_blocker": "A_USE_NOBODY_SHOWED_WAS_REFUSED_OR_LEFT__ON_THE_HELD_OUT_SET_THE_REFUSAL_PREVENTED_NO_WRONG_EDIT_AND_COST_18_OF_59_RIGHT_ONES__ONE_EXAMPLE_CANNOT_SAY_WHICH_PARTS_OF_THE_CHANGED_CODE_MATTER_AND_NOTHING_ASKED_THE_PROJECTS_OWN_TESTS",
+ "expected_parent_change": "A_PLACE_THE_EXAMPLES_DO_NOT_SETTLE_IS_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK_AND_KEPT_ONLY_WHEN_THE_CHECK_NOTICES_THAT_PLACE_FAILING__WHAT_THE_CHECK_SETTLED_IS_WRITTEN_INTO_THE_LESSON_SO_THE_NEXT_FILE_NEEDS_NO_TRY__A_CHECK_THAT_SEES_NOTHING_CHANGES_NOTHING",
+ "expected_parent_frontier_change": "ONE_TAUGHT_SENTENCE_MORE__ON_THE_HELD_OUT_COMMITS_OF_OTHER_PROJECTS_A_SUFFICIENT_CHECK_RAISES_AGREEMENT_WITH_THE_PEOPLE_FROM_116_TO_141_OF_169_STATEMENTS_AND_ON_THE_FIRST_SET_FROM_30_TO_69_OF_103__WITH_ZERO_STATEMENTS_CHANGED_THAT_THE_PEOPLE_LEFT_ALONE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_USE_NOBODY_SHOWED_WAS_REFUSED_OR_LEFT__ON_THE_HELD_OUT_SET_THE_REFUSAL_PREVENTED_NO_WRONG_EDIT_AND_COST_18_OF_59_RIGHT_ONES__ONE_EXAMPLE_CANNOT_SAY_WHICH_PARTS_OF_THE_CHANGED_CODE_MATTER_AND_NOTHING_ASKED_THE_PROJECTS_OWN_TESTS",
+ "falsification_condition": "A_TEST_THAT_PASSES_ON_THE_BASE_COMMIT_FAILS_ON_THIS_ONE__OR_A_TRIED_PLACE_IS_KEPT_ALTHOUGH_THE_CHECK_DOES_NOT_FAIL_WHEN_THAT_PLACE_IS_MADE_TO_FAIL__OR_A_FILE_THE_CHECK_FAILS_ON_AFTER_THE_EDIT_IS_LEFT_EDITED__OR_ON_A_COMMIT_OF_ANOTHER_PROJECT_THE_TRIED_ARM_CHANGES_A_STATEMENT_THE_HUMAN_LEFT_ALONE__OR_A_LESSON_FILE_IS_USED_WHOSE_TEXT_AND_EXAMPLES_DISAGREE__OR_ANYTHING_IN_A_LESSON_OR_A_CHECK_RESULT_IS_TRUSTED_WITHOUT_BEING_RECOMPUTED",
+ "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_REGISTRY_ROW_IS_ADDED__RE_TEACHING_REPRODUCES_THE_TRACKED_BUNDLE_BYTE_FOR_BYTE__THE_FIVE_TEST_FILES_OF_THE_TAUGHT_ACTIONS_PASS_ON_A_FRESH_CLONE__THE_FRONT_DOOR_ANSWERS_THE_NEW_SENTENCE_ON_A_FRESH_CLONE",
+ "explicit_user_authorization": "Owner decisions in this session, 2026-11-11 and 2026-11-12. Asked how coding actions should reach the front door, the owner chose 'Teach it, in the sandbox'. The owner's standing question is why the system cannot be shown an action once and then keep it permanently; the report of #6686 named a test run after a repeated edit as the next step, and the owner's standing instruction of 2026-11-12 is to push and merge the work every time. No governance change. No guard is weakened.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+   "canonical/tools/teach_actions_v1.py",
+   "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json",
+   "canonical/tests/test_a_use_nobody_showed_is_settled_by_the_projects_own_check_v1.py",
+   "canonical/tools/edits_repeated_across_projects_v1.py",
+   "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "THE_SAME_TEACHER_FILES_AND_TARGET_FILES_OF_OTHER_PROJECTS_ARE_MEASURED_THREE_WAYS__REFUSING_UNSHOWN_USES__LEAVING_THEM__AND_TRYING_THEM_WITH_EVERY_TRY_SETTLED__THE_ONLY_DIFFERENCE_IS_THIS_CHANGE__THE_HELD_OUT_SET_WAS_NAMED_IN_THE_TOOL_BEFORE_ITS_COMMITS_WERE_COLLECTED_AND_COLLECT_REFUSES_TO_RUN_TWICE_ON_A_SET__EIGHT_DELIBERATE_BREAKS_OF_THE_NEW_CODE_EACH_FAIL_A_TEST"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS_NOT_PUBLIC_RUNNER_EVIDENCE__TESTS__THE_FIVE_TEST_FILES_OF_THE_TAUGHT_ACTIONS_PASS_246_OF_246_WITH_16_NEW_TESTS__RE_TEACHING_REPRODUCES_THE_TRACKED_BUNDLE_OF_11_SKILLS_BYTE_FOR_BYTE__FRONT_DOOR__A_FRESH_DATABASE_SEEDED_FROM_THE_BUNDLE_ANSWERS_remember_THEN_edit_THE_WAY_THE_LESSON_REMEMBERS_AND_TRY_THE_REST_WITH_THE_CHECK__PASS__COMPILED_WORKFLOW_SKILL__THE_TESTED_USE_IS_CHANGED_THE_UNTESTED_ONE_LEFT_AND_THE_LESSON_WIDENS_TO_A_BLANK_RECEIVER__INSIDE_THE_NAMESPACE_SANDBOX__ACROSS_PROJECTS__56_KINDS_OF_CHANGE_171_MERGED_COMMITS_266_FILES_COLLECTED_BY_A_RULE_FIXED_IN_ADVANCE__THE_HELD_OUT_SET_OF_40_KINDS_WAS_WRITTEN_INTO_THE_TOOL_BEFORE_ANY_OF_ITS_COMMITS_WAS_LOOKED_AT__FIRST_COMMIT_OF_A_KIND_TEACHES_EVERY_FILE_OF_ITS_OTHER_COMMITS_IS_A_QUESTION__SEEN_SET_103_STATEMENTS_THE_PEOPLE_CHANGED__REPEAT_30_SAME_0_DIFFERENT__TRIED_WITH_EVERY_TRY_SETTLED_69_SAME_2_DIFFERENT__HELD_OUT_SET_169_STATEMENTS__REPEAT_116_SAME_0_DIFFERENT__TRIED_141_SAME_1_DIFFERENT__STATEMENTS_CHANGED_THAT_THE_PEOPLE_LEFT_ALONE_0_IN_EVERY_ARM_ON_BOTH_SETS__THE_TRIED_ARM_IS_THE_CEILING_OF_A_SUFFICIENT_CHECK_BECAUSE_OTHER_PROJECTS_TEST_SUITES_CANNOT_BE_RUN_HERE__EIGHT_DELIBERATE_BREAKS_OF_THE_TRY_LOGIC_THE_TWO_RUN_RULE_THE_WIDER_READING_AND_THE_LESSON_WRITE_BACK_EACH_FAIL_AT_LEAST_ONE_TEST__THE_FILE_RESTORED_BYTE_FOR_BYTE_AFTER_EACH",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_OBLIGATIONS_NAMED_ARE_COMPUTER_USE_OBLIGATIONS__A_TRIED_EDIT_COUNTS_TOWARD_THEM_ONLY_WHERE_THE_PROJECTS_OWN_CHECK_NOTICES_THE_EDITED_PLACE_FAILING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-12T16:04:00Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_ADDS_ONE_TAUGHT_ACTION_TO_ONE_PROGRAM_AND_LETS_THE_PROJECTS_OWN_CHECK_SETTLE_WHAT_THE_EXAMPLES_DO_NOT",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "A_USE_NOBODY_SHOWED_IS_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK_AND_KEPT_ONLY_WHEN_THE_CHECK_NOTICES_THAT_PLACE_FAILING",
+   "decisive_question": "DOES_LETTING_THE_PROJECTS_CHECK_SETTLE_THE_TRIES_RECOVER_THE_EDITS_THE_REFUSAL_COST_WITHOUT_CHANGING_ONE_STATEMENT_THE_PEOPLE_LEFT_ALONE__AND_IS_NOTHING_THAT_PASSED_LOST",
+   "falsifier_id": "ONE_RELATED_TEST_THAT_PASSED_ON_THE_BASE_COMMIT_AND_FAILS_HERE__OR_ONE_STATEMENT_OF_EITHER_SET_CHANGED_BY_THE_TRIED_ARM_THAT_THE_HUMAN_LEFT_ALONE__OR_ONE_TRY_KEPT_WHOSE_MADE_TO_FAIL_RUN_THE_CHECK_DOES_NOT_NOTICE",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_FIVE_TEST_FILES_PASS_246_OF_246__ON_BOTH_SETS_THE_TRIED_ARM_CHANGES_ZERO_STATEMENTS_THE_PEOPLE_LEFT_ALONE__THE_THREE_STATEMENTS_IT_WRITES_DIFFERENTLY_ARE_PLACES_WHERE_THE_PERSON_CHANGED_MORE_THAN_THE_KIND_WHILE_TOUCHING_THE_MARKER_AND_ARE_STATED_AS_SUCH__EIGHT_DELIBERATE_BREAKS_EACH_FAIL_A_TEST"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "b86e1823afab5501bcf3dc3cd3b252a2d55bea5b",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "THE_OWNER_CAN_SHOW_A_CHANGE_ONCE_AND_HAVE_THE_PLACES_THE_EXAMPLE_DOES_NOT_SETTLE_DECIDED_BY_THE_PROJECTS_OWN_TESTS_INSTEAD_OF_A_FLAT_REFUSAL__WITH_THE_ANSWER_KEPT_IN_THE_LESSON",
+  "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_THE_PLACES_THE_EXAMPLES_DO_NOT_SETTLE_ARE_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK__KEPT_ONLY_WHEN_THE_CHECK_PASSES_WITH_THE_CHANGE_AND_FAILS_WHEN_THE_PLACE_IS_MADE_TO_FAIL__AND_THE_ANSWER_IS_WRITTEN_BACK_INTO_THE_LESSON",
+  "selected_surviving_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_THE_PLACES_THE_EXAMPLES_DO_NOT_SETTLE_ARE_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK__KEPT_ONLY_WHEN_THE_CHECK_PASSES_WITH_THE_CHANGE_AND_FAILS_WHEN_THE_PLACE_IS_MADE_TO_FAIL__AND_THE_ANSWER_IS_WRITTEN_BACK_INTO_THE_LESSON",
+  "deleted_or_bypassed_paths": [
+   "KEEPING_THE_FLAT_REFUSAL__NOT_DONE__MEASURED_ON_THE_HELD_OUT_SET_IT_PREVENTED_NO_WRONG_EDIT_AND_COST_18_OF_59_RIGHT_ONES",
+   "KEEPING_A_TRY_WHEN_THE_CHECK_MERELY_STAYS_GREEN__NOT_DONE__A_CHECK_THAT_NEVER_RUNS_THE_LINE_STAYS_GREEN_FOR_ANY_EDIT__THE_PLACE_MUST_ALSO_FAIL_WHEN_MADE_TO_FAIL",
+   "RUNNING_THE_WHOLE_SUITE_AS_ONE_VERDICT__NOT_DONE__TESTS_ARE_COMPARED_PER_PLACE_SO_ONE_UNRELATED_RED_TEST_DOES_NOT_FREEZE_THE_FILE",
+   "TRYING_EVERY_PLACE_AT_ONCE__NOT_DONE__WHAT_THE_TRIES_BREAK_IS_LAID_AT_SINGLE_PLACES_BY_LEAVING_ONE_OUT_AT_A_TIME",
+   "LETTING_THE_CHECK_GATE_WHAT_THE_LESSON_ITSELF_SHOWS__NOT_DONE__THE_CHECK_GATES_ONLY_THE_TRIES__A_CHECK_THAT_FAILS_AFTER_THE_SHOWN_CHANGE_REFUSES_THE_WHOLE_EDIT_AND_THE_FILE_IS_PUT_BACK",
+   "A_PYTEST_DEPENDENCY_FOR_THE_RUNNER__NOT_DONE__THE_SANDBOX_HAS_THE_STDLIB_ONLY__UNITTEST_CLASSES_TEST_FUNCTIONS_AND_SCRIPTS_ARE_RUN_DIRECTLY"
+  ],
+  "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_REGISTRY_ROW_IS_ADDED__RE_TEACHING_REPRODUCES_THE_TRACKED_BUNDLE_BYTE_FOR_BYTE__THE_FIVE_TEST_FILES_OF_THE_TAUGHT_ACTIONS_PASS_ON_A_FRESH_CLONE__THE_FRONT_DOOR_ANSWERS_THE_NEW_SENTENCE_ON_A_FRESH_CLONE",
+  "expected_parent_level_state_change": "ONE_TAUGHT_SENTENCE_MORE__ON_THE_HELD_OUT_COMMITS_OF_OTHER_PROJECTS_A_SUFFICIENT_CHECK_RAISES_AGREEMENT_WITH_THE_PEOPLE_FROM_116_TO_141_OF_169_STATEMENTS_AND_ON_THE_FIRST_SET_FROM_30_TO_69_OF_103__WITH_ZERO_STATEMENTS_CHANGED_THAT_THE_PEOPLE_LEFT_ALONE",
+  "why_selected_route_is_fastest_sufficient": "THE_LEARNER_THE_LESSON_FILE_THE_COMPILER_THE_SANDBOX_AND_THE_TEACHING_TOOL_EXIST_AND_ARE_REUSED__THE_NEW_PARTS_ARE_THE_WIDER_READING__A_RUNNER_THAT_NAMES_THE_FAILING_TESTS__THE_TWO_RUN_RULE_PER_PLACE__AND_THE_WRITE_BACK_OF_THE_ANSWER_INTO_THE_LESSON",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "TRY_THE_UNSETTLED_PLACES_AGAINST_THE_PROJECTS_CHECK_AND_KEEP_WHAT_IT_SETTLES__SELECTED",
+   "KEEP_THE_FLAT_REFUSAL__REJECTED_BY_MEASUREMENT_ON_THE_HELD_OUT_SET",
+   "ACCEPT_A_TRY_ON_A_GREEN_SUITE_ALONE__REJECTED_A_SUITE_THAT_NEVER_RUNS_THE_LINE_IS_A_RUBBER_STAMP",
+   "GENERATE_VARIANTS_WITH_A_LANGUAGE_MODEL_AND_FILTER_BY_TESTS__REJECTED_FORBIDDEN_HERE",
+   "ENUMERATE_CANDIDATE_PROGRAMS_AS_THE_REPAIR_SEARCH_DOES__NOT_NEEDED_THE_LESSON_ALREADY_NAMES_THE_CHANGE__ONLY_ITS_BREADTH_IS_OPEN",
+   "DECIDE_BREADTH_FROM_A_CODE_CORPUS__DEFERRED_NO_CORPUS_HERE"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T16:04:00Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__A_USE_NOBODY_SHOWED_IS_REFUSED_WITH_ITS_LINE_OR_LEFT_ALONE_ON_REQUEST__NOTHING_ASKS_THE_PROJECTS_TESTS",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+     "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+     "canonical/tools/teach_actions_v1.py",
+     "canonical/runtime/live_brain_route_admission_v1.py",
+     "canonical/runtime/confine_v1.py",
+     "canonical/runtime/acquired_operator_memory_v1.py",
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://cs.uwaterloo.ca/~m2nagapp/courses/CS846/1171/papers/nguyen_ase13.pdf",
+     "https://danny.cs.colorado.edu/papers/PyEvolve_ICSE2023.pdf",
+     "https://arxiv.org/pdf/2308.14687",
+     "https://arxiv.org/html/2402.07138v3",
+     "https://arxiv.org/pdf/1506.07330",
+     "https://arxiv.org/html/2604.01518v1",
+     "https://dl.acm.org/doi/pdf/10.1145/3387903.3389319",
+     "https://arxiv.org/abs/2611.01386"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/LucyAndLuna2023/meshctx/commit/740af6bc23",
+     "https://github.com/tgandor/meats/commit/9d45804a77",
+     "https://github.com/yaml/pyyaml/blob/main/lib/yaml/__init__.py",
+     "https://github.com/davidmalcolm/pygobject",
+     "https://github.com/greggggg33/scrapy"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://dev.to/webx_2736/prove-your-refactor-tests-can-fail-a-mutation-calibrated-gate-for-messy-repos-b57",
+     "https://decodethefuture.org/en/ai-agent-benchmarks-2026/"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "mutation testing as safety net for refactoring test adequacy weak tests accept wrong edits"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "test-validated program transformation by example mutation analysis check that the changed line is exercised"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent skills compiled from verified traces skill libraries benchmark gains"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "SWE-bench Pro OSWorld leaderboard November 2026 regression suite adequacy STING"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "KEEP_THE_FLAT_REFUSAL_OF_UNSHOWN_USES",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+     ],
+     "qualification_evidence": [
+      "measured on this host: on the held-out set the refusal prevented no wrong edit and cost 18 of 59 right ones; with the check-settled tries agreement rises from 116 to 141 of 169 and still nothing the people left alone is changed"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "SAME_ZERO_WRONG_EDITS",
+      "CAPABILITY_STRENGTH": "25_TO_39_FEWER_RIGHT_EDITS_PER_SET",
+      "WALL_CLOCK": "NONE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "REFUSES_WHAT_A_TEST_COULD_SETTLE",
+      "VERIFIABILITY": "THE_REFUSAL_NAMES_THE_LINES"
+     }
+    },
+    {
+     "route": "ACCEPT_A_TRY_WHEN_THE_SUITE_STAYS_GREEN",
+     "evidence": [
+      "https://arxiv.org/html/2604.01518v1",
+      "https://arxiv.org/pdf/1506.07330"
+     ],
+     "qualification_evidence": [
+      "published: suites that accept plausible but wrong patches (STING, 2026); statement coverage missed a broken test refactoring that mutation coverage caught (Parsai, 2015); here a check that never runs the line stays green for any edit, measured in test_a_check_that_swallows_the_failure_settles_nothing"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "A_GREEN_SUITE_THAT_NEVER_RUNS_THE_LINE_IS_A_RUBBER_STAMP",
+      "CAPABILITY_STRENGTH": "MORE_EDITS_KEPT",
+      "WALL_CLOCK": "HALF_THE_RUNS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "KEEPS_EDITS_NOTHING_EVER_CHECKED",
+      "VERIFIABILITY": "NOTHING_SAYS_THE_LINE_RAN"
+     }
+    },
+    {
+     "route": "LET_A_LANGUAGE_MODEL_WRITE_VARIANTS_AND_FILTER_BY_TESTS",
+     "evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "65_5_PERCENT_OF_VARIANTS_WRONG_BEFORE_FILTERING",
+      "CAPABILITY_STRENGTH": "COVERS_FORMS_NOBODY_SHOWED",
+      "WALL_CLOCK": "SHORT",
+      "INCREMENTAL_COST": "A_MODEL",
+      "RELIABILITY": "NEEDS_THE_SAME_TESTS_ANYWAY",
+      "VERIFIABILITY": "FORBIDDEN_HERE_NO_MODEL_IN_CREDITED_COGNITION"
+     }
+    },
+    {
+     "route": "ENUMERATE_SINGLE_MUTATION_CANDIDATES_AND_LET_LESSONS_VOTE",
+     "evidence": [
+      "canonical/runtime/edit_kind_learning_v1.py"
+     ],
+     "qualification_evidence": [
+      "that engine answers a different question: which fix, out of many, for a failing test; here the lesson already names the change and only its breadth is open, so the only candidates needed are the proven rules and one wider reading"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "SAME_ORACLE",
+      "CAPABILITY_STRENGTH": "SEARCHES_WHERE_NO_LESSON_EXISTS",
+      "WALL_CLOCK": "MANY_CANDIDATES_PER_PLACE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "NEEDS_A_FAILING_TEST_TO_START",
+      "VERIFIABILITY": "SAME"
+     }
+    }
+   ],
+   "negative_search_summary": "THE_MUTATION_TESTING_LITERATURE_SAYS_EXACTLY_WHY_A_GREEN_SUITE_IS_NOT_ENOUGH__STING_2026_SHOWS_BENCHMARK_SUITES_ACCEPT_WRONG_PATCHES_AND_REPAIRS_THEM_BY_MUTATING_THE_PATCH_REGION__PARSAI_2015_SHOWS_PASSING_TESTS_AND_FULL_COVERAGE_MISS_A_BROKEN_REFACTORING_THAT_MUTATION_COVERAGE_CATCHES__NO_SOURCE_SHOWS_A_BY_EXAMPLE_EDITOR_THAT_POINTS_THE_MUTATION_AT_THE_EDITED_PLACES_THEMSELVES_AND_WRITES_THE_ANSWER_BACK_INTO_THE_LESSON",
+   "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_THE_PLACES_THE_EXAMPLES_DO_NOT_SETTLE_ARE_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK__KEPT_ONLY_WHEN_THE_CHECK_PASSES_WITH_THE_CHANGE_AND_FAILS_WHEN_THE_PLACE_IS_MADE_TO_FAIL__AND_THE_ANSWER_IS_WRITTEN_BACK_INTO_THE_LESSON",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T16:04:00Z",
+    "max_age_hours": 2,
+    "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_THE_PLACES_THE_EXAMPLES_DO_NOT_SETTLE_ARE_TRIED_AGAINST_THE_PROJECTS_OWN_CHECK__KEPT_ONLY_WHEN_THE_CHECK_PASSES_WITH_THE_CHANGE_AND_FAILS_WHEN_THE_PLACE_IS_MADE_TO_FAIL__AND_THE_ANSWER_IS_WRITTEN_BACK_INTO_THE_LESSON",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import ast, tokenize, re, builtins, json, sqlite3; print(\"ok\")' returned ok; the program uses nothing else"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "NAMESPACE_SANDBOX_confine_v1",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical.runtime.confine_v1.available() returned True on this host; teaching ran the program inside it and the front door's receipts for the four new sentences report confined True"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "DEMONSTRATION_TO_SKILL_COMPILER_AND_FRONT_DOOR_FALLBACK",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/tools/teach_actions_v1.py qualified ten skills through causal_trace_to_skill_compiler_v1 on this host, re-teaching reproduced the tracked bundle byte for byte, and live_brain_route_admission_v1.solve returned PASS__COMPILED_WORKFLOW_SKILL for remembering a change, repeating it and repeating it with the rest left alone"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_TAUGHT_PROGRAM_OF_THE_PREVIOUS_CHANGE",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/taught_actions/edit_by_example_v1.py on the base commit answers remember, repeat and repeat_shown through the front door on this host; the fifth action is added to the same program and all five are taught again from it"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "A_PLACE_THE_EXAMPLES_DO_NOT_SETTLE_IS_DECIDED_BY_THE_PROJECTS_OWN_CHECK_OR_LEFT_AS_IT_WAS__AND_THE_DECISION_IS_KEPT_IN_THE_LESSON",
+   "proxy_goals_deleted": [
+    "MAKE_AS_MANY_EDITS_AS_POSSIBLE",
+    "CALL_A_GREEN_SUITE_PROOF",
+    "COUNT_A_NEW_SENTENCE"
+   ],
+   "surviving_necessity": "A_TRY_IS_KEPT_ONLY_WHEN_THE_CHECK_NOTICES_THE_TRIED_PLACE_FAILING__A_CHECK_THAT_SEES_NOTHING_SETTLES_NOTHING__AND_EVERYTHING_KEPT_OR_SPOKEN_AGAINST_IS_WRITTEN_INTO_A_LESSON_A_PERSON_CAN_OPEN"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+    "canonical/runtime/acquired_operator_memory_v1.py",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/concept_library_v1.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_LEARNER_AND_LESSON_FILE_OF_6686",
+    "THE_DEMONSTRATION_TO_SKILL_COMPILER",
+    "THE_SANDBOX",
+    "THE_TEACHING_TOOL",
+    "THE_DOORS_FALLBACK",
+    "THE_MUTATION_SCORE_IDEA_POINTED_AT_THE_EDITED_PLACES"
+   ],
+   "capability_work_deleted": [
+    "THE_FLAT_REFUSAL_AS_THE_ONLY_ANSWER_TO_AN_UNSHOWN_USE"
+   ],
+   "external_existing_routes_checked": [
+    "PYEVOLVE",
+    "MELT",
+    "GENPAT",
+    "PYCRAFT",
+    "REFAZER",
+    "THE_2013_STUDY_OF_REPETITIVENESS_OF_CODE_CHANGES",
+    "CONTINUALSKILLBENCH_SKILLSBENCH_VIBEMEMBENCH_AND_SWE_CONTEXTBENCH_OF_2026"
+   ],
+   "surviving_gap": "THE_TRIED_COLUMN_IS_THE_CEILING_OF_A_SUFFICIENT_CHECK__A_PROJECT_WHOSE_TESTS_NEVER_RUN_THE_LINE_KEEPS_THE_REFUSAL__CHECKS_THAT_NEED_PYTEST_FIXTURES_OR_BINARY_DEPENDENCIES_ARE_OUT_OF_REACH_OF_THE_RUNNER__A_TEST_CAN_IN_PRINCIPLE_PASS_THE_CHANGE_AND_FAIL_THE_MADE_TO_FAIL_CODE_WHILE_THE_CHANGE_IS_STILL_WRONG_FOR_AN_INPUT_THE_CHECK_DOES_NOT_HOLD__ADDED_LINES_AND_ADDED_IMPORTS_ARE_STILL_NOT_REPEATED__THE_SENTENCES_MUST_BE_SAID_IN_THEIR_TAUGHT_FORM"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_PROGRAM_REFUSED_OR_LEFT_EVERY_PLACE_THE_EXAMPLES_DID_NOT_SETTLE_AND_NEVER_ASKED_THE_PROJECTS_OWN_TESTS",
+   "evidence": [
+    "ON_THE_BASE_COMMIT_THE_HELD_OUT_SET_GIVES_116_OF_169_WITH_18_FILES_REFUSED_WHOLE",
+    "ON_THIS_COMMIT_THE_SAME_FILES_WITH_A_SUFFICIENT_CHECK_GIVE_141_OF_169_AND_0_STATEMENTS_CHANGED_THAT_THE_PEOPLE_LEFT_ALONE",
+    "ON_THE_BASE_COMMIT_NOTHING_RAN_THE_PROJECTS_TESTS_AT_ALL"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE__NOTHING_TO_DELETE",
+    "BYPASS_BY_KEEPING_THE_TWO_EXAMPLE_FILES_AROUND__THAT_IS_WHAT_THE_OWNER_ASKS_TO_END",
+    "REUSE_THE_REPAIR_LESSON_STORE__IT_KEEPS_TOKEN_RULES_CHECKED_BY_TESTS_AND_CANNOT_BE_READ_FROM_INSIDE_THE_SANDBOX",
+    "SUBSTITUTE_AN_EXTERNAL_TOOL__NONE_INSTALLED"
+   ],
+   "surviving_causal_blocker": "A_USE_NOBODY_SHOWED_WAS_REFUSED_OR_LEFT__ON_THE_HELD_OUT_SET_THE_REFUSAL_PREVENTED_NO_WRONG_EDIT_AND_COST_18_OF_59_RIGHT_ONES__ONE_EXAMPLE_CANNOT_SAY_WHICH_PARTS_OF_THE_CHANGED_CODE_MATTER_AND_NOTHING_ASKED_THE_PROJECTS_OWN_TESTS"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADAPT_THE_EXISTING_PROGRAM__THE_WIDER_READING__THE_TWO_RUN_RULE__THE_WRITE_BACK",
+    "REUSE_THE_COMPILER_SANDBOX_AND_TEACHING_TOOL_FOR_THE_NEW_SENTENCE"
+   ],
+   "losing_routes_reason": "THE_FLAT_REFUSAL_IS_MEASURED_TO_COST_RIGHT_EDITS_AND_PREVENT_NONE__A_GREEN_SUITE_ALONE_IS_A_RUBBER_STAMP__A_MODEL_IS_FORBIDDEN_HERE__THE_CANDIDATE_ENUMERATOR_ANSWERS_A_DIFFERENT_QUESTION",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_TRIED_ARM_IS_COMPARED_WITH_WHAT_PEOPLE_WROTE_IN_COMMITS_OF_OTHER_PROJECTS_ON_A_SET_DECLARED_BEFORE_COLLECTION__THE_CHECK_RUNS_THEMSELVES_ARE_EXERCISED_ON_CONSTRUCTED_PROJECTS_BECAUSE_OTHER_PROJECTS_SUITES_CANNOT_RUN_HERE__AND_ARE_SAID_TO_BE_CONSTRUCTED"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "adjacent_capabilities_absorbed": [],
+   "note": "A_CHECK_IS_AN_ORDINARY_FILE_OF_THE_PROJECT_NAMED_IN_THE_SENTENCE__NOTHING_IS_DISCOVERED_OR_GUESSED__THE_LESSON_RECORDS_WHAT_IT_SETTLED_IN_WORDS_A_PERSON_CAN_READ",
+   "fresh_reuse_plan": "AN_EXAMPLE_TAKEN_FROM_A_COMMIT_CAN_BE_REMEMBERED_THE_SAME_WAY__THE_RUNNERS_FAILING_TEST_NAMES_COULD_FEED_THE_REPAIR_SEARCH_WHEN_A_CHECK_FAILS_ON_THE_FILE_AS_IT_IS"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "TRUSTING_THE_6686_HARNESS_THAT_LIVED_IN_TMP__THE_COLLECTOR_THE_COMMIT_LISTS_AND_THE_MEASURE_ARE_NOW_TRACKED_FILES_AND_COLLECT_REFUSES_TO_RUN_TWICE_ON_A_SET",
+    "TRUSTING_A_GREEN_RUN__EVERY_KEPT_TRY_ALSO_HAS_A_MADE_TO_FAIL_RUN_THAT_THE_CHECK_NOTICES"
+   ],
+   "search_stop_decision": "THE_TRIED_ARM_RECOVERS_THE_MEASURED_COST_OF_THE_REFUSAL_WITH_ZERO_STATEMENTS_CHANGED_THAT_PEOPLE_LEFT_ALONE_ON_BOTH_SETS__THE_FRONTIER_WAS_REFRESHED_TODAY__THE_REMAINING_GAPS_ARE_NAMED",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN_AND_REPORT_IT__THEN__AN_EXAMPLE_TAKEN_FROM_A_COMMIT__ADDED_IMPORT_LINES_AND_RENAMED_IMPORTS__EXTRACT_A_VARIABLE_AND_EXTRACT_A_CONSTANT_PROMISED_THREE_TURNS_AGO__THE_SAME_OLD_CODE_FIXED_TWO_WAYS_TOLD_APART_BY_THE_CHECK",
+ "prior_work_reused": [
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/runtime/confine_v1.py",
+  "canonical/tools/teach_actions_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/edit_kind_learning_v1.py"
+ ]
+}
