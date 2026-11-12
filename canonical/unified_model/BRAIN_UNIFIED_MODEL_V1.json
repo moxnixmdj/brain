@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 354,
+  "knowledge_documents": 355,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6762,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "08a0a60f4d23d4500970ad4c1d8059ffbeacbe9976f2a63b55bf2506a45828be"
+  "value": "d53ad62d584cb4a15c6adb6642d78da20819825cf1c1fbd2ed11b428feb9af36"
  },
  "engines": [
   {
@@ -58878,6 +58878,85 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 12630,
+   "headings": [
+    "What 2026 measured about learning from one run — and what this tree kept",
+    "1. The 2026 answer in one paragraph",
+    "2. What the field measured this year",
+    "3. What this tree kept, measured today",
+    "4. The three design decisions this forces",
+    "5. The fastest path, with acceptance numbers",
+    "6. What would change my mind",
+    "7. Sources"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_2026_MEASURED_ABOUT_LEARNING_FROM_ONE_RUN_20261112_V1.md",
+   "sha256": "4806435a6a0d2ca969860f4a287296206a490acde0564da257ca57c6991dc53b",
+   "summary": "**Date:** 2026-11-12  **Authority:** NONE (producer-run measurement + published 2026 results)  **`truth.achieved`:** stays `false`",
+   "terms": {
+    "149": 4,
+    "17": 5,
+    "2026": 22,
+    "53": 4,
+    "92": 5,
+    "98": 6,
+    "actions": 8,
+    "agent": 15,
+    "arxiv": 5,
+    "change": 6,
+    "code": 6,
+    "cost": 7,
+    "every": 5,
+    "evoclawbench": 5,
+    "field": 6,
+    "frozen": 7,
+    "harness": 12,
+    "https": 8,
+    "iclr": 5,
+    "library": 6,
+    "machine": 8,
+    "may": 6,
+    "measured": 13,
+    "model": 5,
+    "no": 5,
+    "not": 20,
+    "nothing": 8,
+    "once": 5,
+    "one": 13,
+    "only": 5,
+    "own": 7,
+    "owner": 5,
+    "points": 5,
+    "real": 6,
+    "repo": 6,
+    "run": 10,
+    "sica": 5,
+    "skill": 7,
+    "skills": 8,
+    "store": 7,
+    "swe-bench": 6,
+    "swe-skills-bench": 5,
+    "task": 5,
+    "task-specific": 6,
+    "they": 5,
+    "today": 6,
+    "tree": 9,
+    "two": 5
+   },
+   "title": "What 2026 measured about learning from one run — and what this tree kept",
+   "title_terms": [
+    "2026",
+    "about",
+    "kept",
+    "learning",
+    "measured",
+    "one",
+    "run",
+    "tree"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 35815,
    "headings": [
     "The 2026 verdict on \"we solved instant learning — so we solve everything\"",
@@ -72278,10 +72357,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1156,
+  "included_source_count": 1157,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "65b127af47d40688ead98cc8b9426a8d135f9a716bc7d5b35f3a7e1fefc38024"
+  "source_tree_digest": "b8a0dd8ff3173529849f80e749ca6a1c26939f58aee619d71f7b74c2f89f2a80"
  },
  "research_index": [
   {
