@@ -297,7 +297,7 @@ def changed_places(old, new, trail=()):
     return inner or here
 
 
-def levels_of(old, new, trail):
+def levels_of(old, new, trail, label="the example"):
     """The units a difference sits in, innermost first: the place itself, then more and more code around it."""
     levels = []
     for before, after in ((old, new),) + tuple(reversed(trail)):
@@ -306,16 +306,16 @@ def levels_of(old, new, trail):
         if is_unit(before) and is_unit(after) and kind_of(before) == kind_of(after) and (levels or not too_small(before)):
             levels.append((before, after))
     if not levels:
-        raise Refused("line %d of the example adds, removes or reshapes whole statements; only a change inside "
-                      "one expression or one simple statement can be learned" % getattr(old, "lineno", 1))
+        raise Refused("line %d of %s adds, removes or reshapes whole statements; only a change inside "
+                      "one expression or one simple statement can be learned" % (getattr(old, "lineno", 1), label))
     return levels
 
 
-def places_of(old_tree, new_tree):
+def places_of(old_tree, new_tree, label="the example"):
     """One entry per changed place: its levels.  A place inside another changed place is part of it."""
     places, seen = [], set()
     for old, new, trail in changed_places(old_tree, new_tree):
-        levels = levels_of(old, new, trail)
+        levels = levels_of(old, new, trail, label)
         if id(levels[0][0]) not in seen:
             seen.add(id(levels[0][0]))
             places.append(levels)
@@ -438,7 +438,20 @@ class Rule:
         return "%s -> %s" % (written(self.shown), written(self.pieces))
 
 
-def rule_at(pairs, old, new, changed):
+def left_alone(pattern, template, changed):
+    """The first piece of the examples' first files that fits `pattern` and did not become `template`, or None."""
+    for node in changed.candidates.get(pattern[1], ()):
+        bound, again = {}, {}
+        if not fits(pattern, node, bound):
+            continue
+        became = changed.into.get(id(node))
+        if (became is None or not fits(template, became, again)
+                or any(shape(again[blank], ctx=False) != shape(bound[blank], ctx=False) for blank in again)):
+            return node
+    return None
+
+
+def rule_at(pairs, changed):
     """The rule these (before, after) pairs show at one level, or None when they do not show one rule."""
     unique = list({id(before): (before, after) for before, after in pairs}.values())
     blanks = {}
@@ -450,53 +463,70 @@ def rule_at(pairs, old, new, changed):
         return None                      # the new code holds something that varies and was not copied from the old
     if blanks_in(pattern) and not names_something(pattern):
         return None                      # all blanks: it would fit any code of that outline
-    for node in changed.candidates.get(pattern[1], ()):
-        bound, again = {}, {}
-        if not fits(pattern, node, bound):
-            continue
-        became = changed.into.get(id(node))
-        if (became is None or not fits(template, became, again)
-                or any(shape(again[blank], ctx=False) != shape(bound[blank], ctx=False) for blank in again)):
-            return None                  # it would change code the example left alone, or change it differently
+    if left_alone(pattern, template, changed) is not None:
+        return None                      # it would change code an example left alone, or change it differently
     before, after = unique[0]
-    return Rule(kind_of(before), pattern, template, cut_at_blanks(pattern, before, old),
-                cut_at_blanks(template, after, new), unique)
+    shown = changed.home[id(before)]
+    return Rule(kind_of(before), pattern, template, cut_at_blanks(pattern, before, shown.old),
+                cut_at_blanks(template, after, shown.new), unique)
+
+
+class Shown:
+    """One example: a file as it was and as it became, and the places where the two differ."""
+
+    def __init__(self, before_text, after_text, label="the example"):
+        self.label, self.before_text = label, before_text
+        self.old, self.new = Text(before_text, label + "'s first file"), Text(after_text, label + "'s second file")
+        whole_old, whole_new = list(self.old.tree.body), list(self.new.tree.body)
+        imports, self.only_old, self.only_new = import_changes(self.old.tree, self.new.tree)
+        if shape(self.old.tree) == shape(self.new.tree) and not imports:
+            raise Refused("the two %s hold the same code%s" % (
+                "example files" if label == "the example" else "files of " + label,
+                ", apart from import lines that were added or removed" if self.only_old or self.only_new else ""))
+        self.places = places_of(self.old.tree, self.new.tree, label) + [[pair] for pair in imports]
+        self.old.tree.body, self.new.tree.body = whole_old, whole_new
 
 
 class Changed:
-    """What the example changed: every unit of its first file by kind, and what each changed unit became."""
+    """What the examples changed: every unit of their first files by kind, what each changed unit became,
+    and which example a changed unit is from."""
 
-    def __init__(self, tree, places):
-        self.candidates = {}
-        for node in units(tree):
-            self.candidates.setdefault(type(node).__name__, []).append(node)
-        self.into = {id(before): after for levels in places for before, after in levels}
+    def __init__(self, examples):
+        self.candidates, self.into, self.home = {}, {}, {}
+        for shown in examples:
+            for node in units(shown.old.tree):
+                self.candidates.setdefault(type(node).__name__, []).append(node)
+            for levels in shown.places:
+                for before, after in levels:
+                    self.into[id(before)] = after
+                    self.home[id(before)] = shown
 
 
-def rule_for(group, old, new, changed):
-    """The rule about the smallest pieces of code that the example itself does not contradict."""
+def rule_for(group, changed):
+    """The rule about the smallest pieces of code that the examples themselves do not contradict."""
     for level in range(min(len(levels) for levels in group)):
-        rule = rule_at([levels[level] for levels in group], old, new, changed)
+        rule = rule_at([levels[level] for levels in group], changed)
         if rule is not None:
             return rule
     return None
 
 
-def stands_alone(rule, new):
+def stands_alone(rule, changed):
     """Refuse a rule whose places only work together with other changes.  Fills in what the rule needs."""
     for before, after in rule.pairs:
+        label, new = changed.home[id(before)].label, changed.home[id(before)].new
         assigned_before, read_before = names_of(before)
         assigned_after, read_after = names_of(after)
         if assigned_before != assigned_after and not (is_import(before) and is_import(after)
                                                       and isinstance(new.above.get(id(after)), ast.Module)):
-            raise Refused("line %d of the example changes which names are assigned (%s); that works only together "
+            raise Refused("line %d of %s changes which names are assigned (%s); that works only together "
                           "with other changes, as in a rename, and cannot be repeated one place at a time"
-                          % (before.lineno, ", ".join(sorted(assigned_before ^ assigned_after))))
+                          % (before.lineno, label, ", ".join(sorted(assigned_before ^ assigned_after))))
         for name in sorted(read_after - read_before):
             if not new.provides(name, after):
-                raise Refused("line %d of the example makes the code read '%s', which the example's second file neither "
+                raise Refused("line %d of %s makes the code read '%s', which %s's second file neither "
                               "defines or imports at the top nor receives as a parameter there; a change that leans on "
-                              "a local variable cannot be repeated one place at a time" % (before.lineno, name))
+                              "a local variable cannot be repeated one place at a time" % (before.lineno, label, name, label))
             if not hasattr(builtins, name):
                 rule.needs.add(name)
     # Names the new code binds for itself (a comprehension's variable, a lambda's parameter).  Copied code
@@ -543,37 +573,46 @@ def without_imports(tree, shapes):
     return [shape(statement) for statement in tree.body if not (is_import(statement) and shape(statement) in shapes)]
 
 
-def learn(before_text, after_text):
-    """The rules that turn the example's first file into its second."""
-    old, new = Text(before_text, "the example's first file"), Text(after_text, "the example's second file")
-    whole_old, whole_new = list(old.tree.body), list(new.tree.body)
-    imports, only_old, only_new = import_changes(old.tree, new.tree)
-    if shape(old.tree) == shape(new.tree) and not imports:
-        raise Refused("the two example files hold the same code" + (
-            ", apart from import lines that were added or removed" if only_old or only_new else ""))
-    places = places_of(old.tree, new.tree) + [[pair] for pair in imports]
-    old.tree.body, new.tree.body = whole_old, whole_new
-    changed = Changed(old.tree, places)
+def learn_all(examples):
+    """The rules that turn every example's first file into its second.  `examples` is a list of (before, after) texts.
+
+    Several examples are read as one: places changed the same way are put together across them, a blank appears
+    where two such places differ, and code that any one of them left alone speaks against a rule that fits it.
+    """
+    several = len(examples) > 1
+    shown = [Shown(before, after, "example %d" % number if several else "the example")
+             for number, (before, after) in enumerate(examples, 1)]
+    changed = Changed(shown)
     groups = []
-    for levels in places:
-        for group in groups:
-            if rule_for(group + [levels], old, new, changed) is not None:
-                group.append(levels)
-                break
-        else:
-            groups.append([levels])
+    for example in shown:
+        for levels in example.places:
+            for group in groups:
+                if rule_for(group + [levels], changed) is not None:
+                    group.append(levels)
+                    break
+            else:
+                groups.append([levels])
     rules = []
     for group in groups:
-        rule = rule_for(group, old, new, changed)
+        rule = rule_for(group, changed)
         if rule is None:
-            raise Refused("line %d of the example was changed, but the same code was left alone, or changed "
-                          "another way, elsewhere in the example" % group[0][0][0].lineno)
-        stands_alone(rule, new)
+            first = group[0][0][0]
+            raise Refused("line %d of %s was changed, but the same code was left alone, or changed another way, "
+                          "elsewhere in %s" % (first.lineno, changed.home[id(first)].label,
+                                               "the examples" if several else "the example"))
+        stands_alone(rule, changed)
         rules.append(rule)
-    replayed, _ = rewrite(rules, before_text, "the example's first file", check_names=False)
-    if without_imports(ast.parse(replayed), only_old) != without_imports(new.tree, only_new):
-        raise Refused("the rules worked out from the example do not reproduce the example")
+    for example in shown:
+        replayed, _ = rewrite(rules, example.before_text, example.label + "'s first file", check_names=False)
+        if without_imports(ast.parse(replayed), example.only_old) != without_imports(example.new.tree, example.only_new):
+            raise Refused("the rules worked out from %s do not reproduce %s"
+                          % ("the examples" if several else "the example", example.label))
     return rules
+
+
+def learn(before_text, after_text):
+    """The rules that turn the example's first file into its second."""
+    return learn_all([(before_text, after_text)])
 
 
 # ----------------------------------------------------------------------------- applying rules to a file
