@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 381,
+  "knowledge_documents": 380,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6777,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "eb609a922c2b08f50b54ff987111e40a9559b729aa150f04c7afb6168f8e11d4"
+  "value": "23bdabb9d850858ac28b72c22b67945608146a90e537e9f2b0d5e7ccab691afb"
  },
  "engines": [
   {
@@ -45189,84 +45189,6 @@
     "generalization",
     "measures",
     "set"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 5456,
-   "headings": [
-    "A name the examples already imported is brought, and its alias follows the renamed uses",
-    "1. Declared predictions, and what the measurement did to them",
-    "2. What the person did, and what the engine now does",
-    "3. The canonical test that encoded the old limit",
-    "4. Discipline",
-    "5. Next"
-   ],
-   "kind": "DOCUMENT",
-   "path": "A_NAME_THE_EXAMPLES_ALREADY_IMPORTED_IS_BROUGHT_AND_ITS_ALIAS_FOLLOWS_20261112_V1.md",
-   "sha256": "33afc84ff0bb6da5cc2e1ab71f12fcaedaed2f19661bba97feab6c96ba3ea672",
-   "summary": "**2026-11-12.** Base `df7faf2f`. Branch `arena/bbc362d9-brain`. Follows #6764.",
-   "terms": {
-    "13": 6,
-    "156": 4,
-    "6764": 5,
-    "alias": 6,
-    "alone": 3,
-    "already": 3,
-    "bring": 6,
-    "declared": 3,
-    "django.utils.encoding": 6,
-    "engine": 8,
-    "exactly": 4,
-    "example": 4,
-    "examples": 4,
-    "extra": 3,
-    "file": 5,
-    "follows": 4,
-    "force_text": 4,
-    "fresh": 6,
-    "gap": 3,
-    "held": 6,
-    "import": 16,
-    "imports": 6,
-    "lesson": 6,
-    "line": 7,
-    "name": 8,
-    "new": 4,
-    "not": 4,
-    "now": 6,
-    "old": 4,
-    "one": 7,
-    "origin": 3,
-    "other": 3,
-    "own": 5,
-    "person": 4,
-    "refusals": 3,
-    "refused": 6,
-    "renamed": 7,
-    "report": 3,
-    "rewrite": 3,
-    "same": 5,
-    "shown": 3,
-    "smart_str": 6,
-    "smart_text": 3,
-    "strict": 4,
-    "teacher": 4,
-    "test": 3,
-    "tried": 5,
-    "uses": 5
-   },
-   "title": "A name the examples already imported is brought, and its alias follows the renamed uses",
-   "title_terms": [
-    "alias",
-    "already",
-    "brought",
-    "examples",
-    "follows",
-    "imported",
-    "name",
-    "renamed",
-    "uses"
    ]
   },
   {
@@ -74369,10 +74291,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1183,
+  "included_source_count": 1182,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "62d01610042291ad31aa0abf18d194fb47059e892f88f9ddf0221925c5f0e480"
+  "source_tree_digest": "53cc1eef0dd7aa8517dedc17d70ba1a6400c9c23fdaf7a4b1a39e2a524622486"
  },
  "research_index": [
   {
@@ -190995,6 +190917,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_SMALL_PASSING_PATCH_PLACE_RECORD_V1",
+   "sha256": "261fd0c1ce585788c410f5e70f5094603c50a25c342b07a89c2c866cd3d5083c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "place": 1,
+    "small": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/SOFTWARE_SEMANTIC_ACCEPTANCE_SHARED_MINIMUM_COVER_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -220884,33 +220827,6 @@
    }
   },
   {
-   "action_id": "A_NAME_THE_EXAMPLES_ALREADY_IMPORTED_IS_BROUGHT_AND_ITS_ALIAS_FOLLOWS_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_NAME_THE_EXAMPLES_ALREADY_IMPORTED_IS_BROUGHT_AND_ITS_ALIAS_FOLLOWS_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_NAME_THE_EXAMPLES_ALREADY_IMPORTED_IS_BROUGHT_AND_ITS_ALIAS_FOLLOWS_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "141d7a83f4c97ad1ea9ee80cc6ce5216ca14f251ab05895aff6bf8c17ad4b04f",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_name_the_examples_already_imported_is_brought_and_its_alias_follows_20261112_v1": 1,
-    "alias": 1,
-    "already": 1,
-    "brought": 1,
-    "examples": 1,
-    "follows": 1,
-    "fresh_tried__same_90_to_93__refusals_3_to_0__diff_6_extra_13_frozen__held_out_strict_156_0_0_unchanged__seen_unchanged__206_taught_action_tests": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "imported": 1,
-    "name": 1,
-    "synthesize_the_bring_from_the_examples_standing_imports_and_let_the_import_alias_follow_its_renamed_uses__declare_the_deltas_first__measure_the_tracked_sets_once_after": 1,
-    "the_three_smart_str_refusals_of_the_pre_registered_fresh_set__a_needed_name_the_examples_own_file_already_imported_was_refused__and_the_real_files_bind_it_on_a_multi_alias_line_the_whole_line_rewrite_cannot_reach": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "A_NAME_WITH_SPACES_THAT_NO_WORD_INTRODUCES_IS_READ_FROM_THE_DIRECTORY_THAT_HOLDS_IT_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -226166,7 +226082,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "dd287cbe95599fe408d979a6fbd3af89759e88aa591aa9345d1aa5019f8a2985",
+   "sha256": "1f96797e854e13e97f6022839755eac3f2c790f4537947806515240a8941261f",
    "status": "",
    "terms": {
     "20261111": 1,
