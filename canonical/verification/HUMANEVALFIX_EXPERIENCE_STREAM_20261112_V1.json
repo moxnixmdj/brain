@@ -1,0 +1,7953 @@
+{
+ "schema": "BRAIN_HUMANEVALFIX_EXPERIENCE_STREAM_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T15:16:25Z",
+ "read_this_first": [
+  "The question: once the system has repaired a bug, has it learned something that helps with the next bug? The 100 scored HumanEvalFix bugs come one after another, from an empty memory. Nobody in this project wrote the bugs or their tests.",
+  "Answer on bugs met for the first time: a little. Keeping its own repairs as lessons, the system repaired 64 of 100 against 53 for the solver alone, and 45 against 36 were right as far as checked. No bug the solver repaired was lost.",
+  "Most of that gain is not learning. The control keeps every repair the wrong way round, so its memory holds no fix; it repaired 62 and 42 were right. The lessons themselves add 2 repaired bugs and 3 right ones over the control.",
+  "The tree's own ruler for 'it learned' says NO_COMPOUNDING: mean cost falls by a factor of 1.0819 where the ruler asks for 1.5, and the cost is lower on 31/98 bugs where it asks for 80 in 100.",
+  "Being shown the published fix after every bug does not help with the next bug either: 65 repaired, 45 right. It helps with the same bug: on return 99 of 100 are repaired (96 right) in a median of 10 test runs.",
+  "A plain cache does that return as well: it gives back 53 repairs at 2 runs each. On a bug it has not met it has nothing.",
+  "Run twice by the producer on one machine with the same result; 2 orders in all. Nobody else has run it. Zero model calls."
+ ],
+ "what_was_run": {
+  "tool": "canonical/tools/humanevalfix_experience_stream_measure_v1.py",
+  "bugs": "the 100 scored HumanEvalFix bugs (split seed 20261111)",
+  "order_seed": 20261112,
+  "arms": {
+   "cold": "the solver alone, from its record",
+   "own": "the learner first, then the solver; each repair that changed one line is kept as a lesson at once",
+   "backwards": "the same, each repair kept the wrong way round: a memory of the same size that holds no fix",
+   "shown": "the published fix is kept after every bug, repaired or not",
+   "cache": "a memory that gives back the repair of a program it has met"
+  },
+  "learner_budget": 200,
+  "cost_unit": "runs of a bug's tests: 1 to see it fail, 1 per candidate of the learner, 1 more in a fresh interpreter for one that passes, and the processes the solver starts",
+  "a_lesson_is_kept_when": "the repair changed one line of the program as written out (arms own and backwards); the published fix always (arm shown)",
+  "right_as_far_as_checked": "the repair is the published fix, or it answers like the published fix on the extra inputs of HumanEvalPlus-Mini",
+  "code_sha256": {
+   "canonical/tools/humanevalfix_experience_stream_measure_v1.py": "77a5d7fd8beb77e42d7662a1b298bf43970aa2fe062dbdb74e244503e12dad8a",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_repair_solver_measure_v1.py": "5593efc78e56b26b2781052b3e49b4a8dfc39229f5907068ca104548e6b45d27",
+   "canonical/tools/learning_claim_adjudicator_v1.py": "34b8f6d021d8697e4d72d4c189467291a421eb85fe0475f3ccdd3cbd2dba6cf4",
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/runtime/bound_capabilities/python_repair_apply_verified_v1.py": "fd96af03475835c7d87eac7281568c373e58a881cb3eac20389d8a57d29a0638",
+   "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09"
+  },
+  "benchmark": {
+   "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+   "extra_inputs_sha256": "78fbba8865b20c5a979cda6e02fd72538e1762e65980af7d1a6e93c3e87e93af",
+   "solver_record_sha256": "3c446ca8a6d134462b7472056a2bcc685693d97543fd0adfe7862d580f9978dc"
+  },
+  "tree_commit_of_the_run": "b22c77a27325860c6a8f1053243d0a6dbdd2c71d",
+  "model_calls": 0,
+  "seconds": {
+   "own_and_backwards": 270.9,
+   "shown": 306.6
+  },
+  "generated_utc": {
+   "own_and_backwards": "2026-11-12T15:06:34Z",
+   "shown": "2026-11-12T15:06:36Z"
+  },
+  "bugs_without_a_solver_cost": [
+   "Python/123",
+   "Python/32"
+  ]
+ },
+ "first_meeting": {
+  "solver_alone": {
+   "repaired": 53,
+   "right_as_far_as_checked": 36,
+   "test_runs_on_the_bugs_with_a_solver_cost": {
+    "bugs": 98,
+    "mean": 237.92,
+    "median": 122.5,
+    "in_all": 23316
+   },
+   "test_runs_on_every_bug": {
+    "bugs": 98,
+    "mean": 237.92,
+    "median": 122.5,
+    "in_all": 23316
+   }
+  },
+  "own": {
+   "repaired": 64,
+   "right_as_far_as_checked": 45,
+   "repaired_by_the_learner": 41,
+   "repaired_by_the_solver": 23,
+   "right_and_by_the_learner": 35,
+   "lessons_kept": 51,
+   "learner_repaired_within_candidates": {
+    "1": 1,
+    "10": 20,
+    "100": 39,
+    "200": 41
+   },
+   "test_runs_on_the_bugs_with_a_solver_cost": {
+    "bugs": 98,
+    "mean": 219.91,
+    "median": 57.5,
+    "in_all": 21551
+   },
+   "test_runs_on_every_bug": {
+    "bugs": 100,
+    "mean": 217.56,
+    "median": 57.5,
+    "in_all": 21756
+   }
+  },
+  "backwards": {
+   "repaired": 62,
+   "right_as_far_as_checked": 42,
+   "repaired_by_the_learner": 28,
+   "repaired_by_the_solver": 34,
+   "right_and_by_the_learner": 21,
+   "lessons_kept": 48,
+   "learner_repaired_within_candidates": {
+    "1": 5,
+    "10": 18,
+    "100": 25,
+    "200": 28
+   },
+   "test_runs_on_the_bugs_with_a_solver_cost": {
+    "bugs": 98,
+    "mean": 231.18,
+    "median": 84.0,
+    "in_all": 22656
+   },
+   "test_runs_on_every_bug": {
+    "bugs": 100,
+    "mean": 228.1,
+    "median": 84.0,
+    "in_all": 22810
+   }
+  },
+  "shown": {
+   "repaired": 65,
+   "right_as_far_as_checked": 45,
+   "repaired_by_the_learner": 40,
+   "repaired_by_the_solver": 25,
+   "right_and_by_the_learner": 33,
+   "lessons_kept": 100,
+   "learner_repaired_within_candidates": {
+    "1": 5,
+    "10": 17,
+    "100": 36,
+    "200": 40
+   },
+   "test_runs_on_the_bugs_with_a_solver_cost": {
+    "bugs": 98,
+    "mean": 267.63,
+    "median": 180.0,
+    "in_all": 26228
+   },
+   "test_runs_on_every_bug": {
+    "bugs": 99,
+    "mean": 266.86,
+    "median": 182.0,
+    "in_all": 26419
+   }
+  },
+  "own_against_the_solver_alone": {
+   "repaired_here_and_not_there": [
+    "Python/30",
+    "Python/32",
+    "Python/43",
+    "Python/46",
+    "Python/51",
+    "Python/61",
+    "Python/101",
+    "Python/108",
+    "Python/123",
+    "Python/130",
+    "Python/135"
+   ],
+   "repaired_there_and_not_here": [],
+   "right_here_and_not_there": [
+    "Python/30",
+    "Python/32",
+    "Python/43",
+    "Python/46",
+    "Python/108",
+    "Python/123",
+    "Python/130",
+    "Python/135",
+    "Python/150"
+   ],
+   "right_there_and_not_here": [],
+   "cheaper_here": 31,
+   "dearer_here": 66,
+   "the_same_cost": 1,
+   "bugs_compared_for_cost": 98
+  },
+  "own_against_backwards": {
+   "repaired_here_and_not_there": [
+    "Python/30",
+    "Python/101"
+   ],
+   "repaired_there_and_not_here": [],
+   "right_here_and_not_there": [
+    "Python/30",
+    "Python/43",
+    "Python/150"
+   ],
+   "right_there_and_not_here": [],
+   "cheaper_here": 34,
+   "dearer_here": 56,
+   "the_same_cost": 8,
+   "bugs_compared_for_cost": 98
+  },
+  "shown_against_the_solver_alone": {
+   "repaired_here_and_not_there": [
+    "Python/37",
+    "Python/43",
+    "Python/46",
+    "Python/51",
+    "Python/61",
+    "Python/86",
+    "Python/92",
+    "Python/101",
+    "Python/108",
+    "Python/123",
+    "Python/130",
+    "Python/135"
+   ],
+   "repaired_there_and_not_here": [],
+   "right_here_and_not_there": [
+    "Python/28",
+    "Python/37",
+    "Python/43",
+    "Python/46",
+    "Python/86",
+    "Python/108",
+    "Python/123",
+    "Python/130",
+    "Python/135",
+    "Python/150"
+   ],
+   "right_there_and_not_here": [
+    "Python/138"
+   ],
+   "cheaper_here": 28,
+   "dearer_here": 69,
+   "the_same_cost": 1,
+   "bugs_compared_for_cost": 98
+  },
+  "shown_against_own": {
+   "repaired_by_shown_and_not_own": [
+    "Python/37",
+    "Python/86",
+    "Python/92"
+   ],
+   "repaired_by_own_and_not_shown": [
+    "Python/30",
+    "Python/32"
+   ]
+  },
+  "lessons_of_own": {
+   "kept": 51,
+   "made_by": {
+    "learner": 41,
+    "solver": 10
+   },
+   "kept_from_a_repair_that_is_not_right_as_far_as_checked": 8,
+   "not_kept_because": {
+    "nothing was repaired": 36,
+    "the repair changed more than one line": 13
+   }
+  },
+  "quarters_of_the_order": {
+   "solver_alone": [
+    {
+     "positions": [
+      1,
+      25
+     ],
+     "repaired": 15,
+     "right_as_far_as_checked": 8,
+     "test_runs_mean": 304.16,
+     "bugs_with_a_cost": 25
+    },
+    {
+     "positions": [
+      26,
+      50
+     ],
+     "repaired": 15,
+     "right_as_far_as_checked": 13,
+     "test_runs_mean": 154.68,
+     "bugs_with_a_cost": 25
+    },
+    {
+     "positions": [
+      51,
+      75
+     ],
+     "repaired": 11,
+     "right_as_far_as_checked": 8,
+     "test_runs_mean": 232.92,
+     "bugs_with_a_cost": 24
+    },
+    {
+     "positions": [
+      76,
+      100
+     ],
+     "repaired": 12,
+     "right_as_far_as_checked": 7,
+     "test_runs_mean": 260.62,
+     "bugs_with_a_cost": 24
+    }
+   ],
+   "own": [
+    {
+     "positions": [
+      1,
+      25
+     ],
+     "repaired": 17,
+     "right_as_far_as_checked": 11,
+     "test_runs_mean": 272.56,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 6,
+     "lessons_at_its_first_bug": 0
+    },
+    {
+     "positions": [
+      26,
+      50
+     ],
+     "repaired": 15,
+     "right_as_far_as_checked": 13,
+     "test_runs_mean": 185.8,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 11,
+     "lessons_at_its_first_bug": 13
+    },
+    {
+     "positions": [
+      51,
+      75
+     ],
+     "repaired": 15,
+     "right_as_far_as_checked": 10,
+     "test_runs_mean": 245.28,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 10,
+     "lessons_at_its_first_bug": 26
+    },
+    {
+     "positions": [
+      76,
+      100
+     ],
+     "repaired": 17,
+     "right_as_far_as_checked": 11,
+     "test_runs_mean": 166.6,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 14,
+     "lessons_at_its_first_bug": 37
+    }
+   ],
+   "backwards": [
+    {
+     "positions": [
+      1,
+      25
+     ],
+     "repaired": 16,
+     "right_as_far_as_checked": 9,
+     "test_runs_mean": 243.72,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 5,
+     "lessons_at_its_first_bug": 0
+    },
+    {
+     "positions": [
+      26,
+      50
+     ],
+     "repaired": 15,
+     "right_as_far_as_checked": 13,
+     "test_runs_mean": 165.16,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 5,
+     "lessons_at_its_first_bug": 11
+    },
+    {
+     "positions": [
+      51,
+      75
+     ],
+     "repaired": 14,
+     "right_as_far_as_checked": 10,
+     "test_runs_mean": 283.04,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 6,
+     "lessons_at_its_first_bug": 24
+    },
+    {
+     "positions": [
+      76,
+      100
+     ],
+     "repaired": 17,
+     "right_as_far_as_checked": 10,
+     "test_runs_mean": 220.48,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 12,
+     "lessons_at_its_first_bug": 34
+    }
+   ],
+   "shown": [
+    {
+     "positions": [
+      1,
+      25
+     ],
+     "repaired": 16,
+     "right_as_far_as_checked": 10,
+     "test_runs_mean": 310.04,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 5,
+     "lessons_at_its_first_bug": 0
+    },
+    {
+     "positions": [
+      26,
+      50
+     ],
+     "repaired": 15,
+     "right_as_far_as_checked": 12,
+     "test_runs_mean": 269.04,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 9,
+     "lessons_at_its_first_bug": 25
+    },
+    {
+     "positions": [
+      51,
+      75
+     ],
+     "repaired": 16,
+     "right_as_far_as_checked": 11,
+     "test_runs_mean": 281.2,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 11,
+     "lessons_at_its_first_bug": 50
+    },
+    {
+     "positions": [
+      76,
+      100
+     ],
+     "repaired": 18,
+     "right_as_far_as_checked": 12,
+     "test_runs_mean": 204.67,
+     "bugs_with_a_cost": 24,
+     "by_the_learner": 15,
+     "lessons_at_its_first_bug": 75
+    }
+   ]
+  }
+ },
+ "the_rulers_verdict": {
+  "ruler": "canonical/tools/learning_claim_adjudicator_v1.py",
+  "verdict": "NO_COMPOUNDING",
+  "claim": {
+   "claim_id": "C1_cross_kind_compounding",
+   "status": "FAIL",
+   "mean_cost_ratio_cold_over_warm": 1.0819,
+   "paired_wins": "31/98",
+   "cache_only_mean_ratio": 1.0,
+   "incremental_warm_over_cache_ratio": 1.0819,
+   "warm_over_random_ratio": 1.0513,
+   "cold_success": 36,
+   "warm_success": 43,
+   "random_success": 40,
+   "reasons": [
+    "MEAN_RATIO_TOO_SMALL:1.082",
+    "PAIRED_WINS_TOO_FEW:31/98",
+    "WARM_NOT_INCREMENTALLY_BETTER_THAN_CACHE:1.082",
+    "DOES_NOT_BEAT_RANDOM_ARM:1.051"
+   ]
+  },
+  "thresholds": {
+   "min_held_out_tasks": 5,
+   "min_mean_cost_ratio_warm_vs_cold": 1.5,
+   "min_paired_win_fraction": 0.8,
+   "min_incremental_ratio_warm_vs_cache": 1.5,
+   "max_cost_outlier_multiple": 100.0,
+   "one_shot_new_kind_min_held_out_success": 0.3,
+   "one_shot_new_kind_max_extra_interactions": 0,
+   "verifier_independent_min_held_out_success": 0.8
+  },
+  "arms_given": {
+   "cold": "the solver alone",
+   "warm": "the arm 'own'",
+   "cache_only": "a memory that gives back the repair of a program it has met",
+   "random": "the arm 'backwards'"
+  },
+  "tasks": 98,
+  "left_out_for_want_of_a_measured_cost": [
+   "Python/123",
+   "Python/32"
+  ],
+  "what_a_kind_is_here": "one bug. The ruler's question is about a new KIND of task; these are new bugs of one benchmark, six bug types among them all. A pass here would be transfer to new bugs of a known kind, not to a new kind.",
+  "claims_not_measured": [
+   "C2_one_shot_new_kind",
+   "C3_self_authored_structural_test",
+   "C4_interface_evolution",
+   "C5_verifier_independent_success"
+  ],
+  "the_rulers_own_note": "COMPOUNDING here means only C1 passed: experience made a genuinely new kind measurably cheaper, a cache cannot explain it, it beat the random arm, and it did not make the system wronger or damage old kinds. It is not a claim about general computer use or sentience.",
+  "independently_timestamped_registration": false
+ },
+ "on_return": {
+  "own": {
+   "repaired": 65,
+   "right_as_far_as_checked": 46,
+   "by_the_learner": 52,
+   "by_the_solver": 13,
+   "test_runs_mean": 199.26,
+   "test_runs_median": 24.5,
+   "learner_repaired_within_candidates": {
+    "1": 6,
+    "10": 38,
+    "100": 51,
+    "200": 52
+   },
+   "bugs_whose_own_lesson_was_kept": 51,
+   "of_those_repaired_by_the_first_candidate": 6,
+   "repaired_on_return_and_not_at_first": 1,
+   "repaired_at_first_and_not_on_return": 0
+  },
+  "shown": {
+   "repaired": 99,
+   "right_as_far_as_checked": 96,
+   "by_the_learner": 99,
+   "by_the_solver": 0,
+   "test_runs_mean": 21.82,
+   "test_runs_median": 10.0,
+   "learner_repaired_within_candidates": {
+    "1": 6,
+    "10": 60,
+    "100": 98,
+    "200": 99
+   },
+   "bugs_whose_own_lesson_was_kept": 100,
+   "of_those_repaired_by_the_first_candidate": 6,
+   "repaired_on_return_and_not_at_first": 34,
+   "repaired_at_first_and_not_on_return": 0
+  },
+  "cache": {
+   "hits_at_first_meeting": 0,
+   "hits_on_return": 53,
+   "test_runs_of_a_hit": [
+    2
+   ],
+   "repaired_on_return": 53,
+   "right_on_return": 36
+  },
+  "backwards": "not run: the return pass is made for own and shown"
+ },
+ "other_orders": {
+  "20261113": {
+   "order_sha256": "9070329fdaace5121ecc92f6d6022cb5c8fc78288a668e9828875c6c449e1c03",
+   "own": {
+    "repaired": 62,
+    "right_as_far_as_checked": 41,
+    "repaired_by_the_learner": 39,
+    "repaired_by_the_solver": 23,
+    "right_and_by_the_learner": 31,
+    "lessons_kept": 48,
+    "learner_repaired_within_candidates": {
+     "1": 3,
+     "10": 25,
+     "100": 39,
+     "200": 39
+    },
+    "test_runs_on_the_bugs_with_a_solver_cost": {
+     "bugs": 98,
+     "mean": 220.02,
+     "median": 54.0,
+     "in_all": 21562
+    },
+    "test_runs_on_every_bug": {
+     "bugs": 100,
+     "mean": 216.33,
+     "median": 50.0,
+     "in_all": 21633
+    }
+   },
+   "backwards": {
+    "repaired": 58,
+    "right_as_far_as_checked": 41,
+    "repaired_by_the_learner": 25,
+    "repaired_by_the_solver": 33,
+    "right_and_by_the_learner": 20,
+    "lessons_kept": 44,
+    "learner_repaired_within_candidates": {
+     "1": 6,
+     "10": 19,
+     "100": 24,
+     "200": 25
+    },
+    "test_runs_on_the_bugs_with_a_solver_cost": {
+     "bugs": 98,
+     "mean": 237.76,
+     "median": 82.0,
+     "in_all": 23300
+    },
+    "test_runs_on_every_bug": {
+     "bugs": 99,
+     "mean": 235.62,
+     "median": 76.0,
+     "in_all": 23326
+    }
+   },
+   "own_against_the_solver_alone": {
+    "repaired_here_and_not_there": 9,
+    "repaired_there_and_not_here": 0,
+    "right_here_and_not_there": 8,
+    "right_there_and_not_here": 3,
+    "cheaper_here": 31,
+    "dearer_here": 67,
+    "the_same_cost": 0,
+    "bugs_compared_for_cost": 98
+   },
+   "own_and_not_backwards": [
+    "Python/32",
+    "Python/43",
+    "Python/130",
+    "Python/145"
+   ],
+   "backwards_and_not_own": [],
+   "lessons": {
+    "kept": 48,
+    "made_by": {
+     "learner": 39,
+     "solver": 9
+    },
+    "kept_from_a_repair_that_is_not_right_as_far_as_checked": 9
+   },
+   "quarters_own": [
+    {
+     "positions": [
+      1,
+      25
+     ],
+     "repaired": 12,
+     "right_as_far_as_checked": 6,
+     "test_runs_mean": 258.16,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 5,
+     "lessons_at_its_first_bug": 0
+    },
+    {
+     "positions": [
+      26,
+      50
+     ],
+     "repaired": 17,
+     "right_as_far_as_checked": 13,
+     "test_runs_mean": 177.24,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 12,
+     "lessons_at_its_first_bug": 9
+    },
+    {
+     "positions": [
+      51,
+      75
+     ],
+     "repaired": 16,
+     "right_as_far_as_checked": 13,
+     "test_runs_mean": 143.84,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 14,
+     "lessons_at_its_first_bug": 23
+    },
+    {
+     "positions": [
+      76,
+      100
+     ],
+     "repaired": 17,
+     "right_as_far_as_checked": 9,
+     "test_runs_mean": 286.08,
+     "bugs_with_a_cost": 25,
+     "by_the_learner": 8,
+     "lessons_at_its_first_bug": 38
+    }
+   ],
+   "on_return_own": {
+    "repaired": 64,
+    "right_as_far_as_checked": 43,
+    "by_the_learner": 50,
+    "by_the_solver": 14,
+    "test_runs_mean": 201.59,
+    "test_runs_median": 31.0,
+    "learner_repaired_within_candidates": {
+     "1": 10,
+     "10": 39,
+     "100": 50,
+     "200": 50
+    },
+    "bugs_whose_own_lesson_was_kept": 48,
+    "of_those_repaired_by_the_first_candidate": 10,
+    "repaired_on_return_and_not_at_first": 2,
+    "repaired_at_first_and_not_on_return": 0
+   },
+   "the_rulers_verdict": {
+    "verdict": "NO_COMPOUNDING",
+    "claim": {
+     "claim_id": "C1_cross_kind_compounding",
+     "status": "FAIL",
+     "mean_cost_ratio_cold_over_warm": 1.0813,
+     "paired_wins": "31/98",
+     "cache_only_mean_ratio": 1.0,
+     "incremental_warm_over_cache_ratio": 1.0813,
+     "warm_over_random_ratio": 1.0806,
+     "cold_success": 36,
+     "warm_success": 40,
+     "random_success": 40,
+     "reasons": [
+      "MEAN_RATIO_TOO_SMALL:1.081",
+      "PAIRED_WINS_TOO_FEW:31/98",
+      "WARM_NOT_INCREMENTALLY_BETTER_THAN_CACHE:1.081",
+      "DOES_NOT_BEAT_RANDOM_ARM:1.081"
+     ]
+    }
+   },
+   "checked": {
+    "solver_program_not_as_recorded": [],
+    "screen_said_pass_fresh_interpreter_said_no": 0,
+    "solver_runs_made_here": 0,
+    "candidates_run": 9594
+   },
+   "seconds": 173.5,
+   "generated_utc": "2026-11-12T15:12:07Z",
+   "per_bug": {
+    "Python/30": {
+     "position": 1,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 52,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 21,
+       "rank": 19
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 52,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/4": {
+     "position": 2,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 38,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 92,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 38,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/24": {
+     "position": 3,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 97,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 132,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 97,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/70": {
+     "position": 4,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 9,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 5,
+       "rank": 3
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 9,
+      "lessons_before": 0,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/133": {
+     "position": 5,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 353,
+      "lessons_before": 1,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 382,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 353,
+      "lessons_before": 1,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/3": {
+     "position": 6,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 5,
+      "lessons_before": 1,
+      "rank": 3,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 6,
+       "rank": 4
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 13,
+      "lessons_before": 1,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/93": {
+     "position": 7,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 379,
+      "lessons_before": 2,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 472,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 382,
+      "lessons_before": 2,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/16": {
+     "position": 8,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 12,
+      "lessons_before": 2,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 27,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 12,
+      "lessons_before": 2,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/107": {
+     "position": 9,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 543,
+      "lessons_before": 2,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 14,
+       "rank": 12
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 550,
+      "lessons_before": 2,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/158": {
+     "position": 10,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 19,
+      "lessons_before": 3,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 30,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 14,
+      "lessons_before": 3,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/20": {
+     "position": 11,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 61,
+      "lessons_before": 3,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 12,
+       "rank": 10
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 21,
+      "lessons_before": 3,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/14": {
+     "position": 12,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 6,
+      "lessons_before": 4,
+      "rank": 4,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 4,
+      "rank": 2,
+      "kept": true
+     }
+    },
+    "Python/82": {
+     "position": 13,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 73,
+      "lessons_before": 5,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 5,
+       "rank": 3
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 38,
+      "lessons_before": 5,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/143": {
+     "position": 14,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 608,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 644,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 547,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/118": {
+     "position": 15,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 843,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 894,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 774,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/22": {
+     "position": 16,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 27,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 35,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 10,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/125": {
+     "position": 17,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 701,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 733,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 648,
+      "lessons_before": 6,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/61": {
+     "position": 18,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 33,
+      "lessons_before": 6,
+      "rank": 31,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 13,
+       "rank": 11
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 6,
+      "rank": 1,
+      "kept": true
+     }
+    },
+    "Python/5": {
+     "position": 19,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 155,
+      "lessons_before": 7,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 171,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 125,
+      "lessons_before": 7,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/60": {
+     "position": 20,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 7,
+      "rank": 1,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 4,
+       "rank": 2
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 13,
+      "lessons_before": 7,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/102": {
+     "position": 21,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 576,
+      "lessons_before": 8,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 593,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 550,
+      "lessons_before": 8,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/154": {
+     "position": 22,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 77,
+      "lessons_before": 8,
+      "rank": 75,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 9,
+       "rank": 7
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": false,
+      "runs": 19,
+      "lessons_before": 8,
+      "rank": 17,
+      "kept": true
+     }
+    },
+    "Python/132": {
+     "position": 23,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 472,
+      "lessons_before": 9,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 517,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 401,
+      "lessons_before": 9,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/105": {
+     "position": 24,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 699,
+      "lessons_before": 9,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 730,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 690,
+      "lessons_before": 9,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/89": {
+     "position": 25,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 613,
+      "lessons_before": 9,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 636,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 590,
+      "lessons_before": 9,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/51": {
+     "position": 26,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 11,
+      "lessons_before": 9,
+      "rank": 9,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 7,
+       "rank": 5
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": false,
+      "runs": 3,
+      "lessons_before": 9,
+      "rank": 1,
+      "kept": true
+     }
+    },
+    "Python/140": {
+     "position": 27,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 698,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 740,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 635,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/101": {
+     "position": 28,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 346,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 369,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 314,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/141": {
+     "position": 29,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 744,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 790,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 713,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/64": {
+     "position": 30,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 297,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 307,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 285,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/54": {
+     "position": 31,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 18,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 21,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 12,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/25": {
+     "position": 32,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 27,
+      "lessons_before": 10,
+      "rank": 25,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 12,
+       "rank": 10
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 38,
+      "lessons_before": 10,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/29": {
+     "position": 33,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 25,
+      "lessons_before": 11,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 15,
+       "rank": 13
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 11,
+      "lessons_before": 11,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/17": {
+     "position": 34,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 35,
+      "lessons_before": 12,
+      "rank": 33,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 12,
+       "rank": 10
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 57,
+      "lessons_before": 12,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/69": {
+     "position": 35,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 413,
+      "lessons_before": 13,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 441,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 378,
+      "lessons_before": 13,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/100": {
+     "position": 36,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 13,
+      "rank": 2,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 13,
+      "rank": 2,
+      "kept": true
+     }
+    },
+    "Python/120": {
+     "position": 37,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 251,
+      "lessons_before": 14,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 265,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 229,
+      "lessons_before": 14,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/110": {
+     "position": 38,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 673,
+      "lessons_before": 14,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 34,
+       "rank": 32
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 675,
+      "lessons_before": 14,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/130": {
+     "position": 39,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 7,
+      "lessons_before": 15,
+      "rank": 5,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 784,
+      "lessons_before": 15,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/37": {
+     "position": 40,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 527,
+      "lessons_before": 16,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 562,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 472,
+      "lessons_before": 15,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/28": {
+     "position": 41,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 28,
+      "lessons_before": 16,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 32,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 25,
+      "lessons_before": 15,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/123": {
+     "position": 42,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 48,
+      "lessons_before": 16,
+      "rank": 46,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 29,
+       "rank": 27
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 26,
+      "lessons_before": 15,
+      "rank": 24,
+      "kept": true
+     }
+    },
+    "Python/156": {
+     "position": 43,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 155,
+      "lessons_before": 17,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 202,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 202,
+      "lessons_before": 16,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/150": {
+     "position": 44,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 6,
+      "lessons_before": 17,
+      "rank": 4,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 9,
+      "lessons_before": 16,
+      "rank": 7,
+      "kept": true
+     }
+    },
+    "Python/43": {
+     "position": 45,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 12,
+      "lessons_before": 18,
+      "rank": 10,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 8,
+       "rank": 6
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 265,
+      "lessons_before": 17,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/138": {
+     "position": 46,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 16,
+      "lessons_before": 19,
+      "rank": 14,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 8,
+       "rank": 6
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 381,
+      "lessons_before": 17,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/74": {
+     "position": 47,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 8,
+      "lessons_before": 20,
+      "rank": 6,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 25,
+      "lessons_before": 17,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/40": {
+     "position": 48,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 12,
+      "lessons_before": 21,
+      "rank": 10,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 5,
+       "rank": 3
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 13,
+      "lessons_before": 18,
+      "rank": 11,
+      "kept": true
+     }
+    },
+    "Python/163": {
+     "position": 49,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 14,
+      "lessons_before": 22,
+      "rank": 12,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 10,
+       "rank": 8
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 48,
+      "lessons_before": 19,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/52": {
+     "position": 50,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 56,
+      "lessons_before": 23,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": true,
+       "runs": 62,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 55,
+      "lessons_before": 20,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/45": {
+     "position": 51,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 8,
+      "lessons_before": 23,
+      "rank": 6,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 4,
+       "rank": 2
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 5,
+      "lessons_before": 20,
+      "rank": 3,
+      "kept": true
+     }
+    },
+    "Python/122": {
+     "position": 52,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 70,
+      "lessons_before": 24,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 82,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 53,
+      "lessons_before": 21,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/26": {
+     "position": 53,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 24,
+      "rank": 2,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 21,
+      "rank": 2,
+      "kept": true
+     }
+    },
+    "Python/121": {
+     "position": 54,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 16,
+      "lessons_before": 25,
+      "rank": 14,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 8,
+       "rank": 6
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 8,
+      "lessons_before": 22,
+      "rank": 6,
+      "kept": true
+     }
+    },
+    "Python/128": {
+     "position": 55,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 628,
+      "lessons_before": 26,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 660,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 601,
+      "lessons_before": 23,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/1": {
+     "position": 56,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 18,
+      "lessons_before": 26,
+      "rank": 16,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 23,
+      "rank": 1,
+      "kept": true
+     }
+    },
+    "Python/18": {
+     "position": 57,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 7,
+      "lessons_before": 27,
+      "rank": 5,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 6,
+       "rank": 4
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 28,
+      "lessons_before": 24,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/65": {
+     "position": 58,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 301,
+      "lessons_before": 28,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 328,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 253,
+      "lessons_before": 25,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/149": {
+     "position": 59,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 126,
+      "lessons_before": 28,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 143,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 105,
+      "lessons_before": 25,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/9": {
+     "position": 60,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 63,
+      "lessons_before": 28,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 78,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 47,
+      "lessons_before": 25,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/46": {
+     "position": 61,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 9,
+      "lessons_before": 28,
+      "rank": 7,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 5,
+       "rank": 3
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 6,
+      "lessons_before": 25,
+      "rank": 4,
+      "kept": true
+     }
+    },
+    "Python/32": {
+     "position": 62,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 23,
+      "lessons_before": 29,
+      "rank": 21,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 13,
+       "rank": 11
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": null,
+      "lessons_before": 26,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/108": {
+     "position": 63,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 684,
+      "lessons_before": 30,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 92,
+       "rank": 90
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 639,
+      "lessons_before": 26,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/49": {
+     "position": 64,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 5,
+      "lessons_before": 30,
+      "rank": 3,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 4,
+       "rank": 2
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 26,
+      "rank": 1,
+      "kept": true
+     }
+    },
+    "Python/21": {
+     "position": 65,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 43,
+      "lessons_before": 31,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 20,
+       "rank": 18
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 27,
+      "rank": 1,
+      "kept": true
+     }
+    },
+    "Python/35": {
+     "position": 66,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 7,
+      "lessons_before": 32,
+      "rank": 5,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 6,
+       "rank": 4
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 25,
+      "lessons_before": 28,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/96": {
+     "position": 67,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 301,
+      "lessons_before": 33,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 323,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 288,
+      "lessons_before": 29,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/23": {
+     "position": 68,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 33,
+      "rank": 1,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 29,
+      "rank": 1,
+      "kept": true
+     }
+    },
+    "Python/53": {
+     "position": 69,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 9,
+      "lessons_before": 34,
+      "rank": 7,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 7,
+       "rank": 5
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 21,
+      "lessons_before": 30,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/47": {
+     "position": 70,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 587,
+      "lessons_before": 35,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 623,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": false,
+      "runs": 42,
+      "lessons_before": 31,
+      "rank": 40,
+      "kept": true
+     }
+    },
+    "Python/88": {
+     "position": 71,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 14,
+      "lessons_before": 35,
+      "rank": 12,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 9,
+       "rank": 7
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 6,
+      "lessons_before": 32,
+      "rank": 4,
+      "kept": true
+     }
+    },
+    "Python/159": {
+     "position": 72,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 389,
+      "lessons_before": 36,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 408,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 536,
+      "lessons_before": 33,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/41": {
+     "position": 73,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 6,
+      "lessons_before": 36,
+      "rank": 4,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 5,
+       "rank": 3
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 5,
+      "lessons_before": 33,
+      "rank": 3,
+      "kept": true
+     }
+    },
+    "Python/86": {
+     "position": 74,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 254,
+      "lessons_before": 37,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 270,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 323,
+      "lessons_before": 34,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/135": {
+     "position": 75,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 21,
+      "lessons_before": 37,
+      "rank": 19,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 10,
+       "rank": 8
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 11,
+      "lessons_before": 34,
+      "rank": 9,
+      "kept": true
+     }
+    },
+    "Python/124": {
+     "position": 76,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 1078,
+      "lessons_before": 38,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 1078,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": false,
+      "runs": 161,
+      "lessons_before": 35,
+      "rank": 159,
+      "kept": true
+     }
+    },
+    "Python/145": {
+     "position": 77,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 6,
+      "lessons_before": 38,
+      "rank": 4,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 6,
+       "rank": 4
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 603,
+      "lessons_before": 36,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/11": {
+     "position": 78,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 3,
+      "lessons_before": 39,
+      "rank": 1,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 200,
+      "lessons_before": 36,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/27": {
+     "position": 79,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 18,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 21,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 18,
+      "lessons_before": 37,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/15": {
+     "position": 80,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 8,
+      "lessons_before": 40,
+      "rank": 6,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 6,
+       "rank": 4
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 76,
+      "lessons_before": 37,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/127": {
+     "position": 81,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 13,
+      "lessons_before": 41,
+      "rank": 11,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 9,
+       "rank": 7
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": false,
+      "runs": 8,
+      "lessons_before": 38,
+      "rank": 6,
+      "kept": true
+     }
+    },
+    "Python/134": {
+     "position": 82,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 439,
+      "lessons_before": 42,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 35,
+       "rank": 33
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 564,
+      "lessons_before": 39,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/99": {
+     "position": 83,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 22,
+      "lessons_before": 43,
+      "rank": 20,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 9,
+       "rank": 7
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 586,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/62": {
+     "position": 84,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 32,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 39,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 88,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/66": {
+     "position": 85,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 416,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 432,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 486,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/144": {
+     "position": 86,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 447,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 494,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 546,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/19": {
+     "position": 87,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 749,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 780,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 844,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/58": {
+     "position": 88,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 36,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 49,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 48,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/63": {
+     "position": 89,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 903,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": true,
+       "runs": 932,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 1028,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/81": {
+     "position": 90,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 728,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 728,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 728,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/136": {
+     "position": 91,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 499,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 548,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 506,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/114": {
+     "position": 92,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 394,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 420,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 434,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/157": {
+     "position": 93,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 59,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 70,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 147,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/92": {
+     "position": 94,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 431,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 458,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 567,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/109": {
+     "position": 95,
+     "own": {
+      "by": "solver",
+      "right": false,
+      "runs": 538,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": "solver",
+       "right": false,
+       "runs": 577,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": false,
+      "runs": 644,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/147": {
+     "position": 96,
+     "own": {
+      "by": "solver",
+      "right": true,
+      "runs": 138,
+      "lessons_before": 44,
+      "rank": null,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 39,
+       "rank": 37
+      }
+     },
+     "backwards": {
+      "by": "solver",
+      "right": true,
+      "runs": 164,
+      "lessons_before": 40,
+      "rank": null,
+      "kept": true
+     }
+    },
+    "Python/84": {
+     "position": 97,
+     "own": {
+      "by": null,
+      "right": false,
+      "runs": 172,
+      "lessons_before": 45,
+      "rank": null,
+      "kept": false,
+      "return": {
+       "by": null,
+       "right": false,
+       "runs": 172,
+       "rank": null
+      }
+     },
+     "backwards": {
+      "by": null,
+      "right": false,
+      "runs": 221,
+      "lessons_before": 41,
+      "rank": null,
+      "kept": false
+     }
+    },
+    "Python/78": {
+     "position": 98,
+     "own": {
+      "by": "learner",
+      "right": false,
+      "runs": 10,
+      "lessons_before": 45,
+      "rank": 8,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": false,
+       "runs": 8,
+       "rank": 6
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 41,
+      "rank": 2,
+      "kept": true
+     }
+    },
+    "Python/90": {
+     "position": 99,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 4,
+      "lessons_before": 46,
+      "rank": 2,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 3,
+       "rank": 1
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 10,
+      "lessons_before": 42,
+      "rank": 8,
+      "kept": true
+     }
+    },
+    "Python/85": {
+     "position": 100,
+     "own": {
+      "by": "learner",
+      "right": true,
+      "runs": 9,
+      "lessons_before": 47,
+      "rank": 7,
+      "kept": true,
+      "return": {
+       "by": "learner",
+       "right": true,
+       "runs": 7,
+       "rank": 5
+      }
+     },
+     "backwards": {
+      "by": "learner",
+      "right": true,
+      "runs": 15,
+      "lessons_before": 43,
+      "rank": 13,
+      "kept": true
+     }
+    }
+   }
+  }
+ },
+ "across_the_three_orders": {
+  "orders": [
+   "20261112",
+   "20261113"
+  ],
+  "own_repaired": [
+   62,
+   64
+  ],
+  "own_right": [
+   41,
+   45
+  ],
+  "backwards_repaired": [
+   58,
+   62
+  ],
+  "backwards_right": [
+   41,
+   42
+  ],
+  "own_test_runs_mean": [
+   219.91,
+   220.02
+  ],
+  "backwards_test_runs_mean": [
+   231.18,
+   237.76
+  ],
+  "cost_ratio_solver_alone_over_own": [
+   1.0813,
+   1.0819
+  ],
+  "cost_ratio_backwards_over_own": [
+   1.0513,
+   1.0806
+  ],
+  "paired_wins": [
+   "31/98",
+   "31/98"
+  ],
+  "right_solver_alone_own_backwards": [
+   [
+    36,
+    43,
+    40
+   ],
+   [
+    36,
+    40,
+    40
+   ]
+  ],
+  "verdicts": [
+   "NO_COMPOUNDING",
+   "NO_COMPOUNDING"
+  ],
+  "solver_alone": {
+   "repaired": 53,
+   "right_as_far_as_checked": 36,
+   "test_runs_mean": 237.92
+  }
+ },
+ "what_was_checked": {
+  "the_solvers_programs_had_again": "36 one-line repairs of the solver were made again by running the solver; each is the program its record says",
+  "solver_program_not_as_recorded": [],
+  "screen_said_pass_fresh_interpreter_said_no": 0,
+  "not_usable": [],
+  "candidates_run": {
+   "own_and_backwards": 10804,
+   "shown": 11225
+  },
+  "lessons_evidence_sha256": {
+   "own": "97ef9d82ccfe4d20fc4012f31e2c5d4fd0afd1c1c3910c22ae1ab0827fa699c5",
+   "backwards": "334d6d0ba3229feec2d1819a32713df3e2e7c417e6031fb355ffd78ad0370757",
+   "shown": "6e6b9e1925dcc7fe42a447a68300c8ed444f6e817097e46a201b81fd2d98e855"
+  },
+  "run_twice_by_the_producer": {
+   "the_first_run": "12 Nov 2026, 14:24 to 14:35 UTC. Its files and its record were lost before they were pushed. Its numbers are those written down at the time; each line below says whether this run gave the same.",
+   "this_run": "12 Nov 2026, from 2026-11-12T15:06:34Z",
+   "the_table_of_arms_is_the_same": {
+    "cold": true,
+    "own": true,
+    "backwards": true,
+    "shown": true
+   },
+   "the_other_numbers_are_the_same": {
+    "own against the solver alone: no bug lost, 11 more repaired, 9 more right, cheaper on 31 and dearer on 66 of 98": true,
+    "repaired by own and not by backwards: Python/30, Python/101": true,
+    "own lessons: 41 made by the learner, 10 by the solver, 8 from a repair that is not right, 13 repairs not kept": true,
+    "learner within 1, 10, 100, 200 candidates: own 1/20/39/41, backwards 5/18/25/28, shown 5/17/36/40": true,
+    "ruler: NO_COMPOUNDING, cost ratio 1.0819, paired wins 31/98, against the control 1.0513, right 36 / 43 / 40": true,
+    "quarters of own (repaired / by the learner / mean cost): 17/6/272.6, 15/11/185.8, 15/10/245.3, 17/14/166.6": true,
+    "quarters of the solver alone (repaired / mean cost): 15/304.2, 15/154.7, 11/232.9, 12/260.6": true,
+    "on return, shown: 99 repaired, 96 right, median 10 runs": true,
+    "on return, own: 65 repaired, 52 by the learner, 46 right, median 24.5 runs, 6 of 51 by the first candidate": true,
+    "on return, cache: 53 hits at 2 runs each": true,
+    "order 20261113: own 62 repaired, 41 right, mean cost over the bugs that have one 216.3; backwards 58, 41, 235.6; NO_COMPOUNDING": true
+   }
+  },
+  "tests_of_the_tool": "canonical/tests/test_humanevalfix_experience_stream_v1.py: 37 tests; 18 faults were put into the tool one at a time and the tests noticed all 18"
+ },
+ "limits": [
+  "One machine, one producer. Nobody else has run this.",
+  "The rule 'keep a repair only when it changed one line' was chosen after reading the solver's repairs on these same 100 bugs. It is not a rule fixed before the bugs were seen.",
+  "The control keeps the place and the shape of every change and loses only its direction. What it shares with the real lessons, it cannot separate from them: the control says how much of the gain needs the fix itself, not how much needs any memory at all.",
+  "Orders 20261113 and 20261114 were run after the first order had been seen.",
+  "Cost is counted in runs of the tests, not timed.",
+  "The ruler asks about a new KIND of task. These are new bugs of one benchmark, six bug types among them. A pass would have been transfer to new bugs of a known kind; the fail is on that easier question.",
+  "2 bugs (Python/123, Python/32) have no solver cost, because the solver was stopped at its wall limit there; they are in the counts of repairs and out of the costs.",
+  "Right 'as far as checked' is not right: the extra inputs are a sample.",
+  "The solver was not run inside the stream. Its outcome on a bug is read from its record, and its one-line repairs were made again beforehand and compared with the record.",
+  "The first run's files were lost; only the numbers written down then could be compared with this run."
+ ],
+ "per_bug": {
+  "Python/40": {
+   "position": 1,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 8,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 9,
+    "lessons_before": 0,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 9,
+     "rank": 7
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 9,
+    "lessons_before": 0,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 9,
+    "lessons_before": 0,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 3,
+     "rank": 1
+    }
+   }
+  },
+  "Python/105": {
+   "position": 2,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 601,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 633,
+    "lessons_before": 1,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 795,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 602,
+    "lessons_before": 1,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 602,
+    "lessons_before": 1,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 18,
+     "rank": 16
+    }
+   }
+  },
+  "Python/163": {
+   "position": 3,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 22,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 48,
+    "lessons_before": 1,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 19,
+     "rank": 17
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 23,
+    "lessons_before": 1,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 25,
+    "lessons_before": 2,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/78": {
+   "position": 4,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 280,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 311,
+    "lessons_before": 2,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 290,
+    "lessons_before": 2,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 304,
+    "lessons_before": 3,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   }
+  },
+  "Python/150": {
+   "position": 5,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 490,
+    "one_line": false
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 6,
+    "lessons_before": 3,
+    "rank": 4,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 497,
+    "lessons_before": 3,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 6,
+    "lessons_before": 4,
+    "rank": 4,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/47": {
+   "position": 6,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 503,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 554,
+    "lessons_before": 4,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 669,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 11,
+    "lessons_before": 3,
+    "rank": 9,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 552,
+    "lessons_before": 5,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 20,
+     "rank": 18
+    }
+   }
+  },
+  "Python/127": {
+   "position": 7,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 769,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 844,
+    "lessons_before": 4,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 4,
+    "lessons_before": 4,
+    "rank": 2,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 8,
+    "lessons_before": 6,
+    "rank": 6,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 7,
+     "rank": 5
+    }
+   }
+  },
+  "Python/22": {
+   "position": 8,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 9,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 18,
+    "lessons_before": 5,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 43,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 10,
+    "lessons_before": 5,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 98,
+    "lessons_before": 7,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/154": {
+   "position": 9,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 16,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 15,
+    "lessons_before": 5,
+    "rank": 13,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 23,
+     "rank": 21
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 11,
+    "lessons_before": 5,
+    "rank": 9,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 138,
+    "lessons_before": 8,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 12,
+     "rank": 10
+    }
+   }
+  },
+  "Python/89": {
+   "position": 10,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 564,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 600,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 663,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 580,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 627,
+    "lessons_before": 9,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/69": {
+   "position": 11,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 351,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 388,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 467,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 362,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 430,
+    "lessons_before": 10,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 21,
+     "rank": 19
+    }
+   }
+  },
+  "Python/30": {
+   "position": 12,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 51,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 9,
+    "lessons_before": 6,
+    "rank": 7,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 54,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 90,
+    "lessons_before": 11,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/99": {
+   "position": 13,
+   "bug_type": "function misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 420,
+    "one_line": false
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 7,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 448,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 621,
+    "lessons_before": 12,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 17,
+     "rank": 15
+    }
+   }
+  },
+  "Python/114": {
+   "position": 14,
+   "bug_type": "function misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 323,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 360,
+    "lessons_before": 8,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 453,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 337,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 467,
+    "lessons_before": 13,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 13,
+     "rank": 11
+    }
+   }
+  },
+  "Python/158": {
+   "position": 15,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 12,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 20,
+    "lessons_before": 8,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 36,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 15,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 31,
+    "lessons_before": 14,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 30,
+     "rank": 28
+    }
+   }
+  },
+  "Python/45": {
+   "position": 16,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 11,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 20,
+    "lessons_before": 8,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 6,
+     "rank": 4
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 15,
+    "lessons_before": 6,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 45,
+    "lessons_before": 15,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   }
+  },
+  "Python/102": {
+   "position": 17,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 528,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 557,
+    "lessons_before": 9,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 615,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 542,
+    "lessons_before": 7,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 663,
+    "lessons_before": 16,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/145": {
+   "position": 18,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 463,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 508,
+    "lessons_before": 9,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 131,
+     "rank": 129
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 480,
+    "lessons_before": 7,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 664,
+    "lessons_before": 17,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   }
+  },
+  "Python/134": {
+   "position": 19,
+   "bug_type": "function misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 377,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 420,
+    "lessons_before": 9,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 38,
+     "rank": 36
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 398,
+    "lessons_before": 7,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 576,
+    "lessons_before": 18,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 17,
+     "rank": 15
+    }
+   }
+  },
+  "Python/5": {
+   "position": 20,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 119,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 138,
+    "lessons_before": 10,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 188,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 123,
+    "lessons_before": 8,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 222,
+    "lessons_before": 19,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 69,
+     "rank": 67
+    }
+   }
+  },
+  "Python/108": {
+   "position": 21,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 574,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 19,
+    "lessons_before": 10,
+    "rank": 17,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 7,
+    "lessons_before": 8,
+    "rank": 5,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 35,
+    "lessons_before": 20,
+    "rank": 33,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 15,
+     "rank": 13
+    }
+   }
+  },
+  "Python/60": {
+   "position": 22,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 12,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 18,
+    "lessons_before": 11,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 18,
+    "lessons_before": 9,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 21,
+    "rank": 1,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   }
+  },
+  "Python/19": {
+   "position": 23,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 643,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 770,
+    "lessons_before": 12,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 844,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 738,
+    "lessons_before": 10,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 844,
+    "lessons_before": 22,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 29,
+     "rank": 27
+    }
+   }
+  },
+  "Python/109": {
+   "position": 24,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 448,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 541,
+    "lessons_before": 12,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 627,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 501,
+    "lessons_before": 10,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 649,
+    "lessons_before": 23,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 6,
+     "rank": 4
+    }
+   }
+  },
+  "Python/147": {
+   "position": 25,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 10,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 12,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 18,
+    "lessons_before": 10,
+    "rank": 16,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 42,
+    "lessons_before": 24,
+    "rank": 40,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 28,
+     "rank": 26
+    }
+   }
+  },
+  "Python/23": {
+   "position": 26,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 10,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 5,
+    "lessons_before": 13,
+    "rank": 3,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 11,
+    "rank": 1,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 6,
+    "lessons_before": 25,
+    "rank": 4,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/65": {
+   "position": 27,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 243,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 300,
+    "lessons_before": 14,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 355,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 273,
+    "lessons_before": 12,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 444,
+    "lessons_before": 26,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 14,
+     "rank": 12
+    }
+   }
+  },
+  "Python/140": {
+   "position": 28,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 539,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 708,
+    "lessons_before": 14,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 740,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 649,
+    "lessons_before": 12,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 740,
+    "lessons_before": 27,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 12,
+     "rank": 10
+    }
+   }
+  },
+  "Python/4": {
+   "position": 29,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 37,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 76,
+    "lessons_before": 14,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 112,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 56,
+    "lessons_before": 12,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 238,
+    "lessons_before": 28,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 12,
+     "rank": 10
+    }
+   }
+  },
+  "Python/21": {
+   "position": 30,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 12,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 11,
+    "lessons_before": 14,
+    "rank": 9,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 6,
+     "rank": 4
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 12,
+    "rank": 2,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 213,
+    "lessons_before": 29,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/63": {
+   "position": 31,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 827,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 908,
+    "lessons_before": 15,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": true,
+     "runs": 969,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 879,
+    "lessons_before": 13,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 1028,
+    "lessons_before": 30,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 18,
+     "rank": 16
+    }
+   }
+  },
+  "Python/35": {
+   "position": 32,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 16,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 37,
+    "lessons_before": 15,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 28,
+    "lessons_before": 13,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 31,
+    "rank": 1,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/85": {
+   "position": 33,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 23,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 36,
+    "lessons_before": 16,
+    "rank": 34,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 12,
+     "rank": 10
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 53,
+    "lessons_before": 14,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 22,
+    "lessons_before": 32,
+    "rank": 20,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/157": {
+   "position": 34,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 35,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 80,
+    "lessons_before": 17,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 80,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 50,
+    "lessons_before": 15,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 236,
+    "lessons_before": 33,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/58": {
+   "position": 35,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 9,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 62,
+    "lessons_before": 17,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 62,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 23,
+    "lessons_before": 15,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 210,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 14,
+     "rank": 12
+    }
+   }
+  },
+  "Python/14": {
+   "position": 36,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 10,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 17,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 15,
+    "rank": 2,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 35,
+    "rank": 1,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/159": {
+   "position": 37,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 344,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 423,
+    "lessons_before": 18,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 424,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 366,
+    "lessons_before": 16,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 545,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/138": {
+   "position": 38,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 354,
+    "one_line": false
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 6,
+    "lessons_before": 18,
+    "rank": 4,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 6,
+     "rank": 4
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 18,
+    "lessons_before": 16,
+    "rank": 16,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 36,
+    "lessons_before": 37,
+    "rank": 34,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 11,
+     "rank": 9
+    }
+   }
+  },
+  "Python/74": {
+   "position": 39,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 12,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 10,
+    "lessons_before": 19,
+    "rank": 8,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 32,
+    "lessons_before": 17,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 213,
+    "lessons_before": 38,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   }
+  },
+  "Python/90": {
+   "position": 40,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 13,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 32,
+    "lessons_before": 20,
+    "rank": 30,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 37,
+    "lessons_before": 18,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 21,
+    "lessons_before": 39,
+    "rank": 19,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   }
+  },
+  "Python/62": {
+   "position": 41,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 17,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 46,
+    "lessons_before": 21,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 46,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 26,
+    "lessons_before": 19,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 218,
+    "lessons_before": 40,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   }
+  },
+  "Python/64": {
+   "position": 42,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 272,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 319,
+    "lessons_before": 21,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 321,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 291,
+    "lessons_before": 19,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 473,
+    "lessons_before": 41,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 20,
+     "rank": 18
+    }
+   }
+  },
+  "Python/25": {
+   "position": 43,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 11,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 142,
+    "lessons_before": 21,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 20,
+     "rank": 18
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 59,
+    "lessons_before": 19,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 27,
+    "lessons_before": 42,
+    "rank": 25,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   }
+  },
+  "Python/18": {
+   "position": 44,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 11,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 17,
+    "lessons_before": 22,
+    "rank": 15,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 12,
+     "rank": 10
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 11,
+    "lessons_before": 20,
+    "rank": 9,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 24,
+    "lessons_before": 43,
+    "rank": 22,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/41": {
+   "position": 45,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 14,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 11,
+    "lessons_before": 23,
+    "rank": 9,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 21,
+    "lessons_before": 21,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 44,
+    "rank": 1,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/9": {
+   "position": 46,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 28,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 97,
+    "lessons_before": 24,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 97,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 52,
+    "lessons_before": 22,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 229,
+    "lessons_before": 45,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 20,
+     "rank": 18
+    }
+   }
+  },
+  "Python/20": {
+   "position": 47,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 14,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": false,
+    "runs": 21,
+    "lessons_before": 24,
+    "rank": 19,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 13,
+     "rank": 11
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 70,
+    "lessons_before": 22,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 215,
+    "lessons_before": 46,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/93": {
+   "position": 48,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 375,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 507,
+    "lessons_before": 25,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 507,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 419,
+    "lessons_before": 23,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 576,
+    "lessons_before": 47,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 23,
+     "rank": 21
+    }
+   }
+  },
+  "Python/125": {
+   "position": 49,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 624,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 775,
+    "lessons_before": 25,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 776,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 680,
+    "lessons_before": 23,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 825,
+    "lessons_before": 48,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 21,
+     "rank": 19
+    }
+   }
+  },
+  "Python/53": {
+   "position": 50,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 17,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 12,
+    "lessons_before": 25,
+    "rank": 10,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 25,
+    "lessons_before": 23,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 178,
+    "lessons_before": 49,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/88": {
+   "position": 51,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 25,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 30,
+    "lessons_before": 26,
+    "rank": 28,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 6,
+    "lessons_before": 24,
+    "rank": 4,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 91,
+    "lessons_before": 50,
+    "rank": 89,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 17,
+     "rank": 15
+    }
+   }
+  },
+  "Python/29": {
+   "position": 52,
+   "bug_type": "function misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 10,
+    "one_line": true
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 39,
+    "lessons_before": 27,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 16,
+     "rank": 14
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 88,
+    "lessons_before": 25,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 211,
+    "lessons_before": 51,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/128": {
+   "position": 53,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 550,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 699,
+    "lessons_before": 28,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 700,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 672,
+    "lessons_before": 26,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 751,
+    "lessons_before": 52,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 16,
+     "rank": 14
+    }
+   }
+  },
+  "Python/101": {
+   "position": 54,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 294,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": false,
+    "runs": 71,
+    "lessons_before": 28,
+    "rank": 69,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 27,
+     "rank": 25
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 495,
+    "lessons_before": 26,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 182,
+    "lessons_before": 53,
+    "rank": 180,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/24": {
+   "position": 55,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 96,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 144,
+    "lessons_before": 29,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 144,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 166,
+    "lessons_before": 26,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 297,
+    "lessons_before": 54,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 12,
+     "rank": 10
+    }
+   }
+  },
+  "Python/149": {
+   "position": 56,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 88,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 163,
+    "lessons_before": 29,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 163,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 283,
+    "lessons_before": 26,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 289,
+    "lessons_before": 55,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 21,
+     "rank": 19
+    }
+   }
+  },
+  "Python/26": {
+   "position": 57,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 8,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 8,
+    "lessons_before": 29,
+    "rank": 6,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 209,
+    "lessons_before": 26,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 56,
+    "rank": 1,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/66": {
+   "position": 58,
+   "bug_type": "function misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 377,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 452,
+    "lessons_before": 30,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 452,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 484,
+    "lessons_before": 27,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 578,
+    "lessons_before": 57,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 13,
+     "rank": 11
+    }
+   }
+  },
+  "Python/121": {
+   "position": 59,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 9,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 30,
+    "rank": 1,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 5,
+    "lessons_before": 27,
+    "rank": 3,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 15,
+    "lessons_before": 58,
+    "rank": 13,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   }
+  },
+  "Python/16": {
+   "position": 60,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 11,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 32,
+    "lessons_before": 31,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 32,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 27,
+    "lessons_before": 28,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 92,
+    "lessons_before": 59,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 14,
+     "rank": 12
+    }
+   }
+  },
+  "Python/1": {
+   "position": 61,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 8,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 5,
+    "lessons_before": 31,
+    "rank": 3,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 28,
+    "rank": 1,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 8,
+    "lessons_before": 60,
+    "rank": 6,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 18,
+     "rank": 16
+    }
+   }
+  },
+  "Python/15": {
+   "position": 62,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 15,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 16,
+    "lessons_before": 32,
+    "rank": 14,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 80,
+    "lessons_before": 29,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 5,
+    "lessons_before": 61,
+    "rank": 3,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/82": {
+   "position": 63,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 21,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 17,
+    "lessons_before": 33,
+    "rank": 15,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 11,
+     "rank": 9
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 222,
+    "lessons_before": 30,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 62,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/52": {
+   "position": 64,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 40,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": true,
+    "runs": 73,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": true,
+     "runs": 73,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 115,
+    "lessons_before": 31,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": true,
+    "runs": 241,
+    "lessons_before": 63,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 15,
+     "rank": 13
+    }
+   }
+  },
+  "Python/123": {
+   "position": 65,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": null,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 178,
+    "lessons_before": 34,
+    "rank": 176,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 24,
+     "rank": 22
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 19,
+    "lessons_before": 31,
+    "rank": 17,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 191,
+    "lessons_before": 64,
+    "rank": 189,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 19,
+     "rank": 17
+    }
+   }
+  },
+  "Python/46": {
+   "position": 66,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 764,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 12,
+    "lessons_before": 35,
+    "rank": 10,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 13,
+    "lessons_before": 32,
+    "rank": 11,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 5,
+    "lessons_before": 65,
+    "rank": 3,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/136": {
+   "position": 67,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 384,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 585,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 585,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 531,
+    "lessons_before": 33,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 585,
+    "lessons_before": 66,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/54": {
+   "position": 68,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 11,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 24,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 24,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 30,
+    "lessons_before": 33,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 98,
+    "lessons_before": 67,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   }
+  },
+  "Python/120": {
+   "position": 69,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 216,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 285,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 285,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 403,
+    "lessons_before": 33,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 417,
+    "lessons_before": 68,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   }
+  },
+  "Python/118": {
+   "position": 70,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 705,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 906,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 906,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 906,
+    "lessons_before": 33,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 906,
+    "lessons_before": 69,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 21,
+     "rank": 19
+    }
+   }
+  },
+  "Python/143": {
+   "position": 71,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 522,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 688,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 689,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 656,
+    "lessons_before": 33,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 723,
+    "lessons_before": 70,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 125,
+     "rank": 123
+    }
+   }
+  },
+  "Python/51": {
+   "position": 72,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 215,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": false,
+    "runs": 20,
+    "lessons_before": 36,
+    "rank": 18,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 7,
+     "rank": 5
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 6,
+    "lessons_before": 33,
+    "rank": 4,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 17,
+    "lessons_before": 71,
+    "rank": 15,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/81": {
+   "position": 73,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 527,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 728,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 728,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 728,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 728,
+    "lessons_before": 72,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 5,
+     "rank": 3
+    }
+   }
+  },
+  "Python/37": {
+   "position": 74,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 447,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 601,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 602,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 580,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 145,
+    "lessons_before": 73,
+    "rank": 143,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 11,
+     "rank": 9
+    }
+   }
+  },
+  "Python/96": {
+   "position": 75,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 247,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 353,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 355,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 349,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 448,
+    "lessons_before": 74,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 16,
+     "rank": 14
+    }
+   }
+  },
+  "Python/28": {
+   "position": 76,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 17,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 38,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 38,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 37,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 41,
+    "lessons_before": 75,
+    "rank": 39,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 13,
+     "rank": 11
+    }
+   }
+  },
+  "Python/132": {
+   "position": 77,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 374,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 564,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 564,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 547,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 575,
+    "lessons_before": 76,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 23,
+     "rank": 21
+    }
+   }
+  },
+  "Python/92": {
+   "position": 78,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 366,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 487,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 490,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 567,
+    "lessons_before": 34,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 79,
+    "lessons_before": 77,
+    "rank": 77,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 16,
+     "rank": 14
+    }
+   }
+  },
+  "Python/124": {
+   "position": 79,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 877,
+    "one_line": false
+   },
+   "own": {
+    "by": "learner",
+    "right": false,
+    "runs": 200,
+    "lessons_before": 37,
+    "rank": 198,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 19,
+     "rank": 17
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 132,
+    "lessons_before": 34,
+    "rank": 130,
+    "kept": true
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 1078,
+    "lessons_before": 78,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 17,
+     "rank": 15
+    }
+   }
+  },
+  "Python/49": {
+   "position": 80,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 9,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 6,
+    "lessons_before": 38,
+    "rank": 4,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 35,
+    "rank": 1,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 19,
+    "lessons_before": 79,
+    "rank": 17,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   }
+  },
+  "Python/133": {
+   "position": 81,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 350,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 393,
+    "lessons_before": 39,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 393,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 528,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 551,
+    "lessons_before": 80,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 13,
+     "rank": 11
+    }
+   }
+  },
+  "Python/107": {
+   "position": 82,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 532,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 42,
+    "lessons_before": 39,
+    "rank": 40,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 13,
+     "rank": 11
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 731,
+    "lessons_before": 36,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 81,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   }
+  },
+  "Python/27": {
+   "position": 83,
+   "bug_type": "function misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 11,
+    "one_line": false
+   },
+   "own": {
+    "by": "solver",
+    "right": false,
+    "runs": 24,
+    "lessons_before": 40,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": "solver",
+     "right": false,
+     "runs": 24,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": false,
+    "runs": 22,
+    "lessons_before": 37,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "solver",
+    "right": false,
+    "runs": 65,
+    "lessons_before": 82,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/100": {
+   "position": 84,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 14,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 40,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 37,
+    "rank": 1,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 5,
+    "lessons_before": 83,
+    "rank": 3,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/122": {
+   "position": 85,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 44,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 96,
+    "lessons_before": 41,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 96,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 185,
+    "lessons_before": 38,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 245,
+    "lessons_before": 84,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 21,
+     "rank": 19
+    }
+   }
+  },
+  "Python/156": {
+   "position": 86,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 1,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 202,
+    "lessons_before": 41,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 202,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 202,
+    "lessons_before": 38,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 202,
+    "lessons_before": 85,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 81,
+     "rank": 79
+    }
+   }
+  },
+  "Python/130": {
+   "position": 87,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 696,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 85,
+    "lessons_before": 41,
+    "rank": 83,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 25,
+     "rank": 23
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 153,
+    "lessons_before": 38,
+    "rank": 151,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 14,
+    "lessons_before": 86,
+    "rank": 12,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/70": {
+   "position": 88,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 8,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 42,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 3,
+     "rank": 1
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 3,
+    "lessons_before": 39,
+    "rank": 1,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 87,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 6,
+     "rank": 4
+    }
+   }
+  },
+  "Python/110": {
+   "position": 89,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 612,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 17,
+    "lessons_before": 43,
+    "rank": 15,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 32,
+    "lessons_before": 40,
+    "rank": 30,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 133,
+    "lessons_before": 88,
+    "rank": 131,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 7,
+     "rank": 5
+    }
+   }
+  },
+  "Python/3": {
+   "position": 90,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": true,
+    "right": false,
+    "runs": 9,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": false,
+    "runs": 8,
+    "lessons_before": 44,
+    "rank": 6,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 8,
+     "rank": 6
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 4,
+    "lessons_before": 41,
+    "rank": 2,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 7,
+    "lessons_before": 89,
+    "rank": 5,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 7,
+     "rank": 5
+    }
+   }
+  },
+  "Python/141": {
+   "position": 91,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 621,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 822,
+    "lessons_before": 45,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 822,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 822,
+    "lessons_before": 42,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 822,
+    "lessons_before": 90,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 822,
+     "rank": null
+    }
+   }
+  },
+  "Python/86": {
+   "position": 92,
+   "bug_type": "missing logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 215,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 292,
+    "lessons_before": 45,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 292,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 339,
+    "lessons_before": 42,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 33,
+    "lessons_before": 91,
+    "rank": 31,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/84": {
+   "position": 93,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 126,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 189,
+    "lessons_before": 45,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 189,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 232,
+    "lessons_before": 42,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 327,
+    "lessons_before": 92,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 11,
+     "rank": 9
+    }
+   }
+  },
+  "Python/135": {
+   "position": 94,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 309,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 22,
+    "lessons_before": 45,
+    "rank": 20,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 10,
+     "rank": 8
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 9,
+    "lessons_before": 42,
+    "rank": 7,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 40,
+    "lessons_before": 93,
+    "rank": 38,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   }
+  },
+  "Python/61": {
+   "position": 95,
+   "bug_type": "operator misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 449,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": false,
+    "runs": 14,
+    "lessons_before": 46,
+    "rank": 12,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": false,
+     "runs": 8,
+     "rank": 6
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 11,
+    "lessons_before": 43,
+    "rank": 9,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": false,
+    "runs": 30,
+    "lessons_before": 94,
+    "rank": 28,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 17,
+     "rank": 15
+    }
+   }
+  },
+  "Python/17": {
+   "position": 96,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 16,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 53,
+    "lessons_before": 47,
+    "rank": 51,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 15,
+     "rank": 13
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 17,
+    "lessons_before": 44,
+    "rank": 15,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 68,
+    "lessons_before": 95,
+    "rank": 66,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 16,
+     "rank": 14
+    }
+   }
+  },
+  "Python/144": {
+   "position": 97,
+   "bug_type": "excess logic",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 345,
+    "one_line": null
+   },
+   "own": {
+    "by": null,
+    "right": false,
+    "runs": 546,
+    "lessons_before": 48,
+    "rank": null,
+    "kept": false,
+    "return": {
+     "by": null,
+     "right": false,
+     "runs": 546,
+     "rank": null
+    }
+   },
+   "backwards": {
+    "by": null,
+    "right": false,
+    "runs": 546,
+    "lessons_before": 45,
+    "rank": null,
+    "kept": false
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": 546,
+    "lessons_before": 96,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 8,
+     "rank": 6
+    }
+   }
+  },
+  "Python/43": {
+   "position": 98,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": 246,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 26,
+    "lessons_before": 48,
+    "rank": 24,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 13,
+     "rank": 11
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": false,
+    "runs": 43,
+    "lessons_before": 45,
+    "rank": 41,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 10,
+    "lessons_before": 97,
+    "rank": 8,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  },
+  "Python/32": {
+   "position": 99,
+   "bug_type": "variable misuse",
+   "cold": {
+    "repaired": false,
+    "right": false,
+    "runs": null,
+    "one_line": null
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 27,
+    "lessons_before": 49,
+    "rank": 25,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 9,
+     "rank": 7
+    }
+   },
+   "backwards": {
+    "by": "learner",
+    "right": true,
+    "runs": 135,
+    "lessons_before": 46,
+    "rank": 133,
+    "kept": true
+   },
+   "shown": {
+    "by": null,
+    "right": false,
+    "runs": null,
+    "lessons_before": 98,
+    "rank": null,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 20,
+     "rank": 18
+    }
+   }
+  },
+  "Python/11": {
+   "position": 100,
+   "bug_type": "value misuse",
+   "cold": {
+    "repaired": true,
+    "right": true,
+    "runs": 8,
+    "one_line": true
+   },
+   "own": {
+    "by": "learner",
+    "right": true,
+    "runs": 4,
+    "lessons_before": 50,
+    "rank": 2,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   },
+   "backwards": {
+    "by": "solver",
+    "right": true,
+    "runs": 209,
+    "lessons_before": 47,
+    "rank": null,
+    "kept": true
+   },
+   "shown": {
+    "by": "learner",
+    "right": true,
+    "runs": 14,
+    "lessons_before": 99,
+    "rank": 12,
+    "kept": true,
+    "return": {
+     "by": "learner",
+     "right": true,
+     "runs": 4,
+     "rank": 2
+    }
+   }
+  }
+ }
+}
