@@ -1,0 +1,216 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1",
+ "action_intent_id": "ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "5df74130d9d1bd9568eedc04e23315167202782a",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Add a bounded counterfactual diagnostic guarding the claim that one coding experience implies general coding mastery; no development progress claim.",
+ "selected_route": "REUSE_LEARNER_AND_UPSTREAM_TESTS_WITH_EMPTY_AND_REVERSE_CONTROLS",
+ "causal_blocker": "Replay and stored lessons are being treated as universal applicability without a controlled one-lesson test.",
+ "expected_parent_change": "A reproducible diagnostic separates single-lesson replay, applicable candidate coverage, and accepted repairs.",
+ "expected_parent_frontier_change": "No capability or obligation discharged. Measured boundary: one preselected repair is reproduced but generates no proposals for 39 different programs.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Replay and stored lessons are being treated as universal applicability without a controlled one-lesson test.",
+ "falsification_condition": "Target reference code reaches generation, controls are relabeled as full-agent baselines, teacher is switched after results, or local repeats are called independent verification.",
+ "stop_condition": "Preserve the deterministic one-teacher result, pass eight diagnostic controls and neighboring tests, and pass required PR checks without changing learner or gates.",
+ "explicit_user_authorization": "Owner directive 2026-11-12: instant learning in arbitrary new environments is already solved, so giving the model the smartest actions once yields permanent mastery and total computer use -- what is true, what is wrong, what are the real limiting factors, and the fastest optimal path. Standing directives honored: first principles, kill bad ideas before implementing, assume a million mistakes and prevent them, reuse what exists under non-obvious names, maximize web use, $0 spend, zero model dependency, push and merge.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tests/test_one_published_fix_counterfactual_v1.py"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "ONE_REPRODUCED_PUBLISHED_FIX_DOES_NOT_ESTABLISH_GENERAL_CODING_MASTERY",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "One alphabetically selected published QuixBugs bitcount fix gives 6 operators; rank-1 replay passes 9 upstream tests twice; 0 candidates/0 repairs on all 39 targets in each arm; fresh generation matches across processes. 37 target baselines have counted failures, sqrt times out, find_first_in_sorted yields oracle TypeError; all 39 references pass. Eight new controls pass. Diagnostic only; no independently reproduced gain or new learning mechanism."
+ },
+ "measured_effect": "One alphabetically selected published QuixBugs bitcount fix gives 6 operators; rank-1 replay passes 9 upstream tests twice; 0 candidates/0 repairs on all 39 targets in each arm; fresh generation matches across processes. 37 target baselines have counted failures, sqrt times out, find_first_in_sorted yields oracle TypeError; all 39 references pass. Eight new controls pass.",
+ "load_bearing_primary": {
+  "interpretation": "No obligation discharged, no capability/performance gain, no development progress claimed. A controlled applicability diagnostic guards coding-learning claims; inherited constructive-gap unlock is an admission convention, not measured benchmark movement.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ]
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "5df74130d9d1bd9568eedc04e23315167202782a",
+  "real_outcome": "A reproducible diagnostic separates single-lesson replay, applicable candidate coverage, and accepted repairs.",
+  "required_capability": "Separate replay of one taught repair from candidate coverage on different bugs without changing the learner.",
+  "obs_goal": {
+   "real_outcome": "Answer the owner with bounded executed counterfactual evidence rather than a universal claim.",
+   "proxy_goals_deleted": [
+    "counting a replay as transfer",
+    "counting stored operators as accepted repairs",
+    "calling a producer-local run independent"
+   ],
+   "surviving_necessity": "Measure applicability and accepted outcomes on other inputs while holding the lesson fixed."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/edit_kind_learning_v1.py",
+    "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
+    "canonical/swe_kernel/skill_verification_contract_v1.py",
+    "canonical/verification/HUMANEVALFIX_EXPERIENCE_STREAM_20261112_V1.json"
+   ],
+   "external_existing_routes_checked": [
+    "https://github.com/jkoppel/QuixBugs at pinned revision",
+    "https://github.com/unifyai/continual-arc",
+    "https://arxiv.org/abs/2610.34043",
+    "https://proceedings.iclr.cc/paper_files/paper/2026/file/b078eaadc927d7f7ae67371c1363195b-Paper-Conference.pdf"
+   ],
+   "capability_work_deleted": [
+    "No new learner or repair operator",
+    "No broad corpus campaign",
+    "No alternate teacher selected after failure"
+   ],
+   "surviving_gap": "No full-agent equal-work comparison, truly unseen benchmark, or independent reproduction performed."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "The measured lesson has no matching sites on these other 39 programs; this is a specific scope boundary, not impossibility of transfer.",
+   "delete_bypass_substitute_options": [
+    "DELETE the universal inference from replay",
+    "REUSE the larger archived experiment instead of rerunning it",
+    "REUSE existing learner and oracle for one narrower counterfactual",
+    "Reject teacher shopping or generator expansion to improve this score"
+   ],
+   "surviving_causal_blocker": "Replay and stored lessons are being treated as universal applicability without a controlled one-lesson test."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE_LEARNER_AND_UPSTREAM_TESTS_WITH_EMPTY_AND_REVERSE_CONTROLS",
+    "Archive-only answer (does not execute the exact one-lesson diagnostic)",
+    "Build a new learner (unnecessary for this question)"
+   ],
+   "losing_routes_reason": "A larger archived experiment already exists; rewriting it or tuning a teacher would waste work or bias the answer.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Actual upstream project tests via ProjectTestOracle, no stand-ins; reference repairs calibrate the oracle but never enter generation. New unit tests check direction, reconstruction, confirmation refusal, and accounting; these are local checks only."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "The claim that one successful lesson implies arbitrary coding competence"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "Lessons.learn/proposals",
+    "existing project loader and ProjectTestOracle"
+   ],
+   "fresh_reuse_plan": "Choose real tasks in a declared applicability class and contrast failures before claiming transfer or efficiency."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "Do not rebuild the archived 100-bug experience-stream comparison",
+    "Do not retry teachers to improve this result"
+   ],
+   "search_stop_decision": "Stop at the preselected teacher: replay succeeds and zero target proposals localize the boundary before test search.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REUSE_LEARNER_AND_UPSTREAM_TESTS_WITH_EMPTY_AND_REVERSE_CONTROLS",
+   "ARCHIVED_RESULTS_ONLY",
+   "BUILD_NEW_LEARNER",
+   "SWITCH_TEACHER_AFTER_RESULT"
+  ],
+  "deleted_or_bypassed_paths": [
+   "BUILD_NEW_LEARNER",
+   "SWITCH_TEACHER_AFTER_RESULT"
+  ],
+  "selected_surviving_route": "REUSE_LEARNER_AND_UPSTREAM_TESTS_WITH_EMPTY_AND_REVERSE_CONTROLS",
+  "why_selected_route_is_fastest_sufficient": "Reuse the existing learner, project loader, and test oracle, and select one teacher before results rather than building a new learning system.",
+  "expected_parent_level_state_change": "No capability or obligation discharged. Measured boundary: one preselected repair is reproduced but generates no proposals for 39 different programs.",
+  "stop_condition": "Preserve the deterministic one-teacher result, pass eight diagnostic controls and neighboring tests, and pass required PR checks without changing learner or gates.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Claim-auditing diagnostic guard with no development progress claim; no capability acquisition or supplier selection."
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "proof_state_reachability": "Counterfactual diagnostic narrows a learning claim; no proof-state, benchmark, family or terminal credit is asserted.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "P_ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1",
+   "falsifier_id": "F_ONE_LESSON_WITH_NO_APPLICABLE_TARGET_SITE",
+   "decisive_question": "Does the single preselected fix propose or repair other bugs, or only reproduce the demonstrated repair?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_one_published_fix_counterfactual_v1.py",
+     "git_blob_sha": "cbbb2569fbb13b9057639b2e25f1a991072fb31d"
+    }
+   ]
+  },
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION"
+ }
+}

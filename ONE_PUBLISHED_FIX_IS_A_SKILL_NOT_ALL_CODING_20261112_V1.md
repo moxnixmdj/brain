@@ -50,10 +50,13 @@ applicable sites in these other programs. The failure is before test-guided sele
 budget exhausted on bad repairs. Increasing the ten-candidate limit would not help this result.
 It says nothing about whether another lesson or the full repair solver could solve those bugs.
 
-All 39 target reference repairs pass their selected upstream tests; none was excluded. Two target
-buggy baselines (`kheapsort`, `levenshtein`) time out with zero counted tests; the other 37 have counted
-failing tests. The teacher's buggy baseline also times out (return code 124, zero counted tests).
-Timeouts are recorded as timeouts, not described as assertion failures.
+All 39 target reference repairs pass their selected upstream tests; none was excluded. Of the target
+buggy baselines, `sqrt` times out with zero counted tests, and `find_first_in_sorted` yields an oracle
+`TypeError` with no counted result; the other 37 have counted failing tests. The teacher's buggy
+baseline also times out (return code 124, zero counted tests). These two target baselines are not
+claimed as counted assertion failures. They remain in the 39-program candidate-coverage diagnostic
+because their references pass; no candidate was generated for them (or any other target). The oracle
+error is retained, not repaired or silently converted into a test failure.
 
 Record: `canonical/verification/ONE_PUBLISHED_FIX_COUNTERFACTUAL_20261112_V1.json`. It includes
 per-target calibrations, arm outcomes and candidate counts, bounded-project file digests, source
