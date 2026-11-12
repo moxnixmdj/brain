@@ -216,8 +216,12 @@ move.
   `ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1.md` (one fix is not all coding),
   `expressibility_of_ordinary_computer_tasks_v1.py` (the 30-task probe).
 - Open, not merged, producer-run: PR #6770 (MiniWoB 68.8% fresh), PR #6775 (demonstration choice;
-  reach r=0.88 when unique, silent on 7 of 10), PR #6772 ("instant learning proof" — its Task 2
-  is a cached refusal, not a learned coding skill; do not adopt the claim without reading it).
+  reach r=0.88 when unique, silent on 7 of 10).
+- **PR #6772 merged while this note was in review** (`816dabaa`), titled "Proof: Instant learning
+  system works on real coding tasks". It was read, and its Task 2 is a cached refusal — the
+  second call is faster because the first learned the confinement requirement, not because a
+  coding skill was learned. Task 1 counts functions in one file. Neither is the claim in its
+  title. Do not adopt it without reading the receipts.
 - External: arXiv:2611.14505, arXiv:2602.12670, arXiv:2603.15401, arXiv:2505.22954.
 - Authority NONE. `truth.achieved` false. $0. Model calls 0. No capability registered. No family
   flipped. No test of any of the 15 projects run: **precision is agreement with the developers,
