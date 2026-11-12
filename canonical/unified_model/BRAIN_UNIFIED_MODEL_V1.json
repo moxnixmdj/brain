@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 315,
+  "knowledge_documents": 316,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6728,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8d7a49a330ad93335453db22a6eecc84edca42547e12492e55c7c6f3f6aeccc2"
+  "value": "4477d85c8efa8e91e32aed729d5c04ea356ae1a7cb76482aa3ddd09043218346"
  },
  "engines": [
   {
@@ -55612,6 +55612,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6315,
+   "headings": [
+    "The repoint is verified, and the census did not move",
+    "1. Independent verification of the repoint",
+    "2. The prediction that failed",
+    "3. The ninth capability is left where it is, on purpose",
+    "4. Why history cannot adjudicate this",
+    "5. What is still true, and what to do",
+    "6. Receipts",
+    "7. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_REPOINT_IS_VERIFIED_AND_THE_CENSUS_DID_NOT_MOVE_20261112_V1.md",
+   "sha256": "de9e049a0098548f0df1364cd0e8a0c90991c9d07572ded85bf4e71f78688037",
+   "summary": "**2026-11-12.** Base `d1b9c677`. Branch `arena/bd47cd30-brain`. Round 7.",
+   "terms": {
+    "145": 3,
+    "41": 4,
+    "60": 6,
+    "about": 3,
+    "accepted": 3,
+    "adapters": 4,
+    "against": 4,
+    "because": 3,
+    "both": 3,
+    "cannot": 3,
+    "capabilities": 3,
+    "capability": 6,
+    "census": 7,
+    "check_expect": 6,
+    "definite_debt": 3,
+    "did": 3,
+    "different": 4,
+    "eight": 5,
+    "evidence": 4,
+    "executed": 5,
+    "false": 4,
+    "field": 3,
+    "gate": 5,
+    "never": 5,
+    "no": 4,
+    "not": 12,
+    "note": 3,
+    "one": 4,
+    "output_verified": 6,
+    "pass": 6,
+    "predicate": 5,
+    "predicates": 3,
+    "prediction": 3,
+    "probe": 4,
+    "python3": 3,
+    "read": 3,
+    "reads": 3,
+    "reason": 3,
+    "receipt": 6,
+    "registry": 5,
+    "repair": 3,
+    "repoint": 7,
+    "repointed": 3,
+    "round": 9,
+    "same": 5,
+    "still": 5,
+    "transport": 3,
+    "true": 7
+   },
+   "title": "The repoint is verified, and the census did not move",
+   "title_terms": [
+    "census",
+    "did",
+    "move",
+    "not",
+    "repoint",
+    "verified"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9654,
    "headings": [
     "The Search Was Looking for Words",
@@ -69291,10 +69368,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1117,
+  "included_source_count": 1118,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4a0a6475cb6d8763c5c609a2e86afb3ba980ee8d581bf66da693a58100ced308"
+  "source_tree_digest": "092ecb91f1c489f7df4792b2938db0b63da7516076c6b1280d3d08ae0375f8b2"
  },
  "research_index": [
   {
