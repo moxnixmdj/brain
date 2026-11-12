@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 357,
+  "knowledge_documents": 358,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6763,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b950851c424f38107724847f82df5186a8af899f7b3ead5886f6b0af3129ff99"
+  "value": "1339d602e18a4beea04931650065b8154436cec0f038d879ded8e8b7ce89758c"
  },
  "engines": [
   {
@@ -59272,6 +59272,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6583,
+   "headings": [
+    "What I could not do, and the predictor that turned out backwards",
+    "1. The re-run is blocked, and I am not going to fake it",
+    "2. The predictor I expected, and the one that is real",
+    "Why, mechanistically",
+    "3. Why this matters more than it looks",
+    "4. What I shipped",
+    "Answers, stated plainly"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_I_COULD_NOT_DO_20261112_V1.md",
+   "sha256": "d9094a8d582f2e209a8db315823a37bfeb54f0da417db19590693c8b58e2fa16",
+   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "1.00": 3,
+    "130": 3,
+    "all": 3,
+    "ambiguity": 3,
+    "another": 3,
+    "blocked": 4,
+    "cannot": 3,
+    "chromium": 4,
+    "controlling": 3,
+    "correlation": 3,
+    "cost": 5,
+    "demonstration": 7,
+    "descriptions": 5,
+    "every": 3,
+    "first": 7,
+    "fresh": 3,
+    "hand": 4,
+    "here": 5,
+    "last": 3,
+    "learned": 3,
+    "more": 3,
+    "no": 3,
+    "not": 9,
+    "now": 3,
+    "one": 6,
+    "only": 3,
+    "open": 8,
+    "openness": 3,
+    "own": 4,
+    "pages": 5,
+    "pass": 6,
+    "predictor": 3,
+    "produced": 4,
+    "re-run": 7,
+    "real": 3,
+    "recorded": 3,
+    "reports": 3,
+    "run": 5,
+    "seeds": 3,
+    "skill": 3,
+    "so": 5,
+    "still": 3,
+    "success": 13,
+    "than": 5,
+    "thing": 4,
+    "transfer": 3,
+    "two": 3,
+    "whether": 5
+   },
+   "title": "What I could not do, and the predictor that turned out backwards",
+   "title_terms": [
+    "backwards",
+    "not",
+    "out",
+    "predictor",
+    "turned"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 49006,
    "headings": [
     "Where the solutions actually live",
@@ -72509,10 +72584,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1159,
+  "included_source_count": 1160,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3ce86d0b9802c8ee6aca9366b7978056b11b0d31fb0cbf1d5515e28c679e91f3"
+  "source_tree_digest": "84e1d28cf9227fff39cc17341b0ddcf8b549e0f729ff62d2893398d7022b02a0"
  },
  "research_index": [
   {
