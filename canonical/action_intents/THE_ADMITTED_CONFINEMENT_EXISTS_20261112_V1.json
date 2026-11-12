@@ -1,0 +1,455 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1",
+ "action_intent_id": "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "8439f609a3bc18648c35006e221675c2d87c0a43",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asks whether the most advanced coding actions can be experienced once and learned. This round measured that at the mechanism level. The binding wall already fell (re-census on this base: door reaches past 26 of the act-layer NOT_CALLABLE rejections; 25 executed at the door). Decomposing the 52 door NOT_COMPILED: 6 exotic material, 8 diff-artifact gated, 38 ordinary -- and the 38 are the advanced-coding wall. With material-aware REALISTIC sentences (canonical/tools/realistic_goal_reach_probe_v1.py, the instrument is the deliverable), the pre-registered prediction of >=24/38 compiling was FALSIFIED: 3/38 executed (git log, rename symbol, supercomposer). The dominant refusal is ONE named status -- FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT at 19/38 -- which is the SWE repair loops, fault localization, contract checking, cross-file choreography, taint flow, transform-and-synthesize and shell execution being refused for want of the substrate the boundary module's own docstring names as its release condition. This round builds that substrate: canonical/runtime/confinement_v1.py -- admit clones the host into a disposable worktree (the worktree is the computer), execute runs list-argv with shell=False, restricted PATH/HOME and a hard budget, declared effects are verified INSIDE the worktree with sha256 receipts, the host's git status must be byte-identical after, and every run yields a content-addressed receipt. The first draft's shell-metacharacter blocklist was falsified by its own fixture (it broke plain `python3 -c a; b` and refused the bash -c runs that prove the worktree bounds destruction) -- deleted, with the design note in the module and the test rewritten to pin the structural truth: shell=True appears nowhere; the confinement is the worktree plus the restricted environment plus the budget, not a character blocklist. MEASURED 9/9: host byte-identical through creation-and-rm-rf; escaping effects refused; budget overrun honest; the exact argv the door refuses today runs confined; receipts deterministic. NO door code changed -- additive only, the seam (the boundary refusal sites in goal_front_compiler_v1 and live_brain_route_admission_v1) is named for the next diff; every existing refusal stands.",
+ "selected_route": "BUILD_THE_ADMITTED_CONFINEMENT_SUBSTRATE_THE_BOUNDARY_DEMANDS",
+ "causal_blocker": "THE_MOST_ADVANCED_CODING_CAPABILITIES_COMPILE_BIND_AND_ARE_REFUSED_WITH_COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT_MEASURED_19_OF_38_REALISTIC_GOALS__THE_RELEASE_CONDITION_THE_BOUNDARY_NAMES_HAD_NO_IMPLEMENTATION",
+ "expected_parent_change": "THE_BOUNDARY_RELEASE_CONDITION_HAS_ITS_CONSTRUCTIVE_HALF__A_DISPOSABLE_MACHINE_WITH_MEASURED_EFFECT_RECEIPTS_AND_A_NAMED_SEAM__EVERY_EXISTING_REFUSAL_STANDS_UNTIL_THE_SEAM_DIFF__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "expected_parent_frontier_change": "THE_BOUNDARY_RELEASE_CONDITION_HAS_ITS_CONSTRUCTIVE_HALF__A_DISPOSABLE_MACHINE_WITH_MEASURED_EFFECT_RECEIPTS_AND_A_NAMED_SEAM__EVERY_EXISTING_REFUSAL_STANDS_UNTIL_THE_SEAM_DIFF__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_MOST_ADVANCED_CODING_CAPABILITIES_COMPILE_BIND_AND_ARE_REFUSED_WITH_COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT_MEASURED_19_OF_38_REALISTIC_GOALS__THE_RELEASE_CONDITION_THE_BOUNDARY_NAMES_HAD_NO_IMPLEMENTATION",
+ "falsification_condition": "THE_SUBSTRATE_LEAVING_THE_HOST_NOT_BYTE_IDENTICAL__OR_AN_EFFECT_RECEIPT_ABOUT_A_PATH_OUTSIDE_THE_WORKTREE_VERIFYING__OR_AN_OVERRUN_REPORTED_AS_SUCCESS__OR_A_SHELL_STRING_BEING_JOINED_ANYWHERE_IN_THE_MODULE__OR_AN_EXISTING_DOOR_REFUSAL_CHANGING_BY_THIS_ROUND_ALONE__OR_THE_CENSUS_OR_PROBE_NUMBERS_NOT_REPRODUCING",
+ "stop_condition": "REALISTIC_GOAL_PROBE_MEASURED_38_WITH_3_EXECUTED_AND_19_CONFINEMENT_REFUSALS__SUBSTRATE_9_OF_9_TESTS_PASS_HOST_BYTE_IDENTICAL_EFFECT_RECEIPTS_CONTENT_ADDRESSED__FIRST_DESIGN_FALSIFIED_BEFORE_SHIP_AND_RECORDED__NO_DOOR_CODE_CHANGED_ADDITIVE_ONLY__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/confinement_v1.py",
+   "canonical/tests/test_admitted_confinement_v1.py",
+   "canonical/tools/realistic_goal_reach_probe_v1.py",
+   "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_BINDING_WAS_STILL_THE_DOMINANT_WALL__AND_THAT_A_CHARACTER_BLOCKLIST_IS_A_CONFINEMENT",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_8439f609__CENSUS_BOTH_LAYERS_RE_RUN__REALISTIC_PROBE_3_OF_38_EXECUTED_19_CONFINEMENT_REFUSALS__SUBSTRATE_9_OF_9_TESTS_HOST_BYTE_IDENTICAL_RECEIPTS_DETERMINISTIC__NO_DOOR_CODE_CHANGED"
+ },
+ "measured_effect": "PROBE_38_REALISTIC_GOALS_3_EXECUTED_19_CONFINEMENT_REFUSALS_1_DOMINANT_NAMED_CAUSE__SUBSTRATE_9_OF_9_HOST_BYTE_IDENTICAL_EFFECT_SHA256_RECEIPTS_DETERMINISTIC__FIRST_DESIGN_FALSIFIED_AND_DELETED__NO_DOOR_CODE_CHANGED__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "CONSTRUCTIVE_SUBSTRATE_FOR_THE_EXISTING_EXECUTION_BOUNDARY__MEASURED_ISOLATION_AND_EFFECT_RECEIPTS__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/computer_execution_boundary_v1.py",
+  "door_and_act_availability_census_20261112.py",
+  "A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md",
+  "canonical/tools/realistic_goal_reach_probe_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "8439f609a3bc18648c35006e221675c2d87c0a43",
+  "real_outcome": "THE_ADMITTED_CONFINEMENT_SUBSTRATE_EXISTS_AND_IS_MEASURED__THE_DOMINANT_REFUSAL_OF_THE_MOST_ADVANCED_CODING_CAPABILITIES_HAS_ITS_CONSTRUCTIVE_HALF__SEAM_NAMED_NOT_WIRED",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether the most advanced coding actions can be experienced once and learned permanently. Measured: those actions compile, bind, and stop at a deliberate boundary whose release condition had no implementation. The round builds the implementation (the disposable machine with effect receipts) and names the additive seam, changing no refusal.",
+   "proxy_goals_deleted": [
+    "loosening the compile layer so keyword salads compile (the gate-accepts-everything trap, banned on this tree)",
+    "weakening the confinement boundary to admit unconfined execution",
+    "counting a realistic-sentence corpus as a rescue before running it (PR1 falsified: 3/38, not >=24/38)"
+   ],
+   "surviving_necessity": "Execution of advanced capabilities must happen on a disposable machine with verified effect receipts and a byte-identical host guarantee, admitted through the boundary's own release condition."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/computer_execution_boundary_v1.py (the boundary and its release condition -- honored, not weakened)",
+    "canonical/runtime/live_brain_route_admission_v1.py and goal_front_compiler_v1.py (the refusal sites -- the named seam, untouched)",
+    "door_and_act_availability_census_20261112.py (the both-layer instrument -- re-run on this base)",
+    "canonical/tools/realistic_goal_reach_probe_v1.py (NEW: the material-aware realistic-goal instrument, data corpus included)",
+    "A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md (corrected ordering; its section 1.3 lesson killed the salad instrument)"
+   ],
+   "external_existing_routes_checked": [
+    "OSWorld 2.1 record (Nov 2026): best binary completion 44.3% -- long-horizon execution governance and verification is the field wall",
+    "GroundAct (arXiv 2508.05614): feasibility depends on environmental state agents cannot see -- precondition and confinement sensing",
+    "environment-probing curation (arXiv 2609.11060): least-privilege world probes raise pass rates -- probes and receipts over trust"
+   ],
+   "capability_work_deleted": [
+    "the shell-metacharacter blocklist -- falsified by its own fixture and deleted before shipping",
+    "the assumption that realistic phrasing rescues the compile layer (falsified: 3/38)",
+    "the assumption that binding was still the dominant wall (measured: the door reaches past most of it)"
+   ],
+   "surviving_gap": "the seam is named, not wired: every refusal stands; per-capability effect declarations are registry data still to be written; 32/38 realistic advanced-coding goals still refuse"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: an execution boundary without a substrate can only refuse -- the release condition was a promise with no implementation. The deeper blocker is that effect declarations per capability do not exist yet, so even with the substrate the seam cannot verify what a capability promises to produce.",
+   "delete_bypass_substitute_options": [
+    "DELETE the boundary -- rejected: it is the tree's honest refusal to run code unconfined",
+    "BYPASS with per-capability carve-outs -- rejected: carve-outs are how gates rot",
+    "SUBSTITUTE a character blocklist for the worktree -- falsified this round and deleted"
+   ],
+   "surviving_causal_blocker": "the seam is unwired and effect declarations per capability are unwritten; until both exist the 19 refusals stand unchanged by design"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Generalise the lifter to constant collections + discriminating-grid gates -- chosen: one rule, all machinery already measured, both families served",
+    "2. Hand-written keyed-table recogniser plus special-case lifter -- rejected: per-family machinery the general rule replaces",
+    "3. Crystallization-time emission -- killed by arithmetic (262 vs 179 bytes embedded) before implementation; needs a runtime-binding execution contract, an architectural decision",
+    "4. Model donor for body understanding -- rejected by law"
+   ],
+   "losing_routes_reason": "Special-casing duplicates what the general rule does; emission changes the execution contract of every downstream organ consumer for a win the replay path already delivers at the system level; a donor violates the ownership law.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through real execution: the never-seen organ and its replay run on held-out action ids including unknowns and type-hostile inputs; the vacuity gate is exercised by the numeric grid that must refuse; the first family's measured numbers (gain 67, armed-vs-cold prediction) are re-run as regression. The prediction was written before the confirmatory run; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-24 note's second-family negative -- superseded by this measurement",
+    "the round-24 next-step candidate 'crystallization-time emission' -- killed with recorded arithmetic, not deferred silently"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the world-model writer (reused unchanged as the second family's corpus source)",
+    "the round-23/24 admission, licensing, and replay machinery (reused unchanged)"
+   ],
+   "fresh_reuse_plan": "Organ-declared domain probes close the bridge's honest gap; perceptor/policy corpora are the same cheap measurement; the learning-to-learn benchmark re-run is the next cache-proof question."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving whether the mechanism generalises -- pinned by the second-family prediction test",
+    "re-arguing the crystallization arithmetic -- recorded in the result document with the numbers"
+   ],
+   "search_stop_decision": "Stop when the generalisation question is answered by measurement and the vacuity gate is symmetric across both gates. Third-family measurement and bridge probe metadata are new rounds with their own predictions.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "BUILD_THE_ADMITTED_CONFINEMENT_SUBSTRATE_THE_BOUNDARY_DEMANDS",
+   "WEAKEN_THE_CONFINEMENT_BOUNDARY",
+   "LOOSEN_THE_GOAL_COMPILER_FOR_KEYWORD_SALADS",
+   "WIRE_THE_SEAM_IN_THE_SAME_ROUND"
+  ],
+  "deleted_or_bypassed_paths": [
+   "TUPLE_ONLY_LIFTING_RULE",
+   "FIRST_LINE_ONLY_HELPER_RENDERER",
+   "CRYSTALLIZATION_TIME_EMISSION_CANDIDATE_KILLED_BY_ARITHMETIC",
+   "NON_DISCRIMINATING_GRIDS_AT_BOTH_GATES"
+  ],
+  "selected_surviving_route": "BUILD_THE_ADMITTED_CONFINEMENT_SUBSTRATE_THE_BOUNDARY_DEMANDS",
+  "why_selected_route_is_fastest_sufficient": "THE_RELEASE_CONDITION_WAS_ALREADY_WRITTEN_BY_THE_BOUNDARY__THE_SUBSTRATE_IS_STDLIB_AND_GIT_CLONE__THE_INSTRUMENT_LESSON_FROM_SECTION_1_3_KILLED_THE_SALAD_BEFORE_ANOTHER_FALSE_NUMBERS__AND_THE_SEAM_IS_ADDITIVE_SO_NO_EXISTING_REFUSAL_CHANGES",
+  "expected_parent_level_state_change": "THE_BOUNDARY_RELEASE_CONDITION_HAS_ITS_CONSTRUCTIVE_HALF__A_DISPOSABLE_MACHINE_WITH_MEASURED_EFFECT_RECEIPTS_AND_A_NAMED_SEAM__EVERY_EXISTING_REFUSAL_STANDS_UNTIL_THE_SEAM_DIFF__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "REALISTIC_GOAL_PROBE_MEASURED_38_WITH_3_EXECUTED_AND_19_CONFINEMENT_REFUSALS__SUBSTRATE_9_OF_9_TESTS_PASS_HOST_BYTE_IDENTICAL_EFFECT_RECEIPTS_CONTENT_ADDRESSED__FIRST_DESIGN_FALSIFIED_BEFORE_SHIP_AND_RECORDED__NO_DOOR_CODE_CHANGED_ADDITIVE_ONLY__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T18:50:11Z",
+   "max_age_hours": 24,
+   "incumbent_route": "BOUNDARY_STATE__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT_WITH_NO_IMPLEMENTATION_OF_THE_RELEASE_CONDITION__19_OF_38_REALISTIC_ADVANCED_CODING_GOALS_REFUSED",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "census re-run on this base: door fates 25 executed / 38 compiled-failed / 52 not-compiled / 26 routed-elsewhere",
+     "realistic-goal probe: 3/38 executed, 19/38 refused with COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT -- the dominant named cause",
+     "computer_execution_boundary_v1 docstring states the release condition verbatim; this round implements it constructively",
+     "the first draft's metacharacter blocklist was falsified by its own fixture and deleted before shipping"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "OSWorld 2.1 (Nov 2026): best binary completion 44.3%, partial 77.7-81.8% -- long-horizon execution governance is the field's wall",
+     "GroundAct (arXiv 2508.05614): 15 LLMs drop to 29-53% when feasibility depends on unmentioned environmental state",
+     "Grounding Agent Memory (arXiv 2609.11060): least-privilege world probes raise pass rate 39% to 73% -- receipts over trust"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python stdlib only: subprocess shell=False with timeout, tempfile, hashlib, shutil, socket-free",
+     "git clone --no-local is the worktree mechanism, the same convention the census uses for disposable measurement"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "self-improving agents 2026 guide (o-mega.ai, Oct 2026): production agents default write_approval false -- execution governance is the production norm",
+     "safeguard.sh (Oct 2026): skill libraries bank mistakes without verifier gating -- effect receipts are the corrective"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "agent sandboxed code execution effect verification disposable worktree 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent execution governance write approval production 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "python subprocess shell=False restricted env budget timeout git worktree snapshot"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "OSWorld 2.1 computer agent confinement verification November 2026"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "BUILD_THE_ADMITTED_CONFINEMENT_SUBSTRATE_THE_BOUNDARY_DEMANDS",
+   "challenger_routes": [
+    {
+     "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
+     "evidence": [
+      "a dict special case plus a keyed-table recogniser would serve the world-model family specifically"
+     ],
+     "qualification_evidence": [
+      "the recursive collection rule covers tuple, list, set AND dict with less code and no per-family maintenance",
+      "families are still recognised structurally after lifting -- the generalisation does not blur family identity"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Equivalent",
+      "CAPABILITY_STRENGTH": "Strictly narrower (one family per special case)",
+      "WALL_CLOCK": "Similar",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "More per-family surface to maintain and re-measure",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "emitting abstraction calls at organ birth would make every future family member born minimal"
+     ],
+     "qualification_evidence": [
+      "killed by arithmetic: organs must stay self-contained, and helper+call measures ~262 description bytes against the cold form's 179",
+      "emission only pays with a runtime-binding execution contract -- an architectural decision changing every downstream organ consumer, out of round scope"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "Negative at the organ layer as measured",
+      "WALL_CLOCK": "Higher (execution-contract change)",
+      "INCREMENTAL_COST": "0 USD but large blast radius",
+      "RELIABILITY": "New failure mode for every organ consumer",
+      "VERIFIABILITY": "Requires its own pre-registered prediction on emitted bytes"
+     }
+    },
+    {
+     "route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+     "evidence": [
+      "3 sites measure gain 103 bytes with family recognised from structure; the never-seen organ replays 394 to 277 bytes with 0 held-out mismatches",
+      "the numeric grid that cannot see the domain is REFUSED at both gates instead of shipping unchecked rewrites",
+      "the first family's measured numbers re-run unchanged"
+     ],
+     "qualification_evidence": [
+      "6 new tests including the prediction, the economics, the singleton exclusion, the vacuity gate, and first-family regression",
+      "21 tests pass across the three compression rounds; affected suites pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed at both gates; refusals carry reasons",
+      "CAPABILITY_STRENGTH": "Two families under one mechanism, with the third-family question now cheap",
+      "WALL_CLOCK": "Milliseconds of AST work per corpus",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Vacuity gate added where verification was silently vacuous",
+      "VERIFIABILITY": "Prediction written before measurement; first-family numbers as regression calibration"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T18:50:11Z",
+    "max_age_hours": 2,
+    "selected_route": "BUILD_THE_ADMITTED_CONFINEMENT_SUBSTRATE_THE_BOUNDARY_DEMANDS",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the generalised lifter measures the keyed-table abstraction and refuses vacuous grids on this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/runtime/confinement_v1.py",
+      "detail": "the confinement substrate under measurement"
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "synthesize_world_model_organ supplies the second family's corpus, unchanged"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_BUILDS_AND_MEASURES_A_SUBSTRATE_WITH_ZERO_CREDIT_AND_ZERO_REFUSAL_CHANGES__THE_CLAIM_IS_BOUND_TO_9_9_TESTS__THE_FALSIFIED_FIRST_DESIGN_BEING_RECORDED__AND_THE_SEAM_REMAINING_UNWIRED",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "BUILD_THE_ADMITTED_CONFINEMENT_SUBSTRATE",
+   "falsifier_id": "F_THE_HOST_MUST_STAY_BYTE_IDENTICAL__EFFECTS_MUST_VERIFY_INSIDE_THE_WORKTREE_OR_REFUSE_AT_ADMISSION__OVERRUNS_MUST_BE_RECORDED__NO_SHELL_STRING_MAY_BE_JOINED__AND_NO_EXISTING_DOOR_REFUSAL_MAY_CHANGE_BY_THIS_ROUND_ALONE",
+   "decisive_question": "Does an admitted confinement with measured effect receipts exist that the boundary's own release condition names, without weakening any refusal?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/confinement_v1.py",
+     "git_blob_sha": "bc89e7730d703a41bbf3e30e3c33c022fa40d6c8"
+    },
+    {
+     "path": "canonical/tests/test_admitted_confinement_v1.py",
+     "git_blob_sha": "36b81baec9b572fa83f3251dfe42278c3070e534"
+    },
+    {
+     "path": "canonical/tools/realistic_goal_reach_probe_v1.py",
+     "git_blob_sha": "b32244c43b8ca4a3b79cd1ef4ed0d5bd7e9ba228"
+    },
+    {
+     "path": "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.md",
+     "git_blob_sha": "a4f8f4fdadd260378270bad6ea32eba1b0188868"
+    }
+   ]
+  }
+ },
+ "next_step": "WIRE_THE_SEAM_AT_THE_BOUNDARY_REFUSAL_SITES_AS_AN_ADDITIVE_RECEIPT_PATH_AND_WRITE_PER_CAPABILITY_EFFECT_DECLARATIONS_FOR_THE_19_REFUSED_CAPABILITIES__THEN_RE_RUN_THE_REALISTIC_GOAL_PROBE__THE_19_BUCKET_IS_THE_MEASURABLE_TARGET"
+}
