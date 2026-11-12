@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6795,
+  "research_index_records": 6793,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1d8b85841fd02dfd3db70d00e6f387cdd1acdae0e5b8ee80afdd371f8ba77084"
+  "value": "6971d1b03e446f72bdd9762d3b716ee6b219d20e805cb3763003ae58b5da1cec"
  },
  "engines": [
   {
@@ -205412,47 +205412,6 @@
    "action_id": "",
    "capability": false,
    "date": "",
-   "id": "research:canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/test_finite_verifier_search.cpython-311-pytest-9.2.0.pyc",
-   "schema": "",
-   "sha256": "84c982419be34eac3b691da1a553bbf5a3822f9d04bf41d2d48cc244446483c7",
-   "status": "",
-   "terms": {
-    "311": 1,
-    "9.2.0": 1,
-    "finite": 1,
-    "pytest": 1,
-    "search.cpython": 1,
-    "test": 1,
-    "verifier": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/test_owned_causal_falsification_v1.cpython-311-pytest-9.2.0.pyc",
-   "schema": "",
-   "sha256": "34350ba7b0b496fcfa22a7b144587c838fac47f2fcf7ce12d60eb0010fa734e7",
-   "status": "",
-   "terms": {
-    "311": 1,
-    "9.2.0": 1,
-    "causal": 1,
-    "falsification": 1,
-    "owned": 1,
-    "pytest": 1,
-    "test": 1,
-    "v1.cpython": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
    "id": "research:canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
@@ -222149,7 +222108,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0b7c88a5e0c625d21d3c2ade6bf90b6983246b919a51d37eb6a3394dded94534",
+   "sha256": "c6873667143931d5d28e0338e45c0904c8f6ebdd3349def681eac2319c7260c2",
    "status": "",
    "terms": {
     "20261112": 1,
