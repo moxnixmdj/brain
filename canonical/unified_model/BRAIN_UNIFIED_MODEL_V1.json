@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 385,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6780,
+  "research_index_records": 6781,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "21b3eb88a4162e7582fe6f5572985eaf4b901ad65a5b058fb57f2836df53b816"
+  "value": "19dc4edbe3efdb90847ec9b2c5374ab7e01d643720495dfa9f1a777fbd373d13"
  },
  "engines": [
   {
@@ -51306,82 +51306,6 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 5927,
-   "headings": [
-    "I was wrong about the block. The lane was open, and the result replicates.",
-    "1. What I got wrong",
-    "2. The measurement, on instances that did not exist before",
-    "3. What this does and does not settle",
-    "4. Shipped",
-    "Answers"
-   ],
-   "kind": "DOCUMENT",
-   "path": "I_WAS_WRONG_ABOUT_THE_BLOCK_20261112_V1.md",
-   "sha256": "f82a3ee05cab00478195650b97a80861847b604151c6e6d3b4b99cb73c032bbe",
-   "summary": "**2026-11-12.** Authority **NONE** (producer-run measurement in this sandbox). `truth.achieved` = `false`.",
-   "terms": {
-    "17": 4,
-    "50": 6,
-    "all": 4,
-    "arm": 3,
-    "beats": 3,
-    "both": 5,
-    "bridge": 4,
-    "browser": 3,
-    "check": 3,
-    "did": 3,
-    "false": 4,
-    "feasibility": 4,
-    "first": 5,
-    "fresh": 3,
-    "full": 3,
-    "had": 4,
-    "instances": 6,
-    "lane": 3,
-    "learner": 3,
-    "measurement": 4,
-    "newest": 3,
-    "no": 6,
-    "nobody": 3,
-    "not": 13,
-    "now": 6,
-    "one": 6,
-    "only": 5,
-    "open": 3,
-    "ordering": 4,
-    "page": 3,
-    "pages": 9,
-    "pass": 4,
-    "produced": 4,
-    "random": 4,
-    "real": 3,
-    "recorded": 3,
-    "replication": 3,
-    "run": 8,
-    "runs": 8,
-    "same": 6,
-    "seeds": 4,
-    "so": 4,
-    "still": 3,
-    "success": 7,
-    "true": 4,
-    "used": 4,
-    "verbatim": 3,
-    "version_space": 4
-   },
-   "title": "I was wrong about the block. The lane was open, and the result replicates.",
-   "title_terms": [
-    "about",
-    "block",
-    "lane",
-    "open",
-    "replicates",
-    "result",
-    "wrong"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
    "bytes": 5580,
    "headings": [
     "I was wrong: they have run it 296 times",
@@ -61449,6 +61373,85 @@
    "title_terms": [
     "concept",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9221,
+   "headings": [
+    "Which demonstration you give is a decision; the tree has never separated it from the lottery around it",
+    "1. The thing nobody had asked",
+    "2. The decision, made from data available before any outcome",
+    "3. The correction this round is really about",
+    "4. What this says about the owner's plan, precisely",
+    "5. Reproduce",
+    "6. Instrument honesty, including where this round was wrong",
+    "7. What is next, ranked by measured value"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHICH_DEMONSTRATION_YOU_GIVE_IS_A_DECISION_20261112_V1.md",
+   "sha256": "50232c7d5883707d26eb080f976515f404fe9625c92462425eba64acbeef9c32",
+   "summary": "**2026-11-12.** Branch `arena/b8e07941-brain`, base `b52af360`. Authority **NONE** — producer-run sandbox measurement, `$0`, zero model calls in every result-bearing path, `truth.achieved` stays `false`, no capability registered, no family flipped.",
+   "terms": {
+    "0.00": 9,
+    "0.80": 4,
+    "0.81": 4,
+    "0.88": 4,
+    "0.89": 4,
+    "1.00": 8,
+    "15": 7,
+    "about": 4,
+    "against": 4,
+    "all": 5,
+    "answer": 4,
+    "arm": 13,
+    "best": 6,
+    "both": 5,
+    "candidate": 5,
+    "candidates": 6,
+    "canonical": 7,
+    "ceiling": 7,
+    "changes": 5,
+    "choice": 7,
+    "data": 5,
+    "demonstration": 6,
+    "every": 7,
+    "file": 9,
+    "first": 5,
+    "give": 5,
+    "honest": 5,
+    "learner": 5,
+    "most": 5,
+    "no": 11,
+    "not": 15,
+    "number": 6,
+    "one": 10,
+    "only": 6,
+    "other": 5,
+    "own": 6,
+    "path": 5,
+    "reach": 8,
+    "recorded": 5,
+    "reported": 5,
+    "round": 5,
+    "rule": 6,
+    "run": 9,
+    "same": 5,
+    "so": 6,
+    "spread": 6,
+    "strict": 8,
+    "tasks": 12
+   },
+   "title": "Which demonstration you give is a decision; the tree has never separated it from the lottery around it",
+   "title_terms": [
+    "around",
+    "decision",
+    "demonstration",
+    "give",
+    "lottery",
+    "never",
+    "separated",
+    "tree"
    ]
   },
   {
@@ -74677,7 +74680,7 @@
   "included_source_count": 1187,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f0875745329376bc9802cb0200817c15a23b3ad7d3c73fa45326c90765c96cb1"
+  "source_tree_digest": "6d80a00cbc602805cc6d3ad6ad86b455b4bb805ac66aae60fc0e805221e13388"
  },
  "research_index": [
   {
@@ -155549,6 +155552,42 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_CHOICE_CEILING_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_CHOICE_CEILING_20261112_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+   "sha256": "7f0c4a5edd5ea25477611407ada3eda3b569218ccd395b9af8598e8b7e5a554c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "ceiling": 1,
+    "choice": 1,
+    "demonstration": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_CHOICE_STRICT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_CHOICE_STRICT_20261112_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+   "sha256": "87ea21c13e28ba9828a4aaf3c19bf8bc9705db7cf55279c56eaa442e4e1d83a8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "choice": 1,
+    "demonstration": 1,
+    "strict": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/DEONTIC_POLICY_ADEQUACY_AUTH_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -166652,23 +166691,6 @@
     "one": 1,
     "success": 1,
     "v5": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
-   "schema": "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_MEASUREMENT_V1",
-   "sha256": "2f9e3888e4a8b375301f9b7e4aff74f5f36ca2c3ace49ded8d2562050d260751",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "miniwob": 1,
-    "replication": 1,
-    "v1": 1
    }
   },
   {
@@ -230240,31 +230262,6 @@
    }
   },
   {
-   "action_id": "REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "5106b17504f1b36e7ed97d81f34b81ac61683438bb77217bfd85024452614017",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "one": 1,
-    "one_demonstration_was_never_shown_to_reproduce_on_unseen_instances": 1,
-    "replicate": 1,
-    "replicate_one_success_on_unseen_seeds_20261112_v1": 1,
-    "rerun_the_existing_learner_unchanged_on_fresh_seeds_and_compare_ordering_only": 1,
-    "seeds": 1,
-    "success": 1,
-    "the_one_success_ladder_is_known_to_reproduce_on_unseen_instances__no_rate_claim__no_family_flipped": 1,
-    "unseen": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "REPO_INTEGRITY_REFEREE_ON_MAIN_SIGNED_VERDICT_20261014_V1",
    "capability": false,
    "date": "2026-10-14",
@@ -232034,6 +232031,31 @@
     "synthesizer": 1,
     "the_creature_can_reach_its_own_synthesizer_20261104_v1": 1,
     "the_previous_round_hardcoded_the_shape_of_the_answer_and_only_computed_a_parameter_inside_it_so_a_periodic_function_with_an_arbitrary_block_was_refused_while_the_round_reported_general_operator_growth": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1a215b5844c3fb134d72cf208b3b35fdc1a9fe168e03b45b7c7c5b638a41f158",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "chosen": 1,
+    "decision": 1,
+    "demonstration": 1,
+    "every_prior_round_of_this_question_measured_how_many_demonstrations_are_given_and_none_measured_which_one_is_given__the_recorded_run_already_contains_a_0_to_100_in_100_spread_within_a_single_task_and_it_was_read_as_noise": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lottery": 1,
+    "measure_which_demonstration_to_choose_from_data_available_before_any_outcome_and_report_the_honest_capture": 1,
+    "not": 1,
+    "the_demonstration_chosen_is_a_decision_not_a_lottery_20261112_v1": 1,
+    "the_tree_can_say_whether_picking_the_demonstration_is_a_real_decision_or_a_lottery__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "v1": 1
    }
   },
