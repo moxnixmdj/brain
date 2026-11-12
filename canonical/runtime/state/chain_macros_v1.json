@@ -75,6 +75,46 @@
     ]
    ],
    "successes": 1
+  },
+  "6f1caf73129eee5ea888282b": {
+   "created": 1794497643.2908947,
+   "example_goal": "Remove unused imports from canonical/astra_runtime/tmp/swe_upg_live_3bdy4r2r/pkg/comp.py. and add type hints to every function in canonical/astra_runtime/tmp/swe_upg_live_3bdy4r2r/pkg/comp.py.",
+   "last_used": 1794497643.2908947,
+   "plan": [
+    {
+     "capability_id": "python.swe.transform_and_synthesize.v1",
+     "clause": "Remove unused imports from canonical/astra_runtime/tmp/swe_upg_live_3bdy4r2r/pkg/comp.py."
+    },
+    {
+     "capability_id": "python.swe.transform_and_synthesize.v1",
+     "clause": "add type hints to every function in canonical/astra_runtime/tmp/swe_upg_live_3bdy4r2r/pkg/comp.py."
+    }
+   ],
+   "schema": "PROJECT_BRAIN_MACRO_V1",
+   "signature": [
+    [
+     [
+      "imports",
+      "remove",
+      "unused"
+     ],
+     [
+      ".py"
+     ]
+    ],
+    [
+     [
+      "every",
+      "function",
+      "hints",
+      "type"
+     ],
+     [
+      ".py"
+     ]
+    ]
+   ],
+   "successes": 1
   }
  },
  "schema": "PROJECT_BRAIN_MACRO_V1"
