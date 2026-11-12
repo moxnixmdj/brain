@@ -1,0 +1,2198 @@
+{
+ "schema": "BRAIN_TAKE_OUT_MEASURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "which": "scored",
+ "expected_before_the_run": "On the 64 development bugs a piece taken out repaired 15, 12 of them right as far as checked, and 11 of the 12 bugs that are something too much, all 11 right; 3 of the 4 repairs of other bugs were not right. The pieces were shaped while looking at the development bugs, so less is expected of the 100 scored ones. Of their 19 bugs that are something too much: 12 to 16 repaired and right. Of the other 81: 2 to 6 repaired, most of them not right. In all 15 to 21 repaired and 12 to 17 right. Of the 22 bugs nothing without a model had repaired, 7 are something too much: 3 to 6 of the 22 repaired. The pieces first and the learner's candidates in what is left of 200: 58 to 63 repaired against the learner's 55, and 50 to 55 right against 48, with 0 to 3 bugs the learner repaired alone pushed out of the 200. What would make me drop it: the two together repair no more than 55 or are right for no more than 48; or of the repairs by a piece taken out fewer than two in three are right.",
+ "benchmark": {
+  "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+  "extra_inputs_sha256": "78fbba8865b20c5a979cda6e02fd72538e1762e65980af7d1a6e93c3e87e93af"
+ },
+ "parameters": {
+  "budget": 200,
+  "split_seed": 20261111,
+  "screen_limit_s": 0.5
+ },
+ "code_sha256": {
+  "canonical/tools/take_out_measure_v1.py": "0e1efcd308c961cd8fc91aa81c87c1f3378375146ccf2ae8436ffd9f01aae1cb",
+  "canonical/runtime/take_out_v1.py": "335a80c85d96f1ab0151142a73153f8a981bad71b60018ba7c88134beeca71cf",
+  "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+  "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+  "canonical/tools/humanevalfix_experience_stream_measure_v1.py": "77a5d7fd8beb77e42d7662a1b298bf43970aa2fe062dbdb74e244503e12dad8a",
+  "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09"
+ },
+ "model_calls": 0,
+ "lessons": 0,
+ "per_bug": {
+  "Python/1": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 55,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 55,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.74
+  },
+  "Python/3": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 13,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 13,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.19
+  },
+  "Python/4": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 47,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 47,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.43
+  },
+  "Python/5": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 31,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 31,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.33
+  },
+  "Python/9": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 25,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 25,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.27
+  },
+  "Python/11": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 38,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 38,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.36
+  },
+  "Python/14": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 40,
+   "published_fix_rank": 12,
+   "first_pass_rank": 12,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "candidates_run": 12,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.22
+  },
+  "Python/15": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 23,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 23,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.25
+  },
+  "Python/16": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 8,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 8,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.15
+  },
+  "Python/17": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 29,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 29,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.34
+  },
+  "Python/18": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 52,
+   "published_fix_rank": null,
+   "first_pass_rank": 19,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 5,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 14,
+    "agree": 14
+   },
+   "candidates_run": 19,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.35
+  },
+  "Python/19": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 53,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 53,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.47
+  },
+  "Python/20": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 83,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 83,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.75
+  },
+  "Python/21": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 30,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 30,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.31
+  },
+  "Python/22": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 18,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 18,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.21
+  },
+  "Python/23": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 7,
+   "published_fix_rank": 4,
+   "first_pass_rank": 4,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "candidates_run": 4,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.17
+  },
+  "Python/24": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 16,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 16,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.21
+  },
+  "Python/25": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 63,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 63,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.05
+  },
+  "Python/26": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 26,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 26,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.3
+  },
+  "Python/27": {
+   "bug_type": "function misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 3,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 3,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.11
+  },
+  "Python/28": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 8,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 8,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.15
+  },
+  "Python/29": {
+   "bug_type": "function misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 16,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 16,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.23
+  },
+  "Python/30": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 7,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 7,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.17
+  },
+  "Python/32": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 121,
+   "published_fix_rank": null,
+   "first_pass_rank": 23,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 101,
+    "agree": 2
+   },
+   "candidates_run": 23,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.56
+  },
+  "Python/35": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 9,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 9,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.16
+  },
+  "Python/37": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 62,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 62,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.6
+  },
+  "Python/40": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 73,
+   "published_fix_rank": 1,
+   "first_pass_rank": 1,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one of several",
+   "nodes_fewer": 1,
+   "candidates_run": 1,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.26
+  },
+  "Python/41": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 2,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 2,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.11
+  },
+  "Python/43": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 30,
+   "published_fix_rank": null,
+   "first_pass_rank": 12,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one of several",
+   "nodes_fewer": 3,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 22,
+    "agree": 22
+   },
+   "candidates_run": 12,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.3
+  },
+  "Python/45": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 6,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 6,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.13
+  },
+  "Python/46": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 103,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 103,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.82
+  },
+  "Python/47": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 85,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 85,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.7
+  },
+  "Python/49": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 13,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 13,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.19
+  },
+  "Python/51": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 60,
+   "published_fix_rank": null,
+   "first_pass_rank": 10,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": "one of several",
+   "nodes_fewer": 1,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 12,
+    "agree": 11
+   },
+   "candidates_run": 10,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.25
+  },
+  "Python/52": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 6,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 6,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.13
+  },
+  "Python/53": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 8,
+   "published_fix_rank": 4,
+   "first_pass_rank": 4,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 6,
+   "candidates_run": 4,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.18
+  },
+  "Python/54": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 2,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 2,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.11
+  },
+  "Python/58": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 19,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 19,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.24
+  },
+  "Python/60": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 8,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 8,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.18
+  },
+  "Python/61": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 18,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 18,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.26
+  },
+  "Python/62": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 11,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 11,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.23
+  },
+  "Python/63": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 54,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 54,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.61
+  },
+  "Python/64": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 17,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 17,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.22
+  },
+  "Python/65": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 65,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 65,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.62
+  },
+  "Python/66": {
+   "bug_type": "function misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 36,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 36,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.37
+  },
+  "Python/69": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 39,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 39,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.48
+  },
+  "Python/70": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 47,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 47,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 2.41
+  },
+  "Python/74": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 20,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 20,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.27
+  },
+  "Python/78": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 35,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 35,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.38
+  },
+  "Python/81": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 129,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 129,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.27
+  },
+  "Python/82": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 30,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 30,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.35
+  },
+  "Python/84": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 49,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 49,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.45
+  },
+  "Python/85": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 53,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 53,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.45
+  },
+  "Python/86": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 48,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 48,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.45
+  },
+  "Python/88": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 65,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 65,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.56
+  },
+  "Python/89": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 41,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 41,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.37
+  },
+  "Python/90": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 27,
+   "published_fix_rank": null,
+   "first_pass_rank": 5,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 2,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 14,
+    "agree": 11
+   },
+   "candidates_run": 5,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.2
+  },
+  "Python/92": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 51,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 51,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.45
+  },
+  "Python/93": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 79,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 79,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.64
+  },
+  "Python/96": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 33,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 33,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.32
+  },
+  "Python/99": {
+   "bug_type": "function misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 80,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 80,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.65
+  },
+  "Python/100": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 22,
+   "published_fix_rank": 4,
+   "first_pass_rank": 4,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "candidates_run": 4,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.17
+  },
+  "Python/101": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 31,
+   "published_fix_rank": null,
+   "first_pass_rank": 10,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 2,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 9,
+    "agree": 7
+   },
+   "candidates_run": 10,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.27
+  },
+  "Python/102": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 21,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 21,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.26
+  },
+  "Python/105": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 46,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 46,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.42
+  },
+  "Python/107": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 73,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 73,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.65
+  },
+  "Python/108": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 101,
+   "published_fix_rank": 36,
+   "first_pass_rank": 13,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 2,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 12,
+    "agree": 12
+   },
+   "candidates_run": 13,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.38
+  },
+  "Python/109": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 62,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 62,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.58
+  },
+  "Python/110": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 27,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 27,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.31
+  },
+  "Python/114": {
+   "bug_type": "function misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 43,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 43,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.43
+  },
+  "Python/118": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 97,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 97,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.95
+  },
+  "Python/120": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 22,
+   "published_fix_rank": 15,
+   "first_pass_rank": 15,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 4,
+   "candidates_run": 15,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.29
+  },
+  "Python/121": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 51,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 51,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.47
+  },
+  "Python/122": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 34,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 34,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.35
+  },
+  "Python/123": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 55,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 55,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 3.43
+  },
+  "Python/124": {
+   "bug_type": "variable misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 166,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 166,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.55
+  },
+  "Python/125": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 82,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 82,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.73
+  },
+  "Python/127": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 64,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 64,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.6
+  },
+  "Python/128": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 98,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 98,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.89
+  },
+  "Python/130": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 111,
+   "published_fix_rank": 25,
+   "first_pass_rank": 25,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "candidates_run": 25,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.48
+  },
+  "Python/132": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 66,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 66,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.62
+  },
+  "Python/133": {
+   "bug_type": "operator misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 16,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 16,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.21
+  },
+  "Python/134": {
+   "bug_type": "function misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 66,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 66,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.56
+  },
+  "Python/135": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 33,
+   "published_fix_rank": 16,
+   "first_pass_rank": 16,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "a statement",
+   "nodes_fewer": 4,
+   "candidates_run": 16,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.19
+  },
+  "Python/136": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 118,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 118,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.09
+  },
+  "Python/138": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 21,
+   "published_fix_rank": 9,
+   "first_pass_rank": 9,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one of several",
+   "nodes_fewer": 4,
+   "candidates_run": 9,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.23
+  },
+  "Python/140": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 102,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 102,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.96
+  },
+  "Python/141": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 84,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 84,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.87
+  },
+  "Python/143": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 63,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 63,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.58
+  },
+  "Python/144": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 77,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 77,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.69
+  },
+  "Python/145": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 50,
+   "published_fix_rank": 20,
+   "first_pass_rank": 20,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "candidates_run": 20,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.34
+  },
+  "Python/147": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 114,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 114,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 1.24
+  },
+  "Python/149": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 27,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 27,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.31
+  },
+  "Python/150": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 27,
+   "published_fix_rank": 12,
+   "first_pass_rank": 12,
+   "repaired": true,
+   "is_the_published_fix": true,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "candidates_run": 12,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.23
+  },
+  "Python/154": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 86,
+   "published_fix_rank": 38,
+   "first_pass_rank": 21,
+   "repaired": true,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": true,
+   "kind_of_the_piece": "one inside",
+   "nodes_fewer": 3,
+   "on_inputs_the_tests_do_not_have": {
+    "inputs_used": 16,
+    "agree": 16
+   },
+   "candidates_run": 21,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.41
+  },
+  "Python/156": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 80,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 80,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 14.61
+  },
+  "Python/157": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 14,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 14,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.24
+  },
+  "Python/158": {
+   "bug_type": "missing logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 7,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 7,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.17
+  },
+  "Python/159": {
+   "bug_type": "excess logic",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 35,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 35,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.37
+  },
+  "Python/163": {
+   "bug_type": "value misuse",
+   "benchmark_holds": {
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true,
+    "buggy_fails_in_a_fresh_interpreter": true,
+    "published_fix_passes_in_a_fresh_interpreter": true
+   },
+   "usable": true,
+   "candidates": 50,
+   "published_fix_rank": null,
+   "first_pass_rank": null,
+   "repaired": false,
+   "is_the_published_fix": false,
+   "right_as_far_as_checked": false,
+   "kind_of_the_piece": null,
+   "candidates_run": 50,
+   "screen_said_pass_fresh_interpreter_said_no": 0,
+   "seconds": 0.5
+  }
+ },
+ "summary": {
+  "bugs": 100,
+  "usable": 100,
+  "not_usable": [],
+  "budget": 200,
+  "repaired": 19,
+  "right_as_far_as_checked": 15,
+  "the_published_fix": 11,
+  "passes_the_tests_and_is_not_right": [
+   "Python/32",
+   "Python/51",
+   "Python/90",
+   "Python/101"
+  ],
+  "published_fix_among_the_candidates": 13,
+  "published_fix_within_the_budget": 13,
+  "candidates_median": 39.5,
+  "candidates_most": 166,
+  "bugs_with_more_candidates_than_the_budget": 0,
+  "candidates_run_in_all": 3980,
+  "by_bug_type": {
+   "excess logic": {
+    "bugs": 19,
+    "published_fix_among_the_candidates": 10,
+    "repaired": 11,
+    "right_as_far_as_checked": 10
+   },
+   "function misuse": {
+    "bugs": 6,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "missing logic": {
+    "bugs": 19,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "operator misuse": {
+    "bugs": 14,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "value misuse": {
+    "bugs": 30,
+    "published_fix_among_the_candidates": 3,
+    "repaired": 7,
+    "right_as_far_as_checked": 5
+   },
+   "variable misuse": {
+    "bugs": 12,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 1,
+    "right_as_far_as_checked": 0
+   }
+  },
+  "by_kind_of_the_piece": {
+   "a statement": {
+    "repaired": 1,
+    "right_as_far_as_checked": 1
+   },
+   "one inside": {
+    "repaired": 14,
+    "right_as_far_as_checked": 11
+   },
+   "one of several": {
+    "repaired": 4,
+    "right_as_far_as_checked": 3
+   }
+  }
+ },
+ "seconds": 66.5,
+ "generated_utc": "2026-11-12T18:16:29Z",
+ "beside_the_learner": {
+  "dose_record_sha256": "36154be6747e988c94021ba9321040c0d6fea05c22aab13c0fb193103d8d18bf",
+  "bugs_in_both_records": 100,
+  "budget": 200,
+  "the_learner_is": "edit_kind_learning_v1 with all the ConDefects lessons shown forwards, as recorded; not run again",
+  "the_learner_alone": {
+   "repaired": 55,
+   "right_as_far_as_checked": 48
+  },
+  "a_piece_taken_out_alone": {
+   "repaired": 19,
+   "right_as_far_as_checked": 15
+  },
+  "the_pieces_first_then_the_learner_in_what_is_left": {
+   "repaired": 58,
+   "right_as_far_as_checked": 49
+  },
+  "bugs_nothing_without_a_model_had_repaired": 22,
+  "repaired_only_by_a_piece_taken_out": [
+   "Python/53",
+   "Python/120",
+   "Python/130",
+   "Python/145"
+  ],
+  "right_only_by_a_piece_taken_out": [
+   "Python/53",
+   "Python/120",
+   "Python/130",
+   "Python/145"
+  ],
+  "repaired_by_the_learner_alone_and_pushed_out_of_the_budget": [
+   "Python/105"
+  ],
+  "right_with_the_learner_alone_and_not_right_together": [
+   "Python/32",
+   "Python/90",
+   "Python/105"
+  ],
+  "repaired_among_those_nothing_had_repaired": [
+   "Python/120"
+  ],
+  "right_among_those_nothing_had_repaired": [
+   "Python/120"
+  ]
+ }
+}
