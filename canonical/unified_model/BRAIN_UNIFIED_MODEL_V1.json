@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 367,
+  "knowledge_documents": 368,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6769,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "98cc29fa4a2db3364c56e90161e3b6380da36a877099fddcf70924ddad0eb44b"
+  "value": "275330db4938d478ff486a384396d14b9ff6643f2e0637a5866b8f9a25ed2fc5"
  },
  "engines": [
   {
@@ -58065,6 +58065,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 12932,
+   "headings": [
+    "THE_HONEST_STATUS, audited claim by claim — 2026-11-12 (fourth asking)",
+    "1. Every checkable claim in `THE_HONEST_STATUS.md`, audited",
+    "2. The web state, as actually published (2026-11-12), additions today",
+    "3. The corrected one-line answer",
+    "4. Non-claims and standing invariants"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_HONEST_STATUS_AUDITED_20261112_V1.md",
+   "sha256": "5956e990b4bdbcb035de932fe3c51e07d1bac20f4e44af8257f78a9f25b03c05",
+   "summary": "**2026-11-12.** Branch `arena/b8d81640-brain`, branched from `10304401cda5` (main; merges",
+   "terms": {
+    "10": 5,
+    "19": 4,
+    "2026": 5,
+    "2026-11-12": 6,
+    "6750": 7,
+    "about": 5,
+    "abs": 7,
+    "admitted": 6,
+    "advanced": 4,
+    "agent": 5,
+    "answer": 4,
+    "any": 4,
+    "architecture": 4,
+    "arxiv": 9,
+    "arxiv.org": 8,
+    "branch": 4,
+    "canonical": 4,
+    "capability": 6,
+    "cells": 4,
+    "claim": 9,
+    "coding": 7,
+    "corpus": 5,
+    "document": 5,
+    "empty": 6,
+    "every": 5,
+    "exists": 9,
+    "harness": 7,
+    "https": 12,
+    "merged": 5,
+    "model": 5,
+    "most": 7,
+    "never": 5,
+    "no": 11,
+    "not": 22,
+    "one": 7,
+    "over": 6,
+    "owner": 7,
+    "real": 8,
+    "seam": 8,
+    "skill": 7,
+    "skills": 6,
+    "state": 9,
+    "today": 7,
+    "tree": 10,
+    "verification": 6,
+    "verified": 9,
+    "verifier": 6,
+    "zero": 5
+   },
+   "title": "THE_HONEST_STATUS, audited claim by claim — 2026-11-12 (fourth asking)",
+   "title_terms": [
+    "2026-11-12",
+    "asking",
+    "audited",
+    "claim",
+    "fourth",
+    "the_honest_status"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6085,
    "headings": [
     "What changed this time",
@@ -73282,10 +73356,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1169,
+  "included_source_count": 1170,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "74448659bbf8f293f1e5f8f3c15b7ccd4f75633f8785973bacc4109567b2ea42"
+  "source_tree_digest": "007e124248fd63b8d352a141f4b91c9a76d0aa836d34cced41bbe133926d6a96"
  },
  "research_index": [
   {
@@ -227328,7 +227402,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "537a55469a0ccec8da70cc84283899c440249dd83049f498e4aaf06867e20cdb",
+   "sha256": "0aa77160ca1576136516690340c3fa7c0f388e7723849f8d31029e937399545f",
    "status": "",
    "terms": {
     "20261112": 1,
