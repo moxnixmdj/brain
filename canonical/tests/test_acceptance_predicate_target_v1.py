@@ -41,14 +41,15 @@ KNOWN = {
 }
 
 #: Capabilities whose adapter computes and declares a boolean answer while the registry accepts on
-#: `output_verified`. Emptied on 2026-11-12: all nine were repointed to `pass` in one commit, and the
-#: executed probe (`test_gate_accepts_a_failed_repair_v1.py`) shows the live registry now rejects a
-#: failed repair 8 of 8 times. The list may never grow again — anything that computes an outcome
-#: while registering a transport field fails `definite <= DEFINITE_DEBT` before it can be merged.
-DEFINITE_DEBT: set[str] = set()
+#: `output_verified`. Eight of the nine were repointed on 2026-11-12. One is left, deliberately.
+DEFINITE_DEBT: set[str] = {
+    # Its outcome is available but it cannot be executed here: it needs a content-addressed
+    # repository measurement receipt, and a fabricated one would be worse than a transport field.
+    # It leaves this set when someone runs it against a real receipt, not before.
+    "python.task.acceptance.measured.objective.v1",
+}
 
-#: The nine that were in the list, kept so the clearing can be audited and so a regression that
-#: puts one back is named rather than merely counted.
+#: The eight repointed on 2026-11-12, kept so a drift back to transport is named, not just counted.
 REPOINTED_ON_20261112 = {
     "python.patch.search.test_guided.ast.v1",
     "python.software.repair.guided.provenance.coupled.v1",
@@ -58,7 +59,6 @@ REPOINTED_ON_20261112 = {
     "python.software.repair.measured_acceptance.v1",
     "python.software.repair.semantic_acceptance.v1",
     "python.software.request.semantic_behavior.compile.v1",
-    "python.task.acceptance.measured.objective.v1",
 }
 
 

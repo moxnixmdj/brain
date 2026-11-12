@@ -168,6 +168,11 @@ def _one(capability_id: str, module_name: str, args: Mapping[str, Any]) -> dict[
         "registry_accepts": apply_predicate(expect, result),
         "legacy_expect": dict(LEGACY_EXPECT),
         "legacy_accepts": apply_predicate(LEGACY_EXPECT, result),
+        # `corrected` is the outcome predicate; the live registry now equals it for these eight.
+        "corrected_expect": {"type": "field_equals", "field": "pass", "value": True},
+        "corrected_accepts": apply_predicate(
+            {"type": "field_equals", "field": "pass", "value": True}, result
+        ),
         "declared_result_fields": (
             "pass" in (json.loads(REGISTRY.read_text(encoding="utf-8"))
                        ["capabilities"][capability_id].get("result_fields") or [])

@@ -1,15 +1,24 @@
-"""Executed proof that the registered repairs gate accepts a repair that failed.
+"""Executed proof, in both directions, that the repair gate now reads the outcome.
 
 The claim is narrow and must stay narrow: on a workspace whose only test no bounded mutation can
-satisfy, every repair adapter answers `pass == False` and still returns `output_verified == True`,
-so the registry's `field_equals output_verified == true` accepts it.
+satisfy, every repair adapter answers `pass == False` and still returns `output_verified == True`.
 
-These tests would fail if either half of that stopped being true — which is the point. They also
-pin the fixture as genuinely unsatisfiable, so a future edit cannot quietly make the test passable
-and turn this into a measurement of nothing.
+Three things are pinned here, and each fails loudly if it stops being true:
+
+  * the fixture is genuinely unsatisfiable, so this cannot quietly become a measurement of nothing;
+  * the predicate these capabilities carried until 2026-11-12 would have accepted the failure —
+    kept as `LEGACY_EXPECT` in the probe, never read back into the registry, because the reason for
+    the repoint has to survive the repoint;
+  * the live registry, and the **production** checker `grounded_action_v1._check_expect` that the
+    runtime actually calls, reject the failure.
+
+That last one matters: re-implementing `field_equals` inside a probe proves the probe's opinion, not
+the system's behaviour. `test_the_production_expect_checker_rejects_failure_and_accepts_success`
+exists so the claim is about the code that runs.
 """
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
 
@@ -23,8 +32,6 @@ from gate_accepts_a_failed_repair_probe_20261112 import (  # noqa: E402
     apply_predicate,
     run,
 )
-
-import json  # noqa: E402
 
 _CACHE: dict = {}
 
@@ -69,16 +76,19 @@ def test_an_unsupported_expect_type_is_refused_rather_than_guessed():
     raise AssertionError("an unknown predicate type was silently accepted")
 
 
-def test_every_case_is_a_real_bound_capability():
+def test_every_case_is_a_real_bound_capability_with_outcome_acceptance():
+    """The registry must ask the question the adapter already answered."""
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))["capabilities"]
     for capability_id in CASES:
         assert capability_id in registry, capability_id
-        assert registry[capability_id]["action_template"]["expect"]["field"] == "pass"
+        entry = registry[capability_id]
+        expect = entry["action_template"]["expect"]
+        assert expect == {"field": "pass", "type": "field_equals", "value": True}, capability_id
+        assert "pass" in entry["result_fields"], capability_id
 
 
 def test_every_adapter_ran():
-    report = _report()
-    skipped = [r for r in report["records"] if not r["ran"]]
+    skipped = [r for r in _report()["records"] if not r["ran"]]
     assert not skipped, skipped
 
 
@@ -93,21 +103,45 @@ def test_the_honest_answer_is_no_repair_everywhere():
 
 def test_the_legacy_predicate_still_would_have_accepted_every_one_of_them():
     """This is the defect as it stood. It is kept as the reason for the repoint, not as policy."""
-    records = _report()["records"]
-    rejected = [r["capability_id"] for r in records if not r["legacy_accepts"]]
+    rejected = [r["capability_id"] for r in _report()["records"] if not r["legacy_accepts"]]
     assert not rejected, rejected
 
 
-def test_the_live_registry_rejects_every_one_of_them():
+def test_the_registry_predicate_rejects_every_executed_failed_repair():
     """This is the fix. If it ever stops being true the gate has regressed to reading transport."""
-    records = _report()["records"]
-    accepted = [r["capability_id"] for r in records if r["registry_accepts"]]
+    accepted = [r["capability_id"] for r in _report()["records"] if r["registry_accepts"]]
     assert not accepted, accepted
 
 
-def test_the_two_predicates_disagree_on_every_executed_case():
+def test_the_registered_predicate_matches_the_corrected_predicate():
+    disagreements = [
+        r["capability_id"] for r in _report()["records"]
+        if r["registry_accepts"] != r["corrected_accepts"]
+    ]
+    assert not disagreements, disagreements
+
+
+def test_the_production_expect_checker_rejects_failure_and_accepts_success():
+    """The runtime calls `_check_expect`. This is the code that actually decides, not a restatement."""
+    from canonical.runtime.grounded_action_v1 import _check_expect
+
+    registry = json.loads(REGISTRY.read_text(encoding="utf-8"))["capabilities"]
+    for capability_id in CASES:
+        expect = registry[capability_id]["action_template"]["expect"]
+        ok, _ = _check_expect(expect, {
+            "pass": False,
+            "output_verified": True,
+            "status": "OPEN__NO_VERIFIED_REPAIR",
+        })
+        assert not ok, capability_id
+        ok, _ = _check_expect(expect, {"pass": True, "status": "PASS"})
+        assert ok, capability_id
+
+
+def test_the_registered_gate_rejects_all_eight_known_failure_paths():
     summary = _report()["summary"]
-    assert summary["ran"] > 0
+    assert summary["ran"] == 8
+    assert summary["honest_answer_no_repair"] == summary["ran"]
     assert summary["legacy_accepts_the_failure"] == summary["ran"]
     assert summary["registry_rejects_the_failure"] == summary["ran"]
     assert summary["registry_reads_the_outcome"] == summary["ran"]
