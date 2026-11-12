@@ -1,0 +1,45 @@
+{
+  "schema": "BRAIN_EXPERIENTIAL_STRATEGY_EXTRACTOR_V1",
+  "strategies": [
+    {
+      "type": "success_heuristic",
+      "task_type": "information_retrieval",
+      "trigger_conditions": [
+        "task_type:information_retrieval",
+        "patterns:file_read"
+      ],
+      "recommended_actions": [
+        "Step 1: read canonical/runtime/solve_v1.py",
+        "Step 2: parse file with ast.parse()",
+        "Step 3: traverse all FunctionDef nodes",
+        "Step 4: return count"
+      ],
+      "rationale": "Successfully applied to Read canonical/runtime/solve_v1.py and count functions",
+      "confidence": 0.8,
+      "outcome": "success",
+      "id": "strategy_1bb5528d2967ee9d",
+      "extracted_at": "2026-11-12T22:01:44.914147+00:00"
+    },
+    {
+      "type": "failure_heuristic",
+      "task_type": "creation",
+      "trigger_conditions": [
+        "task_type:creation",
+        "patterns:file_write"
+      ],
+      "avoid_patterns": [
+        "Missing admitted_confinement parameter"
+      ],
+      "rationale": "Failed on Create Python function that adds two numbers: Missing admitted_confinement parameter",
+      "confidence": 0.9,
+      "outcome": "failure",
+      "id": "strategy_def42ca82834ac38",
+      "extracted_at": "2026-11-12T22:01:44.914386+00:00"
+    }
+  ],
+  "metadata": {
+    "created_at": "2026-11-12T22:01:44.913992+00:00",
+    "version": "1.0",
+    "description": "Generalizable strategies extracted from task trajectories"
+  }
+}
