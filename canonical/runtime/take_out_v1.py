@@ -178,10 +178,14 @@ def _changes(tree: ast.AST) -> Iterator[tuple[str, Callable[[list], None]]]:
                     yield NO_BOUND, lambda copied, number=number, bound=bound: setattr(copied[number][0], bound, None)
 
 
-def candidates(source: str) -> list[tuple[str, int, str]]:
+def candidates(source: str, *, checked: bool = True) -> list[tuple[str, int, str]]:
     """Every program that is `source` with one piece taken out: (text, how many nodes fewer, what
     kind of piece), the smallest piece first and otherwise in the order of the program. Only
-    programs that compile, each once, and never the program itself. Nothing when the program cannot be read."""
+    programs that compile, each once, and never the program itself. Nothing when the program cannot be read.
+
+    With `checked` off the ones that do not compile are listed too. That is for asking whether a
+    given program is among the candidates when only the part that differs is looked at, a part
+    that need not stand alone (a `return` outside its function): canonical/runtime/fix_shape_v1.py."""
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
@@ -199,10 +203,14 @@ def candidates(source: str) -> list[tuple[str, int, str]]:
             text = ast.unparse(ast.fix_missing_locations(copied))
         except Exception:                                           # a tree that cannot be written out is no candidate
             continue
-        if text in seen or not kinds.is_a_program(text):
+        if text in seen or (checked and not kinds.is_a_program(text)):
+            continue
+        try:
+            fewer = whole - size(ast.parse(text))
+        except (SyntaxError, ValueError, RecursionError):           # only when not checked: a text that cannot even be read
             continue
         seen.add(text)
-        out.append((text, whole - size(ast.parse(text)), kind))
+        out.append((text, fewer, kind))
     out.sort(key=lambda item: item[1])                              # stable: equal pieces stay in the order of the program
     return out
 
