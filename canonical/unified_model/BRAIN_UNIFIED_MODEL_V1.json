@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 346,
+  "knowledge_documents": 347,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6751,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "df67cf3159afe0ed2e579e5bc589d1861227b65b79475f5c2e6a73b015a5a621"
+  "value": "55a29b0a97b7c557c49579b3df1a8ea8f4ad734056b9eac2b3b5dfccd4f4e31b"
  },
  "engines": [
   {
@@ -71624,6 +71624,88 @@
     "astra-verify-file-question-taught-words-001",
     "mission"
    ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7567,
+   "headings": [
+    "What actually blocks the front door, and the work item three of my rounds got wrong",
+    "1. The census",
+    "2. The counterfactual that decides it",
+    "3. Why I got it wrong three times",
+    "4. What this says about the owner's plan",
+    "5. What 2026 says",
+    "6. Answering the owner",
+    "7. Receipts and non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "what_actually_blocks_the_front_door.md",
+   "sha256": "1492c6a49f3c7c95ba70586324d8b93a5a96da98a1304057d03e81405be2e406",
+   "summary": "**2026-11-12.** Base `05c9d45f`. Branch `arena/7aa9a777-brain`. Round 8 of the owner's question.",
+   "terms": {
+    "155": 3,
+    "61": 5,
+    "about": 8,
+    "actions": 3,
+    "actually": 3,
+    "all": 4,
+    "already": 4,
+    "answer": 4,
+    "any": 4,
+    "anything": 3,
+    "argument": 4,
+    "arguments": 3,
+    "arxiv": 4,
+    "because": 4,
+    "become": 3,
+    "binding": 5,
+    "blind": 3,
+    "bucket": 4,
+    "cannot": 4,
+    "capabilities": 4,
+    "census": 7,
+    "counterfactual": 5,
+    "door": 6,
+    "front": 5,
+    "item": 4,
+    "measured": 7,
+    "no": 6,
+    "not": 16,
+    "one": 8,
+    "only": 4,
+    "other": 4,
+    "own": 6,
+    "owner": 5,
+    "premise": 4,
+    "question": 5,
+    "real": 4,
+    "round": 11,
+    "rounds": 4,
+    "rows": 7,
+    "run": 5,
+    "same": 4,
+    "says": 4,
+    "selected": 4,
+    "sensor": 4,
+    "sentence": 4,
+    "three": 7,
+    "work": 6,
+    "wrong": 8
+   },
+   "title": "What actually blocks the front door, and the work item three of my rounds got wrong",
+   "title_terms": [
+    "actually",
+    "blocks",
+    "door",
+    "front",
+    "got",
+    "item",
+    "my",
+    "rounds",
+    "three",
+    "work",
+    "wrong"
+   ]
   }
  ],
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
@@ -71652,10 +71734,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1148,
+  "included_source_count": 1149,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "12afac88b7ac7a7ae1b61029481d422e2b3359a7a22b1f53a5ec65377c1073c0"
+  "source_tree_digest": "9ed21d9b69c564813b784f82591c929a9291a97539ceccf57f89ae63790d0798"
  },
  "research_index": [
   {
