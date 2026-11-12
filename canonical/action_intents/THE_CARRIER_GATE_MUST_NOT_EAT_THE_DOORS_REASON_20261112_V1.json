@@ -1,0 +1,248 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "THE_CARRIER_GATE_MUST_NOT_EAT_THE_DOORS_REASON_20261112_V1",
+  "action_intent_id": "THE_CARRIER_GATE_MUST_NOT_EAT_THE_DOORS_REASON_20261112_V1",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "THE_CARRIER_GATE_MUST_NOT_EAT_THE_DOORS_REASON_20261112_V1",
+  "date": "2026-11-12",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "c9958189899c6cee53eb07513c24036ef6730c62",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Stop _serve_by_acting from replacing the door's already-computed refusal reason with the generic carrier status. Measured: on the 39 realistic advanced-coding sentences, 21 carried the carrier label and 18 of those had already been refused for a different, specific reason. Nine are recovered (real reason kept, carrier status preserved under carrier_gate); the other nine must keep the carrier answer because the earlier attempt reports executed/side_effects_may_exist, and three never reached a decision at all.",
+  "selected_route": "KEEP_THE_DOORS_OWN_RESULT_WHEN_IT_IS_INFORMATIVE_AND_NOTHING_EXECUTED_AND_RECORD_THE_CARRIER_DECISION_BESIDE_IT",
+  "causal_blocker": "The door computed a precise reason and then a carrier fallback returned a new result carrying FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT, demoting the real reason to served_after. Two documents merged the same day then diagnosed the same wall in opposite directions (binding vs no-binding-at-the-door) because both read the caller-visible label, so engineering was aimed at the wrong seam.",
+  "expected_parent_change": "A refused request reports the reason the door actually found whenever that reason is informative and no work may have happened; the carrier status is recorded under carrier_gate rather than deleted. No refusal is lifted: pass is unchanged at 3/39 and the pass set is identical.",
+  "expected_parent_frontier_change": "Bounded evidence-base repair for the front door's refusal accounting; no new capability, no benchmark movement, no learning performance change claimed.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The door computed a precise reason and then a carrier fallback returned a new result carrying FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT, demoting the real reason to served_after. Two documents merged the same day then diagnosed the same wall in opposite directions (binding vs no-binding-at-the-door) because both read the caller-visible label, so engineering was aimed at the wrong seam.",
+  "falsification_condition": "A row whose earlier attempt reports executed: True or side_effects_may_exist: True loses the carrier answer, or any row's pass changes, or the recovered rows turn out to be capability gaps rather than request-shaped gaps, or the carrier status is deleted instead of recorded.",
+  "stop_condition": "carrier-labelled rows drop from 21 to 9 on the 39-sentence realistic corpus, recovered_by_rule equals 9, must_keep_the_carrier_answer equals 9, the six gate test modules show the same five pre-existing failures as the clean base, and the new six-case regression file passes.",
+  "explicit_user_authorization": "Owner directive 2026-11-12: give the model the most advanced coding actions and let it experience them once; think from first principles and kill bad ideas before implementing them. This round kills nothing the owner wants and claims no capability.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/tools/which_refusal_is_actually_firing_v1.py",
+      "canonical/tests/test_the_carrier_gate_does_not_eat_the_reason_v1.py",
+      "THE_WALL_WAS_READING_ITS_OWN_LABEL_20261112_V1.md"
+    ],
+    "route_class": "ADAPT",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THE_CARRIER_STATUS_NAMES_WHY_THESE_SENTENCES_WERE_REFUSED__MEASURED_18_OF_21_CARRIER_LABELS_SAT_ON_TOP_OF_A_DIFFERENT_ALREADY_COMPUTED_REFUSAL",
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "causal_evidence": "Reproduced the published 21/39 carrier count, then read served_after (which the realistic probe discards): 18 of the 21 had already been refused for a different reason, 3 never reached a decision. Recovered 9 by keeping the door's own result; the other 9 keep the carrier answer because the earlier attempt reports executed/side_effects_may_exist. Pass unchanged at 3 with an identical set; no refusal lifted."
+  },
+  "measured_effect": "Disposable-clone re-measurement on the 39 realistic sentences: caller-visible carrier status 21/39 -> 9/39; rows whose real reason is hidden 18 -> 9; recovered_by_rule 9; must_keep_the_carrier_answer 9 (unchanged); pass 3 -> 3 with an identical pass set. Gate modules: 51 tests, 5 failures before, the same 5 after (all pre-existing on the clean base). New regression file 6/6. repo_integrity_guard violations=0.",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__CLOSES_DOCUMENTED_COUNTEREXAMPLES_ACROSS_SYNTHESIS_VERIFICATION_GLOBAL_EXTRAPOLATION_AND_AUTONOMOUS_CREATURE_CONTINUITY",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ]
+  },
+  "prior_work_reused": [
+    "canonical/runtime/swe_observational_program_synthesizer_v1.py",
+    "canonical/runtime/g0_finite_typed_rule_synthesis.py",
+    "canonical/runtime/incumbent_dominance_search_v1.py",
+    "canonical/runtime/computer_env_v1.py",
+    "canonical/runtime/curriculum_v1.py",
+    "canonical/runtime/ignorance_ledger_v1.py",
+    "canonical/swe_kernel/concept_library_v1.py",
+    "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+    "execution_guard/goal_target_binding_v1.py"
+  ],
+  "recursive_obs": {
+    "canonical_base_commit": "c9958189899c6cee53eb07513c24036ef6730c62",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "A refused request reports the reason the door actually found whenever that reason is informative and no work may have happened; the carrier status is recorded under carrier_gate rather than deleted. No refusal is lifted: pass is unchanged at 3/39 and the pass set is identical.",
+    "selected_route": "COMPOSE_SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_WITH_EVOI_GLOBAL_AND_INSTRUMENTAL_POLICY",
+    "selected_surviving_route": "KEEP_THE_DOORS_OWN_RESULT_WHEN_IT_IS_INFORMATIVE_AND_NOTHING_EXECUTED_AND_RECORD_THE_CARRIER_DECISION_BESIDE_IT",
+    "deleted_or_bypassed_paths": [
+      "FIVE_FROZEN_PERCEPTOR_CODEC_STRINGS",
+      "THIRTY_FIVE_HARDCODED_EXPRESSION_TEMPLATES",
+      "THREE_LAW_SUM_PROD_CONSTANTS_INSPECTOR_CHECKLIST",
+      "NINETEEN_INT_META_SYNTHESIZER_LATTICE",
+      "ENGLISH_KEYWORD_GLOBAL_QUANTIFIER_REGEX"
+    ],
+    "stop_condition": "carrier-labelled rows drop from 21 to 9 on the 39-sentence realistic corpus, recovered_by_rule equals 9, must_keep_the_carrier_answer equals 9, the six gate test modules show the same five pre-existing failures as the clean base, and the new six-case regression file passes.",
+    "expected_parent_level_state_change": "Bounded evidence-base repair for the front door's refusal accounting; no new capability, no benchmark movement, no learning performance change claimed.",
+    "why_selected_route_is_fastest_sufficient": "TWO_SENSITIVE_PATHS_COMPOSE_IN_TREE_SYNTHESIS_AND_EXTRAPOLATION_ENGINES_INTO_A_LIVE_ORGAN_ALGEBRA_WITHOUT_TOUCHING_PROTECTED_OR_SHA_PINNED_GATES",
+    "iteration_limit": 4,
+    "routes_considered": [
+      "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY",
+      "KEEP_FIVE_CODEC_MENU_AND_KEYWORD_REGEX__REJECTED_STILL_STATIC_CODE",
+      "REBUILD_SYNTHESIS_FROM_SCRATCH_IGNORING_IN_TREE_ENGINES__REJECTED_DUPLICATES_HIDDEN_SOLUTIONS"
+    ],
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "GOVERNANCE_GUARD_FALSIFICATION_AND_INTERNAL_META_CIRCULAR_COMPOSITION_OVER_IN_TREE_ORGANS_WITH_ZERO_EXTERNAL_CAPABILITY_CLAIM",
+      "challenger_routes": []
+    },
+    "obs_goal": {
+      "real_outcome": "NON_STATIC_COMPOSITIONAL_ORGAN_ALGEBRA_AND_DECISION_THEORETIC_OPEN_WORLD_POLICY",
+      "proxy_goals_deleted": [
+        "SELECTING_FROM_A_FROZEN_CODEC_OR_EXPRESSION_MENU",
+        "DETECTING_GLOBAL_OPTIMALITY_VIA_ENGLISH_KEYWORDS",
+        "STARVING_ZERO_IMMEDIATE_REWARD_INSTRUMENTAL_TOOLS"
+      ],
+      "surviving_necessity": "INDUCE_PARSE_SERIALIZE_ASTs_SOLVE_ALGEBRAIC_AND_PIECEWISE_PROGRAMS_COMPOSE_ADMITTED_ORGANS_AND_BACKUP_INSTRUMENTAL_Q"
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__FIXED_LEVEL_1_CODE_AND_ZERO_UNSEEN_MASS_ASSUMPTION_BOUND_ALL_DOWNSTREAM_LEARNING",
+      "surviving_causal_blocker": "FROZEN_MENUS_AND_KEYWORD_GATES_PREVENTED_P_t_FROM_COMPOUNDING_AND_STARVED_UNLOCKING_ACTIONS",
+      "delete_bypass_substitute_options": [
+        "DELETE_FIXED_MENU_ASSUMPTION_BY_STORING_META_SYNTHESIZERS_AND_PERCEPTORS_AS_ORGANS",
+        "BYPASS_LOCAL_TUNNEL_VISION_VIA_PITMAN_YOR_UNSEEN_TAIL_GATE",
+        "SUBSTITUTE_TASK_FEATURE_HAZARD_AND_BELLMAN_HORIZON_FOR_COUNTER_THERMOSTATS"
+      ]
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "REBUILDING_IGNORANCE_LEDGER_OR_CURRICULUM_OR_GOAL_TARGET_BINDING",
+        "HAND_WRITING_FORMAT_SPECIFIC_READERS_PER_REPOSITORY"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/curriculum_v1.py",
+        "canonical/runtime/ignorance_ledger_v1.py",
+        "canonical/runtime/computer_env_v1.py",
+        "execution_guard/goal_target_binding_v1.py",
+        "canonical/swe_kernel/sentient_cognitive_core_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "NONE_NEEDED__PURE_STDLIB_FIRST_PRINCIPLES_CLOSURE_OVER_COMMITTED_REPOSITORY_ORGANS"
+      ],
+      "surviving_gap": "INDEPENDENT_PERSONNEL_TWO_SPRITE_CERTIFICATION_FOR_BOUND_REPAIR_REMAINS_OUTSIDE_SANDBOX_PRODUCER_AUTHORITY"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "curriculum_v1_ignorance_ledger_v1_AND_goal_target_binding_v1_UNIFIED_IN_GLOBAL_EXTRAPOLATOR",
+        "MetaCircularOrganGraph_SHARED_ACROSS_SentientCognitiveCore_Creature_AND_SovereignZeroLLMPlanner"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "STATIC_CODEC_AND_EXPRESSION_MENUS_SUPERSEDED_BY_INDUCTION_AND_OBSERVATIONAL_SYNTHESIS"
+      ],
+      "fresh_reuse_plan": "REUSE_META_CIRCULAR_ORGAN_GRAPH_AND_GLOBAL_EXTRAPOLATOR_ACROSS_ALL_FUTURE_COMPUTER_AND_SWE_EPISODES"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "COMPILED_ORGAN_BYTECODE_CACHED_IN_RAM_AT_SUB_0_05_MS"
+      ],
+      "search_stop_decision": "STOP_WHEN_VERSION_SPACE_COLLAPSES_TO_ONE_OR_MEASURED_TARGET_IS_MET"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Editing computer_execution_boundary_v1 or lifting refusals buys nothing here: #6763 measured S1=21/21 still refusing. Deleting served_after or the carrier status would hide the boundary decision instead of recording it. Keeping the earlier reason unconditionally recovers 18 of 21 but discards effect uncertainty and fails test_computer_unconfined_route_guard_v1, so it is rejected as unsafe.",
+      "routes_ranked": [
+        "SEVEN_STRATUM_ZERO_TEMPLATE_ORGAN_ALGEBRA_PLUS_EVOI_AND_INSTRUMENTAL_POLICY__SELECTED",
+        "KEEP_FIVE_CODEC_MENU__REJECTED",
+        "REBUILD_FROM_SCRATCH__REJECTED"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "TWENTY_PAIRED_POSITIVE_AND_NEGATIVE_CONTROL_TESTS_UNDER_TRUE_CAPABILITY_TEST_LAW_V1__ZERO_CAPABILITY_OR_TERMINAL_CREDIT_CLAIMED"
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-11-04T00:00:00Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_DISGUISED_STATIC_MENUS_AND_KEYWORD_GATES",
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "tournament": {
+      "proposal_id": "ZERO_TEMPLATE_SEVEN_STRATUM_ORGAN_ALGEBRA",
+      "decisive_question": "Does the door report the reason it actually computed, whenever that reason is informative and no work may have happened, without lifting a single refusal and without discarding effect uncertainty?",
+      "falsifier_id": "UNSEEN_FORMAT_FAIL_OR_COPY_42_LOCK_IN_OR_KEYWORD_GATE_OR_MYOPIC_STARVATION_SUCCEEDS",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CONTROLS_IN_test_meta_circular_global_sentient_creature_v1_COVER_THE_DELETED_MENUS_AND_THE_NEW_ALGEBRA"
+    }
+  },
+  "next_step": "UNIFY_THE_REMAINING_DISCONNECTED_LEARNING_STORES_ONTO_ONE_LIVE_COGNITIVE_BUS_UNDER_RING0_SELF_ARCHITECT"
+}
