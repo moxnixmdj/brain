@@ -900,6 +900,76 @@ def without_imports(tree, shapes):
     return [shape(statement) for statement in tree.body if not (is_import(statement) and shape(statement) in shapes)]
 
 
+def rename_undone(before_text, after_text):
+    """The example's second file with an incidental local rename undone, or the second file as it came.
+
+    A person sometimes renames a local variable in the same commit as the edit worth teaching; the rename is
+    identity-specific and poisons the lesson.  When the second file binds exactly one plainly assigned name the
+    first does not, and the first binds exactly one such name the second dropped, and neither name is ever an
+    import, a def, a class, a parameter, or a global/nonlocal in its file, the new name is put back to the old
+    one everywhere it stands as a bare name.  The result is the same program; only the lesson becomes visible.
+    """
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return after_text
+
+    def all_names(tree):
+        found = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Name):
+                found.add(node.id)
+            elif isinstance(node, ast.arg):
+                found.add(node.arg)
+            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                found.add(node.name)
+            elif isinstance(node, ast.alias):
+                found.add((node.asname or node.name).split(".")[0])
+            elif isinstance(node, (ast.Global, ast.Nonlocal)):
+                found.update(node.names)
+        return found
+
+    olds = {name for name in all_names(before_tree) - all_names(after_tree) if not hasattr(builtins, name)}
+    news = {name for name in all_names(after_tree) - all_names(before_tree) if not hasattr(builtins, name)}
+    if len(olds) != 1 or len(news) != 1:
+        return after_text
+    old, new = olds.pop(), news.pop()
+
+    def plainly_assigned(tree, name):
+        stored = False
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Global, ast.Nonlocal)) and name in node.names:
+                return False
+            if isinstance(node, ast.alias) and (node.asname or node.name).split(".")[0] == name:
+                return False
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and node.name == name:
+                return False
+            if isinstance(node, ast.arg) and node.arg == name:
+                return False
+            if isinstance(node, ast.Name) and node.id == name and isinstance(node.ctx, ast.Store):
+                stored = True
+        return stored
+
+    if not plainly_assigned(before_tree, old) or not plainly_assigned(after_tree, new):
+        return after_text
+    lines = after_text.splitlines(keepends=True)
+    starts, total = [], 0
+    for line in lines:
+        starts.append(total)
+        total += len(line)
+    spans = sorted(((starts[node.lineno - 1] + node.col_offset, starts[node.end_lineno - 1] + node.end_col_offset)
+                    for node in ast.walk(after_tree) if isinstance(node, ast.Name) and node.id == new), reverse=True)
+    came_as = after_text
+    for head, tail in spans:
+        after_text = after_text[:head] + old + after_text[tail:]
+    try:
+        if ast.dump(ast.parse(after_text)) == ast.dump(before_tree):
+            return came_as        # the whole example was the rename; it teaches nothing repeatable
+    except SyntaxError:
+        return came_as
+    return after_text
+
+
 def learn_all(examples, wide=False):
     """The rules that turn every example's first file into its second.  `examples` is a list of (before, after) texts.
 
@@ -911,7 +981,8 @@ def learn_all(examples, wide=False):
     With `wide`, returns (the rules, their wider readings); see `wider`.
     """
     several = len(examples) > 1
-    shown = [Shown(example[0], example[1], "example %d" % number if several else "the example", example[2:] and example[2])
+    shown = [Shown(example[0], rename_undone(example[0], example[1]),
+                   "example %d" % number if several else "the example", example[2:] and example[2])
              for number, example in enumerate(examples, 1)]
     changed = Changed(shown)
     groups = []
@@ -1181,7 +1252,72 @@ def import_insert_at(text):
     return text.starts[last.end_lineno] if last.end_lineno < len(text.starts) else len(text.raw)
 
 
+class Renamed:
+    """A leftover read of a name whose import the examples renamed: the read follows its definition."""
+
+    kind = "expression"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+def renames_to_add(text, places, fail_at):
+    """Places that rename a read left pointing at nothing, after the examples renamed its import.
+
+    The examples rename an imported name where the import line itself is rewritten in place -- same module,
+    same number of names, a bound name changed.  A read of the old name that no rule reaches would be a
+    certain NameError once that import is gone; it follows the renamed definition.  Nothing follows where
+    the map is unsure: two places that rename the name differently, a new name the file already binds, a
+    read a function rebinds locally, or a read inside code a rule already rewrites.
+    """
+    maps = {}
+    for (_, node, rule, bound) in places:
+        if isinstance(rule, Renamed) or not isinstance(node, ast.ImportFrom) or node.level:
+            continue
+        if fail_at is not None and node is fail_at[1]:
+            continue
+        try:
+            _, parsed = written_for(rule, node, bound, text)
+        except Refused:
+            continue
+        if (not isinstance(parsed, ast.ImportFrom) or (node.module, node.level) != (parsed.module, parsed.level)
+                or len(node.names) != len(parsed.names)):
+            continue
+        for a, b in zip(node.names, parsed.names):
+            was, now = (a.asname or a.name), (b.asname or b.name)
+            if was != now:
+                maps.setdefault(was, set()).add(now)
+    maps = {was: min(nows) for was, nows in maps.items() if len(nows) == 1 and min(nows) not in text.defined}
+    if maps:
+        renamed = {node for _, node, rule, _ in places if isinstance(node, ast.ImportFrom)}
+        others = ast.Module(body=[one for one in text.tree.body if one not in renamed], type_ignores=[])
+        elsewhere, anything = module_names(others)
+        maps = {} if anything else {was: now for was, now in maps.items() if was not in elsewhere}
+    found = []
+    for part in ast.walk(text.tree):
+        if not (isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in maps):
+            continue
+        at = text.span(part)
+        if any(not (at[1] <= start or end <= at[0]) for (start, end), _, _, _ in places):
+            continue
+        if text.local_at(part, part.id):
+            continue
+        found.append((at, part, Renamed(maps[part.id]), {}))
+    return found
+
+
 def written(text, places, what="the file", check_names=True, fail_at=None):
+    """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
+    return written_once(text, places + renames_to_add(text, places, fail_at), what, check_names, fail_at)
+
+
+def written_once(text, places, what="the file", check_names=True, fail_at=None):
     """The file's text with every place rewritten by its rule; the place `fail_at` is made to fail instead.
 
     An import line the examples added is inserted when the new code needs its name and the file does not
@@ -1215,6 +1351,8 @@ def written(text, places, what="the file", check_names=True, fail_at=None):
                 parsed = None if new_text is None else parse_like(node, rule.kind, new_text)
                 if parsed is None:
                     raise Refused("the code at line %d of %s cannot be made to fail by itself" % (node.lineno, what))
+            elif isinstance(rule, Renamed):
+                new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
             else:
                 new_text, parsed = written_for(rule, node, bound, text)
                 looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
