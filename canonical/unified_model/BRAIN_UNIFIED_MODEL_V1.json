@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "638f22272c0b0c197ccac7672a90a33817f4d48dce1dbc8f8f0426d99d202ac8"
+  "value": "877689a418252f9407f1c9dfd0ce6169bd2bde0b68c73f479c807f6568706683"
  },
  "engines": [
   {
@@ -232053,7 +232053,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8f0acc01d3ec26d33b1f3ae7216fa954202e94adf264213fb508401ede96923f",
+   "sha256": "3f286f5f881a91f4252c516818e38335c77437b2a6a65520bdd2dd71b787e345",
    "status": "",
    "terms": {
     "20261112": 1,
