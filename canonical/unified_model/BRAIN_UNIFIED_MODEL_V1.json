@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 344,
+  "knowledge_documents": 345,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6749,
+  "research_index_records": 6750,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4c3cfebfe6685edae42e354ea8c2dab705666eb734bdf4b51832084fd67b7006"
+  "value": "aa231a58d6b7fe165526481dfe9fc16721963b8a9a77ecc95d4a41100db8f7e9"
  },
  "engines": [
   {
@@ -44894,6 +44894,81 @@
     "finds",
     "instance",
     "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4747,
+   "headings": [
+    "A dead import the example also removed is taken away",
+    "1. What was built",
+    "2. The measurement, same tracked sets",
+    "3. Receipts",
+    "4. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_DEAD_IMPORT_THE_EXAMPLE_ALSO_REMOVED_IS_TAKEN_AWAY_20261112_V1.md",
+   "sha256": "64437462fdac94eb41607fbe6a5cc0ee8b059e81596e11183207a962ae08e4a1",
+   "summary": "**2026-11-12.** Base `65578066`. Branch `arena/235fa916-brain`. Follows #6709.",
+   "terms": {
+    "122": 2,
+    "14": 2,
+    "147": 2,
+    "6709": 4,
+    "added": 3,
+    "after": 2,
+    "allura": 2,
+    "away": 5,
+    "canonical": 3,
+    "cgi": 5,
+    "changed": 5,
+    "check": 4,
+    "edit": 3,
+    "engine": 7,
+    "every": 4,
+    "exactly": 7,
+    "example": 5,
+    "examples": 3,
+    "extra": 4,
+    "file": 5,
+    "files": 5,
+    "four": 3,
+    "html": 3,
+    "import": 17,
+    "imports": 3,
+    "keeps": 3,
+    "kept": 3,
+    "left": 3,
+    "line": 7,
+    "lines": 3,
+    "name": 6,
+    "never": 6,
+    "no": 4,
+    "now": 4,
+    "one": 6,
+    "only": 8,
+    "passed": 3,
+    "person": 10,
+    "removed": 14,
+    "rule": 3,
+    "same": 6,
+    "set": 3,
+    "statement": 6,
+    "statements": 3,
+    "takes": 4,
+    "tools": 3,
+    "under": 4,
+    "would": 3
+   },
+   "title": "A dead import the example also removed is taken away",
+   "title_terms": [
+    "also",
+    "away",
+    "dead",
+    "example",
+    "import",
+    "removed",
+    "taken"
    ]
   },
   {
@@ -71504,10 +71579,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1146,
+  "included_source_count": 1147,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5b632b83c48d9a00e740cb1c7142cc20a328b33d7176fa1b604931ff28fd8c51"
+  "source_tree_digest": "0d2893206e9c39da1a7e5e47105e8c5a61f8c4def861d90ec062c836fccf071b"
  },
  "research_index": [
   {
@@ -216597,6 +216672,33 @@
     "the_front_door_refuses_every_request_that_would_run_code_because_no_confinement_is_admitted__and_the_only_carrier_in_the_tree_lets_a_worker_call_any_kernel_entry_point__the_review_names_that_as_one_of_two_objections_still_standing": 1,
     "v1": 1,
     "worker": 1
+   }
+  },
+  {
+   "action_id": "A_DEAD_IMPORT_THE_EXAMPLE_ALSO_REMOVED_IS_TAKEN_AWAY_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_DEAD_IMPORT_THE_EXAMPLE_ALSO_REMOVED_IS_TAKEN_AWAY_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_DEAD_IMPORT_THE_EXAMPLE_ALSO_REMOVED_IS_TAKEN_AWAY_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "87895ac836da23a061ddc2ad10deade04a015e8ddabc36e8e65fdeca20a1f835",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_dead_import_the_example_also_removed_is_taken_away_20261112_v1": 1,
+    "adapt_the_taught_program_so_an_import_line_every_example_removed_is_taken_away_with_the_edit__only_where_the_file_holds_exactly_that_statement_alone_without_a_comment_and_the_finished_file_reads_or_writes_the_name_nowhere__anything_less_keeps_the_line": 1,
+    "also": 1,
+    "away": 1,
+    "dead": 1,
+    "example": 1,
+    "four_held_out_files_carry_a_dead_import_the_person_removed_and_the_example_also_removed__the_program_read_a_removed_import_line_as_nothing_at_all": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "import": 1,
+    "on_the_held_out_commits_the_four_extra_statements_of_6709_fall_to_zero_and_no_other_number_moves__the_seen_set_shows_the_engine_never_removes_an_import_a_person_kept": 1,
+    "removed": 1,
+    "taken": 1,
+    "v1": 1
    }
   },
   {
