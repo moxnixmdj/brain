@@ -108,6 +108,26 @@ sys.exit(r.returncode if r.returncode is not None else 91)
 '''
 
 
+def _python_in_chroot() -> str:
+    """The interpreter path that still exists after the helper chroots.
+
+    The helper chroots into a tmpfs root that bind-mounts only ``_MOUNTS``
+    (/usr, /bin, /lib, /lib64) plus the project.  Launching the helper with
+    ``sys.executable`` is correct on a system interpreter and wrong in a venv:
+    ``/tmp/venv/bin/python3`` is not among the mounts, so the helper's own
+    post-chroot spawn of the program dies with FileNotFoundError at
+    helper.py -- a harness fault that surfaces as the taught program
+    failing (measured 2026-11-12 under a venv: every confined run exited 1
+    before any program line ran).  Same rule the broker already follows in
+    ``brokered_workspace_execution_v1._python_in_chroot``.
+    """
+    for cand in ("/usr/bin/python3", "/bin/python3", sys.executable):
+        if cand and any(cand == root or cand.startswith(root + os.sep)
+                        for root in _MOUNTS) and os.path.isfile(cand):
+            return cand
+    return "/usr/bin/python3"
+
+
 def available() -> bool:
     """Probe user-namespace chroot availability, not carrier qualification."""
     if shutil.which("unshare") is None:
@@ -170,7 +190,7 @@ def run(program: str, root: str, timeout: int = 300,
         try:
             r = subprocess.run(
                 ["unshare", "-r", "-m"] + ([] if network else ["-n"]) + \
-                [sys.executable, helper_path, base,
+                [_python_in_chroot(), helper_path, base,
                  os.path.realpath(root), script, "1" if network else "0"],
                 timeout=timeout, capture_output=True, text=True)
             return {"schema": SCHEMA,

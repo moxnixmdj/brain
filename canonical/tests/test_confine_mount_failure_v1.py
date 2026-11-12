@@ -94,3 +94,32 @@ class RequiredMountFailureTests(TestCase):
                 result = confine.run('print(1)', root, timeout=1)
             self.assertEqual(result['verdict'], 'INDETERMINATE')
             self.assertIsNot(result.get('confined'), True)
+
+
+class ChrootInterpreterTests(TestCase):
+    """The helper must be launched with an interpreter the chroot will contain."""
+
+    def test_a_venv_interpreter_is_not_the_one_spawned_into_the_chroot(self):
+        # sys.executable outside _MOUNTS (a venv) cannot exist inside the
+        # helper's chroot; the launch must fall back to a mounted system
+        # python, or every confined run dies before the program starts.
+        with tempfile.TemporaryDirectory() as root, \
+                mock.patch.object(confine, 'available', return_value=True):
+            captured = {}
+
+            def launch(argv, **kwargs):
+                captured['argv'] = list(argv)
+                return SimpleNamespace(returncode=0, stdout='ok', stderr='')
+
+            with mock.patch.object(sys, 'executable', '/tmp/elsewhere/venv/bin/python3'), \
+                    mock.patch.object(subprocess, 'run', side_effect=launch):
+                result = confine.run('print(1)', root)
+            self.assertEqual(result['verdict'], 'OK')
+            spawned = [tok for tok in captured['argv']
+                       if tok.endswith('python') or tok.endswith('python3')]
+            self.assertEqual(len(spawned), 1, captured['argv'])
+            self.assertNotIn('/tmp/elsewhere/venv/bin/python3', spawned)
+            self.assertTrue(
+                spawned[0].startswith('/usr/') or spawned[0].startswith('/bin/'),
+                spawned,
+            )
