@@ -141,6 +141,18 @@ def precondition_context(clauses, root, goal, extra_capability_ids=()):
         return None
 
 
+def _next_contrast(clauses, preconditions, memory):
+    """Advisory: the state to try next so the next run teaches something. Never executes anything."""
+    if not memory or not clauses or len(clauses) < 2:
+        return None
+    try:
+        from canonical.runtime import macro_v1 as MC
+        pool = () if preconditions is None else (preconditions,)
+        return MC.next_contrast(MC.signature(clauses), pool).as_row()
+    except Exception:
+        return None
+
+
 def run(goal, root=None, memory=True, max_steps=8):
     """Plan a chain from one sentence, bind it fully, then execute it."""
     root = Path(root) if root is not None else ROOT
@@ -244,6 +256,7 @@ def run(goal, root=None, memory=True, max_steps=8):
         "ok": failed_at is None and bool(steps),
         "used_macro": bool(used_macro),
         "macro_withheld_out_of_scope": bool(macro_out_of_scope),
+        "next_contrast": _next_contrast(clauses, preconditions, memory),
         "preconditions_observed": (
             None if preconditions is None else sorted(preconditions)
         ),
