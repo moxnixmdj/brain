@@ -31238,7 +31238,11 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
+<<<<<<< HEAD
   "value": "fa3618ec1ee7f95389436e5d1d1390ab18da896e77f1fffd067638bd5b0be832"
+=======
+  "value": "a64f21062019c9ab06282d87c52eff9fb22fa0b93a3a08eea823119a0aaa9da8"
+>>>>>>> origin/main
  },
  "engines": [
   {
@@ -55907,6 +55911,78 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5286,
+   "headings": [
+    "The intent is derived from the diff",
+    "What this round adds",
+    "What it does not do",
+    "Why this is the right thing to have built",
+    "Receipts",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_INTENT_IS_DERIVED_FROM_THE_DIFF_20261112_V1.md",
+   "sha256": "dba4fa65f7bcdf11f95550f0c7cf84f7d7345a6c8af359662d3f7eb15617ae0d",
+   "summary": "**2026-11-12.** Base `808e72ac`. Branch `arena/de5cf49c-brain`. Round 12.",
+   "terms": {
+    "808e72ac": 2,
+    "adds": 2,
+    "against": 4,
+    "already": 2,
+    "base": 7,
+    "branch": 2,
+    "canonical": 3,
+    "canonical_base_commit": 2,
+    "capability": 3,
+    "causal_blocker": 2,
+    "change": 4,
+    "check": 6,
+    "ci": 2,
+    "command": 2,
+    "costs": 2,
+    "derive_action_intent_20261112.py": 3,
+    "derived": 2,
+    "diff": 2,
+    "enforce_goal_hierarchy.py": 2,
+    "equal": 2,
+    "equality": 2,
+    "every": 2,
+    "expected_parent_frontier_change": 2,
+    "fail": 3,
+    "failure": 3,
+    "field": 3,
+    "fields": 7,
+    "files": 3,
+    "git": 7,
+    "guard": 6,
+    "head": 3,
+    "hour": 3,
+    "main": 3,
+    "merge": 3,
+    "next": 3,
+    "no": 5,
+    "not": 10,
+    "one": 5,
+    "python3": 4,
+    "record": 3,
+    "rev-parse": 5,
+    "round": 5,
+    "same": 7,
+    "sha": 3,
+    "than": 3,
+    "thing": 3,
+    "tool": 3,
+    "two": 4
+   },
+   "title": "The intent is derived from the diff",
+   "title_terms": [
+    "derived",
+    "diff",
+    "intent"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7057,
    "headings": [
     "Evidence of history is not evidence of ability",
@@ -70128,7 +70204,11 @@
   "included_source_count": 1128,
   "incremental_spend_usd": 0,
   "network_calls": 0,
+<<<<<<< HEAD
   "source_tree_digest": "9ec7737e654c8e9ebe6491077f1e96e06e1f38091d3c57a48e1b7e91f7c2baeb"
+=======
+  "source_tree_digest": "5871d376505611e29d20c9ecb973b088e5aae89d0b0c3ded4dec2da32ae20e6a"
+>>>>>>> origin/main
  },
  "research_index": [
   {
