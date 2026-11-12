@@ -1,0 +1,228 @@
+{
+ "action_id": "THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1",
+ "action_intent_id": "THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "A guard that claimed to keep forged capabilities from being proposed was appending them at score 0.0, where they survived into the ambiguity gate and vetoed decisive matches. Six lines stop a zero-score row from gating a matched one.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "causal_evidence": "MEASURED_ON_0bd7cf0f__30_ORDINARY_COMPUTER_TASKS_GAVE_11_EXPRESSIBLE_AND_19_AMBIGUOUS__TWO_FORGED_ROWS_AT_SCORE_0_0_BLOCKED_git_history_bisect_regression_v1_AT_SCORE_26_3__AFTER_THE_FIX_15_EXPRESSIBLE_14_AMBIGUOUS__AUDIT_OF_THE_FIVE_VERIFIED_TASKS_BY_READING_THEIR_RECEIPTS_FOUND_ONE_THAT_ANSWERED_ITS_QUESTION",
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_FORGED_CAPABILITY_APPENDED_AT_SCORE_ZERO_IS_REGISTERED_BUT_NEVER_PROPOSED___AND_THAT_VERIFIED_ACTION_MEANS_THE_QUESTION_WAS_ANSWERED",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/runtime/grounded_action_v1.py",
+   "canonical/tests/test_expressibility_of_ordinary_computer_tasks_v1.py",
+   "expressibility_of_ordinary_computer_tasks_v1.py",
+   "THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1.md"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
+ "canonical_base_commit": "200dcb36721fbeee9db5cf454d6bc8567f89f348",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
+ "date": "2026-11-12",
+ "expected_parent_change": "Ordinary computer tasks that route: 11/30 -> 15/30. AMBIGUOUS 19 -> 15.",
+ "expected_parent_frontier_change": "Routing coverage of ordinary tasks, in the front door. No capability registered, no family rank, no benchmark authority.",
+ "explicit_user_authorization": false,
+ "falsification_condition": "If a zero-scored row is shown to be the correct answer where a positive-scored row was also a survivor, the fix suppresses a right answer and must be reverted.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__THE_ROUTING_GAP_IT_CLOSES_IS_A_PRECONDITION_FOR_EVERY_CODING_AND_COMPUTER_USE_OBLIGATION_RATHER_THAN_EVIDENCE_AGAINST_ANY_ONE_OF_THEM__A_SYSTEM_THAT_VERIFIES_A_DIFFERENT_QUESTION_THAN_THE_ONE_ASKED_CANNOT_CREDIT_ITSELF_WITH_ANSWERING_ANY_OF_THEM",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "expressible 11 -> 15 of 30; VERIFIED 2 -> 5 of which 1 of 5 answered its question by inspection; 155-row keyword census 64 -> 62 selected, A/B owed and named.",
+ "next_step": "Make VERIFIED_ACTION unavailable unless the returned object is about the object the sentence named. UNJUDGED already exists in the code and is unused.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "recursive_obs": {
+  "canonical_base_commit": "200dcb36721fbeee9db5cf454d6bc8567f89f348",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
+   "LEAVE_UNDECIDABLE -- it was being read as false"
+  ],
+  "expected_parent_level_state_change": "Routing coverage of ordinary tasks, in the front door. No capability registered, no family rank, no benchmark authority.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE the forged append entirely -- rejected: a forged capability must be proposable when nothing else fits, which is the reason the append exists.",
+    "BYPASS by lowering DECISIVE_MARGIN_RATIO -- rejected: that would make every near-miss decisive and turn ambiguity into wrong answers.",
+    "SUBSTITUTE a tie-break on score -- rejected: a zero-score row has no score to break a tie with.",
+    "ADOPT the narrow rule: a zero-score survivor may not gate a positive-scored one."
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC -- it is in grounded_action_v1.act(), the front door this repository actually uses, and it is triggered by any sentence whose best keyword match is accompanied by an appended forged row.",
+   "surviving_causal_blocker": "A row that was never a candidate decided the election, because selection refuses when the margin is undecidable and a 0.0 row makes every margin undecidable."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "no new learner invented -- settlement_v1.VersionSpace is reused unchanged",
+    "no benchmark chased -- the registry and its own sensor are the domain",
+    "no capability registered, no family flipped, no receipt minted"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/settlement_v1.py (VersionSpace, settle, expected information gain)",
+    "canonical/runtime/environment_learning_v1.py (state-action transition model)",
+    "canonical/runtime/macro_v1.py (learned plan reuse keyed by goal shape)",
+    "canonical/runtime/world_probe_v1.py (premise perception)",
+    "canonical/runtime/finite_capability_diagnosis.py (select_probe version-space narrowing)"
+   ],
+   "external_existing_routes_checked": [
+    "Action Model Learning with Guarantees (KR 2024): a positive demonstration entails (s,1), only a negative entails (s,0)",
+    "Evolving Agent Interfaces / Agent S4 (arXiv 2610.28601): interfaces plus the knowledge of when to use each",
+    "Adapting the Interface, Not the Model (arXiv 2605.22166): harness-level interventions transfer across 17 backbones"
+   ],
+   "surviving_gap": "No record binds (capability, observed state, outcome). macro_v1 stores only plans whose every step verified, so the system retains successes and discards exactly the negative examples that could narrow applicability."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "counting stored skills as learned capability",
+    "reporting a demonstration count as a measure of learning",
+    "treating a verified success as evidence of the condition that made it possible"
+   ],
+   "real_outcome": "Owner asks whether experiencing each action once yields permanent, reusable capability.",
+   "surviving_necessity": "Applicability must be identified before an action can be reused safely; the measurement shows one success identifies 0 of 200 conjunctive requirements."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "settlement_v1 version-space narrowing",
+    "world_probe_v1 premise perception",
+    "finite_capability_diagnosis.select_probe"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "the assumption that macro_v1's success-only store is a sufficient learning substrate",
+    "the assumption that a declared requires list is always checkable"
+   ],
+   "fresh_reuse_plan": "Any future claim that experience teaches applicability must exhibit at least one negative demonstration and show the surviving space shrinks to one hypothesis."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "the registry premise census is computed once per run from the live file",
+    "the sensor decision per premise is memoised by the module"
+   ],
+   "search_stop_decision": "Stopped at three candidate mechanisms because the remaining ones were measured already: breadth of environments (0/10), exposure per lesson (6/7 flat), and model-in-producer-path (forbidden)."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Deleting the append removes the ability to propose a forged capability at all; lowering the margin gate converts ambiguity into confident wrong answers; a score tie-break has nothing to compare.",
+   "routes_ranked": [
+    "DELETE_FORGED_APPEND",
+    "BYPASS_MARGIN_GATE",
+    "SUBSTITUTE_SCORE_TIEBREAK",
+    "ADOPT_ZERO_SCORE_CANNOT_GATE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The effect is measured end to end on thirty ordinary computer tasks and the 155-row keyword census, both run against the real registry on this commit. The seven tests re-run the front door rather than mocking it."
+  },
+  "real_outcome": "A_FORGED_ZERO_SCORE_ROW_NO_LONGER_VETOES_A_DECISIVE_MATCH__AND_VERIFIED_ACTION_IS_NAMED_AS_A_POSTCONDITION_NOT_AN_ANSWER__1_OF_5_AUDITED_VERIFIED_TASKS_ANSWERED_ITS_QUESTION",
+  "required_capability": "A sensor that answers UNKNOWN as its own value, so that a premise nobody can see is not silently counted as false, and a binder that either binds a stated value or reports that it cannot, never neither.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  },
+  "routes_considered": [
+   "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
+   "ADD_A_NETWORK_PERMISSION",
+   "LEAVE_UNDECIDABLE_AND_DOCUMENT_IT"
+  ],
+  "selected_surviving_route": "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
+  "stop_condition": "SEVEN_NEW_TESTS_PASS__THE_30_TASK_COVERAGE_AND_155_ROW_CENSUS_BOTH_RUN_WITH_AND_WITHOUT_THE_CHANGE__EVERY_MOVED_ROW_EXPLAINED__DRIFT_GUARD_PASS__ZERO_CAPABILITIES_REGISTERED",
+  "why_selected_route_is_fastest_sufficient": "Both are one function each, both are measured at the front door before and after, and both replace silence with an answer. Neither adds a capability, a permission, or a model."
+ },
+ "route_id": "THE_WRONG_QUESTION_WAS_BEING_MEASURED_20261112_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "MEASURE_APPLICABILITY_IDENTIFIABILITY_AND_PRICE_THE_REGISTRY_PREMISES",
+ "stop_condition": "SEVEN_NEW_TESTS_PASS__THE_30_TASK_COVERAGE_AND_155_ROW_CENSUS_BOTH_RUN_WITH_AND_WITHOUT_THE_CHANGE__EVERY_MOVED_ROW_EXPLAINED__DRIFT_GUARD_PASS__ZERO_CAPABILITIES_REGISTERED",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "minimum_prerequisite_for": [
+   "EXTERNAL_RESULT_OR_ACCESS",
+   "UNIVERSAL_SCOPE_AND_COMPOSITION",
+   "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+  ],
+  "mode": "CONTROL_PLANE_PREREQUISITE",
+  "proof_state_reachability": "PREVENTS_AN_UNKNOWN_PREMISE_FROM_BEING_TREATED_AS_A_REFUTED_ONE__AND_PREVENTS_A_STATED_VALUE_FROM_BEING_DROPPED_WITHOUT_A_REPORT",
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "867c3a4501b113531fc09c6de3fcf5175d15132c",
+     "path": "canonical/runtime/grounded_action_v1.py"
+    }
+   ],
+   "decisive_question": "Does dropping zero-score survivors change which tasks route, and does any newly routed task actually answer its question?",
+   "falsifier_id": "F_REMOVE_THE_ZERO_SCORE_ROWS_AND_SEE_WHETHER_ANY_OUTCOME_BECOMES_CORRECT",
+   "known_counterexamples_checked": true,
+   "proposal_id": "P_A_FORGED_ROW_SCORED_ZERO_DECIDES_AND_VERIFIED_IS_NOT_ANSWERED"
+  }
+ },
+ "weakens_existing_guard": false
+}
