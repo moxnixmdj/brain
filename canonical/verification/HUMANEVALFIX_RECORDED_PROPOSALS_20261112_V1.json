@@ -1,0 +1,438 @@
+{
+ "schema": "BRAIN_HUMANEVALFIX_RECORDED_PROPOSALS_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T12:41:18Z",
+ "read_this_first": [
+  "The question: what would this tree's checking and fix-shape memory add if a language model stood in it as the proposer? Measured without putting one there: the programs are files other people published; no model was called.",
+  "The same 100 HumanEvalFix bugs that were scored for the edit-kind learner. Its search alone repaired 62 of them (53 right as far as checked).",
+  "Qwen/Qwen2.5-Coder-7B-Instruct: the model and the tests 62 of 100 (61 right as far as checked); with the search and the repair of its attempts 84 (81 right).",
+  "01-ai/Yi-Coder-9B: the model and the tests 40 of 100 (39 right as far as checked); with the search and the repair of its attempts 76 (69 right).",
+  "m-a-p/OpenCodeInterpreter-DS-6.7B: the model and the tests 41 of 100 (40 right as far as checked); with the search and the repair of its attempts 77 (71 right).",
+  "Qwen/Qwen2.5-Coder-0.5B: the model and the tests 8 of 100 (8 right as far as checked); with the search and the repair of its attempts 63 (56 right).",
+  "Bug by bug for the strongest of them: the model and the search both 45, the model only 17, the search only 17, neither 21. They fail on different bugs.",
+  "'The repair of its attempts': where none of the model's programs passed, the operators kept from the fixes of OTHER bugs were applied to the model's failed programs, the tests choosing.",
+  "These bugs come with tests that can be run, and they are single small changes. That is where the search is strong. On tasks whose tests are hidden and whose fix has to be read out of an issue (SWE-bench Verified) the same memory could propose the expert's fix for 11 of 500.",
+  "The models here are small open ones (0.5 to 9 billion parameters, 2024). A stronger model leaves less for the search to add; how much less was not measured.",
+  "One run, one machine, by the producer. Nobody else has re-run it."
+ ],
+ "what_was_checked": {
+  "the_harness_against_the_publishers_own_numbers": "For the three models published with ten programs per bug, the share of programs that pass and the share of bugs with a passing program computed here equal the publisher's pass@1 and pass@10 to four places (see judged_here_on_all_164 beside as_published). For the greedy 7B model 99 of 164 pass here against 101 published.",
+  "right_as_far_as_checked": "the published fix, or the same answers as the published fix on the HumanEval+ Mini inputs for that function",
+  "the_bugs_own_fix": "never among the lessons used on a bug, neither in the search nor in the repair of the model's attempts",
+  "tests": "20 in canonical/tests/test_humanevalfix_recorded_proposals_v1.py; no seeded faults were tried on them"
+ },
+ "for_scale_published_elsewhere": {
+  "the_same_idea": "GiantRepair (ACM TOSEM 2025, doi 10.1145/3715004): a language model's patches used as skeletons and filled in by program analysis repair on average 27.78% more Defects4J v1.2 bugs than the model's patches used directly.",
+  "pooling": "Pooling several models adds uniquely fixed bugs (arXiv 2506.03283, February 2026).",
+  "not_reproduced_here": true
+ },
+ "limits": [
+  "Recorded outputs: the models could not be asked again, given the failing test, or given another try.",
+  "HumanEvalFix has been public since 2023; these models may have seen it.",
+  "The search's results are taken from its record (frozen at cba32385); it was not run again.",
+  "Each of the model's failed programs was given 300 candidates, the first 3 different ones only.",
+  "The order in which the three are asked decides which program comes out when several pass: the model first, then the search, then the repaired attempt."
+ ],
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "per_bug_key": "[programs, programs that pass, first that passes, the passing program right as far as checked, repair of its attempts: [attempt, rank, right, lines]]",
+ "models": [
+ {
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct, greedy, one program per bug",
+  "published_at": "github.com/Q9Kawaii/bugfix-llm@7dd025add327 results/base-7b/samples.jsonl",
+  "proposals_sha256": "24b283b322e9e118709fc6881c490b62d2d63fe8f061bd1d3923e0c267278497",
+  "as_published": {
+   "published_passes": "101 of 164 (61.59%), greedy",
+   "note": "Two bugs (Python/38, Python/50) pass in the publisher's harness and not here: their tests call a helper from the declaration that the model's program left out."
+  },
+  "judged_here_on_all_164": {
+   "bugs": 164,
+   "first_program_passes": 99,
+   "some_program_passes": 99,
+   "share_of_programs_that_pass": 0.6037,
+   "share_of_bugs_with_a_passing_program": 0.6037
+  },
+  "on_the_100_scored_bugs": {
+   "bugs": 100,
+   "the_model_alone_first_program": 62,
+   "the_model_and_the_tests": {
+    "passes": 62,
+    "right_as_far_as_checked": 61,
+    "passes_and_is_wrong_on_an_extra_input": 1
+   },
+   "the_search_alone": {
+    "passes": 62,
+    "right_as_far_as_checked": 53
+   },
+   "either": {
+    "passes": 79,
+    "right_as_far_as_checked": 76
+   },
+   "bug_by_bug": {
+    "both": 45,
+    "the_model_only": 17,
+    "the_search_only": 17,
+    "neither": 21
+   },
+   "the_models_attempt_repaired": {
+    "asked_where_no_program_of_the_model_passed": 38,
+    "passes": 17,
+    "right_as_far_as_checked": 15,
+    "of_those_where_the_search_had_also_failed": 5
+   },
+   "all_three": {
+    "passes": 84,
+    "right_as_far_as_checked": 81
+   },
+   "by_bug_type": {
+    "excess logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 11,
+     "the_search_alone": 11,
+     "either": 13,
+     "all_three": 16
+    },
+    "function misuse": {
+     "bugs": 6,
+     "the_model_and_the_tests": 5,
+     "the_search_alone": 4,
+     "either": 6,
+     "all_three": 6
+    },
+    "missing logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 7,
+     "the_search_alone": 4,
+     "either": 10,
+     "all_three": 10
+    },
+    "operator misuse": {
+     "bugs": 14,
+     "the_model_and_the_tests": 9,
+     "the_search_alone": 9,
+     "either": 11,
+     "all_three": 12
+    },
+    "value misuse": {
+     "bugs": 30,
+     "the_model_and_the_tests": 23,
+     "the_search_alone": 26,
+     "either": 28,
+     "all_three": 29
+    },
+    "variable misuse": {
+     "bugs": 12,
+     "the_model_and_the_tests": 7,
+     "the_search_alone": 8,
+     "either": 11,
+     "all_three": 11
+    }
+   }
+  },
+  "code_sha256": {
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_recorded_proposals_measure_v1.py": "d5aaf854414f1b7e2217714654e15cf8917139f25dce14c832832c72071adf35"
+  },
+  "seconds": 167.7
+ },
+ {
+  "model": "01-ai/Yi-Coder-9B, temperature 0.2, ten programs per bug",
+  "published_at": "github.com/GPT-Laboratory/Assessing-Small-Language-Models-SLMs-for-Code-Generation@570df6797723 results/generations/Yi-Coder-9B_humanevalfixtests-python.json",
+  "proposals_sha256": "563942c4674934074f240c0076d3a8f3c957423523d024613da41d4a13852017",
+  "as_published": {
+   "published_pass_at_1": 0.3341,
+   "published_pass_at_10": 0.4451
+  },
+  "judged_here_on_all_164": {
+   "bugs": 164,
+   "first_program_passes": 55,
+   "some_program_passes": 73,
+   "share_of_programs_that_pass": 0.3341,
+   "share_of_bugs_with_a_passing_program": 0.4451
+  },
+  "on_the_100_scored_bugs": {
+   "bugs": 100,
+   "the_model_alone_first_program": 28,
+   "the_model_and_the_tests": {
+    "passes": 40,
+    "right_as_far_as_checked": 39,
+    "passes_and_is_wrong_on_an_extra_input": 1
+   },
+   "the_search_alone": {
+    "passes": 62,
+    "right_as_far_as_checked": 53
+   },
+   "either": {
+    "passes": 76,
+    "right_as_far_as_checked": 69
+   },
+   "bug_by_bug": {
+    "both": 26,
+    "the_model_only": 14,
+    "the_search_only": 36,
+    "neither": 24
+   },
+   "the_models_attempt_repaired": {
+    "asked_where_no_program_of_the_model_passed": 60,
+    "passes": 29,
+    "right_as_far_as_checked": 23,
+    "of_those_where_the_search_had_also_failed": 0
+   },
+   "all_three": {
+    "passes": 76,
+    "right_as_far_as_checked": 69
+   },
+   "by_bug_type": {
+    "excess logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 8,
+     "the_search_alone": 11,
+     "either": 14,
+     "all_three": 14
+    },
+    "function misuse": {
+     "bugs": 6,
+     "the_model_and_the_tests": 3,
+     "the_search_alone": 4,
+     "either": 6,
+     "all_three": 6
+    },
+    "missing logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 7,
+     "the_search_alone": 4,
+     "either": 9,
+     "all_three": 9
+    },
+    "operator misuse": {
+     "bugs": 14,
+     "the_model_and_the_tests": 7,
+     "the_search_alone": 9,
+     "either": 11,
+     "all_three": 11
+    },
+    "value misuse": {
+     "bugs": 30,
+     "the_model_and_the_tests": 12,
+     "the_search_alone": 26,
+     "either": 26,
+     "all_three": 26
+    },
+    "variable misuse": {
+     "bugs": 12,
+     "the_model_and_the_tests": 3,
+     "the_search_alone": 8,
+     "either": 10,
+     "all_three": 10
+    }
+   }
+  },
+  "code_sha256": {
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_recorded_proposals_measure_v1.py": "d5aaf854414f1b7e2217714654e15cf8917139f25dce14c832832c72071adf35"
+  },
+  "seconds": 313.1
+ },
+ {
+  "model": "m-a-p/OpenCodeInterpreter-DS-6.7B, temperature 0.2, ten programs per bug",
+  "published_at": "github.com/GPT-Laboratory/Assessing-Small-Language-Models-SLMs-for-Code-Generation@570df6797723 results/generations/OpenCodeInterpreter-DS-6.7B_humanevalfixtests-python.json",
+  "proposals_sha256": "fd93cf890a0b0fed19ef98b75a2a24887406023808b58e91d19a1b76c26383ea",
+  "as_published": {
+   "published_pass_at_1": 0.3116,
+   "published_pass_at_10": 0.4207
+  },
+  "judged_here_on_all_164": {
+   "bugs": 164,
+   "first_program_passes": 50,
+   "some_program_passes": 69,
+   "share_of_programs_that_pass": 0.3116,
+   "share_of_bugs_with_a_passing_program": 0.4207
+  },
+  "on_the_100_scored_bugs": {
+   "bugs": 100,
+   "the_model_alone_first_program": 31,
+   "the_model_and_the_tests": {
+    "passes": 41,
+    "right_as_far_as_checked": 40,
+    "passes_and_is_wrong_on_an_extra_input": 1
+   },
+   "the_search_alone": {
+    "passes": 62,
+    "right_as_far_as_checked": 53
+   },
+   "either": {
+    "passes": 76,
+    "right_as_far_as_checked": 70
+   },
+   "bug_by_bug": {
+    "both": 27,
+    "the_model_only": 14,
+    "the_search_only": 35,
+    "neither": 24
+   },
+   "the_models_attempt_repaired": {
+    "asked_where_no_program_of_the_model_passed": 59,
+    "passes": 32,
+    "right_as_far_as_checked": 27,
+    "of_those_where_the_search_had_also_failed": 1
+   },
+   "all_three": {
+    "passes": 77,
+    "right_as_far_as_checked": 71
+   },
+   "by_bug_type": {
+    "excess logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 8,
+     "the_search_alone": 11,
+     "either": 12,
+     "all_three": 13
+    },
+    "function misuse": {
+     "bugs": 6,
+     "the_model_and_the_tests": 2,
+     "the_search_alone": 4,
+     "either": 6,
+     "all_three": 6
+    },
+    "missing logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 5,
+     "the_search_alone": 4,
+     "either": 9,
+     "all_three": 9
+    },
+    "operator misuse": {
+     "bugs": 14,
+     "the_model_and_the_tests": 7,
+     "the_search_alone": 9,
+     "either": 10,
+     "all_three": 10
+    },
+    "value misuse": {
+     "bugs": 30,
+     "the_model_and_the_tests": 15,
+     "the_search_alone": 26,
+     "either": 28,
+     "all_three": 28
+    },
+    "variable misuse": {
+     "bugs": 12,
+     "the_model_and_the_tests": 4,
+     "the_search_alone": 8,
+     "either": 11,
+     "all_three": 11
+    }
+   }
+  },
+  "code_sha256": {
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_recorded_proposals_measure_v1.py": "d5aaf854414f1b7e2217714654e15cf8917139f25dce14c832832c72071adf35"
+  },
+  "seconds": 326.8
+ },
+ {
+  "model": "Qwen/Qwen2.5-Coder-0.5B, temperature 0.2, ten programs per bug",
+  "published_at": "github.com/GPT-Laboratory/Assessing-Small-Language-Models-SLMs-for-Code-Generation@570df6797723 results/generations/Qwen2.5-Coder-0.5B_humanevalfixtests-python.json",
+  "proposals_sha256": "debf433570c2b6a64a1fbf045d56750e80c9dbbe3e3dbbb60f51f85ede16438e",
+  "as_published": {
+   "published_pass_at_1": 0.0476,
+   "published_pass_at_10": 0.0793
+  },
+  "judged_here_on_all_164": {
+   "bugs": 164,
+   "first_program_passes": 8,
+   "some_program_passes": 13,
+   "share_of_programs_that_pass": 0.0476,
+   "share_of_bugs_with_a_passing_program": 0.0793
+  },
+  "on_the_100_scored_bugs": {
+   "bugs": 100,
+   "the_model_alone_first_program": 4,
+   "the_model_and_the_tests": {
+    "passes": 8,
+    "right_as_far_as_checked": 8,
+    "passes_and_is_wrong_on_an_extra_input": 0
+   },
+   "the_search_alone": {
+    "passes": 62,
+    "right_as_far_as_checked": 53
+   },
+   "either": {
+    "passes": 63,
+    "right_as_far_as_checked": 56
+   },
+   "bug_by_bug": {
+    "both": 7,
+    "the_model_only": 1,
+    "the_search_only": 55,
+    "neither": 37
+   },
+   "the_models_attempt_repaired": {
+    "asked_where_no_program_of_the_model_passed": 92,
+    "passes": 49,
+    "right_as_far_as_checked": 43,
+    "of_those_where_the_search_had_also_failed": 0
+   },
+   "all_three": {
+    "passes": 63,
+    "right_as_far_as_checked": 56
+   },
+   "by_bug_type": {
+    "excess logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 1,
+     "the_search_alone": 11,
+     "either": 11,
+     "all_three": 11
+    },
+    "function misuse": {
+     "bugs": 6,
+     "the_model_and_the_tests": 0,
+     "the_search_alone": 4,
+     "either": 4,
+     "all_three": 4
+    },
+    "missing logic": {
+     "bugs": 19,
+     "the_model_and_the_tests": 1,
+     "the_search_alone": 4,
+     "either": 5,
+     "all_three": 5
+    },
+    "operator misuse": {
+     "bugs": 14,
+     "the_model_and_the_tests": 3,
+     "the_search_alone": 9,
+     "either": 9,
+     "all_three": 9
+    },
+    "value misuse": {
+     "bugs": 30,
+     "the_model_and_the_tests": 3,
+     "the_search_alone": 26,
+     "either": 26,
+     "all_three": 26
+    },
+    "variable misuse": {
+     "bugs": 12,
+     "the_model_and_the_tests": 0,
+     "the_search_alone": 8,
+     "either": 8,
+     "all_three": 8
+    }
+   }
+  },
+  "code_sha256": {
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_recorded_proposals_measure_v1.py": "d5aaf854414f1b7e2217714654e15cf8917139f25dce14c832832c72071adf35"
+  },
+  "seconds": 423.6
+ }
+],
+ "per_bug": {"Qwen/Qwen2.5-Coder-7B-Instruct":{"Python/0":[1,1,1,true,null],"Python/1":[1,1,1,true,null],"Python/2":[1,1,1,true,null],"Python/3":[1,1,1,true,null],"Python/4":[1,1,1,true,null],"Python/5":[1,1,1,true,null],"Python/6":[1,1,1,true,null],"Python/7":[1,1,1,true,null],"Python/8":[1,1,1,true,null],"Python/9":[1,1,1,true,null],"Python/10":[1,1,1,true,null],"Python/11":[1,1,1,true,null],"Python/12":[1,1,1,true,null],"Python/13":[1,1,1,true,null],"Python/14":[1,1,1,true,null],"Python/15":[1,1,1,true,null],"Python/16":[1,1,1,true,null],"Python/17":[1,1,1,true,null],"Python/18":[1,1,1,true,null],"Python/19":[1,0,null,null,null],"Python/20":[1,1,1,true,null],"Python/21":[1,1,1,true,null],"Python/22":[1,1,1,true,null],"Python/23":[1,1,1,true,null],"Python/24":[1,0,null,null,[1,5,true,{"removed":["for i in reversed(range(2, n)):"],"put_in":["for i in reversed(range(1, n)):"]}]],"Python/25":[1,1,1,true,null],"Python/26":[1,1,1,true,null],"Python/27":[1,1,1,true,null],"Python/28":[1,1,1,true,null],"Python/29":[1,1,1,true,null],"Python/30":[1,1,1,true,null],"Python/31":[1,1,1,true,null],"Python/32":[1,0,null,null,[1,32,false,{"removed":["begin, end = (-1.0, 1.0)"],"put_in":["end, begin = (-1.0, 1.0)"]}]],"Python/33":[1,0,null,null,null],"Python/34":[1,1,1,true,null],"Python/35":[1,1,1,true,null],"Python/36":[1,0,null,null,null],"Python/37":[1,0,null,null,null],"Python/38":[1,0,null,null,null],"Python/39":[1,1,1,true,null],"Python/40":[1,1,1,true,null],"Python/41":[1,1,1,true,null],"Python/42":[1,0,null,null,null],"Python/43":[1,1,1,true,null],"Python/44":[1,1,1,true,null],"Python/45":[1,1,1,true,null],"Python/46":[1,1,1,true,null],"Python/47":[1,1,1,true,null],"Python/48":[1,1,1,true,null],"Python/49":[1,1,1,true,null],"Python/50":[1,0,null,null,null],"Python/51":[1,1,1,true,null],"Python/52":[1,0,null,null,null],"Python/53":[1,1,1,true,null],"Python/54":[1,0,null,null,null],"Python/55":[1,1,1,true,null],"Python/56":[1,1,1,true,null],"Python/57":[1,1,1,true,null],"Python/58":[1,1,1,true,null],"Python/59":[1,1,1,true,null],"Python/60":[1,1,1,true,null],"Python/61":[1,1,1,true,null],"Python/62":[1,0,null,null,[1,47,true,{"removed":["return [(i + 1) * x for i, x in enumerate(xs)]"],"put_in":["return [(i + 1) * x for i, x in enumerate(xs[1:])]"]}]],"Python/63":[1,0,null,null,[1,14,true,{"removed":["if n == 0:"],"put_in":["if n <= 1:"]}]],"Python/64":[1,0,null,null,null],"Python/65":[1,1,1,true,null],"Python/66":[1,0,null,null,null],"Python/67":[1,0,null,null,null],"Python/68":[1,0,null,null,null],"Python/69":[1,1,1,true,null],"Python/70":[1,0,null,null,[1,1,true,{"removed":["res, switch = ([], False)"],"put_in":["res, switch = ([], 1)"]}]],"Python/71":[1,1,1,true,null],"Python/72":[1,0,null,null,null],"Python/73":[1,1,1,true,null],"Python/74":[1,0,null,null,[1,8,true,{"removed":["else:","return lst1"],"put_in":["return lst1","else:"]}]],"Python/75":[1,1,1,true,null],"Python/76":[1,1,1,true,null],"Python/77":[1,1,1,true,null],"Python/78":[1,1,1,true,null],"Python/79":[1,0,null,null,null],"Python/80":[1,0,null,null,null],"Python/81":[1,0,null,null,null],"Python/82":[1,1,1,true,null],"Python/83":[1,0,null,null,null],"Python/84":[1,0,null,null,null],"Python/85":[1,0,null,null,null],"Python/86":[1,0,null,null,[1,66,true,{"removed":["return ''.join([''.join(sorted(list(i))) for i in s.split(' ')])"],"put_in":["return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])"]}]],"Python/87":[1,0,null,null,null],"Python/88":[1,0,null,null,null],"Python/89":[1,1,1,true,null],"Python/90":[1,1,1,true,null],"Python/91":[1,0,null,null,null],"Python/92":[1,1,1,true,null],"Python/93":[1,0,null,null,null],"Python/94":[1,1,1,true,null],"Python/95":[1,1,1,false,null],"Python/96":[1,1,1,true,null],"Python/97":[1,1,1,true,null],"Python/98":[1,0,null,null,null],"Python/99":[1,1,1,true,null],"Python/100":[1,1,1,true,null],"Python/101":[1,1,1,true,null],"Python/102":[1,0,null,null,null],"Python/103":[1,0,null,null,null],"Python/104":[1,0,null,null,null],"Python/105":[1,0,null,null,null],"Python/106":[1,1,1,true,null],"Python/107":[1,0,null,null,[1,2,true,{"removed":["for i in range(1, n):"],"put_in":["for i in range(1, n + 1):"]}]],"Python/108":[1,1,1,true,null],"Python/109":[1,1,1,true,null],"Python/110":[1,1,1,true,null],"Python/111":[1,0,null,null,null],"Python/112":[1,0,null,null,null],"Python/113":[1,0,null,null,null],"Python/114":[1,1,1,true,null],"Python/115":[1,0,null,null,null],"Python/116":[1,0,null,null,null],"Python/117":[1,1,1,true,null],"Python/118":[1,0,null,null,null],"Python/119":[1,1,1,true,null],"Python/120":[1,0,null,null,[1,4,true,{"removed":["return sorted(ans, reverse=True)"],"put_in":["return sorted(ans, reverse=0)"]}]],"Python/121":[1,0,null,null,[1,14,true,{"removed":["return sum([x for idx, x in enumerate(lst) if idx % 2 == 1 and x % 2 == 1])"],"put_in":["return sum([x for idx, x in enumerate(lst) if (idx - 1) % 2 == 1 and x % 2 == 1])"]}]],"Python/122":[1,0,null,null,null],"Python/123":[1,0,null,null,[1,136,true,{"removed":["n = n * 2 + 1"],"put_in":["n = n * (2 + 1) + 1"]}]],"Python/124":[1,0,null,null,null],"Python/125":[1,1,1,true,null],"Python/126":[1,0,null,null,null],"Python/127":[1,0,null,null,[1,9,false,{"removed":["l = max(interval1[0], interval2[0])"],"put_in":["l = max(interval1[0], interval2[0] + 1)"]}]],"Python/128":[1,1,1,true,null],"Python/129":[1,1,1,true,null],"Python/130":[1,0,null,null,[1,16,true,{"removed":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + i + (i + 3) / 2)"],"put_in":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + (i + 3) / 2)"]}]],"Python/131":[1,1,1,true,null],"Python/132":[1,0,null,null,null],"Python/133":[1,1,1,true,null],"Python/134":[1,1,1,true,null],"Python/135":[1,1,1,true,null],"Python/136":[1,1,1,true,null],"Python/137":[1,0,null,null,null],"Python/138":[1,1,1,true,null],"Python/139":[1,1,1,true,null],"Python/140":[1,0,null,null,null],"Python/141":[1,1,1,true,null],"Python/142":[1,0,null,null,null],"Python/143":[1,0,null,null,null],"Python/144":[1,0,null,null,[1,25,true,{"removed":["c, d = map(int, n.split('/'))"],"put_in":["d, c = map(int, n.split('/'))"]}]],"Python/145":[1,0,null,null,[1,2,true,{"removed":["n, neg = (-1 * n, -1 + n)"],"put_in":["n, neg = (-1 * n, -1)"]}]],"Python/146":[1,0,null,null,null],"Python/147":[1,0,null,null,[1,18,true,{"removed":["A = [i * i for i in range(1, n + 1)]"],"put_in":["A = [(i - 1) * i for i in range(1, n + 1)]"]}]],"Python/148":[1,1,1,true,null],"Python/149":[1,0,null,null,null],"Python/150":[1,1,1,true,null],"Python/151":[1,0,null,null,null],"Python/152":[1,0,null,null,null],"Python/153":[1,1,1,true,null],"Python/154":[1,1,1,false,null],"Python/155":[1,1,1,true,null],"Python/156":[1,1,1,true,null],"Python/157":[1,1,1,true,null],"Python/158":[1,0,null,null,null],"Python/159":[1,0,null,null,[1,8,true,{"removed":["return [number + need, number + remaining - need]"],"put_in":["return [number + need, remaining - need]"]}]],"Python/160":[1,1,1,true,null],"Python/161":[1,1,1,true,null],"Python/162":[1,1,1,true,null],"Python/163":[1,1,1,true,null]},"01-ai/Yi-Coder-9B":{"Python/0":[10,10,1,true,null],"Python/1":[10,0,null,null,[1,9,true,{"removed":["if current_depth < 0:"],"put_in":["if current_depth <= 0:"]}]],"Python/2":[10,10,1,true,null],"Python/3":[10,8,2,true,null],"Python/4":[10,10,1,true,null],"Python/5":[10,9,1,true,null],"Python/6":[10,0,null,null,null],"Python/7":[10,10,1,true,null],"Python/8":[10,10,1,true,null],"Python/9":[10,0,null,null,null],"Python/10":[10,0,null,null,null],"Python/11":[10,2,1,true,null],"Python/12":[10,10,1,true,null],"Python/13":[10,9,2,true,null],"Python/14":[10,10,1,true,null],"Python/15":[10,0,null,null,[1,3,true,{"removed":["return ' '.join([str(x) for x in range(n)])"],"put_in":["return ' '.join([str(x) for x in range(n + 1)])"]}]],"Python/16":[10,10,1,true,null],"Python/17":[10,0,null,null,[1,68,true,{"removed":["note_map = {'o': 3, 'o|': 2, '.|': 1}"],"put_in":["note_map = {'o': 3 + 1, 'o|': 2, '.|': 1}"]}]],"Python/18":[10,0,null,null,[1,12,true,{"removed":["for i in range(len(string) - len(substring)):"],"put_in":["for i in range(len(string) - len(substring) + 1):"]}]],"Python/19":[10,0,null,null,null],"Python/20":[10,10,1,true,null],"Python/21":[10,6,3,true,null],"Python/22":[10,10,1,true,null],"Python/23":[10,1,2,true,null],"Python/24":[10,0,null,null,null],"Python/25":[10,6,1,true,null],"Python/26":[10,0,null,null,[2,2,true,{"removed":["return [n for n in numbers if c[n] < 1]"],"put_in":["return [n for n in numbers if c[n] < 2]"]}]],"Python/27":[10,10,1,true,null],"Python/28":[10,3,4,true,null],"Python/29":[10,10,1,true,null],"Python/30":[10,10,1,true,null],"Python/31":[10,10,1,true,null],"Python/32":[10,0,null,null,[1,36,false,{"removed":["begin, end = (-1.0, 1.0)"],"put_in":["end, begin = (-1.0, 1.0)"]}]],"Python/33":[10,0,null,null,null],"Python/34":[10,10,1,true,null],"Python/35":[10,10,1,true,null],"Python/36":[10,0,null,null,null],"Python/37":[10,0,null,null,null],"Python/38":[10,7,1,true,null],"Python/39":[10,0,null,null,null],"Python/40":[10,0,null,null,[1,1,false,{"removed":["if l[i] + l[j] + l[k] == 0:"],"put_in":["if l[i] + l[j] + l[k] == 2:"]}]],"Python/41":[10,10,1,true,null],"Python/42":[10,7,1,true,null],"Python/43":[10,0,null,null,[1,5,true,{"removed":["for j in range(i, len(l)):"],"put_in":["for j in range(i + 1, len(l)):"]}]],"Python/44":[10,10,1,true,null],"Python/45":[10,8,1,true,null],"Python/46":[10,0,null,null,null],"Python/47":[10,0,null,null,null],"Python/48":[10,5,1,true,null],"Python/49":[10,10,1,true,null],"Python/50":[10,10,1,true,null],"Python/51":[10,0,null,null,[1,35,false,{"removed":["return ''.join([s for s in text if s.lower() not in ['a', 'e', 'i', 'o', 'u', 'w', 'y']])"],"put_in":["return ''.join([s for s in text if s.lower() not in ['a', 'e', 'i', 'o', 'u', 'w', 2]])"]}]],"Python/52":[10,10,1,true,null],"Python/53":[10,0,null,null,[1,60,true,{"removed":["return x + y + y + x"],"put_in":["return y + x"]}]],"Python/54":[10,6,1,true,null],"Python/55":[10,0,null,null,null],"Python/56":[10,8,1,true,null],"Python/57":[10,10,1,true,null],"Python/58":[10,2,7,true,null],"Python/59":[10,4,1,true,null],"Python/60":[10,2,1,true,null],"Python/61":[10,10,1,true,null],"Python/62":[10,2,2,true,null],"Python/63":[10,0,null,null,null],"Python/64":[10,0,null,null,null],"Python/65":[10,0,null,null,null],"Python/66":[10,0,null,null,null],"Python/67":[10,0,null,null,null],"Python/68":[10,0,null,null,null],"Python/69":[10,0,null,null,null],"Python/70":[10,0,null,null,[1,1,true,{"removed":["res, switch = ([], False)"],"put_in":["res, switch = ([], 1)"]}]],"Python/71":[10,10,1,true,null],"Python/72":[10,0,null,null,null],"Python/73":[10,0,null,null,null],"Python/74":[10,0,null,null,[1,10,true,{"removed":["else:","return lst1"],"put_in":["return lst1","else:"]}]],"Python/75":[10,10,1,true,null],"Python/76":[10,2,6,true,null],"Python/77":[10,10,1,true,null],"Python/78":[10,9,1,true,null],"Python/79":[10,0,null,null,null],"Python/80":[10,0,null,null,null],"Python/81":[10,1,5,true,null],"Python/82":[10,6,2,true,null],"Python/83":[10,9,1,true,null],"Python/84":[10,0,null,null,null],"Python/85":[10,1,6,true,null],"Python/86":[10,4,1,true,null],"Python/87":[10,0,null,null,null],"Python/88":[10,0,null,null,null],"Python/89":[10,0,null,null,null],"Python/90":[10,0,null,null,[1,6,true,{"removed":["return None if len(lst) < 3 else lst[1]"],"put_in":["return None if len(lst) < 2 else lst[1]"]}]],"Python/91":[10,0,null,null,null],"Python/92":[10,10,1,true,null],"Python/93":[10,0,null,null,null],"Python/94":[10,10,1,true,null],"Python/95":[10,0,null,null,null],"Python/96":[10,4,3,true,null],"Python/97":[10,0,null,null,null],"Python/98":[10,10,1,true,null],"Python/99":[10,10,1,true,null],"Python/100":[10,0,null,null,[1,2,true,{"removed":["return [n + 2 * i + i for i in range(n)]"],"put_in":["return [n + 1 * i + i for i in range(n)]"]}]],"Python/101":[10,0,null,null,[1,60,false,{"removed":["s_list.append(',')"],"put_in":["s_list.append('')"]}]],"Python/102":[10,0,null,null,[1,15,true,{"removed":["return x - 1"],"put_in":["return y - 1"]}]],"Python/103":[10,0,null,null,null],"Python/104":[10,0,null,null,null],"Python/105":[10,0,null,null,null],"Python/106":[10,10,1,true,null],"Python/107":[10,3,1,true,null],"Python/108":[10,0,null,null,[1,124,true,{"removed":["n[0] = n[0] * neg * -1"],"put_in":["n[0] = n[0] * neg * (-1) ** 2"]}]],"Python/109":[10,0,null,null,[1,140,true,{"removed":["min_index = sorted_array.index(min_value)"],"put_in":["min_index = arr.index(min_value)"]}]],"Python/110":[10,0,null,null,[1,164,true,{"removed":["odd += 1"],"put_in":["even += 1"]}]],"Python/111":[10,0,null,null,null],"Python/112":[10,3,5,true,null],"Python/113":[10,0,null,null,null],"Python/114":[10,0,null,null,null],"Python/115":[10,1,6,true,null],"Python/116":[10,0,null,null,null],"Python/117":[10,9,1,true,null],"Python/118":[10,1,2,true,null],"Python/119":[10,0,null,null,null],"Python/120":[10,0,null,null,null],"Python/121":[10,0,null,null,[1,14,true,{"removed":["return sum([x for idx, x in enumerate(lst) if idx % 2 == 1 and x % 2 == 1])"],"put_in":["return sum([x for idx, x in enumerate(lst) if (idx - 1) % 2 == 1 and x % 2 == 1])"]}]],"Python/122":[10,0,null,null,null],"Python/123":[10,0,null,null,[1,136,true,{"removed":["n = n * 2 + 1"],"put_in":["n = n * (2 + 1) + 1"]}]],"Python/124":[10,0,null,null,null],"Python/125":[10,0,null,null,[1,34,true,{"removed":["return txt.replace(' ', ',').split()"],"put_in":["return txt.replace(',', ' ').split()"]}]],"Python/126":[10,0,null,null,null],"Python/127":[10,0,null,null,[1,5,false,{"removed":["l = max(interval1[0], interval2[0])"],"put_in":["l = max(interval1[0], interval2[0] + 1)"]}]],"Python/128":[10,10,1,true,null],"Python/129":[10,0,null,null,null],"Python/130":[10,0,null,null,[1,16,true,{"removed":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + i + (i + 3) / 2)"],"put_in":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + (i + 3) / 2)"]}]],"Python/131":[10,0,null,null,null],"Python/132":[10,0,null,null,null],"Python/133":[10,0,null,null,null],"Python/134":[10,0,null,null,[1,136,true,{"removed":["return True if len(check) == 1 and 97 <= ord(check.upper()) <= 122 else False"],"put_in":["return True if len(check) == 1 and 97 <= ord(check.upper().lower()) <= 122 else False"]}]],"Python/135":[10,10,1,true,null],"Python/136":[10,0,null,null,null],"Python/137":[10,0,null,null,null],"Python/138":[10,3,1,false,null],"Python/139":[10,10,1,true,null],"Python/140":[10,0,null,null,null],"Python/141":[10,0,null,null,null],"Python/142":[10,0,null,null,null],"Python/143":[10,0,null,null,null],"Python/144":[10,0,null,null,null],"Python/145":[10,0,null,null,[1,2,true,{"removed":["n, neg = (-1 * n, -1 + n)"],"put_in":["n, neg = (-1 * n, -1)"]}]],"Python/146":[10,10,1,true,null],"Python/147":[10,0,null,null,[1,17,true,{"removed":["A = [i * i for i in range(1, n + 1)]"],"put_in":["A = [(i - 1) * i for i in range(1, n + 1)]"]}]],"Python/148":[10,2,3,true,null],"Python/149":[10,0,null,null,null],"Python/150":[10,10,1,true,null],"Python/151":[10,0,null,null,null],"Python/152":[10,0,null,null,null],"Python/153":[10,0,null,null,null],"Python/154":[10,0,null,null,[1,71,false,{"removed":["for j in range(len(b) - l + 1):"],"put_in":["for j in range(len(b) - l + 3):"]}]],"Python/155":[10,10,1,true,null],"Python/156":[10,9,2,true,null],"Python/157":[10,0,null,null,null],"Python/158":[10,0,null,null,null],"Python/159":[10,0,null,null,null],"Python/160":[10,10,1,true,null],"Python/161":[10,0,null,null,null],"Python/162":[10,6,2,true,null],"Python/163":[10,0,null,null,[1,14,true,{"removed":["return [i for i in range(lower, upper) if i % 2 == 0]"],"put_in":["return [i for i in range(lower, upper + 1) if i % 2 == 0]"]}]]},"m-a-p/OpenCodeInterpreter-DS-6.7B":{"Python/0":[10,10,1,true,null],"Python/1":[10,0,null,null,[1,9,true,{"removed":["if current_depth < 0:"],"put_in":["if current_depth <= 0:"]}]],"Python/2":[10,0,null,null,null],"Python/3":[10,7,2,true,null],"Python/4":[10,10,1,true,null],"Python/5":[10,10,1,true,null],"Python/6":[10,10,1,true,null],"Python/7":[10,10,1,true,null],"Python/8":[10,10,1,true,null],"Python/9":[10,10,1,true,null],"Python/10":[10,1,8,true,null],"Python/11":[10,0,null,null,[1,23,true,{"removed":["if i == j:"],"put_in":["if i != j:"]}]],"Python/12":[10,10,1,true,null],"Python/13":[10,10,1,true,null],"Python/14":[10,10,1,true,null],"Python/15":[10,10,1,true,null],"Python/16":[10,8,2,true,null],"Python/17":[10,0,null,null,[1,68,true,{"removed":["note_map = {'o': 3, 'o|': 2, '.|': 1}"],"put_in":["note_map = {'o': 3 + 1, 'o|': 2, '.|': 1}"]}]],"Python/18":[10,3,3,true,null],"Python/19":[10,7,1,true,null],"Python/20":[10,10,1,true,null],"Python/21":[10,10,1,true,null],"Python/22":[10,10,1,true,null],"Python/23":[10,10,1,true,null],"Python/24":[10,0,null,null,null],"Python/25":[10,10,1,true,null],"Python/26":[10,10,1,true,null],"Python/27":[10,10,1,true,null],"Python/28":[10,0,null,null,[1,87,true,{"removed":["return ' '.join(strings)"],"put_in":["return ' '[1:].join(strings)"]}]],"Python/29":[10,8,1,true,null],"Python/30":[10,10,1,true,null],"Python/31":[10,10,1,true,null],"Python/32":[10,0,null,null,[1,36,false,{"removed":["begin, end = (-1.0, 1.0)"],"put_in":["end, begin = (-1.0, 1.0)"]}]],"Python/33":[10,0,null,null,null],"Python/34":[10,0,null,null,null],"Python/35":[10,10,1,true,null],"Python/36":[10,0,null,null,null],"Python/37":[10,0,null,null,null],"Python/38":[10,10,1,true,null],"Python/39":[10,5,1,true,null],"Python/40":[10,5,1,true,null],"Python/41":[10,1,5,true,null],"Python/42":[10,0,null,null,null],"Python/43":[10,0,null,null,[1,5,true,{"removed":["for j in range(i, len(l)):"],"put_in":["for j in range(i + 1, len(l)):"]}]],"Python/44":[10,7,1,true,null],"Python/45":[10,10,1,true,null],"Python/46":[10,3,7,true,null],"Python/47":[10,10,1,true,null],"Python/48":[10,10,1,true,null],"Python/49":[10,0,null,null,[1,5,true,{"removed":["ret = 0"],"put_in":["ret = 1"]}]],"Python/50":[10,4,1,true,null],"Python/51":[10,2,5,true,null],"Python/52":[10,0,null,null,null],"Python/53":[10,10,1,true,null],"Python/54":[10,0,null,null,null],"Python/55":[10,0,null,null,null],"Python/56":[10,9,1,true,null],"Python/57":[10,0,null,null,null],"Python/58":[10,10,1,true,null],"Python/59":[10,0,null,null,null],"Python/60":[10,10,1,true,null],"Python/61":[10,10,1,true,null],"Python/62":[10,0,null,null,[1,281,true,{"removed":["return [i * x for i, x in enumerate(xs)]"],"put_in":["return [i * x for i, x in enumerate(xs)][1:]"]}]],"Python/63":[10,0,null,null,null],"Python/64":[10,0,null,null,null],"Python/65":[10,0,null,null,[1,16,true,{"removed":["return s[:len(s) - shift] + s[len(s) - shift:]"],"put_in":["return s[len(s) - shift:] + s[:len(s) - shift]"]}]],"Python/66":[10,0,null,null,null],"Python/67":[10,0,null,null,null],"Python/68":[10,0,null,null,null],"Python/69":[10,10,1,true,null],"Python/70":[10,0,null,null,[1,1,true,{"removed":["res, switch = ([], False)"],"put_in":["res, switch = ([], 1)"]}]],"Python/71":[10,0,null,null,null],"Python/72":[10,0,null,null,null],"Python/73":[10,2,2,true,null],"Python/74":[10,0,null,null,[1,10,true,{"removed":["else:","return lst1"],"put_in":["return lst1","else:"]}]],"Python/75":[10,4,2,true,null],"Python/76":[10,0,null,null,null],"Python/77":[10,6,1,true,null],"Python/78":[10,9,1,true,null],"Python/79":[10,0,null,null,null],"Python/80":[10,0,null,null,null],"Python/81":[10,1,9,true,null],"Python/82":[10,10,1,true,null],"Python/83":[10,0,null,null,null],"Python/84":[10,0,null,null,null],"Python/85":[10,0,null,null,[1,10,true,{"removed":["return sum([lst[i] for i in range(1, len(lst), 1) if lst[i] % 2 == 0])"],"put_in":["return sum([lst[i] for i in range(1, len(lst), 2) if lst[i] % 2 == 0])"]}]],"Python/86":[10,0,null,null,[1,66,true,{"removed":["return ''.join([''.join(sorted(list(i))) for i in s.split(' ')])"],"put_in":["return ' '.join([''.join(sorted(list(i))) for i in s.split(' ')])"]}]],"Python/87":[10,1,5,true,null],"Python/88":[10,0,null,null,[1,17,true,{"removed":["return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 != 0)"],"put_in":["return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 != 1)"]}]],"Python/89":[10,3,2,true,null],"Python/90":[10,0,null,null,[1,6,true,{"removed":["return None if len(lst) < 3 else lst[1]"],"put_in":["return None if len(lst) < 2 else lst[1]"]}]],"Python/91":[10,0,null,null,null],"Python/92":[10,0,null,null,[1,60,false,{"removed":["if x + y == z or y + z == x:"],"put_in":["if x + y == z or z + z == x:"]}]],"Python/93":[10,0,null,null,null],"Python/94":[10,9,2,true,null],"Python/95":[10,0,null,null,null],"Python/96":[10,10,1,true,null],"Python/97":[10,0,null,null,null],"Python/98":[10,0,null,null,null],"Python/99":[10,0,null,null,[1,60,true,{"removed":["if num > 0:"],"put_in":["if num < 0:"]}]],"Python/100":[10,10,1,true,null],"Python/101":[10,0,null,null,[1,60,false,{"removed":["s_list.append(',')"],"put_in":["s_list.append('')"]}]],"Python/102":[10,0,null,null,[1,15,true,{"removed":["return x - 1"],"put_in":["return y - 1"]}]],"Python/103":[10,0,null,null,null],"Python/104":[10,0,null,null,null],"Python/105":[10,0,null,null,null],"Python/106":[10,10,1,true,null],"Python/107":[10,2,5,true,null],"Python/108":[10,0,null,null,[1,124,true,{"removed":["n[0] = n[0] * neg * -1"],"put_in":["n[0] = n[0] * neg * (-1) ** 2"]}]],"Python/109":[10,0,null,null,null],"Python/110":[10,0,null,null,[1,164,true,{"removed":["odd += 1"],"put_in":["even += 1"]}]],"Python/111":[10,0,null,null,null],"Python/112":[10,0,null,null,null],"Python/113":[10,0,null,null,null],"Python/114":[10,0,null,null,null],"Python/115":[10,0,null,null,null],"Python/116":[10,0,null,null,null],"Python/117":[10,1,1,true,null],"Python/118":[10,0,null,null,null],"Python/119":[10,1,6,true,null],"Python/120":[10,0,null,null,[1,4,true,{"removed":["return sorted(ans, reverse=True)"],"put_in":["return sorted(ans, reverse=0)"]}]],"Python/121":[10,0,null,null,[1,14,true,{"removed":["return sum([x for idx, x in enumerate(lst) if idx % 2 == 1 and x % 2 == 1])"],"put_in":["return sum([x for idx, x in enumerate(lst) if (idx - 1) % 2 == 1 and x % 2 == 1])"]}]],"Python/122":[10,0,null,null,null],"Python/123":[10,0,null,null,[1,136,true,{"removed":["n = n * 2 + 1"],"put_in":["n = n * (2 + 1) + 1"]}]],"Python/124":[10,0,null,null,null],"Python/125":[10,0,null,null,[1,34,true,{"removed":["return txt.replace(' ', ',').split()"],"put_in":["return txt.replace(',', ' ').split()"]}]],"Python/126":[10,0,null,null,null],"Python/127":[10,0,null,null,[1,5,false,{"removed":["l = max(interval1[0], interval2[0])"],"put_in":["l = max(interval1[0], interval2[0] + 1)"]}]],"Python/128":[10,0,null,null,null],"Python/129":[10,5,2,true,null],"Python/130":[10,0,null,null,[1,16,true,{"removed":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + i + (i + 3) / 2)"],"put_in":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + (i + 3) / 2)"]}]],"Python/131":[10,10,1,true,null],"Python/132":[10,0,null,null,null],"Python/133":[10,0,null,null,null],"Python/134":[10,0,null,null,[1,136,true,{"removed":["return True if len(check) == 1 and 97 <= ord(check.upper()) <= 122 else False"],"put_in":["return True if len(check) == 1 and 97 <= ord(check.upper().lower()) <= 122 else False"]}]],"Python/135":[10,6,1,true,null],"Python/136":[10,0,null,null,null],"Python/137":[10,0,null,null,null],"Python/138":[10,1,9,false,null],"Python/139":[10,0,null,null,null],"Python/140":[10,0,null,null,null],"Python/141":[10,0,null,null,null],"Python/142":[10,0,null,null,null],"Python/143":[10,0,null,null,null],"Python/144":[10,0,null,null,null],"Python/145":[10,0,null,null,[1,2,true,{"removed":["n, neg = (-1 * n, -1 + n)"],"put_in":["n, neg = (-1 * n, -1)"]}]],"Python/146":[10,0,null,null,null],"Python/147":[10,0,null,null,[1,17,true,{"removed":["A = [i * i for i in range(1, n + 1)]"],"put_in":["A = [(i - 1) * i for i in range(1, n + 1)]"]}]],"Python/148":[10,0,null,null,null],"Python/149":[10,0,null,null,null],"Python/150":[10,10,1,true,null],"Python/151":[10,0,null,null,null],"Python/152":[10,2,4,true,null],"Python/153":[10,0,null,null,null],"Python/154":[10,0,null,null,[1,71,false,{"removed":["for j in range(len(b) - l + 1):"],"put_in":["for j in range(len(b) - l + 3):"]}]],"Python/155":[10,10,1,true,null],"Python/156":[10,6,1,true,null],"Python/157":[10,0,null,null,null],"Python/158":[10,0,null,null,null],"Python/159":[10,0,null,null,null],"Python/160":[10,10,1,true,null],"Python/161":[10,0,null,null,null],"Python/162":[10,2,5,true,null],"Python/163":[10,0,null,null,[1,14,true,{"removed":["return [i for i in range(lower, upper) if i % 2 == 0]"],"put_in":["return [i for i in range(lower, upper + 1) if i % 2 == 0]"]}]]},"Qwen/Qwen2.5-Coder-0.5B":{"Python/0":[10,0,null,null,null],"Python/1":[10,0,null,null,[1,9,true,{"removed":["if current_depth < 0:"],"put_in":["if current_depth <= 0:"]}]],"Python/2":[10,0,null,null,null],"Python/3":[10,0,null,null,[1,2,false,{"removed":["balance = 0"],"put_in":["balance = 1"]}]],"Python/4":[10,0,null,null,null],"Python/5":[10,1,7,true,null],"Python/6":[10,0,null,null,null],"Python/7":[10,10,1,true,null],"Python/8":[10,10,1,true,null],"Python/9":[10,0,null,null,null],"Python/10":[10,0,null,null,null],"Python/11":[10,0,null,null,[1,23,true,{"removed":["if i == j:"],"put_in":["if i != j:"]}]],"Python/12":[10,0,null,null,null],"Python/13":[10,0,null,null,null],"Python/14":[10,0,null,null,[1,3,true,{"removed":["for i in range(len(string) - 1):"],"put_in":["for i in range(len(string)):"]}]],"Python/15":[10,0,null,null,[1,3,true,{"removed":["return ' '.join([str(x) for x in range(n)])"],"put_in":["return ' '.join([str(x) for x in range(n + 1)])"]}]],"Python/16":[10,0,null,null,null],"Python/17":[10,0,null,null,[1,68,true,{"removed":["note_map = {'o': 3, 'o|': 2, '.|': 1}"],"put_in":["note_map = {'o': 3 + 1, 'o|': 2, '.|': 1}"]}]],"Python/18":[10,0,null,null,[1,12,true,{"removed":["for i in range(len(string) - len(substring)):"],"put_in":["for i in range(len(string) - len(substring) + 1):"]}]],"Python/19":[10,0,null,null,null],"Python/20":[10,0,null,null,null],"Python/21":[10,0,null,null,null],"Python/22":[10,0,null,null,[1,15,true,{"removed":["return values"],"put_in":["return out"]}]],"Python/23":[10,0,null,null,[1,5,true,{"removed":["return len(string) - 1"],"put_in":["return len(string)"]}]],"Python/24":[10,0,null,null,null],"Python/25":[10,0,null,null,[1,13,true,{"removed":["i = 0"],"put_in":["i = 2"]}]],"Python/26":[10,7,1,true,null],"Python/27":[10,0,null,null,null],"Python/28":[10,0,null,null,[1,87,true,{"removed":["return ' '.join(strings)"],"put_in":["return ' '[1:].join(strings)"]}]],"Python/29":[10,0,null,null,null],"Python/30":[10,0,null,null,[1,18,true,{"removed":["return [e for e in l if e < 0]"],"put_in":["return [e for e in l if 0 < e]"]}]],"Python/31":[10,0,null,null,null],"Python/32":[10,0,null,null,[1,36,false,{"removed":["begin, end = (-1.0, 1.0)"],"put_in":["end, begin = (-1.0, 1.0)"]}]],"Python/33":[10,0,null,null,null],"Python/34":[10,10,1,true,null],"Python/35":[10,10,1,true,null],"Python/36":[10,0,null,null,null],"Python/37":[10,0,null,null,null],"Python/38":[10,0,null,null,null],"Python/39":[10,0,null,null,null],"Python/40":[10,2,1,true,null],"Python/41":[10,0,null,null,[1,3,true,{"removed":["return n ** 3"],"put_in":["return n ** 2"]}]],"Python/42":[10,0,null,null,null],"Python/43":[10,0,null,null,[1,5,true,{"removed":["for j in range(i, len(l)):"],"put_in":["for j in range(i + 1, len(l)):"]}]],"Python/44":[10,0,null,null,null],"Python/45":[10,6,5,true,null],"Python/46":[10,0,null,null,[1,1,true,{"removed":["for _ in range(4, n + 1):"],"put_in":["for _ in range(4, n + 1 + 1):"]}]],"Python/47":[10,0,null,null,null],"Python/48":[10,0,null,null,null],"Python/49":[10,0,null,null,[1,5,true,{"removed":["ret = 0"],"put_in":["ret = 1"]}]],"Python/50":[10,0,null,null,null],"Python/51":[10,1,4,true,null],"Python/52":[10,0,null,null,null],"Python/53":[10,0,null,null,[1,60,true,{"removed":["return x + y + y + x"],"put_in":["return y + x"]}]],"Python/54":[10,0,null,null,null],"Python/55":[10,0,null,null,null],"Python/56":[10,0,null,null,null],"Python/57":[10,0,null,null,null],"Python/58":[10,0,null,null,null],"Python/59":[10,0,null,null,null],"Python/60":[10,0,null,null,[1,1,true,{"removed":["return sum(range(n))"],"put_in":["return sum(range(n + 1))"]}]],"Python/61":[10,9,1,true,null],"Python/62":[10,0,null,null,[1,281,true,{"removed":["return [i * x for i, x in enumerate(xs)]"],"put_in":["return [i * x for i, x in enumerate(xs)][1:]"]}]],"Python/63":[10,0,null,null,null],"Python/64":[10,0,null,null,null],"Python/65":[10,0,null,null,[1,16,true,{"removed":["return s[:len(s) - shift] + s[len(s) - shift:]"],"put_in":["return s[len(s) - shift:] + s[:len(s) - shift]"]}]],"Python/66":[10,0,null,null,null],"Python/67":[10,0,null,null,null],"Python/68":[10,0,null,null,null],"Python/69":[10,0,null,null,null],"Python/70":[10,0,null,null,[1,1,true,{"removed":["res, switch = ([], False)"],"put_in":["res, switch = ([], 1)"]}]],"Python/71":[10,0,null,null,null],"Python/72":[10,0,null,null,null],"Python/73":[10,1,5,true,null],"Python/74":[10,0,null,null,[1,10,true,{"removed":["else:","return lst1"],"put_in":["return lst1","else:"]}]],"Python/75":[10,0,null,null,null],"Python/76":[10,0,null,null,null],"Python/77":[10,0,null,null,null],"Python/78":[10,0,null,null,[1,9,true,{"removed":["total = 1"],"put_in":["total = 0"]}]],"Python/79":[10,0,null,null,null],"Python/80":[10,0,null,null,null],"Python/81":[10,0,null,null,null],"Python/82":[10,0,null,null,[1,3,true,{"removed":["for i in range(3, l):"],"put_in":["for i in range(2, l):"]}]],"Python/83":[10,0,null,null,null],"Python/84":[10,0,null,null,null],"Python/85":[10,1,2,true,null],"Python/86":[10,0,null,null,null],"Python/87":[10,0,null,null,null],"Python/88":[10,0,null,null,[2,17,true,{"removed":["return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 != 0)"],"put_in":["return [] if len(array) == 0 else sorted(array, reverse=(array[0] + array[-1]) % 2 != 1)"]}]],"Python/89":[10,0,null,null,null],"Python/90":[10,0,null,null,[1,6,true,{"removed":["return None if len(lst) < 3 else lst[1]"],"put_in":["return None if len(lst) < 2 else lst[1]"]}]],"Python/91":[10,0,null,null,null],"Python/92":[10,0,null,null,[1,60,false,{"removed":["if x + y == z or y + z == x:"],"put_in":["if x + y == z or z + z == x:"]}]],"Python/93":[10,0,null,null,null],"Python/94":[10,0,null,null,null],"Python/95":[10,0,null,null,null],"Python/96":[10,0,null,null,null],"Python/97":[10,0,null,null,null],"Python/98":[10,0,null,null,null],"Python/99":[10,0,null,null,[1,60,true,{"removed":["if num > 0:"],"put_in":["if num < 0:"]}]],"Python/100":[10,0,null,null,[1,2,true,{"removed":["return [n + 2 * i + i for i in range(n)]"],"put_in":["return [n + 1 * i + i for i in range(n)]"]}]],"Python/101":[10,0,null,null,[1,60,false,{"removed":["s_list.append(',')"],"put_in":["s_list.append('')"]}]],"Python/102":[10,0,null,null,[1,15,true,{"removed":["return x - 1"],"put_in":["return y - 1"]}]],"Python/103":[10,0,null,null,null],"Python/104":[10,0,null,null,null],"Python/105":[10,0,null,null,null],"Python/106":[10,0,null,null,null],"Python/107":[10,0,null,null,[1,2,true,{"removed":["for i in range(1, n):"],"put_in":["for i in range(1, n + 1):"]}]],"Python/108":[10,0,null,null,[1,124,true,{"removed":["n[0] = n[0] * neg * -1"],"put_in":["n[0] = n[0] * neg * (-1) ** 2"]}]],"Python/109":[10,0,null,null,[1,140,true,{"removed":["min_index = sorted_array.index(min_value)"],"put_in":["min_index = arr.index(min_value)"]}]],"Python/110":[10,0,null,null,[1,164,true,{"removed":["odd += 1"],"put_in":["even += 1"]}]],"Python/111":[10,0,null,null,null],"Python/112":[10,0,null,null,null],"Python/113":[10,0,null,null,null],"Python/114":[10,0,null,null,null],"Python/115":[10,0,null,null,null],"Python/116":[10,0,null,null,null],"Python/117":[10,0,null,null,null],"Python/118":[10,0,null,null,null],"Python/119":[10,0,null,null,null],"Python/120":[10,0,null,null,null],"Python/121":[10,0,null,null,[1,14,true,{"removed":["return sum([x for idx, x in enumerate(lst) if idx % 2 == 1 and x % 2 == 1])"],"put_in":["return sum([x for idx, x in enumerate(lst) if (idx - 1) % 2 == 1 and x % 2 == 1])"]}]],"Python/122":[10,0,null,null,null],"Python/123":[10,0,null,null,[1,136,true,{"removed":["n = n * 2 + 1"],"put_in":["n = n * (2 + 1) + 1"]}]],"Python/124":[10,0,null,null,null],"Python/125":[10,0,null,null,[1,34,true,{"removed":["return txt.replace(' ', ',').split()"],"put_in":["return txt.replace(',', ' ').split()"]}]],"Python/126":[10,0,null,null,null],"Python/127":[10,0,null,null,[1,5,false,{"removed":["l = max(interval1[0], interval2[0])"],"put_in":["l = max(interval1[0], interval2[0] + 1)"]}]],"Python/128":[10,0,null,null,null],"Python/129":[10,0,null,null,null],"Python/130":[10,0,null,null,[1,16,true,{"removed":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + i + (i + 3) / 2)"],"put_in":["my_tri.append(my_tri[i - 1] + my_tri[i - 2] + (i + 3) / 2)"]}]],"Python/131":[10,0,null,null,null],"Python/132":[10,0,null,null,null],"Python/133":[10,0,null,null,null],"Python/134":[10,0,null,null,[1,136,true,{"removed":["return True if len(check) == 1 and 97 <= ord(check.upper()) <= 122 else False"],"put_in":["return True if len(check) == 1 and 97 <= ord(check.upper().lower()) <= 122 else False"]}]],"Python/135":[10,0,null,null,[1,30,true,{"removed":["ind -= 1"],"put_in":["ind //= 1"]}]],"Python/136":[10,0,null,null,null],"Python/137":[10,0,null,null,null],"Python/138":[10,0,null,null,[1,173,true,{"removed":["return n % 2 == 0 and n >= 8 and (n <= 8)"],"put_in":["return n % 2 == 0 and n >= 8 and (n <= n)"]}]],"Python/139":[10,0,null,null,null],"Python/140":[10,0,null,null,null],"Python/141":[10,0,null,null,null],"Python/142":[10,0,null,null,null],"Python/143":[10,0,null,null,null],"Python/144":[10,0,null,null,null],"Python/145":[10,0,null,null,[1,2,true,{"removed":["n, neg = (-1 * n, -1 + n)"],"put_in":["n, neg = (-1 * n, -1)"]}]],"Python/146":[10,0,null,null,null],"Python/147":[10,0,null,null,[1,17,true,{"removed":["A = [i * i for i in range(1, n + 1)]"],"put_in":["A = [(i - 1) * i for i in range(1, n + 1)]"]}]],"Python/148":[10,0,null,null,null],"Python/149":[10,0,null,null,null],"Python/150":[10,0,null,null,[1,6,true,{"removed":["if n % i - 1 == 0:"],"put_in":["if n % i == 0:"]}]],"Python/151":[10,0,null,null,null],"Python/152":[10,0,null,null,null],"Python/153":[10,0,null,null,null],"Python/154":[10,0,null,null,[1,71,false,{"removed":["for j in range(len(b) - l + 1):"],"put_in":["for j in range(len(b) - l + 3):"]}]],"Python/155":[10,10,1,true,null],"Python/156":[10,0,null,null,null],"Python/157":[10,0,null,null,null],"Python/158":[10,0,null,null,null],"Python/159":[10,0,null,null,null],"Python/160":[10,0,null,null,null],"Python/161":[10,0,null,null,null],"Python/162":[10,0,null,null,null],"Python/163":[10,0,null,null,[1,14,true,{"removed":["return [i for i in range(lower, upper) if i % 2 == 0]"],"put_in":["return [i for i in range(lower, upper + 1) if i % 2 == 0]"]}]]}}
+}

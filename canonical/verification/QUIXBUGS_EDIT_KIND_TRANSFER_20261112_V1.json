@@ -1,0 +1,2366 @@
+{
+ "schema": "BRAIN_QUIXBUGS_EDIT_KIND_TRANSFER_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T12:29:39Z",
+ "read_this_first": [
+  "Like for like: the 40 QuixBugs bugs the tree's own repair solver was measured on, the same tests deciding, about the same number of test runs per bug.",
+  "The tree's repair solver, not edited: 5 of 40 repaired with nothing taught, 6 with every other published fix taught first (canonical/verification/QUIXBUGS_REPAIR_SOLVER_20261111_V1.json).",
+  "The edit-kind learner shown the 164 HumanEvalFix fixes and no QuixBugs fix at all: 20 of 40 repaired; 10 are the published fix. Shown the other 39 QuixBugs fixes as well: 21 of 40.",
+  "Bug by bug against the solver with nothing taught: both 4, the learner alone 16, the solver alone 1, neither 19.",
+  "The 10 repairs that are not the published fix were READ, not run on further inputs: 1 not judged, 1 the same answers, 1 the same answers, slower, 5 the same behaviour, 2 wrong in general. A program that passes its tests is not therefore right.",
+  "Not a score on unseen bugs: all 40 QuixBugs fixes were read earlier in this work, and the learner's limit of 300 candidates per operator was chosen with QuixBugs timings in view. The lessons of the first line (HumanEvalFix only) contain no QuixBugs fix.",
+  "One run, one machine, by the producer. Nobody else has re-run it."
+ ],
+ "summary": {
+  "bugs_asked": 40,
+  "bugs_usable": 40,
+  "not_usable": [],
+  "asked_through_the_benchmarks_runner_alone": [
+   "levenshtein"
+  ],
+  "another_benchmark": {
+   "bugs": 40,
+   "repaired": 20,
+   "repaired_within": {
+    "1": 0,
+    "10": 2,
+    "100": 10,
+    "1000": 20
+   },
+   "the_repair_is_the_published_fix": 10,
+   "the_repair_is_another_program": 10,
+   "published_fix_among_the_candidates": 12,
+   "which": [
+    "bucketsort",
+    "depth_first_search",
+    "find_first_in_sorted",
+    "find_in_sorted",
+    "gcd",
+    "get_factors",
+    "hanoi",
+    "is_valid_parenthesization",
+    "knapsack",
+    "lcs_length",
+    "levenshtein",
+    "longest_common_subsequence",
+    "minimum_spanning_tree",
+    "next_palindrome",
+    "next_permutation",
+    "pascal",
+    "quicksort",
+    "rpn_eval",
+    "shortest_path_lengths",
+    "to_base"
+   ]
+  },
+  "all_other_fixes": {
+   "bugs": 40,
+   "repaired": 21,
+   "repaired_within": {
+    "1": 0,
+    "10": 3,
+    "100": 11,
+    "1000": 21
+   },
+   "the_repair_is_the_published_fix": 9,
+   "the_repair_is_another_program": 12,
+   "published_fix_among_the_candidates": 12,
+   "which": [
+    "bucketsort",
+    "depth_first_search",
+    "detect_cycle",
+    "find_first_in_sorted",
+    "find_in_sorted",
+    "gcd",
+    "get_factors",
+    "hanoi",
+    "knapsack",
+    "lcs_length",
+    "levenshtein",
+    "max_sublist_sum",
+    "mergesort",
+    "minimum_spanning_tree",
+    "next_palindrome",
+    "next_permutation",
+    "pascal",
+    "quicksort",
+    "rpn_eval",
+    "shortest_path_lengths",
+    "to_base"
+   ]
+  },
+  "candidates_run": 29540,
+  "seconds": 979.4,
+  "screen_said_pass_runner_said_no": 0,
+  "beside_the_trees_repair_solver": {
+   "another_benchmark__beside__the_solver_with_nothing_taught": {
+    "the_learner": 20,
+    "the_solver": 5,
+    "both": [
+     "get_factors",
+     "knapsack",
+     "pascal",
+     "quicksort"
+    ],
+    "the_learner_alone": [
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "gcd",
+     "hanoi",
+     "is_valid_parenthesization",
+     "lcs_length",
+     "levenshtein",
+     "longest_common_subsequence",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "rpn_eval",
+     "shortest_path_lengths",
+     "to_base"
+    ],
+    "the_solver_alone": [
+     "sieve"
+    ],
+    "neither": 19
+   },
+   "all_other_fixes__beside__the_solver_with_nothing_taught": {
+    "the_learner": 21,
+    "the_solver": 5,
+    "both": [
+     "get_factors",
+     "knapsack",
+     "pascal",
+     "quicksort"
+    ],
+    "the_learner_alone": [
+     "bucketsort",
+     "depth_first_search",
+     "detect_cycle",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "gcd",
+     "hanoi",
+     "lcs_length",
+     "levenshtein",
+     "max_sublist_sum",
+     "mergesort",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "rpn_eval",
+     "shortest_path_lengths",
+     "to_base"
+    ],
+    "the_solver_alone": [
+     "sieve"
+    ],
+    "neither": 18
+   },
+   "another_benchmark__beside__the_solver_with_all_other_fixes_taught_first": {
+    "the_learner": 20,
+    "the_solver": 6,
+    "both": [
+     "gcd",
+     "get_factors",
+     "knapsack",
+     "pascal",
+     "quicksort"
+    ],
+    "the_learner_alone": [
+     "bucketsort",
+     "depth_first_search",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "hanoi",
+     "is_valid_parenthesization",
+     "lcs_length",
+     "levenshtein",
+     "longest_common_subsequence",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "rpn_eval",
+     "shortest_path_lengths",
+     "to_base"
+    ],
+    "the_solver_alone": [
+     "sieve"
+    ],
+    "neither": 19
+   },
+   "all_other_fixes__beside__the_solver_with_all_other_fixes_taught_first": {
+    "the_learner": 21,
+    "the_solver": 6,
+    "both": [
+     "gcd",
+     "get_factors",
+     "knapsack",
+     "pascal",
+     "quicksort"
+    ],
+    "the_learner_alone": [
+     "bucketsort",
+     "depth_first_search",
+     "detect_cycle",
+     "find_first_in_sorted",
+     "find_in_sorted",
+     "hanoi",
+     "lcs_length",
+     "levenshtein",
+     "max_sublist_sum",
+     "mergesort",
+     "minimum_spanning_tree",
+     "next_palindrome",
+     "next_permutation",
+     "rpn_eval",
+     "shortest_path_lengths",
+     "to_base"
+    ],
+    "the_solver_alone": [
+     "sieve"
+    ],
+    "neither": 18
+   }
+  }
+ },
+ "the_repairs_that_are_not_the_published_fix__lessons_from_humanevalfix_only": {
+  "depth_first_search": {
+   "rank": 167,
+   "operator": "replace: __N0__  ->  __F0__  [at Call.args]",
+   "lines": {
+    "removed": [
+     "return any((search_from(nextnode) for nextnode in node.successors))"
+    ],
+    "put_in": [
+     "return any((search_from(goalnode) for nextnode in node.successors))"
+    ]
+   },
+   "read_as": "wrong in general",
+   "why": "search_from(goalnode) is asked for every successor, which is true at once: any node with a successor \"reaches\" the goal"
+  },
+  "find_first_in_sorted": {
+   "rank": 130,
+   "operator": "replace: __N0__  ->  __N0__ + 1",
+   "lines": {
+    "removed": [
+     "while lo <= hi:"
+    ],
+    "put_in": [
+     "while lo + 1 <= hi:"
+    ]
+   },
+   "read_as": "the same behaviour",
+   "why": "while lo + 1 <= hi is while lo < hi, the published fix"
+  },
+  "get_factors": {
+   "rank": 4,
+   "operator": "replace: '__C0__'  ->  1  [at BinOp.right]",
+   "lines": {
+    "removed": [
+     "for i in range(2, int(n ** 0.5) + 1):"
+    ],
+    "put_in": [
+     "for i in range(2, int(n ** 1) + 1):"
+    ]
+   },
+   "read_as": "the same answers, slower",
+   "why": "the loop runs up to n instead of its square root, so a prime is found as its own factor; the published fix returns [n] at the end"
+  },
+  "is_valid_parenthesization": {
+   "rank": 971,
+   "operator": "replace: __E0__  ->  __F0__ % 4 == 0 and __E0__",
+   "lines": {
+    "removed": [
+     "return True"
+    ],
+    "put_in": [
+     "return depth % 4 == 0 and True"
+    ]
+   },
+   "read_as": "wrong in general",
+   "why": "return depth % 4 == 0 and True: four unclosed brackets count as valid; the published fix is return depth == 0"
+  },
+  "lcs_length": {
+   "rank": 143,
+   "operator": "replace: __N0__  ->  __N0__ + 1",
+   "lines": {
+    "removed": [
+     "dp[i, j] = dp[i - 1, j] + 1"
+    ],
+    "put_in": [
+     "dp[i, j + 1] = dp[i - 1, j] + 1"
+    ]
+   },
+   "read_as": "the same behaviour",
+   "why": "dp[i, j + 1] = dp[i - 1, j] + 1 is the published recurrence with j moved by one; the answer is the largest value"
+  },
+  "levenshtein": {
+   "rank": 71,
+   "operator": "replace: __E0__  ->  __E0__ - 1  [at BinOp.left]",
+   "lines": {
+    "removed": [
+     "return 1 + levenshtein(source[1:], target[1:])"
+    ],
+    "put_in": [
+     "return 1 - 1 + levenshtein(source[1:], target[1:])"
+    ]
+   },
+   "read_as": "the same behaviour",
+   "why": "1 - 1 + levenshtein(...) is levenshtein(...), the published fix"
+  },
+  "minimum_spanning_tree": {
+   "rank": 507,
+   "operator": "replace: __N0__  ->  __F0__",
+   "lines": {
+    "removed": [
+     "for node in group_by_node[v]:"
+    ],
+    "put_in": [
+     "for node in group_by_node[u]:"
+    ]
+   },
+   "read_as": "not judged",
+   "why": "the loop runs over the group of u instead of the group of v; whether that is always right was not worked out"
+  },
+  "next_permutation": {
+   "rank": 14,
+   "operator": "replace: __E0__ < __E1__  ->  __E0__ > __E1__",
+   "lines": {
+    "removed": [
+     "if perm[j] < perm[i]:"
+    ],
+    "put_in": [
+     "if perm[j] > perm[i]:"
+    ]
+   },
+   "read_as": "the same behaviour",
+   "why": "perm[j] > perm[i] is perm[i] < perm[j], the published fix"
+  },
+  "quicksort": {
+   "rank": 18,
+   "operator": "replace: __E0__ < __E1__  ->  __E0__ <= __E1__",
+   "lines": {
+    "removed": [
+     "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+    ],
+    "put_in": [
+     "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+    ]
+   },
+   "read_as": "the same answers",
+   "why": "equal elements go to the lesser side instead of the greater side"
+  },
+  "rpn_eval": {
+   "rank": 48,
+   "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E2__, __E1__)",
+   "lines": {
+    "removed": [
+     "return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](a, b)"
+    ],
+    "put_in": [
+     "return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](b, a)"
+    ]
+   },
+   "read_as": "the same behaviour",
+   "why": "the two operands change places, as in the published fix"
+  }
+ },
+ "limits": [
+  "QuixBugs has no second set of inputs; the repairs that differ from the published fix were judged by reading only.",
+  "The solver's 5 repairs were judged the same way in its own record: 2 are the published fix.",
+  "One bug (levenshtein) could not go through the confined screen (its buggy program does not end in time there) and was asked through the benchmark's own runner with a budget of 150 candidates.",
+  "A candidate has 1.5 seconds per wave in the screen; three buggy programs never end (bitcount, find_first_in_sorted, sqrt), so most of their candidates cost that long.",
+  "The comparison is on tests passed with about a thousand test runs per bug on both sides; the solver stops at its own bounds, the learner at 1000 candidates."
+ ],
+ "parameters": {
+  "budget": 1000,
+  "budget_where_the_screen_cannot_be_used": 150,
+  "screen_limit_s": 1.5,
+  "oracle_limit_s": 8
+ },
+ "benchmark": {
+  "quixbugs_sha256": "44fea01ec12ff8bc809fa719f089c38b8d15a35ddac7fa0eddcd2dfaeeac78bb",
+  "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835"
+ },
+ "lessons": {
+  "given": 204,
+  "from_humanevalfix": 164,
+  "from_quixbugs": 40,
+  "taught_nothing": [],
+  "operators": 1904
+ },
+ "code_sha256": {
+  "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+  "canonical/tools/quixbugs_edit_kind_transfer_measure_v1.py": "6d707a3aa2217fa9721c6ecaf8cce2d1ad7ad4232180d936c7192120ff56661e",
+  "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+  "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py": "f4b3f35cb5db7d076a92ee9cf3fd44c0446749ee2259036084beea744db689c2",
+  "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09",
+  "canonical/runtime/brokered_workspace_execution_v1.py": "c14ad052fbdc0c76133ca320e3d528ea72d55f0634c308aa681ed7b5a46da4d9"
+ },
+ "tool_commit": "4532bce64cf2",
+ "per_bug": {
+  "bitcount": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 718,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 1061,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1059,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 230.66
+  },
+  "breadth_first_search": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4270,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6399,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1247,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 11.17
+  },
+  "bucketsort": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3037,
+    "published_fix_rank": 140,
+    "first_pass_rank": 140,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __N0__  ->  __F0__  [at Call.args]",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76"
+    ],
+    "lines": {
+     "removed": [
+      "for i, count in enumerate(arr):"
+     ],
+     "put_in": [
+      "for i, count in enumerate(counts):"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4311,
+    "published_fix_rank": 174,
+    "first_pass_rank": 174,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __N0__  ->  __F0__  [at Call.args]",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76",
+     "quixbugs/hanoi"
+    ],
+    "lines": {
+     "removed": [
+      "for i, count in enumerate(arr):"
+     ],
+     "put_in": [
+      "for i, count in enumerate(counts):"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 178,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 3.14
+  },
+  "depth_first_search": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2709,
+    "published_fix_rank": null,
+    "first_pass_rank": 167,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __F0__  [at Call.args]",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76"
+    ],
+    "lines": {
+     "removed": [
+      "return any((search_from(nextnode) for nextnode in node.successors))"
+     ],
+     "put_in": [
+      "return any((search_from(goalnode) for nextnode in node.successors))"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4001,
+    "published_fix_rank": null,
+    "first_pass_rank": 50,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__(__N1__)  ->  __N1__",
+    "openness": "names_open",
+    "voted_by": [
+     "quixbugs/flatten"
+    ],
+    "lines": {
+     "removed": [
+      "return any((search_from(nextnode) for nextnode in node.successors))"
+     ],
+     "put_in": [
+      "return any((nextnode for nextnode in node.successors))"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 176,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 5.93
+  },
+  "detect_cycle": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 1999,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 2937,
+    "published_fix_rank": null,
+    "first_pass_rank": 120,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: '__C0__'  ->  __F0__  [at While.test]",
+    "openness": "from_the_place",
+    "voted_by": [
+     "quixbugs/breadth_first_search"
+    ],
+    "lines": {
+     "removed": [
+      "while True:"
+     ],
+     "put_in": [
+      "while hare:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1020,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 18.49
+  },
+  "find_first_in_sorted": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3489,
+    "published_fix_rank": null,
+    "first_pass_rank": 130,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __N0__ + 1",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60"
+    ],
+    "lines": {
+     "removed": [
+      "while lo <= hi:"
+     ],
+     "put_in": [
+      "while lo + 1 <= hi:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 5493,
+    "published_fix_rank": null,
+    "first_pass_rank": 128,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __N0__ + 1",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60",
+     "quixbugs/find_in_sorted",
+     "quixbugs/pascal"
+    ],
+    "lines": {
+     "removed": [
+      "while lo <= hi:"
+     ],
+     "put_in": [
+      "while lo + 1 <= hi:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 158,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 41.12
+  },
+  "find_in_sorted": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4042,
+    "published_fix_rank": 14,
+    "first_pass_rank": 14,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E1__ + 1, __E2__)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60"
+    ],
+    "lines": {
+     "removed": [
+      "return binsearch(mid, end)"
+     ],
+     "put_in": [
+      "return binsearch(mid + 1, end)"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6262,
+    "published_fix_rank": 17,
+    "first_pass_rank": 17,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E1__ + 1, __E2__)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60",
+     "quixbugs/pascal"
+    ],
+    "lines": {
+     "removed": [
+      "return binsearch(mid, end)"
+     ],
+     "put_in": [
+      "return binsearch(mid + 1, end)"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 19,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 4.06
+  },
+  "flatten": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2427,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3644,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1353,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 14.57
+  },
+  "gcd": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 1071,
+    "published_fix_rank": 25,
+    "first_pass_rank": 25,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E2__, __E1__)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/125"
+    ],
+    "lines": {
+     "removed": [
+      "return gcd(a % b, b)"
+     ],
+     "put_in": [
+      "return gcd(b, a % b)"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 1611,
+    "published_fix_rank": 30,
+    "first_pass_rank": 30,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E2__, __E1__)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/125"
+    ],
+    "lines": {
+     "removed": [
+      "return gcd(a % b, b)"
+     ],
+     "put_in": [
+      "return gcd(b, a % b)"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 30,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 1.08
+  },
+  "get_factors": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2517,
+    "published_fix_rank": null,
+    "first_pass_rank": 4,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: '__C0__'  ->  1  [at BinOp.right]",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/42",
+     "Python/46",
+     "Python/49",
+     "Python/8",
+     "Python/98"
+    ],
+    "lines": {
+     "removed": [
+      "for i in range(2, int(n ** 0.5) + 1):"
+     ],
+     "put_in": [
+      "for i in range(2, int(n ** 1) + 1):"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3754,
+    "published_fix_rank": null,
+    "first_pass_rank": 8,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: '__C0__'  ->  1  [at BinOp.right]",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/42",
+     "Python/46",
+     "Python/49",
+     "Python/8",
+     "Python/98"
+    ],
+    "lines": {
+     "removed": [
+      "for i in range(2, int(n ** 0.5) + 1):"
+     ],
+     "put_in": [
+      "for i in range(2, int(n ** 1) + 1):"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 8,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 2.21
+  },
+  "hanoi": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4179,
+    "published_fix_rank": 446,
+    "first_pass_rank": 446,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __N0__  ->  __F0__",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76"
+    ],
+    "lines": {
+     "removed": [
+      "steps.append((start, helper))"
+     ],
+     "put_in": [
+      "steps.append((start, end))"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6347,
+    "published_fix_rank": 548,
+    "first_pass_rank": 548,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __N0__  ->  __F0__",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76",
+     "quixbugs/bucketsort"
+    ],
+    "lines": {
+     "removed": [
+      "steps.append((start, helper))"
+     ],
+     "put_in": [
+      "steps.append((start, end))"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 548,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 6.66
+  },
+  "is_valid_parenthesization": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 1746,
+    "published_fix_rank": null,
+    "first_pass_rank": 971,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__  ->  __F0__ % 4 == 0 and __E0__",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/142"
+    ],
+    "lines": {
+     "removed": [
+      "return True"
+     ],
+     "put_in": [
+      "return depth % 4 == 0 and True"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 2642,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1222,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 9.91
+  },
+  "kheapsort": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2155,
+    "published_fix_rank": 1502,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3103,
+    "published_fix_rank": 1831,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1271,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 18.47
+  },
+  "knapsack": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3262,
+    "published_fix_rank": 20,
+    "first_pass_rank": 20,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__ < __E1__  ->  __E0__ <= __E1__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/26"
+    ],
+    "lines": {
+     "removed": [
+      "if weight < j:"
+     ],
+     "put_in": [
+      "if weight <= j:"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4512,
+    "published_fix_rank": 30,
+    "first_pass_rank": 30,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__ < __E1__  ->  __E0__ <= __E1__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/26"
+    ],
+    "lines": {
+     "removed": [
+      "if weight < j:"
+     ],
+     "put_in": [
+      "if weight <= j:"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 30,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 4.66
+  },
+  "kth": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3413,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4032,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1437,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 12.62
+  },
+  "lcs_length": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3947,
+    "published_fix_rank": 1055,
+    "first_pass_rank": 143,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __N0__ + 1",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60"
+    ],
+    "lines": {
+     "removed": [
+      "dp[i, j] = dp[i - 1, j] + 1"
+     ],
+     "put_in": [
+      "dp[i, j + 1] = dp[i - 1, j] + 1"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 5937,
+    "published_fix_rank": 710,
+    "first_pass_rank": 129,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __N0__ + 1",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60",
+     "quixbugs/find_in_sorted",
+     "quixbugs/pascal"
+    ],
+    "lines": {
+     "removed": [
+      "dp[i, j] = dp[i - 1, j] + 1"
+     ],
+     "put_in": [
+      "dp[i, j + 1] = dp[i - 1, j] + 1"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 171,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 5.53
+  },
+  "levenshtein": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": false
+   },
+   "usable": true,
+   "asked_through": "the_benchmarks_runner_alone",
+   "budget": 150,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3500,
+    "published_fix_rank": null,
+    "first_pass_rank": 71,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__  ->  __E0__ - 1  [at BinOp.left]",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/48"
+    ],
+    "lines": {
+     "removed": [
+      "return 1 + levenshtein(source[1:], target[1:])"
+     ],
+     "put_in": [
+      "return 1 - 1 + levenshtein(source[1:], target[1:])"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 5390,
+    "published_fix_rank": null,
+    "first_pass_rank": 19,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__  ->  __E0__ - 1  [at BinOp.left]",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/48",
+     "quixbugs/lcs_length",
+     "quixbugs/next_palindrome"
+    ],
+    "lines": {
+     "removed": [
+      "return 1 + levenshtein(source[1:], target[1:])"
+     ],
+     "put_in": [
+      "return 1 - 1 + levenshtein(source[1:], target[1:])"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 73,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 95.11
+  },
+  "lis": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3558,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4414,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1260,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 12.48
+  },
+  "longest_common_subsequence": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2544,
+    "published_fix_rank": 831,
+    "first_pass_rank": 831,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__  ->  __E0__[1:]",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/62"
+    ],
+    "lines": {
+     "removed": [
+      "return a[0] + longest_common_subsequence(a[1:], b)"
+     ],
+     "put_in": [
+      "return a[0] + longest_common_subsequence(a[1:], b[1:])"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3959,
+    "published_fix_rank": 1211,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1085,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 57.38
+  },
+  "max_sublist_sum": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2051,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3040,
+    "published_fix_rank": null,
+    "first_pass_rank": 637,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__  ->  max(__F0__, __E0__)  [at Assign.value]",
+    "openness": "from_the_place",
+    "voted_by": [
+     "quixbugs/lis"
+    ],
+    "lines": {
+     "removed": [
+      "max_ending_here = max_ending_here + x"
+     ],
+     "put_in": [
+      "max_ending_here = max(x, max_ending_here + x)"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1170,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 10.09
+  },
+  "mergesort": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4324,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 5711,
+    "published_fix_rank": null,
+    "first_pass_rank": 229,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __N0__[1:]  [at Call.args]",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/62",
+     "quixbugs/longest_common_subsequence"
+    ],
+    "lines": {
+     "removed": [
+      "if len(arr) == 0:"
+     ],
+     "put_in": [
+      "if len(arr[1:]) == 0:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1044,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 9.19
+  },
+  "minimum_spanning_tree": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3815,
+    "published_fix_rank": null,
+    "first_pass_rank": 507,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __F0__",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76"
+    ],
+    "lines": {
+     "removed": [
+      "for node in group_by_node[v]:"
+     ],
+     "put_in": [
+      "for node in group_by_node[u]:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4839,
+    "published_fix_rank": null,
+    "first_pass_rank": 507,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __N0__  ->  __F0__",
+    "openness": "from_the_place",
+    "voted_by": [
+     "Python/102",
+     "Python/106",
+     "Python/109",
+     "Python/13",
+     "Python/37",
+     "Python/59",
+     "Python/6",
+     "Python/76",
+     "quixbugs/bucketsort",
+     "quixbugs/hanoi"
+    ],
+    "lines": {
+     "removed": [
+      "for node in group_by_node[v]:"
+     ],
+     "put_in": [
+      "for node in group_by_node[u]:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 657,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 6.72
+  },
+  "next_palindrome": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4145,
+    "published_fix_rank": 121,
+    "first_pass_rank": 121,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: len(__N0__)  ->  len(__N0__) - 1  [at BinOp.left]",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/48"
+    ],
+    "lines": {
+     "removed": [
+      "return [1] + len(digit_list) * [0] + [1]"
+     ],
+     "put_in": [
+      "return [1] + (len(digit_list) - 1) * [0] + [1]"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6386,
+    "published_fix_rank": 127,
+    "first_pass_rank": 127,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: len(__N0__)  ->  len(__N0__) - 1  [at BinOp.left]",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/48",
+     "quixbugs/lcs_length"
+    ],
+    "lines": {
+     "removed": [
+      "return [1] + len(digit_list) * [0] + [1]"
+     ],
+     "put_in": [
+      "return [1] + (len(digit_list) - 1) * [0] + [1]"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 143,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 5.18
+  },
+  "next_permutation": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4120,
+    "published_fix_rank": null,
+    "first_pass_rank": 14,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__ < __E1__  ->  __E0__ > __E1__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/30",
+     "Python/35"
+    ],
+    "lines": {
+     "removed": [
+      "if perm[j] < perm[i]:"
+     ],
+     "put_in": [
+      "if perm[j] > perm[i]:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6299,
+    "published_fix_rank": null,
+    "first_pass_rank": 20,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__ < __E1__  ->  __E0__ > __E1__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/30",
+     "Python/35"
+    ],
+    "lines": {
+     "removed": [
+      "if perm[j] < perm[i]:"
+     ],
+     "put_in": [
+      "if perm[j] > perm[i]:"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 20,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 4.33
+  },
+  "pascal": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3573,
+    "published_fix_rank": 6,
+    "first_pass_rank": 6,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E1__, __E2__ + 1)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60"
+    ],
+    "lines": {
+     "removed": [
+      "for c in range(0, r):"
+     ],
+     "put_in": [
+      "for c in range(0, r + 1):"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4582,
+    "published_fix_rank": 5,
+    "first_pass_rank": 5,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E1__, __E2__ + 1)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/103",
+     "Python/107",
+     "Python/15",
+     "Python/163",
+     "Python/18",
+     "Python/43",
+     "Python/60",
+     "quixbugs/find_in_sorted"
+    ],
+    "lines": {
+     "removed": [
+      "for c in range(0, r):"
+     ],
+     "put_in": [
+      "for c in range(0, r + 1):"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 6,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 2.15
+  },
+  "possible_change": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2332,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3267,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1258,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 15.88
+  },
+  "powerset": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 1517,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 2234,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1310,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 6.53
+  },
+  "quicksort": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3157,
+    "published_fix_rank": null,
+    "first_pass_rank": 18,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__ < __E1__  ->  __E0__ <= __E1__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/26"
+    ],
+    "lines": {
+     "removed": [
+      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+     ],
+     "put_in": [
+      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4856,
+    "published_fix_rank": null,
+    "first_pass_rank": 10,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__ < __E1__  ->  __E0__ <= __E1__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/26",
+     "quixbugs/knapsack"
+    ],
+    "lines": {
+     "removed": [
+      "lesser = quicksort([x for x in arr[1:] if x < pivot])"
+     ],
+     "put_in": [
+      "lesser = quicksort([x for x in arr[1:] if x <= pivot])"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 18,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 3.03
+  },
+  "reverse_linked_list": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 1214,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 1693,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 2
+   },
+   "candidates_run": 1299,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 22.42
+  },
+  "rpn_eval": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3237,
+    "published_fix_rank": null,
+    "first_pass_rank": 48,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E2__, __E1__)",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/125"
+    ],
+    "lines": {
+     "removed": [
+      "return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](a, b)"
+     ],
+     "put_in": [
+      "return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](b, a)"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4447,
+    "published_fix_rank": null,
+    "first_pass_rank": 14,
+    "repaired": true,
+    "is_the_published_fix": false,
+    "operator": "replace: __E0__(__E1__, __E2__)  ->  __E0__(__E2__, __E1__)  [at Return.value]",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/125",
+     "quixbugs/gcd"
+    ],
+    "lines": {
+     "removed": [
+      "return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](a, b)"
+     ],
+     "put_in": [
+      "return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](b, a)"
+     ]
+    },
+    "on_inputs_the_tests_do_not_have": null
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 48,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 5.41
+  },
+  "shortest_path_length": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4706,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6973,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1253,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 11.52
+  },
+  "shortest_path_lengths": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4133,
+    "published_fix_rank": 107,
+    "first_pass_rank": 107,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: (__N0__, __N1__)  ->  (__N1__, __N0__)",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/87"
+    ],
+    "lines": {
+     "removed": [
+      "length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k])"
+     ],
+     "put_in": [
+      "length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[k, j])"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 5233,
+    "published_fix_rank": 141,
+    "first_pass_rank": 141,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: (__N0__, __N1__)  ->  (__N1__, __N0__)",
+    "openness": "names_open",
+    "voted_by": [
+     "Python/87"
+    ],
+    "lines": {
+     "removed": [
+      "length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[j, k])"
+     ],
+     "put_in": [
+      "length_by_path[i, j] = min(length_by_path[i, j], length_by_path[i, k] + length_by_path[k, j])"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 141,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 5.47
+  },
+  "shortest_paths": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3063,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3877,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1282,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 6.76
+  },
+  "shunting_yard": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 4181,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 6316,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 2
+   },
+   "candidates_run": 1246,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 16.72
+  },
+  "sieve": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2114,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3079,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1252,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 6.4
+  },
+  "sqrt": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 1706,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 2472,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1294,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 229.77
+  },
+  "subsequences": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 3701,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 5514,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1221,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 9.57
+  },
+  "to_base": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2346,
+    "published_fix_rank": 47,
+    "first_pass_rank": 47,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__ + __E1__  ->  __E1__ + __E0__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/65"
+    ],
+    "lines": {
+     "removed": [
+      "result = result + alphabet[i]"
+     ],
+     "put_in": [
+      "result = alphabet[i] + result"
+     ]
+    }
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 3616,
+    "published_fix_rank": 67,
+    "first_pass_rank": 67,
+    "repaired": true,
+    "is_the_published_fix": true,
+    "operator": "replace: __E0__ + __E1__  ->  __E1__ + __E0__",
+    "openness": "untouched_open",
+    "voted_by": [
+     "Python/65"
+    ],
+    "lines": {
+     "removed": [
+      "result = result + alphabet[i]"
+     ],
+     "put_in": [
+      "result = alphabet[i] + result"
+     ]
+    }
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 67,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 8.41
+  },
+  "topological_ordering": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2907,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4506,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 1
+   },
+   "candidates_run": 1254,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 9.83
+  },
+  "wrap": {
+   "benchmark_holds": {
+    "buggy_fails_in_the_benchmarks_runner": true,
+    "published_fix_passes_in_the_benchmarks_runner": true,
+    "buggy_fails_in_the_screen": true,
+    "published_fix_passes_in_the_screen": true
+   },
+   "usable": true,
+   "asked_through": "the_screen_then_the_benchmarks_runner",
+   "budget": 1000,
+   "another_benchmark": {
+    "lessons": 164,
+    "candidates": 2920,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "all_other_fixes": {
+    "lessons": 203,
+    "candidates": 4291,
+    "published_fix_rank": null,
+    "first_pass_rank": null,
+    "repaired": false
+   },
+   "own_fix_shown": {
+    "rank_among_its_own_candidates": 2
+   },
+   "candidates_run": 1212,
+   "screen_said_pass_runner_said_no": 0,
+   "seconds": 28.72
+  }
+ },
+ "model_calls": 0,
+ "incremental_spend_usd": 0
+}

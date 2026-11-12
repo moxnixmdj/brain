@@ -1,0 +1,968 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "checks_of_the_tests": {
+  "seeded_faults_on_the_lines_changed_since_run_4": {
+   "after_new_assertions": "all changes on the eight lines concerned were tried again: 12 of the 20 unnoticed ones are now noticed; 10 known unnoticed changes remain (8 from the first draw, 2 more found on a re-tried line)",
+   "browser_bridge": "not covered by seeded faults (JavaScript); its new behaviour is pinned by 12 new real-browser tests",
+   "how": "one small change at a place drawn at random (a comparison turned round, and/or exchanged, a number one more, a condition forced), tests run without the real pages",
+   "learner": {
+    "noticed": 55,
+    "places": 66,
+    "tried": 66
+   },
+   "not_tried": "36 places in the tool",
+   "the_10_that_remain": "9 change nothing a test could see (a tier number, a value overwritten before use, a refusal reached either way, a length guard implied by the range check, twice, a rank compared only with itself, text expressions computed for a step that never uses them, an unused return value, a flush flag); 1 is in the command-line entry, which the tests do not run",
+   "the_144_seeded_faults_reported_for_run_4": "their scripts were lost with the sandbox and were not re-run on this code",
+   "tool": {
+    "noticed": 81,
+    "places": 126,
+    "tried": 90
+   }
+  },
+  "tests": "216 pass, of which 27 need the downloaded pages and a browser"
+ },
+ "counts": {
+  "at_18_of_20_or_more_from_one_success": {
+   "now_on_seeds_1040_to_1059": [
+    "button-delay",
+    "click-button-sequence",
+    "click-color",
+    "click-test-2",
+    "click-test-transfer",
+    "drag-box",
+    "highlight-text",
+    "highlight-text-2"
+   ],
+   "run_4_on_seeds_1020_to_1039": []
+  },
+  "at_18_of_20_or_more_with_three_practice_instances": {
+   "now_on_seeds_1040_to_1059": [
+    "button-delay",
+    "click-button-sequence",
+    "click-color",
+    "click-test-2",
+    "click-test-transfer",
+    "drag-box",
+    "drag-circle",
+    "drag-single-shape",
+    "highlight-text",
+    "highlight-text-2"
+   ],
+   "run_4_on_seeds_1020_to_1039": []
+  },
+  "first_success_found": {
+   "newly": [
+    "button-delay",
+    "click-menu",
+    "drag-box",
+    "drag-circle",
+    "drag-items",
+    "drag-items-grid",
+    "drag-single-shape",
+    "highlight-text",
+    "highlight-text-2"
+   ],
+   "now": 15,
+   "run_4": 6
+  },
+  "first_success_found_but_below_18_of_20_even_with_practice": {
+   "click-menu": {
+    "one_success": 3,
+    "with_practice": 9
+   },
+   "click-menu-2": {
+    "one_success": 10,
+    "with_practice": 10
+   },
+   "drag-items": {
+    "one_success": 10,
+    "with_practice": 10
+   },
+   "drag-items-grid": {
+    "one_success": 3,
+    "with_practice": 8
+   },
+   "drag-shapes": {
+    "one_success": 5,
+    "with_practice": 6
+   }
+  },
+  "no_first_success_within_600_actions": [
+   "drag-cube",
+   "drag-shapes-2",
+   "drag-sort-numbers",
+   "enter-time",
+   "form-sequence",
+   "sign-agreement",
+   "use-slider",
+   "use-slider-2"
+  ],
+  "pages_in_the_pilot": 23
+ },
+ "environment": {
+  "browser": "HeadlessChrome/153.0.8010.0",
+  "chromium_package": "153.0.0",
+  "code_sha256": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "c418b74861f99fd4e15a869b64ff044d180e5976ecd99b564a921b4ede1c6dbe",
+   "explorer": "a9b99b9ed1c4e790880d1ce9534ee14b9d5d8ae0e6b2d1c18e9218bd0b49dd53",
+   "tool": "953e15e746b409e578da4903eb3baa669aae987e17b84422bc9cc637500cd11d",
+   "version_space_learner": "73aef38b18534d9100e895b027ee8c300643c9265f52f0d1fb9ba6b4cda6bed9"
+  },
+  "epoch_ms": 1767225600000,
+  "html_tree_sha256": "d5693b72ec82bae9041e40f5c9ae3c3c50201849d10c92ea6439967fd73529c8",
+  "node": "v22.22.3",
+  "puppeteer_core": "25.17.0",
+  "python": "3.11.2",
+  "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
+  "step_ms": 500,
+  "substrate": "headless Chromium: real layout and hit-testing, a click is a mouse press on a part of the element that shows, typing is key events, and the hand can also hover, drag, nudge, press three times and wait; virtual clock; one small fixed window",
+  "substrate_name": "chromium",
+  "task_pages": 130,
+  "viewport": [
+   480,
+   360
+  ]
+ },
+ "generated_utc": "2026-11-11T20:23:07Z",
+ "incremental_spend_usd": 0,
+ "instrument_corrections": [
+  {
+   "cause": "when an episode ends the page covers itself with START and a press on that cover begins a new, different episode; the first press failed the episode, the second began another, the third happened to be right in that one, and the reward read back belonged to the second",
+   "checked_by": [
+    "a real-browser test on that page and seed",
+    "on all 130 pages, seed 0, up to 6 pressable elements each: 582 pairs of one press against three presses, none where one fails and three succeed"
+   ],
+   "earlier_runs_affected": "none: before today every action was at most one press, and after an episode ends the bridge refuses further actions",
+   "fix": "in the browser bridge only `reset` begins an episode; the cover takes no press",
+   "how_it_showed": "the first pilot reported a first success on sign-agreement that was three fast presses on Cancel, where one press on Cancel fails",
+   "pages_whose_first_pilot_result_was_false": [
+    "sign-agreement",
+    "use-slider"
+   ],
+   "what": "A FALSE SUCCESS, made by the new three-press action and removed before any number was kept"
+  },
+  {
+   "what": "the price of moving the pointer onto an element the instruction names was lowered to an eighth of any other new action",
+   "what_it_can_change": "only which first success the search finds and how soon; it has no part in scoring",
+   "why": "click-menu had no first success on the demonstration instance within 600 actions: a menu inside a menu needs two such moves, and they were priced as two of the dearest actions"
+  }
+ ],
+ "not_done": [
+  "the full run on all 130 pages with this code",
+  "one memory holding every program, with this code",
+  "an independent re-run by anyone else",
+  "the practice regression on use-autocomplete reported with run 4"
+ ],
+ "pages_not_in_this_pilot_but_in_the_first": {
+  "no_first_success_within_600_actions": [
+   "chase-circle",
+   "draw-circle",
+   "draw-line",
+   "hot-cold"
+  ],
+  "note": "ran once, before the two corrections above; all four ended without a first success, which neither correction can turn into one being missed by a false success"
+ },
+ "parameters": {
+  "acquisition_action_budget": 600,
+  "arms": [
+   "random",
+   "verbatim",
+   "existing_compiler",
+   "version_space",
+   "version_space_blind",
+   "version_space_practice"
+  ],
+  "demonstration_seed": 0,
+  "exploration_time_limit_ms": 3600000,
+  "first_success_search": "guided",
+  "max_episode_steps": 30,
+  "practice_seeds": [
+   500,
+   501,
+   502
+  ],
+  "split_rule": "sha256(task name) mod 4 == 0 is development, the rest held out",
+  "test_seeds": [
+   1040,
+   1041,
+   1042,
+   1043,
+   1044,
+   1045,
+   1046,
+   1047,
+   1048,
+   1049,
+   1050,
+   1051,
+   1052,
+   1053,
+   1054,
+   1055,
+   1056,
+   1057,
+   1058,
+   1059
+  ]
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "read_this_first": "A PILOT, NOT A RUN OF THE BENCHMARK: 23 of the 130 MiniWoB++ pages, chosen by the producer because the change touches them (pages that cannot be done by pressing and typing alone, the three pages hit by the press-point fault, and click-color). The other 107 pages were NOT re-run with this code, so no total over 130 exists for it. Same browser, same search budget (600 actions), same success rule (the page's full reward), one try per instance, 20 instances per page, seeds 1040-1059. What changed since run 4 (V4): (1) a press lands on a part of the element that shows, not on the middle of its box whatever covers it; (2) the hand can also move the pointer onto an element, press three times fast, take hold of an element and let go of it over another, carry one a short way up/down/left/right, and let the seconds the instruction speaks of go by; the guided search tries those only after everything pressing and typing reach; (3) the instruction is read the way the benchmark's own environment reads it for an agent (core.getUtterance), which on one page turns a colour sample into the colour's name; (4) an element reports the colour the page states on it, and text shown as selected is part of what is seen. The learner itself gained only: steps of the new kinds, a word a step carries (direction, seconds) read from the instruction like typed text, and colour as a property an instruction can name. RESULT ON THESE 23 PAGES: a first success was found on 15 (run 4: 6); from one success 8 pages are at 18 of 20 or more (run 4, on its own unseen instances: 0), with three practice instances 10 (run 4: 0). The comparison is across different unseen instances of the same pages (1020-1039 then, 1040-1059 now); the skills run 4 kept were lost with the sandbox and could not be scored on the new ones. 8 of the 23 pages still have no first success, and 5 have one but stay below 18 of 20 even with practice. No task is held out. Before the full run the producer looked at these instances twice: at the wording of a handful of instructions while building the actions, and at the per-instance outcomes of a first pilot on the same seeds. After that first pilot two things were changed, neither in the learner: see instrument_corrections.",
+ "schema": "BRAIN_MINIWOB_WHOLE_HAND_PILOT_V1",
+ "tasks": [
+  {
+   "first_success": [
+    "click@3",
+    "wait=3",
+    "click@4"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Click button ONE, wait 3 seconds, then click button TWO.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000000000",
+    "verbatim": "11111111011000110001",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "11111111011000110001",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 51,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 0,
+    "verbatim": 13,
+    "version_space": 20,
+    "version_space_blind": 13,
+    "version_space_practice": 20
+   },
+   "task": "button-delay"
+  },
+  {
+   "first_success": [
+    "click@3",
+    "click@4"
+   ],
+   "in_run_4": {
+    "stage": "DEMONSTRATED",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": 16,
+     "version_space_practice": 16
+    }
+   },
+   "instruction_of_the_first_success": "Click button ONE, then click button TWO.",
+   "per_instance": {
+    "existing_compiler": "11111111111111111111",
+    "random": "00000000001001000000",
+    "verbatim": "11111111111111111111",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "11111111111111111111",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 5,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 20,
+    "random": 2,
+    "verbatim": 20,
+    "version_space": 20,
+    "version_space_blind": 20,
+    "version_space_practice": 20
+   },
+   "task": "click-button-sequence"
+  },
+  {
+   "first_success": [
+    "click@5"
+   ],
+   "in_run_4": {
+    "stage": "DEMONSTRATED",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": 6,
+     "version_space_practice": 6
+    }
+   },
+   "instruction_of_the_first_success": "Click on the white colored box.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "11100010001000110010",
+    "verbatim": "00000000100000110110",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "00000000000000110110",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 1,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 8,
+    "verbatim": 5,
+    "version_space": 20,
+    "version_space_blind": 4,
+    "version_space_practice": 20
+   },
+   "task": "click-color"
+  },
+  {
+   "first_success": [
+    "hover@6",
+    "hover@10",
+    "click@17"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Select Xaviera>Laurie>Melinde",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000011000",
+    "verbatim": "00000000000000000000",
+    "version_space": "00010000000001000001",
+    "version_space_blind": "00000000000000000000",
+    "version_space_practice": "10101000011000011110"
+   },
+   "practice": {
+    "found_by_search": 1,
+    "new_ways": 1,
+    "no_success": 1,
+    "own_success": 1,
+    "practice_instances": 3,
+    "search_actions": 601
+   },
+   "search_actions_spent": 531,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 2,
+    "verbatim": 0,
+    "version_space": 3,
+    "version_space_blind": 0,
+    "version_space_practice": 9
+   },
+   "task": "click-menu"
+  },
+  {
+   "first_success": [
+    "click@3",
+    "click@15"
+   ],
+   "in_run_4": {
+    "stage": "DEMONSTRATED",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": 6,
+     "version_space_practice": 6
+    }
+   },
+   "instruction_of_the_first_success": "Click the \"Menu\" button, and then find and click on the item labeled \"Zoom In\".",
+   "per_instance": {
+    "existing_compiler": "00010101110000100001",
+    "random": "00000000000000101000",
+    "verbatim": "10011001001000100001",
+    "version_space": "10011101111000100001",
+    "version_space_blind": "10011001001000100001",
+    "version_space_practice": "00010101110101100011"
+   },
+   "practice": {
+    "found_by_search": 2,
+    "new_ways": 2,
+    "no_success": 0,
+    "own_success": 1,
+    "practice_instances": 3,
+    "search_actions": 52
+   },
+   "search_actions_spent": 2,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 7,
+    "random": 2,
+    "verbatim": 7,
+    "version_space": 10,
+    "version_space_blind": 7,
+    "version_space_practice": 10
+   },
+   "task": "click-menu-2"
+  },
+  {
+   "first_success": [
+    "click@3"
+   ],
+   "in_run_4": {
+    "stage": "DEMONSTRATED",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": 16,
+     "version_space_practice": 16
+    }
+   },
+   "instruction_of_the_first_success": "Click button ONE.",
+   "per_instance": {
+    "existing_compiler": "11111111111111111111",
+    "random": "11111010000110100110",
+    "verbatim": "11111111111111111111",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "11111111111111111111",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 1,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 20,
+    "random": 11,
+    "verbatim": 20,
+    "version_space": 20,
+    "version_space_blind": 20,
+    "version_space_practice": 20
+   },
+   "task": "click-test-2"
+  },
+  {
+   "first_success": [
+    "click@3"
+   ],
+   "in_run_4": {
+    "stage": "DEMONSTRATED",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": 16,
+     "version_space_practice": 16
+    }
+   },
+   "instruction_of_the_first_success": "Click button ONE.",
+   "per_instance": {
+    "existing_compiler": "11111111111111111111",
+    "random": "00000011110000001000",
+    "verbatim": "11111111111111111111",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "11111111111111111111",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 1,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 20,
+    "random": 5,
+    "verbatim": 20,
+    "version_space": 20,
+    "version_space_blind": 20,
+    "version_space_practice": 20
+   },
+   "task": "click-test-transfer"
+  },
+  {
+   "first_success": [
+    "grab@4",
+    "drop@5",
+    "click@6"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Drag the smaller box so that it is completely inside the larger box.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000000000",
+    "verbatim": "11111111111111111111",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "11111111111111111111",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 111,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 0,
+    "verbatim": 20,
+    "version_space": 20,
+    "version_space_blind": 20,
+    "version_space_practice": 20
+   },
+   "task": "drag-box"
+  },
+  {
+   "first_success": [
+    "grab@4",
+    "drop@5",
+    "click@5"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Drag the circle down then press Submit.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00001000100000000010",
+    "verbatim": "11101111111101100001",
+    "version_space": "11101111111101100001",
+    "version_space_blind": "11101111111101100001",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 1,
+    "new_ways": 1,
+    "no_success": 0,
+    "own_success": 2,
+    "practice_instances": 3,
+    "search_actions": 18
+   },
+   "search_actions_spent": 16,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 3,
+    "verbatim": 14,
+    "version_space": 14,
+    "version_space_blind": 14,
+    "version_space_practice": 20
+   },
+   "task": "drag-circle"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 555,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "drag-cube"
+  },
+  {
+   "first_success": [
+    "grab@18",
+    "drop@5"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Drag Melinde to the 1st position.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000000000",
+    "verbatim": "00001000000000000000",
+    "version_space": "01101111001010000101",
+    "version_space_blind": "00001000000000000000",
+    "version_space_practice": "00011011100011101001"
+   },
+   "practice": {
+    "found_by_search": 3,
+    "new_ways": 2,
+    "no_success": 0,
+    "own_success": 0,
+    "practice_instances": 3,
+    "search_actions": 149
+   },
+   "search_actions_spent": 41,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 0,
+    "verbatim": 1,
+    "version_space": 10,
+    "version_space_blind": 1,
+    "version_space_practice": 10
+   },
+   "task": "drag-items"
+  },
+  {
+   "first_success": [
+    "grab@21",
+    "drop@13"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Drag Lindsay to the center.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000000000",
+    "verbatim": "00000000000000000000",
+    "version_space": "00011001000000000000",
+    "version_space_blind": "00000000000000000000",
+    "version_space_practice": "00011010100001100011"
+   },
+   "practice": {
+    "found_by_search": 2,
+    "new_ways": 2,
+    "no_success": 0,
+    "own_success": 1,
+    "practice_instances": 3,
+    "search_actions": 183
+   },
+   "search_actions_spent": 87,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 0,
+    "verbatim": 0,
+    "version_space": 3,
+    "version_space_blind": 0,
+    "version_space_practice": 8
+   },
+   "task": "drag-items-grid"
+  },
+  {
+   "first_success": [
+    "click@9"
+   ],
+   "in_run_4": {
+    "stage": "DEMONSTRATED",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": 1,
+     "version_space_practice": 1
+    }
+   },
+   "instruction_of_the_first_success": "Drag all circles into the black box.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "10000000000000000000",
+    "verbatim": "10010100011000000000",
+    "version_space": "10010100011000000000",
+    "version_space_blind": "10010100011000000000",
+    "version_space_practice": "00010100011000001001"
+   },
+   "practice": {
+    "found_by_search": 1,
+    "new_ways": 1,
+    "no_success": 2,
+    "own_success": 0,
+    "practice_instances": 3,
+    "search_actions": 1496
+   },
+   "search_actions_spent": 6,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 1,
+    "verbatim": 5,
+    "version_space": 5,
+    "version_space_blind": 5,
+    "version_space_practice": 6
+   },
+   "task": "drag-shapes"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 600,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "drag-shapes-2"
+  },
+  {
+   "first_success": [
+    "grab@4",
+    "drop@5",
+    "click@5"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Drag the item down then press Submit.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00001000100100000000",
+    "verbatim": "11101111011001100011",
+    "version_space": "11101111011001100011",
+    "version_space_blind": "11101111011001100011",
+    "version_space_practice": "11111111111011111111"
+   },
+   "practice": {
+    "found_by_search": 1,
+    "new_ways": 1,
+    "no_success": 0,
+    "own_success": 2,
+    "practice_instances": 3,
+    "search_actions": 19
+   },
+   "search_actions_spent": 16,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 3,
+    "verbatim": 13,
+    "version_space": 13,
+    "version_space_blind": 13,
+    "version_space_practice": 19
+   },
+   "task": "drag-single-shape"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 600,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "drag-sort-numbers"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 600,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "enter-time"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 600,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "form-sequence"
+  },
+  {
+   "first_success": [
+    "triple@3",
+    "click@4"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Highlight the text in the paragraph below and click submit.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000000000",
+    "verbatim": "11111111011010110101",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "11111111111111111111",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 11,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 0,
+    "verbatim": 15,
+    "version_space": 20,
+    "version_space_blind": 20,
+    "version_space_practice": 20
+   },
+   "task": "highlight-text"
+  },
+  {
+   "first_success": [
+    "triple@6",
+    "click@7"
+   ],
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": "Highlight the text in the 3rd paragraph and click submit.",
+   "per_instance": {
+    "existing_compiler": "00000000000000000000",
+    "random": "00000000000000000100",
+    "verbatim": "00101010011010000100",
+    "version_space": "11111111111111111111",
+    "version_space_blind": "00101010011010000110",
+    "version_space_practice": "11111111111111111111"
+   },
+   "practice": {
+    "found_by_search": 0,
+    "new_ways": 0,
+    "no_success": 0,
+    "own_success": 3,
+    "practice_instances": 3,
+    "search_actions": 0
+   },
+   "search_actions_spent": 29,
+   "stage": "DEMONSTRATED",
+   "successes_of_20": {
+    "existing_compiler": 0,
+    "random": 1,
+    "verbatim": 7,
+    "version_space": 20,
+    "version_space_blind": 8,
+    "version_space_practice": 20
+   },
+   "task": "highlight-text-2"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 478,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "sign-agreement"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 600,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "use-slider"
+  },
+  {
+   "first_success": null,
+   "in_run_4": {
+    "stage": "NO_FIRST_SUCCESS_FOUND",
+    "successes_of_20_on_its_unseen_instances_1020_to_1039": {
+     "version_space": null,
+     "version_space_practice": null
+    }
+   },
+   "instruction_of_the_first_success": null,
+   "search_actions_spent": 600,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "task": "use-slider-2"
+  }
+ ],
+ "tasks_sha256": "22ad9748fcc0f22fd5785e76710d7de3041a15ddddde79d08daf026c09de3b90",
+ "what_the_pages_without_a_first_success_need": {
+  "a drag to a place that is not an element (a slider position, a line or circle drawn in empty space)": [
+   "use-slider",
+   "use-slider-2",
+   "form-sequence",
+   "draw-line",
+   "draw-circle"
+  ],
+  "following something that moves, or probing with the pointer": [
+   "chase-circle",
+   "hot-cold"
+  ],
+  "scrolling inside a box": [
+   "sign-agreement"
+  ],
+  "several drags in a row, more than the budget reaches": [
+   "drag-shapes-2",
+   "drag-sort-numbers",
+   "drag-cube"
+  ],
+  "typed text that is not one word of the instruction": [
+   "enter-time"
+  ]
+ }
+}
