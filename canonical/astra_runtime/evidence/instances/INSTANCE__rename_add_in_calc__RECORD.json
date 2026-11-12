@@ -1,0 +1,65 @@
+{
+ "baseline_preserved": true,
+ "baseline_tests": {
+  "errors": [],
+  "failures": [
+   "test_calc.CalcTests.test_twice_uses_add"
+  ],
+  "skipped": [],
+  "tests_run": 2
+ },
+ "capability_id": "python.refactor.rename_symbol.v1",
+ "incremental_spend_usd": 0,
+ "independent_verifier": null,
+ "independently_verified": false,
+ "input_count": 4,
+ "input_digests": {
+  "calc.py": "8ba4b62a58c18892fc83dc472161fc85a4bb2594605b3de81e72b029b4c26120",
+  "test_calc.py": "a90107c236ce0060515910cedb851c589f037329f5dc71b3032ed2405e170008",
+  "test_other.py": "0c98403b841535a205fc85b79a896f66f072b61e37ffaa4e8d14d3cdfdf22bcd",
+  "util.py": "8c7c4e90f25031143dc0d7d3ecdd2665e6d11abbd27efea17785999319beb774"
+ },
+ "kind": "LOCAL_FIXTURE_EXERCISE",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/python_refactor_rename_symbol.py",
+ "module_sha256": "b0f3b3e4e5e0ff2a83612b8e9ead8388f1cb9c250f1fb79190151d46d81f4841",
+ "observed": {
+  "edit_count": 4,
+  "gate": "PASS_BLIND",
+  "status": null
+ },
+ "output_digests": {
+  "calc.py": "825405852a1d316316e92b8c38821ea5bec026ed9262abb0c2a1d2c4aa50ee08",
+  "test_calc.py": "a90107c236ce0060515910cedb851c589f037329f5dc71b3032ed2405e170008",
+  "test_other.py": "0c98403b841535a205fc85b79a896f66f072b61e37ffaa4e8d14d3cdfdf22bcd",
+  "util.py": "e8a7ac0bb65f2dd2b30d60c78b80ce6758c4ac3cc853c002bce169202513a0a2"
+ },
+ "post_edit_tests": {
+  "errors": [],
+  "failures": [
+   "test_calc.CalcTests.test_twice_uses_add"
+  ],
+  "skipped": [],
+  "tests_run": 2
+ },
+ "postcondition": {
+  "call_sites_updated": true,
+  "checked_by": "runner_ast_postcondition",
+  "holds": true,
+  "independent": false,
+  "symbol_defined": true,
+  "symbol_gone": true
+ },
+ "ran_by": "arena-agent-20261112",
+ "replay_result_sha256": "f16f9ff4777e06e8134caafd621380d16ea5adea97e9ff6de888f6fd09840629",
+ "replayed": true,
+ "request": {
+  "module": "calc.py",
+  "new_symbol": "add_v2",
+  "qualname": "add"
+ },
+ "result_sha256": "f16f9ff4777e06e8134caafd621380d16ea5adea97e9ff6de888f6fd09840629",
+ "schema": "PROJECT_BRAIN_INSTANCE_RECORD_V1",
+ "source": "canonical/tests/fixtures/tree_sitter_swe/python",
+ "task_id": "rename_add_in_calc"
+}
