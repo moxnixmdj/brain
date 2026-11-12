@@ -7,7 +7,7 @@
  "route_id": "A_DEAD_IMPORT_THE_EXAMPLE_ALSO_REMOVED_IS_TAKEN_AWAY_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "93f4f6b3754f3ba69d4a9633cdbea0af476517d9",
+ "canonical_base_commit": "a87ab4bd3497a8d74ba82607ebdb204fed93203b",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -109,7 +109,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "93f4f6b3754f3ba69d4a9633cdbea0af476517d9",
+  "canonical_base_commit": "a87ab4bd3497a8d74ba82607ebdb204fed93203b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "AN_EDIT_LEARNED_FROM_AN_EXAMPLE_THAT_SWAPPED_ONE_IMPORT_FOR_ANOTHER_NOW_LEAVES_THE_FILE_AS_THE_PERSON_WOULD__THE_NEW_IMPORT_PRESENT_THE_DEAD_ONE_GONE_AND_NOTHING_ELSE_TOUCHED",
