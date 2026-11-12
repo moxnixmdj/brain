@@ -37,6 +37,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 SCRATCH = ROOT / "canonical/astra_runtime/tmp/test_taught_refactorings"
 needs_sandbox = pytest.mark.skipif(
     compiler._sandbox_for_taught_programs() is None, reason="this machine cannot start the namespace sandbox")
+TAUGHT_SENTENCES = sum(len(lesson["said_as"]) for lesson in teach.LESSONS)
 
 MODULE = '''import math
 
@@ -291,7 +292,7 @@ def test_every_skill_in_the_tracked_bundle_is_one_of_the_programs() -> None:
                 {"kind": "stdout_equals", "expected": lesson["answers"].format(**request)})
             expected[generalized["goal_skeleton"]] = generalized["abstract_steps"]
     assert {skill["goal_skeleton"]: skill["abstract_steps"] for skill in bundle["skills"]} == expected
-    assert bundle["skill_count"] == len(expected) == 4
+    assert bundle["skill_count"] == len(expected) == TAUGHT_SENTENCES
     for skill in bundle["skills"]:
         (step,) = skill["abstract_steps"]
         assert step["layer"] == "confined_python_exec"
@@ -306,13 +307,13 @@ def test_every_skill_in_the_tracked_bundle_is_one_of_the_programs() -> None:
 
 def test_the_tracked_bundle_imports_whole(tmp_path) -> None:
     report = compiler.import_workflow_bundle(teach.BUNDLE, db_path=tmp_path / "skills.sqlite")
-    assert (report["accepted"], report["refused"]) == (4, 0), report
+    assert (report["accepted"], report["refused"]) == (TAUGHT_SENTENCES, 0), report
 
 
 @needs_sandbox
 def test_teaching_again_produces_the_tracked_bundle(tmp_path) -> None:
     report = teach.teach(tmp_path / "bundle.json")
-    assert report["skill_count"] == 4
+    assert report["skill_count"] == TAUGHT_SENTENCES
     assert (tmp_path / "bundle.json").read_bytes() == teach.BUNDLE.read_bytes(), \
         "the tracked bundle is not what the lessons teach: run canonical/tools/teach_actions_v1.py"
 
