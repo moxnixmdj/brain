@@ -24,7 +24,7 @@
  "causal_blocker": "REGISTERED_CAPABILITIES_WHOSE_PRECONDITION_NEITHER_A_CAPABILITY_PRODUCES_NOR_ANY_SENSOR_DECIDES_PLUS_A_MACRO_STORE_THAT_RETAINS_ONLY_SUCCESSES_SO_THE_ONE_EVIDENCE_CLASS_THAT_CAN_NARROW_APPLICABILITY_IS_NEVER_KEPT",
  "expected_parent_change": "THE_FALSE_GENERAL_CLAIM_THAT_ONE_SUCCESSFUL_DEMONSTRATION_TEACHES_AN_ACTION_WHEN_IT_APPLIES_IS_REFUTED_BY_MEASUREMENT_AND_THE_BLIND_PREMISE_SET_IS_NAMED_AS_A_BOUNDED_NON_RESEARCH_WORK_ITEM",
  "expected_parent_frontier_change": "NO_CAPABILITY_CREDIT__NO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__A_NAMED_BLIND_PREMISE_SET_AND_A_NAMED_MISSING_EVIDENCE_CLASS",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::REGISTERED_CAPABILITIES_WHOSE_PRECONDITION_NEITHER_A_CAPABILITY_PRODUCES_NOR_ANY_SENSOR_DECIDES_PLUS_A_MACRO_STORE_THAT_RETAINS_ONLY_SUCCESSES",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::REGISTERED_CAPABILITIES_WHOSE_PRECONDITION_NEITHER_A_CAPABILITY_PRODUCES_NOR_ANY_SENSOR_DECIDES_PLUS_A_MACRO_STORE_THAT_RETAINS_ONLY_SUCCESSES_SO_THE_ONE_EVIDENCE_CLASS_THAT_CAN_NARROW_APPLICABILITY_IS_NEVER_KEPT",
  "falsification_condition": "A_SINGLE_POSITIVE_DEMONSTRATION_IDENTIFIES_A_CONJUNCTIVE_REQUIREMENT_IN_ANY_OF_THE_200_EXACT_CASES__OR_ANY_BLIND_PREMISE_TURNS_OUT_TO_BE_PRODUCED_BY_A_REGISTERED_CAPABILITY_OR_DECIDED_BY_WORLD_PROBE__OR_THE_MACRO_STORE_TURNS_OUT_TO_RETAIN_A_FAILED_ATTEMPT_AS_A_DEMONSTRATION",
  "stop_condition": "MEASUREMENT_AND_PROPERTY_TESTS_PASS__EXISTING_SETTLEMENT_AND_WORLD_PROBE_TESTS_PASS__REPO_INTEGRITY_AND_ADMISSION_GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
  "explicit_user_authorization": "Owner directive 2026-11-12: give the model the most advanced actions, let it experience them once, and it learns them permanently -- is that true or wrong, what is real, and what is the smartest thing to do. Answer by measurement from first principles, kill the dumb ideas before implementing them, use the web. $0 spend, K3=0, zero model dependency, no protected path touched.",
@@ -73,5 +73,153 @@
    "CODING_CURSORBENCH_GE_57_8",
    "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT"
   ]
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "dd67c1f4abc3a53cbb08bf7525474f603a6548e3",
+  "real_outcome": "The claim that one successful demonstration teaches an action's applicability is refuted by measurement over this tree's own version space, and the registry's 11 blind premises are named.",
+  "required_capability": "A retained, symmetric record of attempted capability application -- including the state it was attempted in and the refusal that came back -- because only a negative example can narrow an applicability condition.",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether experiencing each action once yields permanent, reusable capability.",
+   "proxy_goals_deleted": [
+    "counting stored skills as learned capability",
+    "reporting a demonstration count as a measure of learning",
+    "treating a verified success as evidence of the condition that made it possible"
+   ],
+   "surviving_necessity": "Applicability must be identified before an action can be reused safely; the measurement shows one success identifies 0 of 200 conjunctive requirements."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/settlement_v1.py (VersionSpace, settle, expected information gain)",
+    "canonical/runtime/environment_learning_v1.py (state-action transition model)",
+    "canonical/runtime/macro_v1.py (learned plan reuse keyed by goal shape)",
+    "canonical/runtime/world_probe_v1.py (premise perception)",
+    "canonical/runtime/finite_capability_diagnosis.py (select_probe version-space narrowing)"
+   ],
+   "external_existing_routes_checked": [
+    "Action Model Learning with Guarantees (KR 2024): a positive demonstration entails (s,1), only a negative entails (s,0)",
+    "Evolving Agent Interfaces / Agent S4 (arXiv 2610.28601): interfaces plus the knowledge of when to use each",
+    "Adapting the Interface, Not the Model (arXiv 2605.22166): harness-level interventions transfer across 17 backbones"
+   ],
+   "capability_work_deleted": [
+    "no new learner invented -- settlement_v1.VersionSpace is reused unchanged",
+    "no benchmark chased -- the registry and its own sensor are the domain",
+    "no capability registered, no family flipped, no receipt minted"
+   ],
+   "surviving_gap": "No record binds (capability, observed state, outcome). macro_v1 stores only plans whose every step verified, so the system retains successes and discards exactly the negative examples that could narrow applicability."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: with positive-only evidence the conjunction version space keeps the empty requirement alive, so the action is declared applicable in 68% of the states where it fails. This is a property of consistency, not of any implementation.",
+   "delete_bypass_substitute_options": [
+    "DELETE a success-only evidence store: rejected, successes are still needed for sequences",
+    "BYPASS identification by trusting the declared requires: rejected, the 11 blind premises show it cannot always be decided",
+    "SUBSTITUTE a richer grammar for evidence: rejected here, it changes the prior not the evidence class"
+   ],
+   "surviving_causal_blocker": "REGISTERED_CAPABILITIES_WHOSE_PRECONDITION_NEITHER_A_CAPABILITY_PRODUCES_NOR_ANY_SENSOR_DECIDES_PLUS_A_MACRO_STORE_THAT_RETAINS_ONLY_SUCCESSES_SO_THE_ONE_EVIDENCE_CLASS_THAT_CAN_NARROW_APPLICABILITY_IS_NEVER_KEPT"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Make the 11 blind premises decidable -- bounded, verifiable, converts 10 registered capabilities from uninvocable to planable",
+    "2. Retain (capability, observed state, outcome) on refusal in macro_v1 -- the only source of negative demonstrations",
+    "3. Donor-distilled hypothesis language (Program C) only where no declared interface exists"
+   ],
+   "losing_routes_reason": "More environments was measured zero (1525 vs 1525 environment calls, byte-identical) and more exposure per lesson was measured flat (6/7, 6/7, 6/7). Neither changes the evidence class.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The domain is the live registry on this commit and the tree's own perceiver; the constructive half is exhaustive over 200 exact cases so no sampling can flatter it. Fifteen property tests pin the numbers and the lattice invariants."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the assumption that macro_v1's success-only store is a sufficient learning substrate",
+    "the assumption that a declared requires list is always checkable"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "settlement_v1 version-space narrowing",
+    "world_probe_v1 premise perception",
+    "finite_capability_diagnosis.select_probe"
+   ],
+   "fresh_reuse_plan": "Any future claim that experience teaches applicability must exhibit at least one negative demonstration and show the surviving space shrinks to one hypothesis."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "the registry premise census is computed once per run from the live file",
+    "the sensor decision per premise is memoised by the module"
+   ],
+   "search_stop_decision": "Stopped at three candidate mechanisms because the remaining ones were measured already: breadth of environments (0/10), exposure per lesson (6/7 flat), and model-in-producer-path (forbidden).",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "MEASURE_APPLICABILITY_IDENTIFIABILITY_AND_PRICE_THE_REGISTRY_PREMISES",
+   "ADD_MORE_ENVIRONMENTS",
+   "ADD_MORE_EXPOSURE_PER_LESSON",
+   "ALLOW_A_DONOR_AT_RUNTIME"
+  ],
+  "deleted_or_bypassed_paths": [
+   "ADD_MORE_ENVIRONMENTS -- measured byte-identical",
+   "ADD_MORE_EXPOSURE_PER_LESSON -- measured flat 6/7,6/7,6/7",
+   "ALLOW_A_DONOR_AT_RUNTIME -- forbidden by law and does not produce the property"
+  ],
+  "selected_surviving_route": "MEASURE_APPLICABILITY_IDENTIFIABILITY_AND_PRICE_THE_REGISTRY_PREMISES",
+  "why_selected_route_is_fastest_sufficient": "It is the only route that changes what the system can conclude at zero spend and zero model dependency, and it produces a bounded work list (11 premises) rather than another argument.",
+  "expected_parent_level_state_change": "NO_CAPABILITY_CREDIT__NO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__A_NAMED_BLIND_PREMISE_SET_AND_A_NAMED_MISSING_EVIDENCE_CLASS",
+  "stop_condition": "MEASUREMENT_AND_PROPERTY_TESTS_PASS__EXISTING_SETTLEMENT_AND_WORLD_PROBE_TESTS_PASS__REPO_INTEGRITY_AND_ADMISSION_GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "CONTROL_PLANE_PREREQUISITE",
+  "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+  "minimum_prerequisite_for": [
+   "EXTERNAL_RESULT_OR_ACCESS",
+   "UNIVERSAL_SCOPE_AND_COMPOSITION",
+   "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+  ],
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "proof_state_reachability": "PREVENTS_AN_APPLICABILITY_CLAIM_FROM_REACHING_A_REUSE_OR_TRAINING_PATH_WITHOUT_A_RETAINED_NEGATIVE_DEMONSTRATION__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE_SO_POSITIVE_ONLY_EVIDENCE_MUST_NOT_BE_TREATED_AS_COMPLETE",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "P_ONE_SUCCESS_TEACHES_APPLICABILITY",
+   "falsifier_id": "F_NEGATIVE_DEMONSTRATION_IS_THE_ONLY_SOURCE_OF_NECESSITY__CROSS_CHECKED_AGAINST_SETTLEMENT_V1",
+   "decisive_question": "Can a positive demonstration alone remove the empty requirement from the conjunction version space, or identify a capability's applicability condition exactly?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/settlement_v1.py",
+     "git_blob_sha": "8d67cfa35221e16a8252ea70233d6b5c864155ee"
+    }
+   ]
+  }
  }
 }

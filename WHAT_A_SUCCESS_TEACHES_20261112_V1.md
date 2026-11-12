@@ -208,6 +208,30 @@ of which are cheaper and land sooner.
 
 ---
 
+## 4b. One independent cross-check, because the claim is load-bearing
+
+The document's core sentence — *a failure is the only evidence that can remove the empty
+requirement* — is also decidable by a different entry point with a different implementation, so it
+was asked separately rather than taken from this file's own learner:
+
+```
+python3 -c "from canonical.runtime.settlement_v1 import *; ..."
+    VersionSpace over the same conjunction space, one success on {f1,f2}:
+        before           32 hypotheses, entropy 5.00 bits
+        after            4 hypotheses   ("", "f1", "f2", "f1&f2")
+        empty still live True
+    then one FAILURE on {}:
+        survivors        3  ("f1","f2","f1&f2")
+        empty still live False
+```
+
+`settlement_v1.VersionSpace` is the module the *production* rule store and the scope learner use.
+It reproduces the result from the other direction: a positive demonstration prunes 5→4 and leaves
+`""` (needs nothing) standing; a single negative demonstration is what deletes it. Two independent
+implementations, one claim, no disagreement — and the cross-check is recorded in the intent's
+`v22_prewrite_admission` tournament as its counterexample receipt, so a future reader can re-run the
+falsifier rather than trust this paragraph.
+
 ## 5. Receipts
 
 ```
