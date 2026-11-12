@@ -1318,6 +1318,8 @@ class AwakeAgencyDaemon:
         self._calibrated_rule_ids = calibrated_set
         out: list[dict[str, Any]] = []
         for rule in self.skill_store.lookup_rules("python"):
+            if rule.get("state") not in (None, "ACTIVE"):
+                continue
             sid = str(rule.get("skill_id") or "")
             if not sid or sid in calibrated_set or rule.get("learned_scope"):
                 continue
