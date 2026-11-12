@@ -5,16 +5,16 @@ Nobody writes the change down as a program.  This action works the change out fr
 rewrite rules, and then makes the same change in a third file.
 
 How a rule is worked out.  Every place where the two example files differ is found, down to the
-smallest expression, keyword argument or one-line statement that holds the difference.  Places that
-were changed the same way are put together, and a part of the code becomes a blank (``?1``, ``?2``)
-only where two of those places differ from each other.  A rule therefore never says more than the
-example shows: one changed place gives a rule for exactly that code; two places that differ in their
-arguments give a rule for any arguments; two places in different kinds of statement give a rule that
-no longer cares about the statement.  A blank keeps whatever expression stood there.
+smallest expression, keyword argument or one-line statement that holds the difference.  That piece
+of code, and what it became, is the rule.  Places that were changed the same way are put together,
+and a part of the code becomes a blank (``?1``, ``?2``) only where two of those places differ from
+each other.  A blank keeps whatever expression stood there.
 
-What the example must also show.  Code the example left alone is evidence too: a rule that would
-change something the example did not change is not accepted.  Before the third file is touched, the
-rules are run on the example's first file and must produce its second file.
+Code the example left alone is evidence too.  A rule that would also change something the example
+did not change, or would change it another way, is not accepted; more of the surrounding code is then
+taken into the rule, up to the whole one-line statement, until the rule fits the changed places only.
+Before the third file is touched, the rules are run on the example's first file and must produce its
+second file.
 
 Refused, and nothing is written:
 
@@ -23,8 +23,10 @@ Refused, and nothing is written:
 * a changed place assigns different names than before, or reads a variable that exists only inside
   the example's function: such a change works only together with other changes (a rename does), so
   repeating it one place at a time would leave half of it undone;
-* the new code uses a name the file to edit does not define, import or receive as a parameter;
-* the same code was changed in one place of the example and left alone in another;
+* after the edit, the file would read a name it does not define, import or receive as a parameter, or
+  would still read a name whose import the edit took away;
+* the same code was changed in one place of the example and left alone, or changed another way, in
+  another;
 * nothing in the file to edit has the form the example changed;
 * two places to change overlap, or a comment inside a changed place would be lost;
 * the edited text does not parse to exactly the tree intended.
@@ -32,8 +34,9 @@ Refused, and nothing is written:
 A change of a bare name or a bare number is never a rule by itself; it is kept together with the
 expression or statement around it.  Renaming is a different action, which looks at scopes.
 
-``import`` lines the example added or removed at the top of the file are not repeated.  They are read
-as what the new code needs: the file to edit must already provide those names.
+An ``import`` line at the top of the file that the example changed in place (same module, other
+names) is repeated like any other one-line statement.  ``import`` lines the example added or removed
+are not repeated: they are read as what the new code needs, and the file to edit must provide it.
 
 This repeats a change.  It does not check that the change is right for the code it is repeated on.
 
@@ -111,6 +114,24 @@ def units(tree):
             found.append(node)
         stack.extend(reversed(list(children(node))))
     return found
+
+
+def tightness(node):
+    """How tightly an expression holds together.  A looser one needs brackets where a tighter one stood."""
+    if isinstance(node, ast.BoolOp):
+        return 2 if isinstance(node.op, ast.Or) else 3
+    if isinstance(node, ast.UnaryOp):
+        return 4 if isinstance(node.op, ast.Not) else 12
+    if isinstance(node, ast.Compare):
+        return 5
+    if isinstance(node, ast.BinOp):
+        return {ast.BitOr: 6, ast.BitXor: 7, ast.BitAnd: 8, ast.LShift: 9, ast.RShift: 9, ast.Add: 10, ast.Sub: 10,
+                ast.Pow: 13}.get(type(node.op), 11)
+    if isinstance(node, ast.Await):
+        return 14
+    if isinstance(node, ATOMS):
+        return 15
+    return 1 if isinstance(node, (ast.IfExp, ast.Lambda)) else 0
 
 
 def too_small(node):
@@ -213,6 +234,13 @@ class Text:
                             + [extra for extra in (given.vararg, given.kwarg) if extra]}:
                     return True
         return False
+
+    def inside_operator(self, node):
+        """Is `node` an operand, or the thing a call, attribute or subscript is taken from?"""
+        parent = self.above.get(id(node))
+        return (isinstance(parent, (ast.BinOp, ast.UnaryOp, ast.BoolOp, ast.Compare, ast.Await, ast.Starred, ast.IfExp))
+                or (isinstance(parent, (ast.Attribute, ast.Subscript)) and parent.value is node)
+                or (isinstance(parent, ast.Call) and parent.func is node))
 
     def comments(self):
         """Byte positions of every comment."""
@@ -349,12 +377,12 @@ def fits(pattern, value, bound):
 
 
 def cut_at_blanks(pattern, node, text):
-    """The text of `node` as a list of written text and blank numbers, in order."""
+    """The text of `node` as a list of written text and blank numbers, in order, and how much room each blank has."""
     spots = []
 
     def find(part, value):
         if part[0] == "?":
-            spots.append((text.span(value), part[1]))
+            spots.append((text.span(value), part[1], tightness(value) if text.inside_operator(value) else 0))
         elif part[0] == "N" and isinstance(value, ast.AST):
             for name, inner in part[2]:
                 find(inner, getattr(value, name, None))
@@ -365,10 +393,10 @@ def cut_at_blanks(pattern, node, text):
     find(pattern, node)
     start, end = text.span(node)
     pieces, at = [], start
-    for (first, last), blank in sorted(spots):
+    for (first, last), blank, _ in sorted(spots):
         pieces += [text.raw[at:first].decode("utf-8"), blank]
         at = last
-    return pieces + [text.raw[at:end].decode("utf-8")]
+    return pieces + [text.raw[at:end].decode("utf-8")], [room for _, _, room in sorted(spots)]
 
 
 class Rule:
@@ -376,7 +404,7 @@ class Rule:
 
     def __init__(self, kind, pattern, template, shown, pieces, pairs):
         self.kind, self.pattern, self.template = kind, pattern, template
-        self.shown, self.pieces, self.pairs = shown, pieces, pairs
+        (self.shown, _), (self.pieces, self.room), self.pairs = shown, pieces, pairs
         self.lines = sorted(before.lineno for before, _ in pairs)
         self.needs = set()               # names the new code reads that the old code did not
         self.own = set()                 # names the new code binds for itself
@@ -393,7 +421,7 @@ class Rule:
         return "%s -> %s" % (written(self.shown), written(self.pieces))
 
 
-def rule_at(pairs, old, new, old_units):
+def rule_at(pairs, old, new, changed):
     """The rule these (before, after) pairs show at one level, or None when they do not show one rule."""
     unique = list({id(before): (before, after) for before, after in pairs}.values())
     blanks = {}
@@ -405,18 +433,33 @@ def rule_at(pairs, old, new, old_units):
         return None                      # the new code holds something that varies and was not copied from the old
     if blanks_in(pattern) and not names_something(pattern):
         return None                      # all blanks: it would fit any code of that outline
-    changed = {id(before) for before, _ in unique}
-    if {id(node) for node in old_units if fits(pattern, node, {})} != changed:
-        return None                      # it would also change code the example left alone
+    for node in changed.candidates.get(pattern[1], ()):
+        bound, again = {}, {}
+        if not fits(pattern, node, bound):
+            continue
+        became = changed.into.get(id(node))
+        if (became is None or not fits(template, became, again)
+                or any(shape(again[blank], ctx=False) != shape(bound[blank], ctx=False) for blank in again)):
+            return None                  # it would change code the example left alone, or change it differently
     before, after = unique[0]
     return Rule(kind_of(before), pattern, template, cut_at_blanks(pattern, before, old),
                 cut_at_blanks(template, after, new), unique)
 
 
-def rule_for(group, old, new, old_units):
-    """The rule with the most surrounding code that the whole group shows."""
-    for level in range(min(len(levels) for levels in group) - 1, -1, -1):
-        rule = rule_at([levels[level] for levels in group], old, new, old_units)
+class Changed:
+    """What the example changed: every unit of its first file by kind, and what each changed unit became."""
+
+    def __init__(self, tree, places):
+        self.candidates = {}
+        for node in units(tree):
+            self.candidates.setdefault(type(node).__name__, []).append(node)
+        self.into = {id(before): after for levels in places for before, after in levels}
+
+
+def rule_for(group, old, new, changed):
+    """The rule about the smallest pieces of code that the example itself does not contradict."""
+    for level in range(min(len(levels) for levels in group)):
+        rule = rule_at([levels[level] for levels in group], old, new, changed)
         if rule is not None:
             return rule
     return None
@@ -427,7 +470,8 @@ def stands_alone(rule, new):
     for before, after in rule.pairs:
         assigned_before, read_before = names_of(before)
         assigned_after, read_after = names_of(after)
-        if assigned_before != assigned_after:
+        if assigned_before != assigned_after and not (is_import(before) and is_import(after)
+                                                      and isinstance(new.above.get(id(after)), ast.Module)):
             raise Refused("line %d of the example changes which names are assigned (%s); that works only together "
                           "with other changes, as in a rename, and cannot be repeated one place at a time"
                           % (before.lineno, ", ".join(sorted(assigned_before ^ assigned_after))))
@@ -453,37 +497,64 @@ def stands_alone(rule, new):
             rule.own |= {one.arg for one in ast.walk(part.args) if isinstance(one, ast.arg)}
 
 
+def import_changes(old_tree, new_tree):
+    """Take changed top-level import lines out of both trees.
+
+    Returns (pairs changed in place, shapes only the old file has, shapes only the new file has).  A line
+    counts as changed in place when both files import from the same module; any other difference is a
+    line that was added or removed.
+    """
+    was = {shape(statement) for statement in old_tree.body if is_import(statement)}
+    now = {shape(statement) for statement in new_tree.body if is_import(statement)}
+    gone = [statement for statement in old_tree.body if is_import(statement) and shape(statement) not in now]
+    came = [statement for statement in new_tree.body if is_import(statement) and shape(statement) not in was]
+    old_tree.body = [statement for statement in old_tree.body if not any(statement is one for one in gone)]
+    new_tree.body = [statement for statement in new_tree.body if not any(statement is one for one in came)]
+    pairs = []
+    for before in list(gone):
+        for after in came:
+            if (isinstance(before, ast.ImportFrom) and isinstance(after, ast.ImportFrom)
+                    and (before.module, before.level) == (after.module, after.level)):
+                pairs.append((before, after))
+                gone.remove(before)
+                came.remove(after)
+                break
+    return pairs, {shape(statement) for statement in gone}, {shape(statement) for statement in came}
+
+
+def without_imports(tree, shapes):
+    return [shape(statement) for statement in tree.body if not (is_import(statement) and shape(statement) in shapes)]
+
+
 def learn(before_text, after_text):
     """The rules that turn the example's first file into its second."""
     old, new = Text(before_text, "the example's first file"), Text(after_text, "the example's second file")
-    # Import lines added or removed at the top are not places to repeat; they show what the new code needs.
-    was = {shape(statement) for statement in old.tree.body if is_import(statement)}
-    now = {shape(statement) for statement in new.tree.body if is_import(statement)}
-    old.tree.body = [statement for statement in old.tree.body if not (is_import(statement) and shape(statement) not in now)]
-    new.tree.body = [statement for statement in new.tree.body if not (is_import(statement) and shape(statement) not in was)]
-    if shape(old.tree) == shape(new.tree):
-        raise Refused("the two example files hold the same code")
-    old_units = units(old.tree)
+    whole_old, whole_new = list(old.tree.body), list(new.tree.body)
+    imports, only_old, only_new = import_changes(old.tree, new.tree)
+    if shape(old.tree) == shape(new.tree) and not imports:
+        raise Refused("the two example files hold the same code" + (
+            ", apart from import lines that were added or removed" if only_old or only_new else ""))
+    places = places_of(old.tree, new.tree) + [[pair] for pair in imports]
+    old.tree.body, new.tree.body = whole_old, whole_new
+    changed = Changed(old.tree, places)
     groups = []
-    for levels in places_of(old.tree, new.tree):
+    for levels in places:
         for group in groups:
-            if rule_for(group + [levels], old, new, old_units) is not None:
+            if rule_for(group + [levels], old, new, changed) is not None:
                 group.append(levels)
                 break
         else:
             groups.append([levels])
     rules = []
     for group in groups:
-        rule = rule_for(group, old, new, old_units)
+        rule = rule_for(group, old, new, changed)
         if rule is None:
-            raise Refused("line %d of the example was changed, but the same code was left alone elsewhere in the example"
-                          % group[0][0][0].lineno)
+            raise Refused("line %d of the example was changed, but the same code was left alone, or changed "
+                          "another way, elsewhere in the example" % group[0][0][0].lineno)
         stands_alone(rule, new)
         rules.append(rule)
     replayed, _ = rewrite(rules, before_text, "the example's first file", check_names=False)
-    again = ast.parse(replayed)
-    again.body = [statement for statement in again.body if not (is_import(statement) and shape(statement) not in now)]
-    if shape(again) != shape(new.tree):
+    if without_imports(ast.parse(replayed), only_old) != without_imports(new.tree, only_new):
         raise Refused("the rules worked out from the example do not reproduce the example")
     return rules
 
@@ -511,14 +582,15 @@ def parse_like(node, kind, written):
 
 def written_for(rule, node, bound, text):
     """The new text for one place, and that text parsed.  It must be the rule's new form with the same blanks."""
-    for wrap in (False, True):
-        parts = []
+    for every in (False, True):
+        parts, room = [], iter(rule.room)
         for piece in rule.pieces:
             if isinstance(piece, str):
                 parts.append(piece)
             else:
-                inner = text.of(bound[piece])
-                parts.append("(%s)" % inner if wrap and not isinstance(bound[piece], ATOMS) else inner)
+                inner, needed = text.of(bound[piece]), next(room)
+                loose = not isinstance(bound[piece], ATOMS) if every else tightness(bound[piece]) < needed
+                parts.append("(%s)" % inner if loose else inner)
         written = "".join(parts)
         parsed = parse_like(node, rule.kind, written)
         again = {}
@@ -549,10 +621,6 @@ def rewrite(rules, source_text, what="the file", check_names=True):
     if not places:
         return source_text, 0
     for _, node, rule, bound in places:
-        for name in sorted(rule.needs) if check_names else ():
-            if not text.provides(name, node):
-                raise Refused("the change uses '%s', which %s does not define, import or receive as a parameter "
-                              "at line %d" % (name, what, node.lineno))
         used = {part.id if isinstance(part, ast.Name) else part.arg for blank in bound.values()
                 for part in ast.walk(blank) if isinstance(part, (ast.Name, ast.arg))}
         if used & rule.own:
@@ -564,11 +632,13 @@ def rewrite(rules, source_text, what="the file", check_names=True):
         for position in comments:
             if start <= position < end and not any(first <= position < last for first, last in kept):
                 raise Refused("a comment inside the code at line %d of %s would be lost" % (node.lineno, what))
-    for bracketed in (False, True):
+    for attempt in (0, 1, 2):
         out, at, swap = [], 0, {}
         for (start, end), node, rule, bound in places:
             written, parsed = written_for(rule, node, bound, text)
-            if bracketed and rule.kind == "expression" and not isinstance(parsed, ATOMS):
+            looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
+            if ((looser and text.inside_operator(node)) if attempt == 0 else looser if attempt == 1
+                    else rule.kind == "expression" and not isinstance(parsed, ATOMS)):
                 written = "(%s)" % written
             out += [text.raw[at:start], written.encode("utf-8")]
             at = end
@@ -579,8 +649,27 @@ def rewrite(rules, source_text, what="the file", check_names=True):
         except (SyntaxError, ValueError):
             continue
         if shape(again) == shape(text.tree, swap):
+            if check_names:
+                names_still_hold(text, again, places, what)
             return result, len(places)
     raise Refused("the edited text of %s does not parse to the intended code" % what)
+
+
+def names_still_hold(text, edited, places, what):
+    """After the edit: every name the new code reads is provided, and no name the edit took away is still read."""
+    defined, anything = module_names(edited)
+    if anything:
+        return
+    for _, node, rule, _ in places:
+        for name in sorted(rule.needs):
+            if name not in defined and not text.provides(name, node):
+                raise Refused("the change uses '%s', which %s does not define, import or receive as a parameter "
+                              "at line %d" % (name, what, node.lineno))
+    taken = text.defined - defined
+    for part in ast.walk(edited):
+        if isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in taken:
+            raise Refused("the change takes the name '%s' away from the top of %s, but line %d still uses it"
+                          % (part.id, what, part.lineno))
 
 
 def edit_by_example(target_text, before_text, after_text):
