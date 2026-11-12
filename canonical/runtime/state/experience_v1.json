@@ -168,8 +168,9 @@
   },
   "document.convert.markdown_pdf.pandoc_weasyprint|bound_apt_metadata_not_found": {
    "first_seen": 1794495578.276555,
-   "last_seen": 1794495578.2765572,
+   "last_seen": 1794497216.2045805,
    "observations": [
+    -1,
     -1
    ],
    "structural": false,
@@ -341,8 +342,15 @@
   },
   "image.extract.ocr.tesseract|bound_system_tool_missing": {
    "first_seen": 1794495577.8284273,
-   "last_seen": 1794495584.5261753,
+   "last_seen": 1794497221.8826413,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -377,8 +385,12 @@
   },
   "knowledge.consistency.assess|knowledge_assessment_input_invalid": {
    "first_seen": 1794495575.2572873,
-   "last_seen": 1794495579.1296952,
+   "last_seen": 1794497216.449337,
    "observations": [
+    -1,
+    -1,
+    -1,
+    -1,
     -1,
     -1,
     -1,
@@ -407,8 +419,13 @@
   },
   "orchestration.verify.bridge_enumeration.v1|verified": {
    "first_seen": 1794495573.394807,
-   "last_seen": 1794495584.2348077,
+   "last_seen": 1794497221.5632653,
    "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
     1,
     1,
     1,
@@ -574,8 +591,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1794496392.3642335,
+   "last_seen": 1794497336.3991814,
    "observations": [
+    1,
     1,
     1,
     1,

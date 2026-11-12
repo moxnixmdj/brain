@@ -122,14 +122,14 @@
    ]
   },
   "m13": {
-   "accesses": 536,
-   "blamed": 132,
+   "accesses": 629,
+   "blamed": 143,
    "content": "/tmp/brain-cli-reg-ln9m6bkm/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794495067.9311109,
-   "credited": 118,
+   "credited": 158,
    "id": "m13",
    "kind": "acquired_capability",
-   "last_accessed": 1794497031.9698226,
+   "last_accessed": 1794497490.9353938,
    "tags": [
     "/tmp/brain-cli-reg-ln9m6bkm/regme",
     "cli"
@@ -152,14 +152,14 @@
    ]
   },
   "m14": {
-   "accesses": 535,
-   "blamed": 132,
+   "accesses": 548,
+   "blamed": 134,
    "content": "/tmp/brain-cli-reg-pz9masi_/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794495068.0075924,
    "credited": 118,
    "id": "m14",
    "kind": "acquired_capability",
-   "last_accessed": 1794496520.4219778,
+   "last_accessed": 1794497405.5915122,
    "tags": [
     "/tmp/brain-cli-reg-pz9masi_/regme",
     "cli"
@@ -183,14 +183,14 @@
    ]
   },
   "m15": {
-   "accesses": 536,
-   "blamed": 132,
+   "accesses": 630,
+   "blamed": 144,
    "content": "/tmp/brain-cli-reg-2ut7dudp/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794495068.1093547,
-   "credited": 118,
+   "credited": 159,
    "id": "m15",
    "kind": "acquired_capability",
-   "last_accessed": 1794497031.9698226,
+   "last_accessed": 1794497490.9348593,
    "tags": [
     "/tmp/brain-cli-reg-2ut7dudp/regme",
     "cli"
@@ -213,14 +213,14 @@
    ]
   },
   "m16": {
-   "accesses": 1,
-   "blamed": 0,
+   "accesses": 103,
+   "blamed": 13,
    "content": "/tmp/brain-cli-reg-camekbgi/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794496747.6712165,
-   "credited": 0,
+   "credited": 42,
    "id": "m16",
    "kind": "acquired_capability",
-   "last_accessed": 1794497031.9698226,
+   "last_accessed": 1794497490.9342594,
    "tags": [
     "/tmp/brain-cli-reg-camekbgi/regme",
     "cli"
@@ -243,14 +243,14 @@
    ]
   },
   "m17": {
-   "accesses": 1,
-   "blamed": 0,
+   "accesses": 103,
+   "blamed": 13,
    "content": "/tmp/brain-cli-reg-chu79irf/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794496747.7485561,
-   "credited": 0,
+   "credited": 42,
    "id": "m17",
    "kind": "acquired_capability",
-   "last_accessed": 1794497031.9698226,
+   "last_accessed": 1794497490.9334946,
    "tags": [
     "/tmp/brain-cli-reg-chu79irf/regme",
     "cli"
@@ -273,14 +273,14 @@
    ]
   },
   "m18": {
-   "accesses": 1,
-   "blamed": 0,
+   "accesses": 103,
+   "blamed": 13,
    "content": "/tmp/brain-cli-reg-e3gvwb04/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794496747.8607419,
-   "credited": 0,
+   "credited": 42,
    "id": "m18",
    "kind": "acquired_capability",
-   "last_accessed": 1794497031.9698226,
+   "last_accessed": 1794497490.932794,
    "tags": [
     "/tmp/brain-cli-reg-e3gvwb04/regme",
     "cli"
@@ -365,14 +365,14 @@
    ]
   },
   "m4": {
-   "accesses": 3858,
-   "blamed": 238,
+   "accesses": 3860,
+   "blamed": 239,
    "content": "add ten",
    "created": 1793265249.2641826,
-   "credited": 1356,
+   "credited": 1357,
    "id": "m4",
    "kind": "procedure",
-   "last_accessed": 1794496124.2519734,
+   "last_accessed": 1794497490.022205,
    "tags": [
     "unclassified|moved"
    ],
@@ -480,14 +480,14 @@
    ]
   },
   "m8": {
-   "accesses": 1120,
+   "accesses": 1121,
    "blamed": 34,
    "content": "rewrite the malformed def",
    "created": 1793271386.405867,
-   "credited": 501,
+   "credited": 502,
    "id": "m8",
    "kind": "procedure",
-   "last_accessed": 1794496137.854362,
+   "last_accessed": 1794497487.9888208,
    "tags": [
     "unclassified|fixed"
    ],
@@ -507,14 +507,14 @@
    ]
   },
   "m9": {
-   "accesses": 1041,
+   "accesses": 1042,
    "blamed": 34,
    "content": "rewrite the malformed def",
    "created": 1793290330.7458298,
-   "credited": 445,
+   "credited": 446,
    "id": "m9",
    "kind": "procedure",
-   "last_accessed": 1794496137.854362,
+   "last_accessed": 1794497487.9892182,
    "tags": [
     "unclassified|fixed"
    ],

@@ -27,11 +27,11 @@
    "created": 1793264684.326955,
    "helped": 0,
    "id": "g1025082313878",
-   "last_seen": 1794496666.5398252,
+   "last_seen": 1794497309.9869864,
    "resolved": false,
    "trials": 0,
-   "what": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2",
-   "why": "ONLY_1_INDEPENDENT_CHANNEL(S)_NEED_2"
+   "what": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2",
+   "why": "ONLY_0_INDEPENDENT_CHANNEL(S)_NEED_2"
   },
   "g1051569409963": {
    "cost": 1.0,
