@@ -58,5 +58,17 @@
  },
  "real_outcome": "THE_ONE_DEMONSTRATION_RESULT_REPRODUCES_ON_INSTANCES_THAT_DID_NOT_EXIST_WHEN_THE_LEARNER_WAS_WRITTEN_AND_THE_LANE_IS_RUNNABLE_IN_THIS_SANDBOX",
  "not_applicable_reason": "EVIDENCE_PRESERVATION_OF_A_REPRODUCED_MEASUREMENT__NO_NEW_CAPABILITY_IS_CLAIMED",
- "scope_complete_discharge": false
+ "scope_complete_discharge": false,
+ "load_bearing_primary": {
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0.05",
+  "expected_obligation_unlock_lcb": "1",
+  "success_probability_lcb": "0.9",
+  "wall_clock_cost_ub": "1",
+  "why_this_moves_the_obligation": "The obligation is partial computer-use performance, and the only measured substrate for that in this tree is the MiniWoB++ one-success ladder. This pass does not raise the score; it establishes that the mechanism producing the score reproduces on instances nobody had used, which is the precondition for any later raise to be believable. Discharge LCB is deliberately small: a replication cannot by itself move a capability number."
+ }
 }
