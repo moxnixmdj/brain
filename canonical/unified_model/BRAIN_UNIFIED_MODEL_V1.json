@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1193e393613857df352423a6d465649b08a34dc7cf8d7c67f86af1e3d65065f4"
+  "value": "e311212327d73e876432bac4da3a4499dccc96c3b9d1f851afb487f87d43f255"
  },
  "engines": [
   {
@@ -233198,7 +233198,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "51180ab02dc272633dfba3d4cbac78111b94106869d95c3b2c245c5f6e0841db",
+   "sha256": "597fc5cc78c90fa0582ed7c4ab3b41d955caa4bb0865f499e20ef8993b443671",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -239994,7 +239994,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "b5ecfba1d7324d593b9f91d12f194c7848a3f888773da34f342e1c24715ffb96",
+   "sha256": "d25a8f874fbceb8e039add5affdbdb3665496d33043122acb28bfe7137fc6d0b",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 19,
    "symbols": [
@@ -265700,9 +265700,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "8a819674b9b4e0968f198fb096291aae87e08961ffa526837b08338458f1cba0",
+   "sha256": "7ad424ffbfe2353f71bf26070a3d3c6a5d3aeff8489c14083ead059cd8dee603",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 90,
+   "symbol_count": 91,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -272293,7 +272293,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "a7b2cbe4b7e77df578460c628a744db9ec897bd36a2c6b83153557870216693d",
+   "sha256": "77a36738dea0badd4319bf4cca4eda5db69d4ab700067e13f0b187d5245f8f97",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 130,
    "symbols": [
@@ -300914,7 +300914,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "78c3c611907bd4eb6ab986cef50565084fc4d460b0908540e1baa6884824a8bc",
+   "sha256": "0bba15acac3238b0778a5ac57a86fb838d1705107410f6c0d59fbb8432fe88bd",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
