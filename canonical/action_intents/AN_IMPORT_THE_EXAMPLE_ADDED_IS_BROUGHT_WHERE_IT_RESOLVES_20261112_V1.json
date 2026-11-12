@@ -77,7 +77,7 @@
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-  "checked_at_utc": "2026-11-12T18:30:00Z",
+  "checked_at_utc": "2026-11-12T17:05:00Z",
   "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
   "mode": "ACTIVE_INTERFACE",
   "fresh_reality_authority": false,
@@ -132,7 +132,7 @@
   ],
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-12T18:30:00Z",
+   "checked_at_utc": "2026-11-12T17:05:00Z",
    "max_age_hours": 24,
    "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__AN_IMPORT_AN_EXAMPLE_ADDED_IS_READ_ONLY_AS_A_DEMAND_ON_THE_TARGET_FILE__SEVEN_HELD_OUT_FILES_REFUSED_FOR_THE_MISSING_NAME",
    "source_classes_checked": [
@@ -163,11 +163,12 @@
      "https://arxiv.org/html/2604.01518v1"
     ],
     "CODE_OR_PACKAGE_REGISTRY": [
+     "https://libcst.readthedocs.io/en/latest/codemods.html",
+     "https://github.com/Instagram/LibCST/pull/1432",
      "https://github.com/LucyAndLuna2023/meshctx/commit/740af6bc23",
      "https://github.com/tgandor/meats/commit/9d45804a77",
      "https://github.com/yaml/pyyaml/blob/main/lib/yaml/__init__.py",
-     "https://github.com/davidmalcolm/pygobject",
-     "https://github.com/greggggg33/scrapy"
+     "https://github.com/davidmalcolm/pygobject"
     ],
     "BROAD_WEB_OR_COMMUNITY": [
      "https://dev.to/webx_2736/prove-your-refactor-tests-can-fail-a-mutation-calibrated-gate-for-messy-repos-b57",
@@ -180,12 +181,16 @@
      "query": "library migration missing import statements failure one-shot example"
     },
     {
-     "intent": "NEGATIVE_RESULT",
-     "query": "transform adds import before dependency resolution breaks"
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "transform adds import dependency resolution order unused import residue one-shot migration"
     },
     {
-     "intent": "NEGATIVE_RESULT",
-     "query": "one-shot program transformation unused import residue"
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 continual learning agents skill libraries catastrophic forgetting out of distribution"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "libcst codemod AddImportsVisitor RemoveImportsVisitor automatic import management"
     }
    ],
    "comparison_dimensions": [
@@ -294,7 +299,7 @@
    "negative_search_summary": "THE_MIGRATION_LITERATURE_REPORTS_WRONG_OR_MISSING_IMPORT_PATHS_AS_A_MAIN_FAILURE_OF_GUESSED_MIGRATIONS_AND_UNUSED_IMPORT_RESIDUE_EVEN_WHEN_AN_EXAMPLE_IS_GIVEN__A_TRANSFORM_THAT_ADDS_IMPORTS_MUST_RESOLVE_THEM_WHERE_THE_EDIT_LANDS__NO_TOOL_WAS_FOUND_THAT_CARRIES_EXACTLY_AND_ONLY_THE_EXAMPLES_OWN_ADDED_LINE_UNDER_A_SHADOWING_AND_RESOLUTION_CHECK",
    "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_AN_IMPORT_THE_EXAMPLES_ADDED_IS_BROUGHT_WITH_THE_EDIT__ONLY_WHEN_ALL_EXAMPLES_AGREE_ON_ONE_LINE__ONLY_WHERE_THE_FILE_DOES_NOT_PROVIDE_THE_NAME__ONLY_WHERE_PATHFINDER_RESOLVES_IT_WITHOUT_RUNNING_ANYTHING",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-12T18:30:00Z",
+    "checked_at_utc": "2026-11-12T17:05:00Z",
     "max_age_hours": 2,
     "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_AN_IMPORT_THE_EXAMPLES_ADDED_IS_BROUGHT_WITH_THE_EDIT__ONLY_WHEN_ALL_EXAMPLES_AGREE_ON_ONE_LINE__ONLY_WHERE_THE_FILE_DOES_NOT_PROVIDE_THE_NAME__ONLY_WHERE_PATHFINDER_RESOLVES_IT_WITHOUT_RUNNING_ANYTHING",
     "status": "READY",
