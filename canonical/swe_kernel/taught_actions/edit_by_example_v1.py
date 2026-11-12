@@ -972,6 +972,56 @@ def rename_undone(before_text, after_text):
     return after_text
 
 
+def attribute_rename_undone(before_text, after_text):
+    """The example's second file with an incidental rename of an owned attribute undone.
+
+    The variable form of the tangled-commit phenomenon has an attribute form: a person renames an
+    attribute they own (`self._stop = Event()` becomes `self._stop_event = Event()`) in the same
+    commit as the edit worth teaching.  Ownership is what separates the rename from the lesson: a
+    name is only a rename where the person assigns it; a changed attribute that is never assigned
+    in the file (`isSet` becoming `is_set`) is a use of someone else's object -- behavior, and
+    teachable.  When exactly one assigned attribute name is dropped by the second file and exactly
+    one appears, the new name is put back to the old one at every attribute it names.
+    """
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return after_text
+
+    def attributes(tree):
+        return {node.attr for node in ast.walk(tree) if isinstance(node, ast.Attribute)}
+
+    def assigned(tree, name):
+        return any(isinstance(node, ast.Attribute) and node.attr == name and isinstance(node.ctx, ast.Store)
+                   for node in ast.walk(tree))
+
+    olds = {name for name in attributes(before_tree) - attributes(after_tree) if assigned(before_tree, name)}
+    news = {name for name in attributes(after_tree) - attributes(before_tree) if assigned(after_tree, name)}
+    if len(olds) != 1 or len(news) != 1:
+        return after_text
+    old, new = olds.pop(), news.pop()
+    lines = after_text.splitlines(keepends=True)
+    starts, total = [], 0
+    for line in lines:
+        starts.append(total)
+        total += len(line)
+    spans = sorted(((starts[node.end_lineno - 1] + node.end_col_offset - len(new),
+                     starts[node.end_lineno - 1] + node.end_col_offset)
+                    for node in ast.walk(after_tree) if isinstance(node, ast.Attribute) and node.attr == new),
+                   reverse=True)
+    came_as = after_text
+    for head, tail in spans:
+        if after_text[head:tail] != new:
+            return came_as        # a comment or break between the dot and the name; nothing is guessed
+        after_text = after_text[:head] + old + after_text[tail:]
+    try:
+        if ast.dump(ast.parse(after_text)) == ast.dump(before_tree):
+            return came_as        # the whole example was the rename; it teaches nothing repeatable
+    except SyntaxError:
+        return came_as
+    return after_text
+
+
 def restructures_put_back(before_text, after_text):
     """The example's second file with the changes no rule can carry put back, and where they stood.
 
@@ -1056,7 +1106,8 @@ def learn_all(examples, wide=False):
     several = len(examples) > 1
     shown = []
     for number, example in enumerate(examples, 1):
-        after, set_aside = restructures_put_back(example[0], rename_undone(example[0], example[1]))
+        after, set_aside = restructures_put_back(
+            example[0], attribute_rename_undone(example[0], rename_undone(example[0], example[1])))
         given = tuple(example[2]) if example[2:] and example[2] else ()
         shown.append(Shown(example[0], after, "example %d" % number if several else "the example",
                            given + set_aside))
