@@ -92,7 +92,40 @@ The current one-shot probe shows why "more environments" alone is not the lever:
 
 ## 7. Ranked plan
 
-1. **Widen the interface/verifier regime and make verified routes live-reachable.** The current census already counts the surface: 60/145 typed+receipted, 29/145 typed but unchecked, 8 missing receipt paths, 20 unattributed receipts. The predicate probe localizes 7 unguarded success assignments, 1 declaration mismatch, and 53 statically invisible cases needing negative controls. The acceptance-target probe and executed failed-repair probe sharpen this: repoint the 9 DEFINITE transport predicates to the already computed boolean, using the failed-repair probe as the regression test; read the 46 candidates; then re-run the census and expect the one-shot-safe count to fall where false safety is removed. Repair through the existing gate; do not bypass refusals. For the coding probe, resolve the missing independent-verification evidence. For the gzip probe, bind the stated output to the verified direct route.
+1. **Widen the interface/verifier regime and make verified routes live-reachable.** The current census already counts the surface: 60/145 typed+receipted, 29/145 typed but unchecked, 8 missing receipt paths, 20 unattributed receipts. The predicate probe localizes 7 unguarded success assignments, 1 declaration mismatch, and 53 statically invisible cases needing negative controls. The acceptance-target probe and executed failed-repair probe sharpen this: repoint the 9 DEFINITE transport predicates to the already computed boolean, using the failed-repair probe as the regression test; read the 46 candidates; then re-run the census. **(Eight of the nine were repointed in round 7; the executed positive control below is now added. The prediction that the one-shot-safe count would fall was measured and is WRONG: it is still 60.)** Repair through the existing gate; do not bypass refusals. For the coding probe, resolve the missing independent-verification evidence. For the gzip probe, bind the stated output to the verified direct route.
+### 7.1 Item 1 follow-up: the gate's own test suite had a measured blind spot (2026-11-12, base `6ac2a539`)
+
+Round 7 repointed eight of the nine DEFINITE predicates to `pass` and inverted the gate tests. That work is correct and is not repeated here. What it left unmeasured is the other direction, and the gap is not theoretical:
+
+**Executed falsification.** `ast.Add:[ast.Sub, ast.Mult]` was temporarily reduced to `ast.Add:[ast.Sub]` in `python_test_guided_patch_search_v1.py`, which removes the repair for the canonical injected-operator defect class — the repair surface silently breaks. Result:
+
+| Suite | Verdict with repair broken |
+| --- | --- |
+| All 11 pre-existing gate tests (failure path + synthetic success payload) | **11 passed** |
+| New positive control (real adapters, reachable repair) | **2 failed** |
+
+The adapter was restored immediately; no adapter byte ships in this change. So the suite that was described as proving the gate "in both directions" could not observe the repair surface ceasing to work. Its success-side test feeds a hand-written `{"pass": True}` dict to `_check_expect`, which checks the evaluator, not any result a producer ever produced.
+
+**What was added.** `REPAIRABLE_FIXTURE` (`return x + x`, tests `square(3)==9`, `square(4)==16`) plus `run_positive_control()` and six tests. Measured on the live registry at `6ac2a539`:
+
+| Measurement | Result |
+| --- | --- |
+| Failed repair accepted by the live gate | 0 / 8 (legacy predicate: 8 / 8) |
+| Solvers that find and verify the reachable repair | 5 / 5 |
+| Real repairs the live gate accepts | **5 / 5**, rejects **0** |
+| Acceptance controllers that fail closed on that fixture | 2 / 2 — live gate rejects 2, **legacy gate accepted 2** |
+| One-shot-safe census | 60 / 145 (41%) — **unchanged** |
+| DEFINITE transport/boolean mismatches | 1 (was 9) |
+| Predicate falsifiability defects | 1 (was 8) |
+
+Three findings worth keeping:
+
+- **The first positive control was wrong, and the wrong version was persuasive.** `return x` needing `x * x` is outside the mutation grammar (no name-to-binop rule), so all seven adapters returned `pass=False`; read carelessly that "confirms" narrowing disabled repair. Diagnostics showed `baseline_returncode=1`, so the runner was not blind — the fixture was unreachable. `return x + x` is reachable because Add->Mult is in `_BINOP_SWAPS`. An instrument that cannot succeed is not a control.
+- **The two acceptance controllers are a positively measured false-accept.** On the repairable fixture they answer `pass=False` (`OPEN__REPAIR_FOUND_BUT_MEASURED_ACCEPTANCE_NOT_CLEARED` / `..._REQUEST_ACCEPTANCE_NOT_COMPLETE`) because a patch exists but no measurement receipt or request contract was supplied. The legacy `output_verified` predicate accepted both. That is the defect demonstrated on the success side rather than argued.
+- **The audit's own census prediction is falsified.** It expected one-shot-safe to fall when false safety was removed. It stayed at 60 because the census keys on typed result fields plus receipt attribution, not on which field `expect` reads. Correcting a predicate and widening the measured-safe regime are different levers.
+
+**The ninth is deliberately not repointed.** `python.task.acceptance.measured.objective.v1` still reads `output_verified`. Its adapter computes `pass` from `acceptance_stop_authorized`, but exercising it needs a content-addressed measurement receipt; a fabricated receipt would be worse than a transport field. It stays in `DEFINITE_DEBT` until someone runs it against a real receipt. This change does not touch the registry at all.
+
 2. **Spend chosen questions and failures, not more successes.** Connect `settlement_v1` question selection to rule admission where multiple hypotheses survive. The rule probe measured 2.0 queries after one demonstration settling 10/10 targets; the applicability probe measured chosen failures identifying 25/25 requirements. Record refused attempts as evidence, not only counters, and close the 11 BLIND registry premises with sensors or producers before trusting applicability.
 3. **Turn demonstrations into scoped skills.** Reuse `teach_actions_v1`, `causal_trace_to_skill_compiler_v1`, `edit_by_example_v1`, `verified_skill_crystallizer_v1`, `rule_scope_learning_v1`, and `rule_expiry_v1`. Each skill needs trigger, preconditions, procedure, postconditions, verifier, provenance, side-effect policy, expiry, and measured utility.
 4. **Make compression and cross-kind transfer falsifiable.** Repair the existing concept-library admission path before inventing another store, but do not fix only the bridge: the current one-try-state probe shows the real period corpus is refused by the byte objective itself (`delta_B_exec = -29`). Change the bridge and the admission objective together, and adjudicate with `learning_claim_adjudicator_v1` (cold/warm/cache-only/random arms, held-out cost and separate success). Require held-out search/action/question savings and ablation loss, not zlib bytes on a tiny corpus.

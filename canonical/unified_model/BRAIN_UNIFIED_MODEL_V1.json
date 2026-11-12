@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 322,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6730,
+  "research_index_records": 6731,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d512f1d6c319a86845c372df5b1e640491de41a8c20aa3ca552493e4776c7125"
+  "value": "7bdb1939516ec58dfbf7d28c373cc7230b414ed69aae36106650ac2c5f6c4eef"
  },
  "engines": [
   {
@@ -215462,6 +215462,33 @@
     "v1": 2,
     "value": 3,
     "whole": 4
+   }
+  },
+  {
+   "action_id": "A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d51ecc50cb595cff5d844b9422b6aec07dc6aef48761f5d1ea649be4890f869b",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_gate_that_rejects_everything_passes_every_failure_test_20261112_v1": 1,
+    "add_the_missing_positive_control_to_the_existing_executed_gate_probe": 1,
+    "every": 1,
+    "everything": 1,
+    "failure": 1,
+    "gate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "no_capability_credit__no_terminal_credit__no_family_flipped__no_registry_or_adapter_change__one_measured_verification_blind_spot_closed": 1,
+    "passes": 1,
+    "rejects": 1,
+    "test": 1,
+    "the_repair_gate_verification_suite_contained_no_test_that_executes_a_successful_repair_so_the_repair_surface_could_stop_working_entirely_with_every_test_still_green_which_is_the_failure_mode_that_matters_before_learned_skills_are_retained_permanently": 1,
+    "v1": 1
    }
   },
   {
