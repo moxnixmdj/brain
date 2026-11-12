@@ -262,8 +262,10 @@ def answers(before, person, engine, marker):
     """Compare what the engine wrote with what the person wrote, per statement of `before`.
 
     Returns the counts: questions (marker statements the person changed one for one), same, different,
-    left, and extra (statements the engine changed, or added, that the person did not).  A statement the
-    engine adds (an import it brings) that the person also added is counted neither way.
+    left, and extra (statements the engine changed, added or took out that the person did not).  A statement
+    the engine adds (an import it brings) counts neither way when the person also added it or put it where
+    the person changed a line; one the engine takes out (a dead import) is free only where the person
+    changed or removed that statement too.
     """
     was, became = statements(before), statements(person)
     by_person, person_added = {}, []
@@ -279,24 +281,26 @@ def answers(before, person, engine, marker):
     for tag, a, b, c, d in difflib.SequenceMatcher(None, was, wrote, autojunk=False).get_opcodes():
         if tag == "equal" or (tag == "replace" and b - a == d - c):
             by_engine.update({a + step: wrote[c + step] for step in range(b - a)})
-        elif tag == "insert":
-            engine_added += wrote[c:d]
-        else:                            # the engine never takes a statement out; read it as left + additions
-            by_engine.update({index: was[index] for index in range(a, b)})
+        else:                            # taken out (None), with any uneven replacement read as additions
+            by_engine.update({index: None for index in range(a, b)})
             engine_added += wrote[c:d]
     count = dict.fromkeys(("questions", "same", "different", "left", "extra"), 0)
-    for statement in engine_added:
-        if statement in person_added:
+    settled = [by_person[index] for index in by_person                       # what the person put at changed places,
+               if by_person[index] is not None and by_engine.get(index) != by_person[index]]
+    for statement in engine_added:       # an added statement must match one the person added, or one the person
+        if statement in person_added:    # put at a place the person changed and the engine did not settle there
             person_added.remove(statement)
+        elif statement in settled:
+            settled.remove(statement)
         else:
             count["extra"] += 1
     for index, old in enumerate(was):
-        new, made = by_person.get(index), by_engine.get(index, old)
+        new, made = by_person.get(index), by_engine.get(index)
         if new is not None and marker in old:
             count["questions"] += 1
             count["same" if made == new else "left" if made == old else "different"] += 1
         elif made != old and index not in by_person:
-            count["extra"] += 1
+            count["extra"] += 1          # changed, added around, or took out what the person left alone
     return count
 
 
