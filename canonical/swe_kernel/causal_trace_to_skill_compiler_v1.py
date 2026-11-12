@@ -2121,7 +2121,7 @@ def export_workflow_bundle(
 
     skills: list[dict[str, Any]] = []
     for r in rows:
-        skills.append({
+        skill = {
             "skill_id": r[0],
             "goal_skeleton": r[1],
             "goal_regex": r[2],
@@ -2133,8 +2133,13 @@ def export_workflow_bundle(
             "artifact_sha256": r[8],
             "ownership_receipt": json.loads(r[9]),
             "hit_count": int(r[10]),
-            "goal_variants": json.loads(r[11] or "[]"),
-        })
+        }
+        # Keep legacy bundles byte-identical when no variant was admitted.
+        # Import already treats an absent field as the empty variant list.
+        variants = json.loads(r[11] or "[]")
+        if variants:
+            skill["goal_variants"] = variants
+        skills.append(skill)
 
     doc = {
         "schema": "PROJECT_BRAIN_COMPILED_WORKFLOWS_BUNDLE_V1",

@@ -80,6 +80,18 @@ def test_untaught_or_unsafe_wordings_do_not_recall(tmp_path: pathlib.Path, goal:
     assert not list(world.iterdir())
 
 
+def test_export_without_variants_keeps_legacy_bundle_shape(tmp_path: pathlib.Path) -> None:
+    db = tmp_path / "w.sqlite"
+    assert _teach(db, "Write 'beta' to other.txt")["pass"] is True
+    bundle = tmp_path / "bundle.json"
+    assert C.export_workflow_bundle(bundle, db_path=db)["ok"] is True
+    doc = json.loads(bundle.read_text(encoding="utf-8"))
+    assert len(doc["skills"]) == 1
+    assert "goal_variants" not in doc["skills"][0]
+    imported = C.import_workflow_bundle(bundle, db_path=tmp_path / "imported.sqlite")
+    assert imported["ok"] is True and imported["accepted"] == 1
+
+
 def test_variant_survives_export_import_and_tamper_is_refused(tmp_path: pathlib.Path) -> None:
     db = tmp_path / "w.sqlite"
     assert _teach(db, "Save 'beta' to other.txt")["pass"] is True
