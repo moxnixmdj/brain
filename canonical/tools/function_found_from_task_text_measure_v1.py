@@ -67,7 +67,7 @@ RANKS = (1, 4, 10)
 THE_80, THE_REST, ALL = "the 80 it was shaped on", "tasks outside the 80", "all"
 
 EXPECTED: dict[str, Any] = {
-    "written": "2026-11-12 about 23:05 UTC, before anything was counted. Known by then: the earlier records (the list reaches 7 of the 80 within 5 "
+    "written": "2026-11-12 22:55 UTC, before anything was counted. Known by then: the earlier records (the list reaches 7 of the 80 within 5 "
                "candidates, function given, definitions of at most 1,000 nodes; the changed file of the 80 holds a median of 41 functions; 276 of 500 "
                "tasks have a passing patch within one statement), and a published figure for finding the FILE by BM25 (first: about 40%). Nothing of "
                "the tasks outside the 80, and no rank of any function.",
