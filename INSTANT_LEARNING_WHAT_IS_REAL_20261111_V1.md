@@ -572,6 +572,86 @@ compounding is a second synthesis pass over held-out tasks **with the learned li
 measuring whether solve rate or search cost improves. That is the actual claim — that experience
 makes the next problem cheaper — and it has never been measured in this tree.
 
+## 4g. Addendum 6: the library does not make the next problem cheaper. (NO_COMPOUNDING)
+
+§4f established that the compressor works on machine-synthesized programs and that its concepts
+generalize. What none of the prior probes measured is what the library **buys** — which is the
+actual claim behind "show it once and it learns it permanently". If that is true, the next problem
+must get cheaper because the first one was solved.
+
+This measures it. 250 warmup tasks solved and compressed into a library; then the **same 120
+held-out tasks** synthesized twice, once with an explicitly empty library and once with the learned
+one. Identical tasks, identical synthesizer settings, identical order.
+
+**Design note that matters:** the synthesizer cannot safely be passed `concept_library=None` for a
+control. It falls back to `DEFAULT_LIBRARY_PATH` when that file exists, which would silently load a
+persisted library and contaminate the cold arm. The cold arm gets an explicitly constructed empty
+library on a fresh temp path. Without that, the control is not a control.
+
+First run, 120 held-out tasks: cold 7 solved, warm 8, `delta_solved = +1`. My pre-registered rule
+(`d_solved > 0 OR faster`) fired **COMPOUNDS**. That verdict was wrong, and it was wrong because of
+an `OR` I wrote too loosely: one extra solve out of 120 is sampling noise, and the same run showed
+warm **11% slower** with **44% larger** bodies. I tightened the rule and re-ran with 400 held-out
+tasks and a paired comparison, which removes task difficulty as a confound:
+
+```
+arm     solved    rate   wall_s  mean_nodes
+-------------------------------------------
+cold        32   0.080    47.41       14.16
+warm        31   0.077    53.01       16.90
+
+delta solved: -1          wall speedup: 0.894   (warm is SLOWER)
+
+paired, on the 30 tasks BOTH arms solved
+  cold_mean_nodes 14.23   warm_mean_nodes 16.63   node_ratio 1.169
+  cold_mean_secs  0.0661  warm_mean_secs  0.0547  time_ratio 0.828
+  solved only by cold: 2      solved only by warm: 1
+
+verdict: NO_COMPOUNDING
+```
+
+Read honestly, this is a mixed picture that nets out to nothing:
+
+- **Solve rate: unchanged.** 32 vs 31 out of 400. Not an improvement.
+- **Total wall time: 11% worse** with the library.
+- **Bodies: 17% larger** on the tasks both arms solved.
+- **One real positive:** on the tasks both arms solve, the library makes synthesis **17% faster**
+  (0.828 time ratio). When a concept happens to apply, it is a genuine shortcut.
+
+That last number is the whole story in miniature. Adding concepts to the grammar **widens the
+search space**. On a task where a concept applies, you get a shortcut. On every other task you pay
+to explore concept applications that fail. Measured here, the overhead exceeds the shortcut.
+
+**This is exactly the gap the literature names.** DreamCoder is three components, not one:
+(1) library learning during sleep, (2) a **recognition model** — a learned search policy that
+predicts *which* concept to try — and (3) sleep-dreaming to train it. Its own ablation is explicit:
+dreaming and the recognition model each contribute substantively. A library with no prior over its
+use is not a speedup; it is a larger menu to search. Stitch reaches 1.5–3.5× compression and LILO
+adds +42 to +63 points, but both sit on top of search that knows how to deploy abstractions — LILO
+found that handing GPT-4 abstractions *hurt* downstream synthesis (−30.6 REGEX) until the
+abstractions were de-obfuscated and documented.
+
+This tree has component (1). It does not have (2). Nothing in the synthesizer prefers a concept on
+the basis of the task; concepts are simply added to the enumeration at weight 2 and searched like
+any other primitive. §4g is what that costs, measured.
+
+### What this does and does not say
+
+**It does say:** a library that demonstrably generalizes to held-out programs (13/40, §4f) does not
+make subsequent synthesis cheaper. Generalization of the library and compounding of capability are
+different properties, and only the first has been achieved.
+
+**It does not say:** the architecture is wrong, or that the library is useless. It says the library
+is currently an unpriced menu. The missing piece is measurable and specific: a prior over concept
+use. The cheapest possible version is already available from data the library records —
+`log_prior`, `mdl_gain_bytes`, `corpus_sites`, `verified_hits` are all on `ConceptEntry` — so
+concepts could be ordered by expected usefulness rather than enumerated blindly.
+
+**The next experiment, if this line continues:** rank concepts by `verified_hits` and `log_prior`
+and search high-priority concepts first, then re-run this exact probe. Prediction, pre-registered:
+if ordering is the fix, warm should beat cold on BOTH time and solve rate. If it does not, the
+library is not the path to compounding in this tree and the line should be closed.
+
 ## 5. Where the outside world actually is (2026-11), so "most advanced on the planet" is calibrated
 
 | Benchmark | Top of the board | Human | What it really says |
