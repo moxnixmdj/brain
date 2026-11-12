@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "54bf9cbd741a863cd7f42baebf6ed1f635fb6288c4371db27c15dd76033899d8"
+  "value": "ba9c8a773824dc878da4d9b96d672c87ec70d123318293f0d892f8bf82464bb1"
  },
  "engines": [
   {
@@ -52951,7 +52951,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 15830,
+   "bytes": 15899,
    "headings": [
     "One try covers a fraction",
     "1. The measurement nobody had read as a dosage",
@@ -52967,7 +52967,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md",
-   "sha256": "a71ef665bdb3f9171cd85526efe6cfeb123b0b41f87c6849400bbf88e3663923",
+   "sha256": "bd2ef94107f62359619c82b915819a76c6dda82ae2091bcfca83281ebd9f0ca6",
    "summary": "**2026-11-12 · branch `arena/7aa1248a-brain` · authority NONE · measurement only**",
    "terms": {
     "10": 6,
@@ -74681,7 +74681,7 @@
   "included_source_count": 1187,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9905ea15a1993eea94256c10e1e6c17b6e39bbd5590439c756a9c03018f9629a"
+  "source_tree_digest": "8a7aab3dd4be4363767343fef0571d823cd9daffd014175f0f888922c77dad49"
  },
  "research_index": [
   {

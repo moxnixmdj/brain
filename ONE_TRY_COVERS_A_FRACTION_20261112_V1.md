@@ -224,8 +224,9 @@ where a reader will see it.
   `A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md` (the operator price),
   `ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1.md` (one fix is not all coding),
   `expressibility_of_ordinary_computer_tasks_v1.py` (the 30-task probe).
-- Open, not merged, producer-run: PR #6770 (MiniWoB 68.8% fresh), PR #6775 (demonstration choice;
-  reach r=0.88 when unique, silent on 7 of 10).
+- Producer-run, not independent verification: PR #6770 (MiniWoB 68.8% fresh) and PR #6775
+  (demonstration choice; reach r=0.88 when unique, silent on 7 of 10; merged as `54cf56de`
+  while this note was in review).
 - **PR #6772 merged while this note was in review** (`816dabaa`), titled "Proof: Instant learning
   system works on real coding tasks". It was read, and its Task 2 is a cached refusal — the
   second call is faster because the first learned the confinement requirement, not because a
