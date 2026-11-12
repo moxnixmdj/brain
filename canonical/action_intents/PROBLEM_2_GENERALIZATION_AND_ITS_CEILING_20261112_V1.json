@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Generalization was reported as a matching failure. Measured: 11 of 11 paraphrases are answered with memory OFF, and 4 of the 6 refused tasks have NO capability in the registry at all. The ceiling is what the machine can DO, not what it can find. The old key also collapses opposite directions (convert yaml to json == convert json to yaml) and memory could not reach a task the router missed.",
- "canonical_base_commit": "53c80d83815a288dc65c68610fa801929647c6d0",
+ "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -71,7 +71,7 @@
  "next_step": "Build the four missing ordinary capabilities (csv column arithmetic, zip, xlsx column arithmetic, docx to text); each converts a permanent AMBIGUOUS into a candidate, and the memory built here then has something to carry.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "recursive_obs": {
-  "canonical_base_commit": "53c80d83815a288dc65c68610fa801929647c6d0",
+  "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
@@ -142,7 +142,7 @@
      "path": "canonical/runtime/procedure_memory_v1.py"
     },
     {
-     "git_blob_sha": "867c3a4501b113531fc09c6de3fcf5175d15132c",
+     "git_blob_sha": "4ef5eac1438b42a6ca55a2f9b19dbe25ef6d70dd",
      "path": "canonical/runtime/grounded_action_v1.py"
     }
    ],
