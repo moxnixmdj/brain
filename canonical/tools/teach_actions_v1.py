@@ -351,6 +351,64 @@ LESSONS += [
                 "    return unset == False\n")},
         },
     },
+    {
+        "action": "repeat_what_a_lesson_showed_v1",
+        "program": "edit_by_example_v1",
+        "does": "repeat_shown",
+        "parameters": ("target", "lesson"),
+        "first_request": {"target": "lessons_q7/sizes_q7.py", "lesson": "lessons_q7/kept_q7/plain_q7.lesson"},
+        "said_as": ["edit {target} the way {lesson} remembers and leave the rest alone"],
+        "answers": "edited {target} the way {lesson} remembers and left the rest alone",
+        "first_example": {                      # the lesson showed two arguments; the call with a keyword is left
+            "before": {
+                "lessons_q7/kept_q7/plain_q7.lesson": _as_file(_kept(
+                    [EQUALS_ONE], ("one/was.py -> one/is.py", SUITE_WAS, SUITE_IS))),
+                "lessons_q7/sizes_q7.py": (
+                    "import unittest\n"
+                    "\n"
+                    "\n"
+                    "class SizesTest(unittest.TestCase):\n"
+                    "    def test_size(self):\n"
+                    "        self.assertEquals(size(2), 4)\n"
+                    "        self.assertEquals(size(3), 9, msg='nine')  # a use the lesson never showed\n"),
+            },
+            "after": {"lessons_q7/sizes_q7.py": (
+                "import unittest\n"
+                "\n"
+                "\n"
+                "class SizesTest(unittest.TestCase):\n"
+                "    def test_size(self):\n"
+                "        self.assertEqual(size(2), 4)\n"
+                "        self.assertEquals(size(3), 9, msg='nine')  # a use the lesson never showed\n")},
+        },
+        "second_example": {
+            "request": {"target": "tools/load.py", "lesson": "notes/safe.lesson"},
+            "before": {
+                "notes/safe.lesson": _as_file(_kept(
+                    [{"change": "yaml.load -> yaml.safe_load", "shown": ["called with 1 argument"],
+                      "imports": {"yaml": ["import yaml"]}}],
+                    ("earlier/was.py -> earlier/is.py",
+                     "import yaml\n\n\ndef read(stream):\n    return yaml.load(stream)\n",
+                     "import yaml\n\n\ndef read(stream):\n    return yaml.safe_load(stream)\n"))),
+                "tools/load.py": (
+                    "import yaml\n"
+                    "\n"
+                    "\n"
+                    "def settings(handle, trusted):\n"
+                    "    if trusted:\n"
+                    "        return yaml.load(handle, Loader=yaml.FullLoader)\n"
+                    "    return yaml.load(handle)\n"),
+            },
+            "after": {"tools/load.py": (
+                "import yaml\n"
+                "\n"
+                "\n"
+                "def settings(handle, trusted):\n"
+                "    if trusted:\n"
+                "        return yaml.load(handle, Loader=yaml.FullLoader)\n"
+                "    return yaml.safe_load(handle)\n")},
+        },
+    },
 ]
 
 

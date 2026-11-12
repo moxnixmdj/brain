@@ -6,7 +6,8 @@ rewrite rules, and makes the same change in another file.  The first word of ``R
 
 * ``edit``      -- one example, given as its two files, is repeated on a third file at once;
 * ``remember``  -- one example is added to a lesson file, which is made when it is not there yet;
-* ``repeat``    -- what a lesson file holds is repeated on a file.
+* ``repeat``    -- what a lesson file holds is repeated on a file, all of it or nothing;
+* ``repeat_shown`` -- the same, but code used a way the lesson did not show is left as it is.
 
 How a rule is worked out.  Every place where the two files of an example differ is found, down to the
 smallest expression, keyword argument or one-line statement that holds the difference.  That piece
@@ -29,8 +30,8 @@ Where a rule is applied.  A rule says no more than the examples showed:
 * a name only the new code reads that an example imported must be that import in the file to edit;
 * code that fits a rule but is used another way than any changed place of the examples -- called with
   another number of arguments, with a keyword they did not show, or not called where they called it --
-  may not work with the new code.  Nothing is changed then, and the refusal names the line.  An example
-  that shows that use, changed or left alone, settles it.
+  may not work with the new code.  Nothing is changed then, and the refusal names the lines.  An example
+  that shows that use, changed or left alone, settles it; or the request can say to leave the rest alone.
 
 Refused, and nothing is written:
 
@@ -67,7 +68,8 @@ The edit replaces only the bytes of the places that fit a rule.  Everything else
 including comments and layout, stays as it was.
 """
 # What to do, and with which files: ("edit", (file to edit, example before, example after)),
-# ("remember", (lesson file, example before, example after)) or ("repeat", (file to edit, lesson file)).
+# ("remember", (lesson file, example before, example after)), ("repeat", (file to edit, lesson file))
+# or ("repeat_shown", (file to edit, lesson file)).
 REQUEST = ("edit", ("lessons_q7/suite_q7.py", "lessons_q7/shown_q7/earlier.py", "lessons_q7/shown_q7/later.py"))
 
 import ast
@@ -876,8 +878,11 @@ def not_shown(rule, found, text, what):
                       "those uses" if others else "that use"))
 
 
-def rewrite(rules, source_text, what="the file", check_names=True):
-    """Apply the rules to every place that fits.  Returns (new text, number of places changed)."""
+def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False):
+    """Apply the rules to every place that fits.  Returns (new text, number of places changed).
+
+    Code used a way no example showed stops the whole edit, unless `leave_unshown` asks for it to be left as it is.
+    """
     text = Text(source_text, what)
     places, unshown = [], {}
     for node in units(text.tree):
@@ -896,7 +901,8 @@ def rewrite(rules, source_text, what="the file", check_names=True):
                 continue
             places.append((text.span(node), node) + fitting[0])
     for rule, found in unshown.values():
-        raise not_shown(rule, found, text, what)
+        if not leave_unshown:
+            raise not_shown(rule, found, text, what)
     places.sort(key=lambda place: place[0])
     for earlier, later in zip(places, places[1:]):
         if later[0][0] < earlier[0][1]:
@@ -966,8 +972,8 @@ def edit_by_example(target_text, before_text, after_text):
     return repeated(learn(before_text, after_text), target_text, "the example")
 
 
-def repeated(rules, target_text, shown_by):
-    result, count = rewrite(rules, target_text)
+def repeated(rules, target_text, shown_by, leave_unshown=False):
+    result, count = rewrite(rules, target_text, leave_unshown=leave_unshown)
     if count == 0:
         raise Refused("nothing in the file has the form %s changed (%s); a part of that form may vary "
                       "only where two changed places differ" % (shown_by, "; ".join(str(rule) for rule in rules)))
@@ -1082,14 +1088,14 @@ def main(request):
             lesson, before, after = values
             target, written = remember(lesson, before, after)
             done = "remembered in %s the way %s was changed into %s" % (lesson, before, after)
-        elif action == "repeat":
+        elif action in ("repeat", "repeat_shown"):
             path, lesson = values
             target, text = read_python(path, "the file to edit")
             _, pairs = lesson_examples(lesson)
             if pairs is None:
                 raise Refused("the lesson file does not exist")
-            written = repeated(learn_all(pairs), text, "the lesson").encode("utf-8")
-            done = "edited %s the way %s remembers" % (path, lesson)
+            written = repeated(learn_all(pairs), text, "the lesson", leave_unshown=action == "repeat_shown").encode("utf-8")
+            done = "edited %s the way %s remembers%s" % (path, lesson, " and left the rest alone" if action == "repeat_shown" else "")
         else:
             raise Refused("this program does not know the action %r" % (action,))
     except Refused as why:

@@ -13,7 +13,8 @@ Pinned here:
   example showed; a use that was not shown is refused with the line, and nothing is written;
 * a lesson file holds the examples whole and says what they teach; what it says is checked against the
   examples at every use; nothing in it is ever run; a file that is not a lesson is never written over;
-* one program serves three taught sentences, and through the front door a change is remembered, widened and
+* a use that was not shown is left as it is only when the request says to leave the rest alone;
+* one program serves four taught actions, and through the front door a change is remembered, widened and
   repeated inside the sandbox, with the action's own reason on every refusal.
 """
 from __future__ import annotations
@@ -162,6 +163,22 @@ def test_a_refusal_names_every_use_that_was_not_shown() -> None:
     assert "show those uses too, changed or left alone" in str(refusal.value)
 
 
+def test_asked_to_leave_the_rest_alone_the_uses_that_were_shown_are_changed_and_no_other() -> None:
+    found = by_example.learn_all([YAML_PLAIN])
+    target = "import yaml\na = yaml.load(one)\nb = yaml.load(two, Loader=yaml.Loader)\nc = yaml.load\nd = yaml.load(three)\n"
+    with pytest.raises(by_example.Refused, match="line 3 of the file has yaml.load"):
+        by_example.rewrite(found, target)
+    assert by_example.rewrite(found, target, leave_unshown=True) == (
+        "import yaml\na = yaml.safe_load(one)\nb = yaml.load(two, Loader=yaml.Loader)\nc = yaml.load\nd = yaml.safe_load(three)\n", 2)
+    # Every other refusal still stands: the name the new code needs is still asked for.
+    with pytest.raises(by_example.Refused, match="the change uses 'Path'"):
+        by_example.rewrite(by_example.learn_all([JOIN]), "import os\nx = os.path.join(a, b)\n", leave_unshown=True)
+    only_unshown = "import yaml\nb = yaml.load(two, Loader=yaml.Loader)\n"
+    assert by_example.rewrite(found, only_unshown, leave_unshown=True) == (only_unshown, 0)
+    with pytest.raises(by_example.Refused, match="nothing in the file has the form"):
+        by_example.repeated(found, only_unshown, "the lesson", leave_unshown=True)
+
+
 def test_this_is_the_call_the_new_function_does_not_take() -> None:
     """The measured case.  Before this guard the edit was written, and ``yaml.safe_load`` has no ``Loader``."""
     import inspect
@@ -302,6 +319,19 @@ def test_a_second_showing_is_added_and_the_lesson_then_says_more(project, capsys
         "yaml.load(handle)  # ours", "yaml.safe_load(handle)  # ours")
 
 
+def test_the_rest_is_left_alone_only_when_the_request_says_so(project, capsys) -> None:
+    project({"was.py": YAML_PLAIN[0], "is.py": YAML_PLAIN[1], "config.py": YAML_TARGET})
+    assert run(capsys, "remember", ("yaml.lesson", "was.py", "is.py"))[0] == 0
+    code, said = run(capsys, "repeat", ("config.py", "yaml.lesson"))
+    assert code == 3 and "the keyword Loader" in said and pathlib.Path("config.py").read_text(encoding="utf-8") == YAML_TARGET
+    assert run(capsys, "repeat_shown", ("config.py", "yaml.lesson")) == (
+        0, "edited config.py the way yaml.lesson remembers and left the rest alone\n")
+    assert pathlib.Path("config.py").read_text(encoding="utf-8") == YAML_TARGET.replace(
+        "yaml.load(handle)  # ours", "yaml.safe_load(handle)  # ours")
+    code, said = run(capsys, "repeat_shown", ("config.py", "yaml.lesson"))        # only the use that was not shown is left
+    assert code == 3 and "nothing in the file has the form the lesson changed" in said
+
+
 def test_an_example_is_kept_byte_for_byte(project, capsys) -> None:
     before = "# caf\u00e9\r\nimport time\r\nstart = time.clock()\r\nend = time.clock()  # \u2028 odd\r\nx = 1"     # no last newline
     project({"was.py": before, "is.py": before.replace("time.clock", "time.perf_counter")})
@@ -397,9 +427,9 @@ def test_nothing_in_a_lesson_is_ever_run(project, capsys) -> None:
 # ----------------------------------------------------------------------------- the lessons and the front door
 
 
-def test_one_program_serves_three_taught_actions() -> None:
+def test_one_program_serves_four_taught_actions() -> None:
     mine = [lesson for lesson in teach.LESSONS if lesson.get("program", lesson["action"]) == "edit_by_example_v1"]
-    assert sorted(lesson["does"] for lesson in mine) == ["edit", "remember", "repeat"]
+    assert sorted(lesson["does"] for lesson in mine) == ["edit", "remember", "repeat", "repeat_shown"]
     own_line = next(line for line in (teach.PROGRAMS / "edit_by_example_v1.py").read_text(encoding="utf-8").splitlines()
                     if line.startswith("REQUEST = "))
     for lesson in mine:
@@ -411,7 +441,8 @@ def test_one_program_serves_three_taught_actions() -> None:
     skeletons = {skill["goal_skeleton"] for skill in json.loads(teach.BUNDLE.read_text(encoding="utf-8"))["skills"]}
     assert {"remember in ?path0 the way ?path1 was changed into ?path2",
             "remember in ?path0 also the way ?path1 was changed into ?path2",
-            "edit ?path0 the way ?path1 remembers"} <= skeletons
+            "edit ?path0 the way ?path1 remembers",
+            "edit ?path0 the way ?path1 remembers and leave the rest alone"} <= skeletons
 
 
 @pytest.mark.parametrize("damage", [
@@ -483,6 +514,19 @@ def test_through_the_door_a_change_is_remembered_refused_where_it_was_not_shown_
 
 
 @needs_sandbox
+def test_through_the_door_the_rest_is_left_alone_when_the_sentence_says_so(taught_door) -> None:
+    lesson = by_example.lesson_text([YAML_PLAIN], ["was.py -> is.py"]).decode("utf-8")
+    refused = taught_door("edit DIR/tgt.py the way DIR/kept.lesson remembers", {"kept.lesson": lesson, "tgt.py": YAML_TARGET})
+    assert refused.get("pass") is not True and held("tgt.py") == YAML_TARGET
+    assert "line 9 of the file has yaml.load called with 1 argument and the keyword Loader" in str(refused.get("taught_action_declined"))
+    done = taught_door("edit DIR/tgt.py the way DIR/kept.lesson remembers and leave the rest alone")
+    assert done.get("pass") is True and done["status"] == "PASS__COMPILED_WORKFLOW_SKILL", done.get("status")
+    assert [receipt["confined"] for receipt in done["step_receipts"]] == [True]
+    assert held("tgt.py") == YAML_TARGET.replace("yaml.load(handle)  # ours", "yaml.safe_load(handle)  # ours")
+    assert held("kept.lesson") == lesson
+
+
+@needs_sandbox
 @pytest.mark.parametrize("sentence", [
     "remember in DIR/kept.txt the way DIR/was.py was changed into DIR/is.py",
     "remember in DIR/tgt.py the way DIR/was.py was changed into DIR/is.py",
@@ -490,6 +534,8 @@ def test_through_the_door_a_change_is_remembered_refused_where_it_was_not_shown_
     "remember in DIR/kept.lesson how DIR/was.py became DIR/is.py",
     "edit DIR/tgt.py the way DIR/full.lesson teaches",
     "edit DIR/tgt.py the way DIR/full.json remembers",
+    "edit DIR/tgt.py the way DIR/full.lesson remembers and leave the rest",
+    "edit DIR/tgt.py the way DIR/full.lesson remembers but leave the rest alone",
     "edit everything the way DIR/full.lesson remembers",
 ])
 def test_another_wording_or_another_kind_of_file_changes_nothing(taught_door, sentence) -> None:
