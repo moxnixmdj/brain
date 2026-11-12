@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 398,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6794,
+  "research_index_records": 6795,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c33d535b144bf3a65593031b8e7d63ab9dc8749de0b2110110e80972e42d101f"
+  "value": "b1fe850411d37a59aff2fff66c8cd67c8c9b62d11fb6be089d2783c7d3f2961e"
  },
  "engines": [
   {
@@ -236096,6 +236096,51 @@
    }
   },
   {
+   "action_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2c7fccbfdf37e8d8474d9a1cea072e05ed7093c578477bd14083c6aeaacc35e6",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "accounting": 1,
+    "after_merging_main_the_structural_fallback_bypassed_the_negation_guard_and_word_accounting_refusals_prevented_verified_taught_workflow_recall": 1,
+    "binder": 2,
+    "both": 1,
+    "capability": 2,
+    "compiler": 1,
+    "compose_verified_variant_admission_with_structural_binder_and_keep_word_accounting_refusal_answerable_by_verified_workflow": 1,
+    "door": 1,
+    "family": 1,
+    "flipped": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goal": 2,
+    "live": 1,
+    "longer": 1,
+    "loses": 1,
+    "main": 1,
+    "merged": 1,
+    "no": 3,
+    "preserves": 1,
+    "refusal": 1,
+    "registered": 1,
+    "structural": 2,
+    "survive": 1,
+    "taught": 1,
+    "v1": 1,
+    "variants": 2,
+    "verified": 3,
+    "verified_goal_variants_survive_structural_binder_and_word_accounting_20261112_v1": 1,
+    "word": 1,
+    "word-accounting": 1,
+    "workflow": 1
+   }
+  },
+  {
    "action_id": "VERIFIER_ROUTING_CHECK_SAMPLE_SIZE_FIX_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -272356,7 +272401,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "9edb92232149249b1d5145aa7dad4e6aec4b44686568b567a9ee0770ea54b820",
+   "sha256": "59e0b0c27a086369ae762d72000816ca31929cfb4a49661cd0d5e160bca5df33",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 130,
    "symbols": [

@@ -1,0 +1,229 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1",
+ "action_intent_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "96dc5fdefa4572634e54320f4cb1d5afb46617c0",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Compose the verified goal-variant admission path with main's structural binder and word-accounting refusal. The exact taught template and verified variants keep their own admission; the wider structural/synonym fallback is guarded against negation, conditionals and extra destructive actions. A capability word-accounting refusal no longer silences a verified taught workflow that accounts for the whole sentence; the workflow still executes confined and must pass its own postcondition. Local targeted regression: 237 passed, 2 skipped, 8 subtests; repo-integrity static PASS. No capability, benchmark, family or terminal credit is claimed.",
+ "selected_route": "COMPOSE_VERIFIED_VARIANT_ADMISSION_WITH_STRUCTURAL_BINDER_AND_KEEP_WORD_ACCOUNTING_REFUSAL_ANSWERABLE_BY_VERIFIED_WORKFLOW",
+ "causal_blocker": "AFTER_MERGING_MAIN_THE_STRUCTURAL_FALLBACK_BYPASSED_THE_NEGATION_GUARD_AND_WORD_ACCOUNTING_REFUSALS_PREVENTED_VERIFIED_TAUGHT_WORKFLOW_RECALL",
+ "expected_parent_change": "Verified taught workflows recall through the composed binder; unsafe structural fallbacks refuse; declined taught actions report their own reason.",
+ "expected_parent_frontier_change": "The merged compiler preserves both verified goal variants and main's structural binder; the live door no longer loses a verified taught workflow to a capability word-accounting refusal. No capability registered, no family flipped.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::AFTER_MERGING_MAIN_THE_STRUCTURAL_FALLBACK_BYPASSED_THE_NEGATION_GUARD_AND_WORD_ACCOUNTING_REFUSALS_PREVENTED_VERIFIED_TAUGHT_WORKFLOW_RECALL",
+ "falsification_condition": "A negated or destructive request executes through the structural fallback; a verified taught rename/inline request fails closed without a declined reason; a declined taught action loses its reason; or main's reordered-KV/synonym bridge cases stop binding.",
+ "stop_condition": "The composed binder passes the workflow-goal, bridge and two-refactorings suites; the 15-suite targeted regression is green; the unified model recompiles byte-identically; repo-integrity static passes; no capability or terminal credit is claimed.",
+ "explicit_user_authorization": "Paraphrase, not a quotation: the owner asked for the generalization work to be pushed and merged, with honest measurement and no sentience or terminal claim. This action changes no law, no protected guard, and no terminal truth.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+   "canonical/swe_kernel/workflow_goal_generalization_v1.py",
+   "canonical/runtime/live_brain_route_admission_v1.py",
+   "canonical/tests/test_workflow_goal_generalization_v1.py"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_CAPABILITY_WORD_ACCOUNTING_REFUSAL_IS_A_REFUSAL_OF_A_VERIFIED_TAUGHT_WORKFLOW_THAT_ACCOUNTS_FOR_THE_WHOLE_SENTENCE",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+  ],
+  "causal_evidence": "MEASURED_ON_THIS_HOST_AFTER_MERGING_ORIGIN_MAIN_96dc5fde: workflow_goal + bridge + two_refactorings initially 6 failed / 113 passed; the negated rename executed through the unguarded structural fallback and taught rename/inline doors failed closed with empty taught_action_declined. After composing the guard and allowing verified recall to answer word-accounting refusals, the 15-suite targeted regression passed 237 / 2 skipped / 8 subtests and repo-integrity static passed."
+ },
+ "measured_effect": "Local targeted regression: 237 passed, 2 skipped, 8 subtests. Main's bridge Layer B reordered-KV/synonym binds and Drop refusal pass; the taught rename/inline doors pass; declined taught actions report their own reason; the negated rename no longer executes through the structural fallback.",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__IT_REMOVES_A_MERGED_ADMISSION_REGRESSION_SO_VERIFIED_TAUGHT_WORKFLOWS_REMAIN_REACHABLE_WITHOUT_UNSAFE_STRUCTURAL_FALLBACK",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/workflow_goal_generalization_v1.py",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/tests/test_swe_self_improvement_bridge_v1.py",
+  "canonical/tests/test_two_refactorings_are_taught_once_and_checked_on_a_second_example_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "96dc5fdefa4572634e54320f4cb1d5afb46617c0",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "A verified taught workflow remains reachable after main's structural binder and word-accounting refusal are merged, while unsafe structural fallbacks refuse.",
+  "selected_route": "COMPOSE_VERIFIED_VARIANT_ADMISSION_WITH_STRUCTURAL_BINDER_AND_KEEP_WORD_ACCOUNTING_REFUSAL_ANSWERABLE_BY_VERIFIED_WORKFLOW",
+  "selected_surviving_route": "COMPOSE_VERIFIED_VARIANT_ADMISSION_WITH_STRUCTURAL_BINDER_AND_KEEP_WORD_ACCOUNTING_REFUSAL_ANSWERABLE_BY_VERIFIED_WORKFLOW",
+  "deleted_or_bypassed_paths": [
+   "UNGUARDED_STRUCTURAL_FALLBACK (measured: executed a negated rename)",
+   "WORD_ACCOUNTING_REFUSAL_AS_FINAL_ANSWER_OVER_A_VERIFIED_TAUGHT_WORKFLOW (measured: taught rename/inline doors failed closed and declined reasons were lost)",
+   "DROPPING_MAIN_STRUCTURAL_BINDER (rejected: main's reordered-KV/synonym bridge cases require it)"
+  ],
+  "stop_condition": "The composed binder passes the workflow-goal, bridge and two-refactorings suites; the 15-suite targeted regression is green; the unified model recompiles byte-identically; repo-integrity static passes; no capability or terminal credit is claimed.",
+  "expected_parent_level_state_change": "The merged compiler preserves both verified goal variants and main's structural binder; the live door no longer loses a verified taught workflow to a capability word-accounting refusal. No capability registered, no family flipped.",
+  "why_selected_route_is_fastest_sufficient": "Both mechanisms already exist and have tests. The smallest sound repair is to guard the wider fallback and let the existing verified recall answer only the word-accounting refusal, then re-run both sides' suites.",
+  "iteration_limit": 3,
+  "routes_considered": [
+   "KEEP_UNGUARDED_STRUCTURAL_FALLBACK (rejected: negated rename executed)",
+   "REMOVE_STRUCTURAL_FALLBACK (rejected: main's bridge Layer B requires it)",
+   "GUARD_STRUCTURAL_FALLBACK_AND_COMPOSE_WITH_VERIFIED_VARIANTS (chosen)",
+   "LET_WORD_ACCOUNTING_REFUSAL_STAND_OVER_VERIFIED_RECALL (rejected: taught doors failed closed)"
+  ],
+  "obs_goal": {
+   "real_outcome": "Preserve verified taught workflow recall and unsafe-request refusal after merging main.",
+   "proxy_goals_deleted": [
+    "COUNTING_A_STRUCTURAL_BIND_AS_VERIFIED_TRANSFER",
+    "TREATING_A_CAPABILITY_WORD_ACCOUNTING_REFUSAL_AS_A_REFUSAL_OF_A_VERIFIED_TAUGHT_WORKFLOW"
+   ],
+   "surviving_necessity": "The live door must still execute a taught workflow that accounts for the sentence, and must still refuse negation or an extra destructive action."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_MERGED_COMPILER_AND_LIVE_DOOR_ARE_THE_SELECTION_PATH",
+   "surviving_causal_blocker": "The structural fallback bypassed surface_is_safe, and _is_honest_contract_refusal treated word-accounting refusals as final before verified recall could answer.",
+   "delete_bypass_substitute_options": [
+    "DELETE the structural fallback (rejected: main's bridge cases need it)",
+    "BYPASS all honest refusals (rejected: only word-accounting refusals are answerable by verified recall)",
+    "COMPOSE the existing guard, variant path, structural fallback and verified recall (chosen)"
+   ]
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "NO_NEW_LEARNER__THE_EXISTING_VARIANT_ADMISSION_AND_STRUCTURAL_BINDER_ARE_COMPOSED"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/workflow_goal_generalization_v1.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+    "canonical/runtime/live_brain_route_admission_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "Agent Workflow Memory (arXiv 2409.07429): named-slot workflow abstraction",
+    "SkillGen (arXiv 2605.10999): held-out net-effect gate for skill interventions"
+   ],
+   "surviving_gap": "The merged path needed a guard on the wider fallback and a door rule that lets verified recall answer word-accounting refusals."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "main's structural binder and multi-token index",
+    "the existing confined executor and postcondition verifier"
+   ],
+   "downstream_work_to_delete_or_supersede": [],
+   "fresh_reuse_plan": "On a fresh store the variant path is empty and costs nothing; the exact taught template and structural fallback behave as tested."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "THE_BINDER_IS_COMPOSED_ONCE__NO_SECOND_RETRIEVAL_STORE_IS_ADDED"
+   ],
+   "search_stop_decision": "Stopped after the two measured regressions were repaired and both sides' suites passed; no new mechanism was invented."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Removing the structural fallback breaks main's bridge cases; leaving it unguarded executes negation; leaving word-accounting refusals final loses verified taught recall.",
+   "routes_ranked": [
+    "1_GUARD_STRUCTURAL_FALLBACK_AND_COMPOSE_WITH_VERIFIED_VARIANTS",
+    "2_LET_VERIFIED_RECALL_ANSWER_WORD_ACCOUNTING_REFUSALS",
+    "3_REMOVE_STRUCTURAL_FALLBACK (rejected)",
+    "4_KEEP_UNGUARDED_FALLBACK (rejected)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The effect is measured through the real door and confined executor on taught refactorings, main's bridge Layer B, and the workflow-goal variant suite. No external benchmark or independent verifier is claimed."
+  },
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FLIPS_NO_FAMILY",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING",
+   "decisive_question": "Does the merged compiler preserve verified taught recall and main's structural binds while refusing negation and extra destructive actions?",
+   "falsifier_id": "A_NEGATED_REQUEST_EXECUTES_OR_A_VERIFIED_TAUGHT_DOOR_FAILS_CLOSED_WITHOUT_A_DECLINED_REASON",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "The two measured counterexamples were the unguarded structural fallback executing a negated rename and word-accounting refusals silencing taught rename/inline recall; both are repaired and covered by the existing suites."
+  }
+ },
+ "next_step": "Keep the variant admission path narrow; add chosen-probe settlement and adversarial held-out transfer before claiming broader generalization.",
+ "causal_evidence": "MEASURED_ON_THIS_HOST_AFTER_MERGING_ORIGIN_MAIN_96dc5fde: initial 3-suite run 6 failed / 113 passed; after repair 15-suite targeted regression 237 passed / 2 skipped / 8 subtests; repo-integrity static PASS.",
+ "tournament": {
+  "proposal_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING",
+  "decisive_question": "Does the merged compiler preserve verified taught recall and main's structural binds while refusing negation and extra destructive actions?",
+  "falsifier_id": "A_NEGATED_REQUEST_EXECUTES_OR_A_VERIFIED_TAUGHT_DOOR_FAILS_CLOSED_WITHOUT_A_DECLINED_REASON",
+  "known_counterexamples_checked": true,
+  "counterexample_receipts": [],
+  "no_known_counterexample_reason": "The two measured counterexamples were the unguarded structural fallback executing a negated rename and word-accounting refusals silencing taught rename/inline recall; both are repaired and covered by the existing suites."
+ }
+}
