@@ -1,0 +1,258 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1",
+ "action_intent_id": "MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1",
+ "action_kind": "RECONCILE_FRONTIER",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "4138e9ee0b5afa8cc71f1c32e72c49686304eae6",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Repoints the ninth and last statically identified acceptance defect: python.task.acceptance.measured.objective.v1 accepted on output_verified, which its adapter sets after writing an answer file on every path that returns. The repository's own producer (python.repository.acceptance.measure.v1) was run on a real fixture and its content-addressed receipt fed to the consumer twice: untouched, and with one measurement value altered so the payload hash fails. Both runs answer pass=false (OPEN__SEMANTIC_ACCEPTANCE_RESIDUALS and FAIL_CLOSED) and both are written with output_verified=true, so the registered predicate accepted a genuine pass and a refused receipt and could not tell them apart. After the change it rejects both. Honest limitation: no pass=true was observed from this capability, so this is a repoint on rejection evidence only; it establishes no repair quality, benchmark movement, general computer use, or capability completeness.",
+ "selected_route": "RUN_THE_TREES_OWN_MEASUREMENT_PRODUCER_AND_CHECK_THE_CONSUMERS_DECLARED_BOOLEAN",
+ "causal_blocker": "ONE_REGISTERED_CAPABILITY_ACCEPTS_ANY_WRITTEN_ANSWER_FILE_INCLUDING_A_REFUSED_MEASUREMENT_RECEIPT_BECAUSE_THE_REGISTRY_CHECKS_OUTPUT_VERIFIED_NOT_THE_DECLARED_PASS_BOOLEAN",
+ "expected_parent_change": "A_REFUSED_MEASUREMENT_RECEIPT_AND_A_SEMANTICALLY_BLOCKED_GENUINE_RECEIPT_ARE_BOTH_REJECTED_BY_THE_REGISTERED_PREDICATE",
+ "expected_parent_frontier_change": "ONE_MEASURED_FALSE_ACCEPTANCE_PATH_REMOVED__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_REGISTERED_CAPABILITY_ACCEPTS_ANY_WRITTEN_ANSWER_FILE_INCLUDING_A_REFUSED_MEASUREMENT_RECEIPT_BECAUSE_THE_REGISTRY_CHECKS_OUTPUT_VERIFIED_NOT_THE_DECLARED_PASS_BOOLEAN",
+ "falsification_condition": "EITHER_EXECUTED_CASE_IS_ACCEPTED_BY_THE_REGISTERED_PREDICATE__OR_THE_PRODUCER_RECEIPT_IS_NOT_CONTENT_ADDRESSED__OR_THE_CONSUMER_ACCEPTS_AN_ALTERED_RECEIPT__OR_THE_UNIFIED_MODEL_DOES_NOT_RECOMPILE",
+ "stop_condition": "BOTH_CASES_EXECUTED__REGISTERED_PREDICATE_REJECTS_BOTH__DEBT_LIST_EMPTY__FOCUSED_TESTS_PASS__UNIFIED_MODEL_RECOMPILES__REFEREE_PASSES__NO_CAPABILITY_CREDIT",
+ "explicit_user_authorization": "Owner directive 2026-11-12: determine what is real about instant learning and advanced coding/computer-use actions; kill bad ideas and choose the smartest route. This change fixes an executed false-acceptance defect rather than claiming one demonstration solves arbitrary work. Zero spend and zero model producer cognition.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+   "canonical/tests/test_a_refused_receipt_is_still_marked_verified_v1.py",
+   "a_refused_receipt_is_still_marked_verified_probe_20261112.py"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "A_WRITTEN_ANSWER_FILE_IS_SUFFICIENT_EVIDENCE_THAT_MEASURED_ACCEPTANCE_WAS_GRANTED",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "EXECUTED_ON_CURRENT_TREE__8_OF_8_UNSATISFIABLE_REPAIR_ATTEMPTS_RETURN_PASS_FALSE_AND_OUTPUT_VERIFIED_TRUE__REGISTERED_PREDICATE_CHANGED_TO_PASS_TRUE__PRODUCTION_EXPECT_CHECKER_AND_NEGATIVE_CONTROL_REGRESSION_TESTED"
+ },
+ "measured_effect": "2_OF_2_CASES_ACCEPTED_BEFORE__0_OF_2_ACCEPTED_AFTER__NO_BENCHMARK_MOVEMENT__NO_CAPABILITY_REGISTRATION",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NO_BENCHMARK_OBLIGATION__ONE_MEASURED_ACCEPTANCE_DEFECT_IS_REMOVED_AS_A_CONSTRUCTIVE_DEPENDENCY_FOR_RELIABLE_CODING_WORK__THE_UNLOCK_FRACTION_IS_A_REPO_ADMISSION_UNIT_NOT_A_BENCHMARK_SCORE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/13",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "MEASURED_ACCEPTANCE_REJECTS_A_REFUSED_RECEIPT"
+  ],
+  "proof_state_reachability": "THE_MEASURED_ACCEPTANCE_CAPABILITY_MUST_ROUTE_ITS_RESULT_THROUGH_THE_DECLARED_PASS_BOOLEAN__A_WRITTEN_ANSWER_FILE_IS_NOT_ACCEPTANCE__THIS_FIX_IS_BOUNDED_AND_CLAIMS_NO_GENERAL_TRANSFER",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "total_families": 19,
+   "total_atomic": 38,
+   "terminal": false,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "historical_atomic_registry_count": 38,
+   "deleted_nonnecessary_atomic_count": 2,
+   "current_load_bearing_atomic_count": 36
+  },
+  "tournament": {
+   "proposal_id": "P_MEASURED_ACCEPTANCE_USES_DECLARED_OUTCOME",
+   "falsifier_id": "F_ANY_KNOWN_UNSATISFIABLE_REPAIR_ACCEPTED_OR_VALID_PASS_TRUE_REJECTED",
+   "decisive_question": "Do the eight registered repair capabilities reject each executed provably unsatisfiable repair while accepting a result with pass=true?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "a_refused_receipt_is_still_marked_verified_probe_20261112.py",
+     "git_blob_sha": "6f53349e7674bd87892ab77b1e094f36b9f8448d"
+    },
+    {
+     "path": "canonical/tests/test_a_refused_receipt_is_still_marked_verified_v1.py",
+     "git_blob_sha": "ee3dc0e446ee5946724cadababc177eb9fd444e4"
+    }
+   ]
+  }
+ },
+ "recursive_obs": {
+  "reasoning_durability": {
+   "scope": "BOUNDED_MEASURED_ACCEPTANCE_PREDICATE_CORRECTION",
+   "what_persists": "Registry requires pass=true for the measured-acceptance capability; an executed two-case probe and a regression test preserve the evidence, and the debt list is empty.",
+   "non_claims": [
+    "NO_UNIVERSAL_COMPUTER_USE",
+    "NO_BENCHMARK_GAIN",
+    "NO_CAPABILITY_CREDIT",
+    "NO_SENTIENCE_CLAIM",
+    "NO_OBSERVED_PASS_TRUE_FROM_THIS_CAPABILITY"
+   ]
+  },
+  "theory_invariants": [
+   "OUTPUT_ARTIFACT_EXISTS_IS_NOT_EQUIVALENT_TO_TASK_SUCCESS",
+   "ONLY_A_DECLARED_AND_VERIFIED_SUCCESS_OUTCOME_CAN_SATISFY_THE_REGISTERED_SUCCESS_EXPECTATION",
+   "NEGATIVE_CONTROLS_MUST_REMAIN_REJECTED"
+  ],
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "4138e9ee0b5afa8cc71f1c32e72c49686304eae6",
+  "real_outcome": "Prevent a measured-acceptance capability from accepting a run whose own answer is a refusal, merely because an answer file was written.",
+  "required_capability": "RELIABLE_MEASURED_ACCEPTANCE_AS_A_CONSTRUCTIVE_DEPENDENCY_OF_THE_GENERAL_REUSABLE_PROBLEM_SOLVING_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Reject a refused measurement receipt before reporting a measured acceptance result.",
+   "proxy_goals_deleted": [
+    "OUTPUT_FILE_EXISTS",
+    "REPAIR_ATTEMPT_RAN",
+    "OUTPUT_VERIFIED_FLAG_WITHOUT_PASS_TRUE"
+   ],
+   "surviving_necessity": "The adapter must report pass=true and the production runtime must accept that declared outcome."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/grounded_action_v1.py",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json",
+    "gate_accepts_a_failed_repair_probe_20261112.py"
+   ],
+   "external_existing_routes_checked": [
+    "Existing adapter-declared pass field",
+    "Existing production _check_expect field_equals handling"
+   ],
+   "capability_work_deleted": [
+    "New_repair_adapter",
+    "New_execution_engine",
+    "New_sensor_or_computer_use_action"
+   ],
+   "surviving_gap": "No further capability is added; the eight registry entries must bind acceptance to their declared success outcome."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_REGISTRY_EXPECTATION_MISMATCH",
+   "delete_bypass_substitute_options": [
+    "DELETE_FALSE_OUTPUT_VERIFIED_EXPECTATION",
+    "BYPASS_ADAPTER_AND_CHANGE_RUNTIME",
+    "REUSE_EXISTING_PASS_BOOLEAN_AND_EXPECT_CHECKER"
+   ],
+   "surviving_causal_blocker": "Eight registry expectations select output_verified instead of pass."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    {
+     "route": "REUSE_EXISTING_PASS_BOOLEAN_AND_RUNTIME_EXPECT_CHECKER",
+     "rank": 1,
+     "reason": "Changes eight data predicates without introducing a new runtime mechanism."
+    },
+    {
+     "route": "BYPASS_REGISTRY_EXPECTATION_WITH_NEW_RUNTIME_SPECIAL_CASE",
+     "rank": 2,
+     "reason": "Adds duplicate logic and expands blast radius."
+    },
+    {
+     "route": "SYNTHESIZE_NEW_REPAIR_ORACLE",
+     "rank": 3,
+     "reason": "Unnecessary; current adapters already declare pass."
+    }
+   ],
+   "losing_routes_reason": [
+    "Runtime special case duplicates existing generic _check_expect semantics.",
+    "A new oracle is unnecessary for this measured predicate defect."
+   ],
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": false,
+   "direct_evidence": "Executed all eight unsatisfiable repair negative controls; after correction, zero are accepted and all eight report pass=false.",
+   "positive_control": "Production _check_expect accepts pass=true and rejects pass=false."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "Any claim that output-file existence alone proves a repair succeeded."
+   ],
+   "adjacent_capabilities_absorbed": [
+    "Eight existing registered repair capabilities now share the same explicit boolean outcome semantics."
+   ],
+   "fresh_reuse_plan": "Reuse registered outcome checks; do not create new repair actions based on this predicate fix."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "Do not re-audit adapter implementations after the direct negative-control suite and registry predicates agree."
+   ],
+   "search_stop_decision": "Stop after eight negative controls, positive checker path, focused repair suite, generated model digest, and required repository guards pass.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "DELETE",
+   "BYPASS",
+   "REUSE",
+   "ADAPT",
+   "SUBSTITUTE",
+   "COMPOSE",
+   "CONFIGURE",
+   "INTEGRATE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "deleted_or_bypassed_paths": [
+   "Adding another repair adapter",
+   "Changing production checker where generic semantics already work",
+   "Treating output_verified as success"
+  ],
+  "selected_surviving_route": "REUSE_THE_ADAPTERS_MEASURED_BOOLEAN_OUTCOME_AND_EXISTING_RUNTIME_EXPECT_CHECKER",
+  "why_selected_route_is_fastest_sufficient": "A data-only registry correction reuses the already-declared boolean outcome and production checker; it is smaller than adding an execution rule or new oracle.",
+  "expected_parent_level_state_change": "ONE_MEASURED_FALSE_ACCEPTANCE_PATH_REMOVED__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "stop_condition": "BOTH_CASES_EXECUTED__REGISTERED_PREDICATE_REJECTS_BOTH__DEBT_LIST_EMPTY__FOCUSED_TESTS_PASS__UNIFIED_MODEL_RECOMPILES__REFEREE_PASSES__NO_CAPABILITY_CREDIT",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "BOUNDED_REGISTRY_ACCEPTANCE_DEFECT__REUSE_OF_EXISTING_LOCAL_ADAPTER_OUTCOME_AND_RUNTIME_EXPECT_CHECKER__NO_NEW_CAPABILITY_ROUTE_IS_CLAIMED"
+  }
+ }
+}
