@@ -461,8 +461,32 @@ def iter_crystallized_code_rule_candidates(source_text, rule):
         yield from _iter_token_rule_candidates(source_text, rule)
 
 
+#: The only states in which a stored rule may edit code. `None` is the legacy contract for
+#: rules written before the state field existed; a refuted rule always carries the string, so
+#: this cannot re-open one. Keep this the single source of truth: recall enforces the same
+#: predicate, and callers that had to remember it by hand no longer have to.
+APPLICABLE_RULE_STATES = (None, 'ACTIVE')
+
+
+def rule_is_applicable(rule: Mapping[str, Any]) -> bool:
+    """May this stored rule act? A refuted rule may not, in any path."""
+    return rule.get('state') in APPLICABLE_RULE_STATES
+
+
 def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> str | None:
-    """First proposal only; scoped recall verifies bounded alternative locations."""
+    """First proposal only; scoped recall verifies bounded alternative locations.
+
+    Returns None for a refuted rule. That is the same contract as "the rule did not fire", so
+    every existing caller already handles it -- and it is what makes invalidation mean
+    something outside the one recall path that remembered to check by hand.
+
+    Measured before this guard (2026-11-12): a rule refuted by review on a spec counterexample
+    still returned `return a < 50` for `return a <= 50`, and
+    `software_repair_crossfile_choreograph_v1` offered exactly that as its first repair
+    candidate.
+    """
+    if not rule_is_applicable(rule):
+        return None
     return next(iter_crystallized_code_rule_candidates(source_text, rule), None)
 
 

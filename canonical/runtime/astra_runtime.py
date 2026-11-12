@@ -1446,7 +1446,26 @@ def _resolve_bound_adapter_path(entry,module_name):
     return candidate
 
 
-def _invoke_bound_capability(args):
+def _invoke_bound_capability(args, root=None):
+    """Run one bound adapter in `root` (default: this repository).
+
+    THE DEFECT, MEASURED. This always executed against the module-level ROOT, while the caller
+    that selected the capability had sensed, planned and bound paths against a DIFFERENT root.
+    `chain_v1.run(goal, root=env)` therefore perceived `env` and acted in the repository: a manifest
+    present in `env` bound correctly and then died with MANIFEST_INPUT_REQUIRED because the adapter
+    looked for it in the repo. The system could not act in any environment but its own.
+
+    That is fatal for learning where a plan applies. Every "new environment" was the same
+    environment, so no real contrast could ever be produced, so every applicability boundary stayed
+    UNDETERMINED however many runs happened.
+
+    ADDITIVE BY DESIGN. `root=None` preserves the previous behaviour for all existing callers.
+    Only the ADAPTER CODE still comes from this repository -- `_resolve_bound_adapter_path` is
+    untouched -- because executable code must not be sourced from the environment being acted on.
+    The write-authority check runs against the SAME root the adapter will use, so the guard cannot
+    be bypassed by choosing a root.
+    """
+    execution_root=ROOT if root is None else pathlib.Path(root).resolve()
     cid=str(args.get("capability_id") or "").strip()
     if not cid:
         raise Blocker("BOUND_CAPABILITY_ID_REQUIRED")
@@ -1501,12 +1520,12 @@ def _invoke_bound_capability(args):
     # closed refusal.
     try:
         from canonical.runtime import write_authority_v1 as _write_authority
-        _write_authority.check(ROOT,call_args,cid)
+        _write_authority.check(execution_root,call_args,cid)
     except Blocker:
         raise
     except Exception as exc:  # noqa: BLE001 - a refused write is a closed failure with its reason
         raise Blocker(str(exc)) from exc
-    result=fn(call_args,ROOT)
+    result=fn(call_args,execution_root)
     if not isinstance(result,dict):
         raise Blocker("BOUND_CAPABILITY_RESULT_INVALID")
     result.setdefault("capability_id",cid)

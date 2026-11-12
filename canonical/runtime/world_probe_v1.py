@@ -109,8 +109,13 @@ _RUNTIME_KINDS = {
     # `network` is not an executable, but it is decided the same way this table
     # already decides things: ask the world, answer yes or no, never guess.
     # `_decide_runtime` special-cases it below because `shutil.which("network")`
-    # can never be anything but None.
+    # can never be anything but None. `pypi` is likewise a route, not a binary;
+    # `structured.release_claim` rides the network route; `git.repository` is
+    # decided by the git binary the operate adapter actually shells out to.
     "network": "network",
+    "pypi": "pypi",
+    "structured.release_claim": "network",
+    "git.repository": "git",
 }
 
 
@@ -169,6 +174,77 @@ def _network_reachable() -> dict:
     return {"true": False, "how": "network_tcp_unreachable",
             "evidence": None, "tried": tried}
 
+
+# The same instrument, scoped to one host. `pypi.live_metadata.available` and
+# `pypi.selection.available` both mean "this machine can reach the pypi index at
+# all" -- the live-metadata fetch and the selection read are the adapter's job
+# and stay fail-closed there; this decides the PRECONDITION, so a plan can be
+# formed. Probing pypi.org does not answer for any other host and does not
+# answer "may I fetch" -- it answers "is the route up", never guessing.
+_PYPI_PROBES = (("pypi.org", 443),)
+_PYPI_TIMEOUT_S = 3.0
+
+
+def _pypi_reachable() -> dict:
+    import socket
+    import time as _time
+
+    started = _time.monotonic()
+    tried = []
+    for host, port in _PYPI_PROBES:
+        if _time.monotonic() - started > _PYPI_TIMEOUT_S * 2:
+            break
+        tried.append(host)
+        try:
+            with socket.create_connection((host, port), timeout=_PYPI_TIMEOUT_S):
+                return {"true": True, "how": "pypi_tcp_reachable",
+                        "evidence": host, "tried": tried}
+        except Exception:
+            continue
+    return {"true": False, "how": "pypi_tcp_unreachable",
+            "evidence": None, "tried": tried}
+
+
+# A raster chart reader is available when the libraries it imports exist and the
+# OCR binary it calls exists -- measured on the imports the adapters actually
+# make (`PIL.Image` in the scene graph) and the executable they shell out to
+# (`tesseract` for positioned OCR). ABSENCE IS INFORMATION: "this box cannot
+# read raster charts" is a true and useful answer, and it names the missing
+# piece instead of shrugging. A fact that used to be BLIND -- indistinguishable
+# from "I have no idea" -- is now a decision either way.
+_SUBSYSTEM_KINDS = {
+    "chart": {"imports": ("PIL",), "executables": ("tesseract",)},
+    # `chart.question.<X>.available` names the question, not a suffix chain:
+    # the base does not END with `.question`, so `_subjects` cannot strip down
+    # to `chart`. These two rows are the same subsystem probed the same way,
+    # written out explicitly so the answer stays reviewable data.
+    "chart.question.binary_phase_solvus": {"imports": ("PIL",),
+                                           "executables": ("tesseract",)},
+    "chart.question.legend_linear_intersection": {"imports": ("PIL",),
+                                                  "executables": ("tesseract",)},
+}
+
+
+def _decide_subsystem(subject, _goal_paths, _root):
+    spec = _SUBSYSTEM_KINDS.get(subject)
+    if spec is None:
+        return None
+    missing = []
+    for module in spec.get("imports", ()):
+        try:
+            __import__(module)
+        except Exception:
+            missing.append("module:%s" % module)
+    for exe in spec.get("executables", ()):
+        if shutil.which(exe) is None:
+            missing.append("executable:%s" % exe)
+    if missing:
+        return {"true": False, "how": "subsystem_probed",
+                "evidence": "missing " + ", ".join(missing)}
+    return {"true": True, "how": "subsystem_probed",
+            "evidence": ",".join(spec.get("imports", ()))
+            + "+" + ",".join(spec.get("executables", ())) + " present"}
+
 # Facts so basic they are easy to overlook and fatal to miss. The
 # computer-use capabilities require `project_present` and `files_known`,
 # and nothing in the registry PROVIDES either -- so without deciding them
@@ -193,13 +269,58 @@ def _decide_bootstrap(effect, root, goal_paths):
 
 _INDEX_CACHE: dict[str, list[str]] = {}
 _MATCH_CACHE: dict[tuple[int, str], list[str]] = {}
+#: root -> the directory-entry fingerprint the cached listing was built under.
+_INDEX_STAMP: dict[str, tuple] = {}
+
+
+def _dir_stamp(root: Path) -> tuple:
+    """A cheap token that changes whenever the set of paths under `root` can have changed.
+
+    THE DEFECT THIS REPAIRS, MEASURED. `_index` was memoised on the root path alone and never
+    invalidated. In one process: create `manifest.json` in an empty directory and the probe still
+    answered False; delete it again and the probe still answered True. The world was frozen at
+    first glance. That is fatal for learning where a plan applies -- a new environment is
+    indistinguishable from the old one, so no contrast can ever be observed, so every boundary
+    stays UNDETERMINED no matter how many real runs happen.
+
+    THE TOKEN IS ENTRY NAMES, NOT MTIME. The obvious fingerprint -- (directory, mtime_ns) -- was
+    implemented first and MEASURED TO FAIL on this filesystem: creating a file left the parent
+    directory's mtime_ns bit-identical (timestamp granularity is coarse here), so the stale listing
+    survived. A token that depends on clock resolution is not a correctness mechanism. Listing the
+    entry NAMES of each directory is resolution-independent: a create, delete or rename changes the
+    name set directly. File CONTENT edits do not change the listing, and correctly do not invalidate.
+
+    WHY NOT JUST DROP THE CACHE. Measured on this repository: full index 66.1ms over 16532 files;
+    the name token 10.6ms over 313 directories -- 16% of the cost. Correctness is nearly free here,
+    so there is no trade-off to argue about.
+    """
+    token: list[tuple] = []
+    stack = [str(root)]
+    while stack:
+        cur = stack.pop()
+        try:
+            names: list[str] = []
+            with os.scandir(cur) as it:
+                for entry in it:
+                    if entry.name in _SKIP_DIRS:
+                        continue
+                    names.append(entry.name)
+                    if entry.is_dir(follow_symlinks=False):
+                        stack.append(entry.path)
+            names.sort()
+            token.append((cur, tuple(names)))
+        except OSError:
+            continue
+    token.sort()
+    return tuple(token)
 
 
 def _index(root: Path) -> list[str]:
-    """Cached, bounded, relative-path listing of the repository tree."""
+    """Cached, bounded, relative-path listing of the repository tree, revalidated against disk."""
     key = str(root)
+    stamp = _dir_stamp(root)
     cached = _INDEX_CACHE.get(key)
-    if cached is not None:
+    if cached is not None and _INDEX_STAMP.get(key) == stamp:
         return cached
     found: list[str] = []
     stack = [str(root)]
@@ -221,6 +342,10 @@ def _index(root: Path) -> list[str]:
             continue
     found.sort()
     _INDEX_CACHE[key] = found
+    # Stamp AFTER the walk: a change during the walk then fails validation next call and rebuilds,
+    # instead of being blessed as current.
+    _INDEX_STAMP[key] = _dir_stamp(root)
+    _MATCH_CACHE.clear()
     return found
 
 
@@ -264,7 +389,8 @@ def _subjects(effect: str) -> list[str]:
     out = [base]
     suffixes = (".file", ".corpus", ".runtime", ".text", ".http", ".https",
                 ".network", ".live_metadata", ".selection", ".query",
-                ".question", ".series", ".candidate")
+                ".question", ".series", ".candidate", ".x_value", ".y_value",
+                ".label")
     changed = True
     while changed:
         changed = False
@@ -307,9 +433,15 @@ def _decide_runtime(subject, _goal_paths, _root):
     if exe is None:
         return None
     # `network` is not an executable; it is a route. Same table, different
-    # instrument, same contract: answer, never guess.
+    # instrument, same contract: answer, never guess. `pypi` is the same kind
+    # of route, scoped to the pypi index. `structured.release_claim` rides the
+    # network route too: the claim is obtained over HTTP from the product's
+    # official source, so the machine-level precondition is the route, and the
+    # claim's content is verified by the adapter when it runs.
     if exe == "network":
         return _network_reachable()
+    if exe == "pypi":
+        return _pypi_reachable()
     hit = shutil.which(exe)
     if hit:
         return {"true": True, "how": "path_executable", "evidence": hit}
@@ -353,6 +485,9 @@ def probe_effect(effect, goal="", goal_paths=(), root=None):
 
     for subject in _subjects(e):
         decided = _decide_file(subject, goal_paths, root)
+        if decided is not None:
+            return decided
+        decided = _decide_subsystem(subject, goal_paths, root)
         if decided is not None:
             return decided
         decided = _decide_runtime(subject, goal_paths, root)

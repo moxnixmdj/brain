@@ -234,3 +234,165 @@ python3 -m unittest -v \
 ```
 
 These are sandbox measurements, not canonical promotion receipts.
+
+## 7.4 Choosing the next experience — and two defects that made every new environment the old one
+
+§7.3 wired the applicability learner into the live executor and closed with an honest limit: the
+live store held successes only, so every boundary stayed `UNDETERMINED` and nothing was ever
+withheld. This section removes that limit and reports what was actually broken underneath it.
+
+**The starting measurement.** Three real successes of the same chain on this base:
+`UNDETERMINED__NO_CONTRASTING_OUTCOME`, successes 3, failures 0, survivors 0. Repetition was
+buying rows, not knowledge.
+
+### Two defects found by trying to produce a contrast, not by reading code
+
+1. **The world index never noticed a change.** `world_probe_v1._index` was memoised on the root
+   path alone. Measured in one process: create `manifest.json` in an empty directory → the probe
+   still answered `False`; delete it → still `True`. The perceived world was frozen at first
+   glance. The obvious repair, a `(directory, mtime_ns)` fingerprint, was implemented first and
+   **measured to fail on this filesystem** — the parent mtime stayed bit-identical across a create
+   (coarse timestamp granularity). A correctness mechanism cannot depend on clock resolution. The
+   shipped token is the sorted **entry names** of every directory: resolution-independent, and
+   measured at **10.6 ms vs 66.1 ms** for a full reindex of 16 532 files (16 %), so an unchanged
+   tree still reuses its listing.
+
+2. **Bound adapters always executed against the repository.** `astra_runtime._invoke_bound_capability`
+   called `fn(call_args, ROOT)` while the caller had sensed, planned and bound paths against a
+   different root. A manifest present in the target environment bound correctly and then died with
+   `MANIFEST_INPUT_REQUIRED`, because the adapter looked for it in the repository. **The system
+   could not act in any environment but its own**, so no real contrast could be produced anywhere.
+   The repair is additive — `root=None` preserves all 46 existing callers — and only execution
+   moves: adapter **code** is still resolved from this repository, and the write-authority check
+   runs against the same root the adapter uses, so a root cannot be chosen to bypass the guard.
+
+Together these are the mechanical reason "show it once and it will know every environment" could
+not have worked here: every environment was literally the same environment, and changes to it
+were invisible.
+
+### Separating the SPACE from the VERDICT
+
+`applicability_v1.learn` refuses to license a boundary without a failure, and that refusal is
+correct — a success cannot establish necessity. But successes do constrain which requirements are
+*possible*, and that space is exactly what a query selector needs. Conflating the two left the
+selector with zero survivors after real successes. `candidate_requirements` exposes the space;
+`learn` is unchanged and still returns `UNDETERMINED` from successes alone.
+
+`contrast_selection_v1.select_contrast` ranks reachable states with the existing
+`exact_information_gain` module (exact `Fraction`s, no floating-point logarithms; zero gain is
+recognised exactly by an empty log-term dict). It returns the most even split, or names the facts
+that would have to differ. It proposes **only** states the caller supplies — observed states and
+the current one — because EIG selection is known to degrade when it queries outside realisable
+support (arXiv 2602.06818). `macro_v1.next_contrast` reads the store through the same
+`_evidence_rows` helper as `applicability`, and `chain_v1.run` reports it as `next_contrast`.
+
+### Measured on the real executor
+
+`one_experience_is_a_point_a_chosen_contrast_is_a_boundary_probe_20261112.py` builds real
+directories, runs the real `chain_v1.run`, and records the executor's own verified verdicts. Each
+environment is **reset and re-sensed before every run**, because running the job writes a `.tar.gz`
+into it and silently moves it to another state — without that reset the later numbers describe a
+world that no longer exists. Of 8 requested fact subsets only **4 are reachable**: `manifest.json`
+cannot exist without `structured.json`, and the unreachable requests are detected, never recorded.
+
+| arm | queries after the demo | survivors | learned G | held-out predicted |
+|---|---|---|---|---|
+| passive repetition | 8 | 8 | `[]` (scopes nothing) | 1/3 |
+| **chosen contrast** | **2** | **2** | **`manifest.json.available`** | **1/1** |
+| fewest-survivors (killed idea) | 8 | 6 | `archive.tar_gz.available` (**false**) | 0/2 |
+
+The killed heuristic is not merely slower: it learned a **false** requirement and mispredicted
+every held-out environment. The chosen arm found the true requirement in 2 queries and then
+**stopped**, reporting `NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS`: the last two survivors are
+indistinguishable in every reachable world, so full identification is impossible here and spending
+the remaining budget would buy nothing. Saying so is the correct terminal answer.
+
+### Guards
+
+* Fresh baseline on this base: **1 failed / 65 passed** (pre-existing
+  `test_python_stdlib_capabilities_declare_importable_module`).
+* With the change plus 21 new tests: **1 failed / 86 passed** — **NEW FAILURES: NONE**.
+* **Mutation-tested, all four killed**: cache never invalidated → 4 failures; adapters ignore the
+  caller's root → 2 failures; selector uses the licensed boundary instead of the space → 4
+  failures; fewest-survivors instead of most-even split → 1 failure.
+* Live battery unchanged at **3/4** chains.
+
+**What this does not claim.** No capability credit, no terminal credit, no benchmark movement. One
+demonstration still settles nothing; what changed is that the *next* experience can now be chosen,
+the world can actually be re-perceived, and a different environment can actually be acted in.
+
+## 7.5 The "permanent reachability limit" was double-counting, not a limit
+
+§7.4 ended with what looked like a hard boundary on learning: after two real chosen contrasts the
+learner reported `AMBIGUOUS` with two survivors, and the selector reported that **no reachable state
+could ever separate them**. That was written up as an honest permanent limit. It was wrong.
+
+The two survivors were:
+
+```
+('manifest.json.available',)
+('manifest.json.available', 'structured.json.available')
+```
+
+`world_probe_v1` decides `manifest.json` as "a `.json` file whose name contains *manifest*" and
+`structured.json` as "a `.json` file". **Every world satisfying the first satisfies the second.** So
+the second literal is redundant and those two survivors are **one requirement spelled twice**. The
+system was reporting ignorance where its own evidence already gave certainty — withholding `required`
+and leaving a plan unscoped that it had in fact fully characterised.
+
+### The repair is background knowledge, not more experience
+
+The implication is not learned from trajectories and must not be — it is derivable from the sensor's
+**own kind declarations**, before any example exists. `fact_entailment_v1` reads `_FILE_KINDS` from
+`world_probe_v1` (never a copy, so it cannot drift from the sensor) and derives the implication
+relation. `applicability_v1` now counts **distinct requirements up to logical equivalence** instead
+of counting spellings. This is the *implication-reducible* pruning of Cropper & Hocquette's
+hypothesis-space preprocessing (arXiv 2506.06739): a literal implied by another literal in the same
+body is redundant, and removing it is sound and example-independent.
+
+Measured on the live kind table: **19 kinds, 33 implications, 4 equivalence pairs** (`json` =
+`structured.json` = `candidate.response_or_fields`; `pdf` = `pdf.file.image_only`).
+
+### Soundness was attacked, not assumed
+
+An unsound implication would **delete a real requirement** and let a plan run where it fails — the
+false-lesson failure mode. So:
+
+* The first rule written read an empty suffix set as "matches nothing" and produced **38 bogus
+  equivalences** including `artifact.file == docx`. Empty means **any file** — the weakest
+  constraint, never the strongest. Fixed and pinned by a test.
+* Every one of the 33 claimed implications was then falsification-tested through the **real
+  `probe_effect` on real directories**: **0 violations**.
+* A property test checks reduction never changes an admission decision on any realisable world.
+* Mutual implication gets one canonical representative; without it, reducing `{json, structured}`
+  would delete **both** literals and weaken the requirement to nothing. Mutation-tested.
+* Unknown facts are never reduced away.
+
+### Measured on the real executor
+
+Same probe, same real directories, same two real runs as §7.4:
+
+| arm | queries | survivors | identified | learned requirement | held-out |
+|---|---|---|---|---|---|
+| passive repetition | 8 | 6 | no | `[]` — scopes nothing | 1/3 |
+| **chosen contrast** | **2** | **1** | **YES** | **`manifest.json.available`** | **1/1** |
+| fewest-survivors (killed) | 8 | 4 | no | `archive.tar_gz.available` — false | 0/2 |
+
+**The same experience now yields identification instead of permanent ambiguity.** No extra runs, no
+extra queries — only counting what is actually distinct. All 10 probe verdict checks true.
+
+### Guards
+
+* Fresh baseline on this base **1f/86p** → with 13 new tests **1f/99p** — **NEW FAILURES: NONE**.
+* **Four mutations, all killed**: empty-set direction inverted → 2 failures; counting spellings
+  again → 2; equivalence class deleted entirely → 1; non-transitive spec rule → 5.
+* A transitive-closure loop was written first; a mutation deleting it killed **no** test, and
+  measurement showed it added **0** pairs to the 33 direct ones. `_spec_implies` is provably
+  transitive, so the loop was **deleted as dead code** and replaced by an all-triples property test.
+* Live battery unchanged **3/4**.
+
+**Why this matters for "learn it once".** The bottleneck was not only how much experience the agent
+gets — it was that the agent **threw away certainty it already had** by treating two spellings of one
+requirement as two open questions. Every redundant literal inflates the space exponentially and
+manufactures ambiguity that no amount of experience can resolve. Removing them is free, sound, and
+strictly reduces the number of experiences needed. No capability or terminal credit claimed.

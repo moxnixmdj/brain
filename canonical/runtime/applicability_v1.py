@@ -73,6 +73,9 @@ class Boundary:
     failures: int
     candidate_facts: tuple[str, ...]
     reason: str
+    #: Every requirement still consistent with the evidence, each sorted. Empty unless the
+    #: evidence supports at least one. Query selection needs the whole set, not just its edges.
+    survivors: tuple[tuple[str, ...], ...] = ()
 
     @property
     def identified(self) -> bool:
@@ -89,6 +92,7 @@ class Boundary:
             "successes": self.successes,
             "failures": self.failures,
             "candidate_facts": list(self.candidate_facts),
+            "survivors": [list(s) for s in self.survivors],
             "reason": self.reason,
         }
 
@@ -138,6 +142,47 @@ def survivors(space: VersionSpace) -> list[Hypothesis]:
         if ok:
             out.append(hypothesis)
     return out
+
+
+def candidate_requirements(
+    evidence: Sequence[tuple[Iterable[str], bool]],
+    *,
+    max_candidate_facts: int = MAX_CANDIDATE_FACTS,
+) -> tuple[tuple[str, ...], ...]:
+    """Every requirement the evidence has not yet ruled out, INCLUDING from successes alone.
+
+    This is deliberately separate from `learn`, and it does not weaken it. `learn` refuses to
+    license a boundary without a failure, and that refusal is correct: a success cannot establish
+    necessity. But successes do constrain the SPACE of possible requirements -- any fact absent
+    from some success cannot be necessary -- and that space is exactly what a query selector needs
+    in order to choose the run that would settle the question. Conflating the two would either
+    weaken the refusal or leave the selector with nothing to select against, which is what made
+    the live path report zero survivors after three real successes.
+
+    Returns () when there is no success to scope from, when no requirement survives, or when the
+    candidate set is too large to enumerate. Callers must treat () as "cannot choose", never as
+    "no requirement".
+    """
+    rows = [(normalise_state(state), bool(ok)) for state, ok in (evidence or [])]
+    successes = [state for state, ok in rows if ok]
+    if not successes:
+        return ()
+    allowed: frozenset[str] = frozenset(successes[0])
+    for state in successes[1:]:
+        allowed = allowed & state
+    keys = tuple(sorted(allowed))
+    if len(keys) > max_candidate_facts:
+        return ()
+    space = VersionSpace([
+        conjunction(subset)
+        for size in range(len(keys) + 1)
+        for subset in itertools.combinations(keys, size)
+    ])
+    for state, ok in rows:
+        space.observe((state,), ok)
+    from canonical.runtime.fact_entailment_v1 import distinct_requirements
+
+    return distinct_requirements([as_set(h) for h in survivors(space)])
 
 
 def learn(
@@ -201,20 +246,32 @@ def learn(
         )
 
     sets = [as_set(h) for h in alive]
-    general = tuple(sorted(min(sets, key=len)))
-    specific = tuple(sorted(max(sets, key=len)))
-    status = IDENTIFIED if len(alive) == 1 else AMBIGUOUS
+    # Count DISTINCT requirements, not spellings. Two survivors can denote the same set of
+    # satisfying worlds: `manifest.json` is decided as "a .json named manifest" and
+    # `structured.json` as "a .json", so the first implies the second and
+    # {manifest, structured} IS {manifest}. Measured: that pair was reported AMBIGUOUS and the
+    # selector reported no reachable state could ever split it -- a permanent fake limit that
+    # withheld `required` even though the evidence already determined it. Reducing by the
+    # sensor's own implications removes the redundant literal without removing any requirement.
+    from canonical.runtime.fact_entailment_v1 import distinct_requirements, reduce_requirement
+
+    reduced = distinct_requirements(sets)
+    ordered_survivors = reduced
+    general = tuple(sorted(min(reduced, key=len)))
+    specific = tuple(sorted(max(reduced, key=len)))
+    status = IDENTIFIED if len(reduced) == 1 else AMBIGUOUS
     return Boundary(
         schema=SCHEMA,
         status=status,
         required=general if status == IDENTIFIED else None,
         most_general=general,
         most_specific=specific,
-        survivor_count=len(alive),
+        survivor_count=len(reduced),
         successes=len(successes),
         failures=len(failures),
         candidate_facts=keys,
         reason="ONE_CONSISTENT_REQUIREMENT" if status == IDENTIFIED else "SEVERAL_CONSISTENT_REQUIREMENTS",
+        survivors=ordered_survivors,
     )
 
 

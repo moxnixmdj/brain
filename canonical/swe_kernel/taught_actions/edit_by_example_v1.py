@@ -638,6 +638,7 @@ class Rule:
         self.objects = objects_in(pattern)   # blanks that stand for the object an attribute is read from
         self.imported_objects = set()    # those of them that stood for something imported in an example
         self.bring = {}                  # names the new code needs, and the import line an example added for each
+        self.take = {}                   # names the examples' change made unused, and the import line each removed
 
     def __str__(self):
         number = {}
@@ -706,6 +707,14 @@ class Shown:
                     if alias.name != "*":
                         name = alias.asname or (alias.name.split(".")[0] if isinstance(statement, ast.Import) else alias.name)
                         self.added_lines.setdefault(name, set()).add(self.new.of(statement))
+        self.removed_lines = {}          # names a removed import line bound, and that line as the example had it
+        for statement in self.old.tree.body:
+            if (is_import(statement) and shape(statement) in self.only_old and len(statement.names) == 1
+                    and not (isinstance(statement, ast.ImportFrom) and statement.level)):
+                alias = statement.names[0]
+                if alias.name != "*":
+                    name = alias.asname or (alias.name.split(".")[0] if isinstance(statement, ast.Import) else alias.name)
+                    self.removed_lines.setdefault(name, set()).add(self.old.of(statement))
 
     def says_nothing_about(self, node):
         """Is this code at, in or around a place that a try left unsettled?  Then it is not evidence of anything."""
@@ -858,6 +867,7 @@ def wider(rule, changed):
     except Refused:
         return None
     reading.bring = {name: line for name, line in rule.bring.items() if name in reading.needs}
+    reading.take = dict(rule.take)
     return reading
 
 
@@ -930,6 +940,12 @@ def learn_all(examples, wide=False):
     for rule in rules:
         rule.bring = {name: sorted(added[name])[0] for name in rule.needs
                       if name in added and len(added[name]) == 1}
+    removed = {}
+    for example in shown:
+        for name, lines in example.removed_lines.items():
+            removed.setdefault(name, set()).update(lines)
+    for rule in rules:
+        rule.take = {name: sorted(lines)[0] for name, lines in removed.items() if len(lines) == 1}
     for example in shown:
         replayed, _ = rewrite(rules, example.before_text, example.label + "'s first file", check_names=False,
                               skip=example.says_nothing_about)
@@ -1233,8 +1249,44 @@ def written(text, places, what="the file", check_names=True, fail_at=None):
             if check_names:
                 names_still_hold(text, again, [place for place in places if fail_at is None or place[1] is not fail_at[1]],
                                  what)
-            return result
+            return imports_taken_away(result, again, places)
     raise Refused("the edited text of %s does not parse to the intended code" % what)
+
+
+def imports_taken_away(result, tree, places):
+    """The finished text without the import lines the examples removed, where nothing is at risk.
+
+    A line goes only when the examples all removed it, this file holds exactly that statement on lines
+    of its own without a comment, and no code in the finished file reads or writes the name anywhere.
+    Anything less certain leaves the line where it is -- leaving an import is never wrong the way
+    removing a used one would be.
+    """
+    take = {}
+    for _, _, rule, _ in places:
+        take.update(getattr(rule, "take", {}))
+    for name in sorted(take):
+        wanted = shape(ast.parse(take[name]).body[0])
+        found = [statement for statement in tree.body if is_import(statement) and shape(statement) == wanted]
+        if len(found) != 1:
+            continue
+        statement = found[0]
+        if any(isinstance(part, ast.Name) and part.id == name for part in ast.walk(tree)):
+            continue
+        others = [other for other in tree.body if other is not statement]
+        if any(other.lineno <= statement.end_lineno and other.end_lineno >= statement.lineno for other in others):
+            continue
+        lines = result.splitlines(keepends=True)
+        if statement.end_lineno > len(lines) or "#" in "".join(lines[statement.lineno - 1:statement.end_lineno]):
+            continue
+        shorter = "".join(lines[:statement.lineno - 1] + lines[statement.end_lineno:])
+        try:
+            again = ast.parse(shorter)
+        except (SyntaxError, ValueError):
+            continue
+        if [shape(one) for one in again.body] != [shape(one) for one in others]:
+            continue
+        result, tree = shorter, again
+    return result
 
 
 def names_still_hold(text, edited, places, what):
@@ -1308,6 +1360,8 @@ def described(rules):
                  for name, origins in sorted({**rule.origins, **rule.brought}.items())}
         if names:
             entry["imports"] = names
+        if rule.take:
+            entry["takes away"] = {name: rule.take[name] for name in sorted(rule.take)}
         out.append(entry)
     return out
 
