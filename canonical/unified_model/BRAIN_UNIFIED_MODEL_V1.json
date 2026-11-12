@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 327,
+  "knowledge_documents": 328,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6737,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b39cefe1d45d57308d495244b7168f17901452627cf2edee95442d03af053c42"
+  "value": "ecc30d72dde68dc7fafebdecec8fa3a3059d7ef310056e9786ed44546bfe5eba"
  },
  "engines": [
   {
@@ -54119,6 +54119,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 3408,
+   "headings": [
+    "Verified skills do not compose just because each one verified",
+    "What was measured",
+    "What was added",
+    "Tests — 9, green",
+    "One more thing measured, not fixed",
+    "Why this is the right next increment"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SKILLS_DONT_COMPOSE_20261112_V1.md",
+   "sha256": "6ff018bdd4d9e362bf9462b2d541c89411853249be5c4f4bf803c4be96017200",
+   "summary": "**2026-11-12.** Branch `arena/3778edad-brain`. Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "10": 10,
+    "added": 2,
+    "also": 2,
+    "both": 2,
+    "cannot": 3,
+    "change": 2,
+    "changed": 3,
+    "check": 2,
+    "crystallized": 2,
+    "each": 4,
+    "earlier": 2,
+    "edit": 2,
+    "empty": 2,
+    "every": 5,
+    "exit": 2,
+    "fail": 4,
+    "false": 2,
+    "falsifiable": 2,
+    "first": 2,
+    "had": 2,
+    "itself": 2,
+    "local": 2,
+    "makes": 2,
+    "measured": 3,
+    "more": 3,
+    "no": 2,
+    "no-op": 2,
+    "not": 11,
+    "nothing": 3,
+    "one": 5,
+    "pair": 4,
+    "pass": 4,
+    "passes": 3,
+    "reports": 3,
+    "return": 6,
+    "revert": 3,
+    "rule": 9,
+    "rules": 4,
+    "sequence": 8,
+    "single": 3,
+    "skills": 4,
+    "so": 3,
+    "state": 3,
+    "step": 12,
+    "store": 3,
+    "two": 3,
+    "verdict": 3,
+    "verified": 4
+   },
+   "title": "Verified skills do not compose just because each one verified",
+   "title_terms": [
+    "because",
+    "compose",
+    "each",
+    "just",
+    "not",
+    "one",
+    "skills",
+    "verified"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 64378,
    "headings": [
     "Solution index",
@@ -70200,10 +70277,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1129,
+  "included_source_count": 1130,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "12838d9de7c6cbe2164c4ef1fa1f4146d9194e3c1bbf1aecf4f458aa8d1e49e9"
+  "source_tree_digest": "90f9f6b8da8e7f8402272b279dad9842ac59a03a4124ee7a1b4f828930ed867b"
  },
  "research_index": [
   {
