@@ -1,0 +1,435 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1",
+  "action_intent_id": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1",
+  "date": "2026-11-12",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "c4724d905f689d3af46359653f43bc4b606b944c",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Round 8 priced the negative: no demonstration teaches `median` while no operation fits its example answers -- the lesson was refused with reason NO_OPERATION_I_CAN_PERFORM_GIVES_THESE_ANSWERS and the prescription was to grow the operator space deliberately and pay for it in code. This round executes that prescription once and measures every step of the loop. Pre-registered predictions, all seven held: under the old algebra 0 of 400 operations fit the two-example median lesson; after one reducer is added in code the SAME lesson teaches exactly one word ({median: [median]}); five held-out requests nobody showed -- including a median-plus-rest composition and a file in no lesson -- are answered correctly against oracles written before the run (5/5, 0 wrong); the independent recomputation accepts an honest median claim and rejects the upper median (claimed=20 recomputed=30); `mode` is still refused by name; no seed word changes meaning; clearing the cache, the stored lexicon alone still answers. End to end through the live door with its own taught_program_recomputed gate: teach, ask, pass, answer=9. Cost of the action: parts 14 -> 15, operations 400 -> 560, two runtime files, ~10 lines. Provenance receipt re-run and re-pinned at 39/39 with producer-vs-checker 5600 comparisons and 0 disagreements. No capability registered, no benchmark row moved, no seed lesson or lexicon touched, no live state written into the tree.",
+  "selected_route": "ADD_THE_MEDIAN_REDUCER_AND_MEASURE_THAT_ONE_LESSON_BUYS_ONE_WORD",
+  "causal_blocker": "THE_MEDIAN_LESSON_WAS_SET_ASIDE_UNDER_THE_OLD_ALGEBRA_BECAUSE_NO_OPERATION_FITS_ITS_EXAMPLE_ANSWERS__EXPERIENCE_CANNOT_ADD_A_PART_TO_THE_HYPOTHESIS_LANGUAGE",
+  "expected_parent_change": "ONE_REDUCER_ADDED_IN_CODE_MAKES_THE_SAME_TWO_EXAMPLE_LESSON_TEACH_EXACTLY_ONE_WORD_AND_FIVE_PRE_ORACLED_HELD_OUT_REQUESTS_ANSWERED_WITH_THE_CHECKER_STILL_ABLE_TO_SAY_NO",
+  "expected_parent_frontier_change": "THE_LESSON_LOOP_IS_NOW_PARTS_CODE_PLUS_WORD_LESSON_PLUS_RECOMPUTED_RECALL_MEASURED_END_TO_END_AT_ZERO_MODEL_DEPENDENCY__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_CREDIT__TRUTH_ACHIEVED_STAYS_FALSE",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_MEDIAN_LESSON_WAS_SET_ASIDE_UNDER_THE_OLD_ALGEBRA_BECAUSE_NO_OPERATION_FITS_ITS_EXAMPLE_ANSWERS__EXPERIENCE_CANNOT_ADD_A_PART_TO_THE_HYPOTHESIS_LANGUAGE",
+  "falsification_condition": "THE_LESSON_STILL_REFUSED_AFTER_THE_REDUCER_IS_ADDED__OR_ANY_HELD_OUT_REQUEST_ANSWERED_WRONGLY_AGAINST_THE_PRE_WRITTEN_ORACLE__OR_THE_INDEPENDENT_CHECKER_ACCEPTING_THE_UPPER_MEDIAN__OR_A_SEED_WORD_CHANGING_MEANING__OR_PROVENANCE_FAILING_TO_REACH_39_OF_39__OR_THE_FRONT_DOOR_REFUSING_A_TAUGHT_MEDIAN_QUESTION",
+  "stop_condition": "SEVEN_PRE_REGISTERED_PREDICTIONS_HELD__14_NEW_TESTS_PASS_WITH_THE_ROUND8_AND_FRONT_DOOR_SUITES__PROVENANCE_39_OF_39_REPINNED__REFEREE_AND_ADMISSION_PASS__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+  "explicit_user_authorization": "Owner directive 2026-11-12: determine what is real about instant learning and advanced coding/computer-use actions, kill bad ideas before implementation, think from first principles, maximize use of the latest research, and always push and merge completed work. This change executes round 8's standing prescription -- grow the operator space deliberately and pay for it in code -- as one priced, pre-registered measurement. Zero spend, zero model dependency, no governance change, no sentience claim.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "operator_space_growth_median_20261112.py",
+      "canonical/tests/test_operator_space_growth_median_v1.py",
+      "canonical/runtime/taught_words_v1.py",
+      "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE were each checked against the round-8 enumeration and this round's control: the median is not a composition, substitution, or configuration of count/sum/max/min over any measure -- zero of the old 400 operations fit the lesson's two answers, and more examples cannot add an operation. Only a new primitive in code fits, and its independent recomputation is written beside it.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_ONE_DEMONSTRATION_CAN_TEACH_A_WORD_WHILE_NO_OPERATION_IN_THE_ALGEBRA_FITS_ITS_ANSWERS",
+    "laws_read_this_session": [
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "causal_evidence": "EXECUTED_ON_THIS_COMMIT__OLD_ALGEBRA_0_OF_400_OPERATIONS_FIT_THE_MEDIAN_LESSON_AND_LEARN_SET_IT_ASIDE__AFTER_ONE_REDUCER_IN_CODE_THE_SAME_LESSON_TEACHES_MEDIAN__5_OF_5_HELD_OUT_REQUESTS_MATCH_PRE_WRITTEN_ORACLES_0_WRONG__INDEPENDENT_CHECKER_ACCEPTS_HONEST_AND_REJECTS_UPPER_MEDIAN__MODE_STILL_REFUSED_BY_NAME__SEED_WORDS_PRESERVED__CACHE_CLEAR_RELOAD_ANSWERS__FRONT_DOOR_PASS_AT_ANSWER_9__PROVENANCE_39_OF_39_WITH_5600_PRODUCER_CHECKER_COMPARISONS_0_DISAGREEMENTS"
+  },
+  "measured_effect": "OLD_ALGEBRA_0_OF_400_FIT_AND_LESSON_REFUSED__AFTER_ONE_REDUCER_TAUGHT_EXACTLY_ONE_WORD__5_OF_5_HELD_OUT_CORRECT_0_WRONG__CHECKER_TWO_SIDED_20_VS_30__PARTS_14_TO_15_OPERATIONS_400_TO_560__PROVENANCE_39_OF_39_REPINNED__NO_BENCHMARK_MOVEMENT__ZERO_SPEND",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_BENCHMARK__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_ON_THE_CODING_FRONTIER__THE_REAL_UNIT_IS_ONE_PRICED_PROCEDURE_FOR_GROWING_THE_HYPOTHESIS_LANGUAGE_AT_THE_COST_ROUND_8_PRESCRIBED",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ]
+  },
+  "prior_work_reused": [
+    "canonical/runtime/taught_words_v1.py::run/ALL_OPERATIONS/learn/teach/solve (the reference-design learner, extended by one reducer)",
+    "canonical/runtime/taught_words_check_v1.py::recompute (the independent recomputation, extended by one branch)",
+    "one_lesson_buys_a_word_not_an_operator_probe_20261112.py (round 8's refused-lesson measurement, its unteachable example moved to `mode`)",
+    "canonical/tests/test_taught_words_answer_at_the_front_door_v1.py (the door's taught-words recomputation path, reused unchanged)",
+    "canonical/runtime/verify_taught_words_provenance_v1.py (39-check receipt, re-run --write)"
+  ],
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "c4724d905f689d3af46359653f43bc4b606b944c",
+    "real_outcome": "ONE_REDUCER_ADDED_IN_CODE__THE_SAME_TWO_EXAMPLE_LESSON_NOW_TEACHES_THE_WORD_MEDIAN__FIVE_PRE_ORACLED_HELD_OUT_REQUESTS_ANSWERED__INDEPENDENT_CHECKER_TWO_SIDED__THE_PRICED_PROCEDURE_FOR_GROWING_THE_OPERATOR_SPACE_IS_MEASURED",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "obs_goal": {
+      "real_outcome": "The owner's loop -- experience once, learn permanently -- needs the hypothesis language to contain the answer before any experience can select it. Round 8 proved the median lesson is refused while no operation fits it; this round buys the part and measures the whole loop end to end, priced, so the next part has a known cost.",
+      "proxy_goals_deleted": [
+        "counting a lesson the algebra cannot express as evidence the loop failed",
+        "teaching by loosening the checker instead of adding the operation",
+        "letting the producer's own code grade its new operator"
+      ],
+      "surviving_necessity": "A reducer the independent recomputation can also compute, taught only after the code exists, with held-out answers written down before the run -- or an honest refusal."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/taught_words_v1.py::REDUCERS/ALL_OPERATIONS/run (enumeration, interpretation, lesson fitting -- extended, not replaced)",
+        "canonical/runtime/taught_words_check_v1.py::recompute (independent median branch added beside the max/min arms)",
+        "one_lesson_buys_a_word_not_an_operator_probe_20261112.py (the old-algebra refusal, re-run as this round's control)",
+        "canonical/tests/test_taught_words_answer_at_the_front_door_v1.py (door recomputation path, passed unchanged with the new operator live)"
+      ],
+      "external_existing_routes_checked": [
+        "python statistics.median / numpy median: lower median of even-length lists -- the definition this reducer implements, so answers match the standard library convention",
+        "AhaBench (arXiv 2609.05435): full teaching transfers 78.6-100 percent held-out while answer-only teaching transfers 0-73.9 -- procedures are what experience buys when the algebra can hold them",
+        "Continual-ARC (arXiv 2611.14505): harness memory saves nothing on unseen tasks while weight learning gains -- the external reason the prior must be grown deliberately rather than by exposure"
+      ],
+      "capability_work_deleted": [
+        "round 8's expectation that `median` stays permanently unteachable -- its probe example and test pin moved to `mode`, which still has no part",
+        "the docstring and registry prose claiming fifteen parts while PARTS held fourteen -- the prose is now true"
+      ],
+      "surviving_gap": "The true-suite generator does not emit median questions, so median is covered by the probe's three-way agreement and the new tests only; no capability was registered; one reducer, one algebra."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Intrinsic: under the old algebra the lesson's two example answers (2 and 30) are matched by zero of 400 operations, and every operation that fits a subset is unambiguous -- no number of demonstrations can select an operation that does not exist. This is a property of the hypothesis language, not of training or search.",
+      "delete_bypass_substitute_options": [
+        "DELETE the refusal -- rejected, it would make the learner assert operations it cannot compute",
+        "BYPASS the algebra with literal example matching -- rejected, it teaches answers, not the composable word, and round 8's held-out composition would fail",
+        "REUSE the four existing reducers and hope composition yields the median -- measured impossible: median is not expressible as any composition of count/sum/max/min over a measure",
+        "SUBSTITUTE a model donor to suggest the operations -- forbidden by NO_MODEL_PRODUCER_COGNITION"
+      ],
+      "surviving_causal_blocker": "The part must be written in code with an independent recomputation beside it; experience can then buy the word in one lesson, which is exactly what the probe now measures."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1. Add one lower-median reducer to REDUCERS plus a matching branch in the checker's recompute -- chosen: ten lines, independent recomputation, provenance re-pin, decided in one run at zero spend",
+        "2. Compose the median from count/sum/max/min -- rejected by round 8's enumeration and this round's control: zero of the old operations fit the lesson",
+        "3. Teach by literal example matching without an operation -- rejected: would answer the shown files and fail the pre-oracled composition",
+        "4. Wait for the algebra to grow by itself -- rejected: nothing in the tree grows REDUCERS without a code change"
+      ],
+      "losing_routes_reason": "Composition and literal matching were measured against the same lesson and cannot express it; waiting is not a mechanism. Only a new primitive with its own recomputation survives.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The oracle is pre-written: five held-out expected answers were fixed in the probe before the run and are cross-checked against the producer at report time; the independent checker recomputes from the same file with no shared code; the front door's taught_program_recomputed gate re-runs the program on the live request. The predictions can fail and the test pins them."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "round 8's open prescription 'grow the operator space deliberately, pay for it in code' -- this round prices exactly one iteration of it",
+        "any future claim that more examples can teach an operator the algebra lacks"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "the taught-words reference design's run/learn/teach/solve loop (reused, extended by one reducer)",
+        "the door's taught_program_recomputed expect path (reused unchanged)"
+      ],
+      "fresh_reuse_plan": "Next per the round doc: record refusals as evidence so failures delete the always-applicable survivor; make the BLIND premises decidable; then the second compressive family."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "re-deriving whether the old algebra could express the median -- pinned by round 8's enumeration and this round's 0-of-400 control",
+        "re-arguing whether seed lessons changed meaning -- pinned by the seed-preservation test"
+      ],
+      "search_stop_decision": "Stop when the seven predictions, the door case, and the provenance re-pin hold. Growing more reducers, extending the true-suite generator, and registering a capability are new decisions with their own predictions and are deliberately not squeezed into this round.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ADD_THE_MEDIAN_REDUCER_AND_MEASURE_THAT_ONE_LESSON_BUYS_ONE_WORD",
+      "COMPOSE_THE_MEDIAN_FROM_COUNT_SUM_MAX_MIN",
+      "TEACH_BY_LITERAL_EXAMPLE_MATCHING_WITHOUT_AN_OPERATION",
+      "WAIT_FOR_THE_ALGEBRA_TO_GROW_BY_ITSELF"
+    ],
+    "deleted_or_bypassed_paths": [
+      "ROUND8_PIN_THAT_EXPECTED_MEDIAN_TO_STAY_UNTEACHABLE",
+      "PROSE_CLAIMING_FIFTEEN_PARTS_WHILE_FOURTEEN_WERE_REGISTERED",
+      "ANY_ROUTE_THAT_TEACHES_BY_LOOSENING_THE_CHECKER"
+    ],
+    "selected_surviving_route": "ADD_THE_MEDIAN_REDUCER_AND_MEASURE_THAT_ONE_LESSON_BUYS_ONE_WORD",
+    "why_selected_route_is_fastest_sufficient": "ZERO_OF_400_OLD_OPERATIONS_FIT_THE_LESSON_SO_THE_DECISION_WAS_ALREADY_MADE_BY_THE_MEASUREMENT__A_NEW_REDUCER_IS_TEN_LINES_WITH_AN_INDEPENDENT_RECOMPUTATION__AND_THE_LESSON_LOOP_WAS_DECIDABLE_IN_ONE_RUN_AT_ZERO_SPEND",
+    "expected_parent_level_state_change": "THE_LESSON_LOOP_IS_NOW_PARTS_CODE_PLUS_WORD_LESSON_PLUS_RECOMPUTED_RECALL_MEASURED_END_TO_END_AT_ZERO_MODEL_DEPENDENCY__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_CREDIT__TRUTH_ACHIEVED_STAYS_FALSE",
+    "stop_condition": "SEVEN_PRE_REGISTERED_PREDICTIONS_HELD__14_NEW_TESTS_PASS_WITH_THE_ROUND8_AND_FRONT_DOOR_SUITES__PROVENANCE_39_OF_39_REPINNED__REFEREE_AND_ADMISSION_PASS__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-12T15:23:31Z",
+      "max_age_hours": 24,
+      "incumbent_route": "ROUND_8_STATE__TAUGHT_WORDS_ALGEBRA_HOLDS_COUNT_SUM_MAX_MIN_ONLY__THE_MEDIAN_LESSON_IS_SET_ASIDE_WITH_NO_OPERATION_I_CAN_PERFORM_GIVES_THESE_ANSWERS__ZERO_OF_400_OPERATIONS_FIT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "taught_words_v1.ALL_OPERATIONS enumerated 400 operations before this change and none matched the median lesson's two example answers -- read from the source and re-run this round",
+          "taught_words_check_v1.recompute had arms for max and min only, so a median word would have been rejected at the gate even if taught -- the second file this round had to touch",
+          "the provenance receipt pins both edited files at raw sha256 and the 39-check suite re-ran green after the edit"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "AhaBench (arXiv 2609.05435): full teaching reaches 78.6-100 percent on held-out items where answer-only teaching reaches 0-73.9 -- worked procedures transfer when the language can hold them",
+          "Continual-ARC (arXiv 2611.14505, 10 Nov 2026): no shipped harness method gains on unseen tasks while weight-based learning gains -- the prior, not exposure, is the ceiling",
+          "ERL (arXiv 2603.24639): retrieved heuristics from single-attempt trajectories add +7.8 points on Gaia2 -- experience buys retrieval over an existing language, not new operators"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "python statistics.median defines the lower median of an even-length list -- the exact semantics this reducer implements, so taught answers match the standard library",
+          "no external package was needed: sorted-index selection over integers is stdlib arithmetic"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "OSWorld 2.0/2.1 failure modes (Snorkel, Oct-Nov 2026) are constraint loss, missing mid-task information, and skipping verification -- the frontier's gap is applicability and completion, not action execution",
+          "Remote Labor Index reports Fable 5.2 at 41.3 percent with quality shortfall the largest failure bucket -- even top systems fail on completion, which is what independent recomputation guards"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "median lower median definition even length list standard library"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "teaching worked procedures transfers held-out better than answers AhaBench 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "extending an enumerable operation algebra with an independent recomputation checker"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "harness memory vs weight learning unseen tasks Continual-ARC November 2026"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ADD_THE_MEDIAN_REDUCER_AND_MEASURE_THAT_ONE_LESSON_BUYS_ONE_WORD",
+      "challenger_routes": [
+        {
+          "route": "COMPOSE_THE_MEDIAN_FROM_COUNT_SUM_MAX_MIN",
+          "evidence": [
+            "round 8's enumeration and this round's control both run the full old algebra against the lesson's two example answers"
+          ],
+          "qualification_evidence": [
+            "zero of 400 old operations fit, and every fitting subset was unambiguous -- composition over these reducers cannot produce an order statistic",
+            "the pre-registered control re-ran on this commit and still reports 0 fitting operations"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Impossible: no such composition exists",
+            "CAPABILITY_STRENGTH": "None -- the lesson stays refused",
+            "WALL_CLOCK": "N/A",
+            "INCREMENTAL_COST": "0 USD but zero effect",
+            "RELIABILITY": "N/A",
+            "VERIFIABILITY": "Already falsified by two independent enumerations"
+          }
+        },
+        {
+          "route": "TEACH_BY_LITERAL_EXAMPLE_MATCHING_WITHOUT_AN_OPERATION",
+          "evidence": [
+            "the two example files are small and could be stored verbatim as answers"
+          ],
+          "qualification_evidence": [
+            "would answer the shown files and fail the pre-oracled composition request that combines median with after-the-first on a file no lesson contains",
+            "the independent checker recomputes from the file, so a memorised answer is rejected the moment the claim does not match the data"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Fails held-out and fails the gate",
+            "CAPABILITY_STRENGTH": "Answers, not a word",
+            "WALL_CLOCK": "N/A",
+            "INCREMENTAL_COST": "0 USD but no reusable operator",
+            "RELIABILITY": "Rejected by taught_program_recomputed",
+            "VERIFIABILITY": "The checker makes it decidable"
+          }
+        },
+        {
+          "route": "ADD_THE_MEDIAN_REDUCER_AND_MEASURE_THAT_ONE_LESSON_BUYS_ONE_WORD",
+          "evidence": [
+            "seven pre-registered predictions held: refusal before, exactly one word after, 5/5 held-out correct, checker two-sided, mode refused, seed preserved, reload answers",
+            "front door answers a taught median question at 9 through its own recomputation gate",
+            "provenance 39/39 with producer-vs-checker 5600 comparisons and 0 disagreements"
+          ],
+          "qualification_evidence": [
+            "14 new tests plus the round-8 and front-door suites pass at 28 total",
+            "seed lessons gained zero new fitting operations from the reducer -- measured, not assumed"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE",
+            "INDEPENDENT_VERIFIER"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "Held-out answers match oracles written before the run",
+            "CAPABILITY_STRENGTH": "One priced iteration of growing the hypothesis language",
+            "WALL_CLOCK": "Milliseconds of enumeration; the whole probe runs in under a second",
+            "INCREMENTAL_COST": "0 USD, stdlib only, two files ~10 lines",
+            "RELIABILITY": "Refuses outside the algebra; checker can still say no",
+            "VERIFIABILITY": "Predictions pre-registered; test pins every number"
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-12T15:23:31Z",
+        "max_age_hours": 2,
+        "selected_route": "ADD_THE_MEDIAN_REDUCER_AND_MEASURE_THAT_ONE_LESSON_BUYS_ONE_WORD",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CPython 3 standard library runtime",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "the probe, the new tests, and the provenance suite all executed in this sandbox on this commit"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "canonical.runtime.taught_words_v1",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "REDUCERS now includes median and ALL_OPERATIONS grows 400 to 560; seed lessons gain zero fitting operations"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "BRAIN_INHERITED"
+            ]
+          },
+          {
+            "dependency": "canonical.runtime.taught_words_check_v1",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "the independent recompute gained a median branch and rejects the upper median on the same file"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "INDEPENDENT_VERIFIER"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+    "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
+      "CHARTOGRAPHY_TOOLS_GE_89",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_TB4_GE_66_4",
+      "FINANCE_ACCOUNTING_INDEX_GE_61",
+      "FINANCE_AGENT_V2_GE_58_59",
+      "HLE_TOOLS_GE_67_7",
+      "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+      "OSWORLD_2_1_PARTIAL_GE_81_8",
+      "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+      "PROWORK_GDPVAL_GE_1846",
+      "TB_SCIENCE_GE_58_7"
+    ],
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_PRICES_ONE_ITERATION_OF_GROWING_THE_TAUGHT_WORDS_HYPOTHESIS_LANGUAGE__THE_CLAIM_IS_BOUND_TO_SEVEN_PRE_REGISTERED_PREDICTIONS_AND_TO_AN_INDEPENDENT_RECOMPUTATION_THAT_CAN_STILL_SAY_NO__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "ONE_LESSON_BUYS_A_MEDIAN_WORD_ONCE_THE_CODE_ADDS_THE_REDUCER",
+      "falsifier_id": "F_THE_LESSON_MUST_BE_REFUSED_UNDER_THE_OLD_ALGEBRA_AND_TAUGHT_AFTER_THE_REDUCER__HELD_OUT_ANSWERS_MUST_MATCH_PRE_WRITTEN_ORACLES__THE_INDEPENDENT_CHECKER_MUST_REJECT_THE_UPPER_MEDIAN",
+      "decisive_question": "Does the same two-example median lesson that the old algebra sets aside teach exactly one word once one reducer is added in code, with five pre-oracled held-out requests answered correctly, the independent checker still rejecting a wrong median, and no seed word changed?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "operator_space_growth_median_20261112.py",
+          "git_blob_sha": "3a9882de7bed429ce8e21fa9303be39024436a15"
+        },
+        {
+          "path": "canonical/tests/test_operator_space_growth_median_v1.py",
+          "git_blob_sha": "4fd08f343da4a73269453b6e16ba88790fb0703f"
+        }
+      ]
+    }
+  },
+  "next_step": "RECORD_REFUSALS_AS_EVIDENCE_SO_FAILURES_DELETE_THE_ALWAYS_APPLICABLE_SURVIVOR__THEN_MAKE_THE_BLIND_PREMISES_DECIDABLE__THEN_A_SECOND_COMPRESSIVE_FAMILY_WITH_ABLATIONS_AS_SEARCH_PRIMITIVES__THEN_B1_DONOR_DISTILLED_PRIOR_AT_ZERO_MODEL"
+}

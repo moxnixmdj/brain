@@ -60,7 +60,10 @@ STRUCTURE_WORDS = frozenset("the a an of in is are to me that file".split())
 UNITS = ("lines", "words", "characters", "bytes", "numbers")
 FILTERS = ("rest", "containing", "blank", "unique")
 MEASURES = ("lengths",)
-REDUCERS = ("count", "sum", "max", "min")
+# median is the lower middle element of the sorted values (index len//2), so its answer is always
+# a whole number even when the count is even.  It was added as a code change, not learned: see
+# A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md.
+REDUCERS = ("count", "sum", "max", "min", "median")
 PARTS = UNITS + FILTERS + MEASURES + REDUCERS
 
 
@@ -125,6 +128,9 @@ def run(parts, text, data=None):
         raise Refuse("CANNOT_%s_TEXT" % reducer.upper())
     if not items:
         raise Refuse("NOTHING_TO_REDUCE")
+    if reducer == "median":
+        # Lower middle element: whole number for every non-empty list, even or odd length.
+        return sorted(items)[len(items) // 2]
     return {"sum": sum, "max": max, "min": min}[reducer](items)
 
 
