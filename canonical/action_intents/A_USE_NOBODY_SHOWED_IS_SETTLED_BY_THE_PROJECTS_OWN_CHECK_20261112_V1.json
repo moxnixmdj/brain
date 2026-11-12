@@ -7,7 +7,7 @@
  "route_id": "A_USE_NOBODY_SHOWED_IS_SETTLED_BY_THE_PROJECTS_OWN_CHECK_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "388f2dc7988431d3224778acc3763f510b6718d6",
+ "canonical_base_commit": "be081116dfa8514f2db1bb460f8779e0a6a91d50",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -110,7 +110,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "388f2dc7988431d3224778acc3763f510b6718d6",
+  "canonical_base_commit": "be081116dfa8514f2db1bb460f8779e0a6a91d50",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_OWNER_CAN_SHOW_A_CHANGE_ONCE_AND_HAVE_THE_PLACES_THE_EXAMPLE_DOES_NOT_SETTLE_DECIDED_BY_THE_PROJECTS_OWN_TESTS_INSTEAD_OF_A_FLAT_REFUSAL__WITH_THE_ANSWER_KEPT_IN_THE_LESSON",
