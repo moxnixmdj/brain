@@ -31,6 +31,20 @@ Definitions and documentation strings are never taken out. The candidates come t
 piece first, so that of two that pass the tests the one that keeps more of the program is tried
 first. Nothing here accepts a candidate: the caller's tests do.
 
+What was found
+--------------
+Measured 2026-11-12 (canonical/verification/TAKE_OUT_20261112_V1.json) on the 100 scored
+HumanEvalFix bugs, some 40 candidates a bug: 19 repaired, 15 of them right as far as checked, 4
+passing the tests without being right. Of the 19 bugs that are something too much, 11 repaired
+(10 right) where the learner with 2,864 lessons repairs 8. In front of the learner within the
+same 200 candidates: 58 repaired against 55, and 49 right against 48, because twice a piece that
+passes weak tests stood before a right repair of the learner's. With the learner first it is 58
+and 51, which was worked out afterwards. Five of the seven things expected beforehand did not
+hold; the family was shaped on 64 development bugs and did better there (11 of 12).
+
+So: try the pieces AFTER whatever has lessons behind it, and never call a piece that passes right
+before it has been checked on inputs the tests do not have.
+
 This is not new. It is what Kali did (Qi, Long, Achour, Rinard, ISSTA 2015), with expressions
 added to statements; and Kali is remembered for showing that deleting code makes weak tests pass
 without repairing anything. So a caller must check a passing candidate on inputs the tests do not

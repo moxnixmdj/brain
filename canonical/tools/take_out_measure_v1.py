@@ -142,6 +142,10 @@ def beside_the_learner(per_bug: Mapping[str, Mapping[str, Any]], dose_record: Ma
     alone = {"repaired": 0, "right_as_far_as_checked": 0}
     pieces = {"repaired": 0, "right_as_far_as_checked": 0}
     together = {"repaired": 0, "right_as_far_as_checked": 0}
+    # Two other ways of putting the two together, added after the scored run had been read (see the record):
+    learner_first = {"repaired": 0, "right_as_far_as_checked": 0}       # the learner in what the pieces leave of the budget, then the pieces
+    larger_budget = {"repaired": 0, "right_as_far_as_checked": 0}       # the learner with the whole budget, then the pieces where it repaired nothing
+    more_candidates = 0
     lists: dict[str, list[str]] = {key: [] for key in (
         "repaired_only_by_a_piece_taken_out", "right_only_by_a_piece_taken_out", "repaired_by_the_learner_alone_and_pushed_out_of_the_budget",
         "right_with_the_learner_alone_and_not_right_together", "repaired_among_those_nothing_had_repaired", "right_among_those_nothing_had_repaired")}
@@ -162,6 +166,19 @@ def beside_the_learner(per_bug: Mapping[str, Mapping[str, Any]], dose_record: Ma
             is_right = bool(repaired and right)
         together["repaired"] += 1 if repaired else 0
         together["right_as_far_as_checked"] += 1 if is_right else 0
+        if rank is not None and rank + min(row["candidates"], budget) <= budget:
+            learner_first["repaired"] += 1
+            learner_first["right_as_far_as_checked"] += 1 if right else 0
+        elif row["repaired"]:
+            learner_first["repaired"] += 1
+            learner_first["right_as_far_as_checked"] += 1 if row["right_as_far_as_checked"] else 0
+        if learner_repaired:
+            larger_budget["repaired"] += 1
+            larger_budget["right_as_far_as_checked"] += 1 if right else 0
+        else:
+            more_candidates += row["first_pass_rank"] if row["repaired"] else min(row["candidates"], budget)
+            larger_budget["repaired"] += 1 if row["repaired"] else 0
+            larger_budget["right_as_far_as_checked"] += 1 if row["right_as_far_as_checked"] else 0
         if row["repaired"] and not learner_repaired:
             lists["repaired_only_by_a_piece_taken_out"].append(name)
         if row["right_as_far_as_checked"] and not learner_right:
@@ -176,6 +193,9 @@ def beside_the_learner(per_bug: Mapping[str, Mapping[str, Any]], dose_record: Ma
             lists["right_among_those_nothing_had_repaired"].append(name)
     out.update(the_learner_alone=alone, a_piece_taken_out_alone=pieces, the_pieces_first_then_the_learner_in_what_is_left=together,
                bugs_nothing_without_a_model_had_repaired=len([name for name in names if name in never]), **lists)
+    out["put_together_in_other_ways__looked_at_after_the_scored_run"] = {
+        "the_learner_first_in_what_the_pieces_leave_then_the_pieces": learner_first,
+        "the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing": {**larger_budget, "candidates_run_beyond_the_budget_in_all": more_candidates}}
     return out
 
 

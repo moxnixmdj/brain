@@ -163,6 +163,23 @@ def test_the_learners_place_counts_only_when_it_fits_into_what_the_pieces_left()
     assert got["right_with_the_learner_alone_and_not_right_together"] == ["Python/2"]
 
 
+def test_the_two_put_together_in_other_ways_the_learner_first_and_with_a_larger_budget():
+    record = dose(b1=[1, True, 1, 500], b2=[5, True, 5, 900], b3=[150, True, 150, 900], b4=[1, True, 1, 900], b6=[None, False, None, 10])
+    got = measure.beside_the_learner(PER_BUG, record, budget=200)["put_together_in_other_ways__looked_at_after_the_scored_run"]
+    # the learner first in what the pieces leave: 1 (1 + 30), 2 (5 + 50, and right, where the piece was not), 3 (150 + 40);
+    # 4: 200 pieces leave it nothing and no piece passes; 6: the learner has nothing, a piece passes
+    assert got["the_learner_first_in_what_the_pieces_leave_then_the_pieces"] == {"repaired": 4, "right_as_far_as_checked": 4}
+    # with the whole budget the learner repairs 1, 2, 3 and 4; the pieces are run only for 6, up to the seventh that passes
+    assert got["the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing"] == {"repaired": 5, "right_as_far_as_checked": 5, "candidates_run_beyond_the_budget_in_all": 7}
+    # a learner whose place does not fit beside the pieces gives way to a piece that passes, right or not
+    got = measure.beside_the_learner({"Python/2": PER_BUG["Python/2"]}, dose(b2=[151, True, 151, 900]), budget=200)["put_together_in_other_ways__looked_at_after_the_scored_run"]
+    assert got["the_learner_first_in_what_the_pieces_leave_then_the_pieces"] == {"repaired": 1, "right_as_far_as_checked": 0}
+    assert got["the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing"] == {"repaired": 1, "right_as_far_as_checked": 1, "candidates_run_beyond_the_budget_in_all": 0}
+    # where neither repairs, every piece was run in vain beyond the budget
+    got = measure.beside_the_learner({"Python/3": PER_BUG["Python/3"]}, dose(b3=[None, False, None, 900]), budget=200)["put_together_in_other_ways__looked_at_after_the_scored_run"]
+    assert got["the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing"] == {"repaired": 0, "right_as_far_as_checked": 0, "candidates_run_beyond_the_budget_in_all": 40}
+
+
 def test_a_learners_place_beyond_the_budget_is_no_repair():
     per_bug = {"Python/3": row_of(bug_type="missing logic", candidates=0, run=0)}
     got = measure.beside_the_learner(per_bug, dose(b3=[201, True, 201, 900]), budget=200)
