@@ -1,0 +1,280 @@
+{
+ "schema": "BRAIN_SMALL_PASSING_PATCH_PLACE_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T21:27:53Z",
+ "read_this_first": "For 80 of the 500 real tasks of SWE-bench Verified some patch that passed the benchmark's tests is one small change that could be listed (PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json). This counts whether the lists built in this tree hold that change, and how far down, with the place GIVEN: the smallest definition that holds the change, as it was. That is the best case; nothing here finds the file or the function. The lists: the learner shown 164 HumanEvalFix fixes and 1,000 ConDefects fixes, each once; every single piece taken out; and the two taken in turns. For one definition (median 325 nodes) the learner makes a median of 29,958 candidates and there are a median of 142.5 pieces to take out. Of the 80 tasks, a small passing patch is the first candidate for 2, stands within the first 10 for 2, within 100 for 9, within 200 for 16, within 1,000 for 27, somewhere in a list for 33, and in neither list for 47. By the kind of patch. One piece taken out: 23 tasks have one, within the first 200 for 14, in a list at all for 23. One leaf exchanged: 19 tasks have one, within the first 200 for 2, in a list at all for 8. One small piece put in: 46 tasks have one, within the first 200 for 0, in a list at all for 3. Rule written beforehand: within the first 200 for at least 40 of the 80 tasks, a run is worth building; for fewer than 20, it is not. It came to 16: the rule says the lists built here do not reach real projects even with the place given. No run is built. The next thing to ask is what puts the right name first, not more list. 5 of the 80 tasks have no definition of at most 1,000 nodes and were not asked (matplotlib__matplotlib-13989, matplotlib__matplotlib-26113, pydata__xarray-4094, sympy__sympy-18189, sympy__sympy-23824); their small passing patches are of the kinds 'one leaf exchanged' and 'one piece put in'. Had every one of them been within the first 200 the count would be 21: by the rule undecided instead of not reached, and in both cases no run is built. Control, that the count can say yes: asked the same way of the 64 HumanEvalFix development bugs, each bug's own fix left out of the lessons, the published fix stands within the first 200 for 24 and somewhere in a list for 32. Where the material is: for 72 of the 80 tasks some small passing patch is made from what its own definition holds; for the others the name it needs stands elsewhere in the file, where the learner, which is given the definition, cannot see it. The changed file holds a median of 41 functions, and the place was given here, not found. 6 of the 6 things expected beforehand held. No test was run and no model was called. The places are those of recorded passing patches: another candidate earlier in a list may pass too, which only running the projects' tests could tell. One machine; nobody else has re-run this count.",
+ "what_was_asked": "With the place given, where a small test-passing repair stands among the candidates this tree's lists make for it: how many tries a repair run would spend before reaching it.",
+ "what_was_run": {
+  "the tool": "canonical/tools/small_passing_patch_place_measure_v1.py at commit 65eca5a398bc2e772adca82ba064d01d07f6ed75. What was expected and the rule were committed at 593823aa, before any place was counted.",
+  "the tasks": "the 80 tasks for which the passing-patch record found a listable passing patch; their small passing patches were read again from the 73 submissions with patches at github.com/SWE-bench/experiments 05ad61feb9c9f334dc340baea7c4f31cf7854274: 159 different ones in 119 definitions.",
+  "the lessons": {
+   "humanevalfix_fixes_shown": 164,
+   "condefects_fixes_shown": 1000,
+   "order_seed": 20261112,
+   "lessons_that_taught_something": 1125,
+   "operators": 9654,
+   "condefects_commit": "43f0834a82c5e3bc4516c079fe7765f63b1a15cd"
+  },
+  "the place given": "the smallest definition (function, method, class or top-level statement) of the file as it was that holds every changed line",
+  "what counts": "the best place any small passing patch of a task has, counted from 1 over candidates that compile",
+  "not asked": "a definition of more than 1,000 nodes, or one the learner had not finished in 150 seconds, counts as not reached: 31 of 119 definitions (28 patches have the whole file as their scope).",
+  "seconds": 1477.9
+ },
+ "summary": {
+  "tasks": 80,
+  "small_passing_patches": 159,
+  "tasks_by_best_place": {
+   "in_turns": {
+    "1": 2,
+    "10": 2,
+    "100": 9,
+    "200": 16,
+    "1000": 27,
+    "at any place": 33,
+    "in no place": 47
+   },
+   "learner": {
+    "1": 2,
+    "10": 2,
+    "100": 6,
+    "200": 8,
+    "1000": 14,
+    "at any place": 20,
+    "in no place": 60
+   },
+   "taken_out": {
+    "1": 0,
+    "10": 0,
+    "100": 14,
+    "200": 20,
+    "1000": 23,
+    "at any place": 23,
+    "in no place": 57
+   }
+  },
+  "by_shape_of_the_passing_patch": {
+   "one piece taken out": {
+    "tasks_with_such_a_passing_patch": 23,
+    "within_200_in_turns": 14,
+    "within_200_learner": 6,
+    "within_200_taken_out": 20,
+    "in_either_list_at_any_place": 23
+   },
+   "one piece put in": {
+    "tasks_with_such_a_passing_patch": 46,
+    "within_200_in_turns": 0,
+    "within_200_learner": 0,
+    "within_200_taken_out": 0,
+    "in_either_list_at_any_place": 3
+   },
+   "one leaf exchanged": {
+    "tasks_with_such_a_passing_patch": 19,
+    "within_200_in_turns": 2,
+    "within_200_learner": 2,
+    "within_200_taken_out": 0,
+    "in_either_list_at_any_place": 8
+   }
+  },
+  "median_place_in_turns_where_there_is_one": 236,
+  "median_learner_candidates_for_the_definition": 29957.5,
+  "median_pieces_taken_out_of_the_definition": 142.5,
+  "median_nodes_of_the_definition": 325,
+  "definitions": 119,
+  "definitions_the_learner_did_not_finish": 31,
+  "patches_whose_scope_is_the_whole_file": 28,
+  "tasks_with_a_small_passing_patch_from_its_definition_alone": 72,
+  "tasks_within_budget_whose_patch_there_is_from_its_definition_alone": 16,
+  "median_functions_in_the_changed_file": 41.0
+ },
+ "rule": {
+  "written_before": "With the place given, if a small passing patch stands within the first 200 candidates (the two lists in turns) for at least 40 of the 80 tasks, a repair run on real projects with the lists built here is worth building; the next thing would be a harness for the projects' tests. If for fewer than 20, the lists built here do not reach real projects even with the place given: no run is built, and the next thing to ask is what puts the right name first, not more list. From 20 to 39: undecided; no run is built on this count alone.",
+  "tasks_within_the_first_200_in_turns": 16,
+  "of": 80,
+  "verdict": "not reached: no run",
+  "tasks_not_asked_at_all": [
+   "matplotlib__matplotlib-13989",
+   "matplotlib__matplotlib-26113",
+   "pydata__xarray-4094",
+   "sympy__sympy-18189",
+   "sympy__sympy-23824"
+  ],
+  "at_most_if_all_of_them_were_within_200": 21
+ },
+ "control_humanevalfix_development": {
+  "bugs": 64,
+  "in_turns": {
+   "1": 1,
+   "10": 6,
+   "100": 19,
+   "200": 24,
+   "1000": 30,
+   "at any place": 32,
+   "in no place": 32
+  },
+  "learner": {
+   "1": 1,
+   "10": 6,
+   "100": 17,
+   "200": 21,
+   "1000": 25,
+   "at any place": 27,
+   "in no place": 37
+  },
+  "taken_out": {
+   "1": 1,
+   "10": 4,
+   "100": 11,
+   "200": 11,
+   "1000": 11,
+   "at any place": 11,
+   "in no place": 53
+  }
+ },
+ "what_was_expected_and_what_came": {
+  "tasks of 80 with a small passing patch within the first 200 of the two lists in turns": {
+   "expected": [10, 32],
+   "came": 16,
+   "held": true
+  },
+  "tasks of 80 with a small passing patch within the first 1,000 of the two lists in turns": {
+   "expected": [14, 40],
+   "came": 27,
+   "held": true
+  },
+  "tasks of 80 with no small passing patch in either list at any place": {
+   "expected": [30, 60],
+   "came": 47,
+   "held": true
+  },
+  "share of the tasks with a taken-out passing patch that have one within the first 200 of the pieces taken out": {
+   "expected": [0.7, 1.0],
+   "came": 0.87,
+   "held": true
+  },
+  "tasks of 80 with a small passing patch made from what its own definition holds": {
+   "expected": [45, 72],
+   "came": 72,
+   "held": true
+  },
+  "control: HumanEvalFix development bugs of 64 whose published fix is within the first 200 in turns, own fix left out": {
+   "expected": [15, 35],
+   "came": 24,
+   "held": true
+  },
+  "held": "6 of 6"
+ },
+ "checks": {
+  "tests": "canonical/tests/test_small_passing_patch_place_measure_v1.py",
+  "the control": "the same function asked of bugs whose published fix is known; it must find some, or the count of real tasks would mean nothing"
+ },
+ "what_this_does_not_show": [
+  "How a run would find the place. The definition was given. In the changed file alone there is a median of 41 functions, and the project has many files.",
+  "That the candidates before the recorded patch fail. Another candidate earlier in a list may also pass the tests; only running the projects' tests could tell. So 'within the first 200' is a floor for 'a passing repair within the first 200', and a count of what is known.",
+  "That a passing patch is right. These pass the benchmark's tests; published audits report that some passing patches on this benchmark are not correct.",
+  "What other lessons would do. The order is the learner's, shown these 1,164 fixes of small programs; fixes of real projects were not among the lessons.",
+  "A run needs the failing test to judge by. The benchmark hides it from an agent; here it would have to be given, as in the older repair literature.",
+  "One machine, the producer's count. Nobody else has re-run it."
+ ],
+ "to_run_it_again": [
+  "python3 canonical/tools/expert_fix_pull_request_collector_v1.py --ids-file ids.json --out-dir /tmp/swe/pulls   # ids.json: the 500 names, the keys of per_task in the passing-patch record",
+  "python3 canonical/tools/passing_patch_shape_measure_v1.py --fetch --cache-dir /tmp/rank/experiments",
+  "python3 canonical/tools/small_passing_patch_place_measure_v1.py --cache-dir /tmp/rank/experiments --pull-requests-dir /tmp/swe/pulls --humanevalfix /tmp/hef/humanevalpack.jsonl --condefects /tmp/cd/ConDefects --out /tmp/rank/places.json"
+ ],
+ "model_calls": 0,
+ "programs_run": 0,
+ "tests_run": 0,
+ "incremental_spend_usd": 0,
+ "code_sha256": {
+  "canonical/tools/small_passing_patch_place_measure_v1.py": "5f28a4861460715ddb3ec2604491f557ed14609dfedf45eb69943a9711187f8d",
+  "canonical/tools/passing_patch_shape_measure_v1.py": "d9d1209301b13eeaf2ba1f4822d378f14eaa6ab5ff7bf533b9367d241e22613e",
+  "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+  "canonical/runtime/take_out_v1.py": "30fdefdbc8fd2364995f928af7a6c83c047af18e2cb29d23ea975da0ff8f031e",
+  "canonical/runtime/edit_kind_choice_v1.py": "0f0bff2fd7c2520ac7ea0809d0cd36fe411efdcdf0ef378878bb8b8aec1b7b45",
+  "canonical/runtime/fix_shape_v1.py": "4f5a873fbcaaf40c087da61262de9665d9c832f38091df2793a91625a05523b0",
+  "canonical/tools/edit_kind_choice_measure_v1.py": "fd47b184b3a58e173808fbfe8301754b1ccda59a710a64a3eedc041917a031fa",
+  "canonical/tools/expert_fix_repetition_measure_v1.py": "f2763876028c4d6d2de34a23ff2f52db93a5a60d5ffef00b8879e30a16196715"
+ },
+ "per_task_key": "[small passing patches, definitions, best place in turns, best place in the learner's list, best place among the pieces taken out, some patch made from its definition alone, the shapes of its patches, learner candidates for its first definition, pieces to take out of it, its nodes, functions in the changed file]",
+ "per_task": {
+  "astropy__astropy-12907": [2, 2, 718, 569, null, true, ["one leaf exchanged"], 27652, 160, 158, 10],
+  "astropy__astropy-14309": [1, 1, null, null, null, true, ["one piece put in"], 20900, 81, 92, 6],
+  "django__django-11066": [2, 2, null, null, null, true, ["one piece put in"], 22667, 80, 113, 7],
+  "django__django-11119": [2, 2, null, null, null, true, ["one piece put in"], 20145, 49, 68, 13],
+  "django__django-11133": [1, 1, null, null, null, true, ["one piece put in"], 12195, 46, 55, 56],
+  "django__django-11163": [2, 2, null, null, null, true, ["one piece put in"], 22967, 57, 97, 71],
+  "django__django-11299": [2, 1, null, null, null, true, ["one piece put in"], 30301, 117, 199, 103],
+  "django__django-12125": [2, 2, null, null, null, true, ["one leaf exchanged"], 25905, 112, 118, 32],
+  "django__django-12155": [2, 2, 1797, 1678, null, true, ["one piece put in"], 36193, 132, 110, null],
+  "django__django-12209": [3, 1, 406, 205, 371, true, ["one piece put in", "one piece taken out"], 58761, 416, 462, 67],
+  "django__django-12262": [2, 2, 9196, 8952, null, true, ["one leaf exchanged"], 48713, 273, 328, 22],
+  "django__django-12708": [2, 2, null, null, null, true, ["one leaf exchanged", "one piece put in"], 23596, 142, 139, 64],
+  "django__django-13023": [1, 1, null, null, null, true, ["one piece put in"], 22577, 46, 66, 218],
+  "django__django-13028": [1, 1, 33, 17, 44, true, ["one piece taken out"], 19869, 44, 53, 109],
+  "django__django-13786": [3, 2, 269, null, 135, true, ["one piece taken out"], 43111, 783, 731, 102],
+  "django__django-14140": [1, 1, 236, null, 123, true, ["one piece taken out"], 28527, 125, 155, 28],
+  "django__django-14434": [1, 1, null, null, null, true, ["one piece put in"], 34316, 248, 275, 71],
+  "django__django-14493": [6, 2, null, null, null, true, ["one piece put in"], 34131, 136, 218, 23],
+  "django__django-14672": [2, 2, null, null, null, false, ["one piece put in"], 3576, 21, 28, 34],
+  "django__django-15278": [1, 1, null, null, null, false, ["one piece put in"], 14728, 42, 49, 17],
+  "django__django-15315": [1, 1, 110, null, 55, true, ["one piece taken out"], 7417, 69, 46, 228],
+  "django__django-15368": [1, 1, null, null, null, false, ["one piece put in"], 54523, 312, 428, 130],
+  "django__django-15380": [2, 2, null, null, null, true, ["one leaf exchanged"], 56212, 350, 421, 46],
+  "django__django-15741": [1, 1, null, null, null, true, ["one piece put in"], 29614, 85, 184, 11],
+  "django__django-15814": [1, 1, null, null, null, true, ["one piece put in"], 60777, 265, 478, 112],
+  "django__django-15863": [1, 1, null, null, null, true, ["one leaf exchanged"], 63316, 362, 453, 65],
+  "django__django-16082": [2, 1, null, null, null, true, ["one piece put in"], 49171, 519, 513, 198],
+  "django__django-16255": [2, 2, null, null, null, true, ["one piece put in"], 12996, 45, 54, 18],
+  "django__django-16485": [8, 2, 1, 1, null, true, ["one leaf exchanged", "one piece put in"], 63316, 362, 453, 65],
+  "django__django-16527": [5, 2, null, null, null, true, ["one piece put in"], 37349, 212, 243, 6],
+  "django__django-16901": [2, 2, null, null, null, true, ["one piece put in"], 45569, 237, 325, 29],
+  "django__django-17087": [2, 2, null, null, null, true, ["one leaf exchanged"], 23775, 187, 167, 35],
+  "matplotlib__matplotlib-13989": [1, 1, null, null, null, true, ["one piece put in"], null, null, 2172, 91],
+  "matplotlib__matplotlib-23412": [3, 1, 84, null, 42, true, ["one piece put in", "one piece taken out"], 19240, 79, 103, 249],
+  "matplotlib__matplotlib-24026": [1, 1, 588, 312, 302, true, ["one piece taken out"], 65274, 415, 491, 1],
+  "matplotlib__matplotlib-25122": [1, 1, 588, null, 298, true, ["one piece taken out"], 60478, 725, 930, 18],
+  "matplotlib__matplotlib-26113": [2, 2, null, null, null, true, ["one leaf exchanged"], null, null, 2202, 88],
+  "psf__requests-1142": [1, 1, 33, 17, 45, true, ["one piece taken out"], 20935, 58, 83, 33],
+  "psf__requests-1724": [2, 2, null, null, null, true, ["one piece put in"], 36555, 168, 281, 21],
+  "psf__requests-2317": [2, 2, null, null, null, true, ["one leaf exchanged"], 24123, 85, 161, 25],
+  "pydata__xarray-3095": [1, 1, null, null, null, false, ["one piece put in"], 29205, 82, 101, null],
+  "pydata__xarray-4075": [4, 2, null, null, null, true, ["one piece put in"], 21359, 45, 72, 15],
+  "pydata__xarray-4094": [1, 1, null, null, null, true, ["one leaf exchanged"], null, null, 7991, 143],
+  "pydata__xarray-4629": [2, 2, null, null, null, true, ["one piece put in"], 31505, 139, 163, 21],
+  "pydata__xarray-6721": [1, 1, 134, null, 68, true, ["one piece taken out"], 26719, 98, 120, 79],
+  "pydata__xarray-7233": [2, 2, 372, null, 187, true, ["one piece taken out"], 51214, 326, 400, 35],
+  "pylint-dev__pylint-6903": [4, 1, null, null, null, true, ["one piece put in"], 29258, 143, 154, 3],
+  "pytest-dev__pytest-10081": [1, 1, 168, null, 85, true, ["one piece taken out"], 35701, 174, 215, 25],
+  "pytest-dev__pytest-5262": [1, 1, null, null, null, false, ["one piece put in"], 27828, 90, 136, 83],
+  "pytest-dev__pytest-6202": [3, 3, 111, 137, 57, true, ["one piece taken out"], 21082, 75, 119, 88],
+  "pytest-dev__pytest-7205": [1, 1, null, null, null, true, ["one piece put in"], 33432, 180, 179, 5],
+  "pytest-dev__pytest-7432": [1, 1, 21413, 21195, null, true, ["one piece put in"], 50750, 250, 354, 10],
+  "pytest-dev__pytest-7521": [4, 2, null, null, null, true, ["one piece put in"], 27199, 82, 157, 86],
+  "pytest-dev__pytest-7982": [3, 2, 32, 223, 16, true, ["one leaf exchanged", "one piece taken out"], 20181, 63, 81, 32],
+  "scikit-learn__scikit-learn-11578": [1, 1, null, null, null, true, ["one piece put in"], 55454, 249, 435, 19],
+  "scikit-learn__scikit-learn-13124": [1, 1, null, null, null, false, ["one piece put in"], 40059, 230, 310, 61],
+  "scikit-learn__scikit-learn-14496": [1, 1, 2783, 2581, null, true, ["one piece put in"], 43419, 231, 344, 13],
+  "scikit-learn__scikit-learn-15100": [1, 1, 46, null, 24, true, ["one piece taken out"], 15207, 41, 49, 61],
+  "sphinx-doc__sphinx-7440": [2, 2, 148, null, 75, true, ["one piece taken out"], 42696, 209, 301, 50],
+  "sphinx-doc__sphinx-7910": [1, 1, 331, null, 173, true, ["one piece taken out"], 42325, 209, 312, 5],
+  "sphinx-doc__sphinx-9320": [2, 2, 3289, 2618, null, true, ["one leaf exchanged", "one piece put in"], 57805, 751, 749, 19],
+  "sphinx-doc__sphinx-9698": [2, 2, null, null, null, true, ["one leaf exchanged"], 27206, 132, 171, 63],
+  "sympy__sympy-12096": [1, 1, null, null, null, false, ["one piece put in"], 36949, 196, 256, 96],
+  "sympy__sympy-13372": [1, 1, null, null, null, true, ["one piece put in"], 48639, 263, 330, 45],
+  "sympy__sympy-13480": [2, 2, 6071, 5860, null, true, ["one leaf exchanged"], 48279, 240, 338, 114],
+  "sympy__sympy-13647": [3, 3, 42, 433, 21, true, ["one piece taken out"], 23999, 68, 75, 153],
+  "sympy__sympy-15017": [2, 2, 1, 1, null, true, ["one leaf exchanged"], 23344, 98, 182, 16],
+  "sympy__sympy-15349": [2, 2, 826, 421, null, true, ["one leaf exchanged"], 54071, 531, 496, 34],
+  "sympy__sympy-15875": [2, 1, 182, 131, 92, true, ["one leaf exchanged", "one piece taken out"], 27514, 107, 176, 42],
+  "sympy__sympy-18189": [1, 1, null, null, null, true, ["one piece put in"], null, null, 1109, 61],
+  "sympy__sympy-18763": [1, 1, null, null, null, false, ["one piece put in"], 17281, 89, 103, 260],
+  "sympy__sympy-19495": [2, 2, 286, null, 145, true, ["one piece taken out"], 30350, 188, 222, 6],
+  "sympy__sympy-19637": [8, 1, null, null, null, true, ["one piece put in"], 62034, 286, 422, 8],
+  "sympy__sympy-20801": [1, 1, 120, 62, 70, true, ["one piece taken out"], 21908, 76, 125, 326],
+  "sympy__sympy-22456": [1, 1, 32, 44, 16, true, ["one piece taken out"], 24957, 21, 57, 67],
+  "sympy__sympy-22714": [5, 2, null, null, null, true, ["one piece put in"], 58810, 426, 444, 59],
+  "sympy__sympy-23534": [2, 2, null, null, null, true, ["one piece put in"], 55754, 672, 789, 40],
+  "sympy__sympy-23824": [2, 1, null, null, null, true, ["one leaf exchanged", "one piece put in"], null, null, 1228, 10],
+  "sympy__sympy-24443": [2, 2, 237, null, 123, true, ["one piece taken out"], 27259, 130, 178, 22],
+  "sympy__sympy-24539": [1, 1, null, null, null, true, ["one piece put in"], 20111, 71, 65, 180]
+ }
+}
