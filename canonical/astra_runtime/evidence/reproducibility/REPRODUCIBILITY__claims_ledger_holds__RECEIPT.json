@@ -8,7 +8,8 @@
   "identical": true,
   "incremental_spend_usd": 0,
   "independent_verifier": null,
-  "kind": "replayable_experience",
+  "kind": "REPRODUCIBILITY_RECEIPT",
+  "kind_of_artefact": "replayable_experience",
   "model_dependency_count": 0,
   "ran_by": "arena-agent-20261112",
   "runs": [

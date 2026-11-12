@@ -1,5 +1,12 @@
 # Nobody else has ever run it
 
+> **Correction (round 16).** This note's central number is wrong. Independently verified runs are
+> recorded in a different artefact — `CAPABILITY__*__INDEPENDENT_VERIFICATION.json`, written by the
+> GitHub runner under an OIDC-attested `github_run_id` — and there are **296** of them, all
+> reproduced, all joined to a producer receipt. The census below read only `*RECEIPT.json`.
+> See `I_WAS_WRONG_THEY_HAVE_RUN_IT_296_TIMES_20261112_V1.md`. The method lesson survives: count
+> every artefact kind before concluding zero.
+
 **2026-11-12.** Base `a5e0a347`. Branch `arena/d3917e56-brain`. Round 15.
 
 Round 14 concluded that the missing channel is weights, and that the fastest way to open it is to train

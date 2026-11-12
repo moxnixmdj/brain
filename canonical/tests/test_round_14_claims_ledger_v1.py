@@ -34,7 +34,7 @@ def test_every_tree_claim_holds_and_names_its_measurement():
     report = _report()
     failing = [name for name, row in report["tree"].items() if not row["holds"]]
     assert failing == [], f"claims that no longer hold: {failing}"
-    assert report["summary"]["tree_claims_holding"] == report["summary"]["tree_claims"] == 7
+    assert report["summary"]["tree_claims_holding"] == report["summary"]["tree_claims"] == 8
     for name, row in report["tree"].items():
         assert row["evidence"], f"{name} holds but names no evidence"
 
