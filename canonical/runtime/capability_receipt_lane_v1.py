@@ -183,7 +183,25 @@ def _probe_output_path(capability_id: str, module_sha: str) -> str:
     )
 
 
-def declared_probe_args(root: str, capability_id: str, module_sha: str) -> dict[str, Any]:
+def _at_instance(base: str, instance_index: int, is_path: bool = False) -> str:
+    """The value of one declared input at one instance.
+
+    `instance_index == 0` returns `base` unchanged, so every receipt this lane has already issued is
+    reproduced byte for byte. A later index gives the same input a different value, which is the whole
+    point: one capability, k instances, and each instance is a distinct point in the capability's input
+    space. Without this, "run it again" is "run it again on the same input", which measures nothing.
+    """
+    if instance_index <= 0:
+        return base
+    if not is_path:
+        # free text: the instance is a distinct sample, never a capability id with a suffix bolted on
+        return f"{base}#i{instance_index}"
+    stem, dot, ext = base.rpartition(".")
+    return f"{stem}__i{instance_index}.{ext}" if dot and "/" not in ext else f"{base}__i{instance_index}"
+
+
+def declared_probe_args(root: str, capability_id: str, module_sha: str,
+                        instance_index: int = 0) -> dict[str, Any]:
     """The capability's own declared invocation, with `${input.*}` given probe values.
 
     `action_template.args` already states precisely how the brain invokes this
@@ -203,12 +221,15 @@ def declared_probe_args(root: str, capability_id: str, module_sha: str) -> dict[
     for key, value in list(args.items()):
         if isinstance(value, str) and value.startswith("${input.") and value.endswith("}"):
             name = value[len("${input."):-1]
-            args[key] = sink if name.endswith("_path") else capability_id
+            if name.endswith("_path"):
+                args[key] = _at_instance(sink, instance_index, is_path=True)
+            else:
+                args[key] = _at_instance(capability_id, instance_index, is_path=False)
     return args
 
 
 def _probe_invoke(
-    fn: Any, root: str, capability_id: str, module_sha: str
+    fn: Any, root: str, capability_id: str, module_sha: str, instance_index: int = 0
 ) -> tuple[Any, dict[str, Any]]:
     """Run the adapter, preferring the empty-arg probe and falling back to declared args.
 
@@ -220,7 +241,7 @@ def _probe_invoke(
         return fn({}, root), {}
     except BaseException:  # noqa: BLE001 - the empty probe is a first attempt, not a verdict
         pass
-    declared = declared_probe_args(root, capability_id, module_sha)
+    declared = declared_probe_args(root, capability_id, module_sha, instance_index)
     if not declared:
         raise
     return fn(declared, root), declared
@@ -311,7 +332,8 @@ def verification_path_for(receipt_path: str) -> str:
 
 
 def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
-                        root: str, ran_by: str, kind: str = "contract") -> dict[str, Any] | None:
+                        root: str, ran_by: str, kind: str = "contract",
+                        instance_index: int = 0) -> dict[str, Any] | None:
     """Run one capability and return its receipt. Returns None if it did not run."""
     started = time.perf_counter()
     module_sha = sha256_file(os.path.join(root, module_path))
@@ -363,7 +385,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
             fn = getattr(module, entrypoint, None)
             if not callable(fn):
                 return None
-            result, invoked = _probe_invoke(fn, root, capability_id, module_sha)
+            result, invoked = _probe_invoke(fn, root, capability_id, module_sha, instance_index)
         finally:
             signal.alarm(0)
     except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
@@ -442,7 +464,8 @@ def verify_producer_receipts(root: str, ran_by: str,
 
         fresh = execute_and_receipt(producer["capability_id"], producer["module_path"],
                                    producer["entrypoint"], root, ran_by,
-                                   str(producer.get("kind") or "contract"))
+                                   str(producer.get("kind") or "contract"),
+                                   instance_index=int(producer.get("instance_index") or 0))
         if fresh is None or fresh.get("result_sha256") != producer.get("result_sha256"):
             mismatched.append(rel)
             continue
@@ -645,6 +668,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--kinds", default="contract,cli",
                     help="which invocation kinds to probe (contract, cli)")
     ap.add_argument("--ran-by", default=os.environ.get("BRAIN_RUNNER_IDENTITY", "local-session"))
+    ap.add_argument("--instance-index", type=int, default=0,
+                    help="which instance of a declared capability to run (0 = the receipt already "
+                         "issued; k>0 varies the declared inputs, so k instances are k points)")
     ap.add_argument("--verify", action="store_true",
                     help="re-execute producer receipts as this identity and stamp only reproductions")
     ap.add_argument("--run-reference-json", default=os.environ.get("BRAIN_RUN_REFERENCE", ""),
@@ -685,7 +711,10 @@ def main(argv: list[str] | None = None) -> int:
     receipts: list[dict[str, Any]] = []
     started = time.perf_counter()
     for cid, path, kind, entrypoint in candidates:
-        receipt = execute_and_receipt(cid, path, entrypoint, root, args.ran_by, kind)
+        receipt = execute_and_receipt(cid, path, entrypoint, root, args.ran_by, kind,
+                                      instance_index=args.instance_index)
+        if receipt is not None and args.instance_index:
+            receipt["instance_index"] = args.instance_index
         if receipt is None:
             continue
         receipt["receipt_path"] = receipt_path_for(cid)
