@@ -5,11 +5,23 @@ The tree's one-example learner repeats a change inside one expression or one sim
 Two large classes of change it refuses are expression-shaped and can be written down as
 operators:
 
-* **method rename** -- the same receiver, the same arguments, one different attribute:
-  ``logger.warn(...)`` -> ``logger.warning(...)``, ``self.assertEquals(...)`` ->
+* **method rename between two documented aliases** -- the same receiver, the same arguments, one
+  different attribute, and the two names are *one function* the standard library kept for the
+  other: ``logger.warn(...)`` -> ``logger.warning(...)``, ``self.assertEquals(...)`` ->
   ``self.assertEqual(...)``. The arguments are not touched, so the number of arguments is not
-  evidence against the rename. The tree refused 50 askings in this class because the example
-  showed one arity and the target had another.
+  evidence against the rename -- and for a kept alias it could not be, since the callee is the
+  same function. The tree refused these askings because the example showed one arity and the
+  target had another.
+
+  **Any other rename is refused, and this was learned the hard way.** The first version of this
+  operator applied *any* single-attribute rename, which meant it rewrote
+  ``yaml.load(h, Loader=yaml.FullLoader)`` into ``yaml.safe_load(h, Loader=yaml.FullLoader)`` --
+  code that fails, since ``safe_load`` takes no ``Loader``. ``assertEquals -> assertEqual`` and
+  ``yaml.load -> safe_load`` have the same shape, neither is a re-export, and no structural
+  reading separates them. The tree's own test (``test_one_showing_is_literal_two_showings_are_general``)
+  holds ``yaml.load`` as a refusal for exactly this reason. So the operator now asks
+  ``kept_under_an_old_name_v1.alias_of`` -- the same closed, documented list the organ uses -- and
+  refuses every pair that is not on it. Structure cannot carry this decision; knowledge must.
 * **string concatenation to an f-string** -- ``'prefix' + value`` -> ``f'prefix{value}'`` and
   ``value + 'suffix'`` -> ``f'{value}suffix'``. The tree refused whole pull requests in this
   class because the expression's node type changed.
@@ -29,6 +41,8 @@ from __future__ import annotations
 import ast
 import builtins
 from typing import Any, Iterable
+
+from . import kept_under_an_old_name_v1 as kept_under_an_old_name
 
 SCHEMA = "BRAIN_EXPRESSION_OPERATOR_PACK_V1"
 BUILTINS = frozenset(dir(builtins))
@@ -60,10 +74,12 @@ def calls(tree: ast.AST) -> list[tuple[ast.Call, tuple[str | None, str], tuple[s
 
 
 def method_renames(before: str, after: str) -> dict[tuple[str | None, str], str]:
-    """The method renames one example shows: same receiver, same arguments, one new name.
+    """The method renames one example shows, and only where the two names are documented aliases.
 
     A change that also changes an argument, adds a call, removes a call, or moves the receiver
-    is not this operator and gives an empty mapping.
+    is not this operator and gives an empty mapping. Neither does a rename between two names that
+    are *not* one function the library kept: those are behaviour changes, and applying them where
+    the example did not show that call with those arguments is how a rename breaks a call site.
     """
     try:
         old, new = ast.parse(before), ast.parse(after)
@@ -79,7 +95,11 @@ def method_renames(before: str, after: str) -> dict[tuple[str | None, str], str]
         if args_a != args_b or words_a != words_b:
             continue
         found.setdefault(key_a, set()).add(key_b[1])
-    return {key: next(iter(names)) for key, names in found.items() if len(names) == 1}
+    # One new name per old name, AND the pair must be a name the owning library kept. The
+    # structure alone was measured to be unable to tell `assertEquals -> assertEqual` (safe) from
+    # `yaml.load -> safe_load` (a silent break), so the decision is read from the list.
+    return {key: next(iter(names)) for key, names in found.items()
+            if len(names) == 1 and kept_under_an_old_name.alias_of(key[1], next(iter(names)))}
 
 
 def _defined(tree: ast.AST) -> set[str]:
