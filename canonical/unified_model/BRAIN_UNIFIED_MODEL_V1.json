@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 378,
+  "knowledge_documents": 379,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6775,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5bd279734f034c3fb4e99831e0b7230da97395fad33c128742d7369b563e1340"
+  "value": "161468dc96358a299f0d9a820830559a1556e625927fc7a03f6d5194289b6f12"
  },
  "engines": [
   {
@@ -52719,6 +52719,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 14963,
+   "headings": [
+    "One try covers a fraction",
+    "1. The measurement nobody had read as a dosage",
+    "2. One example is not one number",
+    "3. The refusals are the roadmap",
+    "4. Why this is the answer to \"the most advanced coding actions\"",
+    "5. The same law in three regimes",
+    "6. What is real, what is not",
+    "7. The sentient-creature question, directly",
+    "8. The smartest path, in order",
+    "9. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md",
+   "sha256": "b333f429b03f9e16fcf7c8f5292e7e6caeed3bafa35c1b8e2bb74e2cfdfae0d5",
+   "summary": "**2026-11-12 · branch `arena/7aa1248a-brain` · authority NONE · measurement only**",
+   "terms": {
+    "10": 5,
+    "15": 15,
+    "440": 8,
+    "50": 7,
+    "about": 6,
+    "actions": 5,
+    "add": 5,
+    "advanced": 7,
+    "algebra": 10,
+    "already": 8,
+    "answer": 5,
+    "arxiv": 8,
+    "askings": 11,
+    "change": 10,
+    "changes": 13,
+    "claim": 6,
+    "code": 7,
+    "coding": 8,
+    "coverage": 9,
+    "current": 6,
+    "demonstration": 12,
+    "developers": 6,
+    "every": 6,
+    "example": 18,
+    "file": 8,
+    "files": 8,
+    "import": 7,
+    "kinds": 6,
+    "model": 7,
+    "most": 8,
+    "no": 20,
+    "not": 46,
+    "one": 27,
+    "only": 7,
+    "operator": 13,
+    "oracle": 6,
+    "organ": 12,
+    "other": 6,
+    "pp": 7,
+    "precision": 10,
+    "real": 7,
+    "record": 6,
+    "right": 6,
+    "run": 6,
+    "same": 7,
+    "second": 9,
+    "tests": 7,
+    "tree": 6
+   },
+   "title": "One try covers a fraction",
+   "title_terms": [
+    "covers",
+    "fraction",
+    "one",
+    "try"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 17701,
    "headings": [
     "The optimal plan — V4, re-grounded on today's `main` — 2026-11-02",
@@ -74141,10 +74218,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1180,
+  "included_source_count": 1181,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "dffc1a424e717e32276120e32d1d245e3b2ac65f422e6503d8b9475ab8e22916"
+  "source_tree_digest": "cc49d2624cc62e311f92e5a30c03b5d385c17021344b521cecff9b63fefa6a6d"
  },
  "research_index": [
   {
