@@ -37,7 +37,7 @@
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_FORGED_ROW_SCORED_ZERO_WAS_DECIDING_WINNER_ELECTIONS_AND_VERIFIED_ACTION_IS_NOT_THE_SAME_CLAIM_AS_ANSWERED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
  "canonical_base_commit": "0001e7d29ff8f33cf40299770e011827d559986e",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -62,7 +62,7 @@
    "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
    "LEAVE_UNDECIDABLE -- it was being read as false"
   ],
-  "expected_parent_level_state_change": "Ordinary computer tasks that route: 11/30 -> 15/30. AMBIGUOUS 19 -> 15.",
+  "expected_parent_level_state_change": "Routing coverage of ordinary tasks, in the front door. No capability registered, no family rank, no benchmark authority.",
   "obs_blocker": {
    "delete_bypass_substitute_options": [
     "DELETE the forged append entirely -- rejected: a forged capability must be proposable when nothing else fits, which is the reason the append exists.",
