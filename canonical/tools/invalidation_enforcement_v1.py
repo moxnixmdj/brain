@@ -77,10 +77,28 @@ def measure() -> dict[str, Any]:
     The store is created in a temporary directory: this must never touch the live skill db,
     because the probe deliberately creates a rule and then refutes it.
     """
+    from canonical.swe_kernel.boundary_disjunction_normalization_v1 import (
+        propose_semantic_swaps,
+    )
+    from canonical.swe_kernel.egraph_and_deductive_synthesizer_v1 import (
+        propose_egraph_algebraic_rewrites,
+    )
+    from canonical.swe_kernel.language_neutral_skill_bridge_v1 import (
+        cross_language_candidates,
+        recall_across_languages,
+    )
+    from canonical.swe_kernel.operator_generalization_v1 import propose_operator_swaps
+    from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
+        iter_cst_skeleton_candidates,
+        recall_across_languages_cst,
+    )
     from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
         VerifiedSkillStore,
         _load_rules,
+        anti_unify_code_rule,
         apply_crystallized_code_rule,
+        iter_crystallized_code_rule_candidates,
+        narrow_rule_at_apply_time,
     )
 
     db = pathlib.Path(tempfile.mkdtemp()) / "probe.sqlite"
@@ -104,11 +122,80 @@ def measure() -> dict[str, Any]:
     stored = _load_rules(db, "python")
     stored_rule = stored[0] if stored else {}
     primitive = apply_crystallized_code_rule(victim, stored_rule) if stored_rule else None
+    iter_candidates = list(iter_crystallized_code_rule_candidates(victim, stored_rule)) if stored_rule else []
+    narrowed = narrow_rule_at_apply_time(stored_rule) if stored_rule else None
+    op_swaps = list(propose_operator_swaps(victim, stored_rule)) if stored_rule else []
+    sem_swaps = list(
+        propose_semantic_swaps(
+            "def tier(a):\n    return a < 50 or a == 50\n",
+            stored_rule,
+            operator_swaps=propose_operator_swaps,
+        )
+    ) if stored_rule else []
+    cst_candidates = list(
+        iter_cst_skeleton_candidates(
+            "fn tier(a: i32) -> bool { a <= 50 }\n",
+            stored_rule,
+            target_language="rust",
+        )
+    ) if stored_rule else []
+
+    alg_rule = anti_unify_code_rule(
+        "def f(a, b):\n    return a * b + a * 1\n",
+        "def f(a, b):\n    return a * (b + 1)\n",
+    )
+    alg_rule["state"] = REFUTED
+    egraph_rewrites = propose_egraph_algebraic_rewrites("def g(x, y):\n    return x * y + x\n", alg_rule)
+
+    lexical_cross = cross_language_candidates(
+        store, source_language="python", target_language="javascript"
+    )
+    lexical_recall = recall_across_languages(
+        store,
+        source_text="function tier(a) { return a <= 50; }\n",
+        target_language="javascript",
+        verifier=lambda c: True,
+    )
+    cst_recall = recall_across_languages_cst(
+        store,
+        source_text="fn tier(a: i32) -> bool { a <= 50 }\n",
+        target_language="rust",
+        verifier=lambda c: True,
+    )
+    cross_lang_snippets = {
+        "rust": "fn tier(a: i32) -> bool {\n    a <= 50\n}\n",
+        "go": "package p\nfunc tier(a int) bool {\n    return a <= 50\n}\n",
+        "typescript": "export function tier(a: number): boolean {\n    return a <= 50;\n}\n",
+        "javascript": "function tier(a) {\n    return a <= 50;\n}\n",
+        "java": "class C {\n    static boolean tier(int a) {\n        return a <= 50;\n    }\n}\n",
+        "cpp": "bool tier(int a) {\n    return a <= 50;\n}\n",
+    }
+    cross_lang_recall_fires = {
+        lang: store.recall_and_apply_verified(
+            source_text=src, language=lang, verifier=lambda c: True
+        ) is not None
+        for lang, src in cross_lang_snippets.items()
+    }
+
     strict_recall = store.recall_and_apply_verified(source_text=victim, language="python", verifier=spec)
     permissive_recall = store.recall_and_apply_verified(
         source_text=victim, language="python", verifier=lambda c: True
     )
     public_view = store.lookup_rules("python")
+
+    any_bypass = bool(
+        primitive is not None
+        or iter_candidates
+        or narrowed is not None
+        or op_swaps
+        or sem_swaps
+        or cst_candidates
+        or egraph_rewrites
+        or lexical_cross
+        or lexical_recall is not None
+        or cst_recall is not None
+        or any(cross_lang_recall_fires.values())
+    )
 
     return {
         "schema": SCHEMA, "authority": "NONE",
@@ -120,6 +207,16 @@ def measure() -> dict[str, Any]:
         ),
         "primitive_applies_refuted_rule": primitive is not None,
         "primitive_output": primitive,
+        "iter_candidates_fires": bool(iter_candidates),
+        "narrow_at_apply_time_fires": narrowed is not None,
+        "operator_swaps_fires": bool(op_swaps),
+        "semantic_swaps_fires": bool(sem_swaps),
+        "cst_skeleton_candidates_fires": bool(cst_candidates),
+        "egraph_algebraic_rewrites_fires": bool(egraph_rewrites),
+        "lexical_cross_language_fires": bool(lexical_cross) or (lexical_recall is not None),
+        "cst_cross_language_fires": cst_recall is not None,
+        "cross_language_recall_fires_by_lang": cross_lang_recall_fires,
+        "any_path_applies_refuted_rule": any_bypass,
         "recall_strict_refused": strict_recall is None,
         "recall_permissive_refused": permissive_recall is None,
     }
@@ -140,8 +237,9 @@ def main(argv: list[str] | None = None) -> int:
               f"   -> {report['primitive_output']!r}")
         print(f"  recall refuses (strict)     {report['recall_strict_refused']}")
         print(f"  recall refuses (permissive) {report['recall_permissive_refused']}")
-    # Exit 1 while the primitive can still act on a refuted rule: that is the finding.
-    return 1 if report["primitive_applies_refuted_rule"] else 0
+        print(f"  any path applies refuted    {report['any_path_applies_refuted_rule']}")
+    # Exit 1 while any generator or cross-language path can still act on a refuted rule.
+    return 1 if report["any_path_applies_refuted_rule"] else 0
 
 
 if __name__ == "__main__":
