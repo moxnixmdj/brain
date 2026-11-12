@@ -4072,6 +4072,22 @@ def rollback_created(executed: Mapping[str, Any]) -> list[str]:
     return removed
 
 
+def _chain_refuses(cid: str, entry: Any) -> bool:
+    """Does this chain step need the execution boundary's release condition?
+
+    The decision is asked, never re-derived: `refuses_execution` without an `operation` is exactly
+    the disjunction this loop used to spell out itself, and spelling it out here made the loop
+    unreachable by any change to the boundary (measured 2026-11-12,
+    `canonical/tools/lift_the_refusal_and_see_what_remains_v1.py`: 3 of 21 sentences still came
+    back `..._ADMITTED_CONFINEMENT` from this copy with the boundary's own decision lifted).
+    `execute_chain` has no operation argument, so the static-diagnose narrowing inside
+    `refuses_execution` cannot apply to a chain step; behaviour is byte-identical today.
+    """
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    return boundary.refuses_execution(cid, entry)
+
+
 def execute_chain(chain: Sequence[str], goal: str,
                   inputs: Mapping[str, Any] | None = None,
                   registry: Mapping[str, Any] | None = None) -> dict[str, Any]:
@@ -4084,10 +4100,20 @@ def execute_chain(chain: Sequence[str], goal: str,
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     # Reject a known unconfined command anywhere in the chain before an earlier
     # step can have effects. This does not certify any other adapter as safe.
+    #
+    # THE DECISION IS THE BOUNDARY'S, NOT THIS CALLER'S.  This loop used to spell the three
+    # predicates out itself, which made it a SECOND copy of the rule that
+    # `computer_execution_boundary_v1.refuses_execution` already is.  Measured 2026-11-12
+    # (`canonical/tools/lift_the_refusal_and_see_what_remains_v1.py`): with the boundary's own
+    # decision lifted, 3 of 21 sentences still came back
+    # `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT` from HERE, because a caller
+    # that re-derives a rule cannot be reached by changing the rule.  Every other execution site
+    # in the tree calls `refuses_execution`; this one now does too, so a release condition
+    # admitted once is admitted everywhere or nowhere.  `_chain_refuses` is the one call site and
+    # `test_one_decision_spelled_once_v1` pins it to the substitution.
     for index, cid in enumerate(chain):
         entry = reg.get(cid)
-        if (boundary.is_unconfined_capability_id(cid) or boundary.is_unconfined_execution_entry(entry)
-                or boundary.is_unconfined_repair_entry(cid, entry)):
+        if _chain_refuses(cid, entry):
             return {"schema": SCHEMA, "pass": False, "goal": goal,
                     "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
                     "executed": False, "failed_step": {"index": index, "capability_id": cid},
