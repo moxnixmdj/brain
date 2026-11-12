@@ -488,6 +488,41 @@ def cut_at_blanks(pattern, node, text):
     return pieces + [text.raw[at:end].decode("utf-8")], [room for _, _, room in sorted(spots)]
 
 
+def objects_in(pattern):
+    """Blanks that are the object of an attribute the pattern names, as ``?1`` in ``?1.warn``."""
+    found = set()
+    if pattern[0] == "N":
+        for name, inner in pattern[2]:
+            if pattern[1] == "Attribute" and name == "value" and inner[0] == "?":
+                found.add(inner[1])
+            found |= objects_in(inner)
+    elif pattern[0] == "L":
+        for inner in pattern[1]:
+            found |= objects_in(inner)
+    return found
+
+
+def root_of(node):
+    """The name an expression starts from (``a`` in ``a.b[0].c()``), or None."""
+    while isinstance(node, (ast.Attribute, ast.Subscript, ast.Call)):
+        node = node.func if isinstance(node, ast.Call) else node.value
+    return node if isinstance(node, ast.Name) else None
+
+
+def imported_here(text, node):
+    """Does the expression start from a name the file imports at its top (and no function around it rebinds)?"""
+    root = root_of(node)
+    return root is not None and root.id in text.imports and not text.local_at(root, root.id)
+
+
+def import_said(name, origin):
+    """An import, as it would be written."""
+    module, inner = origin
+    if inner is None:
+        return "import %s" % module if module == name else "import %s as %s" % (module, name)
+    return "from %s import %s" % (module, inner) if inner == name else "from %s import %s as %s" % (module, inner, name)
+
+
 class Rule:
     """Code of one form, and what it becomes."""
 
@@ -499,6 +534,9 @@ class Rule:
         self.own = set()                 # names the new code binds for itself
         self.uses = set()                # how the changed code was used where the examples changed it
         self.origins = {}                # imported names the old code reads, and where each was imported from
+        self.brought = {}                # imported names only the new code reads, and where each was imported from
+        self.objects = objects_in(pattern)   # blanks that stand for the object an attribute is read from
+        self.imported_objects = set()    # those of them that stood for something imported in an example
 
     def __str__(self):
         number = {}
@@ -598,6 +636,7 @@ def stands_alone(rule, changed):
             if (isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and id(part) not in inside
                     and part.id in old.imports and not old.local_at(part, part.id)):
                 rule.origins.setdefault(part.id, set()).add(old.imports[part.id])
+        rule.imported_objects |= {blank for blank in rule.objects if blank in kept and imported_here(old, kept[blank])}
         assigned_before, read_before = names_of(before)
         assigned_after, read_after = names_of(after)
         if assigned_before != assigned_after and not (is_import(before) and is_import(after)
@@ -612,6 +651,8 @@ def stands_alone(rule, changed):
                               "a local variable cannot be repeated one place at a time" % (before.lineno, label, name, label))
             if not hasattr(builtins, name):
                 rule.needs.add(name)
+                if name in new.imports and not new.local_at(after, name):
+                    rule.brought.setdefault(name, set()).add(new.imports[name])
     # Names the new code binds for itself (a comprehension's variable, a lambda's parameter).  Copied code
     # that already uses such a name would be captured by it.
     before, after = rule.pairs[0]
@@ -741,28 +782,59 @@ def written_for(rule, node, bound, text):
     raise Refused("the change does not fit the code at line %d" % node.lineno)
 
 
-def shown_like_this(rule, text, node):
-    """Is the code at `node` used the way changed places of the examples were, and are the imported names it reads
-    the same imports?
+def same_names(rule, text, node, bound):
+    """Is the code at `node` about the same things as the changed code of the examples?
 
-    A function replaced in calls of one form says nothing about calls of another form: the new function may not
-    take those arguments.  So a call must have no keyword argument the examples did not show, and a number of
-    plain arguments between the fewest and the most they showed; code that is not called must have been shown not
-    called.  And a name that is an imported module in the example says nothing about a variable of the same name.
+    A name that is an imported module in an example says nothing about a variable of the same name, or about
+    another module imported under it.  And where a blank stands for the object an attribute is read from
+    (``?1`` in ``?1.warn``), examples that showed variables there say nothing about an imported module
+    (``warnings.warn``).  Code that reads another thing is not the code the rule is about, and is left as it is.
     """
-    if rule.kind == "expression":
-        use, calls = text.use_of(node), [shown for shown in rule.uses if shown is not None]
-        if use is None:
-            if None not in rule.uses:
-                return False
-        elif (not calls or not use[1] <= frozenset().union(*[named for _, named in calls])
-              or not min(count for count, _ in calls) <= use[0] <= max(count for count, _ in calls)):
-            return False
+    inside = {id(part) for blank in bound.values() for part in ast.walk(blank)}
     for part in ast.walk(node):
-        if isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in rule.origins:
+        if (isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in rule.origins
+                and id(part) not in inside):
             if text.imports.get(part.id) not in rule.origins[part.id] or text.local_at(part, part.id):
                 return False
-    return True
+    return not any(blank in bound and blank not in rule.imported_objects and imported_here(text, bound[blank])
+                   for blank in rule.objects)
+
+
+def said(use):
+    """One way of using an expression, in words."""
+    if use is None:
+        return "not called"
+    count, named = use
+    words = "called with %d argument%s" % (count, "" if count == 1 else "s")
+    extra = [name for name in sorted(named) if name not in ("*", "**")]
+    if extra:
+        words += " and the keyword%s %s" % ("" if len(extra) == 1 else "s", ", ".join(extra))
+    for mark, meaning in (("*", "unpacked arguments"), ("**", "unpacked keywords")):
+        if mark in named:
+            words += " and %s" % meaning
+    return words
+
+
+def unshown_use(rule, text, node):
+    """None when the code at `node` is used a way the examples showed; otherwise that use.
+
+    A function replaced where it was called one way says nothing about calls of another form: the new function
+    may not take those arguments.  So a call must have a number of plain arguments the examples showed and no
+    keyword they did not show, and code that is not called must have been shown not called.
+    """
+    if rule.kind != "expression":
+        return None
+    use, calls = text.use_of(node), [shown for shown in rule.uses if shown is not None]
+    if use is None:
+        return None if None in rule.uses else use_said(rule, use)
+    if use[0] in {count for count, _ in calls} and use[1] <= frozenset().union(*[named for _, named in calls]):
+        return None
+    return use_said(rule, use)
+
+
+def use_said(rule, use):
+    return "%s; the examples showed it %s" % (said(use), ", ".join(
+        said(shown) for shown in sorted(rule.uses, key=lambda one: (one is not None, one and (one[0], sorted(one[1]))))))
 
 
 def rewrite(rules, source_text, what="the file", check_names=True):
@@ -773,11 +845,16 @@ def rewrite(rules, source_text, what="the file", check_names=True):
         fitting = []
         for rule in rules:
             bound = {}
-            if fits(rule.pattern, node, bound) and shown_like_this(rule, text, node):
+            if fits(rule.pattern, node, bound) and same_names(rule, text, node, bound):
                 fitting.append((rule, bound))
         if len(fitting) > 1:
             raise Refused("two changes of the example both fit the code at line %d of %s" % (node.lineno, what))
         if fitting:
+            other = unshown_use(fitting[0][0], text, node)
+            if other is not None:
+                raise Refused("line %d of %s has %s %s. A use the examples did not show may not work with the new "
+                              "code, so nothing was changed; show that use too, changed or left alone"
+                              % (node.lineno, what, " ".join(text.of(node).split())[:60], other))
             places.append((text.span(node), node) + fitting[0])
     places.sort(key=lambda place: place[0])
     for earlier, later in zip(places, places[1:]):
@@ -825,11 +902,17 @@ def names_still_hold(text, edited, places, what):
     defined, anything = module_names(edited)
     if anything:
         return
+    imported = imports_of(edited)
     for _, node, rule, _ in places:
         for name in sorted(rule.needs):
             if name not in defined and not text.provides(name, node):
                 raise Refused("the change uses '%s', which %s does not define, import or receive as a parameter "
                               "at line %d" % (name, what, node.lineno))
+            origins = rule.brought.get(name)
+            if origins and None not in origins and (imported.get(name) not in origins or text.local_at(node, name)):
+                raise Refused("the change uses '%s', which the examples get by `%s`; at line %d of %s that name "
+                              "is something else" % (name, "` or `".join(sorted(import_said(name, origin)
+                                                                               for origin in origins)), node.lineno, what))
     taken = text.defined - defined
     for part in ast.walk(edited):
         if isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in taken:
