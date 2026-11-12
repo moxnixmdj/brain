@@ -127,8 +127,17 @@ def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqli
         _AUTO_SEEDED_DBS.add(str(target))
         bundle_p = default_workflow_bundle_path()
         if bundle_p.is_file():
-            row = conn.execute("SELECT COUNT(*) FROM compiled_workflow_skills").fetchone()
-            if not row or int(row[0]) == 0:
+            # Seed when the tracked bundle holds a skill this database lacks -- not only when the
+            # database is empty.  With the empty-only rule, a checkout that had ever stored one
+            # skill never received anything taught later, and nothing said so.
+            try:
+                _bundled = {str(item.get("skill_id")) for item in
+                            (json.loads(bundle_p.read_text(encoding="utf-8")).get("skills") or [])
+                            if isinstance(item, Mapping)}
+            except Exception:  # noqa: BLE001 - an unreadable bundle seeds nothing
+                _bundled = set()
+            _held = {str(r[0]) for r in conn.execute("SELECT skill_id FROM compiled_workflow_skills")}
+            if _bundled - _held:
                 conn.close()
                 try:
                     import_workflow_bundle(bundle_p, db_path=target)
@@ -1883,8 +1892,16 @@ def recall_and_execute_workflow(
     *,
     cwd: str | pathlib.Path | None = None,
     db_path: pathlib.Path | None = None,
+    refusals: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any] | None:
-    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check."""
+    """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check.
+
+    ``refusals``, when given, collects one entry for every skill whose sentence matched the goal
+    exactly and which then did not complete -- with the reason its own step gave.  The return
+    value is unchanged (``None`` when nothing passed), so a caller that does not ask sees nothing
+    new; a caller that does can tell "nothing was taught for this sentence" from "it was taught,
+    and the taught action declined this case".
+    """
     from canonical.runtime.memory_policy_v1 import can_read_memory
 
     if not can_read_memory():
@@ -1926,9 +1943,15 @@ def recall_and_execute_workflow(
                     "step_receipts": exec_res.get("step_receipts") or []}
         previous_attempt = True
         if not exec_res.get("ok"):
+            if refusals is not None:
+                refusals.append({"skill_id": skill.get("skill_id"), "goal_skeleton": skill.get("goal_skeleton"),
+                                 "reason": str(exec_res.get("reason") or "")[:300]})
             continue
         ok, reason = verify_postcondition(inst_post, cwd=cwd, execution_result=exec_res)
         if not ok:
+            if refusals is not None:
+                refusals.append({"skill_id": skill.get("skill_id"), "goal_skeleton": skill.get("goal_skeleton"),
+                                 "reason": str(reason)[:300]})
             continue
         # Record hit count asynchronously-safe in WAL
         target_db, conn = _connect_db(db_path)

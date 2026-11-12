@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 306,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6704,
+  "research_index_records": 6705,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d090c5bfdce4676db06e7a0d6432b0ee7ee5cd2262dea6308f38c016350aa9ba"
+  "value": "646b59353a8658a6fc2d6553f52ec29e89f09df57126e8d1db423cd1b8cf7e1d"
  },
  "engines": [
   {
@@ -213953,7 +213953,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_KEPT_LESSON_STAYS_USABLE_HOWEVER_MANY_FOLLOW_IT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "3bf0f45694b1b63406a0fede3fb97924e78c044c1f2e1eef7e994f13c32dde46",
+   "sha256": "9d9169cc00c317fc60060001791111af44e32d6b6e38d10c737b83a6a9f51fc3",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -215256,6 +215256,35 @@
     "two": 2,
     "v1": 2,
     "zero": 3
+   }
+  },
+  {
+   "action_id": "A_REFACTORING_REQUEST_EDITS_WHAT_THE_SENTENCE_STATES_AND_TWO_MISSING_ACTIONS_ARE_TAUGHT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_REFACTORING_REQUEST_EDITS_WHAT_THE_SENTENCE_STATES_AND_TWO_MISSING_ACTIONS_ARE_TAUGHT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REFACTORING_REQUEST_EDITS_WHAT_THE_SENTENCE_STATES_AND_TWO_MISSING_ACTIONS_ARE_TAUGHT_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "3af1683a1b1b6846aa92785d00602c90954292ec27ddd7dd052535dbd5c4ac81",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_refactoring_request_edits_what_the_sentence_states_and_two_missing_actions_are_taught_20261112_v1": 1,
+    "actions": 1,
+    "adapt_the_doors_object_role_rule_and_its_input_derivation_so_a_refactoring_sentence_binds_the_object_the_lines_and_the_name_it_states__then_reuse_the_demonstration_to_skill_compiler_to_teach_the_two_refactorings_the_door_lacks": 1,
+    "edits": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "missing": 1,
+    "refactoring": 1,
+    "request": 1,
+    "sentence": 1,
+    "states": 1,
+    "taught": 1,
+    "the_owner_asked_to_teach_four_refactorings__three_already_exist_as_rows__through_the_front_door_a_request_to_rename_a_variable_renamed_the_function_and_a_request_to_extract_lines_13_to_14_extracted_line_13_and_a_stated_new_name_became_a_placeholder__all_answered_pass__and_renaming_or_inlining_a_local_variable_did_not_exist": 1,
+    "two": 1,
+    "two_wrong_passes_of_the_refactoring_rows_become_right_or_refused__one_known_wrong_name_becomes_a_refusal__four_taught_sentence_forms_for_two_actions_enter_the_tracked_skill_bundle__no_registry_row_is_added__zero_terminal_credit__zero_family_credit": 1,
+    "v1": 1
    }
   },
   {
@@ -247519,15 +247548,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "bcfea212d4de4bb60eb38daacd926d36c3a6c592da29f3e8e39549149f9d5af1",
+   "sha256": "6fb4f26ac2e1b9a0154d0de7801aca38fbbe2a62a8ee6457ceed9b540c242727",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 20,
+   "symbol_count": 21,
    "symbols": [
     "_defining_module",
     "_derive_edits",
     "_derive_swe_kernel_inputs",
     "_git_head_tree_blobs",
     "_holds_tests",
+    "_innermost_function_spanning",
     "_materialize_git_diff_for_dir",
     "_parsed_source",
     "_project_root",
@@ -247559,6 +247589,7 @@
     "git_head_tree_blobs": 1,
     "holds_tests": 1,
     "human": 1,
+    "innermost_function_spanning": 1,
     "input": 2,
     "is_swe_request": 1,
     "materialize_git_diff_for_dir": 1,
@@ -255897,9 +255928,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "1e16d0d4af9a83ae717b7cb045397a15eaea374a5d3f87b0bb0a3f58b225ef41",
+   "sha256": "8a819674b9b4e0968f198fb096291aae87e08961ffa526837b08338458f1cba0",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 89,
+   "symbol_count": 90,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -262490,9 +262521,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "a73b52e4703da38b6ad4a94a5b15327b60a3e84cf0e81f3b1773a2eaae4261c5",
+   "sha256": "7cca51db694efbc553e490590e65640184b51056774ec3aafe84601dd4164505",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 128,
+   "symbol_count": 129,
    "symbols": [
     "LocalExecutionFailure",
     "_ContextWorkspaceRoot",
@@ -262528,7 +262559,6 @@
     "declared_object_roles": 1,
     "every_word_is_taught": 1,
     "fail-closed": 1,
-    "failure_kind": 1,
     "failure_reason": 1,
     "front": 1,
     "future_artifacts": 1,
@@ -262538,6 +262568,7 @@
     "last_json_object": 1,
     "live": 2,
     "object_role_errors": 1,
+    "object_roles_a_row_cannot_answer": 1,
     "output_keys": 1,
     "printed_verdict": 1,
     "prose_tokens": 1,

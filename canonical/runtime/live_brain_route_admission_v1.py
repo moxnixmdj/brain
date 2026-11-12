@@ -260,11 +260,18 @@ def _output_keys(entry: Mapping[str, Any]) -> list[str]:
 # both roles at once.  So the identifier may not be continued by `/` or by a
 # dotted suffix.  Measured: without this the role rule never fired.
 _NAME_END = r"(?![./][A-Za-z0-9_])"
+# A name may be written in quotes or backticks: "the variable 'tmp'" names a variable exactly as
+# "the variable tmp" does.  Measured 2026-11-11: the quoted form stated no role at all, so the
+# rule below never ran for it.
+_NAME = r"[`\x27\"]?(?:[A-Za-z_][A-Za-z0-9_]*)"
 _ROLE_WORDS: tuple[tuple[str, "re.Pattern[str]"], ...] = (
-    ("PARAMETER", re.compile(r"\b(?:parameter|argument|kwarg|keyword\s+argument)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
-    ("LOCAL", re.compile(r"\b(?:local\s+variable|variable)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
-    ("SYMBOL", re.compile(r"\b(?:function|method|class|symbol|def)\s+(?:[A-Za-z_][A-Za-z0-9_]*)" + _NAME_END, re.I)),
+    ("PARAMETER", re.compile(r"\b(?:parameter|argument|kwarg|keyword\s+argument)\s+" + _NAME + _NAME_END, re.I)),
+    ("LOCAL", re.compile(r"\b(?:local\s+variable|variable)\s+" + _NAME + _NAME_END, re.I)),
+    ("SYMBOL", re.compile(r"\b(?:function|method|class|symbol|def)\s+" + _NAME + _NAME_END, re.I)),
 )
+# A parameter or a variable is never where an edit happens; it is what the edit is about.  A
+# function, a method or a class can be either ("rename the function f", "... in the function f").
+_OPERAND_ROLES = frozenset({"PARAMETER", "LOCAL"})
 # The row's own declaration of what it edits, in the registry's existing slots.
 _ROLE_SLOTS: tuple[tuple[str, frozenset[str]], ...] = (
     ("PARAMETER", frozenset({"old_param", "new_param", "param", "parameter", "param_name"})),
@@ -299,9 +306,37 @@ def object_role_errors(goal: str, entry: Mapping[str, Any]) -> list[str]:
     """
     stated = stated_object_roles(goal)
     declared = declared_object_roles(entry)
-    if stated and declared and not (stated & declared):
+    if object_roles_a_row_cannot_answer(stated, declared):
         return ["OBJECT_ROLE_MISMATCH:" + "+".join(sorted(stated)) + "!=" + "+".join(sorted(declared))]
     return []
+
+
+def object_roles_a_row_cannot_answer(stated: set[str], declared: set[str]) -> set[str]:
+    """The roles a sentence states that a row with these declared roles has no slot for.
+
+    Two cases, and nothing else:
+
+    * the row declares none of the stated roles (the original rule); or
+    * the sentence names a parameter or a variable and the row cannot hold one.
+
+    The second case was measured on main 62fa7efa, three sentences out of three:
+
+        "rename the variable tmp to product in the function compute in <f>"
+          -> python.refactor.rename_symbol.v1, admitted because the sentence ALSO says
+             "function" -> PASS, and the FUNCTION was renamed: ``def product(a, b, ...)``.
+
+    The sentence states two roles: the variable is what the rename is about, the function is
+    where.  A row that declares only the second can bind every slot it has and still not be
+    able to touch the object of the sentence.  Sharing one role is therefore not enough when
+    the role left over is an operand.
+
+    A sentence that states no role, and a row that declares none, are untouched as before.
+    """
+    if not stated or not declared:
+        return set()
+    if not (stated & declared):
+        return set(stated)
+    return (stated & _OPERAND_ROLES) - declared
 
 
 def declared_object_roles(entry: Mapping[str, Any]) -> set[str]:
@@ -609,7 +644,7 @@ def _route_admission_by_evidence(goal: str, compiled: Mapping[str, Any], registr
         # ...and the contract must bind the object the sentence is ABOUT.
         stated_roles = stated_object_roles(goal)
         declared_roles = declared_object_roles(entry)
-        if stated_roles and declared_roles and not (stated_roles & declared_roles):
+        if object_roles_a_row_cannot_answer(stated_roles, declared_roles):
             return {**base, "admitted": False, "rule": "OBJECT_ROLE_MISMATCH",
                     "stated_object_roles": sorted(stated_roles),
                     "capability_object_roles": sorted(declared_roles),
@@ -5495,7 +5530,12 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                 )
 
                 if not _is_honest_contract_refusal(result):
-                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""))
+                    _declined: list[dict[str, Any]] = []
+                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""), refusals=_declined)
+                    if recalled is None and _declined:
+                        # The sentence WAS taught, and the taught action declined this case.  The
+                        # refusal above stands; this says why, in the action's own words.
+                        result["taught_action_declined"] = _declined[:3]
                     from canonical.runtime import computer_execution_boundary_v1 as boundary
                     if recalled is not None and recalled.get("status") == boundary.STATUS:
                         # The primary route preceded this fallback and may have had
