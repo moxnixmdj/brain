@@ -394,9 +394,31 @@ def receipts(root: pathlib.Path) -> dict[str, Any]:
             "receipts": report["counts"]}
 
 
+def rules_execute(root: pathlib.Path) -> dict[str, Any]:
+    """Do stored rules survive being EXECUTED against a spec, or only re-checked structurally?
+
+    The six other layers all verify consistency: a rule still applies, a hash still matches, a
+    pin still resolves. Consistency is cheap. This layer asks whether applying the learned edit
+    preserves the behaviour the program already had, on a victim the rule was never taught on.
+    """
+    try:
+        from canonical.tools import rule_generalization_probe_v1 as P
+    except Exception as exc:                      # pragma: no cover
+        return {"layer": "rules_execute", "total": None, "checkable": None,
+                "error": f"{type(exc).__name__}:{exc}"[:120]}
+
+    demo = P.demonstrate()
+    total = len(demo)
+    checkable = sum(1 for v in demo.values() if v["verdict"] in (P.HOLDS, P.BREAKS))
+    broken = [k for k, v in demo.items() if v["verdict"] == P.BREAKS]
+    return {"layer": "rules_execute", "total": total, "checkable": checkable,
+            "note": f"{checkable}/{total} executed against an oracle; "
+                    f"{len(broken)} broke behaviour ({', '.join(broken) or 'none'})"}
+
+
 def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any]:
     layers = [capabilities(root), skills(root), process_sites(root), test_modules(root),
-              binary_predicates(root), receipts(root)]
+              binary_predicates(root), receipts(root), rules_execute(root)]
     for layer in layers:
         total, checkable = layer.get("total"), layer.get("checkable")
         layer["auditability"] = (round(checkable / total, 4)

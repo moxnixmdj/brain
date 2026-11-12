@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 339,
+  "knowledge_documents": 340,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6744,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c47825ce99437feb278cc1e81a0db358794d166af7c834c03135e29554019003"
+  "value": "cb355005368dff164466ee0fc57d6b64e836fe72962fd80811b6b873fd696986"
  },
  "engines": [
   {
@@ -51080,6 +51080,84 @@
     "being",
     "noticing",
     "told"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7297,
+   "headings": [
+    "One demonstration does not identify a rule. It identifies a set.",
+    "1. The self-critique first: three of my four checks were never called",
+    "2. The fifth link, now executable",
+    "What it found",
+    "3. The field says the same thing, with numbers",
+    "4. Verdict, link by link",
+    "5. What is actually load-bearing",
+    "6. On \"sentient creature\""
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_DEMO_ONE_SET_20261112_V1.md",
+   "sha256": "ce6728b4870ff7cb451086e33e35c3a162ff91eb18935013fc96f66c16c686af",
+   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`. Everything below is measured, either on this tree or in the cited paper, and the numbers are the ones that came out.",
+   "terms": {
+    "0.0pp": 3,
+    "100": 6,
+    "50": 4,
+    "about": 3,
+    "against": 4,
+    "all": 4,
+    "any": 4,
+    "breaks": 3,
+    "claim": 5,
+    "constant": 3,
+    "def": 4,
+    "demonstration": 3,
+    "edit": 3,
+    "edited": 4,
+    "every": 3,
+    "false": 5,
+    "four": 5,
+    "learned": 3,
+    "library": 4,
+    "link": 4,
+    "measured": 6,
+    "more": 3,
+    "never": 4,
+    "no": 10,
+    "not": 11,
+    "nothing": 7,
+    "numbers": 3,
+    "once": 4,
+    "one": 12,
+    "one-shot": 6,
+    "only": 3,
+    "oracle": 3,
+    "own": 3,
+    "return": 4,
+    "revision": 4,
+    "rule": 16,
+    "same": 5,
+    "set": 6,
+    "skill": 10,
+    "skills": 8,
+    "spec": 4,
+    "still": 4,
+    "test": 4,
+    "thing": 6,
+    "tier": 4,
+    "tree": 6,
+    "victim": 4,
+    "wrong": 5
+   },
+   "title": "One demonstration does not identify a rule. It identifies a set.",
+   "title_terms": [
+    "demonstration",
+    "identifies",
+    "identify",
+    "not",
+    "one",
+    "rule",
+    "set"
    ]
   },
   {
@@ -71118,10 +71196,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1141,
+  "included_source_count": 1142,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1c19c411c274c9077581fe569824f8dd96b9201b8e6bf67e11025400a2450c7c"
+  "source_tree_digest": "8f48b8323a527ddfb9bae7376fc7f52e4d33cf997d0de485d70a2ed5988042f1"
  },
  "research_index": [
   {
@@ -222455,7 +222533,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "89a1e6393902b4f4a6937f0a280625ca17009e8f7574546e89e481a0c57203c2",
+   "sha256": "787a26e70f3713f68f77f6df2433d810a598ae518cc0d30498884d62c01f42e0",
    "status": "",
    "terms": {
     "20261111": 1,
