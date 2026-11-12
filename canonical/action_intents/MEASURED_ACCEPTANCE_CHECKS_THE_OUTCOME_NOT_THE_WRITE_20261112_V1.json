@@ -7,7 +7,7 @@
  "route_id": "MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "4138e9ee0b5afa8cc71f1c32e72c49686304eae6",
+ "canonical_base_commit": "191f4f5b9a0b91873f583000e266c23a69097027",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -135,7 +135,7 @@
    "NEGATIVE_CONTROLS_MUST_REMAIN_REJECTED"
   ],
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "4138e9ee0b5afa8cc71f1c32e72c49686304eae6",
+  "canonical_base_commit": "191f4f5b9a0b91873f583000e266c23a69097027",
   "real_outcome": "Prevent a measured-acceptance capability from accepting a run whose own answer is a refusal, merely because an answer file was written.",
   "required_capability": "RELIABLE_MEASURED_ACCEPTANCE_AS_A_CONSTRUCTIVE_DEPENDENCY_OF_THE_GENERAL_REUSABLE_PROBLEM_SOLVING_FRONTIER",
   "obs_goal": {
