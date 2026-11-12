@@ -1,0 +1,446 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_20261112_V1",
+ "action_intent_id": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "d1b9c677325db3f7b713569adcf358fd85b718ca",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Round 23 measured the compounding half (cold 59 vs armed 35 questions on a never-seen period-12) but left the loop open at the program layer: the wake pass handled single-expression concepts only and silently skipped statement-function abstractions -- the ONLY entries the library admits by compression. Admission without replay is an append-only log. This round adds the measured replay engine (shape-matched, behaviour-verified on a probe grid with the abstraction as prelude, strictly byte-reducing, fail-closed, checked-artifact-is-returned-artifact), dispatches to it from both early-exit paths of the library wake pass, and pins the exploration negatives: ramps do not compress (already minimal) and world-model organs do not lift (outside the lifter's scope), so the table family is the only compressive corpus the current writer emits. Prediction written before the confirmatory run: a never-seen period-12 organ synthesized through the COLD path with a fresh library is rewritten by the wake pass to call the admitted abstraction. MEASURED: 179 bytes cold -> 112 bytes replayed (37% smaller, 67 bytes computed), behaviour preserved on 500+ held-out inputs, cold organ itself 0 held-out failures -- the replay changed cost, not correctness.",
+ "selected_route": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_CLOSES_THE_LIBRARY_LOOP",
+ "causal_blocker": "THE_LIBRARY_WAKE_PASS_SILENTLY_SKIPPED_STATEMENT_FUNCTION_ABSTRACTIONS__THE_ONLY_ENTRIES_ADMITTED_BY_COMPRESSION__SO_THE_COMPRESS_ADMIT_LICENSE_LOOP_HAD_NO_REPLAY_ARROW",
+ "expected_parent_change": "ADMITTED_ABSTRACTIONS_ARE_REPLAYED_INTO_PROGRAMS_MEASURED_AT_37_PERCENT_DESCRIPTION_BYTE_REDUCTION_WITH_BEHAVIOUR_PRESERVED_AND_FAIL_CLOSED_REFUSALS",
+ "expected_parent_frontier_change": "THE_LIBRARY_LOOP_IS_NOW_COMPRESS_ADMIT_LICENSE_REPLAY_ALL_MEASURED_IN_TREE_AT_ZERO_MODEL_DEPENDENCY__EXPLORATION_NEGATIVES_PINNED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LIBRARY_WAKE_PASS_SILENTLY_SKIPPED_STATEMENT_FUNCTION_ABSTRACTIONS__THE_ONLY_ENTRIES_ADMITTED_BY_COMPRESSION__SO_THE_COMPRESS_ADMIT_LICENSE_LOOP_HAD_NO_REPLAY_ARROW",
+ "falsification_condition": "THE_REPLAY_NOT_STRICTLY_BYTE_REDUCING__OR_ANY_HELD_OUT_BEHAVIOUR_CHANGE_SHIPPING__OR_A_FORGED_LIBRARY_ENTRY_SURVIVING_THE_PROBE_GRID__OR_THE_CREATURE_SUITE_EXPRESSION_WAKE_PATH_FAILING__OR_THE_EXPLORATION_NEGATIVES_FLIPPING_WITHOUT_NEW_MACHINERY",
+ "stop_condition": "5_NEW_TESTS_PASS__196_AFFECTED_TESTS_PASS_INCLUDING_THE_CREATURE_SUITE_AND_THE_PINNED_EXPRESSION_WAKE_PATH__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/compression_gain_v1.py",
+   "canonical/swe_kernel/concept_library_v1.py",
+   "canonical/tests/test_wake_replay_compounds_into_programs_v1.py",
+   "WAKE_REPLAY_CLOSES_THE_LIBRARY_LOOP_20261112_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_AN_ADMITTED_ABSTRACTION_LIBRARY_IS_A_MEMORY_WHEN_ITS_CONTENT_CANNOT_BE_REPLAYED_INTO_PROGRAMS",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_6469dbbb__COLD_PERIOD12_ORGAN_179_BYTES_REPLAYED_TO_112_BYTES_CALLING_THE_ADMITTED_ABSTRACTION__BEHAVIOUR_PRESERVED_ON_500_PLUS_HELD_OUT_INPUTS__COLD_ORGAN_0_FAILURES_ON_THE_SAME_SET__FORGED_SAME_SHAPE_WRONG_BODY_ENTRY_REFUSED_BY_THE_PROBE_GRID__RAMP_AND_WORLD_MODEL_EXPLORATION_NEGATIVES_MEASURED_AND_PINNED__196_TESTS_PASS"
+ },
+ "measured_effect": "COLD_179_BYTES_TO_REPLAYED_112_BYTES_37_PERCENT_SMALLER_ON_A_NEVER_SEEN_ORGAN__BEHAVIOUR_PRESERVED_HELD_OUT__FAIL_CLOSED_AGAINST_A_FORGED_ENTRY__EXPLORATION_NEGATIVES_RAMP_NO_COMPRESS_WORLD_MODEL_NO_LIFT_PINNED__196_TESTS_PASS__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "EFFICIENCY_GAIN_ON_THE_EXISTING_CRYSTALLIZATION_CAPABILITY__THE_REPLAY_CHANGES_PROGRAM_COST_NOT_CORRECTNESS__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/compression_gain_v1.py",
+  "canonical/swe_kernel/concept_library_v1.py::rewrite_source_with_concepts",
+  "canonical/tests/test_compression_gain_abstraction_v1.py",
+  "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1.md",
+  "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "d1b9c677325db3f7b713569adcf358fd85b718ca",
+  "real_outcome": "REPLAY_ARROW_BUILT_AND_MEASURED__NEVER_SEEN_COLD_ORGAN_REFACTORED_INTO_A_CALL_ON_THE_ADMITTED_ABSTRACTION_AT_37_PERCENT_SMALLER_WITH_BEHAVIOUR_PRESERVED__EXPLORATION_NEGATIVES_PINNED",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether experiencing each structure once yields permanent reusable capability. Round 23 measured compounding within one family but the learned form could not be REUSED at the program layer -- the wake pass skipped the only entries the library admits by compression. This round closes that arrow and measures it.",
+   "proxy_goals_deleted": [
+    "counting a stored abstraction as reusable when no replay path exists",
+    "verifying one program and shipping another",
+    "decorating a program with a call that does not shrink it"
+   ],
+   "surviving_necessity": "A replay that is shape-matched, behaviour-verified, and strictly byte-reducing -- or an honest refusal. Anything else is decoration wearing reuse's clothes."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/concept_library_v1.py::rewrite_source_with_concepts (the existing expression wake path -- reused, not modified in its positive branch)",
+    "canonical/swe_kernel/compression_gain_v1.py (lift_shape, description_bytes, probe grid, exec -- all reused from round 23)",
+    "canonical/tests/test_meta_circular_global_sentient_creature_v1.py::test_sleep_admits_policy_concepts_and_wake_rewrites_the_organ (the pinned expression positive)"
+   ],
+   "external_existing_routes_checked": [
+    "DreamCoder replay: solved programs rewritten against the learned library -- the exact step this round adds in-tree",
+    "LILO search-compress-document loop -- the document step maps to the helper rendering; the replay step maps to this round",
+    "2026 skill-library field comparisons (Voyager lineage, Agent Workflow Memory): gains flatten when stored skills are never refactored into future programs -- this round is that refactor, measured"
+   ],
+   "capability_work_deleted": [
+    "the two wake early-exit paths that returned None past an admitable-by-compression library",
+    "the first draft's dual artifact construction (verified string, returned AST with parameter-name references) -- replaced by one source of truth",
+    "lift_shape's join-only call-args surface that could not be safely split (param_values_src added)"
+   ],
+   "surviving_gap": "The replay is a post-pass; the writer itself does not yet prefer emitting abstraction calls during crystallization, and dict-table organs remain outside the lifter. Both are the named next round."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: a replay is only real if the rewritten program is behaviourally identical AND strictly smaller -- measured on this corpus the table organ's 12-value block is irreducible instance data, so the 67-byte saving is exactly the shared structure the library owns. A forge test (same shape, wrong body, credible bookkeeping) was run and the probe grid refused it: the gate catches a corrupted library, not just a mismatched organ.",
+   "delete_bypass_substitute_options": [
+    "DELETE the replay requirement -- rejected, it reduces the library to an append-only log",
+    "BYPASS with string templating instead of AST lift/match -- rejected, unverifiable and behaviour-unsafe",
+    "REUSE rewrite_source_with_concepts unchanged -- attempted first; its positive path works and was left untouched, its None paths were the defect",
+    "SUBSTITUTE a model donor for the rewrite -- forbidden by NO_MODEL_PRODUCER_COGNITION"
+   ],
+   "surviving_causal_blocker": "The writer does not yet EMIT abstraction calls during crystallization (replay is post-pass), and dict-table lifters do not exist. Named next round."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Compose the replay engine over the round-23 lifter/verifier/currency and dispatch from the wake pass's None paths -- chosen: smallest surface, all machinery already measured",
+    "2. Extend the expression rewriter to statement functions inside its own walker -- rejected: higher blast radius on a pinned path for the same result",
+    "3. Emit abstraction calls during crystallization -- the real end state, but a writer change; sequenced next round after this arrow is measured",
+    "4. Model donor rewrite -- rejected by law"
+   ],
+   "losing_routes_reason": "The in-walker extension touches the pinned expression path for no measured gain over the dispatch; crystallization-time emission is bigger than this round's question and deserves its own prediction.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through the existing eval: the cold organ and its replay are executed on 500+ held-out inputs, the forge case is executed and refused, and the pinned expression path plus the full creature suite is re-run. The prediction was written before the confirmatory run; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-23 note's open arrow 'wire admitted abstractions into the synthesizer grammar' -- the replay half of it is now measured; the search-primitive half remains"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the existing expression wake path (reused untouched)",
+    "the round-23 shape lifter, description currency, and probe grid (reused)"
+   ],
+   "fresh_reuse_plan": "Next: crystallization-time emission of abstraction calls; a dict-table lifter to revisit the second-family question with machinery that can see that corpus."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving the replay numbers per run -- pinned by the prediction test",
+    "re-arguing whether ramps/world-models compress -- pinned by the exploration-negatives test"
+   ],
+   "search_stop_decision": "Stop when the loop is closed and measured: the replay arrow exists, is fail-closed, and the negatives are pinned. Crystallization-time emission is a new mechanism with its own prediction and is deliberately not squeezed into this round.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_CLOSES_THE_LIBRARY_LOOP",
+   "EXTEND_EXPRESSION_REWRITER_TO_STATEMENT_FUNCTIONS_IN_WALKER",
+   "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+   "MODEL_DONOR_REWRITE"
+  ],
+  "deleted_or_bypassed_paths": [
+   "WAKE_NONE_PATHS_THAT_SKIPPED_ADMITTED_ABSTRACTIONS",
+   "DUAL_ARTIFACT_CONSTRUCTION_VERIFIED_STRING_RETURNED_AST",
+   "JOIN_ONLY_CALL_ARGS_SURFACE"
+  ],
+  "selected_surviving_route": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_CLOSES_THE_LIBRARY_LOOP",
+  "why_selected_route_is_fastest_sufficient": "SMALLEST_SURFACE_OVER_ALREADY_MEASURED_MACHINERY__THE_LIFTER_CURRENCY_PROBE_GRID_AND_LIBRARY_ALL_EXIST__THE_PREDICTION_WAS_DECIDABLE_IN_ONE_RUN_AT_ZERO_SPEND",
+  "expected_parent_level_state_change": "THE_LIBRARY_LOOP_IS_NOW_COMPRESS_ADMIT_LICENSE_REPLAY_ALL_MEASURED_IN_TREE_AT_ZERO_MODEL_DEPENDENCY__EXPLORATION_NEGATIVES_PINNED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "5_NEW_TESTS_PASS__196_AFFECTED_TESTS_PASS_INCLUDING_THE_CREATURE_SUITE_AND_THE_PINNED_EXPRESSION_WAKE_PATH__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T14:06:27Z",
+   "max_age_hours": 24,
+   "incumbent_route": "ROUND_23_STATE__COMPRESS_ADMIT_LICENSE_MEASURED__REPLAY_ARROW_ABSENT__WAKE_PASS_RETURNED_NONE_PAST_A_COMPRESSION_ONLY_LIBRARY",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "rewrite_source_with_concepts filtered is_stmt_fn concepts out of the live set, so the only compression-admitted entries could never be replayed -- read from the source this round",
+     "the round-23 bridge is the only writer that sets family on ConceptEntry, so the replay engine's input corpus is exactly the round-23 output",
+     "the growth loop and the table writer are unchanged and still reproduce 14/24/34 cold, pinned by the round-23 calibration test"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Ellis et al., DreamCoder, PLDI 2021: the wake phase rewrites programs against the learned library (abstraction replay), the step this round adds in-tree",
+     "Grand et al., LILO, ICLR 2024: the search-compress-document loop; replay is the closing arrow that makes the library load-bearing for future programs",
+     "Bowers et al., Stitch, POPL 2023: abstraction admission by corpus compression -- the admission rule reused unchanged from round 23"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python ast module (NodeTransformer, unparse, fix_missing_locations) -- the replay engine's entire substrate, stdlib only",
+     "no external crate or package was needed: shape lifting covers the shared structure this corpus contains"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "the 2026 self-improving-agents survey (arXiv 2607.13104) treats skill/procedural reuse as the standard scaffolding lever and notes memory that is stored but not replayed does not compound",
+     "2026 skill-library field comparisons report stored skills are rarely refactored into future programs; Voyager's authors list library growth without merge/refactor as an open limitation -- this round is the refactor, measured"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "DreamCoder wake phase replay learned library rewrite programs against abstractions"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent skill library refactor replay into future programs 2026 Voyager Agent Workflow Memory"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "AST based source rewrite behaviour preserving refactoring guaranteed python"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "self-improving agents 2026 skill library consolidation replay limitations"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_CLOSES_THE_LIBRARY_LOOP",
+   "challenger_routes": [
+    {
+     "route": "EXTEND_THE_EXPRESSION_REWRITER_TO_STATEMENT_FUNCTIONS_IN_ITS_OWN_WALKER",
+     "evidence": [
+      "the expression walker already handles helper inlining and used-concept tracking"
+     ],
+     "qualification_evidence": [
+      "the walker's matcher is expression-subtree based; statement-list matching would be a second matcher inside the pinned function anyway",
+      "the dispatch approach touches zero lines of the pinned positive path"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Equivalent result",
+      "CAPABILITY_STRENGTH": "Equivalent for this corpus",
+      "WALL_CLOCK": "Comparable",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "Higher blast radius on a pinned path",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "the writer could emit abstraction calls directly when a licensed abstraction covers the family"
+     ],
+     "qualification_evidence": [
+      "this changes the writer itself and needs its own pre-registered armed-vs-cold prediction on emitted-program bytes",
+      "sequenced as the next round after the replay arrow is measured; doing both at once would confound the two mechanisms"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Same gate discipline required",
+      "CAPABILITY_STRENGTH": "Larger eventual effect (every future organ)",
+      "WALL_CLOCK": "More work this round",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Writer changes need their own falsification condition",
+      "VERIFIABILITY": "Predictable with the same discipline next round"
+     }
+    },
+    {
+     "route": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_CLOSES_THE_LIBRARY_LOOP",
+     "evidence": [
+      "cold 179-byte organ replayed to 112 bytes calling the admitted abstraction, behaviour preserved on 500+ held-out inputs",
+      "a forged same-shape wrong-body library entry is refused by the probe grid",
+      "the pinned expression wake path and the full creature suite pass unchanged"
+     ],
+     "qualification_evidence": [
+      "5 new tests including the pre-registered prediction and the exploration negatives",
+      "196 affected tests pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed: behaviour, bytes, and shape all measured before anything ships",
+      "CAPABILITY_STRENGTH": "Closes the last open arrow of the library loop",
+      "WALL_CLOCK": "Milliseconds of AST work per replay",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Refuses rather than decorates; forged entries caught",
+      "VERIFIABILITY": "Prediction written before measurement; calibration via the pinned round-23 numbers"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T14:06:27Z",
+    "max_age_hours": 2,
+    "selected_route": "WAKE_REPLAY_OF_ADMITTED_ABSTRACTIONS_CLOSES_THE_LIBRARY_LOOP",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the replay engine runs on this branch and measures the 179-to-112 byte replay"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.concept_library_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the wake dispatch is exercised by both the new tests and the pinned creature sleep test"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_AN_EFFICIENCY_GAIN_ON_THE_EXISTING_CRYSTALLIZATION_CAPABILITY_WITH_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT__THE_REPLAY_CLAIM_IS_BOUND_TO_A_PRE_REGISTERED_PREDICTION_AND_TO_FAIL_CLOSED_BEHAVIOUR_AND_BYTE_MEASUREMENTS",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "WAKE_REPLAY_MAKES_ADMITTED_ABSTRACTIONS_USABLE_AS_PROGRAMS",
+   "falsifier_id": "F_THE_REPLAY_MUST_BE_SHAPE_MATCHED_BEHAVIOUR_PRESERVED_AND_STRICTLY_BYTE_REDUCING_OR_REFUSE__A_FORGED_SAME_SHAPE_WRONG_BODY_ENTRY_MUST_BE_CAUGHT_BY_THE_PROBE_GRID",
+   "decisive_question": "Does an admitted abstraction get replayed into a never-seen organ's program -- measured strictly smaller with behaviour preserved -- through the library's own wake pass, fail-closed against forged entries?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_wake_replay_compounds_into_programs_v1.py",
+     "git_blob_sha": "3fe42f0d64177f496fcea5c1d01f9d7cafc1e385"
+    },
+    {
+     "path": "canonical/swe_kernel/compression_gain_v1.py",
+     "git_blob_sha": "a82712ffd5aaaf3e6ba09fbc0653806f49a8a34d"
+    },
+    {
+     "path": "canonical/tests/test_compounding_and_goal_identity_v1.py",
+     "git_blob_sha": "548d133b719f535d3c9df985b38923f61bf35494"
+    }
+   ]
+  }
+ },
+ "next_step": "CRYSTALLIZATION_TIME_EMISSION_OF_ABSTRACTION_CALLS_WITH_ITS_OWN_ARMED_VS_COLD_PREDICTION_ON_EMITTED_PROGRAM_BYTES__THEN_A_DICT_TABLE_LIFTER_TO_REVISIT_THE_SECOND_FAMILY_QUESTION_WITH_MACHINERY_THAT_CAN_SEE_THAT_CORPUS"
+}

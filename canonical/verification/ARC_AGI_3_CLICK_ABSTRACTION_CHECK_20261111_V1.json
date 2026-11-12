@@ -1,0 +1,223 @@
+{
+ "schema": "PROJECT_BRAIN_ARC_AGI_3_PUBLIC_EXPLORATION_MEASUREMENT_V1_CLICK_ABSTRACTION_CHECK",
+ "authority": "NONE",
+ "measurement_class": "MEASURED_SANDBOX__PRODUCER_RUN__NOT_INDEPENDENT_VERIFICATION",
+ "date_utc": "2026-11-11T12:35:05Z",
+ "instrument": {
+  "arc_agi_version": "0.9.9",
+  "arcengine_version": "0.9.3",
+  "python": "3.11.2",
+  "environments": {
+   "files": 50,
+   "tree_sha256": "bf57484673964be96b1a3fa160f4d0ba5b731ffd33fa8aa1d074113ad7778152"
+  },
+  "games": [
+   "ar25-0c556536",
+   "bp35-0a0ad940",
+   "cd82-fb555c5d",
+   "cn04-2fe56bfb",
+   "dc22-fdcac232",
+   "ft09-0d8bbf25",
+   "g50t-5849a774",
+   "ka59-38d34dbb",
+   "lf52-271a04aa",
+   "lp85-305b61c3",
+   "ls20-9607627b",
+   "m0r0-492f87ba",
+   "r11l-495a7899",
+   "re86-8af5384d",
+   "s5i5-18d95033",
+   "sb26-7fbdac44",
+   "sc25-635fd71a",
+   "sk48-d8078629",
+   "sp80-589a99af",
+   "su15-1944f8ab",
+   "tn36-ef4dde99",
+   "tr87-cd924810",
+   "tu93-0768757b",
+   "vc33-5430563c",
+   "wa30-ee6fef47"
+  ]
+ },
+ "check": {
+  "scope": "FIRST_STATE_OF_EACH_GAME_ONLY",
+  "status": "PASS__EVERY_CLICK_THE_ENGINE_LISTS_IS_REACHED_BY_AN_ADAPTER_TARGET",
+  "games_offering_clicks": 19,
+  "games_where_the_engine_lists_clicks": 13,
+  "engine_listed_clicks": 50,
+  "engine_listed_clicks_covered": 50,
+  "per_game": [
+   {
+    "game": "ar25",
+    "engine_list_available": true,
+    "engine_listed_clicks": 1,
+    "engine_distinct_outcomes": 1,
+    "adapter_targets": 13,
+    "adapter_distinct_outcomes": 1,
+    "engine_listed_clicks_covered": 1
+   },
+   {
+    "game": "bp35",
+    "engine_list_available": true,
+    "engine_listed_clicks": 0,
+    "engine_distinct_outcomes": 0,
+    "adapter_targets": 191,
+    "adapter_distinct_outcomes": 8,
+    "engine_listed_clicks_covered": 0
+   },
+   {
+    "game": "cd82",
+    "engine_list_available": true,
+    "engine_listed_clicks": 0,
+    "engine_distinct_outcomes": 0,
+    "adapter_targets": 15,
+    "adapter_distinct_outcomes": 2,
+    "engine_listed_clicks_covered": 0
+   },
+   {
+    "game": "cn04",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 2,
+    "adapter_targets": 9,
+    "adapter_distinct_outcomes": 3,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "dc22",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 2,
+    "adapter_targets": 40,
+    "adapter_distinct_outcomes": 3,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "ft09",
+    "engine_list_available": true,
+    "engine_listed_clicks": 0,
+    "engine_distinct_outcomes": 0,
+    "adapter_targets": 65,
+    "adapter_distinct_outcomes": 9,
+    "engine_listed_clicks_covered": 0
+   },
+   {
+    "game": "ka59",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 2,
+    "adapter_targets": 14,
+    "adapter_distinct_outcomes": 2,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "lf52",
+    "engine_list_available": true,
+    "engine_listed_clicks": 0,
+    "engine_distinct_outcomes": 0,
+    "adapter_targets": 59,
+    "adapter_distinct_outcomes": 3,
+    "engine_listed_clicks_covered": 0
+   },
+   {
+    "game": "lp85",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 2,
+    "adapter_targets": 40,
+    "adapter_distinct_outcomes": 3,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "m0r0",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 1,
+    "adapter_targets": 7,
+    "adapter_distinct_outcomes": 1,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "r11l",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 2,
+    "adapter_targets": 38,
+    "adapter_distinct_outcomes": 31,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "s5i5",
+    "engine_list_available": true,
+    "engine_listed_clicks": 0,
+    "engine_distinct_outcomes": 0,
+    "adapter_targets": 30,
+    "adapter_distinct_outcomes": 5,
+    "engine_listed_clicks_covered": 0
+   },
+   {
+    "game": "sb26",
+    "engine_list_available": true,
+    "engine_listed_clicks": 12,
+    "engine_distinct_outcomes": 5,
+    "adapter_targets": 26,
+    "adapter_distinct_outcomes": 5,
+    "engine_listed_clicks_covered": 12
+   },
+   {
+    "game": "sc25",
+    "engine_list_available": true,
+    "engine_listed_clicks": 9,
+    "engine_distinct_outcomes": 1,
+    "adapter_targets": 23,
+    "adapter_distinct_outcomes": 1,
+    "engine_listed_clicks_covered": 9
+   },
+   {
+    "game": "sk48",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 1,
+    "adapter_targets": 46,
+    "adapter_distinct_outcomes": 1,
+    "engine_listed_clicks_covered": 2
+   },
+   {
+    "game": "sp80",
+    "engine_list_available": true,
+    "engine_listed_clicks": 1,
+    "engine_distinct_outcomes": 1,
+    "adapter_targets": 8,
+    "adapter_distinct_outcomes": 1,
+    "engine_listed_clicks_covered": 1
+   },
+   {
+    "game": "su15",
+    "engine_list_available": true,
+    "engine_listed_clicks": 0,
+    "engine_distinct_outcomes": 0,
+    "adapter_targets": 28,
+    "adapter_distinct_outcomes": 5,
+    "engine_listed_clicks_covered": 0
+   },
+   {
+    "game": "tn36",
+    "engine_list_available": true,
+    "engine_listed_clicks": 11,
+    "engine_distinct_outcomes": 11,
+    "adapter_targets": 88,
+    "adapter_distinct_outcomes": 11,
+    "engine_listed_clicks_covered": 11
+   },
+   {
+    "game": "vc33",
+    "engine_list_available": true,
+    "engine_listed_clicks": 2,
+    "engine_distinct_outcomes": 2,
+    "adapter_targets": 11,
+    "adapter_distinct_outcomes": 3,
+    "engine_listed_clicks_covered": 2
+   }
+  ]
+ }
+}
