@@ -1,0 +1,11419 @@
+{
+ "schema": "BRAIN_EXPERT_FIXES_DOSE_RESPONSE_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T17:11:23Z",
+ "read_this_first": [
+  "The question: the owner's plan in its most favourable form. Show the system what experts did, each thing once, and it has learned it. Here the things are bug fixes, and the number shown is turned up from 3 to 2,864. How many bugs it has never seen does that repair?",
+  "The lessons are 2,864 real fixes: Python programs handed in at AtCoder, each as its author first wrote it wrong and then right, one faulty line apart (ConDefects). The bugs are the 100 scored HumanEvalFix bugs. Nobody in this project wrote either. The learner is the edit-kind learner as it stands; at most 200 candidate programs are run against a bug's tests.",
+  "Bugs repaired, of 100 (mean of two orders of the lessons): 3 lessons 13.5; 10 lessons 30.5; 30 lessons 36.5; 100 lessons 44.5; 300 lessons 50; 1,000 lessons 56; 2,864 lessons 55. Every tripling of the lessons adds about six bugs up to 1,000 lessons. From 1,000 to 2,864 it adds none.",
+  "Right as far as checked, of 100: 3 lessons 9.5; 10 lessons 25.5; 30 lessons 29; 100 lessons 36.5; 300 lessons 42.5; 1,000 lessons 48.5; 2,864 lessons 48.",
+  "The control is the same pairs shown backwards, from the correct program to the faulty one: a memory of the same size that holds no fix. It repairs 43 with 100 pairs, 54 with 1,000 and 57 with all, and 34, 45 and 49 of those are right. With all the pairs the memory that holds no fix repairs 2 more bugs than the memory of fixes. What carries over is a stock of small changes; which way a fix goes carries nothing at this size. The tests do the choosing.",
+  "Why more stops helping: more lessons reach further and bury what they reach. The published fix is somewhere among the candidates for 40.5 bugs at 1,000 lessons and for 46 with all of them, but among the first 200 candidates for 35 and then 34. The candidates for one bug (the middle bug) go from 12,138 to 30,274.",
+  "Lessons from close by are worth about four times as many from far off: the 243 fixes of the benchmark itself and of QuixBugs repaired 56 bugs within 200 candidates, and it takes 1,000 fixes of AtCoder programs to repair 56.",
+  "What no amount of this has reached. Over every way without a model that this line of work has measured on these 100 bugs (the learner with four memories and their controls, the tree's repair solver, the stream), 78 bugs were repaired by at least one way and 22 by none. Of those 22, 10 are bugs of missing logic (of 19 such bugs) and 7 of excess logic (of 19): code that has to be written or taken out, not one small change.",
+  "What was written down before the run, and what came. Expected: the number repaired rises up to some hundreds of lessons and then stops rising or falls. It rose up to 1,000 and then stopped. Expected: under 62 at the largest dose. It is 55. Expected: the backwards control within 10 of the fixes at the largest dose. It is 2 above them.",
+  "One run by the producer on one machine. Nobody else has run it. Zero model calls."
+ ],
+ "what_was_run": {
+  "tool": "canonical/tools/expert_fixes_dose_response_measure_v1.py",
+  "tool_frozen_at_commit": "9a538188d9cbbf556360975cb531e7e4115668a6",
+  "learner": "canonical/runtime/edit_kind_learning_v1.py",
+  "lessons": {
+   "source": "github.com/appmlk/ConDefects",
+   "commit": "43f0834a82c5e3bc4516c079fe7765f63b1a15cd",
+   "pairs": 2864,
+   "unreadable": [],
+   "pairs_sha256": "6f64229c6cce4a082f71260e70e43f7897ed9651927beb44f147d4db5315cae8",
+   "forwards": {
+    "taught_something": 2773,
+    "taught_nothing": 91,
+    "operators": 21715
+   },
+   "backwards": {
+    "taught_something": 2773,
+    "taught_nothing": 91,
+    "operators": 21794
+   }
+  },
+  "bugs": "the 100 scored HumanEvalFix bugs (split seed 20261111)",
+  "benchmark": {
+   "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+   "extra_inputs_sha256": "78fbba8865b20c5a979cda6e02fd72538e1762e65980af7d1a6e93c3e87e93af"
+  },
+  "parameters": {
+   "sizes": [
+    3,
+    10,
+    30,
+    100,
+    300,
+    1000
+   ],
+   "order_seeds": [
+    20261112,
+    20261113
+   ],
+   "backwards_sizes": [
+    100,
+    1000
+   ],
+   "budget": 200,
+   "split_seed": 20261111,
+   "screen_limit_s": 0.5
+  },
+  "questions": {
+   "forwards": [
+    {
+     "label": "3/20261112",
+     "size": "3",
+     "seed": 20261112,
+     "shown": 3,
+     "taught_something": 3,
+     "only_sha256": "ce6f22bff71f95104d59da83c93c2426229e62f8bf1e07c7546909d39bf1a7cf"
+    },
+    {
+     "label": "10/20261112",
+     "size": "10",
+     "seed": 20261112,
+     "shown": 10,
+     "taught_something": 10,
+     "only_sha256": "7f3ab81bfe5eb34ce683b7cddec4ba77205b4b660eef4f66061098ebb3b6b013"
+    },
+    {
+     "label": "30/20261112",
+     "size": "30",
+     "seed": 20261112,
+     "shown": 30,
+     "taught_something": 30,
+     "only_sha256": "712cb1596c812c04cea8e686d96357313d6118e20c3dbafd5daf867e77501e95"
+    },
+    {
+     "label": "100/20261112",
+     "size": "100",
+     "seed": 20261112,
+     "shown": 100,
+     "taught_something": 96,
+     "only_sha256": "35d6c5f1113e50e91d1d8af70a0b013a9102bc7306f7256d845c12e1ac2cf1ce"
+    },
+    {
+     "label": "300/20261112",
+     "size": "300",
+     "seed": 20261112,
+     "shown": 300,
+     "taught_something": 285,
+     "only_sha256": "ec15bc0ca8c50331770a746bdd2f82a2c661efeacc02782964a92742da1b9453"
+    },
+    {
+     "label": "1000/20261112",
+     "size": "1000",
+     "seed": 20261112,
+     "shown": 1000,
+     "taught_something": 961,
+     "only_sha256": "59c3800255312c05243cff9bd932a0b8ba4e85aa4bf69d4d11d0cbe232a7fda6"
+    },
+    {
+     "label": "3/20261113",
+     "size": "3",
+     "seed": 20261113,
+     "shown": 3,
+     "taught_something": 3,
+     "only_sha256": "53d5f78474d13937b3d55444c3d0eb14ab5211cda477d2439936eaa85819fe7b"
+    },
+    {
+     "label": "10/20261113",
+     "size": "10",
+     "seed": 20261113,
+     "shown": 10,
+     "taught_something": 10,
+     "only_sha256": "e48759a2908fb7bb160767f8343505bdd08a45a551fa8f1f62e3810d1b4028a9"
+    },
+    {
+     "label": "30/20261113",
+     "size": "30",
+     "seed": 20261113,
+     "shown": 30,
+     "taught_something": 30,
+     "only_sha256": "a33c7523db00b9d8678c771e9850e89a16f5b5eae3b1025cfaffb376145337ac"
+    },
+    {
+     "label": "100/20261113",
+     "size": "100",
+     "seed": 20261113,
+     "shown": 100,
+     "taught_something": 95,
+     "only_sha256": "90011c708e5856a67f74fd05c90e4cac2977bdb1bbaeb055331b1ecbd0e46030"
+    },
+    {
+     "label": "300/20261113",
+     "size": "300",
+     "seed": 20261113,
+     "shown": 300,
+     "taught_something": 289,
+     "only_sha256": "fdc802632867079ffe4024366d68abba5e59e296ad39e5652c1e3f9df20551ac"
+    },
+    {
+     "label": "1000/20261113",
+     "size": "1000",
+     "seed": 20261113,
+     "shown": 1000,
+     "taught_something": 963,
+     "only_sha256": "8de97a7341f496f71c328a3100e9a230af2f06df74ab5073fc70f94d4083c9d8"
+    },
+    {
+     "label": "all",
+     "size": "all",
+     "seed": null,
+     "shown": 2864,
+     "taught_something": 2773,
+     "only_sha256": "62f563ac00332891a00de7d8ec97f8edf8f567d7c2cf131709d0f1175d1a9584"
+    }
+   ],
+   "backwards": [
+    {
+     "label": "100/20261112",
+     "size": "100",
+     "seed": 20261112,
+     "shown": 100,
+     "taught_something": 96,
+     "only_sha256": "35d6c5f1113e50e91d1d8af70a0b013a9102bc7306f7256d845c12e1ac2cf1ce"
+    },
+    {
+     "label": "1000/20261112",
+     "size": "1000",
+     "seed": 20261112,
+     "shown": 1000,
+     "taught_something": 961,
+     "only_sha256": "59c3800255312c05243cff9bd932a0b8ba4e85aa4bf69d4d11d0cbe232a7fda6"
+    },
+    {
+     "label": "all",
+     "size": "all",
+     "seed": null,
+     "shown": 2864,
+     "taught_something": 2773,
+     "only_sha256": "62f563ac00332891a00de7d8ec97f8edf8f567d7c2cf131709d0f1175d1a9584"
+    }
+   ]
+  },
+  "code_sha256": {
+   "canonical/tools/expert_fixes_dose_response_measure_v1.py": "1871413484ff019e45fe157b703fdb1bdbb601f5f622b8b455a7d5a1d9e0a52a",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_experience_stream_measure_v1.py": "77a5d7fd8beb77e42d7662a1b298bf43970aa2fe062dbdb74e244503e12dad8a",
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09"
+  },
+  "shards": [
+   "0/2",
+   "1/2"
+  ],
+  "seconds": 2494.1,
+  "model_calls": 0,
+  "before_the_freeze": "three development bugs (Python/2, Python/6, Python/7) were run to see that the tool works; no scored bug was"
+ },
+ "the_dose_table": {
+  "lessons_the_right_way_round": {
+   "3": {
+    "orders": 2,
+    "lessons_that_taught_something": [
+     3,
+     3
+    ],
+    "repaired": [
+     9,
+     18
+    ],
+    "repaired_mean": 13.5,
+    "right_as_far_as_checked": [
+     6,
+     13
+    ],
+    "right_as_far_as_checked_mean": 9.5,
+    "the_published_fix": [
+     2,
+     0
+    ],
+    "repaired_within": [
+     {
+      "1": 4,
+      "10": 8,
+      "100": 9,
+      "200": 9
+     },
+     {
+      "1": 0,
+      "10": 3,
+      "100": 18,
+      "200": 18
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     2,
+     0
+    ],
+    "published_fix_within_the_200": [
+     2,
+     0
+    ],
+    "candidates_median": [
+     7.0,
+     32.5
+    ],
+    "first_pass_rank_median": [
+     2,
+     25.5
+    ]
+   },
+   "10": {
+    "orders": 2,
+    "lessons_that_taught_something": [
+     10,
+     10
+    ],
+    "repaired": [
+     29,
+     32
+    ],
+    "repaired_mean": 30.5,
+    "right_as_far_as_checked": [
+     25,
+     26
+    ],
+    "right_as_far_as_checked_mean": 25.5,
+    "the_published_fix": [
+     11,
+     7
+    ],
+    "repaired_within": [
+     {
+      "1": 5,
+      "10": 21,
+      "100": 29,
+      "200": 29
+     },
+     {
+      "1": 0,
+      "10": 5,
+      "100": 28,
+      "200": 32
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     13,
+     7
+    ],
+    "published_fix_within_the_200": [
+     13,
+     7
+    ],
+    "candidates_median": [
+     31.5,
+     120.5
+    ],
+    "first_pass_rank_median": [
+     4,
+     27.5
+    ]
+   },
+   "30": {
+    "orders": 2,
+    "lessons_that_taught_something": [
+     30,
+     30
+    ],
+    "repaired": [
+     41,
+     32
+    ],
+    "repaired_mean": 36.5,
+    "right_as_far_as_checked": [
+     34,
+     24
+    ],
+    "right_as_far_as_checked_mean": 29,
+    "the_published_fix": [
+     14,
+     10
+    ],
+    "repaired_within": [
+     {
+      "1": 5,
+      "10": 21,
+      "100": 38,
+      "200": 41
+     },
+     {
+      "1": 1,
+      "10": 8,
+      "100": 30,
+      "200": 32
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     19,
+     12
+    ],
+    "published_fix_within_the_200": [
+     17,
+     10
+    ],
+    "candidates_median": [
+     274.0,
+     466.0
+    ],
+    "first_pass_rank_median": [
+     9,
+     27.5
+    ]
+   },
+   "100": {
+    "orders": 2,
+    "lessons_that_taught_something": [
+     96,
+     95
+    ],
+    "repaired": [
+     41,
+     48
+    ],
+    "repaired_mean": 44.5,
+    "right_as_far_as_checked": [
+     33,
+     40
+    ],
+    "right_as_far_as_checked_mean": 36.5,
+    "the_published_fix": [
+     15,
+     25
+    ],
+    "repaired_within": [
+     {
+      "1": 9,
+      "10": 18,
+      "100": 36,
+      "200": 41
+     },
+     {
+      "1": 3,
+      "10": 16,
+      "100": 40,
+      "200": 48
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     20,
+     30
+    ],
+    "published_fix_within_the_200": [
+     18,
+     28
+    ],
+    "candidates_median": [
+     1836.0,
+     918.0
+    ],
+    "first_pass_rank_median": [
+     11,
+     17.5
+    ]
+   },
+   "300": {
+    "orders": 2,
+    "lessons_that_taught_something": [
+     285,
+     289
+    ],
+    "repaired": [
+     45,
+     55
+    ],
+    "repaired_mean": 50,
+    "right_as_far_as_checked": [
+     37,
+     48
+    ],
+    "right_as_far_as_checked_mean": 42.5,
+    "the_published_fix": [
+     19,
+     28
+    ],
+    "repaired_within": [
+     {
+      "1": 4,
+      "10": 20,
+      "100": 43,
+      "200": 45
+     },
+     {
+      "1": 5,
+      "10": 19,
+      "100": 53,
+      "200": 55
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     27,
+     34
+    ],
+    "published_fix_within_the_200": [
+     24,
+     31
+    ],
+    "candidates_median": [
+     4666.5,
+     3308.5
+    ],
+    "first_pass_rank_median": [
+     13,
+     19
+    ]
+   },
+   "1000": {
+    "orders": 2,
+    "lessons_that_taught_something": [
+     961,
+     963
+    ],
+    "repaired": [
+     54,
+     58
+    ],
+    "repaired_mean": 56,
+    "right_as_far_as_checked": [
+     45,
+     52
+    ],
+    "right_as_far_as_checked_mean": 48.5,
+    "the_published_fix": [
+     23,
+     29
+    ],
+    "repaired_within": [
+     {
+      "1": 5,
+      "10": 22,
+      "100": 43,
+      "200": 54
+     },
+     {
+      "1": 5,
+      "10": 22,
+      "100": 48,
+      "200": 58
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     40,
+     41
+    ],
+    "published_fix_within_the_200": [
+     33,
+     37
+    ],
+    "candidates_median": [
+     12742.5,
+     11534.5
+    ],
+    "first_pass_rank_median": [
+     26.0,
+     24.5
+    ]
+   },
+   "all": {
+    "orders": 1,
+    "lessons_that_taught_something": [
+     2773
+    ],
+    "repaired": [
+     55
+    ],
+    "repaired_mean": 55,
+    "right_as_far_as_checked": [
+     48
+    ],
+    "right_as_far_as_checked_mean": 48,
+    "the_published_fix": [
+     26
+    ],
+    "repaired_within": [
+     {
+      "1": 4,
+      "10": 21,
+      "100": 48,
+      "200": 55
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     46
+    ],
+    "published_fix_within_the_200": [
+     34
+    ],
+    "candidates_median": [
+     30274.0
+    ],
+    "first_pass_rank_median": [
+     19
+    ]
+   }
+  },
+  "the_same_lessons_backwards": {
+   "100": {
+    "orders": 1,
+    "lessons_that_taught_something": [
+     96
+    ],
+    "repaired": [
+     43
+    ],
+    "repaired_mean": 43,
+    "right_as_far_as_checked": [
+     34
+    ],
+    "right_as_far_as_checked_mean": 34,
+    "the_published_fix": [
+     19
+    ],
+    "repaired_within": [
+     {
+      "1": 3,
+      "10": 18,
+      "100": 37,
+      "200": 43
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     26
+    ],
+    "published_fix_within_the_200": [
+     22
+    ],
+    "candidates_median": [
+     467.5
+    ],
+    "first_pass_rank_median": [
+     17
+    ]
+   },
+   "1000": {
+    "orders": 1,
+    "lessons_that_taught_something": [
+     961
+    ],
+    "repaired": [
+     54
+    ],
+    "repaired_mean": 54,
+    "right_as_far_as_checked": [
+     45
+    ],
+    "right_as_far_as_checked_mean": 45,
+    "the_published_fix": [
+     27
+    ],
+    "repaired_within": [
+     {
+      "1": 1,
+      "10": 18,
+      "100": 47,
+      "200": 54
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     40
+    ],
+    "published_fix_within_the_200": [
+     38
+    ],
+    "candidates_median": [
+     4154.5
+    ],
+    "first_pass_rank_median": [
+     19.5
+    ]
+   },
+   "all": {
+    "orders": 1,
+    "lessons_that_taught_something": [
+     2773
+    ],
+    "repaired": [
+     57
+    ],
+    "repaired_mean": 57,
+    "right_as_far_as_checked": [
+     49
+    ],
+    "right_as_far_as_checked_mean": 49,
+    "the_published_fix": [
+     29
+    ],
+    "repaired_within": [
+     {
+      "1": 1,
+      "10": 16,
+      "100": 48,
+      "200": 57
+     }
+    ],
+    "published_fix_among_the_candidates": [
+     44
+    ],
+    "published_fix_within_the_200": [
+     37
+    ],
+    "candidates_median": [
+     10486.0
+    ],
+    "first_pass_rank_median": [
+     23
+    ]
+   }
+  }
+ },
+ "with_all_the_lessons": {
+  "repaired_within_candidates": {
+   "1": 4,
+   "10": 21,
+   "100": 48,
+   "200": 55
+  },
+  "first_pass_rank_median": 19,
+  "the_repair_is_the_published_fix": 26,
+  "repaired_with_all_and_not_with_100_of_the_first_order": [
+   "Python/11",
+   "Python/20",
+   "Python/21",
+   "Python/24",
+   "Python/28",
+   "Python/29",
+   "Python/30",
+   "Python/35",
+   "Python/69",
+   "Python/86",
+   "Python/105",
+   "Python/108",
+   "Python/125",
+   "Python/133"
+  ],
+  "repaired_with_100_of_the_first_order_and_not_with_all": [],
+  "repaired_at_some_dose": 62,
+  "not_repaired_though_the_published_fix_is_among_the_candidates": {
+   "Python/4": 2579,
+   "Python/37": 339,
+   "Python/62": 659,
+   "Python/65": 338,
+   "Python/109": 252,
+   "Python/130": 400,
+   "Python/145": 226,
+   "Python/156": 15502
+  },
+  "by_bug_type": {
+   "operator misuse": {
+    "bugs": 14,
+    "repaired_with_all_lessons": 12,
+    "repaired_at_some_dose": 12,
+    "published_fix_among_the_candidates_of_all_lessons": 8
+   },
+   "variable misuse": {
+    "bugs": 12,
+    "repaired_with_all_lessons": 4,
+    "repaired_at_some_dose": 6,
+    "published_fix_among_the_candidates_of_all_lessons": 6
+   },
+   "missing logic": {
+    "bugs": 19,
+    "repaired_with_all_lessons": 5,
+    "repaired_at_some_dose": 6,
+    "published_fix_among_the_candidates_of_all_lessons": 2
+   },
+   "value misuse": {
+    "bugs": 30,
+    "repaired_with_all_lessons": 25,
+    "repaired_at_some_dose": 25,
+    "published_fix_among_the_candidates_of_all_lessons": 23
+   },
+   "excess logic": {
+    "bugs": 19,
+    "repaired_with_all_lessons": 8,
+    "repaired_at_some_dose": 11,
+    "published_fix_among_the_candidates_of_all_lessons": 7
+   },
+   "function misuse": {
+    "bugs": 6,
+    "repaired_with_all_lessons": 1,
+    "repaired_at_some_dose": 2,
+    "published_fix_among_the_candidates_of_all_lessons": 0
+   }
+  }
+ },
+ "to_compare_with": {
+  "record": "canonical/verification/HUMANEVALFIX_EDIT_KIND_TRANSFER_20261111_V1.json",
+  "the_203_other_fixes_of_the_benchmark_and_40_of_quixbugs": {
+   "repaired_within": {
+    "1": 5,
+    "10": 25,
+    "100": 50,
+    "1000": 62,
+    "200": 56
+   },
+   "published_fix_among_the_candidates": 36,
+   "published_fix_within": {
+    "1": 1,
+    "10": 17,
+    "100": 31,
+    "1000": 36,
+    "200": 33
+   },
+   "candidates_median": 3224.0
+  }
+ },
+ "every_way_without_a_model_on_these_100_bugs": {
+  "ways": {
+   "learner, the 203 other fixes of the benchmark": {
+    "repaired": 62,
+    "right_as_far_as_checked": 53
+   },
+   "learner, 40 QuixBugs fixes": {
+    "repaired": 58,
+    "right_as_far_as_checked": 50
+   },
+   "learner, the 203 backwards": {
+    "repaired": 56,
+    "right_as_far_as_checked": 0
+   },
+   "learner, QuixBugs backwards": {
+    "repaired": 39,
+    "right_as_far_as_checked": 0
+   },
+   "solver": {
+    "repaired": 53,
+    "right_as_far_as_checked": 36
+   },
+   "stream, own": {
+    "repaired": 64,
+    "right_as_far_as_checked": 45
+   },
+   "stream, backwards": {
+    "repaired": 62,
+    "right_as_far_as_checked": 42
+   },
+   "stream, shown": {
+    "repaired": 65,
+    "right_as_far_as_checked": 45
+   },
+   "learner, ConDefects forwards, any dose": {
+    "repaired": 62,
+    "right_as_far_as_checked": 56
+   },
+   "learner, ConDefects backwards, any dose": {
+    "repaired": 60,
+    "right_as_far_as_checked": 53
+   }
+  },
+  "repaired_by_at_least_one_way_before_this_run": 76,
+  "right_by_at_least_one_way_before_this_run": 60,
+  "repaired_by_at_least_one_way": 78,
+  "right_as_far_as_checked_by_at_least_one_way": 67,
+  "first_repaired_with_these_lessons": [
+   "Python/105",
+   "Python/133"
+  ],
+  "first_right_with_these_lessons": [
+   "Python/16",
+   "Python/20",
+   "Python/24",
+   "Python/40",
+   "Python/101",
+   "Python/105",
+   "Python/133"
+  ],
+  "never_repaired_by_any_way": [
+   "Python/4",
+   "Python/5",
+   "Python/9",
+   "Python/58",
+   "Python/64",
+   "Python/81",
+   "Python/84",
+   "Python/89",
+   "Python/93",
+   "Python/96",
+   "Python/118",
+   "Python/120",
+   "Python/122",
+   "Python/128",
+   "Python/136",
+   "Python/141",
+   "Python/143",
+   "Python/144",
+   "Python/149",
+   "Python/156",
+   "Python/158",
+   "Python/159"
+  ],
+  "never_repaired_by_bug_type": {
+   "variable misuse": 3,
+   "missing logic": 10,
+   "excess logic": 7,
+   "operator misuse": 1,
+   "value misuse": 1
+  },
+  "all_bugs_by_bug_type": {
+   "operator misuse": 14,
+   "variable misuse": 12,
+   "missing logic": 19,
+   "value misuse": 30,
+   "excess logic": 19,
+   "function misuse": 6
+  },
+  "never_right_by_any_way": [
+   "Python/3",
+   "Python/4",
+   "Python/5",
+   "Python/9",
+   "Python/19",
+   "Python/27",
+   "Python/47",
+   "Python/51",
+   "Python/54",
+   "Python/58",
+   "Python/64",
+   "Python/81",
+   "Python/84",
+   "Python/89",
+   "Python/92",
+   "Python/93",
+   "Python/96",
+   "Python/118",
+   "Python/120",
+   "Python/122",
+   "Python/124",
+   "Python/127",
+   "Python/128",
+   "Python/132",
+   "Python/136",
+   "Python/141",
+   "Python/143",
+   "Python/144",
+   "Python/149",
+   "Python/156",
+   "Python/157",
+   "Python/158",
+   "Python/159"
+  ]
+ },
+ "limits": [
+  "One machine, one producer, one run. Nobody else has run this.",
+  "Two orders of the lessons for every dose below all; one order for the control.",
+  "At most 200 candidates are run. With more, more bugs are repaired: the benchmark's own fixes repaired 56 within 200 and 62 within 1,000. The flattening is at this budget.",
+  "The lessons are whole programs for contest tasks and the bugs are small functions. Another pair of sources may give another curve.",
+  "Right 'as far as checked' is not right: the extra inputs are a sample.",
+  "'By at least one way' is a count over measurements, not a system. Nothing here knows which way to trust on a given bug.",
+  "The count of bugs whose published fix is among the candidates looks for that one program; other right repairs are not counted there.",
+  "The 100 bugs had been scored before in other measurements of this learner. The learner was frozen before they were first scored and has not been changed; the tool of this measurement was frozen before it ran on them.",
+  "The learner applies no operator that would make more than 300 candidates in a program; that cap is part of what is measured."
+ ],
+ "per_bug_key": "for each memory and dose: [place of the first candidate that passes or null, right as far as checked, place of the published fix among the candidates or null, candidates]",
+ "per_bug": {
+  "Python/1": {
+   "bug_type": "operator misuse",
+   "candidates_run": 126,
+   "seconds": 28.32,
+   "forwards": {
+    "3/20261112": [
+     1,
+     true,
+     null,
+     9
+    ],
+    "10/20261112": [
+     5,
+     true,
+     null,
+     50
+    ],
+    "30/20261112": [
+     3,
+     true,
+     null,
+     365
+    ],
+    "100/20261112": [
+     12,
+     true,
+     null,
+     3493
+    ],
+    "300/20261112": [
+     1,
+     true,
+     null,
+     8531
+    ],
+    "1000/20261112": [
+     1,
+     true,
+     null,
+     21459
+    ],
+    "3/20261113": [
+     42,
+     true,
+     null,
+     60
+    ],
+    "10/20261113": [
+     99,
+     true,
+     null,
+     270
+    ],
+    "30/20261113": [
+     1,
+     true,
+     null,
+     761
+    ],
+    "100/20261113": [
+     1,
+     true,
+     null,
+     1655
+    ],
+    "300/20261113": [
+     1,
+     true,
+     null,
+     6037
+    ],
+    "1000/20261113": [
+     1,
+     true,
+     null,
+     20547
+    ],
+    "all": [
+     1,
+     true,
+     null,
+     51345
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     3,
+     true,
+     null,
+     802
+    ],
+    "1000/20261112": [
+     4,
+     true,
+     null,
+     7101
+    ],
+    "all": [
+     4,
+     true,
+     null,
+     16938
+    ]
+   }
+  },
+  "Python/3": {
+   "bug_type": "operator misuse",
+   "candidates_run": 72,
+   "seconds": 6.75,
+   "forwards": {
+    "3/20261112": [
+     2,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     6,
+     false,
+     null,
+     16
+    ],
+    "30/20261112": [
+     1,
+     false,
+     null,
+     155
+    ],
+    "100/20261112": [
+     1,
+     false,
+     null,
+     991
+    ],
+    "300/20261112": [
+     2,
+     false,
+     null,
+     2623
+    ],
+    "1000/20261112": [
+     1,
+     false,
+     null,
+     7547
+    ],
+    "3/20261113": [
+     10,
+     false,
+     null,
+     22
+    ],
+    "10/20261113": [
+     27,
+     false,
+     null,
+     94
+    ],
+    "30/20261113": [
+     58,
+     false,
+     null,
+     310
+    ],
+    "100/20261113": [
+     2,
+     false,
+     null,
+     534
+    ],
+    "300/20261113": [
+     1,
+     false,
+     null,
+     1888
+    ],
+    "1000/20261113": [
+     1,
+     false,
+     null,
+     6931
+    ],
+    "all": [
+     1,
+     false,
+     null,
+     19131
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     1,
+     false,
+     null,
+     303
+    ],
+    "1000/20261112": [
+     3,
+     false,
+     null,
+     2642
+    ],
+    "all": [
+     4,
+     false,
+     null,
+     7007
+    ]
+   }
+  },
+  "Python/4": {
+   "bug_type": "variable misuse",
+   "candidates_run": 1066,
+   "seconds": 23.38,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     22
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     307
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1651
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4004
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     4598,
+     10158
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     24
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     74
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     406
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     757
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2267
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     9608
+    ],
+    "all": [
+     null,
+     false,
+     2579,
+     24921
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     293
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     2935
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     7355
+    ]
+   }
+  },
+  "Python/5": {
+   "bug_type": "missing logic",
+   "candidates_run": 1094,
+   "seconds": 21.75,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     153
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1589
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4259
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     11779
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     32
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     135
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     376
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     835
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3142
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     10719
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     28202
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     477
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3967
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     9818
+    ]
+   }
+  },
+  "Python/9": {
+   "bug_type": "variable misuse",
+   "candidates_run": 989,
+   "seconds": 24.47,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     21
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     173
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1654
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4365
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     12561
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     31
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     138
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     450
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     914
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3337
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     11417
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     30242
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     547
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     4409
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     11177
+    ]
+   }
+  },
+  "Python/11": {
+   "bug_type": "value misuse",
+   "candidates_run": 943,
+   "seconds": 25.74,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     30
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     235
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1992
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     5413
+    ],
+    "1000/20261112": [
+     186,
+     true,
+     null,
+     13678
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     29
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     156
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     470
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     913
+    ],
+    "300/20261113": [
+     44,
+     true,
+     null,
+     3743
+    ],
+    "1000/20261113": [
+     188,
+     true,
+     null,
+     12901
+    ],
+    "all": [
+     73,
+     true,
+     null,
+     32087
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     534
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     4221
+    ],
+    "all": [
+     23,
+     true,
+     null,
+     10749
+    ]
+   }
+  },
+  "Python/14": {
+   "bug_type": "excess logic",
+   "candidates_run": 76,
+   "seconds": 11.6,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     15,
+     true,
+     null,
+     21
+    ],
+    "30/20261112": [
+     9,
+     true,
+     null,
+     284
+    ],
+    "100/20261112": [
+     11,
+     true,
+     null,
+     1652
+    ],
+    "300/20261112": [
+     5,
+     true,
+     5,
+     4080
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     6,
+     10731
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     27
+    ],
+    "10/20261113": [
+     8,
+     true,
+     null,
+     92
+    ],
+    "30/20261113": [
+     18,
+     true,
+     null,
+     424
+    ],
+    "100/20261113": [
+     9,
+     true,
+     9,
+     784
+    ],
+    "300/20261113": [
+     3,
+     true,
+     3,
+     2500
+    ],
+    "1000/20261113": [
+     4,
+     true,
+     11,
+     10215
+    ],
+    "all": [
+     5,
+     true,
+     6,
+     26811
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     8,
+     true,
+     8,
+     311
+    ],
+    "1000/20261112": [
+     3,
+     true,
+     3,
+     3225
+    ],
+    "all": [
+     3,
+     true,
+     3,
+     8213
+    ]
+   }
+  },
+  "Python/15": {
+   "bug_type": "value misuse",
+   "candidates_run": 72,
+   "seconds": 4.32,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     7,
+     true,
+     7,
+     15
+    ],
+    "30/20261112": [
+     25,
+     true,
+     25,
+     113
+    ],
+    "100/20261112": [
+     35,
+     true,
+     35,
+     653
+    ],
+    "300/20261112": [
+     2,
+     true,
+     2,
+     1562
+    ],
+    "1000/20261112": [
+     1,
+     true,
+     1,
+     3887
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     14
+    ],
+    "10/20261113": [
+     12,
+     true,
+     12,
+     41
+    ],
+    "30/20261113": [
+     14,
+     true,
+     14,
+     155
+    ],
+    "100/20261113": [
+     3,
+     true,
+     3,
+     308
+    ],
+    "300/20261113": [
+     4,
+     true,
+     4,
+     978
+    ],
+    "1000/20261113": [
+     1,
+     true,
+     1,
+     3710
+    ],
+    "all": [
+     2,
+     true,
+     2,
+     9429
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     17,
+     true,
+     17,
+     128
+    ],
+    "1000/20261112": [
+     15,
+     true,
+     15,
+     1255
+    ],
+    "all": [
+     17,
+     true,
+     17,
+     3008
+    ]
+   }
+  },
+  "Python/16": {
+   "bug_type": "missing logic",
+   "candidates_run": 763,
+   "seconds": 10.81,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     42
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     226
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     555
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1430
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     26
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     61
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     124
+    ],
+    "300/20261113": [
+     27,
+     true,
+     null,
+     396
+    ],
+    "1000/20261113": [
+     88,
+     true,
+     null,
+     1349
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     3457
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     57
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     526
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     1269
+    ]
+   }
+  },
+  "Python/17": {
+   "bug_type": "value misuse",
+   "candidates_run": 381,
+   "seconds": 14.38,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     8
+    ],
+    "10/20261112": [
+     20,
+     true,
+     null,
+     30
+    ],
+    "30/20261112": [
+     74,
+     true,
+     null,
+     275
+    ],
+    "100/20261112": [
+     16,
+     true,
+     16,
+     1545
+    ],
+    "300/20261112": [
+     42,
+     true,
+     42,
+     3741
+    ],
+    "1000/20261112": [
+     49,
+     true,
+     113,
+     9464
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     22
+    ],
+    "10/20261113": [
+     31,
+     true,
+     null,
+     68
+    ],
+    "30/20261113": [
+     64,
+     true,
+     null,
+     356
+    ],
+    "100/20261113": [
+     104,
+     true,
+     null,
+     721
+    ],
+    "300/20261113": [
+     44,
+     true,
+     44,
+     2207
+    ],
+    "1000/20261113": [
+     43,
+     true,
+     43,
+     8991
+    ],
+    "all": [
+     48,
+     true,
+     96,
+     23474
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     179,
+     true,
+     null,
+     302
+    ],
+    "1000/20261112": [
+     76,
+     true,
+     76,
+     2953
+    ],
+    "all": [
+     137,
+     true,
+     164,
+     7277
+    ]
+   }
+  },
+  "Python/18": {
+   "bug_type": "value misuse",
+   "candidates_run": 408,
+   "seconds": 20.51,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     5
+    ],
+    "10/20261112": [
+     26,
+     true,
+     27,
+     33
+    ],
+    "30/20261112": [
+     99,
+     true,
+     100,
+     219
+    ],
+    "100/20261112": [
+     115,
+     true,
+     115,
+     1976
+    ],
+    "300/20261112": [
+     12,
+     true,
+     12,
+     5058
+    ],
+    "1000/20261112": [
+     9,
+     true,
+     9,
+     13644
+    ],
+    "3/20261113": [
+     28,
+     true,
+     null,
+     34
+    ],
+    "10/20261113": [
+     13,
+     true,
+     13,
+     126
+    ],
+    "30/20261113": [
+     26,
+     true,
+     26,
+     477
+    ],
+    "100/20261113": [
+     35,
+     true,
+     35,
+     1085
+    ],
+    "300/20261113": [
+     19,
+     true,
+     19,
+     3724
+    ],
+    "1000/20261113": [
+     9,
+     true,
+     9,
+     12315
+    ],
+    "all": [
+     9,
+     true,
+     9,
+     31276
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     281,
+     562
+    ],
+    "1000/20261112": [
+     41,
+     true,
+     108,
+     4734
+    ],
+    "all": [
+     11,
+     true,
+     86,
+     11142
+    ]
+   }
+  },
+  "Python/19": {
+   "bug_type": "missing logic",
+   "candidates_run": 1062,
+   "seconds": 28.05,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     23
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     75
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     540
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3021
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     7154
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     17685
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     37
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     98
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     653
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1441
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     4300
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     17092
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     44046
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     601
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5733
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     13731
+    ]
+   }
+  },
+  "Python/20": {
+   "bug_type": "operator misuse",
+   "candidates_run": 838,
+   "seconds": 44.35,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     19
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     65
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     773
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2869
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     7429
+    ],
+    "1000/20261112": [
+     48,
+     true,
+     49,
+     19969
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     70
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     387
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     1114
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1673
+    ],
+    "300/20261113": [
+     32,
+     true,
+     32,
+     5083
+    ],
+    "1000/20261113": [
+     140,
+     true,
+     140,
+     18056
+    ],
+    "all": [
+     58,
+     true,
+     58,
+     50295
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     978
+    ],
+    "1000/20261112": [
+     33,
+     true,
+     87,
+     7786
+    ],
+    "all": [
+     45,
+     true,
+     45,
+     20577
+    ]
+   }
+  },
+  "Python/21": {
+   "bug_type": "operator misuse",
+   "candidates_run": 806,
+   "seconds": 22.16,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     17
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     379
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1935
+    ],
+    "300/20261112": [
+     39,
+     true,
+     39,
+     4803
+    ],
+    "1000/20261112": [
+     55,
+     true,
+     55,
+     12624
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     22
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     79
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     494
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     891
+    ],
+    "300/20261113": [
+     5,
+     true,
+     5,
+     2616
+    ],
+    "1000/20261113": [
+     26,
+     true,
+     26,
+     11880
+    ],
+    "all": [
+     13,
+     true,
+     13,
+     31650
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     348
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3557
+    ],
+    "all": [
+     null,
+     false,
+     705,
+     9356
+    ]
+   }
+  },
+  "Python/22": {
+   "bug_type": "variable misuse",
+   "candidates_run": 208,
+   "seconds": 10.27,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "30/20261112": [
+     66,
+     true,
+     null,
+     149
+    ],
+    "100/20261112": [
+     55,
+     true,
+     null,
+     793
+    ],
+    "300/20261112": [
+     32,
+     true,
+     null,
+     2009
+    ],
+    "1000/20261112": [
+     28,
+     true,
+     null,
+     5315
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     14
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     52
+    ],
+    "30/20261113": [
+     90,
+     true,
+     null,
+     206
+    ],
+    "100/20261113": [
+     61,
+     true,
+     null,
+     384
+    ],
+    "300/20261113": [
+     19,
+     true,
+     null,
+     1178
+    ],
+    "1000/20261113": [
+     26,
+     true,
+     null,
+     4945
+    ],
+    "all": [
+     26,
+     true,
+     null,
+     13123
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     26,
+     true,
+     null,
+     184
+    ],
+    "1000/20261112": [
+     14,
+     true,
+     null,
+     1686
+    ],
+    "all": [
+     14,
+     true,
+     null,
+     4310
+    ]
+   }
+  },
+  "Python/23": {
+   "bug_type": "value misuse",
+   "candidates_run": 39,
+   "seconds": 1.62,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     1
+    ],
+    "10/20261112": [
+     6,
+     true,
+     null,
+     7
+    ],
+    "30/20261112": [
+     2,
+     true,
+     null,
+     40
+    ],
+    "100/20261112": [
+     4,
+     true,
+     null,
+     229
+    ],
+    "300/20261112": [
+     5,
+     true,
+     9,
+     560
+    ],
+    "1000/20261112": [
+     8,
+     true,
+     10,
+     1452
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261113": [
+     18,
+     true,
+     null,
+     25
+    ],
+    "30/20261113": [
+     25,
+     true,
+     null,
+     62
+    ],
+    "100/20261113": [
+     9,
+     true,
+     9,
+     131
+    ],
+    "300/20261113": [
+     6,
+     true,
+     6,
+     412
+    ],
+    "1000/20261113": [
+     6,
+     true,
+     14,
+     1364
+    ],
+    "all": [
+     8,
+     true,
+     10,
+     3498
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     5,
+     true,
+     8,
+     60
+    ],
+    "1000/20261112": [
+     4,
+     true,
+     4,
+     553
+    ],
+    "all": [
+     4,
+     true,
+     4,
+     1297
+    ]
+   }
+  },
+  "Python/24": {
+   "bug_type": "operator misuse",
+   "candidates_run": 1103,
+   "seconds": 16.7,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     15
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     128
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     786
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     1943
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5180
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     21
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     68
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     226
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     415
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1357
+    ],
+    "1000/20261113": [
+     121,
+     true,
+     121,
+     4892
+    ],
+    "all": [
+     116,
+     true,
+     319,
+     12761
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     189
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1777
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     4428
+    ]
+   }
+  },
+  "Python/25": {
+   "bug_type": "value misuse",
+   "candidates_run": 516,
+   "seconds": 25.16,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     6
+    ],
+    "10/20261112": [
+     4,
+     true,
+     4,
+     41
+    ],
+    "30/20261112": [
+     11,
+     true,
+     11,
+     293
+    ],
+    "100/20261112": [
+     6,
+     true,
+     6,
+     2524
+    ],
+    "300/20261112": [
+     28,
+     true,
+     28,
+     6196
+    ],
+    "1000/20261112": [
+     88,
+     true,
+     88,
+     15964
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     52
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     204
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     604
+    ],
+    "100/20261113": [
+     115,
+     true,
+     115,
+     1467
+    ],
+    "300/20261113": [
+     87,
+     true,
+     87,
+     4649
+    ],
+    "1000/20261113": [
+     43,
+     true,
+     43,
+     15511
+    ],
+    "all": [
+     66,
+     true,
+     66,
+     37218
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     80,
+     true,
+     80,
+     599
+    ],
+    "1000/20261112": [
+     63,
+     true,
+     63,
+     5420
+    ],
+    "all": [
+     55,
+     true,
+     55,
+     12655
+    ]
+   }
+  },
+  "Python/26": {
+   "bug_type": "operator misuse",
+   "candidates_run": 60,
+   "seconds": 9.47,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     1,
+     true,
+     null,
+     15
+    ],
+    "30/20261112": [
+     1,
+     true,
+     null,
+     289
+    ],
+    "100/20261112": [
+     1,
+     true,
+     null,
+     1565
+    ],
+    "300/20261112": [
+     2,
+     true,
+     8,
+     3924
+    ],
+    "1000/20261112": [
+     2,
+     true,
+     2,
+     10398
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     19
+    ],
+    "10/20261113": [
+     40,
+     true,
+     null,
+     73
+    ],
+    "30/20261113": [
+     3,
+     true,
+     3,
+     388
+    ],
+    "100/20261113": [
+     3,
+     true,
+     3,
+     706
+    ],
+    "300/20261113": [
+     1,
+     true,
+     1,
+     2162
+    ],
+    "1000/20261113": [
+     2,
+     true,
+     2,
+     9800
+    ],
+    "all": [
+     2,
+     true,
+     2,
+     26421
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     6,
+     true,
+     13,
+     283
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     28,
+     2995
+    ],
+    "all": [
+     6,
+     true,
+     13,
+     7915
+    ]
+   }
+  },
+  "Python/27": {
+   "bug_type": "function misuse",
+   "candidates_run": 810,
+   "seconds": 8.88,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     0
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     130
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     332
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     907
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     39
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     70
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     247
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     852
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     2256
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     29
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     319
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     811
+    ]
+   }
+  },
+  "Python/28": {
+   "bug_type": "excess logic",
+   "candidates_run": 679,
+   "seconds": 8.64,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     33
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     188
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     469
+    ],
+    "1000/20261112": [
+     128,
+     true,
+     128,
+     1249
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     27
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     54
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     111
+    ],
+    "300/20261113": [
+     156,
+     true,
+     null,
+     358
+    ],
+    "1000/20261113": [
+     124,
+     true,
+     124,
+     1171
+    ],
+    "all": [
+     91,
+     true,
+     91,
+     3069
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     48
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     483
+    ],
+    "all": [
+     43,
+     true,
+     43,
+     1184
+    ]
+   }
+  },
+  "Python/29": {
+   "bug_type": "function misuse",
+   "candidates_run": 1070,
+   "seconds": 15.45,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     1
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     8
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     119
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     669
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     1682
+    ],
+    "1000/20261112": [
+     132,
+     false,
+     null,
+     4437
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     12
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     43
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     170
+    ],
+    "100/20261113": [
+     96,
+     false,
+     null,
+     309
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     971
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     4144
+    ],
+    "all": [
+     121,
+     false,
+     null,
+     11062
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     127
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1340
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     3475
+    ]
+   }
+  },
+  "Python/30": {
+   "bug_type": "operator misuse",
+   "candidates_run": 403,
+   "seconds": 7.98,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     1
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     8
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     68
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     407
+    ],
+    "300/20261112": [
+     24,
+     true,
+     null,
+     1019
+    ],
+    "1000/20261112": [
+     76,
+     true,
+     85,
+     2605
+    ],
+    "3/20261113": [
+     8,
+     false,
+     null,
+     10
+    ],
+    "10/20261113": [
+     24,
+     false,
+     null,
+     30
+    ],
+    "30/20261113": [
+     42,
+     false,
+     null,
+     102
+    ],
+    "100/20261113": [
+     11,
+     true,
+     11,
+     207
+    ],
+    "300/20261113": [
+     28,
+     true,
+     28,
+     650
+    ],
+    "1000/20261113": [
+     75,
+     true,
+     85,
+     2436
+    ],
+    "all": [
+     53,
+     true,
+     53,
+     6347
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     98
+    ],
+    "1000/20261112": [
+     24,
+     true,
+     24,
+     902
+    ],
+    "all": [
+     42,
+     true,
+     42,
+     2175
+    ]
+   }
+  },
+  "Python/32": {
+   "bug_type": "variable misuse",
+   "candidates_run": 462,
+   "seconds": 55.48,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     26
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     88
+    ],
+    "30/20261112": [
+     7,
+     false,
+     null,
+     479
+    ],
+    "100/20261112": [
+     9,
+     false,
+     null,
+     3046
+    ],
+    "300/20261112": [
+     40,
+     false,
+     null,
+     7414
+    ],
+    "1000/20261112": [
+     157,
+     false,
+     187,
+     20567
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     78
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     404
+    ],
+    "30/20261113": [
+     140,
+     false,
+     null,
+     844
+    ],
+    "100/20261113": [
+     60,
+     false,
+     null,
+     1564
+    ],
+    "300/20261113": [
+     28,
+     false,
+     null,
+     5173
+    ],
+    "1000/20261113": [
+     34,
+     true,
+     34,
+     17447
+    ],
+    "all": [
+     69,
+     true,
+     69,
+     48279
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     8,
+     false,
+     null,
+     1044
+    ],
+    "1000/20261112": [
+     38,
+     false,
+     119,
+     7484
+    ],
+    "all": [
+     49,
+     true,
+     49,
+     18180
+    ]
+   }
+  },
+  "Python/35": {
+   "bug_type": "operator misuse",
+   "candidates_run": 683,
+   "seconds": 14.02,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     12
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     169
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1014
+    ],
+    "300/20261112": [
+     49,
+     true,
+     null,
+     2648
+    ],
+    "1000/20261112": [
+     101,
+     true,
+     101,
+     7449
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     21
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     85
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     309
+    ],
+    "100/20261113": [
+     8,
+     true,
+     8,
+     533
+    ],
+    "300/20261113": [
+     26,
+     true,
+     26,
+     1815
+    ],
+    "1000/20261113": [
+     87,
+     true,
+     87,
+     6925
+    ],
+    "all": [
+     68,
+     true,
+     68,
+     18807
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     289
+    ],
+    "1000/20261112": [
+     39,
+     true,
+     39,
+     2485
+    ],
+    "all": [
+     54,
+     true,
+     54,
+     6566
+    ]
+   }
+  },
+  "Python/37": {
+   "bug_type": "variable misuse",
+   "candidates_run": 1149,
+   "seconds": 36.36,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     51
+    ],
+    "30/20261112": [
+     null,
+     false,
+     353,
+     387
+    ],
+    "100/20261112": [
+     null,
+     false,
+     684,
+     3811
+    ],
+    "300/20261112": [
+     null,
+     false,
+     482,
+     9496
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     357,
+     23288
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     52
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     221
+    ],
+    "30/20261113": [
+     null,
+     false,
+     512,
+     756
+    ],
+    "100/20261113": [
+     null,
+     false,
+     575,
+     1716
+    ],
+    "300/20261113": [
+     null,
+     false,
+     608,
+     6624
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     594,
+     22265
+    ],
+    "all": [
+     null,
+     false,
+     339,
+     53905
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     404,
+     819
+    ],
+    "1000/20261112": [
+     200,
+     true,
+     200,
+     7286
+    ],
+    "all": [
+     null,
+     false,
+     205,
+     17091
+    ]
+   }
+  },
+  "Python/40": {
+   "bug_type": "value misuse",
+   "candidates_run": 219,
+   "seconds": 23.67,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     15
+    ],
+    "10/20261112": [
+     2,
+     false,
+     null,
+     56
+    ],
+    "30/20261112": [
+     3,
+     false,
+     null,
+     330
+    ],
+    "100/20261112": [
+     5,
+     false,
+     null,
+     3245
+    ],
+    "300/20261112": [
+     15,
+     false,
+     null,
+     8189
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     33,
+     21165
+    ],
+    "3/20261113": [
+     21,
+     false,
+     null,
+     54
+    ],
+    "10/20261113": [
+     100,
+     false,
+     null,
+     193
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     792
+    ],
+    "100/20261113": [
+     1,
+     true,
+     1,
+     1557
+    ],
+    "300/20261113": [
+     2,
+     true,
+     2,
+     5986
+    ],
+    "1000/20261113": [
+     13,
+     true,
+     18,
+     19421
+    ],
+    "all": [
+     19,
+     true,
+     20,
+     49086
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     6,
+     true,
+     6,
+     892
+    ],
+    "1000/20261112": [
+     14,
+     true,
+     14,
+     7296
+    ],
+    "all": [
+     13,
+     true,
+     13,
+     16852
+    ]
+   }
+  },
+  "Python/41": {
+   "bug_type": "value misuse",
+   "candidates_run": 55,
+   "seconds": 2.34,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     1
+    ],
+    "10/20261112": [
+     1,
+     true,
+     1,
+     5
+    ],
+    "30/20261112": [
+     2,
+     true,
+     2,
+     25
+    ],
+    "100/20261112": [
+     1,
+     true,
+     1,
+     145
+    ],
+    "300/20261112": [
+     2,
+     true,
+     2,
+     360
+    ],
+    "1000/20261112": [
+     9,
+     true,
+     9,
+     959
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     41
+    ],
+    "100/20261113": [
+     11,
+     true,
+     11,
+     89
+    ],
+    "300/20261113": [
+     13,
+     true,
+     13,
+     280
+    ],
+    "1000/20261113": [
+     9,
+     true,
+     9,
+     898
+    ],
+    "all": [
+     9,
+     true,
+     9,
+     2341
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     8,
+     true,
+     8,
+     42
+    ],
+    "1000/20261112": [
+     4,
+     true,
+     4,
+     397
+    ],
+    "all": [
+     5,
+     true,
+     5,
+     958
+    ]
+   }
+  },
+  "Python/43": {
+   "bug_type": "value misuse",
+   "candidates_run": 337,
+   "seconds": 15.93,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "10/20261112": [
+     16,
+     true,
+     16,
+     31
+    ],
+    "30/20261112": [
+     57,
+     true,
+     57,
+     187
+    ],
+    "100/20261112": [
+     107,
+     true,
+     107,
+     1769
+    ],
+    "300/20261112": [
+     3,
+     true,
+     3,
+     4612
+    ],
+    "1000/20261112": [
+     1,
+     true,
+     1,
+     12962
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     32
+    ],
+    "10/20261113": [
+     14,
+     true,
+     14,
+     133
+    ],
+    "30/20261113": [
+     28,
+     true,
+     28,
+     488
+    ],
+    "100/20261113": [
+     26,
+     true,
+     26,
+     998
+    ],
+    "300/20261113": [
+     10,
+     true,
+     10,
+     3599
+    ],
+    "1000/20261113": [
+     5,
+     true,
+     5,
+     11640
+    ],
+    "all": [
+     2,
+     true,
+     2,
+     30193
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     192,
+     true,
+     192,
+     548
+    ],
+    "1000/20261112": [
+     16,
+     false,
+     64,
+     4551
+    ],
+    "all": [
+     13,
+     false,
+     33,
+     11105
+    ]
+   }
+  },
+  "Python/45": {
+   "bug_type": "value misuse",
+   "candidates_run": 95,
+   "seconds": 2.29,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     1
+    ],
+    "10/20261112": [
+     1,
+     true,
+     null,
+     7
+    ],
+    "30/20261112": [
+     2,
+     true,
+     null,
+     55
+    ],
+    "100/20261112": [
+     1,
+     true,
+     null,
+     331
+    ],
+    "300/20261112": [
+     3,
+     true,
+     null,
+     833
+    ],
+    "1000/20261112": [
+     12,
+     true,
+     null,
+     2139
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     28
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     87
+    ],
+    "100/20261113": [
+     11,
+     true,
+     null,
+     171
+    ],
+    "300/20261113": [
+     12,
+     true,
+     null,
+     551
+    ],
+    "1000/20261113": [
+     12,
+     true,
+     null,
+     2030
+    ],
+    "all": [
+     11,
+     true,
+     null,
+     5299
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     9,
+     true,
+     null,
+     72
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     null,
+     720
+    ],
+    "all": [
+     6,
+     true,
+     null,
+     1771
+    ]
+   }
+  },
+  "Python/46": {
+   "bug_type": "value misuse",
+   "candidates_run": 105,
+   "seconds": 26.47,
+   "forwards": {
+    "3/20261112": [
+     15,
+     true,
+     15,
+     25
+    ],
+    "10/20261112": [
+     2,
+     true,
+     29,
+     81
+    ],
+    "30/20261112": [
+     3,
+     true,
+     15,
+     349
+    ],
+    "100/20261112": [
+     1,
+     true,
+     54,
+     3150
+    ],
+    "300/20261112": [
+     1,
+     true,
+     113,
+     7627
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     91,
+     18915
+    ],
+    "3/20261113": [
+     61,
+     true,
+     null,
+     61
+    ],
+    "10/20261113": [
+     2,
+     true,
+     null,
+     185
+    ],
+    "30/20261113": [
+     4,
+     true,
+     null,
+     623
+    ],
+    "100/20261113": [
+     5,
+     true,
+     71,
+     1597
+    ],
+    "300/20261113": [
+     5,
+     true,
+     113,
+     5529
+    ],
+    "1000/20261113": [
+     2,
+     true,
+     114,
+     18217
+    ],
+    "all": [
+     3,
+     true,
+     110,
+     44397
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     7,
+     true,
+     26,
+     767
+    ],
+    "1000/20261112": [
+     20,
+     true,
+     32,
+     6803
+    ],
+    "all": [
+     17,
+     true,
+     26,
+     14680
+    ]
+   }
+  },
+  "Python/47": {
+   "bug_type": "value misuse",
+   "candidates_run": 1026,
+   "seconds": 18.81,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     52
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     273
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1596
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     3741
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     9296
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     45
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     112
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     364
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     831
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2638
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     8757
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     21966
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     107,
+     false,
+     null,
+     373
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3324
+    ],
+    "all": [
+     115,
+     false,
+     null,
+     7351
+    ]
+   }
+  },
+  "Python/49": {
+   "bug_type": "value misuse",
+   "candidates_run": 67,
+   "seconds": 13.15,
+   "forwards": {
+    "3/20261112": [
+     1,
+     true,
+     1,
+     3
+    ],
+    "10/20261112": [
+     2,
+     true,
+     2,
+     14
+    ],
+    "30/20261112": [
+     1,
+     true,
+     1,
+     260
+    ],
+    "100/20261112": [
+     2,
+     true,
+     2,
+     1438
+    ],
+    "300/20261112": [
+     5,
+     true,
+     5,
+     3678
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     6,
+     10051
+    ],
+    "3/20261113": [
+     13,
+     true,
+     null,
+     19
+    ],
+    "10/20261113": [
+     38,
+     true,
+     null,
+     80
+    ],
+    "30/20261113": [
+     59,
+     true,
+     null,
+     396
+    ],
+    "100/20261113": [
+     3,
+     true,
+     3,
+     690
+    ],
+    "300/20261113": [
+     2,
+     true,
+     2,
+     2233
+    ],
+    "1000/20261113": [
+     6,
+     true,
+     6,
+     9424
+    ],
+    "all": [
+     7,
+     true,
+     7,
+     25569
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     2,
+     true,
+     2,
+     327
+    ],
+    "1000/20261112": [
+     4,
+     true,
+     4,
+     3070
+    ],
+    "all": [
+     4,
+     true,
+     4,
+     8194
+    ]
+   }
+  },
+  "Python/51": {
+   "bug_type": "excess logic",
+   "candidates_run": 126,
+   "seconds": 6.1,
+   "forwards": {
+    "3/20261112": [
+     2,
+     false,
+     null,
+     16
+    ],
+    "10/20261112": [
+     2,
+     false,
+     null,
+     42
+    ],
+    "30/20261112": [
+     5,
+     false,
+     null,
+     209
+    ],
+    "100/20261112": [
+     19,
+     false,
+     null,
+     1195
+    ],
+    "300/20261112": [
+     36,
+     false,
+     null,
+     2794
+    ],
+    "1000/20261112": [
+     39,
+     false,
+     null,
+     6991
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     22
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     62
+    ],
+    "30/20261113": [
+     26,
+     false,
+     null,
+     266
+    ],
+    "100/20261113": [
+     36,
+     false,
+     null,
+     601
+    ],
+    "300/20261113": [
+     34,
+     false,
+     null,
+     1846
+    ],
+    "1000/20261113": [
+     37,
+     false,
+     null,
+     6728
+    ],
+    "all": [
+     38,
+     false,
+     null,
+     17087
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     8,
+     false,
+     null,
+     251
+    ],
+    "1000/20261112": [
+     10,
+     false,
+     null,
+     2376
+    ],
+    "all": [
+     10,
+     false,
+     null,
+     5409
+    ]
+   }
+  },
+  "Python/52": {
+   "bug_type": "operator misuse",
+   "candidates_run": 1112,
+   "seconds": 18.43,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     111
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     733
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     1938
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5630
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     17
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     72
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     234
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     392
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1411
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     5168
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     14356
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     218
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1910
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     5141
+    ]
+   }
+  },
+  "Python/53": {
+   "bug_type": "excess logic",
+   "candidates_run": 986,
+   "seconds": 12.46,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     0
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     74
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     449
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     1104
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     2810
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     11
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     32
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     110
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     209
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     684
+    ],
+    "1000/20261113": [
+     109,
+     true,
+     null,
+     2642
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     6869
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     95
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     903
+    ],
+    "all": [
+     106,
+     true,
+     null,
+     2181
+    ]
+   }
+  },
+  "Python/54": {
+   "bug_type": "missing logic",
+   "candidates_run": 871,
+   "seconds": 11.65,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     0
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     34
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     206
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     545
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1484
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     24
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     59
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     108
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     364
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     1364
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     3692
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     53
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     505
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     1312
+    ]
+   }
+  },
+  "Python/58": {
+   "bug_type": "missing logic",
+   "candidates_run": 987,
+   "seconds": 30.21,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     16
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     139
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1586
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4318
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     12881
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     25
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     119
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     424
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     922
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3375
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     11429
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     30306
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     548
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     4366
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     11153
+    ]
+   }
+  },
+  "Python/60": {
+   "bug_type": "value misuse",
+   "candidates_run": 35,
+   "seconds": 1.62,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     3,
+     true,
+     3,
+     7
+    ],
+    "30/20261112": [
+     16,
+     true,
+     16,
+     42
+    ],
+    "100/20261112": [
+     15,
+     true,
+     15,
+     226
+    ],
+    "300/20261112": [
+     3,
+     true,
+     3,
+     551
+    ],
+    "1000/20261112": [
+     3,
+     true,
+     3,
+     1403
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261113": [
+     6,
+     true,
+     6,
+     26
+    ],
+    "30/20261113": [
+     8,
+     true,
+     8,
+     61
+    ],
+    "100/20261113": [
+     3,
+     true,
+     3,
+     124
+    ],
+    "300/20261113": [
+     3,
+     true,
+     3,
+     394
+    ],
+    "1000/20261113": [
+     1,
+     true,
+     1,
+     1328
+    ],
+    "all": [
+     1,
+     true,
+     1,
+     3383
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     8,
+     true,
+     8,
+     57
+    ],
+    "1000/20261112": [
+     5,
+     true,
+     5,
+     523
+    ],
+    "all": [
+     6,
+     true,
+     6,
+     1258
+    ]
+   }
+  },
+  "Python/61": {
+   "bug_type": "operator misuse",
+   "candidates_run": 331,
+   "seconds": 18.19,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     5
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     26
+    ],
+    "30/20261112": [
+     22,
+     false,
+     null,
+     254
+    ],
+    "100/20261112": [
+     27,
+     false,
+     null,
+     1613
+    ],
+    "300/20261112": [
+     27,
+     false,
+     null,
+     4129
+    ],
+    "1000/20261112": [
+     35,
+     false,
+     null,
+     11596
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     31
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     122
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     491
+    ],
+    "100/20261113": [
+     81,
+     false,
+     null,
+     853
+    ],
+    "300/20261113": [
+     68,
+     false,
+     null,
+     2948
+    ],
+    "1000/20261113": [
+     19,
+     false,
+     null,
+     10811
+    ],
+    "all": [
+     42,
+     false,
+     null,
+     29271
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     24,
+     false,
+     null,
+     447
+    ],
+    "1000/20261112": [
+     45,
+     false,
+     null,
+     3940
+    ],
+    "all": [
+     43,
+     false,
+     1283,
+     10223
+    ]
+   }
+  },
+  "Python/62": {
+   "bug_type": "value misuse",
+   "candidates_run": 1175,
+   "seconds": 17.02,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     125
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     671
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     1679
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     502,
+     4346
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     11
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     39
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     174
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     315
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     964
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     450,
+     4096
+    ],
+    "all": [
+     null,
+     false,
+     659,
+     10685
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     131
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     569,
+     1320
+    ],
+    "all": [
+     null,
+     false,
+     1372,
+     3350
+    ]
+   }
+  },
+  "Python/63": {
+   "bug_type": "value misuse",
+   "candidates_run": 997,
+   "seconds": 25.84,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     44
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     319
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1942
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4721
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     12018
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     45
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     133
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     475
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     992
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3176
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     11339
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     29382
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     458
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     4088
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     9679
+    ]
+   }
+  },
+  "Python/64": {
+   "bug_type": "missing logic",
+   "candidates_run": 914,
+   "seconds": 19.57,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     15
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     107
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1128
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     3046
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     8200
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     17
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     75
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     206
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     571
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1972
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     7210
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     19197
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     352
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     2887
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     7050
+    ]
+   }
+  },
+  "Python/65": {
+   "bug_type": "variable misuse",
+   "candidates_run": 950,
+   "seconds": 26.49,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     33
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     448
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2489
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     5982
+    ],
+    "1000/20261112": [
+     161,
+     true,
+     161,
+     15145
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     36
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     109
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     600
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1121
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3425
+    ],
+    "1000/20261113": [
+     165,
+     true,
+     165,
+     14330
+    ],
+    "all": [
+     null,
+     false,
+     338,
+     37447
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     447
+    ],
+    "1000/20261112": [
+     104,
+     true,
+     104,
+     4359
+    ],
+    "all": [
+     null,
+     false,
+     239,
+     10902
+    ]
+   }
+  },
+  "Python/66": {
+   "bug_type": "function misuse",
+   "candidates_run": 1095,
+   "seconds": 17.15,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     5
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     24
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     177
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1044
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     2545
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     6567
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     24
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     70
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     255
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     519
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1675
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     6237
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     16149
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     232
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     2149
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     5184
+    ]
+   }
+  },
+  "Python/69": {
+   "bug_type": "value misuse",
+   "candidates_run": 676,
+   "seconds": 24.73,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     39
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     261
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2468
+    ],
+    "300/20261112": [
+     152,
+     true,
+     152,
+     6370
+    ],
+    "1000/20261112": [
+     23,
+     true,
+     23,
+     17316
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     43
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     169
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     602
+    ],
+    "100/20261113": [
+     12,
+     true,
+     12,
+     1348
+    ],
+    "300/20261113": [
+     12,
+     true,
+     12,
+     4760
+    ],
+    "1000/20261113": [
+     22,
+     true,
+     22,
+     15782
+    ],
+    "all": [
+     17,
+     true,
+     17,
+     40426
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     80,
+     true,
+     80,
+     764
+    ],
+    "1000/20261112": [
+     55,
+     true,
+     55,
+     6158
+    ],
+    "all": [
+     66,
+     true,
+     66,
+     14587
+    ]
+   }
+  },
+  "Python/70": {
+   "bug_type": "operator misuse",
+   "candidates_run": 52,
+   "seconds": 19.58,
+   "forwards": {
+    "3/20261112": [
+     1,
+     true,
+     null,
+     11
+    ],
+    "10/20261112": [
+     2,
+     true,
+     null,
+     38
+    ],
+    "30/20261112": [
+     1,
+     true,
+     null,
+     425
+    ],
+    "100/20261112": [
+     1,
+     true,
+     null,
+     2393
+    ],
+    "300/20261112": [
+     1,
+     true,
+     null,
+     5832
+    ],
+    "1000/20261112": [
+     5,
+     true,
+     null,
+     15299
+    ],
+    "3/20261113": [
+     14,
+     true,
+     null,
+     36
+    ],
+    "10/20261113": [
+     46,
+     true,
+     null,
+     122
+    ],
+    "30/20261113": [
+     3,
+     true,
+     null,
+     610
+    ],
+    "100/20261113": [
+     1,
+     true,
+     null,
+     1140
+    ],
+    "300/20261113": [
+     1,
+     true,
+     null,
+     3596
+    ],
+    "1000/20261113": [
+     7,
+     true,
+     null,
+     14856
+    ],
+    "all": [
+     5,
+     true,
+     null,
+     38528
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     1,
+     true,
+     null,
+     448
+    ],
+    "1000/20261112": [
+     1,
+     true,
+     null,
+     4537
+    ],
+    "all": [
+     1,
+     true,
+     null,
+     11469
+    ]
+   }
+  },
+  "Python/74": {
+   "bug_type": "variable misuse",
+   "candidates_run": 942,
+   "seconds": 20.62,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     21
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     212
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1622
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4243
+    ],
+    "1000/20261112": [
+     150,
+     true,
+     null,
+     10976
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     33
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     168
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     418
+    ],
+    "100/20261113": [
+     174,
+     true,
+     null,
+     774
+    ],
+    "300/20261113": [
+     33,
+     true,
+     null,
+     3138
+    ],
+    "1000/20261113": [
+     142,
+     true,
+     null,
+     10460
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     26443
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     477
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3943
+    ],
+    "all": [
+     198,
+     true,
+     null,
+     9848
+    ]
+   }
+  },
+  "Python/78": {
+   "bug_type": "value misuse",
+   "candidates_run": 309,
+   "seconds": 16.76,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     17
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     51
+    ],
+    "30/20261112": [
+     3,
+     true,
+     3,
+     226
+    ],
+    "100/20261112": [
+     1,
+     true,
+     1,
+     2023
+    ],
+    "300/20261112": [
+     3,
+     true,
+     3,
+     5188
+    ],
+    "1000/20261112": [
+     5,
+     true,
+     5,
+     13829
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     34
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     137
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     470
+    ],
+    "100/20261113": [
+     18,
+     true,
+     36,
+     1090
+    ],
+    "300/20261113": [
+     9,
+     true,
+     9,
+     3847
+    ],
+    "1000/20261113": [
+     6,
+     true,
+     6,
+     12526
+    ],
+    "all": [
+     6,
+     true,
+     6,
+     32229
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     28,
+     true,
+     28,
+     625
+    ],
+    "1000/20261112": [
+     14,
+     true,
+     14,
+     5021
+    ],
+    "all": [
+     20,
+     true,
+     20,
+     11905
+    ]
+   }
+  },
+  "Python/81": {
+   "bug_type": "excess logic",
+   "candidates_run": 1118,
+   "seconds": 87.08,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     38
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     154
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     794
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     6547
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     15474
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     39178
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     148
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     509
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     1444
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     3558
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     11576
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     37221
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     91263
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1609
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     13456
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     30174
+    ]
+   }
+  },
+  "Python/82": {
+   "bug_type": "value misuse",
+   "candidates_run": 419,
+   "seconds": 20.44,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     1,
+     true,
+     1,
+     38
+    ],
+    "30/20261112": [
+     2,
+     true,
+     2,
+     379
+    ],
+    "100/20261112": [
+     1,
+     true,
+     1,
+     2236
+    ],
+    "300/20261112": [
+     4,
+     true,
+     4,
+     5592
+    ],
+    "1000/20261112": [
+     29,
+     true,
+     29,
+     14890
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     38
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     145
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     600
+    ],
+    "100/20261113": [
+     171,
+     true,
+     171,
+     1105
+    ],
+    "300/20261113": [
+     26,
+     true,
+     26,
+     3618
+    ],
+    "1000/20261113": [
+     42,
+     true,
+     42,
+     13948
+    ],
+    "all": [
+     38,
+     true,
+     38,
+     37186
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     121,
+     true,
+     121,
+     510
+    ],
+    "1000/20261112": [
+     23,
+     true,
+     23,
+     4668
+    ],
+    "all": [
+     31,
+     true,
+     31,
+     11907
+    ]
+   }
+  },
+  "Python/84": {
+   "bug_type": "operator misuse",
+   "candidates_run": 1071,
+   "seconds": 16.56,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     5
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     21
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     155
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     908
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     2131
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5273
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     18
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     51
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     210
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     417
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1341
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     5000
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     12688
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     166
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1685
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     3899
+    ]
+   }
+  },
+  "Python/85": {
+   "bug_type": "value misuse",
+   "candidates_run": 103,
+   "seconds": 7.43,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     3,
+     true,
+     3,
+     32
+    ],
+    "30/20261112": [
+     4,
+     true,
+     4,
+     224
+    ],
+    "100/20261112": [
+     6,
+     true,
+     6,
+     1300
+    ],
+    "300/20261112": [
+     13,
+     true,
+     13,
+     3069
+    ],
+    "1000/20261112": [
+     17,
+     true,
+     41,
+     7576
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     24
+    ],
+    "10/20261113": [
+     24,
+     true,
+     null,
+     65
+    ],
+    "30/20261113": [
+     34,
+     true,
+     null,
+     296
+    ],
+    "100/20261113": [
+     21,
+     true,
+     21,
+     625
+    ],
+    "300/20261113": [
+     27,
+     true,
+     43,
+     1926
+    ],
+    "1000/20261113": [
+     10,
+     true,
+     33,
+     7174
+    ],
+    "all": [
+     14,
+     true,
+     30,
+     18059
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     20,
+     true,
+     20,
+     250
+    ],
+    "1000/20261112": [
+     19,
+     true,
+     19,
+     2437
+    ],
+    "all": [
+     24,
+     true,
+     24,
+     5562
+    ]
+   }
+  },
+  "Python/86": {
+   "bug_type": "missing logic",
+   "candidates_run": 860,
+   "seconds": 16.84,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     8
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     27
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     175
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     998
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     2374
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5971
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     55
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     233
+    ],
+    "100/20261113": [
+     23,
+     true,
+     23,
+     485
+    ],
+    "300/20261113": [
+     78,
+     true,
+     78,
+     1542
+    ],
+    "1000/20261113": [
+     67,
+     true,
+     67,
+     5819
+    ],
+    "all": [
+     124,
+     true,
+     124,
+     14614
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     178
+    ],
+    "1000/20261112": [
+     189,
+     true,
+     189,
+     1852
+    ],
+    "all": [
+     135,
+     true,
+     135,
+     4376
+    ]
+   }
+  },
+  "Python/88": {
+   "bug_type": "operator misuse",
+   "candidates_run": 88,
+   "seconds": 5.21,
+   "forwards": {
+    "3/20261112": [
+     4,
+     true,
+     null,
+     8
+    ],
+    "10/20261112": [
+     8,
+     true,
+     null,
+     34
+    ],
+    "30/20261112": [
+     9,
+     true,
+     null,
+     158
+    ],
+    "100/20261112": [
+     36,
+     true,
+     null,
+     962
+    ],
+    "300/20261112": [
+     26,
+     true,
+     null,
+     2226
+    ],
+    "1000/20261112": [
+     30,
+     true,
+     null,
+     5521
+    ],
+    "3/20261113": [
+     12,
+     true,
+     null,
+     26
+    ],
+    "10/20261113": [
+     26,
+     true,
+     null,
+     62
+    ],
+    "30/20261113": [
+     4,
+     true,
+     4,
+     215
+    ],
+    "100/20261113": [
+     17,
+     true,
+     17,
+     490
+    ],
+    "300/20261113": [
+     13,
+     true,
+     13,
+     1559
+    ],
+    "1000/20261113": [
+     20,
+     true,
+     20,
+     5181
+    ],
+    "all": [
+     33,
+     true,
+     58,
+     12926
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     10,
+     true,
+     null,
+     206
+    ],
+    "1000/20261112": [
+     10,
+     true,
+     96,
+     1931
+    ],
+    "all": [
+     9,
+     true,
+     37,
+     4160
+    ]
+   }
+  },
+  "Python/89": {
+   "bug_type": "value misuse",
+   "candidates_run": 1072,
+   "seconds": 27.72,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     8
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     31
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     188
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1903
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4923
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     13564
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     34
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     135
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     468
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1028
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3717
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     12410
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     32325
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     601
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     4843
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     11673
+    ]
+   }
+  },
+  "Python/90": {
+   "bug_type": "value misuse",
+   "candidates_run": 156,
+   "seconds": 4.35,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     6
+    ],
+    "10/20261112": [
+     3,
+     true,
+     3,
+     24
+    ],
+    "30/20261112": [
+     8,
+     true,
+     8,
+     122
+    ],
+    "100/20261112": [
+     4,
+     true,
+     4,
+     683
+    ],
+    "300/20261112": [
+     9,
+     true,
+     9,
+     1614
+    ],
+    "1000/20261112": [
+     30,
+     true,
+     34,
+     4037
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "10/20261113": [
+     28,
+     true,
+     null,
+     52
+    ],
+    "30/20261113": [
+     46,
+     true,
+     null,
+     159
+    ],
+    "100/20261113": [
+     57,
+     true,
+     57,
+     367
+    ],
+    "300/20261113": [
+     77,
+     true,
+     77,
+     1141
+    ],
+    "1000/20261113": [
+     23,
+     true,
+     36,
+     3801
+    ],
+    "all": [
+     26,
+     true,
+     32,
+     9514
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     45,
+     true,
+     45,
+     172
+    ],
+    "1000/20261112": [
+     11,
+     true,
+     11,
+     1505
+    ],
+    "all": [
+     13,
+     true,
+     13,
+     3339
+    ]
+   }
+  },
+  "Python/92": {
+   "bug_type": "missing logic",
+   "candidates_run": 379,
+   "seconds": 16.75,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     39
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     459
+    ],
+    "100/20261112": [
+     42,
+     false,
+     null,
+     2535
+    ],
+    "300/20261112": [
+     34,
+     false,
+     null,
+     6219
+    ],
+    "1000/20261112": [
+     28,
+     false,
+     null,
+     16037
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     39
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     136
+    ],
+    "30/20261113": [
+     29,
+     false,
+     null,
+     628
+    ],
+    "100/20261113": [
+     44,
+     false,
+     null,
+     1189
+    ],
+    "300/20261113": [
+     46,
+     false,
+     null,
+     3671
+    ],
+    "1000/20261113": [
+     39,
+     false,
+     null,
+     15067
+    ],
+    "all": [
+     19,
+     false,
+     null,
+     39622
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     36,
+     false,
+     null,
+     523
+    ],
+    "1000/20261112": [
+     17,
+     false,
+     null,
+     4734
+    ],
+    "all": [
+     14,
+     false,
+     null,
+     11880
+    ]
+   }
+  },
+  "Python/93": {
+   "bug_type": "missing logic",
+   "candidates_run": 962,
+   "seconds": 24.6,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     42
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     255
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2360
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     5861
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     14582
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     37
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     114
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     435
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1194
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3975
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     13855
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     33366
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     570
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5020
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     11066
+    ]
+   }
+  },
+  "Python/96": {
+   "bug_type": "variable misuse",
+   "candidates_run": 1101,
+   "seconds": 30.62,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     35
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     277
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2430
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     6021
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     15550
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     43
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     207
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     558
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1119
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     4268
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     14815
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     37378
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     563
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5385
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     13182
+    ]
+   }
+  },
+  "Python/99": {
+   "bug_type": "function misuse",
+   "candidates_run": 909,
+   "seconds": 50.75,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     15
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     71
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     518
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     4557
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     11107
+    ],
+    "1000/20261112": [
+     171,
+     true,
+     null,
+     27299
+    ],
+    "3/20261113": [
+     35,
+     true,
+     null,
+     72
+    ],
+    "10/20261113": [
+     140,
+     true,
+     null,
+     297
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     1008
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     2051
+    ],
+    "300/20261113": [
+     78,
+     true,
+     null,
+     7440
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     25671
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     63268
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1114
+    ],
+    "1000/20261112": [
+     120,
+     true,
+     null,
+     8675
+    ],
+    "all": [
+     143,
+     true,
+     null,
+     19845
+    ]
+   }
+  },
+  "Python/100": {
+   "bug_type": "excess logic",
+   "candidates_run": 171,
+   "seconds": 7.28,
+   "forwards": {
+    "3/20261112": [
+     1,
+     true,
+     null,
+     2
+    ],
+    "10/20261112": [
+     1,
+     true,
+     null,
+     13
+    ],
+    "30/20261112": [
+     1,
+     true,
+     null,
+     119
+    ],
+    "100/20261112": [
+     1,
+     true,
+     null,
+     711
+    ],
+    "300/20261112": [
+     5,
+     true,
+     null,
+     1702
+    ],
+    "1000/20261112": [
+     10,
+     true,
+     84,
+     4221
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     15
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     41
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     169
+    ],
+    "100/20261113": [
+     2,
+     true,
+     null,
+     339
+    ],
+    "300/20261113": [
+     1,
+     true,
+     null,
+     1059
+    ],
+    "1000/20261113": [
+     7,
+     true,
+     null,
+     4011
+    ],
+    "all": [
+     9,
+     true,
+     204,
+     10183
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     1,
+     true,
+     null,
+     140
+    ],
+    "1000/20261112": [
+     3,
+     true,
+     16,
+     1377
+    ],
+    "all": [
+     3,
+     true,
+     21,
+     3229
+    ]
+   }
+  },
+  "Python/101": {
+   "bug_type": "value misuse",
+   "candidates_run": 331,
+   "seconds": 29.88,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     6
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     32
+    ],
+    "30/20261112": [
+     39,
+     false,
+     null,
+     381
+    ],
+    "100/20261112": [
+     170,
+     false,
+     null,
+     2281
+    ],
+    "300/20261112": [
+     106,
+     false,
+     null,
+     5722
+    ],
+    "1000/20261112": [
+     24,
+     false,
+     null,
+     15742
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     41
+    ],
+    "10/20261113": [
+     27,
+     false,
+     null,
+     149
+    ],
+    "30/20261113": [
+     50,
+     false,
+     null,
+     619
+    ],
+    "100/20261113": [
+     76,
+     true,
+     76,
+     1104
+    ],
+    "300/20261113": [
+     98,
+     false,
+     217,
+     3770
+    ],
+    "1000/20261113": [
+     43,
+     false,
+     172,
+     15151
+    ],
+    "all": [
+     25,
+     false,
+     226,
+     40296
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     19,
+     false,
+     null,
+     491
+    ],
+    "1000/20261112": [
+     5,
+     false,
+     355,
+     4725
+    ],
+    "all": [
+     5,
+     false,
+     254,
+     12510
+    ]
+   }
+  },
+  "Python/102": {
+   "bug_type": "variable misuse",
+   "candidates_run": 160,
+   "seconds": 8.74,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     25
+    ],
+    "30/20261112": [
+     46,
+     true,
+     46,
+     210
+    ],
+    "100/20261112": [
+     8,
+     true,
+     8,
+     1299
+    ],
+    "300/20261112": [
+     1,
+     true,
+     1,
+     3272
+    ],
+    "1000/20261112": [
+     2,
+     true,
+     2,
+     8527
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     35
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     110
+    ],
+    "30/20261113": [
+     5,
+     true,
+     5,
+     330
+    ],
+    "100/20261113": [
+     3,
+     true,
+     3,
+     656
+    ],
+    "300/20261113": [
+     7,
+     true,
+     7,
+     2176
+    ],
+    "1000/20261113": [
+     2,
+     true,
+     2,
+     7974
+    ],
+    "all": [
+     2,
+     true,
+     2,
+     21061
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     7,
+     true,
+     7,
+     328
+    ],
+    "1000/20261112": [
+     3,
+     true,
+     3,
+     2871
+    ],
+    "all": [
+     5,
+     true,
+     5,
+     7048
+    ]
+   }
+  },
+  "Python/105": {
+   "bug_type": "missing logic",
+   "candidates_run": 970,
+   "seconds": 33.84,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     68
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     298
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2959
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     7368
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     18001
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     47
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     185
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     563
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1665
+    ],
+    "300/20261113": [
+     43,
+     true,
+     null,
+     5472
+    ],
+    "1000/20261113": [
+     132,
+     true,
+     null,
+     17284
+    ],
+    "all": [
+     155,
+     true,
+     null,
+     41120
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     746
+    ],
+    "1000/20261112": [
+     142,
+     true,
+     null,
+     6232
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     14362
+    ]
+   }
+  },
+  "Python/107": {
+   "bug_type": "value misuse",
+   "candidates_run": 349,
+   "seconds": 31.07,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "10/20261112": [
+     31,
+     true,
+     31,
+     65
+    ],
+    "30/20261112": [
+     119,
+     true,
+     119,
+     404
+    ],
+    "100/20261112": [
+     134,
+     true,
+     134,
+     3681
+    ],
+    "300/20261112": [
+     4,
+     true,
+     4,
+     9000
+    ],
+    "1000/20261112": [
+     1,
+     true,
+     1,
+     21883
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     59
+    ],
+    "10/20261113": [
+     2,
+     true,
+     2,
+     237
+    ],
+    "30/20261113": [
+     3,
+     true,
+     3,
+     769
+    ],
+    "100/20261113": [
+     2,
+     true,
+     2,
+     1666
+    ],
+    "300/20261113": [
+     4,
+     true,
+     4,
+     6308
+    ],
+    "1000/20261113": [
+     1,
+     true,
+     1,
+     20606
+    ],
+    "all": [
+     1,
+     true,
+     1,
+     50815
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     60,
+     true,
+     60,
+     859
+    ],
+    "1000/20261112": [
+     102,
+     true,
+     102,
+     7359
+    ],
+    "all": [
+     68,
+     true,
+     68,
+     16784
+    ]
+   }
+  },
+  "Python/108": {
+   "bug_type": "excess logic",
+   "candidates_run": 854,
+   "seconds": 35.68,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     18
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     72
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     474
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2197
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     5563
+    ],
+    "1000/20261112": [
+     140,
+     true,
+     null,
+     14525
+    ],
+    "3/20261113": [
+     51,
+     true,
+     null,
+     60
+    ],
+    "10/20261113": [
+     146,
+     true,
+     null,
+     227
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     641
+    ],
+    "100/20261113": [
+     161,
+     true,
+     null,
+     1184
+    ],
+    "300/20261113": [
+     96,
+     true,
+     null,
+     3413
+    ],
+    "1000/20261113": [
+     100,
+     true,
+     null,
+     12809
+    ],
+    "all": [
+     114,
+     true,
+     null,
+     35507
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     121,
+     true,
+     null,
+     746
+    ],
+    "1000/20261112": [
+     99,
+     true,
+     null,
+     5534
+    ],
+    "all": [
+     186,
+     true,
+     null,
+     13394
+    ]
+   }
+  },
+  "Python/109": {
+   "bug_type": "variable misuse",
+   "candidates_run": 1063,
+   "seconds": 40.83,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     58
+    ],
+    "30/20261112": [
+     null,
+     false,
+     351,
+     476
+    ],
+    "100/20261112": [
+     null,
+     false,
+     715,
+     4338
+    ],
+    "300/20261112": [
+     null,
+     false,
+     204,
+     10716
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     283,
+     25556
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     59
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     259
+    ],
+    "30/20261113": [
+     null,
+     false,
+     547,
+     894
+    ],
+    "100/20261113": [
+     null,
+     false,
+     577,
+     1890
+    ],
+    "300/20261113": [
+     null,
+     false,
+     662,
+     6665
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     656,
+     24305
+    ],
+    "all": [
+     null,
+     false,
+     252,
+     59393
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     415,
+     962
+    ],
+    "1000/20261112": [
+     95,
+     false,
+     194,
+     8271
+    ],
+    "all": [
+     187,
+     true,
+     187,
+     18620
+    ]
+   }
+  },
+  "Python/110": {
+   "bug_type": "variable misuse",
+   "candidates_run": 586,
+   "seconds": 22.84,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     41
+    ],
+    "30/20261112": [
+     196,
+     true,
+     null,
+     292
+    ],
+    "100/20261112": [
+     200,
+     true,
+     null,
+     2399
+    ],
+    "300/20261112": [
+     25,
+     true,
+     null,
+     5914
+    ],
+    "1000/20261112": [
+     116,
+     true,
+     null,
+     15692
+    ],
+    "3/20261113": [
+     32,
+     true,
+     null,
+     45
+    ],
+    "10/20261113": [
+     99,
+     true,
+     null,
+     222
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     579
+    ],
+    "100/20261113": [
+     187,
+     true,
+     null,
+     1310
+    ],
+    "300/20261113": [
+     75,
+     true,
+     null,
+     4558
+    ],
+    "1000/20261113": [
+     94,
+     true,
+     null,
+     14799
+    ],
+    "all": [
+     119,
+     true,
+     null,
+     37553
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     105,
+     true,
+     null,
+     611
+    ],
+    "1000/20261112": [
+     84,
+     true,
+     null,
+     5589
+    ],
+    "all": [
+     80,
+     true,
+     null,
+     13759
+    ]
+   }
+  },
+  "Python/114": {
+   "bug_type": "function misuse",
+   "candidates_run": 1159,
+   "seconds": 40.16,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     43
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     407
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3507
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     8710
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     21611
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     49
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     234
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     764
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1490
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     5905
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     20641
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     51281
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     822
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     7106
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     17053
+    ]
+   }
+  },
+  "Python/118": {
+   "bug_type": "excess logic",
+   "candidates_run": 1092,
+   "seconds": 38.02,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     34
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     101
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     436
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3636
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     8866
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     22239
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     70
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     224
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     790
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1929
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     6495
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     20565
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     50972
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     966
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     8107
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     17792
+    ]
+   }
+  },
+  "Python/120": {
+   "bug_type": "excess logic",
+   "candidates_run": 1155,
+   "seconds": 21.14,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     2
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     240
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1448
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     3631
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     9421
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     25
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     87
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     351
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     650
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2186
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     8981
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     23832
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     284
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     2787
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     7157
+    ]
+   }
+  },
+  "Python/121": {
+   "bug_type": "value misuse",
+   "candidates_run": 107,
+   "seconds": 9.04,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     6
+    ],
+    "10/20261112": [
+     15,
+     true,
+     null,
+     26
+    ],
+    "30/20261112": [
+     9,
+     true,
+     9,
+     297
+    ],
+    "100/20261112": [
+     11,
+     true,
+     11,
+     1656
+    ],
+    "300/20261112": [
+     12,
+     true,
+     12,
+     3967
+    ],
+    "1000/20261112": [
+     8,
+     true,
+     8,
+     9936
+    ],
+    "3/20261113": [
+     17,
+     true,
+     null,
+     22
+    ],
+    "10/20261113": [
+     32,
+     true,
+     null,
+     62
+    ],
+    "30/20261113": [
+     68,
+     true,
+     null,
+     386
+    ],
+    "100/20261113": [
+     20,
+     true,
+     20,
+     745
+    ],
+    "300/20261113": [
+     11,
+     true,
+     11,
+     2248
+    ],
+    "1000/20261113": [
+     6,
+     true,
+     6,
+     9392
+    ],
+    "all": [
+     8,
+     true,
+     8,
+     24320
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     17,
+     true,
+     17,
+     281
+    ],
+    "1000/20261112": [
+     25,
+     true,
+     25,
+     2888
+    ],
+    "all": [
+     25,
+     true,
+     25,
+     7040
+    ]
+   }
+  },
+  "Python/122": {
+   "bug_type": "missing logic",
+   "candidates_run": 1209,
+   "seconds": 22.47,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     16
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     205
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1111
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     2692
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     6797
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     16
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     49
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     267
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     516
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1552
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     6431
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     16678
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     196
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1983
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     4967
+    ]
+   }
+  },
+  "Python/123": {
+   "bug_type": "value misuse",
+   "candidates_run": 430,
+   "seconds": 47.61,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     11
+    ],
+    "10/20261112": [
+     3,
+     true,
+     null,
+     53
+    ],
+    "30/20261112": [
+     3,
+     true,
+     null,
+     422
+    ],
+    "100/20261112": [
+     10,
+     true,
+     null,
+     2634
+    ],
+    "300/20261112": [
+     35,
+     true,
+     395,
+     6334
+    ],
+    "1000/20261112": [
+     47,
+     true,
+     247,
+     16476
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     59
+    ],
+    "10/20261113": [
+     91,
+     true,
+     null,
+     174
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     666
+    ],
+    "100/20261113": [
+     112,
+     false,
+     null,
+     1334
+    ],
+    "300/20261113": [
+     19,
+     true,
+     null,
+     4362
+    ],
+    "1000/20261113": [
+     37,
+     true,
+     258,
+     15774
+    ],
+    "all": [
+     72,
+     true,
+     267,
+     40566
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     47,
+     true,
+     47,
+     605
+    ],
+    "1000/20261112": [
+     139,
+     true,
+     139,
+     5613
+    ],
+    "all": [
+     121,
+     true,
+     121,
+     13396
+    ]
+   }
+  },
+  "Python/124": {
+   "bug_type": "variable misuse",
+   "candidates_run": 1173,
+   "seconds": 53.66,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     46
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     146
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     675
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3209
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     7654
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     21067
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     102
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     423
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     974
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     2083
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     6039
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     19239
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     51416
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1114
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     7959
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     19697
+    ]
+   }
+  },
+  "Python/125": {
+   "bug_type": "value misuse",
+   "candidates_run": 924,
+   "seconds": 29.57,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     10
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     47
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     340
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2072
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4985
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     12861
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     44
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     122
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     480
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     979
+    ],
+    "300/20261113": [
+     36,
+     true,
+     36,
+     3280
+    ],
+    "1000/20261113": [
+     179,
+     true,
+     179,
+     12594
+    ],
+    "all": [
+     110,
+     true,
+     110,
+     31821
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     404
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     4053
+    ],
+    "all": [
+     64,
+     true,
+     64,
+     9601
+    ]
+   }
+  },
+  "Python/127": {
+   "bug_type": "missing logic",
+   "candidates_run": 150,
+   "seconds": 54.67,
+   "forwards": {
+    "3/20261112": [
+     4,
+     false,
+     null,
+     23
+    ],
+    "10/20261112": [
+     5,
+     false,
+     null,
+     84
+    ],
+    "30/20261112": [
+     11,
+     false,
+     null,
+     658
+    ],
+    "100/20261112": [
+     29,
+     false,
+     null,
+     2788
+    ],
+    "300/20261112": [
+     17,
+     false,
+     null,
+     7479
+    ],
+    "1000/20261112": [
+     8,
+     false,
+     null,
+     21127
+    ],
+    "3/20261113": [
+     54,
+     false,
+     null,
+     76
+    ],
+    "10/20261113": [
+     9,
+     false,
+     null,
+     431
+    ],
+    "30/20261113": [
+     20,
+     false,
+     null,
+     1041
+    ],
+    "100/20261113": [
+     17,
+     false,
+     null,
+     1782
+    ],
+    "300/20261113": [
+     10,
+     false,
+     null,
+     5273
+    ],
+    "1000/20261113": [
+     6,
+     false,
+     null,
+     18738
+    ],
+    "all": [
+     6,
+     false,
+     null,
+     52708
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     24,
+     false,
+     null,
+     1103
+    ],
+    "1000/20261112": [
+     20,
+     false,
+     null,
+     7090
+    ],
+    "all": [
+     30,
+     false,
+     null,
+     19041
+    ]
+   }
+  },
+  "Python/128": {
+   "bug_type": "excess logic",
+   "candidates_run": 1040,
+   "seconds": 36.68,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     11
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     49
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     275
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2603
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     6503
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     16067
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     42
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     131
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     496
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1304
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     4395
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     14692
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     35951
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     643
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     5458
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     11968
+    ]
+   }
+  },
+  "Python/130": {
+   "bug_type": "excess logic",
+   "candidates_run": 893,
+   "seconds": 38.44,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     18
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     75
+    ],
+    "30/20261112": [
+     122,
+     true,
+     null,
+     372
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3421
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     8266
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     210,
+     20742
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     67
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     201
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     724
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1776
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     6090
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     19625
+    ],
+    "all": [
+     null,
+     false,
+     400,
+     48175
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     849
+    ],
+    "1000/20261112": [
+     44,
+     true,
+     44,
+     7494
+    ],
+    "all": [
+     77,
+     true,
+     77,
+     16275
+    ]
+   }
+  },
+  "Python/132": {
+   "bug_type": "value misuse",
+   "candidates_run": 1122,
+   "seconds": 43.53,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     11
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     59
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     565
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2787
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     6982
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     19956
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     69
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     343
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     854
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1687
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     4899
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     18503
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     51626
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     937
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     7324
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     19082
+    ]
+   }
+  },
+  "Python/133": {
+   "bug_type": "operator misuse",
+   "candidates_run": 1083,
+   "seconds": 19.15,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     233
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1331
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     3490
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     9794
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     19
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     85
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     372
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     632
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2174
+    ],
+    "1000/20261113": [
+     151,
+     true,
+     151,
+     9120
+    ],
+    "all": [
+     92,
+     true,
+     92,
+     25044
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     324
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3011
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     8154
+    ]
+   }
+  },
+  "Python/134": {
+   "bug_type": "function misuse",
+   "candidates_run": 1085,
+   "seconds": 19.32,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     40
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     261
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1560
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     3677
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     9202
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     29
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     75
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     344
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     740
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2342
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     8898
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     22396
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     293
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     2911
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     6694
+    ]
+   }
+  },
+  "Python/135": {
+   "bug_type": "excess logic",
+   "candidates_run": 282,
+   "seconds": 19.46,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     29
+    ],
+    "30/20261112": [
+     23,
+     true,
+     36,
+     371
+    ],
+    "100/20261112": [
+     57,
+     true,
+     99,
+     2165
+    ],
+    "300/20261112": [
+     57,
+     true,
+     148,
+     5389
+    ],
+    "1000/20261112": [
+     38,
+     true,
+     38,
+     14401
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     36
+    ],
+    "10/20261113": [
+     17,
+     true,
+     17,
+     129
+    ],
+    "30/20261113": [
+     48,
+     true,
+     48,
+     594
+    ],
+    "100/20261113": [
+     78,
+     true,
+     78,
+     1076
+    ],
+    "300/20261113": [
+     105,
+     true,
+     105,
+     3496
+    ],
+    "1000/20261113": [
+     42,
+     true,
+     42,
+     13618
+    ],
+    "all": [
+     30,
+     true,
+     30,
+     35950
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     34,
+     true,
+     34,
+     493
+    ],
+    "1000/20261112": [
+     8,
+     true,
+     8,
+     4634
+    ],
+    "all": [
+     11,
+     true,
+     11,
+     11670
+    ]
+   }
+  },
+  "Python/136": {
+   "bug_type": "excess logic",
+   "candidates_run": 946,
+   "seconds": 36.54,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     22
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     77
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     413
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3831
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     9418
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     22108
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     57
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     168
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     688
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1567
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     5871
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     20234
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     49165
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     916
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     7285
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     15624
+    ]
+   }
+  },
+  "Python/138": {
+   "bug_type": "excess logic",
+   "candidates_run": 115,
+   "seconds": 4.25,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     19
+    ],
+    "30/20261112": [
+     19,
+     true,
+     null,
+     90
+    ],
+    "100/20261112": [
+     16,
+     true,
+     null,
+     543
+    ],
+    "300/20261112": [
+     21,
+     true,
+     null,
+     1252
+    ],
+    "1000/20261112": [
+     19,
+     true,
+     null,
+     3131
+    ],
+    "3/20261113": [
+     8,
+     true,
+     null,
+     16
+    ],
+    "10/20261113": [
+     30,
+     true,
+     null,
+     38
+    ],
+    "30/20261113": [
+     17,
+     false,
+     null,
+     123
+    ],
+    "100/20261113": [
+     16,
+     true,
+     null,
+     291
+    ],
+    "300/20261113": [
+     44,
+     true,
+     null,
+     914
+    ],
+    "1000/20261113": [
+     23,
+     true,
+     null,
+     2948
+    ],
+    "all": [
+     19,
+     true,
+     null,
+     7381
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     19,
+     true,
+     null,
+     131
+    ],
+    "1000/20261112": [
+     29,
+     true,
+     null,
+     1183
+    ],
+    "all": [
+     42,
+     true,
+     null,
+     2587
+    ]
+   }
+  },
+  "Python/140": {
+   "bug_type": "excess logic",
+   "candidates_run": 1176,
+   "seconds": 57.44,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     26
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     108
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     729
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3318
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     7741
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     22447
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     97
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     389
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     1145
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     2129
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     6246
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     20805
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     55806
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1333
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     8698
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     21195
+    ]
+   }
+  },
+  "Python/141": {
+   "bug_type": "missing logic",
+   "candidates_run": 996,
+   "seconds": 44.14,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     26
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     87
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     487
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     4449
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     10668
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     25793
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     69
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     276
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     903
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1995
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     7498
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     24759
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     59588
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1008
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     8093
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     18716
+    ]
+   }
+  },
+  "Python/143": {
+   "bug_type": "missing logic",
+   "candidates_run": 1113,
+   "seconds": 37.37,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     54
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     368
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3531
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     8700
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     22058
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     56
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     255
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     757
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1588
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     6020
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     20447
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     51257
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     748
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     7252
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     17383
+    ]
+   }
+  },
+  "Python/144": {
+   "bug_type": "excess logic",
+   "candidates_run": 1061,
+   "seconds": 36.25,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     19
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     70
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     577
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2387
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     5963
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     15644
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     61
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     259
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     790
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1328
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     3903
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     13833
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     37879
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     988
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     6140
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     15021
+    ]
+   }
+  },
+  "Python/145": {
+   "bug_type": "excess logic",
+   "candidates_run": 917,
+   "seconds": 33.25,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     13
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     53
+    ],
+    "30/20261112": [
+     94,
+     true,
+     null,
+     347
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     3111
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     7636
+    ],
+    "1000/20261112": [
+     174,
+     true,
+     174,
+     17927
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     48
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     185
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     645
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1393
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     5250
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     17280
+    ],
+    "all": [
+     null,
+     false,
+     226,
+     41472
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     716
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     6,
+     5987
+    ],
+    "all": [
+     15,
+     true,
+     15,
+     13397
+    ]
+   }
+  },
+  "Python/147": {
+   "bug_type": "missing logic",
+   "candidates_run": 475,
+   "seconds": 38.64,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     20
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     84
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     570
+    ],
+    "100/20261112": [
+     88,
+     true,
+     null,
+     2630
+    ],
+    "300/20261112": [
+     52,
+     true,
+     null,
+     6630
+    ],
+    "1000/20261112": [
+     47,
+     true,
+     null,
+     18851
+    ],
+    "3/20261113": [
+     23,
+     true,
+     null,
+     74
+    ],
+    "10/20261113": [
+     133,
+     true,
+     null,
+     286
+    ],
+    "30/20261113": [
+     37,
+     true,
+     null,
+     784
+    ],
+    "100/20261113": [
+     123,
+     true,
+     null,
+     1593
+    ],
+    "300/20261113": [
+     95,
+     true,
+     null,
+     5096
+    ],
+    "1000/20261113": [
+     40,
+     true,
+     null,
+     17087
+    ],
+    "all": [
+     31,
+     true,
+     null,
+     46934
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     13,
+     true,
+     null,
+     918
+    ],
+    "1000/20261112": [
+     72,
+     true,
+     null,
+     7457
+    ],
+    "all": [
+     75,
+     true,
+     null,
+     18684
+    ]
+   }
+  },
+  "Python/149": {
+   "bug_type": "missing logic",
+   "candidates_run": 1113,
+   "seconds": 25.3,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     22
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     283
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1710
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4271
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     11651
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     30
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     108
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     464
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     841
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2796
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     11178
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     29526
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     353
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3534
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     9200
+    ]
+   }
+  },
+  "Python/150": {
+   "bug_type": "excess logic",
+   "candidates_run": 148,
+   "seconds": 21.33,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     4
+    ],
+    "10/20261112": [
+     16,
+     true,
+     null,
+     24
+    ],
+    "30/20261112": [
+     14,
+     true,
+     null,
+     419
+    ],
+    "100/20261112": [
+     11,
+     true,
+     null,
+     2466
+    ],
+    "300/20261112": [
+     5,
+     true,
+     5,
+     6235
+    ],
+    "1000/20261112": [
+     5,
+     true,
+     5,
+     17382
+    ],
+    "3/20261113": [
+     31,
+     true,
+     null,
+     33
+    ],
+    "10/20261113": [
+     59,
+     true,
+     null,
+     140
+    ],
+    "30/20261113": [
+     106,
+     true,
+     null,
+     704
+    ],
+    "100/20261113": [
+     13,
+     true,
+     13,
+     1177
+    ],
+    "300/20261113": [
+     6,
+     true,
+     6,
+     3947
+    ],
+    "1000/20261113": [
+     8,
+     true,
+     8,
+     16121
+    ],
+    "all": [
+     5,
+     true,
+     5,
+     44122
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     12,
+     true,
+     12,
+     562
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     6,
+     5185
+    ],
+    "all": [
+     6,
+     true,
+     6,
+     13965
+    ]
+   }
+  },
+  "Python/154": {
+   "bug_type": "value misuse",
+   "candidates_run": 226,
+   "seconds": 31.02,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     7
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     48
+    ],
+    "30/20261112": [
+     12,
+     true,
+     null,
+     417
+    ],
+    "100/20261112": [
+     31,
+     true,
+     null,
+     4009
+    ],
+    "300/20261112": [
+     69,
+     true,
+     null,
+     10035
+    ],
+    "1000/20261112": [
+     83,
+     false,
+     null,
+     23635
+    ],
+    "3/20261113": [
+     47,
+     false,
+     null,
+     55
+    ],
+    "10/20261113": [
+     125,
+     false,
+     null,
+     217
+    ],
+    "30/20261113": [
+     27,
+     true,
+     null,
+     823
+    ],
+    "100/20261113": [
+     5,
+     true,
+     null,
+     1715
+    ],
+    "300/20261113": [
+     25,
+     true,
+     null,
+     6777
+    ],
+    "1000/20261113": [
+     76,
+     true,
+     null,
+     22655
+    ],
+    "all": [
+     53,
+     true,
+     null,
+     55114
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     6,
+     false,
+     null,
+     894
+    ],
+    "1000/20261112": [
+     17,
+     true,
+     97,
+     8078
+    ],
+    "all": [
+     19,
+     true,
+     221,
+     18076
+    ]
+   }
+  },
+  "Python/156": {
+   "bug_type": "missing logic",
+   "candidates_run": 990,
+   "seconds": 98.55,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     56
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     132
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     505
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     2263
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     5716
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     12116,
+     15672
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     65
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     279
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     893
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     1970
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     5115
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     15068
+    ],
+    "all": [
+     null,
+     false,
+     15502,
+     39332
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     979
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     6468
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     16282
+    ]
+   }
+  },
+  "Python/157": {
+   "bug_type": "missing logic",
+   "candidates_run": 1224,
+   "seconds": 17.65,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     0
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     11
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     169
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     962
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     2381
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     6056
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     15
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     44
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     248
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     457
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     1372
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     5826
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     15104
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     172
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1726
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     4329
+    ]
+   }
+  },
+  "Python/158": {
+   "bug_type": "missing logic",
+   "candidates_run": 869,
+   "seconds": 10.21,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     3
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     41
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     229
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     560
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     1449
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     9
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     26
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     61
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     130
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     413
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     1362
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     3495
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     61
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     551
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     1295
+    ]
+   }
+  },
+  "Python/159": {
+   "bug_type": "excess logic",
+   "candidates_run": 1120,
+   "seconds": 20.31,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     5
+    ],
+    "10/20261112": [
+     null,
+     false,
+     null,
+     25
+    ],
+    "30/20261112": [
+     null,
+     false,
+     null,
+     310
+    ],
+    "100/20261112": [
+     null,
+     false,
+     null,
+     1742
+    ],
+    "300/20261112": [
+     null,
+     false,
+     null,
+     4283
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     10938
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     27
+    ],
+    "10/20261113": [
+     null,
+     false,
+     null,
+     86
+    ],
+    "30/20261113": [
+     null,
+     false,
+     null,
+     426
+    ],
+    "100/20261113": [
+     null,
+     false,
+     null,
+     799
+    ],
+    "300/20261113": [
+     null,
+     false,
+     null,
+     2508
+    ],
+    "1000/20261113": [
+     null,
+     false,
+     null,
+     10343
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     27211
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     null,
+     false,
+     null,
+     327
+    ],
+    "1000/20261112": [
+     null,
+     false,
+     null,
+     3228
+    ],
+    "all": [
+     null,
+     false,
+     null,
+     8009
+    ]
+   }
+  },
+  "Python/163": {
+   "bug_type": "value misuse",
+   "candidates_run": 204,
+   "seconds": 12.8,
+   "forwards": {
+    "3/20261112": [
+     null,
+     false,
+     null,
+     14
+    ],
+    "10/20261112": [
+     24,
+     true,
+     24,
+     41
+    ],
+    "30/20261112": [
+     75,
+     true,
+     75,
+     244
+    ],
+    "100/20261112": [
+     73,
+     true,
+     174,
+     2294
+    ],
+    "300/20261112": [
+     21,
+     true,
+     28,
+     6017
+    ],
+    "1000/20261112": [
+     6,
+     true,
+     6,
+     14576
+    ],
+    "3/20261113": [
+     null,
+     false,
+     null,
+     31
+    ],
+    "10/20261113": [
+     14,
+     true,
+     14,
+     106
+    ],
+    "30/20261113": [
+     33,
+     true,
+     33,
+     426
+    ],
+    "100/20261113": [
+     20,
+     true,
+     57,
+     966
+    ],
+    "300/20261113": [
+     19,
+     true,
+     28,
+     3727
+    ],
+    "1000/20261113": [
+     7,
+     true,
+     7,
+     13244
+    ],
+    "all": [
+     7,
+     true,
+     7,
+     33004
+    ]
+   },
+   "backwards": {
+    "100/20261112": [
+     34,
+     true,
+     257,
+     620
+    ],
+    "1000/20261112": [
+     21,
+     true,
+     180,
+     4951
+    ],
+    "all": [
+     28,
+     true,
+     115,
+     10962
+    ]
+   }
+  }
+ }
+}
