@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 330,
+  "knowledge_documents": 331,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6739,
+  "research_index_records": 6740,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b9b7654f702ccd574c018747a34dd248660bbd1f782f67a3b34a4aa65b0be1e0"
+  "value": "c1d9ebee501580f70487e723a6653fa53a9841ac79358ec687a5df01d5bc0ca4"
  },
  "engines": [
   {
@@ -56968,6 +56968,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10922,
+   "headings": [
+    "Two doors count availability differently",
+    "1. The claim under test",
+    "2. Protocol",
+    "3. Results (fates, 145 goals each layer)",
+    "4. Pre-registered predictions and verdicts",
+    "5. What the two doors are (mechanism)",
+    "6. The four \"most advanced\" dispatchers, traced to named gates",
+    "7. Shipped this round",
+    "8. Re-ranked next steps",
+    "9. External context (2026)",
+    "10. Reproduce",
+    "predictions and fate tables are in the probe docstring and /tmp/census.json"
+   ],
+   "kind": "DOCUMENT",
+   "path": "TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1.md",
+   "sha256": "833e032f5171a15007f2c0b6002721cf828f2e2a073ac04c80d04a08ce540042",
+   "summary": "Date: 2026-11-12. Branch `arena/8c417005-brain`, base `b86e1823afab5501bcf3dc3cd3b252a2d55bea5b`. Pre-registered predictions before the run (see the probe docstring, `door_and_act_availability_census_20261112.py`): five, of which **two held and three were falsified** — reported below exactly as measured, including the falsifications.",
+   "terms": {
+    "145": 6,
+    "53": 5,
+    "act": 9,
+    "adapter": 5,
+    "baseline": 4,
+    "both": 4,
+    "boundary": 4,
+    "census_clone": 4,
+    "chain": 4,
+    "class": 4,
+    "confinement": 5,
+    "constant": 5,
+    "docstring": 5,
+    "door": 18,
+    "door_and_act_availability_census_20261112.py": 5,
+    "doors": 4,
+    "each": 4,
+    "execution": 9,
+    "executor": 4,
+    "extract": 6,
+    "falsified": 4,
+    "family": 4,
+    "four": 4,
+    "gate": 5,
+    "git": 8,
+    "goal": 4,
+    "item": 4,
+    "layer": 6,
+    "measured": 7,
+    "no": 5,
+    "not": 10,
+    "not_callable": 5,
+    "one": 6,
+    "operation": 4,
+    "own": 4,
+    "phrase": 6,
+    "plan": 4,
+    "predictions": 5,
+    "probe": 6,
+    "read": 4,
+    "recorded": 4,
+    "round": 9,
+    "row": 7,
+    "rows": 4,
+    "sentence": 9,
+    "sentences": 6,
+    "tmp": 7,
+    "two": 5
+   },
+   "title": "Two doors count availability differently",
+   "title_terms": [
+    "availability",
+    "count",
+    "differently",
+    "doors",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7697,
    "headings": [
     "Two Kinds of \"I Don't Know\", and the One It Was Using",
@@ -70429,10 +70509,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1132,
+  "included_source_count": 1133,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c05a3c118c5f145ff1439ab1afea3dd2577294ca56f2c683ab8c4f88dbcfc6ad"
+  "source_tree_digest": "ea2825c5e4584f22d887243719a9062b1bf126b7796998c7eb2a3a48f69cb7cd"
  },
  "research_index": [
   {
@@ -228582,6 +228662,31 @@
    }
   },
   {
+   "action_id": "TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TWO_DOORS_COUNT_AVAILABILITY_DIFFERENTLY_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b7793448f5631cfd3162b596ae1e478fae5f9d70eca63a522708070ab70883d4",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "availability": 1,
+    "availability_is_measured_as_a_property_of_a_door_not_of_a_capability__the_census_probe_is_committed_and_reproducible_from_a_disposable_clone__the_four_dispatcher_sentences_are_traced_to_named_gates_with_file_line_evidence__no_benchmark_row_moved__no_capability_credit__truth_achieved_stays_false": 1,
+    "availability_was_censused_at_only_one_of_the_tree_two_doors__act_is_the_step_executor_and_its_54_is_the_chain_layer_number__the_sentence_door_where_owner_requests_arrive_has_no_binding_status_and_fails_at_plan_selection_and_effect_claiming_instead": 1,
+    "count": 1,
+    "differently": 1,
+    "doors": 1,
+    "dual_layer_census_with_pre_registered_predictions_and_the_one_measured_phrase_whole_chain_reaches_its_next_named_gate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "two": 1,
+    "two_doors_count_availability_differently_20261112_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "TWO_SPELLINGS_OF_ONE_PATH_ARE_ONE_QUESTION_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27T08:40:00Z",
@@ -295673,7 +295778,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/swe_typed_plan_v1.py",
-   "sha256": "f7d0cc529bbdbf174892c032d4ef5949637861c04d8086378cfae6fba9fe56f9",
+   "sha256": "e4ed1db84f306c7d4dbe8d2b8126418d4941d1ee05d7585cdfb54fd21de0e7bd",
    "summary": "Scoped typed-SWE execution plan for the live front door (hidden-tool wiring).",
    "symbol_count": 19,
    "symbols": [
