@@ -1,0 +1,1125 @@
+{
+ "schema": "BRAIN_TAKE_OUT_RECORD_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T18:16:29Z",
+ "read_this_first": "Every program that is the buggy one with one piece taken out, some 40 candidates a bug and no lesson behind any of them, repairs 19 of the 100 scored HumanEvalFix bugs; 15 of the repairs are right as far as checked and 4 pass the tests without being right. Of the 19 bugs that are something too much it repairs 11 (10 right); the learner with 2,864 lessons repairs 8 of them. Put in front of the learner within the same 200 candidates the two repair 58 against the learner's 55 and are right for 49 against 48: four bugs won that the learner did not repair, two right repairs lost to a piece that passes weak tests first, one pushed out of the 200. So it adds three repairs and one right answer. That is less than was written down beforehand: five of the seven statements of the expectation did not hold, though neither of the two that would have made me drop it came true. Of the 22 bugs nothing without a model had repaired it repairs one. One run, one machine, by the producer; nobody else has re-run it.",
+ "what_was_asked": "How many bugs does taking one piece out repair with no lesson at all, how many of those repairs are right, and what does it add to the learner with all its lessons within the same 200 candidates?",
+ "what_was_run": {
+  "the_family": "canonical/runtime/take_out_v1.py: a statement deleted; a compound statement replaced by what is under it or under its else; an else dropped; an expression replaced by one inside it; one of several operands, arguments, elements or conditions; an augmented assignment made plain; a slice bound left out. The smallest piece first.",
+  "development": "the 64 development bugs, on which the family was shaped (the plain assignment was added after reading one of them)",
+  "scored": "the 100 scored bugs, run once at commit f4bcc149 with the expectation already written into the tool",
+  "budget": 200,
+  "lessons": 0,
+  "model_calls": 0,
+  "the_learner_beside_it": "edit_kind_learning_v1 with all 2,864 ConDefects lessons forwards, as recorded in EXPERT_FIXES_DOSE_RESPONSE_20261112_V1.json; not run again. The sum of the two is arithmetic on the two records."
+ },
+ "on_the_100_scored_bugs": {
+  "bugs": 100,
+  "usable": 100,
+  "repaired": 19,
+  "right_as_far_as_checked": 15,
+  "the_published_fix": 11,
+  "passes_the_tests_and_is_not_right": [
+   "Python/32",
+   "Python/51",
+   "Python/90",
+   "Python/101"
+  ],
+  "published_fix_among_the_candidates": 13,
+  "candidates_median": 39.5,
+  "candidates_most": 166,
+  "candidates_run_in_all": 3980,
+  "by_bug_type": {
+   "excess logic": {
+    "bugs": 19,
+    "published_fix_among_the_candidates": 10,
+    "repaired": 11,
+    "right_as_far_as_checked": 10
+   },
+   "function misuse": {
+    "bugs": 6,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "missing logic": {
+    "bugs": 19,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "operator misuse": {
+    "bugs": 14,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "value misuse": {
+    "bugs": 30,
+    "published_fix_among_the_candidates": 3,
+    "repaired": 7,
+    "right_as_far_as_checked": 5
+   },
+   "variable misuse": {
+    "bugs": 12,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 1,
+    "right_as_far_as_checked": 0
+   }
+  },
+  "by_kind_of_the_piece": {
+   "a statement": {
+    "repaired": 1,
+    "right_as_far_as_checked": 1
+   },
+   "one inside": {
+    "repaired": 14,
+    "right_as_far_as_checked": 11
+   },
+   "one of several": {
+    "repaired": 4,
+    "right_as_far_as_checked": 3
+   }
+  }
+ },
+ "beside_the_learner_as_named_beforehand": {
+  "the_learner_alone": {
+   "repaired": 55,
+   "right_as_far_as_checked": 48
+  },
+  "a_piece_taken_out_alone": {
+   "repaired": 19,
+   "right_as_far_as_checked": 15
+  },
+  "the_pieces_first_then_the_learner_in_what_is_left": {
+   "repaired": 58,
+   "right_as_far_as_checked": 49
+  },
+  "repaired_only_by_a_piece_taken_out": [
+   "Python/53",
+   "Python/120",
+   "Python/130",
+   "Python/145"
+  ],
+  "right_only_by_a_piece_taken_out": [
+   "Python/53",
+   "Python/120",
+   "Python/130",
+   "Python/145"
+  ],
+  "repaired_by_the_learner_alone_and_pushed_out_of_the_budget": [
+   "Python/105"
+  ],
+  "right_with_the_learner_alone_and_not_right_together": [
+   "Python/32",
+   "Python/90",
+   "Python/105"
+  ],
+  "bugs_nothing_without_a_model_had_repaired": 22,
+  "repaired_among_those_nothing_had_repaired": [
+   "Python/120"
+  ],
+  "right_among_those_nothing_had_repaired": [
+   "Python/120"
+  ]
+ },
+ "put_together_in_other_ways__looked_at_after_the_scored_run": {
+  "the_learner_first_in_what_the_pieces_leave_then_the_pieces": {
+   "repaired": 58,
+   "right_as_far_as_checked": 51
+  },
+  "the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing": {
+   "repaired": 59,
+   "right_as_far_as_checked": 52,
+   "candidates_run_beyond_the_budget_in_all": 2258
+  },
+  "what_it_says": "The order matters for what is right. With the learner first in what the pieces leave of the 200, then the pieces: 58 repaired and 51 right. With the learner's whole 200 and the pieces only where it repaired nothing: 59 and 52, for 2258 candidates beyond the 200 in all. Both were worked out after the scored result had been read, so they are leads; the order named beforehand was the pieces first."
+ },
+ "every_way_without_a_model_on_these_100_bugs": {
+  "repaired_by_at_least_one_way_before": 78,
+  "repaired_by_at_least_one_way_now": 79,
+  "right_by_at_least_one_way_before": 67,
+  "right_by_at_least_one_way_now_at_least": 68,
+  "never_repaired_by_any_way_now": [
+   "Python/4",
+   "Python/5",
+   "Python/9",
+   "Python/58",
+   "Python/64",
+   "Python/81",
+   "Python/84",
+   "Python/89",
+   "Python/93",
+   "Python/96",
+   "Python/118",
+   "Python/122",
+   "Python/128",
+   "Python/136",
+   "Python/141",
+   "Python/143",
+   "Python/144",
+   "Python/149",
+   "Python/156",
+   "Python/158",
+   "Python/159"
+  ],
+  "note": "How many are right by at least one way now is not given: it would need the lists of every earlier way, bug by bug, and only the never-repaired list is in the dose record. It is at least one more than before, since Python/120 was repaired by nothing and is right now."
+ },
+ "what_was_expected_and_what_came": {
+  "written_before_the_scored_run": "On the 64 development bugs a piece taken out repaired 15, 12 of them right as far as checked, and 11 of the 12 bugs that are something too much, all 11 right; 3 of the 4 repairs of other bugs were not right. The pieces were shaped while looking at the development bugs, so less is expected of the 100 scored ones. Of their 19 bugs that are something too much: 12 to 16 repaired and right. Of the other 81: 2 to 6 repaired, most of them not right. In all 15 to 21 repaired and 12 to 17 right. Of the 22 bugs nothing without a model had repaired, 7 are something too much: 3 to 6 of the 22 repaired. The pieces first and the learner's candidates in what is left of 200: 58 to 63 repaired against the learner's 55, and 50 to 55 right against 48, with 0 to 3 bugs the learner repaired alone pushed out of the 200. What would make me drop it: the two together repair no more than 55 or are right for no more than 48; or of the repairs by a piece taken out fewer than two in three are right.",
+  "statement_by_statement": [
+   {
+    "expected": "of the 19 bugs that are something too much, 12 to 16 repaired and right",
+    "came": 10,
+    "held": false
+   },
+   {
+    "expected": "of the other 81, 2 to 6 repaired",
+    "came": 8,
+    "held": false
+   },
+   {
+    "expected": "most of those not right",
+    "came": "3 of 8 not right",
+    "held": false
+   },
+   {
+    "expected": "in all 15 to 21 repaired and 12 to 17 right",
+    "came": [
+     19,
+     15
+    ],
+    "held": true
+   },
+   {
+    "expected": "of the 22 bugs nothing had repaired, 3 to 6 repaired",
+    "came": 1,
+    "held": false
+   },
+   {
+    "expected": "the two together 58 to 63 repaired and 50 to 55 right",
+    "came": [
+     58,
+     49
+    ],
+    "held": false
+   },
+   {
+    "expected": "0 to 3 bugs pushed out of the 200",
+    "came": 1,
+    "held": true
+   }
+  ],
+  "what_would_have_made_me_drop_it": {
+   "the two together repair no more than 55 or are right for no more than 48": false,
+   "fewer than two in three of the repairs by a piece are right": false
+  },
+  "why_the_expectation_was_too_high": "On the development bugs the published fix was among the pieces for 10 of the 12 bugs that are something too much; on the scored ones for 10 of 19. The family was shaped while reading the development bugs, and twelve bugs are few. The other scored bugs of that type have more than one piece too much, or a piece changed rather than added.",
+  "statements_that_did_not_hold": 5
+ },
+ "on_the_64_development_bugs": {
+  "bugs": 64,
+  "usable": 64,
+  "repaired": 15,
+  "right_as_far_as_checked": 12,
+  "the_published_fix": 10,
+  "passes_the_tests_and_is_not_right": [
+   "Python/38",
+   "Python/95",
+   "Python/111"
+  ],
+  "published_fix_among_the_candidates": 11,
+  "candidates_median": 40.0,
+  "candidates_most": 177,
+  "candidates_run_in_all": 2866,
+  "by_bug_type": {
+   "excess logic": {
+    "bugs": 12,
+    "published_fix_among_the_candidates": 10,
+    "repaired": 11,
+    "right_as_far_as_checked": 11
+   },
+   "function misuse": {
+    "bugs": 2,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   },
+   "missing logic": {
+    "bugs": 14,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 1,
+    "right_as_far_as_checked": 0
+   },
+   "operator misuse": {
+    "bugs": 11,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 1,
+    "right_as_far_as_checked": 0
+   },
+   "value misuse": {
+    "bugs": 14,
+    "published_fix_among_the_candidates": 1,
+    "repaired": 2,
+    "right_as_far_as_checked": 1
+   },
+   "variable misuse": {
+    "bugs": 11,
+    "published_fix_among_the_candidates": 0,
+    "repaired": 0,
+    "right_as_far_as_checked": 0
+   }
+  },
+  "by_kind_of_the_piece": {
+   "a statement": {
+    "repaired": 2,
+    "right_as_far_as_checked": 2
+   },
+   "one inside": {
+    "repaired": 9,
+    "right_as_far_as_checked": 7
+   },
+   "one of several": {
+    "repaired": 2,
+    "right_as_far_as_checked": 1
+   },
+   "plain assignment": {
+    "repaired": 2,
+    "right_as_far_as_checked": 2
+   }
+  }
+ },
+ "what_this_does_not_show": [
+  "Not that deleting code repairs real bugs. HumanEvalFix bugs that are something too much were made by adding a piece to a correct program, so the piece taken out is the fix by construction. In real projects such bugs are a small share, and since Kali (ISSTA 2015) it is known that deletion mostly makes weak tests pass.",
+  "Not a gain in right answers worth the name: 49 against 48 is one bug in one run.",
+  "The 22 were known by type before the family was built (7 of them something too much). That is why the family was looked for; it was shaped on the development bugs only, and the scored bugs were run once.",
+  "Right as far as checked means: the published fix, or the same answers as the published fix on the extra inputs of HumanEval+ Mini. It is not a proof.",
+  "The learner was not run again beside the pieces; the sum is arithmetic on its recorded places. A piece that is also among the learner's first candidates is counted twice against the budget, which can only make the sum smaller.",
+  "One run on one machine by the producer. Nobody else has re-run it."
+ ],
+ "sources": {
+  "benchmark": {
+   "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+   "extra_inputs_sha256": "78fbba8865b20c5a979cda6e02fd72538e1762e65980af7d1a6e93c3e87e93af"
+  },
+  "dose_record_sha256": "36154be6747e988c94021ba9321040c0d6fea05c22aab13c0fb193103d8d18bf",
+  "records": {
+   "TAKE_OUT_SCORED_BUGS_20261112_V1.json": "f997b6722541a8d1f9f12515905da761d2e29baa16f63127f5a9321dcf78d3b6",
+   "TAKE_OUT_DEVELOPMENT_BUGS_20261112_V1.json": "72bda1a9e2346e96b894c85ed6a31b6064c08b88df38e3e718d377b46a80da1f"
+  },
+  "code_sha256_at_the_scored_run": {
+   "canonical/tools/take_out_measure_v1.py": "0e1efcd308c961cd8fc91aa81c87c1f3378375146ccf2ae8436ffd9f01aae1cb",
+   "canonical/runtime/take_out_v1.py": "335a80c85d96f1ab0151142a73153f8a981bad71b60018ba7c88134beeca71cf",
+   "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+   "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+   "canonical/tools/humanevalfix_experience_stream_measure_v1.py": "77a5d7fd8beb77e42d7662a1b298bf43970aa2fe062dbdb74e244503e12dad8a",
+   "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09"
+  },
+  "commit_of_the_scored_run": "f4bcc149",
+  "note": "The development record was made before the expectation was written into the tool, since the expectation was written from it. The other ways of putting the two together were added to the tool after the scored run; what the frozen tool wrote is unchanged, and this record was checked against it when it was written."
+ },
+ "to_run_it_again": "python3 canonical/tools/take_out_measure_v1.py --humanevalfix humanevalpack.jsonl --extra-inputs HumanEvalPlus-Mini.jsonl --work-dir W --which scored --out scored.json   (about a minute)",
+ "per_bug_key": "for each scored bug: [bug type, candidates, place of the published fix among them or null, place of the first that passes or null, right as far as checked, kind of the piece or null]",
+ "per_bug": {
+  "Python/1": [
+   "operator misuse",
+   55,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/3": [
+   "operator misuse",
+   13,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/4": [
+   "variable misuse",
+   47,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/5": [
+   "missing logic",
+   31,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/9": [
+   "variable misuse",
+   25,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/11": [
+   "value misuse",
+   38,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/14": [
+   "excess logic",
+   40,
+   12,
+   12,
+   true,
+   "one inside"
+  ],
+  "Python/15": [
+   "value misuse",
+   23,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/16": [
+   "missing logic",
+   8,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/17": [
+   "value misuse",
+   29,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/18": [
+   "value misuse",
+   52,
+   null,
+   19,
+   true,
+   "one inside"
+  ],
+  "Python/19": [
+   "missing logic",
+   53,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/20": [
+   "operator misuse",
+   83,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/21": [
+   "operator misuse",
+   30,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/22": [
+   "variable misuse",
+   18,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/23": [
+   "value misuse",
+   7,
+   4,
+   4,
+   true,
+   "one inside"
+  ],
+  "Python/24": [
+   "operator misuse",
+   16,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/25": [
+   "value misuse",
+   63,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/26": [
+   "operator misuse",
+   26,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/27": [
+   "function misuse",
+   3,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/28": [
+   "excess logic",
+   8,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/29": [
+   "function misuse",
+   16,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/30": [
+   "operator misuse",
+   7,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/32": [
+   "variable misuse",
+   121,
+   null,
+   23,
+   false,
+   "one inside"
+  ],
+  "Python/35": [
+   "operator misuse",
+   9,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/37": [
+   "variable misuse",
+   62,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/40": [
+   "value misuse",
+   73,
+   1,
+   1,
+   true,
+   "one of several"
+  ],
+  "Python/41": [
+   "value misuse",
+   2,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/43": [
+   "value misuse",
+   30,
+   null,
+   12,
+   true,
+   "one of several"
+  ],
+  "Python/45": [
+   "value misuse",
+   6,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/46": [
+   "value misuse",
+   103,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/47": [
+   "value misuse",
+   85,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/49": [
+   "value misuse",
+   13,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/51": [
+   "excess logic",
+   60,
+   null,
+   10,
+   false,
+   "one of several"
+  ],
+  "Python/52": [
+   "operator misuse",
+   6,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/53": [
+   "excess logic",
+   8,
+   4,
+   4,
+   true,
+   "one inside"
+  ],
+  "Python/54": [
+   "missing logic",
+   2,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/58": [
+   "missing logic",
+   19,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/60": [
+   "value misuse",
+   8,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/61": [
+   "operator misuse",
+   18,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/62": [
+   "value misuse",
+   11,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/63": [
+   "value misuse",
+   54,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/64": [
+   "missing logic",
+   17,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/65": [
+   "variable misuse",
+   65,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/66": [
+   "function misuse",
+   36,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/69": [
+   "value misuse",
+   39,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/70": [
+   "operator misuse",
+   47,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/74": [
+   "variable misuse",
+   20,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/78": [
+   "value misuse",
+   35,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/81": [
+   "excess logic",
+   129,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/82": [
+   "value misuse",
+   30,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/84": [
+   "operator misuse",
+   49,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/85": [
+   "value misuse",
+   53,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/86": [
+   "missing logic",
+   48,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/88": [
+   "operator misuse",
+   65,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/89": [
+   "value misuse",
+   41,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/90": [
+   "value misuse",
+   27,
+   null,
+   5,
+   false,
+   "one inside"
+  ],
+  "Python/92": [
+   "missing logic",
+   51,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/93": [
+   "missing logic",
+   79,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/96": [
+   "variable misuse",
+   33,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/99": [
+   "function misuse",
+   80,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/100": [
+   "excess logic",
+   22,
+   4,
+   4,
+   true,
+   "one inside"
+  ],
+  "Python/101": [
+   "value misuse",
+   31,
+   null,
+   10,
+   false,
+   "one inside"
+  ],
+  "Python/102": [
+   "variable misuse",
+   21,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/105": [
+   "missing logic",
+   46,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/107": [
+   "value misuse",
+   73,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/108": [
+   "excess logic",
+   101,
+   36,
+   13,
+   true,
+   "one inside"
+  ],
+  "Python/109": [
+   "variable misuse",
+   62,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/110": [
+   "variable misuse",
+   27,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/114": [
+   "function misuse",
+   43,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/118": [
+   "excess logic",
+   97,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/120": [
+   "excess logic",
+   22,
+   15,
+   15,
+   true,
+   "one inside"
+  ],
+  "Python/121": [
+   "value misuse",
+   51,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/122": [
+   "missing logic",
+   34,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/123": [
+   "value misuse",
+   55,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/124": [
+   "variable misuse",
+   166,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/125": [
+   "value misuse",
+   82,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/127": [
+   "missing logic",
+   64,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/128": [
+   "excess logic",
+   98,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/130": [
+   "excess logic",
+   111,
+   25,
+   25,
+   true,
+   "one inside"
+  ],
+  "Python/132": [
+   "value misuse",
+   66,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/133": [
+   "operator misuse",
+   16,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/134": [
+   "function misuse",
+   66,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/135": [
+   "excess logic",
+   33,
+   16,
+   16,
+   true,
+   "a statement"
+  ],
+  "Python/136": [
+   "excess logic",
+   118,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/138": [
+   "excess logic",
+   21,
+   9,
+   9,
+   true,
+   "one of several"
+  ],
+  "Python/140": [
+   "excess logic",
+   102,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/141": [
+   "missing logic",
+   84,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/143": [
+   "missing logic",
+   63,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/144": [
+   "excess logic",
+   77,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/145": [
+   "excess logic",
+   50,
+   20,
+   20,
+   true,
+   "one inside"
+  ],
+  "Python/147": [
+   "missing logic",
+   114,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/149": [
+   "missing logic",
+   27,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/150": [
+   "excess logic",
+   27,
+   12,
+   12,
+   true,
+   "one inside"
+  ],
+  "Python/154": [
+   "value misuse",
+   86,
+   38,
+   21,
+   true,
+   "one inside"
+  ],
+  "Python/156": [
+   "missing logic",
+   80,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/157": [
+   "missing logic",
+   14,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/158": [
+   "missing logic",
+   7,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/159": [
+   "excess logic",
+   35,
+   null,
+   null,
+   false,
+   null
+  ],
+  "Python/163": [
+   "value misuse",
+   50,
+   null,
+   null,
+   false,
+   null
+  ]
+ }
+}
