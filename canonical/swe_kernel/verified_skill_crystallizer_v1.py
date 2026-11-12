@@ -900,7 +900,18 @@ class VerifiedSkillStore:
         if contract is not None:
             rule['training_baseline'] = {'passed': False, 'kind': baseline.kind, 'scope_id': baseline.scope_id,
                                          'candidate_sha256': baseline.candidate_sha256, 'evidence': dict(baseline.evidence)}
-        rule['provenance'] = {'before_sha256': source_sha256(before_snippet), 'after_sha256': source_sha256(after_snippet)}
+        # A HASH OF THE DEMONSTRATION IS HISTORY; THE DEMONSTRATION ITSELF IS WHAT CAN BE RE-RUN.
+        #
+        # Measured 2026-11-12: `before_sha256`/`after_sha256` identify the source a rule was
+        # taught on but cannot reproduce it, so a stored rule could never be shown to still
+        # apply -- 5 of 5 stored rules had no re-executable source at all
+        # (`canonical/swe_kernel/skill_recheck_v1.py` reports ABSENT). Keeping the text makes a
+        # rule re-checkable; the hash is kept beside it so the two can be compared.
+        rule['provenance'] = {
+            'before_sha256': source_sha256(before_snippet),
+            'after_sha256': source_sha256(after_snippet),
+            'taught_sources': [{'before': before_snippet, 'after': after_snippet}],
+        }
         if contract is not None:
             rule['skill_id'] = skill_identity(rule)
         conn = _connect(self.db_path)

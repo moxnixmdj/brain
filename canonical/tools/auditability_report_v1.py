@@ -256,13 +256,30 @@ def skills(root: pathlib.Path) -> dict[str, Any]:
     # A skill is checkable only if it names a verifier that is not the demonstration that
     # taught it. `twin_verification` is the only stored field that does that; a rule that
     # carries neither it nor an executable predicate is history.
-    checkable = sum(1 for row in seen.values()
-                    if row.get("twin_verification") or predicate_of(row) is not None)
-    with_any_evidence = sum(
-        1 for row in seen.values()
-        if any(k for k in row if "verification" in k or "verified" in k))
+    # A skill is checkable only if it can be RE-EXECUTED. Counting a stored
+    # `twin_verification` record would be history: it says a check was once run, not that the
+    # rule still holds. `skill_recheck_v1` re-applies the rule to the source it was taught on,
+    # and reports ABSENT when the store kept only a hash of that source -- which is the real
+    # state of every rule taught before 2026-11-12.
+    recheck = {"PASS": 0, "FAIL": 0, "ABSENT": 0}
+    detail = None
+    try:
+        from canonical.swe_kernel import skill_recheck_v1 as R  # local: avoid import cycles
+        report = R.recheck_store(store.db_path)
+        if report.get("error"):
+            detail = report["error"]
+        else:
+            recheck = dict(report["counts"])
+    except Exception as exc:                      # a broken recheck must not read as a pass
+        detail = f"{type(exc).__name__}:{exc}"[:120]
+
+    checkable = recheck.get("PASS", 0) + recheck.get("FAIL", 0)
+    note = (f"re-executable {checkable} (PASS {recheck.get('PASS', 0)}, "
+            f"FAIL {recheck.get('FAIL', 0)}), no taught source {recheck.get('ABSENT', 0)}")
+    if detail:
+        note += f"; recheck unavailable: {detail}"
     return {"layer": "skills", "total": len(seen), "checkable": checkable,
-            "note": f"{with_any_evidence} of {len(seen)} carry any verification field at all"}
+            "note": note, "recheck": recheck}
 
 
 def process_sites(root: pathlib.Path) -> dict[str, Any]:
@@ -297,8 +314,20 @@ def test_modules(root: pathlib.Path) -> dict[str, Any]:
     tests_dir = root / "canonical" / "tests"
     if not tests_dir.exists():
         return {"layer": "test_modules", "total": None, "checkable": None, "error": "NO_TESTS_DIR"}
-    proc = subprocess.run([sys.executable, "-m", "pytest", str(tests_dir), "--collect-only", "-q"],
-                          cwd=root, capture_output=True, text=True, timeout=1800)
+    try:
+        proc = subprocess.run([sys.executable, "-m", "pytest", str(tests_dir),
+                               "--collect-only", "-q"],
+                              cwd=root, capture_output=True, text=True, timeout=1800)
+    except (OSError, subprocess.SubprocessError) as exc:
+        return {"layer": "test_modules", "total": None, "checkable": None,
+                "error": f"PYTEST_UNRUNNABLE:{type(exc).__name__}"}
+    # MEASURED 2026-11-12: with no pytest installed, `python -m pytest` exits 1 and prints
+    # nothing parseable, and this function used to report `total 0, checkable 0` -- a
+    # confident zero where the truth was "could not measure". A missing measurement must
+    # read as missing, or the number is worse than no number.
+    if "No module named pytest" in (proc.stderr or "") or "No module named pytest" in (proc.stdout or ""):
+        return {"layer": "test_modules", "total": None, "checkable": None,
+                "error": "PYTEST_NOT_INSTALLED"}
     # `-q` prints one "ERROR path - reason" line per module that failed to import, plus a
     # final "Interrupted: N errors during collection". Count the module lines: each one is a
     # module whose tests never ran, so its claims are neither true nor false.
@@ -309,6 +338,9 @@ def test_modules(root: pathlib.Path) -> dict[str, Any]:
             head = line.split("tests collected")[0].strip().split()[-1]
             if head.isdigit():
                 collected = int(head)
+    if not collected:
+        return {"layer": "test_modules", "total": None, "checkable": None,
+                "error": "COLLECTION_OUTPUT_UNPARSEABLE"}
     return {"layer": "test_modules", "total": collected,
             "checkable": max(collected - errors, 0),
             "note": f"{errors} collection errors (modules that never ran)"}
