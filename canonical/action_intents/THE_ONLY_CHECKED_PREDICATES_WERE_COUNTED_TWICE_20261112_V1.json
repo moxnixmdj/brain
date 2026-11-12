@@ -7,7 +7,7 @@
  "route_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
+ "canonical_base_commit": "69a45b4b088039ab1909b9e4bf9f39c8867eec26",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -95,7 +95,7 @@
   "THE_AUDIT_SAID_PASS_FOR_COMMANDS_THAT_EXITED_1_20261112_V1.md (superseded on the number it got wrong, left byte-identical as evidence)"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
+  "canonical_base_commit": "69a45b4b088039ab1909b9e4bf9f39c8867eec26",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_TREE_CAN_STATE_HOW_MANY_OF_ITS_DECLARED_VERIFICATIONS_ACTUALLY_ASSERT_SOMETHING_AND_CAN_PREVENT_THAT_NUMBER_FROM_RISING_OR_FROM_BEING_IMPROVED_AND_THEN_SPENT_BACK",
