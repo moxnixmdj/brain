@@ -1015,7 +1015,12 @@ def lesson_examples(path):
                 for side in ("before", "after")) for example in examples)):
         raise Refused("%s exists and is not a lesson file" % path)
     pairs = [("".join(example["before"]), "".join(example["after"])) for example in examples]
-    if held.get("teaches") != described(learn_all(pairs)):
+    try:
+        taught = described(learn_all(pairs))
+    except Refused as why:
+        raise Refused("the examples in %s no longer give rules (%s); it was changed by hand, or written by another "
+                      "version of this action. Remember its examples again" % (path, why))
+    if held.get("teaches") != taught:
         raise Refused("%s says it teaches something other than what its examples show; it was changed by hand, or "
                       "written by another version of this action. Remember its examples again" % path)
     return target, pairs
