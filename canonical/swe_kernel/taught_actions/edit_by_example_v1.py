@@ -1652,7 +1652,7 @@ def remember(lesson, before, after):
 
 # ----------------------------------------------------------------------------- what a check settles
 
-MOST_TRIED = 8                   # places tried in one file; any further ones are left as they are
+MOST_TRIED = 8                   # places tried together; further batches share the same time budget
 CHECK_SECONDS = 20               # the longest one run of the check may take
 ALL_CHECKS_SECONDS = 90          # the longest all runs of one request may take
 CHECK_SAID = "TESTS OF THE CHECK THAT FAILED: "
@@ -1793,14 +1793,7 @@ def repeat_tried(path, lesson, check_path):
             return None
 
     written(text, shown)                 # what the lesson shows must be writable by itself, or the refusal says why
-    trying, unsettled, against, kept = [], [], [], []
-    for place in tries:
-        if (len(trying) < MOST_TRIED and with_places(trying + [place]) is not None
-                and with_places(trying + [place], place) is not None):
-            trying.append(place)
-        else:
-            unsettled.append(place)
-    if not shown and not trying:
+    if not shown and not tries:
         raise Refused("nothing in the file has the form the lesson changed (%s), also not when what the change "
                       "copied may be other code" % "; ".join(str(rule) for rule in rules))
     lines = lambda places: ", ".join(str(place[1].lineno) for place in sorted(places, key=lambda place: place[0]))
@@ -1810,30 +1803,68 @@ def repeat_tried(path, lesson, check_path):
         raise Refused("%s does not come to an end on %s as it is (%s); nothing was changed" % (check_path, path, check.said))
 
     def broken_by(places):
-        """The tests that passed on the file as it is and fail with these places changed; None when unknown."""
+        """New failures against the baseline, or None when the check did not complete."""
         edited = with_places(places)
-        return None if edited is None or not check.time_left() else check.failing(edited) - before
+        if edited is None or not check.time_left():
+            return None
+        failed = check.failing(edited)
+        return None if "coming to an end" in failed else failed - before
 
-    broken = broken_by(trying)
-    for place in list(trying) if broken else []:
-        rest = [other for other in trying if other is not place]
-        less = broken_by(rest)
-        if less is not None and less < broken:
-            trying, broken, said_against = rest, less, check.said
-            against.append(place)
-            if not broken:
-                break
-    if broken is None or broken:         # what the tries break cannot be laid at single places: none of them is kept
-        unsettled, trying = unsettled + trying, []
-        if shown and (broken_by([]) or check.failing(with_places([])) - before):
-            raise Refused("%s fails after the change the lesson shows at line %s (%s) and not before; nothing was "
-                          "changed" % (check_path, lines(shown), check.said))
-    fails_now = check.failing(with_places(trying)) if trying else frozenset()
-    for place in trying:
-        if check.time_left() and check.failing(with_places(trying, place)) - fails_now:
-            kept.append(place)
+    # Each batch is limited, but untested early sites must not hide later testable ones.  The
+    # original source and one baseline are used throughout.  Previously kept sites participate
+    # in every subsequent check, and the shared deadline still bounds the whole operation.
+    unsettled, against, kept = [], [], []
+    said_against = ""
+    cursor = 0
+    while cursor < len(tries) and check.time_left():
+        trying = []
+        while cursor < len(tries) and len(trying) < MOST_TRIED:
+            place = tries[cursor]
+            cursor += 1
+            group = kept + trying + [place]
+            if with_places(group) is not None and with_places(group, place) is not None:
+                trying.append(place)
+            else:
+                unsettled.append(place)
+        if not trying:
+            continue
+        broken = broken_by(kept + trying)
+        for place in list(trying) if broken else []:
+            rest = [other for other in trying if other is not place]
+            less = broken_by(kept + rest)
+            if less is not None and less < broken:
+                trying, broken, said_against = rest, less, check.said
+                against.append(place)
+                if not broken:
+                    break
+        if broken is None or broken:
+            unsettled.extend(trying)
+            continue
+        if not check.time_left():
+            unsettled.extend(trying)
+            break
+        fails_now = check.failing(with_places(kept + trying))
+        if "coming to an end" in fails_now:
+            unsettled.extend(trying)
+            continue
+        newly_kept = []
+        for place in trying:
+            if not check.time_left():
+                unsettled.append(place)
+                continue
+            fails_mutated = check.failing(with_places(kept + trying, place))
+            # Timeout or an incomplete runner is not a test that observed the mutation.
+            if "coming to an end" not in fails_mutated and fails_mutated - fails_now:
+                newly_kept.append(place)
+            else:
+                unsettled.append(place)
+        # A subset can behave differently from the full batch.  Do not carry it forward unless
+        # that exact subset also preserves all tests that passed before the edit.
+        if newly_kept and broken_by(kept + newly_kept) == frozenset():
+            kept.extend(newly_kept)
         else:
-            unsettled.append(place)
+            unsettled.extend(newly_kept)
+    unsettled.extend(tries[cursor:])
     if not shown and not kept:
         raise Refused("nothing was changed: %s" % (
             "%s fails with line %s changed (%s)" % (check_path, lines(against), said_against) if against
