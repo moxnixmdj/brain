@@ -1,0 +1,424 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1",
+ "action_intent_id": "THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1",
+ "action_kind": "RECONCILE_FRONTIER",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "d418ab52de39be030f9284890130cf48d7195686",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The standing question's verdict-level answers hold (audit, ONE_TRY, THE_PRIOR, TWO_DOORS); what a 'learned it on the first try' claim needs underneath is an acceptance gate that can only pass when it actually ran the project's tests. This round measures that gate. The project-test baseline in canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py has three suite sites (_collect_project_bad_tests, _verify_no_new_test_failures, _run_project_tests) and all three inherited _run_cmd's implicit 20.0 s helper default. Two failure modes measured on 8439f609: (M1) a 21 s unittest.TestCase fixture died at 20.3 s with PROJECT_TEST_BASELINE_UNMEASURABLE while still running -- the suite was runnable, the gate quit; the brain's own canonical/tests did not finish in 300 s either (rc=-9 at 300.3 s, SUBSTRATE_CAVEAT), so the budget must be an explicit reviewed number, not a helper default. (M2, the dangerous one) a pytest-shaped test file (bare def test_it, no TestCase class) loads as ZERO tests under Python 3.11's unittest loader (loader.py:120-124 collects TestCase subclasses only), the probe printed an empty bad-list in 0.0 s, and the gate read that as 'no failures' -- an empty measurement sold as green; the extract-constant door showcase had been PASSing on exactly this vacuous baseline. The fix ships three changes in one file: BASELINE_BUDGET_S=300.0 passed explicitly at all three sites; suite children exit 3 with BASELINE_NO_DISCOVERABLE_TESTS when countTestCases()==0, which the parent converts into the named refusal PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE (door status FAIL_CLOSED__CAPABILITY_REFUSED_TEST_FILES_FOUND_NONE_DISCOVERABLE) only when test files exist inside discovery's own scope; and _test_files_present mirrors the loader's traversal (direct test*.py/_test.py files, descend only into __init__.py packages) instead of an rglob -- the first rglob draft was caught by test_three_pillar (tests under a non-package directory discover never descends) and replaced before commit. After: the 21 s suite measures in 21.0 s; function-style files refuse by name at both sites; empty and out-of-scope projects proceed exactly as base; a spy over the three sites shows [300.0, 300.0, 300.0]; the extract chain passes end to end against a MEASURED TestCase suite (PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED, python.swe.transform_and_synthesize.v1, EXTRACTED_CONSTANT=7) and the same sentence over a function-style suite now refuses. Regression ledger: 6 new pins in test_the_gate_waits_for_the_suite_it_measures_v1 (including the 21 s measurement and the door showcase); contracts 49/49, three_pillar+contracts 52/52, door/refactor/near-miss batch 36 passed 1 skipped; substrate restored by scripts/restore_substrate_v1.py (SUBSTRATE_READY 10/10); test_hardcore memoize failure stash-verified pre-existing on base (OUTPUT_ALREADY_EXISTS), not fixed silently. Next instrument named, not smuggled: a pytest fallback when importable, its own measured round; >300 s suites still refuse fail-closed.",
+ "selected_route": "EXPLICIT_300_S_BUDGET_AT_ALL_THREE_SUITE_SITES_PLUS_A_NAMED_EMPTY_MEASUREMENT_REFUSAL_SCOPED_TO_DISCOVERYS_OWN_TRAVERSAL",
+ "causal_blocker": "THE_PROJECT_TEST_BASELINE_INHERITED_A_20_SECOND_HELPER_DEFAULT_REFUSING_EVERY_SUITE_LONGER_THAN_20_S_WHILE_TEST_FILES_THE_UNittest_LOADER_CANNOT_COLLECT_LOADED_ZERO_TESTS_AND_THE_GATE_READ_THE_EMPTY_RESULT_AS_GREEN_RUBBER_STAMPING_THE_EDIT",
+ "expected_parent_change": "EVERY_SUITE_MEASUREMENT_PASSES_THE_REVIEWED_300_S_BUDGET_EXPLICITLY__TEST_FILES_INSIDE_DISCOVERYS_OWN_SCOPE_THAT_LOAD_NOTHING_REFUSE_BY_NAME_INSTEAD_OF_PASSING_SILENTLY__THE_EXTRACT_CONSTANT_CHAIN_EXECUTES_END_TO_END_AGAINST_A_MEASURED_TESTCASE_SUITE_WITH_THE_FUNCTION_STYLE_COUNTER_CASE_REFUSING",
+ "expected_parent_frontier_change": "THE_GATE_HAS_THREE_MEASURED_MODES_NOT_TWO_REAL_PLUS_ONE_RUBBER_STAMP__THE_EMPTY_MEASUREMENT_IS_A_NAMED_REFUSAL__THE_SLOW_SUITE_IS_MEASURED_INSIDE_A_REVIEWED_BUDGET_OR_REFUSED_FAIL_CLOSED__THE_SCOPE_RULE_MIRRORS_THE_LOADER_SO_FILES_DISCOVERY_CANNOT_SEE_ARE_NOT_EVIDENCE__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_CREDIT__TRUTH_ACHIEVED_STAYS_FALSE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PROJECT_TEST_BASELINE_INHERITED_A_20_SECOND_HELPER_DEFAULT_REFUSING_EVERY_SUITE_LONGER_THAN_20_S_WHILE_TEST_FILES_THE_UNittest_LOADER_CANNOT_COLLECT_LOADED_ZERO_TESTS_AND_THE_GATE_READ_THE_EMPTY_RESULT_AS_GREEN_RUBBER_STAMPING_THE_EDIT",
+ "falsification_condition": "THE_21_S_SUITE_REFUSING_AGAIN_AT_20_S__OR_A_FUNCTION_STYLE_SUITE_PASSING_SILENTLY_AGAIN_SET_WITHOUT_THE_NAMED_REFUSAL__OR_THE_OUT_OF_SCOPE_CONTROL_STARTING_TO_REFUSE_SCOPE_OVERREACH__OR_ANY_OF_THE_THREE_SITES_QUIETLY_BACK_TO_THE_20_S_DEFAULT__OR_THE_SHOWCASE_PASSING_WITHOUT_A_MEASURED_BASELINE__OR_AN_INHERITED_TEMPLATE_FIELD_LYING_ABOUT_THIS_ROUND",
+ "stop_condition": "SIX_PINS_GREEN_INCLUDING_THE_21_S_MEASUREMENT_AND_THE_DOOR_SHOWCASE__ALL_THREE_SITES_LOGGED_AT_300_0_BY_A_SPY__THE_VACUOUS_AND_OUT_OF_SCOPE_CONTROLS_BOTH_HOLD__CONTRACTS_THREE_PILLAR_DOOR_REFACTOR_NEAR_MISS_SUITES_PASS__INTENT_AND_GOAL_HIERARCHY_LOAD_BEARING_AND_INTEGRITY_GUARDS_PASS__CLEAN_CLONE_ARTIFACT_RECOMPILES__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive 2026-11-12: determine what is real about instant learning and advanced coding/computer-use actions, kill bad ideas before implementation, think from first principles, maximize use of the latest research, and always push and merge completed work. This change is the acceptance-gate half of that standing order: the gate that decides whether a change is 'accepted' was measured and found to have two non-measuring modes (quit at 20 s; pass on an empty measurement). Fixing it is a zero-spend runtime repair with pins, not a governance change, no sentience claim.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tests/test_the_gate_waits_for_the_suite_it_measures_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "earlier_routes_exhausted_reason": "THE_BASELINE_DEFECT_WAS_UNMEASURED_BEFORE_THIS_ROUND__THE_ENGINE_FIXTURES_USE_TESTCASE_STYLE_SO_THEY_NEVER_TRIED_A_FUNCTION_STYLE_SUITE__THE_20_S_DEFAULT_WAS_NOT_ANYWHERE_A_REVIEWED_DECISION__NO_PYTEST_FALLBACK_PATCH_WAS_ATTEMPTED_BECAUSE_ITS_EXIT_CODE_MAP_AND_OUTPUT_PARSING_NEED_THEIR_OWN_MEASURED_ROUND_NOT_A_SMUGGLED_EDIT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THE_IMPLICIT_CLAIM_BUILT_INTO_ALL_THREE_SUITE_SITES_THAT_20_SECONDS_IS_WHEN_A_PROJECT_SUITE_BECOMES_UNMEASURABLE__AND_THE_STRONGER_SILENT_CLAIM_THAT_AN_EMPTY_DISCOVERY_RESULT_MEANS_NO_FAILURES__FALSIFIED_MEASURED:21S_FIXTURE_REFUSED_AT_20_3S_WHILE_RUNNABLE__FUNCTION_STYLE_SUITE_SET_IN_0_0S_WHILE_TEST_FILES_EXISTED",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "EXECUTED_ON_THIS_COMMIT__21S_TESTCASE_FIXTURE_REFUSED_PROJECT_TEST_BASELINE_UNMEASURABLE_AT_20_3S_BEFORE__MEASURED_SET_IN_21_0S_AFTER__FUNCTION_STYLE_FIXTURE_SET_IN_0_0S_SILENT_BEFORE__NAMED_REFUSAL_PROJECT_TEST_BASELINE_UNMEASURABLE_TEST_FILES_FOUND_NONE_DISCOVERABLE_AFTER__SPY_OVER_THE_THREE_SITES_20_0_20_0_20_0_IMPLICIT_BEFORE__300_0_300_0_300_0_AFTER__EXTRACT_CHAIN_DOOR_PASS_WITH_RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED_ON_A_MEASURED_TESTCASE_SUITE__SAME_SENTENCE_FUNCTION_STYLE_FAIL_CLOSED_CAPABILITY_REFUSED_TEST_FILES_FOUND_NONE_DISCOVERABLE__FIRST_RBGLOB_DRAFT_CAUGHT_BY_TEST_THREE_PILLAR_SCOPE_OVERREACH_AND_REPLACED_BY_A_LOADER_MIRROR_BEFORE_ANY_COMMIT__SIX_NEW_PINS_6_OF_6__PRE_EXISTING_HARDCORE_MEMOIZE_FAILURE_STASH_VERIFIED_ON_BASE_NOT_THIS_ROUND"
+ },
+ "measured_effect": "M1_21S_FIXTURE_REFUSED_AT_20_3S_BEFORE__MEASURED_21_0S_AFTER__M2_FUNCTION_STYLE_SET_IN_0_0S_SILENT_BEFORE__NAMED_REFUSAL_AFTER__SPY_20_0_20_0_20_0_IMPLICIT_BEFORE__300_0_300_0_300_0_AFTER__EXTRACT_CHAIN_DOOR_PASS_ON_MEASURED_TESTCASE_SUITE_FILE_REWRITTEN_EXTRACTED_CONSTANT_7__FUNCTION_STYLE_SAME_SENTENCE_FAIL_CLOSED_CAPABILITY_REFUSED_TEST_FILES_FOUND_NONE_DISCOVERABLE__SIX_NEW_PINS_6_OF_6__REGRESSION_SUITES_GREEN__PRE_EXISTING_HARDCORE_MEMOIZE_FAILURE_STASH_VERIFIED_NOT_THIS_ROUND__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_BENCHMARK__THE_LIMITING_FACTOR_MEASURED_THIS_ROUND_IS_THE_HONESTY_OF_THE_ACCEPTANCE_GATE_ITSELF:THREE_SUITE_SITES_THAT_COULD_EITHER_QUIT_AT_20_SECONDS_OR_WAVE_A_CHANGE_THROUGH_WITHOUT_MEASURING__BOTH_NON_MEASURING_MODES_NOW_REFUSE_BY_NAME_OR_MEASURE_INSIDE_A_REVIEWED_300_S_BUDGET__THE_PYTEST_FALLBACK_IS_NAMED_AS_THE_NEXT_INSTRUMENT_NOT_SMUGGLED_IN",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/13",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py::_collect_project_bad_tests/_verify_no_new_test_failures/_run_project_tests (the three suite sites, adapted in place -- budget constant, named empty refusal, loader-mirrored scope check)",
+  "canonical/runtime/live_brain_route_admission_v1.py::solve (the door, reused unchanged; its status mapping surfaces the new refusal name)",
+  "scripts/restore_substrate_v1.py (the repo's own substrate restore, SUBSTRATE_READY 10/10, needed to run the pytest-importing suites locally as CI does)",
+  "canonical/tests/test_swe_transform_contracts_v1.py (the engine's measured fixture family -- TestCase style -- reused as the regression bed)",
+  "derive_action_intent_20261112.py (the intent binder, reused: spec + template + git binding)"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "d418ab52de39be030f9284890130cf48d7195686",
+  "real_outcome": "THE_GATE_HAD_TWO_NON_MEASURING_MODES_MEASURED_AND_CLOSED:21_S_SUITE_REFUSED_AT_20_3_S_BEFORE_MEASURED_21_0_S_AFTER__FUNCTION_STYLE_SUITE_SILENT_SET_BEFORE_NAMED_REFUSAL_AFTER__ALL_THREE_SITES_AT_300_0_BY_SPY__EXTRACT_SHOWCASE_NOW_PASSES_ON_A_MEASURED_TESTCASE_SUITE__OUT_OF_SCOPE_AND_EMPTY_CONTROLS_HOLD__SIX_NEW_PINS",
+  "required_capability": "ACCEPTANCE_GATE_MEASUREMENT_HONESTY_AND_DISCOVERY_SCOPE_FIDELITY",
+  "obs_goal": {
+   "real_outcome": "Round 8's prescription to grow the operator space deliberately implied the acceptance gate was sound; this round measured it instead of assuming. On 8439f609 all three suite sites inherited a 20 s helper default: a runnable 21 s suite was refused at 20.3 s, and a pytest-shaped suite loaded zero tests and was reported green in 0.0 s -- the empty measurement sold as a pass, the exact signal a 'worked first try' learning claim would have rested on. Both modes now refuse by name or measure inside an explicit 300 s budget, scoped to discovery's own traversal.",
+   "proxy_goals_deleted": [
+    "reading an empty bad-list as evidence the suite passed",
+    "treating the 20 s helper default as a reviewed budget for project test measurement",
+    "globbing for test files anywhere under the root instead of where discovery itself can reach",
+    "claiming the extract showcase served the sentence while its baseline measured nothing"
+   ],
+   "surviving_necessity": "A gate that measures what the project runs or refuses by name: explicit budget at all three sites, empty-measurement refusal scoped to the loader's traversal, and pins that fail if any site slips back."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py::_run_cmd (implicit timeout=20.0 at :27 -- all three suite sites called it without a timeout)",
+    "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py::_collect_project_bad_tests/_verify_no_new_test_failures/_run_project_tests (baseline, verification, runner -- three independent runners, one shared omission)",
+    "/usr/lib/python3.11/unittest/loader.py:120-124 (loadTestsFromModule collects TestCase subclasses only -- no isTestMethod check remains)",
+    "canonical/runtime/live_brain_route_admission_v1.py::solve (door status mapping -- the new refusal name surfaces as FAIL_CLOSED__CAPABILITY_REFUSED_TEST_FILES_FOUND_NONE_DISCOVERABLE)"
+   ],
+   "external_existing_routes_checked": [
+    "CPython 3.11 unittest discovery semantics: non-package directories are never descended (loader.py _find_test_path) -- the scope rule had to mirror this, not rglob",
+    "pytest project convention (bare def test_* functions) -- the dominant modern style the unittest-only probe could not see; named as the next instrument after scripts/restore_substrate_v1.py proved pytest installable",
+    "The tree's own boundary precedent (COMPUTER_EXECUTION_BOUNDARY_DRAFT_20261102.md): automatic fallbacks are removed as intentional availability regressions rather than kept as silent dishonesty -- the same trade here for function-style suites"
+   ],
+   "capability_work_deleted": [
+    "the 20 s implicit budget as the thing that decides measurability -- replaced by reviewed BASELINE_BUDGET_S=300.0 passed at every site",
+    "the empty bad-list as a green result -- replaced by a named refusal when test files exist inside discovery's scope",
+    "rglob as the file-existence test -- replaced by a loader-mirrored traversal after test_three_pillar caught the overreach"
+   ],
+   "surviving_gap": "Projects whose tests are pytest-shaped now refuse instead of passing; the pytest fallback (run when importable, with a measured exit-code map) is the named next instrument. Suits over 300 s still refuse fail-closed, including the brain's own canonical/tests."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific: _run_cmd is a generic helper (mypy, import checks, ruff all share its 20 s default, which is fine for them) and the suite sites never said otherwise; discovery's scope and file-existence are different questions whose asymmetry only shows on non-package trees. The vacuity was invisible because the engine's own fixtures are TestCase-style.",
+   "delete_bypass_substitute_options": [
+    "DELETE the baseline gate -- rejected: it is what makes accepted edits accepted",
+    "BYPASS by raising _run_cmd's global default -- rejected: mypy and import checks would inherit a 300 s wait for no reason",
+    "REUSE a silent pass for zero discovered tests -- rejected: that is the rubber stamp this round exists to remove",
+    "SUBSTITUTE a pytest run everywhere -- rejected as a smuggled edit: exit-code map and output parsing need their own measured round"
+   ],
+   "surviving_causal_blocker": "A measurement gate must either measure inside a reviewed budget or refuse by name -- never quit early and never pass on an empty result."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Explicit BASELINE_BUDGET_S=300.0 at the three suite sites plus a named empty-measurement refusal scoped to discovery's traversal -- chosen: kills both non-measuring modes with one reviewed constant and one named status, proven by before/after probes and six pins",
+    "2. Raise _run_cmd's global default -- rejected: the helper serves mypy and import checks where 20 s is right; only the suite sites needed the budget",
+    "3. Pytest fallback in this round -- deferred by name: needs its own measured exit-code map and output parsing, not a smuggled edit",
+    "4. Drop the file-existence condition (refuse any zero count) -- rejected: would break empty projects and out-of-scope targets, caught by the three_pillar control"
+   ],
+   "losing_routes_reason": "The global-default raise over-waits everywhere else; the unconditional refusal breaks empty projects; the pytest fallback without a measured parsing contract is exactly the kind of under-tested gate change this round is fixing. Only the scoped budget-plus-named-refusal survives the measurements and the controls.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The measurements are the oracle: the 21 s fixture, the function-style fixture, the out-of-scope and empty controls, the budget spy, and the door showcase all run against the real engine and the real door; no mock stands in for a suite."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "any claim or test that reads an empty bad-list as a passing suite -- superseded by the named refusal",
+    "the first rglob draft of _test_files_present in this round's own history -- deleted before commit by the three_pillar regression",
+    "documentation treating 20 s as when suites become unmeasurable -- replaced by the measured budget comment"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the door's status mapping surfaced the new refusal without change -- reused as-is",
+    "the engine's TestCase-style fixture family (test_swe_transform_contracts project()) reused as the regression bed",
+    "scripts/restore_substrate_v1.py reused to make the local environment match CI's pytest",
+    "merged main's impact-slice refactor of the same three sites (_suite_expr_and_env: run_cwd adjustment and <=6 of >60 test files selected by target stems, dfdcff9e) -- unioned with this round's budget and named vacuity refusal, no line dropped from either side, 72 tests green across both rounds' suites"
+   ],
+   "fresh_reuse_plan": "Pytest fallback when importable (own round, measured exit-code map), then act-layer arity/selector defaults for chain steps, then B1 donor distilled prior at zero model; the confinement wall and its wiring are owned by main's THE_ADMITTED_CONFINEMENT_EXISTS round (PR 6733), which this branch merged at d18c5dae -- the gzip sentence still refuses there."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving why the extract showcase passed -- the vacuity trace (loader.py:120, 0.0 s set()) is recorded in the round doc instead of re-run",
+    "re-testing whether the 20 s default was intentional anywhere for suites -- the three sites and their callers are catalogued in the doc with line numbers",
+    "re-running the gzip/confinement admission analysis -- killed last segment, boundary draft verdict stands"
+   ],
+   "search_stop_decision": "Stop when both non-measuring modes are closed and pinned: 21 s measured, function-style named, spy at 300.0 on all three sites, showcase passing on a measured suite, controls green. The pytest fallback and the >300 s class (including the brain's own suite) are new decisions with their own measurements and are deliberately not squeezed in.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "RAISE_RUN_CMD_GLOBAL_DEFAULT_TO_300__REJECTED__mypy_and_import_checks_share_the_helper_AND_20_S_IS_RIGHT_FOR_THEM",
+   "VACUITY_REFUSAL_WITHOUT_A_SCOPE_RULE__REJECTED__first_draft_rglob_overreached_non_package_trees_AND_THE_TREE_CAUGHT_IT_VIA_THREE_PILLAR",
+   "PYTEST_FALLBACK_IN_THIS_ROUND__DEFERRED_BY_NAME__needs_a_measured_exit_code_map_and_output_parsing_its_own_round",
+   "ONLY_FIX_THE_BUDGET_AND_LEAVE_THE_EMPTY_PASS__REJECTED__the_empty_pass_is_the_rubber_stamp_THE_WHOLE_ROUND_IS_ABOUT"
+  ],
+  "deleted_or_bypassed_paths": [],
+  "selected_surviving_route": "EXPLICIT_300_S_BUDGET_AT_THE_THREE_SUITE_SITES_PLUS_A_NAMED_EMPTY_MEASUREMENT_REFUSAL_SCOPED_TO_DISCOVERYS_OWN_TRAVERSAL",
+  "why_selected_route_is_fastest_sufficient": "ONE_CONSTANT_ONE_NAMED_STATUS_AND_ONE_LOADER_MIRRORED_CHECK_CLOSE_BOTH_MEASURED_FAILURE_MODES_IN_A_SINGLE_FILE_WITH_BEFORE_AND_AFTER_PROBES_AND_SIX_PINS__THE_ALTERNATIVES_EITHER_OVERWAIT_ELSEWHERE_BREAK_EMPTY_PROJECTS_OR_DESERVE_THEIR_OWN_MEASURED_ROUND",
+  "expected_parent_level_state_change": "THE_GATE_HAS_THREE_MEASURED_MODES_NOT_TWO_REAL_PLUS_ONE_RUBBER_STAMP__THE_EMPTY_MEASUREMENT_IS_A_NAMED_REFUSAL__THE_SLOW_SUITE_IS_MEASURED_INSIDE_A_REVIEWED_BUDGET_OR_REFUSED_FAIL_CLOSED__THE_SCOPE_RULE_MIRRORS_THE_LOADER_SO_FILES_DISCOVERY_CANNOT_SEE_ARE_NOT_EVIDENCE__NO_BENCHMARK_ROW_MOVED__NO_CAPABILITY_CREDIT__TRUTH_ACHIEVED_STAYS_FALSE",
+  "stop_condition": "SIX_PINS_GREEN_INCLUDING_THE_21_S_MEASUREMENT_AND_THE_DOOR_SHOWCASE__ALL_THREE_SITES_LOGGED_AT_300_0_BY_A_SPY__THE_VACUOUS_AND_OUT_OF_SCOPE_CONTROLS_BOTH_HOLD__CONTRACTS_THREE_PILLAR_DOOR_REFACTOR_NEAR_MISS_SUITES_PASS__INTENT_AND_GOAL_HIERARCHY_LOAD_BEARING_AND_INTEGRITY_GUARDS_PASS__CLEAN_CLONE_ARTIFACT_RECOMPILES__ZERO_SPEND__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T19:12:45Z",
+   "max_age_hours": 24,
+   "incumbent_route": "IMPLICIT_20_S_HELPER_DEFAULT_AT_ALL_THREE_SUITE_SITES__AND_BEFORE_IT_THE_UNQUESTIONED_ASSUMPTION_THAT_THE_BASELINE_GATE_MEASURED_WHENEVER_IT_RETURNED_EMPTY",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "21 s TestCase fixture refused at 20.3 s (rc=-9 at the deadline) on 8439f609 -- the suite was runnable, the gate quit",
+     "function-style test files returned set() in 0.0 s while test files existed -- Python 3.11 unittest collects TestCase subclasses only (loader.py:120-124)",
+     "the extract-constant showcase at canonical/astra_runtime/tmp passed the door on exactly this vacuous baseline -- PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED over nothing measured",
+     "three suite sites all call _run_cmd without timeout: _collect_project_bad_tests, _verify_no_new_test_failures, _run_project_tests (memoize :665 and add_thread_pool :728 call the runner with no baseline at all)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pipeline_exec_v1.run_command deadline reap -> SIGKILL rc=-9 (probes: 20.3 s at default, 300.3 s at timeout=300 on canonical/tests with SUBSTRATE_CAVEAT)",
+     "scripts/restore_substrate_v1.py SUBSTRATE_READY modules_present=10/10 -- pytest becomes importable locally, which is what makes a measured pytest fallback a viable next instrument",
+     "test_three_pillar_swe_breakthroughs_v1::test_zero_hint... has a target whose tests live under a non-package directory -- caught the rglob scope overreach before commit"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "pytest-style bare def test_* is the dominant modern Python test layout -- the convention the unittest-only probe cannot see; pytest's own collection docs are the standard reference (2026)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "CPython 3.11 unittest/loader.py loadTestsFromModule:120-124 -- only TestCase subclasses, no isTestMethod (the direct cause of the vacuous pass)",
+     "arXiv 2609.38108 Do LLM Agents Execute the Plans They Declare? (2026): a declared verification that never ran is the same shape as an empty measurement sold as green -- inherited from the prior round's evidence, unchanged verdict"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "project test baseline refuses suite after 20 seconds subprocess timeout"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "unittest discover loads zero tests pytest style collection vacuous"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "python 3.11 unittest loader collect only TestCase subclasses isTestMethod removed"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "test gate empty measurement false pass 2026"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "EXPLICIT_300_S_BUDGET_AT_THE_THREE_SUITE_SITES_PLUS_A_NAMED_EMPTY_MEASUREMENT_REFUSAL_SCOPED_TO_DISCOVERYS_OWN_TRAVERSAL",
+   "challenger_routes": [
+    {
+     "route": "RAISE_RUN_CMD_GLOBAL_DEFAULT_TO_300",
+     "evidence": [
+      "_run_cmd's default of 20.0 is shared by mypy, ruff, import checks, and the suite sites"
+     ],
+     "qualification_evidence": [
+      "a 300 s wait on a hung mypy would be a new failure mode for no benefit -- the budget belongs to the suite measurement, not the helper"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Fixes suites but over-waits every other caller",
+      "CAPABILITY_STRENGTH": "Same suite unlock as the selected route",
+      "WALL_CLOCK": "Worse on helper failures",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "New hang surface outside the gate",
+      "VERIFIABILITY": "Same six pins could not tell the difference"
+     }
+    },
+    {
+     "route": "PYTEST_FALLBACK_WHEN_IMPORTABLE",
+     "evidence": [
+      "function-style suites are the dominant modern layout; restore_substrate_v1.py proves pytest is installable (SUBSTRATE_READY 10/10)"
+     ],
+     "qualification_evidence": [
+      "exit-code semantics and output parsing for pytest vs unittest differ (pytest exit 3 is INTERNAL_ERROR, collection errors are 2); a wrong map would misread a red suite as green -- exactly this round's defect class"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "High value but needs its own measured parsing contract",
+      "CAPABILITY_STRENGTH": "Restores availability for pytest-shaped projects instead of refusing them",
+      "WALL_CLOCK": "One further round",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Risky if smuggled without pins",
+      "VERIFIABILITY": "Requires before/after on both red and green pytest suites"
+     }
+    },
+    {
+     "route": "REFUSE_ANY_ZERO_COUNT_WITHOUT_A_FILE_CONDITION",
+     "evidence": [
+      "countTestCases()==0 is always an empty measurement"
+     ],
+     "qualification_evidence": [
+      "measured control: an empty project (no test files) and a target whose tests live outside discovery's scope must still proceed -- test_three_pillar failed on exactly this before the scope rule existed"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Breaks empty projects and out-of-scope targets",
+      "CAPABILITY_STRENGTH": "Same refusal for in-scope suites",
+      "WALL_CLOCK": "Equal",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Regressions the tree's own suites catch",
+      "VERIFIABILITY": "Caught pre-commit by three_pillar"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T19:12:45Z",
+    "max_age_hours": 2,
+    "selected_route": "EXPLICIT_300_S_BUDGET_AT_THE_THREE_SUITE_SITES_PLUS_A_NAMED_EMPTY_MEASUREMENT_REFUSAL_SCOPED_TO_DISCOVERYS_OWN_TRAVERSAL",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the 21 s measurement, the named refusal probes, the budget spy, and the door showcase all executed in this sandbox on this commit"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "all three suite sites pass timeout=BASELINE_BUDGET_S by spy; the named refusal and the loader-mirrored scope check are pinned 6 of 6"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "INDEPENDENT_VERIFIER"
+      ]
+     },
+     {
+      "dependency": "canonical.runtime.live_brain_route_admission_v1.solve",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the showcase sentence executes end to end with PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED on the measured suite"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   },
+   "negative_search_summary": "RAISING_THE_GLOBAL_HELPER_DEFAULT_IS_NON_DOMINATING_IT_OVERWAITS_MYPY_AND_IMPORT_CHECKS__AN_UNCONDITIONAL_ZERO_COUNT_REFUSAL_BREAKS_EMPTY_PROJECTS_PROVEN_BY_THE_CONTROLS__THE_PYTEST_FALLBACK_IS_NAMED_NOT_SMUGGLED_REQUIRING_ITS_OWN_MEASURED_ROUND__AND_THE_CONFINEMENT_WALL_IS_OWNED_BY_MERGED_MAINS_THE_ADMITTED_CONFINEMENT_EXISTS_ROUND_PR_6733__MEASURED_HERE_THE_GZIP_SENTENCE_STILL_REFUSES_AT_THE_DOOR_AFTER_THAT_MERGE__NOT_THIS_ROUNDS_TO_FIX"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_PRICES_ONE_HONESTY_REPAIR_OF_THE_ACCEPTANCE_GATE_ITSELF__THE_CLAIM_IS_BOUND_TO_SIX_PINS_AND_TO_CONTROLS_THAT_CAN_STILL_SAY_NO__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "THE_GATE_THAT_MEASURES_NOTHING_MUST_REFUSE_BY_NAME",
+   "falsifier_id": "F_THE_LESSON_MUST_BE_REFUSED_UNDER_THE_OLD_ALGEBRA_AND_TAUGHT_AFTER_THE_REDUCER__HELD_OUT_ANSWERS_MUST_MATCH_PRE_WRITTEN_ORACLES__THE_INDEPENDENT_CHECKER_MUST_REJECT_THE_UPPER_MEDIAN",
+   "decisive_question": "Does a runnable 21 s suite get measured inside a reviewed 300 s budget, does a function-style suite that loads zero tests refuse by name instead of passing silently, do empty and out-of-scope projects still proceed, and does the extract showcase pass only against a measured TestCase suite?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_the_gate_waits_for_the_suite_it_measures_v1.py",
+     "git_blob_sha": "ee9923f0475eb88bafe7ede0b3baa6582f0fb0fe"
+    }
+   ]
+  }
+ },
+ "next_step": "Pytest fallback when importable with a measured exit-code map (own round)__then act-layer arity and selector defaults for chain steps__then B1 donor distilled prior at zero model__confinement wiring owned by main PR 6733 (merged; gzip still refuses at the door, measured)"
+}
