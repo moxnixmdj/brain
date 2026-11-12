@@ -18,8 +18,12 @@ rules are run on the example's first file and must produce its second file.
 
 Refused, and nothing is written:
 
-* the example adds, removes or reshapes whole statements or blocks (an added ``import``, a new line,
-  a renamed function): only a change inside one expression or one simple statement is learned;
+* the example adds, removes or reshapes whole statements or blocks (a new line, a renamed function):
+  only a change inside one expression or one simple statement is learned;
+* a changed place assigns different names than before, or reads a variable that exists only inside
+  the example's function: such a change works only together with other changes (a rename does), so
+  repeating it one place at a time would leave half of it undone;
+* the new code uses a name the file to edit does not define, import or receive as a parameter;
 * the same code was changed in one place of the example and left alone in another;
 * nothing in the file to edit has the form the example changed;
 * two places to change overlap, or a comment inside a changed place would be lost;
@@ -28,12 +32,18 @@ Refused, and nothing is written:
 A change of a bare name or a bare number is never a rule by itself; it is kept together with the
 expression or statement around it.  Renaming is a different action, which looks at scopes.
 
+``import`` lines the example added or removed at the top of the file are not repeated.  They are read
+as what the new code needs: the file to edit must already provide those names.
+
+This repeats a change.  It does not check that the change is right for the code it is repeated on.
+
 The edit replaces only the bytes of the places that fit a rule.  Everything else in the file,
 including comments and layout, stays as it was.
 """
 REQUEST = ("lessons_q7/suite_q7.py", "lessons_q7/shown_q7/earlier.py", "lessons_q7/shown_q7/later.py")  # file to edit, example before, example after
 
 import ast
+import builtins
 import io
 import pathlib
 import re
@@ -110,6 +120,65 @@ def too_small(node):
     return isinstance(node, (ast.Name, ast.Constant))
 
 
+def names_of(node):
+    """(names the code assigns in its surroundings, names it reads from its surroundings)."""
+    assigned, read = set(), set()
+
+    def walk(part, local):
+        if isinstance(part, (ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp)):
+            local = local | {name.id for loop in part.generators for name in ast.walk(loop.target)
+                             if isinstance(name, ast.Name)}
+        elif isinstance(part, ast.Lambda):
+            given = part.args
+            local = local | {one.arg for one in given.posonlyargs + given.args + given.kwonlyargs
+                             + [extra for extra in (given.vararg, given.kwarg) if extra]}
+        elif isinstance(part, ast.Name):
+            if part.id not in local:
+                (read if isinstance(part.ctx, ast.Load) else assigned).add(part.id)
+            return
+        elif isinstance(part, (ast.Import, ast.ImportFrom)):
+            assigned.update((alias.asname or alias.name).split(".")[0] for alias in part.names)
+            return
+        elif isinstance(part, (ast.Global, ast.Nonlocal)):
+            assigned.update(part.names)
+            return
+        for child in ast.iter_child_nodes(part):
+            walk(child, local)
+
+    walk(node, frozenset())
+    return assigned, read
+
+
+def module_names(tree):
+    """(names defined at the top level of a module, whether a ``*`` import makes that unknowable)."""
+    defined, anything, stack = set(), False, list(tree.body)
+    while stack:
+        statement = stack.pop()
+        if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            defined.add(statement.name)
+            continue
+        if isinstance(statement, ast.ImportFrom) and any(alias.name == "*" for alias in statement.names):
+            anything = True
+        if isinstance(statement, SIMPLE_STATEMENTS):
+            defined |= names_of(statement)[0]
+            continue
+        for name in ("target", "optional_vars"):
+            if isinstance(getattr(statement, name, None), ast.AST):
+                defined |= names_of(getattr(statement, name))[0]
+        for item in getattr(statement, "items", []):
+            if item.optional_vars is not None:
+                defined |= names_of(item.optional_vars)[0]
+        for name in ("body", "orelse", "finalbody"):
+            stack.extend(getattr(statement, name, []))
+        for handler in getattr(statement, "handlers", []):
+            stack.extend(handler.body)
+    return defined, anything
+
+
+def is_import(statement):
+    return isinstance(statement, (ast.Import, ast.ImportFrom))
+
+
 class Text:
     """A source file: its bytes, its tree, and where each node sits in the bytes."""
 
@@ -122,6 +191,8 @@ class Text:
         except (SyntaxError, ValueError) as problem:
             raise Refused("%s is not Python this interpreter can read (%s)" % (what, problem))
         self.starts = [0] + [found.end() for found in re.finditer(rb"\r\n|\r|\n", self.raw)]
+        self.above = {id(child): node for node in ast.walk(self.tree) for child in ast.iter_child_nodes(node)}
+        self.defined, self.anything = module_names(self.tree)
 
     def span(self, node):
         return (self.starts[node.lineno - 1] + node.col_offset, self.starts[node.end_lineno - 1] + node.end_col_offset)
@@ -129,6 +200,19 @@ class Text:
     def of(self, node):
         start, end = self.span(node)
         return self.raw[start:end].decode("utf-8")
+
+    def provides(self, name, node):
+        """Can code at `node` read `name`?  Built in, defined at the top of the file, or a parameter around it."""
+        if self.anything or name in self.defined or hasattr(builtins, name):
+            return True
+        while id(node) in self.above:
+            node = self.above[id(node)]
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+                given = node.args
+                if name in {one.arg for one in given.posonlyargs + given.args + given.kwonlyargs
+                            + [extra for extra in (given.vararg, given.kwarg) if extra]}:
+                    return True
+        return False
 
     def comments(self):
         """Byte positions of every comment."""
@@ -290,9 +374,12 @@ def cut_at_blanks(pattern, node, text):
 class Rule:
     """Code of one form, and what it becomes."""
 
-    def __init__(self, kind, pattern, template, shown, pieces, lines):
+    def __init__(self, kind, pattern, template, shown, pieces, pairs):
         self.kind, self.pattern, self.template = kind, pattern, template
-        self.shown, self.pieces, self.lines = shown, pieces, lines
+        self.shown, self.pieces, self.pairs = shown, pieces, pairs
+        self.lines = sorted(before.lineno for before, _ in pairs)
+        self.needs = set()               # names the new code reads that the old code did not
+        self.own = set()                 # names the new code binds for itself
 
     def __str__(self):
         number = {}
@@ -323,7 +410,7 @@ def rule_at(pairs, old, new, old_units):
         return None                      # it would also change code the example left alone
     before, after = unique[0]
     return Rule(kind_of(before), pattern, template, cut_at_blanks(pattern, before, old),
-                cut_at_blanks(template, after, new), sorted(node.lineno for node, _ in unique))
+                cut_at_blanks(template, after, new), unique)
 
 
 def rule_for(group, old, new, old_units):
@@ -335,9 +422,45 @@ def rule_for(group, old, new, old_units):
     return None
 
 
+def stands_alone(rule, new):
+    """Refuse a rule whose places only work together with other changes.  Fills in what the rule needs."""
+    for before, after in rule.pairs:
+        assigned_before, read_before = names_of(before)
+        assigned_after, read_after = names_of(after)
+        if assigned_before != assigned_after:
+            raise Refused("line %d of the example changes which names are assigned (%s); that works only together "
+                          "with other changes, as in a rename, and cannot be repeated one place at a time"
+                          % (before.lineno, ", ".join(sorted(assigned_before ^ assigned_after))))
+        for name in sorted(read_after - read_before):
+            if not new.provides(name, after):
+                raise Refused("line %d of the example makes the code read '%s', which the example's second file neither "
+                              "defines or imports at the top nor receives as a parameter there; a change that leans on "
+                              "a local variable cannot be repeated one place at a time" % (before.lineno, name))
+            if not hasattr(builtins, name):
+                rule.needs.add(name)
+    # Names the new code binds for itself (a comprehension's variable, a lambda's parameter).  Copied code
+    # that already uses such a name would be captured by it.
+    before, after = rule.pairs[0]
+    copied = {}
+    fits(rule.template, after, copied)
+    inside = {id(part) for blank in copied.values() for part in ast.walk(blank)}
+    for part in ast.walk(after):
+        if id(part) in inside:
+            continue
+        if isinstance(part, ast.comprehension):
+            rule.own |= {name.id for name in ast.walk(part.target) if isinstance(name, ast.Name)}
+        elif isinstance(part, ast.Lambda):
+            rule.own |= {one.arg for one in ast.walk(part.args) if isinstance(one, ast.arg)}
+
+
 def learn(before_text, after_text):
     """The rules that turn the example's first file into its second."""
     old, new = Text(before_text, "the example's first file"), Text(after_text, "the example's second file")
+    # Import lines added or removed at the top are not places to repeat; they show what the new code needs.
+    was = {shape(statement) for statement in old.tree.body if is_import(statement)}
+    now = {shape(statement) for statement in new.tree.body if is_import(statement)}
+    old.tree.body = [statement for statement in old.tree.body if not (is_import(statement) and shape(statement) not in now)]
+    new.tree.body = [statement for statement in new.tree.body if not (is_import(statement) and shape(statement) not in was)]
     if shape(old.tree) == shape(new.tree):
         raise Refused("the two example files hold the same code")
     old_units = units(old.tree)
@@ -355,9 +478,12 @@ def learn(before_text, after_text):
         if rule is None:
             raise Refused("line %d of the example was changed, but the same code was left alone elsewhere in the example"
                           % group[0][0][0].lineno)
+        stands_alone(rule, new)
         rules.append(rule)
-    replayed, _ = rewrite(rules, before_text, "the example's first file")
-    if shape(ast.parse(replayed)) != shape(new.tree):
+    replayed, _ = rewrite(rules, before_text, "the example's first file", check_names=False)
+    again = ast.parse(replayed)
+    again.body = [statement for statement in again.body if not (is_import(statement) and shape(statement) not in now)]
+    if shape(again) != shape(new.tree):
         raise Refused("the rules worked out from the example do not reproduce the example")
     return rules
 
@@ -402,7 +528,7 @@ def written_for(rule, node, bound, text):
     raise Refused("the change does not fit the code at line %d" % node.lineno)
 
 
-def rewrite(rules, source_text, what="the file"):
+def rewrite(rules, source_text, what="the file", check_names=True):
     """Apply the rules to every place that fits.  Returns (new text, number of places changed)."""
     text = Text(source_text, what)
     places = []
@@ -422,6 +548,16 @@ def rewrite(rules, source_text, what="the file"):
             raise Refused("two places to change overlap at line %d of %s" % (later[1].lineno, what))
     if not places:
         return source_text, 0
+    for _, node, rule, bound in places:
+        for name in sorted(rule.needs) if check_names else ():
+            if not text.provides(name, node):
+                raise Refused("the change uses '%s', which %s does not define, import or receive as a parameter "
+                              "at line %d" % (name, what, node.lineno))
+        used = {part.id if isinstance(part, ast.Name) else part.arg for blank in bound.values()
+                for part in ast.walk(blank) if isinstance(part, (ast.Name, ast.arg))}
+        if used & rule.own:
+            raise Refused("the new code has its own variable '%s', and the code at line %d of %s already uses that name"
+                          % (sorted(used & rule.own)[0], node.lineno, what))
     comments = text.comments()
     for (start, end), node, rule, bound in places:
         kept = [text.span(bound[piece]) for piece in rule.pieces if not isinstance(piece, str)]
@@ -478,6 +614,9 @@ def main(request):
         result = edit_by_example(text, earlier, later)
     except Refused as why:
         print("REFUSED: %s" % why)
+        return 3
+    except RecursionError:
+        print("REFUSED: the code is nested too deeply to compare")
         return 3
     target.write_bytes(result.encode("utf-8"))
     print("edited %s the way %s was changed into %s" % (path, before, after))
