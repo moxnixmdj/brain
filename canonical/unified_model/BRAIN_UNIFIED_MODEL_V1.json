@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 376,
+  "knowledge_documents": 377,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6774,
+  "research_index_records": 6775,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c15a8514ec54920a97ba052b2caf97466bc041b9345b219a5a86930b7634a894"
+  "value": "997e00b7766f0b343a1ded74bd9cf5bf676d1b6cab2ac990f0601821f79335b2"
  },
  "engines": [
   {
@@ -51146,6 +51146,82 @@
     "about",
     "itself",
     "not",
+    "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5927,
+   "headings": [
+    "I was wrong about the block. The lane was open, and the result replicates.",
+    "1. What I got wrong",
+    "2. The measurement, on instances that did not exist before",
+    "3. What this does and does not settle",
+    "4. Shipped",
+    "Answers"
+   ],
+   "kind": "DOCUMENT",
+   "path": "I_WAS_WRONG_ABOUT_THE_BLOCK_20261112_V1.md",
+   "sha256": "f82a3ee05cab00478195650b97a80861847b604151c6e6d3b4b99cb73c032bbe",
+   "summary": "**2026-11-12.** Authority **NONE** (producer-run measurement in this sandbox). `truth.achieved` = `false`.",
+   "terms": {
+    "17": 4,
+    "50": 6,
+    "all": 4,
+    "arm": 3,
+    "beats": 3,
+    "both": 5,
+    "bridge": 4,
+    "browser": 3,
+    "check": 3,
+    "did": 3,
+    "false": 4,
+    "feasibility": 4,
+    "first": 5,
+    "fresh": 3,
+    "full": 3,
+    "had": 4,
+    "instances": 6,
+    "lane": 3,
+    "learner": 3,
+    "measurement": 4,
+    "newest": 3,
+    "no": 6,
+    "nobody": 3,
+    "not": 13,
+    "now": 6,
+    "one": 6,
+    "only": 5,
+    "open": 3,
+    "ordering": 4,
+    "page": 3,
+    "pages": 9,
+    "pass": 4,
+    "produced": 4,
+    "random": 4,
+    "real": 3,
+    "recorded": 3,
+    "replication": 3,
+    "run": 8,
+    "runs": 8,
+    "same": 6,
+    "seeds": 4,
+    "so": 4,
+    "still": 3,
+    "success": 7,
+    "true": 4,
+    "used": 4,
+    "verbatim": 3,
+    "version_space": 4
+   },
+   "title": "I was wrong about the block. The lane was open, and the result replicates.",
+   "title_terms": [
+    "about",
+    "block",
+    "lane",
+    "open",
+    "replicates",
+    "result",
     "wrong"
    ]
   },
@@ -73988,10 +74064,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1178,
+  "included_source_count": 1179,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f879d78cc76a635dc92f621abc8f26a1e610acab157e716e708747bb829e2e73"
+  "source_tree_digest": "40cbda1c7a951ee4e17503383866b289bf6902f3b45733aec85dbd79c3b0743e"
  },
  "research_index": [
   {
@@ -165966,6 +166042,23 @@
     "one": 1,
     "success": 1,
     "v5": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
+   "schema": "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_MEASUREMENT_V1",
+   "sha256": "2f9e3888e4a8b375301f9b7e4aff74f5f36ca2c3ace49ded8d2562050d260751",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "miniwob": 1,
+    "replication": 1,
+    "v1": 1
    }
   },
   {
