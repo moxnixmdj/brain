@@ -1,5 +1,6 @@
 """The measure of one example of a repeated change: what counts as a change, as right, as not the
 developers'; how the questions are put; how the organ's refusals, failures and slowness are told apart."""
+import json
 import time
 
 import pytest
@@ -299,3 +300,51 @@ def test_the_draw_is_the_same_every_time_and_loses_no_file():
 def test_what_is_recorded_of_a_pull_request_has_no_text_and_can_be_checked():
     kept = measure.without_texts([{"name": "a/b#1", "repo": "a/b", "number": 1, "before_at": "s1", "after_at": "s2", "files": files(2)}])
     assert kept[0]["before_at"] == "s1" and "before" not in kept[0]["files"][0] and len(kept[0]["files"][0]["before_sha256"]) == 64
+
+
+# ----------------------------------------------------------------------------- the same files again
+def recorded_and_github():
+    pool = files(2)
+    pull = {"name": "a/b#1", "repo": "a/b", "number": 1, "title": "t", "before_at": "s1", "after_at": "s2", "kind": "k", "query": "q", "files": pool}
+    recorded = measure.without_texts([pull])
+    github = {}
+    for item in pool:
+        github[f"repos/a/b/contents/{item['path']}?ref=s1"] = item["before"]
+        github[f"repos/a/b/contents/{item['path']}?ref=s2"] = item["after"]
+    return pull, recorded, github
+
+
+def test_the_files_a_record_names_are_fetched_again_and_are_the_same(monkeypatch):
+    pull, recorded, github = recorded_and_github()
+    asked = []
+    monkeypatch.setattr(measure, "gh", lambda path, raw=False: asked.append((path, raw)) or github.get(path))
+    again = measure.fetched_again(recorded, say=lambda line: None)
+    assert again == [{**{key: value for key, value in pull.items() if key != "files"}, "files": pull["files"]}]
+    assert all(raw for _, raw in asked) and len(asked) == 4
+    assert measure.without_texts(again) == recorded
+
+
+def test_a_text_that_is_not_the_recorded_one_stops_the_fetching(monkeypatch):
+    _, recorded, github = recorded_and_github()
+    changed = dict(github, **{"repos/a/b/contents/m1.py?ref=s2": "v1 = repr(1)\n"})
+    monkeypatch.setattr(measure, "gh", lambda path, raw=False: changed.get(path))
+    with pytest.raises(RuntimeError, match="a/b#1 m1.py: the text after the change is not the one the record names"):
+        measure.fetched_again(recorded, say=lambda line: None)
+
+
+def test_a_file_that_is_gone_stops_the_fetching(monkeypatch):
+    _, recorded, github = recorded_and_github()
+    gone = {path: text for path, text in github.items() if path != "repos/a/b/contents/m0.py?ref=s1"}
+    monkeypatch.setattr(measure, "gh", lambda path, raw=False: gone.get(path))
+    with pytest.raises(RuntimeError, match="m0.py: the text before the change"):
+        measure.fetched_again(recorded, say=lambda line: None)
+
+
+def test_fetching_again_from_the_command_line_writes_the_pull_requests_with_their_texts(tmp_path, monkeypatch, capsys):
+    pull, recorded, github = recorded_and_github()
+    record, out = tmp_path / "record.json", tmp_path / "pulls.json"
+    record.write_text(json.dumps({"pull_requests": recorded}))
+    monkeypatch.setattr(measure, "gh", lambda path, raw=False: github.get(path))
+    monkeypatch.setattr(measure, "collect", lambda *a, **k: pytest.fail("the search must not be made"))
+    assert measure.main(["--collect", str(out), "--as-recorded-in", str(record)]) == 0
+    assert json.loads(out.read_text())[0]["files"] == pull["files"] and "1 pull requests, 2 files" in capsys.readouterr().out

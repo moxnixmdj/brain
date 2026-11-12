@@ -412,6 +412,26 @@ def collect(say: Callable[[str], None] = print) -> list[dict[str, Any]]:
     return pulls
 
 
+def fetched_again(recorded: Sequence[Mapping[str, Any]], say: Callable[[str], None] = print) -> list[dict[str, Any]]:
+    """The pull requests and files a record names, fetched again from GitHub. Every text must have
+    the hash the record gives for it; otherwise nothing is returned. With this the measure can be
+    made again on the same files by anyone, whatever GitHub's search gives by then."""
+    pulls = []
+    for item in recorded:
+        files = []
+        for entry in item["files"]:
+            quoted = urllib.parse.quote(entry["path"])
+            texts = {"before": gh(f"repos/{item['repo']}/contents/{quoted}?ref={item['before_at']}", raw=True),
+                     "after": gh(f"repos/{item['repo']}/contents/{quoted}?ref={item['after_at']}", raw=True)}
+            for which, text in texts.items():
+                if text is None or hashlib.sha256(text.encode()).hexdigest() != entry[f"{which}_sha256"]:
+                    raise RuntimeError(f"{item['name']} {entry['path']}: the text {which} the change is not the one the record names")
+            files.append({"path": entry["path"], **texts})
+        pulls.append({**{key: value for key, value in item.items() if key != "files"}, "files": files})
+        say(f"{item['name']:45s} {len(files)} files, as recorded")
+    return pulls
+
+
 def without_texts(pulls: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     """What was used, without the files' text: enough for anyone to fetch the same files again."""
     return [{**{key: value for key, value in pull.items() if key != "files"},
@@ -427,13 +447,16 @@ def code_sha256() -> dict[str, str]:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--collect", type=pathlib.Path, default=None, help="look the pull requests up and write them, with the files' text, here")
+    parser.add_argument("--as-recorded-in", type=pathlib.Path, default=None,
+                        help="with --collect: do not search; fetch again the pull requests and files this record names, each text checked against its hash")
     parser.add_argument("--pulls", type=pathlib.Path, default=None, help="the file --collect wrote")
     parser.add_argument("--out", type=pathlib.Path, default=None)
     parser.add_argument("--no-two-examples", action="store_true")
     parser.add_argument("--leave-unshown", action="store_true", help="the organ's other way of repeating: code used a way the example did not show is left as it is")
     args = parser.parse_args(argv)
     if args.collect is not None:
-        pulls = collect()
+        pulls = (collect() if args.as_recorded_in is None
+                 else fetched_again(json.loads(args.as_recorded_in.read_text(encoding="utf-8"))["pull_requests"]))
         args.collect.write_text(json.dumps(pulls), encoding="utf-8")
         print(f"{len(pulls)} pull requests, {sum(len(pull['files']) for pull in pulls)} files -> {args.collect}")
         return 0
