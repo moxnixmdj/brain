@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 360,
+  "knowledge_documents": 361,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6764,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2d7b70cbf8c8e295db6e886c6f9755189ab5e757fd5b72ed7b18f32a4dc45233"
+  "value": "eea19cf2d23e6cc1cc143220bc76c07ac8737173a35783c3f7d2baba9ff12cb4"
  },
  "engines": [
   {
@@ -54488,6 +54488,77 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 3734,
+   "headings": [
+    "Primary route evidence behind fallback refusals",
+    "A small root-binding counterfactual"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PRIMARY_ROUTE_EVIDENCE_20261112_V1.md",
+   "sha256": "aeb34cfe4929eeff8d7f8f41c7f7c48c0aa4127bd518273e4b4fff16c56f0610",
+   "summary": "Producer diagnostic, 2026-11-12, base `513d23fc`. No capability or independent verification claim.",
+   "terms": {
+    "2026-11-12": 2,
+    "arguments": 2,
+    "arm": 2,
+    "baseline": 3,
+    "binder": 2,
+    "binding": 3,
+    "both": 2,
+    "but": 2,
+    "calls": 3,
+    "capability": 2,
+    "chains": 2,
+    "change": 5,
+    "completion": 3,
+    "composer": 2,
+    "confinement": 6,
+    "containing": 3,
+    "controlled": 2,
+    "diagnostic": 2,
+    "either": 2,
+    "every": 2,
+    "evidence": 2,
+    "execution": 3,
+    "experiment": 3,
+    "explicitly": 2,
+    "fallback": 4,
+    "file": 3,
+    "files": 2,
+    "fixtures": 2,
+    "independent": 2,
+    "index": 5,
+    "intervention": 3,
+    "learning": 2,
+    "measure": 2,
+    "named": 2,
+    "next": 2,
+    "not": 9,
+    "one": 3,
+    "output": 3,
+    "outputs": 2,
+    "paths": 3,
+    "primary": 7,
+    "public": 5,
+    "raised": 3,
+    "refusal": 3,
+    "reported": 3,
+    "sentences": 3,
+    "two": 3,
+    "were": 4
+   },
+   "title": "Primary route evidence behind fallback refusals",
+   "title_terms": [
+    "behind",
+    "evidence",
+    "fallback",
+    "primary",
+    "refusals",
+    "route"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 14514,
    "headings": [
     "Project Brain — read this first",
@@ -72741,10 +72812,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1162,
+  "included_source_count": 1163,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "43c86080076ec67b17f730b0d6afbcb9d6055d3916e88b97bb10e1403572374a"
+  "source_tree_digest": "00fbe67460448e79698463322c3741ab4c84dbfa335f688357225991b718be51"
  },
  "research_index": [
   {
@@ -268474,7 +268545,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "7cca51db694efbc553e490590e65640184b51056774ec3aafe84601dd4164505",
+   "sha256": "85eb8e6e1ecf040f70924bfd22739a8c22a8c469e3453a5e5e82d8266ce921ef",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 129,
    "symbols": [
