@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 330,
+  "knowledge_documents": 331,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6739,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e393e41072ad98752786757ffb116c7a879994f30dc12ab395082423a7f84ee1"
+  "value": "e684ee06c81efeb3f250db7fe50eb26f04c24770240500fd56b566548857f76a"
  },
  "engines": [
   {
@@ -44668,6 +44668,83 @@
     "repository",
     "rules",
     "working"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9489,
+   "headings": [
+    "A capability that cannot know this machine cannot run it",
+    "1. The positive result, stated precisely",
+    "2. Where the plan breaks: 56 rows that cannot fail",
+    "The counterfactual, measured by injection",
+    "3. What this means for \"give it a try in every new environment\"",
+    "4. What I did not do, on purpose",
+    "5. What 2026 says",
+    "6. Answering the owner, plainly",
+    "7. Receipts and non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_CAPABILITY_THAT_CANNOT_KNOW_THIS_MACHINE_CANNOT_RUN_IT_20261112_V1.md",
+   "sha256": "a0ad13ece1748044ddf7c6729a9ce2a8392495213aefd8887608bd6804cc6d64",
+   "summary": "**2026-11-12.** Base `2540a6ed`. Branch `arena/89828447-brain`. Round 6 of the owner's question.",
+   "terms": {
+    "145": 3,
+    "56": 6,
+    "across": 5,
+    "all": 4,
+    "arxiv": 4,
+    "attempts": 3,
+    "audit": 4,
+    "because": 4,
+    "both": 3,
+    "cannot": 10,
+    "capability": 5,
+    "change": 3,
+    "different": 6,
+    "environment": 7,
+    "environments": 4,
+    "every": 5,
+    "executable_absent": 5,
+    "file": 8,
+    "four": 4,
+    "job": 4,
+    "loop": 4,
+    "machine": 13,
+    "measured": 5,
+    "new": 6,
+    "no": 12,
+    "not": 22,
+    "one": 8,
+    "only": 8,
+    "owner": 6,
+    "plan": 8,
+    "precondition": 6,
+    "qrencode": 5,
+    "real": 4,
+    "registry": 4,
+    "requires": 7,
+    "reuse": 6,
+    "round": 7,
+    "row": 7,
+    "rows": 12,
+    "runtime": 4,
+    "same": 8,
+    "sensor": 5,
+    "so": 6,
+    "sqlite3.runtime.available": 4,
+    "thing": 5,
+    "trial": 5,
+    "verified": 5,
+    "would": 4
+   },
+   "title": "A capability that cannot know this machine cannot run it",
+   "title_terms": [
+    "cannot",
+    "capability",
+    "know",
+    "machine",
+    "run"
    ]
   },
   {
@@ -70429,10 +70506,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1132,
+  "included_source_count": 1133,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "528d0476efb8a64877f6b5ba46d5e3be05d87d784b4e7ca68c807add653df24c"
+  "source_tree_digest": "97065e30087bb7ecfaa471372b7cd5c71127f33b83887473da2457fa4ccde346"
  },
  "research_index": [
   {
