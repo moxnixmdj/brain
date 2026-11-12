@@ -31229,11 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 328,
   "receipt_backed_capabilities": 294,
-<<<<<<< HEAD
-  "research_index_records": 6735,
-=======
-  "research_index_records": 6737,
->>>>>>> origin/main
+  "research_index_records": 6738,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31242,11 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-<<<<<<< HEAD
-  "value": "d4982fcb7354b9dfa64539bbe27c1053c432b511224c3a30bb77c49b87c3d0a9"
-=======
-  "value": "b39cefe1d45d57308d495244b7168f17901452627cf2edee95442d03af053c42"
->>>>>>> origin/main
+  "value": "b2c345d513cf396cb3c052f00795d76749e04d3b0da4f52f9a5c9d5946e104e5"
  },
  "engines": [
   {
@@ -225515,7 +225507,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "aec92bc676fc23e1732164fcc308ceec686b6f327d08276a440fd33683f64cb0",
+   "sha256": "e0dfd0db0cc7c4336e5f0b8c766933dc702d80ef331839bc5d95cbdaf3a96c3a",
    "status": "",
    "terms": {
     "20261112": 1,
