@@ -1,6 +1,6 @@
 {
  "read_this_first": [
-  "A count over recorded patches: no program, no test and no model was run. One run by the producer on one machine; nobody else has re-run it.",
+  "A count over recorded patches: none of the tasks' programs or tests was run and no model was called. One run by the producer on one machine; nobody else has re-run it.",
   "The task's own text finds the function. With the file given, ordering the file's functions by the words of the task text (BM25) puts a function that holds a test-passing patch first for 162 of 339 tasks (48%), among the first 4 for 241 (71%), among the first 10 for 293 (86%). With another task's text of the same project: 65 / 127 / 191. Counted from the top of the file: 30 / 81 / 153. A file holds a median of 39 functions.",
   "That carries to tasks it was never looked at on: 49% and 70% on the 78 tasks the earlier counts used, 48% and 71% on the 261 others.",
   "The list that writes the fix does not carry like that. With the function given, a line quoted in the issue makes a passing patch within 20 candidates for 8 of the 78 tasks the list was shaped on and for 3 of the 261 others (3 of the 185 of them that have a passing patch within one statement). The two groups differ in more than that, the 80 being the tasks with a small passing patch, so the fall cannot be put on one cause. With another task's text: 0 of 339.",
