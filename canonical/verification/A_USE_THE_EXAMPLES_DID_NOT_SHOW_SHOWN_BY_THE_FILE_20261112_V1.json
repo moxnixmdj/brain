@@ -1,0 +1,48 @@
+{
+ "schema": "A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_V1",
+ "generated_utc": "2026-11-12T22:54:30Z",
+ "authority": "NONE",
+ "what_was_run": "canonical/tools/repeated_change_one_example_measure_v1.py, one demonstration, leave-one-out over every drawn file, on the 15 pull requests and 89 files of canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json, the files fetched again from their named commits and each checked against the sha256 the record holds (15 pull requests, 89 files, all as recorded)",
+ "organ_sha256": "cd2e8814a488c9935cc342f6f128454b4863ff241f8dcde6f5498651b7f8d956",
+ "coverage_is": "the developers' own non-import changes that the organ made, over all the non-import changes they made in the drawn files",
+ "denominator": 1674,
+ "arms": {
+  "refused, nothing changed": {
+   "asked": 440,
+   "edited": 90,
+   "developers_changes_not_imports": 1674,
+   "organ_changes": 290,
+   "right_not_imports": 268,
+   "not_what_the_developers_did": 14,
+   "coverage": 0.1601,
+   "precision": 0.9241
+  },
+  "the file shows the use": {
+   "asked": 440,
+   "edited": 94,
+   "developers_changes_not_imports": 1674,
+   "organ_changes": 307,
+   "right_not_imports": 285,
+   "not_what_the_developers_did": 14,
+   "coverage": 0.1703,
+   "precision": 0.9283
+  },
+  "ceiling: every try kept": {
+   "asked": 440,
+   "edited": 147,
+   "developers_changes_not_imports": 1674,
+   "organ_changes": 415,
+   "right_not_imports": 393,
+   "not_what_the_developers_did": 14,
+   "coverage": 0.2348,
+   "precision": 0.947
+  }
+ },
+ "order": "the ceiling is the organ's own repeat_tried with every try kept; the coverage is a share of its own ceiling, not of an outside idea",
+ "what_the_change_is": "A rule is refused where the file uses code a way the examples did not show. Where the file already uses the new code that same way, at a place the change leaves alone, that use is shown -- by the file. Nothing is assumed: a name put in place of a name does not license the use on its own, because a name can be renamed because its signature changed (test_a_use_the_examples_did_not_show_is_shown_by_the_file_itself_v1).",
+ "limits": [
+  "8 kinds of change, 2 pull requests each: a claim about one kind has n=2 and is not a rate.",
+  "Python only, and only changes that repeat literally enough for one demonstration to fit them.",
+  "The witness reads one file. A use shown by another file of the same project is not read; that is the next widening and is unmeasured."
+ ]
+}

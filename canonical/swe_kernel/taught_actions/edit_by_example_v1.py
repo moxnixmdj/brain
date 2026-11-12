@@ -1209,12 +1209,69 @@ def said(use):
 SHOWN = object()
 
 
-def unshown_use(rule, text, node):
+def written_with(rule, node, bound, text):
+    """The new text for the node the rule makes at this place, without reading the file around it.
+
+    It is `written_for` with nothing to lean on, which is exactly right here: the question is what name the change
+    puts in place of the old one, and that does not depend on the rest of the file.
+    """
+    return written_for(rule, node, bound, text)[0]
+
+
+def made_use(rule, node, bound, text):
+    """How the code the rule makes here is used here, in the terms `use_of` uses: None, or a call's form.
+
+    `None` when the place is not a call at all.  Otherwise the number of plain arguments and the names of the
+    keywords are those of the call the old code stood in -- writing the new code over the old code's span cannot
+    reach the arguments or the brackets around it -- and the code that is written must itself be a call.
+    """
+    use = text.use_of(node)
+    if use is None:
+        return None
+    made = written_with(rule, node, bound, text)
+    try:
+        new = ast.parse(made, mode="eval").body
+    except (SyntaxError, ValueError):
+        return use
+    return use if isinstance(new, ast.Call) else None
+
+
+def shown_by_the_file(rule, text, use, node):
+    """Is the code this rule makes also used this way somewhere else in the same file?
+
+    A file that already calls the new code some way is its own witness that the new code is called that way: this
+    is the question the refusal below asks, asked of the file instead of of the examples.  Nothing is assumed --
+    the use has to be written in the file already, at a place the change leaves alone.
+    """
+    if use is None or rule.kind != "expression" or blanks_in(rule.template):
+        return False                      # the new code varies here, so there is no one name to look for
+    try:
+        made = ast.parse(written_with(rule, node, {}, text), mode="eval").body
+    except (SyntaxError, ValueError, KeyError, Refused):
+        return False
+    callee = ast.unparse(made.func if isinstance(made, ast.Call) else made)
+    for other in ast.walk(text.tree):
+        if not isinstance(other, ast.Call) or ast.unparse(other.func) != callee:
+            continue
+        if text.use_of(other.func) != use:
+            continue
+        if fits(rule.pattern, other.func, {}):
+            continue                      # a place the change touches itself is not a witness
+        return True
+    return False
+
+
+def unshown_use(rule, text, node, bound=None):
     """`SHOWN` when the code at `node` is used a way the examples showed; otherwise that use.
 
     A function replaced where it was called one way says nothing about calls of another form: the new function
     may not take those arguments.  So a call must have a number of plain arguments the examples showed and no
     keyword they did not show, and code that is not called must have been shown not called.
+
+    A file that already calls the new code the way this place calls the old one has answered that question for
+    itself.  That is a showing, so the use counts as shown -- the same widening a second example gives, read off
+    the file instead of off another example.  Shown with two arguments and with four still says nothing about
+    three, unless the file itself shows three.
     """
     if rule.kind != "expression":
         return SHOWN
@@ -1222,6 +1279,8 @@ def unshown_use(rule, text, node):
     if use is None:
         return SHOWN if None in rule.uses else use
     if use[0] in {count for count, _ in calls} and use[1] <= frozenset().union(*[named for _, named in calls]):
+        return SHOWN
+    if shown_by_the_file(rule, text, use, node):
         return SHOWN
     return use
 
