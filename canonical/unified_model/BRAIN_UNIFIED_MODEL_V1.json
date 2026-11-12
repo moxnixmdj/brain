@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 348,
+  "knowledge_documents": 349,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6760,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "acdc3e8c2310af9651582edc5b264cff00d17403978d8aab612936006e60165e"
+  "value": "b4f8985c79c58d8d5880417b15c8fa4b4687d3c7642cb046e244d8450fa866cf"
  },
  "engines": [
   {
@@ -51308,6 +51308,85 @@
     "being",
     "noticing",
     "told"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 18927,
+   "headings": [
+    "One demonstration, and the six things that are true",
+    "1. The three claims, separated",
+    "2. Why \"show it once and it is permanent\" cannot be true — the identification argument",
+    "3. New measurement, 2026-11-12: what one showing actually buys",
+    "What I disproved about my own last fix",
+    "4. Where the claim collapses for *computer use* — the state problem",
+    "5. Sentience",
+    "6. What is actually real, with the names it is hiding under",
+    "7. The smartest things to do, in order, with the kill list",
+    "8. What would prove the owner right — the falsifiers",
+    "9. Method note"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_DEMONSTRATION_AND_THE_SIX_THINGS_THAT_ARE_TRUE_20261112_V1.md",
+   "sha256": "4dc70995a3f577c339df2e178c65b73994e04e41f1e942ab3d26c5d8379ef8ce",
+   "summary": "**Date:** 2026-11-12  **Authority:** NONE (producer-run measurement + reading of the tree's own evidence)  **`truth.achieved`:** stays `false`",
+   "terms": {
+    "10": 7,
+    "149": 6,
+    "15": 13,
+    "1525": 6,
+    "31": 7,
+    "action": 7,
+    "already": 10,
+    "any": 10,
+    "canonical": 14,
+    "capability": 8,
+    "change": 12,
+    "check": 12,
+    "claim": 6,
+    "code": 6,
+    "demonstration": 7,
+    "environment": 8,
+    "every": 8,
+    "false": 7,
+    "file": 8,
+    "files": 6,
+    "kinds": 7,
+    "learning": 8,
+    "lesson": 13,
+    "mean": 8,
+    "measured": 14,
+    "model": 10,
+    "new": 8,
+    "no": 13,
+    "none": 10,
+    "not": 48,
+    "nothing": 9,
+    "once": 8,
+    "one": 25,
+    "only": 10,
+    "own": 8,
+    "owner": 8,
+    "place": 7,
+    "prior": 8,
+    "project": 7,
+    "real": 11,
+    "right": 7,
+    "rule": 7,
+    "runtime": 7,
+    "same": 9,
+    "single": 8,
+    "sites": 12,
+    "so": 7,
+    "vs": 7
+   },
+   "title": "One demonstration, and the six things that are true",
+   "title_terms": [
+    "demonstration",
+    "one",
+    "six",
+    "things",
+    "true"
    ]
   },
   {
@@ -71808,10 +71887,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1150,
+  "included_source_count": 1151,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8b91dda385d283700d150171c159f24a3f5e3efada0d140fe53491de1fb6a5d3"
+  "source_tree_digest": "a92bd9b56320e33dcf18350c41a751855c273d639d16c3ae07fd8a14809543e2"
  },
  "research_index": [
   {
