@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 392,
+  "knowledge_documents": 393,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6786,
+  "research_index_records": 6788,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b3396b3770aa771be5f7898abe1b17c0534b147a3c38d503fdc36d9095c6a156"
+  "value": "82bcd670a644a2df4a4b6a96445c6888f2d48a786cb6d47a27b14a2173472e83"
  },
  "engines": [
   {
@@ -59755,6 +59755,87 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 16478,
+   "headings": [
+    "THE ONLY CHECKED PREDICATES WERE COUNTED TWICE",
+    "0. Two findings, one of them about my own last report",
+    "1. The double count, measured",
+    "What I did NOT do about the other duplicates",
+    "2. The gate: why it counts declarations and not outcomes",
+    "3. The spend-back hole, and closing it",
+    "4. What was built",
+    "5. Tests and mutations",
+    "6. Honest limits",
+    "7. The owner's question, with the corrected number",
+    "8. Next, ranked",
+    "9. Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1.md",
+   "sha256": "606805bbc66be9f4e99bf259bed3146b6bcc5958c5e8747603702383c3f02963",
+   "summary": "**Date:** 2026-11-12 · **Branch:** `arena/98b2d92b-brain` · **Base:** `537368bb` **Authority: NONE.** Every number here is a sandbox measurement, not independent verification. **Cost:** $0 · **Model dependency:** zero · **truth.achieved: false**",
+   "terms": {
+    "58": 6,
+    "595": 11,
+    "about": 9,
+    "audit": 8,
+    "auditability_report_v1.py": 5,
+    "baseline": 6,
+    "because": 5,
+    "canonical": 13,
+    "checked": 5,
+    "corpus": 7,
+    "declarations": 8,
+    "every": 12,
+    "exactly": 5,
+    "exit": 6,
+    "fail": 6,
+    "fails": 5,
+    "file": 5,
+    "five": 5,
+    "floor": 25,
+    "fraction": 5,
+    "gate": 15,
+    "github.com": 7,
+    "green": 7,
+    "https": 7,
+    "issues": 6,
+    "killed": 9,
+    "measured": 7,
+    "measurement": 5,
+    "no": 14,
+    "not": 25,
+    "nothing": 8,
+    "now": 5,
+    "number": 9,
+    "one": 24,
+    "only": 11,
+    "own": 5,
+    "pass": 10,
+    "predicates": 8,
+    "python3": 8,
+    "receipt": 7,
+    "records": 5,
+    "red": 7,
+    "so": 13,
+    "tests": 7,
+    "tools": 6,
+    "tree": 8,
+    "two": 8,
+    "wrong": 6
+   },
+   "title": "THE ONLY CHECKED PREDICATES WERE COUNTED TWICE",
+   "title_terms": [
+    "checked",
+    "counted",
+    "only",
+    "predicates",
+    "twice",
+    "were"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6139,
    "headings": [
     "The Preference Is Learned. The Tests Are Not.",
@@ -75235,10 +75316,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1194,
+  "included_source_count": 1195,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9e8bda3594350c50fd5e94b852b94c8acc84a8586f9ea62ff10212c388d85684"
+  "source_tree_digest": "9127f26f05446cc51d522264ef7d6fe030b2cc51f8f20a173836167f12231854"
  },
  "research_index": [
   {
@@ -145295,6 +145376,24 @@
     "v1": 1,
     "verification": 1,
     "write": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
+   "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
+   "sha256": "75479798881ad8eefd3221b14ca60ae5ca1cd8ca8b2b607e7634ae8909e956ba",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "auditability": 1,
+    "declaration": 1,
+    "floor": 1,
+    "v1": 1
    }
   },
   {
@@ -232641,7 +232740,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7a51d914169f1c6b7287f114d544cb26fa33bdd0ab7a93f0cd14c9c4819d85e0",
+   "sha256": "1677fa2cd9ca84e002f66f5dd1b484d900b7a776e9cf5ff01a96d702441d5c93",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -233264,6 +233363,32 @@
     "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
     "v1": 2,
     "workspace": 2
+   }
+  },
+  {
+   "action_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "77cdbf969983c9b7458369a5ae932a91668c9187568543873de4fa5e853576be",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "checked": 1,
+    "counted": 1,
+    "gate_the_declaration_rather_than_the_outcome_and_ratchet_the_floor_to_the_measurement_so_an_improvement_is_red_until_it_is_written_down": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "only": 1,
+    "predicates": 1,
+    "the_only_checked_predicates_were_counted_twice_20261112_v1": 1,
+    "the_only_fraction_in_the_tree_that_flattered_it_was_computed_by_two_code_paths_over_one_corpus_so_the_published_number_was_twice_the_truth_and_nothing_in_the_tree_could_notice_because_no_gate_counted_declarations_at_all": 1,
+    "the_tree_can_state_how_much_of_its_own_evidence_has_a_verifier_and_that_number_can_only_improve_until_it_is_written_down__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "twice": 1,
+    "v1": 1,
+    "were": 1
    }
   },
   {
