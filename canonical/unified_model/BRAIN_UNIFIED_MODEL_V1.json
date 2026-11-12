@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 378,
+  "knowledge_documents": 379,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6775,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5bd279734f034c3fb4e99831e0b7230da97395fad33c128742d7369b563e1340"
+  "value": "badb3f351a500562689a79c1d7a0db04c92b242d0f8753ed11f7879132776285"
  },
  "engines": [
   {
@@ -56027,6 +56027,79 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5770,
+   "headings": [
+    "SWE_SELF_IMPROVEMENT_BRIDGE_20261112_V1.md — re-measured, 2026-11-12 (seventh asking)",
+    "1. Reproduction check (2026-11-12, this branch)",
+    "2. What this reproduction does — and does not — establish",
+    "3. The one next experiment that would make this progress rather than a demonstration",
+    "4. Standing invariants"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SWE_BRIDGE_REMEASURED_20261112_V1.md",
+   "sha256": "f3377cbb4411502851ce99a1f624cefc5057f98493d4e3cc1c12953e7752f00c",
+   "summary": "**2026-11-12.** Branch `arena/ab235d52-brain`, forked from `537368bb` (main). Authority: **NONE**. `truth.achieved` stays `false`. $0 spend. Zero model dependency.",
+   "terms": {
+    "10": 2,
+    "19": 2,
+    "2026-11-12": 5,
+    "2611.03219": 2,
+    "56": 2,
+    "6750": 2,
+    "6769": 3,
+    "absent": 2,
+    "active_skill_count": 2,
+    "addresses": 2,
+    "all": 2,
+    "any": 5,
+    "authority": 2,
+    "branch": 2,
+    "bridge": 3,
+    "broken": 2,
+    "candidate": 2,
+    "canonical": 3,
+    "capabilities": 2,
+    "check": 2,
+    "checkout": 3,
+    "claim": 3,
+    "code": 2,
+    "corpus": 2,
+    "end-to-end": 3,
+    "failing": 3,
+    "false": 5,
+    "identical": 7,
+    "loop": 4,
+    "merged": 4,
+    "no": 6,
+    "not": 8,
+    "one": 4,
+    "only": 3,
+    "owner": 3,
+    "pr": 3,
+    "price": 4,
+    "real": 5,
+    "repair": 3,
+    "reproduction": 3,
+    "rule": 3,
+    "run": 4,
+    "skill": 4,
+    "state": 5,
+    "still": 5,
+    "truth.achieved": 3,
+    "verified_episode_count": 3,
+    "yes": 8
+   },
+   "title": "SWE_SELF_IMPROVEMENT_BRIDGE_20261112_V1.md — re-measured, 2026-11-12 (seventh asking)",
+   "title_terms": [
+    "2026-11-12",
+    "asking",
+    "re-measured",
+    "seventh",
+    "swe_self_improvement_bridge_20261112_v1.md"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10015,
    "headings": [
     "Reuse-first SWE: confined real-repository exercise",
@@ -74141,10 +74214,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1180,
+  "included_source_count": 1181,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "dffc1a424e717e32276120e32d1d245e3b2ac65f422e6503d8b9475ab8e22916"
+  "source_tree_digest": "eabdb7924efa2ea16aa3142613aa6114210bbe45188e37edd3e9fae0470b2b6b"
  },
  "research_index": [
   {
