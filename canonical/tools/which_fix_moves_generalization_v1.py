@@ -460,7 +460,7 @@ def code_sha256() -> dict[str, str]:
 
 
 ARMS: dict[str, str] = {
-    "baseline": "the organ exactly as merged",
+    "baseline": "the organ with the kept-name exemption switched off, so the gain is attributable",
     "call_shape": "a rename that leaves the arguments alone (pure rename + the organ's own gate)",
     "extend_import": "extend the import the file already has with the name the lesson needs",
     "both": "extend_import first, then call_shape on whatever is still refused",
@@ -469,7 +469,14 @@ ARMS: dict[str, str] = {
 
 def _arm(name: str) -> Callable[[Mapping[str, str], Mapping[str, str]], tuple[str | None, str | None]]:
     def baseline(target, example):
-        return ask_strict(target["before"], example["before"], example["after"])
+        """The organ with the kept-name exemption switched off, so the gain is attributable."""
+        organ = organ_module()
+        kept = organ.kept_alias
+        organ.kept_alias = lambda rule: None
+        try:
+            return ask_strict(target["before"], example["before"], example["after"])
+        finally:
+            organ.kept_alias = kept
 
     def call_shape(target, example):
         return ask_past_unshown(target["before"], example["before"], example["after"])

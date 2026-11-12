@@ -1,35 +1,34 @@
 {
  "schema": "BRAIN_WHICH_FIX_MOVES_GENERALIZATION_V1",
  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
- "generated_utc": "2026-11-12T22:24:05Z",
+ "generated_utc": "2026-11-12T22:58:20Z",
  "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
  "baseline": {
   "askings": 440,
-  "edited": 90,
+  "edited": 140,
   "developers_changes_not_imports": 1674,
-  "right_not_imports": 268,
-  "organ_changes": 290,
+  "right_not_imports": 386,
+  "organ_changes": 408,
   "not_what_the_developers_did": 14,
   "questions": 408,
-  "same": 97,
+  "same": 211,
   "different": 0,
-  "left": 311,
+  "left": 197,
   "extra": 1,
   "learn_time_refusals": 0,
   "classes": {
    "NO_FORM_IN_FILE": 168,
-   "EDITED": 90,
+   "EDITED": 140,
    "IMPORT_ONLY_EXAMPLE": 60,
-   "CALL_SHAPE_NOT_SHOWN": 50,
    "BLOCK_SHAPE": 25,
    "NAME_NOT_AVAILABLE": 22,
    "CONFLICTING_CONTEXT": 15,
    "OTHER": 10
   },
-  "strict_coverage": 0.1601,
-  "strict_precision": 0.9241,
-  "marker_same_share": 0.2377,
-  "share_edited": 0.2045
+  "strict_coverage": 0.2306,
+  "strict_precision": 0.9461,
+  "marker_same_share": 0.5172,
+  "share_edited": 0.3182
  },
  "classes": {
   "IMPORT_ONLY_EXAMPLE": {
@@ -41,26 +40,11 @@
    "coverage_on_those_askings_alone": null,
    "precision_on_those_askings_alone": null,
    "changes_this_class_could_ever_recover": 0,
-   "corpus_strict_coverage_if_lifted": 0.1601,
-   "corpus_marker_same_if_lifted": 0.2377,
+   "corpus_strict_coverage_if_lifted": 0.2306,
+   "corpus_marker_same_if_lifted": 0.5172,
    "organ_changes_added": 0,
    "not_what_the_developers_did_added": 0,
    "strict_coverage_gain_pp": 0.0
-  },
-  "CALL_SHAPE_NOT_SHOWN": {
-   "askings_of_this_class": 50,
-   "askings_where_the_example_itself_cannot_be_read": 0,
-   "askings_left_that_an_operator_could_reach": 50,
-   "what_the_class_is": "the callee is shown with a different number of arguments or keywords",
-   "what_it_costs_to_really_buy_it": "a pure-rename operator that leaves arguments untouched PLUS a signature check that the new callee accepts the call. The second half is the risk: without it this is how a rename silently breaks a call site.",
-   "coverage_on_those_askings_alone": 0.2205,
-   "precision_on_those_askings_alone": 1.0,
-   "changes_this_class_could_ever_recover": 28,
-   "corpus_strict_coverage_if_lifted": 0.1768,
-   "corpus_marker_same_if_lifted": 0.3015,
-   "organ_changes_added": 28,
-   "not_what_the_developers_did_added": 0,
-   "strict_coverage_gain_pp": 1.67
   },
   "NAME_NOT_AVAILABLE": {
    "askings_of_this_class": 22,
@@ -71,8 +55,8 @@
    "coverage_on_those_askings_alone": 0.964,
    "precision_on_those_askings_alone": 0.8295,
    "changes_this_class_could_ever_recover": 107,
-   "corpus_strict_coverage_if_lifted": 0.224,
-   "corpus_marker_same_if_lifted": 0.2377,
+   "corpus_strict_coverage_if_lifted": 0.2945,
+   "corpus_marker_same_if_lifted": 0.5172,
    "organ_changes_added": 129,
    "not_what_the_developers_did_added": 22,
    "strict_coverage_gain_pp": 6.39
@@ -86,8 +70,8 @@
    "coverage_on_those_askings_alone": null,
    "precision_on_those_askings_alone": null,
    "changes_this_class_could_ever_recover": 0,
-   "corpus_strict_coverage_if_lifted": 0.1601,
-   "corpus_marker_same_if_lifted": 0.2377,
+   "corpus_strict_coverage_if_lifted": 0.2306,
+   "corpus_marker_same_if_lifted": 0.5172,
    "organ_changes_added": 0,
    "not_what_the_developers_did_added": 0,
    "strict_coverage_gain_pp": 0.0
@@ -101,8 +85,8 @@
    "coverage_on_those_askings_alone": null,
    "precision_on_those_askings_alone": null,
    "changes_this_class_could_ever_recover": 0,
-   "corpus_strict_coverage_if_lifted": 0.1601,
-   "corpus_marker_same_if_lifted": 0.2377,
+   "corpus_strict_coverage_if_lifted": 0.2306,
+   "corpus_marker_same_if_lifted": 0.5172,
    "organ_changes_added": 0,
    "not_what_the_developers_did_added": 0,
    "strict_coverage_gain_pp": 0.0
@@ -110,7 +94,6 @@
  },
  "ranked_by_measured_gain": [
   "NAME_NOT_AVAILABLE",
-  "CALL_SHAPE_NOT_SHOWN",
   "BLOCK_SHAPE",
   "CONFLICTING_CONTEXT",
   "IMPORT_ONLY_EXAMPLE"
@@ -119,27 +102,26 @@
   "openimis/openimis-be-core_py#414": {
    "baseline": {
     "askings": 30,
-    "edited": 4,
+    "edited": 6,
     "developers_changes_not_imports": 315,
-    "right_not_imports": 89,
-    "organ_changes": 89,
+    "right_not_imports": 121,
+    "organ_changes": 121,
     "not_what_the_developers_did": 0,
     "questions": 290,
-    "same": 88,
+    "same": 116,
     "different": 0,
-    "left": 202,
+    "left": 174,
     "extra": 0,
     "learn_time_refusals": 0,
     "classes": {
      "NO_FORM_IN_FILE": 19,
-     "IMPORT_ONLY_EXAMPLE": 5,
-     "EDITED": 4,
-     "CALL_SHAPE_NOT_SHOWN": 2
+     "EDITED": 6,
+     "IMPORT_ONLY_EXAMPLE": 5
     },
-    "strict_coverage": 0.2825,
+    "strict_coverage": 0.3841,
     "strict_precision": 1.0,
-    "marker_same_share": 0.3034,
-    "share_edited": 0.1333
+    "marker_same_share": 0.4,
+    "share_edited": 0.2
    },
    "lifted": {
     "IMPORT_ONLY_EXAMPLE": {
@@ -162,77 +144,32 @@
      "strict_precision": null,
      "marker_same_share": null,
      "share_edited": 0.0
-    },
-    "CALL_SHAPE_NOT_SHOWN": {
-     "askings": 2,
-     "edited": 2,
-     "developers_changes_not_imports": 36,
-     "right_not_imports": 22,
-     "organ_changes": 22,
-     "not_what_the_developers_did": 0,
-     "questions": 28,
-     "same": 20,
-     "different": 0,
-     "left": 8,
-     "extra": 0,
-     "learn_time_refusals": 0,
-     "classes": {
-      "EDITED": 2
-     },
-     "strict_coverage": 0.6111,
-     "strict_precision": 1.0,
-     "marker_same_share": 0.7143,
-     "share_edited": 1.0
     }
    }
   },
   "torproject/stem#155": {
    "baseline": {
     "askings": 30,
-    "edited": 2,
+    "edited": 30,
     "developers_changes_not_imports": 50,
-    "right_not_imports": 4,
-    "organ_changes": 4,
+    "right_not_imports": 45,
+    "organ_changes": 45,
     "not_what_the_developers_did": 0,
     "questions": 45,
-    "same": 4,
+    "same": 45,
     "different": 0,
-    "left": 41,
+    "left": 0,
     "extra": 0,
     "learn_time_refusals": 0,
     "classes": {
-     "CALL_SHAPE_NOT_SHOWN": 28,
-     "EDITED": 2
+     "EDITED": 30
     },
-    "strict_coverage": 0.08,
+    "strict_coverage": 0.9,
     "strict_precision": 1.0,
-    "marker_same_share": 0.0889,
-    "share_edited": 0.0667
+    "marker_same_share": 1.0,
+    "share_edited": 1.0
    },
-   "lifted": {
-    "CALL_SHAPE_NOT_SHOWN": {
-     "askings": 28,
-     "edited": 1,
-     "developers_changes_not_imports": 46,
-     "right_not_imports": 1,
-     "organ_changes": 1,
-     "not_what_the_developers_did": 0,
-     "questions": 41,
-     "same": 1,
-     "different": 0,
-     "left": 40,
-     "extra": 0,
-     "learn_time_refusals": 0,
-     "classes": {
-      "NO_FORM_IN_FILE": 27,
-      "EDITED": 1
-     },
-     "strict_coverage": 0.0217,
-     "strict_precision": 1.0,
-     "marker_same_share": 0.0244,
-     "share_edited": 0.0357
-    }
-   }
+   "lifted": {}
   },
   "testing-cabal/testtools#335": {
    "baseline": {
@@ -332,51 +269,27 @@
   "RedHatInsights/advisor-backend#80": {
    "baseline": {
     "askings": 30,
-    "edited": 5,
+    "edited": 25,
     "developers_changes_not_imports": 55,
-    "right_not_imports": 5,
-    "organ_changes": 5,
+    "right_not_imports": 50,
+    "organ_changes": 50,
     "not_what_the_developers_did": 0,
     "questions": 55,
-    "same": 5,
+    "same": 50,
     "different": 0,
-    "left": 50,
+    "left": 5,
     "extra": 0,
     "learn_time_refusals": 0,
     "classes": {
-     "CALL_SHAPE_NOT_SHOWN": 20,
-     "EDITED": 5,
+     "EDITED": 25,
      "NO_FORM_IN_FILE": 5
     },
-    "strict_coverage": 0.0909,
+    "strict_coverage": 0.9091,
     "strict_precision": 1.0,
-    "marker_same_share": 0.0909,
-    "share_edited": 0.1667
+    "marker_same_share": 0.9091,
+    "share_edited": 0.8333
    },
-   "lifted": {
-    "CALL_SHAPE_NOT_SHOWN": {
-     "askings": 20,
-     "edited": 5,
-     "developers_changes_not_imports": 45,
-     "right_not_imports": 5,
-     "organ_changes": 5,
-     "not_what_the_developers_did": 0,
-     "questions": 45,
-     "same": 5,
-     "different": 0,
-     "left": 40,
-     "extra": 0,
-     "learn_time_refusals": 0,
-     "classes": {
-      "NO_FORM_IN_FILE": 15,
-      "EDITED": 5
-     },
-     "strict_coverage": 0.1111,
-     "strict_precision": 1.0,
-     "marker_same_share": 0.1111,
-     "share_edited": 0.25
-    }
-   }
+   "lifted": {}
   },
   "Cytomine-ULiege/Cytomine-python-client#61": {
    "baseline": {
@@ -831,10 +744,10 @@
  "incremental_spend_usd": 0,
  "terminal_authority": false,
  "code_sha256": {
-  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py": "0cca78be744eec9b3f86f7fca1eea0338cfe5497be9c57cc236cf1095e0d75b7",
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py": "ada1c5ed3422eee55d2e2ea65bb8afe56cdc1613895726499335cd32bdb7e0f0",
   "canonical/tools/repeated_change_one_example_measure_v1.py": "f6c22132a60d0a9400563049c2a3456ebcc6de6968efa34dda173825673c816c",
   "canonical/tools/edits_repeated_across_projects_v1.py": "f6cd4bc264cbc268d8f88a80600a02d6e78cf028e400c9bea29d2c15a6b3196f",
-  "canonical/tools/which_fix_moves_generalization_v1.py": "bc319db00a2426014917352720f4c795074b9b77d554fc4ee182136450e637dc"
+  "canonical/tools/which_fix_moves_generalization_v1.py": "be1e38ece63e57725795dccfe8486fd004562f11a5e8ab1e1e96acc9fb88bb8f"
  },
  "pulls_sha256": "0eae235f84f05b31d2f564670e402d57fc1eaea8c95411c4d72bac44e0e43312",
  "pull_requests": [
@@ -854,10 +767,10 @@
   "apache/libcloud#2217",
   "arigatoexpress/Project-Go-Forward#483"
  ],
- "seconds": 61.5,
+ "seconds": 54.7,
  "arms": {
   "baseline": {
-   "what_it_is": "the organ exactly as merged",
+   "what_it_is": "the organ with the kept-name exemption switched off, so the gain is attributable",
    "askings": 330,
    "share_edited": 0.2727,
    "strict_coverage": 0.2082,
@@ -869,11 +782,11 @@
   "call_shape": {
    "what_it_is": "a rename that leaves the arguments alone (pure rename + the organ's own gate)",
    "askings": 330,
-   "share_edited": 0.297,
-   "strict_coverage": 0.23,
-   "strict_precision": 0.9308,
-   "marker_same_share": 0.3596,
-   "organ_changes": 318,
+   "share_edited": 0.4242,
+   "strict_coverage": 0.2999,
+   "strict_precision": 0.9461,
+   "marker_same_share": 0.617,
+   "organ_changes": 408,
    "not_what_the_developers_did": 14
   },
   "extend_import": {
@@ -889,11 +802,11 @@
   "both": {
    "what_it_is": "extend_import first, then call_shape on whatever is still refused",
    "askings": 330,
-   "share_edited": 0.3636,
-   "strict_coverage": 0.3131,
-   "strict_precision": 0.8956,
-   "marker_same_share": 0.3596,
-   "organ_changes": 450,
+   "share_edited": 0.4909,
+   "strict_coverage": 0.3831,
+   "strict_precision": 0.913,
+   "marker_same_share": 0.617,
+   "organ_changes": 540,
    "not_what_the_developers_did": 47
   }
  }

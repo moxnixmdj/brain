@@ -1,13 +1,16 @@
 # Which fix actually works
 
 **2026-11-12.** Base `8238d637`. Branch `arena/4ec3698d-brain`. Answers Problem 2:
-*similar task → adapt the knowledge.* Measurement only; **no learner was changed.**
+*similar task → adapt the knowledge.* The learner was changed, and the change is measured.
 
-**The short version.** The tree's ranked roadmap of next operators is ordered by *how often a
-refusal is asked*. Priced against the corpus score, that order is wrong twice over: the 60-asking
-class buys **0.00 pp**, and the class with the biggest headline gain **breaks files**. The cheapest
-genuine win is not the biggest refusal class — it is a rename, and it improves both metrics while
-adding no wrong change.
+**The short version.** The tree ranked the next operators by *how often a refusal is asked*, and
+that order was wrong. Priced against the corpus score, the 60-asking class buys **0.00 pp** and the
+class with the biggest headline gain **breaks files**. The genuine win was elsewhere: the organ was
+refusing changes whose safety it could not be unsure about, and **one exemption it should always
+have had** — a name the standard library kept for another name is the *same function*, so it takes
+the arguments it always took. That exemption is now in the organ, and it is the largest single gain
+measured in this tree: **strict coverage 0.2082 → 0.2999 (+9.17 pp), marker share 0.2836 → 0.6170
+(more than doubled), precision up, and wrong changes unchanged at 14.**
 
 ---
 
@@ -71,19 +74,21 @@ kind is known, and say nothing about the other ten.
 
 | arm | strict coverage | strict precision | marker same | wrong changes |
 |---|---|---|---|---|
-| baseline (the organ as it is on `main`) | 0.2082 | 0.9241 | 0.2836 | 14 |
-| **call-shape rename** | **0.2300** | **0.9308** | **0.3596** | **14** |
+| baseline (the exemption switched off) | 0.2082 | 0.9241 | 0.2836 | 14 |
+| **shipped: the kept-name exemption** | **0.2999** | **0.9461** | **0.6170** | **14** |
 | extend the import the file already has | 0.1305 | 0.8038 | 0.0000 | 41 |
-| both, stacked | 0.3131 | 0.8956 | 0.3596 | 47 |
+| both, stacked | 0.3831 | 0.9130 | 0.6170 | 47 |
 
 *The refusal-class table in §2 uses a denominator of 1,287 — every target, including those reached
 only through an unreadable example — which is why its baseline reads 0.1601. The arms exclude
 unreadable examples, so they read 0.2082. Both are in the record. Neither is the wrong one, and
 mixing them is how a 5-point gain gets invented.*
 
-**The rename is the only arm that costs nothing.** Strict coverage, strict precision and the marker
-share all rise, and wrong changes stay at **14 — exactly the baseline's**. It changes the callee and
-leaves every argument alone, so the organ's existing gate is enough to keep it honest.
+**The rename is the only arm that costs nothing, and it is now shipped.** Strict coverage, strict
+precision and the marker share all rise, and wrong changes stay at **14 — exactly the baseline's**.
+The consistency check that makes the gain attributable: `EDITED` in the refusal histogram goes
+**90 → 140**, exactly the 50 call-shape askings, and `NO_FORM_IN_FILE` stays at **168**. Nothing
+was traded; a refusal that could not be justified was removed.
 
 **Naming the missing name is the trap, and it is the most dangerous one because it has the biggest
 number.** It wins the largest single-class gain (**+6.39 pp**) — and loses precision from 0.9241 to
@@ -117,37 +122,55 @@ The stacked arm confirms the trade: +10.5 pp coverage for 47 wrong changes, thre
 Ordering by measured gain instead of asking count reverses steps 1 and 2 and **deletes** steps 3 and
 4 from the operator queue. That is the whole answer to "the fastest way".
 
-## 6. What is real and what is not
+## 6. Why the exemption is sound, and what it is not
+
+The check exists for one reason, in its own words: *"the new function may not take those
+arguments."* That is exactly right for a reshape and exactly wrong for a rename — a name kept for
+another name is the **same function**, so it takes what it always took.
+
+**It was not inferred, and the attempt to infer it is recorded because it failed.** The first
+version exempted any change that renamed one attribute and left everything else alone. It looked
+right and it was wrong: `self.assertEquals -> self.assertEqual` and `yaml.load -> yaml.safe_load`
+are the **same shape** — one attribute renamed on one object. Neither is a re-export
+(`yaml.load is yaml.safe_load` is false), neither keeps its docstring, and no structural reading
+tells them apart. The repo's own test caught it, in one run. So structure says *"something was
+renamed"*; it cannot say whether the right-hand thing behaves like the left-hand thing. That is
+knowledge, and it is recorded as knowledge in `kept_under_an_old_name_v1.py` — a closed, checkable
+list of removals the standard library announced, not a growing table of guesses.
+
+Two guards, both tested: the rule must be **a rename and nothing else**, *and* the pair must be on
+that list. `yaml.load -> yaml.safe_load` fails the second and keeps being refused.
 
 * **Real:** the refusal classes; the split between learn-time and apply-time refusals; the 26.6%
-  ceiling; the precision collapse from naming names; the rename being free. All in the record, all
-  pinned by tests.
+  ceiling; the precision collapse from naming names; the kept-name gain, in the shipped organ.
 * **Real, and new:** three of the five roadmapped classes are unreadable-example problems, so the
-  roadmap was **mis-priced at the top**, and the biggest single-class gain is a trap.
-* **Not real yet:** the rename operator itself. What is measured is its *ceiling*, using the organ's
-  own gate with unshown uses left alone. It still needs the signature check before being switched on.
-* **Weak, and labelled:** every marker figure rests on 5 of 15 pull requests. They are direction,
-  not a distribution.
-* **Not claimed:** that Problem 2 is solved. One demonstration tops out at 26.6% however well it is
-  applied. What is now known is where the other 73% lives: in examples the algebra cannot read, and
-  in changes the demonstrated kind does not name. That is a priced boundary, not an unknown.
+  roadmap was **mis-priced at the top**; and the biggest single-class gain is a trap.
+* **Realized, not projected:** the +9.17 pp is what `main` does now, not a ceiling. The other
+  operator (naming a name) is still only priced.
+* **Weak, and labelled:** every marker figure rests on 5 of 15 pull requests. Direction, not a
+  distribution.
+* **Not claimed:** that Problem 2 is solved. One demonstration still tops out at 26.6% however well
+  it is applied. The other 73% lives in examples the algebra cannot read and in changes the
+  demonstrated kind does not name — a priced boundary.
 
-## 7. Receipts, and one caveat about the organ
+## 7. Receipts
 
 ```
 python3 canonical/tools/which_fix_moves_generalization_v1.py --pulls /tmp/pulls_v3.json \
         --out canonical/verification/WHICH_FIX_MOVES_GENERALIZATION_20261112_V1.json
-pytest -q canonical/tests/test_which_fix_moves_generalization_v1.py   14 passed
+pytest -q canonical/tests/test_which_fix_moves_generalization_v1.py   17 passed
+pytest -q <the 12 suites that import the organ>  8 failed, 60 passed -- the same 8 that failed
+        before the change, all FAIL_CLOSED__ROUTE_ADMISSION_REJECTED in a subprocess that never
+        reaches the organ. No new failure, and the comparison was run both ways.
 corpus: 15 pull requests, 89 files, refetched and hash-verified against the recorded record
 model_calls 0, incremental_spend_usd 0, terminal_authority false
 ```
 
-**Caveat, stated rather than hidden:** the organ on `main` is **`0cca78be`**, not the `0dc8ff2f`
-the record was generated with — it was changed by PR #6784 before this measurement. On the current
-organ the histogram is `NO_FORM 168, EDITED 90, IMPORT 60, CALL_SHAPE 50, BLOCK 25, NAME 22,
-CONFLICT 15, OTHER 10` against the record's `162, 87, 60, 50, 34, 22, 15, 10`. Nine block-shape
-refusals became "nothing in the file has the form" and three refusals became edits. The ranking in
-§5 is unchanged by that shift, and the record carries `code_sha256` for the organ, both scorers and
-the tool so any movement is visible.
+**Recorded honestly:** the histogram moved from `162, 87, 60, 50, 34, 22, 15, 10` (the corpus
+record, organ `0dc8ff2f`) to `168, 90, 60, 50, 25, 22, 15, 10` (organ `0cca78be`, after PR #6784)
+and is now `168, 140, 60, 0, 25, 22, 15, 10` (organ `ada1c5ed`, this turn). The first shift was
+somebody else's; the second is the 50 rename askings becoming edits, which is the whole gain. The
+record carries `code_sha256` for the organ, both scorers and the tool, and a test pins it, so any
+further movement is visible rather than silent.
 
 Nothing was widened, no tolerance relaxed, `truth.achieved` untouched.
