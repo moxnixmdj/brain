@@ -144,7 +144,7 @@ def test_the_real_tree_reports_a_fraction_not_a_claim():
     """
     report = A.audit(A.REPO_ROOT, run=False)
     assert report["authority"] == "NONE"
-    assert len(report["layers"]) == 7
+    assert len(report["layers"]) == 8
     for layer in report["layers"]:
         assert "total" in layer and "checkable" in layer
         if layer.get("auditability") is not None:
