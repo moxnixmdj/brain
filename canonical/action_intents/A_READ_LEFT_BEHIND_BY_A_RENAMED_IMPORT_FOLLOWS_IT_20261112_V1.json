@@ -7,7 +7,7 @@
  "route_id": "A_READ_LEFT_BEHIND_BY_A_RENAMED_IMPORT_FOLLOWS_IT_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "8439f609a3bc18648c35006e221675c2d87c0a43",
+ "canonical_base_commit": "13c900accaa720b2cc3c4c203c8cbc0e257a6c78",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -109,7 +109,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "8439f609a3bc18648c35006e221675c2d87c0a43",
+  "canonical_base_commit": "13c900accaa720b2cc3c4c203c8cbc0e257a6c78",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "AN_EDIT_LEARNED_FROM_AN_EXAMPLE_THAT_RENAMED_AN_IMPORTED_NAME_NOW_CARRIES_EVERY_READ_OF_THAT_NAME_WITH_IT__INCLUDING_FORMS_NOBODY_SHOWED__OR_KEEPS_THE_OLD_REFUSAL_WHERE_THE_MAP_IS_UNSURE",
