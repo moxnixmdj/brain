@@ -141,6 +141,17 @@ def precondition_context(clauses, root, goal, extra_capability_ids=()):
         return None
 
 
+def _vocabulary_gap(clauses, memory):
+    """Advisory: proof that this plan needs a fact the sensor cannot express. Executes nothing."""
+    if not memory or not clauses or len(clauses) < 2:
+        return None
+    try:
+        from canonical.runtime import macro_v1 as MC
+        return MC.vocabulary_gap(MC.signature(clauses))
+    except Exception:
+        return None
+
+
 def _next_contrast(clauses, preconditions, memory):
     """Advisory: the state to try next so the next run teaches something. Never executes anything."""
     if not memory or not clauses or len(clauses) < 2:
@@ -257,6 +268,7 @@ def run(goal, root=None, memory=True, max_steps=8):
         "used_macro": bool(used_macro),
         "macro_withheld_out_of_scope": bool(macro_out_of_scope),
         "next_contrast": _next_contrast(clauses, preconditions, memory),
+        "vocabulary_gap": _vocabulary_gap(clauses, memory),
         "preconditions_observed": (
             None if preconditions is None else sorted(preconditions)
         ),

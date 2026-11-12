@@ -396,3 +396,82 @@ gets — it was that the agent **threw away certainty it already had** by treati
 requirement as two open questions. Every redundant literal inflates the space exponentially and
 manufactures ambiguity that no amount of experience can resolve. Removing them is free, sound, and
 strictly reduces the number of experiences needed. No capability or terminal credit claimed.
+
+## 7.6 The actual wall: a precondition the sensor cannot express
+
+§7.4–7.5 improved how experience is chosen and counted. This section measures the limit that neither
+can touch, and it is the direct answer to *"give it the smartest actions once and it will learn them
+permanently."*
+
+### The measurement
+
+Two real directories, same goal, real executor:
+
+| world | sensed facts | real outcome |
+|---|---|---|
+| with `.docx.intent.json` sidecar | `{git.repository, manifest.json, structured.json}` | **ok** |
+| without the sidecar | `{git.repository, manifest.json, structured.json}` — **identical** | **FAIL** `DOCX_INTENT_SIDECAR_MISSING` |
+
+`probe_effect("docx.intent_sidecar.available")` answers `UNDECIDABLE__NOT_ESTABLISHED`. The cause of
+the failure has **no fact in the sensor's vocabulary**. To the learner those two worlds are the same
+point; to the executor they are different worlds.
+
+**Twenty extra real runs changed nothing**: 22 evidence rows, status `INCONSISTENT` before and after.
+This is not a data shortage. Every run reports the same fact vector, so the evidence is contradictory
+forever. The missing thing is an **observable**, not an observation.
+
+Worse, the wall was invisible: `INCONSISTENT` has no survivors, so `explains_failure` answers False and
+`applicable` returned **True** — the plan was still offered in the world where it had just failed, and
+nothing anywhere said why.
+
+### Ideas killed before implementing them
+
+* Wiring `verifier_falsification_v1:1350` — it is a **self-test** of the "wrongly erased" defect, not a
+  production path. Wiring it would have bought nothing.
+* "Context-free failures corrupt the learner" — checked `note_failure`: it appends evidence **only**
+  when `context is not None`. No fabrication happens. Not a defect.
+* Reusing `vocabulary_induction_v1` — real, and the right *principle* (recover vocabulary from evidence
+  that fits; report `NO_EVIDENCE` rather than guess), but it induces **numeric function families**.
+  Wrong domain. Its discipline was followed; its code was not applicable.
+
+### What shipped
+
+1. **`applicability_v1.vocabulary_gap(evidence)`** returns the **witness**: two observations with equal
+   fact sets and opposite outcomes. That pair is a *proof* of insufficiency, not a guess. It returns
+   None for merely sparse evidence.
+2. **`macro_v1.vocabulary_gap(key)`** reads the same `_evidence_rows` as `applicability`, so they cannot
+   disagree, and **`chain_v1.run` reports `vocabulary_gap`** on the live path. Admission behaviour is
+   deliberately unchanged: a gap must never become a ban.
+3. **`precondition_discovery_v1.discover(...)`** aims a repair at the witness. It derives candidate
+   **file-name suffix** observables from the real success/failure directories and requires three
+   properties, all checked against real directories: **separation**, **generality** (shortest
+   separating suffix, so a whole filename can never be passed off as a predicate), and **rename
+   stability** on held-out worlds that are never used to choose the suffix. It registers nothing —
+   adopting an observable into the sensor is a governance act with its own evidence bar.
+
+### Measured repair, on real producer output
+
+`an_unexpressible_precondition_cannot_be_learned_by_repetition_probe_20261112.py`:
+
+* Discovery returned **`.intent.json`** — a kind, not the filename it was found on — and it survived
+  held-out worlds whose document was renamed `RENAMED_ALPHA` / `RENAMED_BETA`.
+* Re-recording the **same real outcomes** with that observable included: `most_general =
+  [docx.intent_sidecar.available]`, the failing world is now **REFUSED**, the working world still
+  **ADMITTED**.
+* Status is `AMBIGUOUS`, and that is correct: the other sensed facts were never absent in a success, so
+  requirements including them also survive. Withholding is sound as soon as G rejects a world. The
+  selector then names the next chosen query, varying `manifest.json` / `git.repository` — the three
+  mechanisms compose.
+* **All 12 probe verdict checks true.**
+
+### Guards
+
+* Fresh baseline on this base **1f/88p** → with 15 new tests **1f/103p** — **NEW FAILURES: NONE**.
+* **Four mutations, all killed**: gap never detected → 3 failures; longest suffix (filename
+  fingerprint) → 1; held-out worlds ignored → 2; a gap turned into a ban → 2.
+* Live battery unchanged **3/4**.
+
+**The honest answer.** One exposure cannot teach a precondition the agent cannot perceive. The
+fastest path is not more demonstrations — it is widening what the agent can *observe*, driven by
+witnessed contradictions and verified on renamed held-out worlds. No capability or terminal credit
+claimed; nothing was registered into the sensor.
