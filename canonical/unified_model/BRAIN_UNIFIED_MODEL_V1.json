@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 395,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6792,
+  "research_index_records": 6791,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5dc59bd98702e3936a4b673f4b9c18ebe159bee814242ea434e10ab14824f95e"
+  "value": "81cd9ceb2b402bb9020f179b25d78be0d24a3071c8e7b424c8755252d21af906"
  },
  "engines": [
   {
@@ -229958,7 +229958,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ONE_SHOWING_HELD_OUT_20261112_V1.json",
    "schema": "ACTION_INTENT_V1",
-   "sha256": "3f59a25433a11456679d7661f87f8c5663f29b9f258d829179a2c6b94ed1751a",
+   "sha256": "126471e9185239b964acd878a5d76bb923d2d422c646e7981c1b7283d6921edb",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -231229,31 +231229,6 @@
     "v1": 2,
     "values": 2,
     "verifier": 2
-   }
-  },
-  {
-   "action_id": "REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/REPLICATE_ONE_SUCCESS_ON_UNSEEN_SEEDS_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "5106b17504f1b36e7ed97d81f34b81ac61683438bb77217bfd85024452614017",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "one": 1,
-    "one_demonstration_was_never_shown_to_reproduce_on_unseen_instances": 1,
-    "replicate": 1,
-    "replicate_one_success_on_unseen_seeds_20261112_v1": 1,
-    "rerun_the_existing_learner_unchanged_on_fresh_seeds_and_compare_ordering_only": 1,
-    "seeds": 1,
-    "success": 1,
-    "the_one_success_ladder_is_known_to_reproduce_on_unseen_instances__no_rate_claim__no_family_flipped": 1,
-    "unseen": 1,
-    "v1": 1
    }
   },
   {

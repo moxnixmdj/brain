@@ -18,8 +18,8 @@
  "user_authorized_governance_change": false,
  "weakens_existing_guard": false,
  "benchmark_or_family_rank_authority": false,
- "highest_leverage_now": "THE_DECISION_TO_ACT_ON_ONE_DEMONSTRATION_HAD_NEVER_BEEN_SCORED_AND_NEVER_BEEN_TESTED_OFF_ITS_OWN_CORPUS",
- "action_summary": "Score one demonstration as a decision rather than as a population of askings, then test the resulting curve on six kinds of change the organ never saw.",
+ "highest_leverage_now": true,
+ "action_summary": "One action: price one-demonstration transfer as a decision rather than as a population of askings, establish that the underlying ladder reproduces on instances nobody had used (the MiniWoB replication record carried here as prior evidence), and then test the resulting precision curve on six kinds of change the organ never saw.",
  "selected_route": "REUSE_THE_RECORDED_INSTRUMENT_ON_A_DISJOINT_CORPUS",
  "causal_blocker": "ONE_SHOWING_TRANSFERS_ONLY_WITHIN_KINDS_OF_CHANGE_IT_ALREADY_EXPRESSES",
  "expected_parent_change": "THE_PRECISION_CORRECTION_IS_REPLICATED_ON_A_DISJOINT_CORPUS_AND_THE_TRANSFER_CLAIM_IS_FALSIFIED_ON_UNFAMILIAR_KINDS",
@@ -36,6 +36,7 @@
   "progress_evidence_paths": [
    "canonical/verification/ONE_SHOWING_HELD_OUT_20261112_V1.json",
    "canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
+   "canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
    "ONE_SHOWING_IS_WORTH_A_LOT_AND_SOMETIMES_NOTHING_20261112_V1.md"
   ],
   "route_class": "REUSE",
@@ -81,7 +82,9 @@
  "prior_work_reused": [
   "canonical/tools/demonstration_choice_measure_v1.py",
   "canonical/tools/repeated_change_one_example_measure_v1.py",
-  "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json"
+  "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+  "canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
+  "I_WAS_WRONG_ABOUT_THE_BLOCK_20261112_V1.md"
  ],
  "recursive_obs": {
   "canonical_base_commit": "92cf96e8d7425b800f2e8d7e4f4c390281ceafbf",
@@ -215,5 +218,6 @@
    "no_known_counterexample_reason": "NO_PRIOR_ART_OR_IN_TREE_RECORD_TESTS_THIS_MECHANISM_OFF_ITS_OWN_CORPUS"
   }
  },
- "next_step": "A_CHECK_PER_EDIT_IS_NOW_THE_ONLY_NAMED_LEVER__REACH_CANNOT_SEPARATE_CONTAINS_THE_FORM_FROM_NEEDED_THE_CHANGE"
+ "next_step": "A_CHECK_PER_EDIT_IS_NOW_THE_ONLY_NAMED_LEVER__REACH_CANNOT_SEPARATE_CONTAINS_THE_FORM_FROM_NEEDED_THE_CHANGE",
+ "why_highest_leverage_now": "The decision to act on one demonstration had never been scored, and the curve had never been tested off its own corpus. Every plan to 'give it the smartest actions once and it keeps them' depends on that price being low and that curve holding. It is 87.0% and it does not hold. Both facts were obtainable in under twenty minutes of measurement and neither was on the record."
 }
