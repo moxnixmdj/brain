@@ -200,18 +200,14 @@
   "tournament": {
    "counterexample_receipts": [
     {
-     "git_blob_sha": "b45968a8cfebe4036ad2cbde4d507f81b97954d8",
-     "path": "canonical/runtime/world_probe_v1.py"
-    },
-    {
-     "git_blob_sha": "3cdab587bf7157d1c54d8c2a44c32da8d6ef7c64",
-     "path": "canonical/runtime/world_binding_v1.py"
+     "git_blob_sha": "867c3a4501b113531fc09c6de3fcf5175d15132c",
+     "path": "canonical/runtime/grounded_action_v1.py"
     }
    ],
-   "decisive_question": "Is network.http.available undecidable for any reason other than the subject parse, and does a goal that states a URL bind it?",
-   "falsifier_id": "F_MEASURE_THE_PREMISE_ON_A_MACHINE_THAT_HAS_IT__AND_TRACE_WHERE_A_STATED_URL_GOES",
+   "decisive_question": "Does dropping zero-score survivors change which tasks route, and does any newly routed task actually answer its question?",
+   "falsifier_id": "F_REMOVE_THE_ZERO_SCORE_ROWS_AND_SEE_WHETHER_ANY_OUTCOME_BECOMES_CORRECT",
    "known_counterexamples_checked": true,
-   "proposal_id": "P_UNDECIDABLE_IS_THE_SAME_AS_FALSE"
+   "proposal_id": "P_A_FORGED_ROW_SCORED_ZERO_DECIDES_AND_VERIFIED_IS_NOT_ANSWERED"
   }
  },
  "weakens_existing_guard": false
