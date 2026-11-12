@@ -1181,7 +1181,72 @@ def import_insert_at(text):
     return text.starts[last.end_lineno] if last.end_lineno < len(text.starts) else len(text.raw)
 
 
+class Renamed:
+    """A leftover read of a name whose import the examples renamed: the read follows its definition."""
+
+    kind = "expression"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+def renames_to_add(text, places, fail_at):
+    """Places that rename a read left pointing at nothing, after the examples renamed its import.
+
+    The examples rename an imported name where the import line itself is rewritten in place -- same module,
+    same number of names, a bound name changed.  A read of the old name that no rule reaches would be a
+    certain NameError once that import is gone; it follows the renamed definition.  Nothing follows where
+    the map is unsure: two places that rename the name differently, a new name the file already binds, a
+    read a function rebinds locally, or a read inside code a rule already rewrites.
+    """
+    maps = {}
+    for (_, node, rule, bound) in places:
+        if isinstance(rule, Renamed) or not isinstance(node, ast.ImportFrom) or node.level:
+            continue
+        if fail_at is not None and node is fail_at[1]:
+            continue
+        try:
+            _, parsed = written_for(rule, node, bound, text)
+        except Refused:
+            continue
+        if (not isinstance(parsed, ast.ImportFrom) or (node.module, node.level) != (parsed.module, parsed.level)
+                or len(node.names) != len(parsed.names)):
+            continue
+        for a, b in zip(node.names, parsed.names):
+            was, now = (a.asname or a.name), (b.asname or b.name)
+            if was != now:
+                maps.setdefault(was, set()).add(now)
+    maps = {was: min(nows) for was, nows in maps.items() if len(nows) == 1 and min(nows) not in text.defined}
+    if maps:
+        renamed = {node for _, node, rule, _ in places if isinstance(node, ast.ImportFrom)}
+        others = ast.Module(body=[one for one in text.tree.body if one not in renamed], type_ignores=[])
+        elsewhere, anything = module_names(others)
+        maps = {} if anything else {was: now for was, now in maps.items() if was not in elsewhere}
+    found = []
+    for part in ast.walk(text.tree):
+        if not (isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load) and part.id in maps):
+            continue
+        at = text.span(part)
+        if any(not (at[1] <= start or end <= at[0]) for (start, end), _, _, _ in places):
+            continue
+        if text.local_at(part, part.id):
+            continue
+        found.append((at, part, Renamed(maps[part.id]), {}))
+    return found
+
+
 def written(text, places, what="the file", check_names=True, fail_at=None):
+    """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
+    return written_once(text, places + renames_to_add(text, places, fail_at), what, check_names, fail_at)
+
+
+def written_once(text, places, what="the file", check_names=True, fail_at=None):
     """The file's text with every place rewritten by its rule; the place `fail_at` is made to fail instead.
 
     An import line the examples added is inserted when the new code needs its name and the file does not
@@ -1215,6 +1280,8 @@ def written(text, places, what="the file", check_names=True, fail_at=None):
                 parsed = None if new_text is None else parse_like(node, rule.kind, new_text)
                 if parsed is None:
                     raise Refused("the code at line %d of %s cannot be made to fail by itself" % (node.lineno, what))
+            elif isinstance(rule, Renamed):
+                new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
             else:
                 new_text, parsed = written_for(rule, node, bound, text)
                 looser = rule.kind == "expression" and tightness(parsed) < tightness(node)
