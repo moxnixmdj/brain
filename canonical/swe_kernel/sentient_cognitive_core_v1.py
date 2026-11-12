@@ -1583,7 +1583,7 @@ class WakeSleepConsolidationEngine:
         calibrated_existing: list[dict[str, Any]] = []
         if calibrate_scopes and skill_store is not None:
             for r in skill_store.lookup_rules("python"):
-                if r.get("learned_scope"):
+                if r.get("state") not in (None, "ACTIVE") or r.get("learned_scope"):
                     continue
                 cal = rscope.calibrate_rule_scope(r, store=skill_store)
                 if cal.get("result") != "NO_PROBES_APPLICABLE":
@@ -1642,6 +1642,8 @@ class WakeSleepConsolidationEngine:
         diagnosed_scopes: list[dict[str, Any]] = []
         if skill_store is not None and hasattr(skill_store, "lookup_rules"):
             for r in skill_store.lookup_rules("python")[:4]:
+                if r.get("state") not in (None, "ACTIVE"):
+                    continue
                 raw_probes = rscope.synthesize_diagnostic_probes(r)
                 if not raw_probes:
                     continue

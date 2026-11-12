@@ -454,13 +454,6 @@ def anti_unify_code_rule(before_snippet: str, after_snippet: str, *,
                                  _anti_unify_token_rule, skill_identity) or rule
 
 
-def iter_crystallized_code_rule_candidates(source_text, rule):
-    if rule.get('pattern_format') == _PY_EDIT.FORMAT:
-        yield from _PY_EDIT.candidates(source_text, rule, _apply_token_rule)
-    elif rule.get('pattern_format') is None:
-        yield from _iter_token_rule_candidates(source_text, rule)
-
-
 #: The only states in which a stored rule may edit code. `None` is the legacy contract for
 #: rules written before the state field existed; a refuted rule always carries the string, so
 #: this cannot re-open one. Keep this the single source of truth: recall enforces the same
@@ -470,7 +463,16 @@ APPLICABLE_RULE_STATES = (None, 'ACTIVE')
 
 def rule_is_applicable(rule: Mapping[str, Any]) -> bool:
     """May this stored rule act? A refuted rule may not, in any path."""
-    return rule.get('state') in APPLICABLE_RULE_STATES
+    return isinstance(rule, Mapping) and rule.get('state') in APPLICABLE_RULE_STATES
+
+
+def iter_crystallized_code_rule_candidates(source_text, rule):
+    if not rule_is_applicable(rule):
+        return
+    if rule.get('pattern_format') == _PY_EDIT.FORMAT:
+        yield from _PY_EDIT.candidates(source_text, rule, _apply_token_rule)
+    elif rule.get('pattern_format') is None:
+        yield from _iter_token_rule_candidates(source_text, rule)
 
 
 def apply_crystallized_code_rule(source_text: str, rule: Mapping[str, Any]) -> str | None:
@@ -498,6 +500,8 @@ def narrow_rule_at_apply_time(rule: Mapping[str, Any]) -> dict[str, Any] | None:
     each side, provided every replacement hole remains bound and at least one
     hole and one concrete non-whitespace token remain in the pattern.
     """
+    if not rule_is_applicable(rule):
+        return None
     pat = [tuple(tok) for tok in (rule.get("pattern_tokens") or [])]
     rep = [tuple(tok) for tok in (rule.get("replacement_tokens") or [])]
     if not pat or not rep:
@@ -1537,6 +1541,7 @@ class VerifiedSkillStore:
                     target_language=lang,
                     verifier=_cst_bool_verifier,
                     error_class=error_class,
+                    rule_filter=rule_is_applicable,
                 )
                 if cst_hit is None and error_class is not None:
                     cst_hit = recall_across_languages_cst(
@@ -1545,6 +1550,7 @@ class VerifiedSkillStore:
                         target_language=lang,
                         verifier=_cst_bool_verifier,
                         error_class=None,
+                        rule_filter=rule_is_applicable,
                     )
                 if cst_hit is not None:
                     cand = str(cst_hit["patched_source"])

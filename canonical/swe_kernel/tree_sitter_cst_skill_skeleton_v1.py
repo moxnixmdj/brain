@@ -1301,6 +1301,8 @@ def iter_cst_skeleton_candidates(
     suspect_lines: Sequence[int] | None = None,
 ) -> Iterator[str]:
     """Yield syntactically valid `target_language` rewrites via Tree-Sitter CST skeleton unification."""
+    if not isinstance(rule, Mapping) or rule.get("state") not in (None, "ACTIVE"):
+        return
     lang = target_language.lower()
     if lang not in CODE_LANGUAGES:
         return
@@ -1593,6 +1595,8 @@ def recall_across_languages_cst(
         except TypeError:
             rules = store.lookup_rules(src_lang)
         for rule in rules:
+            if not isinstance(rule, Mapping) or rule.get("state") not in (None, "ACTIVE"):
+                continue
             if callable(rule_filter) and not rule_filter(rule):
                 continue
             sid = str(rule.get("skill_id") or "")
