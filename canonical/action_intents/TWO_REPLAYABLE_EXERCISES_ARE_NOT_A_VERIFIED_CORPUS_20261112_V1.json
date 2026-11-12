@@ -7,7 +7,7 @@
  "route_id": "TWO_REPLAYABLE_EXERCISES_ARE_NOT_A_VERIFIED_CORPUS_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "0e480fd02b842de83b732ac5fce90a954617579c",
+ "canonical_base_commit": "5e0c8d8ac87c3bd744794f7535360a8d5e3a545a",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -74,7 +74,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "0e480fd02b842de83b732ac5fce90a954617579c",
+  "canonical_base_commit": "5e0c8d8ac87c3bd744794f7535360a8d5e3a545a",
   "real_outcome": "Two local exercise records retain pre-edit bytes and can replay after deletion without claiming verification or learning.",
   "required_capability": "Capture pre-edit file bytes and reconstruct them without the original paths.",
   "obs_goal": {
