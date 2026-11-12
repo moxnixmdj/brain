@@ -195,7 +195,7 @@
   "stop_condition": "6_NEW_TESTS_PASS__21_TESTS_PASS_ACROSS_THE_THREE_COMPRESSION_ROUNDS__FULL_AFFECTED_SUITES_PASS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-12T15:38:07Z",
+   "checked_at_utc": "2026-11-12T15:40:06Z",
    "max_age_hours": 24,
    "incumbent_route": "ROUND_24_STATE__ONE_FAMILY_PERIODIC_TABLE__SECOND_FAMILY_EXPLICITLY_PINNED_AS_UNSHOWN__LIFTER blind TO_DICT_BODIES",
    "source_classes_checked": [
@@ -330,7 +330,7 @@
     }
    ],
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-12T15:38:07Z",
+    "checked_at_utc": "2026-11-12T15:40:06Z",
     "max_age_hours": 2,
     "selected_route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
     "status": "READY",
