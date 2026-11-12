@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 389,
+  "knowledge_documents": 390,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6785,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "10676df1bee40728290e7f3410ff814f9915273a02817221b95f7ea33017b793"
+  "value": "cd14f9567ecb2a7443bc6d9815e3eabee4c9be4ef2448b41be74461816e3005d"
  },
  "engines": [
   {
@@ -46093,6 +46093,81 @@
     "certified",
     "domain",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9818,
+   "headings": [
+    "Choose the demonstrations that apply",
+    "1. What \"chosen\" does, and why it is allowed",
+    "2. The mechanism, in nine lines",
+    "3. The trade-off, stated rather than hidden",
+    "4. What this does not solve",
+    "5. What is real and what is not",
+    "6. The smartest path, in order",
+    "7. The 2026 literature says the same thing",
+    "8. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "CHOOSE_THE_DEMONSTRATIONS_THAT_APPLY_20261112_V1.md",
+   "sha256": "48cefafda37004af359d694234cc10fa59ed51e360fd6135447ff2e79b5c36bb",
+   "summary": "**2026-11-12 · branch `arena/c3653209-brain` · authority NONE · measurement only**",
+   "terms": {
+    "15": 8,
+    "2-arg": 5,
+    "all": 4,
+    "all-pair": 5,
+    "arxiv": 4,
+    "average": 4,
+    "baseline": 4,
+    "call": 6,
+    "canonical": 4,
+    "change": 5,
+    "changed": 5,
+    "changes": 8,
+    "check": 4,
+    "chosen": 6,
+    "code": 6,
+    "coverage": 7,
+    "demonstration": 10,
+    "demonstrations": 6,
+    "developers": 5,
+    "edited": 4,
+    "every": 7,
+    "false": 5,
+    "files": 7,
+    "learner": 8,
+    "more": 9,
+    "no": 12,
+    "not": 26,
+    "one": 12,
+    "only": 5,
+    "oracle": 7,
+    "own": 6,
+    "pair": 18,
+    "pairs": 5,
+    "places": 9,
+    "policy": 5,
+    "precision": 8,
+    "pull": 5,
+    "record": 7,
+    "rule": 5,
+    "same": 9,
+    "second": 8,
+    "selection": 9,
+    "shape": 5,
+    "so": 5,
+    "target": 15,
+    "tests": 6,
+    "two": 11,
+    "use": 6
+   },
+   "title": "Choose the demonstrations that apply",
+   "title_terms": [
+    "apply",
+    "choose",
+    "demonstrations"
    ]
   },
   {
@@ -74990,10 +75065,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1191,
+  "included_source_count": 1192,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "133e5ad9f9d3c6d30d8e2709f4059f65c1f926cab8d69723a794fe43196e02d5"
+  "source_tree_digest": "651acaeea04e5bbae953873c294e582122a8b11cc68c31e74e2db95f74da8a40"
  },
  "research_index": [
   {
