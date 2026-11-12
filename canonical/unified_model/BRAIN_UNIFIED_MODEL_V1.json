@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 311,
+  "knowledge_documents": 312,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6706,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "51fdee6b06d67f6fb7b96daa65c29b22694dcc813b93685f6a850b595b854b8d"
+  "value": "df187bb1a3c99e5242924b3e1437d58812b48f29d1a335d0a99ac6866e811fde"
  },
  "engines": [
   {
@@ -54855,6 +54855,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7544,
+   "headings": [
+    "The gate accepts a failed repair",
+    "1. What this means for \"learn it once and keep it\"",
+    "2. Why \"give it a try in all environments\" is the wrong next move",
+    "3. The limiting factor, named",
+    "4. Ranked next moves, each falsifiable",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_GATE_ACCEPTS_A_FAILED_REPAIR_20261112_V1.md",
+   "sha256": "8d7444677585c3d3032ac5f8fe418a5ade92e8f8e4977c9446f31293acd71a88",
+   "summary": "**2026-11-12.** Base `fea6498c`. Branch `arena/1399c02c-brain`. Round 6.",
+   "terms": {
+    "10": 6,
+    "accepted": 10,
+    "adapters": 5,
+    "all": 4,
+    "answer": 5,
+    "but": 3,
+    "cannot": 3,
+    "capability": 5,
+    "cost": 4,
+    "defect": 3,
+    "demonstration": 7,
+    "each": 3,
+    "environments": 3,
+    "executed": 4,
+    "false": 5,
+    "file": 3,
+    "gate": 4,
+    "give": 3,
+    "honestly": 3,
+    "identification": 4,
+    "keep": 3,
+    "more": 3,
+    "nine": 3,
+    "no": 8,
+    "not": 11,
+    "nothing": 5,
+    "number": 3,
+    "once": 4,
+    "one": 11,
+    "only": 4,
+    "output_verified": 4,
+    "pass": 5,
+    "per": 3,
+    "predicate": 5,
+    "real": 3,
+    "receipts": 3,
+    "registry": 3,
+    "repair": 3,
+    "round": 11,
+    "same": 3,
+    "says": 7,
+    "set": 3,
+    "so": 3,
+    "test": 6,
+    "tests": 3,
+    "three": 4,
+    "true": 5,
+    "try": 3
+   },
+   "title": "The gate accepts a failed repair",
+   "title_terms": [
+    "accepts",
+    "failed",
+    "gate",
+    "repair"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6137,
    "headings": [
     "The gate asks whether a file was written",
@@ -68986,10 +69060,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1113,
+  "included_source_count": 1114,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "41844c2fba568629f7f9ea5379827b1ff7bbdc3969b76824331a3b2e23de6af1"
+  "source_tree_digest": "a792b7a698beb5793fddd646e644ca807e6f440aaa9d5dd54c23c7e0eb455b6d"
  },
  "research_index": [
   {
