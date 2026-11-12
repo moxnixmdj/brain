@@ -123,7 +123,16 @@
    "search_stop_decision": "Stopped at three candidate mechanisms because the remaining ones were measured already: breadth of environments (0/10), exposure per lesson (6/7 flat), and model-in-producer-path (forbidden)."
   },
   "obs_solution": {
-   "deletion_first_order_applied": true,
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
    "implementation_still_necessary": true,
    "losing_routes_reason": "Deleting the append removes the ability to propose a forged capability at all; lowering the margin gate converts ambiguity into confident wrong answers; a score tie-break has nothing to compare.",
    "routes_ranked": [
