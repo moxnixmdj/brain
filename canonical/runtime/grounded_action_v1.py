@@ -682,6 +682,12 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                     chosen, why = s, "REMEMBERED_RESOLUTION"
                     break
     if survivors and chosen is None:
+        # A ZERO-SCORE ROW MAY NOT GATE A MATCHED ONE.
+        # A forged capability is appended with combined_score 0.0 so it can be
+        # proposed when nothing else fits. It must not survive INTO the ambiguity
+        # gate, where its mere presence turns a decisive match into AMBIGUOUS.
+        _positive = [s for s in survivors if (s.get("score") or 0.0) > 0.0]
+        if _positive: survivors = _positive
         if len(survivors) == 1:
             chosen = survivors[0]
             why = "UNIQUE_SURVIVOR"
