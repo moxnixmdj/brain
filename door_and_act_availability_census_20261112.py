@@ -147,14 +147,14 @@ def run_census(root: pathlib.Path) -> dict:
                 goal, root=root, memory=False, bridge=False, computer_use=False
             )
             row["act"] = _act_fate(act or {}, cid)
-        except Exception as exc:  # noqa: BLE001 - a raise is a fate, not a crash
+        except (Exception, SystemExit) as exc:  # noqa: BLE001 - a raise is a fate, not a crash
             row["act"] = {"fate": "ADAPTER_RAISED", "error": repr(exc)[:300]}
             exceptions.append({"layer": "act", "capability_id": cid, "error": repr(exc)[:300]})
 
         try:
             verdict = door.solve({"task_id": f"census_{index}", "goal": goal})
             row["door"] = _door_fate(verdict or {}, cid)
-        except Exception as exc:  # noqa: BLE001
+        except (Exception, SystemExit) as exc:  # noqa: BLE001
             row["door"] = {"fate": "DOOR_RAISED", "error": repr(exc)[:300]}
             exceptions.append({"layer": "door", "capability_id": cid, "error": repr(exc)[:300]})
 
