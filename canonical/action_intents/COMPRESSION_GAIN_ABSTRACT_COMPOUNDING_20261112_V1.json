@@ -7,7 +7,7 @@
  "route_id": "COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "6bff8c709fdc1b10b659947a776de3c9da39a4c3",
+ "canonical_base_commit": "c456d85de0d8d4469748acdf6bbf85c42da967d0",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -19,14 +19,14 @@
  "weakens_existing_guard": false,
  "benchmark_or_family_rank_authority": false,
  "highest_leverage_now": true,
- "action_summary": "Implements the round-22 top-ranked move: the deepest measured defect was that nothing is ever compressed, so experience cannot compound -- the bridge into G_t admitted only single-return bodies and reported a gain nobody computed. This round adds shape-lifting compression over the library's memory of solved programs (admission = >=2 real sites, strictly positive measured description-length gain, every rewritten site reproducing its original behaviour), fixes the bridge to admit statement bodies with honestly computed gain/sites (fabricated max(1,bytes) deleted, honest zero preserved across reload), recognises the periodic-table family from structure, and licenses a two-cycle evidence policy for new family members -- with acquire-time 2p/3p verification retained. Prediction written before measurement: a never-seen period-12 must cost strictly fewer questions with the library than cold. MEASURED: cold 59 questions / 48 evidence points; armed 35 / 24; 41% cheaper; 0 held-out failures on 57 probes for both organs; build arm reproduces the historical cold costs 14/24/34 exactly.",
+ "action_summary": "Implements the round-22 top-ranked move: the deepest measured defect was that nothing is ever compressed, so experience cannot compound -- the bridge into G_t admitted only single-return bodies and reported a gain nobody computed. This round adds shape-lifting compression over the library's memory of solved programs (admission = >=2 real sites, strictly positive measured description-length gain in uncompressed canonical AST text, every rewritten site reproducing its original behaviour), fixes the bridge to admit statement bodies with honestly computed gain/sites (fabricated max(1,bytes) deleted, honest zero preserved across reload), recognises the periodic-table family from structure, and licenses a two-cycle evidence policy for new family members -- with acquire-time 2p/3p verification retained. Prediction written before measurement: a never-seen period-12 must cost strictly fewer questions with the library than cold. MEASURED: cold 59 questions / 48 evidence points; armed 35 / 24; 41% cheaper; 0 held-out failures on 57 probes for both organs; build arm reproduces the historical cold costs 14/24/34 exactly.",
  "selected_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
  "causal_blocker": "NOTHING_IS_EVER_COMPRESSED__THE_G_T_BRIDGE_REJECTED_EVERY_STATEMENT_BODY_ORGAN_AND_REPORTED_FABRICATED_GAIN__SO_EXPERIENCE_COULD_NOT_COMPOUND",
  "expected_parent_change": "LIBRARY_ACCUMULATES_ONE_COMPRESSION_POSITIVE_MULTI_SITE_ABSTRACTION_AFTER_THREE_SOLVED_STRUCTURES__NEW_FAMILY_MEMBERS_INDUCT_AT_MEASURED_LOWER_COST_WITH_VERIFICATION_RETAINED",
  "expected_parent_frontier_change": "CROSS_INSTANCE_TRANSFER_WITHIN_A_FAMILY_NOW_MEASURES_AT_41_PERCENT_COST_REDUCTION_THROUGH_A_NON_CACHE_MECHANISM__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NOTHING_IS_EVER_COMPRESSED__THE_G_T_BRIDGE_REJECTED_EVERY_STATEMENT_BODY_ORGAN_AND_REPORTED_FABRICATED_GAIN__SO_EXPERIENCE_COULD_NOT_COMPOUND",
  "falsification_condition": "ARMED_NOT_STRICTLY_CHEAPER_THAN_COLD_ON_THE_NEVER_SEEN_INSTANCE__OR_HELD_OUT_FAILURES_APPEAR__OR_THE_ABSTRACTION_ADMITS_WITHOUT_MEASURED_GAIN__OR_THE_BUILD_ARM_STOPS_REPRODUCING_14_24_34__OR_THE_LICENSED_POLICY_FIRES_ON_A_MENU_ENTRY",
- "stop_condition": "10_NEW_TESTS_PASS__174_AFFECTED_PINNED_TESTS_PASS_INCLUDING_THE_CREATURE_SUITE_AND_THE_COMPOUNDING_NEGATIVES__ZERO_SPEND__ZERO_MODEL_DEPENDENCY",
+ "stop_condition": "10_NEW_TESTS_PASS__174_AFFECTED_PINNED_TESTS_PASS__ARTIFACT_RECOMPILED_33_33_PASS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
  "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -61,9 +61,9 @@
    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
    "AGENTS.md"
   ],
-  "causal_evidence": "MEASURED_ON_6bff8c7__COLD_PERIOD12_59_QUESTIONS_48_EVIDENCE_VS_ARMED_35_24_WITH_THE_ABSTRACTION_COMPRESSED_FROM_SOLVED_PERIODS_3_5_7__BUILD_ARM_REPRODUCES_HISTORICAL_14_24_34_EXACTLY__BRIDGE_NOW_ADMITS_STATEMENT_BODIES_WITH_GAIN_67_BYTES_SITES_3_FAMILY_PERIODIC_TABLE_RECOGNISED_FROM_STRUCTURE__0_HELD_OUT_FAILURES_ON_57_PROBES_BOTH_ARMS__ZLIB_CURRENCY_REJECTED_WITH_REASON_UNCOMPRESSED_AST_TEXT_IS_THE_ADMISSION_CURRENCY"
+  "causal_evidence": "MEASURED_ON_6bff8c7_TREE_WITH_CI_BASE_94a105fe__COLD_PERIOD12_59_QUESTIONS_48_EVIDENCE_VS_ARMED_35_24_WITH_THE_ABSTRACTION_COMPRESSED_FROM_SOLVED_PERIODS_3_5_7__BUILD_ARM_REPRODUCES_HISTORICAL_14_24_34_EXACTLY__BRIDGE_NOW_ADMITS_STATEMENT_BODIES_WITH_GAIN_67_BYTES_SITES_3_FAMILY_PERIODIC_TABLE_RECOGNISED_FROM_STRUCTURE__0_HELD_OUT_FAILURES_ON_57_PROBES_BOTH_ARMS__ZLIB_CURRENCY_REJECTED_WITH_RECORDED_REASON"
  },
- "measured_effect": "COLD_59_VS_ARMED_35_QUESTIONS_ON_NEVER_SEEN_PERIOD_12__EVIDENCE_48_VS_24__41_PERCENT_CHEAPER__CONCEPTS_NOW_1_SITES_3_GAIN_67_BYTES_VS_ROUND_22_MEASURED_ZERO__GAIN_AND_SITES_COMPUTED_NEVER_FABRICATED__HONEST_ZERO_SURVIVES_RELOAD__184_TESTS_PASS_ZERO_SPEND",
+ "measured_effect": "COLD_59_VS_ARMED_35_QUESTIONS_ON_NEVER_SEEN_PERIOD_12__EVIDENCE_48_VS_24__41_PERCENT_CHEAPER__CONCEPTS_NOW_1_SITES_3_GAIN_67_BYTES_VS_ROUND_22_MEASURED_ZERO__GAIN_AND_SITES_COMPUTED_NEVER_FABRICATED__HONEST_ZERO_SURVIVES_RELOAD__184_TESTS_PASS__ZERO_SPEND",
  "load_bearing_primary": {
   "interpretation": "EFFICIENCY_GAIN_ON_AN_EXISTING_CAPABILITY__SAME_CORRECTNESS_AT_MEASURED_LOWER_COST__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
   "open_obligation_ids": [],
@@ -90,41 +90,382 @@
  "prior_work_reused": [
   "canonical/runtime/settlement_v1.py",
   "canonical/swe_kernel/concept_library_v1.py",
-  "canonical/runtime/settlement_v1.py::induce_periodic_table",
-  "canonical/swe_kernel/meta_circular_organ_graph_v1.py::_grow_operator_from_evidence",
+  "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
   "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md",
   "DOES_IT_SOLVE_EVERYTHING_20261103_V1.md"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "6bff8c709fdc1b10b659947a776de3c9da39a4c3",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "canonical_base_commit": "c456d85de0d8d4469748acdf6bbf85c42da967d0",
   "real_outcome": "ABSTRACTION_ADMITTED_BY_MEASURED_COMPRESSION__NEVER_SEEN_FAMILY_MEMBER_41_PERCENT_CHEAPER__FABRICATED_GAIN_DELETED_FROM_THE_BRIDGE_AND_FROM_THE_RELOAD_PATH",
-  "selected_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
-  "selected_surviving_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether experiencing each structure once yields permanent reusable capability that makes the NEXT never-seen structure cheaper. Round 22 measured the answer was no: nothing is ever compressed, so nothing compounds. This round makes the answer measurable again with a prediction a cache cannot satisfy.",
+   "proxy_goals_deleted": [
+    "counting stored skills as learned capability",
+    "reporting a demonstration count as a measure of learning",
+    "fabricating an MDL gain no compression ever computed",
+    "treating a cache hit on identical evidence shape as transfer"
+   ],
+   "surviving_necessity": "A mechanism must turn solved programs into admitted abstractions by MEASURED compression, and an admitted abstraction must change what a never-seen member of the same family costs. Only a strictly-cheaper never-seen instance distinguishes compounding from caching."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/settlement_v1.py (induce_periodic_table, candidate_period, acquire_period -- the real evidence machinery)",
+    "canonical/swe_kernel/concept_library_v1.py (CompoundingConceptLibrary, ConceptEntry, executable_ast_bytes, statement-function rendering)",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py (_grow_operator_from_evidence, synthesize_table_organ, register_organ, _skill_organ_to_concept_entry)",
+    "canonical/tests/test_compounding_and_goal_identity_v1.py (the pinned cross-kind negatives)"
+   ],
+   "external_existing_routes_checked": [
+    "DreamCoder EC2 wake/sleep library learning (needs a neural recognition model -- forbidden on credited paths by NO_MODEL_PRODUCER_COGNITION)",
+    "Stitch corpus-guided compression (Rust crate + PyPI bindings -- external dependency; shape lifting covers the shared structure this corpus actually contains at zero dependencies)",
+    "LILO search-compress-document (LLM-guided synthesis -- donor only, never runtime; not used here at all)",
+    "Agent Workflow Memory / Voyager skill libraries / ACE playbooks (2026 field mechanisms -- the in-tree concept library already is the skill memory; what was missing is admission by compression, which is this round)"
+   ],
+   "capability_work_deleted": [
+    "the fabricated mdl_gain_bytes=max(1, code_bytes) bridge accounting",
+    "the from_dict or-1 upgrade that re-fabricated a stored zero on reload",
+    "the single-return-only admission predicate that silently rejected every statement-body organ"
+   ],
+   "surviving_gap": "One structurally-recognised family (periodic_table). Cross-family transfer remains the round-22 measured negative and is not claimed here."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: an abstraction is only an abstraction if rewriting the corpus with it strictly reduces description length AND every rewritten site reproduces its original behaviour. Measured on this corpus, two sites do not pay for the definition (-13 bytes); compression pays from the third site. A currency in which the admitted mechanism can never measure a gain (zlib, which re-derives shared structure for free) would make admission impossible by construction.",
+   "delete_bypass_substitute_options": [
+    "DELETE the requirement that abstractions compound -- rejected, it deletes the owner's goal",
+    "BYPASS with a hand-tuned evidence threshold -- rejected, a policy edit wearing learning's clothes; the prior must come from a measured admission",
+    "REUSE the existing concept library unchanged -- attempted first; its admission predicate was the defect itself",
+    "SUBSTITUTE a model donor for abstraction mining -- forbidden by NO_MODEL_PRODUCER_COGNITION"
+   ],
+   "surviving_causal_blocker": "The synthesis grammar does not yet SEARCH WITH admitted abstractions (they license evidence policy only); and only one family is structurally recognised. Both are the named next round."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Compose compression over the library's OWN memory of solved programs and admit by measured gain -- chosen: reuses every real mechanism in the tree at zero dependencies",
+    "2. Full Stitch lambda abduction -- heavier than the shape sharing this corpus actually contains; non-dominating",
+    "3. Hand-tuned evidence threshold -- rejected: a policy edit wearing learning's clothes",
+    "4. Model donor for abstraction mining -- rejected by NO_MODEL_PRODUCER_COGNITION"
+   ],
+   "losing_routes_reason": "Stitch/external crates add supply-chain surface for structure this corpus does not need; a donor model violates the ownership law; a tuned threshold is indistinguishable from overfitting the benchmark.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's own answers through the existing acquire/verify machinery: cold vs armed on the SAME never-seen instance, both organs scored on 57 held-out inputs neither run ever asked, and the build arm calibrated against the round-22 documented numbers 14/24/34 which it reproduces exactly. The prediction was written before the measurement; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-22 claim that nothing can compound -- now conditional: it compounds within a measured family",
+    "the bridge's fabricated accounting that made G_t's content untrustworthy"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "settlement_v1's evidence machinery (unchanged defaults, one parameter plumbed)",
+    "the concept library's statement-function support (used, not modified beyond the family field and the honest reload)"
+   ],
+   "fresh_reuse_plan": "Admitted abstractions next become search primitives in the synthesizer grammar (callable_map already renders them callable); a second structurally-recognised family tests whether the mechanism generalises."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving the cost model per run -- pinned by test_the_build_arm_reproduces_the_historical_cold_costs",
+    "re-arguing whether the bridge works -- pinned by three bridge tests"
+   ],
+   "search_stop_decision": "Stop at one family and one licensed relaxation: the prediction was measured strictly true, and the next marginal question (second family, grammar integration) is a new round, not more tuning here.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+   "FULL_STITCH_LAMBDA_ABDUCTION",
+   "HAND_TUNED_EVIDENCE_THRESHOLD",
+   "MODEL_DONOR_ABSTRACTION_MINING"
+  ],
   "deleted_or_bypassed_paths": [
    "FABRICATED_MDL_GAIN_MAX_1_CODE_BYTES_IN_THE_BRIDGE",
    "OR_1_RELOAD_UPGRADE_OF_AN_HONEST_STORED_ZERO",
    "SINGLE_RETURN_ONLY_ADMISSION_IN_THE_G_T_BRIDGE"
   ],
-  "stop_condition": "10_NEW_TESTS_PASS__174_AFFECTED_PINNED_TESTS_PASS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
-  "expected_parent_level_state_change": "EXPERIENCE_COMPOUNDS_WITHIN_A_MEASURED_FAMILY__CROSS_INSTANCE_TRANSFER_IS_NO_LONGER_A_BYTE_IDENTICAL_CACHE",
-  "why_selected_route_is_fastest_sufficient": "COMPRESSION_OVER_AN_EXISTING_MEMORY_AND_ONE_EVIDENCE_REQUIREMENT_PARAMETER__NO_NEW_SUBSTRATE__REUSES_THE_REAL_WRITER_THE_REAL_LOOP_AND_THE_REAL_LIBRARY",
-  "iteration_limit": 4,
-  "routes_considered": [
-   "FULL_STITCH_LAMBDA_ABDUCTION__REJECTED_FAR_HEAVIER_THAN_THE_SHAPE_SHARING_THE_CORPUS_ACTUALLY_CONTAINS",
-   "HAND_TUNED_EVIDENCE_THRESHOLD__REJECTED_A_POLICY_EDIT_WEARING_LEARNINGS_CLOTHES_THE_PRIOR_MUST_COME_FROM_A_MEASURED_ADMISSION",
-   "MODEL_DONOR_FOR_ABSTRACTION_MINING__REJECTED_NO_MODEL_PRODUCER_COGNITION_LAW",
-   "WIRED_THE_LICENSED_STOP_INTO_THE_COLLECTION_LOOP_ONLY__REJECTED_BY_MEASUREMENT_THE_BUDGET_ESCALATION_EXITS_THE_LOOP_AT_15_POINTS_AND_THE_TOP_UP_BLOCK_SIZES_THE_REAL_BILL"
-  ],
+  "selected_surviving_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+  "why_selected_route_is_fastest_sufficient": "COMPRESSION_OVER_AN_EXISTING_MEMORY_AND_ONE_EVIDENCE_REQUIREMENT_PARAMETER__NO_NEW_SUBSTRATE__REUSES_THE_REAL_WRITER_THE_REAL_LOOP_AND_THE_REAL_LIBRARY__THE_FIELD_ANSWER_DREAMCODER_STITCH_LILO_WAS_ALREADY_CITED_BY_ROUND_22_AND_IS_COMPOSED_HERE_AT_ZERO_SPEND",
+  "expected_parent_level_state_change": "CROSS_INSTANCE_TRANSFER_WITHIN_A_FAMILY_NOW_MEASURES_AT_41_PERCENT_COST_REDUCTION_THROUGH_A_NON_CACHE_MECHANISM__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "10_NEW_TESTS_PASS__174_AFFECTED_PINNED_TESTS_PASS__ARTIFACT_RECOMPILED_33_33_PASS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
   "route_frontier": {
-   "discovery_required": false,
-   "not_applicable_reason": "THE_FIELD_ANSWER_IS_MEASURED_AND_NAMED__DREAMCODER_EC2__STITCH__LILO_LIBRARY_LEARNING__THE_ROUND_22_NOTE_ALREADY_CITED_IT_AND_THIS_ROUND_COMPOSES_IT_INTO_THE_TREE_AT_ZERO_SPEND"
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T13:42:32Z",
+   "max_age_hours": 24,
+   "incumbent_route": "ROUND_22_STATE__NOTHING_IS_EVER_COMPRESSED__G_T_EMPTY_BY_CONSTRUCTION__CROSS_KIND_BYTE_IDENTITY_PINNED_AS_A_FINDING",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "round-22 note THE_DEEPEST_STILL_OPEN_DEFECT measured concepts() EMPTY after three distinct solved structures and traced the single-return admission predicate",
+     "the induced period tables share one byte-identical body apart from the block literal, so the shared shape is the abstraction the corpus actually contains",
+     "the cost model cold = (4*period - seeds) + acquire reproduces the documented 14/24/34 exactly, which is what makes an armed-vs-cold comparison against the same ruler possible",
+     "the round-22 cross-kind negatives are pinned in test_compounding_and_goal_identity_v1 and still pass, so the new mechanism must not break them"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Ellis et al., DreamCoder, PLDI 2021: wake-sleep library learning; a learned library improves solve rates by +19.6 REGEX, +62.46 CLEVR, +29.73 LOGO over the base DSL",
+     "Bowers et al., Stitch, POPL 2023: corpus-guided top-down abstraction with 2 orders of magnitude less memory and 3-4 orders of magnitude less time than DreamCoder compression",
+     "Grand et al., LILO, ICLR 2024: search-compress-document; +42.27 REGEX, +63.43 CLEVR, +43.24 LOGO over base DSL and rejects non-compressive abstractions by construction"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "github.com/mlb2251/stitch provides a Rust crate and Python bindings for corpus compression",
+     "pypi stitch-bindings exposes the Rust backend to Python",
+     "the in-tree executable_ast_bytes and pure-AST evaluator already provide the measurement and execution substrate this round composes"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "the 2026 self-improving-agents survey (arXiv 2607.13104) frames memory-based improvement as the standard scaffolding lever and cites Agent S procedural reuse for computer control",
+     "ACE agentic context engineering (ICLR 2026, arXiv 2510.04618) reports +10.6% on agents from evolving playbooks and names brevity bias and context collapse as the failure modes incremental updates avoid",
+     "2026 field comparisons of skill libraries (Voyager lineage, Agent Workflow Memory, ReasoningBank) show gains flatten without verification and that the verifier is the highest-leverage signal, which is why this round retains acquire-time 2p/3p verification"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "library learning program synthesis DreamCoder Stitch LILO compression abstraction state of the art"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "stitch compression python bindings rust crate corpus guided abstraction"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "agent skill library memory compounding ACE playbook workflow memory 2026 implementation"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "self-improving agents survey 2026 memory scaffolding OSWorld computer use state of the art"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+   "challenger_routes": [
+    {
+     "route": "FULL_STITCH_LAMBDA_ABDUCTION_OVER_THE_CORPUS",
+     "evidence": [
+      "Stitch finds optimal lambda abstractions in seconds on a single CPU",
+      "this corpus contains exactly one shared parameterized shape (table lookup with a block parameter)"
+     ],
+     "qualification_evidence": [
+      "shape lifting over the real writer's output measures the same single abstraction with gain 67 bytes",
+      "the corpus has three members; full abduction adds dependency surface for structure that is not present"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "Equivalent for this corpus",
+      "CAPABILITY_STRENGTH": "Stronger on corpora with nested shared structure this tree does not have yet",
+      "WALL_CLOCK": "Comparable at this corpus size",
+      "INCREMENTAL_COST": "External Rust/PyPI dependency versus zero",
+      "RELIABILITY": "New supply-chain surface",
+      "VERIFIABILITY": "Same measurement discipline available"
+     }
+    },
+    {
+     "route": "HAND_TUNED_EVIDENCE_THRESHOLD_CHANGE",
+     "evidence": [
+      "lowering the table factor from 4 to 2 alone would also make period-12 cheaper"
+     ],
+     "qualification_evidence": [
+      "the licensed policy is gated on a measured admission; a bare threshold has no measured prior and cannot distinguish learning from a moved knob",
+      "round-22's learning-to-learn verdict exists precisely because tuning features after seeing results is how a false positive is manufactured"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "None beyond the moved number",
+      "WALL_CLOCK": "Cheapest because it does nothing",
+      "INCREMENTAL_COST": "0 USD but manufactures an unfalsifiable claim",
+      "RELIABILITY": "Degrades: no prior, no gate, tuning after seeing results",
+      "VERIFIABILITY": "None: nothing pins why the threshold moved"
+     }
+    },
+    {
+     "route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+     "evidence": [
+      "armed period-12 measures 35 questions vs cold 59 with 0 held-out failures on 57 probes",
+      "the build arm reproduces the documented cold costs 14/24/34 exactly",
+      "the abstraction is refused unless compression is measured and behaviour is preserved"
+     ],
+     "qualification_evidence": [
+      "10 new tests including the pre-registered prediction and the historical calibration",
+      "174 affected pinned tests pass, including the cross-kind negatives this round must not break"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Organ verified on 57 held-out inputs; refusals fail closed with named reasons",
+      "CAPABILITY_STRENGTH": "First measured compounding mechanism in the tree",
+      "WALL_CLOCK": "Milliseconds of AST work per admission",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Fail-closed: no measured gain, no admission, no license",
+      "VERIFIABILITY": "Prediction written before measurement; calibration against documented numbers; pinned by tests"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T13:42:32Z",
+    "max_age_hours": 2,
+    "selected_route": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_LICENSE_THE_EVIDENCE_POLICY",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected pinned suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "compresses the real writer's output and refuses an incompressible rewrite, measured in this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "growth loop with the licensed policy produces the armed measurement at the current base"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "canonical.runtime.settlement_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "induce_periodic_table with the plumbed factor defaults to the cold rule and fits the licensed two-cycle evidence"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
   }
  },
  "v22_prewrite_admission": {
-  "admitted": true,
-  "reason": "THE_PRE_REGISTERED_PREDICTION_A_CACHE_CANNOT_SATISFY_WAS_MEASURED_STRICTLY_TRUE__THE_BUILD_ARM_CALIBRATES_AGAINST_THE_HISTORICAL_DOCUMENTED_NUMBERS__THE_NEGATIVE_MECHANISMS_OF_PRIOR_ROUNDS_STILL_REACH_THEIR_VERDICTS"
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_AN_EFFICIENCY_GAIN_ON_AN_EXISTING_MEASURED_CAPABILITY_WITH_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT__THE_COMPOUNDING_CLAIM_IS_BOUND_TO_A_PRE_REGISTERED_PREDICTION_A_CACHE_CANNOT_SATISFY_AND_TO_HELD_OUT_VERIFICATION_BY_THE_WORLDS_OWN_ANSWERS",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "COMPRESSION_GAIN_ADMITTED_ABSTRACTIONS_COMPOUND_EXPERIENCE",
+   "falsifier_id": "F_ARMED_MUST_BE_STRICTLY_CHEAPER_THAN_COLD_ON_A_NEVER_SEEN_MEMBER_OF_THE_FAMILY__A_CACHE_CANNOT_SATISFY_IT__CROSS_CHECKED_AGAINST_THE_PINNED_CROSS_KIND_NEGATIVES",
+   "decisive_question": "Does an abstraction admitted by measured compression make a never-seen member of the same family strictly cheaper to induce than cold, with verification retained and held-out correctness unchanged?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_compounding_and_goal_identity_v1.py",
+     "git_blob_sha": "548d133b719f535d3c9df985b38923f61bf35494"
+    },
+    {
+     "path": "canonical/swe_kernel/compression_gain_v1.py",
+     "git_blob_sha": "6f8c7bf9eba997ccb1603a09a3d8af57df096d2d"
+    },
+    {
+     "path": "canonical/tests/test_compression_gain_abstraction_v1.py",
+     "git_blob_sha": "c904297e47930904ae445aec0d100391b0c838d1"
+    }
+   ]
+  }
  },
  "next_step": "A_SECOND_STRUCTURALLY_RECOGNISED_FAMILY_TO_TEST_WHETHER_THE_MECHANISM_GENERALISES_OR_THE_ROUND_WAS_A_ONE_FAMILY_TRICK__THEN_WIRE_ADMITTED_ABSTRACTIONS_INTO_THE_SYNTHESIZER_GRAMMAR_AS_SEARCH_PRIMITIVES"
 }
