@@ -122,14 +122,14 @@
    ]
   },
   "m13": {
-   "accesses": 535,
+   "accesses": 536,
    "blamed": 132,
    "content": "/tmp/brain-cli-reg-ln9m6bkm/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794495067.9311109,
    "credited": 118,
    "id": "m13",
    "kind": "acquired_capability",
-   "last_accessed": 1794496520.4211054,
+   "last_accessed": 1794497031.9698226,
    "tags": [
     "/tmp/brain-cli-reg-ln9m6bkm/regme",
     "cli"
@@ -183,14 +183,14 @@
    ]
   },
   "m15": {
-   "accesses": 535,
+   "accesses": 536,
    "blamed": 132,
    "content": "/tmp/brain-cli-reg-2ut7dudp/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794495068.1093547,
    "credited": 118,
    "id": "m15",
    "kind": "acquired_capability",
-   "last_accessed": 1794496520.4205363,
+   "last_accessed": 1794497031.9698226,
    "tags": [
     "/tmp/brain-cli-reg-2ut7dudp/regme",
     "cli"
@@ -213,14 +213,14 @@
    ]
   },
   "m16": {
-   "accesses": 0,
+   "accesses": 1,
    "blamed": 0,
    "content": "/tmp/brain-cli-reg-camekbgi/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794496747.6712165,
    "credited": 0,
    "id": "m16",
    "kind": "acquired_capability",
-   "last_accessed": 1794496747.6712165,
+   "last_accessed": 1794497031.9698226,
    "tags": [
     "/tmp/brain-cli-reg-camekbgi/regme",
     "cli"
@@ -243,14 +243,14 @@
    ]
   },
   "m17": {
-   "accesses": 0,
+   "accesses": 1,
    "blamed": 0,
    "content": "/tmp/brain-cli-reg-chu79irf/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794496747.7485561,
    "credited": 0,
    "id": "m17",
    "kind": "acquired_capability",
-   "last_accessed": 1794496747.7485561,
+   "last_accessed": 1794497031.9698226,
    "tags": [
     "/tmp/brain-cli-reg-chu79irf/regme",
     "cli"
@@ -273,14 +273,14 @@
    ]
   },
   "m18": {
-   "accesses": 0,
+   "accesses": 1,
    "blamed": 0,
    "content": "/tmp/brain-cli-reg-e3gvwb04/regme regme -o ${input.output_path} -d ${input.text}",
    "created": 1794496747.8607419,
    "credited": 0,
    "id": "m18",
    "kind": "acquired_capability",
-   "last_accessed": 1794496747.8607419,
+   "last_accessed": 1794497031.9698226,
    "tags": [
     "/tmp/brain-cli-reg-e3gvwb04/regme",
     "cli"

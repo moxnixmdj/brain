@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 323,
+  "knowledge_documents": 324,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6732,
+  "research_index_records": 6733,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,11 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-<<<<<<< HEAD
-  "value": "4dbedf394dc6816d503d6859a774325f968c00cf3fd02cbbe8b7e47f4716a630"
-=======
-  "value": "6d92cf4e3484f1f99a0b0f28b0c39180c8acd347e743cca6518854ce525fd053"
->>>>>>> origin/main
+  "value": "4a2a76df9330de3c5e7da846c0932de4f9b6201248b30ce53e5a5b312a23f721"
  },
  "engines": [
   {
@@ -69981,14 +69977,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1125,
+  "included_source_count": 1126,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-<<<<<<< HEAD
-  "source_tree_digest": "b9a46e96dc6fc34a5a3a803147b00e0ab6edaa00940ba948210aa732ca812f80"
-=======
-  "source_tree_digest": "3948bf7dec8593ba5fc404082794035f67856e9c9e81a3cb81e10b3f4c73bdd8"
->>>>>>> origin/main
+  "source_tree_digest": "1e3d9e36a0710a0cc640ba395afbb4998a9e557e92094e3923309751b2d58559"
  },
  "research_index": [
   {

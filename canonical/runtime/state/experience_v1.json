@@ -141,8 +141,10 @@
   },
   "auto.pypi.msgpack|bound_pypi_install_failed": {
    "first_seen": 1794494700.5311034,
-   "last_seen": 1794496383.2793586,
+   "last_seen": 1794496991.344986,
    "observations": [
+    -1,
+    -1,
     -1,
     -1,
     -1,
