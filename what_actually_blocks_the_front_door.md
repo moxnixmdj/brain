@@ -10,6 +10,15 @@ the smartest approach?* — and asked the question none of rounds 3–7 had aske
 
 The answer is **zero**. That is this round's result, and it refutes three rounds of my own work.
 
+> **CORRECTED IN ROUND 9.** The tables below were measured with `ROOT` pointing at `/home`
+> instead of the repository, so every file-shaped premise resolved against a directory that is not
+> the tree. With the root fixed: **64 selected, 63 not bindable, 2 blocked-by-unknown, 6
+> blocked-by-false**; and the counterfactual reads **2 unknown → 2 selected → 0 work**. The
+> conclusion is unchanged and in fact strengthened — but two earlier claims in this document are
+> now dead (see "Retracted" at the end), and round 9 showed that the census measures *my sentences*
+> rather than machinery defects. The original figures are left in place so the correction is
+> auditable rather than invisible.
+
 Authority **NONE**. One machine, no independent verifier, $0, zero model dependency.
 `truth.achieved` stays `false`; no capability registered; no family flipped.
 
@@ -23,11 +32,11 @@ bucketed by where it died:
 
 | Bucket | Rows |
 |---|---|
-| **1 SELECTED** (picked and run) | **63** |
+| **1 SELECTED** (picked and run) | **63** → corrected **64** |
 | 2 not a candidate for its own keywords | 14 |
-| **3 NOT_BINDABLE** (picked, goal cannot supply its arguments) | **61** |
-| **4 BLOCKED_BY_UNKNOWN** (a precondition nobody can decide) | **9** |
-| 5 BLOCKED_BY_FALSE (the world says no — correct) | 2 |
+| **3 NOT_BINDABLE** (picked, goal cannot supply its arguments) | **61** → corrected **63** |
+| **4 BLOCKED_BY_UNKNOWN** (a precondition nobody can decide) | **9** → corrected **2** |
+| 5 BLOCKED_BY_FALSE (the world says no — correct) | 2 → corrected **6** |
 | 8 no keywords declared | 4 |
 | 9 adapter raised | 2 |
 | **total** | **155** |
@@ -41,9 +50,9 @@ So: assume every undecidable precondition **true**, re-run the same sentence, an
 
 | | |
 |---|---|
-| blocked by a premise nobody can decide | **9** |
-| of those, become SELECTED once assumed | **3** |
-| of those, then run without an error | **0** |
+| blocked by a premise nobody can decide | **9** → corrected **2** |
+| of those, become SELECTED once assumed | **3** → corrected **2** |
+| of those, then run without an error | **0** → corrected **0** |
 
 Of the nine, six do not even become selected — they move to `NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES`,
 i.e. the premise was never their binding constraint. The three that do become selected
@@ -141,3 +150,22 @@ argument; the census says where a sentence dies, not who is at fault. Not claime
 counterfactual is exhaustive for the other buckets. It was run only for the unknown-premise bucket,
 because that is the one three rounds pointed at. Extending it to all 61 binding rows is the next
 measurement, and it is the one that should have come first.
+
+---
+
+## Retracted in round 9
+
+Two claims in this document do not survive:
+
+1. **"Binding is where the plan loses; arity/selector defaults are next."** Round 9 showed the
+   census feeds each capability its own keywords, and five keywords are not a request: `text.file.write`
+   routes to `image.extract.ocr.tesseract`, and `json.query.jq` — counted here as `NOT_BINDABLE` — is
+   answered `VERIFIED_ACTION` by a real sentence. **The 61 (now 63) is an upper bound on machinery
+   defects, not a count of them**, and it cannot rank work on its own.
+2. **"Closing all nine blind premises buys nothing."** Still true in conclusion, but the figures were
+   wrong: with the repository root, only **2** premises are undecidable, both become selected when
+   assumed, and **both then fail** — the same conclusion from different numbers.
+
+What survives: the round-8 law (*a census finds symptoms; a counterfactual finds causes*), and the
+finding that a counterfactual has never once confirmed a census in this exercise. Round 9 adds a
+third null: teaching the presence probe its own blind spot moved a blocker without removing it.
