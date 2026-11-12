@@ -8,4 +8,13 @@ Ten primary calls reported `STEP_RAISED_OUTCOME_UNKNOWN`. Nine had composer chai
 
 The small change in this PR preserves the full primary verdict under `primary_result` when either acting or workflow fallback returns the confinement refusal. The existing outer status and safety behavior remain unchanged, and `served_after` remains for compatibility. The result may contain paths, arguments and other primary-route diagnostics just as the primary response could; callers must handle this evidence accordingly. This is an observability fix, not additional execution, verified task completion, learning, or proof of consciousness.
 
+## A small root-binding counterfactual
+
+On 2026-11-12, two corpus sentences were each run in separate fresh temporary workspaces containing one Python file. Both arms explicitly set `workspace_root`; the intervention arm temporarily substituted `source_root='.'` in the composer binder for that call only. This is an experiment, not a shipped binding policy. Neither arm established independent correctness of outputs.
+
+* Python symbol index: baseline raised `PYTHON_INDEX_ROOT_MISSING`; intervention produced an index containing one file and one symbol, but the primary result was `FAIL_CLOSED__COMPOSED_CHAIN_NOT_VERIFIED`. The public fallback remained a confinement refusal. Producing an index is not verified completion.
+* Incremental tree-sitter index: baseline raised `SOURCE_ROOT_MISSING`; intervention's first parse produced output but reported `tree_sitter_available=false`, and the next step raised `TREE_SITTER_SUBSTRATE_IDENTITY_UNAVAILABLE`. The public fallback remained a confinement refusal.
+
+Thus fixing that binding alone did not deliver an accepted solution in either case. Two tiny fixtures and two sentences are insufficient to generalize, and the experiment does not test adverse paths or every repair chain. Do not infer a capability gain or that every machine lacks the tree-sitter substrate.
+
 Next experiment: in isolated workspaces with explicitly supplied roots and outputs, compare baseline and a narrowly scoped binder change on both named and unseen goals. Measure actual postcondition verification, unintended effects, wrong-scope refusals and changes in held-out task completion. Reject the change if it merely moves errors downstream or widens scope. Keep unconfined execution blocked.
