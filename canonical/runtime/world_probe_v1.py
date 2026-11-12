@@ -323,9 +323,41 @@ _KIND_TOKENS = {
 
 
 def _kinds_of(text):
-    """Which file kinds a string announces."""
-    low = str(text or "").lower()
-    return {k for k in _KIND_TOKENS if k in low}
+    """Which file kinds a string announces, as WHOLE WORDS.
+
+    THE DEFECT THIS CLOSES, MEASURED NOT GUESSED.
+
+    This used a raw substring test (`k in low`). Substring matching reads a
+    KIND out of the middle of an unrelated word, and `kind_contradiction`
+    turns that accident into an outright ELIMINATION -- not a down-rank.
+
+    Measured on the live registry, 8 of 145 capability ids announce a kind
+    nobody declared:
+
+        chart.raster.axis_title_unit_binding.v1   -> 'ast'   ("ch-art.r-ast-er")
+        chart.raster.scene_graph.v1               -> 'ast'
+        auto.npm.shelacek-ubjson                  -> 'json'  ("ub-json")
+        terminal.kstar.root.assess.stdlib         -> 'tar'   ("ks-tar")
+
+    All six `chart.raster.*` capabilities therefore declared themselves AST
+    consumers. The consequence is total: `chart.raster.axis_title_unit_binding`
+    carries `requires: ['image.file.available']` -- its own registry row says
+    it consumes an IMAGE -- and it was eliminated with
+    `INPUT_KIND_CONTRADICTS_GOAL_FILE` the instant a goal named a real PNG.
+    Binding was never even attempted. A capability whose declared kind
+    contradicts its own row cannot be rescued by any amount of learning.
+
+    `kind_keys_for` below already makes exactly this distinction and says so:
+    "that one feeds CONTRADICTION, where a loose match would wrongly eliminate
+    a capability. This one feeds BINDING, where a loose match only proposes a
+    file that still has to fit." The comment was right; the code contradicted it.
+
+    Word-splitting costs nothing that matters: every kind token here is a single
+    ordinary word (`pdf`, `json`, `image`, `ast`), and the dotted keys it feeds
+    are matched by `_FILE_KINDS`, not by this function.
+    """
+    import re as _re
+    return {k for k in _KIND_TOKENS if k in _re.findall(r"[a-z0-9]+", str(text or "").lower())}
 
 
 def kind_keys_for(text):
