@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 313,
+  "knowledge_documents": 314,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6707,
+  "research_index_records": 6709,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9b85656f0cc2cdc4127bb82ea8c2b941a0d27ea0660c4e276088c527447519c1"
+  "value": "c726355fe068d96ba51d9c16aed751b70b3145858a608c8c5ebd12fd59a7f8de"
  },
  "engines": [
   {
@@ -45276,6 +45276,82 @@
     "repository",
     "right",
     "selection"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8328,
+   "headings": [
+    "COMPRESSION MAKES EXPERIENCE COMPOUND — measured",
+    "1. The prediction, written before the measurement",
+    "2. The measurement",
+    "3. What was built",
+    "4. Where the mechanism actually bites (the defect the first draft missed)",
+    "5. What this changes about the honest answers",
+    "6. Explicitly not claimed / honest limits",
+    "7. The next round this points at"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1.md",
+   "sha256": "ee2ecd06be3db17ffbe43ee6a2c52c4a899faf6ab3d735e1fe4d2d8a0511fbf6",
+   "summary": "**2026-11-12.** Round 23. Base `6bff8c7` (main). Authority `NONE`. `truth.achieved` stays `false`. $0 incremental spend. Zero model dependency in every result-bearing path (pure stdlib AST work).",
+   "terms": {
+    "22": 4,
+    "24": 3,
+    "57": 3,
+    "59": 4,
+    "abstraction": 10,
+    "abstractions": 5,
+    "admit": 3,
+    "admitted": 4,
+    "after": 5,
+    "cannot": 5,
+    "cold": 7,
+    "compression": 4,
+    "corpus": 8,
+    "cycles": 4,
+    "evidence": 7,
+    "family": 9,
+    "first": 4,
+    "gain": 7,
+    "held-out": 5,
+    "library": 5,
+    "licensed": 5,
+    "loop": 5,
+    "measured": 11,
+    "measurement": 4,
+    "mechanism": 5,
+    "never": 5,
+    "not": 13,
+    "nothing": 4,
+    "now": 7,
+    "one": 9,
+    "only": 5,
+    "period-12": 4,
+    "pinned": 4,
+    "policy": 5,
+    "prior": 4,
+    "programs": 4,
+    "questions": 8,
+    "recognised": 4,
+    "round": 9,
+    "same": 7,
+    "shape": 5,
+    "sites": 5,
+    "solved": 4,
+    "stored": 4,
+    "strictly": 4,
+    "structure": 6,
+    "two": 4,
+    "verified": 5
+   },
+   "title": "COMPRESSION MAKES EXPERIENCE COMPOUND — measured",
+   "title_terms": [
+    "compound",
+    "compression",
+    "experience",
+    "makes",
+    "measured"
    ]
   },
   {
@@ -69138,10 +69214,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1115,
+  "included_source_count": 1116,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b682a2f9d11a26a135ceaf4ff19ede268dbe239a6afe9f023e226da1493784e8"
+  "source_tree_digest": "c31667698cfad27b5061b9f0c642192de9c0477aaa50b2c208837b3a3a7bf768"
  },
  "research_index": [
   {
@@ -218686,6 +218762,30 @@
    }
   },
   {
+   "action_id": "COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/COMPRESSION_GAIN_ABSTRACT_COMPOUNDING_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "04c8e70c644bcb719a2e1a6bcf59ee9a286146adc78dcb653ff29725fa1b8893",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "abstract": 1,
+    "compounding": 1,
+    "compression": 1,
+    "compression_gain_abstract_compounding_20261112_v1": 1,
+    "compression_gain_admitted_abstractions_license_the_evidence_policy": 1,
+    "cross_instance_transfer_within_a_family_now_measures_at_41_percent_cost_reduction_through_a_non_cache_mechanism__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "gain": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "nothing_is_ever_compressed__the_g_t_bridge_rejected_every_statement_body_organ_and_reported_fabricated_gain__so_experience_could_not_compound": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "CONTINUATION_OUTRANKS_VALUE_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -223197,6 +223297,31 @@
     "v1": 2,
     "verb": 2,
     "were": 2
+   }
+  },
+  {
+   "action_id": "REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "25a95036a5d75d59542c53da8a80ba15c9c0d6a7b86cc47669246cab093453e5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "acceptance": 1,
+    "check": 1,
+    "eight_repair_capabilities_accept_a_failed_repair_because_the_registry_checks_output_file_written_not_the_adapters_declared_boolean_outcome": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "one_measured_false-acceptance_path_removed__no_benchmark_row_moved__no_capability_or_terminal_credit": 1,
+    "outcome": 1,
+    "repair": 1,
+    "repair_acceptance_must_check_outcome_20261112_v1": 1,
+    "reuse_the_adapters_measured_boolean_outcome_and_existing_runtime_expect_checker": 1,
+    "v1": 1
    }
   },
   {
@@ -291238,7 +291363,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/settlement_v1.py",
-   "sha256": "fbb377610046a32865e74ff60f054da7441530a1e032a733deac3ff4929e323c",
+   "sha256": "4a16ede4d0088a9fd1921166d56ae1fa6c268425afdc870331ccd8ef70b84087",
    "summary": "Settlement V1: *settled* is a computed quantity, never a reached state.",
    "symbol_count": 13,
    "symbols": [

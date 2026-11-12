@@ -1734,14 +1734,17 @@ def synthesize_table_organ(
     observations: Sequence[tuple[tuple[Any, ...], Any]],
     *,
     task_signature: str,
+    min_compression: float = 4.0,
 ) -> tuple["ExecutableOrgan", dict[str, Any]] | None:
     """Emit and verify an organ for an induced period table.
 
+    `min_compression` passes through to `induce_periodic_table` and defaults to the cold 4x rule;
+    only a library-licensed prior may lower it (see `compression_gain_v1.licensed_table_policy`).
     Verification is on the evidence only; the caller decides what to do about held-out behaviour. If
     the emitted body disagrees with any observation, nothing is admitted -- an induction that cannot
     reproduce its own evidence is not an induction.
     """
-    found = settlement.induce_periodic_table(observations)
+    found = settlement.induce_periodic_table(observations, min_compression=min_compression)
     if found is None:
         return None
     body = _table_body(found["block"])
@@ -3937,11 +3940,74 @@ def _observational_skill_source(
     return f"{helpers}def run({', '.join(names)}):\n{indented}\n"
 
 
-def _skill_organ_to_concept_entry(organ: ExecutableOrgan) -> Any | None:
-    """Bridge a simple SKILL organ into a ConceptEntry for `G_t`."""
+def _skill_organ_to_concept_entry(
+    organ: ExecutableOrgan, *, corpus_sources: Sequence[str] | None = None
+) -> Any | None:
+    """Bridge a SKILL organ into a ConceptEntry for `G_t` -- honestly accounted.
+
+    Round 22 measured this bridge's two defects: it admitted only single-`return` bodies (so the
+    induced period tables -- `Assign, Assign, Return` -- were all silently rejected and `G_t`
+    stayed empty), and it reported a gain nobody computed (`mdl_gain_bytes=max(1, code_bytes)`,
+    `corpus_sites=1`). A library fed fabricated numbers cannot compound, because nothing in it is
+    measured. The fix, in `compression_gain_v1`:
+
+      * multi-statement bodies are admitted, as statement-function entries;
+      * `mdl_gain_bytes` and `corpus_sites` are COMPUTED by compressing this organ against the
+        current SKILL corpus;
+      * when the corpus genuinely compresses (>= 2 sites, strictly > 0 bytes, every rewritten site
+        reproducing its original behaviour), the admitted entry IS the abstraction -- the shared
+        parameterized shape -- carrying its measured gain, site count and structural family;
+      * a singleton is admitted as what it is -- a stored primitive -- with gain 0 and sites 1.
+        Zero is honest here; the defect was not that a primitive is stored, it is that storage was
+        bookkept as compression.
+
+    Fail-closed: any unexpected shape returns None and the organ simply stays un-bridged.
+    """
     try:
         from canonical.swe_kernel.concept_library_v1 import ConceptEntry
+        from canonical.swe_kernel import compression_gain_v1 as cg
     except Exception:
+        return None
+    corpus = list(corpus_sources or [])
+    if organ.source_code not in corpus:
+        corpus.append(organ.source_code)
+    abstractions: list[dict[str, Any]] = []
+    try:
+        res = cg.compress_corpus(corpus)
+        abstractions = list(res.get("abstractions") or [])
+    except Exception:
+        abstractions = []
+    own = next((a for a in abstractions if organ.source_code in a.get("_member_sources", ())), None)
+    if own is None:
+        # fall back to matching this organ's lifted shape against the admissible abstractions
+        try:
+            lifted = cg.lift_shape(organ.source_code, organ.entrypoint)
+        except Exception:
+            lifted = None
+        if lifted is not None:
+            own = next(
+                (a for a in abstractions if a.get("shape_key") == lifted["shape_key"]), None
+            )
+    if own is not None:
+        cid = str(own["concept_id"])
+        if not cid.isidentifier():
+            return None
+        return ConceptEntry(
+            concept_id=cid,
+            arity=int(own["arity"]),
+            param_names=tuple(own["param_names"]),
+            body_expr="",
+            body_stmts=cg.helper_body_stmts(own),
+            domain_kind="any",
+            mdl_gain_bytes=int(own["gain_bytes"]),
+            corpus_sites=int(own["sites"]),
+            verified_hits=max(1, int(getattr(organ, "verified_passes", 0) or 1)),
+            family=str(own.get("family") or ""),
+        )
+    # Singleton: a stored primitive. The gain is zero because zero compression was measured --
+    # never a fabricated number.
+    cid = "c_" + organ.organ_id.replace("organ_skill_", "")[:18]
+    if not cid.isidentifier():
         return None
     try:
         tree = ast.parse(organ.source_code)
@@ -3950,22 +4016,29 @@ def _skill_organ_to_concept_entry(organ: ExecutableOrgan) -> Any | None:
     fn = next((n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == organ.entrypoint), None)
     if fn is None or not fn.body:
         return None
-    if not (len(fn.body) == 1 and isinstance(fn.body[0], ast.Return) and fn.body[0].value is not None):
-        return None
-    cid = "c_" + organ.organ_id.replace("organ_skill_", "")[:18]
-    if not cid.isidentifier():
-        return None
     try:
-        body_expr = ast.unparse(fn.body[0].value)
+        if len(fn.body) == 1 and isinstance(fn.body[0], ast.Return) and fn.body[0].value is not None:
+            return ConceptEntry(
+                concept_id=cid,
+                arity=len(fn.args.args),
+                param_names=tuple(a.arg for a in fn.args.args),
+                body_expr=ast.unparse(fn.body[0].value),
+                domain_kind="any",
+                mdl_gain_bytes=0,
+                corpus_sites=1,
+                verified_hits=max(0, int(getattr(organ, "verified_passes", 0) or 0)),
+            )
+        body_stmts = "\n".join(ast.unparse(stmt) for stmt in fn.body)
         return ConceptEntry(
             concept_id=cid,
             arity=len(fn.args.args),
             param_names=tuple(a.arg for a in fn.args.args),
-            body_expr=body_expr,
+            body_expr="",
+            body_stmts=body_stmts,
             domain_kind="any",
-            mdl_gain_bytes=max(1, organ.code_bytes),
+            mdl_gain_bytes=0,
             corpus_sites=1,
-            verified_hits=max(1, organ.verified_passes),
+            verified_hits=max(0, int(getattr(organ, "verified_passes", 0) or 0)),
         )
     except Exception:
         return None
@@ -4050,7 +4123,25 @@ class MetaCircularOrganGraph:
                 replaced = True
         self._save()
         if organ.stratum == SKILL and self.concept_library is not None:
-            entry = _skill_organ_to_concept_entry(organ)
+            # The compression corpus is the LIBRARY's memory plus the newcomer. Every previously
+            # registered SKILL organ is already held in `G_t` as a stored entry (that bridge is
+            # the one below), and `G_t` is the accumulator that survives the graph being fresh --
+            # counting a graph-local copy on top of its own stored entry would fabricate sites.
+            # An admitted abstraction (family set) is derived, not a stored program, and stays
+            # out of the corpus it is about to be re-admitted over.
+            corpus: list[str] = []
+            try:
+                for c in self.concept_library.concepts():
+                    if str(getattr(c, "family", "") or ""):
+                        continue
+                    try:
+                        corpus.append(c.render_helper_def())
+                    except Exception:
+                        continue
+            except Exception:
+                corpus = []
+            corpus.append(organ.source_code)
+            entry = _skill_organ_to_concept_entry(organ, corpus_sources=corpus)
             if entry is not None and hasattr(self.concept_library, "admit_verified_concept"):
                 try:
                     self.concept_library.admit_verified_concept(entry)
@@ -4344,6 +4435,20 @@ class MetaCircularOrganGraph:
         """
         if not examples or not self.growth_enabled:
             return None
+        # A prior may come ONLY from the library, and only from a measured abstraction:
+        # compression-positive, >= 2 real sites, verified. An empty library, a stored primitive,
+        # or an unverified entry licenses nothing and every rule below keeps its cold form. This
+        # is the exact difference between "the library made the next problem cheaper" (measured
+        # compounding) and "a hand-tuned threshold moved" (a policy edit wearing learning's
+        # clothes).
+        licensed = None
+        if self.concept_library is not None:
+            try:
+                from canonical.swe_kernel.compression_gain_v1 import licensed_table_policy
+
+                licensed = licensed_table_policy(self.concept_library)
+            except Exception:
+                licensed = None
         try:
             diagnosis = settlement.diagnose_structure(examples)
         except Exception:
@@ -4376,6 +4481,21 @@ class MetaCircularOrganGraph:
             would make the table unreachable, which is how a diagnostic that cannot see a structure
             prevents the creature from ever learning it.
             """
+            # THE LICENSED EARLY STOP. When the library holds a compression-positive, multi-site,
+            # verified abstraction of the table family, two full cycles -- the block stated once
+            # and confirmed at a second position -- plus the acquire-time verification at 2p and
+            # 3p below is the licensed evidence policy for a NEW member of that family. The cold
+            # 4x rule exists because a structure-free run must buy its skepticism point by point;
+            # a measured prior is exactly experience paying part of that bill. Without a licensed
+            # abstraction this branch never fires and the cold rule is untouched, byte for byte.
+            if licensed is not None:
+                try:
+                    if settlement.induce_periodic_table(
+                        list(evidence), min_compression=float(licensed["min_compression"])
+                    ) is not None:
+                        return False
+                except Exception:
+                    pass
             if d.get("kind") == settlement.UNEXPLAINED:
                 return settlement.induce_periodic_table(list(evidence)) is None
             return d.get("kind") == settlement.AFFINE and bool(d.get("provisional"))
@@ -4426,6 +4546,17 @@ class MetaCircularOrganGraph:
         # analytically -- measured: the loop collected thirteen points, the table fit them from three,
         # and the run still refused.
         table_hypothesis = settlement.induce_periodic_table(evidence)
+        # The licensed fit carries through: without this, the top-up block below would re-derive
+        # the cold 4x requirement and silently re-spend every question the prior just saved --
+        # measured in round 23 as the difference between stopping at two cycles and being dragged
+        # back to four.
+        if table_hypothesis is None and licensed is not None:
+            try:
+                table_hypothesis = settlement.induce_periodic_table(
+                    evidence, min_compression=float(licensed["min_compression"])
+                )
+            except Exception:
+                table_hypothesis = None
         # ALWAYS top the evidence up to the table's own threshold before deciding. The loop above stops
         # as soon as the classifier has an opinion, which for an arbitrary repeating block is
         # "UNEXPLAINED" forever; the compression rule then needs four cycles before it will speak, and
@@ -4440,7 +4571,19 @@ class MetaCircularOrganGraph:
                 guessed = settlement.candidate_period(evidence)
                 if guessed is None:
                     break
-                requirement = settlement.table_evidence_requirement(int(guessed))
+                # THE LICENSED REQUIREMENT. This block is where the evidence bill is actually
+                # sized -- the collection loop above is capped by its escalation budget long
+                # before either factor is reached (measured: both arms exit the loop at 15
+                # points; every question that matters is spent here). When a library abstraction
+                # licenses the family, the requirement is two cycles; the cold rule is four. The
+                # acquire-time verification at 2p and 3p below is not waived by this -- the
+                # policy moves where evidence is collected, never whether it is verified.
+                if licensed is not None:
+                    requirement = settlement.table_evidence_requirement(
+                        int(guessed), factor=int(float(licensed["min_compression"]))
+                    )
+                else:
+                    requirement = settlement.table_evidence_requirement(int(guessed))
                 if len(evidence) >= requirement:
                     break
                 while len(evidence) < requirement:
@@ -4455,6 +4598,13 @@ class MetaCircularOrganGraph:
                     spent += 1
                 diagnosis = settlement.diagnose_structure(evidence)
                 table_hypothesis = settlement.induce_periodic_table(evidence)
+                if table_hypothesis is None and licensed is not None:
+                    try:
+                        table_hypothesis = settlement.induce_periodic_table(
+                            evidence, min_compression=float(licensed["min_compression"])
+                        )
+                    except Exception:
+                        table_hypothesis = None
                 if table_hypothesis is not None:
                     break
         # A table is the more general hypothesis, but "more general" is not "always better". Its
@@ -4477,7 +4627,15 @@ class MetaCircularOrganGraph:
         # periodic and three questions determine it, yet the ramp-only path returned
         # NO_CONSISTENT_HYPOTHESIS. Falling back to the ramp keeps the narrow case fast where the
         # compression requirement cannot be met yet.
-        table = synthesize_table_organ(evidence, task_signature=task_signature)
+        table = synthesize_table_organ(
+            evidence,
+            task_signature=task_signature,
+            # The licensed factor, and ONLY that one, reaches the synthesizer; the cold default
+            # applies when no abstraction licensed anything.
+            min_compression=(
+                float(licensed["min_compression"]) if licensed is not None else 4.0
+            ),
+        )
         if table is not None:
             organ, found_table = table
             return organ, {

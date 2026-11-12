@@ -765,6 +765,10 @@ class ConceptEntry:
     # other about whether the record still vouches for it -- so both fields survive.
     body_stmts: str = ""
     callable_params: tuple[tuple[str, int], ...] = field(default_factory=tuple)
+    #: Structural family the abstraction was recognised from -- computed from the lifted shape by
+    #: `compression_gain_v1.family_of`, never asserted. Empty for stored primitives, which license
+    #: nothing: a menu entry with a family name is still a menu entry.
+    family: str = ""
 
     # Until `disconfirmations` existed, `log_prior` could only rise: measured, 50 recorded failures
     # left it unchanged at 2.8904, and the synthesizer only ever looks at the top 16 concepts, so
@@ -823,6 +827,8 @@ class ConceptEntry:
             out["body_stmts"] = self.body_stmts
         if self.callable_params:
             out["callable_params"] = {k: int(v) for k, v in self.callable_params}
+        if self.family:
+            out["family"] = self.family
         return out
 
     @classmethod
@@ -839,13 +845,17 @@ class ConceptEntry:
             param_names=params,
             body_expr=str(raw.get("body_expr") or ""),
             domain_kind=str(raw.get("domain_kind") or "any"),
-            mdl_gain_bytes=int(raw.get("mdl_gain_bytes") or 1),
+            # A stored 0 must stay 0: zero is the honest "no compression was measured" value the
+            # bridge writes for a stored primitive, and `or 1` silently upgraded it back to a
+            # fabricated gain on every reload.
+            mdl_gain_bytes=int(raw["mdl_gain_bytes"]) if raw.get("mdl_gain_bytes") is not None else 1,
             corpus_sites=int(raw.get("corpus_sites") or 2),
             uses=int(raw.get("uses") or 0),
             verified_hits=int(raw.get("verified_hits") or 0),
             body_stmts=str(raw.get("body_stmts") or ""),
             callable_params=cp_tup,
             disconfirmations=int(raw.get("disconfirmations") or 0),
+            family=str(raw.get("family") or ""),
         )
 
 
