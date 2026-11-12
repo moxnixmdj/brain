@@ -21952,7 +21952,7 @@
    "verification": {
     "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001__RECEIPT.json",
     "evidence_present_note": "embedding this record does not grant credit; the adapter re-reads the live registry and its evidence on every call",
-    "evidence_sha256": "fd586b0a9ef466db2d255f3fa12f739c9e273be541cb9f2808845c8ed2561971",
+    "evidence_sha256": "50240b9e8a0578245641eafae44a4e33baa9a69238479495be3cc820f2082678",
     "independent_verification_evident": false,
     "mission_id": null,
     "module_sha256": null,
@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 326,
+  "knowledge_documents": 327,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6733,
+  "research_index_records": 6734,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a64f21062019c9ab06282d87c52eff9fb22fa0b93a3a08eea823119a0aaa9da8"
+  "value": "2ab43231eebd75d69c109714e15711136a05dc8511998887e661868215b22bf3"
  },
  "engines": [
   {
@@ -44744,6 +44744,86 @@
     "finds",
     "instance",
     "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 15310,
+   "headings": [
+    "A new part costs code; one lesson buys the word",
+    "1. The measurement, with the predictions written first",
+    "2. What this settles about the owner's sentence",
+    "3. Scorecard: real vs wrong, as of this commit",
+    "4. The external state, refreshed 2026-11-12 (max web, latest first)",
+    "5. The limiting factors, ranked, and the smartest next moves",
+    "6. On \"a sentient creature\"",
+    "7. Receipts",
+    "8. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md",
+   "sha256": "6bbf8f5fa21c90649e5e5fb763e7c20c28cc995c9015ccc9bd84af5aae75c031",
+   "summary": "**2026-11-12.** Base `c4724d90`. Branch `arena/9914f9a5-brain`. Round 9 of today's series — and the round that executes round 8's prescription instead of restating it.",
+   "terms": {
+    "10": 12,
+    "100": 5,
+    "14": 5,
+    "15": 7,
+    "2026": 6,
+    "39": 8,
+    "action": 5,
+    "after": 6,
+    "algebra": 6,
+    "before": 5,
+    "buys": 5,
+    "cannot": 6,
+    "canonical": 6,
+    "code": 9,
+    "every": 8,
+    "everything": 9,
+    "experience": 10,
+    "false": 7,
+    "family": 7,
+    "files": 6,
+    "first": 7,
+    "held": 8,
+    "held-out": 6,
+    "here": 6,
+    "independent": 6,
+    "lesson": 16,
+    "measured": 9,
+    "median": 18,
+    "new": 9,
+    "no": 23,
+    "not": 15,
+    "now": 9,
+    "number": 8,
+    "one": 26,
+    "only": 8,
+    "own": 7,
+    "owner": 6,
+    "part": 11,
+    "parts": 6,
+    "real": 6,
+    "refused": 7,
+    "round": 24,
+    "same": 8,
+    "tasks": 6,
+    "true": 9,
+    "two": 7,
+    "vs": 6,
+    "word": 10
+   },
+   "title": "A new part costs code; one lesson buys the word",
+   "title_terms": [
+    "buys",
+    "code",
+    "costs",
+    "lesson",
+    "new",
+    "one",
+    "part",
+    "word"
    ]
   },
   {
@@ -70120,10 +70200,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1128,
+  "included_source_count": 1129,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5871d376505611e29d20c9ecb973b088e5aae89d0b0c3ded4dec2da32ae20e6a"
+  "source_tree_digest": "12838d9de7c6cbe2164c4ef1fa1f4146d9194e3c1bbf1aecf4f458aa8d1e49e9"
  },
  "research_index": [
   {
@@ -216245,6 +216325,34 @@
    }
   },
   {
+   "action_id": "A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2ed2483d0ffdee228b3330f6369b057cc68c5f7106196015f51d5e5630969a52",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_new_part_costs_code_one_lesson_buys_the_word_20261112_v1": 1,
+    "add_the_median_reducer_and_measure_that_one_lesson_buys_one_word": 1,
+    "buys": 1,
+    "code": 1,
+    "costs": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lesson": 1,
+    "new": 1,
+    "one": 1,
+    "part": 1,
+    "the_lesson_loop_is_now_parts_code_plus_word_lesson_plus_recomputed_recall_measured_end_to_end_at_zero_model_dependency__no_benchmark_row_moved__no_capability_credit__truth_achieved_stays_false": 1,
+    "the_median_lesson_was_set_aside_under_the_old_algebra_because_no_operation_fits_its_example_answers__experience_cannot_add_a_part_to_the_hypothesis_language": 1,
+    "v1": 1,
+    "word": 1
+   }
+  },
+  {
    "action_id": "A_PART_OF_A_FILE_MEASURED_IN_A_UNIT_THE_SENTENCE_STATES_IS_ANSWERED_IN_THAT_UNIT_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -296094,7 +296202,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/taught_words_check_v1.py",
-   "sha256": "1719bbbb378634000214e558a301d474d77c9164ed9e411c13fa2e3c63e91634",
+   "sha256": "333288cf9869d8c20af10a11faf4c9292a36466ad9716d6702ed874530f9e7e1",
    "summary": "Recompute a taught-words answer from the file, without the code that produced it.",
    "symbol_count": 2,
    "symbols": [
@@ -296153,7 +296261,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/taught_words_v1.py",
-   "sha256": "620fa38346b0864ec1dafea451c76858348a80e39427438a81c70ee1639e91ed",
+   "sha256": "1977c4e951dd4cefe9cf7a1107b7e6befcf1d552dc80c3ba8259da08d3e8237a",
    "summary": "Taught words: word meanings learned from example answers, and file questions answered from them.",
    "symbol_count": 19,
    "symbols": [
