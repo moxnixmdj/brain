@@ -526,6 +526,36 @@ def _bound_capability_ids() -> frozenset[str]:
     return _BOUND_IDS_CACHE
 
 
+def _plan_refuses(cid: str, entry: Any, operation: Any, context: Any) -> bool:
+    """Does this plan candidate need the execution boundary's release condition?
+
+    Two questions, both asked of the boundary rather than re-derived here:
+
+    1. `repair=False` -- the repair row's own missing-evidence refusal is reported first, so the
+       information-gap machinery still learns from it (`refuses_execution`'s docstring says why
+       folding it in early was a regression in what the creature learns).
+    2. `repair=True` -- the same row is not executable merely because that inspection succeeded.
+       This half used to be written out here as its own copy of `is_unconfined_repair_entry`,
+       which no change to the boundary could reach (measured 2026-11-12,
+       `canonical/tools/lift_the_refusal_and_see_what_remains_v1.py`); calling the decision with
+       `repair=True` is exactly the disjunction it replaces.
+
+    `context` is `(controller_actions, dag, bound_ids)` or None. The second half applies only
+    outside the bound registry's single-row path. Behaviour is byte-identical today.
+    """
+    from canonical.runtime import computer_execution_boundary_v1 as boundary
+
+    if boundary.refuses_execution(cid, entry, operation, repair=False):
+        return True
+    if not boundary.refuses_execution(cid, entry, operation, repair=True):
+        return False
+    if context is None:
+        return False
+    controller_actions, dag, bound_ids = context
+    return (controller_actions is not None or isinstance(dag, Mapping)
+            or cid not in bound_ids)
+
+
 def _plan_lineage(out: Any) -> tuple[list[str], list[str]]:
     """What the executed plan needed before it started and produced by the end.
 
@@ -1034,11 +1064,18 @@ def _run_raw_goal_impl(request: Mapping[str, Any]) -> dict[str, Any]:
         # independent-evidence refusal. Its executor separately blocks host
         # execution even if that inspection later succeeds. A raw multi-action
         # plan or DAG is not entitled to bypass either boundary.
+        #
+        # `repair=False` above means "report the repair row's own missing-evidence refusal first,
+        # and let the information-gap machinery learn from it".  This guard then closes the second
+        # half: the same row is not executable just because that inspection happened to succeed.
+        # That second half used to be written as its own copy of the predicate; measured
+        # 2026-11-12 (`canonical/tools/lift_the_refusal_and_see_what_remains_v1.py`) that copy is
+        # unreachable by any change to the boundary, which is what makes a second copy a defect
+        # rather than a belt-and-braces.  It is now the boundary's single decision, asked with
+        # `repair=True`, exactly as `refuses_execution`'s docstring specifies.
         for cid, operation in candidates:
-            repair_unconfined = boundary.is_unconfined_repair_entry(cid, admissible.get(cid))
-            if ((boundary.refuses_execution(cid, admissible.get(cid), operation, repair=False))
-                    or (repair_unconfined and (controller_actions is not None or isinstance(dag, Mapping)
-                                              or cid not in _bound_capability_ids()))):
+            if _plan_refuses(cid, admissible.get(cid), operation,
+                             (controller_actions, dag, _bound_capability_ids())):
                 return {"schema": SCHEMA, "task_id": task_id, "pass": False,
                         "status": boundary.STATUS, "failure_class": boundary.FAILURE_CLASS,
                         "compiled_capability_id": cid, "executed": False,
