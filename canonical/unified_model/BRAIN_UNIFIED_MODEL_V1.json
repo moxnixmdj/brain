@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 329,
+  "knowledge_documents": 330,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6739,
+  "research_index_records": 6738,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1963
+  "source_index_modules": 1962
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0c14c0083b07fb36e06247ed684ca9fc7cec95d00462e41537674861d3a8a74c"
+  "value": "46ca31d1b9ef2e47cb4236e7db0d190203c27b1bd3fbc41c8c495dd43c7c8764"
  },
  "engines": [
   {
@@ -54271,6 +54271,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 3408,
+   "headings": [
+    "Verified skills do not compose just because each one verified",
+    "What was measured",
+    "What was added",
+    "Tests — 9, green",
+    "One more thing measured, not fixed",
+    "Why this is the right next increment"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SKILLS_DONT_COMPOSE_20261112_V1.md",
+   "sha256": "6ff018bdd4d9e362bf9462b2d541c89411853249be5c4f4bf803c4be96017200",
+   "summary": "**2026-11-12.** Branch `arena/3778edad-brain`. Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "10": 10,
+    "added": 2,
+    "also": 2,
+    "both": 2,
+    "cannot": 3,
+    "change": 2,
+    "changed": 3,
+    "check": 2,
+    "crystallized": 2,
+    "each": 4,
+    "earlier": 2,
+    "edit": 2,
+    "empty": 2,
+    "every": 5,
+    "exit": 2,
+    "fail": 4,
+    "false": 2,
+    "falsifiable": 2,
+    "first": 2,
+    "had": 2,
+    "itself": 2,
+    "local": 2,
+    "makes": 2,
+    "measured": 3,
+    "more": 3,
+    "no": 2,
+    "no-op": 2,
+    "not": 11,
+    "nothing": 3,
+    "one": 5,
+    "pair": 4,
+    "pass": 4,
+    "passes": 3,
+    "reports": 3,
+    "return": 6,
+    "revert": 3,
+    "rule": 9,
+    "rules": 4,
+    "sequence": 8,
+    "single": 3,
+    "skills": 4,
+    "so": 3,
+    "state": 3,
+    "step": 12,
+    "store": 3,
+    "two": 3,
+    "verdict": 3,
+    "verified": 4
+   },
+   "title": "Verified skills do not compose just because each one verified",
+   "title_terms": [
+    "because",
+    "compose",
+    "each",
+    "just",
+    "not",
+    "one",
+    "skills",
+    "verified"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 64378,
    "headings": [
     "Solution index",
@@ -70352,10 +70429,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1131,
+  "included_source_count": 1132,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "e09faf348723ef7c594e4114f6652c42be17b6cbb72a2646ccf14317db4486ea"
+  "source_tree_digest": "528d0476efb8a64877f6b5ba46d5e3be05d87d784b4e7ca68c807add653df24c"
  },
  "research_index": [
   {
@@ -215834,30 +215911,6 @@
    }
   },
   {
-   "action_id": "A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_FAILURE_IS_A_CONTEXT_NOT_A_BAN_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "e7939892f7f02dc66da9170d21371baf5bf027a12fa051c56a03e0b1212f6afb",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_failure_is_a_context_not_a_ban_20261112_v1": 1,
-    "ban": 1,
-    "context": 1,
-    "failure": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "no_new_capability_registered__no_family_flipped__no_terminal_credit__an_existing_learning_substrate_gains_a_scoped_applicability_condition_and_stops_discarding_working_plans": 1,
-    "not": 1,
-    "scope_a_remembered_plan_by_the_states_its_outcomes_happened_in": 1,
-    "the_macro_store_retained_outcomes_without_the_state_they_happened_in_so_it_could_only_keep_or_ban_a_plan_globally_and_never_learn_where_it_applies_which_is_the_quantity_the_owner_claims_one_exposure_teaches": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "A_FAILURE_RECORD_WITH_NO_SUBJECT_COUNTED_TWO_DIFFERENT_BREAKAGES_AS_ONE_AND_falsified_MEANS_PROOF_NOT_MERELY_FAILURE_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -233325,45 +233378,6 @@
     "significance": 1,
     "v1": 1,
     "validity": 1
-   }
-  },
-  {
-   "capability": false,
-   "classification": "ORPHAN",
-   "executable_entry_point": false,
-   "id": "source:canonical/runtime/applicability_v1.py",
-   "imported_by_count": 0,
-   "kind": "SOURCE_ADDRESSABLE_MODULE",
-   "path": "canonical/runtime/applicability_v1.py",
-   "sha256": "9ccd986829390e5caa8143d5717f1d85be2c3546775e31581ae027232520ab8b",
-   "summary": "Learn WHEN a remembered plan applies, from outcomes in context.",
-   "symbol_count": 8,
-   "symbols": [
-    "Boundary",
-    "admits",
-    "as_set",
-    "conjunction",
-    "explains_failure",
-    "learn",
-    "normalise_state",
-    "survivors"
-   ],
-   "terms": {
-    "admits": 1,
-    "applicability": 1,
-    "applies": 1,
-    "as_set": 1,
-    "boundary": 1,
-    "conjunction": 1,
-    "context": 1,
-    "explains_failure": 1,
-    "learn": 2,
-    "normalise_state": 1,
-    "outcomes": 1,
-    "plan": 1,
-    "remembered": 1,
-    "survivors": 1,
-    "v1": 1
    }
   },
   {
@@ -267868,18 +267882,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/macro_v1.py",
-   "sha256": "50d757c187430fdaf67554f9952d21d190e796cf6721f288cbbbb86ab2aa84d6",
+   "sha256": "dcbeb1520ad5ed38cfb08733034156a661926d838e614cfdc95e18ac01773a0e",
    "summary": "Learn a plan from having done the work, then reuse it.",
-   "symbol_count": 16,
+   "symbol_count": 12,
    "symbols": [
-    "_append_evidence",
-    "_boundary",
     "_distinctive",
     "_load",
     "_save",
     "_state_path",
-    "applicability",
-    "applicable",
     "clause_shape",
     "forget",
     "lookup",
@@ -267890,10 +267900,6 @@
     "stats"
    ],
    "terms": {
-    "append_evidence": 1,
-    "applicability": 1,
-    "applicable": 1,
-    "boundary": 1,
     "clause_shape": 1,
     "distinctive": 1,
     "done": 1,
