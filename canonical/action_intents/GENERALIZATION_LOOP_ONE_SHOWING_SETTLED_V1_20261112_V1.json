@@ -7,7 +7,7 @@
  "route_id": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "53c80d83815a288dc65c68610fa801929647c6d0",
+ "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -89,7 +89,7 @@
   "canonical/runtime/settlement_v1.py (version-space and information-gain discipline)"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "53c80d83815a288dc65c68610fa801929647c6d0",
+  "canonical_base_commit": "ff810a5be66a3317df0b274dc406da46c143454a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERALIZATION_FROM_ONE_SHOWING",
   "real_outcome": "One showing reaches 4/4 unseen sites automatically with oracle settlement; without oracle admits 1/4 and refuses 3/4 fail-closed; over-generalization refused.",
