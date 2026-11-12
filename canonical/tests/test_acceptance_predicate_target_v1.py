@@ -41,15 +41,12 @@ KNOWN = {
 }
 
 #: Capabilities whose adapter computes and declares a boolean answer while the registry accepts on
-#: `output_verified`. Eight of the nine were repointed on 2026-11-12. One is left, deliberately.
-DEFINITE_DEBT: set[str] = {
-    # Its outcome is available but it cannot be executed here: it needs a content-addressed
-    # repository measurement receipt, and a fabricated one would be worse than a transport field.
-    # It leaves this set when someone runs it against a real receipt, not before.
-    "python.task.acceptance.measured.objective.v1",
-}
+#: `output_verified`. Empty since 2026-11-12, when the last entry was repointed after being executed
+#: against a genuine content-addressed measurement receipt and against a receipt the consumer
+#: refused (see `test_a_refused_receipt_is_still_marked_verified_v1.py`). It may never grow again.
+DEFINITE_DEBT: set[str] = set()
 
-#: The eight repointed on 2026-11-12, kept so a drift back to transport is named, not just counted.
+#: The nine repointed on 2026-11-12, kept so a drift back to transport is named, not just counted.
 REPOINTED_ON_20261112 = {
     "python.patch.search.test_guided.ast.v1",
     "python.software.repair.guided.provenance.coupled.v1",
@@ -59,6 +56,7 @@ REPOINTED_ON_20261112 = {
     "python.software.repair.measured_acceptance.v1",
     "python.software.repair.semantic_acceptance.v1",
     "python.software.request.semantic_behavior.compile.v1",
+    "python.task.acceptance.measured.objective.v1",
 }
 
 
