@@ -7,8 +7,13 @@ This probe removes the word "statically": it builds a workspace whose only test 
 satisfied by any bounded mutation, runs each adapter for real, and applies both predicates to the
 object the adapter actually returned.
 
-If the registry predicate accepts, the gate is not measuring the outcome. It is measuring whether a
-file was produced.
+Round 7 repointed the nine capabilities from `output_verified` to `pass`. This probe is now a
+regression test in both directions: the **live registry** must reject the failure, and the
+**legacy predicate** (kept here as a constant, not as live configuration) must still accept it —
+so the evidence for why the repoint happened survives the repoint.
+
+LEGACY_EXPECT is the predicate as it stood at fea6498c. It is data in this file, never read back
+into the registry.
 
 Authority NONE. Deterministic. Zero model dependency. Each adapter runs with a cut-down candidate
 budget (seconds, not minutes) because the point is the *failure* path, not a repair.
@@ -45,6 +50,10 @@ FIXTURE: dict[str, str] = {
 }
 
 TEST_PATHS = ["test_calc.py"]
+
+#: The predicate these nine capabilities carried at fea6498c, before the repoint. Kept as a
+#: constant so the probe can show what the old gate would have done, without configuring anything.
+LEGACY_EXPECT: dict[str, Any] = {"type": "field_equals", "field": "output_verified", "value": True}
 TASK_TEXT = "make test_calc.py pass"
 
 #: capability_id -> (adapter module, args). Every one of these is a DEFINITE case in round 5.
@@ -148,7 +157,6 @@ def _one(capability_id: str, module_name: str, args: Mapping[str, Any]) -> dict[
         shutil.rmtree(root, ignore_errors=True)
 
     expect = _expect_for(capability_id)
-    corrected = {"type": "field_equals", "field": "pass", "value": True}
     return {
         "capability_id": capability_id,
         "adapter_module": module_name,
@@ -158,8 +166,8 @@ def _one(capability_id: str, module_name: str, args: Mapping[str, Any]) -> dict[
         "status": result.get("status"),
         "registry_expect": dict(expect),
         "registry_accepts": apply_predicate(expect, result),
-        "corrected_expect": corrected,
-        "corrected_accepts": apply_predicate(corrected, result),
+        "legacy_expect": dict(LEGACY_EXPECT),
+        "legacy_accepts": apply_predicate(LEGACY_EXPECT, result),
         "declared_result_fields": (
             "pass" in (json.loads(REGISTRY.read_text(encoding="utf-8"))
                        ["capabilities"][capability_id].get("result_fields") or [])
@@ -191,9 +199,12 @@ def run() -> dict[str, Any]:
             "ran": len(ran),
             "failed_to_run": len(records) - len(ran),
             "honest_answer_no_repair": sum(1 for r in ran if r["passed"] is False),
-            "registry_accepts_the_failure": sum(1 for r in ran if r["registry_accepts"] is True),
-            "corrected_rejects_the_failure": sum(
-                1 for r in ran if r["corrected_accepts"] is False
+            "legacy_accepts_the_failure": sum(1 for r in ran if r["legacy_accepts"] is True),
+            "registry_rejects_the_failure": sum(
+                1 for r in ran if r["registry_accepts"] is False
+            ),
+            "registry_reads_the_outcome": sum(
+                1 for r in ran if r["registry_expect"].get("field") == "pass"
             ),
             "output_verified_true": sum(1 for r in ran if r["output_verified"] is True),
             "pass_declared_in_result_fields": sum(
@@ -202,7 +213,7 @@ def run() -> dict[str, Any]:
         },
         "hard_nonclaims": [
             "NO_CAPABILITY_RE_REGISTERED",
-            "NO_PREDICATE_REPOINTED_IN_THIS_PR",
+            "NO_ADAPTER_CHANGED",
             "NO_ACCEPTANCE_CREDIT",
             "NO_TRUTH_ACHIEVED",
             "NO_GENERAL_REPAIR_COMPLETENESS",
@@ -229,10 +240,10 @@ def main(argv: list[str] | None = None) -> int:
           f"{s['honest_answer_no_repair']:>4}")
     print(f"  set output_verified == True anyway                       "
           f"{s['output_verified_true']:>4}")
-    print(f"  the REGISTERED predicate accepted the failure            "
-          f"{s['registry_accepts_the_failure']:>4}")
-    print(f"  the CORRECTED predicate (pass == True) rejected it       "
-          f"{s['corrected_rejects_the_failure']:>4}")
+    print(f"  the LEGACY predicate accepted the failure                "
+          f"{s['legacy_accepts_the_failure']:>4}")
+    print(f"  the LIVE registry predicate rejects it                   "
+          f"{s['registry_rejects_the_failure']:>4}")
     print(f"  ...with 'pass' declared in the capability's result_fields "
           f"{s['pass_declared_in_result_fields']:>3}")
     if s["failed_to_run"]:
@@ -245,7 +256,8 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  SKIP      {r['capability_id']:<52}{r['error'][:40]}")
                 continue
             verdict = "ACCEPTED" if r["registry_accepts"] else "rejected"
-            print(f"  {verdict:<9} {r['capability_id']:<52}{str(r['status'])[:44]}")
+            legacy = "old:accepted" if r["legacy_accepts"] else "old:rejected"
+            print(f"  {verdict:<9}{legacy:<13}{r['capability_id']:<52}{str(r['status'])[:44]}")
     return 0
 
 

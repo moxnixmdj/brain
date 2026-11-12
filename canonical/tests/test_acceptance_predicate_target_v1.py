@@ -12,6 +12,7 @@ Both are tested. The nine known cases are pinned as debt: the list may shrink, n
 from __future__ import annotations
 
 import ast
+import json
 import sys
 from pathlib import Path
 
@@ -40,9 +41,15 @@ KNOWN = {
 }
 
 #: Capabilities whose adapter computes and declares a boolean answer while the registry accepts on
-#: `output_verified`. This is debt. Nothing may be added to it; entries are removed by repointing
-#: the predicate and re-measuring.
-DEFINITE_DEBT = {
+#: `output_verified`. Emptied on 2026-11-12: all nine were repointed to `pass` in one commit, and the
+#: executed probe (`test_gate_accepts_a_failed_repair_v1.py`) shows the live registry now rejects a
+#: failed repair 8 of 8 times. The list may never grow again — anything that computes an outcome
+#: while registering a transport field fails `definite <= DEFINITE_DEBT` before it can be merged.
+DEFINITE_DEBT: set[str] = set()
+
+#: The nine that were in the list, kept so the clearing can be audited and so a regression that
+#: puts one back is named rather than merely counted.
+REPOINTED_ON_20261112 = {
     "python.patch.search.test_guided.ast.v1",
     "python.software.repair.guided.provenance.coupled.v1",
     "python.software.repair.loop.coupled.ast.v1",
@@ -107,6 +114,15 @@ def test_the_partition_holds_and_nothing_new_enters_the_debt_list():
     }
     # The list may shrink. It may never grow without a reviewer noticing.
     assert definite <= DEFINITE_DEBT, sorted(definite - DEFINITE_DEBT)
+    # Nothing that was repointed may drift back to a transport predicate.
+    registry = json.loads(
+        (ROOT / "canonical" / "runtime" / "BOUND_CAPABILITY_REGISTRY_V1.json").read_text("utf-8")
+    )["capabilities"]
+    drifted = [
+        cid for cid in REPOINTED_ON_20261112
+        if registry[cid]["action_template"]["expect"].get("field") != "pass"
+    ]
+    assert not drifted, drifted
     assert summary["definite"] == len(definite)
     assert summary["reads_transport_while_outcome_available"] == (
         summary["definite"]
@@ -124,6 +140,4 @@ def test_every_definite_case_reads_a_transport_field_and_offers_a_boolean():
 
 
 def test_the_run_is_deterministic():
-    import json
-
     assert json.dumps(run(), sort_keys=True) == json.dumps(run(), sort_keys=True)

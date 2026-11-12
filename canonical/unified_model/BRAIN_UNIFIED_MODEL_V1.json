@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 313,
+  "knowledge_documents": 314,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6707,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9b85656f0cc2cdc4127bb82ea8c2b941a0d27ea0660c4e276088c527447519c1"
+  "value": "cb9911656f39755f536a1bb6b02a60114843eff42ab51be8e5b651d7fe74f6f9"
  },
  "engines": [
   {
@@ -55536,6 +55536,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5432,
+   "headings": [
+    "The repair gate reads the outcome",
+    "1. Proof in both directions",
+    "2. The blast radius, measured before shipping",
+    "3. Why history could not have told us",
+    "4. What this does to the numbers",
+    "5. What is *not* fixed, stated precisely",
+    "6. Receipts",
+    "7. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_REPAIR_GATE_READS_THE_OUTCOME_20261112_V1.md",
+   "sha256": "eae60c45a7b9f1a266bc5be76e50c34e0bb2d80c864d163fce4e569b07db127f",
+   "summary": "**2026-11-12.** Base `94a105fe`. Branch `arena/bd47cd30-brain`. Round 7.",
+   "terms": {
+    "145": 3,
+    "385": 2,
+    "41": 2,
+    "50": 3,
+    "accepted": 3,
+    "adapter": 3,
+    "adapters": 3,
+    "added": 2,
+    "after": 3,
+    "because": 2,
+    "before": 4,
+    "blast": 2,
+    "both": 4,
+    "cannot": 3,
+    "capabilities": 5,
+    "capability": 4,
+    "defect": 3,
+    "evidence": 4,
+    "executed": 4,
+    "failed": 3,
+    "failure": 3,
+    "family": 3,
+    "field": 4,
+    "gate": 3,
+    "here": 3,
+    "nine": 4,
+    "no": 9,
+    "not": 11,
+    "one": 3,
+    "only": 3,
+    "outcome": 4,
+    "output_verified": 5,
+    "pass": 6,
+    "passed": 3,
+    "predicate": 6,
+    "predicates": 4,
+    "read": 3,
+    "receipt": 4,
+    "registry": 3,
+    "repair": 7,
+    "repoint": 4,
+    "result": 3,
+    "round": 15,
+    "run": 3,
+    "same": 3,
+    "test": 4,
+    "two": 3,
+    "went": 3
+   },
+   "title": "The repair gate reads the outcome",
+   "title_terms": [
+    "gate",
+    "outcome",
+    "reads",
+    "repair"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9654,
    "headings": [
     "The Search Was Looking for Words",
@@ -69138,10 +69213,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1115,
+  "included_source_count": 1116,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b682a2f9d11a26a135ceaf4ff19ede268dbe239a6afe9f023e226da1493784e8"
+  "source_tree_digest": "312894ba7fb3ec2e7abe8294e396ead6109f6d76c36b9d25f77be4247e5fc040"
  },
  "research_index": [
   {

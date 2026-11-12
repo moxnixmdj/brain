@@ -73,7 +73,7 @@ def test_every_case_is_a_real_bound_capability():
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))["capabilities"]
     for capability_id in CASES:
         assert capability_id in registry, capability_id
-        assert registry[capability_id]["action_template"]["expect"]["field"] == "output_verified"
+        assert registry[capability_id]["action_template"]["expect"]["field"] == "pass"
 
 
 def test_every_adapter_ran():
@@ -91,22 +91,24 @@ def test_the_honest_answer_is_no_repair_everywhere():
     assert all(r["status"].startswith("OPEN__") for r in records)
 
 
-def test_the_registry_predicate_accepts_every_one_of_them():
-    """This is the defect. If it ever stops being true, the bug was fixed and this test should go."""
+def test_the_legacy_predicate_still_would_have_accepted_every_one_of_them():
+    """This is the defect as it stood. It is kept as the reason for the repoint, not as policy."""
     records = _report()["records"]
-    rejected = [r["capability_id"] for r in records if not r["registry_accepts"]]
+    rejected = [r["capability_id"] for r in records if not r["legacy_accepts"]]
     assert not rejected, rejected
 
 
-def test_the_corrected_predicate_rejects_every_one_of_them():
+def test_the_live_registry_rejects_every_one_of_them():
+    """This is the fix. If it ever stops being true the gate has regressed to reading transport."""
     records = _report()["records"]
-    accepted = [r["capability_id"] for r in records if r["corrected_accepts"]]
+    accepted = [r["capability_id"] for r in records if r["registry_accepts"]]
     assert not accepted, accepted
 
 
 def test_the_two_predicates_disagree_on_every_executed_case():
     summary = _report()["summary"]
     assert summary["ran"] > 0
-    assert summary["registry_accepts_the_failure"] == summary["ran"]
-    assert summary["corrected_rejects_the_failure"] == summary["ran"]
+    assert summary["legacy_accepts_the_failure"] == summary["ran"]
+    assert summary["registry_rejects_the_failure"] == summary["ran"]
+    assert summary["registry_reads_the_outcome"] == summary["ran"]
     assert summary["pass_declared_in_result_fields"] == summary["ran"]
