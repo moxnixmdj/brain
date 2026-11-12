@@ -31229,16 +31229,16 @@
   "engines": 26,
   "knowledge_documents": 345,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6748,
+  "research_index_records": 6749,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1964
+  "source_index_modules": 1965
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e505768793dae9c43156d801cb5f00e779f80c85df74bb6741edea52be26812"
+  "value": "f6f3be641118e5e1c919fef52b76fb1a75ff3325454024eb3a6066aeb537437c"
  },
  "engines": [
   {
@@ -226218,6 +226218,48 @@
    }
   },
   {
+   "action_id": "REDUNDANT_LITERALS_ARE_NOT_AMBIGUITY_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/REDUNDANT_LITERALS_ARE_NOT_AMBIGUITY_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REDUNDANT_LITERALS_ARE_NOT_AMBIGUITY_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cbf5625bc14872181167cbd6c8826ff0bb6cd28f194b9f0f0e8291f538e9b128",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "already": 1,
+    "ambiguity": 2,
+    "certainty": 1,
+    "counting": 1,
+    "distinct": 1,
+    "equivalent": 1,
+    "evidence": 1,
+    "feed_the_live_executor_a_pre_state_snapshot_and_gate_the_offer_on_it": 1,
+    "gave": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learner": 1,
+    "literals": 1,
+    "logically": 1,
+    "manufactured": 1,
+    "no_new_capability_registered__no_family_flipped__no_terminal_credit__an_owned_learner_becomes_reachable_on_the_primary_executor_and_a_circular_learning_rule_is_refuted_by_execution_before_it_can_ship": 1,
+    "not": 1,
+    "one": 1,
+    "open": 1,
+    "own": 1,
+    "permanent": 1,
+    "questions": 1,
+    "redundant": 1,
+    "redundant_literals_are_not_ambiguity_20261112_v1": 1,
+    "required": 1,
+    "requirement": 1,
+    "spellings": 1,
+    "v1": 1,
+    "withholding": 1
+   }
+  },
+  {
    "action_id": "REFUSE_ACCEPTANCE_WHILE_MEASURABLY_OVERCONFIDENT_V1_20261102",
    "capability": false,
    "date": "2026-11-01",
@@ -234809,7 +234851,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/applicability_v1.py",
-   "sha256": "dc976721a44966ecd585de5201eff03ee67c2f1063e61d2b57931a0c4c729afb",
+   "sha256": "139c8496bb9bec18c2bf11d5855ac60f931a55b86affc56c06aaf70535aa8116",
    "summary": "Learn WHEN a remembered plan applies, from outcomes in context.",
    "symbol_count": 9,
    "symbols": [
@@ -255488,6 +255530,56 @@
     "validate_url": 1,
     "verify_npm_sri": 1,
     "write_json_atomic": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/fact_entailment_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/fact_entailment_v1.py",
+   "sha256": "775cfcf56e3f292c90e9626527b459cff547215386f10d9434924b12e1c05ae4",
+   "summary": "Which observed facts are ALREADY IMPLIED by others, derived from the sensor's own definitions.",
+   "symbol_count": 11,
+   "symbols": [
+    "_kinds",
+    "_relation",
+    "_representative",
+    "_spec_implies",
+    "as_row",
+    "distinct_requirements",
+    "equivalent",
+    "implied_by",
+    "implies",
+    "known_facts",
+    "reduce_requirement"
+   ],
+   "terms": {
+    "already": 1,
+    "as_row": 1,
+    "definitions": 1,
+    "derived": 1,
+    "distinct_requirements": 1,
+    "entailment": 1,
+    "equivalent": 1,
+    "fact": 1,
+    "facts": 1,
+    "implied": 1,
+    "implied_by": 1,
+    "implies": 1,
+    "kinds": 1,
+    "known_facts": 1,
+    "observed": 1,
+    "others": 1,
+    "own": 1,
+    "reduce_requirement": 1,
+    "relation": 1,
+    "representative": 1,
+    "sensor": 1,
+    "spec_implies": 1,
+    "v1": 1
    }
   },
   {
