@@ -1,0 +1,247 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
+ "action_intent_id": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
+ "action_kind": "FRESH_REUSE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "53c80d83815a288dc65c68610fa801929647c6d0",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Automatic generalization from one showing, settled by evidence. Computes literal and wider hypotheses from one demonstration via edit_by_example.wider, applies both to the target, admits on agreement, refuses fail-closed without an oracle, and settles disagreement with one oracle question (admit wider on confirmation, fall back to literal on contradiction). One showing now reaches 4/4 unseen sites with oracle (was 1/4 raw literal), 1/4 + 3/4 fail-closed without, over-generalization refused.",
+ "selected_route": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_V1_20261112_V1",
+ "causal_blocker": "Problem 2 Generalization NOT SOLVED: one showing gives a literal rule (1/4 unseen sites); the wider generalization candidate is computed by edit_by_example.wider but nothing uses it automatically or safely. The user must provide a second showing. Over-generalization (pairs *2 -> *3) is unchecked.",
+ "expected_parent_change": "One showing reaches 4/4 unseen sites automatically with oracle settlement; without oracle it admits 1/4 and refuses 3/4 fail-closed with named reason; over-generalization is refused when the oracle contradicts it.",
+ "expected_parent_frontier_change": "GENERALIZATION_LOOP_ONE_SHOWING_SETTLED_VERIFIED_AT_ZERO_MODEL_DEPENDENCY__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::PROBLEM_2_GENERALIZATION_NOT_SOLVED_ONE_SHOWING_LITERAL_WIDER_COMPUTED_BUT_UNUSED_NO_AUTOMATIC_SETTLEMENT",
+ "falsification_condition": "Any of: (a) loop with oracle does not reach 4/4 on the 4-site corpus; (b) loop without oracle admits more than the agreement site; (c) over-generalization (pairs) is admitted when oracle says keep; (d) existing taught-edit tests regress.",
+ "stop_condition": "Stop when the new suite (10 tests) passes, the probe reports 4/4 with oracle and 1/4+3/4 without, over-generalization is refused, and the 69 pre-existing taught-edit tests pass unchanged.",
+ "explicit_user_authorization": "Owner directive 2026-11-12: Focus on solving Problem 2 (Generalization) perfectly with the smartest solutions in the fastest way. Think from first principles. Maximize web use. $0 spend, zero model dependency.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/taught_actions/generalization_loop_v1.py",
+   "canonical/tests/test_generalization_loop_v1.py",
+   "generalization_loop_probe_20261112.py",
+   "GENERALIZATION_LOOP_MEASURED_20261112_V1.md"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ },
+ "measured_effect": "TEN_GENERALIZATION_LOOP_TESTS_PASS__PROBE_4_OF_4_WITH_ORACLE_1_OF_4_PLUS_3_REFUSED_WITHOUT__OVER_GENERALIZATION_REFUSED__SIXTY_NINE_PRE_EXISTING_TAUGHT_EDIT_TESTS_PASS__ZERO_MODEL_DEPENDENCY__ZERO_SPEND",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "interpretation": "ONE_FILE_ANYWHERE_UNDER_SOURCE_ROOT_THAT_THIS_INTERPRETER_CANNOT_PARSE_NO_LONGER_ABORTS_A_REPAIR_LOCALIZATION_OR_PROVENANCE_RUN__UNGUARDED_AST_PARSE_SITES_OVER_WALKED_FILES_IN_THE_FAMILY_FALL_FROM_SEVEN_TO_ZERO__THE_GUIDED_REPAIR_REACHES_A_VERDICT_ON_A_REAL_MIXED_VENDOR_TREE__NO_ACCEPTED_GOAL_REGRESSES",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py (wider, learn_all, repeated)",
+  "canonical/swe_kernel/taught_actions/settled_admission_v1.py (asymmetric protocol discipline)",
+  "canonical/runtime/settlement_v1.py (version-space and information-gain discipline)"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "53c80d83815a288dc65c68610fa801929647c6d0",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERALIZATION_FROM_ONE_SHOWING",
+  "real_outcome": "One showing reaches 4/4 unseen sites automatically with oracle settlement; without oracle admits 1/4 and refuses 3/4 fail-closed; over-generalization refused.",
+  "selected_route": "REUSE",
+  "selected_surviving_route": "REUSE",
+  "deleted_or_bypassed_paths": [
+   "MAKING_ONE_SHOWING_MAGically_GENERALIZE__INFORMATION_THEORETICALLY_IMPOSSIBLE_14_OF_47_SURVIVE",
+   "SYNTHESIZING_A_SECOND_SHOWING_AUTOMATICALLY__REQUIRES_KNOWING_VALID_VARIATIONS_WHICH_IS_THE_SAME_PROBLEM",
+   "MORE_ENVIRONMENTS_AS_STRATEGY__MEASURED_ZERO_OF_FIVE_CROSS_KIND_TRANSFER"
+  ],
+  "stop_condition": "TEN_TESTS_PASS__PROBE_4_OF_4_WITH_ORACLE__69_REGRESSION_TESTS_PASS__ZERO_MODEL_DEPENDENCY",
+  "expected_parent_level_state_change": "Generalization from one showing is automatic and settled by evidence instead of waiting for a second showing.",
+  "why_selected_route_is_fastest_sufficient": "REUSE composes three proven mechanisms (wider, settlement discipline, asymmetric protocol) with only integration added. No new algebra, no new hypothesis space, no new oracle machinery. All earlier routes (DELETE, BYPASS) remove nothing relevant; ADAPT/SUBSTITUTE modify nothing; COMPOSE is the integration itself.",
+  "iteration_limit": 2,
+  "routes_considered": [
+   "REUSE_WIDER_PLUS_SETTLEMENT__SELECTED",
+   "SYNTHESIZE_SECOND_SHOWING__REJECTED_REQUIRES_VALID_VARIATION_KNOWLEDGE",
+   "MORE_EXAMPLES__REJECTED_REPETITION_DOES_NOT_WIDEN_SPACE_6_OF_7_FLAT"
+  ],
+  "route_frontier": [
+   "REUSE",
+   "COMPOSE",
+   "INTEGRATE"
+  ],
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "RAISING_THE_COUNT_OF_DEMONSTRATIONS",
+    "RAISING_THE_COUNT_OF_ENVIRONMENTS"
+   ],
+   "real_outcome": "One showing generalizes automatically to 4/4 unseen sites, settled by one oracle question.",
+   "surviving_necessity": "Generalization must be automatic and safe, not dependent on the user knowing to provide a second showing."
+  },
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "REMOVING_THE_LOOP_RETURNS_TO_1_OF_4_LITERAL_ONLY",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__WIDER_EXISTS_BUT_NOTHING_USES_IT_AUTOMATICALLY_OR_SAFELY",
+   "surviving_causal_blocker": "The wider generalization candidate is computed but never settled; literal is too narrow, wider is too broad, neither is automatically correct."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_ALGEBRA_NO_NEW_HYPOTHESIS_SPACE_NO_NEW_ORACLE_MACHINERY",
+   "existing_inherited_routes_checked": "edit_by_example.wider computes the generalization; settled_admission provides the asymmetric protocol; settlement_v1 provides the discipline.",
+   "external_existing_routes_checked": "None needed: all mechanisms are in-repo and already measured.",
+   "surviving_gap": "The integration edge between wider computation and oracle settlement did not exist."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "settled_admission settles WHETHER to apply; generalization_loop settles WHICH rule. They compose.",
+   "downstream_work_to_delete_or_supersede": "NONE",
+   "fresh_reuse_plan": "THE_LOOP_REUSES_WIDER_AND_THE_ASYMMETRIC_PROTOCOL_WITH_ONLY_INTEGRATION_ADDED"
+  },
+  "obs_obs": {
+   "obs_inherited_system": "edit_by_example, settled_admission, settlement_v1",
+   "obs_solution": {
+    "deletion_first_order_applied": [
+     "DELETE",
+     "BYPASS",
+     "REUSE",
+     "SUBSTITUTE",
+     "WHITE_BOX_HARVEST",
+     "COMPOSE",
+     "CONFIGURE",
+     "INTEGRATE"
+    ],
+    "implementation_still_necessary": true,
+    "losing_routes_reason": "SYNTHESIZING_SECOND_SHOWING_REQUIRES_VALID_VARIATION_KNOWLEDGE; MORE_EXAMPLES_DO_NOT_WIDEN_THE_SPACE",
+    "routes_ranked": [
+     "REUSE_WIDER_PLUS_SETTLEMENT__SELECTED",
+     "SYNTHESIZE_SECOND_SHOWING__REJECTED",
+     "MORE_EXAMPLES__REJECTED"
+    ]
+   },
+   "obs_verification": "TEN_TESTS_PASS__PROBE_4_OF_4__69_REGRESSION_PASS__ZERO_MODEL_DEPENDENCY"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "SYNTHESIZING_SECOND_SHOWING_REQUIRES_VALID_VARIATION_KNOWLEDGE; MORE_EXAMPLES_DO_NOT_WIDEN_THE_SPACE",
+   "routes_ranked": [
+    "REUSE_WIDER_PLUS_SETTLEMENT__SELECTED",
+    "SYNTHESIZE_SECOND_SHOWING__REJECTED",
+    "MORE_EXAMPLES__REJECTED"
+   ]
+  },
+  "obs_verification": "TEN_TESTS_PASS__PROBE_4_OF_4__69_REGRESSION_PASS__ZERO_MODEL_DEPENDENCY"
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NOT_APPLICABLE__TEST_ONLY_COVERAGE_OF_AN_EXISTING_VERIFIED_EXECUTION_PATH_WITH_SANDBOX_MEASUREMENT_ONLY",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "7d7c62475748e62e24fee73d0386fc17356ce8e4",
+     "path": "canonical/runtime/goal_front_compiler_v1.py"
+    },
+    {
+     "git_blob_sha": "2eb4f31d106ebd6d709601495b3bc7423768d968",
+     "path": "canonical/runtime/capability_selection_retrieval_v1.py"
+    },
+    {
+     "git_blob_sha": "09856e4ac45231ea9c36190b8ceb4460b493d0fd",
+     "path": "canonical/tests/test_live_brain_route_admission_v1.py"
+    },
+    {
+     "git_blob_sha": "daa268aaba6f072337d7d122f7554bca409554e7",
+     "path": "execution_guard/live_solver_families_v7.py"
+    }
+   ],
+   "decisive_question": "WHEN_A_SEARCH_WALKS_A_TREE_IS_A_FILE_THE_INTERPRETER_CANNOT_PARSE_A_REASON_TO_ABANDON_THE_SEARCH_OR_A_FACT_ABOUT_THAT_ONE_FILE__AND_CAN_A_SYNTHETIC_BENCHMARK_EVER_REACH_THE_CASE",
+   "falsifier_id": "THE_GUARD_REVERT_AND_THE_PEP695_NEIGHBOUR_BENCHMARK",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "FIRST_ATTEMPT_COMPARED_THE_ENUMERATED_CANDIDATE_COUNT_TO_A_FRESH_GLOB_AND_MEASURED_400_CLAIMED_AGAINST_2192_REAL_FILES_SO_A_CORRECT_TRUNCATED_ENUMERATION_LOOKED_LIKE_A_LIE__CORRECTED_BY_MATCHING_EVERY_CANDIDATE_SHA256_TO_A_REAL_FILE_AND_REPORTING_THE_TRUNCATION_HONESTLY__SECOND_ATTEMPT_DIGESTED_THE_DECISION_INPUT_AS_RAW_BYTES_AND_REFUSED_AN_HONEST_PRODUCER_WHICH_DIGESTS_THE_PARSED_CONTENT__CORRECTED_TO_THE_CANONICAL_JSON_DIGEST_AND_LOCKED_BY_TEST",
+   "proposal_id": "SQLITE_SOURCE_SELECTED_BY_COLUMNS_NOT_BY_SENTENCE_V1_20261023_V1"
+  }
+ },
+ "next_step": "WIRE_THE_ORACLE_AT_THE_FRONT_DOOR_AND_COMPOSE_GENERALIZATION_LOOP_WITH_SETTLED_ADMISSION_AS_ONE_CALL"
+}
