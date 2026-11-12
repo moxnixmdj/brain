@@ -78,7 +78,7 @@ NOTHING, HELD, BUILT_IN, NEXT_TO_IT, NEW = "nothing", "held", "built in", "next 
 NEEDS = (NOTHING, HELD, BUILT_IN, NEXT_TO_IT, NEW)
 
 SMALL_PIECE = 3                    # nodes: `abs(x)` for `x` is two more, `x + 1` for `x` three
-TOO_LARGE_TO_LIST = 1000           # nodes of one statement; beyond it the candidates are not listed (minutes for one)
+TOO_LARGE_TO_LIST = 300            # nodes of one statement; beyond it the candidates are not listed (a large one takes minutes)
 
 _OPERATORS = (ast.operator, ast.cmpop, ast.boolop, ast.unaryop)
 _DEFINITIONS = (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)
