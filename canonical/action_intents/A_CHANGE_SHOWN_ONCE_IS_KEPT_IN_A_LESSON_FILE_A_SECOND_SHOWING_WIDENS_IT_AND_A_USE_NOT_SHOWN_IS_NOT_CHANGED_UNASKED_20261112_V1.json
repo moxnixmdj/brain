@@ -1,0 +1,567 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE_A_SECOND_SHOWING_WIDENS_IT_AND_A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED_20261112_V1",
+ "action_intent_id": "A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE_A_SECOND_SHOWING_WIDENS_IT_AND_A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE_A_SECOND_SHOWING_WIDENS_IT_AND_A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "f8e6d2eaea5eb46e9eba7bd570b7d9a32ce27b2e",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asks why the system cannot be shown an advanced coding action once and then keep it for good. After the previous change an edit shown as two files was repeated on a third, but nothing was kept: the example had to be handed over with every request, only one example could be read, and the rule was applied to every piece of code of its form. Measured on commits of projects the program was not developed on, that last point wrote yaml.safe_load(stream, Loader=...), a call that raises, and answered PASS. This change (1) reads several examples as one, so that a second showing makes a rule more general or more exact; (2) keeps the examples in a lesson file the request names, with what they teach written out and checked against the examples at every use; (3) applies a rule only to code that reads the same imports and is used a way an example showed, and otherwise refuses with the line, or leaves that code alone when the request says so. Four sentences are taught through the existing compiler; no registry row, no change to the front door, no governance change.",
+ "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_SEVERAL_EXAMPLES_ARE_READ_AS_ONE_AND_ARE_KEPT_IN_A_LESSON_FILE__AND_SO_A_RULE_IS_APPLIED_ONLY_TO_CODE_THAT_IS_ABOUT_THE_SAME_THINGS_AND_IS_USED_THE_WAY_AN_EXAMPLE_SHOWED__THROUGH_THE_EXISTING_COMPILER_SANDBOX_AND_TEACHING_TOOL",
+ "causal_blocker": "A_CHANGE_SHOWN_ONCE_WAS_NOT_KEPT__THE_EXAMPLE_HAD_TO_BE_HANDED_OVER_WITH_EVERY_REQUEST__ONLY_ONE_EXAMPLE_COULD_BE_READ__AND_ON_A_PROJECT_THE_PROGRAM_WAS_NOT_DEVELOPED_ON_IT_WROTE_A_CALL_THE_NEW_FUNCTION_DOES_NOT_ACCEPT_AND_REPORTED_IT_DONE",
+ "expected_parent_change": "A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_FILE_AND_REPEATED_FROM_IT_WITHOUT_THE_EXAMPLE__A_SECOND_SHOWING_MAKES_THE_LESSON_SAY_MORE__A_USE_NO_EXAMPLE_SHOWED_IS_REFUSED_WITH_ITS_LINE_OR_LEFT_AS_IT_IS_WHEN_THE_REQUEST_SAYS_SO",
+ "expected_parent_frontier_change": "FOUR_TAUGHT_SENTENCES_MORE__ON_COMMITS_OF_PROJECTS_THE_PROGRAM_WAS_NOT_DEVELOPED_ON_NO_EDIT_DIFFERS_FROM_THE_HUMANS_AND_NONE_IS_MADE_WHERE_THE_HUMAN_MADE_NONE__AT_A_MEASURED_COST_IN_EDITS_THAT_ARE_NO_LONGER_MADE_UNASKED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_CHANGE_SHOWN_ONCE_WAS_NOT_KEPT__THE_EXAMPLE_HAD_TO_BE_HANDED_OVER_WITH_EVERY_REQUEST__ONLY_ONE_EXAMPLE_COULD_BE_READ__AND_ON_A_PROJECT_THE_PROGRAM_WAS_NOT_DEVELOPED_ON_IT_WROTE_A_CALL_THE_NEW_FUNCTION_DOES_NOT_ACCEPT_AND_REPORTED_IT_DONE",
+ "falsification_condition": "A_TEST_THAT_PASSES_ON_THE_BASE_COMMIT_FAILS_ON_THIS_ONE__OR_A_HEARTBEAT_OR_CENSUS_REQUEST_THAT_PASSED_IS_LOST__OR_ON_A_COMMIT_OF_ANOTHER_PROJECT_THE_ACTION_WRITES_A_STATEMENT_THE_HUMAN_DID_NOT_WRITE__OR_A_LESSON_FILE_IS_USED_WHOSE_TEXT_AND_EXAMPLES_DISAGREE__OR_A_FILE_THAT_IS_NOT_A_LESSON_IS_WRITTEN_OVER__OR_ANYTHING_IN_A_LESSON_IS_RUN",
+ "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_REGISTRY_ROW_IS_ADDED__RE_TEACHING_REPRODUCES_THE_TRACKED_BUNDLE_BYTE_FOR_BYTE__THE_RELATED_TEST_FILES_THE_HEARTBEAT_AND_BOTH_CENSUSES_GIVE_THE_SAME_RESULTS_ON_BOTH_TREES",
+ "explicit_user_authorization": "Owner decisions in this session, 2026-11-11. Asked how coding actions should reach the front door, the owner chose 'Teach it, in the sandbox': each action written once as a small program, checked by the repository's compiler on a second example, a few actions per pull request. The owner's standing question is why the system cannot be shown an action once and then keep it permanently; the previous change (#6665) repeated a shown edit but kept nothing, and its report named a kept lesson as the next step. Asked about merging #6658 the owner answered 'Yes, and merge the next ones too.' No governance change. No guard is weakened.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+   "canonical/tools/teach_actions_v1.py",
+   "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json",
+   "canonical/tests/test_a_change_shown_once_is_kept_and_a_second_showing_widens_it_v1.py",
+   "canonical/tests/test_an_edit_is_worked_out_from_an_example_and_repeated_on_another_file_v1.py",
+   "canonical/tests/test_two_refactorings_are_taught_once_and_checked_on_a_second_example_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "BEFORE_AND_AFTER_THROUGH_THE_SAME_FRONT_DOOR_ON_THE_SAME_FILES_AND_SENTENCES__THE_ONLY_DIFFERENCE_BETWEEN_THE_TWO_TREES_IS_THIS_CHANGE__THE_COMMIT_MEASUREMENTS_COMPARE_THE_ACTIONS_OUTPUT_WITH_WHAT_PEOPLE_IN_OTHER_PROJECTS_WROTE__THE_SECOND_SET_OF_COMMITS_WAS_DECLARED_BEFORE_IT_WAS_FETCHED__33_DELIBERATE_BREAKS_OF_THE_NEW_CODE_EACH_FAIL_A_TEST"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS__THE_FRONT_DOOR_THE_TEST_FILES_THE_HEARTBEAT_AND_THE_CENSUSES_EACH_AGAINST_MAIN_AT_d1b9c677_ON_THE_SAME_INPUT__NOT_PUBLIC_RUNNER_EVIDENCE__MAIN_THEN_MOVED_TO_f8e6d2ea_BY_CHANGES_OF_OTHER_SESSIONS__IT_IS_MERGED_IN__THE_TESTS_OF_THIS_CHANGE_THE_FRONT_DOOR_SENTENCES_AND_THE_GATES_WERE_RUN_AGAIN_ON_THE_MERGED_TREE__FRONT_DOOR__SIX_SENTENCES_IN_ONE_FOLDER__ON_THE_BASE_COMMIT_ALL_SIX_ARE_REFUSED_AND_NOTHING_IS_WRITTEN__AFTER__A_CHANGE_IS_REMEMBERED_IN_A_LESSON_FILE__REPEATING_IT_ON_A_FILE_WITH_A_USE_IT_DID_NOT_SHOW_IS_REFUSED_WITH_THE_LINE__THE_SAME_REQUEST_SAYING_LEAVE_THE_REST_ALONE_IS_DONE__A_SECOND_SHOWING_IS_ADDED_AND_THE_FIRST_REQUEST_IS_THEN_DONE__EVERY_DONE_REQUEST_RAN_INSIDE_THE_SANDBOX__ACROSS_PROJECTS__A_CHANGE_IS_SHOWN_ONCE_IN_ONE_PROJECT_AND_REPEATED_ON_FILES_OF_OTHER_PROJECTS_THAT_MADE_THE_SAME_KIND_OF_CHANGE__COMPARED_STATEMENT_BY_STATEMENT_WITH_WHAT_THE_PEOPLE_THERE_WROTE__SET_TWO_WAS_DECLARED_BEFORE_ANY_OF_ITS_COMMITS_WAS_FETCHED_34_KINDS_OF_WHICH_18_HAD_TWO_OR_MORE_PROJECTS_AND_12_COULD_BE_TAUGHT__THE_ALL_OR_NOTHING_RUN_WAS_MADE_ONCE__THE_REFUSAL_TEXT_AND_THE_LEAVE_THE_REST_ALONE_REQUEST_WERE_ADDED_AFTER_THAT_RUN_AND_THE_ALL_OR_NOTHING_COUNTS_RUN_AGAIN_ARE_IDENTICAL__SET_TWO_ONE_SHOWING__114_STATEMENTS_THE_PEOPLE_CHANGED__SAME_AS_THE_HUMAN_59_BEFORE_THIS_CHANGE__41_ALL_OR_NOTHING__56_LEAVING_THE_REST_ALONE__DIFFERENT_FROM_THE_HUMAN_0_IN_ALL_THREE__CHANGED_WHERE_THE_HUMAN_MADE_NO_CHANGE_0_IN_ALL_THREE__SET_TWO_TWO_SHOWINGS_ON_THE_79_STATEMENTS_OF_THE_PROJECTS_AFTER_THE_SECOND__ONE_SHOWING_29_AND_44__TWO_SHOWINGS_48_AND_63__ALL_OR_NOTHING_AND_LEAVING_THE_REST_ALONE__DIFFERENT_0__SO_ON_SET_TWO_THE_RULE_ABOUT_USES_PREVENTED_NOTHING_AND_COST_18_OF_59_EDITS_ALL_OR_NOTHING_AND_3_WHEN_THE_REST_IS_LEFT_ALONE__SET_ONE_19_KINDS_13_TAUGHT__ITS_RESULTS_WERE_SEEN_WHILE_THE_RULE_ABOUT_USES_WAS_DESIGNED_SO_IT_IS_NOT_A_BLIND_TEST_OF_THAT_RULE__ONE_SHOWING__169_STATEMENTS__BEFORE_88_SAME_AND_7_DIFFERENT__OF_THOSE_7__ONE_TURNED_A_WORKING_CALL_INTO_yaml_safe_load_WITH_A_Loader_KEYWORD_WHICH_RAISES__ONE_WAS_ON_A_LINE_THAT_ALREADY_RAISED__ONE_WAS_ANOTHER_VALID_FIX__FOUR_DID_PART_OF_WHAT_THE_HUMAN_DID_AT_THAT_PLACE__AFTER_85_SAME_ALL_OR_NOTHING_AND_85_LEAVING_THE_REST_ALONE_AND_0_DIFFERENT__TWO_SHOWINGS_ON_117_STATEMENTS__79_AND_85_SAME_AGAINST_69_WITH_ONE__AND_4_WHERE_THE_HUMAN_CHANGED_MORE_AT_THE_SAME_PLACE__THE_RULE_THAT_A_BLANK_FOR_AN_OBJECT_DOES_NOT_STAND_FOR_AN_IMPORTED_MODULE_HAS_NO_CASE_IN_EITHER_SET__IT_RESTS_ON_A_CONSTRUCTED_CASE_warnings_warn_AND_COST_ONE_EDIT_THE_HUMAN_ALSO_MADE__THE_20_COMMITS_THE_PROGRAM_WAS_DEVELOPED_ON__ONE_FILE_OF_A_COMMIT_SHOWN_AND_EACH_OTHER_FILE_EDITED__SAME_AS_THE_HUMAN_599_BEFORE__461_ALL_OR_NOTHING__554_LEAVING_THE_REST_ALONE__OF_935__THE_DIFFERENCE_IS_CALLS_WITH_A_NUMBER_OF_ARGUMENTS_OR_A_KEYWORD_THE_SHOWN_FILE_DID_NOT_HAVE__162_TEST_FILES_THAT_USE_THE_FRONT_DOOR_THE_COMPILER_OR_THE_TAUGHT_PROGRAMS__1697_PASSED_471_FAILED_6_SKIPPED_BEFORE__1763_PASSED_472_FAILED_6_SKIPPED_AFTER__3_FILES_GAVE_NO_RESULT_IN_170_SECONDS_ON_EITHER_TREE__THE_FILES_THAT_DIFFER_ARE_THE_NEW_TEST_FILE__THE_PER_LESSON_CASES_OF_ONE_EXISTING_FILE__AND_ONE_TEST_THAT_COMPARES_TWO_TIMINGS_test_mutation_and_perf_are_measurements_too__WHICH_FAILED_ON_THE_MERGED_TREE_IN_THIS_RUN_AND_ON_MAIN_IN_A_REPLAY_OF_THE_SAME_FILES_AND_PASSED_FOUR_TIMES_OF_FOUR_ON_BOTH_TREES_RUN_ALONE__HEARTBEAT_SEED_4242_127_OF_216_IN_SCOPE_AND_ALL_OUT_OF_SCOPE_REFUSED_ON_BOTH_TREES_NO_FAMILY_DIFFERS__CENSUS_OF_28_HARD_SURFACES_AND_CENSUS_OF_49_ADVANCED_REQUESTS_NO_ROW_DIFFERS__ONE_NEW_TEST_FILE_64_TESTS__33_DELIBERATE_BREAKS_EACH_FAIL_AT_LEAST_ONE_BEHAVIOURAL_TEST",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_OBLIGATIONS_NAMED_ARE_COMPUTER_USE_OBLIGATIONS__A_CODE_EDITING_REQUEST_COUNTS_TOWARD_THEM_ONLY_IF_THE_EDIT_IS_THE_ONE_THE_SENTENCE_STATES__AND_A_TASK_LEARNED_FROM_ONE_DEMONSTRATION_ONLY_IF_IT_REFUSES_WHAT_IT_CANNOT_KEEP_THE_SAME",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-12T14:47:21Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_ADDS_THREE_TAUGHT_ACTIONS_TO_ONE_PROGRAM_AND_NARROWS_WHERE_ITS_RULES_ARE_APPLIED",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "A_CHANGE_SHOWN_ONCE_IS_KEPT_IN_A_LESSON_FILE__A_SECOND_SHOWING_WIDENS_IT__A_USE_NOT_SHOWN_IS_NOT_CHANGED_UNASKED",
+   "decisive_question": "IS_A_CHANGE_SHOWN_IN_ONE_PROJECT_REPEATED_IN_OTHER_PROJECTS_AS_THE_PEOPLE_THERE_MADE_IT__WITH_NO_STATEMENT_WRITTEN_THAT_THEY_DID_NOT_WRITE__AND_IS_NOTHING_THAT_PASSED_LOST",
+   "falsifier_id": "ONE_RELATED_TEST_HEARTBEAT_OR_CENSUS_REQUEST_THAT_PASSED_ON_THE_BASE_COMMIT_AND_FAILS_HERE__OR_ONE_STATEMENT_WRITTEN_ON_A_COMMIT_OF_THE_SECOND_SET_THAT_THE_HUMAN_DID_NOT_WRITE__OR_ONE_LESSON_FILE_USED_ALTHOUGH_ITS_TEXT_AND_EXAMPLES_DISAGREE",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_162_RELATED_TEST_FILES_THE_HEARTBEAT_AND_BOTH_CENSUSES_GIVE_THE_SAME_RESULTS_ON_BOTH_TREES_APART_FROM_THE_NEW_TESTS__ON_THE_SECOND_SET_89_EDITS_ALL_OR_NOTHING_AND_119_LEAVING_THE_REST_ALONE_ARE_ALL_WHAT_THE_HUMAN_WROTE__ON_THE_FIRST_SET_FOUR_EDITS_MADE_AFTER_TWO_SHOWINGS_ARE_PART_OF_A_LARGER_CHANGE_THE_HUMAN_MADE_AT_THE_SAME_PLACE_AND_ARE_STATED_AS_SUCH"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "f8e6d2eaea5eb46e9eba7bd570b7d9a32ce27b2e",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "THE_OWNER_CAN_SHOW_A_CHANGE_ONCE_HAVE_IT_KEPT_AND_HAVE_IT_REPEATED_LATER_WITHOUT_THE_EXAMPLE__OR_GET_A_REFUSAL_THAT_NAMES_THE_LINE_AND_SAYS_WHAT_TO_SHOW",
+  "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_SEVERAL_EXAMPLES_ARE_READ_AS_ONE_AND_ARE_KEPT_IN_A_LESSON_FILE__AND_SO_A_RULE_IS_APPLIED_ONLY_TO_CODE_THAT_IS_ABOUT_THE_SAME_THINGS_AND_IS_USED_THE_WAY_AN_EXAMPLE_SHOWED__THROUGH_THE_EXISTING_COMPILER_SANDBOX_AND_TEACHING_TOOL",
+  "selected_surviving_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_SEVERAL_EXAMPLES_ARE_READ_AS_ONE_AND_ARE_KEPT_IN_A_LESSON_FILE__AND_SO_A_RULE_IS_APPLIED_ONLY_TO_CODE_THAT_IS_ABOUT_THE_SAME_THINGS_AND_IS_USED_THE_WAY_AN_EXAMPLE_SHOWED__THROUGH_THE_EXISTING_COMPILER_SANDBOX_AND_TEACHING_TOOL",
+  "deleted_or_bypassed_paths": [
+   "A_STORE_OF_LESSONS_KEYED_BY_A_QUOTED_NAME__NOT_DONE__A_TAUGHT_PROGRAM_SEES_ONLY_THE_PROJECT_SO_THE_STORE_IS_A_FILE_IN_IT_ANYWAY_AND_THE_PATH_IS_THE_NAME__NO_HIDDEN_STATE_AND_NO_FORGET_OR_SHOW_SENTENCES_ARE_NEEDED",
+   "A_LESSON_THAT_HOLDS_ONLY_RULES__NOT_DONE__CODE_AN_EXAMPLE_LEFT_ALONE_IS_EVIDENCE_AND_WOULD_BE_LOST__AND_A_RULE_FORMAT_WOULD_FREEZE_TODAYS_LEARNER",
+   "A_JSON_SUFFIX_FOR_THE_LESSON_FILE__NOT_DONE__THE_DOOR_ANSWERS_A_SENTENCE_NAMING_A_JSON_FILE_WITH_ITS_EXECUTION_BOUNDARY_BEFORE_A_TAUGHT_SENTENCE_IS_CONSULTED",
+   "LEAVING_AN_UNSHOWN_USE_ALONE_WITHOUT_BEING_ASKED__BUILT_FIRST_AND_REPLACED__A_DONE_REQUEST_PRINTS_ONE_FIXED_LINE_SO_THE_PLACES_LEFT_COULD_NOT_BE_REPORTED",
+   "A_BLANK_FROM_ONE_CHANGED_PLACE_BY_BLANKING_WHAT_WAS_COPIED_UNCHANGED__NOT_DONE__time_clock_WOULD_BECOME_ANY_OBJECTS_clock__PUBLISHED_AS_OVER_GENERAL",
+   "A_SECOND_COPY_OF_THE_LEARNER_FOR_EACH_NEW_SENTENCE__NOT_DONE__ONE_PROGRAM_SERVES_FOUR_ACTIONS_AND_THE_TEACHING_TOOL_WRITES_ITS_REQUEST_LINE_FROM_THE_LESSON"
+  ],
+  "stop_condition": "THE_REFEREE_REPORTS_ZERO_VIOLATIONS__THE_UNIFIED_MODEL_SUITE_PASSES_137_OF_137__NO_REGISTRY_ROW_IS_ADDED__RE_TEACHING_REPRODUCES_THE_TRACKED_BUNDLE_BYTE_FOR_BYTE__THE_RELATED_TEST_FILES_THE_HEARTBEAT_AND_BOTH_CENSUSES_GIVE_THE_SAME_RESULTS_ON_BOTH_TREES",
+  "expected_parent_level_state_change": "FOUR_TAUGHT_SENTENCES_MORE__ON_COMMITS_OF_PROJECTS_THE_PROGRAM_WAS_NOT_DEVELOPED_ON_NO_EDIT_DIFFERS_FROM_THE_HUMANS_AND_NONE_IS_MADE_WHERE_THE_HUMAN_MADE_NONE__AT_A_MEASURED_COST_IN_EDITS_THAT_ARE_NO_LONGER_MADE_UNASKED",
+  "why_selected_route_is_fastest_sufficient": "THE_LEARNER_THE_COMPILER_THE_SANDBOX_THE_TEACHING_TOOL_AND_THE_DOORS_FALLBACK_EXIST_AND_ARE_REUSED__THE_NEW_PARTS_ARE_READING_SEVERAL_EXAMPLES_AS_ONE__A_FILE_FORMAT__AND_THREE_CHECKS_AT_THE_PLACE_WHERE_A_RULE_IS_APPLIED",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "READ_SEVERAL_EXAMPLES_AS_ONE_KEEP_THEM_IN_A_LESSON_FILE_AND_APPLY_A_RULE_ONLY_WHERE_IT_WAS_SHOWN",
+   "KEEP_APPLYING_A_RULE_TO_EVERY_PIECE_OF_CODE_OF_ITS_FORM__REJECTED_BY_MEASUREMENT_ON_OTHER_PROJECTS",
+   "BLANK_WHAT_ONE_PLACE_COPIED_UNCHANGED__REJECTED_OVER_GENERAL",
+   "DECIDE_WHAT_TO_BLANK_FROM_A_LARGE_CODE_CORPUS__DEFERRED_NO_CORPUS_HERE",
+   "A_LANGUAGE_MODEL_WRITES_VARIANTS_OF_THE_EXAMPLE__REJECTED_FORBIDDEN_HERE",
+   "A_HIDDEN_STORE_KEYED_BY_NAME__REJECTED_THE_PROGRAM_SEES_ONLY_THE_PROJECT",
+   "A_LESSON_OF_RULES_WITHOUT_EXAMPLES__REJECTED_LOSES_EVIDENCE",
+   "LEAVE_UNSHOWN_USES_ALONE_UNASKED__REJECTED_CANNOT_BE_REPORTED",
+   "RUN_THE_PROJECTS_TESTS_AFTER_THE_EDIT__DEFERRED_STRONGER_AND_NOT_BUILT"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T14:47:21Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__ONE_EXAMPLE_GIVEN_AS_TWO_FILES_WITH_EVERY_REQUEST__NOTHING_IS_KEPT__A_RULE_IS_APPLIED_TO_EVERY_PIECE_OF_CODE_OF_ITS_FORM",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+     "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+     "canonical/tools/teach_actions_v1.py",
+     "canonical/runtime/live_brain_route_admission_v1.py",
+     "canonical/runtime/confine_v1.py",
+     "canonical/runtime/acquired_operator_memory_v1.py",
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://cs.uwaterloo.ca/~m2nagapp/courses/CS846/1171/papers/nguyen_ase13.pdf",
+     "https://danny.cs.colorado.edu/papers/PyEvolve_ICSE2023.pdf",
+     "https://arxiv.org/pdf/2308.14687",
+     "https://xiongyingfei.github.io/papers/ASE19a.pdf",
+     "https://arxiv.org/html/2402.07138v3",
+     "https://www.alphaxiv.org/abs/2608.03874",
+     "https://huggingface.co/papers/2602.12670",
+     "https://arxiv.org/html/2609.23570",
+     "https://arxiv.org/html/2602.08316v2"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/LucyAndLuna2023/meshctx/commit/740af6bc23",
+     "https://github.com/tgandor/meats/commit/9d45804a77",
+     "https://github.com/yaml/pyyaml/blob/main/lib/yaml/__init__.py",
+     "https://github.com/davidmalcolm/pygobject",
+     "https://github.com/greggggg33/scrapy"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://codex.danielvaughan.com/2026/08/06/continualskillbench-llm-agent-skill-evolution-codex-cli-skill-architecture-consolidation-gap/",
+     "https://benchlm.ai/benchmarks/swe-bench-pro"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "study repetitiveness of code changes in software evolution percentage repeated changes drops with change size cross-project"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "inferring code transformation rules from examples API migration Python 2026 precision over-generalization guards argument compatibility one example"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent skill library learned from single demonstration fails to generalize continual learning benchmark agents skill reuse retrieval interference"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "coding agent memory learns from past commits or experience reuse across repositories 2026 evaluation SWE-bench continual learning result"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "KEEP_APPLYING_A_RULE_TO_EVERY_PIECE_OF_CODE_OF_ITS_FORM",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+     ],
+     "qualification_evidence": [
+      "on this host the program of the base commit, shown yaml.load(stream) becoming yaml.safe_load(stream) in one project, turned return yaml.load(stream, Loader=yaml.Loader) of another project into yaml.safe_load(stream, Loader=yaml.Loader); yaml.safe_load has no Loader parameter and raises"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "ONE_EDIT_IN_154_ON_OTHER_PROJECTS_RAISES_WHEN_RUN_AND_IS_REPORTED_DONE",
+      "CAPABILITY_STRENGTH": "MOST_EDITS_MADE",
+      "WALL_CLOCK": "NONE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "A_WRONG_PASS",
+      "VERIFIABILITY": "NOTHING_CHECKS_THE_NEW_FUNCTIONS_ARGUMENTS"
+     }
+    },
+    {
+     "route": "BLANK_WHAT_ONE_CHANGED_PLACE_COPIED_UNCHANGED",
+     "evidence": [
+      "https://arxiv.org/pdf/2308.14687"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/pdf/2308.14687"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "PUBLISHED_OVER_GENERALIZATION_read_table_ARGS_TO_read_csv_ARGS__HERE_time_clock_WOULD_BECOME_ANY_OBJECTS_clock",
+      "CAPABILITY_STRENGTH": "ONE_SHOWING_WOULD_OFTEN_SUFFICE",
+      "WALL_CLOCK": "SHORT",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "OVER_GENERAL",
+      "VERIFIABILITY": "NEEDS_A_VERIFIER_PER_EDIT"
+     }
+    },
+    {
+     "route": "DECIDE_WHAT_TO_BLANK_FROM_A_LARGE_CODE_CORPUS",
+     "evidence": [
+      "https://xiongyingfei.github.io/papers/ASE19a.pdf"
+     ],
+     "qualification_evidence": [
+      "https://xiongyingfei.github.io/papers/ASE19a.pdf"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DEFERRED",
+     "comparison": {
+      "CORRECTNESS": "PUBLISHED_FOR_JAVA_WITH_A_CORPUS_OF_MANY_PROJECTS",
+      "CAPABILITY_STRENGTH": "GENERALIZES_FROM_ONE_EXAMPLE",
+      "WALL_CLOCK": "A_CORPUS_MUST_BE_BUILT_AND_KEPT",
+      "INCREMENTAL_COST": "STORAGE",
+      "RELIABILITY": "DEPENDS_ON_THE_CORPUS",
+      "VERIFIABILITY": "A_TAUGHT_PROGRAM_SEES_ONLY_THE_PROJECT"
+     }
+    },
+    {
+     "route": "LET_A_LANGUAGE_MODEL_WRITE_VARIANTS_OF_THE_EXAMPLE",
+     "evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "THE_PAPER_REPORTS_65_5_PERCENT_OF_GENERATED_VARIANTS_WRONG_BEFORE_FILTERING_BY_TESTS",
+      "CAPABILITY_STRENGTH": "COVERS_FORMS_NOBODY_SHOWED",
+      "WALL_CLOCK": "SHORT",
+      "INCREMENTAL_COST": "A_MODEL",
+      "RELIABILITY": "NEEDS_TESTS",
+      "VERIFIABILITY": "FORBIDDEN_HERE_NO_MODEL_IN_CREDITED_COGNITION"
+     }
+    },
+    {
+     "route": "A_HIDDEN_STORE_OF_LESSONS_KEYED_BY_A_QUOTED_NAME",
+     "evidence": [
+      "canonical/runtime/confine_v1.py"
+     ],
+     "qualification_evidence": [
+      "on this host a taught program runs with only the project mounted writable and everything else of the machine absent, so a store outside the project cannot be read and one inside it is a file the request could have named"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "SAME",
+      "CAPABILITY_STRENGTH": "A_SHORTER_SENTENCE",
+      "WALL_CLOCK": "MORE_SENTENCES_FORGET_AND_SHOW",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "HIDDEN_STATE",
+      "VERIFIABILITY": "A_LESSON_NOBODY_CAN_OPEN"
+     }
+    },
+    {
+     "route": "KEEP_ONLY_THE_RULES_IN_THE_LESSON",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+     ],
+     "qualification_evidence": [
+      "on this host a second example that leaves yaml.load(c, Loader=yaml.FullLoader) alone moves the rule from yaml.load to the whole call yaml.load(?1); a lesson that held only the first rule could not be corrected that way"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "LOSES_THE_CODE_AN_EXAMPLE_LEFT_ALONE",
+      "CAPABILITY_STRENGTH": "A_SMALLER_FILE",
+      "WALL_CLOCK": "A_RULE_FORMAT_AND_ITS_VALIDATION",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "A_HAND_WRITTEN_RULE_COULD_SAY_ANYTHING",
+      "VERIFIABILITY": "NOTHING_TO_CHECK_THE_RULE_AGAINST"
+     }
+    },
+    {
+     "route": "LEAVE_AN_UNSHOWN_USE_ALONE_WITHOUT_BEING_ASKED",
+     "evidence": [
+      "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+     ],
+     "qualification_evidence": [
+      "the postcondition of a taught program is stdout_equals on one fixed line, read on this host in verify_postcondition; a done request therefore cannot say which places it left"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "THE_EDITS_MADE_ARE_RIGHT",
+      "CAPABILITY_STRENGTH": "MORE_EDITS_PER_REQUEST",
+      "WALL_CLOCK": "NONE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "A_FILE_REPORTED_EDITED_STILL_HOLDS_THE_OLD_CODE",
+      "VERIFIABILITY": "THE_PLACES_LEFT_ARE_NOT_REPORTED"
+     }
+    },
+    {
+     "route": "RUN_THE_PROJECTS_TESTS_AFTER_THE_EDIT_AND_LET_THEM_DECIDE",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+     ],
+     "qualification_evidence": [
+      "measured on this host: on the second set the refusal of unshown uses prevented no wrong edit and cost 18 of 59 right ones; a test run that executed the edited line would have kept them"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DEFERRED",
+     "comparison": {
+      "CORRECTNESS": "STRONGER_THAN_A_REFUSAL_WHERE_TESTS_RUN_THE_LINE",
+      "CAPABILITY_STRENGTH": "RECOVERS_THE_EDITS_THE_REFUSAL_COSTS",
+      "WALL_CLOCK": "A_TEST_RUNNER_IN_THE_SANDBOX_AND_A_CHECK_THAT_THE_LINE_RAN",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "ONLY_AS_GOOD_AS_THE_TESTS",
+      "VERIFIABILITY": "THE_NEXT_CHANGE"
+     }
+    }
+   ],
+   "negative_search_summary": "SEVEN_QUERIES__SMALL_CODE_CHANGES_REPEAT_ACROSS_PROJECTS_AND_LARGE_ONES_DO_NOT__A_RULE_FROM_ONE_EXAMPLE_IS_REPORTED_AS_TOO_NARROW_OR_WHEN_GENERALIZED_BY_A_FIXED_RECIPE_AS_TOO_WIDE__PUBLISHED_TOOLS_DECIDE_WITH_MORE_EXAMPLES_A_CODE_CORPUS_OR_A_LANGUAGE_MODEL_PLUS_TESTS__THE_2026_BENCHMARKS_OF_AGENTS_THAT_KEEP_SKILLS_REPORT_THAT_STORED_SKILLS_HELP_WHERE_THE_PROCEDURE_IS_EXACT_AND_THAT_AUTOMATIC_RECALL_MOSTLY_DOES_NOT_BEAT_NO_MEMORY__NO_SOURCE_SHOWS_A_ROUTE_THAT_KNOWS_FROM_ONE_EXAMPLE_WHETHER_A_NEW_FUNCTION_TAKES_THE_OLD_ONES_ARGUMENTS",
+   "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_SEVERAL_EXAMPLES_ARE_READ_AS_ONE_AND_ARE_KEPT_IN_A_LESSON_FILE__AND_SO_A_RULE_IS_APPLIED_ONLY_TO_CODE_THAT_IS_ABOUT_THE_SAME_THINGS_AND_IS_USED_THE_WAY_AN_EXAMPLE_SHOWED__THROUGH_THE_EXISTING_COMPILER_SANDBOX_AND_TEACHING_TOOL",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T14:47:21Z",
+    "max_age_hours": 2,
+    "selected_route": "ADAPT_THE_TAUGHT_PROGRAM_SO_SEVERAL_EXAMPLES_ARE_READ_AS_ONE_AND_ARE_KEPT_IN_A_LESSON_FILE__AND_SO_A_RULE_IS_APPLIED_ONLY_TO_CODE_THAT_IS_ABOUT_THE_SAME_THINGS_AND_IS_USED_THE_WAY_AN_EXAMPLE_SHOWED__THROUGH_THE_EXISTING_COMPILER_SANDBOX_AND_TEACHING_TOOL",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import ast, tokenize, re, builtins, json, sqlite3; print(\"ok\")' returned ok; the program uses nothing else"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "NAMESPACE_SANDBOX_confine_v1",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical.runtime.confine_v1.available() returned True on this host; teaching ran the program inside it and the front door's receipts for the four new sentences report confined True"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "DEMONSTRATION_TO_SKILL_COMPILER_AND_FRONT_DOOR_FALLBACK",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/tools/teach_actions_v1.py qualified ten skills through causal_trace_to_skill_compiler_v1 on this host, re-teaching reproduced the tracked bundle byte for byte, and live_brain_route_admission_v1.solve returned PASS__COMPILED_WORKFLOW_SKILL for remembering a change, repeating it and repeating it with the rest left alone"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_TAUGHT_PROGRAM_OF_THE_PREVIOUS_CHANGE",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/taught_actions/edit_by_example_v1.py on the base commit answered 'edit FILE the way BEFORE was changed into AFTER' through the front door on this host; its two sentences are taught again from the adapted program and its tests pass"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "A_CHANGE_SHOWN_ONCE_IS_KEPT_AND_REPEATED_LATER_WHERE_IT_WAS_SHOWN_OR_REFUSED_WITH_THE_LINE",
+   "proxy_goals_deleted": [
+    "MAKE_AS_MANY_EDITS_AS_POSSIBLE",
+    "COUNT_A_NEW_SENTENCE",
+    "CALL_A_FILE_COPY_LEARNING"
+   ],
+   "surviving_necessity": "A_RULE_MAY_SAY_NO_MORE_THAN_THE_EXAMPLES_SHOW__THAT_INCLUDES_HOW_THE_CHANGED_CODE_WAS_USED_AND_WHAT_ITS_NAMES_WERE__AND_A_KEPT_LESSON_MUST_BE_SOMETHING_A_PERSON_CAN_OPEN_AND_CHECK"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+    "canonical/runtime/acquired_operator_memory_v1.py",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/concept_library_v1.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_LEARNER_OF_THE_PREVIOUS_CHANGE",
+    "THE_DEMONSTRATION_TO_SKILL_COMPILER",
+    "THE_SANDBOX",
+    "THE_TEACHING_TOOL",
+    "THE_DOORS_FALLBACK_AND_ITS_REFUSAL_REASON",
+    "THE_PRINCIPLE_OF_acquired_operator_memory_v1_THAT_THE_DEMONSTRATION_IS_THE_OPERATOR__THE_LESSON_HOLDS_THE_EXAMPLES"
+   ],
+   "capability_work_deleted": [
+    "LEAVING_UNSHOWN_USES_ALONE_UNASKED",
+    "A_CHECK_IN_THE_TEACHING_TOOL_THAT_COULD_NOT_FAIL"
+   ],
+   "external_existing_routes_checked": [
+    "PYEVOLVE",
+    "MELT",
+    "GENPAT",
+    "PYCRAFT",
+    "REFAZER",
+    "THE_2013_STUDY_OF_REPETITIVENESS_OF_CODE_CHANGES",
+    "CONTINUALSKILLBENCH_SKILLSBENCH_VIBEMEMBENCH_AND_SWE_CONTEXTBENCH_OF_2026"
+   ],
+   "surviving_gap": "ONLY_A_CHANGE_INSIDE_ONE_EXPRESSION_KEYWORD_ARGUMENT_OR_ONE_LINE_STATEMENT_IS_LEARNED__ONE_CHANGED_PLACE_GIVES_A_RULE_ABOUT_EXACTLY_THAT_CODE__THE_SAME_OLD_CODE_FIXED_TWO_WAYS_BY_PEOPLE_IS_NOT_TOLD_APART__NOTHING_CHECKS_THAT_A_REPEATED_CHANGE_IS_RIGHT_FOR_THE_CODE__ADDED_LINES_AND_ADDED_IMPORTS_ARE_NOT_REPEATED__A_LESSON_IS_USED_ONLY_WHEN_THE_REQUEST_NAMES_IT__THE_SENTENCES_MUST_BE_SAID_IN_THEIR_TAUGHT_FORM"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_PROGRAM_READ_ONE_EXAMPLE_FROM_TWO_FILES_GIVEN_WITH_THE_REQUEST_AND_APPLIED_ITS_RULE_TO_EVERY_PIECE_OF_CODE_OF_THAT_FORM",
+   "evidence": [
+    "ON_THE_BASE_COMMIT_THE_FRONT_DOOR_REFUSES_remember_in_L_the_way_A_was_changed_into_B_AND_edit_T_the_way_L_remembers",
+    "ON_THE_BASE_COMMIT_THE_PROGRAM_TURNED_yaml_load_stream_Loader_INTO_yaml_safe_load_stream_Loader_ON_A_FILE_OF_ANOTHER_PROJECT__THAT_CALL_RAISES",
+    "ON_THE_BASE_COMMIT_ONE_CHANGED_PLACE_product_eq_None_GIVES_A_RULE_ABOUT_product_ONLY_AND_A_SECOND_EXAMPLE_CANNOT_BE_ADDED"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE__NOTHING_TO_DELETE",
+    "BYPASS_BY_KEEPING_THE_TWO_EXAMPLE_FILES_AROUND__THAT_IS_WHAT_THE_OWNER_ASKS_TO_END",
+    "REUSE_THE_REPAIR_LESSON_STORE__IT_KEEPS_TOKEN_RULES_CHECKED_BY_TESTS_AND_CANNOT_BE_READ_FROM_INSIDE_THE_SANDBOX",
+    "SUBSTITUTE_AN_EXTERNAL_TOOL__NONE_INSTALLED"
+   ],
+   "surviving_causal_blocker": "A_CHANGE_SHOWN_ONCE_WAS_NOT_KEPT__THE_EXAMPLE_HAD_TO_BE_HANDED_OVER_WITH_EVERY_REQUEST__ONLY_ONE_EXAMPLE_COULD_BE_READ__AND_ON_A_PROJECT_THE_PROGRAM_WAS_NOT_DEVELOPED_ON_IT_WROTE_A_CALL_THE_NEW_FUNCTION_DOES_NOT_ACCEPT_AND_REPORTED_IT_DONE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADAPT_THE_EXISTING_PROGRAM__SEVERAL_EXAMPLES_AS_ONE__A_LESSON_FILE__CHECKS_WHERE_A_RULE_IS_APPLIED",
+    "REUSE_THE_COMPILER_SANDBOX_AND_TEACHING_TOOL_FOR_THE_NEW_SENTENCES"
+   ],
+   "losing_routes_reason": "A_RULE_APPLIED_EVERYWHERE_WROTE_A_CALL_THAT_RAISES__A_FIXED_RECIPE_FOR_BLANKS_IS_OVER_GENERAL__A_CORPUS_OR_A_LANGUAGE_MODEL_IS_NOT_AVAILABLE_HERE__A_HIDDEN_STORE_CANNOT_BE_OPENED__TESTS_AFTER_THE_EDIT_ARE_STRONGER_AND_NOT_BUILT_YET",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_ACTION_WAS_COMPARED_WITH_WHAT_PEOPLE_WROTE_IN_COMMITS_OF_OTHER_PROJECTS_IN_TWO_SETS_THE_SECOND_DECLARED_BEFORE_IT_WAS_FETCHED__AND_THROUGH_THE_REAL_FRONT_DOOR_BEFORE_AND_AFTER__CONSTRUCTED_CODE_IS_USED_ONLY_FOR_CASES_THE_SETS_DO_NOT_HOLD_AND_IS_SAID_TO_BE_CONSTRUCTED"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "adjacent_capabilities_absorbed": [],
+   "note": "A_LESSON_FILE_IS_AN_ORDINARY_FILE_OF_THE_PROJECT__IT_CAN_BE_REVIEWED_VERSIONED_COPIED_TO_ANOTHER_PROJECT_AND_DELETED__NO_SENTENCE_IS_NEEDED_FOR_ANY_OF_THAT",
+   "fresh_reuse_plan": "A_TEST_RUN_AFTER_THE_EDIT_CAN_REPLACE_THE_REFUSAL_OF_UNSHOWN_USES__AN_EXAMPLE_CAN_BE_TAKEN_FROM_A_COMMIT_AND_ADDED_TO_A_LESSON_THE_SAME_WAY"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "TRUSTING_THE_FIGURE_OF_THE_PREVIOUS_CHANGE__IT_WAS_MEASURED_ON_THE_COMMITS_THE_PROGRAM_WAS_DEVELOPED_ON__TWO_SETS_FROM_OTHER_PROJECTS_WERE_COLLECTED_BY_A_RULE_FIXED_IN_ADVANCE",
+    "TRUSTING_THE_FIRST_SET_FOR_THE_RULE_ABOUT_USES__IT_WAS_SEEN_WHILE_THAT_RULE_WAS_DESIGNED_SO_A_SECOND_SET_WAS_DECLARED_AND_RUN_ONCE"
+   ],
+   "search_stop_decision": "THE_ROUTE_MAKES_NO_EDIT_THE_PEOPLE_DID_NOT_MAKE_ON_EITHER_SET_AND_ITS_COST_IS_MEASURED_AND_STATED__THE_FRONTIER_WAS_REFRESHED_TODAY__THE_STRONGER_ROUTE_IS_NAMED_AS_THE_NEXT_STEP",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN_AND_REPORT_IT__THEN__RUN_THE_PROJECTS_TESTS_AFTER_A_REPEATED_EDIT_SO_AN_UNSHOWN_USE_IS_DECIDED_BY_A_TEST_AND_NOT_BY_A_REFUSAL__AN_EXAMPLE_TAKEN_FROM_A_COMMIT__ADDED_IMPORT_LINES_AND_RENAMES_OF_AN_IMPORTED_NAME__EXTRACT_A_VARIABLE_AND_EXTRACT_A_CONSTANT_PROMISED_TWO_TURNS_AGO",
+ "prior_work_reused": [
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/runtime/confine_v1.py",
+  "canonical/tools/teach_actions_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/acquired_operator_memory_v1.py",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py"
+ ]
+}
