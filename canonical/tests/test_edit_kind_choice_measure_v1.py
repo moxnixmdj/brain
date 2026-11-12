@@ -347,3 +347,78 @@ def test_a_development_bug_is_measured_with_the_counts_of_the_other_bugs_only(fi
     record = json.loads(out.read_text())
     assert record["which"] == "named" and record["per_bug"]["Python/902"]["ordered_with_the_counts_of_the_other_bugs_only"]
     assert record["per_bug"]["Python/902"]["forwards"]["counted"]["repaired"]
+
+
+# ----------------------------------------------------------------------------- what the seeded faults asked for
+def spied_put_together(monkeypatch):
+    left_out, real = [], measure.put_together
+
+    def spy(per_bug, without=()):
+        left_out.append(list(without))
+        return real(per_bug, without)
+    monkeypatch.setattr(measure, "put_together", spy)
+    return left_out
+
+
+def test_in_step_two_every_bug_is_ordered_with_counts_that_leave_it_out(files, monkeypatch):
+    tmp_path, common = files
+    counts = counts_for(files, "forwards")
+    left_out = spied_put_together(monkeypatch)
+    assert measure.main(common + ["--places", "--counts", str(counts), "--out", str(tmp_path / "places.json")]) == 0
+    assert left_out == [["Python/901"], ["Python/902"], ["Python/903"]]
+
+
+def test_in_the_measurement_a_counted_bug_is_left_out_of_its_own_counts_and_a_scored_bug_has_them_all(files, monkeypatch):
+    tmp_path, common = files
+    forwards, backwards = counts_for(files, "forwards"), counts_for(files, "backwards")
+    left_out = spied_put_together(monkeypatch)
+    rest = ["--counts", str(forwards), str(backwards), "--how", "most", "--work-dir", str(tmp_path / "w"), "--out", str(tmp_path / "m.json")]
+    assert measure.main(common + rest + ["--bugs", "Python/902"]) == 0
+    assert left_out == [[], [], ["Python/902"], ["Python/902"]]          # the tables of all the bugs, one for each way round; then the bug's own
+    del left_out[:]
+    assert measure.main(common + rest + ["--which", "scored"]) == 0
+    assert left_out == [[], []]
+
+
+def test_the_counted_arm_is_asked_in_the_counted_order_and_the_other_in_the_learners_own(tmp_path, monkeypatch):
+    asked_for, real = [], choice.ordered
+
+    def spy(found, how):
+        asked_for.append(how)
+        return real(found, how)
+    monkeypatch.setattr(choice, "ordered", spy)
+    memories = {direction: memory(direction == "backwards") for direction in measure.DIRECTIONS}
+    check, accepted, _ = passing(TWO_PLACES["fixed"])
+    measure.one_bug(TWO_PLACES, memories, tables_from(PLUS), tmp_path / "w", how=choice.MOST, check=check, accepted=accepted)
+    assert asked_for == [None, choice.MOST, None, choice.MOST]
+
+
+def test_in_turns_it_is_the_learners_order_and_the_counted_one_that_alternate(monkeypatch):
+    import ast as _ast
+    fix = _ast.unparse(_ast.parse(PLUS["fixed"]))
+
+    def order(prefix, fix_at):
+        return [(fix if place == fix_at else f"{prefix} = {place}", 1.0 / place, {}) for place in range(1, 31)]
+    orders = {None: order("v", 3), choice.SUM: order("s", 10), choice.MOST: order("m", 20)}
+    monkeypatch.setattr(choice, "shares", lambda lessons, source, table: {text: (0.0, 0.0, 0.0) for text, _, _ in orders[None]})
+    monkeypatch.setattr(choice, "ordered", lambda found, how: orders[how])
+    got = measure.places_of_the_fix(PLUS, memory(), None)
+    assert (got[measure.VOTES], got[choice.SUM], got[choice.MOST]) == (3, 10, 20) and got["candidates"] == 30
+    # v1 s1 v2 s2 v3: the learner's third is the fifth taken in turns, whichever counted order is the other
+    assert got[measure.IN_TURNS] == {choice.SUM: 5, choice.MOST: 5}
+    # and when the counted order has it nearer: v1 s1 v2 s2, the counted second is the fourth
+    orders.update({None: order("v", 25), choice.SUM: order("s", 2), choice.MOST: order("m", 1)})
+    got = measure.places_of_the_fix(PLUS, memory(), None)
+    assert got[measure.IN_TURNS] == {choice.SUM: 4, choice.MOST: 2}
+
+
+def test_a_place_that_is_the_budget_itself_is_within_it():
+    per_bug = {"a": {"votes": 200, "sum": 201, "most": 200, "in_turns": {"sum": 200, "most": 201}},
+               "b": {"votes": 201, "sum": 200, "most": 201, "in_turns": {"sum": 201, "most": 200}}}
+    summary = measure.places_summary(per_bug, 200)
+    assert summary["votes"]["published_fix_within"]["200"] == 1 and summary["sum"]["published_fix_within"]["200"] == 1
+    assert summary["sum"]["against_the_votes"]["fell_out_of_the_budget"] == 1 and summary["sum"]["against_the_votes"]["came_within_the_budget"] == 1
+    assert summary["most"]["against_the_votes"]["fell_out_of_the_budget"] == 0 and summary["most"]["against_the_votes"]["came_within_the_budget"] == 0
+    assert summary["sum"]["taken_in_turns_with_the_votes"]["published_fix_within"]["200"] == 1
+    assert summary["sum"]["taken_in_turns_with_the_votes"]["fell_out_of_the_budget"] == 0 and summary["sum"]["taken_in_turns_with_the_votes"]["came_within_the_budget"] == 0
+    assert summary["most"]["taken_in_turns_with_the_votes"]["fell_out_of_the_budget"] == 1 and summary["most"]["taken_in_turns_with_the_votes"]["came_within_the_budget"] == 1

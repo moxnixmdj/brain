@@ -253,3 +253,56 @@ def test_nothing_is_read_from_an_order_before_it_is_asked_for():
 
     turns = choice.in_turns(slowly("a", "b", "c"), slowly("p", "q", "r"))
     assert read == [] and next(turns)[0] == "a" and next(turns)[0] == "p" and read == ["a", "p"]
+
+
+# ----------------------------------------------------------------------------- what the seeded faults asked for
+def even_table():
+    """Every operator of every kind: one chance in two."""
+    return choice.Table(choice.Counts.from_dict({"programs": 1, "programs_with_the_fix_among_the_candidates": 1, "cells": {"everything|0|0": [10, 5]}}))
+
+
+def test_counts_put_together_add_up_how_often_the_fix_was_held_not_how_often_an_operator_fitted():
+    one, other = choice.Counts(), choice.Counts()
+    one.add("k", 1, 1, True)
+    one.add("k", 1, 1, False)
+    for held in (False, False, True):
+        other.add("k", 1, 1, held)
+    one.take(other)
+    assert one.cells == {"k|0|0": [5, 2]}
+
+
+def test_the_chance_goes_by_the_lessons_behind_an_operator_within_its_kind_and_number_of_candidates():
+    counts = choice.Counts.from_dict({"programs": 1, "programs_with_the_fix_among_the_candidates": 1, "cells": {"k|0|1": [1000, 0], "k|5|1": [1000, 900]}})
+    table = choice.Table(counts)
+    assert table.chance("k", 30, 2) > 0.8 and table.chance("k", 1, 2) < 0.02
+    # and by the number of candidates within its kind
+    counts = choice.Counts.from_dict({"programs": 1, "programs_with_the_fix_among_the_candidates": 1, "cells": {"k|0|0": [1000, 900], "k|0|6": [1000, 0]}})
+    table = choice.Table(counts)
+    assert table.chance("k", 1, 1) > 0.8 and table.chance("k", 1, 500) < 0.02
+
+
+def test_a_share_is_the_operators_chance_over_the_candidates_it_makes_and_is_not_counted_once_for_every_lesson():
+    memory = lessons_of(a=MINUS_TO_PLUS, b=LESS_TO_LESS_EQUAL, c=ONE_TO_ZERO, d=MINUS_TO_PLUS_AGAIN)
+    table = even_table()
+    twice = "def f(a, b):\n    if a < b:\n        return a - b\n    return b - a\n"          # two places for one operator
+    largest, by_lesson, several_lessons, several_candidates = {}, {}, False, False
+    for _, operator, givers, made in choice.fitting(memory, twice):
+        several_lessons = several_lessons or len(givers) > 1
+        several_candidates = several_candidates or len(made) > 1
+        for candidate in made:
+            largest[candidate] = max(largest.get(candidate, 0.0), 0.5 / len(made))
+            for lesson in givers:           # the operator's share, divided among the lessons that gave it; a lesson counts once, with its largest
+                row = by_lesson.setdefault(candidate, {})
+                row[lesson] = max(row.get(lesson, 0.0), 0.5 / len(made) / len(givers))
+    assert several_lessons and several_candidates, "the example must have an operator two lessons gave and one that makes two candidates"
+    found = choice.shares(memory, twice, table)
+    assert set(found) == set(largest)
+    for candidate, (_, added, most) in found.items():
+        assert most == pytest.approx(largest[candidate])
+        assert added == pytest.approx(sum(by_lesson[candidate].values()))
+
+
+def test_of_two_candidates_with_the_same_share_the_one_with_more_votes_comes_first_however_long_it_is():
+    found = {"a much longer text": (0.9, 0.2, 0.1), "c": (0.1, 0.2, 0.1)}
+    assert [text for text, _, _ in choice.ordered(found, choice.SUM)] == ["a much longer text", "c"]
+    assert [text for text, _, _ in choice.ordered(found, choice.MOST)] == ["a much longer text", "c"]
