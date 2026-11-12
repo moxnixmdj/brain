@@ -230,6 +230,40 @@
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"
     },
+    "PYTHON_COUPLED_COMPARISON_REPAIR_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Given a fresh disposable two-module Python repository whose two imported pure one-argument boundary predicates use strict comparisons where the declared behavior is inclusive, and a visible test whose first failed assertion requires both boundary edits, the bounded model-free coupled repair loop returns exactly one candidate patch per module that changes the two comparisons, passes two verification replays, restores every source byte after search, and satisfies the independent inclusive-boundary behavior on unseen values.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "ANALYTIC_CLOSED_FORM",
+        "BOUNDARY_METAMORPHIC",
+        "PATCH_AND_PROVENANCE_PROPERTIES"
+      ],
+      "instances": 2000,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py": "ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/PYTHON_COUPLED_COMPARISON_REPAIR_V1__d93cf6ce90f519ad.json",
+      "measured_utc": "2026-10-17T09:23:12Z",
+      "oracle_classes": {
+        "ANALYTIC_CLOSED_FORM": "ANALYTIC_CLOSED_FORM",
+        "BOUNDARY_METAMORPHIC": "METAMORPHIC",
+        "PATCH_AND_PROVENANCE_PROPERTIES": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO arbitrary Python repair, multi-hunk semantic synthesis, or hidden-requirement guarantee",
+        "NO more than two source modules, one simple comparison per module, or any source imports",
+        "NO candidate promotion, source write, merge, benchmark, FrontierCode, or terminal-credit authority",
+        "NO claim that the coupled search is complete beyond one localized candidate mutation per file and one pair candidate",
+        "NO non-Python, persistent-repository, network, package-installation, model, or external-capability-provider support"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "689db97639bc2f743c1b5c3b2f21e8229349ea8b",
+      "spec_path": "canonical/capabilities/true/specs/PYTHON_COUPLED_COMPARISON_REPAIR_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
     "SACCR_CREDIT_ADDON_V1": {
       "canary_pass": "1/1",
       "carrier": "SANDBOX",

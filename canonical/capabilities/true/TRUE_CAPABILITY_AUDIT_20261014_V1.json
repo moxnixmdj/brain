@@ -2,6 +2,7 @@
   "schema": "TRUE_CAPABILITY_AUDIT_V1",
   "audit_id": "TRUE_CAPABILITY_AUDIT_20261014_V1",
   "date_utc": "2026-10-14",
+  "last_amended_utc": "2026-10-17T09:23:12Z",
   "authority": "NONE",
   "law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
   "method": "Each of the 19 Opus-5.5 family rows in OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json is classified by its quoted best route: if an external model or external service is in the route, the family is not a Brain capability under the law regardless of its matrix status. Model-free components named by the routes are listed separately with their measurement state. Nothing in the matrix, the predicate registry or any pointer is modified by this audit.",
@@ -24,8 +25,8 @@
       "matrix_postwave_status": "DEFINED_RESULT_OPEN",
       "matrix_route_quoted": "Brain-owned Superpowers 6.4.2 configuration + approved general cognition substrate",
       "model_in_route": true,
-      "classification": "EXTERNAL_MODEL_ROUTE",
-      "reason": "route is a configuration (Superpowers) of an external model ('approved general cognition substrate'); the TB4 wal-recovery pass was produced through that model route"
+      "classification": "EXTERNAL_MODEL_ROUTE_WITH_MEASURABLE_COMPONENTS",
+      "reason": "route remains a configuration (Superpowers) of an external model ('approved general cognition substrate'); the TB4 wal-recovery pass was produced through that model route. Amendment 2026-10-17: the separate bounded model-free two-file comparison-repair component is MEASURED_PASS, but does not make the model-dependent family owned."
     },
     {
       "family": "COMPLEX_MULTI_TOOL_AGENCY",
@@ -267,6 +268,13 @@
       "evidence": "three ledger rows, 2000/2000 sandbox each: rank_work (exact-fraction reference ranking, eligible-first/score-monotone invariants, permutation and uniform-cost-scaling invariance, no authority granted); update_pareto_frontier folded from empty (textbook dominance reference, antichain/verified/no-deletion invariants, uniform scaling invariance); compile_schedule (reference verdict+frontier, authority envelope, tamper-after-receipt refused, permutation invariance). No defect found. Mutants caught (500 each): demoted work outranking eligible 70, wrong score formula 418, benchmark bookkeeping admitted 136, lost tie-break 65, validation removed 24; weak dominance 180, contract check removed 74, unverified admission 200; receipt binding removed 372, spend check removed 15, wrong dominance 221. Correction: the audit's earlier wording 'lease + fan-in' was wrong - these modules rank and compare, they hold no lease; the lease is the supervisor (measured) and the fan-in lives in capability_proposal_generators.py (not yet audited). Generator coverage had to be raised twice (exact leverage ties, zero-gain eligible items, exact metric twins) before two of the mutants were caught - recorded because a test that cannot catch a bug is not a test."
     },
     {
+      "component": "Bounded coupled Python strict-to-inclusive comparison repair",
+      "path": "canonical/runtime/python_coupled_comparison_repair_true_adapter_v1.py via canonical/runtime/bound_capabilities/python_coupled_software_repair_loop_v1.py (kernel blob ab626e85d9075a4c0d3490e2774ac9fb6d2ccdfd)",
+      "classification": "MEASURED_PASS",
+      "spec": "PYTHON_COUPLED_COMPARISON_REPAIR_V1",
+      "evidence": "2026-10-17 amendment: harness-written ledger row and receipt; 2000/2000 sandbox on fresh declarative two-module strict-comparison defects, all independent analytic, metamorphic, and patch/provenance oracle classes 2000/2000; adapter and kernel blobs bound; scratch left-comparison wrong-mutation rejected 0/500 by all three oracle classes. Scope is only one comparison in each of two pure source modules, one candidate per file and one pair candidate; it does not claim general program repair, benchmark credit, or family ownership."
+    },
+    {
       "component": "bytes_* microkernels and 'closed proof' kernels",
       "path": "canonical/runtime/bytes_*_microkernel_v1.py, bytes_v14_closed_proof_kernel_v7.py",
       "classification": "NOT_YET_AUDITED",
@@ -282,8 +290,8 @@
   "summary": {
     "families_total": 19,
     "families_by_classification": {
-      "EXTERNAL_MODEL_ROUTE": 12,
-      "EXTERNAL_MODEL_ROUTE_WITH_MEASURABLE_COMPONENTS": 2,
+      "EXTERNAL_MODEL_ROUTE": 11,
+      "EXTERNAL_MODEL_ROUTE_WITH_MEASURABLE_COMPONENTS": 3,
       "MEASURABLE_PENDING": 2,
       "COMPONENT_MEASURED_PASS": 2,
       "EXTERNAL_LIBRARY_IS_THE_CAPABILITY": 1
@@ -295,7 +303,7 @@
       "TOOL_DISCOVERY_SELECTION_AND_LEARNING",
       "EXACT_SYMBOLIC_COMPUTATION"
     ],
-    "components_measured_pass": 5,
+    "components_measured_pass": 6,
     "components_measured_fail": 0,
     "components_measurable_pending": 4,
     "components_checker_gaming": 1,
@@ -304,7 +312,7 @@
       "docx_exact_text_edit: replacement by the empty string always failed closed (fixed 2026-10-14)",
       "same_identity_supervisor: execute_claimed_task had no terminal-state guard, so a caller skipping claim_task could relaunch the runtime on a COMPLETE/FAILED task (fixed 2026-10-14; the frozen credited copy same_identity_supervisor_credited_v1.py still carries it)"
     ],
-    "measured_specs_total": 9
+    "measured_specs_total": 10
   },
   "what_this_audit_does_not_say": "It does not say any family is owned, does not change any matrix status, predicate, scoreboard or pointer, and credits nothing. A MEASURED_PASS component is exactly what its receipt says.",
   "next_in_order": [
