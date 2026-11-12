@@ -100,6 +100,7 @@ _FAMILIES = (
    'add type hints',
    'extract the magic',
    'extract constant',
+   'extract the constant',
    'cherry-pick',
    'create a branch',
    'from docstrings',
