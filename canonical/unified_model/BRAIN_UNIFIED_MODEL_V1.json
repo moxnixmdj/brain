@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 356,
+  "knowledge_documents": 357,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6763,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "851a28e57365b983f05dc1081e2ce695bc2ca8d7b8efae8245ca67d32721d6dc"
+  "value": "b950851c424f38107724847f82df5186a8af899f7b3ead5886f6b0af3129ff99"
  },
  "engines": [
   {
@@ -56615,6 +56615,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7579,
+   "headings": [
+    "The answer was already on disk. I argued with you from the literature instead.",
+    "1. What I did wrong",
+    "2. The measurement, as it stands",
+    "You are right, and more strongly than I said",
+    "3. Where your claim still breaks — measured, not cited",
+    "4. The lesson that generalises",
+    "Verdict, final form"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ANSWER_WAS_ALREADY_ON_DISK_20261112_V1.md",
+   "sha256": "f11158a83e4c0ad791755b38a2de419ad2e83be0d666a4277fbdda35aa71a939",
+   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "130": 4,
+    "14.0": 4,
+    "18": 4,
+    "20": 5,
+    "26.6": 4,
+    "45": 5,
+    "65.5": 5,
+    "78": 3,
+    "8.5": 3,
+    "about": 3,
+    "all": 7,
+    "already": 3,
+    "arm": 3,
+    "board": 3,
+    "cache": 3,
+    "demonstration": 7,
+    "first": 9,
+    "five": 5,
+    "generalising": 4,
+    "here": 5,
+    "instances": 5,
+    "instruction": 7,
+    "measured": 4,
+    "measurement": 5,
+    "never": 6,
+    "new": 4,
+    "no": 9,
+    "nobody": 4,
+    "not": 15,
+    "one": 15,
+    "only": 4,
+    "own": 5,
+    "page": 6,
+    "pages": 9,
+    "passes": 5,
+    "practice": 4,
+    "right": 4,
+    "run": 6,
+    "same": 5,
+    "skill": 7,
+    "so": 5,
+    "still": 4,
+    "success": 9,
+    "task": 4,
+    "tasks": 6,
+    "tree": 5,
+    "worth": 4,
+    "wrong": 4
+   },
+   "title": "The answer was already on disk. I argued with you from the literature instead.",
+   "title_terms": [
+    "already",
+    "answer",
+    "argued",
+    "disk",
+    "instead",
+    "literature"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5852,
    "headings": [
     "The capability was there. The substrate wasn't.",
@@ -72433,10 +72509,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1158,
+  "included_source_count": 1159,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "149b74c2346a771adc2477a70e41da6638cf702b51c2f7986cbe60f8ef93c62b"
+  "source_tree_digest": "3ce86d0b9802c8ee6aca9366b7978056b11b0d31fb0cbf1d5515e28c679e91f3"
  },
  "research_index": [
   {
