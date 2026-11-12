@@ -65,7 +65,7 @@ CHUNK = 40                       # tasks handled by one worker at a time, neighb
 FETCH_AT_ONCE = 4000             # file contents asked for in one request
 
 EXPECTED: dict[str, Any] = {
-    "written": "2026-11-12 23:50 UTC, before anything was counted. Known by then: counts others published for plain BM25 over a project's files "
+    "written": "2026-11-12 23:40 UTC, before anything was counted. Known by then: counts others published for plain BM25 over a project's files "
                "(500 SWE-bench Verified issues: a fixing file first 26.6%, among the first 3 47.0%, among the first 10 70.2%, synaptixs/spine pull "
                "request 593; SWE-bench Lite: first 30% to 39% in three other counts); that 27% of the Verified issues write a file path out "
                "(arXiv 2506.12286); and the last record here (10 tasks reached with the file given, 3 more by the earlier lists). No rank of any file.",
