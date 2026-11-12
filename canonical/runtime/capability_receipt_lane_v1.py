@@ -183,6 +183,50 @@ def _probe_output_path(capability_id: str, module_sha: str) -> str:
     )
 
 
+#: Largest input file the lane will content-address.  A receipt must stay small; the store is what
+#: makes an instance replayable, so a bounded snapshot beats no snapshot at all.
+INSTANCE_STORE = os.path.join("canonical", "astra_runtime", "instances")
+MAX_SNAPSHOT_BYTES = 1 << 20
+
+
+def snapshot_inputs(root: str, args: Mapping[str, Any] | None) -> dict[str, str]:
+    """Content-address every file argument, so the *inputs* of a run survive the run.
+
+    Measured before this existed: 532 receipts, one of which recorded any argument at all, and two
+    of its three path arguments pointed at files that were already gone.  A receipt like that cannot
+    be replayed as an *instance* — only re-run on whatever the probe synthesises — so no corpus of
+    input -> verified-output pairs can be built from it, and "run it again" can never mean "run it on
+    another input".
+
+    Each file argument is copied into a content-addressed store and its sha256 recorded on the
+    receipt.  A receipt with `input_digests` is addressable forever; one without is a claim about a
+    moment that has passed.
+    """
+    if not args:
+        return {}
+    digests: dict[str, str] = {}
+    for name, value in args.items():
+        if not isinstance(value, str) or not value:
+            continue
+        path = value if os.path.isabs(value) else os.path.join(root, value)
+        try:
+            if not os.path.isfile(path) or os.path.getsize(path) > MAX_SNAPSHOT_BYTES:
+                continue
+            with open(path, "rb") as fh:
+                blob = fh.read()
+        except OSError:
+            continue
+        digest = hashlib.sha256(blob).hexdigest()
+        digests[str(name)] = digest
+        target_dir = os.path.join(root, INSTANCE_STORE)
+        os.makedirs(target_dir, exist_ok=True)
+        target = os.path.join(target_dir, digest + ".bin")
+        if not os.path.exists(target):
+            with open(target, "wb") as fh:
+                fh.write(blob)
+    return digests
+
+
 def _at_instance(base: str, instance_index: int, is_path: bool = False) -> str:
     """The value of one declared input at one instance.
 
@@ -398,6 +442,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
 
     if not isinstance(result, dict):
         return None
+    input_digests = snapshot_inputs(root, invoked)
     outcome = "EXECUTED"
     for field in ("status", "pass", "output_verified"):
         if field in result:
@@ -423,6 +468,7 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
         "runtime": {"python": platform.python_version(), "platform": platform.system().lower()},
         "independent_verifier": None,
         "independent_run_reference": None,
+        **({"input_digests": input_digests} if input_digests else {}),
     }
 
 
