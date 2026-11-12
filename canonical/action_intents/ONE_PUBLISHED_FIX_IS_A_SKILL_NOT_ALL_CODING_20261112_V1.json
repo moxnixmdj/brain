@@ -7,7 +7,7 @@
  "route_id": "ONE_PUBLISHED_FIX_IS_A_SKILL_NOT_ALL_CODING_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "522fee20f1039bdef646ea64d6a95ea65b1846a9",
+ "canonical_base_commit": "0001e7d29ff8f33cf40299770e011827d559986e",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -74,7 +74,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "522fee20f1039bdef646ea64d6a95ea65b1846a9",
+  "canonical_base_commit": "0001e7d29ff8f33cf40299770e011827d559986e",
   "real_outcome": "A reproducible diagnostic separates single-lesson replay, applicable candidate coverage, and accepted repairs.",
   "required_capability": "Separate replay of one taught repair from candidate coverage on different bugs without changing the learner.",
   "obs_goal": {
