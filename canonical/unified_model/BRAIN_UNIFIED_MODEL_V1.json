@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 333,
+  "knowledge_documents": 334,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6741,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3b287109ce0cd0947bc5d44ef258771fc885cfbc9820fcb6d8d251722e580f25"
+  "value": "a7208f0c8afc98abd5b7474b8d8e2b82cc2ede3aaf548935ddd8aa50adcc962f"
  },
  "engines": [
   {
@@ -50712,6 +50712,79 @@
     "same",
     "thing",
     "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5525,
+   "headings": [
+    "Nobody else has ever run it",
+    "Why this, and not weights, is the limiting factor",
+    "The part I got wrong for one run",
+    "What this does to the plan",
+    "Receipts",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "NOBODY_ELSE_HAS_EVER_RUN_IT_20261112_V1.md",
+   "sha256": "6889904eadee27cbb333a1283e96f12420a736bfd9e935eceb13bafe11dfaaca",
+   "summary": "**2026-11-12.** Base `a5e0a347`. Branch `arena/d3917e56-brain`. Round 15.",
+   "terms": {
+    "107": 3,
+    "532": 4,
+    "a07493c1bd5eb587dff6f6250aa2f4b1ecca502e864292c5c2059ca178c843d0": 2,
+    "across": 2,
+    "all": 3,
+    "already": 3,
+    "any": 4,
+    "anyone": 2,
+    "astra_runtime": 2,
+    "base": 2,
+    "been": 2,
+    "canonical": 3,
+    "census": 4,
+    "corpus": 6,
+    "else": 3,
+    "every": 3,
+    "evidence": 4,
+    "examples": 3,
+    "false": 3,
+    "first": 5,
+    "had": 3,
+    "identical": 3,
+    "model": 4,
+    "never": 3,
+    "new": 3,
+    "no": 3,
+    "not": 14,
+    "one": 9,
+    "only": 3,
+    "own": 3,
+    "producer": 3,
+    "project": 4,
+    "receipts": 9,
+    "reproducibility": 5,
+    "round": 3,
+    "run": 5,
+    "runs": 5,
+    "same": 3,
+    "second": 3,
+    "so": 3,
+    "student": 3,
+    "thing": 5,
+    "tree": 5,
+    "verdict": 3,
+    "verified": 3,
+    "verifier": 4,
+    "would": 4,
+    "zero": 3
+   },
+   "title": "Nobody else has ever run it",
+   "title_terms": [
+    "else",
+    "ever",
+    "nobody",
+    "run"
    ]
   },
   {
@@ -70660,10 +70733,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1135,
+  "included_source_count": 1136,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "efa76518039ce20b47c5575268d205e76cf8626e21d7b33cb3e24b94c2041084"
+  "source_tree_digest": "818358c16cdcd5528eaaf2c1200027e32a3519dd5a1c68a544070f05e731689d"
  },
  "research_index": [
   {

@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "round_14_claims_ledger_20261112.py"
+  ],
+  "as_designed": true,
+  "expect_identical": true,
+  "experience": "claims_ledger_holds",
+  "identical": true,
+  "incremental_spend_usd": 0,
+  "independent_verifier": null,
+  "kind": "replayable_experience",
+  "model_dependency_count": 0,
+  "ran_by": "arena-agent-20261112",
+  "runs": [
+    {
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "29707065a19c49cf7aa463cc47f29c65dbb97d990ddcc2e3eaf7521aa0f7b2db"
+    },
+    {
+      "returncode": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "29707065a19c49cf7aa463cc47f29c65dbb97d990ddcc2e3eaf7521aa0f7b2db"
+    }
+  ],
+  "schema": "PROJECT_BRAIN_REPRODUCIBILITY_RECEIPT_V1",
+  "verdict": "REPRODUCED",
+  "verified": false
+}
