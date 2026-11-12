@@ -31,6 +31,7 @@ What it does
         then each simple code line put in before or after each statement line, at the depth of
         that line or of the next. The lines the text points at come first: a line weighs the
         names on it that the text mentions, each one over the number of lines that hold it.
+        Nothing is put in front of a program that is one definition: that would be outside it.
 
 Candidates are programs that compile, each once, in the text `ast.unparse` writes; the program
 itself is never among them. Nothing here accepts a candidate: the caller's tests do. A line the
@@ -191,10 +192,12 @@ def _in_place(lines: Sequence[str], where: dict[int, bool], quoted: Sequence[tup
         yield list(lines[:number - 1]) + [_indent(lines[number - 1]) + new] + list(lines[number:])
 
 
-def _next_to(lines: Sequence[str], where: dict[int, bool], quoted: Sequence[tuple[str, bool]], text: str) -> Iterator[list[str]]:
+def _next_to(lines: Sequence[str], where: dict[int, bool], quoted: Sequence[tuple[str, bool]], text: str, inside: bool) -> Iterator[list[str]]:
     simple = [code for code, head in quoted if not head]
     for number in pointed_at(lines, sorted(where), text):
         depths = [(number - 1, _indent(lines[number - 1])), (number, _indent(lines[number - 1]))]
+        if inside and number == 1:
+            depths = depths[1:]                                       # nothing is put in front of the definition the program is
         if number < len(lines) and _indent(lines[number]) != _indent(lines[number - 1]):
             depths.append((number, _indent(lines[number])))
         for code in simple:
@@ -206,17 +209,19 @@ def candidates(program: str, text: str, at_most: int = AT_MOST) -> list[str]:
     """The programs that are `program` with one code line of `text` in place of a line or next to one,
     in the order to try them. An empty list when the program cannot be read or the text has no code line."""
     try:
-        normal = ast.unparse(_parsed(program))
+        tree = _parsed(program)
+        normal = ast.unparse(tree)
         where = statement_lines(normal)
     except _UNREADABLE:
         return []
+    inside = len(tree.body) == 1 and _has_body(tree.body[0])
     quoted = code_lines(text)
     if not quoted:
         return []
     lines = normal.split("\n")
     out: list[str] = []
     seen = {normal}
-    for made in (_in_place(lines, where, quoted), _next_to(lines, where, quoted, text)):
+    for made in (_in_place(lines, where, quoted), _next_to(lines, where, quoted, text, inside)):
         for changed in made:
             if len(out) >= at_most:
                 return out
