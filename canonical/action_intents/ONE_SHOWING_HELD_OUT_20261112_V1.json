@@ -1,0 +1,219 @@
+{
+ "schema": "ACTION_INTENT_V1",
+ "action_id": "ONE_SHOWING_HELD_OUT_20261112_V1",
+ "action_intent_id": "ONE_SHOWING_HELD_OUT_20261112_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "REUSE_THE_RECORDED_INSTRUMENT_ON_A_DISJOINT_CORPUS",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "4e255432f4a8cb22df2ef8c1d607d00112358005",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": "THE_DECISION_TO_ACT_ON_ONE_DEMONSTRATION_HAD_NEVER_BEEN_SCORED_AND_NEVER_BEEN_TESTED_OFF_ITS_OWN_CORPUS",
+ "action_summary": "Score one demonstration as a decision rather than as a population of askings, then test the resulting curve on six kinds of change the organ never saw.",
+ "selected_route": "REUSE_THE_RECORDED_INSTRUMENT_ON_A_DISJOINT_CORPUS",
+ "causal_blocker": "ONE_SHOWING_TRANSFERS_ONLY_WITHIN_KINDS_OF_CHANGE_IT_ALREADY_EXPRESSES",
+ "expected_parent_change": "THE_PRECISION_CORRECTION_IS_REPLICATED_ON_A_DISJOINT_CORPUS_AND_THE_TRANSFER_CLAIM_IS_FALSIFIED_ON_UNFAMILIAR_KINDS",
+ "expected_parent_frontier_change": "ONE_SHOWING_IS_KNOWN_TO_BE_A_DECISION_WITH_A_PRICE_NOT_A_SKILL__NO_RATE_CLAIM__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_SHOWING_TRANSFERS_ONLY_WITHIN_KINDS_OF_CHANGE_IT_ALREADY_EXPRESSES",
+ "falsification_condition": "CHOSEN_DEMONSTRATION_PRECISION_IS_NOT_BELOW_THE_POOLED_FIGURE_OR_UNFAMILIAR_KINDS_TRANSFER_AS_WELL_AS_FAMILIAR_ONES",
+ "stop_condition": "BOTH_CORPORA_MEASURED__PREDICTIONS_SCORED_AS_WRITTEN__TESTS_GREEN__GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "explicit_user_authorization": "",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/ONE_SHOWING_HELD_OUT_20261112_V1.json",
+   "canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
+   "ONE_SHOWING_IS_WORTH_A_LOT_AND_SOMETIMES_NOTHING_20261112_V1.md"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ },
+ "measured_effect": {
+  "chosen_demonstration_precision_discovery": 0.8696,
+  "chosen_demonstration_precision_held_out": 0.0,
+  "held_out_changes_right": 0,
+  "held_out_changes_wrong": 5,
+  "held_out_unlearnable_share": 0.7358,
+  "recorded_pooled_precision_for_comparison": 0.9545,
+  "tests_passed": 21
+ },
+ "load_bearing_primary": {
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0.02",
+  "expected_obligation_unlock_lcb": "1",
+  "success_probability_lcb": "0.85",
+  "wall_clock_cost_ub": "1",
+  "why_this_moves_the_obligation": "The obligation is partial computer-use performance and its substrate here is one-demonstration transfer. This pass does not raise the score; it prices the mechanism and shows it fails outside the kinds of change it was fitted on, which forbids the obvious next plan (give it more actions, expect more skill) before it is funded. Discharge LCB is deliberately small: a falsification cannot by itself move a capability number."
+ },
+ "prior_work_reused": [
+  "canonical/tools/demonstration_choice_measure_v1.py",
+  "canonical/tools/repeated_change_one_example_measure_v1.py",
+  "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "4e255432f4a8cb22df2ef8c1d607d00112358005",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "ONE_SHOWING_PRICED_AS_A_DECISION_AT_87_PERCENT_AND_FALSIFIED_ON_SIX_UNSEEN_KINDS_OF_CHANGE_WHERE_EVERY_CHANGE_MADE_WAS_WRONG",
+  "obs_goal": {
+   "real_outcome": "ONE_SHOWING_PRICED_AS_A_DECISION_AT_87_PERCENT_AND_FALSIFIED_ON_SIX_UNSEEN_KINDS_OF_CHANGE_WHERE_EVERY_CHANGE_MADE_WAS_WRONG",
+   "proxy_goals_deleted": [
+    "ANOTHER_COVERAGE_AVERAGE",
+    "ANOTHER_BETTER_TIE_BREAK"
+   ],
+   "surviving_necessity": "A_MECHANISM_WITHOUT_A_PRICE_AND_WITHOUT_A_HELD_OUT_TEST_CANNOT_BE_DEPLOYED_OR_FALSIFIED"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/tools/demonstration_choice_measure_v1.py",
+    "canonical/tools/repeated_change_one_example_measure_v1.py",
+    "canonical/tools/one_try_coverage_frontier_20261112_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "2608.20274 subtask-level induction",
+    "2605.08670 MIND-Skill closed loop",
+    "Microsoft Research 2026 negative transfer"
+   ],
+   "capability_work_deleted": [
+    "WRITE_A_NEW_LEARNER",
+    "COLLECT_A_NEW_DISCOVERY_CORPUS"
+   ],
+   "surviving_gap": "THE_DECISION_HAD_NO_PRICE_AND_THE_CURVE_HAD_NO_HELD_OUT_TEST"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC",
+   "delete_bypass_substitute_options": [
+    "RE_MEASURE_COVERAGE",
+    "TUNE_THE_TIE_BREAK",
+    "ADD_DEMONSTRATIONS"
+   ],
+   "surviving_causal_blocker": "REACH_ANSWERS_A_SYNTACTIC_QUESTION_AND_WAS_READ_AS_A_SEMANTIC_ONE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE_RECORDED_INSTRUMENT_ON_DISJOINT_CORPUS",
+    "WRITE_A_NEW_MEASURE",
+    "ADD_DEMONSTRATIONS"
+   ],
+   "losing_routes_reason": "A_NEW_MEASURE_WOULD_NOT_BE_COMPARABLE_AND_ADDING_DEMONSTRATIONS_BUYS_EIGHT_POINTS_AND_FLATTENS",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__AGREEMENT_WITH_THE_PEOPLE_WHO_MADE_THE_CHANGE_IS_THE_ONLY_ORACLE_AND_IT_IS_A_PROXY"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_PLAN_TO_GIVE_MORE_ACTIONS_AND_EXPECT_MORE_SKILL"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "REACH_IS_NOW_A_RANKING_NOT_A_CALIBRATION"
+   ],
+   "fresh_reuse_plan": "THE_SAME_TWO_TOOLS_RUN_ON_ANY_FUTURE_CORPUS_WITHOUT_CHANGE"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_MEASURING_COVERAGE",
+    "RE_SEARCHING_THE_DISCOVERY_QUERIES"
+   ],
+   "search_stop_decision": "STOP_ONCE_A_DISJOINT_CORPUS_HAS_SCORED_THE_CURVE",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REUSE_RECORDED_INSTRUMENT_ON_DISJOINT_CORPUS",
+   "WRITE_A_NEW_MEASURE",
+   "ADD_DEMONSTRATIONS",
+   "TUNE_THE_TIE_BREAK"
+  ],
+  "deleted_or_bypassed_paths": [
+   "FEASIBILITY_BY_INSPECTION",
+   "A_SINGLE_UNMONOTONE_CLAIM_PRESENTED_AS_A_CURVE"
+  ],
+  "selected_surviving_route": "EXERCISE_THE_MECHANISM_AS_A_DECISION_AND_THEN_OFF_ITS_OWN_CORPUS",
+  "why_selected_route_is_fastest_sufficient": "BOTH_CORPORA_COST_UNDER_TWENTY_MINUTES_AND_THE_RESULT_FORBIDS_A_PLAN_THAT_WOULD_HAVE_COST_MONTHS",
+  "expected_parent_level_state_change": "ONE_SHOWING_IS_KNOWN_TO_BE_A_DECISION_WITH_A_PRICE_NOT_A_SKILL__NO_RATE_CLAIM__NO_FAMILY_FLIPPED",
+  "stop_condition": "BOTH_CORPORA_MEASURED__PREDICTIONS_SCORED_AS_WRITTEN__TESTS_GREEN__GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "THIS_ACTION_ADDS_NO_CAPABILITY_AND_PRESERVES_A_MEASUREMENT_THE_ROUTE_WAS_FIXED_BEFORE_THE_RUN_AND_NO_NEW_ROUTE_IS_SELECTED"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-12T00:00:00Z",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_CREDIT_AND_ZERO_TERMINAL_CREDIT_AND_ONLY_FALSIFIES_A_TRANSFER_CLAIM",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "ONE_SHOWING_HELD_OUT_V1",
+   "falsifier_id": "FALSIFY_THAT_THE_PRECISION_CURVE_TRANSFERS_TO_UNSEEN_KINDS_OF_CHANGE",
+   "decisive_question": "ON SIX KINDS OF CHANGE THE ORGAN NEVER SAW, IS THE CHOSEN DEMONSTRATION STILL RIGHT MORE OFTEN THAN NOT",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "NO_PRIOR_ART_OR_IN_TREE_RECORD_TESTS_THIS_MECHANISM_OFF_ITS_OWN_CORPUS"
+  }
+ },
+ "next_step": "A_CHECK_PER_EDIT_IS_NOW_THE_ONLY_NAMED_LEVER__REACH_CANNOT_SEPARATE_CONTAINS_THE_FORM_FROM_NEEDED_THE_CHANGE"
+}

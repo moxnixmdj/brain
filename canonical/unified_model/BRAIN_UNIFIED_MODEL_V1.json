@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 386,
+  "knowledge_documents": 387,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6783,
+  "research_index_records": 6786,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "38917176fcc4e49bb2a04636b4ba8564c4d7326d5a0aebf26d9efda798b09bed"
+  "value": "9440e6276b3a94f1f285a826130779a2460b26fb54e96e0e1138e39cd52adf5c"
  },
  "engines": [
   {
@@ -52948,6 +52948,90 @@
     "showing",
     "showings",
     "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 16291,
+   "headings": [
+    "One showing is worth 4.7× a replay — and a quarter of the time it is worth exactly nothing",
+    "1. What \"solved\" is worth, measured",
+    "2. The correction this round makes to the generalisation story",
+    "3. Declining is free, and that is the whole of what it is",
+    "4. A class of change the metric cannot see",
+    "5. Why \"give it the smartest actions once\" cannot be made to work as stated",
+    "6. Where the smartest next step actually is, measured",
+    "7. Reproduce",
+    "8. What this round got wrong",
+    "9. The held-out test: the curve did not transfer, and that is the answer",
+    "What this settles",
+    "What this means for \"solve problem 2 perfectly\""
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_SHOWING_IS_WORTH_A_LOT_AND_SOMETIMES_NOTHING_20261112_V1.md",
+   "sha256": "c4f8b3535c0bc8807aec3e2a6352efbf230b4b57aae6c049805346a998f922e9",
+   "summary": "**2026-11-12.** Branch `arena/2b093755-brain`. Authority **NONE** — producer-run measurement, `$0`, zero model calls, `truth.achieved` stays `false`, no capability registered, no family flipped. The organ measured (`edit_by_example_v1.py`) is not edited by this round.",
+   "terms": {
+    "against": 7,
+    "all": 7,
+    "already": 5,
+    "arm": 5,
+    "because": 6,
+    "better": 5,
+    "cannot": 6,
+    "canonical": 9,
+    "change": 20,
+    "changes": 20,
+    "check": 7,
+    "claim": 5,
+    "class": 5,
+    "corpus": 13,
+    "demonstration": 10,
+    "demonstrations": 7,
+    "did": 6,
+    "discovery": 6,
+    "every": 12,
+    "file": 7,
+    "first": 6,
+    "held-out": 8,
+    "https": 6,
+    "import": 6,
+    "kind": 6,
+    "kinds": 7,
+    "made": 7,
+    "measured": 8,
+    "mechanism": 6,
+    "no": 10,
+    "not": 35,
+    "now": 6,
+    "one": 20,
+    "organ": 14,
+    "people": 7,
+    "per": 6,
+    "precision": 13,
+    "problem": 12,
+    "reach": 12,
+    "right": 8,
+    "same": 7,
+    "skill": 6,
+    "so": 10,
+    "tasks": 8,
+    "three": 6,
+    "tree": 6,
+    "were": 6,
+    "wrong": 17
+   },
+   "title": "One showing is worth 4.7× a replay — and a quarter of the time it is worth exactly nothing",
+   "title_terms": [
+    "4.7",
+    "exactly",
+    "nothing",
+    "one",
+    "quarter",
+    "replay",
+    "showing",
+    "time",
+    "worth"
    ]
   },
   {
@@ -74753,10 +74837,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1188,
+  "included_source_count": 1189,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7c0c095425f226d100f285d4129c7f2fe11e0359364eef3c0fe866308097c76c"
+  "source_tree_digest": "55f1e12ebd61ea8479d5a7a81ada2e27c7028a733284b48263455f3941e4e31b"
  },
  "research_index": [
   {
@@ -167978,6 +168062,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ONE_SHOWING_HELD_OUT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ONE_SHOWING_HELD_OUT_20261112_V1.json",
+   "schema": "ONE_SHOWING_HELD_OUT_V1",
+   "sha256": "2d22a48135172d5f574b1d270bc6239ff3780184c67c5f4c250a72cbe8b97729",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "held": 1,
+    "one": 1,
+    "out": 1,
+    "showing": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/OPENAI_MATH_CORPUS_SOURCE_RECOMPUTATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -204275,6 +204378,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
+   "schema": "WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_V1",
+   "sha256": "9ee1adc9b0e386ff6c0c17008245483e833f12956965ab7f4e1445f2f8d1c7fe",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "one": 1,
+    "should": 1,
+    "showing": 1,
+    "trusted": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -229095,6 +229217,30 @@
     "runner": 3,
     "so": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "ONE_SHOWING_HELD_OUT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/ONE_SHOWING_HELD_OUT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_SHOWING_HELD_OUT_20261112_V1.json",
+   "schema": "ACTION_INTENT_V1",
+   "sha256": "7eee3dc27643cc16a618ba478a1698ee9d5f7d37a573993e73a1c9dea444ee88",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "held": 1,
+    "one": 1,
+    "one_showing_held_out_20261112_v1": 1,
+    "one_showing_is_known_to_be_a_decision_with_a_price_not_a_skill__no_rate_claim__no_family_flipped": 1,
+    "one_showing_transfers_only_within_kinds_of_change_it_already_expresses": 1,
+    "out": 1,
+    "reuse_the_recorded_instrument_on_a_disjoint_corpus": 1,
+    "showing": 1,
+    "v1": 1
    }
   },
   {
