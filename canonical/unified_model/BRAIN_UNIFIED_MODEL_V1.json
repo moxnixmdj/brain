@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 310,
+  "knowledge_documents": 311,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6706,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "51dbe597079ddeb158e36ed4acc28007390420eacd434b7f4a37dbd67b01d050"
+  "value": "51fdee6b06d67f6fb7b96daa65c29b22694dcc813b93685f6a850b595b854b8d"
  },
  "engines": [
   {
@@ -54855,6 +54855,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6137,
+   "headings": [
+    "The gate asks whether a file was written",
+    "1. The measurement",
+    "2. Why the fix is not in this PR",
+    "3. Why this is the answer to the question, in one sentence",
+    "4. What to do, in order",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_GATE_ASKS_IF_A_FILE_WAS_WRITTEN_20261112_V1.md",
+   "sha256": "6fc37a80842902ca8fd188beabc8ea452ab81e1dd0980fcd3bf9c3b10fd56066",
+   "summary": "**2026-11-12.** Base `6a5936b9`. Branch `arena/7cb4cbf4-brain`. Round 5.",
+   "terms": {
+    "46": 3,
+    "55": 2,
+    "acceptance": 3,
+    "adapter": 3,
+    "answer": 4,
+    "asks": 3,
+    "boolean": 4,
+    "called": 3,
+    "candidates": 3,
+    "capability": 6,
+    "computed": 3,
+    "computes": 6,
+    "count": 3,
+    "debt": 3,
+    "definite": 3,
+    "expect": 3,
+    "false": 3,
+    "field": 6,
+    "file": 4,
+    "found": 3,
+    "gate": 5,
+    "here": 3,
+    "learn": 3,
+    "most": 4,
+    "must": 4,
+    "nine": 5,
+    "no": 4,
+    "not": 15,
+    "nothing": 5,
+    "one": 8,
+    "only": 3,
+    "outcome": 3,
+    "output_verified": 5,
+    "own": 3,
+    "pass": 8,
+    "pr": 3,
+    "predicate": 10,
+    "read": 4,
+    "reads": 4,
+    "result": 5,
+    "round": 9,
+    "test": 3,
+    "tests": 4,
+    "transport": 4,
+    "true": 3,
+    "while": 3,
+    "would": 4,
+    "written": 3
+   },
+   "title": "The gate asks whether a file was written",
+   "title_terms": [
+    "asks",
+    "file",
+    "gate",
+    "whether",
+    "written"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6679,
    "headings": [
     "The gate is not a rubber stamp — except where it is",
@@ -68911,10 +68986,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1112,
+  "included_source_count": 1113,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ec47c5bdad4cf3986cf7abdb83065f6cdfdeb68978f5bc0de26a3f550652ccaf"
+  "source_tree_digest": "41844c2fba568629f7f9ea5379827b1ff7bbdc3969b76824331a3b2e23de6af1"
  },
  "research_index": [
   {
