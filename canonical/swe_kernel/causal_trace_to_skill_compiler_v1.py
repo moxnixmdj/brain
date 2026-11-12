@@ -44,6 +44,7 @@ import urllib.request
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import capability_transfer_ownership_gate_v1 as ownership_gate
+from canonical.swe_kernel import workflow_goal_generalization_v1 as goal_variants
 
 SCHEMA = "PROJECT_BRAIN_CAUSAL_TRACE_TO_SKILL_COMPILER_V1"
 
@@ -116,10 +117,15 @@ def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqli
             artifact_sha256 TEXT NOT NULL,
             ownership_receipt_json TEXT NOT NULL,
             hit_count INTEGER NOT NULL DEFAULT 0,
-            created_ns INTEGER NOT NULL
+            created_ns INTEGER NOT NULL,
+            goal_variants_json TEXT NOT NULL DEFAULT '[]'
         )
         """
     )
+    # Additive migration for stores created before verified goal variants existed.
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(compiled_workflow_skills)")}
+    if "goal_variants_json" not in columns:
+        conn.execute("ALTER TABLE compiled_workflow_skills ADD COLUMN goal_variants_json TEXT NOT NULL DEFAULT '[]'")
     conn.execute(
         "CREATE INDEX IF NOT EXISTS idx_workflow_layer ON compiled_workflow_skills(dominant_layer)"
     )
@@ -597,8 +603,7 @@ def anti_unify_workflow(
     }
 
 
-def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
-    pattern = str(skill.get("goal_regex") or "")
+def _bind_goal_regex(pattern: str, goal: str) -> dict[str, str] | None:
     if not pattern:
         return None
     m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
@@ -611,6 +616,97 @@ def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] 
         clean = v.strip().strip("\"'").rstrip(".")
         out["?" + k] = clean
     return out
+
+
+def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
+    bindings = _bind_goal_regex(str(skill.get("goal_regex") or ""), goal)
+    if bindings is not None:
+        return bindings
+    # Variant recall is the widened path, so it carries the conservative surface
+    # guard.  The original template keeps its historical admission behavior.
+    if not goal_variants.surface_is_safe(goal):
+        return None
+    for variant in skill.get("goal_variants") or []:
+        if not isinstance(variant, Mapping):
+            continue
+        bindings = _bind_goal_regex(str(variant.get("goal_regex") or ""), goal)
+        if bindings is not None:
+            return bindings
+    return None
+
+
+def _hole_kind(hole: str) -> str:
+    m = re.fullmatch(r"\?([a-z]+)\d+", hole)
+    return m.group(1) if m else ""
+
+
+def induce_goal_variant(
+    generalized: Mapping[str, Any], heldout_goal: str
+) -> tuple[dict[str, str], dict[str, Any]] | None:
+    """Align a *verified* held-out wording to the same typed holes.
+
+    This is intentionally narrow: the held-out sentence must expose exactly one
+    extractable literal of each hole kind, in the same multiplicity as the
+    original template.  The caller still has to execute the instantiated steps
+    and pass the postcondition/sabotage/ownership gates before the variant is
+    persisted.  Ambiguous or control-heavy surfaces return None.
+    """
+    if not goal_variants.surface_is_safe(heldout_goal):
+        return None
+    param_order = list(generalized.get("param_order") or [])
+    if not param_order:
+        return None
+    needed: dict[str, int] = {}
+    for hole in param_order:
+        kind = _hole_kind(str(hole))
+        if not kind:
+            return None
+        needed[kind] = needed.get(kind, 0) + 1
+    # Automatic induction is admitted only when each typed kind occurs once.
+    # Two ?path holes (source/destination, old/new, ...) cannot be aligned by
+    # surface order alone; a paraphrase may reorder them.  Refuse rather than
+    # guess a role assignment.  Exact-template qualification still works.
+    if any(count != 1 for count in needed.values()):
+        return None
+    seen: dict[str, list[str]] = {}
+    for kind, value in _extract_goal_literals(heldout_goal):
+        if kind not in needed:
+            continue
+        bucket = seen.setdefault(kind, [])
+        if value not in bucket:
+            bucket.append(value)
+    if any(len(seen.get(kind, [])) != count for kind, count in needed.items()):
+        return None
+    bindings: dict[str, str] = {}
+    cursors: dict[str, int] = {}
+    for hole in param_order:
+        kind = _hole_kind(str(hole))
+        idx = cursors.get(kind, 0)
+        bindings[str(hole)] = seen[kind][idx]
+        cursors[kind] = idx + 1
+    if bindings == generalized.get("concrete_bindings"):
+        return None
+    inst_steps = _instantiate_obj(generalized.get("abstract_steps") or [], bindings)
+    inst_post = _instantiate_obj(generalized.get("abstract_postcondition") or {}, bindings)
+    variant = anti_unify_workflow(heldout_goal, inst_steps, inst_post)
+    # A paraphrase may reorder arguments.  Hole *names* are kind-local (?path0,
+    # ?str0), so the set must match even when the surface order differs.
+    if set(variant.get("param_order") or []) != set(param_order):
+        return None
+    if variant.get("concrete_bindings") != bindings:
+        return None
+    if variant.get("abstract_steps") != generalized.get("abstract_steps"):
+        return None
+    if variant.get("abstract_postcondition") != generalized.get("abstract_postcondition"):
+        return None
+    record = {
+        "goal_skeleton": variant["goal_skeleton"],
+        "goal_regex": variant["goal_regex"],
+        "skeleton_tokens": variant["skeleton_tokens"],
+    }
+    if not goal_variants.validate_variant(record, param_order):
+        return None
+    return bindings, record
 
 
 # --------------------------------------------------------------------------- #
@@ -1517,6 +1613,11 @@ def compile_and_qualify_skill(
 
     effective_heldout_goal = heldout_goal or goal
     heldout_bindings = bind_goal_parameters(generalized, effective_heldout_goal)
+    pending_variant: dict[str, Any] | None = None
+    if heldout_bindings is None and heldout_goal is not None:
+        induced = induce_goal_variant(generalized, heldout_goal)
+        if induced is not None:
+            heldout_bindings, pending_variant = induced
     if heldout_bindings is None:
         return {
             "schema": SCHEMA,
@@ -1687,14 +1788,20 @@ def compile_and_qualify_skill(
             import shutil
             shutil.rmtree(auto_twin_dir, ignore_errors=True)
 
-    artifact_payload = json.dumps({
+    if pending_variant is not None:
+        generalized["goal_variants"] = goal_variants.canonical_variants([pending_variant])
+    artifact_payload_obj = {
         "goal_skeleton": generalized["goal_skeleton"],
         "goal_regex": generalized["goal_regex"],
         "param_order": generalized["param_order"],
         "abstract_steps": generalized["abstract_steps"],
         "abstract_postcondition": generalized["abstract_postcondition"],
         "dominant_layer": elevated["dominant_layer"],
-    }, sort_keys=True)
+    }
+    variant_records = goal_variants.canonical_variants(generalized.get("goal_variants") or [])
+    if variant_records:
+        artifact_payload_obj["goal_variants"] = variant_records
+    artifact_payload = json.dumps(artifact_payload_obj, sort_keys=True)
     artifact_sha256 = hashlib.sha256(artifact_payload.encode("utf-8")).hexdigest()
     skill_id = "workflow." + artifact_sha256[:16]
 
@@ -1748,10 +1855,10 @@ def compile_and_qualify_skill(
                 skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                 param_order_json, steps_json, postcondition_json,
                 dominant_layer, artifact_sha256, ownership_receipt_json,
-                hit_count, created_ns
+                hit_count, created_ns, goal_variants_json
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE(
                 (SELECT hit_count FROM compiled_workflow_skills WHERE skill_id = ?), 0
-            ), ?)
+            ), ?, ?)
             """,
             (
                 skill_id,
@@ -1766,6 +1873,7 @@ def compile_and_qualify_skill(
                 json.dumps(gate_verdict, sort_keys=True),
                 skill_id,
                 time.time_ns(),
+                json.dumps(variant_records),
             ),
         )
         conn.commit()
@@ -1804,7 +1912,7 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             """
             SELECT skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                    param_order_json, steps_json, postcondition_json,
-                   dominant_layer, artifact_sha256
+                   dominant_layer, artifact_sha256, goal_variants_json
             FROM compiled_workflow_skills
             ORDER BY hit_count DESC, created_ns DESC
             """
@@ -1823,20 +1931,31 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             "abstract_postcondition": json.loads(r[6]),
             "dominant_layer": r[7],
             "artifact_sha256": r[8],
+            "goal_variants": json.loads(r[9] or "[]"),
         })
     _WORKFLOW_MEM_CACHE[key] = out
-    # Build O(1) rarest-anchor-token inverted index so lookup stays sub-millisecond at 10,000+ skills
+    # Rarest-anchor inverted index.  Verified goal variants contribute their own
+    # anchors so a paraphrase can retrieve the skill even when it shares no
+    # original skeleton token.  Binding still requires a full template match.
     doc_freq: dict[str, int] = {}
+    skill_tokens: dict[str, set[str]] = {}
     for sk in out:
-        for tok in set(sk.get("skeleton_tokens") or []):
+        toks = goal_variants.retrieval_tokens(sk)
+        skill_tokens[sk["skill_id"]] = toks
+        for tok in toks:
             doc_freq[tok] = doc_freq.get(tok, 0) + 1
     inv: dict[str, list[dict[str, Any]]] = {"__ALL_EMPTY__": []}
     for sk in out:
-        toks = list(set(sk.get("skeleton_tokens") or []))
+        toks = skill_tokens[sk["skill_id"]]
         if not toks:
             inv["__ALL_EMPTY__"].append(sk)
-        else:
-            anchor = min(toks, key=lambda t: (doc_freq.get(t, 0), -len(t), t))
+            continue
+        anchors = {min(toks, key=lambda t: (doc_freq.get(t, 0), -len(t), t))}
+        for variant in sk.get("goal_variants") or []:
+            vt = {str(t) for t in variant.get("skeleton_tokens") or [] if isinstance(t, str)}
+            if vt:
+                anchors.add(min(vt, key=lambda t: (doc_freq.get(t, 0), -len(t), t)))
+        for anchor in anchors:
             inv.setdefault(anchor, []).append(sk)
     _WORKFLOW_INDEX_CACHE[key] = inv
     return out
@@ -1912,9 +2031,6 @@ def recall_and_execute_workflow(
     previous_attempt = False
 
     for skill in _candidate_skills_for_words(goal_words, db_path):
-        skel_tokens = set(skill.get("skeleton_tokens") or [])
-        if skel_tokens and not (skel_tokens <= goal_words):
-            continue
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None:
             continue
@@ -1994,7 +2110,8 @@ def export_workflow_bundle(
             """
             SELECT skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                    param_order_json, steps_json, postcondition_json,
-                   dominant_layer, artifact_sha256, ownership_receipt_json, hit_count
+                   dominant_layer, artifact_sha256, ownership_receipt_json, hit_count,
+                   goal_variants_json
             FROM compiled_workflow_skills
             ORDER BY skill_id ASC
             """
@@ -2016,6 +2133,7 @@ def export_workflow_bundle(
             "artifact_sha256": r[8],
             "ownership_receipt": json.loads(r[9]),
             "hit_count": int(r[10]),
+            "goal_variants": json.loads(r[11] or "[]"),
         })
 
     doc = {
@@ -2056,14 +2174,24 @@ def import_workflow_bundle(
                 continue
             sid = str(item.get("skill_id") or "")
             claimed_sha = str(item.get("artifact_sha256") or "")
-            canonical_payload = json.dumps({
+            variant_records = goal_variants.canonical_variants(item.get("goal_variants") or [])
+            param_order = list(item.get("param_order") or [])
+            if variant_records and not all(
+                goal_variants.validate_variant(v, param_order) for v in variant_records
+            ):
+                refusals.append({"skill_id": sid, "reason": "INVALID_GOAL_VARIANT"})
+                continue
+            canonical_payload_obj = {
                 "goal_skeleton": item.get("goal_skeleton"),
                 "goal_regex": item.get("goal_regex"),
                 "param_order": item.get("param_order"),
                 "abstract_steps": item.get("abstract_steps"),
                 "abstract_postcondition": item.get("abstract_postcondition"),
                 "dominant_layer": item.get("dominant_layer"),
-            }, sort_keys=True)
+            }
+            if variant_records:
+                canonical_payload_obj["goal_variants"] = variant_records
+            canonical_payload = json.dumps(canonical_payload_obj, sort_keys=True)
             actual_sha = hashlib.sha256(canonical_payload.encode("utf-8")).hexdigest()
             expected_sid = "workflow." + actual_sha[:16]
             if not claimed_sha or actual_sha != claimed_sha or sid != expected_sid:
@@ -2079,8 +2207,8 @@ def import_workflow_bundle(
                     skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                     param_order_json, steps_json, postcondition_json,
                     dominant_layer, artifact_sha256, ownership_receipt_json,
-                    hit_count, created_ns
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    hit_count, created_ns, goal_variants_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     sid,
@@ -2095,6 +2223,7 @@ def import_workflow_bundle(
                     json.dumps(dict(receipt), sort_keys=True),
                     int(item.get("hit_count") or 0),
                     time.time_ns(),
+                    json.dumps(variant_records),
                 ),
             )
             accepted += 1
