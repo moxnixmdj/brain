@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 379,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6776,
+  "research_index_records": 6775,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3809324641a0b3bee655005be33951db202cfffd87c936c3f45b3a309cd4c5dd"
+  "value": "badb3f351a500562689a79c1d7a0db04c92b242d0f8753ed11f7879132776285"
  },
  "engines": [
   {
@@ -51151,82 +51151,6 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 5927,
-   "headings": [
-    "I was wrong about the block. The lane was open, and the result replicates.",
-    "1. What I got wrong",
-    "2. The measurement, on instances that did not exist before",
-    "3. What this does and does not settle",
-    "4. Shipped",
-    "Answers"
-   ],
-   "kind": "DOCUMENT",
-   "path": "I_WAS_WRONG_ABOUT_THE_BLOCK_20261112_V1.md",
-   "sha256": "f82a3ee05cab00478195650b97a80861847b604151c6e6d3b4b99cb73c032bbe",
-   "summary": "**2026-11-12.** Authority **NONE** (producer-run measurement in this sandbox). `truth.achieved` = `false`.",
-   "terms": {
-    "17": 4,
-    "50": 6,
-    "all": 4,
-    "arm": 3,
-    "beats": 3,
-    "both": 5,
-    "bridge": 4,
-    "browser": 3,
-    "check": 3,
-    "did": 3,
-    "false": 4,
-    "feasibility": 4,
-    "first": 5,
-    "fresh": 3,
-    "full": 3,
-    "had": 4,
-    "instances": 6,
-    "lane": 3,
-    "learner": 3,
-    "measurement": 4,
-    "newest": 3,
-    "no": 6,
-    "nobody": 3,
-    "not": 13,
-    "now": 6,
-    "one": 6,
-    "only": 5,
-    "open": 3,
-    "ordering": 4,
-    "page": 3,
-    "pages": 9,
-    "pass": 4,
-    "produced": 4,
-    "random": 4,
-    "real": 3,
-    "recorded": 3,
-    "replication": 3,
-    "run": 8,
-    "runs": 8,
-    "same": 6,
-    "seeds": 4,
-    "so": 4,
-    "still": 3,
-    "success": 7,
-    "true": 4,
-    "used": 4,
-    "verbatim": 3,
-    "version_space": 4
-   },
-   "title": "I was wrong about the block. The lane was open, and the result replicates.",
-   "title_terms": [
-    "about",
-    "block",
-    "lane",
-    "open",
-    "replicates",
-    "result",
-    "wrong"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
    "bytes": 5580,
    "headings": [
     "I was wrong: they have run it 296 times",
@@ -56099,6 +56023,79 @@
    "title_terms": [
     "index",
     "solution"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5770,
+   "headings": [
+    "SWE_SELF_IMPROVEMENT_BRIDGE_20261112_V1.md — re-measured, 2026-11-12 (seventh asking)",
+    "1. Reproduction check (2026-11-12, this branch)",
+    "2. What this reproduction does — and does not — establish",
+    "3. The one next experiment that would make this progress rather than a demonstration",
+    "4. Standing invariants"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SWE_BRIDGE_REMEASURED_20261112_V1.md",
+   "sha256": "f3377cbb4411502851ce99a1f624cefc5057f98493d4e3cc1c12953e7752f00c",
+   "summary": "**2026-11-12.** Branch `arena/ab235d52-brain`, forked from `537368bb` (main). Authority: **NONE**. `truth.achieved` stays `false`. $0 spend. Zero model dependency.",
+   "terms": {
+    "10": 2,
+    "19": 2,
+    "2026-11-12": 5,
+    "2611.03219": 2,
+    "56": 2,
+    "6750": 2,
+    "6769": 3,
+    "absent": 2,
+    "active_skill_count": 2,
+    "addresses": 2,
+    "all": 2,
+    "any": 5,
+    "authority": 2,
+    "branch": 2,
+    "bridge": 3,
+    "broken": 2,
+    "candidate": 2,
+    "canonical": 3,
+    "capabilities": 2,
+    "check": 2,
+    "checkout": 3,
+    "claim": 3,
+    "code": 2,
+    "corpus": 2,
+    "end-to-end": 3,
+    "failing": 3,
+    "false": 5,
+    "identical": 7,
+    "loop": 4,
+    "merged": 4,
+    "no": 6,
+    "not": 8,
+    "one": 4,
+    "only": 3,
+    "owner": 3,
+    "pr": 3,
+    "price": 4,
+    "real": 5,
+    "repair": 3,
+    "reproduction": 3,
+    "rule": 3,
+    "run": 4,
+    "skill": 4,
+    "state": 5,
+    "still": 5,
+    "truth.achieved": 3,
+    "verified_episode_count": 3,
+    "yes": 8
+   },
+   "title": "SWE_SELF_IMPROVEMENT_BRIDGE_20261112_V1.md — re-measured, 2026-11-12 (seventh asking)",
+   "title_terms": [
+    "2026-11-12",
+    "asking",
+    "re-measured",
+    "seventh",
+    "swe_self_improvement_bridge_20261112_v1.md"
    ]
   },
   {
@@ -74220,7 +74217,7 @@
   "included_source_count": 1181,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ae57abbb43728399ed2e375b0ebb4f86cea7ef1255e4c4922e33be83b3174693"
+  "source_tree_digest": "eabdb7924efa2ea16aa3142613aa6114210bbe45188e37edd3e9fae0470b2b6b"
  },
  "research_index": [
   {
@@ -166195,23 +166192,6 @@
     "one": 1,
     "success": 1,
     "v5": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/MINIWOB_REPLICATION_20261112_V1.json",
-   "schema": "BRAIN_MINIWOB_ONE_SUCCESS_GENERALISATION_MEASUREMENT_V1",
-   "sha256": "2f9e3888e4a8b375301f9b7e4aff74f5f36ca2c3ace49ded8d2562050d260751",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "miniwob": 1,
-    "replication": 1,
-    "v1": 1
    }
   },
   {
