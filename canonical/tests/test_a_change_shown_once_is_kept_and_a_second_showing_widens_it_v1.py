@@ -150,6 +150,18 @@ def test_a_use_no_example_showed_is_refused_with_its_line_and_nothing_is_changed
     assert "nothing was changed" in said and "show that use too, changed or left alone" in said
 
 
+def test_a_refusal_names_every_use_that_was_not_shown() -> None:
+    target = ("import yaml\ny = yaml.load(q)\nx = yaml.load(s, Loader=yaml.Loader)\ncb = yaml.load\n"
+              "z = yaml.load(a, b)\nw = yaml.load(a, b, c)\nv = yaml.load(c, Loader=1)\n")
+    with pytest.raises(by_example.Refused) as refusal:
+        repeated(target, YAML_PLAIN)
+    assert str(refusal.value).startswith(
+        "line 3 of the file has yaml.load called with 1 argument and the keyword Loader "
+        "(also line 4, not called; line 5, called with 2 arguments; and 1 more); "
+        "the examples showed it called with 1 argument.")
+    assert "show those uses too, changed or left alone" in str(refusal.value)
+
+
 def test_this_is_the_call_the_new_function_does_not_take() -> None:
     """The measured case.  Before this guard the edit was written, and ``yaml.safe_load`` has no ``Loader``."""
     import inspect

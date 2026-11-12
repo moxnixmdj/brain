@@ -841,32 +841,45 @@ def said(use):
     return words
 
 
+SHOWN = object()
+
+
 def unshown_use(rule, text, node):
-    """None when the code at `node` is used a way the examples showed; otherwise that use.
+    """`SHOWN` when the code at `node` is used a way the examples showed; otherwise that use.
 
     A function replaced where it was called one way says nothing about calls of another form: the new function
     may not take those arguments.  So a call must have a number of plain arguments the examples showed and no
     keyword they did not show, and code that is not called must have been shown not called.
     """
     if rule.kind != "expression":
-        return None
+        return SHOWN
     use, calls = text.use_of(node), [shown for shown in rule.uses if shown is not None]
     if use is None:
-        return None if None in rule.uses else use_said(rule, use)
+        return SHOWN if None in rule.uses else use
     if use[0] in {count for count, _ in calls} and use[1] <= frozenset().union(*[named for _, named in calls]):
-        return None
-    return use_said(rule, use)
+        return SHOWN
+    return use
 
 
-def use_said(rule, use):
-    return "%s; the examples showed it %s" % (said(use), ", ".join(
-        said(shown) for shown in sorted(rule.uses, key=lambda one: (one is not None, one and (one[0], sorted(one[1]))))))
+def not_shown(rule, found, text, what):
+    """The refusal for uses the examples did not show.  `found` is [(use, the first node used that way)]."""
+    (use, node), others = found[0], found[1:]
+    also = ""
+    if others:
+        also = " (also %s%s)" % ("; ".join("line %d, %s" % (other.lineno, said(more)) for more, other in others[:2]),
+                                 "; and %d more" % (len(others) - 2) if len(others) > 2 else "")
+    return Refused("line %d of %s has %s %s%s; the examples showed it %s. A use the examples did not show may not "
+                   "work with the new code, so nothing was changed; show %s too, changed or left alone"
+                   % (node.lineno, what, " ".join(text.of(node).split())[:60], said(use), also,
+                      ", ".join(said(shown) for shown in sorted(
+                          rule.uses, key=lambda one: (one is not None, one and (one[0], sorted(one[1]))))),
+                      "those uses" if others else "that use"))
 
 
 def rewrite(rules, source_text, what="the file", check_names=True):
     """Apply the rules to every place that fits.  Returns (new text, number of places changed)."""
     text = Text(source_text, what)
-    places = []
+    places, unshown = [], {}
     for node in units(text.tree):
         fitting = []
         for rule in rules:
@@ -876,12 +889,14 @@ def rewrite(rules, source_text, what="the file", check_names=True):
         if len(fitting) > 1:
             raise Refused("two changes of the example both fit the code at line %d of %s" % (node.lineno, what))
         if fitting:
-            other = unshown_use(fitting[0][0], text, node)
-            if other is not None:
-                raise Refused("line %d of %s has %s %s. A use the examples did not show may not work with the new "
-                              "code, so nothing was changed; show that use too, changed or left alone"
-                              % (node.lineno, what, " ".join(text.of(node).split())[:60], other))
+            use = unshown_use(fitting[0][0], text, node)
+            if use is not SHOWN:
+                if use not in [seen for seen, _ in unshown.setdefault(id(fitting[0][0]), (fitting[0][0], []))[1]]:
+                    unshown[id(fitting[0][0])][1].append((use, node))
+                continue
             places.append((text.span(node), node) + fitting[0])
+    for rule, found in unshown.values():
+        raise not_shown(rule, found, text, what)
     places.sort(key=lambda place: place[0])
     for earlier, later in zip(places, places[1:]):
         if later[0][0] < earlier[0][1]:
