@@ -20,6 +20,9 @@ WRONG_SIGN = bug(902, "    return a - b\n", "    return a + b\n", bug_type="oper
 # the tests are weak: `t = b + 1` gives 3 for (1, 2) as the fix does, is a smaller piece taken out, and is wrong for (5, 2)
 WEAK_TESTS = bug(903, "    t = a\n    t += b + 1\n    return t\n", "    t = a\n    t += b\n    return t\n")
 WRONG_AND_PASSING = "def f(a, b):\n    t = a\n    t = b + 1\n    return t\n"
+# the smallest piece that passes leaves `(a + b) * 1`: not the published text, and the same answers everywhere
+NOT_THE_FIX_AND_RIGHT = bug(904, "    return (a + b) * 1 + 1\n", "    return a + b\n")
+EXTRA = {"entry": "f", "atol": 0, "inputs": [[1, 2], [5, 2], [0, 0]]}
 
 
 def passing(*programs):
@@ -65,6 +68,9 @@ def test_no_more_candidates_than_the_budget_are_run(tmp_path):
     assert row["published_fix_rank"] == 4 and not row["repaired"] and row["candidates_run"] == 3
     row, _ = asked(WEAK_TESTS, tmp_path, budget=4)
     assert row["repaired"] and row["first_pass_rank"] == 4 and row["is_the_published_fix"]
+    # the kind and the size written down are those of the piece that passed, not of the first one tried
+    first = take_out.candidates(WEAK_TESTS["buggy"])[0]
+    assert (first[1], first[2]) == (1, take_out.PLAIN_ASSIGNMENT) and row["kind_of_the_piece"] == take_out.ONE_INSIDE and row["nodes_fewer"] == 3
 
 
 def test_a_piece_that_passes_weak_tests_and_is_not_the_fix_is_repaired_and_not_right(tmp_path):
@@ -89,6 +95,17 @@ def test_with_the_real_screen_the_fix_is_found_and_the_wrong_deletion_is_told_ap
     assert row["kind_of_the_piece"] == take_out.PLAIN_ASSIGNMENT and row["first_pass_rank"] < row["published_fix_rank"]
     row = measure.one_bug(WRONG_SIGN, tmp_path / "c")
     assert row["usable"] and not row["repaired"]
+
+
+def test_right_as_far_as_checked_goes_by_inputs_the_tests_do_not_have(tmp_path):
+    row = measure.one_bug(NOT_THE_FIX_AND_RIGHT, tmp_path / "a", extra=EXTRA)
+    assert row["repaired"] and not row["is_the_published_fix"] and row["right_as_far_as_checked"]
+    assert row["on_inputs_the_tests_do_not_have"] == {"inputs_used": 3, "agree": 3} and row["first_pass_rank"] < row["published_fix_rank"]
+    # without such inputs only the published fix counts as right
+    assert not measure.one_bug(NOT_THE_FIX_AND_RIGHT, tmp_path / "b")["right_as_far_as_checked"]
+    row = measure.one_bug(WEAK_TESTS, tmp_path / "c", extra=EXTRA)
+    assert row["repaired"] and not row["right_as_far_as_checked"]
+    assert row["on_inputs_the_tests_do_not_have"]["inputs_used"] == 3 and row["on_inputs_the_tests_do_not_have"]["agree"] == 1
 
 
 # ----------------------------------------------------------------------------- what it came to
@@ -120,6 +137,13 @@ def test_the_counts_by_bug_type_and_by_kind_of_piece():
     assert summary["by_bug_type"]["excess logic"] == {"bugs": 2, "published_fix_among_the_candidates": 2, "repaired": 2, "right_as_far_as_checked": 1}
     assert summary["by_bug_type"]["missing logic"] == {"bugs": 2, "published_fix_among_the_candidates": 1, "repaired": 0, "right_as_far_as_checked": 0}
     assert summary["by_kind_of_the_piece"] == {take_out.ONE_INSIDE: {"repaired": 2, "right_as_far_as_checked": 2}, take_out.STATEMENT: {"repaired": 1, "right_as_far_as_checked": 0}}
+
+
+def test_the_budget_itself_is_within_the_budget():
+    per_bug = {"Python/1": row_of(candidates=200, fix_at=200, run=200), "Python/2": row_of(candidates=201, fix_at=201, run=200)}
+    summary = measure.summarise(per_bug, budget=200)
+    assert summary["published_fix_among_the_candidates"] == 2 and summary["published_fix_within_the_budget"] == 1
+    assert summary["bugs_with_more_candidates_than_the_budget"] == 1
 
 
 def test_nothing_usable_gives_counts_of_nothing():
@@ -175,6 +199,10 @@ def test_the_two_put_together_in_other_ways_the_learner_first_and_with_a_larger_
     got = measure.beside_the_learner({"Python/2": PER_BUG["Python/2"]}, dose(b2=[151, True, 151, 900]), budget=200)["put_together_in_other_ways__looked_at_after_the_scored_run"]
     assert got["the_learner_first_in_what_the_pieces_leave_then_the_pieces"] == {"repaired": 1, "right_as_far_as_checked": 0}
     assert got["the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing"] == {"repaired": 1, "right_as_far_as_checked": 1, "candidates_run_beyond_the_budget_in_all": 0}
+    # a repair of the learner's that is not right stays not right, whichever comes first
+    got = measure.beside_the_learner({"Python/3": PER_BUG["Python/3"]}, dose(b3=[9, False, None, 900]), budget=200)["put_together_in_other_ways__looked_at_after_the_scored_run"]
+    assert got["the_learner_first_in_what_the_pieces_leave_then_the_pieces"] == {"repaired": 1, "right_as_far_as_checked": 0}
+    assert got["the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing"] == {"repaired": 1, "right_as_far_as_checked": 0, "candidates_run_beyond_the_budget_in_all": 0}
     # where neither repairs, every piece was run in vain beyond the budget
     got = measure.beside_the_learner({"Python/3": PER_BUG["Python/3"]}, dose(b3=[None, False, None, 900]), budget=200)["put_together_in_other_ways__looked_at_after_the_scored_run"]
     assert got["the_learner_with_the_whole_budget_then_the_pieces_where_it_repaired_nothing"] == {"repaired": 0, "right_as_far_as_checked": 0, "candidates_run_beyond_the_budget_in_all": 40}
@@ -197,7 +225,9 @@ def humanevalfix_row(number, buggy_body, fixed_body, checks, bug_type):
 def files(tmp_path, monkeypatch):
     rows = [humanevalfix_row(901, "    return a + b + 1\n", "    return a + b\n", "    assert f(1, 2) == 3", "excess logic"),
             humanevalfix_row(902, "    return a - b\n", "    return a + b\n", "    assert f(1, 2) == 3", "operator misuse"),
-            humanevalfix_row(903, "    return (a + b) * 2\n", "    return a + b\n", "    assert f(1, 2) == 3", "excess logic")]
+            humanevalfix_row(903, "    return (a + b) * 2\n", "    return a + b\n", "    assert f(1, 2) == 3", "excess logic"),
+            humanevalfix_row(904, "    return (a + b) * 1 + 1\n", "    return a + b\n", "    assert f(1, 2) == 3", "excess logic")]
+    (tmp_path / "extra.jsonl").write_text(json.dumps({"task_id": "HumanEval/904", "entry_point": "f", "atol": 0, "base_input": [[1, 2]], "plus_input": [[5, 2], [0, 0]]}) + "\n", encoding="utf-8")
     path = tmp_path / "humanevalpack.jsonl"
     path.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
     monkeypatch.setattr(hef, "split", lambda bugs, **_: (["Python/901", "Python/902"], ["Python/903"]))
@@ -238,3 +268,17 @@ def test_without_a_dose_record_the_sum_with_the_learner_is_left_out(files):
     out = tmp_path / "out.json"
     assert measure.main(common[:4] + ["--dose-record", str(tmp_path / "none.json"), "--out", str(out)]) == 0
     assert "beside_the_learner" not in json.loads(out.read_text())
+
+
+def test_the_extra_inputs_given_on_the_command_line_decide_what_is_right(files):
+    tmp_path, common = files
+    out = tmp_path / "out.json"
+    assert measure.main(common + ["--bugs", "Python/904", "--extra-inputs", str(tmp_path / "extra.jsonl"), "--out", str(out)]) == 0
+    record = json.loads(out.read_text())
+    row = record["per_bug"]["Python/904"]
+    assert row["repaired"] and not row["is_the_published_fix"] and row["right_as_far_as_checked"] and row["on_inputs_the_tests_do_not_have"] == {"inputs_used": 3, "agree": 3}
+    assert record["summary"]["right_as_far_as_checked"] == 1 and record["summary"]["the_published_fix"] == 0 and len(record["benchmark"]["extra_inputs_sha256"]) == 64
+    assert measure.main(common + ["--bugs", "Python/904", "--out", str(out)]) == 0
+    record = json.loads(out.read_text())
+    assert record["per_bug"]["Python/904"]["repaired"] and not record["per_bug"]["Python/904"]["right_as_far_as_checked"]
+    assert record["summary"]["passes_the_tests_and_is_not_right"] == ["Python/904"] and record["benchmark"]["extra_inputs_sha256"] is None
