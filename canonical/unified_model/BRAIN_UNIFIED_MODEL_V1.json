@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 375,
+  "knowledge_documents": 376,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6773,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "143421db7400475679ecbd28cfd2d54ef52978b1706a6c30c2d4b0d43bdd4f05"
+  "value": "dde0541bd22685bf266954997f18f4024b141d4618cac4f44294bc3247ecdfff"
  },
  "engines": [
   {
@@ -59506,6 +59506,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 12997,
+   "headings": [
+    "THE_SYSTEM_ALREADY_WORKS.md, audited receipt by receipt — 2026-11-12 (sixth asking)",
+    "1. Its claims, with the receipts they actually carry",
+    "2. What the document is right about — and worth keeping",
+    "3. The corrected bottom line for the owner",
+    "3b. Addendum, appended after this audit was written (#6773 base moved)",
+    "4. Standing owner decisions (unchanged)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SYSTEM_ALREADY_WORKS_AUDITED_20261112_V1.md",
+   "sha256": "995de8f4ef7d2c7325d9e113a749323ac38407ef502d66e39d9cd207366fc958",
+   "summary": "**2026-11-12.** Branch `arena/aff65bc5-brain`, forked from `4c05cd4d` (main at the time). Authority: **NONE**. `truth.achieved` stays `false`. $0 incremental spend. Zero model calls.",
+   "terms": {
+    "10": 5,
+    "11": 5,
+    "19": 5,
+    "2026-11-12": 7,
+    "38": 4,
+    "6750": 5,
+    "6755": 8,
+    "6766": 5,
+    "abs": 5,
+    "admitted": 4,
+    "after": 4,
+    "all": 11,
+    "arxiv": 5,
+    "arxiv.org": 5,
+    "audit": 9,
+    "code": 7,
+    "coding": 6,
+    "confinement": 7,
+    "door": 5,
+    "end-to-end": 6,
+    "four": 5,
+    "https": 5,
+    "literal": 6,
+    "loop": 7,
+    "measured": 7,
+    "merged": 6,
+    "never": 8,
+    "no": 5,
+    "not": 16,
+    "one": 19,
+    "only": 5,
+    "owner": 11,
+    "real": 13,
+    "recall": 5,
+    "recalled": 5,
+    "repair": 9,
+    "right": 5,
+    "system": 7,
+    "task": 5,
+    "tier": 5,
+    "today": 6,
+    "tree": 10,
+    "true": 11,
+    "verification": 7,
+    "verified": 8,
+    "wall": 6,
+    "were": 6,
+    "yet": 7
+   },
+   "title": "THE_SYSTEM_ALREADY_WORKS.md, audited receipt by receipt — 2026-11-12 (sixth asking)",
+   "title_terms": [
+    "2026-11-12",
+    "asking",
+    "audited",
+    "receipt",
+    "sixth",
+    "the_system_already_works.md"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6945,
    "headings": [
     "The World Is Allowed to Say No",
@@ -73901,10 +73976,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1177,
+  "included_source_count": 1178,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "695c6474bf57ac8d95222b5c916786877988f5ae91e77ee130f172ded53f3e6b"
+  "source_tree_digest": "6f63c97c9281a79c4fa7b4f9e8f2918f0d2f04bd4bd598808003e5daf089ea53"
  },
  "research_index": [
   {
