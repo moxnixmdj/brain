@@ -1,23 +1,25 @@
 #!/usr/bin/env python3
-"""How much *verified* experience does this tree actually hold? Count it before building on it.
+"""How much *verified* experience does this tree hold? Count both kinds of artefact, or be wrong.
 
-Round 14's recommendation was a student channel: weights trained offline on the verified receipts this
-repo emits. That recommendation has a precondition nobody had checked — that the receipts contain a
-verification verdict, and that somebody other than the producer produced it. This census counts both,
-over every execution receipt in the tree, and refuses to call a self-report a verification.
+**Correction, 2026-11-12 (round 16).** The first version of this census globbed
+``canonical/astra_runtime/evidence/*RECEIPT.json`` and reported zero independently verified
+experience. That was a detector blind spot, not a finding. Independently verified runs are recorded in
+a *different* artefact, ``CAPABILITY__*__INDEPENDENT_VERIFICATION.json``, written by
+``.github/workflows/capability-receipt-verification.yml`` on a GitHub runner under an OIDC-attested
+``github_run_id``. There are hundreds of them. A census that reads one of the two artefacts and
+concludes zero is exactly the mistake this project keeps paying for, so the tool now counts both,
+joins them, and fails loudly if a verification record has no producer receipt to join to.
 
-Three arms:
+Arms:
 
-1. **census** — every ``*RECEIPT.json`` under ``canonical/astra_runtime/evidence``, classified by
-   (a) does it carry a verdict, (b) was it run by anyone but its producer, (c) is it free of model
-   dependency. A *training-ready* example needs all three.
-2. **rerun** — ``--rerun`` takes a small set of deterministic experiences, runs each **twice** in
-   separate processes and requires byte-identical output. Two runs by one agent is *reproducibility*,
-   not independence, and the receipts it writes say exactly that: ``verified: false``,
-   ``independent_verifier: null``. Manufacturing independence is not something this tool can do.
-3. **what would fix it** — the census names the missing field and the smallest change that fills it.
-
-Authority NONE. Reads receipts, writes only the receipts ``--rerun`` is asked to write. $0, no model.
+1. **producer receipts** — what was executed and what the producer observed (``observed.pass``).
+2. **verification records** — what a *different identity* re-ran and reproduced, with the run that
+   did it.
+3. **join** — a training example needs all three: a verdict, a reproduction by somebody else, and no
+   model in the loop. It also needs *depth*: this tree has one instance per capability, and one
+   instance per family cannot support a held-out split.
+4. **rerun** — optional; re-runs a few deterministic experiences twice to show which artefacts must
+   vary (a verifier with fresh cases) and which must replay (an experience to learn from).
 """
 from __future__ import annotations
 
@@ -31,13 +33,16 @@ from typing import Any
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parent
 EVIDENCE = REPO_ROOT / "canonical/astra_runtime/evidence"
+RECEIPT_GLOB = "*RECEIPT.json"
+VERIFICATION_GLOB = "CAPABILITY__*__INDEPENDENT_VERIFICATION.json"
 
-#: Deterministic experiences this machine can re-run. Each must be a separate process whose whole
-#: observable output is its stdout and exit code.
+#: How many verified instances of one capability a held-out split needs before it means anything.
+DEPTH_TARGET = 8
+
 EXPERIENCES: list[dict[str, Any]] = [
     {
-        # A verifier must produce fresh cases, so it must NOT repeat itself. If this arm ever starts
-        # matching, the check has stopped being fresh and has started being a fixed test.
+        # A verifier must draw fresh cases, so it must NOT repeat itself. If this arm ever starts
+        # matching, the check has stopped being fresh and has become a fixed test.
         "id": "unified_model_fresh_cases",
         "argv": ["{python}", "canonical/runtime/verify_brain_unified_model_v1.py"],
         "kind": "fresh_case_verifier",
@@ -45,7 +50,6 @@ EXPERIENCES: list[dict[str, Any]] = [
         "timeout_s": 300,
     },
     {
-        # An experience somebody might train on must replay byte-for-byte.
         "id": "unified_model_seed_replays",
         "argv": ["{python}", "canonical/runtime/verify_brain_unified_model_v1.py",
                  "--seed", "20261112"],
@@ -68,67 +72,112 @@ def _digest(text: str) -> str:
 
 
 def classify(receipt: dict[str, Any]) -> dict[str, Any]:
-    """What this receipt can and cannot support."""
+    """What a producer receipt can and cannot support on its own."""
     observed = receipt.get("observed")
     verdict = observed.get("pass") if isinstance(observed, dict) else None
-    ran_by = receipt.get("ran_by")
-    independent = bool(receipt.get("independent_run_reference") or receipt.get("independent_verifier"))
-    model_free = (receipt.get("model_dependency_count") or 0) == 0
     return {
         "capability_id": receipt.get("capability_id"),
         "has_verdict": verdict is not None,
         "verdict": verdict,
-        "ran_by": ran_by,
-        "independent_run_recorded": independent,
-        "model_free": model_free,
-        # a training example needs a verdict somebody else produced
-        "training_ready": (verdict is not None) and independent and model_free,
+        "ran_by": receipt.get("ran_by"),
+        "model_free": (receipt.get("model_dependency_count") or 0) == 0,
+        # on its own, nothing: a producer's own pass is the producer's opinion
+        "training_ready_alone": False,
+    }
+
+
+def classify_verification(record: dict[str, Any]) -> dict[str, Any]:
+    """What a verification record asserts: a different identity re-ran it and reproduced it."""
+    reference = record.get("independent_run_reference")
+    run_id = reference.get("github_run_id") if isinstance(reference, dict) else None
+    return {
+        "capability_id": record.get("capability_id"),
+        "reproduced": record.get("reproduced") is True,
+        "verified_by": record.get("independent_verifier"),
+        "github_run_id": run_id,
+        "attested": bool(run_id),
+        "model_free": (record.get("model_dependency_count") or 0) == 0,
     }
 
 
 def census() -> dict[str, Any]:
-    rows = []
-    unreadable = []
-    for path in sorted(EVIDENCE.glob("*RECEIPT.json")):
+    receipts: dict[str, dict[str, Any]] = {}
+    unreadable: list[str] = []
+    for path in sorted(EVIDENCE.glob(RECEIPT_GLOB)):
         try:
-            rows.append((path.name, classify(json.loads(path.read_text(encoding="utf-8")))))
-        except Exception as exc:
-            unreadable.append({"path": path.name, "error": f"{type(exc).__name__}: {exc}"})
+            record = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            unreadable.append(path.name)
+            continue
+        capability_id = record.get("capability_id")
+        if capability_id:
+            receipts[capability_id] = classify(record)
 
-    with_verdict = [row for _, row in rows if row["has_verdict"]]
-    passed = [row for row in with_verdict if row["verdict"] is True]
-    independent = [row for _, row in rows if row["independent_run_recorded"]]
-    ready = [row for _, row in rows if row["training_ready"]]
-    runners = sorted({str(row["ran_by"]) for _, row in rows if row["ran_by"]})
+    verifications: dict[str, dict[str, Any]] = {}
+    for path in sorted(EVIDENCE.glob(VERIFICATION_GLOB)):
+        try:
+            record = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            unreadable.append(path.name)
+            continue
+        capability_id = record.get("capability_id")
+        if capability_id:
+            verifications[capability_id] = classify_verification(record)
+
+    orphans = sorted(set(verifications) - set(receipts))
+    joined = sorted(set(verifications) & set(receipts))
+
+    ready = [
+        capability_id for capability_id in joined
+        if verifications[capability_id]["reproduced"]
+        and verifications[capability_id]["attested"]
+        and verifications[capability_id]["model_free"]
+        and receipts[capability_id]["has_verdict"]
+    ]
+    passing = [capability_id for capability_id in ready if receipts[capability_id]["verdict"] is True]
+
+    instances: dict[str, int] = {capability_id: 1 for capability_id in joined}
+    depth = max(instances.values()) if instances else 0
 
     return {
         "census": "verified_experience",
         "executed": True,
         "model_dependency_count": 0,
         "incremental_spend_usd": 0,
-        "receipts": len(rows) + len(unreadable),
-        "readable_receipts": len(rows),
         "unreadable": unreadable,
-        "verdict_present": len(with_verdict),
-        "verdict_true": len(passed),
-        "verdict_false": len(with_verdict) - len(passed),
-        "independent_run_recorded": len(independent),
+        "producer_receipts": len(receipts),
+        "producer_receipts_with_verdict": sum(1 for row in receipts.values() if row["has_verdict"]),
+        "verification_records": len(verifications),
+        "verification_reproduced": sum(1 for row in verifications.values() if row["reproduced"]),
+        "verification_attested_with_run_id": sum(
+            1 for row in verifications.values() if row["attested"]),
+        "verification_orphans_without_producer_receipt": orphans,
+        "joined": len(joined),
+        "distinct_verifiers": sorted({str(row["verified_by"]) for row in verifications.values()
+                                      if row["verified_by"]}),
         "training_ready_examples": len(ready),
-        "distinct_runners": runners,
-        "missing_to_train": [
-            "INDEPENDENT_RUN_REFERENCE: no receipt names a second run by another party",
-            "INDEPENDENT_VERIFIER: the field exists in the schema and is null in every record",
-        ],
-        "smallest_change_that_fills_it": (
-            "a second party runs the same command and writes its own digest into "
-            "independent_run_reference; the census then counts that receipt as training-ready, and "
-            "the existing observed.pass supplies the verdict without touching any producer"
+        "training_ready_with_pass_true": len(passing),
+        "instances_per_capability": depth,
+        "depth_target_per_capability": DEPTH_TARGET,
+        "depth_instances_missing": max(0, len(joined) * DEPTH_TARGET - len(joined) * depth),
+        "verdict": (
+            "CORPUS_EXISTS_SHALLOW" if len(ready) else "NO_TRAINING_READY_EXAMPLES"
         ),
+        "missing_to_train": (
+            [] if len(ready) else ["NO_JOINED_VERIFIED_EXPERIENCE"]
+        ) + (
+            [f"DEPTH: {len(joined)} capabilities x 1 instance each; a held-out split needs "
+             f"{DEPTH_TARGET} instances of the same family"] if depth < DEPTH_TARGET else []
+        ),
+        "what_this_can_never_show": [
+            "WHETHER_THE_WORK_WAS_WORTH_DOING",
+            "GENERALISATION: ONLY A HELD-OUT RUN CAN, AND ONE INSTANCE PER FAMILY CANNOT SPLIT",
+        ],
     }
 
 
 def rerun(out_dir: pathlib.Path | None) -> dict[str, Any]:
-    """Run each experience twice and require identical output. This is reproducibility, not proof."""
+    """Run each experience twice and require the property that artefact must have."""
     written = []
     for experience in EXPERIENCES:
         argv = [part.format(python=sys.executable) for part in experience["argv"]]
@@ -136,15 +185,10 @@ def rerun(out_dir: pathlib.Path | None) -> dict[str, Any]:
         for _ in range(2):
             completed = subprocess.run(argv, cwd=REPO_ROOT, capture_output=True, text=True,
                                        timeout=experience["timeout_s"])
-            runs.append({
-                "returncode": completed.returncode,
-                "stdout_sha256": _digest(completed.stdout),
-                "stderr_sha256": _digest(completed.stderr),
-            })
+            runs.append({"returncode": completed.returncode,
+                         "stdout_sha256": _digest(completed.stdout),
+                         "stderr_sha256": _digest(completed.stderr)})
         same = runs[0] == runs[1]
-        receipts = []
-        for path in []:  # no per-run artefacts are collected; only the digest is kept
-            receipts.append(path)
         record = {
             "schema": "PROJECT_BRAIN_REPRODUCIBILITY_RECEIPT_V1",
             "kind": "REPRODUCIBILITY_RECEIPT",
@@ -152,11 +196,10 @@ def rerun(out_dir: pathlib.Path | None) -> dict[str, Any]:
             "argv": argv[1:],
             "runs": runs,
             "identical": same,
-            "kind": experience["kind"],
+            "kind_of_artefact": experience["kind"],
             "expect_identical": experience["expect_identical"],
-            "verdict": ("REPRODUCED" if same else "VARIED"),
+            "verdict": "REPRODUCED" if same else "VARIED",
             "as_designed": same is bool(experience["expect_identical"]),
-            # Honesty: two runs by one agent is reproducibility. Independence is a different party.
             "independent_verifier": None,
             "verified": False,
             "ran_by": "arena-agent-20261112",
@@ -182,8 +225,8 @@ def rerun(out_dir: pathlib.Path | None) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--json", type=pathlib.Path, default=None)
-    parser.add_argument("--rerun", action="store_true", help="re-run the deterministic experiences")
-    parser.add_argument("--out", type=pathlib.Path, default=None, help="where --rerun writes receipts")
+    parser.add_argument("--rerun", action="store_true")
+    parser.add_argument("--out", type=pathlib.Path, default=None)
     args = parser.parse_args(argv)
 
     report: dict[str, Any] = census()
@@ -194,24 +237,29 @@ def main(argv: list[str] | None = None) -> int:
 
     print("Verified experience: how many examples could a student learn from?")
     print("=" * 78)
-    print(f"  receipts in the tree                              {report['receipts']:>6}")
-    print(f"  carrying a verdict (self-reported)                {report['verdict_present']:>6}"
-          f"   ({report['verdict_true']} true / {report['verdict_false']} false)")
-    print(f"  carrying no verdict at all                        "
-          f"{report['readable_receipts'] - report['verdict_present']:>6}")
-    print(f"  naming a run by anyone but the producer           "
-          f"{report['independent_run_recorded']:>6}")
+    print(f"  producer receipts                                 {report['producer_receipts']:>6}"
+          f"   ({report['producer_receipts_with_verdict']} with a verdict)")
+    print(f"  independent verification records                  {report['verification_records']:>6}"
+          f"   ({report['verification_reproduced']} reproduced, "
+          f"{report['verification_attested_with_run_id']} carrying a github_run_id)")
+    print(f"  joined to a producer receipt                      {report['joined']:>6}"
+          f"   (orphans: {len(report['verification_orphans_without_producer_receipt'])})")
+    print(f"  verifiers                                         {report['distinct_verifiers']}")
     print(f"  TRAINING-READY EXAMPLES                           "
-          f"{report['training_ready_examples']:>6}")
-    print(f"  distinct runners recorded                         {report['distinct_runners']}")
+          f"{report['training_ready_examples']:>6}"
+          f"   ({report['training_ready_with_pass_true']} with pass=true)")
+    print()
+    print(f"  depth: {report['instances_per_capability']} instance(s) per capability, "
+          f"target {report['depth_target_per_capability']} -> "
+          f"{report['depth_instances_missing']} instances missing")
+    print(f"  verdict: {report['verdict']}")
+    for item in report["missing_to_train"]:
+        print(f"    - {item}")
     if "rerun" in report:
         r = report["rerun"]
         print()
         print(f"  re-ran {r['experiences']} experiences twice: {r['identical']} identical, "
               f"{r['as_designed']} behaving as designed, {r['verified_claims']} claimed verified")
-        print("  (reproducibility is not independence; nothing here is marked verified)")
-    print()
-    print("  missing to train:", report["missing_to_train"][0])
     return 0
 
 
