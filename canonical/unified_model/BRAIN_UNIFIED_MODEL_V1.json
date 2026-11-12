@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 372,
+  "knowledge_documents": 371,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6772,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ac5af785419463e1069f82b471e184d7f8d1e98ee792feb9744cb0f169317201"
+  "value": "a7e541fb52f46b85c4a5efe5e03984a0acdfe9febaedf4ea2afde3411e01c41e"
  },
  "engines": [
   {
@@ -45115,80 +45115,6 @@
     "constant",
     "demonstration",
     "no"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 4101,
-   "headings": [
-    "A fresh set, declared first, measures generalization",
-    "1. Declared predictions, and what the test did to them",
-    "2. What this says",
-    "3. Receipts",
-    "4. Non-claims"
-   ],
-   "kind": "DOCUMENT",
-   "path": "A_FRESH_SET_DECLARED_FIRST_MEASURES_GENERALIZATION_20261112_V1.md",
-   "sha256": "27dcbe4f62f660dbdc5160d1e84ef80c6061c7e11d5bfe8dd698b7dc28cf9732",
-   "summary": "**2026-11-12.** Base `5df74130`. Branch `arena/fc6ffba9-brain`. Follows #6749.",
-   "terms": {
-    "105": 3,
-    "13": 2,
-    "20": 4,
-    "40": 2,
-    "48z": 2,
-    "79": 2,
-    "all": 3,
-    "answers": 2,
-    "arxiv": 2,
-    "before": 3,
-    "both": 3,
-    "canonical": 2,
-    "change": 2,
-    "check": 2,
-    "chose": 2,
-    "cleanup": 2,
-    "collect": 2,
-    "commit": 5,
-    "commits": 2,
-    "counts": 2,
-    "declared": 5,
-    "diff": 3,
-    "engine": 8,
-    "exactly": 2,
-    "extra": 4,
-    "falsified": 4,
-    "first": 3,
-    "found": 2,
-    "fresh": 11,
-    "generalization": 3,
-    "github": 2,
-    "held-out": 2,
-    "kind": 3,
-    "kinds": 9,
-    "learn": 2,
-    "learned": 2,
-    "left": 3,
-    "measurable": 3,
-    "measure": 3,
-    "no": 4,
-    "not": 3,
-    "one": 7,
-    "questions": 3,
-    "ran": 5,
-    "showing": 3,
-    "teacher": 5,
-    "turn": 5,
-    "two": 5
-   },
-   "title": "A fresh set, declared first, measures generalization",
-   "title_terms": [
-    "declared",
-    "first",
-    "fresh",
-    "generalization",
-    "measures",
-    "set"
    ]
   },
   {
@@ -73664,10 +73590,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1174,
+  "included_source_count": 1173,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f9b776d411a75e28138eea5aa5840acee8ce96240a4d980dc84869b51c844aa6"
+  "source_tree_digest": "5ca3ccd45aaa99ebe48695f9dc1082a79ac79b9b1551c7381ca54e3d18619ed5"
  },
  "research_index": [
   {
@@ -157001,7 +156927,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/FIX_SHAPE_CENSUS_20261112_V1.json",
    "schema": "BRAIN_FIX_SHAPE_CENSUS_RECORD_V1",
-   "sha256": "d22e98532204ee635e860628e9786c70800e9091b2c8cf50acbcf2b94b1d013f",
+   "sha256": "6a3e5681bb2000c039a300988e60e000354cb3b8ae301453202f1d11924cda0d",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -171671,6 +171597,26 @@
     "refiner": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_PASSING_PATCH_SHAPE_RECORD_V1",
+   "sha256": "f25358f059698f4c4d127c17e0b16e3aadbe3d30d07aa1f91cdd7f4bb0de5185",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "shape": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
    }
   },
   {
@@ -219739,32 +219685,6 @@
    }
   },
   {
-   "action_id": "A_FRESH_SET_DECLARED_FIRST_MEASURES_GENERALIZATION_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/A_FRESH_SET_DECLARED_FIRST_MEASURES_GENERALIZATION_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/A_FRESH_SET_DECLARED_FIRST_MEASURES_GENERALIZATION_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8997a07b354b4e042aaef3b66bf3d0e84d215ef6d5a0ad9573b9da717fac5fcc",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_fresh_set_declared_first_measures_generalization_20261112_v1": 1,
-    "declare_sixteen_fresh_kinds_in_code_and_push_before_collection__collect_mechanically__measure_once__report_the_falsified_predictions_loudly_with_line_level_diagnoses_and_no_post_hoc_engine_patch": 1,
-    "declared": 1,
-    "every_tracked_kind_already_learns_so_no_measured_target_remained_inside_the_old_corpus__the_generalization_claim_itself_was_the_unmeasured_thing": 1,
-    "first": 1,
-    "fresh": 1,
-    "fresh_set__nine_of_nine_measurable_kinds_learn__same_83_of_105__diff_6_and_extra_13_against_declared_zeros__both_decomposed__intent_tangle_and_plural_replacements__old_sets_untouched": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "generalization": 1,
-    "measures": 1,
-    "set": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1",
    "capability": false,
    "date": "2026-11-12",
@@ -225414,7 +225334,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "66bcb1dd0b2b4b7675d3d699cc190fb2af034daae0edc895c14883ab24501f5e",
+   "sha256": "dd287cbe95599fe408d979a6fbd3af89759e88aa591aa9345d1aa5019f8a2985",
    "status": "",
    "terms": {
     "20261111": 1,
