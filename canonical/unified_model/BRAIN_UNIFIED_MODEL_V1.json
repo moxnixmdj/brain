@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 319,
+  "knowledge_documents": 320,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6728,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ec41cce6dbe24bb156780c4b436a934a928192f57c61eae45ffa37633e61604c"
+  "value": "85f1eaa662f7fba20d88a02c8c49caa6c56b86568b2e65dac5c61a39f4b63ea1"
  },
  "engines": [
   {
@@ -56134,6 +56134,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6121,
+   "headings": [
+    "Twelve lessons buy nothing; sixteen lines buy the capability",
+    "1. Why the comparison is not rigged",
+    "2. The part, and what makes sixteen lines legitimate",
+    "3. The law, priced",
+    "4. What this says to build, in order",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "TWELVE_LESSONS_BUY_NOTHING_ONE_PART_BUYS_IT_20261112_V1.md",
+   "sha256": "0d48d353f6ec4247a71184380e50c764138e9855fb3ebbecc4542108040df8b3",
+   "summary": "**2026-11-12.** Base `c4724d90`. Branch `arena/e4b5603c-brain`. Round 9.",
+   "terms": {
+    "10": 2,
+    "12": 2,
+    "about": 4,
+    "added": 4,
+    "agreeing": 2,
+    "all": 3,
+    "because": 3,
+    "bindings": 4,
+    "capability": 4,
+    "cheap": 3,
+    "check": 4,
+    "code": 4,
+    "each": 4,
+    "factor": 3,
+    "independent": 5,
+    "learned": 5,
+    "learner": 7,
+    "lessons": 9,
+    "lines": 7,
+    "median": 9,
+    "model": 3,
+    "module": 3,
+    "no": 6,
+    "none": 3,
+    "not": 14,
+    "nothing": 4,
+    "notperformable": 3,
+    "numbers": 5,
+    "one": 12,
+    "only": 4,
+    "operator": 7,
+    "part": 9,
+    "parts": 9,
+    "recomputation": 4,
+    "refusal": 6,
+    "round": 5,
+    "same": 3,
+    "search": 3,
+    "shipped": 9,
+    "sixteen": 5,
+    "space": 5,
+    "statistics.median": 3,
+    "text": 4,
+    "than": 3,
+    "twelve": 6,
+    "two": 4,
+    "values": 3,
+    "zero": 3
+   },
+   "title": "Twelve lessons buy nothing; sixteen lines buy the capability",
+   "title_terms": [
+    "buy",
+    "capability",
+    "lessons",
+    "lines",
+    "nothing",
+    "sixteen",
+    "twelve"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7697,
    "headings": [
     "Two Kinds of \"I Don't Know\", and the One It Was Using",
@@ -69594,10 +69671,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1121,
+  "included_source_count": 1122,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "165bb822b003924557a8f864b68fc2bc2e7f53bd657200abc4e524a61d4ab08c"
+  "source_tree_digest": "3e9390321516ab966f9d427d62e9ae094e4ae48ea8e92f7fd7c53f2e9bcf8abc"
  },
  "research_index": [
   {
