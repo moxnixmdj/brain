@@ -561,6 +561,33 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         if extra:
             merged = merged + [{"candidates": extra}]
 
+    # A REMEMBERED PROCEDURE IS A CANDIDATE, NOT A DECISION.
+    #
+    # `recall_resolution` below can only choose among survivors the router has already
+    # narrowed to, so it can never reach a task the router missed -- measured: it fires
+    # (`selected_because: REMEMBERED_RESOLUTION`) and changes nothing. A learned procedure
+    # that cannot rescue a miss is not learning, it is a tie-break.
+    #
+    # So the memory is injected HERE, before the loop, where every candidate is put through
+    # the same precondition probe, the same kind-contradiction check and the same binding as
+    # anything the grounder proposed. That is what makes it safe to generalise the match: a
+    # looser match costs a failed verification, never a wrong answer, because the candidate
+    # still has to earn its place.
+    #
+    # It is also why learning is restricted to VERIFIED receipts (procedure_memory_v1.learn):
+    # a failure teaches nothing here, and would only add a candidate that fails again.
+    if EXP is not None:
+        try:
+            from canonical.runtime import procedure_memory_v1 as _PM
+            _remembered = _PM.recall_many(goal)
+            if _remembered:
+                merged = merged + [{"candidates": [
+                    {"capability_id": r["capability_id"],
+                     "combined_score": round(float(r["similarity"]), 4) * 10.0}
+                    for r in _remembered if r.get("capability_id")]}]
+        except Exception:
+            pass
+
     # A FORGED CAPABILITY IS REGISTERED BUT NEVER PROPOSED.
     #
     # The same wall the computer-use family hit: the grounder scores
@@ -856,4 +883,16 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             out["learned"] = EXP.observe(goal, out)
         except Exception as exc:
             out["learned"] = {"error": type(exc).__name__ + ":" + str(exc)}
+        # ONE VERIFIED RUN TEACHES A PROCEDURE. ONE FAILED RUN TEACHES NOTHING.
+        #
+        # `verified` is this receipt's own verdict, so a failure cannot launder itself into a
+        # preference for the next sentence that resembles it. The exact-recall store above is
+        # untouched: this writes to a separate `procedures` section of the same file.
+        try:
+            from canonical.runtime import procedure_memory_v1 as _PM
+            out["procedure_learned"] = _PM.learn(
+                goal, chosen["capability_id"], verified=bool(verified))
+        except Exception as exc:
+            out["procedure_learned"] = {"learned": False,
+                                        "error": type(exc).__name__ + ":" + str(exc)}
     return out
