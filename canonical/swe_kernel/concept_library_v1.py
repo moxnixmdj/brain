@@ -88,6 +88,20 @@ _SAFE_LIST_MUT_METHODS: frozenset[str] = frozenset({"append", "extend", "pop", "
 _SAFE_SET_MUT_METHODS: frozenset[str] = frozenset({"add", "discard", "update"})
 _SAFE_DICT_MUT_METHODS: frozenset[str] = frozenset({"setdefault", "pop", "update"})
 
+# ---------------------------------------------------------------------------
+# Constant abstraction in the sleep phase.
+#
+# Measured 2026-11-11 (`compression_binding_constraint_probe_20261111_v1.py`): with this OFF,
+# `sleep_abstract` admits ZERO abstractions on corpora whose members differ only by a literal,
+# because holes are drawn from `ast.Name` alone. Differing-by-a-literal is the commonest way two
+# real programs differ, so the compressor could only rediscover structure canonicalization had
+# already removed. `G_t` stays empty and nothing compounds.
+#
+# The switch exists so the baseline stays measurable after the fix lands. It is not a feature
+# flag: flip it to True and delete it once the referee is green.
+# ---------------------------------------------------------------------------
+CONSTANT_HOLES_ENABLED: bool = False
+
 
 class UnsafeOrUnsupportedAST(ValueError):
     """Raised when an AST node is impure, oversized, or unsupported by pure evaluation."""
@@ -688,8 +702,15 @@ def _canonicalize_pure_subtree(
     expr: ast.expr,
     bound_locals: frozenset[str],
     existing_concepts: frozenset[str],
-) -> tuple[ast.expr, list[str]] | None:
-    """Alpha-normalize a pure expression subtree into canonical `(_v0, _v1, ...)` hole form."""
+) -> tuple[ast.expr, list[str], list[ast.expr]] | None:
+    """Alpha-normalize a pure expression subtree into canonical `(_v0, _v1, ...)` hole form.
+
+    Returns `(canon_ast, hole_order, arg_nodes)`. `hole_order[i]` is the hole identifier used
+    inside `canon_ast`; `arg_nodes[i]` is the AST that a call site must substitute for it. For a
+    name hole that is the original `Name`; for a constant hole (only when
+    `CONSTANT_HOLES_ENABLED`) it is the original `Constant`. Call sites MUST rebuild arguments
+    from `arg_nodes`, never from `hole_order`: a constant hole has no name in scope to reference.
+    """
     comp_targets: set[str] = set()
     for sub in ast.walk(expr):
         if isinstance(sub, (ast.ListComp, ast.GeneratorExp)):
@@ -714,6 +735,8 @@ def _canonicalize_pure_subtree(
 
     hole_order: list[str] = []
     hole_map: dict[str, str] = {}
+    arg_nodes: list[ast.expr] = []
+    const_map: dict[tuple[type, object], str] = {}
     cloned = copy.deepcopy(expr)
 
     class _Renamer(ast.NodeTransformer):
@@ -735,7 +758,18 @@ def _canonicalize_pure_subtree(
             if nm not in hole_map:
                 hole_map[nm] = f"_v{len(hole_order)}"
                 hole_order.append(nm)
+                arg_nodes.append(ast.Name(id=nm, ctx=ast.Load()))
             return ast.Name(id=hole_map[nm], ctx=ast.Load())
+
+        def visit_Constant(self, nd: ast.Constant) -> ast.AST:
+            if not CONSTANT_HOLES_ENABLED:
+                return nd
+            key = (type(nd.value), nd.value)
+            if key not in const_map:
+                const_map[key] = f"_v{len(hole_order)}"
+                hole_order.append(const_map[key])
+                arg_nodes.append(ast.Constant(value=nd.value))
+            return ast.Name(id=const_map[key], ctx=ast.Load())
 
     try:
         canon_ast = _Renamer().visit(cloned)
@@ -744,7 +778,7 @@ def _canonicalize_pure_subtree(
     if not (1 <= len(hole_order) <= 4):
         return None
     ast.fix_missing_locations(canon_ast)
-    return canon_ast, hole_order
+    return canon_ast, hole_order, arg_nodes
 
 
 @dataclass(frozen=True)
@@ -1416,7 +1450,11 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
     if not live:
         return None
     try:
-        tree = ast.parse(src)
+        # Wake must use the SAME normal form as sleep. `sleep_abstract` scans
+        # `canonicalize_ast_via_egraph(ast.parse(src))`; matching against a raw parse meant a
+        # concept admitted for `(b - a) * (x - a)` could never match `(x - a) * (b - a)`, so an
+        # admitted abstraction was unusable in practice. Measured 2026-11-11.
+        tree = canonicalize_ast_via_egraph(ast.parse(src))
     except SyntaxError:
         return None
     existing_ids = frozenset(getattr(c, "concept_id", "") for c in live)
@@ -1448,7 +1486,7 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
                     if isinstance(node, ast.expr) and _expr_node_count(node) == ncount:
                         c_res = _canonicalize_pure_subtree(node, bound_v, existing_ids)
                         if c_res is not None:
-                            c_ast, h_vars = c_res
+                            c_ast, _h_vars, arg_nodes = c_res
                             if ast.dump(c_ast, include_attributes=False) == target_dump:
                                 nonlocal changed
                                 changed = True
@@ -1457,7 +1495,7 @@ def rewrite_source_with_concepts(source: str, library: Any, *, max_concepts: int
                                     used.append(entry)
                                 return ast.Call(
                                     func=ast.Name(id=cid, ctx=ast.Load()),
-                                    args=[ast.Name(id=v, ctx=ast.Load()) for v in h_vars],
+                                    args=[copy.deepcopy(a) for a in arg_nodes],
                                     keywords=[],
                                 )
                     return super().generic_visit(node)
@@ -2001,7 +2039,7 @@ class CompoundingConceptLibrary:
                     canon = _canonicalize_pure_subtree(expr, b_frozen, existing_ids)
                     if canon is None:
                         continue
-                    canon_ast, hole_vars = canon
+                    canon_ast, hole_vars, _arg_nodes = canon
                     dump_key = ast.dump(canon_ast, include_attributes=False)
                     entry = candidates.setdefault(
                         dump_key,
@@ -2059,13 +2097,13 @@ class CompoundingConceptLibrary:
                             if isinstance(node, ast.expr) and _expr_node_count(node) == cand["node_count"]:
                                 c_res = _canonicalize_pure_subtree(node, bound_v, existing_ids)
                                 if c_res is not None:
-                                    c_ast, h_vars = c_res
+                                    c_ast, _h_vars, arg_nodes = c_res
                                     if ast.dump(c_ast, include_attributes=False) == target_dump:
                                         nonlocal replaced_sites
                                         replaced_sites += 1
                                         return ast.Call(
                                             func=ast.Name(id=cid, ctx=ast.Load()),
-                                            args=[ast.Name(id=v, ctx=ast.Load()) for v in h_vars],
+                                            args=[copy.deepcopy(a) for a in arg_nodes],
                                             keywords=[],
                                         )
                             return super().generic_visit(node)
