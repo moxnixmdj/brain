@@ -1,0 +1,456 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1",
+ "action_intent_id": "LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "d677e54e4db450638ee61d84e799f4ef1622ec54",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Rounds 23-25 measured compress-admit-replay by calling compression_gain_v1 directly and supplying the probe domain from the test; round 25 named the gap itself ('organs enter the library only through a caller that can supply real domain probes'). This round drove the LIVE path (MetaCircularOrganGraph.register_organ -> CompoundingConceptLibrary -> rewrite_source_with_concepts) with no caller probes and measured that it worked zero times: three registered world-model organs of one family left the library EMPTY, the never-seen member was refused, and three different organs produced ONE concept id (the bridge built 'c_' + organ_id.replace('organ_skill_','')[:18], which leaves 'c_organ_skill_' for every SKILL organ). Five defects were found and each is sufficient to stop the loop: (1) no probe domain at the live entry, so the numeric default grid ran against a string-keyed table and the correct vacuity gate refused everything; (2) both gates read ANY exception as a behaviour change, so 'identical except where the table has no row' -- what every keyed lookup is -- was unmeasurable; (3) the colliding identifier; (4) admission fired only for organ.stratum == SKILL while the second family is emitted by synthesize_world_model_organ, a WORLD_MODEL organ, so the live writer for that family did not exist; (5) the wake entry returned the replay engine's REPORT DICT on the abstraction branch and source text elsewhere, and returning the source alone produced a program whose concept id was undefined. Built: derive_probe_domain (domain derived from corpus literals -- a prior, not an oracle), admit_corpus_abstraction (one live admission call that reports which domain was used), partial-function equivalence at both gates, concept_id_for_source, _ADMISSIBLE_STRATA=(SKILL, WORLD_MODEL), and one executable return type. NO gate was widened: the vacuity gate still refuses a non-discriminating grid (pinned), one site is still a stored program and not a rule (pinned), and the periodic family's measured gain 67 is unchanged (pinned).",
+ "selected_route": "LIVE_ENTRY_DOMAIN_DERIVATION_WITH_UNCHANGED_GATES",
+ "causal_blocker": "THE_COMPRESSION_LOOP_WAS_MEASURED_ONLY_WITH_A_HUMAN_SUPPLIED_PROBE_DOMAIN_AND_NEVER_THROUGH_THE_LIVE_ENTRY_POINT__WHICH_HAD_ONE_LIBRARY_SLOT__NO_DOMAIN__AND_A_STRATUM_GATE_THAT_EXCLUDED_THE_FAMILY_IT_WAS_BUILT_FOR",
+ "expected_parent_change": "THE_COMPRESSION_REPLAY_LOOP_RUNS_ON_THE_LIVE_ENTRY_POINT__THREE_WORLD_MODEL_ORGANS_ADMIT_THREE_STORED_PROGRAMS_AND_ONE_ABSTRACTION__THE_NEVER_SEEN_FOURTH_REPLAYS_30_PERCENT_SMALLER_WITH_ZERO_BEHAVIOUR_CHANGES_AND_NO_HUMAN_NAMING_A_DOMAIN",
+ "expected_parent_frontier_change": "ONE_MORE_MEASURED_PATH_BY_WHICH_EXPERIENCE_COMPOUNDS_OUTSIDE_A_TEST_HARNESS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__CROSS_KIND_COMPOUNDING_STAYS_THE_PINNED_NEGATIVE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_COMPRESSION_LOOP_WAS_MEASURED_ONLY_WITH_A_HUMAN_SUPPLIED_PROBE_DOMAIN_AND_NEVER_THROUGH_THE_LIVE_ENTRY_POINT__WHICH_HAD_ONE_LIBRARY_SLOT__NO_DOMAIN__AND_A_STRATUM_GATE_THAT_EXCLUDED_THE_FAMILY_IT_WAS_BUILT_FOR",
+ "falsification_condition": "THE_LIVE_CURVE_NOT_SHOWING_ONE_STORED_PROGRAM_AT_ONE_AND_TWO_EXPERIENCES_AND_AN_ABSTRACTION_AT_THREE__OR_THE_NEVER_SEEN_MEMBER_NOT_REPLAYING_STRICTLY_SMALLER__OR_ANY_HELD_OUT_BEHAVIOUR_MISMATCH__OR_A_NON_DISCRIMINATING_SUPPLIED_GRID_PASSING__OR_TWO_DIFFERENT_ORGANS_SHARING_ONE_LIBRARY_SLOT__OR_THE_PERIODIC_FAMILY_MEASURED_GAIN_67_DRIFTING",
+ "stop_condition": "9_NEW_TESTS_PASS__44_TESTS_PASS_ACROSS_THE_FOUR_SUITES_THAT_OWN_THE_MECHANISM__145_ACROSS_THE_TEN_SUITES_IMPORTING_THE_THREE_CHANGED_MODULES__REFEREE_PASS_0_VIOLATIONS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, no protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/tools/one_try_compounding_probe_20261112_v1.py",
+   "canonical/tests/test_live_compounding_loop_v1.py",
+   "canonical/swe_kernel/compression_gain_v1.py",
+   "THE_LOOP_WAS_OPEN_AT_THE_LIVE_ENTRY_20261112_V1.md"
+  ],
+  "route_class": "INTEGRATE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_ROUND_25_S_SECOND_FAMILY_RESULT_WAS_A_LOOP_THE_CREATURE_CAN_CLOSE__AND_THAT_AN_EQUALITY_CHECK_OVER_A_GRID_THAT_CANNOT_SEE_THE_DOMAIN__OR_A_MEMORY_KEYED_BY_ONE_IDENTIFIER__VERIFIES_OR_KEEPS_ANYTHING",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_d677e54e__BEFORE_3_ORGAN_REGISTRATIONS_LIBRARY_0_ENTRIES_REPLAY_REFUSED__3_ORGANS_OFFERED_1_CONCEPT_ID_1_SLOT__AFTER_3_ENTRIES_1_ABSTRACTION_FAMILY_KEYED_TABLE_GAIN_103_SITES_3__NEVER_SEEN_FOURTH_PROGRAM_394_TO_277_BYTES_0_HELD_OUT_MISMATCHES_INCLUDING_UNKNOWNS_AND_NON_STRINGS__NUMERIC_GRID_STILL_REFUSED_AT_BOTH_GATES__PERIODIC_GAIN_67_UNCHANGED"
+ },
+ "measured_effect": "LIVE_CURVE_1_1_0__2_2_0__3_3_1__NEVER_SEEN_PROGRAM_394_TO_277_BYTES_30_PERCENT_SMALLER_PLUS_ONE_250_BYTE_HELPER_SHARED_BY_THE_FAMILY__0_BEHAVIOUR_MISMATCHES__3_DISTINCT_IDS_3_SLOTS__WAKE_ENTRY_RETURNS_EXECUTABLE_SOURCE_TEXT__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "INTEGRATION_OF_AN_ALREADY_OWNED_MECHANISM_ONTO_THE_LIVE_PATH_IT_WAS_ALWAYS_DESCRIBED_AS_RUNNING_ON__NO_NEW_CAPABILITY_CLASS__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/compression_gain_v1.py",
+  "canonical/swe_kernel/concept_library_v1.py",
+  "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+  "canonical/swe_kernel/meta_circular_organ_graph_v1.py::synthesize_world_model_organ",
+  "COMPRESSION_MAKES_EXPERIENCE_COMPOUND_20261112_V1.md",
+  "SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1.md",
+  "WAKE_REPLAY_CLOSES_THE_LIBRARY_LOOP_20261112_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "d677e54e4db450638ee61d84e799f4ef1622ec54",
+  "real_outcome": "THE_LOOP_CLOSES_ON_THE_LIVE_ENTRY_POINT__FIVE_MEASURED_DEFECTS_FOUND_AND_FIXED_WITH_NO_GATE_WIDENED__LIVE_CURVE_1_1_0_2_2_0_3_3_1__NEVER_SEEN_PROGRAM_394_TO_277_BYTES_WITH_0_HELD_OUT_MISMATCHES__CROSS_KIND_COMPOUNDING_UNCHANGED_NEGATIVE",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks, again: give it the most advanced actions, let it experience each once, and it learns them permanently -- so we have solved computer use. Rounds 23-25 answered the information-theory half. This round answers the ENGINEERING half on the live path, because a mechanism that only runs when a human supplies the domain is not the thing the owner described.",
+   "proxy_goals_deleted": [
+    "measuring the decompressor and calling it the creature's learning",
+    "treating a caller-supplied probe domain as if the live path had one",
+    "treating a stored program as a rule"
+   ],
+   "surviving_necessity": "A lesson must be kept and reused without a human in the loop, or the compounding claim is about a test harness."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/compression_gain_v1.py (lifter, currency, gates -- extended with a derived domain and partial-function equivalence; no gate loosened)",
+    "canonical/swe_kernel/concept_library_v1.py (wake entry -- one executable return type, domain plumbed)",
+    "canonical/swe_kernel/meta_circular_organ_graph_v1.py (bridge + register_organ -- domain derivation, source-derived id, stratum scope)"
+   ],
+   "external_existing_routes_checked": [
+    "DreamCoder/Stitch/LILO library learning -- the admission currency is unchanged",
+    "2026 skill-library work (PolySkill, GSE, CUA-Skill, SoK agentic skills) names library consolidation and cross-domain reuse as the open lever; this round makes the in-tree consolidation run unattended",
+    "no external crate or model was needed"
+   ],
+   "capability_work_deleted": [
+    "the numeric default grid as the admission domain of last resort",
+    "the total-function comparator that read an off-domain exception as a behaviour change",
+    "the truncated organ-id identifier",
+    "the SKILL-only stratum gate",
+    "the dual return type of the wake entry"
+   ],
+   "surviving_gap": "Cross-KIND compounding is still the pinned negative; the licensing of evidence policies remains periodic-only; the live curve is measured on synthesized world-model organs, not yet on a corpus of real solved programs."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific: the live path had no domain, one slot, and a stratum gate that excluded the family. The intrinsic blocker is unchanged -- one experience is enough only when the interface and the verifier already generalise, which is why the abstraction still arrives at the third site and not at the first.",
+   "delete_bypass_substitute_options": [
+    "DELETE the live-path question -- rejected, it is the owner's question",
+    "BYPASS by keeping the human-supplied domain -- rejected, it is the defect",
+    "REUSE the numeric grid by widening it -- rejected, a wider float grid still cannot see a string key",
+    "SUBSTITUTE a model to name the domain -- forbidden by NO_MODEL_PRODUCER_COGNITION"
+   ],
+   "surviving_causal_blocker": "The domain must be derivable from the corpus. It is: a body can only branch on data it mentions, so the literals the lifter just decided are data are the domain."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Derive the domain from the corpus literals; keep both gates exactly as strict -- chosen: no new knowledge, no new authority, one rule",
+    "2. Widen the default numeric grid -- rejected: cannot see a string key by construction",
+    "3. Let the bridge accept a domain from the graph layer -- rejected: the graph has no domain knowledge and would only move the human",
+    "4. Relax the vacuity gate so admission can fire -- rejected: that is the gate a forged abstraction sails through"
+   ],
+   "losing_routes_reason": "Widening a float grid or relaxing the vacuity gate would buy admission at the cost of the only check that distinguishes a verified abstraction from a confident one.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through real execution: the never-seen organ and its replay run on held-out action ids including unknowns, the empty string and a case variant; the vacuity gate is exercised by a numeric grid that must refuse; the first family's measured gain 67 is re-run as regression; the curve itself is asserted (1,0), (2,0), (3,1). The prediction was written before the confirmatory run and the tests can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "round 25's honest gap ('string-domain organs enter the library only through a caller that can supply real domain probes') -- closed for the derived path",
+    "the auto-generated id scheme in the bridge -- superseded"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the world-model writer (reused unchanged as the corpus source)",
+    "the round-23/24 admission, licensing and replay machinery (reused unchanged)"
+   ],
+   "fresh_reuse_plan": "Feed the live loop real solved programs and measure whether the curve keeps its shape; perceptor/policy corpora under the same discipline; the learning-to-learn benchmark re-run."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving that the live path was empty -- pinned by the curve test",
+    "re-arguing the identifier collision -- pinned by the distinct-id test"
+   ],
+   "search_stop_decision": "Stop when the live curve closes with no human naming a domain and every gate still refuses what it refused before. Real-corpus measurement is a new round with its own prediction.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "LIVE_ENTRY_DOMAIN_DERIVATION_WITH_UNCHANGED_GATES",
+   "WIDENED_NUMERIC_DEFAULT_GRID",
+   "DOMAIN_SUPPLIED_BY_THE_GRAPH_LAYER",
+   "RELAX_THE_VACUITY_GATE"
+  ],
+  "deleted_or_bypassed_paths": [
+   "TUPLE_ONLY_LIFTING_RULE",
+   "FIRST_LINE_ONLY_HELPER_RENDERER",
+   "CRYSTALLIZATION_TIME_EMISSION_CANDIDATE_KILLED_BY_ARITHMETIC",
+   "NON_DISCRIMINATING_GRIDS_AT_BOTH_GATES"
+  ],
+  "selected_surviving_route": "LIVE_ENTRY_DOMAIN_DERIVATION_WITH_UNCHANGED_GATES",
+  "why_selected_route_is_fastest_sufficient": "It needs no new knowledge and no new authority: the domain is already inside the corpus, both gates are untouched, and the change is one derivation function plus four small call-site fixes.",
+  "expected_parent_level_state_change": "THE_COMPRESSION_REPLAY_LOOP_RUNS_ON_THE_LIVE_ENTRY_POINT__THREE_WORLD_MODEL_ORGANS_ADMIT_THREE_STORED_PROGRAMS_AND_ONE_ABSTRACTION__THE_NEVER_SEEN_FOURTH_REPLAYS_30_PERCENT_SMALLER_WITH_ZERO_BEHAVIOUR_CHANGES_AND_NO_HUMAN_NAMING_A_DOMAIN",
+  "stop_condition": "9_NEW_TESTS_PASS__44_TESTS_PASS_ACROSS_THE_FOUR_SUITES_THAT_OWN_THE_MECHANISM__145_ACROSS_THE_TEN_SUITES_IMPORTING_THE_THREE_CHANGED_MODULES__REFEREE_PASS_0_VIOLATIONS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T19:40:00Z",
+   "max_age_hours": 24,
+   "incumbent_route": "ROUND_25_STATE__MECHANISM_MEASURED_WITH_CALLER_SUPPLIED_DOMAIN__LIVE_PATH_UNMEASURED_AND_EMPTY__BRIDGE_ONE_SLOT__SKILL_ONLY_ADMISSION",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "live probe on d677e54e: 3 registrations -> 0 library entries, replay REFUSED, 3 organs -> 1 concept id",
+     "round 25's own honest limit names the caller-supplied domain as the bridge's gap",
+     "the round-23 periodic gain 67 re-runs unchanged after this change"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Ellis et al., DreamCoder, PLDI 2021: abstraction admission by corpus compression; library learning improves solve rates across DSLs -- the generality claim this round mirrors in-tree",
+     "Bowers et al., Stitch, POPL 2023: corpus-guided abstraction is family-agnostic in principle; per-family recognisers are this tree's own structural addition",
+     "Grand et al., LILO, ICLR 2024: the search-compress-document loop generalises across string editing, scene reasoning and graphics domains -- the multi-domain precedent for a multi-family claim"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python ast module -- NodeTransformer recursion over literal collections is the entire generalisation substrate, stdlib only",
+     "no external crate or package was needed"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "the 2026 self-improving-agents survey (arXiv 2607.13104) frames memory-based improvement via ACE-style evolving playbooks and skill libraries; consolidation breadth is the open lever this round widens",
+     "2026 skill-library field comparisons report stored skills are rarely refactored and rarely generalise across families -- the measured second family is the differentiator in this tree"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "program abstraction learning generalisation across domains DreamCoder Stitch multi DSL library"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent skill library consolidation across task families 2026 self-improving agents"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "AST constant collection lifting parameterisation dict literal abstraction python"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "skill library generalisation multi family compression 2026 agent memory consolidation"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+   "challenger_routes": [
+    {
+     "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
+     "evidence": [
+      "a dict special case plus a keyed-table recogniser would serve the world-model family specifically"
+     ],
+     "qualification_evidence": [
+      "the recursive collection rule covers tuple, list, set AND dict with less code and no per-family maintenance",
+      "families are still recognised structurally after lifting -- the generalisation does not blur family identity"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Equivalent",
+      "CAPABILITY_STRENGTH": "Strictly narrower (one family per special case)",
+      "WALL_CLOCK": "Similar",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "More per-family surface to maintain and re-measure",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "emitting abstraction calls at organ birth would make every future family member born minimal"
+     ],
+     "qualification_evidence": [
+      "killed by arithmetic: organs must stay self-contained, and helper+call measures ~262 description bytes against the cold form's 179",
+      "emission only pays with a runtime-binding execution contract -- an architectural decision changing every downstream organ consumer, out of round scope"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "Negative at the organ layer as measured",
+      "WALL_CLOCK": "Higher (execution-contract change)",
+      "INCREMENTAL_COST": "0 USD but large blast radius",
+      "RELIABILITY": "New failure mode for every organ consumer",
+      "VERIFIABILITY": "Requires its own pre-registered prediction on emitted bytes"
+     }
+    },
+    {
+     "route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+     "evidence": [
+      "3 sites measure gain 103 bytes with family recognised from structure; the never-seen organ replays 394 to 277 bytes with 0 held-out mismatches",
+      "the numeric grid that cannot see the domain is REFUSED at both gates instead of shipping unchecked rewrites",
+      "the first family's measured numbers re-run unchanged"
+     ],
+     "qualification_evidence": [
+      "6 new tests including the prediction, the economics, the singleton exclusion, the vacuity gate, and first-family regression",
+      "21 tests pass across the three compression rounds; affected suites pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed at both gates; refusals carry reasons",
+      "CAPABILITY_STRENGTH": "Two families under one mechanism, with the third-family question now cheap",
+      "WALL_CLOCK": "Milliseconds of AST work per corpus",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Vacuity gate added where verification was silently vacuous",
+      "VERIFIABILITY": "Prediction written before measurement; first-family numbers as regression calibration"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T15:56:01Z",
+    "max_age_hours": 2,
+    "selected_route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the generalised lifter measures the keyed-table abstraction and refuses vacuous grids on this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "synthesize_world_model_organ supplies the second family's corpus, unchanged"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__AN_INTEGRATION_GAIN_ON_AN_EXISTING_MECHANISM_WITH_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT__BOUND_TO_A_PRE_REGISTERED_LIVE_CURVE_PREDICTION_AND_TO_THE_UNCHANGED_VACUITY_GATE",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "THE_COMPRESSION_LOOP_RUNS_UNATTENDED_ON_THE_LIVE_ENTRY_POINT",
+   "falsifier_id": "F_THE_LIVE_CURVE_MUST_BE_ONE_STORED_PROGRAM_AT_K_1_AND_2_AND_AN_ABSTRACTION_AT_3__THE_NEVER_SEEN_MEMBER_MUST_REPLAY_STRICTLY_SMALLER_WITH_BEHAVIOUR_PRESERVED__AND_A_NON_DISCRIMINATING_GRID_MUST_STILL_REFUSE",
+   "decisive_question": "Can the compress-admit-replay loop close on the live entry point with nobody supplying a probe domain, without loosening either gate?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_live_compounding_loop_v1.py",
+     "git_blob_sha": "30c9e58b7c47a421950eb9484566b255d807e60e"
+    },
+    {
+     "path": "canonical/swe_kernel/compression_gain_v1.py",
+     "git_blob_sha": "9a39eeb976102361e090eeebe00a472232338be2"
+    },
+    {
+     "path": "canonical/swe_kernel/concept_library_v1.py",
+     "git_blob_sha": "cc80ca2e39b5e5cd1d699e37961bab0fa23e6e1c"
+    },
+    {
+     "path": "canonical/tests/test_compression_gain_abstraction_v1.py",
+     "git_blob_sha": "c904297e47930904ae445aec0d100391b0c838d1"
+    }
+   ]
+  }
+ },
+ "next_step": "FEED_THE_LIVE_LOOP_A_CORPUS_OF_REAL_SOLVED_PROGRAMS_AND_MEASURE_WHETHER_THE_CURVE_KEEPS_ITS_SHAPE__THEN_THE_PERCEPTOR_AND_POLICY_CORPORA_UNDER_THE_SAME_DISCIPLINE__THEN_THE_LEARNING_TO_LEARN_BENCHMARK_RE_RUN_WITH_THE_LIBRARY_NOW_HOLDING_REUSABLE_MACHINERY"
+}
