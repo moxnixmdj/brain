@@ -1,0 +1,76 @@
+name: Finance Index Client Payload Probe
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/finance-index-client-payload-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Fetch public AA page and inspect client chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import html, json, re, urllib.parse, urllib.request, sys, time
+          PAGE='https://artificialanalysis.ai/models/capabilities/finance-and-accounting'
+          UA='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/155 Safari/537.36'
+          def get(url):
+              req=urllib.request.Request(url,headers={'user-agent':UA,'accept':'text/html,application/javascript,*/*'})
+              with urllib.request.urlopen(req,timeout=20) as r:
+                  b=r.read(8_000_000)
+                  ct=r.headers.get('content-type','')
+                  return b.decode('utf-8','replace'),ct
+          raw,ct=get(PAGE)
+          print('PAGE_STATUS_OK bytes=',len(raw),'ct=',ct)
+          print('PAGE_SHA_HINT=',__import__('hashlib').sha256(raw.encode()).hexdigest())
+          scripts=[]
+          for m in re.finditer(r'<script[^>]+src=["\']([^"\']+)["\']',raw,re.I):
+              u=urllib.parse.urljoin(PAGE,html.unescape(m.group(1)))
+              if u not in scripts: scripts.append(u)
+          print('SCRIPT_COUNT',len(scripts))
+          for u in scripts: print('SCRIPT',u)
+          markers=[
+            'finance-and-accounting','Finance & Accounting','capabilityIndex','capability-index',
+            'capabilityBreakdown','Capability Breakdown','AA-Briefcase','GDPval-AA','GDP.pdf',
+            'AutomationBench-AA','Not publicly available','businessKnowledge','agenticKnowledgeWork',
+            'longContext','nonHallucination','/api/','trpc','graphql','sanity'
+          ]
+          def emit(label,text,limit=160):
+              hits=[]
+              low=text.lower()
+              for mk in markers:
+                  start=0
+                  while len(hits)<limit:
+                      i=low.find(mk.lower(),start)
+                      if i<0: break
+                      hits.append((i,mk,text[max(0,i-220):min(len(text),i+520)]))
+                      start=i+len(mk)
+              hits.sort(key=lambda x:x[0])
+              print(f'=== {label} HITS {len(hits)} ===')
+              for i,mk,ctx in hits[:limit]:
+                  print('@@',mk,'@',i)
+                  print(ctx.replace('\n',' ')[:900])
+          emit('PAGE',raw,240)
+          fetched=0
+          for idx,u in enumerate(scripts):
+              try:
+                  txt,sct=get(u)
+              except Exception as e:
+                  print('SCRIPT_FETCH_FAIL',u,type(e).__name__,str(e)[:200]); continue
+              fetched+=1
+              low=txt.lower()
+              if any(m.lower() in low for m in markers):
+                  print('\n### SCRIPT_MATCH',idx,u,'bytes',len(txt),'ct',sct)
+                  emit('SCRIPT '+str(idx),txt,100)
+              if fetched>=120:
+                  break
+          print('FETCHED_SCRIPTS',fetched)
+          PY
