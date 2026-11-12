@@ -144,6 +144,41 @@ def survivors(space: VersionSpace) -> list[Hypothesis]:
     return out
 
 
+def vocabulary_gap(evidence: Sequence[tuple[Iterable[str], bool]]) -> dict[str, Any] | None:
+    """Proof that the OBSERVED FACTS cannot express what this plan needs, or None.
+
+    THE MEASURED WALL. Two real directories, identical sensed facts
+    `{git.repository, manifest.json, structured.json}`, opposite real outcomes: one succeeded, one
+    failed with `DOCX_INTENT_SIDECAR_MISSING`. The cause -- a `.docx.intent.json` sidecar -- has no
+    fact in the sensor's vocabulary (`probe_effect` answers UNDECIDABLE for it). So the two worlds
+    are THE SAME POINT to this learner while being different worlds to the executor.
+
+    That is the honest answer to "show it once and it will learn": if the real precondition is not
+    expressible, one exposure and a million exposures teach exactly the same nothing. `learn`
+    already refuses to invent a requirement here and returns INCONSISTENT, which is correct -- but
+    INCONSISTENT has no survivors, so `explains_failure` answers False and the plan is offered even
+    in the world where it just failed, with no statement of why.
+
+    This returns the WITNESS: two observations with equal fact sets and opposite outcomes. That pair
+    is a proof of insufficiency, not a guess, and it is what a vocabulary repair must be aimed at.
+    Returns None when no such pair exists -- including when the evidence is merely sparse.
+    """
+    by_state: dict[frozenset[str], set[bool]] = {}
+    for state, ok in (evidence or []):
+        by_state.setdefault(normalise_state(state), set()).add(bool(ok))
+    for state in sorted(by_state, key=lambda s: (len(s), sorted(s))):
+        outcomes = by_state[state]
+        if len(outcomes) > 1:
+            return {
+                "schema": SCHEMA,
+                "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+                "facts": sorted(state),
+                "outcomes": [False, True],
+                "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+            }
+    return None
+
+
 def candidate_requirements(
     evidence: Sequence[tuple[Iterable[str], bool]],
     *,
