@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "779a218172791c5ea79a50c59695662e121c8a5d634f9f3f57e5290d40261be1"
+  "value": "0e9c2b21f5b495363115fe2a3152c80044365784b77def13828e6a1f3a705af2"
  },
  "engines": [
   {
@@ -239972,7 +239972,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/answer_shape_v1.py",
-   "sha256": "b5ecfba1d7324d593b9f91d12f194c7848a3f888773da34f342e1c24715ffb96",
+   "sha256": "d25a8f874fbceb8e039add5affdbdb3665496d33043122acb28bfe7137fc6d0b",
    "summary": "The answer is in the artifact. Deliver it, or refuse — never return a count in its place.",
    "symbol_count": 19,
    "symbols": [
@@ -265642,9 +265642,9 @@
    "imported_by_count": 5,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/goal_front_compiler_v1.py",
-   "sha256": "8a819674b9b4e0968f198fb096291aae87e08961ffa526837b08338458f1cba0",
+   "sha256": "7ad424ffbfe2353f71bf26070a3d3c6a5d3aeff8489c14083ead059cd8dee603",
    "summary": "One mouth for every bound capability: a front layer on the byte-pinned goal compiler.",
-   "symbol_count": 90,
+   "symbol_count": 91,
    "symbols": [
     "_actions_of",
     "_after_key",
@@ -272235,7 +272235,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "c1413ae6b615fad247cddb752e19c0380907634fe6507497e71782101e29b02b",
+   "sha256": "9edb92232149249b1d5145aa7dad4e6aec4b44686568b567a9ee0770ea54b820",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 130,
    "symbols": [
@@ -300856,7 +300856,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "78c3c611907bd4eb6ab986cef50565084fc4d460b0908540e1baa6884824a8bc",
+   "sha256": "0bba15acac3238b0778a5ac57a86fb838d1705107410f6c0d59fbb8432fe88bd",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
