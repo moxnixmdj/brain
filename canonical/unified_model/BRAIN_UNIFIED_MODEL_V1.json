@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 360,
+  "knowledge_documents": 361,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6764,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2d7b70cbf8c8e295db6e886c6f9755189ab5e757fd5b72ed7b18f32a4dc45233"
+  "value": "d95a4aa6fcbcfcfe2a678b95de6e1f3f4416c5bbbcc765430636e19e95a91ac4"
  },
  "engines": [
   {
@@ -58505,6 +58505,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 15481,
+   "headings": [
+    "The shipped memory can now be shown wrong",
+    "1. The answer, in one line",
+    "2. Re-run today, not quoted",
+    "3. What 2026 measured outside this tree",
+    "4. What was actually broken here",
+    "5. What was built",
+    "6. Mutation-tested — 5 of 5 killed",
+    "7. The fastest path from here, ranked",
+    "8. Receipts",
+    "9. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_SHIPPED_MEMORY_CAN_NOW_BE_SHOWN_WRONG_20261112_V1.md",
+   "sha256": "8e6285678e36964b16d15e4e90612403429b5b6d337556bf9c5d5de2c445298c",
+   "summary": "**2026-11-12.** Base `8cfbd57d`. Branch `arena/00cef34c-brain`. Round 9 of the owner's question.",
+   "terms": {
+    "10": 13,
+    "100": 6,
+    "2026": 6,
+    "absent": 7,
+    "against": 5,
+    "already": 5,
+    "arxiv": 6,
+    "bundle": 6,
+    "canonical": 10,
+    "check": 7,
+    "computer": 5,
+    "demo": 5,
+    "demonstration": 7,
+    "every": 5,
+    "experience": 5,
+    "fail": 9,
+    "here": 5,
+    "learned": 5,
+    "lessons": 5,
+    "machine": 5,
+    "measured": 5,
+    "measures": 5,
+    "never": 8,
+    "new": 5,
+    "no": 13,
+    "not": 22,
+    "nothing": 6,
+    "now": 7,
+    "one": 20,
+    "only": 9,
+    "pass": 9,
+    "python3": 6,
+    "re-check": 5,
+    "return": 6,
+    "rule": 13,
+    "rules": 6,
+    "same": 6,
+    "self-witness": 5,
+    "shipped": 7,
+    "skills": 10,
+    "so": 5,
+    "still": 7,
+    "store": 7,
+    "taught": 6,
+    "tests": 9,
+    "tree": 7,
+    "verifier": 6,
+    "w0": 11
+   },
+   "title": "The shipped memory can now be shown wrong",
+   "title_terms": [
+    "memory",
+    "now",
+    "shipped",
+    "shown",
+    "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6945,
    "headings": [
     "The World Is Allowed to Say No",
@@ -72741,10 +72819,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1162,
+  "included_source_count": 1163,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "43c86080076ec67b17f730b0d6afbcb9d6055d3916e88b97bb10e1403572374a"
+  "source_tree_digest": "5c13eb081d2e31a41030b51e465d04d3cd339bd5a8779ef3a98ac2e900257bbd"
  },
  "research_index": [
   {
