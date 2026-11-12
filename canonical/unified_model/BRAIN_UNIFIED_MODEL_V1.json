@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 353,
+  "knowledge_documents": 354,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6761,
+  "research_index_records": 6762,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1968
+  "source_index_modules": 1969
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2579775cff8c52afd49526db6c94381435991dfa2074016998582157cdaa8827"
+  "value": "08a0a60f4d23d4500970ad4c1d8059ffbeacbe9976f2a63b55bf2506a45828be"
  },
  "engines": [
   {
@@ -56531,6 +56531,90 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9403,
+   "headings": [
+    "The admitted confinement exists: the wall the most advanced capabilities actually hit",
+    "0. What the owner asked, and what this round found under it",
+    "1. The measurement chain (predictions written before each run)",
+    "1.1 The census on this base (instrument: keyword salads, both doors)",
+    "1.2 Decomposition of the 52 NOT_COMPILED (first-principles filter)",
+    "1.3 The realistic-sentence probe — PR1 FALSIFIED, and the falsification is the finding",
+    "2. What was built: `canonical/runtime/confinement_v1.py`",
+    "2.1 The first design was falsified before it shipped — recorded, as law requires",
+    "3. Measurements (`canonical/tests/test_admitted_confinement_v1.py`, 9/9 pass)",
+    "4. The ledger, updated",
+    "5. Smartest next steps",
+    "6. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.md",
+   "sha256": "896715f683dfe1b6fe71fca07c434bdfc9a1a38f6bbe7b59c0208cdc3e666ab3",
+   "summary": "**2026-11-12.** Branch `arena/8ac47053-brain`. Base `8439f609` (#6719). Follows `A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md` (corrected ordering) and `NINE_BLIND_FACTS_NOW_DECIDED_20261112_V1.md` (premise layer). Authority NONE — sandbox measurement, `$0`, zero model dependency, `truth.achieved` stays `false`.",
+   "terms": {
+    "19": 5,
+    "38": 8,
+    "actions": 4,
+    "admission": 4,
+    "admitted": 4,
+    "advanced": 6,
+    "already": 4,
+    "argv": 5,
+    "bash": 4,
+    "binding": 5,
+    "both": 4,
+    "boundary": 5,
+    "budget": 5,
+    "canonical": 6,
+    "capabilities": 7,
+    "clone": 5,
+    "coding": 5,
+    "compile": 7,
+    "condition": 5,
+    "confinement": 7,
+    "declared": 5,
+    "diff": 4,
+    "door": 8,
+    "each": 4,
+    "effect": 8,
+    "every": 4,
+    "exactly": 4,
+    "exists": 5,
+    "false": 4,
+    "git": 4,
+    "host": 5,
+    "inside": 4,
+    "layer": 4,
+    "measured": 6,
+    "most": 7,
+    "named": 5,
+    "not": 11,
+    "python3": 5,
+    "realistic": 5,
+    "refusal": 5,
+    "refused": 6,
+    "refuses": 5,
+    "release": 5,
+    "run": 5,
+    "shell": 6,
+    "true": 5,
+    "wall": 6,
+    "worktree": 5
+   },
+   "title": "The admitted confinement exists: the wall the most advanced capabilities actually hit",
+   "title_terms": [
+    "actually",
+    "admitted",
+    "advanced",
+    "capabilities",
+    "confinement",
+    "exists",
+    "hit",
+    "most",
+    "wall"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5852,
    "headings": [
     "The capability was there. The substrate wasn't.",
@@ -72194,10 +72278,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1155,
+  "included_source_count": 1156,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "aa1b3a860562eb0977ff9643882a5bece5afd25553a64c848b28fb93f317615e"
+  "source_tree_digest": "65b127af47d40688ead98cc8b9426a8d135f9a716bc7d5b35f3a7e1fefc38024"
  },
  "research_index": [
   {
@@ -228991,6 +229075,29 @@
    }
   },
   {
+   "action_id": "THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "929769e6a7bc443e286aee88d49b6864413c1ff0761d7939c4778786b9ba9f7d",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "admitted": 1,
+    "build_the_admitted_confinement_substrate_the_boundary_demands": 1,
+    "confinement": 1,
+    "exists": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "the_admitted_confinement_exists_20261112_v1": 1,
+    "the_boundary_release_condition_has_its_constructive_half__a_disposable_machine_with_measured_effect_receipts_and_a_named_seam__every_existing_refusal_stands_until_the_seam_diff__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "the_most_advanced_coding_capabilities_compile_bind_and_are_refused_with_computer_execution_requires_admitted_confinement_measured_19_of_38_realistic_goals__the_release_condition_the_boundary_names_had_no_implementation": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_CENSUS_NAMES_EVERY_REFUSAL_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -249132,6 +249239,44 @@
     "repair": 1,
     "run": 1,
     "snapshot": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/confinement_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/confinement_v1.py",
+   "sha256": "6412b3601034839b5f11afa37c1ee9783e8d0927b7f751aff1da4f37f2171c7b",
+   "summary": "The admitted confinement and effect-verification path the boundary demands.",
+   "symbol_count": 8,
+   "symbols": [
+    "Confinement",
+    "_host_head",
+    "_host_status",
+    "_inside",
+    "admit",
+    "execute",
+    "release",
+    "run_confined"
+   ],
+   "terms": {
+    "admit": 1,
+    "admitted": 1,
+    "boundary": 1,
+    "confinement": 3,
+    "demands": 1,
+    "effect-verification": 1,
+    "execute": 1,
+    "host_head": 1,
+    "host_status": 1,
+    "inside": 1,
+    "path": 1,
+    "release": 1,
+    "run_confined": 1,
     "v1": 1
    }
   },
