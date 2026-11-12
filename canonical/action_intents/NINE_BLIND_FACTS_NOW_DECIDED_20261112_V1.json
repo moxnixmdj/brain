@@ -432,7 +432,7 @@
    "counterexample_receipts": [
     {
      "path": "canonical/runtime/world_probe_v1.py",
-     "git_blob_sha": "4ca5d211587875d17549aa9ef8374e0f51fae635"
+     "git_blob_sha": "3dc901388800f7217a894cec6354234eaf260c5a"
     },
     {
      "path": "canonical/tests/test_world_probe_senses_the_nine_blind_facts_v1.py",
