@@ -118,6 +118,27 @@ KINDS = {
         ("text_mode", "universal_newlines text=True", "universal_newlines="),
         ("open_mode", "rU mode open", "'rU'"),
     ],
+    # Declared 2026-11-12 before any of their commits was looked at, as a generalization test of the
+    # engine exactly as merged (main 5df74130): none of these kinds was seen while any engine code was
+    # written.  The declaration is committed and pushed before `collect fresh` runs.
+    "fresh": [
+        ("fail_unless", "failUnless assertTrue", "failUnless("),
+        ("fail_if", "failIf assertFalse", "failIf("),
+        ("assert_underscore", "assert_ assertTrue", ".assert_("),
+        ("smart_str", "smart_text smart_str", "smart_text("),
+        ("scipy_imread", "scipy.misc.imread imageio", "misc.imread("),
+        ("np_object", "np.object deprecated", "np.object"),
+        ("np_alltrue", "np.alltrue np.all", "np.alltrue("),
+        ("tf_session", "tf.Session compat.v1", "tf.Session("),
+        ("tf_placeholder", "tf.placeholder compat.v1", "tf.placeholder("),
+        ("qt_exec", "exec_ exec deprecated", ".exec_()"),
+        ("os_errno", "os.errno errno", "os.errno"),
+        ("urllib_quote", "urllib.quote urllib.parse.quote", "urllib.quote("),
+        ("xrange", "xrange range python3", "xrange("),
+        ("raw_input", "raw_input input python3", "raw_input("),
+        ("basestring", "basestring str python3", "basestring)"),
+        ("mpl_get_cmap", "get_cmap matplotlib colormaps", "get_cmap("),
+    ],
 }
 
 
