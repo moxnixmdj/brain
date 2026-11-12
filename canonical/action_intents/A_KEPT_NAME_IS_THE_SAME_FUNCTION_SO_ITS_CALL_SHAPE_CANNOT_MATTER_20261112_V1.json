@@ -32,7 +32,7 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "progress_class": "MEASURED_CAPABILITY_EXTENSION_OF_AN_EXISTING_MECHANISM",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
    "canonical/swe_kernel/taught_actions/kept_under_an_old_name_v1.py",
    "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
@@ -42,7 +42,7 @@
    "canonical/tests/test_repeated_change_one_example_v1.py",
    "WHICH_FIX_ACTUALLY_WORKS_20261112_V1.md"
   ],
-  "route_class": "EXTEND_AN_EXISTING_MECHANISM",
+  "route_class": "ADAPT",
   "producer_cognition_model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "conversation_memory_is_authority": false,
@@ -174,10 +174,10 @@
    "implementation_still_necessary": true,
    "losing_routes_reason": "A_SELF_AUTHORED_FIXTURE_CANNOT_SHOW_A_TIE_WITH_DIFFERENT_OUTCOMES__THE_RECORDED_CORPUS_IS_THE_ONLY_PLACE_THAT_CASE_EXISTS",
    "routes_ranked": [
-    "1_NARROW_IMPORT_EXTENSION (priced, not shipped: 0.1305 strict alone, precision 0.8038 -- needs the narrow form)",
-    "2_PURE_RENAME_BETWEEN_DOCUMENTED_ALIASES (shipped, measured)",
-    "3_BLOCK_SHAPE (blocked: learn time)",
-    "4_IMPORT_ONLY (blocked: learn time)"
+    "1_ADAPT_THE_EXISTING_CALL_SHAPE_CHECK (shipped: exempt a rename between two documented delegating aliases)",
+    "2_ADAPT_THE_IMPORT_GATE (priced, not shipped: precision 0.8038 in its wide form)",
+    "3_SYNTHESIZE_A_BLOCK_SHAPE_ALGEBRA (blocked: the example is refused at learn time)",
+    "4_SYNTHESIZE_AN_IMPORT_ONLY_OPERATOR (blocked: the example is refused at learn time)"
    ]
   },
   "obs_verification": {
