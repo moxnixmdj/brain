@@ -1,0 +1,700 @@
+{
+ "schema": "EXPRESSION_OPERATOR_PACK_MEASURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T22:55:02Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "organ_sha256": "0cca78be744eec9b3f86f7fca1eea0338cfe5497be9c57cc236cf1095e0d75b7",
+ "pack": "canonical/swe_kernel/taught_actions/expression_operator_pack_v1.py",
+ "pack_sha256": "28c70ee77f2ff281068cfacdd64dba185ec44d7b4693990970f0e6b2a0d8cc8d",
+ "corpus_sha256": "0eae235f84f05b31d2f564670e402d57fc1eaea8c95411c4d72bac44e0e43312",
+ "collect": "python3 canonical/tools/repeated_change_one_example_measure_v1.py --collect /tmp/pulls.json --as-recorded-in canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+ "summary": {
+  "base": {
+   "asked": 440,
+   "edited": 258,
+   "right": 268,
+   "developers_changes": 1674,
+   "organ_changes": 290,
+   "coverage": 0.160096,
+   "precision": 0.924138
+  },
+  "rename": {
+   "asked": 440,
+   "edited": 308,
+   "right": 391,
+   "developers_changes": 1674,
+   "organ_changes": 413,
+   "coverage": 0.233572,
+   "precision": 0.946731,
+   "gain_right": 123,
+   "gain_coverage": 0.073476,
+   "gain_precision": 0.022593,
+   "pull_requests_improved": 3
+  },
+  "fstring": {
+   "asked": 440,
+   "edited": 279,
+   "right": 363,
+   "developers_changes": 1674,
+   "organ_changes": 498,
+   "coverage": 0.216846,
+   "precision": 0.728916,
+   "gain_right": 95,
+   "gain_coverage": 0.05675,
+   "gain_precision": -0.195222,
+   "pull_requests_improved": 2
+  },
+  "both": {
+   "asked": 440,
+   "edited": 329,
+   "right": 486,
+   "developers_changes": 1674,
+   "organ_changes": 621,
+   "coverage": 0.290323,
+   "precision": 0.782609,
+   "gain_right": 218,
+   "gain_coverage": 0.130227,
+   "gain_precision": -0.141529,
+   "pull_requests_improved": 5
+  }
+ },
+ "per_pull_request": {
+  "openimis/openimis-be-core_py#414": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 23,
+    "right": 89,
+    "developers_changes": 315,
+    "organ_changes": 89,
+    "coverage": 0.28254,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 25,
+    "right": 121,
+    "developers_changes": 315,
+    "organ_changes": 121,
+    "coverage": 0.384127,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 23,
+    "right": 89,
+    "developers_changes": 315,
+    "organ_changes": 89,
+    "coverage": 0.28254,
+    "precision": 1.0
+   },
+   "both": {
+    "asked": 30,
+    "edited": 25,
+    "right": 121,
+    "developers_changes": 315,
+    "organ_changes": 121,
+    "coverage": 0.384127,
+    "precision": 1.0
+   },
+   "name": "openimis/openimis-be-core_py#414",
+   "kind": "an old name of a test method",
+   "seconds": 3.2
+  },
+  "torproject/stem#155": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 2,
+    "right": 4,
+    "developers_changes": 50,
+    "organ_changes": 4,
+    "coverage": 0.08,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 30,
+    "right": 45,
+    "developers_changes": 50,
+    "organ_changes": 45,
+    "coverage": 0.9,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 2,
+    "right": 4,
+    "developers_changes": 50,
+    "organ_changes": 4,
+    "coverage": 0.08,
+    "precision": 1.0
+   },
+   "both": {
+    "asked": 30,
+    "edited": 30,
+    "right": 45,
+    "developers_changes": 50,
+    "organ_changes": 45,
+    "coverage": 0.9,
+    "precision": 1.0
+   },
+   "name": "torproject/stem#155",
+   "kind": "an old name of a test method, second",
+   "seconds": 7.4
+  },
+  "testing-cabal/testtools#335": {
+   "files": 5,
+   "base": {
+    "asked": 20,
+    "edited": 20,
+    "right": 12,
+    "developers_changes": 44,
+    "organ_changes": 12,
+    "coverage": 0.272727,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 20,
+    "edited": 20,
+    "right": 12,
+    "developers_changes": 44,
+    "organ_changes": 12,
+    "coverage": 0.272727,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 20,
+    "edited": 20,
+    "right": 12,
+    "developers_changes": 44,
+    "organ_changes": 12,
+    "coverage": 0.272727,
+    "precision": 1.0
+   },
+   "both": {
+    "asked": 20,
+    "edited": 20,
+    "right": 12,
+    "developers_changes": 44,
+    "organ_changes": 12,
+    "coverage": 0.272727,
+    "precision": 1.0
+   },
+   "name": "testing-cabal/testtools#335",
+   "kind": "an old name of a test method, second",
+   "seconds": 5.1
+  },
+  "kuangjiafa/automagician#55": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 10,
+    "right": 0,
+    "developers_changes": 40,
+    "organ_changes": 1,
+    "coverage": 0.0,
+    "precision": 0.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 10,
+    "right": 0,
+    "developers_changes": 40,
+    "organ_changes": 1,
+    "coverage": 0.0,
+    "precision": 0.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 22,
+    "right": 0,
+    "developers_changes": 40,
+    "organ_changes": 44,
+    "coverage": 0.0,
+    "precision": 0.0
+   },
+   "both": {
+    "asked": 30,
+    "edited": 22,
+    "right": 0,
+    "developers_changes": 40,
+    "organ_changes": 44,
+    "coverage": 0.0,
+    "precision": 0.0
+   },
+   "name": "kuangjiafa/automagician#55",
+   "kind": "an old name of a logging method",
+   "seconds": 3.2
+  },
+  "RedHatInsights/advisor-backend#80": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 10,
+    "right": 5,
+    "developers_changes": 55,
+    "organ_changes": 5,
+    "coverage": 0.090909,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 30,
+    "right": 55,
+    "developers_changes": 55,
+    "organ_changes": 55,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 10,
+    "right": 5,
+    "developers_changes": 55,
+    "organ_changes": 5,
+    "coverage": 0.090909,
+    "precision": 1.0
+   },
+   "both": {
+    "asked": 30,
+    "edited": 30,
+    "right": 55,
+    "developers_changes": 55,
+    "organ_changes": 55,
+    "coverage": 1.0,
+    "precision": 1.0
+   },
+   "name": "RedHatInsights/advisor-backend#80",
+   "kind": "an old name of a logging method",
+   "seconds": 3.9
+  },
+  "Cytomine-ULiege/Cytomine-python-client#61": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "right": 50,
+    "developers_changes": 85,
+    "organ_changes": 50,
+    "coverage": 0.588235,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 30,
+    "right": 50,
+    "developers_changes": 85,
+    "organ_changes": 50,
+    "coverage": 0.588235,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 30,
+    "right": 50,
+    "developers_changes": 85,
+    "organ_changes": 50,
+    "coverage": 0.588235,
+    "precision": 1.0
+   },
+   "both": {
+    "asked": 30,
+    "edited": 30,
+    "right": 50,
+    "developers_changes": 85,
+    "organ_changes": 50,
+    "coverage": 0.588235,
+    "precision": 1.0
+   },
+   "name": "Cytomine-ULiege/Cytomine-python-client#61",
+   "kind": "a call written the old way",
+   "seconds": 1.5
+  },
+  "unifyai/ivy#26932": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "right": 17,
+    "developers_changes": 70,
+    "organ_changes": 17,
+    "coverage": 0.242857,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 30,
+    "right": 17,
+    "developers_changes": 70,
+    "organ_changes": 17,
+    "coverage": 0.242857,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 30,
+    "right": 17,
+    "developers_changes": 70,
+    "organ_changes": 23,
+    "coverage": 0.242857,
+    "precision": 0.73913
+   },
+   "both": {
+    "asked": 30,
+    "edited": 30,
+    "right": 17,
+    "developers_changes": 70,
+    "organ_changes": 23,
+    "coverage": 0.242857,
+    "precision": 0.73913
+   },
+   "name": "unifyai/ivy#26932",
+   "kind": "a call written the old way",
+   "seconds": 2.4
+  },
+  "InterDigitalInc/CompressAI-Vision#40": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 0,
+    "right": 0,
+    "developers_changes": 35,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 0,
+    "right": 0,
+    "developers_changes": 35,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 0,
+    "right": 0,
+    "developers_changes": 35,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "both": {
+    "asked": 30,
+    "edited": 0,
+    "right": 0,
+    "developers_changes": 35,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "name": "InterDigitalInc/CompressAI-Vision#40",
+   "kind": "a library taken out",
+   "seconds": 2.0
+  },
+  "inveniosoftware/invenio-pidstore#189": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 5,
+    "right": 0,
+    "developers_changes": 115,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 5,
+    "right": 0,
+    "developers_changes": 115,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 5,
+    "right": 0,
+    "developers_changes": 115,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "both": {
+    "asked": 30,
+    "edited": 5,
+    "right": 0,
+    "developers_changes": 115,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "name": "inveniosoftware/invenio-pidstore#189",
+   "kind": "a library taken out",
+   "seconds": 0.6
+  },
+  "nipy/nibabel#1609": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "right": 0,
+    "developers_changes": 70,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 30,
+    "right": 0,
+    "developers_changes": 70,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 30,
+    "right": 55,
+    "developers_changes": 70,
+    "organ_changes": 85,
+    "coverage": 0.785714,
+    "precision": 0.647059
+   },
+   "both": {
+    "asked": 30,
+    "edited": 30,
+    "right": 55,
+    "developers_changes": 70,
+    "organ_changes": 85,
+    "coverage": 0.785714,
+    "precision": 0.647059
+   },
+   "name": "nipy/nibabel#1609",
+   "kind": "text put together another way",
+   "seconds": 7.3
+  },
+  "jupyter/jupyter-sphinx#301": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "right": 0,
+    "developers_changes": 110,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 30,
+    "right": 0,
+    "developers_changes": 110,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 30,
+    "right": 42,
+    "developers_changes": 110,
+    "organ_changes": 45,
+    "coverage": 0.381818,
+    "precision": 0.933333
+   },
+   "both": {
+    "asked": 30,
+    "edited": 30,
+    "right": 42,
+    "developers_changes": 110,
+    "organ_changes": 45,
+    "coverage": 0.381818,
+    "precision": 0.933333
+   },
+   "name": "jupyter/jupyter-sphinx#301",
+   "kind": "text put together another way",
+   "seconds": 2.0
+  },
+  "fulcrumgenomics/fgpyo#300": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 20,
+    "right": 2,
+    "developers_changes": 220,
+    "organ_changes": 3,
+    "coverage": 0.009091,
+    "precision": 0.666667
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 20,
+    "right": 2,
+    "developers_changes": 220,
+    "organ_changes": 3,
+    "coverage": 0.009091,
+    "precision": 0.666667
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 20,
+    "right": 2,
+    "developers_changes": 220,
+    "organ_changes": 3,
+    "coverage": 0.009091,
+    "precision": 0.666667
+   },
+   "both": {
+    "asked": 30,
+    "edited": 20,
+    "right": 2,
+    "developers_changes": 220,
+    "organ_changes": 3,
+    "coverage": 0.009091,
+    "precision": 0.666667
+   },
+   "name": "fulcrumgenomics/fgpyo#300",
+   "kind": "types written another way",
+   "seconds": 2.2
+  },
+  "Prekzursil/env-inspector#72": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 20,
+    "right": 34,
+    "developers_changes": 280,
+    "organ_changes": 46,
+    "coverage": 0.121429,
+    "precision": 0.73913
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 20,
+    "right": 34,
+    "developers_changes": 280,
+    "organ_changes": 46,
+    "coverage": 0.121429,
+    "precision": 0.73913
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 21,
+    "right": 34,
+    "developers_changes": 280,
+    "organ_changes": 50,
+    "coverage": 0.121429,
+    "precision": 0.68
+   },
+   "both": {
+    "asked": 30,
+    "edited": 21,
+    "right": 34,
+    "developers_changes": 280,
+    "organ_changes": 50,
+    "coverage": 0.121429,
+    "precision": 0.68
+   },
+   "name": "Prekzursil/env-inspector#72",
+   "kind": "types written another way",
+   "seconds": 3.3
+  },
+  "apache/libcloud#2217": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 20,
+    "right": 12,
+    "developers_changes": 30,
+    "organ_changes": 12,
+    "coverage": 0.4,
+    "precision": 1.0
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 20,
+    "right": 12,
+    "developers_changes": 30,
+    "organ_changes": 12,
+    "coverage": 0.4,
+    "precision": 1.0
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 22,
+    "right": 12,
+    "developers_changes": 30,
+    "organ_changes": 21,
+    "coverage": 0.4,
+    "precision": 0.571429
+   },
+   "both": {
+    "asked": 30,
+    "edited": 22,
+    "right": 12,
+    "developers_changes": 30,
+    "organ_changes": 21,
+    "coverage": 0.4,
+    "precision": 0.571429
+   },
+   "name": "apache/libcloud#2217",
+   "kind": "a call that is no longer to be used",
+   "seconds": 5.9
+  },
+  "arigatoexpress/Project-Go-Forward#483": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 8,
+    "right": 43,
+    "developers_changes": 155,
+    "organ_changes": 51,
+    "coverage": 0.277419,
+    "precision": 0.843137
+   },
+   "rename": {
+    "asked": 30,
+    "edited": 8,
+    "right": 43,
+    "developers_changes": 155,
+    "organ_changes": 51,
+    "coverage": 0.277419,
+    "precision": 0.843137
+   },
+   "fstring": {
+    "asked": 30,
+    "edited": 14,
+    "right": 41,
+    "developers_changes": 155,
+    "organ_changes": 67,
+    "coverage": 0.264516,
+    "precision": 0.61194
+   },
+   "both": {
+    "asked": 30,
+    "edited": 14,
+    "right": 41,
+    "developers_changes": 155,
+    "organ_changes": 67,
+    "coverage": 0.264516,
+    "precision": 0.61194
+   },
+   "name": "arigatoexpress/Project-Go-Forward#483",
+   "kind": "a call that is no longer to be used",
+   "seconds": 3.4
+  }
+ },
+ "limits": [
+  "One corpus: 15 merged pull requests found because they repeat one change, six files each; no test of any of the fifteen projects was run.",
+  "Precision is agreement with the developers, not correctness.",
+  "The f-string arm is a candidate generator: it converts every string-constant concatenation, not only the developers'. Use it behind a test.",
+  "The rename arm assumes a method rename keeps the arguments; a rename that also changes the signature is not this operator.",
+  "The organ's hash is recorded; a later change to it needs this measurement re-run."
+ ]
+}
