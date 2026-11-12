@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 324,
+  "knowledge_documents": 325,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6732,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2e2aa5426921807758dd2c3c149192c0e81eacc0a0695f659c3e55074d34f1e0"
+  "value": "dde1e0d3334f5b44fdb1bf81d4e3f33eae7a5323751ea97dff15ecd2d97e54dc"
  },
  "engines": [
   {
@@ -55756,6 +55756,78 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5286,
+   "headings": [
+    "The intent is derived from the diff",
+    "What this round adds",
+    "What it does not do",
+    "Why this is the right thing to have built",
+    "Receipts",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_INTENT_IS_DERIVED_FROM_THE_DIFF_20261112_V1.md",
+   "sha256": "dba4fa65f7bcdf11f95550f0c7cf84f7d7345a6c8af359662d3f7eb15617ae0d",
+   "summary": "**2026-11-12.** Base `808e72ac`. Branch `arena/de5cf49c-brain`. Round 12.",
+   "terms": {
+    "808e72ac": 2,
+    "adds": 2,
+    "against": 4,
+    "already": 2,
+    "base": 7,
+    "branch": 2,
+    "canonical": 3,
+    "canonical_base_commit": 2,
+    "capability": 3,
+    "causal_blocker": 2,
+    "change": 4,
+    "check": 6,
+    "ci": 2,
+    "command": 2,
+    "costs": 2,
+    "derive_action_intent_20261112.py": 3,
+    "derived": 2,
+    "diff": 2,
+    "enforce_goal_hierarchy.py": 2,
+    "equal": 2,
+    "equality": 2,
+    "every": 2,
+    "expected_parent_frontier_change": 2,
+    "fail": 3,
+    "failure": 3,
+    "field": 3,
+    "fields": 7,
+    "files": 3,
+    "git": 7,
+    "guard": 6,
+    "head": 3,
+    "hour": 3,
+    "main": 3,
+    "merge": 3,
+    "next": 3,
+    "no": 5,
+    "not": 10,
+    "one": 5,
+    "python3": 4,
+    "record": 3,
+    "rev-parse": 5,
+    "round": 5,
+    "same": 7,
+    "sha": 3,
+    "than": 3,
+    "thing": 3,
+    "tool": 3,
+    "two": 4
+   },
+   "title": "The intent is derived from the diff",
+   "title_terms": [
+    "derived",
+    "diff",
+    "intent"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7057,
    "headings": [
     "Evidence of history is not evidence of ability",
@@ -69974,10 +70046,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1126,
+  "included_source_count": 1127,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "79424d9cbb9d1a3b4fa95ace0bfaf5689169b52659ee633feaceddded68bb84a"
+  "source_tree_digest": "149a8309c7c5a1bfdc4ad25097c88bf8eb227a9f8977a441698600e35890b745"
  },
  "research_index": [
   {
