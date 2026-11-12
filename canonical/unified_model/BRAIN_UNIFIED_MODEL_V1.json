@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 323,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6732,
+  "research_index_records": 6735,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6d92cf4e3484f1f99a0b0f28b0c39180c8acd347e743cca6518854ce525fd053"
+  "value": "b4efedb321c37b41cc425b582bda4784d9fd79ecfbdfe907ae6c323dbab73dca"
  },
  "engines": [
   {
@@ -158472,6 +158472,24 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/HUMANEVALFIX_EXPERIENCE_STREAM_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HUMANEVALFIX_EXPERIENCE_STREAM_20261112_V1.json",
+   "schema": "BRAIN_HUMANEVALFIX_EXPERIENCE_STREAM_RECORD_V1",
+   "sha256": "0bb2286bb2b77cd124d33d08a0330abac960ae3a10482ad19279c8370eb45212",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "experience": 1,
+    "humanevalfix": 1,
+    "stream": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/HUMANEVALFIX_RECORDED_PROPOSALS_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/HUMANEVALFIX_RECORDED_PROPOSALS_20261112_V1.json",
@@ -158483,6 +158501,24 @@
     "humanevalfix": 1,
     "proposals": 1,
     "recorded": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/HUMANEVALFIX_REPAIR_SOLVER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HUMANEVALFIX_REPAIR_SOLVER_20261112_V1.json",
+   "schema": "BRAIN_HUMANEVALFIX_REPAIR_SOLVER_RECORD_V1",
+   "sha256": "c0c32384b7ade49b549b416ae2d7915249e04e5cea0e06146e930c07fb239d2f",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "humanevalfix": 1,
+    "repair": 1,
+    "solver": 1,
     "v1": 1
    }
   },
@@ -180777,6 +180813,25 @@
     "counterexample": 1,
     "known": 1,
     "repair": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+   "schema": "BRAIN_REPEATED_CHANGE_ONE_EXAMPLE_RECORD_V1",
+   "sha256": "f38b285a2414503dc54dcabadefdf34b4c14d06f903475fd079e90076a25c0e8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "change": 1,
+    "example": 1,
+    "one": 1,
+    "repeated": 1,
     "v1": 1
    }
   },
@@ -221061,7 +221116,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c54f958c7e682c173d7a2a6b797c47df2bb813bf8e5aee8fa54126044bbd9388",
+   "sha256": "16ca60e5b6249e4a622b78de52c459737061d351522c511a6c028020a7e444e9",
    "status": "",
    "terms": {
     "20261111": 1,
