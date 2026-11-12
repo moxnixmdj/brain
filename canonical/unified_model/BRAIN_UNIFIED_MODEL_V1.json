@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 367,
+  "knowledge_documents": 368,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6767,
+  "research_index_records": 6768,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ef15caee03a0b42c1dcaa3e781765b0d0cf466382dd444bae5e6ce4f1e0fb750"
+  "value": "0562d676ccb19c661858e71e07af59c659ac4b37858add2b9111d5abbb5606e6"
  },
  "engines": [
   {
@@ -58356,6 +58356,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9480,
+   "headings": [
+    "The loop was open at the live entry",
+    "1. What the live path did before this round",
+    "2. What was built, and why each step is the smallest correct one",
+    "3. The measurement",
+    "4. What this does not claim",
+    "5. The plain answer to *\"why can't we just give it the actions once?\"*",
+    "6. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_LOOP_WAS_OPEN_AT_THE_LIVE_ENTRY_20261112_V1.md",
+   "sha256": "7044dae5f526a6b632c6b179db56b47827ff56738fb7aed654db179448c9a6f0",
+   "summary": "**2026-11-12.** Base `d677e54e`. Branch `arena/91d09142-brain`. Round 26.",
+   "terms": {
+    "25": 4,
+    "about": 4,
+    "abstraction": 4,
+    "anything": 4,
+    "behaviour": 5,
+    "both": 5,
+    "bytes": 4,
+    "canonical": 6,
+    "capability": 4,
+    "corpus": 5,
+    "curve": 4,
+    "derived": 4,
+    "different": 4,
+    "domain": 8,
+    "each": 4,
+    "entry": 4,
+    "every": 4,
+    "family": 12,
+    "gate": 4,
+    "helper": 4,
+    "honest": 4,
+    "id": 4,
+    "library": 5,
+    "live": 15,
+    "loop": 5,
+    "measured": 4,
+    "measurement": 5,
+    "never-seen": 5,
+    "no": 17,
+    "not": 11,
+    "nothing": 4,
+    "now": 5,
+    "once": 4,
+    "one": 22,
+    "only": 4,
+    "organ": 5,
+    "organs": 7,
+    "path": 9,
+    "probe": 6,
+    "program": 5,
+    "programs": 5,
+    "refused": 5,
+    "replay": 7,
+    "round": 9,
+    "same": 5,
+    "tests": 7,
+    "three": 8,
+    "two": 5
+   },
+   "title": "The loop was open at the live entry",
+   "title_terms": [
+    "entry",
+    "live",
+    "loop",
+    "open"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5430,
    "headings": [
     "The twelve-entry menu was deciding which functions exist",
@@ -73279,10 +73353,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1169,
+  "included_source_count": 1170,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "80a5c9ab8eec98c38e263eec07a64787ce3c5f6e1f051835652167bd3bc05d9a"
+  "source_tree_digest": "9bd2bd5bb76720370d20f1029fd501279a7e2c377dbeaef6ed87ca168413dafd"
  },
  "research_index": [
   {
@@ -226397,6 +226471,30 @@
     "live_brain_heartbeat_20261015_v1": 1,
     "no_continuous_measurement_exists__the_one_entry_was_measured_once_in_a_sandbox_that_cannot_run_22_of_66_tools__nothing_turns_red_when_a_capability_stops_working": 1,
     "the_live_brain_is_re_measured_on_fresh_goals_every_day_on_the_public_runner_and_any_regression_is_visible_within_one_day__twelve_in_scope_fresh_goal_families_plus_out_of_scope_measured__one_real_library_limit_found_and_fail_closed_cbor_float_truncation__zero_credit": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LIVE_COMPOUNDING_LOOP_CLOSED_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a5a96ff99de2ded5a12109438070d33eb92bcfec4dbf039a5a6ff765b47c59f5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "closed": 1,
+    "compounding": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "live": 1,
+    "live_compounding_loop_closed_20261112_v1": 1,
+    "live_entry_domain_derivation_with_unchanged_gates": 1,
+    "loop": 1,
+    "one_more_measured_path_by_which_experience_compounds_outside_a_test_harness__zero_capability_credit__zero_terminal_credit__no_family_flipped__cross_kind_compounding_stays_the_pinned_negative": 1,
+    "the_compression_loop_was_measured_only_with_a_human_supplied_probe_domain_and_never_through_the_live_entry_point__which_had_one_library_slot__no_domain__and_a_stratum_gate_that_excluded_the_family_it_was_built_for": 1,
     "v1": 1
    }
   },
