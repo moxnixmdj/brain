@@ -1929,7 +1929,12 @@ class AwakeAgencyDaemon:
         lessons: list[dict[str, Any]] = []
         promoted_workflows: list[str] = []
         r3_drain: dict[str, Any] = {"drained": 0, "pass": True, "shed_by_mortality": False}
-        r3_fixed_point: dict[str, Any] = {"converged": True, "fixed_point": True, "status": "IDLE_ALREADY_CONVERGED"}
+        r3_fixed_point: dict[str, Any] = {
+            "converged": True,
+            "fixed_point": True,
+            "rounds_executed": 0,
+            "status": "VERIFIED_R3_FIXED_POINT_REACHED" if self._r3_explicit else "IDLE_ALREADY_CONVERGED",
+        }
         speculative_outcome: Mapping[str, Any] | None = None
 
         def _awake_perform(work: M.Work, _c: Any) -> dict[str, Any]:

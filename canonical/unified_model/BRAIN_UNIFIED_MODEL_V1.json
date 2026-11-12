@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 384,
+  "knowledge_documents": 385,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6779,
+  "research_index_records": 6781,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8eae99c84fa030cab463ecc098744caad76812d174da4dd24f3fda82051e0343"
+  "value": "ba9c8a773824dc878da4d9b96d672c87ec70d123318293f0d892f8bf82464bb1"
  },
  "engines": [
   {
@@ -52951,7 +52951,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 15251,
+   "bytes": 15899,
    "headings": [
     "One try covers a fraction",
     "1. The measurement nobody had read as a dosage",
@@ -52962,14 +52962,15 @@
     "6. What is real, what is not",
     "7. The sentient-creature question, directly",
     "8. The smartest path, in order",
-    "9. Receipts"
+    "9. The record is a snapshot, not a standing claim",
+    "10. Receipts"
    ],
    "kind": "DOCUMENT",
    "path": "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md",
-   "sha256": "eb89c991f3c87deaa838c76daa1c01951132fe190c6f42c15a05aaaa0b0093d8",
+   "sha256": "bd2ef94107f62359619c82b915819a76c6dda82ae2091bcfca83281ebd9f0ca6",
    "summary": "**2026-11-12 · branch `arena/7aa1248a-brain` · authority NONE · measurement only**",
    "terms": {
-    "10": 5,
+    "10": 6,
     "15": 15,
     "440": 8,
     "50": 7,
@@ -52983,12 +52984,12 @@
     "arxiv": 8,
     "askings": 11,
     "change": 10,
+    "changed": 7,
     "changes": 13,
-    "claim": 6,
+    "claim": 7,
     "code": 7,
     "coding": 9,
     "coverage": 9,
-    "current": 6,
     "demonstration": 12,
     "developers": 6,
     "every": 6,
@@ -53000,7 +53001,7 @@
     "model": 7,
     "most": 8,
     "no": 20,
-    "not": 46,
+    "not": 49,
     "one": 28,
     "only": 7,
     "operator": 13,
@@ -53010,9 +53011,9 @@
     "pp": 7,
     "precision": 10,
     "real": 8,
-    "record": 6,
+    "record": 16,
     "right": 6,
-    "run": 6,
+    "run": 12,
     "same": 7,
     "second": 10,
     "tests": 7,
@@ -61373,6 +61374,85 @@
    "title_terms": [
     "concept",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 9221,
+   "headings": [
+    "Which demonstration you give is a decision; the tree has never separated it from the lottery around it",
+    "1. The thing nobody had asked",
+    "2. The decision, made from data available before any outcome",
+    "3. The correction this round is really about",
+    "4. What this says about the owner's plan, precisely",
+    "5. Reproduce",
+    "6. Instrument honesty, including where this round was wrong",
+    "7. What is next, ranked by measured value"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHICH_DEMONSTRATION_YOU_GIVE_IS_A_DECISION_20261112_V1.md",
+   "sha256": "50232c7d5883707d26eb080f976515f404fe9625c92462425eba64acbeef9c32",
+   "summary": "**2026-11-12.** Branch `arena/b8e07941-brain`, base `b52af360`. Authority **NONE** — producer-run sandbox measurement, `$0`, zero model calls in every result-bearing path, `truth.achieved` stays `false`, no capability registered, no family flipped.",
+   "terms": {
+    "0.00": 9,
+    "0.80": 4,
+    "0.81": 4,
+    "0.88": 4,
+    "0.89": 4,
+    "1.00": 8,
+    "15": 7,
+    "about": 4,
+    "against": 4,
+    "all": 5,
+    "answer": 4,
+    "arm": 13,
+    "best": 6,
+    "both": 5,
+    "candidate": 5,
+    "candidates": 6,
+    "canonical": 7,
+    "ceiling": 7,
+    "changes": 5,
+    "choice": 7,
+    "data": 5,
+    "demonstration": 6,
+    "every": 7,
+    "file": 9,
+    "first": 5,
+    "give": 5,
+    "honest": 5,
+    "learner": 5,
+    "most": 5,
+    "no": 11,
+    "not": 15,
+    "number": 6,
+    "one": 10,
+    "only": 6,
+    "other": 5,
+    "own": 6,
+    "path": 5,
+    "reach": 8,
+    "recorded": 5,
+    "reported": 5,
+    "round": 5,
+    "rule": 6,
+    "run": 9,
+    "same": 5,
+    "so": 6,
+    "spread": 6,
+    "strict": 8,
+    "tasks": 12
+   },
+   "title": "Which demonstration you give is a decision; the tree has never separated it from the lottery around it",
+   "title_terms": [
+    "around",
+    "decision",
+    "demonstration",
+    "give",
+    "lottery",
+    "never",
+    "separated",
+    "tree"
    ]
   },
   {
@@ -74598,10 +74678,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1186,
+  "included_source_count": 1187,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "cfff1d0c6342e9060db974a4d2e3ec216c6ddf429e302c5e8561ba6427832143"
+  "source_tree_digest": "8a7aab3dd4be4363767343fef0571d823cd9daffd014175f0f888922c77dad49"
  },
  "research_index": [
   {
@@ -155473,6 +155553,42 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_CHOICE_CEILING_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_CHOICE_CEILING_20261112_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+   "sha256": "7f0c4a5edd5ea25477611407ada3eda3b569218ccd395b9af8598e8b7e5a554c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "ceiling": 1,
+    "choice": 1,
+    "demonstration": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DEMONSTRATION_CHOICE_STRICT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DEMONSTRATION_CHOICE_STRICT_20261112_V1.json",
+   "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+   "sha256": "87ea21c13e28ba9828a4aaf3c19bf8bc9705db7cf55279c56eaa442e4e1d83a8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "choice": 1,
+    "demonstration": 1,
+    "strict": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/DEONTIC_POLICY_ADEQUACY_AUTH_SPRITE_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -231806,30 +231922,6 @@
    }
   },
   {
-   "action_id": "THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_CHROOT_RAN_A_PYTHON_THAT_WAS_NOT_IN_IT_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f2fb6097c85d090b364b7fb236263d349e260345d34c1a11eedd968b9d29a6f6",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "chroot": 1,
-    "every_confined_execution_died_when_the_harness_ran_under_a_venv_because_confine_v1_spawned_sys_executable_into_a_chroot_that_only_mounts_usr_bin_lib_lib64_so_the_helpers_own_post_chroot_program_spawn_raised_filenotfound_error_before_any_program_line_ran_and_the_receipt_read_like_the_taught_program_failed": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "not": 1,
-    "port_the_brokers_chroot_visible_interpreter_rule_into_confine_v1_at_the_helper_launch_and_pin_both_ends_the_unit_pin_on_the_launch_argv_and_the_front_door_teach_apply_integration_pin_under_the_venv_that_failed_on_base": 1,
-    "python": 1,
-    "ran": 1,
-    "the_chroot_ran_a_python_that_was_not_in_it_20261112_v1": 1,
-    "the_harness_fault_class_that_impersonates_a_program_failure_is_closed_at_the_confinement_launcher_and_measured_at_both_ends__the_one_shot_loop_has_a_failable_pin_through_the_production_door__three_candidate_instruments_were_killed_by_measurement_before_code__zero_spend__no_benchmark_row_moved__truth_achieved_stays_false": 1,
-    "v1": 1
-   }
-  },
-  {
    "action_id": "THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -231940,6 +232032,31 @@
     "synthesizer": 1,
     "the_creature_can_reach_its_own_synthesizer_20261104_v1": 1,
     "the_previous_round_hardcoded_the_shape_of_the_answer_and_only_computed_a_parameter_inside_it_so_a_periodic_function_with_an_arbitrary_block_was_refused_while_the_round_reported_general_operator_growth": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1a215b5844c3fb134d72cf208b3b35fdc1a9fe168e03b45b7c7c5b638a41f158",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "chosen": 1,
+    "decision": 1,
+    "demonstration": 1,
+    "every_prior_round_of_this_question_measured_how_many_demonstrations_are_given_and_none_measured_which_one_is_given__the_recorded_run_already_contains_a_0_to_100_in_100_spread_within_a_single_task_and_it_was_read_as_noise": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lottery": 1,
+    "measure_which_demonstration_to_choose_from_data_available_before_any_outcome_and_report_the_honest_capture": 1,
+    "not": 1,
+    "the_demonstration_chosen_is_a_decision_not_a_lottery_20261112_v1": 1,
+    "the_tree_can_say_whether_picking_the_demonstration_is_a_real_decision_or_a_lottery__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "v1": 1
    }
   },
@@ -252003,11 +252120,10 @@
    "imported_by_count": 2,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confine_v1.py",
-   "sha256": "a9b944feb840b8d513356a85ce391be6ede86d7fd2b8d04b84abd60559cc0961",
+   "sha256": "f12d50da3b587ad41fb99ff23cdab370f293174b29408314a39c90abdc804682",
    "summary": "Candidate namespace/chroot launcher; not an admitted security boundary.",
-   "symbol_count": 4,
+   "symbol_count": 3,
    "symbols": [
-    "_python_in_chroot",
     "available",
     "run",
     "run_readonly"
@@ -252022,7 +252138,6 @@
     "launcher": 1,
     "namespace": 1,
     "not": 1,
-    "python_in_chroot": 1,
     "run": 1,
     "run_readonly": 1,
     "security": 1,
