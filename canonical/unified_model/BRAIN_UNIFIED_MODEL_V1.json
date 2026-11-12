@@ -27078,7 +27078,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_source_add_parameter.py",
-    "source_sha256": "5f73aaa5acb00ca0bedee1a967f7fbdb9325076aaf30faf1ed3595569bd7190d",
+    "source_sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c",
     "source_type": "brain_native_deterministic_composition"
    },
    "provides": [
@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 306,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6705,
+  "research_index_records": 6706,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "646b59353a8658a6fc2d6553f52ec29e89f09df57126e8d1db423cd1b8cf7e1d"
+  "value": "f4aa1cb293d8146670f61b76373ee14ce1c2dafedf69655270aae9920ec3ae06"
  },
  "engines": [
   {
@@ -32248,7 +32248,7 @@
     },
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "5f73aaa5acb00ca0bedee1a967f7fbdb9325076aaf30faf1ed3595569bd7190d"
+    "sha256": "ac274c5921a4f321d22d1f79411d07ec62d869f57ed8e94ff0909e168c04067c"
    },
    "canonical/runtime/bound_capabilities/python_source_complexity.py": {
     "defaulted_keys": {},
@@ -68605,7 +68605,7 @@
   "included_source_count": 1108,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "68d187a5ddb8e93edc8741f0e79ff067c0b2f089b908b84fbaf6308f09364fc6"
+  "source_tree_digest": "0d9e8abb42b3fd17b52c40171bfe94b764739c84f71f606b385668cc28c3417e"
  },
  "research_index": [
   {
@@ -211636,6 +211636,33 @@
    }
   },
   {
+   "action_id": "AN_EDIT_IS_WORKED_OUT_FROM_AN_EXAMPLE_AND_A_STATED_DEFAULT_IS_WRITTEN_AS_STATED_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/AN_EDIT_IS_WORKED_OUT_FROM_AN_EXAMPLE_AND_A_STATED_DEFAULT_IS_WRITTEN_AS_STATED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_EDIT_IS_WORKED_OUT_FROM_AN_EXAMPLE_AND_A_STATED_DEFAULT_IS_WRITTEN_AS_STATED_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d2723845541faa8bb5679984b34c794fb161306c9b69973f8bddeb544086ad92",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "an_edit_is_worked_out_from_an_example_and_a_stated_default_is_written_as_stated_20261112_v1": 1,
+    "default": 1,
+    "edit": 1,
+    "every_action_the_front_door_can_do_was_written_down_by_a_writer__showing_it_an_edit_taught_it_nothing__and_add_a_parameter_answered_pass_with_the_default_none_when_the_sentence_stated_another_default": 1,
+    "example": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "one_taught_action_whose_rule_comes_from_the_example_and_not_from_a_writer__eleven_wrong_passes_of_add_a_parameter_become_right_or_refused__no_request_that_passed_is_lost": 1,
+    "out": 1,
+    "stated": 2,
+    "teach_one_self_contained_program_that_works_an_edit_out_from_a_before_and_after_pair_of_files_through_the_existing_compiler_and_sandbox__and_adapt_the_add_parameter_binding_so_a_stated_default_is_written_as_stated_or_the_request_is_refused": 1,
+    "v1": 1,
+    "worked": 1,
+    "written": 1
+   }
+  },
+  {
    "action_id": "AN_EDIT_REQUEST_MUST_RUN_THE_EDIT_CAPABILITY_NOT_A_READ_ONLY_CENSUS_V1_20261027_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -247548,10 +247575,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/declared_input_derivation_v1.py",
-   "sha256": "6fb4f26ac2e1b9a0154d0de7801aca38fbbe2a62a8ee6457ceed9b540c242727",
+   "sha256": "0813cc961b1e2d839285c2f019c8feb50dd8f6ae443efbcb1bc431a734cf2753",
    "summary": "Declared input derivation -- bind human sentences to typed capability contracts.",
-   "symbol_count": 21,
+   "symbol_count": 23,
    "symbols": [
+    "_as_python_literal",
     "_defining_module",
     "_derive_edits",
     "_derive_swe_kernel_inputs",
@@ -247572,10 +247600,12 @@
     "is_swe_request",
     "stated_existing_files",
     "stated_git_operation_verb",
-    "stated_git_operations"
+    "stated_git_operations",
+    "stated_parameter_default"
    ],
    "terms": {
     "adapter_defaulted_keys": 1,
+    "as_python_literal": 1,
     "bind": 1,
     "binding_view": 1,
     "capability": 1,
@@ -247603,6 +247633,7 @@
     "stated_existing_files": 1,
     "stated_git_operation_verb": 1,
     "stated_git_operations": 1,
+    "stated_parameter_default": 1,
     "tree_of": 1,
     "typed": 1,
     "v1": 1

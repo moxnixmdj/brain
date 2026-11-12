@@ -244,6 +244,15 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
             and sub.value.id in candidate_owners
             and sub.attr == param_name
         ]
+        if attr_hits and not (isinstance(def_ast, ast.Constant) and def_ast.value is None):
+            # The body reads <owner>.<param>.  With a default of None that read becomes
+            # "(param if param is not None else owner.param)", and every existing call computes what
+            # it computed before.  No such form exists for any other default: the read used to be
+            # replaced by the bare parameter, so a call that omits the argument silently got the
+            # default instead of the attribute (measured 2026-11-12: "with a default of 3" turned
+            # ``item.price * item.qty`` into ``item.price * qty`` with ``qty=3``, and answered PASS).
+            raise RuntimeError("DEFAULT_OTHER_THAN_NONE_WOULD_CHANGE_EXISTING_CALLS:%s.%s"
+                               % (attr_hits[0].value.id, param_name))
         if attr_hits:
             lines_pre = working_src.splitlines(keepends=True)
             pos_pre = [0]
@@ -258,11 +267,7 @@ def run(args: Mapping[str, Any], root: str | pathlib.Path) -> dict[str, Any]:
                 for h in attr_hits
             )
             for s_off, e_off, owner_id in reversed(spans):
-                override_expr = (
-                    f"({param_name} if {param_name} is not None else {owner_id}.{param_name})"
-                    if isinstance(def_ast, ast.Constant) and def_ast.value is None
-                    else param_name
-                )
+                override_expr = f"({param_name} if {param_name} is not None else {owner_id}.{param_name})"
                 working_src = working_src[:s_off] + override_expr + working_src[e_off:]
                 attr_rewrites += 1
 
