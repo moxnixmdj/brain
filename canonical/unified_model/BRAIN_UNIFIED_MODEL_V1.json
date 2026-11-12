@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 381,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6777,
+  "research_index_records": 6778,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a72ed3adf7fb46c0abb2c0ce36d93dd6a5a072cc5d195ef6fc79272a5d13a7f2"
+  "value": "340a40a8e9bb4247ce5beaab79739ae61b992ba2f5dc9595467a68bb415739e9"
  },
  "engines": [
   {
@@ -190997,6 +190997,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_SMALL_PASSING_PATCH_PLACE_RECORD_V1",
+   "sha256": "261fd0c1ce585788c410f5e70f5094603c50a25c342b07a89c2c866cd3d5083c",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "passing": 1,
+    "patch": 1,
+    "place": 1,
+    "small": 1,
+    "swebench": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/SOFTWARE_SEMANTIC_ACCEPTANCE_SHARED_MINIMUM_COVER_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -226141,7 +226162,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "dd287cbe95599fe408d979a6fbd3af89759e88aa591aa9345d1aa5019f8a2985",
+   "sha256": "1f96797e854e13e97f6022839755eac3f2c790f4537947806515240a8941261f",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -231583,7 +231604,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a9efcbf60a231df4985aa8ae3ab581145d4c5820ef5af7b8c29903ba629d08aa",
+   "sha256": "608e663e9e267ad625f2c480becc8528abe8cc98ffb763ded2d70a62e7723dd1",
    "status": "",
    "terms": {
     "20261112": 1,
