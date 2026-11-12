@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 396,
+  "knowledge_documents": 397,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6790,
+  "research_index_records": 6792,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3767898839f9cc5dda48a87854b95b91b7c89d0696dca355b69c348a84a52771"
+  "value": "7856a8cd1ddd5d92c30861d7b4e2310711cb48a9cfa3d1a97df54857e5b6276b"
  },
  "engines": [
   {
@@ -45951,6 +45951,85 @@
     "showing",
     "teacher",
     "untangles"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 13129,
+   "headings": [
+    "A SKILL'S SCOPE IS ITS SYNTAX, NOT ITS CLASS",
+    "0. The verdict, in one line",
+    "1. What was measured",
+    "2. The evidence unit is the actual bug",
+    "3. The label is earnable — otherwise 0-of-5 is a constant",
+    "-> boundary IDENTIFIED, required == [\"pytest\"], label GENERALIZING",
+    "4. Why this is the smartest route to Problem 2, and the routes I killed",
+    "What November 2026 says, independently",
+    "5. Am I right or wrong?",
+    "6. Next, ranked",
+    "7. Reproduce"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.md",
+   "sha256": "d0368e06d8757af27bc879b6965bfd270abdcc6cebc7aa14f6f217279fff5b6e",
+   "summary": "**Date:** 2026-11-12 · **Branch:** `arena/643fffe7-brain` · **Base:** `f20945b20e` **Authority: NONE.** Sandbox measurement, not independent verification. **Cost:** $0 · **Model calls in the producer path:** 0",
+   "terms": {
+    "10": 5,
+    "2026": 5,
+    "all": 5,
+    "arxiv": 5,
+    "because": 10,
+    "but": 6,
+    "caller": 5,
+    "canonical": 6,
+    "change": 5,
+    "class": 9,
+    "corpus": 4,
+    "declared": 5,
+    "decorative": 5,
+    "each": 8,
+    "every": 11,
+    "evidence": 6,
+    "exactly": 4,
+    "failure": 5,
+    "false": 4,
+    "fields": 8,
+    "generalization": 6,
+    "generalizing": 4,
+    "killed": 6,
+    "measured": 8,
+    "no": 13,
+    "not": 28,
+    "nothing": 7,
+    "one": 21,
+    "only": 11,
+    "own": 5,
+    "owner": 5,
+    "probes": 7,
+    "problem": 6,
+    "pytest": 7,
+    "python": 7,
+    "record": 8,
+    "rule": 12,
+    "same": 8,
+    "scope": 5,
+    "shipped": 6,
+    "skill": 15,
+    "skills": 9,
+    "so": 11,
+    "state": 16,
+    "still": 5,
+    "succeeded": 5,
+    "tree": 10,
+    "two": 7
+   },
+   "title": "A SKILL'S SCOPE IS ITS SYNTAX, NOT ITS CLASS",
+   "title_terms": [
+    "class",
+    "not",
+    "scope",
+    "skill",
+    "syntax"
    ]
   },
   {
@@ -75561,10 +75640,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1198,
+  "included_source_count": 1199,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "040ec4500d8e517df15e4ede7e740549a9da4a3eff0661828eec6307e68d4753"
+  "source_tree_digest": "c4be37174449e6f978fec2ce3cfe3752520dab43e29fcdad831e86df64820e4f"
  },
  "research_index": [
   {
@@ -192282,6 +192361,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_SKILL_SCOPE_LEDGER_V1",
+   "sha256": "a3ac984b9d63d28a73e207d1ab0c4c151b456ef8722b429d18e9c46fbbb7378e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "ledger": 1,
+    "scope": 1,
+    "skill": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "",
    "id": "research:canonical/verification/SMALL_PASSING_PATCH_PLACE_SWEBENCH_VERIFIED_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -224705,6 +224802,31 @@
    }
   },
   {
+   "action_id": "A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SKILLS_SCOPE_IS_ITS_SYNTAX_NOT_ITS_CLASS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "38770032f94fb56376c9af04dc264e95d6370b0eb6e01fa9017a15ead0fd7ef9",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_skills_scope_is_its_syntax_not_its_class_20261112_v1": 1,
+    "class": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measure_which_declared_fields_actually_constrain_where_a_skill_applies_and_label_every_skill_by_the_tree_s_own_applicability_law_rather_than_build_a_new_learner": 1,
+    "not": 1,
+    "scope": 1,
+    "skills": 1,
+    "syntax": 1,
+    "the_skill_store_records_successes_as_a_count_without_the_state_they_happened_in_so_no_scope_claim_can_be_identified_and_the_fields_that_name_a_skill_s_class_constrain_nothing_which_leaves_exact_recall_wearing_the_name_of_generalization": 1,
+    "the_tree_can_distinguish_exact_recall_from_generalization_in_its_own_skill_store_and_can_name_the_one_missing_evidence_unit__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -233055,7 +233177,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "be7c9bfe4b14048d865a77e7a37bb6dce979c0c6b762183214e1febc4fff3826",
+   "sha256": "4a3f3bc7dc4527c4002044873a210cfc2464af17bb9f5934c1f0f3d2ca56f0d4",
    "status": "",
    "terms": {
     "20261112": 1,

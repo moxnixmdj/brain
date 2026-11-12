@@ -1,0 +1,232 @@
+{
+ "authority": "NONE__SANDBOX_MEASUREMENT_NOT_INDEPENDENT_VERIFICATION",
+ "carrier": "SANDBOX",
+ "correction_to_the_owner_framing": "PROBLEM_2_IS_NOT_A_RETRIEVAL_UPGRADE_FROM_EXACT_MATCH_TO_SIMILAR_MATCH__IT_IS_AN_ADMISSIBILITY_PROPERTY__A_RULE_GENERALIZES_ONLY_WHEN_SOMETHING_CAN_CONTRADICT_IT_IN_A_NAMED_STATE__THE_STORE_RECORDS_SUCCESSES_AS_A_COUNT_SO_NOTHING_CAN",
+ "date": "2026-11-12",
+ "declares_nothing_about": "WHETHER_A_REPAIR_IS_CORRECT__NO_TEST_WAS_RUN_AND_NO_PROJECT_SEMANTICS_WERE_CONSULTED__A_REFUSAL_MEANS_THE_TOKENS_DID_NOT_MATCH_NOTHING_MORE",
+ "executes_no_declared_command": true,
+ "how_reproduced": [
+  "python3 canonical/swe_kernel/skill_scope_ledger_v1.py --json",
+  "python3 -m pytest -q canonical/tests/test_skill_scope_ledger_v1.py"
+ ],
+ "measured_at_git_head": "f20945b20ecd7383fd4f0ba5294fc3c2cc2d9c8b",
+ "measured_on": "593abeb00d5a90d8d4e350a6cd15ec436e42467a",
+ "negative_result_recorded": "THE_EXPECTED_OVER_APPLICATION_WAS_NOT_FOUND__EACH_RULE_REFUSED_THE_OTHER_SEVEN_PROBES_INCLUDING_CROSS_LANGUAGE_TEXT_AND_THE_NEAR_MISS__THE_REFUSALS_COME_FROM_THE_TOKEN_MATCHER_NOT_FROM_THE_DECLARED_CLASS_WHICH_IS_THE_POINT__NARROWNESS_IS_NOT_A_SCOPE",
+ "probe_corpus_declared_before_measurement": {
+  "empty_source": "",
+  "go_var_map": "var counts map[string]int\n",
+  "near_miss_one_token": "def f(x, y):\n    return x + y * y\n",
+  "python_return_add_mul": "def f(x, y):\n    return x + x * y\n",
+  "python_return_call_sub": "return f(a, b) - c\n",
+  "rust_range_len": "for i in 0..=v.len() {\n",
+  "ts_return_member": "function g(a){ return a.b; }\n",
+  "unrelated_source": "import os\nprint(os.getcwd())\n"
+ },
+ "producer": "canonical/swe_kernel/skill_scope_ledger_v1.py",
+ "reading": [
+  "SIX_OF_EIGHT_DECLARED_FIELDS_ARE_DECORATIVE_ON_ALL_FIVE_SHIPPED_SKILLS__LANGUAGE_ERROR_CLASS_DOMAIN_HOLE_COUNT_SKELETON_FP_SKILL_ID",
+  "ONLY_PATTERN_TOKENS_AND_REPLACEMENT_TOKENS_CONSTRAIN_BEHAVIOUR__THE_POSITIVE_CONTROL_HELD_IN_THE_SAME_RUN_ON_THE_SAME_CORPUS",
+  "EVERY_SKILL_CARRIES_verified_hits_1_AND_ZERO_STATES_SO applicability_v1_RETURNS_UNDETERMINED_FOR_FIVE_OF_FIVE",
+  "ZERO_OF_FIVE_MAY_BE_CALLED_GENERALIZING_UNDER_THE_TREE_S_OWN_LAW__A_CALLER_MAY_ONLY_WITHHOLD_A_PLAN_ON_IDENTIFIED",
+  "THE_LABEL_IS_EARNABLE__TWO_SUCCESSES_SHARING_ONE_FACT_PLUS_A_FAILURE_IN_EACH_STATE_LACKING_IT_YIELDS_IDENTIFIED",
+  "THE_PRODUCTION_CALLER_FILTERS_BY_LOOKUP_KEY_SO_THE_CLASS_FIELDS_ARE_THE_CALLER_S_KEY_AND_INERT_IN_THE_RULE"
+ ],
+ "runtime_seconds": 0.07,
+ "schema": "PROJECT_BRAIN_SKILL_SCOPE_LEDGER_V1",
+ "skills": [
+  {
+   "boundary_reason": "NO_EVIDENCE",
+   "boundary_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+   "contrasting_failures_recorded": 0,
+   "declared_class": {
+    "domain": "swe_code_repair",
+    "error_class": "python_test_repair",
+    "language": "python"
+   },
+   "decorative_fields": [
+    "domain",
+    "error_class",
+    "hole_count",
+    "language",
+    "skeleton_fp",
+    "skill_id"
+   ],
+   "enforcing_fields": [
+    "pattern_tokens",
+    "replacement_tokens"
+   ],
+   "evidence_unit": "A_COUNT_IS_NOT_A_STATE__SUCCESSES_RECORDED_WITHOUT_THE_STATE_THEY_HAPPENED_IN",
+   "fires_on": [
+    "python_return_add_mul"
+   ],
+   "label": "EXACT_MATCH_ONLY__SCOPE_NOT_IDENTIFIED",
+   "positive_control_held": true,
+   "probes_run": 8,
+   "required": null,
+   "skill_id": "skill_5b30b7cd667d062d",
+   "successes_recorded": 1,
+   "survivor_count": 0,
+   "usable_evidence_pairs": 0
+  },
+  {
+   "boundary_reason": "NO_EVIDENCE",
+   "boundary_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+   "contrasting_failures_recorded": 0,
+   "declared_class": {
+    "domain": "swe_code_repair",
+    "error_class": "python_test_repair",
+    "language": "python"
+   },
+   "decorative_fields": [
+    "domain",
+    "error_class",
+    "hole_count",
+    "language",
+    "skeleton_fp",
+    "skill_id"
+   ],
+   "enforcing_fields": [
+    "pattern_tokens",
+    "replacement_tokens"
+   ],
+   "evidence_unit": "A_COUNT_IS_NOT_A_STATE__SUCCESSES_RECORDED_WITHOUT_THE_STATE_THEY_HAPPENED_IN",
+   "fires_on": [
+    "python_return_call_sub"
+   ],
+   "label": "EXACT_MATCH_ONLY__SCOPE_NOT_IDENTIFIED",
+   "positive_control_held": true,
+   "probes_run": 8,
+   "required": null,
+   "skill_id": "skill_5e717ccbddc250f9",
+   "successes_recorded": 1,
+   "survivor_count": 0,
+   "usable_evidence_pairs": 0
+  },
+  {
+   "boundary_reason": "NO_EVIDENCE",
+   "boundary_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+   "contrasting_failures_recorded": 0,
+   "declared_class": {
+    "domain": "swe_code_repair",
+    "error_class": "go_repair",
+    "language": "go"
+   },
+   "decorative_fields": [
+    "domain",
+    "error_class",
+    "hole_count",
+    "language",
+    "skeleton_fp",
+    "skill_id"
+   ],
+   "enforcing_fields": [
+    "pattern_tokens",
+    "replacement_tokens"
+   ],
+   "evidence_unit": "A_COUNT_IS_NOT_A_STATE__SUCCESSES_RECORDED_WITHOUT_THE_STATE_THEY_HAPPENED_IN",
+   "fires_on": [
+    "go_var_map"
+   ],
+   "label": "EXACT_MATCH_ONLY__SCOPE_NOT_IDENTIFIED",
+   "positive_control_held": true,
+   "probes_run": 8,
+   "required": null,
+   "skill_id": "skill_72276765c53ffea4",
+   "successes_recorded": 1,
+   "survivor_count": 0,
+   "usable_evidence_pairs": 0
+  },
+  {
+   "boundary_reason": "NO_EVIDENCE",
+   "boundary_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+   "contrasting_failures_recorded": 0,
+   "declared_class": {
+    "domain": "swe_code_repair",
+    "error_class": "ts_repair",
+    "language": "typescript"
+   },
+   "decorative_fields": [
+    "domain",
+    "error_class",
+    "hole_count",
+    "language",
+    "skeleton_fp",
+    "skill_id"
+   ],
+   "enforcing_fields": [
+    "pattern_tokens",
+    "replacement_tokens"
+   ],
+   "evidence_unit": "A_COUNT_IS_NOT_A_STATE__SUCCESSES_RECORDED_WITHOUT_THE_STATE_THEY_HAPPENED_IN",
+   "fires_on": [
+    "ts_return_member"
+   ],
+   "label": "EXACT_MATCH_ONLY__SCOPE_NOT_IDENTIFIED",
+   "positive_control_held": true,
+   "probes_run": 8,
+   "required": null,
+   "skill_id": "skill_9df30abeb867023c",
+   "successes_recorded": 1,
+   "survivor_count": 0,
+   "usable_evidence_pairs": 0
+  },
+  {
+   "boundary_reason": "NO_EVIDENCE",
+   "boundary_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+   "contrasting_failures_recorded": 0,
+   "declared_class": {
+    "domain": "swe_code_repair",
+    "error_class": "rust_repair",
+    "language": "rust"
+   },
+   "decorative_fields": [
+    "domain",
+    "error_class",
+    "hole_count",
+    "language",
+    "skeleton_fp",
+    "skill_id"
+   ],
+   "enforcing_fields": [
+    "pattern_tokens",
+    "replacement_tokens"
+   ],
+   "evidence_unit": "A_COUNT_IS_NOT_A_STATE__SUCCESSES_RECORDED_WITHOUT_THE_STATE_THEY_HAPPENED_IN",
+   "fires_on": [
+    "rust_range_len"
+   ],
+   "label": "EXACT_MATCH_ONLY__SCOPE_NOT_IDENTIFIED",
+   "positive_control_held": true,
+   "probes_run": 8,
+   "required": null,
+   "skill_id": "skill_f8b41c7e705cda49",
+   "successes_recorded": 1,
+   "survivor_count": 0,
+   "usable_evidence_pairs": 0
+  }
+ ],
+ "summary": {
+  "contrasting_failures_recorded": 0,
+  "evidence_is_a_count_without_states": 5,
+  "fields_decorative_on_every_measured_skill": [
+   "domain",
+   "error_class",
+   "hole_count",
+   "language",
+   "skeleton_fp",
+   "skill_id"
+  ],
+  "fields_enforcing_on_every_measured_skill": [
+   "pattern_tokens",
+   "replacement_tokens"
+  ],
+  "labelled_exact_match_only": 5,
+  "labelled_generalizing": 0,
+  "positive_control_held_on_all": true,
+  "probes_in_corpus": 8,
+  "scope_identified": 0,
+  "skills_measured": 5
+ },
+ "what_this_decides": "WHICH_DECLARED_FIELDS_CONSTRAIN_WHERE_A_SKILL_APPLIES_AND_WHETHER_ANY_SKILL_MAY_BE_CALLED_GENERALIZING_UNDER_THE_TREE_S_OWN_LAW",
+ "writes_nothing": true
+}
