@@ -1,0 +1,453 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "NINE_BLIND_FACTS_NOW_DECIDED_20261112_V1",
+ "action_intent_id": "NINE_BLIND_FACTS_NOW_DECIDED_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "a87ab4bd3497a8d74ba82607ebdb204fed93203b",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "A try is only informative if the machine can tell whether it FAILED BECAUSE IT CANNOT ACT HERE. Round 3's audit found facts where the registry could not even ask that question: BLIND -- no capability produces the fact, no sensor reads it -- so capabilities held by them were auto-refused with no evidence. This round gives world_probe_v1 honest instruments for nine of the ten remaining blind facts: the git binary for git.repository.available (the operate adapter shells out to it); a TCP probe scoped to pypi.org for the two pypi facts (the same instrument convention as network.http.available: it decides the ROUTE, never 'may I fetch'); the network route for structured.release_claim.available (the claim arrives over HTTP; content stays the adapter's job); and the raster-chart subsystem (PIL importable AND tesseract on PATH -- the imports the adapters actually make, the binary they actually call) for the five chart facts. source.candidate.provenance.verified STAYS BLIND on purpose: nothing produces it and a file-existence scan would fabricate 'verified'. MEASURED: fact_classes {PROVIDED 100, SENSED 24, BLIND 1}; 143 of 145 capabilities fully decidable (was 135); at the front door the three true-premise capabilities no longer reject with PRECONDITION_NOT_TRUE_OF_WORLD (git -> ACTION_FAILED past the premise gate, pypi -> ACTION_FAILED, web.release -> AMBIGUOUS) and the four chart capabilities reject with NAMED missing dependencies instead of an undecidable shrug. First confirmatory run missed 2 of 10 predictions (chart.question.* does not END with .question, so the suffix strip could not reach 'chart'); the fix was explicit reviewable subject rows, not a suffix hack. Also fixes a PRE-EXISTING stale-pin failure on main (the tree measured BLIND 10/SENSED 15 while the test pinned 11/14). Two further test failures are reproduced on the clean base with this round stashed and recorded as pre-existing environment-dependent fixtures, out of scope. Placement per the corrected ordering (A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION): prerequisite layer, NOT the gain item -- binding (54 capabilities, 37%) remains the dominant measured blocker and is the named next round.",
+ "selected_route": "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+ "causal_blocker": "NINE_PRECONDITION_FACTS_WERE_BLIND__NO_CAPABILITY_PRODUCED_THEM_AND_NO_SENSOR_READ_THEM__SO_APPLICABILITY_COULD_NOT_BE_ASKED_AND_THE_FRONT_DOOR_AUTO_REFUSED_WITH_NO_EVIDENCE",
+ "expected_parent_change": "APPLICABILITY_IS_ASKABLE_FOR_143_OF_145_CAPABILITIES__NINE_FACTS_ANSWERED_BY_HONEST_INSTRUMENTS_AND_ONE_LEFT_BLIND_BECAUSE_SENSING_IT_WOULD_FABRICATE_VERIFICATION__BINDING_54_REMAINS_THE_DOMINANT_MEASURED_BLOCKER__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "expected_parent_frontier_change": "APPLICABILITY_IS_ASKABLE_FOR_143_OF_145_CAPABILITIES__NINE_FACTS_ANSWERED_BY_HONEST_INSTRUMENTS_AND_ONE_LEFT_BLIND_BECAUSE_SENSING_IT_WOULD_FABRICATE_VERIFICATION__BINDING_54_REMAINS_THE_DOMINANT_MEASURED_BLOCKER__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NINE_PRECONDITION_FACTS_WERE_BLIND__NO_CAPABILITY_PRODUCED_THEM_AND_NO_SENSOR_READ_THEM__SO_APPLICABILITY_COULD_NOT_BE_ASKED_AND_THE_FRONT_DOOR_AUTO_REFUSED_WITH_NO_EVIDENCE",
+ "falsification_condition": "A_SENSOR_ANSWERING_TRUE_WITHOUT_MEASURING_ITS_FACT__OR_A_FABRICATED_VERIFICATION_FOR_SOURCE_CANDIDATE_PROVENANCE_VERIFIED__OR_THE_REGISTRY_TOTALS_NOT_MATCHING_100_24_1__OR_A_PREMISE_TRUE_CAPABILITY_STILL_REJECTED_WITH_PRECONDITION_NOT_TRUE_OF_WORLD__OR_CHART_FACTS_ANSWERING_TRUE_ON_A_MACHINE_WITHOUT_PIL_AND_TESSERACT__OR_THE_ONE_SHOT_IDENTIFIABILITY_RECEIPTS_DRIFTING",
+ "stop_condition": "9_NEW_SENSOR_TESTS_PASS__REGISTRY_FACT_CLASSES_100_24_1__ONE_FACT_STAYS_BLIND_ON_PURPOSE__143_OF_145_CAPABILITIES_FULLY_DECIDABLE__3_CAPABILITIES_PAST_THE_PREMISE_GATE_AT_THE_FRONT_DOOR__STALE_PIN_FAILURE_ON_MAIN_FIXED__TWO_PRE_EXISTING_FAILURES_REPRODUCED_ON_THE_CLEAN_BASE_AND_RECORDED__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/world_probe_v1.py",
+   "canonical/tests/test_world_probe_senses_the_nine_blind_facts_v1.py",
+   "NINE_BLIND_FACTS_NOW_DECIDED_20261112_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_BLIND_PREMISE_CLOSURE_WAS_THE_HIGHEST_GAIN_WORK_ITEM__AND_THAT_A_FILE_EXISTENCE_SCAN_COULD_STAND_FOR_VERIFIED_PROVENANCE",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_a87ab4bd__FACT_CLASSES_100_24_1__143_OF_145_DECIDABLE__FRONT_DOOR_FATE_SHIFT_MEASURED_FOR_NINE_CAPABILITIES__PREDICTIONS_MISSED_2_OF_10_ON_RUN_1_CAUSE_FOUND_FIX_WAS_DATA"
+ },
+ "measured_effect": "FACT_CLASSES_100_24_1_BLIND_1__143_OF_145_FULLY_DECIDABLE__GIT_PYPI_RELEASE_CLAIM_ANSWER_TRUE_CHART_FIVE_ANSWER_FALSE_WITH_NAMED_MISSING_PIL_AND_TESSERACT__PROVENANCE_VERIFIED_STAYS_BLIND__FRONT_DOOR_THREE_CAPABILITIES_PAST_THE_PREMISE_GATE__STALE_PIN_FIXED__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "PREREQUISITE_LAYER_WIDENING_ON_THE_EXISTING_PERCEPTION_CAPABILITY__MEASURED_REGISTRY_AND_FRONT_DOOR_EFFECTS__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/world_probe_v1.py",
+  "what_a_success_teaches_20261112.py",
+  "A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md",
+  "canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "a87ab4bd3497a8d74ba82607ebdb204fed93203b",
+  "real_outcome": "NINE_BLIND_FACTS_DECIDED_BY_HONEST_SENSORS__ONE_FACT_LEFT_BLIND_ON_PURPOSE__143_OF_145_APPLICABILITY_ASKABLE__THREE_CAPABILITIES_PAST_THE_PREMISE_GATE_AT_THE_FRONT_DOOR",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether one try in each new environment teaches everything permanently. A try is only informative if the machine can tell whether it failed because it cannot act here. This round widens the set of facts the machine can ASK about that, from 135 to 143 of 145 capabilities, with instruments that answer yes or no and never guess.",
+   "proxy_goals_deleted": [
+    "counting a fabricated 'verified' from a file scan as a closed premise",
+    "treating an undecidable fact as a refusal with evidence",
+    "claiming the premise layer was the gain item after the corrected ordering measured binding at 54"
+   ],
+   "surviving_necessity": "Every declared precondition must be decidable by an honest instrument or honestly blind with the reason recorded; the front door must name what the machine lacks, not shrug."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/world_probe_v1.py (the one sensor; its _RUNTIME_KINDS/_subjects tables and network-route convention -- extended with data, not rewritten)",
+    "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json (the domain: 145 capabilities, 125 facts)",
+    "what_a_success_teaches_20261112.py section D (the measurement that names BLIND -- reused unchanged)",
+    "canonical/runtime/grounded_action_v1.py (the front door that consults the same sensor for PRECONDITION_NOT_TRUE_OF_WORLD -- reused unchanged)",
+    "A_PERFECT_ACTION_IS_NOT_AN_AVAILABLE_ACTION_20261112_V1.md (the corrected ordering this round honors)"
+   ],
+   "external_existing_routes_checked": [
+    "GroundAct (arXiv 2508.05614): agents drop 85-96% to 29-53% when feasibility depends on environmental state -- action grounding is the field's measured gap",
+    "Grounding Agent Memory (arXiv 2609.11060): environment-probing curation raises pass rate 39% to 73% -- probing the world is the accepted lever",
+    "Online tool grounding for IoT agents (arXiv 2610.25563): eligibility and availability checked explicitly before selection"
+   ],
+   "capability_work_deleted": [
+    "the auto-refusal of nine capabilities whose premises could not be asked",
+    "the stale pins that claimed BLIND 11 / SENSED 14 against a tree measuring 10/15",
+    "the implicit claim that chart availability was unknowable rather than measurable"
+   ],
+   "surviving_gap": "binding: 54 capabilities the front door identifies but cannot call with what a goal supplies; one honestly-blind fact with no producer; the chart subsystem absent on this machine (PIL, tesseract) and the sensors already measure that truth"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: a fact with no producer and no sensor is not false -- it is UNASKABLE, and the front door treats unaskable as refusal. The one fact left blind (source.candidate.provenance.verified) has a real producer-shaped hole: nothing in the source pipeline verifies candidate provenance, and pretending a file scan is verification would fabricate the answer.",
+   "delete_bypass_substitute_options": [
+    "DELETE the blind facts from the registry -- rejected, they are true requirements",
+    "BYPASS the premise check for blind facts -- rejected, that is how unsupported actions get executed",
+    "SUBSTITUTE a file-existence scan for provenance verification -- rejected, fabrication is worse than blindness"
+   ],
+   "surviving_causal_blocker": "binding: 54 capabilities cannot be called with what a goal supplies -- the dominant measured blocker, named by the corrected ordering and untouched this round"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Generalise the lifter to constant collections + discriminating-grid gates -- chosen: one rule, all machinery already measured, both families served",
+    "2. Hand-written keyed-table recogniser plus special-case lifter -- rejected: per-family machinery the general rule replaces",
+    "3. Crystallization-time emission -- killed by arithmetic (262 vs 179 bytes embedded) before implementation; needs a runtime-binding execution contract, an architectural decision",
+    "4. Model donor for body understanding -- rejected by law"
+   ],
+   "losing_routes_reason": "Special-casing duplicates what the general rule does; emission changes the execution contract of every downstream organ consumer for a win the replay path already delivers at the system level; a donor violates the ownership law.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through real execution: the never-seen organ and its replay run on held-out action ids including unknowns and type-hostile inputs; the vacuity gate is exercised by the numeric grid that must refuse; the first family's measured numbers (gain 67, armed-vs-cold prediction) are re-run as regression. The prediction was written before the confirmatory run; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-24 note's second-family negative -- superseded by this measurement",
+    "the round-24 next-step candidate 'crystallization-time emission' -- killed with recorded arithmetic, not deferred silently"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the world-model writer (reused unchanged as the second family's corpus source)",
+    "the round-23/24 admission, licensing, and replay machinery (reused unchanged)"
+   ],
+   "fresh_reuse_plan": "Organ-declared domain probes close the bridge's honest gap; perceptor/policy corpora are the same cheap measurement; the learning-to-learn benchmark re-run is the next cache-proof question."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving whether the mechanism generalises -- pinned by the second-family prediction test",
+    "re-arguing the crystallization arithmetic -- recorded in the result document with the numbers"
+   ],
+   "search_stop_decision": "Stop when the generalisation question is answered by measurement and the vacuity gate is symmetric across both gates. Third-family measurement and bridge probe metadata are new rounds with their own predictions.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+   "BINDING_REPAIR_FOR_54_CAPABILITIES_FIRST",
+   "FILE_SCAN_FAKING_PROVENANCE_VERIFICATION",
+   "DELETE_BLIND_FACTS_FROM_THE_REGISTRY"
+  ],
+  "deleted_or_bypassed_paths": [
+   "TUPLE_ONLY_LIFTING_RULE",
+   "FIRST_LINE_ONLY_HELPER_RENDERER",
+   "CRYSTALLIZATION_TIME_EMISSION_CANDIDATE_KILLED_BY_ARITHMETIC",
+   "NON_DISCRIMINATING_GRIDS_AT_BOTH_GATES"
+  ],
+  "selected_surviving_route": "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+  "why_selected_route_is_fastest_sufficient": "THE_SENSOR_TABLES_ARE_DATA__THE_INSTRUMENTS_ARE_STDLIB_AND_THE_NETWORK_ROUTE_CONVENTION_EXISTS__THE_MEASUREMENT_TOOLS_ARE_ALREADY_IN_THE_TREE__THE_NINE_FACTS_ARE_EXACTLY_THE_SHAPES_THE_SUBJECT_WIDENING_WAS_BUILT_FOR__ONE_ROUND_OF_TABLE_ROWS_AND_NINE_TESTS",
+  "expected_parent_level_state_change": "APPLICABILITY_IS_ASKABLE_FOR_143_OF_145_CAPABILITIES__NINE_FACTS_ANSWERED_BY_HONEST_INSTRUMENTS_AND_ONE_LEFT_BLIND_BECAUSE_SENSING_IT_WOULD_FABRICATE_VERIFICATION__BINDING_54_REMAINS_THE_DOMINANT_MEASURED_BLOCKER__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "9_NEW_SENSOR_TESTS_PASS__REGISTRY_FACT_CLASSES_100_24_1__ONE_FACT_STAYS_BLIND_ON_PURPOSE__143_OF_145_CAPABILITIES_FULLY_DECIDABLE__3_CAPABILITIES_PAST_THE_PREMISE_GATE_AT_THE_FRONT_DOOR__STALE_PIN_FAILURE_ON_MAIN_FIXED__TWO_PRE_EXISTING_FAILURES_REPRODUCED_ON_THE_CLEAN_BASE_AND_RECORDED__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-12T17:53:43Z",
+   "max_age_hours": 24,
+   "incumbent_route": "ROUND_3_AUDIT_STATE__TEN_FACTS_BLIND_ON_THE_CURRENT_TREE__APPLICABILITY_ASKABLE_FOR_135_OF_145__FRONT_DOOR_AUTO_REFUSES_ON_UNASKABLE_PREMISES",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "what_a_success_teaches section D re-run on this base: fact_classes {100, 15, 10} with the pinned doc stale at {100, 14, 11}",
+     "the front door consults the SAME sensor for PRECONDITION_NOT_TRUE_OF_WORLD, so premise repair is prerequisite to binding repair showing value",
+     "A_PERFECT_ACTION measured the corrected ordering: binding 54 > blind 12 -- this round claims the prerequisite, not the gain item",
+     "the enumerate adapter's output_verified is 'file written and non-empty' -- nothing verifies candidate provenance, so that fact stays honestly blind"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "GroundAct (arXiv 2508.05614): 15 LLMs drop to 29-53% when action feasibility depends on unmentioned environmental state -- grounding prerequisites is the measured field gap",
+     "Grounding Agent Memory (arXiv 2609.11060, Sep 2026): least-privilege read-only world probes raise pass rate 39% to 73% and cut task cost -- environment probing is deployment-compatible",
+     "Online tool grounding in IoT (arXiv 2610.25563): eligibility, authorization and availability are checked explicitly before a call is bound"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python stdlib only: socket for the scoped TCP route probes, shutil and __import__ for subsystem presence",
+     "no external package, crate or model was needed"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "OSWorld 2.1 record (Nov 2026): best binary completion 44.3% -- agents fail on tracking and verification, i.e. on facts about the machine and task state they cannot ask",
+     "self-improving agents 2026 guide (o-mega.ai, Oct 2026): skill libraries bank mistakes without verifier gating; probes and checks are the corrective lever"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "agent action feasibility environmental state precondition probing benchmark"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "agent tool grounding availability check production 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "python sensor table TCP probe executable presence subsystem imports"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "GroundAct environment-probing curation 2026 agent grounding"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+   "challenger_routes": [
+    {
+     "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
+     "evidence": [
+      "a dict special case plus a keyed-table recogniser would serve the world-model family specifically"
+     ],
+     "qualification_evidence": [
+      "the recursive collection rule covers tuple, list, set AND dict with less code and no per-family maintenance",
+      "families are still recognised structurally after lifting -- the generalisation does not blur family identity"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Equivalent",
+      "CAPABILITY_STRENGTH": "Strictly narrower (one family per special case)",
+      "WALL_CLOCK": "Similar",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "More per-family surface to maintain and re-measure",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "emitting abstraction calls at organ birth would make every future family member born minimal"
+     ],
+     "qualification_evidence": [
+      "killed by arithmetic: organs must stay self-contained, and helper+call measures ~262 description bytes against the cold form's 179",
+      "emission only pays with a runtime-binding execution contract -- an architectural decision changing every downstream organ consumer, out of round scope"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "Negative at the organ layer as measured",
+      "WALL_CLOCK": "Higher (execution-contract change)",
+      "INCREMENTAL_COST": "0 USD but large blast radius",
+      "RELIABILITY": "New failure mode for every organ consumer",
+      "VERIFIABILITY": "Requires its own pre-registered prediction on emitted bytes"
+     }
+    },
+    {
+     "route": "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+     "evidence": [
+      "registry totals moved to {PROVIDED 100, SENSED 24, BLIND 1}; 143/145 decidable",
+      "front door: the three true-premise capabilities left PRECONDITION_NOT_TRUE_OF_WORLD; chart rejections name their missing pieces"
+     ],
+     "qualification_evidence": [
+      "6 new tests including the prediction, the economics, the singleton exclusion, the vacuity gate, and first-family regression",
+      "21 tests pass across the three compression rounds; affected suites pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed at both gates; refusals carry reasons",
+      "CAPABILITY_STRENGTH": "Two families under one mechanism, with the third-family question now cheap",
+      "WALL_CLOCK": "Milliseconds of AST work per corpus",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Vacuity gate added where verification was silently vacuous",
+      "VERIFIABILITY": "Prediction written before measurement; first-family numbers as regression calibration"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-12T17:53:43Z",
+    "max_age_hours": 2,
+    "selected_route": "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the generalised lifter measures the keyed-table abstraction and refuses vacuous grids on this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/runtime/world_probe_v1.py",
+      "detail": "the sensor tables under measurement"
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "synthesize_world_model_organ supplies the second family's corpus, unchanged"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_WIDENS_ASKABLE_APPLICABILITY_WITH_HONEST_INSTRUMENTS_AND_ZERO_CREDIT__THE_CLAIM_IS_BOUND_TO_THE_REGISTRY_TOTALS_100_24_1__THE_FRONT_DOOR_FATE_SHIFT__AND_TO_ONE_FACT_STAYING_BLIND_BY_PRINCIPLE",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "HONEST_SENSORS_FOR_NINE_BLIND_PRECONDITION_FACTS",
+   "falsifier_id": "F_A_SENSOR_MUST_MEASURE_ITS_FACT_OR_REFUSE__A_FABRICATED_VERIFICATION_OR_AN_UNMEASURED_TRUE_MUST_FAIL__THE_REGISTRY_TOTALS_MUST_MATCH_THE_MEASUREMENT__AND_TRUE_PREMISE_CAPABILITIES_MUST_LEAVE_PRECONDITION_NOT_TRUE_OF_WORLD",
+   "decisive_question": "Can the nine facts be decided by honest stdlib instruments so applicability is askable for 143 of 145 capabilities, without faking the one fact that needs a producer?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/world_probe_v1.py",
+     "git_blob_sha": "3dc901388800f7217a894cec6354234eaf260c5a"
+    },
+    {
+     "path": "canonical/tests/test_world_probe_senses_the_nine_blind_facts_v1.py",
+     "git_blob_sha": "3590aba9b06d392f4f321de340605f2f83100907"
+    },
+    {
+     "path": "NINE_BLIND_FACTS_NOW_DECIDED_20261112_V1.md",
+     "git_blob_sha": "586833f895e7c92a80d26fc8b7116d50157fe559"
+    },
+    {
+     "path": "canonical/tests/test_what_a_success_teaches_v1.py",
+     "git_blob_sha": "76b4ae5b1082213b1b4163ac8f9ab81d74e71f14"
+    }
+   ]
+  }
+ },
+ "next_step": "BINDING_REPAIR_FOR_THE_54_CAPABILITIES_THE_FRONT_DOOR_IDENTIFIES_BUT_CANNOT_CALL__ARITY_OVER_SPECIFICATION_AND_SELECTOR_DEFAULTS_PER_THE_CORRECTED_ORDERING__THEN_A_REAL_PRODUCER_FOR_SOURCE_CANDIDATE_PROVENANCE_VERIFIED"
+}
