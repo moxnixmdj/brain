@@ -261,7 +261,16 @@ def skills(root: pathlib.Path) -> dict[str, Any]:
     # rule still holds. `skill_recheck_v1` re-applies the rule to the source it was taught on,
     # and reports ABSENT when the store kept only a hash of that source -- which is the real
     # state of every rule taught before 2026-11-12.
+    # For those, `self_witness` re-applies the rule to the smallest text its OWN pattern
+    # denotes and checks the rewrite it declares, plus a near-miss it must leave alone. That is
+    # a weaker check than the demonstration and is counted in its own column: it shows a shipped
+    # lesson still means what it says to the engine that applies it, not that it still fixes the
+    # bug it was learned from.
     recheck = {"PASS": 0, "FAIL": 0, "ABSENT": 0}
+    witness = {"PASS": 0, "FAIL": 0, "ABSENT": 0}
+    recheckable_any = 0
+    witness_only = 0
+    stored_total = None
     detail = None
     try:
         from canonical.swe_kernel import skill_recheck_v1 as R  # local: avoid import cycles
@@ -270,16 +279,45 @@ def skills(root: pathlib.Path) -> dict[str, Any]:
             detail = report["error"]
         else:
             recheck = dict(report["counts"])
+            witness = dict(report.get("self_witness_counts") or witness)
+            recheckable_any = int(report.get("recheckable_any") or 0)
+            witness_only = int(report.get("self_witness_only") or 0)
+            stored_total = report.get("total")
     except Exception as exc:                      # a broken recheck must not read as a pass
         detail = f"{type(exc).__name__}:{exc}"[:120]
 
-    checkable = recheck.get("PASS", 0) + recheck.get("FAIL", 0)
-    note = (f"re-executable {checkable} (PASS {recheck.get('PASS', 0)}, "
-            f"FAIL {recheck.get('FAIL', 0)}), no taught source {recheck.get('ABSENT', 0)}")
+    # THE DENOMINATOR MUST BE THE POPULATION THE CHECK RAN OVER.
+    #
+    # `seen` is what the agent can RECALL (`_load_rules` reads one domain only); `recheck_store`
+    # re-executes every stored row. Measured 2026-11-12 with the two mixed: a store holding one
+    # recallable rule and one stored-but-unrecallable one reported `checkable 2` over `total 1`,
+    # an auditability of 200%. A fraction above 1 is the instrument lying upward, which is the
+    # one thing it must not do, so the denominator is the larger population and the difference
+    # is reported as what it is: a lesson in memory that nothing can recall.
+    total = len(seen)
+    unreachable = 0
+    if isinstance(stored_total, int):
+        total = max(len(seen), stored_total)
+        unreachable = max(0, stored_total - len(seen))
+
+    # A rule checkable by BOTH mechanisms is one checkable rule, so the count comes from the
+    # store's per-rule union and never from summing the two columns.
+    checkable = recheckable_any or (recheck.get("PASS", 0) + recheck.get("FAIL", 0))
+    checkable = min(checkable, total) if total else checkable
+    taught = recheck.get("PASS", 0) + recheck.get("FAIL", 0)
+    note = (f"re-executable {checkable} (taught source {taught}: PASS {recheck.get('PASS', 0)}, "
+            f"FAIL {recheck.get('FAIL', 0)}; self-witness {witness.get('PASS', 0) + witness.get('FAIL', 0)}"
+            f": PASS {witness.get('PASS', 0)}, FAIL {witness.get('FAIL', 0)}, "
+            f"alone {witness_only}), no check {max(0, recheck.get('ABSENT', 0) - witness_only)}")
+    if unreachable:
+        note += f"; {unreachable} stored but not recallable by any lookup"
     if detail:
         note += f"; recheck unavailable: {detail}"
-    return {"layer": "skills", "total": len(seen), "checkable": checkable,
-            "note": note, "recheck": recheck}
+    return {"layer": "skills", "total": total, "checkable": checkable,
+            "note": note, "recheck": recheck, "self_witness": witness,
+            "self_witness_only": witness_only, "stored_not_recallable": unreachable,
+            "recallable": len(seen),
+            "fail": recheck.get("FAIL", 0) + witness.get("FAIL", 0)}
 
 
 def process_sites(root: pathlib.Path) -> dict[str, Any]:
@@ -467,6 +505,11 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
     for item in predicates:
         counts[item["verdict"]] = counts.get(item["verdict"], 0) + 1
 
+    # A layer that re-executes its own records can contradict them, and a contradiction must be
+    # able to gate the same way a predicate FAIL does -- otherwise the audit is green by
+    # construction, which is the one property this instrument exists to not have.
+    layer_failures = sum(int(layer.get("fail") or 0) for layer in layers)
+
     return {
         "schema": SCHEMA,
         "authority": "NONE",
@@ -474,7 +517,8 @@ def audit(root: pathlib.Path = REPO_ROOT, *, run: bool = False) -> dict[str, Any
         "predicates_run": len(predicates),
         "predicate_verdicts": counts,
         "predicate_results": predicates,
-        "red": bool(counts.get("FAIL")),
+        "layer_failures": layer_failures,
+        "red": bool(counts.get("FAIL")) or bool(layer_failures),
     }
 
 
