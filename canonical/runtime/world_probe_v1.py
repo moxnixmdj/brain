@@ -106,7 +106,68 @@ _RUNTIME_KINDS = {
     "yq": "yq",
     "jq": "jq",
     "sqlite3": "sqlite3",
+    # `network` is not an executable, but it is decided the same way this table
+    # already decides things: ask the world, answer yes or no, never guess.
+    # `_decide_runtime` special-cases it below because `shutil.which("network")`
+    # can never be anything but None.
+    "network": "network",
 }
+
+
+# THE PREMISE THAT COULD NOT BE DECIDED, ON A MACHINE THAT HAD IT.
+#
+# Measured on 2026-11-12 in a sandbox with verified egress (pypi.org,
+# registry.npmjs.org and api.github.com all returned HTTP 200):
+#
+#     probe_effect("network.http.available") -> true=False
+#                                              how=UNDECIDABLE__NOT_ESTABLISHED
+#
+# so `knowledge.json.fetch.external`, whose only declared precondition it is,
+# sat in the blind set while the network demonstrably worked. The registry row
+# was right and the sensor was missing -- which meant the machine could not tell
+# "this box is offline" from "I have no idea", and treated the second as the
+# first.
+#
+# WHAT THIS IS NOT. It is not a permission to fetch. Nothing here is consulted by
+# the adapter or by the native `fetch_json_knowledge` action; those decide their
+# own safety when they run. This decides the PRECONDITION, so a plan can be
+# formed at all. Conflating the two is how "the network is up" becomes "go read
+# any URL you like", and the second does not follow from the first.
+#
+# A TCP connect with a short timeout is the honest instrument here: it answers
+# exactly the question asked ("can this machine reach a host at all") without
+# issuing a request, without a payload, and without depending on DNS for a
+# particular name. `_NETWORK_PROBES` is the contact list, and it is data so the
+# answer is reviewable.
+_NETWORK_PROBES = (("pypi.org", 443), ("registry.npmjs.org", 443),
+                   ("api.github.com", 443))
+_NETWORK_TIMEOUT_S = 3.0
+
+
+def _network_reachable() -> dict:
+    """Can this machine open an outbound TCP connection to a public host?
+
+    Non-HTTP deliberately: an HTTP check would conflate "no route" with "TLS is
+    broken" with "the host dislikes my user agent". All three would be reported
+    as the same fact, and only the first is what `network.http.available` means.
+    """
+    import socket
+    import time as _time
+
+    started = _time.monotonic()
+    tried = []
+    for host, port in _NETWORK_PROBES:
+        if _time.monotonic() - started > _NETWORK_TIMEOUT_S * 2:
+            break
+        tried.append(host)
+        try:
+            with socket.create_connection((host, port), timeout=_NETWORK_TIMEOUT_S):
+                return {"true": True, "how": "network_tcp_reachable",
+                        "evidence": host, "tried": tried}
+        except Exception:
+            continue
+    return {"true": False, "how": "network_tcp_unreachable",
+            "evidence": None, "tried": tried}
 
 # Facts so basic they are easy to overlook and fatal to miss. The
 # computer-use capabilities require `project_present` and `files_known`,
@@ -182,15 +243,38 @@ def _matching_files(root: Path, subject: str) -> list[str]:
 
 
 def _subjects(effect: str) -> list[str]:
-    """Candidate subject keys for an abstract effect name."""
+    """Candidate subject keys for an abstract effect name.
+
+    EVERY SUFFIX IS STRIPPED, NOT JUST THE FIRST.
+
+    `network.http.available` names the subject `network`, qualified by the
+    transport. Stripping one suffix produced `network.http`, which is not a
+    subject, so the whole fact was undecidable on a machine whose network
+    worked. `chart.query.x_value.available` has the same shape.
+
+    This is a widening of the candidate list only. A subject still has to be one
+    the table knows about, and `_decide_runtime` still answers yes or no -- an
+    unknown subject returns None and the fact stays undecided, which is the
+    correct answer for a fact nobody can see.
+    """
     e = str(effect or "").strip().lower()
     if not e.endswith(".available"):
         return []
     base = e[: -len(".available")]
     out = [base]
-    for suffix in (".file", ".corpus", ".runtime", ".text"):
-        if base.endswith(suffix):
-            out.append(base[: -len(suffix)])
+    suffixes = (".file", ".corpus", ".runtime", ".text", ".http", ".https",
+                ".network", ".live_metadata", ".selection", ".query",
+                ".question", ".series", ".candidate")
+    changed = True
+    while changed:
+        changed = False
+        for suffix in suffixes:
+            if base.endswith(suffix) and base[: -len(suffix)]:
+                base = base[: -len(suffix)]
+                if base not in out:
+                    out.append(base)
+                changed = True
+                break
     return out
 
 
@@ -222,6 +306,10 @@ def _decide_runtime(subject, _goal_paths, _root):
     exe = _RUNTIME_KINDS.get(subject)
     if exe is None:
         return None
+    # `network` is not an executable; it is a route. Same table, different
+    # instrument, same contract: answer, never guess.
+    if exe == "network":
+        return _network_reachable()
     hit = shutil.which(exe)
     if hit:
         return {"true": True, "how": "path_executable", "evidence": hit}
