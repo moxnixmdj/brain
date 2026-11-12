@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 336,
+  "knowledge_documents": 337,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6741,
+  "research_index_records": 6742,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2bf17aa5749187353a98de017a39253f94d25a4d815b6a1afa73ba931d511cc0"
+  "value": "cdea7d83df98f90bcdae86eff4fef418842ab992ad7b1d7d9c27416f64f96300"
  },
  "engines": [
   {
@@ -54652,6 +54652,85 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11627,
+   "headings": [
+    "Settled admission: the one-try question gets its missing instrument",
+    "1. The owner's question, answered from the tree and the record",
+    "2. What was built: `settled_admission_v1`",
+    "2.1 The first draft was falsified, and the falsification is the finding",
+    "3. Measurements (all exact; predictions written before each run, first protocol",
+    "4. Where the field is (checked 2026-11-12; newest sources used)",
+    "5. What is real and what is not, after this round",
+    "6. Sentience",
+    "7. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SETTLED_ADMISSION_MEASURED_20261112_V1.md",
+   "sha256": "1c23ee89568b5bdd0ac505a83843a881035e3944a54094104c2adfeb02850fe3",
+   "summary": "**2026-11-12.** Branch `arena/8d982436-brain`. Base `be081116` (the INSTANT_LEARNING_AUDIT merge), synced to `a5e0a347dd` (#6699, #6701, #6696, #6694 included) before pushing. Follows `canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md` ranked-plan item 2 (\"connect `settlement_v1` question selection to rule admission where multiple hypotheses survive\") and closes measured defect 6 of `canonical",
+   "terms": {
+    "10": 6,
+    "200": 6,
+    "2026": 4,
+    "25": 4,
+    "admission": 9,
+    "admit": 5,
+    "after": 5,
+    "all": 4,
+    "already": 4,
+    "any": 4,
+    "arxiv": 5,
+    "asked": 4,
+    "audit": 6,
+    "before": 4,
+    "both": 4,
+    "canonical": 7,
+    "check": 4,
+    "chosen": 6,
+    "compression": 4,
+    "coverage": 5,
+    "demo": 5,
+    "demonstration": 4,
+    "disagreement": 12,
+    "environments": 4,
+    "every": 4,
+    "exactly": 6,
+    "experience": 6,
+    "false": 5,
+    "first": 4,
+    "identified": 4,
+    "mean": 4,
+    "measured": 6,
+    "module": 6,
+    "new": 6,
+    "no": 8,
+    "not": 23,
+    "one": 13,
+    "oracle": 13,
+    "points": 4,
+    "question": 7,
+    "questions": 15,
+    "real": 10,
+    "refuse": 9,
+    "round": 5,
+    "same": 5,
+    "target": 10,
+    "tests": 6,
+    "tree": 5
+   },
+   "title": "Settled admission: the one-try question gets its missing instrument",
+   "title_terms": [
+    "admission",
+    "gets",
+    "instrument",
+    "missing",
+    "one-try",
+    "question",
+    "settled"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 8509,
    "headings": [
     "Settled is computed, never reached",
@@ -70887,10 +70966,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1138,
+  "included_source_count": 1139,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1639671120b8a2f06c05dc4e5ec754152df8ec2913554b233e6a6762a0c4f671"
+  "source_tree_digest": "e24af7db23529f3c88e6538f263b26da734c6d72425c572b3dd545bac86d63fe"
  },
  "research_index": [
   {
@@ -226250,6 +226329,30 @@
     "settled_is_computed_never_reached_20261104_v1": 1,
     "the_operator_basis_grows_by_induction_on_measured_evidence_and_the_system_can_state_why_it_is_unsure__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "the_system_decided_questions_were_settled_from_the_search_path_it_had_taken_instead_of_from_the_evidence_it_held_so_statistical_inevidence_was_read_as_equivalence_and_experience_made_held_out_accuracy_fall_from_2_of_10_to_0_of_10_while_reporting_success": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "SETTLED_TAUGHT_ADMISSION_MEASURED_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/SETTLED_TAUGHT_ADMISSION_MEASURED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SETTLED_TAUGHT_ADMISSION_MEASURED_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d8a5c3d502d1ab5d36f37d1201bd66a02965817628a114f8a5c462fcc3184524",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_taught_edit_touches_a_new_target_only_when_chosen_questions_settle_the_transfer__refusal_at_the_first_contradiction_admission_only_on_full_disagreement_coverage__fail_closed_without_an_oracle_or_an_unprobeable_target__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "admission": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measured": 1,
+    "settled": 1,
+    "settled_taught_admission_measured_20261112_v1": 1,
+    "settlement_gated_admission_of_taught_edits_with_asymmetric_oracle_coverage": 1,
+    "taught": 1,
+    "the_taught_edit_admission_path_consulted_no_oracle__measured_defect_6_one_try_probe__one_demonstration_banked_a_rule_wrong_at_the_targets_boundary__and_settlement_question_selection_was_measured_but_never_wired_into_admission": 1,
     "v1": 1
    }
   },
