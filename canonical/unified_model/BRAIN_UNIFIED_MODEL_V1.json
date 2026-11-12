@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 362,
+  "knowledge_documents": 363,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6765,
+  "research_index_records": 6766,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2f1e2f0e87467042597feda0a656b14138b29d987d985aefb107964a740d7a4c"
+  "value": "50daaf1845e03b32ad5af070c9d254f8892c9d5770ddb9ecc1487e8a178453ac"
  },
  "engines": [
   {
@@ -45572,6 +45572,79 @@
     "refused",
     "still",
     "verified"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 3689,
+   "headings": [
+    "A reshaping the example tangled in is put back",
+    "1. What was built",
+    "2. The measurement, same tracked sets",
+    "3. Receipts",
+    "4. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_RESHAPING_THE_EXAMPLE_TANGLED_IN_IS_PUT_BACK_20261112_V1.md",
+   "sha256": "0d8955b68d993cdc8ab435c3d007242f558740df09a098b84178e80dacc86752",
+   "summary": "**2026-11-12.** Base `19281c7c`. Branch `arena/5ce68cd0-brain`. Follows #6742.",
+   "terms": {
+    "11": 2,
+    "14": 2,
+    "156": 2,
+    "196": 2,
+    "6742": 4,
+    "all": 2,
+    "arxiv": 2,
+    "back": 2,
+    "beside": 3,
+    "canonical": 3,
+    "did": 2,
+    "diff": 3,
+    "edits": 2,
+    "every": 5,
+    "example": 4,
+    "extra": 3,
+    "file": 2,
+    "files": 3,
+    "first": 2,
+    "held-out": 2,
+    "held_out": 2,
+    "honestly": 2,
+    "kind": 3,
+    "kinds": 4,
+    "learn": 2,
+    "learned": 4,
+    "learning": 2,
+    "learns": 3,
+    "left": 4,
+    "located": 2,
+    "mechanical": 2,
+    "move": 2,
+    "not": 8,
+    "nothing": 3,
+    "now": 2,
+    "one": 5,
+    "passed": 2,
+    "refusing": 3,
+    "reshaping": 3,
+    "same": 5,
+    "seen": 3,
+    "set": 3,
+    "statement": 3,
+    "stays": 3,
+    "still": 4,
+    "tracked": 3,
+    "tried": 3,
+    "whole": 3
+   },
+   "title": "A reshaping the example tangled in is put back",
+   "title_terms": [
+    "back",
+    "example",
+    "put",
+    "reshaping",
+    "tangled"
    ]
   },
   {
@@ -72894,10 +72967,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1164,
+  "included_source_count": 1165,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8b35f6175fdfd5559d631746c2a3405e4885b2b32d6fbaf304a5e5df5867e225"
+  "source_tree_digest": "83d8caf64e3491b28833e11011c9ce135e879ad710dc43025e86d0b0657b162e"
  },
  "research_index": [
   {
@@ -221296,6 +221369,31 @@
     "sentence": 2,
     "served": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "A_RESHAPING_THE_EXAMPLE_TANGLED_IN_IS_PUT_BACK_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_RESHAPING_THE_EXAMPLE_TANGLED_IN_IS_PUT_BACK_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_RESHAPING_THE_EXAMPLE_TANGLED_IN_IS_PUT_BACK_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "db6ad1d6ae4c4b951a3d1d356ffdca088e2942d611027bbf6cff3a8aba064532",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_reshaping_the_example_tangled_in_is_put_back_20261112_v1": 1,
+    "back": 1,
+    "example": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "held_out_kinds_not_learned_fall_6_to_0__questions_in_reach_rise_179_to_233__repeat_same_rises_130_to_156__tried_rises_160_to_196__diff_and_extra_stay_zero__seen_set_unchanged": 1,
+    "one_reshaped_statement_in_a_teacher_commit_refused_the_whole_example_and_five_held_out_kinds_with_dozens_of_mechanical_answers_were_never_learned": 1,
+    "put": 1,
+    "put_back_every_changed_place_that_cannot_hold_a_rule_and_hand_its_span_to_the_unsettled_machinery__localized_at_the_innermost_statement_pair_with_decorator_spans__never_when_nothing_can_be_localized_or_nothing_remains": 1,
+    "reshaping": 1,
+    "tangled": 1,
+    "v1": 1
    }
   },
   {
