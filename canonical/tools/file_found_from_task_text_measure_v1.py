@@ -60,6 +60,7 @@ FUNCTION_RECORD = ROOT / "canonical" / "verification" / "FUNCTION_FOUND_FROM_TAS
 PLACE_RECORD = content.PLACE_RECORD
 BUDGET, FIRST = function_measure.BUDGET, function_measure.FIRST
 RANKS = (1, 3, 10)
+FUNCTION_RANKS = (1, 4, 10)
 THREE_FILES = 3
 CHUNK = 40                       # tasks handled by one worker at a time, neighbours in the project's history
 FETCH_AT_ONCE = 4000             # file contents asked for in one request
@@ -120,20 +121,20 @@ def _git(directory: pathlib.Path, *args: str, text_in: str | None = None, check:
     return done.stdout
 
 
-def listing(directory: pathlib.Path, repository: str, commit: str) -> list[tuple[str, str]]:
-    """(path, the name of its contents) of every Python file outside the tests in the tree of a commit."""
+def listing(directory: pathlib.Path, repository: str, commit: str, tests_too: bool = False) -> list[tuple[str, str]]:
+    """(path, the name of its contents) of every Python file outside the tests in the tree of a commit; with `tests_too`, of every Python file."""
     out = []
     for entry in _git(directory, "ls-tree", "-r", "-z", commit).split("\0"):
         if not entry:
             continue
         head, path = entry.split("\t", 1)
         mode, kind, name = head.split(" ")
-        if kind == "blob" and mode in ("100644", "100755") and path.endswith(".py") and not collector.is_test(repository, path):
+        if kind == "blob" and mode in ("100644", "100755") and path.endswith(".py") and (tests_too or not collector.is_test(repository, path)):
             out.append((path, name))
     return out
 
 
-def fetch(trees: pathlib.Path, tasks: Sequence[str], commits: Mapping[str, str]) -> dict[str, Any]:
+def fetch(trees: pathlib.Path, tasks: Sequence[str], commits: Mapping[str, str], tests_too: bool = False) -> dict[str, Any]:
     """Clone each project without file contents, then fetch the contents of the listed files of every task's tree."""
     report: dict[str, Any] = {}
     for project in sorted({project_of(task) for task in tasks}):
@@ -149,9 +150,10 @@ def fetch(trees: pathlib.Path, tasks: Sequence[str], commits: Mapping[str, str])
             _git(directory, "fetch", "-q", "--filter=blob:none", "origin", commit, check=False)
         wanted: dict[str, None] = {}
         for task in mine:
-            for _, name in listing(directory, repository, commits[task]):
+            for _, name in listing(directory, repository, commits[task], tests_too):
                 wanted[name] = None
-        names = list(wanted)
+        have = set(_git(directory, "cat-file", "--batch-all-objects", "--batch-check=%(objectname)").split())
+        names = [name for name in wanted if name not in have]
         for at in range(0, len(names), FETCH_AT_ONCE):
             _git(directory, "-c", "fetch.negotiationAlgorithm=noop", "fetch", "origin", "--no-tags", "--no-write-fetch-head", "--recurse-submodules=no",
                  "--filter=blob:none", "--stdin", text_in="\n".join(names[at:at + FETCH_AT_ONCE]) + "\n")
@@ -234,8 +236,12 @@ def of_task(documents: Mapping[str, Mapping[str, int]], source_of, record: Mappi
         "expert": rank_of(in_order, expert), "expert_by_score": rank_of(by_score, expert), "expert_other_text": rank_of(with_other, expert),
         "expert_named": max([finder.named(path, text) for path in expert if path in documents], default=None),
         "passing": rank_of(in_order, holding) if holding else None,
-        "place": None, "place_three": None, "place_other_text": None,
+        "function": None, "place": None, "place_three": None, "place_other_text": None,
     }
+    if targets and in_order and in_order[0] in holding:
+        spans = {span for path, span in targets if path == in_order[0]}
+        ranked = pointer.order(source_of(in_order[0]), text)
+        row["function"] = next((at for at, function in enumerate(ranked, 1) if (function.first, function.last) in spans), None)
     if targets:
         row["place"] = place_of(finder.candidates(documents, source_of, text, in_order=in_order), targets)
         row["place_three"] = place_of(finder.candidates(documents, source_of, text, files_tried=THREE_FILES, in_order=in_order), targets)
@@ -245,15 +251,15 @@ def of_task(documents: Mapping[str, Mapping[str, int]], source_of, record: Mappi
     return row
 
 
-def of_chunk(job: tuple[str, str, list[tuple[str, str, Mapping[str, Any], list[str], str, str]]]) -> dict[str, dict[str, Any]]:
+def of_chunk(job: tuple[str, str, list[tuple[str, str, Mapping[str, Any], list[str], str, str]], bool]) -> dict[str, dict[str, Any]]:
     """The tasks of one stretch of a project's history: each file's words are counted once for as long as the file stays the same."""
-    directory, repository, tasks = job
+    directory, repository, tasks, tests_too = job
     contents = Contents(pathlib.Path(directory))
     kept: dict[tuple[str, str], Any] = {}
     out = {}
     try:
         for task, commit, record, diffs, text, other_text in tasks:
-            files = listing(pathlib.Path(directory), repository, commit)
+            files = listing(pathlib.Path(directory), repository, commit, tests_too)
             here = {}
             for path, name in files:
                 key = (name, path)
@@ -320,6 +326,7 @@ def summarise(per_task: Mapping[str, Mapping[str, Any]], reached_with_the_file: 
         "by_project": by_project,
         "tasks_with_a_passing_patch_inside_one_function": len(with_patch),
         "file_holding_such_a_patch_among_the_first__organ": _within([row["passing"] for row in with_patch]),
+        "function_holding_such_a_patch_among_the_first_of_the_first_file": _within([row.get("function") for row in with_patch], FUNCTION_RANKS),
         "chain__tasks_reached_from_the_tree__all_20_in_the_first_file": len(reached), "chain__which": reached,
         "chain__tasks_reached__functions_of_the_first_3_files_together": len(reached_three), "chain__which_three": reached_three,
         "chain__tasks_reached_with_another_tasks_text": sum(1 for row in rows if row["place_other_text"] is not None),
@@ -371,6 +378,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--trees-dir", required=True, type=pathlib.Path)
     parser.add_argument("--statements-dir", required=True, type=pathlib.Path)
     parser.add_argument("--fetch", action="store_true")
+    parser.add_argument("--with-tests", action="store_true", help="rank every Python file of the tree, the tests too (what others publish counts for)")
     parser.add_argument("--cache-dir", type=pathlib.Path)
     parser.add_argument("--pull-requests-dir", type=pathlib.Path)
     parser.add_argument("--workers", type=int, default=2)
@@ -383,7 +391,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     tasks = sorted(json.loads(place.PASSING_RECORD.read_text())["per_task"])
     commits = base_commits(args.statements_dir, tasks)
     if args.fetch:
-        report = fetch(args.trees_dir, tasks, commits)
+        report = fetch(args.trees_dir, tasks, commits, args.with_tests)
         say(f"FETCHED {sum(found['file_contents'] for found in report.values())} file contents of {len(report)} projects")
         return 0
 
@@ -395,6 +403,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         for task in sorted(with_patches[name]):
             if task in passed and task in offered and offered[task] not in passed[task]:
                 passed[task].append(offered[task])
+    records = {task: json.loads((args.pull_requests_dir / f"{task}.json").read_text()) for task in tasks}
+    broken = sorted(task for task, record in records.items() if "files" not in record or any(row.get("fetch_error") for row in record["files"]))
+    if broken:
+        raise SystemExit(f"{len(broken)} pull request records were not fetched whole; fetch them again: {broken[:8]}")
     issues = content.statements(args.statements_dir, tasks)
     other = function_measure.other_text_of(sorted(issues))
     jobs = []
@@ -403,9 +415,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         mine = [task for task in tasks if project_of(task) == project and task in commits and task in issues]
         when = {task: int(_git(directory, "log", "-1", "--format=%ct", commits[task]).strip() or 0) for task in mine}
         mine.sort(key=lambda task: (when[task], task))
-        rows = [(task, commits[task], json.loads((args.pull_requests_dir / f"{task}.json").read_text()), passed[task], issues[task], issues[other[task]]) for task in mine]
+        rows = [(task, commits[task], records[task], passed[task], issues[task], issues[other[task]]) for task in mine]
         for at in range(0, len(rows), CHUNK):
-            jobs.append((str(directory), repository_of(mine[0]), rows[at:at + CHUNK]))
+            jobs.append((str(directory), repository_of(mine[0]), rows[at:at + CHUNK], args.with_tests))
     jobs.sort(key=lambda job: -len(job[2]))
     say(f"{len(tasks)} tasks, {sum(len(job[2]) for job in jobs)} with a base commit and an issue text, in {len(jobs)} stretches")
 
@@ -419,6 +431,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     record = {
         "schema": SCHEMA, "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
         "generated_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "files_ranked": "every Python file of the tree, the tests too" if args.with_tests else "the Python files of the tree outside the tests",
         "expected_before": EXPECTED, "summary": summary, "rule": rule(summary),
         "per_task": {task: per_task[task] for task in sorted(per_task)},
         "base_commits_from": list(content.STATEMENTS), "experiments_commit": passing.WITH_PATCHES, "submissions_with_patches": len(with_patches),
