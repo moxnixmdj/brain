@@ -4212,10 +4212,19 @@ class MetaCircularOrganGraph:
         if len(self._world_transitions) < 2 or len(self._world_transitions) % 2 != 0:
             return
         try:
-            wm = synthesize_world_model_organ(self._world_transitions[-16:])
+            recent = self._world_transitions[-16:]
+            wm = synthesize_world_model_organ(recent)
             if wm is not None:
                 self.register_organ(wm)
-            self.evolve_policy_from_traces()
+            incumbent = self.get_primary(POLICY, "policy::instrumental_q")
+            has_contrast = (
+                incumbent is None
+                or bool(self._live_policy_boards)
+                or len({bool(t.get("failed")) for t in recent}) >= 2
+                or len({t.get("value") for t in recent if t.get("value") is not None}) >= 2
+            )
+            if has_contrast:
+                self.evolve_policy_from_traces()
         except Exception:
             return
 
