@@ -200,6 +200,18 @@ def test_every_dose_of_every_memory_is_asked_and_no_candidate_is_run_twice(tmp_p
     assert row["forwards"]["candidates_of_every_lesson"] >= row["forwards"]["doses"]["all"]["candidates"]
 
 
+def test_a_candidate_two_memories_both_make_is_run_once(tmp_path):
+    plus_to_minus = ("p = int(input())\nq = int(input())\nprint(p + q)\n", "p = int(input())\nq = int(input())\nprint(p - q)\n")
+    both_ways = {"condefects/t1/1": MINUS_TO_PLUS, "condefects/t5/5": plus_to_minus}
+    memories = {"forwards": measure.taught(both_ways), "backwards": measure.taught(both_ways, backwards=True)}
+    questions = {arm: measure.doses(list(both_ways), memory.lessons, sizes=(), seeds=()) for arm, memory in memories.items()}
+    check, accepted, seen = passing(BUG["fixed"])
+    row = measure.one_bug(BUG, memories, questions, tmp_path / "w", check=check, accepted=accepted)
+    assert row["forwards"]["doses"]["all"]["repaired"] and row["backwards"]["doses"]["all"]["repaired"]
+    asked_about = seen[2:]
+    assert len(asked_about) == len(set(asked_about)) == row["candidates_run"]
+
+
 def test_a_bug_whose_benchmark_does_not_hold_is_not_asked_anything(tmp_path):
     memories = {"forwards": measure.taught(PAIRS)}
     check, accepted, seen = passing(BUG["fixed"], BUG["buggy"])
