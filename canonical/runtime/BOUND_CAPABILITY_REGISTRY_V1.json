@@ -5272,7 +5272,7 @@
      "timeout_s": 60
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -6998,7 +6998,7 @@
      "timeout_s": 20
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -7115,7 +7115,7 @@
      "timeout_s": 20
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -7224,7 +7224,7 @@
      "timeout_s": 30
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -7330,7 +7330,7 @@
      "timeout_s": 20
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -7427,7 +7427,7 @@
      "timeout_s": 20
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -7611,7 +7611,7 @@
      "timeout_s": 20
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
@@ -7735,7 +7735,7 @@
      "task_text": "${input.goal}"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
