@@ -15,6 +15,7 @@ import hashlib
 import json
 import io
 import keyword
+import math
 import tokenize
 import os
 import pathlib
@@ -1962,9 +1963,27 @@ class VerifiedSkillStore:
                 if not identity_matches:
                     refusals.append({"skill_id": stated, "reason": "CONTENT_ADDRESS_MISMATCH"})
                     continue
+                # Metadata is not covered by the rule's content address. Validate before
+                # touching SQLite: one malformed count/time must not abort later lessons or
+                # poison a merge. Canonical counters fit SQLite's signed INTEGER exactly.
+                hits = entry.get("verified_hits", 1)
+                if isinstance(hits, bool) or not isinstance(hits, int) or not 0 <= hits < (1 << 63):
+                    refusals.append({"skill_id": stated, "reason": "INVALID_VERIFIED_HITS"})
+                    continue
+                raw_created = entry.get("created_ts")
+                if raw_created is None:
+                    created = time.time()
+                else:
+                    try:
+                        if isinstance(raw_created, bool) or not isinstance(raw_created, (int, float)):
+                            raise ValueError("timestamp is not numeric")
+                        created = float(raw_created)
+                        if not math.isfinite(created) or created < 0:
+                            raise ValueError("timestamp is not finite and nonnegative")
+                    except (TypeError, ValueError, OverflowError):
+                        refusals.append({"skill_id": stated, "reason": "INVALID_CREATED_TS"})
+                        continue
                 prov = entry.get("provenance") or []
-                hits = int(entry.get("verified_hits", 1))
-                created = float(entry.get("created_ts") or time.time())
                 existing = conn.execute(
                     "SELECT verified_hits, created_ts, provenance_json, pattern_json FROM crystallized_skills "
                     "WHERE skill_id = ?", (stated,)
