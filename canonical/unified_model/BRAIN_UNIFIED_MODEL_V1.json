@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 381,
+  "knowledge_documents": 382,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6778,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6b80c967e00d7592229128adca7aad0adeb9d31e31d1864f3cfbd1cf35ef0006"
+  "value": "8ee6a46491c552b066f3834db7157af9893d6959187dd2b5857fa9092c104946"
  },
  "engines": [
   {
@@ -51042,6 +51042,83 @@
     "learning",
     "re-measured",
     "solved"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 2884,
+   "headings": [
+    "Proof: Instant Learning System Works",
+    "Demonstration Results",
+    "Task 1: Real Problem-Solving",
+    "Task 2: Learning Refusal Patterns",
+    "System State",
+    "What This Proves",
+    "The Revolutionary Architecture",
+    "Why This Is Revolutionary",
+    "Conclusion"
+   ],
+   "kind": "DOCUMENT",
+   "path": "INSTANT_LEARNING_PROOF.md",
+   "sha256": "312cb8ca8d22da3eaceb1cf1c555ecacc6d663c00bcfb643172586a76c3c2905",
+   "summary": "**Task:** \"Read the file canonical/runtime/solve_v1.py and count how many functions it contains\"",
+   "terms": {
+    "5ms": 2,
+    "answer": 2,
+    "brain-owned": 2,
+    "call": 3,
+    "capabilities": 2,
+    "coding": 2,
+    "compiled": 3,
+    "confinement": 2,
+    "correct": 2,
+    "execute": 2,
+    "experience": 2,
+    "external": 2,
+    "found": 2,
+    "functions": 2,
+    "instant": 6,
+    "instantly": 3,
+    "learn": 5,
+    "learning": 8,
+    "learns": 2,
+    "model": 4,
+    "not": 4,
+    "opaque": 2,
+    "patterns": 2,
+    "permanent": 3,
+    "proof": 2,
+    "proves": 4,
+    "python": 2,
+    "ready": 2,
+    "real": 2,
+    "recall": 5,
+    "requirement": 2,
+    "result": 3,
+    "revolutionary": 3,
+    "skill": 2,
+    "skills": 3,
+    "status": 2,
+    "stochastic": 2,
+    "store": 2,
+    "system": 8,
+    "task": 7,
+    "tasks": 2,
+    "tier": 5,
+    "transfer": 2,
+    "true": 3,
+    "verified": 5,
+    "verified_skills_bundle_v1.json": 2,
+    "verify": 2,
+    "works": 4
+   },
+   "title": "Proof: Instant Learning System Works",
+   "title_terms": [
+    "instant",
+    "learning",
+    "proof",
+    "system",
+    "works"
    ]
   },
   {
@@ -74369,10 +74446,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1183,
+  "included_source_count": 1184,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "62d01610042291ad31aa0abf18d194fb47059e892f88f9ddf0221925c5f0e480"
+  "source_tree_digest": "4546993604520736b3912582c89ae07a47a8d5b0096ab8776d6a39ba444bb467"
  },
  "research_index": [
   {
