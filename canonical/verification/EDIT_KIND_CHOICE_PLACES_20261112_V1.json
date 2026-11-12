@@ -1,0 +1,504 @@
+{
+ "schema": "BRAIN_EDIT_KIND_CHOICE_MEASURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "step": "places",
+ "which": "development",
+ "lessons": {
+  "source": "github.com/appmlk/ConDefects",
+  "commit": "43f0834a82c5e3bc4516c079fe7765f63b1a15cd",
+  "pairs": 2864,
+  "unreadable": [],
+  "pairs_sha256": "6f64229c6cce4a082f71260e70e43f7897ed9651927beb44f147d4db5315cae8",
+  "forwards": {
+   "taught_something": 2773,
+   "operators": 21715
+  }
+ },
+ "benchmark": {
+  "humanevalfix_sha256": "5a0f8cce22a5537eb6b2147709611a6dcbfad62e258684b40fdb2255cbfe9835",
+  "extra_inputs_sha256": null
+ },
+ "grouping": {
+  "support_edges": [
+   1,
+   2,
+   3,
+   5,
+   10,
+   30
+  ],
+  "made_edges": [
+   1,
+   2,
+   3,
+   6,
+   11,
+   31,
+   101
+  ],
+  "shrink": 20.0
+ },
+ "code_sha256": {
+  "canonical/tools/edit_kind_choice_measure_v1.py": "c97745395aff8b51019e22d57c018535ceb6ea12d1faa52e3f8529439e3a48df",
+  "canonical/runtime/edit_kind_choice_v1.py": "45bbd5c0f5d977da0f2776fa1fb412fae30379cb9988a4438e335be3e790e980",
+  "canonical/runtime/edit_kind_learning_v1.py": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
+  "canonical/tools/expert_fixes_dose_response_measure_v1.py": "1871413484ff019e45fe157b703fdb1bdbb601f5f622b8b455a7d5a1d9e0a52a",
+  "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py": "1dd423a916d6709eae67bbc170c364b92393832dedbf6c6ca8a018881737beba",
+  "canonical/tools/humanevalfix_experience_stream_measure_v1.py": "77a5d7fd8beb77e42d7662a1b298bf43970aa2fe062dbdb74e244503e12dad8a",
+  "canonical/swe_kernel/zygote_worker_pool_v1.py": "e9508a331d0dbe00c42364751b755abb3545db0a3e87e8f990831ffc1cb13d09"
+ },
+ "model_calls": 0,
+ "counts_sha256": [
+  "262d5c6ecbac0a65852b15cdacefeb993619f58f0d2958339b7b08ac3ba59c75"
+ ],
+ "direction": "forwards",
+ "how_chosen": "most",
+ "per_bug": {
+  "Python/0": {
+   "candidates": 48437,
+   "votes": 193,
+   "sum": 109,
+   "most": 193
+  },
+  "Python/2": {
+   "candidates": 3843,
+   "votes": 4,
+   "sum": 30,
+   "most": 32
+  },
+  "Python/6": {
+   "candidates": 52693,
+   "votes": 326,
+   "sum": 5278,
+   "most": 5826
+  },
+  "Python/7": {
+   "candidates": 12137,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/8": {
+   "candidates": 36529,
+   "votes": 7,
+   "sum": 6,
+   "most": 2
+  },
+  "Python/10": {
+   "candidates": 44623,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/12": {
+   "candidates": 36043,
+   "votes": 384,
+   "sum": 60,
+   "most": 60
+  },
+  "Python/13": {
+   "candidates": 11675,
+   "votes": 12,
+   "sum": 2918,
+   "most": 2918
+  },
+  "Python/31": {
+   "candidates": 21604,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/33": {
+   "candidates": 4081,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/34": {
+   "candidates": 2632,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/36": {
+   "candidates": 59487,
+   "votes": 548,
+   "sum": 54,
+   "most": 54
+  },
+  "Python/38": {
+   "candidates": 68825,
+   "votes": 12469,
+   "sum": 14781,
+   "most": 14781
+  },
+  "Python/39": {
+   "candidates": 53823,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/42": {
+   "candidates": 6768,
+   "votes": 10,
+   "sum": 218,
+   "most": 341
+  },
+  "Python/44": {
+   "candidates": 27086,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/48": {
+   "candidates": 20544,
+   "votes": 72,
+   "sum": 30,
+   "most": 34
+  },
+  "Python/50": {
+   "candidates": 42045,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/55": {
+   "candidates": 26207,
+   "votes": 27,
+   "sum": 20,
+   "most": 36
+  },
+  "Python/56": {
+   "candidates": 35241,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/57": {
+   "candidates": 9954,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/59": {
+   "candidates": 64823,
+   "votes": 59,
+   "sum": 819,
+   "most": 1021
+  },
+  "Python/67": {
+   "candidates": 35679,
+   "votes": 7,
+   "sum": 44,
+   "most": 43
+  },
+  "Python/68": {
+   "candidates": 48686,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/71": {
+   "candidates": 62461,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/72": {
+   "candidates": 48520,
+   "votes": 91,
+   "sum": 3,
+   "most": 3
+  },
+  "Python/73": {
+   "candidates": 38183,
+   "votes": 13984,
+   "sum": 15293,
+   "most": 15293
+  },
+  "Python/75": {
+   "candidates": 71975,
+   "votes": 80,
+   "sum": 1765,
+   "most": 1755
+  },
+  "Python/76": {
+   "candidates": 31459,
+   "votes": 44,
+   "sum": 1406,
+   "most": 2835
+  },
+  "Python/77": {
+   "candidates": 9547,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/79": {
+   "candidates": 6508,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/80": {
+   "candidates": 44474,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/83": {
+   "candidates": 9234,
+   "votes": 159,
+   "sum": 55,
+   "most": 49
+  },
+  "Python/87": {
+   "candidates": 45619,
+   "votes": 51,
+   "sum": 2,
+   "most": 3
+  },
+  "Python/91": {
+   "candidates": 37318,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/94": {
+   "candidates": 53098,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/95": {
+   "candidates": 68597,
+   "votes": 378,
+   "sum": 413,
+   "most": 394
+  },
+  "Python/97": {
+   "candidates": 13979,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/98": {
+   "candidates": 31093,
+   "votes": 47,
+   "sum": 26,
+   "most": 24
+  },
+  "Python/103": {
+   "candidates": 36476,
+   "votes": 18,
+   "sum": 224,
+   "most": 505
+  },
+  "Python/104": {
+   "candidates": 40193,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/106": {
+   "candidates": 56074,
+   "votes": 163,
+   "sum": 772,
+   "most": 869
+  },
+  "Python/111": {
+   "candidates": 58161,
+   "votes": 2,
+   "sum": 143,
+   "most": 150
+  },
+  "Python/112": {
+   "candidates": 27453,
+   "votes": 66,
+   "sum": 3,
+   "most": 3
+  },
+  "Python/113": {
+   "candidates": 68283,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/115": {
+   "candidates": 28143,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/116": {
+   "candidates": 9994,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/117": {
+   "candidates": 58521,
+   "votes": 616,
+   "sum": 80,
+   "most": 78
+  },
+  "Python/119": {
+   "candidates": 50771,
+   "votes": 324,
+   "sum": 34,
+   "most": 38
+  },
+  "Python/126": {
+   "candidates": 36414,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/129": {
+   "candidates": 60256,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/131": {
+   "candidates": 40319,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/137": {
+   "candidates": 63364,
+   "votes": 1300,
+   "sum": 1372,
+   "most": 1372
+  },
+  "Python/139": {
+   "candidates": 45279,
+   "votes": 9,
+   "sum": 30,
+   "most": 41
+  },
+  "Python/142": {
+   "candidates": 45112,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/146": {
+   "candidates": 48831,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/148": {
+   "candidates": 56353,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/151": {
+   "candidates": 15895,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/152": {
+   "candidates": 20596,
+   "votes": 244,
+   "sum": 18,
+   "most": 18
+  },
+  "Python/153": {
+   "candidates": 57219,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/155": {
+   "candidates": 34834,
+   "votes": 2241,
+   "sum": 17461,
+   "most": 17461
+  },
+  "Python/160": {
+   "candidates": 40812,
+   "votes": 399,
+   "sum": 278,
+   "most": 278
+  },
+  "Python/161": {
+   "candidates": 55435,
+   "votes": null,
+   "sum": null,
+   "most": null
+  },
+  "Python/162": {
+   "candidates": 9810,
+   "votes": null,
+   "sum": null,
+   "most": null
+  }
+ },
+ "shards": [
+  "0/2",
+  "1/2"
+ ],
+ "seconds": 543.2,
+ "generated_utc": "2026-11-12T17:56:57Z",
+ "summary": {
+  "bugs": 64,
+  "votes": {
+   "published_fix_among_the_candidates": 32,
+   "published_fix_within": {
+    "1": 0,
+    "10": 6,
+    "50": 11,
+    "100": 17,
+    "200": 20,
+    "1000": 28
+   },
+   "place_median": 85.5,
+   "mean_of_one_over_the_place": 0.0249
+  },
+  "sum": {
+   "published_fix_among_the_candidates": 32,
+   "published_fix_within": {
+    "1": 0,
+    "10": 4,
+    "50": 12,
+    "100": 16,
+    "200": 18,
+    "1000": 24
+   },
+   "place_median": 94.5,
+   "mean_of_one_over_the_place": 0.0271,
+   "against_the_votes": {
+    "nearer_the_front": 15,
+    "further_back": 17,
+    "the_same_place": 0,
+    "came_within_the_budget": 5,
+    "fell_out_of_the_budget": 7
+   }
+  },
+  "most": {
+   "published_fix_among_the_candidates": 32,
+   "published_fix_within": {
+    "1": 0,
+    "10": 4,
+    "50": 13,
+    "100": 16,
+    "200": 18,
+    "1000": 23
+   },
+   "place_median": 114.0,
+   "mean_of_one_over_the_place": 0.029,
+   "against_the_votes": {
+    "nearer_the_front": 13,
+    "further_back": 18,
+    "the_same_place": 1,
+    "came_within_the_budget": 5,
+    "fell_out_of_the_budget": 7
+   }
+  }
+ }
+}
