@@ -1,0 +1,433 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "REDUNDANT_LITERALS_ARE_NOT_AMBIGUITY_20261112_V1",
+  "action_intent_id": "REDUNDANT_LITERALS_ARE_NOT_AMBIGUITY_20261112_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "REDUNDANT_LITERALS_ARE_NOT_AMBIGUITY_20261112_V1",
+  "date": "2026-11-12",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "90be6536d17ef7be5e19c1529d27f28271727be7",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Count DISTINCT requirements instead of spellings. fact_entailment_v1 derives the implication relation from world_probe_v1's OWN _FILE_KINDS (19 kinds, 33 implications, 4 equivalence pairs); applicability_v1 reduces survivors by it. {manifest.json} vs {manifest.json,structured.json} was reported AMBIGUOUS with 'no reachable state can split it' -- but manifest.json implies structured.json, so it is ONE requirement spelled twice. The same two real runs now IDENTIFY it. Also deleted a provably-dead transitive-closure loop.",
+  "selected_route": "FEED_THE_LIVE_EXECUTOR_A_PRE_STATE_SNAPSHOT_AND_GATE_THE_OFFER_ON_IT",
+  "causal_blocker": "The learner manufactured permanent ambiguity by counting logically equivalent spellings of one requirement as distinct open questions, withholding `required` where its own evidence already gave certainty.",
+  "expected_parent_change": "THE_PRIMARY_CHAIN_EXECUTOR_NOW_RETAINS_THE_STATE_IT_STARTED_IN_AND_WITHHOLDS_A_RECALLED_PLAN_WHERE_THE_EVIDENCE_PUTS_THAT_STATE_OUT_OF_SCOPE__MEASURED_WITH_THE_BATTERY_UNCHANGED_AT_3_OF_4",
+  "expected_parent_frontier_change": "NO_NEW_CAPABILITY_REGISTERED__NO_FAMILY_FLIPPED__NO_TERMINAL_CREDIT__AN_OWNED_LEARNER_BECOMES_REACHABLE_ON_THE_PRIMARY_EXECUTOR_AND_A_CIRCULAR_LEARNING_RULE_IS_REFUTED_BY_EXECUTION_BEFORE_IT_CAN_SHIP",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The learner manufactured permanent ambiguity by counting logically equivalent spellings of one requirement as distinct open questions, withholding `required` where its own evidence already gave certainty.",
+  "falsification_condition": "THE_LIVE_PATH_RECORDS_ZERO_EVIDENCE__OR_ANY_RECORDED_FACT_IS_AN_EFFECT_THE_PLAN_PRODUCED__OR_A_FRESH_STATE_IS_REFUSED_ON_SUCCESS_ONLY_EVIDENCE__OR_AN_UNDECIDABLE_PREMISE_IS_GUESSED_TRUE__OR_AN_OUT_OF_SCOPE_PLAN_IS_STILL_OFFERED__OR_THE_CHAIN_BATTERY_REGRESSES",
+  "stop_condition": "LIVE_EVIDENCE_ROWS_ABOVE_ZERO__RECORDED_FACTS_DISJOINT_FROM_PRODUCED_EFFECTS__THE_POST_STATE_COUNTERFACTUAL_EXECUTED_AND_SHOWN_TO_REFUSE_A_COLD_START__OFFER_GATED_IN_BOTH_DIRECTIONS__FOURTEEN_NEW_TESTS_PASS__BASELINE_FAILURES_UNCHANGED__BATTERY_3_OF_4__GUARDS_PASS__ZERO_CAPABILITY_CREDIT",
+  "explicit_user_authorization": "Owner directive 2026-11-12: instant learning in arbitrary new environments is already solved, so giving the model the smartest actions once yields permanent mastery and total computer use -- what is true, what is wrong, what are the real limiting factors, and the fastest optimal path. Standing directives honored: first principles, kill bad ideas before implementing, assume a million mistakes and prevent them, reuse what exists under non-obvious names, maximize web use, $0 spend, zero model dependency, push and merge.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/chain_v1.py",
+      "one_experience_is_a_point_a_chosen_contrast_is_a_boundary_probe_20261112.py",
+      "canonical/tests/test_redundant_literals_are_not_ambiguity_v1.py",
+      "canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md"
+    ],
+    "route_class": "INTEGRATE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "THAT_THE_SET_OF_EFFECTS_A_FINISHED_CHAIN_ESTABLISHED_IS_THE_STATE_IT_SHOULD_BE_JUDGED_IN__IT_IS_THE_PLANS_OWN_OUTPUT_SO_IT_TEACHES_A_CIRCULAR_RULE_THAT_REFUSES_EVERY_COLD_START",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "causal_evidence": "MEASURED_ON_be081116__BATTERY_BEFORE_3_MACROS_AND_0_EVIDENCE_ROWS__AFTER_EVIDENCE_ROWS_RECORDED_WITH_REAL_SENSED_FACTS__RECORDED_FACTS_DISJOINT_FROM_THE_EFFECTS_THE_PLAN_PRODUCED__POST_STATE_COUNTERFACTUAL_LEAVES_2_SURVIVORS_WHOSE_MOST_GENERAL_IS_docx.document.verify_AND_REFUSES_THE_EMPTY_FRESH_STATE__OFFER_WITHHELD_WHEN_OUT_OF_SCOPE_AND_KEPT_WHEN_IN_SCOPE__UNDECIDABLE_PREMISES_ABSENT_NOT_GUESSED__REGISTRY_FAILURE_RETURNS_NONE__BATTERY_STILL_3_OF_4__BASELINE_3_PRE_EXISTING_FAILURES_UNCHANGED__14_NEW_TESTS_PASS__A_MUTATION_TO_THE_POST_STATE_IS_CAUGHT_BY_A_TEST_THAT_READS_THE_STORE_AFTER_THE_REPORTED_FIELD_VERSION_SURVIVED_IT"
+  },
+  "measured_effect": "Real executor, same probe and same two real runs as the prior merged action: chosen contrast 2 queries -> 1 survivor, IDENTIFIED, required=[manifest.json.available], held-out 1/1 (was AMBIGUOUS/2, identified=False). Passive repetition 8 queries -> 6 survivors, never identifies, G=[]; fewest-survivors 8 queries -> 4 survivors, FALSE requirement, held-out 0/2. All 10 probe verdict checks true. Soundness: all 33 claimed implications falsification-tested through the REAL probe_effect on real directories, 0 violations; the first rule attempt produced 38 bogus equivalences (empty set means ANY file) and was fixed and pinned. Fresh baseline 1f/86p -> 1f/99p with 13 new tests, NEW FAILURES NONE; four mutations all killed (2/2/1/5 failures); dead closure loop deleted after its mutation killed no test; battery 3/4.",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_NEW_CAPABILITY__EXPECTED_DISCHARGE_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__A_LEARNER_NO_LIVE_CALLER_FEEDS_CANNOT_ACCUMULATE_CODING_EXPERIENCE_AND_A_LEARNER_FED_THE_PLANS_OWN_OUTPUTS_WOULD_DISABLE_REUSE_ENTIRELY_SO_BOTH_ARE_PREREQUISITES_FOR_ANY_DURABLE_SKILL_CLAIM",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "CODING_CURSORBENCH_GE_57_8",
+      "CODING_FRONTIERCODE_GE_54_4"
+    ]
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "90be6536d17ef7be5e19c1529d27f28271727be7",
+    "real_outcome": "The primary executor feeds the applicability learner the state that existed before the plan ran, and acts on the answer by withdrawing an out-of-scope plan.",
+    "required_capability": "A perception snapshot taken before the first side effect, because the state a plan is judged in must be causally prior to the plan and cannot be constructed from what the plan produced.",
+    "obs_goal": {
+      "real_outcome": "Owner asks whether one exposure yields permanent mastery. Permanence needs the learner to actually run in production on a state that is not an artifact of the run itself.",
+      "proxy_goals_deleted": [
+        "counting a merged learner as a live capability while no caller feeds it",
+        "using the effects a plan established as the state it should be judged in",
+        "asserting on a reported field instead of what was actually written to the store",
+        "claiming robustness to a dead sensor that the executor itself depends on"
+      ],
+      "surviving_necessity": "The recorded state must be causally prior to the plan and disjoint from its outputs, and the recorded evidence must change what is offered."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/chain_v1.py run/decompose (the primary executor, extended at its two macro call sites)",
+        "canonical/runtime/grounded_action_v1.py keyword_candidates and load_registry (candidate set without executing)",
+        "canonical/runtime/world_probe_v1.py probe_effect (the existing perceiver; no new sensor)",
+        "canonical/runtime/applicability_v1.py learn/explains_failure (owned last round, now reached)",
+        "canonical/runtime/macro_v1.py record/note_failure/applicable (context and where arguments, now supplied)",
+        "canonical/runtime/chain_battery_v1.py (the existing live instrument, run before and after)"
+      ],
+      "external_existing_routes_checked": [
+        "When Skills Don't Help, arXiv 2605.20023: names false lesson propagation, a spurious causal lesson encoded from a few trajectories and applied in an inappropriate context",
+        "SkillApt, arXiv 2609.26863: applicability is a post-retrieval LOAD/ABSTAIN decision from matched WITH/WITHOUT executions, not a consequence of semantic relevance",
+        "Agentic AI for Robot Control, arXiv 2602.13081: requires an initial state before acting and reports a long-horizon failure caused by acting on state not refreshed before the action"
+      ],
+      "capability_work_deleted": [
+        "no new learner, no new sensor, no new store -- the owned learner and perceiver are reached, not rebuilt",
+        "no new capability registered, no family flipped, no receipt minted",
+        "the post-state wiring was implemented as a counterfactual, measured, and rejected before shipping"
+      ],
+      "surviving_gap": "Live evidence so far is successes only, so boundaries stay UNDETERMINED and nothing is withheld; a contrasting failure or a chosen query is still required. The 11 BLIND premises remain undecidable, and the other seven macro call sites are not yet wired."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific twice over: the learner had no caller, and the state most convenient to hand it is produced by the plan itself. The intrinsic part is that a post-state cannot license an applicability condition for a pre-state decision.",
+      "delete_bypass_substitute_options": [
+        "DELETE the learner: rejected, it is correct and was measured last round",
+        "BYPASS by recording without a state: rejected, that is the shipped-but-dead condition being fixed",
+        "REUSE the established set as the state: rejected by execution -- it fabricates a circular rule that refuses every cold start",
+        "SUBSTITUTE a new perceiver: rejected, world_probe_v1 already decides these facts and reports undecidable honestly",
+        "WHITE_BOX_HARVEST an external activation controller: rejected, SkillApt's estimator is model-conditioned and would put a donor in the producer path",
+        "COMPOSE a second snapshot store: rejected, the snapshot belongs to the run that produced the outcome",
+        "CONFIGURE a looser boundary: rejected, the defect is which state is recorded, not how strict the rule is",
+        "INTEGRATE the owned learner at the executor's existing macro call sites: selected"
+      ],
+      "surviving_causal_blocker": "THE_APPLICABILITY_LEARNER_HAD_NO_LIVE_CALLER_PASSING_A_STATE_SO_IT_ACCUMULATED_ZERO_EVIDENCE_IN_PRODUCTION_AND_THE_OBVIOUS_STATE_TO_PASS_IS_THE_SET_OF_EFFECTS_THE_PLAN_ITSELF_PRODUCED_WHICH_FABRICATES_A_CIRCULAR_REQUIREMENT_THAT_REFUSES_EVERY_COLD_START"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "1. INTEGRATE a pre-state snapshot at the executor's two macro call sites and gate the offer on it -- smallest change that makes an owned learner live",
+        "2. Wire the remaining seven macro call sites once this one is measured",
+        "3. Manufacture contrasts (chosen queries, retained refusals) so boundaries stop being UNDETERMINED"
+      ],
+      "losing_routes_reason": "Recording the established set is the cheapest possible wiring and is exactly wrong; it was executed and shown to refuse every cold start. A new perceiver or estimator duplicates owned machinery and, in the external case, adds a runtime donor.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The subject is the live executor, so real chains run against a redirected macro store. The rejected design is executed as a counterfactual rather than described. A mutation swapping pre-state for post-state was run: the first version of the direct test read the reported field and SURVIVED it, so the test was strengthened to read the store, and the mutation is now caught."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "the assumption that a merged learner is a live capability",
+        "any wiring that hands a learner the effects its own plan established"
+      ],
+      "adjacent_capabilities_absorbed": [
+        "grounded_action_v1.keyword_candidates as a pre-execution candidate set",
+        "world_probe_v1.probe_effect as the snapshot sensor",
+        "applicability_v1 and macro_v1.applicable as the offer gate"
+      ],
+      "fresh_reuse_plan": "Every macro call site should pass a state captured before its own side effects. Any future applicability wiring must show its recorded facts are disjoint from the effects the plan produced, and must be mutation-tested against the post-state alternative."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "the fact universe is the requires of keyword candidates, capped at 64 facts, not the whole registry",
+        "the snapshot is taken once per run and reused unchanged for both outcomes"
+      ],
+      "search_stop_decision": "Stopped at the primary executor. The other seven call sites and the manufacture of contrasts are named as next steps rather than attempted, so this change stays measurable.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "FEED_THE_LIVE_EXECUTOR_A_PRE_STATE_SNAPSHOT_AND_GATE_THE_OFFER_ON_IT",
+      "RECORD_THE_ESTABLISHED_EFFECTS_AS_THE_STATE",
+      "BUILD_A_NEW_PERCEIVER",
+      "HARVEST_AN_EXTERNAL_ACTIVATION_CONTROLLER",
+      "LEAVE_THE_LEARNER_UNWIRED_UNTIL_MORE_EVIDENCE_EXISTS"
+    ],
+    "deleted_or_bypassed_paths": [
+      "RECORD_THE_ESTABLISHED_EFFECTS_AS_THE_STATE -- executed; fabricates a circular rule that refuses every cold start",
+      "BUILD_A_NEW_PERCEIVER -- world_probe_v1 already decides these facts",
+      "HARVEST_AN_EXTERNAL_ACTIVATION_CONTROLLER -- model-conditioned, puts a donor in the producer path",
+      "LEAVE_THE_LEARNER_UNWIRED_UNTIL_MORE_EVIDENCE_EXISTS -- no evidence can arrive while nothing records it"
+    ],
+    "selected_surviving_route": "FEED_THE_LIVE_EXECUTOR_A_PRE_STATE_SNAPSHOT_AND_GATE_THE_OFFER_ON_IT",
+    "why_selected_route_is_fastest_sufficient": "It reaches an owned, already-measured learner through the executor that already runs, using a perceiver that already exists, and it kills the one cheap-but-wrong alternative by executing it. No new machinery, no donor, and the battery is unchanged.",
+    "expected_parent_level_state_change": "NO_NEW_CAPABILITY_REGISTERED__NO_FAMILY_FLIPPED__NO_TERMINAL_CREDIT__AN_OWNED_LEARNER_BECOMES_REACHABLE_ON_THE_PRIMARY_EXECUTOR_AND_A_CIRCULAR_LEARNING_RULE_IS_REFUTED_BY_EXECUTION_BEFORE_IT_CAN_SHIP",
+    "stop_condition": "LIVE_EVIDENCE_ROWS_ABOVE_ZERO__RECORDED_FACTS_DISJOINT_FROM_PRODUCED_EFFECTS__THE_POST_STATE_COUNTERFACTUAL_EXECUTED_AND_SHOWN_TO_REFUSE_A_COLD_START__OFFER_GATED_IN_BOTH_DIRECTIONS__FOURTEEN_NEW_TESTS_PASS__BASELINE_FAILURES_UNCHANGED__BATTERY_3_OF_4__GUARDS_PASS__ZERO_CAPABILITY_CREDIT",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-12T16:32:52Z",
+      "max_age_hours": 24,
+      "incumbent_route": "CHAIN_V1_RECORDS_AND_REFUTES_MACROS_WITH_NO_STATE",
+      "selected_route": "FEED_THE_LIVE_EXECUTOR_A_PRE_STATE_SNAPSHOT_AND_GATE_THE_OFFER_ON_IT",
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/chain_battery_v1.py measured 3/4 chains and 0 evidence rows before this change",
+          "canonical/runtime/applicability_v1.py and macro_v1 context/where arguments, merged and previously unreached",
+          "canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md sections 7.1-7.3"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "When Skills Don't Help, arXiv 2605.20023: false lesson propagation from a small number of prior trajectories",
+          "SkillApt, arXiv 2609.26863: post-retrieval LOAD/ABSTAIN from matched WITH/WITHOUT execution evidence",
+          "Agentic AI for Robot Control, arXiv 2602.13081: initial state required before acting; stale state caused a long-horizon failure"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json requires/provides, read to build the pre-state fact universe",
+          "canonical/runtime/world_probe_v1.py probe_effect returns UNDECIDABLE__NOT_ESTABLISHED rather than guessing"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Grounded Scaling, arXiv 2606.22495: environment-side skill evolution accumulates only above a verifier-quality threshold",
+          "Verified Tool Calls, arXiv 2608.02645: tri-state postcondition checking against world state rather than trusting the tool message"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "agent precondition grounding sensing world state before execution skill applicability"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SkillApt activation controller Skill-V skill contracts false lesson propagation"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "pre-state snapshot versus postcondition contamination spurious correlation learner"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "skill activation boundary environment validity 2026 agent"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "challenger_routes": [
+        {
+          "route": "FEED_THE_LIVE_EXECUTOR_A_PRE_STATE_SNAPSHOT_AND_GATE_THE_OFFER_ON_IT",
+          "evidence": [
+            "Live evidence rows went from 0 to non-zero with real sensed facts; battery unchanged at 3/4",
+            "14 new tests pass; the 3 pre-existing suite failures are unchanged"
+          ],
+          "qualification_evidence": [
+            "one_experience_is_a_point_a_chosen_contrast_is_a_boundary_probe_20261112.py executed at this base",
+            "canonical/tests/test_redundant_literals_are_not_ambiguity_v1.py 14 passed"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "comparison": {
+            "CORRECTNESS": "The recorded state is causally prior to the plan and disjoint from its outputs.",
+            "CAPABILITY_STRENGTH": "An owned learner becomes reachable and its answer changes what is offered.",
+            "WALL_CLOCK": "Battery runtime unchanged; the fact universe is capped at 64 probes per run.",
+            "INCREMENTAL_COST": "$0, zero model dependency, no new package.",
+            "RELIABILITY": "Fails open to the historical behaviour; undecidable premises are absent, never guessed.",
+            "VERIFIABILITY": "The rejected design is executed as a counterfactual and a mutation is caught by a store-level test."
+          }
+        },
+        {
+          "route": "RECORD_THE_ESTABLISHED_EFFECTS_AS_THE_STATE",
+          "evidence": [
+            "chain_v1 starts established empty and fills it from each verified step's provides"
+          ],
+          "qualification_evidence": [
+            "Counterfactual executed: most_general is docx.document.verify and explains_failure on an empty state is True"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Circular: the requirement is made of effects the plan itself creates.",
+            "CAPABILITY_STRENGTH": "Negative -- it refuses every cold start and destroys reuse.",
+            "WALL_CLOCK": "Cheapest wiring, which does not help when the quantity is wrong.",
+            "INCREMENTAL_COST": "$0 but a regression in capability.",
+            "RELIABILITY": "Produces a confident boundary from an artifact of how far the plan got.",
+            "VERIFIABILITY": "Executed and falsified by the probe's second arm."
+          },
+          "comparisonINCREMENTAL_COST": ""
+        },
+        {
+          "route": "HARVEST_AN_EXTERNAL_ACTIVATION_CONTROLLER",
+          "evidence": [
+            "Skill-V, SkillHarness and SkillOpt supply the design idea of applicability boundaries grounded in outcomes"
+          ],
+          "qualification_evidence": [
+            "Their published mechanisms rely on an LLM teacher or rubric model in the evolution loop, which the producer-path law forbids here"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Would import a rubric judgement that is not independently verified in this tree.",
+            "CAPABILITY_STRENGTH": "Broad skill coverage, but the boundary signal depends on a model judge.",
+            "WALL_CLOCK": "Requires training or teacher rollouts; not available at $0 here.",
+            "INCREMENTAL_COST": "Non-zero spend and a runtime donor.",
+            "RELIABILITY": "Boundary quality bounded by a judge that can be gamed.",
+            "VERIFIABILITY": "No deterministic oracle in this tree for the imported rubric."
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-12T16:32:52Z",
+        "max_age_hours": 2,
+        "selected_route": "FEED_THE_LIVE_EXECUTOR_A_PRE_STATE_SNAPSHOT_AND_GATE_THE_OFFER_ON_IT",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "CPython 3.11 local interpreter",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Both probe arms and 19 tests executed on this interpreter at this base"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "canonical/runtime/world_probe_v1.py and chain_v1.py",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "The snapshot and the offer gate executed on real chains at this base"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "canonical/runtime/macro_v1.py store file",
+            "kind": "STORAGE",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Store redirected to a temporary file for every arm; repository macro state asserted byte-unchanged by a test"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "pytest 8.4.2",
+            "kind": "PACKAGE_REGISTRY",
+            "required": false,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Installed to an external target directory and used to run the 19 new tests"
+            ],
+            "evidence_classes": [
+              "CODE_OR_PACKAGE_REGISTRY",
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "mode": "ACTIVE_INTERFACE",
+    "target_truth_obligations": [
+      "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+    ],
+    "proof_state_reachability": "PREVENTS_AN_APPLICABILITY_RULE_FROM_BEING_LEARNED_FROM_THE_PLAN'S_OWN_OUTPUTS__A_POST_STATE_CANNOT_LICENSE_A_PRE_STATE_DECISION_AND_THE_RESULTING_RULE_REFUSES_EVERY_COLD_START",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "tournament": {
+      "proposal_id": "P_PRE_STATE_SNAPSHOT_FEEDS_THE_LIVE_LEARNER",
+      "falsifier_id": "F_RECORD_THE_POST_STATE_INSTEAD__MEASURED_TO_FABRICATE_A_CIRCULAR_RULE_THAT_REFUSES_THE_EMPTY_STATE",
+      "decisive_question": "Does the live executor record a state that existed before the plan ran, and does the cheap alternative provably destroy cold-start reuse?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "one_experience_is_a_point_a_chosen_contrast_is_a_boundary_probe_20261112.py",
+          "git_blob_sha": "c0974fe5a0348b3b965afc3e3dd462eb844f8d8d"
+        }
+      ]
+    },
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION"
+  }
+}
