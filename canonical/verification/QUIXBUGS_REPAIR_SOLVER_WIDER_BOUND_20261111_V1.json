@@ -76,9 +76,10 @@
   "shortest_path_lengths",
   "shortest_paths",
   "shunting_yard",
-  "sqrt"
+  "sqrt",
+  "subsequences"
  ],
- "generated_utc": "2026-11-12T01:12:17Z",
+ "generated_utc": "2026-11-12T01:13:53Z",
  "mutations_per_file": 128,
  "outcomes": {
   "bitcount": {
@@ -678,6 +679,25 @@
    "solver_says_applied": false,
    "solver_says_pass": false,
    "status": "FAIL_CLOSED__BASELINE_VERIFICATION_INCOMPLETE",
+   "stopped_at_the_wall_limit": false
+  },
+  "subsequences": {
+   "file_changed": false,
+   "finished": true,
+   "lesson_kept_after": null,
+   "lesson_not_kept_because": null,
+   "memory_hit": false,
+   "memory_strategy": null,
+   "processes_started": 1024,
+   "repair_mode": null,
+   "repair_status": "OPEN__NO_VERIFIED_REPAIR_IN_GUIDED_BOUNDS",
+   "repaired": false,
+   "searches": 1,
+   "second_check_passes": false,
+   "seconds": 718.69,
+   "solver_says_applied": false,
+   "solver_says_pass": false,
+   "status": "OPEN__NO_VERIFIED_REPAIR_IN_BOUNDED_SEARCH",
    "stopped_at_the_wall_limit": false
   }
  },
