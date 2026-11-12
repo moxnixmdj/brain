@@ -18,7 +18,10 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+# parents[2] is the repository root. parents[1] pointed the live-state check at
+# canonical/canonical/astra_runtime/state, which cannot exist, so "wrote nothing into the tree"
+# passed vacuously.
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from one_lesson_buys_a_word_not_an_operator_probe_20261112 import (  # noqa: E402
@@ -70,16 +73,20 @@ def test_an_operator_the_learner_does_not_have_cannot_be_demonstrated():
     op = _report()["operator_that_cannot_be_taught"]
     assert op["request"] == UNTEACHABLE
     assert op["ok"] is False
-    assert op["reason"] == "UNKNOWN_WORD:median"
+    # `median` was this pin until its operator was added in code (the next round); `mode` has no
+    # part and no lesson can create one.
+    assert op["reason"] == "UNKNOWN_WORD:mode"
 
 
 def test_the_lesson_adds_no_operator():
     s = _report()["summary"]
     assert s["operators_added_by_the_lesson"] == 0
     assert s["built_in_operator_parts"] == len(taught.PARTS)
-    # Report the measured number rather than the prose. The module docstring says fifteen; PARTS
-    # holds fourteen. The probe must not repeat a number it has not counted.
-    assert len(taught.PARTS) == 14
+    # Report the measured number rather than the prose. The module docstring and the registry
+    # limitation both say fifteen; PARTS held fourteen until the median reducer was added as a
+    # code change (A_NEW_PART_COSTS_CODE_ONE_LESSON_BUYS_THE_WORD_20261112_V1.md). It now
+    # matches the prose the whole time.
+    assert len(taught.PARTS) == 15
 
 
 def test_a_lesson_with_one_example_is_set_aside_not_believed():
