@@ -416,6 +416,16 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
     result: Any = None
     observed: dict[str, Any] = {}
     invoked: dict[str, Any] = {}
+    input_digests: dict[str, str] = {}
+
+    def invoke_with_snapshot(args: dict[str, Any], invocation_root: str) -> Any:
+        # Capture each attempted invocation BEFORE it can overwrite/delete file arguments.
+        # The fallback call must capture its own pre-state, not the empty probe's pre-state.
+        # Files created by the action are outputs, not inputs of this invocation.
+        nonlocal input_digests
+        input_digests = snapshot_inputs(invocation_root, args)
+        return fn(args, invocation_root)
+
     try:
         spec = importlib.util.spec_from_file_location(module_name, os.path.join(root, module_path))
         if spec is None or spec.loader is None:
@@ -429,7 +439,8 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
             fn = getattr(module, entrypoint, None)
             if not callable(fn):
                 return None
-            result, invoked = _probe_invoke(fn, root, capability_id, module_sha, instance_index)
+            result, invoked = _probe_invoke(invoke_with_snapshot, root, capability_id,
+                                            module_sha, instance_index)
         finally:
             signal.alarm(0)
     except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
@@ -442,7 +453,6 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
 
     if not isinstance(result, dict):
         return None
-    input_digests = snapshot_inputs(root, invoked)
     outcome = "EXECUTED"
     for field in ("status", "pass", "output_verified"):
         if field in result:
