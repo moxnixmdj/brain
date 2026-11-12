@@ -7,7 +7,7 @@
  "route_id": "WHAT_ACTUALLY_BLOCKS_THE_FRONT_DOOR_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "dcbbba05ea306fffa2c0b4883da73e6ea91cc696",
+ "canonical_base_commit": "d418ab52de39be030f9284890130cf48d7195686",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -103,7 +103,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "dcbbba05ea306fffa2c0b4883da73e6ea91cc696",
+  "canonical_base_commit": "d418ab52de39be030f9284890130cf48d7195686",
   "real_outcome": "THE_CONFINEMENT_SEAM_IS_MEASURED_AS_NOT_THE_BLOCKER__LIFTING_IT_BUYS_0_OF_21__THE_DOMINANT_EMITTER_OF_THAT_STATUS_IS_A_DIFFERENT_REFUSAL_SITE__AND_THE_EXECUTION_DECISION_WAS_SPELLED_THREE_TIMES_SO_A_RELEASE_CONDITION_COULD_NOT_PROPAGATE__NOW_SPELLED_ONCE_WITH_EVERY_EXISTING_REFUSAL_UNCHANGED",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "obs_goal": {
@@ -209,7 +209,7 @@
   "stop_condition": "COUNTERFACTUAL_RUN_TWICE_BEFORE_AND_AFTER_THE_FIX__S0_21_TO_21__S1_21_TO_18__S2_3_TO_0__S3_TWO_WORKING__TEST_7_OF_7__HOST_UNTOUCHED_TRUE__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-12T20:32:21Z",
+   "checked_at_utc": "2026-11-12T20:35:47Z",
    "max_age_hours": 24,
    "incumbent_route": "BOUNDARY_STATE__19_OF_38_REALISTIC_ADVANCED_CODING_GOALS_REFUSED_WITH_COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT__SEAM_PRICED_AS_THE_NEXT_WORK_ITEM_BY_FOUR_DOCUMENTS",
    "source_classes_checked": [
@@ -341,7 +341,7 @@
     }
    ],
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-12T20:32:21Z",
+    "checked_at_utc": "2026-11-12T20:35:47Z",
     "max_age_hours": 2,
     "selected_route": "RUN_THE_COUNTERFACTUAL_BEFORE_BUILDING",
     "status": "READY",
