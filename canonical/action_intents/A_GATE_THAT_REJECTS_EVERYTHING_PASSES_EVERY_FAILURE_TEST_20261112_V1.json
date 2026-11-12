@@ -1,0 +1,233 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1",
+ "action_intent_id": "A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_GATE_THAT_REJECTS_EVERYTHING_PASSES_EVERY_FAILURE_TEST_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "4138e9ee0b5afa8cc71f1c32e72c49686304eae6",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Round 7 repointed eight repair predicates to pass and inverted the gate tests, but every one of those tests asks the gate to REJECT, and a gate that rejects everything satisfies all of them. This is measured, not argued: reducing ast.Add:[ast.Sub, ast.Mult] to ast.Add:[ast.Sub] in the patch-search adapter removes the repair for the canonical injected-operator defect class, and all 11 pre-existing gate tests still PASS while the added positive control FAILS 2. The existing success-side test feeds a hand-written pass=True dict to _check_expect, so it checks the evaluator and not any result a producer produced. Added REPAIRABLE_FIXTURE (return x + x, reachable because Add->Mult is in _BINOP_SWAPS), run_positive_control(), and six tests that execute real adapters: 5/5 solvers find and verify the repair, the live gate accepts 5/5 and rejects 0, and the two acceptance controllers correctly fail closed where the legacy transport predicate accepted both. The adapter used for the falsification was restored; no adapter byte and no registry line ships in this change. Claims no capability progress.",
+ "selected_route": "ADD_THE_MISSING_POSITIVE_CONTROL_TO_THE_EXISTING_EXECUTED_GATE_PROBE",
+ "causal_blocker": "THE_REPAIR_GATE_VERIFICATION_SUITE_CONTAINED_NO_TEST_THAT_EXECUTES_A_SUCCESSFUL_REPAIR_SO_THE_REPAIR_SURFACE_COULD_STOP_WORKING_ENTIRELY_WITH_EVERY_TEST_STILL_GREEN_WHICH_IS_THE_FAILURE_MODE_THAT_MATTERS_BEFORE_LEARNED_SKILLS_ARE_RETAINED_PERMANENTLY",
+ "expected_parent_change": "THE_FALSE_CLAIM_THAT_THE_GATE_SUITE_VERIFIES_THE_GATE_IN_BOTH_DIRECTIONS_IS_REFUTED_BY_AN_EXECUTED_MUTATION_AND_THE_MISSING_DIRECTION_IS_NOW_MEASURED_ON_REAL_ADAPTER_OUTPUT",
+ "expected_parent_frontier_change": "NO_CAPABILITY_CREDIT__NO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NO_REGISTRY_OR_ADAPTER_CHANGE__ONE_MEASURED_VERIFICATION_BLIND_SPOT_CLOSED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_REPAIR_GATE_VERIFICATION_SUITE_CONTAINED_NO_TEST_THAT_EXECUTES_A_SUCCESSFUL_REPAIR_SO_THE_REPAIR_SURFACE_COULD_STOP_WORKING_ENTIRELY_WITH_EVERY_TEST_STILL_GREEN_WHICH_IS_THE_FAILURE_MODE_THAT_MATTERS_BEFORE_LEARNED_SKILLS_ARE_RETAINED_PERMANENTLY",
+ "falsification_condition": "THE_REPAIR_SURFACE_IS_BROKEN_AND_THE_POSITIVE_CONTROL_STILL_PASSES__OR_A_SOLVER_VERIFIES_A_REACHABLE_REPAIR_AND_THE_POSITIVE_CONTROL_REPORTS_IT_AS_REJECTED__OR_THE_REPAIRABLE_FIXTURE_TURNS_OUT_TO_PASS_BEFORE_ANY_REPAIR_OR_TO_BE_UNREPAIRABLE_BY_THE_GRAMMAR",
+ "stop_condition": "POSITIVE_CONTROL_PASSES_ON_THE_UNMODIFIED_TREE__FAILS_WHEN_THE_REPAIR_GRAMMAR_IS_BROKEN__FAILS_WHEN_THE_LIVE_PREDICATE_WRONGLY_REJECTS__ALL_17_GATE_TESTS_PASS__ADAPTER_AND_REGISTRY_RESTORED_BYTE_IDENTICAL__GUARDS_PASS__ZERO_CREDIT",
+ "explicit_user_authorization": "Owner directive 2026-11-12: instant learning in arbitrary new environments is already solved, so one exposure to the best actions yields permanent mastery -- what is true, what is wrong, what are the real limiting factors, and the fastest optimal path. Standing directives honored: first principles, kill bad ideas before implementing them, assume a million mistakes and prevent them, reuse what already exists under non-obvious names, maximize web use, $0 spend, zero model dependency, push and merge.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "gate_accepts_a_failed_repair_probe_20261112.py",
+   "canonical/tests/test_gate_accepts_a_failed_repair_v1.py",
+   "canonical/tools/INSTANT_LEARNING_AUDIT_20261112_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_SUITE_OF_TESTS_WHICH_ALL_ASK_THE_GATE_TO_REJECT_A_FAILURE_ESTABLISHES_THE_GATE_IS_CORRECT__A_GATE_THAT_REJECTS_EVERYTHING_PASSES_ALL_OF_THEM_AND_THE_REPAIR_SURFACE_CAN_BE_ENTIRELY_BROKEN_WITH_EVERY_TEST_GREEN",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_6ac2a539__REPAIR_GRAMMAR_BROKEN_BY_REMOVING_ADD_TO_MULT__ALL_11_PRE_EXISTING_GATE_TESTS_PASSED__THE_ADDED_POSITIVE_CONTROL_FAILED_2__ADAPTER_RESTORED_BYTE_IDENTICAL__LIVE_GATE_ON_THE_UNMODIFIED_TREE_REJECTS_8_OF_8_FAILED_REPAIRS_AND_ACCEPTS_5_OF_5_REAL_REPAIRS_WITH_0_REJECTED__TWO_ACCEPTANCE_CONTROLLERS_FAIL_CLOSED_WHERE_THE_LEGACY_PREDICATE_ACCEPTED_BOTH__LIVE_PREDICATE_POINTED_AT_AN_ABSENT_FIELD_FAILS_3_OF_THE_NEW_TESTS__17_GATE_TESTS_PASS__CENSUS_STILL_60_OF_145_WHICH_FALSIFIES_THE_AUDITS_OWN_PREDICTION__DEFINITE_MISMATCHES_NOW_1_AND_FALSIFIABILITY_DEFECTS_NOW_1__NINTH_PREDICATE_DELIBERATELY_LEFT_BECAUSE_IT_NEEDS_A_REAL_CONTENT_ADDRESSED_MEASUREMENT_RECEIPT"
+ },
+ "measured_effect": "ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_REGISTRY_OR_ADAPTER_CHANGE__A_VERIFICATION_BLIND_SPOT_DEMONSTRATED_BY_MUTATION_AND_THEN_CLOSED",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_IS_NOT_A_MEASURED_BENCHMARK_MOVEMENT__A_VERIFICATION_SUITE_THAT_STAYS_GREEN_WHILE_THE_REPAIR_SURFACE_IS_BROKEN_CANNOT_ESTABLISH_ANY_CODING_ACCEPTANCE_CLAIM_SO_CLOSING_IT_IS_A_PREREQUISITE_FOR_TRUSTING_THE_MEASUREMENT_NOT_A_SCORE_MOVEMENT",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ]
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "4138e9ee0b5afa8cc71f1c32e72c49686304eae6",
+  "real_outcome": "The repair surface can be broken with every existing gate test still passing; it now cannot be broken without the positive control failing.",
+  "required_capability": "A verification instrument that can succeed. A control which is unreachable by construction cannot distinguish a correct gate from a disabled one, so reachability of the fixture must itself be executed and pinned.",
+  "obs_goal": {
+   "real_outcome": "Owner asks whether one exposure to the best actions yields permanent mastery. Permanent retention is only safe if the gate deciding what counted as success can be wrong in neither direction.",
+   "proxy_goals_deleted": [
+    "counting inverted failure-path tests as two-sided verification",
+    "feeding a hand-written success payload to the evaluator and calling it an end-to-end success measurement",
+    "accepting an unreachable fixture as a positive control",
+    "re-doing the eight repoints another session had already merged"
+   ],
+   "surviving_necessity": "Both directions must be executed on real producer output: false when the repair provably failed, true when a solver really found and verified one."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "gate_accepts_a_failed_repair_probe_20261112.py (CASES, _load, _materialise, apply_predicate, LEGACY_EXPECT -- extended, not rebuilt)",
+    "canonical/tests/test_gate_accepts_a_failed_repair_v1.py (round 7 inversion and LEGACY_EXPECT design preserved)",
+    "canonical/runtime/grounded_action_v1.py::_check_expect (the production decider, reused for the real payloads)",
+    "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py::_BINOP_SWAPS (read to design a reachable fixture; temporarily mutated for the falsification, then restored)",
+    "canonical/tests/test_acceptance_predicate_target_v1.py (DEFINITE_DEBT and REPOINTED_ON_20261112 ratchets, left intact)",
+    "one_shot_regime_census_20261112.py / acceptance_predicate_target_probe_20261112.py / runtime_predicate_falsifiability_probe_20261112.py (re-measured, not re-argued)"
+   ],
+   "external_existing_routes_checked": [
+    "The Verifier Is Part of the Simulator (arXiv 2611.01334, 2026-10-31): with the trajectory and library frozen the only remaining move is which permitted summary to admit; agreement among summaries is a safeguard, not a certificate",
+    "ImpossibleBench and the 2026 agentic reward-hacking survey: visible-check gaming passes impossible tasks, so evidence strength must be labelled and the oracle must read the real outcome",
+    "Countdown-Code (arXiv 2603.07084): a proxy separable from the true reward seeds a persistent hacking prior, which permanent retention would freeze"
+   ],
+   "capability_work_deleted": [
+    "no new probe, no new predicate engine, no new adapter",
+    "no registry line changed -- eight repoints were already merged and the ninth needs a real receipt",
+    "no capability registered, no family flipped, no receipt minted",
+    "the duplicate nine-predicate change built earlier this session was discarded after measuring that main had already landed eight of them"
+   ],
+   "surviving_gap": "One DEFINITE row still reads transport because it needs a content-addressed measurement receipt; 46 transport candidates and 11 undeclared-outcome rows are unread; 53 predicates are statically invisible; the verified repair routes are still not reachable through the live front door."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic to one-sided evidence: rejection-only tests are satisfied by a universally rejecting gate, so no amount of additional failure-path testing can establish the success direction. The path-specific part was that the one success-side test used a synthetic payload instead of adapter output.",
+   "delete_bypass_substitute_options": [
+    "DELETE the failure-path tests: rejected, they are correct and catch real false-accepts",
+    "BYPASS by trusting the round-7 repoint: rejected, the mutation experiment shows the suite stays green when repair breaks",
+    "REUSE the synthetic success payload: rejected, it exercises the evaluator on data no producer emitted",
+    "SUBSTITUTE a new verification framework: rejected, the existing probe already loads and runs every adapter",
+    "CONFIGURE a looser assertion: rejected, widening a tolerance is a forbidden marker and the gap is a missing direction"
+   ],
+   "surviving_causal_blocker": "THE_REPAIR_GATE_VERIFICATION_SUITE_CONTAINED_NO_TEST_THAT_EXECUTES_A_SUCCESSFUL_REPAIR_SO_THE_REPAIR_SURFACE_COULD_STOP_WORKING_ENTIRELY_WITH_EVERY_TEST_STILL_GREEN_WHICH_IS_THE_FAILURE_MODE_THAT_MATTERS_BEFORE_LEARNED_SKILLS_ARE_RETAINED_PERMANENTLY"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. ADAPT the existing probe with a reachable fixture and require the live predicate to accept the verified repair -- reuses every loader and case, adds the missing direction only",
+    "2. Repoint the ninth predicate -- blocked on a real content-addressed measurement receipt; fabricating one would be worse than the transport field",
+    "3. Read the 46 transport candidates -- larger, needs per-row outcome semantics"
+   ],
+   "losing_routes_reason": "Re-implementing the eight repoints would have duplicated merged work and produced a 24k-line reformat. A new verification framework would replace loaders that already run every adapter. Repointing the ninth without a real receipt would substitute one unverified acceptance for another.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The instrument was itself falsified twice before being trusted. Breaking the mutation grammar: 11 existing tests passed, the new control failed 2. Pointing the live predicate at an absent field: 3 new tests failed. The fixture's reachability and its initial failure are executed directly with no adapter and no predicate involved, so neither a grammar bug nor an evaluator bug can satisfy them."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the description of a rejection-only suite as two-sided verification",
+    "the audit's unmeasured prediction that repointing would lower the one-shot-safe census, now recorded as falsified at 60/145"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the probe's existing adapter loader and case table",
+    "the production _check_expect decider",
+    "round 7's LEGACY_EXPECT convention, extended to the success-side fixture"
+   ],
+   "fresh_reuse_plan": "Any future gate correction must ship both directions executed on real producer output, plus a demonstration that the new tests fail when the behavior they claim to protect is broken. A control that cannot succeed is not a control."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "the positive control reuses CASES and _load rather than duplicating adapter invocation",
+    "the three static probes were re-run once at this base instead of being re-argued from memory",
+    "the positive report is cached per test session"
+   ],
+   "search_stop_decision": "Stopped at the missing direction. The ninth predicate, the 46 candidates and the front-door reach are named as open rather than guessed, and the eight merged repoints were not redone.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "ADD_THE_MISSING_POSITIVE_CONTROL_TO_THE_EXISTING_EXECUTED_GATE_PROBE",
+   "REDO_ALL_NINE_PREDICATE_REPOINTS",
+   "REPOINT_THE_NINTH_PREDICATE_WITHOUT_A_REAL_RECEIPT",
+   "BUILD_A_NEW_VERIFICATION_FRAMEWORK",
+   "ACCEPT_THE_SYNTHETIC_SUCCESS_PAYLOAD_AS_SUFFICIENT"
+  ],
+  "deleted_or_bypassed_paths": [
+   "REDO_ALL_NINE_PREDICATE_REPOINTS -- eight already merged on main; the duplicate was discarded after measurement",
+   "REPOINT_THE_NINTH_PREDICATE_WITHOUT_A_REAL_RECEIPT -- a fabricated receipt is worse than a transport field",
+   "BUILD_A_NEW_VERIFICATION_FRAMEWORK -- the existing probe already runs every adapter",
+   "ACCEPT_THE_SYNTHETIC_SUCCESS_PAYLOAD_AS_SUFFICIENT -- measured: 11 tests stay green while repair is broken"
+  ],
+  "selected_surviving_route": "ADD_THE_MISSING_POSITIVE_CONTROL_TO_THE_EXISTING_EXECUTED_GATE_PROBE",
+  "why_selected_route_is_fastest_sufficient": "It reuses the probe that already loads and executes every adapter, adds one reachable fixture and six tests, changes no registry or adapter byte, and is itself falsified in two independent ways before being trusted. Every alternative was duplicative, blocked on a real receipt, or measured insufficient.",
+  "expected_parent_level_state_change": "NO_CAPABILITY_CREDIT__NO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED__NO_REGISTRY_OR_ADAPTER_CHANGE__ONE_MEASURED_VERIFICATION_BLIND_SPOT_CLOSED",
+  "stop_condition": "POSITIVE_CONTROL_PASSES_ON_THE_UNMODIFIED_TREE__FAILS_WHEN_THE_REPAIR_GRAMMAR_IS_BROKEN__FAILS_WHEN_THE_LIVE_PREDICATE_WRONGLY_REJECTS__ALL_17_GATE_TESTS_PASS__ADAPTER_AND_REGISTRY_RESTORED_BYTE_IDENTICAL__GUARDS_PASS__ZERO_CREDIT",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "CONTROL_PLANE_PREREQUISITE",
+  "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+  "minimum_prerequisite_for": [
+   "EXTERNAL_RESULT_OR_ACCESS",
+   "UNIVERSAL_SCOPE_AND_COMPOSITION",
+   "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+  ],
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "proof_state_reachability": "PREVENTS_A_REPAIR_SURFACE_THAT_STOPPED_WORKING_FROM_BEING_REPORTED_AS_VERIFIED_BY_A_GREEN_SUITE__REJECTION_ONLY_EVIDENCE_IS_SATISFIED_BY_A_UNIVERSALLY_REJECTING_GATE_SO_THE_SUCCESS_DIRECTION_MUST_BE_EXECUTED_ON_REAL_PRODUCER_OUTPUT",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "P_REJECTION_ONLY_TESTS_ESTABLISH_THE_GATE",
+   "falsifier_id": "F_BREAK_THE_REPAIR_GRAMMAR_AND_COUNT_WHICH_TESTS_NOTICE__ELEVEN_PASS_AND_THE_POSITIVE_CONTROL_FAILS",
+   "decisive_question": "Can the repair surface stop working entirely while every existing gate test still passes?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "gate_accepts_a_failed_repair_probe_20261112.py",
+     "git_blob_sha": "11922c226f4ed5214de8a49fdba8636b8d232617"
+    }
+   ]
+  }
+ }
+}

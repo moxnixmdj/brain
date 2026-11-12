@@ -8995,7 +8995,7 @@
      "task_text": "${input.goal}"
     },
     "expect": {
-     "field": "output_verified",
+     "field": "pass",
      "type": "field_equals",
      "value": true
     },
