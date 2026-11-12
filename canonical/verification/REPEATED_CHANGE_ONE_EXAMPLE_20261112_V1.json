@@ -10,7 +10,7 @@
   "Two examples: 1089 of 3326 (33 in 100); 1118 of its 1150 changes are the developers'.",
   "An example of another kind of change: the organ edited in 7 of 1163 askings; none of its 19 changes there is one the developers made.",
   "By kind of change, from one example: a renamed method or a call written the old way, 38 to 58 in 100; a call no longer to be used, 30; types written another way, 7; text put together as f-strings, 0; a library taken out, 0. Every f-string is another expression and taking a library out removes whole lines: the organ learns the changed expression of its example and repeats that expression.",
-  "In 24 of the 89 files the organ can learn nothing from the file's own change: the change is only import lines (12), or it adds, removes or reshapes whole statements.",
+  "In 24 of the 89 files the organ can learn nothing from the file's own change: the change is only import lines (12); it adds, removes or reshapes whole statements (7); the same code was changed in one place and left alone in another (3); or the organ's rule does not reproduce the example (2).",
   "No test was run: agreement with the developers is the measure. This is the best case by construction, because the pull requests were looked for as repeats of one change. One run by the producer on one machine; nobody else has run it. Zero model calls."
  ],
  "what_was_run": {
