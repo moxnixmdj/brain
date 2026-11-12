@@ -75,6 +75,45 @@ _IMAGE_EXT = (".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp", ".tif", ".tiff")
 
 _PLACEHOLDER_RE = re.compile(r"\$\{input\.([A-Za-z0-9_]+)\}")
 
+# A URL is an ADDRESS, not a location in the filesystem. These are the slot
+# names that mean one. Kept as a predicate rather than a list of capabilities so
+# a new URL-consuming capability needs no change here.
+_URL_SLOT_WORDS = ("url", "uri", "href", "endpoint", "webhook", "feed")
+_URL_IN_TEXT = re.compile(r"https?://[^\s)\]}>\"']+")
+
+
+def _is_url_slot(low):
+    """Does this placeholder name a URL rather than a path, a key, or a name?
+
+    `url_key` is the trap, and it was hit on the first attempt. It contains
+    "url" but it means THE NAME OF A KEY whose value is a URL --
+    `http.json.fetch_from_state` looks that key up inside a repository-local
+    JSON file. Binding the goal's URL there would have handed a lookup name a
+    web address and produced a confident, wrong call. A slot that names a KEY
+    or a NAME is a lookup, not an address.
+    """
+    low = str(low or "").lower()
+    if "path" in low or "file" in low or "dir" in low:
+        return False
+    if "key" in low or low.endswith("name") or "_name" in low:
+        return False
+    return any(w in low for w in _URL_SLOT_WORDS)
+
+
+def _url_named_in(goal):
+    """The first absolute URL the goal itself states, or None.
+
+    Trailing sentence punctuation is stripped: `...date=2020,` and
+    `...report).` are both URLs followed by prose. It must be the goal's own
+    text -- nothing is invented, and nothing is taken from the filesystem.
+    """
+    for m in _URL_IN_TEXT.finditer(str(goal or "")):
+        url = m.group(0).rstrip(".,;:!?)]}")
+        if url:
+            return url
+    return None
+
+
 
 def _flatten(value, out=None):
     out = [] if out is None else out
@@ -770,6 +809,27 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             value = _quoted(goal)
             if value is None:
                 value = str(goal or "").strip()
+        elif _is_url_slot(low):
+            # A URL IN THE SENTENCE MUST NOT BE READ AS A FILE PATH.
+            #
+            # Measured: the goal `Using the authoritative JSON source
+            # https://api.worldbank.org/... extract JSON path 1.0.value and save
+            # to <file>.json` provides a URL, a json path and a destination.
+            # The binder extracted the file for `source_json_path` (correct) and
+            # then could not fill the URL slot, so the only capability that
+            # fetches JSON over HTTP was refused with
+            # NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES while the URL sat in the
+            # sentence.
+            #
+            # The compiler already treats URLs as non-paths -- `_repo_paths_uncached`
+            # strips them before scanning "because URL path components are not
+            # repository paths". The binder had no counterpart rule, so the URL
+            # was neither a path nor anything else: it fell through every branch
+            # and was silently dropped.
+            #
+            # This binds ONLY a slot named like a URL. A path slot is untouched,
+            # so a goal containing both still gets one of each.
+            value = _url_named_in(goal)
         elif ("path" in low) or ("file" in low) or ("root" in low) \
                 or ("dir" in low) or ("corpus" in low) or low.endswith("_dir"):
             # The fallback must honor the same declared scope as the primary
