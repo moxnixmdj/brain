@@ -1,0 +1,215 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "ONE_BAD_TRANSPORT_ENTRY_MUST_NOT_DROP_THE_NEXT_LESSON_20261112_V1",
+ "action_intent_id": "ONE_BAD_TRANSPORT_ENTRY_MUST_NOT_DROP_THE_NEXT_LESSON_20261112_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "ONE_BAD_TRANSPORT_ENTRY_MUST_NOT_DROP_THE_NEXT_LESSON_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "aec51eb214426215ea24b846ec25c569636825c7",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Refuse invalid skill-bundle counters and timestamps per entry so later valid lessons survive transport; preserve epoch zero.",
+ "selected_route": "VALIDATE_NUMERIC_METADATA_BEFORE_EXISTING_BUNDLE_IMPORT_WRITES",
+ "causal_blocker": "Numeric skill transport metadata was blindly coerced, so one malformed entry aborts later imports or writes invalid values despite a matching rule content address.",
+ "expected_parent_change": "A malformed numeric entry is refused by skill ID without writing or blocking later valid lessons; legacy defaults and valid numeric roundtrips remain usable.",
+ "expected_parent_frontier_change": "Bounded reliability repair for retained-skill transport; no new task-solving or learning performance claim, family discharge, or terminal credit.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::Numeric skill transport metadata was blindly coerced, so one malformed entry aborts later imports or writes invalid values despite a matching rule content address.",
+ "falsification_condition": "An invalid count or timestamp aborts the bundle, mutates an existing rule, or prevents the following valid lesson from being recalled after reopening the store.",
+ "stop_condition": "Fifteen numeric metadata cases pass including reopened-store recall; neighboring transport/restart/wiring tests and required guards pass.",
+ "explicit_user_authorization": "Owner directive 2026-11-12: instant learning in arbitrary new environments is already solved, so giving the model the smartest actions once yields permanent mastery and total computer use -- what is true, what is wrong, what are the real limiting factors, and the fastest optimal path. Standing directives honored: first principles, kill bad ideas before implementing, assume a million mistakes and prevent them, reuse what exists under non-obvious names, maximize web use, $0 spend, zero model dependency, push and merge.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tests/test_skill_bundle_numeric_metadata_v1.py"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "CONTENT_ADDRESS_VALIDITY_DOES_NOT_VALIDATE_NUMERIC_TRANSPORT_METADATA",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "New regression cases before patch: 14 failed, 1 passed. After patch: all 15 pass. With transport, wiring, scoped restart and parameterized-skill neighbors: 71 pass locally. Local regression evidence, not independently reproduced task performance."
+ },
+ "measured_effect": "New regression cases before patch: 14 failed, 1 passed. After patch: all 15 pass. With transport, wiring, scoped restart and parameterized-skill neighbors: 71 pass locally.",
+ "load_bearing_primary": {
+  "interpretation": "Zero benchmark or obligation discharge claimed. Preventing malformed numeric transport metadata from dropping usable coding lessons is prerequisite reliability work. Inherited constructive-gap unlock is an admission convention, not measured score improvement.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ]
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "aec51eb214426215ea24b846ec25c569636825c7",
+  "real_outcome": "A malformed numeric entry is refused by skill ID without writing or blocking later valid lessons; legacy defaults and valid numeric roundtrips remain usable.",
+  "required_capability": "Keep numeric import failures local to their entries and retain subsequent usable memory.",
+  "obs_goal": {
+   "real_outcome": "Improve durable reuse reliability while distinguishing bounded generalization from perfect arbitrary computer use.",
+   "proxy_goals_deleted": [
+    "counting stored bytes as general mastery",
+    "calling every malformed import a learner failure",
+    "treating counter syntax as authentic verification"
+   ],
+   "surviving_necessity": "One malformed transport entry must not block a later valid lesson."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "VerifiedSkillStore.import_bundle/export_bundle and lookup/recall",
+    "_malformed_rule_reason and skill_identity exclude numeric metadata",
+    "test_skill_transport_roundtrip_probe_v1.py",
+    "test_learn_path_verification_wiring_v1.py",
+    "MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json and MINI WOB one-memory record"
+   ],
+   "external_existing_routes_checked": [
+    "https://arxiv.org/html/2610.34043 (KEEL)",
+    "https://arxiv.org/abs/2609.25299 (skill habit formation)"
+   ],
+   "capability_work_deleted": [
+    "No new learner, transport store, skill registry, or repair primitive",
+    "No repeat of the previous broad exposure diagnostic"
+   ],
+   "surviving_gap": "Other malformed bundle fields, authenticity and arbitrary-environment mastery remain outside scope."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Path-specific conversion and SQLite representation boundary in numeric import metadata.",
+   "delete_bypass_substitute_options": [
+    "DELETE blind numeric coercions",
+    "REUSE existing per-entry refusal list and continue path",
+    "ADAPT numeric admission before any database write",
+    "Reject wrapping the whole import in a swallowed exception: it still drops later lessons"
+   ],
+   "surviving_causal_blocker": "Numeric skill transport metadata was blindly coerced, so one malformed entry aborts later imports or writes invalid values despite a matching rule content address."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "VALIDATE_NUMERIC_METADATA_BEFORE_EXISTING_BUNDLE_IMPORT_WRITES",
+    "Skip whole malformed bundle (rejected: drops valid later lessons)",
+    "New store/schema (rejected: not required)",
+    "Broad exposure experiment (rejected: does not repair transport)"
+   ],
+   "losing_routes_reason": "Existing content identity and structural checks cannot validate counters or timestamps; catching the bundle-level failure cannot resume the later entry.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Tests teach a real store, mutate exported metadata, import invalid-before-valid entries, reopen the receiver and recall the actual rewrite. Malformed merges must leave existing memory unchanged. Unit checks use an exact result plus caller predicate, not independent task correctness."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "blind int/float coercions of numeric transport metadata"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "existing per-entry refusal and valid import/merge paths"
+   ],
+   "fresh_reuse_plan": "Use the repaired transport for scoped learned rules; independently measure live real-task reuse before stronger promotion."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "Do not rerun broad one-fix exposure diagnostic",
+    "Read archived MINI WOB measurements with their demonstrated-task denominator and exploration budget"
+   ],
+   "search_stop_decision": "Fourteen pre-fix regression failures localize the numeric import defect; stop after repairing and checking neighboring persistence paths.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "VALIDATE_NUMERIC_METADATA_BEFORE_EXISTING_BUNDLE_IMPORT_WRITES",
+   "DROP_WHOLE_BUNDLE",
+   "REBUILD_STORE",
+   "REPEAT_BROAD_EXPOSURE"
+  ],
+  "deleted_or_bypassed_paths": [
+   "DROP_WHOLE_BUNDLE",
+   "REBUILD_STORE",
+   "REPEAT_BROAD_EXPOSURE"
+  ],
+  "selected_surviving_route": "VALIDATE_NUMERIC_METADATA_BEFORE_EXISTING_BUNDLE_IMPORT_WRITES",
+  "why_selected_route_is_fastest_sufficient": "Adapt the existing importer with pre-write numeric validation; no new learner, bundle schema, store, exception-swallowing transaction wrapper, or test tolerance change.",
+  "expected_parent_level_state_change": "Bounded reliability repair for retained-skill transport; no new task-solving or learning performance claim, family discharge, or terminal credit.",
+  "stop_condition": "Fifteen numeric metadata cases pass including reopened-store recall; neighboring transport/restart/wiring tests and required guards pass.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "Bounded evidence/memory-preservation repair at numeric transport boundary; no new capability supplier acquisition."
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "proof_state_reachability": "Prevents numeric metadata defects from aborting retained coding lesson transport; no proof-state or terminal credit movement asserted.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "P_ONE_BAD_TRANSPORT_ENTRY_MUST_NOT_DROP_THE_NEXT_LESSON_20261112_V1",
+   "falsifier_id": "F_BAD_NUMERIC_ENTRY_BEFORE_VALID_LESSON",
+   "decisive_question": "Can the valid lesson after malformed numeric metadata still be imported and used from a reopened store without mutating existing memory?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_skill_bundle_numeric_metadata_v1.py",
+     "git_blob_sha": "9294bde99a5b15d97950c60dd2b7b4a9ab0764b5"
+    }
+   ]
+  },
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION"
+ }
+}
