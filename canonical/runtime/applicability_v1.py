@@ -73,6 +73,9 @@ class Boundary:
     failures: int
     candidate_facts: tuple[str, ...]
     reason: str
+    #: Every requirement still consistent with the evidence, each sorted. Empty unless the
+    #: evidence supports at least one. Query selection needs the whole set, not just its edges.
+    survivors: tuple[tuple[str, ...], ...] = ()
 
     @property
     def identified(self) -> bool:
@@ -89,6 +92,7 @@ class Boundary:
             "successes": self.successes,
             "failures": self.failures,
             "candidate_facts": list(self.candidate_facts),
+            "survivors": [list(s) for s in self.survivors],
             "reason": self.reason,
         }
 
@@ -138,6 +142,45 @@ def survivors(space: VersionSpace) -> list[Hypothesis]:
         if ok:
             out.append(hypothesis)
     return out
+
+
+def candidate_requirements(
+    evidence: Sequence[tuple[Iterable[str], bool]],
+    *,
+    max_candidate_facts: int = MAX_CANDIDATE_FACTS,
+) -> tuple[tuple[str, ...], ...]:
+    """Every requirement the evidence has not yet ruled out, INCLUDING from successes alone.
+
+    This is deliberately separate from `learn`, and it does not weaken it. `learn` refuses to
+    license a boundary without a failure, and that refusal is correct: a success cannot establish
+    necessity. But successes do constrain the SPACE of possible requirements -- any fact absent
+    from some success cannot be necessary -- and that space is exactly what a query selector needs
+    in order to choose the run that would settle the question. Conflating the two would either
+    weaken the refusal or leave the selector with nothing to select against, which is what made
+    the live path report zero survivors after three real successes.
+
+    Returns () when there is no success to scope from, when no requirement survives, or when the
+    candidate set is too large to enumerate. Callers must treat () as "cannot choose", never as
+    "no requirement".
+    """
+    rows = [(normalise_state(state), bool(ok)) for state, ok in (evidence or [])]
+    successes = [state for state, ok in rows if ok]
+    if not successes:
+        return ()
+    allowed: frozenset[str] = frozenset(successes[0])
+    for state in successes[1:]:
+        allowed = allowed & state
+    keys = tuple(sorted(allowed))
+    if len(keys) > max_candidate_facts:
+        return ()
+    space = VersionSpace([
+        conjunction(subset)
+        for size in range(len(keys) + 1)
+        for subset in itertools.combinations(keys, size)
+    ])
+    for state, ok in rows:
+        space.observe((state,), ok)
+    return tuple(sorted(tuple(sorted(as_set(h))) for h in survivors(space)))
 
 
 def learn(
@@ -201,6 +244,7 @@ def learn(
         )
 
     sets = [as_set(h) for h in alive]
+    ordered_survivors = tuple(sorted(tuple(sorted(s)) for s in sets))
     general = tuple(sorted(min(sets, key=len)))
     specific = tuple(sorted(max(sets, key=len)))
     status = IDENTIFIED if len(alive) == 1 else AMBIGUOUS
@@ -215,6 +259,7 @@ def learn(
         failures=len(failures),
         candidate_facts=keys,
         reason="ONE_CONSISTENT_REQUIREMENT" if status == IDENTIFIED else "SEVERAL_CONSISTENT_REQUIREMENTS",
+        survivors=ordered_survivors,
     )
 
 

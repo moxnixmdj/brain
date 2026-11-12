@@ -154,14 +154,18 @@ def _append_evidence(entry: dict, context, ok: bool) -> None:
     entry["evidence"] = sorted(kept, key=lambda r: bool(r.get("ok")), reverse=True)
 
 
+def _evidence_rows(entry: dict) -> list:
+    """The retained (state, outcome) pairs, in one place so no two readers can disagree."""
+    log = entry.get("evidence")
+    if not isinstance(log, list):
+        return []
+    return [(row.get("facts") or (), row.get("ok")) for row in log if isinstance(row, dict)]
+
+
 def _boundary(entry: dict):
     from canonical.runtime.applicability_v1 import learn
 
-    log = entry.get("evidence")
-    if not isinstance(log, list):
-        return learn([])
-    return learn([(row.get("facts") or (), row.get("ok")) for row in log
-                  if isinstance(row, dict)])
+    return learn(_evidence_rows(entry))
 
 
 def applicability(key: str):
@@ -240,6 +244,28 @@ def record(clauses, steps, where: str = "", *, context=None) -> bool:
         _append_evidence(data["macros"][key], context, True)
     _save(data)
     return True
+
+
+def next_contrast(key: str, candidate_states=()):
+    """What to try next to learn WHERE this plan applies, or why nothing can be learned yet.
+
+    Repeating a job in the state it already succeeded in adds an evidence row and zero information.
+    This returns the reachable state whose outcome is guaranteed to eliminate the most surviving
+    requirements, or -- when no reachable state separates them -- the facts that would have to
+    differ. It executes nothing and changes nothing.
+
+    The default pool is the states already observed, which are reachable because they happened,
+    plus whatever reachable states the caller supplies. It never invents a world.
+    """
+    from canonical.runtime.memory_policy_v1 import can_read_memory
+    from canonical.runtime.contrast_selection_v1 import observed_states, select_contrast
+
+    if not key or not can_read_memory():
+        return select_contrast([], ())
+    entry = (_load().get("macros") or {}).get(key)
+    rows = _evidence_rows(entry) if isinstance(entry, dict) else []
+    pool = list(observed_states(rows)) + [s for s in (candidate_states or ())]
+    return select_contrast(rows, pool)
 
 
 def note_failure(key: str, where: str = "", *, context=None) -> bool:

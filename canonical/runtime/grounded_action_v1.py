@@ -801,7 +801,7 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     args["capability_id"] = chosen["capability_id"]
     t1 = time.perf_counter()
     try:
-        result = _invoke_bound_capability(args)
+        result = _invoke_bound_capability(args, root=root)
         invoked = True
         error = None
     except Exception as exc:
