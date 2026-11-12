@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 352,
+  "knowledge_documents": 353,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6762,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "325318805e1a7314b0cad1cdb2c01d4b604abb94d10e752bc511c1e25ce849a8"
+  "value": "d9acd5c198641c693a220f08fe9cdb1e6d48ed0d8edd65f7678fa2344c9279cc"
  },
  "engines": [
   {
@@ -56689,6 +56689,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 4714,
+   "headings": [
+    "The corpus can only come from real work",
+    "Why the zero is not a bug in the probe",
+    "What that means for the question, stated flatly",
+    "What is already in place to collect it",
+    "The one thing to do next",
+    "Receipts",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_CORPUS_CAN_ONLY_COME_FROM_REAL_WORK_20261112_V1.md",
+   "sha256": "cf83e96a254d732669fc4e43fe0a5ae918ae0d9acb28f2a8573e68f41eb91ab4",
+   "summary": "**2026-11-12.** Base `e88e9c00`. Branch `arena/0087950f-brain`. Round 20.",
+   "terms": {
+    "145": 2,
+    "19": 3,
+    "296": 2,
+    "56": 3,
+    "about": 3,
+    "all": 3,
+    "already": 2,
+    "because": 3,
+    "borrowed": 2,
+    "cannot": 2,
+    "capabilities": 6,
+    "capability": 5,
+    "corpus": 5,
+    "document": 3,
+    "documents": 4,
+    "each": 4,
+    "environment": 3,
+    "environments": 4,
+    "every": 4,
+    "executions": 3,
+    "file": 4,
+    "first": 2,
+    "fix": 2,
+    "fixture": 3,
+    "function": 2,
+    "honest": 2,
+    "input": 4,
+    "inputs": 5,
+    "instance": 2,
+    "instances": 2,
+    "kept": 2,
+    "left": 2,
+    "many": 3,
+    "means": 2,
+    "no": 4,
+    "not": 13,
+    "number": 3,
+    "one": 7,
+    "only": 5,
+    "real": 12,
+    "registry": 3,
+    "repository": 3,
+    "round": 10,
+    "run": 4,
+    "shipped": 5,
+    "tree": 5,
+    "work": 5,
+    "zero": 6
+   },
+   "title": "The corpus can only come from real work",
+   "title_terms": [
+    "come",
+    "corpus",
+    "only",
+    "real",
+    "work"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10460,
    "headings": [
     "THE CREATURE CAN REACH ITS OWN SYNTHESIZER",
@@ -72119,10 +72194,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1154,
+  "included_source_count": 1155,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "af963efdbf2fe61b7c989a2517bea22ec43ec1dd87a75aa64ca56f84e8bfe6b0"
+  "source_tree_digest": "3022c14bea1a38f8451353555f3b024d4e1835d2f64fd0ef1e6489d72af6e908"
  },
  "research_index": [
   {
@@ -228923,7 +228998,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_ADMITTED_CONFINEMENT_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "da7c9ed5495c76c8d0bce901ffe0e3b773399490eede849f285becea9302d957",
+   "sha256": "929769e6a7bc443e286aee88d49b6864413c1ff0761d7939c4778786b9ba9f7d",
    "status": "",
    "terms": {
     "20261112": 1,
