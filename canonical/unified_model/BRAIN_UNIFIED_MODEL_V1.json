@@ -31229,7 +31229,7 @@
   "engines": 26,
   "knowledge_documents": 388,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6782,
+  "research_index_records": 6783,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0110e562cb4a5c3c14ed88768dea990fab2cab88185bd04ac6973c31f76a073b"
+  "value": "4d08e280e1c0e7c3a6938850afe20263bdcd3d9ea382843671e70c3ebd211d7d"
  },
  "engines": [
   {
@@ -232832,6 +232832,32 @@
     "the_most_ordinary_sentence_a_software_engineer_says_must_be_answered_v1_20261029_v1": 2,
     "v1": 2,
     "workspace": 2
+   }
+  },
+  {
+   "action_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e28d09b1b9eb63737068d867790f0d01fdadef11929de1c611e4248f3ecf6d97",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "checked": 1,
+    "counted": 1,
+    "gate_the_declaration_rather_than_the_outcome_and_ratchet_the_floor_to_the_measurement_so_an_improvement_is_red_until_it_is_written_down": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "only": 1,
+    "predicates": 1,
+    "the_only_checked_predicates_were_counted_twice_20261112_v1": 1,
+    "the_only_fraction_in_the_tree_that_flattered_it_was_computed_by_two_code_paths_over_one_corpus_so_the_published_number_was_twice_the_truth_and_nothing_in_the_tree_could_notice_because_no_gate_counted_declarations_at_all": 1,
+    "the_tree_can_state_how_much_of_its_own_evidence_has_a_verifier_and_that_number_can_only_improve_until_it_is_written_down__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "twice": 1,
+    "v1": 1,
+    "were": 1
    }
   },
   {

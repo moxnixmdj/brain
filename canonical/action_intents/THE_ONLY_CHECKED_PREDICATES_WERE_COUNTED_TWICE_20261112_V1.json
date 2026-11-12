@@ -1,0 +1,247 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1",
+ "action_intent_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "419d20666a09a8eba9109a52c603cfa5299b4c4d",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "A report merged onto main earlier on 2026-11-12 stated that 10 of 605 declared predicates carry an expectation, 1.7 percent of the corpus. That is wrong by exactly a factor of two. The binary-identity corpus is read by two code paths inside one function: an explicit branch, which is the only place an entry's name survives, and the generic JSON walk, because predicate_of also accepts the arg key. Each of its five predicates was therefore yielded twice. The corrected measurement is 5 of 600, 0.83 percent, and declaring_none is unchanged at 595 because every duplicated entry was one of the checked ones, so the double count inflated the numerator of the only flattering fraction in the document. All five checked predicates are tar, git, python3, node and jq --version: identity checks on installed tools, so not one of the 600 declared verifications in this repository asserts anything about the work the model did. This round supersedes that number rather than editing it, and adds the gate whose absence let it ship: a static declaration floor measured in 1.9 seconds that executes nothing and writes nothing, a committed baseline, a ratchet with three verdicts, and a pull_request workflow. The obvious gate was rejected on measurement: --audit takes about 13 minutes, writes into the tree it measures, and 8 of its 58 failures name another machine's filesystem while 19 predicates land in the 30 second timeout budget, so it is machine dependent and would be flaky in CI, and a flaky gate gets muted, which is worse than no gate because it manufactures the appearance of a constraint.",
+ "selected_route": "GATE_THE_DECLARATION_RATHER_THAN_THE_OUTCOME_AND_RATCHET_THE_FLOOR_TO_THE_MEASUREMENT_SO_AN_IMPROVEMENT_IS_RED_UNTIL_IT_IS_WRITTEN_DOWN",
+ "causal_blocker": "THE_ONLY_FRACTION_IN_THE_TREE_THAT_FLATTERED_IT_WAS_COMPUTED_BY_TWO_CODE_PATHS_OVER_ONE_CORPUS_SO_THE_PUBLISHED_NUMBER_WAS_TWICE_THE_TRUTH_AND_NOTHING_IN_THE_TREE_COULD_NOTICE_BECAUSE_NO_GATE_COUNTED_DECLARATIONS_AT_ALL",
+ "expected_parent_change": "A_STATIC_FLOOR_THAT_ITERATES_THE_SAME_WALK_AS_THE_EXECUTED_AUDIT_SO_IT_CANNOT_DRIFT_PLUS_A_THREE_VERDICT_RATCHET_WHOSE_GAIN_CANNOT_BE_SPENT_BACK_PLUS_A_BUILDER_THAT_REGENERATES_THE_BASELINE_FROM_A_LIVE_MEASUREMENT_WHILE_PRESERVING_THE_PROSE_A_HUMAN_WROTE",
+ "expected_parent_frontier_change": "THE_TREE_CAN_STATE_HOW_MUCH_OF_ITS_OWN_EVIDENCE_HAS_A_VERIFIER_AND_THAT_NUMBER_CAN_ONLY_IMPROVE_UNTIL_IT_IS_WRITTEN_DOWN__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_ONLY_FRACTION_IN_THE_TREE_THAT_FLATTERED_IT_WAS_COMPUTED_BY_TWO_CODE_PATHS_OVER_ONE_CORPUS_SO_THE_PUBLISHED_NUMBER_WAS_TWICE_THE_TRUTH_AND_NOTHING_IN_THE_TREE_COULD_NOTICE_BECAUSE_NO_GATE_COUNTED_DECLARATIONS_AT_ALL",
+ "falsification_condition": "THE_STATIC_FLOOR_AND_THE_EXECUTED_AUDIT_DISAGREE_ON_THE_CORPUS_THEY_COUNT__OR_THE_FLOOR_EXECUTES_A_DECLARED_COMMAND_OR_WRITES_ANYTHING_INTO_THE_TREE_IT_MEASURES__OR_AN_IMPROVEMENT_BELOW_THE_FLOOR_IS_REPORTED_GREEN_WHICH_IS_THE_SPEND_BACK_HOLE__OR_A_MISSING_OR_MALFORMED_BASELINE_IS_REPORTED_GREEN__OR_THE_BINARY_IDENTITY_CORPUS_IS_COUNTED_TWICE_AGAIN",
+ "stop_condition": "THE_GATE_AND_ITS_26_TESTS_ARE_IN_THE_TREE__THE_FLOOR_COUNTS_EXACTLY_WHAT_THE_EXECUTED_AUDIT_RUNS__THE_WORKFLOW_RUNS_ON_PULL_REQUEST_AND_ON_MAIN__REPO_INTEGRITY_GUARD_PASSES_STATIC_AND_SELF_TEST__8_OF_8_MUTATIONS_KILLED_WITH_THE_SUITE_GREEN_FIRST__THE_CORRECTED_NUMBER_IS_PUBLISHED_NEXT_TO_THE_WRONG_ONE_RATHER_THAN_REPLACING_IT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "explicit_user_authorization": "PARAPHRASE, NOT A QUOTATION. On 2026-11-12 the owner asked again whether giving the model the most advanced coding actions and letting it experience them once teaches them permanently, whether that solves everything on a computer, whether the project is making a sentient creature, what is real and what is not, and what the smartest next moves are; and asked at every step whether the approach is the smartest one and that bad ideas be killed before implementation. No governance change, no weakening of any guard, no credit claimed, no protected path touched, no sentience claim. Zero dollars of spend and zero model calls in the producer path. This round also corrects a number this agent itself published earlier the same day, which the owner did not ask for and which is reported against the agent rather than in its favour.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/auditability_report_v1.py",
+   "canonical/tests/test_auditability_declaration_floor_v1.py",
+   "canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
+   ".github/workflows/declaration-floor.yml",
+   "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE_20261112_V1.md"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_10_OF_605_DECLARED_PREDICATES_CARRY_AN_EXPECTATION_SO_1.7_PERCENT_OF_THE_TREE_IS_CHECKED__MEASURED_FALSE__IT_IS_5_OF_600_OR_0.83_PERCENT_BECAUSE_THE_BINARY_IDENTITY_CORPUS_WAS_YIELDED_BY_TWO_CODE_PATHS_INSIDE_ONE_FUNCTION",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+  ],
+  "causal_evidence": "MEASURED_2026-11-12_IN_AN_ARENA_SESSION_SANDBOX_WITH_THE_REPO_OWN_PINNED_HASHED_SUBSTRATE_INSTALLED__STATIC_FLOOR_600_DECLARED_5_WITH_AN_EXPECTATION_595_WITH_NONE_FRACTION_0.0083_IN_1.9_SECONDS__EXECUTED_AUDIT_600_RUN_FAIL_58_PASS_447_UNRUNNABLE_95_pass_checked_5_pass_started_447_EXIT_1__CORPUS_YIELDS_5_WITH_ALL_FIVE_NAMES_INTACT__26_TESTS_PASS__8_OF_8_MUTATIONS_KILLED_INCLUDING_THE_ONE_THAT_RESTORES_THE_SPEND_BACK_HOLE_AND_THE_ONE_THAT_RESTORES_THE_DOUBLE_COUNT__GUARD_STATIC_RULES_11_VIOLATIONS_0_AND_SELF_TEST_PASS__verify_brain_unified_model_v1_33_OF_33_PASS",
+  "earlier_routes_exhausted_reason": "REUSE was done first and is what shipped: the instrument repaired in the previous round was extended rather than replaced, and the floor iterates the same _iter_predicate_specs walk the executed audit uses so the two cannot drift. Gating the outcome count was measured and rejected: --audit takes about 13 minutes, writes four tracked and three untracked files into the tree it measures, and 8 of its 58 failures name another machine's filesystem with 19 predicates landing in the 30 second timeout budget, so it is machine dependent and would be flaky, and a flaky gate gets muted. Deduplicating the 18 repeated (source, argv) pairs was rejected because it would shrink the denominator by a guess about what a repeated declaration means, which flatters the fraction in the same direction as the bug being fixed."
+ },
+ "measured_effect": "PREDICATES_RUN_605_TO_600__DECLARING_AN_EXPECTATION_10_TO_5__FRACTION_CHECKED_1.7_PERCENT_TO_0.83_PERCENT__DECLARING_NONE_595_UNCHANGED__PASS_452_TO_447__FAIL_58_UNCHANGED__UNRUNNABLE_95_UNCHANGED__PASS_CHECKED_10_TO_5__PASS_STARTED_442_UNCHANGED__FLOOR_MEASURED_IN_1.9_SECONDS_EXECUTING_NOTHING__WORST_SOURCE_CAPABILITY_RECEIPT_PROJECTION_V1_JSON_184_OF_595_WHICH_IS_31_PERCENT_OF_THE_GAP_IN_ONE_FILE__26_NEW_TESTS__8_OF_8_MUTATIONS_KILLED__70_PASSED_ACROSS_THE_THREE_AUDITABILITY_SUITES__GUARD_RULES_11_VIOLATIONS_0",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_VALUE_IS_A_CORRECTED_NUMBER_AND_A_GATE_THAT_STOPS_IT_MOVING_THE_WRONG_WAY_WHICH_IS_EVIDENCE_HYGIENE_NOT_A_LOAD_BEARING_OBLIGATION_DISCHARGE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/tools/auditability_report_v1.py (the instrument repaired in the previous round; extended, not replaced)",
+  "canonical/tools/predicates/binary_identity_predicates_20261112_v1.json (the five-entry corpus, read unchanged)",
+  "canonical/tests/test_auditability_predicate_exit_gate_v1.py and canonical/tests/test_auditability_report_v1.py (run, never edited to move a number)",
+  "execution_guard/repo_integrity_guard_v1.py (run as the pre-merge gate, not modified)",
+  "THE_AUDIT_SAID_PASS_FOR_COMMANDS_THAT_EXITED_1_20261112_V1.md (superseded on the number it got wrong, left byte-identical as evidence)"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "419d20666a09a8eba9109a52c603cfa5299b4c4d",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "THE_TREE_CAN_STATE_HOW_MANY_OF_ITS_DECLARED_VERIFICATIONS_ACTUALLY_ASSERT_SOMETHING_AND_CAN_PREVENT_THAT_NUMBER_FROM_RISING_OR_FROM_BEING_IMPROVED_AND_THEN_SPENT_BACK",
+  "selected_route": "GATE_THE_DECLARATION_RATHER_THAN_THE_OUTCOME_AND_RATCHET_THE_FLOOR_TO_THE_MEASUREMENT_SO_AN_IMPROVEMENT_IS_RED_UNTIL_IT_IS_WRITTEN_DOWN",
+  "selected_surviving_route": "EXTEND_THE_EXISTING_INSTRUMENT_WITH_ONE_SHARED_WALK_A_STATIC_FLOOR_A_THREE_VERDICT_RATCHET_AND_A_BASELINE_BUILDER_THEN_GATE_IT_WITH_AN_ORDINARY_PULL_REQUEST_WORKFLOW",
+  "deleted_or_bypassed_paths": [
+   "GATING_THE_FAIL_COUNT_FROM_--audit__DELETED_AFTER_MEASUREMENT__13_MINUTES_WRITES_INTO_THE_TREE_IT_MEASURES_AND_8_OF_58_FAILURES_NAME_ANOTHER_MACHINE",
+   "DEDUPLICATING_THE_18_REPEATED_SOURCE_ARGV_PAIRS__DELETED__IT_SHRINKS_THE_DENOMINATOR_BY_A_GUESS_AND_FLATTERS_THE_FRACTION",
+   "PASSING_WHEN_DECLARING_NONE_IS_MERELY_BELOW_THE_FLOOR__DELETED__IT_BANKS_A_GAIN_AS_SPENDABLE_HEADROOM_THE_WAY_AUTOBOT_AI_14498_LOST_344_LINES",
+   "EDITING_THE_MERGED_CLAIM_DOCUMENT_TO_REMOVE_THE_WRONG_NUMBER__DELETED__EVIDENCE_IS_SUPERSEDED_NOT_REWRITTEN"
+  ],
+  "stop_condition": "THE_GATE_AND_ITS_26_TESTS_ARE_IN_THE_TREE__THE_FLOOR_COUNTS_EXACTLY_WHAT_THE_EXECUTED_AUDIT_RUNS__THE_WORKFLOW_RUNS_ON_PULL_REQUEST_AND_ON_MAIN__REPO_INTEGRITY_GUARD_PASSES_STATIC_AND_SELF_TEST__8_OF_8_MUTATIONS_KILLED_WITH_THE_SUITE_GREEN_FIRST__THE_CORRECTED_NUMBER_IS_PUBLISHED_NEXT_TO_THE_WRONG_ONE_RATHER_THAN_REPLACING_IT__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "expected_parent_level_state_change": "THE_TREE_CAN_STATE_HOW_MUCH_OF_ITS_OWN_EVIDENCE_HAS_A_VERIFIER_AND_THAT_NUMBER_CAN_ONLY_IMPROVE_UNTIL_IT_IS_WRITTEN_DOWN__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "why_selected_route_is_fastest_sufficient": "THE_FLOOR_IS_A_PROPERTY_OF_JSON_ON_DISK_SO_IT_MEASURES_IN_1.9 SECONDS, IS IDENTICAL ON EVERY RUNNER AND WRITES NOTHING, WHICH IS THE cheapest gate that can hold the number that actually limits the tree; the instrument, the corpus, the two existing test suites and the guard already existed and were reused unchanged, so the new code is one walk, one measurement, one ratchet and one builder.",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "GATE_THE_EXECUTED_FAIL_COUNT (rejected: slow, machine-dependent, writes into the tree it measures, flaky)",
+   "GATE_THE_STATIC_DECLARATION_FLOOR_AND_RATCHET_IT (selected)",
+   "DEDUPLICATE_REPEATED_DECLARATIONS_TO_IMPROVE_THE_FRACTION (rejected: shrinks the denominator by a guess)",
+   "DO_NOTHING_AND_ONLY_PUBLISH_THE_CORRECTION (rejected: the number that was wrong had no gate, so it could be wrong again unnoticed)"
+  ],
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "EVIDENCE_PRESERVATION_OF_A_FALSIFICATION_PLUS_A_GATE_ON_AN_EXISTING_INSTRUMENT__NO_NEW_CAPABILITY_IS_CLAIMED_NO_EXTERNAL_ROUTE_IS_ADOPTED_AND_NO_SPEND_IS_REQUESTED__THE_ONE_EXTERNAL_INPUT_WAS_READ_AND_IS_CITED_IN_THE_CLAIM_DOCUMENT",
+   "challenger_routes": []
+  },
+  "obs_goal": {
+   "real_outcome": "KNOW_HOW_MUCH_OF_THE_TREE_S_EVIDENCE_HAS_A_VERIFIER_AND_KEEP_THAT_NUMBER_FROM_GETTING_WORSE_OR_FROM_BEING_IMPROVED_AND_THEN_SILENTLY_SPENT_BACK",
+   "proxy_goals_deleted": [
+    "MAKING_THE_EXECUTED_AUDIT_GO_GREEN (a proxy: green outcomes on a machine-bound receipt prove nothing)"
+   ],
+   "surviving_necessity": "THE_COUNT_OF_DECLARATIONS_THAT_ASK_FOR_NOTHING_TO_BE_CHECKED_IS_THE_LIMITING_NUMBER_AND_NO_GATE_HELD_IT"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_CORPUS_FILE_WAS_REACHED_TWICE_BY_ONE_FUNCTION_AND_NO_GATE_COUNTED_DECLARATIONS_SO_NOTHING_COULD_NOTICE",
+   "delete_bypass_substitute_options": [
+    "DELETING_THE_EXPLICIT_BRANCH_WAS_REJECTED__IT_IS_THE_ONLY_PLACE_AN_ENTRY_S_NAME_SURVIVES__SO_THE_WALK_SKIPS_THE_PATH_THE_CONSTANT_NAMES"
+   ],
+   "surviving_causal_blocker": "A_GATE_CAN_BE_MADE_REQUIRED_ONLY_BY_THE_OWNER_BECAUSE_AGENTS_HAVE_NO_ADMINISTRATION_RIGHTS_SO_THE_GATE_IS_VISIBLE_NOT_MERGE_BLOCKING"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/tools/auditability_report_v1.py (extended)",
+    "execution_guard/honest_suite_baseline_v1.py (read: builder-only baseline idiom, no comparator existed in the repo)"
+   ],
+   "external_existing_routes_checked": [
+    "AutoBot-AI issue 14498 (ratchet spend-back hole and its fix)",
+    "AIRIA-Systems airia-ci issue 127 (dated tighten-only debt baseline, 90-day expiry)",
+    "afonsoft agent-harness issue 252 (threshold below measured reality)",
+    "eshu-mcp issue 11 (ratchet must not silently exclude or delete assertions)"
+   ],
+   "capability_work_deleted": [
+    "NO_NEW_CAPABILITY_PRIMITIVE_WAS_BUILT__THE_ROUND_ADDS_A_MEASUREMENT_AND_A_GATE_ONLY"
+   ],
+   "surviving_gap": "595_OF_600_DECLARED_PREDICATES_STILL_ASK_FOR_NOTHING_TO_BE_CHECKED_AND_THE_GATE_HOLDS_THAT_NUMBER_IT_DOES_NOT_LOWER_IT"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_1.7_PERCENT_HEADLINE_IN_THE_AUDIT_SAID_PASS_FOR_COMMANDS_THAT_EXITED_1_20261112_V1.md_IS_SUPERSEDED_NOT_EDITED"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "THE_FLOOR_NOW_OWNS_THE_DENOMINATOR_PARITY_CLAIM_SO_THE_TWO_SUITES_CANNOT_DISAGREE_ABOUT_WHAT_THE_CORPUS_IS"
+   ],
+   "fresh_reuse_plan": "RUN_THE_FLOOR_ON_EVERY_FUTURE_CHANGE_TO_THE_INSTRUMENT_OR_THE_CORPUS__REBASELINE_WITH_--write-baseline_WHENEVER_THE_NUMBER_IMPROVES_SO_THE_GAIN_IS_LOCKED_IN"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "THE_STATIC_FLOOR_PROTOTYPE_WAS_MEASURED_ONCE_IN_2.07_SECONDS_AND_REUSED_RATHER_THAN_RE_DERIVED_PER_CYCLE"
+   ],
+   "search_stop_decision": "STOPPED_SEARCHING_FOR_A_WAY_TO_MAKE_THE_GATE_REQUIRED_ONCE_THE_POLICY_SAY_AGENTS_HAVE_NO_ADMINISTRATION_RIGHTS_WAS_READ__THE_ONE_CLICK_OWNER_ACTION_IS_RECORDED_INSTEAD",
+   "affected_layers_only_on_revalidation": true
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "GATING_THE_OUTCOME_COUNT_LOSES_BECAUSE_IT_IS_MACHINE_DEPENDENT_AND_WOULD_BE_MUTED__DEDUPLICATION_LOSES_BECAUSE_IT_FLATTERS_THE_FRACTION__A_FROZEN_BASELINE_LOSES_BECAUSE_A_GAIN_BECOMES_SPENDABLE_HEADROOM",
+   "routes_ranked": [
+    "STATIC_DECLARATION_FLOOR_WITH_A_THREE_VERDICT_RATCHET (selected)",
+    "GATE_THE_EXECUTED_FAIL_COUNT",
+    "DEDUPLICATE_AND_GATE_THE_FRACTION",
+    "PUBLISH_THE_CORRECTION_WITHOUT_A_GATE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_ORACLE_IS_THE_CORPUS_ON_DISK_AND_THE_EXECUTED_AUDIT_ITSELF__THE_FLOOR_IS_PINNED_AGAINST_THE_AUDIT_S_OWN_WALK_SO_A_DRIFT_BETWEEN_THEM_IS_A_TEST_FAILURE_AND_EVERY_VERDICT_OF_THE_RATCHET_IS_PINNED_BY_A_TEST_ON_A_SYNTHETIC_TREE_BUILT_IN_TMP_WHICH_IS_NECESSARY_BECAUSE_THE_REAL_TREE_ONLY_OCCUPIES_ONE_POINT_OF_THE_VERDICT_SPACE"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-12T22:40:00Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FLIPS_NO_FAMILY",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "tournament": {
+   "proposal_id": "THE_ONLY_CHECKED_PREDICATES_WERE_COUNTED_TWICE",
+   "decisive_question": "DOES_A_STATIC_FLOOR_ON_THE_COUNT_OF_DECLARATIONS_THAT_ASK_FOR_NOTHING_TO_BE_CHECKED_HOLD_THE_NUMBER_WITHOUT_BEING_MACHINE_DEPENDENT_OR_FLAKY",
+   "falsifier_id": "THE_FLOOR_AND_THE_EXECUTED_AUDIT_COUNT_DIFFERENT_CORPORA_OR_AN_IMPROVEMENT_BELOW_THE_FLOOR_IS_GREEN_OR_A_MISSING_BASELINE_IS_GREEN",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_SPEND_BACK_COUNTEREXAMPLE_WAS_FOUND_IN_THE_OPEN_RECORD_BEFORE_SHIPPING_AUTOBOT_AI_ISSUE_14498_AND_THE_GATE_WAS_CHANGED_TO_FAIL_ON_AN_UNLOCKED_IN_IMPROVEMENT_RATHER_THAN_TO_PASS_ON_IT_SO_THE_KNOWN_COUNTEREXAMPLE_IS_NOW_PINNED_RED_BY_A_TEST"
+  }
+ },
+ "next_step": "MAKE_declaration-floor_A_REQUIRED_CHECK_WHICH_NEEDS_THE_OWNER_BECAUSE_AGENTS_HAVE_NO_ADMINISTRATION_RIGHTS__THEN_SPEND_THE_CONCENTRATION_BY_GIVING_EXPECTATIONS_TO_THE_184_DECLARATIONS_IN_CAPABILITY_RECEIPT_PROJECTION_V1_JSON__THEN_TRIAGE_THE_58_FAILURES_INTO_REFUTED_CLAIM_AND_MACHINE_BOUND_RECEIPT_AND_UNPROVISIONED_SANDBOX",
+ "route_frontier": {
+  "discovery_required": false,
+  "not_applicable_reason": "EVIDENCE_PRESERVATION_OF_A_MEASURED_FALSIFICATION__NO_NEW_CAPABILITY_IS_CLAIMED_AND_NO_EXTERNAL_ROUTE_IS_ADOPTED",
+  "challenger_routes": []
+ }
+}
