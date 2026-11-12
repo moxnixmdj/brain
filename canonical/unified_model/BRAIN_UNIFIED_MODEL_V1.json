@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3053aa676b249feb31bfa79244164911242488c72129f1462109fb0792e1856d"
+  "value": "1400d58f97dd126d0196865686291c17c93ee746859629860f9519b7126059ac"
  },
  "engines": [
   {
@@ -230668,7 +230668,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_GATE_MEASURED_NOTHING_AND_CALLED_IT_GREEN_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "4051b848db73ddadb8d8d6816987afe9343487cf8398af8d50c7151ef66ec34e",
+   "sha256": "83b34c885f82b033d62f5b0d6fb849d94e937ad785c4e01424f3aec18513b6b3",
    "status": "",
    "terms": {
     "20261112": 1,
