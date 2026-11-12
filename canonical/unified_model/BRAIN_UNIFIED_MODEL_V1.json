@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 386,
+  "knowledge_documents": 387,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6782,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bb01d6893a51749133ee2d6120402846c2958294d6dfab8c9b31e81b23805695"
+  "value": "358fcea96865c39794cda49d33749de0059ebb0268b00aabbce0ebe9d7a92d4c"
  },
  "engines": [
   {
@@ -59964,6 +59964,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10576,
+   "headings": [
+    "The tree is the input space it was missing",
+    "1. What was measured",
+    "2. The loop closes on the real tree",
+    "3. Two bugs I wrote, and what they would have cost",
+    "4. The sensor's matching rule is a substring test",
+    "5. What this does and does not change",
+    "6. What is wrong with the plan in the question",
+    "7. Receipts",
+    "8. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_TREE_IS_THE_INPUT_SPACE_20261112_V1.md",
+   "sha256": "f52c85677518ce33fe8c707245b2845dd578fb8416c36efb42f50097b66efd05",
+   "summary": "**2026-11-12.** Base `d5d7cb90`. Branch `arena/06cc4027-brain`. Round 21.",
+   "terms": {
+    "21": 4,
+    "admitted": 6,
+    "already": 9,
+    "any": 4,
+    "binding": 4,
+    "canonical": 12,
+    "capabilities": 8,
+    "capability": 7,
+    "construction": 4,
+    "corpus": 4,
+    "correct": 4,
+    "digest": 4,
+    "directories": 7,
+    "directory": 7,
+    "distinct": 10,
+    "environment": 5,
+    "every": 7,
+    "evidence": 4,
+    "fact": 4,
+    "false": 10,
+    "files": 4,
+    "fixtures": 4,
+    "four": 6,
+    "input": 4,
+    "inputs": 5,
+    "instance": 5,
+    "measured": 4,
+    "model": 4,
+    "module": 4,
+    "new": 4,
+    "no": 16,
+    "not": 26,
+    "nothing": 5,
+    "one": 14,
+    "real": 21,
+    "repository": 4,
+    "result": 4,
+    "round": 11,
+    "run": 5,
+    "same": 6,
+    "sensor": 9,
+    "sink": 4,
+    "so": 8,
+    "test": 10,
+    "tree": 10,
+    "true": 11,
+    "verified": 7,
+    "zero": 5
+   },
+   "title": "The tree is the input space it was missing",
+   "title_terms": [
+    "input",
+    "missing",
+    "space",
+    "tree"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 12120,
    "headings": [
     "The wall was not the wall: nine rounds counted a refusal nobody had ever lifted",
@@ -74754,10 +74830,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1188,
+  "included_source_count": 1189,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d95722b67868e7560c4c627f5d4767548bb92310e5685b3b0e33aab318a6b137"
+  "source_tree_digest": "4019b241fa8a8ffc09c4654e726bcc592fd6417be6e7d9ae7139f25dd0e09aba"
  },
  "research_index": [
   {
