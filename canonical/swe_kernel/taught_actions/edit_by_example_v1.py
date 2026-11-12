@@ -1,42 +1,65 @@
-"""Edit one file the way an example was edited.
+"""Edit a file the way examples were edited, and keep what the examples teach.
 
-The example is two files: a Python file as it was, and the same file after somebody changed it.
-Nobody writes the change down as a program.  This action works the change out from the two files, as
-rewrite rules, and then makes the same change in a third file.
+An example is two files: a Python file as it was, and the same file after somebody changed it.
+Nobody writes the change down as a program.  This program works the change out from examples, as
+rewrite rules, and makes the same change in another file.  The first word of ``REQUEST`` says what to do:
 
-How a rule is worked out.  Every place where the two example files differ is found, down to the
+* ``edit``      -- one example, given as its two files, is repeated on a third file at once;
+* ``remember``  -- one example is added to a lesson file, which is made when it is not there yet;
+* ``repeat``    -- what a lesson file holds is repeated on a file.
+
+How a rule is worked out.  Every place where the two files of an example differ is found, down to the
 smallest expression, keyword argument or one-line statement that holds the difference.  That piece
 of code, and what it became, is the rule.  Places that were changed the same way are put together,
-and a part of the code becomes a blank (``?1``, ``?2``) only where two of those places differ from
-each other.  A blank keeps whatever expression stood there.
+across all the examples, and a part of the code becomes a blank (``?1``, ``?2``) only where two of those
+places differ from each other.  A blank keeps whatever expression stood there.  So one changed place
+gives a rule about exactly that code, and a second, different place is what makes it general.
 
-Code the example left alone is evidence too.  A rule that would also change something the example
+Code the examples left alone is evidence too.  A rule that would also change something an example
 did not change, or would change it another way, is not accepted; more of the surrounding code is then
 taken into the rule, up to the whole one-line statement, until the rule fits the changed places only.
-Before the third file is touched, the rules are run on the example's first file and must produce its
-second file.
+Before any file is touched, the rules are run on every example's first file and must produce its second.
+
+Where a rule is applied.  A rule says no more than the examples showed:
+
+* a name the changed code reads that an example imported must be the same import in the file to edit;
+  a variable or another module of that name is something else, and that code is left as it is;
+* where a blank stands for the object an attribute is read from (``?1`` in ``?1.warn``) and the examples
+  showed variables there, an imported module (``warnings.warn``) is something else, and is left as it is;
+* a name only the new code reads that an example imported must be that import in the file to edit;
+* code that fits a rule but is used another way than any changed place of the examples -- called with
+  another number of arguments, with a keyword they did not show, or not called where they called it --
+  may not work with the new code.  Nothing is changed then, and the refusal names the line.  An example
+  that shows that use, changed or left alone, settles it.
 
 Refused, and nothing is written:
 
-* the example adds, removes or reshapes whole statements or blocks (a new line, a renamed function):
+* an example adds, removes or reshapes whole statements or blocks (a new line, a renamed function):
   only a change inside one expression or one simple statement is learned;
 * a changed place assigns different names than before, or reads a variable that exists only inside
   the example's function: such a change works only together with other changes (a rename does), so
   repeating it one place at a time would leave half of it undone;
 * after the edit, the file would read a name it does not define, import or receive as a parameter, or
   would still read a name whose import the edit took away;
-* the same code was changed in one place of the example and left alone, or changed another way, in
+* the same code was changed in one place of the examples and left alone, or changed another way, in
   another;
-* nothing in the file to edit has the form the example changed;
+* nothing in the file to edit has the form the examples changed;
 * two places to change overlap, or a comment inside a changed place would be lost;
-* the edited text does not parse to exactly the tree intended.
+* the edited text does not parse to exactly the tree intended;
+* a lesson file that is not one: a name that does not end in ``.lesson``, other content, or a file whose
+  ``teaches`` is not what its own examples give.
 
 A change of a bare name or a bare number is never a rule by itself; it is kept together with the
 expression or statement around it.  Renaming is a different action, which looks at scopes.
 
-An ``import`` line at the top of the file that the example changed in place (same module, other
-names) is repeated like any other one-line statement.  ``import`` lines the example added or removed
+An ``import`` line at the top of the file that an example changed in place (same module, other
+names) is repeated like any other one-line statement.  ``import`` lines an example added or removed
 are not repeated: they are read as what the new code needs, and the file to edit must provide it.
+
+A lesson file is JSON.  It holds the examples whole, line by line, and under ``teaches`` what they give:
+each change, the ways the changed code was used, the imports it leans on.  ``teaches`` is for the reader;
+the rules are worked out from the examples again at every use, and a file whose ``teaches`` differs from
+that is refused.  A lesson is never used unasked: the request names it.
 
 This repeats a change.  It does not check that the change is right for the code it is repeated on.
 
