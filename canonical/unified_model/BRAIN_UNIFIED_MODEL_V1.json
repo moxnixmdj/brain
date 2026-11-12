@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 398,
+  "knowledge_documents": 399,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6795,
+  "research_index_records": 6796,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "eab43727eb7b2145ebd9b06648b3de6482db3fef3393646be46a3d9fb84ddc6c"
+  "value": "7a5ac0dbf28a98a771fb3ca3010e30ccb550379298c04cda338ad69097ad487f"
  },
  "engines": [
   {
@@ -55656,6 +55656,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7553,
+   "headings": [
+    "Problem 2 is two questions, and one of them is already 64% solved",
+    "1. A fix that was silently breaking code — now refused",
+    "2. What that second operator is actually worth: +0.39 pp, not +7.35 pp",
+    "3. The number that answers the owner's question",
+    "4. What is real and what is not",
+    "5. What is smartest next, in order",
+    "Receipts",
+    "6. Addendum, same turn: my own fix was incomplete in exactly the same way"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PROBLEM_TWO_IS_TWO_QUESTIONS_20261112_V1.md",
+   "sha256": "6f33a0423e5497d039b9c6267b5c6abf662c09bb4dbae3f758daa25d878c96c6",
+   "summary": "**2026-11-12.** Base `aea7d0ce`. Branch `arena/3dff4ec0-brain`.",
+   "terms": {
+    "0.2999": 4,
+    "330": 3,
+    "63.6": 3,
+    "64": 3,
+    "7.35": 3,
+    "against": 3,
+    "alias": 5,
+    "all": 6,
+    "already": 5,
+    "applicable": 5,
+    "arguments": 4,
+    "askings": 8,
+    "because": 3,
+    "both": 3,
+    "cannot": 4,
+    "changes": 6,
+    "code": 5,
+    "constant": 4,
+    "demonstrated": 5,
+    "different": 9,
+    "example": 6,
+    "exemption": 4,
+    "file": 5,
+    "form": 6,
+    "loader": 4,
+    "measured": 4,
+    "message": 4,
+    "new": 4,
+    "no": 9,
+    "not": 18,
+    "nothing": 5,
+    "now": 4,
+    "one": 10,
+    "only": 5,
+    "operator": 9,
+    "organ": 10,
+    "pack": 4,
+    "pp": 6,
+    "real": 7,
+    "rename": 5,
+    "rule": 4,
+    "same": 10,
+    "so": 9,
+    "solved": 4,
+    "target": 4,
+    "task": 6,
+    "tree": 4,
+    "yaml.load": 4
+   },
+   "title": "Problem 2 is two questions, and one of them is already 64% solved",
+   "title_terms": [
+    "64",
+    "already",
+    "one",
+    "problem",
+    "questions",
+    "solved",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 14514,
    "headings": [
     "Project Brain — read this first",
@@ -75716,10 +75794,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1200,
+  "included_source_count": 1201,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c7bf4cf542d863bb854426c028a3a42bc54f73eb673ba03a74d239ee67697b9c"
+  "source_tree_digest": "cbe9d4ce4c22787a835bec548070f5b066e6192d3157f30d4e8d70793fcc5f0e"
  },
  "research_index": [
   {
@@ -224604,6 +224682,32 @@
     "v1": 2,
     "were": 2,
     "zero": 2
+   }
+  },
+  {
+   "action_id": "A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0e56a147186392f620bc1bcbe999b4a59fbb0f2e4225ed32d2698b470d0a0948",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_second_operator_has_to_face_the_same_test_or_not_be_an_operator_20261112_v1": 1,
+    "face": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "operator": 2,
+    "refuse_any_rename_that_is_not_on_the_documented_alias_list_and_register_this_as_the_same_test_every_operator_must_face": 1,
+    "same": 1,
+    "second": 1,
+    "test": 1,
+    "the_pack_learned_any_single_attribute_rename_and_its_own_docstring_called_that_safe_without_an_oracle__measured_to_rewrite_yaml_load_into_yaml_safe_load_with_a_loader_keyword_which_cannot_run__and_its_recorded_7_35_point_gain_was_measured_against_the_organ_before_the_alias_exemption_landed": 1,
+    "the_tree_can_say_what_adaptation_achieves_where_the_task_is_actually_similar__0_6359__separately_from_where_it_is_not__0_0000__instead_of_one_diluted_0_2999__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1
    }
   },
   {
