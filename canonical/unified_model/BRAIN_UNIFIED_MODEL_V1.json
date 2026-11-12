@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 308,
+  "knowledge_documents": 309,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6706,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "72c3f5e2b3335844e6d4dc52f23302b700c0a4d2d452176084b558229eb77e36"
+  "value": "2aa6cb7457beee39f218e0e9f85cd6eea8e4ea4561e9a2dfb05d6ac7c53cfb5f"
  },
  "engines": [
   {
@@ -55079,6 +55079,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6679,
+   "headings": [
+    "The one-shot regime is 41% of the bound surface",
+    "1. The census",
+    "2. What it says",
+    "3. Why this is the honest answer to the question",
+    "4. What to build, in order",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_ONE_SHOT_REGIME_IS_41_PERCENT_20261112_V1.md",
+   "sha256": "429b656a137ec894ab709711a14fb3e804498b3f2bd0d0879669862aacafcff4",
+   "summary": "**2026-11-12.** Base `dd67c1f4`. Branch `arena/1e8b91af-brain`. Round 3.",
+   "terms": {
+    "145": 5,
+    "20": 6,
+    "29": 4,
+    "41": 4,
+    "60": 5,
+    "78": 3,
+    "admission": 3,
+    "already": 3,
+    "answer": 3,
+    "bound": 4,
+    "but": 3,
+    "capabilities": 3,
+    "capability": 4,
+    "census": 5,
+    "check": 5,
+    "checker": 3,
+    "checks": 3,
+    "contract": 3,
+    "declared": 11,
+    "definitions": 3,
+    "disk": 3,
+    "every": 4,
+    "exactly": 4,
+    "false": 3,
+    "gave": 3,
+    "independent": 6,
+    "interface": 6,
+    "itself": 3,
+    "learner": 3,
+    "means": 3,
+    "move": 3,
+    "names": 5,
+    "no": 9,
+    "not": 14,
+    "nothing": 4,
+    "one": 12,
+    "only": 4,
+    "own": 4,
+    "receipt": 11,
+    "receipted": 6,
+    "receipts": 4,
+    "round": 5,
+    "runtime": 4,
+    "says": 4,
+    "surface": 5,
+    "tests": 4,
+    "try": 5,
+    "typed": 8
+   },
+   "title": "The one-shot regime is 41% of the bound surface",
+   "title_terms": [
+    "41",
+    "bound",
+    "one-shot",
+    "regime",
+    "surface"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6139,
    "headings": [
     "The Preference Is Learned. The Tests Are Not.",
@@ -68761,10 +68836,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1110,
+  "included_source_count": 1111,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "78827e9f9692011ee7c5280656ae2652dd079bb26cfaff4aaab6b3894dcae7a2"
+  "source_tree_digest": "5830f4d4364837b3f50aff088c9dffae4650f6540e77749340de3f2482d790f5"
  },
  "research_index": [
   {
