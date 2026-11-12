@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 322,
+  "knowledge_documents": 323,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6731,
+  "research_index_records": 6732,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7bdb1939516ec58dfbf7d28c373cc7230b414ed69aae36106650ac2c5f6c4eef"
+  "value": "6d92cf4e3484f1f99a0b0f28b0c39180c8acd347e743cca6518854ce525fd053"
  },
  "engines": [
   {
@@ -44971,6 +44971,82 @@
     "learn",
     "must",
     "refusal"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5358,
+   "headings": [
+    "A refused receipt is still marked verified",
+    "What was run",
+    "What changed",
+    "Why the honest answer is False in both cases, and why that is correct",
+    "What this does not establish",
+    "Where the series stands",
+    "Receipts",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_REFUSED_RECEIPT_IS_STILL_MARKED_VERIFIED_20261112_V1.md",
+   "sha256": "95a1980e2dcf21364b89031efb4fd09232373efe6c9f8034a34fdb8100c4376d",
+   "summary": "**2026-11-12.** Base `3243ab0c`. Branch `arena/eb986bc7-brain`. Round 11.",
+   "terms": {
+    "10": 3,
+    "11": 2,
+    "18": 2,
+    "accept": 2,
+    "accepted": 4,
+    "accepts": 7,
+    "altered": 3,
+    "answer": 4,
+    "because": 3,
+    "been": 2,
+    "both": 3,
+    "but": 2,
+    "capabilities": 3,
+    "consumer": 7,
+    "correct": 3,
+    "eight": 3,
+    "evidence": 3,
+    "executed": 3,
+    "false": 8,
+    "field": 3,
+    "fixture": 3,
+    "gate": 4,
+    "genuine": 5,
+    "honest": 3,
+    "legacy": 3,
+    "measurement": 4,
+    "nine": 4,
+    "no": 6,
+    "not": 11,
+    "one": 14,
+    "outcome": 3,
+    "output_verified": 5,
+    "pass": 9,
+    "predicate": 6,
+    "producer": 4,
+    "receipt": 13,
+    "refused": 6,
+    "registry": 3,
+    "repointed": 4,
+    "round": 4,
+    "said": 5,
+    "sentence": 4,
+    "so": 6,
+    "task": 7,
+    "tests": 4,
+    "true": 9,
+    "were": 3,
+    "written": 3
+   },
+   "title": "A refused receipt is still marked verified",
+   "title_terms": [
+    "marked",
+    "receipt",
+    "refused",
+    "still",
+    "verified"
    ]
   },
   {
@@ -69824,10 +69900,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1124,
+  "included_source_count": 1125,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3ee449bdc514bbea1994ff46f1956eb1c855926b73add1c00742304995e9e666"
+  "source_tree_digest": "3948bf7dec8593ba5fc404082794035f67856e9c9e81a3cb81e10b3f4c73bdd8"
  },
  "research_index": [
   {
@@ -222473,6 +222549,32 @@
     "three": 4,
     "verdict": 2,
     "verifiers": 3
+   }
+  },
+  {
+   "action_id": "MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASURED_ACCEPTANCE_CHECKS_THE_OUTCOME_NOT_THE_WRITE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7731bfb5b074197b04b3fd14e65d1fe03f1b1d41dca063448fc494a6129090ea",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "acceptance": 1,
+    "checks": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measured": 1,
+    "measured_acceptance_checks_the_outcome_not_the_write_20261112_v1": 1,
+    "not": 1,
+    "one_measured_false_acceptance_path_removed__no_benchmark_row_moved__no_capability_or_terminal_credit": 1,
+    "one_registered_capability_accepts_any_written_answer_file_including_a_refused_measurement_receipt_because_the_registry_checks_output_verified_not_the_declared_pass_boolean": 1,
+    "outcome": 1,
+    "run_the_trees_own_measurement_producer_and_check_the_consumers_declared_boolean": 1,
+    "v1": 1,
+    "write": 1
    }
   },
   {
