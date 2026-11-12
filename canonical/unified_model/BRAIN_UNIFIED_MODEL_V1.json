@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 341,
+  "knowledge_documents": 342,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6746,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "11cb1576a9e8206848759b0d10fa831b898974538693e2ef1713146a25e77a1a"
+  "value": "f1c0aed0b50b176edf60b88be617c6be0c10f9dc798686ff01cb706d8d46fc40"
  },
  "engines": [
   {
@@ -54257,6 +54257,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5708,
+   "headings": [
+    "The rule was refuted, and kept firing",
+    "1. The good news, measured first",
+    "2. The defect: enforcement lived in a call site, not in the primitive",
+    "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py:1126",
+    "3. The fix, and the fix I rejected",
+    "4. A refutation is knowledge, so it must travel",
+    "5. Regression evidence",
+    "What this changes about the answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "REFUTED_BUT_STILL_FIRING_20261112_V1.md",
+   "sha256": "8de8d7cf100371a117751198d64a083c521435ce5988b4ab66ae078aaa03b7a4",
+   "summary": "**2026-11-12.** Authority **NONE**. `truth.achieved` = `false`.",
+   "terms": {
+    "100": 2,
+    "13": 2,
+    "14": 2,
+    "50": 3,
+    "about": 2,
+    "active": 2,
+    "after": 2,
+    "answer": 2,
+    "applies": 2,
+    "apply": 2,
+    "bundle": 3,
+    "c_out": 4,
+    "caller": 3,
+    "counterexample": 5,
+    "enforcement": 3,
+    "fail": 3,
+    "false": 5,
+    "fix": 3,
+    "fresh": 3,
+    "invalidated": 8,
+    "main": 4,
+    "measured": 3,
+    "must": 3,
+    "new": 5,
+    "none": 5,
+    "not": 12,
+    "one": 9,
+    "oracle": 3,
+    "pass": 4,
+    "permanent": 3,
+    "primitive": 5,
+    "public": 3,
+    "python": 4,
+    "read": 4,
+    "refused": 3,
+    "refuted": 6,
+    "repair": 3,
+    "rule": 14,
+    "same": 3,
+    "so": 4,
+    "state": 9,
+    "still": 5,
+    "store": 4,
+    "tests": 4,
+    "tree": 3,
+    "true": 6,
+    "two": 3,
+    "verifier": 3
+   },
+   "title": "The rule was refuted, and kept firing",
+   "title_terms": [
+    "firing",
+    "kept",
+    "refuted",
+    "rule"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6335,
    "headings": [
     "Repair candidate broker — unadmitted draft",
@@ -71269,10 +71344,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1143,
+  "included_source_count": 1144,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8545e423e441f11f02b0da87da117816ce2415f579598cf3c31ecf06a204a2b7"
+  "source_tree_digest": "4edd372db92f49eeeaa5062e9d3eeb7950b0fa3e25d2df3c14d0e3407853b362"
  },
  "research_index": [
   {
@@ -185146,7 +185221,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_20261006_V1.json",
    "schema": "PROJECT_BRAIN_ROOT3_DIRECT_URLOPEN_NETWORK_MEDIATOR_PUBLIC_RUNNER_VERIFICATION_V1",
-   "sha256": "47017140782a79abb3bf5ffee176c348c845900110b779fc3dd43b934da4916e",
+   "sha256": "f0ee2a17220483a9850130611bfeee539c8e0c95115ef7a53f1110315d35c2b7",
    "status": "PUBLIC_RUNNER_PASS__DIRECT_URLOPEN_FALLBACK_MEDIATED_AND_RECEIPTED__ZERO_TERMINA",
    "terms": {
     "20261006": 1,
