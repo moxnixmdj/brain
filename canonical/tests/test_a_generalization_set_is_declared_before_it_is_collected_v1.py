@@ -57,3 +57,20 @@ def test_every_kept_commit_names_its_files_and_parent():
         for commit in kind["commits"]:
             assert commit["project"] and commit["commit"] != commit["parent"]
             assert commit["files"], "a kept commit without files"
+
+
+def test_the_lessons_showings_are_never_their_own_targets():
+    """`--showings N` reads the first N commits as one lesson; a shown commit is never measured.
+
+    The default of one showing is the old protocol unchanged: the same teacher, the same targets.
+    A kind with too few commits for the asked showings drops out instead of teaching on nothing.
+    """
+    import inspect
+
+    harness = _harness()
+    signature = inspect.signature(harness.measure)
+    assert signature.parameters["showings"].default == 1
+    source = inspect.getsource(harness.measure)
+    assert 'kind["commits"][:showings]' in source, "the lesson is the first N commits"
+    assert 'kind["commits"][showings:]' in source, "the targets are every commit after the lesson"
+    assert 'len(kind["commits"]) < showings + 1' in source, "too small a kind drops out"

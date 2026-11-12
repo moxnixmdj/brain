@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 388,
+  "knowledge_documents": 389,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6782,
+  "research_index_records": 6783,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a4d0a1c773b3bb5ab8f5041753a4a6ffc530d9364518240d2bb346546ddf15dc"
+  "value": "d5f5cc94869f86f91cc42c27cd8facd49daae44f2e01a5f9f2a6d1c70098730d"
  },
  "engines": [
   {
@@ -45797,6 +45797,82 @@
     "put",
     "reshaping",
     "tangled"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7166,
+   "headings": [
+    "A second showing untangles the lesson from the teacher's other habits",
+    "1. Predictions, declared before the measurement ran",
+    "2. What landed",
+    "3. The falsification, diagnosed to the line",
+    "4. What this answers, and the next reachable move",
+    "5. Discipline"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SECOND_SHOWING_UNTANGLES_THE_LESSON_20261112_V1.md",
+   "sha256": "1edfb7f4bc0ec94c6983e0925f6c1b8a74ea9aa5f10544a59ba1aeb635defdb8",
+   "summary": "**2026-11-12.** Base `8238d637`. Branch `arena/0e163c42-brain`. Follows #6778.",
+   "terms": {
+    "13": 6,
+    "6778": 3,
+    "against": 4,
+    "all": 4,
+    "alone": 4,
+    "any": 4,
+    "byte-identical": 4,
+    "code": 9,
+    "commit": 4,
+    "commits": 3,
+    "declared": 3,
+    "diff": 7,
+    "doctrine": 3,
+    "engine": 5,
+    "every": 4,
+    "example": 12,
+    "extra": 9,
+    "fail_unless": 5,
+    "files": 4,
+    "fresh": 12,
+    "held": 5,
+    "held_out": 6,
+    "is_set": 4,
+    "kind": 4,
+    "kinds": 10,
+    "left": 7,
+    "lesson": 4,
+    "never": 6,
+    "no": 4,
+    "not": 10,
+    "one": 12,
+    "one-showing": 4,
+    "only": 5,
+    "other": 5,
+    "own": 5,
+    "refused": 5,
+    "rule": 5,
+    "rules": 4,
+    "second": 15,
+    "seen": 5,
+    "showing": 12,
+    "showings": 16,
+    "strict": 8,
+    "tangle": 5,
+    "teacher": 9,
+    "tried": 8,
+    "two": 5,
+    "untouched": 4
+   },
+   "title": "A second showing untangles the lesson from the teacher's other habits",
+   "title_terms": [
+    "habits",
+    "lesson",
+    "other",
+    "second",
+    "showing",
+    "teacher",
+    "untangles"
    ]
   },
   {
@@ -74914,10 +74990,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1190,
+  "included_source_count": 1191,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0fd0448daf85dfc4fba134844c12ebf56968930796db6ed0ac4d13fff0ff6709"
+  "source_tree_digest": "133e5ad9f9d3c6d30d8e2709f4059f65c1f926cab8d69723a794fe43196e02d5"
  },
  "research_index": [
   {
@@ -223635,6 +223711,30 @@
    }
   },
   {
+   "action_id": "A_SECOND_SHOWING_UNTANGLES_THE_LESSON_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SECOND_SHOWING_UNTANGLES_THE_LESSON_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SECOND_SHOWING_UNTANGLES_THE_LESSON_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7e9f5a22f658131a94da80c18bb2e9ad55473733b6c192dbdb757c9aad028fdc",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_second_showing_untangles_the_lesson_20261112_v1": 1,
+    "add_showings_n_to_the_measure_harness_with_teachers_never_targets__declare_five_predictions_and_push_before_measuring__measure_once__report_the_falsified_safety_claim_with_the_line_level_diagnosis_and_no_post_hoc_patch": 1,
+    "fresh_at_2_showings__extra_13_to_0__strict_same_rate_79_to_95_percent__held_out_safety_claim_falsified_by_is_set_4_and_4__seen_clean__one_showing_tables_byte_identical": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lesson": 1,
+    "second": 1,
+    "showing": 1,
+    "the_intent_tangle_was_declared_movable_only_by_a_second_showing_and_multi_showing_teaching_had_never_been_measured_on_the_tracked_corpus": 1,
+    "untangles": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_SENTENCE_CAN_ASK_FOR_TEXT_TO_BE_REPLACED_IN_A_FILE_SO_THE_EDIT_FAMILY_IS_NO_LONGER_UNAVAILABLE_V1_20261025_V1",
    "capability": false,
    "date": "2026-10-25",
@@ -232117,7 +232217,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CARRIER_GATE_MUST_NOT_EAT_THE_DOORS_REASON_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0a55b3b6afaea9cfb9086385fe1b25b224f24837c6deaf1ff204362697f977d3",
+   "sha256": "3537b44f6e62a1d8f444a0ed4af85635672439141087f1bb8de61f818fa1d24c",
    "status": "",
    "terms": {
     "20261112": 1,
