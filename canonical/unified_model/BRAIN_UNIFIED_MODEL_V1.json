@@ -31238,7 +31238,11 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
+<<<<<<< HEAD
   "value": "1f995b50856b7374f048f0d1d08a0087ed3e924b03fc97f598319cca25d6be0b"
+=======
+  "value": "c726355fe068d96ba51d9c16aed751b70b3145858a608c8c5ebd12fd59a7f8de"
+>>>>>>> origin/main
  },
  "engines": [
   {
@@ -69294,7 +69298,11 @@
   "included_source_count": 1117,
   "incremental_spend_usd": 0,
   "network_calls": 0,
+<<<<<<< HEAD
   "source_tree_digest": "2d06eb0c53c28780165104eb93bae4353034843c7de42dc3bbf69f97a31b2800"
+=======
+  "source_tree_digest": "c31667698cfad27b5061b9f0c642192de9c0477aaa50b2c208837b3a3a7bf768"
+>>>>>>> origin/main
  },
  "research_index": [
   {
@@ -223374,6 +223382,31 @@
     "v1": 2,
     "verb": 2,
     "were": 2
+   }
+  },
+  {
+   "action_id": "REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/REPAIR_ACCEPTANCE_MUST_CHECK_OUTCOME_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "25a95036a5d75d59542c53da8a80ba15c9c0d6a7b86cc47669246cab093453e5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "acceptance": 1,
+    "check": 1,
+    "eight_repair_capabilities_accept_a_failed_repair_because_the_registry_checks_output_file_written_not_the_adapters_declared_boolean_outcome": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "one_measured_false-acceptance_path_removed__no_benchmark_row_moved__no_capability_or_terminal_credit": 1,
+    "outcome": 1,
+    "repair": 1,
+    "repair_acceptance_must_check_outcome_20261112_v1": 1,
+    "reuse_the_adapters_measured_boolean_outcome_and_existing_runtime_expect_checker": 1,
+    "v1": 1
    }
   },
   {
