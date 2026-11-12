@@ -435,6 +435,79 @@ fact. It is the next experiment, and it is a **corpus routing** change — which
 handed to `sleep_abstract` — not another algorithm change, so it is cheap to run and cheap to
 revert.
 
+## 4e. Addendum 4: the corpus experiment did not run. That is not a result.
+
+I tried to test the §4d corpus hypothesis the controlled way: take the same 120 files, and
+mechanically *de-factor* one arm by inlining every call to a same-file `return <expr>` helper, so
+that shared structure is spelled out at each call site instead of referenced by name. Same content,
+one variable different.
+
+```
+defactoring: 1/120 files changed, 1 call sites inlined
+
+arm           admit  rejected  fit-rw  val-rw  TEST-rw   ok
+--------------------------------------------------------------
+factored          0         1       0       0        0  True
+defactored        0         1       0       0        0  True
+```
+
+**The manipulation failed.** One call site, in one file, out of 120. The corpus contains almost no
+top-level single-`return` helpers to inline, so the "defactored" arm is the same corpus wearing a
+hat. The run measured nothing.
+
+It would be easy to read `NOT_CONFIRMED` as "the corpus hypothesis is refuted." That would be
+wrong, and it is exactly the mistake of §4 (toy corpus) and of my own probe bug in §4c (builtins
+reported undefined): reporting a conclusion the measurement does not support. So it is recorded as
+**inconclusive, not negative**. The corpus hypothesis is untested.
+
+What the failure does tell us, usefully, is that this codebase's Python has almost nothing
+inlinable at that shape — which is itself consistent with "already factored," but does not
+establish it.
+
+I stopped here rather than build a more elaborate corpus generator. Four manipulations of this
+compressor have now produced four null or inconclusive results, and the marginal value of a fifth
+is lower than the value of saying plainly what is established and what is not.
+
+### What is established, and what is not
+
+**Established by measurement today:**
+
+| Claim | Status |
+|---|---|
+| A learned lesson persists across restart / bundle | TRUE, 25 tests green |
+| Exact-episode replay works | TRUE |
+| Transfer to a new instance of a known family | TRUE but bounded: 8/15, and 7/15 cost more calls |
+| Transfer to a new *kind* of environment | Negative: learn-to-learn `NO_COMPOUNDING` |
+| "Show once, learn the class" | FALSE, three ways: 1/2/3 examples all 6/7; direct instruction fails |
+| The compressor generalizes on this codebase's Python | FALSE, four attempts, 0 TEST rewrites throughout |
+
+**Not established:**
+
+- That the compressor *cannot* generalize. It generalized on a flat unfactored corpus (12 → 6 nodes
+  on an unseen instance, execution-equivalent). What is unestablished is whether a real
+  machine-generated corpus exists here to feed it.
+- That the corpus is the binding constraint. Untested — the experiment did not run.
+
+The load-bearing negative is narrow and firm: **on this repository's human-authored Python, under
+four different manipulations, no learned abstraction ever fired on held-out code.** That is enough
+to say "show it once" cannot work today. It is not enough to say the compressor is dead.
+
+### Where I think the effort should go instead
+
+The compression line is now blocked on something that is not a mechanism: it needs a corpus of
+machine-generated, unfactored programs, and producing one requires running the synthesizer at
+scale. That is an integration task, not a research one, and it should not be attempted by tuning
+the compressor further.
+
+Meanwhile, the external numbers in §5 point at a different constraint for the actual goal. The
+sharpest single fact found today is that SWE-bench Pro falls from **25.9% to 8.4%** when
+human-written requirements are removed. Advanced software engineering is gated less by executing
+actions than by turning an ambiguous request into a checkable acceptance test — and that is exactly
+the spine `SOLUTION_INDEX.md` already ranks first (`lossless_raw_task_contract` →
+`live_brain_route_admission` → `live_integrated_brain`). Effort spent there is aimed at a measured
+17-point collapse. Effort spent on the compressor is aimed at a hypothesis that is currently
+untestable here.
+
 ## 5. Where the outside world actually is (2026-11), so "most advanced on the planet" is calibrated
 
 | Benchmark | Top of the board | Human | What it really says |
