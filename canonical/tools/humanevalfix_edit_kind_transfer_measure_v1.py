@@ -18,7 +18,7 @@ that order, up to a budget. Asked three ways:
 
   another_benchmark   the 40 QuixBugs fixes only (other authors, other programs)
   all_other_fixes     those and the fixes of the other 163 HumanEvalFix bugs
-  learning curve      k of those lessons, drawn at random, for several k
+  learning curve      k of those lessons, drawn at random, for several k (a smaller budget per draw)
 
 and, as a check on the learner alone (no tests run), where the bug's OWN fix ranks once shown.
 
@@ -73,9 +73,10 @@ DEFAULT_BUDGET = 1000             # candidates run against a bug's tests, at mos
 SCREEN_LIMIT_S = 0.5              # one candidate in the screen
 ACCEPT_LIMIT_S = 10               # the harness's own limit, in a fresh interpreter
 CHUNK = 40
-CURVE_SIZES = (1, 3, 10, 30, 100)
-CURVE_SEEDS = 3
-RANKS = (1, 10, 100, 1000)
+CURVE_SIZES = (3, 10, 30, 100)    # lessons drawn at random for the learning curve
+CURVE_SEEDS = 2                   # draws per size and bug
+CURVE_BUDGET = 200                # candidates run per draw: compare with "repaired_within 200" of the full questions
+RANKS = (1, 10, 100, 200, 1000)
 
 
 # --------------------------------------------------------------------------- #
@@ -372,7 +373,7 @@ def one_bug(bug: Mapping[str, Any], lessons: kinds.Lessons, quixbugs_names: Sequ
         rows = []
         for draw in range(curve_seeds):
             chosen = random.Random(f"{seed}/{bug['name']}/{size}/{draw}").sample(others, size)
-            answer = asked(bench, lessons, votes, chosen, budget, extra, detail=False)
+            answer = asked(bench, lessons, votes, chosen, min(budget, CURVE_BUDGET), extra, detail=False)
             rows.append({k: answer.get(k) for k in ("candidates", "published_fix_rank", "first_pass_rank", "repaired", "is_the_published_fix")})
         curve[str(size)] = rows
     out["curve"] = curve
@@ -385,24 +386,26 @@ def one_bug(bug: Mapping[str, Any], lessons: kinds.Lessons, quixbugs_names: Sequ
 # --------------------------------------------------------------------------- #
 # the measurement and what it came to
 # --------------------------------------------------------------------------- #
-def taught(bugs: Sequence[Mapping[str, Any]], quixbugs: Mapping[str, tuple[str, str]]) -> kinds.Lessons:
+def taught(bugs: Sequence[Mapping[str, Any]], quixbugs: Mapping[str, tuple[str, str]], *, backwards: bool = False) -> kinds.Lessons:
+    """Every fix shown once. `backwards` shows each one the wrong way round -- from the fixed program
+    to the buggy one -- which is the control: the same programs, the same sizes of change, no fix."""
     lessons = kinds.Lessons()
     for name, (buggy, fixed) in quixbugs.items():
-        lessons.learn(name, buggy, fixed)
+        lessons.learn(name, *((fixed, buggy) if backwards else (buggy, fixed)))
     for bug in bugs:
-        lessons.learn(bug["name"], bug["buggy"], bug["fixed"])
+        lessons.learn(bug["name"], *((bug["fixed"], bug["buggy"]) if backwards else (bug["buggy"], bug["fixed"])))
     return lessons
 
 
 def measure(bugs: Sequence[Mapping[str, Any]], names: Sequence[str], quixbugs: Mapping[str, tuple[str, str]], work: pathlib.Path, *,
             budget: int = DEFAULT_BUDGET, extra: Mapping[int, Mapping[str, Any]] | None = None,
-            curve_sizes: Sequence[int] = CURVE_SIZES, curve_seeds: int = CURVE_SEEDS, seed: int = 0,
+            curve_sizes: Sequence[int] = CURVE_SIZES, curve_seeds: int = CURVE_SEEDS, seed: int = 0, backwards: bool = False,
             check_for: Callable[[Mapping[str, Any], pathlib.Path], Callable[[Sequence[str]], int | None]] | None = None,
             accepted_for: Callable[[Mapping[str, Any]], Callable[[str], bool]] | None = None,
             progress: Callable[[str, Mapping[str, Any], Mapping[str, Any]], None] | None = None) -> dict[str, Any]:
     """Every bug in `names` asked every question. The lessons are the fixes of ALL the bugs given
     and of QuixBugs; a bug's own fix is never among the lessons it is asked with."""
-    lessons = taught(bugs, quixbugs)
+    lessons = taught(bugs, quixbugs, backwards=backwards)
     by_name = {bug["name"]: bug for bug in bugs}
     per_bug: dict[str, Any] = {}
     for name in names:
@@ -502,6 +505,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--budget", type=int, default=DEFAULT_BUDGET)
     parser.add_argument("--curve-seeds", type=int, default=CURVE_SEEDS)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--lessons-backwards", action="store_true",
+                        help="the control: every fix is shown from the fixed program to the buggy one")
     parser.add_argument("--merge", nargs="*", type=pathlib.Path, default=None, help="put shard records together instead of measuring")
     parser.add_argument("--out", required=True, type=pathlib.Path)
     args = parser.parse_args(argv)
@@ -512,7 +517,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         parts = [json.loads(path.read_text()) for path in args.merge]
         per_bug: dict[str, Any] = {}
         for part in parts:
-            if any(part[k] != parts[0][k] for k in ("which", "budget", "code_sha256", "benchmark", "lessons", "seed", "curve_seeds")):
+            if any(part[k] != parts[0][k] for k in ("which", "budget", "code_sha256", "benchmark", "lessons", "seed", "curve_seeds", "lessons_shown")):
                 raise SystemExit("the shards were not measured the same way")
             per_bug.update(part["per_bug"])
         record = {k: v for k, v in parts[0].items() if k not in ("per_bug", "summary", "shard", "names")}
@@ -533,7 +538,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     record: dict[str, Any] = {
         "schema": SCHEMA, "authority": AUTHORITY, "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "which": args.which, "shard": args.shard, "names": names, "budget": args.budget, "seed": args.seed, "curve_seeds": args.curve_seeds,
-        "curve_sizes": list(CURVE_SIZES), "screen_limit_s": SCREEN_LIMIT_S, "accept_limit_s": ACCEPT_LIMIT_S,
+        "lessons_shown": "backwards__from_the_fixed_program_to_the_buggy_one" if args.lessons_backwards else "as_fixes",
+        "curve_sizes": list(CURVE_SIZES), "curve_budget": min(args.budget, CURVE_BUDGET), "screen_limit_s": SCREEN_LIMIT_S,
+        "accept_limit_s": ACCEPT_LIMIT_S, "at_most_candidates_of_one_operator": kinds.MAX_CANDIDATES_OF_ONE,
         "split": {"seed": SPLIT_SEED, "scored": len(scored), "development": len(development), "never_scored": list(READ_BEFORE_THE_DRAW)},
         "benchmark": {"humanevalfix_sha256": hashlib.sha256(args.humanevalfix.read_bytes()).hexdigest(), "bugs": len(bugs),
                       "extra_inputs_sha256": None if args.extra_inputs is None else hashlib.sha256(args.extra_inputs.read_bytes()).hexdigest(),
@@ -550,7 +557,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.out.write_text(json.dumps(record, indent=1, sort_keys=True) + "\n")
 
     measured = measure(bugs, names, quixbugs, args.work_dir, budget=args.budget, extra=extra, curve_seeds=args.curve_seeds,
-                       seed=args.seed, progress=progress)
+                       seed=args.seed, backwards=args.lessons_backwards, progress=progress)
     record["lessons"] = measured["lessons"]
     record["per_bug"] = measured["per_bug"]
     record["summary"] = summarise(measured["per_bug"], args.budget)

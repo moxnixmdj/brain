@@ -526,13 +526,20 @@ def built(pattern: Any, bound: dict[str, Any]) -> Any:
     return pattern
 
 
+def _is_documentation(node: ast.AST) -> bool:
+    """A string standing alone as a statement: a change to it changes nothing that runs."""
+    return isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str)
+
+
 class Place:
     """A program an operator may be applied to, read once."""
 
     def __init__(self, source: str) -> None:
         self.tree = ast.parse(source)
         self.original = ast.unparse(self.tree)
-        self.nodes = [(path, node, position) for path, node, position in walk(self.tree) if path]
+        documentation = [node for _, node, _ in walk(self.tree) if _is_documentation(node)]
+        skipped = {id(node) for node in documentation} | {id(node.value) for node in documentation}
+        self.nodes = [(path, node, position) for path, node, position in walk(self.tree) if path and id(node) not in skipped]
         self.by_type: dict[type, list[tuple[tuple, ast.AST, tuple[str, str] | None]]] = {}
         for row in self.nodes:
             self.by_type.setdefault(type(row[1]), []).append(row)
@@ -544,8 +551,9 @@ class Place:
                 self.names.append(text)
             if isinstance(node, ast.Attribute) and node.attr not in self.attributes:
                 self.attributes.append(node.attr)
+        # every list of statements -- and the else-branch that is not there yet: a statement may be put into it
         self.bodies = [(path, node, name) for path, node, _ in [((), self.tree, None)] + self.nodes for name in _BODIES
-                       if isinstance(getattr(node, name, None), list) and getattr(node, name)
+                       if isinstance(getattr(node, name, None), list) and (getattr(node, name) or name == "orelse")
                        and all(isinstance(s, ast.stmt) for s in getattr(node, name))]
 
     def where(self, pattern: ast.AST | None) -> list[tuple[tuple, ast.AST, tuple[str, str] | None]]:
@@ -603,8 +611,6 @@ def candidates(operator: Operator, place: Place | str, at_most: int = MAX_CANDID
         for path, node, position in place.where(operator.before):
             if operator.position is not None and position != operator.position:
                 continue
-            if isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str):
-                continue                                     # a documentation string
             bound: dict[str, Any] = {}
             if fits(operator.before, node, bound):
                 fitting.append((path, node, bound))
@@ -624,7 +630,8 @@ def candidates(operator: Operator, place: Place | str, at_most: int = MAX_CANDID
               if operator.position is None or (type(owner).__name__, name) == operator.position]
     if operator.what == "delete":
         fitting = [(getattr(owner, name), index) for owner, name in bodies
-                   for index, statement in enumerate(getattr(owner, name)) if fits(operator.before, statement, {})]
+                   for index, statement in enumerate(getattr(owner, name))
+                   if not _is_documentation(statement) and fits(operator.before, statement, {})]
         if len(fitting) > at_most:
             return []
         for body, index in fitting:
