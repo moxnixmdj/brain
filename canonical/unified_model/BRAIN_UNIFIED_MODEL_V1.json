@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 307,
+  "knowledge_documents": 308,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6706,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "65679c5da27bfd59ef5e5a7bd1b321b9425ddd8e5230e61f814cb7fe76b5f72b"
+  "value": "72c3f5e2b3335844e6d4dc52f23302b700c0a4d2d452176084b558229eb77e36"
  },
  "engines": [
   {
@@ -50826,6 +50826,81 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7956,
+   "headings": [
+    "One try buys a rule that is wrong",
+    "1. The measurement",
+    "2. What this does *not* say — and it matters, because here the owner is right",
+    "3. Why \"more environments\" still fails outside it",
+    "4. What to do with this",
+    "5. Receipts",
+    "6. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_TRY_BUYS_A_RULE_THAT_IS_WRONG_20261112_V1.md",
+   "sha256": "b7ff87d5ec5c717965a7741fd16ba9e25a2f6227214508e215c993cb6bf0f63d",
+   "summary": "**2026-11-12.** Base `e3f6075f`. Branch `arena/2356f2b6-brain`. Round 2 of the owner's question.",
+   "terms": {
+    "0.00": 11,
+    "1.00": 19,
+    "10": 11,
+    "100": 3,
+    "14": 6,
+    "16": 6,
+    "47": 4,
+    "affine": 3,
+    "after": 7,
+    "against": 5,
+    "all": 5,
+    "already": 5,
+    "because": 5,
+    "but": 3,
+    "candidates": 3,
+    "chosen": 5,
+    "demo": 4,
+    "demonstration": 4,
+    "exactly": 5,
+    "held-out": 4,
+    "inputs": 4,
+    "interface": 11,
+    "leader": 6,
+    "mod": 7,
+    "more": 5,
+    "no": 11,
+    "not": 22,
+    "observation": 4,
+    "one": 16,
+    "only": 7,
+    "owner": 5,
+    "prior": 4,
+    "programs": 5,
+    "questions": 5,
+    "regime": 7,
+    "right": 12,
+    "rule": 4,
+    "same": 5,
+    "so": 4,
+    "space": 14,
+    "still": 6,
+    "targets": 4,
+    "those": 5,
+    "three": 6,
+    "tree": 4,
+    "two": 4,
+    "verifier": 5,
+    "wrong": 4
+   },
+   "title": "One try buys a rule that is wrong",
+   "title_terms": [
+    "buys",
+    "one",
+    "rule",
+    "try",
+    "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 17701,
    "headings": [
     "The optimal plan — V4, re-grounded on today's `main` — 2026-11-02",
@@ -68686,10 +68761,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1109,
+  "included_source_count": 1110,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "dac7ba386bc1815b5197f2f19beabcffb9fb652cc3f02b292b50a51a4b55ca24"
+  "source_tree_digest": "78827e9f9692011ee7c5280656ae2652dd079bb26cfaff4aaab6b3894dcae7a2"
  },
  "research_index": [
   {
