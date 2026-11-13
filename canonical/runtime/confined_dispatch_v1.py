@@ -177,12 +177,17 @@ def run_confined_capability(
             "declared_effects": observed,
         }
         adapter_result: dict[str, Any] | None = None
+        raised_reason: str | None = None
         result_path = conf.worktree / RESULT_FILE
         if result_path.is_file():
             try:
                 loaded = json.loads(result_path.read_text(encoding="utf-8"))
                 if isinstance(loaded, dict) and "__confined_runner__" not in loaded:
                     adapter_result = loaded
+                elif isinstance(loaded, dict) and loaded.get("__confined_runner__") == "adapter_raised":
+                    # The adapter ran and refused: the reason is measured data, not silence.
+                    raised_reason = "CONFINED_ADAPTER_RAISED:%s:%s" % (
+                        loaded.get("error_type"), loaded.get("error"))
             except (ValueError, OSError):
                 adapter_result = None
 
@@ -190,7 +195,7 @@ def run_confined_capability(
             return {
                 "pass": False,
                 "status": CF.STATUS if hasattr(CF, "STATUS") else "FAIL_CLOSED__CONFINED_EXECUTION",
-                "reason": "CONFINED_RUN_DID_NOT_PRODUCE_A_RESULT",
+                "reason": raised_reason or "CONFINED_RUN_DID_NOT_PRODUCE_A_RESULT",
                 "confinement": receipt,
                 "capability_id": str(cid),
                 "dependency": {"type": "confinement", "modules": [], "executor": EXECUTOR},

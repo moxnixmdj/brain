@@ -5561,6 +5561,15 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                     _is_honest_contract_refusal,
                 )
                 if not _is_honest_contract_refusal(result):
+                    from canonical.runtime import effect_directed_compile_v1 as _edc
+                    try:
+                        _effect_routed = _edc.attempt(request)
+                    except Exception:  # noqa: BLE001 - a router failure must not change the refusal path
+                        _effect_routed = None
+                    if _effect_routed is not None:
+                        _effect_routed["elapsed_ns"] = perf_counter_ns() - started
+                        _effect_routed["served_after"] = str(result.get("status") or "")
+                        return _effect_routed
                     acted = _serve_by_acting(request)
                     if acted is not None:
                         acted["elapsed_ns"] = perf_counter_ns() - started
