@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 433,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6830,
+  "research_index_records": 6831,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "22fcb2491256fb518d186d4f55423c4dca775ef436e702c1b58ed99fd7cf2d57"
+  "value": "596357e693537f4a5f166b0e2aec87cf09ca8c64e58cc348ab7fb3e2147eae8d"
  },
  "engines": [
   {
@@ -239906,6 +239906,29 @@
     "source": 2,
     "v1": 2,
     "wave_seven_receipt_prose_family_gets_a_suite_v1_20261024_v1": 2
+   }
+  },
+  {
+   "action_id": "WEIGHT_SPACE_FUEL_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/WEIGHT_SPACE_FUEL_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WEIGHT_SPACE_FUEL_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6ee3e5dbf16f0f39caec678f79b1316caacbf653305587dcc7c456e29cec0509",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "count_the_fuel_before_building_the_engine": 1,
+    "fuel": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "space": 1,
+    "the_next_layer_is_named_and_its_precondition_is_measured__verified_events_number_258_with_64_verified_against_a_5000_threshold_while_2790_changed_lines_per_merge_are_discarded__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "the_next_layer_of_learning_is_weight_space_but_its_precondition_is_a_verified_event_stream_and_this_repo_has_258_units_with_64_verified__the_hand_seeded_store_has_100_percent_success_and_cannot_teach_where_a_lesson_stops__and_the_check_that_would_verify_new_events_could_not_run_on_0_of_42_real_changed_files": 1,
+    "v1": 1,
+    "weight": 1,
+    "weight_space_fuel_20261113_v1": 1
    }
   },
   {
