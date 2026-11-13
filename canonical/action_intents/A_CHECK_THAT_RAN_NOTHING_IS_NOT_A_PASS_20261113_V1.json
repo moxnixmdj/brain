@@ -34,12 +34,8 @@
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
-      "THE_VERIFIER_WAS_EMPTY_20261113_V1.md",
-      "canonical/swe_kernel/check_collection_admission_v1.py",
-      "canonical/tools/experience_corpus_training_readiness_v1.py",
       "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
-      "canonical/tests/test_experience_corpus_training_readiness_v1.py",
-      "canonical/verification/VACUOUS_CHECK_CENSUS_20261113_V1.json"
+      "canonical/tests/test_experience_corpus_training_readiness_v1.py"
     ],
     "route_class": "ADAPT",
     "producer_cognition_model_dependency_count": 0,
@@ -96,8 +92,8 @@
       "COLLECTION_ERROR_COUNTED_AS_A_TEST_VERDICT (caught by the new tests before shipping)",
       "FINE_TUNING_ON_THE_CURRENT_CORPUS_FIRST (rejected: 0/71 admissible rows, 0 failures recorded)"
     ],
-    "stop_condition": "The counterfactual and controls behave as stated, the new and existing suites pass, the unified verifier and referee are green, and no credit is claimed.",
-    "expected_parent_level_state_change": "A stood-up check reports a verdict only when it executed at least one test; zero collection, collection error and missing dependency are distinct refusals rather than a pass.",
+    "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
+    "expected_parent_level_state_change": "The check admission path no longer stamps verified on an untested edit. No capability is registered and no family is flipped.",
     "why_selected_route_is_fastest_sufficient": "Both learning options consume the verification bit, so repairing its admission is upstream of choosing between them. The defect is local to one runner call in an owned tool; adapting it is smaller than a new verifier organ, and no GPU or open-weight model is required.",
     "iteration_limit": 3,
     "routes_considered": [
@@ -212,12 +208,12 @@
       "known_counterexamples_checked": true,
       "counterexample_receipts": [
         {
-          "path": "canonical/tests/test_the_check_is_the_difference_v1.py",
-          "git_blob_sha": "9a65301c92e0b09f2f973fb373a66d197d90bede"
+          "path": "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
+          "git_blob_sha": "38610d9cece78899b2d12f1774a67dc3aa0db34a"
         },
         {
-          "path": "canonical/tests/test_across_environments_v1.py",
-          "git_blob_sha": "8daf4ccee6fc2cb2431a39d5a5d2a406d5557930"
+          "path": "canonical/tests/test_experience_corpus_training_readiness_v1.py",
+          "git_blob_sha": "fe95875a3dee93bf635ded228ceea29aa52a52c5"
         }
       ]
     }
