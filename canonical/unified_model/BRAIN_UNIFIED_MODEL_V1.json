@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 430,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6826,
+  "research_index_records": 6828,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1976
+  "source_index_modules": 1977
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3cea3b93b7e3540632c2adb15c4cb5e45b7dd50ccd0e9696db8220239904c804"
+  "value": "3378a4e5254dc0ffb4f0a78ab6b6fe4c2f689558e29c407c26d23ae5312e7051"
  },
  "engines": [
   {
@@ -150996,6 +150996,28 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json",
+   "schema": "BRAIN_CANDIDATE_UNDER_THE_TASKS_TESTS_V1",
+   "sha256": "939af7399f527af570e21c5c8f4cf17ef0d0c95b7f986fc29c041fb66534eee9",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "candidate": 1,
+    "django": 1,
+    "swebench": 1,
+    "tasks": 1,
+    "tests": 1,
+    "under": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/CANONICAL_PROOF_ATOM_BASIS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -190084,6 +190106,29 @@
     "v1": 1,
     "verification": 1,
     "witness": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RESOLVING_CANDIDATE_UNDER_THE_WHOLE_SUITE_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RESOLVING_CANDIDATE_UNDER_THE_WHOLE_SUITE_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json",
+   "schema": "BRAIN_RESOLVING_CANDIDATE_UNDER_THE_WHOLE_SUITE_V1",
+   "sha256": "520c1aa8a78bed161b6244a099a35601bc5bec66d332e7bbfcda578ae0c59fca",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "candidate": 1,
+    "django": 1,
+    "resolving": 1,
+    "suite": 1,
+    "swebench": 1,
+    "under": 1,
+    "v1": 1,
+    "verified": 1,
+    "whole": 1
    }
   },
   {
@@ -230892,7 +230937,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "b64f94f2fb59cbc6814acd042d0eba93568f93dec00365dd76938fcba999831b",
+   "sha256": "5582a55ba4d29b8907df9de006a57d041b02f23a0ebafe76ccaac43941bac976",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -310193,6 +310238,55 @@
     "test_missing_family_fails_closed": 1,
     "test_open_family_fails_closed": 1,
     "test_unknown_counter_fails_closed": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/tests_as_the_judge_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/tests_as_the_judge_v1.py",
+   "sha256": "d09379f502d2d063b1ca88548f36a0abdcf182ffe970c1f7a44dcbd8482be0b0",
+   "summary": "What a run of a project's own tests says about a change, read from what the runner printed.",
+   "symbol_count": 11,
+   "symbols": [
+    "_name_line",
+    "_read",
+    "finished",
+    "identifiers",
+    "left_out",
+    "normal",
+    "passing",
+    "ran",
+    "resolves",
+    "statuses",
+    "tells_apart"
+   ],
+   "terms": {
+    "about": 1,
+    "change": 1,
+    "finished": 1,
+    "identifiers": 1,
+    "judge": 1,
+    "left_out": 1,
+    "name_line": 1,
+    "normal": 1,
+    "own": 1,
+    "passing": 1,
+    "printed": 1,
+    "project": 1,
+    "ran": 1,
+    "read": 2,
+    "resolves": 1,
+    "run": 1,
+    "runner": 1,
+    "says": 1,
+    "statuses": 1,
+    "tells_apart": 1,
+    "tests": 2,
+    "v1": 1
    }
   },
   {
