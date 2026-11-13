@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 438,
+  "knowledge_documents": 439,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6839,
+  "research_index_records": 6841,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1977
+  "source_index_modules": 1978
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0cab0d04c099ccd0769a19da77d12a43be13e558a8be4f387c9dd1048b3b2de4"
+  "value": "ebed4074e5e73ce72d93ad8799e2466054413403c6c1ee344d541a037f46b56a"
  },
  "engines": [
   {
@@ -58281,6 +58281,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10511,
+   "headings": [
+    "You are right about the shape and wrong about \"solved\"",
+    "1. The thing you say is solved is not solved, and I can show you where",
+    "2. And a reachable check is not a check that catches a bug",
+    "3. Now the part of your claim that is real, measured",
+    "4. The three things \"instant\" quietly assumes",
+    "5. Claim D2 — \"faster and better than how agents learn now\"",
+    "6. What to build next, in order",
+    "7. Direct answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "RIGHT_ABOUT_THE_MECHANISM_WRONG_ABOUT_SOLVED_20261113_V1.md",
+   "sha256": "896b7775032737338dc830438dfee4877661718954a4feae7c856798ec2beb30",
+   "summary": "**Claim D:** instant learning and instant learning in new environments are already solved, so give the model the smartest coding/computer-use actions, have it do each thing **once**, and it learns all of it **permanently** — which solves any computer use and most advanced software engineering.",
+   "terms": {
+    "18": 4,
+    "about": 5,
+    "accounts": 7,
+    "against": 4,
+    "already": 4,
+    "answer": 4,
+    "canonical": 5,
+    "check": 13,
+    "claim": 5,
+    "comics": 8,
+    "conftest.py": 4,
+    "cost": 4,
+    "did": 4,
+    "environment": 5,
+    "every": 7,
+    "file": 4,
+    "files": 9,
+    "free": 5,
+    "goal": 5,
+    "import": 5,
+    "interactions": 4,
+    "learn": 5,
+    "learning": 5,
+    "measured": 8,
+    "missing": 5,
+    "model": 6,
+    "models.py": 4,
+    "module": 4,
+    "mutation": 4,
+    "never": 4,
+    "no": 10,
+    "not": 27,
+    "once": 6,
+    "one": 12,
+    "only": 5,
+    "part": 5,
+    "pass": 9,
+    "plan": 5,
+    "real": 9,
+    "right": 7,
+    "same": 6,
+    "so": 7,
+    "solved": 6,
+    "test": 10,
+    "tests": 8,
+    "than": 6,
+    "visit": 5,
+    "wrong": 17
+   },
+   "title": "You are right about the shape and wrong about \"solved\"",
+   "title_terms": [
+    "about",
+    "right",
+    "shape",
+    "solved",
+    "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6899,
    "headings": [
     "THE SECOND FAMILY: the compression mechanism generalises — measured",
@@ -79031,10 +79107,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1240,
+  "included_source_count": 1241,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "bfc0dcdc65eec9ad6622b7e19e5c4c5ca2746ffdd6b38974786c4e1bb68736a0"
+  "source_tree_digest": "c7ad750b2b9eebace346dad3ad3a640b7ade6dd9570ea6392d7367f5051d7ecd"
  },
  "research_index": [
   {
@@ -205751,6 +205827,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/TEST_ENTRY_POINT_FINDER_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/TEST_ENTRY_POINT_FINDER_20261113_V1.json",
+   "schema": "TEST_ENTRY_POINT_FINDER_20261113_V1",
+   "sha256": "6f219ca234d5658165456f115572db53e1a355dc6631557db3231bbdeca33e3f",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "entry": 1,
+    "finder": 1,
+    "point": 1,
+    "test": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -237187,6 +237282,30 @@
    }
   },
   {
+   "action_id": "TEST_ENTRY_POINT_FINDER_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/TEST_ENTRY_POINT_FINDER_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TEST_ENTRY_POINT_FINDER_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "d2367c02abbb34e1facd1bdb4126ce89565d26fc5ac5dc706352b8349e5d488a",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "entry": 1,
+    "finder": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instant_learning_and_instant_learning_in_new_environments_are_not_solved__one_shot_permanence_fails_on_the_check__the_prior_verdict_that_the_check_could_not_run_was_a_finder_bug_not_a_real_absence__corrected_yield_is_18_of_54_non_test_files_with_a_reachable_check__and_3_of_5_mutants_survive_so_covers_is_not_adequacy__validated_replay_of_a_learned_model_costs_1_08_percent_of_cold_but_only_because_it_is_checked": 1,
+    "none__measurement_correction": 1,
+    "point": 1,
+    "reuse": 1,
+    "test": 1,
+    "test_entry_point_finder_20261113_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "TEST_PATHS_REQUIRED_IS_DERIVABLE_AT_EVERY_SITE_THAT_RAISES_IT_V1_20261028_V1",
    "capability": false,
    "date": "2026-10-27",
@@ -264163,6 +264282,36 @@
     "probe": 2,
     "snapshot": 1,
     "unknown": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/environment_reuse_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/environment_reuse_v1.py",
+   "sha256": "48fefe3699c18d51a12882e7e2f0f19f08483755b55e72d9a61657bfbae9b322",
+   "summary": "Reuse a learned environment model without spending the trials again -- and notice when it is stale.",
+   "symbol_count": 2,
+   "symbols": [
+    "_safe_goal",
+    "replay_then_repair"
+   ],
+   "terms": {
+    "again": 1,
+    "environment": 2,
+    "learned": 1,
+    "model": 1,
+    "notice": 1,
+    "replay_then_repair": 1,
+    "reuse": 2,
+    "safe_goal": 1,
+    "spending": 1,
+    "stale": 1,
+    "trials": 1,
     "v1": 1
    }
   },
