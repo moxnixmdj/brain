@@ -217,7 +217,7 @@ def test_acceptance_is_labelled_structural_not_independent(workspace):
 
 
 def test_parser_refuses_ambiguous_and_unsupported_shapes():
-    from canonical.runtime import python_ast_query_v1 as adapter
+    from canonical.swe_kernel import python_ast_query_v1 as adapter
 
     assert adapter.parse_query("Count functions in a.py and write out.json") is None
     assert adapter.parse_query("Explain the architecture of sample.py") is None
@@ -233,7 +233,7 @@ def test_parser_refuses_ambiguous_and_unsupported_shapes():
 
 
 def test_method_scope_is_lexical_not_any_enclosing_class():
-    from canonical.runtime import python_ast_query_v1 as adapter
+    from canonical.swe_kernel import python_ast_query_v1 as adapter
 
     source = '''\
 def factory():

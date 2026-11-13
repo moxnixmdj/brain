@@ -81,7 +81,7 @@ counter, and it could fail open.
 
 ### 3.2 Added a bounded typed adapter
 
-New module: `canonical/runtime/python_ast_query_v1.py`.
+New module: `canonical/swe_kernel/python_ast_query_v1.py`.
 
 Contract:
 

@@ -543,7 +543,7 @@ def _solve_or_learn_impl(
         """Bounded read-only AST adapter. Similarity is never an executor."""
         if not goal or _has_structured_specialist:
             return None
-        from canonical.runtime import python_ast_query_v1 as ast_query
+        from canonical.swe_kernel import python_ast_query_v1 as ast_query
 
         try:
             typed = ast_query.solve_query(goal, root=work_cwd)
