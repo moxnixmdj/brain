@@ -7,7 +7,7 @@
  "route_id": "REUSE_THE_RECORDED_INSTRUMENTS_ON_A_REPOSITORY_DISJOINT_CORPUS",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "3a0dba881f884b3c132d51cc5dcf5d1692f94e7a",
+ "canonical_base_commit": "b56d981c8af50af5d3f3bf02ccdbf80ca281d2f5",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -88,7 +88,7 @@
   "canonical/verification/ONE_SHOWING_HELD_OUT_20261112_V1.json"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "3a0dba881f884b3c132d51cc5dcf5d1692f94e7a",
+  "canonical_base_commit": "b56d981c8af50af5d3f3bf02ccdbf80ca281d2f5",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "CROSS_REPOSITORY_TRANSFER_MEASURED_AT_0_573_MEAN_BUT_HALF_THE_KINDS_TRANSFER_EXACTLY_ZERO_AND_THREE_SHOWINGS_DO_NOT_MOVE_THEM",
