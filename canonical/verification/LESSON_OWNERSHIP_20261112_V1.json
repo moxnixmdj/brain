@@ -1,0 +1,211 @@
+{
+ "schema": "LESSON_OWNERSHIP_V1",
+ "authority": "NONE",
+ "model_calls": 0,
+ "cost_usd": 0.0,
+ "corpus_tool_sha256": "5fac4f092d34126d4806d244046c321cc63e7f20bf47341788b3a60a9ac6aaea",
+ "lessons": 52,
+ "targets": 232,
+ "curve": [
+  {
+   "lessons": 8,
+   "unscoped": {
+    "files": 25,
+    "edited": 2,
+    "questions": 1,
+    "same": 1,
+    "left": 0,
+    "extra": 0,
+    "wrong": 0
+   },
+   "symbol_scoped": {
+    "files": 25,
+    "edited": 1,
+    "questions": 1,
+    "same": 1,
+    "left": 0,
+    "extra": 0,
+    "wrong": 0
+   }
+  },
+  {
+   "lessons": 13,
+   "unscoped": {
+    "files": 47,
+    "edited": 16,
+    "questions": 24,
+    "same": 24,
+    "left": 0,
+    "extra": 5,
+    "wrong": 5
+   },
+   "symbol_scoped": {
+    "files": 47,
+    "edited": 15,
+    "questions": 24,
+    "same": 24,
+    "left": 0,
+    "extra": 0,
+    "wrong": 0
+   }
+  },
+  {
+   "lessons": 21,
+   "unscoped": {
+    "files": 93,
+    "edited": 51,
+    "questions": 103,
+    "same": 102,
+    "left": 1,
+    "extra": 21,
+    "wrong": 21
+   },
+   "symbol_scoped": {
+    "files": 93,
+    "edited": 44,
+    "questions": 87,
+    "same": 87,
+    "left": 0,
+    "extra": 12,
+    "wrong": 12
+   }
+  },
+  {
+   "lessons": 34,
+   "unscoped": {
+    "files": 158,
+    "edited": 83,
+    "questions": 163,
+    "same": 157,
+    "left": 6,
+    "extra": 32,
+    "wrong": 32
+   },
+   "symbol_scoped": {
+    "files": 158,
+    "edited": 67,
+    "questions": 137,
+    "same": 133,
+    "left": 4,
+    "extra": 15,
+    "wrong": 15
+   }
+  },
+  {
+   "lessons": 52,
+   "unscoped": {
+    "files": 232,
+    "edited": 130,
+    "questions": 282,
+    "same": 270,
+    "left": 6,
+    "extra": 39,
+    "wrong": 39
+   },
+   "symbol_scoped": {
+    "files": 232,
+    "edited": 106,
+    "questions": 247,
+    "same": 231,
+    "left": 10,
+    "extra": 20,
+    "wrong": 20
+   }
+  }
+ ],
+ "control_discriminating_power": {
+  "surviving_lessons_histogram": {
+   "0": 3,
+   "1": 36,
+   "2": 41,
+   "3": 41,
+   "4": 32,
+   "5": 21,
+   "6": 19,
+   "7": 13,
+   "8": 10,
+   "9": 4,
+   "10": 7,
+   "11": 3,
+   "12": 1,
+   "13": 1
+  },
+  "unique": 36,
+  "targets": 232,
+  "unique_share": 0.155,
+  "reading": "A filter that keeps every lesson decides nothing. This one leaves one lesson standing on a minority of targets, so it is a real decision and not a tautology, but it is silent most of the time and must not be quoted as a general rule."
+ },
+ "control_matched_volume": {
+  "symbol_scoped": {
+   "files": 232,
+   "edited": 106,
+   "questions": 247,
+   "same": 231,
+   "left": 10,
+   "extra": 20,
+   "wrong": 20,
+   "wrong_per_edit": 0.189
+  },
+  "blind_random": [
+   {
+    "files": 232,
+    "edited": 81,
+    "questions": 187,
+    "same": 171,
+    "left": 13,
+    "extra": 35,
+    "wrong": 35,
+    "wrong_per_edit": 0.432
+   },
+   {
+    "files": 232,
+    "edited": 85,
+    "questions": 184,
+    "same": 161,
+    "left": 20,
+    "extra": 33,
+    "wrong": 33,
+    "wrong_per_edit": 0.388
+   },
+   {
+    "files": 232,
+    "edited": 75,
+    "questions": 160,
+    "same": 145,
+    "left": 11,
+    "extra": 28,
+    "wrong": 28,
+    "wrong_per_edit": 0.373
+   },
+   {
+    "files": 232,
+    "edited": 79,
+    "questions": 172,
+    "same": 148,
+    "left": 20,
+    "extra": 31,
+    "wrong": 31,
+    "wrong_per_edit": 0.392
+   },
+   {
+    "files": 232,
+    "edited": 74,
+    "questions": 159,
+    "same": 143,
+    "left": 13,
+    "extra": 39,
+    "wrong": 39,
+    "wrong_per_edit": 0.527
+   }
+  ],
+  "reading": "Blind random lessons at comparable volumes write two to three times as many wrong lines per edit. The scope is therefore a decision about which lesson owns a place, not merely caution that does less work."
+ },
+ "question_2_weight_training_evidencable": {
+  "commits": 207,
+  "projects": 205,
+  "projects_with_three_or_more_commits": 0,
+  "projects_with_two_or_more_lessons": 1,
+  "reading": "A weight-update experiment needs a stream from the same distribution with tasks kept back. This corpus is one commit per project almost everywhere, so training and held-out tasks cannot be separated, and no claim about weight learning can be evidenced on it. That is a data-shape fact, not an opinion about weights."
+ },
+ "seconds": 354.0
+}
