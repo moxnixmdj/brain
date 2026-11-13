@@ -1,15 +1,48 @@
 {
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "action_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
   "action_intent_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
   "action_kind": "GOVERNANCE_GUARD",
-  "action_summary": "Measures the owner's claim that solved instant learning implies solved computer use. Census at base: 943 of 2592 tracked test files (36.38%) are pytest-shaped, and `python -m unittest` runs 0 tests and exits 0 on them; two were run both ways (unittest 0/OK; pytest 10 and 4 passed). Main PR #6836 landed the vacuity guard concurrently, so the duplicate module written here was DELETED and main's kept. The surviving defect is collector reachability: main's bounded env hides an installed pytest, so the fallback is unreachable and the check is discarded as CHECK_NO_DISCOVERABLE_TESTS. Appending the caller's existing PYTHONPATH dirs AFTER the project copy makes the same check available, accepting the original and refusing a broken `return None` edit. Also audits five durable experience stores against the ASCENT/Experience-Distillation training-signal contract: 0/71 rows admissible, 0 stores record a failure. Claims no capability, flips no family, moves no benchmark.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+  "date": "2026-11-13",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "d98c52f3f508efcae22990f31152210a8fd38ca6",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Measures the owner's claim that solved instant learning implies solved computer use. Census at base: 943 of 2592 tracked test files (36.38%) are pytest-shaped, and `python -m unittest` runs 0 tests and exits 0 on them; two were run both ways (unittest 0/OK; pytest 10 and 4 passed). Main PR #6836 landed the vacuity guard concurrently, so the duplicate module written here was DELETED and main's kept. The surviving defect is collector reachability: main's bounded env hides an installed pytest, so the fallback is unreachable and the check is discarded as CHECK_NO_DISCOVERABLE_TESTS. Appending the caller's existing PYTHONPATH dirs AFTER the project copy makes the same check available, accepting the original and refusing a broken `return None` edit. Also audits five durable experience stores against the ASCENT/Experience-Distillation training-signal contract: 0/71 rows admissible, 0 stores record a failure. Claims no capability, flips no family, moves no benchmark.",
+  "selected_route": "DELETE_THE_DUPLICATE_CHECK_MODULE_KEEP_MAINS_AND_REPAIR_ONLY_THE_COLLECTOR_REACHABILITY_THAT_DISCARDS_REAL_CHECKS",
+  "causal_blocker": "THE_BOUNDED_CHECK_ENVIRONMENT_HID_THE_INSTALLED_PYTEST_COLLECTOR_SO_THE_VACUITY_FALLBACK_WAS_UNREACHABLE_AND_REAL_CHECKS_WERE_DISCARDED",
+  "expected_parent_change": "A pytest-shaped project's own tests are reachable as the check, so the vacuity guard's fallback runs instead of discarding the check; the project copy stays first on PYTHONPATH.",
+  "expected_parent_frontier_change": "Real checks are no longer discarded because the collector was installed outside the project copy. No capability is registered and no family is flipped.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_BOUNDED_CHECK_ENVIRONMENT_HID_THE_INSTALLED_PYTEST_COLLECTOR_SO_THE_VACUITY_FALLBACK_WAS_UNREACHABLE_AND_REAL_CHECKS_WERE_DISCARDED",
+  "falsification_condition": "The repaired env lets the repository's own modules satisfy a project's suite, the check accepts a broken edit, a genuinely passing unittest project is refused, or an existing consumer regresses.",
+  "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
+  "explicit_user_authorization": "PARAPHRASE, NOT A QUOTATION. On 2026-11-12 the owner narrowed this round to Problem 2 -- a similar task must be adaptable, not only an exact repeat -- and asked for it solved perfectly in the fastest way, with the real limiting factor found from first principles, bad ideas killed before implementation, and a standing instruction to push and merge the work. No merge of governance, no change to any law, no credit requested or claimed. $0 spend, zero model calls in the producer path, no sentience claim.",
   "agent_orientation": {
-    "causal_evidence": "THE_INERT_RULE_WAS_REPRODUCED_BY_CALLING_anti_unify_code_rule_ON_THE_TWO_WHOLE_PINNED_FILES_AND_COUNTING_THE_CANDIDATES_IT_PROPOSES_ON_EVERY_REAL_SOURCE__BEFORE_ANY_NEW_MODULE_WAS_WRITTEN__AND_THE_LOCALIZATION_GRANULARITY_WAS_SETTLED_BY_MEASUREMENT_WHEN_THE_ENCLOSING_FUNCTION_WAS_REFUSED_FOR_CARRYING_TWO_DIFFERENCES",
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-    "conversation_memory_is_authority": false,
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
+      "canonical/tests/test_experience_corpus_training_readiness_v1.py"
+    ],
+    "route_class": "REUSE",
+    "producer_cognition_model_dependency_count": 0,
     "incremental_spend_usd": 0,
+    "false_claim_removed": "THAT_THE_SYSTEM_IS_A_LIMITED_LOOKUP_SYSTEM_USING_STRING_MATCHING_AND_THAT_WEIGHT_SPACE_TRAINING_IS_THE_MISSING_LAYER",
+    "causal_evidence": "THE_REWORDING_CONTROL_RECOVERS_332_CHANGES_WHERE_A_LOOKUP_SYSTEM_RECOVERS_0_AND_THE_CROSS_KIND_ARM_IS_0_OF_4444",
+    "conversation_memory_is_authority": false,
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -23,145 +56,90 @@
       "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
       "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
       "AGENTS.md"
-    ],
-    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-    "producer_cognition_model_dependency_count": 0,
-    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
-    "progress_evidence_paths": [
-      "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
-      "canonical/tests/test_experience_corpus_training_readiness_v1.py"
-    ],
-    "route_class": "ADAPT",
-    "false_claim_removed": "A pytest-shaped project's real tests were discarded as CHECK_NO_DISCOVERABLE_TESTS because the installed collector was invisible in the bounded env."
+    ]
   },
-  "benchmark_or_family_rank_authority": false,
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_BOUNDED_CHECK_ENVIRONMENT_HID_THE_INSTALLED_PYTEST_COLLECTOR_SO_THE_VACUITY_FALLBACK_WAS_UNREACHABLE_AND_REAL_CHECKS_WERE_DISCARDED",
-  "canonical_base_commit": "f643acd1381dac06cdb06e1f3b5853668ca32105",
-  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "capability_credit_delta": 0,
-  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "THE_BOUNDED_CHECK_ENVIRONMENT_HID_THE_INSTALLED_PYTEST_COLLECTOR_SO_THE_VACUITY_FALLBACK_WAS_UNREACHABLE_AND_REAL_CHECKS_WERE_DISCARDED",
-  "date": "2026-11-13",
-  "expected_parent_change": "A pytest-shaped project's own tests are reachable as the check, so the vacuity guard's fallback runs instead of discarding the check; the project copy stays first on PYTHONPATH.",
-  "expected_parent_frontier_change": "Real checks are no longer discarded because the collector was installed outside the project copy. No capability is registered and no family is flipped.",
-  "explicit_user_authorization": "Owner decisions in this session, 2026-11-12. The owner asked why the model cannot simply be given the most advanced coding actions and experience them once, whether that can be done now, and instructed: determine what is true and what is wrong, what is real and what is not, then focus on solving these perfectly with the smartest only real solutions in the fastest way. The owner's standing instruction is to always push and merge the work after making it.",
-  "falsification_condition": "The repaired env lets the repository's own modules satisfy a project's suite, the check accepts a broken edit, a genuinely passing unittest project is refused, or an existing consumer regresses.",
-  "governance_change": false,
-  "highest_leverage_now": true,
-  "incremental_spend_usd": 0,
+  "measured_effect": "Vacuity exposure 943/2592 files (36.38%) measured; on a pytest-style project main-as-landed reports CHECK_NO_DISCOVERABLE_TESTS and accepts nothing, while main plus collector reachability is available, accepts the original and refuses the broken edit; experience-corpus readiness 0/71 rows and 0/5 stores holding a failure; 47 tests pass across four suites including main's own vacuity suite.",
   "load_bearing_primary": {
+    "open_obligation_ids": [],
     "constructive_gap_for_open_obligation_ids": [
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
+    "scope_complete_discharge": false,
     "expected_obligation_discharge_lcb": "0",
     "expected_obligation_unlock_lcb": "1",
-    "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_NOT_CLAIMS_ABOUT_A_BENCHMARK__THE_MEASURED_EFFECT_IS_A_SANDBOX_MEASUREMENT_OVER_FOUR_PINNED_REAL_REPAIRS_IN_ONE_SANDBOX_AND_THE_SHIPPED_SKILL_LEDGER_IS_UNCHANGED",
-    "open_obligation_ids": [],
-    "scope_complete_discharge": false,
     "success_probability_lcb": "1",
-    "wall_clock_cost_ub": 1
+    "wall_clock_cost_ub": "1"
   },
-  "measured_effect": "Vacuity exposure 943/2592 files (36.38%) measured; on a pytest-style project main-as-landed reports CHECK_NO_DISCOVERABLE_TESTS and accepts nothing, while main plus collector reachability is available, accepts the original and refuses the broken edit; experience-corpus readiness 0/71 rows and 0/5 stores holding a failure; 47 tests pass across four suites including main's own vacuity suite.",
-  "next_step": "Measure how many of the 12 real tasks become verifiable now that pytest-shaped suites are reachable and main's dependency standing exists; then give the experience store a failure channel with provenance before evaluating weight-space distillation.",
-  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
-    "canonical/tools/generalization_rung_gradient_v1.py",
-    "canonical/tests/test_the_check_stands_up_what_verification_needs_20261112_V1.py",
-    "canonical/tests/test_the_check_is_the_difference_v1.py",
-    "canonical/tools/weight_space_fuel_v1.py",
-    "one_example_is_a_point_a_test_is_a_quantifier_probe_20261112.py"
+    "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+    "canonical/tools/repeated_change_one_example_measure_v1.py",
+    "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+    "canonical/runtime/finite_capability_diagnosis.py"
   ],
   "recursive_obs": {
-    "canonical_base_commit": "f643acd1381dac06cdb06e1f3b5853668ca32105",
+    "canonical_base_commit": "d98c52f3f508efcae22990f31152210a8fd38ca6",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "THE_TREE_KNOWS_THAT_ITS_LIMIT_IS_CROSS_KIND_ABSTRACTION_AND_NOT_STORAGE__AND_THAT_THE_WEIGHT_LAYER_IS_NOT_AVAILABLE__RATHER_THAN_CARRYING_THE_OPPOSITE_CLAIM",
+    "selected_route": "PRICE_THE_TWO_ARMS_THAT_SEPARATE_A_LOOKUP_SYSTEM_FROM_A_RULE_AND_REFUSE_THE_WEIGHT_ROUTE",
+    "selected_surviving_route": "PRICE_THE_TWO_ARMS_THAT_SEPARATE_A_LOOKUP_SYSTEM_FROM_A_RULE_AND_REFUSE_THE_WEIGHT_ROUTE",
     "deleted_or_bypassed_paths": [
-      "THE_DUPLICATE_CHECK_COLLECTION_MODULE_WRITTEN_THIS_ROUND (deleted: main PR #6836 already implements the guard)",
-      "EXIT_CODE_ZERO_AS_A_VERDICT (fixed on main; measured here to accept a broken return None edit)",
-      "PROJECT_COPY_ONLY_PYTHONPATH (rejected: hides the installed collector and discards real checks)",
-      "FINE_TUNING_ON_THE_CURRENT_CORPUS_FIRST (rejected: 0/71 admissible rows, 0 failures recorded)"
+      "WEIGHT_SPACE_TRAINING_AS_A_ROUTE (forbidden by V4 producer-path law, impossible on this host, and downstream of the experience layer)",
+      "THE_LOOKUP_SYSTEM_CHARACTERISATION (measured false: 332 changes survive a re-wording that a lookup system cannot survive)",
+      "OPTION_1_AS_POSED_KEEP_BUILDING_TOKEN_SPACE (not deleted, but re-aimed at the cross-kind arm rather than at more fitting)"
     ],
+    "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
     "expected_parent_level_state_change": "Real checks are no longer discarded because the collector was installed outside the project copy. No capability is registered and no family is flipped.",
+    "why_selected_route_is_fastest_sufficient": "THE_WHOLE_ANSWER_COSTS_TWO_ARMS_OF_A_SCORER_THAT_ALREADY_EXISTS_AND_A_CORPUS_THAT_ALREADY_REFETCHES_BYTE_IDENTICAL__NO_MACHINERY_IS_BUILT_AND_A_ROUTE_THAT_CANNOT_BE_TAKEN_IS_CLOSED_WITH_EVIDENCE_INSTEAD_OF_ASSERTION",
     "iteration_limit": 4,
+    "routes_considered": [
+      "FINE_TUNE_OR_DISTIL_ONTO_OUR_TRACES (rejected: forbidden, impossible here, and downstream)",
+      "ACCEPT_THE_LOOKUP_SYSTEM_CLAIM (rejected by measurement: the re-wording control)",
+      "MORE_FITTING_ON_THE_SAME_KIND (rejected: 0.42 pp of headroom, all guessing)",
+      "PRICE_THE_TWO_ARMS_AND_NAME_CROSS_KIND_AS_THE_WALL (chosen)"
+    ],
+    "obs_goal": {
+      "real_outcome": "KNOW_WHETHER_EVIDENCE_CAN_STILL_WIDEN_THIS_CORPUS_OR_WHETHER_THE_GAP_IS_INFORMATION",
+      "proxy_goals_deleted": [
+        "A_HIGHER_CORRELATION_ON_ITS_OWN__A_CORRELATION_THAT_LIVES_ENTIRELY_IN_TIES_BROKEN_BY_PATH_IS_A_LOTTERY"
+      ],
+      "surviving_necessity": "THE_ORGAN_ALREADY_RETURNS_98_2_PERCENT_OF_ITS_OWN_CEILING"
+    },
     "obs_blocker": {
+      "intrinsic_or_path_specific": "INTRINSIC__ONE_BEFORE_AFTER_PAIR_DOES_NOT_DETERMINE_HOW_A_CHANGE_APPLIES_TO_1674_EDITS",
+      "surviving_causal_blocker": "THE_ORGAN_HAS_NO_ABSTRACTION_ABOVE_THE_LEVEL_OF_THE_CHANGED_TEXT__IT_ADAPTS_ACROSS_FILES_AND_WORDINGS_AND_DIES_ACROSS_KINDS",
       "delete_bypass_substitute_options": [
-        "EDITING_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY__REJECTED__TEACHING_A_LOCALIZED_PAIR_WHILE_VERIFYING_A_WHOLE_FILE_WOULD_BREAK_verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_WHICH_ASSUME_THE_RULE_REPRODUCES_AFTER_SNIPPET_FROM_BEFORE_SNIPPET__A_HALF_APPLIED_CHANGE_TO_A_PRODUCTION_MODULE_WITH_SIX_CALL_SITES",
-        "WIDENING_THE_TOKEN_MATCHER__REJECTED__THIRTEEN_HOLES_IS_THE_CORRECT_ANSWER_FOR_A_PAIR_THAT_DIFFERS_IN_MORE_THAN_ONE_PLACE__ACCEPTING_IT_WOULD_STORE_A_RULE_WHOSE_MEANING_IS_NOT_ONE_OPERATOR",
-        "COUNTING_A_ZERO_TEST_RUN_AS_A_FAILURE__REJECTED__IT_FABRICATES_A_CONTRASTING_OBSERVATION_OUT_OF_A_MISSING_DEPENDENCY__THE_SAME_ERROR_CLASS_AS_COUNTING_A_PASS_THAT_ONLY_PROVED_A_PROCESS_STARTED",
-        "EMITTING_A_PLACEHOLDER_FACT_FOR_AN_UNLOCATED_OFFSET__REJECTED_AFTER_MEASUREMENT__IT_WAS_TRUE_OF_EVERY_REAL_CASE_SO_THE_LAW_RETURNED_IT_AS_THE_MOST_GENERAL_SURVIVOR__A_CONSTANT_DRESSED_AS_A_FINDING"
-      ],
-      "evidence": [
-        "EXECUTED__ANTI_UNIFYING_THE_TWO_WHOLE_1317_LINE_FILES_OF_THE_PINNED_BOLTONS_REPAIR_GIVES_HOLES_13_AND_99_VS_99_TOKENS_AND_DERIVE_OPERATOR_SWAP_NONE",
-        "EXECUTED__THE_RESULTING_STORED_ACTIVE_RULE_PROPOSES_0_CANDIDATES_ON_ALL_FOUR_REAL_CORPUS_SOURCES",
-        "EXECUTED__error_class_IS_NOT_THE_CAUSE__GENERIC_AND_BOUNDARY_GIVE_IDENTICAL_PATTERN_AND_REPLACEMENT_TOKENS",
-        "EXECUTED__LOCALIZED_TO_ONE_STATEMENT_THE_SAME_REPAIR_DERIVES_THE_SWAP_AND_CRYSTALLIZE_CODE_FIX_RETURNS_CRYSTALLIZED_TRUE",
-        "EXECUTED__THAT_LESSON_ON_A_DIFFERENT_REAL_MODULE_PROPOSES_THE_SHA256_PINNED_UPSTREAM_FIX_AT_RANK_2_OF_4_AND_IT_PASSES_ITS_OWN_3_TESTS_FROM_A_BASELINE_RETURNING_1",
-        "EXECUTED__THE_TWO_MORE_ITERTOOLS_ZERO_GUARD_BUGS_ARE_REFUSED_BY_LOCALIZATION_AND_THE_SKILL_FIRES_32_TIMES_ON_EACH_WITHOUT_REPAIRING_WITHIN_BUDGET_12",
-        "EXECUTED__WHOLE_FILE_FACTS_GIVE_A_REAL_FILE_AND_ITS_OWN_REPAIR_IDENTICAL_26_FACT_SETS",
-        "EXECUTED__SITE_RELATIVE_FACTS_TURN_THE_LAWS_VERDICT_FROM_AMBIGUOUS_WITH_1024_SURVIVORS_INTO_INCONSISTENT_WITH_0"
-      ],
-      "intrinsic_or_path_specific": "PATH_SPECIFIC_AND_NAMED__THE_BLOCKER_WAS_THE_ABSENCE_OF_A_LOCALIZATION_STEP_BETWEEN_A_REAL_FILE_PAIR_AND_ANTI_UNIFICATION__IT_IS_CLOSED_FOR_PYTHON_AND_REFUSES_WITH_NO_LOCALIZER_FOR_LANGUAGE_FOR_EVERY_OTHER_LANGUAGE_RATHER_THAN_GUESSING_AT_STATEMENT_BOUNDARIES",
-      "surviving_causal_blocker": "THE_SCOPE_LAW_CANNOT_YET_EXPRESS_WHAT_DISCRIMINATES_ON_REAL_CODE__THE_TWO_FAILURES_SITE_FACT_SETS_ARE_SUPERSETS_OF_THE_TWO_SUCCESSES_SO_NO_CONJUNCTION_OF_PRESENT_FACTS_SEPARATES_THEM_AND_THE_LAW_RETURNS_INCONSISTENT__AND_CRYSTALLIZE_CODE_FIX_STILL_TEACHES_WHOLE_FILES_SO_LOCALIZATION_IS_NOT_YET_ON_THE_TEACHING_PATH"
+        "INFER_IT (deleted: measured unable to separate assertEquals from yaml.load)",
+        "LEAVE_THE_CHECK_OFF_ENTIRELY (deleted: the repo test holds yaml.load as a refusal, correctly)"
+      ]
     },
     "obs_capability": {
       "capability_work_deleted": [
-        "THE_REDUCED_STANDING_CANDIDATE__KILLED_BY_THE_COINCIDENCE_COUNTEREXAMPLE_BEFORE_ANY_CODE"
+        "A_NEW_LEARNER__THE_SHIPPED_ORGAN_IS_UNCHANGED",
+        "ANY_ORGAN_EDIT_ON_THIS_BRANCH"
       ],
       "existing_inherited_routes_checked": [
-        "canonical/tests/historical_repair_curriculum_v1.py",
-        "canonical/tests/retained_repair_curriculum_v1.py",
-        "canonical/swe_kernel/skill_verification_contract_v1.py",
-        "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
-        "canonical/swe_kernel/operator_generalization_v1.py",
-        "canonical/swe_kernel/rule_scope_learning_v1.py",
-        "canonical/swe_kernel/skill_scope_acquisition_v1.py",
-        "canonical/swe_kernel/metamorphic_cli_compiler_v1.py",
-        "canonical/runtime/applicability_v1.py",
-        "canonical/runtime/contrast_selection_v1.py",
-        "what_a_success_teaches_20261112.py"
+        "canonical/runtime/finite_capability_diagnosis.py (select_probe: exact version-space narrowing over a FINITE declared space; the reach here is decided by the organ, not by that module)"
       ],
       "external_existing_routes_checked": [
-        "SKILLSBENCH",
-        "SOK_AGENTIC_SKILLS",
-        "A_CEGIS",
-        "SKILLEVOLVER",
-        "SWE_SKILLS_BENCH",
-        "WHEN_SKILLS_DONT_HELP"
+        "active learning for neurosymbolic program synthesis (ACM 10.1145/3763102): worst-case pruning power over a version space; consistent with reach as a prediction of informativeness",
+        "approximate optimal active learning of decision trees (arXiv 2512.03971): version-space halving by approximate model counting"
       ],
-      "reused_rather_than_rebuilt": [
-        "THE_PINNED_REAL_FIXTURE_CORPUS_AND_ITS_UNMODIFIED_UPSTREAM_TEST_BODIES",
-        "THE_CURRICULUMS_build_case_PROJECT_LAYOUT",
-        "ProjectTestOracle",
-        "VerifiedSkillStore.crystallize_code_fix",
-        "anti_unify_code_rule",
-        "derive_operator_swap_AND_derive_swap_family",
-        "_occurrences_AS_THE_PROPOSERS_OWN_SCANNER",
-        "applicability_v1.learn"
-      ],
-      "surviving_gap": "LOCALIZATION_IS_NOT_ON_THE_TEACHING_PATH__CRYSTALLIZE_CODE_FIX_STILL_RECEIVES_WHOLE_FILES_BECAUSE_ITS_REPRODUCTION_CHECKS_ARE_FILE_RELATIVE__AND_THE_FACT_VOCABULARY_CANNOT_EXPRESS_ABSENCE_SO_THE_LAW_RETURNS_INCONSISTENT_ON_REAL_CODE"
-    },
-    "obs_goal": {
-      "proxy_goals_deleted": [
-        "MAKING_THE_FROZEN_LIST_LONGER_AND_CALLING_IT_A_FIX",
-        "COUNTING_HOW_MANY_OPERATORS_ARE_ON_THE_LIST_AS_THOUGH_LENGTH_WERE_SAFETY",
-        "REPORTING_SAME_AS_THOUGH_IT_WERE_A_PROOF_OF_EQUIVALENCE"
-      ],
-      "real_outcome": "THE_OWNERS_QUESTION_ABOUT_LEARNING_FROM_ONE_EXPERIENCE__THE_TREE_ALREADY_HAD_PINNED_REAL_REPAIRS_WITH_THEIR_OWN_UPSTREAM_TESTS_AND_A_LAW_THAT_IDENTIFIES_APPLICABILITY_FROM_EXECUTED_CONTRASTS__WHAT_IT_COULD_NOT_DO_WAS_TURN_A_REAL_WHOLE_FILE_REPAIR_INTO_A_LESSON_AT_ALL__THE_MISSING_STEP_WAS_MEASURED_AND_BUILT_RATHER_THAN_A_NEW_LEARNER",
-      "surviving_necessity": "MEASURE_THE_CHEAPER_ROUTE_BEFORE_BUILDING_THE_EXPENSIVE_ONE__JUDGE_BY_THE_INJURED_PROJECTS_OWN_TESTS_NOT_BY_A_FIXTURE_WRITTEN_FOR_THE_OCCASION__STATE_THE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__AND_LEAVE_A_NEGATIVE_RESULT_STANDING_RATHER_THAN_REPAIRING_IT_BY_CHANGING_THE_EVIDENCE"
+      "surviving_gap": "AN_ABSTRACTION_THAT_SURVIVES_A_CHANGE_OF_KIND__THE_CROSS_KIND_ARM_IS_0_OF_4444_AND_THE_LARGEST_REFUSAL_CLASS_IS_38_PERCENT_NO_SUCH_FORM_IN_THE_FILE"
     },
     "obs_inherited_system": {
       "adjacent_capabilities_absorbed": [
-        "THE_CROSS_LANGUAGE_QUESTION_ASKED_BY_cross_language_lesson_transfer_probe_v1_WHICH_GATED_CANDIDATES_BY_EXECUTING_THEM_ONE_AT_A_TIME__THE_GATE_NOW_ANSWERS_IT_EARLIER_AND_MORE_CHEAPLY_FOR_THE_OPERATOR_ITSELF"
+        "canonical/tools/repeated_change_one_example_measure_v1.py (the corpus and the scoring, used as-is)"
       ],
       "downstream_work_to_delete_or_supersede": [],
-      "fresh_reuse_plan": "NEXT__COMPOSE_WITH_canonical/swe_kernel/lesson_admission_gate_v1_WHICH_LANDED_ON_MAIN_DURING_THIS_ROUND__IT_CLASSIFIES_HELD_OUT_PROGRAMS_AND_ADMITS_OR_REJECTS_A_RULE_BUT_NEEDS_A_RULE_TO_EVALUATE_AND_THE_WHOLE_FILE_TEACHING_PATH_DERIVES_NONE__SO_PASS_REAL_VICTIMS_THROUGH_CRYSTALLIZE_CODE_FIX_TOGETHER_WITH_A_LOCALIZED_LESSON__THEN_MAKE_verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_REGION_RELATIVE__THEN_GIVE_THE_FACT_VOCABULARY_ABSENCE_OR_MOVE_THE_UNIT_OF_OBSERVATION_TO_TARGET_AND_SITE_SO_THE_LAW_CAN_SEPARATE_AN_OPERATOR_BOUNDARY_DEFECT_FROM_A_MISSING_GUARD__THEN_LET_A_STORED_RULE_ACQUIRE_A_SCOPE_FROM_THE_REAL_CORPUS_RATHER_THAN_FROM_CONSTRUCTED_FIXTURES",
-      "note": "NOTHING_IS_DELETED__THE_FIXTURE_CORPUS_AND_ITS_UPSTREAM_TEST_BODIES_ARE_UNMODIFIED__CRYSTALLIZE_CODE_FIX_IS_UNTOUCHED__ROUND_F_OBSERVE_KEEPS_ITS_WHOLE_FILE_STATE_AND_ITS_21_PINNED_TESTS_PASS_UNCHANGED__SITE_RELATIVE_FACTS_ARE_ADDITIVE"
+      "fresh_reuse_plan": "PRICE_ANY_FUTURE_WIDENING_WITH_THE_SAME_SCORER_AND_THE_SAME_REFETCH_BEFORE_IT_IS_CARRIED__A_ZERO_IS_A_RESULT_AND_IT_IS_WRITTEN_DOWN"
     },
     "obs_obs": {
       "affected_layers_only_on_revalidation": true,
       "analysis_steps_deleted_or_cached": [
-        "THE_OWNERSHIP_PRINCIPLE_IS_CACHED__RENAMES_ARE_OF_ASSIGNED_NAMES__NEVER_ASSIGNED_ATTRIBUTE_CHANGES_ARE_BEHAVIOR__SUPPORT_COUNTING_IS_BLIND_TO_COINCIDENT_TANGLES"
+        "THE_CORPUS_IS_ONE_REFETCH_NOT_A_NEW_SEARCH__THE_RECORDED_HASHES_MAKE_IT_REPLAYABLE"
       ],
-      "search_stop_decision": "STOPPED__THE_PINNED_REAL_CORPUS_AND_ITS_ORACLE_WERE_FOUND_AND_USED_RATHER_THAN_REBUILT__THE_INERT_RULE_WAS_REPRODUCED_BY_CALLING_anti_unify_code_rule_ON_THE_TWO_WHOLE_FILES__THE_LOCALIZATION_GRANULARITY_WAS_SETTLED_BY_MEASUREMENT_WHEN_THE_ENCLOSING_FUNCTION_WAS_REFUSED_FOR_CARRYING_TWO_DIFFERENCES__AND_SIX_2026_PAPERS_ON_AGENT_SKILLS_WERE_READ_FOR_THE_ROUTE_COMPARISON"
+      "search_stop_decision": "STOPPED_AFTER_THE_REWORDING_CONTROL_SETTLED_THE_LOOKUP_QUESTION_AND_THE_CROSS_KIND_ARM_NAMED_THE_WALL"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -175,72 +153,53 @@
         "INTEGRATE"
       ],
       "implementation_still_necessary": true,
-      "losing_routes_reason": "EDITING_THE_CRYSTALLIZER_WOULD_BREAK_ITS_FILE_RELATIVE_REPRODUCTION_CHECKS__WIDENING_THE_MATCHER_STORES_A_RULE_WHOSE_MEANING_IS_NOT_ONE_OPERATOR__error_class_WAS_MEASURED_IRRELEVANT__A_MODEL_WRITTEN_LESSON_IS_REFUTED_BY_SKILLSBENCH_AT_MINUS_1_3_PERCENT_FOR_SELF_GENERATED_SKILLS_AND_BY_THIS_TREES_ZERO_MODEL_DEPENDENCY_RULE__SYNTHESIZING_CONTRASTS_ONLY_NEAR_THE_DEMONSTRATION_IS_SKILLEVOLVERS_court_form_filling_FAILURE_WHERE_REFINEMENT_RE_EXPLORED_THE_SAME_TRAINING_DATA_AND_BAKED_A_FALSE_HEURISTIC_DEEPER__COUNTING_A_ZERO_TEST_RUN_FABRICATES_EVIDENCE__AND_A_PLACEHOLDER_FACT_WAS_MEASURED_TO_BECOME_THE_MOST_GENERAL_SURVIVOR",
+      "losing_routes_reason": "THE_WIDENING_IS_SOUND_AND_WORTHLESS_HERE__THE_CORPUS_HAS_NO_CALL_SHAPE_REFUSAL_LEFT_FOR_IT_TO_ANSWER",
       "routes_ranked": [
-        "LOCALIZE_TO_THE_SMALLEST_STATEMENT_AND_JUDGE_EVERY_TARGET_BY_ITS_OWN_UPSTREAM_TESTS",
-        "EDIT_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY",
-        "SYNTHESIZE_CONTRASTING_VICTIMS_NEAR_THE_DEMONSTRATION",
-        "LET_A_MODEL_WRITE_THE_LOCALIZED_LESSON",
-        "WIDEN_THE_TOKEN_MATCHER_SO_A_THIRTEEN_HOLE_RULE_IS_ACCEPTED",
-        "COUNT_A_ZERO_TEST_RUN_AS_A_FAILURE_SO_A_BOUNDARY_ARRIVES",
-        "EMIT_A_PLACEHOLDER_FACT_FOR_AN_OFFSET_OUTSIDE_ANY_COMPARISON",
-        "CHANGE_ERROR_CLASS_TO_BOUNDARY"
+        "1_ADAPT_THE_FILE_TO_ANSWER_THE_REFUSAL (built, tested, measured zero, withdrawn)",
+        "2_RECORD_THE_PRICED_CEILING (shipped)",
+        "3_APPLICABILITY_EVIDENCE_FROM_THE_DIVIDE_INSIDE_A_PULL_REQUEST (next, unbuilt)",
+        "4_WITNESSES_ACROSS_FILES (next, unbuilt)"
       ]
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION_IS_USED__EVERY_VERDICT_COMES_FROM ProjectTestOracle RUNNING_A_REAL_CASES_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_IN_A_COPY_OF_THE_PROJECT__THE_ORACLE_NEVER_PATCHES_THE_ORIGINAL_AND_REJECTS_A_ZERO_TEST_RUN__AND_A_CORPUS_CONTROL_CHECKS_THAT_EACH_PINNED_UPSTREAM_FIX_PASSES_ITS_OWN_TESTS_SO_A_FAILURE_BELONGS_TO_THE_SKILL_NOT_TO_A_BROKEN_HARNESS"
+      "synthetic_verification_necessity": "THE_ONLY_ORACLE_IS_WHAT_THE_PEOPLE_ON_THOSE_PROJECTS_ACTUALLY_DID__NO_TEST_OF_THOSE_PROJECTS_IS_RUN__AND_THE_RECORD_SAYS_SO"
     },
-    "real_outcome": "The vacuity guard's pytest fallback is reachable, so a pytest-shaped project's check runs and refuses a broken edit instead of being discarded.",
-    "required_capability": "A_REAL_EXPERIENCE_MUST_BECOME_A_RULE_THAT_ACTUALLY_FIRES__AND_WHETHER_IT_HELPED_MUST_BE_DECIDED_BY_THE_INJURED_PROJECTS_OWN_TESTS_RATHER_THAN_BY_A_FIXTURE_WRITTEN_FOR_THE_OCCASION",
     "route_frontier": {
       "discovery_required": false,
       "not_applicable_reason": "RECONCILE_FRONTIER__BOUNDED_LOCAL_COLLECTOR_REACHABILITY_DEFECT_IN_AN_OWNED_TOOL__NO_NEW_EXTERNAL_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
-    },
-    "routes_considered": [
-      "KEEP_BOTH_IMPLEMENTATIONS (rejected: two organs doing one job)",
-      "KEEP_THIS_ROUNDS_MODULE_AND_DROP_MAINS (rejected: main's is a superset and already tested)",
-      "DELETE_THE_DUPLICATE_AND_REPAIR_COLLECTOR_REACHABILITY (chosen)",
-      "LEAVE_THE_CHECK_DISCARDED_AS_SAFE (rejected: safe but 943 files stay unverifiable for an environmental reason)"
-    ],
-    "selected_route": "DELETE_THE_DUPLICATE_CHECK_MODULE_KEEP_MAINS_AND_REPAIR_ONLY_THE_COLLECTOR_REACHABILITY_THAT_DISCARDS_REAL_CHECKS",
-    "selected_surviving_route": "DELETE_THE_DUPLICATE_CHECK_MODULE_KEEP_MAINS_AND_REPAIR_ONLY_THE_COLLECTOR_REACHABILITY_THAT_DISCARDS_REAL_CHECKS",
-    "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
-    "why_selected_route_is_fastest_sufficient": "Main already owns the vacuity guard, so the delete-first order applies to this round's own duplicate. What remains is a bounded env defect in one function; repairing it reuses main's guard rather than restating it."
+    }
   },
-  "route_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
-  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "DELETE_THE_DUPLICATE_CHECK_MODULE_KEEP_MAINS_AND_REPAIR_ONLY_THE_COLLECTOR_REACHABILITY_THAT_DISCARDS_REAL_CHECKS",
-  "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
-  "terminal_credit_delta": 0,
-  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "user_authorized_governance_change": false,
   "v22_prewrite_admission": {
-    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
     "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-    "checked_at_utc": "2026-11-13T03:09:30Z",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "checked_at_utc": "2026-11-13T03:27:24Z",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FLIPS_NO_FAMILY",
+    "terminal_credit_delta": 0,
     "currentness": {
       "accepted_families": 5,
-      "meta_envelope_open_count": 8,
       "open_families": 14,
       "proved_atomic": 14,
+      "unresolved_atomic": 22,
       "root1_positive_gap_count": 0,
       "root2_touching_count": 17,
       "root3_touching_count": 8,
-      "terminal": false,
+      "meta_envelope_open_count": 8,
       "total_open_truth_obligations": 30,
-      "unresolved_atomic": 22
+      "terminal": false
     },
-    "fresh_reality_authority": false,
-    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
-    "mode": "ACTIVE_INTERFACE",
-    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_ADDS_A_LOCALIZATION_STEP_BETWEEN_A_REAL_FILE_PAIR_AND_ANTI_UNIFICATION_SO_THAT_A_REAL_EXPERIENCE_STOPS_BUYING_A_RULE_THAT_FIRES_NOWHERE",
     "target_truth_obligations": [
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
-    "terminal_credit_delta": 0,
     "tournament": {
+      "proposal_id": "A_LOOKUP_SYSTEM_CANNOT_SURVIVE_A_REWORDING_AND_THIS_ONE_DOES",
+      "decisive_question": "IS_THE_SYSTEM_A_LOOKUP_SYSTEM_OR_A_RULE__AND_IF_A_RULE_WHERE_DOES_IT_ACTUALLY_DIE",
+      "falsifier_id": "IF_REWORDING_THE_SAME_CHANGE_ON_BOTH_SIDES_RECOVERS_ZERO_CHANGES_THEN_IT_IS_A_LOOKUP_SYSTEM",
+      "known_counterexamples_checked": true,
       "counterexample_receipts": [
         {
           "path": "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
@@ -251,13 +210,20 @@
           "git_blob_sha": "fe95875a3dee93bf635ded228ceea29aa52a52c5"
         }
       ],
-      "decisive_question": "DOES_OWNERSHIP_STORE_CONTEXT_SEPARATE_AN_INCIDENTAL_ATTRIBUTE_RENAME_FROM_THE_LESSON_WHERE_SUPPORT_COUNTING_CANNOT__MEASURED_ONCE_UNDER_DECLARED_PREDICTIONS",
-      "falsifier_id": "A_NEVER_ASSIGNED_ATTRIBUTE_UNDONE__A_MOVED_ONE_SHOWING_TABLE__A_SURVIVING_IS_SET_WRONG_WRITE__OR_A_MEASUREMENT_PRECEDING_ITS_DECLARATION",
-      "known_counterexamples_checked": true,
-      "no_known_counterexample_reason": "THE_DECLARATION_PRECEDES_THE_MEASUREMENT__ALL_FOUR_PREDICTIONS_HELD__THE_PURE_RENAME_AND_NEVER_ASSIGNED_BACK_OFFS_ARE_PINNED_BY_TESTS__215_TESTS_PASS",
-      "proposal_id": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1"
+      "no_known_counterexample_reason": "NO_PRIOR_MEASUREMENT_OF_A_DEMONSTRATION_CHOOSING_RULE_WAS_FOUND_ON_MAIN_OR_IN_THE_OPEN_PULL_REQUESTS"
     }
   },
-  "weakens_existing_guard": false,
-  "causal_evidence": "943/2592 tracked test files are pytest-shaped; unittest runs 0 tests and exits 0. Main-as-landed on a constructed pytest-style project: available=False, CHECK_NO_DISCOVERABLE_TESTS. With collector reachability: available=True, accepts original, refuses broken return None. 47 tests pass across four suites."
+  "next_step": "TWO_OPERATORS_REMAIN_AND_THE_TREE_KNOWS_THEIR_PRICE: THE_NARROW_IMPORT_EXTENSION (22 REACHABLE ASKINGS, BUYS COVERAGE ONLY IN THE FORM THAT EXTENDS AN IMPORT THE FILE ALREADY HAS) AND A PROJECT CHECK THAT SETTLES EVERY TRY, WHICH WOULD TURN AGREEMENT WITH THE PEOPLE INTO CORRECTNESS AND IS NOT DONE BY ANYONE HERE. THE 26.6 PERCENT CEILING SAYS WHAT NEITHER CAN REACH: EXAMPLES THE ALGEBRA CANNOT READ AND CHANGES THE DEMONSTRATED KIND DOES NOT NAME.",
+  "causal_evidence": "MEASURED_2026-11-12_ON_THE_SAME_15_MERGED_PULL_REQUESTS_89_FILES_AND_330_READABLE_ASKINGS__SHIPPED_ORGAN_STRICT_COVERAGE_0_2999_PRECISION_0_9461_PER_QUESTION_0_6170_WRONG_14__SAME_ORGAN_WITH_THE_EXEMPTION_SWITCHED_OFF_0_2082_0_9241_0_2836_14__ATTRIBUTION_EDITED_90_TO_140_EXACTLY_THE_50_CALL_SHAPE_ASKINGS_AND_NO_FORM_IN_FILE_STAYS_168__CEILING_A_PERFECT_LEARNER_OF_THE_DEMONSTRATED_KIND_TOPS_OUT_AT_342_OF_1287_0_266_ALL_PULLS_AND_342_OF_411_0_832_ON_THE_5_WHOSE_KIND_IS_KNOWN__THE_INFERENCE_WAS_TRIED_AND_REFUSED: ASSERTEQUALS_TO_ASSERTEQUAL_AND_YAML_LOAD_TO_YAML_SAFE_LOAD_HAVE_THE_SAME_SHAPE_AND_NO_STRUCTURAL_READING_SEPARATES_THEM_SO_THE_EXEMPTION_IS_A_CLOSED_DOCUMENTED_ALIAS_LIST_AND_THE_REPO_OWN_TEST_CAUGHT_THE_FIRST_VERSION_IN_ONE_RUN__PROVENANCE_BOTH_ALIAS_FAMILIES_CONFIRMED_TO_DELEGATE_EVERY_ARGUMENT_SO_THE_CALLEE_CANNOT_HAVE_CHANGED_WHAT_IT_ACCEPTS",
+  "tournament": {
+    "proposal_id": "A_KEPT_NAME_IS_THE_SAME_FUNCTION_SO_ITS_CALL_SHAPE_CANNOT_MATTER",
+    "decisive_question": "DOES_EXEMPTING_A_RENAME_BETWEEN_TWO_DOCUMENTED_ALIASES_FROM_THE_CALL_SHAPE_CHECK_RAISE_WHAT_ONE_DEMONSTRATION_RECOVERS_WITHOUT_ADDING_A_WRONG_CHANGE",
+    "falsifier_id": "A_RENAME_BETWEEN_TWO_DIFFERENT_NAMES_IS_ALSO_EXEMPTED_OR_A_NEW_WRONG_CHANGE_APPEARS",
+    "known_counterexamples_checked": true,
+    "counterexample_receipts": [
+      "canonical/tests/test_one_showing_is_literal_two_showings_are_general_v1.py (yaml.load -> yaml.safe_load held as a refusal; the first version of this exemption broke it in one run and was replaced)"
+    ],
+    "no_known_counterexample_reason": "THE_ONE_KNOWN_COUNTEREXAMPLE_IS_RECORDED_AS_THE_REASON_THE_EXEMPTION_IS_A_CLOSED_LIST"
+  },
+  "base_main_commit": "ca531123dea93512334b6050513f06a7d9f61930"
 }
