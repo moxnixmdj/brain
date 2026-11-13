@@ -273,10 +273,80 @@
    ],
    "selected_route": "LOAD_EVERY_LESSON_AND_SCORE_ONE_FIXED_TARGET_SET_UNDER_GROWING_POOLS_WITH_AND_WITHOUT_A_SYMBOL_OWNERSHIP_RULE__PRICE_THE_RULE_BY_WRONG_LINES_PER_EDIT_AGAINST_BLIND_RANDOM_AT_COMPARABLE_VOLUME__AND_COUNT_WHETHER_A_TRAINING_EXPERIMENT_CAN_BE_HELD_OUT",
    "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
     "blocking_dependency": "NONE__CORPUS_ALREADY_FETCHED_AND_ORGAN_ALREADY_EXISTS",
     "checked_at_utc": "2026-11-13T03:17:15Z",
+    "execution_dependencies": [
+     {
+      "dependency": "LOCAL_PYTHON_RUNTIME_python3",
+      "evidence": [
+       "DIRECT_PROBE: python3 ran the measurement tool this session and produced canonical/verification/LESSON_OWNERSHIP_20261112_V1.json"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "observed_at_utc": "2026-11-13T03:17:24Z",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "TRACKED_CORPUS_edits_repeated_across_projects",
+      "evidence": [
+       "DIRECT_PROBE: 52 lessons and 232 targets loaded from canonical/tools/edits_repeated_across_projects_commits_v1.json"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "DATA_SOURCE",
+      "observed_at_utc": "2026-11-13T03:17:24Z",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "GITHUB_PUBLIC_CONTENT_FETCH_for_corpus",
+      "evidence": [
+       "DIRECT_PROBE: all three corpus sets fetched with 0 files that could not be had"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "REMOTE_SERVICE",
+      "observed_at_utc": "2026-11-13T03:17:24Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "NO_MODEL_API_IS_USED_BY_THIS_ACTION",
+      "evidence": [
+       "DIRECT_PROBE: producer_cognition_model_dependency_count is 0 and the run made zero model calls"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "MODEL_API",
+      "observed_at_utc": "2026-11-13T03:17:24Z",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
     "expected_cost_usd": 0,
     "expected_wall_clock_minutes": 8,
+    "failed_dependencies": [],
     "max_age_hours": 2,
     "measurement_that_would_stop_it": "IF_BLIND_RANDOM_MATCHES_THE_SCOPE_ON_WRONG_LINES_PER_EDIT_THE_ROUTE_IS_DROPPED",
     "selected_route": "LOAD_EVERY_LESSON_AND_SCORE_ONE_FIXED_TARGET_SET_UNDER_GROWING_POOLS_WITH_AND_WITHOUT_A_SYMBOL_OWNERSHIP_RULE__PRICE_THE_RULE_BY_WRONG_LINES_PER_EDIT_AGAINST_BLIND_RANDOM_AT_COMPARABLE_VOLUME__AND_COUNT_WHETHER_A_TRAINING_EXPERIMENT_CAN_BE_HELD_OUT",
@@ -334,7 +404,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-11-13T03:17:15Z",
+  "checked_at_utc": "2026-11-13T03:17:24Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
