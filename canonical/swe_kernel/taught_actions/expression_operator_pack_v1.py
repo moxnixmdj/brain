@@ -42,7 +42,10 @@ import ast
 import builtins
 from typing import Any, Iterable
 
-from . import kept_under_an_old_name_v1 as kept_under_an_old_name
+try:
+    from . import kept_under_an_old_name_v1 as kept_under_an_old_name
+except ImportError:  # confined exec() with no package context: fall back to absolute import
+    from canonical.swe_kernel.taught_actions import kept_under_an_old_name_v1 as kept_under_an_old_name
 
 SCHEMA = "BRAIN_EXPRESSION_OPERATOR_PACK_V1"
 BUILTINS = frozenset(dir(builtins))
