@@ -1,0 +1,267 @@
+{
+ "schema": "TWO_DOORS_ONE_ANSWER_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-13T00:58:38Z",
+ "rows": [
+  {
+   "sentence": "count how many functions canonical/runtime/solve_v1.py contains",
+   "noun_asked": "function",
+   "shape": "count",
+   "path": "canonical/runtime/solve_v1.py",
+   "ground_truth": 9,
+   "declares": {
+    "functions": 9,
+    "classes": 0
+   },
+   "primary": {
+    "answer": 9,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 9,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": true
+   }
+  },
+  {
+   "sentence": "how many functions are in canonical/runtime/astra_runtime.py",
+   "noun_asked": "function",
+   "shape": "count",
+   "path": "canonical/runtime/astra_runtime.py",
+   "ground_truth": 153,
+   "declares": {
+    "functions": 153,
+    "classes": 2
+   },
+   "primary": {
+    "answer": 153,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 155,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "how many classes are in canonical/runtime/astra_runtime.py",
+   "noun_asked": "class",
+   "shape": "count",
+   "path": "canonical/runtime/astra_runtime.py",
+   "ground_truth": 2,
+   "declares": {
+    "functions": 153,
+    "classes": 2
+   },
+   "primary": {
+    "answer": 2,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 155,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "count the classes in canonical/runtime/goal_compiler.py",
+   "noun_asked": "class",
+   "shape": "count",
+   "path": "canonical/runtime/goal_compiler.py",
+   "ground_truth": 2,
+   "declares": {
+    "functions": 148,
+    "classes": 2
+   },
+   "primary": {
+    "answer": 2,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 150,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "count the functions in canonical/runtime/goal_compiler.py",
+   "noun_asked": "function",
+   "shape": "count",
+   "path": "canonical/runtime/goal_compiler.py",
+   "ground_truth": 148,
+   "declares": {
+    "functions": 148,
+    "classes": 2
+   },
+   "primary": {
+    "answer": 148,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 150,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "list the functions in canonical/runtime/solve_v1.py",
+   "noun_asked": "function",
+   "shape": "enumerate",
+   "path": "canonical/runtime/solve_v1.py",
+   "ground_truth": "9 names",
+   "declares": {
+    "functions": 9,
+    "classes": 0
+   },
+   "primary": {
+    "answer": [
+     "_default_staging_path",
+     "_snapshot_small_tree",
+     "_solve_impl",
+     "_stage_or_crystallize_paired_skill",
+     "act",
+     "observe",
+     "read",
+     "render",
+     "solve"
+    ],
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": null,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": false,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "list the classes in canonical/runtime/astra_runtime.py",
+   "noun_asked": "class",
+   "shape": "enumerate",
+   "path": "canonical/runtime/astra_runtime.py",
+   "ground_truth": "2 names",
+   "declares": {
+    "functions": 153,
+    "classes": 2
+   },
+   "primary": {
+    "answer": [
+     "Blocker",
+     "_ExternalBridgeHTTPResponse"
+    ],
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": null,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": false,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "count how many functions canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/errors.py contains",
+   "noun_asked": "function",
+   "shape": "count",
+   "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/errors.py",
+   "ground_truth": 0,
+   "declares": {
+    "functions": 0,
+    "classes": 3
+   },
+   "primary": {
+    "answer": 0,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 3,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": false
+   }
+  },
+  {
+   "sentence": "count how many classes canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/errors.py contains",
+   "noun_asked": "class",
+   "shape": "count",
+   "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/errors.py",
+   "ground_truth": 3,
+   "declares": {
+    "functions": 0,
+    "classes": 3
+   },
+   "primary": {
+    "answer": 3,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "right": true
+   },
+   "secondary": {
+    "answer": 3,
+    "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED",
+    "answered": true,
+    "reason": null,
+    "right": true
+   }
+  }
+ ],
+ "primary_right": 9,
+ "secondary_right": 2,
+ "probes": 9,
+ "prediction": {
+  "claims": {
+   "P1_secondary_is_right_if_and_only_if_the_asked_count_equals_the_sum": {
+    "counts_probed": 7,
+    "asked_equals_sum": 2,
+    "asked_differs_from_sum": 5,
+    "right_on_every_asked_equals_sum": true,
+    "wrong_on_every_asked_differs": true,
+    "held": true
+   },
+   "P2_primary_door_right_on_every_probe": {
+    "primary_right": 9,
+    "probes": 9,
+    "held": true
+   },
+   "P3_secondary_door_is_silent_on_an_enumeration": {
+    "enumerations": 2,
+    "secondary_answered_none": 2,
+    "held": true
+   }
+  },
+  "all_held": true
+ },
+ "seconds": 5.2,
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "terminal_authority": false,
+ "truth_achieved": false
+}
