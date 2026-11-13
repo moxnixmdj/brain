@@ -82,7 +82,42 @@ P4. **No wrong-write regression anywhere**: @2 different == 0 and extra == 0 on
 
 ## Results (filled after the single measurement run)
 
-_pending_
+**P1 HELD. P2 held in substance, its byte-identity clause FALSIFIED. P3
+FALSIFIED. P4 HELD.** Recorded, not erased.
+
+| set @showings | strict same/diff/left/extra (ref) | tried same/diff/left/extra (ref) |
+|---|---|---|
+| fresh @1 | 89/6/10/13 (0) | 93/6/6/13 (0) |
+| held_out @1 | 169/0/64/0 (7) | 196/1/36/0 (3) |
+| seen @1 | 30/0/73/0 (1) | 69/2/32/0 (0) |
+| fresh @2 | 62/0/3/0 (0) | 62/0/3/0 (0) |
+| held_out @2 | **166/0/16/0 (3)**, 182 q, 97 files, 0 unlearned | 167/0/15/0 (2) |
+| seen @2 | 50/0/4/0 (0) | 51/0/3/0 (0) |
+
+P1: set_daemon learned `?1.setDaemon(True) -> ?1.daemon = True` at two
+showings; held_out @2 kinds unlearned 1 -> 0, questions 176 -> 182, files
+94 -> 97, strict same 158 -> 166, refused files 4 -> 3, and different == 0,
+extra == 0 in every way. **Zero wrong writes at two showings everywhere
+stands.**
+
+P3 fell -- and the post-run attribution matters more than the miss. fresh @1
+(83 -> 89 same, ref 1 -> 0), held_out @1 (156 -> 169 same, ref 14 -> 7) and
+seen @2 (48 -> 50, ref 1 -> 0) all moved. A base-versus-T35 engine comparison
+on every kind proved the cause: **at one showing, and at two showings outside
+set_daemon/yaml_safe_load, every write of this engine is byte-identical to the
+base engine's.** The movement is the base's own alias law
+(`kept_under_an_old_name`, merged by a parallel session during T34's sync
+rounds, after T34's measurement ran) against this report's stale memorized
+baseline. The declaration error was bookkeeping -- comparing against tables
+measured on a pre-alias engine -- not an unintended effect of this mechanism.
+The T35 mechanism's whole corpus footprint is exactly: set_daemon @2 refused ->
+learned; yaml_safe_load @2 refusal message now names its true cause (within-
+example dissent at line 109, no longer the whole-statement reshape).
+
+utcnow @2 (substance disagreement) and mpl_get_cmap @2 (needs-gate) stay
+refused on purpose. At two showings the corpus now has **zero kinds refused for
+tangled additions**: every remaining @2 refusal is either genuine disagreement
+between the people shown, or a name the target genuinely lacks.
 
 ## What this does not claim
 
