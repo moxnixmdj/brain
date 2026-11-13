@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 431,
+  "knowledge_documents": 432,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6829,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ed3c56980e2ad6ebef0d8ec6428cbeb6480f895988616165b36eb68a17351a7f"
+  "value": "80098c23937a26c3a5007fb6d8ba0a04c5aa9fb054b3df536cbd9be7716f0011"
  },
  "engines": [
   {
@@ -47244,6 +47244,87 @@
     "launcher",
     "learner",
     "namespace"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 4739,
+   "headings": [
+    "One more advanced-coding action is now admitted to the confined seam — and four were rejected as inert",
+    "The question this answers (the owner asked, again, whether the most advanced coding actions can just be experienced once)",
+    "What changed — exactly one row",
+    "What was deliberately NOT changed, and why",
+    "What this does NOT do",
+    "Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "CONFINED_DECLARATION_REPAIR_APPLY_20261113_V1.md",
+   "sha256": "403b10a77fea298c6e7af39612c115b9735cb71dfa8b98e3bb8fc3a3cbe7f194",
+   "summary": "**2026-11-13.** Branch `arena/024b7a7c-brain`. Base `20a4cbe3` (#6840). Authority: **NONE**. `truth.achieved` stays `false`. $0. No tolerance widened, no refusal lifted, no capability registered. This is a measured round note, not a capability claim.",
+   "terms": {
+    "11": 2,
+    "12": 2,
+    "2026-11-13": 3,
+    "33": 2,
+    "actions": 2,
+    "added": 2,
+    "admitted": 3,
+    "advanced-coding": 4,
+    "answer": 2,
+    "apply": 3,
+    "artifact": 2,
+    "before": 2,
+    "bind": 3,
+    "boundary": 2,
+    "boundary.refuses_execution": 3,
+    "but": 2,
+    "canonical": 6,
+    "capability": 6,
+    "changed": 2,
+    "clone": 5,
+    "compile": 3,
+    "confined": 5,
+    "confined_effect_declarations_v1.json": 2,
+    "confinement": 3,
+    "directly": 2,
+    "door": 3,
+    "effect": 3,
+    "fail-closed": 3,
+    "false": 3,
+    "fresh": 3,
+    "measured": 3,
+    "names": 3,
+    "no": 8,
+    "not": 9,
+    "one": 4,
+    "probe": 3,
+    "python3": 3,
+    "refusal": 3,
+    "rejected": 3,
+    "row": 3,
+    "rows": 3,
+    "same": 5,
+    "test_confined_dispatch_v1.py": 3,
+    "tests": 3,
+    "true": 3,
+    "unchanged": 3,
+    "verified": 4,
+    "would": 3
+   },
+   "title": "One more advanced-coding action is now admitted to the confined seam — and four were rejected as inert",
+   "title_terms": [
+    "action",
+    "admitted",
+    "advanced-coding",
+    "confined",
+    "four",
+    "inert",
+    "more",
+    "now",
+    "one",
+    "rejected",
+    "seam",
+    "were"
    ]
   },
   {
@@ -78461,10 +78542,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1233,
+  "included_source_count": 1234,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ce1c543834ef19ad3575f634175aca1d12ea740fe0286cd1221e78860849e0cc"
+  "source_tree_digest": "41cc4aeb26f10a1edd879bb54516562c9e8f0570646ee9955ee42e6330a2e1d9"
  },
  "research_index": [
   {
