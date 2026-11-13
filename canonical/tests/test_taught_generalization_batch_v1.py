@@ -164,3 +164,119 @@ def test_a_later_settled_site_can_generalize_after_process_restart(tmp_path, mon
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
     assert Path("other.py").read_text() == other.replace("isAlive", "is_alive")
+
+
+def test_check_import_crash_cannot_prove_a_test_observed_the_mutation(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    source = "def active(worker):\n    return worker.isAlive()\n"
+    Path("pool.py").write_text(source)
+    Path("check_pool.py").write_text(
+        "import pool\n"
+        "class Thread:\n"
+        "    def isAlive(self): return True\n"
+        "    def is_alive(self): return True\n"
+        "pool.active(Thread())  # executed during import, before tests can be discovered\n"
+        "def test_unrelated():\n"
+        "    assert len('ok') == 2\n"
+    )
+    prior = Path("alive.lesson").read_bytes()
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 3
+    assert Path("pool.py").read_text() == source
+    assert Path("alive.lesson").read_bytes() == prior
+
+
+def test_a_check_that_cannot_import_is_not_a_valid_baseline(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    source = "def status(self):\n    return self.thread.isAlive()\n"
+    Path("pool.py").write_text(source)
+    Path("check_pool.py").write_text("raise RuntimeError('could not load tests')\n")
+    prior = Path("alive.lesson").read_bytes()
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 3
+    assert Path("pool.py").read_text() == source
+    assert Path("alive.lesson").read_bytes() == prior
+
+
+def test_no_tests_after_edit_refuses_and_restores_the_file(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    source = BEFORE
+    Path("pool.py").write_text(source)
+    Path("check_pool.py").write_text(
+        "import pool\n"
+        "class Thread:\n"
+        "    def isAlive(self): return True\n"
+        "    def is_alive(self): return False\n"
+        "class Holder:\n"
+        "    thread = Thread()\n"
+        "if pool.status(Holder()):\n"
+        "    def test_old_behavior():\n"
+        "        assert pool.status(Holder())\n"
+    )
+    prior = Path("alive.lesson").read_bytes()
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 3
+    assert Path("pool.py").read_text() == source
+    assert Path("alive.lesson").read_bytes() == prior
+
+
+def test_a_disappearing_test_cannot_make_an_edit_pass(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    Path("pool.py").write_text(BEFORE)
+    Path("check_pool.py").write_text(
+        "import pool\n"
+        "class Thread:\n"
+        "    def isAlive(self): return True\n"
+        "    def is_alive(self): return False\n"
+        "class Holder:\n"
+        "    thread = Thread()\n"
+        "def test_unrelated():\n"
+        "    assert len('ok') == 2\n"
+        "if pool.status(Holder()):\n"
+        "    def test_old_behavior():\n"
+        "        assert pool.status(Holder())\n"
+    )
+    prior = Path("alive.lesson").read_bytes()
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 3
+    assert Path("pool.py").read_text() == BEFORE
+    assert Path("alive.lesson").read_bytes() == prior
+
+
+def test_skipping_a_previously_running_test_refuses_and_restores(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    Path("pool.py").write_text(BEFORE)
+    Path("check_pool.py").write_text(
+        "import pool, unittest\n"
+        "class Thread:\n"
+        "    def isAlive(self): return True\n"
+        "    def is_alive(self): return False\n"
+        "class Holder:\n"
+        "    thread = Thread()\n"
+        "class Tests(unittest.TestCase):\n"
+        "    @unittest.skipUnless(pool.status(Holder()), 'disabled')\n"
+        "    def test_old_behavior(self):\n"
+        "        self.assertTrue(pool.status(Holder()))\n"
+        "    def test_unrelated(self):\n"
+        "        self.assertEqual(len('ok'), 2)\n"
+    )
+    prior = Path("alive.lesson").read_bytes()
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 3
+    assert Path("pool.py").read_text() == BEFORE
+    assert Path("alive.lesson").read_bytes() == prior
+
+
+def test_all_skipped_tests_are_not_a_baseline(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    Path("pool.py").write_text(BEFORE)
+    Path("check_pool.py").write_text(
+        "import unittest\n"
+        "class Tests(unittest.TestCase):\n"
+        "    @unittest.skip('not available')\n"
+        "    def test_skipped(self):\n"
+        "        self.assertEqual(len('ok'), 2)\n"
+    )
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 3
+    assert Path("pool.py").read_text() == BEFORE
