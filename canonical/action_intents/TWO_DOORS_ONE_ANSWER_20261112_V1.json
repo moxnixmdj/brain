@@ -30,10 +30,22 @@
  "explicit_user_authorization": "Owner directive restated this round: the system is claimed to be a limited lookup system that cannot count different things, work on different files, or handle different task structures, and proposes actual model training, conceptual understanding, transfer learning, and reasoning. Owner also instructed: do not accept the framing by default, separate claim from measurement, test the Brutal Truth list itself, and always push and merge work after finishing.",
  "measured_effect": "PRIMARY_DOOR_NINE_OF_NINE__SECONDARY_DOOR_TWO_OF_NINE__ASKED_EQUALS_SUM_PREDICTS_EVERY_ROW__TWENTY_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS_17_RULES_0_VIOLATIONS",
  "load_bearing_primary": {
-  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__THE_ROUND_MEASURES_AND_PINS_AN_INTERFACE_DEFECT_AND_LEAVES_BOTH_RUNTIME_FILES_UNCHANGED",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__THIS_ROUND_MEASURES_AND_PINS_AN_INTERFACE_DEFECT_AND_LEAVES_BOTH_RUNTIME_FILES_UNCHANGED",
+  "open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": 0.0,
+  "expected_obligation_unlock_lcb": 0.02,
+  "success_probability_lcb": 1.0,
+  "wall_clock_cost_ub": 0.02,
   "spend_usd": 0,
   "model_calls": 0,
-  "terminal_credit": 0
+  "terminal_credit": 0,
+  "why_this_is_the_causal_path": "A_CODING_BENCHMARK_NUMBER_IS_ONLY_AS_TRUSTWORTHY_AS_THE_ANSWER_PATH_THAT_PRODUCES_IT__AND_ONE_OF_TWO_ENTRY_POINTS_RETURNS_FUNCTIONS_PLUS_CLASSES_FOR_A_QUESTION_ABOUT_EITHER_WHILE_STAMPING_PASS"
  },
  "prior_work_reused": [
   "canonical/runtime/answer_shape_v1.py",
@@ -58,5 +70,37 @@
   ],
   "governance_note": "GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md remains CANONICAL and FAIL-CLOSED; training model weights is permitted but confers zero capability credit, so model training is neither the admissibility question nor the measured bottleneck"
  },
- "next_step": "DECIDE_WHICH_DOOR_IS_THE_CONTRACT_THEN_EITHER_ROUTE_RUN_RAW_GOAL_THROUGH_ANSWER_SHAPE_LIFT_NAMED_ANSWER_OR_RETIRE_IT_AS_A_PUBLISHABLE_ENTRY_POINT"
+ "next_step": "DECIDE_WHICH_DOOR_IS_THE_CONTRACT_THEN_EITHER_ROUTE_RUN_RAW_GOAL_THROUGH_ANSWER_SHAPE_LIFT_NAMED_ANSWER_OR_RETIRE_IT_AS_A_PUBLISHABLE_ENTRY_POINT",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+   "canonical/runtime/global_open_world_extrapolator_v1.py",
+   "canonical/tests/test_meta_circular_global_sentient_creature_v1.py"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_FIVE_HARDCODED_CODECS_THIRTY_FIVE_EXPRESSION_TEMPLATES_THREE_ARITHMETIC_LAWS_A_NINETEEN_INT_COEFFICIENT_GRID_AND_AN_ENGLISH_KEYWORD_REGEX_CONSTITUTE_NON_STATIC_SENTIENT_COGNITION",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_9e3b5f5e__GRAMMAR_INDUCTION_PARSES_RECORD_XML_AND_LENPREF_FORMATS_OUTSIDE_THE_OLD_FIVE_CODECS__EXACT_LINEAR_SOLVE_GETS_7x0-2x1+12_AND_META_TACTIC_SOLVES_OFF_GRID_42x0-9x1+13__STUN_PIECEWISE_AND_ORGAN_COMPOSITION_LIVE__DIFFERENCE_INVARIANT_SYNTHESIZED_NOT_JUST_SUM_OR_PROD__EVOI_EXPANDS_ON_EARN_500_USD_WITHOUT_FASTEST_OR_BEST__INSTRUMENTAL_POLICY_PICKS_ZERO_REWARD_FORGE_SENSOR_THAT_UNLOCKS_100_VALUE_GOAL__COPY_42_STILL_REFUSED_WITHOUT_ORACLE__20_TESTS_IN_0_257S"
+ }
 }
