@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 410,
+  "knowledge_documents": 411,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6810,
+  "research_index_records": 6811,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "69dc3df66a37c4c88b2117e63b1de85c54f6ee4646036ab5886f70be89e0baad"
+  "value": "ddc03ee1fc8f932b74c8f56ed1bf2af719d4d101d9c3af07857ede111aabaa61"
  },
  "engines": [
   {
@@ -51357,6 +51357,85 @@
     "map",
     "measured",
     "problem"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8442,
+   "headings": [
+    "Held out is not in sample: the number the critique was asking for",
+    "The critique, and what is right in it",
+    "What transferred, and what did not",
+    "The four requirements, taken one at a time",
+    "What the critique gets wrong",
+    "The limiting factors, in order",
+    "The fastest real path",
+    "Reproduce",
+    "Limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "HELD_OUT_IS_NOT_IN_SAMPLE_20261112_V1.md",
+   "sha256": "bf008fcc7cc2ed8da11fe8a688e7294fa5a31f4b031d445db42ca340bd33e6cf",
+   "summary": "**2026-11-12 · 8 pull requests the operators were not designed on · no model, no network, $0**",
+   "terms": {
+    "150": 4,
+    "16": 3,
+    "175": 3,
+    "37.52": 3,
+    "585": 10,
+    "604": 5,
+    "8.54": 4,
+    "change": 4,
+    "changes": 5,
+    "chosen": 4,
+    "class": 4,
+    "code": 4,
+    "corpus": 4,
+    "critique": 5,
+    "every": 5,
+    "example": 6,
+    "family": 6,
+    "generalization": 4,
+    "held-out": 7,
+    "helper": 5,
+    "in-sample": 9,
+    "lookup": 4,
+    "model": 9,
+    "needs": 4,
+    "no": 12,
+    "not": 30,
+    "number": 7,
+    "one": 7,
+    "only": 6,
+    "operator": 14,
+    "operators": 6,
+    "path": 4,
+    "pep": 15,
+    "precision": 4,
+    "project": 8,
+    "pull": 15,
+    "real": 4,
+    "record": 4,
+    "requests": 13,
+    "right": 5,
+    "same": 4,
+    "says": 4,
+    "tests": 7,
+    "training": 8,
+    "transfer": 7,
+    "two": 5,
+    "utc": 14,
+    "were": 4
+   },
+   "title": "Held out is not in sample: the number the critique was asking for",
+   "title_terms": [
+    "asking",
+    "critique",
+    "held",
+    "not",
+    "number",
+    "out",
+    "sample"
    ]
   },
   {
@@ -76671,10 +76750,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1212,
+  "included_source_count": 1213,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9f56a526f7d892bbfd9f7727bee33eac0a953ff716973e4d184821ff7a094f50"
+  "source_tree_digest": "7f021ebf284b5739e19b24ac1e0d61fe74d89c67b0bcb825755163ce65ceba8c"
  },
  "research_index": [
   {
@@ -164668,6 +164747,25 @@
     "hard": 1,
     "known": 1,
     "slice": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/HELD_OUT_TRANSFER_PRS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/HELD_OUT_TRANSFER_PRS_20261112_V1.json",
+   "schema": "",
+   "sha256": "80ec618506510f14a55cafd893728e8011002c9c124453139ff009f63de8773e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "held": 1,
+    "out": 1,
+    "prs": 1,
+    "transfer": 1,
     "v1": 1
    }
   },

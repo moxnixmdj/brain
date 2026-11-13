@@ -1,0 +1,370 @@
+{
+ "schema": "HELD_OUT_TRANSFER_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-13T00:58:10Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "organ_sha256": "682960d1b73971606e4fae1f861b43d81b6a8acea604e947a3816b75c3d75c5a",
+ "operator": "canonical/swe_kernel/taught_actions/generic_alias_v1.py",
+ "operator_sha256": "4ae6cf341b17dc28e96891b23eacf8a5363da7b59ecce09f195e5338f220ab80",
+ "queries": [
+  {
+   "kind": "pep585",
+   "words": "\"PEP 585\""
+  },
+  {
+   "kind": "pep585",
+   "words": "built-in generics"
+  },
+  {
+   "kind": "utc",
+   "words": "utcnow"
+  },
+  {
+   "kind": "utc",
+   "words": "datetime.now(UTC)"
+  }
+ ],
+ "excluded_as_design": [
+  "Cytomine-ULiege/Cytomine-python-client#61",
+  "InterDigitalInc/CompressAI-Vision#40",
+  "Prekzursil/env-inspector#72",
+  "RedHatInsights/advisor-backend#80",
+  "apache/libcloud#2217",
+  "arigatoexpress/Project-Go-Forward#483",
+  "fulcrumgenomics/fgpyo#300",
+  "inveniosoftware/invenio-pidstore#189",
+  "jupyter/jupyter-sphinx#301",
+  "kuangjiafa/automagician#55",
+  "nipy/nibabel#1609",
+  "openimis/openimis-be-core_py#414",
+  "testing-cabal/testtools#335",
+  "torproject/stem#155",
+  "unifyai/ivy#26932"
+ ],
+ "by_kind": {
+  "pep585": {
+   "base": {
+    "asked": 120,
+    "edited": 105,
+    "changed_files": 0,
+    "right": 64,
+    "developers_changes": 525,
+    "organ_changes": 86,
+    "coverage": 0.121905,
+    "precision": 0.744186,
+    "wrong_changes": 16,
+    "whole_files": 4,
+    "pull_requests": 4
+   },
+   "alias": {
+    "asked": 120,
+    "edited": 107,
+    "changed_files": 35,
+    "right": 197,
+    "developers_changes": 525,
+    "organ_changes": 258,
+    "coverage": 0.375238,
+    "precision": 0.763566,
+    "wrong_changes": 52,
+    "whole_files": 7,
+    "pull_requests": 4,
+    "gain_right": 133,
+    "gain_coverage": 0.253333
+   }
+  },
+  "utc": {
+   "base": {
+    "asked": 120,
+    "edited": 53,
+    "changed_files": 0,
+    "right": 35,
+    "developers_changes": 410,
+    "organ_changes": 73,
+    "coverage": 0.085366,
+    "precision": 0.479452,
+    "wrong_changes": 17,
+    "whole_files": 10,
+    "pull_requests": 4
+   },
+   "alias": {
+    "asked": 120,
+    "edited": 53,
+    "changed_files": 0,
+    "right": 35,
+    "developers_changes": 410,
+    "organ_changes": 73,
+    "coverage": 0.085366,
+    "precision": 0.479452,
+    "wrong_changes": 17,
+    "whole_files": 10,
+    "pull_requests": 4,
+    "gain_right": 0,
+    "gain_coverage": 0.0
+   }
+  }
+ },
+ "per_pull_request": {
+  "ncouture/AirTell#200": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 19,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 120,
+    "organ_changes": 3,
+    "coverage": 0.0,
+    "precision": 0.0,
+    "wrong_changes": 1,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 19,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 120,
+    "organ_changes": 3,
+    "coverage": 0.0,
+    "precision": 0.0,
+    "wrong_changes": 1,
+    "whole_files": 0
+   },
+   "name": "ncouture/AirTell#200",
+   "kind": "pep585",
+   "query": "\"PEP 585\"",
+   "title": "chore(typing): p3 modernize legacy typing to PEP 585 and PEP 604 across codebase (#127)",
+   "seconds": 2.5
+  },
+  "yaalalabs/agent-kernel#825": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 31,
+    "developers_changes": 175,
+    "organ_changes": 44,
+    "coverage": 0.177143,
+    "precision": 0.704545,
+    "wrong_changes": 13,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 18,
+    "right": 79,
+    "developers_changes": 175,
+    "organ_changes": 117,
+    "coverage": 0.451429,
+    "precision": 0.675214,
+    "wrong_changes": 35,
+    "whole_files": 3
+   },
+   "name": "yaalalabs/agent-kernel#825",
+   "kind": "pep585",
+   "query": "\"PEP 585\"",
+   "title": "refactor: modernize type annotations to PEP 585/604 style",
+   "seconds": 1.8
+  },
+  "agencyenterprise/draft-detective#858": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 10,
+    "developers_changes": 80,
+    "organ_changes": 14,
+    "coverage": 0.125,
+    "precision": 0.714286,
+    "wrong_changes": 2,
+    "whole_files": 2
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 10,
+    "developers_changes": 80,
+    "organ_changes": 14,
+    "coverage": 0.125,
+    "precision": 0.714286,
+    "wrong_changes": 2,
+    "whole_files": 2
+   },
+   "name": "agencyenterprise/draft-detective#858",
+   "kind": "pep585",
+   "query": "built-in generics",
+   "title": "refactor(typing): use built-in generics and | unions",
+   "seconds": 0.9
+  },
+  "VHDL/pyVHDLModel#204": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 26,
+    "changed_files": 0,
+    "right": 23,
+    "developers_changes": 150,
+    "organ_changes": 25,
+    "coverage": 0.153333,
+    "precision": 0.92,
+    "wrong_changes": 0,
+    "whole_files": 2
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 28,
+    "changed_files": 17,
+    "right": 108,
+    "developers_changes": 150,
+    "organ_changes": 124,
+    "coverage": 0.72,
+    "precision": 0.870968,
+    "wrong_changes": 14,
+    "whole_files": 2
+   },
+   "name": "VHDL/pyVHDLModel#204",
+   "kind": "pep585",
+   "query": "built-in generics",
+   "title": "Built-in generics instead of typing's List, Tuple and Dict",
+   "seconds": 2.4
+  },
+  "zkaelxz/U00#1831": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 5,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 95,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 5,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 95,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "name": "zkaelxz/U00#1831",
+   "kind": "utc",
+   "query": "utcnow",
+   "title": "Replace the deprecated datetime.utcnow with lib.clock.utcnow",
+   "seconds": 3.3
+  },
+  "mborchuk/ContaAutonomo#121": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 4,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 215,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 4,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 215,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "name": "mborchuk/ContaAutonomo#121",
+   "kind": "utc",
+   "query": "utcnow",
+   "title": "refactor: replace deprecated utcnow() and Query.get() (E-5)",
+   "seconds": 6.2
+  },
+  "mozilla/bugbug#7463": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 19,
+    "changed_files": 0,
+    "right": 16,
+    "developers_changes": 50,
+    "organ_changes": 23,
+    "coverage": 0.32,
+    "precision": 0.695652,
+    "wrong_changes": 4,
+    "whole_files": 1
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 19,
+    "changed_files": 0,
+    "right": 16,
+    "developers_changes": 50,
+    "organ_changes": 23,
+    "coverage": 0.32,
+    "precision": 0.695652,
+    "wrong_changes": 4,
+    "whole_files": 1
+   },
+   "name": "mozilla/bugbug#7463",
+   "kind": "utc",
+   "query": "datetime.now(UTC)",
+   "title": "Revert \"Refix replace datetime.utcnow() with datetime.now(timezone.utc) (#7062)\"",
+   "seconds": 3.8
+  },
+  "mozilla/bugbug#7062": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 25,
+    "changed_files": 0,
+    "right": 19,
+    "developers_changes": 50,
+    "organ_changes": 50,
+    "coverage": 0.38,
+    "precision": 0.38,
+    "wrong_changes": 13,
+    "whole_files": 9
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 25,
+    "changed_files": 0,
+    "right": 19,
+    "developers_changes": 50,
+    "organ_changes": 50,
+    "coverage": 0.38,
+    "precision": 0.38,
+    "wrong_changes": 13,
+    "whole_files": 9
+   },
+   "name": "mozilla/bugbug#7062",
+   "kind": "utc",
+   "query": "datetime.now(UTC)",
+   "title": "Refix replace datetime.utcnow() with datetime.now(timezone.utc)",
+   "seconds": 3.6
+  }
+ },
+ "limits": [
+  "A pilot: eight merged pull requests found by title search, two per query; not a random sample and not a benchmark.",
+  "The class titles are noisy: some pull requests also use PEP 604 unions or a project-local utcnow helper, which this operator does not read.",
+  "No project's tests were run; precision is agreement with the developers.",
+  "The pull requests were not used to choose the operator, but the operator's family was chosen on the earlier corpus; this measures transfer of that choice."
+ ]
+}
