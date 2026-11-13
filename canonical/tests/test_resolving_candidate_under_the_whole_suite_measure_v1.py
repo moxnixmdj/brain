@@ -56,6 +56,7 @@ here = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, here)
 given = sys.argv[1:]
 assert given[:4] == ["--verbosity", "2", "--settings=test_sqlite", "--parallel"] and given[4].isdigit(), given
+print("processes:", given[4])
 loader = unittest.defaultTestLoader
 if given[5:]:
     suite = unittest.TestSuite(loader.discover(os.path.join(here, name.split(".")[0]), pattern="tests.py", top_level_dir=here) for name in given[5:])
@@ -232,6 +233,14 @@ def test_the_stand_in_runs_every_module_when_no_label_is_given_and_the_labels_wh
     assert found[FIRST[0]] == judge.FAILED and found[LABEL] == judge.PASSED and found[MACHINE] == judge.FAILED
     some = whole.run_whole(tree, ["label_tests.tests"], 60, processes=1)
     assert judge.ran(some["output"]) == 2 and set(judge.statuses(some["output"])) == {LABEL, MUCH, "A label holds the shop and the name."}
+
+
+@needs_git
+def test_a_run_is_made_on_one_process_unless_more_are_asked_for(project, tree):
+    """Added after the round of seeded faults: on two processes Django's runner ended before its summary on this machine, and no test held the number."""
+    assert count.as_the_task_starts(tree, project["test_patch"])
+    assert whole.run_whole(tree, ["label_tests.tests"], 60)["output"].startswith("processes: 1\n")
+    assert whole.run_whole(tree, ["label_tests.tests"], 60, processes=3)["output"].startswith("processes: 3\n")
 
 
 @needs_git
