@@ -7069,5 +7069,848 @@
   "canonical/tools/passing_patch_shape_measure_v1.py": "d9d1209301b13eeaf2ba1f4822d378f14eaa6ab5ff7bf533b9367d241e22613e",
   "canonical/tools/expert_fix_pull_request_collector_v1.py": "f5f8a3bb3cbed88d6c0970a35d78461f79f36ec11ebc2f0a960cd3be3887d13e"
  },
- "seconds": 58.4
+ "seconds": 58.4,
+ "seeded_faults": {
+  "what": "canonical/tools/seeded_faults_file_found_v1.py replaces one piece of text of the organ or of the measure by a wrong one, in a copy of the tree, and runs the two test files; a fault is caught when a test fails. Three tests are left out of the run: they fail for any seeded fault, or cannot pass before the round is made.",
+  "a_first_run_that_said_64_of_64": {
+   "caught": 64,
+   "of": 64,
+   "caught_only_by_the_test_that_fails_for_any_seeded_fault": [
+    "only the first place a name stands is looked at",
+    "the class a method stands in is not among its words",
+    "the candidates of the other text are made from the task's own",
+    "a task reached twice counts twice",
+    "the earlier lists: one small function first is enough",
+    "the base commit is read from the middle of a line"
+   ],
+   "what_was_wrong": "The test that every fault's text stands once in its file was in the run. It fails as soon as any fault is seeded, because the text is then gone. I saw it in the list of which test caught which fault. That test is now left out of the run, and the six it had covered got past."
+  },
+  "the_last_answers_round_checked": {
+   "why": "Its record says the second round caught 34 of 34, and its test file holds the same kind of test.",
+   "run_again_with_that_test_left_out": {
+    "seeded": 34,
+    "caught": 34,
+    "survived": []
+   },
+   "reading": "The last answer's 34 of 34 does not rest on that test."
+  },
+  "what_the_survivors_say": "Six places where the tests did not pin the behaviour down: a name looked for only where it first stands; the class of a method left out of its words; the other task's candidates made from the task's own text; a task reached by the chain and by the earlier lists counted twice; one small function standing first being enough for the earlier lists; a base commit read from the middle of a line. The code in the tree has none of these faults, so no counted number changes. Each has a test now.",
+  "tests_added_after_the_first_round": [
+   "canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_name_that_first_stands_inside_a_longer_one_is_still_found_where_it_stands_whole",
+   "canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_class_a_method_stands_in_is_among_the_words_of_the_method",
+   "canonical/tests/test_file_the_task_text_points_at_v1.py::test_across_files_the_method_of_the_class_the_text_names_comes_first",
+   "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_text_that_finds_the_file_and_quotes_nothing_reaches_nothing",
+   "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_text_that_quotes_the_line_is_counted_as_reaching_it",
+   "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_the_chain_and_the_earlier_lists_both_reach_is_one_task",
+   "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_earlier_lists_do_not_keep_a_task_with_a_small_function_that_does_not_stand_first",
+   "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_base_commit_quoted_inside_the_statement_is_not_the_base_commit"
+  ],
+  "rounds": [
+   {
+    "seeded": 64,
+    "caught": 58,
+    "survived": [
+     "only the first place a name stands is looked at",
+     "the class a method stands in is not among its words",
+     "the candidates of the other text are made from the task's own",
+     "a task reached twice counts twice",
+     "the earlier lists: one small function first is enough",
+     "the base commit is read from the middle of a line"
+    ],
+    "not_seeded": [],
+    "left_out_of_the_run": [
+     "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_was_made_by_the_code_in_the_tree",
+     "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_says_how_many_seeded_faults_the_tests_caught",
+     "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_seeded_faults_are_each_one_piece_of_text_that_stands_once"
+    ],
+    "rows": [
+     {
+      "fault": "the files are ordered by score the wrong way round",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_rare_word_outweighs_words_that_stand_in_nearly_every_file"
+     },
+     {
+      "fault": "the files the text names come last",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_file_the_text_names_comes_before_a_file_with_a_higher_score"
+     },
+     {
+      "fault": "ties between files go against the path",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_rare_word_outweighs_words_that_stand_in_nearly_every_file"
+     },
+     {
+      "fault": "the files the text names are not put first",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_file_the_text_names_comes_before_a_file_with_a_higher_score"
+     },
+     {
+      "fault": "the names are used even when the caller turns them off",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_file_the_text_names_comes_before_a_file_with_a_higher_score"
+     },
+     {
+      "fault": "the words of the path are not in the document",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_document_is_the_words_of_the_text_and_of_the_path"
+     },
+     {
+      "fault": "a word counts once however often it stands",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_counted_is_the_words_of_the_function_organ_counted[text0]"
+     },
+     {
+      "fault": "k1 is 1.2",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "b is 0.5",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "the length of a file does not count",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "a word that stands in every file weighs as much as a rare one",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "how often a word stands in a file does not count",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "a file name alone counts as written out",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[in helpers.py-1]"
+     },
+     {
+      "fault": "a module path does not name a file",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[pkg.util.helpers.helper is wrong-2]"
+     },
+     {
+      "fault": "a path with a directory does not name a file",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[see pkg/util/helpers.py line 3-2]"
+     },
+     {
+      "fault": "a name that ends a longer name counts",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[xhelpers.py-0]"
+     },
+     {
+      "fault": "a name that begins a longer name counts",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[helpers.pyc-0]"
+     },
+     {
+      "fault": "a package is named by anything inside it",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_package_is_named_by_its_directory[pkg.forms.ModelForm-0]"
+     },
+     {
+      "fault": "only the first place a name stands is looked at",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": false,
+      "by": "105 passed, 3 deselected in 0.38s"
+     },
+     {
+      "fault": "a package is never named",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_package_is_named_by_its_directory[import pkg.forms-2]"
+     },
+     {
+      "fault": "the candidates come from the second file",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_with_one_file_the_candidates_are_the_function_organs_for_that_file"
+     },
+     {
+      "fault": "an order handed over is not used",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_an_order_handed_over_is_used_as_it_is"
+     },
+     {
+      "fault": "only the first function gets candidates",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_with_one_file_the_candidates_are_the_function_organs_for_that_file"
+     },
+     {
+      "fault": "the functions are ranked the wrong way round",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_with_one_file_the_candidates_are_the_function_organs_for_that_file"
+     },
+     {
+      "fault": "a function gets every candidate there is",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_there_are_at_most_so_many_candidates"
+     },
+     {
+      "fault": "the class a method stands in is not among its words",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": false,
+      "by": "105 passed, 3 deselected in 0.38s"
+     },
+     {
+      "fault": "the tests are listed with the project's files",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_listing_is_the_python_files_outside_the_tests_of_that_commit"
+     },
+     {
+      "fault": "the tests are never listed",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_with_the_tests_too_the_listing_is_every_python_file"
+     },
+     {
+      "fault": "files that are not Python are listed",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_listing_is_the_python_files_outside_the_tests_of_that_commit"
+     },
+     {
+      "fault": "a file is kept under its name only, whatever its path",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the rank of a file counts from 0",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the place of a candidate counts from 0",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the place of the function counts from 0",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_whose_text_points_at_the_file_and_quotes_the_line"
+     },
+     {
+      "fault": "the right text in another function counts",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_place_of_the_first_candidate_that_is_a_passing_text"
+     },
+     {
+      "fault": "the expert's file is ranked by score alone",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "score alone is the order of the organ",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_text_that_names_another_file_loses_the_patch_with_one_file_and_keeps_it_with_three"
+     },
+     {
+      "fault": "the other text is the task's own",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_tasks_text_finds_neither_the_file_nor_the_patch"
+     },
+     {
+      "fault": "the candidates of the other text are made from the task's own",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": false,
+      "by": "105 passed, 3 deselected in 0.42s"
+     },
+     {
+      "fault": "three files are one file",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the chain is handed the expert's file",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the function is looked for in the expert's file, wherever it stands",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_text_that_names_another_file_loses_the_patch_with_one_file_and_keeps_it_with_three"
+     },
+     {
+      "fault": "a file that holds no passing patch counts as holding one",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_without_a_passing_patch_inside_a_function_still_has_the_rank_of_its_file"
+     },
+     {
+      "fault": "the text in the tree is never compared with the text the collector read",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_tree_whose_file_is_not_the_text_the_collector_read_is_said"
+     },
+     {
+      "fault": "a function whose span is not a function of the file is a target",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_functions_that_hold_a_passing_patch_and_their_texts_after_it"
+     },
+     {
+      "fault": "among the first 3 is among the first 5",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_file"
+     },
+     {
+      "fault": "a share has two places",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_summary_of_the_record_adds_up_from_its_rows"
+     },
+     {
+      "fault": "a rank equal to the bound is not within it",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_file"
+     },
+     {
+      "fault": "a file name alone is not naming the file",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_file"
+     },
+     {
+      "fault": "by project, the first 3 are the first 10",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_summary_of_the_record_adds_up_from_its_rows"
+     },
+     {
+      "fault": "the median is the mean",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_summary_of_the_record_adds_up_from_its_rows"
+     },
+     {
+      "fault": "a task reached with another task's text is not counted",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_reached_only_from_the_tree_is_counted_as_such"
+     },
+     {
+      "fault": "every task reached counts as reached from the tree only",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_chain"
+     },
+     {
+      "fault": "a task reached twice counts twice",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": false,
+      "by": "105 passed, 3 deselected in 0.43s"
+     },
+     {
+      "fault": "the earlier lists count with their file anywhere in the order",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_chain"
+     },
+     {
+      "fault": "a task reached with the file given that is not among the tasks still counts",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_chain"
+     },
+     {
+      "fault": "the rule: 6 kept is enough",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_rule_reads_how_many_of_the_tasks_reached_with_the_file_given_are_still_reached[6-undecided]"
+     },
+     {
+      "fault": "the rule: 4 kept is the limiting step",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_rule_reads_how_many_of_the_tasks_reached_with_the_file_given_are_still_reached[4-undecided]"
+     },
+     {
+      "fault": "the rule: a share outside the range still agrees",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_rule_says_whether_score_alone_agrees_with_what_others_measured[0.21-False]"
+     },
+     {
+      "fault": "the earlier lists: within all 200",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_earlier_lists_keep_a_task_whose_small_functions_all_stand_first"
+     },
+     {
+      "fault": "the earlier lists: one small function first is enough",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": false,
+      "by": "105 passed, 3 deselected in 0.43s"
+     },
+     {
+      "fault": "the earlier lists: a function that is not small counts",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_earlier_lists_keep_a_task_whose_small_functions_all_stand_first"
+     },
+     {
+      "fault": "a record without the text of the expert's file is counted",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_pull_request_record_without_the_text_of_a_file_is_refused"
+     },
+     {
+      "fault": "fewer submissions than the function record had are counted",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_number_of_submissions_than_the_function_record_had_is_refused[51]"
+     },
+     {
+      "fault": "the base commit is read from the middle of a line",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": false,
+      "by": "105 passed, 3 deselected in 0.39s"
+     }
+    ],
+    "seconds": 33.7,
+    "tests": "the two test files as they were when the record was first written, without the test that fails for any seeded fault"
+   },
+   {
+    "seeded": 64,
+    "caught": 64,
+    "survived": [],
+    "not_seeded": [],
+    "left_out_of_the_run": [
+     "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_was_made_by_the_code_in_the_tree",
+     "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_record_says_how_many_seeded_faults_the_tests_caught",
+     "canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_seeded_faults_are_each_one_piece_of_text_that_stands_once"
+    ],
+    "rows": [
+     {
+      "fault": "the files are ordered by score the wrong way round",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_rare_word_outweighs_words_that_stand_in_nearly_every_file"
+     },
+     {
+      "fault": "the files the text names come last",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_file_the_text_names_comes_before_a_file_with_a_higher_score"
+     },
+     {
+      "fault": "ties between files go against the path",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_rare_word_outweighs_words_that_stand_in_nearly_every_file"
+     },
+     {
+      "fault": "the files the text names are not put first",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_file_the_text_names_comes_before_a_file_with_a_higher_score"
+     },
+     {
+      "fault": "the names are used even when the caller turns them off",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_file_the_text_names_comes_before_a_file_with_a_higher_score"
+     },
+     {
+      "fault": "the words of the path are not in the document",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_document_is_the_words_of_the_text_and_of_the_path"
+     },
+     {
+      "fault": "a word counts once however often it stands",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_counted_is_the_words_of_the_function_organ_counted[text0]"
+     },
+     {
+      "fault": "k1 is 1.2",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "b is 0.5",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "the length of a file does not count",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "a word that stands in every file weighs as much as a rare one",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "how often a word stands in a file does not count",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_scores_are_what_the_trees_scorer_gives_for_the_same_words_in_lists"
+     },
+     {
+      "fault": "a file name alone counts as written out",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[in helpers.py-1]"
+     },
+     {
+      "fault": "a module path does not name a file",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[pkg.util.helpers.helper is wrong-2]"
+     },
+     {
+      "fault": "a path with a directory does not name a file",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[see pkg/util/helpers.py line 3-2]"
+     },
+     {
+      "fault": "a name that ends a longer name counts",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[xhelpers.py-0]"
+     },
+     {
+      "fault": "a name that begins a longer name counts",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_how_much_of_a_path_the_text_writes_out[helpers.pyc-0]"
+     },
+     {
+      "fault": "a package is named by anything inside it",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_package_is_named_by_its_directory[pkg.forms.ModelForm-0]"
+     },
+     {
+      "fault": "only the first place a name stands is looked at",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_name_that_first_stands_inside_a_longer_one_is_still_found_where_it_stands_whole"
+     },
+     {
+      "fault": "a package is never named",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_a_package_is_named_by_its_directory[import pkg.forms-2]"
+     },
+     {
+      "fault": "the candidates come from the second file",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_with_one_file_the_candidates_are_the_function_organs_for_that_file"
+     },
+     {
+      "fault": "an order handed over is not used",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_an_order_handed_over_is_used_as_it_is"
+     },
+     {
+      "fault": "only the first function gets candidates",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_with_one_file_the_candidates_are_the_function_organs_for_that_file"
+     },
+     {
+      "fault": "the functions are ranked the wrong way round",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_with_one_file_the_candidates_are_the_function_organs_for_that_file"
+     },
+     {
+      "fault": "a function gets every candidate there is",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_there_are_at_most_so_many_candidates"
+     },
+     {
+      "fault": "the class a method stands in is not among its words",
+      "file": "canonical/runtime/file_the_task_text_points_at_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_the_task_text_points_at_v1.py::test_the_class_a_method_stands_in_is_among_the_words_of_the_method"
+     },
+     {
+      "fault": "the tests are listed with the project's files",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_listing_is_the_python_files_outside_the_tests_of_that_commit"
+     },
+     {
+      "fault": "the tests are never listed",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_with_the_tests_too_the_listing_is_every_python_file"
+     },
+     {
+      "fault": "files that are not Python are listed",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_listing_is_the_python_files_outside_the_tests_of_that_commit"
+     },
+     {
+      "fault": "a file is kept under its name only, whatever its path",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the rank of a file counts from 0",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the place of a candidate counts from 0",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the place of the function counts from 0",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_whose_text_points_at_the_file_and_quotes_the_line"
+     },
+     {
+      "fault": "the right text in another function counts",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_place_of_the_first_candidate_that_is_a_passing_text"
+     },
+     {
+      "fault": "the expert's file is ranked by score alone",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "score alone is the order of the organ",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_text_that_names_another_file_loses_the_patch_with_one_file_and_keeps_it_with_three"
+     },
+     {
+      "fault": "the other text is the task's own",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_tasks_text_finds_neither_the_file_nor_the_patch"
+     },
+     {
+      "fault": "the candidates of the other text are made from the task's own",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_text_that_finds_the_file_and_quotes_nothing_reaches_nothing"
+     },
+     {
+      "fault": "three files are one file",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the chain is handed the expert's file",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_stretch_of_tasks_is_counted_from_the_trees_of_their_commits"
+     },
+     {
+      "fault": "the function is looked for in the expert's file, wherever it stands",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_text_that_names_another_file_loses_the_patch_with_one_file_and_keeps_it_with_three"
+     },
+     {
+      "fault": "a file that holds no passing patch counts as holding one",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_without_a_passing_patch_inside_a_function_still_has_the_rank_of_its_file"
+     },
+     {
+      "fault": "the text in the tree is never compared with the text the collector read",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_tree_whose_file_is_not_the_text_the_collector_read_is_said"
+     },
+     {
+      "fault": "a function whose span is not a function of the file is a target",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_functions_that_hold_a_passing_patch_and_their_texts_after_it"
+     },
+     {
+      "fault": "among the first 3 is among the first 5",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_file"
+     },
+     {
+      "fault": "a share has two places",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_summary_of_the_record_adds_up_from_its_rows"
+     },
+     {
+      "fault": "a rank equal to the bound is not within it",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_file"
+     },
+     {
+      "fault": "a file name alone is not naming the file",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_file"
+     },
+     {
+      "fault": "by project, the first 3 are the first 10",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_summary_of_the_record_adds_up_from_its_rows"
+     },
+     {
+      "fault": "the median is the mean",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_summary_of_the_record_adds_up_from_its_rows"
+     },
+     {
+      "fault": "a task reached with another task's text is not counted",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_reached_only_from_the_tree_is_counted_as_such"
+     },
+     {
+      "fault": "every task reached counts as reached from the tree only",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_chain"
+     },
+     {
+      "fault": "a task reached twice counts twice",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_task_the_chain_and_the_earlier_lists_both_reach_is_one_task"
+     },
+     {
+      "fault": "the earlier lists count with their file anywhere in the order",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_chain"
+     },
+     {
+      "fault": "a task reached with the file given that is not among the tasks still counts",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_counts_of_the_chain"
+     },
+     {
+      "fault": "the rule: 6 kept is enough",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_rule_reads_how_many_of_the_tasks_reached_with_the_file_given_are_still_reached[6-undecided]"
+     },
+     {
+      "fault": "the rule: 4 kept is the limiting step",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_rule_reads_how_many_of_the_tasks_reached_with_the_file_given_are_still_reached[4-undecided]"
+     },
+     {
+      "fault": "the rule: a share outside the range still agrees",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_rule_says_whether_score_alone_agrees_with_what_others_measured[0.21-False]"
+     },
+     {
+      "fault": "the earlier lists: within all 200",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_earlier_lists_keep_a_task_whose_small_functions_all_stand_first"
+     },
+     {
+      "fault": "the earlier lists: one small function first is enough",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_earlier_lists_do_not_keep_a_task_with_a_small_function_that_does_not_stand_first"
+     },
+     {
+      "fault": "the earlier lists: a function that is not small counts",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_the_earlier_lists_keep_a_task_whose_small_functions_all_stand_first"
+     },
+     {
+      "fault": "a record without the text of the expert's file is counted",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_pull_request_record_without_the_text_of_a_file_is_refused"
+     },
+     {
+      "fault": "fewer submissions than the function record had are counted",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_another_number_of_submissions_than_the_function_record_had_is_refused[51]"
+     },
+     {
+      "fault": "the base commit is read from the middle of a line",
+      "file": "canonical/tools/file_found_from_task_text_measure_v1.py",
+      "caught": true,
+      "by": "FAILED canonical/tests/test_file_found_from_task_text_measure_v1.py::test_a_base_commit_quoted_inside_the_statement_is_not_the_base_commit"
+     }
+    ],
+    "seconds": 34.6,
+    "tests": "with the eight tests added"
+   }
+  ]
+ }
 }
