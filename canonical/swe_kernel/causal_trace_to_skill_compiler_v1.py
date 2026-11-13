@@ -44,6 +44,7 @@ import urllib.request
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import capability_transfer_ownership_gate_v1 as ownership_gate
+from canonical.swe_kernel import workflow_goal_generalization_v1 as goal_variants
 
 SCHEMA = "PROJECT_BRAIN_CAUSAL_TRACE_TO_SKILL_COMPILER_V1"
 
@@ -116,10 +117,15 @@ def _connect_db(db_path: pathlib.Path | None = None) -> tuple[pathlib.Path, sqli
             artifact_sha256 TEXT NOT NULL,
             ownership_receipt_json TEXT NOT NULL,
             hit_count INTEGER NOT NULL DEFAULT 0,
-            created_ns INTEGER NOT NULL
+            created_ns INTEGER NOT NULL,
+            goal_variants_json TEXT NOT NULL DEFAULT '[]'
         )
         """
     )
+    # Additive migration for stores created before verified goal variants existed.
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(compiled_workflow_skills)")}
+    if "goal_variants_json" not in columns:
+        conn.execute("ALTER TABLE compiled_workflow_skills ADD COLUMN goal_variants_json TEXT NOT NULL DEFAULT '[]'")
     conn.execute(
         "CREATE INDEX IF NOT EXISTS idx_workflow_layer ON compiled_workflow_skills(dominant_layer)"
     )
@@ -660,6 +666,20 @@ def anti_unify_workflow(
     }
 
 
+def _bind_goal_regex(pattern: str, goal: str) -> dict[str, str] | None:
+    if not pattern:
+        return None
+    m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
+    if not m:
+        return None
+    out: dict[str, str] = {}
+    for k, v in m.groupdict().items():
+        if v is None:
+            return None
+        clean = v.strip().strip("\"'").rstrip(".")
+        out["?" + k] = clean
+    return out
+
 def anti_unify_workflow_examples(
     example_1: Mapping[str, Any],
     example_2: Mapping[str, Any],
@@ -786,31 +806,139 @@ def _bind_structural_goal_parameters(skill: Mapping[str, Any], goal: str) -> dic
     return out if len(out) == len(param_order) else None
 
 
+
+_STRUCTURAL_UNSAFE_WORDS = frozenset({
+    "not", "no", "never", "dont", "don't", "cannot", "can't", "without", "unless",
+    "instead", "rather", "but", "however", "although", "if", "except", "only",
+    "then", "also", "plus", "followed", "after", "before", "while",
+    "delete", "drop", "remove", "erase", "destroy", "overwrite",
+})
+
+
+def _structural_surface_safe(goal: str) -> bool:
+    """Guard the loose structural fallback, not the exact taught template.
+
+    The exact regex and verified variants carry their own admission. The
+    structural/synonym fallback is wider, so it must not absorb negation,
+    conditionals, or an extra destructive action. `and`/`or` are tolerated only
+    when the sentence is joining typed key=value arguments, which is the
+    reordered-argument case the structural binder exists for.
+    """
+    if not goal_variants.surface_is_safe(goal):
+        # surface_is_safe rejects all control words including and/or. Allow the
+        # conjunction back only for KV argument lists, and only if no stronger
+        # control word is present.
+        masked = goal
+        for pattern in goal_variants._LITERAL_MASKS:
+            masked = pattern.sub(" ", masked)
+        words = {w.lower().replace("’", "'") for w in re.findall(r"[A-Za-z']+", masked)}
+        if words & _STRUCTURAL_UNSAFE_WORDS:
+            return False
+        if (words & {"and", "or"}) and not _KV_PAIR_RE.search(goal):
+            return False
+    return True
+
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
-    pattern = str(skill.get("goal_regex") or "")
-    if pattern:
-        m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
-        if m:
-            out: dict[str, str] = {}
-            ok = True
-            for k, v in m.groupdict().items():
-                if v is None:
-                    ok = False
-                    break
-                clean = v.strip().strip("\"'").rstrip(".")
-                out["?" + k] = clean
-            if ok:
-                # Verify that if named key=value slots exist in the skeleton, a reordered
-                # `env=prod and service=auth` wasn't misbound positionally by `.+?`
-                skel = str(skill.get("goal_skeleton") or "")
-                kv_holes = {m_kv.group(2): m_kv.group(1).lower() for m_kv in _HOLE_KV_RE.finditer(skel)}
-                misbound = any(
-                    re.match(r"^[A-Za-z_][A-Za-z0-9_-]*\s*[=:]", str(out.get(h) or ""))
-                    for h in kv_holes
-                )
-                if not misbound:
-                    return out
+    bindings = _bind_goal_regex(str(skill.get("goal_regex") or ""), goal)
+    if bindings is not None:
+        # If named key=value slots exist, a reordered `env=prod and service=auth`
+        # must not be misbound positionally by `.+?`.
+        skel = str(skill.get("goal_skeleton") or "")
+        kv_holes = {m_kv.group(2): m_kv.group(1).lower() for m_kv in _HOLE_KV_RE.finditer(skel)}
+        misbound = any(
+            re.match(r"^[A-Za-z_][A-Za-z0-9_-]*\s*[=:]", str(bindings.get(h) or ""))
+            for h in kv_holes
+        )
+        if not misbound:
+            return bindings
+    # Verified variants are exact templates admitted only after held-out execution.
+    if goal_variants.surface_is_safe(goal):
+        for variant in skill.get("goal_variants") or []:
+            if not isinstance(variant, Mapping):
+                continue
+            bindings = _bind_goal_regex(str(variant.get("goal_regex") or ""), goal)
+            if bindings is not None:
+                return bindings
+    # Structural/synonym fallback from main. It is a candidate binder, not an
+    # authority grant; execution still passes preconditions and postconditions.
+    if not _structural_surface_safe(goal):
+        return None
     return _bind_structural_goal_parameters(skill, goal)
+
+
+def _hole_kind(hole: str) -> str:
+    m = re.fullmatch(r"\?([a-z]+)\d+", hole)
+    return m.group(1) if m else ""
+
+
+def induce_goal_variant(
+    generalized: Mapping[str, Any], heldout_goal: str
+) -> tuple[dict[str, str], dict[str, Any]] | None:
+    """Align a *verified* held-out wording to the same typed holes.
+
+    This is intentionally narrow: the held-out sentence must expose exactly one
+    extractable literal of each hole kind, in the same multiplicity as the
+    original template.  The caller still has to execute the instantiated steps
+    and pass the postcondition/sabotage/ownership gates before the variant is
+    persisted.  Ambiguous or control-heavy surfaces return None.
+    """
+    if not goal_variants.surface_is_safe(heldout_goal):
+        return None
+    param_order = list(generalized.get("param_order") or [])
+    if not param_order:
+        return None
+    needed: dict[str, int] = {}
+    for hole in param_order:
+        kind = _hole_kind(str(hole))
+        if not kind:
+            return None
+        needed[kind] = needed.get(kind, 0) + 1
+    # Automatic induction is admitted only when each typed kind occurs once.
+    # Two ?path holes (source/destination, old/new, ...) cannot be aligned by
+    # surface order alone; a paraphrase may reorder them.  Refuse rather than
+    # guess a role assignment.  Exact-template qualification still works.
+    if any(count != 1 for count in needed.values()):
+        return None
+    seen: dict[str, list[str]] = {}
+    for kind, value in _extract_goal_literals(heldout_goal):
+        if kind not in needed:
+            continue
+        bucket = seen.setdefault(kind, [])
+        if value not in bucket:
+            bucket.append(value)
+    if any(len(seen.get(kind, [])) != count for kind, count in needed.items()):
+        return None
+    bindings: dict[str, str] = {}
+    cursors: dict[str, int] = {}
+    for hole in param_order:
+        kind = _hole_kind(str(hole))
+        idx = cursors.get(kind, 0)
+        bindings[str(hole)] = seen[kind][idx]
+        cursors[kind] = idx + 1
+    if bindings == generalized.get("concrete_bindings"):
+        return None
+    inst_steps = _instantiate_obj(generalized.get("abstract_steps") or [], bindings)
+    inst_post = _instantiate_obj(generalized.get("abstract_postcondition") or {}, bindings)
+    variant = anti_unify_workflow(heldout_goal, inst_steps, inst_post)
+    # A paraphrase may reorder arguments.  Hole *names* are kind-local (?path0,
+    # ?str0), so the set must match even when the surface order differs.
+    if set(variant.get("param_order") or []) != set(param_order):
+        return None
+    if variant.get("concrete_bindings") != bindings:
+        return None
+    if variant.get("abstract_steps") != generalized.get("abstract_steps"):
+        return None
+    if variant.get("abstract_postcondition") != generalized.get("abstract_postcondition"):
+        return None
+    record = {
+        "goal_skeleton": variant["goal_skeleton"],
+        "goal_regex": variant["goal_regex"],
+        "skeleton_tokens": variant["skeleton_tokens"],
+    }
+    if not goal_variants.validate_variant(record, param_order):
+        return None
+    return bindings, record
 
 
 # --------------------------------------------------------------------------- #
@@ -1717,6 +1845,11 @@ def compile_and_qualify_skill(
 
     effective_heldout_goal = heldout_goal or goal
     heldout_bindings = bind_goal_parameters(generalized, effective_heldout_goal)
+    pending_variant: dict[str, Any] | None = None
+    if heldout_bindings is None and heldout_goal is not None:
+        induced = induce_goal_variant(generalized, heldout_goal)
+        if induced is not None:
+            heldout_bindings, pending_variant = induced
     if heldout_bindings is None:
         return {
             "schema": SCHEMA,
@@ -1887,14 +2020,20 @@ def compile_and_qualify_skill(
             import shutil
             shutil.rmtree(auto_twin_dir, ignore_errors=True)
 
-    artifact_payload = json.dumps({
+    if pending_variant is not None:
+        generalized["goal_variants"] = goal_variants.canonical_variants([pending_variant])
+    artifact_payload_obj = {
         "goal_skeleton": generalized["goal_skeleton"],
         "goal_regex": generalized["goal_regex"],
         "param_order": generalized["param_order"],
         "abstract_steps": generalized["abstract_steps"],
         "abstract_postcondition": generalized["abstract_postcondition"],
         "dominant_layer": elevated["dominant_layer"],
-    }, sort_keys=True)
+    }
+    variant_records = goal_variants.canonical_variants(generalized.get("goal_variants") or [])
+    if variant_records:
+        artifact_payload_obj["goal_variants"] = variant_records
+    artifact_payload = json.dumps(artifact_payload_obj, sort_keys=True)
     artifact_sha256 = hashlib.sha256(artifact_payload.encode("utf-8")).hexdigest()
     skill_id = "workflow." + artifact_sha256[:16]
 
@@ -1948,10 +2087,10 @@ def compile_and_qualify_skill(
                 skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                 param_order_json, steps_json, postcondition_json,
                 dominant_layer, artifact_sha256, ownership_receipt_json,
-                hit_count, created_ns
+                hit_count, created_ns, goal_variants_json
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE(
                 (SELECT hit_count FROM compiled_workflow_skills WHERE skill_id = ?), 0
-            ), ?)
+            ), ?, ?)
             """,
             (
                 skill_id,
@@ -1966,6 +2105,7 @@ def compile_and_qualify_skill(
                 json.dumps(gate_verdict, sort_keys=True),
                 skill_id,
                 time.time_ns(),
+                json.dumps(variant_records),
             ),
         )
         conn.commit()
@@ -2004,7 +2144,7 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             """
             SELECT skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                    param_order_json, steps_json, postcondition_json,
-                   dominant_layer, artifact_sha256
+                   dominant_layer, artifact_sha256, goal_variants_json
             FROM compiled_workflow_skills
             ORDER BY hit_count DESC, created_ns DESC
             """
@@ -2023,13 +2163,14 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             "abstract_postcondition": json.loads(r[6]),
             "dominant_layer": r[7],
             "artifact_sha256": r[8],
+            "goal_variants": json.loads(r[9] or "[]"),
         })
     _WORKFLOW_MEM_CACHE[key] = out
-    # Build multi-token inverted index over all skeleton tokens so lookup stays sub-millisecond
-    # even when a similar goal paraphrases one verb or omits an optional container noun.
+    # Multi-token inverted index over skill and verified-variant tokens so a
+    # paraphrase can retrieve the skill even when it shares no original verb.
     inv: dict[str, list[dict[str, Any]]] = {"__ALL_EMPTY__": []}
     for sk in out:
-        toks = sorted(set(sk.get("skeleton_tokens") or []))
+        toks = sorted(goal_variants.retrieval_tokens(sk))
         if not toks:
             inv["__ALL_EMPTY__"].append(sk)
         else:
@@ -2110,10 +2251,7 @@ def recall_and_execute_workflow(
 
     expanded_goal_words = _expand_workflow_synonyms(goal_words)
     for skill in _candidate_skills_for_words(goal_words, db_path):
-        skel_tokens = set(skill.get("skeleton_tokens") or [])
-        req_tokens = (skel_tokens - _OPTIONAL_CONTAINER_NOUNS) or skel_tokens
-        if req_tokens and not (req_tokens <= expanded_goal_words):
-            continue
+
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None:
             continue
@@ -2193,7 +2331,8 @@ def export_workflow_bundle(
             """
             SELECT skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                    param_order_json, steps_json, postcondition_json,
-                   dominant_layer, artifact_sha256, ownership_receipt_json, hit_count
+                   dominant_layer, artifact_sha256, ownership_receipt_json, hit_count,
+                   goal_variants_json
             FROM compiled_workflow_skills
             ORDER BY skill_id ASC
             """
@@ -2203,7 +2342,7 @@ def export_workflow_bundle(
 
     skills: list[dict[str, Any]] = []
     for r in rows:
-        skills.append({
+        skill = {
             "skill_id": r[0],
             "goal_skeleton": r[1],
             "goal_regex": r[2],
@@ -2215,7 +2354,13 @@ def export_workflow_bundle(
             "artifact_sha256": r[8],
             "ownership_receipt": json.loads(r[9]),
             "hit_count": int(r[10]),
-        })
+        }
+        # Keep legacy bundles byte-identical when no variant was admitted.
+        # Import already treats an absent field as the empty variant list.
+        variants = json.loads(r[11] or "[]")
+        if variants:
+            skill["goal_variants"] = variants
+        skills.append(skill)
 
     doc = {
         "schema": "PROJECT_BRAIN_COMPILED_WORKFLOWS_BUNDLE_V1",
@@ -2255,14 +2400,24 @@ def import_workflow_bundle(
                 continue
             sid = str(item.get("skill_id") or "")
             claimed_sha = str(item.get("artifact_sha256") or "")
-            canonical_payload = json.dumps({
+            variant_records = goal_variants.canonical_variants(item.get("goal_variants") or [])
+            param_order = list(item.get("param_order") or [])
+            if variant_records and not all(
+                goal_variants.validate_variant(v, param_order) for v in variant_records
+            ):
+                refusals.append({"skill_id": sid, "reason": "INVALID_GOAL_VARIANT"})
+                continue
+            canonical_payload_obj = {
                 "goal_skeleton": item.get("goal_skeleton"),
                 "goal_regex": item.get("goal_regex"),
                 "param_order": item.get("param_order"),
                 "abstract_steps": item.get("abstract_steps"),
                 "abstract_postcondition": item.get("abstract_postcondition"),
                 "dominant_layer": item.get("dominant_layer"),
-            }, sort_keys=True)
+            }
+            if variant_records:
+                canonical_payload_obj["goal_variants"] = variant_records
+            canonical_payload = json.dumps(canonical_payload_obj, sort_keys=True)
             actual_sha = hashlib.sha256(canonical_payload.encode("utf-8")).hexdigest()
             expected_sid = "workflow." + actual_sha[:16]
             if not claimed_sha or actual_sha != claimed_sha or sid != expected_sid:
@@ -2278,8 +2433,8 @@ def import_workflow_bundle(
                     skill_id, goal_skeleton, goal_regex, skeleton_tokens_json,
                     param_order_json, steps_json, postcondition_json,
                     dominant_layer, artifact_sha256, ownership_receipt_json,
-                    hit_count, created_ns
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    hit_count, created_ns, goal_variants_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     sid,
@@ -2294,6 +2449,7 @@ def import_workflow_bundle(
                     json.dumps(dict(receipt), sort_keys=True),
                     int(item.get("hit_count") or 0),
                     time.time_ns(),
+                    json.dumps(variant_records),
                 ),
             )
             accepted += 1
