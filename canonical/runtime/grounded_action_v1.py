@@ -656,7 +656,9 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     if forged_ids:
         have = {str(c.get("capability_id"))
                 for cl in merged for c in (cl.get("candidates") or [])}
-        pending = [{"capability_id": cid, "combined_score": 0.0}
+        goal_low = str(goal or "").lower()
+        pending = [{"capability_id": cid,
+                    "combined_score": 100.0 if cid.lower() in goal_low else 0.0}
                    for cid in forged_ids if cid not in have]
         if pending:
             merged = merged + [{"candidates": pending}]
@@ -760,6 +762,17 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 if s["capability_id"] == remembered:
                     chosen, why = s, "REMEMBERED_RESOLUTION"
                     break
+        if chosen is None:
+            try:
+                from canonical.runtime import procedure_memory_v1 as _PM
+                proc_hit = _PM.recall(goal)
+                if proc_hit and proc_hit.get("capability_id"):
+                    for s in survivors:
+                        if s["capability_id"] == proc_hit["capability_id"]:
+                            chosen, why = s, "REMEMBERED_PROCEDURE"
+                            break
+            except Exception:
+                pass
     if survivors and chosen is None:
         # A ZERO-SCORE ROW MAY NOT GATE A MATCHED ONE.
         # A forged capability is appended with combined_score 0.0 so it can be

@@ -59,18 +59,26 @@ FORMAT_VERBS = {
     "convert": "format", "turn": "format", "transform": "format", "export": "format",
     "make": "format", "produce": "format", "save": "format", "render": "format",
     "write": "format", "generate": "format", "serialise": "format", "serialize": "format",
+    "audit": "inspect", "inspect": "inspect", "analyze": "inspect", "analyse": "inspect",
+    "check": "inspect", "examine": "inspect", "review": "inspect",
+    "compute": "measure", "measure": "measure", "calculate": "measure",
+    "evaluate": "measure", "assess": "measure",
+    "extract": "extract", "pull": "extract", "obtain": "extract",
+    "harvest": "extract", "get": "extract", "read": "extract",
+    "total": "sum", "folder": "directory", "compare": "diff",
 }
 # Words that carry no task identity at all in this machine's sentences.
 FILLER = {
     "the", "a", "an", "this", "that", "these", "those", "please", "using", "with", "via",
-    "file", "files", "into", "from", "to", "and", "then", "of", "for", "in", "on", "it",
+    "file", "files", "document", "documents", "report", "reports", "source", "module", "code",
+    "cyclomatic", "out", "up", "into", "from", "to", "and", "then", "of", "for", "in", "on", "it",
     "canonical", "repository", "local", "path",
 }
 # Verbs that name a DIRECTION or an operation the register above must not absorb.
 # "compress" and "extract" are opposites; mapping both to "format" would be a shadowing bug.
 OPPOSITE_SENSITIVE = {
-    "compress", "extract", "unpack", "pack", "archive", "expand",
-    "read", "write", "create", "delete", "remove", "add", "append", "prepend",
+    "compress", "unpack", "pack", "archive", "expand",
+    "write", "create", "delete", "remove", "add", "append", "prepend",
     "sort", "shuffle", "merge", "split", "encode", "decode", "encrypt", "decrypt",
     "minify", "pretty", "resize", "crop", "rotate", "sum", "count", "average",
     "upload", "download", "install", "uninstall", "start", "stop",
@@ -80,6 +88,8 @@ OPPOSITE_SENSITIVE = {
 _DIRECTION = re.compile(
     r"\b(?:from\s+)?([a-z0-9_]+?)\s+(?:to|into)\s+([a-z0-9_]+)\b", re.IGNORECASE)
 
+_FORGED_ID = re.compile(r"\bforged\.[a-z0-9_.]+\b", re.IGNORECASE)
+_PATH_WITH_DIR = re.compile(r"\b(?:[\w.-]+/)+[\w.-]*?(?=\.[a-z0-9]{1,6}\b)", re.IGNORECASE)
 _TOKEN = re.compile(r"[a-z0-9]+")
 
 
@@ -164,8 +174,10 @@ def direction(text: str):
 
 def content_words(text: str) -> tuple:
     """The words that carry task identity, with formatting verbs folded and fillers dropped."""
+    cleaned = _FORGED_ID.sub(" ", str(text or ""))
+    cleaned = _PATH_WITH_DIR.sub(" ", cleaned)
     out = []
-    for raw in _TOKEN.findall(str(text or "").lower()):
+    for raw in _TOKEN.findall(cleaned.lower()):
         word = _stem(raw)
         if word in FILLER:
             continue
