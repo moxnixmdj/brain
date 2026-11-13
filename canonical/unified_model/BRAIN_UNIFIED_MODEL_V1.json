@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 425,
+  "knowledge_documents": 426,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6824,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "396f5d1ed8b4df49b460b3bba0e860f29cadd096112ad15a42a7977c339ed983"
+  "value": "aa130f6105dfb0d8ef202c019c42f11ff72a1a2f90c023f3445b4b22bcc59b9c"
  },
  "engines": [
   {
@@ -46103,6 +46103,84 @@
     "scope",
     "skill",
     "syntax"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 11048,
+   "headings": [
+    "A skill learns WHERE it applies, from executed observations, in five of them",
+    "The claim, bounded",
+    "Why this was missing",
+    "The measurement",
+    "Two-sided controls",
+    "Three traps this was built out of, each hit for real",
+    "What this does NOT say",
+    "Relation to the four requirements in the critique",
+    "Verdict on \"do it once ⇒ learned forever\""
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1.md",
+   "sha256": "5f121689dc5b82722e5012dc432b3182650327d2351c9f151a51c9589d936ad4",
+   "summary": "**Date:** 2026-11-12 **Carrier:** Arena session sandbox **Authority:** NONE — producer-run measurement on constructed fixtures **Modules:** `canonical/swe_kernel/skill_scope_acquisition_v1.py`, `canonical/tools/skill_scope_acquisition_probe_v1.py`, `canonical/tests/test_skill_scope_acquisition_v1.py` **Reproduce:** `python3 canonical/tools/skill_scope_acquisition_probe_v1.py` · `python3 -m pytest ",
+   "terms": {
+    "about": 3,
+    "against": 6,
+    "all": 6,
+    "already": 3,
+    "answer": 3,
+    "baseline.violates_own_spec": 6,
+    "bought": 5,
+    "boundary": 5,
+    "buys": 3,
+    "cannot": 3,
+    "canonical": 8,
+    "code": 4,
+    "computed": 4,
+    "each": 4,
+    "evidence": 6,
+    "fact": 7,
+    "failure": 7,
+    "model": 4,
+    "needs": 5,
+    "no": 10,
+    "none": 4,
+    "not": 27,
+    "nothing": 8,
+    "now": 8,
+    "observation": 5,
+    "observations": 7,
+    "one": 13,
+    "only": 8,
+    "over": 4,
+    "own": 4,
+    "rather": 7,
+    "real": 4,
+    "requirements": 4,
+    "returns": 8,
+    "round": 4,
+    "same": 8,
+    "scope": 8,
+    "shipped": 4,
+    "skill": 8,
+    "skills": 4,
+    "specification": 4,
+    "successes": 5,
+    "than": 10,
+    "three": 6,
+    "tree": 6,
+    "true": 4,
+    "were": 4,
+    "wrong": 4
+   },
+   "title": "A skill learns WHERE it applies, from executed observations, in five of them",
+   "title_terms": [
+    "applies",
+    "executed",
+    "five",
+    "learns",
+    "observations",
+    "skill"
    ]
   },
   {
@@ -77951,10 +78029,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1227,
+  "included_source_count": 1228,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "79e43b32d78162dd4a822b867406b120751a10b76a5906a6730a62421a73b4c2"
+  "source_tree_digest": "f548e9d0da5c6eedb214683ea5b55be3114be25505a18141cf209c0c60eae7a9"
  },
  "research_index": [
   {
@@ -194865,6 +194943,29 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SKILL_SCOPE_ACQUISITION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SKILL_SCOPE_ACQUISITION_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_SKILL_SCOPE_ACQUISITION_VERIFICATION_V1",
+   "sha256": "79582f8e7b5b6114114174e3258dad5c6e421ad4d1fb6d8422c998717f6449f1",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "acquisition": 1,
+    "applies": 1,
+    "executed": 1,
+    "five": 1,
+    "learns": 1,
+    "observations": 1,
+    "scope": 1,
+    "skill": 2,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-12",
    "id": "research:canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -195031,23 +195132,6 @@
     "spread": 1,
     "v2": 1,
     "verify": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
-   "sha256": "6f39a538f01faef96312f28d60d978314ce6b64163365486514a3bf06b4b9e3f",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "check": 1,
-    "standing": 1,
-    "v1": 1
    }
   },
   {
@@ -227518,6 +227602,31 @@
    }
   },
   {
+   "action_id": "A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2cadd77a58fae64b0d3c5fcf153a481f98e52182833031d34b4f982e39baeab5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_skill_learns_where_it_applies_from_executed_observations_20261112_v1": 1,
+    "applies": 1,
+    "compute_the_facts_a_target_can_be_observed_to_have_from_its_own_ast_and_its_own_executed_specification__spend_observations_until_the_trees_own_law_identifies_the_requirement__let_the_caller_own_realisability_so_no_experiment_is_invented__treat_a_non_firing_as_no_observation_rather_than_a_failure__and_refuse_with_a_named_reason_when_the_evidence_does_not_support_one_scope": 1,
+    "executed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learns": 1,
+    "observations": 1,
+    "skill": 1,
+    "skill_scope_acquisition_v1_ships__one_crystallized_boundary_lesson_buys_required_baseline_violates_own_spec_in_5_executed_observations_with_1_survivor__the_same_skill_goes_from_repairing_5_and_breaking_correct_code_on_3_to_repairing_5_and_breaking_0_by_refusing_before_any_edit__three_successes_alone_buy_nothing_and_the_law_refuses_to_name_a_requirement": 1,
+    "the_tree_could_store_a_success_and_a_failure_but_not_a_state__so_the_law_that_identifies_a_skills_applicability_had_nothing_to_read__every_boundary_stayed_undetermined_and_the_ledger_reported_exact_match_only_for_all_five_shipped_skills": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -235350,30 +235459,6 @@
     "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
     "turn": 1,
     "v1": 2
-   }
-  },
-  {
-   "action_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8ad765a6fbd0b5d8deeeb3a94bc7334e0980930750a68cc7a06327275a4231a5",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_wrong_generalisation_is_refused_only_where_a_check_exists__and_on_real_migrated_projects_the_check_could_not_run_at_all__0_of_42_files__because_no_test_module_imported_the_file_or_a_declared_dependency_was_not_installed": 1,
-    "check": 1,
-    "environment": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "reuse_the_rung_gradient_arms_and_check_class__add_isolated_venv_standing_of_declared_dependencies_manifest_named_missing_module_repair_a_per_path_test_entry_finder_with_direct_in_directory_indirect_confidence_and_a_ran_zero_tests_refusal__carry_the_manifests_in_the_corpus__then_remeasure_the_same_twelve_pull_requests_by_label": 1,
-    "round": 1,
-    "standing": 1,
-    "standing_the_check_is_the_environment_round_20261112_v1": 1,
-    "the_oracle_deficit_named_last_round_is_now_an_implemented_organ__standing_up_a_project_s_checks__and_the_verified_coverage_on_this_corpus_remains_zero_with_each_residual_named_per_project_instead_of_bucketed_half_half": 1,
-    "v1": 1
    }
   },
   {
