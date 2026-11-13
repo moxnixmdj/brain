@@ -31227,7 +31227,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 407,
+  "knowledge_documents": 408,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6807,
   "routing_tokens": 2373,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0e7f18de06a61c6c6a394d59688774c2cc93c36dad9c4eca48ae5607aa7b319a"
+  "value": "1ee26d1393abde578264521d3c34ddb2a3c4e4258ef792ac624c80c97389fc98"
  },
  "engines": [
   {
@@ -63293,6 +63293,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 5478,
+   "headings": [
+    "Workflow goal generalization — 2026-11-12",
+    "What shipped",
+    "What main already shipped",
+    "Merged-runtime repair",
+    "Local measurements",
+    "Honest verdict",
+    "External anchors"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WORKFLOW_GOAL_GENERALIZATION_20261112_V1.md",
+   "sha256": "c6ea33ce26f50b40794047f83247fed12e2d4efa0e5b8940b6407bc11d28d0db",
+   "summary": "Status: sandbox measurement and merged-runtime repair record. Authority: NONE. No capability, benchmark, family, ownership, or terminal credit is claimed.",
+   "terms": {
+    "10": 4,
+    "11": 2,
+    "15-suite": 2,
+    "2.0": 2,
+    "33": 2,
+    "admitted": 3,
+    "after": 3,
+    "answer": 3,
+    "artifact": 3,
+    "bridge": 3,
+    "canonical": 4,
+    "capability": 4,
+    "confined": 3,
+    "failed": 3,
+    "failures": 3,
+    "generalization": 3,
+    "goal": 5,
+    "guard": 5,
+    "held-out": 3,
+    "honest": 3,
+    "https": 4,
+    "main": 10,
+    "memory": 3,
+    "merged-runtime": 3,
+    "new": 3,
+    "no": 3,
+    "not": 9,
+    "one": 3,
+    "ownership": 3,
+    "pass": 3,
+    "passed": 4,
+    "path": 3,
+    "postcondition": 3,
+    "pr": 3,
+    "recall": 3,
+    "refusal": 3,
+    "repair": 5,
+    "retrieval": 4,
+    "shipped": 4,
+    "skipped": 3,
+    "so": 3,
+    "structural": 6,
+    "subtests": 3,
+    "typed": 4,
+    "variant": 6,
+    "variants": 4,
+    "verified": 4,
+    "workflow": 6
+   },
+   "title": "Workflow goal generalization — 2026-11-12",
+   "title_terms": [
+    "2026-11-12",
+    "generalization",
+    "goal",
+    "workflow"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7815,
    "headings": [
     "You Were Right All Along — 2026-11-12",
@@ -76436,10 +76510,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1209,
+  "included_source_count": 1210,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7d75372911d8f54a49277430301408a1cc53084882bb35bc923d2fdf6e889807"
+  "source_tree_digest": "6eb6ba2859e585957f139226f9dd1ca080f2b03f90d054222eb15bda3899f375"
  },
  "research_index": [
   {
@@ -237058,7 +237132,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d9a6c8c1444dd1e14ac8cec2a01a3ff473a9ecce9f29fd2d6cee1688f0c8e4f1",
+   "sha256": "7eb81b8a9e36ce9a9de0bdc8f03323a2db731c6ca7f9bee89ee41efff7084fcd",
    "status": "",
    "terms": {
     "20261112": 1,
