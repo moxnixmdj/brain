@@ -76,6 +76,12 @@
    ],
    "budget_s": 600,
    "note": "verified bound capability (independent test canonical.tests.test_code_tree_sitter_swe_v1); added 2026-11-13 after review"
+  },
+  "python.software.repair.apply.verified.v1": {
+   "effect_args": [
+    "output_path"
+   ],
+   "budget_s": 600
   }
  }
 }

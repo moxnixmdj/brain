@@ -198,7 +198,7 @@
   "stop_condition": "PR2_VERIFIED_PROBE_8_EXECUTED_VS_PREDICTED_GE8_ALL_ROUTED_ROWS_NAMED_5_EFFECT_DIRECTED_CONFINED_PASSES_4_HONEST_FAIL_CLOSED_RECEIPTS_PINS_STAND_GUARD_AT_CLEAN_TREE_BASELINE__WEB_VERIFIED_ED_2607_21051_AND_ASCENT_2610_05303_NAIVE_ONE_TRY_DISTILLATION_DESTABILIZES_ONLY_VERIFIED_EXPERIENCE_DISTILLS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-13T04:06:25Z",
+   "checked_at_utc": "2026-11-13T04:07:50Z",
    "max_age_hours": 24,
    "incumbent_route": "COMPILE_LAYER_WALL_32_OF_38__SEAM_LIVE_BUT_UNREACHABLE_FROM_REALISTIC_SENTENCES__WEIGHT_SPACE_QUESTION_UNANSWERED",
    "source_classes_checked": [
@@ -334,7 +334,7 @@
     }
    ],
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-13T04:06:25Z",
+    "checked_at_utc": "2026-11-13T04:07:50Z",
     "max_age_hours": 2,
     "selected_route": "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
     "status": "READY",
@@ -446,7 +446,7 @@
     },
     {
      "path": "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
-     "git_blob_sha": "9ec994fc4717ba420765724c3292213651cebae2"
+     "git_blob_sha": "34b6b0252521e2ff1415b65d6e8140016eac5358"
     },
     {
      "path": "canonical/tests/test_effect_directed_compile_v1.py",
