@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 404,
+  "knowledge_documents": 405,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6803,
+  "research_index_records": 6804,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "29a6714b775ddf643a0057f0c542b52113e2e9693b6a7f68e90c5fa08ccf89ce"
+  "value": "bed07712528d7d37608b095004589928e180360eb8761c5c2eeaf1c931020c50"
  },
  "engines": [
   {
@@ -44668,6 +44668,80 @@
     "repository",
     "rules",
     "working"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6397,
+   "headings": [
+    "An import is each file's own bookkeeping",
+    "The refusal this closes",
+    "The principle",
+    "Predictions — declared before the measurement run",
+    "Results (filled after the single measurement run)",
+    "What this does not claim"
+   ],
+   "kind": "DOCUMENT",
+   "path": "AN_IMPORT_IS_EACH_FILES_OWN_BOOKKEEPING_20261112_V1.md",
+   "sha256": "b4cb524ef49aa16e74a8313323e22ff2eeb3ff5f01c8aec35c9f034a94a1d8b5",
+   "summary": "Date: 2026-11-12 (T34). Engine: `canonical/swe_kernel/taught_actions/edit_by_example_v1.py`. Base: main `0d888623` (post-#6805, carries T33 `attribute_rename_undone`).",
+   "terms": {
+    "158": 3,
+    "adds": 3,
+    "after": 5,
+    "alone": 3,
+    "before": 3,
+    "code": 4,
+    "code-level": 3,
+    "corpus": 3,
+    "correct": 5,
+    "datetime": 5,
+    "declared": 3,
+    "different": 4,
+    "dissent": 5,
+    "each": 4,
+    "engine": 3,
+    "example": 7,
+    "examples": 3,
+    "file": 3,
+    "fresh": 6,
+    "held_out": 9,
+    "here": 3,
+    "import": 13,
+    "imports": 4,
+    "kind": 3,
+    "left": 5,
+    "lesson": 6,
+    "line": 4,
+    "mechanism": 6,
+    "mpl_get_cmap": 4,
+    "new": 4,
+    "no": 9,
+    "not": 13,
+    "one": 5,
+    "refusal": 9,
+    "run": 4,
+    "same": 7,
+    "seen": 7,
+    "showings": 7,
+    "strict": 6,
+    "t33": 7,
+    "t35": 4,
+    "target": 4,
+    "tests": 5,
+    "true": 4,
+    "two": 9,
+    "utcnow": 6,
+    "wrong": 6,
+    "yaml_safe_load": 4
+   },
+   "title": "An import is each file's own bookkeeping",
+   "title_terms": [
+    "bookkeeping",
+    "each",
+    "file",
+    "import",
+    "own"
    ]
   },
   {
@@ -76197,10 +76271,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1206,
+  "included_source_count": 1207,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b8b9e2f4a9700db37177a2bf1f6ad741b4684225711575026a3c58f2582830af"
+  "source_tree_digest": "978af5d180c9af6d2b5f3f3be2076e19e2a8d8237dc2e79fde4432db6ebac152"
  },
  "research_index": [
   {
@@ -220296,6 +220370,31 @@
     "v1": 2,
     "value": 2,
     "whole": 2
+   }
+  },
+  {
+   "action_id": "AN_IMPORT_IS_EACH_FILES_OWN_BOOKKEEPING_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/AN_IMPORT_IS_EACH_FILES_OWN_BOOKKEEPING_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/AN_IMPORT_IS_EACH_FILES_OWN_BOOKKEEPING_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "fb9a68cc39390efd5236c3ede0366d5c4785c5007d7351cbc722d2352f44562f",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "all_one_showing_and_two_showing_tables_byte_identical_to_6797__zero_wrong_writes_at_two_showings_preserved_on_all_tracked_sets__utcnow_stays_refused_for_its_true_cause__the_examples_disagree_in_substance": 1,
+    "an_import_is_each_files_own_bookkeeping_20261112_v1": 1,
+    "bookkeeping": 1,
+    "each": 1,
+    "files": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "import": 1,
+    "own": 1,
+    "set_aside_failing_all_import_groups_as_file_local_bookkeeping__bring_standing_names_by_extending_the_targets_own_single_plain_from_import_line_only_when_unambiguous__declare_four_predictions_and_push_before_measuring__measure_once__record_the_two_falsifications_instead_of_erasing_them": 1,
+    "the_lesson_level_refusals_at_two_showings__an_import_line_one_example_widened_and_another_left_alone_was_read_as_lesson_dissent_and_refused_the_whole_kind__import_bookkeeping_and_code_level_lessons_were_not_separated": 1,
+    "v1": 1
    }
   },
   {
