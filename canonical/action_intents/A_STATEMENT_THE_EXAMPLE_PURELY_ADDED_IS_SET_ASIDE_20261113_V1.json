@@ -7,7 +7,7 @@
  "route_id": "A_STATEMENT_THE_EXAMPLE_PURELY_ADDED_IS_SET_ASIDE_20261113_V1",
  "date": "2026-11-13",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "68374960837276a4d19f32caf39215cc99eb49ae",
+ "canonical_base_commit": "e432b2ea85e3e98aed72ddc61ed4972e78e688f4",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -107,7 +107,7 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "68374960837276a4d19f32caf39215cc99eb49ae",
+  "canonical_base_commit": "e432b2ea85e3e98aed72ddc61ed4972e78e688f4",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "AT_TWO_SHOWINGS_NO_KIND_IS_REFUSED_FOR_TANGLED_ADDITIONS_ANY_MORE__EVERY_REMAINING_AT_2_REFUSAL_IS_GENUINE_DISAGREEMENT_OR_A_MISSING_NAME__AND_THE_TEACH_PIPELINE_RUNS_AGAIN_ON_A_MACHINE_WHOSE_SANDBOX_STARTS",
