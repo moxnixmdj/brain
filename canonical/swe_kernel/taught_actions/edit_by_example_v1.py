@@ -72,7 +72,9 @@ names) is repeated like any other one-line statement.  An ``import`` line an exa
 along with the change when the new code needs its name, the file to edit does not provide that name
 anywhere, and the import can be found where the edit is made -- the standard library or the project
 itself; nothing is imported or run to decide that.  Where it cannot be found, the refusal names the
-import.  ``import`` lines an example removed are not repeated.
+import.  An import removed in an example may also be removed from a target, but only when an edited
+place read its name and the finished target has no syntactic use of it. This does not prove removal
+is safe for side effects, dynamic access or external users.
 
 A lesson file is JSON.  It holds the examples whole, line by line, and under ``teaches`` what they give:
 each change, the ways the changed code was used, the imports it leans on.  ``teaches`` is for the reader;
@@ -2130,21 +2132,24 @@ def written_once(text, places, what="the file", check_names=True, fail_at=None):
             if check_names:
                 names_still_hold(text, again, [place for place in places if fail_at is None or place[1] is not fail_at[1]],
                                  what)
-            return imports_taken_away(result, again, places)
+            active = [place for place in places if fail_at is None or place[1] is not fail_at[1]]
+            return imports_taken_away(result, again, active)
     raise Refused("the edited text of %s does not parse to the intended code" % what)
 
 
 def imports_taken_away(result, tree, places):
-    """The finished text without the import lines the examples removed, where nothing is at risk.
+    """Remove some example-removed imports after a syntactically related edit.
 
-    A line goes only when the examples all removed it, this file holds exactly that statement on lines
-    of its own without a comment, and no code in the finished file reads or writes the name anywhere.
-    Anything less certain leaves the line where it is -- leaving an import is never wrong the way
-    removing a used one would be.
+    A line goes only when a successfully rewritten place actually read the name before the edit,
+    the examples recorded its removal, this file holds exactly that import on lines of its own
+    without a comment, and no code in the finished file reads or writes the name.  This is a
+    syntactic safeguard, not proof that removing an import has no side effects or external users.
     """
     take = {}
-    for _, _, rule, _ in places:
-        take.update(getattr(rule, "take", {}))
+    for _, node, rule, _ in places:
+        read = {part.id for part in ast.walk(node)
+                if isinstance(part, ast.Name) and isinstance(part.ctx, ast.Load)}
+        take.update({name: line for name, line in getattr(rule, "take", {}).items() if name in read})
     for name in sorted(take):
         wanted = shape(ast.parse(take[name]).body[0])
         found = [statement for statement in tree.body if is_import(statement) and shape(statement) == wanted]

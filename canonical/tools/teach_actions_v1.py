@@ -525,6 +525,14 @@ def carried_along(text: str) -> str:
     Knowledge two programs share may live in one sibling file -- but at teaching time that sibling's
     source is folded in, bound under the same name, and the program is self-contained again.
     """
+    # Some programs also support direct execution using an absolute-import fallback.
+    # Replace the whole known wrapper, not just the indented relative import: the
+    # sandbox contains neither the package nor that fallback import.
+    wrapper = re.compile(
+        r"^try:\n    from \. import (\w+) as (\w+)\n"
+        r"except ImportError:[^\n]*\n"
+        r"    from canonical\.swe_kernel\.taught_actions import \1 as \2\n", re.M)
+    text = wrapper.sub(lambda match: "from . import %s as %s\n" % match.groups(), text)
     pattern = re.compile(r"^from \. import (\w+) as (\w+)[ \t]*\n", re.M)
     for module_name, bound_name in pattern.findall(text):
         source = (PROGRAMS / (module_name + ".py")).read_text(encoding="utf-8")
