@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 427,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6825,
+  "research_index_records": 6826,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5da77dce551d224909d22a7d24bc926f03254761f20514942a2719d64002d5f2"
+  "value": "1bc7cef356946496252499b9948322f0d6039b7b2bf868e2c68e5b405e74f8d3"
  },
  "engines": [
   {
@@ -231932,6 +231932,35 @@
     "one": 3,
     "set": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "419b9cb483f46f795de27878d2531e72967ef232f2a8b0b47d383f2c2d8114c8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "accumulate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learning": 1,
+    "learning_does_not_accumulate_a_pool_of_lessons_writes_lines_nobody_wrote_20261112_v1": 1,
+    "lessons": 1,
+    "lines": 1,
+    "load_every_lesson_the_corpus_yields_and_score_one_fixed_target_set_under_a_growing_pool__verify_every_row_with_a_second_scorer_that_shares_no_input_with_the_first__and_declare_predictions_before_running": 1,
+    "nobody": 1,
+    "not": 1,
+    "pool": 1,
+    "the_owners_thesis_rests_on_composition__that_a_lesson_keeps_working_while_other_lessons_are_loaded__and_no_round_had_ever_measured_a_pool__every_recorded_round_scores_one_lesson_two_lessons_or_the_choice_of_demonstration__so_the_one_assumption_the_whole_roadmap_stands_on_was_unmeasured": 1,
+    "the_tree_can_now_state_that_experience_does_not_accumulate__a_pool_of_52_lessons_writes_39_lines_no_developer_wrote_where_a_pool_of_5_writes_none__and_that_the_mechanism_is_missing_ownership_not_a_weak_matcher": 1,
+    "v1": 1,
+    "writes": 1,
+    "wrote": 1
    }
   },
   {
