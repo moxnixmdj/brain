@@ -699,6 +699,21 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                                  "goal_paths": own_paths})
                 continue
 
+            # 1a-bis. ENTITY CONTRADICTION -- the row counts one kind of thing and the
+            # sentence asks for another. `kind_contradiction` above compares the FILE the
+            # sentence names; this compares the ENTITY it asks about, which is the axis a
+            # "count" question varies along and that nothing was checking.
+            #
+            # Measured 2026-11-12: eight different counting questions about one file --
+            # if statements, functions, lines, classes, imports, comments, todos,
+            # characters -- all returned VERIFIED_ACTION carrying the SAME number, 28.
+            # Each was a correct answer to a question nobody asked.
+            if WP.entity_contradiction(cid, goal):
+                rejected.append({"capability_id": cid,
+                                 "why": "ENTITY_ASKED_FOR_IS_NOT_WHAT_THIS_COUNTS",
+                                 "asked": sorted(WP.countable_entities_in(goal))})
+                continue
+
             # 1b. PERCEPTION
             already = set(str(x) for x in (established_effects or ()))
             need = [e for e in (orphans.get(cid) or []) if e not in already]

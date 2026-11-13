@@ -49,6 +49,7 @@ DESIGN RULES, FROM FIRST PRINCIPLES.
 from __future__ import annotations
 
 import os
+import re
 import shutil
 from pathlib import Path
 
@@ -744,3 +745,92 @@ def needed_effects(registry, capability_ids):
     for cid in capability_ids or ():
         need |= set(orphans.get(str(cid)) or ())
     return need
+
+
+# ------------------------------------------------------------------------------------------
+# WHAT A CAPABILITY CAN COUNT, NOT JUST WHAT FILE IT CAN READ.
+#
+# Every filter in this module compares a capability against the FILE the sentence names.
+# None of them compares it against the ENTITY the sentence asks about, and that is the gap
+# a "count" question falls into with nothing to catch it.
+#
+# MEASURED 2026-11-12. `python.source.definition_count.v1` declares exactly one effect --
+# `python.source.definition_count` -- and no notion of which entities it can count. Given a
+# file with 28 functions, 97 if-statements and 1029 lines, all eight of these sentences
+# returned `VERIFIED_ACTION` carrying the SAME number, 28:
+#
+#     count the if statements / functions / lines / classes
+#           / imports / comments / todos / characters   in <file>
+#
+# The adapter was not lying: it counts defs and classes, and it said 28. The VERIFICATION
+# was not lying either: it re-ran the adapter and the adapter agreed. The defect is that
+# nothing compared WHAT WAS ASKED FOR against WHAT THE ROW CAN DO, so a correct answer to a
+# different question was certified as an answer to this one.
+#
+# This is the failure the owner named: a system that recalls a procedure and does not check
+# that the procedure answers THIS question. Word overlap cannot check it -- "count the
+# functions" and "count the if statements" share every word except the one that matters.
+# ------------------------------------------------------------------------------------------
+
+# The entities a "count N in a source file" question can name, mapped to the words that name
+# them. Deliberately narrow: it covers the entities this repository can actually count, so a
+# row is only contradicted when the truth is known. An entity outside this table is never a
+# contradiction -- not knowing is not disagreeing (the same rule `kind_contradiction` uses).
+COUNTABLE_ENTITIES = {
+    "function": ("function", "functions", "method", "methods", "def", "defs",
+                 "definition", "definitions", "function and class", "function and class definitions"),
+    "class": ("class", "classes"),
+    "if_statement": ("if", "if statement", "if statements", "branch", "branches",
+                     "conditional", "conditionals"),
+    "line": ("line", "lines", "loc", "line of code", "lines of code"),
+    "import": ("import", "imports", "import statement", "import statements"),
+    "comment": ("comment", "comments"),
+    "character": ("character", "characters", "char", "chars"),
+    "todo": ("todo", "todos", "fixme", "fixmes"),
+}
+
+# Which entities each counting capability can actually answer for. A row absent from this
+# table is never contradicted -- the table states a fact about a row, it does not assume one.
+_COUNTABLE_BY_CAPABILITY = {
+    "python.source.definition_count": {"function", "class"},
+    "python.source.definition_count.v1": {"function", "class"},
+}
+
+
+def countable_entities_in(text):
+    """The entities a sentence asks to be counted, as canonical kind names.
+
+    Reads the words that FOLLOW a counting verb. "count the lines in X" names `line`;
+    "count the functions in X" names `function`. A sentence that names no known entity
+    returns an empty set, which is the signal to make no claim at all.
+    """
+    low = re.sub(r"[`'\"]", " ", str(text or "").lower())
+    low = re.sub(r"\s+", " ", low)
+    if not re.search(r"\b(?:count|counting|number of|how many|total number of)\b", low):
+        return set()
+    found = set()
+    for kind, words in COUNTABLE_ENTITIES.items():
+        for word in words:
+            # whole-word, so "imports" is not read out of "important", and "class" is not
+            # read out of "classification" -- the same defect `_kinds_of` documents.
+            if re.search(r"(?<![a-z0-9])" + re.escape(word) + r"(?![a-z0-9])", low):
+                found.add(kind)
+                break
+    return found
+
+
+def entity_contradiction(capability_id, goal):
+    """True when the sentence asks for a count this capability cannot produce.
+
+    Fires only when BOTH sides are known and the sets are disjoint: the sentence names at
+    least one countable entity, and the row declares the entities it can count, and none of
+    the asked-for entities is among them. An undeclared row, or an unrecognised noun, is
+    never a contradiction.
+    """
+    asked = countable_entities_in(goal)
+    if not asked:
+        return False
+    declared = _COUNTABLE_BY_CAPABILITY.get(str(capability_id))
+    if not declared:
+        return False
+    return not (asked & declared)
