@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 428,
+  "knowledge_documents": 429,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6824,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "02cc39bba93e78827fdfa5eadd9eba7c2b1129ee416a08261e4013cd410ff8c8"
+  "value": "6611c80f948a9c03ed182f23bd75688db36e00b4fa5c2ca0cd7478f330ee3a2a"
  },
  "engines": [
   {
@@ -63920,6 +63920,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9126,
+   "headings": [
+    "Experience distillation: evidence and pilot readiness (2026-11-13)",
+    "Answer and research",
+    "What exists here, and what does not follow",
+    "First useful experiment, before deployment",
+    "Delivery status"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WEIGHT_SPACE_EXPERIENCE_AUDIT_20261113.md",
+   "sha256": "cfde2c9d0a60b57e515b939a5afa96b2d98d4ec57898e2d328c1ea98e50a9f38",
+   "summary": "Adding a trainable model, persistent adapters, external memory and an independent verifier is a plausible research direction, not proof of universal computer use, learning a general rule after one example, retention forever, or sentience. Memory can support useful generalization without weight updates. Weight changes can improve a policy but can also forget, overfit, absorb poisoned data, or make ",
+   "terms": {
+    "296": 3,
+    "action": 6,
+    "adapter": 3,
+    "against": 3,
+    "agent": 3,
+    "audit": 3,
+    "before": 3,
+    "canonical": 3,
+    "cases": 4,
+    "checkpoint": 3,
+    "checks": 3,
+    "coding": 3,
+    "conditioned": 4,
+    "data": 6,
+    "distillation": 4,
+    "each": 3,
+    "earlier": 3,
+    "establish": 3,
+    "evidence": 3,
+    "experience": 7,
+    "frozen": 3,
+    "hashes": 3,
+    "history": 3,
+    "https": 4,
+    "independent": 5,
+    "learning": 6,
+    "lora": 4,
+    "measure": 3,
+    "memory": 6,
+    "metadata": 3,
+    "model": 10,
+    "narrow": 3,
+    "no": 7,
+    "not": 31,
+    "passes": 4,
+    "plus": 4,
+    "policy": 4,
+    "records": 6,
+    "report": 5,
+    "separate": 5,
+    "task": 8,
+    "tasks": 4,
+    "teacher": 8,
+    "tests": 5,
+    "training": 8,
+    "transfer": 6,
+    "weight": 4,
+    "weights": 6
+   },
+   "title": "Experience distillation: evidence and pilot readiness (2026-11-13)",
+   "title_terms": [
+    "2026-11-13",
+    "distillation",
+    "evidence",
+    "experience",
+    "pilot",
+    "readiness"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 12630,
    "headings": [
     "What 2026 measured about learning from one run — and what this tree kept",
@@ -78189,10 +78263,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1230,
+  "included_source_count": 1231,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d35f3a575ab39c266045be6ebdac9b43b84173491abc427f7c7a69b69aef297c"
+  "source_tree_digest": "f9240c6888b15469638fed58eb9110f1d591b00a608fd38d339ad8a252836dcc"
  },
  "research_index": [
   {
