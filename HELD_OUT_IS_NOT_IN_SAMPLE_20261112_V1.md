@@ -25,8 +25,28 @@ The result is worse than the in-sample number, and that is the point:
 
 The in-sample figure for the whole design corpus was **56.87%**, and on its two PEP 585 pull
 requests the operator reached **495/500 (99.0%)**. On four pull requests it was not designed on,
-the same operator is **37.52%**. The in-sample utc success — `Project-Go-Forward#483`, 150/155 —
-did not transfer at all: **8.54%**, and the operator adds nothing.
+the same operator is **37.52%**.
+
+## Correction, same day: the utc number was partly the harness
+
+The `8.54%` above is measured with the organ's own import check, run from this repository's
+working directory. The held-out utc projects import a **project-local helper** (`timeutil`,
+`lib`), which is not on this sandbox's path, so the organ refuses with "nothing named 'timeutil'
+can be found in this project" — a true statement about the sandbox, and a false one about the
+project. Re-running with `check_names=False`, which assumes every project-local import resolves
+as it would in the file's own checkout, gives an **upper bound**:
+
+| class | arm | right | developers' changes | coverage | precision | wrong |
+|---|---|---:|---:|---:|---:|---:|
+| utc | organ, project modules assumed | **140** | 410 | **34.15%** | 60.61% | 65 |
+| PEP 585 | family, project modules assumed | 197 | 525 | 37.52% | 75.48% | 51 |
+
+So the earlier sentence "the utc success did not transfer at all" was **wrong**, and this is the
+correction. The transfer is 8.54% under the strict check and 34.15% under the assumption; the
+truth for a real edit lies between, because a real checkout resolves the import *and* checks the
+names. What survives is the quality problem: at the upper bound the utc arm makes **65 wrong
+changes** and its precision is **60.61%**, and `ContaAutonomo#121` transfers only 30 of 215
+changes. The concept is still not learned; it is not true that nothing transferred.
 
 ## What transferred, and what did not
 
@@ -40,14 +60,14 @@ Per pull request:
 | `agencyenterprise/draft-detective#858` | PEP 585 + PEP 604 | 10/80 | 10 |
 | `mozilla/bugbug#7062` | utc | 19/50 | 19 |
 | `mozilla/bugbug#7463` | utc | 16/50 | 16 |
-| `zkaelxz/U00#1831` | utc helper | 0/95 | 0 |
-| `mborchuk/ContaAutonomo#121` | utc helper | 0/215 | 0 |
+| `zkaelxz/U00#1831` | utc helper | 0/95 | 0 (72/95 when the helper is assumed) |
+| `mborchuk/ContaAutonomo#121` | utc helper | 0/215 | 0 (30/215 when the helper is assumed) |
 
 **PEP 585 transfers partially.** Two projects modernise and the operator follows them
 (`pyVHDLModel` 108/150, `agent-kernel` 79/175); two mix the change with PEP 604 unions or carry
 an import-only example, and the operator cannot read the direction from them.
 
-**The utc class does not transfer, and the reason is the interesting part.** The two successful
+**The utc class transfers poorly, and the reason is the interesting part.** The two successful
 in-sample files changed `datetime.utcnow()` to `datetime.now(UTC)`. The held-out projects do not
 do that:
 
@@ -56,10 +76,12 @@ created_at = db.Column(db.DateTime, default=utcnow)      # from timeutil import 
 first_seen = clock.utcnow().isoformat()                  # from lib import clock
 ```
 
-They replace the deprecated call with **a project-local clock helper**. What our operator learned
-was the *syntax* of one replacement, not the *concept* "stop using a naive UTC clock." That is
-exactly the conceptual understanding the critique says is missing. The measurement now says it,
-with numbers, instead of leaving it as an opinion.
+They replace the deprecated call with **a project-local clock helper**. When the helper's import
+is assumed to resolve, the organ follows it in three of the four projects — which is real
+transfer of a structural rule — but at 60.6% precision with 65 wrong changes, and `U00` reaches
+72/95 while `ContaAutonomo` reaches 30/215. What it learned is the *shape* of one replacement,
+not the *concept* "stop using a naive UTC clock"; that is why the quality collapses when the
+surrounding code differs. The concept is still missing, but "nothing transferred" was too strong.
 
 ## The four requirements, taken one at a time
 
@@ -72,12 +94,13 @@ The 2026 evidence says this is the strongest lever (GEN-1.5: one demo 59%, ten g
 83%; Continual-ARC: weight training is the only family that gains on unseen tasks).
 
 **2. Conceptual understanding.** Operationalised honestly, this is *does the learned thing apply
-when the surface form changes*. The utc result says no: the operator captured a spelling, not a
-concept. A model with broad code priors, or a semantic layer that maps a helper to its role, is
+when the surface form changes*. The utc result says **partly**: with the project's helper assumed
+to resolve, the structural rule transfers to 34.15%, but at 60.61% precision with 65 wrong
+changes. The rule captured the shape of one replacement, not the concept. A model with broad code priors, or a semantic layer that maps a helper to its role, is
 what would close this. Hand-written operators will not, one at a time.
 
 **3. Transfer across domains.** Measured above. PEP 585 transfers at 37.52% to four unseen
-projects; utc at 8.54%. The operator is not a lookup table — it changes code by structure, and
+projects; utc at 8.54% strict, 34.15% with the project's helper assumed. The operator is not a lookup table — it changes code by structure, and
 it changes files it never saw — but its transfer is narrow and class-specific.
 
 **4. Reasoning.** Not measurable in this corpus. The only proxy available is verification: a
@@ -99,7 +122,7 @@ would also be false. It is a **small, typed inductive bias with a measured trans
 1. **Evaluation bias.** The project kept measuring on its design corpus. This is now fixed by
    this instrument; future claims must carry a held-out number.
 2. **No learned prior.** Hand-written operators cover classes someone anticipated. The utc
-   failure is the price. Weight training is the known fix and is blocked by the spend/model
+   quality collapse is the price. Weight training is the known fix and is blocked by the spend/model
    constraint.
 3. **No verification at scale.** Preference without tests: precision is agreement, not
    correctness. The training path needs tests as its reward signal, and so does the operator
@@ -150,3 +173,6 @@ a receipt. `truth.achieved` stays false.
 * No project's tests were run; precision is agreement with the developers.
 * The operator's family was chosen on the earlier corpus; this measures transfer of that choice,
   not of a model trained from scratch.
+* The "project modules assumed" arm disables the name check (`check_names=False`); it is an upper
+  bound, not a verified edit. A real checkout resolves the import and still checks the names, so
+  the truth is between the strict and assumed numbers.
