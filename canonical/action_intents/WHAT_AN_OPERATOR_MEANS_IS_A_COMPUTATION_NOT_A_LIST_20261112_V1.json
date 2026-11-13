@@ -1,0 +1,484 @@
+{
+ "action_id": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1",
+ "action_intent_id": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "GENERALIZABLE WAS A FROZEN 16 ENTRY LIST WHOSE COMMENT CLAIMED ITS MEMBERS MEAN THE SAME THING ACROSS SIX LANGUAGES AND NOTHING COMPUTED THAT CLAIM__EXECUTED HERE IT IS FALSE FOR PERCENT AND SLASH__MEANWHILE THE SHIPPED RUST LESSON DIFFERING BY EXACTLY ONE OPERATOR TOKEN WAS REFUSED BECAUSE RANGE OPERATORS WERE ABSENT__SPLIT THE TWO QUESTIONS THE LIST CONFLATED__Q1 STRUCTURAL STAYS A SET__Q2 SEMANTIC IS PAIR RELATIVE AND IS NOW COMPUTED BY EXECUTING THE OPERATOR IN EVERY TOOLCHAIN PRESENT__GATE WIRED INSIDE PROPOSE_OPERATOR_SWAPS WHERE BOTH LANGUAGES ARE KNOWN",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "causal_evidence": "THE_FOUR_DECLARED_PREDICTIONS_PRECEDE_THE_MEASUREMENT_IN_BRANCH_HISTORY_AND_PUSH_TIME_AND_ALL_HELD__THE_IS_SET_INJECTION_IS_GONE_WITH_THE_ONE_SHOWING_TABLES_BYTE_IDENTICAL",
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/operator_semantics_v1.py",
+   "canonical/swe_kernel/operator_generalization_v1.py",
+   "canonical/tests/test_operator_semantics_v1.py",
+   "canonical/tests/test_shipped_skill_memory_v1.py",
+   "canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
+   "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.md"
+  ],
+  "route_class": "ADAPT"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_ABSOLUTE_MEMBERSHIP_TEST_WAS_ANSWERING_A_PAIR_RELATIVE_SEMANTIC_QUESTION__SO_THE_LIST_WAS_UNSOUND_FOR_TWO_OPERATORS_IT_ADMITTED_AND_TOO_NARROW_FOR_A_REAL_SHIPPED_LESSON_IT_REFUSED__AND_THE_PRODUCTION_CALL_SITE_TOOK_THE_PROPOSAL_LANGUAGE_FROM_THE_INSTANCE_WITH_NO_GUARD_WHILE_ITS_SIBLING_HYPOTHESIS_GUARDED_ON_IT",
+ "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "ONE_ABSOLUTE_MEMBERSHIP_TEST_WAS_ANSWERING_A_PAIR_RELATIVE_SEMANTIC_QUESTION__SO_THE_LIST_WAS_UNSOUND_FOR_TWO_OPERATORS_IT_ADMITTED_AND_TOO_NARROW_FOR_A_REAL_SHIPPED_LESSON_IT_REFUSED__AND_THE_PRODUCTION_CALL_SITE_TOOK_THE_PROPOSAL_LANGUAGE_FROM_THE_INSTANCE_WITH_NO_GUARD_WHILE_ITS_SIBLING_HYPOTHESIS_GUARDED_ON_IT",
+ "date": "2026-11-12",
+ "expected_parent_change": "THE_GENERALISER_BECOMES_SOUNDER_AND_WIDER_AT_ONCE__PERCENT_AND_SLASH_REFUSED_WHERE_EXECUTION_WITNESSES_DIVERGENCE_AND_KEPT_WHERE_IT_DOES_NOT__THE_RUST_RANGE_LESSON_REACHES_A_FILE_IT_WAS_NEVER_TAUGHT_ON__GENERALIZABLE_SHIPPED_SKILLS_2_OF_5_TO_3_OF_5__EVERY_REFUSAL_NOW_NAMES_A_COMPUTED_VERDICT_INSTEAD_OF_AN_ABSENT_TOKEN",
+ "expected_parent_frontier_change": "GENERALIZABLE_SHIPPED_SKILLS_3_OF_5__FROZEN_LIST_AUDIT_REFUTES_PERCENT_AND_SLASH_BY_WITNESSED_COUNTEREXAMPLE__GATE_MATRIX_13_PAIRS_EACH_WITH_BASIS_AND_STRENGTH__CRASH_KEYERROR_PERCENT_EQUALS_FROM_COMPOSING_WITH_MAINS_NEW_AUGMENTATION_REFUSED_BY_NAME__99_TESTS_PASSING__11_OF_11_MUTATIONS_KILLED__DECLARATION_FLOOR_HELD_595__45_SUITE_BATCH_IDENTICAL_AT_9_FAILED_7_ERRORS_WITH_PASSED_505_TO_521__ROUND_D_LEDGER_UNMOVED",
+ "explicit_user_authorization": "Owner decisions in this session, 2026-11-12. The owner's standing directive is that Problem 2 (Generalization) is NOT solved and must be solved perfectly with the smartest solutions in the fastest way; that thinking must start from first principles and detect the real limiting factor; that bad ideas must be killed before implementing; that solutions exist in the tree under non-obvious names and must be searched for and reused before building; and that the work must always be pushed and merged. The owner also rejects unearned universal claims and requires an explicit what-is-real / what-is-not verdict each round, which this action supplies in sections 8 and 9 of its claim document, including a checked answer about a document landed on main during this round that declares Problem 2 COMPLETELY SOLVED.",
+ "falsification_condition": "A_TRACKED_NUMBER_MOVES_AGAINST_ITS_DECLARATION__OR_THE_AUDIT_REPORTS_NO_REFUTED_ENTRY_WHILE_THE_TOOLCHAINS_ARE_PRESENT__OR_THE_RUST_LESSON_FAILS_TO_REACH_THE_UNTAUGHT_VICTIM__OR_A_CROSS_LANGUAGE_PERCENT_PROPOSAL_IS_STILL_EMITTED__OR_THE_FLOOR_RISES_ABOVE_595__OR_ANY_OF_THE_11_MUTATIONS_SURVIVES__OR_THE_45_SUITE_BATCH_GAINS_A_FAILURE_NOT_PRESENT_ON_THE_UNMODIFIED_BASELINE",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_OBLIGATIONS_NAMED_ARE_COMPUTER_USE_OBLIGATIONS__A_TRIED_EDIT_COUNTS_TOWARD_THEM_ONLY_WHERE_THE_PROJECTS_OWN_CHECK_NOTICES_THE_EDITED_PLACE_FAILING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS_NOT_PUBLIC_RUNNER_EVIDENCE__DECLARED_FIRST__THE_FROZEN_LISTS_OWN_CLAIM_EXECUTED_AND_REFUTED_FOR_TWO_OF_ITS_SIXTEEN_ENTRIES__THE_UNBLOCKED_LESSON_DEMONSTRATED_ON_A_FILE_IT_WAS_NEVER_TAUGHT_ON__BOTH_DIRECTIONS_OF_THE_GATE_MEASURED__AND_THE_BASELINE_FOR_THE_BATCH_RUN_MEASURED_ON_UNMODIFIED_CODE_SO_NO_PRE_EXISTING_FAILURE_IS_BORROWED",
+ "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN__THEN_RECORD_STATES_INSTEAD_OF_COUNTS_IN_THE_SKILL_PROVENANCE_SO_APPLICABILITY_V1_CAN_IDENTIFY_A_BOUNDARY_AND_SELECT_CONTRAST_HAS_A_POOL__AND_REPLACE_THE_4_KEY_DUALS_TABLE_WITH_A_COMPUTATION",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/swe_kernel/operator_generalization_v1.py",
+  "canonical/swe_kernel/rule_scope_learning_v1.py",
+  "canonical/swe_kernel/boundary_disjunction_normalization_v1.py",
+  "canonical/tools/cross_language_lesson_transfer_probe_v1.py",
+  "canonical/runtime/applicability_v1.py",
+  "canonical/swe_kernel/skill_scope_ledger_v1.py",
+  "A_CHECK_THAT_FINDS_THE_CLASS_20261104_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "WEAKENING_THE_ROUND_TRIP_REPRODUCTION_CHECK_TO_FORCE_UTCNOW_TO_LEARN__REJECTED__THE_EXAMPLES_GENUINELY_DISAGREE__DATETIME_UTC_VERSUS_TIMEZONE_UTC__ANY_WRITE_WOULD_CONTRADICT_ONE_EXAMPLE",
+   "ERASING_OR_REWRITING_THE_FALSIFIED_PREDICTIONS_AFTER_THE_RUN__REJECTED__THE_MISSES_ARE_THE_FINDING_AND_STAY_IN_THE_REPORT",
+   "ADDING_A_PARALLEL_IMPORT_LINE_INSTEAD_OF_EXTENDING_THE_FILES_OWN__REJECTED__PEOPLE_WIDEN_THE_EXISTING_LINE__A_PARALLEL_LINE_IS_NOT_WHAT_ANY_EXAMPLE_SHOWED",
+   "GUESSING_AMONG_SEVERAL_CANDIDATE_IMPORT_LINES_OR_TAKEN_NAMES__REJECTED__AMBIGUITY_REFUSES"
+  ],
+  "expected_parent_level_state_change": "GENERALIZABLE_SHIPPED_SKILLS_3_OF_5__FROZEN_LIST_AUDIT_REFUTES_PERCENT_AND_SLASH_BY_WITNESSED_COUNTEREXAMPLE__GATE_MATRIX_13_PAIRS_EACH_WITH_BASIS_AND_STRENGTH__CRASH_KEYERROR_PERCENT_EQUALS_FROM_COMPOSING_WITH_MAINS_NEW_AUGMENTATION_REFUSED_BY_NAME__99_TESTS_PASSING__11_OF_11_MUTATIONS_KILLED__DECLARATION_FLOOR_HELD_595__45_SUITE_BATCH_IDENTICAL_AT_9_FAILED_7_ERRORS_WITH_PASSED_505_TO_521__ROUND_D_LEDGER_UNMOVED",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "DELETE__NOTHING_TO_DELETE",
+    "BYPASS_BY_KEEPING_THE_TWO_EXAMPLE_FILES_AROUND__THAT_IS_WHAT_THE_OWNER_ASKS_TO_END",
+    "REUSE_THE_REPAIR_LESSON_STORE__IT_KEEPS_TOKEN_RULES_CHECKED_BY_TESTS_AND_CANNOT_BE_READ_FROM_INSIDE_THE_SANDBOX",
+    "SUBSTITUTE_AN_EXTERNAL_TOOL__NONE_INSTALLED"
+   ],
+   "evidence": [
+    "EXECUTED__MINUS_7_PERCENT_3_IS_2_IN_PYTHON_AND_MINUS_1_IN_JAVASCRIPT_AND_C_PLUS_PLUS",
+    "EXECUTED__7_SLASH_2_IS_3_POINT_5_IN_PYTHON_AND_JAVASCRIPT_AND_3_FOR_C_PLUS_PLUS_INTEGERS",
+    "EXECUTED__THE_SHIPPED_RUST_RULE_DIFFERS_BY_EXACTLY_ONE_OPERATOR_TOKEN_AND_DERIVE_OPERATOR_SWAP_RETURNED_NONE",
+    "READ__RULE_SCOPE_LEARNING_LINE_130_TAKES_THE_PROPOSAL_LANGUAGE_FROM_THE_INSTANCE_AND_SCOPE_OPERATOR_HAD_NO_LANGUAGE_GUARD_WHILE_SCOPE_STATEMENT_DID",
+    "EXECUTED__COMPOSING_THE_GATE_WITH_MAINS_NEW_AUG_ELIGIBLE_RAISED_KEYERROR_PERCENT_EQUALS"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_AND_CLOSED__THE_BLOCKER_WAS_ONE_ABSOLUTE_MEMBERSHIP_TEST_STANDING_IN_FOR_A_PAIR_RELATIVE_SEMANTIC_QUESTION__NOT_AN_ABSENT_CAPABILITY",
+   "surviving_causal_blocker": "A_TANGLED_HABIT_THAT_IS_NEITHER_AN_ASSIGNED_NAME_NOR_DISSENTED_BY_ANY_EXAMPLES_CODE_CAN_STILL_ENTER_A_MULTI_EXAMPLE_LESSON"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "THE_REDUCED_STANDING_CANDIDATE__KILLED_BY_THE_COINCIDENCE_COUNTEREXAMPLE_BEFORE_ANY_CODE"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/operator_generalization_v1.py",
+    "canonical/swe_kernel/rule_scope_learning_v1.py",
+    "canonical/swe_kernel/boundary_disjunction_normalization_v1.py",
+    "canonical/swe_kernel/semantic_generalization_engine_v1.py",
+    "canonical/swe_kernel/concept_library_v1.py",
+    "canonical/tools/cross_language_lesson_transfer_probe_v1.py",
+    "canonical/tools/rule_generalization_probe_v1.py",
+    "canonical/swe_kernel/skill_precondition_presence_v1.py",
+    "canonical/runtime/applicability_v1.py",
+    "canonical/runtime/contrast_selection_v1.py",
+    "canonical/swe_kernel/skill_scope_ledger_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "PYEVOLVE",
+    "MELT",
+    "GENPAT",
+    "PYCRAFT",
+    "REFAZER",
+    "THE_2013_STUDY_OF_REPETITIVENESS_OF_CODE_CHANGES",
+    "CONTINUALSKILLBENCH_SKILLSBENCH_VIBEMEMBENCH_AND_SWE_CONTEXTBENCH_OF_2026"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_LEARNER_AND_LESSON_FILE_OF_6686",
+    "THE_DEMONSTRATION_TO_SKILL_COMPILER",
+    "THE_SANDBOX",
+    "THE_TEACHING_TOOL",
+    "THE_DOORS_FALLBACK",
+    "THE_MUTATION_SCORE_IDEA_POINTED_AT_THE_EDITED_PLACES"
+   ],
+   "surviving_gap": "PLURAL_REPLACEMENTS_REMAIN__ONLY_A_PROJECT_SIDE_SIGNAL_CAN_DISCRIMINATE_THEM__CONFLICTING_EXAMPLES_STILL_REFUSE_AND_DROP_THE_KIND__METHOD_RENAMES_THE_PERSON_OWNS_ARE_NOT_YET_COVERED_BY_THE_SET_ASIDE"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "MAKING_THE_FROZEN_LIST_LONGER_AND_CALLING_IT_A_FIX",
+    "COUNTING_HOW_MANY_OPERATORS_ARE_ON_THE_LIST_AS_THOUGH_LENGTH_WERE_SAFETY",
+    "REPORTING_SAME_AS_THOUGH_IT_WERE_A_PROOF_OF_EQUIVALENCE"
+   ],
+   "real_outcome": "THE_OWNERS_GENERALIZATION_PROBLEM__THE_ONLY_MODULE_THAT_WIDENS_A_CRYSTALLIZED_LESSON_WAS_GATED_BY_A_FROZEN_LIST_ASSERTING_A_CROSS_LANGUAGE_SEMANTIC_CLAIM_NOTHING_COMPUTED__3_OF_5_SHIPPED_SKILLS_ARE_NOW_WIDENABLE_WHERE_2_WERE__AND_TWO_OPERATORS_ARE_REFUSED_WHERE_EXECUTION_WITNESSES_THEIR_DIVERGENCE",
+   "surviving_necessity": "KILL_CANDIDATES_AGAINST_THE_ACTUAL_FAILURE_BEFORE_IMPLEMENTING__DECLARE_DELTAS_BEFORE_MEASURING__FALSIFIED_CLAIMS_STAND"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "THE_CROSS_LANGUAGE_QUESTION_ASKED_BY_cross_language_lesson_transfer_probe_v1_WHICH_GATED_CANDIDATES_BY_EXECUTING_THEM_ONE_AT_A_TIME__THE_GATE_NOW_ANSWERS_IT_EARLIER_AND_MORE_CHEAPLY_FOR_THE_OPERATOR_ITSELF"
+   ],
+   "downstream_work_to_delete_or_supersede": [],
+   "fresh_reuse_plan": "NEXT__RECORD_STATES_INSTEAD_OF_COUNTS_IN_THE_SKILL_PROVENANCE_SO_APPLICABILITY_V1_CAN_IDENTIFY_A_BOUNDARY__THEN_REPLACE_THE_4_KEY_DUALS_TABLE_WITH_A_COMPUTATION__IT_IS_INCOMPLETE_RATHER_THAN_UNSOUND_SO_IT_COSTS_REACH_AND_NEVER_CORRECTNESS",
+   "note": "NOTHING_IS_DELETED__THE_FROZEN_SET_KEEPS_ITS_STRUCTURAL_JOB_OF_NARROWING_THE_PROPOSAL_SPACE_AND_GAINS_TWO_TOKENS__THE_SEMANTIC_JOB_IT_COULD_NOT_DO_IS_COMPUTED_BESIDE_IT__MAINS_NEW_AUGMENTATION_IS_PRESERVED_AND_NOW_GOVERNED_BECAUSE_THE_GATE_SITS_INSIDE_THE_LOOP_OVER_THE_AUGMENTED_LIST"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "THE_OWNERSHIP_PRINCIPLE_IS_CACHED__RENAMES_ARE_OF_ASSIGNED_NAMES__NEVER_ASSIGNED_ATTRIBUTE_CHANGES_ARE_BEHAVIOR__SUPPORT_COUNTING_IS_BLIND_TO_COINCIDENT_TANGLES"
+   ],
+   "search_stop_decision": "STOPPED__THE_DEFECT_CLASS_WAS_ALREADY_NAMED_BY_THIS_TREES_OWN_AUDIT_DOCUMENT_THE_EXISTING_GENERALIZER_WAS_FOUND_AND_MEASURED_RATHER_THAN_REBUILT_THE_PRODUCTION_CALL_SITE_WAS_LOCATED_AND_ITS_MISSING_GUARD_IDENTIFIED_AND_THE_BASELINE_FOR_THE_BATCH_WAS_MEASURED_ON_UNMODIFIED_CODE__FURTHER_SEARCH_WOULD_DUPLICATE_A_MEASUREMENT_ALREADY_IN_HAND"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "ONLY_COMPUTING_THE_CLAIM_ANSWERS_A_PAIR_RELATIVE_QUESTION__A_LONGER_LIST_IS_THE_SAME_DEFECT__DELETING_THE_LIST_MAKES_THE_SET_DECORATIVE__REMOVING_THE_TWO_OPERATORS_IS_THE_WRONG_REPAIR_BECAUSE_THEY_ARE_SOUND_WITHIN_ONE_LANGUAGE__A_NEW_GENERALIZER_DUPLICATES_16_IMPORTERS_OF_WORKING_CODE__SIMILARITY_WITHOUT_A_CHECK_FALSE_ACCEPTS_67_5_PERCENT__MODEL_DRIVEN_MERGING_NEEDS_CALLS_AND_DEGRADED_BELOW_THE_NO_SKILL_BASELINE_IN_THE_EXTERNAL_RECORD",
+   "routes_ranked": [
+    "COMPUTE_THE_SEMANTIC_CLAIM_BY_EXECUTION",
+    "ADD_THE_RANGE_OPERATORS_TO_THE_FROZEN_LIST",
+    "DELETE_THE_LIST_ENTIRELY",
+    "REMOVE_PERCENT_AND_SLASH_FROM_THE_LIST",
+    "BUILD_A_NEW_GENERALIZER",
+    "SIMILARITY_RETRIEVAL_INSTEAD",
+    "MODEL_DRIVEN_CREATE_IMPROVE_MERGE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_VERIFICATION_IS_EXECUTION_ITSELF__THREE_REAL_TOOLCHAINS_RUN_THE_SAME_SOURCE_TEXT_AND_THE_VERDICT_IS_READ_OFF_THEIR_OBSERVED_OUTPUTS__NO_ORACLE_IS_INVENTED_AND_WHERE_NO_TOOLCHAIN_EXISTS_THE_VERDICT_IS_UNDECIDED_AND_THE_GATE_REFUSES"
+  },
+  "real_outcome": "THE_OWNERS_GENERALIZATION_PROBLEM__THE_ONLY_MODULE_THAT_WIDENS_A_CRYSTALLIZED_LESSON_WAS_GATED_BY_A_FROZEN_LIST_ASSERTING_A_CROSS_LANGUAGE_SEMANTIC_CLAIM_NOTHING_COMPUTED__3_OF_5_SHIPPED_SKILLS_ARE_NOW_WIDENABLE_WHERE_2_WERE__AND_TWO_OPERATORS_ARE_REFUSED_WHERE_EXECUTION_WITNESSES_THEIR_DIVERGENCE",
+  "required_capability": "A_LEARNED_LESSON_MUST_BE_WIDENABLE_PAST_THE_SKELETON_IT_WAS_TAUGHT_ON__WITHOUT_THE_WIDENING_CHANGING_WHAT_THE_PROGRAM_COMPUTES__AND_THE_DECISION_MUST_BE_COMPUTED_RATHER_THAN_ENUMERATED",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "ZERO_NEW_REACH_VERSUS_TWO_NEWLY_NAMED_BOUNDARIES",
+      "CORRECTNESS": "NO_NEW_TRUTH_VERSUS_A_MEASURED_GENERALIZATION_NUMBER",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "UNTESTED_CLAIMS_AGE_BADLY",
+      "VERIFIABILITY": "THE_DECLARATION_PUSH_TIMESTAMP_IS_PUBLIC_HISTORY",
+      "WALL_CLOCK": "NONE"
+     },
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+     ],
+     "qualification_evidence": [
+      "measured on this host: zero kinds remained unlearned inside the old corpus, so further inside work had no measured target while the generalization claim stayed a claim"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "KEEP_IMPROVING_INSIDE_THE_CURATED_CORPUS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "MORE_EDITS_KEPT",
+      "CORRECTNESS": "A_GREEN_SUITE_THAT_NEVER_RUNS_THE_LINE_IS_A_RUBBER_STAMP",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "KEEPS_EDITS_NOTHING_EVER_CHECKED",
+      "VERIFIABILITY": "NOTHING_SAYS_THE_LINE_RAN",
+      "WALL_CLOCK": "HALF_THE_RUNS"
+     },
+     "evidence": [
+      "https://arxiv.org/html/2604.01518v1",
+      "https://arxiv.org/pdf/1506.07330"
+     ],
+     "qualification_evidence": [
+      "published: suites that accept plausible but wrong patches (STING, 2026); statement coverage missed a broken test refactoring that mutation coverage caught (Parsai, 2015); here a check that never runs the line stays green for any edit, measured in test_a_check_that_swallows_the_failure_settles_nothing"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "ACCEPT_A_TRY_WHEN_THE_SUITE_STAYS_GREEN"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "COVERS_FORMS_NOBODY_SHOWED",
+      "CORRECTNESS": "65_5_PERCENT_OF_VARIANTS_WRONG_BEFORE_FILTERING",
+      "INCREMENTAL_COST": "A_MODEL",
+      "RELIABILITY": "NEEDS_THE_SAME_TESTS_ANYWAY",
+      "VERIFIABILITY": "FORBIDDEN_HERE_NO_MODEL_IN_CREDITED_COGNITION",
+      "WALL_CLOCK": "SHORT"
+     },
+     "evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LET_A_LANGUAGE_MODEL_WRITE_VARIANTS_AND_FILTER_BY_TESTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "SEARCHES_WHERE_NO_LESSON_EXISTS",
+      "CORRECTNESS": "SAME_ORACLE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "NEEDS_A_FAILING_TEST_TO_START",
+      "VERIFIABILITY": "SAME",
+      "WALL_CLOCK": "MANY_CANDIDATES_PER_PLACE"
+     },
+     "evidence": [
+      "canonical/runtime/edit_kind_learning_v1.py"
+     ],
+     "qualification_evidence": [
+      "that engine answers a different question: which fix, out of many, for a failing test; here the lesson already names the change and only its breadth is open, so the only candidates needed are the proven rules and one wider reading"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ENUMERATE_SINGLE_MUTATION_CANDIDATES_AND_LET_LESSONS_VOTE"
+    }
+   ],
+   "checked_at_utc": "2026-11-13T00:23:13Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__A_FROZEN_16_ENTRY_SET_DECIDES_WHETHER_A_LEARNED_LESSON_MAY_BE_WIDENED__IT_ADMITS_TWO_OPERATORS_WHOSE_CROSS_LANGUAGE_EQUIVALENCE_IS_REFUTED_BY_EXECUTION_AND_REFUSES_A_SHIPPED_RUST_LESSON_THAT_DIFFERS_BY_EXACTLY_ONE_OPERATOR_TOKEN",
+   "max_age_hours": 24,
+   "negative_search_summary": "THE_2026_EVALUATION_LITERATURE_PRESCRIBES_EXACTLY_THIS__PROTOCOL_FIXED_BEFORE_EXPERIMENTATION__FINAL_TEST_ONCE__NO_POST_HOC_CHANGES__NO_FOUND_SKILL_LEARNING_SYSTEM_REPORTS_A_PRE_REGISTERED_GENERALIZATION_NUMBER_WITH_ITS_FALSIFIED_PREDICTIONS_LEFT_STANDING",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "held-out generalization test pre-registered declared before data collection"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "final-test-once evaluation protocol locked before test data seen"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 evaluation good practices fixed protocol before experimentation"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "github commit search api mechanical corpus collection deprecation migrations"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "COMPUTE_THE_MEANING_CLAIM_THE_FROZEN_LIST_ASSERTED__BY_EXECUTING_THE_OPERATOR_IN_EVERY_TOOLCHAIN_PRESENT_AND_READING_THE_VERDICT_OFF_THE_OBSERVED_VALUES__KEEP_THE_STRUCTURAL_QUESTION_A_SET_AND_ANSWER_THE_SEMANTIC_QUESTION_PER_LANGUAGE_PAIR__WIRE_THE_GATE_INSIDE_THE_PROPOSER_LOOP_SO_A_REFUSED_SWAP_YIELDS_NO_CANDIDATE__REFUSE_WHEN_NOTHING_CAN_EXECUTE_RATHER_THAN_GUESS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-13T00:23:13Z",
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "evidence": [
+       "python3 -c 'import ast, tokenize, re, builtins, json, sqlite3; print(\"ok\")' returned ok; the program uses nothing else"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "NAMESPACE_SANDBOX_confine_v1",
+      "evidence": [
+       "canonical.runtime.confine_v1.available() returned True on this host; teaching ran the program inside it and the front door's receipts for the four new sentences report confined True"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "DEMONSTRATION_TO_SKILL_COMPILER_AND_FRONT_DOOR_FALLBACK",
+      "evidence": [
+       "canonical/tools/teach_actions_v1.py qualified ten skills through causal_trace_to_skill_compiler_v1 on this host, re-teaching reproduced the tracked bundle byte for byte, and live_brain_route_admission_v1.solve returned PASS__COMPILED_WORKFLOW_SKILL for remembering a change, repeating it and repeating it with the rest left alone"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "THE_TAUGHT_PROGRAM_OF_THE_PREVIOUS_CHANGE",
+      "evidence": [
+       "canonical/swe_kernel/taught_actions/edit_by_example_v1.py on the base commit answers remember, repeat and repeat_shown through the front door on this host; the fifth action is added to the same program and all five are taught again from it"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "COMPUTE_THE_MEANING_CLAIM_THE_FROZEN_LIST_ASSERTED__BY_EXECUTING_THE_OPERATOR_IN_EVERY_TOOLCHAIN_PRESENT_AND_READING_THE_VERDICT_OFF_THE_OBSERVED_VALUES__KEEP_THE_STRUCTURAL_QUESTION_A_SET_AND_ANSWER_THE_SEMANTIC_QUESTION_PER_LANGUAGE_PAIR__WIRE_THE_GATE_INSIDE_THE_PROPOSER_LOOP_SO_A_REFUSED_SWAP_YIELDS_NO_CANDIDATE__REFUSE_WHEN_NOTHING_CAN_EXECUTE_RATHER_THAN_GUESS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+     "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+     "canonical/tools/teach_actions_v1.py",
+     "canonical/runtime/live_brain_route_admission_v1.py",
+     "canonical/runtime/confine_v1.py",
+     "canonical/runtime/acquired_operator_memory_v1.py",
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2604.20087v1",
+     "https://arxiv.org/html/2606.01139v3"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/wisoums/scalerl/issues/119"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://pith.science/paper/2412.03700",
+     "https://arxiv.org/pdf/2608.26170",
+     "https://dl.acm.org/doi/10.5555/2487085.2487113"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "COMPUTE_THE_SEMANTIC_CLAIM_BY_EXECUTION__SELECTED",
+   "ADD_THE_RANGE_OPERATORS_TO_THE_FROZEN_LIST__REJECTED__SAME_DEFECT_A_LONGER_LIST_AND_IT_LEAVES_THE_UNSOUNDNESS",
+   "DELETE_THE_LIST_ENTIRELY__REJECTED__THE_PROPOSAL_SPACE_BECOMES_THE_WHOLE_OPERATOR_VOCABULARY_AND_THE_SET_STOPS_MEASURING_ANYTHING",
+   "REMOVE_PERCENT_AND_SLASH_FROM_THE_LIST__REJECTED__WRONG_REPAIR__THEY_ARE_SOUND_WITHIN_ONE_LANGUAGE_SO_THIS_COSTS_A_REAL_LESSON_FOR_NO_SAFETY",
+   "BUILD_A_NEW_GENERALIZER__REJECTED__OPERATOR_GENERALIZATION_V1_EXISTS_WITH_16_IMPORTERS_AND_IS_WIRED",
+   "SIMILARITY_RETRIEVAL_INSTEAD__REJECTED__THIS_TREE_MEASURED_A_GENERAL_BOUNDARY_FALSE_ACCEPTING_67_5_PERCENT_WITHOUT_A_CHECK",
+   "MODEL_DRIVEN_CREATE_IMPROVE_MERGE__REJECTED__NEEDS_MODEL_CALLS_AND_THE_EXTERNAL_RECORD_SHOWS_UNCONTROLLED_EXTRACTION_DEGRADING_BELOW_THE_NO_SKILL_BASELINE"
+  ],
+  "selected_route": "COMPUTE_THE_MEANING_CLAIM_THE_FROZEN_LIST_ASSERTED__BY_EXECUTING_THE_OPERATOR_IN_EVERY_TOOLCHAIN_PRESENT_AND_READING_THE_VERDICT_OFF_THE_OBSERVED_VALUES__KEEP_THE_STRUCTURAL_QUESTION_A_SET_AND_ANSWER_THE_SEMANTIC_QUESTION_PER_LANGUAGE_PAIR__WIRE_THE_GATE_INSIDE_THE_PROPOSER_LOOP_SO_A_REFUSED_SWAP_YIELDS_NO_CANDIDATE__REFUSE_WHEN_NOTHING_CAN_EXECUTE_RATHER_THAN_GUESS",
+  "selected_surviving_route": "COMPUTE_THE_MEANING_CLAIM_THE_FROZEN_LIST_ASSERTED__BY_EXECUTING_THE_OPERATOR_IN_EVERY_TOOLCHAIN_PRESENT_AND_READING_THE_VERDICT_OFF_THE_OBSERVED_VALUES__KEEP_THE_STRUCTURAL_QUESTION_A_SET_AND_ANSWER_THE_SEMANTIC_QUESTION_PER_LANGUAGE_PAIR__WIRE_THE_GATE_INSIDE_THE_PROPOSER_LOOP_SO_A_REFUSED_SWAP_YIELDS_NO_CANDIDATE__REFUSE_WHEN_NOTHING_CAN_EXECUTE_RATHER_THAN_GUESS",
+  "stop_condition": "THE_GATE_IS_WIRED_AND_MEASURED_IN_BOTH_DIRECTIONS_WITH_ALL_11_MUTATIONS_KILLED_AND_THE_SUITE_GREEN__THE_FLOOR_HELD__THE_BATCH_COMPARED_AGAINST_A_MEASURED_UNMODIFIED_BASELINE__AND_THE_TWO_REMAINING_GAPS_NAMED_RATHER_THAN_CLOSED__RECORDS_STILL_CARRY_NO_STATES_AND_DUALS_IS_STILL_A_4_KEY_TABLE",
+  "why_selected_route_is_fastest_sufficient": "THE_DEFECT_WAS_ALREADY_NAMED_BY_THIS_TREES_OWN_AUDIT_CLASS_AND_THE_MEASUREMENT_NEEDED_ONLY_THE_TOOLCHAINS_ALREADY_INSTALLED__NO_NEW_LEARNER_NO_MODEL_CALLS_AND_NO_NEW_HYPOTHESIS_SPACE__ONE_NEW_MODULE_ONE_GATE_ONE_WIDENING_AND_A_BASELINE_COMPARISON_ON_UNMODIFIED_CODE__EVERY_ALTERNATIVE_REQUIRED_BUILDING_SOMETHING_THAT_ALREADY_EXISTS"
+ },
+ "route_id": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "COMPUTE_THE_MEANING_CLAIM_THE_FROZEN_LIST_ASSERTED__BY_EXECUTING_THE_OPERATOR_IN_EVERY_TOOLCHAIN_PRESENT_AND_READING_THE_VERDICT_OFF_THE_OBSERVED_VALUES__KEEP_THE_STRUCTURAL_QUESTION_A_SET_AND_ANSWER_THE_SEMANTIC_QUESTION_PER_LANGUAGE_PAIR__WIRE_THE_GATE_INSIDE_THE_PROPOSER_LOOP_SO_A_REFUSED_SWAP_YIELDS_NO_CANDIDATE__REFUSE_WHEN_NOTHING_CAN_EXECUTE_RATHER_THAN_GUESS",
+ "stop_condition": "THE_GATE_IS_WIRED_AND_MEASURED_IN_BOTH_DIRECTIONS_WITH_ALL_11_MUTATIONS_KILLED_AND_THE_SUITE_GREEN__THE_FLOOR_HELD__THE_BATCH_COMPARED_AGAINST_A_MEASURED_UNMODIFIED_BASELINE__AND_THE_TWO_REMAINING_GAPS_NAMED_RATHER_THAN_CLOSED__RECORDS_STILL_CARRY_NO_STATES_AND_DUALS_IS_STILL_A_4_KEY_TABLE",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-13T00:21:49Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_REPLACES_ONE_FROZEN_MEMBERSHIP_TEST_WITH_AN_EXECUTED_SEMANTIC_GATE_IN_THE_MODULE_THAT_WIDENS_LEARNED_LESSONS",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "DOES_OWNERSHIP_STORE_CONTEXT_SEPARATE_AN_INCIDENTAL_ATTRIBUTE_RENAME_FROM_THE_LESSON_WHERE_SUPPORT_COUNTING_CANNOT__MEASURED_ONCE_UNDER_DECLARED_PREDICTIONS",
+   "falsifier_id": "A_NEVER_ASSIGNED_ATTRIBUTE_UNDONE__A_MOVED_ONE_SHOWING_TABLE__A_SURVIVING_IS_SET_WRONG_WRITE__OR_A_MEASUREMENT_PRECEDING_ITS_DECLARATION",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "THE_DECLARATION_PRECEDES_THE_MEASUREMENT__ALL_FOUR_PREDICTIONS_HELD__THE_PURE_RENAME_AND_NEVER_ASSIGNED_BACK_OFFS_ARE_PINNED_BY_TESTS__215_TESTS_PASS",
+   "proposal_id": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1"
+  }
+ },
+ "weakens_existing_guard": false
+}
