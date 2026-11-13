@@ -107,28 +107,42 @@ options sit on top of it.** Terminal-Bench 4.1 shipped on 2026-11-09 regrading *
 hardened verifiers — the frontier moved the checker, not the tasks. The field is learning the same
 lesson from the other direction.
 
-### What shipped
+### What shipped, and what a concurrent branch beat me to
 
-`canonical/swe_kernel/check_collection_admission_v1.py` — runs the check and returns **how many
-tests actually executed**. Zero is never a pass. When `unittest` collects nothing, the pytest
-collector is tried, so those 943 files become real checks instead of false ones. When neither
-collector can run, the reason is reported and the caller refuses.
+While this was in flight, main landed PR #6836, which rewrote the same `Check` class and **fixed the
+vacuity itself**: `_suite` now refuses to call `Ran 0 tests` a pass, falls back to pytest, and stands
+up declared dependencies. That is a superset of my repair. Shipping my version alongside it would
+have been a second organ doing the same job, so **I deleted my duplicate module**
+(`check_collection_admission_v1.py`) and took main's.
 
-Wired into both places that consumed the old exit code (`Check._runs` and `Check.accepts`) — not
-left as an orphan organ, which this repo has been burned by before.
+But main's fix has a gap I measured. Its `_env` builds `PYTHONPATH` from the project copy alone, so
+a pytest installed anywhere else — which is every real run, since the copy holds one pull request's
+files and no site-packages — is invisible. `_pytest_importable()` returns False and the check is
+dropped as `CHECK_NO_DISCOVERABLE_TESTS`:
+
+| on the same pytest-style project | available | accepts original | accepts broken |
+|---|---|---|---|
+| main as landed | **False** (`CHECK_NO_DISCOVERABLE_TESTS`) | no | no |
+| main + this round's `_env` change | **True** | yes | **no** |
+
+Main's behaviour is *safe* — it refuses rather than falsely passing. But it discards the check, so
+the 943 pytest-shaped files stay unverifiable for a reason that has nothing to do with the project
+under test. **The one-line-of-intent fix that survived the merge is collector reachability:** append
+the caller's existing `PYTHONPATH` directories *after* the project copy, so the suite still imports
+the copy's code and can never be satisfied by the repository's own modules.
+
+That turns a discarded check into a real one that rejects the broken edit.
+
+**Evidence:** 47 tests pass across four suites, including main's own
+`test_the_check_stands_up_what_verification_needs_20261112_V1.py`. My tests use real subprocesses on
+real temporary projects — the defect lived in a process environment, so a mocked runner would have
+hidden it — and one test *pins the legacy behaviour* so it cannot be quietly redefined away.
 
 Three bugs of my own that the tests caught before shipping, recorded because they are instructive:
-bytes-vs-str comparisons; counting a pytest **collection error** as a test that ran; and trusting
-`unittest`'s `Ran 1 test ... FAILED (errors=1)`, where that "1" is a synthetic `_FailedTest`
+bytes-vs-str comparisons; counting a pytest **collection error** (exit 2) as a test that ran; and
+trusting `unittest`'s `Ran 1 test ... FAILED (errors=1)`, where that "1" is a synthetic `_FailedTest`
 placeholder for an import failure, not a test of your code. All three would have blamed the edit
-for the machine.
-
-**Evidence:** 24 new tests pass; 74 compatibility tests pass; the two existing consumers
-(`test_the_check_is_the_difference_v1` 15, `test_across_environments_v1` 17) pass. The load-bearing
-test refuses the broken edit that the legacy path accepted, and a separate test *pins the legacy
-behaviour* so the defect cannot be quietly redefined away.
-
----
+for the machine. They died with the duplicate module, but the lesson generalises to any runner.
 
 ## 3. Is our accumulated experience even a training set?
 
@@ -285,7 +299,10 @@ Reproduce:
 
 ```
 python3 canonical/tools/experience_corpus_training_readiness_v1.py
-python3 -m pytest canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py \
-                  canonical/tests/test_experience_corpus_training_readiness_v1.py -q
+PYTHONPATH=<pytest-dir>:. python3 -m pytest -q \
+    canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py \
+    canonical/tests/test_the_check_stands_up_what_verification_needs_20261112_V1.py \
+    canonical/tests/test_experience_corpus_training_readiness_v1.py \
+    canonical/tests/test_the_check_is_the_difference_v1.py
 python3 one_example_is_a_point_a_test_is_a_quantifier_probe_20261112.py
 ```

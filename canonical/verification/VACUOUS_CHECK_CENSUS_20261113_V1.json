@@ -29,10 +29,18 @@
     "project": "constructed pytest-style package with two real assertions",
     "legacy_accepts_original": true,
     "legacy_accepts_broken_return_none": true,
-    "repaired_accepts_original": true,
-    "repaired_accepts_broken_return_none": false,
-    "repaired_collector": "pytest",
-    "repaired_tests_executed": 2
+    "main_as_landed": {
+      "available": false,
+      "reason": "CHECK_NO_DISCOVERABLE_TESTS",
+      "accepts_original": false,
+      "accepts_broken": false
+    },
+    "main_plus_collector_reachability": {
+      "available": true,
+      "accepts_original": true,
+      "accepts_broken_return_none": false
+    },
+    "note": "Main PR #6836 fixed the vacuity itself; this round adds collector reachability so the fallback can be reached and the check is not discarded."
   },
   "live_repo_witnesses": [
     {
@@ -52,5 +60,6 @@
   "model_calls": 0,
   "incremental_spend_usd": 0,
   "scope": "NECESSARY_NOT_SUFFICIENT__A_REAL_CHECK_DOES_NOT_PROVE_AN_EDIT_CORRECT__IT_REMOVES_A_FALSE_VERIFIED",
-  "census_population": "git ls-files at base_commit; untracked files excluded"
+  "census_population": "git ls-files at base_commit; untracked files excluded",
+  "resolution": "DUPLICATE_MODULE_DELETED__MAIN_IMPLEMENTATION_KEPT__COLLECTOR_REACHABILITY_ADDED"
 }

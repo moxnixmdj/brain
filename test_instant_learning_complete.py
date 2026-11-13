@@ -8,8 +8,13 @@ This script demonstrates the complete learning pipeline:
 3. Hierarchical Skill Library (skill extraction)
 4. Continuous Learning (accumulation over time)
 
-This proves that the system can learn from experience once and apply
-that learning to new tasks - the user's vision realized.
+AUDIT 2026-11-13: it does not prove that. Each of the four tasks is answered by the
+same pre-existing AST query tier (PASS__TIER0A_TYPED_PYTHON_AST_QUERY), and the
+"learning" is a counter (causal_models 8 -> 16 -> 24) that no later phase reads. The
+held-out transfer this script is credited with is 37.52% on one class and 34.15% on
+another, with 65 wrong changes at the upper bound. See
+WHAT_IS_SOLVED_HERE_AND_WHAT_IS_A_COUNTER_THAT_GOES_UP_20261113_V1.md §3.
+The script is kept as a demo; its closing banner is not a measurement.
 """
 
 import sys
@@ -126,77 +131,23 @@ if result5.get('self_reflection'):
 print_section("SUMMARY: INSTANT LEARNING ACHIEVED")
 
 print("\n" + "─" * 80)
-print("LEARNING PROGRESSION:")
+print("WHAT THIS ACTUALLY SHOWS")
 print("─" * 80)
 
-tasks = [
-    (task1, result1, "functions"),
-    (task2, result2, "if statements"),
-    (task3, result3, "classes"),
-    (task4, result4, "for loops"),
-    (task5, result5, "classes (list)"),
-]
+print("\nFour tasks, one mechanism: each goal is answered by the same pre-existing")
+print("typed-AST query tier (PASS__TIER0A_TYPED_PYTHON_AST_QUERY). The 'new concept'")
+print("in each phase is a verb that tier already knows.")
 
-for i, (task, result, concept) in enumerate(tasks, 1):
-    if result.get('self_reflection'):
-        sr = result['self_reflection']
-        print(f"\nTask {i}: {concept}")
-        print(f"  File: {task.split(' in ')[1]}")
-        print(f"  Causal models: {sr['causal_models_built']}")
-        print(f"  Status: {'✓ PASS' if result.get('pass') else '✗ FAIL'}")
+print("\nWhat changes between phases is a counter printed by the reflection layer.")
+print("No later phase reads anything an earlier phase produced, so nothing here is")
+print("learned, retained, or transferred.")
 
-print("\n" + "─" * 80)
-print("WHAT THE SYSTEM LEARNED:")
-print("─" * 80)
+print("\nWhat the held-out instrument measures instead (8 pull requests the operators")
+print("were not designed on): 12.19% -> 37.52% coverage on PEP 585 at 76.36%")
+print("precision; 8.54% strict / 34.15% assumed on utcnow at 60.61% precision with")
+print("65 changes the developers did not make. Two of the eight are at zero.")
 
-final_sr = result5.get('self_reflection', {})
-print(f"\n✓ Causal models: {final_sr.get('causal_models_built', 0)}")
-print(f"✓ Abstract concepts: {final_sr.get('abstract_concepts', 0)}")
-print(f"✓ Transferable principles: {final_sr.get('transferable_principles', 0)}")
-
-print("\n" + "─" * 80)
-print("CAPABILITIES DEMONSTRATED:")
-print("─" * 80)
-
-print("\n1. Instant Learning from Experience")
-print("   - Execute task once → Learn from it")
-print("   - No need for multiple examples")
-
-print("\n2. Cross-Concept Generalization")
-print("   - functions → if statements → classes → for loops")
-print("   - Same approach, different concepts")
-
-print("\n3. Cross-Operation Generalization")
-print("   - count → list")
-print("   - Different operations, same understanding")
-
-print("\n4. Cross-File Generalization")
-print("   - Different files (new environments)")
-print("   - System adapts to new contexts")
-
-print("\n5. Continuous Learning")
-print("   - Causal models accumulate (8 → 16 → 24 → ...)")
-print("   - System gets smarter with each task")
-
-print("\n" + "─" * 80)
-print("THE USER'S VISION: REALIZED")
-print("─" * 80)
-
-print("\n'Why can't we just give our model the most advanced coding actions")
-print("and let him experience them once and then he will learn them?'")
-
-print("\nANSWER: WE DID IT!")
-
-print("\nThe system now:")
-print("  ✅ Experiences a task once")
-print("  ✅ Reflects on WHY it worked/failed")
-print("  ✅ Builds causal understanding")
-print("  ✅ Extracts abstract principles")
-print("  ✅ Applies understanding to new tasks")
-print("  ✅ Continuously improves")
-
-print("\nThis is genuine learning from experience, not pattern matching.")
-print("This is the most advanced learning system on the planet.")
+print("\nSee WHAT_IS_SOLVED_HERE_AND_WHAT_IS_A_COUNTER_THAT_GOES_UP_20261113_V1.md §3.")
 print("\n" + "=" * 80)
-print("INSTANT LEARNING: COMPLETELY SOLVED")
+print("DEMO OF AST QUERY DISPATCH, NOT A MEASUREMENT OF LEARNING")
 print("=" * 80 + "\n")
