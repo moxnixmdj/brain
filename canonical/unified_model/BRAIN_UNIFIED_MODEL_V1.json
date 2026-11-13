@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "110ade815c9b68d46999682f67dd966c6bba3450cea64a377ad52eda8ba5263a"
+  "value": "f822adea740f11391f3ccf330cf0aa4eaf0231c7cbf076e39217783bdee1b682"
  },
  "engines": [
   {
@@ -64168,7 +64168,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 14106,
+   "bytes": 14249,
    "headings": [
     "What is real, what is not, and the fastest honest path — 2026-11-13",
     "0. Direct answer",
@@ -64186,7 +64186,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "WHAT_IS_REAL_AND_WHAT_TO_DO_20261113_V1.md",
-   "sha256": "be925d03805f939b26a049f04d1bf55d6bdbbf0ae1e6d037385f2b54db9760e0",
+   "sha256": "4a792a3610b7a29bbe7eac3765c0b573ccc6d7c24ba9b0f31c4823c62ac647e7",
    "summary": "**Branch:** `arena/954d9035-brain`. **Base:** `68374960837276a4d19f32caf39215cc99eb49ae`. **Authority:** NONE. Producer-run sandbox measurement and code change. `truth.achieved` stays `false`. No capability registered, no family flipped, no base-model/LLM weights updated, no independent verifier claimed.",
    "terms": {
     "2026": 4,
@@ -64199,7 +64199,7 @@
     "bounded": 5,
     "broader": 4,
     "but": 7,
-    "canonical": 15,
+    "canonical": 18,
     "change": 4,
     "changed": 4,
     "classes": 4,
@@ -64210,26 +64210,26 @@
     "current": 5,
     "engine": 6,
     "evidence": 5,
-    "external": 4,
     "functions": 8,
     "html": 5,
     "https": 11,
     "killed": 7,
     "lane": 5,
-    "main": 6,
+    "live": 5,
+    "main": 8,
     "memory": 12,
     "methods": 6,
     "no": 7,
     "not": 32,
     "one": 6,
     "pass": 5,
-    "real": 8,
+    "real": 9,
     "regression": 6,
     "repo": 5,
     "skill": 8,
     "skills": 6,
     "tasks": 6,
-    "tests": 17,
+    "tests": 21,
     "traces": 5,
     "transfer": 6,
     "typed": 6,
@@ -78114,7 +78114,7 @@
   "included_source_count": 1229,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "79f4439489bafec276fd75addf30c688aa1b03f4e4c09cb3b5b165288c323af4"
+  "source_tree_digest": "15bb584f92cf135bce7b9d3df09966be9955c6ce768218a10ac79d0c188153b3"
  },
  "research_index": [
   {

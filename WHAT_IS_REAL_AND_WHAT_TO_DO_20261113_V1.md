@@ -116,29 +116,30 @@ Also:
 - `semantic_generalization_integration.py` and `fix_semantic_integration.py` now refuse to run;
   they previously spliced keyword-driven executors into the controller.
 - The three optimistic summary documents carry supersession/retraction banners.
-- `test_semantic_generalization_real.py` now asserts correctness instead of printing a banner.
+- The root print-only “real semantic generalization” demo was removed by main’s cleanup; the honest
+  assertions now live in `canonical/tests/test_python_ast_query_transfer_v1.py`.
 
 ### 3.4 Tests
 
 New/changed tests:
 
 - `canonical/tests/test_python_ast_query_transfer_v1.py`: 23 tests.
-- `test_semantic_generalization_real.py`: 1 test.
 - main’s `canonical/tests/test_real_generalization_engine_v2.py`: 69 tests, kept green.
+- main’s `canonical/tests/test_skill_scope_acquisition_v1.py`: 21 tests, kept green.
 
 Targeted regression run after merging main:
 
 ```text
 .venv/bin/python -m pytest -q \
   canonical/tests/test_real_generalization_engine_v2.py \
-  test_semantic_generalization_real.py \
   canonical/tests/test_python_ast_query_transfer_v1.py \
   canonical/tests/test_swe_intent_scope_regressions_v1.py \
   canonical/tests/test_one_demonstration_and_where_it_stops_v1.py \
   canonical/tests/test_the_check_is_the_difference_v1.py \
   canonical/tests/test_learn_path_verification_wiring_v1.py \
-  canonical/tests/test_wake_sleep_recall_and_specialist_controller_v1.py
-142 passed in 17.10s
+  canonical/tests/test_wake_sleep_recall_and_specialist_controller_v1.py \
+  canonical/tests/test_skill_scope_acquisition_v1.py
+162 passed in 18.13s
 ```
 
 Integrity guard:
