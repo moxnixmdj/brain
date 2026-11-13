@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5da23fd77b536e55506ab3548136a5549ea38c2c3f032d842cda1a2a767a229a"
+  "value": "7b81759cb5413e62c59b9409378cdfb21296cb13e19903a3290d9f51f9bddf5b"
  },
  "engines": [
   {
@@ -240252,7 +240252,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_AND_THE_CROSS_KIND_ZERO_IS_THE_WALL_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "894e9ad6f99e292d1a373ac5993841d9713a4d277576819dc9027c0ecb2847f4",
+   "sha256": "b68e17e949e1007fb90dafc7244fa1df82354bc47d7a2732137a5f7f1e5cb0f1",
    "status": "",
    "terms": {
     "20261112": 1,
