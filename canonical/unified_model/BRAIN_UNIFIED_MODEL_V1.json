@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 423,
+  "knowledge_documents": 424,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6822,
+  "research_index_records": 6823,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6e9f104ea9539d295c9d2ed712a5f69c04beb3a7febab022d1da0088ef19e51d"
+  "value": "bfad69d2444ddac6505c6d088362d0d29eef34699ad8f0ea23480a314228daaf"
  },
  "engines": [
   {
@@ -52283,6 +52283,90 @@
     "they",
     "times",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 12022,
+   "headings": [
+    "Learning does not accumulate: 52 lessons write 39 lines nobody wrote",
+    "1. The assumption nobody tested",
+    "2. Why this is the answer to the question, and not a footnote",
+    "3. What the owner's four proposed fixes actually do",
+    "4. The limiting factor, from first principles",
+    "5. What is real and what is not, in the owner's words",
+    "6. Reproduce",
+    "corpus (needs gh; ~6 min for all three sets)",
+    "the pool curve, ~3 min",
+    "pinned by 8 tests, predictions declared before the run",
+    "7. Where this round was wrong"
+   ],
+   "kind": "DOCUMENT",
+   "path": "LEARNING_DOES_NOT_ACCUMULATE_20261112_V1.md",
+   "sha256": "74ef8437bc1a2c3df291adeb7373e62b3f73028aa27d0dbfc05ac06969b0eeb8",
+   "summary": "**2026-11-12.** Branch `arena/6bc5654f-brain`, base `b56d981c`. Authority **NONE** — producer-run sandbox measurement, `$0`, zero model calls, `truth.achieved` stays `false`, no capability registered, no family flipped, no test weakened.",
+   "terms": {
+    "232": 8,
+    "39": 7,
+    "52": 5,
+    "across": 6,
+    "arm": 5,
+    "before": 5,
+    "canonical": 6,
+    "change": 5,
+    "control": 5,
+    "corpus": 10,
+    "correct": 5,
+    "curve": 7,
+    "each": 7,
+    "every": 9,
+    "false": 5,
+    "files": 6,
+    "fresh": 5,
+    "half": 6,
+    "learning": 11,
+    "lesson": 12,
+    "lessons": 15,
+    "lines": 8,
+    "measured": 6,
+    "model": 5,
+    "no": 12,
+    "not": 31,
+    "once": 8,
+    "one": 23,
+    "only": 9,
+    "organ": 5,
+    "own": 5,
+    "place": 5,
+    "pool": 13,
+    "precision": 5,
+    "python3": 5,
+    "round": 7,
+    "rules": 5,
+    "same": 5,
+    "scope": 5,
+    "tasks": 5,
+    "thesis": 6,
+    "thing": 5,
+    "three": 5,
+    "training": 5,
+    "tree": 7,
+    "weights": 8,
+    "wrong": 13,
+    "wrote": 7
+   },
+   "title": "Learning does not accumulate: 52 lessons write 39 lines nobody wrote",
+   "title_terms": [
+    "39",
+    "52",
+    "accumulate",
+    "learning",
+    "lessons",
+    "lines",
+    "nobody",
+    "not",
+    "write",
+    "wrote"
    ]
   },
   {
@@ -77783,10 +77867,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1225,
+  "included_source_count": 1226,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "586d94a630d93bdcefb10ce96c211940d6656fc68543a6b418095b170bd11a11"
+  "source_tree_digest": "4fc738879d16525393b114cf06faab8d4c17c5eb1f305cf97b34212ac46816fe"
  },
  "research_index": [
   {
@@ -167383,6 +167467,24 @@
     "benchmark": 1,
     "learn": 2,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/LESSON_POOL_INTERFERENCE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/LESSON_POOL_INTERFERENCE_20261112_V1.json",
+   "schema": "LESSON_POOL_INTERFERENCE_V1",
+   "sha256": "94ea9394e72aa06e9ebc37dd27e6fce01dd18f1e99ba30ebe6db34133e3eeccf",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "interference": 1,
+    "lesson": 1,
+    "pool": 1,
+    "v1": 1
    }
   },
   {
