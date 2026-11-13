@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "aaf28f2abca1e78d6ffeb3ffd395fde73b531f3045b31432f01d2949caf2a030"
+  "value": "9b024c66e673e56e272a4dc96feb8bebff80783429dd86520cf85615e7f2255e"
  },
  "engines": [
   {
@@ -236228,7 +236228,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "74450b235730c52d1cd44a5c159c6bd12361597a5bec9e73e8693014bdfe9d68",
+   "sha256": "41704558ada4a57db186360676a3c7cb97829b99eb52039adbb6f5dcf2cd7e24",
    "status": "",
    "terms": {
     "20261112": 1,
