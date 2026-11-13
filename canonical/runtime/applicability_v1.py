@@ -179,6 +179,120 @@ def vocabulary_gap(evidence: Sequence[tuple[Iterable[str], bool]]) -> dict[str, 
     return None
 
 
+#: The five proofs that evidence cannot yield a requirement, and the one absence of proof.
+#: The first three are a missing KIND of observation, so more runs of the same sort can fix them.
+#: The last two are a missing OBSERVABLE, and no number of runs can fix them.
+WITNESS_NO_EVIDENCE = "NO_EVIDENCE__NOTHING_OBSERVED"
+WITNESS_NO_FAILURE = "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE"
+WITNESS_NO_SUCCESS = "NO_SUCCESS__NOTHING_TO_SCOPE"
+WITNESS_SAME_STATE = "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES"
+WITNESS_SEPARATION_IMPOSSIBLE = (
+    "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS"
+)
+#: Kinds that more observations of this same vocabulary cannot repair.
+UNREPAIRABLE_BY_REPETITION = frozenset({WITNESS_SAME_STATE, WITNESS_SEPARATION_IMPOSSIBLE})
+
+
+def insufficiency_witness(evidence: Sequence[tuple[Iterable[str], bool]]) -> dict[str, Any] | None:
+    """A PROOF that this evidence cannot yield a requirement, or None. No enumeration.
+
+    WHY THIS EXISTS BESIDE `vocabulary_gap`. `vocabulary_gap` proves insufficiency in one shape
+    only: two observations with EQUAL fact sets and opposite outcomes. That shape is real -- it is
+    the `.docx.intent.json` sidecar -- but it is a special case, and it is silent on the shape that
+    the pinned real code-repair corpus actually exhibits. Measured 2026-11-13 on the four pinned
+    historical repairs in `canonical/tests/fixtures/historical_repair_projects_v1`, judged by their
+    own upstream tests (two repaired, two fired and did not repair):
+
+        `vocabulary_gap`  -> None, i.e. "nothing is wrong with the vocabulary"
+        `learn`           -> INCONSISTENT, 0 survivors
+
+    Both answers are correct and they contradict each other in effect: the instrument built to
+    explain the refusal does not fire on the refusal. The two successes share exactly two facts
+    (`baseline.violates_own_spec`, `operator.Gt`), and every failure has both. So the worlds are not
+    the same point -- they differ in 38 other facts -- and yet nothing in the vocabulary separates
+    them, because the only facts the successes AGREE on are facts the failures also have.
+
+    THE CERTIFICATE, AND WHY IT NEEDS NO ENUMERATION. Write A = the intersection of the fact sets of
+    all successes. A conjunction C of observed facts is consistent with the successes exactly when
+    C is a subset of A, so the largest candidate is A itself. C excludes a failure F exactly when C
+    is not a subset of F. Therefore some consistent C exists iff A is not a subset of any failure,
+    and A itself is the witness either way:
+
+        no requirement exists  <=>  A is a subset of at least one failure's fact set
+
+    `learn` reaches the same verdict by enumerating all 2^|A| subsets and finding none alive; this
+    reaches it in |evidence| set comparisons. Two consequences matter. First, the certificate still
+    decides when |A| exceeds `MAX_CANDIDATE_FACTS` and `learn` has to answer BOUNDED -- it separates
+    "the vocabulary cannot express this" from "enumerating the vocabulary is too expensive", which
+    are different problems with different repairs. Second, `vocabulary_gap`'s shape implies this
+    one: if a success and a failure share their whole fact set then A, a subset of that success, is
+    a subset of that failure. So this witness fires on everything the older one fires on, plus the
+    cases it is blind to.
+
+    WHAT None MEANS, AND WHAT IT DOES NOT. None is a proof that separation IS possible: some
+    conjunction admits every success and excludes every failure. It is not a claim that the learner
+    found one, or that it is cheap to find -- with |A| above the cap `learn` still answers BOUNDED.
+
+    This function decides nothing about admission and writes nothing. It is a diagnostic, and the
+    reason it is worth shipping is measured: two rounds read a refusal label, aimed engineering at
+    the wrong seam, and merged opposite diagnoses of the same wall.
+    """
+    rows = [(normalise_state(state), bool(ok)) for state, ok in (evidence or ())]
+    successes = [state for state, ok in rows if ok]
+    failures = [state for state, ok in rows if not ok]
+
+    def _missing(kind: str, reason: str) -> dict[str, Any]:
+        return {
+            "schema": SCHEMA, "kind": kind, "reason": reason,
+            "successes": len(successes), "failures": len(failures),
+            "shared_facts": [], "witness_failure_indices": [],
+            "unrepairable_by_repetition": False,
+            "what_would_repair_it": "AN_OBSERVATION_OF_THE_MISSING_KIND__NOT_A_NEW_OBSERVABLE",
+        }
+
+    if not rows:
+        return _missing(WITNESS_NO_EVIDENCE, "NOTHING_OBSERVED")
+    if not failures:
+        return _missing(WITNESS_NO_FAILURE, "A_SUCCESS_CANNOT_ESTABLISH_NECESSITY")
+    if not successes:
+        return _missing(WITNESS_NO_SUCCESS, "NO_SUCCESS_TO_SCOPE_FROM")
+
+    shared: frozenset[str] = frozenset(successes[0])
+    for state in successes[1:]:
+        shared = shared & state
+
+    # The equal-facts shape is reported preferentially: it is strictly more specific, and it names
+    # the two worlds that are one point to this sensor, which is what a suffix-predicate repair aims at.
+    by_state: dict[frozenset[str], set[bool]] = {}
+    for state, ok in rows:
+        by_state.setdefault(state, set()).add(ok)
+    for state in sorted(by_state, key=lambda s: (len(s), sorted(s))):
+        if len(by_state[state]) > 1:
+            return {
+                "schema": SCHEMA, "kind": WITNESS_SAME_STATE,
+                "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+                "successes": len(successes), "failures": len(failures),
+                "facts": sorted(state), "shared_facts": sorted(shared),
+                "witness_failure_indices": [
+                    i for i, f in enumerate(failures) if f == state],
+                "unrepairable_by_repetition": True,
+                "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+            }
+
+    witnesses = [i for i, state in enumerate(failures) if shared <= state]
+    if witnesses:
+        return {
+            "schema": SCHEMA, "kind": WITNESS_SEPARATION_IMPOSSIBLE,
+            "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+            "successes": len(successes), "failures": len(failures),
+            "shared_facts": sorted(shared),
+            "witness_failure_indices": witnesses,
+            "unrepairable_by_repetition": True,
+            "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+        }
+    return None
+
+
 def candidate_requirements(
     evidence: Sequence[tuple[Iterable[str], bool]],
     *,
