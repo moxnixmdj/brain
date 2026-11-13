@@ -7,7 +7,7 @@
  "route_id": "TWO_DOORS_ONE_ANSWER_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "167c37a0a1433cb9adbf0b48fe1674b551a13ecf",
+ "canonical_base_commit": "be61049e098352a91aa26d0d396725cbb4e0577b",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -56,7 +56,7 @@
   "canonical/tools/across_environments_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "167c37a0a1433cb9adbf0b48fe1674b551a13ecf",
+  "canonical_base_commit": "be61049e098352a91aa26d0d396725cbb4e0577b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "real_outcome": "PRIMARY_DOOR_9_OF_9_SECONDARY_DOOR_2_OF_9_ON_NINE_SENTENCES_WITH_AST_GROUND_TRUTH__THE_SECONDARY_DOOR_IS_RIGHT_IF_AND_ONLY_IF_THE_ASKED_COUNT_EQUALS_FUNCTIONS_PLUS_CLASSES",
   "required_capability": "BIND_THE_QUANTITY_NAMED_IN_A_SENTENCE_TO_THE_FIELD_DELIVERED_AT_EVERY_PUBLISHABLE_ENTRY_POINT",
