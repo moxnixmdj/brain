@@ -1,3 +1,5 @@
+> **⚠ SUPERSEDED — HISTORY, NOT EVIDENCE (bannered 2026-11-12)** — this document's headline claims were never supported by any measurement: no coverage, no precision, no held-out set, no wrong-change count. It is kept for the record and may not be cited as evidence of capability, generalization, or learning. See `REALITY_CHECK_INSTANT_LEARNING_COMPUTER_USE_SENTIENCE_20261112_V1.md` and `WHAT_2026_SAYS_ABOUT_THIS_20261112_V1.md` for the measured position.
+
 # REAL Generalization Solution (2026) - MCP Box Compiler
 
 ## The Brutal Truth About Our Previous "Solution"
