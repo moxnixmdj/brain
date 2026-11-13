@@ -1,0 +1,70 @@
+{
+  "authority": "NONE -- a measurement of this tree in an Arena session sandbox, not a verification receipt and not independent verification of anything",
+  "carrier": "SANDBOX",
+  "correction_20261112": "An earlier measurement on the same day reported 605 predicates and 10 of them declaring an expectation (1.7%). Both were wrong by the same defect: the binary-identity corpus is read by two code paths in one function, an explicit branch and the generic JSON walk, so its 5 predicates were each counted twice. The honest figures are 600 and 5 (0.83%). declaring_none was and is 595, because every duplicated entry was one of the checked ones -- the double count inflated the numerator of the only flattering fraction in the report.",
+  "declares_nothing_about": "whether any claim is true. 5 checked predicates is 0.83% of the corpus; the rest of the passes observed on 2026-11-12 were processes that started and exited 0 with nothing asserted about their output.",
+  "declaring_none": 595,
+  "floor": {
+    "declaring_an_expectation": 5,
+    "declaring_none": 595,
+    "fraction_checked": 0.0083,
+    "predicates_declared": 600
+  },
+  "how_reproduced": [
+    "python3 canonical/tools/auditability_report_v1.py --floor",
+    "python3 canonical/tools/auditability_report_v1.py --floor --baseline canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json"
+  ],
+  "measured_at_git_head": "537368bbbfe6c6c3b370960c774846a432cf39bd",
+  "measured_on": "2026-11-12",
+  "not_deduplicated": "18 (source, argv) pairs repeat across the tree. They are counted as declared, not merged: deduplicating would shrink the denominator by a guess about what a repeated declaration means, and a smaller denominator flatters the fraction. Two records are two declarations until someone shows they are one claim.",
+  "producer": "canonical/tools/auditability_report_v1.py --floor",
+  "reading": [
+    "One file holds 184 of the 595 -- canonical/runtime/CAPABILITY_RECEIPT_PROJECTION_V1.json, 31% of the whole gap. The floor is concentrated, so it is cheap to move.",
+    "Before 2026-11-12 the executed audit reported 495 PASS and 0 FAIL, because run_predicate discarded the exit code of any record that declared no expectation. After the repair it reported FAIL 58 with the report red. This floor exists so neither number can move silently again."
+  ],
+  "schema": "AUDITABILITY_DECLARATION_FLOOR_V1",
+  "what_this_gates": "declaring_none may fall and must not rise. It counts records that declare a verification command but ask for nothing to be checked, so the only way such a record can be contradicted is by its exit code and never by its output. Lowering this file is a deliberate act that belongs in a commit with a reason.",
+  "why_not_the_fail_count": "--audit executes 600 commands over ~13 minutes, writes into the tree it measures (live_audit.json and .html, a controller checkpoint, experience_v1.json, plus new DIAGNOSTIC result files), and its verdicts depend on what the machine has installed: 8 of its failures name another machine's filesystem outright and 19 predicates land in the 30s timeout budget. A CI gate on that number would be flaky by construction, and a flaky gate gets muted, which is worse than no gate. A declaration is a property of JSON on disk and is identical on every runner: this measurement takes 1.9s and writes nothing.",
+  "worst_sources_at_measurement": [
+    {
+      "declaring_none": 184,
+      "source": "canonical/runtime/CAPABILITY_RECEIPT_PROJECTION_V1.json"
+    },
+    {
+      "declaring_none": 12,
+      "source": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
+    },
+    {
+      "declaring_none": 6,
+      "source": "canonical/astra_runtime/state/ASTRA-RUNTIME-PLAIN-GOAL-QR-001.json"
+    },
+    {
+      "declaring_none": 6,
+      "source": "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+    },
+    {
+      "declaring_none": 4,
+      "source": "canonical/astra_runtime/pending_bindings/ASTRA-RUNTIME-PLAIN-GOAL-BARCODE-003__zint__85bc9cd2c9a4.json"
+    },
+    {
+      "declaring_none": 4,
+      "source": "canonical/astra_runtime/state/ASTRA-RUNTIME-CAPABILITY-AUDIT-001.json"
+    },
+    {
+      "declaring_none": 4,
+      "source": "canonical/astra_runtime/verification_capsules/PR15_BLIND_AUTO_ACQUIRE_CBOR_WINDOWS_001.json"
+    },
+    {
+      "declaring_none": 4,
+      "source": "canonical/astra_runtime/verification_capsules/PR20_GENERIC_NATIVE_PROBE_RECOVERY_001.json"
+    },
+    {
+      "declaring_none": 4,
+      "source": "canonical/capabilities/obsolescence/TOOL_DISCOVERY_SELECTION_LEARNING_EXECUTABLE_EVIDENCE_SOURCE_DIAGNOSTIC_001_RECONCILIATION.json"
+    },
+    {
+      "declaring_none": 4,
+      "source": "canonical/verification/ROOT3_PDF_RASTER_TEMP_EXECUTOR_SPRITE_VERIFICATION_20261005_V1.json"
+    }
+  ]
+}

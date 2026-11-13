@@ -15,6 +15,7 @@ import hashlib
 import json
 import io
 import keyword
+import math
 import tokenize
 import os
 import pathlib
@@ -617,6 +618,156 @@ def narrow_rule_at_apply_time(rule: Mapping[str, Any]) -> dict[str, Any] | None:
     return narrowed
 
 
+def iter_narrowed_rules_at_apply_time(rule: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Yield relational frame-stripped and compound-collapsed narrowed rules at apply time.
+
+    1. When unchanged leading/trailing statement frame tokens (e.g. ``return ``, ``x = ``)
+       surround a relational expression whose adjacent compound operand ``(?id0 * ?id1)``
+       shares bound holes with the rest of the expression, yield the frame-stripped rule
+       preserving the relational compound operand (e.g. ``?id0 + (?id0 * ?id1) -> ?id0 - (?id0 * ?id1)``).
+    2. Also yield ``narrow_rule_at_apply_time(rule)`` (compound-operand collapsed ``?id_lhs`` / ``?id_rhs``).
+    """
+    if not rule_is_applicable(rule):
+        return []
+    out: list[dict[str, Any]] = []
+    pat = [tuple(tok) for tok in (rule.get("pattern_tokens") or [])]
+    rep = [tuple(tok) for tok in (rule.get("replacement_tokens") or [])]
+    pat_nw = [(idx, tok) for idx, tok in enumerate(pat) if tok[0] != "ws"]
+    rep_nw = [(idx, tok) for idx, tok in enumerate(rep) if tok[0] != "ws"]
+    if pat_nw and rep_nw:
+        p_common = 0
+        while p_common < len(pat_nw) and p_common < len(rep_nw) and pat_nw[p_common][1] == rep_nw[p_common][1]:
+            p_common += 1
+        s_common = 0
+        while (
+            s_common < (len(pat_nw) - p_common)
+            and s_common < (len(rep_nw) - p_common)
+            and pat_nw[len(pat_nw) - 1 - s_common][1] == rep_nw[len(rep_nw) - 1 - s_common][1]
+        ):
+            s_common += 1
+        if p_common > 0 or s_common > 0:
+            p_rel = p_common
+            if p_rel > 0 and pat_nw[p_rel - 1][1][0] in _HOLE_KIND:
+                p_rel -= 1
+            elif p_rel > 1 and pat_nw[p_rel - 1][1] in (("op", ")"), ("op", "]")):
+                close_tok = pat_nw[p_rel - 1][1][1]
+                open_tok = "(" if close_tok == ")" else "["
+                depth = 0
+                for idx in range(p_rel - 1, -1, -1):
+                    tk = pat_nw[idx][1]
+                    if tk == ("op", close_tok):
+                        depth += 1
+                    elif tk == ("op", open_tok):
+                        depth -= 1
+                        if depth == 0:
+                            if not (idx > 0 and pat_nw[idx - 1][1][0] == "ident"):
+                                p_rel = idx
+                            break
+            s_rel = s_common
+            rhs_head_idx = len(pat_nw) - s_rel
+            if s_rel > 0 and pat_nw[rhs_head_idx][1][0] in _HOLE_KIND:
+                s_rel -= 1
+            elif s_rel > 1 and pat_nw[rhs_head_idx][1] in (("op", "("), ("op", "[")):
+                open_tok = pat_nw[rhs_head_idx][1][1]
+                close_tok = ")" if open_tok == "(" else "]"
+                depth = 0
+                for idx in range(rhs_head_idx, len(pat_nw)):
+                    tk = pat_nw[idx][1]
+                    if tk == ("op", open_tok):
+                        depth += 1
+                    elif tk == ("op", close_tok):
+                        depth -= 1
+                        if depth == 0:
+                            s_rel = len(pat_nw) - 1 - idx
+                            break
+            if (p_rel > 0 or s_rel > 0) and (p_rel + s_rel < len(pat_nw)) and (p_rel + s_rel < len(rep_nw)):
+                rel_pat = list(pat[pat_nw[p_rel][0] : pat_nw[len(pat_nw) - 1 - s_rel][0] + 1])
+                rel_rep = list(rep[rep_nw[p_rel][0] : rep_nw[len(rep_nw) - 1 - s_rel][0] + 1])
+                bound_h = {v for k, v in rel_pat if k in _HOLE_KIND}
+                needed_h = {v for k, v in rel_rep if k in _HOLE_KIND}
+                has_conc = any(k not in _HOLE_KIND and k != "ws" for k, _ in rel_pat)
+                if rel_pat != pat and bound_h and has_conc and needed_h.issubset(bound_h):
+                    rel_rule = dict(rule)
+                    rel_rule.pop("pattern_format", None)
+                    rel_rule["pattern_tokens"] = rel_pat
+                    rel_rule["replacement_tokens"] = rel_rep
+                    out.append(rel_rule)
+
+    collapsed = narrow_rule_at_apply_time(rule)
+    if collapsed is not None:
+        if not any(
+            r.get("pattern_tokens") == collapsed.get("pattern_tokens")
+            and r.get("replacement_tokens") == collapsed.get("replacement_tokens")
+            for r in out
+        ):
+            out.append(collapsed)
+    return out
+
+
+def _canonicalize_rule_holes(rule: Mapping[str, Any]) -> dict[str, Any]:
+    """Rename holes in appearance order (`?id0, ?id1, ...`) so narrowed rules from distinct statement frames unify."""
+    pat = [tuple(t) for t in (rule.get("pattern_tokens") or [])]
+    rep = [tuple(t) for t in (rule.get("replacement_tokens") or [])]
+    remap: dict[str, str] = {}
+    counts: dict[str, int] = {}
+    prefix_map = {"hole_id": "?id", "hole_num": "?num", "hole_str": "?str"}
+    new_pat: list[tuple[str, str]] = []
+    for k, v in pat:
+        if k in prefix_map and v not in ("?id_lhs", "?id_rhs"):
+            if v not in remap:
+                idx = counts.get(k, 0)
+                counts[k] = idx + 1
+                remap[v] = f"{prefix_map[k]}{idx}"
+            new_pat.append((k, remap[v]))
+        else:
+            new_pat.append((k, v))
+    new_rep: list[tuple[str, str]] = [
+        (k, remap.get(v, v)) if k in prefix_map else (k, v)
+        for k, v in rep
+    ]
+    out = dict(rule)
+    out["pattern_tokens"] = new_pat
+    out["replacement_tokens"] = new_rep
+    return out
+
+
+def anti_unify_code_rule_pair(
+    before_1: str,
+    after_1: str,
+    before_2: str,
+    after_2: str,
+    *,
+    language: str = "python",
+    error_class: str = "GENERIC",
+) -> dict[str, Any] | None:
+    """Plotkin LGG across two code repair demonstrations (including distinct statement frames)."""
+    r1 = anti_unify_code_rule(before_1, after_1, language=language, error_class=error_class)
+    r2 = anti_unify_code_rule(before_2, after_2, language=language, error_class=error_class)
+    if r1 is None or r2 is None:
+        return None
+    cands_1 = [_canonicalize_rule_holes(r1)] + [_canonicalize_rule_holes(x) for x in iter_narrowed_rules_at_apply_time(r1)]
+    cands_2 = [_canonicalize_rule_holes(r2)] + [_canonicalize_rule_holes(x) for x in iter_narrowed_rules_at_apply_time(r2)]
+    sig_2 = {
+        (
+            tuple((k, v) for k, v in c["pattern_tokens"] if k != "ws"),
+            tuple((k, v) for k, v in c["replacement_tokens"] if k != "ws"),
+        ): c
+        for c in cands_2
+    }
+    for c1 in cands_1:
+        key = (
+            tuple((k, v) for k, v in c1["pattern_tokens"] if k != "ws"),
+            tuple((k, v) for k, v in c1["replacement_tokens"] if k != "ws"),
+        )
+        if key in sig_2:
+            if (
+                after_1.strip() in {s.strip() for s in _iter_token_rule_candidates(before_1, c1)}
+                and after_2.strip() in {s.strip() for s in _iter_token_rule_candidates(before_2, c1)}
+            ):
+                return c1
+    return None
+
+
 def _iter_token_rule_candidates(
     source_text: str,
     rule: Mapping[str, Any],
@@ -662,30 +813,62 @@ def _iter_token_rule_candidates(
     for start_idx in range(1 if _anchored else len(src_tokens) - plen + 1):
         bindings: dict[str, str] = dict(_initial_bindings or {})
         matched = True
-        for offset, (pk, pv) in enumerate(pat_non_ws):
-            sk, sv, _, _ = src_tokens[start_idx + offset]
+        src_idx = start_idx
+        for pk, pv in pat_non_ws:
+            if src_idx >= len(src_tokens):
+                matched = False
+                break
+            sk, sv, s_start, _ = src_tokens[src_idx]
             if pk in _HOLE_KIND:
-                if sk != _HOLE_KIND[pk]:
+                if sk == _HOLE_KIND[pk]:
+                    bound_val = sv
+                    src_idx += 1
+                elif (
+                    pv in ("?id_lhs", "?id_rhs")
+                    and sk == "op"
+                    and sv in ("(", "[")
+                    and not (src_idx > 0 and src_tokens[src_idx - 1][0] == "ident")
+                ):
+                    close_ch = ")" if sv == "(" else "]"
+                    depth = 0
+                    close_idx: int | None = None
+                    for scan_i in range(src_idx, len(src_tokens)):
+                        tk_k, tk_v, _, _ = src_tokens[scan_i]
+                        if tk_k == "op" and tk_v == sv:
+                            depth += 1
+                        elif tk_k == "op" and tk_v == close_ch:
+                            depth -= 1
+                            if depth == 0:
+                                close_idx = scan_i
+                                break
+                    if close_idx is None:
+                        matched = False
+                        break
+                    bound_val = source_text[s_start : src_tokens[close_idx][3]]
+                    src_idx = close_idx + 1
+                else:
                     matched = False
                     break
                 prev = bindings.get(pv)
-                if prev is not None and prev != sv:
+                if prev is not None and prev != bound_val:
                     matched = False
                     break
-                bindings[pv] = sv
+                bindings[pv] = bound_val
             elif pk == "kw" and sql_mode:
                 if sk != "kw" or sv.upper() != pv.upper():
                     matched = False
                     break
+                src_idx += 1
             else:
                 if sk != pk or sv != pv:
                     matched = False
                     break
-        if not matched:
+                src_idx += 1
+        if not matched or src_idx <= start_idx:
             continue
 
         span_start = src_tokens[start_idx][2]
-        span_end = src_tokens[start_idx + plen - 1][3]
+        span_end = src_tokens[src_idx - 1][3]
         line_start = source_text.rfind("\n", 0, span_start) + 1
         indent = ""
         for ch in source_text[line_start:span_start]:
@@ -1457,8 +1640,7 @@ class VerifiedSkillStore:
                 and required_verification_kind == "TEST_SUITE"
                 and learned_scope != "SCOPE_STATEMENT"
             ):
-                narrowed = narrow_rule_at_apply_time(rule)
-                if narrowed is not None:
+                for narrowed in iter_narrowed_rules_at_apply_time(rule):
                     hit, invalidated_mid_run = _try_candidate_batch(
                         rule,
                         _iter_token_rule_candidates(source_text, narrowed),
@@ -1468,6 +1650,8 @@ class VerifiedSkillStore:
                     )
                     if hit is not None:
                         return hit
+                    if invalidated_mid_run:
+                        break
                 if not invalidated_mid_run:
                     try:
                         from canonical.swe_kernel.tree_sitter_cst_skill_skeleton_v1 import (
@@ -1962,9 +2146,27 @@ class VerifiedSkillStore:
                 if not identity_matches:
                     refusals.append({"skill_id": stated, "reason": "CONTENT_ADDRESS_MISMATCH"})
                     continue
+                # Metadata is not covered by the rule's content address. Validate before
+                # touching SQLite: one malformed count/time must not abort later lessons or
+                # poison a merge. Canonical counters fit SQLite's signed INTEGER exactly.
+                hits = entry.get("verified_hits", 1)
+                if isinstance(hits, bool) or not isinstance(hits, int) or not 0 <= hits < (1 << 63):
+                    refusals.append({"skill_id": stated, "reason": "INVALID_VERIFIED_HITS"})
+                    continue
+                raw_created = entry.get("created_ts")
+                if raw_created is None:
+                    created = time.time()
+                else:
+                    try:
+                        if isinstance(raw_created, bool) or not isinstance(raw_created, (int, float)):
+                            raise ValueError("timestamp is not numeric")
+                        created = float(raw_created)
+                        if not math.isfinite(created) or created < 0:
+                            raise ValueError("timestamp is not finite and nonnegative")
+                    except (TypeError, ValueError, OverflowError):
+                        refusals.append({"skill_id": stated, "reason": "INVALID_CREATED_TS"})
+                        continue
                 prov = entry.get("provenance") or []
-                hits = int(entry.get("verified_hits", 1))
-                created = float(entry.get("created_ts") or time.time())
                 existing = conn.execute(
                     "SELECT verified_hits, created_ts, provenance_json, pattern_json FROM crystallized_skills "
                     "WHERE skill_id = ?", (stated,)

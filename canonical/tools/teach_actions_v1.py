@@ -35,6 +35,7 @@ import ast
 import io
 import json
 import pathlib
+import re
 import sys
 import tempfile
 import tokenize
@@ -361,7 +362,9 @@ LESSONS += [
         "first_request": {"target": "lessons_q7/sizes_q7.py", "lesson": "lessons_q7/kept_q7/plain_q7.lesson"},
         "said_as": ["edit {target} the way {lesson} remembers and leave the rest alone"],
         "answers": "edited {target} the way {lesson} remembers and left the rest alone",
-        "first_example": {                      # the lesson showed two arguments; the call with a keyword is left
+        "first_example": {                      # assertEquals is assertEqual kept under an old name, so the
+                                                # keyword call follows too; the yaml example below shows a true
+                                                # replacement, where the unshown use is left alone
             "before": {
                 "lessons_q7/kept_q7/plain_q7.lesson": _as_file(_kept(
                     [EQUALS_ONE], ("one/was.py -> one/is.py", SUITE_WAS, SUITE_IS))),
@@ -381,7 +384,7 @@ LESSONS += [
                 "class SizesTest(unittest.TestCase):\n"
                 "    def test_size(self):\n"
                 "        self.assertEqual(size(2), 4)\n"
-                "        self.assertEquals(size(3), 9, msg='nine')  # a use the lesson never showed\n")},
+                "        self.assertEqual(size(3), 9, msg='nine')  # a use the lesson never showed\n")},
         },
         "second_example": {
             "request": {"target": "tools/load.py", "lesson": "notes/safe.lesson"},
@@ -515,9 +518,45 @@ class LessonError(Exception):
     """A lesson that must not be taught as written."""
 
 
+def carried_along(text: str) -> str:
+    """The program with each sibling it imports carried along, so it still travels as one file.
+
+    A taught program runs alone in the sandbox: ``from . import x_v1 as x`` finds nothing there.
+    Knowledge two programs share may live in one sibling file -- but at teaching time that sibling's
+    source is folded in, bound under the same name, and the program is self-contained again.
+    """
+    # Some programs also support direct exec from the repository by falling back to an
+    # absolute import. Neither form works in the isolated sandbox; carry the sibling
+    # for the whole try/except, not just its relative-import line.
+    patterns = (
+        re.compile(r"^try:\n    from \. import (\w+) as (\w+)\n"
+                   r"except ImportError:[^\n]*\n"
+                   r"    from canonical\.swe_kernel\.taught_actions import \1 as \2\n", re.M),
+        re.compile(r"^from \. import (\w+) as (\w+)[ \t]*\n", re.M),
+    )
+
+    def carry(found: re.Match) -> str:
+        module_name, bound_name = found.group(1, 2)
+        source = (PROGRAMS / (module_name + ".py")).read_text(encoding="utf-8")
+        return ("# ---- %s, carried along so the program travels alone ----\n"
+                "import types as _carrier\n"
+                "%s = _carrier.SimpleNamespace()\n"
+                "exec(compile(%r, %r, 'exec'), %s.__dict__)\n"
+                % (module_name, bound_name, source, module_name + ".py", bound_name))
+
+    for pattern in patterns:
+        text = pattern.sub(carry, text)
+    if any(isinstance(node, ast.ImportFrom) and
+           (node.level or (node.module or "").startswith("canonical.swe_kernel.taught_actions"))
+           for node in ast.walk(ast.parse(text))):
+        raise LessonError("a taught program contains an unsupported sibling import")
+    return text
+
+
 def program_and_request(lesson: dict) -> tuple[str, dict[str, str]]:
     """The program text and the values of its first example, read from its ``REQUEST`` line."""
-    text = (PROGRAMS / (lesson.get("program", lesson["action"]) + ".py")).read_text(encoding="utf-8")
+    text = carried_along(
+        (PROGRAMS / (lesson.get("program", lesson["action"]) + ".py")).read_text(encoding="utf-8"))
     if "does" in lesson:
         lines = text.splitlines(keepends=True)
         at = [number for number, line in enumerate(lines) if line.startswith("REQUEST = ")]

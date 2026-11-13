@@ -228,6 +228,7 @@ def _stage_or_crystallize_paired_skill(
     try:
         from canonical.swe_kernel.causal_trace_to_skill_compiler_v1 import (
             anti_unify_workflow,
+            bind_goal_parameters,
             compile_and_qualify_skill,
         )
     except Exception:
@@ -237,8 +238,6 @@ def _stage_or_crystallize_paired_skill(
     step_list = [{"layer": "confined_python_exec", "code": prog} for prog in ok_programs]
     post = {"kind": "file_nonempty", "path": primary_out}
     generalized = anti_unify_workflow(goal, step_list, post)
-    if not generalized.get("param_order"):
-        return None
 
     st_file = Path(staging_path) if staging_path is not None else _default_staging_path()
     try:
@@ -250,6 +249,28 @@ def _stage_or_crystallize_paired_skill(
     episodes = staged_doc.setdefault("episodes", {})
     skel = str(generalized["goal_skeleton"])
     prior = episodes.get(skel)
+    matched_skel = skel
+    if not isinstance(prior, dict):
+        for cand_skel, cand_ep in list(episodes.items()):
+            if not isinstance(cand_ep, dict) or str(cand_ep.get("goal") or "") == goal:
+                continue
+            cand_gen = anti_unify_workflow(
+                str(cand_ep.get("goal") or ""),
+                list(cand_ep.get("steps") or ()),
+                dict(cand_ep.get("postcondition") or {}),
+                peer_goal=goal,
+            )
+            if not cand_gen.get("param_order"):
+                continue
+            b2 = bind_goal_parameters(cand_gen, goal)
+            if b2 is not None and b2 != cand_gen.get("concrete_bindings"):
+                prior = cand_ep
+                matched_skel = str(cand_skel)
+                generalized = cand_gen
+                break
+
+    if not generalized.get("param_order") and not isinstance(prior, dict):
+        return None
 
     if not isinstance(prior, dict):
         episodes[skel] = {
@@ -265,8 +286,8 @@ def _stage_or_crystallize_paired_skill(
             pass
         return {"staged": True, "crystallized": False, "goal_skeleton": skel}
 
-    if prior.get("concrete_bindings") == generalized["concrete_bindings"]:
-        return {"staged": True, "crystallized": False, "goal_skeleton": skel}
+    if str(prior.get("goal") or "").strip() == goal.strip():
+        return {"staged": True, "crystallized": False, "goal_skeleton": matched_skel}
 
     db_p = Path(skill_db) if skill_db is not None else None
     with tempfile.TemporaryDirectory(prefix="brain_solve_qual_") as held_tmp:

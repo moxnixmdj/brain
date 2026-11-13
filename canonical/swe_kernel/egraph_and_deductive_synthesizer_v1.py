@@ -29,6 +29,53 @@ def _run_cmd(argv: list[str], cwd: Path, timeout: float = 20.0) -> tuple[int, st
     return (int(rc) if rc is not None else 124), out_b.decode("utf-8", errors="replace"), err_b.decode("utf-8", errors="replace")
 
 
+#: Budget for ONE measurement of a project's own test suite -- the baseline
+#: before an edit, the verification after it, and the runner they share.  The
+#: implicit 20 s helper default refused every project whose suite takes longer
+#: than 20 s: measured 2026-11-12, a 21 s fixture suite died at 20.3 s with
+#: PROJECT_TEST_BASELINE_UNMEASURABLE while it was still running (rc=-9 at the
+#: deadline).  300 s is the reviewed budget for this gate; past it the
+#: measurement still refuses -- fail-closed, never partial, and never silently
+#: empty (a suite that loads nothing while test files exist refuses by name,
+#: see BASELINE_NO_DISCOVERABLE_TESTS).
+BASELINE_BUDGET_S = 300.0
+
+#: Exit code a suite child uses to say "test files exist here and I loaded
+#: zero tests" -- an empty measurement, not a green one.
+_BASELINE_EMPTY_MARKER = "BASELINE_NO_DISCOVERABLE_TESTS"
+
+
+def _test_files_present(search_dir: Path) -> bool:
+    """True when unittest discovery's OWN scope holds test-shaped files.
+
+    Mirrors the loader's traversal: direct ``test*.py`` / ``*_test.py`` files at
+    this level, descending only into importable packages (directories with an
+    ``__init__.py``) -- a non-package directory is invisible to ``discover``, so
+    files inside one are not evidence that this measurement was empty.
+    """
+    try:
+        if not search_dir.is_dir():
+            return False
+        for entry in search_dir.iterdir():
+            if entry.is_file() and entry.suffix == ".py" and (
+                    entry.name.startswith("test") or entry.name.endswith("_test.py")):
+                return True
+            if entry.is_dir() and (entry / "__init__.py").is_file() and _test_files_present(entry):
+                return True
+    except OSError:
+        return False
+    return False
+
+
+def _empty_measurement(rc: int, err: str, search_dir: Path) -> tuple[int, bool]:
+    """Classify a child's exit: (effective rc, refusal-due-to-empty-measurement)."""
+    if rc == 3 and _BASELINE_EMPTY_MARKER in err:
+        if _test_files_present(search_dir):
+            return rc, True
+        return 0, False  # an empty project: nothing to measure, nothing to refuse
+    return rc, False
+
+
 def _compare_in_child(before: str, after: str, target: Path, symbol: str, integer_range: bool, *, timeout: float = 30) -> dict[str, Any]:
     payload = {'before': before, 'after': after, 'target': str(target), 'symbol': symbol, 'integer_range': integer_range}
     worker = r"""
@@ -85,7 +132,7 @@ def _suite_expr_and_env(
     project_root: Path,
     pkg_dir: Path | None = None,
     target_files: list[Path] | None = None,
-) -> tuple[str, list[str], Path]:
+) -> tuple[str, list[str], Path, Path]:
     tests_dir = project_root / "tests"
     search_dir = tests_dir if tests_dir.is_dir() else (pkg_dir if pkg_dir and pkg_dir.is_dir() else project_root)
     py_paths = [str(project_root)]
@@ -104,7 +151,7 @@ def _suite_expr_and_env(
 
     all_test_files = sorted(search_dir.glob("test*.py")) if search_dir.is_dir() else []
     if len(all_test_files) <= 60:
-        return f"unittest.defaultTestLoader.discover({str(search_dir)!r})", py_paths, run_cwd
+        return f"unittest.defaultTestLoader.discover({str(search_dir)!r})", py_paths, run_cwd, search_dir
 
     stems = [
         p.stem for p in (target_files or [])
@@ -132,7 +179,7 @@ def _suite_expr_and_env(
         "unittest.TestSuite([unittest.defaultTestLoader.discover("
         f"{str(search_dir)!r}, pattern=_fn) for _fn in {selected!r}])"
     )
-    return suite_expr, py_paths, run_cwd
+    return suite_expr, py_paths, run_cwd, search_dir
 
 
 def _collect_project_bad_tests(
@@ -140,14 +187,21 @@ def _collect_project_bad_tests(
     pkg_dir: Path | None = None,
     target_files: list[Path] | None = None,
 ) -> set[str]:
-    suite_expr, py_paths, run_cwd = _suite_expr_and_env(project_root, pkg_dir, target_files)
+    suite_expr, py_paths, run_cwd, search_dir = _suite_expr_and_env(project_root, pkg_dir, target_files)
     probe = (
         f"import json, sys, unittest; sys.path.extend({py_paths!r}); "
         f"suite = {suite_expr}; "
         "res = unittest.TestResult(); suite.run(res); "
-        "sys.stdout.write(json.dumps([t.id() for t, _ in (res.failures + res.errors)]))"
+        "sys.stdout.write(json.dumps([t.id() for t, _ in (res.failures + res.errors)])); "
+        "empty = suite.countTestCases() == 0; "
+        f"sys.stderr.write({_BASELINE_EMPTY_MARKER + chr(10)!r} if empty else ''); "
+        "raise SystemExit(3 if empty else 0)"
     )
-    rc, out, _ = _run_cmd([sys.executable, "-B", "-P", "-c", probe], cwd=run_cwd)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", probe],
+                            cwd=run_cwd, timeout=BASELINE_BUDGET_S)
+    rc, empty_refusal = _empty_measurement(rc, err, search_dir)
+    if empty_refusal:
+        raise RuntimeError("PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE")
     if rc != 0 or not out.strip():
         raise RuntimeError("PROJECT_TEST_BASELINE_UNMEASURABLE")
     try:
@@ -162,7 +216,7 @@ def _verify_no_new_test_failures(
     before_bad: set[str],
     edited_py_files: list[Path] | None = None,
 ) -> tuple[bool, str]:
-    suite_expr, py_paths, run_cwd = _suite_expr_and_env(project_root, pkg_dir, edited_py_files)
+    suite_expr, py_paths, run_cwd, search_dir = _suite_expr_and_env(project_root, pkg_dir, edited_py_files)
     for ef in (edited_py_files or []):
         if ef.is_file() and ef.suffix == ".py":
             src_txt = ef.read_text(encoding="utf-8")
@@ -189,9 +243,15 @@ def _verify_no_new_test_failures(
         "res = unittest.TestResult(); suite.run(res); "
         "new_bad = [(t.id(), tb) for t, tb in (res.failures + res.errors) if t.id() not in before]; "
         "sys.stdout.write(json.dumps({'ok': not new_bad, 'detail': new_bad[0][1][-300:] if new_bad else ''})); "
-        "raise SystemExit(0 if not new_bad else 1)"
+        "empty = suite.countTestCases() == 0; "
+        f"sys.stderr.write({_BASELINE_EMPTY_MARKER + chr(10)!r} if empty else ''); "
+        "raise SystemExit(3 if empty else (0 if not new_bad else 1))"
     )
-    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", runner_code], cwd=run_cwd)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-P", "-c", runner_code],
+                            cwd=run_cwd, timeout=BASELINE_BUDGET_S)
+    rc, empty_refusal = _empty_measurement(rc, err, search_dir)
+    if empty_refusal:
+        return False, "PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE"
     return rc == 0, (out + "\n" + err).strip()
 
 
@@ -200,14 +260,21 @@ def _run_project_tests(
     pkg_dir: Path | None = None,
     target_files: list[Path] | None = None,
 ) -> tuple[bool, str]:
-    suite_expr, py_paths, run_cwd = _suite_expr_and_env(project_root, pkg_dir, target_files)
+    suite_expr, py_paths, run_cwd, search_dir = _suite_expr_and_env(project_root, pkg_dir, target_files)
     runner_code = (
         f"import io, sys, unittest; sys.path[:0] = {py_paths!r}; "
         f"suite = {suite_expr}; "
         "buf = io.StringIO(); res = unittest.TextTestRunner(stream=buf, verbosity=1).run(suite); "
-        "sys.stdout.write(buf.getvalue()); raise SystemExit(0 if res.wasSuccessful() else 1)"
+        "sys.stdout.write(buf.getvalue()); "
+        "empty = suite.countTestCases() == 0; "
+        f"sys.stderr.write({_BASELINE_EMPTY_MARKER + chr(10)!r} if empty else ''); "
+        "raise SystemExit(3 if empty else (0 if res.wasSuccessful() else 1))"
     )
-    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_code], cwd=run_cwd)
+    rc, out, err = _run_cmd([sys.executable, "-B", "-c", runner_code],
+                            cwd=run_cwd, timeout=BASELINE_BUDGET_S)
+    rc, empty_refusal = _empty_measurement(rc, err, search_dir)
+    if empty_refusal:
+        return False, "PROJECT_TEST_BASELINE_UNMEASURABLE:TEST_FILES_FOUND_NONE_DISCOVERABLE"
     return rc == 0, (out + "\n" + err).strip()
 
 
@@ -3207,12 +3274,73 @@ def propose_egraph_algebraic_rewrites(source_text: str, rule: dict[str, Any] | A
 
     # Collect maximal arithmetic expressions (and their BinOp sub-expressions) with source spans
     expr_nodes: list[ast.expr] = []
+    aug_nodes: list[ast.AugAssign] = []
     for nd in ast.walk(tree):
         if isinstance(nd, (ast.BinOp, ast.UnaryOp)) and _span(nd) is not None:
             expr_nodes.append(nd)
+        elif isinstance(nd, ast.AugAssign) and isinstance(nd.target, ast.Name) and _span(nd) is not None:
+            aug_nodes.append(nd)
 
     proposals: list[str] = []
     seen: set[str] = {source_text}
+    # Map simple initial assignments `var = <init_expr>` in the same function/module for AugAssign folding
+    init_assigns: dict[str, ast.expr] = {}
+    for nd in ast.walk(tree):
+        if (
+            isinstance(nd, ast.Assign)
+            and len(nd.targets) == 1
+            and isinstance(nd.targets[0], ast.Name)
+            and isinstance(nd.value, ast.expr)
+        ):
+            init_assigns.setdefault(nd.targets[0].id, nd.value)
+
+    for aug in aug_nodes:
+        sp = _span(aug)
+        if sp is None or not isinstance(aug.target, ast.Name):
+            continue
+        lhs_expr = init_assigns.get(aug.target.id, ast.Name(id=aug.target.id, ctx=ast.Load()))
+        synth_binop = ast.BinOp(left=lhs_expr, op=aug.op, right=aug.value)
+        eg = EGraph()
+        leaf_src: dict[int, tuple[int, str]] = {}
+        root_cid = _ast_expr_to_egraph(eg, synth_binop, leaf_src)
+        _saturate_algebraic_egraph(eg, rounds=3)
+        matches = _match_pattern_in_eclass(eg, before_expr, root_cid, holes, {})
+        for env in matches[:4]:
+            hole_texts: dict[str, str] = {}
+            ok = True
+            for h in holes:
+                cid_h = env.get(h)
+                txt_h = _extract_eclass_source(eg, cid_h, leaf_src) if cid_h is not None else None
+                if not txt_h:
+                    ok = False
+                    break
+                hole_texts[h] = txt_h
+            if not ok:
+                continue
+            try:
+                repl_ast = _instantiate_after_ast(after_expr, hole_texts)
+                repl_txt = ast.unparse(repl_ast)
+            except Exception:
+                continue
+            s_idx, e_idx = sp
+            cand_stmts: list[str] = [f"{aug.target.id} = {repl_txt}"]
+            if isinstance(repl_ast, ast.BinOp) and isinstance(aug.op, (ast.Add, ast.Sub)) and isinstance(repl_ast.op, (ast.Add, ast.Sub)):
+                op_sym = "-=" if isinstance(repl_ast.op, ast.Sub) else "+="
+                val_sp = _span(aug.value)
+                rhs_txt = source_text[val_sp[0]:val_sp[1]] if val_sp is not None else ast.unparse(repl_ast.right)
+                cand_stmts.insert(0, f"{aug.target.id} {op_sym} {rhs_txt}")
+            for cand_stmt in cand_stmts:
+                patched = source_text[:s_idx] + cand_stmt + source_text[e_idx:]
+                if patched in seen:
+                    continue
+                try:
+                    ast.parse(patched)
+                except SyntaxError:
+                    continue
+                seen.add(patched)
+                proposals.append(patched)
+                break
+
     for target_expr in expr_nodes:
         sp = _span(target_expr)
         if sp is None:

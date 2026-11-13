@@ -96,7 +96,7 @@ _NOUNS: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
     (name, re.compile(pattern, re.I)) for name, pattern in (
         ("caller", r"\b(callers?|call\s?sites?|who\s+calls)\b"),
         ("function", r"\b(functions?|methods?)\b"),
-        ("class", r"\b(classes|class\s+hierarchy)\b"),
+        ("class", r"\b(classes|class\s+(?:hierarchy|names?))\b"),
         ("import", r"\b(import\s+cycles?|imports?|imported\s+modules?)\b"),
         ("definition", r"\b(definitions?)\b"),
         ("symbol", r"\b(symbols?)\b"),
@@ -596,7 +596,7 @@ def deliver_surface(goal: str, result: "dict[str, Any]", rows: "list[Mapping[str
     return []
 
 
-def lift_named_answer(result: "dict[str, Any]") -> bool:
+def lift_named_answer(result: "dict[str, Any]", goal: str = "") -> bool:
     """Hand over a row's OWN ``answer`` field, verbatim, when the result carries none.
 
     ``python.source.complexity.v1`` and ``python.source.definition_count.v1`` answer with a field
@@ -605,6 +605,11 @@ def lift_named_answer(result: "dict[str, Any]") -> bool:
     file therefore did nothing with it -- measured 2026-11-01: both matrix cases PASSed with
     ``answer: None`` while the row held the answer one level down.  Not re-shaping and not
     delivering are two different decisions, and only the first one was ever made.
+
+    When ``python.source.definition_count.v1`` reports ``function_count``, ``class_count`` and
+    ``definition_count`` together, a sentence asking specifically for functions (and not classes
+    or definitions) receives ``function_count``, and a sentence asking specifically for classes
+    (and not functions or definitions) receives ``class_count``.
 
     The value travels EXACTLY as the row stated it: no envelope, no noun, no count.
     """
@@ -615,9 +620,25 @@ def lift_named_answer(result: "dict[str, Any]") -> bool:
         for step in ((result.get("composer_execution") or {}).get("steps") or []):
             if isinstance(step, Mapping) and isinstance(step.get("result"), Mapping):
                 rows.append({"capability_id": step.get("capability_id"), "result": step["result"]})
+    g_text = str(goal or "")
     for row in rows:
         inner = row.get("result") if isinstance(row.get("result"), Mapping) else None
         if inner is not None and inner.get("answer") is not None:
+            if (
+                g_text
+                and "function_count" in inner
+                and "class_count" in inner
+                and "definition_count" in inner
+            ):
+                asks_fn = bool(re.search(r"\b(?:functions?|methods?)\b", g_text, re.I))
+                asks_cls = bool(re.search(r"\b(?:classes|class)\b", g_text, re.I))
+                asks_def = bool(re.search(r"\bdefinitions?\b", g_text, re.I))
+                if asks_fn and not asks_cls and not asks_def:
+                    result["answer"] = inner["function_count"]
+                    return True
+                if asks_cls and not asks_fn and not asks_def:
+                    result["answer"] = inner["class_count"]
+                    return True
             result["answer"] = inner["answer"]
             return True
     return False

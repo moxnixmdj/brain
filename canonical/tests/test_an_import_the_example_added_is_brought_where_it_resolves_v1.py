@@ -67,11 +67,12 @@ def test_an_import_of_something_that_cannot_be_found_is_refused_by_name():
     # and the file is left exactly as it was: repeated() raises before anything is written
 
 
-def test_an_import_the_example_did_not_add_is_still_only_a_demand():
-    # Both example files import html; nothing was added, so a file without it is refused as before.
+def test_an_import_the_example_did_not_add_is_brought_from_where_the_examples_had_it():
+    # Both example files import html, so nothing was added -- but the lesson knows the one absolute
+    # place the name comes from, and brings the same import instead of refusing a plain demand.
     example = (ESCAPE[0].replace("import cgi\n", "import cgi\nimport html\n"), ESCAPE[1])
-    with pytest.raises(by_example.Refused, match="the change uses 'html', which the file does not define"):
-        _repeat(TARGET, example)
+    edited = _repeat(TARGET, example)
+    assert "import html\n" in edited and "html.escape(name)" in edited
 
 
 def test_a_relative_import_the_example_added_is_not_carried_to_another_project():
@@ -183,3 +184,28 @@ def test_an_unresolvable_import_makes_the_try_fail_and_the_file_stays(tmp_path, 
     assert by_example.main(("repeat_tried", ("page.py", "escape.lesson", "check_page.py"))) == 3
     assert "nothing named 'zq_missing_q7'" in capsys.readouterr().out
     assert pathlib.Path("page.py").read_text() == before
+
+
+def test_a_standing_bring_extends_the_files_own_from_import_line() -> None:
+    # the examples' files import timezone from one place; the target already imports from datetime,
+    # so the person's move is one alias added to the file's own line -- not a parallel line
+    e1 = ("from datetime import datetime\nfrom datetime import timezone\n\n\ndef stamp():\n"
+          "    return datetime.utcnow().isoformat()\n")
+    e2 = ("from datetime import datetime\n\n\ndef when():\n    return datetime.utcnow().year\n",
+          "from datetime import datetime, timezone\n\n\ndef when():\n    return datetime.now(timezone.utc).year\n")
+    rules = by_example.learn_all([(e1, e1.replace("datetime.utcnow()", "datetime.now(timezone.utc)")), e2])
+    assert by_example.repeated(rules, "from datetime import date, datetime\n\n\ndef old(d):\n"
+                                      "    return datetime.utcnow() - d\n", "the examples") == (
+        "from datetime import date, datetime, timezone\n\n\ndef old(d):\n"
+        "    return datetime.now(timezone.utc) - d\n")
+
+
+def test_import_lines_the_examples_changed_different_ways_are_their_own_bookkeeping() -> None:
+    # one example widened `from datetime import datetime`, the other left that very line alone:
+    # no import rule is learned, no kind is lost, and the code-level lesson survives whole
+    e1 = ("from datetime import datetime\nfrom datetime import timezone\n\n\ndef stamp():\n"
+          "    return datetime.utcnow().isoformat()\n")
+    e2 = ("from datetime import datetime\n\n\ndef when():\n    return datetime.utcnow().year\n",
+          "from datetime import datetime, timezone\n\n\ndef when():\n    return datetime.now(timezone.utc).year\n")
+    rules = by_example.learn_all([(e1, e1.replace("datetime.utcnow()", "datetime.now(timezone.utc)")), e2])
+    assert [str(rule) for rule in rules] == ["datetime.utcnow() -> datetime.now(timezone.utc)"]

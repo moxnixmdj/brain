@@ -253,6 +253,36 @@ def _word_tokens(text):
             if len(t) >= 3}
 
 
+SHELL_ROWS = frozenset({
+    "shell.command.run", "cli_command.run", "shell.run", "command.run",
+})
+
+
+def _rows_that_can_run_a_stated_command(registry):
+    """Rows whose adapter actually executes an argv this module bound.
+
+    A sentence that STATES a command line has already said what should run. The
+    only question left is which row can run it, and exactly one shape of row can:
+    the ones whose adapter takes argv and hands it to a process. Everything else
+    -- a git bisect, an eight-stage pipeline, a diff security gate -- would be
+    answering a different request while quoting this one's words.
+
+    Derived, not listed: a row qualifies when its action template declares an
+    `argv` argument, which is the honest structural statement that this row
+    consumes a command line.
+    """
+    out = set()
+    for cid, entry in (registry or {}).items():
+        if str(cid) in SHELL_ROWS:
+            out.add(str(cid))
+            continue
+        template = entry.get("action_template") or {}
+        args = template.get("args") if isinstance(template, dict) else None
+        if isinstance(args, dict) and "argv" in args:
+            out.add(str(cid))
+    return out
+
+
 def keyword_candidates(goal, registry, k=8):
     """Route on the words the grounder is structurally blind to.
 
@@ -280,6 +310,28 @@ def keyword_candidates(goal, registry, k=8):
         if hits:
             scored.append((len(hits), str(cid)))
     scored.sort(key=lambda t: (-t[0], t[1]))
+    # A STATED COMMAND NARROWS THE FIELD TO ROWS THAT CAN RUN ONE.
+    #
+    # "run the shell command ls | head -2" states a command line (the pipeline is
+    # then refused by `extract_argv`, which cannot honour it without a shell). The
+    # word "head" also happens to be a keyword of
+    # `git.history.bisect_regression.v1`, which requires nothing -- so when the
+    # stated command was refused, that row survived and was reported as
+    # VERIFIED_ACTION. Measured 2026-11-12: a request for a shell pipeline was
+    # answered by bisecting this repository's history and calling it verified.
+    #
+    # Score cannot fix that, because the row is not wrong about the words; it is
+    # wrong about the job. Once the sentence has stated a command, only a row that
+    # executes commands is eligible. Nothing is invented: if no such row is a
+    # candidate the list is empty and the ordinary refusal stands.
+    try:
+        from canonical.runtime.composer_route_v1 import states_a_command_line as _sc
+        _states_command = bool(_sc(goal))
+    except Exception:  # noqa: BLE001 - no parser, no narrowing
+        _states_command = False
+    if _states_command:
+        runnable = _rows_that_can_run_a_stated_command(registry)
+        scored = [row for row in scored if row[1] in runnable]
     return [{"capability_id": cid, "combined_score": float(hits) * 10.0}
             for hits, cid in scored[:k]]
 
@@ -561,6 +613,33 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         if extra:
             merged = merged + [{"candidates": extra}]
 
+    # A REMEMBERED PROCEDURE IS A CANDIDATE, NOT A DECISION.
+    #
+    # `recall_resolution` below can only choose among survivors the router has already
+    # narrowed to, so it can never reach a task the router missed -- measured: it fires
+    # (`selected_because: REMEMBERED_RESOLUTION`) and changes nothing. A learned procedure
+    # that cannot rescue a miss is not learning, it is a tie-break.
+    #
+    # So the memory is injected HERE, before the loop, where every candidate is put through
+    # the same precondition probe, the same kind-contradiction check and the same binding as
+    # anything the grounder proposed. That is what makes it safe to generalise the match: a
+    # looser match costs a failed verification, never a wrong answer, because the candidate
+    # still has to earn its place.
+    #
+    # It is also why learning is restricted to VERIFIED receipts (procedure_memory_v1.learn):
+    # a failure teaches nothing here, and would only add a candidate that fails again.
+    if EXP is not None:
+        try:
+            from canonical.runtime import procedure_memory_v1 as _PM
+            _remembered = _PM.recall_many(goal)
+            if _remembered:
+                merged = merged + [{"candidates": [
+                    {"capability_id": r["capability_id"],
+                     "combined_score": round(float(r["similarity"]), 4) * 10.0}
+                    for r in _remembered if r.get("capability_id")]}]
+        except Exception:
+            pass
+
     # A FORGED CAPABILITY IS REGISTERED BUT NEVER PROPOSED.
     #
     # The same wall the computer-use family hit: the grounder scores
@@ -577,7 +656,9 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
     if forged_ids:
         have = {str(c.get("capability_id"))
                 for cl in merged for c in (cl.get("candidates") or [])}
-        pending = [{"capability_id": cid, "combined_score": 0.0}
+        goal_low = str(goal or "").lower()
+        pending = [{"capability_id": cid,
+                    "combined_score": 100.0 if cid.lower() in goal_low else 0.0}
                    for cid in forged_ids if cid not in have]
         if pending:
             merged = merged + [{"candidates": pending}]
@@ -681,7 +762,24 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 if s["capability_id"] == remembered:
                     chosen, why = s, "REMEMBERED_RESOLUTION"
                     break
+        if chosen is None:
+            try:
+                from canonical.runtime import procedure_memory_v1 as _PM
+                proc_hit = _PM.recall(goal)
+                if proc_hit and proc_hit.get("capability_id"):
+                    for s in survivors:
+                        if s["capability_id"] == proc_hit["capability_id"]:
+                            chosen, why = s, "REMEMBERED_PROCEDURE"
+                            break
+            except Exception:
+                pass
     if survivors and chosen is None:
+        # A ZERO-SCORE ROW MAY NOT GATE A MATCHED ONE.
+        # A forged capability is appended with combined_score 0.0 so it can be
+        # proposed when nothing else fits. It must not survive INTO the ambiguity
+        # gate, where its mere presence turns a decisive match into AMBIGUOUS.
+        _positive = [s for s in survivors if (s.get("score") or 0.0) > 0.0]
+        if _positive: survivors = _positive
         if len(survivors) == 1:
             chosen = survivors[0]
             why = "UNIQUE_SURVIVOR"
@@ -850,4 +948,16 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
             out["learned"] = EXP.observe(goal, out)
         except Exception as exc:
             out["learned"] = {"error": type(exc).__name__ + ":" + str(exc)}
+        # ONE VERIFIED RUN TEACHES A PROCEDURE. ONE FAILED RUN TEACHES NOTHING.
+        #
+        # `verified` is this receipt's own verdict, so a failure cannot launder itself into a
+        # preference for the next sentence that resembles it. The exact-recall store above is
+        # untouched: this writes to a separate `procedures` section of the same file.
+        try:
+            from canonical.runtime import procedure_memory_v1 as _PM
+            out["procedure_learned"] = _PM.learn(
+                goal, chosen["capability_id"], verified=bool(verified))
+        except Exception as exc:
+            out["procedure_learned"] = {"learned": False,
+                                        "error": type(exc).__name__ + ":" + str(exc)}
     return out

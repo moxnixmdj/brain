@@ -67,6 +67,13 @@ STRATA: tuple[str, ...] = (
     POLICY,
 )
 
+#: Strata whose organs are lifted into `G_t`. SKILL and WORLD_MODEL bodies are pure functions over
+#: data (a lookup, a table, a transition model) -- exactly the shapes the constant-collection lifter
+#: can parameterize. PERCEPTOR and VERIFIER entrypoints consume raw samples and emit parsed records,
+#: so lifting their literals would probe a parser with inputs it was never written to accept.
+_ADMISSIBLE_STRATA: tuple[str, ...] = (SKILL, WORLD_MODEL)
+
+
 _FORBIDDEN_AST_NAMES = frozenset({
     "__import__",
     "eval",
@@ -3973,7 +3980,10 @@ def _skill_organ_to_concept_entry(
         corpus.append(organ.source_code)
     abstractions: list[dict[str, Any]] = []
     try:
-        res = cg.compress_corpus(corpus)
+        # The probe domain is derived from the corpus when the caller supplies none. Without that,
+        # the numeric default grid answered a string-keyed table identically on every probe and the
+        # (correct) vacuity gate refused every organ -- measured on the live path, not argued.
+        res = cg.admit_corpus_abstraction(corpus)
         abstractions = list(res.get("abstractions") or [])
     except Exception:
         abstractions = []
@@ -4005,8 +4015,10 @@ def _skill_organ_to_concept_entry(
             family=str(own.get("family") or ""),
         )
     # Singleton: a stored primitive. The gain is zero because zero compression was measured --
-    # never a fabricated number.
-    cid = "c_" + organ.organ_id.replace("organ_skill_", "")[:18]
+    # never a fabricated number. The id is derived from the SOURCE, not from the organ id: the old
+    # expression left `c_organ_skill_` for every organ (see `cg.concept_id_for_source`), so this
+    # branch could store exactly one program no matter how many were offered.
+    cid = cg.concept_id_for_source(organ.source_code)
     if not cid.isidentifier():
         return None
     try:
@@ -4122,7 +4134,20 @@ class MetaCircularOrganGraph:
                 self.primary_by_sig[sig_key] = organ.organ_id
                 replaced = True
         self._save()
-        if organ.stratum == SKILL and self.concept_library is not None:
+        # EVERY stratum with an entrypoint, not only SKILL. Round 25's second family is emitted by
+        # `synthesize_world_model_organ`, which is a WORLD_MODEL organ -- so the compression corpus
+        # could only ever be fed by one of the seven strata, and the family the round measured as
+        # generalising had no live writer at all (measured: three world-model organs registered
+        # through this method left `G_t` empty even after the probe-domain fix). A perceptor and a
+        # skill are the same kind of object: a function with a shape. Restricting admission by
+        # stratum was never a measured property; it was an accident of which writer landed first.
+        # `PERCEPTOR` and `VERIFIER` organs are still excluded: their entrypoints take raw samples
+        # and return parsed records, so lifting their literals would probe a parser with tokens it
+        # was not written to accept, and a refusal there would read as a compression failure.
+        if (
+            self.concept_library is not None
+            and organ.stratum in _ADMISSIBLE_STRATA
+        ):
             # The compression corpus is the LIBRARY's memory plus the newcomer. Every previously
             # registered SKILL organ is already held in `G_t` as a stored entry (that bridge is
             # the one below), and `G_t` is the accumulator that survives the graph being fresh --
@@ -4187,10 +4212,19 @@ class MetaCircularOrganGraph:
         if len(self._world_transitions) < 2 or len(self._world_transitions) % 2 != 0:
             return
         try:
-            wm = synthesize_world_model_organ(self._world_transitions[-16:])
+            recent = self._world_transitions[-16:]
+            wm = synthesize_world_model_organ(recent)
             if wm is not None:
                 self.register_organ(wm)
-            self.evolve_policy_from_traces()
+            incumbent = self.get_primary(POLICY, "policy::instrumental_q")
+            has_contrast = (
+                incumbent is None
+                or bool(self._live_policy_boards)
+                or len({bool(t.get("failed")) for t in recent}) >= 2
+                or len({t.get("value") for t in recent if t.get("value") is not None}) >= 2
+            )
+            if has_contrast:
+                self.evolve_policy_from_traces()
         except Exception:
             return
 

@@ -1,0 +1,2385 @@
+{
+ "schema": "BRAIN_DEMONSTRATION_CHOICE_MEASURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T21:08:20Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "pulls_sha256": "0eae235f84f05b31d2f564670e402d57fc1eaea8c95411c4d72bac44e0e43312",
+ "code_sha256": {
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py": "1c1141dd1d6d08c2c3e000c7a59d6c71543386c285b6f93e5dc77d6a2bee1ace",
+  "canonical/tools/repeated_change_one_example_measure_v1.py": "f6c22132a60d0a9400563049c2a3456ebcc6de6968efa34dda173825673c816c",
+  "canonical/tools/demonstration_choice_measure_v1.py": "aa2cbd086833aeb0c0f3292d46aabde898b72d9d0f8395f3a0febed0717815da"
+ },
+ "reach_only": false,
+ "arm": "strict",
+ "parameters": {
+  "call_limit_s": 30,
+  "choice_rule": "greatest reach, then fewest blanks, then path"
+ },
+ "tasks": [
+  {
+   "name": "openimis/openimis-be-core_py#414",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "core/migrations/0034_remove_user_legacy_id_remove_user_validity_from_and_more.py",
+     "bytes": 4286,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 63,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "core/models/history_model.py",
+     "bytes": 14522,
+     "rules": [
+      "from core.utils import CachedManager, CachedModelMixin, filter_validity as core_filter_validity, uuidv7 -> from core.utils import CachedManager, CachedModelMixin, uuidv7",
+      "from django.db.models import ( Q, UUIDField, DateTimeField, BooleanField, Model, IntegerField, ForeignKey, BigAutoField, JSONField, deletion, ) -> from django.db.models import ( DateTimeField, Model, IntegerField, )"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 63,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "core/datetimes/test_ad_datetime.py",
+     "bytes": 10488,
+     "rules": [
+      "self.assertEquals -> self.assertEqual"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 8,
+      "developers_changes_not_imports": 27,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 8,
+      "share_recovered": 0.2962962962962963
+     },
+     "share_recovered": 0.2962962962962963
+    },
+    {
+     "path": "core/datetimes/test_shared.py",
+     "bytes": 1471,
+     "rules": [
+      "self.assertEquals -> self.assertEqual",
+      "self.assertNotEquals -> self.assertNotEqual"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 36,
+      "developers_changes_not_imports": 54,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 36,
+      "share_recovered": 0.6666666666666666
+     },
+     "share_recovered": 0.6666666666666666
+    },
+    {
+     "path": "core/tests/test_utils.py",
+     "bytes": 6051,
+     "rules": [
+      "self.assertEquals -> self.assertEqual",
+      "self.assertNotEquals -> self.assertNotEqual"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 45,
+      "developers_changes_not_imports": 45,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 45,
+      "share_recovered": 1.0
+     },
+     "share_recovered": 1.0
+    },
+    {
+     "path": "core/tests/test_abs_calculation_rule.py",
+     "bytes": 14457,
+     "rules": [
+      "from core.abs_calculation_rule import AbsStrategy, AbsCalculationRule -> from core.abs_calculation_rule import AbsStrategy"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 63,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "core/models/history_model.py",
+   "best_possible_recovered": 1.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.3271604938271605,
+   "spread": 1.0,
+   "chosen_by_reach": "core/datetimes/test_ad_datetime.py",
+   "chosen_reach": 2,
+   "chosen_recovered": 0.2962962962962963,
+   "chosen_is_best": false,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 0.2962962962962963,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": 0.0
+  },
+  {
+   "name": "torproject/stem#155",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "test/unit/client/cell.py",
+     "bytes": 18180,
+     "rules": [
+      "self.assertRaisesRegexp -> self.assertRaisesRegex"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 9,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "test/unit/descriptor/certificate.py",
+     "bytes": 8716,
+     "rules": [
+      "self.assertRaisesRegexp -> self.assertRaisesRegex"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 9,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "stem/util/test_tools.py",
+     "bytes": 22829,
+     "rules": [
+      "\"\"\" Asserts the given invokation raises the expected excepiton. This is similar to unittest's assertRaises and assertRaisesRegexp, but checks for an exact match. This method is **not** being vended to external users and may be changed without notice. If you want this method to be part of our vended API then please let us know. \"\"\" -> \"\"\" Asserts the given invokation raises the expected excepiton. This is similar to unittest's assertRaises and assertRaisesRegex, but checks for an exact match. This method is **not** being vended to external users and may be changed without notice. If you want this method to be part of our vended API then please let us know. \"\"\"",
+      "self.assertRaisesRegexp -> self.assertRaisesRegex"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.375
+     },
+     "share_recovered": 0.375
+    },
+    {
+     "path": "test/integ/control/controller.py",
+     "bytes": 67167,
+     "rules": [
+      "self.assertRaisesRegexp -> self.assertRaisesRegex"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "test/unit/util/connection.py",
+     "bytes": 31126,
+     "rules": [
+      "self.assertRaisesRegexp -> self.assertRaisesRegex"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 1,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 1,
+      "share_recovered": 0.125
+     },
+     "share_recovered": 0.125
+    },
+    {
+     "path": "test/unit/descriptor/remote.py",
+     "bytes": 12440,
+     "rules": [
+      "self.assertRaisesRegexp -> self.assertRaisesRegex"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 9,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "test/integ/control/controller.py",
+   "best_possible_recovered": 0.375,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.08333333333333333,
+   "spread": 0.375,
+   "chosen_by_reach": "stem/util/test_tools.py",
+   "chosen_reach": 1,
+   "chosen_recovered": 0.375,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": 0.0
+  },
+  {
+   "name": "testing-cabal/testtools#335",
+   "files": 5,
+   "candidates": [
+    {
+     "path": "testtools/tests/test_compat.py",
+     "bytes": 9837,
+     "rules": [
+      "self.skip -> self.skipTest"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.75,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.3
+     },
+     "share_recovered": 0.3
+    },
+    {
+     "path": "testtools/tests/matchers/test_filesystem.py",
+     "bytes": 7792,
+     "rules": [
+      "self.skip -> self.skipTest"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.75,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.3
+     },
+     "share_recovered": 0.3
+    },
+    {
+     "path": "testtools/tests/test_testcase.py",
+     "bytes": 72785,
+     "rules": [
+      "self.skip -> self.skipTest"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.75,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 4,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.75
+     },
+     "share_recovered": 0.75
+    },
+    {
+     "path": "testtools/tests/test_testsuite.py",
+     "bytes": 11671,
+     "rules": [
+      "self.skip -> self.skipTest"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.75,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.3
+     },
+     "share_recovered": 0.3
+    },
+    {
+     "path": "testtools/tests/samplecases.py",
+     "bytes": 7028,
+     "rules": [
+      "case.skip -> case.skipTest"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "testtools/tests/test_testcase.py",
+   "best_possible_recovered": 0.75,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.33,
+   "spread": 0.75,
+   "chosen_by_reach": "testtools/tests/matchers/test_filesystem.py",
+   "chosen_reach": 3,
+   "chosen_recovered": 0.3,
+   "chosen_is_best": false,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 0.39999999999999997,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.75,
+   "share_of_best_captured_by_size": 1.0
+  },
+  {
+   "name": "kuangjiafa/automagician#55",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "test/test_database.py",
+     "bytes": 44258,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/automagician/classes.py",
+     "bytes": 2457,
+     "rules": [
+      "Literal[\"NoSSH\"] | SshScp -> Union[Literal[\"NoSSH\"], SshScp]",
+      "int | Literal[-1] -> Union[int, Literal[-1]]",
+      "from typing import Literal -> from typing import Literal, Union"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 1,
+      "organ_changes": 1,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/automagician/process_job.py",
+     "bytes": 35097,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/automagician/small_functions.py",
+     "bytes": 2858,
+     "rules": [
+      "logger.warn(\"archive converged is deperciated, and will be reimplemented shortly\") -> logger.warning(\"archive converged is deprecated, and will be reimplemented shortly\")",
+      "\"\"\"Moves all converged jobs from converged_jobs.dat to unconverged_jobs.dat Depriacted Args: home (str): the path to the users home directory\"\"\" -> \"\"\"Moves all converged jobs from converged_jobs.dat to unconverged_jobs.dat Deprecated Args: home (str): the path to the users home directory\"\"\"",
+      "logger.warn(\"reset converged is deperciated, and will be reimplemented shortly\") -> logger.warning(\"reset converged is deprecated, and will be reimplemented shortly\")"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "test/test_small_functions.py",
+     "bytes": 2738,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/automagician/update_job.py",
+     "bytes": 8475,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "test/test_database.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "src/automagician/classes.py",
+   "chosen_reach": 1,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "RedHatInsights/advisor-backend#80",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "api/advisor/api/scripts/import_content.py",
+     "bytes": 36350,
+     "rules": [
+      "logger.warn -> logger.warning"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "api/advisor/tasks/kafka_utils.py",
+     "bytes": 10500,
+     "rules": [
+      "logger.warn -> logger.warning"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 1,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 1,
+      "share_recovered": 0.1
+     },
+     "share_recovered": 0.1
+    },
+    {
+     "path": "api/advisor/tasks/management/commands/tasks_service.py",
+     "bytes": 23023,
+     "rules": [
+      "logger.warn -> logger.warning"
+     ],
+     "learned": true,
+     "reach": 4,
+     "reach_share": 0.8,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.42857142857142855
+     },
+     "share_recovered": 0.42857142857142855
+    },
+    {
+     "path": "api/advisor/api/management/commands/import_content.py",
+     "bytes": 40420,
+     "rules": [
+      "logger.warn -> logger.warning"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "api/advisor/tasks/management/commands/stale_job_timeout.py",
+     "bytes": 3162,
+     "rules": [
+      "logger.warn -> logger.warning"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 1,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 1,
+      "share_recovered": 0.1
+     },
+     "share_recovered": 0.1
+    },
+    {
+     "path": "api/advisor/tasks/management/commands/tasks_sync_playbook_content.py",
+     "bytes": 3724,
+     "rules": [
+      "logger.warn -> logger.warning"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "api/advisor/api/management/commands/import_content.py",
+   "best_possible_recovered": 0.42857142857142855,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.10476190476190476,
+   "spread": 0.42857142857142855,
+   "chosen_by_reach": "api/advisor/tasks/management/commands/tasks_service.py",
+   "chosen_reach": 4,
+   "chosen_recovered": 0.42857142857142855,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": 0.0
+  },
+  {
+   "name": "Cytomine-ULiege/Cytomine-python-client#61",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "cytomine/models/imagegroup.py",
+     "bytes": 3335,
+     "rules": [
+      "super(?1, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 5,
+     "reach_share": 1.0,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 12,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 12,
+      "share_recovered": 0.9230769230769231
+     },
+     "share_recovered": 0.9230769230769231
+    },
+    {
+     "path": "cytomine/models/model.py",
+     "bytes": 4298,
+     "rules": [
+      "super(DomainModel, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 16,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "cytomine/cytomine_job.py",
+     "bytes": 13713,
+     "rules": [
+      "super(CytomineJob, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 16,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "cytomine/models/collection.py",
+     "bytes": 10864,
+     "rules": [
+      "super(?1, self) -> super()",
+      "f\"domain/{self._domainClassName}/{self._domainIdent}/\" f\"{super(DomainCollection, self).uri(without_filters)}\" -> f\"domain/{self._domainClassName}/{self._domainIdent}/\" f\"{super().uri(without_filters)}\""
+     ],
+     "learned": true,
+     "reach": 5,
+     "reach_share": 1.0,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 14,
+      "developers_changes_not_imports": 14,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 14,
+      "share_recovered": 1.0
+     },
+     "share_recovered": 1.0
+    },
+    {
+     "path": "cytomine/models/storage.py",
+     "bytes": 3041,
+     "rules": [
+      "super(?1, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 5,
+     "reach_share": 1.0,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 12,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 12,
+      "share_recovered": 0.9230769230769231
+     },
+     "share_recovered": 0.9230769230769231
+    },
+    {
+     "path": "cytomine/models/project.py",
+     "bytes": 3211,
+     "rules": [
+      "super(?1, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 5,
+     "reach_share": 1.0,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 12,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 12,
+      "share_recovered": 0.9230769230769231
+     },
+     "share_recovered": 0.9230769230769231
+    }
+   ],
+   "chosen_by_size": "cytomine/cytomine_job.py",
+   "best_possible_recovered": 1.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.6282051282051282,
+   "spread": 1.0,
+   "chosen_by_reach": "cytomine/models/collection.py",
+   "chosen_reach": 5,
+   "chosen_recovered": 1.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": 0.0
+  },
+  {
+   "name": "unifyai/ivy#26932",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "ivy/functional/ivy/experimental/sparse_array.py",
+     "bytes": 26993,
+     "rules": [
+      "super(SparseArray, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "ivy/functional/backends/jax/device.py",
+     "bytes": 3552,
+     "rules": [
+      "super(Profiler, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.6,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.23076923076923078
+     },
+     "share_recovered": 0.23076923076923078
+    },
+    {
+     "path": "ivy/functional/backends/paddle/device.py",
+     "bytes": 3663,
+     "rules": [
+      "super(Profiler, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.6,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.23076923076923078
+     },
+     "share_recovered": 0.23076923076923078
+    },
+    {
+     "path": "ivy/functional/backends/tensorflow/device.py",
+     "bytes": 3131,
+     "rules": [
+      "super(Profiler, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.6,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.23076923076923078
+     },
+     "share_recovered": 0.23076923076923078
+    },
+    {
+     "path": "ivy_tests/test_ivy/test_stateful/test_converters.py",
+     "bytes": 12645,
+     "rules": [
+      "super(?1, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 5,
+     "reach_share": 1.0,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 5,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 5,
+      "share_recovered": 1.0
+     },
+     "share_recovered": 1.0
+    },
+    {
+     "path": "ivy/functional/backends/torch/device.py",
+     "bytes": 3856,
+     "rules": [
+      "super(Profiler, self) -> super()"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.6,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 3,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 3,
+      "share_recovered": 0.23076923076923078
+     },
+     "share_recovered": 0.23076923076923078
+    }
+   ],
+   "chosen_by_size": "ivy/functional/ivy/experimental/sparse_array.py",
+   "best_possible_recovered": 1.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.32051282051282054,
+   "spread": 1.0,
+   "chosen_by_reach": "ivy_tests/test_ivy/test_stateful/test_converters.py",
+   "chosen_reach": 5,
+   "chosen_recovered": 1.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": 0.0
+  },
+  {
+   "name": "InterDigitalInc/CompressAI-Vision#40",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "compressai_vision/evaluators/tf_evaluation_utils/np_box_list_ops.py",
+     "bytes": 23443,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "compressai_vision/evaluators/tf_evaluation_utils/metrics.py",
+     "bytes": 9163,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "compressai_vision/evaluators/tf_evaluation_utils/np_box_mask_list_ops.py",
+     "bytes": 17863,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "compressai_vision/evaluators/tf_evaluation_utils/per_image_evaluation.py",
+     "bytes": 38468,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "compressai_vision/evaluators/tf_evaluation_utils/object_detection_evaluation.py",
+     "bytes": 56080,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 0,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "compressai_vision/evaluators/tf_evaluation_utils/np_box_list.py",
+     "bytes": 6713,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "compressai_vision/evaluators/tf_evaluation_utils/object_detection_evaluation.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "compressai_vision/evaluators/tf_evaluation_utils/metrics.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "inveniosoftware/invenio-pidstore#189",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "examples/app.py",
+     "bytes": 1921,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 23,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "invenio_pidstore/models.py",
+     "bytes": 21287,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 1,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "invenio_pidstore/proxies.py",
+     "bytes": 297,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 23,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "invenio_pidstore/minters.py",
+     "bytes": 2377,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 23,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "invenio_pidstore/__init__.py",
+     "bytes": 12208,
+     "rules": [
+      "(\"__version__\", \"InvenioPIDStore\", \"current_pidstore\") -> (\"InvenioPIDStore\", \"__version__\", \"current_pidstore\")"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 22,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "invenio_pidstore/alembic/f615cee99600_create_pidstore_branch.py",
+     "bytes": 401,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 23,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "invenio_pidstore/models.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "examples/app.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "nipy/nibabel#1609",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "nibabel/cifti2/tests/test_cifti2io_header.py",
+     "bytes": 21052,
+     "rules": [
+      "'No exercise of ' + klass.__name__ -> f'No exercise of {klass.__name__}'",
+      "self._pixdim_message + '; setting to abs of pixdim values' -> f'{self._pixdim_message}; setting to abs of pixdim values'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "nibabel/tests/test_minc1.py",
+     "bytes": 7186,
+     "rules": [
+      "'test.mnc' + ext -> f'test.mnc{ext}'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "nibabel/cmdline/utils.py",
+     "bytes": 2809,
+     "rules": [
+      "'!' + msg -> f'!{msg}'",
+      "'get_' + name -> f'get_{name}'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "nibabel/deprecator.py",
+     "bytes": 7644,
+     "rules": [
+      "text.rstrip() + '\\n' -> f'{text.rstrip()}\\n'",
+      "old_doc + '\\n' + dep_doc -> f'{old_doc}\\n{dep_doc}'",
+      "'* deprecated from version: ' + since -> f'* deprecated from version: {since}'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 11,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "nibabel/nifti1.py",
+     "bytes": 96275,
+     "rules": [
+      "'unknown code ' + str(code) -> f'unknown code {code}'",
+      "'Unknown intent code: ' + str(code) -> f'Unknown intent code: {code}'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "nibabel/tests/test_parrec.py",
+     "bytes": 37766,
+     "rules": [
+      "basename_affine + '.PAR' -> f'{basename_affine}.PAR'",
+      "line + '\\n' -> f'{line}\\n'",
+      "par_root + '.PAR' -> f'{par_root}.PAR'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 10,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "nibabel/nifti1.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "nibabel/cifti2/tests/test_cifti2io_header.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "jupyter/jupyter-sphinx#301",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "tests/conftest.py",
+     "bytes": 4669,
+     "rules": [
+      "\"extensions = ['%s']\" % entrypoint -> f\"extensions = ['{entrypoint}']\"",
+      "\"\\n\" + config -> f\"\\n{config}\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 19,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "jupyter_sphinx/__init__.py",
+     "bytes": 9096,
+     "rules": [
+      "\"Rendering encountered a node type that should \" \"have been removed before rendering: %s\" % type(node) -> \"Rendering encountered a node type that should \" f\"have been removed before rendering: {type(node)}\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 21,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "jupyter_sphinx/execute.py",
+     "bytes": 11707,
+     "rules": [
+      "notebook_name + \".ipynb\" -> f\"{notebook_name}.ipynb\"",
+      "notebook_name + resources[\"output_extension\"] -> f'{notebook_name}{resources[\"output_extension\"]}'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 19,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "jupyter_sphinx/thebelab.py",
+     "bytes": 3987,
+     "rules": [
+      "'<div class=\"{}\" data-executable=\"true\" data-language=\"{}\">'.format( code_class, language ) -> f'<div class=\"{code_class}\" data-executable=\"true\" data-language=\"{language}\">'",
+      "'<button title=\"{text}\" class=\"thebelab-button\" ' 'id=\"thebelab-activate-button\" ' 'onclick=\"initThebelab()\">{text}</button>'.format(text=text) -> f'<button title=\"{text}\" class=\"thebelab-button\" ' 'id=\"thebelab-activate-button\" ' f'onclick=\"initThebelab()\">{text}</button>'",
+      "'\\n<script type=\"text/x-thebe-config\">\\n{}\\n</script>'.format( json.dumps(thebe_config) ) -> f'\\n<script type=\"text/x-thebe-config\">\\n{json.dumps(thebe_config)}\\n</script>'",
+      "'\\n<script type=\"text/javascript\" src=\"{}\"></script>'.format( env.config.jupyter_sphinx_thebelab_url ) -> f'\\n<script type=\"text/javascript\" src=\"{env.config.jupyter_sphinx_thebelab_url}\">' \"</script>\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 18,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/test_execute.py",
+     "bytes": 16205,
+     "rules": [
+      "\"\\n\" + directive(\"execute\", [\"3 + 3\"]) -> f'\\n{directive(\"execute\", [\"3 + 3\"])}'",
+      "\"\\n\" + directive(\"execute\", [\"a += 1\", \"a\"]) -> f'\\n{directive(\"execute\", [\"a += 1\", \"a\"])}'",
+      "\"\\n\" + directive(\"kernel\", [], [(\"id\", \"new-kernel\")]) -> f'\\n{directive(\"kernel\", [], [(\"id\", \"new-kernel\")])}'",
+      "\"\\n\" + directive(\"execute\", [\"a += 1\", \"a\"], [\"raises\"]) -> f'\\n{directive(\"execute\", [\"a += 1\", \"a\"], [\"raises\"])}'",
+      "\"\\n\" + directive(\"execute\", [\"1 + 1\"]) -> f'\\n{directive(\"execute\", [\"1 + 1\"])}'",
+      "\"\\n\" + directive(\"execute\", [\"a = 1\", \"print(a)\", \"\"]) -> f'\\n{directive(\"execute\", [\"a = 1\", \"print(a)\", \"\"])}'",
+      "\"\\n\" + directive(\"output\", [\"4\"]) -> f'\\n{directive(\"output\", [\"4\"])}'",
+      "\"\\n\" + directive(\"input\", [\"3 + 3\"]) -> f'\\n{directive(\"input\", [\"3 + 3\"])}'",
+      "\"\\n\" + directive(\"output\", [\"6\"]) -> f'\\n{directive(\"output\", [\"6\"])}'"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "jupyter_sphinx/utils.py",
+     "bytes": 3253,
+     "rules": [
+      "\"/\" + os.path.relpath(out_path, env.app.srcdir) -> f\"/{os.path.relpath(out_path, env.app.srcdir)}\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 21,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "tests/test_execute.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "jupyter_sphinx/__init__.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "fulcrumgenomics/fgpyo#300",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "fgpyo/sam/builder.py",
+     "bytes": 27760,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 30,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "fgpyo/sam/clipping.py",
+     "bytes": 18377,
+     "rules": [
+      "List[CigarElement] -> list[CigarElement]",
+      "Tuple[Cigar, ClippingInfo] -> tuple[Cigar, ClippingInfo]"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 42,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "fgpyo/util/metric.py",
+     "bytes": 25978,
+     "rules": [
+      "List[str] -> list[str]",
+      "Tuple[str, Any] -> tuple[str, Any]",
+      "List[Tuple[str, str]] -> list[tuple[str, str]]",
+      "Dict[type, Callable[[str], Any]] -> dict[type, Callable[[str], Any]]",
+      "List[Any] -> list[Any]",
+      "Type[?1] -> type[?1]"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 1,
+      "developers_changes_not_imports": 21,
+      "not_what_the_developers_did": 1,
+      "organ_changes": 2,
+      "share_recovered": 0.047619047619047616
+     },
+     "share_recovered": 0.047619047619047616
+    },
+    {
+     "path": "tests/fgpyo/test_sequence.py",
+     "bytes": 6496,
+     "rules": [
+      "List[Tuple[?1]] -> list[tuple[?1]]"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 1,
+      "developers_changes_not_imports": 42,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 1,
+      "share_recovered": 0.023809523809523808
+     },
+     "share_recovered": 0.023809523809523808
+    },
+    {
+     "path": "fgpyo/fasta/builder.py",
+     "bytes": 9220,
+     "rules": [
+      "Dict[str, ContigBuilder] -> dict[str, ContigBuilder]"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 43,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/fgpyo/util/test_types.py",
+     "bytes": 1428,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 42,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "fgpyo/sam/builder.py",
+   "best_possible_recovered": 0.047619047619047616,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.011904761904761904,
+   "spread": 0.047619047619047616,
+   "chosen_by_reach": "fgpyo/util/metric.py",
+   "chosen_reach": 1,
+   "chosen_recovered": 0.047619047619047616,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": 0.0
+  },
+  {
+   "name": "Prekzursil/env-inspector#72",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "tests/test_core_coverage_providers_wsl.py",
+     "bytes": 7200,
+     "rules": [
+      "list[Any] -> List[Any]"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 55,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "scripts/security_helpers.py",
+     "bytes": 12980,
+     "rules": [
+      "headers: dict[str, str] -> headers: Dict[str, str]",
+      "dict[str, ?1] | None -> Dict[str, ?1] | None",
+      "set[str] -> Set[str]",
+      "tuple[str, str, dict[str, str]] -> Tuple[str, str, Dict[str, str]]",
+      "tuple[int, str, str, dict[str, str]] -> Tuple[int, str, str, Dict[str, str]]",
+      "tuple[Any, dict[str, str]] -> Tuple[Any, Dict[str, str]]"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 1,
+      "developers_changes_not_imports": 41,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 1,
+      "share_recovered": 0.024390243902439025
+     },
+     "share_recovered": 0.024390243902439025
+    },
+    {
+     "path": "tests/test_service_coverage_branches.py",
+     "bytes": 23278,
+     "rules": [
+      "dict[str, ?1] -> Dict[str, ?1]",
+      "list[EnvRecord] -> List[EnvRecord]",
+      "list[tuple[?1]] -> List[Tuple[?1]]",
+      "list[str] -> List[str]"
+     ],
+     "learned": true,
+     "reach": 4,
+     "reach_share": 0.8,
+     "fits_itself": true,
+     "blanks": 2,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 28,
+      "developers_changes_not_imports": 46,
+      "not_what_the_developers_did": 10,
+      "organ_changes": 38,
+      "share_recovered": 0.6086956521739131
+     },
+     "share_recovered": 0.6086956521739131
+    },
+    {
+     "path": "env_inspector_gui/dialogs.py",
+     "bytes": 14741,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 43,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "env_inspector_core/models.py",
+     "bytes": 1044,
+     "rules": [
+      "dict[str, Any] -> Dict[str, Any]"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 5,
+      "developers_changes_not_imports": 54,
+      "not_what_the_developers_did": 2,
+      "organ_changes": 7,
+      "share_recovered": 0.09259259259259259
+     },
+     "share_recovered": 0.09259259259259259
+    },
+    {
+     "path": "tests/test_cli.py",
+     "bytes": 11013,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 41,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "tests/test_service_coverage_branches.py",
+   "best_possible_recovered": 0.6086956521739131,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.12094641477815744,
+   "spread": 0.6086956521739131,
+   "chosen_by_reach": "tests/test_service_coverage_branches.py",
+   "chosen_reach": 4,
+   "chosen_recovered": 0.6086956521739131,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.6086956521739131,
+   "share_of_best_captured_by_size": 1.0
+  },
+  {
+   "name": "apache/libcloud#2217",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "libcloud/common/openstack_identity.py",
+     "bytes": 66776,
+     "rules": [
+      "datetime.datetime.utcnow() -> datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)"
+     ],
+     "learned": true,
+     "reach": 4,
+     "reach_share": 0.8,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 4,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 4,
+      "share_recovered": 0.8
+     },
+     "share_recovered": 0.8
+    },
+    {
+     "path": "libcloud/dns/base.py",
+     "bytes": 17294,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "libcloud/dns/drivers/route53.py",
+     "bytes": 24184,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "libcloud/common/aws.py",
+     "bytes": 16555,
+     "rules": [
+      "datetime.utcnow() -> datetime.now(timezone.utc).replace(tzinfo=None)",
+      "from datetime import datetime -> from datetime import datetime, timezone"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "libcloud/common/google.py",
+     "bytes": 34588,
+     "rules": [
+      "datetime.datetime.utcnow() -> datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)"
+     ],
+     "learned": true,
+     "reach": 4,
+     "reach_share": 0.8,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 4,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 4,
+      "share_recovered": 0.8
+     },
+     "share_recovered": 0.8
+    },
+    {
+     "path": "libcloud/dns/drivers/auroradns.py",
+     "bytes": 20938,
+     "rules": [
+      "datetime.datetime.utcnow() -> datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)"
+     ],
+     "learned": true,
+     "reach": 4,
+     "reach_share": 0.8,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 4,
+      "developers_changes_not_imports": 5,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 4,
+      "share_recovered": 0.8
+     },
+     "share_recovered": 0.8
+    }
+   ],
+   "chosen_by_size": "libcloud/common/openstack_identity.py",
+   "best_possible_recovered": 0.8,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.4,
+   "spread": 0.8,
+   "chosen_by_reach": "libcloud/common/google.py",
+   "chosen_reach": 4,
+   "chosen_recovered": 0.8,
+   "chosen_is_best": true,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 1.0,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.8,
+   "share_of_best_captured_by_size": 1.0
+  },
+  {
+   "name": "arigatoexpress/Project-Go-Forward#483",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "database/firestore_client.py",
+     "bytes": 19693,
+     "rules": [
+      "datetime.utcnow() -> datetime.now(UTC).replace(tzinfo=None)",
+      "from datetime import datetime -> from datetime import UTC, datetime"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 4,
+      "developers_changes_not_imports": 21,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 6,
+      "share_recovered": 0.19047619047619047
+     },
+     "share_recovered": 0.19047619047619047
+    },
+    {
+     "path": "tools/crm_tools.py",
+     "bytes": 14013,
+     "rules": [
+      "datetime.utcnow() -> datetime.now(UTC).replace(tzinfo=None)",
+      "from datetime import date, datetime, timedelta -> from datetime import UTC, date, datetime, timedelta"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 30,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "structured_logging.py",
+     "bytes": 3996,
+     "rules": [
+      "datetime.utcnow() -> datetime.now(UTC).replace(tzinfo=None)",
+      "from datetime import datetime -> from datetime import UTC, datetime"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 13,
+      "developers_changes_not_imports": 30,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 15,
+      "share_recovered": 0.43333333333333335
+     },
+     "share_recovered": 0.43333333333333335
+    },
+    {
+     "path": "conversation_memory.py",
+     "bytes": 10058,
+     "rules": [
+      "datetime.utcnow() -> datetime.now(UTC).replace(tzinfo=None)",
+      "from datetime import datetime -> from datetime import UTC, datetime"
+     ],
+     "learned": true,
+     "reach": 2,
+     "reach_share": 0.4,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 11,
+      "developers_changes_not_imports": 28,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 13,
+      "share_recovered": 0.39285714285714285
+     },
+     "share_recovered": 0.39285714285714285
+    },
+    {
+     "path": "chat_history.py",
+     "bytes": 10012,
+     "rules": [
+      "f\"msg_{datetime.utcnow().timestamp()}\" -> f\"msg_{datetime.now(UTC).replace(tzinfo=None).timestamp()}\"",
+      "datetime.utcnow() -> datetime.now(UTC).replace(tzinfo=None)",
+      "from datetime import datetime, timedelta -> from datetime import UTC, datetime, timedelta"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 7,
+      "developers_changes_not_imports": 22,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 8,
+      "share_recovered": 0.3181818181818182
+     },
+     "share_recovered": 0.3181818181818182
+    },
+    {
+     "path": "lead_management.py",
+     "bytes": 16034,
+     "rules": [
+      "datetime.utcnow() -> datetime.now(UTC).replace(tzinfo=None)",
+      "from datetime import datetime, timedelta -> from datetime import UTC, datetime, timedelta"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 8,
+      "developers_changes_not_imports": 24,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 9,
+      "share_recovered": 0.3333333333333333
+     },
+     "share_recovered": 0.3333333333333333
+    }
+   ],
+   "chosen_by_size": "database/firestore_client.py",
+   "best_possible_recovered": 0.43333333333333335,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.278030303030303,
+   "spread": 0.43333333333333335,
+   "chosen_by_reach": "conversation_memory.py",
+   "chosen_reach": 2,
+   "chosen_recovered": 0.39285714285714285,
+   "chosen_is_best": false,
+   "chosen_is_worst": false,
+   "share_of_best_captured": 0.9065934065934066,
+   "candidates_differ": true,
+   "size_choice_recovered": 0.19047619047619047,
+   "share_of_best_captured_by_size": 0.4395604395604395
+  }
+ ],
+ "seconds": 63.7,
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "terminal_authority": false,
+ "summary": {
+  "tasks": 15,
+  "tasks_where_candidates_differ": 10,
+  "candidate_pairs": 89,
+  "correlation_reach_to_recovered": {
+   "r": 0.8849,
+   "n": 89,
+   "reason": null
+  },
+  "mean_share_recovered_choosing_at_random": 0.1719,
+  "changes_recovered_choosing_by_reach": 80,
+  "changes_recovered_choosing_the_best": 119,
+  "changes_recovered_choosing_the_worst": 0,
+  "changes_the_developers_made": 1674,
+  "changes_recovered_choosing_the_largest_file": 39,
+  "share_of_best_captured_by_size_mean": 0.344,
+  "share_of_best_captured_mean": 0.8603,
+  "share_of_best_captured_median": 1.0,
+  "tasks_where_the_choice_was_the_best_possible": 7,
+  "tasks_where_the_choice_was_the_worst_possible": 0,
+  "honest_capture": {
+   "tasks_where_the_rule_actually_decided": 3,
+   "tasks_where_the_top_reach_was_tied": 7,
+   "capture_where_the_rule_decided_mean": 1.0,
+   "capture_where_the_top_reach_was_tied_mean": 0.7319,
+   "honest_capture_all_differing_tasks_mean": 0.8123,
+   "honest_capture_all_differing_tasks_median": 0.8622,
+   "per_task": [
+    {
+     "name": "RedHatInsights/advisor-backend#80",
+     "capture_expected": 1.0,
+     "capture_best_in_group": 1.0,
+     "group": 1
+    },
+    {
+     "name": "unifyai/ivy#26932",
+     "capture_expected": 1.0,
+     "capture_best_in_group": 1.0,
+     "group": 1
+    },
+    {
+     "name": "Prekzursil/env-inspector#72",
+     "capture_expected": 1.0,
+     "capture_best_in_group": 1.0,
+     "group": 1
+    },
+    {
+     "name": "openimis/openimis-be-core_py#414",
+     "capture_expected": 0.654320987654321,
+     "capture_best_in_group": 1.0,
+     "group": 3
+    },
+    {
+     "name": "torproject/stem#155",
+     "capture_expected": 0.4444444444444444,
+     "capture_best_in_group": 1.0,
+     "group": 3
+    },
+    {
+     "name": "testing-cabal/testtools#335",
+     "capture_expected": 0.5499999999999999,
+     "capture_best_in_group": 1.0,
+     "group": 4
+    },
+    {
+     "name": "Cytomine-ULiege/Cytomine-python-client#61",
+     "capture_expected": 0.9423076923076923,
+     "capture_best_in_group": 1.0,
+     "group": 4
+    },
+    {
+     "name": "fulcrumgenomics/fgpyo#300",
+     "capture_expected": 0.75,
+     "capture_best_in_group": 1.0,
+     "group": 2
+    },
+    {
+     "name": "apache/libcloud#2217",
+     "capture_expected": 1.0,
+     "capture_best_in_group": 1.0,
+     "group": 3
+    },
+    {
+     "name": "arigatoexpress/Project-Go-Forward#483",
+     "capture_expected": 0.782051282051282,
+     "capture_best_in_group": 1.0,
+     "group": 3
+    }
+   ]
+  },
+  "pre_registered_prediction": {
+   "reach_and_recovered_are_positively_correlated_r_ge_0_30": true,
+   "choosing_by_reach_captures_ge_80_percent_of_best_on_tasks_where_candidates_differ": true
+  },
+  "prediction_held": true
+ }
+}

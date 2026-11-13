@@ -134,3 +134,42 @@ def test_the_measurement_files_themselves_are_present():
     assert len(paths) >= 3
     for path in paths:
         json.loads(path.read_text())        # every one must still parse
+
+
+# ---------------------------------------------------------------------------
+# the replication: same ordering, instances that did not exist when it was learned
+# ---------------------------------------------------------------------------
+def test_a_replication_run_is_on_file_and_is_not_confused_with_the_headline():
+    reps = T.replications()
+    assert reps, "the fresh-seed replication must stay on file"
+    record = T.report()
+    # the headline is still taken from the full-scale run, never from the 50-page replication
+    assert record["run"].startswith("MINIWOB_ONE_SUCCESS_GENERALISATION_")
+    assert record["run"] != reps[-1].name
+
+
+def test_the_ladder_ordering_reproduces_on_fresh_seeds():
+    check = T.replication_check()
+    assert check["available"] is True
+    assert check["ordering_reproduces"] is True
+    names = {c["ordering"] for c in check["checks"]}
+    assert "version_space > verbatim" in names
+    assert "version_space > version_space_blind" in names
+
+
+def test_the_replication_records_the_instances_it_used():
+    check = T.replication_check()
+    seeds = check["test_seeds"]
+    assert seeds and min(seeds) >= 1080, "fresh means unused by runs 3/4/5 (1000-1079)"
+    assert check["browser"].startswith("HeadlessChrome/")
+
+
+def test_a_replication_is_never_quoted_as_the_headline_number():
+    """The two runs use different task sets; only the ordering may be compared."""
+    check = T.replication_check()
+    assert check["pages"] < 130, "a replication is smaller than the full run by construction"
+    # and the tool says so in the record it writes
+    import json as _json
+    rep = _json.loads(T.replications()[-1].read_text())
+    assert "ordering" in rep["read_this_first"].lower()
+    assert "does not" in rep["read_this_first"].lower()
