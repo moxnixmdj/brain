@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "61c855b0e6d60f58de1b7533011d60a93962249c837b1168bf0f664f56668428"
+  "value": "3cea3b93b7e3540632c2adb15c4cb5e45b7dd50ccd0e9696db8220239904c804"
  },
  "engines": [
   {
@@ -232216,7 +232216,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "cba424cbd462fc492f0e98c29c0bc3492aa0fbd9cda65f1a0407cad56428f752",
+   "sha256": "30900965fc604de0369d699f834acc649aa3ae0baf8fbdb840cb7642189c195a",
    "status": "",
    "terms": {
     "20261112": 1,
