@@ -579,10 +579,45 @@ def _solve_or_learn_impl(
     )
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         req.setdefault("workspace_root", str(work_cwd))
+
+    def _typed_python_ast_lane() -> dict[str, Any] | None:
+        """Bounded read-only AST adapter. Similarity is never an executor."""
+        if not goal or _has_structured_specialist:
+            return None
+        from canonical.swe_kernel import python_ast_query_v1 as ast_query
+
+        try:
+            typed = ast_query.solve_query(goal, root=work_cwd)
+        except ast_query.PythonAstQueryError as exc:
+            # The bounded adapter is not the whole read-only surface. If the
+            # current sentence is outside its small grammar, let the verified
+            # compositional engine/door try; safety refusals still fail closed.
+            if exc.code in {"UNSUPPORTED_TARGET", "UNSUPPORTED_QUERY_SHAPE"}:
+                try:
+                    ast_query.check_source_confinement(goal, root=work_cwd)
+                except ast_query.PythonAstQueryError as confined_exc:
+                    out = ast_query.failure_result(confined_exc)
+                    out.update(schema=SCHEMA, task_id=task_id,
+                               elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+                    return out
+                return None
+            out = ast_query.failure_result(exc)
+            out.update(schema=SCHEMA, task_id=task_id,
+                       elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+            return out
+        if typed is None:
+            return None
+        typed.update(schema=SCHEMA, task_id=task_id, executed=True,
+                     semantic_acceptance_complete=False,
+                     elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+        return typed
     if not learn:
         allow_tier2_learning = False
         record_open_gap = False
     if not learn and not _has_structured_specialist:
+        typed = _typed_python_ast_lane()
+        if typed is not None:
+            return typed
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         door_req = dict(req)
@@ -1051,6 +1086,9 @@ def _solve_or_learn_impl(
     # silently mutates tracked experience state.
     # ------------------------------------------------------------------
     if learn and recalled is None:
+        typed = _typed_python_ast_lane()
+        if typed is not None:
+            return typed
         try:
             from canonical.swe_kernel.semantic_generalization_engine_v1 import (
                 GeneralizationEngine,
