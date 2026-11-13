@@ -109,14 +109,16 @@ def _attempt(function, *args, **kwargs):
         return None
 
 
-def one_pull_request(files: Sequence[Mapping[str, str]]) -> dict[str, Any]:
+def one_pull_request(files: Sequence[Mapping[str, str]],
+                     check_names: bool = True) -> dict[str, Any]:
     arms = {name: _empty() for name in ARMS}
     for example_number, example in enumerate(files):
         rules = _attempt(E.learn, example["before"], example["after"])
         for target_number, target in enumerate(files):
             if target_number == example_number:
                 continue
-            base = _text(_attempt(E.rewrite, rules, target["before"], "target")) if rules is not None else None
+            base = _text(_attempt(E.rewrite, rules, target["before"], "target",
+                                  check_names=check_names)) if rules is not None else None
             _add(arms["base"], score(target["before"], target["after"], base), base is not None, False)
             alias = None
             try:
@@ -130,12 +132,13 @@ def one_pull_request(files: Sequence[Mapping[str, str]]) -> dict[str, Any]:
     return {"files": len(files), **{name: _rate(arms[name]) for name in ARMS}}
 
 
-def measure(pulls: Sequence[Mapping[str, Any]], say=lambda line: None) -> dict[str, Any]:
+def measure(pulls: Sequence[Mapping[str, Any]], say=lambda line: None,
+            check_names: bool = True) -> dict[str, Any]:
     per_pull = {}
     totals: dict[str, dict[str, dict[str, int]]] = {}
     for pull in pulls:
         started = time.time()
-        row = one_pull_request(pull["files"])
+        row = one_pull_request(pull["files"], check_names=check_names)
         row.update(name=pull["name"], kind=pull.get("kind"), query=pull.get("query"),
                    title=pull.get("title"), seconds=round(time.time() - started, 1))
         per_pull[pull["name"]] = row
@@ -192,7 +195,9 @@ def collect(record: pathlib.Path | None = None, say=print) -> list[dict[str, Any
 
 
 def report(pulls: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
-    body = measure(pulls, say=lambda line: print(line, flush=True))
+    strict = measure(pulls, say=lambda line: print("strict   " + line, flush=True), check_names=True)
+    print()
+    assumed = measure(pulls, say=lambda line: print("assumed  " + line, flush=True), check_names=False)
     return {
         "schema": SCHEMA,
         "authority": AUTHORITY,
@@ -203,8 +208,17 @@ def report(pulls: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "operator_sha256": _sha(ROOT / OPERATOR),
         "queries": [{"kind": kind, "words": words} for kind, words in QUERIES],
         "excluded_as_design": sorted(DESIGN),
-        "by_kind": body["by_kind"],
-        "per_pull_request": body["per_pull_request"],
+        "by_mode": {
+            "strict": {"what_it_is": "the organ's own name and import checks; a project-local "
+                                     "module is not on this sandbox's path, so the edit is refused",
+                       "by_kind": strict["by_kind"], "per_pull_request": strict["per_pull_request"]},
+            "assumed": {"what_it_is": "the same run with `check_names=False`: every project-local "
+                                      "import is assumed to resolve, as it would in the file's own "
+                                      "checkout. An upper bound, not a verified edit.",
+                        "by_kind": assumed["by_kind"], "per_pull_request": assumed["per_pull_request"]},
+        },
+        "by_kind": strict["by_kind"],
+        "per_pull_request": strict["per_pull_request"],
         "limits": [
             "A pilot: eight merged pull requests found by title search, two per query; not a "
             "random sample and not a benchmark.",
@@ -237,13 +251,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.json:
         args.json.write_text(json.dumps(rep, indent=1) + "\n", encoding="utf-8")
     print()
-    print(f"{'kind':8} {'arm':6} {'right':>6} {'developers':>11} {'coverage':>9} {'precision':>10} {'wrong':>6}")
-    for kind, arms in rep["by_kind"].items():
-        for arm in ARMS:
-            row = arms[arm]
-            print(f"{kind:8} {arm:6} {row['right']:6d} {row['developers_changes']:11d} "
-                  f"{100 * (row['coverage'] or 0):8.2f}% {100 * (row['precision'] or 0):9.2f}% "
-                  f"{row['wrong_changes']:6d}")
+    print(f"{'mode':9} {'kind':8} {'arm':6} {'right':>6} {'developers':>11} {'coverage':>9} "
+          f"{'precision':>10} {'wrong':>6}")
+    for mode, body in rep["by_mode"].items():
+        for kind, arms in body["by_kind"].items():
+            for arm in ARMS:
+                row = arms[arm]
+                print(f"{mode:9} {kind:8} {arm:6} {row['right']:6d} {row['developers_changes']:11d} "
+                      f"{100 * (row['coverage'] or 0):8.2f}% {100 * (row['precision'] or 0):9.2f}% "
+                      f"{row['wrong_changes']:6d}")
     return 0
 
 
