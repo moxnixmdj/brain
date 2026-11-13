@@ -204,6 +204,17 @@
       "VERIFIABILITY": "SKILLOPT_MEASURED_52_OF_52_BEST_OR_TIED_WITH_ZERO_WEIGHT_UPDATES_SO_IT_IS_NOT_A_PREREQUISITE",
       "WALL_CLOCK": "WEEKS"
      },
+     "evidence": [
+      "NO_TRAINING_SUBSTRATE_IN_THIS_TREE__PYTHON3_NODE_AND_G_PLUS_PLUS_ONLY__NO_GRADIENT_STACK_NO_CHECKPOINT_NO_OPTIMIZER",
+      "SKILLOPT_REPORTS_BEST_OR_TIED_BEST_ON_52_OF_52_MODEL_BENCHMARK_HARNESS_CELLS_WITH_ZERO_WEIGHT_UPDATES_AND_ZERO_INFERENCE_TIME_MODEL_CALLS"
+     ],
+     "qualification_evidence": [
+      "https://www.microsoft.com/en-us/research/blog/skillopt-agent-skills-as-trainable-parameters/",
+      "https://arxiv.org/pdf/2605.23904"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
      "resolution": "DISQUALIFIED",
      "route": "TRAIN_THE_MODEL_WEIGHTS_ON_THE_EXPERIENCE"
     },
@@ -216,6 +227,16 @@
       "VERIFIABILITY": "THIS_TREES_OWN_ENGINE_HAS_ZERO_OCCURRENCES_OF_ORACLE_VERIFY_REFUSE_WRONG_EXPECT_ASSERT_FALSIFY_CONTRADICT",
       "WALL_CLOCK": "NONE"
      },
+     "evidence": [
+      "GREP__canonical/swe_kernel/semantic_generalization_engine_v1.py HAS_ZERO_OCCURRENCES_OF_ORACLE_VERIFY_REFUSE_WRONG_EXPECT_ASSERT_FALSIFY_CONTRADICT",
+      "MEASURED__SIMILARITY_RETRIEVAL_WITHOUT_A_CHECK_FALSE_ACCEPTS_67_5_PERCENT_OF_A_GENERAL_BOUNDARY"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/abs/2608.15165"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
      "resolution": "DISQUALIFIED",
      "route": "STORE_MORE_EXPERIENCES_AND_RETRIEVE_THEM_BY_SIMILARITY"
     },
@@ -228,6 +249,16 @@
       "VERIFIABILITY": "THE_WHOLE_DEFECT_IS_THAT_COUNTS_AND_DECLARATIONS_ARE_UNFALSIFIABLE",
       "WALL_CLOCK": "NONE"
      },
+     "evidence": [
+      "MEASURED__canonical/swe_kernel/skill_scope_ledger_v1.py REPORTS_ALL_FIVE_SHIPPED_SKILLS_EXACT_MATCH_ONLY_WITH_NO_DOMAIN_STATEMENT",
+      "MEASURED__595_RECORDS_IN_THIS_TREE_DECLARE_A_COMMAND_AND_ASK_FOR_NOTHING_TO_BE_CHECKED"
+     ],
+     "qualification_evidence": [
+      "canonical/tools/auditability_report_v1.py --floor --baseline canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json printed HELD: declaring_none 595 == floor 595 on this host"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
      "resolution": "DISQUALIFIED",
      "route": "DECLARE_THE_SCOPE_IN_THE_RULE_BY_HAND"
     },
@@ -240,6 +271,16 @@
       "VERIFIABILITY": "PINNED_BY_A_TEST_AND_KILLED_BY_MUTATION",
       "WALL_CLOCK": "SHORTER"
      },
+     "evidence": [
+      "EXECUTED__THE_SKILL_FIRES_ON_8_OF_8_VICTIMS_SO_A_NON_FIRING_WOULD_HAVE_TO_BE_SYNTHESIZED_RATHER_THAN_OBSERVED",
+      "EXECUTED__A_VICTIM_HOLDING_NO_COMPARISON_YIELDS_NOT_APPLICABLE_AND_NO_EVIDENCE_ROW"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_skill_scope_acquisition_v1.py::test_a_non_firing_costs_an_observation_and_yields_no_evidence passed on this host"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
      "resolution": "DISQUALIFIED",
      "route": "COUNT_A_NON_FIRING_AS_A_FAILURE_SO_A_BOUNDARY_ARRIVES_SOONER"
     },
@@ -252,7 +293,18 @@
       "VERIFIABILITY": "PINNED_BY_A_TEST_AND_KILLED_BY_MUTATION",
       "WALL_CLOCK": "FASTER"
      },
-     "resolution": "DISQUALIFIED_AFTER_MEASUREMENT",
+     "evidence": [
+      "EXECUTED__THE_SUBSTRING_VARIANT_OF_THE_SAME_VOCABULARY_IDENTIFIED_BASELINE_VIOLATES_OWN_SPEC_PLUS_SITE_RETURN_FROM_THE_SAME_EVIDENCE",
+      "EXECUTED__THE_AST_VARIANT_IDENTIFIES_BASELINE_VIOLATES_OWN_SPEC_ALONE_WITH_ONE_SURVIVOR"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_skill_scope_acquisition_v1.py::test_a_substring_is_not_an_observation passed on this host",
+      "the mutation site_return_is_a_substring_test was KILLED by that suite"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
      "route": "EXTRACT_FACTS_BY_SUBSTRING_TEST"
     }
    ],
