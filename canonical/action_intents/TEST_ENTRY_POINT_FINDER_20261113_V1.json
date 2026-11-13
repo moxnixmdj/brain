@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "INSTANT_LEARNING_AND_INSTANT_LEARNING_IN_NEW_ENVIRONMENTS_ARE_NOT_SOLVED__ONE_SHOT_PERMANENCE_FAILS_ON_THE_CHECK__THE_PRIOR_VERDICT_THAT_THE_CHECK_COULD_NOT_RUN_WAS_A_FINDER_BUG_NOT_A_REAL_ABSENCE__CORRECTED_YIELD_IS_18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK__AND_3_OF_5_MUTANTS_SURVIVE_SO_COVERS_IS_NOT_ADEQUACY__VALIDATED_REPLAY_OF_A_LEARNED_MODEL_COSTS_1_08_PERCENT_OF_COLD_BUT_ONLY_BECAUSE_IT_IS_CHECKED",
- "canonical_base_commit": "97e3deb1669286b8dd9739642a3e0033d0308e55",
+ "canonical_base_commit": "ee9685ddf9436842a9d4326209bc36c1c3f40a5b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -53,7 +53,22 @@
  "governance_change": false,
  "highest_leverage_now": "The finder is now honest about its own blind spots, which the previous instrument was not.",
  "incremental_spend_usd": 0,
- "load_bearing_primary": true,
+ "load_bearing_primary": {
+  "canonical_base_commit": "ee9685ddf9436842a9d4326209bc36c1c3f40a5b",
+  "constructive_gap_for_open_obligation_ids": [],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/2",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ZERO__THE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING__CORRECTS_A_MEASUREMENT_THAT_WAS_WRONG_AND_THEN_FALSIFIES_THE_ONE_SHOT_PERMANENCE_ASSUMPTION_AT_THE_TOOL_LEVEL",
+  "open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ],
+  "open_obligation_ids_note": "Bound to the two coding obligations because the blocker is the coding-generalisation blocker; no obligation is claimed discharged and scope_complete_discharge is false.",
+  "scope_complete_discharge": false,
+  "stop_condition": "THE_FINDER_REPORTS_WHAT_IT_CANNOT_SEE__18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK_AND_3_OF_5_MUTANTS_SURVIVING__VALIDATED_REPLAY_SAVES_98_9_PERCENT_AND_BLIND_REPLAY_LANDS_OFF_GOAL__62_TESTS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
  "measured_effect": "finder: 74 changed .py files, 6 pinned repos -> IS_TEST_FILE 20, COVERS 11, IMPORTS 5, DISPATCH 2, NONE 36; 18/54 non-test files reachable = 33%. mutation: stem caught (28 pass -> 2 fail 2 err), comics __str__ mutant survived (10 pass), comics db_table mutant caught, two comics views mutants survived -> 3 of 5 survived. reuse: cold 1672 interactions, drive(prior) 1672 (0% saving), replay_then_repair 18 (1.08%), drifted world refused at 1 interaction, blind replay lands (7,8,9). 62 tests pass.",
  "next_step": "Add mutation as the adequacy gate; keep weight training blocked at 258 units / 64 verified against 5000.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
