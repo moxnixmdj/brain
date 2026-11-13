@@ -455,7 +455,8 @@ def test_one_program_serves_five_taught_actions() -> None:
         (line,) = [line for line in program.splitlines() if line.startswith("REQUEST = ")]
         assert ast.literal_eval(line.split("=", 1)[1].strip()) == (lesson["does"], tuple(lesson["first_request"].values()))
         assert request == lesson["first_request"] and tuple(request) == tuple(lesson["parameters"])
-        assert program.replace(line, own_line) == (teach.PROGRAMS / "edit_by_example_v1.py").read_text(encoding="utf-8")
+        assert program.replace(line, own_line) == teach.carried_along(
+            (teach.PROGRAMS / "edit_by_example_v1.py").read_text(encoding="utf-8"))
     skeletons = {skill["goal_skeleton"] for skill in json.loads(teach.BUNDLE.read_text(encoding="utf-8"))["skills"]}
     assert {"remember in ?path0 the way ?path1 was changed into ?path2",
             "remember in ?path0 also the way ?path1 was changed into ?path2",
