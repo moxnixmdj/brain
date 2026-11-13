@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 446,
+  "knowledge_documents": 447,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6843,
+  "research_index_records": 6844,
   "routing_tokens": 2373,
   "skills": 18,
-  "source_index_entry_points": 448,
-  "source_index_modules": 1978
+  "source_index_entry_points": 449,
+  "source_index_modules": 1979
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5f39fd36076a856e1efdaf428513b1b52d7966c7348e02b6864c453664792c96"
+  "value": "04995268b7f6161d965fad6ab3be34b2c7eec93bffa5b57474476ae518faf1f5"
  },
  "engines": [
   {
@@ -60927,6 +60927,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11075,
+   "headings": [
+    "The compile layer released for declared capabilities: effect-directed routing, measured",
+    "0. The owner's question, and what this round does about it",
+    "1. The mechanism: effect-directed compile routing",
+    "2. PR2 — pre-registered BEFORE the confirmatory probe run",
+    "3. Measured (filled after the probe run)",
+    "4. The theory answer: token-space, weight-space, and what is actually real",
+    "5. What is real and what is not, after this round",
+    "6. Probe scoreboard (measured after PR2 was committed)",
+    "7. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_COMPILE_LAYER_RELEASED_20261113_V1.md",
+   "sha256": "33b88028dda135b82420ab20af29aeba109662c1e27fa5dcc289759e0ff2f2a9",
+   "summary": "**2026-11-13.** Branch `arena/360b15d5-brain`. Base `d314e2fe`. Follows PR #6733 (the confinement substrate) and PR #6760 (the confined dispatch seam + the corrected diagnosis: 32/38 realistic sentences die at the COMPILE layer, before any dispatch). Authority NONE — sandbox measurement, $0, zero model dependency, `truth.achieved` stays `false`.",
+   "terms": {
+    "2026": 4,
+    "38": 5,
+    "adapter": 4,
+    "after": 6,
+    "already": 5,
+    "any": 5,
+    "argument": 4,
+    "before": 6,
+    "candidate": 4,
+    "canonical": 6,
+    "check": 4,
+    "clone": 5,
+    "committed": 4,
+    "compile": 7,
+    "confined": 5,
+    "crosshair": 4,
+    "declared": 6,
+    "distillation": 4,
+    "every": 5,
+    "exactly": 4,
+    "executed": 7,
+    "experience": 7,
+    "fail-closed": 5,
+    "gate": 5,
+    "honestly": 4,
+    "index": 4,
+    "layer": 4,
+    "learning": 4,
+    "measured": 7,
+    "model": 5,
+    "named": 6,
+    "new": 4,
+    "no": 9,
+    "not": 11,
+    "one": 11,
+    "own": 8,
+    "real": 6,
+    "result": 5,
+    "round": 11,
+    "routed": 5,
+    "row": 5,
+    "rows": 7,
+    "run": 7,
+    "seam": 6,
+    "sentence": 8,
+    "sentences": 7,
+    "tree": 8,
+    "verified": 12
+   },
+   "title": "The compile layer released for declared capabilities: effect-directed routing, measured",
+   "title_terms": [
+    "capabilities",
+    "compile",
+    "declared",
+    "effect-directed",
+    "layer",
+    "measured",
+    "released",
+    "routing"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6738,
    "headings": [
     "The confined dispatch seam exists; the corrected diagnosis moves the wall to the compile layer",
@@ -79672,10 +79752,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1248,
+  "included_source_count": 1249,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6a4479bb78953cc46ad29847a46e41ce4662c74e748a8b4b0db35dfc41cdc405"
+  "source_tree_digest": "381acf5588603af96801fe21e3f5f9307cb0ec0d87e38112bf0da2dc4215567e"
  },
  "research_index": [
   {
@@ -238146,6 +238226,29 @@
    }
   },
   {
+   "action_id": "THE_COMPILE_LAYER_RELEASED_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/THE_COMPILE_LAYER_RELEASED_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_COMPILE_LAYER_RELEASED_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cf41388156aead3631a1a04a36cad238f6965f51505730951f056894a1678e87",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "compile": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "layer": 1,
+    "realistic_sentences_now_compile_through_reviewed_declarations_and_execute_on_the_disposable_clone_with_verified_effect_receipts__executed_3_to_8_not_compiled_32_to_18__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "release_the_compile_layer_with_effect_directed_routing_and_answer_the_weight_space_question_with_2026_research": 1,
+    "released": 1,
+    "the_compile_layer_did_not_map_sentences_to_declared_capabilities_and_the_door_discovery_fallback_masked_the_gap_with_a_boundary_status__weight_space_learning_has_no_weights_in_this_sandbox": 1,
+    "the_compile_layer_released_20261113_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_COMPOSED_PATH_ASKS_THE_ACCEPTANCE_VERIFIER_TOO_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -258727,7 +258830,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/confined_dispatch_v1.py",
-   "sha256": "fe1b5ca1bed19e5a453fb4e13f885185b068e06f0b572422ea09557f4affcfbb",
+   "sha256": "9903f478bd38f0f8652ebe7e3a106df09644efb713b864c13876920077234e36",
    "summary": "The seam the admitted confinement was built for: declared capabilities run confined.",
    "symbol_count": 5,
    "symbols": [
@@ -264596,6 +264699,48 @@
     "side": 1,
     "truth-preserving": 1,
     "v2": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/effect_directed_compile_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/effect_directed_compile_v1.py",
+   "sha256": "904cd36a3bd68aaf732107d2914a267ec4bd6b6b099ff9d8b39e38e30a346344",
+   "summary": "Effect-directed compile routing: the reviewed declarations decide, the sentence binds,",
+   "symbol_count": 8,
+   "symbols": [
+    "_bind_args",
+    "_declarations",
+    "_mentioned_paths",
+    "_output_artifact",
+    "_stem",
+    "_tokens",
+    "attempt",
+    "candidates"
+   ],
+   "terms": {
+    "attempt": 1,
+    "bind_args": 1,
+    "binds": 1,
+    "candidates": 1,
+    "compile": 2,
+    "decide": 1,
+    "declarations": 2,
+    "directed": 1,
+    "effect": 1,
+    "effect-directed": 1,
+    "mentioned_paths": 1,
+    "output_artifact": 1,
+    "reviewed": 1,
+    "routing": 1,
+    "sentence": 1,
+    "stem": 1,
+    "tokens": 1,
+    "v1": 1
    }
   },
   {
@@ -277632,7 +277777,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "94a4b1bd5296a6ee9e983527bc41b04de0732bbc8eaacdb6758d75c184f017bc",
+   "sha256": "f1d9f3cd68372045a1cada01e981d11d63c661f573a33fcdd9630763295117db",
    "summary": "Fail-closed route admission in front of the live Brain.",
    "symbol_count": 130,
    "symbols": [
