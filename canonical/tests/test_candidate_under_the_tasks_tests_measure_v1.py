@@ -434,6 +434,19 @@ def test_a_task_whose_test_patch_touches_no_test_module_is_run_on_the_modules_it
     assert [one["resolves"] for one in row["candidates"]] == [False, True]
 
 
+ONE_MORE_MODULE = ("diff --git a/tests/store_tests/test_more.py b/tests/store_tests/test_more.py\nnew file mode 100644\n--- /dev/null\n+++ b/tests/store_tests/test_more.py\n"
+                   "@@ -0,0 +1,6 @@\n+import unittest\n+\n+\n+class MoreTests(unittest.TestCase):\n+    def test_more(self):\n+        self.assertTrue(True)\n")
+
+
+@needs_git
+def test_every_module_the_test_patch_touches_is_run_whether_or_not_the_tasks_lists_name_a_test_of_it(project, tree):
+    """Added after the round of seeded faults: with the labels always taken from the tests' names nothing failed."""
+    patch = project["test_patch"] + ONE_MORE_MODULE
+    row = measure.of_task(tree, project["clone"], project["commit"], patch, project["fix"], TASK_TESTS, [candidate(FIXED)], None)
+    assert row["labels"] == ["store_tests.tests", "store_tests.test_more"] and measure.modules_named(FIRST + KEEP) == ["store_tests.tests"]
+    assert row["judged"] and row["as_it_stands"]["ran"] == 6 and row["with_the_fix"]["ran"] == 6 and row["candidates"][0]["resolves"]
+
+
 @needs_git
 def test_a_test_that_fails_here_even_with_the_fix_is_not_held_against_a_candidate(project, tree):
     row = measure.of_task(tree, project["clone"], project["commit"], project["test_patch"], project["fix"], TASK_TESTS, [candidate(FIXED)], None)
@@ -500,6 +513,18 @@ def test_a_clone_made_without_file_contents_has_them_after_the_fetch(project, tm
     assert (tmp_path / "tree" / "shop" / "store.py").read_text() == FIXED
 
 
+@needs_git
+def test_what_a_fetch_does_not_bring_is_counted_as_still_missing(project, tmp_path, monkeypatch):
+    """Added after the round of seeded faults: with the count of what is still missing set to nothing, nothing failed."""
+    _git(project["clone"], "config", "uploadpack.allowFilter", "true")
+    clone = tmp_path / "without.git"
+    subprocess.run(["git", "clone", "-q", "--bare", "--filter=blob:none", f"file://{project['clone']}", str(clone)], check=True, capture_output=True)
+    real = measure._git
+    monkeypatch.setattr(measure, "_git", lambda directory, *args, **more: None if "fetch" in args else real(directory, *args, **more))
+    report = measure.fetch_everything(clone, [project["commit"]])
+    assert (report["files"], report["fetched"], report["still_missing"]) == (7, 7, 7)
+
+
 # --------------------------------------------------------------------------- #
 # all of them
 # --------------------------------------------------------------------------- #
@@ -516,7 +541,7 @@ ROWS = {
     "django__django-2": a_row(resolving=(2,), other=False, whole=(1,), version="3.0"),
     "django__django-3": a_row(made=2, other=True, stopped=(1,), broken=(2,)),
     "django__django-4": a_row(made=0, version="3.0"),
-    "django__django-5": a_row(judged=False, why="the tests do not run here: with the expert's fix the run ended before its summary", version="1.11"),
+    "django__django-5": a_row(judged=False, why="the tests do not run here: with the expert's fix the run ended before its summary", version="1.11", left_out=59),
     "django__django-6": a_row(judged=False, why="the expert's fix did not go in", made=0),
     "django__django-7": a_row(judged=False, why="the expert's fix did not go in", made=0),
     "django__django-8": a_row(resolving=(1,), made=20),
@@ -534,7 +559,7 @@ def test_the_counts_of_what_this_machine_can_judge():
     assert (summary["tasks"], summary["judged"], summary["judged__share_of_the_django_tasks"]) == (8, 5, 0.625)
     assert summary["not_judged__why"] == {"the expert's fix did not go in": 2, "the tests do not run here: with the expert's fix the run ended before its summary": 1}
     assert list(summary["not_judged__why"]) == ["the expert's fix did not go in", "the tests do not run here: with the expert's fix the run ended before its summary"]
-    assert summary["tests_left_out__that_fail_here_even_with_the_fix"] == 2 and summary["tasks_with_a_test_left_out"] == 1
+    assert summary["tests_left_out__that_fail_here_even_with_the_fix"] == 2 and summary["tasks_with_a_test_left_out"] == 1   # the 59 of a task that is not judged are not among them
     assert summary["tests_that_should_keep_passing__in_the_judged_tasks"] == 50
     assert (summary["with_a_candidate"], summary["with_a_candidate_and_judged"]) == (5, 4)
 
@@ -764,6 +789,26 @@ def test_with_no_candidates_only_the_judging_is_done(dataset):
                                     {"files": [{"path": "shop/store.py", "status": "modified", "patch": "@@ -1 +1 @@", "fetch_error": "HTTP 502"}]}])
 def test_a_pull_request_record_that_is_not_whole_is_refused(dataset, broken):
     (dataset["pulls"] / f"{ONE}.json").write_text(json.dumps(broken))
+    assert count(dataset) == 2
+    assert not dataset["out"].exists() and not (dataset["work"] / "rows.jsonl").exists()
+
+
+@needs_git
+def test_the_tasks_of_the_record_stand_in_the_order_of_their_numbers(project, dataset):
+    """Added after the round of seeded faults: with the tasks in the order of their names, 10097 before 7530, nothing failed."""
+    early = "django__django-7530"
+    hunk = project["fix"][project["fix"].index("@@"):]
+    (dataset["root"] / "problems" / "swe" / "swebench-verified" / f"{early}.yaml").write_text(_statement(project["commit"], TEXT, TASK_TESTS))
+    (dataset["root"] / "patches" / f"{early}_tests.patch").write_text(project["test_patch"])
+    (dataset["pulls"] / f"{early}.json").write_text(json.dumps({"files": [{"path": "shop/store.py", "status": "modified", "previous": None, "patch": hunk, "is_test": False}]}))
+    assert count(dataset, "--no-candidates") == 0
+    assert list(json.loads(dataset["out"].read_text())["per_task"]) == [early, TWO, ONE] and sorted([early, TWO, ONE]) == [TWO, ONE, early]
+
+
+@needs_git
+def test_trees_that_did_not_come_whole_are_refused(dataset, monkeypatch):
+    real = measure.fetch_everything
+    monkeypatch.setattr(measure, "fetch_everything", lambda clone, commits: {**real(clone, commits), "still_missing": 3})
     assert count(dataset) == 2
     assert not dataset["out"].exists() and not (dataset["work"] / "rows.jsonl").exists()
 
