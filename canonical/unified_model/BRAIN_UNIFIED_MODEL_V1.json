@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 429,
+  "knowledge_documents": 430,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6826,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "76a1eed670d28b7d14bb3e2e27a6df669f7329fb9fdac64d7787a85a4875744a"
+  "value": "3cea3b93b7e3540632c2adb15c4cb5e45b7dd50ccd0e9696db8220239904c804"
  },
  "engines": [
   {
@@ -52549,6 +52549,90 @@
     "they",
     "times",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 12022,
+   "headings": [
+    "Learning does not accumulate: 52 lessons write 39 lines nobody wrote",
+    "1. The assumption nobody tested",
+    "2. Why this is the answer to the question, and not a footnote",
+    "3. What the owner's four proposed fixes actually do",
+    "4. The limiting factor, from first principles",
+    "5. What is real and what is not, in the owner's words",
+    "6. Reproduce",
+    "corpus (needs gh; ~6 min for all three sets)",
+    "the pool curve, ~3 min",
+    "pinned by 8 tests, predictions declared before the run",
+    "7. Where this round was wrong"
+   ],
+   "kind": "DOCUMENT",
+   "path": "LEARNING_DOES_NOT_ACCUMULATE_20261112_V1.md",
+   "sha256": "74ef8437bc1a2c3df291adeb7373e62b3f73028aa27d0dbfc05ac06969b0eeb8",
+   "summary": "**2026-11-12.** Branch `arena/6bc5654f-brain`, base `b56d981c`. Authority **NONE** — producer-run sandbox measurement, `$0`, zero model calls, `truth.achieved` stays `false`, no capability registered, no family flipped, no test weakened.",
+   "terms": {
+    "232": 8,
+    "39": 7,
+    "52": 5,
+    "across": 6,
+    "arm": 5,
+    "before": 5,
+    "canonical": 6,
+    "change": 5,
+    "control": 5,
+    "corpus": 10,
+    "correct": 5,
+    "curve": 7,
+    "each": 7,
+    "every": 9,
+    "false": 5,
+    "files": 6,
+    "fresh": 5,
+    "half": 6,
+    "learning": 11,
+    "lesson": 12,
+    "lessons": 15,
+    "lines": 8,
+    "measured": 6,
+    "model": 5,
+    "no": 12,
+    "not": 31,
+    "once": 8,
+    "one": 23,
+    "only": 9,
+    "organ": 5,
+    "own": 5,
+    "place": 5,
+    "pool": 13,
+    "precision": 5,
+    "python3": 5,
+    "round": 7,
+    "rules": 5,
+    "same": 5,
+    "scope": 5,
+    "tasks": 5,
+    "thesis": 6,
+    "thing": 5,
+    "three": 5,
+    "training": 5,
+    "tree": 7,
+    "weights": 8,
+    "wrong": 13,
+    "wrote": 7
+   },
+   "title": "Learning does not accumulate: 52 lessons write 39 lines nobody wrote",
+   "title_terms": [
+    "39",
+    "52",
+    "accumulate",
+    "learning",
+    "lessons",
+    "lines",
+    "nobody",
+    "not",
+    "write",
+    "wrote"
    ]
   },
   {
@@ -78303,10 +78387,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1231,
+  "included_source_count": 1232,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4dca631932a318d12c7ff73daa89a3eec30e3c8968fde6f3cb20ff54cf518baf"
+  "source_tree_digest": "b9672cbb74c1e7f02da77e62387fd0e5d3569b9b4b6aa4843efe23fd20bec08d"
  },
  "research_index": [
   {
@@ -167908,6 +167992,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/LESSON_POOL_INTERFERENCE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/LESSON_POOL_INTERFERENCE_20261112_V1.json",
+   "schema": "LESSON_POOL_INTERFERENCE_V1",
+   "sha256": "94ea9394e72aa06e9ebc37dd27e6fce01dd18f1e99ba30ebe6db34133e3eeccf",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "interference": 1,
+    "lesson": 1,
+    "pool": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-05",
    "id": "research:canonical/verification/LITERAL_TERMINAL_NOW_ATTAINABILITY_CUT_CONNECTOR_VERIFICATION_20261005_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -195406,23 +195508,6 @@
     "spread": 1,
     "v2": 1,
     "verify": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
-   "sha256": "6f39a538f01faef96312f28d60d978314ce6b64163365486514a3bf06b4b9e3f",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "check": 1,
-    "standing": 1,
-    "v1": 1
    }
   },
   {
@@ -232124,6 +232209,35 @@
    }
   },
   {
+   "action_id": "LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/LEARNING_DOES_NOT_ACCUMULATE_A_POOL_OF_LESSONS_WRITES_LINES_NOBODY_WROTE_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "30900965fc604de0369d699f834acc649aa3ae0baf8fbdb840cb7642189c195a",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "accumulate": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learning": 1,
+    "learning_does_not_accumulate_a_pool_of_lessons_writes_lines_nobody_wrote_20261112_v1": 1,
+    "lessons": 1,
+    "lines": 1,
+    "load_every_lesson_the_corpus_yields_and_score_one_fixed_target_set_under_a_growing_pool__verify_every_row_with_a_second_scorer_that_shares_no_input_with_the_first__and_declare_predictions_before_running": 1,
+    "nobody": 1,
+    "not": 1,
+    "pool": 1,
+    "the_owners_thesis_rests_on_composition__that_a_lesson_keeps_working_while_other_lessons_are_loaded__and_no_round_had_ever_measured_a_pool__every_recorded_round_scores_one_lesson_two_lessons_or_the_choice_of_demonstration__so_the_one_assumption_the_whole_roadmap_stands_on_was_unmeasured": 1,
+    "the_tree_can_now_state_that_experience_does_not_accumulate__a_pool_of_52_lessons_writes_39_lines_no_developer_wrote_where_a_pool_of_5_writes_none__and_that_the_mechanism_is_missing_ownership_not_a_weak_matcher": 1,
+    "v1": 1,
+    "writes": 1,
+    "wrote": 1
+   }
+  },
+  {
    "action_id": "SQLITE_VERIFIER_SUBSTRATE_DECLARED_AS_THE_STDLIB_MODULE_IT_ACTUALLY_USES_V1_20261021_V1",
    "capability": false,
    "date": "2026-10-21",
@@ -235750,30 +235864,6 @@
     "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
     "turn": 1,
     "v1": 2
-   }
-  },
-  {
-   "action_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "324861300c62c532dae7c3ccb745043ee5b3e76ca7c6941399d10fabdbb48a1a",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_wrong_generalisation_is_refused_only_where_a_check_exists__and_on_real_migrated_projects_the_check_could_not_run_at_all__0_of_42_files__because_no_test_module_imported_the_file_or_a_declared_dependency_was_not_installed": 1,
-    "check": 1,
-    "environment": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "reuse_the_rung_gradient_arms_and_check_class__add_isolated_venv_standing_of_declared_dependencies_manifest_named_missing_module_repair_a_per_path_test_entry_finder_with_direct_in_directory_indirect_confidence_and_a_ran_zero_tests_refusal__carry_the_manifests_in_the_corpus__then_remeasure_the_same_twelve_pull_requests_by_label": 1,
-    "round": 1,
-    "standing": 1,
-    "standing_the_check_is_the_environment_round_20261112_v1": 1,
-    "the_oracle_deficit_named_last_round_is_now_an_implemented_organ__standing_up_a_project_s_checks__and_the_verified_coverage_on_this_corpus_remains_zero_with_each_residual_named_per_project_instead_of_bucketed_half_half": 1,
-    "v1": 1
    }
   },
   {
