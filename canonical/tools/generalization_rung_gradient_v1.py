@@ -66,6 +66,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import pathlib
 import random
 import shutil
@@ -633,24 +634,41 @@ class Check:
         self.reason = "" if runs else why
 
     def _runs(self) -> tuple[bool, str]:
+        """A check is available only if it EXECUTED a test and got the expected verdict.
+
+        The first version took `unittest`'s exit code alone. On a pytest-style module --
+        plain `def test_*()` and no `TestCase` -- `unittest` collects nothing, prints
+        `Ran 0 tests ... OK` and exits 0, so the check was declared available and accepted
+        every candidate including a broken one. 943 of this repo's 2,592 test files are
+        shaped that way. `run_check` counts what actually ran and tries the pytest
+        collector when unittest sees nothing; zero is never a verdict.
+        """
         if self._dir is None or self._test is None:
             return False, "CHECK_NO_TEST_MODULE"
-        try:
-            done = subprocess.run(
-                [sys.executable, "-m", "unittest", self._test],
-                cwd=str(self._dir), capture_output=True, timeout=CALL_LIMIT_S,
-                env=self._env(),
-            )
-        except (subprocess.TimeoutExpired, OSError):
-            return False, "CHECK_TIMED_OUT"
-        passed = done.returncode == 0
-        if passed == (self.expect == "PASS"):
+        from canonical.swe_kernel import check_collection_admission_v1 as A
+
+        verdict = A.run_check(self._test, cwd=self._dir, env=self._admission_env(),
+                              timeout_s=CALL_LIMIT_S)
+        self.last_collection = verdict
+        if not verdict["ran"]:
+            return False, verdict["reason"]
+        if bool(verdict["passed"]) == (self.expect == "PASS"):
             return True, ""
-        missing = b"ModuleNotFoundError" in done.stderr or b"ImportError" in done.stderr
-        if missing:
-            return False, "CHECK_DEPENDENCY_MISSING"
         return False, ("CHECK_FAILS_ON_THE_ORIGINAL" if self.expect == "PASS"
                        else "CHECK_PASSES_ON_A_BROKEN_FILE")
+
+    def _admission_env(self) -> dict[str, str]:
+        """The bounded env, plus any collector the parent already has on its path.
+
+        The project copy stays first on PYTHONPATH so the check imports the copy's code,
+        not the repository's. pytest itself is borrowed from the caller's path when present;
+        when it is absent the reason is CHECK_COLLECTOR_UNAVAILABLE, never a silent pass.
+        """
+        env = self._env()
+        inherited = os.environ.get("PYTHONPATH", "")
+        extra = [p for p in inherited.split(os.pathsep) if p and pathlib.Path(p).is_dir()]
+        env["PYTHONPATH"] = os.pathsep.join([env["PYTHONPATH"], *extra])
+        return env
 
     def _env(self) -> dict[str, str]:
         import os
@@ -730,16 +748,19 @@ class Check:
             return False
         try:
             written.write_text(candidate, encoding="utf-8")
-            done = subprocess.run(
-                [sys.executable, "-m", "unittest", self._test],
-                cwd=str(self._dir), capture_output=True, timeout=CALL_LIMIT_S,
-                env=self._env(),
-            )
             # A CANDIDATE is accepted when the check passes on it, in both modes. `expect` is about
             # the file as it was found (a migration already works, a repair does not); it does not
             # flip what "accepted" means. Inverting this made the tool accept edits that left the
             # tests FAILING -- the exact opposite of what an oracle is for.
-            ok = done.returncode == 0
+            #
+            # It is not enough for the exit code to be 0: the check must have RUN something.
+            # `unittest` exits 0 on a module it collected nothing from, which accepted every
+            # candidate ever offered to it.
+            from canonical.swe_kernel import check_collection_admission_v1 as A
+
+            verdict = A.run_check(self._test, cwd=self._dir, env=self._admission_env(),
+                                  timeout_s=CALL_LIMIT_S)
+            ok = bool(verdict["ran"]) and verdict["passed"] is True
         except (subprocess.TimeoutExpired, OSError):
             ok = False
         finally:

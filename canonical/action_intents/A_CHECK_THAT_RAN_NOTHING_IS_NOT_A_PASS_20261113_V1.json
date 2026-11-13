@@ -1,0 +1,243 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+  "action_intent_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "route_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+  "date": "2026-11-13",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "incremental_spend_usd": 0,
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "benchmark_or_family_rank_authority": false,
+  "highest_leverage_now": true,
+  "action_summary": "Measures the owner's claim that solved instant learning implies solved computer use, and finds a defect upstream of every learning option: the stood-up check treated `python -m unittest` exit 0 as a verdict, but unittest collects nothing from a pytest-style module and exits 0. 943 of 2592 tracked test files (36.38%) have that shape; two were run both ways (unittest: 0 tests/OK; pytest: 10 and 4 passed). On a constructed project the legacy path accepted a deliberately broken `return None` edit; the repaired check refuses it and still accepts the original. Also audits the five durable experience stores against the training-signal contract of ASCENT and Experience Distillation: 0 of 71 rows are admissible and no store records a single failure. Claims no capability, flips no family, moves no benchmark.",
+  "selected_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
+  "causal_blocker": "THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT",
+  "expected_parent_change": "A stood-up check reports a verdict only when it executed at least one test; zero collection, collection error and missing dependency are distinct refusals rather than a pass.",
+  "expected_parent_frontier_change": "The check admission path no longer stamps verified on an untested edit. No capability is registered and no family is flipped.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT",
+  "falsification_condition": "The repaired check accepts a broken edit in a pytest-style project, refuses a genuinely passing unittest project, reports a verdict when nothing ran, or an existing consumer of the tool regresses.",
+  "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
+  "explicit_user_authorization": "Paraphrase, not a quotation: the owner asks whether solved instant learning implies solved computer use and asks for the smartest real next step. This action changes no law, no protected guard, and no terminal truth.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "THE_VERIFIER_WAS_EMPTY_20261113_V1.md",
+      "canonical/swe_kernel/check_collection_admission_v1.py",
+      "canonical/tools/experience_corpus_training_readiness_v1.py",
+      "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
+      "canonical/tests/test_experience_corpus_training_readiness_v1.py",
+      "canonical/verification/VACUOUS_CHECK_CENSUS_20261113_V1.json"
+    ],
+    "route_class": "ADAPT",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "false_claim_removed": "A check reported available=True and accepted every candidate, including a deliberately broken one, on projects whose tests unittest cannot collect.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+    ],
+    "causal_evidence": "943/2592 tracked test files are pytest-style; unittest runs 0 tests and exits 0 on them. Legacy accepted the broken edit; repaired refuses it with 2 tests executed under pytest."
+  },
+  "measured_effect": "Vacuous-check exposure 943/2592 files (36.38%) measured; broken-edit acceptance True->False with the passing controls preserved; experience-corpus readiness 0/71 rows admissible and 0/5 stores holding a failure; 24 new tests pass, 74 compatibility tests pass, existing consumers 15 and 17 pass.",
+  "load_bearing_primary": {
+    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__IT_REMOVES_A_FALSE_VERIFIED_SIGNAL_THAT_EVERY_TOKEN_SPACE_AND_WEIGHT_SPACE_LEARNING_ROUTE_CONSUMES",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1",
+    "wall_clock_cost_ub": 1,
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/13",
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ]
+  },
+  "prior_work_reused": [
+    "canonical/tools/generalization_rung_gradient_v1.py",
+    "canonical/tests/test_the_check_is_the_difference_v1.py",
+    "canonical/tools/across_environments_v1.py",
+    "one_example_is_a_point_a_test_is_a_quantifier_probe_20261112.py",
+    "a_failure_is_a_context_not_a_ban_probe_20261112.py"
+  ],
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "real_outcome": "The stood-up check refuses a deliberately broken edit it previously accepted, and reports zero collection as unknown rather than as a pass.",
+    "selected_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
+    "selected_surviving_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
+    "deleted_or_bypassed_paths": [
+      "EXIT_CODE_ZERO_AS_A_VERDICT (measured: accepts a broken return None edit)",
+      "PYTEST_STYLE_MODULES_COUNTED_AS_CHECKED (measured: 943/2592 files run 0 tests)",
+      "COLLECTION_ERROR_COUNTED_AS_A_TEST_VERDICT (caught by the new tests before shipping)",
+      "FINE_TUNING_ON_THE_CURRENT_CORPUS_FIRST (rejected: 0/71 admissible rows, 0 failures recorded)"
+    ],
+    "stop_condition": "The counterfactual and controls behave as stated, the new and existing suites pass, the unified verifier and referee are green, and no credit is claimed.",
+    "expected_parent_level_state_change": "A stood-up check reports a verdict only when it executed at least one test; zero collection, collection error and missing dependency are distinct refusals rather than a pass.",
+    "why_selected_route_is_fastest_sufficient": "Both learning options consume the verification bit, so repairing its admission is upstream of choosing between them. The defect is local to one runner call in an owned tool; adapting it is smaller than a new verifier organ, and no GPU or open-weight model is required.",
+    "iteration_limit": 3,
+    "routes_considered": [
+      "KEEP_EXIT_CODE_ZERO_AS_THE_VERDICT (rejected: measured to accept a broken edit)",
+      "REQUIRE_PYTEST_EVERYWHERE (rejected: would break genuinely unittest-shaped projects)",
+      "COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR (chosen)",
+      "BUILD_A_NEW_VERIFIER_ORGAN (rejected: the existing check can be repaired and tested)",
+      "FINE_TUNE_ON_ACCUMULATED_TRACES_NOW (rejected: 0/71 admissible rows and no recorded failure)"
+    ],
+    "obs_goal": {
+      "real_outcome": "Remove a false verified signal without claiming broader capability.",
+      "proxy_goals_deleted": [
+        "EXIT_CODE_AS_VERIFICATION",
+        "FILES_PRESENT_AS_CHECK_AVAILABILITY",
+        "CORPUS_SIZE_AS_TRAINING_READINESS"
+      ],
+      "surviving_necessity": "A verification bit must come from a test that actually executed."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "environment_learning_v1.state_key/learn_model/drive",
+        "systematic_exploration_v1.explore_to_goal/drive",
+        "transfer_learning_v1.remember/recall/drive/walk_carried_model",
+        "predicate_world_abstraction_v1.project_computer_observation"
+      ],
+      "external_existing_routes_checked": [
+        "No external capability route is claimed; this is a bounded local identity/admission repair."
+      ],
+      "capability_work_deleted": [
+        "No new organ, store, learner, or runtime model dependency."
+      ],
+      "surviving_gap": "Hidden state, stochastic successors, exploration depth/budget, and open-environment coverage remain unsolved."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_ZERO_COLLECTION_ACCEPTED_AS_A_VERDICT",
+      "delete_bypass_substitute_options": [
+        "Deleting the check removes the only oracle; bypassing it returns to no verification; substituting a new organ widens scope."
+      ],
+      "surviving_causal_blocker": "THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "REJECT_UNDECLARED_PRIORS_AND_VERSION_THE_SHARED_KEY",
+        "MIGRATE_LEGACY_ROWS_BY_GUESSING_TYPES",
+        "ADD_A_NEW_ENVIRONMENT_LEARNER_OR_MEMORY_ORGAN",
+        "KEEP_STR_AND_DEFAULT_STR_IDENTITY"
+      ],
+      "losing_routes_reason": "Guessing legacy types is unsound; a new organ is unnecessary; keeping the old key preserves the measured defect.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "The counterfactual project is constructed and labelled so; the two live repo witnesses and the 2592-file census are measured on the real tree. Existing consumer suites are controls, not independent capability qualification."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "Future carried-model callers must pass the schema returned by the learner; legacy rows should be relearned, not guessed.",
+      "adjacent_capabilities_absorbed": [
+        "Volatile-noise projection remains in the existing projection organ."
+      ],
+      "fresh_reuse_plan": "Use V2 schema-tagged models on fresh instances and keep goal verification separate from model recall."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "The depth/budget confound was measured once and recorded as a control amendment."
+      ],
+      "search_stop_decision": "Stop after the local repair, typed oracle, schema gates, controls, compatibility diff, unified verifier, and referee admission; do not open a new learning-organ search.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER__BOUNDED_LOCAL_VERIFIER_ADMISSION_DEFECT_IN_AN_OWNED_TOOL__NO_NEW_EXTERNAL_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+    "mode": "ACTIVE_INTERFACE",
+    "fresh_reality_authority": false,
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_REMOVES_A_FALSE_VERIFIED_SIGNAL_AND_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT",
+    "terminal_credit_delta": 0,
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "tournament": {
+      "proposal_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+      "decisive_question": "Does counting executed tests and admitting the pytest collector make the stood-up check refuse a deliberately broken edit that the legacy exit-code path accepted, while still accepting a genuinely passing project?",
+      "falsifier_id": "THE_REPAIRED_CHECK_ACCEPTS_RETURN_NONE_IN_A_PYTEST_STYLE_PROJECT_OR_REFUSES_A_GENUINELY_PASSING_UNITTEST_PROJECT_OR_AN_EXISTING_CONSUMER_REGRESSES",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/tests/test_the_check_is_the_difference_v1.py",
+          "git_blob_sha": "9a65301c92e0b09f2f973fb373a66d197d90bede"
+        },
+        {
+          "path": "canonical/tests/test_across_environments_v1.py",
+          "git_blob_sha": "8daf4ccee6fc2cb2431a39d5a5d2a406d5557930"
+        }
+      ]
+    }
+  },
+  "next_step": "Stand up checks where none exist: resolve declared dependencies and find the test entry point that imports the changed file transitively. Then give the experience store a failure channel with provenance, and only then evaluate weight-space distillation on a corpus that passes the readiness screen.",
+  "causal_evidence": "At base b8c42ebce3, 943/2592 tracked test files are pytest-style and unittest exits 0 after running 0 tests on them. Legacy check accepted a broken return None edit; repaired check executes 2 tests under pytest and refuses it, while still accepting the original and the unittest-shaped control.",
+  "tournament": {
+    "proposal_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+    "decisive_question": "Does counting executed tests and admitting the pytest collector make the stood-up check refuse a deliberately broken edit that the legacy exit-code path accepted, while still accepting a genuinely passing project?",
+    "falsifier_id": "THE_REPAIRED_CHECK_ACCEPTS_RETURN_NONE_IN_A_PYTEST_STYLE_PROJECT_OR_REFUSES_A_GENUINELY_PASSING_UNITTEST_PROJECT_OR_AN_EXISTING_CONSUMER_REGRESSES",
+    "known_counterexamples_checked": true,
+    "counterexample_receipts": [
+      {
+        "path": "canonical/tests/test_the_check_is_the_difference_v1.py",
+        "git_blob_sha": "9a65301c92e0b09f2f973fb373a66d197d90bede"
+      },
+      {
+        "path": "canonical/tests/test_across_environments_v1.py",
+        "git_blob_sha": "8daf4ccee6fc2cb2431a39d5a5d2a406d5557930"
+      }
+    ]
+  }
+}
