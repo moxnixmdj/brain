@@ -1,5 +1,8 @@
 """Generalizing a demonstrated edit needs evidence at each newly tried site."""
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 from canonical.swe_kernel.taught_actions import edit_by_example_v1 as learner
@@ -128,3 +131,36 @@ def test_batching_also_works_for_a_different_demonstrated_edit(tmp_path, monkeyp
     assert Path("values.py").read_text() == source.replace("v9 == None", "v9 is None")
     lesson = json.loads(Path("none.lesson").read_text())
     assert len(lesson["examples"][1]["not settled"]) == 9
+
+
+def test_a_later_settled_site_can_generalize_after_process_restart(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    make_lesson()
+    # The original lesson names only self.thread; the later file uses a new receiver.
+    other = "def available(worker):\n    return worker.isAlive()\n"
+    Path("other.py").write_text(other)
+    assert learner.main(("repeat", ("other.py", "alive.lesson"))) == 3
+    assert Path("other.py").read_text() == other
+
+    source = "\n".join(f"def f{i}(v{i}):\n    return v{i}.isAlive()\n" for i in range(9))
+    Path("pool.py").write_text(source)
+    Path("check_pool.py").write_text(
+        "import pool\n"
+        "class Thread:\n"
+        "    def isAlive(self): return True\n"
+        "    def is_alive(self): return True\n"
+        "def test_last():\n"
+        "    assert pool.f8(Thread())\n"
+    )
+    assert learner.main(("repeat_tried", ("pool.py", "alive.lesson", "check_pool.py"))) == 0
+
+    # A fresh interpreter re-reads the persisted lesson, not the training process's memory.
+    root = Path(__file__).resolve().parents[2]
+    env = dict(os.environ, PYTHONPATH=str(root), PYTHONDONTWRITEBYTECODE="1")
+    completed = subprocess.run(
+        [sys.executable, "-c", "from canonical.swe_kernel.taught_actions import edit_by_example_v1 as e; "
+         "raise SystemExit(e.main(('repeat', ('other.py', 'alive.lesson'))))"],
+        cwd=tmp_path, env=env, capture_output=True, text=True, timeout=10,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert Path("other.py").read_text() == other.replace("isAlive", "is_alive")
