@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "07ebf101b3618315df34bc471df5fafbb8fe251e43cd4dce317acd03d2c35eda"
+  "value": "b1f97c849660ff07a6384ac28ae86d68a6bba95bba1b0ed87ff9a5b82f9cbc92"
  },
  "engines": [
   {
@@ -51929,6 +51929,85 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 10004,
+   "headings": [
+    "Learn it here, use it there: what cross-environment transfer actually costs",
+    "1. What was measured",
+    "2. The result, and why the mean is not it",
+    "3. Where the wall is, in the learner's own words",
+    "4. It is not the check, and this is the part the previous round got wrong",
+    "5. What this means for the plan, claim by claim",
+    "6. The smartest next action, with the alternatives killed first",
+    "7. Receipts",
+    "8. What this round got wrong"
+   ],
+   "kind": "DOCUMENT",
+   "path": "LEARN_IT_HERE_USE_IT_THERE_20261112_V1.md",
+   "sha256": "7902472e33a0424302ef66f1529a17f98fe08baab9ee30d8185951425b103284",
+   "summary": "**2026-11-12.** Authority **NONE** — producer-run, `$0`, zero model calls, `truth.achieved` stays `false`, no capability registered, no family flipped.",
+   "terms": {
+    "0.000": 6,
+    "1.000": 5,
+    "about": 5,
+    "all": 6,
+    "arm": 4,
+    "canonical": 5,
+    "carries": 4,
+    "change": 12,
+    "changed": 6,
+    "changes": 4,
+    "check": 4,
+    "claim": 5,
+    "demonstration": 6,
+    "demonstrations": 7,
+    "each": 5,
+    "every": 5,
+    "exact": 6,
+    "false": 4,
+    "file": 5,
+    "first": 6,
+    "fixed": 4,
+    "form": 8,
+    "forms": 4,
+    "half": 7,
+    "kind": 8,
+    "kinds": 7,
+    "learner": 7,
+    "method": 8,
+    "name": 8,
+    "new": 7,
+    "no": 5,
+    "not": 20,
+    "nothing": 7,
+    "old": 6,
+    "one": 14,
+    "only": 6,
+    "record": 7,
+    "refused": 5,
+    "repository": 9,
+    "right": 7,
+    "round": 10,
+    "same": 5,
+    "so": 8,
+    "test": 5,
+    "three": 8,
+    "transfer": 8,
+    "two": 5,
+    "wrong": 11
+   },
+   "title": "Learn it here, use it there: what cross-environment transfer actually costs",
+   "title_terms": [
+    "actually",
+    "costs",
+    "cross-environment",
+    "here",
+    "learn",
+    "transfer",
+    "use"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6560,
    "headings": [
     "Learning-to-learn: measured at the scale I said I would, and it fails",
@@ -62646,91 +62725,6 @@
     "solve",
     "solved",
     "verdict"
-   ]
-  },
-  {
-   "authority": "NOT_A_LAW",
-   "bytes": 15971,
-   "headings": [
-    "WHAT AN OPERATOR MEANS IS A COMPUTATION, NOT A LIST",
-    "1. The one-sentence finding",
-    "2. Why this is on Problem 2's critical path and not a side issue",
-    "Operators that mean the same thing across python/go/rust/typescript/java/cpp and may be",
-    "generalized. Anything else is refused rather than guessed at.",
-    "3. The claim, executed",
-    "The two questions one list was answering",
-    "What that unblocked",
-    "The gate matrix, both directions",
-    "4. A crash found by composing with what landed on main mid-round",
-    "5. The two verdicts are not equally strong, and the output says so",
-    "6. It is wired, not decorative",
-    "7. Evidence",
-    "8. What is real",
-    "9. What is not real",
-    "10. On `PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md`, which landed on main during this round",
-    "11. What this changes next"
-   ],
-   "kind": "DOCUMENT",
-   "path": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.md",
-   "sha256": "29907cf3eed383bde5a0850639796fb6a65d60f47aedc948750764e5c020bf3d",
-   "summary": "**Date:** 2026-11-12 **Branch:** `arena/12c4f901-brain` **Authority: NONE.** Producer-run measurement on this sandbox. Every number below was produced by executing code in this repository, and the generator that produced the machine-readable copy is recorded in `canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json`.",
-   "terms": {
-    "11": 5,
-    "all": 7,
-    "answer": 6,
-    "both": 6,
-    "canonical": 10,
-    "check": 5,
-    "claim": 6,
-    "correct": 5,
-    "count": 5,
-    "every": 7,
-    "exactly": 5,
-    "family": 5,
-    "gate": 9,
-    "go": 6,
-    "javascript": 7,
-    "language": 14,
-    "lesson": 11,
-    "list": 12,
-    "main": 5,
-    "module": 5,
-    "never": 6,
-    "new": 6,
-    "no": 33,
-    "not": 27,
-    "nothing": 7,
-    "now": 6,
-    "one": 21,
-    "operator": 13,
-    "proposal": 6,
-    "python": 26,
-    "rather": 9,
-    "real": 7,
-    "refused": 8,
-    "refuted": 6,
-    "round": 6,
-    "rust": 11,
-    "same": 9,
-    "shipped": 6,
-    "so": 19,
-    "still": 8,
-    "test": 7,
-    "tests": 7,
-    "than": 10,
-    "token": 7,
-    "two": 7,
-    "typescript": 7,
-    "verdict": 7,
-    "were": 7
-   },
-   "title": "WHAT AN OPERATOR MEANS IS A COMPUTATION, NOT A LIST",
-   "title_terms": [
-    "computation",
-    "list",
-    "means",
-    "not",
-    "operator"
    ]
   },
   {
@@ -76524,7 +76518,7 @@
   "included_source_count": 1210,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "cac4b645956448478ecd63f1cd9e8f976f37e7a82f1eca27aed57719dffbf607"
+  "source_tree_digest": "e28d0ea3166bf5fe9e50558fa3545a7b3ed72ba115f1a06f52dc29ba7ce7f01e"
  },
  "research_index": [
   {
@@ -146000,6 +145994,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ACROSS_ENVIRONMENTS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ACROSS_ENVIRONMENTS_20261112_V1.json",
+   "schema": "ACROSS_ENVIRONMENTS_V1",
+   "sha256": "9ae94c49187a11d8f76711fe16aa87e1836db493479b4ec662b5292e54ab33b0",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "across": 1,
+    "environments": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/ACTIONS_PRESTEP_RUNNER_DISPATCH_FAILURE_CONNECTOR_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -169896,28 +169907,6 @@
     "pinned_source_recomputation_pass__policy_bound__no_model_eval_executed__zero_terminal_credit": 1,
     "recomputation": 1,
     "source": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_OPERATOR_SEMANTICS_VERIFICATION_V1",
-   "sha256": "2132497d227418e8cbcaab240c9e8052b96e525dc0501aa82c3ec2dc4f34e649",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "computation": 1,
-    "means": 1,
-    "membership": 1,
-    "not": 1,
-    "operator": 2,
-    "semantics": 1,
-    "test": 1,
     "v1": 1
    }
   },
@@ -231276,6 +231265,30 @@
    }
   },
   {
+   "action_id": "ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT.json",
+   "schema": "ACTION_INTENT_V1",
+   "sha256": "4ddc65b0ce0a680dd4bbae5d36e3bbcccf96eaab62d48e4de1db61345a01c144",
+   "status": "",
+   "terms": {
+    "bounded": 1,
+    "environment": 1,
+    "form": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generalisation_is_bounded_by_the_form_of_a_change_not_by_how_often_it_is_shown": 1,
+    "not": 1,
+    "one": 1,
+    "one_showing_is_bounded_by_form_not_by_environment": 1,
+    "reuse_the_recorded_instruments_on_a_repository_disjoint_corpus": 1,
+    "showing": 1,
+    "transfer_is_half_solved_and_the_failing_half_is_named__the_check_cannot_fix_it__no_rate_claim__no_family_flipped": 1
+   }
+  },
+  {
    "action_id": "OPEN_ENDED_CONCEPT_AND_ENDOGENOUS_SELF_ARCHITECT_20261103_V1",
    "capability": false,
    "date": "2026-11-03",
@@ -237279,31 +237292,6 @@
     "source": 2,
     "v1": 2,
     "wave_seven_receipt_prose_family_gets_a_suite_v1_20261024_v1": 2
-   }
-  },
-  {
-   "action_id": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "083ddaa5b3392cbac9b343b14cf7756ffcb35aeada1d24e693f11051c5f7acb5",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "computation": 1,
-    "compute_the_meaning_claim_the_frozen_list_asserted__by_executing_the_operator_in_every_toolchain_present_and_reading_the_verdict_off_the_observed_values__keep_the_structural_question_a_set_and_answer_the_semantic_question_per_language_pair__wire_the_gate_inside_the_proposer_loop_so_a_refused_swap_yields_no_candidate__refuse_when_nothing_can_execute_rather_than_guess": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "generalizable_shipped_skills_3_of_5__frozen_list_audit_refutes_percent_and_slash_by_witnessed_counterexample__gate_matrix_13_pairs_each_with_basis_and_strength__crash_keyerror_percent_equals_from_composing_with_mains_new_augmentation_refused_by_name__99_tests_passing__11_of_11_mutations_killed__declaration_floor_held_595__45_suite_batch_identical_at_9_failed_7_errors_with_passed_505_to_521__round_d_ledger_unmoved": 1,
-    "list": 1,
-    "means": 1,
-    "not": 1,
-    "one_absolute_membership_test_was_answering_a_pair_relative_semantic_question__so_the_list_was_unsound_for_two_operators_it_admitted_and_too_narrow_for_a_real_shipped_lesson_it_refused__and_the_production_call_site_took_the_proposal_language_from_the_instance_with_no_guard_while_its_sibling_hypothesis_guarded_on_it": 1,
-    "operator": 1,
-    "v1": 1,
-    "what_an_operator_means_is_a_computation_not_a_list_20261112_v1": 1
    }
   },
   {
