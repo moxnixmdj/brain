@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 432,
+  "knowledge_documents": 433,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6829,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8a45dfef1ad6b0c2097a2b2d32a1468b8d055d7b7e8a60e1140085607152a2a8"
+  "value": "61992c6409185f26e515975aaf38c3f25af537d54576e638afeb33c453369ab4"
  },
  "engines": [
   {
@@ -44598,6 +44598,88 @@
   "tokenizer": "lowercase-ascii-words-then-stopword-removal"
  },
  "knowledge": [
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 10937,
+   "headings": [
+    "Admission is the bottleneck — measured on the live learn path, 13 November 2026",
+    "1. The claim under test",
+    "2. What the live path actually executed (measured before changing anything)",
+    "3. What changed",
+    "4. What this does **not** say",
+    "5. Why this is the fastest real lever (current research, not intuition)",
+    "6. The four gaps, with the fastest honest mechanism for each",
+    "7. Killed before implementation",
+    "8. Test ledger (real counts, including the failure)",
+    "9. The one-sentence answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ADMISSION_IS_THE_BOTTLENECK_20261113_V1.md",
+   "sha256": "2e4466f42de9e38f54892a159443d1889d25e1f6b0aaf7541ba355002938e789",
+   "summary": "Authority: **NONE**. Sandbox measurement on this tree plus published research. No capability is registered, no family flips, `truth.achieved` is untouched, no base-model/LLM weights are updated.",
+   "terms": {
+    "100": 4,
+    "2026": 9,
+    "admission": 7,
+    "admit": 5,
+    "all": 5,
+    "alone": 4,
+    "arxiv": 7,
+    "before": 5,
+    "broken": 4,
+    "caller": 4,
+    "cannot": 5,
+    "capability": 4,
+    "crystallized": 4,
+    "demonstration": 6,
+    "each": 4,
+    "every": 5,
+    "evidence": 6,
+    "executed": 5,
+    "failures": 4,
+    "false": 4,
+    "falsification": 4,
+    "gain": 4,
+    "gate": 8,
+    "held-out": 4,
+    "lesson": 5,
+    "measured": 4,
+    "memory": 4,
+    "never": 8,
+    "no": 13,
+    "not": 18,
+    "one": 13,
+    "own": 6,
+    "passed": 8,
+    "permanence": 6,
+    "probe": 5,
+    "program": 7,
+    "programs": 4,
+    "real": 10,
+    "regression": 4,
+    "repaired": 4,
+    "store": 4,
+    "tests": 4,
+    "than": 4,
+    "true": 4,
+    "under": 4,
+    "ungated": 5,
+    "updates": 4,
+    "victims": 6
+   },
+   "title": "Admission is the bottleneck — measured on the live learn path, 13 November 2026",
+   "title_terms": [
+    "13",
+    "2026",
+    "admission",
+    "bottleneck",
+    "learn",
+    "live",
+    "measured",
+    "november",
+    "path"
+   ]
+  },
   {
    "authority": "NOT_A_LAW",
    "bytes": 4315,
@@ -78545,10 +78627,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1234,
+  "included_source_count": 1235,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "be63996d1b278d1b6e9a33f7cb2a64efc2c0cc2ddc917ff40782ff9828000f0e"
+  "source_tree_digest": "47f9776f37e93972a4ab5c8c9a02cd7d3539977b49591339acc34664901cda21"
  },
  "research_index": [
   {
