@@ -1,0 +1,424 @@
+{
+ "action_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
+ "action_intent_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "Implements the previous round's named next step -- standing up a project's checks in a new environment -- by extending the rung-gradient Check with declared-dependency venvs, manifest-named repair, a per-target-path test-entry finder that reports its own uncertainty, a refuse-by-name guard for suites that collect nothing, and a corpus that carries the project's dependency manifests; then re-measures the same twelve merged pull requests and reports verified coverage with a named residual operator per project.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "REUSE is the first applicable route after DELETE and BYPASS: nothing is deleted (the learner stands, measured) and nothing is bypassed (the check is the shipped project test runner).",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tests/test_the_check_stands_up_what_verification_needs_20261112_V1.py"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_WRONG_GENERALISATION_IS_REFUSED_ONLY_WHERE_A_CHECK_EXISTS__AND_ON_REAL_MIGRATED_PROJECTS_THE_CHECK_COULD_NOT_RUN_AT_ALL__0_OF_42_FILES__BECAUSE_NO_TEST_MODULE_IMPORTED_THE_FILE_OR_A_DECLARED_DEPENDENCY_WAS_NOT_INSTALLED",
+ "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "capability_target_unchanged_reason": "The measurement narrows what is missing for the existing frontier target; it does not change the target.",
+ "causal_blocker": "A_WRONG_GENERALISATION_IS_REFUSED_ONLY_WHERE_A_CHECK_EXISTS__AND_ON_REAL_MIGRATED_PROJECTS_THE_CHECK_COULD_NOT_RUN_AT_ALL__0_OF_42_FILES__BECAUSE_NO_TEST_MODULE_IMPORTED_THE_FILE_OR_A_DECLARED_DEPENDENCY_WAS_NOT_INSTALLED",
+ "date": "2026-11-12",
+ "expected_parent_change": "canonical/tools/generalization_rung_gradient_v1.py extended: Check stands declared dependencies into an isolated venv behind a single pip seam, repairs missing modules only when the project's own manifests spell them out, resolves the test entry per target path with a candidates-and-confidence receipt and defines-tests ranking, refuses suites that collect zero tests unless the project's own pytest runs, and fetch_tree carries requirements/pyproject/setup/Pipfile/tox/extension manifests; canonical/verification/STANDING_THE_CHECK_20261112_V1.json re-measures the same twelve pull requests",
+ "expected_parent_frontier_change": "THE_ORACLE_DEFICIT_NAMED_LAST_ROUND_IS_NOW_AN_IMPLEMENTED_ORGAN__STANDING_UP_A_PROJECT_S_CHECKS__AND_THE_VERIFIED_COVERAGE_ON_THIS_CORPUS_REMAINS_ZERO_WITH_EACH_RESIDUAL_NAMED_PER_PROJECT_INSTEAD_OF_BUCKETED_HALF_HALF",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Focus on solving the problem 2 perfectly with the smartest solutions in the fastest way', 'you must always think from the deepest layer, from first principles', 'kill all the bad and dumb ideas before you waste time implementing them', and 'always after you make any of your work, push and merge your work always'. This PR is the measurement step the owner's own law demands before a mechanism: it falsifies two candidate plans (widen the rule; add a semantic guard) with numbers instead of implementing them, and it names the one remaining limiting factor. No external model, zero spend, fail closed.",
+ "falsification_condition": "FALSIFIED if the record does not reproduce from the committed --labels command, if any of the 28 pinned tests fails, if a dependency is installed that the project's manifests do not name, if a suite that collected zero tests is accepted as a check, or if the verified-pair count reported in prose differs from the record",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "984b680779529621ef6606762271d7d6aa635420",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/2",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ZERO_AND_THE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING__FALSIFIES_THE_TWO_CLAIMS_THAT_WERE_STEERING_THE_NEXT_ROUND__NAMELY_THAT_GENERALISATION_IS_UNSOLVED_AND_THAT_WIDENING_THE_RULE_IS_HOW_TO_SOLVE_IT",
+  "measured_effect": "See the top-level measured_effect.",
+  "open_obligation_ids": [
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "PROWORK_GDPVAL_GE_1846"
+  ],
+  "open_obligation_ids_note": "The first two are the zero-expected-discharge bindings: this PR moves no benchmark. The second two are the causal-path bindings: the blocker it removes (a wrong generalisation kept because no check could run) is the same blocker that holds the agentic coding and the professional-work family at or below their gates. No obligation is claimed discharged; scope_complete_discharge is false.",
+  "scope_complete_discharge": false,
+  "stop_condition": "PROBLEM_TWO_IS_LOCATED_AS_A_LADDER_AND_AS_AN_ORACLE_DEFICIT__ONE_SHOWING_MEASURED_AT_0_529_OF_THE_WORK_AT_PRECISION_1_000__WIDEST_RUNG_MEASURED_WORSE_AT_0_455_PRECISION_WITH_42_WRONG_CHANGES__CHECK_UNAVAILABLE_ON_42_OF_42_REAL_CHANGED_FILES_WITH_THE_POSITIVE_CONTROL_DISCRIMINATING__UNIFIED_MODEL_VERIFIES__REPO_INTEGRITY_AND_ADMISSION_GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Same twelve merged pull requests re-taken by name (frozen merge commits, same deterministic draw): task-level reasons moved from NO_TEST 6 / DEPENDENCY 6 to DEPENDENCY 6 / FAILS_ON_THE_ORIGINAL 3 / NO_TEST 3; five tasks stood their declared dependencies in isolated venvs against the live index, five got manifest-named repairs (pyqt5, pytest, aexpect, django), three now execute their own suites end to end; residual blockers named per project (generated version module, C extension build, stdlib test shadowing, cross-repo framework, binary data assets outside the corpus, red integration baseline); any_rung_check still edits 0 of 132 with all 726 candidate evaluations refused -- verified coverage 0.000, now with the reason printed for each task",
+ "next_step": "BUY_THE_RESIDUAL_OPERATORS_THE_RECORD_NAMES__A_BUILD_STEP_BEFORE_THE_SUITE__pip_install_e_dot_or_build_ext_FOR_GENERATED_VERSION_AND_C_EXTENSION_PROJECTS__THE_PROJECTS_OWN_TEST_ENTRY_POINT_FOR_CUSTOM_RUNNERS__A_REAL_CHECKOUT_FOR_BINARY_DATA_ASSETS__AND_A_PARSER_FOR_EXTENSION_JSON_DECLARATIONS__THEN_RECOUNT_VERIFIED_COVERAGE_ON_THE_SAME_TWELVE",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  {
+   "commit": "9155bc37",
+   "what": "WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT named standing up the check as the next action and shipped the rung-gradient arms, the Check class and the 15 pinned tests; this PR reuses all of it unchanged and adds the environment organs the previous round could not run."
+  },
+  {
+   "commit": "568a36d3",
+   "what": "ONE_TRY_COVERS_A_FRACTION priced every refusal class as an operator to buy in code; this PR buys the environment class (dependency standing, test entry, vacuity) and leaves the algebra classes (import-only, call-shape, block-shape) untouched."
+  },
+  {
+   "commit": "5f2b7e0c",
+   "what": "The two-showing arm and its +8 to +10 point dose sit in the same record this PR re-measures; nothing about the learning curve is re-claimed here."
+  }
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "WIDEN_THE_RULE_AS_THE_GENERALISATION_LEVER",
+   "ADD_A_HAND_WRITTEN_SEMANTIC_GUARD_TO_THE_TOKEN_MATCHER",
+   "GROW_THE_SKILL_LIBRARY_TO_LOOK_MORE_CAPABLE",
+   "COUNT_A_CHECK_THAT_CANNOT_BE_IMPORTED_AS_A_CHECK"
+  ],
+  "expected_parent_level_state_change": "THE_ORACLE_DEFICIT_NAMED_LAST_ROUND_IS_NOW_AN_IMPLEMENTED_ORGAN__STANDING_UP_A_PROJECT_S_CHECKS__AND_THE_VERIFIED_COVERAGE_ON_THIS_CORPUS_REMAINS_ZERO_WITH_EACH_RESIDUAL_NAMED_PER_PROJECT_INSTEAD_OF_BUCKETED_HALF_HALF",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE_THE_WIDEN_THE_RULE_PLAN_AND_THE_HAND_WRITTEN_SEMANTIC_GUARD_PLAN__BYPASS_IMPOSSIBLE_WITH_NO_CHECK__SUBSTITUTE_UNAVAILABLE_AT_ZERO_COST_BECAUSE_A_MODEL_BASED_GENERALISER_IS_FORBIDDEN",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_TO_HOW_ONE_DEMONSTRATION_IS_READ_AND_TO_WHETHER_THE_FILE_HAS_A_CHECK_THAT_CAN_RUN",
+   "surviving_causal_blocker": "A wrong generalisation is refused only where a check exists, and on 42 of 42 real changed files in real projects no check could run here."
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_LEARNER_NO_NEW_VERIFIER_AND_NO_NEW_REGISTRY_ENTRY",
+   "existing_inherited_routes_checked": "EDIT_KIND_LEARNING_V1_THE_LADDER__EDIT_BY_EXAMPLE_V1_THE_SHIPPED_ORGAN__THE_PROJECTS_OWN_UNITTEST_MODULES_THE_CHECK__REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1_THE_SAME_CORPUS",
+   "external_existing_routes_checked": "Python standard library ast/unittest/difflib/subprocess only; no package installed for the measurement",
+   "surviving_gap": "Standing up a project's checks in a new environment: resolving its dependencies and finding the test entry point that imports the changed file."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "TREATING_GENERALISATION_AS_ONE_UNSOLVED_THING",
+    "TREATING_WIDER_RULES_AS_BETTER_GENERALISATION",
+    "TREATING_A_TEST_MODULE_THAT_MENTIONS_A_FILE_AS_A_CHECK_OF_IT"
+   ],
+   "real_outcome": "THE_GENERALISATION_QUESTION_ANSWERED_AS_A_MEASURED_LADDER_PLUS_A_CHECK_DEFICIT",
+   "surviving_necessity": "One demonstration leaves a set of rules consistent with it; only a check can pick among them, and only a second showing narrows the set."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The dose-response reading in ONE_TRY_COVERS_A_FRACTION is absorbed as one arm of a larger comparison.",
+   "downstream_work_to_delete_or_supersede": "Any future plan that says 'make the learned rule more general' must answer this measurement first.",
+   "fresh_reuse_plan": "The next round reuses this standing Check and buys the residual operators the record names: a build step before the suite, the project own entry point for custom runners, a real checkout for binary data assets, and a parser for extension.json declarations -- then recounts verified coverage on the same twelve tasks."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Killed before implementation: a hand-written semantic guard, a policy trained on the same demonstrations, and a library-growth plan. Cached: the collected corpus is stored without file text, only hashes, so the same files can be fetched again.",
+   "search_stop_decision": "Stopped searching when two 2026 lines of work (PolySkill, GSE) both generalized through a model or clustering and both took the checker as given; that is the same boundary this measurement found from the other side."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "REUSE wins: the learner and the test runner are already shipped, so the round is a reader plus a record. SYNTHESIZE_NEW_PRIMITIVE loses because a new generaliser would have been built before the ladder's own numbers existed.",
+   "routes_ranked": [
+    "REUSE",
+    "CONFIGURE",
+    "COMPOSE",
+    "ADAPT",
+    "INTEGRATE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_REAL_CORPUS_CANNOT_ANSWER_THE_CHECK_QUESTION_AT_ALL_SO_THE_COUNTERFACTUAL_IS_CONSTRUCTED_AND_LABELLED_CONSTRUCTED_TRUE__THE_ONE_DEMONSTRATION_CARRIED_ONLY_HALF_OF_ITS_OWN_FILES_BEHAVIOUR_UNTIL_THE_SECOND_BOUNDARY_WAS_STATED_IN_THE_DEMONSTRATIONS_TEST__TWO_DEMONSTRATIONS_WERE_TRIED_AND_DID_NOT_HELP_HERE__MANY_DEMONSTRATIONS_WERE_NOT_TRIED"
+  },
+  "real_outcome": "PROBLEM_TWO_LOCATED_AS_A_SIX_RUNG_LADDER_PLUS_A_CHECK_DEFICIT_WITH_EVERY_ARM_MEASURED_ON_REAL_PULL_REQUESTS",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Sufficient: it answers which rung reaches and what a check refuses, which is the blocker.",
+      "CORRECTNESS": "Precision 1.000 for the shipped rung; the wider rungs are measured wrong 42 times.",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Deterministic; the check is subprocess-isolated and restores the original file.",
+      "VERIFIABILITY": "13 tests pin every number, including the two limits that must not be silently fixed.",
+      "WALL_CLOCK": "Two minutes per corpus run in this sandbox; no training, no model."
+     },
+     "evidence": [
+      "canonical/runtime/edit_kind_learning_v1.py six writings",
+      "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json"
+     ],
+     "qualification_evidence": [
+      "the positive control discriminates on a project that ships a check, and the same run reproduces every arm figure in the committed record"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Requires a model or GPUs; the credited path forbids both.",
+      "CORRECTNESS": "No advantage demonstrated for this ladder; the wrong rung is not fixed by a policy.",
+      "INCREMENTAL_COST": "Non-zero compute; forbidden under ZERO_INCREMENTAL_SPEND.",
+      "RELIABILITY": "Not deterministic, and not attributable to a shipped mechanism.",
+      "VERIFIABILITY": "Cannot be verified on held-out instances here.",
+      "WALL_CLOCK": "Weeks, and a training dependency."
+     },
+     "evidence": [
+      "2026-09-27 CodeSkill",
+      "2026-08-06 GSE"
+     ],
+     "qualification_evidence": [
+      "2026 literature index entries for CodeSkill and GSE"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "TRAIN_OR_ADAPT_A_GENERALISING_POLICY_FROM_THE_SAME_DEMONSTRATIONS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Narrower than the project's own tests, which the check already runs.",
+      "CORRECTNESS": "A guard is another way to be confidently wrong; the check is ground truth.",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Unknown coverage; a guard that misfires silently is worse than a refusal.",
+      "VERIFIABILITY": "Would need its own oracle, which is the thing being built.",
+      "WALL_CLOCK": "Comparable to write, worse to trust."
+     },
+     "evidence": [
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py recall path"
+     ],
+     "qualification_evidence": [
+      "the previous round measured the rule rewriting a required '<='"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "ADD_A_HAND_WRITTEN_SEMANTIC_GUARD_TO_THE_RULE"
+    }
+   ],
+   "checked_at_utc": "2026-11-13T00:03:31Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "SHIPPED_ONE_DEMONSTRATION_LEARNER_WITH_NO_SYSTEMATIC_MEASUREMENT_OF_ITS_OWN_RUNG_LADDER",
+   "max_age_hours": 24,
+   "negative_search_summary": "Searched 2026 skill-learning literature for a method that admits a generalisation by measured compression or by a ladder of openness rather than by a model: none found. PolySkill and GSE both generalise through a model or clustering plus replay validation, and both treat the checker as given.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "2026 agent skill generalization from one demonstration version space active query replay validation"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "PolySkill polymorphic abstraction agent skill library 2026 ICLR"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "anti-unification code edit rule ladder openness levels like Getafix Refazer"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 GSE learning globally reusable skills coding agents replay-driven validation"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-13T00:03:31Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with ast, difflib, unittest and subprocess",
+      "evidence": [
+       "the corpus run and the 13 tests executed in this sandbox in this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "GitHub GraphQL API for pull request metadata and codeload tarballs for project trees",
+      "evidence": [
+       "12 pull requests collected with whole project trees after the REST quota was exhausted and the collection was rewritten onto GraphQL plus codeload"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-13T00:03:31Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json committed record",
+      "evidence": [
+       "written in this session by the tool and read back by the 13 tests"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "observed_at_utc": "2026-11-12T22:53:00Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json (the record this PR re-reads as a ladder)",
+     "canonical/runtime/edit_kind_learning_v1.py (the six writings, read as the rungs)",
+     "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md and WHICH_DEMONSTRATION_YOU_GIVE_IS_A_DECISION_20261112_V1.md"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "2026-11-12 challenger query: 2026 code edit skill generalization from one demonstration version space replay validation",
+     "2026-11-12 challenger query: 2026 polymorphic skill abstraction replay-driven validation coding agents GSE PolySkill"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (the other repair corpus already measured in-tree)",
+     "https://pypi.org/project/pytest/ (the runner used for this PR's own tests only)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/unittest.html (the check: the project's own runner)",
+     "https://docs.python.org/3/library/ast.html (unparse, used to compare programs by meaning not bytes)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REUSE",
+   "ADAPT",
+   "SUBSTITUTE",
+   "COMPOSE",
+   "CONFIGURE",
+   "INTEGRATE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK",
+  "selected_surviving_route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK",
+  "selected_surviving_route_class": "REUSE",
+  "stop_condition": "THE_CHECK_STANDS_UP_AND_THE_VERIFIED_COVERAGE_IS_COUNTED__OR_EACH_OF_THE_TWELVE_TASKS_CARRIES_A_NAMED_RESIDUAL_OPERATOR__STOP_WHEN_NO_TASK_HAS_AN_UNNAMED_BLOCKER_OR_WHEN_THE_RECORD_REPRODUCES",
+  "why_selected_route_is_fastest_sufficient": "The learner and the test runner already exist and are the shipped ones; the only new code is the reader that puts them on the same 132 pairs. Building a generaliser before knowing the ladder's own numbers would have spent the round on the 42 wrong changes the measurement now names."
+ },
+ "route_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REUSE_THE_RUNG_GRADIENT_ARMS_AND_CHECK_CLASS__ADD_ISOLATED_VENV_STANDING_OF_DECLARED_DEPENDENCIES_MANIFEST_NAMED_MISSING_MODULE_REPAIR_A_PER_PATH_TEST_ENTRY_FINDER_WITH_DIRECT_IN_DIRECTORY_INDIRECT_CONFIDENCE_AND_A_RAN_ZERO_TESTS_REFUSAL__CARRY_THE_MANIFESTS_IN_THE_CORPUS__THEN_REMEASURE_THE_SAME_TWELVE_PULL_REQUESTS_BY_LABEL",
+ "stop_condition": "THE_CHECK_STANDS_UP_AND_THE_VERIFIED_COVERAGE_IS_COUNTED__OR_EACH_OF_THE_TWELVE_TASKS_CARRIES_A_NAMED_RESIDUAL_OPERATOR__STOP_WHEN_NO_TASK_HAS_AN_UNNAMED_BLOCKER_OR_WHEN_THE_RECORD_REPRODUCES",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-13T00:03:31Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_THE_WIDEN_THE_RULE_AND_UNSOLVED_GENERALISATION_CLAIMS",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "path": "canonical/tests/test_the_check_stands_up_what_verification_needs_20261112_V1.py",
+     "git_blob_sha": "69fb684f753f4e17864ad5721732bdf5d72cbdff"
+    }
+   ],
+   "decisive_question": "WHICH_OF_ONE_DEMONSTRATIONS_SIX_WRITINGS_REACHES_A_NEW_FILE_AND_DOES_A_CHECK_TURN_A_WRONG_REACHING_INTO_A_REFUSAL",
+   "falsifier_id": "RECORD_DOES_NOT_REPRODUCE_OR_CONTROL_STOPS_DISCRIMINATING_OR_WIDEST_RUNG_REPORTED_BETTER",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "PAIRED_POSITIVE_CONTROL_AND_NEGATIVE_CASES_IN_test_the_check_is_the_difference_v1_COVER_BOTH_THE_CHECK_WORKING_AND_THE_CHECK_ABSENT",
+   "proposal_id": "LADDER_AND_CHECK_MEASUREMENT"
+  }
+ },
+ "weakens_existing_guard": false
+}
