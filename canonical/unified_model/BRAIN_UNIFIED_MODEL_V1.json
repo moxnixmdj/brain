@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 417,
+  "knowledge_documents": 418,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6813,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "515ab56a46588f6297cea00cc4ecd6e49dab5294acca3ff490e9459a5b45e2eb"
+  "value": "bfdd2001424771f67590ce3e4e68f777929c1e0e7532b7237590eaafa5425811"
  },
  "engines": [
   {
@@ -52283,6 +52283,88 @@
     "they",
     "times",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 11184,
+   "headings": [
+    "Learning something once does not solve everything, and it does not solve computer use",
+    "The claim being answered",
+    "What was measured, and what it means",
+    "Wall one: transfer",
+    "Wall two: coverage",
+    "Wall three: verification",
+    "Where the four levers stand",
+    "Four documents on main that say otherwise",
+    "What is genuinely solved",
+    "What would count as solved",
+    "Next measured step"
+   ],
+   "kind": "DOCUMENT",
+   "path": "LEARNING_ONCE_DOES_NOT_SOLVE_COMPUTER_USE_20261113_V1.md",
+   "sha256": "f16dbc06ea1ea7fbeaeae4a050625ab59248426dd61d9201dd182fe64b3945d9",
+   "summary": "Date: 2026-11-13. Instruments: `canonical/tools/held_out_transfer_20261112_v1.py`, `canonical/tools/generic_alias_measure_20261112_v1.py`. Record: `canonical/verification/HELD_OUT_TRANSFER_PRS_20261112_V1.json`, `canonical/tests/fixtures/held_out_transfer_v1.json`. Base: main `d9318588` (post-#6828).",
+   "terms": {
+    "10": 4,
+    "2026": 4,
+    "34.15": 4,
+    "585": 5,
+    "65": 7,
+    "alone": 5,
+    "arm": 5,
+    "arxiv": 5,
+    "assumed": 5,
+    "basis": 5,
+    "bound": 7,
+    "changes": 7,
+    "class": 15,
+    "classes": 6,
+    "computer": 6,
+    "corpus": 5,
+    "coverage": 9,
+    "developers": 8,
+    "family": 11,
+    "held-out": 8,
+    "here": 5,
+    "learner": 5,
+    "learning": 9,
+    "measured": 9,
+    "more": 5,
+    "no": 12,
+    "not": 27,
+    "number": 5,
+    "one": 13,
+    "operator": 8,
+    "own": 7,
+    "pep": 6,
+    "per": 5,
+    "points": 5,
+    "precision": 7,
+    "project": 5,
+    "pull": 5,
+    "real": 7,
+    "referee": 6,
+    "repository": 7,
+    "solved": 6,
+    "three": 5,
+    "transfer": 7,
+    "two": 6,
+    "upper": 7,
+    "use": 5,
+    "utcnow": 8,
+    "wrong": 8
+   },
+   "title": "Learning something once does not solve everything, and it does not solve computer use",
+   "title_terms": [
+    "computer",
+    "everything",
+    "learning",
+    "not",
+    "once",
+    "solve",
+    "something",
+    "use"
    ]
   },
   {
@@ -77299,10 +77381,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1219,
+  "included_source_count": 1220,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3ae70d25aaae32bcb588036ab90ae9699ad1ff874349492b9604d2809006b85a"
+  "source_tree_digest": "3cb5e27b1e362024eacffaad7492296e65346ba3e7f8fae667055b75de81ec64"
  },
  "research_index": [
   {
@@ -235245,7 +235327,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "42c0f8d833b280f3399554fb5145c0ccc98fb0f2d5f8bf69aca5058d385d2c39",
+   "sha256": "19a1e4ce7f6e0d2859c2f52fba85466dce7ce72fd238f850b75de8b4fcd5cb6b",
    "status": "",
    "terms": {
     "20261112": 1,
