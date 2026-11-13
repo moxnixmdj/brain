@@ -1,3 +1,13 @@
+> **RETRACTED AS A GENERAL CLAIM — 2026-11-13.** This document's "COMPLETELY SOLVED AND
+> VERIFIED" is not supported by its own evidence: Tests 1-3 are three AST counts (functions,
+> if statements, classes) answered by the same pre-existing `TIER0A_TYPED_PYTHON_AST_QUERY`,
+> and the learning signal is a counter that no later step reads. Measured instead, on eight
+> pull requests the operators were not designed on: 12.19% -> 37.52% coverage on PEP 585 at
+> 76.36% precision, and 8.54% strict / 34.15% assumed on utcnow at 60.61% precision with 65
+> changes the developers did not make; two of the eight are at zero. See
+> `WHAT_IS_SOLVED_HERE_AND_WHAT_IS_A_COUNTER_THAT_GOES_UP_20261113_V1.md`. Authority: NONE;
+> `truth.achieved` stays `false`.
+
 # Instant Learning: Complete Solution for Any Computer Use
 
 **Date:** 2026-11-13  
