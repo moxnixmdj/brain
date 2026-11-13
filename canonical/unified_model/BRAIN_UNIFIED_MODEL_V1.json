@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 427,
+  "knowledge_documents": 428,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6824,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "fd9460616ad002665bb4b176ccb8068a345b62dc702342f6eab84b23b60c803b"
+  "value": "02cc39bba93e78827fdfa5eadd9eba7c2b1129ee416a08261e4013cd410ff8c8"
  },
  "engines": [
   {
@@ -47553,6 +47553,80 @@
     "only",
     "owner",
     "they"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8841,
+   "headings": [
+    "From experience to generalization: what is real and the next experiment",
+    "Answer",
+    "What this checkout demonstrates",
+    "This change",
+    "What current research suggests, not guarantees",
+    "Highest-value next steps"
+   ],
+   "kind": "DOCUMENT",
+   "path": "EXPERIENCE_TO_GENERALIZATION_20261113.md",
+   "sha256": "9db745cdd561f1cb302642d63ddd00ceb57d183f3b0cbb0a0c65fe39342b2dac",
+   "summary": "Date: 2026-11-13. This is a producer assessment, not independent verification.",
+   "terms": {
+    "abs": 3,
+    "after": 3,
+    "agent": 4,
+    "all": 4,
+    "also": 4,
+    "arm": 4,
+    "arxiv.org": 7,
+    "audit": 3,
+    "before": 6,
+    "benchmark": 5,
+    "both": 3,
+    "capability": 3,
+    "change": 4,
+    "changes": 4,
+    "compound": 4,
+    "current": 3,
+    "demonstration": 3,
+    "effects": 6,
+    "environments": 4,
+    "establish": 3,
+    "evidence": 3,
+    "example": 4,
+    "executable": 3,
+    "existing": 3,
+    "experience": 3,
+    "external": 3,
+    "failed": 5,
+    "family": 4,
+    "file": 7,
+    "full": 3,
+    "guarantee": 3,
+    "https": 10,
+    "import": 4,
+    "independent": 5,
+    "memory": 4,
+    "no": 6,
+    "not": 27,
+    "now": 6,
+    "only": 5,
+    "output": 4,
+    "reports": 5,
+    "repository": 4,
+    "side": 5,
+    "target": 5,
+    "tasks": 9,
+    "test": 8,
+    "tests": 6,
+    "transfer": 6
+   },
+   "title": "From experience to generalization: what is real and the next experiment",
+   "title_terms": [
+    "experience",
+    "experiment",
+    "generalization",
+    "next",
+    "real"
    ]
   },
   {
@@ -78115,10 +78189,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1229,
+  "included_source_count": 1230,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "51683c2887bcab77e9c763797c8d60f82aea990b3ccd7c9b3cc488b33154a24b"
+  "source_tree_digest": "d35f3a575ab39c266045be6ebdac9b43b84173491abc427f7c7a69b69aef297c"
  },
  "research_index": [
   {
@@ -275538,9 +275612,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_route_admission_v1.py",
-   "sha256": "94a4b1bd5296a6ee9e983527bc41b04de0732bbc8eaacdb6758d75c184f017bc",
+   "sha256": "6ede3cc5e8accb1cd5378484d39dac5e04c60ebe5caa87724bfa24a55128b209",
    "summary": "Fail-closed route admission in front of the live Brain.",
-   "symbol_count": 130,
+   "symbol_count": 131,
    "symbols": [
     "LocalExecutionFailure",
     "_ContextWorkspaceRoot",
@@ -275558,14 +275632,14 @@
     "_composed_acceptance",
     "_composed_holds_up",
     "_composed_wrote_only_its_own_scratch",
+    "_compound_report_overwrites_named_file",
     "_controller_passed",
     "_credit_recall",
     "_dag_evidence",
     "_dag_result",
     "_dag_rows",
     "_decided_before_the_carrier_gate",
-    "_decisive_typed_plan",
-    "_declared_operation"
+    "_decisive_typed_plan"
    ],
    "terms": {
     "admission": 2,

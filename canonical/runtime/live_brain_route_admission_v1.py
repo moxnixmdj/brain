@@ -2063,10 +2063,58 @@ def _execute_capability_dag(task_id: str, goal: str, compiled: Mapping[str, Any]
                        controller=controller, checkpoint=checkpoint)
 
 
+def _compound_report_overwrites_named_file(goal: str, compiled: Mapping[str, Any],
+                                           admissible: Mapping[str, Mapping[str, Any]]) -> dict[str, Any] | None:
+    """Detect a report aimed at an existing task operand before any plan step runs.
+
+    The single-action route repairs output collisions, but the legacy compound route
+    has already rendered its actions and bypasses that repair. Refuse rather than
+    silently relocate a rendered multi-step plan whose later steps may depend on it.
+    This check is deliberately limited to named existing files, concrete output
+    arguments and capabilities classified as non-editors; it is not a sandbox.
+    """
+    actions = compiled.get("controller_actions")
+    if not isinstance(actions, list):
+        return None
+    named = {path.resolve() for _, path in goal_compiler._repo_paths(goal, ROOT) if path.is_file()}
+    if not named:
+        return None
+    for index, action in enumerate(actions):
+        if not isinstance(action, Mapping) or action.get("type") != "invoke_capability":
+            continue
+        args = action.get("args")
+        if not isinstance(args, Mapping):
+            continue
+        cid = str(args.get("capability_id") or "")
+        entry = admissible.get(cid)
+        if not isinstance(entry, Mapping) or front.capability_edits_source(entry):
+            continue
+        # A destination in a different clause does not authorize this action to
+        # write there. If this capability appears in multiple parts, the action's
+        # provenance is ambiguous and no destination exception is granted.
+        parts = [part for part in compiled.get("compiled_parts") or []
+                 if isinstance(part, Mapping) and part.get("selected_capability") == cid]
+        destination = (goal_compiler._path_named_after_output_verb(str(parts[0].get("subgoal") or ""), ROOT)
+                       if len(parts) == 1 else None)
+        explicit = (ROOT / destination).resolve() if destination else None
+        for key, value in args.items():
+            if not isinstance(value, str) or not front._is_output_key(str(key), entry):
+                continue
+            path = (ROOT / value).resolve()
+            if path in named and path != explicit:
+                return {"index": index, "capability_id": cid, "argument": str(key), "path": value}
+    return None
+
+
 def _execute(task_id: str, goal: str, compiled: Mapping[str, Any], admissible: Mapping[str, Mapping[str, Any]], started: int) -> dict[str, Any]:
     """Execute a compiled plan with the same controller calls ``run_raw_goal`` makes."""
     controller_actions = compiled.get("controller_actions")
     selected = str(compiled.get("selected_capability") or "").strip()
+    collision = _compound_report_overwrites_named_file(goal, compiled, admissible)
+    if collision is not None:
+        return _fail(task_id, "FAIL_CLOSED__REPORT_OUTPUT_OVERWRITES_TASK_FILE",
+                     "REPORT_OUTPUT_OVERWRITES_TASK_FILE", started, executed=False,
+                     refused_before_execution=True, report_output_collision=collision)
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     command_candidates: list[tuple[str, str | None]] = [
         (selected, _declared_operation(compiled.get("inputs"), compiled.get("compiled_inputs")))
