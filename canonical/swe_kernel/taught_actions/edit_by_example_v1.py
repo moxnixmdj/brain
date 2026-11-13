@@ -93,6 +93,7 @@ import ast
 import builtins
 import importlib.machinery
 import io
+import itertools
 import json
 import pathlib
 import re
@@ -1024,6 +1025,133 @@ def attribute_rename_undone(before_text, after_text):
     return after_text
 
 
+def additions_put_back(before_text, after_text):
+    """The example's second file with the statements the person purely added taken back out.
+
+    The tangled-commit phenomenon in its third form: a person often builds new machinery -- a new
+    def, a constant, a block of wiring -- in the same commit as the edit worth teaching.  A whole
+    statement that came beside an in-place lesson cannot itself be the lesson (one showing of a new
+    statement underdetermines where it would go in another file), but refusing the whole example
+    loses the lesson next to it.  So, where every order-preserving alignment of the first file's
+    statements into the second file's tells the same in-place story, the purely added statements
+    are the person's own project work: they are taken back out, and learning proceeds on what
+    remains.  Added import lines are left alone -- they are bookkeeping other machinery already
+    carries.  Removals, ambiguity, or an unparseable result leave the file as it came, so the old
+    refusal stands.  A lesson that leans on the taken-out machinery still refuses downstream: the
+    rewritten code would read a name the example's remaining file does not provide.
+    """
+    came_as = after_text
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return came_as
+    added = []
+
+    def pairable(old, new):
+        """Could `new` be `old` edited in place?  Same-named or unnamed same-kind statements, or
+        one simple statement rewritten into another."""
+        if type(old) is type(new):
+            name = getattr(old, "name", None)
+            return not isinstance(name, str) or name == getattr(new, "name", None)
+        return isinstance(old, SIMPLE_STATEMENTS) and isinstance(new, SIMPLE_STATEMENTS)
+
+    def aligned(olds, news):
+        """The (old, new) pairs and the added statements, when every order-preserving alignment
+        that keeps the most statements unchanged tells the same in-place story; else None."""
+        n, m = len(olds), len(news)
+        equal = [[shape(old) == shape(new) for new in news] for old in olds]
+        fits = [[equal[i][j] or pairable(olds[i], news[j]) for j in range(m)] for i in range(n)]
+        best = [[-1] * (m + 1) for _ in range(n + 1)]         # most unchanged pairs from (i, j) on
+        best[n] = [0] * (m + 1)
+        for i in range(n - 1, -1, -1):
+            for j in range(m - 1, -1, -1):
+                if m - j < n - i:
+                    continue
+                here = -1
+                if fits[i][j] and best[i + 1][j + 1] >= 0:
+                    here = best[i + 1][j + 1] + (1 if equal[i][j] else 0)
+                here = max(here, best[i][j + 1])
+                best[i][j] = here
+        if best[0][0] < 0:
+            return None
+        stories = {}                                           # the in-place stories along optimal alignments
+
+        def stories_from(i, j):
+            if (i, j) not in stories:
+                found = set()
+                if i == n:
+                    found.add(())
+                else:
+                    if fits[i][j] and best[i + 1][j + 1] == best[i][j] - (1 if equal[i][j] else 0):
+                        for story in stories_from(i + 1, j + 1):
+                            found.add(story if equal[i][j] else ((i, shape(news[j])),) + story)
+                    if j + 1 <= m and best[i][j + 1] == best[i][j]:
+                        found |= stories_from(i, j + 1)
+                stories[(i, j)] = set(itertools.islice(found, 3))
+            return stories[(i, j)]
+
+        if len(stories_from(0, 0)) != 1:
+            return None
+        pairs, i, j = [], 0, 0                                 # walk one optimal alignment back out
+        while i < n:
+            if fits[i][j] and best[i + 1][j + 1] == best[i][j] - (1 if equal[i][j] else 0) and (
+                    equal[i][j] or not (best[i][j + 1] == best[i][j])):
+                pairs.append((i, j))
+                i, j = i + 1, j + 1
+            else:
+                j += 1
+        matched = {j for _, j in pairs}
+        return ([(olds[i], news[j]) for i, j in pairs],
+                [news[j] for j in range(m) if j not in matched])
+
+    def collect(old, new):
+        """Gather the purely added statements under this matched pair; False on removals or ambiguity."""
+        for name in old._fields:
+            first, second = getattr(old, name, None), getattr(new, name, None)
+            if isinstance(first, ast.AST) and isinstance(second, ast.AST):
+                if type(first) is type(second) and shape(first) != shape(second) and not collect(first, second):
+                    return False
+            elif isinstance(first, list) and isinstance(second, list):
+                if not (first and second and all(isinstance(item, ast.stmt) for item in first + second)):
+                    continue
+                olds = [item for item in first if not is_import(item)]
+                news = [item for item in second if not is_import(item)]
+                if len(olds) == len(news):
+                    pairs, extras = list(zip(olds, news)), []
+                elif len(olds) < len(news):
+                    fit = aligned(olds, news)
+                    if fit is None:
+                        return False
+                    pairs, extras = fit
+                else:
+                    return False
+                added.extend(extras)
+                for one, other in pairs:
+                    if type(one) is type(other) and shape(one) != shape(other) and not collect(one, other):
+                        return False
+        return True
+
+    if not collect(before_tree, after_tree) or not added:
+        return came_as
+    lines = after_text.splitlines(keepends=True)
+    offsets, total = [], 0
+    for line in lines:
+        offsets.append(total)
+        total += len(line)
+    spans = []
+    for node in added:
+        first = node.decorator_list[0] if getattr(node, "decorator_list", None) else node
+        spans.append((offsets[first.lineno - 1], offsets[node.end_lineno - 1] + len(lines[node.end_lineno - 1])))
+    for head, tail in sorted(spans, reverse=True):
+        after_text = after_text[:head] + after_text[tail:]
+    try:
+        if ast.dump(ast.parse(after_text)) == ast.dump(before_tree):
+            return came_as        # the whole example was the additions; they teach nothing repeatable
+    except SyntaxError:
+        return came_as
+    return after_text
+
+
 def restructures_put_back(before_text, after_text):
     """The example's second file with the changes no rule can carry put back, and where they stood.
 
@@ -1108,8 +1236,15 @@ def learn_all(examples, wide=False):
     several = len(examples) > 1
     shown = []
     for number, example in enumerate(examples, 1):
-        after, set_aside = restructures_put_back(
-            example[0], attribute_rename_undone(example[0], rename_undone(example[0], example[1])))
+        renamed = attribute_rename_undone(example[0], rename_undone(example[0], example[1]))
+        after, set_aside = restructures_put_back(example[0], renamed)
+        # Statements that came at a level restructures_put_back cannot localize (whole new defs or
+        # constants beside the lesson) are the person's own project work: take them back out, then
+        # let the reshaping put-back have another look at what remains.
+        slimmed = additions_put_back(example[0], after)
+        if slimmed != after:
+            after, more = restructures_put_back(example[0], slimmed)
+            set_aside = tuple(sorted(set(set_aside) | set(more)))
         given = tuple(example[2]) if example[2:] and example[2] else ()
         shown.append(Shown(example[0], after, "example %d" % number if several else "the example",
                            given + set_aside))
