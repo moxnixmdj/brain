@@ -15,9 +15,10 @@ read from PATH at runtime. Nothing here knows that gzip compresses, or that
 tar archives. The learner finds out which program does what by running them
 and watching the directory change.
 
-Every action is real -- a real subprocess or a real file operation on a real
-disk -- and reset puts the directory back, so probing is free and the only
-thing that survives is what was learned.
+Actions are real subprocesses or file operations. Reset replaces the scratch
+directory contents, but cannot undo external effects. A working directory is
+not an OS security sandbox; do not run untrusted programs on a real machine on
+the assumption that resetting it confines or reverses their effects.
 """
 
 from __future__ import annotations
@@ -108,33 +109,49 @@ def _digest(root: pathlib.Path) -> str:
 
 
 class ComputerEnv:
-    """A real working directory. Actions really run. Reset really undoes."""
+    """An exclusively dedicated scratch directory, not an OS security sandbox.
+
+    An explicit root must be a new or empty directory, reserved for this
+    environment. Later reset/restore calls replace its contents; callers must
+    not add anything they cannot afford to lose. This is not a concurrent or
+    adversarial filesystem isolation boundary.
+    """
 
     def __init__(self, seed: Mapping[str, bytes] | None = None,
                  root: str | pathlib.Path | None = None,
                  seed_file: str | pathlib.Path | None = None,
                  programs: Sequence[str] | None = None) -> None:
-        self._owned = root is None
-        self.root = pathlib.Path(root) if root else pathlib.Path(
-            tempfile.mkdtemp(prefix="brain-computer-env-"))
-        self.root.mkdir(parents=True, exist_ok=True)
-        # A sandbox holding a text file cannot teach an image operation:
-        # 'convert -resize 50% input.txt out.png' fails for the same reason
-        # a piano cannot be practised on a picture of one. When the real
-        # input is available, practise on a copy of it -- same bytes, same
-        # name, and never the original.
+        # Validate seed names before creating or writing any working directory.
         if seed_file:
             path = pathlib.Path(seed_file)
             self.seed = {path.name: path.read_bytes()}
         else:
             self.seed = dict(seed or {"input.txt": b"brain computer env sample\n"})
+        for name, data in self.seed.items():
+            if (not isinstance(name, str) or not name or name in {".", ".."}
+                    or "/" in name or "\\" in name or "\x00" in name):
+                raise ValueError("COMPUTER_ENV_INVALID_SEED_NAME")
+            if not isinstance(data, (bytes, bytearray)):
+                raise ValueError("COMPUTER_ENV_INVALID_SEED_BYTES")
+        self._owned = root is None
+        self.root = pathlib.Path(root) if root is not None else pathlib.Path(
+            tempfile.mkdtemp(prefix="brain-computer-env-"))
+        if self.root.is_symlink():
+            raise ValueError("COMPUTER_ENV_ROOT_IS_SYMLINK")
+        self.root.mkdir(parents=True, exist_ok=True)
+        if any(self.root.iterdir()):
+            raise ValueError("COMPUTER_ENV_ROOT_NOT_EMPTY")
+        # Do not reset on construction: reset deletes contents. Exclusive file
+        # creation avoids overwriting a file that appeared after the emptiness check.
+        for name, data in self.seed.items():
+            with (self.root / name).open("xb") as file:
+                file.write(data)
         # what each action actually did, filled in by program_actions when an
         # action succeeds -- see ComputerEnv.recipes
         self.recipes: dict[str, dict[str, Any]] = {}
         self.programs = list(programs) if programs is not None else installed_programs()
         self.actions: dict[str, Callable[[ComputerEnv], bool]] = {}
         self.register(file_actions())
-        self.reset()
 
     def register(self, actions: Sequence[tuple[str, Callable[[ComputerEnv], bool]]]) -> None:
         for name, fn in actions:
@@ -166,8 +183,11 @@ class ComputerEnv:
             (self.root / name).write_bytes(data)
 
     def snapshot(self) -> bytes:
-        """Everything, so probing can be undone. A snapshot that misses part
-        of the world is how a learner corrupts the very thing it studies."""
+        """Copy the working directory, not processes or effects outside it.
+
+        This copy follows symlinks and is not a safe snapshot of untrusted
+        filesystem contents; it does not provide an isolation boundary.
+        """
         tmp = tempfile.mkdtemp(prefix="brain-env-snap-")
         shutil.copytree(self.root, os.path.join(tmp, "root"),
                         symlinks=False, dirs_exist_ok=True)
