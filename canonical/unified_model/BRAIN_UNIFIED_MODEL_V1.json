@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 403,
+  "knowledge_documents": 404,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6800,
+  "research_index_records": 6801,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6e32577f1d2367ff8d49d670002578d13637a31d60d1d65fc3bc47bd40ae6011"
+  "value": "48f96c708c993fffa0c5a1ed6146677682a6f12791398268b68abbeb0ada6430"
  },
  "engines": [
   {
@@ -55974,6 +55974,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7553,
+   "headings": [
+    "Problem 2 is two questions, and one of them is already 64% solved",
+    "1. A fix that was silently breaking code — now refused",
+    "2. What that second operator is actually worth: +0.39 pp, not +7.35 pp",
+    "3. The number that answers the owner's question",
+    "4. What is real and what is not",
+    "5. What is smartest next, in order",
+    "Receipts",
+    "6. Addendum, same turn: my own fix was incomplete in exactly the same way"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PROBLEM_TWO_IS_TWO_QUESTIONS_20261112_V1.md",
+   "sha256": "6f33a0423e5497d039b9c6267b5c6abf662c09bb4dbae3f758daa25d878c96c6",
+   "summary": "**2026-11-12.** Base `aea7d0ce`. Branch `arena/3dff4ec0-brain`.",
+   "terms": {
+    "0.2999": 4,
+    "330": 3,
+    "63.6": 3,
+    "64": 3,
+    "7.35": 3,
+    "against": 3,
+    "alias": 5,
+    "all": 6,
+    "already": 5,
+    "applicable": 5,
+    "arguments": 4,
+    "askings": 8,
+    "because": 3,
+    "both": 3,
+    "cannot": 4,
+    "changes": 6,
+    "code": 5,
+    "constant": 4,
+    "demonstrated": 5,
+    "different": 9,
+    "example": 6,
+    "exemption": 4,
+    "file": 5,
+    "form": 6,
+    "loader": 4,
+    "measured": 4,
+    "message": 4,
+    "new": 4,
+    "no": 9,
+    "not": 18,
+    "nothing": 5,
+    "now": 4,
+    "one": 10,
+    "only": 5,
+    "operator": 9,
+    "organ": 10,
+    "pack": 4,
+    "pp": 6,
+    "real": 7,
+    "rename": 5,
+    "rule": 4,
+    "same": 10,
+    "so": 9,
+    "solved": 4,
+    "target": 4,
+    "task": 6,
+    "tree": 4,
+    "yaml.load": 4
+   },
+   "title": "Problem 2 is two questions, and one of them is already 64% solved",
+   "title_terms": [
+    "64",
+    "already",
+    "one",
+    "problem",
+    "questions",
+    "solved",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 14514,
    "headings": [
     "Project Brain — read this first",
@@ -76114,10 +76192,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1205,
+  "included_source_count": 1206,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "796b331ee7a9239d427f20e3a870bb4ea00a76e1f03b85b3cb9fb773d0d45944"
+  "source_tree_digest": "8cbfe3e4f956cb58f88b6a161d61dec724fdf43a90e63213dfb64845d7c833ea"
  },
  "research_index": [
   {
@@ -220184,7 +220262,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/AN_IMPORT_IS_EACH_FILES_OWN_BOOKKEEPING_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "507594320efd6c7b7ff6101f5f61be6879e2e64255dd8d63c3b26ef7c743d115",
+   "sha256": "0b9d79280d63c6c217eb085c739915acc0b003be5d98870b93f6e6f9c8884657",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -225082,6 +225160,32 @@
     "v1": 2,
     "were": 2,
     "zero": 2
+   }
+  },
+  {
+   "action_id": "A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2843ad9c209b87ceb7abe85e105b7ec12d81736ac5e68180d414b9f17b447827",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_second_operator_has_to_face_the_same_test_or_not_be_an_operator_20261112_v1": 1,
+    "face": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "operator": 2,
+    "refuse_any_rename_that_is_not_on_the_documented_alias_list_and_register_this_as_the_same_test_every_operator_must_face": 1,
+    "same": 1,
+    "second": 1,
+    "test": 1,
+    "the_pack_learned_any_single_attribute_rename_and_its_own_docstring_called_that_safe_without_an_oracle__measured_to_rewrite_yaml_load_into_yaml_safe_load_with_a_loader_keyword_which_cannot_run__and_its_recorded_7_35_point_gain_was_measured_against_the_organ_before_the_alias_exemption_landed": 1,
+    "the_tree_can_say_what_adaptation_achieves_where_the_task_is_actually_similar__0_6359__separately_from_where_it_is_not__0_0000__instead_of_one_diluted_0_2999__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1
    }
   },
   {
