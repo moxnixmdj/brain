@@ -180,6 +180,7 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
                     effect_prior: bool = False,
                     order: str = "nearest",
                     prior: Mapping[str, Mapping[str, str]] | None = None,
+                    prior_schema: str | None = None,
                     reset_cost: int = 1,
                     include_model: bool = True,
                     cost_of: Callable[[Any, str], float] | None = None) -> dict[str, Any]:
@@ -199,6 +200,9 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
                    price offered in the same state (lower first; declared order among equals).
                    Only read by order="cheapest". An order of trying, never a reason not to try.
     prior          a model carried from elsewhere; it is travelled, checked, and corrected.
+                   Under the default shared observation identity it must declare
+                   `prior_schema=environment_learning_v1.STATE_KEY_SCHEMA`; legacy rows are
+                   rejected, not reinterpreted. A custom `key_of` is the caller's own identity.
     reset_cost     what a reset is worth in actions. It decides between walking and resetting,
                    and every reset after the first is charged against `action_budget` at this
                    price -- some environments count a reset as an action, and one that does
@@ -221,8 +225,17 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
     static_actions = tuple(str(a) for a in actions)
     classify = action_class or (lambda a: a)
 
+    # The shared observation identity is versioned. A carried model under that identity
+    # must declare the same schema; a legacy str()/default=str row is not a V2 row.
+    # A custom key_of is the caller's own quotient and is not silently reinterpreted here.
+    from canonical.runtime import environment_learning_v1 as el
+    shared_identity = key_of is None or key_of is _default_key or key_of is el.state_key
+    key_schema = el.STATE_KEY_SCHEMA if shared_identity else None
+    prior_rejected = bool(prior) and shared_identity and prior_schema != key_schema
+    accepted_prior: Mapping[str, Mapping[str, str]] = {} if prior_rejected else (prior or {})
+
     model: dict[str, dict[str, str]] = {str(k): {str(a): str(n) for a, n in v.items()}
-                                        for k, v in (prior or {}).items()}
+                                        for k, v in accepted_prior.items()}
     available: dict[str, tuple[str, ...]] = {}
     dead: set[str] = set()
     prices: dict[str, dict[str, int]] = {}        # state -> action -> price, as quoted when first seen
@@ -340,7 +353,9 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
             "revisit_rate": round(counters["revisits"] / max(1, counters["acts"]), 4),
             "effect_prior": bool(effect_prior),
             "order": order,
-            "prior_states": len(prior or {}),
+            "state_key_schema": key_schema,
+            "prior_states": len(accepted_prior),
+            "prior_rejected_states": len(prior or {}) if prior_rejected else 0,
             "duration_s": round(time.time() - started, 4),
         }
         out.update(counters)
@@ -352,7 +367,7 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
             # everything nearer than the goal was fully tried first and the place held still.
             out["plan_minimality"] = (
                 "SHORTEST_GIVEN_REPEATABLE_ENVIRONMENT"
-                if order == "shallowest" and not counters["surprises"] and not prior
+                if order == "shallowest" and not counters["surprises"] and not accepted_prior
                 else "NOT_PROVEN_SHORTEST")
             if order == "cheapest":
                 _, _, came = priced_routes(root)
@@ -596,7 +611,8 @@ def drive(env: Any, actions: Sequence[Any], *,
                     break
         if result["pass"] and memory_on and remember is not None:
             kept = remember(fp, goal_key, result["plan"], reached=True,
-                            model=explored.get("model"))
+                            model=explored.get("model"),
+                            model_schema=explored.get("state_key_schema"))
             result["episode_persisted"] = bool(kept.get("persisted"))
     result["interactions"] = dict(counters)
     result["duration_s"] = round(time.time() - started, 4)

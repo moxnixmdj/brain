@@ -21,6 +21,7 @@ import shutil
 import tempfile
 import unittest
 
+from canonical.runtime import environment_learning_v1 as el
 from canonical.runtime import transfer_learning_v1 as tl
 
 
@@ -240,9 +241,56 @@ class StoreTests(_Store, unittest.TestCase):
 
     def test_a_remembered_model_is_stored(self):
         fp = tl.fingerprint(Lock(), ["+0", "+1", "+2"])
-        tl.remember(fp, "g", ["+0"], reached=True, model={"s0": {"+0": "s1"}})
+        model = {el.state_key(0): {"+0": el.state_key(1)}}
+        tl.remember(fp, "g", ["+0"], reached=True, model=model,
+                    model_schema=el.STATE_KEY_SCHEMA)
         recalled = tl.recall(fp, "g")
-        self.assertEqual(recalled[0]["model"], {"s0": {"+0": "s1"}})
+        self.assertEqual(recalled[0]["model"], model)
+        self.assertEqual(recalled[0]["model_schema"], el.STATE_KEY_SCHEMA)
+
+    def test_a_legacy_model_gets_no_current_model_bonus(self):
+        fp = tl.fingerprint(Lock(), ["+0", "+1", "+2"])
+        tl.remember(fp, "legacy", ["+0"], reached=True,
+                    model={"s0": {"+0": "s1"}})
+        tl.remember(fp, "current", ["+0"], reached=True,
+                    model={el.state_key(0): {"+0": el.state_key(1)}},
+                    model_schema=el.STATE_KEY_SCHEMA)
+        order = [r["goal_key"] for r in tl.recall(fp)]
+        self.assertEqual(order[0], "current")
+
+    def test_a_plan_only_repetition_preserves_the_stored_model(self):
+        fp = tl.fingerprint(Lock(), ["+0", "+1", "+2"])
+        model = {el.state_key(0): {"+0": el.state_key(1)}}
+        tl.remember(fp, "g", ["+0"], reached=True, model=model,
+                    model_schema=el.STATE_KEY_SCHEMA)
+        tl.remember(fp, "g", ["+0"], reached=True)
+        recalled = tl.recall(fp, "g")[0]
+        self.assertEqual(recalled["model"], model)
+        self.assertEqual(recalled["model_schema"], el.STATE_KEY_SCHEMA)
+        self.assertEqual(recalled["trials"], 2)
+
+    def test_a_declared_model_upgrades_a_legacy_row_and_is_not_downgraded(self):
+        fp = tl.fingerprint(Lock(), ["+0", "+1", "+2"])
+        legacy = {"s0": {"+0": "s1"}}
+        current = {el.state_key(0): {"+0": el.state_key(1)}}
+        tl.remember(fp, "g", ["+0"], reached=True, model=legacy)
+        tl.remember(fp, "g", ["+0"], reached=True, model=current,
+                    model_schema=el.STATE_KEY_SCHEMA)
+        self.assertEqual(tl.recall(fp, "g")[0]["model"], current)
+        tl.remember(fp, "g", ["+0"], reached=True, model=legacy)
+        row = tl.recall(fp, "g")[0]
+        self.assertEqual(row["model"], current)
+        self.assertEqual(row["model_schema"], el.STATE_KEY_SCHEMA)
+
+    def test_a_new_declared_model_refreshes_the_same_schema_row(self):
+        fp = tl.fingerprint(Lock(), ["+0", "+1", "+2"])
+        first = {el.state_key(0): {"+0": el.state_key(1)}}
+        second = dict(first, **{el.state_key(1): {"+0": el.state_key(2)}})
+        tl.remember(fp, "g", ["+0"], reached=True, model=first,
+                    model_schema=el.STATE_KEY_SCHEMA)
+        tl.remember(fp, "g", ["+0"], reached=True, model=second,
+                    model_schema=el.STATE_KEY_SCHEMA)
+        self.assertEqual(tl.recall(fp, "g")[0]["model"], second)
 
     def test_repeating_the_same_lesson_increments_not_duplicates(self):
         fp = tl.fingerprint(Lock(), ["+0", "+1", "+2"])

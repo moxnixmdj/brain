@@ -421,7 +421,8 @@ def forget_miss(fp: Mapping[str, Any], goal_key: str, verifier: str = "") -> boo
 
 def walk_carried_model(env: Any, prior: Mapping[str, Mapping[str, str]],
                        is_goal: Callable[[Any], bool], *,
-                       max_act_calls: int = 96) -> dict[str, Any]:
+                       max_act_calls: int = 96,
+                       prior_schema: str | None = None) -> dict[str, Any]:
     """Execute the carried transition model from the real start state, watching for the goal.
 
     THE SUBTLE PART, and it cost a measurement to learn. `environment_learning_v1.
@@ -449,6 +450,10 @@ def walk_carried_model(env: Any, prior: Mapping[str, Mapping[str, str]],
     """
     counters = {"act_calls": 0, "resets": 0, "edges": 0, "truncated": False}
     if not prior:
+        return {"reached": False, "plan": None, "counters": counters}
+    from canonical.runtime import environment_learning_v1 as _el
+    if prior_schema != _el.STATE_KEY_SCHEMA:
+        counters["prior_rejected_states"] = len(prior)
         return {"reached": False, "plan": None, "counters": counters}
     if not (hasattr(env, "reset") and hasattr(env, "act") and hasattr(env, "state")):
         return {"reached": False, "plan": None, "counters": counters}
@@ -552,7 +557,8 @@ def el_state_key(observation: Any) -> str:
 
 def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
              *, reached: bool,
-             model: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+             model: Mapping[str, Mapping[str, str]] | None = None,
+             model_schema: str | None = None) -> dict[str, Any]:
     """Store what worked, and what did not. Both are worth knowing.
 
     The MODEL is stored alongside the plan, and the model is the part that
@@ -569,6 +575,8 @@ def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
         "reached": bool(reached),
         "model": ({k: dict(v) for k, v in model.items()}
                   if isinstance(model, Mapping) else None),
+        "model_schema": (str(model_schema) if model_schema is not None and isinstance(model, Mapping)
+                         else None),
         "trials": 1,
         "successes": 1 if reached else 0,
         "last_used_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
@@ -580,6 +588,14 @@ def remember(fingerprint: Mapping[str, Any], goal_key: str, plan: Sequence[Any],
             row["trials"] = int(row.get("trials", 0)) + 1
             row["successes"] = int(row.get("successes", 0)) + (1 if reached else 0)
             row["last_used_utc"] = entry["last_used_utc"]
+            # A newly verified model may fill an absent row or upgrade a legacy row to a
+            # declared schema. A plan-only repetition must not erase a stored model, and
+            # an undeclared/legacy model must not downgrade a declared one.
+            if entry["model"] is not None and (
+                    not isinstance(row.get("model"), Mapping)
+                    or entry["model_schema"] is not None):
+                row["model"] = entry["model"]
+                row["model_schema"] = entry["model_schema"]
             persisted = _save(rows[-DEFAULT_MAX_EPISODES:])
             return dict(row, persisted=persisted)
     rows.append(entry)
@@ -603,9 +619,13 @@ def recall(fingerprint: Mapping[str, Any], goal_key: str | None = None, *,
         successes = int(row.get("successes", 0) or 0)
         # Laplace: an unproven plan is not equal to a proven one
         evidence = (successes + 0.5) / (trials + 1)
-        # an episode carrying the RULES is worth more than one carrying a plan
+        # an episode carrying USABLE rules is worth more than one carrying a plan.
+        # A legacy model whose observation identity is not the current schema is not
+        # usable as a carried model, so it must not buy the model bonus.
         if isinstance(row.get("model"), Mapping) and row["model"]:
-            evidence *= 2.0
+            from canonical.runtime import environment_learning_v1 as _el
+            if row.get("model_schema") == _el.STATE_KEY_SCHEMA:
+                evidence *= 2.0
         out.append((round(sim * evidence, 6), sim, row))
     out.sort(key=lambda t: -t[0])
     return [dict(row, similarity=sim) for _, sim, row in out[:k]]
@@ -756,7 +776,8 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     prior = None
     for cand in candidates:
         model = cand.get("model")
-        if isinstance(model, Mapping) and model:
+        if (isinstance(model, Mapping) and model
+                and cand.get("model_schema") == el.STATE_KEY_SCHEMA):
             prior = model
             break
 
@@ -771,10 +792,12 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
     # remembered as working. No learning happens here, so a failure costs exactly one reset.
     prior_plan_failed = False
     if prior:
-        walk = walk_carried_model(env, prior, is_goal)
+        walk = walk_carried_model(env, prior, is_goal,
+                                  prior_schema=el.STATE_KEY_SCHEMA)
         if walk["reached"]:
             carried = [str(a) for a in walk["plan"]]
-            retained = remember(fp, gkey, carried, reached=True, model=prior)
+            retained = remember(fp, gkey, carried, reached=True, model=prior,
+                                model_schema=el.STATE_KEY_SCHEMA)
             return finish({
                 "schema": SCHEMA, "status": PASS_PRIOR_PLAN, "pass": True,
                 "plan": carried, "plan_length": len(carried),
@@ -816,10 +839,12 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
 
     while spent < budget_decided:
         take = min(chunk, budget_decided - spent)
+        carried = model_out or prior or None
         partial = el.learn_model(env, actions, budget=take,
                                  seed=(seed or 0) + spent,
                                  max_depth=max_depth, heuristic=heuristic,
-                                 prior=model_out or prior or None)
+                                 prior=carried,
+                                 prior_schema=el.STATE_KEY_SCHEMA if carried else None)
         spent += take
         model_out = partial.get("model") or {}
         # tried = whether this chunk earned anything new
@@ -846,7 +871,8 @@ def drive(env: Any, actions: Sequence[Any], *, is_goal: Callable[[Any], bool],
             reached = False
         if reached:
             plan = [str(a) for a in candidate]
-            retained = remember(fp, gkey, plan, reached=True, model=model_out)
+            retained = remember(fp, gkey, plan, reached=True, model=model_out,
+                                model_schema=el.STATE_KEY_SCHEMA)
             return finish({
                 "schema": SCHEMA, "status": PASS_TRANSFERRED if prior else PASS_LEARNED,
                 "pass": True, "plan": plan, "plan_length": len(plan),
