@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 443,
+  "knowledge_documents": 444,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6842,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2495bcc3492ad3985ebf4cdff25addf5f950f7adde19de39679559ac9c4974c5"
+  "value": "d2cffec6409884cb7946c6048cd935caa5362a3b276b1f8ccc5a6cbe280b1898"
  },
  "engines": [
   {
@@ -61387,6 +61387,88 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 9623,
+   "headings": [
+    "The first advanced action to build is the judge — measured on this tree's own test generator",
+    "1. The actions you want to build are already in this tree",
+    "2. The generator passes its own tests and detects nothing",
+    "3. The survivor-killer already here cannot run",
+    "4. The trap: amplification without an independent oracle cements the bug",
+    "5. What was built: a judge, and a gate on what may be written",
+    "6. What this says about the four phases",
+    "7. Verification",
+    "8. What this does not claim"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_FIRST_ACTION_TO_BUILD_IS_THE_JUDGE_20261113_V1.md",
+   "sha256": "19f24122044b0ec528bcde35d402ad93ddef18c8c2700d16c8fb63bb863cfa68",
+   "summary": "**13 November 2026.** Branch `arena/9bcff20d-brain`, base `ca531123de`. Authority **NONE**: producer-run sandbox measurement, `$0`, zero model calls, **no new capability registered**, no family flipped, `truth.achieved` untouched, no test weakened, no protected path touched.",
+   "terms": {
+    "10": 6,
+    "12": 7,
+    "action": 4,
+    "actions": 4,
+    "advanced": 4,
+    "already": 6,
+    "arxiv": 4,
+    "assertion": 5,
+    "build": 5,
+    "canonical": 4,
+    "counting": 4,
+    "every": 5,
+    "false": 9,
+    "gate": 4,
+    "generated": 4,
+    "generator": 6,
+    "here": 6,
+    "in_range": 4,
+    "independent": 7,
+    "judge": 4,
+    "killed": 5,
+    "loop": 4,
+    "measured": 4,
+    "mutants": 5,
+    "mutation": 6,
+    "new": 4,
+    "no": 13,
+    "not": 21,
+    "nothing": 7,
+    "one": 6,
+    "only": 5,
+    "oracle": 8,
+    "own": 5,
+    "passed": 7,
+    "phase": 4,
+    "program": 10,
+    "rate": 4,
+    "same": 9,
+    "score": 5,
+    "spec": 6,
+    "suite": 6,
+    "test": 7,
+    "tests": 10,
+    "text": 5,
+    "than": 4,
+    "tree": 4,
+    "value": 6,
+    "verified": 5
+   },
+   "title": "The first advanced action to build is the judge — measured on this tree's own test generator",
+   "title_terms": [
+    "action",
+    "advanced",
+    "build",
+    "first",
+    "generator",
+    "judge",
+    "measured",
+    "own",
+    "test",
+    "tree"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7544,
    "headings": [
     "The gate accepts a failed repair",
@@ -79432,10 +79514,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1245,
+  "included_source_count": 1246,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3470efdbdc26f851a17f7d8ebc055969c661cc7afe75da955c2fb88771a06232"
+  "source_tree_digest": "5eb9f7493c358af052f861376f3a10360aaf76c2e7b4ee311f68a09b7a882d7c"
  },
  "research_index": [
   {
@@ -237659,7 +237741,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/TEST_ENTRY_POINT_FINDER_20261113_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8c41c6619a884f6384fa77927f669219d63c6922f102b095aaf745e4828bbd7a",
+   "sha256": "b7e3c91c397b0850d8c1a3dffa85d80174d0f338839521d09ffae6e886e56d9f",
    "status": "",
    "terms": {
     "20261113": 1,

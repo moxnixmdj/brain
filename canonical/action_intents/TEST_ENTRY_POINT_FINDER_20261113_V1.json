@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::INSTANT_LEARNING_AND_INSTANT_LEARNING_IN_NEW_ENVIRONMENTS_ARE_NOT_SOLVED__ONE_SHOT_PERMANENCE_FAILS_ON_THE_CHECK__THE_PRIOR_VERDICT_THAT_THE_CHECK_COULD_NOT_RUN_WAS_A_FINDER_BUG_NOT_A_REAL_ABSENCE__CORRECTED_YIELD_IS_18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK__AND_3_OF_5_MUTANTS_SURVIVE_SO_COVERS_IS_NOT_ADEQUACY__VALIDATED_REPLAY_OF_A_LEARNED_MODEL_COSTS_1_08_PERCENT_OF_COLD_BUT_ONLY_BECAUSE_IT_IS_CHECKED",
- "canonical_base_commit": "7c5ee71779d2a9f6d49f4d79107d50f718e969c0",
+ "canonical_base_commit": "da1ed71f80006344b974b40a4e4571ca6f1094ae",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -54,7 +54,7 @@
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
-  "canonical_base_commit": "7c5ee71779d2a9f6d49f4d79107d50f718e969c0",
+  "canonical_base_commit": "da1ed71f80006344b974b40a4e4571ca6f1094ae",
   "constructive_gap_for_open_obligation_ids": [],
   "expected_obligation_discharge_lcb": 0,
   "expected_obligation_unlock_lcb": "1/2",
@@ -83,7 +83,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "7c5ee71779d2a9f6d49f4d79107d50f718e969c0",
+  "canonical_base_commit": "da1ed71f80006344b974b40a4e4571ca6f1094ae",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "TRUST_THE_ROUND_28_NO_TEST_MODULE_VERDICT",
