@@ -439,6 +439,13 @@ def solve_or_learn(
 ) -> dict[str, Any]:
     if type(learn) is not bool:
         raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    # A mapping request may carry its own `learn` flag (e.g. front-door calls
+    # that must stay read-only). It is honoured here rather than ignored.
+    if isinstance(request, Mapping) and "learn" in request:
+        request_learn = request["learn"]
+        if type(request_learn) is not bool:
+            raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+        learn = request_learn
     from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
 
     with memory_policy_scope(READ_WRITE if learn else OFF):
@@ -472,6 +479,40 @@ def solve_or_learn(
                 )
             except Exception:
                 pass
+
+            # Self-Reflective Learning: Reflect on execution to build understanding
+            try:
+                from canonical.swe_kernel.self_reflective_learning_system_v1 import get_learning_system
+                learning_system = get_learning_system()
+                goal_text = request if isinstance(request, str) else str(request.get("goal") or "")
+                task_id_text = "autonomous-solve" if isinstance(request, str) else str(request.get("task_id") or "autonomous-solve")
+                
+                # Execute and reflect on the task
+                reflection = learning_system.execute_and_reflect(
+                    task=goal_text,
+                    execution_result={
+                        "status": "PASS" if res.get("pass") else "FAIL",
+                        "answer": res.get("answer", ""),
+                        "error": res.get("error", ""),
+                    }
+                )
+                
+                # Store the reflection for future reasoning
+                learning_system.learn_from_reflection(reflection)
+                
+                # Add reflection metadata to result
+                if isinstance(res, dict):
+                    res["self_reflection"] = {
+                        "task_id": reflection.task_id,
+                        "success": reflection.success,
+                        "causal_models_built": len(learning_system.causal_models),
+                        "abstract_concepts": len(learning_system.abstract_concepts),
+                        "transferable_principles": len(learning_system.transferable_principles),
+                    }
+            except Exception as e:
+                # Self-reflection is non-critical, continue even if it fails
+                pass
+
         return res
 
 
@@ -538,13 +579,49 @@ def _solve_or_learn_impl(
     )
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         req.setdefault("workspace_root", str(work_cwd))
+
+    def _typed_python_ast_lane() -> dict[str, Any] | None:
+        """Bounded read-only AST adapter. Similarity is never an executor."""
+        if not goal or _has_structured_specialist:
+            return None
+        from canonical.swe_kernel import python_ast_query_v1 as ast_query
+
+        try:
+            typed = ast_query.solve_query(goal, root=work_cwd)
+        except ast_query.PythonAstQueryError as exc:
+            # The bounded adapter is not the whole read-only surface. If the
+            # current sentence is outside its small grammar, let the verified
+            # compositional engine/door try; safety refusals still fail closed.
+            if exc.code in {"UNSUPPORTED_TARGET", "UNSUPPORTED_QUERY_SHAPE"}:
+                try:
+                    ast_query.check_source_confinement(goal, root=work_cwd)
+                except ast_query.PythonAstQueryError as confined_exc:
+                    out = ast_query.failure_result(confined_exc)
+                    out.update(schema=SCHEMA, task_id=task_id,
+                               elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+                    return out
+                return None
+            out = ast_query.failure_result(exc)
+            out.update(schema=SCHEMA, task_id=task_id,
+                       elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+            return out
+        if typed is None:
+            return None
+        typed.update(schema=SCHEMA, task_id=task_id, executed=True,
+                     semantic_acceptance_complete=False,
+                     elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+        return typed
     if not learn:
         allow_tier2_learning = False
         record_open_gap = False
     if not learn and not _has_structured_specialist:
+        typed = _typed_python_ast_lane()
+        if typed is not None:
+            return typed
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         door_req = dict(req)
+        door_req.setdefault("task_id", task_id)
         door_req["route_memory_mode"] = "exclude"
         return ra.solve(door_req)
 
@@ -1000,72 +1077,41 @@ def _solve_or_learn_impl(
         }
 
     # ------------------------------------------------------------------
-    # TIER 0A-SEMANTIC (<10 ms): Semantic Generalization - Retrieve Similar
-    #                            Experiences & Adapt Strategies
+    # TIER 0A-SEMANTIC (<25 ms): Neuro-symbolic compositional & causal
+    # generalization. Replaces the old TF-IDF keyword lookup: typed
+    # SemanticTaskAST -> explicit synthesized program -> interventional
+    # verification -> only then an answer. Structured answers (int counts,
+    # name lists, dict breakdowns), and fail-closed refusals otherwise.
+    # The volatile policy update is kept in-memory; this tier never
+    # silently mutates tracked experience state.
     # ------------------------------------------------------------------
     if learn and recalled is None:
+        typed = _typed_python_ast_lane()
+        if typed is not None:
+            return typed
         try:
             from canonical.swe_kernel.semantic_generalization_engine_v1 import (
-                SemanticGeneralizationEngine,
+                GeneralizationEngine,
             )
 
-            sem_engine = SemanticGeneralizationEngine()
-            sem_result = sem_engine.generalize_and_solve(goal, top_k=3)
-            
-            if sem_result.get("adapted_strategy") is not None:
-                adapted = sem_result["adapted_strategy"]
-                base_strategy = adapted.get("base_strategy", {})
-                
-                # Try to execute the adapted strategy
-                if base_strategy.get("task_type") == "information_retrieval":
-                    # Apply information retrieval strategy
-                    recommended = base_strategy.get("recommended_actions", [])
-                    if recommended and "read file" in recommended[0].lower():
-                        # This is a file reading task - extract file path from goal
-                        file_match = re.search(r'[\w/.-]+\.py', goal)
-                        if file_match:
-                            file_path = file_match.group(0)
-                            try:
-                                with open(file_path, 'r') as f:
-                                    file_content = f.read()
-                                
-                                # Count based on strategy
-                                if any("function" in act.lower() or "method" in act.lower() or "class" in act.lower() for act in recommended):
-                                    import ast
-                                    tree = ast.parse(file_content)
-                                    
-                                    if "function" in goal.lower() or "method" in goal.lower():
-                                        count = sum(1 for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)))
-                                        return {
-                                            "schema": SCHEMA,
-                                            "task_id": task_id,
-                                            "pass": True,
-                                            "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
-                                            "tier_used": "tier0a_semantic_generalization",
-                                            "from_memory": True,
-                                            "generalization_used": True,
-                                            "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
-                                            "top_similarities": sem_result.get("top_similarities", []),
-                                            "answer": f"Found {count} {'functions' if 'function' in goal.lower() else 'methods'}",
-                                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                                        }
-                                    elif "class" in goal.lower():
-                                        count = sum(1 for node in ast.walk(tree) if isinstance(node, ast.ClassDef))
-                                        return {
-                                            "schema": SCHEMA,
-                                            "task_id": task_id,
-                                            "pass": True,
-                                            "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
-                                            "tier_used": "tier0a_semantic_generalization",
-                                            "from_memory": True,
-                                            "generalization_used": True,
-                                            "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
-                                            "top_similarities": sem_result.get("top_similarities", []),
-                                            "answer": f"Found {count} classes",
-                                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                                        }
-                            except Exception:
-                                pass
+            sem_engine = GeneralizationEngine()
+            sem_result = sem_engine.solve_task(
+                goal,
+                work_cwd=work_cwd,
+                top_k=3,
+                persist_policy=False,
+                store_experience=False,
+            )
+
+            if sem_result.get("pass") is True:
+                out = dict(sem_result)
+                out["schema"] = SCHEMA
+                out["task_id"] = task_id
+                out["status"] = "PASS__TIER0A_SEMANTIC_GENERALIZATION"
+                out["tier_used"] = "tier0a_semantic_generalization"
+                out["from_memory"] = False
+                out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
+                return out
         except Exception:
             pass
 

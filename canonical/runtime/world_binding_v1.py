@@ -128,6 +128,20 @@ def _flatten(value, out=None):
     return out
 
 
+def _argv_stated_in(goal):
+    """The command line the sentence states, or None. Never a guess.
+
+    Delegates to `composer_route_v1.extract_argv`, which is where this repository already
+    solves exactly this problem and already documents the refusal that makes it safe.
+    Imported lazily because composer_route_v1 imports this module.
+    """
+    try:
+        from canonical.runtime.composer_route_v1 import extract_argv
+        return extract_argv(str(goal or ""))
+    except Exception:
+        return None
+
+
 def placeholders(entry):
     """Every ${input.X} name an entry's action template references.
 
@@ -565,10 +579,32 @@ def render_args(entry, bound):
             raise KeyError("UNBOUND_TEMPLATE_ARGUMENT:" + key)
         return str(bound[key])
 
+    def whole(match_value):
+        """A value that IS one placeholder, with no surrounding text.
+
+        `${input.argv}` in a template asks for the bound argument itself, not for its
+        text. Substituting through `repl` stringified whatever was bound, so a LIST
+        slot arrived at its adapter as the characters "['ls', '-la']". The adapter
+        then found `argv` was not a list and refused with CLI_ARGV_REQUIRED -- a
+        correct refusal of a mangled value, blamed for years on the adapter.
+
+        Only an exact whole-value placeholder keeps its type. `${input.x}/y`, or a
+        list element mixing text and a placeholder, is a string-building context and
+        still renders to text, because that is what the template asked for.
+        """
+        m = _PLACEHOLDER_RE.fullmatch(match_value)
+        if not m:
+            return None
+        key = m.group(1)
+        if key not in (bound or {}):
+            raise KeyError("UNBOUND_TEMPLATE_ARGUMENT:" + key)
+        return True, bound[key]
+
     out = {}
     for key, value in args.items():
         if isinstance(value, str):
-            out[key] = _PLACEHOLDER_RE.sub(repl, value)
+            held = whole(value)
+            out[key] = held[1] if held else _PLACEHOLDER_RE.sub(repl, value)
         elif isinstance(value, (list, tuple)):
             out[key] = [_PLACEHOLDER_RE.sub(repl, v) if isinstance(v, str) else v
                         for v in value]
@@ -770,8 +806,43 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
     filled_from_declared_default = {}
     from canonical.runtime import declared_argument_default_v1 as _dad
     _declared_defaults = _dad.declared_defaults(entry)
+    # A ROW MAY DECLARE THAT AN ARGUMENT IS NOT REQUIRED.
+    #
+    # `"optional": ["output_path"]` is the row saying: this argument is not part of
+    # what the sentence asks for, and the adapter is the only authority on whether it
+    # can work without it. The template language has always allowed this -- seven rows
+    # already declare optional keys -- but only `goal_front_compiler` ever read it.
+    # This module did not, so an optional destination was still SYNTHESISED below,
+    # and a destination that no sentence asked for became a required artifact. The
+    # command then ran correctly and the adapter raised CLI_EXPECTED_OUTPUT_MISSING
+    # over a file nobody had requested: `ls` and `cat` both reported ACTION_FAILED
+    # for work that had already succeeded.
+    declared_optional = set()
+    try:
+        from canonical.runtime.goal_front_compiler_v1 import declared_optional_inputs as _dop
+        declared_optional = {str(k) for k in _dop(entry)}
+    except Exception:  # noqa: BLE001 - no declaration, nothing withheld
+        declared_optional = set()
+    # ...and the declaration only WITHDRAWS a slot the template stopped asking for.
+    #
+    # The first version of this rule withdrew every key the row called optional, and
+    # that was wrong: seven rows declare an optional key that their template still
+    # interpolates as `${input.X}`. Withdrawing there left the placeholder unbound,
+    # `render_args` raised UNBOUND_TEMPLATE_ARGUMENT, and the whole plan lost --
+    # measured as 5 regressions in test_goal_compiler_world_binding_v1, including
+    # "Audit python source structure..." switching away from python.source.audit.ast.
+    # A key the template still names is still required; the declaration changes
+    # nothing there, and this module behaves exactly as it did before.
+    _template_args = ((entry or {}).get("action_template") or {}).get("args")
+    _named_by_template = set(_template_args) if isinstance(_template_args, dict) else set()
     for key in keys:
         low = key.lower()
+        if key in declared_optional and key not in _named_by_template and key not in bound:
+            # The row states this argument is not part of what it was asked to do.
+            # The adapter's own *_REQUIRED refusal is the only authority on whether
+            # that is true, so a row that lies here fails loudly at the call rather
+            # than silently receiving a path this module invented.
+            continue
         # A DESTINATION IS DETERMINED, NOT DISCOVERED.
         #
         # goal_compiler synthesises its own output_path first, and it has no
@@ -809,6 +880,29 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             value = _quoted(goal)
             if value is None:
                 value = str(goal or "").strip()
+        elif low == "argv" or low.endswith("_argv"):
+            # A STATED COMMAND IS BOUND; AN UNSTATED ONE IS NOT INVENTED.
+            #
+            # `shell.command.run` has been a VERIFIED_BOUND_CAPABILITY the whole time --
+            # cwd pinned to the repository root, timeout clamped, argv capped at 64
+            # non-empty strings, non-zero exit raised rather than returned -- and it was
+            # unreachable from the front door for one reason: this module had no `argv`
+            # notion at all, so every sentence that asked for a command was refused with
+            # NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES:['argv'].
+            #
+            # Measured 2026-11-12: "run a shell command" is AMBIGUOUS and its only
+            # survivors are two forged rows scoring 0.0, while the capability that CAN run
+            # a command is rejected one line earlier. And when the adapter is handed the
+            # right argv directly it does the job perfectly -- `awk -F, '{s+=$2} END
+            # {print s}'` over a CSV returned 10, the correct sum, verified.
+            #
+            # The extractor is the composer's own, reused rather than reimplemented: it
+            # already handles quoted command lines, prose commands, and the refusal this
+            # rule needs. It returns None rather than a guess when the sentence states no
+            # command -- and an unstated argv must stay unbound, because a slot filled from
+            # something the sentence does not contain is an invention, and an invention
+            # executes.
+            value = _argv_stated_in(goal)
         elif _is_url_slot(low):
             # A URL IN THE SENTENCE MUST NOT BE READ AS A FILE PATH.
             #

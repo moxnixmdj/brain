@@ -1,0 +1,44 @@
+{
+ "schema": "BRAIN_GENERALIZATION_OR_LOOKUP_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-13T00:28:05Z",
+ "decides_lookup_from_generalization_by": "whether the change's OLD statement text appears in the example's own first file -- decided before the organ runs, so the organ cannot influence the classification",
+ "lookup_vs_generalization": {
+  "SHOWED": {
+   "right": 16,
+   "missed": 7,
+   "share": 0.6957
+  },
+  "NEVER_SHOWED": {
+   "right": 370,
+   "missed": 214,
+   "share": 0.6336
+  },
+  "NEVER_SHOWED_strict": {
+   "right": 370,
+   "missed": 214,
+   "share": 0.6336
+  },
+  "SHOWED_strict": {
+   "right": 16,
+   "missed": 7,
+   "share": 0.6957
+  }
+ },
+ "share_of_recovered_changes_that_are_generalization": 0.9585,
+ "recovered_never_showed": 370,
+ "recovered_total": 386,
+ "coverage_strict": 0.6359,
+ "edits": {
+  "strict_made": 408,
+  "strict_wrong": 22,
+  "modal_made": 408,
+  "modal_wrong": 22
+ },
+ "precision_strict": 0.9461,
+ "askings_not_applicable": 168,
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "terminal_authority": false,
+ "non_claim": "AGREEMENT_WITH_THE_PEOPLE_IS_NOT_CORRECTNESS__NO_PROJECT_TEST_WAS_RUN"
+}

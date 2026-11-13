@@ -348,9 +348,12 @@ def forge_and_record(entry, root=None, seed_cases=None) -> dict:
         cases = candidate_inputs(params, root,
                                  annotations=signature_of(src, name, root),
                                  source_rel=src, function=name)
+        if seed_cases:
+            cases = list(seed_cases) + [c for c in cases if c not in seed_cases]
         ent = register(src, contract, cases, function=name)
         report["capability_id"] = ent["capability_id"]
-        data["refused"].pop(key, None)
+        data = _state()
+        data.setdefault("refused", {}).pop(key, None)
     else:
         # forge_function names a capability_id before it has earned one. A
         # refused function must not carry an id, or a reader can mistake it
@@ -384,7 +387,7 @@ def register(module: str, contract: dict, cases: list[dict],
             r"[a-z0-9]+", (module + " " + (function or "")).lower()))),
         # Forged capabilities declare nothing about shared effects:
         # inventing an effect would let them chain on claims nobody made.
-        "provides": ["forged." + module],
+        "provides": ["forged." + module + ("::" + function if function else "")],
         "requires": [],
         "action_template": {
             "type": "invoke_capability",

@@ -163,3 +163,21 @@ def test_the_two_reachable_refusals_are_reachable(ceiling):
     reachable = [r for r in ceiling["rows"] if r["capability_exists"]]
     assert len(reachable) == 2
     assert {r["task"] for r in reachable} == {"diff two files", "sort the lines of a file"}
+
+
+def test_failing_paraphrases_of_existing_capabilities_are_rescued_by_memory():
+    """12 paraphrases of existing capabilities fail with memory=False and succeed with memory=True."""
+    rescue = B.memory_rescue_on_failing_paraphrases()
+    assert rescue["total"] == 12
+    assert rescue["testable"] == 12
+    assert rescue["rescued"] == 12
+    assert rescue["rescue_rate"] == 1.0
+
+
+def test_forged_ordinary_capabilities_close_the_six_unanswered_tasks_and_paraphrases():
+    """All 6 unanswered ceiling tasks and 6 held-out paraphrases are forged, taught once, and rescued."""
+    forged = B.forged_ceiling_rescue()
+    assert forged["forged_admitted"] == 6
+    assert forged["tasks_rescued"] == 6
+    assert forged["paraphrases_rescued"] == 6
+
