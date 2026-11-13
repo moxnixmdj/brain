@@ -190,7 +190,29 @@ git diff --check
 
 Environment: created a local ignored `.venv` and installed pytest 9.2.0; no test installs
 packages, patches standard-library behavior, or reads historical source versions. No full-suite
-run is claimed. Existing suite backlog outside these nine files remains unmeasured in this turn.
+run is claimed.
+
+### CI follow-up: generated artifact, not a weakened check
+
+The first PR check run failed `recompilation_is_byte_identical` (32/33 artifact checks), because
+this report changes the root markdown knowledge index. The signed repository referee passed.
+Updated the current working branch with `origin/main` at `2b4d4281fd582f45fb37c194b7464d0cdc189369`
+and regenerated the existing tracked index through its normal compiler; no verifier was changed.
+
+```sh
+python3 canonical/runtime/compile_brain_unified_model_v1.py
+python3 canonical/runtime/verify_brain_unified_model_v1.py
+# 33/33 PASS after rebuild
+.venv/bin/python -m unittest -q \
+  canonical.tests.test_brain_unified_model_v1 \
+  canonical.tests.test_goal_compiler \
+  canonical.tests.test_goal_compiler_world_binding_v1
+# Ran 137 tests in 52.399s, OK
+```
+
+Recompile again after this report is finalized, since its bytes are indexed too. The generated
+JSON is an existing required projection, not new learned weights or additional capability.
+Suite backlog outside the named pytest and unittest files remains unmeasured in this turn.
 
 **Bottom line:** storing an experience once is achievable. Safe transfer is a hypothesis that
 requires additional evidence. Today's concrete gain is two fewer ways for an unsafe hypothesis
