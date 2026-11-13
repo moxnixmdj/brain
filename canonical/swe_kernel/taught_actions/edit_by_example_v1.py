@@ -102,7 +102,10 @@ import sys
 import time
 import tokenize
 
-from . import kept_under_an_old_name_v1 as kept_under_an_old_name
+try:
+    from . import kept_under_an_old_name_v1 as kept_under_an_old_name
+except ImportError:  # confined exec() with no package context: fall back to absolute import
+    from canonical.swe_kernel.taught_actions import kept_under_an_old_name_v1 as kept_under_an_old_name
 
 SIMPLE_STATEMENTS = (ast.Assign, ast.AugAssign, ast.AnnAssign, ast.Return, ast.Expr, ast.Raise, ast.Assert,
                      ast.Delete, ast.Pass, ast.Import, ast.ImportFrom, ast.Global, ast.Nonlocal, ast.Break,
