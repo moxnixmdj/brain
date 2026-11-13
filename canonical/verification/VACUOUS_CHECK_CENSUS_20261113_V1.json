@@ -1,0 +1,65 @@
+{
+  "schema": "PROJECT_BRAIN_VACUOUS_CHECK_CENSUS_20261113_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+  "question": "Does the shipped check execute a test before it reports PASS?",
+  "defect": "generalization_rung_gradient_v1.Check took `python -m unittest` exit 0 as a verdict; unittest exits 0 after collecting nothing from a pytest-style module.",
+  "census": {
+    "files_scanned": 2592,
+    "unittest_collectable": 1596,
+    "neither_collector": 53,
+    "vacuous_under_unittest": 943
+  },
+  "vacuous_share": 0.3638,
+  "vacuous_examples": [
+    "canonical/runtime/test_execution_authority_reducer.py",
+    "canonical/runtime/test_livebench_ngram_reference_free_v1.py",
+    "canonical/runtime/test_prequalification_spent_regressions.py",
+    "canonical/runtime/test_prequalification_stage_a_generic.py",
+    "canonical/runtime/test_prequalification_stage_a_reducer.py",
+    "canonical/runtime/test_requirement_graph_kernel.py",
+    "canonical/runtime/test_seed_preserving_instruction_postprocessor_v1.py",
+    "canonical/runtime/test_seed_preserving_instruction_postprocessor_v2.py",
+    "canonical/runtime/test_specification_consensus_gate.py",
+    "canonical/runtime/test_terminal_closure_reducer.py",
+    "canonical/tests/test_a_capability_reports_its_substrate_v1.py",
+    "canonical/tests/test_a_capability_that_cannot_know_this_machine_cannot_run_it_v1.py"
+  ],
+  "counterfactual": {
+    "project": "constructed pytest-style package with two real assertions",
+    "legacy_accepts_original": true,
+    "legacy_accepts_broken_return_none": true,
+    "main_as_landed": {
+      "available": false,
+      "reason": "CHECK_NO_DISCOVERABLE_TESTS",
+      "accepts_original": false,
+      "accepts_broken": false
+    },
+    "main_plus_collector_reachability": {
+      "available": true,
+      "accepts_original": true,
+      "accepts_broken_return_none": false
+    },
+    "note": "Main PR #6836 fixed the vacuity itself; this round adds collector reachability so the fallback can be reached and the check is not discarded."
+  },
+  "live_repo_witnesses": [
+    {
+      "file": "canonical/runtime/test_requirement_graph_kernel.py",
+      "unittest": "Ran 0 tests, OK, exit 0",
+      "pytest": "10 passed"
+    },
+    {
+      "file": "canonical/runtime/test_prequalification_stage_a_reducer.py",
+      "unittest": "Ran 0 tests, OK, exit 0",
+      "pytest": "4 passed"
+    }
+  ],
+  "truth": {
+    "achieved": false
+  },
+  "model_calls": 0,
+  "incremental_spend_usd": 0,
+  "scope": "NECESSARY_NOT_SUFFICIENT__A_REAL_CHECK_DOES_NOT_PROVE_AN_EDIT_CORRECT__IT_REMOVES_A_FALSE_VERIFIED",
+  "census_population": "git ls-files at base_commit; untracked files excluded",
+  "resolution": "DUPLICATE_MODULE_DELETED__MAIN_IMPLEMENTATION_KEPT__COLLECTOR_REACHABILITY_ADDED"
+}
