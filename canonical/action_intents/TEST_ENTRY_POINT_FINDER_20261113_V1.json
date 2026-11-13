@@ -39,7 +39,7 @@
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "INSTANT_LEARNING_AND_INSTANT_LEARNING_IN_NEW_ENVIRONMENTS_ARE_NOT_SOLVED__ONE_SHOT_PERMANENCE_FAILS_ON_THE_CHECK__THE_PRIOR_VERDICT_THAT_THE_CHECK_COULD_NOT_RUN_WAS_A_FINDER_BUG_NOT_A_REAL_ABSENCE__CORRECTED_YIELD_IS_18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK__AND_3_OF_5_MUTANTS_SURVIVE_SO_COVERS_IS_NOT_ADEQUACY__VALIDATED_REPLAY_OF_A_LEARNED_MODEL_COSTS_1_08_PERCENT_OF_COLD_BUT_ONLY_BECAUSE_IT_IS_CHECKED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::INSTANT_LEARNING_AND_INSTANT_LEARNING_IN_NEW_ENVIRONMENTS_ARE_NOT_SOLVED__ONE_SHOT_PERMANENCE_FAILS_ON_THE_CHECK__THE_PRIOR_VERDICT_THAT_THE_CHECK_COULD_NOT_RUN_WAS_A_FINDER_BUG_NOT_A_REAL_ABSENCE__CORRECTED_YIELD_IS_18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK__AND_3_OF_5_MUTANTS_SURVIVE_SO_COVERS_IS_NOT_ADEQUACY__VALIDATED_REPLAY_OF_A_LEARNED_MODEL_COSTS_1_08_PERCENT_OF_COLD_BUT_ONLY_BECAUSE_IT_IS_CHECKED",
  "canonical_base_commit": "ee9685ddf9436842a9d4326209bc36c1c3f40a5b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -83,7 +83,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "7767b9c39b5c413ae0e86fedd9d2c50d2779ea67",
+  "canonical_base_commit": "9a5be3729115c5ae9a07827a0f7ea70c268f8843",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "TRUST_THE_ROUND_28_NO_TEST_MODULE_VERDICT",
@@ -143,6 +143,54 @@
     "ADAPT",
     "INTEGRATE"
    ]
+  },
+  "real_outcome": "THE_CHECK_IS_BUILDABLE_AND_THE_PRIOR_ZERO_OF_42_VERDICT_WAS_A_FINDER_BUG",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_SIX_REPOSITORIES_ARE_THE_ORACLE_AND_THEY_ARE_ON_THIS_MACHINE_AT_THEIR_PINNED_BASE_COMMITS__MUTATION_IS_THE_ADEQUACY_ORACLE_AND_IT_WAS_RUN__THE_DRIFT_PROBE_IS_A_CONSTRUCTED_COUNTERFACTUAL_REPORTED_AS_SUCH"
+  },
+  "routes_considered": [
+   "REUSE",
+   "ADAPT",
+   "CONFIGURE",
+   "COMPOSE",
+   "INTEGRATE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_route": "FIX_THE_INSTRUMENT_BEFORE_ARGUING_WITH_IT",
+  "selected_surviving_route": "FIX_THE_INSTRUMENT_BEFORE_ARGUING_WITH_IT",
+  "selected_surviving_route_class": "REUSE",
+  "why_selected_route_is_fastest_sufficient": "The claim could not be tested with the instrument that existed, because the instrument reported absence where it had only failed to look. Repairing it cost one afternoon of file reading and answered the claim directly; building a learner first would have produced a number nobody could check.",
+  "stop_condition": "THE_FINDER_REPORTS_WHAT_IT_CANNOT_SEE__18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK__3_OF_5_MUTANTS_SURVIVE__VALIDATED_REPLAY_98_9_PERCENT_AND_BLIND_REPLAY_OFF_GOAL__62_TESTS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "route": "BUILD_A_NEW_LEARNER_THAT_LEARNS_FROM_ONE_SHOWING",
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Claimed higher, measured lower: without an adequacy signal a one-shot lesson is indistinguishable from a one-shot mistake.",
+      "CORRECTNESS": "Unfalsifiable here: the fuel census counts 64 verified units against a 5,000 threshold.",
+      "INCREMENTAL_COST": "Real money per episode; ASCENT measures 115 s vs 97 s per episode for the update alone.",
+      "RELIABILITY": "Forgetting is silent: naive sequential FT costs 28.8 to 2 percent on GSM8K.",
+      "VERIFIABILITY": "None until a terminal verifier exists.",
+      "WALL_CLOCK": "Days, against minutes for repairing the instrument."
+     }
+    },
+    {
+     "route": "TRUST_THE_ROUND_28_ZERO_OF_42_VERDICT",
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Sufficient only if true; it is not true.",
+      "CORRECTNESS": "Refuted by five importing test files in one repository.",
+      "INCREMENTAL_COST": "0 USD, which is why it was attractive.",
+      "RELIABILITY": "A finder searching one convention cannot distinguish absence from a blind spot.",
+      "VERIFIABILITY": "Refuted in one command.",
+      "WALL_CLOCK": "Seconds."
+     }
+    }
+   ],
+   "selected": "FIX_THE_INSTRUMENT_BEFORE_ARGUING_WITH_IT",
+   "selection_basis": "It is the only route whose result can be re-run by anyone with the same six commits."
   }
  },
  "route_id": "REUSE",
