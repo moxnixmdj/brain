@@ -123,7 +123,15 @@
     "canonical/tools/insufficiency_certificate_probe_v1.py"
    ],
    "external_existing_routes_checked": [
-    "NO_EXTERNAL_SOURCE_IS_RELEVANT_TO_A_TEST_SAMPLE_GOING_STALE__THE_EVIDENCE_IS_THE_TREE_ITSELF"
+    "PYTHON_DOCS_pathlib.rglob__THE_ORACLE_PRIMITIVE_THE_CENSUS_NOW_DERIVES_OUTCOMES_WITH",
+    "PYTEST_OFFICIAL_DOCS_AND_PYPI__THE_RUNNER_THE_SUITES_EXECUTE_UNDER",
+    "STRYKER_JS_REPOSITORY__THE_ANNOTATE_A_CONFIRMED_SURVIVOR_WITH_A_WRITTEN_REASON_CONVENTION",
+    "SOFTWARE_ENGINEERING_STACKEXCHANGE_409160__A_GOLDEN_MASTER_IS_A_PREDICTION_AND_SUCH_TESTS_ARE_BRITTLE_WHEN_THE_SYSTEM_CHANGES",
+    "GIST_MangaD_GOLD_FILES__GOLDEN_MASTER_IS_A_HISTORICAL_ORACLE_AND_CAN_BLESS_BUGS",
+    "DEV_TO_2726__HARD_CODED_EXPECTED_VALUES_MAKE_A_TEST_PASS_FOR_THE_WRONG_REASON_GENERATE_FIXTURES_IN_THE_TEST",
+    "SPECSTORY_EQUIVALENT_MUTANTS__THE_EQUIVALENT_MUTANT_PROBLEM_IS_UNDECIDABLE_SO_SOME_SURVIVORS_NEED_JUDGMENT",
+    "AGARIC_ISSUE_3350__CONFIRMED_EQUIVALENT_MUTANTS_MUST_BE_ANNOTATED_NOT_LEFT_AS_PERMANENT_SURVIVORS",
+    "RESYNC_MUTATION_TESTING__DOCUMENT_SURVIVING_EQUIVALENT_MUTANTS_NEAR_THE_CODE"
    ],
    "reused_rather_than_rebuilt": [
     "THE_LEARNER_AND_ITS_STATUSES",
@@ -297,7 +305,7 @@
      "route": "DELETE_OR_RELOCATE_THE_TWO_NEW_TEST_MODULES_IN_canonical_tools"
     }
    ],
-   "checked_at_utc": "2026-11-13T04:54:37Z",
+   "checked_at_utc": "2026-11-13T04:56:56Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -309,7 +317,7 @@
    "discovery_required": true,
    "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__THE_CENSUS_HARD_CODES_SIX_DIRECTORIES_AND_THEIR_OUTCOMES_SO_A_REAL_TEST_MODULE_LANDING_IN_THE_UNIQUE_FAILURE_DIRECTORY_DEGRADES_most_general_TO_python.source.available_WHILE_EVERY_ASSERTION_ABOUT_ADMITS_STILL_PASSES",
    "max_age_hours": 24,
-   "negative_search_summary": "NO_EXTERNAL_SOURCE_ADDRESSES_THIS_FAILURE_MODE_DIRECTLY_AND_NONE_WAS_NEEDED__THE_EVIDENCE_IS_THE_TREE_ITSELF_AND_THE_MEASUREMENT_IS_A_FOUR_SCENARIO_CHECK_RUN_LOCALLY__THE_RELEVANT_PRIOR_ART_IS_THE_REPOSITORYS_OWN__THE_MUTATION_TESTING_PRACTICE_OF_NAMING_AN_EQUIVALENT_OR_IRREDUCIBLE_SURVIVOR_RATHER_THAN_CLAIMING_COVERAGE_THAT_CANNOT_EXIST_WHICH_THE_PREVIOUS_ROUND_ALREADY_APPLIED_TO_A_BEHAVIOURALLY_EQUIVALENT_SUBSTRING_MUTANT",
+   "negative_search_summary": "NO_EXTERNAL_SOURCE_ADDRESSES_A_CENSUS_OF_A_REPOSITORYS_OWN_DIRECTORIES_BUT_THE_LITERATURE_ON_GOLDEN_MASTER_AND_CHARACTERIZATION_TESTS_NAMES_THE_FAILURE_MODE_EXACTLY_AND_CONFIRMED_THE_REPAIR_RATHER_THAN_SUGGESTING_IT__A_GOLDEN_MASTER_IS_A_HISTORICAL_ORACLE_AND_A_PREDICTION_ABOUT_CURRENT_BEHAVIOUR_SO_IT_IS_BRITTLE_WHEN_THE_SYSTEM_CHANGES_AND_HARD_CODED_EXPECTED_VALUES_MAKE_A_TEST_PASS_FOR_THE_WRONG_REASON__THE_DERIVED_ORACLE_THIS_ROUND_SUBSTITUTES_IS_THE_STANDARD_ANSWER__ON_THE_SURVIVOR_THE_EQUIVALENT_MUTANT_PROBLEM_IS_UNDECIDABLE_IN_GENERAL_SO_SOME_SURVIVORS_NEED_A_WRITTEN_JUDGMENT_RATHER_THAN_A_TEST_AND_A_PERMANENT_UNANNOTATED_SURVIVOR_STOPS_CARRYING_INFORMATION__NO_SOURCE_FOUND_CLAIMS_A_TEST_CAN_ENFORCE_THE_INDEPENDENCE_OF_ITS_OWN_ORACLE_BY_ASSERTION",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -337,7 +345,7 @@
    "selected_route": "DERIVE_THE_CENSUS_SAMPLE_FROM_A_RULE_THAT_NEVER_MENTIONS_TESTS__EVERY_DIRECTORY_UNDER_canonical_AT_DEPTH_TWO_HOLDING_PYTHON_SOURCE_DIRECTLY__WITH_OUTCOMES_FROM_AN_INDEPENDENT_rglob_COUNT_AND_TWO_GUARDS_PINNING_WHY_IDENTIFICATION_HOLDS__BOTH_OUTCOME_CLASSES_MUST_BE_NON_EMPTY_AND_SOME_FAILURE_MUST_HOLD_PYTHON_SOURCE__THEN_REPLACE_THE_STALE_TREE_FACT_PIN_WITH_THE_DURABLE_INVARIANT_THAT_THE_SENSOR_AND_THE_INDEPENDENT_COUNT_AGREE_IN_BOTH_DIRECTIONS",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-13T04:54:37Z",
+    "checked_at_utc": "2026-11-13T04:56:56Z",
     "execution_dependencies": [
      {
       "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
@@ -372,17 +380,19 @@
      {
       "dependency": "THE_REAL_REPOSITORY_TREE_AS_THE_CENSUS_SUBJECT",
       "evidence": [
-       "13 structural candidates measured on merged main at c76fde11; because the sample is derived the census follows the tree instead of breaking when it grows"
+       "13 structural candidates measured on merged main at c76fde11; because the sample is derived the census follows the tree instead of breaking when it grows",
+       "marked VOLATILE with observed_at_utc because this round exists precisely because the tree grew: two concurrent rounds added genuine test modules to canonical/tools between the branch going green and the merge, so any claim about which directories hold tests has an age"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "LOCAL",
       "kind": "CODE_ARTIFACT",
+      "observed_at_utc": "2026-11-13T04:56:56Z",
       "required": true,
       "scope": "LOCAL",
       "status": "READY",
-      "volatility": "CHANGES_WHEN_ANY_ROUND_ADDS_A_FILE"
+      "volatility": "VOLATILE"
      }
     ],
     "execution_dependencies_complete": true,
@@ -406,9 +416,23 @@
      "canonical/runtime/applicability_v1.py",
      "canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py"
     ],
-    "BROAD_WEB_OR_COMMUNITY": [],
-    "CODE_OR_PACKAGE_REGISTRY": [],
-    "OFFICIAL_PRIMARY": []
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://softwareengineering.stackexchange.com/questions/409160/wont-a-characterization-regression-test-fail-when-a-bug-is-fixed",
+     "https://gist.github.com/MangaD/d3b0dae9d4d70bf3972614fa0b3b2f83",
+     "https://dev.to/hackrs_6393/audit-ai-generated-characterization-tests-before-you-refactor-2726",
+     "https://specstory.com/learning/test-quality/equivalent-mutants",
+     "https://github.com/jfolcini/agaric/issues/3350",
+     "https://bootcamp.resync.nz/library/techniques/mutation-testing/"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/project/pytest/",
+     "https://github.com/pytest-dev/pytest",
+     "https://github.com/stryker-mutator/stryker-js"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/pathlib.html#pathlib.Path.rglob",
+     "https://docs.pytest.org/en/stable/"
+    ]
    },
    "unresolved_plausible_dominators": []
   },
@@ -435,7 +459,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-11-13T04:54:37Z",
+  "checked_at_utc": "2026-11-13T04:56:56Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,

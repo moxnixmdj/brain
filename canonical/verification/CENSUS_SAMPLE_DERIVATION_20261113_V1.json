@@ -12,7 +12,7 @@
   "written": "every sampled directory must hold Python source"
  },
  "generated_at_git_head": "8cb35f6502de46d42aa0c19ecd7406977c219144",
- "generated_at_utc": "2026-11-13T04:54:37Z",
+ "generated_at_utc": "2026-11-13T04:56:56Z",
  "generated_by": "producer-run measurement in one sandbox",
  "how_reproduced": [
   "python3 -m pytest canonical/tests/test_real_input_space_census_v1.py canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py canonical/tests/test_insufficiency_witness_v1.py -q"
