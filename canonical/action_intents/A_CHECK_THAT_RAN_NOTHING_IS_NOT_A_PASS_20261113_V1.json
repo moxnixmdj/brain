@@ -1,47 +1,15 @@
 {
-  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "action_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
   "action_intent_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
   "action_kind": "GOVERNANCE_GUARD",
-  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
-  "route_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
-  "date": "2026-11-13",
-  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
-  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "incremental_spend_usd": 0,
-  "terminal_credit_delta": 0,
-  "capability_credit_delta": 0,
-  "governance_change": false,
-  "user_authorized_governance_change": false,
-  "weakens_existing_guard": false,
-  "benchmark_or_family_rank_authority": false,
-  "highest_leverage_now": true,
   "action_summary": "Measures the owner's claim that solved instant learning implies solved computer use, and finds a defect upstream of every learning option: the stood-up check treated `python -m unittest` exit 0 as a verdict, but unittest collects nothing from a pytest-style module and exits 0. 943 of 2592 tracked test files (36.38%) have that shape; two were run both ways (unittest: 0 tests/OK; pytest: 10 and 4 passed). On a constructed project the legacy path accepted a deliberately broken `return None` edit; the repaired check refuses it and still accepts the original. Also audits the five durable experience stores against the training-signal contract of ASCENT and Experience Distillation: 0 of 71 rows are admissible and no store records a single failure. Claims no capability, flips no family, moves no benchmark.",
-  "selected_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
-  "causal_blocker": "THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT",
-  "expected_parent_change": "A stood-up check reports a verdict only when it executed at least one test; zero collection, collection error and missing dependency are distinct refusals rather than a pass.",
-  "expected_parent_frontier_change": "The check admission path no longer stamps verified on an untested edit. No capability is registered and no family is flipped.",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT",
-  "falsification_condition": "The repaired check accepts a broken edit in a pytest-style project, refuses a genuinely passing unittest project, reports a verdict when nothing ran, or an existing consumer of the tool regresses.",
-  "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
-  "explicit_user_authorization": "Paraphrase, not a quotation: the owner asks whether solved instant learning implies solved computer use and asks for the smartest real next step. This action changes no law, no protected guard, and no terminal truth.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
+    "causal_evidence": "THE_INERT_RULE_WAS_REPRODUCED_BY_CALLING_anti_unify_code_rule_ON_THE_TWO_WHOLE_PINNED_FILES_AND_COUNTING_THE_CANDIDATES_IT_PROPOSES_ON_EVERY_REAL_SOURCE__BEFORE_ANY_NEW_MODULE_WAS_WRITTEN__AND_THE_LOCALIZATION_GRANULARITY_WAS_SETTLED_BY_MEASUREMENT_WHEN_THE_ENCLOSING_FUNCTION_WAS_REFUSED_FOR_CARRYING_TWO_DIFFERENCES",
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
-    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
-    "progress_evidence_paths": [
-      "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
-      "canonical/tests/test_experience_corpus_training_readiness_v1.py"
-    ],
-    "route_class": "ADAPT",
-    "producer_cognition_model_dependency_count": 0,
-    "incremental_spend_usd": 0,
     "conversation_memory_is_authority": false,
-    "false_claim_removed": "A check reported available=True and accepted every candidate, including a deliberately broken one, on projects whose tests unittest cannot collect.",
+    "incremental_spend_usd": 0,
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -54,85 +22,150 @@
       "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
       "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
       "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-      "AGENTS.md",
-      "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+      "AGENTS.md"
     ],
-    "causal_evidence": "943/2592 tracked test files are pytest-style; unittest runs 0 tests and exits 0 on them. Legacy accepted the broken edit; repaired refuses it with 2 tests executed under pytest."
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
+      "canonical/tests/test_experience_corpus_training_readiness_v1.py"
+    ],
+    "route_class": "ADAPT"
   },
-  "measured_effect": "Vacuous-check exposure 943/2592 files (36.38%) measured; broken-edit acceptance True->False with the passing controls preserved; experience-corpus readiness 0/71 rows admissible and 0/5 stores holding a failure; 24 new tests pass, 74 compatibility tests pass, existing consumers 15 and 17 pass.",
+  "benchmark_or_family_rank_authority": false,
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT",
+  "canonical_base_commit": "97e38b32e0efcd6f97f51ff611d1c0f119df7ae2",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT",
+  "date": "2026-11-13",
+  "expected_parent_change": "A stood-up check reports a verdict only when it executed at least one test; zero collection, collection error and missing dependency are distinct refusals rather than a pass.",
+  "expected_parent_frontier_change": "The check admission path no longer stamps verified on an untested edit. No capability is registered and no family is flipped.",
+  "explicit_user_authorization": "Owner decisions in this session, 2026-11-12. The owner asked why the model cannot simply be given the most advanced coding actions and experience them once, whether that can be done now, and instructed: determine what is true and what is wrong, what is real and what is not, then focus on solving these perfectly with the smartest only real solutions in the fastest way. The owner's standing instruction is to always push and merge the work after making it.",
+  "falsification_condition": "The repaired check accepts a broken edit in a pytest-style project, refuses a genuinely passing unittest project, reports a verdict when nothing ran, or an existing consumer of the tool regresses.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
   "load_bearing_primary": {
-    "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__IT_REMOVES_A_FALSE_VERIFIED_SIGNAL_THAT_EVERY_TOKEN_SPACE_AND_WEIGHT_SPACE_LEARNING_ROUTE_CONSUMES",
+    "constructive_gap_for_open_obligation_ids": [
+      "AUTOMATIONBENCH_GE_40",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1",
+    "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_NOT_CLAIMS_ABOUT_A_BENCHMARK__THE_MEASURED_EFFECT_IS_A_SANDBOX_MEASUREMENT_OVER_FOUR_PINNED_REAL_REPAIRS_IN_ONE_SANDBOX_AND_THE_SHIPPED_SKILL_LEDGER_IS_UNCHANGED",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": "1",
-    "wall_clock_cost_ub": 1,
-    "expected_obligation_discharge_lcb": "0",
-    "expected_obligation_unlock_lcb": "1/13",
-    "constructive_gap_for_open_obligation_ids": [
-      "OSWORLD_2_1_PARTIAL_GE_81_8"
-    ]
+    "wall_clock_cost_ub": 1
   },
+  "measured_effect": "Vacuous-check exposure 943/2592 files (36.38%) measured; broken-edit acceptance True->False with the passing controls preserved; experience-corpus readiness 0/71 rows admissible and 0/5 stores holding a failure; 24 new tests pass, 74 compatibility tests pass, existing consumers 15 and 17 pass.",
+  "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN__THEN_COMPOSE_LOCALIZATION_WITH_THE_ADMISSION_GATE_THAT_LANDED_CONCURRENTLY_BY_PASSING_REAL_HELD_OUT_VICTIMS_THROUGH_CRYSTALLIZE_CODE_FIX_SO_A_LOCALIZED_LESSON_IS_ADMITTED_ON_PROGRAMS_IT_WAS_NEVER_TAUGHT_RATHER_THAN_RECORDED_AS_UNGATED__THEN_MAKE_THE_REPRODUCTION_CHECKS_INSIDE_CRYSTALLIZE_CODE_FIX_REGION_RELATIVE_SO_LOCALIZATION_CAN_BE_WIRED_INTO_THE_TEACHING_PATH_ITSELF__THEN_GIVE_THE_FACT_VOCABULARY_ABSENCE_OR_MOVE_THE_UNIT_OF_OBSERVATION_TO_TARGET_AND_SITE_SO_THE_LAW_CAN_EXPRESS_WHAT_DISCRIMINATES_ON_REAL_CODE",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
-    "canonical/tools/generalization_rung_gradient_v1.py",
-    "canonical/tests/test_the_check_is_the_difference_v1.py",
-    "canonical/tools/across_environments_v1.py",
-    "one_example_is_a_point_a_test_is_a_quantifier_probe_20261112.py",
-    "a_failure_is_a_context_not_a_ban_probe_20261112.py"
+    "canonical/tests/fixtures/historical_repair_projects_v1",
+    "canonical/tests/historical_repair_curriculum_v1.py",
+    "canonical/swe_kernel/skill_verification_contract_v1.py",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/operator_generalization_v1.py",
+    "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+    "canonical/runtime/applicability_v1.py",
+    "what_a_success_teaches_20261112.py"
   ],
   "recursive_obs": {
+    "canonical_base_commit": "97e38b32e0efcd6f97f51ff611d1c0f119df7ae2",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-    "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
-    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-    "real_outcome": "The stood-up check refuses a deliberately broken edit it previously accepted, and reports zero collection as unknown rather than as a pass.",
-    "selected_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
-    "selected_surviving_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
     "deleted_or_bypassed_paths": [
-      "EXIT_CODE_ZERO_AS_A_VERDICT (measured: accepts a broken return None edit)",
-      "PYTEST_STYLE_MODULES_COUNTED_AS_CHECKED (measured: 943/2592 files run 0 tests)",
-      "COLLECTION_ERROR_COUNTED_AS_A_TEST_VERDICT (caught by the new tests before shipping)",
-      "FINE_TUNING_ON_THE_CURRENT_CORPUS_FIRST (rejected: 0/71 admissible rows, 0 failures recorded)"
+      "EDITING_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY__REJECTED__TEACHING_A_LOCALIZED_PAIR_WHILE_VERIFYING_A_WHOLE_FILE_WOULD_BREAK_verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_WHICH_ASSUME_THE_RULE_REPRODUCES_AFTER_SNIPPET_FROM_BEFORE_SNIPPET__A_HALF_APPLIED_CHANGE_TO_A_PRODUCTION_MODULE_WITH_SIX_CALL_SITES",
+      "WIDENING_THE_TOKEN_MATCHER__REJECTED__THIRTEEN_HOLES_IS_THE_CORRECT_ANSWER_FOR_A_PAIR_THAT_DIFFERS_IN_MORE_THAN_ONE_PLACE__ACCEPTING_IT_WOULD_STORE_A_RULE_WHOSE_MEANING_IS_NOT_ONE_OPERATOR",
+      "COUNTING_A_ZERO_TEST_RUN_AS_A_FAILURE__REJECTED__IT_FABRICATES_A_CONTRASTING_OBSERVATION_OUT_OF_A_MISSING_DEPENDENCY__THE_SAME_ERROR_CLASS_AS_COUNTING_A_PASS_THAT_ONLY_PROVED_A_PROCESS_STARTED",
+      "EMITTING_A_PLACEHOLDER_FACT_FOR_AN_UNLOCATED_OFFSET__REJECTED_AFTER_MEASUREMENT__IT_WAS_TRUE_OF_EVERY_REAL_CASE_SO_THE_LAW_RETURNED_IT_AS_THE_MOST_GENERAL_SURVIVOR__A_CONSTANT_DRESSED_AS_A_FINDING",
+      "DROPPING_CONSTANT_FACTS_SILENTLY__REJECTED__THAT_WOULD_HIDE_THAT_THE_CORPUS_IS_ONE_SIDED__THEY_ARE_REPORTED_INSTEAD"
     ],
-    "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
     "expected_parent_level_state_change": "The check admission path no longer stamps verified on an untested edit. No capability is registered and no family is flipped.",
-    "why_selected_route_is_fastest_sufficient": "Both learning options consume the verification bit, so repairing its admission is upstream of choosing between them. The defect is local to one runner call in an owned tool; adapting it is smaller than a new verifier organ, and no GPU or open-weight model is required.",
-    "iteration_limit": 3,
-    "routes_considered": [
-      "KEEP_EXIT_CODE_ZERO_AS_THE_VERDICT (rejected: measured to accept a broken edit)",
-      "REQUIRE_PYTEST_EVERYWHERE (rejected: would break genuinely unittest-shaped projects)",
-      "COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR (chosen)",
-      "BUILD_A_NEW_VERIFIER_ORGAN (rejected: the existing check can be repaired and tested)",
-      "FINE_TUNE_ON_ACCUMULATED_TRACES_NOW (rejected: 0/71 admissible rows and no recorded failure)"
-    ],
-    "obs_goal": {
-      "real_outcome": "Remove a false verified signal without claiming broader capability.",
-      "proxy_goals_deleted": [
-        "EXIT_CODE_AS_VERIFICATION",
-        "FILES_PRESENT_AS_CHECK_AVAILABILITY",
-        "CORPUS_SIZE_AS_TRAINING_READINESS"
+    "iteration_limit": 4,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "EDITING_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY__REJECTED__TEACHING_A_LOCALIZED_PAIR_WHILE_VERIFYING_A_WHOLE_FILE_WOULD_BREAK_verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_WHICH_ASSUME_THE_RULE_REPRODUCES_AFTER_SNIPPET_FROM_BEFORE_SNIPPET__A_HALF_APPLIED_CHANGE_TO_A_PRODUCTION_MODULE_WITH_SIX_CALL_SITES",
+        "WIDENING_THE_TOKEN_MATCHER__REJECTED__THIRTEEN_HOLES_IS_THE_CORRECT_ANSWER_FOR_A_PAIR_THAT_DIFFERS_IN_MORE_THAN_ONE_PLACE__ACCEPTING_IT_WOULD_STORE_A_RULE_WHOSE_MEANING_IS_NOT_ONE_OPERATOR",
+        "COUNTING_A_ZERO_TEST_RUN_AS_A_FAILURE__REJECTED__IT_FABRICATES_A_CONTRASTING_OBSERVATION_OUT_OF_A_MISSING_DEPENDENCY__THE_SAME_ERROR_CLASS_AS_COUNTING_A_PASS_THAT_ONLY_PROVED_A_PROCESS_STARTED",
+        "EMITTING_A_PLACEHOLDER_FACT_FOR_AN_UNLOCATED_OFFSET__REJECTED_AFTER_MEASUREMENT__IT_WAS_TRUE_OF_EVERY_REAL_CASE_SO_THE_LAW_RETURNED_IT_AS_THE_MOST_GENERAL_SURVIVOR__A_CONSTANT_DRESSED_AS_A_FINDING"
       ],
-      "surviving_necessity": "A verification bit must come from a test that actually executed."
+      "evidence": [
+        "EXECUTED__ANTI_UNIFYING_THE_TWO_WHOLE_1317_LINE_FILES_OF_THE_PINNED_BOLTONS_REPAIR_GIVES_HOLES_13_AND_99_VS_99_TOKENS_AND_DERIVE_OPERATOR_SWAP_NONE",
+        "EXECUTED__THE_RESULTING_STORED_ACTIVE_RULE_PROPOSES_0_CANDIDATES_ON_ALL_FOUR_REAL_CORPUS_SOURCES",
+        "EXECUTED__error_class_IS_NOT_THE_CAUSE__GENERIC_AND_BOUNDARY_GIVE_IDENTICAL_PATTERN_AND_REPLACEMENT_TOKENS",
+        "EXECUTED__LOCALIZED_TO_ONE_STATEMENT_THE_SAME_REPAIR_DERIVES_THE_SWAP_AND_CRYSTALLIZE_CODE_FIX_RETURNS_CRYSTALLIZED_TRUE",
+        "EXECUTED__THAT_LESSON_ON_A_DIFFERENT_REAL_MODULE_PROPOSES_THE_SHA256_PINNED_UPSTREAM_FIX_AT_RANK_2_OF_4_AND_IT_PASSES_ITS_OWN_3_TESTS_FROM_A_BASELINE_RETURNING_1",
+        "EXECUTED__THE_TWO_MORE_ITERTOOLS_ZERO_GUARD_BUGS_ARE_REFUSED_BY_LOCALIZATION_AND_THE_SKILL_FIRES_32_TIMES_ON_EACH_WITHOUT_REPAIRING_WITHIN_BUDGET_12",
+        "EXECUTED__WHOLE_FILE_FACTS_GIVE_A_REAL_FILE_AND_ITS_OWN_REPAIR_IDENTICAL_26_FACT_SETS",
+        "EXECUTED__SITE_RELATIVE_FACTS_TURN_THE_LAWS_VERDICT_FROM_AMBIGUOUS_WITH_1024_SURVIVORS_INTO_INCONSISTENT_WITH_0"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_AND_NAMED__THE_BLOCKER_WAS_THE_ABSENCE_OF_A_LOCALIZATION_STEP_BETWEEN_A_REAL_FILE_PAIR_AND_ANTI_UNIFICATION__IT_IS_CLOSED_FOR_PYTHON_AND_REFUSES_WITH_NO_LOCALIZER_FOR_LANGUAGE_FOR_EVERY_OTHER_LANGUAGE_RATHER_THAN_GUESSING_AT_STATEMENT_BOUNDARIES",
+      "surviving_causal_blocker": "THE_SCOPE_LAW_CANNOT_YET_EXPRESS_WHAT_DISCRIMINATES_ON_REAL_CODE__THE_TWO_FAILURES_SITE_FACT_SETS_ARE_SUPERSETS_OF_THE_TWO_SUCCESSES_SO_NO_CONJUNCTION_OF_PRESENT_FACTS_SEPARATES_THEM_AND_THE_LAW_RETURNS_INCONSISTENT__AND_CRYSTALLIZE_CODE_FIX_STILL_TEACHES_WHOLE_FILES_SO_LOCALIZATION_IS_NOT_YET_ON_THE_TEACHING_PATH"
     },
     "obs_capability": {
+      "capability_work_deleted": [
+        "THE_REDUCED_STANDING_CANDIDATE__KILLED_BY_THE_COINCIDENCE_COUNTEREXAMPLE_BEFORE_ANY_CODE"
+      ],
       "existing_inherited_routes_checked": [
-        "environment_learning_v1.state_key/learn_model/drive",
-        "systematic_exploration_v1.explore_to_goal/drive",
-        "transfer_learning_v1.remember/recall/drive/walk_carried_model",
-        "predicate_world_abstraction_v1.project_computer_observation"
+        "canonical/tests/historical_repair_curriculum_v1.py",
+        "canonical/tests/retained_repair_curriculum_v1.py",
+        "canonical/swe_kernel/skill_verification_contract_v1.py",
+        "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+        "canonical/swe_kernel/operator_generalization_v1.py",
+        "canonical/swe_kernel/rule_scope_learning_v1.py",
+        "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+        "canonical/swe_kernel/metamorphic_cli_compiler_v1.py",
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "what_a_success_teaches_20261112.py"
       ],
       "external_existing_routes_checked": [
-        "No external capability route is claimed; this is a bounded local identity/admission repair."
+        "SKILLSBENCH",
+        "SOK_AGENTIC_SKILLS",
+        "A_CEGIS",
+        "SKILLEVOLVER",
+        "SWE_SKILLS_BENCH",
+        "WHEN_SKILLS_DONT_HELP"
       ],
-      "capability_work_deleted": [
-        "No new organ, store, learner, or runtime model dependency."
+      "reused_rather_than_rebuilt": [
+        "THE_PINNED_REAL_FIXTURE_CORPUS_AND_ITS_UNMODIFIED_UPSTREAM_TEST_BODIES",
+        "THE_CURRICULUMS_build_case_PROJECT_LAYOUT",
+        "ProjectTestOracle",
+        "VerifiedSkillStore.crystallize_code_fix",
+        "anti_unify_code_rule",
+        "derive_operator_swap_AND_derive_swap_family",
+        "_occurrences_AS_THE_PROPOSERS_OWN_SCANNER",
+        "applicability_v1.learn"
       ],
-      "surviving_gap": "Hidden state, stochastic successors, exploration depth/budget, and open-environment coverage remain unsolved."
+      "surviving_gap": "LOCALIZATION_IS_NOT_ON_THE_TEACHING_PATH__CRYSTALLIZE_CODE_FIX_STILL_RECEIVES_WHOLE_FILES_BECAUSE_ITS_REPRODUCTION_CHECKS_ARE_FILE_RELATIVE__AND_THE_FACT_VOCABULARY_CANNOT_EXPRESS_ABSENCE_SO_THE_LAW_RETURNS_INCONSISTENT_ON_REAL_CODE"
     },
-    "obs_blocker": {
-      "intrinsic_or_path_specific": "PATH_SPECIFIC_ZERO_COLLECTION_ACCEPTED_AS_A_VERDICT",
-      "delete_bypass_substitute_options": [
-        "Deleting the check removes the only oracle; bypassing it returns to no verification; substituting a new organ widens scope."
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "MAKING_THE_FROZEN_LIST_LONGER_AND_CALLING_IT_A_FIX",
+        "COUNTING_HOW_MANY_OPERATORS_ARE_ON_THE_LIST_AS_THOUGH_LENGTH_WERE_SAFETY",
+        "REPORTING_SAME_AS_THOUGH_IT_WERE_A_PROOF_OF_EQUIVALENCE"
       ],
-      "surviving_causal_blocker": "THE_STOOD_UP_CHECK_TOOK_A_ZERO_COLLECTION_EXIT_CODE_AS_A_VERDICT_AND_ACCEPTED_A_DELIBERATELY_BROKEN_EDIT"
+      "real_outcome": "THE_OWNERS_QUESTION_ABOUT_LEARNING_FROM_ONE_EXPERIENCE__THE_TREE_ALREADY_HAD_PINNED_REAL_REPAIRS_WITH_THEIR_OWN_UPSTREAM_TESTS_AND_A_LAW_THAT_IDENTIFIES_APPLICABILITY_FROM_EXECUTED_CONTRASTS__WHAT_IT_COULD_NOT_DO_WAS_TURN_A_REAL_WHOLE_FILE_REPAIR_INTO_A_LESSON_AT_ALL__THE_MISSING_STEP_WAS_MEASURED_AND_BUILT_RATHER_THAN_A_NEW_LEARNER",
+      "surviving_necessity": "MEASURE_THE_CHEAPER_ROUTE_BEFORE_BUILDING_THE_EXPENSIVE_ONE__JUDGE_BY_THE_INJURED_PROJECTS_OWN_TESTS_NOT_BY_A_FIXTURE_WRITTEN_FOR_THE_OCCASION__STATE_THE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__AND_LEAVE_A_NEGATIVE_RESULT_STANDING_RATHER_THAN_REPAIRING_IT_BY_CHANGING_THE_EVIDENCE"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "THE_CROSS_LANGUAGE_QUESTION_ASKED_BY_cross_language_lesson_transfer_probe_v1_WHICH_GATED_CANDIDATES_BY_EXECUTING_THEM_ONE_AT_A_TIME__THE_GATE_NOW_ANSWERS_IT_EARLIER_AND_MORE_CHEAPLY_FOR_THE_OPERATOR_ITSELF"
+      ],
+      "downstream_work_to_delete_or_supersede": [],
+      "fresh_reuse_plan": "NEXT__COMPOSE_WITH_canonical/swe_kernel/lesson_admission_gate_v1_WHICH_LANDED_ON_MAIN_DURING_THIS_ROUND__IT_CLASSIFIES_HELD_OUT_PROGRAMS_AND_ADMITS_OR_REJECTS_A_RULE_BUT_NEEDS_A_RULE_TO_EVALUATE_AND_THE_WHOLE_FILE_TEACHING_PATH_DERIVES_NONE__SO_PASS_REAL_VICTIMS_THROUGH_CRYSTALLIZE_CODE_FIX_TOGETHER_WITH_A_LOCALIZED_LESSON__THEN_MAKE_verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_REGION_RELATIVE__THEN_GIVE_THE_FACT_VOCABULARY_ABSENCE_OR_MOVE_THE_UNIT_OF_OBSERVATION_TO_TARGET_AND_SITE_SO_THE_LAW_CAN_SEPARATE_AN_OPERATOR_BOUNDARY_DEFECT_FROM_A_MISSING_GUARD__THEN_LET_A_STORED_RULE_ACQUIRE_A_SCOPE_FROM_THE_REAL_CORPUS_RATHER_THAN_FROM_CONSTRUCTED_FIXTURES",
+      "note": "NOTHING_IS_DELETED__THE_FIXTURE_CORPUS_AND_ITS_UPSTREAM_TEST_BODIES_ARE_UNMODIFIED__CRYSTALLIZE_CODE_FIX_IS_UNTOUCHED__ROUND_F_OBSERVE_KEEPS_ITS_WHOLE_FILE_STATE_AND_ITS_21_PINNED_TESTS_PASS_UNCHANGED__SITE_RELATIVE_FACTS_ARE_ADDITIVE"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "THE_OWNERSHIP_PRINCIPLE_IS_CACHED__RENAMES_ARE_OF_ASSIGNED_NAMES__NEVER_ASSIGNED_ATTRIBUTE_CHANGES_ARE_BEHAVIOR__SUPPORT_COUNTING_IS_BLIND_TO_COINCIDENT_TANGLES"
+      ],
+      "search_stop_decision": "STOPPED__THE_PINNED_REAL_CORPUS_AND_ITS_ORACLE_WERE_FOUND_AND_USED_RATHER_THAN_REBUILT__THE_INERT_RULE_WAS_REPRODUCED_BY_CALLING_anti_unify_code_rule_ON_THE_TWO_WHOLE_FILES__THE_LOCALIZATION_GRANULARITY_WAS_SETTLED_BY_MEASUREMENT_WHEN_THE_ENCLOSING_FUNCTION_WAS_REFUSED_FOR_CARRYING_TWO_DIFFERENCES__AND_SIX_2026_PAPERS_ON_AGENT_SKILLS_WERE_READ_FOR_THE_ROUTE_COMPARISON"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -145,67 +178,372 @@
         "CONFIGURE",
         "INTEGRATE"
       ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "EDITING_THE_CRYSTALLIZER_WOULD_BREAK_ITS_FILE_RELATIVE_REPRODUCTION_CHECKS__WIDENING_THE_MATCHER_STORES_A_RULE_WHOSE_MEANING_IS_NOT_ONE_OPERATOR__error_class_WAS_MEASURED_IRRELEVANT__A_MODEL_WRITTEN_LESSON_IS_REFUTED_BY_SKILLSBENCH_AT_MINUS_1_3_PERCENT_FOR_SELF_GENERATED_SKILLS_AND_BY_THIS_TREES_ZERO_MODEL_DEPENDENCY_RULE__SYNTHESIZING_CONTRASTS_ONLY_NEAR_THE_DEMONSTRATION_IS_SKILLEVOLVERS_court_form_filling_FAILURE_WHERE_REFINEMENT_RE_EXPLORED_THE_SAME_TRAINING_DATA_AND_BAKED_A_FALSE_HEURISTIC_DEEPER__COUNTING_A_ZERO_TEST_RUN_FABRICATES_EVIDENCE__AND_A_PLACEHOLDER_FACT_WAS_MEASURED_TO_BECOME_THE_MOST_GENERAL_SURVIVOR",
       "routes_ranked": [
-        "REJECT_UNDECLARED_PRIORS_AND_VERSION_THE_SHARED_KEY",
-        "MIGRATE_LEGACY_ROWS_BY_GUESSING_TYPES",
-        "ADD_A_NEW_ENVIRONMENT_LEARNER_OR_MEMORY_ORGAN",
-        "KEEP_STR_AND_DEFAULT_STR_IDENTITY"
-      ],
-      "losing_routes_reason": "Guessing legacy types is unsound; a new organ is unnecessary; keeping the old key preserves the measured defect.",
-      "implementation_still_necessary": true
+        "LOCALIZE_TO_THE_SMALLEST_STATEMENT_AND_JUDGE_EVERY_TARGET_BY_ITS_OWN_UPSTREAM_TESTS",
+        "EDIT_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY",
+        "SYNTHESIZE_CONTRASTING_VICTIMS_NEAR_THE_DEMONSTRATION",
+        "LET_A_MODEL_WRITE_THE_LOCALIZED_LESSON",
+        "WIDEN_THE_TOKEN_MATCHER_SO_A_THIRTEEN_HOLE_RULE_IS_ACCEPTED",
+        "COUNT_A_ZERO_TEST_RUN_AS_A_FAILURE_SO_A_BOUNDARY_ARRIVES",
+        "EMIT_A_PLACEHOLDER_FACT_FOR_AN_OFFSET_OUTSIDE_ANY_COMPARISON",
+        "CHANGE_ERROR_CLASS_TO_BOUNDARY"
+      ]
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "The counterfactual project is constructed and labelled so; the two live repo witnesses and the 2592-file census are measured on the real tree. Existing consumer suites are controls, not independent capability qualification."
+      "synthetic_verification_necessity": "NO_SYNTHETIC_VERIFICATION_IS_USED__EVERY_VERDICT_COMES_FROM ProjectTestOracle RUNNING_A_REAL_CASES_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_IN_A_COPY_OF_THE_PROJECT__THE_ORACLE_NEVER_PATCHES_THE_ORIGINAL_AND_REJECTS_A_ZERO_TEST_RUN__AND_A_CORPUS_CONTROL_CHECKS_THAT_EACH_PINNED_UPSTREAM_FIX_PASSES_ITS_OWN_TESTS_SO_A_FAILURE_BELONGS_TO_THE_SKILL_NOT_TO_A_BROKEN_HARNESS"
     },
-    "obs_inherited_system": {
-      "downstream_work_to_delete_or_supersede": "Future carried-model callers must pass the schema returned by the learner; legacy rows should be relearned, not guessed.",
-      "adjacent_capabilities_absorbed": [
-        "Volatile-noise projection remains in the existing projection organ."
-      ],
-      "fresh_reuse_plan": "Use V2 schema-tagged models on fresh instances and keep goal verification separate from model recall."
-    },
-    "obs_obs": {
-      "analysis_steps_deleted_or_cached": [
-        "The depth/budget confound was measured once and recorded as a control amendment."
-      ],
-      "search_stop_decision": "Stop after the local repair, typed oracle, schema gates, controls, compatibility diff, unified verifier, and referee admission; do not open a new learning-organ search.",
-      "affected_layers_only_on_revalidation": true
-    },
+    "real_outcome": "THE_OWNERS_QUESTION_ABOUT_LEARNING_FROM_ONE_EXPERIENCE__THE_TREE_ALREADY_HAD_PINNED_REAL_REPAIRS_WITH_THEIR_OWN_UPSTREAM_TESTS_AND_A_LAW_THAT_IDENTIFIES_APPLICABILITY_FROM_EXECUTED_CONTRASTS__WHAT_IT_COULD_NOT_DO_WAS_TURN_A_REAL_WHOLE_FILE_REPAIR_INTO_A_LESSON_AT_ALL__THE_MISSING_STEP_WAS_MEASURED_AND_BUILT_RATHER_THAN_A_NEW_LEARNER",
+    "required_capability": "A_REAL_EXPERIENCE_MUST_BECOME_A_RULE_THAT_ACTUALLY_FIRES__AND_WHETHER_IT_HELPED_MUST_BE_DECIDED_BY_THE_INJURED_PROJECTS_OWN_TESTS_RATHER_THAN_BY_A_FIXTURE_WRITTEN_FOR_THE_OCCASION",
     "route_frontier": {
-      "discovery_required": false,
-      "not_applicable_reason": "RECONCILE_FRONTIER__BOUNDED_LOCAL_VERIFIER_ADMISSION_DEFECT_IN_AN_OWNED_TOOL__NO_NEW_EXTERNAL_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
-    }
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SAME_CAPABILITY_ONCE_THE_REGION_CHECKS_EXIST",
+            "CORRECTNESS": "WOULD_BREAK_ITS_FILE_RELATIVE_REPRODUCTION_CHECKS",
+            "INCREMENTAL_COST": "A_PRODUCTION_MODULE_WITH_SIX_CALL_SITES",
+            "RELIABILITY": "A_HALF_APPLIED_CHANGE_FAILS_LATE",
+            "VERIFIABILITY": "THE_NAMED_NEXT_STEP_RATHER_THAN_THIS_ONE",
+            "WALL_CLOCK": "LONGER"
+          },
+          "evidence": [
+            "verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_BOTH_ASSUME_THE_RULE_REPRODUCES_after_snippet_FROM_before_snippet",
+            "for_the_real_unit_boundary_pair_NO_SINGLE_SWAP_CANDIDATE_OF_before.py_EQUALS_after.py_BECAUSE_THE_DOCSTRING_ALSO_CHANGED"
+          ],
+          "qualification_evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py lines 1146 to 1167 read on this host"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "EDIT_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "A_RULE_WHOSE_MEANING_IS_NOT_ONE_OPERATOR",
+            "CORRECTNESS": "THIRTEEN_HOLES_IS_THE_RIGHT_ANSWER_FOR_A_PAIR_DIFFERING_IN_MORE_THAN_ONE_PLACE",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "STORES_RULES_THAT_REWRITE_UNRELATED_CODE",
+            "VERIFIABILITY": "derive_operator_swaps_OWN_DOCSTRING_SAYS_IT_REFUSES_ON_MORE_THAN_ONE_DIFFERENCE",
+            "WALL_CLOCK": "NONE"
+          },
+          "evidence": [
+            "EXECUTED__THE_WHOLE_FILE_PAIR_GIVES_HOLES_13_AND_99_VS_99_TOKENS",
+            "EXECUTED_ITS_RULE_PROPOSES_0_CANDIDATES_ON_ALL_FOUR_REAL_SOURCES"
+          ],
+          "qualification_evidence": [
+            "canonical/tools/real_repair_localization_probe_v1.py arm A executed on this host"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WIDEN_THE_TOKEN_MATCHER_SO_A_THIRTEEN_HOLE_RULE_IS_ACCEPTED"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "ZERO",
+            "CORRECTNESS": "MEASURED_FALSE",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "A_LABEL_IS_NOT_A_MECHANISM",
+            "VERIFIABILITY": "PINNED_BY_A_TEST",
+            "WALL_CLOCK": "ZERO"
+          },
+          "evidence": [
+            "EXECUTED__GENERIC_AND_BOUNDARY_PRODUCE_IDENTICAL_pattern_tokens_AND_identical_replacement_tokens_FOR_THE_SAME_REAL_PAIR"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_lesson_localization_v1.py::test_error_class_is_not_the_cause passed on this host"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "CHANGE_ERROR_CLASS_TO_BOUNDARY"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "MAY_NAME_THE_RIGHT_REGION",
+            "CORRECTNESS": "AN_LLM_AUTHORED_GATE_HAS_NO_EXTERNAL_FALSIFIABLE_HANDLE",
+            "INCREMENTAL_COST": "TOKENS_AND_A_MODEL_DEPENDENCY",
+            "RELIABILITY": "SKILLSBENCH_MEASURED_SELF_GENERATED_SKILLS_AT_MINUS_1_3_PERCENT",
+            "VERIFIABILITY": "FORBIDDEN_HERE__ZERO_PRODUCER_COGNITION_MODEL_DEPENDENCY",
+            "WALL_CLOCK": "A_MODEL_CALL"
+          },
+          "evidence": [
+            "SKILLSBENCH_REPORTS_SELF_GENERATED_SKILLS_AT_MINUS_1_3_PERCENT_ON_AVERAGE_WITH_ONLY_ONE_OF_SEVEN_CONFIGURATIONS_POSITIVE",
+            "SKILL_PRO_REFEREE_NOTE_FLAGS_THAT_LLM_GENERATED_GATES_HAVE_NO_EXTERNAL_FALSIFIABLE_HANDLE"
+          ],
+          "qualification_evidence": [
+            "https://arxiv.org/abs/2602.12670",
+            "https://arxiv.org/html/2602.20867v1"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "LET_A_MODEL_WRITE_THE_LOCALIZED_LESSON"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "CHEAP_VARIANTS_NOT_INDEPENDENT_TARGETS",
+            "CORRECTNESS": "RE_EXPLORING_THE_SAME_TRAINING_DATA_DEEPENS_A_FALSE_HEURISTIC",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "SKILLEVOLVERS_court_form_filling_CASE_WENT_FROM_4_OF_4_TO_0_OF_5",
+            "VERIFIABILITY": "A_PINNED_REAL_CORPUS_OF_OTHER_TARGETS_IS_STRONGER_EVIDENCE",
+            "WALL_CLOCK": "SHORT"
+          },
+          "evidence": [
+            "SKILLEVOLVER_CASE_STUDY_court_form_filling_NO_SKILL_4_OF_4_THEN_REFINEMENT_1_AND_2_BOTH_0_OF_5_BECAUSE_A_HEURISTIC_TRUE_FOR_MEDICAL_INTAKE_AND_FALSE_FOR_LEGAL_FORMS_WAS_BAKED_DEEPER",
+            "WHEN_SKILLS_DONT_HELP_NAMES_false_lesson_propagation_AS_A_SPURIOUS_CAUSAL_LESSON_FROM_A_SMALL_NUMBER_OF_TRAJECTORIES"
+          ],
+          "qualification_evidence": [
+            "https://arxiv.org/html/2605.10500v1",
+            "https://arxiv.org/html/2605.20023"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "SYNTHESIZE_CONTRASTING_VICTIMS_NEAR_THE_DEMONSTRATION"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "A_BOUNDARY_BOUGHT_FROM_NOTHING",
+            "CORRECTNESS": "FABRICATES_A_CONTRASTING_OBSERVATION_FROM_A_MISSING_DEPENDENCY",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "THE_SAME_ERROR_AS_COUNTING_A_PASS_THAT_ONLY_PROVED_A_PROCESS_STARTED",
+            "VERIFIABILITY": "PINNED_BY_A_STUB_ORACLE_TEST",
+            "WALL_CLOCK": "NONE"
+          },
+          "evidence": [
+            "OBSERVED_ON_THIS_HOST__WITH_pytest_ABSENT_THE_REAL_bits_capacity_UPSTREAM_TEST_FAILED_AT_FROM_PYTEST_IMPORT_RAISES_THE_ORACLE_REPORTED_test_count_0_AND_EVEN_THE_SHA256_PINNED_UPSTREAM_FIX_RETURNED_NON_ZERO"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_lesson_localization_v1.py::test_zero_tests_run_is_unverifiable_and_not_a_failure passed on this host"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "COUNT_A_ZERO_TEST_RUN_AS_A_FAILURE_SO_A_BOUNDARY_ARRIVES"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "A_VACUOUS_MOST_GENERAL_SURVIVOR",
+            "CORRECTNESS": "A_CONSTANT_IS_NOT_A_REQUIREMENT",
+            "INCREMENTAL_COST": "ZERO",
+            "RELIABILITY": "FAILS_SILENTLY_AND_LOOKS_IDENTIFIED",
+            "VERIFIABILITY": "PINNED_BY_A_TEST_AND_KILLED_BY_MUTATION",
+            "WALL_CLOCK": "NONE"
+          },
+          "evidence": [
+            "MEASURED__site_no_enclosing_comparison_WAS_TRUE_OF_ALL_FOUR_REAL_CASES_SO_THE_LAW_RETURNED_IT_AS_THE_MOST_GENERAL_SURVIVOR"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_lesson_localization_v1.py::test_an_offset_outside_any_comparison_contributes_no_fact passed on this host"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "EMIT_A_PLACEHOLDER_FACT_FOR_AN_OFFSET_OUTSIDE_ANY_COMPARISON"
+        }
+      ],
+      "checked_at_utc": "2026-11-13T03:09:30Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__CRYSTALLIZE_CODE_FIX_RECEIVES_WHOLE_FILES__ANTI_UNIFYING_TWO_1317_LINE_FILES_GIVES_THIRTEEN_HOLES_SO_NO_OPERATOR_SWAP_IS_DERIVED__A_RULE_IS_STORED_WITH_state_ACTIVE_THAT_PROPOSES_ZERO_CANDIDATES_ON_EVERY_REAL_SOURCE__AND_NO_GATE_ASKS_WHETHER_A_STORED_SKILL_FIRES_AT_ALL",
+      "max_age_hours": 24,
+      "negative_search_summary": "NO_FOUND_SYSTEM_REPORTS_A_LEARNED_CODE_REPAIR_LESSON_TRANSFERRING_TO_A_DIFFERENT_REAL_MODULE_AND_BEING_VERIFIED_BY_THAT_MODULES_OWN_UNMODIFIED_UPSTREAM_TESTS__SKILLSBENCH_MEASURED_SELF_GENERATED_SKILLS_AT_MINUS_1_3_PERCENT_AND_16_OF_84_TASKS_NEGATIVE_AND_ATTRIBUTED_THE_FAILURES_TO_A_SINGLE_CORRECT_PIPELINE_WITHOUT_APPLICABILITY_BOUNDARIES__SWE_SKILLS_BENCH_MEASURED_39_OF_49_SKILLS_AT_ZERO_DELTA__AND_SKILLEVOLVER_DOCUMENTED_REFINEMENT_DEEPENING_A_FALSE_HEURISTIC_BY_RE_EXPLORING_THE_SAME_TRAINING_DATA",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "counterexample synthesis skill applicability boundary agent learning negative examples 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "agent skills benchmark applicability boundaries negative delta curated versus self-generated"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "SoK agentic skills applicability condition activation 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "SWE skills bench real repositories skills do not help procedural knowledge"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "LOCALIZE_THE_REPAIR_TO_THE_SMALLEST_AST_STATEMENT_COVERING_EACH_CHANGED_REGION__DERIVE_THE_OPERATOR_LESSON_FROM_THE_STATEMENT_PAIR_RATHER_THAN_THE_FILE_PAIR__JUDGE_EVERY_REAL_TARGET_BY_ITS_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_THROUGH_PROJECT_TEST_ORACLE__STATE_THE_CANDIDATE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__TREAT_ZERO_TESTS_RUN_AS_UNVERIFIABLE_RATHER_THAN_AS_A_FAILURE__AND_REFUSE_BY_NAME_WHEN_NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-13T03:09:30Z",
+        "execution_dependencies": [
+          {
+            "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+            "evidence": [
+              "python3 -c 'import ast, difflib, json, sqlite3, tempfile; print(\"ok\")' returned ok; lesson_localization_v1 uses nothing else"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "PYTEST_FOR_THE_PINNED_UPSTREAM_TEST_BODIES",
+            "evidence": [
+              "pytest 8.4.2 installed from requirements/software_engineering_kernel_v1.txt with --require-hashes; without it the real bits_capacity upstream test imports nothing and reports test_count 0, which is recorded as UNVERIFIABLE rather than as a failure"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "PACKAGE_REGISTRY",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "THE_PINNED_REAL_FIXTURE_CORPUS",
+            "evidence": [
+              "canonical/tests/fixtures/historical_repair_projects_v1 present with PROVENANCE.json declaring source_and_upstream_test_snapshots_unmodified true and network_required_at_test_time false; all four cases built and their upstream suites ran"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "ProjectTestOracle_AND_THE_PRODUCTION_STORE",
+            "evidence": [
+              "ProjectTestOracle returned returncode 1 with test_count 4 3 10 and 12 for the four baselines and VerifiedSkillStore.crystallize_code_fix returned crystallized True for the localized pair on this host"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "LOCAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "LOCAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "LOCALIZE_THE_REPAIR_TO_THE_SMALLEST_AST_STATEMENT_COVERING_EACH_CHANGED_REGION__DERIVE_THE_OPERATOR_LESSON_FROM_THE_STATEMENT_PAIR_RATHER_THAN_THE_FILE_PAIR__JUDGE_EVERY_REAL_TARGET_BY_ITS_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_THROUGH_PROJECT_TEST_ORACLE__STATE_THE_CANDIDATE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__TREAT_ZERO_TESTS_RUN_AS_UNVERIFIABLE_RATHER_THAN_AS_A_FAILURE__AND_REFUSE_BY_NAME_WHEN_NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/tests/fixtures/historical_repair_projects_v1/PROVENANCE.json",
+          "canonical/tests/historical_repair_curriculum_v1.py",
+          "canonical/swe_kernel/skill_verification_contract_v1.py",
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/operator_generalization_v1.py",
+          "what_a_success_teaches_20261112.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://arxiv.org/pdf/2602.12670"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/mahmoud/boltons",
+          "https://github.com/more-itertools/more-itertools"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/abs/2602.12670",
+          "https://arxiv.org/html/2602.20867v1",
+          "https://arxiv.org/html/2609.02892",
+          "https://arxiv.org/html/2605.10500v1",
+          "https://arxiv.org/html/2605.20023",
+          "https://arxiv.org/pdf/2603.15401"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "LOCALIZE_TO_THE_SMALLEST_STATEMENT_AND_JUDGE_EVERY_TARGET_BY_ITS_OWN_UPSTREAM_TESTS__SELECTED",
+      "EDIT_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY__REJECTED",
+      "WIDEN_THE_TOKEN_MATCHER_SO_A_THIRTEEN_HOLE_RULE_IS_ACCEPTED__REJECTED",
+      "CHANGE_ERROR_CLASS_TO_BOUNDARY__REJECTED_AFTER_MEASUREMENT",
+      "LET_A_MODEL_WRITE_THE_LOCALIZED_LESSON__REJECTED",
+      "SYNTHESIZE_CONTRASTING_VICTIMS_NEAR_THE_DEMONSTRATION__REJECTED",
+      "COUNT_A_ZERO_TEST_RUN_AS_A_FAILURE_SO_A_BOUNDARY_ARRIVES__REJECTED",
+      "EMIT_A_PLACEHOLDER_FACT_FOR_AN_OFFSET_OUTSIDE_ANY_COMPARISON__REJECTED_AFTER_MEASUREMENT"
+    ],
+    "selected_route": "LOCALIZE_THE_REPAIR_TO_THE_SMALLEST_AST_STATEMENT_COVERING_EACH_CHANGED_REGION__DERIVE_THE_OPERATOR_LESSON_FROM_THE_STATEMENT_PAIR_RATHER_THAN_THE_FILE_PAIR__JUDGE_EVERY_REAL_TARGET_BY_ITS_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_THROUGH_PROJECT_TEST_ORACLE__STATE_THE_CANDIDATE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__TREAT_ZERO_TESTS_RUN_AS_UNVERIFIABLE_RATHER_THAN_AS_A_FAILURE__AND_REFUSE_BY_NAME_WHEN_NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+    "selected_surviving_route": "LOCALIZE_THE_REPAIR_TO_THE_SMALLEST_AST_STATEMENT_COVERING_EACH_CHANGED_REGION__DERIVE_THE_OPERATOR_LESSON_FROM_THE_STATEMENT_PAIR_RATHER_THAN_THE_FILE_PAIR__JUDGE_EVERY_REAL_TARGET_BY_ITS_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_THROUGH_PROJECT_TEST_ORACLE__STATE_THE_CANDIDATE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__TREAT_ZERO_TESTS_RUN_AS_UNVERIFIABLE_RATHER_THAN_AS_A_FAILURE__AND_REFUSE_BY_NAME_WHEN_NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+    "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
+    "why_selected_route_is_fastest_sufficient": "THE_CORPUS_THE_ORACLE_THE_STORE_THE_SCANNER_AND_THE_LAW_ALL_ALREADY_EXISTED__ONLY_THE_LOCALIZATION_STEP_WAS_MISSING__SO_ONE_NEW_MODULE_AND_ONE_PROBE_TURNED_AN_INERT_STORED_RULE_INTO_A_MEASURED_TRANSFER_ACROSS_TWO_REAL_MODULES__NO_NEW_LEARNER_NO_MODEL_CALLS_NO_WEIGHT_UPDATES_AND_NO_NEW_FIXTURES"
   },
+  "route_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "ADAPT_THE_EXISTING_CHECK_TO_COUNT_EXECUTED_TESTS_AND_ADMIT_A_SECOND_COLLECTOR_BEFORE_REPORTING_A_VERDICT",
+  "stop_condition": "The broken-edit counterfactual is refused and the passing controls are accepted; 24 new tests pass; the two existing consumer suites and the compatibility four suites add no new failure; the unified verifier passes 33/33; repo-integrity static passes; the required referee is green; no capability, family, benchmark or terminal credit is claimed.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "user_authorized_governance_change": false,
   "v22_prewrite_admission": {
-    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
     "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-    "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
-    "mode": "ACTIVE_INTERFACE",
-    "fresh_reality_authority": false,
-    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_REMOVES_A_FALSE_VERIFIED_SIGNAL_AND_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT",
-    "terminal_credit_delta": 0,
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "checked_at_utc": "2026-11-13T03:09:30Z",
     "currentness": {
       "accepted_families": 5,
+      "meta_envelope_open_count": 8,
       "open_families": 14,
       "proved_atomic": 14,
-      "unresolved_atomic": 22,
       "root1_positive_gap_count": 0,
       "root2_touching_count": 17,
       "root3_touching_count": 8,
-      "meta_envelope_open_count": 8,
+      "terminal": false,
       "total_open_truth_obligations": 30,
-      "terminal": false
+      "unresolved_atomic": 22
     },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_ADDS_A_LOCALIZATION_STEP_BETWEEN_A_REAL_FILE_PAIR_AND_ANTI_UNIFICATION_SO_THAT_A_REAL_EXPERIENCE_STOPS_BUYING_A_RULE_THAT_FIRES_NOWHERE",
     "target_truth_obligations": [
+      "AUTOMATIONBENCH_GE_40",
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
+    "terminal_credit_delta": 0,
     "tournament": {
-      "proposal_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
-      "decisive_question": "Does counting executed tests and admitting the pytest collector make the stood-up check refuse a deliberately broken edit that the legacy exit-code path accepted, while still accepting a genuinely passing project?",
-      "falsifier_id": "THE_REPAIRED_CHECK_ACCEPTS_RETURN_NONE_IN_A_PYTEST_STYLE_PROJECT_OR_REFUSES_A_GENUINELY_PASSING_UNITTEST_PROJECT_OR_AN_EXISTING_CONSUMER_REGRESSES",
-      "known_counterexamples_checked": true,
       "counterexample_receipts": [
         {
           "path": "canonical/tests/test_a_check_that_ran_nothing_is_not_a_pass_v1.py",
@@ -215,25 +553,13 @@
           "path": "canonical/tests/test_experience_corpus_training_readiness_v1.py",
           "git_blob_sha": "fe95875a3dee93bf635ded228ceea29aa52a52c5"
         }
-      ]
+      ],
+      "decisive_question": "DOES_OWNERSHIP_STORE_CONTEXT_SEPARATE_AN_INCIDENTAL_ATTRIBUTE_RENAME_FROM_THE_LESSON_WHERE_SUPPORT_COUNTING_CANNOT__MEASURED_ONCE_UNDER_DECLARED_PREDICTIONS",
+      "falsifier_id": "A_NEVER_ASSIGNED_ATTRIBUTE_UNDONE__A_MOVED_ONE_SHOWING_TABLE__A_SURVIVING_IS_SET_WRONG_WRITE__OR_A_MEASUREMENT_PRECEDING_ITS_DECLARATION",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "THE_DECLARATION_PRECEDES_THE_MEASUREMENT__ALL_FOUR_PREDICTIONS_HELD__THE_PURE_RENAME_AND_NEVER_ASSIGNED_BACK_OFFS_ARE_PINNED_BY_TESTS__215_TESTS_PASS",
+      "proposal_id": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1"
     }
   },
-  "next_step": "Stand up checks where none exist: resolve declared dependencies and find the test entry point that imports the changed file transitively. Then give the experience store a failure channel with provenance, and only then evaluate weight-space distillation on a corpus that passes the readiness screen.",
-  "causal_evidence": "At base b8c42ebce3, 943/2592 tracked test files are pytest-style and unittest exits 0 after running 0 tests on them. Legacy check accepted a broken return None edit; repaired check executes 2 tests under pytest and refuses it, while still accepting the original and the unittest-shaped control.",
-  "tournament": {
-    "proposal_id": "A_CHECK_THAT_RAN_NOTHING_IS_NOT_A_PASS_20261113_V1",
-    "decisive_question": "Does counting executed tests and admitting the pytest collector make the stood-up check refuse a deliberately broken edit that the legacy exit-code path accepted, while still accepting a genuinely passing project?",
-    "falsifier_id": "THE_REPAIRED_CHECK_ACCEPTS_RETURN_NONE_IN_A_PYTEST_STYLE_PROJECT_OR_REFUSES_A_GENUINELY_PASSING_UNITTEST_PROJECT_OR_AN_EXISTING_CONSUMER_REGRESSES",
-    "known_counterexamples_checked": true,
-    "counterexample_receipts": [
-      {
-        "path": "canonical/tests/test_the_check_is_the_difference_v1.py",
-        "git_blob_sha": "9a65301c92e0b09f2f973fb373a66d197d90bede"
-      },
-      {
-        "path": "canonical/tests/test_across_environments_v1.py",
-        "git_blob_sha": "8daf4ccee6fc2cb2431a39d5a5d2a406d5557930"
-      }
-    ]
-  }
+  "weakens_existing_guard": false
 }

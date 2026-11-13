@@ -162,6 +162,20 @@ objective — and that is with a *good* corpus.
 
 ---
 
+### Independent convergence, arrived at while this was being written
+
+A concurrent branch landed `THE_LAYER_YOU_NAMED_IS_RIGHT_THE_FUEL_IS_MISSING_20261113_V1.md` (PR
+#6850) while this work was in flight. It asked a different question — *what could a weight-space
+layer actually train on?* — and counted the event stream: 305 execution receipts yielding **0**
+trainable units, the 24-record trajectory store yielding 66 units of which **0 verified**. Its
+conclusion: *"the engine is not what is missing, the fuel is."*
+
+Two different instruments, two different directions, same wall. It also surfaced the cost of
+getting the order wrong: TRACE sequential fine-tuning took LLaMA-2 13B GSM8K from **28.8% → 2%**.
+That is what permanently learning a wrong lesson looks like. This round adds the mechanism those
+counts could not see: even the units counted as "verified" were verified by a check that, in the
+affected regime, **ran nothing**.
+
 ## 4. Your "Brutal Truth" analysis, adjudicated
 
 You wrote that our semantic generalization is a limited lookup system, and that real generalization
