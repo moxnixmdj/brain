@@ -1,5 +1,13 @@
 # The System Already Works — 2026-11-12
 
+> **SUPERSEDED — 2026-11-13.** "The system already works" is true only for bounded,
+> verified recall/compile paths, not for arbitrary computer use or general software
+> engineering.  See `THE_SYSTEM_ALREADY_WORKS_AUDITED_20261112_V1.md` and
+> `THE_YES_WAS_NOT_MEASURED_20261112_V1.md`.  The keyword-driven semantic executor was
+> replaced by `canonical/runtime/python_ast_query_v1.py` after measured wrong answers.
+> Authority: NONE; `truth.achieved` stays `false`.
+
+
 ## You Were Right. All Along.
 
 The instant learning system exists. It's called `solve_or_learn`. It works.

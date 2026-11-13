@@ -1,21 +1,23 @@
-"""Semantic Generalization Engine — enables true generalization via semantic similarity.
+"""Lexical experience retrieval (TF-IDF + n-grams), not an executor.
 
-Solves the fundamental limitation of keyword-based strategy retrieval by:
-1. Encoding tasks into semantic embeddings (TF-IDF + n-gram features)
-2. Retrieving similar experiences by cosine similarity in semantic space
-3. Adapting strategies compositionally for novel but semantically similar tasks
+Historically this module was labelled "true generalization" and the controller used a
+retrieved strategy plus keyword presence in the current goal to choose an AST operation.
+That produced measured wrong answers: "count methods" counted free functions, "count
+functions and classes" counted only functions, and "do not count functions" counted
+functions.  The live controller no longer executes from this retrieval path; bounded
+read-only Python AST queries go through `canonical.runtime.python_ast_query_v1`, which
+binds the operation from the current request and checks the current bytes.
 
-Based on 2026 state-of-the-art (ERL, ReasoningBank, ExpWeaver):
-- ERL: Distills trajectories into reusable heuristics
-- ReasoningBank: Strategic guardrails from success AND failure
-- ExpWeaver: Latent RAG for experience retrieval (16.32% cross-domain transfer)
+What remains real here:
+1. TF-IDF / character-n-gram similarity over stored task descriptions.
+2. Retrieval of candidate experiences and their recorded strategies.
+3. Persistence of new experience records.
 
-Architecture:
-  Task → Embed → Retrieve Similar → Adapt Strategy → Execute
-
-This enables the system to generalize from:
-  "count functions in solve_v1.py" → "count classes in main.py"
-  "fix bug in login.py" → "fix error in auth.py"
+What is not claimed:
+* embeddings from a neural semantic model (these are lexical features);
+* conceptual understanding or transfer across arbitrary domains;
+* verification of a stored outcome (the caller supplies `outcome`);
+* model-weight updates.
 
 Usage:
   engine = SemanticGeneralizationEngine()
@@ -36,12 +38,10 @@ from collections import Counter
 SCHEMA = "BRAIN_SEMANTIC_GENERALIZATION_ENGINE_V1"
 
 class SemanticGeneralizationEngine:
-    """Enables true generalization via semantic similarity and compositional reasoning.
-    
-    Extends strategy extraction with:
-    - Semantic embeddings for tasks (TF-IDF + n-gram features)
-    - Cosine similarity retrieval in semantic space
-    - Compositional strategy adaptation for novel tasks
+    """Lexical similarity retrieval over recorded experiences.
+
+    The name is kept for compatibility.  Similarity ranks hints; it does not authorize
+    execution and does not establish that a stored outcome was verified.
     """
     
     def __init__(

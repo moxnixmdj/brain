@@ -1,5 +1,15 @@
 # Proof: Instant Learning System Works
 
+> **SUPERSEDED / NOT A PROOF OF GENERAL SOLUTION — 2026-11-13.**
+> The demonstrations below show bounded recall and fixture-level pattern reuse, not
+> "solve anything on a computer once and keep it permanently."  Later measurements in
+> `THE_YES_WAS_NOT_MEASURED_20261112_V1.md`, `WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT_20261112_V1.md`,
+> and `WHAT_2026_MEASURED_ABOUT_LEARNING_FROM_ONE_RUN_20261112_V1.md` bound the claim.
+> The lexical-similarity executor referenced by this family was removed on 2026-11-13
+> after measured wrong answers; read-only Python AST queries now use the typed adapter
+> `canonical/runtime/python_ast_query_v1.py`.  Authority: NONE; `truth.achieved` stays `false`.
+
+
 ## Demonstration Results
 
 ### Task 1: Real Problem-Solving

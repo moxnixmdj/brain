@@ -538,10 +538,34 @@ def _solve_or_learn_impl(
     )
     if work_cwd != pathlib.Path(__file__).resolve().parents[2]:
         req.setdefault("workspace_root", str(work_cwd))
+
+    def _typed_python_ast_lane() -> dict[str, Any] | None:
+        """Bounded read-only AST adapter. Similarity is never an executor."""
+        if not goal or _has_structured_specialist:
+            return None
+        from canonical.runtime import python_ast_query_v1 as ast_query
+
+        try:
+            typed = ast_query.solve_query(goal, root=work_cwd)
+        except ast_query.PythonAstQueryError as exc:
+            out = ast_query.failure_result(exc)
+            out.update(schema=SCHEMA, task_id=task_id,
+                       elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+            return out
+        if typed is None:
+            return None
+        typed.update(schema=SCHEMA, task_id=task_id, executed=True,
+                     semantic_acceptance_complete=False,
+                     elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+        return typed
+
     if not learn:
         allow_tier2_learning = False
         record_open_gap = False
     if not learn and not _has_structured_specialist:
+        typed = _typed_python_ast_lane()
+        if typed is not None:
+            return typed
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         door_req = dict(req)
@@ -1000,73 +1024,14 @@ def _solve_or_learn_impl(
         }
 
     # ------------------------------------------------------------------
-    # TIER 0A-SEMANTIC (<10 ms): Semantic Generalization - Retrieve Similar
-    #                            Experiences & Adapt Strategies
+    # TIER 0A-TYPED: read-only Python AST queries.
+    # The old lexical-similarity executor is removed: a retrieved strategy may
+    # rank a hint, but it may not choose the operation for the current sentence.
     # ------------------------------------------------------------------
     if learn and recalled is None:
-        try:
-            from canonical.swe_kernel.semantic_generalization_engine_v1 import (
-                SemanticGeneralizationEngine,
-            )
-
-            sem_engine = SemanticGeneralizationEngine()
-            sem_result = sem_engine.generalize_and_solve(goal, top_k=3)
-            
-            if sem_result.get("adapted_strategy") is not None:
-                adapted = sem_result["adapted_strategy"]
-                base_strategy = adapted.get("base_strategy", {})
-                
-                # Try to execute the adapted strategy
-                if base_strategy.get("task_type") == "information_retrieval":
-                    # Apply information retrieval strategy
-                    recommended = base_strategy.get("recommended_actions", [])
-                    if recommended and "read file" in recommended[0].lower():
-                        # This is a file reading task - extract file path from goal
-                        file_match = re.search(r'[\w/.-]+\.py', goal)
-                        if file_match:
-                            file_path = file_match.group(0)
-                            try:
-                                with open(file_path, 'r') as f:
-                                    file_content = f.read()
-                                
-                                # Count based on strategy - check goal for keywords
-                                import ast
-                                tree = ast.parse(file_content)
-                                
-                                if "function" in goal.lower() or "method" in goal.lower() or "subroutine" in goal.lower():
-                                    count = sum(1 for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)))
-                                    return {
-                                        "schema": SCHEMA,
-                                        "task_id": task_id,
-                                        "pass": True,
-                                        "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
-                                        "tier_used": "tier0a_semantic_generalization",
-                                        "from_memory": True,
-                                        "generalization_used": True,
-                                        "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
-                                        "top_similarities": sem_result.get("top_similarities", []),
-                                        "answer": f"Found {count} {'functions' if 'function' in goal.lower() else 'methods'}",
-                                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                                    }
-                                elif "class" in goal.lower():
-                                    count = sum(1 for node in ast.walk(tree) if isinstance(node, ast.ClassDef))
-                                    return {
-                                        "schema": SCHEMA,
-                                        "task_id": task_id,
-                                        "pass": True,
-                                        "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
-                                        "tier_used": "tier0a_semantic_generalization",
-                                        "from_memory": True,
-                                        "generalization_used": True,
-                                        "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
-                                        "top_similarities": sem_result.get("top_similarities", []),
-                                        "answer": f"Found {count} classes",
-                                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                                    }
-                            except Exception:
-                                pass
-        except Exception:
-            pass
+        typed = _typed_python_ast_lane()
+        if typed is not None:
+            return typed
 
     forged_state_path = req.pop("forged_state_path", None)
     macro_state_path = req.pop("macro_state_path", None)

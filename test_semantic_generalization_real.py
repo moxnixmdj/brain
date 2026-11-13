@@ -1,117 +1,63 @@
 #!/usr/bin/env python3
-"""
-Real-world test: Semantic generalization integrated into solve_or_learn.
+"""Honest replacement for the old "Problem 2 is completely solved" demonstration.
 
-This demonstrates that Problem 2 (generalization) is completely solved:
-- Novel task (never seen before)
-- Exact recall fails
-- Semantic generalization retrieves similar experiences
-- Adapts strategy from similar tasks
-- Successfully solves the novel task
-"""
+The former version printed a success banner when a retrieved strategy fired; it did not
+assert that the answer matched the current file.  This version pins the bounded contract
+that actually shipped: a typed, read-only Python AST adapter follows the current request,
+works on an unseen file, and refuses negation.  It does not claim weight updates, sentience,
+or general computer use.
 
+Authority: NONE.  Temp directories only.
+"""
+from __future__ import annotations
+
+import pathlib
 import sys
-import time
-sys.path.insert(0, '/home/user/brain')
+
+ROOT = pathlib.Path(__file__).resolve().parent
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from canonical.swe_kernel.closed_loop_autonomous_controller_v1 import solve_or_learn
 
-def test_semantic_generalization():
-    print("=" * 80)
-    print("TESTING: Semantic Generalization in solve_or_learn")
-    print("=" * 80)
-    print()
-    
-    # Task 1: Exact task we've seen before (should use Tier 0A exact recall)
-    print("TEST 1: Exact recall (baseline)")
-    print("-" * 80)
-    task1 = "Read canonical/runtime/solve_v1.py and count functions"
-    print(f"Task: {task1}")
-    
-    start = time.time()
-    result1 = solve_or_learn(task1, learn=True, confinement_admitted=True)
-    elapsed1 = time.time() - start
-    
-    print(f"Status: {result1.get('status')}")
-    print(f"Tier used: {result1.get('tier_used')}")
-    print(f"From memory: {result1.get('from_memory')}")
-    print(f"Answer: {result1.get('answer')}")
-    print(f"Time: {elapsed1:.3f}s")
-    print()
-    
-    # Task 2: Novel task with different wording (should use semantic generalization)
-    print("TEST 2: Semantic generalization (NOVEL task)")
-    print("-" * 80)
-    task2 = "enumerate subroutines in canonical/runtime/goal_compiler.py"
-    print(f"Task: {task2}")
-    print("Note: Different words ('enumerate subroutines' vs 'count functions')")
-    print("      Different file (goal_compiler.py vs solve_v1.py)")
-    
-    start = time.time()
-    result2 = solve_or_learn(task2, learn=True, confinement_admitted=True)
-    elapsed2 = time.time() - start
-    
-    print(f"Status: {result2.get('status')}")
-    print(f"Tier used: {result2.get('tier_used')}")
-    print(f"From memory: {result2.get('from_memory')}")
-    print(f"Generalization used: {result2.get('generalization_used')}")
-    print(f"Similar experiences: {result2.get('similar_experiences_count')}")
-    print(f"Top similarities: {result2.get('top_similarities')}")
-    print(f"Answer: {result2.get('answer')}")
-    print(f"Time: {elapsed2:.3f}s")
-    print()
-    
-    # Task 3: Another novel task
-    print("TEST 3: Another novel task")
-    print("-" * 80)
-    task3 = "identify methods in canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
-    print(f"Task: {task3}")
-    
-    start = time.time()
-    result3 = solve_or_learn(task3, learn=True, confinement_admitted=True)
-    elapsed3 = time.time() - start
-    
-    print(f"Status: {result3.get('status')}")
-    print(f"Tier used: {result3.get('tier_used')}")
-    print(f"From memory: {result3.get('from_memory')}")
-    print(f"Generalization used: {result3.get('generalization_used')}")
-    print(f"Answer: {result3.get('answer')}")
-    print(f"Time: {elapsed3:.3f}s")
-    print()
-    
-    # Summary
-    print("=" * 80)
-    print("RESULTS SUMMARY")
-    print("=" * 80)
-    print()
-    print(f"Test 1 (Exact recall):")
-    print(f"  ✓ Status: {result1.get('status')}")
-    print(f"  ✓ Tier: {result1.get('tier_used')}")
-    print()
-    
-    gen_success = result2.get('generalization_used', False) or result2.get('status') == 'PASS__TIER0_COMPILED_SKILL_RECALL'
-    print(f"Test 2 (Semantic generalization):")
-    print(f"  {'✓' if gen_success else '✗'} Status: {result2.get('status')}")
-    print(f"  {'✓' if gen_success else '✗'} Tier: {result2.get('tier_used')}")
-    print(f"  {'✓' if gen_success else '✗'} Generalization used: {result2.get('generalization_used')}")
-    print()
-    
-    gen_success3 = result3.get('generalization_used', False) or result3.get('status') == 'PASS__TIER0_COMPILED_SKILL_RECALL'
-    print(f"Test 3 (Another novel task):")
-    print(f"  {'✓' if gen_success3 else '✗'} Status: {result3.get('status')}")
-    print(f"  {'✓' if gen_success3 else '✗'} Tier: {result3.get('tier_used')}")
-    print(f"  {'✓' if gen_success3 else '✗'} Generalization used: {result3.get('generalization_used')}")
-    print()
-    
-    if gen_success or gen_success3:
-        print("✓ PROBLEM 2 SOLVED: Semantic generalization is working in solve_or_learn!")
-        print("✓ Novel tasks are solved by retrieving similar experiences and adapting strategies")
-        return True
-    else:
-        print("✗ Semantic generalization not yet triggered")
-        print("  (May need to seed experience database with more examples)")
-        return False
+PASS_STATUS = "PASS__TIER0A_TYPED_PYTHON_AST_QUERY"
+SOURCE = "class C:\n    def method(self):\n        pass\n\ndef free():\n    if True:\n        pass\n"
 
-if __name__ == "__main__":
-    success = test_semantic_generalization()
-    sys.exit(0 if success else 1)
+
+def _solve(root: pathlib.Path, goal: str):
+    return solve_or_learn(
+        goal,
+        learn=True,
+        cwd=root,
+        db_path=root / "skills.sqlite",
+        r3_state_path=root / "r3.json",
+        allow_tier1_composition=False,
+        allow_tier2_learning=False,
+        allow_jit_network=False,
+        record_open_gap=False,
+        confinement_admitted=True,
+    )
+
+
+def test_typed_ast_adapter_answers_the_current_question(tmp_path, monkeypatch):
+    root = tmp_path / "ws"
+    root.mkdir()
+    monkeypatch.setenv("BRAIN_COGNITIVE_STATE_DIR", str(tmp_path / "cognitive"))
+    (root / "sample.py").write_text(SOURCE, encoding="utf-8")
+    unseen = root / "pkg" / "unseen.py"
+    unseen.parent.mkdir()
+    unseen.write_text(SOURCE, encoding="utf-8")
+
+    methods = _solve(root, "Count methods in sample.py")
+    assert methods["pass"] is True, methods
+    assert methods["status"] == PASS_STATUS, methods
+    assert methods["answer"] == 1, methods
+
+    transferred = _solve(root, "Count if statements in pkg/unseen.py")
+    assert transferred["pass"] is True, transferred
+    assert transferred["answer"] == 1, transferred
+    assert transferred["from_memory"] is False, transferred
+
+    negated = _solve(root, "Do not count functions in sample.py")
+    assert negated["pass"] is False, negated
+    assert negated["status"].startswith("FAIL_CLOSED__PYTHON_AST"), negated
