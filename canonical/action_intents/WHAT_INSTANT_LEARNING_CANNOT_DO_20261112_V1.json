@@ -1,0 +1,227 @@
+{
+ "action_id": "WHAT_INSTANT_LEARNING_CANNOT_DO_20261112_V1",
+ "action_intent_id": "WHAT_INSTANT_LEARNING_CANNOT_DO_20261112_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "The round-12 deliverable. Instant learning is real and is only recall: it makes a verified procedure permanent and does not produce one. Measured at exactly that boundary -- shell.command.run required nothing, scored highest of all candidates (20.0), and was refused on every command sentence behind four defects in series, all repaired in #6813. A fifth defect (nested quotes truncate a program and still report VERIFIED_ACTION) is recorded and pinned rather than hidden.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "causal_evidence": "MEASURED_ON_984b6807__shell_command_run_REQUIRES_NOTHING_AND_SCORES_20_0_YET_EVERY_COMMAND_SENTENCE_WAS_REFUSED_MISSING_ARGV__cli_command_run_WITH_A_CORRECT_ARGV_RETURNED_10_FROM_probe.csv_WITH_output_verified_TRUE__SO_THE_CAPABILITY_WAS_HEALTHY_AND_UNREACHABLE",
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_VERIFIED_BOUND_CAPABILITY_WITH_THE_HIGHEST_KEYWORD_SCORE_IS_REACHABLE__AND_THAT_VERIFIED_ACTION_MEANS_THE_QUESTION_WAS_ANSWERED",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "WHAT_INSTANT_LEARNING_CANNOT_DO_20261112_V1.md",
+   "canonical/tests/test_stated_command_reaches_the_shell_v1.py"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A VERIFIED_BOUND_CAPABILITY with requires:[] and the highest keyword score was unreachable by every sentence that named it, and act() reported the failure as AMBIGUOUS with only zero-score forged survivors -- naming the routing layer when the cause was binding.",
+ "canonical_base_commit": "a89c5bb593af464eea34aa37c1f556289c04ada7",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "A VERIFIED_BOUND_CAPABILITY with requires:[] and the highest keyword score was unreachable by every sentence that named it, and act() reported the failure as AMBIGUOUS with only zero-score forged survivors -- naming the routing layer when the cause was binding.",
+ "date": "2026-11-12",
+ "expected_parent_change": "A stated shell command is executable through the front door for the first time, and the two ways it was being answered wrongly (literal-operand dispatch, keyword reroute) are closed.",
+ "expected_parent_frontier_change": "Front-door reachability of an already-verified capability. No capability registered, no family rank, no benchmark authority.",
+ "explicit_user_authorization": false,
+ "falsification_condition": "If a sentence whose argv is not stated is ever executed, or if any of the 37 touched test files gains a failure against its HEAD baseline, this change is wrong and must be reverted.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__THIS_IS_A_DEFECT_REPAIR_IN_THE_PATH_THAT_EVERY_CODING_AND_COMPUTER_USE_ACTION_TRAVELS__A_MACHINE_THAT_CANNOT_EXECUTE_THE_COMMAND_IT_CORRECTLY_SELECTED_CANNOT_CLAIM_ANY_OF_THOSE_OBLIGATIONS",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Six ordinary tasks refused in round 11 are now performable when the command is STATED; unstated, pipeline and redirection cases all fail closed; 284 -> 275 failures over the 37 touched test files with zero new failures.",
+ "next_step": "Make VERIFIED_ACTION require an effect about the named object -- the awk case proves returncode==0 is not an answer -- then teach the parser to balance quotes, then re-run the census separating coverage gaps from binding gaps.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "recursive_obs": {
+  "canonical_base_commit": "a89c5bb593af464eea34aa37c1f556289c04ada7",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
+   "LEAVE_UNDECIDABLE -- it was being read as false"
+  ],
+  "expected_parent_level_state_change": "Front-door reachability of an already-verified capability. No capability registered, no family rank, no benchmark authority.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "Delete the argv branch",
+    "Bypass world_binding",
+    "Substitute a second command parser"
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC -- world_binding_v1.complete_inputs, composer_route_v1.extract_argv, grounded_action_v1.keyword_candidates.",
+   "surviving_causal_blocker": "Each layer mangled or invented the value the next layer needed, and each downstream refusal was correct about the value it was handed."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "A second command parser",
+    "A listed set of shell rows",
+    "A blanket write_stdout_to_output default"
+   ],
+   "existing_inherited_routes_checked": [
+    "composer_route_v1.extract_argv",
+    "goal_front_compiler_v1.declared_optional_inputs",
+    "declared_argument_default_v1"
+   ],
+   "external_existing_routes_checked": [],
+   "surviving_gap": "Nothing in the tree could state that an argument is not required, and world_binding ignored the declaration the template language already had."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "Add more capabilities to route around the refusal",
+    "Treat coverage census gaps and binding gaps as the same failure"
+   ],
+   "real_outcome": "Owner asks whether instant learning solves everything. Measured today at exactly the boundary: learning makes a VERIFIED procedure permanent, and the machine still could not REACH one it had already verified.",
+   "surviving_necessity": "A capability that is verified, registered and correctly ranked must also be bindable, renderable and declarable before any claim about what the machine can do is true."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "settlement_v1 version-space narrowing",
+    "world_probe_v1 premise perception",
+    "finite_capability_diagnosis.select_probe"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "the assumption that macro_v1's success-only store is a sufficient learning substrate",
+    "the assumption that a declared requires list is always checkable"
+   ],
+   "fresh_reuse_plan": "Any future claim that experience teaches applicability must exhibit at least one negative demonstration and show the surviving space shrinks to one hypothesis."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "Re-measuring the six refused ordinary tasks",
+    "Re-deriving the keyword census"
+   ],
+   "search_stop_decision": "Stopped after five mechanisms because the remaining ones were the same defect at a different layer, and each was measured rather than assumed."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Re-implementing command parsing would fork the rule that keeps an invented command from executing; listing the shell rows would be a second table; defaulting write_stdout_to_output would clobber `sort -o out.txt` with an empty stream.",
+   "routes_ranked": [
+    "REUSE_EXTRACT_ARGV",
+    "TYPE_PRESERVING_RENDER",
+    "HONOUR_DECLARED_OPTIONAL",
+    "REFUSE_SHELL_SYNTAX",
+    "NARROW_TO_RUNNABLE_ROWS"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The effect is the process's own stdout against a fixture with a known answer, and the failure set over 37 touched test files compared with HEAD."
+  },
+  "real_outcome": "A_FORGED_ZERO_SCORE_ROW_NO_LONGER_VETOES_A_DECISIVE_MATCH__AND_VERIFIED_ACTION_IS_NAMED_AS_A_POSTCONDITION_NOT_AN_ANSWER__1_OF_5_AUDITED_VERIFIED_TASKS_ANSWERED_ITS_QUESTION",
+  "required_capability": "A sensor that answers UNKNOWN as its own value, so that a premise nobody can see is not silently counted as false, and a binder that either binds a stated value or reports that it cannot, never neither.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ONLY__NO_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED"
+  },
+  "routes_considered": [
+   "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
+   "ADD_A_NETWORK_PERMISSION",
+   "LEAVE_UNDECIDABLE_AND_DOCUMENT_IT"
+  ],
+  "selected_surviving_route": "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
+  "stop_condition": "TWENTY_FOUR_NEW_TESTS_PASS__AND_THE_FAILURE_SET_OVER_THE_37_TOUCHED_TEST_FILES_IS_A_STRICT_SUBSET_OF_HEAD",
+  "why_selected_route_is_fastest_sufficient": "Both are one function each, both are measured at the front door before and after, and both replace silence with an answer. Neither adds a capability, a permission, or a model."
+ },
+ "route_id": "WHAT_INSTANT_LEARNING_CANNOT_DO_20261112_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "BIND_RENDER_DECLARE_THEN_REFUSE_THE_UNHONOURABLE",
+ "stop_condition": "TWENTY_FOUR_NEW_TESTS_PASS__AND_THE_FAILURE_SET_OVER_THE_37_TOUCHED_TEST_FILES_IS_A_STRICT_SUBSET_OF_HEAD",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "control_plane_gap": "V22_SCHEDULER_ENFORCEMENT_GAP",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "minimum_prerequisite_for": [
+   "EXTERNAL_RESULT_OR_ACCESS",
+   "UNIVERSAL_SCOPE_AND_COMPOSITION",
+   "BEHAVIORAL_QUOTIENT_AND_TRANSFER"
+  ],
+  "mode": "CONTROL_PLANE_PREREQUISITE",
+  "proof_state_reachability": "PREVENTS_A_STATED_COMMAND_FROM_BEING_MISDISPATCHED_AS_A_DIFFERENT_COMMAND_AND_PREVENTS_A_KEYWORD_SHARED_WITH_A_TOOL_NAME_FROM_ANSWERING_A_SHELL_REQUEST",
+  "target_truth_obligations": [
+   "GLOBAL_SCHEDULER_ENFORCEMENT_FOR_ALL_32_OPEN_TRUTH_OBLIGATIONS"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/world_binding_v1.py",
+     "git_blob_sha": "8d9cdd5caadc10c1945217992a4869e2d70890e1"
+    },
+    {
+     "path": "canonical/runtime/composer_route_v1.py",
+     "git_blob_sha": "fa4dd9063c3ee235ca20cb2b6c10c93c7a788859"
+    },
+    {
+     "path": "canonical/runtime/grounded_action_v1.py",
+     "git_blob_sha": "17e5e4934de0ba035e8a8a55c7c097f1b781a34a"
+    }
+   ],
+   "decisive_question": "Can a sentence that states a shell command execute exactly that command end to end, and does every sentence that states no runnable command still fail closed?",
+   "falsifier_id": "F_STATE_A_COMMAND_AND_SEE_WHETHER_EXACTLY_IT_RUNS",
+   "known_counterexamples_checked": true,
+   "proposal_id": "P_STATED_COMMAND_IS_UNREACHABLE_BEHIND_FOUR_LAYERS"
+  }
+ },
+ "weakens_existing_guard": false
+}
