@@ -34,8 +34,8 @@
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
-   "canonical/verification/WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_20261112_V1.json",
-   "WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_20261112_V1.md"
+   "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
+   "WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.md"
   ],
   "route_class": "REUSE",
   "producer_cognition_model_dependency_count": 0,
