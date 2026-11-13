@@ -53,10 +53,15 @@ conflated:
 THE TWO VERDICTS ARE NOT EQUALLY STRONG, AND THE OUTPUT SAYS SO
 ---------------------------------------------------------------
 `DIVERGES` is a WITNESSED COUNTEREXAMPLE: one concrete input, executed by both toolchains, on which
-they disagree. Nothing can argue with it. `SAME` is only a FAILURE TO REFUTE on that one probe --
-`%` agrees for positive operands and disagrees for negative ones, so "agreed here" never means
-"equivalent". Every row therefore carries `strength`, and a caller that needs certainty in the
-permissive direction cannot get it from this module and should not pretend to.
+they disagree. Nothing can argue with it. `SAME` is only a FAILURE TO REFUTE on that one probe, and
+that is not a caveat -- it is demonstrably the case here. `%` agrees for positive operands and
+disagrees for negative ones. `+` reports SAME on `-7 + 3`, yet executed on sequence operands
+`[] + [1]` is the list `[1]` in Python and the STRING `"1"` in JavaScript, and `b += [1]` mutates an
+alias in Python while rebinding to a string in JavaScript. Every row therefore carries `strength` and
+the exact `text` that was run, and a caller needing certainty in the permissive direction cannot get
+it from this module and should not pretend to. One probe per operator is a deliberate bound: more
+probes would refute more, and a probe that does not compile in one language (no `[] + [1]` in C++)
+must not be allowed to poison that operator's verdict everywhere.
 
 WHAT IT DOES NOT SAY
 --------------------
@@ -87,6 +92,7 @@ SAME = "SAME__BOTH_EXECUTED_AND_AGREED"
 DIVERGES = "DIVERGES__BOTH_EXECUTED_AND_DIFFERED"
 UNDECIDED = "UNDECIDED_NO_TOOLCHAIN"
 NOT_AN_OPERATOR = "NOT_AN_OPERATOR_IN_LANGUAGE"
+NO_QUESTION = "UNDECIDED_NO_EXECUTABLE_QUESTION_FOR_THIS_OPERATOR"
 
 #: The languages this tree generalizes across, per operator_generalization_v1's own comment, plus
 #: the executable name that stands for each family.
@@ -107,6 +113,7 @@ STRENGTH: dict[str, str] = {
     DIVERGES: "WITNESSED_COUNTEREXAMPLE",
     UNDECIDED: "NOTHING_EXECUTED",
     NOT_AN_OPERATOR: "TOOLCHAIN_REFUSED_THE_TOKEN",
+    NO_QUESTION: "NOTHING_EXECUTED",
 }
 
 #: One source text per operator, evaluated as written by each language. `kind` decides how the
@@ -168,6 +175,9 @@ def _probe_text(op: str, language: str) -> tuple[str, str]:
 def run_probe(op: str, language: str) -> dict[str, Any]:
     """Execute one operator's probe in one language and report what that language said."""
     binary = toolchain(language)
+    if op not in PROBES:
+        return {"language": language, "operator": op, "ran": False,
+                "verdict": NO_QUESTION, "reason": "NO_EXECUTABLE_QUESTION_FOR_" + op}
     text, kind = _probe_text(op, language)
     if binary is None:
         return {"language": language, "operator": op, "ran": False,
@@ -284,7 +294,15 @@ def may_generalize(op: str, *, taught_in: str, proposed_in: str) -> dict[str, An
         if alias:
             out["via_alias"] = alias
         return out
-    sem = semantics(op)
+    sem = semantics(op) if op in PROBES else None
+    if sem is None:
+        # No executable question exists for this token, and it may NOT inherit the verdict of the
+        # operator it is spelled from: `b += [2]` mutates the alias `b` shares in Python while
+        # `b = b + [2]` rebinds and leaves it alone, so `+=` is not `+` even in one language.
+        # Inferring here would be exactly the guess this module exists to refuse.
+        return {**base, "allowed": False, "basis": NO_QUESTION, "strength": STRENGTH[UNDECIDED],
+                "reason": "NO_EXECUTABLE_QUESTION_FOR_" + op
+                          + "__AND_A_COMPOUND_OPERATOR_MAY_NOT_INHERIT_ITS_BASE"}
     if t_exec in sem["not_an_operator_in"] or p_exec in sem["not_an_operator_in"]:
         return {**base, "allowed": False, "basis": NOT_AN_OPERATOR,
                 "strength": STRENGTH[NOT_AN_OPERATOR], "observations": sem["observations"]}

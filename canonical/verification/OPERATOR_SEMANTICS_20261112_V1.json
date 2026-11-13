@@ -1,0 +1,531 @@
+{
+ "authority": "NONE__PRODUCER_RUN_MEASUREMENT_ON_THIS_SANDBOX_NOT_A_LANGUAGE_STANDARD",
+ "crash_found_by_composing_with_main": {
+  "after_the_fix": {
+   "python": {
+    "candidates": 1,
+    "raised": null
+   },
+   "typescript": {
+    "candidates": 0,
+    "raised": null
+   }
+  },
+  "defect_before_the_fix": "KeyError: '%=' on any cross-language proposal of an augmented swap",
+  "note": "the gate now governs the augmented swaps too, because it is applied inside the loop over the augmented swap list rather than beside it.",
+  "what_main_added": "`aug_eligible = {\"+\", \"-\", \"*\", \"/\", \"%\"}` in propose_operator_swaps synthesises `%=`/`/=` swaps, bypassing GENERALIZABLE with a second frozen set and no semantic check.",
+  "why_a_compound_operator_may_not_inherit_its_base": "executed: `b += [2]` mutates the alias in Python, `b = b + [2]` rebinds and leaves it; and `[] + [1]` is a list in Python and a string in JavaScript."
+ },
+ "frozen_list_audit": {
+  "entries_audited": 18,
+  "per_entry": [
+   {
+    "observations": {
+     "cxx": "true",
+     "javascript": "true",
+     "python": "true"
+    },
+    "operator": "!=",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "-1",
+     "javascript": "-1",
+     "python": "2"
+    },
+    "operator": "%",
+    "strength": "WITNESSED_COUNTEREXAMPLE",
+    "verdict": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED"
+   },
+   {
+    "observations": {
+     "cxx": "false",
+     "javascript": "false",
+     "python": "false"
+    },
+    "operator": "&&",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "-21",
+     "javascript": "-21",
+     "python": "-21"
+    },
+    "operator": "*",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "-4",
+     "javascript": "-4",
+     "python": "-4"
+    },
+    "operator": "+",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "-10",
+     "javascript": "-10",
+     "python": "-10"
+    },
+    "operator": "-",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": null,
+    "operator": "..",
+    "strength": null,
+    "verdict": "NOT_PROBED__NO_EXECUTABLE_QUESTION_FOR_IT"
+   },
+   {
+    "observations": null,
+    "operator": "..=",
+    "strength": null,
+    "verdict": "NOT_PROBED__NO_EXECUTABLE_QUESTION_FOR_IT"
+   },
+   {
+    "observations": {
+     "cxx": "3",
+     "javascript": "3.5",
+     "python": "3.5"
+    },
+    "operator": "/",
+    "strength": "WITNESSED_COUNTEREXAMPLE",
+    "verdict": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED"
+   },
+   {
+    "observations": {
+     "cxx": "true",
+     "javascript": "true",
+     "python": "true"
+    },
+    "operator": "<",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "true",
+     "javascript": "true",
+     "python": "true"
+    },
+    "operator": "<=",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "false",
+     "javascript": "false",
+     "python": "false"
+    },
+    "operator": "==",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "false",
+     "javascript": "false",
+     "python": "false"
+    },
+    "operator": ">",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "false",
+     "javascript": "false",
+     "python": "false"
+    },
+    "operator": ">=",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "false",
+     "javascript": "false",
+     "python": "false"
+    },
+    "operator": "and",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "false",
+     "javascript": "false",
+     "python": "false"
+    },
+    "operator": "not",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "true",
+     "javascript": "true",
+     "python": "true"
+    },
+    "operator": "or",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   },
+   {
+    "observations": {
+     "cxx": "true",
+     "javascript": "true",
+     "python": "true"
+    },
+    "operator": "||",
+    "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+    "verdict": "SAME__BOTH_EXECUTED_AND_AGREED"
+   }
+  ],
+  "refuted_by_execution": [
+   "%",
+   "/"
+  ]
+ },
+ "gate_matrix": [
+  {
+   "allowed": true,
+   "basis": "WITHIN_LANGUAGE__NO_CROSS_LANGUAGE_CLAIM_NEEDED",
+   "operator": "%",
+   "proposed_in": "python",
+   "strength": "STRUCTURAL__MEANING_CANNOT_DIFFER_FROM_ITSELF",
+   "taught_in": "python"
+  },
+  {
+   "allowed": false,
+   "basis": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED",
+   "operator": "%",
+   "proposed_in": "javascript",
+   "strength": "WITNESSED_COUNTEREXAMPLE",
+   "taught_in": "python"
+  },
+  {
+   "allowed": false,
+   "basis": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED",
+   "operator": "%",
+   "proposed_in": "typescript",
+   "strength": "WITNESSED_COUNTEREXAMPLE",
+   "taught_in": "python",
+   "via_alias": {
+    "typescript": "typescript"
+   }
+  },
+  {
+   "allowed": false,
+   "basis": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED",
+   "operator": "%",
+   "proposed_in": "rust",
+   "strength": "WITNESSED_COUNTEREXAMPLE",
+   "taught_in": "python",
+   "via_alias": {
+    "rust": "rust"
+   }
+  },
+  {
+   "allowed": false,
+   "basis": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED",
+   "operator": "%",
+   "proposed_in": "go",
+   "strength": "WITNESSED_COUNTEREXAMPLE",
+   "taught_in": "python",
+   "via_alias": {
+    "go": "go"
+   }
+  },
+  {
+   "allowed": true,
+   "basis": "SAME__BOTH_EXECUTED_AND_AGREED",
+   "operator": "/",
+   "proposed_in": "javascript",
+   "strength": "WITNESSED_COUNTEREXAMPLE",
+   "taught_in": "python"
+  },
+  {
+   "allowed": false,
+   "basis": "DIVERGES__BOTH_EXECUTED_AND_DIFFERED",
+   "operator": "/",
+   "proposed_in": "rust",
+   "strength": "WITNESSED_COUNTEREXAMPLE",
+   "taught_in": "python",
+   "via_alias": {
+    "rust": "rust"
+   }
+  },
+  {
+   "allowed": true,
+   "basis": "SAME__BOTH_EXECUTED_AND_AGREED",
+   "operator": "<=",
+   "proposed_in": "typescript",
+   "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+   "taught_in": "python",
+   "via_alias": {
+    "typescript": "typescript"
+   }
+  },
+  {
+   "allowed": true,
+   "basis": "SAME__BOTH_EXECUTED_AND_AGREED",
+   "operator": "<=",
+   "proposed_in": "rust",
+   "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+   "taught_in": "python",
+   "via_alias": {
+    "rust": "rust"
+   }
+  },
+  {
+   "allowed": true,
+   "basis": "SAME__BOTH_EXECUTED_AND_AGREED",
+   "operator": "+",
+   "proposed_in": "javascript",
+   "strength": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+   "taught_in": "python"
+  },
+  {
+   "allowed": false,
+   "basis": "UNDECIDED_NO_EXECUTABLE_QUESTION_FOR_THIS_OPERATOR",
+   "operator": "+=",
+   "proposed_in": "javascript",
+   "strength": "NOTHING_EXECUTED",
+   "taught_in": "python"
+  },
+  {
+   "allowed": false,
+   "basis": "UNDECIDED_NO_EXECUTABLE_QUESTION_FOR_THIS_OPERATOR",
+   "operator": "%=",
+   "proposed_in": "typescript",
+   "strength": "NOTHING_EXECUTED",
+   "taught_in": "python"
+  },
+  {
+   "allowed": false,
+   "basis": "UNDECIDED_NO_TOOLCHAIN",
+   "operator": "==",
+   "proposed_in": "haskell",
+   "strength": "NOTHING_EXECUTED",
+   "taught_in": "python"
+  }
+ ],
+ "generated_at_utc": "2026-11-13T00:19:01Z",
+ "generated_by": "canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json generator (producer run)",
+ "measurement": {
+  "batch_regression_comparison": {
+   "all_9_failures_reproduced_on_unmodified_code": true,
+   "baseline_without_this_change": {
+    "errors": 7,
+    "failed": 9,
+    "passed": 505
+   },
+   "command": "pytest -q --continue-on-collection-errors over the 45 suites importing this machinery",
+   "verdict": "identical failures and identical errors; passing tests +16, which is exactly the 15 new tests plus the one shipped-corpus test split into two",
+   "with_this_change": {
+    "errors": 7,
+    "failed": 9,
+    "passed": 521
+   }
+  },
+  "declaration_floor": {
+   "exit_code": 0,
+   "verdict_line": "HELD: declaring_none 595 == floor 595"
+  },
+  "mutations": {
+   "detail": [
+    "M1_unwiden_the_rust_range_operators          KILLED     2 failed, 71 passed in 7.43s",
+    "M2_gate_always_allows                        KILLED     10 failed, 63 passed in 7.60s",
+    "M3_gate_always_refuses                       KILLED     20 failed, 53 passed in 7.34s",
+    "M4_proposer_ignores_the_gate                 KILLED     2 failed, 71 passed in 7.58s",
+    "M5_gate_reports_everything_allowed           KILLED     2 failed, 71 passed in 7.23s",
+    "M6_verdict_never_diverges                    KILLED     2 failed, 71 passed in 7.42s",
+    "M7_no_normalisation_of_bool_spellings        KILLED     4 failed, 69 passed in 7.53s",
+    "M8_strengths_collapsed                       KILLED     1 failed, 72 passed in 7.38s",
+    "M9_unknown_language_resolves_to_python       KILLED     2 failed, 71 passed in 7.73s",
+    "M10_audit_skips_the_two_refuted_entries      KILLED     1 failed, 72 passed in 7.55s",
+    "M11_compound_operator_inherits_its_base      KILLED     2 failed, 71 passed in 7.87s"
+   ],
+   "exit_code": 0,
+   "harness": "/tmp/mutateE.py",
+   "killed": 11,
+   "suite_green_before_and_after": "73 passed both times; sources byte-identical to pristine",
+   "survived": 0
+  },
+  "round_d_ledger_unmoved": {
+   "exit_code": 0,
+   "note": "the ledger's GENERALIZING label is about applicability_v1 states, not about derive_operator_swap, so this change does not move it",
+   "observed": {
+    "may be": "0",
+    "skills measured": "5"
+   }
+  },
+  "test_suites": {
+   "exit_code": 0,
+   "suites": [
+    "canonical/tests/test_operator_semantics_v1.py",
+    "canonical/tests/test_shipped_skill_memory_v1.py",
+    "canonical/tests/test_operator_generalization_v1.py",
+    "canonical/tests/test_boundary_disjunction_normalization_v1.py",
+    "canonical/tests/test_invalidation_enforcement_v1.py",
+    "canonical/tests/test_skill_scope_ledger_v1.py"
+   ],
+   "summary": "99 passed in 7.92s"
+  }
+ },
+ "runtime_seconds": 116.81,
+ "schema": "PROJECT_BRAIN_OPERATOR_SEMANTICS_VERIFICATION_V1",
+ "shipped_corpus": {
+  "bundle": "canonical/astra_runtime/skills/VERIFIED_SKILLS_BUNDLE_V1.json",
+  "generalizable_after_this_change": 3,
+  "generalizable_before_this_change": 2,
+  "per_rule": [
+   {
+    "error_class": "python_test_repair",
+    "generalizable": true,
+    "language": "python",
+    "reason": "SINGLE_OPERATOR_DIFFERENCE",
+    "skill_id": "skill_5b30b7cd667d062d",
+    "swap": {
+     "from": "+",
+     "to": "-"
+    },
+    "token_length_differs": false
+   },
+   {
+    "error_class": "python_test_repair",
+    "generalizable": true,
+    "language": "python",
+    "reason": "SINGLE_OPERATOR_DIFFERENCE",
+    "skill_id": "skill_5e717ccbddc250f9",
+    "swap": {
+     "from": "-",
+     "to": "+"
+    },
+    "token_length_differs": false
+   },
+   {
+    "error_class": "go_repair",
+    "generalizable": false,
+    "language": "go",
+    "reason": "NOT_A_SINGLE_OPERATOR_DIFFERENCE",
+    "skill_id": "skill_72276765c53ffea4",
+    "swap": null,
+    "token_length_differs": true
+   },
+   {
+    "error_class": "ts_repair",
+    "generalizable": false,
+    "language": "typescript",
+    "reason": "NOT_A_SINGLE_OPERATOR_DIFFERENCE",
+    "skill_id": "skill_9df30abeb867023c",
+    "swap": null,
+    "token_length_differs": true
+   },
+   {
+    "error_class": "rust_repair",
+    "generalizable": true,
+    "language": "rust",
+    "reason": "SINGLE_OPERATOR_DIFFERENCE",
+    "skill_id": "skill_f8b41c7e705cda49",
+    "swap": {
+     "from": "..=",
+     "to": ".."
+    },
+    "token_length_differs": false
+   }
+  ],
+  "rules": 5,
+  "the_two_that_remain_are_not_operator_lessons": [
+   {
+    "language": "go",
+    "reason": "NOT_A_SINGLE_OPERATOR_DIFFERENCE",
+    "token_length_differs": true
+   },
+   {
+    "language": "typescript",
+    "reason": "NOT_A_SINGLE_OPERATOR_DIFFERENCE",
+    "token_length_differs": true
+   }
+  ]
+ },
+ "the_defect": {
+  "two_questions_one_list": {
+   "Q1_structural_language_local": "is this token an operator whose swap is a lesson at all?",
+   "Q2_semantic_pair_relative": "does it mean the same thing in the language being proposed in?",
+   "why_a_flat_set_cannot_answer_Q2": "Q2's answer differs per language PAIR: `/` is sound python->javascript and unsound python->rust, so no absolute membership test can express it."
+  },
+  "what_computed_it_before": "nothing",
+  "what_it_claimed": "operators in GENERALIZABLE mean the same thing across python/go/rust/typescript/java/cpp",
+  "where": "canonical/swe_kernel/operator_generalization_v1.py GENERALIZABLE",
+  "why_it_matters": "GENERALIZABLE decides whether the only module that widens a crystallized lesson past its taught skeleton may widen it at all, so it sits on the critical path of Problem 2 (generalization).",
+  "wrong_in_both_directions": {
+   "too_narrow": "`..=`/`..` were off it, so the shipped rust lesson was refused by an enumeration nobody derived.",
+   "unsound": "`%` and `/` were on the list, so a Python lesson could be proposed in TypeScript and change what the program computes."
+  }
+ },
+ "the_unblocked_lesson_reaches_a_file_it_was_never_taught_on": {
+  "correct": true,
+  "proposals": [
+   "fn total(v: &Vec<i32>) -> usize {\n    for i in 0..v.len() {\n        use_(i);\n    }\n    0\n}\n"
+  ],
+  "rule_language": "rust",
+  "swap": {
+   "from": "..=",
+   "to": ".."
+  },
+  "victim": "fn total(v: &Vec<i32>) -> usize {\n    for i in 0..=v.len() {\n        use_(i);\n    }\n    0\n}\n"
+ },
+ "title": "What an operator means is a computation, not a membership test",
+ "toolchains_present": {
+  "cxx": true,
+  "javascript": true,
+  "python": true
+ },
+ "verdict_asymmetry": {
+  "diverges": "WITNESSED_COUNTEREXAMPLE",
+  "same": "FAILURE_TO_REFUTE_ON_ONE_PROBE",
+  "why_it_is_not_decoration": {
+   "consequence": "SAME is a failure to refute one probe, so the permissive direction of this gate is never a proof and is labelled as such in every row.",
+   "percent": "`%` agrees for positive operands and disagrees for negative ones.",
+   "plus": "`+` reports SAME on `-7 + 3`, yet `[] + [1]` is the list [1] in Python and the STRING \"1\" in JavaScript, and `b += [1]` mutates an alias in Python while rebinding to a string in JavaScript. Both executed here."
+  }
+ },
+ "what_is_not": [
+  "That SAME proves equivalence. It is one probe not refuted; `+` is a witnessed counterexample to treating it as a proof.",
+  "That go, rust and java were executed. They are answered by a family stand-in and every such verdict records `via_alias`; a language with no stand-in is refused, never guessed.",
+  "That a widened proposal is correct. Every proposal is still a candidate and the caller's verifier decides; neither module exposes an acceptance surface.",
+  "That Problem 2 is solved. 3 of 5 shipped skills can now be widened where 2 could, and the records still carry no states, so applicability_v1 still identifies no boundary: the ledger is unchanged at 5 EXACT_MATCH_ONLY.",
+  "That `_DUALS` is fixed. It is still a 4-key table; it is incomplete rather than unsound, because derive_swap_family falls back to the direct form, and it is named here as remaining."
+ ],
+ "what_is_real": [
+  "`%` and `/` were on a list claiming cross-language equivalence, and execution refutes it.",
+  "A shipped rust lesson differing by exactly one operator token was unreachable by the only module that widens lessons; it is reachable now and reaches a file it was never taught on.",
+  "The gate is wired into the proposer and into a production call site that had no language guard.",
+  "Composing the gate with main's new augmentation exposed a KeyError crash, now refused by name."
+ ],
+ "wiring": {
+  "other_callers": [
+   "canonical/swe_kernel/verified_skill_crystallizer_v1.py:1508",
+   "canonical/swe_kernel/cow_impact_repair_engine_v1.py:172"
+  ],
+  "reachable_in_production": {
+   "call_site": "canonical/swe_kernel/rule_scope_learning_v1.py",
+   "code": "language = str(instance.get(\"language\") or rule.get(\"language\") or \"python\")",
+   "line": 130,
+   "the_asymmetry_it_exposes": "SCOPE_STATEMENT guards `if language != rule.language: return SILENT` while SCOPE_OPERATOR passed the instance's language straight into propose_operator_swaps with no guard at all."
+  },
+  "the_gate_is_not_decorative": "applied inside propose_operator_swaps, so a refused swap produces no candidate at all; mutation M4 proves it."
+ }
+}

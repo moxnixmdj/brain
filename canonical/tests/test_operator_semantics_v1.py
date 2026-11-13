@@ -188,6 +188,48 @@ def test_explain_rule_names_the_refusal_instead_of_only_the_mismatch():
 
 
 # --------------------------------------------------------------------------- discipline
+def test_an_augmented_swap_is_gated_by_name_rather_than_crashing():
+    """`aug_eligible` in the proposer synthesises `%=`/`/=` swaps that bypass `GENERALIZABLE`.
+
+    Those compound tokens have no executable probe, and before this the gate raised `KeyError: '%='`
+    on any cross-language call -- a crash introduced by composing the augmentation with the gate.
+    The refusal must be named, and it must still work within the language the rule was taught in.
+    """
+    rule = {
+        "language": "python",
+        "pattern_tokens": [["hole_id", "?a"], ["ws", " "], ["op", "%"], ["ws", " "], ["hole_id", "?b"]],
+        "replacement_tokens": [["hole_id", "?a"], ["ws", " "], ["op", "/"], ["ws", " "], ["hole_id", "?b"]],
+    }
+    py = "def f(a, b):\n    a %= b\n    return a\n"
+    got = list(gen.propose_operator_swaps(py, rule, language="python"))
+    assert any("a /= b" in c for c in got), got
+
+    ts = "function f(a, b) { a %= b; return a; }\n"
+    assert list(gen.propose_operator_swaps(ts, rule, language="typescript")) == []
+
+    r = sem.may_generalize("%=", taught_in="python", proposed_in="typescript")
+    assert r["allowed"] is False
+    assert r["basis"] == sem.NO_QUESTION
+    assert "MAY_NOT_INHERIT" in r["reason"]
+
+
+def test_a_compound_operator_may_not_inherit_its_base_verdict():
+    """`+` is not refuted on a numeric probe, but `+=` is a different operator.
+
+    Executed: in Python `b += [2]` mutates the list `b` is an alias of, while `b = b + [2]` rebinds
+    and leaves that alias alone -- so the permissive verdict for `+` cannot be reused for `+=` even
+    inside one language, let alone across two. That is why an unprobed token refuses cross-language
+    instead of borrowing its base's answer.
+    """
+    assert sem.may_generalize("+", taught_in="python", proposed_in="python")["allowed"] is True
+    assert sem.may_generalize("+=", taught_in="python", proposed_in="python")["allowed"] is True
+    cross = sem.may_generalize("+=", taught_in="python", proposed_in="javascript")
+    assert cross["allowed"] is False
+    assert cross["basis"] == sem.NO_QUESTION
+    # And probing an unprobed token directly reports itself unobserved rather than raising.
+    assert sem.run_probe("%=", "python")["verdict"] == sem.NO_QUESTION
+
+
 def test_neither_module_exposes_an_acceptance_surface():
     """A gate decides what may be PROPOSED; the caller's verifier still decides what is accepted."""
     for mod in (sem, gen):
