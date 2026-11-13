@@ -1,0 +1,534 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "by_rung": {
+  "as_it_was": 12,
+  "both_open": 7,
+  "names_open": 3,
+  "untouched_open": 12
+ },
+ "check": "tests",
+ "check_reasons": {
+  "CHECK_DEPENDENCY_MISSING": 6,
+  "CHECK_FAILS_ON_THE_ORIGINAL": 3,
+  "CHECK_NO_TEST_MODULE": 3
+ },
+ "check_unavailable_pairs": 132,
+ "generated_utc": "2026-11-13T01:31:21Z",
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "oracle_when_one_exists": {
+  "arms": {
+   "pkg/edges.py": {
+    "check_available": true,
+    "check_strength": {
+     "passes_a_wrong_edit_that_satisfies_it": null,
+     "wrong_edits_tried": 3
+    },
+    "with_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    },
+    "without_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    }
+   },
+   "pkg/inclusive.py": {
+    "check_available": true,
+    "check_strength": {
+     "passes_a_wrong_edit_that_satisfies_it": null,
+     "wrong_edits_tried": 3
+    },
+    "with_a_check": {
+     "edited": false,
+     "is_the_correct_edit": true
+    },
+    "without_a_check": {
+     "edited": true,
+     "is_the_correct_edit": false
+    }
+   },
+   "pkg/limits.py": {
+    "check_available": true,
+    "check_strength": {
+     "passes_a_wrong_edit_that_satisfies_it": "return x > hi",
+     "wrong_edits_tried": 3
+    },
+    "with_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    },
+    "without_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    }
+   }
+  },
+  "constructed": true
+ },
+ "pairs": 132,
+ "per_task": [
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "missing_modules": [],
+   "name": "ArduPilot/MAVProxy#1623",
+   "path_reasons": {},
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "standing": {
+    "attempted": false,
+    "detail": "",
+    "outcome": "NOT_NEEDED",
+    "source": null
+   },
+   "test_entry_candidates": 0,
+   "test_entry_confidence": "NONE",
+   "test_module": null,
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "missing_modules": [
+    "azure"
+   ],
+   "name": "Azure/azure-cli-extensions#8010",
+   "path_reasons": {
+    "NO_DECLARED_DEPENDENCIES": 32
+   },
+   "right_any_rung": 6,
+   "right_exact": 16,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "NO_DECLARED_DEPENDENCIES",
+    "source": null
+   },
+   "test_entry_candidates": 3,
+   "test_entry_confidence": "DIRECT",
+   "test_module": "src.ssh.azext_ssh.tests.latest.test_custom",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "missing_modules": [
+    "PyQt5",
+    "pytest",
+    "foqus_lib.version.version"
+   ],
+   "name": "CCSI-Toolset/FOQUS#1002",
+   "path_reasons": {
+    "CHECK_NO_TEST_MODULE": 32,
+    "INSTALL_FAILED": 71,
+    "STILL_MISSING_AFTER_STANDING": 5
+   },
+   "right_any_rung": 12,
+   "right_exact": 3,
+   "standing": {
+    "attempted": true,
+    "detail": "ERROR: file:///home/user/brain (from -r /tmp/rung-check-2dgmz1eg/requirements-dev.txt (line 32)) does not appear to be a Python project: neither 'setup.py' nor 'pyproject.toml' found.\n",
+    "outcome": "INSTALL_FAILED",
+    "repair_failures": {
+     "foqus_lib": "ERROR: Could not find a version that satisfies the requirement foqus_lib (from versions: none)\nERROR: No matching distribution found for foqus_lib\n"
+    },
+    "repaired": [
+     "pyqt5",
+     "pytest"
+    ],
+    "source": "requirements_txt"
+   },
+   "test_entry_candidates": 1,
+   "test_entry_confidence": "DIRECT",
+   "test_module": "foqus_lib.gui.tests.test_uq",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "missing_modules": [
+    "test.integration_tests"
+   ],
+   "name": "FZJ-IEK3-VSA/ActivityAssure#2",
+   "path_reasons": {
+    "STILL_MISSING_AFTER_STANDING": 56
+   },
+   "right_any_rung": 6,
+   "right_exact": 8,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "STOOD",
+    "repair_failures": {
+     "test": "ERROR: Could not find a version that satisfies the requirement test (from versions: none)\nERROR: No matching distribution found for test\n"
+    },
+    "source": "requirements_txt"
+   },
+   "test_entry_candidates": 1,
+   "test_entry_confidence": "INDIRECT",
+   "test_module": "test.integration_tests.test_input_data_processing",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 3,
+   "missing_modules": [
+    "aexpect",
+    "avocado"
+   ],
+   "name": "avocado-framework/avocado-vt#2887",
+   "path_reasons": {},
+   "right_any_rung": 0,
+   "right_exact": 14,
+   "standing": {
+    "attempted": true,
+    "detail": "\n      error: command '/usr/bin/x86_64-linux-gnu-gcc' failed with exit code 1\n      [end of output]\n  \n  note: This error originates from a subprocess, and is likely not a problem with pip.\nerror: legacy-install-failure\n\n\u00d7 Encountered error while trying to install package.\n\u2570\u2500> netifaces\n\nnote: This is an issue with the package mentioned above, not pip.\nhint: See above for output from the failure.\n",
+    "outcome": "INSTALL_FAILED",
+    "repaired": [
+     "aexpect"
+    ],
+    "source": "requirements_txt"
+   },
+   "test_entry_candidates": 1,
+   "test_entry_confidence": "INDIRECT",
+   "test_module": "selftests.unit.test_env_process",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_FAILS_ON_THE_ORIGINAL",
+   "files": 4,
+   "missing_modules": [
+    "numpy"
+   ],
+   "name": "cta-observatory/pyirf#289",
+   "path_reasons": {},
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "STOOD",
+    "source": "setup_py"
+   },
+   "test_entry_candidates": 6,
+   "test_entry_confidence": "DIRECT",
+   "test_module": "pyirf.tests.test_utils",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "missing_modules": [
+    "django"
+   ],
+   "name": "jodal/comics#652",
+   "path_reasons": {
+    "CHECK_NO_TEST_MODULE": 10
+   },
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "standing": {
+    "attempted": true,
+    "detail": " 5.0.11, 5.0.12, 5.0.13, 5.0.14, 5.1a1, 5.1b1, 5.1rc1, 5.1, 5.1.1, 5.1.2, 5.1.3, 5.1.4, 5.1.5, 5.1.6, 5.1.7, 5.1.8, 5.1.9, 5.1.10, 5.1.11, 5.1.12, 5.1.13, 5.1.14, 5.1.15, 5.2a1, 5.2b1, 5.2rc1, 5.2, 5.2.1, 5.2.2, 5.2.3, 5.2.4, 5.2.5, 5.2.6, 5.2.7, 5.2.8, 5.2.9, 5.2.10, 5.2.11, 5.2.12, 5.2.13, 5.2.14, 5.2.15, 5.2.16, 5.2.17, 5.2.18, 5.2.19)\nERROR: No matching distribution found for django<7,>=6.0.6\n",
+    "outcome": "INSTALL_FAILED",
+    "repaired": [
+     "django"
+    ],
+    "source": "pyproject"
+   },
+   "test_entry_candidates": 0,
+   "test_entry_confidence": "NONE",
+   "test_module": null,
+   "wrong_any_rung": 6,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "missing_modules": [
+    "django"
+   ],
+   "name": "learning-unlimited/django-argcache#5",
+   "path_reasons": {
+    "CHECK_NO_TEST_MODULE": 48
+   },
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "STOOD",
+    "repaired": [
+     "django"
+    ],
+    "source": "setup_py"
+   },
+   "test_entry_candidates": 0,
+   "test_entry_confidence": "NONE",
+   "test_module": null,
+   "wrong_any_rung": 13,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "missing_modules": [
+    "graphene"
+   ],
+   "name": "openimis/openimis-be-core_py#414",
+   "path_reasons": {},
+   "right_any_rung": 0,
+   "right_exact": 246,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "STOOD",
+    "source": "setup_py"
+   },
+   "test_entry_candidates": 8,
+   "test_entry_confidence": "DIRECT",
+   "test_module": "core.calendars.test_ne_calendar",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_FAILS_ON_THE_ORIGINAL",
+   "files": 3,
+   "missing_modules": [
+    "django"
+   ],
+   "name": "scoursen/django-softdelete#114",
+   "path_reasons": {
+    "CHECK_NO_TEST_MODULE": 32
+   },
+   "right_any_rung": 0,
+   "right_exact": 97,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "NO_DECLARED_DEPENDENCIES",
+    "repaired": [
+     "django"
+    ],
+    "source": null
+   },
+   "test_entry_candidates": 3,
+   "test_entry_confidence": "DIRECT",
+   "test_module": "softdelete.tests.test_sd",
+   "wrong_any_rung": 21,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_FAILS_ON_THE_ORIGINAL",
+   "files": 4,
+   "missing_modules": [],
+   "name": "torproject/stem#155",
+   "path_reasons": {
+    "CHECK_NO_TEST_MODULE": 32
+   },
+   "right_any_rung": 6,
+   "right_exact": 14,
+   "standing": {
+    "attempted": false,
+    "detail": "",
+    "outcome": "NOT_NEEDED",
+    "source": null
+   },
+   "test_entry_candidates": 55,
+   "test_entry_confidence": "IN_DIRECTORY",
+   "test_module": "test.integ.installation",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "missing_modules": [
+    "pytest",
+    "wolfcrypt._ffi"
+   ],
+   "name": "wolfSSL/wolfcrypt-py#120",
+   "path_reasons": {
+    "CHECK_NO_TEST_MODULE": 4,
+    "STILL_MISSING_AFTER_STANDING": 10
+   },
+   "right_any_rung": 5,
+   "right_exact": 0,
+   "standing": {
+    "attempted": true,
+    "detail": "",
+    "outcome": "STOOD",
+    "repair_failures": {
+     "wolfcrypt": "CalledProcessError: Command 'libtoolize' returned non-zero exit status 127.\n      [end of output]\n  \n  note: This error originates from a subprocess, and is likely not a problem with pip.\nerror: metadata-generation-failed\n\n\u00d7 Encountered error while generating package metadata.\n\u2570\u2500> See above for output.\n\nnote: This is an issue with the package mentioned above, not pip.\nhint: See above for details.\n"
+    },
+    "repaired": [
+     "pytest"
+    ],
+    "source": "pyproject"
+   },
+   "test_entry_candidates": 5,
+   "test_entry_confidence": "DIRECT",
+   "test_module": "tests.test_asn",
+   "wrong_any_rung": 2,
+   "wrong_exact": 0
+  }
+ ],
+ "positive_control": {
+  "accepts_the_correct_edit": true,
+  "accepts_the_project_as_it_is": true,
+  "available": true,
+  "discriminates": true,
+  "module": "tests.test_bounds",
+  "reason": "",
+  "rejects_a_broken_file": true,
+  "rejects_a_wrong_edit_that_still_compiles": true
+ },
+ "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
+ "summary": {
+  "any_rung": {
+   "asked": 726,
+   "edited": 34,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 0.4545,
+   "right": 35,
+   "share_of_the_work": 0.0482,
+   "wrong": 42
+  },
+  "any_rung_check": {
+   "asked": 726,
+   "edited": 0,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": null,
+   "right": 0,
+   "share_of_the_work": 0.0,
+   "wrong": 0
+  },
+  "by_rung": {
+   "as_it_was": 12,
+   "both_open": 7,
+   "names_open": 3,
+   "untouched_open": 12
+  },
+  "check_only": {
+   "asked": 726,
+   "edited": 0,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": null,
+   "right": 0,
+   "share_of_the_work": 0.0,
+   "wrong": 0
+  },
+  "check_unavailable_pairs": 132,
+  "exact": {
+   "asked": 726,
+   "edited": 34,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 1.0,
+   "right": 398,
+   "share_of_the_work": 0.5482,
+   "wrong": 0
+  },
+  "literal": {
+   "asked": 726,
+   "edited": 13,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 0.6364,
+   "right": 7,
+   "share_of_the_work": 0.0096,
+   "wrong": 4
+  },
+  "pairs": 132,
+  "tasks": 12,
+  "two_showings": {
+   "asked": 726,
+   "edited": 64,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 1.0,
+   "right": 650,
+   "share_of_the_work": 0.8953,
+   "wrong": 0
+  }
+ },
+ "tasks": 12,
+ "totals": {
+  "any_rung": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 34,
+   "pairs": 132,
+   "reached": 15,
+   "right": 35,
+   "wrong": 42
+  },
+  "any_rung_check": {
+   "asked": 726,
+   "check_asked": 132,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 0,
+   "pairs": 132,
+   "reached": 15,
+   "right": 0,
+   "wrong": 0
+  },
+  "check_only": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 0,
+   "pairs": 132,
+   "reached": 15,
+   "right": 0,
+   "wrong": 0
+  },
+  "exact": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 34,
+   "pairs": 132,
+   "reached": 15,
+   "right": 398,
+   "wrong": 0
+  },
+  "literal": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 13,
+   "pairs": 132,
+   "reached": 15,
+   "right": 7,
+   "wrong": 4
+  },
+  "two_showings": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 64,
+   "pairs": 132,
+   "reached": 15,
+   "right": 650,
+   "wrong": 0
+  }
+ }
+}
