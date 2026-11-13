@@ -266,12 +266,12 @@
    "selected_route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-13T00:03:31Z",
+    "checked_at_utc": "2026-11-13T02:09:20Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with ast, difflib, unittest and subprocess",
       "evidence": [
-       "the corpus run and the 13 tests executed in this sandbox in this session"
+       "the final --labels corpus run and the 28 tests (15 pinned + 13 new) executed in this sandbox in this session"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -286,30 +286,30 @@
      {
       "dependency": "GitHub GraphQL API for pull request metadata and codeload tarballs for project trees",
       "evidence": [
-       "12 pull requests collected with whole project trees after the REST quota was exhausted and the collection was rewritten onto GraphQL plus codeload"
+       "the final --labels run fetched all 12 pull requests via GraphQL and codeload and pip stood declared dependencies against PyPI minutes before this stamp"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-13T00:03:31Z",
+      "observed_at_utc": "2026-11-13T02:09:20Z",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
       "volatility": "VOLATILE"
      },
      {
-      "dependency": "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json committed record",
+      "dependency": "canonical/verification/STANDING_THE_CHECK_20261112_V1.json committed record",
       "evidence": [
-       "written in this session by the tool and read back by the 13 tests"
+       "written in this session by generalization_rung_gradient_v1 --labels and read back by the 28 tests"
       ],
       "evidence_classes": [
        "BRAIN_INHERITED"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "CODE_ARTIFACT",
-      "observed_at_utc": "2026-11-12T22:53:00Z",
+      "observed_at_utc": "2026-11-13T02:09:20Z",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
