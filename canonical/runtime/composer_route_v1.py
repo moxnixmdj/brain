@@ -640,6 +640,14 @@ def extract_content(text: str) -> str | None:
 # which is what keeps the whole "Run the <capability>." corpus from binding a
 # command nobody asked to run -- measured, none of those sentences mention
 # "command" or "argv".
+# SHELL SYNTAX THE ADAPTER CANNOT HONOUR.
+#
+# `cli_command.run` passes argv to a program with NO shell, deliberately: a shell
+# is how an argv becomes something other than the argv that was checked. The cost
+# is that a stated pipeline or redirection cannot run at all, and the honest answer
+# is to refuse the command rather than dispatch a different one.
+_SHELL_SYNTAX = re.compile(r"(?<![<>=!])[|;`]|(?<![<>=!])>(?![>=])|(?<![<>=!])(?<![0-9])<(?![=<])|\$\(")
+
 _ARGV = [
     re.compile(r"\b(?:shell\s+|cli\s+|terminal\s+)?command\s+(?:to\s+run\s+|line\s+)?(.+?)\s*$", re.I),
     re.compile(r"\bargv\s+(.+?)\s*$", re.I),
@@ -706,6 +714,19 @@ def extract_argv(text: str) -> list[str] | None:
     is the rule PR #6119 established for a text slot and it applies here for the
     same reason: a slot filled from something the sentence does not contain is
     an invention, and an invention executes.
+
+    A command line that uses SHELL SYNTAX is also refused, for a third reason:
+    the adapter runs argv with no shell, so no pipeline, redirection, `;` list,
+    subshell or glob expansion can ever happen. Passing ``|`` through as a
+    literal token does not run the stated command -- it runs ``ls`` with a
+    literal pipe as an operand, and ``ls`` then fails with a message about a
+    missing file. Measured 2026-11-12: "run the shell command ls -la D | head -5"
+    reached the adapter as ``['ls','-la','D','|','head','-5']`` and raised
+    CLI_COMMAND_FAILED. The failure was CLOSED and therefore safe, but it
+    reported a broken command when the truth is that this machine cannot run the
+    stated command at all. Refusing says the true thing, and it stops a `>` being
+    silently swallowed as an operand -- ``cat a > b`` became
+    ``['cat','a','>','b']``, which prints both files instead of writing one.
     """
     sentence = str(text or "")
     # A QUOTED command line ends at its closing quote.  The patterns below run to
@@ -730,7 +751,7 @@ def extract_argv(text: str) -> list[str] | None:
             except ValueError:
                 return None
             if parts and all(isinstance(part, str) and part for part in parts):
-                return parts
+                return None if _SHELL_SYNTAX.search(body) else parts
     known = _known_programs()
     for pat in _ARGV:
         m = pat.search(sentence)
@@ -771,12 +792,39 @@ def extract_argv(text: str) -> list[str] | None:
         # invention executes.
         if parts[0] not in known:
             continue
+        if _SHELL_SYNTAX.search(body):
+            continue
         return parts
     # No command line was QUOTED.  The request may still state one in ordinary
     # English -- "Copy the file a to b" -- and that is the shape almost every
     # real request takes.  This is a fallthrough, not a replacement: a quoted
     # command line always wins, because it is the stronger statement.
     return _prose_argv(sentence)
+
+
+def states_a_command_line(text: str) -> bool:
+    """True when the sentence names a command line, whether or not it can run.
+
+    `extract_argv` returning None is two different facts and the caller must be
+    able to tell them apart:
+
+      * the sentence states no command at all -- nothing to route on; and
+      * the sentence states a command this machine cannot honour (a pipeline, a
+        redirection) -- a real request that must be refused, not answered by
+        some other row that merely shares a word with it.
+
+    Measured 2026-11-12: "run the shell command ls | head -2" is the second kind.
+    Collapsing it into the first made a git bisect row eligible again, and it
+    reported VERIFIED_ACTION for a request nobody had answered.
+    """
+    sentence = str(text or "")
+    if not sentence:
+        return False
+    quoted = re.search(r"\b(?:shell\s+|cli\s+|terminal\s+)?command\s+"
+                       r"(?:to\s+run\s+|line\s+)?[\"\'](.+?)[\"\']", sentence, re.I)
+    if quoted and quoted.group(1).strip():
+        return True
+    return any(pat.search(sentence) for pat in _ARGV)
 
 
 # --------------------------------------------------------------------------- #

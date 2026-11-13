@@ -28,12 +28,38 @@ class MethodRename(unittest.TestCase):
         self.assertEqual(P.method_renames("self.assertEquals(a, b)\n", "self.assertEqual(a, b, msg)\n"), {})
 
     def test_a_bare_name_is_only_renamed_when_the_target_defines_the_new_name(self):
-        mapping = P.method_renames("old_name(1)\n", "new_name(1)\n")
-        self.assertEqual(mapping, {(None, "old_name"): "new_name"})
-        self.assertEqual(P.apply_method_renames("old_name(2)\n", mapping), (None, 0))
-        text, count = P.apply_method_renames("new_name = lambda x: x\nold_name(2)\n", mapping)
+        """A bare name must also be a documented alias, so the guard is tested with a real pair."""
+        mapping = P.method_renames("failUnless(1)\n", "assertTrue(1)\n")
+        self.assertEqual(mapping, {(None, "failUnless"): "assertTrue"})
+        self.assertEqual(P.apply_method_renames("failUnless(2)\n", mapping), (None, 0))
+        text, count = P.apply_method_renames("assertTrue = lambda x: x\nfailUnless(2)\n", mapping)
         self.assertEqual(count, 1)
-        self.assertIn("new_name(2)", text)
+        self.assertIn("assertTrue(2)", text)
+
+    def test_a_rename_between_two_names_that_are_not_one_function_is_refused(self):
+        """The defect this operator shipped with, kept as a test so it cannot come back.
+
+        `assertEquals -> assertEqual` and `yaml.load -> safe_load` have the same shape: one
+        attribute renamed, arguments untouched, neither a re-export. Applying the second rewrites
+        `yaml.load(h, Loader=yaml.FullLoader)` into `yaml.safe_load(h, Loader=yaml.FullLoader)`,
+        which cannot run -- `safe_load` takes no `Loader`. The organ refuses it for that reason,
+        and this operator has to refuse it for the same reason.
+        """
+        before = "import yaml\n\n\ndef s(h):\n    return yaml.load(h)\n"
+        after = before.replace("load(", "safe_load(")
+        self.assertEqual(P.method_renames(before, after), {},
+                         "a rename between two different functions must not be learned")
+        # and the same shape, which IS one function, is still learned
+        self.assertEqual(P.method_renames("self.assertEquals(a, b)\n", "self.assertEqual(a, b)\n"),
+                         {("self", "assertEquals"): "assertEqual"})
+
+    def test_every_learned_rename_is_on_the_documented_alias_list(self):
+        from canonical.swe_kernel.taught_actions import kept_under_an_old_name_v1 as kept
+        for before, after in (("logger.warn('x')\n", "logger.warning('x')\n"),
+                              ("self.assertRaisesRegexp(E, r, f)\n", "self.assertRaisesRegex(E, r, f)\n"),
+                              ("self.assertEquals(a, b)\n", "self.assertEqual(a, b)\n")):
+            for (_, old), new in P.method_renames(before, after).items():
+                self.assertTrue(kept.alias_of(old, new), "%s -> %s is not a kept name" % (old, new))
 
     def test_a_different_receiver_is_not_renamed(self):
         mapping = P.method_renames("a.warn('x')\n", "a.warning('x')\n")
