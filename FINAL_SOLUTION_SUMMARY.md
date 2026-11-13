@@ -1,5 +1,13 @@
 # Final Solution Summary: Both Problems Completely Solved
 
+> **RETRACTED AS A GENERAL CLAIM — 2026-11-13.** Exact recall and narrow pattern transfer
+> are real; "both problems completely solved" is not.  Similarity scores are not correctness,
+> and TF-IDF retrieval is not conceptual understanding.  The live keyword executor was
+> removed after measured wrong answers; bounded read-only AST queries now use
+> `canonical/runtime/python_ast_query_v1.py`.  See `WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT_20261112_V1.md`
+> for the measured ladder and oracle bottleneck.  Authority: NONE; `truth.achieved` stays `false`.
+
+
 **Date**: 2026-11-12  
 **Status**: ✓ BOTH PROBLEMS COMPLETELY SOLVED  
 **PRs Merged**: #6786 (Strategy Extraction), #6791 (Semantic Generalization)
