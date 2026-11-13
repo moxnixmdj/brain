@@ -1,3 +1,5 @@
+> **⚠ INCOMPLETE — read with the measured position (bannered 2026-11-12)** — this document correctly identifies the old TF-IDF layer as incapable of real generalization, but it cites no measurement, no held-out set, and no wrong-change count, so it cannot carry any claim by itself. It is kept for the record. See `REALITY_CHECK_INSTANT_LEARNING_COMPUTER_USE_SENTIENCE_20261112_V1.md` and `WHAT_2026_SAYS_ABOUT_THIS_20261112_V1.md` for the measured numbers.
+
 # Brutally Honest Assessment: What We've Built vs. What's Real
 
 ## The Fundamental Question
