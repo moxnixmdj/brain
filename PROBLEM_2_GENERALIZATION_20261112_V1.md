@@ -140,8 +140,60 @@ this round I was on the wrong side of it twice.
 - `canonical/runtime/procedure_memory_v1.py` — the generalized memory, with the two safety rules.
 - `canonical/runtime/grounded_action_v1.py` — memory injected **before** the candidate loop; learning
   only on `verified`.
-- `problem_2_generalization_benchmark_v1.py` — the three measurements, re-runnable, **declaring**
+- `problem_2_generalization_benchmark_v1.py` — the five measurements, re-runnable, **declaring**
   the tool substrate instead of assuming it.
+- `canonical/runtime/ordinary_computer_capabilities_v1.py` — the six ordinary capabilities for
+  `UNANSWERED_TASKS`, admitted by `capability_forge_v1` and invoked through `forged_invoker`.
+- `canonical/tests/test_problem_2_memory_rescue_and_forged_ceiling_v1.py` — pinned unit tests for
+  both the 12-paraphrase falsification and the 6-task forged ceiling closure.
+
+## 7. Follow-up falsification and ceiling closure (measured on this machine)
+
+The original falsification condition was:
+> *"If a paraphrase of an EXISTING capability can be shown to fail without memory and succeed with
+> it, then memory already has testable targets and the zero-testable-target finding is wrong."*
+
+### 7.1 Falsification on existing capabilities (`0/12 -> 12/12`)
+Testing natural paraphrases of three existing, runnable capabilities (`pdf.extract.text.pypdf`,
+`python.source.audit.ast`, `python.source.complexity.v1`) exposed **12 paraphrases that all fail
+with `memory=False`** (6 route to higher-scoring false-positive competitors such as
+`document.convert.markdown_pdf.pandoc_weasyprint` or `code.multilanguage.parse.tree_sitter.v1` and
+fail with `ACTION_FAILED`; 6 die at `AMBIGUOUS__NO_DECISIVE_MARGIN`).
+
+Before this fix, even with `memory=True` after teaching the 3 capabilities, **`0/12 (0%)` were
+rescued** because of two defects in `grounded_action_v1.act()` and two in `procedure_memory_v1.py`:
+1. `grounded_action_v1.act()` appended `_PM.recall_many(goal)` at the end of `merged`, where
+   `if not cid or cid in seen: continue` silently dropped the remembered entry whenever `grounding`
+   had already proposed `cid` with a lower score than a false-positive competitor.
+2. Survivor tie-breaking (`if survivors and chosen is None and EXP is not None and len(survivors) > 1:`)
+   consulted only `EXP.recall_resolution(goal)` (the old exact-match key) and never consulted
+   `procedure_memory_v1.recall(goal)`.
+3. `procedure_memory_v1.content_words()` did not strip directory/file-stem literals
+   (`canonical/runtime/solve_v1.py` vs `canonical/runtime/macro_v1.py`) or `forged.<module>.<fn>`
+   identifiers despite its docstring stating that file literals are typed arguments.
+4. `procedure_memory_v1.FORMAT_VERBS` and `FILLER` covered only formatting verbs, omitting
+   inspection (`audit`/`inspect`/`analyze`/`check`), measurement (`compute`/`measure`/`calculate`/`evaluate`),
+   extraction (`extract`/`pull`/`obtain`/`harvest`/`get`/`read`), and container nouns
+   (`document`/`report`/`source`/`module`/`code`).
+
+With those four defects fixed, `memory_rescue_on_failing_paraphrases()` measures **`12/12 (100%)`
+rescued** (`status="VERIFIED_ACTION"`, `selected_because="REMEMBERED_PROCEDURE"`).
+
+### 7.2 Forging and rescuing the 6 unanswered ceiling tasks (`0/12 -> 12/12`)
+Implementing the six `UNANSWERED_TASKS` in `canonical/runtime/ordinary_computer_capabilities_v1.py`
+and running `capability_forge_v1.forge_and_record()` exposed two additional bugs in
+`capability_forge_v1.py`:
+1. `forge_and_record()` loaded `data = _state()` before calling `register()`, and then called
+   `_save(data)` on the stale `data` dict — wiping out every newly registered capability from
+   `STATE` immediately after `register()` wrote it.
+2. `register()` assigned `"provides": ["forged." + module]` without the function name, causing
+   `grounded_action_v1.py` to treat distinct functions in the same module as
+   `EFFECT_EQUIVALENT_CHEAPEST`.
+
+With both forge bugs fixed and `forged_invoker.py` emitting a canonical JSON artifact verified by
+`_independent_artifact_check` (`ARTIFACT_REVERIFIED`), `forged_ceiling_rescue()` admits **`6/6`
+capabilities** (`ran: 3/3`, `killed: 7/9` to `24/24`) and rescues **`6/6` unanswered tasks +
+`6/6` held-out paraphrases (`12/12 = 100%` `VERIFIED_ACTION`)**.
 - `canonical/tests/test_problem_2_generalization_v1.py` — **7 passed, 2 skipped** (skips state
   `tool substrate absent`, never a false pass).
 

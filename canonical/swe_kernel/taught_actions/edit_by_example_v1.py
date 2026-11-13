@@ -93,6 +93,7 @@ import ast
 import builtins
 import importlib.machinery
 import io
+import itertools
 import json
 import pathlib
 import re
@@ -1024,6 +1025,133 @@ def attribute_rename_undone(before_text, after_text):
     return after_text
 
 
+def additions_put_back(before_text, after_text):
+    """The example's second file with the statements the person purely added taken back out.
+
+    The tangled-commit phenomenon in its third form: a person often builds new machinery -- a new
+    def, a constant, a block of wiring -- in the same commit as the edit worth teaching.  A whole
+    statement that came beside an in-place lesson cannot itself be the lesson (one showing of a new
+    statement underdetermines where it would go in another file), but refusing the whole example
+    loses the lesson next to it.  So, where every order-preserving alignment of the first file's
+    statements into the second file's tells the same in-place story, the purely added statements
+    are the person's own project work: they are taken back out, and learning proceeds on what
+    remains.  Added import lines are left alone -- they are bookkeeping other machinery already
+    carries.  Removals, ambiguity, or an unparseable result leave the file as it came, so the old
+    refusal stands.  A lesson that leans on the taken-out machinery still refuses downstream: the
+    rewritten code would read a name the example's remaining file does not provide.
+    """
+    came_as = after_text
+    try:
+        before_tree, after_tree = ast.parse(before_text), ast.parse(after_text)
+    except SyntaxError:
+        return came_as
+    added = []
+
+    def pairable(old, new):
+        """Could `new` be `old` edited in place?  Same-named or unnamed same-kind statements, or
+        one simple statement rewritten into another."""
+        if type(old) is type(new):
+            name = getattr(old, "name", None)
+            return not isinstance(name, str) or name == getattr(new, "name", None)
+        return isinstance(old, SIMPLE_STATEMENTS) and isinstance(new, SIMPLE_STATEMENTS)
+
+    def aligned(olds, news):
+        """The (old, new) pairs and the added statements, when every order-preserving alignment
+        that keeps the most statements unchanged tells the same in-place story; else None."""
+        n, m = len(olds), len(news)
+        equal = [[shape(old) == shape(new) for new in news] for old in olds]
+        fits = [[equal[i][j] or pairable(olds[i], news[j]) for j in range(m)] for i in range(n)]
+        best = [[-1] * (m + 1) for _ in range(n + 1)]         # most unchanged pairs from (i, j) on
+        best[n] = [0] * (m + 1)
+        for i in range(n - 1, -1, -1):
+            for j in range(m - 1, -1, -1):
+                if m - j < n - i:
+                    continue
+                here = -1
+                if fits[i][j] and best[i + 1][j + 1] >= 0:
+                    here = best[i + 1][j + 1] + (1 if equal[i][j] else 0)
+                here = max(here, best[i][j + 1])
+                best[i][j] = here
+        if best[0][0] < 0:
+            return None
+        stories = {}                                           # the in-place stories along optimal alignments
+
+        def stories_from(i, j):
+            if (i, j) not in stories:
+                found = set()
+                if i == n:
+                    found.add(())
+                else:
+                    if fits[i][j] and best[i + 1][j + 1] == best[i][j] - (1 if equal[i][j] else 0):
+                        for story in stories_from(i + 1, j + 1):
+                            found.add(story if equal[i][j] else ((i, shape(news[j])),) + story)
+                    if j + 1 <= m and best[i][j + 1] == best[i][j]:
+                        found |= stories_from(i, j + 1)
+                stories[(i, j)] = set(itertools.islice(found, 3))
+            return stories[(i, j)]
+
+        if len(stories_from(0, 0)) != 1:
+            return None
+        pairs, i, j = [], 0, 0                                 # walk one optimal alignment back out
+        while i < n:
+            if fits[i][j] and best[i + 1][j + 1] == best[i][j] - (1 if equal[i][j] else 0) and (
+                    equal[i][j] or not (best[i][j + 1] == best[i][j])):
+                pairs.append((i, j))
+                i, j = i + 1, j + 1
+            else:
+                j += 1
+        matched = {j for _, j in pairs}
+        return ([(olds[i], news[j]) for i, j in pairs],
+                [news[j] for j in range(m) if j not in matched])
+
+    def collect(old, new):
+        """Gather the purely added statements under this matched pair; False on removals or ambiguity."""
+        for name in old._fields:
+            first, second = getattr(old, name, None), getattr(new, name, None)
+            if isinstance(first, ast.AST) and isinstance(second, ast.AST):
+                if type(first) is type(second) and shape(first) != shape(second) and not collect(first, second):
+                    return False
+            elif isinstance(first, list) and isinstance(second, list):
+                if not (first and second and all(isinstance(item, ast.stmt) for item in first + second)):
+                    continue
+                olds = [item for item in first if not is_import(item)]
+                news = [item for item in second if not is_import(item)]
+                if len(olds) == len(news):
+                    pairs, extras = list(zip(olds, news)), []
+                elif len(olds) < len(news):
+                    fit = aligned(olds, news)
+                    if fit is None:
+                        return False
+                    pairs, extras = fit
+                else:
+                    return False
+                added.extend(extras)
+                for one, other in pairs:
+                    if type(one) is type(other) and shape(one) != shape(other) and not collect(one, other):
+                        return False
+        return True
+
+    if not collect(before_tree, after_tree) or not added:
+        return came_as
+    lines = after_text.splitlines(keepends=True)
+    offsets, total = [], 0
+    for line in lines:
+        offsets.append(total)
+        total += len(line)
+    spans = []
+    for node in added:
+        first = node.decorator_list[0] if getattr(node, "decorator_list", None) else node
+        spans.append((offsets[first.lineno - 1], offsets[node.end_lineno - 1] + len(lines[node.end_lineno - 1])))
+    for head, tail in sorted(spans, reverse=True):
+        after_text = after_text[:head] + after_text[tail:]
+    try:
+        if ast.dump(ast.parse(after_text)) == ast.dump(before_tree):
+            return came_as        # the whole example was the additions; they teach nothing repeatable
+    except SyntaxError:
+        return came_as
+    return after_text
+
+
 def restructures_put_back(before_text, after_text):
     """The example's second file with the changes no rule can carry put back, and where they stood.
 
@@ -1108,8 +1236,15 @@ def learn_all(examples, wide=False):
     several = len(examples) > 1
     shown = []
     for number, example in enumerate(examples, 1):
-        after, set_aside = restructures_put_back(
-            example[0], attribute_rename_undone(example[0], rename_undone(example[0], example[1])))
+        renamed = attribute_rename_undone(example[0], rename_undone(example[0], example[1]))
+        after, set_aside = restructures_put_back(example[0], renamed)
+        # Statements that came at a level restructures_put_back cannot localize (whole new defs or
+        # constants beside the lesson) are the person's own project work: take them back out, then
+        # let the reshaping put-back have another look at what remains.
+        slimmed = additions_put_back(example[0], after)
+        if slimmed != after:
+            after, more = restructures_put_back(example[0], slimmed)
+            set_aside = tuple(sorted(set(set_aside) | set(more)))
         given = tuple(example[2]) if example[2:] and example[2] else ()
         shown.append(Shown(example[0], after, "example %d" % number if several else "the example",
                            given + set_aside))
@@ -1396,11 +1531,13 @@ def fitting(rules, text, what, skip=None, torn=True):
     return found
 
 
-def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False, skip=None):
+def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown=False, skip=None,
+            example=None):
     """Apply the rules to every place that fits.  Returns (new text, number of places changed).
 
     Code used a way no example showed stops the whole edit, unless `leave_unshown` asks for it to be left as it is.
-    Code for which `skip` is true is not looked at.
+    Code for which `skip` is true is not looked at.  `example`, when given, also renames the name that example
+    renamed everywhere this file reads it from the same module (`swaps_to_make`); those places count.
     """
     text = Text(source_text, what)
     places, unshown = [], {}
@@ -1413,9 +1550,10 @@ def rewrite(rules, source_text, what="the file", check_names=True, leave_unshown
     for rule, found in unshown.values():
         if not leave_unshown:
             raise not_shown(rule, found, text, what)
-    if not places:
+    swapped = swaps_to_make(text, example, None) if example is not None else []
+    if not places and not swapped:
         return source_text, 0
-    return written(text, places, what, check_names), len(places)
+    return written(text, places, what, check_names, example=example), len(places) + len(swapped)
 
 
 # What a changed place is replaced by to see whether a check notices that code failing.  It raises, when it is
@@ -1592,6 +1730,229 @@ def aliases_to_follow(text, places, fail_at):
     return found
 
 
+class Swapped:
+    """A read of a name whose import the examples renamed, reached another way round than the example reached it."""
+
+    kind = "expression"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+class SwappedLine:
+    """The import line of a name the examples renamed, on a file that reads that name as a bare name."""
+
+    kind = "statement"
+    own = frozenset()
+    needs = frozenset()
+    pieces = ()
+    brought = {}
+    bring = {}
+    take = {}
+
+    def __init__(self, new):
+        self.new = new
+
+
+def _imported_from(tree):
+    """Every name a module is imported to bind, by module: name in the module -> name it is bound as."""
+    found = {}
+    for statement in tree.body:
+        if isinstance(statement, ast.ImportFrom) and not statement.level and statement.module:
+            for alias in statement.names:
+                if alias.name != "*":
+                    found.setdefault(statement.module, {})[alias.name] = alias.asname or alias.name
+        elif isinstance(statement, ast.Import):
+            for alias in statement.names:
+                found.setdefault(alias.name, {})[alias.name.split(".")[0]] = (
+                    alias.asname or alias.name.split(".")[0])
+    return found
+
+
+def _module_names(tree):
+    """Every module imported at the top, and the name it is bound as here."""
+    found = {}
+    for statement in tree.body:
+        if isinstance(statement, ast.Import):
+            for alias in statement.names:
+                found[alias.asname or alias.name.split(".")[0]] = alias.name
+    return found
+
+
+def _swap_candidates(example):
+    """Ways the examples might be showing that a name changed inside a module.  Each is a guess still.
+
+    Two ways round are possible.  The examples may import the name itself (``from m import old``) or import
+    the module and read ``m.old``; either way what a demonstration of this kind says is: inside module ``m``,
+    ``old`` is now ``new``.  Nothing here is accepted yet -- `swaps_of` keeps only a guess that reproduces the
+    example's own second file, which is the same test the rules get before any file is touched.
+    """
+    was, now = _imported_from(example.old.tree), _imported_from(example.new.tree)
+    for module, names_was in was.items():
+        names_now = now.get(module, {})
+        gone = {inner: bound for inner, bound in names_was.items() if inner not in names_now}
+        came = {inner: bound for inner, bound in names_now.items() if inner not in names_was}
+        if len(gone) == 1 and len(came) == 1:
+            inner_was, inner_now = next(iter(gone)), next(iter(came))
+            yield (module, inner_was, inner_now, True)
+    aliases = _module_names(example.old.tree)
+    after_of = {id(before): after for levels in example.places for before, after in levels}
+    for name, module in aliases.items():
+        for node in ast.walk(example.old.tree):
+            if not (isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name)
+                    and node.value.id == name):
+                continue
+            after = after_of.get(id(node))
+            if isinstance(after, ast.Attribute) and after.attr != node.attr:
+                yield (module, node.attr, after.attr, False)
+
+
+def _swap_places(text, module, old, new, shown_uses=None, fail_at=None):
+    """Every place in `text` that reads `old` from `module`, and what each becomes when it reads `new`.
+
+    How a file reaches the module decides the form of the change, and nothing else does.  A file that binds
+    the name itself (``from m import old``) has that alias and its reads renamed, exactly as the example
+    renamed its own.  A file that imports the module (``import m``) has every ``m.old`` become ``m.new``,
+    which is the same fact about the module written the other way round.  A file that does neither is not
+    touched.  A file that binds the old name itself, or reaches it through anything that is not this module,
+    is left alone: the demonstration says what the module holds, not what a local name means.
+    """
+    if text.anything:
+        return []                                    # a `*` import: where a name comes from is not knowable here
+    bindings = _imported_from(text.tree)
+    bound_as = (bindings.get(module) or {}).get(old)
+    aliases = {name for name, reaches in _module_names(text.tree).items() if reaches == module}
+    if bound_as is None and not aliases:
+        return []
+    if bound_as is not None and new in text.defined:
+        return []                                    # the new name already means something in this file
+    if any(isinstance(node, ast.Name) and node.id == old and not isinstance(node.ctx, ast.Load)
+           for node in ast.walk(text.tree)):
+        return []                                    # the file binds the old name itself: not ours to rename
+    if any(isinstance(node, (ast.Global, ast.Nonlocal)) and old in node.names
+           for node in ast.walk(text.tree)):
+        return []
+    if bound_as is not None and any(
+            isinstance(node, ast.Name) and node.id == old and isinstance(node.ctx, ast.Load)
+            and text.local_at(node, old) for node in ast.walk(text.tree)):
+        return []                                    # the same spelling is a local name somewhere here
+    found = []
+    if bound_as is not None:
+        for statement in text.tree.body:
+            if not (isinstance(statement, ast.ImportFrom) and not statement.level
+                    and statement.module == module):
+                continue
+            if not any((alias.asname or alias.name) == old and not alias.asname
+                       for alias in statement.names):
+                continue
+            names = [ast.alias(name=new) if (alias.asname or alias.name) == old and not alias.asname
+                     else alias for alias in statement.names]
+            line = ast.unparse(ast.ImportFrom(module=statement.module, names=names, level=0))
+            found.append((text.span(statement), statement, SwappedLine(line), {}))
+        for node in ast.walk(text.tree):
+            if (isinstance(node, ast.Name) and node.id == old and isinstance(node.ctx, ast.Load)
+                    and (fail_at is None or node is not fail_at[1]) and not text.local_at(node, old)):
+                found.append((text.span(node), node, Swapped(new), {}))
+    for node in ast.walk(text.tree):
+        if not (isinstance(node, ast.Attribute) and node.attr == old and isinstance(node.value, ast.Name)
+                and node.value.id in aliases):
+            continue
+        if fail_at is not None and node is fail_at[1]:
+            continue
+        if text.local_at(node.value, node.value.id):
+            continue
+        if shown_uses is not None and text.use_of(node) not in shown_uses:
+            continue                                 # the example showed this name used another way
+        found.append((text.span(node), node, Swapped(node.value.id + "." + new), {}))
+    return found
+
+
+def swaps_of(example):
+    """What one example teaches about a name that changed inside a module: (module, old, new, by_name).
+
+    A guess is kept only when applying it to the example's own first file turns it into the example's own
+    second file, byte for byte.  That is the same test the rules are put to before any file is touched, so
+    an example that renames a name *and* does other work teaches nothing here: it cannot be reproduced by
+    a rename alone.  An example whose only change is the rename is exactly what this operator is for, and
+    it is answered from the demonstration, in code, without a question to anybody.
+    """
+    for module, old, new in (candidate[:3] for candidate in _swap_candidates(example)):
+        shown_uses = _shown_uses(example, module, old)
+        places = _swap_places(example.old, module, old, new, shown_uses)
+        if not places:
+            continue
+        try:
+            written = written_once(example.old, places, example.label, check_names=False)
+        except (Refused, RecursionError):
+            continue
+        if written.encode("utf-8") == example.new.raw:
+            return (module, old, new, shown_uses)    # the example was nothing but this rename
+        if _rename_only(example, places, old, new):
+            return (module, old, new, shown_uses)    # the example was this rename among other work
+    return None
+
+
+def _shown_uses(example, module, old):
+    """How the example itself used the name it renamed: a call with how many arguments, or not a call at all.
+
+    A rename is not always a plain substitution.  ``yaml.load(fp, loader=...)`` becoming ``yaml.safe_load``
+    is a different program, because the new name does not take what the old one took.  The example is the
+    only evidence there is about that, so a place used another way than the example used it is left alone.
+    """
+    aliases = {name for name, reaches in _module_names(example.old.tree).items() if reaches == module}
+    used = set()
+    for node in ast.walk(example.old.tree):
+        if isinstance(node, ast.Name) and node.id == old:
+            used.add(example.old.use_of(node))
+        if isinstance(node, ast.Attribute) and node.attr == old and isinstance(node.value, ast.Name) \
+                and node.value.id in aliases:
+            used.add(example.old.use_of(node))
+    return used or None
+
+
+def _rename_only(example, places, old, new):
+    """Did the example's own change take the old name away and put the new one in its place, and nothing else?
+
+    The example may also do other work; that work is taught by its own rules.  What is asked here is only
+    what this operator would claim: every place the example read the old name is rewritten by the swap, and
+    the new file reads the new name and never the old one.  A demonstration that renames nothing, or that
+    leaves a read of the old name standing, does not teach a rename.
+    """
+    shown = {span for span, node, _, _ in places
+             if not isinstance(node, ast.ImportFrom) and not isinstance(node, ast.Import)}
+    reads = set()
+    for node in ast.walk(example.old.tree):
+        if isinstance(node, ast.Name) and node.id == old:
+            reads.add(id(node))
+        if isinstance(node, ast.Attribute) and node.attr == old:
+            reads.add(id(node))
+    if not reads:
+        return False
+    covered = {id(node) for _, node, _, _ in places}
+    if not reads <= covered:
+        return False
+    if any(isinstance(node, ast.Name) and node.id == old for node in ast.walk(example.new.tree)):
+        return False
+    if not any(isinstance(node, ast.Name) and node.id == new for node in ast.walk(example.new.tree)):
+        return False
+    return True
+
+
+def swaps_to_make(text, example, fail_at=None):
+    """Every place in this file that reads the example's old name from the same module, reading it as the new one."""
+    taught = swaps_of(example)
+    if taught is None:
+        return []
+    module, old, new, shown_uses = taught
+    return _swap_places(text, module, old, new, shown_uses, fail_at)
+
+
 def aliases_to_add(text, places, fail_at):
     """The file's own from-import line, extended with a needed name whose origin the lesson knows.
 
@@ -1673,11 +2034,21 @@ def renames_to_add(text, places, fail_at):
     return found
 
 
-def written(text, places, what="the file", check_names=True, fail_at=None):
-    """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
+def written(text, places, what="the file", check_names=True, fail_at=None, example=None):
+    """`written_once`, with the leftover reads of a renamed import following their renamed definition.
+
+    When `example` is given, a name that example renamed is also renamed everywhere this file reads it
+    from the same module (`swaps_to_make`), which is the rename an example with one changed file cannot
+    otherwise repeat: the rule fits only the reading it was shown, and every other reading is left.
+    """
     added = renames_to_add(text, places, fail_at) + aliases_to_follow(text, places, fail_at)
     added += aliases_to_add(text, places + added, fail_at)
-    return written_once(text, places + added, what, check_names, fail_at)
+    placed = places + added
+    if example is not None:
+        taken = [span for span, _, _, _ in placed]
+        placed = placed + [one for one in swaps_to_make(text, example, fail_at)
+                           if not any(start <= one[0][0] and one[0][1] <= end for start, end in taken)]
+    return written_once(text, placed, what, check_names, fail_at)
 
 
 def written_once(text, places, what="the file", check_names=True, fail_at=None):
@@ -1717,6 +2088,10 @@ def written_once(text, places, what="the file", check_names=True, fail_at=None):
             elif isinstance(rule, Renamed):
                 new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
             elif isinstance(rule, Rebound):
+                new_text, parsed = rule.new, ast.parse(rule.new).body[0]
+            elif isinstance(rule, Swapped):
+                new_text, parsed = rule.new, ast.parse(rule.new, mode="eval").body
+            elif isinstance(rule, SwappedLine):
                 new_text, parsed = rule.new, ast.parse(rule.new).body[0]
             else:
                 new_text, parsed = written_for(rule, node, bound, text)
@@ -1820,8 +2195,8 @@ def edit_by_example(target_text, before_text, after_text):
     return repeated(learn(before_text, after_text), target_text, "the example")
 
 
-def repeated(rules, target_text, shown_by, leave_unshown=False):
-    result, count = rewrite(rules, target_text, leave_unshown=leave_unshown)
+def repeated(rules, target_text, shown_by, leave_unshown=False, example=None):
+    result, count = rewrite(rules, target_text, leave_unshown=leave_unshown, example=example)
     if count == 0:
         raise Refused("nothing in the file has the form %s changed (%s); a part of that form may vary "
                       "only where two changed places differ" % (shown_by, "; ".join(str(rule) for rule in rules)))
