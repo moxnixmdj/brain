@@ -83,7 +83,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "9a5be3729115c5ae9a07827a0f7ea70c268f8843",
+  "canonical_base_commit": "f643acd1381dac06cdb06e1f3b5853668ca32105",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "TRUST_THE_ROUND_28_NO_TEST_MODULE_VERDICT",
@@ -91,7 +91,7 @@
    "CALL_A_REACHABLE_TEST_AN_ADEQUATE_CHECK",
    "EXECUTE_A_STORED_PLAN_WITHOUT_VALIDATING_IT"
   ],
-  "expected_parent_level_state_change": "THE_CHECK_IS_BUILDABLE_AND_THE_PRIOR_ZERO_OF_42_VERDICT_WAS_A_FINDER_BUG__CORRECTED_YIELD_18_OF_54_NON_TEST_FILES_33_PERCENT__3_OF_5_MUTANTS_SURVIVE_SO_REACHABILITY_IS_NOT_ADEQUACY__VALIDATED_REPLAY_SAVES_98_9_PERCENT_AND_BLIND_REPLAY_LANDS_OFF_GOAL__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "expected_parent_level_state_change": "NONE__MEASUREMENT_CORRECTION",
   "iteration_limit": 4,
   "obs_blocker": {
    "delete_bypass_substitute_options": "DELETE_NOT_APPLICABLE_THE_MEASUREMENT_IS_KEPT__BYPASS_IMPOSSIBLE_EVERY_DOWNSTREAM_CLAIM_NEEDS_A_CHECK__SUBSTITUTE_FORBIDDEN_A_MODEL_JUDGING_CORRECTNESS_IS_NEITHER_ZERO_COST_NOR_INDEPENDENT",
@@ -163,8 +163,10 @@
   "selected_surviving_route": "FIX_THE_INSTRUMENT_BEFORE_ARGUING_WITH_IT",
   "selected_surviving_route_class": "REUSE",
   "why_selected_route_is_fastest_sufficient": "The claim could not be tested with the instrument that existed, because the instrument reported absence where it had only failed to look. Repairing it cost one afternoon of file reading and answered the claim directly; building a learner first would have produced a number nobody could check.",
-  "stop_condition": "THE_FINDER_REPORTS_WHAT_IT_CANNOT_SEE__18_OF_54_NON_TEST_FILES_WITH_A_REACHABLE_CHECK__3_OF_5_MUTANTS_SURVIVE__VALIDATED_REPLAY_98_9_PERCENT_AND_BLIND_REPLAY_OFF_GOAL__62_TESTS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "stop_condition": "The corrected number is recorded and the tool cannot claim adequacy it did not measure.",
   "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_CORRECTING_AN_IN_TREE_MEASUREMENT_INSTRUMENT_WITH_ITS_CORPUS_PINNED_TO_SIX_PUBLIC_COMMIT_SHAS__THE_CHALLENGERS_WERE_COMPARED_IN_THE_INTENT_BODY_AND_ZERO_EXTERNAL_CAPABILITY_IS_CLAIMED",
    "challenger_routes": [
     {
      "route": "BUILD_A_NEW_LEARNER_THAT_LEARNS_FROM_ONE_SHOWING",
@@ -188,9 +190,7 @@
       "WALL_CLOCK": "Seconds."
      }
     }
-   ],
-   "selected": "FIX_THE_INSTRUMENT_BEFORE_ARGUING_WITH_IT",
-   "selection_basis": "It is the only route whose result can be re-run by anyone with the same six commits."
+   ]
   }
  },
  "route_id": "REUSE",
