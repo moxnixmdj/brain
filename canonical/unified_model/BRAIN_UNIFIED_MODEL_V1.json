@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 426,
+  "knowledge_documents": 427,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6824,
+  "research_index_records": 6826,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "aa130f6105dfb0d8ef202c019c42f11ff72a1a2f90c023f3445b4b22bcc59b9c"
+  "value": "ffe448281cbbb93b52cdcf720a3c10d63974ead6467dce463b513c2453b795a1"
  },
  "engines": [
   {
@@ -63302,6 +63302,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6588,
+   "headings": [
+    "Two doors, one answer",
+    "1. The probe",
+    "2. Why this is the sharpest possible demonstration",
+    "3. The fix already exists, on the other door",
+    "4. The four charges, judged",
+    "5. The limiting factor, from first principles",
+    "6. What this round did not do"
+   ],
+   "kind": "DOCUMENT",
+   "path": "TWO_DOORS_ONE_ANSWER_20261112.md",
+   "sha256": "229e3158b77d7857b6463118d80026a78bde8bdb158e2cace403cf848b01b90c",
+   "summary": "**Measured 2026-11-12 on `144f4ab9`.** Instrument: `canonical/tools/two_doors_one_answer_v1.py`. Record: `canonical/verification/TWO_DOORS_ONE_ANSWER_20261112_V1.json`. Tests: `canonical/tests/test_two_doors_one_answer_v1.py` (20).",
+   "terms": {
+    "1.000": 3,
+    "153": 3,
+    "155": 3,
+    "all": 3,
+    "already": 4,
+    "answer": 7,
+    "answers": 4,
+    "asked": 6,
+    "astra_runtime.py": 4,
+    "cannot": 4,
+    "canonical": 4,
+    "change": 3,
+    "classes": 13,
+    "count": 6,
+    "defect": 4,
+    "different": 7,
+    "door": 7,
+    "doors": 3,
+    "entry": 3,
+    "errors.py": 3,
+    "false": 4,
+    "files": 3,
+    "four": 3,
+    "function": 3,
+    "functions": 14,
+    "goal_compiler.py": 3,
+    "handle": 3,
+    "instrument": 3,
+    "lookup": 3,
+    "measured": 3,
+    "model": 3,
+    "names": 6,
+    "no": 3,
+    "none": 4,
+    "not": 15,
+    "number": 4,
+    "one": 10,
+    "other": 3,
+    "point": 3,
+    "quantity": 4,
+    "round": 5,
+    "same": 7,
+    "sentence": 6,
+    "solve_v1.py": 4,
+    "true": 5,
+    "two": 5,
+    "work": 4,
+    "wrong": 7
+   },
+   "title": "Two doors, one answer",
+   "title_terms": [
+    "answer",
+    "doors",
+    "one",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7697,
    "headings": [
     "Two Kinds of \"I Don't Know\", and the One It Was Using",
@@ -78029,10 +78103,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1228,
+  "included_source_count": 1229,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f548e9d0da5c6eedb214683ea5b55be3114be25505a18141cf209c0c60eae7a9"
+  "source_tree_digest": "6c758f5ab7cb9797e29674a697b46fa2c4c8d15c1bbbf413adb744e0237f4da7"
  },
  "research_index": [
   {
@@ -205507,6 +205581,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/TWO_DOORS_ONE_ANSWER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/TWO_DOORS_ONE_ANSWER_20261112_V1.json",
+   "schema": "TWO_DOORS_ONE_ANSWER_V1",
+   "sha256": "cdf3c2514c970206749f210c49d874732c0664a4dd56c68e3a4e63ca8a787d47",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "answer": 1,
+    "doors": 1,
+    "one": 1,
+    "two": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-04",
    "id": "research:canonical/verification/TYPED_MINIMUM_CERTIFICATE_BASIS_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -238150,6 +238243,30 @@
     "general_reusable_problem_solving_capability_frontier": 1,
     "two": 1,
     "two_doors_count_availability_differently_20261112_v1": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "TWO_DOORS_ONE_ANSWER_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/TWO_DOORS_ONE_ANSWER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/TWO_DOORS_ONE_ANSWER_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "f81061f39143455dfa1a91ec5fd362ca86006a57469d6e87989444c029c9a487",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "answer": 1,
+    "answer_quantity_is_dropped_between_the_sentence_and_the_adapter_answer_field_on_one_entry_point_so_a_pass_can_carry_a_wrong_number": 1,
+    "doors": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measure_both_front_doors_against_ast_ground_truth_and_pin_the_divergence_without_rewiring_either": 1,
+    "one": 1,
+    "quantity_binding_and_enumeration_delivery_are_attributed_to_the_mechanism_that_has_them_instead_of_being_reported_as_a_global_inability": 1,
+    "two": 1,
+    "two_doors_one_answer_20261112_v1": 1,
     "v1": 1
    }
   },
