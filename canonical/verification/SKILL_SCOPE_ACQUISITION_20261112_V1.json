@@ -1,0 +1,269 @@
+{
+ "authority": "NONE__PRODUCER_RUN_MEASUREMENT_ON_THIS_SANDBOX_NOT_INDEPENDENT_VERIFICATION",
+ "controls": {
+  "earnability": {
+   "point": "if the label were reachable from successes alone it would be a constant, not a measurement",
+   "successes_only_reason": "NO_FAILURE__NECESSITY_IS_ONLY_REFUTED_BY_FAILURE",
+   "successes_only_required": null,
+   "successes_only_status": "UNDETERMINED__NO_CONTRASTING_OUTCOME"
+  },
+  "realisability": {
+   "observed_states_only": "NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS",
+   "observed_states_only_informative": false,
+   "once_identified": "ALREADY_IDENTIFIED__NO_CONTRAST_NEEDED",
+   "once_identified_informative": false,
+   "point": "the pool must contain states that could still be OBSERVED; inventing them is not making them",
+   "realisable_pool_discriminating_facts": [
+    "baseline.violates_own_spec"
+   ],
+   "realisable_pool_informative": true,
+   "realisable_pool_of_remaining_victims": "SELECTED__A_REACHABLE_STATE_SPLITS_THE_SURVIVORS",
+   "realisable_pool_survivors_before": 2,
+   "realisable_pool_worst_case_after": 1
+  }
+ },
+ "files": {
+  "canonical/swe_kernel/skill_scope_acquisition_v1.py": "5e851af12eb8569702d1452fb1dc7f95d309d261fa9cfd4750084b24fd01d7a2",
+  "canonical/tests/test_skill_scope_acquisition_v1.py": "388abc616b3b3c188dd91d4d851fe680a94bf93637e4287a0d33f0cf44e7c19e",
+  "canonical/tools/skill_scope_acquisition_probe_v1.py": "e9606358e69c80a6b5966f838f4ac8093351596aec642af7ab47b288c52a9fed"
+ },
+ "generated_at_git_head": "237769ff6bd9fe0458c25912df69860258998493",
+ "generated_at_utc": "2026-11-13T02:08:58Z",
+ "generated_by": "producer run of canonical/tools/skill_scope_acquisition_probe_v1.py",
+ "how_reproduced": [
+  "python3 canonical/tools/skill_scope_acquisition_probe_v1.py",
+  "python3 canonical/tools/skill_scope_acquisition_probe_v1.py --json",
+  "python3 -m pytest canonical/tests/test_skill_scope_acquisition_v1.py"
+ ],
+ "measurement": {
+  "broke_correct_code_with_the_scope": 0,
+  "broke_correct_code_without_a_scope": 3,
+  "dose_response_ladder": [
+   {
+    "label": "return_site_defect",
+    "observations": 1,
+    "required": null,
+    "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+    "survivors": 0,
+    "verdict": "REPAIRED"
+   },
+   {
+    "label": "assignment_site_defect",
+    "observations": 2,
+    "required": null,
+    "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+    "survivors": 0,
+    "verdict": "REPAIRED"
+   },
+   {
+    "label": "negated_defect",
+    "observations": 3,
+    "required": null,
+    "status": "UNDETERMINED__NO_CONTRASTING_OUTCOME",
+    "survivors": 0,
+    "verdict": "REPAIRED"
+   },
+   {
+    "label": "if_guard_already_correct",
+    "observations": 4,
+    "required": null,
+    "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "survivors": 2,
+    "verdict": "BROKE_CORRECT_CODE"
+   },
+   {
+    "label": "flipped_operands_defect",
+    "observations": 5,
+    "required": [
+     "baseline.violates_own_spec"
+    ],
+    "status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+    "survivors": 1,
+    "verdict": "REPAIRED"
+   }
+  ],
+  "each_victim_judged_by": "its own specification, executed, before and after the skill is applied",
+  "evidence_rows": 5,
+  "failures": 1,
+  "fired_on": 8,
+  "lesson_taught_through": "canonical.swe_kernel.verified_skill_crystallizer_v1.VerifiedSkillStore.crystallize_code_fix",
+  "not_applicable": 0,
+  "observations_to_identify": 5,
+  "reason": "ONE_CONSISTENT_REQUIREMENT",
+  "refusals_issued_before_any_edit": 3,
+  "refusals_named": [
+   {
+    "label": "return_site_already_correct",
+    "missing": [
+     "baseline.violates_own_spec"
+    ],
+    "would_have_been": "BROKE_CORRECT_CODE"
+   },
+   {
+    "label": "if_guard_already_correct",
+    "missing": [
+     "baseline.violates_own_spec"
+    ],
+    "would_have_been": "BROKE_CORRECT_CODE"
+   },
+   {
+    "label": "flipped_operands_already_correct",
+    "missing": [
+     "baseline.violates_own_spec"
+    ],
+    "would_have_been": "BROKE_CORRECT_CODE"
+   }
+  ],
+  "repaired_without_a_scope": 5,
+  "repairs_with_the_scope": 5,
+  "required": [
+   "baseline.violates_own_spec"
+  ],
+  "status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+  "successes": 4,
+  "survivors": 1,
+  "swap": {
+   "from": "<=",
+   "to": "<"
+  },
+  "swap_family": [
+   [
+    "<=",
+    "<"
+   ],
+   [
+    ">=",
+    ">"
+   ],
+   [
+    ">",
+    ">="
+   ]
+  ],
+  "taught_after": "def within(x, hi):\n    return x < hi\n",
+  "taught_before": "def within(x, hi):\n    return x <= hi\n",
+  "victims_offered": 8,
+  "why_the_family_is_the_defect": "'>=' -> '>' is in the family of '<=' -> '<', so the skill fires on already-correct inclusive code and ruins it"
+ },
+ "mutations": {
+  "harness": "producer-run textual mutation of the module and the probe",
+  "initially_survived": [
+   "while_guard_needs_only_an_ancestor",
+   "buy_scope_reports_no_non_firings"
+  ],
+  "killed": 18,
+  "killed_names": [
+   "non_firing_counted_as_evidence",
+   "non_firing_reported_as_failure",
+   "breakage_counted_as_success",
+   "noop_counted_as_repair",
+   "site_return_is_a_substring_test",
+   "if_guard_needs_only_an_ancestor",
+   "while_guard_needs_only_an_ancestor",
+   "unexecuted_baseline_invented_as_true",
+   "unknown_language_guesses_instead_of_refusing",
+   "admits_always_admits",
+   "admits_reports_no_missing_facts",
+   "buy_scope_ignores_the_probe_chooser",
+   "buy_scope_never_stops_at_identified",
+   "buy_scope_reports_no_non_firings",
+   "pool_states_are_invented_not_executed",
+   "probe_hides_which_breakages_were_prevented",
+   "probe_counts_a_refusal_as_a_repair",
+   "probe_erases_the_ladder"
+  ],
+  "survived": 0,
+  "what_the_survivors_meant": "both were defects in the test suite, not the module: no case where a while merely contains the comparison, and a reported count nothing pinned. A reported number no test reads is a number that can be anything."
+ },
+ "regression": {
+  "eleven_suite_batch": {
+   "failed": 0,
+   "note": "includes every suite that imports applicability_v1 or contrast_selection_v1, plus the scope ledger, precondition presence, rule scope learning, the refused-candidate oracle suite and shipped skill memory",
+   "passed": 155
+  },
+  "three_suite_batch": {
+   "passed": 53,
+   "suites": [
+    "test_skill_scope_acquisition_v1",
+    "test_operator_generalization_v1",
+    "test_operator_semantics_v1"
+   ]
+  }
+ },
+ "schema": "PROJECT_BRAIN_SKILL_SCOPE_ACQUISITION_VERIFICATION_V1",
+ "sources_consulted": [
+  {
+   "bearing": "best or tied-best on 52 of 52 (model, benchmark, harness) cells with bounded add/delete/replace edits accepted only on strict held-out improvement, zero inference-time model calls and no weight updates",
+   "date": "2026-05-25",
+   "id": "SkillOpt: agent skills as trainable parameters",
+   "where": "microsoft.com/en-us/research/blog/skillopt-agent-skills-as-trainable-parameters and arxiv.org/pdf/2605.23904"
+  },
+  {
+   "bearing": "skills as versioned falsifiable contracts that must state conditions of applicability; ablation Static Library 73.40, Acquisition Only 68.80, Failure-only 67.20, Full 95.30",
+   "date": "2026-10-08",
+   "id": "Skill-V: Verifiable Self-Evolving Skill Library for Interactive Agents",
+   "where": "arxiv.org/html/2610.11781v1"
+  },
+  {
+   "bearing": "consolidating by semantic similarity or LLM judgment may merge behaviorally incompatible strategies and degrade performance; scope expands only under behavioural validation",
+   "date": "2026-08-15",
+   "id": "SkillCommit: Evolving Agent Skills through Behaviorally Validated Scope Expansion",
+   "where": "arxiv.org/abs/2608.15165"
+  },
+  {
+   "bearing": "skills as (activation condition, execution procedure, termination condition); a referee note flags that LLM-generated gates have no external falsifiable handle, which is why every gate here is executed rather than prompted",
+   "date": "2026-05-28",
+   "id": "Skill-Pro: Learning Reusable Skills from Experience via Non-Parametric PPO for LLM Agents",
+   "where": "arxiv.org/abs/2602.01869"
+  }
+ ],
+ "tests": {
+  "failed": 0,
+  "file": "canonical/tests/test_skill_scope_acquisition_v1.py",
+  "passed": 21
+ },
+ "the_gap": {
+  "adjacent_but_not_this": "rule_scope_learning_v1.learn_scope narrows among three hypothesis LEVELS (SCOPE_STATEMENT, SCOPE_OPERATOR, SCOPE_SEMANTIC) and returns {'scope': hypothesis_id}; it never calls applicability_v1 or contrast_selection_v1. Choosing the mechanism and identifying the domain are different questions.",
+  "consequence": "canonical/swe_kernel/skill_scope_ledger_v1.py reports 5 of 5 shipped skills EXACT_MATCH_ONLY and every boundary UNDETERMINED__NO_CONTRASTING_OUTCOME",
+  "evidence_stored_but_unreadable": "crystallize_code_fix stores training_baseline (returncode 1, test_count 2) and training_verification (returncode 0) -- a real failure and a real success -- in a shape the law cannot read",
+  "extractor_grep": "grep -rn 'def facts_of|def state_of|def observable_facts|def extract_facts|def observe_state' canonical/ returned nothing",
+  "extractors_in_tree_before_this": 0,
+  "instrument_existed": "canonical/runtime/contrast_selection_v1.select_contrast(evidence, pool) names the observation that splits the surviving requirements most evenly; the caller owns realisability",
+  "law_existed": "canonical/runtime/applicability_v1.learn(evidence) identifies the requirement a set of (state, succeeded) observations supports and refuses with a named reason when they do not",
+  "neither_had_anything_to_read": "shipped skill records carry provenance {at, hits, origin} and verified_hits, which are counts"
+ },
+ "title": "A skill learns where it applies, from executed observations, in five of them",
+ "traps_hit_while_prototyping": [
+  {
+   "how_it_is_pinned": "a non-firing costs an observation and yields no evidence; not_applicable is a load-bearing count",
+   "trap": "a victim the skill never fires on counted as a failure",
+   "why_it_is_wrong": "NOT_APPLICABLE yields no observation: nothing was tried and nothing was learned. Counting it builds a boundary out of the tokenizer's reach instead of the skill's domain -- the same error as counting a PASS that only proved a process started."
+  },
+  {
+   "how_it_is_pinned": "site facts follow the node, not the keyword; an if/while that merely CONTAINS the comparison is not a guard on it",
+   "trap": "site.return computed as 'return ' in source",
+   "why_it_is_wrong": "true of a function whose return is nowhere near the operator. Measured effect: the law identified {baseline.violates_own_spec, site.return} -- plausible, wrong, and narrower than the truth. On the AST the same evidence yields {baseline.violates_own_spec} alone. A crude extractor does not fail loudly; it reports a scope that looks identified."
+  },
+  {
+   "how_it_is_pinned": "the ladder: three successes buy nothing, the first failure changes the answer, one more closes it",
+   "trap": "record states instead of counts, and stop there",
+   "why_it_is_wrong": "from a single before/after pair learn() returns AMBIGUOUS with 3 to 6 survivors, and select_contrast over observed states returns NO_REACHABLE_STATE_SPLITS_THE_SURVIVORS. States are necessary and not sufficient without contrasting observations on untaught victims."
+  }
+ ],
+ "what_is_not": [
+  "that the acquired condition is TRUE in general: it is the one requirement consistent with the observations made, and learn refuses or returns AMBIGUOUS when the evidence does not support one",
+  "that the shipped corpus now has scopes: it does not. Acquiring one needs victims and a specification for each and neither is stored with a skill, so 5 shipped skills remain EXACT_MATCH_ONLY",
+  "that admits accepts anything: it decides whether a skill may be PROPOSED; the caller's verifier still decides the outcome, and the module exposes no apply/accept/commit/store/save surface",
+  "that a fact absent from a state was observed false: absent means not observed true",
+  "that this is model training or that model training is unnecessary in general: SkillOpt trained skill documents for a frozen agent and was best or tied-best on 52 of 52 cells with no weight updates, which is evidence against (1) being a prerequisite, not evidence that any gate is optional -- Skill-V measured Acquisition Only 68.80 against Static Library 73.40 and Full 95.30, so accumulating experience without a falsifiability gate is worse than not learning at all",
+  "that cross-domain transfer was attempted: it was not, and no claim is made about it"
+ ],
+ "what_is_real": [
+  "the same skill, executed against eight victims' own specifications, repairs 5 and breaks correct code on 3",
+  "its condition of applicability is bought in 5 observations and is ('baseline.violates_own_spec',) with 1 survivor",
+  "enforcing that scope takes breakages 3 -> 0 with repairs unchanged at 5, through refusals issued before any edit, each naming the missing fact and the breakage it prevented",
+  "the ladder is a dose-response: 3 successes UNDETERMINED, first failure AMBIGUOUS, fifth observation IDENTIFIED",
+  "with the failures deleted the same code refuses to name any requirement, so the label is earned",
+  "the law used is the tree's own applicability_v1.learn, pinned by a test so a private learner cannot drift from it"
+ ]
+}
