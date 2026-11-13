@@ -31227,18 +31227,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 403,
+  "knowledge_documents": 404,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6801,
+  "research_index_records": 6802,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1974
+  "source_index_modules": 1973
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "42c768d2f8ad020bd70bfce1276fc0e9b6538b09e8e88e3eb44e2b48b9c5e712"
+  "value": "6f6d443e31992605e2628d056a005e5e826e0ee933a9e0a2e6c640f3e6bb1b88"
  },
  "engines": [
   {
@@ -62565,6 +62565,85 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 14775,
+   "headings": [
+    "Problem 2 is not one problem: where generalisation stops, and what actually moves it",
+    "1. What is actually true, before any new mechanism",
+    "2. The thing that is actually missing — and it is not a learner",
+    "3. The measurement that had to fail before it could mean anything",
+    "4. Am I right or wrong — the four claims, split",
+    "5. The smartest next action, and the ones I killed",
+    "6. Receipts",
+    "7. Seven mistakes this instrument made, none of which survived into a number",
+    "8. What this does not claim"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT_20261112_V1.md",
+   "sha256": "1d28da06f474f30fdfc889482f5ff8cef17c0a820674df3c4908ed766e9c4e42",
+   "summary": "**2026-11-12.** Base `dbdf4969`. Branch `arena/5c61b6c7-brain`.",
+   "terms": {
+    "0.529": 9,
+    "1.000": 8,
+    "132": 10,
+    "42": 9,
+    "about": 6,
+    "all": 6,
+    "boundary": 8,
+    "changed": 6,
+    "changes": 9,
+    "check": 35,
+    "constructed": 7,
+    "correct": 14,
+    "demonstration": 22,
+    "each": 6,
+    "edited": 14,
+    "every": 6,
+    "exact": 9,
+    "false": 11,
+    "file": 15,
+    "files": 7,
+    "generalisation": 6,
+    "half": 11,
+    "ladder": 7,
+    "learner": 12,
+    "lesson": 6,
+    "made": 7,
+    "module": 6,
+    "no": 13,
+    "not": 40,
+    "number": 8,
+    "one": 27,
+    "only": 8,
+    "own": 8,
+    "pairs": 6,
+    "pkg": 9,
+    "precision": 8,
+    "problem": 6,
+    "project": 8,
+    "real": 8,
+    "right": 7,
+    "run": 7,
+    "same": 14,
+    "so": 12,
+    "solved": 7,
+    "test": 15,
+    "tests": 12,
+    "true": 29,
+    "wrong": 21
+   },
+   "title": "Problem 2 is not one problem: where generalisation stops, and what actually moves it",
+   "title_terms": [
+    "actually",
+    "generalisation",
+    "moves",
+    "not",
+    "one",
+    "problem",
+    "stops"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 49006,
    "headings": [
     "Where the solutions actually live",
@@ -76118,10 +76197,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1205,
+  "included_source_count": 1206,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "7063b61e9742819f0810668cb8fbe2aa525afb953a7835d874bca5debff8b398"
+  "source_tree_digest": "b8b9e2f4a9700db37177a2bf1f6ad741b4684225711575026a3c58f2582830af"
  },
  "research_index": [
   {
@@ -158569,27 +158648,6 @@
   {
    "action_id": "",
    "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/FILE_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/FILE_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
-   "schema": "BRAIN_FILE_FOUND_FROM_TASK_TEXT_V1",
-   "sha256": "bf4c9e3cb087ad76a10df1db1f0b59c423b0ba9e085b93235ae8e9f3fb6f72d2",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "file": 1,
-    "found": 1,
-    "swebench": 1,
-    "task": 1,
-    "text": 1,
-    "v1": 1,
-    "verified": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -160869,6 +160927,24 @@
     "v1": 1,
     "v21": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json",
+   "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
+   "sha256": "25fd4b6ebcfaaa8940fd80dd57aeb054d839e8ad5f3a83d34c57553d1c8a85b8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "generalization": 1,
+    "gradient": 1,
+    "rung": 1,
+    "v1": 1
    }
   },
   {
@@ -228293,7 +228369,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "62897a15355c64c82e5642bd7186f522b6b4dad78cceeb1a7556dd8ea4769c7d",
+   "sha256": "cadc1f1ec212cdc88616b15bac3db46e3b7eebb534e475ec0a06324e97941b53",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -236791,6 +236867,29 @@
     "teaches": 1,
     "v1": 1,
     "what_a_success_teaches_20261112_v1": 1
+   }
+  },
+  {
+   "action_id": "WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHERE_GENERALISATION_STOPS_AND_WHAT_MOVES_IT_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0b80c620bee968ca3dcef46c08be1d2ca1edee65476545596652d7f9d401afd1",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_correction_whose_demonstration_carried_only_half_of_the_behaviour_is_confidently_wrong_on_the_other_half_and_a_demonstration_does_not_have_to_say_which_half_it_carried__the_ladder_is_measured_as_one_showing_0_529_and_widest_rung_0_048_at_precision_0_455_and_the_test_that_would_refuse_the_wrong_half_could_run_on_0_of_42_real_changed_files": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generalisation": 1,
+    "measure_the_ladder_and_move_the_limiting_factor_from_the_learner_to_the_check": 1,
+    "moves": 1,
+    "problem_two_is_a_ladder_of_six_writings_and_an_oracle_deficit__not_a_single_unsolved_learner__measured_on_12_merged_pull_requests_with_a_discriminating_positive_control__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "stops": 1,
+    "v1": 1,
+    "where_generalisation_stops_and_what_moves_it_20261112_v1": 1
    }
   },
   {
@@ -259628,10 +259727,10 @@
   },
   {
    "capability": false,
-   "classification": "ORPHAN",
+   "classification": "INTERNAL_HELPER",
    "executable_entry_point": false,
    "id": "source:canonical/runtime/edit_kind_learning_v1.py",
-   "imported_by_count": 0,
+   "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/edit_kind_learning_v1.py",
    "sha256": "d8e8203414f707d78a5b5c7493d6b6ec628d4faa45e6d5f14283bde65f58abf4",
@@ -262034,45 +262133,6 @@
     "stated": 1,
     "v1": 1,
     "verify": 1
-   }
-  },
-  {
-   "capability": false,
-   "classification": "ORPHAN",
-   "executable_entry_point": false,
-   "id": "source:canonical/runtime/file_the_task_text_points_at_v1.py",
-   "imported_by_count": 0,
-   "kind": "SOURCE_ADDRESSABLE_MODULE",
-   "path": "canonical/runtime/file_the_task_text_points_at_v1.py",
-   "sha256": "775219629a59cf3404f8083c2fc28c96d4de93c0eea7c393c7eaa77b699b78ad",
-   "summary": "Which file of a project a task's text points at, and the first changes to try from there.",
-   "symbol_count": 7,
-   "symbols": [
-    "_stands",
-    "candidates",
-    "counted",
-    "document",
-    "named",
-    "order",
-    "scores"
-   ],
-   "terms": {
-    "candidates": 1,
-    "changes": 1,
-    "counted": 1,
-    "document": 1,
-    "file": 2,
-    "first": 1,
-    "named": 1,
-    "order": 1,
-    "points": 2,
-    "project": 1,
-    "scores": 1,
-    "stands": 1,
-    "task": 2,
-    "text": 2,
-    "try": 1,
-    "v1": 1
    }
   },
   {
