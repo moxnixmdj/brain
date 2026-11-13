@@ -7,7 +7,7 @@
  "route_id": "THE_TREE_NEVER_SEPARATED_LOOKUP_FROM_GENERALIZATION_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "92e080108f2abd1729f714efac6ba94267173539",
+ "canonical_base_commit": "3a0dba881f884b3c132d51cc5dcf5d1692f94e7a",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -93,7 +93,7 @@
   "canonical/runtime/finite_capability_diagnosis.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "92e080108f2abd1729f714efac6ba94267173539",
+  "canonical_base_commit": "3a0dba881f884b3c132d51cc5dcf5d1692f94e7a",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_TREE_CAN_SAY_WHETHER_A_RECOVERED_CHANGE_WAS_REMEMBERED_OR_GENERALIZED_AND_THE_FALSE_CLAIM_THAT_GENERALIZATION_IS_EXACT_MATCHES_ONLY_IS_REMOVED",
@@ -267,12 +267,13 @@
       "/tmp/pulls_v3.json file lists"
      ],
      "qualification_evidence": [
-      "measured on this host: the changed paths are mostly under test/ or tests/, so a project's own suite does not cover them; and importing a changed file fails for 8 of the 15 projects (numpy, cv2, PIL, dotenv, yaml absent), so the result would silently cover 7"
+      "measured on this host: the changed paths are mostly under test/ or tests/, so a project's own suite does not cover them; and importing a changed file fails for 8 of the 15 projects (numpy, cv2, PIL, dotenv, yaml absent), so the result would silently cover 7",
+      "disqualified for this round: the measurement would be partial by construction and the gap would be silent, which is worse than stating that no project test was run"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "resolution": "DISQUALIFIED_THIS_ROUND",
+     "resolution": "DISQUALIFIED",
      "comparison": {
       "CORRECTNESS": "WOULD BE STRONGER BUT IS NOT OBTAINABLE HERE",
       "CAPABILITY_STRENGTH": "7 OF 15 WITH A SILENT GAP",
