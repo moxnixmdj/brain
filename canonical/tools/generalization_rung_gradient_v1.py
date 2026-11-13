@@ -1166,12 +1166,29 @@ class Check:
         return done.returncode, done.stderr.decode("utf-8", "replace")[-400:]
 
     def _env(self) -> dict[str, str]:
+        """The bounded env, with the COLLECTOR reachable and the project's own code first.
+
+        `_suite` correctly refuses to call "Ran 0 tests" a pass and falls back to pytest for
+        pytest-shaped modules. That fallback used to be unreachable whenever pytest was
+        installed outside the project copy -- which is every real run, because the copy holds
+        one pull request's files and no site-packages. `_pytest_importable()` then said False,
+        the check was dropped as CHECK_NO_DISCOVERABLE_TESTS, and the 943 pytest-shaped files
+        stayed unverifiable for a reason that has nothing to do with the project.
+
+        The project directory stays FIRST on PYTHONPATH, so the suite still imports the copy's
+        code and can never be satisfied by the repository's own modules. Only directories that
+        exist are appended, and nothing else from the parent environment is inherited.
+        """
         import os
         path = os.environ.get("PATH", "/usr/bin:/bin")
         if self._venv_dir:
             path = str(pathlib.Path(self._venv_dir) / "bin") + os.pathsep + path
+        project = str(self._dir) if self._dir else ""
+        inherited = os.environ.get("PYTHONPATH", "")
+        extra = [p for p in inherited.split(os.pathsep)
+                 if p and p != project and pathlib.Path(p).is_dir()]
         return {"PATH": path,
-                "PYTHONPATH": str(self._dir) if self._dir else "",
+                "PYTHONPATH": os.pathsep.join([project, *extra]) if project else os.pathsep.join(extra),
                 "HOME": str(self._dir) if self._dir else "/tmp"}
 
     @staticmethod
