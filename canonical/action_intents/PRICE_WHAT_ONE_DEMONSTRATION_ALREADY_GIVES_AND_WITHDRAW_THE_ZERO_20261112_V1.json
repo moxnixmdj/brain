@@ -7,7 +7,7 @@
  "route_id": "PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "7ca881b812a31fd2d13c1e07ff788b346c5a5c0b",
+ "canonical_base_commit": "68374960837276a4d19f32caf39215cc99eb49ae",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -78,7 +78,7 @@
   "canonical/runtime/finite_capability_diagnosis.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "7ca881b812a31fd2d13c1e07ff788b346c5a5c0b",
+  "canonical_base_commit": "68374960837276a4d19f32caf39215cc99eb49ae",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_BRANCH_CARRIES_A_PRICED_FACT_INSTEAD_OF_AN_UNPRICED_CHANGE__THE_SHIPPED_ORGAN_IS_AT_23_06_OF_ITS_OWN_23_48_CEILING_ON_THE_RECORDED_CORPUS_AND_A_SOUND_WIDENING_MEASURES_ZERO",
@@ -169,7 +169,7 @@
   },
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-13T00:57:07Z",
+   "checked_at_utc": "2026-11-13T00:59:10Z",
    "max_age_hours": 24,
    "incumbent_route": "THE_SHIPPED_ORGAN_ON_MAIN_RETURNS_23_06_PERCENT_OF_THE_DEVELOPERS_NON_IMPORT_CHANGES_AT_94_61_PERCENT_PRECISION_ON_THE_RECORDED_CORPUS__ITS_OWN_CEILING_IS_23_48_PERCENT",
    "source_classes_checked": [
@@ -324,7 +324,7 @@
    "negative_search_summary": "NO_WIDENING_OF_THE_ALGEBRA_CAN_EXCEED_THE_ORGAN_OWN_CEILING_ON_THIS_CORPUS__EVERY_ROUTE_THAT_ADDS_EVIDENCE_RATHER_THAN_FITTING_IS_WHAT_IS_LEFT",
    "selected_route": "WITHDRAW_THE_ZERO_GAIN_WIDENING_AND_RECORD_WHAT_THE_SHIPPED_ORGAN_ALREADY_GIVES",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-13T00:57:07Z",
+    "checked_at_utc": "2026-11-13T00:59:10Z",
     "max_age_hours": 2,
     "selected_route": "WITHDRAW_THE_ZERO_GAIN_WIDENING_AND_RECORD_WHAT_THE_SHIPPED_ORGAN_ALREADY_GIVES",
     "status": "READY",
@@ -401,7 +401,7 @@
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-  "checked_at_utc": "2026-11-13T00:57:07Z",
+  "checked_at_utc": "2026-11-13T00:59:10Z",
   "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
   "mode": "ACTIVE_INTERFACE",
   "fresh_reality_authority": false,
@@ -454,5 +454,5 @@
   ],
   "no_known_counterexample_reason": "THE_ONE_KNOWN_COUNTEREXAMPLE_IS_RECORDED_AS_THE_REASON_THE_EXEMPTION_IS_A_CLOSED_LIST"
  },
- "base_main_commit": "7ca881b812a31fd2d13c1e07ff788b346c5a5c0b"
+ "base_main_commit": "68374960837276a4d19f32caf39215cc99eb49ae"
 }
