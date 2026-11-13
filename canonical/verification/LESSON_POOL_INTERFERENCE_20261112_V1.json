@@ -1,0 +1,128 @@
+{
+ "schema": "LESSON_POOL_INTERFERENCE_V1",
+ "authority": "NONE",
+ "model_calls": 0,
+ "cost_usd": 0.0,
+ "corpus_tool_sha256": "5fac4f092d34126d4806d244046c321cc63e7f20bf47341788b3a60a9ac6aaea",
+ "organ_sha256": "682960d1b73971606e4fae1f861b43d81b6a8acea604e947a3816b75c3d75c5a",
+ "sets": [
+  "seen",
+  "held_out",
+  "fresh"
+ ],
+ "kinds": 52,
+ "targets": 232,
+ "rules_when_all_loaded": 70,
+ "own_lesson_only": {
+  "files": 232,
+  "edited": 140,
+  "questions": 296,
+  "same": 288,
+  "left": 2,
+  "extra": 13,
+  "wrong": 13
+ },
+ "curve": [
+  {
+   "files": 232,
+   "edited": 1,
+   "questions": 1,
+   "same": 1,
+   "left": 0,
+   "extra": 0,
+   "wrong": 0,
+   "lessons": 1,
+   "rules": 1
+  },
+  {
+   "files": 232,
+   "edited": 1,
+   "questions": 1,
+   "same": 1,
+   "left": 0,
+   "extra": 0,
+   "wrong": 0,
+   "lessons": 2,
+   "rules": 2
+  },
+  {
+   "files": 232,
+   "edited": 1,
+   "questions": 1,
+   "same": 1,
+   "left": 0,
+   "extra": 0,
+   "wrong": 0,
+   "lessons": 3,
+   "rules": 4
+  },
+  {
+   "files": 232,
+   "edited": 1,
+   "questions": 1,
+   "same": 1,
+   "left": 0,
+   "extra": 0,
+   "wrong": 0,
+   "lessons": 5,
+   "rules": 6
+  },
+  {
+   "files": 232,
+   "edited": 11,
+   "questions": 21,
+   "same": 1,
+   "left": 20,
+   "extra": 20,
+   "wrong": 20,
+   "lessons": 8,
+   "rules": 9
+  },
+  {
+   "files": 232,
+   "edited": 30,
+   "questions": 56,
+   "same": 24,
+   "left": 32,
+   "extra": 48,
+   "wrong": 48,
+   "lessons": 13,
+   "rules": 14
+  },
+  {
+   "files": 232,
+   "edited": 64,
+   "questions": 135,
+   "same": 102,
+   "left": 33,
+   "extra": 51,
+   "wrong": 51,
+   "lessons": 21,
+   "rules": 23
+  },
+  {
+   "files": 232,
+   "edited": 90,
+   "questions": 180,
+   "same": 159,
+   "left": 21,
+   "extra": 49,
+   "wrong": 49,
+   "lessons": 34,
+   "rules": 43
+  },
+  {
+   "files": 232,
+   "edited": 130,
+   "questions": 282,
+   "same": 270,
+   "left": 6,
+   "extra": 39,
+   "wrong": 39,
+   "lessons": 52,
+   "rules": 70
+  }
+ ],
+ "seconds": 166.7,
+ "reading": "The curve is the measurement. With one to five lessons loaded the organ edits almost nothing and is never wrong. From the eighth lesson on it edits many files and starts writing lines the developers never wrote. 'extra' and 'wrong' are computed by different code and agree."
+}
