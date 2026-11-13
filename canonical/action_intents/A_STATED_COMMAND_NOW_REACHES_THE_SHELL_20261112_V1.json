@@ -37,7 +37,7 @@
   "route_class": "REUSE"
  },
  "benchmark_or_family_rank_authority": false,
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::VERIFIED_ACTION reports that an action met its own declared postcondition, and is read as 'the question was answered'. Audited: 1 of 5 verified ordinary tasks answered its question. The forged-row veto is the same error one layer down -- a surface match reported as a decisive fact.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A VERIFIED_BOUND_CAPABILITY with requires:[] and the highest keyword score was unreachable by every sentence that named it, and act() reported the failure as AMBIGUOUS with only zero-score forged survivors -- naming the routing layer when the cause was binding.",
  "canonical_base_commit": "984b680779529621ef6606762271d7d6aa635420",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
@@ -166,7 +166,7 @@
    "LEAVE_UNDECIDABLE_AND_DOCUMENT_IT"
   ],
   "selected_surviving_route": "DECIDE_THE_NETWORK_PREMISE_AND_BIND_THE_STATED_URL",
-  "stop_condition": "SEVEN_NEW_TESTS_PASS__THE_30_TASK_COVERAGE_AND_155_ROW_CENSUS_BOTH_RUN_WITH_AND_WITHOUT_THE_CHANGE__EVERY_MOVED_ROW_EXPLAINED__DRIFT_GUARD_PASS__ZERO_CAPABILITIES_REGISTERED",
+  "stop_condition": "TWENTY_FOUR_NEW_TESTS_PASS__AND_THE_FAILURE_SET_OVER_THE_37_TOUCHED_TEST_FILES_IS_A_STRICT_SUBSET_OF_HEAD",
   "why_selected_route_is_fastest_sufficient": "Both are one function each, both are measured at the front door before and after, and both replace silence with an answer. Neither adds a capability, a permission, or a model."
  },
  "route_id": "A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1",
