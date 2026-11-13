@@ -7,7 +7,7 @@
  "route_id": "CAUSAL_LOCALIZATION_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1",
  "date": "2026-11-13",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "391a707d1803d3ffef5ca2a0bcea41c278d1b354",
+ "canonical_base_commit": "c7017116dee6b282d597be90e4d685023c4a3090",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -91,7 +91,7 @@
  ],
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "391a707d1803d3ffef5ca2a0bcea41c278d1b354",
+  "canonical_base_commit": "c7017116dee6b282d597be90e4d685023c4a3090",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "Multi-hunk whole-file and multi-site historical repairs now crystallize only causally sufficient, contrast-admitted lessons; operator transfer filters proposals and scope facts to executed syntax-valid lines (77 -> 2 candidates, IDENTIFIED scope); and multi-step closed-loop repository repair refuses cross-module imported callee bypasses (8/8 generalising).",
   "selected_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
@@ -191,7 +191,7 @@
   },
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-13T04:31:18Z",
+   "checked_at_utc": "2026-11-13T04:37:19Z",
    "max_age_hours": 24,
    "incumbent_route": "STATIC_WHOLE_FILE_OR_SINGLE_SITE_SKILL_CRYSTALLIZATION_AND_PARAMETER_ONLY_PATCH_DEPENDENCY_GATE",
    "source_classes_checked": [
@@ -328,7 +328,7 @@
     }
    ],
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-13T04:31:18Z",
+    "checked_at_utc": "2026-11-13T04:37:19Z",
     "max_age_hours": 2,
     "selected_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
     "status": "READY",
@@ -443,7 +443,7 @@
     },
     {
      "path": "canonical/verification/CAUSAL_LOCALIZATION_AND_DEPENDENCY_ADMISSION_20261113_V1.json",
-     "git_blob_sha": "7bf8bc003bfa99b23b4b8a2b215d3a06208059c7"
+     "git_blob_sha": "1625ce9b4815f8bfa5f9546ffff56184ffdc853f"
     },
     {
      "path": "canonical/tests/test_causal_localization_and_dependency_admission_v1.py",

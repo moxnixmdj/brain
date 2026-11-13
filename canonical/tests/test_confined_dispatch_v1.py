@@ -102,7 +102,11 @@ def test_pc4_a_raising_adapter_fails_closed_with_its_receipt() -> None:
     result = CD.run_confined_capability(cid, _entry(cid), action, host_root=ROOT)
     assert isinstance(result, dict)
     assert result.get("pass") is False
-    assert result.get("reason") == "CONFINED_RUN_DID_NOT_PRODUCE_A_RESULT"
+    # Measured 2026-11-13 (effect-directed round): a raising adapter's reason is named,
+    # not silenced -- the runner's error travels as CONFINED_ADAPTER_RAISED:<type>:<error>.
+    reason = str(result.get("reason") or "")
+    assert reason == "CONFINED_RUN_DID_NOT_PRODUCE_A_RESULT" or reason.startswith(
+        "CONFINED_ADAPTER_RAISED:"), reason
     assert (result.get("confinement") or {}).get("receipt_sha256")
     assert result.get("dependency", {}).get("executor") == CD.EXECUTOR
 

@@ -1,0 +1,205 @@
+{
+ "schema": "TEST_ENTRY_POINT_FINDER_20261113_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "question": "Can the check the fuel census said was missing actually be stood up on real repositories?",
+ "prior_measurement": {
+  "round": 28,
+  "source": "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json",
+  "verdict_reported": "CHECK_NO_TEST_MODULE",
+  "tasks_affected": "6 of 12",
+  "accepted_as_true": false
+ },
+ "corpus": {
+  "repositories": 6,
+  "pinned_base_shas": {
+   "torproject/stem#155": "fc3394ab9b07cff8d2ddc6d8290ffdaa0ff3479f",
+   "jodal/comics#652": "157072d14651ac002ebe547405cb5ce4129d0aff",
+   "learning-unlimited/django-argcache#5": "e07f17975e98fc1adc427c628422b4d3e961776c",
+   "ArduPilot/MAVProxy#1623": "e7fade958c1fc6ddfabc7c08f23ca415aaf633b0",
+   "FZJ-IEK3-VSA/ActivityAssure#2": "6b391336e908e4dd5a4bf7bb531162e814c51d2c",
+   "avocado-framework/avocado-vt#2887": "ef4f01bacce78c0a9ff70c2a3919cb6c447cf434"
+  },
+  "changed_python_files_examined": 74
+ },
+ "finding_1_prior_verdict_was_wrong": {
+  "claim": "CHECK_NO_TEST_MODULE was at least partly a finder bug, not a real absence",
+  "evidence": {
+   "repo": "jodal/comics",
+   "file": "src/comics/accounts/models.py",
+   "old_finder": "globbed only test_*.py; the importing files are conftest.py and test_*.py under tests/api/",
+   "files_importing_it": 5,
+   "verdict_after_fix": "COVERS"
+  },
+  "general_rule_violated": "A finder that searches one filename convention reports a missing check, and 'no check exists' is indistinguishable from 'I did not look here'."
+ },
+ "finding_2_finder_bugs_found_and_fixed": [
+  {
+   "bug": "only test_*.py scanned",
+   "fix": "also *_test.py, conftest.py, and every .py under test/ or tests/"
+  },
+  {
+   "bug": "filename-based discovery misses tests named after the module",
+   "example": "torproject/stem test/unit/util/connection.py tests stem/util/connection.py",
+   "fix": "directory-convention discovery"
+  },
+  {
+   "bug": "relative imports matched top-level files",
+   "example": "from .other_validation import x matched pkg/validation.py",
+   "fix": "resolve node.level against the importing file's package"
+  },
+  {
+   "bug": "import name unrecoverable from the path",
+   "example": "django-argcache src/function.py imported as argcache.function; name only in setup.py packages=[...]",
+   "fix": "read packages=/package_dir= from setup.py, setup.cfg, pyproject.toml"
+  },
+  {
+   "bug": "router dispatch invisible to an import graph",
+   "example": "comics src/comics/accounts/views.py imported only by urls.py, exercised by client.get('/me/secret-key/')",
+   "fix": "walk urls.py route registrations and match routes/names in tests"
+  },
+  {
+   "bug": "test files counted as unchecked",
+   "fix": "verdict IS_TEST_FILE"
+  }
+ ],
+ "finding_3_census": {
+  "verdicts": {
+   "IS_TEST_FILE": 20,
+   "COVERS": 11,
+   "IMPORTS": 5,
+   "DISPATCH": 2,
+   "NONE": 36
+  },
+  "non_test_files": 54,
+  "non_test_files_with_reachable_check": 18,
+  "rate": 0.333,
+  "interpretation": "Even with four naming conventions, six repos, and three graph kinds, only a third of changed non-test files have any check reachable. The prior round's 42/42 unverified was measured with a finder that undercounts; the corrected number is still 67% unverifiable."
+ },
+ "finding_4_reachability_is_not_adequacy": {
+  "method": "mutation testing on two real projects, baseline green, then break the code",
+  "experiments": [
+   {
+    "repo": "torproject/stem",
+    "file": "stem/util/connection.py",
+    "mutant": "is_valid_ipv4_address -> return True",
+    "baseline": "28 passed",
+    "after": "2 failed, 2 errors",
+    "caught": true
+   },
+   {
+    "repo": "jodal/comics",
+    "file": "src/comics/accounts/models.py",
+    "mutant": "Subscription.__str__ -> 'MUTANT'",
+    "baseline": "10 passed",
+    "after": "10 passed",
+    "caught": false,
+    "note": "an existing test imports this module; nothing asserts this behaviour"
+   },
+   {
+    "repo": "jodal/comics",
+    "file": "src/comics/accounts/models.py",
+    "mutant": "db_table -> 'MUTANT_TABLE'",
+    "baseline": "10 passed",
+    "after": "1 failed, 8 errors, 1 passed",
+    "caught": true
+   },
+   {
+    "repo": "jodal/comics",
+    "file": "src/comics/accounts/views.py",
+    "mutant": "secret_key POST no longer rotates the key",
+    "baseline": "4 passed",
+    "after": "4 passed",
+    "caught": false
+   },
+   {
+    "repo": "jodal/comics",
+    "file": "src/comics/accounts/views.py",
+    "mutant": "account_details renders 'accounts/MUTANT.html'",
+    "baseline": "4 passed",
+    "after": "4 passed",
+    "caught": false
+   }
+  ],
+  "measured": "3 of 5 mutants survived",
+  "conclusion": "COVERS means a test exists and names the module. It does not mean a bug in that module is caught. Mutation is the only measurement that distinguishes the two, and it costs a test run per mutant."
+ },
+ "finding_5_runnability": {
+  "measured": "stem: python -m unittest test.unit.util.connection -> OK, 28 tests, no install needed",
+  "measured_2": "comics: 9 transitive dependencies missing plus Django>=6.0.6 requires Python>=3.12 while the sandbox is 3.11; after installing 12 packages the suite ran 10 passed in 5.76s",
+  "conclusion": "Running a repository's own check is possible but costs dependency resolution and a version-constrained interpreter. It is a setup problem, not a model-capability problem."
+ },
+ "conclusion": "THE_CHECK_IS_BUILDABLE__IT_WAS_NEVER_A_MODEL_LIMIT",
+ "what_this_does_not_say": [
+  "It does not say the 6 round-28 tasks now verify; the finder only says a check may exist.",
+  "It does not say coverage is 33% everywhere; the corpus is 6 repositories chosen because they were the failures.",
+  "It does not close claim D: reachability, adequacy, and weight-space permanence are three different bars."
+ ],
+ "artifacts": {
+  "tool": "canonical/tools/test_entry_point_finder_v1.py",
+  "tests": "canonical/tests/test_test_entry_point_finder_v1.py",
+  "tests_passing": 11
+ },
+ "finding_6_reuse_measured": {
+  "tool": "canonical/runtime/environment_reuse_v1.py",
+  "environment": "three-dial lock, 1000 states, repo's own shape (canonical/runtime/environment_learning_v1.py)",
+  "experiments": [
+   {
+    "regime": "cold, no heuristic",
+    "status": "FAIL_CLOSED__GOAL_NEVER_OBSERVED",
+    "note": "51 states seen of 1000, goal never observed; 600 trials still found only 79 states"
+   },
+   {
+    "regime": "cold, caller-supplied AIM heuristic",
+    "status": "PASS",
+    "interactions": 1672,
+    "states_modelled": 245,
+    "plan_length": 18,
+    "note": "the repo's existing tests pass a hand-written heuristic; the aim is the caller's, not learned"
+   },
+   {
+    "regime": "second visit via drive(prior=...)",
+    "status": "PASS",
+    "interactions": 1672,
+    "saving": "0.00%",
+    "note": "drive() explores before planning every visit; the prior changed no cost"
+   },
+   {
+    "regime": "second visit via replay_then_repair",
+    "status": "PASS__PRIOR_REPLAYED_GOAL_OBSERVED",
+    "interactions": 18,
+    "saving": "98.92%",
+    "ratio": 0.0108
+   },
+   {
+    "regime": "drifted world (dial 1 reversed), prior replayed",
+    "status": "FAIL_CLOSED__PRIOR_STALE_REPAIR_FAILED",
+    "prior_was_stale": true,
+    "interactions": 1,
+    "note": "stale prior detected instead of executed"
+   },
+   {
+    "regime": "stored plan executed blind on drifted world",
+    "result_state": [
+     7,
+     8,
+     9
+    ],
+    "goal": [
+     7,
+     2,
+     9
+    ],
+    "note": "the counterfactual: unvalidated reuse lands off goal"
+   }
+  ],
+  "conclusion": "INSTANT_REUSE_IS_REAL_ONLY_BECAUSE_IT_IS_CHECKED",
+  "what_the_number_means": "1.08% is the cost of replaying one already-learned plan in an UNCHANGED environment. It is not learning: nothing new is acquired on the warm visit, and the 1672-interaction learning cost is paid once by whoever found the plan.",
+  "two_easy_to_miss_false_negatives": [
+   "the environment supplies reset()/snapshot()/restore() -- arbitrary rollback no real computer-use surface gives you",
+   "the caller supplies is_goal() -- the terminal verifier, which is the same missing piece as the fuel census",
+   "the caller supplies the AIM heuristic, without which the 1000-state lock is not solved at all"
+  ]
+ }
+}

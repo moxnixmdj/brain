@@ -3,9 +3,10 @@
 Eleven rounds of hunting blockers and removing them changed nothing measurable. This round
 tested the other hypothesis -- that the wrong thing was being measured -- and it holds:
 
-  * 30 ordinary computer tasks: 15 expressible, 15 not, 15 AMBIGUOUS.
-  * Of the 5 the machine reports as VERIFIED_ACTION, reading them says ONE answered its
-    question. The other three answered a different question. One is unjudged.
+  * 30 ordinary computer tasks: 14 expressible, 16 not (corrected 2026-11-12 from 15/15:
+    one "expressible" task was returning 51,684 for a 223-line file).
+  * Of the 4 the machine reports as VERIFIED_ACTION, reading them says ONE answered its
+    question. The other two answered a different question. One is unjudged.
 
 The load-bearing assertion is `test_verified_action_is_not_the_same_claim_as_answered`.
 `VERIFIED_ACTION` means the action met its own declared postcondition. It does not mean the
@@ -47,9 +48,19 @@ def test_thirty_ordinary_tasks_are_measured(report):
 
 
 def test_only_half_of_ordinary_computer_tasks_are_expressible(report):
-    """15 of 30. This is coverage, not failure: ten of these have no capability at all."""
-    assert report["expressible"] == 15, report["expressible"]
-    assert report["unexpressible"] == 15
+    """14 of 30, corrected down from 15 on 2026-11-12 — the 15th was a FALSE PASS.
+
+    "count the lines in README.md" routed to `python.source.definition_count.v1`,
+    which counts functions and classes. README.md has 223 lines; the machine
+    answered 51,684 and reported VERIFIED_ACTION. It was counted as expressible
+    because a wrong answer in the right shape reads exactly like a right one.
+
+    `world_probe_v1.entity_contradiction` now refuses a counting row that cannot
+    count the thing asked for, so the task is honestly unexpressible. The number
+    going DOWN is the measurement improving: coverage was never 15.
+    """
+    assert report["expressible"] == 14, report["expressible"]
+    assert report["unexpressible"] == 16
 
 
 def test_every_unexpressible_task_is_ambiguous_not_routeless(report):
@@ -68,7 +79,7 @@ def test_every_unexpressible_task_is_ambiguous_not_routeless(report):
     assert len(routeless) == 0, [r["task"] for r in routeless]
     # "unexpressible" is the sum of the two, not one of them -- they overlap only in
     # having no capability_id, which is exactly why counting them as one number hides the split.
-    assert len(ambiguous) + len(routeless) == report["unexpressible"] == 15
+    assert len(ambiguous) + len(routeless) == report["unexpressible"] == 16
     assert all(r.get("survivor_scores") for r in ambiguous)
 
 
@@ -87,8 +98,11 @@ def test_verified_action_is_not_the_same_claim_as_answered(honest):
     central finding no longer holds -- that would be good news and a reason to rewrite, not
     a reason to relax the test.
     """
-    assert honest["verified"] == 5, honest["verified"]
-    assert honest["not_an_answer"] == 3, honest["not_an_answer"]
+    # 5 -> 4 and 3 -> 2 on 2026-11-12: the fifth VERIFIED_ACTION was the README
+    # line-count, and it is no longer produced at all. Fewer false passes is fewer
+    # rows to audit; the ratio that matters (1 honest of 4) did not improve.
+    assert honest["verified"] == 4, honest["verified"]
+    assert honest["not_an_answer"] == 2, honest["not_an_answer"]
     assert honest["honest"] == 1, honest["honest"]
     assert honest["verified"] > honest["honest"] + honest["not_an_answer"] - 1
 
@@ -96,7 +110,7 @@ def test_verified_action_is_not_the_same_claim_as_answered(honest):
 def test_each_wrong_verdict_carries_what_it_actually_returned(honest):
     """A verdict without the receipt content is an opinion. Every wrong one records both."""
     wrong = [r for r in honest["rows"] if r["verdict"] == "NOT_AN_ANSWER"]
-    assert len(wrong) == 3
+    assert len(wrong) == 2
     for row in wrong:
         assert row["audit"], row["task"]
         assert row["audit"]["returned"], row["task"]

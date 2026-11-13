@@ -1,0 +1,336 @@
+{
+ "authority": "NONE__PRODUCER_RUN_MEASUREMENT_IN_ONE_SANDBOX_NOT_INDEPENDENT_VERIFICATION",
+ "correction_to_a_merged_claim": {
+  "claimed": "the failures' site-fact sets are supersets of the successes'",
+  "file": "A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1.md",
+  "measured": "false for all four pairs",
+  "pinned_by": "test_correction_no_success_fact_set_is_a_subset_of_a_failure",
+  "round": "G",
+  "true_obstruction": "the intersection of the successes is contained in every failure, which is narrower"
+ },
+ "file_counts": {
+  "credited_but_not_a_test": 54,
+  "examples": [
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-INLINE-HELPER-001__WORLD/project/tests/__init__.py",
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-MERGE-RESOLVE-001__WORLD/project/tests/__init__.py",
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/app/__init__.py",
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/app/mod.py",
+   "canonical/astra_runtime/evidence/ASTRA-VERIFY-TEST-ADEQUACY-001__WORLD/project/tests/__init__.py",
+   "canonical/astra_runtime/state/env_toolchain/pytest_run.py"
+  ],
+  "genuine_test_modules": 2609,
+  "substring_rule_files": 2663,
+  "via_a_directory_component": 29,
+  "via_the_filename": 25
+ },
+ "files": {
+  "THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.md": "42eccaf9b0f5a50158a7d1ea46a4a3ac5a867f54604288d5bc824fe180f54ce3",
+  "canonical/runtime/applicability_v1.py": "e81a2ae3eadbe676aea0e5a0fad86f5ff17a37dab9be6ab9221daec7c8de0233",
+  "canonical/runtime/fact_entailment_v1.py": "bb978bfcbd7959ebf6b4d0455e0de39920e4a2b1c392a62083af05578c8be84e",
+  "canonical/runtime/world_probe_v1.py": "2b8f8d9602ff2dab9db6bcb71bc7eaf5a1bab8931cc8ee09cdc138d6ee1c9454",
+  "canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py": "751c491b06380a58b527c0b9866b0403baa732289a3058b72d331fe358c38e6d",
+  "canonical/tests/test_insufficiency_witness_v1.py": "0cb299425d0e8e0c8b8497ef2eae8a59d8a0ac5e2df28cfe1097d58c53d710b0",
+  "canonical/tools/insufficiency_certificate_probe_v1.py": "6239389923338b01c289e92e82a8d823cd0ea802173b8e2769831578dcaea238"
+ },
+ "generated_at_git_head": "2ef8a72597d7efa791d1d1d2b8f5c87fde0a7ef8",
+ "generated_at_utc": "2026-11-13T04:14:11Z",
+ "generated_by": "producer run of canonical/tools/insufficiency_certificate_probe_v1.py",
+ "how_reproduced": [
+  "python3 canonical/tools/insufficiency_certificate_probe_v1.py",
+  "python3 canonical/tools/insufficiency_certificate_probe_v1.py --json",
+  "python3 -m pytest canonical/tests/test_insufficiency_witness_v1.py canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py canonical/tests/test_real_input_space_census_v1.py -q"
+ ],
+ "mutations": {
+  "first_run_killed": 9,
+  "gaps_the_survivors_exposed": [
+   "a prefix tested against the whole path is indistinguishable from one tested against the filename for any single-directory root, because the sensor indexes paths relative to the root; only a nested module separates them",
+   "restoring the substring is behaviourally equivalent because a name starting with test_ necessarily contains test, so it is pinnable but not killable, and that is stated rather than hidden",
+   "the prefix arm of _spec_implies is unreachable from the live table while exactly one kind carries a prefix, so it is exercised directly on constructed specs"
+  ],
+  "killed": 12,
+  "survived": 0
+ },
+ "real_code_repair_corpus": {
+  "certificate": {
+   "failures": 2,
+   "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+   "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+   "schema": "PROJECT_BRAIN_APPLICABILITY_V1",
+   "shared_facts": [
+    "baseline.violates_own_spec",
+    "operator.Gt"
+   ],
+   "successes": 2,
+   "unrepairable_by_repetition": true,
+   "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+   "witness_failure_indices": [
+    0,
+    1
+   ]
+  },
+  "constant_facts": [
+   "baseline.violates_own_spec",
+   "operator.Gt"
+  ],
+  "correction_no_success_is_a_subset_of_a_failure": true,
+  "evidence": [
+   [
+    [
+     "baseline.violates_own_spec",
+     "left_operand.call",
+     "left_operand.name.abs_bytes",
+     "left_operand.name.delta",
+     "left_operand.name.prev_end",
+     "operator.Gt",
+     "operator.LtE",
+     "right_operand.constant",
+     "right_operand.name.next_size",
+     "right_operand.name.start"
+    ],
+    true
+   ],
+   [
+    [
+     "baseline.violates_own_spec",
+     "left_operand.name.k",
+     "left_operand.name.val",
+     "operator.Gt",
+     "operator.GtE",
+     "right_operand.arithmetic",
+     "right_operand.attribute"
+    ],
+    true
+   ],
+   [
+    [
+     "baseline.violates_own_spec",
+     "left_operand.arithmetic",
+     "left_operand.attribute",
+     "left_operand.constant",
+     "left_operand.name.distance",
+     "left_operand.name.full_size",
+     "left_operand.name.i",
+     "left_operand.name.index",
+     "left_operand.name.item_len",
+     "left_operand.name.k",
+     "left_operand.name.level",
+     "left_operand.name.m",
+     "left_operand.name.max_count",
+     "left_operand.name.max_size",
+     "left_operand.name.min_size",
+     "left_operand.name.n",
+     "left_operand.name.partial_size",
+     "left_operand.name.r",
+     "left_operand.name.remainder",
+     "left_operand.name.step",
+     "left_operand.name.stop",
+     "left_operand.name.value",
+     "left_operand.name.weight",
+     "left_operand.subscript",
+     "operator.Gt",
+     "operator.GtE",
+     "operator.Lt",
+     "operator.LtE",
+     "right_operand.attribute",
+     "right_operand.call",
+     "right_operand.constant",
+     "right_operand.name.batch_size",
+     "right_operand.name.cache_len",
+     "right_operand.name.candidate",
+     "right_operand.name.index",
+     "right_operand.name.j",
+     "right_operand.name.levels",
+     "right_operand.name.max_size",
+     "right_operand.name.n",
+     "right_operand.name.r",
+     "right_operand.name.remaining",
+     "right_operand.name.size",
+     "right_operand.name.value",
+     "right_operand.name.weights_to_skip",
+     "right_operand.subscript"
+    ],
+    false
+   ],
+   [
+    [
+     "baseline.violates_own_spec",
+     "left_operand.arithmetic",
+     "left_operand.attribute",
+     "left_operand.constant",
+     "left_operand.name.distance",
+     "left_operand.name.full_size",
+     "left_operand.name.i",
+     "left_operand.name.index",
+     "left_operand.name.item_len",
+     "left_operand.name.k",
+     "left_operand.name.level",
+     "left_operand.name.m",
+     "left_operand.name.max_count",
+     "left_operand.name.max_size",
+     "left_operand.name.min_size",
+     "left_operand.name.n",
+     "left_operand.name.partial_size",
+     "left_operand.name.r",
+     "left_operand.name.remainder",
+     "left_operand.name.step",
+     "left_operand.name.stop",
+     "left_operand.name.value",
+     "left_operand.name.weight",
+     "left_operand.subscript",
+     "operator.Gt",
+     "operator.GtE",
+     "operator.Lt",
+     "operator.LtE",
+     "right_operand.attribute",
+     "right_operand.call",
+     "right_operand.constant",
+     "right_operand.name.batch_size",
+     "right_operand.name.cache_len",
+     "right_operand.name.candidate",
+     "right_operand.name.index",
+     "right_operand.name.j",
+     "right_operand.name.levels",
+     "right_operand.name.max_size",
+     "right_operand.name.n",
+     "right_operand.name.r",
+     "right_operand.name.remaining",
+     "right_operand.name.size",
+     "right_operand.name.value",
+     "right_operand.name.weights_to_skip",
+     "right_operand.subscript"
+    ],
+    false
+   ]
+  ],
+  "learn_reason": "NO_CONJUNCTION_OF_OBSERVED_FACTS_SEPARATES_SUCCESSES_FROM_FAILURES",
+  "learn_status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+  "learn_survivors": 0,
+  "older_witness_vocabulary_gap": null,
+  "rows": [
+   {
+    "candidates_proposed": 9,
+    "case": "unit_boundary",
+    "firing_sites": 9,
+    "site_facts": 10,
+    "succeeded": true,
+    "verdict": "REPAIRED"
+   },
+   {
+    "candidates_proposed": 4,
+    "case": "bits_capacity",
+    "firing_sites": 4,
+    "site_facts": 7,
+    "succeeded": true,
+    "verdict": "REPAIRED"
+   },
+   {
+    "candidates_proposed": 32,
+    "case": "ichunked_zero",
+    "firing_sites": 56,
+    "site_facts": 45,
+    "succeeded": false,
+    "verdict": "FIRED_AND_NOT_REPAIRED_WITHIN_BUDGET"
+   },
+   {
+    "candidates_proposed": 32,
+    "case": "chunked_even_zero",
+    "firing_sites": 56,
+    "site_facts": 45,
+    "succeeded": false,
+    "verdict": "FIRED_AND_NOT_REPAIRED_WITHIN_BUDGET"
+   }
+  ]
+ },
+ "schema": "PROJECT_BRAIN_INSUFFICIENCY_CERTIFICATE_VERIFICATION_V1",
+ "sensor_defect_before_and_after": {
+  "after_repair": {
+   "admits_every_success_and_refuses_every_failure": true,
+   "certificate": null,
+   "identified_requirement": [
+    "python.test.corpus.available"
+   ],
+   "learn": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+   "survivors": 1
+  },
+  "before_repair": {
+   "certificate": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+   "learn": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+   "older_witness": "FIRES",
+   "sensed_identical_to_canonical_tools": [
+    "canonical/tests",
+    "canonical/tools",
+    "canonical/verification"
+   ],
+   "survivors": 0
+  },
+  "entailment_still_correct": {
+   "corpus_implies_source": true,
+   "implication_pairs": 33,
+   "known_facts": 19,
+   "source_implies_corpus": false,
+   "they_are_equivalent": false
+  },
+  "genuine_test_modules_found": {
+   "canonical/analysis": [],
+   "canonical/runtime": [
+    "test_cognitive_tool_router.py",
+    "test_continuous_obs_runtime.py",
+    "test_data_anonymization_stage_b_gate.py"
+   ],
+   "canonical/runtime/bound_capabilities": [
+    "test_slice_never_miss_v1.py"
+   ],
+   "canonical/tests": [
+    "test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py",
+    "test_a_bisect_materialises_only_the_named_tree_v1.py",
+    "test_a_bisect_without_a_known_good_commit_is_not_certified_v1.py"
+   ],
+   "canonical/tools": [],
+   "canonical/verification": [
+    "test_finite_verifier_search.py",
+    "test_owned_causal_falsification_v1.py"
+   ]
+  },
+  "pinned_outcomes": {
+   "canonical/analysis": false,
+   "canonical/runtime": true,
+   "canonical/runtime/bound_capabilities": true,
+   "canonical/tests": true,
+   "canonical/tools": false,
+   "canonical/verification": true
+  }
+ },
+ "tests": {
+  "batch_passed": 303,
+  "batch_pre_existing_unrelated_failure": "test_computer_unconfined_route_guard_v1.py::test_controller_does_not_run_unconfined_query_or_archive",
+  "batch_skipped": 3,
+  "pre_existing_verified_by": "stashing every change in this round and re-running: it fails on clean main in 0.50s",
+  "test_a_test_corpus_is_a_naming_convention_not_a_substring_v1": 12,
+  "test_insufficiency_witness_v1": 12,
+  "test_real_input_space_census_v1": 9
+ },
+ "theorem": {
+  "equal_facts_cases_checked": 820,
+  "equivalence_counterexamples": 0,
+  "evidence_sets_checked": 2517,
+  "subsumption_counterexamples": 0
+ },
+ "title": "The wall is in the vocabulary, and it can now be proved",
+ "vocabulary_repair_cost": {
+  "certificate_after_closing": null,
+  "closed_vocabulary_size": 31,
+  "hypotheses_that_would_need_enumerating": 8388608,
+  "learn_after_closing": "BOUNDED__TOO_MANY_CANDIDATE_FACTS_TO_ENUMERATE",
+  "learner_enumeration_cap": 12,
+  "reading": "absence removes the separation obstruction but not the enumeration bound, so the obstacle moves from representation to combinatorics",
+  "shared_literals_after_closing": 23
+ },
+ "what_is_not": [
+  "that the real code-repair corpus can now be scoped: the certificate fires with unrepairable_by_repetition True",
+  "that absence facts are shipped: their cost is measured and the learner is unchanged",
+  "that *_test.py is a test module here: the tree's own check defines genuineness as test_*.py",
+  "that this is a weight-space or benchmark result: no model was called",
+  "that the shipped skill corpus has scopes: the ledger is unchanged at 5 of 5 EXACT_MATCH_ONLY",
+  "that the pre-existing red guard is fixed: it is reported and named, not touched"
+ ]
+}

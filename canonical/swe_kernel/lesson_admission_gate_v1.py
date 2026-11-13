@@ -48,6 +48,14 @@ THE TWO TRAPS IT REFUSES TO FALL INTO
    already-correct victim was ever touched, the verdict is `REFINE`, never `ADMIT`: a check whose
    success case is "I didn't look" is the failure this whole seam exists to remove.
 
+TWO FURTHER COUNTEREXAMPLES CLOSED, 2026-11-13
+---------------------------------------------
+The expected answers are fixed from the ORIGINAL source before either execution. Re-running
+an oracle on the edited source let the candidate change its own exam. Also, every previously
+passing probe is protected, even inside an already-defective program: a new failure yields
+REGRESSED and rejection, including on archived programs. Equal aggregate failure counts are
+not evidence of non-regression.
+
 Authority: NONE. Sandbox measurement over caller-supplied victims; no receipt, no capability.
 """
 from __future__ import annotations
@@ -75,6 +83,7 @@ REFUSED = "REFUSED"
 REPAIRED = "REPAIRED"
 PRESERVED = "PRESERVED"
 BROKEN = "BROKEN"
+REGRESSED = "REGRESSED"
 STILL_WRONG = "STILL_WRONG"
 NOT_APPLICABLE = "NOT_APPLICABLE"
 NOT_HELD_OUT = "NOT_HELD_OUT"
@@ -90,7 +99,7 @@ UNCLASSIFIED = "UNCLASSIFIED"
 HELD_OUT = "HELD_OUT"
 ARCHIVE = "ARCHIVE"
 
-_BROKEN_OUTCOMES = frozenset({BROKEN})
+_BROKEN_OUTCOMES = frozenset({BROKEN, REGRESSED})
 _MALFORMED_OUTCOMES = frozenset({NO_PROBES, ORACLE_ERROR, BASELINE_EXECUTION_ERROR})
 
 Oracle = Callable[[str, Any], Any]
@@ -100,8 +109,11 @@ Oracle = Callable[[str, Any], Any]
 class Victim:
     """A program the lesson was not taught on, with its own spec and points to check it at.
 
-    `oracle(source, point)` states the value the CORRECT program produces. It is the caller's
-    specification, not the program's opinion of itself, and this module cannot repair a wrong one.
+    `oracle(source, point)` states the value the CORRECT program produces. It is called once
+    per point with the ORIGINAL source, before execution; both arms use those expectations.
+    It is the caller's specification, not the program's opinion of itself, and this module
+    cannot repair a wrong one. Inputs, oracle and programs must be trusted: the executor runs
+    in-process, without isolation or a timeout.
     """
 
     victim_id: str
@@ -119,7 +131,7 @@ def _norm(text: str) -> str:
 
 
 def _run(source: str, point: Any) -> tuple[bool, Any, str | None]:
-    """(ran, value, error). Executes the tree's own bounded single-call runner."""
+    """(ran, value, error). In-process single-call runner; NOT a security/time sandbox."""
     from canonical.tools.rule_generalization_probe_v1 import run_snippet
 
     try:
@@ -128,14 +140,10 @@ def _run(source: str, point: Any) -> tuple[bool, Any, str | None]:
         return False, None, f"{type(exc).__name__}:{exc}"
 
 
-def _check(source: str, oracle: Oracle, probes: Sequence[Any]) -> dict[str, Any]:
-    """Execute `source` at every point against the victim's own spec."""
+def _check(source: str, probes: Sequence[Any], expected_values: Sequence[Any]) -> dict[str, Any]:
+    """Execute against the same pre-edit expectations in both arms, never a new spec."""
     rows: list[dict[str, Any]] = []
-    for point in probes:
-        try:
-            expected = oracle(source, point)
-        except Exception as exc:
-            return {"outcome": ORACLE_ERROR, "error": f"{type(exc).__name__}:{exc}", "points": rows}
+    for point, expected in zip(probes, expected_values, strict=True):
         ran, actual, error = _run(source, point)
         if not ran:
             rows.append({"probe": point, "agrees": False, "execution_error": error})
@@ -156,11 +164,12 @@ def _evaluate_victim(
 ) -> dict[str, Any]:
     from canonical.swe_kernel.verified_skill_crystallizer_v1 import apply_crystallized_code_rule
 
+    probes = tuple(victim.probes)
     row: dict[str, Any] = {
         "victim_id": victim.victim_id,
         "role": role,
         "source_sha256": _sha(victim.source),
-        "probe_count": len(tuple(victim.probes)),
+        "probe_count": len(probes),
         "family": UNCLASSIFIED,
     }
     if not row["probe_count"]:
@@ -169,9 +178,13 @@ def _evaluate_victim(
         return {**row, "outcome": NOT_HELD_OUT,
                 "reason": "VICTIM_IS_THE_DEMONSTRATION", "counted_as_evidence": False}
 
-    baseline = _check(victim.source, victim.oracle, victim.probes)
-    if baseline["outcome"] == ORACLE_ERROR:
-        return {**row, "outcome": ORACLE_ERROR, "reason": baseline["error"]}
+    # The oracle may inspect source metadata. Give it only the original program,
+    # once per point, BEFORE either execution; an edit cannot move its own goalposts.
+    try:
+        expected_values = tuple(victim.oracle(victim.source, point) for point in probes)
+    except Exception as exc:
+        return {**row, "outcome": ORACLE_ERROR, "reason": f"{type(exc).__name__}:{exc}"}
+    baseline = _check(victim.source, probes, expected_values)
     if baseline.get("execution_errors"):
         return {**row, "outcome": BASELINE_EXECUTION_ERROR,
                 "reason": "VICTIM_DOES_NOT_RUN_BEFORE_THE_LESSON",
@@ -187,12 +200,19 @@ def _evaluate_victim(
                 "reason": "RULE_DOES_NOT_FIRE_ON_THIS_PROGRAM"}
     row["edited_sha256"] = _sha(edited)
 
-    after = _check(edited, victim.oracle, victim.probes)
-    if after["outcome"] == ORACLE_ERROR:
-        return {**row, "outcome": ORACLE_ERROR, "reason": after["outcome"] + ":" + str(after["error"])}
+    after = _check(edited, probes, expected_values)
     row["after_disagreements"] = after["disagreements"]
     row["after_execution_errors"] = after.get("execution_errors", 0)
     row["points"] = after["points"]
+    # A program with one old defect can still lose working behavior. Compare
+    # pointwise: equal or lower total failure counts can conceal a new failure.
+    regressed = [old["probe"] for old, new in zip(baseline["points"], after["points"], strict=True)
+                 if old["agrees"] and not new["agrees"]]
+    row["regressed_probes"] = regressed
+    row["regressed_probe_count"] = len(regressed)
+    if defective and regressed:
+        return {**row, "outcome": REGRESSED, "counted_as_evidence": True,
+                "reason": "LOST_PREVIOUSLY_PASSING_BEHAVIOUR"}
 
     if after["disagreements"] == 0:
         return {**row, "outcome": REPAIRED if defective else PRESERVED, "counted_as_evidence": True}
@@ -214,8 +234,9 @@ def evaluate(
 ) -> dict[str, Any]:
     """Run the candidate lesson on held-out programs and decide whether it may be persisted.
 
-    Nothing is written anywhere: the lesson is applied to in-memory strings only. The caller owns
-    persistence, and `ADMIT` is a statement about the supplied victims and probe points.
+    The gate does not persist lessons: edits are in-memory strings and the caller owns
+    persistence. Executed programs/oracles are trusted, in-process code and may have side
+    effects; there is no security sandbox. `ADMIT` concerns only the supplied probes.
     """
     offered = list(victims)
     archived = list(archive)
@@ -256,10 +277,12 @@ def evaluate(
         "repaired": sum(1 for r in fresh if r["outcome"] == REPAIRED),
         "preserved": sum(1 for r in fresh if r["outcome"] == PRESERVED),
         "broken": sum(1 for r in fresh if r["outcome"] == BROKEN),
+        "regressed": sum(1 for r in fresh if r["outcome"] == REGRESSED),
         "still_wrong": sum(1 for r in fresh if r["outcome"] == STILL_WRONG),
         "archive_repaired": sum(1 for r in old if r["outcome"] == REPAIRED),
         "archive_preserved": sum(1 for r in old if r["outcome"] == PRESERVED),
         "archive_broken": sum(1 for r in old if r["outcome"] == BROKEN),
+        "archive_regressed": sum(1 for r in old if r["outcome"] == REGRESSED),
         "programs_executed": sum(int(r.get("probe_count") or 0) * 2 for r in rows
                                  if r["outcome"] not in _MALFORMED_OUTCOMES
                                  and r["outcome"] not in {NOT_HELD_OUT, NOT_APPLICABLE}),
@@ -283,9 +306,13 @@ def evaluate(
     archived_broken = [r["victim_id"] for r in rows if r["role"] == ARCHIVE and r["outcome"] in _BROKEN_OUTCOMES]
     if archived_broken:
         return {**report, "verdict": REJECT, "reason": "ARCHIVE_REGRESSION:" + ",".join(archived_broken)}
-    broken = [r["victim_id"] for r in rows if r["outcome"] in _BROKEN_OUTCOMES]
+    broken = [r["victim_id"] for r in rows if r["outcome"] == BROKEN]
     if broken:
         return {**report, "verdict": REJECT, "reason": "BROKE_CORRECT_PROGRAM:" + ",".join(broken)}
+    regressed = [r["victim_id"] for r in rows if r["outcome"] == REGRESSED]
+    if regressed:
+        return {**report, "verdict": REJECT,
+                "reason": "REGRESSED_PREVIOUSLY_PASSING_BEHAVIOUR:" + ",".join(regressed)}
     if counts["repaired"] == 0:
         return {**report, "verdict": REFINE, "reason": "NO_MEASURED_REPAIR_ON_AN_UNSEEN_PROGRAM"}
     if counts["preserved"] == 0:
@@ -302,7 +329,8 @@ def record_for_store(report: Mapping[str, Any]) -> dict[str, Any]:
         "counts": dict(report.get("counts") or {}),
         "victims": [{"victim_id": r["victim_id"], "role": r["role"], "family": r["family"],
                      "outcome": r["outcome"], "source_sha256": r["source_sha256"],
-                     "probe_count": r.get("probe_count", 0)}
+                     "probe_count": r.get("probe_count", 0),
+                     "regressed_probe_count": r.get("regressed_probe_count", 0)}
                     for r in report.get("rows") or []],
         "whole_task_correctness_proved": False,
         "authority": "NONE",

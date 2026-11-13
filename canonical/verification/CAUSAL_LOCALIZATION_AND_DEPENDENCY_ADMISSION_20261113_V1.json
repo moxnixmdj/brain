@@ -115,6 +115,7 @@
       "archive": 0,
       "archive_broken": 0,
       "archive_preserved": 0,
+      "archive_regressed": 0,
       "archive_repaired": 0,
       "broken": 0,
       "held_out": 2,
@@ -122,6 +123,7 @@
       "not_held_out": 0,
       "preserved": 1,
       "programs_executed": 12,
+      "regressed": 0,
       "repaired": 1,
       "still_wrong": 0,
       "victims_offered": 2
@@ -160,6 +162,7 @@
         "archive": 0,
         "archive_broken": 0,
         "archive_preserved": 0,
+        "archive_regressed": 0,
         "archive_repaired": 0,
         "broken": 1,
         "held_out": 2,
@@ -167,6 +170,7 @@
         "not_held_out": 0,
         "preserved": 0,
         "programs_executed": 12,
+        "regressed": 0,
         "repaired": 1,
         "still_wrong": 0,
         "victims_offered": 2

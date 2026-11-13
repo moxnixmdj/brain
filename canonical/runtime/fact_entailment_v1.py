@@ -45,7 +45,7 @@ def _kinds() -> dict:
     from the sensor that actually decides the facts.
     """
     try:
-        from canonical.runtime.world_probe_v1 import _FILE_KINDS
+        from canonical.runtime.world_probe_v1 import _FILE_KINDS, _FILE_NAME_PREFIXES
 
         table = {}
         for name, spec in dict(_FILE_KINDS).items():
@@ -53,6 +53,7 @@ def _kinds() -> dict:
             table[str(name)] = (
                 frozenset(str(s).lower() for s in (suffixes or ())),
                 frozenset(str(s).lower() for s in (substrings or ())),
+                frozenset(str(p).lower() for p in (_FILE_NAME_PREFIXES.get(name, ()) or ())),
             )
         return table
     except Exception:
@@ -62,28 +63,43 @@ def _kinds() -> dict:
 def _spec_implies(a: tuple, b: tuple) -> bool:
     """True when every path matching spec `a` necessarily matches spec `b`.
 
-    A spec is (suffixes, substrings_any). An EMPTY suffix set means ANY suffix; an EMPTY substring
-    set means NO name constraint. `world_probe_v1._matches_kind` accepts a path when its name ends
-    with one of the suffixes (or the set is empty) AND its lowercased path contains one of the
-    substrings (or the set is empty).
+    A spec is (suffixes, substrings_any, name_prefixes). An EMPTY suffix set means ANY suffix; an
+    EMPTY substring set means NO path constraint; an EMPTY prefix set means NO filename convention.
+    `world_probe_v1._matches_kind` accepts a path when its name ends with one of the suffixes (or the
+    set is empty) AND its lowercased path contains one of the substrings (or the set is empty) AND
+    its lowercased FILENAME starts with one of the prefixes (or the set is empty).
 
     So `a` is at least as demanding as `b` exactly when:
       * suffixes: `b` imposes nothing (empty), or `a` imposes something and every suffix `a` allows
         is also allowed by `b`; and
       * substrings: `b` imposes nothing, or `a` imposes something and every substring `b` accepts is
-        among those `a` requires -- `a`'s narrower name test guarantees `b`'s.
+        among those `a` requires -- `a`'s narrower name test guarantees `b`'s; and
+      * prefixes: the same rule as substrings, because a filename convention is also a narrowing.
 
     An empty `a` set is the WEAKEST constraint, not the strongest: it can never imply a narrower one.
     Getting that backwards was the first mistake made here, and it produced 38 bogus "equivalences"
-    including `artifact.file == docx`. The guard is the `not sa` / `not ta` branches.
+    including `artifact.file == docx`. The guard is the `not sa` / `not ta` / `not pa` branches.
+
+    WHY THE THIRD COMPONENT IS LOAD-BEARING, MEASURED 2026-11-13. `python.test.corpus` stopped being
+    the substring kind `("test",)` and became the filename-prefix kind `test_`, because the substring
+    credited 54 non-test files on this tree. Moving that constraint OUT of the spec and leaving this
+    function reading two components made `python.test.corpus` spec-IDENTICAL to `python.source`, so
+    the relation declared them EQUIVALENT: `reduce_requirement` then canonicalised a learned
+    requirement to `python.source.available`, and a capability declaring `python.test.corpus.available`
+    would have been grounded by any directory holding Python source and no tests at all. The
+    entailment must be derived from the whole spec the sensor actually applies, or narrowing a sensor
+    silently widens what the tree believes.
     """
-    sa, ta = a
-    sb, tb = b
+    sa, ta, pa = a
+    sb, tb, pb = b
     if sb:
         if not sa or not sa <= sb:
             return False
     if tb:
         if not ta or not tb <= ta:
+            return False
+    if pb:
+        if not pa or not pb <= pa:
             return False
     return True
 
