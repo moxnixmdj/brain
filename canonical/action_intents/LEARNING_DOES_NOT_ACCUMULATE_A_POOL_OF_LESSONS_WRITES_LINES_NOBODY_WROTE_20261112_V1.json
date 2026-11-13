@@ -37,7 +37,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_OWNERS_THESIS_RESTS_ON_COMPOSITION__THAT_A_LESSON_KEEPS_WORKING_WHILE_OTHER_LESSONS_ARE_LOADED__AND_NO_ROUND_HAD_EVER_MEASURED_A_POOL__EVERY_RECORDED_ROUND_SCORES_ONE_LESSON_TWO_LESSONS_OR_THE_CHOICE_OF_DEMONSTRATION__SO_THE_ONE_ASSUMPTION_THE_WHOLE_ROADMAP_STANDS_ON_WAS_UNMEASURED",
- "canonical_base_commit": "20a4cbe3ff2941327f4dcf3237f73115cc101eeb",
+ "canonical_base_commit": "7c58f1234f7bee6cd870fcec1c6cffa2bae48039",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -74,7 +74,7 @@
   "canonical/tests/test_lesson_pools_do_not_compose_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "20a4cbe3ff2941327f4dcf3237f73115cc101eeb",
+  "canonical_base_commit": "7c58f1234f7bee6cd870fcec1c6cffa2bae48039",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "COUNTING_A_VICTIM_THE_SKILL_NEVER_FIRES_ON_AS_A_FAILURE__REJECTED__NOTHING_WAS_TRIED_SO_NOTHING_WAS_LEARNED__IT_WOULD_BUILD_A_BOUNDARY_OUT_OF_THE_TOKENIZERS_REACH_INSTEAD_OF_THE_SKILLS_DOMAIN__THE_SAME_ERROR_AS_COUNTING_A_PASS_THAT_ONLY_PROVED_A_PROCESS_STARTED",
