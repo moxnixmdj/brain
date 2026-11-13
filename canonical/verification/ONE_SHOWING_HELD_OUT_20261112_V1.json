@@ -1,0 +1,1557 @@
+{
+ "schema": "ONE_SHOWING_HELD_OUT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-12T22:41:46Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "pulls_sha256": "60a38c160226554987a3c20bd8ad2768b687bc5cbb225717bb07820aa96d8ce9",
+ "code_sha256": {
+  "canonical/tools/when_one_showing_should_be_trusted_20261112_v1.py": "e35933839348ef65633754c2f47dde6cb23c74604aa45d14b9a5dd566a51dbaf",
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py": "0cca78be744eec9b3f86f7fca1eea0338cfe5497be9c57cc236cf1095e0d75b7"
+ },
+ "arm": "strict",
+ "choice_rule": "greatest reach, then fewest blanks, then path -- the rule the recorded round measured against four alternatives and could not beat",
+ "parameters": {
+  "abstention_thresholds": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "reach_strata": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "tasks": [
+  {
+   "name": "biopython/biopython#5218",
+   "files": 5,
+   "candidates": [
+    {
+     "path": "Bio/Align/bigbed.py",
+     "bytes": 81937,
+     "rules": [
+      "\"Expected field name '%s'; found '%s'\" % (names[i], name) -> f\"Expected field name '{names[i]}'; found '{name}'\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 6,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "Bio/Align/bigpsl.py",
+     "bytes": 23416,
+     "rules": [
+      "\"Expected field name '%s'; found '%s'\" % (name, fields[i].name) -> f\"Expected field name '{name}'; found '{fields[i].name}'\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 6,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "Bio/Align/bigmaf.py",
+     "bytes": 13708,
+     "rules": [
+      "\"%s.%s\" % (self.reference, self.targets[0].id) -> f\"{self.reference}.{self.targets[0].id}\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 6,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "Bio/Blast/_parser.py",
+     "bytes": 41609,
+     "rules": [
+      "\"Failed to find method for %s (%s)\" % (name, self._start_methods.keys()) -> f\"Failed to find method for {name} ({self._start_methods.keys()})\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 6,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "Bio/Align/sam.py",
+     "bytes": 30565,
+     "rules": [
+      "\"%s:%s\" % (key, value) -> f\"{key}:{value}\"",
+      "\"%s:%s\" % (key[:2], value) -> f\"{key[:2]}:{value}\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 4,
+     "outcome": {
+      "asked": 4,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 4,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "Bio/Align/bigbed.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "Bio/Align/bigbed.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "quadseven/grug#1674",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "grugthink/src/grugthink/bot/llm_clients.py",
+     "bytes": 31080,
+     "rules": [
+      "os.getenv -> _bot_getenv"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 26,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "grugthink/src/grugthink/bot_manager/lifecycle.py",
+     "bytes": 14062,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 24,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "grugthink/src/grugthink/pgvector_store.py",
+     "bytes": 15156,
+     "rules": [
+      "os.getenv(\"OLLAMA_URLS\") -> _bot_getenv(\"OLLAMA_URLS\")",
+      "os.getenv(\"USE_OLLAMA_EMBEDDINGS\", \"true\") -> _bot_getenv(\"USE_OLLAMA_EMBEDDINGS\", \"true\")",
+      "os.getenv(\"GRUGTHINK_EMBED_MODEL\", \"nomic-embed-text:v1.5\") -> _bot_getenv(\"GRUGTHINK_EMBED_MODEL\", \"nomic-embed-text:v1.5\")"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 26,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "grugthink/src/grugthink/bot.py",
+     "bytes": 64665,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 26,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "grugthink/src/grugthink/bot/commands.py",
+     "bytes": 51670,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 28,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "grugthink/src/grugthink/config_legacy.py",
+     "bytes": 7463,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 15,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "grugthink/src/grugthink/bot.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "grugthink/src/grugthink/bot.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "deluispablo/data-agent-toolkit#114",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "agents/csv_inspector/tests/test_cli_support.py",
+     "bytes": 9439,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 30,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "agents/csv_inspector/src/csv_inspector/_config.py",
+     "bytes": 11980,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 16,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "agents/csv_inspector/src/csv_inspector/_invokers.py",
+     "bytes": 21252,
+     "rules": [
+      "resolve_settings( settings, LLMBackend.API ) -> resolve_settings(settings)"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 31,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "agents/csv_inspector/tests/test_embedding.py",
+     "bytes": 11938,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 31,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "agents/csv_inspector/src/csv_inspector/_inspect.py",
+     "bytes": 19643,
+     "rules": [
+      "resolve_settings(settings, backend) -> resolve_settings(settings)"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 31,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "agents/csv_inspector/tests/test_backends.py",
+     "bytes": 24825,
+     "rules": [
+      "any(importlib.util.find_spec(name) is None for name in (\"pydantic_settings\", \"google\")) -> importlib.util.find_spec(\"google\") is None",
+      "\"\"\"Simulate a base install, without ``pydantic-settings`` (imported lazily).\"\"\" -> \"\"\"Simulate a base install, without ``google-genai`` (imported lazily).\"\"\"",
+      "monkeypatch.setitem(sys.modules, \"pydantic_settings\", None) -> monkeypatch.setitem(sys.modules, \"google.genai\", None)",
+      "resolve_settings(None, ?1) -> resolve_settings(None)"
+     ],
+     "learned": true,
+     "reach": 1,
+     "reach_share": 0.2,
+     "fits_itself": true,
+     "blanks": 1,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 21,
+      "not_what_the_developers_did": 2,
+      "organ_changes": 2,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "agents/csv_inspector/tests/test_backends.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "agents/csv_inspector/tests/test_backends.py",
+   "chosen_reach": 1,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "PrefectHQ/prometheus-prefect-exporter#176",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "metrics/flows.py",
+     "bytes": 1332,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "main.py",
+     "bytes": 3799,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "metrics/healthz.py",
+     "bytes": 1827,
+     "rules": [
+      "requests.get(endpoint, headers=self.headers) -> requests.get( endpoint, headers=self.headers, timeout=self.timeout )"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 11,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/test_healthz.py",
+     "bytes": 1195,
+     "rules": [
+      "PrefectHealthz( url=\"http://prefect.test/api\", headers={\"accept\": \"application/json\"}, max_retries=3, logger=logging.getLogger(\"test\"), ) -> PrefectHealthz( url=\"http://prefect.test/api\", headers={\"accept\": \"application/json\"}, max_retries=3, timeout=10, logger=logging.getLogger(\"test\"), )"
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 14,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/test_metrics_ongoing.py",
+     "bytes": 7498,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 14,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "metrics/deployments.py",
+     "bytes": 1468,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "tests/test_metrics_ongoing.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "main.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "QuEraComputing/bloqade-core#138",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "demo/qasm_single_task_simpler_serialization.py",
+     "bytes": 1792,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 21,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "demo/qasm_single_task.py",
+     "bytes": 2055,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 19,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/bloqade/core/device/device.py",
+     "bytes": 19468,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 14,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "test/device/test_device.py",
+     "bytes": 6019,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 20,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/bloqade/core/device/task_builder.py",
+     "bytes": 13567,
+     "rules": [
+      "\"\"\"Incrementally assemble subtasks before finalizing them for a device.\"\"\" -> \"\"\"Canonical API for constructing workloads submitted through a device. Add kernel invocations with ``add_subtask()``, then pass the builder to ``Device.run_async()``. The builder owns the ordered programs, arguments, metadata, and shot counts; the device owns backend-specific validation and serialization. Builders are mutable and append-only. Adding the same ``ir.Method`` object more than once creates multiple subtasks that reuse one program entry. Finalization does not mutate the builder, so it may be inspected, copied, extended, dry-run, or submitted again. ``Device.task()``, ``Device.batch_task()``, and ``Device.parameter_scan()`` are deprecated task-construction APIs. New code should use ``TaskBuilder`` for single kernels, batches, and parameter scans. \"\"\"",
+      "\"\"\"Return a shallow, independently editable copy of this builder.\"\"\" -> \"\"\"Return a shallow, independently editable copy of this builder. The mutable program, subtask, and name-index containers are copied, so later calls to ``add_subtask()`` affect only the copy. Existing kernel objects and subtask records are shared rather than deep-copied. Returns: TaskBuilder: Builder containing the same programs and subtasks. \"\"\""
+     ],
+     "learned": true,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 19,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "demo/qasm_single_task_persistent.py",
+     "bytes": 2163,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 17,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "src/bloqade/core/device/device.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "demo/qasm_single_task.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "gb119/stoner_measurement#213",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "src/stoner_measurement/ui/magnet_panel.py",
+     "bytes": 32965,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 11,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/stoner_measurement/core/sequence_engine.py",
+     "bytes": 67388,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 11,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/stoner_measurement/plugins/trace/k6221_2182a.py",
+     "bytes": 56508,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/stoner_measurement/ui/widgets/visa_resource_widget.py",
+     "bytes": 17403,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 9,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/stoner_measurement/magnet_control/engine.py",
+     "bytes": 27683,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 11,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/stoner_measurement/ui/log_viewer.py",
+     "bytes": 31862,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 11,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "src/stoner_measurement/core/sequence_engine.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "src/stoner_measurement/core/sequence_engine.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "gptme/gptme#2039",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "gptme/dirs.py",
+     "bytes": 5316,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "gptme/llm/validate.py",
+     "bytes": 8736,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 6,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "gptme/prompts/workspace.py",
+     "bytes": 12067,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "gptme/commands/llm.py",
+     "bytes": 11948,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "gptme/config/cli_setup.py",
+     "bytes": 7515,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "gptme/prompts/templates.py",
+     "bytes": 12491,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 8,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "gptme/prompts/templates.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "gptme/commands/llm.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "berenslab/skeliner#37",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "skeliner/python/dataclass.py",
+     "bytes": 1619,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 63,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "skeliner/_state.py",
+     "bytes": 13298,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 61,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "skeliner/dx.py",
+     "bytes": 59115,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 61,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/test_rust_core.py",
+     "bytes": 73652,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 55,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/_parity.py",
+     "bytes": 3610,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 56,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "skeliner/dataclass.py",
+     "bytes": 51747,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 29,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "tests/test_rust_core.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "skeliner/_state.py",
+   "chosen_reach": 0,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  },
+  {
+   "name": "a16bitsysop/freeagentPY#18",
+   "files": 6,
+   "candidates": [
+    {
+     "path": "src/freeagent/bank_account.py",
+     "bytes": 4445,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/freeagent/category.py",
+     "bytes": 3161,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "tests/test_base.py",
+     "bytes": 8929,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/freeagent/__init__.py",
+     "bytes": 739,
+     "rules": [
+      "from .base import FreeAgentBase -> from .base import DEFAULT_API_BASE_URL, FreeAgentBase"
+     ],
+     "learned": true,
+     "reach": 3,
+     "reach_share": 0.6,
+     "fits_itself": true,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 13,
+      "not_what_the_developers_did": 3,
+      "organ_changes": 3,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/freeagent/bank.py",
+     "bytes": 8371,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 7,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    },
+    {
+     "path": "src/freeagent/oauth_callback.py",
+     "bytes": 5148,
+     "rules": [],
+     "learned": false,
+     "reach": 0,
+     "reach_share": 0.0,
+     "fits_itself": false,
+     "blanks": 0,
+     "siblings": 5,
+     "outcome": {
+      "asked": 5,
+      "right_not_imports": 0,
+      "developers_changes_not_imports": 12,
+      "not_what_the_developers_did": 0,
+      "organ_changes": 0,
+      "share_recovered": 0.0
+     },
+     "share_recovered": 0.0
+    }
+   ],
+   "chosen_by_size": "tests/test_base.py",
+   "best_possible_recovered": 0.0,
+   "worst_possible_recovered": 0.0,
+   "mean_recovered": 0.0,
+   "spread": 0.0,
+   "chosen_by_reach": "src/freeagent/__init__.py",
+   "chosen_reach": 3,
+   "chosen_recovered": 0.0,
+   "chosen_is_best": true,
+   "chosen_is_worst": true,
+   "share_of_best_captured": null,
+   "candidates_differ": false,
+   "size_choice_recovered": 0.0,
+   "share_of_best_captured_by_size": null
+  }
+ ],
+ "seconds": 36.3,
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "terminal_authority": false,
+ "truth_achieved": false,
+ "summary": {
+  "tasks": 9,
+  "candidate_demonstrations": 53,
+  "unlearnable_demonstrations": 39,
+  "changes_the_people_made": 1018,
+  "import_line_changes_the_metric_excludes": {
+   "changes_including_import_lines": 1889,
+   "changes_excluding_import_lines": 1674,
+   "import_line_changes": 215,
+   "share_of_changes_that_are_import_lines": 0.11381683430386448,
+   "why_it_matters": "the organ refuses a demonstration whose change is only import lines, so a repeated change made in imports alone can never be taught by it"
+  },
+  "precision_by_reach": [
+   {
+    "reach": 0,
+    "candidates": 12,
+    "organ_changes": 0,
+    "right": 0,
+    "wrong": 0,
+    "precision": 0.0,
+    "recovered": 0.0
+   },
+   {
+    "reach": 1,
+    "candidates": 1,
+    "organ_changes": 2,
+    "right": 0,
+    "wrong": 2,
+    "precision": 0.0,
+    "recovered": 0.0
+   },
+   {
+    "reach": 3,
+    "candidates": 1,
+    "organ_changes": 3,
+    "right": 0,
+    "wrong": 3,
+    "precision": 0.0,
+    "recovered": 0.0
+   }
+  ],
+  "abstention_policies": [
+   {
+    "minimum_reach": 0,
+    "tasks_acted_on": 9,
+    "tasks_declined": 0,
+    "changes_right": 0,
+    "changes_wrong": 5,
+    "precision_of_the_decision": 0.0,
+    "share_of_all_developers_changes_recovered": 0.0,
+    "developers_changes_in_the_tasks_still_acted_on": 177
+   },
+   {
+    "minimum_reach": 1,
+    "tasks_acted_on": 2,
+    "tasks_declined": 7,
+    "changes_right": 0,
+    "changes_wrong": 5,
+    "precision_of_the_decision": 0.0,
+    "share_of_all_developers_changes_recovered": 0.0,
+    "developers_changes_in_the_tasks_still_acted_on": 34
+   },
+   {
+    "minimum_reach": 2,
+    "tasks_acted_on": 1,
+    "tasks_declined": 8,
+    "changes_right": 0,
+    "changes_wrong": 3,
+    "precision_of_the_decision": 0.0,
+    "share_of_all_developers_changes_recovered": 0.0,
+    "developers_changes_in_the_tasks_still_acted_on": 13
+   },
+   {
+    "minimum_reach": 3,
+    "tasks_acted_on": 1,
+    "tasks_declined": 8,
+    "changes_right": 0,
+    "changes_wrong": 3,
+    "precision_of_the_decision": 0.0,
+    "share_of_all_developers_changes_recovered": 0.0,
+    "developers_changes_in_the_tasks_still_acted_on": 13
+   },
+   {
+    "minimum_reach": 4,
+    "tasks_acted_on": 0,
+    "tasks_declined": 9,
+    "changes_right": 0,
+    "changes_wrong": 0,
+    "precision_of_the_decision": 0.0,
+    "share_of_all_developers_changes_recovered": 0.0,
+    "developers_changes_in_the_tasks_still_acted_on": 0
+   },
+   {
+    "minimum_reach": 5,
+    "tasks_acted_on": 0,
+    "tasks_declined": 9,
+    "changes_right": 0,
+    "changes_wrong": 0,
+    "precision_of_the_decision": 0.0,
+    "share_of_all_developers_changes_recovered": 0.0,
+    "developers_changes_in_the_tasks_still_acted_on": 0
+   }
+  ],
+  "ceiling": {
+   "best_possible_right": 0,
+   "best_possible_wrong": 0,
+   "worst_possible_right": 0,
+   "per_task": [
+    {
+     "task": "biopython/biopython#5218",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "quadseven/grug#1674",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "deluispablo/data-agent-toolkit#114",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "PrefectHQ/prometheus-prefect-exporter#176",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "QuEraComputing/bloqade-core#138",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "gb119/stoner_measurement#213",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "gptme/gptme#2039",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "berenslab/skeliner#37",
+     "best_right": 0,
+     "worst_right": 0
+    },
+    {
+     "task": "a16bitsysop/freeagentPY#18",
+     "best_right": 0,
+     "worst_right": 0
+    }
+   ]
+  },
+  "pre_registered_prediction": {
+   "claims": {
+    "chosen_precision_below_pooled_95_45": {
+     "value": 0.0,
+     "pooled": 0.9545,
+     "held": true
+    },
+    "reach_not_monotone_in_precision": {
+     "falls_in_the_curve": 0,
+     "by_reach": {
+      "0": 0.0,
+      "1": 0.0,
+      "3": 0.0
+     },
+     "held": false
+    },
+    "declining_at_reach_ge_1_costs_nothing": {
+     "tasks_declined": 7,
+     "changes_right_at_threshold_0": 0,
+     "changes_right_at_threshold_1": 0,
+     "changes_wrong_at_threshold_0": 5,
+     "changes_wrong_at_threshold_1": 5,
+     "held": true
+    }
+   },
+   "all_held": false
+  },
+  "headline": {
+   "precision_of_the_chosen_demonstration": 0.0,
+   "recorded_pooled_precision_for_comparison": 0.9545,
+   "changes_recovered_choosing_by_reach": 0,
+   "changes_recovered_choosing_the_best": 0,
+   "share_of_best_captured": 0.0
+  }
+ },
+ "hold_out": {
+  "why": "six kinds of repeated change, disjoint by query from the fifteen pull requests the precision curve was fitted on",
+  "corpus": "/tmp/pulls_holdout.json",
+  "corpus_sha256": "60a38c160226554987a3c20bd8ad2768b687bc5cbb225717bb07820aa96d8ce9",
+  "queries_fixed_before_the_search_ran": "canonical/tools/hold_out_the_precision_curve_20261112_v1.py",
+  "github_calls_refused_and_passed_over": 23,
+  "kinds_collected": [
+   "a bare except made specific",
+   "a dataclass replacing an init",
+   "a deprecation warning added",
+   "a string formatted the old way",
+   "a timeout added to a request",
+   "an environment read moved to a settings object"
+  ]
+ },
+ "discovery_comparison": {
+  "discovery_record": "canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
+  "tasks": [
+   15,
+   9
+  ],
+  "candidate_demonstrations": [
+   89,
+   53
+  ],
+  "unlearnable_demonstrations": [
+   22,
+   39
+  ],
+  "unlearnable_share": [
+   0.24719101123595505,
+   0.7358490566037735
+  ],
+  "changes_made": [
+   290,
+   5
+  ],
+  "right": [
+   268,
+   0
+  ],
+  "wrong": [
+   14,
+   5
+  ],
+  "precision_when_editing": [
+   0.9241379310344827,
+   0.0
+  ],
+  "precision_of_the_chosen_demonstration": [
+   0.8695652173913043,
+   0.0
+  ]
+ }
+}

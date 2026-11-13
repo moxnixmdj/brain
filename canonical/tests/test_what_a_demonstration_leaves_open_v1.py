@@ -88,30 +88,36 @@ def test_a_confounded_effect_is_never_reported_as_a_predictor():
 def test_feasibility_is_measured_not_assumed():
     feas = W.feasibility()
     assert feas["status"] in ("RUNNABLE", "BLOCKED")
-    assert isinstance(feas["blocked_by"], list)
-    if feas["status"] == "BLOCKED":
+    assert feas["method"].startswith("ran the bridge")
+    if not feas["can_rerun_on_fresh_seeds"]:
         assert feas["blocked_by"], "a block must name its cause"
-        assert "not a re-run" in feas["note"]
-    assert feas["can_rerun_on_fresh_seeds"] is (feas["status"] == "RUNNABLE")
 
 
-def test_this_environment_reports_blocked_with_a_reason(monkeypatch):
-    """Pin the sandbox's actual condition: no browser, so no fresh-seed claim from here."""
-    monkeypatch.setattr(W.shutil, "which", lambda name: None)
+def test_feasibility_reports_a_browser_when_it_can_load_a_page():
+    """The correction of a wrong answer: this sandbox CAN run the bridge.
+
+    Last pass this function checked for a system chromium, found none, checked for
+    libnspr4.so, found neither, and reported BLOCKED. All three facts were true and the
+    conclusion false: @sparticuz/chromium ships bin/al2023.tar.br containing libnspr4.so and
+    libnss3.so, and the bridge inflates it and sets LD_LIBRARY_PATH itself.
+    """
     feas = W.feasibility()
-    assert feas["status"] == "BLOCKED"
-    assert "NO_BROWSER_BINARY" in feas["blocked_by"]
+    if not feas["can_rerun_on_fresh_seeds"]:
+        pytest.skip(f"bridge unavailable here: {feas['blocked_by']}")
+    assert feas["probe"]["loaded"] is True
+    assert feas["probe"]["browser"], "a loaded page must report the browser it loaded in"
 
 
-def test_a_missing_library_without_root_is_reported_as_both(monkeypatch):
-    monkeypatch.setattr(W.shutil, "which", lambda name: "/usr/bin/chromium")
-    monkeypatch.setattr(W.pathlib.Path, "exists", lambda self: False)
-    import os
-    monkeypatch.setattr(os, "geteuid", lambda: 1001, raising=False)
-    feas = W.feasibility()
+def test_a_missing_module_directory_is_reported_as_blocked(tmp_path):
+    feas = W.feasibility(html_dir=str(tmp_path), modules_dir=str(tmp_path))
     assert feas["status"] == "BLOCKED"
-    assert any(b.startswith("MISSING_SHARED_LIBRARIES") for b in feas["blocked_by"])
-    assert "NO_ROOT_TO_INSTALL_THEM" in feas["blocked_by"]
+    assert "NO_MINIWOB_HTML" in feas["blocked_by"] or "NO_PUPPETEER_CORE" in feas["blocked_by"]
+
+
+def test_feasibility_never_calls_a_missing_module_runnable(tmp_path):
+    """The direction of the earlier mistake, pinned: inspecting is not exercising."""
+    feas = W.feasibility(html_dir=str(tmp_path), modules_dir=str(tmp_path))
+    assert feas["can_rerun_on_fresh_seeds"] is False
 
 
 def test_the_cli_runs_and_names_the_verdict():
