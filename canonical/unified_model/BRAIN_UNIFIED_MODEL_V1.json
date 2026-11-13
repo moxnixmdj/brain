@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 425,
+  "knowledge_documents": 426,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6823,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "eb4b871201c4dd71ca7d7d8983dc71e75722bb7814748e234d3af7242d4c5ec4"
+  "value": "459f571ca74c27c700eb4b185f2fa1cfad36fb29d3a8cdc10d4d46f23522e879"
  },
  "engines": [
   {
@@ -46552,6 +46552,88 @@
     "loop",
     "probe",
     "routing"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8074,
+   "headings": [
+    "Complete Solution Summary: Self-Reflective Learning System",
+    "The Journey: From Pattern Matching to Genuine Understanding",
+    "The Original Problem (Session Start)",
+    "What We Initially Had (Before Your Pushback)",
+    "Your Insight That Changed Everything",
+    "The Breakthrough: Self-Reflective Learning System (PR #6830)",
+    "The Final Integration (PR #6835)",
+    "What We've Achieved",
+    "The Answer to Your Original Question",
+    "The Revolutionary Impact",
+    "The Merged PRs",
+    "The Key Insight",
+    "Conclusion"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPLETE_SOLUTION_SUMMARY.md",
+   "sha256": "1900869e3e5df340b9b6e7f610684e43e5f38bd534829758b2ce64f0e077a74e",
+   "summary": "You asked a fundamental question that challenged everything we thought we knew:",
+   "terms": {
+    "2026": 5,
+    "abstract": 11,
+    "across": 4,
+    "agent": 5,
+    "any": 4,
+    "apply": 7,
+    "cannot": 4,
+    "causal": 11,
+    "cause-effect": 4,
+    "concepts": 6,
+    "conceptual": 5,
+    "cross-domain": 4,
+    "did": 4,
+    "domains": 6,
+    "execution": 10,
+    "experience": 7,
+    "extract": 4,
+    "failed": 4,
+    "genuine": 5,
+    "just": 4,
+    "knowledge": 11,
+    "learn": 5,
+    "learning": 19,
+    "matching": 5,
+    "merged": 4,
+    "model": 5,
+    "models": 5,
+    "not": 4,
+    "once": 4,
+    "pattern": 5,
+    "pr": 7,
+    "principles": 9,
+    "problem": 4,
+    "reasoning": 7,
+    "reflection": 6,
+    "right": 5,
+    "self-reflection": 8,
+    "self-reflective": 7,
+    "system": 12,
+    "task": 14,
+    "tasks": 7,
+    "through": 7,
+    "transfer": 8,
+    "transferable": 5,
+    "understand": 4,
+    "understanding": 16,
+    "way": 4,
+    "were": 7
+   },
+   "title": "Complete Solution Summary: Self-Reflective Learning System",
+   "title_terms": [
+    "complete",
+    "learning",
+    "self-reflective",
+    "solution",
+    "summary",
+    "system"
    ]
   },
   {
@@ -77953,10 +78035,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1227,
+  "included_source_count": 1228,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5fcdf9323c79c09f96a56b0b52c4a9a585dc133a9f911d2d53902ae0c99de603"
+  "source_tree_digest": "c0ca9366a71bee4f0795dcb853e42d7dc35ecaf7ae967da664c55167e5d15705"
  },
  "research_index": [
   {
