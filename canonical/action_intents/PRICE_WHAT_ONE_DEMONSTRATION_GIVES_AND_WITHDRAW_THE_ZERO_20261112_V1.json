@@ -1,0 +1,31 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "date": "2026-11-12",
+ "objective": "PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_ON_THE_SHIPPED_ORGAN_AND_WITHDRAW_THE_WIDENING_THAT_MEASURED_ZERO_SO_THE_NEXT_ROUND_WORKS_ON_THE_REAL_LIMITING_FACTOR",
+ "highest_leverage_now": true,
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "0",
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": "1"
+ },
+ "why_this_is_the_gap_and_not_a_discharge": "The shipped organ returns 98.2% of its own ceiling on the repeated-change corpus (23.06% of 23.48%), so that corpus can no longer be widened by fitting. What remains is that one demonstration does not identify where a change applies: the next constructive step is the divide inside a pull request and witnesses read across files. Nothing here moves a coding benchmark, so no obligation is claimed discharged.",
+ "constraints": [
+  "ZERO_INCREMENTAL_SPEND",
+  "REUSE_BEFORE_INVENTION",
+  "FAIL_CLOSED_NO_ROW_CREDIT_WITHOUT_AUTHENTICATED_PROOF"
+ ],
+ "accounting": {
+  "incremental_spend_usd": 0,
+  "acceptance_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0
+ },
+ "base_main_commit": "3a0dba881f884b3c132d51cc5dcf5d1692f94e7a"
+}
