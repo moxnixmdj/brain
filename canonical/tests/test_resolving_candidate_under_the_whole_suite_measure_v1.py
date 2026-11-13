@@ -113,6 +113,17 @@ class OnceTests(unittest.TestCase):
         seen.write_text('')
         self.assertFalse(first)
 '''
+MANY_TESTS = '''import unittest
+
+from shop.store import label
+
+
+class ManyTests(unittest.TestCase):
+    def test_labels_of_many(self):
+        for name in ('a', 'b'):
+            with self.subTest(name=name):
+                self.assertEqual(label(name), 'shop:' + name)
+'''
 TREE = {
     "shop/__init__.py": "",
     "shop/store.py": STORE,
@@ -123,12 +134,16 @@ TREE = {
     "tests/label_tests/tests.py": LABEL_TESTS,
     "tests/machine_tests/__init__.py": "",
     "tests/machine_tests/tests.py": MACHINE_TESTS,
+    "tests/many_tests/__init__.py": "",
+    "tests/many_tests/tests.py": MANY_TESTS,
 }
 FIRST = ["test_save_writes_to_the_database_given (store_tests.tests.StoreTests)"]
 LABEL = "test_label (label_tests.tests.LabelTests)"
 MUCH = "test_nothing_much (label_tests.tests.LabelTests)"
 MACHINE = "test_fails_on_this_machine (machine_tests.tests.MachineTests)"
 ONCE = "test_fails_the_first_time (once_tests.tests.OnceTests)"
+MANY = "test_labels_of_many (many_tests.tests.ManyTests)"
+prints_subtests = pytest.mark.skipif(sys.version_info < (3, 11), reason="before Python 3.11 a failing subtest is not printed on a line of its own")
 
 
 def _git(directory, *args):
@@ -171,18 +186,28 @@ def under(project, tree, text, **more):
 # --------------------------------------------------------------------------- #
 # reading two runs against each other
 # --------------------------------------------------------------------------- #
+SUBTEST = "test_e (sub.tests.V.test_e) [a message] (value='x y')"
 FOUND = {"test_a (m.T)": judge.PASSED, "test_b (m.T)": judge.FAILED, "test_c (pkg.n.U)": judge.ERROR, "test_d (m.T)": judge.SKIPPED,
-         "What b does": judge.FAILED, "test_views (unittest.loader._FailedTest)": judge.ERROR}
+         "What b does": judge.FAILED, "test_views (unittest.loader._FailedTest)": judge.ERROR, SUBTEST: judge.FAILED,
+         "test_f (other.tests.W.test_f) (value=1)": judge.PASSED}
 
 
-def test_the_tests_that_did_not_pass_are_the_failed_and_the_errors_by_name():
-    assert whole.not_passing(FOUND) == ["test_b (m.T)", "test_c (pkg.n.U)", "test_views (unittest.loader._FailedTest)"]
+def test_the_tests_that_did_not_pass_are_the_failed_and_the_errors_by_name_subtests_among_them():
+    assert whole.not_passing(FOUND) == ["test_b (m.T)", "test_c (pkg.n.U)", SUBTEST, "test_views (unittest.loader._FailedTest)"]
+
+
+def test_the_module_of_a_printed_test_or_subtest():
+    assert whole.module_of("test_b (m.T)") == "m" and whole.module_of("test_c (pkg.n.U)") == "pkg.n"
+    assert whole.module_of("test_c (pkg.n.U.test_c)") == "pkg.n"                          # as Python 3.11 prints it
+    assert whole.module_of(SUBTEST) == "sub.tests" and whole.module_of("test_e (sub.tests.V) (value=1)") == "sub.tests"
+    assert whole.module_of("test_views (unittest.loader._FailedTest)") is None and whole.module_of("test_views (unittest.loader._FailedTest.test_views)") is None
+    assert whole.module_of("What b does") is None and whole.module_of("Introspection of columns (#21090)") is None and whole.module_of("test_a (T)") is None
 
 
 def test_the_modules_to_run_again_are_those_of_the_tests_that_did_not_pass_and_those_that_did_not_load():
     printed = "ERROR: test_views (unittest.loader._FailedTest)\nImportError: Failed to import test module: admin_docs.test_views\nTraceback ...\n"
-    assert whole.modules_again(FOUND, printed) == ["admin_docs.test_views", "m", "pkg.n"]
-    assert whole.modules_again(FOUND, "") == ["m", "pkg.n"]                               # unittest's own name for a module that did not load is no module to run
+    assert whole.modules_again(FOUND, printed) == ["admin_docs.test_views", "m", "pkg.n", "sub.tests"]
+    assert whole.modules_again(FOUND, "") == ["m", "pkg.n", "sub.tests"]                  # unittest's own name for a module that did not load is no module to run
     assert whole.modules_again({"test_a (m.T)": judge.PASSED, "test_d (m.T)": judge.SKIPPED}, "") == []
 
 
@@ -202,7 +227,7 @@ def test_broken_is_passing_with_the_fix_and_not_passing_with_the_candidate():
 def test_the_stand_in_runs_every_module_when_no_label_is_given_and_the_labels_when_they_are(project, tree):
     assert count.as_the_task_starts(tree, project["test_patch"])
     everything = whole.run_whole(tree, [], 60)
-    assert judge.ran(everything["output"]) == 5 and judge.finished(everything["output"]) and not everything["stopped"]
+    assert judge.ran(everything["output"]) == 6 and judge.finished(everything["output"]) and not everything["stopped"]
     found = judge.statuses(everything["output"])
     assert found[FIRST[0]] == judge.FAILED and found[LABEL] == judge.PASSED and found[MACHINE] == judge.FAILED
     some = whole.run_whole(tree, ["label_tests.tests"], 60, processes=1)
@@ -219,19 +244,35 @@ def test_a_run_that_takes_too_long_is_stopped(project, tree):
 @needs_git
 def test_a_candidate_that_breaks_nothing_keeps_the_whole_suite_though_a_test_fails_on_this_machine(project, tree):
     row = under(project, tree, FIXED)
-    assert row["whole_run"] == {**row["whole_run"], "ran": 5, "finished": True, "stopped": False, "passing": 4, "not_passing": 1, "start_passing": 1, "start_passing_wanted": 1}
+    assert row["whole_run"] == {**row["whole_run"], "ran": 6, "finished": True, "stopped": False, "passing": 5, "not_passing": 1, "start_passing": 1, "start_passing_wanted": 1,
+                                "read_from_a_file": False}
     assert row["modules_again"] == ["machine_tests.tests"]
     assert row["run_again"]["with_the_candidate"]["ran"] == 1 and row["run_again"]["with_the_fix"]["not_passing"] == 1
     assert row["broken_by_the_candidate"] == [] and row["keeps_the_whole_suite"] is True and row["why_nothing_is_said"] is None
 
 
 @needs_git
+@prints_subtests
 def test_a_candidate_that_breaks_a_test_elsewhere_does_not_keep_the_whole_suite(project, tree):
+    """One test fails outright; the other fails only through its subtests, which Python 3.11 prints on lines of their own."""
     row = under(project, tree, BREAKS_THE_LABEL)
-    assert row["whole_run"]["start_passing"] == 1 and row["whole_run"]["not_passing"] == 2          # the task's own test passes: the count called this resolving
-    assert row["modules_again"] == ["label_tests.tests", "machine_tests.tests"]
-    assert row["broken_by_the_candidate"] == [LABEL] and row["keeps_the_whole_suite"] is False
+    assert row["whole_run"]["start_passing"] == 1 and row["whole_run"]["not_passing"] == 4          # the task's own test passes: the count called this resolving
+    assert row["modules_again"] == ["label_tests.tests", "machine_tests.tests", "many_tests.tests"]
+    assert row["broken_by_the_candidate"] == [LABEL, MANY] and row["keeps_the_whole_suite"] is False
     assert (tree / "shop" / "store.py").read_text() == FIXED                                        # the second run with the expert's fix was the last one
+
+
+@needs_git
+@prints_subtests
+def test_a_test_that_fails_only_through_a_subtest_has_its_module_run_again(project, tree):
+    """The fault found while the first whole runs were being made: such a test has no line of its own, and its module was not run again."""
+    only_many = FIXED.replace("return HELPER + ':' + name", "return HELPER + ':' + name.upper()").replace("def label(name):", "def label(name, old=False):")
+    patch = project["test_patch"] + ("diff --git a/tests/label_tests/tests.py b/tests/label_tests/tests.py\ndeleted file mode 100644\n--- a/tests/label_tests/tests.py\n+++ /dev/null\n"
+                                     f"@@ -1,{len(LABEL_TESTS.splitlines())} +0,0 @@\n" + "".join(f"-{line}\n" for line in LABEL_TESTS.splitlines()))
+    row = whole.of_candidate(tree, patch, project["fix"], "shop/store.py", only_many, FIRST)
+    assert row["whole_run"]["ran"] == 4 and row["whole_run"]["not_passing"] == 3                    # this machine's test, and the two subtests
+    assert row["modules_again"] == ["machine_tests.tests", "many_tests.tests"]
+    assert row["broken_by_the_candidate"] == [MANY] and row["keeps_the_whole_suite"] is False
 
 
 @needs_git
@@ -248,7 +289,7 @@ def test_a_test_that_fails_once_and_passes_the_second_time_is_not_held_against_t
                                      "diff --git a/tests/once_tests/tests.py b/tests/once_tests/tests.py\nnew file mode 100644\n--- /dev/null\n+++ b/tests/once_tests/tests.py\n"
                                      f"@@ -0,0 +1,{len(ONCE_TESTS.splitlines())} @@\n" + "".join(f"+{line}\n" for line in ONCE_TESTS.splitlines()))
     row = whole.of_candidate(tree, patch, project["fix"], "shop/store.py", FIXED, FIRST)
-    assert row["whole_run"]["ran"] == 6 and row["whole_run"]["not_passing"] == 2 and row["modules_again"] == ["machine_tests.tests", "once_tests.tests"]
+    assert row["whole_run"]["ran"] == 7 and row["whole_run"]["not_passing"] == 2 and row["modules_again"] == ["machine_tests.tests", "once_tests.tests"]
     assert row["run_again"]["with_the_candidate"]["not_passing"] == 1 and row["run_again"]["with_the_fix"]["not_passing"] == 2
     assert row["broken_by_the_candidate"] == [] and row["keeps_the_whole_suite"] is True
 
@@ -311,6 +352,18 @@ def test_too_many_modules_are_not_run_again_and_nothing_is_said(project, tree, m
 def test_the_whole_run_is_kept_as_it_was_printed(project, tree, tmp_path):
     under(project, tree, FIXED, run=canned(ALL_PASS), keep_output=tmp_path / "printed.txt")
     assert (tmp_path / "printed.txt").read_text() == ALL_PASS
+
+
+@needs_git
+def test_a_whole_run_made_before_is_read_from_its_file_and_the_second_runs_are_made_anew(project, tree, tmp_path):
+    (tmp_path / "before.txt").write_text(ONE_FAILS)
+    run = canned(ONE_FAILS, ALL_PASS)
+    row = under(project, tree, BREAKS_THE_LABEL, run=run, whole_run_from=tmp_path / "before.txt", keep_output=tmp_path / "kept.txt")
+    assert run.calls == [["m"], ["m"]] and row["whole_run"]["read_from_a_file"] is True and row["whole_run"]["seconds"] == 0.0
+    assert row["broken_by_the_candidate"] == ["test_a (m.T)"] and (tmp_path / "kept.txt").read_text() == ONE_FAILS
+    run = canned(ALL_PASS)
+    row = under(project, tree, FIXED, run=run, whole_run_from=tmp_path / "not_there.txt")           # no such file: the whole run is made
+    assert run.calls == [[]] and row["whole_run"]["read_from_a_file"] is False and row["keeps_the_whole_suite"] is True
 
 
 @needs_git

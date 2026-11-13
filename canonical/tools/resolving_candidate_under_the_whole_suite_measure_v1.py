@@ -35,6 +35,15 @@ its parent when the error cannot be pickled, and on Python 3.11 one test's error
 process the same error is one test's error and the run goes on. That change, and running two
 candidates side by side, were made after that first run and before any other; `EXPECTED` and `rule`
 are as they were pushed.
+
+A second fault was found while the first five whole runs were being made, by reading what one of them
+printed. Python 3.11 prints a failing SUBTEST on a line of its own, with the subtest's values after
+the test's name, and prints no line for the test itself. The tool as pushed did not take such a line
+for a test that did not pass, so the module of a test that fails only through a subtest would not
+have been run again and a candidate breaking it would have been said to keep the whole suite. The
+tool now takes those lines too. A whole run is nine minutes of machine time and prints the same
+thing again, so the mended tool can read the whole runs already made (`--whole-runs-from`) and
+makes every second run anew; a row says when its whole run was read from a file.
 """
 from __future__ import annotations
 
@@ -82,6 +91,7 @@ EXPECTED = {
 }
 
 _NAME = re.compile(r"^(\S+) \(((?:[^\s().]+\.)+)([^\s().]+)\)$")
+_NAME_AND_MORE = re.compile(r"^(\S+) \(((?:[^\s().]+\.)+)([^\s().]+)\)(?: .+)?$")      # a subtest: the test's name, then its message and values
 _DID_NOT_LOAD = re.compile(r"^ImportError: Failed to import test module: (\S+)\s*$", re.MULTILINE)
 
 Runner = Callable[[pathlib.Path, Sequence[str], float], Mapping[str, Any]]
@@ -91,17 +101,29 @@ Runner = Callable[[pathlib.Path, Sequence[str], float], Mapping[str, Any]]
 # reading two runs against each other
 # --------------------------------------------------------------------------- #
 def not_passing(found: Mapping[str, str]) -> list[str]:
-    """The tests, by name, that failed or ended in an error."""
-    return sorted(name for name, how in found.items() if how in (judge.FAILED, judge.ERROR) and _NAME.match(name))
+    """The tests and subtests, by the name they were printed under, that failed or ended in an error."""
+    return sorted(name for name, how in found.items() if how in (judge.FAILED, judge.ERROR) and _NAME_AND_MORE.match(name))
+
+
+def module_of(name: str) -> str | None:
+    """The test module of a printed test or subtest, or nothing when it is unittest's own name for a module that did not load."""
+    found = _NAME_AND_MORE.match(name)
+    if found is None:
+        return None
+    parts = (found.group(2) + found.group(3)).split(".")
+    if parts[-1] == found.group(1):                     # as Python 3.11 prints it: the method's name once more after the class
+        parts = parts[:-1]
+    module = ".".join(parts[:-1])
+    return None if not module or module.startswith("unittest.") or module == "unittest" else module
 
 
 def modules_again(found: Mapping[str, str], printed: str) -> list[str]:
-    """The test modules to run a second time: those of the tests that did not pass, and those that did not load."""
+    """The test modules to run a second time: those of the tests and subtests that did not pass, and those that did not load."""
     out: dict[str, None] = {}
     for name in not_passing(found):
-        dotted = _NAME.match(name).group(2).rstrip(".")
-        if not dotted.startswith("unittest."):          # a module that did not load is printed as a test of unittest's own
-            out[dotted] = None
+        module = module_of(name)
+        if module is not None:
+            out[module] = None
     for module in _DID_NOT_LOAD.findall(printed):
         out[module] = None
     return sorted(out)
@@ -142,16 +164,23 @@ def _said(got: Mapping[str, Any], found: Mapping[str, str]) -> dict[str, Any]:
 
 
 def of_candidate(tree: pathlib.Path, test_patch: str, fix: str, path: str, text: str, first: Sequence[str],
-                 run: Runner = run_whole, keep_output: pathlib.Path | None = None) -> dict[str, Any]:
-    """One candidate under the whole suite, and the second run that says which tests it broke."""
+                 run: Runner = run_whole, keep_output: pathlib.Path | None = None, whole_run_from: pathlib.Path | None = None) -> dict[str, Any]:
+    """One candidate under the whole suite, and the second run that says which tests it broke.
+
+    With `whole_run_from`, a file holding what this candidate's whole run printed before, the whole run is read from it and not made again."""
     if not count.as_the_task_starts(tree, test_patch):
         raise RuntimeError("the test patch did not go in")
     (tree / path).write_bytes(text.encode("utf-8"))
-    got = run(tree, [], WHOLE_SECONDS)
+    read = whole_run_from is not None and whole_run_from.exists()
+    if read:
+        got = {"output": whole_run_from.read_text(encoding="utf-8"), "seconds": 0.0, "stopped": False, "exit": None}
+    else:
+        got = run(tree, [], WHOLE_SECONDS)
     if keep_output is not None:
         keep_output.write_text(got["output"], encoding="utf-8")
     found = judge.statuses(got["output"])
-    row: dict[str, Any] = {"whole_run": {**_said(got, found), "start_passing": len(judge.passing(found, first)), "start_passing_wanted": len(first)},
+    row: dict[str, Any] = {"whole_run": {**_said(got, found), "start_passing": len(judge.passing(found, first)), "start_passing_wanted": len(first),
+                                         "read_from_a_file": read},
                            "modules_again": None, "run_again": None, "broken_by_the_candidate": None, "keeps_the_whole_suite": None, "why_nothing_is_said": None}
     if not row["whole_run"]["finished"]:
         row["why_nothing_is_said"] = "the whole run was stopped for time" if got["stopped"] else "the whole run ended before its summary"
@@ -267,6 +296,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--which", choices=("one", "first", "all"), default="one",
                         help="the resolving candidates at place 1, the first resolving candidate of each task, or every resolving candidate")
     parser.add_argument("--workers", type=int, default=2, help="candidates run side by side, each on its own tree")
+    parser.add_argument("--whole-runs-from", type=pathlib.Path, default=None,
+                        help="a directory of <task>__place_<n>__whole_run.txt files: what a whole run printed before is read, not made again")
     parser.add_argument("--out", type=pathlib.Path, default=None)
     args = parser.parse_args(argv)
 
@@ -314,7 +345,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         row = {"task": task, "place": at, "first_resolving": (task, at) in firsts, "version": counted["per_task"][task].get("version"),
                "path": candidate["path"], "function": candidate["function"], "sha256": written["sha256"],
                **of_candidate(tree, test_patch, fix, candidate["path"], candidate["text"], count.tests_of(statements / f"{task}.yaml")["fail_to_pass"],
-                              keep_output=args.work_dir / f"{task}__place_{at}__whole_run.txt")}
+                              keep_output=args.work_dir / f"{task}__place_{at}__whole_run.txt",
+                              whole_run_from=None if args.whole_runs_from is None else args.whole_runs_from / f"{task}__place_{at}__whole_run.txt")}
         row["seconds"] = round(time.time() - begun, 1)
         return row
 
@@ -335,6 +367,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "which": args.which,
         "processes_of_one_run": 1,
         "candidates_side_by_side": max(1, args.workers),
+        "whole_runs_read_from_files": [f"{row['task']} place {row['place']}" for row in ordered if row["whole_run"].get("read_from_a_file")],
         "expected": {name: list(pair) for name, pair in EXPECTED.items()},
         "expectations": held(summary),
         "summary": summary,
