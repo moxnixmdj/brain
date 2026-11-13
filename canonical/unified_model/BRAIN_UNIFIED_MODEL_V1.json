@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6611c80f948a9c03ed182f23bd75688db36e00b4fa5c2ca0cd7478f330ee3a2a"
+  "value": "c100513f259aa33bf69ab1dbf0d7cb5f7d6bb274671286ce5ab8b1c591f5cefe"
  },
  "engines": [
   {
@@ -63920,7 +63920,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 9126,
+   "bytes": 9701,
    "headings": [
     "Experience distillation: evidence and pilot readiness (2026-11-13)",
     "Answer and research",
@@ -63930,21 +63930,21 @@
    ],
    "kind": "DOCUMENT",
    "path": "WEIGHT_SPACE_EXPERIENCE_AUDIT_20261113.md",
-   "sha256": "cfde2c9d0a60b57e515b939a5afa96b2d98d4ec57898e2d328c1ea98e50a9f38",
+   "sha256": "45d122c9bd31ffcbc19859d72cddd96e8b66cbc112e1e15aee06c7cfabbf06ce",
    "summary": "Adding a trainable model, persistent adapters, external memory and an independent verifier is a plausible research direction, not proof of universal computer use, learning a general rule after one example, retention forever, or sentience. Memory can support useful generalization without weight updates. Weight changes can improve a policy but can also forget, overfit, absorb poisoned data, or make ",
    "terms": {
-    "296": 3,
     "action": 6,
     "adapter": 3,
     "against": 3,
     "agent": 3,
+    "arxiv.org": 3,
     "audit": 3,
     "before": 3,
+    "brain": 3,
     "canonical": 3,
     "cases": 4,
     "checkpoint": 3,
-    "checks": 3,
-    "coding": 3,
+    "coding": 4,
     "conditioned": 4,
     "data": 6,
     "distillation": 4,
@@ -63953,34 +63953,34 @@
     "establish": 3,
     "evidence": 3,
     "experience": 7,
-    "frozen": 3,
-    "hashes": 3,
-    "history": 3,
-    "https": 4,
+    "external": 3,
+    "fields": 3,
+    "forgetting": 3,
+    "https": 5,
     "independent": 5,
     "learning": 6,
     "lora": 4,
-    "measure": 3,
     "memory": 6,
-    "metadata": 3,
+    "metadata": 4,
     "model": 10,
-    "narrow": 3,
-    "no": 7,
-    "not": 31,
+    "new": 4,
+    "no": 8,
+    "not": 33,
     "passes": 4,
     "plus": 4,
     "policy": 4,
-    "records": 6,
+    "records": 5,
     "report": 5,
     "separate": 5,
-    "task": 8,
+    "task": 9,
     "tasks": 4,
     "teacher": 8,
-    "tests": 5,
-    "training": 8,
+    "tests": 6,
+    "training": 9,
     "transfer": 6,
-    "weight": 4,
-    "weights": 6
+    "weight": 5,
+    "weights": 6,
+    "were": 4
    },
    "title": "Experience distillation: evidence and pilot readiness (2026-11-13)",
    "title_terms": [
@@ -78266,7 +78266,7 @@
   "included_source_count": 1231,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f9240c6888b15469638fed58eb9110f1d591b00a608fd38d339ad8a252836dcc"
+  "source_tree_digest": "3c5cb0ca2c1df32f8b22b556abae7d82aac10569a1845c6d4bb10338d5aa824e"
  },
  "research_index": [
   {
