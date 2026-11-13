@@ -34,7 +34,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_WRONG_GENERALISATION_IS_REFUSED_ONLY_WHERE_A_CHECK_EXISTS__AND_ON_REAL_MIGRATED_PROJECTS_THE_CHECK_COULD_NOT_RUN_AT_ALL__0_OF_42_FILES__BECAUSE_NO_TEST_MODULE_IMPORTED_THE_FILE_OR_A_DECLARED_DEPENDENCY_WAS_NOT_INSTALLED",
- "canonical_base_commit": "83a62d561d2f32070d891170199d89bbf3f585b7",
+ "canonical_base_commit": "529c106f793785ece71c815ae8ba2833eecf37df",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -88,7 +88,7 @@
   }
  ],
  "recursive_obs": {
-  "canonical_base_commit": "83a62d561d2f32070d891170199d89bbf3f585b7",
+  "canonical_base_commit": "529c106f793785ece71c815ae8ba2833eecf37df",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "WIDEN_THE_RULE_AS_THE_GENERALISATION_LEVER",
