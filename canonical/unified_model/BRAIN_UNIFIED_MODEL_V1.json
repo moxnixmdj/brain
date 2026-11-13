@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 431,
+  "knowledge_documents": 432,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6831,
+  "research_index_records": 6829,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0179c9ee60e0695e6fe34384e60c3ea37bebbb648bb245de5b16a1215f2adb4a"
+  "value": "926af20a14e34f34e566d61cd3748c5d84a4f6dbe087766832f39d116ba01069"
  },
  "engines": [
   {
@@ -44598,6 +44598,88 @@
   "tokenizer": "lowercase-ascii-words-then-stopword-removal"
  },
  "knowledge": [
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 10937,
+   "headings": [
+    "Admission is the bottleneck — measured on the live learn path, 13 November 2026",
+    "1. The claim under test",
+    "2. What the live path actually executed (measured before changing anything)",
+    "3. What changed",
+    "4. What this does **not** say",
+    "5. Why this is the fastest real lever (current research, not intuition)",
+    "6. The four gaps, with the fastest honest mechanism for each",
+    "7. Killed before implementation",
+    "8. Test ledger (real counts, including the failure)",
+    "9. The one-sentence answer"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ADMISSION_IS_THE_BOTTLENECK_20261113_V1.md",
+   "sha256": "2e4466f42de9e38f54892a159443d1889d25e1f6b0aaf7541ba355002938e789",
+   "summary": "Authority: **NONE**. Sandbox measurement on this tree plus published research. No capability is registered, no family flips, `truth.achieved` is untouched, no base-model/LLM weights are updated.",
+   "terms": {
+    "100": 4,
+    "2026": 9,
+    "admission": 7,
+    "admit": 5,
+    "all": 5,
+    "alone": 4,
+    "arxiv": 7,
+    "before": 5,
+    "broken": 4,
+    "caller": 4,
+    "cannot": 5,
+    "capability": 4,
+    "crystallized": 4,
+    "demonstration": 6,
+    "each": 4,
+    "every": 5,
+    "evidence": 6,
+    "executed": 5,
+    "failures": 4,
+    "false": 4,
+    "falsification": 4,
+    "gain": 4,
+    "gate": 8,
+    "held-out": 4,
+    "lesson": 5,
+    "measured": 4,
+    "memory": 4,
+    "never": 8,
+    "no": 13,
+    "not": 18,
+    "one": 13,
+    "own": 6,
+    "passed": 8,
+    "permanence": 6,
+    "probe": 5,
+    "program": 7,
+    "programs": 4,
+    "real": 10,
+    "regression": 4,
+    "repaired": 4,
+    "store": 4,
+    "tests": 4,
+    "than": 4,
+    "true": 4,
+    "under": 4,
+    "ungated": 5,
+    "updates": 4,
+    "victims": 6
+   },
+   "title": "Admission is the bottleneck — measured on the live learn path, 13 November 2026",
+   "title_terms": [
+    "13",
+    "2026",
+    "admission",
+    "bottleneck",
+    "learn",
+    "live",
+    "measured",
+    "november",
+    "path"
+   ]
+  },
   {
    "authority": "NOT_A_LAW",
    "bytes": 4315,
@@ -78461,10 +78543,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1233,
+  "included_source_count": 1234,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ce1c543834ef19ad3575f634175aca1d12ea740fe0286cd1221e78860849e0cc"
+  "source_tree_digest": "c8670eb320188b430b138f60cb20957c6840fc5a7993e2ec3f63b02118801851"
  },
  "research_index": [
   {
@@ -195632,23 +195714,6 @@
   {
    "action_id": "",
    "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
-   "sha256": "6f39a538f01faef96312f28d60d978314ce6b64163365486514a3bf06b4b9e3f",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "check": 1,
-    "standing": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_REPLAY_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -236042,30 +236107,6 @@
     "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
     "turn": 1,
     "v1": 2
-   }
-  },
-  {
-   "action_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ae73e98043540c224e9c868b88d2eeeabf6f18441a96cd25ea1381749b288433",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_wrong_generalisation_is_refused_only_where_a_check_exists__and_on_real_migrated_projects_the_check_could_not_run_at_all__0_of_42_files__because_no_test_module_imported_the_file_or_a_declared_dependency_was_not_installed": 1,
-    "check": 1,
-    "environment": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "reuse_the_rung_gradient_arms_and_check_class__add_isolated_venv_standing_of_declared_dependencies_manifest_named_missing_module_repair_a_per_path_test_entry_finder_with_direct_in_directory_indirect_confidence_and_a_ran_zero_tests_refusal__carry_the_manifests_in_the_corpus__then_remeasure_the_same_twelve_pull_requests_by_label": 1,
-    "round": 1,
-    "standing": 1,
-    "standing_the_check_is_the_environment_round_20261112_v1": 1,
-    "the_oracle_deficit_named_last_round_is_now_an_implemented_organ__standing_up_a_project_s_checks__and_the_verified_coverage_on_this_corpus_remains_zero_with_each_residual_named_per_project_instead_of_bucketed_half_half": 1,
-    "v1": 1
    }
   },
   {
