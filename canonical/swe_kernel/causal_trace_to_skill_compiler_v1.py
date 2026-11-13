@@ -387,7 +387,50 @@ def elevate_trace_to_fastest_layer(trace: Mapping[str, Any] | Sequence[Mapping[s
 # --------------------------------------------------------------------------- #
 # 2. Multi-Step Workflow Plotkin Anti-Unification
 # --------------------------------------------------------------------------- #
-def _extract_goal_literals(goal: str) -> list[tuple[str, str]]:
+_KV_PAIR_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_-]*)\s*[=:]\s*([^\s,;)]+)")
+_HOLE_KV_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_-]*)\s*[=:]\s*(\?[a-z]+\d+)")
+
+_WORKFLOW_SYNONYM_GROUPS: tuple[frozenset[str], ...] = (
+    frozenset({"submit", "post", "send", "dispatch"}),
+    frozenset({"count", "tally", "total"}),
+    frozenset({"create", "make", "initialize"}),
+    frozenset({"insert", "add", "record"}),
+    frozenset({"enable", "activate"}),
+    frozenset({"extract", "collect"}),
+)
+
+_WORKFLOW_OPPOSING_VERBS: tuple[tuple[frozenset[str], frozenset[str]], ...] = (
+    (frozenset({"enable", "activate"}), frozenset({"disable", "deactivate"})),
+    (frozenset({"create", "insert", "add", "write"}), frozenset({"delete", "drop", "remove", "erase"})),
+    (frozenset({"read", "count", "select", "get", "fetch"}), frozenset({"write", "delete", "drop", "update"})),
+    (frozenset({"encode", "encrypt", "compress"}), frozenset({"decode", "decrypt", "decompress"})),
+    (frozenset({"start", "open", "lock"}), frozenset({"stop", "close", "unlock"})),
+)
+
+_OPTIONAL_CONTAINER_NOUNS: frozenset[str] = frozenset({"database", "file", "feature", "endpoint", "server"})
+
+
+def _expand_workflow_synonyms(words: set[str]) -> set[str]:
+    out = set(words)
+    for grp in _WORKFLOW_SYNONYM_GROUPS:
+        if out & grp:
+            out |= grp
+    return out
+
+
+def _has_opposing_workflow_intent(skel_words: set[str], goal_words: set[str]) -> bool:
+    for pos_grp, neg_grp in _WORKFLOW_OPPOSING_VERBS:
+        if (skel_words & pos_grp and goal_words & neg_grp) or (skel_words & neg_grp and goal_words & pos_grp):
+            return True
+    return False
+
+
+def _extract_goal_literals(
+    goal: str,
+    *,
+    peer_goal: str | None = None,
+    step_blob: str = "",
+) -> list[tuple[str, str]]:
     """Extract candidate parameterizable literals `(kind, raw_value)` in left-to-right order."""
     spans: list[tuple[int, int, str, str]] = []
 
@@ -430,6 +473,19 @@ def _extract_goal_literals(goal: str) -> list[tuple[str, str]]:
         val = m.group(0)
         if val.lower() not in _STOP_WORDS and ("_" in val or "-" in val) and not _overlaps(m.start(), m.end()):
             spans.append((m.start(), m.end(), "str", val))
+
+    if peer_goal and peer_goal.strip() and peer_goal.strip() != goal.strip() and step_blob:
+        peer_words = {m.group(0).lower() for m in _IDENT_RE.finditer(peer_goal)}
+        for m in _IDENT_RE.finditer(goal):
+            val = m.group(0)
+            vlow = val.lower()
+            if (
+                vlow not in _STOP_WORDS
+                and vlow not in peer_words
+                and not _overlaps(m.start(), m.end())
+                and re.search(rf"\b{re.escape(val)}\b", step_blob)
+            ):
+                spans.append((m.start(), m.end(), "str", val))
 
     spans.sort(key=lambda t: t[0])
     return [(kind, val) for _, _, kind, val in spans]
@@ -498,10 +554,12 @@ def anti_unify_workflow(
     goal: str,
     elevated_steps: Sequence[Mapping[str, Any]],
     postcondition: Mapping[str, Any],
+    *,
+    peer_goal: str | None = None,
 ) -> dict[str, Any]:
     """Anti-unify `(goal, elevated_steps, postcondition)` into a reusable parameterized workflow."""
     step_blob = json.dumps(list(elevated_steps), sort_keys=True) + "\n" + json.dumps(dict(postcondition), sort_keys=True)
-    candidates = _extract_goal_literals(goal)
+    candidates = _extract_goal_literals(goal, peer_goal=peer_goal, step_blob=step_blob)
 
     val_to_hole: dict[str, str] = {}
     param_order: list[str] = []
@@ -585,32 +643,174 @@ def anti_unify_workflow(
         w for w in re.findall(r"[a-z]{2,}", re.sub(r"\?[a-z]+\d+", " ", goal_skeleton.lower()))
         if w not in _STOP_WORDS
     })
+    param_keys: dict[str, str] = {
+        m.group(2): m.group(1).lower()
+        for m in _HOLE_KV_RE.finditer(goal_skeleton)
+    }
 
     return {
         "goal_skeleton": goal_skeleton,
         "goal_regex": goal_regex,
         "skeleton_tokens": skel_words,
         "param_order": param_order,
+        "param_keys": param_keys,
         "abstract_steps": abstract_steps,
         "abstract_postcondition": abstract_post,
         "concrete_bindings": {h: v for v, h in val_to_hole.items()},
     }
 
 
+def anti_unify_workflow_examples(
+    example_1: Mapping[str, Any],
+    example_2: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Plotkin Least-General Generalization (LGG) over two workflow demonstrations.
+
+    Given two demonstrations `(goal_1, steps_1, post_1)` and `(goal_2, steps_2, post_2)`,
+    generalizes both typed literals and plain-word tokens that vary between `goal_1` and
+    `goal_2` while causally appearing in `steps_1` / `post_1`, and verifies that `goal_2`
+    structurally binds to the resulting parameterized workflow with distinct bindings.
+    """
+    g1 = str(example_1.get("goal") or "")
+    g2 = str(example_2.get("goal") or "")
+    s1 = elevate_trace_to_fastest_layer(list(example_1.get("steps") or example_1.get("trace") or ()))["elevated_steps"]
+    p1 = dict(example_1.get("postcondition") or {})
+    gen = anti_unify_workflow(g1, s1, p1, peer_goal=g2)
+    b2 = bind_goal_parameters(gen, g2)
+    gen["second_example_bindings"] = b2
+    gen["generalized_across_both"] = bool(b2 is not None and b2 != gen.get("concrete_bindings"))
+    return gen
+
+
+def _bind_structural_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
+    """Polymorphic structural parameter binder for similar goals (reordered keys, synonyms, clause order)."""
+    goal_clean = goal.strip().rstrip(".")
+    goal_skeleton = str(skill.get("goal_skeleton") or "")
+    param_order = [str(p) for p in (skill.get("param_order") or []) if str(p).startswith("?")]
+    if not goal_skeleton or not param_order:
+        return None
+
+    skel_tokens = {str(w).lower() for w in (skill.get("skeleton_tokens") or []) if w}
+    if not skel_tokens:
+        skel_tokens = {
+            w for w in re.findall(r"[a-z]{2,}", re.sub(r"\?[a-z]+\d+", " ", goal_skeleton.lower()))
+            if w not in _STOP_WORDS
+        }
+    goal_words = {w for w in re.findall(r"[a-z]{2,}", goal_clean.lower()) if w not in _STOP_WORDS}
+    if not skel_tokens or _has_opposing_workflow_intent(skel_tokens, goal_words):
+        return None
+
+    expanded_goal_words = _expand_workflow_synonyms(goal_words)
+    required_skel = skel_tokens - _OPTIONAL_CONTAINER_NOUNS
+    if not required_skel:
+        required_skel = skel_tokens
+    if not (required_skel <= expanded_goal_words):
+        return None
+
+    # 1. Bind named `key=val` / `key: val` holes by key name (order-independent)
+    key_to_hole: dict[str, str] = {}
+    for m in _HOLE_KV_RE.finditer(goal_skeleton):
+        key_to_hole[m.group(1).lower()] = m.group(2)
+    if isinstance(skill.get("param_keys"), Mapping):
+        for hole_k, key_name in skill["param_keys"].items():
+            key_to_hole.setdefault(str(key_name).lower(), str(hole_k))
+
+    out: dict[str, str] = {}
+    consumed_spans: list[tuple[int, int]] = []
+    if key_to_hole:
+        goal_kv: dict[str, str] = {}
+        for m in _KV_PAIR_RE.finditer(goal_clean):
+            k_low = m.group(1).lower()
+            v_raw = m.group(2).strip().strip("\"'").rstrip(".,;:")
+            if k_low in key_to_hole and v_raw:
+                goal_kv[k_low] = v_raw
+                consumed_spans.append((m.start(), m.end()))
+        if set(key_to_hole.keys()) != set(goal_kv.keys()):
+            return None
+        for k_low, hole in key_to_hole.items():
+            out[hole] = goal_kv[k_low]
+
+    remaining_holes = [h for h in param_order if h not in out]
+    if not remaining_holes:
+        return out
+
+    # 2. Bind remaining positional typed holes (`?url`, `?path`, `?num`, `?str`) on unconsumed text
+    masked_chars = list(goal_clean)
+    for s_idx, e_idx in consumed_spans:
+        for i in range(max(0, s_idx), min(len(masked_chars), e_idx)):
+            masked_chars[i] = " "
+    rem_goal = "".join(masked_chars)
+
+    cands = _extract_goal_literals(rem_goal)
+    by_kind: dict[str, list[str]] = {"url": [], "path": [], "num": [], "str": []}
+    for kind, val in cands:
+        if kind == "url" and any(u != val and u.startswith(val) for k2, u in cands if k2 == "url"):
+            continue
+        clean_v = val.strip().strip("\"'").rstrip(".")
+        if clean_v and clean_v not in by_kind.get(kind, ()):
+            by_kind.setdefault(kind, []).append(clean_v)
+
+    # Also allow plain non-skeleton identifier arguments when a `?str` hole was learned via 2-example LGG
+    needed_str = sum(1 for h in remaining_holes if h.startswith("?str"))
+    if needed_str > len(by_kind["str"]):
+        expanded_skel_tokens = _expand_workflow_synonyms(skel_tokens)
+        for m in _IDENT_RE.finditer(rem_goal):
+            tok = m.group(0)
+            tlow = tok.lower()
+            if (
+                tlow not in _STOP_WORDS
+                and tlow not in expanded_skel_tokens
+                and tok not in by_kind["str"]
+                and not any(tok in p for p in by_kind["path"] + by_kind["url"])
+            ):
+                by_kind["str"].append(tok)
+
+    kind_cursors: dict[str, int] = {"url": 0, "path": 0, "num": 0, "str": 0}
+    for hole in remaining_holes:
+        m_kind = re.match(r"^\?([a-z]+)\d+$", hole)
+        if not m_kind:
+            return None
+        h_kind = m_kind.group(1)
+        pool = by_kind.get(h_kind) or []
+        cur = kind_cursors.get(h_kind, 0)
+        if cur >= len(pool):
+            return None
+        out[hole] = pool[cur]
+        kind_cursors[h_kind] = cur + 1
+
+    # Ambiguity guard: do not bind if extra conflicting typed literals of a bound positional kind remain
+    for h_kind, used_count in kind_cursors.items():
+        if used_count > 0 and len(by_kind.get(h_kind) or ()) != used_count:
+            return None
+
+    return out if len(out) == len(param_order) else None
+
+
 def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
     pattern = str(skill.get("goal_regex") or "")
-    if not pattern:
-        return None
-    m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
-    if not m:
-        return None
-    out: dict[str, str] = {}
-    for k, v in m.groupdict().items():
-        if v is None:
-            return None
-        clean = v.strip().strip("\"'").rstrip(".")
-        out["?" + k] = clean
-    return out
+    if pattern:
+        m = re.match(pattern, goal.strip(), flags=re.IGNORECASE)
+        if m:
+            out: dict[str, str] = {}
+            ok = True
+            for k, v in m.groupdict().items():
+                if v is None:
+                    ok = False
+                    break
+                clean = v.strip().strip("\"'").rstrip(".")
+                out["?" + k] = clean
+            if ok:
+                # Verify that if named key=value slots exist in the skeleton, a reordered
+                # `env=prod and service=auth` wasn't misbound positionally by `.+?`
+                skel = str(skill.get("goal_skeleton") or "")
+                kv_holes = {m_kv.group(2): m_kv.group(1).lower() for m_kv in _HOLE_KV_RE.finditer(skel)}
+                misbound = any(
+                    re.match(r"^[A-Za-z_][A-Za-z0-9_-]*\s*[=:]", str(out.get(h) or ""))
+                    for h in kv_holes
+                )
+                if not misbound:
+                    return out
+    return _bind_structural_goal_parameters(skill, goal)
 
 
 # --------------------------------------------------------------------------- #
@@ -1481,7 +1681,7 @@ def compile_and_qualify_skill(
             "status": "FAIL_CLOSED__EMPTY_CAUSAL_TRACE",
         }
 
-    generalized = anti_unify_workflow(goal, steps, postcondition)
+    generalized = anti_unify_workflow(goal, steps, postcondition, peer_goal=heldout_goal)
 
     # Donor deletion: from this line forward, `trace` is never consulted again.
     del trace
@@ -1825,19 +2025,16 @@ def _load_cached_skills(db_path: pathlib.Path | None = None) -> list[dict[str, A
             "artifact_sha256": r[8],
         })
     _WORKFLOW_MEM_CACHE[key] = out
-    # Build O(1) rarest-anchor-token inverted index so lookup stays sub-millisecond at 10,000+ skills
-    doc_freq: dict[str, int] = {}
-    for sk in out:
-        for tok in set(sk.get("skeleton_tokens") or []):
-            doc_freq[tok] = doc_freq.get(tok, 0) + 1
+    # Build multi-token inverted index over all skeleton tokens so lookup stays sub-millisecond
+    # even when a similar goal paraphrases one verb or omits an optional container noun.
     inv: dict[str, list[dict[str, Any]]] = {"__ALL_EMPTY__": []}
     for sk in out:
-        toks = list(set(sk.get("skeleton_tokens") or []))
+        toks = sorted(set(sk.get("skeleton_tokens") or []))
         if not toks:
             inv["__ALL_EMPTY__"].append(sk)
         else:
-            anchor = min(toks, key=lambda t: (doc_freq.get(t, 0), -len(t), t))
-            inv.setdefault(anchor, []).append(sk)
+            for tok in toks:
+                inv.setdefault(tok, []).append(sk)
     _WORKFLOW_INDEX_CACHE[key] = inv
     return out
 
@@ -1850,7 +2047,7 @@ def _candidate_skills_for_words(goal_words: set[str], db_path: pathlib.Path | No
     inv = _WORKFLOW_INDEX_CACHE.get(key) or {}
     candidates: list[dict[str, Any]] = list(inv.get("__ALL_EMPTY__") or [])
     seen_ids = {s["skill_id"] for s in candidates}
-    for w in goal_words:
+    for w in _expand_workflow_synonyms(goal_words):
         for sk in inv.get(w) or ():
             if sk["skill_id"] not in seen_ids:
                 seen_ids.add(sk["skill_id"])
@@ -1893,14 +2090,20 @@ def recall_and_execute_workflow(
     cwd: str | pathlib.Path | None = None,
     db_path: pathlib.Path | None = None,
     refusals: list[dict[str, Any]] | None = None,
+    require_exact_goal: bool = False,
 ) -> dict[str, Any] | None:
     """Sub-2ms O(1) indexed lookup + precondition guard + deterministic execution + postcondition check.
 
     ``refusals``, when given, collects one entry for every skill whose sentence matched the goal
-    exactly and which then did not complete -- with the reason its own step gave.  The return
-    value is unchanged (``None`` when nothing passed), so a caller that does not ask sees nothing
-    new; a caller that does can tell "nothing was taught for this sentence" from "it was taught,
-    and the taught action declined this case".
+    and which then did not complete -- with the reason its own step gave. The return value is
+    unchanged (``None`` when nothing passed), so a caller that does not ask sees nothing new; a
+    caller that does can tell "nothing was taught for this sentence" from "it was taught, and the
+    taught action declined this case".
+
+    ``require_exact_goal`` disables the structural/synonym fallback and requires the complete
+    recorded goal template to match. The public door uses this when considering a stored workflow
+    after an honest capability-coverage refusal: a different, prequalified skill may serve the
+    request, but a loose structural resemblance must not override that refusal.
     """
     from canonical.runtime.memory_policy_v1 import can_read_memory
 
@@ -1911,10 +2114,16 @@ def recall_and_execute_workflow(
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     previous_attempt = False
 
+    expanded_goal_words = _expand_workflow_synonyms(goal_words)
     for skill in _candidate_skills_for_words(goal_words, db_path):
         skel_tokens = set(skill.get("skeleton_tokens") or [])
-        if skel_tokens and not (skel_tokens <= goal_words):
+        req_tokens = (skel_tokens - _OPTIONAL_CONTAINER_NOUNS) or skel_tokens
+        if req_tokens and not (req_tokens <= expanded_goal_words):
             continue
+        if require_exact_goal:
+            pattern = str(skill.get("goal_regex") or "")
+            if not pattern or re.match(pattern, goal.strip(), flags=re.IGNORECASE) is None:
+                continue
         bindings = bind_goal_parameters(skill, goal)
         if bindings is None:
             continue

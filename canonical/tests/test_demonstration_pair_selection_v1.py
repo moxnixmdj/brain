@@ -22,13 +22,18 @@ RECORD = pathlib.Path("canonical/tests/fixtures/demonstration_pair_selection_sum
 
 
 def _files():
-    """Two two-argument examples, one three-argument example, one three-argument target."""
+    """Two two-argument examples, one three-argument example, one three-argument target.
+
+    Use an unlisted rename: ``assertEquals`` -> ``assertEqual`` is a documented alias,
+    so the shipped learner correctly allows a different call shape for that specific pair.
+    This synthetic case pins the general rule for renames that are not known aliases.
+    """
     def pair(name, args):
         names = ", ".join(args)
         return {
             "path": name + ".py",
-            "before": "def %s(%s):\n    return check.assertEquals(%s)\n" % (name, names, names),
-            "after": "def %s(%s):\n    return check.assertEqual(%s)\n" % (name, names, names),
+            "before": "def %s(%s):\n    return check.assertOld(%s)\n" % (name, names, names),
+            "after": "def %s(%s):\n    return check.assertNew(%s)\n" % (name, names, names),
         }
     return [pair("a1", ("a", "b")), pair("b1", ("c", "d")),
             pair("c1", ("x", "y", "z")), pair("d1", ("p", "q", "r"))]

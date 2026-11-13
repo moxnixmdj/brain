@@ -77,6 +77,9 @@ _HONEST_REFUSAL_CLASSES: frozenset[str] = frozenset(
         # whose entire point is that the refusal is PRECISE -- read the wrong failure class, and
         # the door lost the reason it had already computed.
         "CROSSFILE_TASK_UNBOUND",
+        "MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY",
+        "REQUEST_WORD_NOT_ACCOUNTED_FOR_BY_CAPABILITY",
+        "PROMISED_FILE_NOT_WRITTEN_BY_CAPABILITY",
         computer_boundary.FAILURE_CLASS,
     }
 )

@@ -2636,6 +2636,11 @@ def request_words_explained_by_row(sentence: str, admission: Mapping[str, Any], 
                     or token in _RESULT_DESTINATION_WORDS or token.isdigit()
                     or token in explained or token in unexplained):
                 continue
+            if token in ("name", "names") and explained and explained[-1] in (
+                "function", "functions", "class", "classes", "method", "methods",
+                "symbol", "symbols", "import", "imports", "module", "modules",
+            ):
+                continue
             if _word_stem(token) in vocabulary:
                 explained.append(token)
             elif token not in bound_as_data:
@@ -4637,8 +4642,9 @@ def _close_observations(result: dict[str, Any], goal: str,
         try:
             from canonical.runtime import answer_shape_v1 as _answer_shape
             from canonical.runtime import swe_typed_plan_v1 as _tp_shape
-            _answer_shape.lift_named_answer(result)
-            answer_errors = _answer_shape.deliver(_tp_shape._strip_pasted_test_output(goal), result, ROOT)
+            _clean_shape_goal = _tp_shape._strip_pasted_test_output(goal)
+            _answer_shape.lift_named_answer(result, _clean_shape_goal)
+            answer_errors = _answer_shape.deliver(_clean_shape_goal, result, ROOT)
         except Exception:  # noqa: BLE001 - a projection fault must never change a verdict
             answer_errors = []
     if answer_errors:
@@ -5398,6 +5404,28 @@ def _may_supersede_a_failed_attempt(result: Mapping[str, Any]) -> bool:
 _UNINFORMATIVE_STATUSES = frozenset({"", "FAIL_CLOSED"})
 
 
+_COMPILED_WORKFLOW_ROUTABLE_REFUSALS = frozenset({
+    "MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY",
+    "REQUEST_WORD_NOT_ACCOUNTED_FOR_BY_CAPABILITY",
+    "PROMISED_FILE_NOT_WRITTEN_BY_CAPABILITY",
+})
+
+
+def _compiled_workflow_may_answer_refusal(result: Mapping[str, Any]) -> bool:
+    """Whether a separate, prequalified workflow may be tried after a route-coverage refusal.
+
+    These statuses honestly describe why the selected registry row did not serve the request;
+    they must still block the unconfined discovery route. They do not prove that *no other*
+    registered route can serve it, though. A compiled workflow is an independent, content-addressed
+    capability with its own goal binding, execution boundary and postcondition. Let that route try
+    only these admission-coverage refusals; if it declines, the original refusal remains the answer.
+    """
+    failure = str(result.get("failure_class") or "")
+    status = str(result.get("status") or "")
+    return any(reason in failure or reason in status
+               for reason in _COMPILED_WORKFLOW_ROUTABLE_REFUSALS)
+
+
 def _decided_before_the_carrier_gate(attempted: Mapping[str, Any]) -> bool:
     """Did the door already decide WHY this request cannot be served?
 
@@ -5594,9 +5622,12 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                     recall_and_execute_workflow,
                 )
 
-                if not _is_honest_contract_refusal(result):
+                _coverage_refusal = _compiled_workflow_may_answer_refusal(result)
+                if not _is_honest_contract_refusal(result) or _coverage_refusal:
                     _declined: list[dict[str, Any]] = []
-                    recalled = recall_and_execute_workflow(str(request.get("goal") or ""), refusals=_declined)
+                    recalled = recall_and_execute_workflow(
+                        str(request.get("goal") or ""), refusals=_declined,
+                        require_exact_goal=_coverage_refusal)
                     if recalled is None and _declined:
                         # The sentence WAS taught, and the taught action declined this case.  The
                         # refusal above stands; this says why, in the action's own words.
