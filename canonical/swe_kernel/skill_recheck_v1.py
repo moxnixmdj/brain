@@ -98,10 +98,23 @@ def _rule_sources(rule: dict) -> list[dict]:
 
 
 def recheck(rule: dict, *, apply=None) -> dict:
-    """Re-run `rule` on its own taught sources. Can return FAIL, which is the point."""
+    """Re-run `rule` on its own taught sources. Can return FAIL, which is the point.
+
+    In multi-function modules a valid scoped rule is a bounded candidate generator: the
+    taught function need not be the first matching function in the file (for instance
+    `ichunked` in `more_itertools/more.py` is candidate index 1 of 3). When using the
+    production applier (`apply is None`), `recheck` therefore checks the same bounded
+    64-candidate stream that `crystallize_code_fix` and `recall_and_apply_verified` use,
+    while still failing whenever zero candidates match (`RULE_NO_LONGER_APPLIES`) or none
+    reproduces `expected` (`REWRITE_DIFFERS_FROM_TAUGHT`).
+    """
+    import itertools
+
+    iter_candidates = None
     if apply is None:
         from canonical.swe_kernel.verified_skill_crystallizer_v1 import (
             apply_crystallized_code_rule as apply,
+            iter_crystallized_code_rule_candidates as iter_candidates,
         )
     sources = _rule_sources(rule)
     if not sources:
@@ -113,19 +126,27 @@ def recheck(rule: dict, *, apply=None) -> dict:
         before = str(source.get("before") or "")
         expected = source.get("after")
         try:
-            produced = apply(before, rule)
+            if iter_candidates is not None:
+                cands = list(itertools.islice(iter_candidates(before, rule), 64))
+                if not cands:
+                    one = apply(before, rule)
+                    if one is not None:
+                        cands = [one]
+            else:
+                one = apply(before, rule)
+                cands = [one] if one is not None else []
         except Exception as exc:                     # a rule that raises has failed
             return {"verdict": FAIL, "reason": f"APPLY_RAISED:{type(exc).__name__}",
                     "source_index": index}
         checked += 1
-        if produced is None:
+        if not cands:
             return {"verdict": FAIL, "reason": "RULE_NO_LONGER_APPLIES",
                     "source_index": index,
                     "detail": "the pattern no longer matches the text it was taught on"}
-        if expected is not None and produced != str(expected):
+        if expected is not None and str(expected) not in cands:
             return {"verdict": FAIL, "reason": "REWRITE_DIFFERS_FROM_TAUGHT",
                     "source_index": index,
-                    "expected_len": len(str(expected)), "produced_len": len(produced)}
+                    "expected_len": len(str(expected)), "produced_len": len(cands[0])}
 
     return {"verdict": PASS, "reason": None, "sources_checked": checked}
 

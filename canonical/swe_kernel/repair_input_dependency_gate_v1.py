@@ -53,12 +53,19 @@ dependencies and still be wrong. It closes exactly one hole and says so.
 from __future__ import annotations
 
 import ast
+import sys
 from typing import Any
 
 SCHEMA = "PROJECT_BRAIN_REPAIR_INPUT_DEPENDENCY_GATE_V1"
 
 PASS = "PASS"
 REFUSED = "REFUSED"
+
+_STDLIB_ROOTS = frozenset(getattr(sys, "stdlib_module_names", ())) | {
+    "builtins",
+    "__future__",
+    "typing_extensions",
+}
 
 
 class GateError(RuntimeError):
@@ -143,16 +150,187 @@ def _names_by_slot(source_text: str, function_name: str) -> dict[str, str]:
     return {}
 
 
+def _collect_non_stdlib_imports(node: ast.AST) -> tuple[dict[str, str], dict[str, str]]:
+    """Return `(symbol_to_module, alias_to_module)` for non-stdlib imports in `node`'s scope."""
+    sym_to_mod: dict[str, str] = {}
+    alias_to_mod: dict[str, str] = {}
+    stack: list[ast.AST] = list(ast.iter_child_nodes(node))
+    while stack:
+        cur = stack.pop()
+        if isinstance(cur, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
+            continue
+        if isinstance(cur, ast.ImportFrom):
+            if cur.level and cur.level >= 1:
+                mod_key = "." * cur.level + (cur.module or "")
+            else:
+                mod_name = cur.module or ""
+                root_pkg = mod_name.split(".", 1)[0]
+                if not root_pkg or root_pkg in _STDLIB_ROOTS:
+                    continue
+                mod_key = mod_name
+            for al in cur.names:
+                if al.name == "*":
+                    continue
+                sym_to_mod[al.asname or al.name] = mod_key
+        elif isinstance(cur, ast.Import):
+            for al in cur.names:
+                root_pkg = al.name.split(".", 1)[0]
+                if not root_pkg or root_pkg in _STDLIB_ROOTS:
+                    continue
+                local = al.asname if al.asname else root_pkg
+                alias_to_mod[local] = al.name if al.asname else root_pkg
+        else:
+            stack.extend(ast.iter_child_nodes(cur))
+    return sym_to_mod, alias_to_mod
+
+
+def _local_shadows(fn_node: ast.FunctionDef | ast.AsyncFunctionDef) -> set[str]:
+    """Names bound locally as parameters, assignments, or nested defs in `fn_node`."""
+    shadows = {name for _, name in _slots(fn_node)}
+    stack: list[ast.AST] = list(ast.iter_child_nodes(fn_node))
+    while stack:
+        cur = stack.pop()
+        if isinstance(cur, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            shadows.add(cur.name)
+            continue
+        if isinstance(cur, ast.Lambda):
+            continue
+        if isinstance(cur, ast.Name) and isinstance(cur.ctx, ast.Store):
+            shadows.add(cur.id)
+        stack.extend(ast.iter_child_nodes(cur))
+    return shadows
+
+
+def _attr_root_name(node: ast.AST) -> str | None:
+    cur = node
+    while isinstance(cur, ast.Attribute):
+        cur = cur.value
+    if isinstance(cur, ast.Name):
+        return cur.id
+    return None
+
+
+def imported_callee_use(
+    source_text: str,
+    *,
+    inherited_symbols: dict[str, str] | None = None,
+    inherited_aliases: dict[str, str] | None = None,
+    require_call: bool = True,
+) -> dict[str, dict[str, str]]:
+    """For every function in `source_text`, map non-stdlib imported module -> witness callee.
+
+    When `require_call=True` (used on `before_source`), only actual `ast.Call` invocations of
+    non-stdlib imported symbols/modules register an obligation, so unused imports or imported
+    constants never create obligations. When `require_call=False` (used on `after_source`),
+    higher-order callback references (`map(apply_discount, ...)`) also satisfy the obligation.
+    """
+    if not isinstance(source_text, str) or not source_text.strip():
+        raise GateError("SOURCE_REQUIRED")
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError as exc:
+        raise GateError("SOURCE_NOT_PARSEABLE") from exc
+
+    mod_syms = dict(inherited_symbols or {})
+    mod_aliases = dict(inherited_aliases or {})
+    top_syms, top_aliases = _collect_non_stdlib_imports(tree)
+    mod_syms.update(top_syms)
+    mod_aliases.update(top_aliases)
+
+    out: dict[str, dict[str, str]] = {}
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        fn_syms = dict(mod_syms)
+        fn_aliases = dict(mod_aliases)
+        local_syms, local_aliases = _collect_non_stdlib_imports(node)
+        fn_syms.update(local_syms)
+        fn_aliases.update(local_aliases)
+        shadows = _local_shadows(node)
+
+        used_modules: dict[str, str] = {}
+        stack: list[ast.AST] = list(ast.iter_child_nodes(node))
+        while stack:
+            cur = stack.pop()
+            if isinstance(cur, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
+                continue
+            if isinstance(cur, ast.Call):
+                func = cur.func
+                if isinstance(func, ast.Name) and func.id not in shadows and func.id in fn_syms:
+                    used_modules.setdefault(fn_syms[func.id], func.id)
+                elif isinstance(func, ast.Attribute):
+                    root_nm = _attr_root_name(func.value)
+                    if root_nm and root_nm not in shadows and (root_nm in fn_aliases or root_nm in fn_syms):
+                        mod_origin = fn_aliases.get(root_nm) or fn_syms[root_nm]
+                        used_modules.setdefault(mod_origin, f"{root_nm}.{func.attr}")
+            elif not require_call:
+                if isinstance(cur, ast.Name) and isinstance(cur.ctx, ast.Load):
+                    if cur.id not in shadows and cur.id in fn_syms:
+                        used_modules.setdefault(fn_syms[cur.id], cur.id)
+                elif isinstance(cur, ast.Attribute) and isinstance(cur.ctx, ast.Load):
+                    root_nm = _attr_root_name(cur.value)
+                    if root_nm and root_nm not in shadows and (root_nm in fn_aliases or root_nm in fn_syms):
+                        mod_origin = fn_aliases.get(root_nm) or fn_syms[root_nm]
+                        used_modules.setdefault(mod_origin, f"{root_nm}.{cur.attr}")
+            stack.extend(ast.iter_child_nodes(cur))
+        out[node.name] = used_modules
+    return out
+
+
+def lost_imported_callees(before_source: str, after_source: str) -> list[dict[str, str]]:
+    """Non-stdlib imported callees a function invoked before the patch and severed after it.
+
+    Measured 2026-11-13 on the coupled two-file billing defect (`billing/invoice.py` +
+    `billing/discounts.py`): bottom-up observational synthesis replaced `compute_invoice` with
+    `return (sum(items) - disc)`, reading both formal parameters (`items`, `disc`) while
+    deleting the call to `from billing.discounts import apply_discount` and leaving
+    `billing/discounts.py` (`return price + disc`) broken. Keying by origin module allows
+    swapping sibling helpers from the same module (`encode` -> `decode`) and never restricts
+    stdlib helpers (`math`, `itertools`), while refusing cross-module call-graph amputation.
+    """
+    if not isinstance(before_source, str) or not before_source.strip():
+        raise GateError("SOURCE_REQUIRED")
+    if not isinstance(after_source, str) or not after_source.strip():
+        raise GateError("SOURCE_REQUIRED")
+    try:
+        before_tree = ast.parse(before_source)
+    except SyntaxError as exc:
+        raise GateError("SOURCE_NOT_PARSEABLE") from exc
+    inh_syms, inh_aliases = _collect_non_stdlib_imports(before_tree)
+
+    before_calls = imported_callee_use(before_source, require_call=True)
+    after_uses = imported_callee_use(
+        after_source,
+        inherited_symbols=inh_syms,
+        inherited_aliases=inh_aliases,
+        require_call=False,
+    )
+    lost: list[dict[str, str]] = []
+    for fn_name, before_mods in before_calls.items():
+        if fn_name not in after_uses:
+            continue
+        after_mods = after_uses[fn_name]
+        for mod_key in sorted(set(before_mods) - set(after_mods)):
+            lost.append({
+                "function": fn_name,
+                "module": mod_key,
+                "callee": before_mods[mod_key],
+            })
+    return lost
+
+
 def gate(before_source: str, after_source: str) -> dict[str, Any]:
-    """Decide whether the patch keeps every input the original function consumed."""
+    """Decide whether the patch keeps every input and non-stdlib callee dependency."""
     try:
         lost = lost_dependencies(before_source, after_source)
+        lost_callees = lost_imported_callees(before_source, after_source)
     except GateError as exc:
         return {
             "schema": SCHEMA,
             "status": REFUSED,
             "reason": str(exc),
             "lost": [],
+            "lost_callees": [],
             "terminal_authority": False,
         }
     if lost:
@@ -162,6 +340,17 @@ def gate(before_source: str, after_source: str) -> dict[str, Any]:
             "status": REFUSED,
             "reason": "PATCH_STOPPED_READING_ITS_INPUTS: " + listed,
             "lost": lost,
+            "lost_callees": lost_callees,
+            "terminal_authority": False,
+        }
+    if lost_callees:
+        listed_callees = ", ".join(f"{item['function']}({item['callee']})" for item in lost_callees)
+        return {
+            "schema": SCHEMA,
+            "status": REFUSED,
+            "reason": "PATCH_STOPPED_CALLING_IMPORTED_DEPENDENCY: " + listed_callees,
+            "lost": [],
+            "lost_callees": lost_callees,
             "terminal_authority": False,
         }
     return {
@@ -169,6 +358,7 @@ def gate(before_source: str, after_source: str) -> dict[str, Any]:
         "status": PASS,
         "reason": "INPUT_DEPENDENCIES_PRESERVED",
         "lost": [],
+        "lost_callees": [],
         "terminal_authority": False,
     }
 
