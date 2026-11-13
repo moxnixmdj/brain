@@ -40,21 +40,58 @@
    "SEVEN_CLAIMS_SCORED_AGAINST_MEASUREMENT_20261112_V1.md"
   ],
   "route_class": "REUSE",
-  "earlier_routes_exhausted_reason": "REUSE_WAS_THE_ROUTE: the corpus, the organ, the QuixBugs record and the generalisation ladder all already exist and were used unchanged. The only new artefact is the alpha-rename operator and the measurement of what it is worth, which came out at zero.",
   "producer_cognition_model_dependency_count": 0,
   "incremental_spend_usd": 0,
   "conversation_memory_is_authority": false,
   "false_claim_removed": "THAT_INSTANT_LEARNING_IN_NEW_ENVIRONMENTS_IS_ALREADY_SOLVED_PERFECTLY__THE_TREES_OWN_RECORD_SAYS_1_OF_40__AND_THAT_THE_SYSTEM_IS_ONLY_A_LOOKUP_SYSTEM__ALL_607_RECOVERED_CHANGES_ARE_CROSS_FILE__AND_THAT_MODEL_WEIGHTS_ARE_REQUIRED_FOR_GENERALISATION__REASONINGBANK_IS_TRAINING_FREE_AT_PLUS_8_3_ABSOLUTE",
   "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
    "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
    "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-   "AGENTS.md",
-   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+   "AGENTS.md"
   ],
-  "causal_evidence": "MEASURED_2026-11-12__ALPHA_SAFE_REWRITE_ON_THE_RECORDED_CORPUS_15_PULL_REQUESTS_89_FILES_HASH_VERIFIED__162_APPLICABLE_ASKINGS_607_DEVELOPER_CHANGES__AS_TAUGHT_493_OF_607_0_8122__ALPHA_SAFE_493_OF_607_0_8122__DELTA_0_0__ORGAN_REFUSALS_ON_THIS_CORPUS_0_OF_330__AND_THE_TREES_RECORDED_QUBIXBUGS_TRANSFER_22_OF_22_SAME_BUG_AGAIN_1_OF_40_ONE_FIX_3_OF_40_WIDEST_0_OF_40_SEED_BUNDLE_18_OF_40_FIXES_REFUSED_TO_STORE"
+  "causal_evidence": "MEASURED_2026-11-12__ALPHA_SAFE_REWRITE_ON_THE_RECORDED_CORPUS_15_PULL_REQUESTS_89_FILES_HASH_VERIFIED__162_APPLICABLE_ASKINGS_607_DEVELOPER_CHANGES__AS_TAUGHT_493_OF_607_0_8122__ALPHA_SAFE_493_OF_607_0_8122__DELTA_0_0__ORGAN_REFUSALS_ON_THIS_CORPUS_0_OF_330__AND_THE_TREES_RECORDED_QUBIXBUGS_TRANSFER_22_OF_22_SAME_BUG_AGAIN_1_OF_40_ONE_FIX_3_OF_40_WIDEST_0_OF_40_SEED_BUNDLE_18_OF_40_FIXES_REFUSED_TO_STORE",
+  "earlier_routes_exhausted_reason": "REUSE_WAS_THE_ROUTE: the corpus, the organ, the QuixBugs record and the generalisation ladder all already exist and were used unchanged. The only new artefact is the alpha-rename operator and the measurement of what it is worth, which came out at zero."
  },
  "measured_effect": "ALPHA_SAFE_DELTA_0_0__COVERAGE_0_8122_BOTH_TIERS__PRECISION_0_9762__WRONG_12_OF_505__ORGAN_REFUSALS_0_OF_330_ASKINGS__AND_THE_ALPHA_WELD_IS_REAL_STANDALONE_ONE_DEMONSTRATION_OF_A_LE_HI_TO_A_LT_HI_STORES_THE_LITERAL_RULE_AND_REFUSES_X_LE_TOP",
- "next_step": "RE_RUN_QUIXBUGS_ON_TODAYS_ORGAN_BECAUSE_THE_RECORD_PREDATES_THE_REPAIR_AND_THAT_IS_THE_NUMBER_THE_THESIS_RESTS_ON__THEN_WIRE_settled_admission_v1_IN_FRONT_OF_EVERY_LESSON_THAT_REACHES_A_NEW_TARGET_BECAUSE_THAT_IS_THE_ONE_CHANGE_AIMED_AT_THE_FAILURE_THE_2026_LITERATURE_SAYS_DOMINATES",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ZERO_EXPLICITLY__THE_ROUND_SCORES_THE_OWNERS_CLAIMS_AND_REPORTS_ONE_MEASURED_NULL__THE_NULL_IS_THAT_UNWELDING_THE_OPERAND_NAMES_ADDS_0_0_BECAUSE_THE_ORGAN_REFUSES_0_OF_330_ASKINGS_ON_A_CORPUS_SELECTED_FOR_SAMENESS",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/verification/QUIXBUGS_ONE_FIX_TRANSFER_20261111_V1.json",
+  "canonical/tools/repeated_change_one_example_measure_v1.py",
+  "canonical/tools/generalization_or_lookup_v1.py",
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+  "canonical/swe_kernel/rule_scope_learning_v1.py"
+ ],
  "recursive_obs": {
   "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
@@ -68,8 +105,8 @@
    "WIRE_operator_generalization_v1_INTO_THE_ONE_EXAMPLE_ORGAN (deleted: it is oracle-gated on purpose by OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE, and an oracle-free version would be the negative-transfer failure STRATA measures)",
    "RE_RUN_QUIXBUGS_THIS_ROUND (deferred and named: the 1-of-40 figure on record is the one the claim is about, and substituting a newer measurement would change the question)"
   ],
-  "stop_condition": "SEE_TOP_LEVEL_STOP_CONDITION",
-  "expected_parent_level_state_change": "NO_FAMILY_FLIPPED__ZERO_CAPABILITY_CREDIT__THE_ROUTE_IS_RE_ORDERED",
+  "stop_condition": "THE_TOOL_AND_ITS_19_TESTS_ARE_IN_THE_TREE__THE_RECORD_IS_WRITTEN__THE_MEMO_SCORES_ALL_SEVEN_CLAIMS_WITH_THE_MEASUREMENT_BEHIND_EACH__THE_NULL_IS_STATED_AS_A_NULL__REPO_INTEGRITY_GUARD_PASSES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "expected_parent_level_state_change": "NO_FAMILY_FLIPPED__ZERO_CAPABILITY_CREDIT__THE_ROUTE_IS_RE_ORDERED_FROM_MORE_OPERATORS_TO_AN_ORACLE_FREE_RUNG_AND_TO_SETTLED_ADMISSION_IN_FRONT_OF_EVERY_LESSON",
   "why_selected_route_is_fastest_sufficient": "THE_CORPUS_THE_ORGAN_THE_QUBIXBUGS_RECORD_AND_THE_GENERALISATION_LADDER_ALL_ALREADY_EXIST__AND_THE_ALPHA_RENAME_OPERATOR_IS_ONE_AST_WALK_WITH_NO_ORACLE_AND_NO_SPEND",
   "iteration_limit": 4,
   "routes_considered": [
@@ -78,15 +115,82 @@
    "MEASURE_THE_ALPHA_RENAME_OPERATOR (chosen)",
    "BUILD_A_NEW_MECHANISM (rejected: the mechanisms exist)"
   ],
+  "obs_goal": {
+   "real_outcome": "KNOW_WHETHER_WHICH_DEMONSTRATION_IS_GIVEN_CAN_BE_CHOSEN_FROM_DATA_AVAILABLE_BEFORE_THE_OUTCOME",
+   "proxy_goals_deleted": [
+    "A_HIGHER_CORRELATION_ON_ITS_OWN__A_CORRELATION_THAT_LIVES_ENTIRELY_IN_TIES_BROKEN_BY_PATH_IS_A_LOTTERY"
+   ],
+   "surviving_necessity": "ONE_SHOWING_IS_ALREADY_THE_UNIT__THE_UNASKED_QUESTION_IS_WHICH_ONE"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_REACH_IS_COMPUTED_BY_THE_ORGAN_ON_THE_CANDIDATE_FILES__A_TASK_WHOSE_PEOPLE_CHANGED_ONE_FILE_GIVES_NO_CANDIDATES_AND_CANNOT_BE_MEASURED",
+   "surviving_causal_blocker": "THE_CHECK_CANNOT_TELL_A_RENAME_BETWEEN_ALIASES_FROM_A_RENAME_BETWEEN_DIFFERENT_FUNCTIONS__AND_THE_PAIR_IS_THE_ONLY_EVIDENCE_THAT_SEPARATES_THEM",
+   "delete_bypass_substitute_options": [
+    "INFER_IT (deleted: measured unable to separate assertEquals from yaml.load)",
+    "LEAVE_THE_CHECK_OFF_ENTIRELY (deleted: the repo test holds yaml.load as a refusal, correctly)"
+   ]
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "A_NEW_LEARNER__THE_SHIPPED_ORGAN_IS_USED_UNCHANGED"
+   ],
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/finite_capability_diagnosis.py (select_probe: exact version-space narrowing over a FINITE declared space; the reach here is decided by the organ, not by that module)"
+   ],
+   "external_existing_routes_checked": [
+    "active learning for neurosymbolic program synthesis (ACM 10.1145/3763102): worst-case pruning power over a version space; consistent with reach as a prediction of informativeness",
+    "approximate optimal active learning of decision trees (arXiv 2512.03971): version-space halving by approximate model counting"
+   ],
+   "surviving_gap": "AN_ALIAS_LIST_IS_KNOWLEDGE_AND_IT_IS_SMALL__THE_NEXT_ROUNDS_ARE_THE_TWO_REAL_OPERATORS_THAT_REMAIN_UNBOUGHT: THE_NARROW_IMPORT_EXTENSION (extend an import the file already has -- 22 askings) AND_A_CHECK_SETTLES_THE_REST"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": [
+    "canonical/tools/repeated_change_one_example_measure_v1.py (the corpus and the scoring, used as-is)"
+   ],
+   "downstream_work_to_delete_or_supersede": [],
+   "fresh_reuse_plan": "RUN_THE_SAME_TOOL_UNCHANGED_AGAINST_EVERY_FUTURE_DEMONSTRATION_CHOOSING_MECHANISM_BEFORE_ANY_CLAIM"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "THE_CORPUS_IS_ONE_REFETCH_NOT_A_NEW_SEARCH__THE_RECORDED_HASHES_MAKE_IT_REPLAYABLE"
+   ],
+   "search_stop_decision": "STOPPED_AFTER_MEASURING_FIVE_OPERATOR_CLASSES__TWO_ARE_UNREACHABLE_ONE_IS_A_PRECISION_REGRESSION_ONE_IS_A_RESEARCH_STEP_AND_ONE_IS_SHIPPED__THAT_IS_THE_EVIDENCE_THAT_THE_ROADMAP_WAS_MIS_PRICED_NOT_THAT_THE_OPERATORS_ARE_BAD"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "A_SELF_AUTHORED_FIXTURE_CANNOT_SHOW_A_TIE_WITH_DIFFERENT_OUTCOMES__THE_RECORDED_CORPUS_IS_THE_ONLY_PLACE_THAT_CASE_EXISTS",
+   "routes_ranked": [
+    "1_ADAPT_THE_EXISTING_CALL_SHAPE_CHECK (shipped: exempt a rename between two documented delegating aliases)",
+    "2_ADAPT_THE_IMPORT_GATE (priced, not shipped: precision 0.8038 in its wide form)",
+    "3_SYNTHESIZE_A_BLOCK_SHAPE_ALGEBRA (blocked: the example is refused at learn time)",
+    "4_SYNTHESIZE_AN_IMPORT_ONLY_OPERATOR (blocked: the example is refused at learn time)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_ONLY_ORACLE_IS_WHAT_THE_PEOPLE_ON_THOSE_PROJECTS_ACTUALLY_DID__NO_TEST_OF_THOSE_PROJECTS_IS_RUN__AND_THE_RECORD_SAYS_SO"
+  },
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-13T01:36:59Z",
+   "checked_at_utc": "2026-11-13T01:40:46Z",
    "max_age_hours": 24,
-   "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
-   "incumbent_route": "THE_TREE_IS_A_LOOKUP_SYSTEM_AND_NEEDS_MODEL_WEIGHTS_TO_GENERALISE",
+   "incumbent_route": "THIS_IS_A_LOOKUP_SYSTEM_AND_NEEDS_MODEL_WEIGHTS_CONCEPTS_TRANSFER_AND_REASONING",
    "source_classes_checked": [
     "BRAIN_INHERITED",
     "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
     "BROAD_WEB_OR_COMMUNITY"
    ],
    "source_evidence": {
@@ -98,15 +202,44 @@
      "canonical/swe_kernel/skill_recheck_v1.py"
     ],
     "OFFICIAL_PRIMARY": [
-     "https://arxiv.org/abs/2509.25140 ReasoningBank ICLR 2026 training-free memory +8.3 abs"
+     "https://docs.python.org/3.1/library/unittest.html (Deprecated aliases table)",
+     "https://docs.python.org/3.11/whatsnew/3.11.html (bpo-45162 removals)",
+     "https://github.com/python/cpython/pull/28268"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/Qile-J/awesome-self-evolving-agents (285+ papers, machine-checked)"
     ],
     "BROAD_WEB_OR_COMMUNITY": [
-     "https://arxiv.org/html/2610.19386v1 STRATA negative transfer -100 vs memoryless",
-     "https://arxiv.org/html/2604.27003 When Continual Learning Moves to Memory dRR +4.6 dNL -26.1",
-     "https://arxiv.org/abs/2509.26354 Your Agent May Misevolve ICLR 2026",
-     "https://arxiv.org/abs/2602.03224 TAME 211 of 383 self-authored rules regressed"
+     "https://codereview.doctor/features/python/best-practice/avoid-deprecated-testcase-assertions",
+     "https://pythonresources.com/guides/python-3-11-end-of-life/"
     ]
    },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "training-free agent experience memory generalization 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "anti-unification least general generalization program transformation from edits"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "ICLR 2026 self-evolving agent memory negative transfer"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "ReasoningBank google research training-free memory SWE-bench"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
    "challenger_routes": [
     {
      "route": "TRAIN_THE_MODELS_WEIGHTS_ON_EXPERIENCE",
@@ -116,7 +249,7 @@
      ],
      "qualification_evidence": [
       "ReasoningBank reaches +8.3 absolute with no training at all, so weights are not the binding constraint",
-      "continual fine-tuning risks catastrophic forgetting with no reliable rollback, which is the same negative-transfer risk but less reversible"
+      "continual fine-tuning risks catastrophic forgetting with no reliable rollback, the same negative-transfer risk but less reversible"
      ],
      "qualification_evidence_classes": [
       "OFFICIAL_PRIMARY"
@@ -132,7 +265,7 @@
      }
     },
     {
-     "route": "WIRE_THE_EXISTING_ORACLE_GATED_GENERALISATION_LADDER_IN_WITHOUT_AN_ORACLE",
+     "route": "WIRE_THE_ORACLE_GATED_GENERALISATION_LADDER_IN_WITHOUT_AN_ORACLE",
      "evidence": [
       "canonical/swe_kernel/verified_skill_crystallizer_v1.py:1428",
       "https://arxiv.org/html/2610.19386v1"
@@ -155,9 +288,18 @@
      }
     }
    ],
-   "negative_search_summary": "NO_PRIOR_MEASUREMENT_IN_THIS_TREE_SEPARATED_AN_OPERATOR_CHANGE_FROM_THE_OPERAND_NAMES_IT_WAS_SHOWN_ON__AND_THE_2026_LITERATURE_IS_UNANIMOUS_THAT_TRAINING_FREE_MEMORY_TRANSFERS_ONLY_WHEN_ABSTRACTED_AND_THAT_CONCRETE_STEP_MEMORY_CAN_HARM",
+   "why_no_external_route": "THE_DECISION_IS_ABOUT_WHAT_A_NAMED_FUNCTION_IS__THE_OWNING_LIBRARY_DOCUMENTS_IT_AND_NOTHING_OUTSIDE_THE_LIBRARY_CAN_KNOW_IT_BETTER",
+   "unresolved_plausible_dominators": [],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "negative_search_summary": "NO_PRIOR_MEASUREMENT_IN_THIS_TREE_SEPARATED_AN_OPERATOR_CHANGE_FROM_THE_OPERAND_NAMES_IT_WAS_SHOWN_ON__AND_THE_2026_LITERATURE_IS_UNANIMOUS_THAT_TRAINING_FREE_MEMORY_TRANSFERS_ONLY_WHEN_ABSTRACTED_AND_THAT_CONCRETE_STEP_MEMORY_CAN_HARM_MORE_THAN_NO_MEMORY",
+   "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-13T01:36:59Z",
+    "checked_at_utc": "2026-11-13T01:40:46Z",
     "max_age_hours": 2,
     "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
     "status": "READY",
@@ -174,14 +316,14 @@
       "evidence_scope": "LOCAL",
       "status": "READY",
       "evidence": [
-       "ast.parse and ast.unparse of the demo and target lines succeeded"
+       "python3 -c 'import ast, json, sys; print(\"ok\")' returned ok"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ]
      },
      {
-      "dependency": "THE_RECORDED_CORPUS",
+      "dependency": "THE_RECORDED_CORPUS_AND_BOTH_SCORERS",
       "kind": "CODE_ARTIFACT",
       "required": true,
       "volatility": "STATIC",
@@ -189,7 +331,22 @@
       "evidence_scope": "LOCAL",
       "status": "READY",
       "evidence": [
-       "refetch produced 15 pull requests / 89 files matching the recorded hashes"
+       "the refetch produced 15 pull requests / 89 files matching the record and the same 330 askings were walked once, reporting 0.6359 strict and 0.9585 generalization share"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_ORGAN",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/taught_actions/edit_by_example_v1.py is used unchanged this round; no organ edit was made"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -199,5 +356,61 @@
     "note": "NO_NETWORK_AND_NO_THIRD_PARTY_PACKAGE_IS_NEEDED_AT_RUN_TIME"
    }
   }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-13T01:40:40Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FLIPS_NO_FAMILY",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "tournament": {
+   "proposal_id": "THE_DEMONSTRATION_CHOSEN_IS_A_DECISION_NOT_A_LOTTERY",
+   "decisive_question": "DOES_CHOOSING_WHICH_DEMONSTRATION_TO_GIVE_FROM_DATA_AVAILABLE_BEFORE_ANY_OUTCOME_RECOVER_MORE_OF_WHAT_THE_PEOPLE_DID_THAN_CHOOSING_AT_RANDOM",
+   "falsifier_id": "THE_REACH_READS_A_TARGET_FILES_AFTER_TEXT_OR_THE_CHOICE_DEPENDS_ON_FILE_ORDER",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "NO_PRIOR_MEASUREMENT_OF_A_DEMONSTRATION_CHOOSING_RULE_WAS_FOUND_ON_MAIN_OR_IN_THE_OPEN_PULL_REQUESTS"
+  }
+ },
+ "next_step": "RE_RUN_QUIXBUGS_ON_TODAYS_ORGAN_BECAUSE_THE_RECORD_PREDATES_THE_REPAIR_AND_THAT_IS_THE_NUMBER_THE_THESIS_RESTS_ON__THEN_WIRE_settled_admission_v1_IN_FRONT_OF_EVERY_LESSON_THAT_REACHES_A_NEW_TARGET_BECAUSE_THAT_IS_THE_ONE_CHANGE_AIMED_AT_THE_FAILURE_THE_2026_LITERATURE_SAYS_DOMINATES",
+ "causal_evidence": "MEASURED_2026-11-12_ON_THE_SAME_15_MERGED_PULL_REQUESTS_89_FILES_AND_330_READABLE_ASKINGS__SHIPPED_ORGAN_STRICT_COVERAGE_0_2999_PRECISION_0_9461_PER_QUESTION_0_6170_WRONG_14__SAME_ORGAN_WITH_THE_EXEMPTION_SWITCHED_OFF_0_2082_0_9241_0_2836_14__ATTRIBUTION_EDITED_90_TO_140_EXACTLY_THE_50_CALL_SHAPE_ASKINGS_AND_NO_FORM_IN_FILE_STAYS_168__CEILING_A_PERFECT_LEARNER_OF_THE_DEMONSTRATED_KIND_TOPS_OUT_AT_342_OF_1287_0_266_ALL_PULLS_AND_342_OF_411_0_832_ON_THE_5_WHOSE_KIND_IS_KNOWN__THE_INFERENCE_WAS_TRIED_AND_REFUSED: ASSERTEQUALS_TO_ASSERTEQUAL_AND_YAML_LOAD_TO_YAML_SAFE_LOAD_HAVE_THE_SAME_SHAPE_AND_NO_STRUCTURAL_READING_SEPARATES_THEM_SO_THE_EXEMPTION_IS_A_CLOSED_DOCUMENTED_ALIAS_LIST_AND_THE_REPO_OWN_TEST_CAUGHT_THE_FIRST_VERSION_IN_ONE_RUN__PROVENANCE_BOTH_ALIAS_FAMILIES_CONFIRMED_TO_DELEGATE_EVERY_ARGUMENT_SO_THE_CALLEE_CANNOT_HAVE_CHANGED_WHAT_IT_ACCEPTS",
+ "tournament": {
+  "proposal_id": "AN_OPERATOR_CHANGE_IS_A_FACT_ABOUT_THE_OPERATION_NOT_ABOUT_THE_OPERANDS",
+  "decisive_question": "DOES_REPLACING_THE_DEMONSTRATED_OPERANDS_WITH_HOLES_LET_ONE_SHOWING_REACH_CODE_THAT_MERELY_RENAMES_THEM_AND_DOES_THAT_RECOVER_MORE_OF_WHAT_THE_PEOPLE_DID",
+  "falsifier_id": "THE_ALPHA_SAFE_DELTA_IS_NOT_ZERO_OR_THE_ORGAN_DOES_REFUSE_ASKINGS_ON_THIS_CORPUS",
+  "known_counterexamples_checked": true,
+  "counterexample_receipts": [
+   "canonical/verification/WHAT_THE_OPERAND_NAMES_COST_20261112_V1.json (delta 0.0, refusals 0 of 330)"
+  ],
+  "no_known_counterexample_reason": "THE_HYPOTHESIS_WAS_FALSIFIED_BY_ITS_OWN_MEASUREMENT_AND_THE_FALSIFICATION_IS_THE_DELIVERABLE"
  }
 }
