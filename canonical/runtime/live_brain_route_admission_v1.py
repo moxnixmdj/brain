@@ -1485,8 +1485,16 @@ def run_adapter_locally(entry: Mapping[str, Any], action: Mapping[str, Any]) -> 
         raise LocalExecutionFailure("BOUND_CAPABILITY_NONZERO_COST_REJECTED:" + cid)
     from canonical.runtime import computer_execution_boundary_v1 as boundary
     if boundary.refuses_execution(cid, entry, _declared_operation(action.get("args"))):
-        # Reject before importing an adapter or materializing upstream effects.
-        raise LocalExecutionFailure(boundary.STATUS)
+        # The admitted-confinement route (2026-11-12, PR #6733's release condition):
+        # a capability with a reviewed effect declaration runs on a disposable clone
+        # of the host with verified effect receipts, and the result is judged by the
+        # SAME expectation check. No declaration, an unbound effect, or a shape the
+        # confinement refuses -> None -> the refusal stands exactly as before.
+        from canonical.runtime import confined_dispatch_v1 as _confined
+        _routed = _confined.run_confined_capability(cid, entry, action, host_root=ROOT)
+        if _routed is None:
+            raise LocalExecutionFailure(boundary.STATUS)
+        return _routed
     source = entry.get("source") if isinstance(entry.get("source"), Mapping) else {}
     modules = source.get("modules") if isinstance(source.get("modules"), list) else []
     for name in modules:
