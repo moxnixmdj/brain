@@ -96,9 +96,14 @@ that mistake once — the 32/33 artifact that had been compiled before its own i
   cannot yet hold many at once without writing foreign lines. This round *reduced* the rate at which
   that happens from 0.37–0.53 to 0.19 wrong lines per edit. Reduced, not solved: 20 wrong lines
   remain at the full pool, and the ownership rule is silent on 84.5% of targets.
-* **"The gap is that we are not training weights."** **Half true, and this round shows the half that
-  matters is not the half you can attack next.** Weights are the right destination. The corpus cannot
-  yet state the experiment. The first move is not a GPU; it is a stream of same-project tasks.
+* **"The gap is that we are not training weights."** **True as a destination, false as a next step, and
+  the literature says the naive form is the broken one.** Weights are where the only measured gains on
+  unseen tasks live (ASCENT +22, Agentic-TTT 0.256→0.510, Continual-ARC). But naive training on your own
+  traces retains **3.8%** of the gain where verifier-gated self-distillation retains **64.8%** to
+  **93.4%** ([2607.21051](https://arxiv.org/abs/2607.21051)). Adding weight updates without the gate buys the 3.8%
+  arm. And the corpus here cannot state the experiment at all: 207 commits across 205 projects, zero
+  projects with three commits. Two prerequisites, in order: **a verifier gate on what gets retained**
+  (available at `$0`, measured above) and **a stream with several tasks per project**.
 * **"We were trying to make a sentient creature."** Nothing here measures sentience and this round
   does not claim it. What it does establish is narrower and checkable: the system can now say **which
   of its lessons owns a given place**, and can be measured on how often it is right. That is a
@@ -108,7 +113,56 @@ that mistake once — the 32/33 artifact that had been compiled before its own i
   precision 1.000 — and an ownership rule that cuts the cost of holding many lessons by more than
   half.** The revolutionary part is the cheapness, not the coverage.
 
-## 6. Reproduce
+## 6. The weight-space case, read from the primary sources on 2026-11-12
+
+The owner asked for this to be settled from the literature rather than from opinion. Five primary
+sources were fetched and read in full. **Two of them change the recommendation.**
+
+**The case for the critique is real and it is strong.** ASCENT ([2610.05303](https://arxiv.org/abs/2610.05303), 4 Oct 2026)
+self-distills verified trajectories into persistent LoRA fast weights and reports **+22 points exact
+success** over the base on ALFWorld and WebShop at two model scales, with gains that *grow later in
+the stream* and transfer to held-out scenes. Agentic-TTT ([2610.12002](https://arxiv.org/abs/2610.12002)) raises Qwen2.5-7B
+utility from **0.256 to 0.510** and generalises to domains unseen in training. Continual-ARC
+([2611.14505](https://arxiv.org/abs/2611.14505)) found no harness-based method gains on unseen tasks while weight-based
+learning does. **The critique's central claim — that weights are the layer with the only measured
+gains on unseen tasks — survives contact with the primary sources.**
+
+**But the same literature says the version of it the owner is describing fails.** Experience
+Distillation ([2607.21051](https://arxiv.org/abs/2607.21051), 23 Jul 2026) is the paper the critique leans on, and it ran the
+exact experiment the owner is asking for: take the gains an agent gets from its own experience, then
+train them into the weights. Its control is the naive version —
+
+> retaining those gains in the weights: **64.8%** of the in-context gain (SWE) / **93.4%** (text games)
+> vs direct supervised fine-tuning on the same trajectories: **3.8%** / **−2.6%**
+
+That is the whole thing in one line. **Naive training on your own traces is not a weak version of the
+good method; it is a broken one.** And the good method is not "train the weights": it is a **frozen
+teacher conditioned on the verified trajectory, distilling its next-token distribution into a student
+that never sees it, and skipping the update entirely on failure.** ASCENT independently confirms the
+same structure and adds the finding that imitating or reinforcing the tokens of a single attempt
+*"destabilizes the policy"* — their ungated-imitation baseline ends with collapsed entropy and a
+gradient 25× larger.
+
+So the honest answer to "should we add weight-space learning" is not yes or no. It is:
+
+> **Yes for the destination, and the route is not fine-tuning.** The measured route is
+> *verifier-gated self-distillation of an accepted trajectory through a frozen teacher*. Every
+> source that reports gains reports them with that gate. Every source that reports failure reports it
+> without one.
+
+**And this round's measurement says the gate is the part worth building first.** The tree's failure
+is not that it cannot remember — it forgets nothing, it misapplies. That is precisely the failure a
+verification gate on the *write* addresses, and it is available at `$0` today. Ascending the ladder
+(ICL → memory → loop → test-time training → post-training) with a broken gate reproduces the
+3.8% arm, which is worse than not learning at all.
+
+**One more correction to the framing.** ASCENT's own stated limit is that *"one verified success does
+not reveal which individual turns caused success, or whether an untried alternative would have been
+better."* That is this tree's conclusion, reached independently, by a different method, on different
+data. The thing the owner calls "instant learning" is uniformly reported as **sparse and
+credit-ambiguous**, never as solved.
+
+## 7. Reproduce
 
 ```
 # corpus (needs gh; ~6 min for all three sets)
@@ -123,7 +177,7 @@ python3 canonical/tools/lesson_ownership_measure_v1.py \
 python3 -m pytest canonical/tests/test_lesson_ownership_is_a_decision_not_caution_v1.py   # 8 passed
 ```
 
-## 7. Where this round was wrong
+## 8. Where this round was wrong
 
 1. **I nearly quoted the halving as the result.** The wrong-line count falls because *some* files get
    fewer edits, and the first draft of this measurement had no volume control at all. It was added

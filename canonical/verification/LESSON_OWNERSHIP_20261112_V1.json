@@ -207,5 +207,67 @@
   "projects_with_two_or_more_lessons": 1,
   "reading": "A weight-update experiment needs a stream from the same distribution with tasks kept back. This corpus is one commit per project almost everywhere, so training and held-out tasks cannot be separated, and no claim about weight learning can be evidenced on it. That is a data-shape fact, not an opinion about weights."
  },
- "seconds": 354.0
+ "seconds": 354.0,
+ "weight_space_primary_sources": {
+  "read_on": "2026-11-12",
+  "fetched_in_full": true,
+  "sources": [
+   {
+    "id": "2607.21051",
+    "title": "Sample-Efficient Learning from Agent Experience (Experience Distillation)",
+    "published": "2026-07-23",
+    "key_numbers": {
+     "retained_icl_gain_epd_swe": 0.648,
+     "retained_icl_gain_epd_talesuite": 0.934,
+     "retained_icl_gain_direct_sft_swe": 0.038,
+     "retained_icl_gain_direct_sft_talesuite": -0.026,
+     "environment_sample_reduction_vs_rl": "9.6x"
+    },
+    "bearing": "DECIDES_IT__naive_sft_on_own_traces_retains_3_8_PERCENT_WHERE_FROZEN_TEACHER_SELF_DISTILLATION_RETAINS_64_8_TO_93_4"
+   },
+   {
+    "id": "2610.05303",
+    "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+    "published": "2026-10-04",
+    "key_numbers": {
+     "exact_success_gain_over_base": "+22 points",
+     "alfworld_4b": 0.695,
+     "base_4b": 0.464,
+     "failure_behaviour": "SKIP_THE_UPDATE"
+    },
+    "bearing": "CONFIRMS_THE_GATE__AND_STATES_THE_SAME_CREDIT_LIMIT_THIS_TREE_MEASURED"
+   },
+   {
+    "id": "2610.12002",
+    "title": "Agentic-TTT: Training test-time policy for test-time training",
+    "published": "2026-10-08",
+    "key_numbers": {
+     "qwen25_7b_direct": 0.256,
+     "qwen25_7b_agentic_ttt": 0.51
+    },
+    "bearing": "SUPPORTS__AGENCY_OVER_WHEN_TO_UPDATE_BEATS_ANY_FIXED_METHOD"
+   },
+   {
+    "id": "2611.14505",
+    "title": "Continual-ARC",
+    "published": "2026-11-11",
+    "key_numbers": {
+     "weight_based_held_out": 0.29,
+     "harness_based_held_out": 0.03
+    },
+    "bearing": "SUPPORTS__THE_ONLY_ROUTE_WITH_GAINS_ON_UNSEEN_TASKS"
+   },
+   {
+    "id": "2607.03441",
+    "title": "No Time Like the Present: Agentic Test-Time Training for LLM Agents",
+    "published": "2026-07-03",
+    "key_numbers": {
+     "alfworld_improvement": 5.0,
+     "swebench_lite_improvement": 4.9
+    },
+    "bearing": "BOUNDS_IT__GAINS_CONCENTRATE_WHERE_COMPETENCE_EXISTS_AND_MODELS_DRIFT"
+   }
+  ],
+  "reading": "The critique's central claim survives: weight-space is the only layer with measured gains on unseen tasks. Its proposed next step does not: direct training on an agent's own traces retains 3.8% of the available gain where verifier-gated self-distillation retains 64.8% to 93.4%. Every route that reports a gain reports the gate, and every route that reports a collapse reports the absence of one. So the ordering is: build the gate on what is retained (available at zero spend, measured here), then build a task stream, then distill through a frozen teacher."
+ }
 }
