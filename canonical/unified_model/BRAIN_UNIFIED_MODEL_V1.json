@@ -28825,8 +28825,7 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "argv",
-    "output_path"
+    "argv"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28838,7 +28837,7 @@
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
     "source_sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39",
-    "source_type": "python_stdlib"
+    "source_type": "brain_owned_python_composition"
    },
    "provides": [
     "shell.command.result"
@@ -31227,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 408,
+  "knowledge_documents": 409,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6807,
+  "research_index_records": 6810,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1ee26d1393abde578264521d3c34ddb2a3c4e4258ef792ac624c80c97389fc98"
+  "value": "d47fdd6f29ce7b1dc74914cadecab05e7917e6a401c738326ef60f266a592b22"
  },
  "engines": [
   {
@@ -51925,6 +51924,85 @@
     "they",
     "times",
     "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 10004,
+   "headings": [
+    "Learn it here, use it there: what cross-environment transfer actually costs",
+    "1. What was measured",
+    "2. The result, and why the mean is not it",
+    "3. Where the wall is, in the learner's own words",
+    "4. It is not the check, and this is the part the previous round got wrong",
+    "5. What this means for the plan, claim by claim",
+    "6. The smartest next action, with the alternatives killed first",
+    "7. Receipts",
+    "8. What this round got wrong"
+   ],
+   "kind": "DOCUMENT",
+   "path": "LEARN_IT_HERE_USE_IT_THERE_20261112_V1.md",
+   "sha256": "7902472e33a0424302ef66f1529a17f98fe08baab9ee30d8185951425b103284",
+   "summary": "**2026-11-12.** Authority **NONE** — producer-run, `$0`, zero model calls, `truth.achieved` stays `false`, no capability registered, no family flipped.",
+   "terms": {
+    "0.000": 6,
+    "1.000": 5,
+    "about": 5,
+    "all": 6,
+    "arm": 4,
+    "canonical": 5,
+    "carries": 4,
+    "change": 12,
+    "changed": 6,
+    "changes": 4,
+    "check": 4,
+    "claim": 5,
+    "demonstration": 6,
+    "demonstrations": 7,
+    "each": 5,
+    "every": 5,
+    "exact": 6,
+    "false": 4,
+    "file": 5,
+    "first": 6,
+    "fixed": 4,
+    "form": 8,
+    "forms": 4,
+    "half": 7,
+    "kind": 8,
+    "kinds": 7,
+    "learner": 7,
+    "method": 8,
+    "name": 8,
+    "new": 7,
+    "no": 5,
+    "not": 20,
+    "nothing": 7,
+    "old": 6,
+    "one": 14,
+    "only": 6,
+    "record": 7,
+    "refused": 5,
+    "repository": 9,
+    "right": 7,
+    "round": 10,
+    "same": 5,
+    "so": 8,
+    "test": 5,
+    "three": 8,
+    "transfer": 8,
+    "two": 5,
+    "wrong": 11
+   },
+   "title": "Learn it here, use it there: what cross-environment transfer actually costs",
+   "title_terms": [
+    "actually",
+    "costs",
+    "cross-environment",
+    "here",
+    "learn",
+    "transfer",
+    "use"
    ]
   },
   {
@@ -76510,10 +76588,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1210,
+  "included_source_count": 1211,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "6eb6ba2859e585957f139226f9dd1ca080f2b03f90d054222eb15bda3899f375"
+  "source_tree_digest": "5acb68ccb92f8fff121cf08c608f816d45b4bf1597687ef26b40b3fefa562ab9"
  },
  "research_index": [
   {
@@ -145983,6 +146061,23 @@
     "promotion": 1,
     "proof": 1,
     "three": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/ACROSS_ENVIRONMENTS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/ACROSS_ENVIRONMENTS_20261112_V1.json",
+   "schema": "ACROSS_ENVIRONMENTS_V1",
+   "sha256": "9ae94c49187a11d8f76711fe16aa87e1836db493479b4ec662b5292e54ab33b0",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "across": 1,
+    "environments": 1,
     "v1": 1
    }
   },
@@ -225972,6 +226067,51 @@
    }
   },
   {
+   "action_id": "A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0a6269f9dcd6333808a50b086188509c6dc9e4fa8295860bfd80443c2574672b",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_stated_command_now_reaches_the_shell_20261112_v1": 1,
+    "act": 1,
+    "already-verified": 1,
+    "ambiguous": 1,
+    "authority": 1,
+    "benchmark": 1,
+    "bind_render_declare_then_refuse_the_unhonourable": 1,
+    "binding": 1,
+    "capability": 2,
+    "cause": 1,
+    "command": 1,
+    "every": 1,
+    "failure": 1,
+    "family": 1,
+    "forged": 1,
+    "front-door": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "highest": 1,
+    "keyword": 1,
+    "layer": 1,
+    "named": 1,
+    "naming": 1,
+    "no": 3,
+    "now": 1,
+    "only": 1,
+    "rank": 1,
+    "reachability": 1,
+    "reaches": 1,
+    "registered": 1,
+    "reported": 1,
+    "requires": 1
+   }
+  },
+  {
    "action_id": "A_STATED_FILE_BEATS_A_REFERENCE_TO_A_STEP_THAT_DOES_NOT_EXIST_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -231240,6 +231380,30 @@
     "reuse_the_recorded_instrument_on_a_disjoint_corpus": 1,
     "showing": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT.json",
+   "schema": "ACTION_INTENT_V1",
+   "sha256": "4ddc65b0ce0a680dd4bbae5d36e3bbcccf96eaab62d48e4de1db61345a01c144",
+   "status": "",
+   "terms": {
+    "bounded": 1,
+    "environment": 1,
+    "form": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generalisation_is_bounded_by_the_form_of_a_change_not_by_how_often_it_is_shown": 1,
+    "not": 1,
+    "one": 1,
+    "one_showing_is_bounded_by_form_not_by_environment": 1,
+    "reuse_the_recorded_instruments_on_a_repository_disjoint_corpus": 1,
+    "showing": 1,
+    "transfer_is_half_solved_and_the_failing_half_is_named__the_check_cannot_fix_it__no_rate_claim__no_family_flipped": 1
    }
   },
   {
@@ -237132,7 +237296,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "7eb81b8a9e36ce9a9de0bdc8f03323a2db731c6ca7f9bee89ee41efff7084fcd",
+   "sha256": "fa827008cc25971fbba4fd5469ef69c33cd995ae7eb8c44c3f7343df5bf173f5",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -253708,9 +253872,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "c7e68d6d368bbe52269f87b287c339e54981ccd8e140bd762dbb001e047195f8",
+   "sha256": "44f1448790a982f8270f947e4d994a13301216fce2316d64dec47dd78880fac9",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 67,
+   "symbol_count": 68,
    "symbols": [
     "_ContextRepoRoot",
     "_bare_alternatives",
@@ -253759,10 +253923,10 @@
     "routing": 1,
     "ruff_format_flags": 1,
     "score": 1,
-    "sed_print_script": 1,
     "sentence": 1,
     "sort_key_flags": 1,
     "stated_command_refusal": 1,
+    "states_a_command_line": 1,
     "tail_flags": 1,
     "token_words": 1,
     "typed": 1,
@@ -267160,9 +267324,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/grounded_action_v1.py",
-   "sha256": "7869b6cc4c90969b7422e5d6a0573525c80c190cc759d577e3e58c970802ac1b",
+   "sha256": "a7c9ab62ad0e523f8ed22f2450e2070ef2ba4bf916501c8a54bc68371680191a",
    "summary": "Plain goal in, verified work out -- over the whole registry, with no model.",
-   "symbol_count": 14,
+   "symbol_count": 15,
    "symbols": [
     "_bind_inventory_param",
     "_binder",
@@ -267173,6 +267337,7 @@
     "_independent_artifact_check",
     "_load",
     "_lookup",
+    "_rows_that_can_run_a_stated_command",
     "_try_bridge",
     "_word_tokens",
     "act",
@@ -267201,6 +267366,7 @@
     "over": 1,
     "plain": 1,
     "registry": 1,
+    "rows_that_can_run_a_stated_command": 1,
     "try_bridge": 1,
     "v1": 1,
     "verified": 1,
@@ -313342,10 +313508,11 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_binding_v1.py",
-   "sha256": "ab57d895402c904b7fa5ae403f76394cd996259de1cb6463e80fa11baae7dc70",
+   "sha256": "2096289b994ea33bc4932262cc8b3171f9636b8eccf75f183da00554ce91aa5f",
    "summary": "Complete a capability's inputs when the goal does not state all of them.",
-   "symbol_count": 25,
+   "symbol_count": 26,
    "symbols": [
+    "_argv_stated_in",
     "_companion_paths",
     "_declared_discovery_pattern",
     "_demonstrated_invocation_inputs",
@@ -313368,16 +313535,15 @@
     "complete_inputs",
     "named_destination",
     "placeholders",
-    "render_args",
-    "stated_paths_absent_in_workspace"
+    "render_args"
    ],
    "terms": {
     "all": 1,
+    "argv_stated_in": 1,
     "binding": 1,
     "capability": 1,
     "companion_paths": 1,
     "complete": 1,
-    "declared_discovery_pattern": 1,
     "demonstrated_invocation_inputs": 1,
     "ext_for": 1,
     "ext_for_placeholder": 1,
