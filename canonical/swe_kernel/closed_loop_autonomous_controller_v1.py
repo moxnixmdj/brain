@@ -1029,41 +1029,40 @@ def _solve_or_learn_impl(
                                 with open(file_path, 'r') as f:
                                     file_content = f.read()
                                 
-                                # Count based on strategy
-                                if any("function" in act.lower() or "method" in act.lower() or "class" in act.lower() for act in recommended):
-                                    import ast
-                                    tree = ast.parse(file_content)
-                                    
-                                    if "function" in goal.lower() or "method" in goal.lower():
-                                        count = sum(1 for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)))
-                                        return {
-                                            "schema": SCHEMA,
-                                            "task_id": task_id,
-                                            "pass": True,
-                                            "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
-                                            "tier_used": "tier0a_semantic_generalization",
-                                            "from_memory": True,
-                                            "generalization_used": True,
-                                            "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
-                                            "top_similarities": sem_result.get("top_similarities", []),
-                                            "answer": f"Found {count} {'functions' if 'function' in goal.lower() else 'methods'}",
-                                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                                        }
-                                    elif "class" in goal.lower():
-                                        count = sum(1 for node in ast.walk(tree) if isinstance(node, ast.ClassDef))
-                                        return {
-                                            "schema": SCHEMA,
-                                            "task_id": task_id,
-                                            "pass": True,
-                                            "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
-                                            "tier_used": "tier0a_semantic_generalization",
-                                            "from_memory": True,
-                                            "generalization_used": True,
-                                            "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
-                                            "top_similarities": sem_result.get("top_similarities", []),
-                                            "answer": f"Found {count} classes",
-                                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                                        }
+                                # Count based on strategy - check goal for keywords
+                                import ast
+                                tree = ast.parse(file_content)
+                                
+                                if "function" in goal.lower() or "method" in goal.lower() or "subroutine" in goal.lower():
+                                    count = sum(1 for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)))
+                                    return {
+                                        "schema": SCHEMA,
+                                        "task_id": task_id,
+                                        "pass": True,
+                                        "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
+                                        "tier_used": "tier0a_semantic_generalization",
+                                        "from_memory": True,
+                                        "generalization_used": True,
+                                        "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
+                                        "top_similarities": sem_result.get("top_similarities", []),
+                                        "answer": f"Found {count} {'functions' if 'function' in goal.lower() else 'methods'}",
+                                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                                    }
+                                elif "class" in goal.lower():
+                                    count = sum(1 for node in ast.walk(tree) if isinstance(node, ast.ClassDef))
+                                    return {
+                                        "schema": SCHEMA,
+                                        "task_id": task_id,
+                                        "pass": True,
+                                        "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
+                                        "tier_used": "tier0a_semantic_generalization",
+                                        "from_memory": True,
+                                        "generalization_used": True,
+                                        "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
+                                        "top_similarities": sem_result.get("top_similarities", []),
+                                        "answer": f"Found {count} classes",
+                                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                                    }
                             except Exception:
                                 pass
         except Exception:
