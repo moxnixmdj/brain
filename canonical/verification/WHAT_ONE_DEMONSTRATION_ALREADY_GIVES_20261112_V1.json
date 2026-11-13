@@ -1,0 +1,54 @@
+{
+ "schema": "WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_V1",
+ "generated_utc": "2026-11-12T23:46:08Z",
+ "authority": "NONE",
+ "what_was_run": "canonical/tools/repeated_change_one_example_measure_v1.py, one demonstration, leave-one-out over every drawn file, on the 15 pull requests and 89 files of REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json, the files fetched again from their named commits and each checked against the sha256 the record holds (15 pull requests, 89 files, all as recorded)",
+ "organ_sha256": "7737d8f1ecec31148607beabac8131d72faca3235985e969de2d0d56fd134cf8",
+ "organ_is_unchanged_from_main": true,
+ "coverage_is": "the developers' own non-import changes that the organ made, over all the non-import changes they made in the drawn files",
+ "arms_on_the_shipped_organ": {
+  "refuse uses the examples did not show": {
+   "asked": 440,
+   "edited": 90,
+   "developers_changes_not_imports": 1674,
+   "organ_changes": 290,
+   "right_not_imports": 268,
+   "not_what_the_developers_did": 14,
+   "coverage": 0.1601,
+   "precision": 0.9241
+  },
+  "the shipped organ, one demonstration": {
+   "asked": 440,
+   "edited": 140,
+   "developers_changes_not_imports": 1674,
+   "organ_changes": 408,
+   "right_not_imports": 386,
+   "not_what_the_developers_did": 14,
+   "coverage": 0.2306,
+   "precision": 0.9461
+  },
+  "the shipped organ's own ceiling (every try kept)": {
+   "asked": 440,
+   "edited": 147,
+   "developers_changes_not_imports": 1674,
+   "organ_changes": 415,
+   "right_not_imports": 393,
+   "not_what_the_developers_did": 14,
+   "coverage": 0.2348,
+   "precision": 0.947
+  }
+ },
+ "attribution": {
+  "unittest_and_logging_aliases_exempted": "0.1601 -> 0.2306, precision 0.9241 -> 0.9461, wrong changes 14 -> 14",
+  "call_shape_refusals_remaining_on_the_shipped_organ": 0,
+  "a_file_witness_for_a_use_no_example_showed": "0.2306 -> 0.2306 on this corpus: 0 of 440 askings, no effect"
+ },
+ "the_finding": "The shipped organ returns 98.2% of its own ceiling on this corpus. The 0.42 pp that remains is bought by guessing: the ceiling arm changes every place a rule fits, including places no evidence settles, and it makes no more of the developers' changes right and no more wrong. Coverage cannot rise further here without changing what a demonstration means -- a second example (about +8 pp) or a check of the project (a different arm).",
+ "why_a_file_witness_was_not_shipped": "It was built, tested and measured. It moves 0 of 440 askings on this corpus because the shipped alias exemption already answers every call-shape refusal that existed, and 0 call-shape refusals remain. A change that measures zero on the only corpus that prices it is a claim, not a result, so it was not kept.",
+ "limits": [
+  "8 kinds of change, 2 pull requests each: a claim about one kind has n=2 and is not a rate.",
+  "Python only, and only changes that repeat literally enough for one demonstration to fit them.",
+  "Half the pull requests return nothing, and four hold 370 of the 1,674 changes: the mean is not a rate over tasks.",
+  "The organ's own teach action cannot regenerate the skills bundle on this base (relative import in a confined subprocess), which is main's state and not this branch's."
+ ]
+}

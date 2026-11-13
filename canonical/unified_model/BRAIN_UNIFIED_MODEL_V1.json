@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 418,
+  "knowledge_documents": 419,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6813,
+  "research_index_records": 6816,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9dca2b53985dddfa81c35db887879420dca5d33b0ff03dcd2371c1f416406b4c"
+  "value": "182cee489fe320cbe636e076b9f95c14eff61f2bd99462948cec468d952f7194"
  },
  "engines": [
   {
@@ -63675,6 +63675,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7697,
+   "headings": [
+    "One demonstration already gives 98% of what one demonstration can give. The corpus is not where Problem 2 is stuck.",
+    "1. The number that settles the argument",
+    "2. What was built, verified, and then withdrawn",
+    "3. Attribution: where the 7 points between 16% and 23% came from",
+    "4. Where Problem 2 actually is now",
+    "5. What not to do (each already priced)",
+    "6. The answers to the questions asked"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_20261112_V1.md",
+   "sha256": "5093e2969a52c2ee5418eba092a019ea117df5637bdd85c2404199bbd72c07bf",
+   "summary": "**Problem 2, measured on the shipped organ.** Record: `canonical/verification/WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_20261112_V1.json`.",
+   "terms": {
+    "0.42": 3,
+    "10": 3,
+    "14": 5,
+    "23.06": 8,
+    "94.61": 4,
+    "98.2": 3,
+    "algebra": 3,
+    "already": 7,
+    "answered": 3,
+    "arm": 3,
+    "because": 5,
+    "between": 3,
+    "calls": 3,
+    "cannot": 3,
+    "ceiling": 7,
+    "change": 7,
+    "changed": 3,
+    "changes": 7,
+    "checked": 3,
+    "class": 3,
+    "code": 3,
+    "corpus": 7,
+    "coverage": 5,
+    "demonstration": 13,
+    "every": 4,
+    "file": 9,
+    "measured": 6,
+    "more": 5,
+    "no": 7,
+    "not": 31,
+    "nothing": 7,
+    "one": 16,
+    "only": 4,
+    "organ": 9,
+    "own": 4,
+    "pp": 4,
+    "precision": 5,
+    "problem": 8,
+    "real": 6,
+    "record": 5,
+    "shipped": 6,
+    "so": 4,
+    "three": 4,
+    "two": 5,
+    "way": 4,
+    "widening": 4,
+    "wrong": 5,
+    "zero": 5
+   },
+   "title": "One demonstration already gives 98% of what one demonstration can give. The corpus is not where Problem 2 is stuck.",
+   "title_terms": [
+    "98",
+    "already",
+    "corpus",
+    "demonstration",
+    "give",
+    "gives",
+    "not",
+    "one",
+    "problem",
+    "stuck"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 14775,
    "headings": [
     "Problem 2 is not one problem: where generalisation stops, and what actually moves it",
@@ -77381,10 +77461,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1220,
+  "included_source_count": 1221,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3cb5e27b1e362024eacffaad7492296e65346ba3e7f8fae667055b75de81ec64"
+  "source_tree_digest": "a25dde26a10df513aa35837b946e76e766a821c7cfb037ebe9b7da8950a72354"
  },
  "research_index": [
   {
@@ -147637,6 +147717,28 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_20261112_V1.json",
+   "schema": "A_USE_THE_EXAMPLES_DID_NOT_SHOW_SHOWN_BY_THE_FILE_V1",
+   "sha256": "7d15b719120ca1eaef321104c0d3a6564f5ef8ab8fcd673e3affde7082df97ba",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "did": 1,
+    "examples": 1,
+    "file": 1,
+    "not": 1,
+    "show": 1,
+    "shown": 1,
+    "use": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/B9_COMPOSITION_DERIVATIVE_REPLAY_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -207113,6 +207215,25 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_20261112_V1.json",
+   "schema": "WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_V1",
+   "sha256": "18d76f75b0a0b0ba7045274a7240c38aa197eaf9e467a82c6a8f84407e3595ad",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "already": 1,
+    "demonstration": 1,
+    "gives": 1,
+    "one": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
@@ -232772,6 +232893,33 @@
    }
   },
   {
+   "action_id": "PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "cddbe272e578ca84c4e2d43a8c12bb6eb1c3552c0ae29688c7acbfe6da880105",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "already": 1,
+    "demonstration": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "gives": 1,
+    "one": 1,
+    "organ_unchanged_from_main__coverage_23_06_of_an_own_ceiling_of_23_48__the_0_42_pp_remaining_is_bought_by_guessing_and_makes_nothing_more_right__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "price": 1,
+    "price_what_one_demonstration_already_gives_and_withdraw_the_zero_20261112_v1": 1,
+    "the_widening_under_test_reads_a_call_shape_off_the_target_file_itself_instead_of_off_a_second_demonstration__which_is_sound__but_the_shipped_organ_already_answers_every_call_shape_refusal_this_corpus_contains_so_the_widening_moves_0_of_440_askings_and_the_corpus_can_no_longer_be_widened_by_fitting_at_all": 1,
+    "v1": 1,
+    "withdraw": 1,
+    "withdraw_the_zero_gain_widening_and_record_what_the_shipped_organ_already_gives": 1,
+    "zero": 1
+   }
+  },
+  {
    "action_id": "PROBLEM_2_GENERALIZATION_AND_ITS_CEILING_20261112_V1",
    "capability": false,
    "date": "2026-11-12",
@@ -235327,7 +235475,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d536fe4c14cd580cdf189e0c850d997d7ae8012fe476bf1c1a2d5ebe1db6e239",
+   "sha256": "081e673ecaef5a82196a8d81b6b808dad3fc78f435ce8ab3c770d26034615a01",
    "status": "",
    "terms": {
     "20261112": 1,
