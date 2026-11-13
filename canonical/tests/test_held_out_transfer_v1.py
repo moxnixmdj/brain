@@ -55,6 +55,17 @@ class Measured(unittest.TestCase):
         self.assertFalse(names & set(H.DESIGN))
         self.assertEqual(len(names), 8)
 
+    def test_the_project_module_upper_bound_is_recorded(self):
+        assumed = self.record["by_mode"]["assumed"]["by_kind"]
+        utc = assumed["utc"]["base"]
+        self.assertEqual((utc["right"], utc["developers_changes"]), (140, 410))
+        self.assertAlmostEqual(utc["coverage"], 0.341463, places=6)
+        self.assertAlmostEqual(utc["precision"], 0.606061, places=6)
+        self.assertEqual(utc["wrong_changes"], 65)
+        rows = self.record["by_mode"]["assumed"]["per_pull_request"]
+        self.assertEqual(rows["zkaelxz/U00#1831"]["base"]["right"], 72)
+        self.assertEqual(rows["mborchuk/ContaAutonomo#121"]["base"]["right"], 30)
+
     def test_a_tiny_pull_request_is_measured_without_a_crash(self):
         files = [
             {"path": "a.py", "before": "from typing import List\n\ndef f(x: List[int]) -> None: ...\n",
