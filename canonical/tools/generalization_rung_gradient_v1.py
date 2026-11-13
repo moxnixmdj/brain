@@ -408,6 +408,24 @@ def gh_graphql(query: str, variables: Mapping[str, Any]) -> Any:
     raise RuntimeError(f"GraphQL did not answer: {done.stderr[-200:]!r}")
 
 
+def _carries(name: str) -> bool:
+    """What the corpus keeps: Python sources and the project's own dependency manifests.
+
+    The first version of fetch_tree kept only `.py` -- which meant every check that had to READ
+    a declaration (requirements.txt, pyproject.toml, setup.cfg, an Azure extension.json) was
+    reading a project whose declarations had been filtered out of it, and six tasks reported
+    NO_DECLARED_DEPENDENCIES for dependencies their own manifests named. A manifest is text,
+    it is small, and it is exactly what "stand up this project's checks" needs.
+    """
+    base = name.rsplit("/", 1)[-1]
+    if name.endswith(".py"):
+        return True
+    if base in ("pyproject.toml", "setup.cfg", "tox.ini", "pytest.ini", "Pipfile",
+                "environment.yml", "environment.yaml", "extension.json"):
+        return True
+    return base.startswith("requirements") or base.startswith("constraints")
+
+
 def fetch_tree(repo: str, ref: str, into: pathlib.Path | None = None) -> dict[str, str]:
     """Every text file of a repository at one commit, from one tarball.
 
@@ -426,7 +444,7 @@ def fetch_tree(repo: str, ref: str, into: pathlib.Path | None = None) -> dict[st
     out: dict[str, str] = {}
     with tarfile.open(fileobj=io.BytesIO(blob), mode="r:gz") as archive:
         for member in archive.getmembers():
-            if not member.isfile() or not member.name.endswith(".py"):
+            if not member.isfile() or not _carries(member.name):
                 continue
             if member.size > MAX_BYTES:
                 continue
@@ -452,6 +470,41 @@ def _reads(text: str | None) -> bool:
     return True
 
 
+def collect_pull(owner: str, name: str, number: int, files: int,
+                 say: Callable[[str], None], query: str = "") -> dict[str, Any] | None:
+    """One pull request, both sides from tarballs, drawn the deterministic way every time.
+
+    Shared by the search collector and --labels, so a record re-taken by name draws exactly the
+    files the search path would have drawn: sorted paths, shuffled with seed 0, readable modified
+    Python files, at most `files` of them, at least 3 or the pull is passed over.
+    """
+    label = f"{owner}/{name}#{number}"
+    details = pull_details(owner, name, number)
+    if not details or len(details["paths"]) < 3:
+        return None
+    repo = f"{owner}/{name}"
+    try:
+        before_tree = fetch_tree(repo, details["before_at"])
+        after_tree = fetch_tree(repo, details["after_at"])
+    except Exception as error:
+        say(f"{label:45s} passed over: {type(error).__name__}")
+        return None
+    order = list(details["paths"])
+    random.Random(0).shuffle(order)
+    drawn = [{"path": p, "before": before_tree[p], "after": after_tree[p]}
+             for p in order
+             if p in before_tree and p in after_tree
+             and _reads(before_tree[p]) and _reads(after_tree[p])
+             and before_tree[p] != after_tree[p]][:files]
+    if len(drawn) < 3:
+        return None
+    project = {p: t for p, t in before_tree.items() if len(t) < MAX_BYTES}
+    say(f"{label:45s} {len(drawn)} files, {len(project)} project files  {details['title'][:50]}")
+    return {"name": label, "repo": repo, "number": number, "title": details["title"],
+            "query": query, "before_at": details["before_at"], "after_at": details["after_at"],
+            "files": drawn, "project": project}
+
+
 def collect(queries: Sequence[str], per_query: int, files: int, say: Callable[[str], None],
             only: Sequence[str] | None = None) -> list[dict[str, Any]]:
     """Merged Python pull requests where one kind of change was made in several files.
@@ -470,31 +523,11 @@ def collect(queries: Sequence[str], per_query: int, files: int, say: Callable[[s
             label = f"{owner}/{name}#{number}"
             if label in seen:
                 continue
-            details = pull_details(owner, name, number)
-            if not details or len(details["paths"]) < 3:
+            pull = collect_pull(owner, name, number, files, say, query=words)
+            if pull is None:
                 continue
-            repo = f"{owner}/{name}"
-            try:
-                before_tree = fetch_tree(repo, details["before_at"])
-                after_tree = fetch_tree(repo, details["after_at"])
-            except Exception as error:
-                say(f"{label:45s} passed over: {type(error).__name__}")
-                continue
-            order = list(details["paths"])
-            random.Random(0).shuffle(order)
-            drawn = [{"path": p, "before": before_tree[p], "after": after_tree[p]}
-                     for p in order
-                     if p in before_tree and p in after_tree
-                     and _reads(before_tree[p]) and _reads(after_tree[p])
-                     and before_tree[p] != after_tree[p]][:files]
-            if len(drawn) < 3:
-                continue
-            project = {p: t for p, t in before_tree.items() if len(t) < MAX_BYTES}
-            pulls.append({"name": label, "repo": repo, "number": number, "title": details["title"],
-                          "query": words, "before_at": details["before_at"],
-                          "after_at": details["after_at"], "files": drawn, "project": project})
+            pulls.append(pull)
             seen.add(label)
-            say(f"{label:45s} {len(drawn)} files, {len(project)} project files  {details['title'][:50]}")
             taken += 1
             if taken >= per_query:
                 break
@@ -584,6 +617,42 @@ def score(before: str, after: str, got: str | None) -> dict[str, int]:
 # --------------------------------------------------------------------------- #
 # the check: a real oracle where one exists, and a control where none does
 # --------------------------------------------------------------------------- #
+def _tree_defines_tests(tree: Any) -> bool:
+    """Whether this module DEFINES anything a runner could collect.
+
+    Being under tests/ and importing the target is not enough -- stem's test/arguments.py is
+    both and defines no test. A candidate that defines nothing collects nothing, and a suite
+    that collects nothing verifies nothing.
+    """
+    import ast
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_"):
+            return True
+        if isinstance(node, ast.ClassDef):
+            for base in node.bases:
+                base_name = base.id if isinstance(base, ast.Name) else (
+                    base.attr if isinstance(base, ast.Attribute) else "")
+                if base_name.endswith("TestCase") or base_name == "PyTestCase":
+                    return True
+    return False
+
+
+def _missing_module_names(text: str) -> list[str]:
+    """The exact imports a run could not satisfy, in order, deduplicated.
+
+    'still missing a dependency' names a class; 'missing: six' names the next operator. The
+    record keeps the names so a residual failure is actionable instead of a bucket.
+    """
+    import re
+    found = re.findall(r"No module named '([^']+)'|No module named \"([^\"]+)\"", text)
+    names: list[str] = []
+    for first, second in found:
+        name = first or second
+        if name and name not in names:
+            names.append(name)
+    return names
+
+
 class Check:
     """Runs the target file's own tests, if the project ships a test module that imports it.
 
@@ -615,47 +684,511 @@ class Check:
         self.reason = ""            # why the check cannot run, when it cannot
         self._dir: pathlib.Path | None = None
         self._test: str | None = None
+        self._python = sys.executable     # the interpreter the suite runs under (a venv after standing)
+        self._venv_dir: str | None = None
+        self._imports: dict[str, set[str]] | None = None   # project import index, parsed once
+        self._entry_cache: dict[str, tuple[str | None, list[dict[str, Any]], str]] = {}
+        self.test_entry: dict[str, Any] = {"chosen": None, "candidates": [], "confidence": "NONE"}
+        self.standing: dict[str, Any] = {"attempted": False, "outcome": "NOT_NEEDED",
+                                         "source": None, "detail": ""}
+        self.path_reasons: dict[str, int] = {}
+        self.missing_modules: list[str] = []
+        self._repaired: list[str] = []
         if kind != "tests" or not files:
             self.available = kind == "identity"
             self.reason = "no check was asked for" if kind != "identity" else ""
             return
         self._dir = self._project(files)
-        self._test = self._module_of(str(target_path))
-        if self._test is None:
+        # The entry point is reported for the file the record names, but accepts() resolves one
+        # entry PER TARGET PATH: a file no test imports has no oracle, whatever the first file's
+        # tests happen to cover.
+        chosen, candidates, confidence = self._test_entry(str(target_path))
+        self.test_entry = {"chosen": chosen, "candidates": candidates, "confidence": confidence}
+        if chosen is None:
             self.available = False
             self.reason = "CHECK_NO_TEST_MODULE"
             return
+        self._test = chosen
         # A test module that cannot be imported is not a check. Which of the two it is matters and
         # is reported separately: a test that does not import is a missing DEPENDENCY, and
-        # installing a project's dependencies is the work "verify in a new environment" actually is.
-        runs, why = self._runs()
+        # installing a project's dependencies is the work "verify in a new environment" actually is
+        # -- so when the dependency is the only obstacle, THIS is where it gets stood up.
+        runs, why = self._runs(chosen)
+        if not runs and why == "CHECK_DEPENDENCY_MISSING":
+            # stand what the project declares, re-run, then -- if the suite still cannot import
+            # something -- install the missing name only when the project's own manifests spell
+            # it out (extras, dev files, dynamic setup.py: words the declaration parser did not
+            # reach). A name the project never writes is still not installed; that would be a
+            # guess, and a guess is what this whole instrument exists to refuse.
+            self._stand_dependencies()
+            runs, why = self._runs(chosen)
+            if not runs and why == "CHECK_DEPENDENCY_MISSING" and self._repair_missing():
+                runs, why = self._runs(chosen)
         self.available = runs
         self.reason = "" if runs else why
 
-    def _runs(self) -> tuple[bool, str]:
-        if self._dir is None or self._test is None:
-            return False, "CHECK_NO_TEST_MODULE"
+    # ---------------------------------------------------------------- test entry, per target
+    def _imports_of(self, path: pathlib.Path) -> set[str]:
+        """The dotted names one file imports (absolute, plus same-root relative resolved)."""
+        import ast
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, SyntaxError, ValueError, RecursionError, MemoryError):
+            return set()
+        relative = path.relative_to(self._dir) if self._dir else pathlib.Path(path.name)
+        package = relative.parent.parts
+        names: set[str] = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                names |= {alias.name for alias in node.names}
+            elif isinstance(node, ast.ImportFrom):
+                if node.module:
+                    names.add(node.module)
+                    names |= {f"{node.module}.{alias.name}" for alias in node.names}
+                elif node.level:
+                    # `from .x import y` inside tests/sub/ -> tests.sub.x ; `from .. import z`
+                    # -> tests.z. Only same-tree relatives count; there is no such thing as an
+                    # absolute name invented here.
+                    base = package[: max(len(package) - node.level + 1, 0)]
+                    stem = ".".join(base) if base else ""
+                    full = ".".join(part for part in (stem, node.module or "") if part)
+                    if full:
+                        names.add(full)
+                    prefix = full or stem
+                    if prefix:
+                        names |= {f"{prefix}.{alias.name}" for alias in node.names}
+        return names
+
+    @staticmethod
+    def _is_test_name(path: pathlib.Path) -> bool:
+        stem = path.stem
+        return (stem.startswith("test_") and stem != "test_"
+                or stem.endswith("_test") or stem == "tests")
+
+    @staticmethod
+    def _in_test_dir(path: pathlib.Path) -> bool:
+        return any(part in ("test", "tests", "testing") for part in path.parent.parts)
+
+    def _project_imports(self) -> dict[str, set[str]]:
+        """module dotted name -> imported names, for the whole project. Parsed once per check."""
+        if self._imports is not None:
+            return self._imports
+        index: dict[str, set[str]] = {}
+        if self._dir is not None:
+            for path in sorted(self._dir.rglob("*.py")):
+                relative = path.relative_to(self._dir).with_suffix("")
+                parts = list(relative.parts)
+                if parts and parts[-1] == "__init__":
+                    parts = parts[:-1]
+                dotted = ".".join(parts)
+                if dotted:
+                    index[dotted] = self._imports_of(path)
+        self._imports = index
+        return index
+
+    def _test_entry(self, target_path: str) -> tuple[str | None, list[dict[str, Any]], str]:
+        """The test entry point for THIS file, the candidates it beat, and how sure that is.
+
+        The honest output is not a bare name: it is the candidate list with its confidence
+        (DIRECT: a test file imports this module; IN_DIRECTORY: a file under tests/ does;
+        INDIRECT: a test imports a module that imports this; NONE: no oracle for this file).
+        A mention of the file's name is still not a criterion -- only imports are.
+        """
+        if target_path in self._entry_cache:
+            return self._entry_cache[target_path]
+        empty: tuple[str | None, list[dict[str, Any]], str] = (None, [], "NONE")
+        if self._dir is None:
+            self._entry_cache[target_path] = empty
+            return empty
+        import ast
+        wanted = pathlib.Path(target_path).with_suffix("")
+        parts = list(wanted.parts)
+        if parts and parts[-1] == "__init__":
+            parts = parts[:-1]
+        if not parts:
+            self._entry_cache[target_path] = empty
+            return empty
+        dotted = ".".join(parts)
+        module = parts[-1]
+        candidates: list[dict[str, Any]] = []
+        for path in sorted(self._dir.rglob("*.py")):
+            test_named = self._is_test_name(path)
+            in_test_dir = self._in_test_dir(path)
+            if not test_named and not in_test_dir:
+                continue
+            if path.stem == "__init__" and test_named:
+                continue
+            try:
+                tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+            except (OSError, SyntaxError, ValueError):
+                continue
+            imported = self._imports_of(path)
+            # "the one I would run" prefers a module that actually DEFINES tests: stem's
+            # test/arguments.py sits in the test directory and imports the target, but it is the
+            # runner's argument parser -- a candidate that defines no test is a candidate that
+            # will collect nothing.
+            defines = _tree_defines_tests(tree)
+            rel = ".".join(path.relative_to(self._dir).with_suffix("").parts)
+            row = {"path": rel, "defines_tests": defines}
+            if any(name == dotted or name.startswith(dotted + ".") for name in imported):
+                row["tier"] = 0 if test_named else 2
+                row["imports"] = "direct"
+                candidates.append(row)
+            elif module not in ("__init__",) and any(
+                    name.split(".")[-1] == module or dotted.endswith(name) for name in imported):
+                if test_named:
+                    row["tier"] = 1
+                    row["imports"] = "direct"
+                    candidates.append(row)
+        if not candidates:
+            # one hop: a test that imports a module which imports this file
+            index = self._project_imports()
+            for path in sorted(self._dir.rglob("*.py")):
+                if not (self._is_test_name(path) or self._in_test_dir(path)):
+                    continue
+                if path.stem == "__init__":
+                    continue
+                imported = self._imports_of(path)
+                for name in imported:
+                    covered = index.get(name)
+                    if covered is None:
+                        continue
+                    if any(n == dotted or n.startswith(dotted + ".") for n in covered):
+                        rel = ".".join(path.relative_to(self._dir).with_suffix("").parts)
+                        try:
+                            hop_tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+                        except (OSError, SyntaxError, ValueError):
+                            hop_tree = None
+                        candidates.append({"path": rel, "tier": 3, "imports": "indirect",
+                                           "defines_tests": bool(hop_tree) and _tree_defines_tests(hop_tree)})
+                        break
+        if not candidates:
+            self._entry_cache[target_path] = empty
+            return empty
+        candidates.sort(key=lambda row: (row["tier"],
+                                         0 if row.get("defines_tests") else 1,
+                                         len(row["path"].split(".")), row["path"]))
+        chosen_row = candidates[0]
+        confidence = {0: "DIRECT", 1: "DIRECT", 2: "IN_DIRECTORY", 3: "INDIRECT"}[chosen_row["tier"]]
+        result = (chosen_row["path"], candidates, confidence)
+        self._entry_cache[target_path] = result
+        return result
+
+    def _path_of(self, test_module: str) -> pathlib.Path | None:
+        """The file a unittest module name points at (pytest needs a path, not a module)."""
+        if self._dir is None:
+            return None
+        direct = self._dir.joinpath(*test_module.split(".")).with_suffix(".py")
+        if direct.is_file():
+            return direct
+        package = self._dir.joinpath(*test_module.split("."), "__init__.py")
+        if package.is_file():
+            return package
+        return None
+
+    # ---------------------------------------------------------------- running the suite
+    def _suite(self, test_module: str) -> tuple[int, str]:
+        """(returncode, combined text) for the suite at `test_module`. -1 means it never finished.
+
+        Two things this must not do: count "Ran 0 tests" as a pass (a suite that ran nothing
+        verifies nothing -- the tree has measured that exact vacuity), and refuse to use the
+        project's own declared runner when its tests are written for pytest and unittest
+        therefore collects none.
+        """
+        if self._dir is None:
+            return -1, "no project"
         try:
             done = subprocess.run(
-                [sys.executable, "-m", "unittest", self._test],
+                [self._python, "-m", "unittest", test_module],
                 cwd=str(self._dir), capture_output=True, timeout=CALL_LIMIT_S,
                 env=self._env(),
             )
+        except subprocess.TimeoutExpired:
+            return -1, "CHECK_TIMED_OUT"
+        except OSError as error:
+            return -1, f"{type(error).__name__}: {error}"
+        text = (done.stdout + done.stderr).decode("utf-8", errors="replace")
+        if "Ran 0 tests" in text:
+            if not self._pytest_importable():
+                return 5, text
+            target = self._path_of(test_module)
+            if target is None:
+                return 5, text
+            try:
+                done = subprocess.run(
+                    [self._python, "-m", "pytest", str(target), "-q", "-p", "no:cacheprovider"],
+                    cwd=str(self._dir), capture_output=True, timeout=CALL_LIMIT_S,
+                    env=self._env(),
+                )
+            except subprocess.TimeoutExpired:
+                return -1, "CHECK_TIMED_OUT"
+            except OSError as error:
+                return -1, f"{type(error).__name__}: {error}"
+            text = (done.stdout + done.stderr).decode("utf-8", errors="replace")
+            return (5 if done.returncode == 5 else done.returncode), text
+        return done.returncode, text
+
+    def _pytest_importable(self) -> bool:
+        try:
+            done = subprocess.run(
+                [self._python, "-c", "import pytest"],
+                capture_output=True, timeout=CALL_LIMIT_S, env=self._env(),
+            )
         except (subprocess.TimeoutExpired, OSError):
+            return False
+        return done.returncode == 0
+
+    def _runs(self, test_module: str) -> tuple[bool, str]:
+        if self._dir is None or test_module is None:
+            return False, "CHECK_NO_TEST_MODULE"
+        code, text = self._suite(test_module)
+        if code == -1:
             return False, "CHECK_TIMED_OUT"
-        passed = done.returncode == 0
+        if code == 5:
+            return False, "CHECK_NO_DISCOVERABLE_TESTS"
+        passed = code == 0
         if passed == (self.expect == "PASS"):
             return True, ""
-        missing = b"ModuleNotFoundError" in done.stderr or b"ImportError" in done.stderr
-        if missing:
+        if "ModuleNotFoundError" in text or "ImportError" in text:
+            for name in _missing_module_names(text):
+                if name not in self.missing_modules:
+                    self.missing_modules.append(name)
             return False, "CHECK_DEPENDENCY_MISSING"
         return False, ("CHECK_FAILS_ON_THE_ORIGINAL" if self.expect == "PASS"
                        else "CHECK_PASSES_ON_A_BROKEN_FILE")
 
+    # ---------------------------------------------------------------- standing the environment
+    def _declared_dependencies(self) -> tuple[str, list[str]] | None:
+        """What the project itself declares: (source-kind, pip arguments), or None.
+
+        Only the project's own words count -- requirements*.txt, pyproject.toml's
+        project.dependencies, setup.py's install_requires, setup.cfg. A dependency the project
+        never declares is reported as CHECK_DEPENDENCY_MISSING still, because guessing package
+        names is a new way to be confidently wrong.
+        """
+        if self._dir is None:
+            return None
+        requirements = sorted(
+            p for p in self._dir.glob("requirements*.txt") if p.is_file()
+        )
+        if requirements:
+            args: list[str] = []
+            for path in requirements:
+                args += ["-r", str(path)]
+            return "requirements_txt", args
+        pyproject = self._dir / "pyproject.toml"
+        if pyproject.is_file():
+            try:
+                import tomllib
+                data = tomllib.loads(pyproject.read_text(encoding="utf-8", errors="replace"))
+            except Exception:
+                data = {}
+            declared = list((((data.get("project") or {}).get("dependencies")) or []))
+            for group in (((data.get("project") or {}).get("optional-dependencies") or {}).values()):
+                declared += list(group or [])
+            if declared:
+                return "pyproject", list(declared)
+        setup_py = self._dir / "setup.py"
+        if setup_py.is_file():
+            import ast
+            try:
+                tree = ast.parse(setup_py.read_text(encoding="utf-8", errors="replace"))
+            except (SyntaxError, ValueError, RecursionError, MemoryError):
+                tree = None
+            if tree is not None:
+                found: list[str] = []
+
+                def take(value: Any) -> None:
+                    if isinstance(value, (ast.List, ast.Tuple)):
+                        found.extend(e.value for e in value.elts
+                                     if isinstance(e, ast.Constant) and isinstance(e.value, str))
+                    elif isinstance(value, ast.Dict):   # extras_require = {"test": [...]}
+                        for inner in value.values:
+                            take(inner)
+
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.keyword) and node.arg in (
+                            "install_requires", "tests_require", "extras_require"):
+                        take(node.value)
+                    if isinstance(node, ast.Dict):
+                        for key, value in zip(node.keys, node.values):
+                            if isinstance(key, ast.Constant) and key.value in (
+                                    "install_requires", "tests_require", "extras_require"):
+                                take(value)
+                if found:
+                    return "setup_py", found
+        setup_cfg = self._dir / "setup.cfg"
+        if setup_cfg.is_file():
+            import configparser
+            parser = configparser.ConfigParser()
+            try:
+                parser.read_string(setup_cfg.read_text(encoding="utf-8", errors="replace"))
+            except configparser.Error:
+                pass
+            if parser.has_option("options", "install_requires"):
+                lines = [line.strip() for line in
+                         parser.get("options", "install_requires").splitlines()]
+                lines = [line for line in lines if line and not line.startswith("#")]
+                if lines:
+                    return "setup_cfg", lines
+        return None
+
+    def _stand_dependencies(self) -> bool:
+        """Install what the project declares into an isolated venv, then re-run is the caller's job.
+
+        This is the step the previous round named and could not do: 6 of 12 real tasks were
+        CHECK_DEPENDENCY_MISSING, and a missing dependency is the difference between "cannot
+        verify" and "can verify". One venv per Check, outside the project copy, reused by every
+        pair of that task. Failure is reported by name (INSTALL_FAILED with pip's tail), never
+        papered over.
+        """
+        if self.standing.get("attempted"):
+            return bool(self.standing.get("outcome") == "STOOD")
+        self.standing["attempted"] = True
+        declared = self._declared_dependencies()
+        if declared is None:
+            self.standing.update(outcome="NO_DECLARED_DEPENDENCIES")
+            return False
+        source, args = declared
+        try:
+            venv_dir = tempfile.mkdtemp(prefix="rung-venv-")
+            made = subprocess.run([sys.executable, "-m", "venv", venv_dir],
+                                  capture_output=True, timeout=180)
+            if made.returncode != 0:
+                shutil.rmtree(venv_dir, ignore_errors=True)
+                self.standing.update(outcome="VENV_FAILED", source=source,
+                                     detail=made.stderr.decode("utf-8", "replace")[-400:])
+                return False
+            self._venv_dir = venv_dir
+            python = pathlib.Path(venv_dir) / "bin" / "python"
+            code, error_tail = self._pip_install(str(python), args)
+            if code != 0:
+                shutil.rmtree(venv_dir, ignore_errors=True)
+                self._venv_dir = None
+                self.standing.update(outcome="INSTALL_FAILED", source=source, detail=error_tail)
+                return False
+        except (subprocess.TimeoutExpired, OSError) as error:
+            self.standing.update(outcome="INSTALL_FAILED", source=source,
+                                 detail=f"{type(error).__name__}: {error}")
+            return False
+        self._python = str(python)
+        self.standing.update(outcome="STOOD", source=source, detail="")
+        return True
+
+    def _manifest_mentions(self, root: str) -> bool:
+        """Whether the project's own manifest text spells out this package name.
+
+        The literal parser in `_declared_dependencies` reaches what is written as a list; this
+        reaches what is written any other way (read('requirements.txt'), extras built in a
+        comprehension, a dev file). Either way the word is the project's -- which is the line
+        between standing up a dependency and guessing one.
+        """
+        if self._dir is None:
+            return False
+        texts: list[str] = []
+        for pattern in ("requirements*.txt", "pyproject.toml", "setup.py", "setup.cfg",
+                        "Pipfile", "tox.ini"):
+            for path in sorted(self._dir.glob(pattern)):
+                if path.is_file():
+                    try:
+                        texts.append(path.read_text(encoding="utf-8", errors="replace"))
+                    except OSError:
+                        continue
+        joined = "\n".join(texts).lower().replace("-", "_")
+        return root.lower() in joined
+
+    def _make_venv(self) -> bool:
+        if self._venv_dir:
+            return True
+        try:
+            venv_dir = tempfile.mkdtemp(prefix="rung-venv-")
+            made = subprocess.run([sys.executable, "-m", "venv", venv_dir],
+                                  capture_output=True, timeout=180)
+            if made.returncode != 0:
+                shutil.rmtree(venv_dir, ignore_errors=True)
+                return False
+            self._venv_dir = venv_dir
+            self._python = str(pathlib.Path(venv_dir) / "bin" / "python")
+            return True
+        except (subprocess.TimeoutExpired, OSError):
+            return False
+
+    def _repair_missing(self) -> bool:
+        """Install the still-missing modules the project's manifests NAME, once each.
+
+        Runs after standing: the declared list got installed and the suite still cannot import
+        something. If the project spells the name out anywhere in its manifests, install it; if
+        it does not, install nothing (NO_DECLARED stays honest). Returns whether an install was
+        attempted, so the caller knows a re-run could differ.
+        """
+        if not self.missing_modules or self._dir is None:
+            return False
+        todo: list[str] = []
+        for name in self.missing_modules:
+            root = name.split(".")[0].replace("-", "_").lower()
+            if not root or root in self._repaired:
+                continue
+            if self._manifest_mentions(root):
+                todo.append(root)
+        if not todo:
+            return False
+        if not self._make_venv():
+            return False
+        succeeded = False
+        for root in todo:
+            code, tail = self._pip_install(self._python, [root])
+            self._repaired.append(root)
+            if code == 0:
+                self.standing.setdefault("repaired", []).append(root)
+                succeeded = True
+            else:
+                self.standing.setdefault("repair_failures", {})[root] = tail
+        if not succeeded and self.standing.get("outcome") != "STOOD":
+            # nothing was ever installed: a venv that holds nothing verifies nothing
+            shutil.rmtree(self._venv_dir, ignore_errors=True)
+            self._venv_dir = None
+            self._python = sys.executable
+        return succeeded
+
+    def _pip_install(self, python: str, args: Sequence[str]) -> tuple[int, str]:
+        """The one place that talks to the package index.
+
+        Kept as its own method so a test can stand a dependency in without a network (the index
+        itself is proven separately, on the real corpus), and so a failure keeps pip's tail for
+        the record instead of a bare boolean.
+        """
+        done = subprocess.run(
+            [python, "-m", "pip", "install", "--quiet", "--no-input",
+             "--disable-pip-version-check", *args],
+            capture_output=True, timeout=480,
+            env={"PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": self._venv_dir or "/tmp"},
+        )
+        return done.returncode, done.stderr.decode("utf-8", "replace")[-400:]
+
     def _env(self) -> dict[str, str]:
+        """The bounded env, with the COLLECTOR reachable and the project's own code first.
+
+        `_suite` correctly refuses to call "Ran 0 tests" a pass and falls back to pytest for
+        pytest-shaped modules. That fallback used to be unreachable whenever pytest was
+        installed outside the project copy -- which is every real run, because the copy holds
+        one pull request's files and no site-packages. `_pytest_importable()` then said False,
+        the check was dropped as CHECK_NO_DISCOVERABLE_TESTS, and the 943 pytest-shaped files
+        stayed unverifiable for a reason that has nothing to do with the project.
+
+        The project directory stays FIRST on PYTHONPATH, so the suite still imports the copy's
+        code and can never be satisfied by the repository's own modules. Only directories that
+        exist are appended, and nothing else from the parent environment is inherited.
+        """
         import os
-        return {"PATH": os.environ.get("PATH", "/usr/bin:/bin"),
-                "PYTHONPATH": str(self._dir) if self._dir else "",
+        path = os.environ.get("PATH", "/usr/bin:/bin")
+        if self._venv_dir:
+            path = str(pathlib.Path(self._venv_dir) / "bin") + os.pathsep + path
+        project = str(self._dir) if self._dir else ""
+        inherited = os.environ.get("PYTHONPATH", "")
+        extra = [p for p in inherited.split(os.pathsep)
+                 if p and p != project and pathlib.Path(p).is_dir()]
+        return {"PATH": path,
+                "PYTHONPATH": os.pathsep.join([project, *extra]) if project else os.pathsep.join(extra),
                 "HOME": str(self._dir) if self._dir else "/tmp"}
 
     @staticmethod
@@ -671,75 +1204,62 @@ class Check:
                 continue
         return directory
 
-    def _module_of(self, target_path: str) -> str | None:
-        """A test module that IMPORTS the module this file is, named as `unittest` wants it.
-
-        "Mentions the file's name somewhere" is not the criterion: the first version of this used
-        `stem in text` and picked `stem.util.test_tools` -- a helper, not a test of
-        `test/__init__.py` -- as the check for a test-package file. The criterion here is an
-        import statement whose module is this file's module, or one of its parents.
-        """
-        import ast
-        if self._dir is None:
-            return None
-        wanted = pathlib.Path(target_path).with_suffix("")
-        parts = list(wanted.parts)
-        if parts and parts[-1] == "__init__":
-            parts = parts[:-1]
-        if not parts:
-            return None
-        dotted = ".".join(parts)
-        module = parts[-1]
-        candidates: list[tuple[int, str]] = []
-        for path in sorted(self._dir.rglob("test_*.py")):
-            if path.stem in ("__init__",):
-                continue
-            try:
-                source = path.read_text(encoding="utf-8", errors="replace")
-                tree = ast.parse(source)
-            except (OSError, SyntaxError, ValueError):
-                continue
-            imported: set[str] = set()
-            for node in ast.walk(tree):
-                if isinstance(node, ast.Import):
-                    imported |= {alias.name for alias in node.names}
-                elif isinstance(node, ast.ImportFrom) and node.module:
-                    imported.add(node.module)
-                    imported |= {f"{node.module}.{alias.name}" for alias in node.names}
-            if any(name == dotted or name.startswith(dotted + ".") for name in imported):
-                candidates.append((0, path))
-            elif module not in ("__init__",) and any(
-                    name.split(".")[-1] == module or dotted.endswith(name) for name in imported):
-                candidates.append((1, path))
-        if not candidates:
-            return None
-        candidates.sort(key=lambda pair: (pair[0], len(pair[1].parts), str(pair[1])))
-        chosen = candidates[0][1]
-        return ".".join(chosen.relative_to(self._dir).with_suffix("").parts)
-
     def accepts(self, path: str, candidate: str) -> bool:
         self.asked += 1
         if self.kind == "identity":
             self.settled += 1
             return True
-        if not self.available or self._dir is None or self._test is None:
+        if self._dir is None:
+            return False
+        # The oracle for THIS file is the test module that imports THIS file. The first version of
+        # this class bound one entry (the record's first path) to every path of the task, so a file
+        # whose own tests never ran could be judged by a sibling's suite -- a check for the wrong
+        # file is not a weaker check, it is a different claim.
+        chosen, _candidates, _confidence = self._test_entry(path)
+        if chosen is None:
+            self.path_reasons["CHECK_NO_TEST_MODULE"] = self.path_reasons.get(
+                "CHECK_NO_TEST_MODULE", 0) + 1
             return False
         written = self._dir / path
         original = self.originals.get(path)
         if original is None:
             return False
+        ok = False
         try:
             written.write_text(candidate, encoding="utf-8")
-            done = subprocess.run(
-                [sys.executable, "-m", "unittest", self._test],
-                cwd=str(self._dir), capture_output=True, timeout=CALL_LIMIT_S,
-                env=self._env(),
-            )
-            # A CANDIDATE is accepted when the check passes on it, in both modes. `expect` is about
-            # the file as it was found (a migration already works, a repair does not); it does not
-            # flip what "accepted" means. Inverting this made the tool accept edits that left the
-            # tests FAILING -- the exact opposite of what an oracle is for.
-            ok = done.returncode == 0
+            code, text = self._suite(chosen)
+            if code == -1:
+                self.path_reasons["CHECK_TIMED_OUT"] = self.path_reasons.get("CHECK_TIMED_OUT", 0) + 1
+            elif code == 5:
+                self.path_reasons["CHECK_NO_DISCOVERABLE_TESTS"] = self.path_reasons.get(
+                    "CHECK_NO_DISCOVERABLE_TESTS", 0) + 1
+            elif code != 0 and ("ModuleNotFoundError" in text or "ImportError" in text):
+                # The suite cannot import: this is where the project's declared dependencies get
+                # one standing attempt per check (never once per candidate), followed by the
+                # manifest-named repair for whatever is still missing.
+                for name in _missing_module_names(text):
+                    if name not in self.missing_modules:
+                        self.missing_modules.append(name)
+                self._stand_dependencies()
+                repaired = self._repair_missing()
+                if repaired or self._venv_dir:
+                    code, after = self._suite(chosen)
+                    for name in _missing_module_names(after):
+                        if name not in self.missing_modules:
+                            self.missing_modules.append(name)
+                    ok = code == 0
+                    if not ok and ("ModuleNotFoundError" in after or "ImportError" in after):
+                        self.path_reasons["STILL_MISSING_AFTER_STANDING"] = self.path_reasons.get(
+                            "STILL_MISSING_AFTER_STANDING", 0) + 1
+                else:
+                    outcome = str(self.standing.get("outcome", "INSTALL_FAILED"))
+                    self.path_reasons[outcome] = self.path_reasons.get(outcome, 0) + 1
+            else:
+                # A CANDIDATE is accepted when the check passes on it, in both modes. `expect` is
+                # about the file as it was found (a migration already works, a repair does not); it
+                # does not flip what "accepted" means. Inverting this made the tool accept edits
+                # that left the tests FAILING -- the exact opposite of what an oracle is for.
+                ok = code == 0
         except (subprocess.TimeoutExpired, OSError):
             ok = False
         finally:
@@ -751,6 +1271,9 @@ class Check:
     def close(self) -> None:
         if self._dir is not None:
             shutil.rmtree(self._dir, ignore_errors=True)
+        if self._venv_dir:
+            shutil.rmtree(self._venv_dir, ignore_errors=True)
+            self._venv_dir = None
 
 
 # --------------------------------------------------------------------------- #
@@ -983,6 +1506,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--per-query", type=int, default=2)
     parser.add_argument("--cache", type=pathlib.Path, default=None,
                         help="keep the fetched texts here; a re-run reads them instead of GitHub")
+    parser.add_argument("--labels", default=None,
+                        help="comma-separated owner/repo#number: collect exactly these pulls "
+                             "(re-taking a record's corpus by name instead of by search)")
     parser.add_argument("--out", type=pathlib.Path, default=None)
     args = parser.parse_args(list(argv) if argv is not None else None)
 
@@ -1007,21 +1533,37 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"\n{len(pulled)} pull requests -> {args.collect}  (texts not kept; hashes are)")
         return 0
 
-    if not args.pulls:
-        parser.error("give --demo, --collect or --pulls")
-    recorded = json.loads(args.pulls.read_text(encoding="utf-8"))
-    cached = {}
-    if args.cache and args.cache.is_file():
-        cached = {item["name"]: item for item in json.loads(args.cache.read_text(encoding="utf-8"))}
-    pulled = []
-    for item in recorded:
-        if item["name"] in cached:
-            pulled.append(cached[item["name"]])
-        else:
-            pulled.extend(fetch_again([item]))
-        time.sleep(1)
-    if args.cache:
-        args.cache.write_text(json.dumps(pulled, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    if args.labels:
+        pulled = []
+        for label in [part.strip() for part in args.labels.split(",") if part.strip()]:
+            head, _, num = label.rpartition("#")
+            owner, _, repo = head.partition("/")
+            if not owner or not repo or not num.isdigit():
+                parser.error(f"--labels: {label!r} is not owner/repo#number")
+            pull = collect_pull(owner, repo, int(num), args.files, print, query="--labels")
+            if pull is None:
+                print(f"  {label}: passed over")
+                continue
+            pulled.append(pull)
+            time.sleep(1)
+        if not pulled:
+            parser.error("--labels collected no pull requests")
+    elif args.pulls:
+        recorded = json.loads(args.pulls.read_text(encoding="utf-8"))
+        cached = {}
+        if args.cache and args.cache.is_file():
+            cached = {item["name"]: item for item in json.loads(args.cache.read_text(encoding="utf-8"))}
+        pulled = []
+        for item in recorded:
+            if item["name"] in cached:
+                pulled.append(cached[item["name"]])
+            else:
+                pulled.extend(fetch_again([item]))
+            time.sleep(1)
+        if args.cache:
+            args.cache.write_text(json.dumps(pulled, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    else:
+        parser.error("give --demo, --collect, --labels or --pulls")
     result: dict[str, Any] = {"schema": SCHEMA, "authority": AUTHORITY,
                               "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                               "check": args.check, "model_calls": 0, "incremental_spend_usd": 0}
@@ -1042,6 +1584,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         reasons[why] = reasons.get(why, 0) + 1
         per_task.append({"name": pull["name"], "files": len(pull["files"]),
                          "check": why, "test_module": check._test,
+                         "test_entry_confidence": check.test_entry.get("confidence", "NONE"),
+                         "test_entry_candidates": len(check.test_entry.get("candidates", [])),
+                         "standing": dict(check.standing),
+                         "path_reasons": dict(check.path_reasons),
+                         "missing_modules": list(check.missing_modules),
                          "right_exact": measured["totals"]["exact"]["right"],
                          "wrong_exact": measured["totals"]["exact"]["wrong"],
                          "right_any_rung": measured["totals"]["any_rung"]["right"],

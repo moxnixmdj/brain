@@ -17,6 +17,7 @@ import tempfile
 import unittest
 from collections import deque
 
+from canonical.runtime import environment_learning_v1 as el
 from canonical.runtime import systematic_exploration_v1 as sx
 from canonical.runtime import transfer_learning_v1 as tl
 from canonical.tools import arc_agi_3_public_exploration_measure_v1 as arc_measure
@@ -92,9 +93,12 @@ class NothingIsPaidForTwiceTests(unittest.TestCase):
         out = sx.explore_to_goal(env, ACTIONS, is_goal=lambda s: False, action_budget=10**6)
         reachable = true_distances(table, 0)
         learned = out["model"]
-        self.assertEqual(set(learned), {str(s) for s in reachable})
+        # The shared observation identity is versioned; the oracle is still the
+        # environment's own transition table, looked up under that exact identity.
+        self.assertEqual(set(learned), {el.state_key(s) for s in reachable})
         for s in reachable:
-            self.assertEqual(learned[str(s)], {a: str(table[s][a]) for a in ACTIONS})
+            self.assertEqual(learned[el.state_key(s)],
+                             {a: el.state_key(table[s][a]) for a in ACTIONS})
 
 
 class ExhaustionTests(unittest.TestCase):
@@ -528,6 +532,41 @@ class SharedMemoryTests(unittest.TestCase):
         self.assertEqual(out["status"], sx.FAIL_NOT_REPRODUCIBLE)
         self.assertFalse(out["pass"])
         self.assertIsNone(out["plan"])
+
+
+class PriorSchemaTests(unittest.TestCase):
+    """A carried model is only comparable under the identity that wrote it."""
+
+    @staticmethod
+    def _env():
+        return TableEnv({0: {"a": 1}, 1: {"a": 1}}, 0)
+
+    def test_a_legacy_prior_is_rejected_under_the_shared_identity(self):
+        out = sx.explore_to_goal(self._env(), ["a"], is_goal=lambda s: s == 1,
+                                 action_budget=10, prior={"0": {"a": "1"}})
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["state_key_schema"], el.STATE_KEY_SCHEMA)
+        self.assertEqual(out["prior_states"], 0)
+        self.assertEqual(out["prior_rejected_states"], 1)
+        self.assertNotIn("0", out["model"])
+
+    def test_a_declared_current_prior_is_accepted(self):
+        prior = {el.state_key(0): {"a": el.state_key(1)}}
+        out = sx.explore_to_goal(self._env(), ["a"], is_goal=lambda s: s == 1,
+                                 action_budget=10, prior=prior,
+                                 prior_schema=el.STATE_KEY_SCHEMA)
+        self.assertTrue(out["pass"])
+        self.assertEqual(out["prior_states"], 1)
+        self.assertEqual(out["prior_rejected_states"], 0)
+
+    def test_a_custom_key_of_is_the_callers_own_identity(self):
+        out = sx.explore_to_goal(self._env(), ["a"], is_goal=lambda s: s == 1,
+                                 action_budget=10, prior={"0": {"a": "1"}},
+                                 key_of=lambda s: str(s))
+        self.assertTrue(out["pass"])
+        self.assertIsNone(out["state_key_schema"])
+        self.assertEqual(out["prior_states"], 1)
+        self.assertEqual(out["prior_rejected_states"], 0)
 
 
 class ClickTargetTests(unittest.TestCase):
