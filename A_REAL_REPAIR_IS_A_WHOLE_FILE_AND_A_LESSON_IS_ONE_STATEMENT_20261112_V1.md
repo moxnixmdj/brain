@@ -82,6 +82,12 @@ Round F identified `required = ('baseline.violates_own_spec',)` from five execut
 
 The mechanism is therefore not novel in conception — the frontier converged on falsifiable applicability conditions — but the specific defect it removes (whole-file teaching yielding an inert rule) and the specific evidence (a lesson transferring to a different real module's pinned upstream fix) are measured here rather than asserted.
 
+## Relation to the admission gate that landed concurrently
+
+`canonical/swe_kernel/lesson_admission_gate_v1.py` merged to main while this round was in flight. It is **complementary, not duplicative**, and the composition is exact: that gate classifies *held-out* programs as `REPAIRED` / `PRESERVED` / `BROKEN` / `STILL_WRONG` / `NOT_APPLICABLE` and returns `ADMIT` / `REFINE` / `REJECT` — but it evaluates **a rule**. This round's Arm A measures that teaching a real repair as two whole files derives **no rule at all** (`derive_operator_swap` → `None`, 0 candidates on all four real sources), so there is nothing for an admission gate to admit. Localization is *upstream* of admission: it is the step that produces a rule whose behaviour on held-out programs is then worth gating.
+
+Two consequences are stated rather than left implicit. First, this round does **not** wire localization into `crystallize_code_fix`, so a localized lesson still reaches the store through the ungated branch and is recorded as `UNGATED_RECORD`; passing real victims through the new gate is the obvious next composition. Second, this round's own transfer measurement is *not* an admission decision — 2 of 4 real targets were repaired and 2 were not, so under that gate's vocabulary this lesson would not be an unqualified `ADMIT`, and it is not claimed as one.
+
 ## Verification
 
 - `canonical/tests/test_lesson_localization_v1.py` — **24 passed**, running the real pinned fixtures and the real upstream test suites
