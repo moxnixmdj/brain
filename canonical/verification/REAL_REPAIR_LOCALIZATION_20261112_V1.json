@@ -1,0 +1,354 @@
+{
+ "authority": "NONE__PRODUCER_RUN_MEASUREMENT_IN_ONE_SANDBOX_NOT_INDEPENDENT_VERIFICATION",
+ "corpus": {
+  "cases": [
+   "unit_boundary",
+   "bits_capacity",
+   "ichunked_zero",
+   "chunked_even_zero"
+  ],
+  "network_required_at_test_time": false,
+  "path": "canonical/tests/fixtures/historical_repair_projects_v1",
+  "pinned_by": "sha256 and git blob sha in PROVENANCE.json",
+  "provenance_declares": {
+   "full_upstream_repository_coverage": false,
+   "independent_certification": false
+  },
+  "repositories": [
+   "mahmoud/boltons",
+   "more-itertools/more-itertools"
+  ],
+  "source_and_upstream_test_snapshots_unmodified": true,
+  "why_this_corpus": "real pre- and post-repair sources with their exact unchanged upstream test bodies, so a transfer claim can be judged by the injured project's own tests rather than by a fixture written for the occasion"
+ },
+ "fact_vocabulary": {
+  "consequences": [
+   "facts must be able to express absence, or the unit of observation must become (target, site) rather than target",
+   "site-relative facts still blur: they are a union over all nine firing sites, so operator.LtE is present in both before.py and after.py, and what actually disappears is the defect site's own left operand"
+  ],
+  "constant_facts_reported_not_dropped": [
+   "baseline.violates_own_spec",
+   "operator.Gt"
+  ],
+  "identical_fact_count_for_that_pair": 26,
+  "law_on_site_relative_facts": {
+   "constant_facts": [
+    "baseline.violates_own_spec",
+    "operator.Gt"
+   ],
+   "required": [],
+   "status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+   "survivors": 0
+  },
+  "law_on_whole_file_facts": {
+   "required": [],
+   "status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+   "survivors": 1024
+  },
+  "per_case": {
+   "bits_capacity": {
+    "firing_sites": 4,
+    "site_relative_facts": 7,
+    "unlocated_offsets": 2,
+    "whole_file_facts": 20
+   },
+   "chunked_even_zero": {
+    "firing_sites": 56,
+    "site_relative_facts": 45,
+    "unlocated_offsets": 0,
+    "whole_file_facts": 87
+   },
+   "ichunked_zero": {
+    "firing_sites": 56,
+    "site_relative_facts": 45,
+    "unlocated_offsets": 0,
+    "whole_file_facts": 86
+   },
+   "unit_boundary": {
+    "firing_sites": 9,
+    "site_relative_facts": 10,
+    "unlocated_offsets": 3,
+    "whole_file_facts": 26
+   }
+  },
+  "placeholder_facts_are_forbidden": "an earlier prototype emitted site.no_enclosing_comparison for an offset outside any comparison; because that happened in every real case the law returned it as the most general survivor -- a constant dressed as a finding",
+  "survivors_reduction": "1024 -> 0 on the same evidence, and the verdict changes from AMBIGUOUS to INCONSISTENT",
+  "what_is_not_expressible": "that the defect is an operator boundary rather than a missing guard",
+  "whole_file_facts_cannot_distinguish_a_real_defect_from_its_own_repair": true,
+  "why_constant_facts_matter": "all four real targets already fail their own tests, so Round F's requirement baseline.violates_own_spec is present in every observation and refuted by none; a fact true of everything is not a requirement",
+  "why_inconsistent_is_the_useful_refusal": "it says the VOCABULARY is wrong rather than the evidence being thin: the two failures' site-fact sets (45 facts each) are supersets of the two successes' (10 and 7), so no conjunction of PRESENT facts can separate them"
+ },
+ "files": {
+  "A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1.md": "c703d1b4774519066c3efd32d27ec7f788566b9064a596b6d71cb96f8649e532",
+  "canonical/swe_kernel/lesson_localization_v1.py": "d303713452eaa06a77d7a8f76a06c8df09a3bdee719ece7fd8a57c35371505d1",
+  "canonical/swe_kernel/skill_scope_acquisition_v1.py": "c90c9cadd9c2be9418de0befa5e58a46785f891ca499b6e34b2259fa371fb002",
+  "canonical/tests/test_lesson_localization_v1.py": "7c7d94bbdc866d32e219a4ef21c7d61990470eb3b63a2cb612c41a7d7fd290bc",
+  "canonical/tools/real_repair_localization_probe_v1.py": "7b9ed951f7984b815bfccadf222f8dcacb090ccab793698c8a3f1c422c9372d0"
+ },
+ "generated_at_git_head": "ea968ff655c518ede46ec0e5c60e90816c3834cd",
+ "generated_at_utc": "2026-11-13T02:50:51Z",
+ "generated_by": "producer run of canonical/tools/real_repair_localization_probe_v1.py",
+ "how_reproduced": [
+  "python3 canonical/tools/real_repair_localization_probe_v1.py",
+  "python3 canonical/tools/real_repair_localization_probe_v1.py --json",
+  "python3 -m pytest canonical/tests/test_lesson_localization_v1.py"
+ ],
+ "mutations": {
+  "files_mutated": [
+   "lesson_localization_v1.py",
+   "skill_scope_acquisition_v1.py",
+   "real_repair_localization_probe_v1.py"
+  ],
+  "killed": 16,
+  "killed_names": [
+   "largest_statement_instead_of_smallest",
+   "function_granularity_instead_of_statement",
+   "picks_one_when_several_lessons_exist",
+   "fabricates_a_lesson_where_no_swap_was_derived",
+   "guesses_at_a_language_it_cannot_parse",
+   "identical_sources_become_a_lesson",
+   "unparseable_source_is_not_refused",
+   "placeholder_fact_for_an_unlocated_offset",
+   "constant_facts_never_reported",
+   "firing_sites_ignore_the_swap_family",
+   "site_state_drops_the_baseline_verdict",
+   "candidate_budget_ignored",
+   "zero_tests_treated_as_a_failure",
+   "already_correct_target_treated_as_defective",
+   "the_real_upstream_fix_is_not_recognised",
+   "the_inert_rule_reports_a_candidate"
+  ],
+  "survived": 0
+ },
+ "schema": "PROJECT_BRAIN_REAL_REPAIR_LOCALIZATION_VERIFICATION_V1",
+ "sources_consulted": [
+  {
+   "bearing": "curated skills +16.2pp but self-generated skills -1.3pp and 16 of 84 tasks negative; the common cause is a single correct pipeline without applicability boundaries, and the stated implication is that skills should include applicability boundaries not just preferred procedures",
+   "date": "2026-02-13",
+   "id": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+   "where": "arxiv.org/abs/2602.12670"
+  },
+  {
+   "bearing": "formalizes an applicability condition C, a skill should activate only when its procedural knowledge is beneficial; documents ClawHavoc where overbroad skill descriptions widened the attack surface",
+   "date": "2026-02-24",
+   "id": "SoK: Agentic Skills -- Beyond Tool Use in LLM Agents",
+   "where": "arxiv.org/html/2602.20867v1"
+  },
+  {
+   "bearing": "negatives generated from positive seeds by small edit operations against a deterministic oracle, plus a hardening pass over a probe pool for witnesses where gold and candidate disagree",
+   "date": "2026-07-01",
+   "id": "Counterexamples as feedback for agent self-correction (A-CEGIS)",
+   "where": "arxiv.org/html/2609.02892"
+  },
+  {
+   "bearing": "court-form-filling case: a heuristic true for medical intake and false for legal forms, where refinement re-explored the same training data and baked it deeper -- the argument against synthesizing contrasts only near the original demonstration",
+   "date": "2026-05-11",
+   "id": "SkillEvolver: Skill Learning as a Meta-Skill",
+   "where": "arxiv.org/html/2605.10500v1"
+  },
+  {
+   "bearing": "names false lesson propagation, a spurious causal lesson from a small number of trajectories applied in an inappropriate context, and identifies environment-feedback bandwidth as the missing variable",
+   "date": "2026-05-24",
+   "id": "When Skills Don't Help: A Negative Result on Procedural Knowledge for Tool-Grounded Agents",
+   "where": "arxiv.org/html/2605.20023"
+  },
+  {
+   "bearing": "39 of 49 skills produce zero delta and the average is +1.2%; near-match templates cause surface anchoring and concept bleed. A skill proposing 0 candidates is a zero delta by construction",
+   "date": "2026-03-17",
+   "id": "SWE-Skills-Bench: Do Agent Skills Actually Help in Real Repositories",
+   "where": "arxiv.org/pdf/2603.15401"
+  }
+ ],
+ "tests": {
+  "failed": 0,
+  "fifteen_suite_batch": {
+   "failed": 0,
+   "passed": 238
+  },
+  "file": "canonical/tests/test_lesson_localization_v1.py",
+  "passed": 24,
+  "post_merge_re_run": {
+   "passed": 45
+  },
+  "round_f_suite_unchanged": {
+   "file": "canonical/tests/test_skill_scope_acquisition_v1.py",
+   "passed": 21
+  }
+ },
+ "the_defect": {
+  "candidates_on_each_real_source": {
+   "bits_capacity": 0,
+   "chunked_even_zero": 0,
+   "ichunked_zero": 0,
+   "unit_boundary": 0
+  },
+  "consequence": "the rule is stored, marked state ACTIVE, and fires nowhere; nothing in the tree asks whether a stored skill fires at all",
+  "derived_family": [],
+  "derived_swap": null,
+  "error_class_is_not_the_cause": true,
+  "holes": 13,
+  "pattern_tokens": 99,
+  "replacement_tokens": 99,
+  "total_candidates_on_the_corpus": 0,
+  "what_the_production_teaching_path_receives": "the two whole 1317-line files, exactly as canonical/tests/historical_repair_curriculum_v1.py passes them",
+  "why_derive_operator_swap_is_right_to_refuse": "it returns a swap only when the two token streams differ at exactly one operator position, and this pair differs in a docstring as well"
+ },
+ "the_fix": {
+  "after_statement": "if abs_bytes < next_size:\n            break",
+  "before_lines": [
+   565,
+   566
+  ],
+  "before_statement": "if abs_bytes <= next_size:\n            break",
+  "family": [
+   [
+    "<=",
+    "<"
+   ],
+   [
+    ">=",
+    ">"
+   ],
+   [
+    ">",
+    ">="
+   ]
+  ],
+  "granularity": "the smallest AST STATEMENT covering each changed region, not the enclosing function",
+  "module": "canonical/swe_kernel/lesson_localization_v1.py",
+  "operator_lessons_found": 1,
+  "refusals_are_named": [
+   "NO_OPERATOR_LESSON__NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+   "SEVERAL_OPERATOR_LESSONS__NOT_ONE_LESSON",
+   "NO_CHANGED_REGION__THE_TWO_SOURCES_ARE_IDENTICAL",
+   "UNPARSEABLE__A_SOURCE_DID_NOT_PARSE",
+   "NO_LOCALIZER_FOR_LANGUAGE"
+  ],
+  "regions_examined": 2,
+  "regions_with_a_statement_pair": 2,
+  "status": "LOCALIZED__ONE_OPERATOR_LESSON",
+  "stored_through_the_production_path": {
+   "attempted": true,
+   "crystallized": true,
+   "reason": null,
+   "swap_after_storing": {
+    "from": "<=",
+    "to": "<"
+   }
+  },
+  "swap": {
+   "from": "<=",
+   "to": "<"
+  },
+  "why_statement_granularity": "the enclosing function of the real boltons fix also contains the changed docstring, so it carries two differences and is refused"
+ },
+ "the_two_real_failures": {
+  "budget_executed": 12,
+  "cases": [
+   "ichunked_zero",
+   "chunked_even_zero"
+  ],
+  "corpus_control": "each case's real upstream fix does pass its own tests, so the failure belongs to the skill and not to a broken harness",
+  "localization_verdict": "NO_OPERATOR_LESSON__NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE for both",
+  "nature": "missing zero-guards, not operator boundaries",
+  "passing_candidates": [
+   [],
+   []
+  ],
+  "recorded_as": "FIRED_AND_NOT_REPAIRED_WITHIN_BUDGET with the budget stated, never as a pass and never as a non-firing",
+  "skill_still_fires": [
+   32,
+   32
+  ]
+ },
+ "title": "A real repair is a whole file and a lesson is one statement",
+ "transfer": {
+  "bits_capacity": {
+   "baseline_returncode": 1,
+   "baseline_test_count": 3,
+   "budget": 12,
+   "candidates_proposed": 4,
+   "candidates_tried": 4,
+   "localization_of_its_own_repair": "LOCALIZED__ONE_OPERATOR_LESSON",
+   "passing_candidates": [
+    2
+   ],
+   "real_fix_passes": true,
+   "real_fix_proposed": true,
+   "real_fix_rank": 2,
+   "real_fix_test_count": 3,
+   "verdict": "REPAIRED"
+  },
+  "chunked_even_zero": {
+   "baseline_returncode": 1,
+   "baseline_test_count": 12,
+   "budget": 12,
+   "candidates_proposed": 32,
+   "candidates_tried": 12,
+   "localization_of_its_own_repair": "NO_OPERATOR_LESSON__NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+   "passing_candidates": [],
+   "real_fix_passes": true,
+   "real_fix_proposed": false,
+   "real_fix_rank": null,
+   "real_fix_test_count": 12,
+   "verdict": "FIRED_AND_NOT_REPAIRED_WITHIN_BUDGET"
+  },
+  "ichunked_zero": {
+   "baseline_returncode": 1,
+   "baseline_test_count": 10,
+   "budget": 12,
+   "candidates_proposed": 32,
+   "candidates_tried": 12,
+   "localization_of_its_own_repair": "NO_OPERATOR_LESSON__NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
+   "passing_candidates": [],
+   "real_fix_passes": true,
+   "real_fix_proposed": false,
+   "real_fix_rank": null,
+   "real_fix_test_count": 10,
+   "verdict": "FIRED_AND_NOT_REPAIRED_WITHIN_BUDGET"
+  },
+  "unit_boundary": {
+   "baseline_returncode": 1,
+   "baseline_test_count": 4,
+   "budget": 12,
+   "candidates_proposed": 9,
+   "candidates_tried": 9,
+   "localization_of_its_own_repair": "LOCALIZED__ONE_OPERATOR_LESSON",
+   "passing_candidates": [
+    1
+   ],
+   "real_fix_passes": true,
+   "real_fix_proposed": false,
+   "real_fix_rank": null,
+   "real_fix_test_count": 4,
+   "verdict": "REPAIRED"
+  }
+ },
+ "transfer_headline": {
+  "applied_to": "boltons/mathutils.py::Bits.__init__ (a different module, never shown)",
+  "baseline_fails_its_own_tests": true,
+  "baseline_test_count": 3,
+  "byte_identical_to_the_pinned_upstream_fix": true,
+  "candidate_passes_its_own_tests": true,
+  "candidate_rank": 2,
+  "candidates_proposed": 4,
+  "reached_by": "the swap family, whose dual form ('>','>=') is that module's real historical fix",
+  "real_fix_passes": true,
+  "taught_from": "boltons/strutils.py::bytes2human (real historical repair, localized to one statement)"
+ },
+ "trap_pinned": {
+  "matches_the_trees_convention": "TOOLCHAIN_ABSENT__NOT_A_PASS",
+  "pinned_by": "test_zero_tests_run_is_unverifiable_and_not_a_failure",
+  "verdict_now": "UNVERIFIABLE__ITS_OWN_TESTS_DID_NOT_RUN, yielding no observation",
+  "what_happened": "with pytest absent from the sandbox, bits_capacity's upstream test failed at 'from pytest import raises', the oracle reported test_count 0, and even the sha256-pinned upstream fix returned non-zero",
+  "why_it_matters": "counting that as a failure of the skill would fabricate a contrasting observation out of a missing dependency -- the same error class as counting a PASS that only proved a process started"
+ },
+ "what_is_not": [
+  "that the localized lesson is the right lesson for the corpus: it repaired 2 of 4 real bugs and failed on 2",
+  "that crystallize_code_fix now localizes: it does not, and editing it was deliberately avoided because teaching a localized pair while verifying a whole file would break its downstream reproduction checks verify_rule_on_mutated_twin and iter_crystallized_code_rule_candidates, which assume the rule reproduces after_snippet from before_snippet",
+  "that the shipped corpus has scopes: it does not, and the ledger is unchanged at 5 of 5 EXACT_MATCH_ONLY",
+  "that the scope law now works on real code: it returns INCONSISTENT here and that is the finding",
+  "that this is a benchmark result or model training: no model was called and every verdict is an executed test suite over pinned real sources",
+  "that the fixtures are independently certified: PROVENANCE.json declares independent_certification false"
+ ]
+}

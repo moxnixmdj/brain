@@ -1094,6 +1094,8 @@ class VerifiedSkillStore:
         precondition_accessor: Callable[[str], Any] | None = None,
         oracle: Callable[[str, Any], Any] | None = None,
         probes: Sequence[Any] | None = None,
+        admission_victims: Sequence[Any] | None = None,
+        admission_archive: Sequence[Any] | None = None,
     ) -> dict[str, Any]:
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
@@ -1185,7 +1187,37 @@ class VerifiedSkillStore:
             rule["oracle_probe"] = {
                 "verdict": probe_out["verdict"],
                 "probes_checked": len(probe_out.get("probes") or ()),
+                # The learn path passes the TAUGHT snippet as the victim, so this probe shows the
+                # edit reproduces itself. It executes no unseen program. Say so in the record
+                # instead of letting "HOLDS" be read as generalization.
+                "victim_was_taught_snippet": True,
+                "held_out_programs_executed": 0,
             }
+        # ADMISSION: what does this lesson do to programs it was never taught on? Measured
+        # 2026-11-13: with `oracle` + `probes` alone the store admitted an ACTIVE boundary rule
+        # that repaired one unseen program and BROKE another that was already right, on four
+        # executions of the demonstration and zero of anything else. When a caller supplies
+        # victims, that execution happens here, before the write.
+        from canonical.swe_kernel import lesson_admission_gate_v1 as _admission
+
+        if admission_victims or admission_archive:
+            admission_report = _admission.evaluate(
+                before_snippet,
+                after_snippet,
+                victims=admission_victims or (),
+                archive=admission_archive or (),
+                rule=rule,
+                language=language,
+            )
+            if admission_report.get("verdict") != _admission.ADMIT:
+                return {
+                    "crystallized": False,
+                    "reason": f"ADMISSION_{admission_report.get('verdict')}:{admission_report.get('reason')}",
+                    "admission": admission_report,
+                }
+            rule["admission"] = _admission.record_for_store(admission_report)
+        else:
+            rule["admission"] = dict(_admission.UNGATED_RECORD)
         if precondition_evidence is not None:
             rule["precondition_presence"] = precondition_evidence
         rule['record_version'] = 1
@@ -1257,9 +1289,18 @@ class VerifiedSkillStore:
                             "training_baseline",
                             "precondition_presence",
                             "oracle_probe",
+                            "admission",
                         ):
                             if preserve_key in rule and preserve_key not in existing_rule:
                                 existing_rule[preserve_key] = rule[preserve_key]
+                        # Stronger admission evidence upgrades a weaker record; it never
+                        # downgrades one. An ungated row that is later shown on held-out
+                        # programs should say so.
+                        from canonical.swe_kernel import lesson_admission_gate_v1 as _adm
+
+                        if (rule.get("admission", {}).get("verdict") == _adm.ADMIT
+                                and existing_rule.get("admission", {}).get("verdict") != _adm.ADMIT):
+                            existing_rule["admission"] = rule["admission"]
                         if existing_rule.get("state") != "INVALIDATED":
                             existing_rule["state"] = rule.get("state", "ACTIVE")
                         rule_to_store = existing_rule
