@@ -28,6 +28,13 @@ could therefore have been found before a candidate was handed in.
 
 What is expected, and what follows from each outcome, is written below (`EXPECTED`, `rule`) and was
 pushed before any whole run was made.
+
+The runs are made on ONE process each. The first whole run, of django__django-11066, was made on two
+and ended before its summary after 320 seconds: Django's parallel runner cannot hand an error to
+its parent when the error cannot be pickled, and on Python 3.11 one test's error cannot. On one
+process the same error is one test's error and the run goes on. That change, and running two
+candidates side by side, were made after that first run and before any other; `EXPECTED` and `rule`
+are as they were pushed.
 """
 from __future__ import annotations
 
@@ -42,6 +49,7 @@ import signal
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Callable, Mapping, Sequence
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -108,8 +116,8 @@ def broken(with_the_fix: Mapping[str, str], with_the_candidate: Mapping[str, str
 # --------------------------------------------------------------------------- #
 # the runs
 # --------------------------------------------------------------------------- #
-def run_whole(tree: pathlib.Path, labels: Sequence[str], seconds: float, processes: int = 2) -> dict[str, Any]:
-    """Django's own runner on the whole suite (no labels) or on the labels, on `processes` processes; what it printed, and whether it was stopped."""
+def run_whole(tree: pathlib.Path, labels: Sequence[str], seconds: float, processes: int = 1) -> dict[str, Any]:
+    """Django's own runner on the whole suite (no labels) or on the labels, on one process; what it printed, and whether it was stopped."""
     environment = {**os.environ, "PYTHONPATH": str(tree), "PYTHONDONTWRITEBYTECODE": "1", "LC_ALL": "C.UTF-8", "LANG": "C.UTF-8"}
     started = time.time()
     process = subprocess.Popen([sys.executable, "tests/runtests.py", "--verbosity", "2", "--settings=test_sqlite", "--parallel", str(processes), *labels],
@@ -258,6 +266,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--count-record", type=pathlib.Path, default=COUNT_RECORD)
     parser.add_argument("--which", choices=("one", "first", "all"), default="one",
                         help="the resolving candidates at place 1, the first resolving candidate of each task, or every resolving candidate")
+    parser.add_argument("--workers", type=int, default=2, help="candidates run side by side, each on its own tree")
     parser.add_argument("--out", type=pathlib.Path, default=None)
     args = parser.parse_args(argv)
 
@@ -284,6 +293,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             row = json.loads(line)
             rows[(row["task"], row["place"])] = row
         say(f"{len(rows)} candidates already run, read from {rows_file}")
+    todo = []
     for task, at in wanted:
         if (task, at) in rows:
             continue
@@ -292,22 +302,30 @@ def main(argv: Sequence[str] | None = None) -> int:
         if written["place"] != at or hashlib.sha256(candidate["text"].encode("utf-8")).hexdigest()[:16] != written["sha256"]:
             say(f"REFUSED: the candidate of {task} at place {at} is not the one the count ran")
             return 2
+        tree = args.work_dir / f"{task}__place_{at}"
+        count.at_commit(clone, tree, commits[task])                       # one after the other: the trees share one clone
+        todo.append((task, at, written, candidate, tree))
+
+    def one(given: tuple) -> dict[str, Any]:
+        task, at, written, candidate, tree = given
         test_patch = (args.dataset_dir / "patches" / f"{task}_tests.patch").read_text(encoding="utf-8")
         fix = count.expert_diff(json.loads((args.pull_requests_dir / f"{task}.json").read_text()), test_patch)
-        tree = args.work_dir / task
-        count.at_commit(clone, tree, commits[task])
         begun = time.time()
         row = {"task": task, "place": at, "first_resolving": (task, at) in firsts, "version": counted["per_task"][task].get("version"),
                "path": candidate["path"], "function": candidate["function"], "sha256": written["sha256"],
                **of_candidate(tree, test_patch, fix, candidate["path"], candidate["text"], count.tests_of(statements / f"{task}.yaml")["fail_to_pass"],
                               keep_output=args.work_dir / f"{task}__place_{at}__whole_run.txt")}
         row["seconds"] = round(time.time() - begun, 1)
-        rows[(task, at)] = row
-        with rows_file.open("a", encoding="utf-8") as out:
-            out.write(json.dumps(row) + "\n")
-        say(f"{len(rows)}/{len(wanted)} {task} place {at}: whole run ran={row['whole_run']['ran']} not passing={row['whole_run']['not_passing']} "
-            f"modules again={len(row['modules_again'] or ())} broken by the candidate={row['broken_by_the_candidate']} keeps={row['keeps_the_whole_suite']} "
-            f"{row['why_nothing_is_said'] or ''} {row['seconds']}s")
+        return row
+
+    with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
+        for row in pool.map(one, todo):
+            rows[(row["task"], row["place"])] = row
+            with rows_file.open("a", encoding="utf-8") as out:
+                out.write(json.dumps(row) + "\n")
+            say(f"{len(rows)}/{len(wanted)} {row['task']} place {row['place']}: whole run ran={row['whole_run']['ran']} not passing={row['whole_run']['not_passing']} "
+                f"modules again={len(row['modules_again'] or ())} broken by the candidate={row['broken_by_the_candidate']} keeps={row['keeps_the_whole_suite']} "
+                f"{row['why_nothing_is_said'] or ''} {row['seconds']}s")
     ordered = [rows[pair] for pair in wanted]
     summary = summarise(ordered)
     record = {
@@ -315,6 +333,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "made_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "python": sys.version.split()[0],
         "which": args.which,
+        "processes_of_one_run": 1,
+        "candidates_side_by_side": max(1, args.workers),
         "expected": {name: list(pair) for name, pair in EXPECTED.items()},
         "expectations": held(summary),
         "summary": summary,
