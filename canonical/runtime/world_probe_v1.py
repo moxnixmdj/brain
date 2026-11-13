@@ -77,7 +77,9 @@ _FILE_KINDS = {
     "yaml":                   ((".yaml", ".yml"), ()),
     "markdown":               ((".md", ".markdown"), ()),
     "python.source":          ((".py",), ()),
-    "python.test.corpus":     ((".py",), ("test",)),
+    #: NOT a substring kind. See `_FILE_NAME_PREFIXES`: a test corpus is decided by the
+    #: filename convention, because "test" as a substring is not a test.
+    "python.test.corpus":     ((".py",), ()),
     "archive.tar_gz":         ((".tar.gz", ".tgz"), ()),
     "artifact.file":          ((), ()),
     "candidate.response_or_fields": ((".json",), ()),
@@ -93,6 +95,43 @@ _FILE_KINDS = {
     "sqlite":                 ((".sqlite", ".sqlite3", ".db"), ()),
     "csv":                    ((".csv",), ()),
     "html":                   ((".html", ".htm"), ()),
+}
+
+#: subject -> filename PREFIXES. A kind whose identity is a naming convention, not a word in a path.
+#:
+#: THE DEFECT THIS CLOSES, MEASURED 2026-11-13, AND IT WAS LIVE ON MAIN.
+#:
+#: `python.test.corpus` used to be the substring kind `("test",)`, and `_matches_kind` tests
+#: substrings against the whole RELATIVE PATH. Two loosenesses compound: "test" is read out of the
+#: middle of an ordinary word, and it is read out of a directory name, so every `.py` under a
+#: directory merely NAMED `tests` announced itself as a test module.
+#:
+#: Measured on this tree: 2662 files matched the substring rule and 2608 are genuine `test_*.py`
+#: modules, so **54 files (2%) announced a test corpus that is not one** -- 29 via a directory
+#: component and 25 via the filename. The filename cases show why this is not pedantry:
+#:
+#:     canonical/runtime/attested_state_v1.py                     "at-TEST-ed"
+#:     canonical/runtime/bound_capabilities/python_test_audit.py  a capability ABOUT tests
+#:     canonical/tools/seeded_faults_tests_as_the_judge_v1.py     a probe, not a test
+#:
+#: The consequence is not cosmetic. `python.test.corpus.available` is a declared precondition of
+#: test-guided capabilities (`python.fault.localize.dynamic.dataflow.v1`,
+#: `python.patch.search.test_guided.ast.v1`), so a directory with no tests at all could ground a
+#: capability that then has nothing to be guided by. And it made `canonical/tools` -- which contains
+#: zero `test_*.py` modules -- sense as IDENTICAL to `canonical/tests`, which is exactly the
+#: equal-facts wall `applicability_v1.vocabulary_gap` was written to witness.
+#:
+#: It was caught by a check that was already in the tree and had been red for about three hours:
+#: `test_the_real_tree_separation_is_backed_by_real_test_files` compares the sensor's verdict to the
+#: count of genuine `test_*.py` modules, and its docstring says what divergence means -- "the learned
+#: requirement is unsound on the real tree". The labels were not stale; the sensor was.
+#:
+#: `*_test.py` is deliberately NOT accepted. pytest collects it, but the tree's own check defines a
+#: genuine test module as `test_*.py`, and accepting both would make the sensor and its check
+#: disagree about any directory that has only the suffix form. This tree has none, so the narrower
+#: rule loses nothing here and cannot silently reintroduce the divergence.
+_FILE_NAME_PREFIXES = {
+    "python.test.corpus": ("test_",),
 }
 
 # subject -> executable that must exist on PATH
@@ -361,7 +400,8 @@ def _matching_files(root: Path, subject: str) -> list[str]:
     if hit is not None:
         return hit
     suffixes, substrings = spec
-    matched = [rel for rel in idx if _matches_kind(rel, suffixes, substrings)]
+    prefixes = _FILE_NAME_PREFIXES.get(subject, ())
+    matched = [rel for rel in idx if _matches_kind(rel, suffixes, substrings, prefixes)]
     if len(_MATCH_CACHE) > 1024:
         _MATCH_CACHE.clear()
     _MATCH_CACHE[ck] = matched
@@ -405,12 +445,20 @@ def _subjects(effect: str) -> list[str]:
     return out
 
 
-def _matches_kind(rel: str, suffixes, substrings) -> bool:
+def _matches_kind(rel: str, suffixes, substrings, name_prefixes=()) -> bool:
+    """Does this relative path denote the kind? Suffix and substring read the whole path.
+
+    `name_prefixes` reads the FILENAME only, and it exists because a naming convention is not a
+    substring: see `_FILE_NAME_PREFIXES` for the measured defect that made 54 non-test files on this
+    tree announce a test corpus, one of them because "attested" contains "test".
+    """
     low = rel.lower()
     name = low.rsplit("/", 1)[-1]
     if suffixes and not any(name.endswith(s) for s in suffixes):
         return False
     if substrings and not any(s in low for s in substrings):
+        return False
+    if name_prefixes and not any(name.startswith(p) for p in name_prefixes):
         return False
     return True
 
@@ -420,8 +468,9 @@ def _decide_file(subject, goal_paths, root):
     if spec is None:
         return None
     suffixes, substrings = spec
+    prefixes = _FILE_NAME_PREFIXES.get(subject, ())
     for rel in goal_paths:
-        if _matches_kind(rel, suffixes, substrings):
+        if _matches_kind(rel, suffixes, substrings, prefixes):
             return {"true": True, "how": "goal_path", "evidence": rel}
     matched = _matching_files(root, subject)
     if matched:

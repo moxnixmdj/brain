@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 447,
+  "knowledge_documents": 448,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6844,
+  "research_index_records": 6846,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "04995268b7f6161d965fad6ab3be34b2c7eec93bffa5b57474476ae518faf1f5"
+  "value": "06f818bb9090a8267b360da7bfa7f66e8ad6b7ebc2221aa5ccb2e53ac3202987"
  },
  "engines": [
   {
@@ -64002,6 +64002,83 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 15135,
+   "headings": [
+    "The wall is in the vocabulary, and it can now be proved",
+    "0. The owner's question, answered",
+    "1. The certificate: when experience provably cannot teach",
+    "2. A correction to something I shipped in Round G",
+    "3. A live vocabulary defect on main, and the trap inside its repair",
+    "4. What a vocabulary repair for the real corpus would cost",
+    "5. What this does NOT claim",
+    "6. A red guard on main that this round did not touch, reported not fixed",
+    "7. Verification",
+    "8. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.md",
+   "sha256": "42eccaf9b0f5a50158a7d1ea46a4a3ac5a867f54604288d5bc824fe180f54ce3",
+   "summary": "**Date:** 2026-11-13 **Branch:** `arena/15c3bce3-brain`, base main `e5be642e` **Authority:** NONE — producer-run measurement in one sandbox, not independent verification **Modules:** `canonical/runtime/applicability_v1.py` (`insufficiency_witness`), `canonical/runtime/world_probe_v1.py` (`_FILE_NAME_PREFIXES`), `canonical/runtime/fact_entailment_v1.py` (three-component specs) **Instrument:** `cano",
+   "terms": {
+    "12": 8,
+    "all": 6,
+    "any": 6,
+    "both": 7,
+    "cannot": 5,
+    "canonical": 26,
+    "certificate": 9,
+    "corpus": 10,
+    "directory": 6,
+    "every": 12,
+    "evidence": 6,
+    "fact": 5,
+    "facts": 11,
+    "failure": 9,
+    "false": 7,
+    "fires": 5,
+    "guard": 5,
+    "kind": 8,
+    "learn": 7,
+    "main": 6,
+    "modules": 5,
+    "more": 5,
+    "no": 18,
+    "none": 6,
+    "not": 26,
+    "nothing": 8,
+    "now": 9,
+    "one": 12,
+    "only": 6,
+    "own": 10,
+    "passed": 5,
+    "pinned": 6,
+    "real": 12,
+    "requirement": 6,
+    "round": 14,
+    "same": 7,
+    "set": 6,
+    "sets": 6,
+    "so": 15,
+    "success": 8,
+    "test": 15,
+    "tests": 20,
+    "tools": 8,
+    "tree": 11,
+    "true": 8,
+    "two": 9,
+    "vocabulary": 7,
+    "would": 7
+   },
+   "title": "The wall is in the vocabulary, and it can now be proved",
+   "title_terms": [
+    "now",
+    "proved",
+    "vocabulary",
+    "wall"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 12120,
    "headings": [
     "The wall was not the wall: nine rounds counted a refusal nobody had ever lifted",
@@ -79752,10 +79829,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1249,
+  "included_source_count": 1250,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "381acf5588603af96801fe21e3f5f9307cb0ec0d87e38112bf0da2dc4215567e"
+  "source_tree_digest": "2c7f640b08c3ebf214359ece9b3ab3db04772fa2639585d4bc8d3e45f41b1e75"
  },
  "research_index": [
   {
@@ -168977,6 +169054,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_INSUFFICIENCY_CERTIFICATE_VERIFICATION_V1",
+   "sha256": "0d18c2fdfceed90734fff36a5293d1afb98b6e1118bcacf36a968c0e4129f262",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "certificate": 1,
+    "insufficiency": 1,
+    "now": 1,
+    "proved": 1,
+    "v1": 1,
+    "vocabulary": 1,
+    "wall": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-13",
    "id": "research:canonical/verification/ISSUE_3739_CLAIM_SCOPED_REGISTRY_ALREADY_REPAIRED_VERIFY_20261013_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -239773,6 +239871,30 @@
    }
   },
   {
+   "action_id": "THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7a7d2977045b2e238d593308790330e8ebdaaecc045fe4397f0237cd0f335c91",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "insufficiency_witness_ships_and_is_verified_exhaustively_against_the_learner_over_2517_evidence_sets_with_zero_disagreements_and_against_the_older_witness_over_820_equal_facts_cases_with_zero_disagreements__it_fires_on_the_pinned_real_code_repair_corpus_where_vocabulary_gap_returns_none_and_names_the_two_facts_all_successes_share_as_the_corpus_constants__and_the_sensor_repair_turns_the_real_input_space_census_from_inconsistent_with_zero_survivors_into_identified_with_one_survivor_python_test_corpus_available_which_admits_every_real_success_and_refuses_every_real_failure__main_goes_from_three_red_tests_to_one_pre_existing_unrelated_red_guard": 1,
+    "now": 1,
+    "proved": 1,
+    "ship_the_general_certificate__with_a_the_intersection_of_all_successes_fact_sets_no_consistent_conjunction_exists_iff_a_is_a_subset_of_some_failure_which_is_decidable_in_evidence_many_set_comparisons_where_learn_enumerates_two_to_the_a_subsets_and_so_also_decides_cases_where_learn_must_answer_bounded__then_repair_the_vocabulary_defect_it_exposes_by_deciding_python_test_corpus_with_the_test_filename_prefix_rather_than_a_path_substring_and_teaching_fact_entailment_the_third_spec_component_so_narrowing_the_sensor_does_not_silently_declare_a_test_corpus_equivalent_to_any_python_source": 1,
+    "the_tree_can_prove_nothing_about_when_experience_cannot_teach__applicability_v1_learn_answers_inconsistent_on_the_pinned_real_code_repair_corpus_while_vocabulary_gap_the_instrument_built_to_explain_that_refusal_returns_none_because_it_fires_only_when_two_observations_have_equal_fact_sets__so_the_tree_says_nothing_can_be_learned_here_and_nothing_is_wrong_at_the_same_time": 1,
+    "the_wall_is_in_the_vocabulary_and_it_can_now_be_proved_20261113_v1": 1,
+    "v1": 1,
+    "vocabulary": 1,
+    "wall": 1
+   }
+  },
+  {
    "action_id": "THE_WALL_WAS_NOT_THE_WALL_20261112_V1",
    "capability": false,
    "date": "2026-11-12",
@@ -241427,7 +241549,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHAT_INSTANT_LEARNING_CANNOT_DO_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d46f4bf8333084265f1fa0c61493553bf5b9892b17e35dd5e4b167eacb14a722",
+   "sha256": "077854ca4e1e60df1a0acaa507d6b5a79165728ea0f81bcd1f57eae82cd5fae7",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -245464,9 +245586,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/applicability_v1.py",
-   "sha256": "dc7af8ef5922666bfc4c642563a64fef9058bd95269a850dd481cdf86bc76028",
+   "sha256": "e81a2ae3eadbe676aea0e5a0fad86f5ff17a37dab9be6ab9221daec7c8de0233",
    "summary": "Learn WHEN a remembered plan applies, from outcomes in context.",
-   "symbol_count": 10,
+   "symbol_count": 11,
    "symbols": [
     "Boundary",
     "admits",
@@ -245474,6 +245596,7 @@
     "candidate_requirements",
     "conjunction",
     "explains_failure",
+    "insufficiency_witness",
     "learn",
     "normalise_state",
     "survivors",
@@ -245489,6 +245612,7 @@
     "conjunction": 1,
     "context": 1,
     "explains_failure": 1,
+    "insufficiency_witness": 1,
     "learn": 2,
     "normalise_state": 1,
     "outcomes": 1,
@@ -266355,7 +266479,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/fact_entailment_v1.py",
-   "sha256": "775cfcf56e3f292c90e9626527b459cff547215386f10d9434924b12e1c05ae4",
+   "sha256": "bb978bfcbd7959ebf6b4d0455e0de39920e4a2b1c392a62083af05578c8be84e",
    "summary": "Which observed facts are ALREADY IMPLIED by others, derived from the sensor's own definitions.",
    "symbol_count": 11,
    "symbols": [
@@ -317788,7 +317912,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_probe_v1.py",
-   "sha256": "b1ec1334a5d5fbe43322a147485a9c6012392ad9d6d5867dce700cb74b34af8a",
+   "sha256": "2f31e4ca1366986f40767fc0c3b7da9c31fda27aca79012b0cbd05b1ae506d4c",
    "summary": "Perception: turn the machine's actual state into established facts.",
    "symbol_count": 25,
    "symbols": [

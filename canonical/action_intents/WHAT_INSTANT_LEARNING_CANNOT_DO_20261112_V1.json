@@ -37,7 +37,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A VERIFIED_BOUND_CAPABILITY with requires:[] and the highest keyword score was unreachable by every sentence that named it, and act() reported the failure as AMBIGUOUS with only zero-score forged survivors -- naming the routing layer when the cause was binding.",
- "canonical_base_commit": "2ef8a72597d7efa791d1d1d2b8f5c87fde0a7ef8",
+ "canonical_base_commit": "c76fde1135e2da82030720ad5d4923ec1cdc2729",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -69,7 +69,7 @@
  "next_step": "Make VERIFIED_ACTION require an effect about the named object -- the awk case proves returncode==0 is not an answer -- then teach the parser to balance quotes, then re-run the census separating coverage gaps from binding gaps.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "recursive_obs": {
-  "canonical_base_commit": "2ef8a72597d7efa791d1d1d2b8f5c87fde0a7ef8",
+  "canonical_base_commit": "c76fde1135e2da82030720ad5d4923ec1cdc2729",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "ADD_A_NETWORK_PERMISSION -- a premise is not an authorisation",
