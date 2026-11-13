@@ -1,6 +1,6 @@
 {
  "schema": "PROJECT_BRAIN_CONFINED_EFFECT_DECLARATIONS_V1",
- "date": "2026-11-13",
+ "date": "2026-11-12",
  "authority": "NONE__REVIEWED_DECLARATION_DATA_EACH_ROW_NAMES_ITS_VERIFIED_EFFECT_ARGUMENTS",
  "contract": "A row admits a capability to the confined dispatch route ONLY: the adapter runs inside a disposable clone of the host, the declared effect arguments' bound values must exist as files inside the worktree after the run (sha256 receipt), the host git status must be byte-identical, and the door's expectation check applies unchanged. No row here weakens any refusal for goals that do not compile and bind.",
  "capabilities": {
@@ -69,6 +69,13 @@
     "output_path"
    ],
    "budget_s": 600
+  },
+  "code.index.tree_sitter.incremental.v1": {
+   "effect_args": [
+    "output_path"
+   ],
+   "budget_s": 600,
+   "note": "verified bound capability (independent test canonical.tests.test_code_tree_sitter_swe_v1); added 2026-11-13 after review"
   },
   "python.software.repair.apply.verified.v1": {
    "effect_args": [
