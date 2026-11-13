@@ -112,14 +112,60 @@ def test_the_crude_operator_path_over_proposes_and_cannot_accept(shipped, fresh_
     assert not (public & {"apply", "accept", "commit", "store", "save"}), public
 
 
-def test_most_of_the_shipped_corpus_cannot_generalize(shipped):
-    """2 of 5 rules are operator-representable; the rest replay their skeleton and stop.
+def test_the_generalization_ceiling_is_computed_not_enumerated(shipped):
+    """3 of 5 shipped rules are operator-representable; the 2 that are not are not operator lessons.
 
-    This is the hypothesis-space ceiling, measured on the system's own memory rather than on a
-    synthetic lesson.
+    This number was 2 until `GENERALIZABLE` stopped being the authority on it. The rust lesson
+    `for i in 0..=v.len()` -> `for i in 0..v.len()` differs by exactly ONE operator token with the
+    surrounding shape identical modulo holes, and was refused only because `..=` and `..` were absent
+    from a 16-entry list nobody derived -- so a real lesson in the shipped memory was unreachable by
+    the one module that widens lessons past their skeleton.
+
+    The ceiling is a measurement of the corpus, so it moves when a refusal turns out to be an
+    enumeration rather than a property. Each rule's REASON is pinned below so the count cannot move
+    again without the reason moving with it.
     """
-    generalising = [e for e in shipped["rules"] if gen.derive_operator_swap(e["rule"])]
-    replay_only = len(shipped["rules"]) - len(generalising)
+    generalising = {(e["language"], s["from"], s["to"])
+                    for e in shipped["rules"]
+                    for s in [gen.derive_operator_swap(e["rule"])] if s}
     assert len(shipped["rules"]) == 5
-    assert len(generalising) == 2
-    assert replay_only == 3
+    assert generalising == {("python", "+", "-"), ("python", "-", "+"), ("rust", "..=", "..")}
+
+    # The two that remain are not operator lessons at all: their pattern and replacement differ in
+    # LENGTH (a declaration becomes an initialisation, a member access becomes an optional chain with
+    # a default), so there is no single operator position to swap and `derive_operator_swap`'s own
+    # structural criterion refuses them. Widening the list again must not pull them in.
+    replay_only = [e for e in shipped["rules"] if not gen.derive_operator_swap(e["rule"])]
+    assert sorted(e["language"] for e in replay_only) == ["go", "typescript"]
+    for e in replay_only:
+        pat = [t for t in e["rule"]["pattern_tokens"] if t[0] != "ws"]
+        rep = [t for t in e["rule"]["replacement_tokens"] if t[0] != "ws"]
+        assert len(pat) != len(rep), e["language"]
+        assert gen.explain_rule(e["rule"])["reason"] == "NOT_A_SINGLE_OPERATOR_DIFFERENCE"
+
+
+def test_widening_the_list_did_not_make_it_decorative(shipped):
+    """The set still narrows: a single-operator difference outside it is refused.
+
+    Two-sided control on the change above. Unblocking `..=`/`..` had to widen what may be proposed
+    without turning `GENERALIZABLE` into a formality -- if any single-token operator difference were
+    admitted, the proposal space would be the whole operator vocabulary and the list would measure
+    nothing. `<<=` is an operator the tokenizer classifies as one, differs by exactly one position,
+    and is still refused.
+    """
+    not_listed = {
+        "language": "python",
+        "pattern_tokens": [["hole_id", "?a"], ["ws", " "], ["op", "<<="], ["ws", " "], ["num", "1"]],
+        "replacement_tokens": [["hole_id", "?a"], ["ws", " "], ["op", ">>="], ["ws", " "], ["num", "1"]],
+    }
+    assert "<<=" not in gen.GENERALIZABLE
+    assert gen.derive_operator_swap(not_listed) is None
+    assert gen.derive_swap_family(not_listed) == []
+    assert list(gen.propose_operator_swaps("a <<= 1\n", not_listed)) == []
+
+    # And the rust lesson that WAS unblocked reaches a file it was never taught on.
+    rust = next(e["rule"] for e in shipped["rules"] if e["language"] == "rust")
+    victim = "fn total(v: &Vec<i32>) -> usize {\n    for i in 0..=v.len() {\n        use_(i);\n    }\n    0\n}\n"
+    got = list(gen.propose_operator_swaps(victim, rust, language="rust"))
+    assert len(got) == 1
+    assert "0..v.len()" in got[0] and "0..=v.len()" not in got[0]
