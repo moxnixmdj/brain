@@ -176,8 +176,231 @@
    "affected_layers_only_on_revalidation": true
   },
   "route_frontier": {
-   "discovery_required": false,
-   "not_applicable_reason": "REAL_CAPABILITY_ACQUISITION_WITHIN_THE_OWNED_CONFINED_SEAM__ONE_REVIEWED_DECLARATION_ROW__NO_NEW_EXTERNAL_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED__DISCOVERY_NOT_RUN_FOR_THIS_BOUNDED_ADMISSION"
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-13T03:05:52Z",
+   "max_age_hours": 24,
+   "incumbent_route": "DOOR_REFUSAL_CANNOT_BE_ADMITTED__BOUNDARY_REFUSES_EXECUTION_TRUE__NO_REVIEWED_DECLARATION_ROW__COMPILE_LAYER_WALL_STILL_UNMEASURED",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "boundary.refuses_execution returns True only for python.software.repair.apply.verified.v1 among the 2026-11-13 confinement-refusal set; file.copy.v1, file.rename.v1, tree_sitter.python.symbols.v1, evidence.oracle.v1 all return False (inert rows, removed)",
+     "confined dispatch of the owned adapter under this tree: RAN on a disposable clone with fixtures committed inside the clone only, host git status byte-identical, sha256 receipt attached; a synthetic no-repair goal fails closed (CONFINED_RUN_DID_NOT_PRODUCE_A_RESULT) by design",
+     "test_confined_dispatch_v1.py PC1 pins file.copy.v1 absent from the declarations; the seam tests pass 5/5 with the new row",
+     "the corpus repair sentence still compiles with compiled_capability_id null; this row is the prerequisite for the compile-bind Links, not a demo that any realistic goal executes"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Microsoft Linux and Open Source Blog (techcommunity.microsoft.com, 2026-06-05): the Agent Governance Toolkit runs agent-generated code in Azure Container App sandboxes under a deny-by-default policy (network_default deny, subprocess/pip-deny rules, tool_allowlist) with per-step receipts — the governed-admission shape Brain implements locally in the confined dispatch seam; https://techcommunity.microsoft.com/blog/linuxandopensourceblog/govern-ai-agents-using-agent-governance-toolkit-and-azure-container-app-sandboxe/4526011",
+     "The Terminal-Bench team (Stanford, Laude Institute, Harbor): Terminal-Bench 4.0 released 2026-08-28 with 66 tasks; per the 2026-09-28 Cyborb leaderboard report tbench.ai, top public score 58.2% (GPT-6 Astra) — shows terminal-agent admission quality is still frontier-limited, not sandbox-limited; https://cyborb.ai/blog/coding-agent-leaderboard",
+     "Scale AI SWE-bench Pro: 731 public / 276 private / 858 held-out tasks, public leaderboard frontier 61.5% (Muse Spark 1.1) as of its 2026-07-09 entry; https://cyborb.ai/blog/coding-agent-leaderboard"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "python stdlib only: importlib-based adapter loading and subprocess shell=False in canonical/runtime/confined_dispatch_v1.py; the admissions surface is versioned JSON; no external package, crate, or model was added by this change (seam tests re-run today: 5/5)",
+     "microsoft agt-sandbox exists on PyPI per the Microsoft post above; it was NOT required and NOT adopted — the owned substrate already implements the deny-by-default shape with effect receipts at zero incremental cost"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "bex.co (2026-09-25): Rubrik's governed MCP path uses per-call scoped tokens, per-agent tool allowlists, policy-gated destructive calls, and full action trails — allowlisting is enforced where the call executes, not in the prompt; https://bex.co/blog/2026/09/25/rubrik-governed-mcp-tools-infra-pattern",
+     "dev.to/chunxiaoxx (2026-04-10): 2026 production guidance — native tool calling, observability, and verifiable execution receipts; an agent without proof of action is not production-ready; https://dev.to/chunxiaoxx/building-production-ai-agents-in-2026-native-tool-calling-observability-and-verifiable-execution-4dhe",
+     "pipelab.org (2026-10-14): Landlock and seccomp are free kernel primitives in modern Linux (filesystem reach and syscall filtering); Pipelock uses Landlock internally — the same layer Linux affords the owned confinement substrate",
+     "getmaxim.ai MCP checklist (2026-10-13) and contextstudios.ai (2026-10-09): deny-by-default is the 2026 production pattern; unrestricted agents vs sandboxed agents; sandbox boundary is infrastructure-asserted, not prompt-asserted"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "AI agent tool execution sandbox governed receipts production 2026 confinement"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "MCP tool allowlist governed agent execution write approval enterprise 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "syscall allowlist seccomp gVisor Firecracker agent code execution sandbox comparison 2026"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "coding agent benchmarks November 2026 Terminal-Bench 4.0 SWE-bench Pro releases"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+   "challenger_routes": [
+    {
+     "route": "ADOPT_A_MANAGED_SANDBOX_PRODUCT_E2B_DAYTONA_MODAL",
+     "evidence": [
+      "E2B ~150ms microVM boot, Firecracker boundary; Daytona sysbox/Kata; Modal gVisor; subscription/compute spend; vendor comparison BLAxel 2026-09-02 and spheron 2026-11-02 put all three behind per-unit cost",
+      "brain runs at incremental_spend_usd 0 and already owns a disposable-clone confinement substrate measured with host byte-identity"
+     ],
+     "qualification_evidence": [
+      "external spend and vendor credentials are required for every run; effect_args receipts would not be produced by the vendor — Brain's ruler (sha256 effect receipts inside the worktree, host byte-identical) is not offered by any listed product",
+      "subprocess confinement in Brain is local and free; no product substitutes for the bound adapter's verified effect"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "BROAD_WEB_OR_COMMUNITY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Similar isolation class, weaker effect verification",
+      "CAPABILITY_STRENGTH": "Broader isolation, narrower verified-effect contract",
+      "WALL_CLOCK": "~0.1-0.5s sandbox boot per task vs milliseconds locally",
+      "INCREMENTAL_COST": "$0.05-0.14 per vCPU-hr plus subscriptions vs 0 USD",
+      "RELIABILITY": "Network/vendor dependency on every task vs none",
+      "VERIFIABILITY": "Vendor logs vs local sha256 receipts checked by the door"
+     }
+    },
+    {
+     "route": "MCP_GATEWAY_WITH_LLM_POLICY_JUDGE_AT_ADMISSION",
+     "evidence": [
+      "MCP gateway products (Bifrost, Docker MCP Gateway, Pipelock) are the production pattern for external tools; getmaxim.ai checklist gates with allowlists and approval for consequential calls",
+      "an LLM judge at the admission boundary would be nondeterministic and costly at every dispatch"
+     ],
+     "qualification_evidence": [
+      "a model in the admission path violates the owned substrate law (no model in the producer/admission path); fail-closed requires a deterministic rereadable check; receipts cannot be re-verified offline",
+      "the boundary refusal here is a predicate on (cid, entry, goal) — adding a judge adds a failure mode and a per-call spend with no capability gain over one reviewed row"
+     ],
+     "qualification_evidence_classes": [
+      "BROAD_WEB_OR_COMMUNITY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Nondeterministic admission vs deterministic predicate",
+      "CAPABILITY_STRENGTH": "Same set of allowed capabilities, weaker guarantees",
+      "WALL_CLOCK": "+ model call latency per dispatch",
+      "INCREMENTAL_COST": "Per-call model spend vs 0 USD",
+      "RELIABILITY": "Judge drift and availability vs no dependency",
+      "VERIFIABILITY": "Opaque judge verdicts vs rereadable declarations and receipts"
+     }
+    },
+    {
+     "route": "SYSCALL_ALLOWLIST_SUBSTRATE_ALONE_WITHOUT_THE_REVIEWED_DECLARATION",
+     "evidence": [
+      "the owned substrate runs adapters under a syscall allowlist with clone isolation; Landlock/seccomp are free kernel primitives (pipelab.org 2026-10-14)",
+      "measured today: without the row, the door refuses dispatch of repair.apply.verified.v1 with FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
+     ],
+     "qualification_evidence": [
+      "boundary.refuses_execution returns True for this capability by construction, so the substrate alone cannot serve it behind the door; the declaration is the reviewed contract the ruler checks (effect_args output_path, budget 600s)",
+      "a syscall allowlist asserts nothing about verified effect; the declaration binds the effect argument and the receipt ruler"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Substrate fails closed but cannot admit the refused capability",
+      "CAPABILITY_STRENGTH": "Zero new admissible capability",
+      "WALL_CLOCK": "Same",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Correct refusal, still stuck on the named blocker",
+      "VERIFIABILITY": "Same ruler applies but is never reached"
+     }
+    },
+    {
+     "route": "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+     "evidence": [
+      "one reviewed additive row in CONFINED_EFFECT_DECLARATIONS_V1.json; refuses_execution is the load-bearing predicate; 11 pre-existing rows already serve the substrate",
+      "measured on this host today: direct confined dispatch RAN with host byte-identical and a sha256 receipt attached; seam tests 5/5; bridge+front-door 12/12"
+     ],
+     "qualification_evidence": [
+      "smallest change to the exact measured blocker; inert candidates removed (file.copy pinned by PC1); unified verify 33/33 PASS on the recompiled artifact",
+      "2026 production pattern confirmed by independent 2026 sources (Microsoft techcommunity, bex.co, dev.to, getmaxim.ai): governed, deny-by-default admission with verifiable receipts is the shipping shape — implemented here locally and free of vendor or model dependence"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed unchanged; refusal removal limited to the one refused capability",
+      "CAPABILITY_STRENGTH": "+1 admitted capability, no other door crossed",
+      "WALL_CLOCK": "milliseconds at admission; adapter itself runs under 600s budget",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Pinned by PC1-PC5 seam tests and byte-identical host control",
+      "VERIFIABILITY": "sha256 effect receipt inside the worktree + reviewed declaration diff"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-13T03:05:52Z",
+    "max_age_hours": 2,
+    "selected_route": "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the seam tests, bridge/front-door suites and unified verifier execute in this sandbox at the current base today (5/5, 12/12, 33/33)"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical/runtime/confined_dispatch_v1.py (owned confinement substrate)",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the seam tests (PC1-PC5) run the real adapter against this repository with a byte-identical host, 5/5 today"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/runtime/confined_dispatch_v1.py",
+      "detail": "the confined dispatch seam under measurement"
+     },
+     {
+      "dependency": "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json (owned reviewed admissions surface)",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "12 rows present; the new row declares effect_args [output_path] with a 600s budget; direct confined dispatch verified today on a disposable clone"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "path": "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+      "detail": "one additive reviewed row; the four inert candidates were removed"
+     }
+    ]
+   }
   }
  },
  "v22_prewrite_admission": {
