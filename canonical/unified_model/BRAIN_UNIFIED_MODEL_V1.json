@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 424,
+  "knowledge_documents": 425,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6824,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f7922e3f80ea9278264440b197ff8065ff43c525d3359434c76f52b9d564cab9"
+  "value": "396f5d1ed8b4df49b460b3bba0e860f29cadd096112ad15a42a7977c339ed983"
  },
  "engines": [
   {
@@ -46552,6 +46552,88 @@
     "loop",
     "probe",
     "routing"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 8074,
+   "headings": [
+    "Complete Solution Summary: Self-Reflective Learning System",
+    "The Journey: From Pattern Matching to Genuine Understanding",
+    "The Original Problem (Session Start)",
+    "What We Initially Had (Before Your Pushback)",
+    "Your Insight That Changed Everything",
+    "The Breakthrough: Self-Reflective Learning System (PR #6830)",
+    "The Final Integration (PR #6835)",
+    "What We've Achieved",
+    "The Answer to Your Original Question",
+    "The Revolutionary Impact",
+    "The Merged PRs",
+    "The Key Insight",
+    "Conclusion"
+   ],
+   "kind": "DOCUMENT",
+   "path": "COMPLETE_SOLUTION_SUMMARY.md",
+   "sha256": "1900869e3e5df340b9b6e7f610684e43e5f38bd534829758b2ce64f0e077a74e",
+   "summary": "You asked a fundamental question that challenged everything we thought we knew:",
+   "terms": {
+    "2026": 5,
+    "abstract": 11,
+    "across": 4,
+    "agent": 5,
+    "any": 4,
+    "apply": 7,
+    "cannot": 4,
+    "causal": 11,
+    "cause-effect": 4,
+    "concepts": 6,
+    "conceptual": 5,
+    "cross-domain": 4,
+    "did": 4,
+    "domains": 6,
+    "execution": 10,
+    "experience": 7,
+    "extract": 4,
+    "failed": 4,
+    "genuine": 5,
+    "just": 4,
+    "knowledge": 11,
+    "learn": 5,
+    "learning": 19,
+    "matching": 5,
+    "merged": 4,
+    "model": 5,
+    "models": 5,
+    "not": 4,
+    "once": 4,
+    "pattern": 5,
+    "pr": 7,
+    "principles": 9,
+    "problem": 4,
+    "reasoning": 7,
+    "reflection": 6,
+    "right": 5,
+    "self-reflection": 8,
+    "self-reflective": 7,
+    "system": 12,
+    "task": 14,
+    "tasks": 7,
+    "through": 7,
+    "transfer": 8,
+    "transferable": 5,
+    "understand": 4,
+    "understanding": 16,
+    "way": 4,
+    "were": 7
+   },
+   "title": "Complete Solution Summary: Self-Reflective Learning System",
+   "title_terms": [
+    "complete",
+    "learning",
+    "self-reflective",
+    "solution",
+    "summary",
+    "system"
    ]
   },
   {
@@ -77869,10 +77951,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1226,
+  "included_source_count": 1227,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "77fd54ea14addab22c54369a77ecef2e6f2c211eb095690b17dee625d0e41b7f"
+  "source_tree_digest": "79e43b32d78162dd4a822b867406b120751a10b76a5906a6730a62421a73b4c2"
  },
  "research_index": [
   {
@@ -235278,7 +235360,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "26d225d3fb0f20b488f2082d6b94a827429ca56c11624266342d0bdec96e0048",
+   "sha256": "8ad765a6fbd0b5d8deeeb3a94bc7334e0980930750a68cc7a06327275a4231a5",
    "status": "",
    "terms": {
     "20261112": 1,
