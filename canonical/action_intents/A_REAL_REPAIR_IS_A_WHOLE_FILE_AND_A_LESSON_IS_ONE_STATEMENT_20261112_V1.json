@@ -39,7 +39,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PRODUCTION_TEACHING_PATH_RECEIVES_TWO_WHOLE_FILES_SO_ANTI_UNIFICATION_YIELDS_THIRTEEN_HOLES_OVER_NINETY_NINE_TOKENS_AND_DERIVE_OPERATOR_SWAP_CORRECTLY_REFUSES__THE_STORED_ACTIVE_RULE_PROPOSES_ZERO_CANDIDATES_ON_EVERY_REAL_SOURCE_SO_ONE_REAL_EXPERIENCE_BUYS_A_PERMANENT_NO_OP",
- "canonical_base_commit": "8dfc1f46d2d9db30b877d9585da6fa6c8f027c6d",
+ "canonical_base_commit": "97e3deb1669286b8dd9739642a3e0033d0308e55",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -79,7 +79,7 @@
   "what_a_success_teaches_20261112.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "8dfc1f46d2d9db30b877d9585da6fa6c8f027c6d",
+  "canonical_base_commit": "97e3deb1669286b8dd9739642a3e0033d0308e55",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "EDITING_CRYSTALLIZE_CODE_FIX_TO_LOCALIZE_INTERNALLY__REJECTED__TEACHING_A_LOCALIZED_PAIR_WHILE_VERIFYING_A_WHOLE_FILE_WOULD_BREAK_verify_rule_on_mutated_twin_AND_iter_crystallized_code_rule_candidates_WHICH_ASSUME_THE_RULE_REPRODUCES_AFTER_SNIPPET_FROM_BEFORE_SNIPPET__A_HALF_APPLIED_CHANGE_TO_A_PRODUCTION_MODULE_WITH_SIX_CALL_SITES",
@@ -358,7 +358,7 @@
      "route": "EMIT_A_PLACEHOLDER_FACT_FOR_AN_OFFSET_OUTSIDE_ANY_COMPARISON"
     }
    ],
-   "checked_at_utc": "2026-11-13T03:00:23Z",
+   "checked_at_utc": "2026-11-13T03:09:30Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -398,7 +398,7 @@
    "selected_route": "LOCALIZE_THE_REPAIR_TO_THE_SMALLEST_AST_STATEMENT_COVERING_EACH_CHANGED_REGION__DERIVE_THE_OPERATOR_LESSON_FROM_THE_STATEMENT_PAIR_RATHER_THAN_THE_FILE_PAIR__JUDGE_EVERY_REAL_TARGET_BY_ITS_OWN_UNMODIFIED_UPSTREAM_TEST_BODY_THROUGH_PROJECT_TEST_ORACLE__STATE_THE_CANDIDATE_BUDGET_IN_EVERY_VERDICT_THAT_DEPENDS_ON_IT__TREAT_ZERO_TESTS_RUN_AS_UNVERIFIABLE_RATHER_THAN_AS_A_FAILURE__AND_REFUSE_BY_NAME_WHEN_NO_REGION_IS_A_SINGLE_OPERATOR_DIFFERENCE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-13T03:00:23Z",
+    "checked_at_utc": "2026-11-13T03:09:30Z",
     "execution_dependencies": [
      {
       "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
@@ -525,7 +525,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-11-13T03:00:23Z",
+  "checked_at_utc": "2026-11-13T03:09:30Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
