@@ -253,6 +253,36 @@ def _word_tokens(text):
             if len(t) >= 3}
 
 
+SHELL_ROWS = frozenset({
+    "shell.command.run", "cli_command.run", "shell.run", "command.run",
+})
+
+
+def _rows_that_can_run_a_stated_command(registry):
+    """Rows whose adapter actually executes an argv this module bound.
+
+    A sentence that STATES a command line has already said what should run. The
+    only question left is which row can run it, and exactly one shape of row can:
+    the ones whose adapter takes argv and hands it to a process. Everything else
+    -- a git bisect, an eight-stage pipeline, a diff security gate -- would be
+    answering a different request while quoting this one's words.
+
+    Derived, not listed: a row qualifies when its action template declares an
+    `argv` argument, which is the honest structural statement that this row
+    consumes a command line.
+    """
+    out = set()
+    for cid, entry in (registry or {}).items():
+        if str(cid) in SHELL_ROWS:
+            out.add(str(cid))
+            continue
+        template = entry.get("action_template") or {}
+        args = template.get("args") if isinstance(template, dict) else None
+        if isinstance(args, dict) and "argv" in args:
+            out.add(str(cid))
+    return out
+
+
 def keyword_candidates(goal, registry, k=8):
     """Route on the words the grounder is structurally blind to.
 
@@ -280,6 +310,28 @@ def keyword_candidates(goal, registry, k=8):
         if hits:
             scored.append((len(hits), str(cid)))
     scored.sort(key=lambda t: (-t[0], t[1]))
+    # A STATED COMMAND NARROWS THE FIELD TO ROWS THAT CAN RUN ONE.
+    #
+    # "run the shell command ls | head -2" states a command line (the pipeline is
+    # then refused by `extract_argv`, which cannot honour it without a shell). The
+    # word "head" also happens to be a keyword of
+    # `git.history.bisect_regression.v1`, which requires nothing -- so when the
+    # stated command was refused, that row survived and was reported as
+    # VERIFIED_ACTION. Measured 2026-11-12: a request for a shell pipeline was
+    # answered by bisecting this repository's history and calling it verified.
+    #
+    # Score cannot fix that, because the row is not wrong about the words; it is
+    # wrong about the job. Once the sentence has stated a command, only a row that
+    # executes commands is eligible. Nothing is invented: if no such row is a
+    # candidate the list is empty and the ordinary refusal stands.
+    try:
+        from canonical.runtime.composer_route_v1 import states_a_command_line as _sc
+        _states_command = bool(_sc(goal))
+    except Exception:  # noqa: BLE001 - no parser, no narrowing
+        _states_command = False
+    if _states_command:
+        runnable = _rows_that_can_run_a_stated_command(registry)
+        scored = [row for row in scored if row[1] in runnable]
     return [{"capability_id": cid, "combined_score": float(hits) * 10.0}
             for hits, cid in scored[:k]]
 

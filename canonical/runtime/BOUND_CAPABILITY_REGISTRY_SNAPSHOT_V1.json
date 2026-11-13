@@ -9741,14 +9741,16 @@
     "shell.command.run": {
       "action_template": {
         "args": {
-          "argv": "${input.argv}",
-          "output_path": "${input.output_path}"
+          "argv": "${input.argv}"
         },
         "expect": {
           "field": "returncode",
           "type": "field_equals",
           "value": 0
         },
+        "optional": [
+        "output_path"
+        ],
         "type": "invoke_capability"
       },
       "adapter_module": "cli_command",
@@ -9809,7 +9811,7 @@
       ],
       "source": {
         "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
-        "type": "python_stdlib"
+        "type": "brain_owned_python_composition"
       },
       "status": "VERIFIED_BOUND_CAPABILITY",
       "verification": {

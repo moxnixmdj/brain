@@ -28825,8 +28825,7 @@
    "incremental_spend_usd": 0,
    "input_contract_source": "action_template",
    "input_names": [
-    "argv",
-    "output_path"
+    "argv"
    ],
    "kind": "BOUND_CAPABILITY",
    "output_fields": [
@@ -28838,7 +28837,7 @@
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/cli_command.py",
     "source_sha256": "2d3fe3889c6f3cc0b42117809668a63dd7b8f197b9aa4fe47dd1c8f8c4d1ae39",
-    "source_type": "python_stdlib"
+    "source_type": "brain_owned_python_composition"
    },
    "provides": [
     "shell.command.result"
@@ -31229,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 409,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6808,
+  "research_index_records": 6809,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8ffb24340dfadad1757a4d47b601af61a200f10d2443491b529e64ddb0e61116"
+  "value": "a1ba90bc30081bcc956366dfd045b29a408b3bdba62e65322380bacd9675df30"
  },
  "engines": [
   {
@@ -76598,7 +76597,7 @@
   "included_source_count": 1211,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "9b05ba550aa09d3f02c433b8c710e906bd01babcd50d0265df84985025e9d5f6"
+  "source_tree_digest": "0c71ee6487f13da45982b81393bcd45f87f3d90bced0cc90f29f70b0fb40bdba"
  },
  "research_index": [
   {
@@ -226074,6 +226073,51 @@
    }
   },
   {
+   "action_id": "A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_STATED_COMMAND_NOW_REACHES_THE_SHELL_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0a6269f9dcd6333808a50b086188509c6dc9e4fa8295860bfd80443c2574672b",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_stated_command_now_reaches_the_shell_20261112_v1": 1,
+    "act": 1,
+    "already-verified": 1,
+    "ambiguous": 1,
+    "authority": 1,
+    "benchmark": 1,
+    "bind_render_declare_then_refuse_the_unhonourable": 1,
+    "binding": 1,
+    "capability": 2,
+    "cause": 1,
+    "command": 1,
+    "every": 1,
+    "failure": 1,
+    "family": 1,
+    "forged": 1,
+    "front-door": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "highest": 1,
+    "keyword": 1,
+    "layer": 1,
+    "named": 1,
+    "naming": 1,
+    "no": 3,
+    "now": 1,
+    "only": 1,
+    "rank": 1,
+    "reachability": 1,
+    "reaches": 1,
+    "registered": 1,
+    "reported": 1,
+    "requires": 1
+   }
+  },
+  {
    "action_id": "A_STATED_FILE_BEATS_A_REFERENCE_TO_A_STEP_THAT_DOES_NOT_EXIST_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -253789,9 +253833,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/composer_route_v1.py",
-   "sha256": "c7e68d6d368bbe52269f87b287c339e54981ccd8e140bd762dbb001e047195f8",
+   "sha256": "44f1448790a982f8270f947e4d994a13301216fce2316d64dec47dd78880fac9",
    "summary": "Routing a sentence to a typed capability chain.",
-   "symbol_count": 67,
+   "symbol_count": 68,
    "symbols": [
     "_ContextRepoRoot",
     "_bare_alternatives",
@@ -253840,10 +253884,10 @@
     "routing": 1,
     "ruff_format_flags": 1,
     "score": 1,
-    "sed_print_script": 1,
     "sentence": 1,
     "sort_key_flags": 1,
     "stated_command_refusal": 1,
+    "states_a_command_line": 1,
     "tail_flags": 1,
     "token_words": 1,
     "typed": 1,
@@ -267241,9 +267285,9 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/grounded_action_v1.py",
-   "sha256": "7869b6cc4c90969b7422e5d6a0573525c80c190cc759d577e3e58c970802ac1b",
+   "sha256": "a7c9ab62ad0e523f8ed22f2450e2070ef2ba4bf916501c8a54bc68371680191a",
    "summary": "Plain goal in, verified work out -- over the whole registry, with no model.",
-   "symbol_count": 14,
+   "symbol_count": 15,
    "symbols": [
     "_bind_inventory_param",
     "_binder",
@@ -267254,6 +267298,7 @@
     "_independent_artifact_check",
     "_load",
     "_lookup",
+    "_rows_that_can_run_a_stated_command",
     "_try_bridge",
     "_word_tokens",
     "act",
@@ -267282,6 +267327,7 @@
     "over": 1,
     "plain": 1,
     "registry": 1,
+    "rows_that_can_run_a_stated_command": 1,
     "try_bridge": 1,
     "v1": 1,
     "verified": 1,
@@ -313423,10 +313469,11 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/world_binding_v1.py",
-   "sha256": "ab57d895402c904b7fa5ae403f76394cd996259de1cb6463e80fa11baae7dc70",
+   "sha256": "2096289b994ea33bc4932262cc8b3171f9636b8eccf75f183da00554ce91aa5f",
    "summary": "Complete a capability's inputs when the goal does not state all of them.",
-   "symbol_count": 25,
+   "symbol_count": 26,
    "symbols": [
+    "_argv_stated_in",
     "_companion_paths",
     "_declared_discovery_pattern",
     "_demonstrated_invocation_inputs",
@@ -313449,16 +313496,15 @@
     "complete_inputs",
     "named_destination",
     "placeholders",
-    "render_args",
-    "stated_paths_absent_in_workspace"
+    "render_args"
    ],
    "terms": {
     "all": 1,
+    "argv_stated_in": 1,
     "binding": 1,
     "capability": 1,
     "companion_paths": 1,
     "complete": 1,
-    "declared_discovery_pattern": 1,
     "demonstrated_invocation_inputs": 1,
     "ext_for": 1,
     "ext_for_placeholder": 1,
