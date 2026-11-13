@@ -31227,9 +31227,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 404,
+  "knowledge_documents": 405,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6803,
+  "research_index_records": 6805,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "29a6714b775ddf643a0057f0c542b52113e2e9693b6a7f68e90c5fa08ccf89ce"
+  "value": "f31ce1b99cfbea9d831428dbc62add27c6be4e2d946cc0d37d390354ab3da67d"
  },
  "engines": [
   {
@@ -55900,6 +55900,87 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6361,
+   "headings": [
+    "\"Exact matches only\" is false — 95.9% of what one showing recovers was never shown",
+    "1. The test, and why it had to be built",
+    "2. The result",
+    "3. The second half: what the 36% actually is",
+    "4. The number that had been read as a capability",
+    "5. One correction to the scoring, made visible rather than quiet",
+    "6. What is real, and what is not",
+    "7. Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "PROBLEM_TWO_EXACT_MATCHES_ONLY_IS_FALSE_20261112_V1.md",
+   "sha256": "bedc52e17af198b0e69a5cf7e39b3aee218ea3eddae0280653b20ea67d17f305",
+   "summary": "**2026-11-12.** Base `92e08010`. Branch `arena/5f24577e-brain`.",
+   "terms": {
+    "221": 4,
+    "36": 3,
+    "370": 3,
+    "askings": 3,
+    "been": 5,
+    "cannot": 3,
+    "canonical": 5,
+    "change": 7,
+    "changed": 4,
+    "changes": 5,
+    "code": 4,
+    "datetime": 4,
+    "demonstrated": 3,
+    "developer": 3,
+    "different": 8,
+    "every": 4,
+    "exact": 4,
+    "example": 8,
+    "false": 3,
+    "file": 8,
+    "files": 3,
+    "had": 4,
+    "import": 8,
+    "kind": 3,
+    "lookup": 3,
+    "missed": 5,
+    "never": 9,
+    "no": 6,
+    "not": 18,
+    "number": 5,
+    "one": 8,
+    "only": 4,
+    "operator": 4,
+    "organ": 8,
+    "own": 4,
+    "precision": 4,
+    "problem": 4,
+    "real": 5,
+    "recovers": 4,
+    "rule": 4,
+    "same": 7,
+    "second": 5,
+    "showed": 6,
+    "showing": 4,
+    "so": 6,
+    "statement": 7,
+    "two": 4,
+    "wrong": 4
+   },
+   "title": "\"Exact matches only\" is false — 95.9% of what one showing recovers was never shown",
+   "title_terms": [
+    "95.9",
+    "exact",
+    "false",
+    "matches",
+    "never",
+    "one",
+    "only",
+    "recovers",
+    "showing",
+    "shown"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 7553,
    "headings": [
     "Problem 2 is two questions, and one of them is already 64% solved",
@@ -76197,10 +76278,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1206,
+  "included_source_count": 1207,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b8b9e2f4a9700db37177a2bf1f6ad741b4684225711575026a3c58f2582830af"
+  "source_tree_digest": "e0d9f92a024e13ef4e871f0aaf140da37ab4f4c1427ffcc0dfaa0542077cd9e2"
  },
  "research_index": [
   {
@@ -160954,6 +161035,23 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/GENERALIZATION_OR_LOOKUP_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/GENERALIZATION_OR_LOOKUP_20261112_V1.json",
+   "schema": "BRAIN_GENERALIZATION_OR_LOOKUP_V1",
+   "sha256": "996e3e917894554c56b521d4da4e53e2c0355ca909f63f4d801a55680151f603",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "generalization": 1,
+    "lookup": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json",
@@ -235300,6 +235398,31 @@
     "the_tool_s_own_explanation_reaches_the_failure_reason_v1_20261024_v1": 2,
     "v1": 2,
     "verdict": 3
+   }
+  },
+  {
+   "action_id": "THE_TREE_NEVER_SEPARATED_LOOKUP_FROM_GENERALIZATION_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/THE_TREE_NEVER_SEPARATED_LOOKUP_FROM_GENERALIZATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_TREE_NEVER_SEPARATED_LOOKUP_FROM_GENERALIZATION_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ec8fc46ba467ff0cc6a62778e138d4540ca9ffc31f0d349ece2c63a45a404410",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "classify_every_recovered_change_by_whether_the_example_showed_its_own_old_statement_and_report_lookup_against_generalization": 1,
+    "every_number_in_this_tree_measured_how_much_one_showing_recovers_and_none_separated_recovering_a_statement_the_example_literally_showed_from_recovering_one_it_never_showed__so_the_claim_that_generalization_is_exact_matches_only_had_never_been_tested": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generalization": 1,
+    "generalization_confirmed_as_the_mechanism_370_of_386_never_shown__adaptation_measured_at_0_6359_not_0_2999_once_the_168_unreachable_askings_are_counted_apart__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "lookup": 1,
+    "never": 1,
+    "separated": 1,
+    "the_tree_never_separated_lookup_from_generalization_20261112_v1": 1,
+    "tree": 1,
+    "v1": 1
    }
   },
   {
