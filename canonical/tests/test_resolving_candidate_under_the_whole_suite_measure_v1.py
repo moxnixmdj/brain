@@ -482,3 +482,31 @@ def test_the_records_candidates_are_the_ones_the_count_called_resolving(written)
         there = counted[row["task"]]["candidates"][row["place"] - 1]
         assert there["resolves"] and there["sha256"] == row["sha256"] and there["place"] == row["place"]
         assert row["whole_run"]["start_passing"] == row["whole_run"]["start_passing_wanted"] or row["keeps_the_whole_suite"] is not True
+
+
+# --------------------------------------------------------------------------- #
+# the round of seeded faults (canonical/tools/seeded_faults_whole_suite_v1.py)
+# --------------------------------------------------------------------------- #
+def test_the_seeded_faults_are_each_one_piece_of_text_that_stands_once():
+    from canonical.tools import seeded_faults_whole_suite_v1 as seeded
+    text = (ROOT / seeded.MEASURE).read_text(encoding="utf-8")
+    assert len(seeded.FAULTS) == len({what for what, _, _, _ in seeded.FAULTS}) >= 50
+    for what, name, old, new in seeded.FAULTS:
+        assert name == seeded.MEASURE and old != new and text.count(old) == 1, what
+
+
+def test_the_tests_left_out_of_the_seeded_round_are_tests_of_this_file():
+    from canonical.tools import seeded_faults_whole_suite_v1 as seeded
+    for name in seeded.LEFT_OUT:
+        path, test = name.split("::")
+        assert path in seeded.TESTS and f"def {test}(" in (ROOT / path).read_text(encoding="utf-8"), name
+
+
+def test_the_record_says_how_many_seeded_faults_the_tests_caught(written):
+    from canonical.tools import seeded_faults_whole_suite_v1 as seeded
+    last = written["seeded_faults"]["rounds"][-1]
+    assert last["seeded"] == len(seeded.FAULTS) and last["not_seeded"] == []
+    assert last["caught"] + len(last["survived"]) == last["seeded"]
+    assert [row["fault"] for row in last["rows"]] == [what for what, _, _, _ in seeded.FAULTS]
+    assert sorted(row["fault"] for row in last["rows"] if not row["caught"]) == sorted(last["survived"])
+    assert last["left_out_of_the_run"] == list(seeded.LEFT_OUT)
