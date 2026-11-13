@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 430,
+  "knowledge_documents": 431,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6828,
+  "research_index_records": 6830,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3378a4e5254dc0ffb4f0a78ab6b6fe4c2f689558e29c407c26d23ae5312e7051"
+  "value": "e5ffd36727d78b5ab40f4d4fac815aaf042060bd906a4e3c2156d30ad4e168cf"
  },
  "engines": [
   {
@@ -45725,6 +45725,86 @@
     "left",
     "read",
     "renamed"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 14365,
+   "headings": [
+    "A real repair is a whole file. A lesson is one statement.",
+    "The owner's question, answered with an execution",
+    "What localization buys, executed",
+    "The two failures are real and are reported as failures",
+    "A trap that was live, and is now pinned",
+    "The scope law on real code: an honest negative",
+    "What this does NOT claim",
+    "What the 2026 literature says, and where this sits",
+    "Verification",
+    "Verdict on \"experience it once ⇒ learned permanently\""
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1.md",
+   "sha256": "1e8fb1d726f53567742ca09b51a7f1f1b76faff0bdd174c8b0738ba24af29e11",
+   "summary": "**Date:** 2026-11-12 **Carrier:** Arena session sandbox **Authority:** NONE — producer-run measurement in one sandbox, not independent verification **Modules:** `canonical/swe_kernel/lesson_localization_v1.py`, `canonical/tools/real_repair_localization_probe_v1.py`, `canonical/tests/test_lesson_localization_v1.py`; site-relative facts added to `canonical/swe_kernel/skill_scope_acquisition_v1.py` *",
+   "terms": {
+    "all": 6,
+    "applicability": 6,
+    "boltons": 5,
+    "both": 5,
+    "candidate": 6,
+    "candidates": 5,
+    "canonical": 13,
+    "case": 5,
+    "code": 5,
+    "corpus": 9,
+    "each": 6,
+    "every": 5,
+    "executed": 5,
+    "experience": 5,
+    "facts": 9,
+    "failures": 7,
+    "fires": 5,
+    "fix": 6,
+    "fixtures": 5,
+    "floor": 5,
+    "lesson": 9,
+    "module": 5,
+    "never": 5,
+    "no": 6,
+    "not": 30,
+    "now": 7,
+    "once": 5,
+    "one": 13,
+    "operator": 6,
+    "own": 14,
+    "pass": 6,
+    "pinned": 12,
+    "rather": 10,
+    "real": 28,
+    "repair": 7,
+    "round": 6,
+    "rule": 7,
+    "same": 6,
+    "skill": 8,
+    "skills": 7,
+    "so": 6,
+    "test": 9,
+    "tests": 16,
+    "than": 11,
+    "two": 7,
+    "upstream": 9,
+    "verdict": 6,
+    "verification": 6
+   },
+   "title": "A real repair is a whole file. A lesson is one statement.",
+   "title_terms": [
+    "file",
+    "lesson",
+    "one",
+    "real",
+    "repair",
+    "statement",
+    "whole"
    ]
   },
   {
@@ -78387,10 +78467,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1232,
+  "included_source_count": 1233,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b9672cbb74c1e7f02da77e62387fd0e5d3569b9b4b6aa4843efe23fd20bec08d"
+  "source_tree_digest": "8a057dc45b37b235f8fafe656e507b666b484f89c522e86f142d05760c1a0d1f"
  },
  "research_index": [
   {
@@ -189164,6 +189244,29 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REAL_REPAIR_LOCALIZATION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REAL_REPAIR_LOCALIZATION_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_REAL_REPAIR_LOCALIZATION_VERIFICATION_V1",
+   "sha256": "eef762fad1de252fed23af2b93868b3abc4147f1aaf9d0e4ae2be1e6e222cb69",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "file": 1,
+    "lesson": 1,
+    "localization": 1,
+    "one": 1,
+    "real": 2,
+    "repair": 2,
+    "statement": 1,
+    "v1": 1,
+    "whole": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-03",
    "id": "research:canonical/verification/RECOVERY_ACCEPTANCE_INTEGRATOR_PUBLIC_RUNNER_VERIFICATION_20261003_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -226578,6 +226681,33 @@
     "repository": 1,
     "revision": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9ab163469b2fc5e9c59bf8455799332dde5fa2b99f8badf8dd1e31dc0a903c08",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_real_repair_is_a_whole_file_and_a_lesson_is_one_statement_20261112_v1": 1,
+    "file": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "lesson": 1,
+    "lesson_localization_v1_ships__teaching_the_pinned_boltons_bytes_human_repair_as_two_whole_files_proposes_zero_candidates_on_all_four_real_corpus_sources__localized_to_one_statement_it_derives_less_than_or_equal_to_less_than_survives_the_production_store_and_repairs_a_different_real_module__candidate_two_of_four_is_byte_identical_to_the_sha256_pinned_upstream_fix_for_boltons_mathutils_and_passes_its_own_three_upstream_tests_while_the_baseline_fails_them__two_more_itertools_zero_guard_bugs_are_recorded_as_fired_and_not_repaired_within_budget_twelve": 1,
+    "localize_the_repair_to_the_smallest_ast_statement_covering_each_changed_region__derive_the_operator_lesson_from_the_statement_pair_rather_than_the_file_pair__judge_every_real_target_by_its_own_unmodified_upstream_test_body_through_project_test_oracle__state_the_candidate_budget_in_every_verdict_that_depends_on_it__treat_zero_tests_run_as_unverifiable_rather_than_as_a_failure__and_refuse_by_name_when_no_region_is_a_single_operator_difference": 1,
+    "one": 1,
+    "real": 1,
+    "repair": 1,
+    "statement": 1,
+    "the_production_teaching_path_receives_two_whole_files_so_anti_unification_yields_thirteen_holes_over_ninety_nine_tokens_and_derive_operator_swap_correctly_refuses__the_stored_active_rule_proposes_zero_candidates_on_every_real_source_so_one_real_experience_buys_a_permanent_no_op": 1,
+    "v1": 1,
+    "whole": 1
    }
   },
   {
