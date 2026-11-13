@@ -1,0 +1,225 @@
+{
+ "schema": "ACTION_INTENT_V1",
+ "action_id": "ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT",
+ "action_intent_id": "ONE_SHOWING_IS_BOUNDED_BY_FORM_NOT_BY_ENVIRONMENT",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "REUSE_THE_RECORDED_INSTRUMENTS_ON_A_REPOSITORY_DISJOINT_CORPUS",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "b56d981c8af50af5d3f3bf02ccdbf80ca281d2f5",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "why_highest_leverage_now": "Every measurement in this tree taught and applied inside one pull request, which is the easiest case that exists, while the claim being funded is about new environments. The claim had never been measured as made. It took one corpus and one tool, and it rules out the next step the previous round proposed before that step was built.",
+ "action_summary": "Teach a change in one repository and apply it in a different repository with the same kind of change, with no demonstration from the target repository, across six kinds of change and twelve pull requests.",
+ "selected_route": "REUSE_THE_RECORDED_INSTRUMENTS_ON_A_REPOSITORY_DISJOINT_CORPUS",
+ "causal_blocker": "GENERALISATION_IS_BOUNDED_BY_THE_FORM_OF_A_CHANGE_NOT_BY_HOW_OFTEN_IT_IS_SHOWN",
+ "expected_parent_change": "CROSS_ENVIRONMENT_TRANSFER_IS_MEASURED_AND_SHOWN_TO_DEPEND_ON_THE_FORM_OF_THE_CHANGE_NOT_ON_THE_NUMBER_OF_SHOWINGS",
+ "expected_parent_frontier_change": "TRANSFER_IS_HALF_SOLVED_AND_THE_FAILING_HALF_IS_NAMED__THE_CHECK_CANNOT_FIX_IT__NO_RATE_CLAIM__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::GENERALISATION_IS_BOUNDED_BY_THE_FORM_OF_A_CHANGE_NOT_BY_HOW_OFTEN_IT_IS_SHOWN",
+ "falsification_condition": "CROSS_REPOSITORY_TRANSFER_IS_UNIFORM_ACROSS_KINDS_OF_CHANGE_OR_THREE_DEMONSTRATIONS_MOVE_A_KIND_THAT_ONE_DEMONSTRATION_COULD_NOT",
+ "stop_condition": "CROSS_ENVIRONMENT_PAIRS_MEASURED__PREDICTIONS_SCORED_AS_WRITTEN__TESTS_GREEN__GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "explicit_user_authorization": "",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/ACROSS_ENVIRONMENTS_20261112_V1.json",
+   "canonical/tools/across_environments_v1.py",
+   "LEARN_IT_HERE_USE_IT_THERE_20261112_V1.md"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ },
+ "measured_effect": {
+  "cross_repository_coverage_one_showing": 0.573,
+  "cross_repository_precision_one_showing": 1.0,
+  "cross_repository_coverage_three_showings": 0.845,
+  "kinds_that_transfer_at_all": 3,
+  "kinds_that_transfer_at_exactly_zero": 3,
+  "correct_changes_from_one_kind_of_six": 537,
+  "total_correct_changes": 562,
+  "wide_ladder_wrong_changes": 71,
+  "tests_passed": 17
+ },
+ "load_bearing_primary": {
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0.02",
+  "expected_obligation_unlock_lcb": "1",
+  "success_probability_lcb": "0.85",
+  "wall_clock_cost_ub": "1",
+  "why_this_moves_the_obligation": "The obligation is partial computer-use performance, and its substrate here is one-shot transfer into a new environment. This pass does not raise the score; it establishes that the transfer half which works works by travelling a form, and that the half which fails is not fixed by more demonstrations or by a check. That forbids the obvious next plan before it is funded. Discharge LCB is deliberately small: a falsification cannot move a capability number."
+ },
+ "prior_work_reused": [
+  "canonical/tools/generalization_rung_gradient_v1.py",
+  "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json",
+  "canonical/tools/when_one_showing_should_be_trusted_20261112_v1.py",
+  "canonical/verification/ONE_SHOWING_HELD_OUT_20261112_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "b56d981c8af50af5d3f3bf02ccdbf80ca281d2f5",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "CROSS_REPOSITORY_TRANSFER_MEASURED_AT_0_573_MEAN_BUT_HALF_THE_KINDS_TRANSFER_EXACTLY_ZERO_AND_THREE_SHOWINGS_DO_NOT_MOVE_THEM",
+  "obs_goal": {
+   "real_outcome": "CROSS_REPOSITORY_TRANSFER_MEASURED_AT_0_573_MEAN_BUT_HALF_THE_KINDS_TRANSFER_EXACTLY_ZERO_AND_THREE_SHOWINGS_DO_NOT_MOVE_THEM",
+   "proxy_goals_deleted": [
+    "ANOTHER_WITHIN_REPOSITORY_AVERAGE",
+    "ANOTHER_TIE_BREAK",
+    "A_CHECK_THAT_RECOVERS_NOTHING"
+   ],
+   "surviving_necessity": "A_CLAIM_ABOUT_NEW_ENVIRONMENTS_HAD_NEVER_BEEN_MEASURED_AS_MADE"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/tools/generalization_rung_gradient_v1.py",
+    "canonical/tools/when_one_showing_should_be_trusted_20261112_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "2608.20274 subtask-level induction",
+    "2605.08670 MIND-Skill closed loop",
+    "PolySkill ICLR 2026 polymorphic abstraction"
+   ],
+   "capability_work_deleted": [
+    "WRITE_A_NEW_LEARNER",
+    "BUILD_A_DEPENDENCY_INSTALLER",
+    "COLLECT_AN_UNRELATED_CORPUS"
+   ],
+   "surviving_gap": "TRANSFER_ACROSS_ENVIRONMENTS_HAD_NO_MEASUREMENT_AT_ALL"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC",
+   "delete_bypass_substitute_options": [
+    "MORE_DEMONSTRATIONS",
+    "WIDEN_THE_LADDER",
+    "STAND_UP_THE_CHECK",
+    "BUY_A_BIGGER_LIBRARY"
+   ],
+   "surviving_causal_blocker": "THE_LEARNED_UNIT_IS_THE_FORM_OF_A_CHANGE_AND_FORMS_DO_NOT_TRAVEL_BETWEEN_CODEBASES"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE_RECORDED_INSTRUMENTS_ON_A_REPOSITORY_DISJOINT_CORPUS",
+    "BUILD_A_DEPENDENCY_INSTALLER",
+    "ADD_DEMONSTRATIONS"
+   ],
+   "losing_routes_reason": "THE_INSTALLER_WAS_ALREADY_MEASURED_AT_ZERO_COVERAGE_AND_MORE_SHOWINGS_LEAVE_THREE_KINDS_AT_EXACTLY_ZERO",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__AGREEMENT_WITH_THE_PEOPLE_WHO_MADE_THE_CHANGE_IS_A_PROXY_AND_IS_LABELLED_AS_ONE"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_PREVIOUS_ROUNDS_NAMED_NEXT_STEP_OF_MAKING_CHECKS_CHEAP"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "THREE_SHOWINGS_ARE_A_WITHIN_FORM_DIAL_NOT_A_CROSS_FORM_ONE"
+   ],
+   "fresh_reuse_plan": "THE_SAME_TOOL_RUNS_ON_ANY_FUTURE_CORPUS_OF_KIND_DISJOINT_PAIRS_WITHOUT_CHANGE"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "RE_MEASURING_WITHIN_REPOSITORY_TRANSFER",
+    "RE_COLLECTING_THE_CORPUS"
+   ],
+   "search_stop_decision": "STOP_ONCE_EVERY_KIND_HAS_BEEN_MEASURED_ACROSS_A_DISJOINT_REPOSITORY",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "REUSE_RECORDED_INSTRUMENTS_ON_A_REPOSITORY_DISJOINT_CORPUS",
+   "BUILD_A_DEPENDENCY_INSTALLER",
+   "ADD_DEMONSTRATIONS",
+   "WIDEN_THE_LADDER"
+  ],
+  "deleted_or_bypassed_paths": [
+   "A_MEAN_REPORTED_AS_A_HEADLINE_WHEN_ONE_KIND_CARRIES_IT",
+   "REFUSALS_TRUNCATED_TO_THE_WORD_REFUSED"
+  ],
+  "selected_surviving_route": "EXERCISE_THE_CLAIM_AS_MADE_ON_A_REPOSITORY_DISJOINT_CORPUS",
+  "why_selected_route_is_fastest_sufficient": "ONE_CORPUS_AND_ONE_TOOL_UNDER_FIVE_MINUTES_AND_IT_RULES_OUT_THE_NEXT_STEP_BEFORE_IT_IS_BUILT",
+  "expected_parent_level_state_change": "TRANSFER_IS_HALF_SOLVED_AND_THE_FAILING_HALF_IS_NAMED__THE_CHECK_CANNOT_FIX_IT__NO_RATE_CLAIM__NO_FAMILY_FLIPPED",
+  "stop_condition": "CROSS_ENVIRONMENT_PAIRS_MEASURED__PREDICTIONS_SCORED_AS_WRITTEN__TESTS_GREEN__GUARDS_PASS__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "THIS_ACTION_ADDS_NO_CAPABILITY_AND_PRESERVES_A_MEASUREMENT_THE_ROUTE_WAS_FIXED_BEFORE_THE_RUN_AND_NO_NEW_ROUTE_IS_SELECTED"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-12T00:00:00Z",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__THIS_ONLY_MEASURES_TRANSFER",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "ACROSS_ENVIRONMENTS_V1",
+   "falsifier_id": "FALSIFY_THAT_THREE_SHOWINGS_OR_A_CHECK_CAN_RESCUE_A_KIND_WHOSE_FORM_DOES_NOT_TRAVEL",
+   "decisive_question": "ON SIX KINDS OF CHANGE HELD FIXED ACROSS TWO REPOSITORIES EACH DOES TRANSFER DEPEND ON THE KIND OR ON THE FORM",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "NO_PRIOR_ART_OR_IN_TREE_RECORD_MEASURES_TEACH_HERE_APPLY_THERE_ACROSS_REPOSITORIES"
+  }
+ },
+ "next_step": "BUY_THE_NAME_KIND_OPERATOR_ONLY_AND_RE_RUN_THIS_EXACT_TOOL_ON_THESE_EXACT_TWELVE_PAIRS_IF_THE_LOGGING_KIND_LEAVES_ZERO_THE_WALL_IS_PER_KIND_OPERATORS_AND_THEY_ARE_WORTH_BUYING_ONE_AT_A_TIME"
+}
