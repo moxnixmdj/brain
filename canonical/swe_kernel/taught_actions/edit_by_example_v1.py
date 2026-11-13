@@ -1595,7 +1595,6 @@ def aliases_to_follow(text, places, fail_at):
     return found
 
 
-<<<<<<< HEAD
 class Swapped:
     """A read of a name whose import the examples renamed, reached another way round than the example reached it."""
 
@@ -1819,7 +1818,6 @@ def swaps_to_make(text, example, fail_at=None):
     return _swap_places(text, module, old, new, shown_uses, fail_at)
 
 
-=======
 def aliases_to_add(text, places, fail_at):
     """The file's own from-import line, extended with a needed name whose origin the lesson knows.
 
@@ -1856,7 +1854,6 @@ def aliases_to_add(text, places, fail_at):
     return found
 
 
->>>>>>> origin/main
 def renames_to_add(text, places, fail_at):
     """Places that rename a read left pointing at nothing, after the examples renamed its import.
 
@@ -1902,7 +1899,6 @@ def renames_to_add(text, places, fail_at):
     return found
 
 
-<<<<<<< HEAD
 def written(text, places, what="the file", check_names=True, fail_at=None, example=None):
     """`written_once`, with the leftover reads of a renamed import following their renamed definition.
 
@@ -1910,19 +1906,14 @@ def written(text, places, what="the file", check_names=True, fail_at=None, examp
     from the same module (`swaps_to_make`), which is the rename an example with one changed file cannot
     otherwise repeat: the rule fits only the reading it was shown, and every other reading is left.
     """
-    placed = places + renames_to_add(text, places, fail_at) + aliases_to_follow(text, places, fail_at)
+    added = renames_to_add(text, places, fail_at) + aliases_to_follow(text, places, fail_at)
+    added += aliases_to_add(text, places + added, fail_at)
+    placed = places + added
     if example is not None:
         taken = [span for span, _, _, _ in placed]
         placed = placed + [one for one in swaps_to_make(text, example, fail_at)
                            if not any(start <= one[0][0] and one[0][1] <= end for start, end in taken)]
     return written_once(text, placed, what, check_names, fail_at)
-=======
-def written(text, places, what="the file", check_names=True, fail_at=None):
-    """`written_once`, with the leftover reads of a renamed import following their renamed definition."""
-    added = renames_to_add(text, places, fail_at) + aliases_to_follow(text, places, fail_at)
-    added += aliases_to_add(text, places + added, fail_at)
-    return written_once(text, places + added, what, check_names, fail_at)
->>>>>>> origin/main
 
 
 def written_once(text, places, what="the file", check_names=True, fail_at=None):
