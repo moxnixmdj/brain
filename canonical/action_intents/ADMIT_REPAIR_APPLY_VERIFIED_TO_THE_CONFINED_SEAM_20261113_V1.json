@@ -1,0 +1,228 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "ADMIT_REPAIR_APPLY_VERIFIED_TO_THE_CONFINED_SEAM_20261113_V1",
+ "action_intent_id": "ADMIT_REPAIR_APPLY_VERIFIED_TO_THE_CONFINED_SEAM_20261113_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "CONFINED_DECLARATION_ROUND_20261113_V1",
+ "date": "2026-11-13",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "One additive reviewed row in canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json declaring python.software.repair.apply.verified.v1 admissible behind the existing confined dispatch (effect_args [output_path], budget 600s). This is the only behavior-refusing-at-the-door capability among the advanced-coding confinement refusals: boundary.refuses_execution(cid, entry, goal) returns True for it. The other four candidates from the 2026-11-13 measurement (file.copy.v1, file.rename.v1, tree_sitter.python.symbols.v1, evidence.oracle.v1) were re-measured and rejected as inert declaration data (boundary boundary-allowed for each), and file.copy.v1 is pinned absent from the declarations by test_confined_dispatch_v1.py (its own docstring). No code, no gate, no tolerance, no capability registry, no spend, no authority claim.",
+ "selected_route": "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+ "causal_blocker": "PYTHON_SOFTWARE_REPAIR_APPLY_VERIFIED_V1_IS_REFUSED_AT_THE_DOOR_WITH_BOUNDARY_REFUSES_EXECUTION_TRUE_AND_NO_REVIEWED_CONFINED_DECLARATION_ROW",
+ "expected_parent_change": "python.software.repair.apply.verified.v1 can be dispatched through the confined route behind the same effect-verification ruler as every other declared capability; it binds to no realistic sentence yet.",
+ "expected_parent_frontier_change": "The confinement wall is no longer the reason repair.apply.verified.v1 cannot run on a disposable clone; the binding constraint for the corpus repair sentence is now the compile layer (compiled_capability_id null before dispatch is consulted). No corpus goal flips; no capability is claimed; no family flips.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::PYTHON_SOFTWARE_REPAIR_APPLY_VERIFIED_V1_IS_REFUSED_AT_THE_DOOR_WITH_BOUNDARY_REFUSES_EXECUTION_TRUE_AND_NO_REVIEWED_CONFINED_DECLARATION_ROW",
+ "falsification_condition": "THE_NEW_ROW_LETS_AN_UNDECLARED_CAPABILITY_RUN__OR_A_CONFINED_REPAIR_APPLY_RUN_PASSES_WITHOUT_ITS_DECLARED_EFFECT_VERIFIED_INSIDE_THE_WORKTREE__OR_THE_HOST_GIT_STATUS_MOVES__OR_PC1_OR_PC5_CHANGES__OR_ANY_REALISTIC_PROBE_ROW_FLIPS_BY_THIS_PR__OR_REFUSES_EXECUTION_IS_CONSULTED_AND_OVERRIDDEN",
+ "stop_condition": "test_confined_dispatch_v1 5/5; bridge and front-door suites 12/12; unified model verify 33/33 PASS on a recompiled artifact; integrity guard PASS; drift-immunity referee green; the new row is data only; zero realistic probe rows flip by this PR; no capability, family, benchmark, or terminal credit is claimed; truth.achieved stays false.",
+ "explicit_user_authorization": "Owner directive on 2026-11-12 and 2026-11-13: always push and merge work; $0 spend; zero protected or SHA-pinned paths touched; no governance change; no sentience claim; honesty over progress claims.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+   "canonical/tests/test_confined_dispatch_v1.py",
+   "CONFINED_DECLARATION_REPAIR_APPLY_20261113_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_A_CONFINED_DECLARATION_ROW_ALONE_MAKES_THE_CORPUS_REPAIR_SENTENCE_BOUND_OR_EXECUTED__THE_ROW_IS_A_PREREQUISITE_MEASURED_AND_RECORDED_AS_SUCH",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_THIS_HOST: boundary.refuses_execution returns True only for python.software.repair.apply.verified.v1 among the 2026-11-13 confinement-refusal set; file.copy/file.rename/tree_sitter/evidence.oracle return False (inert rows, removed); confined direct dispatch of the adapter RAN on a disposable clone with fixtures committed inside the clone only, host git status byte-identical, sha256 receipt attached; a synthetic no-repair goal fails closed (CONFINED_RUN_DID_NOT_PRODUCE_A_RESULT) by design; test_confined_dispatch_v1 5/5; bridge+front-door 12/12; unified model verify 33/33 PASS; integrity guard PASS; no realistic probe row flips (compiled_capability_id null for the corpus sentence)."
+ },
+ "measured_effect": "Declaration rows 11->12 in the reviewed confinement admissions surface (+1 boundary-refused repair apply verified); realistic probe rows flipped: 0; confined dispatch of python.software.repair.apply.verified.v1: RAN on a disposable clone with host byte-identical (synthetic no-repair goal fails closed by design); test_confined_dispatch_v1: 5/5; bridge+front-door: 12/12; unified model verify: 33/33 PASS (recompiled artifact).",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__IT_REMOVES_A_MEASURED_ADMISSION_DEFECT_IN_THE_CONFINED_SEAM_AS_A_CONSTRUCTIVE_DEPENDENCY_FOR_VERIFIED_COMPUTER_EXECUTION",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/13",
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/confined_dispatch_v1.py",
+  "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+  "canonical/runtime/computer_execution_boundary_v1.py",
+  "canonical/tests/test_confined_dispatch_v1.py",
+  "canonical/tools/realistic_goal_reach_probe_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "python.software.repair.apply.verified.v1 is now admissible behind the confined dispatch seam behind the same effect-verification ruler as every other declared capability; it binds to no realistic sentence yet.",
+  "selected_route": "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+  "selected_surviving_route": "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+  "deleted_or_bypassed_paths": [
+   "FOUR_INERT_DECLARATION_CANDIDATES (boundary-allowed for file.copy/file.rename/tree_sitter/evidence.oracle; removed)",
+   "DECLARING_BOUNDARY_ALLOWED_CAPABILITIES_",
+   "A_DECLARATION_AS_A_BINDING_OR_EXECUTION_CLAIM (measured: compiled_capability_id null for the corpus sentence)",
+   "COUNTING_REFUSAL_PREREQUISITE_AS_CAPABILITY"
+  ],
+  "stop_condition": "test_confined_dispatch_v1 5/5; bridge and front-door suites 12/12; unified model verify 33/33 PASS on a recompiled artifact; integrity guard PASS; drift-immunity referee green; the new row is data only; zero realistic probe rows flip by this PR; no capability, family, benchmark, or terminal credit is claimed; truth.achieved stays false.",
+  "expected_parent_level_state_change": "The confinement wall is no longer the reason repair.apply.verified.v1 cannot run on a disposable clone; the binding constraint for the corpus repair sentence is now the compile layer (compiled_capability_id null before dispatch is consulted). No corpus goal flips; no capability is claimed; no family flips.",
+  "why_selected_route_is_fastest_sufficient": "The refusal diagnosis was measured five ways; exactly one candidate capability is boundary-refused at the door. One additive reviewed data row is the minimum sufficient change; four rows measurably do nothing at the door and one would break the pinned seam tests (file.copy). Binding the corpus sentence requires the compile layer, which this round deliberately does not touch.",
+  "iteration_limit": 3,
+  "routes_considered": [
+   "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW (chosen)",
+   "DECLARE_ALL_FIVE_CANDIDATES (rejected: four are boundary-allowed and inert; one breaks PC1)",
+   "WIRE_COMPILE_BIND_FOR_THE_CORPUS_SENTENCE_IN_THE_SAME_PR (rejected: unmeasured compile-layer change, violates smallest-binding-item)",
+   "BYPASS_THE_BOUNDARY_REFUSAL (rejected: not a lawful route and forbidden)"
+  ],
+  "obs_goal": {
+   "real_outcome": "The door can dispatch the one boundary-refused repair-apply capability under confinement, with verified effects, or refuse with the existing reason.",
+   "proxy_goals_deleted": [
+    "DECLARING_MORE_ROWS_AS_PROGRESS",
+    "REMOVING_THE_REFUSAL_MESSAGE_AS_SUCCESS",
+    "A_DECLARATION_AS_A_SENTENCE_BINDING"
+   ],
+   "surviving_necessity": "Only the boundary-refused capability needs a declaration; boundary-allowed capabilities are served locally and their declarations are inert at the door."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "confined_dispatch_v1.run_confined_capability",
+    "CONFINED_EFFECT_DECLARATIONS_V1.json (11 rows pre-round)",
+    "computer_execution_boundary_v1.refuses_execution",
+    "python.software.repair.apply.verified.v1 (owned adapter)",
+    "test_confined_dispatch_v1.py (PC1 pin on file.copy.v1)"
+   ],
+   "external_existing_routes_checked": [
+    "No external capability route is claimed; this is a bounded local reviewed declaration on an already-owned owned adapter."
+   ],
+   "capability_work_deleted": [
+    "The four inert declaration rows.",
+    "Any edit to gates, tolerances, the capability registry, or the boundary predicate.",
+    "Any claim that the corpus repair sentence now executes."
+   ],
+   "surviving_gap": "compile-layer binding for advanced-coding sentences (compiled_capability_id null); 54 verified-but-uncallable capabilities; refusal removal is not capability."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_BOUNDARY_REFUSAL_IN_THE_CONFINED_SEAM",
+   "delete_bypass_substitute_options": [
+    "Declare boundary-allowed rows (measured inert, deleted); bypass confinement (forbidden); substitute another adapter (not the same verified capability); leave the row out (refusal stands)."
+   ],
+   "surviving_causal_blocker": "PYTHON_SOFTWARE_REPAIR_APPLY_VERIFIED_V1_IS_REFUSED_AT_THE_DOOR_WITH_BOUNDARY_REFUSES_EXECUTION_TRUE_AND_NO_REVIEWED_CONFINED_DECLARATION_ROW"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "ADMIT_THE_SINGLE_DOOR_REFUSED_CAPABILITY_VIA_ONE_REVIEWED_DECLARATION_ROW",
+    "DECLARE_ALL_FIVE_CANDIDATES",
+    "WIRE_COMPILE_BIND_FOR_THE_CORPUS_SENTENCE_IN_THE_SAME_PR"
+   ],
+   "losing_routes_reason": "Declaring all five adds four inert rows and one pinned red build; binding the corpus sentence in the same change hides a compile-layer change inside an admissions PR and was not measured.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The confinement ruler (sha256 receipts inside the worktree, host git status byte-identical) is the existing oracle and was used. test_confined_dispatch_v1 pins the undeclared/boundary behavior. Direct invocation of the adapter under confinement ran RAN with a receipt attached; the synthetic no-repair fixture fails closed by design. No corpus sentence binds, so no end-to-end realistic effect is claimed."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "Future declaration rounds must re-measure boundary.refuses_execution before adding rows; inert candidates are removed, never accumulated; nothing in the seam or the door is weakened.",
+   "adjacent_capabilities_absorbed": [
+    "None; exactly one row was admitted and four candidates were removed."
+   ],
+   "fresh_reuse_plan": "When the corpus sentence compile-binds (Link 2), the same seam serves repair.apply.verified.v1 with no additional declaration; reuse is unchanged."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "The candidate-row evaluation harness was run once per candidate and recorded; re-measurement on any future round is required because boundary.refuses_execution is the load-bearing predicate."
+   ],
+   "search_stop_decision": "Stop after the one reviewed row, the seam tests, the bridge/front-door suites, the unified verify, the integrity guard, and this referee; do not open a broader admission claim or a compile-layer change in this PR.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "REAL_CAPABILITY_ACQUISITION_WITHIN_THE_OWNED_CONFINED_SEAM__ONE_REVIEWED_DECLARATION_ROW__NO_NEW_EXTERNAL_CAPABILITY_ROUTE_IS_DISCOVERED_OR_CLAIMED__DISCOVERY_NOT_RUN_FOR_THIS_BOUNDED_ADMISSION"
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_ADMITS_ONE_REVIEWED_DECLARATION_ROW__ZERO_CAPABILITY__ZERO_TERMINAL_CREDIT__THE_CLAIM_IS_BOUND_TO_5_5_SEAM_TESTS__12_12_BRIDGE_FRONT_DOOR_TESTS__33_33_UNIFIED_VERIFY__AND_THE_ZERO_FLIP_ERROR_ANALYSIS_IN_THE_ROUND_NOTE",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "ADMIT_REPAIR_APPLY_VERIFIED_TO_THE_CONFINED_SEAM_20261113_V1",
+   "decisive_question": "Does the single additive declaration row for python.software.repair.apply.verified.v1 admit it to the confined route with verified effects, while leaving undeclared dispatch and the pinned seam tests unchanged?",
+   "falsifier_id": "ANY_UNDECLARED_CAPABILITY_RUNS__OR_A_CONFINED_RUN_PASSES_WITHOUT_ITS_DECLARED_EFFECT_VERIFIED_INSIDE_THE_WORKTREE__OR_THE_HOST_GIT_STATUS_MOVES__OR_PC1_BREAKS__OR_ANY_REALISTIC_PROBE_ROW_FLIPS_BY_THIS_PR",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+     "git_blob_sha": "3593b06e0f026f5d5d56b5f01cfe68480bb9a4d5"
+    },
+    {
+     "path": "canonical/tests/test_confined_dispatch_v1.py",
+     "git_blob_sha": "b92240f96736b3db17e133ea9ae1ba2dbc5d0ebc"
+    },
+    {
+     "path": "CONFINED_DECLARATION_REPAIR_APPLY_20261113_V1.md",
+     "git_blob_sha": "8d1e2afeab32e64b0796739a9c5184f83f7fdf0c"
+    }
+   ]
+  }
+ },
+ "next_step": "Link 2 of the measured path: diagnose and fix the compile-layer binding for advanced-coding sentences (FAIL__RAW_GOAL_COMPILATION_GAP and STATED_SWE_EFFECT_UNSERVED from the 2026-11-13 probe), one cause at a time, fail-closed, and re-run the probe before claiming any row flips."
+}
