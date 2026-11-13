@@ -266,7 +266,7 @@
    "selected_route": "MEASURE_THE_LADDER_AND_MOVE_THE_LIMITING_FACTOR_FROM_THE_LEARNER_TO_THE_CHECK",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-13T02:17:35Z",
+    "checked_at_utc": "2026-11-13T02:18:46Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with ast, difflib, unittest and subprocess",
@@ -293,7 +293,7 @@
       ],
       "evidence_scope": "GLOBAL",
       "kind": "NETWORK_ENDPOINT",
-      "observed_at_utc": "2026-11-13T02:17:35Z",
+      "observed_at_utc": "2026-11-13T02:18:46Z",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -309,7 +309,7 @@
       ],
       "evidence_scope": "GLOBAL",
       "kind": "CODE_ARTIFACT",
-      "observed_at_utc": "2026-11-13T02:17:35Z",
+      "observed_at_utc": "2026-11-13T02:18:46Z",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
