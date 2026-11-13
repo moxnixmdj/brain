@@ -7,7 +7,7 @@
  "route_id": "A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "e2cb9ceed300d624b3eb16ac9b4ceae451c5d035",
+ "canonical_base_commit": "e489a5eca159dcf4456ca8aadc45767a2d9520cf",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -94,7 +94,7 @@
   "canonical/runtime/finite_capability_diagnosis.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "e2cb9ceed300d624b3eb16ac9b4ceae451c5d035",
+  "canonical_base_commit": "e489a5eca159dcf4456ca8aadc45767a2d9520cf",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "NO_OPERATOR_IN_THIS_TREE_CAN_WRITE_A_RENAME_BETWEEN_TWO_DIFFERENT_FUNCTIONS__AND_THE_TREE_CAN_STATE_WHAT_ONE_SHOWING_ACHIEVES_ON_A_GENUINELY_SIMILAR_TASK_SEPARATELY_FROM_WHERE_THERE_IS_NOTHING_TO_CHANGE",
