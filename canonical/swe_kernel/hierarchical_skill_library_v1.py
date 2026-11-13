@@ -8,6 +8,13 @@ Based on 2026 state-of-the-art research:
 - Memento: Memory-based learning (2025)
 - HExA: Hierarchical experimentalist agents (June 2026)
 
+AUDIT 2026-11-13: the claim below is not what this module does. Measured reading
+(`WHAT_IS_SOLVED_HERE_AND_WHAT_IS_A_COUNTER_THAT_GOES_UP_20261113_V1.md` §2):
+`_analyze_task` is a keyword/synonym table, `_execute_skill` hard-codes three AST
+counts (functions, classes, imports) and returns UNSUPPORTED otherwise. That is a
+lookup, not generalization and not zero-shot transfer. Kept as history; not a
+capability, not cited as evidence.
+
 Key Insight: Real learning = structured external knowledge + recursive refinement
 NOT model weight updates!
 
