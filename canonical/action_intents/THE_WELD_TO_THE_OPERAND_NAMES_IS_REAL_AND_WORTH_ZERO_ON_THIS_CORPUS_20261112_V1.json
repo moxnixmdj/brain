@@ -7,7 +7,7 @@
  "route_id": "THE_WELD_TO_THE_OPERAND_NAMES_IS_REAL_AND_WORTH_ZERO_ON_THIS_CORPUS_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
+ "canonical_base_commit": "d63a14de5ad250f13af1b3c02e73b8b3ccc7fdae",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -93,7 +93,7 @@
   "canonical/swe_kernel/rule_scope_learning_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "6010f1a1ae397af6983017ffd84c4117164bd155",
+  "canonical_base_commit": "d63a14de5ad250f13af1b3c02e73b8b3ccc7fdae",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "THE_TREE_CAN_STATE_WHICH_OF_THE_OWNERS_CLAIMS_ARE_REAL_WITH_THE_MEASUREMENT_BEHIND_EACH_AND_HAS_MEASURED_THAT_UNWELDING_THE_OPERAND_NAMES_BUYS_NOTHING_ON_ITS_OWN_CORPUS",
@@ -184,7 +184,7 @@
   },
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-13T01:40:46Z",
+   "checked_at_utc": "2026-11-13T01:44:00Z",
    "max_age_hours": 24,
    "incumbent_route": "THIS_IS_A_LOOKUP_SYSTEM_AND_NEEDS_MODEL_WEIGHTS_CONCEPTS_TRANSFER_AND_REASONING",
    "source_classes_checked": [
@@ -299,7 +299,7 @@
    "negative_search_summary": "NO_PRIOR_MEASUREMENT_IN_THIS_TREE_SEPARATED_AN_OPERATOR_CHANGE_FROM_THE_OPERAND_NAMES_IT_WAS_SHOWN_ON__AND_THE_2026_LITERATURE_IS_UNANIMOUS_THAT_TRAINING_FREE_MEMORY_TRANSFERS_ONLY_WHEN_ABSTRACTED_AND_THAT_CONCRETE_STEP_MEMORY_CAN_HARM_MORE_THAN_NO_MEMORY",
    "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-13T01:40:46Z",
+    "checked_at_utc": "2026-11-13T01:44:00Z",
     "max_age_hours": 2,
     "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
     "status": "READY",
@@ -360,7 +360,7 @@
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-  "checked_at_utc": "2026-11-13T01:40:40Z",
+  "checked_at_utc": "2026-11-13T01:44:00Z",
   "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
   "mode": "ACTIVE_INTERFACE",
   "fresh_reality_authority": false,

@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 420,
+  "knowledge_documents": 421,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6818,
+  "research_index_records": 6820,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "784a9e7c5dfb6a8bac438e78b2db22e4e68b2c052b1aecd4cc19bee5580ce5d6"
+  "value": "74bcc609fe2b0bff13577533b8e91bd47a09a1145b82b762dba9760e2ff212a3"
  },
  "engines": [
   {
@@ -63601,6 +63601,92 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 17214,
+   "headings": [
+    "WHAT AN OPERATOR MEANS IS A COMPUTATION, NOT A LIST",
+    "1. The one-sentence finding",
+    "2. Why this is on Problem 2's critical path and not a side issue",
+    "Operators that mean the same thing across python/go/rust/typescript/java/cpp and may be",
+    "generalized. Anything else is refused rather than guessed at.",
+    "3. The claim, executed",
+    "The two questions one list was answering",
+    "What that unblocked",
+    "The gate matrix, both directions",
+    "4. A crash found by composing with what landed on main mid-round",
+    "5. The two verdicts are not equally strong, and the output says so",
+    "6. It is wired, not decorative",
+    "7. Evidence",
+    "The floor caught this round's own record",
+    "8. What is real",
+    "9. What is not real",
+    "10. On `PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md`, which landed on main during this round",
+    "11. What this changes next"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.md",
+   "sha256": "b19ef30bb67242742dbde9ae46754b3ecf5d21d1695cc4e6c3ed081e7dc34cdc",
+   "summary": "**Date:** 2026-11-12 **Branch:** `arena/12c4f901-brain` **Authority: NONE.** Producer-run measurement on this sandbox. Every number below was produced by executing code in this repository, and the generator that produced the machine-readable copy is recorded in `canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json`.",
+   "terms": {
+    "11": 5,
+    "595": 6,
+    "all": 7,
+    "answer": 6,
+    "batch": 5,
+    "both": 6,
+    "canonical": 11,
+    "check": 5,
+    "claim": 6,
+    "correct": 5,
+    "count": 5,
+    "every": 7,
+    "floor": 8,
+    "gate": 10,
+    "go": 6,
+    "javascript": 7,
+    "language": 14,
+    "lesson": 11,
+    "list": 12,
+    "main": 7,
+    "never": 6,
+    "new": 6,
+    "no": 33,
+    "not": 29,
+    "nothing": 8,
+    "now": 7,
+    "one": 22,
+    "operator": 13,
+    "proposal": 6,
+    "python": 26,
+    "rather": 10,
+    "real": 7,
+    "refused": 8,
+    "refuted": 6,
+    "round": 8,
+    "rust": 11,
+    "same": 9,
+    "shipped": 7,
+    "so": 21,
+    "still": 8,
+    "test": 7,
+    "tests": 7,
+    "than": 12,
+    "token": 7,
+    "two": 7,
+    "typescript": 7,
+    "verdict": 7,
+    "were": 7
+   },
+   "title": "WHAT AN OPERATOR MEANS IS A COMPUTATION, NOT A LIST",
+   "title_terms": [
+    "computation",
+    "list",
+    "means",
+    "not",
+    "operator"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 17652,
    "headings": [
     "What a success teaches about *when*",
@@ -77541,10 +77627,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1222,
+  "included_source_count": 1223,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c4dcd2328382b485c5f947c41f592bb9506aa70a0a772542d98dc0e8f356c5f3"
+  "source_tree_digest": "c56acdb6a4cc6e3cc84a4bf26465d41ba551aa63007fbb76b0ba5de7806df17f"
  },
  "research_index": [
   {
@@ -170980,6 +171066,28 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_OPERATOR_SEMANTICS_VERIFICATION_V1",
+   "sha256": "1864fda58ecada1a563397406844c071de6a88e119bcc8c8824b0363e84b146e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "computation": 1,
+    "means": 1,
+    "membership": 1,
+    "not": 1,
+    "operator": 2,
+    "semantics": 1,
+    "test": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-08",
    "id": "research:canonical/verification/OPTION_PRESERVING_CAPABILITY_OPTIMIZER_INDEPENDENT_VERIFICATION_20261008_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -237074,7 +237182,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_WELD_TO_THE_OPERAND_NAMES_IS_REAL_AND_WORTH_ZERO_ON_THIS_CORPUS_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "3a64d167fb72f9760d84ddc21d80ef2750ab0ce9b89f512fe39c2059d6037b3e",
+   "sha256": "e52ff953950c16a5410b01ed15c17e80556906322e48e163d9a534bee0c43f5f",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -238590,6 +238698,31 @@
     "source": 2,
     "v1": 2,
     "wave_seven_receipt_prose_family_gets_a_suite_v1_20261024_v1": 2
+   }
+  },
+  {
+   "action_id": "WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "a264e7b8635f47a39aca0ce0bd0c13b0f1f485ed013bcc23ff5f95eda0db1fe8",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "computation": 1,
+    "compute_the_meaning_claim_the_frozen_list_asserted__by_executing_the_operator_in_every_toolchain_present_and_reading_the_verdict_off_the_observed_values__keep_the_structural_question_a_set_and_answer_the_semantic_question_per_language_pair__wire_the_gate_inside_the_proposer_loop_so_a_refused_swap_yields_no_candidate__refuse_when_nothing_can_execute_rather_than_guess": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generalizable_shipped_skills_3_of_5__frozen_list_audit_refutes_percent_and_slash_by_witnessed_counterexample__gate_matrix_13_pairs_each_with_basis_and_strength__crash_keyerror_percent_equals_from_composing_with_mains_new_augmentation_refused_by_name__99_tests_passing__11_of_11_mutations_killed__declaration_floor_held_595__45_suite_batch_identical_at_9_failed_7_errors_with_passed_505_to_521__round_d_ledger_unmoved": 1,
+    "list": 1,
+    "means": 1,
+    "not": 1,
+    "one_absolute_membership_test_was_answering_a_pair_relative_semantic_question__so_the_list_was_unsound_for_two_operators_it_admitted_and_too_narrow_for_a_real_shipped_lesson_it_refused__and_the_production_call_site_took_the_proposal_language_from_the_instance_with_no_guard_while_its_sibling_hypothesis_guarded_on_it": 1,
+    "operator": 1,
+    "v1": 1,
+    "what_an_operator_means_is_a_computation_not_a_list_20261112_v1": 1
    }
   },
   {
