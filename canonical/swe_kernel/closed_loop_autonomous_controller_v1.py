@@ -479,6 +479,40 @@ def solve_or_learn(
                 )
             except Exception:
                 pass
+
+            # Self-Reflective Learning: Reflect on execution to build understanding
+            try:
+                from canonical.swe_kernel.self_reflective_learning_system_v1 import get_learning_system
+                learning_system = get_learning_system()
+                goal_text = request if isinstance(request, str) else str(request.get("goal") or "")
+                task_id_text = "autonomous-solve" if isinstance(request, str) else str(request.get("task_id") or "autonomous-solve")
+                
+                # Execute and reflect on the task
+                reflection = learning_system.execute_and_reflect(
+                    task=goal_text,
+                    execution_result={
+                        "status": "PASS" if res.get("pass") else "FAIL",
+                        "answer": res.get("answer", ""),
+                        "error": res.get("error", ""),
+                    }
+                )
+                
+                # Store the reflection for future reasoning
+                learning_system.learn_from_reflection(reflection)
+                
+                # Add reflection metadata to result
+                if isinstance(res, dict):
+                    res["self_reflection"] = {
+                        "task_id": reflection.task_id,
+                        "success": reflection.success,
+                        "causal_models_built": len(learning_system.causal_models),
+                        "abstract_concepts": len(learning_system.abstract_concepts),
+                        "transferable_principles": len(learning_system.transferable_principles),
+                    }
+            except Exception as e:
+                # Self-reflection is non-critical, continue even if it fails
+                pass
+
         return res
 
 
