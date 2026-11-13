@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "7dc1ea56dec14c1bf94c2229f4a8eac1207fc08171f4c35252b9717cf8dbea1b"
+  "value": "028e3a05da534d38ac138c0f70b4fe84f92457a75362102cb9780961dfd300f8"
  },
  "engines": [
   {
@@ -237082,7 +237082,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHAT_AN_OPERATOR_MEANS_IS_A_COMPUTATION_NOT_A_LIST_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "b0416c4f615a7d7f537094e3177aa1a5a013670a5eebb5f938eab436d2217883",
+   "sha256": "af1e2ad5267324a3130874a2763cad317f32fb6807e2b7f7532e98ce651b5268",
    "status": "",
    "terms": {
     "20261112": 1,
