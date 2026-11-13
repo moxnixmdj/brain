@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 416,
+  "knowledge_documents": 417,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6812,
+  "research_index_records": 6813,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0b20ed52520d1147132f2f875d7a0ed53e6ffd31283df1db7e3785ae1b19aeba"
+  "value": "4cc3074252c4013d90b7b0161f2927fe5c0a0d5393fb8f63cb009d2a7beae10f"
  },
  "engines": [
   {
@@ -57932,6 +57932,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 14628,
+   "headings": [
+    "Seven claims, scored against measurement",
+    "1. \"We already solved instant learning and instant learning in new environments perfectly.\"",
+    "2. \"Give it the smartest actions once and it learns them permanently.\"",
+    "3. \"Therefore we can solve anything on a computer.\"",
+    "4. \"The brutal truth: it's a limited lookup system, we need model weights, conceptual",
+    "5. \"It can't work on different files or different task structures.\"",
+    "6. \"We were trying to make our model a sentient creature.\"",
+    "7. \"We already solved it, with non-obvious names; use the web.\"",
+    "What is real, what is not — one table",
+    "What I did not do, and why",
+    "The fastest real route, ranked",
+    "Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "SEVEN_CLAIMS_SCORED_AGAINST_MEASUREMENT_20261112_V1.md",
+   "sha256": "6418da45a5dee67cc0607ea9856ee479f69405b06d9ffab137c489fe0a3ebc5b",
+   "summary": "**2026-11-12 · branch `arena/87f2b453-brain` · base `d9318588`**",
+   "terms": {
+    "22": 6,
+    "40": 12,
+    "607": 5,
+    "agent": 5,
+    "all": 7,
+    "already": 12,
+    "arxiv": 5,
+    "because": 9,
+    "been": 5,
+    "but": 6,
+    "cases": 6,
+    "change": 7,
+    "corpus": 11,
+    "did": 5,
+    "different": 9,
+    "every": 6,
+    "false": 10,
+    "files": 6,
+    "hi": 6,
+    "instant": 6,
+    "learning": 8,
+    "makes": 7,
+    "measured": 8,
+    "measurement": 7,
+    "memory": 12,
+    "missing": 6,
+    "model": 5,
+    "most": 5,
+    "names": 5,
+    "new": 6,
+    "no": 10,
+    "not": 35,
+    "nothing": 6,
+    "one": 22,
+    "only": 6,
+    "oracle": 5,
+    "organ": 8,
+    "organs": 5,
+    "own": 8,
+    "real": 16,
+    "round": 5,
+    "rule": 10,
+    "rules": 6,
+    "same": 6,
+    "target": 6,
+    "taught": 6,
+    "transfer": 11,
+    "tree": 14
+   },
+   "title": "Seven claims, scored against measurement",
+   "title_terms": [
+    "against",
+    "claims",
+    "measurement",
+    "scored",
+    "seven"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 3408,
    "headings": [
     "Verified skills do not compose just because each one verified",
@@ -77219,10 +77299,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1218,
+  "included_source_count": 1219,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ecb81562eac639802641926b13fa81f7cfc73318601e7e588e631f819a58bc08"
+  "source_tree_digest": "ed31aecb3322093ae73bb34b7a46d46a3a6fd76fdd9a7a3fdecc7bae3970f129"
  },
  "research_index": [
   {
@@ -206945,6 +207025,24 @@
     "v1": 1,
     "verify": 1,
     "wake": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHAT_THE_OPERAND_NAMES_COST_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_THE_OPERAND_NAMES_COST_20261112_V1.json",
+   "schema": "BRAIN_WHAT_THE_OPERAND_NAMES_COST_V1",
+   "sha256": "5c12eef3cf794d65065a753527f10906dd127e8df761fa29c7344dc7e0b50a00",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "cost": 1,
+    "names": 1,
+    "operand": 1,
+    "v1": 1
    }
   },
   {

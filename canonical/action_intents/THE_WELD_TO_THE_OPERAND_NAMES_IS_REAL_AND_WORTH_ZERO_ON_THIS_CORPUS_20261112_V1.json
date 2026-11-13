@@ -1,0 +1,203 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_WELD_TO_THE_OPERAND_NAMES_IS_REAL_AND_WORTH_ZERO_ON_THIS_CORPUS_20261112_V1",
+ "action_intent_id": "THE_WELD_TO_THE_OPERAND_NAMES_IS_REAL_AND_WORTH_ZERO_ON_THIS_CORPUS_20261112_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "THE_WELD_TO_THE_OPERAND_NAMES_IS_REAL_AND_WORTH_ZERO_ON_THIS_CORPUS_20261112_V1",
+ "date": "2026-11-12",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "d93185887ade25b4d13f9ad95dad9b41902ef813",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "The owner asserted that instant learning and instant learning in new environments are already solved perfectly, that therefore anything on a computer is solvable, and separately that the system is only a lookup system whose fix is model weights, conceptual understanding, transfer and reasoning. Seven claims were scored against recorded measurement. Instant learning is real: 22 of 22 same-bug repairs from a stored rule. Instant transfer is not: 1 of 40 on QuixBugs as taught and 3 of 40 with every generalisation on, and 18 of 40 fixes could not even be stored. The claim that weights are required is unsupported -- ReasoningBank is training-free and gains 8.3 points absolute. The claim that the system is a pure lookup is half wrong: every one of the 607 recovered changes is cross-file by construction. The one place the owner was right about the tree is naming: five organs already exist for exactly these ideas (rule_scope_learning_v1, settled_admission_v1, rule_expiry_v1, skill_recheck_v1, operator_generalization_v1). New measurement this round: alpha_safe_rewrite generalises a demonstrated operator change across alpha-renamed code with no oracle, and on the same 607 applicable changes it adds 0.0 -- because the organ refuses 0 of 330 askings on a corpus selected for sameness, so there is no refusal to rescue. The null is the result.",
+ "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
+ "causal_blocker": "THE_OWNER_ASSERTS_INSTANT_LEARNING_IS_SOLVED_PERFECTLY_INCLUDING_NEW_ENVIRONMENTS__AND_THE_TREE_ALREADY_CONTAINS_THE_MECHANISMS_UNDER_NON_OBVIOUS_NAMES__WHILE_THE_TREES_OWN_QUBIXBUGS_RECORD_SAYS_TRANSFER_IS_1_OF_40",
+ "expected_parent_change": "THE_TREE_CAN_SAY_PRECISELY_WHICH_CLAIMS_ABOUT_INSTANT_LEARNING_ARE_REAL_AND_THAT_UNWELDING_THE_OPERAND_NAMES_IS_WORTH_ZERO_ON_THIS_CORPUS__AND_THAT_THE_REAL_BLOCKER_IS_THAT_EVERY_RUNG_ABOVE_EXACT_STATEMENT_IS_ORACLE_GATED",
+ "expected_parent_frontier_change": "NO_FAMILY_FLIPPED__ZERO_CAPABILITY_CREDIT__THE_ROUTE_IS_RE_ORDERED_FROM_MORE_OPERATORS_TO_AN_ORACLE_FREE_RUNG_AND_TO_SETTLED_ADMISSION_IN_FRONT_OF_EVERY_LESSON",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_OWNER_ASSERTS_INSTANT_LEARNING_IS_SOLVED_PERFECTLY_INCLUDING_NEW_ENVIRONMENTS__AND_THE_TREE_ALREADY_CONTAINS_THE_MECHANISMS_UNDER_NON_OBVIOUS_NAMES__WHILE_THE_TREES_OWN_QUBIXBUGS_RECORD_SAYS_TRANSFER_IS_1_OF_40",
+ "falsification_condition": "THE_ALPHA_SAFE_DELTA_IS_NOT_ZERO__OR_THE_ORGAN_DOES_REFUSE_ASKINGS_ON_THIS_CORPUS__OR_THE_QUBIXBUGS_TRANSFER_FIGURE_IS_NOT_1_OF_40_IN_THE_RECORD__OR_A_NEW_TEST_FAILURE_APPEARS",
+ "stop_condition": "THE_TOOL_AND_ITS_19_TESTS_ARE_IN_THE_TREE__THE_RECORD_IS_WRITTEN__THE_MEMO_SCORES_ALL_SEVEN_CLAIMS_WITH_THE_MEASUREMENT_BEHIND_EACH__THE_NULL_IS_STATED_AS_A_NULL__REPO_INTEGRITY_GUARD_PASSES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "explicit_user_authorization": "PARAPHRASE, NOT A QUOTATION. On 2026-11-12 the owner again asked whether instant learning is a perfect solution to every problem on a computer, whether giving the model the smartest actions once makes it learn them permanently, whether the system is only a lookup system that needs weights and reasoning, and what is real and what is not; with first-principles reasoning about the real limiting factor, bad ideas killed before implementation, a demand to maximize web use and use 2026 research, and a standing instruction to push and merge. No governance change, no law changed, no credit claimed, no sentience claim, zero model calls in the producer path.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/what_the_operand_names_cost_v1.py",
+   "canonical/tests/test_what_the_operand_names_cost_v1.py",
+   "canonical/verification/WHAT_THE_OPERAND_NAMES_COST_20261112_V1.json",
+   "SEVEN_CLAIMS_SCORED_AGAINST_MEASUREMENT_20261112_V1.md"
+  ],
+  "route_class": "REUSE",
+  "earlier_routes_exhausted_reason": "REUSE_WAS_THE_ROUTE: the corpus, the organ, the QuixBugs record and the generalisation ladder all already exist and were used unchanged. The only new artefact is the alpha-rename operator and the measurement of what it is worth, which came out at zero.",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_INSTANT_LEARNING_IN_NEW_ENVIRONMENTS_IS_ALREADY_SOLVED_PERFECTLY__THE_TREES_OWN_RECORD_SAYS_1_OF_40__AND_THAT_THE_SYSTEM_IS_ONLY_A_LOOKUP_SYSTEM__ALL_607_RECOVERED_CHANGES_ARE_CROSS_FILE__AND_THAT_MODEL_WEIGHTS_ARE_REQUIRED_FOR_GENERALISATION__REASONINGBANK_IS_TRAINING_FREE_AT_PLUS_8_3_ABSOLUTE",
+  "laws_read_this_session": [
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
+  ],
+  "causal_evidence": "MEASURED_2026-11-12__ALPHA_SAFE_REWRITE_ON_THE_RECORDED_CORPUS_15_PULL_REQUESTS_89_FILES_HASH_VERIFIED__162_APPLICABLE_ASKINGS_607_DEVELOPER_CHANGES__AS_TAUGHT_493_OF_607_0_8122__ALPHA_SAFE_493_OF_607_0_8122__DELTA_0_0__ORGAN_REFUSALS_ON_THIS_CORPUS_0_OF_330__AND_THE_TREES_RECORDED_QUBIXBUGS_TRANSFER_22_OF_22_SAME_BUG_AGAIN_1_OF_40_ONE_FIX_3_OF_40_WIDEST_0_OF_40_SEED_BUNDLE_18_OF_40_FIXES_REFUSED_TO_STORE"
+ },
+ "measured_effect": "ALPHA_SAFE_DELTA_0_0__COVERAGE_0_8122_BOTH_TIERS__PRECISION_0_9762__WRONG_12_OF_505__ORGAN_REFUSALS_0_OF_330_ASKINGS__AND_THE_ALPHA_WELD_IS_REAL_STANDALONE_ONE_DEMONSTRATION_OF_A_LE_HI_TO_A_LT_HI_STORES_THE_LITERAL_RULE_AND_REFUSES_X_LE_TOP",
+ "next_step": "RE_RUN_QUIXBUGS_ON_TODAYS_ORGAN_BECAUSE_THE_RECORD_PREDATES_THE_REPAIR_AND_THAT_IS_THE_NUMBER_THE_THESIS_RESTS_ON__THEN_WIRE_settled_admission_v1_IN_FRONT_OF_EVERY_LESSON_THAT_REACHES_A_NEW_TARGET_BECAUSE_THAT_IS_THE_ONE_CHANGE_AIMED_AT_THE_FAILURE_THE_2026_LITERATURE_SAYS_DOMINATES",
+ "recursive_obs": {
+  "canonical_base_commit": "d93185887ade25b4d13f9ad95dad9b41902ef813",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "THE_TREE_CAN_STATE_WHICH_OF_THE_OWNERS_CLAIMS_ARE_REAL_WITH_THE_MEASUREMENT_BEHIND_EACH_AND_HAS_MEASURED_THAT_UNWELDING_THE_OPERAND_NAMES_BUYS_NOTHING_ON_ITS_OWN_CORPUS",
+  "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
+  "selected_surviving_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
+  "deleted_or_bypassed_paths": [
+   "TRAIN_THE_WEIGHTS (deleted as a first move: ReasoningBank is training-free at +8.3 absolute, and continual fine-tuning is a less reversible version of the same negative-transfer risk)",
+   "SHIP_ALPHA_SAFETY_AS_A_GAIN (deleted: measured delta 0.0; reporting it as a gain would be false)",
+   "WIRE_operator_generalization_v1_INTO_THE_ONE_EXAMPLE_ORGAN (deleted: it is oracle-gated on purpose by OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE, and an oracle-free version would be the negative-transfer failure STRATA measures)",
+   "RE_RUN_QUIXBUGS_THIS_ROUND (deferred and named: the 1-of-40 figure on record is the one the claim is about, and substituting a newer measurement would change the question)"
+  ],
+  "stop_condition": "SEE_TOP_LEVEL_STOP_CONDITION",
+  "expected_parent_level_state_change": "NO_FAMILY_FLIPPED__ZERO_CAPABILITY_CREDIT__THE_ROUTE_IS_RE_ORDERED",
+  "why_selected_route_is_fastest_sufficient": "THE_CORPUS_THE_ORGAN_THE_QUBIXBUGS_RECORD_AND_THE_GENERALISATION_LADDER_ALL_ALREADY_EXIST__AND_THE_ALPHA_RENAME_OPERATOR_IS_ONE_AST_WALK_WITH_NO_ORACLE_AND_NO_SPEND",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "TRAIN_WEIGHTS (rejected)",
+   "WIRE_THE_ORACLE_GATED_LADDER (rejected)",
+   "MEASURE_THE_ALPHA_RENAME_OPERATOR (chosen)",
+   "BUILD_A_NEW_MECHANISM (rejected: the mechanisms exist)"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-13T01:36:59Z",
+   "max_age_hours": 24,
+   "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
+   "incumbent_route": "THE_TREE_IS_A_LOOKUP_SYSTEM_AND_NEEDS_MODEL_WEIGHTS_TO_GENERALISE",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/QUIXBUGS_ONE_FIX_TRANSFER_20261111_V1.json",
+     "canonical/swe_kernel/rule_scope_learning_v1.py",
+     "canonical/swe_kernel/taught_actions/settled_admission_v1.py",
+     "canonical/swe_kernel/rule_expiry_v1.py",
+     "canonical/swe_kernel/skill_recheck_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2509.25140 ReasoningBank ICLR 2026 training-free memory +8.3 abs"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2610.19386v1 STRATA negative transfer -100 vs memoryless",
+     "https://arxiv.org/html/2604.27003 When Continual Learning Moves to Memory dRR +4.6 dNL -26.1",
+     "https://arxiv.org/abs/2509.26354 Your Agent May Misevolve ICLR 2026",
+     "https://arxiv.org/abs/2602.03224 TAME 211 of 383 self-authored rules regressed"
+    ]
+   },
+   "challenger_routes": [
+    {
+     "route": "TRAIN_THE_MODELS_WEIGHTS_ON_EXPERIENCE",
+     "evidence": [
+      "https://arxiv.org/abs/2509.25140",
+      "https://arxiv.org/html/2604.27003"
+     ],
+     "qualification_evidence": [
+      "ReasoningBank reaches +8.3 absolute with no training at all, so weights are not the binding constraint",
+      "continual fine-tuning risks catastrophic forgetting with no reliable rollback, which is the same negative-transfer risk but less reversible"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "NOT THE BINDING CONSTRAINT",
+      "CAPABILITY_STRENGTH": "EQUAL OR WEAKER THAN TRAINING-FREE",
+      "WALL_CLOCK": "HOURS TO DAYS",
+      "INCREMENTAL_COST": "GPU SPEND",
+      "RELIABILITY": "NO ROLLBACK",
+      "VERIFIABILITY": "HARDER TO ATTRIBUTE"
+     }
+    },
+    {
+     "route": "WIRE_THE_EXISTING_ORACLE_GATED_GENERALISATION_LADDER_IN_WITHOUT_AN_ORACLE",
+     "evidence": [
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py:1428",
+      "https://arxiv.org/html/2610.19386v1"
+     ],
+     "qualification_evidence": [
+      "the gate OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE exists because an operator swap changes behaviour",
+      "STRATA measures a memory that makes an agent worse than memoryless on the hard cases"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "WOULD INTRODUCE NEGATIVE TRANSFER",
+      "CAPABILITY_STRENGTH": "NOT ESTABLISHED",
+      "WALL_CLOCK": "FAST",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "MEASURED TO REGRESS",
+      "VERIFIABILITY": "NO ORACLE TO CHECK WITH"
+     }
+    }
+   ],
+   "negative_search_summary": "NO_PRIOR_MEASUREMENT_IN_THIS_TREE_SEPARATED_AN_OPERATOR_CHANGE_FROM_THE_OPERAND_NAMES_IT_WAS_SHOWN_ON__AND_THE_2026_LITERATURE_IS_UNANIMOUS_THAT_TRAINING_FREE_MEMORY_TRANSFERS_ONLY_WHEN_ABSTRACTED_AND_THAT_CONCRETE_STEP_MEMORY_CAN_HARM",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-13T01:36:59Z",
+    "max_age_hours": 2,
+    "selected_route": "SCORE_THE_OWNERS_SEVEN_CLAIMS_AGAINST_RECORDED_MEASUREMENT_AND_MEASURE_WHAT_UNWELDING_THE_OPERAND_NAMES_BUYS",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "ast.parse and ast.unparse of the demo and target lines succeeded"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_RECORDED_CORPUS",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "refetch produced 15 pull requests / 89 files matching the recorded hashes"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ],
+    "note": "NO_NETWORK_AND_NO_THIRD_PARTY_PACKAGE_IS_NEEDED_AT_RUN_TIME"
+   }
+  }
+ }
+}
