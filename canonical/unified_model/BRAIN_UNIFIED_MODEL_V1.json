@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 426,
+  "knowledge_documents": 427,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6824,
+  "research_index_records": 6826,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e3ebb252fefdc9b6c788896599c9aa80e3ea158280c680fefd28bfd6ddb54436"
+  "value": "ffe448281cbbb93b52cdcf720a3c10d63974ead6467dce463b513c2453b795a1"
  },
  "engines": [
   {
@@ -46103,6 +46103,84 @@
     "scope",
     "skill",
     "syntax"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 11048,
+   "headings": [
+    "A skill learns WHERE it applies, from executed observations, in five of them",
+    "The claim, bounded",
+    "Why this was missing",
+    "The measurement",
+    "Two-sided controls",
+    "Three traps this was built out of, each hit for real",
+    "What this does NOT say",
+    "Relation to the four requirements in the critique",
+    "Verdict on \"do it once ⇒ learned forever\""
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1.md",
+   "sha256": "5f121689dc5b82722e5012dc432b3182650327d2351c9f151a51c9589d936ad4",
+   "summary": "**Date:** 2026-11-12 **Carrier:** Arena session sandbox **Authority:** NONE — producer-run measurement on constructed fixtures **Modules:** `canonical/swe_kernel/skill_scope_acquisition_v1.py`, `canonical/tools/skill_scope_acquisition_probe_v1.py`, `canonical/tests/test_skill_scope_acquisition_v1.py` **Reproduce:** `python3 canonical/tools/skill_scope_acquisition_probe_v1.py` · `python3 -m pytest ",
+   "terms": {
+    "about": 3,
+    "against": 6,
+    "all": 6,
+    "already": 3,
+    "answer": 3,
+    "baseline.violates_own_spec": 6,
+    "bought": 5,
+    "boundary": 5,
+    "buys": 3,
+    "cannot": 3,
+    "canonical": 8,
+    "code": 4,
+    "computed": 4,
+    "each": 4,
+    "evidence": 6,
+    "fact": 7,
+    "failure": 7,
+    "model": 4,
+    "needs": 5,
+    "no": 10,
+    "none": 4,
+    "not": 27,
+    "nothing": 8,
+    "now": 8,
+    "observation": 5,
+    "observations": 7,
+    "one": 13,
+    "only": 8,
+    "over": 4,
+    "own": 4,
+    "rather": 7,
+    "real": 4,
+    "requirements": 4,
+    "returns": 8,
+    "round": 4,
+    "same": 8,
+    "scope": 8,
+    "shipped": 4,
+    "skill": 8,
+    "skills": 4,
+    "specification": 4,
+    "successes": 5,
+    "than": 10,
+    "three": 6,
+    "tree": 6,
+    "true": 4,
+    "were": 4,
+    "wrong": 4
+   },
+   "title": "A skill learns WHERE it applies, from executed observations, in five of them",
+   "title_terms": [
+    "applies",
+    "executed",
+    "five",
+    "learns",
+    "observations",
+    "skill"
    ]
   },
   {
@@ -78025,10 +78103,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1228,
+  "included_source_count": 1229,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ab50642d0585d1ac2d951aa32d537d4be81b74d2ef1f0c0f819eb8e19236d52e"
+  "source_tree_digest": "6c758f5ab7cb9797e29674a697b46fa2c4c8d15c1bbbf413adb744e0237f4da7"
  },
  "research_index": [
   {
@@ -194939,6 +195017,29 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SKILL_SCOPE_ACQUISITION_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SKILL_SCOPE_ACQUISITION_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_SKILL_SCOPE_ACQUISITION_VERIFICATION_V1",
+   "sha256": "79582f8e7b5b6114114174e3258dad5c6e421ad4d1fb6d8422c998717f6449f1",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "acquisition": 1,
+    "applies": 1,
+    "executed": 1,
+    "five": 1,
+    "learns": 1,
+    "observations": 1,
+    "scope": 1,
+    "skill": 2,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-11-12",
    "id": "research:canonical/verification/SKILL_SCOPE_LEDGER_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -227594,6 +227695,31 @@
    }
   },
   {
+   "action_id": "A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_SKILL_LEARNS_WHERE_IT_APPLIES_FROM_EXECUTED_OBSERVATIONS_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2cadd77a58fae64b0d3c5fcf153a481f98e52182833031d34b4f982e39baeab5",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_skill_learns_where_it_applies_from_executed_observations_20261112_v1": 1,
+    "applies": 1,
+    "compute_the_facts_a_target_can_be_observed_to_have_from_its_own_ast_and_its_own_executed_specification__spend_observations_until_the_trees_own_law_identifies_the_requirement__let_the_caller_own_realisability_so_no_experiment_is_invented__treat_a_non_firing_as_no_observation_rather_than_a_failure__and_refuse_with_a_named_reason_when_the_evidence_does_not_support_one_scope": 1,
+    "executed": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "learns": 1,
+    "observations": 1,
+    "skill": 1,
+    "skill_scope_acquisition_v1_ships__one_crystallized_boundary_lesson_buys_required_baseline_violates_own_spec_in_5_executed_observations_with_1_survivor__the_same_skill_goes_from_repairing_5_and_breaking_correct_code_on_3_to_repairing_5_and_breaking_0_by_refusing_before_any_edit__three_successes_alone_buy_nothing_and_the_law_refuses_to_name_a_requirement": 1,
+    "the_tree_could_store_a_success_and_a_failure_but_not_a_state__so_the_law_that_identifies_a_skills_applicability_had_nothing_to_read__every_boundary_stayed_undetermined_and_the_ledger_reported_exact_match_only_for_all_five_shipped_skills": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "A_STATED_COMMAND_LINE_RUNS_AND_IS_CHECKED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -238128,7 +238254,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/TWO_DOORS_ONE_ANSWER_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "2dd0ea93249ca903ed86ef8c5fdeff18624cc96c76da3787bc9185e8cf811e68",
+   "sha256": "f81061f39143455dfa1a91ec5fd362ca86006a57469d6e87989444c029c9a487",
    "status": "",
    "terms": {
     "20261112": 1,
