@@ -493,6 +493,29 @@ def test_the_records_candidates_are_the_ones_the_count_called_resolving(written)
         assert row["whole_run"]["start_passing"] == row["whole_run"]["start_passing_wanted"] or row["keeps_the_whole_suite"] is not True
 
 
+def test_the_record_names_what_was_broken_as_its_rows_have_it(written):
+    rows = {f"{row['task']} place {row['place']}": row for row in written["candidates"]}
+    said = written["what_was_broken"]
+    assert sorted(said) == sorted(name for name, row in rows.items() if row["keeps_the_whole_suite"] is False)
+    for name, one in said.items():
+        assert one["tests"] == rows[name]["broken_by_the_candidate"] and one["tests"]
+    for name, row in rows.items():
+        assert len(row["not_passing_in_the_whole_run"]) == row["whole_run"]["not_passing"] == written["tests_and_subtests_not_passing_in_each_whole_run"][name]
+        assert row["whole_run"]["ran"] == written["tests_run_in_each_whole_run"][name] and len(row["whole_run_output_sha256"]) == 64
+        # what the record's limits say of this machine: with the modules run again, as many do not pass with the candidate, and as many less the broken with the fix
+        assert row["run_again"]["with_the_candidate"]["not_passing"] == row["whole_run"]["not_passing"]
+        assert row["run_again"]["with_the_fix"]["not_passing"] == row["whole_run"]["not_passing"] - len(row["broken_by_the_candidate"])
+    assert written["whole_runs_read_from_files"] == [name for name, row in rows.items() if row["whole_run"]["read_from_a_file"]]
+
+
+def test_the_record_names_its_pushes_and_the_seeded_fault_that_survives(written):
+    last_push = written["pushed_while_the_first_five_whole_runs_were_made_and_before_the_second_runs_of_this_record"]
+    assert last_push["code_sha256"] == written["code_sha256"]
+    assert all(len(written[key]["commit"]) == 40 for key in ("pushed_before_any_whole_run", "pushed_after_the_first_whole_run_and_before_any_other"))
+    found = written["seeded_faults"]
+    assert found["rounds"][-1]["survived"] == [found["the_one_that_survives"]["fault"]] and found["rounds"][0]["caught"] < found["rounds"][-1]["caught"]
+
+
 # --------------------------------------------------------------------------- #
 # the round of seeded faults (canonical/tools/seeded_faults_whole_suite_v1.py)
 # --------------------------------------------------------------------------- #

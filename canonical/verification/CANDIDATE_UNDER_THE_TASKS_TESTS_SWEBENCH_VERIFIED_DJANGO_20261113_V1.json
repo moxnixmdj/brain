@@ -7,7 +7,7 @@
   "RESOLVES is the benchmark's own measure: every test the task says should start passing passes, and every test it says should keep passing still passes. Only the test modules the task's test patch touches are run, which is what the benchmark does too.",
   "ONE SUBMISSION is the first candidate: what the chain would hand in, having seen no test. WITHIN TWENTY is the first candidate in order that resolves the task: that needs the task's hidden tests to say which one it is, and a submission may not use them. The two are kept apart everywhere.",
   "What was found. 225 of the 231 tasks can be judged here. One submission resolves 5 tasks. Within twenty, 7. Of 2422 candidates run, 10 resolve. The first candidate made from ANOTHER task's text resolves 0 of 77.",
-  "What this is not. It is not a run in the tasks' own images: this machine has Python 3.11 and no Docker. It is not all 500 tasks. And RESOLVES does not say the change is right everywhere in the project: see RESOLVING_CANDIDATE_UNDER_THE_WHOLE_SUITE_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json, which runs Django's whole suite on the candidates this record calls resolving.",
+  "What this is not. It is not a run in the tasks' own images: this machine has Python 3.11 and no Docker. It is not all 500 tasks. And RESOLVES does not say the change is right everywhere in the project: see RESOLVING_CANDIDATE_UNDER_THE_WHOLE_SUITE_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json, which runs Django's whole suite on the first resolving candidate of each of the seven tasks: six keep it, and the one of django__django-12155 breaks 8 tests the benchmark does not run.",
   "Nobody but the producer has run this again. authority is NONE."
  ],
  "python": "3.11.2",
@@ -390,7 +390,7 @@
   }
  },
  "limits": [
-  "Only the test modules the task's test patch touches are run, as SWE-bench does. A candidate can pass those and break a test elsewhere; the whole-suite record counts that for the candidates called resolving here.",
+  "Only the test modules the task's test patch touches are run, as SWE-bench does. A candidate can pass those and break a test elsewhere; the whole-suite record counts that for the first resolving candidate of each of the seven tasks, and finds one that does.",
   "Django only: 231 of the 500 tasks. The four scikit-learn tasks the earlier record counts were not run (they need compiled code).",
   "Python 3.11 on this machine, not the Python of each task's image. 6 tasks are not judged; versions 1.11 and 2.2 (one task each) do not run at all here.",
   "17 of 17672 tests that should keep passing fail here even with the expert's fix, in 10 tasks. They are left out: a candidate is not asked to pass them.",
