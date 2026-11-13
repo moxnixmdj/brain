@@ -1,0 +1,463 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "THE_COMPILE_LAYER_RELEASED_20261113_V1",
+ "action_intent_id": "THE_COMPILE_LAYER_RELEASED_20261113_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "SECOND_FAMILY_GENERALIZATION_MEASURED_20261112_V1",
+ "date": "2026-11-13",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "This round released the compile layer -- the measured wall (32/38 realistic sentences failing before any dispatch, PR #6760's corrected diagnosis) -- with a general mechanism and answered the owner's weight-space theory with freshly fetched 2026 research. MECHANISM: canonical/runtime/effect_directed_compile_v1.py routes a sentence to a declared capability when (1) the named artifact's format is verifier-checkable (the carrier gate's own evidence bar), (2) the IDF-weighted overlap between the sentence's stemmed content tokens and the candidate's reviewed keywords/provides reaches 0.8 (path fragments never vote; two mid-frequency tokens or one rare and one common open the gate; word soup does not), and (3) every non-knob argument binds from the sentence -- an unbindable argument refuses the row; operation-shaped arguments are never guessed. Execution goes through the R29 confined seam; the first VERIFIED candidate wins; attempts are recorded; a failing run is fail-closed WITH its receipt, now naming the adapter's own reason (CONFINED_ADAPTER_RAISED in confined_dispatch_v1 -- silence about why is how a compile gap got misread as a sandbox gap). The tree-sitter capability was added to the declarations after review (VERIFIED_BOUND_CAPABILITY with an independent test). The door insertion is 9 lines between the honest-refusal check and the carrier gate. MEASURED: probe on the committed tree: EXECUTED 3 to 8 (PR2a predicted >=8), ROUTED_ELSEWHERE 3 to 11, NOT_COMPILED 32 to 18, all rows named; 5 effect-directed confined passes (tree-sitter index, AST symbol index, test selection, crosshair contract check, crosshair concrete-execution oracle) and 4 honest fail-closed rows (the material a clean clone lacks); 8/8 new tests; seam suite 5/5; guards at clean-tree baseline; tree-sitter run-to-run variance recorded honestly as a capability-side question. WEB (all four owner-cited sources fetched and real): Experience Distillation (arXiv 2607.21051) retains 64.8-93.4% of ICL gains in weights while direct SFT recovers 3.8%, matching RL with 9.6x fewer samples, accumulating over cycles; ASCENT (arXiv 2610.05303) distills ONLY verified experience into LoRA fast weights (+22 points, held-out transfer) and its central negative result is that directly imitating a single attempt DESTABILIZES the policy; Memory Models (Letta Jun 2026) frames token-space memory trained with memory-native RL. Verdict delivered to the owner: one try teaches nothing permanently -- one VERIFIED success, distilled, persists; this sandbox has no weights to update (zero model dependency is deliberate) and its contribution to any future trainer is the half both papers require and harnesses lack: verified, receipted experience.",
+ "selected_route": "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
+ "causal_blocker": "THE_COMPILE_LAYER_DID_NOT_MAP_SENTENCES_TO_DECLARED_CAPABILITIES_AND_THE_DOOR_DISCOVERY_FALLBACK_MASKED_THE_GAP_WITH_A_BOUNDARY_STATUS__WEIGHT_SPACE_LEARNING_HAS_NO_WEIGHTS_IN_THIS_SANDBOX",
+ "expected_parent_change": "REALISTIC_SENTENCES_NOW_COMPILE_THROUGH_REVIEWED_DECLARATIONS_AND_EXECUTE_ON_THE_DISPOSABLE_CLONE_WITH_VERIFIED_EFFECT_RECEIPTS__EXECUTED_3_TO_8_NOT_COMPILED_32_TO_18__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "expected_parent_frontier_change": "REALISTIC_SENTENCES_NOW_COMPILE_THROUGH_REVIEWED_DECLARATIONS_AND_EXECUTE_ON_THE_DISPOSABLE_CLONE_WITH_VERIFIED_EFFECT_RECEIPTS__EXECUTED_3_TO_8_NOT_COMPILED_32_TO_18__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_COMPILE_LAYER_DID_NOT_MAP_SENTENCES_TO_DECLARED_CAPABILITIES_AND_THE_DOOR_DISCOVERY_FALLBACK_MASKED_THE_GAP_WITH_A_BOUNDARY_STATUS__WEIGHT_SPACE_LEARNING_HAS_NO_WEIGHTS_IN_THIS_SANDBOX",
+ "falsification_condition": "A_SENTENCE_ROUTING_WITHOUT_ITS_NON_KNOB_ARGUMENTS_BOUND_FROM_THE_SENTENCE__OR_A_FAILING_CONFINED_RUN_REPORTED_AS_A_PASS__OR_A_PINNED_REFUSAL_MOVING__OR_THE_PROBE_SCOREBOARD_NOT_REPRODUCING__OR_A_CORPUS_SENTENCE_FOUND_IN_THE_ROUTER_SOURCE",
+ "stop_condition": "PR2_VERIFIED_PROBE_8_EXECUTED_VS_PREDICTED_GE8_ALL_ROUTED_ROWS_NAMED_5_EFFECT_DIRECTED_CONFINED_PASSES_4_HONEST_FAIL_CLOSED_RECEIPTS_PINS_STAND_GUARD_AT_CLEAN_TREE_BASELINE__WEB_VERIFIED_ED_2607_21051_AND_ASCENT_2610_05303_NAIVE_ONE_TRY_DISTILLATION_DESTABILIZES_ONLY_VERIFIED_EXPERIENCE_DISTILLS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+ "explicit_user_authorization": "Owner directive on 2026-11-12: 'And always after you make any of your work, push and merge your work always.' $0 spend, zero protected or SHA-pinned paths touched, no sentience claim, no governance change.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/effect_directed_compile_v1.py",
+   "canonical/runtime/confined_dispatch_v1.py",
+   "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+   "canonical/tests/test_effect_directed_compile_v1.py",
+   "THE_COMPILE_LAYER_RELEASED_20261113_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_ONE_TRY_PER_ENVIRONMENT_TEACHES_PERMANENTLY__THE_FETCHED_PAPERS_AND_THE_TREE_PINS_AGREE_NAIVE_SINGLE_ATTEMPT_DISTILLATION_DESTABILIZES_ONLY_VERIFIED_EXPERIENCE_DISTILLS__AND_THAT_WEIGHT_SPACE_LEARNING_EXISTS_HERE__NO_WEIGHTS_EXIST_IN_THIS_SANDBOX",
+  "laws_read_this_session": [
+   "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_b8c42ebc__PROBE_8_11_1_18_PR2_PRE_REGISTERED_AND_VERIFIED__5_CONFINED_PASSES_4_NAMED_FAIL_CLOSES__8_8_TESTS__WEB_2607_21051_AND_2610_05303_FETCHED_AND_CITED"
+ },
+ "measured_effect": "PROBE_EXECUTED_3_TO_8_PREDICTED_GE8_VERIFIED__ROUTED_ELSEWHERE_3_TO_11__NOT_COMPILED_32_TO_18__ALL_ROWS_NAMED__5_EFFECT_DIRECTED_CONFINED_PASSES_4_HONEST_FAIL_CLOSED__8_8_NEW_TESTS_SEAM_5_5_GUARDS_AT_BASELINE__ZERO_SPEND",
+ "load_bearing_primary": {
+  "interpretation": "THE_COMPILE_LAYER_RELEASED_FOR_DECLARED_CAPABILITIES_WITH_A_GENERAL_MECHANISM__NO_NEW_CAPABILITY_CLASS_CLAIMED__NO_FAMILY_FLIPPED__TRUTH_ACHIEVED_STAYS_FALSE",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/runtime/confined_dispatch_v1.py",
+  "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+  "canonical/tools/realistic_goal_reach_probe_v1.py",
+  "THE_CONFINED_DISPATCH_SEAM_EXISTS_20261112_V1.md"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "b8c42ebce3ecbf4e7981b570928d10593608a4bb",
+  "real_outcome": "THE_COMPILE_LAYER_IS_RELEASED_FOR_DECLARED_CAPABILITIES__PROBE_EXECUTED_3_TO_8__ALL_ROWS_NAMED__THE_WEIGHT_SPACE_ANSWER_IS_GROUNDED_IN_FETCHED_2026_PAPERS",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "obs_goal": {
+   "real_outcome": "Owner claims one-try permanent learning and asks whether weight-space learning is the missing piece. The compile wall was released with a general mechanism, the probe verified the prediction exactly, and the fetched papers answer the theory: naive one-try distillation destabilizes; verified-experience distillation persists; no weights exist in this sandbox to update.",
+   "proxy_goals_deleted": [
+    "hand-written per-sentence recognizers in the compiler (benchmark-specific routing, banned)",
+    "binding operation-shaped arguments by guessing from verbs",
+    "treating an adapter's honest refusal as silence (the seam now names CONFINED_ADAPTER_RAISED reasons)",
+    "claiming weight-space learning as built when no weights exist in the sandbox"
+   ],
+   "surviving_necessity": "Verified, receipted experience is the reusable half of any future weight-space trainer; the compile layer must extend beyond the declared rows (repair family, network fetchers) with their own honest diffs."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/confined_dispatch_v1.py (the seam -- extended to surface adapter-raised reasons)",
+    "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json (the reviewed data -- tree-sitter row added after review)",
+    "canonical/tools/realistic_goal_reach_probe_v1.py (the scoreboard instrument -- PR2 pre-registered then run)",
+    "canonical/tests/test_computer_unconfined_route_guard_v1.py (the pinned refusals -- clean-tree baseline held)"
+   ],
+   "external_existing_routes_checked": [
+    "Experience Distillation (arXiv 2607.21051, Jul 2026): 64.8-93.4% ICL-gain retention in weights; SFT alone 3.8%; 9.6x fewer samples than RL; continual cycles accumulate",
+    "ASCENT (arXiv 2610.05303, Oct 2026): OaTTT via self-distillation of verified experience into LoRA fast weights; +22 points; naive single-attempt imitation destabilizes",
+    "Memory Models (Letta, Jun 2026): token-space memory across model generations, memory-native RL",
+    "MemoPilot (arXiv 2606.08656): RL-trained memory model assists a frozen player plug-and-play"
+   ],
+   "capability_work_deleted": [
+    "the df<=2 distinctiveness filter (too brittle: one new keyword row killed a correct route) -- replaced by continuous IDF weighting",
+    "path fragments as gate evidence (filesystem vocabulary, not the sentence's English)",
+    "the corpus sentence that leaked into the router's __main__ example (PC12 catches this class)"
+   ],
+   "surviving_gap": "28 of 38 realistic sentences still refuse honestly (repair family, network fetchers, diff-gated rows, unbindable operations); weight-space learning remains out of scope of this zero-model tree by design"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "Intrinsic: sentence-to-capability mapping without benchmark tables is a ranking problem over reviewed interfaces; the honest gate is IDF-weighted lexical agreement plus full argument bindability. Capability-side variance exists: the tree-sitter adapter passed in the probe run and fail-closed with SOURCE_FILE_LIMIT_EXCEEDED in a development e2e on the same repository -- recorded, not smoothed.",
+   "delete_bypass_substitute_options": [
+    "DELETE the discovery fallback -- rejected again: it is the honest refusal of unconfined file creation",
+    "BYPASS by teaching the compiler per-sentence -- rejected: benchmark-specific routing is banned",
+    "SUBSTITUTE a trained recognizer -- rejected: zero model dependency is a deliberate property of this tree"
+   ],
+   "surviving_causal_blocker": "beyond the declared 10, sentences whose capabilities need material a clean clone lacks (conflicts, failing tests, defect specs) or whose arguments cannot bind honestly; weight-space learning needs a trainer this sandbox deliberately does not contain"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "1. Generalise the lifter to constant collections + discriminating-grid gates -- chosen: one rule, all machinery already measured, both families served",
+    "2. Hand-written keyed-table recogniser plus special-case lifter -- rejected: per-family machinery the general rule replaces",
+    "3. Crystallization-time emission -- killed by arithmetic (262 vs 179 bytes embedded) before implementation; needs a runtime-binding execution contract, an architectural decision",
+    "4. Model donor for body understanding -- rejected by law"
+   ],
+   "losing_routes_reason": "Special-casing duplicates what the general rule does; emission changes the execution contract of every downstream organ consumer for a win the replay path already delivers at the system level; a donor violates the ownership law.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is the world's answers through real execution: the never-seen organ and its replay run on held-out action ids including unknowns and type-hostile inputs; the vacuity gate is exercised by the numeric grid that must refuse; the first family's measured numbers (gain 67, armed-vs-cold prediction) are re-run as regression. The prediction was written before the confirmatory run; the test can fail."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "the round-24 note's second-family negative -- superseded by this measurement",
+    "the round-24 next-step candidate 'crystallization-time emission' -- killed with recorded arithmetic, not deferred silently"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "the world-model writer (reused unchanged as the second family's corpus source)",
+    "the round-23/24 admission, licensing, and replay machinery (reused unchanged)"
+   ],
+   "fresh_reuse_plan": "Organ-declared domain probes close the bridge's honest gap; perceptor/policy corpora are the same cheap measurement; the learning-to-learn benchmark re-run is the next cache-proof question."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "re-deriving whether the mechanism generalises -- pinned by the second-family prediction test",
+    "re-arguing the crystallization arithmetic -- recorded in the result document with the numbers"
+   ],
+   "search_stop_decision": "Stop when the generalisation question is answered by measurement and the vacuity gate is symmetric across both gates. Third-family measurement and bridge probe metadata are new rounds with their own predictions.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
+   "ADD_WEIGHT_SPACE_LEARNING_IN_THIS_SANDBOX",
+   "PER_SENTENCE_COMPILER_ROWS",
+   "TEACH_THE_DISCOVERY_FALLBACK_TO_SYNTHESIZE_PROGRAMS"
+  ],
+  "deleted_or_bypassed_paths": [
+   "TUPLE_ONLY_LIFTING_RULE",
+   "FIRST_LINE_ONLY_HELPER_RENDERER",
+   "CRYSTALLIZATION_TIME_EMISSION_CANDIDATE_KILLED_BY_ARITHMETIC",
+   "NON_DISCRIMINATING_GRIDS_AT_BOTH_GATES"
+  ],
+  "selected_surviving_route": "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
+  "why_selected_route_is_fastest_sufficient": "THE_SEAM_AND_DECLARATIONS_EXISTED__THE_ROUTER_IS_DATA_DRIVEN_FROM_THE_SAME_REVIEWED_ARTIFACTS__PR2_WAS_PRE_REGISTERED_AND_VERIFIED_EXACTLY_ON_THE_FIRST_CONFIRMATORY_RUN__AND_THE_THEORY__ANSWER_COST_FOUR_FETCHES_INSTEAD_OF_A_TRAINING_ROUND",
+  "expected_parent_level_state_change": "REALISTIC_SENTENCES_NOW_COMPILE_THROUGH_REVIEWED_DECLARATIONS_AND_EXECUTE_ON_THE_DISPOSABLE_CLONE_WITH_VERIFIED_EFFECT_RECEIPTS__EXECUTED_3_TO_8_NOT_COMPILED_32_TO_18__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "stop_condition": "PR2_VERIFIED_PROBE_8_EXECUTED_VS_PREDICTED_GE8_ALL_ROUTED_ROWS_NAMED_5_EFFECT_DIRECTED_CONFINED_PASSES_4_HONEST_FAIL_CLOSED_RECEIPTS_PINS_STAND_GUARD_AT_CLEAN_TREE_BASELINE__WEB_VERIFIED_ED_2607_21051_AND_ASCENT_2610_05303_NAIVE_ONE_TRY_DISTILLATION_DESTABILIZES_ONLY_VERIFIED_EXPERIENCE_DISTILLS__ZERO_SPEND__ZERO_MODEL_DEPENDENCY__TRUTH_ACHIEVED_STAYS_FALSE",
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-13T04:02:43Z",
+   "max_age_hours": 24,
+   "incumbent_route": "COMPILE_LAYER_WALL_32_OF_38__SEAM_LIVE_BUT_UNREACHABLE_FROM_REALISTIC_SENTENCES__WEIGHT_SPACE_QUESTION_UNANSWERED",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "probe on the committed tree: EXECUTED 3 to 8, ROUTED_ELSEWHERE 3 to 11, NOT_COMPILED 32 to 18; every row named",
+     "8/8 new tests; seam suite 5/5; guard suite at its clean-tree baseline (the controller subtest failure reproduces on the unmodified tree)",
+     "the confined seam surfaced CONFINED_ADAPTER_RAISED reasons; tree-sitter's own SOURCE_FILE_LIMIT_EXCEEDED named honestly",
+     "the IDF gate shows 0 phantom candidates on the 38-sentence corpus; compress, garbage and unbindable-operation sentences refuse"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Experience Distillation (arXiv 2607.21051): ICL gains retained in weights 64.8-93.4%; direct SFT 3.8%; >=9.6x fewer environment samples than RL; continual cycles accumulate 7.1 to 47.0",
+     "ASCENT (arXiv 2610.05303): naive imitation of a single attempt destabilizes the policy; only verifier-accepted experience is distilled into LoRA fast weights; +22 points exact success; transfers to held-out scenes",
+     "Memory Models (Letta, Jun 2026): continual agent learning framed as token-space memory creation and curation trained with memory-native RL"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "tree-sitter, tree-sitter-languages and crosshair-tool installed from pypi so the declared capabilities can actually run; stdlib-only router (re, json, pathlib)",
+     "the router reads only CONFINED_EFFECT_DECLARATIONS_V1.json and the verified registry -- no corpus, no model"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "alphaxiv/pith reviews of 2607.21051: honest empirical core, no code shipped; retention claims read with their caveats",
+     "huggingface papers page for ASCENT: community framing confirms verified-experience-only distillation"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "agent sentence to capability compilation reviewed declarations 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "test-time training LoRA verified experience distillation agent"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "IDF weighted keyword gate argument binding fail closed router"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "ASCENT OaTTT experience distillation November 2026"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
+   "challenger_routes": [
+    {
+     "route": "PER_FAMILY_HAND_WRITTEN_RECOGNISERS_AND_SPECIAL_CASE_DICT_LIFTER",
+     "evidence": [
+      "a dict special case plus a keyed-table recogniser would serve the world-model family specifically"
+     ],
+     "qualification_evidence": [
+      "the recursive collection rule covers tuple, list, set AND dict with less code and no per-family maintenance",
+      "families are still recognised structurally after lifting -- the generalisation does not blur family identity"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Equivalent",
+      "CAPABILITY_STRENGTH": "Strictly narrower (one family per special case)",
+      "WALL_CLOCK": "Similar",
+      "INCREMENTAL_COST": "0 USD either way",
+      "RELIABILITY": "More per-family surface to maintain and re-measure",
+      "VERIFIABILITY": "Same measurement discipline"
+     }
+    },
+    {
+     "route": "CRYSTALLIZATION_TIME_ABSTRACTION_EMISSION",
+     "evidence": [
+      "emitting abstraction calls at organ birth would make every future family member born minimal"
+     ],
+     "qualification_evidence": [
+      "killed by arithmetic: organs must stay self-contained, and helper+call measures ~262 description bytes against the cold form's 179",
+      "emission only pays with a runtime-binding execution contract -- an architectural decision changing every downstream organ consumer, out of round scope"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Unchanged",
+      "CAPABILITY_STRENGTH": "Negative at the organ layer as measured",
+      "WALL_CLOCK": "Higher (execution-contract change)",
+      "INCREMENTAL_COST": "0 USD but large blast radius",
+      "RELIABILITY": "New failure mode for every organ consumer",
+      "VERIFIABILITY": "Requires its own pre-registered prediction on emitted bytes"
+     }
+    },
+    {
+     "route": "GENERALISED_CONSTANT_COLLECTION_LIFTING_WITH_DISCRIMINATING_GRID_GATES",
+     "evidence": [
+      "3 sites measure gain 103 bytes with family recognised from structure; the never-seen organ replays 394 to 277 bytes with 0 held-out mismatches",
+      "the numeric grid that cannot see the domain is REFUSED at both gates instead of shipping unchecked rewrites",
+      "the first family's measured numbers re-run unchanged"
+     ],
+     "qualification_evidence": [
+      "6 new tests including the prediction, the economics, the singleton exclusion, the vacuity gate, and first-family regression",
+      "21 tests pass across the three compression rounds; affected suites pass at the current base"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Fail-closed at both gates; refusals carry reasons",
+      "CAPABILITY_STRENGTH": "Two families under one mechanism, with the third-family question now cheap",
+      "WALL_CLOCK": "Milliseconds of AST work per corpus",
+      "INCREMENTAL_COST": "0 USD, pure stdlib",
+      "RELIABILITY": "Vacuity gate added where verification was silently vacuous",
+      "VERIFIABILITY": "Prediction written before measurement; first-family numbers as regression calibration"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-13T04:02:43Z",
+    "max_age_hours": 2,
+    "selected_route": "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library runtime",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the new tests and the affected suites execute in this sandbox at the current base"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.compression_gain_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "the generalised lifter measures the keyed-table abstraction and refuses vacuous grids on this branch"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ]
+     },
+     {
+      "dependency": "canonical.swe_kernel.meta_circular_organ_graph_v1",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "synthesize_world_model_organ supplies the second family's corpus, unchanged"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THE_CLAIM_IS_BOUND_TO_THE_PROBE_SCOREBOARD__8_11_1_18___THE_PRE_REGISTERED_PR2__THE_8_8_AND_5_5_TEST_SUITES__AND_THE_GUARD_BASELINE",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "tournament": {
+   "proposal_id": "RELEASE_THE_COMPILE_LAYER_WITH_EFFECT_DIRECTED_ROUTING_AND_ANSWER_THE_WEIGHT_SPACE_QUESTION_WITH_2026_RESEARCH",
+   "falsifier_id": "F_THE_ROUTER_MUST_ROUTE_ONLY_REVIEWED_DECLARATIONS_WITH_FULLY_BOUND_ARGUMENTS_AND_REPORT_EVERY_OUTCOME_NAMED__A_PHANTOM_ROUTE_OR_A_FABRICATED_PASS_OR_A_MOVED_PIN_FALSIFIES_THE_ROUND",
+   "decisive_question": "Can the compile wall be released by a general data-driven mechanism without benchmark tables, and does the 2026 literature support the owner's one-try-permanent-learning theory?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/runtime/effect_directed_compile_v1.py",
+     "git_blob_sha": "c2b1c57dd6b71eab76a1cd6b6139f7207f5eaac0"
+    },
+    {
+     "path": "canonical/runtime/confined_dispatch_v1.py",
+     "git_blob_sha": "53c1c0ed76173073b509d686f87d8c22da87d34a"
+    },
+    {
+     "path": "canonical/runtime/live_brain_route_admission_v1.py",
+     "git_blob_sha": "c4ee45c262252dcfbdf19a4d59613894532d6658"
+    },
+    {
+     "path": "canonical/runtime/CONFINED_EFFECT_DECLARATIONS_V1.json",
+     "git_blob_sha": "2d8bc3773c12c29f2f81b9f1177a8f789d2fe9c6"
+    },
+    {
+     "path": "canonical/tests/test_effect_directed_compile_v1.py",
+     "git_blob_sha": "94d95bc9458a6d2d2a1a5acd5742151e93e3615e"
+    },
+    {
+     "path": "THE_COMPILE_LAYER_RELEASED_20261113_V1.md",
+     "git_blob_sha": "1d71c1b7eb8e215f3ac3652288188bd4c278f132"
+    }
+   ]
+  }
+ },
+ "next_step": "EXTEND_THE_DECLARED_ROUTES_WITH_THEIR_OWN_HONEST_DIFFS__REPAIR_FAMILY_EFFECTS_NETWORK_GATED_ROWS__AND_MAKE_THE_FOUR_FAIL_CLOSED_ROWS_REACHABLE_BY_BINDING_THE_MATERIAL_THEY_NEED__THE_VERIFIED_RECEIPTS_ARE_THE_TRAINING_DATA_HALF_ANY_FUTURE_WEIGHT_SPACE_TRAINER_WILL_CONSUME"
+}

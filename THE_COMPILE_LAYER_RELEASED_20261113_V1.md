@@ -135,7 +135,34 @@ permanence under drift; weight updates; sentience.
 
 ## 6. Probe scoreboard (measured after PR2 was committed)
 
-PENDING — filled in by the probe run on the committed tree.
+`realistic_goal_reach_probe_v1.py` on the committed tree (2026-11-13T03:59Z):
+
+| fate | before (R29) | after | 
+|---|---|---|
+| EXECUTED | 3 | **8** |
+| ROUTED_ELSEWHERE | 3 | **11** |
+| COMPILED_TO_SELF | 1 | 1 |
+| NOT_COMPILED | 32 | **18** |
+
+- **PR2a VERIFIED**: exactly 8 EXECUTED (predicted ≥8). The five new rows all carry
+  `EXECUTED__EFFECT_DIRECTED_CONFINED`: tree-sitter index, AST symbol index, test
+  selection, crosshair contract check, crosshair concrete-execution oracle — each a
+  verified effect on the disposable clone (plus the 3 that already executed).
+- **PR2b VERIFIED**: every routed-but-unverified row returned a named fail-closed status
+  (`FAIL_CLOSED__EFFECT_DIRECTED_CONFINED_RUN_DID_NOT_VERIFY`) — merge-conflict
+  resolution, cross-file choreography, dynamic fault localization, interprocedural
+  provenance: the material a clean clone genuinely lacks.
+- **PR2c VERIFIED**: the pinned compress refusal stands; the guard suite stayed at its
+  clean-tree baseline (the one controller subtest failure reproduces on the unmodified
+  tree — recorded as pre-existing, not chased).
+- **PR2d VERIFIED**: the remaining 18 NOT_COMPILED rows all carry named statuses
+  (5 STATED_SWE_EFFECT_UNSERVED, 4 STEP_RAISED_OUTCOME_UNKNOWN, 4 RAW_GOAL_COMPILATION_GAP,
+  3 carrier-gate refusals for artifact-naming rows no declaration serves, 1 path-outside,
+  1 probe-wrapper timeout on a slow routed row).
+- **Named honestly**: in a development e2e the tree-sitter sentence fail-closed with
+  `SOURCE_FILE_LIMIT_EXCEEDED` (the adapter's own limit) and in the probe run it executed;
+  the variance between those two runs is unexplained and is recorded as a capability-side
+  question, not smoothed over.
 
 ## 7. Reproduction
 
