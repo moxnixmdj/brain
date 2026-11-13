@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 448,
+  "knowledge_documents": 449,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6846,
+  "research_index_records": 6848,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "06f818bb9090a8267b360da7bfa7f66e8ad6b7ebc2221aa5ccb2e53ac3202987"
+  "value": "a18f9ef92cc3bc6ec83d14a75fdf4937472700519a5e39f85c287675a6bce195"
  },
  "engines": [
   {
@@ -46646,6 +46646,92 @@
    "title_terms": [
     "grows",
     "vocabulary"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 14068,
+   "headings": [
+    "Causal Sufficiency in Multi-Hunk Lesson Localization, Dynamic Execution-Locus Scope Identification, and Cross-Module Callee Dependency Admission (2026-11-13)",
+    "1. Executive Summary",
+    "2. 2026 External Research Grounding",
+    "3. Architecture & Exact Changes",
+    "3.1 Cross-Module Imported Callee Preservation (`repair_input_dependency_gate_v1.py` + `multistep_repo_closed_loop_solver_v1.py`)",
+    "3.2 Multi-Site Statement Recheck & Counterfactual Causal Localization (`skill_recheck_v1.py` + `verified_skill_crystallizer_v1.py`)",
+    "3.3 Dynamic Execution-Locus Filtering & Scope Identification (`verified_lesson_pipeline_v1.py`)",
+    "4. Honest Limits, Falsifiers, and Non-Claims",
+    "5. Reproducible Verification Commands"
+   ],
+   "kind": "DOCUMENT",
+   "path": "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1.md",
+   "sha256": "f9cdf87720166c2d799922c6099cd92fbbb97f6bcdc7832504477f67eaa1e142",
+   "summary": "- **Date:** 2026-11-13 (UTC) - **Authority:** `NONE` (`truth.achieved = false`; zero capability, family, benchmark, or terminal credit claimed) - **Incremental Spend:** `$0.00` (`producer_cognition_model_dependency_count = 0`; zero external API calls; zero pretrained weights) - **Verification Artifact:** `canonical/verification/CAUSAL_LOCALIZATION_AND_DEPENDENCY_ADMISSION_20261113_V1.json`",
+   "terms": {
+    "13": 5,
+    "2026": 13,
+    "across": 6,
+    "admission": 4,
+    "agent": 4,
+    "all": 4,
+    "arxiv": 12,
+    "before": 4,
+    "bits_capacity": 4,
+    "callee": 5,
+    "candidate": 7,
+    "candidates": 5,
+    "canonical": 19,
+    "causal": 4,
+    "contracts": 4,
+    "counterfactual": 6,
+    "cross-module": 5,
+    "dependency": 4,
+    "disc": 5,
+    "dynamic": 4,
+    "execution-locus": 4,
+    "fail": 5,
+    "failed": 6,
+    "historical": 7,
+    "ichunked_zero": 5,
+    "import": 4,
+    "items": 4,
+    "learning": 5,
+    "localization": 4,
+    "module": 4,
+    "multi-hunk": 5,
+    "non-stdlib": 4,
+    "not": 4,
+    "oracle": 6,
+    "origin": 5,
+    "pass": 5,
+    "passed": 6,
+    "patch": 4,
+    "repair": 5,
+    "rule": 5,
+    "runs": 9,
+    "scope": 6,
+    "skills": 8,
+    "static": 6,
+    "swe_kernel": 6,
+    "tests": 12,
+    "verification": 6,
+    "zero": 5
+   },
+   "title": "Causal Sufficiency in Multi-Hunk Lesson Localization, Dynamic Execution-Locus Scope Identification, and Cross-Module Callee Dependency Admission (2026-11-13)",
+   "title_terms": [
+    "2026-11-13",
+    "admission",
+    "callee",
+    "causal",
+    "cross-module",
+    "dependency",
+    "dynamic",
+    "execution-locus",
+    "identification",
+    "lesson",
+    "localization",
+    "multi-hunk",
+    "scope",
+    "sufficiency"
    ]
   },
   {
@@ -79829,10 +79915,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1250,
+  "included_source_count": 1251,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "2c7f640b08c3ebf214359ece9b3ab3db04772fa2639585d4bc8d3e45f41b1e75"
+  "source_tree_digest": "ab515b3a5dd961d0881e75f929e5928749c952883c67cd97d83738ce8acc17c5"
  },
  "research_index": [
   {
@@ -152856,6 +152942,25 @@
     "v1": 1,
     "v2": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CAUSAL_LOCALIZATION_AND_DEPENDENCY_ADMISSION_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CAUSAL_LOCALIZATION_AND_DEPENDENCY_ADMISSION_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_VERIFIED_LESSON_PIPELINE_V1",
+   "sha256": "ae8e6b4c1d4daba7109d76024af9727b3a00feaa695958fff30e5ea665922542",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "admission": 1,
+    "causal": 1,
+    "dependency": 1,
+    "localization": 1,
+    "v1": 1
    }
   },
   {
@@ -231133,6 +231238,51 @@
     "number": 1,
     "only": 1,
     "self-model": 2
+   }
+  },
+  {
+   "action_id": "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "80fb927660a03fb90a9b11d0fe69e6be50d1381d924f05017dd15e4e2fd55794",
+   "status": "",
+   "terms": {
+    "12": 1,
+    "13": 3,
+    "20261113": 1,
+    "26": 1,
+    "77": 1,
+    "admission": 1,
+    "benchmark": 1,
+    "callee": 1,
+    "candidate": 1,
+    "capability": 1,
+    "causal": 1,
+    "causal_sufficiency_execution_locus_and_callee_admission_20261113_v1": 1,
+    "claimed": 1,
+    "control": 1,
+    "credit": 1,
+    "drops": 1,
+    "execution": 1,
+    "family": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "green": 1,
+    "historical": 1,
+    "identification": 1,
+    "identified": 1,
+    "inconsistent": 1,
+    "load": 1,
+    "locus": 1,
+    "moves": 3,
+    "operator": 1,
+    "oracle": 1,
+    "owned_causal_sufficiency_execution_locus_and_imported_callee_admission_in_swe_kernel": 1,
+    "preserved": 1,
+    "runs": 1
    }
   },
   {

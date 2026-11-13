@@ -1,0 +1,183 @@
+{
+  "authority": "NONE",
+  "candidate_reduction_on_4_real_defects": {
+    "execution_locus_candidates_total": 2,
+    "execution_locus_oracle_calls_total": 2,
+    "reduction_ratio": 0.974026,
+    "static_probe_oracle_calls_total": 26,
+    "static_raw_candidates_total": 77
+  },
+  "green_control_bits_capacity_after": {
+    "baseline_returncode": 0,
+    "baseline_test_count": 3,
+    "locus_facts": [
+      "executed_locus.left_operand.name.val",
+      "executed_locus.operator.GtE",
+      "executed_locus.right_operand.arithmetic",
+      "executed_locus.syntax_valid_site"
+    ],
+    "oracle_calls_under_learned_scope": 0,
+    "verdict_under_learned_scope": "ALREADY_CORRECT"
+  },
+  "incremental_spend_usd": 0,
+  "model_dependency_count": 0,
+  "per_case": {
+    "bits_capacity": {
+      "baseline_returncode": 1,
+      "baseline_test_count": 3,
+      "executed_line_count": 42,
+      "locus_candidates": 1,
+      "locus_facts": [
+        "baseline.violates_own_spec",
+        "executed_locus.left_operand.name.val",
+        "executed_locus.operator.Gt",
+        "executed_locus.right_operand.arithmetic",
+        "executed_locus.syntax_valid_site"
+      ],
+      "matches_exact_upstream_fix": true,
+      "oracle_calls": 1,
+      "passing_locus_ranks": [
+        1
+      ],
+      "raw_candidates": 4,
+      "verdict": "REPAIRED"
+    },
+    "chunked_even_zero": {
+      "baseline_returncode": 1,
+      "baseline_test_count": 12,
+      "executed_line_count": 278,
+      "locus_candidates": 0,
+      "locus_facts": [
+        "baseline.violates_own_spec"
+      ],
+      "matches_exact_upstream_fix": false,
+      "oracle_calls": 0,
+      "passing_locus_ranks": [],
+      "raw_candidates": 32,
+      "verdict": "DID_NOT_FIRE_IN_EXECUTED_LOCUS"
+    },
+    "ichunked_zero": {
+      "baseline_returncode": 1,
+      "baseline_test_count": 10,
+      "executed_line_count": 262,
+      "locus_candidates": 0,
+      "locus_facts": [
+        "baseline.violates_own_spec"
+      ],
+      "matches_exact_upstream_fix": false,
+      "oracle_calls": 0,
+      "passing_locus_ranks": [],
+      "raw_candidates": 32,
+      "verdict": "DID_NOT_FIRE_IN_EXECUTED_LOCUS"
+    },
+    "unit_boundary": {
+      "baseline_returncode": 1,
+      "baseline_test_count": 4,
+      "executed_line_count": 175,
+      "locus_candidates": 1,
+      "locus_facts": [
+        "baseline.violates_own_spec",
+        "executed_locus.left_operand.name.abs_bytes",
+        "executed_locus.operator.LtE",
+        "executed_locus.right_operand.name.next_size",
+        "executed_locus.syntax_valid_site"
+      ],
+      "matches_exact_upstream_fix": false,
+      "oracle_calls": 1,
+      "passing_locus_ranks": [
+        1
+      ],
+      "raw_candidates": 9,
+      "verdict": "REPAIRED"
+    }
+  },
+  "provenance_cases": [
+    "bits_capacity",
+    "chunked_even_zero",
+    "ichunked_zero",
+    "unit_boundary"
+  ],
+  "schema": "PROJECT_BRAIN_VERIFIED_LESSON_PIPELINE_V1",
+  "scope_comparison": {
+    "execution_locus_broken_only_status": "AMBIGUOUS__SEVERAL_CONSISTENT_REQUIREMENTS",
+    "execution_locus_broken_only_survivors": 2,
+    "execution_locus_identified_required_facts": [
+      "baseline.violates_own_spec",
+      "executed_locus.syntax_valid_site"
+    ],
+    "execution_locus_with_green_control_status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+    "execution_locus_with_green_control_survivors": 1,
+    "static_site_union_status": "INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE",
+    "static_site_union_survivors": 0
+  },
+  "teaching": {
+    "admission_counts": {
+      "archive": 0,
+      "archive_broken": 0,
+      "archive_preserved": 0,
+      "archive_regressed": 0,
+      "archive_repaired": 0,
+      "broken": 0,
+      "held_out": 2,
+      "not_applicable": 0,
+      "not_held_out": 0,
+      "preserved": 1,
+      "programs_executed": 12,
+      "regressed": 0,
+      "repaired": 1,
+      "still_wrong": 0,
+      "victims_offered": 2
+    },
+    "admission_verdict": "ADMIT",
+    "causal_sufficiency": {
+      "incidental_edits_stripped": true,
+      "minimal_candidate_sha256": "49a28380abb353e9a68a79456de6d5c1499a36ad0626cbe72f2c7fc32d7aecf8",
+      "verified": true
+    },
+    "crystallized": true,
+    "localization": {
+      "after_lines": [
+        567,
+        568
+      ],
+      "before_lines": [
+        565,
+        566
+      ],
+      "incidental_regions_ignored": 1,
+      "regions_examined": 2,
+      "schema": "PROJECT_BRAIN_LESSON_LOCALIZATION_V1",
+      "status": "LOCALIZED__ONE_OPERATOR_LESSON",
+      "swap": {
+        "from": "<=",
+        "to": "<"
+      }
+    },
+    "recheck_verdict": "PASS",
+    "self_witness_verdict": "PASS",
+    "skill_id": "skill_c4d0b153c028aebc7f8bb129",
+    "source_case": "unit_boundary",
+    "ungated_collision_rejected_by_admission_gate": {
+      "counts": {
+        "archive": 0,
+        "archive_broken": 0,
+        "archive_preserved": 0,
+        "archive_regressed": 0,
+        "archive_repaired": 0,
+        "broken": 1,
+        "held_out": 2,
+        "not_applicable": 0,
+        "not_held_out": 0,
+        "preserved": 0,
+        "programs_executed": 12,
+        "regressed": 0,
+        "repaired": 1,
+        "still_wrong": 0,
+        "victims_offered": 2
+      },
+      "crystallized": false,
+      "reason": "ADMISSION_REJECT:BROKE_CORRECT_PROGRAM:already_correct_inclusive_quota"
+    }
+  },
+  "truth_achieved": false
+}

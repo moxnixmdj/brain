@@ -1,0 +1,460 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1",
+ "action_intent_id": "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "CAUSAL_LOCALIZATION_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1",
+ "date": "2026-11-13",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "c7017116dee6b282d597be90e4d685023c4a3090",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Close four measured SWE kernel defects in owned $0 Python code without model calls or governance changes: (1) enforce non-stdlib imported callee preservation (lost_imported_callees / PATCH_STOPPED_CALLING_IMPORTED_DEPENDENCY) in repair_input_dependency_gate_v1 and multistep_repo_closed_loop_solver_v1, fixing coupled 2-file closed-loop generalisation (test_closed_loop_repair_must_generalise_v1 5/8 -> 8/8); (2) evaluate bounded 64-candidate stream in skill_recheck_v1 and direct ProjectTestOracle in SCOPE_STATEMENT batch screening, fixing multi-site historical transfer (test_historical_repair_transfer_v1 12/13 -> 13/13); (3) add localize_lesson=True with counterfactual causal sufficiency verification (LOCALIZED_LESSON_NOT_CAUSALLY_SUFFICIENT) to VerifiedSkillStore.crystallize_code_fix so multi-hunk whole-file commits strip incidental edits and prove single-hunk sufficiency on before_snippet; (4) add verified_lesson_pipeline_v1 dynamic sys.settrace execution-locus candidate filtering and scope learning, cutting static candidates on the 4 pinned historical defects from 77 to 2 (97.4% reduction; 26 -> 2 oracle runs) and moving applicability_v1.learn from INCONSISTENT (0 survivors) to IDENTIFIED__ONE_CONSISTENT_REQUIREMENT (1 survivor).",
+ "selected_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+ "causal_blocker": "UNLOCALIZED_WHOLE_FILE_CRYSTALLIZATION_INERTNESS__MULTI_SITE_RECHECK_FALSE_NEGATIVE__STATIC_BYSTANDER_SCOPE_INCONSISTENCY__AND_CROSS_MODULE_CALLEE_BYPASS_IN_CLOSED_LOOP_REPAIR",
+ "expected_parent_change": "The owned SWE repair and skill-crystallization kernel now (a) refuses synthesized patches that sever non-stdlib imported callees across beam expansion, winning admission, and 2-file fallback, (b) crystallizes and transfers multi-site statement skills and causally sufficient localized multi-hunk lessons behind pre-write contrast victims, and (c) filters operator proposals and scope facts to executed syntax-valid lines.",
+ "expected_parent_frontier_change": "test_closed_loop_repair_must_generalise_v1 moves from 5/8 to 8/8; test_historical_repair_transfer_v1 moves from 12/13 to 13/13; historical operator candidate load drops 77 -> 2 (26 -> 2 oracle runs) and scope identification moves from INCONSISTENT (0 survivors) to IDENTIFIED (1 survivor) with green control preserved. Zero benchmark, family, capability, or terminal credit claimed.",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::UNLOCALIZED_WHOLE_FILE_CRYSTALLIZATION_INERTNESS__MULTI_SITE_RECHECK_FALSE_NEGATIVE__STATIC_BYSTANDER_SCOPE_INCONSISTENCY__AND_CROSS_MODULE_CALLEE_BYPASS_IN_CLOSED_LOOP_REPAIR",
+ "falsification_condition": "ANY_SPURIOUS_NON_CAUSAL_LOCALIZED_HUNK_IS_CRYSTALLIZED__OR_HARMFUL_CONTRAST_VICTIM_PASSES_ADMISSION__OR_COUPLED_BILLING_BYPASSES_APPLY_DISCOUNT__OR_GREEN_CONTROL_REGRESSES__OR_ANY_EXISTING_PINNED_SWE_KERNEL_SUITE_REGRESSES",
+ "stop_condition": "147/147 SWE kernel and unified-creature tests pass (including 8/8 closed-loop generalisation, 13/13 historical repair transfer, and 5/5 new causal localization + execution-locus + callee dependency tests); unified model verify 33/33 PASS on recompiled artifact; repo_integrity_guard, enforce_goal_hierarchy, enforce_load_bearing_primary_pr, and orientation checks all PASS; authority NONE and truth.achieved stays false.",
+ "explicit_user_authorization": "Owner standing directives in repository laws and 2026-11-12/2026-11-13 rounds: $0 incremental spend, zero model dependency in owned substrate, zero protected or SHA-pinned paths weakened, honesty over inflated capability claims.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+   "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+   "canonical/swe_kernel/skill_recheck_v1.py",
+   "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+   "canonical/swe_kernel/verified_lesson_pipeline_v1.py",
+   "canonical/verification/CAUSAL_LOCALIZATION_AND_DEPENDENCY_ADMISSION_20261113_V1.json",
+   "canonical/tests/test_causal_localization_and_dependency_admission_v1.py",
+   "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "false_claim_removed": "THAT_EXECUTED_LOCUS_REACHABILITY_PROVES_ROOT_CAUSE_SUFFICIENCY_OR_THAT_PARAMETER_READ_CHECKS_ALONE_PREVENT_CROSS_MODULE_OVERFITTING",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "MEASURED_ON_THIS_HOST: test_closed_loop_repair_must_generalise_v1 moved 5/8 -> 8/8 (PATCH_STOPPED_CALLING_IMPORTED_DEPENDENCY refuses compute_invoice(apply_discount) bypass and repairs both billing/discounts.py and billing/invoice.py, generalising to unseen inputs); test_historical_repair_transfer_v1 moved 12/13 -> 13/13 (zero_consumption-0 crystallizes and transfers with 0 search invocations); unit_boundary whole-file localization strips docstring edit and verifies counterfactual causal sufficiency while spurious operator hunk is rejected (LOCALIZED_LESSON_NOT_CAUSALLY_SUFFICIENT); 4 real historical defects drop 77 -> 2 candidates (26 -> 2 oracle runs) and applicability_v1.learn moves INCONSISTENT (0 survivors) -> IDENTIFIED__ONE_CONSISTENT_REQUIREMENT (1 survivor); 147/147 SWE kernel + unified-creature tests PASS."
+ },
+ "measured_effect": "test_closed_loop_repair_must_generalise_v1: 5/8 -> 8/8; test_historical_repair_transfer_v1: 12/13 -> 13/13; 4-defect historical static-vs-execution-locus candidates: 77 -> 2 (97.40% reduction), oracle runs: 26 -> 2 (92.31% reduction); applicability_v1.learn: INCONSISTENT (0 survivors) -> IDENTIFIED__ONE_CONSISTENT_REQUIREMENT (1 survivor); SWE kernel + unified-creature regression battery: 147/147 PASS; incremental spend: $0.",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NO_BENCHMARK_OBLIGATION_AND_CLAIMS_NO_CREDIT__IT_REMOVES_FOUR_MEASURED_FALSE_POSITIVE_AND_FALSE_NEGATIVE_DEFECTS_IN_THE_OWNED_SWE_REPAIR_AND_SKILL_CRYSTALLIZATION_KERNEL",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "2/13",
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ]
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/lesson_localization_v1.py",
+  "canonical/swe_kernel/operator_generalization_v1.py",
+  "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+  "canonical/swe_kernel/lesson_admission_gate_v1.py",
+  "canonical/swe_kernel/skill_recheck_v1.py",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+  "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+  "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+  "canonical/runtime/applicability_v1.py"
+ ],
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "c7017116dee6b282d597be90e4d685023c4a3090",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "Multi-hunk whole-file and multi-site historical repairs now crystallize only causally sufficient, contrast-admitted lessons; operator transfer filters proposals and scope facts to executed syntax-valid lines (77 -> 2 candidates, IDENTIFIED scope); and multi-step closed-loop repository repair refuses cross-module imported callee bypasses (8/8 generalising).",
+  "selected_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+  "selected_surviving_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+  "deleted_or_bypassed_paths": [
+   "MUTATING_PINNED_OPERATOR_GENERALIZATION_OR_SCOPE_ACQUISITION_IN_PLACE (rejected: preserves sha256/test pins on existing diagnostic modules)",
+   "STATIC_AST_LOCALIZATION_WITHOUT_COUNTERFACTUAL_ORACLE_SUFFICIENCY (rejected: admits spurious incidental operator edits when another hunk fixed the test)",
+   "LLM_JUDGE_FOR_PATCH_OVERFITTING_OR_SKILL_EXTRACTION (rejected: violates $0 model-free producer substrate law and is nondeterministic)",
+   "TOY_SYNTHETIC_REGEX_DEMO_WITHOUT_REAL_HISTORICAL_REPOSITORIES (rejected: pinned boltons and more-itertools fixtures plus 2-file billing generalisation suite already exist)"
+  ],
+  "stop_condition": "147/147 SWE kernel and unified-creature tests pass (including 8/8 closed-loop generalisation, 13/13 historical repair transfer, and 5/5 new causal localization + execution-locus + callee dependency tests); unified model verify 33/33 PASS on recompiled artifact; repo_integrity_guard, enforce_goal_hierarchy, enforce_load_bearing_primary_pr, and orientation checks all PASS; authority NONE and truth.achieved stays false.",
+  "expected_parent_level_state_change": "test_closed_loop_repair_must_generalise_v1 moves from 5/8 to 8/8; test_historical_repair_transfer_v1 moves from 12/13 to 13/13; historical operator candidate load drops 77 -> 2 (26 -> 2 oracle runs) and scope identification moves from INCONSISTENT (0 survivors) to IDENTIFIED (1 survivor) with green control preserved. Zero benchmark, family, capability, or terminal credit claimed.",
+  "why_selected_route_is_fastest_sufficient": "Reuses all nine existing SWE kernel modules directly without breaking any pinned diagnostic surface, replacing unexecuted static candidate enumeration with a single sys.settrace baseline pass and extending the AST input-dependency gate to non-stdlib imported callees.",
+  "iteration_limit": 3,
+  "routes_considered": [
+   "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL (chosen)",
+   "LLM_PROMPT_BASED_SKILL_EXTRACTION_AND_PATCH_REVIEW (rejected: model dependency + nonzero spend + unrepeatable)",
+   "STATIC_FILE_WIDE_AST_FACT_REFINEMENT_WITHOUT_EXECUTION_TRACE (rejected: unexecuted bystander comparisons in 175 KB files remain indistinguishable from executed sites)",
+   "HARD_BLOCKING_ALL_CALLEE_CHANGES_INCLUDING_STDLIB_AND_SIBLINGS (rejected: blocks legitimate refactorings; module-origin non-stdlib obligation is exact)"
+  ],
+  "obs_goal": {
+   "real_outcome": "Reusable code skills are causally sufficient, contrast-gated, and execution-locus scoped; multi-file closed-loop repairs preserve inter-module callee dependencies and generalise to unseen inputs.",
+   "proxy_goals_deleted": [
+    "COUNTING_STORED_SKILL_ROWS_WITHOUT_TRANSFER_OR_CONTRAST_EXECUTION",
+    "PASSING_VISIBLE_REPO_TESTS_BY_INLINING_AROUND_BROKEN_IMPORTED_MODULES",
+    "TREATING_REACHABILITY_ON_FAILING_TRACE_AS_PROOF_OF_DEFECT"
+   ],
+   "surviving_necessity": "Every localized hunk must prove counterfactual sufficiency on before_snippet; every candidate patch must preserve both formal inputs and non-stdlib imported callees; scope facts must come from executed syntax-valid sites plus green controls."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "lesson_localization_v1.localize_operator_lesson",
+    "operator_generalization_v1.propose_operator_swaps",
+    "skill_scope_acquisition_v1.facts_at_offset",
+    "lesson_admission_gate_v1.evaluate",
+    "skill_recheck_v1.recheck",
+    "verified_skill_crystallizer_v1.VerifiedSkillStore",
+    "repair_input_dependency_gate_v1.gate",
+    "multistep_repo_closed_loop_solver_v1.solve_repository_closed_loop"
+   ],
+   "external_existing_routes_checked": [
+    "arXiv:2610.11781 (Skill-V falsifiable skill contracts and replay counterexample gating)",
+    "arXiv:2611.01386 (Zep Learning by Doing conflict/applicability admission gating)",
+    "arXiv:2611.10837v1 (Patch Correctness in APR under synthesis distribution shift)",
+    "arXiv:2607.10113, arXiv:2602.12670, arXiv:2603.15401 (Dynamic Agent Skills, SkillsBench +16.6 pp, SWE-Skills-Bench static skill regression diagnosis)"
+   ],
+   "capability_work_deleted": [
+    "Rewriting lesson_localization_v1 or applicability_v1 (already clean and reusable).",
+    "Modifying pinned diagnostic probes that prove why static file-wide scope fails."
+   ],
+   "surviving_gap": "Broader multi-statement structural synthesis beyond single-operator and bounded CST/observational templates; compile-layer goal binding for raw prose SWE prompts."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_GAPS_BETWEEN_LOCALIZATION_RECHECK_TRACE_LOCUS_AND_CALLEE_DEPENDENCY_GATES",
+   "delete_bypass_substitute_options": [
+    "Bypassing recheck or admission gates is forbidden; mutating pinned probes breaks historical falsification tests; composing localization + counterfactual oracle + sys.settrace locus + module-origin callee gate resolves all four cleanly."
+   ],
+   "surviving_causal_blocker": "UNLOCALIZED_WHOLE_FILE_CRYSTALLIZATION_INERTNESS__MULTI_SITE_RECHECK_FALSE_NEGATIVE__STATIC_BYSTANDER_SCOPE_INCONSISTENCY__AND_CROSS_MODULE_CALLEE_BYPASS_IN_CLOSED_LOOP_REPAIR"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+    "STATIC_FILE_WIDE_AST_FACT_REFINEMENT_WITHOUT_EXECUTION_TRACE",
+    "LLM_PROMPT_BASED_SKILL_EXTRACTION_AND_PATCH_REVIEW"
+   ],
+   "losing_routes_reason": "Static file-wide facts cannot separate executed defects from unexecuted bystanders in multi-thousand-line modules; LLM prompt review violates $0 owned cognition rules.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Real pinned upstream boltons and more-itertools repositories (ProjectTestOracle) and the existing 2-file billing unseen-input generalisation suite serve as the primary executable oracles; two compact adversarial fixtures verify counterfactual rejection of a spurious localized hunk and honest NOT_REPAIRED reporting on an innocent executed guard."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "Manual single-site assumptions in skill_recheck_v1 and parameter-only assumptions in repair_input_dependency_gate_v1 are superseded in place while keeping all prior tests green.",
+   "adjacent_capabilities_absorbed": [
+    "Whole-file multi-hunk causal localization, dynamic execution-cone candidate filtering, execution-grounded scope identification, and cross-module imported callee preservation."
+   ],
+   "fresh_reuse_plan": "Future SWE repair adapters and retained-learning sessions can pass localize_lesson=True with ProjectTestOracle + held-out contrast victims and filter operator transfers through trace_project_target + apply_localized_skill_with_locus."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "Baseline execution trace is captured once per target and reused for both candidate filtering and execution-locus scope fact extraction."
+   ],
+   "search_stop_decision": "Stop once all 4 measured gaps are closed, 147/147 tests pass, unified model verifies 33/33 PASS, and referee checks pass.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-13T04:37:19Z",
+   "max_age_hours": 24,
+   "incumbent_route": "STATIC_WHOLE_FILE_OR_SINGLE_SITE_SKILL_CRYSTALLIZATION_AND_PARAMETER_ONLY_PATCH_DEPENDENCY_GATE",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "test_closed_loop_repair_must_generalise_v1 failed 3/8 on main (391a707d) because compute_invoice -> return (sum(items) - disc) read both formal inputs while dropping billing.discounts.apply_discount",
+     "test_historical_repair_transfer_v1 failed zero_consumption-0 on main because skill_recheck_v1 checked only candidate #0 on 4-site more_itertools/more.py",
+     "lesson_localization_v1, skill_scope_acquisition_v1, lesson_admission_gate_v1, and applicability_v1 existed as separate modules; static file-wide facts returned INCONSISTENT (0 survivors) across the 4 pinned historical defects"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "Skill-V (arXiv:2610.11781, 2026-10-08): falsifiable skill contracts with replay counterexample admission gating and boundary revision on contract-outcome disagreement; https://arxiv.org/html/2610.11781v1",
+     "Patch Correctness in Automated Program Repair Technical Report (arXiv:2611.10837v1, 2026-11-07): patch validators degrade under candidate distribution shift; PatchDiff differential audit finds 68/877 plausible patches fail broader tests and 260/877 diverge behaviorally; https://arxiv.org/pdf/2611.10837",
+     "Dynamic Agent Skills (arXiv:2607.10113, TMLR July 2026) and Learning by Doing / Zep Agent Skills (arXiv:2611.01386, Nov 2026): write-time verification, conflict/applicability gates, and counterfactual pruning prevent negative skill transfer; https://arxiv.org/html/2607.10113 and https://arxiv.org/html/2611.01386",
+     "SkillsBench (arXiv:2602.12670 v4, +16.6 pp across 87 tasks, 33.9% -> 50.5%) and SWE-Skills-Bench (arXiv:2603.15401, 92/98 static SWE skills yield no significant gain and up to -17 pt regressions without execution-grounded scope)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "CPython 3.11 stdlib sys.settrace, ast, sys.stdlib_module_names, tokenize, and sqlite3 plus pinned tree-sitter 0.20.4 substrate already in requirements/software_engineering_kernel_v1.txt; zero new third-party dependencies added"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Reward Hacking Benchmark (arXiv:2605.02964), Know Before Fix (arXiv:2607.11111), SWE-Bench Pro V2 (arXiv:2610.24206), and OSWorld 2.0 (arXiv:2606.29537): cross-file dependency acquisition and end-state verification prevent visible-assertion reward hacking"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "verified skill crystallization agent memory library abstraction self-improving agents 2026 arxiv"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "automated program repair overfitting patch correctness dynamic execution trace dependency preservation 2026 arxiv"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-bench Pro Terminal-Bench coding agent architecture November 2026 localization verification"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "dynamic causal cone sys.settrace spectrum fault localization Python stdlib vs external tracer 2026"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "selected_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+   "challenger_routes": [
+    {
+     "route": "LLM_JUDGE_FOR_SKILL_EXTRACTION_AND_PATCH_ADMISSION",
+     "evidence": [
+      "LLM-as-a-judge patch review and prompt-extracted skills are common in external agent frameworks (SWE-Skills-Bench 2026, Zep 2026)",
+      "SWE-Skills-Bench measures 92/98 static/prompt-extracted SWE skills yielding zero gain and up to -17 pt regressions"
+     ],
+     "qualification_evidence": [
+      "violates V4/V10 owned-cognition law (zero model calls in producer/admission path) and incurs per-candidate spend and nondeterminism",
+      "cannot provide deterministic counterfactual execution receipts on before_snippet or AST call-graph guarantees"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "Nondeterministic heuristic vs exact test-oracle counterfactual + AST proof",
+      "CAPABILITY_STRENGTH": "Prone to -17 pt static-skill regressions vs 0 broken held-out victims",
+      "WALL_CLOCK": "Seconds per LLM call vs milliseconds locally",
+      "INCREMENTAL_COST": "Nonzero API spend vs 0 USD",
+      "RELIABILITY": "External provider drift vs deterministic stdlib",
+      "VERIFIABILITY": "Opaque prose rationale vs sha256 execution receipts"
+     }
+    },
+    {
+     "route": "STATIC_FILE_WIDE_AST_SCOPE_WITHOUT_EXECUTION_TRACE",
+     "evidence": [
+      "skill_scope_acquisition_v1 already extracts AST facts across all static firing sites in a file",
+      "measured on the 4 pinned historical defects: 77 raw candidates, 26 subprocess pytest runs, and INCONSISTENT__NO_REQUIREMENT_EXPLAINS_THE_EVIDENCE (0 survivors)"
+     ],
+     "qualification_evidence": [
+      "in 175 KB more_itertools/more.py, unexecuted bystander comparisons create a strict superset of AST facts over the smaller repaired modules, making static file-union mathematically inconsistent",
+      "dynamic sys.settrace on before.py collapses 77 -> 2 candidates (97.4% reduction) and achieves IDENTIFIED__ONE_CONSISTENT_REQUIREMENT (1 survivor)"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "INCONSISTENT (0 survivors) vs IDENTIFIED (1 survivor)",
+      "CAPABILITY_STRENGTH": "Wastes 24 extra oracle calls on unexecuted/invalid sites",
+      "WALL_CLOCK": "26 subprocess pytest runs vs 2 (+1 trace pass per target)",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Breaks on large multi-function modules",
+      "VERIFIABILITY": "Deterministic but falsified on real corpus"
+     }
+    },
+    {
+     "route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+     "evidence": [
+      "combines counterfactual single-hunk oracle verification, sys.settrace execution-locus candidate/fact filtering, bounded 64-candidate recheck, and module-origin non-stdlib callee preservation",
+      "measured today: closed-loop generalisation 5/8 -> 8/8; historical transfer 12/13 -> 13/13; static candidates 77 -> 2; scope IDENTIFIED; 147/147 tests PASS"
+     ],
+     "qualification_evidence": [
+      "zero external spend, zero new dependencies, preserves every pinned diagnostic module untouched, and passes adversarial counterfactual falsifiers",
+      "directly implements the 2026 falsifiable-contract and cross-file dependency invariants locally in deterministic stdlib Python"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "Counterfactual oracle + held-out contrast + AST callee preservation",
+      "CAPABILITY_STRENGTH": "Closes both red suites on main (8/8 and 13/13) and identifies scope on real corpus",
+      "WALL_CLOCK": "92.3% fewer oracle runs on historical operator transfer",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "147/147 deterministic local tests pass",
+      "VERIFIABILITY": "Committed JSON receipt + reproducible CLI and pytest suites"
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-13T04:37:19Z",
+    "max_age_hours": 2,
+    "selected_route": "OWNED_CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_IMPORTED_CALLEE_ADMISSION_IN_SWE_KERNEL",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "CPython 3.11 standard library + restored SWE kernel substrate (pytest, hypothesis, tree-sitter 0.20.4)",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "scripts/restore_substrate_v1.py verified SUBSTRATE_READY (10/10 modules); 147/147 SWE kernel and unified-creature tests pass locally today"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "localize_lesson=True + counterfactual causal sufficiency + SCOPE_STATEMENT oracle screening verified across historical_repair_transfer (13/13) and causal_localization_and_dependency_admission (5/5)"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+      "detail": "skill store with counterfactual causal localization and pre-write admission"
+     },
+     {
+      "dependency": "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "lost_imported_callees + PATCH_STOPPED_CALLING_IMPORTED_DEPENDENCY verified across 15/15 gate tests, 8/8 closed-loop generalisation tests, and 5-arm bypass/sibling/stdlib/shadow tests"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "BRAIN_INHERITED"
+      ],
+      "path": "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+      "detail": "AST parameter + non-stdlib imported callee dependency gate"
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLOSES_FOUR_MEASURED_SWE_KERNEL_DEFECTS_AT_ZERO_SPEND__ZERO_CAPABILITY_OR_TERMINAL_CREDIT__BOUND_TO_147_147_SWE_TESTS__8_8_CLOSED_LOOP_GENERALISATION__13_13_HISTORICAL_TRANSFER__AND_33_33_UNIFIED_MODEL_VERIFY",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4"
+  ],
+  "tournament": {
+   "proposal_id": "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1",
+   "decisive_question": "Do counterfactual single-hunk oracle sufficiency, dynamic sys.settrace execution-locus filtering, bounded 64-candidate recheck, and non-stdlib imported callee dependency gating resolve whole-file inertness, multi-site transfer failure, static bystander scope inconsistency, and 2-file callee bypass without breaking any existing SWE kernel invariant?",
+   "falsifier_id": "SPURIOUS_LOCALIZED_HUNK_ADMITTED__OR_INCLUSIVE_VICTIM_BROKEN_ADMITTED__OR_COUPLED_BILLING_BYPASS_ACCEPTED__OR_GREEN_CONTROL_MODIFIED__OR_ANY_OF_147_SWE_TESTS_FAILS",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [
+    {
+     "path": "canonical/swe_kernel/skill_recheck_v1.py",
+     "git_blob_sha": "2d4c27e171980d20feb29069743a67f558b16402"
+    },
+    {
+     "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "git_blob_sha": "d62ad771c18654601b945fa8365c8584f3e401e8"
+    },
+    {
+     "path": "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+     "git_blob_sha": "30079a45d605842da619e24cb1b17b6a0ad3fd66"
+    },
+    {
+     "path": "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+     "git_blob_sha": "b2434fc3f1cd7d877027bfa06b24ac0c8e2120b4"
+    },
+    {
+     "path": "canonical/swe_kernel/verified_lesson_pipeline_v1.py",
+     "git_blob_sha": "580ec846f4b2b076dfc5ff9da77d781035bfb162"
+    },
+    {
+     "path": "canonical/verification/CAUSAL_LOCALIZATION_AND_DEPENDENCY_ADMISSION_20261113_V1.json",
+     "git_blob_sha": "1625ce9b4815f8bfa5f9546ffff56184ffdc853f"
+    },
+    {
+     "path": "canonical/tests/test_causal_localization_and_dependency_admission_v1.py",
+     "git_blob_sha": "5ac0d0adb47a14de758dbed07c65d72bf7da42c7"
+    },
+    {
+     "path": "CAUSAL_SUFFICIENCY_EXECUTION_LOCUS_AND_CALLEE_ADMISSION_20261113_V1.md",
+     "git_blob_sha": "b886b460cdff842052d49430e7ff53f42266c725"
+    }
+   ]
+  }
+ },
+ "next_step": "Extend multi-statement guard localization (e.g., missing ValueError zero-guards in more-itertools) under the same counterfactual sufficiency + execution-locus + held-out contrast admission pipeline, and diagnose compile-layer binding for advanced-coding prose goals."
+}

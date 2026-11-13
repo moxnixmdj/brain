@@ -1684,15 +1684,14 @@ def solve_repository_closed_loop(
                     }
                     new_history = history + [step_rec]
 
+                    if not _input_dependencies_preserved(
+                        state_files[rel_f].decode("utf-8", errors="replace"),
+                        next_files[rel_f].decode("utf-8", errors="replace"),
+                    ):
+                        refused_by_input_gate += 1
+                        continue
+
                     if cand_failed_count == 0:
-                        # Green tests are not the whole admission condition: the patch must
-                        # still consume the inputs the original consumed.
-                        if not _input_dependencies_preserved(
-                            state_files[rel_f].decode("utf-8", errors="replace"),
-                            next_files[rel_f].decode("utf-8", errors="replace"),
-                        ):
-                            refused_by_input_gate += 1
-                            continue
                         # Materialize candidate and run mandatory Sabotage Control
                         for rp, rb in next_files.items():
                             (wt / rp).write_bytes(rb)
@@ -1747,6 +1746,18 @@ def solve_repository_closed_loop(
                                             and int(pair_diag["total_tests"]) >= int(initial_diag["total_tests"])
                                             and int(pair_diag["failed_count"]) == 0
                                         ):
+                                            if not (
+                                                _input_dependencies_preserved(
+                                                    state_files[f1].decode("utf-8", errors="replace"),
+                                                    pair_files[f1].decode("utf-8", errors="replace"),
+                                                )
+                                                and _input_dependencies_preserved(
+                                                    state_files[f2].decode("utf-8", errors="replace"),
+                                                    pair_files[f2].decode("utf-8", errors="replace"),
+                                                )
+                                            ):
+                                                refused_by_input_gate += 1
+                                                continue
                                             for rp, rb in pair_files.items():
                                                 (wt / rp).write_bytes(rb)
                                             sab1 = _sabotage_control_kills_suite(

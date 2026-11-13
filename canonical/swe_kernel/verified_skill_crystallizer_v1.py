@@ -1096,6 +1096,7 @@ class VerifiedSkillStore:
         probes: Sequence[Any] | None = None,
         admission_victims: Sequence[Any] | None = None,
         admission_archive: Sequence[Any] | None = None,
+        localize_lesson: bool = False,
     ) -> dict[str, Any]:
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
@@ -1145,9 +1146,44 @@ class VerifiedSkillStore:
                 return {"crystallized": False, "reason": "TRAINING_VERIFICATION_FAILED"}
         elif training_verifier is not None:
             raise ValueError('TRAINING_VERIFIER_REQUIRES_SCOPE_CONTRACT')
+
+        lesson_before = before_snippet
+        lesson_after = after_snippet
+        localization_record: dict[str, Any] | None = None
+        causal_sufficiency: dict[str, Any] | None = None
+        localized_line_span: tuple[int, int] | None = None
+        if localize_lesson:
+            from canonical.swe_kernel import lesson_localization_v1 as _loc
+
+            localized = _loc.localize_operator_lesson(
+                before_snippet, after_snippet, language=language
+            )
+            if localized.status != _loc.LOCALIZED or localized.chosen is None:
+                return {
+                    "crystallized": False,
+                    "reason": f"LESSON_LOCALIZATION_{localized.status}",
+                    "localization": {
+                        "status": localized.status,
+                        "reason": localized.reason,
+                        "regions_examined": localized.regions_examined,
+                    },
+                }
+            lesson_before = localized.chosen.before_statement
+            lesson_after = localized.chosen.after_statement
+            localized_line_span = tuple(localized.chosen.before_lines)
+            localization_record = {
+                "schema": _loc.SCHEMA,
+                "status": localized.status,
+                "swap": dict(localized.chosen.swap),
+                "before_lines": list(localized.chosen.before_lines),
+                "after_lines": list(localized.chosen.after_lines),
+                "regions_examined": localized.regions_examined,
+                "incidental_regions_ignored": max(0, localized.regions_examined - 1),
+            }
+
         rule = anti_unify_code_rule(
-            before_snippet,
-            after_snippet,
+            lesson_before,
+            lesson_after,
             language=language,
             error_class=error_class,
         )
@@ -1160,22 +1196,62 @@ class VerifiedSkillStore:
             if result is not None:
                 twin_evidence = result
             return result is not None
-        if not verify_rule_on_mutated_twin(before_snippet, rule, twin_oracle=observe_twin if twin_oracle else None,
-                                           expected_after_snippet=after_snippet):
+        if not verify_rule_on_mutated_twin(lesson_before, rule, twin_oracle=observe_twin if twin_oracle else None,
+                                           expected_after_snippet=lesson_after):
             return {"crystallized": False, "reason": "FAILED_MUTATED_TWIN_VERIFICATION"}
 
-        if contract is not None and not any(c == after_snippet for c in itertools.islice(
-                iter_crystallized_code_rule_candidates(before_snippet, rule), 64)):
-            return {"crystallized": False, "reason": "RULE_DOES_NOT_REPRODUCE_VERIFIED_EXAMPLE"}
+        if contract is not None:
+            whole_cands = list(itertools.islice(
+                iter_crystallized_code_rule_candidates(before_snippet, rule), 64
+            ))
+            if not localize_lesson:
+                if not any(c == after_snippet for c in whole_cands):
+                    return {"crystallized": False, "reason": "RULE_DOES_NOT_REPRODUCE_VERIFIED_EXAMPLE"}
+            else:
+                if not whole_cands:
+                    return {"crystallized": False, "reason": "RULE_DOES_NOT_FIRE_ON_WHOLE_BEFORE"}
+                if localized_line_span is not None:
+                    lo_ln, hi_ln = localized_line_span
+                    def _in_localized_span(cand_text: str) -> int:
+                        off = next((i for i, (ca, cb) in enumerate(zip(before_snippet, cand_text)) if ca != cb), len(before_snippet))
+                        ln = before_snippet[:off].count("\n") + 1
+                        return 0 if lo_ln <= ln <= hi_ln else 1
+                    whole_cands.sort(key=_in_localized_span)
+                verified_cand: str | None = None
+                verified_causal: dict[str, Any] | None = None
+                for cand_text in whole_cands[:16]:
+                    ver_c = evaluate(
+                        training_verifier,
+                        cand_text,
+                        contract['verification_kind'],
+                        contract['scope_id'],
+                    )
+                    if ver_c is not None:
+                        verified_cand = cand_text
+                        verified_causal = ver_c
+                        break
+                if verified_cand is None or verified_causal is None:
+                    return {
+                        "crystallized": False,
+                        "reason": "LOCALIZED_LESSON_NOT_CAUSALLY_SUFFICIENT",
+                        "candidates_checked": min(len(whole_cands), 16),
+                        "localization": localization_record,
+                    }
+                causal_sufficiency = {
+                    "verified": True,
+                    "minimal_candidate_sha256": source_sha256(verified_cand),
+                    "incidental_edits_stripped": verified_cand != after_snippet,
+                    "verification": verified_causal,
+                }
         if oracle is not None or probes is not None:
             from canonical.tools import rule_generalization_probe_v1 as _probe
 
             probe_out = _probe.probe_rule(
-                before_snippet,
-                after_snippet,
+                lesson_before,
+                lesson_after,
                 oracle=oracle,
                 probes=probes,
-                victim_snippet=before_snippet,
+                victim_snippet=lesson_before,
                 rule=rule,
             )
             if probe_out.get("verdict") != _probe.HOLDS:
@@ -1202,8 +1278,8 @@ class VerifiedSkillStore:
 
         if admission_victims or admission_archive:
             admission_report = _admission.evaluate(
-                before_snippet,
-                after_snippet,
+                lesson_before,
+                lesson_after,
                 victims=admission_victims or (),
                 archive=admission_archive or (),
                 rule=rule,
@@ -1220,6 +1296,10 @@ class VerifiedSkillStore:
             rule["admission"] = dict(_admission.UNGATED_RECORD)
         if precondition_evidence is not None:
             rule["precondition_presence"] = precondition_evidence
+        if localization_record is not None:
+            rule["localization"] = localization_record
+        if causal_sufficiency is not None:
+            rule["causal_sufficiency"] = causal_sufficiency
         rule['record_version'] = 1
         rule['state'] = 'ACTIVE'
         rule['contract'] = contract
@@ -1236,11 +1316,15 @@ class VerifiedSkillStore:
         # apply -- 5 of 5 stored rules had no re-executable source at all
         # (`canonical/swe_kernel/skill_recheck_v1.py` reports ABSENT). Keeping the text makes a
         # rule re-checkable; the hash is kept beside it so the two can be compared.
-        rule['provenance'] = {
-            'before_sha256': source_sha256(before_snippet),
-            'after_sha256': source_sha256(after_snippet),
-            'taught_sources': [{'before': before_snippet, 'after': after_snippet}],
+        provenance_record: dict[str, Any] = {
+            'before_sha256': source_sha256(lesson_before),
+            'after_sha256': source_sha256(lesson_after),
+            'taught_sources': [{'before': lesson_before, 'after': lesson_after}],
         }
+        if localize_lesson:
+            provenance_record['whole_before_sha256'] = source_sha256(before_snippet)
+            provenance_record['whole_after_sha256'] = source_sha256(after_snippet)
+        rule['provenance'] = provenance_record
         from canonical.swe_kernel import skill_recheck_v1 as _recheck
 
         recheck_out = _recheck.recheck(rule)
@@ -1288,6 +1372,8 @@ class VerifiedSkillStore:
                             "twin_verification",
                             "training_baseline",
                             "precondition_presence",
+                            "localization",
+                            "causal_sufficiency",
                             "oracle_probe",
                             "admission",
                         ):
@@ -1328,7 +1414,7 @@ class VerifiedSkillStore:
 
         mem_key = f"{self.db_path.resolve()}::{rule['language']}"
         _MEM_SKILLS.pop(mem_key, None)
-        return {
+        out = {
             "crystallized": True,
             "skill_id": rule["skill_id"],
             "skeleton_fp": rule["skeleton_fp"],
@@ -1338,6 +1424,11 @@ class VerifiedSkillStore:
             "twin_verification": stored.get('twin_verification', {'kind': 'LEGACY_UNSCOPED'}),
             "whole_task_correctness_proved": False,
         }
+        if localization_record is not None:
+            out["localization"] = localization_record
+        if causal_sufficiency is not None:
+            out["causal_sufficiency"] = causal_sufficiency
+        return out
 
     def update_learned_scope(
         self,
@@ -1612,7 +1703,7 @@ class VerifiedSkillStore:
                 return None, False
 
             eval_list = batch
-            if is_py_project_oracle and len(batch) >= 2:
+            if is_py_project_oracle and scope_tier != "SCOPE_STATEMENT" and len(batch) >= 4:
                 try:
                     from canonical.swe_kernel.zygote_worker_pool_v1 import screen_python_candidates_cow
 
