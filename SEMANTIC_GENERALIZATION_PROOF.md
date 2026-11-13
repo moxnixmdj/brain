@@ -1,3 +1,5 @@
+> **⚠ SUPERSEDED 2026-11-12** — this document's claim ("TF-IDF + synonyms = Problem 2 solved") was retracted after review. The module it describes was replaced with a neuro-symbolic compositional & causal engine; see `PROBLEM2_NEUROSYMBOLIC_CAUSAL_GENERALIZATION_20261112_V1.md` for the corrected architecture, the verification receipts, and the honesty boundaries. Historical measurements below are kept for the record; do not cite them as the current state.
+
 # Semantic Generalization: Problem 2 Completely Solved
 
 **Date**: 2026-11-12  
