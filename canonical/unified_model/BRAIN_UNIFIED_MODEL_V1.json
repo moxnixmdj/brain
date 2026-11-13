@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 430,
+  "knowledge_documents": 431,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6830,
+  "research_index_records": 6829,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8536abcc371c2672051c12fa4fe664136c5473bd340dc61a1d62cc8bfba765d2"
+  "value": "ed3c56980e2ad6ebef0d8ec6428cbeb6480f895988616165b36eb68a17351a7f"
  },
  "engines": [
   {
@@ -53247,6 +53247,80 @@
     "being",
     "noticing",
     "told"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6198,
+   "headings": [
+    "Observation identity is part of the model — 2026-11-12",
+    "The defect",
+    "What shipped",
+    "Measured effect",
+    "Honest limits",
+    "Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "OBSERVATION_IDENTITY_IS_PART_OF_THE_MODEL_20261112_V1.md",
+   "sha256": "6dfdd32f70c1b64bf45d62ef2fb9b8a1ed50fb4640824e6c3525fa14f978f157",
+   "summary": "Status: producer-run sandbox measurement and runtime reliability repair. Authority: NONE. No capability, benchmark, family, ownership, terminal, or sentience credit is claimed. `truth.achieved` remains `false`.",
+   "terms": {
+    "10": 5,
+    "188": 2,
+    "33": 2,
+    "ab": 2,
+    "after": 3,
+    "assertions": 2,
+    "before": 4,
+    "budget": 3,
+    "canonical": 13,
+    "closed": 3,
+    "control": 3,
+    "declared": 4,
+    "drive": 3,
+    "environment": 7,
+    "failed": 3,
+    "failures": 3,
+    "goal": 5,
+    "hashable": 3,
+    "identity": 11,
+    "inc": 4,
+    "key_of": 3,
+    "legacy": 6,
+    "measured": 4,
+    "measurement": 4,
+    "mixed": 3,
+    "mixed-type": 3,
+    "model": 11,
+    "no": 4,
+    "none": 3,
+    "not": 10,
+    "objects": 3,
+    "observation": 3,
+    "observations": 3,
+    "own": 3,
+    "pass": 4,
+    "passed": 4,
+    "python3": 5,
+    "remains": 3,
+    "returns": 3,
+    "row": 5,
+    "rows": 4,
+    "runtime": 4,
+    "sandbox": 3,
+    "str": 3,
+    "tests": 9,
+    "true": 3,
+    "under": 3,
+    "v2": 3
+   },
+   "title": "Observation identity is part of the model — 2026-11-12",
+   "title_terms": [
+    "2026-11-12",
+    "identity",
+    "model",
+    "observation",
+    "part"
    ]
   },
   {
@@ -78387,10 +78461,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1232,
+  "included_source_count": 1233,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b9672cbb74c1e7f02da77e62387fd0e5d3569b9b4b6aa4843efe23fd20bec08d"
+  "source_tree_digest": "ce1c543834ef19ad3575f634175aca1d12ea740fe0286cd1221e78860849e0cc"
  },
  "research_index": [
   {
@@ -195558,23 +195632,6 @@
   {
    "action_id": "",
    "capability": false,
-   "date": "",
-   "id": "research:canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
-   "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
-   "sha256": "6f39a538f01faef96312f28d60d978314ce6b64163365486514a3bf06b4b9e3f",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "check": 1,
-    "standing": 1,
-    "v1": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_REPLAY_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -233176,6 +233233,48 @@
    }
   },
   {
+   "action_id": "OBSERVATION_IDENTITY_IS_PART_OF_THE_MODEL_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/OBSERVATION_IDENTITY_IS_PART_OF_THE_MODEL_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/OBSERVATION_IDENTITY_IS_PART_OF_THE_MODEL_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1870c546d7a69e668243b8cf46f5f578e0cf8215489d16f366cede748990398e",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "adapt_existing_state_key_projection_and_transfer_admission_to_a_versioned_type_preserving_identity": 1,
+    "capability": 1,
+    "carried-model": 1,
+    "consumers": 1,
+    "distinguish": 1,
+    "environment": 1,
+    "environment_state_key_erased_observation_types_and_carried_models_were_accepted_without_declaring_the_identity_schema_that_wrote_them": 1,
+    "family": 1,
+    "flipped": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "identity": 2,
+    "learner": 1,
+    "legacy": 1,
+    "model": 1,
+    "no": 2,
+    "now": 1,
+    "observation": 1,
+    "observation_identity_is_part_of_the_model_20261112_v1": 1,
+    "observations": 1,
+    "part": 1,
+    "priors": 1,
+    "registered": 1,
+    "reject": 1,
+    "shared": 2,
+    "typed": 1,
+    "undeclared": 1,
+    "under": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "ONE_ANSWER_FOR_WHY_A_GOAL_FAILED_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-24",
@@ -235926,30 +236025,6 @@
     "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
     "turn": 1,
     "v1": 2
-   }
-  },
-  {
-   "action_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
-   "capability": false,
-   "date": "2026-11-12",
-   "id": "research:canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "f98e5851448131c767bcaf3a949240a6bc488c89e6a2f1c12c78ff0a39ad614c",
-   "status": "",
-   "terms": {
-    "20261112": 1,
-    "a_wrong_generalisation_is_refused_only_where_a_check_exists__and_on_real_migrated_projects_the_check_could_not_run_at_all__0_of_42_files__because_no_test_module_imported_the_file_or_a_declared_dependency_was_not_installed": 1,
-    "check": 1,
-    "environment": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
-    "reuse_the_rung_gradient_arms_and_check_class__add_isolated_venv_standing_of_declared_dependencies_manifest_named_missing_module_repair_a_per_path_test_entry_finder_with_direct_in_directory_indirect_confidence_and_a_ran_zero_tests_refusal__carry_the_manifests_in_the_corpus__then_remeasure_the_same_twelve_pull_requests_by_label": 1,
-    "round": 1,
-    "standing": 1,
-    "standing_the_check_is_the_environment_round_20261112_v1": 1,
-    "the_oracle_deficit_named_last_round_is_now_an_implemented_organ__standing_up_a_project_s_checks__and_the_verified_coverage_on_this_corpus_remains_zero_with_each_residual_named_per_project_instead_of_bucketed_half_half": 1,
-    "v1": 1
    }
   },
   {
@@ -263221,11 +263296,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/environment_learning_v1.py",
-   "sha256": "f2183aef493038271d9d036803b4914c0adfc4634a54b75b39ccead6dae69122",
+   "sha256": "11605be5e02a857dd9f8a7c81d34c5b2e275aaabd56d483c96096a9d81692025",
    "summary": "Learn any environment by acting in it, then plan the shortest way through it.",
-   "symbol_count": 7,
+   "symbol_count": 8,
    "symbols": [
     "Trace",
+    "_canonical_observation",
     "_choose_action",
     "_path_to",
     "drive",
@@ -263236,6 +263312,7 @@
    "terms": {
     "acting": 1,
     "any": 1,
+    "canonical_observation": 1,
     "choose_action": 1,
     "drive": 1,
     "environment": 2,
@@ -307134,7 +307211,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/systematic_exploration_v1.py",
-   "sha256": "a9b99b9ed1c4e790880d1ce9534ee14b9d5d8ae0e6b2d1c18e9218bd0b49dd53",
+   "sha256": "32fcdc7a501b81efcadd82ec9359c46564356662a893dbd8acd089bb23cffc7a",
    "summary": "An unknown environment is a graph nobody has drawn yet. Draw it without paying twice.",
    "symbol_count": 6,
    "symbols": [
@@ -311856,7 +311933,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/transfer_learning_v1.py",
-   "sha256": "90e8b0e0370773efb0d8b942f45dc4b00e867fd0ba93d4ee274a7ce55283d88d",
+   "sha256": "dc39e0d7028a0a5c69fc24c921c0557813fb3f3f0fb282e6574bb6d50cb7856f",
    "summary": "Experience carries over. An environment is not the first one ever seen.",
    "symbol_count": 24,
    "symbols": [
