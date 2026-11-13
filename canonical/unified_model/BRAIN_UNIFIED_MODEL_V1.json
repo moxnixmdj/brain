@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 449,
+  "knowledge_documents": 450,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6848,
+  "research_index_records": 6850,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a18f9ef92cc3bc6ec83d14a75fdf4937472700519a5e39f85c287675a6bce195"
+  "value": "1cb49689a8beb2a6d9635fa50c3ffef49ca3a84260e78a08e30698421bb4f873"
  },
  "engines": [
   {
@@ -45203,6 +45203,87 @@
     "know",
     "machine",
     "run"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 11297,
+   "headings": [
+    "A census must sample a tree that still contains the distinction",
+    "0. What happened",
+    "1. The census degraded without going red where it mattered",
+    "2. The repair, and why the sample is derived rather than chosen",
+    "3. The first version of guard 2 was wrong, and a scenario check caught it",
+    "4. Mutation results, including the survivor",
+    "5. What the literature calls this — the repair is the textbook move",
+    "6. A stale tree fact is not an invariant",
+    "7. What this does NOT claim",
+    "8. Still open, unchanged",
+    "9. Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_CENSUS_MUST_SAMPLE_A_TREE_THAT_STILL_CONTAINS_THE_DISTINCTION_20261113_V1.md",
+   "sha256": "928e5ea700cb778fc9454edd38e9218b1b1358c695b9c67cbe69e723de118ccf",
+   "summary": "**Date:** 2026-11-13 **Branch:** `arena/15c3bce3-brain`, base main `8cb35f65` **Authority:** NONE — producer-run measurement in one sandbox **Files:** `canonical/tests/test_real_input_space_census_v1.py` (test-only), `canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py` (test-only) **No runtime module changed in this round.**",
+   "terms": {
+    "13": 6,
+    "6863": 4,
+    "about": 4,
+    "because": 4,
+    "both": 6,
+    "canonical": 21,
+    "census": 9,
+    "count": 4,
+    "current": 4,
+    "directories": 5,
+    "directory": 8,
+    "equivalent": 4,
+    "every": 4,
+    "evidence": 4,
+    "exactly": 4,
+    "failure": 12,
+    "false": 5,
+    "first": 5,
+    "genuine": 4,
+    "guard": 11,
+    "holds": 6,
+    "https": 10,
+    "independent": 5,
+    "killed": 6,
+    "most_general": 4,
+    "must": 4,
+    "mutant": 6,
+    "no": 7,
+    "not": 23,
+    "now": 7,
+    "one": 6,
+    "oracle": 7,
+    "rather": 5,
+    "red": 6,
+    "round": 5,
+    "sample": 9,
+    "sensor": 6,
+    "so": 10,
+    "source": 12,
+    "still": 5,
+    "survivor": 5,
+    "test": 14,
+    "tests": 17,
+    "than": 5,
+    "tools": 8,
+    "tree": 10,
+    "two": 6,
+    "were": 6
+   },
+   "title": "A census must sample a tree that still contains the distinction",
+   "title_terms": [
+    "census",
+    "contains",
+    "distinction",
+    "must",
+    "sample",
+    "still",
+    "tree"
    ]
   },
   {
@@ -79915,10 +79996,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1251,
+  "included_source_count": 1252,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ab515b3a5dd961d0881e75f929e5928749c952883c67cd97d83738ce8acc17c5"
+  "source_tree_digest": "b2714171fdb166a418df224c355d140b179356f794e7933475601c341a0c25c4"
  },
  "research_index": [
   {
@@ -152990,6 +153071,29 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CENSUS_SAMPLE_DERIVATION_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CENSUS_SAMPLE_DERIVATION_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_INSUFFICIENCY_CERTIFICATE_VERIFICATION_V1",
+   "sha256": "7d1b4f5fa468a1fb08ea4aef9e830bd90ad9b4e986bde44c021e79f9fe72fe4c",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "census": 2,
+    "contains": 1,
+    "derivation": 1,
+    "distinction": 1,
+    "must": 1,
+    "sample": 2,
+    "still": 1,
+    "tree": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/CERTIFICATE_GATED_CONTENT_ADDRESS_BINDING_VERIFICATION_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -225398,6 +225502,35 @@
     "so": 2,
     "v1": 2,
     "verifies": 2
+   }
+  },
+  {
+   "action_id": "A_CENSUS_MUST_SAMPLE_A_TREE_THAT_STILL_CONTAINS_THE_DISTINCTION_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/A_CENSUS_MUST_SAMPLE_A_TREE_THAT_STILL_CONTAINS_THE_DISTINCTION_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CENSUS_MUST_SAMPLE_A_TREE_THAT_STILL_CONTAINS_THE_DISTINCTION_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "23680667e8085500d8c5df03dac3ceebafcb2508452f7bacf78747650846e5b1",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "a_census_must_sample_a_tree_that_still_contains_the_distinction_20261113_v1": 1,
+    "analysis_holds_no_python_at_all__so_python.source.available_separated_the_evidence_too_and_being_weaker_than_the_corpus_fact_it_became_most_general__the_census_kept_passing_its_admits_check_while_identifying_the_wrong_requirement": 1,
+    "census": 1,
+    "contains": 1,
+    "derive_the_census_sample_from_a_rule_that_never_mentions_tests__every_directory_under_canonical_at_depth_two_holding_python_source_directly__with_outcomes_from_an_independent_rglob_count_and_two_guards_pinning_why_identification_holds__both_outcome_classes_must_be_non_empty_and_some_failure_must_hold_python_source__then_replace_the_stale_tree_fact_pin_with_the_durable_invariant_that_the_sensor_and_the_independent_count_agree_in_both_directions": 1,
+    "distinction": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "must": 1,
+    "sample": 1,
+    "still": 1,
+    "the_census_goes_from_ambiguous_with_two_survivors_and_most_general_python.source.available_to_identified_with_one_survivor_and_most_general_python.test.corpus.available_over_13_real_directories_with_zero_disagreements_against_the_independent_count__and_the_guards_are_shown_to_be_exactly_equivalent_to_identifiability_over_four_sample_shapes_including_the_one_that_degraded__main_goes_from_two_red_tests_in_the_just_merged_work_to_green_with_no_runtime_module_touched": 1,
+    "the_real_input_space_census_stopped_measuring_what_it_names_without_any_assertion_about_the_requirement_going_red__two_concurrent_rounds_added_genuine_test_modules_to_canonical": 1,
+    "tools_so_the_directory_the_census_used_as_its_unique_source_but_no_tests_failure_became_a_success_and_the_only_remaining_failure_canonical": 1,
+    "tree": 1,
+    "v1": 1
    }
   },
   {
