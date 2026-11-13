@@ -31238,7 +31238,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "78257c39b6d0bc37376112b8c67ac678bec44f6f2a1f4e92df7971897cfcebae"
+  "value": "ee71c62e5d401983b7449f481a209111e3be8b59a8165bcdb49fb74b2ce3a602"
  },
  "engines": [
   {
@@ -231817,23 +231817,29 @@
    }
   },
   {
-   "action_id": "",
+   "action_id": "PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1",
    "capability": false,
    "date": "2026-11-12",
-   "id": "research:canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
+   "id": "research:canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
-   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "6f345e39b309e227b0bcec45c2cdff14de6a3aac9c30f0cb22296465f40bb68f",
+   "path": "canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "c62ab17e5863a1a98faba6a8f31d68db3a85ef469f41eebbe35e3830c8180fba",
    "status": "",
    "terms": {
     "20261112": 1,
+    "already": 1,
     "demonstration": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
     "gives": 1,
     "one": 1,
+    "organ_unchanged_from_main__coverage_23_06_of_an_own_ceiling_of_23_48__the_0_42_pp_remaining_is_bought_by_guessing_and_makes_nothing_more_right__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "price": 1,
+    "price_what_one_demonstration_already_gives_and_withdraw_the_zero_20261112_v1": 1,
+    "the_widening_under_test_reads_a_call_shape_off_the_target_file_itself_instead_of_off_a_second_demonstration__which_is_sound__but_the_shipped_organ_already_answers_every_call_shape_refusal_this_corpus_contains_so_the_widening_moves_0_of_440_askings_and_the_corpus_can_no_longer_be_widened_by_fitting_at_all": 1,
     "v1": 1,
     "withdraw": 1,
+    "withdraw_the_zero_gain_widening_and_record_what_the_shipped_organ_already_gives": 1,
     "zero": 1
    }
   },
