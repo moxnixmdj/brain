@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b7fe2f1fdac2580fbcca75d290f9e5baba580c6d81b0dcf881fbc84929717109"
+  "value": "829d8243d2e6de529b32607bf4311b5187cc78312a66e20058788331bef2feb3"
  },
  "engines": [
   {
@@ -232071,7 +232071,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/PRICE_WHAT_ONE_DEMONSTRATION_ALREADY_GIVES_AND_WITHDRAW_THE_ZERO_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "db5146e26cadaa7b6f57e1190ae45bdc84d34b8d1258eec4b3139786158a1e1b",
+   "sha256": "fdfa570c0dcb23a894d0e9cd58f6ae4d1d9f02760d3391616087a25ee4df0535",
    "status": "",
    "terms": {
     "20261112": 1,
