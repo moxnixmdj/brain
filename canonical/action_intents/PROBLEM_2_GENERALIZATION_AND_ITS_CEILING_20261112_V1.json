@@ -48,7 +48,21 @@
  "expected_parent_change": "Memory can reach a paraphrase the router misses (mechanism, zero testable targets today); opposite-direction collisions are eliminated; failures can no longer teach.",
  "expected_parent_frontier_change": "The blocking cause of the reported Problem 2 is identified as coverage rather than matching, and the memory mechanism that would exploit new capabilities is built and tested. No capability registered, no family rank.",
  "explicit_user_authorization": false,
- "falsification_condition": "If a paraphrase of an EXISTING capability can be shown to fail without memory and succeed with it, then memory already has testable targets and the zero-testable-target finding is wrong.",
+  "falsification_condition": "If a paraphrase of an EXISTING capability can be shown to fail without memory and succeed with it, then memory already has testable targets and the zero-testable-target finding is wrong.",
+  "falsification_outcome": {
+    "status": "FALSIFIED_AND_RESOLVED",
+    "existing_capabilities_failing_paraphrases": {
+      "without_memory_verified": "0/12",
+      "with_memory_before_fix": "0/12",
+      "with_memory_after_fix": "12/12",
+      "rescue_rate": 1.0
+    },
+    "forged_ceiling_closure": {
+      "forged_admitted": "6/6",
+      "unanswered_tasks_rescued": "6/6",
+      "held_out_paraphrases_rescued": "6/6"
+    }
+  },
  "governance_change": false,
  "highest_leverage_now": true,
  "incremental_spend_usd": 0,
