@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import pathlib
 import re
-from typing import Any, Callable, Mapping, Sequence
+from typing import Any, Callable, Hashable, Mapping, Sequence
 
 from canonical.runtime import finite_abstraction_cover_lift_v1 as cover_lift
 
@@ -126,8 +126,14 @@ def project_computer_observation(
     observation: Any,
     *,
     cnf_predicates: Sequence[Mapping[str, Any]] | None = None,
+    preserve_key_types: bool = False,
 ) -> Any:
-    """Canonicalize a raw computer/browser/API observation into a noise-free hashable structure."""
+    """Canonicalize a raw computer/browser/API observation into a noise-free hashable structure.
+
+    ``preserve_key_types`` is for observation identity: volatile noise is still stripped,
+    but mapping keys are not erased to ``str`` (so ``{1: ...}`` and ``{"1": ...}`` remain
+    different observations). Default callers keep the historical string-key projection.
+    """
     if observation is None or isinstance(observation, (bool, int, float)):
         return observation
 
@@ -138,18 +144,24 @@ def project_computer_observation(
         return _UUID_RE.sub("<UUID>", _ISO_TS_RE.sub("<TS>", observation))
 
     if isinstance(observation, tuple):
-        return tuple(project_computer_observation(x) for x in observation)
+        return tuple(project_computer_observation(x, preserve_key_types=preserve_key_types)
+                     for x in observation)
 
     if isinstance(observation, list):
-        return [project_computer_observation(x) for x in observation]
+        return [project_computer_observation(x, preserve_key_types=preserve_key_types)
+                for x in observation]
 
     if isinstance(observation, Mapping):
-        cleaned: dict[str, Any] = {}
+        cleaned: dict[Any, Any] = {}
         for k, v in observation.items():
-            ks = str(k)
-            if ks.lower() in _VOLATILE_KEYS:
+            name = str(k)
+            if name.lower() in _VOLATILE_KEYS:
                 continue
-            if ks == "screenshot_bytes" and isinstance(v, (bytes, bytearray)):
+            try:
+                out_key = k if preserve_key_types and isinstance(k, Hashable) else name
+            except TypeError:
+                out_key = name
+            if name == "screenshot_bytes" and isinstance(v, (bytes, bytearray)):
                 # Project raw screenshot bytes through `osworld_v21_positioned_ocr_observer_v1`
                 try:
                     from canonical.runtime.osworld_v21_positioned_ocr_observer_v1 import observe_screenshot
@@ -166,7 +178,9 @@ def project_computer_observation(
                 except Exception:
                     cleaned["ocr_error"] = True
                 continue
-            cleaned[ks] = project_computer_observation(v)
+            cleaned[out_key] = project_computer_observation(
+                v, preserve_key_types=preserve_key_types
+            )
 
         # If structured multi-channel `observed_elements` are present, synthesize Boolean element facts
         raw_els = observation.get("observed_elements")
@@ -179,7 +193,9 @@ def project_computer_observation(
                         cleaned[f"visible_enabled:{eid}"] = True
 
         if cnf_predicates:
-            bool_vals = {k: bool(v) for k, v in cleaned.items() if isinstance(v, bool)}
+            # CNF variable names are strings; the abstract predicate surface is not the
+            # type-preserving identity surface. Keep the historical string-key behavior here.
+            bool_vals = {str(k): bool(v) for k, v in cleaned.items() if isinstance(v, bool)}
             budget = [0]
             var_names = set(bool_vals.keys())
             abstract_out: dict[str, bool] = {}

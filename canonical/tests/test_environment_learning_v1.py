@@ -282,5 +282,261 @@ class PlanningTests(unittest.TestCase):
         self.assertNotEqual(a, el.state_key({"a": [2, 1]}))
 
 
+# --------------------------------------------------------------------------- #
+# observation identity: the measured type-erasure defect and its honest limits
+# --------------------------------------------------------------------------- #
+ALIAS_CORPUS = [
+    0, "0", 1, "1", 7, "7", True, "True", False, "False", None, "None",
+    (1, 2), "(1, 2)", (0, 1), "(0, 1)", b"ab", "b'ab'", 1.0, "1.0",
+]
+
+
+class MixedTypeEnv:
+    """The pre-registered mixed environment: int states and their string twins.
+
+    ``quote`` moves an int to its string twin; ``inc`` always returns an int;
+    ``reset`` returns int 0. A learner that identifies 7 with "7" writes rows
+    that contradict this table even though every action was really executed.
+    """
+
+    ACTIONS = ["quote", "inc", "reset"]
+
+    def __init__(self) -> None:
+        self.reset()
+
+    def reset(self) -> None:
+        self.s = 0
+
+    def state(self):
+        return self.s
+
+    def act(self, a) -> None:
+        if a == "quote":
+            self.s = str(self.s)
+        elif a == "inc":
+            self.s = int(self.s) + 1 if int(self.s) < 10 else 10
+        elif a == "reset":
+            self.s = 0
+        else:
+            raise ValueError(a)
+
+    def expected_after(self, before, action):
+        if action == "quote":
+            return str(before)
+        if action == "inc":
+            return int(before) + 1 if int(before) < 10 else 10
+        if action == "reset":
+            return 0
+        raise ValueError(action)
+
+
+class IntControlEnv:
+    """No-alias control: the same learner must still solve an ordinary int world."""
+
+    def __init__(self) -> None:
+        self.reset()
+
+    def reset(self) -> None:
+        self.s = 0
+
+    def state(self):
+        return self.s
+
+    def act(self, a) -> None:
+        if a == "inc":
+            self.s = min(10, self.s + 1)
+        elif a == "reset":
+            self.s = 0
+        else:
+            raise ValueError(a)
+
+
+class HiddenBitEnv:
+    """A visible observation that does not determine the next visible observation.
+
+    Identity repair cannot invent the hidden bit. The honest result is an open
+    model, not a verified plan.
+    """
+
+    def __init__(self) -> None:
+        self.hidden = False
+        self.visible = 0
+
+    def reset(self) -> None:
+        self.hidden = not self.hidden
+        self.visible = 0
+
+    def state(self):
+        return self.visible
+
+    def act(self, a) -> None:
+        if a == "go":
+            self.visible = "ready" if self.hidden else 0
+        elif a == "toggle":
+            self.hidden = not self.hidden
+        else:
+            raise ValueError(a)
+
+
+class StochasticEnv:
+    """One visible state, two possible successors. Traces must keep the conflict."""
+
+    def __init__(self) -> None:
+        import random
+        self.rng = random.Random(3)
+        self.s = 0
+
+    def reset(self) -> None:
+        self.s = 0
+
+    def state(self):
+        return self.s
+
+    def act(self, a) -> None:
+        if a == "flip":
+            self.s = self.rng.randrange(2)
+        else:
+            raise ValueError(a)
+
+
+class ObservationIdentityTests(unittest.TestCase):
+    def test_the_fixed_alias_corpus_has_no_collisions(self):
+        keys = [el.state_key(value) for value in ALIAS_CORPUS]
+        self.assertEqual(len(keys), 20)
+        self.assertEqual(len(set(keys)), 20)
+        for i, left in enumerate(ALIAS_CORPUS):
+            for right in ALIAS_CORPUS[i + 1:]:
+                self.assertNotEqual(el.state_key(left), el.state_key(right),
+                                    (left, right))
+
+    def test_keys_are_versioned_and_stable(self):
+        first = el.state_key({"a": [1, 2]})
+        self.assertTrue(first.startswith(el.STATE_KEY_PREFIX))
+        self.assertEqual(first, el.state_key({"a": [1, 2]}))
+        self.assertEqual(el.STATE_KEY_SCHEMA, "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2")
+
+    def test_mapping_key_types_are_not_erased_by_projection(self):
+        self.assertNotEqual(el.state_key({1: "a"}), el.state_key({"1": "a"}))
+        self.assertNotEqual(el.state_key({True: "a"}), el.state_key({"True": "a"}))
+        self.assertNotEqual(el.state_key({(1, 2): "a"}), el.state_key({"(1, 2)": "a"}))
+        self.assertEqual(el.state_key({1: "a", "1": "b"}),
+                         el.state_key({"1": "b", 1: "a"}))
+
+    def test_container_kinds_and_order_remain_distinct(self):
+        self.assertNotEqual(el.state_key([1, 2]), el.state_key((1, 2)))
+        self.assertNotEqual(el.state_key([1, 2]), el.state_key([2, 1]))
+        self.assertNotEqual(el.state_key({1, 2}), el.state_key(frozenset({1, 2})))
+        self.assertEqual(el.state_key({1, 2}), el.state_key({2, 1}))
+        self.assertNotEqual(el.state_key(b"ab"), el.state_key(bytearray(b"ab")))
+        self.assertNotEqual(el.state_key(1), el.state_key(1.0))
+        self.assertNotEqual(el.state_key(0.0), el.state_key(-0.0))
+
+    def test_volatile_computer_noise_is_still_projected_out(self):
+        self.assertEqual(el.state_key({"x": 1, "timestamp": 123}),
+                         el.state_key({"x": 1, "timestamp": 456}))
+        self.assertEqual(el.state_key({"x": 1, "csrf_token": "a"}),
+                         el.state_key({"x": 1, "csrf_token": "b"}))
+        self.assertNotEqual(el.state_key({"x": 1}), el.state_key({"x": 2}))
+
+    def test_the_mixed_environment_model_agrees_with_its_own_table(self):
+        env = MixedTypeEnv()
+        learned = el.learn_model(env, MixedTypeEnv.ACTIONS, budget=40,
+                                 max_depth=8, seed=0)
+        self.assertEqual(learned["state_key_schema"], el.STATE_KEY_SCHEMA)
+        self.assertEqual(len(learned["traces"]), 188)
+        observations = learned["observations"]
+        wrong = []
+        for trace in learned["traces"]:
+            before = observations[trace["before"]]
+            after = observations[trace["after"]]
+            expected = env.expected_after(before, trace["action"])
+            if type(expected) is not type(after) or expected != after:
+                wrong.append((before, trace["action"], after, expected))
+        self.assertEqual(wrong, [])
+        for key, snapshot in observations.items():
+            self.assertEqual(key, el.state_key(snapshot))
+
+    def test_the_no_alias_control_is_still_solved(self):
+        result = el.drive(IntControlEnv(), ["inc", "reset"],
+                          is_goal=lambda s: s == 3, budget=40, max_depth=8, seed=0)
+        self.assertTrue(result["pass"], result)
+        self.assertEqual(result["plan"], ["inc", "inc", "inc"])
+
+    def test_a_legacy_prior_is_rejected_not_reinterpreted(self):
+        legacy = {"0": {"inc": "1"}}
+        learned = el.learn_model(IntControlEnv(), ["inc", "reset"], budget=2,
+                                 max_depth=2, seed=0, prior=legacy)
+        self.assertEqual(learned["prior_states"], 0)
+        self.assertEqual(learned["prior_rejected_states"], 1)
+        self.assertNotIn("0", learned["model"])
+        accepted = el.learn_model(IntControlEnv(), ["inc", "reset"], budget=2,
+                                  max_depth=2, seed=0, prior=legacy,
+                                  prior_schema=el.STATE_KEY_SCHEMA)
+        self.assertEqual(accepted["prior_states"], 1)
+        self.assertIn("0", accepted["model"])
+
+    def test_hidden_state_is_not_promoted_to_a_verified_plan(self):
+        result = el.drive(HiddenBitEnv(), ["go", "toggle"],
+                          is_goal=lambda s: s == "ready", budget=20,
+                          max_depth=4, seed=0)
+        self.assertFalse(result["pass"])
+        self.assertNotEqual(result["authority"],
+                            "MODEL_LEARNED_PLAN_EXECUTED_GOAL_OBSERVED")
+
+    def test_stochastic_conflicts_remain_in_the_traces(self):
+        learned = el.learn_model(StochasticEnv(), ["flip"], budget=20,
+                                 max_depth=1, seed=0)
+        outcomes = {(t["before"], t["after"]) for t in learned["traces"]}
+        zero = el.state_key(0)
+        one = el.state_key(1)
+        self.assertIn((zero, zero), outcomes)
+        self.assertIn((zero, one), outcomes)
+        # The tabular model is still a single-successor hypothesis; the conflict is
+        # visible in the traces, not silently claimed away as determinism.
+        self.assertEqual(len(learned["model"][zero]), 1)
+
+    def test_projection_default_and_identity_mode_are_explicit(self):
+        from canonical.swe_kernel.predicate_world_abstraction_v1 import (
+            project_computer_observation,
+        )
+        raw = {1: "a", "1": "b", "timestamp": 123}
+        self.assertEqual(project_computer_observation(raw), {"1": "b"})
+        self.assertEqual(project_computer_observation(raw, preserve_key_types=True),
+                         {1: "a", "1": "b"})
+        self.assertNotEqual(el.state_key({1: "a"}), el.state_key({"1": "a"}))
+
+    def test_cycles_and_unsupported_observations_fail_closed(self):
+        cycle = []
+        cycle.append(cycle)
+        with self.assertRaisesRegex(ValueError, "STATE_KEY_CYCLE"):
+            el.state_key(cycle)
+
+        class Unsupported:
+            __hash__ = None
+
+        with self.assertRaisesRegex(TypeError, "STATE_KEY_UNSUPPORTED"):
+            el.state_key(Unsupported())
+
+    def test_arc_observation_keeps_its_caller_supplied_hashable_identity(self):
+        from canonical.tools.arc_agi_3_public_exploration_measure_v1 import Observation
+        first = Observation(1, b"frame", "start", ("A",))
+        second = Observation(1, b"frame", "start", ("A",))
+        other = Observation(1, b"other", "start", ("A",))
+        self.assertEqual(el.state_key(first), el.state_key(second))
+        self.assertNotEqual(el.state_key(first), el.state_key(other))
+        self.assertTrue(el.state_key(first).startswith(el.STATE_KEY_PREFIX))
+
+    def test_mixed_reachable_goal_is_solved_and_deep_goal_is_not_invented(self):
+        reached = el.drive(MixedTypeEnv(), MixedTypeEnv.ACTIONS,
+                           is_goal=lambda s: s == 3, budget=40, max_depth=8, seed=0)
+        self.assertTrue(reached["pass"], reached)
+        self.assertEqual(reached["plan"], ["inc", "inc", "inc"])
+        deep = el.drive(MixedTypeEnv(), MixedTypeEnv.ACTIONS,
+                        is_goal=lambda s: s == 10, budget=40, max_depth=8, seed=0)
+        self.assertFalse(deep["pass"])
+        self.assertEqual(deep["status"], el.FAIL_NO_GOAL)
+        self.assertEqual(deep["learned"]["prior_rejected_states"], 0)
+
+
 if __name__ == "__main__":
     unittest.main()

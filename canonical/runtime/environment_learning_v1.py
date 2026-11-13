@@ -38,6 +38,14 @@ from typing import Any, Callable, Hashable, Iterable, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_ENVIRONMENT_LEARNING_V1"
 
+# Observation identity is part of the model format. V1 rendered hashable observations
+# with str() and unhashable ones with json.dumps(default=str), so 7 and "7" (and
+# True/"True", None/"None", tuple/its rendering, bytes/its repr) became one state.
+# V2 hashes a type- and structure-tagged canonical form. The prefix keeps old stored
+# model rows from being mistaken for new ones; they are rejected, not reinterpreted.
+STATE_KEY_SCHEMA = "PROJECT_BRAIN_ENVIRONMENT_STATE_KEY_V2"
+STATE_KEY_PREFIX = "el-state-v2:"
+
 PASS = "PASS__ENVIRONMENT_LEARNED_AND_GOAL_REACHED"
 OPEN_UNREACHED = "OPEN__ENVIRONMENT_LEARNED_GOAL_NOT_REACHED_IN_MODEL"
 FAIL_NO_MODEL = "FAIL_CLOSED__ENVIRONMENT_LEARNED_NOTHING"
@@ -47,22 +55,83 @@ FAIL_NO_GOAL = "FAIL_CLOSED__GOAL_NEVER_OBSERVED"
 # --------------------------------------------------------------------------- #
 # observation
 # --------------------------------------------------------------------------- #
+def _canonical_observation(value: Any, active: set[int]) -> Any:
+    """A JSON-safe, type-tagged canonical form. No ``default=str`` erasure is allowed.
+
+    Containers keep their kind and order where order is part of the value (tuple/list);
+    mappings and sets are order-insensitive. Mapping keys are encoded with the same rules
+    as values, so an integer key is not a string key. Cycles and unsupported unhashable
+    objects fail closed instead of being rendered into a colliding string.
+    """
+    kind = type(value)
+    if value is None:
+        return ["none"]
+    if kind is bool:
+        return ["bool", value]
+    if kind is int:
+        return ["int", str(value)]
+    if kind is float:
+        return ["float", value.hex()]
+    if kind is str:
+        return ["str", value]
+    if kind is bytes:
+        return ["bytes", value.hex()]
+    if kind is bytearray:
+        return ["bytearray", bytes(value).hex()]
+    if kind is complex:
+        return ["complex", value.real.hex(), value.imag.hex()]
+
+    ident = id(value)
+    if ident in active:
+        raise ValueError("STATE_KEY_CYCLE")
+    active.add(ident)
+    try:
+        if kind is tuple:
+            return ["tuple", [_canonical_observation(x, active) for x in value]]
+        if kind is list:
+            return ["list", [_canonical_observation(x, active) for x in value]]
+        if kind in (set, frozenset):
+            items = [_canonical_observation(x, active) for x in value]
+            items.sort(key=lambda x: json.dumps(x, sort_keys=True, separators=(",", ":")))
+            return ["set" if kind is set else "frozenset", items]
+        if isinstance(value, Mapping):
+            items = [[_canonical_observation(k, active), _canonical_observation(v, active)]
+                     for k, v in value.items()]
+            items.sort(key=lambda pair: json.dumps(pair[0], sort_keys=True, separators=(",", ":")))
+            return ["map", items]
+    finally:
+        active.remove(ident)
+
+    # Opaque hashable objects keep the historical caller-supplied string identity, but
+    # now qualified by concrete type. This is not a structural encoding of arbitrary
+    # objects; callers needing a finer quotient should project or supply `key_of`.
+    if isinstance(value, Hashable):
+        try:
+            hash(value)
+        except TypeError:
+            pass
+        else:
+            return ["opaque", kind.__module__ + "." + kind.__qualname__, str(value)]
+    raise TypeError("STATE_KEY_UNSUPPORTED:" + kind.__module__ + "." + kind.__qualname__)
+
+
 def state_key(observation: Any) -> str:
-    """A stable identity for a state. Anything hashable becomes a key; volatile computer noise is projected out."""
+    """A versioned, type/structure-preserving identity for a projected state.
+
+    Volatile computer noise is still projected out, but the projection no longer erases
+    mapping-key types for identity. The result is namespaced by STATE_KEY_SCHEMA so a
+    legacy ``str``/``default=str`` model row cannot be read as a V2 observation.
+    """
     try:
         from canonical.swe_kernel.predicate_world_abstraction_v1 import project_computer_observation
 
-        observation = project_computer_observation(observation)
+        observation = project_computer_observation(observation, preserve_key_types=True)
     except Exception:
         pass
-    try:
-        if isinstance(observation, Hashable) and not isinstance(observation,
-                                                                 (dict, list, set)):
-            return str(observation)
-    except TypeError:
-        pass
-    blob = json.dumps(observation, sort_keys=True, default=str)
-    return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16]
+    canonical = _canonical_observation(observation, set())
+    blob = json.dumps(canonical, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=True, allow_nan=False)
+    return STATE_KEY_PREFIX + hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 
 class Trace:
@@ -88,7 +157,8 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
                 seed: int | None = None, max_depth: int = 6,
                 reward: Callable[[Any, Any, Any], float] | None = None,
                 heuristic: Callable[[Any], float] | None = None,
-                prior: Mapping[str, Mapping[str, str]] | None = None
+                prior: Mapping[str, Mapping[str, str]] | None = None,
+                prior_schema: str | None = None
                 ) -> dict[str, Any]:
     """Act, watch what changes, and record it. No model of the world is assumed.
 
@@ -106,8 +176,14 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
     # A model carried over from a similar environment met before. Starting
     # from nothing every time is amnesiac: the same three-dial lock solved
     # yesterday would be re-learned from scratch today.
+    #
+    # Carried rows are only comparable under the SAME observation identity. A legacy
+    # row keyed by str(7) cannot be reinterpreted as a V2 row for int 7; the caller
+    # must declare the schema, and a mismatch is rejected rather than merged.
+    prior_rejected = bool(prior) and prior_schema != STATE_KEY_SCHEMA
+    accepted_prior = {} if prior_rejected else (prior or {})
     model: dict[str, dict[str, str]] = (
-        {k: dict(v) for k, v in (prior or {}).items()})
+        {k: dict(v) for k, v in accepted_prior.items()})
     observations: dict[str, Any] = {}
     traces: list[Trace] = []
     trials = 0
@@ -146,10 +222,12 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
 
     return {
         "schema": SCHEMA,
+        "state_key_schema": STATE_KEY_SCHEMA,
         "model": model,
         "observations": observations,
         "guided": heuristic is not None,
-        "prior_states": len(prior or {}),
+        "prior_states": len(accepted_prior),
+        "prior_rejected_states": len(prior or {}) if prior_rejected else 0,
         "traces": [t.as_dict() for t in traces],
         "states": sorted(model),
         "state_count": len(model),
@@ -277,7 +355,8 @@ def drive(env: Any, actions: Sequence[Any], *,
           budget: int = 60, seed: int | None = None,
           max_depth: int = 6, verify: bool = True,
           heuristic: Callable[[Any], float] | None = None,
-          prior: Mapping[str, Mapping[str, str]] | None = None) -> dict[str, Any]:
+          prior: Mapping[str, Mapping[str, str]] | None = None,
+          prior_schema: str | None = None) -> dict[str, Any]:
     """Learn an unknown environment and reach the goal in it. Or say why not.
 
     The plan is executed and the goal is CHECKED afterwards. A plan that was
@@ -285,7 +364,8 @@ def drive(env: Any, actions: Sequence[Any], *,
     """
     started = time.time()
     learned = learn_model(env, actions, budget=budget, seed=seed,
-                          max_depth=max_depth, heuristic=heuristic, prior=prior)
+                          max_depth=max_depth, heuristic=heuristic, prior=prior,
+                          prior_schema=prior_schema)
     if not learned["model"] or learned["transition_count"] == 0:
         return {"schema": SCHEMA, "status": FAIL_NO_MODEL, "pass": False,
                 "learned": learned, "plan": None,
