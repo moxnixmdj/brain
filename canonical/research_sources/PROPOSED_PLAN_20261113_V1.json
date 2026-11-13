@@ -1,0 +1,75 @@
+{
+  "schema": "proposed_plan_v1",
+  "goal": "Total coverage of any computer use, including the most advanced software engineering, by giving the agent the most advanced actions and letting it learn each from one exposure.",
+  "recorded": "2026-11-13",
+  "proposed_by": "owner, restated in this session",
+  "why_recorded": "A plan is a claim about the future. This one was proposed and refused on 2026-11-13 by canonical/tools/plan_admission_v1.py. It is kept verbatim so that the refusal can be re-checked against the plan as it was actually written, and so the next session does not have to re-argue it from memory.",
+  "verdict_at_record_time": "REJECTED",
+  "phases": [
+    {
+      "name": "Phase 1: prove on advanced coding tasks",
+      "actions": [
+        "multi-step debugging",
+        "test generation",
+        "performance profiling",
+        "architecture design",
+        "complex refactoring"
+      ],
+      "success_criterion": "Task 1 builds 10 causal models; Task 2 builds 25 causal models, transferred from Task 1; Task 3 builds 40 causal models. Show: each task makes the system smarter.",
+      "held_out": "",
+      "controls": [],
+      "stopping_rule": "",
+      "falsifier": ""
+    },
+    {
+      "name": "Phase 2: expand to code modification",
+      "actions": [
+        "edit code",
+        "refactor code",
+        "generate code",
+        "integrate systems"
+      ],
+      "success_criterion": "Show the system can modify code correctly; show it learns from mistakes; show it applies knowledge to new modifications.",
+      "held_out": "",
+      "controls": [],
+      "stopping_rule": "",
+      "falsifier": ""
+    },
+    {
+      "name": "Phase 3: scale to adjacent domains",
+      "actions": [
+        "test generation and execution",
+        "performance optimisation",
+        "architecture design"
+      ],
+      "success_criterion": "Builds on code understanding; natural next steps.",
+      "held_out": "",
+      "controls": [],
+      "stopping_rule": "",
+      "falsifier": ""
+    },
+    {
+      "name": "Phase 4: any computer use",
+      "actions": [
+        "GUI interaction",
+        "system administration",
+        "data analysis",
+        "creative tasks"
+      ],
+      "success_criterion": "The system learns any task by executing it; knowledge transfers across domains.",
+      "held_out": "",
+      "controls": [],
+      "stopping_rule": "",
+      "falsifier": ""
+    }
+  ],
+  "refusal_summary": [
+    "ACTIVITY_METRIC: the only stated success criterion in Phase 1 is a count of artefacts ('10 causal models', '25', '40'). This repository has already measured artefact counts to be uncorrelated with capability, repeatedly and in both directions.",
+    "NO_HELD_OUT: no phase names a distribution that was withheld from development, so every number the plan would produce is a fit.",
+    "NO_CONTROLS: no phase includes a cache-only arm or a random/default arm, so 'it learned' and 'it recalled' cannot be separated.",
+    "NO_STOPPING_RULE: no phase names a result at which the work would stop.",
+    "NO_FALSIFIER: no phase names an outcome that would prove the phase wrong. A plan that cannot return NO cannot teach anything.",
+    "DOMAIN_SEQUENCING: phases are ordered by substrate (code -> code edits -> adjacent -> GUI), not by whether an independent verifier is cheap. Verifier availability, not substrate, is what makes a phase tractable.",
+    "ACTION_IS_A_TASK_FAMILY: five of the named 'actions' are task families ('multi-step debugging', 'architecture design'), not actions. An action is edit_file or run_tests. You cannot give a model a task family as an action."
+  ]
+}
