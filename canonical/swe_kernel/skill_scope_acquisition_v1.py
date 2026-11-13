@@ -181,6 +181,123 @@ def observable_facts(source: str, *, baseline_ok: bool | None,
     return frozenset(facts)
 
 
+# --------------------------------------------------------------------------- site-relative facts
+# Added 2026-11-12 after measuring whole-file facts on real third-party modules. On the pinned
+# boltons repair, `before.py` and its own `after.py` -- which differ by the actual historical fix --
+# produce IDENTICAL 26-fact sets (sites {assignment, if_guard}, all nine comparison operators). A
+# vocabulary that cannot tell a real defect from its own repair cannot scope anything, and over the
+# four real corpus cases it left 1024 survivors where site-relative facts left 4.
+def firing_sites(source: str, rule: Mapping[str, Any], *,
+                 language: str = "python") -> list[tuple[int, str]]:
+    """Every (offset, operator) the lesson's family would rewrite, in scanning order.
+
+    These are reconstructed with the same scanner `propose_operator_swaps` uses, so they are the
+    proposer's own sites rather than a second opinion about where it fires.
+    """
+    from canonical.swe_kernel import operator_generalization_v1 as gen
+
+    family = gen.derive_swap_family(rule) or (
+        [gen.derive_operator_swap(rule)] if gen.derive_operator_swap(rule) else [])
+    sites: set[tuple[int, str]] = set()
+    for swap in family:
+        src_op = str(swap.get("from") or "")
+        for idx in gen._occurrences(source, src_op, language=language):
+            sites.add((idx, src_op))
+    return sorted(sites)
+
+
+def facts_at_offset(source: str, offset: int) -> frozenset[str]:
+    """Facts of the comparison that CONTAINS this offset. Empty when none does.
+
+    Empty, never a placeholder. An earlier prototype emitted `site.no_enclosing_comparison` for an
+    offset outside any comparison, and because that happened in every one of the four real cases the
+    law returned it as the most general survivor -- a requirement satisfied by everything, i.e. a
+    constant dressed as a finding. The absence of a fact is not a fact.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return frozenset()
+    lines = source.splitlines(keepends=True)
+    starts = [0]
+    for line in lines:
+        starts.append(starts[-1] + len(line))
+
+    def absolute(lineno: int, col: int) -> int:
+        return starts[lineno - 1] + col if 0 < lineno <= len(lines) else 0
+
+    hit: tuple[int, ast.AST] | None = None
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Compare):
+            continue
+        lo = absolute(node.lineno, node.col_offset)
+        hi = absolute(getattr(node, "end_lineno", node.lineno), getattr(node, "end_col_offset", 0))
+        if lo <= offset < hi and (hit is None or (hi - lo) < hit[0]):
+            hit = (hi - lo, node)
+    if hit is None:
+        return frozenset()
+    node = hit[1]
+    facts: set[str] = set()
+    for op in node.ops:
+        facts.add(f"operator.{type(op).__name__}")
+    for side, operand in (("left_operand", node.left),
+                          ("right_operand", node.comparators[0] if node.comparators else None)):
+        if operand is None:
+            continue
+        if isinstance(operand, ast.Name):
+            facts.add(f"{side}.name.{operand.id}")
+        elif isinstance(operand, ast.Attribute):
+            facts.add(f"{side}.attribute")
+        elif isinstance(operand, ast.Call):
+            facts.add(f"{side}.call")
+        elif isinstance(operand, ast.BinOp):
+            facts.add(f"{side}.arithmetic")
+        elif isinstance(operand, ast.Subscript):
+            facts.add(f"{side}.subscript")
+        elif isinstance(operand, ast.Constant):
+            facts.add(f"{side}.constant")
+        elif isinstance(operand, ast.UnaryOp):
+            facts.add(f"{side}.unary")
+    return frozenset(facts)
+
+
+def site_facts(source: str, rule: Mapping[str, Any], *, baseline_ok: bool | None,
+               language: str = "python") -> dict[str, Any]:
+    """The state of a target WHERE THE SKILL ACTUALLY FIRES, plus the baseline verdict.
+
+    Returns the fact set and the counts that make it interpretable: how many sites fired, and how
+    many of them sit outside any comparison and therefore contributed nothing.
+    """
+    sites = firing_sites(source, rule, language=language)
+    union: set[str] = set()
+    unlocated = 0
+    for offset, _op in sites:
+        local = facts_at_offset(source, offset)
+        if not local:
+            unlocated += 1
+        union |= local
+    if baseline_ok is None:
+        union.add("baseline.not_executed")
+    else:
+        union.add(BASELINE_SATISFIES if baseline_ok else BASELINE_VIOLATES)
+    return {"state": frozenset(union), "firing_sites": len(sites), "unlocated_offsets": unlocated}
+
+
+def constant_facts(rows: Sequence[tuple[Iterable[str], bool]]) -> frozenset[str]:
+    """Facts present in EVERY observation: consistent with every requirement, tested by none.
+
+    Reported, never silently dropped. Dropping them would hide that the corpus is one-sided, and a
+    requirement made only of constant facts is not a finding -- it is the corpus saying nothing.
+    """
+    sets = [frozenset(str(f) for f in state) for state, _ok in rows]
+    if not sets:
+        return frozenset()
+    common = set(sets[0])
+    for s in sets[1:]:
+        common &= s
+    return frozenset(common)
+
+
 # --------------------------------------------------------------------------- one observation
 def observe(rule: Mapping[str, Any], source: str, spec: str, *,
             propose: Callable[..., Iterable[str]] | None = None,
@@ -214,10 +331,18 @@ def observe(rule: Mapping[str, Any], source: str, spec: str, *,
         verdict = FIRED_STILL_WRONG
 
     state = observable_facts(source, baseline_ok=baseline_ok, language=language)
+    # `state` is whole-file and is what Round F's pinned tests read. `site_state` is the state where
+    # the skill actually fires, and is the one that survives contact with real modules.
+    site = site_facts(source, rule, baseline_ok=baseline_ok, language=language) if fired else None
     return {"schema": SCHEMA, "verdict": verdict, "fired": fired,
             "baseline_ok": baseline_ok, "solved": solved,
             "candidates": len(candidates), "state": state,
-            "row": (sorted(state), verdict in IS_SUCCESS) if verdict in IS_EVIDENCE else None}
+            "site_state": (site["state"] if site else state),
+            "firing_sites": (site["firing_sites"] if site else 0),
+            "unlocated_offsets": (site["unlocated_offsets"] if site else 0),
+            "row": (sorted(state), verdict in IS_SUCCESS) if verdict in IS_EVIDENCE else None,
+            "site_row": ((sorted(site["state"]), verdict in IS_SUCCESS)
+                         if (site is not None and verdict in IS_EVIDENCE) else None)}
 
 
 def _default_executor(source: str, spec: str) -> bool:
