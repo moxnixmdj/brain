@@ -211,6 +211,27 @@ the gate; gate reports everything allowed; verdict never diverges; no bool norma
 collapsed; unknown language resolves to python; audit skips the two refuted entries; compound operator
 inherits its base.
 
+### The floor caught this round's own record
+
+The first draft of `canonical/verification/OPERATOR_SEMANTICS_20261112_V1.json` filed a prose
+description of how the batch comparison was reproduced under the key `command`. That key is one of the
+three `auditability_report_v1.predicate_of` recognises, so the sentence was split on whitespace and
+counted as a declared verification asking nothing to be checked:
+
+```
+my branch      REGRESSED: declaring_none 596 > floor 595
+origin/main    HELD:      declaring_none 595 == floor 595     (separate worktree, none of my files)
+```
+
+The comparison against a clean `origin/main` worktree is what makes the attribution certain rather
+than plausible. The fix was to stop using a reserved key for prose — `how_reproduced` — not to move
+the floor, and the reason is recorded inside the JSON where the next reader will find it. The record
+measures the floor including itself, so it was regenerated until that measurement reached a fixed
+point: it now reports `HELD 595` and a standalone run agrees.
+
+This is the gate doing its job on the round that shipped it, which is worth more than another green
+tick: a ratchet that only ever catches other people's regressions is not yet shown to catch anything.
+
 ---
 
 ## 8. What is real
