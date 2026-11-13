@@ -295,3 +295,45 @@ class AStatedCommandNarrowsTheFieldTests(unittest.TestCase):
                    memory=False, bridge=False, computer_use=False)
         self.assertNotEqual(r.get("status"), "VERIFIED_ACTION")
         self.assertIsNone(r.get("capability_id"))
+
+
+class WhatThisDoesNotYetDoTests(unittest.TestCase):
+    """A command whose own text contains quotes is still mangled. Recorded, not hidden.
+
+    The quoted-command pattern ends at the FIRST closing quote, so a program that
+    needs quotes of its own -- `awk -F, '{s+=$2} END {print s}' f` -- is cut short.
+    Measured 2026-11-12, after a stated command became reachable for the first time:
+    the sentence `run the shell command "awk -F, '{s+=$2} END {print s}' probe.csv"`
+    binds `['awk', '-F,']`, runs it, gets an empty stdout, and the row's declared
+    postcondition (`returncode == 0`) is satisfied -- so it reports VERIFIED_ACTION
+    with no output at all.
+
+    That is the same error this change exists to remove, one layer out: a pass that
+    is really an unmeasured result. The regex PREDATES this work; what is new is
+    that such a sentence now reaches a shell at all, so the defect is now
+    load-bearing rather than hypothetical.
+
+    These tests assert today's behaviour so the regression cannot be papered over
+    silently. When the parser learns to balance quotes, they will fail and the
+    assertion should be replaced with the correct one -- deliberately, not by
+    accident.
+    """
+
+    SENTENCE = ('run the shell command "awk -F, \'{s+=$2} END {print s}\' probe.csv"')
+
+    def test_nested_quotes_currently_truncate_the_command(self):
+        from canonical.runtime.composer_route_v1 import extract_argv
+        self.assertEqual(extract_argv(self.SENTENCE), ["awk", "-F,"],
+                         "if this changes, the parser learned to balance quotes -- "
+                         "update this test to assert the full program")
+
+    def test_a_truncated_command_is_not_the_question_that_was_asked(self):
+        """VERIFIED_ACTION over an empty result is a pass with nothing behind it."""
+        from canonical.runtime import grounded_action_v1 as GA
+        r = GA.act(self.SENTENCE, memory=False, bridge=False, computer_use=False)
+        if r.get("status") == "VERIFIED_ACTION":
+            stdout = (r.get("result") or {}).get("stdout") or ""
+            self.assertEqual(stdout, "",
+                             "the premise of this test is that the truncated command "
+                             "produces no output; if it now produces the right answer "
+                             "the parser has been fixed")
