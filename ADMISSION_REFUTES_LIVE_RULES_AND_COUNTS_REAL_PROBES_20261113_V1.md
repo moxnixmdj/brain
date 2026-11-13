@@ -1,6 +1,6 @@
 # A counterexample must revoke the live rule; safety evidence must actually execute
 
-Date: 2026-11-13. Base: `8cb35f6502de46d42aa0c19ecd7406977c219144`.
+Date: 2026-11-13. Base: `388c5c7d9b4d1407ac842d785201c1fb6fb6b473`.
 Authority: **NONE**. This is model-assisted development and producer-run sandbox testing.
 It registers no capability, flips no family, updates no base-model weights, and claims no
 independent certification. `truth.achieved` remains `false`.
@@ -171,27 +171,27 @@ tree-sitter-languages 1.10.2, Pillow 13.0.0, and z3-solver 5.4.1.0. No test harn
 patched and no assertion was weakened.
 
 ```text
-# new regression file at the final main base, before this patch's runtime wiring
+# new regression file at pre-merge main base 8cb35f6502, before this patch's runtime wiring
 32 failed, 2 passed in 1.12s
 
-# final focused admission/store/engine regression set (16 files)
+# final focused admission/store/engine regression set on the merged tree (16 files)
 302 passed, 1 warning in 31.37s
 
-# all 43 tracked test files that reference VerifiedSkillStore/crystallize_code_fix
+# all 43 tracked test files that reference VerifiedSkillStore/crystallize_code_fix (at 8cb35f6502)
 551 passed, 11 failed, 7 errors, 9 warnings in 249.94s
 
-# the same failing/erroring files re-run with the two runtime files restored to final base
+# the same failing/erroring files re-run with the two runtime files restored to 8cb35f6502
 11 failed, 126 passed, 5 warnings in 100.97s
 
 # the 7-error QuixBugs file alone, with this patch restored
 61 passed in 30.76s
 ```
 
-The 11 broad-suite failures reproduce on the final base runtime files: unconfined-route
+The 11 broad-suite failures reproduce on the 8cb35f6502 base runtime files: unconfined-route
 expectations, multi-round crystallization count, navigation/front-door confinement,
 insertion/coupled repair, latency/confinement-dependent organism tests, and a calibration
 expectation. The 7 QuixBugs errors were a concurrent `_MEM_SKILLS` dictionary-mutation race
-during the broad run; that file passed alone and also passed in the final base rerun. Neither class
+during the broad run; that file passed alone and also passed in that base rerun. Neither class
 is hidden or attributed to this patch. They remain real backlog/environment work.
 
 `compileall`, `git diff --check`, and the integrity guard self-test passed. Generated test

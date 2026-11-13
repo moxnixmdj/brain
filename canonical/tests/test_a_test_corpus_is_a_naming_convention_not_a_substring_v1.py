@@ -93,13 +93,28 @@ def test_a_directory_named_tests_holding_no_test_module_is_not_credited():
 
 
 # ---------------------------------------------------------------- the real tree
-def test_canonical_tools_has_no_test_corpus_and_canonical_tests_does():
-    """The pair the substring rule made indistinguishable, on the real tree."""
-    tools = _probe(ROOT / "canonical/tools")
-    tests = _probe(ROOT / "canonical/tests")
-    assert tools.get("true") is False, tools
-    assert tests.get("true") is True, tests
-    assert not [p for p in (ROOT / "canonical/tools").rglob("test_*.py")]
+def test_the_sensor_agrees_with_an_independent_count_on_real_directories():
+    """Both directions, on the real tree, against a count the sensor does not share.
+
+    This test used to pin `canonical/tools` as holding no test corpus. That was true when
+    written and became false within hours, when two concurrent rounds added genuine
+    `test_*.py` modules there (`ee9685dd`, `97684727`). A tree fact is not an invariant,
+    and pinning one makes the suite red for being wrong about the tree rather than for
+    finding a defect. What must hold is that the sensor and an independent
+    `rglob("test_*.py")` count agree -- in both directions, on whatever the tree holds now.
+    """
+    dirs = [d for base in sorted(ROOT.glob("canonical/*")) if base.is_dir()
+            for d in [base] + [c for c in sorted(base.glob("*"))
+                               if c.is_dir() and not c.name.startswith(("_", "."))]
+            if list(d.glob("*.py"))]
+    rows = {d: bool(list(d.rglob("test_*.py"))) for d in dirs}
+
+    # both directions must be represented, or the agreement below proves nothing
+    assert any(rows.values()), rows
+    assert any(not v for v in rows.values()), rows
+
+    for d, genuine in rows.items():
+        assert _probe(d).get("true") is genuine, (d.relative_to(ROOT).as_posix(), genuine)
 
 
 def test_the_fixtures_are_not_a_test_corpus():

@@ -1,0 +1,77 @@
+{
+ "authority": "NONE__PRODUCER_RUN_MEASUREMENT_IN_ONE_SANDBOX_NOT_INDEPENDENT_VERIFICATION",
+ "files": {
+  "A_CENSUS_MUST_SAMPLE_A_TREE_THAT_STILL_CONTAINS_THE_DISTINCTION_20261113_V1.md": "6c43d84fb716f8a19dac9d4b6b2e6902132ca53906dd7727c5c2040b82b7e592",
+  "canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py": "63282d5b4ba47bbb2eae310e906f2cc2f1cf80c42037efaf7d5e35c8b3fb3384",
+  "canonical/tests/test_real_input_space_census_v1.py": "5532d2168968b22867735e8f5bf6f7f2ae37df428f8c4d930644447d6d808380"
+ },
+ "first_version_of_guard2_was_wrong": {
+  "reason": "source excludes a failure only if that failure lacks source",
+  "refuted_by": "injecting canonical/analysis into the sample: the guard fired but learn still returned IDENTIFIED with most_general python.test.corpus.available",
+  "replaced_with": "some failure must hold Python source",
+  "written": "every sampled directory must hold Python source"
+ },
+ "generated_at_git_head": "8cb35f6502de46d42aa0c19ecd7406977c219144",
+ "generated_at_utc": "2026-11-13T04:56:56Z",
+ "generated_by": "producer-run measurement in one sandbox",
+ "how_reproduced": [
+  "python3 -m pytest canonical/tests/test_real_input_space_census_v1.py canonical/tests/test_a_test_corpus_is_a_naming_convention_not_a_substring_v1.py canonical/tests/test_insufficiency_witness_v1.py -q"
+ ],
+ "measurements": {
+  "admits_equals_oracle_on_all": true,
+  "as_pinned_before": "INCONSISTENT 0 survivors",
+  "cause_commits": {
+   "97684727": "canonical/tools/test_oracle_strength_measure_20261113_v1.py, 5 test functions",
+   "ee9685dd": "canonical/tools/test_entry_point_finder_v1.py, 1 test function"
+  },
+  "disagreements": 0,
+  "four_scenario_equivalence": "guard1 AND guard2 == identifiable in all four rows",
+  "json.available_present": "9/13",
+  "learn": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+  "markdown.available_present": "6/13",
+  "most_general": [
+   "python.test.corpus.available"
+  ],
+  "python.source.available_present": "13/13",
+  "real_dirs_yields": "5 directories for every count 6..20, all holding tests, learn UNDETERMINED",
+  "source_without_tests": 6,
+  "stale_pin_flipped_only": "AMBIGUOUS 2 survivors most_general python.source.available",
+  "structural_sample_directories": 13,
+  "survivors": 1,
+  "with_tests": 7
+ },
+ "mutations": {
+  "guards_shared_with_synthetic_test": true,
+  "killed": 4,
+  "killed_mutants": [
+   "guard2 over-strict (the bug the author actually made)",
+   "guard2 ignoring source",
+   "guard1 dropping the failure side",
+   "sample rule cherry-picking directories that have tests"
+  ],
+  "survived": 1,
+  "survivor": "the rglob oracle replaced by the sensor's own verdict",
+  "survivor_is_irreducible": true,
+  "survivor_reason": "on this tree the sensor and the independent count agree everywhere, so a tautological comparison still passes; oracle independence is a property of the code path, not enforceable by assertion"
+ },
+ "schema": "PROJECT_BRAIN_INSUFFICIENCY_CERTIFICATE_VERIFICATION_V1",
+ "tests": {
+  "batch_passed": 258,
+  "batch_skipped": 3,
+  "batch_suites": 15,
+  "runtime_modules_changed": 0,
+  "test_a_test_corpus_is_a_naming_convention_not_a_substring_v1": 12,
+  "test_insufficiency_witness_v1": 13,
+  "test_real_input_space_census_v1": 10,
+  "three_suites_passed": 35
+ },
+ "title": "A census must sample a tree that still contains the distinction",
+ "what_is_not": [
+  "a runtime change: no module under canonical/runtime/ was touched, and PR 6863's 12-of-12 mutation result stands unchanged",
+  "that canonical/tools should hold no tests: it holds two genuine ones now and is correctly credited",
+  "that the six source-without-tests directories are permanent: the sample is derived, so it follows the tree",
+  "that the census is tamper-proof: the surviving mutant says exactly where it is not",
+  "that the pre-existing red guard test_controller_does_not_run_unconfined_query_or_archive is fixed: it is reported, not touched",
+  "independent certification of anything: authority NONE, one sandbox"
+ ]
+}

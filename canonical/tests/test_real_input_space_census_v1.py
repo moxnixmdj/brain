@@ -140,36 +140,165 @@ def test_distinctness_does_not_come_from_the_output_path():
     assert len(digests) == 1, "identical substantive results must collapse to one digest"
 
 
+def _real_source_directories(root: Path) -> list[Path]:
+    """Every directory under `canonical/` at depth <= 2 that holds Python source directly.
+
+    The rule never mentions tests, so it cannot be tuned to manufacture the failure the
+    census needs: the tree decides which directories are successes and which are failures.
+    """
+    out: list[Path] = []
+    for base in sorted(root.glob("canonical/*")):
+        if not base.is_dir():
+            continue
+        for cand in [base] + [c for c in sorted(base.glob("*"))
+                              if c.is_dir() and not c.name.startswith(("_", "."))]:
+            if list(cand.glob("*.py")):
+                out.append(cand)
+    return out
+
+
+def _guard_both_classes_present(real: dict) -> bool:
+    """Guard 1: a census whose directories all agree proves nothing, in either direction."""
+    return any(real.values()) and any(not v for v in real.values())
+
+
+def _guard_a_failure_holds_source(real: dict, states: dict, source: str) -> bool:
+    """Guard 2: some failure must hold Python source, or the weaker source fact wins.
+
+    `python.source.available` excludes a failure only if that failure lacks source, so
+    with at least one failure that HOLDS source the source fact is inconsistent and cannot
+    become `most_general`. This is not the same as requiring every sampled directory to
+    hold source: a Python-free failure is harmless alongside one that is not, and the
+    stricter version of this guard was written first and rejected a sample that still
+    identifies. `test_the_two_guards_are_exactly_the_condition_for_identification` pins
+    the difference by calling this function on all four shapes.
+    """
+    return any(not real[d] and source in states[d] for d in real)
+
+
 def test_the_existing_sensor_separates_success_from_failure_on_real_outcomes():
-    """No new vocabulary: every fact used here is already in world_probe_v1's table."""
+    """No new vocabulary: every fact used here is already in world_probe_v1's table.
+
+    Until 2026-11-13 this test hard-coded six directories and their outcomes. Two
+    concurrent rounds then added genuine `test_*.py` modules to `canonical/tools`
+    (`ee9685dd`, `97684727`), so the pinned `canonical/tools: False` became a stale fact
+    about the tree rather than a finding about the sensor. The failure was silent and
+    worse than a red assertion: with no directory left holding source and no tests, the
+    only remaining failure was `canonical/analysis`, which holds no Python at all, so
+    `python.source.available` separated the evidence too -- and being weaker than the
+    corpus fact it became `most_general`. The census still "passed" its admits check
+    while identifying the wrong requirement (AMBIGUOUS, 2 survivors).
+
+    So the sample is now derived from a rule that never mentions tests, and the outcomes
+    from an independent `rglob("test_*.py")` count. Two guards pin *why* identification
+    holds instead of assuming it: both outcome classes must be non-empty, or the census is
+    vacuous; and at least one failure directory must hold Python source, or the weaker
+    source fact separates the evidence too and becomes `most_general` exactly as it just
+    did. Neither guard is the only thing that would fail -- each names the cause before a
+    downstream assertion reports the symptom, which is the difference between a census
+    that explains its own degradation and one that merely goes red.
+
+    One mutation survives and cannot be killed from inside this file: replacing the
+    independent `rglob("test_*.py")` oracle with the sensor's own verdict makes the
+    comparison tautological and the test still passes, because on this tree the two agree
+    everywhere. Oracle independence is a property of the code path, not something an
+    assertion can enforce. What catches a sensor defect is the other suite,
+    `test_a_test_corpus_is_a_naming_convention_not_a_substring_v1`, which builds
+    directories whose names and contents disagree and pins both directions; this test's
+    job is the real-tree comparison and the two guards above.
+    """
     from canonical.runtime import applicability_v1 as ap
     from canonical.runtime import world_probe_v1 as wp
 
     effects = ["python.source.available", "python.test.corpus.available",
                "json.available", "markdown.available"]
-    real = {
-        "canonical/tests": True,
-        "canonical/runtime": True,
-        "canonical/runtime/bound_capabilities": True,
-        "canonical/verification": True,
-        "canonical/tools": False,
-        "canonical/analysis": False,
-    }
-    evidence = [
-        (tuple(wp.established_facts(effects, root=str(ROOT / d))), outcome)
-        for d, outcome in real.items()
-    ]
+    dirs = _real_source_directories(ROOT)
+    real = {d: bool(list(d.rglob("test_*.py"))) for d in dirs}
+    states = {d: set(wp.established_facts(effects, root=str(d))) for d in dirs}
+
+    # Guard 1 -- a census whose directories all agree proves nothing, in either direction.
+    assert _guard_both_classes_present(real), (
+        "the census is vacuous: no real directory holds Python source without a test "
+        "corpus, so nothing separates the corpus fact from the source fact")
+
+    # Guard 2 -- this, not the absence of Python-free directories, is what makes the
+    # corpus fact the MOST GENERAL separator. Measured: injecting a Python-free directory
+    # into this sample changes nothing (still IDENTIFIED, still the corpus fact) precisely
+    # because the other failures hold source. The census degraded on 2026-11-13 only
+    # because its single remaining failure was Python-free.
+    assert _guard_a_failure_holds_source(real, states, "python.source.available"), (
+        "every failure directory lacks Python source, so `python.source.available` also "
+        "separates the evidence and, being weaker than the corpus fact, becomes most_general")
+
+    evidence = [(tuple(states[d]), real[d]) for d in dirs]
     boundary = ap.learn(evidence)
 
     assert boundary.status.startswith("IDENTIFIED"), boundary.status
     assert set(boundary.most_general or ()) == {REQUIREMENT}, boundary.most_general
     assert boundary.survivor_count == 1, boundary.survivor_count
 
-    # The learned boundary must refuse every real failure and admit every real success.
-    for d, outcome in real.items():
-        facts = set(wp.established_facts(effects, root=str(ROOT / d)))
-        admitted = set(boundary.most_general) <= facts
-        assert admitted == outcome, (d, admitted, outcome)
+    # The learned boundary must refuse every real failure and admit every real success,
+    # and the sensor must agree with the independent count on every directory.
+    for d in dirs:
+        admitted = set(boundary.most_general) <= states[d]
+        assert admitted == real[d], (d, admitted, real[d])
+        assert (REQUIREMENT in states[d]) == real[d], (d, sorted(states[d]), real[d])
+
+
+def test_the_two_guards_are_exactly_the_condition_for_identification():
+    """The guards are not decoration: they fire exactly when the census cannot identify.
+
+    Measured on the real tree on 2026-11-13, four sample shapes:
+
+      every directory holds tests      no failure to separate       UNDETERMINED
+      a failure that holds source      the corpus fact separates    IDENTIFIED
+      that plus a Python-free failure  unchanged                    IDENTIFIED
+      only a Python-free failure       the weaker source fact wins  most_general = source
+
+    The last row is the degradation that actually happened, and it is the only row where
+    guard 2 fires while guard 1 does not -- so guard 2 is load-bearing for precisely the
+    failure mode the census survived. It does not reject the third row, which a stricter
+    "no sampled directory may lack Python source" guard wrongly did: that version was
+    written first, a scenario check showed it firing on a sample that still identifies,
+    and it was replaced by the condition that actually decides identification.
+    """
+    from canonical.runtime import applicability_v1 as ap
+
+    SRC, CORPUS = "python.source.available", REQUIREMENT
+    JSON, MD = "json.available", "markdown.available"
+    # The two successes must share no fact beyond source and corpus. A fact every row
+    # holds is a constant, and `learn` keeps conjunctions that add a constant to the
+    # requirement -- so a constant fact spawns extra survivors and the shape stops
+    # matching the real census, whose directories differ on json and markdown. Redundant
+    # literals are not ambiguity: {source, corpus} collapses to {corpus} because the
+    # entailment relation knows corpus implies source.
+    success_a = (SRC, CORPUS, JSON)
+    success_b = (SRC, CORPUS, MD)
+    failure_with_source = (SRC, JSON, MD)   # holds source, no test corpus
+    failure_python_free = (JSON, MD)        # holds neither
+
+    def shape(failures):
+        rows = [(set(success_a), True), (set(success_b), True)]
+        rows += [(set(f), False) for f in failures]
+        states = {i: facts for i, (facts, _) in enumerate(rows)}
+        real = {i: outcome for i, (_, outcome) in enumerate(rows)}
+        boundary = ap.learn([(tuple(f), o) for f, o in rows])
+        identifiable = (boundary.status.startswith("IDENTIFIED")
+                        and set(boundary.most_general or ()) == {REQUIREMENT}
+                        and boundary.survivor_count == 1)
+        # the SAME two functions the census calls, not a restatement of them: a mutant
+        # that makes either guard stricter or weaker is killed by the rows below.
+        return (_guard_both_classes_present(real),
+                _guard_a_failure_holds_source(real, states, SRC),
+                identifiable, sorted(set(boundary.most_general or ())))
+
+    assert shape([]) == (False, False, False, []), shape([])
+    assert shape([failure_with_source]) == (True, True, True, [REQUIREMENT])
+    assert shape([failure_with_source, failure_python_free]) == (True, True, True, [REQUIREMENT])
+
+    guard1, guard2, identifiable, most_general = shape([failure_python_free])
+    assert (guard1, guard2, identifiable) == (True, False, False), (guard1, guard2, identifiable)
+    assert most_general == [SRC], most_general
 
 
 def test_the_requirement_is_decided_by_the_tree_not_by_the_directory_name():

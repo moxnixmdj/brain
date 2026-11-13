@@ -7,7 +7,7 @@
  "route_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
  "date": "2026-11-13",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "8cb35f6502de46d42aa0c19ecd7406977c219144",
+ "canonical_base_commit": "388c5c7d9b4d1407ac842d785201c1fb6fb6b473",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -60,9 +60,9 @@
    "AGENTS.md"
   ]
  },
- "measured_effect": "At final main base the new suite was 32 failed/2 passed before wiring. Final focused set: 302 passed across 16 files, including 34 new tests and the upstream causal-localization suite. Broad 43-file store sweep: 551 passed/11 failed/7 errors; the same 11 failures reproduce with the two runtime files restored to final base, and the 7-error QuixBugs file passes 61/61 alone and in the final base rerun. No capability credit.",
+ "measured_effect": "At pre-merge main base 8cb35f6502 the new suite was 32 failed/2 passed before wiring. Final focused set on the merged tree: 302 passed across 16 files, including 34 new tests and the upstream causal-localization suite. Broad 43-file store sweep at 8cb35f6502 immediately before the final census-only merge: 551 passed/11 failed/7 errors; the same 11 failures reproduce with the two runtime files restored to that base, and the 7-error QuixBugs file passes 61/61 alone and in that base rerun. No capability credit.",
  "load_bearing_primary": {
-  "canonical_base_commit": "8cb35f6502de46d42aa0c19ecd7406977c219144",
+  "canonical_base_commit": "388c5c7d9b4d1407ac842d785201c1fb6fb6b473",
   "open_obligation_ids": [],
   "constructive_gap_for_open_obligation_ids": [
    "CODING_TB4_GE_66_4",
@@ -85,7 +85,7 @@
   "main PR #6861 source-sensitive-oracle and pointwise-regression repair"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "8cb35f6502de46d42aa0c19ecd7406977c219144",
+  "canonical_base_commit": "388c5c7d9b4d1407ac842d785201c1fb6fb6b473",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "A_COUNTEREXAMPLE_CAN_REVOKE_THE_LIVE_RULE_AND_SAFETY_EVIDENCE_MUST_BE_EXECUTED_AND_DISTINCT",
@@ -169,7 +169,7 @@
    "affected_layers_only_on_revalidation": true
   },
   "route_frontier": {
-   "checked_at_utc": "2026-11-13T05:01:27Z",
+   "checked_at_utc": "2026-11-13T05:05:37Z",
    "max_age_hours": 24,
    "discovery_required": true,
    "source_classes_checked": [
@@ -309,7 +309,7 @@
     }
    ],
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-13T05:01:27Z",
+    "checked_at_utc": "2026-11-13T05:05:37Z",
     "max_age_hours": 2,
     "selected_route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
     "status": "READY",
@@ -357,7 +357,7 @@
       "scope": "GLOBAL",
       "evidence_scope": "GLOBAL",
       "status": "READY",
-      "observed_at_utc": "2026-11-13T05:01:27Z",
+      "observed_at_utc": "2026-11-13T05:05:37Z",
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
@@ -372,7 +372,7 @@
  "v22_prewrite_admission": {
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
-  "checked_at_utc": "2026-11-13T05:01:27Z",
+  "checked_at_utc": "2026-11-13T05:05:37Z",
   "currentness": {
    "accepted_families": 5,
    "open_families": 14,
@@ -397,7 +397,7 @@
   ],
   "terminal_credit_delta": 0,
   "tournament": {
-   "checked_at_utc": "2026-11-13T05:01:27Z",
+   "checked_at_utc": "2026-11-13T05:05:37Z",
    "proposal_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
    "falsifier_id": "REJECTED_RETEACH_LEAVES_LIVE_RULE_ACTIVE_OR_DUPLICATE_UNEXECUTED_EVIDENCE_ADMITTED",
    "decisive_question": "DOES_EXECUTED_COUNTEREVIDENCE_REVOKE_THE_MATCHING_LIVE_RULE_AND_DOES_EVIDENCE_ACCOUNTING_REFUSE_DUPLICATES_AND_COUNT_ONLY_REAL_RUNS",
