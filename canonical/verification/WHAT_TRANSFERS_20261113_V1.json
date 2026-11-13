@@ -1,0 +1,77 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "claim_a_transfer": {
+  "cross_project": "NOT_RUN__NO_CORPUS_RECORD",
+  "in_project": {
+   "asked": 726,
+   "edited": 28,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 1.0,
+   "right": 384,
+   "share_of_the_work": 0.5289,
+   "wrong": 0
+  },
+  "note": "in_project is the committed round-28 figure; cross_project is measured now",
+  "one_showing_against_four_shapes": {
+   "a `<=` that is REQUIRED": "REFUSED",
+   "other operator form": "REFUSED",
+   "other shape (a comprehension)": "REFUSED",
+   "same defect, other names": "REFUSED"
+  },
+  "two_showings": {
+   "first_proposal_changes_the_bound": true,
+   "proposals": 1,
+   "still_offers_to_change_a_required_le": true
+  }
+ },
+ "claim_b_the_retrieval_engine": {
+  "adapted_strategy_differs_with_a_different_memory": true,
+  "adapted_strategy_loaded_memory": "('information_retrieval', ('read file', 'parse with ast', 'traverse nested nodes', 'count'), ('parse file with ast.parse()', 'count and return result', 'read file canonical/runtime/solve_v1.py', 'traverse all functiondef nodes'))",
+  "adapted_strategy_replaced_memory": "(None, (), ())",
+  "answer_dependence_test_is_conclusive": false,
+  "answer_with_no_memory_at_all": "REFUSED",
+  "answers_by_question": {
+   "a DIFFERENT kind of thing asked for": "COUNTS_ANOTHER_KIND",
+   "a different file, same words": "COUNTS_ONE_KIND",
+   "one word outside the synonym table": "NOT_IMPLEMENTED",
+   "the PR's own demo": "COUNTS_ONE_KIND"
+  },
+  "answers_unchanged_when_the_memory_is_replaced": "0/4",
+  "answers_with_a_different_memory": {
+   "a DIFFERENT kind of thing asked for": "REFUSED",
+   "a different file, same words": "REFUSED",
+   "one word outside the synonym table": "REFUSED",
+   "the PR's own demo": "REFUSED"
+  },
+  "distinct_answers_to_four_different_questions": 3,
+  "distinct_outcomes_in_store": [
+   "success"
+  ],
+  "note": "2 distinct answers over 4 materially different questions means the answer is a lookup on one keyword, not an adaptation of the retrieved experience",
+  "stored_experiences": 24,
+  "stored_experiences_share_one_task_type": true,
+  "stored_unique_task_texts": 8,
+  "the_answer_tracks_the_question": true,
+  "the_content_comes_from_the_memory": false,
+  "what_the_memory_does_decide": "whether an answer is given at all, and which sentence is read back as its provenance",
+  "where_the_answer_is_decided": "problem2_solved_wrapper.py, solve_with_semantic_generalization: the executed branch reads task_description with `any(kw in ...)`; the retrieved strategy contributes only the guard `base_strategy.get('task_type') == 'information_retrieval'`, which every stored experience sets to the same value",
+  "why_inconclusive": "a replacement memory sharing no vocabulary makes retrieval refuse, which replaces every answer; REFUSED is not an answer to compare"
+ },
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "schema": "WHAT_TRANSFERS_V1",
+ "shipped_organ": {
+  "importable": true
+ },
+ "why_widening_cannot_fix_it": {
+  "how_many_the_rule_can_distinguish": 0,
+  "learned_from_one_showing": true,
+  "plausible_repairs_consistent_with_that_one_showing": [
+   "return x > hi",
+   "return x < 0",
+   "return False"
+  ],
+  "why": "the demonstration stated one boundary; three different programs satisfy it"
+ }
+}
