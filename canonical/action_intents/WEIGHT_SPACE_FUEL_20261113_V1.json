@@ -1,0 +1,416 @@
+{
+ "action_id": "WEIGHT_SPACE_FUEL_20261113_V1",
+ "action_intent_id": "WEIGHT_SPACE_FUEL_20261113_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "Counts what a weight-space learning layer would actually have to eat, instead of assuming it. The owner's analysis that token-space is one layer and weight-space is the other is correct, and its four 2026 citations check out. What it does not say is that the precondition is a verified event stream, not an update mechanism. Measured: execution receipts carry 0 usable events, the hand-seeded store 66 events and 0 verified, and the controller checkpoints 192 work steps with 64 verified and an 8.9 percent real failure rate -- a natural label split, thin and narrow. 258 units against a 5000 threshold, while 2790 changed lines per merge are discarded. Adds no capability, trains nothing, claims no benchmark movement.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "REUSE is the first applicable route after DELETE and BYPASS: nothing is deleted (the stores stand, measured) and nothing is bypassed (the event stream is the repo's own checkpoints, read as they are).",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "THE_LAYER_YOU_NAMED_IS_RIGHT_THE_FUEL_IS_MISSING_20261113_V1.md",
+   "canonical/tools/weight_space_fuel_v1.py",
+   "canonical/tests/test_weight_space_fuel_v1.py",
+   "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+   "canonical/action_intents/WEIGHT_SPACE_FUEL_20261113_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_NEXT_LAYER_OF_LEARNING_IS_WEIGHT_SPACE_BUT_ITS_PRECONDITION_IS_A_VERIFIED_EVENT_STREAM_AND_THIS_REPO_HAS_258_UNITS_WITH_64_VERIFIED__THE_HAND_SEEDED_STORE_HAS_100_PERCENT_SUCCESS_AND_CANNOT_TEACH_WHERE_A_LESSON_STOPS__AND_THE_CHECK_THAT_WOULD_VERIFY_NEW_EVENTS_COULD_NOT_RUN_ON_0_OF_42_REAL_CHANGED_FILES",
+ "canonical_base_commit": "8dfc1f46d2d9db30b877d9585da6fa6c8f027c6d",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_NEXT_LAYER_OF_LEARNING_IS_WEIGHT_SPACE_BUT_ITS_PRECONDITION_IS_A_VERIFIED_EVENT_STREAM_AND_THIS_REPO_HAS_258_UNITS_WITH_64_VERIFIED__THE_HAND_SEEDED_STORE_HAS_100_PERCENT_SUCCESS_AND_CANNOT_TEACH_WHERE_A_LESSON_STOPS__AND_THE_CHECK_THAT_WOULD_VERIFY_NEW_EVENTS_COULD_NOT_RUN_ON_0_OF_42_REAL_CHANGED_FILES",
+ "date": "2026-11-13",
+ "expected_parent_change": "canonical/tools/weight_space_fuel_v1.py added as the gauge; canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json added as its record; canonical/tests/test_weight_space_fuel_v1.py added with 9 tests; THE_LAYER_YOU_NAMED_IS_RIGHT_THE_FUEL_IS_MISSING_20261113_V1.md added; canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json recompiled.",
+ "expected_parent_frontier_change": "THE_NEXT_LAYER_IS_NAMED_AND_ITS_PRECONDITION_IS_MEASURED__VERIFIED_EVENTS_NUMBER_258_WITH_64_VERIFIED_AGAINST_A_5000_THRESHOLD_WHILE_2790_CHANGED_LINES_PER_MERGE_ARE_DISCARDED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?', 'you must think from first principles', 'kill all the bad and dumb ideas before you waste time implementing them', 'maximize your web use', and 'always after you make any of your work, push and merge your work always'. This PR answers the question with measurements and repairs the instrument that was too broken to measure with.",
+ "falsification_condition": "FALSIFIED if any source reports zero units without a stated reason, if a terminal `finish` step is counted as a failure, if the record claims the repo is ready to train, if the trajectory store's single outcome class is reported as having signal, or if spend or a model call is claimed.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "8dfc1f46d2d9db30b877d9585da6fa6c8f027c6d",
+  "constructive_gap_for_open_obligation_ids": [],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/2",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ZERO__THE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING__REPAIRS_THE_INSTRUMENT_THAT_WAS_TOO_BROKEN_FOR_ANY_CLAIM_TO_BE_TESTED_AND_THEN_FALSIFIES_THE_SINGLE_SHOWING_ASSUMPTION",
+  "open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ],
+  "open_obligation_ids_note": "Bound to the two coding obligations because the blocker is the coding-generalisation blocker; no obligation is claimed discharged and scope_complete_discharge is false.",
+  "scope_complete_discharge": false,
+  "stop_condition": "THE_FUEL_GAUGE_COUNTS_WHAT_A_WEIGHT_SPACE_LAYER_WOULD_EAT_AND_SAYS_THIN_NOT_ABSENT__192_WORK_STEPS_WITH_AN_8_9_PERCENT_REAL_FAILURE_RATE_FOUND_IN_THE_ONE_SOURCE_THE_FIRST_VERSION_MISSED__THE_GAUGES_OWN_TWO_ERRORS_PINNED_BY_TESTS__9_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Fuel gauge, all counted from the tree: execution receipts 305 records / 0 units (a receipt holds no situation and no choice); hand-seeded trajectory store 24 records / 66 units / 0 verified / outcomes {success}; taught-action corpora 0 stores with changes; controller checkpoints 449 files / 320 steps / 192 work steps after excluding 128 terminal `finish` steps / 64 verified / 175 passed / 17 failed = 8.9 percent real failure rate / 20 distinct capabilities / 87 distinct situations. Totals: 258 units, 64 verified, threshold 5000, ready_to_train False. Production rate: 2790 changed lines per merge over 30 merges. Two of the gauge's own first versions were wrong and both are pinned: it never opened the only file kind with an event stream, and it counted terminal steps as failures (45 percent instead of 8.9). 9 tests pass.",
+ "next_step": "RECORD_EVERY_EDIT_WITH_ITS_CHECK_RESULT_AS_(before_after_check)_SO_THE_2790_CHANGED_LINES_PER_MERGE_BECOME_FUEL_AND_MAKE_THE_CHECK_CHEAP_TO_STAND_UP_SO_THOSE_EVENTS_ARE_VERIFIED",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  {
+   "commit": "5a01d80505",
+   "what": "round 28's ladder measurement is the in-project figure this PR puts beside the cross-project refusals; none of its numbers are recomputed."
+  },
+  {
+   "commit": "450955595b",
+   "what": "the constructed counterfactual and its correction are reused verbatim as the explanation of why widening cannot fix a half demonstration."
+  }
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "8dfc1f46d2d9db30b877d9585da6fa6c8f027c6d",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "START_FINE_TUNING_NOW",
+   "USE_CAUSAL_MODELS_AS_TRAINING_DATA",
+   "COPY_ONLINE_TEST_TIME_TRAINING_WITHOUT_ITS_VERIFIER",
+   "MOVE_THE_RECORD_OUT_OF_CANONICAL_VERIFICATION_TO_DODGE_THE_GATE"
+  ],
+  "expected_parent_level_state_change": "THE_NEXT_LAYER_IS_NAMED_AND_ITS_PRECONDITION_IS_MEASURED__VERIFIED_EVENTS_NUMBER_258_WITH_64_VERIFIED_AGAINST_A_5000_THRESHOLD_WHILE_2790_CHANGED_LINES_PER_MERGE_ARE_DISCARDED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE_NOT_APPLICABLE_THE_ORGAN_IS_KEPT__BYPASS_IMPOSSIBLE_THERE_IS_NO_OTHER_ROUTE_TO_THE_LESSON__SUBSTITUTE_FORBIDDEN_A_MODEL_OR_EMBEDDING_IS_NEITHER_ZERO_COST_NOR_VERIFIABLE_HERE",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_ORGAN_LEARNS_ONLY_WHAT_TWO_CHANGED_PLACES_DIFFER_IN_AND_A_SINGLE_SHOWING_HAS_NO_DIFFERING_PLACES",
+   "surviving_causal_blocker": "A_SINGLE_DEMONSTRATION_LEAVES_EVERY_PLACE_IN_THE_RULE_FIXED_SO_THE_LESSON_MATCHES_ONE_FILE_AND_NOTHING_THAT_CAN_HAVE_A_CHECK"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_LEARNER_NO_NEW_EMBEDDING_NO_NEW_MEMORY_STORE",
+   "existing_inherited_routes_checked": "EDIT_BY_EXAMPLE_V1_THE_ORGAN__EDIT_KIND_LEARNING_V1_THE_LADDER__THE_REPOS_OWN_TEST_RUNNER__THE_ROUND_28_CORPUS_RECORD",
+   "external_existing_routes_checked": "PYTHON_STDLIB_AST_AND_JSON_ONLY__NO_PACKAGE_INSTALLED_FOR_THE_MEASUREMENT",
+   "surviving_gap": "TWO_THINGS_ONLY__A_SECOND_DIFFERING_DEMONSTRATION_CHOSEN_AUTOMATICALLY__AND_A_CHECK_STOOD_UP_IN_A_NEW_ENVIRONMENT"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "ANSWERING_FROM_THE_DOCUMENT_TITLES",
+    "TREATING_A_REFUSAL_AS_A_LEARNING_SUCCESS",
+    "TREATING_ONE_SHOWING_AS_INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT"
+   ],
+   "real_outcome": "THE_OWNERS_QUESTION_ANSWERED_WITH_MEASUREMENTS_RATHER_THAN_WITH_A_VERDICT",
+   "surviving_necessity": "A claim that is worth acting on has to survive its own instrument; here the instrument itself was broken, so the claim had never been tested at all."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "THE_ROUND_28_LADDER_FIGURES_AND_THE_CONSTRUCTED_COUNTERFACTUAL_ARE_REUSED_WITHOUT_RECOMPUTATION",
+   "downstream_work_to_delete_or_supersede": "ANY_PLAN_THAT_ASSUMES_THE_ORGAN_TRANSFERS_FROM_ONE_SHOWING_MUST_ANSWER_THIS_MEASUREMENT_FIRST",
+   "fresh_reuse_plan": "THE_NEXT_PR_REUSES_THE_DOORS_TAUGHT_ACTION_PATH_AND_THE_EXPLAINS_TOO_LITTLE_GATE_AND_WIRES_THEM_TOGETHER"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "DELETED_BEFORE_IMPLEMENTATION__A_SEMANTIC_ADAPTER_WIDENING_THE_RULE_AND_A_NEW_MEMORY_STORE__CACHED__THE_PROBE_RESULTS_AND_THE_RECORD_SO_NO_RERUN_IS_NEEDED",
+   "search_stop_decision": "STOPPED_WHEN_THREE_INDEPENDENT_2026_LINES_ALL_LOCATED_THE_BOTTLENECK_IN_VALIDATED_REUSE_RATHER_THAN_IN_RETRIEVAL_QUALITY"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "REUSE_WINS_BECAUSE_THE_REPO_ALREADY_OWNS_BOTH_THE_ORGAN_AND_A_LADDER_THAT_TRANSFERS__SYNTHESIZE_NEW_PRIMITIVE_LOSES_BECAUSE_NOTHING_HAD_BEEN_MEASURED_YET",
+   "routes_ranked": [
+    "REUSE",
+    "CONFIGURE",
+    "COMPOSE",
+    "ADAPT",
+    "INTEGRATE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_CORPUS_RECORD_NEEDED_TO_PROVE_CROSS_PROJECT_TRANSFER_IS_NOT_ON_THIS_MACHINE_SO_THAT_ARM_IS_REPORTED_AS_NOT_RUN_RATHER_THAN_ESTIMATED__THE_FOUR_SHAPE_PROBE_IS_SMALL_AND_MEASURES_REFUSAL_WHICH_IS_A_LOWER_BOUND_ON_INABILITY"
+  },
+  "real_outcome": "THE_NEXT_LAYER_IS_NAMED_AND_ITS_PRECONDITION_IS_COUNTED_RATHER_THAN_ASSUMED",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Sufficient: it restores the shipped instrument and measures the claim with it.",
+      "CORRECTNESS": "Union resolution keeps both sides; taking one side was rejected because each side holds code the other calls.",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Deterministic and pinned by 17 tests.",
+      "VERIFIABILITY": "The breakage and the repair are both one ast.parse call away.",
+      "WALL_CLOCK": "Seconds to parse, minutes to run the suites."
+     },
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py SyntaxError at line 1598 on main",
+      "148 tests that could not be collected now run"
+     ],
+     "qualification_evidence": [
+      "the repaired file parses and the widest one-shot suite runs 60 passing where it ran none"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "A store of 8 tasks with no failures cannot express where a lesson stops.",
+      "CORRECTNESS": "Its executed answer comes from keyword branches, not from the retrieved strategy.",
+      "INCREMENTAL_COST": "0 USD but every later number would be void.",
+      "RELIABILITY": "Duplicate records and duplicate memory stores.",
+      "VERIFIABILITY": "The falsification is a single read of the wrapper.",
+      "WALL_CLOCK": "Would have been fast and wrong."
+     },
+     "evidence": [
+      "PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md",
+      "canonical/swe_kernel/semantic_generalization_engine_v1.py"
+     ],
+     "qualification_evidence": [
+      "Python official ast documentation defines the parse that detects the breakage",
+      "Python official unittest documentation defines the check the learner lacks"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "TRUST_THE_CLAIMED_SOLVED_ENGINE_AND_MOVE_ON_TO_ENVIRONMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Reaches more files and is wrong more often; reach is not capability.",
+      "CORRECTNESS": "Already measured worse than doing nothing.",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "No mechanism to refuse the wrong half.",
+      "VERIFIABILITY": "Only a check could verify it, and checks are what is missing.",
+      "WALL_CLOCK": "Fast to build, expensive to be wrong with."
+     },
+     "evidence": [
+      "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json any_rung arm"
+     ],
+     "qualification_evidence": [
+      "Python official ast documentation on program equivalence",
+      "the widest-rung precision figure recorded in canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "WIDEN_THE_LESSON_SO_ONE_SHOWING_COVERS_THE_NEW_SHAPES"
+    }
+   ],
+   "checked_at_utc": "2026-11-13T03:03:16Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "ONE_SHOWING_OF_A_CHANGE_ASSUMED_TO_GENERALISE_AND_A_CLAIMED_SOLVED_RETRIEVAL_ENGINE_NEITHER_OF_WHICH_HAD_BEEN_MEASURED",
+   "max_age_hours": 24,
+   "negative_search_summary": "Looked for a 2026 method that admits a generalisation from a single demonstration without a check: none found. Both memory-reuse lines that report gains (LifeMem, WikiTrace) get them by validating or linking memory, and the (k,v) study reports raw trajectories actively harm hard cases.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "experience reuse memory agents negative transfer retrieval hurts performance 2026 LLM agent benchmark"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "LifeMem lifelong experience reuse agents cross-environment transfer 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space anti-unification one demonstration versus two demonstrations code edit transfer"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "WikiTrace evidence-linked memory memory-induced degradation 2026 agents"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "COUNT_THE_FUEL_BEFORE_BUILDING_THE_ENGINE",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-13T03:03:16Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with ast, json and pytest",
+      "evidence": [
+       "the organ is parsed and both suites are run in this sandbox in this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "GitHub read access for the commits that introduced the conflict markers",
+      "evidence": [
+       "commit ffac8e3f53 and both of its parents were read and their organ blobs compared: 0 markers in each parent, 1 in the merge"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-13T03:03:16Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "canonical/runtime/edit_kind_learning_v1.py and the taught-actions organ",
+      "evidence": [
+       "the two-showing transfer test runs against them and passes"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "observed_at_utc": "2026-11-13T01:36:11Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "COUNT_THE_FUEL_BEFORE_BUILDING_THE_ENGINE",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json (the in-project figure)",
+     "canonical/runtime/edit_kind_learning_v1.py (the ladder that does transfer)",
+     "PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md and canonical/swe_kernel/semantic_generalization_engine_v1.py (the claim measured and falsified)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "arxiv.org/abs/2604.27003 When Continual Learning Moves to Memory: abstract memories transfer, raw trajectories cause negative transfer",
+     "arxiv.org/html/2611.14320 WikiTrace: memory-induced degradation, 52% of failures trace to a memory item the agent followed",
+     "arxiv.org/abs/2609.12655 LifeMem: removing trajectories costs more than removing skills; later tasks can harm earlier ones"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (the repair corpus already measured in-tree)",
+     "https://pypi.org/project/pytest/ (this PR's own tests only)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (parsing the organ is how the breakage was found)",
+     "https://docs.python.org/3/library/unittest.html (the check the learner needs and does not have)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REUSE",
+   "ADAPT",
+   "SUBSTITUTE",
+   "COMPOSE",
+   "CONFIGURE",
+   "INTEGRATE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_route": "COUNT_THE_FUEL_BEFORE_BUILDING_THE_ENGINE",
+  "selected_surviving_route": "COUNT_THE_FUEL_BEFORE_BUILDING_THE_ENGINE",
+  "selected_surviving_route_class": "REUSE",
+  "stop_condition": "THE_FUEL_GAUGE_COUNTS_WHAT_A_WEIGHT_SPACE_LAYER_WOULD_EAT_AND_SAYS_THIN_NOT_ABSENT__192_WORK_STEPS_WITH_AN_8_9_PERCENT_REAL_FAILURE_RATE_FOUND_IN_THE_ONE_SOURCE_THE_FIRST_VERSION_MISSED__THE_GAUGES_OWN_TWO_ERRORS_PINNED_BY_TESTS__9_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "why_selected_route_is_fastest_sufficient": "Counting the fuel is minutes of file reading; building a shaper against 64 verified events would spend real money to learn the wrong thing, and the 2026 forgetting numbers say that damage is silent."
+ },
+ "route_id": "WEIGHT_SPACE_FUEL_20261113_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "COUNT_THE_FUEL_BEFORE_BUILDING_THE_ENGINE",
+ "stop_condition": "THE_FUEL_GAUGE_COUNTS_WHAT_A_WEIGHT_SPACE_LAYER_WOULD_EAT_AND_SAYS_THIN_NOT_ABSENT__192_WORK_STEPS_WITH_AN_8_9_PERCENT_REAL_FAILURE_RATE_FOUND_IN_THE_ONE_SOURCE_THE_FIRST_VERSION_MISSED__THE_GAUGES_OWN_TWO_ERRORS_PINNED_BY_TESTS__9_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-13T03:03:16Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_THE_SINGLE_SHOWING_AND_COMPLETELY_SOLVED_CLAIMS",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "checked_at_utc": "2026-11-13T03:03:16Z",
+   "counterexample_receipts": [],
+   "decisive_question": "HOW_MANY_VERIFIED_SITUATION_ACTION_VERDICT_EVENTS_DOES_THIS_REPO_HAVE_AND_WHERE",
+   "falsifier_id": "A_SOURCE_REPORTED_EMPTY_WITHOUT_A_REASON_OR_A_FINISH_STEP_COUNTED_AS_A_FAILURE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CASES_IN_test_what_transfers_v1_COVER_BOTH_THE_REFUSAL_AND_THE_TRANSFER",
+   "proposal_id": "FUEL_GAUGE_BEFORE_WEIGHT_SPACE_ENGINE"
+  }
+ },
+ "weakens_existing_guard": false
+}
