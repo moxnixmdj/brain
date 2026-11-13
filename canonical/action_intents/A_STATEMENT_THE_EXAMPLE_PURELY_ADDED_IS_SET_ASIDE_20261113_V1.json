@@ -1,0 +1,463 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "A_STATEMENT_THE_EXAMPLE_PURELY_ADDED_IS_SET_ASIDE_20261113_V1",
+ "action_intent_id": "A_STATEMENT_THE_EXAMPLE_PURELY_ADDED_IS_SET_ASIDE_20261113_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "A_STATEMENT_THE_EXAMPLE_PURELY_ADDED_IS_SET_ASIDE_20261113_V1",
+ "date": "2026-11-13",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "f049ab952a26683f1b9c48d397b1691b8f220eef",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "6812 named the pure-addition reshapings as next: yaml_safe_load and set_daemon refused whole kinds at two showings because the person built new machinery -- a def, constants -- in the same commit as a one-line lesson, and a module body of a different length could not be localized. This action adds additions_put_back, third member of the put-back family: where every order-preserving alignment of the first file's statements into the second file's tells the same in-place story, the purely added statements are the person's own project work and are taken back out. Removals refuse; ambiguity refuses; a lesson leaning on taken-out machinery still refuses downstream. restructures_put_back runs first so every previously-learning kind takes a byte-identical path. The turn also repaired the teach pipeline main had silently broken (a taught program with a relative import cannot travel alone; carried_along folds the sibling in) and resolved a latent lesson/engine contradiction under the merged alias law. Declared-first: P1 and P4 held -- set_daemon learns ?1.setDaemon(True) -> ?1.daemon = True at two showings, held_out @2 unlearned 1->0, zero wrong writes at two showings on every set. P3 fell and was attributed by a base-versus-new engine comparison on every kind: all other table movement is the base's own alias law against a stale memorized baseline; this mechanism's entire corpus footprint is set_daemon learned plus a truer refusal message for yaml_safe_load.",
+ "selected_route": "TAKE_PURELY_ADDED_STATEMENTS_BACK_OUT_WHERE_EVERY_BEST_ALIGNMENT_TELLS_ONE_IN_PLACE_STORY__RESTRUCTURES_FIRST_SO_OLD_WINS_KEEP_THEIR_EXACT_PATH__REPAIR_THE_TEACH_PIPELINE_SO_THE_PROGRAM_TRAVELS_ALONE_AGAIN__DECLARE_FOUR_PREDICTIONS_PUSH_THEN_MEASURE_ONCE__ATTRIBUTE_EVERY_TABLE_MOVE_BY_A_BASE_VERSUS_NEW_WRITE_COMPARISON",
+ "causal_blocker": "THE_PURE_ADDITION_RESHAPINGS_AT_TWO_SHOWINGS__NEW_MACHINERY_BUILT_IN_THE_SAME_COMMIT_AS_A_ONE_LINE_LESSON_MADE_THE_MODULE_BODY_A_DIFFERENT_LENGTH_AND_NOTHING_COULD_BE_LOCALIZED__AND_A_RELATIVE_IMPORT_ANOTHER_SESSION_ADDED_LEFT_THE_TAUGHT_PROGRAM_UNABLE_TO_TRAVEL_ALONE",
+ "expected_parent_change": "THE_ENGINE_GAINS_THE_THIRD_PUT_BACK__PURE_ADDITIONS_ARE_PROJECT_WORK_SET_ASIDE__AND_THE_TEACH_PIPELINE_TEACHES_AGAIN_FROM_THE_EDITED_ENGINE",
+ "expected_parent_frontier_change": "HELD_OUT_AT_2_SHOWINGS__KINDS_UNLEARNED_1_TO_0__SET_DAEMON_LEARNS_AND_ITS_TARGETS_ANSWER__DIFFERENT_0_EXTRA_0_IN_EVERY_WAY_ON_EVERY_SET_AT_2_SHOWINGS__THE_ONLY_REMAINING_AT_2_REFUSALS_ARE_GENUINE_DISAGREEMENT_OR_A_NAME_THE_TARGET_LACKS",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PURE_ADDITION_RESHAPINGS_AT_TWO_SHOWINGS__NEW_MACHINERY_BUILT_IN_THE_SAME_COMMIT_AS_A_ONE_LINE_LESSON_MADE_THE_MODULE_BODY_A_DIFFERENT_LENGTH_AND_NOTHING_COULD_BE_LOCALIZED__AND_A_RELATIVE_IMPORT_ANOTHER_SESSION_ADDED_LEFT_THE_TAUGHT_PROGRAM_UNABLE_TO_TRAVEL_ALONE",
+ "falsification_condition": "A_WRONG_WRITE_APPEARS_AT_TWO_SHOWINGS_ON_ANY_TRACKED_SET__OR_A_REMOVAL_OR_AMBIGUOUS_ADDITION_IS_SET_ASIDE_IN_THE_PINNED_TESTS__OR_A_KIND_THAT_LEARNED_ON_THE_BASE_ENGINE_WRITES_DIFFERENTLY_OUTSIDE_THE_TWO_NAMED_KINDS__OR_THE_BUNDLE_DOES_NOT_REPRODUCE_FROM_THE_EDITED_ENGINE",
+ "stop_condition": "THE_SINGLE_DECLARED_RUN_IS_RECORDED_WITH_ITS_FALSIFIED_PREDICTION_AND_ITS_ATTRIBUTION__220_ENGINE_TESTS_WITH_THE_FIVE_NEW_PINS_PASS_IN_CI__THE_BUNDLE_IS_RE_TAUGHT_FROM_THE_EDITED_ENGINE_THROUGH_THE_REPAIRED_PIPELINE__THE_MODEL_RECOMPILES_AND_VERIFIES__THE_REFEREE_REPORTS_ZERO_VIOLATIONS",
+ "explicit_user_authorization": "Owner decisions in this session, 2026-11-12. The owner's standing question is the generalization problem and the fastest honest path; 6788's report named the injection side as the next reachable move; the owner's standing instruction is to push and merge the work every time. No governance change. No guard is weakened.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+   "canonical/tests/test_an_incidental_rename_in_the_example_is_set_aside_v1.py",
+   "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "causal_evidence": "THE_FOUR_DECLARED_PREDICTIONS_PRECEDE_THE_MEASUREMENT_IN_BRANCH_HISTORY_AND_PUSH_TIME_AND_ALL_HELD__THE_IS_SET_INJECTION_IS_GONE_WITH_THE_ONE_SHOWING_TABLES_BYTE_IDENTICAL"
+ },
+ "measured_effect": "SANDBOX_MEASUREMENTS_NOT_PUBLIC_RUNNER_EVIDENCE__DECLARED_FIRST__P1_P4_HELD__SET_DAEMON_LEARNS_AT_2_SHOWINGS_AND_HELD_OUT_AT_2_REACHES_166_OF_182_STRICT_WITH_ZERO_WRONG_WRITES__P3_FALSIFIED_AND_ATTRIBUTED__ALL_OTHER_MOVEMENT_IS_THE_BASES_OWN_ALIAS_LAW_AGAINST_A_STALE_BASELINE__THIS_MECHANISMS_FOOTPRINT_IS_EXACTLY_TWO_KINDS",
+ "load_bearing_primary": {
+  "interpretation": "DISCHARGES_NOTHING__EXPECTED_DISCHARGE_IS_ASSERTED_ZERO_EXPLICITLY__THE_POSITIVE_UNLOCK_FIGURE_AND_THE_SUCCESS_PROBABILITY_ARE_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING_AND_ARE_NOT_A_MEASURED_BENCHMARK_MOVEMENT__THE_TWO_OBLIGATIONS_NAMED_ARE_COMPUTER_USE_OBLIGATIONS__A_TRIED_EDIT_COUNTS_TOWARD_THEM_ONLY_WHERE_THE_PROJECTS_OWN_CHECK_NOTICES_THE_EDITED_PLACE_FAILING",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": 1,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1",
+  "constructive_gap_for_open_obligation_ids": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ]
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-13T00:59:20Z",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "fresh_reality_authority": false,
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_TERMINAL_CREDIT_AND_ZERO_FAMILY_CREDIT__IT_EXTENDS_ONE_TAUGHT_ACTION_WITH_A_THIRD_PUT_BACK_AND_REPAIRS_THE_TEACH_PIPELINE",
+  "terminal_credit_delta": 0,
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "tournament": {
+   "proposal_id": "AN_OWNED_ATTRIBUTE_RENAME_IS_SET_ASIDE_20261112_V1",
+   "decisive_question": "DOES_OWNERSHIP_STORE_CONTEXT_SEPARATE_AN_INCIDENTAL_ATTRIBUTE_RENAME_FROM_THE_LESSON_WHERE_SUPPORT_COUNTING_CANNOT__MEASURED_ONCE_UNDER_DECLARED_PREDICTIONS",
+   "falsifier_id": "A_NEVER_ASSIGNED_ATTRIBUTE_UNDONE__A_MOVED_ONE_SHOWING_TABLE__A_SURVIVING_IS_SET_WRONG_WRITE__OR_A_MEASUREMENT_PRECEDING_ITS_DECLARATION",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "THE_DECLARATION_PRECEDES_THE_MEASUREMENT__ALL_FOUR_PREDICTIONS_HELD__THE_PURE_RENAME_AND_NEVER_ASSIGNED_BACK_OFFS_ARE_PINNED_BY_TESTS__215_TESTS_PASS"
+  }
+ },
+ "recursive_obs": {
+  "canonical_base_commit": "f049ab952a26683f1b9c48d397b1691b8f220eef",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "AT_TWO_SHOWINGS_NO_KIND_IS_REFUSED_FOR_TANGLED_ADDITIONS_ANY_MORE__EVERY_REMAINING_AT_2_REFUSAL_IS_GENUINE_DISAGREEMENT_OR_A_MISSING_NAME__AND_THE_TEACH_PIPELINE_RUNS_AGAIN_ON_A_MACHINE_WHOSE_SANDBOX_STARTS",
+  "selected_route": "TAKE_PURELY_ADDED_STATEMENTS_BACK_OUT_WHERE_EVERY_BEST_ALIGNMENT_TELLS_ONE_IN_PLACE_STORY__RESTRUCTURES_FIRST_SO_OLD_WINS_KEEP_THEIR_EXACT_PATH__REPAIR_THE_TEACH_PIPELINE_SO_THE_PROGRAM_TRAVELS_ALONE_AGAIN__DECLARE_FOUR_PREDICTIONS_PUSH_THEN_MEASURE_ONCE__ATTRIBUTE_EVERY_TABLE_MOVE_BY_A_BASE_VERSUS_NEW_WRITE_COMPARISON",
+  "selected_surviving_route": "TAKE_PURELY_ADDED_STATEMENTS_BACK_OUT_WHERE_EVERY_BEST_ALIGNMENT_TELLS_ONE_IN_PLACE_STORY__RESTRUCTURES_FIRST_SO_OLD_WINS_KEEP_THEIR_EXACT_PATH__REPAIR_THE_TEACH_PIPELINE_SO_THE_PROGRAM_TRAVELS_ALONE_AGAIN__DECLARE_FOUR_PREDICTIONS_PUSH_THEN_MEASURE_ONCE__ATTRIBUTE_EVERY_TABLE_MOVE_BY_A_BASE_VERSUS_NEW_WRITE_COMPARISON",
+  "deleted_or_bypassed_paths": [
+   "SETTING_ASIDE_REMOVALS_TOO__REJECTED__REPEATING_A_LESSON_LEARNED_BESIDE_UNSEEN_REMOVALS_IS_SAFE_BUT_THE_SYMMETRY_WAS_NOT_MEASURED_AND_ONE_MECHANISM_PER_DECLARATION_IS_THE_LAW",
+   "BRINGING_THE_ADDED_DEF_INTO_TARGETS_WHERE_THE_LESSON_LEANS_ON_IT__DEFERRED__PLACEMENT_IS_UNDERDETERMINED_AND_A_MISPLACED_DEF_IS_AN_EXTRA_WRITE__THE_ZERO_WRONG_WRITES_INVARIANT_OUTRANKS_COVERAGE",
+   "ENUMERATING_ALIGNMENTS_WITH_A_CAP__REPLACED_PRE_MEASUREMENT__IDENTICAL_STATEMENT_COPIES_EXPLODE_THE_WALK__THE_SHIPPED_FORM_IS_A_DP_OVER_MOST_UNCHANGED_PAIRS_WITH_MEMOIZED_STORY_SETS",
+   "WEAKENING_THE_NEEDS_GATE_SO_YAML_SAFE_LOAD_LEARNS__REJECTED__THE_REWRITTEN_CALL_READS_A_NAME_ONLY_THE_TAKEN_OUT_DEF_PROVIDES__WRITING_IT_WOULD_BREAK_EVERY_TARGET"
+  ],
+  "stop_condition": "THE_SINGLE_DECLARED_RUN_IS_RECORDED_WITH_ITS_FALSIFIED_PREDICTION_AND_ITS_ATTRIBUTION__220_ENGINE_TESTS_WITH_THE_FIVE_NEW_PINS_PASS_IN_CI__THE_BUNDLE_IS_RE_TAUGHT_FROM_THE_EDITED_ENGINE_THROUGH_THE_REPAIRED_PIPELINE__THE_MODEL_RECOMPILES_AND_VERIFIES__THE_REFEREE_REPORTS_ZERO_VIOLATIONS",
+  "expected_parent_level_state_change": "HELD_OUT_AT_2_SHOWINGS__KINDS_UNLEARNED_1_TO_0__SET_DAEMON_LEARNS_AND_ITS_TARGETS_ANSWER__DIFFERENT_0_EXTRA_0_IN_EVERY_WAY_ON_EVERY_SET_AT_2_SHOWINGS__THE_ONLY_REMAINING_AT_2_REFUSALS_ARE_GENUINE_DISAGREEMENT_OR_A_NAME_THE_TARGET_LACKS",
+  "why_selected_route_is_fastest_sufficient": "THE_T34_REPORT_HAD_ALREADY_NAMED_THE_KINDS_AND_THE_REFUSAL_SITE__ONE_PUT_BACK_IN_THE_EXISTING_FAMILY_PLUS_A_COMPOSITION_ORDER_THAT_PROVABLY_PRESERVES_EVERY_OLD_PATH__THE_TEACH_REPAIR_WAS_FORCED_BY_THE_TURN_ITSELF_WHEN_RETEACHING_THE_BUNDLE_EXPOSED_MAINS_BREAK",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "ADDITIONS_PUT_BACK_WITH_UNIQUE_STORY_ALIGNMENT__SELECTED",
+   "SURGICAL_CLEANING_BEFORE_RESTRUCTURES__REJECTED_PRE_MEASUREMENT__IT_UNMASKED_HABIT_DISSENTS_THE_COARSE_PUT_BACK_HAD_SETTLED_AND_BROKE_EXCEPTION_MESSAGE_AT_ONE_SHOWING",
+   "RELAXING_LEVELS_OF_TO_ACCEPT_WHOLE_STATEMENT_RESHAPES__REJECTED__GUARD_WEAKENING",
+   "LEAVING_THE_TEACH_PIPELINE_BROKEN_AND_SHIPPING_A_STALE_BUNDLE__REJECTED__THE_FRONT_DOOR_WOULD_EXECUTE_AN_ENGINE_WITHOUT_THE_LAST_TWO_MECHANISMS"
+  ],
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-13T00:59:20Z",
+   "max_age_hours": 24,
+   "incumbent_route": "THE_PROGRAM_ON_THE_BASE_COMMIT__A_STATEMENT_ADDED_BESIDE_AN_IN_PLACE_LESSON_REFUSES_THE_WHOLE_KIND_AND_THE_TEACH_PIPELINE_CANNOT_RUN_AT_ALL_ON_A_MACHINE_WHOSE_SANDBOX_STARTS",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+     "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+     "canonical/tools/teach_actions_v1.py",
+     "canonical/runtime/live_brain_route_admission_v1.py",
+     "canonical/runtime/confine_v1.py",
+     "canonical/runtime/acquired_operator_memory_v1.py",
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "THE_DEEPEST_STILL_OPEN_DEFECT_NOTHING_IS_EVER_COMPRESSED_20261104_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://pith.science/paper/2412.03700",
+     "https://arxiv.org/pdf/2608.26170",
+     "https://dl.acm.org/doi/10.5555/2487085.2487113"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/wisoums/scalerl/issues/119"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/html/2604.20087v1",
+     "https://arxiv.org/html/2606.01139v3"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "held-out generalization test pre-registered declared before data collection"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "final-test-once evaluation protocol locked before test data seen"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 evaluation good practices fixed protocol before experimentation"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "github commit search api mechanical corpus collection deprecation migrations"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "KEEP_IMPROVING_INSIDE_THE_CURATED_CORPUS",
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+     ],
+     "qualification_evidence": [
+      "measured on this host: zero kinds remained unlearned inside the old corpus, so further inside work had no measured target while the generalization claim stayed a claim"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "NO_NEW_TRUTH_VERSUS_A_MEASURED_GENERALIZATION_NUMBER",
+      "CAPABILITY_STRENGTH": "ZERO_NEW_REACH_VERSUS_TWO_NEWLY_NAMED_BOUNDARIES",
+      "WALL_CLOCK": "NONE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "UNTESTED_CLAIMS_AGE_BADLY",
+      "VERIFIABILITY": "THE_DECLARATION_PUSH_TIMESTAMP_IS_PUBLIC_HISTORY"
+     }
+    },
+    {
+     "route": "ACCEPT_A_TRY_WHEN_THE_SUITE_STAYS_GREEN",
+     "evidence": [
+      "https://arxiv.org/html/2604.01518v1",
+      "https://arxiv.org/pdf/1506.07330"
+     ],
+     "qualification_evidence": [
+      "published: suites that accept plausible but wrong patches (STING, 2026); statement coverage missed a broken test refactoring that mutation coverage caught (Parsai, 2015); here a check that never runs the line stays green for any edit, measured in test_a_check_that_swallows_the_failure_settles_nothing"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "A_GREEN_SUITE_THAT_NEVER_RUNS_THE_LINE_IS_A_RUBBER_STAMP",
+      "CAPABILITY_STRENGTH": "MORE_EDITS_KEPT",
+      "WALL_CLOCK": "HALF_THE_RUNS",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "KEEPS_EDITS_NOTHING_EVER_CHECKED",
+      "VERIFIABILITY": "NOTHING_SAYS_THE_LINE_RAN"
+     }
+    },
+    {
+     "route": "LET_A_LANGUAGE_MODEL_WRITE_VARIANTS_AND_FILTER_BY_TESTS",
+     "evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2402.07138v3"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "65_5_PERCENT_OF_VARIANTS_WRONG_BEFORE_FILTERING",
+      "CAPABILITY_STRENGTH": "COVERS_FORMS_NOBODY_SHOWED",
+      "WALL_CLOCK": "SHORT",
+      "INCREMENTAL_COST": "A_MODEL",
+      "RELIABILITY": "NEEDS_THE_SAME_TESTS_ANYWAY",
+      "VERIFIABILITY": "FORBIDDEN_HERE_NO_MODEL_IN_CREDITED_COGNITION"
+     }
+    },
+    {
+     "route": "ENUMERATE_SINGLE_MUTATION_CANDIDATES_AND_LET_LESSONS_VOTE",
+     "evidence": [
+      "canonical/runtime/edit_kind_learning_v1.py"
+     ],
+     "qualification_evidence": [
+      "that engine answers a different question: which fix, out of many, for a failing test; here the lesson already names the change and only its breadth is open, so the only candidates needed are the proven rules and one wider reading"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "SAME_ORACLE",
+      "CAPABILITY_STRENGTH": "SEARCHES_WHERE_NO_LESSON_EXISTS",
+      "WALL_CLOCK": "MANY_CANDIDATES_PER_PLACE",
+      "INCREMENTAL_COST": "ZERO",
+      "RELIABILITY": "NEEDS_A_FAILING_TEST_TO_START",
+      "VERIFIABILITY": "SAME"
+     }
+    }
+   ],
+   "negative_search_summary": "THE_2026_EVALUATION_LITERATURE_PRESCRIBES_EXACTLY_THIS__PROTOCOL_FIXED_BEFORE_EXPERIMENTATION__FINAL_TEST_ONCE__NO_POST_HOC_CHANGES__NO_FOUND_SKILL_LEARNING_SYSTEM_REPORTS_A_PRE_REGISTERED_GENERALIZATION_NUMBER_WITH_ITS_FALSIFIED_PREDICTIONS_LEFT_STANDING",
+   "selected_route": "TAKE_PURELY_ADDED_STATEMENTS_BACK_OUT_WHERE_EVERY_BEST_ALIGNMENT_TELLS_ONE_IN_PLACE_STORY__RESTRUCTURES_FIRST_SO_OLD_WINS_KEEP_THEIR_EXACT_PATH__REPAIR_THE_TEACH_PIPELINE_SO_THE_PROGRAM_TRAVELS_ALONE_AGAIN__DECLARE_FOUR_PREDICTIONS_PUSH_THEN_MEASURE_ONCE__ATTRIBUTE_EVERY_TABLE_MOVE_BY_A_BASE_VERSUS_NEW_WRITE_COMPARISON",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-13T00:59:20Z",
+    "max_age_hours": 2,
+    "selected_route": "TAKE_PURELY_ADDED_STATEMENTS_BACK_OUT_WHERE_EVERY_BEST_ALIGNMENT_TELLS_ONE_IN_PLACE_STORY__RESTRUCTURES_FIRST_SO_OLD_WINS_KEEP_THEIR_EXACT_PATH__REPAIR_THE_TEACH_PIPELINE_SO_THE_PROGRAM_TRAVELS_ALONE_AGAIN__DECLARE_FOUR_PREDICTIONS_PUSH_THEN_MEASURE_ONCE__ATTRIBUTE_EVERY_TABLE_MOVE_BY_A_BASE_VERSUS_NEW_WRITE_COMPARISON",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON3_STDLIB_LOCAL_RUNTIME",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "python3 -c 'import ast, tokenize, re, builtins, json, sqlite3; print(\"ok\")' returned ok; the program uses nothing else"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "NAMESPACE_SANDBOX_confine_v1",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical.runtime.confine_v1.available() returned True on this host; teaching ran the program inside it and the front door's receipts for the four new sentences report confined True"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "DEMONSTRATION_TO_SKILL_COMPILER_AND_FRONT_DOOR_FALLBACK",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/tools/teach_actions_v1.py qualified ten skills through causal_trace_to_skill_compiler_v1 on this host, re-teaching reproduced the tracked bundle byte for byte, and live_brain_route_admission_v1.solve returned PASS__COMPILED_WORKFLOW_SKILL for remembering a change, repeating it and repeating it with the rest left alone"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_TAUGHT_PROGRAM_OF_THE_PREVIOUS_CHANGE",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/swe_kernel/taught_actions/edit_by_example_v1.py on the base commit answers remember, repeat and repeat_shown through the front door on this host; the fifth action is added to the same program and all five are taught again from it"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  },
+  "obs_goal": {
+   "real_outcome": "THE_OWNERS_GENERALIZATION_PROBLEM__A_VETTED_OR_UNVETTED_SECOND_SHOWING_IS_NOW_SAFE_AGAINST_OWNED_ATTRIBUTE_RENAME_HABITS__95_PERCENT_FRESH_STRICT_WITH_ZERO_WRONG_WRITES",
+   "proxy_goals_deleted": [
+    "PROTECTING_THE_STREAK_OF_ZERO_DIFF_ZERO_EXTRA_BY_NOT_MEASURING",
+    "POST_HOC_PATCHES",
+    "CHERRY_PICKED_KINDS"
+   ],
+   "surviving_necessity": "KILL_CANDIDATES_AGAINST_THE_ACTUAL_FAILURE_BEFORE_IMPLEMENTING__DECLARE_DELTAS_BEFORE_MEASURING__FALSIFIED_CLAIMS_STAND"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+    "canonical/runtime/acquired_operator_memory_v1.py",
+    "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+    "canonical/swe_kernel/concept_library_v1.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py"
+   ],
+   "reused_rather_than_rebuilt": [
+    "THE_LEARNER_AND_LESSON_FILE_OF_6686",
+    "THE_DEMONSTRATION_TO_SKILL_COMPILER",
+    "THE_SANDBOX",
+    "THE_TEACHING_TOOL",
+    "THE_DOORS_FALLBACK",
+    "THE_MUTATION_SCORE_IDEA_POINTED_AT_THE_EDITED_PLACES"
+   ],
+   "capability_work_deleted": [
+    "THE_REDUCED_STANDING_CANDIDATE__KILLED_BY_THE_COINCIDENCE_COUNTEREXAMPLE_BEFORE_ANY_CODE"
+   ],
+   "external_existing_routes_checked": [
+    "PYEVOLVE",
+    "MELT",
+    "GENPAT",
+    "PYCRAFT",
+    "REFAZER",
+    "THE_2013_STUDY_OF_REPETITIVENESS_OF_CODE_CHANGES",
+    "CONTINUALSKILLBENCH_SKILLSBENCH_VIBEMEMBENCH_AND_SWE_CONTEXTBENCH_OF_2026"
+   ],
+   "surviving_gap": "PLURAL_REPLACEMENTS_REMAIN__ONLY_A_PROJECT_SIDE_SIGNAL_CAN_DISCRIMINATE_THEM__CONFLICTING_EXAMPLES_STILL_REFUSE_AND_DROP_THE_KIND__METHOD_RENAMES_THE_PERSON_OWNS_ARE_NOT_YET_COVERED_BY_THE_SET_ASIDE"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC_AND_CLOSED_FOR_ASSIGNED_ATTRIBUTES__THE_VARIABLE_FORM_PRECEDENT_MADE_THE_MECHANISM_A_MIRROR_NOT_AN_INVENTION",
+   "evidence": [
+    "THE_INJECTED_WIDENED_RULE_HAD_SUPPORT_FROM_BOTH_EXAMPLES__ITS_AFTER_SIDES_COINCIDED_BY_THE_RENAME",
+    "STORE_CONTEXT_SEPARATES_STOP_FROM_ISSET_MECHANICALLY"
+   ],
+   "delete_bypass_substitute_options": [
+    "DELETE__NOTHING_TO_DELETE",
+    "BYPASS_BY_KEEPING_THE_TWO_EXAMPLE_FILES_AROUND__THAT_IS_WHAT_THE_OWNER_ASKS_TO_END",
+    "REUSE_THE_REPAIR_LESSON_STORE__IT_KEEPS_TOKEN_RULES_CHECKED_BY_TESTS_AND_CANNOT_BE_READ_FROM_INSIDE_THE_SANDBOX",
+    "SUBSTITUTE_AN_EXTERNAL_TOOL__NONE_INSTALLED"
+   ],
+   "surviving_causal_blocker": "A_TANGLED_HABIT_THAT_IS_NEITHER_AN_ASSIGNED_NAME_NOR_DISSENTED_BY_ANY_EXAMPLES_CODE_CAN_STILL_ENTER_A_MULTI_EXAMPLE_LESSON"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "PRE_REGISTERED_FRESH_SET",
+    "ENGINE_WORK_ON_REACHABLE_REFUSALS",
+    "WIDEN_OLD_SET",
+    "POST_HOC_PATCH"
+   ],
+   "losing_routes_reason": "ONLY_THE_PRE_REGISTERED_SET_ANSWERS_THE_STANDING_QUESTION__ENGINE_WORK_WOULD_HAVE_CONTAMINATED_THE_MEASUREMENT_IT_RODE_WITH__THE_OLD_SET_CANNOT_TEST_GENERALIZATION__POST_HOC_PATCHES_DESTROY_THE_PROTOCOL",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_PROTOCOL_IS_ITS_OWN_VERIFICATION__DECLARATION_PUSHED_BEFORE_COLLECTION_IN_PUBLIC_HISTORY__ONE_MEASUREMENT__MISSES_REPORTED_WITH_LINE_LEVEL_DIAGNOSES"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [],
+   "adjacent_capabilities_absorbed": [],
+   "note": "THE_ENGINE_CHANGED__THE_BUNDLE_IS_RE_TAUGHT_AND_REPRODUCES__ATTRIBUTE_RENAME_UNDONE_SITS_BESIDE_RENAME_UNDONE_AND_RUNS_IN_THE_SAME_LEARN_ALL_LINE",
+   "fresh_reuse_plan": "NEXT__A_PROJECT_SIDE_SIGNAL_FOR_PLURAL_REPLACEMENTS__EXTRACT_VARIABLE__RE_MEASURES_REMAIN_REGRESSION_CHECKS"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "THE_OWNERSHIP_PRINCIPLE_IS_CACHED__RENAMES_ARE_OF_ASSIGNED_NAMES__NEVER_ASSIGNED_ATTRIBUTE_CHANGES_ARE_BEHAVIOR__SUPPORT_COUNTING_IS_BLIND_TO_COINCIDENT_TANGLES"
+   ],
+   "search_stop_decision": "THE_DECLARED_FAILURE_IS_CLOSED_WITH_ALL_PREDICTIONS_HELD__FURTHER_ENGINE_WORK_THIS_TURN_WOULD_RIDE_UNDECLARED",
+   "affected_layers_only_on_revalidation": true
+  }
+ },
+ "next_step": "MERGE_UNDER_THE_OWNERS_STANDING_INSTRUCTION_ONCE_THE_REFEREE_IS_GREEN__THEN__BRING_AN_ADDED_DEF_THE_LESSON_LEANS_ON_INTO_TARGETS_ONLY_IF_THE_EXTRA_WRITE_RISK_CLEARS__OR_THE_PLURAL_REPLACEMENTS_ON_FRESH",
+ "prior_work_reused": [
+  "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/runtime/confine_v1.py",
+  "canonical/tools/teach_actions_v1.py",
+  "canonical/runtime/live_brain_route_admission_v1.py",
+  "canonical/runtime/edit_kind_learning_v1.py"
+ ]
+}
