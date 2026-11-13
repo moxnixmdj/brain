@@ -2170,10 +2170,31 @@ class GeneralizationEngine:
         policy_receipt = None
         if learn_update:
             try:
-                policy_receipt = self.policy.update_from_experience(
-                    goal, task.operation, task.concept, task.domain,
-                    persist=persist_policy,
-                )
+                if persist_policy:
+                    # A PERMANENT weight change needs evidence outside the example it trained
+                    # on. Measured 2026-11-13: 32 ungated steps each reported loss going down,
+                    # ended at 5/32 agreement with the parser, and broke 3 predictions that
+                    # were already right. The step is now tried on a copy and kept only if it
+                    # helps another verified goal and breaks none. A volatile per-request step
+                    # (persist_policy=False) is unchanged: it is discarded, so it grants no
+                    # permanence.
+                    from canonical.swe_kernel import weight_update_admission_v1 as _wa
+
+                    prior = [str(e.get("task_description") or "")
+                             for e in self.experiences.get("experiences", [])
+                             if e.get("outcome") == "success" and e.get("task_description")]
+                    built = _wa.probes_from_goals(prior, exclude=goal, archive_goals=prior)
+                    policy_receipt = _wa.apply_if_admitted(
+                        self.policy, goal, task.operation, task.concept, task.domain,
+                        probes=built["probes"], persist=True,
+                    )
+                    policy_receipt["probe_source"] = "prior_verified_experiences"
+                    policy_receipt["parser_refused_probes"] = len(built["refused"])
+                else:
+                    policy_receipt = self.policy.update_from_experience(
+                        goal, task.operation, task.concept, task.domain,
+                        persist=False,
+                    )
             except Exception:
                 policy_receipt = {"schema": "BRAIN_POLICY_UPDATE_RECEIPT_V1", "error": "update failed"}
         if learn_update and store_experience:
