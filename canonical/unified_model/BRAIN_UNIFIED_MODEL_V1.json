@@ -31229,16 +31229,16 @@
   "engines": 26,
   "knowledge_documents": 403,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6800,
+  "research_index_records": 6801,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
-  "source_index_modules": 1973
+  "source_index_modules": 1974
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "589408e99d6bd0c89e39a28e3b1cd89b9c1f65943bd2abfd0fa7930657db4ed0"
+  "value": "42c768d2f8ad020bd70bfce1276fc0e9b6538b09e8e88e3eb44e2b48b9c5e712"
  },
  "engines": [
   {
@@ -158569,6 +158569,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FILE_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FILE_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json",
+   "schema": "BRAIN_FILE_FOUND_FROM_TASK_TEXT_V1",
+   "sha256": "bf4c9e3cb087ad76a10df1db1f0b59c423b0ba9e085b93235ae8e9f3fb6f72d2",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "file": 1,
+    "found": 1,
+    "swebench": 1,
+    "task": 1,
+    "text": 1,
+    "v1": 1,
+    "verified": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/FINAL_OBJECTIVE_BINDINGS_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -225071,7 +225092,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_SECOND_OPERATOR_HAS_TO_FACE_THE_SAME_TEST_OR_NOT_BE_AN_OPERATOR_20261112_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0e56a147186392f620bc1bcbe999b4a59fbb0f2e4225ed32d2698b470d0a0948",
+   "sha256": "2843ad9c209b87ceb7abe85e105b7ec12d81736ac5e68180d414b9f17b447827",
    "status": "",
    "terms": {
     "20261112": 1,
@@ -228272,7 +228293,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FIRST_CONTACT_IS_MEASURED_WHERE_NOBODY_HERE_WROTE_THE_ENVIRONMENT_20261111_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "cadc1f1ec212cdc88616b15bac3db46e3b7eebb534e475ec0a06324e97941b53",
+   "sha256": "62897a15355c64c82e5642bd7186f522b6b4dad78cceeb1a7556dd8ea4769c7d",
    "status": "",
    "terms": {
     "20261111": 1,
@@ -262013,6 +262034,45 @@
     "stated": 1,
     "v1": 1,
     "verify": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/file_the_task_text_points_at_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/file_the_task_text_points_at_v1.py",
+   "sha256": "775219629a59cf3404f8083c2fc28c96d4de93c0eea7c393c7eaa77b699b78ad",
+   "summary": "Which file of a project a task's text points at, and the first changes to try from there.",
+   "symbol_count": 7,
+   "symbols": [
+    "_stands",
+    "candidates",
+    "counted",
+    "document",
+    "named",
+    "order",
+    "scores"
+   ],
+   "terms": {
+    "candidates": 1,
+    "changes": 1,
+    "counted": 1,
+    "document": 1,
+    "file": 2,
+    "first": 1,
+    "named": 1,
+    "order": 1,
+    "points": 2,
+    "project": 1,
+    "scores": 1,
+    "stands": 1,
+    "task": 2,
+    "text": 2,
+    "try": 1,
+    "v1": 1
    }
   },
   {
