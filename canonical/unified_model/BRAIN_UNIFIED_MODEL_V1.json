@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 408,
+  "knowledge_documents": 409,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6809,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c5e985cf096da624bafc089f4bf257c399652561058ad1dc9d77c668523a368f"
+  "value": "a1ba90bc30081bcc956366dfd045b29a408b3bdba62e65322380bacd9675df30"
  },
  "engines": [
   {
@@ -52456,6 +52456,86 @@
     "being",
     "noticing",
     "told"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6790,
+   "headings": [
+    "One annotation shows the direction: +27 points, and the family follows",
+    "The answer to the question, again, in the form the corpus can defend",
+    "What the operator is",
+    "The measurement",
+    "What this settles, and what it does not",
+    "Why this is the honest shape of \"generalization\"",
+    "Context: the organ was unavailable this morning",
+    "Reproduce",
+    "Limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_ANNOTATION_SHOWS_THE_DIRECTION_20261112_V1.md",
+   "sha256": "828276e58bee9baa4dface6600c2c53e7ce62bfcd67cf71bc50e06aad1eb5ea8",
+   "summary": "**2026-11-12 · 15 pull requests / 89 files / 1,674 developers' changes · no model, no network, $0**",
+   "terms": {
+    "280": 5,
+    "56.87": 3,
+    "585": 3,
+    "674": 4,
+    "annotation": 6,
+    "any": 5,
+    "arm": 3,
+    "base": 4,
+    "before": 4,
+    "builtin": 3,
+    "callable": 3,
+    "canonical": 4,
+    "changed": 3,
+    "changes": 9,
+    "class": 4,
+    "collections.abc": 3,
+    "corpus": 4,
+    "coverage": 4,
+    "developers": 5,
+    "dict": 8,
+    "did": 3,
+    "direction": 5,
+    "down": 4,
+    "example": 14,
+    "family": 9,
+    "files": 5,
+    "import": 6,
+    "int": 4,
+    "lines": 3,
+    "list": 10,
+    "measured": 3,
+    "measurement": 6,
+    "model": 3,
+    "no": 7,
+    "not": 16,
+    "one": 15,
+    "only": 4,
+    "operator": 11,
+    "organ": 4,
+    "other": 4,
+    "precision": 4,
+    "pull": 6,
+    "set": 4,
+    "tuple": 5,
+    "type": 4,
+    "typing": 5,
+    "whole": 4,
+    "wrong": 5
+   },
+   "title": "One annotation shows the direction: +27 points, and the family follows",
+   "title_terms": [
+    "27",
+    "annotation",
+    "direction",
+    "family",
+    "follows",
+    "one",
+    "points",
+    "shows"
    ]
   },
   {
@@ -76514,10 +76594,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1210,
+  "included_source_count": 1211,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5f2f5e8f9eb0d7438a702a1ace518bb3b03795ee6b2caef900467f1aa6382558"
+  "source_tree_digest": "0c71ee6487f13da45982b81393bcd45f87f3d90bced0cc90f29f70b0fb40bdba"
  },
  "research_index": [
   {

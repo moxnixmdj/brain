@@ -1,0 +1,499 @@
+{
+ "schema": "GENERIC_ALIAS_MEASURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-13T00:44:07Z",
+ "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+ "organ_sha256": "682960d1b73971606e4fae1f861b43d81b6a8acea604e947a3816b75c3d75c5a",
+ "operator": "canonical/swe_kernel/taught_actions/generic_alias_v1.py",
+ "operator_sha256": "4bbb610711ebdc6c255b589756f716994e2393a5365a61cbb1d235d57474cb63",
+ "corpus_sha256": "0eae235f84f05b31d2f564670e402d57fc1eaea8c95411c4d72bac44e0e43312",
+ "collect": "python3 canonical/tools/repeated_change_one_example_measure_v1.py --collect /tmp/pulls.json --as-recorded-in canonical/verification/REPEATED_CHANGE_ONE_EXAMPLE_20261112_V1.json",
+ "summary": {
+  "base": {
+   "asked": 440,
+   "edited": 330,
+   "changed_files": 0,
+   "right": 493,
+   "developers_changes": 1674,
+   "organ_changes": 537,
+   "coverage": 0.294504,
+   "precision": 0.918063,
+   "wrong_changes": 36,
+   "whole_files": 117
+  },
+  "alias": {
+   "asked": 440,
+   "edited": 350,
+   "changed_files": 58,
+   "right": 952,
+   "developers_changes": 1674,
+   "organ_changes": 1026,
+   "coverage": 0.568698,
+   "precision": 0.927875,
+   "wrong_changes": 48,
+   "whole_files": 155,
+   "gain_right": 459,
+   "gain_coverage": 0.274194,
+   "gain_precision": 0.009812,
+   "pull_requests_improved": 2
+  }
+ },
+ "per_pull_request": {
+  "openimis/openimis-be-core_py#414": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 25,
+    "changed_files": 0,
+    "right": 121,
+    "developers_changes": 315,
+    "organ_changes": 121,
+    "coverage": 0.384127,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 4
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 25,
+    "changed_files": 0,
+    "right": 121,
+    "developers_changes": 315,
+    "organ_changes": 121,
+    "coverage": 0.384127,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 4
+   },
+   "name": "openimis/openimis-be-core_py#414",
+   "kind": "an old name of a test method",
+   "seconds": 1.1
+  },
+  "torproject/stem#155": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 45,
+    "developers_changes": 50,
+    "organ_changes": 45,
+    "coverage": 0.9,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 25
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 45,
+    "developers_changes": 50,
+    "organ_changes": 45,
+    "coverage": 0.9,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 25
+   },
+   "name": "torproject/stem#155",
+   "kind": "an old name of a test method, second",
+   "seconds": 3.7
+  },
+  "testing-cabal/testtools#335": {
+   "files": 5,
+   "base": {
+    "asked": 20,
+    "edited": 20,
+    "changed_files": 0,
+    "right": 12,
+    "developers_changes": 44,
+    "organ_changes": 12,
+    "coverage": 0.272727,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 9
+   },
+   "alias": {
+    "asked": 20,
+    "edited": 20,
+    "changed_files": 0,
+    "right": 12,
+    "developers_changes": 44,
+    "organ_changes": 12,
+    "coverage": 0.272727,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 9
+   },
+   "name": "testing-cabal/testtools#335",
+   "kind": "an old name of a test method, second",
+   "seconds": 2.1
+  },
+  "kuangjiafa/automagician#55": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 10,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 40,
+    "organ_changes": 1,
+    "coverage": 0.0,
+    "precision": 0.0,
+    "wrong_changes": 1,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 10,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 40,
+    "organ_changes": 1,
+    "coverage": 0.0,
+    "precision": 0.0,
+    "wrong_changes": 1,
+    "whole_files": 0
+   },
+   "name": "kuangjiafa/automagician#55",
+   "kind": "an old name of a logging method",
+   "seconds": 1.1
+  },
+  "RedHatInsights/advisor-backend#80": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 50,
+    "developers_changes": 55,
+    "organ_changes": 50,
+    "coverage": 0.909091,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 25
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 50,
+    "developers_changes": 55,
+    "organ_changes": 50,
+    "coverage": 0.909091,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 25
+   },
+   "name": "RedHatInsights/advisor-backend#80",
+   "kind": "an old name of a logging method",
+   "seconds": 1.7
+  },
+  "Cytomine-ULiege/Cytomine-python-client#61": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 50,
+    "developers_changes": 85,
+    "organ_changes": 50,
+    "coverage": 0.588235,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 17
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 50,
+    "developers_changes": 85,
+    "organ_changes": 50,
+    "coverage": 0.588235,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 17
+   },
+   "name": "Cytomine-ULiege/Cytomine-python-client#61",
+   "kind": "a call written the old way",
+   "seconds": 0.7
+  },
+  "unifyai/ivy#26932": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 17,
+    "developers_changes": 70,
+    "organ_changes": 17,
+    "coverage": 0.242857,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 17
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 17,
+    "developers_changes": 70,
+    "organ_changes": 17,
+    "coverage": 0.242857,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 17
+   },
+   "name": "unifyai/ivy#26932",
+   "kind": "a call written the old way",
+   "seconds": 1.1
+  },
+  "InterDigitalInc/CompressAI-Vision#40": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 0,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 35,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 0,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 35,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "name": "InterDigitalInc/CompressAI-Vision#40",
+   "kind": "a library taken out",
+   "seconds": 0.8
+  },
+  "inveniosoftware/invenio-pidstore#189": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 5,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 115,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 5,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 115,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "name": "inveniosoftware/invenio-pidstore#189",
+   "kind": "a library taken out",
+   "seconds": 0.2
+  },
+  "nipy/nibabel#1609": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 70,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 70,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "name": "nipy/nibabel#1609",
+   "kind": "text put together another way",
+   "seconds": 2.8
+  },
+  "jupyter/jupyter-sphinx#301": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 110,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 0,
+    "developers_changes": 110,
+    "organ_changes": 0,
+    "coverage": 0.0,
+    "precision": null,
+    "wrong_changes": 0,
+    "whole_files": 0
+   },
+   "name": "jupyter/jupyter-sphinx#301",
+   "kind": "text put together another way",
+   "seconds": 0.9
+  },
+  "fulcrumgenomics/fgpyo#300": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 20,
+    "changed_files": 0,
+    "right": 2,
+    "developers_changes": 220,
+    "organ_changes": 3,
+    "coverage": 0.009091,
+    "precision": 0.666667,
+    "wrong_changes": 1,
+    "whole_files": 0
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 29,
+    "right": 215,
+    "developers_changes": 220,
+    "organ_changes": 258,
+    "coverage": 0.977273,
+    "precision": 0.833333,
+    "wrong_changes": 25,
+    "whole_files": 9
+   },
+   "name": "fulcrumgenomics/fgpyo#300",
+   "kind": "types written another way",
+   "seconds": 1.4
+  },
+  "Prekzursil/env-inspector#72": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 20,
+    "changed_files": 0,
+    "right": 34,
+    "developers_changes": 280,
+    "organ_changes": 46,
+    "coverage": 0.121429,
+    "precision": 0.73913,
+    "wrong_changes": 12,
+    "whole_files": 1
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 29,
+    "right": 280,
+    "developers_changes": 280,
+    "organ_changes": 280,
+    "coverage": 1.0,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 30
+   },
+   "name": "Prekzursil/env-inspector#72",
+   "kind": "types written another way",
+   "seconds": 1.9
+  },
+  "apache/libcloud#2217": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 20,
+    "changed_files": 0,
+    "right": 12,
+    "developers_changes": 30,
+    "organ_changes": 12,
+    "coverage": 0.4,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 12
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 20,
+    "changed_files": 0,
+    "right": 12,
+    "developers_changes": 30,
+    "organ_changes": 12,
+    "coverage": 0.4,
+    "precision": 1.0,
+    "wrong_changes": 0,
+    "whole_files": 12
+   },
+   "name": "apache/libcloud#2217",
+   "kind": "a call that is no longer to be used",
+   "seconds": 2.8
+  },
+  "arigatoexpress/Project-Go-Forward#483": {
+   "files": 6,
+   "base": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 150,
+    "developers_changes": 155,
+    "organ_changes": 180,
+    "coverage": 0.967742,
+    "precision": 0.833333,
+    "wrong_changes": 22,
+    "whole_files": 7
+   },
+   "alias": {
+    "asked": 30,
+    "edited": 30,
+    "changed_files": 0,
+    "right": 150,
+    "developers_changes": 155,
+    "organ_changes": 180,
+    "coverage": 0.967742,
+    "precision": 0.833333,
+    "wrong_changes": 22,
+    "whole_files": 7
+   },
+   "name": "arigatoexpress/Project-Go-Forward#483",
+   "kind": "a call that is no longer to be used",
+   "seconds": 1.8
+  }
+ },
+ "limits": [
+  "One corpus: 15 merged pull requests found because they repeat one change, six files each; no test of any of the fifteen projects was run.",
+  "Precision is agreement with the developers, not correctness.",
+  "The family is knowledge (the PEP 585 pairs); the example supplies only the direction. A project that changes one pair and deliberately keeps another is not distinguished.",
+  "Only bare-name subscripts are changed; `typing.List[...]` written qualified, and `Callable`/`Iterable` moved to `collections.abc`, are not this operator."
+ ]
+}
