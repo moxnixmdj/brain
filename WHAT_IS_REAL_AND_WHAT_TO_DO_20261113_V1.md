@@ -2,7 +2,7 @@
 
 **Branch:** `arena/954d9035-brain`. **Base:** `68374960837276a4d19f32caf39215cc99eb49ae`.
 **Authority:** NONE. Producer-run sandbox measurement and code change. `truth.achieved` stays `false`.
-No capability registered, no family flipped, no model weights updated, no independent verifier claimed.
+No capability registered, no family flipped, no base-model/LLM weights updated, no independent verifier claimed.
 
 ## 0. Direct answer
 
@@ -14,8 +14,9 @@ The direction is real; the quantifiers are not.
   generalization,” “the most advanced coding agent on the planet,” or “sentient creature.”
 - **This repo specifically:** the older `INSTANT_LEARNING_PROOF.md`, `THE_SYSTEM_ALREADY_WORKS.md`,
   and `FINAL_SOLUTION_SUMMARY.md` overclaimed. The tree already contains retractions and
-  measurements bounding them. This round removes one measured-wrong live executor and replaces
-  it with a bounded, typed, read-only adapter.
+  measurements bounding them. This round removes one measured-wrong live executor, puts a
+  bounded typed read-only adapter in front of the read-only lane, and confines the broader
+  compositional engine that landed on main during the work.
 
 A system can learn *procedures* without changing model weights. That is useful. It is not the
 same as the model understanding why a procedure works, knowing when it must not fire, or
@@ -97,11 +98,23 @@ Contract:
 This is engineering transfer over file names and wording for a bounded syntax domain. It is not
 weight learning, not conceptual understanding, and not arbitrary computer use.
 
-### 3.3 Retired dangerous patchers and corrected labels
+### 3.3 Merged main’s compositional engine, then confined it
+
+While this work was in flight, main landed a replacement for the lexical engine:
+`semantic_generalization_engine_v1.py` became a typed compositional count/list/breakdown/exists/compare
+engine with interventional probes and a small online policy head. That is real engineering progress,
+but it still is not arbitrary computer use or base-model weight learning.
+
+This branch keeps that engine and adds two safety properties:
+
+- the bounded typed adapter runs first for its explicit Python AST shapes;
+- when the adapter falls through because the grammar is unsupported, both the adapter’s confinement
+  check and the broader engine refuse targets outside the caller workspace, including symlink escapes.
+
+Also:
 
 - `semantic_generalization_integration.py` and `fix_semantic_integration.py` now refuse to run;
   they previously spliced keyword-driven executors into the controller.
-- `semantic_generalization_engine_v1.py` is labelled lexical retrieval, not “true generalization.”
 - The three optimistic summary documents carry supersession/retraction banners.
 - `test_semantic_generalization_real.py` now asserts correctness instead of printing a banner.
 
@@ -109,13 +122,15 @@ weight learning, not conceptual understanding, and not arbitrary computer use.
 
 New/changed tests:
 
-- `canonical/tests/test_python_ast_query_transfer_v1.py`: 21 tests.
+- `canonical/tests/test_python_ast_query_transfer_v1.py`: 23 tests.
 - `test_semantic_generalization_real.py`: 1 test.
+- main’s `canonical/tests/test_real_generalization_engine_v2.py`: 69 tests, kept green.
 
-Targeted regression run:
+Targeted regression run after merging main:
 
 ```text
 .venv/bin/python -m pytest -q \
+  canonical/tests/test_real_generalization_engine_v2.py \
   test_semantic_generalization_real.py \
   canonical/tests/test_python_ast_query_transfer_v1.py \
   canonical/tests/test_swe_intent_scope_regressions_v1.py \
@@ -123,7 +138,7 @@ Targeted regression run:
   canonical/tests/test_the_check_is_the_difference_v1.py \
   canonical/tests/test_learn_path_verification_wiring_v1.py \
   canonical/tests/test_wake_sleep_recall_and_specialist_controller_v1.py
-71 passed in 19.48s
+142 passed in 17.10s
 ```
 
 Integrity guard:

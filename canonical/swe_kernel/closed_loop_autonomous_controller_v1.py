@@ -439,6 +439,13 @@ def solve_or_learn(
 ) -> dict[str, Any]:
     if type(learn) is not bool:
         raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+    # A mapping request may carry its own `learn` flag (e.g. front-door calls
+    # that must stay read-only). It is honoured here rather than ignored.
+    if isinstance(request, Mapping) and "learn" in request:
+        request_learn = request["learn"]
+        if type(request_learn) is not bool:
+            raise ValueError("LEARN_FLAG_MUST_BE_BOOL")
+        learn = request_learn
     from canonical.runtime.memory_policy_v1 import OFF, READ_WRITE, can_read_memory, memory_policy_scope
 
     with memory_policy_scope(READ_WRITE if learn else OFF):
@@ -548,6 +555,18 @@ def _solve_or_learn_impl(
         try:
             typed = ast_query.solve_query(goal, root=work_cwd)
         except ast_query.PythonAstQueryError as exc:
+            # The bounded adapter is not the whole read-only surface. If the
+            # current sentence is outside its small grammar, let the verified
+            # compositional engine/door try; safety refusals still fail closed.
+            if exc.code in {"UNSUPPORTED_TARGET", "UNSUPPORTED_QUERY_SHAPE"}:
+                try:
+                    ast_query.check_source_confinement(goal, root=work_cwd)
+                except ast_query.PythonAstQueryError as confined_exc:
+                    out = ast_query.failure_result(confined_exc)
+                    out.update(schema=SCHEMA, task_id=task_id,
+                               elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
+                    return out
+                return None
             out = ast_query.failure_result(exc)
             out.update(schema=SCHEMA, task_id=task_id,
                        elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
@@ -558,7 +577,6 @@ def _solve_or_learn_impl(
                      semantic_acceptance_complete=False,
                      elapsed_ms=round((perf_counter_ns() - t0) / 1e6, 3))
         return typed
-
     if not learn:
         allow_tier2_learning = False
         record_open_gap = False
@@ -569,6 +587,7 @@ def _solve_or_learn_impl(
         from canonical.runtime import live_brain_route_admission_v1 as ra
 
         door_req = dict(req)
+        door_req.setdefault("task_id", task_id)
         door_req["route_memory_mode"] = "exclude"
         return ra.solve(door_req)
 
@@ -1024,14 +1043,43 @@ def _solve_or_learn_impl(
         }
 
     # ------------------------------------------------------------------
-    # TIER 0A-TYPED: read-only Python AST queries.
-    # The old lexical-similarity executor is removed: a retrieved strategy may
-    # rank a hint, but it may not choose the operation for the current sentence.
+    # TIER 0A-SEMANTIC (<25 ms): Neuro-symbolic compositional & causal
+    # generalization. Replaces the old TF-IDF keyword lookup: typed
+    # SemanticTaskAST -> explicit synthesized program -> interventional
+    # verification -> only then an answer. Structured answers (int counts,
+    # name lists, dict breakdowns), and fail-closed refusals otherwise.
+    # The volatile policy update is kept in-memory; this tier never
+    # silently mutates tracked experience state.
     # ------------------------------------------------------------------
     if learn and recalled is None:
         typed = _typed_python_ast_lane()
         if typed is not None:
             return typed
+        try:
+            from canonical.swe_kernel.semantic_generalization_engine_v1 import (
+                GeneralizationEngine,
+            )
+
+            sem_engine = GeneralizationEngine()
+            sem_result = sem_engine.solve_task(
+                goal,
+                work_cwd=work_cwd,
+                top_k=3,
+                persist_policy=False,
+                store_experience=False,
+            )
+
+            if sem_result.get("pass") is True:
+                out = dict(sem_result)
+                out["schema"] = SCHEMA
+                out["task_id"] = task_id
+                out["status"] = "PASS__TIER0A_SEMANTIC_GENERALIZATION"
+                out["tier_used"] = "tier0a_semantic_generalization"
+                out["from_memory"] = False
+                out["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
+                return out
+        except Exception:
+            pass
 
     forged_state_path = req.pop("forged_state_path", None)
     macro_state_path = req.pop("macro_state_path", None)

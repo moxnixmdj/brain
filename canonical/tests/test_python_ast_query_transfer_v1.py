@@ -100,7 +100,6 @@ def _solve(root: pathlib.Path, goal: str, **kwargs):
         ("Count the number of methods in sample.py", METHODS),
         ("Count functions in sample.py", FUNCTIONS),
         ("Count classes in sample.py", CLASSES),
-        ("How many async functions are in sample.py", None),  # unsupported refinement -> refuse
     ],
 )
 def test_count_binds_the_requested_node_kind(workspace, goal, expected):
@@ -113,6 +112,34 @@ def test_count_binds_the_requested_node_kind(workspace, goal, expected):
         assert result["status"] == PASS_STATUS, result
         assert result["answer"] == expected, result
         assert result["from_memory"] is False, result
+
+
+def test_unsupported_refinement_falls_through_only_to_the_verified_engine(workspace):
+    """The small adapter refuses this target; the broader engine may answer it.
+
+    This is not a keyword fall-through: the compositional engine must carry a
+    passing interventional verification receipt and the hand-counted answer.
+    """
+    from canonical.swe_kernel import python_ast_query_v1 as adapter
+
+    with pytest.raises(adapter.PythonAstQueryError) as refused:
+        adapter.parse_query("How many async functions are in sample.py")
+    assert refused.value.code == "UNSUPPORTED_TARGET"
+
+    result = _solve(workspace, "How many async functions are in sample.py")
+    assert result["pass"] is True, result
+    assert result["status"] == "PASS__TIER0A_SEMANTIC_GENERALIZATION", result
+    assert result["answer"] == 2, result  # amethod, afree
+    assert result["causal_verification"]["all_passed"] is True, result
+    assert result["from_memory"] is False, result
+
+
+def test_unsupported_shape_outside_workspace_is_still_refused(workspace, tmp_path):
+    outside = tmp_path / "outside.py"
+    outside.write_text(SOURCE, encoding="utf-8")
+    result = _solve(workspace, f"How many classes does {outside} contain?")
+    assert result["pass"] is False, result
+    assert result["status"] == "FAIL_CLOSED__PYTHON_AST_PATH_OUTSIDE_ROOT", result
 
 
 def test_multiple_targets_are_not_collapsed_into_the_first_keyword(workspace):
@@ -248,3 +275,40 @@ def factory():
     functions = [row["qualname"] for row in rows if row["kind"] == "functions"]
     assert methods == ["factory.Local.method"], methods
     assert functions == ["factory", "factory.Local.method", "factory.Local.method.helper"], functions
+
+
+def test_broader_readonly_engine_is_confined_to_caller_workspace(tmp_path):
+    from canonical.swe_kernel.semantic_generalization_engine_v1 import GeneralizationEngine
+
+    root = tmp_path / "ws"
+    root.mkdir()
+    (root / "sample.py").write_text(SOURCE, encoding="utf-8")
+    outside = tmp_path / "outside.py"
+    outside.write_text("def outsider():\n    pass\n", encoding="utf-8")
+    (root / "link.py").symlink_to(outside)
+    engine = GeneralizationEngine(
+        experiences_path=tmp_path / "exp.json",
+        embeddings_path=tmp_path / "emb.json",
+        policy_path=tmp_path / "policy.json",
+    )
+
+    inside = engine.solve_task(
+        "Count functions in sample.py", work_cwd=root,
+        persist_policy=False, store_experience=False,
+    )
+    assert inside["pass"] is True, inside
+    assert inside["answer"] == FUNCTIONS, inside
+
+    absolute = engine.solve_task(
+        f"Count functions in {outside}", work_cwd=root,
+        persist_policy=False, store_experience=False,
+    )
+    assert absolute["pass"] is False, absolute
+    assert absolute["status"] == "FAIL_CLOSED__TARGET_OUTSIDE_ROOT", absolute
+
+    symlink = engine.solve_task(
+        "Count functions in link.py", work_cwd=root,
+        persist_policy=False, store_experience=False,
+    )
+    assert symlink["pass"] is False, symlink
+    assert symlink["status"] == "FAIL_CLOSED__TARGET_OUTSIDE_ROOT", symlink

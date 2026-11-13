@@ -143,6 +143,31 @@ def parse_query(goal: str) -> PythonAstQuery | None:
     raise PythonAstQueryError("UNSUPPORTED_QUERY_SHAPE", prose)
 
 
+def check_source_confinement(goal: str, *, root: pathlib.Path | str) -> None:
+    """Refuse an outside-root source even when the query grammar is unsupported.
+
+    The bounded adapter may fall through to a broader read-only engine, but a
+    recognized read-only request must not use that fall-through to escape the
+    caller's workspace.  Effectful requests are not this lane's concern.
+    """
+    text = " ".join(str(goal or "").strip().split())
+    if text.endswith("."):
+        text = text[:-1].rstrip()
+    paths = _PATH_RE.findall(text)
+    if not paths:
+        return
+    workspace = pathlib.Path(root).resolve()
+    for path_text in paths:
+        raw = pathlib.Path(path_text.strip("`'\""))
+        candidate = raw if raw.is_absolute() else workspace / raw
+        try:
+            resolved = candidate.resolve()
+        except (OSError, RuntimeError) as exc:
+            raise PythonAstQueryError("PATH_RESOLUTION_FAILED", str(exc)) from exc
+        if not resolved.is_relative_to(workspace):
+            raise PythonAstQueryError("PATH_OUTSIDE_ROOT", str(resolved))
+
+
 def _collect(tree: ast.AST) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
 
