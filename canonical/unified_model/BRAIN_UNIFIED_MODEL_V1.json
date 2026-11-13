@@ -26915,7 +26915,7 @@
     "source_executable": null,
     "source_module": null,
     "source_path": "canonical/runtime/bound_capabilities/python_software_request_semantic_acceptance_v1.py",
-    "source_sha256": "4054efa46e5e749f3aaa742e5d4d787bc16e539755d7ea2aa38d447a8fa3d9dc",
+    "source_sha256": "9f42752485fc47b59761dbff17c003099380fd1d1f1029248f6eda56b5b69cb3",
     "source_type": "python_stdlib"
    },
    "provides": [
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "926af20a14e34f34e566d61cd3748c5d84a4f6dbe087766832f39d116ba01069"
+  "value": "c25c92c7f8a5785d8c936ecabaa214fe5979460d9054eeda0a295b8ba104d8f5"
  },
  "engines": [
   {
@@ -32239,7 +32239,7 @@
     "defaulted_keys": {},
     "dispatch_ops": [],
     "dispatch_phrases": [],
-    "sha256": "4054efa46e5e749f3aaa742e5d4d787bc16e539755d7ea2aa38d447a8fa3d9dc"
+    "sha256": "9f42752485fc47b59761dbff17c003099380fd1d1f1029248f6eda56b5b69cb3"
    },
    "canonical/runtime/bound_capabilities/python_source_add_parameter.py": {
     "defaulted_keys": {
@@ -78546,7 +78546,7 @@
   "included_source_count": 1234,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c8670eb320188b430b138f60cb20957c6840fc5a7993e2ec3f63b02118801851"
+  "source_tree_digest": "d3a2e6bb65335dd1200bf7f3cdd2da62d04547581bf22e01f75b0bb0faa7e59b"
  },
  "research_index": [
   {

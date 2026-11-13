@@ -839,7 +839,7 @@ def _structural_surface_safe(goal: str) -> bool:
     return True
 
 
-def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] | None:
+def bind_goal_parameters(skill: Mapping[str, Any], goal: str, *, allow_structural: bool = True) -> dict[str, str] | None:
     bindings = _bind_goal_regex(str(skill.get("goal_regex") or ""), goal)
     if bindings is not None:
         # If named key=value slots exist, a reordered `env=prod and service=auth`
@@ -862,7 +862,7 @@ def bind_goal_parameters(skill: Mapping[str, Any], goal: str) -> dict[str, str] 
                 return bindings
     # Structural/synonym fallback from main. It is a candidate binder, not an
     # authority grant; execution still passes preconditions and postconditions.
-    if not _structural_surface_safe(goal):
+    if not allow_structural or not _structural_surface_safe(goal):
         return None
     return _bind_structural_goal_parameters(skill, goal)
 
@@ -2252,13 +2252,16 @@ def recall_and_execute_workflow(
     expanded_goal_words = _expand_workflow_synonyms(goal_words)
     for skill in _candidate_skills_for_words(goal_words, db_path):
 
-        bindings = bind_goal_parameters(skill, goal)
-        if bindings is None:
-            continue
         has_py = any(
             isinstance(s, Mapping) and s.get("layer") == "confined_python_exec"
             for s in (skill.get("abstract_steps") or [])
         )
+        # Structural word overlap does not establish the intent or argument roles of
+        # an arbitrary executable program. Exact templates and verified variants
+        # remain available; loose matching stays available to non-Python workflows.
+        bindings = bind_goal_parameters(skill, goal, allow_structural=not has_py)
+        if bindings is None:
+            continue
         if has_py and any(any(ch in str(v) for ch in ("'", '"', "\n", "\r", "\\")) for v in bindings.values()):
             continue
         inst_steps = _instantiate_obj(skill["abstract_steps"], bindings)

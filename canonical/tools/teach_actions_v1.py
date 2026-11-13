@@ -525,15 +525,31 @@ def carried_along(text: str) -> str:
     Knowledge two programs share may live in one sibling file -- but at teaching time that sibling's
     source is folded in, bound under the same name, and the program is self-contained again.
     """
-    pattern = re.compile(r"^from \. import (\w+) as (\w+)[ \t]*\n", re.M)
-    for module_name, bound_name in pattern.findall(text):
+    # Some programs also support direct exec from the repository by falling back to an
+    # absolute import. Neither form works in the isolated sandbox; carry the sibling
+    # for the whole try/except, not just its relative-import line.
+    patterns = (
+        re.compile(r"^try:\n    from \. import (\w+) as (\w+)\n"
+                   r"except ImportError:[^\n]*\n"
+                   r"    from canonical\.swe_kernel\.taught_actions import \1 as \2\n", re.M),
+        re.compile(r"^from \. import (\w+) as (\w+)[ \t]*\n", re.M),
+    )
+
+    def carry(found: re.Match) -> str:
+        module_name, bound_name = found.group(1, 2)
         source = (PROGRAMS / (module_name + ".py")).read_text(encoding="utf-8")
-        carried = ("# ---- %s, carried along so the program travels alone ----\n"
-                   "import types as _carrier\n"
-                   "%s = _carrier.SimpleNamespace()\n"
-                   "exec(compile(%r, %r, 'exec'), %s.__dict__)\n"
-                   % (module_name, bound_name, source, module_name + ".py", bound_name))
-        text = pattern.sub(lambda found: carried, text, count=1)
+        return ("# ---- %s, carried along so the program travels alone ----\n"
+                "import types as _carrier\n"
+                "%s = _carrier.SimpleNamespace()\n"
+                "exec(compile(%r, %r, 'exec'), %s.__dict__)\n"
+                % (module_name, bound_name, source, module_name + ".py", bound_name))
+
+    for pattern in patterns:
+        text = pattern.sub(carry, text)
+    if any(isinstance(node, ast.ImportFrom) and
+           (node.level or (node.module or "").startswith("canonical.swe_kernel.taught_actions"))
+           for node in ast.walk(ast.parse(text))):
+        raise LessonError("a taught program contains an unsupported sibling import")
     return text
 
 

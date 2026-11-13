@@ -41,7 +41,8 @@ part the change merely copied, when it starts from a variable, may be any other 
 places only that reading fits, together with the uses nobody showed.  A try is kept only when two runs
 agree: no test of the check that passed on the file as it is fails with the place changed, and a test
 that passes with it fails when that place is made to fail.  A check that passes either way says nothing
-about that place, and the place stays as it was.  What a check settled is added to the lesson as a new
+about that place, and the place stays as it was.  A load failure, timeout, or a test that stops running
+or becomes skipped is not evidence that a test observed the change.  What a check settled is added as a new
 example -- a kept place widens the lesson, a failing one speaks against the wider reading -- and the
 places the check could not settle are written in the example as ``not settled``, so they count neither
 as changed nor as left alone the next time.  The check itself decides nothing else: a file that fails
@@ -2321,10 +2322,12 @@ def remember(lesson, before, after):
 
 # ----------------------------------------------------------------------------- what a check settles
 
-MOST_TRIED = 8                   # places tried in one file; any further ones are left as they are
+MOST_TRIED = 8                   # places tried together; further batches share the same time budget
 CHECK_SECONDS = 20               # the longest one run of the check may take
 ALL_CHECKS_SECONDS = 90          # the longest all runs of one request may take
 CHECK_SAID = "TESTS OF THE CHECK THAT FAILED: "
+# Neither a timeout nor a failure to load the check identifies a test that ran.
+CHECK_INCOMPLETE = frozenset({"coming to an end", "reading the check itself", "tests did not run"})
 
 # Runs a check file in a fresh interpreter and prints, last, the tests of it that failed.
 #
@@ -2367,10 +2370,22 @@ def run(name, package):
         return module, True
     return module, False
 
-def ended(failed):
+def ended(failed, ran=()):
     sys.stderr.flush()
-    print("\n" + %r + json.dumps(None if failed is None else sorted(failed)), flush=True)
+    result = None if failed is None else {"failed": sorted(failed), "ran": sorted(ran)}
+    print("\n" + %r + json.dumps(result), flush=True)
     os._exit(0)
+
+class TrackingResult(unittest.TextTestResult):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.ran = set()
+    def startTest(self, test):
+        self.ran.add(str(test))
+        super().startTest(test)
+    def addSkip(self, test, reason):
+        self.ran.discard(str(test))
+        super().addSkip(test, reason)
 
 module, broke = run(".".join(parts), ".".join(parts[:-1]))
 if broke:
@@ -2384,11 +2399,11 @@ for label, value in list(vars(module).items()):
             for given in inspect.signature(value).parameters.values()):
         tests.addTest(unittest.FunctionTestCase(value))
 if tests.countTestCases():
-    outcome = unittest.TextTestRunner(stream=sys.stderr, verbosity=0).run(tests)
-    ended([str(test) for test, _ in outcome.failures + outcome.errors] + [str(test) for test in outcome.unexpectedSuccesses])
+    outcome = unittest.TextTestRunner(stream=sys.stderr, verbosity=0, resultclass=TrackingResult).run(tests)
+    ended([str(test) for test, _ in outcome.failures + outcome.errors] + [str(test) for test in outcome.unexpectedSuccesses], outcome.ran)
 if any(isinstance(part, ast.If) and "__name__" in ast.dump(part.test) and "__main__" in ast.dump(part.test)
        for part in ast.parse(source).body):
-    ended(["the script"] if run("__main__", None)[1] else [])
+    ended(["the script"] if run("__main__", None)[1] else [], ["the script"])
 ended(None)
 """ % CHECK_SAID
 
@@ -2398,6 +2413,7 @@ class Check:
 
     def __init__(self, path, edited):
         self.path, self.edited, self.slowest, self.said = path, edited, 0.0, ""
+        self.baseline_tests = None
         self.until = time.monotonic() + ALL_CHECKS_SECONDS
 
     def time_left(self):
@@ -2406,7 +2422,8 @@ class Check:
     def failing(self, text=None):
         """Run the check; with `text`, as if the file to edit held that text.  Returns the tests that failed.
 
-        A run that does not come to an end counts as one failed test.  `self.said` keeps what a failing run said.
+        Incomplete runs use reserved markers, not test evidence. Every test that ran in the baseline
+        must still run without being skipped. `self.said` keeps what a failing run said.
         """
         started = time.monotonic()
         try:
@@ -2419,16 +2436,26 @@ class Check:
         self.slowest = max(self.slowest, time.monotonic() - started)
         lines = [line.strip() for line in (ran.stderr + b"\n" + ran.stdout).decode("utf-8", "replace").splitlines()
                  if line.strip()]
-        failed = ["coming to an end"]
+        result = {"failed": ["coming to an end"], "ran": []}
         if lines and lines[-1].startswith(CHECK_SAID):
-            failed = json.loads(lines.pop()[len(CHECK_SAID):])
-        if failed is None:
+            result = json.loads(lines.pop()[len(CHECK_SAID):])
+        if result is None:
             raise Refused("%s holds nothing that can be run here: no unittest class, no test function without "
                           "arguments, and it is not a script; nothing was changed" % self.path)
+        failed, ran_tests = frozenset(result["failed"]), frozenset(result["ran"])
         if failed:
             telling = [line for line in lines if re.match(r"[A-Za-z_][\w.]*(Error|Exception|Exit|Fails)\b", line)]
             self.said = (telling or lines or ["it ended with status %d" % ran.returncode])[-1][:90]
-        return frozenset(failed)
+        if failed & CHECK_INCOMPLETE:
+            return failed
+        if self.baseline_tests is None:
+            if not ran_tests:
+                raise Refused("%s ran no tests; nothing was changed" % self.path)
+            self.baseline_tests = ran_tests
+        elif not self.baseline_tests <= ran_tests:
+            self.said = "a test that ran before did not run or was skipped"
+            return failed | frozenset({"tests did not run"})
+        return failed
 
 
 def repeat_tried(path, lesson, check_path):
@@ -2462,47 +2489,82 @@ def repeat_tried(path, lesson, check_path):
             return None
 
     written(text, shown)                 # what the lesson shows must be writable by itself, or the refusal says why
-    trying, unsettled, against, kept = [], [], [], []
-    for place in tries:
-        if (len(trying) < MOST_TRIED and with_places(trying + [place]) is not None
-                and with_places(trying + [place], place) is not None):
-            trying.append(place)
-        else:
-            unsettled.append(place)
-    if not shown and not trying:
+    if not shown and not tries:
         raise Refused("nothing in the file has the form the lesson changed (%s), also not when what the change "
                       "copied may be other code" % "; ".join(str(rule) for rule in rules))
     lines = lambda places: ", ".join(str(place[1].lineno) for place in sorted(places, key=lambda place: place[0]))
     check = Check(check_path, path)
     before = check.failing()
     if "coming to an end" in before:
-        raise Refused("%s does not come to an end on %s as it is (%s); nothing was changed" % (check_path, path, check.said))
+        raise Refused("%s does not come to an end on %s as it is (%s); nothing was changed" %
+                      (check_path, path, check.said))
+    if "reading the check itself" in before:
+        raise Refused("%s could not load on %s as it is (%s); nothing was changed" %
+                      (check_path, path, check.said))
 
     def broken_by(places):
-        """The tests that passed on the file as it is and fail with these places changed; None when unknown."""
+        """New failures against the baseline, or None when the check did not complete."""
         edited = with_places(places)
-        return None if edited is None or not check.time_left() else check.failing(edited) - before
+        if edited is None or not check.time_left():
+            return None
+        failed = check.failing(edited)
+        return None if failed & CHECK_INCOMPLETE else failed - before
 
-    broken = broken_by(trying)
-    for place in list(trying) if broken else []:
-        rest = [other for other in trying if other is not place]
-        less = broken_by(rest)
-        if less is not None and less < broken:
-            trying, broken, said_against = rest, less, check.said
-            against.append(place)
-            if not broken:
-                break
-    if broken is None or broken:         # what the tries break cannot be laid at single places: none of them is kept
-        unsettled, trying = unsettled + trying, []
-        if shown and (broken_by([]) or check.failing(with_places([])) - before):
-            raise Refused("%s fails after the change the lesson shows at line %s (%s) and not before; nothing was "
-                          "changed" % (check_path, lines(shown), check.said))
-    fails_now = check.failing(with_places(trying)) if trying else frozenset()
-    for place in trying:
-        if check.time_left() and check.failing(with_places(trying, place)) - fails_now:
-            kept.append(place)
+    # Each batch is limited, but untested early sites must not hide later testable ones.  The
+    # original source and one baseline are used throughout.  Previously kept sites participate
+    # in every subsequent check, and the shared deadline still bounds the whole operation.
+    unsettled, against, kept = [], [], []
+    said_against = ""
+    cursor = 0
+    while cursor < len(tries) and check.time_left():
+        trying = []
+        while cursor < len(tries) and len(trying) < MOST_TRIED:
+            place = tries[cursor]
+            cursor += 1
+            group = kept + trying + [place]
+            if with_places(group) is not None and with_places(group, place) is not None:
+                trying.append(place)
+            else:
+                unsettled.append(place)
+        if not trying:
+            continue
+        broken = broken_by(kept + trying)
+        for place in list(trying) if broken else []:
+            rest = [other for other in trying if other is not place]
+            less = broken_by(kept + rest)
+            if less is not None and less < broken:
+                trying, broken, said_against = rest, less, check.said
+                against.append(place)
+                if not broken:
+                    break
+        if broken is None or broken:
+            unsettled.extend(trying)
+            continue
+        if not check.time_left():
+            unsettled.extend(trying)
+            break
+        fails_now = check.failing(with_places(kept + trying))
+        if fails_now & CHECK_INCOMPLETE:
+            unsettled.extend(trying)
+            continue
+        newly_kept = []
+        for place in trying:
+            if not check.time_left():
+                unsettled.append(place)
+                continue
+            fails_mutated = check.failing(with_places(kept + trying, place))
+            # Neither a timeout nor a load failure is a test that observed the mutation.
+            if not fails_mutated & CHECK_INCOMPLETE and fails_mutated - fails_now:
+                newly_kept.append(place)
+            else:
+                unsettled.append(place)
+        # A subset can behave differently from the full batch.  Do not carry it forward unless
+        # that exact subset also preserves all tests that passed before the edit.
+        if newly_kept and broken_by(kept + newly_kept) == frozenset():
+            kept.extend(newly_kept)
         else:
-            unsettled.append(place)
+            unsettled.extend(newly_kept)
+    unsettled.extend(tries[cursor:])
     if not shown and not kept:
         raise Refused("nothing was changed: %s" % (
             "%s fails with line %s changed (%s)" % (check_path, lines(against), said_against) if against
@@ -2511,10 +2573,15 @@ def repeat_tried(path, lesson, check_path):
     final = with_places(kept)
     if final is None:
         raise Refused("the places the check settled cannot be written together; nothing was changed")
-    target.write_bytes(final.encode("utf-8"))
-    if check.failing() - before:
+    try:
+        target.write_bytes(final.encode("utf-8"))
+        if check.failing() - before:
+            raise Refused("%s fails on the edited file (%s) and not before; nothing was changed" % (check_path, check.said))
+    except BaseException:
+        # A failed check can itself raise (for example if the edit removes all discoverable
+        # tests).  Never report a refusal while leaving the tentative edit on disk.
         target.write_bytes(source.encode("utf-8"))
-        raise Refused("%s fails on the edited file (%s) and not before; nothing was changed" % (check_path, check.said))
+        raise
     if kept or against:
         told = ["a try on %s that %s settled" % (path, check_path)]
         told += ["kept line %s: a test that passes with it fails when that code fails" % lines(kept)] if kept else []

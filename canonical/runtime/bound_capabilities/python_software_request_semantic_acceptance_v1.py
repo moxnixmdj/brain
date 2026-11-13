@@ -402,7 +402,13 @@ def run(args:dict[str,Any],root:str|pathlib.Path)->dict[str,Any]:
             "acceptance_program_sha256":_sha(program.encode("utf-8")),
         }
     output.parent.mkdir(parents=True,exist_ok=True)
-    output.write_text(json.dumps(result,indent=2,sort_keys=True)+"\n",encoding="utf-8")
+    try:
+        # A guessed output path must not truncate an existing source or report.
+        # Exclusive creation also closes the check-then-write race at the leaf.
+        with output.open("x", encoding="utf-8") as stream:
+            stream.write(json.dumps(result,indent=2,sort_keys=True)+"\n")
+    except FileExistsError as exc:
+        raise SemanticAcceptanceError("OUTPUT_PATH_ALREADY_EXISTS") from exc
     raw=output.read_bytes()
     return {
         **result,
