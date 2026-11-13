@@ -182,6 +182,13 @@ def test_the_requirement_is_decided_by_the_tree_not_by_the_directory_name():
     An earlier version of this test asserted that `canonical/verification` held no
     test files. It holds two, and the test failed for being wrong about the tree
     rather than for finding a defect -- which is the correct way for it to fail.
+
+    Until 2026-11-13 this test's own assertion contradicted the paragraph above: it
+    pinned `notatest.py` as CREDITED, with a comment naming the fix and declining to
+    ship it. The sensor now decides the corpus by the `test_` filename prefix, so the
+    assertion and the docstring agree, and the sibling check that compares the sensor
+    to genuine `test_*.py` counts passes on the real tree for the first time since two
+    `*tests*`-named tools landed in `canonical/tools`.
     """
     import tempfile
 
@@ -193,18 +200,28 @@ def test_the_requirement_is_decided_by_the_tree_not_by_the_directory_name():
     assert rt.get("how") in ("tree_scan", "goal_path"), rt
     assert rt.get("true") is True, rt
 
-    # A directory with no test module whose only .py file merely CONTAINS the
-    # substring "test" is credited today. `_matches_kind` is a substring test, so
-    # `notatest.py` satisfies it. This is pinned as CURRENT behaviour, not as correct
-    # behaviour: the round's headline depends on this fact separating real successes
-    # from real failures, and it does so on this tree, but it can be true for the
-    # wrong reason. The fix (require the stem to start with `test_`) is a narrowing
-    # of a sensor every binding decision reads, so it is named, not shipped blind.
+    # A directory whose only .py file merely CONTAINS the substring "test" was credited until
+    # 2026-11-13, because `_matches_kind` tested the substring against the whole relative path. The
+    # comment that used to be here pinned that as CURRENT behaviour, not as correct behaviour, and
+    # named the fix -- "require the stem to start with `test_`" -- without shipping it, because it
+    # narrows a sensor every binding decision reads. It is shipped now, and the reason is measured
+    # rather than aesthetic: 2662 files on this tree matched the substring and 2608 are genuine
+    # `test_*.py` modules, so 54 announced a test corpus that is not one -- among them
+    # `canonical/runtime/attested_state_v1.py` ("at-TEST-ed"), `python_test_audit.py` (a capability
+    # ABOUT tests), and every `.py` under `canonical/tests/fixtures/`, whose PATH contains "tests"
+    # and whose contents are defective fixtures, not tests. The consequence was not cosmetic:
+    # `canonical/tools`, holding zero genuine test modules, sensed as IDENTICAL to
+    # `canonical/tests`, which is the equal-facts wall `applicability_v1.vocabulary_gap` exists to
+    # witness, and it left `test_the_real_tree_separation_is_backed_by_real_test_files` red.
+    # Both directions are pinned, because a narrowing that credited nothing would pass the first.
     with tempfile.TemporaryDirectory(prefix="no_tests_here_") as empty:
         Path(empty, "notatest.py").write_text("x = 1\n")
         none = wp.probe_effect("python.test.corpus.available", "", (), root=empty)
-        assert none.get("true") is True, none          # current, substring-matched
-        assert none.get("evidence") == "notatest.py", none
+        assert none.get("true") is False, none         # "test" inside a name is not a test
+        Path(empty, "test_genuine.py").write_text("x = 1\n")
+        some = wp.probe_effect("python.test.corpus.available", "", (), root=empty)
+        assert some.get("true") is True, some          # and a genuine module is still credited
+        assert some.get("evidence") == "test_genuine.py", some
 
 
 def test_the_real_tree_separation_is_backed_by_real_test_files():
