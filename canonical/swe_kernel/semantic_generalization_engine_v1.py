@@ -2061,6 +2061,28 @@ class GeneralizationEngine:
                 elapsed_ms=elapsed(),
             )
 
+        # --- honesty gate 4b: caller-workspace confinement ---
+        # A read-only answer engine must not become a parent-directory scanner.
+        # Resolve every target before existence checks or reads; symlink escapes
+        # are refused just like absolute paths outside the caller root.
+        for target in task.targets:
+            raw = Path(target)
+            candidate = raw if raw.is_absolute() else root / raw
+            try:
+                resolved = candidate.resolve()
+            except (OSError, RuntimeError) as exc:
+                return _fail_closed(
+                    "FAIL_CLOSED__TARGET_RESOLUTION_FAILED", goal, task=task, policy=policy_prediction,
+                    detail=f"{type(exc).__name__}: {exc}", elapsed_ms=elapsed(),
+                    extra={"target": target},
+                )
+            if not resolved.is_relative_to(root):
+                return _fail_closed(
+                    "FAIL_CLOSED__TARGET_OUTSIDE_ROOT", goal, task=task, policy=policy_prediction,
+                    detail=str(resolved), elapsed_ms=elapsed(),
+                    extra={"target": target, "workspace_root": str(root)},
+                )
+
         # --- honesty gate 5: domain ---
         if task.domain in ("unknown", "mixed"):
             return _fail_closed(
