@@ -51,7 +51,7 @@
  "explicit_user_authorization": "Owner instruction this session, verbatim: 'Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?', 'you must think from first principles', 'kill all the bad and dumb ideas before you waste time implementing them', 'maximize your web use', and 'always after you make any of your work, push and merge your work always'. This PR answers the question with measurements and repairs the instrument that was too broken to measure with.",
  "falsification_condition": "Re-run the finder on the six pinned base SHAs and get fewer than 18 of 54 non-test files with a reachable check; or find a name-convention or graph kind it still misses on those repos; or find a mutant in the recorded set that the corresponding suite catches and this record says it did not.",
  "governance_change": false,
- "highest_leverage_now": "The finder is now honest about its own blind spots, which the previous instrument was not.",
+ "highest_leverage_now": true,
  "incremental_spend_usd": 0,
  "load_bearing_primary": {
   "canonical_base_commit": "ee9685ddf9436842a9d4326209bc36c1c3f40a5b",
@@ -135,5 +135,6 @@
    "proposal_id": "FUEL_GAUGE_BEFORE_WEIGHT_SPACE_ENGINE"
   }
  },
- "weakens_existing_guard": false
+ "weakens_existing_guard": false,
+ "highest_leverage_reason": "Every downstream claim about one-shot learning rests on being able to tell whether a change is wrong. The previous instrument could not, and reported that it could not when the real cause was that it was not looking. Fixing the instrument is the precondition for any measurement of claim D."
 }
