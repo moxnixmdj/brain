@@ -113,7 +113,9 @@ class Victim:
     per point with the ORIGINAL source, before execution; both arms use those expectations.
     It is the caller's specification, not the program's opinion of itself, and this module
     cannot repair a wrong one. Inputs, oracle and programs must be trusted: the executor runs
-    in-process, without isolation or a timeout.
+    in-process, without isolation or a timeout. Probe points must be JSON-serializable and
+    distinct so the evidence can be audited and repeated observations cannot inflate coverage.
+    One-shot probe iterables are materialized once before either execution.
     """
 
     victim_id: str
@@ -128,6 +130,50 @@ def _sha(text: str) -> str:
 
 def _norm(text: str) -> str:
     return "\n".join(line.rstrip() for line in text.strip().splitlines())
+
+
+def _point_key(point: Any) -> str:
+    """Stable audit identity for one input, not its Python object identity."""
+    return json.dumps(point, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=False, allow_nan=False)
+
+
+def _prepare_victims(victims: Sequence[Victim]) -> tuple[list[Victim], str | None]:
+    """Validate and snapshot evidence inputs before any program or oracle runs.
+
+    Snapshot once, and refuse duplicate/unreadable evidence instead of letting
+    exhausted iterables or relabeled observations become safety evidence.
+    """
+    prepared: list[Victim] = []
+    ids: set[str] = set()
+    evidence: set[tuple[str, int, tuple[str, ...]]] = set()
+    for victim in victims:
+        if not isinstance(victim, Victim):
+            return [], "VICTIM_IS_NOT_A_VICTIM_RECORD"
+        if not isinstance(victim.victim_id, str) or not victim.victim_id.strip():
+            return [], "INVALID_VICTIM_ID"
+        if not isinstance(victim.source, str):
+            return [], f"UNREADABLE_VICTIM_SOURCE:{victim.victim_id}"
+        if victim.victim_id in ids:
+            return [], f"DUPLICATE_VICTIM_ID:{victim.victim_id}"
+        if not callable(victim.oracle):
+            return [], f"VICTIM_HAS_NO_ORACLE:{victim.victim_id}"
+        try:
+            points = tuple(victim.probes)
+            keys = tuple(_point_key(p) for p in points)
+        except Exception:
+            return [], f"UNREADABLE_PROBE_POINTS:{victim.victim_id}"
+        if len(set(keys)) != len(keys):
+            return [], f"DUPLICATE_PROBE_POINT:{victim.victim_id}"
+        # The same source under a DIFFERENT spec is a different observation.
+        # The same source/spec/points under a new label or role is not new evidence.
+        key = (_norm(victim.source), id(victim.oracle), tuple(sorted(keys)))
+        if key in evidence:
+            return [], f"DUPLICATE_EVIDENCE:{victim.victim_id}"
+        ids.add(victim.victim_id)
+        evidence.add(key)
+        prepared.append(dataclasses.replace(victim, probes=points))
+    return prepared, None
 
 
 def _run(source: str, point: Any) -> tuple[bool, Any, str | None]:
@@ -170,6 +216,8 @@ def _evaluate_victim(
         "role": role,
         "source_sha256": _sha(victim.source),
         "probe_count": len(probes),
+        "baseline_probes_executed": 0,
+        "candidate_probes_executed": 0,
         "family": UNCLASSIFIED,
     }
     if not row["probe_count"]:
@@ -185,6 +233,7 @@ def _evaluate_victim(
     except Exception as exc:
         return {**row, "outcome": ORACLE_ERROR, "reason": f"{type(exc).__name__}:{exc}"}
     baseline = _check(victim.source, probes, expected_values)
+    row["baseline_probes_executed"] = len(baseline["points"])
     if baseline.get("execution_errors"):
         return {**row, "outcome": BASELINE_EXECUTION_ERROR,
                 "reason": "VICTIM_DOES_NOT_RUN_BEFORE_THE_LESSON",
@@ -201,6 +250,7 @@ def _evaluate_victim(
     row["edited_sha256"] = _sha(edited)
 
     after = _check(edited, probes, expected_values)
+    row["candidate_probes_executed"] = len(after["points"])
     row["after_disagreements"] = after["disagreements"]
     row["after_execution_errors"] = after.get("execution_errors", 0)
     row["points"] = after["points"]
@@ -250,14 +300,12 @@ def evaluate(
     if not offered and not archived:
         return {"schema": SCHEMA, "verdict": REFUSED, "reason": "NO_VICTIMS_OFFERED",
                 "rows": [], "authority": "NONE", "whole_task_correctness_proved": False}
-    for victim in [*offered, *archived]:
-        if not isinstance(victim, Victim):
-            return {"schema": SCHEMA, "verdict": REFUSED, "reason": "VICTIM_IS_NOT_A_VICTIM_RECORD",
-                    "rows": [], "authority": "NONE", "whole_task_correctness_proved": False}
-        if not callable(victim.oracle):
-            return {"schema": SCHEMA, "verdict": REFUSED,
-                    "reason": f"VICTIM_HAS_NO_ORACLE:{victim.victim_id}",
-                    "rows": [], "authority": "NONE", "whole_task_correctness_proved": False}
+    prepared, error = _prepare_victims([*offered, *archived])
+    if error is not None:
+        return {"schema": SCHEMA, "verdict": REFUSED, "reason": error,
+                "rows": [], "authority": "NONE", "whole_task_correctness_proved": False}
+    offered = prepared[:len(offered)]
+    archived = prepared[len(offered):]
 
     rows = [_evaluate_victim(v, rule, before_snippet=before_snippet, after_snippet=after_snippet,
                              role=HELD_OUT) for v in offered]
@@ -283,9 +331,11 @@ def evaluate(
         "archive_preserved": sum(1 for r in old if r["outcome"] == PRESERVED),
         "archive_broken": sum(1 for r in old if r["outcome"] == BROKEN),
         "archive_regressed": sum(1 for r in old if r["outcome"] == REGRESSED),
-        "programs_executed": sum(int(r.get("probe_count") or 0) * 2 for r in rows
-                                 if r["outcome"] not in _MALFORMED_OUTCOMES
-                                 and r["outcome"] not in {NOT_HELD_OUT, NOT_APPLICABLE}),
+        # Program evaluations at probe points, including a baseline that ran
+        # before the rule failed to match. Not a count of distinct programs.
+        "programs_executed": sum(int(r.get("baseline_probes_executed") or 0)
+                                 + int(r.get("candidate_probes_executed") or 0)
+                                 for r in rows),
     }
     report: dict[str, Any] = {
         "schema": SCHEMA,
@@ -330,6 +380,8 @@ def record_for_store(report: Mapping[str, Any]) -> dict[str, Any]:
         "victims": [{"victim_id": r["victim_id"], "role": r["role"], "family": r["family"],
                      "outcome": r["outcome"], "source_sha256": r["source_sha256"],
                      "probe_count": r.get("probe_count", 0),
+                     "baseline_probes_executed": r.get("baseline_probes_executed", 0),
+                     "candidate_probes_executed": r.get("candidate_probes_executed", 0),
                      "regressed_probe_count": r.get("regressed_probe_count", 0)}
                     for r in report.get("rows") or []],
         "whole_task_correctness_proved": False,

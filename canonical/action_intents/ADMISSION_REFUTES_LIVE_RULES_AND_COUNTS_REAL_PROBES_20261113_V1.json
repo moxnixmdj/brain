@@ -1,0 +1,410 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "action_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
+ "action_intent_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "route_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
+ "date": "2026-11-13",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "388c5c7d9b4d1407ac842d785201c1fb6fb6b473",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "incremental_spend_usd": 0,
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "benchmark_or_family_rank_authority": false,
+ "highest_leverage_now": true,
+ "action_summary": "Reuses the shipped lesson admission gate and SQLite skill store. A rejected reteach with executed BROKEN or REGRESSED evidence now invalidates the matching live rule, preserves prior admission history, and appends an admission refutation atomically. Evidence inputs are validated, snapshotted and deduplicated across held-out/archive roles; execution counts are recorded from actual baseline/candidate runs. Keeps concurrent main PR #6861 source-sensitive-oracle and pointwise-regression fixes. Adds no capability, flips no family, moves no benchmark, and claims no sentience.",
+ "selected_route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
+ "causal_blocker": "A_REJECTED_RETEACH_LEFT_THE_PREVIOUSLY_ADMITTED_OR_UNGATED_RULE_ACTIVE__AND_PROBE_EVIDENCE_COULD_BE_DUPLICATED_REORDERED_OR_COUNTED_WITHOUT_EXECUTION",
+ "expected_parent_change": "canonical/swe_kernel/lesson_admission_gate_v1.py validates/snapshots/deduplicates evidence and records executed probe counts; canonical/swe_kernel/verified_skill_crystallizer_v1.py revokes refuted live rules and stores refutations atomically; canonical/tests/test_admission_refutation_and_evidence_v1.py adds 34 tests; the root report records the answer, measurements and limits.",
+ "expected_parent_frontier_change": "EXECUTED_ADMISSION_DAMAGE_NOW_REVOKES_THE_MATCHING_LIVE_RULE_INCLUDING_SCOPED_AND_LEGACY_UNGATED_ROWS__REFUTATIONS_SURVIVE_REOPEN_AND_BUNDLE_TRANSPORT__DUPLICATE_OR_UNEXECUTED_EVIDENCE_IS_REFUSED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_REJECTED_RETEACH_LEFT_THE_PREVIOUSLY_ADMITTED_OR_UNGATED_RULE_ACTIVE__AND_PROBE_EVIDENCE_COULD_BE_DUPLICATED_REORDERED_OR_COUNTED_WITHOUT_EXECUTION",
+ "falsification_condition": "FALSIFIED if a rejected reteach with executed damage leaves the matching rule ACTIVE, if REFINE/REFUSED/no-damage revokes a rule, if duplicate/reordered/unreadable evidence is admitted, if counts include unexecuted probes, if scoped identity or bundle/reopen persistence fails, or if any focused regression fails.",
+ "stop_condition": "34_NEW_REGRESSION_TESTS_PASS__302_FOCUSED_TESTS_PASS__11_BROAD_FAILURES_REPRODUCE_AT_BASE__7_QUIXBUGS_RACE_ERRORS_PASS_ISOLATED__UNIFIED_MODEL_33_OF_33__ORIENTATION_AND_DRIFT_AND_LOAD_BEARING_AND_INTEGRITY_GUARDS_PASS__REFEREE_GREEN_BEFORE_MERGE__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+ "explicit_user_authorization": "PARAPHRASE, NOT A QUOTATION. The owner asked whether instant learning and arbitrary-environment computer use are already perfectly solved, demanded a truthful real-vs-false distinction including sentience, asked for the most advanced coding/general computer-use capability through real training/concepts/transfer/reasoning, required first-principles elimination of bad ideas and maximal current web/project search, and standing instruction to push and merge after work. This PR makes one bounded reliability repair and claims no universal mastery or sentience.",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1.md",
+   "canonical/swe_kernel/lesson_admission_gate_v1.py",
+   "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+   "canonical/tests/test_admission_refutation_and_evidence_v1.py",
+   "canonical/action_intents/ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1.json"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "DELETE does not apply because admission and the store are load-bearing; BYPASS would leave the harmful live row reachable; REUSE wins because the gate, invalidation method, scoped identity, bundle transport and test oracle already exist and only the missing wiring/evidence accounting is added.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ]
+ },
+ "measured_effect": "At pre-merge main base 8cb35f6502 the new suite was 32 failed/2 passed before wiring. Final focused set on the merged tree: 302 passed across 16 files, including 34 new tests and the upstream causal-localization suite. Broad 43-file store sweep at 8cb35f6502 immediately before the final census-only merge: 551 passed/11 failed/7 errors; the same 11 failures reproduce with the two runtime files restored to that base, and the 7-error QuixBugs file passes 61/61 alone and in that base rerun. No capability credit.",
+ "load_bearing_primary": {
+  "canonical_base_commit": "388c5c7d9b4d1407ac842d785201c1fb6fb6b473",
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/13",
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": "1",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__REMOVES_A_MEASURED_ADMISSION_REVOCATION_AND_EVIDENCE_ACCOUNTING_DEFECT_AS_A_CONSTRUCTIVE_DEPENDENCY_FOR_RELIABLE_CODING_AND_COMPUTER_USE_LEARNING",
+  "open_obligation_ids_note": "Bound constructively to coding and computer-use obligations because durable learning cannot be trusted while refuted rules stay live; no obligation is claimed discharged.",
+  "stop_condition": "34_NEW_REGRESSION_TESTS_PASS__302_FOCUSED_TESTS_PASS__11_BROAD_FAILURES_REPRODUCE_AT_BASE__7_QUIXBUGS_RACE_ERRORS_PASS_ISOLATED__UNIFIED_MODEL_33_OF_33__ORIENTATION_AND_DRIFT_AND_LOAD_BEARING_AND_INTEGRITY_GUARDS_PASS__REFEREE_GREEN_BEFORE_MERGE__ZERO_CAPABILITY_AND_TERMINAL_CREDIT"
+ },
+ "prior_work_reused": [
+  "canonical/swe_kernel/lesson_admission_gate_v1.py",
+  "canonical/swe_kernel/verified_skill_crystallizer_v1.py invalidate/skill_identity/export_bundle/import_bundle",
+  "canonical/swe_kernel/skill_verification_contract_v1.py ProjectTestOracle",
+  "canonical/tools/lesson_admission_harm_measure_20261113_v1.py",
+  "main PR #6861 source-sensitive-oracle and pointwise-regression repair"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "388c5c7d9b4d1407ac842d785201c1fb6fb6b473",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "real_outcome": "A_COUNTEREXAMPLE_CAN_REVOKE_THE_LIVE_RULE_AND_SAFETY_EVIDENCE_MUST_BE_EXECUTED_AND_DISTINCT",
+  "selected_route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
+  "selected_surviving_route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
+  "selected_surviving_route_class": "REUSE",
+  "deleted_or_bypassed_paths": [
+   "BUILD_A_SECOND_MEMORY_STORE",
+   "TRAIN_BASE_MODEL_WEIGHTS_ON_EVERY_SUCCESS",
+   "COUNT_MORE_ACTION_NAMES_OR_CAUSAL_MODELS",
+   "TREAT_A_NON_FIRING_RULE_AS_SAFETY",
+   "LEAVE_THE_OLD_ACTIVE_COPY_AFTER_EXECUTED_DAMAGE"
+  ],
+  "stop_condition": "34_NEW_REGRESSION_TESTS_PASS__302_FOCUSED_TESTS_PASS__11_BROAD_FAILURES_REPRODUCE_AT_BASE__7_QUIXBUGS_RACE_ERRORS_PASS_ISOLATED__UNIFIED_MODEL_33_OF_33__ORIENTATION_AND_DRIFT_AND_LOAD_BEARING_AND_INTEGRITY_GUARDS_PASS__REFEREE_GREEN_BEFORE_MERGE__ZERO_CAPABILITY_AND_TERMINAL_CREDIT",
+  "expected_parent_level_state_change": "EXECUTED_ADMISSION_DAMAGE_NOW_REVOKES_THE_MATCHING_LIVE_RULE_INCLUDING_SCOPED_AND_LEGACY_UNGATED_ROWS__REFUTATIONS_SURVIVE_REOPEN_AND_BUNDLE_TRANSPORT__DUPLICATE_OR_UNEXECUTED_EVIDENCE_IS_REFUSED__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "why_selected_route_is_fastest_sufficient": "The repo already owns the gate, invalidation, scoped identity, bundle transport and real project-test oracle. The smallest causal repair is to wire executed damage to invalidation and make evidence preparation/accounting honest; no new learner, model, store or benchmark is needed.",
+  "iteration_limit": 4,
+  "routes_considered": [
+   "REUSE",
+   "ADAPT",
+   "COMPOSE",
+   "CONFIGURE",
+   "INTEGRATE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "obs_goal": {
+   "real_outcome": "DURABLE_LEARNING_THAT_CAN_BE_REVOKED_BY_EXECUTED_COUNTEREVIDENCE",
+   "proxy_goals_deleted": [
+    "MORE_STORED_ROWS",
+    "MORE_ACTION_NAMES",
+    "UNIVERSAL_MASTERY_OR_SENTIENCE_CLAIMS"
+   ],
+   "surviving_necessity": "A durable improvement must survive unseen probes, regressions, restart and transport, and must stop being usable when contradicted."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "lesson_admission_gate_v1, verified_skill_crystallizer_v1, skill_verification_contract_v1, rule_generalization_probe_v1, lesson_admission_harm_measure_20261113_v1, weight_update_admission_v1, semantic_generalization_engine_v1",
+   "external_existing_routes_checked": "FGSE, ReScopeBench, Continual-ARC, ENGRAM, AgentCL, SkillsBench, SEAL, OSWorld-V2, SWE-bench Pro; Python sqlite3 transaction docs and pytest/PyPI metadata",
+   "capability_work_deleted": "NO_NEW_LEARNER_NO_NEW_STORE_NO_MODEL_FINE_TUNE_NO_NEW_CAPABILITY_REGISTRATION",
+   "surviving_gap": "AUTONOMOUS_CALLERS_STILL_NEED_REAL_VICTIM_CORPORA__TRANSFER_MUST_BE_MEASURED_PAIRED__WEIGHT_CONSOLIDATION_REMAINS_BOUNDED_AND_GOVERNED"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_EXISTING_REJECT_RETURN_EXITED_BEFORE_INVALIDATION_AND_EVIDENCE_PREPARATION_ALLOWED_DUPLICATES",
+   "delete_bypass_substitute_options": "DELETE_NOT_APPLICABLE_GATE_AND_STORE_ARE_LOAD_BEARING__BYPASS_LEAVES_HARMFUL_RULE_REACHABLE__SUBSTITUTE_WITH_MODEL_OR_NEW_STORE_ADDS_COST_AND_UNVERIFIED_AUTHORITY",
+   "surviving_causal_blocker": "FINITE_CALLER_SUPPLIED_ORACLES_AND_MISSING_AUTONOMOUS_VICTIM_WIRING_STILL_LIMIT_SCOPE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "REUSE",
+    "ADAPT",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE",
+    "SYNTHESIZE_NEW_PRIMITIVE"
+   ],
+   "losing_routes_reason": "A new store or model route does not remove the missing invalidation wiring and adds authority/forgetting risk; reuse removes the measured defect with two source files and executable regressions.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The new programs are small executable counterexamples with separate specs and real SQLite; they prove the revocation/accounting contract, not general coding competence. Existing ProjectTestOracle supplies a real failing-then-passing scoped test suite."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "Any plan that treats rejection of a new demonstration as revocation of an old live rule, or counts relabeled/unexecuted probes as safety evidence.",
+   "adjacent_capabilities_absorbed": "Main PR #6861 source-sensitive-oracle and pointwise-regression fixes are preserved; scoped identity, bundle transport and invalidation enforcement are reused.",
+   "fresh_reuse_plan": "Next wire autonomous learn callers to real held-out/archive victims and measure paired memory-off/memory-on transfer before weight consolidation."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "Rejected before implementation: lexical lookup expansion, artifact counters, training on every success, and sentience claims. Cached: base-vs-patch failure attribution and focused/broad test logs.",
+   "search_stop_decision": "Stopped route search after the defect was reproduced on the real store and current research converged on verified admission plus maintenance rather than more memory volume.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "route_frontier": {
+   "checked_at_utc": "2026-11-13T05:05:37Z",
+   "max_age_hours": 24,
+   "discovery_required": true,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/lesson_admission_gate_v1.py",
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "canonical/tests/test_lesson_admission_regression_v1.py",
+     "LEARNING_ONCE_DOES_NOT_SOLVE_COMPUTER_USE_20261113_V1.md"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3.9/library/sqlite3.html transactions and BEGIN IMMEDIATE",
+     "https://github.com/python/cpython/tree/v3.11.2 official runtime source tag"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/pypi/pytest/8.4.2/json",
+     "https://github.com/xlang-ai/OSWorld-V2",
+     "https://github.com/scaleapi/SWE-bench_Pro-os"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://arxiv.org/abs/2611.14326 FGSE",
+     "https://arxiv.org/html/2611.05450 ReScopeBench",
+     "https://arxiv.org/html/2611.14505 Continual-ARC",
+     "https://arxiv.org/html/2606.02461 AgentCL"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "November 2026 lifelong learning computer use agents one demonstration permanent generalization new benchmark"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "ReScopeBench 2611.05450 selective maintenance experience lifecycle 18 environments results"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "SQLite BEGIN IMMEDIATE atomic read modify write transaction Python sqlite3 official documentation"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "OSWorld-V2 SWE-bench Pro latest release November 2026 computer use coding benchmark"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "incumbent_route": "REJECT_THE_NEW_DEMONSTRATION_BUT_LEAVE_THE_OLD_RULE_ACTIVE_AND_INFER_EXECUTION_COUNTS",
+   "selected_route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
+   "negative_search_summary": "No checked current source supports one exposure implying permanent arbitrary computer-use mastery. ReScopeBench finds stale experience left uncorrected; Continual-ARC finds no harness-based unseen-task gain in its experiments; SkillsBench finds self-generated skills can hurt. The smallest supported route is verified admission plus revocation/maintenance.",
+   "unresolved_plausible_dominators": [],
+   "challenger_routes": [
+    {
+     "route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
+     "resolution": "SELECTED",
+     "evidence": [
+      "Real-store repro: rejected reteach left ACTIVE/ADMIT rule applying to correct code",
+      "Final focused 302 passed; base attribution for broad failures"
+     ],
+     "qualification_evidence": [
+      "34 new executable regressions pass",
+      "Python sqlite3 official transaction documentation"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "OFFICIAL_PRIMARY"
+     ],
+     "comparison": {
+      "CORRECTNESS": "Executed damage revokes the matching live identity; no-damage does not.",
+      "CAPABILITY_STRENGTH": "Same bounded capability, safer maintenance; no new capability claimed.",
+      "WALL_CLOCK": "Two source files plus tests; focused suite about 14 seconds.",
+      "INCREMENTAL_COST": "0 USD.",
+      "RELIABILITY": "Atomic append, scoped identity, reopen/bundle persistence.",
+      "VERIFIABILITY": "Real programs, separate specs, real SQLite and project tests."
+     }
+    },
+    {
+     "route": "BUILD_A_NEW_REVOCATION_STORE_OR_COUNTER_REGISTRY",
+     "resolution": "DISQUALIFIED",
+     "evidence": [
+      "Existing store already has invalidate, generation, export/import and INVALIDATED preservation"
+     ],
+     "qualification_evidence": [
+      "canonical/swe_kernel/verified_skill_crystallizer_v1.py direct inspection and tests"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE",
+      "BRAIN_INHERITED"
+     ],
+     "comparison": {
+      "CORRECTNESS": "Would duplicate authority and risk divergence.",
+      "CAPABILITY_STRENGTH": "No additional measured capability.",
+      "WALL_CLOCK": "More implementation and migration work.",
+      "INCREMENTAL_COST": "0 USD but higher complexity.",
+      "RELIABILITY": "Two stores can disagree.",
+      "VERIFIABILITY": "Requires new cross-store proofs."
+     }
+    },
+    {
+     "route": "FINE_TUNE_A_GENERAL_MODEL_ON_EVERY_SUCCESSFUL_TRACE",
+     "resolution": "NON_DOMINATING",
+     "evidence": [
+      "SEAL reports catastrophic forgetting under sequential updates",
+      "Continual-ARC weight gains are real but held-out performance is about half of seen"
+     ],
+     "qualification_evidence": [
+      "https://arxiv.org/html/2506.10943v1",
+      "https://arxiv.org/html/2611.14505"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY"
+     ],
+     "comparison": {
+      "CORRECTNESS": "Success-only traces have weak credit assignment and can forget.",
+      "CAPABILITY_STRENGTH": "Potentially broader later, not the missing revocation seam now.",
+      "WALL_CLOCK": "Training/evaluation infrastructure is downstream.",
+      "INCREMENTAL_COST": "Not available under zero-spend/owned-producer constraints.",
+      "RELIABILITY": "Forgetting and release gates remain unresolved.",
+      "VERIFIABILITY": "Needs reserved no-retrieval probes and independent audit."
+     }
+    }
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-13T05:05:37Z",
+    "max_age_hours": 2,
+    "selected_route": "REUSE_THE_SHIPPED_ADMISSION_GATE_AND_STORE__REVOKE_REFUTED_LIVE_RULES_AND_COUNT_ONLY_EXECUTED_DISTINCT_EVIDENCE",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "Local Python 3.11.2 with pytest 8.4.2, tree-sitter 0.21.3, tree-sitter-languages 1.10.2, Pillow 13.0.0, z3-solver 5.4.1.0",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence": [
+       "Focused 302-test run and isolated QuixBugs 61-test run executed in this sandbox"
+      ]
+     },
+     {
+      "dependency": "SQLite WAL store with BEGIN IMMEDIATE transactions",
+      "kind": "STORAGE",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "OFFICIAL_PRIMARY"
+      ],
+      "evidence": [
+       "Real temporary SQLite tests pass",
+       "https://docs.python.org/3.9/library/sqlite3.html"
+      ]
+     },
+     {
+      "dependency": "GitHub read/PR access for base synchronization and referee",
+      "kind": "NETWORK_ENDPOINT",
+      "required": true,
+      "volatility": "VOLATILE",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "observed_at_utc": "2026-11-13T05:05:37Z",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence": [
+       "git fetch/ls-remote and gh pr list succeeded in this session"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "checked_at_utc": "2026-11-13T05:05:37Z",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT__ONLY_ADMISSION_RELIABILITY_IS_REPAIRED",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "checked_at_utc": "2026-11-13T05:05:37Z",
+   "proposal_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
+   "falsifier_id": "REJECTED_RETEACH_LEAVES_LIVE_RULE_ACTIVE_OR_DUPLICATE_UNEXECUTED_EVIDENCE_ADMITTED",
+   "decisive_question": "DOES_EXECUTED_COUNTEREVIDENCE_REVOKE_THE_MATCHING_LIVE_RULE_AND_DOES_EVIDENCE_ACCOUNTING_REFUSE_DUPLICATES_AND_COUNT_ONLY_REAL_RUNS",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "Paired positive/negative cases in the new suite cover BROKEN, REGRESSED, archive, scoped identity, legacy UNGATED, reopen/bundle, no-damage, duplicates, malformed inputs and zero-execution fabrication."
+  }
+ },
+ "next_step": "WIRE_AUTONOMOUS_LEARN_CALLERS_TO_REAL_HELD_OUT_AND_ARCHIVE_VICTIMS__MEASURE_PAIRED_TRANSFER_AND_REGRESSIONS__THEN_CONSIDER_GOVERNED_WEIGHT_CONSOLIDATION"
+}

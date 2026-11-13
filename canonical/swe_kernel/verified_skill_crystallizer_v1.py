@@ -1286,11 +1286,33 @@ class VerifiedSkillStore:
                 language=language,
             )
             if admission_report.get("verdict") != _admission.ADMIT:
-                return {
+                # Rejecting a new demonstration is not enough: the same rule may
+                # already be ACTIVE (admitted earlier, or legacy UNGATED). New
+                # executed damage must revoke that live copy, not leave it behind.
+                existing_skill_invalidated = False
+                refuted_skill_id = None
+                damaged = [r for r in admission_report.get("rows") or ()
+                           if isinstance(r, Mapping)
+                           and r.get("outcome") in _admission._BROKEN_OUTCOMES]
+                if admission_report.get("verdict") == _admission.REJECT and damaged:
+                    identity_rule = dict(rule)
+                    identity_rule["contract"] = contract
+                    refuted_skill_id = skill_identity(identity_rule)
+                    existing_skill_invalidated = self.invalidate(
+                        refuted_skill_id,
+                        f"ADMISSION_REJECT:{admission_report.get('reason')}",
+                        counterexample_sha256=str(damaged[0].get("source_sha256") or ""),
+                        admission_report=admission_report,
+                    )
+                result = {
                     "crystallized": False,
                     "reason": f"ADMISSION_{admission_report.get('verdict')}:{admission_report.get('reason')}",
                     "admission": admission_report,
+                    "existing_skill_invalidated": existing_skill_invalidated,
                 }
+                if existing_skill_invalidated:
+                    result["refuted_skill_id"] = refuted_skill_id
+                return result
             rule["admission"] = _admission.record_for_store(admission_report)
         else:
             rule["admission"] = dict(_admission.UNGATED_RECORD)
@@ -2397,19 +2419,46 @@ class VerifiedSkillStore:
             rules = [r for r in rules if r.get('error_class') == error_class]
         return copy.deepcopy(rules)
 
-    def invalidate(self, skill_id: str, reason: str, *, counterexample_sha256: str = '') -> bool:
-        """Retain the rule/counterexample but forbid subsequent application."""
+    def invalidate(self, skill_id: str, reason: str, *, counterexample_sha256: str = '',
+                   admission_report: Mapping[str, Any] | None = None) -> bool:
+        """Retain the rule/counterexample but forbid subsequent application.
+
+        An admission counterexample is committed in the SAME transaction as the
+        state change. Earlier admission evidence stays as history; it is not
+        rewritten to pretend the damage was known before it was executed.
+        """
         if not reason.strip():
             raise ValueError('INVALIDATION_REASON_REQUIRED')
+        refutation = None
+        if admission_report is not None:
+            from canonical.swe_kernel import lesson_admission_gate_v1 as _admission
+
+            def _executed_damage(row: Any) -> bool:
+                return (isinstance(row, Mapping)
+                        and row.get('outcome') in _admission._BROKEN_OUTCOMES
+                        and type(row.get('baseline_probes_executed')) is int
+                        and row.get('baseline_probes_executed') > 0
+                        and type(row.get('candidate_probes_executed')) is int
+                        and row.get('candidate_probes_executed') > 0)
+
+            if (not isinstance(admission_report, Mapping)
+                    or admission_report.get('schema') != _admission.SCHEMA
+                    or admission_report.get('verdict') != _admission.REJECT
+                    or not any(_executed_damage(r) for r in admission_report.get('rows') or ())):
+                raise ValueError('ADMISSION_REFUTATION_REQUIRES_EXECUTED_DAMAGE')
+            refutation = _admission.record_for_store(admission_report)
         conn = _connect(self.db_path)
         try:
             with conn:
+                conn.execute('BEGIN IMMEDIATE')
                 row = conn.execute('SELECT pattern_json FROM crystallized_skills WHERE skill_id=?', (skill_id,)).fetchone()
                 if row is None:
                     return False
                 rule = json.loads(row[0])
                 rule['state'] = 'INVALIDATED'
                 rule.setdefault('counterexamples', []).append({'reason': reason[:2000], 'candidate_sha256': counterexample_sha256})
+                if refutation is not None:
+                    rule.setdefault('admission_refutations', []).append(refutation)
                 conn.execute('UPDATE crystallized_skills SET pattern_json=? WHERE skill_id=?', (json.dumps(rule), skill_id))
                 conn.execute('UPDATE skill_store_meta SET generation = generation + 1 WHERE id=1')
                 return True

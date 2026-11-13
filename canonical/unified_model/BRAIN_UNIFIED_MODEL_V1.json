@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 450,
+  "knowledge_documents": 451,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6850,
+  "research_index_records": 6851,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1cb49689a8beb2a6d9635fa50c3ffef49ca3a84260e78a08e30698421bb4f873"
+  "value": "518db73434cebfc957c81b7081fa283e2673b5b84d8f2d596a70f4774356c3f9"
  },
  "engines": [
   {
@@ -44678,6 +44678,95 @@
     "measured",
     "november",
     "path"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 13037,
+   "headings": [
+    "A counterexample must revoke the live rule; safety evidence must actually execute",
+    "Direct answer to the owner",
+    "First-principles diagnosis",
+    "What exists under non-obvious names",
+    "Two concrete defects found and fixed",
+    "1. Rejecting a new counterexample left the old harmful rule active",
+    "2. Probe accounting could report safety without executing probes",
+    "Current research checked through 2026-11-13",
+    "Smartest next order",
+    "Ideas rejected before implementation",
+    "Test ledger",
+    "new regression file at pre-merge main base 8cb35f6502, before this patch's runtime wiring",
+    "final focused admission/store/engine regression set on the merged tree (16 files)",
+    "all 43 tracked test files that reference VerifiedSkillStore/crystallize_code_fix (at 8cb35f6502)",
+    "the same failing/erroring files re-run with the two runtime files restored to 8cb35f6502",
+    "the 7-error QuixBugs file alone, with this patch restored",
+    "Bottom line"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1.md",
+   "sha256": "af660e05d6e970a3766ce3de754ecdf3744f32fac9aa6ff5f720693450fc2aed",
+   "summary": "Date: 2026-11-13. Base: `388c5c7d9b4d1407ac842d785201c1fb6fb6b473`. Authority: **NONE**. This is model-assisted development and producer-run sandbox testing. It registers no capability, flips no family, updates no base-model weights, and claims no independent certification. `truth.achieved` remains `false`.",
+   "terms": {
+    "8cb35f6502": 4,
+    "active": 4,
+    "admission": 8,
+    "arxiv.org": 7,
+    "base": 5,
+    "before": 8,
+    "but": 4,
+    "candidate": 5,
+    "canonical": 6,
+    "change": 4,
+    "computer": 4,
+    "evidence": 9,
+    "experience": 4,
+    "files": 5,
+    "harmful": 4,
+    "held-out": 4,
+    "html": 5,
+    "https": 9,
+    "main": 4,
+    "make": 4,
+    "measured": 6,
+    "memory": 7,
+    "narrow": 4,
+    "new": 5,
+    "no": 11,
+    "not": 34,
+    "old": 4,
+    "once": 4,
+    "one": 6,
+    "only": 4,
+    "passed": 8,
+    "patch": 7,
+    "points": 4,
+    "probe": 5,
+    "probes": 7,
+    "programs": 5,
+    "real": 9,
+    "record": 4,
+    "regression": 4,
+    "rule": 12,
+    "same": 7,
+    "swe_kernel": 5,
+    "tasks": 5,
+    "test": 6,
+    "they": 6,
+    "transfer": 6,
+    "use": 5,
+    "weight": 5
+   },
+   "title": "A counterexample must revoke the live rule; safety evidence must actually execute",
+   "title_terms": [
+    "actually",
+    "counterexample",
+    "evidence",
+    "execute",
+    "live",
+    "must",
+    "revoke",
+    "rule",
+    "safety"
    ]
   },
   {
@@ -79996,10 +80085,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1252,
+  "included_source_count": 1253,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b2714171fdb166a418df224c355d140b179356f794e7933475601c341a0c25c4"
+  "source_tree_digest": "e5db2d54032788039b4c3988f1f3dde5b2f19b40b9a95cb2cc34f55fa6259e27"
  },
  "research_index": [
   {
@@ -224149,6 +224238,33 @@
     "semantic": 1,
     "v1": 1,
     "v16": 1
+   }
+  },
+  {
+   "action_id": "ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "941d51058a0902683455f0ba498e46cf46554408c54c25921f45dbef65cba3af",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "a_rejected_reteach_left_the_previously_admitted_or_ungated_rule_active__and_probe_evidence_could_be_duplicated_reordered_or_counted_without_execution": 1,
+    "admission": 1,
+    "admission_refutes_live_rules_and_counts_real_probes_20261113_v1": 1,
+    "counts": 1,
+    "executed_admission_damage_now_revokes_the_matching_live_rule_including_scoped_and_legacy_ungated_rows__refutations_survive_reopen_and_bundle_transport__duplicate_or_unexecuted_evidence_is_refused__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "live": 1,
+    "probes": 1,
+    "real": 1,
+    "refutes": 1,
+    "reuse_the_shipped_admission_gate_and_store__revoke_refuted_live_rules_and_count_only_executed_distinct_evidence": 1,
+    "rules": 1,
+    "v1": 1
    }
   },
   {
