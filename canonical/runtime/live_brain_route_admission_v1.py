@@ -5608,7 +5608,19 @@ def _solve_public(request: Mapping[str, Any]) -> dict[str, Any]:
                     recall_and_execute_workflow,
                 )
 
-                if not _is_honest_contract_refusal(result):
+                # A capability's word-accounting refusal is honest, but it is not a
+                # refusal of a *verified taught workflow* that accounts for the whole
+                # sentence. Let recall try; it still executes confined and must pass
+                # its own postcondition. Other honest contract refusals stand.
+                _word_accounting_tokens = (
+                    "REQUEST_WORD_NOT_ACCOUNTED_FOR_BY_CAPABILITY",
+                    "MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY",
+                )
+                _word_accounting_refusal = any(
+                    tok in str(result.get("failure_class") or "") or tok in str(result.get("status") or "")
+                    for tok in _word_accounting_tokens
+                )
+                if not _is_honest_contract_refusal(result) or _word_accounting_refusal:
                     _declined: list[dict[str, Any]] = []
                     recalled = recall_and_execute_workflow(str(request.get("goal") or ""), refusals=_declined)
                     if recalled is None and _declined:
