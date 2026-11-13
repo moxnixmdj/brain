@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 436,
+  "knowledge_documents": 437,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6835,
+  "research_index_records": 6837,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e75273def05583b9766a2e35430df6d83b7c4f14d7893a47f1d8974f132aba71"
+  "value": "8f726c893dad7462cc09edb1a9a1633ddcd8e0d55c211a9af976d2bf33633412"
  },
  "engines": [
   {
@@ -65649,6 +65649,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 8692,
+   "headings": [
+    "Weight-space learning is not the missing layer. It is the layer you cannot reach, and the reason is not the law.",
+    "1. The brutal truth is wrong on three of its four bullets, and I measured it",
+    "2. Where the real wall is — and it is not weights",
+    "3. Why the weight layer is not available here, in order of how fatal each reason is",
+    "4. What the citations actually say, since they were quoted at me",
+    "5. What is real, what is not, and the smartest next move"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.md",
+   "sha256": "24cf5cefdc741d6a31236e4de0e7274b169f051b737d697504760ae275412012",
+   "summary": "**Answering the \"brutal truth\", measured.** Record: `canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json`.",
+   "terms": {
+    "19": 3,
+    "29.45": 4,
+    "332": 3,
+    "440": 3,
+    "444": 3,
+    "all": 5,
+    "already": 4,
+    "another": 4,
+    "applied": 4,
+    "cannot": 8,
+    "change": 11,
+    "changed": 4,
+    "changes": 9,
+    "corpus": 4,
+    "different": 8,
+    "distillation": 4,
+    "every": 4,
+    "experience": 8,
+    "file": 8,
+    "files": 6,
+    "here": 4,
+    "kind": 7,
+    "layer": 9,
+    "lookup": 6,
+    "model": 5,
+    "no": 11,
+    "not": 23,
+    "nothing": 5,
+    "one": 11,
+    "organ": 4,
+    "real": 6,
+    "recovered": 4,
+    "recovers": 4,
+    "rule": 5,
+    "same": 12,
+    "shown": 4,
+    "so": 5,
+    "step": 5,
+    "survives": 4,
+    "system": 7,
+    "three": 4,
+    "verification": 4,
+    "weight": 4,
+    "weights": 11,
+    "while": 4,
+    "work": 5,
+    "would": 5,
+    "zero": 4
+   },
+   "title": "Weight-space learning is not the missing layer. It is the layer you cannot reach, and the reason is not the law.",
+   "title_terms": [
+    "cannot",
+    "law",
+    "layer",
+    "learning",
+    "missing",
+    "not",
+    "reach",
+    "reason",
+    "weight-space"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 5478,
    "headings": [
     "Workflow goal generalization — 2026-11-12",
@@ -78866,10 +78944,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1238,
+  "included_source_count": 1239,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "bce79d0d994aee4cebb8dafb5346a235c0bb09678c43b710c7cd754d1c9b7ef4"
+  "source_tree_digest": "4ddc2c154c7ab761b7fae12112c3b6a92894e83370c0a208ddb8497c01efa3f2"
  },
  "research_index": [
   {
@@ -208875,6 +208953,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_20261112_V1.json",
+   "schema": "WHY_WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_V1",
+   "sha256": "9a910fc9c28cc5dda5cd2c576a31ee8eecb594f3fead1a0225e3d79be778e4ae",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "layer": 1,
+    "missing": 1,
+    "not": 1,
+    "space": 1,
+    "v1": 1,
+    "weight": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-11",
    "id": "research:canonical/verification/WIKIDATA_ENTITY_NEIGHBORHOOD_INDEPENDENT_VERIFY_20261011_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -240267,6 +240365,35 @@
     "v1": 1,
     "weight": 1,
     "weight_space_fuel_20261113_v1": 1
+   }
+  },
+  {
+   "action_id": "WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_AND_THE_CROSS_KIND_ZERO_IS_THE_WALL_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_AND_THE_CROSS_KIND_ZERO_IS_THE_WALL_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WEIGHT_SPACE_IS_NOT_THE_MISSING_LAYER_AND_THE_CROSS_KIND_ZERO_IS_THE_WALL_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "2061fb2250c1744dfcee1f69dcdba8a089e582d0a9d29fa17961af00f9b04b7b",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "cross": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "kind": 1,
+    "layer": 1,
+    "missing": 1,
+    "no_organ_change__a_falsification_of_the_lookup_system_claim_and_a_named_next_limiting_factor__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "not": 1,
+    "price_the_two_arms_that_separate_a_lookup_system_from_a_rule_and_refuse_the_weight_route": 1,
+    "space": 1,
+    "the_owner_proposed_weight_space_training_as_the_missing_layer_on_the_claim_that_the_system_is_a_limited_lookup_system__the_claim_is_measurably_false_on_three_of_four_counts_and_the_weight_route_is_forbidden_impossible_here_and_downstream_of_the_layer_that_is_actually_weak__which_is_the_cross_kind_arm_at_0_of_4444": 1,
+    "v1": 1,
+    "wall": 1,
+    "weight": 1,
+    "weight_space_is_not_the_missing_layer_and_the_cross_kind_zero_is_the_wall_20261112_v1": 1,
+    "zero": 1
    }
   },
   {
