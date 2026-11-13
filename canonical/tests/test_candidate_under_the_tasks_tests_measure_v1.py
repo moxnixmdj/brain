@@ -925,3 +925,31 @@ def test_the_record_says_how_many_seeded_faults_the_tests_caught(written):
     assert [row["fault"] for row in last["rows"]] == [what for what, _, _, _ in seeded.FAULTS]
     assert sorted(row["fault"] for row in last["rows"] if not row["caught"]) == sorted(last["survived"])
     assert last["left_out_of_the_run"] == list(seeded.LEFT_OUT)
+    assert last["survived"] == [found["the_one_that_survives"]["fault"]] and len(found["rounds"]) == 2 and found["rounds"][0]["caught"] < last["caught"]
+
+
+def test_the_record_names_the_candidates_that_pass_the_new_tests_and_break_an_old_one(written):
+    """The summary's count of that name is every candidate given the whole run that does not resolve. The ones that fit the name are found from the rows."""
+    fit, others = {}, {}
+    for task, row in written["per_task"].items():
+        for candidate in row.get("candidates") or ():
+            if candidate.get("whole_run") and not candidate["resolves"]:
+                (fit if candidate["start_passing"] == row["start_passing"] else others).setdefault(task, []).append(candidate)
+    said = written["candidates_that_pass_the_new_tests_and_break_an_old_one"]
+    assert said["count"] == sum(len(some) for some in fit.values()) == 3
+    assert {task: [one["place"] for one in some] for task, some in said["which"].items()} == {task: [one["place"] for one in some] for task, some in fit.items()}
+    assert all(one["keep_passing"] < one["keep_wanted"] for some in fit.values() for one in some)
+    assert said["candidates_given_the_whole_run_without_passing_the_new_test"] == {task: len(some) for task, some in others.items()}
+    assert all(one["start_passing"] < written["per_task"][task]["start_passing"] and not written["per_task"][task]["few"]["stands"] for task, some in others.items() for one in some)
+    assert said["count"] + sum(len(some) for some in others.values()) == written["summary"]["candidates_passing_what_should_start_passing_and_breaking_what_should_keep_passing"] == 43
+
+
+def test_the_records_seven_places_are_read_from_its_rows(written):
+    seven = written["the_seven_recorded_places"]
+    assert sorted(seven) == sorted(written["summary"]["recorded_places"]) and len(seven) == 7
+    for task, said in seven.items():
+        row = written["per_task"][task]
+        there = row["candidates"][said["recorded_place"] - 1]
+        assert there["place"] == said["recorded_place"] == written["summary"]["recorded_places"][task]
+        assert said["resolves_at_the_recorded_place"] == there["resolves"] and said["first_resolving_place"] == measure.first_resolving(row)
+    assert {task: said["first_resolving_place"] for task, said in seven.items()} == written["summary"]["within_twenty__tasks"]
