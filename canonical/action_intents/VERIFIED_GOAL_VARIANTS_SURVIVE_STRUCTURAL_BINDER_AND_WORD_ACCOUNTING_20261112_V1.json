@@ -7,7 +7,7 @@
  "route_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING_20261112_V1",
  "date": "2026-11-12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "96dc5fdefa4572634e54320f4cb1d5afb46617c0",
+ "canonical_base_commit": "e2cb9ceed300d624b3eb16ac9b4ceae451c5d035",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -59,7 +59,7 @@
    "AGENTS.md",
    "canonical/governance/OWNER_ACTIVE_GOAL_20261018_V1.md"
   ],
-  "causal_evidence": "MEASURED_ON_THIS_HOST_AFTER_MERGING_ORIGIN_MAIN_96dc5fde: workflow_goal + bridge + two_refactorings initially 6 failed / 113 passed; the negated rename executed through the unguarded structural fallback and taught rename/inline doors failed closed with empty taught_action_declined. After composing the guard and allowing verified recall to answer word-accounting refusals, the 15-suite targeted regression passed 237 / 2 skipped / 8 subtests and repo-integrity static passed."
+  "causal_evidence": "MEASURED_ON_THIS_HOST_AFTER_MERGING_ORIGIN_MAIN_e2cb9cee: workflow_goal + bridge + two_refactorings initially 6 failed / 113 passed; the negated rename executed through the unguarded structural fallback and taught rename/inline doors failed closed with empty taught_action_declined. After composing the guard and allowing verified recall to answer word-accounting refusals, the 15-suite targeted regression passed 237 / 2 skipped / 8 subtests and repo-integrity static passed."
  },
  "measured_effect": "Local targeted regression: 237 passed, 2 skipped, 8 subtests. Main's bridge Layer B reordered-KV/synonym binds and Drop refusal pass; the taught rename/inline doors pass; declined taught actions report their own reason; the negated rename no longer executes through the structural fallback.",
  "load_bearing_primary": {
@@ -84,7 +84,7 @@
   "canonical/tests/test_two_refactorings_are_taught_once_and_checked_on_a_second_example_v1.py"
  ],
  "recursive_obs": {
-  "canonical_base_commit": "96dc5fdefa4572634e54320f4cb1d5afb46617c0",
+  "canonical_base_commit": "e2cb9ceed300d624b3eb16ac9b4ceae451c5d035",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "real_outcome": "A verified taught workflow remains reachable after main's structural binder and word-accounting refusal are merged, while unsafe structural fallbacks refuse.",
@@ -217,7 +217,7 @@
   }
  },
  "next_step": "Keep the variant admission path narrow; add chosen-probe settlement and adversarial held-out transfer before claiming broader generalization.",
- "causal_evidence": "MEASURED_ON_THIS_HOST_AFTER_MERGING_ORIGIN_MAIN_96dc5fde: initial 3-suite run 6 failed / 113 passed; after repair 15-suite targeted regression 237 passed / 2 skipped / 8 subtests; repo-integrity static PASS.",
+ "causal_evidence": "MEASURED_ON_THIS_HOST_AFTER_MERGING_ORIGIN_MAIN_e2cb9cee: initial 3-suite run 6 failed / 113 passed; after repair 15-suite targeted regression 237 passed / 2 skipped / 8 subtests; repo-integrity static PASS.",
  "tournament": {
   "proposal_id": "VERIFIED_GOAL_VARIANTS_SURVIVE_STRUCTURAL_BINDER_AND_WORD_ACCOUNTING",
   "decisive_question": "Does the merged compiler preserve verified taught recall and main's structural binds while refusing negation and extra destructive actions?",
