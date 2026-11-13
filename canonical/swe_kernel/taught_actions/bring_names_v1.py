@@ -32,7 +32,10 @@ from __future__ import annotations
 import ast
 import pathlib
 
-from . import edit_by_example_v1 as organ
+try:
+    from . import edit_by_example_v1 as organ
+except ImportError:  # confined exec() with no package context: fall back to absolute import
+    from canonical.swe_kernel.taught_actions import edit_by_example_v1 as organ
 
 SCHEMA = "BRAIN_BRING_NAMES_V1"
 
