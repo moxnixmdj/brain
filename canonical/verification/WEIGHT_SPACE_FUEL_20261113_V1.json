@@ -1,0 +1,63 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "conclusion": "FUEL_EXISTS_BUT_IS_THIN_AND_NARROW__ENOUGH_TO_VALIDATE_A_SEED_NOT_TO_TRAIN_A_MODEL",
+ "incremental_spend_usd": 0,
+ "minimum_units_to_try": 5000,
+ "model_calls": 0,
+ "rate": {
+  "changed_lines_per_merge": 2789.7,
+  "merges_measured": 30,
+  "note": "each of these is a real, merged code change whose before/after is recoverable from git, which is the only shape here a shaper could learn from; the repo currently throws that shape away by keeping the lesson and not the change"
+ },
+ "ready_to_train": false,
+ "schema": "WEIGHT_SPACE_FUEL_V1",
+ "sources": {
+  "controller_checkpoints": {
+   "distinct_capabilities": 20,
+   "distinct_situations": 87,
+   "failure_rate": 0.089,
+   "passed": 175,
+   "records": 449,
+   "terminal_steps_excluded": 128,
+   "units": 192,
+   "verdict": "THIN_BUT_REAL",
+   "verified_units": 64,
+   "why": "this is the only source with a natural pass/fail split and a committed `expect`; it is thin (hundreds, not thousands) and narrow (about twenty capabilities), so it is a seed, not a dataset",
+   "with_a_prediction": 94
+  },
+  "execution_receipts": {
+   "outcomes_seen": {
+    "EXECUTED": 305
+   },
+   "readable": 305,
+   "records": 305,
+   "units": 0,
+   "verdict": "NO_SIGNAL",
+   "verified_units": 0,
+   "why": "a receipt records that a module was invoked and what it returned; it holds no situation the machine was in and no choice it made, so there is nothing for a shaper to condition on or to predict. Zero units is not a small number, it is a missing shape.",
+   "with_a_model_in_the_loop": 0,
+   "with_an_independent_verifier": 0
+  },
+  "taught_action_corpora": {
+   "lesson_store_exists": false,
+   "stores_found": 0,
+   "units": 0,
+   "verdict": "NO_SIGNAL",
+   "verified_units": 0,
+   "why": "a lesson is a rule, not an event. The demonstration it was learned from is not kept with it, so the (before, after, outcome) triples cannot be recovered from the store -- they would have to be re-fetched from the pull requests they came from"
+  },
+  "trajectory_store": {
+   "distinct_tasks": 8,
+   "outcomes_seen": [
+    "success"
+   ],
+   "records": 24,
+   "units": 66,
+   "verdict": "NO_SIGNAL",
+   "verified_units": 0,
+   "why": "every record is hand-seeded, every outcome is `success`, and the four steps are the same four for all of them; a store that cannot express a failure cannot teach a policy where to stop, which is the thing a shaper most needs to learn"
+  }
+ },
+ "total_units": 258,
+ "total_verified_units": 64
+}
