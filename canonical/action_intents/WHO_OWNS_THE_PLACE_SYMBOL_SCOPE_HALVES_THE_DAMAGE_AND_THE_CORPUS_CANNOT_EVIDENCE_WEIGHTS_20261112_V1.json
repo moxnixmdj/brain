@@ -90,7 +90,9 @@
    ],
    "evidence": [
     "THE_POOL_CURVE_AND_BOTH_CONTROLS_ARE_IN_THE_RECORD_AND_PINNED_BY_TESTS"
-   ]
+   ],
+   "intrinsic_or_path_specific": "PATH_SPECIFIC",
+   "surviving_causal_blocker": "LAST_ROUND_MEASURED_THAT_A_POOL_OF_52_LESSONS_WRITES_39_LINES_NO_DEVELOPER_WROTE_BECAUSE_NOTHING_DECIDES_WHICH_LESSON_OWNS_A_PLACE__THE_DECLARED_NEXT_STEP_WAS_TO_SCOPE_BY_THE_CHANGED_NAME_AND_IT_HAD_NOT_BEEN_RUN__SEPARATELY_THE_WEIGHT_SPACE_CLAIM_WAS_BEING_ARGUED_FROM_THE_LITERATURE_WITH_NO_COUNT_OF_WHETHER_THIS_TREE_COULD_EVEN_STATE_A_TRAINING_EXPERIMENT"
   },
   "obs_capability": {
    "capability_work_deleted": "NO_NEW_CAPABILITY_NO_NEW_ADAPTER_AND_NO_NEW_VERIFIER_MECHANISM",
@@ -340,7 +342,7 @@
       "required": false,
       "scope": "GLOBAL",
       "status": "READY",
-      "volatility": "STATIC"
+      "volatility": "VOLATILE"
      }
     ],
     "execution_dependencies_complete": true,
