@@ -82,7 +82,69 @@
    "what": "the constructed counterfactual and its correction are reused verbatim as the explanation of why widening cannot fix a half demonstration."
   }
  ],
- "recursive_obs": "The finder now reports which conventions paid off and refuses to call a test file unchecked.",
+ "recursive_obs": {
+  "canonical_base_commit": "7767b9c39b5c413ae0e86fedd9d2c50d2779ea67",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "TRUST_THE_ROUND_28_NO_TEST_MODULE_VERDICT",
+   "COUNT_TEST_FILES_AS_UNCHECKED_SURFACE",
+   "CALL_A_REACHABLE_TEST_AN_ADEQUATE_CHECK",
+   "EXECUTE_A_STORED_PLAN_WITHOUT_VALIDATING_IT"
+  ],
+  "expected_parent_level_state_change": "THE_CHECK_IS_BUILDABLE_AND_THE_PRIOR_ZERO_OF_42_VERDICT_WAS_A_FINDER_BUG__CORRECTED_YIELD_18_OF_54_NON_TEST_FILES_33_PERCENT__3_OF_5_MUTANTS_SURVIVE_SO_REACHABILITY_IS_NOT_ADEQUACY__VALIDATED_REPLAY_SAVES_98_9_PERCENT_AND_BLIND_REPLAY_LANDS_OFF_GOAL__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE_NOT_APPLICABLE_THE_MEASUREMENT_IS_KEPT__BYPASS_IMPOSSIBLE_EVERY_DOWNSTREAM_CLAIM_NEEDS_A_CHECK__SUBSTITUTE_FORBIDDEN_A_MODEL_JUDGING_CORRECTNESS_IS_NEITHER_ZERO_COST_NOR_INDEPENDENT",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_FINDER_MUST_KNOW_THE_CONVENTIONS_OF_THE_REPOSITORY_IT_IS_READING__A_SINGLE_FILENAME_PATTERN_IS_A_SINGLE_CONVENTION",
+   "surviving_causal_blocker": "A_CHECK_THAT_EXISTS_IS_NOT_A_CHECK_THAT_CATCHES__THREE_OF_FIVE_MUTANTS_SURVIVED_ON_REAL_PROJECTS_SO_ONE_SHOT_LEARNING_STILL_HAS_NO_ADEQUACY_SIGNAL"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_LEARNER_NO_NEW_EMBEDDING_NO_WEIGHT_TRAINING__THE_REUSE_ORGAN_IS_118_LINES_REUSING_THE_EXISTING_MODEL_FORMAT",
+   "existing_inherited_routes_checked": "THE_ROUND_28_IMPORT_GRAPH_FINDER__ENVIRONMENT_LEARNING_V1_AND_ITS_PRIOR_PARAMETER__THE_SIX_PINNED_REPOSITORIES_THEMSELVES",
+   "external_existing_routes_checked": "PYTHON_STDLIB_AST_JSON_RE_ONLY__PYTEST_AND_THE_REPOS_OWN_SUITES_IN_A_THROWAWAY_VENV__NO_PACKAGE_INSTALLED_INTO_THE_REPO",
+   "surviving_gap": "TWO_THINGS_ONLY__MUTATION_AS_A_STANDING_ADEQUACY_GATE__AND_A_GOAL_CHECK_THE_CALLER_DOES_NOT_HAVE_TO_WRITE"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "ANSWERING_WITH_A_VERDICT_INSTEAD_OF_A_MEASUREMENT",
+    "TREATING_A_FINDER_BUG_AS_A_REAL_ABSENCE",
+    "TREATING_A_PASSING_SUITE_AS_A_CHECK"
+   ],
+   "real_outcome": "CLAIM_D_ADJUDICATED_WITH_NUMBERS_THAT_CAN_BE_RE_RUN",
+   "surviving_necessity": "One shot makes a lesson permanent exactly as well as it makes a mistake permanent, so the check is not adjacent to the claim, it is the claim."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "THE_FUEL_CENSUS_FIGURES_258_UNITS_64_VERIFIED_AND_THE_ROUND_28_CORPUS_ARE_REUSED_WITHOUT_RECOMPUTATION",
+   "downstream_work_to_delete_or_supersede": "ANY_PLAN_THAT_TREATS_THE_ROUND_28_NO_TEST_MODULE_VERDICT_AS_A_REAL_ABSENCE",
+   "fresh_reuse_plan": "THE_NEXT_PR_WIRES_MUTATION_INTO_THE_FINDER_AS_THE_ADEQUACY_GATE_AND_RE_RUNS_THE_CORPUS"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "DELETED_BEFORE_IMPLEMENTATION__A_SECOND_FINDER_AND_A_NEW_MEMORY_STORE__CACHED__THE_PINNED_SHAS_THE_CENSUS_AND_THE_MUTATION_TABLE",
+   "search_stop_decision": "STOPPED_WHEN_TWO_INDEPENDENT_MEASUREMENTS__THE_MUTATION_TABLE_AND_THE_ZERO_SAVING_PRIOR__PUT_THE_FAILURE_IN_THE_SAME_PLACE"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "REUSE_WINS_BECAUSE_THE_REPO_ALREADY_OWNS_A_GENERAL_ENVIRONMENT_LEARNER_AND_A_MODEL_FORMAT__SYNTHESIZE_NEW_LEARNER_LOSES_BECAUSE_THE_MISSING_PART_WAS_118_LINES_OF_REUSE_NOT_A_NEW_ORGAN",
+   "routes_ranked": [
+    "REUSE",
+    "CONFIGURE",
+    "COMPOSE",
+    "ADAPT",
+    "INTEGRATE"
+   ]
+  }
+ },
  "route_id": "REUSE",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "selected_route": "REUSE",
