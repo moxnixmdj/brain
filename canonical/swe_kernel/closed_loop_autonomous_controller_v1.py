@@ -77,6 +77,9 @@ _HONEST_REFUSAL_CLASSES: frozenset[str] = frozenset(
         # whose entire point is that the refusal is PRECISE -- read the wrong failure class, and
         # the door lost the reason it had already computed.
         "CROSSFILE_TASK_UNBOUND",
+        "MOST_OF_THE_REQUEST_IS_NOT_EXPLAINED_BY_CAPABILITY",
+        "REQUEST_WORD_NOT_ACCOUNTED_FOR_BY_CAPABILITY",
+        "PROMISED_FILE_NOT_WRITTEN_BY_CAPABILITY",
         computer_boundary.FAILURE_CLASS,
     }
 )
@@ -995,6 +998,76 @@ def _solve_or_learn_impl(
             "qualification_receipt": qualification_receipt,
             "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
         }
+
+    # ------------------------------------------------------------------
+    # TIER 0A-SEMANTIC (<10 ms): Semantic Generalization - Retrieve Similar
+    #                            Experiences & Adapt Strategies
+    # ------------------------------------------------------------------
+    if learn and recalled is None:
+        try:
+            from canonical.swe_kernel.semantic_generalization_engine_v1 import (
+                SemanticGeneralizationEngine,
+            )
+
+            sem_engine = SemanticGeneralizationEngine()
+            sem_result = sem_engine.generalize_and_solve(goal, top_k=3)
+            
+            if sem_result.get("adapted_strategy") is not None:
+                adapted = sem_result["adapted_strategy"]
+                base_strategy = adapted.get("base_strategy", {})
+                
+                # Try to execute the adapted strategy
+                if base_strategy.get("task_type") == "information_retrieval":
+                    # Apply information retrieval strategy
+                    recommended = base_strategy.get("recommended_actions", [])
+                    if recommended and "read file" in recommended[0].lower():
+                        # This is a file reading task - extract file path from goal
+                        file_match = re.search(r'[\w/.-]+\.py', goal)
+                        if file_match:
+                            file_path = file_match.group(0)
+                            try:
+                                with open(file_path, 'r') as f:
+                                    file_content = f.read()
+                                
+                                # Count based on strategy
+                                if any("function" in act.lower() or "method" in act.lower() or "class" in act.lower() for act in recommended):
+                                    import ast
+                                    tree = ast.parse(file_content)
+                                    
+                                    if "function" in goal.lower() or "method" in goal.lower():
+                                        count = sum(1 for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)))
+                                        return {
+                                            "schema": SCHEMA,
+                                            "task_id": task_id,
+                                            "pass": True,
+                                            "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
+                                            "tier_used": "tier0a_semantic_generalization",
+                                            "from_memory": True,
+                                            "generalization_used": True,
+                                            "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
+                                            "top_similarities": sem_result.get("top_similarities", []),
+                                            "answer": f"Found {count} {'functions' if 'function' in goal.lower() else 'methods'}",
+                                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                                        }
+                                    elif "class" in goal.lower():
+                                        count = sum(1 for node in ast.walk(tree) if isinstance(node, ast.ClassDef))
+                                        return {
+                                            "schema": SCHEMA,
+                                            "task_id": task_id,
+                                            "pass": True,
+                                            "status": "PASS__TIER0A_SEMANTIC_GENERALIZATION",
+                                            "tier_used": "tier0a_semantic_generalization",
+                                            "from_memory": True,
+                                            "generalization_used": True,
+                                            "similar_experiences_count": sem_result.get("similar_experiences_found", 0),
+                                            "top_similarities": sem_result.get("top_similarities", []),
+                                            "answer": f"Found {count} classes",
+                                            "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
+                                        }
+                            except Exception:
+                                pass
+        except Exception:
+            pass
 
     forged_state_path = req.pop("forged_state_path", None)
     macro_state_path = req.pop("macro_state_path", None)

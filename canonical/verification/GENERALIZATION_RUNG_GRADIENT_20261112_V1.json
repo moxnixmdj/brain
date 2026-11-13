@@ -1,0 +1,342 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "by_rung": {
+  "as_it_was": 12,
+  "both_open": 7,
+  "names_open": 3,
+  "untouched_open": 12
+ },
+ "check": "tests",
+ "check_reasons": {
+  "CHECK_DEPENDENCY_MISSING": 6,
+  "CHECK_NO_TEST_MODULE": 6
+ },
+ "check_unavailable_pairs": 132,
+ "generated_utc": "2026-11-12T23:05:24Z",
+ "incremental_spend_usd": 0,
+ "model_calls": 0,
+ "oracle_when_one_exists": {
+  "arms": {
+   "pkg/edges.py": {
+    "check_available": true,
+    "check_strength": {
+     "passes_a_wrong_edit_that_satisfies_it": null,
+     "wrong_edits_tried": 3
+    },
+    "with_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    },
+    "without_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    }
+   },
+   "pkg/inclusive.py": {
+    "check_available": true,
+    "check_strength": {
+     "passes_a_wrong_edit_that_satisfies_it": null,
+     "wrong_edits_tried": 3
+    },
+    "with_a_check": {
+     "edited": false,
+     "is_the_correct_edit": true
+    },
+    "without_a_check": {
+     "edited": true,
+     "is_the_correct_edit": false
+    }
+   },
+   "pkg/limits.py": {
+    "check_available": true,
+    "check_strength": {
+     "passes_a_wrong_edit_that_satisfies_it": "return x > hi",
+     "wrong_edits_tried": 3
+    },
+    "with_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    },
+    "without_a_check": {
+     "edited": true,
+     "is_the_correct_edit": true
+    }
+   }
+  },
+  "constructed": true
+ },
+ "pairs": 132,
+ "per_task": [
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "name": "openimis/openimis-be-core_py#414",
+   "right_any_rung": 0,
+   "right_exact": 246,
+   "test_module": "core.test_helpers",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 3,
+   "name": "scoursen/django-softdelete#114",
+   "right_any_rung": 0,
+   "right_exact": 97,
+   "test_module": "softdelete.tests.test_sd",
+   "wrong_any_rung": 21,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "name": "CCSI-Toolset/FOQUS#1002",
+   "right_any_rung": 12,
+   "right_exact": 3,
+   "test_module": "foqus_lib.gui.tests.test_uq",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 3,
+   "name": "avocado-framework/avocado-vt#2887",
+   "right_any_rung": 0,
+   "right_exact": 14,
+   "test_module": null,
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "name": "FZJ-IEK3-VSA/ActivityAssure#2",
+   "right_any_rung": 6,
+   "right_exact": 8,
+   "test_module": null,
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "name": "cta-observatory/pyirf#289",
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "test_module": "pyirf.tests.test_utils",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "name": "Azure/azure-cli-extensions#8010",
+   "right_any_rung": 6,
+   "right_exact": 16,
+   "test_module": "src.ssh.azext_ssh.tests.latest.test_custom",
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "name": "torproject/stem#155",
+   "right_any_rung": 6,
+   "right_exact": 0,
+   "test_module": null,
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "name": "jodal/comics#652",
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "test_module": null,
+   "wrong_any_rung": 6,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_DEPENDENCY_MISSING",
+   "files": 4,
+   "name": "wolfSSL/wolfcrypt-py#120",
+   "right_any_rung": 5,
+   "right_exact": 0,
+   "test_module": "tests.test_asn",
+   "wrong_any_rung": 2,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "name": "learning-unlimited/django-argcache#5",
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "test_module": null,
+   "wrong_any_rung": 13,
+   "wrong_exact": 0
+  },
+  {
+   "check": "CHECK_NO_TEST_MODULE",
+   "files": 4,
+   "name": "ArduPilot/MAVProxy#1623",
+   "right_any_rung": 0,
+   "right_exact": 0,
+   "test_module": null,
+   "wrong_any_rung": 0,
+   "wrong_exact": 0
+  }
+ ],
+ "positive_control": {
+  "accepts_the_correct_edit": true,
+  "accepts_the_project_as_it_is": true,
+  "available": true,
+  "discriminates": true,
+  "module": "tests.test_bounds",
+  "reason": "",
+  "rejects_a_broken_file": true,
+  "rejects_a_wrong_edit_that_still_compiles": true
+ },
+ "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
+ "summary": {
+  "any_rung": {
+   "asked": 726,
+   "edited": 34,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 0.4545,
+   "right": 35,
+   "share_of_the_work": 0.0482,
+   "wrong": 42
+  },
+  "any_rung_check": {
+   "asked": 726,
+   "edited": 0,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": null,
+   "right": 0,
+   "share_of_the_work": 0.0,
+   "wrong": 0
+  },
+  "by_rung": {
+   "as_it_was": 12,
+   "both_open": 7,
+   "names_open": 3,
+   "untouched_open": 12
+  },
+  "check_only": {
+   "asked": 726,
+   "edited": 0,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": null,
+   "right": 0,
+   "share_of_the_work": 0.0,
+   "wrong": 0
+  },
+  "check_unavailable_pairs": 132,
+  "exact": {
+   "asked": 726,
+   "edited": 28,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 1.0,
+   "right": 384,
+   "share_of_the_work": 0.5289,
+   "wrong": 0
+  },
+  "literal": {
+   "asked": 726,
+   "edited": 13,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 0.6364,
+   "right": 7,
+   "share_of_the_work": 0.0096,
+   "wrong": 4
+  },
+  "pairs": 132,
+  "tasks": 12,
+  "two_showings": {
+   "asked": 726,
+   "edited": 62,
+   "nothing_to_generalise": 15,
+   "pairs": 132,
+   "precision": 1.0,
+   "right": 647,
+   "share_of_the_work": 0.8912,
+   "wrong": 0
+  }
+ },
+ "tasks": 12,
+ "totals": {
+  "any_rung": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 34,
+   "pairs": 132,
+   "reached": 15,
+   "right": 35,
+   "wrong": 42
+  },
+  "any_rung_check": {
+   "asked": 726,
+   "check_asked": 132,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 0,
+   "pairs": 132,
+   "reached": 15,
+   "right": 0,
+   "wrong": 0
+  },
+  "check_only": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 0,
+   "pairs": 132,
+   "reached": 15,
+   "right": 0,
+   "wrong": 0
+  },
+  "exact": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 28,
+   "pairs": 132,
+   "reached": 15,
+   "right": 384,
+   "wrong": 0
+  },
+  "literal": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 13,
+   "pairs": 132,
+   "reached": 15,
+   "right": 7,
+   "wrong": 4
+  },
+  "two_showings": {
+   "asked": 726,
+   "check_asked": 0,
+   "check_right": 0,
+   "check_wrong": 0,
+   "edited": 62,
+   "pairs": 132,
+   "reached": 15,
+   "right": 647,
+   "wrong": 0
+  }
+ }
+}

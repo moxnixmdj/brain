@@ -46,8 +46,10 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import os
 import shutil
 import statistics as st
+import subprocess
 import sys
 from typing import Any, Iterable, Mapping, Sequence
 
@@ -189,47 +191,111 @@ def _judge(raw: float | None, partial: float | None) -> str:
 # ---------------------------------------------------------------------------
 # can the measurement be re-run here at all?
 # ---------------------------------------------------------------------------
-def feasibility() -> dict[str, Any]:
-    """Whether a fresh-seed re-run is possible in THIS environment, and if not, why.
+def feasibility(html_dir: str | None = None, modules_dir: str | None = None) -> dict[str, Any]:
+    """Can a fresh-seed re-run happen HERE? Answered by trying, not by looking for a browser.
 
-    The honest answer matters more than a number: a re-run that cannot happen must not be
-    reported as a re-run that agreed. The chromium bridge needs a browser with real layout,
-    because drag and hit-testing need geometry.
+    MEASURED 2026-11-12, and this replaces a wrong answer. The previous version checked for a
+    system chromium binary, found none, checked for libnspr4.so/libnss3.so, found neither, and
+    reported BLOCKED. All three facts were true and the conclusion was false:
+    `@sparticuz/chromium` ships `bin/chromium.br`, `bin/fonts.tar.br` and `bin/al2023.tar.br`,
+    the last of which contains libnspr4.so, libnss3.so and seven other objects. The bridge
+    inflates them and sets LD_LIBRARY_PATH itself (`miniwob_chromium_bridge_v1.mjs:377-381`), so
+    no root and no system library is needed. Verified in this sandbox: HeadlessChrome/153.0.8010.0,
+    real layout boxes, `click-test` reaching `raw_reward: 1`.
+
+    A feasibility check that inspects the environment instead of exercising the tool reports
+    false negatives, which is the failure this repository has now recorded five times. So this
+    one runs the bridge.
     """
-    browsers = {name: shutil.which(name) for name in
-                ("chromium", "chromium-browser", "google-chrome", "chrome", "headless_shell")}
-    found = [name for name, path in browsers.items() if path]
-    libs = {lib: any(pathlib.Path(p).exists() for p in (f"/usr/lib/x86_64-linux-gnu/{lib}",))
-            for lib in ("libnspr4.so", "libnss3.so")}
-    root = False
-    try:
-        import os
-        root = os.geteuid() == 0
-    except Exception:
-        root = False
-
+    html = pathlib.Path(html_dir) if html_dir else _locate_html()
+    modules = pathlib.Path(modules_dir) if modules_dir else _locate_modules()
     blocked: list[str] = []
-    if not found:
-        blocked.append("NO_BROWSER_BINARY")
-    missing = [lib for lib, present in libs.items() if not present]
-    if missing:
-        blocked.append("MISSING_SHARED_LIBRARIES:" + ",".join(missing))
-    if missing and not root:
-        blocked.append("NO_ROOT_TO_INSTALL_THEM")
+
+    if html is None or not html.is_dir():
+        blocked.append("NO_MINIWOB_HTML")
+    if modules is None or not (modules / "node_modules" / "puppeteer-core").is_dir():
+        blocked.append("NO_PUPPETEER_CORE")
+
+    probed = None
+    if not blocked:
+        probed = _probe_bridge(html, modules)                     # type: ignore[arg-type]
+        if not probed.get("loaded"):
+            blocked.append("BRIDGE_DID_NOT_LOAD:" + str(probed.get("error"))[:80])
 
     return {
         "schema": SCHEMA,
         "can_rerun_on_fresh_seeds": not blocked,
         "status": "RUNNABLE" if not blocked else "BLOCKED",
         "blocked_by": blocked,
-        "what_a_rerun_would_need": [
-            "a chromium with real layout (the bridge presses at element boxes)",
-            "miniwob-plusplus/miniwob/html on disk",
-            "puppeteer-core and @sparticuz/chromium, or a system chromium",
-        ],
-        "note": ("A blocked re-run is not a re-run. The recorded runs stand as the only "
-                 "measurement; nothing in this tool may be cited as a fresh confirmation."),
+        "method": "ran the bridge and loaded a page; did not inspect the environment",
+        "probe": probed,
+        "html_dir": str(html) if html else None,
+        "modules_dir": str(modules) if modules else None,
     }
+
+
+def _sparticuz_root() -> pathlib.Path | None:
+    """Where npm put the package, if it is findable at all."""
+    for base in ("/tmp/mw2", "/tmp/mw", os.getcwd()):
+        candidate = pathlib.Path(base) / "node_modules" / "@sparticuz" / "chromium"
+        if (candidate / "bin" / "al2023.tar.br").is_file():
+            return candidate
+    return None
+
+
+def _locate_html() -> pathlib.Path | None:
+    if os.environ.get("MINIWOB_HTML_DIR"):
+        return pathlib.Path(os.environ["MINIWOB_HTML_DIR"])
+    for base in ("/tmp/mw2", "/tmp/mw"):
+        for found in sorted(pathlib.Path(base).glob("*miniwob*/miniwob/html")) + \
+                sorted(pathlib.Path(base).glob("*MiniWoB*/miniwob/html")):
+            if found.is_dir():
+                return found
+    return None
+
+
+def _locate_modules() -> pathlib.Path | None:
+    if os.environ.get("MINIWOB_NODE_MODULES_DIR"):
+        return pathlib.Path(os.environ["MINIWOB_NODE_MODULES_DIR"])
+    for base in ("/tmp/mw2", "/tmp/mw"):
+        if (pathlib.Path(base) / "node_modules" / "puppeteer-core").is_dir():
+            return pathlib.Path(base)
+    return None
+
+
+def _probe_bridge(html: pathlib.Path, modules: pathlib.Path) -> dict[str, Any]:
+    """Load one task through the real bridge. The only honest way to answer this."""
+    bridge = ROOT / "canonical" / "tools" / "miniwob_chromium_bridge_v1.mjs"
+    if not shutil.which("node"):
+        return {"loaded": False, "error": "NO_NODE"}
+    commands = "\n".join(['{"cmd":"load","task":"click-test"}',
+                          '{"cmd":"reset","seed":1}',
+                          '{"cmd":"close"}'])
+    try:
+        proc = subprocess.run([shutil.which("node") or "node", str(bridge), str(html), str(modules)],
+                              input=commands + "\n", text=True, capture_output=True, timeout=240)
+    except Exception as exc:                                    # pragma: no cover - env specific
+        return {"loaded": False, "error": f"{type(exc).__name__}:{exc}"[:120]}
+    first = (proc.stdout or "").splitlines()[:1]
+    if not first:
+        return {"loaded": False, "error": (proc.stderr or "NO_OUTPUT")[:160]}
+    try:
+        loaded = json.loads(first[0]).get("ok") is True
+    except ValueError:
+        return {"loaded": False, "error": first[0][:160]}
+    return {"loaded": loaded, "error": None if loaded else first[0][:160],
+            "browser": _browser_version(html, modules)}
+
+
+def _browser_version(html: pathlib.Path, modules: pathlib.Path) -> str | None:
+    bridge = ROOT / "canonical" / "tools" / "miniwob_chromium_bridge_v1.mjs"
+    try:
+        proc = subprocess.run([shutil.which("node") or "node", str(bridge), str(html), str(modules)],
+                              input='{"cmd":"versions"}\n{"cmd":"close"}\n', text=True,
+                              capture_output=True, timeout=240)
+        return (json.loads((proc.stdout or "").splitlines()[0]).get("browser"))
+    except Exception:                                           # pragma: no cover - env specific
+        return None
 
 
 # ---------------------------------------------------------------------------
