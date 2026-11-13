@@ -67,4 +67,22 @@ def run(args, root=None):
     result.setdefault("adapter", "forged_invoker")
     result.setdefault("capability_id", cid)
     result.setdefault("function", function)
+    if result.get("ok") is True and "output_path" not in result:
+        try:
+            import hashlib
+            import json
+            import re
+            base_root = pathlib.Path(root) if root else _ROOT
+            canonical_bytes = (json.dumps(result, sort_keys=True, default=str) + "\n").encode("utf-8")
+            sha = hashlib.sha256(canonical_bytes).hexdigest()
+            slug = re.sub(r"[^a-z0-9_]+", "_", cid.lower()).strip("_")[:60]
+            rel_out = f"canonical/astra_runtime/tmp/forged_out__{slug}__{sha[:10]}.json"
+            out_file = base_root / rel_out
+            out_file.parent.mkdir(parents=True, exist_ok=True)
+            out_file.write_bytes(canonical_bytes)
+            result["output_path"] = rel_out
+            result["output_sha256"] = sha
+            result["output_bytes"] = len(canonical_bytes)
+        except Exception:
+            pass
     return result
