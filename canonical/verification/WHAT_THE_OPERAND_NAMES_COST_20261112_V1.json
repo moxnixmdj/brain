@@ -1,0 +1,37 @@
+{
+ "schema": "BRAIN_WHAT_THE_OPERAND_NAMES_COST_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-13T01:34:25Z",
+ "question": "does the one-example rule reach code whose free-variable names differ from the demonstration, and what would alpha-safe generalization buy",
+ "tiers": {
+  "AS_TAUGHT": {
+   "covered": 493,
+   "developers_changes": 607,
+   "coverage": 0.8122,
+   "made": 505,
+   "wrong": 12,
+   "precision": 0.9762
+  },
+  "ALPHA_SAFE": {
+   "covered": 493,
+   "developers_changes": 607,
+   "coverage": 0.8122,
+   "made": 505,
+   "wrong": 12,
+   "precision": 0.9762
+  },
+  "delta_coverage": 0.0
+ },
+ "askings_not_applicable": 168,
+ "askings_where_only_alpha_reaches": 0,
+ "examples_of_only_alpha": [],
+ "oracle_ladder": {
+  "what_it_is": "canonical/swe_kernel/operator_generalization_v1.py, 6 of 7 on its own record",
+  "why_it_is_not_a_tier_here": "verified_skill_crystallizer_v1:1428 refuses operator generalization unless required_verification_kind == TEST_SUITE and a scope_id is given: OPERATOR_GENERALIZATION_REQUIRES_SCOPED_PYTHON_TEST_SUITE",
+  "what_that_means": "every rung above 'exact statement' in this tree needs a runnable oracle, and a new environment has none"
+ },
+ "model_calls": 0,
+ "incremental_spend_usd": 0,
+ "terminal_authority": false,
+ "non_claim": "AGREEMENT_WITH_THE_PEOPLE_IS_NOT_CORRECTNESS__NO_PROJECT_TEST_WAS_RUN"
+}

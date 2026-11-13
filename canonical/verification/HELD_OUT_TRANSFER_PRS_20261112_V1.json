@@ -1,0 +1,346 @@
+[
+ {
+  "name": "ncouture/AirTell#200",
+  "repo": "ncouture/AirTell",
+  "number": 200,
+  "title": "chore(typing): p3 modernize legacy typing to PEP 585 and PEP 604 across codebase (#127)",
+  "before_at": "d2a03ce8f47b4ac028eb8794c20e027afbe7ad87",
+  "after_at": "bbb20eba2e78ed960e145cac65a3bd175f80370e",
+  "changed_python_files": 75,
+  "kind": "pep585",
+  "query": "\"PEP 585\"",
+  "files": [
+   {
+    "path": "src/sniffle/src/sniffle/tests/test_tier2_boundaries.py",
+    "before_sha256": "13764ee9e360305f0edf5f43a6abfd76554c9c0245ab48c56a19a151c58a5a47",
+    "after_sha256": "a4b98cffc1dd0940925ce9a8545f0ef66e7d6857c8f835531c40a58ba661117e"
+   },
+   {
+    "path": "src/sniffle/src/sniffle/measurements.py",
+    "before_sha256": "bda89cf9c0fc22869a816745c1d9f0dd2da1dbfa984eb3282d17c8f018c4a67b",
+    "after_sha256": "777d4a966773f777444fef7587d5d189a5de855a0fb3fc32f6fede662d74346f"
+   },
+   {
+    "path": "src/sniffle/src/sniffle/tests/test_tier3_pairwise.py",
+    "before_sha256": "7609eada851eeab525ae1526f69ab665c8452efe7b2317ac5c7fdde54a6217f6",
+    "after_sha256": "e80131948cb83843cf1dd06ff73280c9c7ca677f357092b1dec9c3fc70da01ad"
+   },
+   {
+    "path": "src/sniffle/src/sniffle/sdr_utils.py",
+    "before_sha256": "262d8eab4a669af23ef72155385676ccdbebfc8a968f07fd2f0395ad91774ca6",
+    "after_sha256": "609536535151b58dc08ddb4aa8fdf7131421fe01b1778232b697d20cee5a510e"
+   },
+   {
+    "path": "src/sniffle/src/sniffle/radar/capture.py",
+    "before_sha256": "aa04f6b49f6e71f81fc5dd86fc20000d789e9748a855e55eb9dbbbd70205db68",
+    "after_sha256": "f6604faddde4df41578d34ab1252d7b33e0cc3bd4ed522258031924a4bbcb205"
+   },
+   {
+    "path": "src/airtell/scripts/code_review.py",
+    "before_sha256": "88fe3061115e57dd17d91b4d3803044abf8f7c93fb753d16cf00382fe34d8ce8",
+    "after_sha256": "4fddea7d85eda59c7d93c4170b5458ca74ab8556555105e4379d6ce8d10d4e30"
+   }
+  ]
+ },
+ {
+  "name": "yaalalabs/agent-kernel#825",
+  "repo": "yaalalabs/agent-kernel",
+  "number": 825,
+  "title": "refactor: modernize type annotations to PEP 585/604 style",
+  "before_at": "893bedfaec257f540d40168e5154918c3cb0d204",
+  "after_at": "8b25d669a749983f25de7f519737bca3f6aebb77",
+  "changed_python_files": 248,
+  "kind": "pep585",
+  "query": "\"PEP 585\"",
+  "files": [
+   {
+    "path": "examples/api/mcp/multi/client.py",
+    "before_sha256": "290c58284269d2786b1342d10f94fd93992ae093feb34b92049f65ff9cf69bbf",
+    "after_sha256": "b5f41c2a915b8d202e93ac60d81c2b385f22af39b90be533fe88d34ca6f8cd40"
+   },
+   {
+    "path": "ak-py/src/agentkernel/integration/thread/thread_chat.py",
+    "before_sha256": "adef2ca8a3f4d2a1c8b183c0e585a8afc67183d605a2a5f564bd1b490fff2de8",
+    "after_sha256": "5fc68d00132206f40461db270332da8c8a60c10e7c86e5f0227508203ddaba75"
+   },
+   {
+    "path": "ak-py/src/agentkernel/pipeline/request_handler.py",
+    "before_sha256": "046ec05bb8631a21af37149c0ba230b7a86512c0deb2f9389e7d8bd3b8aee12b",
+    "after_sha256": "a9da80a37b21411d726a7fc6a7364671e6c949171a073aa05f0578abc94ed8c3"
+   },
+   {
+    "path": "ak-py/src/agentkernel/core/multimodal/storage/base.py",
+    "before_sha256": "3a9119e68c993ef96eed8e5ea3a6c444f1481a31357b9db91d54b44681af3e35",
+    "after_sha256": "2bebedc6e34081f743a2c9309847da863823fd3a47075adaf6bfe43537887eb6"
+   },
+   {
+    "path": "examples/api/livekit-voice/openai/nats/nats_tester.py",
+    "before_sha256": "b3c837666e590547de45129962cbb6ac4001d2477453958a8a1ee178e28ef040",
+    "after_sha256": "5305f10954504b40dc275c9f677a55977569def1c99e7c3833ec820f5115c12b"
+   },
+   {
+    "path": "ak-py/src/agentkernel/knowledgebase/base.py",
+    "before_sha256": "5e8183ae05cf7133fbf6970d92666e3d7dbf6d518300bd37ff73a58ee8d597be",
+    "after_sha256": "a13a2864b727e07fa60bb8929805d0e07c99ba9a0c8091eab13415b8f730af52"
+   }
+  ]
+ },
+ {
+  "name": "agencyenterprise/draft-detective#858",
+  "repo": "agencyenterprise/draft-detective",
+  "number": 858,
+  "title": "refactor(typing): use built-in generics and | unions",
+  "before_at": "78a1264bb67094bb4720ddedcbc9c80bd520ac62",
+  "after_at": "44024ab7f16e5f4c21bd0179e4d224464cbfba9c",
+  "changed_python_files": 252,
+  "kind": "pep585",
+  "query": "built-in generics",
+  "files": [
+   {
+    "path": "lib/api/routers/microsoft/teams.py",
+    "before_sha256": "732f13911c465a3c4348c86a7e04456a2710bf2f27b0fad26341500e3f8edff0",
+    "after_sha256": "89387636e4b55cccf7edaa41a778769be9ac4b7811c46e511dbe937671256a8c"
+   },
+   {
+    "path": "lib/models/project.py",
+    "before_sha256": "4adc3f926327b642974f2614a09b0fa9f0f6ac28e3f8f4eb821c37f472c6491c",
+    "after_sha256": "00354ff06ecfed32c370b803f448c5cd9f09e66af0883d2f6f99b03bf86f7361"
+   },
+   {
+    "path": "evals_inspectai/e2e/document_structure/criteria.py",
+    "before_sha256": "107647b4dc7930a350d2ce42c901913a9aef01efacc06e4c3bf25213fd975759",
+    "after_sha256": "315db5db2d103f91c0ad687dc56503784e80ee47f9972d2b1f266ab0fb997939"
+   },
+   {
+    "path": "lib/workflows/simple_deep_agent/agent_types.py",
+    "before_sha256": "43cb645ab63d00315059fdaa56e7019db6b11cd07904278884399368ba320e34",
+    "after_sha256": "8920a158c443f3cd11a1cdec532ca19f572256e497277bc9297ae41f9bfc1bf2"
+   },
+   {
+    "path": "evals_inspectai/e2e/reviewer_2/reviewer_2_e2e.py",
+    "before_sha256": "dc7690f0c8eb2b4c22c9d0b112ec7d34d0d5935df0e7f17b59321bcc4f255223",
+    "after_sha256": "1b96cb8f1f489beda195d12901543d3f32681e83a7dc0911a724d6ee5a3e8c30"
+   },
+   {
+    "path": "tests/unit/agents/test_chat_agent.py",
+    "before_sha256": "f8a33a327e59a97e80168b3607606186e884a07eb7b2b40ad9809f65eb8ccffe",
+    "after_sha256": "367b43474a4901d77eca4d7ea8ecf97fb6f65b648323ee7c15f6b8ba8310861e"
+   }
+  ]
+ },
+ {
+  "name": "VHDL/pyVHDLModel#204",
+  "repo": "VHDL/pyVHDLModel",
+  "number": 204,
+  "title": "Built-in generics instead of typing's List, Tuple and Dict",
+  "before_at": "37d9ecd523c62474d9a3b05d340585a0379aa9da",
+  "after_at": "7476f4e65448b20c1f808c14974c867424b366ed",
+  "changed_python_files": 20,
+  "kind": "pep585",
+  "query": "built-in generics",
+  "files": [
+   {
+    "path": "pyVHDLModel/Association.py",
+    "before_sha256": "5c668ffcf9a8654ff04b4a2390b71b087b1328f4d3d33d2f3236b07ce50c6b8f",
+    "after_sha256": "543d61480c73e9cf2e38f015bef39f57b508db1169fa69ac08e5987363581c3d"
+   },
+   {
+    "path": "pyVHDLModel/Instantiation.py",
+    "before_sha256": "1afcf86601b3513f9d1307f3c8849516eee6a3dbbf1e6c03da86a9b6be078f1f",
+    "after_sha256": "a6b1d92cb2146230a73632c91efc048e0052c55af4cae91fa2d99191b0d97649"
+   },
+   {
+    "path": "pyVHDLModel/Name.py",
+    "before_sha256": "cdcc200301193284ed012c5ff66c32c282ded6cf31d994cd1a8cec1f52e4ae72",
+    "after_sha256": "b9d0a9e8372db10baaa619bd2500cca727e0a0bc976bfcd3a833c6a6903773e6"
+   },
+   {
+    "path": "pyVHDLModel/Namespace.py",
+    "before_sha256": "9d607c0d07c4b1a4d2fb01d00e42892aa6395837a23136e42a7b4183bda05228",
+    "after_sha256": "ebf8931e08ef5f2ead4e755b4dad29575e9eb01da60fec20bd280dc80ea18745"
+   },
+   {
+    "path": "pyVHDLModel/Symbol.py",
+    "before_sha256": "5722b0de0e6f90f34efad69883ad8e97135cd395123288e5310fbaf536a41dd6",
+    "after_sha256": "ab5abfa53a2e2b75786e5464b7041f83b714a1dd6364f85b06fd2e96d3a1848d"
+   },
+   {
+    "path": "pyVHDLModel/Sequential.py",
+    "before_sha256": "7193527ff96cdd415e51d7c9ae398f51441b223a6283fb181f98b652828cb03c",
+    "after_sha256": "acf651d45cb70184de0dc486194108f0c47a59249d33d8e345b13e077defc074"
+   }
+  ]
+ },
+ {
+  "name": "zkaelxz/U00#1831",
+  "repo": "zkaelxz/U00",
+  "number": 1831,
+  "title": "Replace the deprecated datetime.utcnow with lib.clock.utcnow",
+  "before_at": "0009aef37b548e08c0daf84746ecbe021860aa76",
+  "after_at": "bfe7ed0cd2600853fd9b3b87355471347d092e60",
+  "changed_python_files": 38,
+  "kind": "utc",
+  "query": "utcnow",
+  "files": [
+   {
+    "path": "db/vocab.py",
+    "before_sha256": "4e974c8b53b14f00f62a2e566726b9da7b40fa35587567e0d68016315a89d1f0",
+    "after_sha256": "91ef347aafbde790b95a4cfa4af8d87db230b249bdd613111f719ac7f49fc7e9"
+   },
+   {
+    "path": "services/metadata_research_service.py",
+    "before_sha256": "40a1879a786d259b06afc73320724aaf45f1daef494ddd7bde112c68fd5603e5",
+    "after_sha256": "b429a5f9e358e04688ae1c61623f63ac8b7fea2055c27c95482ffadfd410d445"
+   },
+   {
+    "path": "services/benchmark_lab_service.py",
+    "before_sha256": "79de155103c4edfeb98151d287e9cc2f19a1486495dace9476dd9c2e86cdfbe3",
+    "after_sha256": "4326ff5cbb613208d3e2294cd4c05f4ee9702b114b8544c7de99e503ea154861"
+   },
+   {
+    "path": "db/bulk_jobs.py",
+    "before_sha256": "3d5478a1a453b80b3aaf3aee256a45bfaa850eb610f36cce04bdd0f785ce265f",
+    "after_sha256": "a60f4be57228b278579492f7b409eb2e80bfd9c7222d682a2cdce7b13f279a35"
+   },
+   {
+    "path": "db/benchmark.py",
+    "before_sha256": "0bbb17d1eeea05b2265b8538a02582c322c5dcdfd3029181e59e53e1e41e67b7",
+    "after_sha256": "75462af197dea2bbc162282cf9f0b698af5f00812965a524dd2f498f26bc490a"
+   },
+   {
+    "path": "db/speakers.py",
+    "before_sha256": "0d5c03e5211ff6364ec49682e67327aa477f0cf3631b1c68df9de45b8d6dbaff",
+    "after_sha256": "8c044609c93502a18b3b65fe7a9351b387326239a245f3ff5ca232cda6b49ab5"
+   }
+  ]
+ },
+ {
+  "name": "mborchuk/ContaAutonomo#121",
+  "repo": "mborchuk/ContaAutonomo",
+  "number": 121,
+  "title": "refactor: replace deprecated utcnow() and Query.get() (E-5)",
+  "before_at": "a8d029b9152baaf230f5e7d5239d55901f35b854",
+  "after_at": "fe4a1101159da30750fffc62fed2d53981042d6c",
+  "changed_python_files": 21,
+  "kind": "utc",
+  "query": "utcnow",
+  "files": [
+   {
+    "path": "modules/invoice_designer/index.py",
+    "before_sha256": "a7b59db313a9fec832453a28f88ae84809fca0bd7bb4ccbc661ce739198f69ed",
+    "after_sha256": "4359be09822a6373710db97dcde3218c6e3266ca812dc7d9cf79e6a4d1ff7dde"
+   },
+   {
+    "path": "modules/pdf_signature/index.py",
+    "before_sha256": "c186b7cb466b2c944db56e5c1e9f520b09d352ef54eb051b80dff743d82f2123",
+    "after_sha256": "9662c61420f30d1fc8d05cdb0cceb38cd11c13301f74058a3530ff7635fb642f"
+   },
+   {
+    "path": "modules/documents/index.py",
+    "before_sha256": "77fad6c7b8e6715a42e92af3235614adc6b80e150943f2a82f898e191db2b5c5",
+    "after_sha256": "3078f388148bde8a28452e21225536b3ad1e76d6534df835cd959410ee266468"
+   },
+   {
+    "path": "modules/invoice_email/index.py",
+    "before_sha256": "4a753fd76ec0e51d6308d5420b3b78301f62612974480e1c4acf2a3eef7fc548",
+    "after_sha256": "013d3b5026724622f68ffaa9eddfce24232762f0dee8101b68d46a8b97b92de6"
+   },
+   {
+    "path": "modules/invoice_comments/index.py",
+    "before_sha256": "0c3e5678298ba41d9a9b74c1fee47ca16740fffe8e90e1996546d1b52afc421c",
+    "after_sha256": "62af1702f3883d1ee461eb8360ad70afd18a5ce0b8be7f2f70737cb06164841d"
+   },
+   {
+    "path": "module_manager.py",
+    "before_sha256": "74f4be5e98ed43f2fd8bfa53116c50ec41bd044ecb59ca2acd80caf67aa68875",
+    "after_sha256": "61156f7612f737d0c99b09952a44035d45b6f3c214fef764e59ae6833a9859a4"
+   }
+  ]
+ },
+ {
+  "name": "mozilla/bugbug#7463",
+  "repo": "mozilla/bugbug",
+  "number": 7463,
+  "title": "Revert \"Refix replace datetime.utcnow() with datetime.now(timezone.utc) (#7062)\"",
+  "before_at": "6c1bb1e62f9f11134ef0f4d575fb9d0d2ca151ce",
+  "after_at": "f98144bae8bf8837a990df2f9c0763ac2d4e2bcc",
+  "changed_python_files": 16,
+  "kind": "utc",
+  "query": "datetime.now(UTC)",
+  "files": [
+   {
+    "path": "bugbug/phabricator.py",
+    "before_sha256": "96a5617affe8d1ecc1b97fea2833443ea93bd8a8aa0d9b9846cd19afbdf2ba11",
+    "after_sha256": "81e5f7a1e7ab3a627b3e58dbff54c3aa8a50d190b1350c163a8df325d3073867"
+   },
+   {
+    "path": "bugbug/bugzilla.py",
+    "before_sha256": "4dca2286d49e4629f3545191a2378d5b89744de8aecff759ea97c2c302903570",
+    "after_sha256": "f65b33d7de33fbebc742f4f5f545df44b7b40d88405761e58b9d9e99e0aec816"
+   },
+   {
+    "path": "bugbug/repository.py",
+    "before_sha256": "6043d7cd5bf2aec74df5c40c0a8a5e7c8b8a2b51f186227795ec2207f0105e9b",
+    "after_sha256": "a7b0f1c3825c56cf3d5f94a25a8fa78137b6097a37e6e3e9c0fdf4a6efdfcd29"
+   },
+   {
+    "path": "scripts/get_untriaged.py",
+    "before_sha256": "c555e5a7db4275c4ec79e25a8f52d0575b556ffe2fad0a1119a94992929a9c3d",
+    "after_sha256": "db24dcd24cdb6bed5f75e05f6dcdc3de49c913d59077064d4ab78ae9547e0308"
+   },
+   {
+    "path": "scripts/test_scheduling_history_retriever.py",
+    "before_sha256": "8ff8b8f71731cbca19c249360a55a55895d6aa8c76f81143951ed6b05ee8e3b6",
+    "after_sha256": "8f8fe6303b2391be5738a21186572f43bcdde22c496b6831a7e6f8a34466e569"
+   },
+   {
+    "path": "bugbug/models/backout.py",
+    "before_sha256": "7f07be8dc036da3a8907228912008f8717b3cda851321f3c35d56ed69b5435c3",
+    "after_sha256": "59f0a119aeef1b200688a25815f57cdca3a1cc811bc1e404d8f0f49478150425"
+   }
+  ]
+ },
+ {
+  "name": "mozilla/bugbug#7062",
+  "repo": "mozilla/bugbug",
+  "number": 7062,
+  "title": "Refix replace datetime.utcnow() with datetime.now(timezone.utc)",
+  "before_at": "8824b80a5102a87cd55542ac133885897ac72e90",
+  "after_at": "9ccbd8e747b413dc94d18fab8460e4b63f96243c",
+  "changed_python_files": 16,
+  "kind": "utc",
+  "query": "datetime.now(UTC)",
+  "files": [
+   {
+    "path": "bugbug/phabricator.py",
+    "before_sha256": "81e5f7a1e7ab3a627b3e58dbff54c3aa8a50d190b1350c163a8df325d3073867",
+    "after_sha256": "96a5617affe8d1ecc1b97fea2833443ea93bd8a8aa0d9b9846cd19afbdf2ba11"
+   },
+   {
+    "path": "bugbug/bugzilla.py",
+    "before_sha256": "f65b33d7de33fbebc742f4f5f545df44b7b40d88405761e58b9d9e99e0aec816",
+    "after_sha256": "4dca2286d49e4629f3545191a2378d5b89744de8aecff759ea97c2c302903570"
+   },
+   {
+    "path": "bugbug/repository.py",
+    "before_sha256": "a7b0f1c3825c56cf3d5f94a25a8fa78137b6097a37e6e3e9c0fdf4a6efdfcd29",
+    "after_sha256": "6043d7cd5bf2aec74df5c40c0a8a5e7c8b8a2b51f186227795ec2207f0105e9b"
+   },
+   {
+    "path": "scripts/get_untriaged.py",
+    "before_sha256": "db24dcd24cdb6bed5f75e05f6dcdc3de49c913d59077064d4ab78ae9547e0308",
+    "after_sha256": "c555e5a7db4275c4ec79e25a8f52d0575b556ffe2fad0a1119a94992929a9c3d"
+   },
+   {
+    "path": "scripts/test_scheduling_history_retriever.py",
+    "before_sha256": "8f8fe6303b2391be5738a21186572f43bcdde22c496b6831a7e6f8a34466e569",
+    "after_sha256": "8ff8b8f71731cbca19c249360a55a55895d6aa8c76f81143951ed6b05ee8e3b6"
+   },
+   {
+    "path": "bugbug/models/backout.py",
+    "before_sha256": "59f0a119aeef1b200688a25815f57cdca3a1cc811bc1e404d8f0f49478150425",
+    "after_sha256": "7f07be8dc036da3a8907228912008f8717b3cda851321f3c35d56ed69b5435c3"
+   }
+  ]
+ }
+]
