@@ -32,8 +32,8 @@
   "canonical/tests/test_insufficiency_witness_v1.py": "0cb299425d0e8e0c8b8497ef2eae8a59d8a0ac5e2df28cfe1097d58c53d710b0",
   "canonical/tools/insufficiency_certificate_probe_v1.py": "6239389923338b01c289e92e82a8d823cd0ea802173b8e2769831578dcaea238"
  },
- "generated_at_git_head": "453e3557fd4f1a774c46b363d5c551f00223585c",
- "generated_at_utc": "2026-11-13T04:05:14Z",
+ "generated_at_git_head": "2ef8a72597d7efa791d1d1d2b8f5c87fde0a7ef8",
+ "generated_at_utc": "2026-11-13T04:14:11Z",
  "generated_by": "producer run of canonical/tools/insufficiency_certificate_probe_v1.py",
  "how_reproduced": [
   "python3 canonical/tools/insufficiency_certificate_probe_v1.py",
