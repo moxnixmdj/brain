@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 423,
+  "knowledge_documents": 424,
   "receipt_backed_capabilities": 294,
   "research_index_records": 6822,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4f0f4a0d3a8954b74f95d3aa36003bfefbd89d18afa1147893adc51661159f0c"
+  "value": "4496ca81da40cbadaa1d32501ff85fde2e8897534e2040246e9f86f2852aab14"
  },
  "engines": [
   {
@@ -61904,6 +61904,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6878,
+   "headings": [
+    "The remaining gap at two showings is a census, not a mystery",
+    "Why this census exists",
+    "The census (held_out at two showings, every gap)",
+    "The one mechanism the census licenses next",
+    "What the one-showing wrong writes prove (and why they stay)",
+    "Standing doctrine this census confirms"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_REMAINING_GAP_AT_TWO_SHOWINGS_IS_A_CENSUS_NOT_A_MYSTERY_20261113_V1.md",
+   "sha256": "4eb7a6e92172af98576b2211d973ad8f5a2560656ac4b6a37925929bee6a5307",
+   "summary": "Date: 2026-11-13.  Base: `d9318588` (T35 merged).  This is a diagnosis artifact, not a declared measurement: no benchmark table below is a re-draw; every number cited from the tables is the T35 declared run's recorded result, and everything new here is learn-time and per-file diagnosis of the kind every prior turn ran before declaring its mechanism.",
+   "terms": {
+    "all": 3,
+    "because": 3,
+    "census": 8,
+    "code": 5,
+    "corpus": 5,
+    "datetime": 4,
+    "declared": 3,
+    "different": 4,
+    "e.message": 3,
+    "each": 3,
+    "engine": 4,
+    "every": 4,
+    "example": 4,
+    "file": 7,
+    "files": 4,
+    "gap": 4,
+    "here": 3,
+    "import": 5,
+    "knowable": 3,
+    "left": 7,
+    "lesson": 5,
+    "literal": 3,
+    "mechanism": 10,
+    "must": 3,
+    "new": 3,
+    "no": 6,
+    "not": 16,
+    "np.object": 3,
+    "object": 5,
+    "one": 13,
+    "only": 7,
+    "origin": 6,
+    "own": 3,
+    "pattern": 3,
+    "refused": 4,
+    "remaining": 4,
+    "same": 5,
+    "showing": 4,
+    "showings": 13,
+    "side": 4,
+    "spelling": 5,
+    "str": 8,
+    "string": 5,
+    "target": 14,
+    "targets": 5,
+    "two": 9,
+    "writes": 4,
+    "wrong": 5
+   },
+   "title": "The remaining gap at two showings is a census, not a mystery",
+   "title_terms": [
+    "census",
+    "gap",
+    "mystery",
+    "not",
+    "remaining",
+    "showings",
+    "two"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6315,
    "headings": [
     "The repoint is verified, and the census did not move",
@@ -77789,10 +77865,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1225,
+  "included_source_count": 1226,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "77a9f56851421c1e07bb4f71abc60f3173b5703d51aa1542e821f1db2488a077"
+  "source_tree_digest": "53d1fb767c4cfad97580a8660ff97a90258601ec06799454ed1e7fedc72c479c"
  },
  "research_index": [
   {
