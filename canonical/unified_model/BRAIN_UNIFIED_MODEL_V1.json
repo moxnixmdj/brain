@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 432,
+  "knowledge_documents": 433,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6829,
+  "research_index_records": 6830,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "926af20a14e34f34e566d61cd3748c5d84a4f6dbe087766832f39d116ba01069"
+  "value": "22fcb2491256fb518d186d4f55423c4dca775ef436e702c1b58ed99fd7cf2d57"
  },
  "engines": [
   {
@@ -61804,6 +61804,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11153,
+   "headings": [
+    "The layer you named is the right layer, and it is not the bottleneck",
+    "1. Your citations are real — verified, not taken on trust",
+    "2. The cost of adding weights without a verifier, measured by other people",
+    "3. What I measured: this repo has a real event stream, and it is thin",
+    "4. Where your analysis is wrong — three specific things",
+    "5. The smartest path — and why it is not \"start fine-tuning\"",
+    "6. Am I right or wrong — final",
+    "Receipts"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_LAYER_YOU_NAMED_IS_RIGHT_THE_FUEL_IS_MISSING_20261113_V1.md",
+   "sha256": "25fd968fb8920502b65796be90608886b8f9741daf52246f9db751ab85c3148c",
+   "summary": "You pasted an analysis that says: token-space learning is one layer, weight-space learning is the other, and the missing piece is weight updates. **That analysis is correct, and every citation in it is real.** I checked all four against 2026 sources before answering, and I measured what this repo would have to feed such a layer.",
+   "terms": {
+    "192": 4,
+    "2026": 7,
+    "3.8": 4,
+    "analysis": 4,
+    "arxiv": 4,
+    "ascent": 8,
+    "before": 4,
+    "both": 4,
+    "canonical": 5,
+    "capability": 6,
+    "check": 4,
+    "distillation": 4,
+    "events": 4,
+    "every": 4,
+    "experience": 8,
+    "fine-tuning": 7,
+    "fuel": 4,
+    "gains": 5,
+    "held-out": 6,
+    "here": 4,
+    "layer": 10,
+    "learning": 12,
+    "lesson": 6,
+    "make": 7,
+    "measured": 7,
+    "memory": 9,
+    "missing": 6,
+    "no": 6,
+    "not": 26,
+    "one": 16,
+    "permanent": 6,
+    "real": 11,
+    "right": 6,
+    "same": 5,
+    "scale": 5,
+    "sft": 6,
+    "steps": 5,
+    "stream": 5,
+    "token-space": 5,
+    "training": 5,
+    "trajectories": 5,
+    "verdict": 5,
+    "verified": 8,
+    "verifier": 5,
+    "weight-space": 6,
+    "weights": 13,
+    "wrong": 11,
+    "yes": 5
+   },
+   "title": "The layer you named is the right layer, and it is not the bottleneck",
+   "title_terms": [
+    "bottleneck",
+    "layer",
+    "named",
+    "not",
+    "right"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10796,
    "headings": [
     "The wall is not the shape of the change; it is that one file cannot show you a fact about a module",
@@ -78543,10 +78619,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1234,
+  "included_source_count": 1235,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "c8670eb320188b430b138f60cb20957c6840fc5a7993e2ec3f63b02118801851"
+  "source_tree_digest": "b81e488386e11a5576a1fd6d3c1ea4b2e07a541ea69657f9305874fbe22620e7"
  },
  "research_index": [
   {
@@ -208399,6 +208475,24 @@
     "v1": 1,
     "verify": 1,
     "wake": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WEIGHT_SPACE_FUEL_20261113_V1.json",
+   "schema": "WEIGHT_SPACE_FUEL_V1",
+   "sha256": "34731ad1b1b6d2db2cb513708104287ebe89fa2de62098d3e57af5fe2f3b592e",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "fuel": 1,
+    "space": 1,
+    "v1": 1,
+    "weight": 1
    }
   },
   {
