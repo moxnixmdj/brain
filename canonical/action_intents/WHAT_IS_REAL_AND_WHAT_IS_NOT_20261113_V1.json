@@ -1,0 +1,418 @@
+{
+ "action_id": "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1",
+ "action_intent_id": "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "action_summary": "Repairs the shipped generalisation organ, which on main did not parse: a merge commit carried two conflict regions into edit_by_example_v1.py, so 10 test files could not be collected and the function every claim calls was unreachable. Then measures the owner's claim - give it the action once and it is learned in a new environment - instead of arguing it: one showing is refused on all four new shapes tried, including the same defect under different variable names; two showings from two places do reach a name never shown, and still offer to change a boundary that is required. Also measures the 'Problem 2 completely solved' document on main: 24 records holding 8 distinct tasks, none of them a failure, and an executed answer that does not come from the memory. Adds no capability, flips no family, claims no benchmark movement.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "DELETE does not apply (the organ is load-bearing and is kept, repaired), BYPASS does not apply (there is no other route to the lesson), and REUSE is what this does: the repo's own organ, its own ladder, and its own test runner, with no new capability.",
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1.md",
+   "canonical/tools/what_transfers_v1.py",
+   "canonical/tests/test_what_transfers_v1.py",
+   "canonical/verification/WHAT_TRANSFERS_20261113_V1.json",
+   "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+   "canonical/action_intents/WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1.json"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_FILE_EVERY_GENERALISATION_CLAIM_RESTS_ON_WAS_A_SYNTAX_ERROR_ON_MAIN_SO_NO_CLAIM_COULD_BE_MEASURED_OR_REFUTED__AND_ONCE_IT_RAN_ONE_SHOWING_WAS_MEASURED_AS_TRANSFERRING_TO_NOTHING_WHILE_TWO_SHOWINGS_TRANSFER_AND_STILL_OFFER_TO_CHANGE_A_REQUIRED_BOUND__AND_A_STORE_OF_24_RECORDS_HOLDING_8_TASKS_NONE_OF_THEM_A_FAILURE_CANNOT_KNOW_WHERE_A_LESSON_STOPS",
+ "canonical_base_commit": "00a75d5f34d93f0616e8e3e85437f6efd3dba822",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_FILE_EVERY_GENERALISATION_CLAIM_RESTS_ON_WAS_A_SYNTAX_ERROR_ON_MAIN_SO_NO_CLAIM_COULD_BE_MEASURED_OR_REFUTED__AND_ONCE_IT_RAN_ONE_SHOWING_WAS_MEASURED_AS_TRANSFERRING_TO_NOTHING_WHILE_TWO_SHOWINGS_TRANSFER_AND_STILL_OFFER_TO_CHANGE_A_REQUIRED_BOUND__AND_A_STORE_OF_24_RECORDS_HOLDING_8_TASKS_NONE_OF_THEM_A_FAILURE_CANNOT_KNOW_WHERE_A_LESSON_STOPS",
+ "date": "2026-11-13",
+ "expected_parent_change": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py parses again and its two conflict regions are unioned rather than resolved to one side; canonical/tools/what_transfers_v1.py added as the instrument; canonical/verification/WHAT_TRANSFERS_20261113_V1.json added as its record; canonical/tests/test_what_transfers_v1.py added with 17 tests; WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1.md added.",
+ "expected_parent_frontier_change": "THE_GENERALISATION_ORGAN_IS_IMPORTABLE_AGAIN_AND_ONE_SHOWING_IS_MEASURED_AS_INSUFFICIENT__TRANSFER_COMES_FROM_A_SECOND_DIFFERING_SHOWING_AND_FROM_A_CHECK_NEITHER_OF_WHICH_IS_AUTOMATIC__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+ "explicit_user_authorization": "Owner instruction this session, verbatim: 'Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?', 'you must think from first principles', 'kill all the bad and dumb ideas before you waste time implementing them', 'maximize your web use', and 'always after you make any of your work, push and merge your work always'. This PR answers the question with measurements and repairs the instrument that was too broken to measure with.",
+ "falsification_condition": "FALSIFIED if the organ does not parse, if any conflict marker remains, if the union dropped either side, if one showing is reported as transferring, if two showings are reported as unable to transfer where the ladder transfers, if the 2 remaining door tests are reported as passing, or if the record claims spend or a model call.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "canonical_base_commit": "00a75d5f34d93f0616e8e3e85437f6efd3dba822",
+  "constructive_gap_for_open_obligation_ids": [],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/2",
+  "interpretation": "DISCHARGES_NOTHING_AND_CLAIMS_NO_CAPABILITY__EXPECTED_DISCHARGE_IS_ZERO__THE_UNLOCK_FIGURE_IS_THE_HOUSE_CONVENTION_FOR_A_CONSTRUCTIVE_GAP_BINDING__REPAIRS_THE_INSTRUMENT_THAT_WAS_TOO_BROKEN_FOR_ANY_CLAIM_TO_BE_TESTED_AND_THEN_FALSIFIES_THE_SINGLE_SHOWING_ASSUMPTION",
+  "open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4"
+  ],
+  "open_obligation_ids_note": "Bound to the two coding obligations because the blocker is the coding-generalisation blocker; no obligation is claimed discharged and scope_complete_discharge is false.",
+  "scope_complete_discharge": false,
+  "stop_condition": "SHIPPED_ORGAN_IMPORTABLE_AND_ITS_WIDEST_SUITE_RUNNING_AGAIN__ONE_SHOWING_MEASURED_AS_REFUSED_ON_ALL_FOUR_NEW_SHAPES__TWO_SHOWINGS_MEASURED_AS_TRANSFERRING_TO_AN_UNSEEN_NAME__THE_SOLVED_CLAIM_MEASURED_AND_FALSIFIED__17_NEW_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "success_probability_lcb": 0.9,
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "Organ: SyntaxError at line 1598 on main, from merge ffac8e3f53 (both parents clean); after a union resolution it parses and 148 tests that could not be collected run, with 60 passing in the widest one-shot suite (0 before). One showing against four new shapes: same defect other names REFUSED, other operator form REFUSED, other shape REFUSED, required '<=' REFUSED. Two showings from two places: 1 proposal, changes the bound correctly on a function never shown; and still offers to change a required '<='. Solved-claim store: 24 records, 8 distinct tasks, outcome set {success}, executed answer does not come from the memory. The 2 remaining door failures are traced to a third defect, a later 'explains too little' gate short-circuiting before the taught-action path, and are left failing rather than papered over. 17 new tests pass; repo-integrity-guard 17 rules 0 violations.",
+ "next_step": "WIRE_THE_TAUGHT_ACTION_REFUSAL_THROUGH_THE_EXPLAINS_TOO_LITTLE_GATE_SO_A_TAUGHT_LESSON_IS_CONSULTED_BEFORE_A_WORD_COUNT_REFUSES_THE_REQUEST",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  {
+   "commit": "5a01d80505",
+   "what": "round 28's ladder measurement is the in-project figure this PR puts beside the cross-project refusals; none of its numbers are recomputed."
+  },
+  {
+   "commit": "450955595b",
+   "what": "the constructed counterfactual and its correction are reused verbatim as the explanation of why widening cannot fix a half demonstration."
+  }
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "00a75d5f34d93f0616e8e3e85437f6efd3dba822",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "TAKE_ONE_SIDE_OF_EACH_CONFLICT_REGION",
+   "TRUST_THE_COMPLETELY_SOLVED_DOCUMENT",
+   "WIDEN_THE_RULE_TO_COVER_THE_NEW_SHAPES",
+   "PATCH_THE_CENTRAL_DOOR_WITHOUT_A_WAY_TO_VERIFY_IT",
+   "DELETE_THE_DUPLICATE_MEMORY_STORES_IN_THIS_PR"
+  ],
+  "expected_parent_level_state_change": "THE_GENERALISATION_ORGAN_IS_IMPORTABLE_AGAIN_AND_ONE_SHOWING_IS_MEASURED_AS_INSUFFICIENT__TRANSFER_COMES_FROM_A_SECOND_DIFFERING_SHOWING_AND_FROM_A_CHECK_NEITHER_OF_WHICH_IS_AUTOMATIC__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT__NO_FAMILY_FLIPPED",
+  "iteration_limit": 4,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "DELETE_NOT_APPLICABLE_THE_ORGAN_IS_KEPT__BYPASS_IMPOSSIBLE_THERE_IS_NO_OTHER_ROUTE_TO_THE_LESSON__SUBSTITUTE_FORBIDDEN_A_MODEL_OR_EMBEDDING_IS_NEITHER_ZERO_COST_NOR_VERIFIABLE_HERE",
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__THE_ORGAN_LEARNS_ONLY_WHAT_TWO_CHANGED_PLACES_DIFFER_IN_AND_A_SINGLE_SHOWING_HAS_NO_DIFFERING_PLACES",
+   "surviving_causal_blocker": "A_SINGLE_DEMONSTRATION_LEAVES_EVERY_PLACE_IN_THE_RULE_FIXED_SO_THE_LESSON_MATCHES_ONE_FILE_AND_NOTHING_THAT_CAN_HAVE_A_CHECK"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "NO_NEW_LEARNER_NO_NEW_EMBEDDING_NO_NEW_MEMORY_STORE",
+   "existing_inherited_routes_checked": "EDIT_BY_EXAMPLE_V1_THE_ORGAN__EDIT_KIND_LEARNING_V1_THE_LADDER__THE_REPOS_OWN_TEST_RUNNER__THE_ROUND_28_CORPUS_RECORD",
+   "external_existing_routes_checked": "PYTHON_STDLIB_AST_AND_JSON_ONLY__NO_PACKAGE_INSTALLED_FOR_THE_MEASUREMENT",
+   "surviving_gap": "TWO_THINGS_ONLY__A_SECOND_DIFFERING_DEMONSTRATION_CHOSEN_AUTOMATICALLY__AND_A_CHECK_STOOD_UP_IN_A_NEW_ENVIRONMENT"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "ANSWERING_FROM_THE_DOCUMENT_TITLES",
+    "TREATING_A_REFUSAL_AS_A_LEARNING_SUCCESS",
+    "TREATING_ONE_SHOWING_AS_INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT"
+   ],
+   "real_outcome": "THE_OWNERS_QUESTION_ANSWERED_WITH_MEASUREMENTS_RATHER_THAN_WITH_A_VERDICT",
+   "surviving_necessity": "A claim that is worth acting on has to survive its own instrument; here the instrument itself was broken, so the claim had never been tested at all."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "THE_ROUND_28_LADDER_FIGURES_AND_THE_CONSTRUCTED_COUNTERFACTUAL_ARE_REUSED_WITHOUT_RECOMPUTATION",
+   "downstream_work_to_delete_or_supersede": "ANY_PLAN_THAT_ASSUMES_THE_ORGAN_TRANSFERS_FROM_ONE_SHOWING_MUST_ANSWER_THIS_MEASUREMENT_FIRST",
+   "fresh_reuse_plan": "THE_NEXT_PR_REUSES_THE_DOORS_TAUGHT_ACTION_PATH_AND_THE_EXPLAINS_TOO_LITTLE_GATE_AND_WIRES_THEM_TOGETHER"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "DELETED_BEFORE_IMPLEMENTATION__A_SEMANTIC_ADAPTER_WIDENING_THE_RULE_AND_A_NEW_MEMORY_STORE__CACHED__THE_PROBE_RESULTS_AND_THE_RECORD_SO_NO_RERUN_IS_NEEDED",
+   "search_stop_decision": "STOPPED_WHEN_THREE_INDEPENDENT_2026_LINES_ALL_LOCATED_THE_BOTTLENECK_IN_VALIDATED_REUSE_RATHER_THAN_IN_RETRIEVAL_QUALITY"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "REUSE_WINS_BECAUSE_THE_REPO_ALREADY_OWNS_BOTH_THE_ORGAN_AND_A_LADDER_THAT_TRANSFERS__SYNTHESIZE_NEW_PRIMITIVE_LOSES_BECAUSE_NOTHING_HAD_BEEN_MEASURED_YET",
+   "routes_ranked": [
+    "REUSE",
+    "CONFIGURE",
+    "COMPOSE",
+    "ADAPT",
+    "INTEGRATE"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "THE_CORPUS_RECORD_NEEDED_TO_PROVE_CROSS_PROJECT_TRANSFER_IS_NOT_ON_THIS_MACHINE_SO_THAT_ARM_IS_REPORTED_AS_NOT_RUN_RATHER_THAN_ESTIMATED__THE_FOUR_SHAPE_PROBE_IS_SMALL_AND_MEASURES_REFUSAL_WHICH_IS_A_LOWER_BOUND_ON_INABILITY"
+  },
+  "real_outcome": "THE_ORGAN_IS_IMPORTABLE_AGAIN_AND_ONE_SHOWING_IS_MEASURED_AS_TRANSFERRING_TO_NOTHING_WHILE_TWO_SHOWINGS_TRANSFER",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Sufficient: it restores the shipped instrument and measures the claim with it.",
+      "CORRECTNESS": "Union resolution keeps both sides; taking one side was rejected because each side holds code the other calls.",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "Deterministic and pinned by 17 tests.",
+      "VERIFIABILITY": "The breakage and the repair are both one ast.parse call away.",
+      "WALL_CLOCK": "Seconds to parse, minutes to run the suites."
+     },
+     "evidence": [
+      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py SyntaxError at line 1598 on main",
+      "148 tests that could not be collected now run"
+     ],
+     "qualification_evidence": [
+      "the repaired file parses and the widest one-shot suite runs 60 passing where it ran none"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "A store of 8 tasks with no failures cannot express where a lesson stops.",
+      "CORRECTNESS": "Its executed answer comes from keyword branches, not from the retrieved strategy.",
+      "INCREMENTAL_COST": "0 USD but every later number would be void.",
+      "RELIABILITY": "Duplicate records and duplicate memory stores.",
+      "VERIFIABILITY": "The falsification is a single read of the wrapper.",
+      "WALL_CLOCK": "Would have been fast and wrong."
+     },
+     "evidence": [
+      "PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md",
+      "canonical/swe_kernel/semantic_generalization_engine_v1.py"
+     ],
+     "qualification_evidence": [
+      "Python official ast documentation defines the parse that detects the breakage",
+      "Python official unittest documentation defines the check the learner lacks"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "TRUST_THE_CLAIMED_SOLVED_ENGINE_AND_MOVE_ON_TO_ENVIRONMENTS"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "Reaches more files and is wrong more often; reach is not capability.",
+      "CORRECTNESS": "Already measured worse than doing nothing.",
+      "INCREMENTAL_COST": "0 USD",
+      "RELIABILITY": "No mechanism to refuse the wrong half.",
+      "VERIFIABILITY": "Only a check could verify it, and checks are what is missing.",
+      "WALL_CLOCK": "Fast to build, expensive to be wrong with."
+     },
+     "evidence": [
+      "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json any_rung arm"
+     ],
+     "qualification_evidence": [
+      "Python official ast documentation on program equivalence",
+      "the widest-rung precision figure recorded in canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "WIDEN_THE_LESSON_SO_ONE_SHOWING_COVERS_THE_NEW_SHAPES"
+    }
+   ],
+   "checked_at_utc": "2026-11-13T01:45:54Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "ONE_SHOWING_OF_A_CHANGE_ASSUMED_TO_GENERALISE_AND_A_CLAIMED_SOLVED_RETRIEVAL_ENGINE_NEITHER_OF_WHICH_HAD_BEEN_MEASURED",
+   "max_age_hours": 24,
+   "negative_search_summary": "Looked for a 2026 method that admits a generalisation from a single demonstration without a check: none found. Both memory-reuse lines that report gains (LifeMem, WikiTrace) get them by validating or linking memory, and the (k,v) study reports raw trajectories actively harm hard cases.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "experience reuse memory agents negative transfer retrieval hurts performance 2026 LLM agent benchmark"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "LifeMem lifelong experience reuse agents cross-environment transfer 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "version space anti-unification one demonstration versus two demonstrations code edit transfer"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "WikiTrace evidence-linked memory memory-induced degradation 2026 agents"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-13T01:45:54Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with ast, json and pytest",
+      "evidence": [
+       "the organ is parsed and both suites are run in this sandbox in this session"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "GitHub read access for the commits that introduced the conflict markers",
+      "evidence": [
+       "commit ffac8e3f53 and both of its parents were read and their organ blobs compared: 0 markers in each parent, 1 in the merge"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-13T01:45:54Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "canonical/runtime/edit_kind_learning_v1.py and the taught-actions organ",
+      "evidence": [
+       "the two-showing transfer test runs against them and passes"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "observed_at_utc": "2026-11-13T01:36:11Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/GENERALIZATION_RUNG_GRADIENT_20261112_V1.json (the in-project figure)",
+     "canonical/runtime/edit_kind_learning_v1.py (the ladder that does transfer)",
+     "PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md and canonical/swe_kernel/semantic_generalization_engine_v1.py (the claim measured and falsified)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "arxiv.org/abs/2604.27003 When Continual Learning Moves to Memory: abstract memories transfer, raw trajectories cause negative transfer",
+     "arxiv.org/html/2611.14320 WikiTrace: memory-induced degradation, 52% of failures trace to a memory item the agent followed",
+     "arxiv.org/abs/2609.12655 LifeMem: removing trajectories costs more than removing skills; later tasks can harm earlier ones"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (the repair corpus already measured in-tree)",
+     "https://pypi.org/project/pytest/ (this PR's own tests only)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://docs.python.org/3/library/ast.html (parsing the organ is how the breakage was found)",
+     "https://docs.python.org/3/library/unittest.html (the check the learner needs and does not have)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REUSE",
+   "ADAPT",
+   "SUBSTITUTE",
+   "COMPOSE",
+   "CONFIGURE",
+   "INTEGRATE",
+   "SYNTHESIZE_NEW_PRIMITIVE"
+  ],
+  "selected_route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT",
+  "selected_surviving_route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT",
+  "selected_surviving_route_class": "REUSE",
+  "stop_condition": "SHIPPED_ORGAN_IMPORTABLE_AND_ITS_WIDEST_SUITE_RUNNING_AGAIN__ONE_SHOWING_MEASURED_AS_REFUSED_ON_ALL_FOUR_NEW_SHAPES__TWO_SHOWINGS_MEASURED_AS_TRANSFERRING_TO_AN_UNSEEN_NAME__THE_SOLVED_CLAIM_MEASURED_AND_FALSIFIED__17_NEW_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+  "why_selected_route_is_fastest_sufficient": "Nothing can be measured while the instrument is a syntax error, so the repair is first and it is two regions of a file, not a redesign; every measurement after it reuses code the repo already has."
+ },
+ "route_id": "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "REPAIR_THE_UNIMPORTABLE_ORGAN_FIRST_THEN_MEASURE_EACH_CLAIM_AGAINST_ITS_OWN_INSTRUMENT",
+ "stop_condition": "SHIPPED_ORGAN_IMPORTABLE_AND_ITS_WIDEST_SUITE_RUNNING_AGAIN__ONE_SHOWING_MEASURED_AS_REFUSED_ON_ALL_FOUR_NEW_SHAPES__TWO_SHOWINGS_MEASURED_AS_TRANSFERRING_TO_AN_UNSEEN_NAME__THE_SOLVED_CLAIM_MEASURED_AND_FALSIFIED__17_NEW_TESTS_PASS__REPO_INTEGRITY_GUARD_PASS__UNIFIED_MODEL_VERIFIES__ZERO_CAPABILITY_CREDIT__ZERO_TERMINAL_CREDIT",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "checked_at_utc": "2026-11-13T01:45:54Z",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "NO_PROOF_STATE_IS_REACHED__THIS_ACTION_CLAIMS_ZERO_CAPABILITY_AND_ZERO_TERMINAL_CREDIT_AND_FALSIFIES_THE_SINGLE_SHOWING_AND_COMPLETELY_SOLVED_CLAIMS",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "checked_at_utc": "2026-11-13T01:45:54Z",
+   "counterexample_receipts": [],
+   "decisive_question": "DOES_ONE_SHOWING_OF_A_CHANGE_REACH_A_DIFFERENT_SHAPE_IN_A_DIFFERENT_PROJECT_AND_DOES_TWO",
+   "falsifier_id": "ORGAN_STILL_UNIMPORTABLE_OR_ONE_SHOWING_REPORTED_AS_TRANSFERRING_OR_THE_RECORD_CLAIMS_SPEND",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "PAIRED_POSITIVE_AND_NEGATIVE_CASES_IN_test_what_transfers_v1_COVER_BOTH_THE_REFUSAL_AND_THE_TRANSFER",
+   "proposal_id": "REPAIR_THEN_MEASURE_THE_SINGLE_SHOWING_ASSUMPTION"
+  }
+ },
+ "weakens_existing_guard": false
+}

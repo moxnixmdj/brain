@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 422,
+  "knowledge_documents": 423,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6820,
+  "research_index_records": 6822,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a20f4a4e5aba6f96ff0c98173f34f6c4bf86c0785f0ccf65037559767587e8e8"
+  "value": "6e9f104ea9539d295c9d2ed712a5f69c04beb3a7febab022d1da0088ef19e51d"
  },
  "engines": [
   {
@@ -63842,6 +63842,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 15404,
+   "headings": [
+    "You are right about one thing and wrong about the other, and the difference is measurable",
+    "1. What I found on main before I could answer anything",
+    "2. `PROBLEM2_GENERALIZATION_COMPLETELY_SOLVED.md` does not survive a measurement",
+    "3. The claim you actually care about — one showing, a new environment — measured",
+    "4. Where you are right, precisely",
+    "5. Where it breaks, precisely — the three real limiting factors",
+    "6. The smartest next actions, in order, and the ones I killed",
+    "7. The creature question, answered honestly",
+    "8. What this does not claim"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1.md",
+   "sha256": "c88f17dec86ae7bf1a92a6e7b2150e53cce6b0a868844961e31a3fe25c51f3c6",
+   "summary": "You asked: *is instant learning plus instant learning in new environments the perfect solution to everything on a computer, where we only need to give the model one experience and it keeps it permanently?* And: *is this a revolutionary way to make agents learn faster than the current way?*",
+   "terms": {
+    "about": 7,
+    "all": 8,
+    "already": 9,
+    "answer": 9,
+    "because": 6,
+    "cannot": 6,
+    "canonical": 10,
+    "changed": 8,
+    "check": 11,
+    "different": 14,
+    "experience": 6,
+    "false": 7,
+    "file": 9,
+    "learning": 6,
+    "lesson": 7,
+    "main": 6,
+    "make": 6,
+    "measured": 7,
+    "memory": 7,
+    "model": 6,
+    "names": 7,
+    "new": 10,
+    "no": 9,
+    "not": 38,
+    "nothing": 12,
+    "one": 34,
+    "only": 8,
+    "organ": 7,
+    "place": 9,
+    "real": 9,
+    "refused": 8,
+    "rule": 7,
+    "same": 11,
+    "second": 7,
+    "seen": 6,
+    "shape": 6,
+    "showing": 13,
+    "showings": 8,
+    "so": 8,
+    "something": 6,
+    "store": 7,
+    "tasks": 6,
+    "test": 7,
+    "than": 6,
+    "thing": 6,
+    "three": 8,
+    "two": 17,
+    "wrong": 11
+   },
+   "title": "You are right about one thing and wrong about the other, and the difference is measurable",
+   "title_terms": [
+    "about",
+    "difference",
+    "measurable",
+    "one",
+    "other",
+    "right",
+    "thing",
+    "wrong"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6583,
    "headings": [
     "What I could not do, and the predictor that turned out backwards",
@@ -77703,10 +77783,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1224,
+  "included_source_count": 1225,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b4a4a4e222f37feb40d57dee410c1122ca7c1d8c3088623034b9e3b7057f8655"
+  "source_tree_digest": "586d94a630d93bdcefb10ce96c211940d6656fc68543a6b418095b170bd11a11"
  },
  "research_index": [
   {
@@ -207516,6 +207596,22 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/WHAT_TRANSFERS_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHAT_TRANSFERS_20261113_V1.json",
+   "schema": "WHAT_TRANSFERS_V1",
+   "sha256": "fb2823f1877821ea3e52828f9e201c8aac7bcb59692e291a23289d96312054f3",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "transfers": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/WHEN_ONE_SHOWING_SHOULD_BE_TRUSTED_20261112_V1.json",
@@ -238821,6 +238917,28 @@
     "teaches": 1,
     "v1": 1,
     "what_a_success_teaches_20261112_v1": 1
+   }
+  },
+  {
+   "action_id": "WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1",
+   "capability": false,
+   "date": "2026-11-13",
+   "id": "research:canonical/action_intents/WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHAT_IS_REAL_AND_WHAT_IS_NOT_20261113_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "abd09b20ca821f6db20d8eef963b83c924e2df42da192c93d2d1821d251b45e3",
+   "status": "",
+   "terms": {
+    "20261113": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "not": 1,
+    "real": 1,
+    "repair_the_unimportable_organ_first_then_measure_each_claim_against_its_own_instrument": 1,
+    "the_file_every_generalisation_claim_rests_on_was_a_syntax_error_on_main_so_no_claim_could_be_measured_or_refuted__and_once_it_ran_one_showing_was_measured_as_transferring_to_nothing_while_two_showings_transfer_and_still_offer_to_change_a_required_bound__and_a_store_of_24_records_holding_8_tasks_none_of_them_a_failure_cannot_know_where_a_lesson_stops": 1,
+    "the_generalisation_organ_is_importable_again_and_one_showing_is_measured_as_insufficient__transfer_comes_from_a_second_differing_showing_and_from_a_check_neither_of_which_is_automatic__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1,
+    "what_is_real_and_what_is_not_20261113_v1": 1
    }
   },
   {
