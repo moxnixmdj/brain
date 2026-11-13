@@ -1,0 +1,222 @@
+{
+  "schema": "external_evidence_ledger_v1",
+  "created": "2026-11-13",
+  "authority": "NONE",
+  "why_this_file_exists": [
+    "Every strategic decision in this repository is steered by external research, and until now that research was cited from memory, never pinned.",
+    "Two measured defects follow from that: (1) a paper is quoted without a version, so numbers from a superseded preprint keep being repeated as current fact; (2) nothing distinguishes 'the abstract says this' from 'the abstract is silent and this number came from somewhere I cannot point at'.",
+    "This ledger is the compression of that knowledge: one row per paper that carries a decision, with the exact words that carry it.",
+    "It does not claim authority, it does not verify the papers' internal experiments, and it is not independent. It records what a named source says, on a named date, at a named version, so that a later session can re-check instead of re-deriving."
+  ],
+  "rules": {
+    "support_levels": {
+      "ABSTRACT_CONFIRMS": "The quoted sentence is in the arXiv abstract of that version and states the claim the repository makes.",
+      "ABSTRACT_SILENT": "The paper exists and is consistent in direction, but the specific number or mechanism the repository quotes does not appear in the abstract. It may be in the body. It may not be. Treat it as unverified here.",
+      "VERSION_DRIFT": "The repository quotes numbers that match an earlier version of this paper. The current version reports different numbers. The repository's copies are stale, not false.",
+      "MISATTRIBUTED": "The repository attributes a number to this paper, and the paper does not carry that number. The number may be real elsewhere. The attribution is the defect."
+    },
+    "no_row_may_be_deleted": "A row whose source turned out wrong stays, with its support level corrected. Deleting the row would delete the record of having believed it.",
+    "a_new_citation_is_a_new_row_first": "A document that cites an arXiv id absent from this ledger is making an unaudited claim. Add the row, with the quote, before the prose.",
+    "quotes_are_verbatim": "quote is copied from the abstract and must appear in the abstract text, including its oddities."
+  },
+  "sources": [
+    {
+      "id": "2611.14326",
+      "version": "v1",
+      "title": "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
+      "submitted": "2026-11-10",
+      "fetched": "2026-11-13",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "claim_allowed": "The published 2026 position on admitting an experience-derived lesson is to test it as a falsifiable hypothesis in temporary state before committing it; doing so cuts harmful committed updates to 3.6%. This is the same gate this repository built independently, so the repository's 'admission is the bottleneck' conclusion is the frontier position, not a local eccentricity.",
+      "quote": "current self-improvement mechanisms often write episode-derived lessons directly into memory, making local success an unreliable signal for reusable and safe knowledge",
+      "quote_2": "while reducing falsification failures to 5.0%, regression damage to 1.3%, and harmful committed updates to 3.6%",
+      "bears_on": "admission and gating"
+    },
+    {
+      "id": "2610.05303",
+      "version": "v1",
+      "title": "ASCENT: Online Test-Time Training of Long-Horizon Agents via Self-Distillation of Verified Experience",
+      "submitted": "2026-10-04",
+      "fetched": "2026-11-13",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "claim_allowed": "The owner's core intuition is not wrong and it is not unpublished: an agent can execute each task exactly once and keep the gain permanently. But the paper states the conditions, and omits them is what makes the naive version fail: there must be a verification result, the teacher must be a frozen copy given the trajectory as hindsight, and the update must go into persistent LoRA fast weights. Imitating or reinforcing the single attempt directly destabilizes the policy.",
+      "quote": "The agent executes each task once, in one pass over the stream, and the executed trajectory with its verification result is the only learning signal for weight updates that persist across tasks. Directly imitating or reinforcing the generated tokens of this single attempt destabilizes the policy.",
+      "quote_2": "A stable version of the LLM, its frozen initial copy, receives the verified trajectory as privileged information and predicts next-token distributions along it with this hindsight.",
+      "bears_on": "one execution per task; the legitimacy of the owner's direction"
+    },
+    {
+      "id": "2607.21051",
+      "version": "v1",
+      "title": "Sample-Efficient Learning from Agent Experience (Experience Distillation)",
+      "submitted": "2026-07-23",
+      "fetched": "2026-11-13",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "claim_allowed": "The most direct measurement of the owner's sentence 'let it experience them once and it learns them'. The obvious implementation of that sentence is supervised fine-tuning on the collected experience, and it recovers 3.8% of what the experience taught. The method that works recovers 64.8% or more, needs no extra environment interaction, and matches RL with at least 9.6x fewer samples. The gap between 3.8% and 64.8% is entirely in how the experience is turned into targets.",
+      "quote": "it retains at least 64.8% of the gains from in-context learning across both domains, whereas direct supervised fine-tuning on the collected experience recovers only 3.8%",
+      "quote_2": "matches their performance with at least 9.6x fewer environment samples",
+      "bears_on": "why 'just let it experience once' fails as literally stated"
+    },
+    {
+      "id": "2611.14505",
+      "version": "v2",
+      "title": "Continual-ARC: Measuring Skill Acquisition over a Working Lifetime",
+      "submitted": "2026-11-10",
+      "fetched": "2026-11-13",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "claim_allowed": "Measured on a single scale, with memory-based and weight-based learners scored identically: no harness-based method gains on unseen tasks, and most harness methods learn less than a floor that simply caches each task's demonstrations. Weight-based learning does gain. This is the strongest single result against 'experience once in the harness, therefore everything'.",
+      "quote": "No harness-based method gains on unseen tasks, whereas weight-based learning shows substantial gains.",
+      "quote_2": "Persistence in the harness generally does not improve memorization unless provided with explicit expert guidance.",
+      "bears_on": "the ceiling of token-space memory; the case for weight updates",
+      "note": "The specific numbers 0.57 seen / 0.29 held-out are used in this repository but are NOT in the abstract and are not verified here. The abstract carries only the direction: weight-based learning gains, no harness method does."
+    },
+    {
+      "id": "2602.12670",
+      "version": "v4",
+      "title": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+      "submitted": "2026-06-14",
+      "fetched": "2026-11-13",
+      "support_level": "VERSION_DRIFT",
+      "claim_allowed": "Only this: curated skills raise the pass rate from 33.9% to 50.5% at v4. The repository's +16.2 pp and -1.3 pp figures belong to an earlier version and must not be repeated as current. See the drift block below.",
+      "quote": "Curated Skills raise the average pass rate from 33.9% to 50.5% (+16.6 percentage points; 25.5% normalized gain)",
+      "quote_2": "The latest aggregate evaluation runs the 87-task benchmark under matched no-Skills and curated-Skills conditions for 18 model-harness configurations.",
+      "bears_on": "the value of curated versus self-generated procedural knowledge"
+    }
+  ],
+  "drift": [
+    {
+      "id": "2602.12670",
+      "title": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks",
+      "version_quoted_in_repo": "v1/v2 (unstated)",
+      "version_current": "v4",
+      "current_submitted": "2026-06-14",
+      "support_level": "VERSION_DRIFT",
+      "what_the_repository_repeats": "curated skills +16.2 pp; self-generated skills -1.3 pp; 16 of 84 tasks show negative deltas",
+      "what_the_current_version_says_verbatim": "Curated Skills raise the average pass rate from 33.9% to 50.5% (+16.6 percentage points; 25.5% normalized gain)",
+      "what_broke": "The inventory grew from 84 to 87 tasks and the headline gain moved from +16.2 to +16.6 pp. The current abstract reports curated-vs-no-skills matched pairs and does not report the self-generated arm, so the -1.3 pp figure cannot be sourced from v4 at abstract level.",
+      "documents_repeating_the_stale_numbers": [
+        "A_REAL_REPAIR_IS_A_WHOLE_FILE_AND_A_LESSON_IS_ONE_STATEMENT_20261112_V1.md",
+        "CHOOSE_THE_DEMONSTRATIONS_THAT_APPLY_20261112_V1.md",
+        "LEARNING_ONCE_DOES_NOT_SOLVE_COMPUTER_USE_20261113_V1.md",
+        "ONE_ANNOTATION_SHOWS_THE_DIRECTION_20261112_V1.md",
+        "ONE_DEMO_ONE_SET_20261112_V1.md",
+        "ONE_TRY_COVERS_A_FRACTION_20261112_V1.md",
+        "REALITY_CHECK_INSTANT_LEARNING_COMPUTER_USE_SENTIENCE_20261112_V1.md"
+      ],
+      "correct_action": "Do not rewrite the dated documents; they are records of what was believed on that date. Cite v4's numbers going forward, and cite the direction of the self-generated result to a source that still carries it at abstract level (2605.24117 SkillEvolBench and 2608.03874 ContinualSkillBench both do)."
+    },
+    {
+      "id": "2602.20867",
+      "title": "SoK: Agentic Skills -- Beyond Tool Use in LLM Agents",
+      "version_quoted_in_repo": "v1 (unstated)",
+      "version_current": "v1",
+      "current_submitted": "2026-02-24",
+      "support_level": "MISATTRIBUTED",
+      "what_the_repository_repeats": "self-generated skills -1.3 pp, attributed to this survey",
+      "what_the_current_version_says_verbatim": "recent benchmark evidence that curated skills can substantially improve agent success rates while self-generated skills may degrade them",
+      "what_broke": "The survey asserts the direction ('may degrade') and does not carry the -1.3 number. The number belongs to SkillsBench at a superseded version. Attributing it here is a citation of a summary of a measurement, which is two steps from the measurement.",
+      "documents_repeating_the_stale_numbers": [
+        "LEARNING_ONCE_DOES_NOT_SOLVE_COMPUTER_USE_20261113_V1.md"
+      ],
+      "correct_action": "Cite the survey for the direction and the ClawHavoc governance case, which it does carry; cite the number to nothing until a version that carries it is pinned."
+    }
+  ],
+  "audited_elsewhere": [
+    {
+      "id": "2604.20087",
+      "title": "SkillLearnBench",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "all continual learning methods improve over the no-skill baseline, yet consistent gains remain elusive; self-feedback alone induces recursive drift",
+      "version": "v1"
+    },
+    {
+      "id": "2605.24117",
+      "title": "SkillEvolBench",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "current agents often adapt locally but rarely form robust reusable skills; raw-trajectory reuse frequently outperforms distilled skills",
+      "version": "v1"
+    },
+    {
+      "id": "2608.03874",
+      "title": "ContinualSkillBench",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "retaining context and feedback without skill maintenance yields nearly the same mean performance as maintaining an explicit skill library",
+      "version": "v3"
+    },
+    {
+      "id": "2610.28601",
+      "title": "Evolving Agent Interfaces (Agent S4)",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "21.3% binary on OSWorld V2, 3.8x the same model with fixed interfaces, above GPT-5.5 (13.0%) and Opus 4.8 (20.6%) -- the gain came from evolving interfaces, not weights",
+      "version": "v1"
+    },
+    {
+      "id": "2607.22798",
+      "title": "StateAct: Program State, before Pixels",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "state-grounding lifts Opus 4.8 from 20.6% to 26.9% binary at ~9x lower cost; a code-only variant with no GUI subagent reaches only 45.9% partial, below the screenshot baseline; failures depend more on what the agent thinks than on what it sees",
+      "version": "v1"
+    },
+    {
+      "id": "2606.29537",
+      "title": "OSWorld 2.0",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "108 long-horizon workflows, ~318 tool calls, human median ~1.6 h; best is 20.6% binary / 54.8% partial; agents lose track of constraints, miss mid-task information, guess rather than ask, and skip verification, struggling most on hidden state",
+      "version": "v2"
+    },
+    {
+      "id": "2507.22580",
+      "title": "RePaCA",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "83.1% accuracy / 84.8% F1 at static patch correctness assessment -- passing tests does not establish correctness",
+      "version": "v2"
+    },
+    {
+      "id": "2604.01518",
+      "title": "Probe to Generate",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "77% of SWE-bench Verified instances admit at least one surviving variant; augmented suites reduce top-10 agents' resolved rates by 4.2%-9.0%",
+      "version": "v2"
+    },
+    {
+      "id": "2610.05076",
+      "title": "Self-Generated Feedback Destabilizes Test-Time Training",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "retaining generated-text updates worsens prediction on independent human text; Settlement checks the candidate on independent evidence before commitment and leaves gaps of 0.07 / -0.02 nats",
+      "version": "v1"
+    },
+    {
+      "id": "2610.34043",
+      "title": "KEEL",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "+4.2 to +21.7 pp over no-knowledge, against +2.4 to +9.6 for the default method; skill claims supported, contradicted, replaced or retired as evidence arrives",
+      "version": "v1"
+    },
+    {
+      "id": "2610.25858",
+      "title": "Are Self-Evolving Agents Continual Learners?",
+      "support_level": "ABSTRACT_CONFIRMS",
+      "one_line": "higher plasticity consistently costs stability; self-modifying methods interfere with unseen tasks and overwrite earlier knowledge",
+      "version": "v1"
+    }
+  ],
+  "claims_with_no_primary_source": [
+    {
+      "text": "A five-level Continual Learning Spectrum (in-context -> memory systems -> loop engineering -> test-time training -> post-training/RL), attributed to July 2026.",
+      "status": "NO SOURCE FOUND",
+      "why_it_matters": "The ordering is useful and roughly right, and it is also not a paper. No arXiv id accompanies it. A ladder that is invented and then treated as a citation is how a project starts steering by its own prose.",
+      "correct_action": "If the ladder is used, present it as this repository's own summary and mark it as such, with the individual rungs cited to real papers."
+    },
+    {
+      "text": "Memory models that create and curate token-space memory across model generations, trained with memory-native RL, attributed to June 2026.",
+      "status": "NO SOURCE FOUND",
+      "why_it_matters": "Quoted as a direct quotation with no id. The nearest verified source for the mechanism is 2602.12275 (on-policy context distillation) and 2610.34043 (KEEL).",
+      "correct_action": "Replace with a verified id or drop the quotation marks."
+    },
+    {
+      "text": "Experience Distillation characterised as 'model-free, one-step distillation' quoted as July 2026 marketing prose.",
+      "status": "PAPER IS REAL, QUOTED TEXT IS A SECONDARY SUMMARY",
+      "why_it_matters": "2607.21051 is real and says substantially this. The quoted sentence is a review site's paraphrase, not the paper. The distinction matters because the paraphrase omits the number that decides the question (3.8% for naive SFT).",
+      "correct_action": "Quote the abstract via this ledger's row for 2607.21051."
+    }
+  ]
+}
