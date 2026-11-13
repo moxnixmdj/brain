@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 436,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6833,
+  "research_index_records": 6835,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 448,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "11d7e3510b880a3d293b68a779a234089c0dda5c50ca3187327bca757dc80efc"
+  "value": "e75273def05583b9766a2e35430df6d83b7c4f14d7893a47f1d8974f132aba71"
  },
  "engines": [
   {
@@ -196060,6 +196060,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/STANDING_THE_CHECK_20261112_V1.json",
+   "schema": "GENERALIZATION_RUNG_GRADIENT_V1",
+   "sha256": "6f39a538f01faef96312f28d60d978314ce6b64163365486514a3bf06b4b9e3f",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "check": 1,
+    "standing": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/STOCHASTIC_KERNEL_TRANSFORM_UNIVERSALITY_REPLAY_20261007_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -236498,6 +236515,30 @@
     "stale_governance_snapshot_counts_turn_the_guards_that_protect_them_red_v1_20261022_v1": 1,
     "turn": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1",
+   "capability": false,
+   "date": "2026-11-12",
+   "id": "research:canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/STANDING_THE_CHECK_IS_THE_ENVIRONMENT_ROUND_20261112_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "ba95f604833ca9aeab5975a95a2577f535c075e4dfc20e1d76c3d767837c92e3",
+   "status": "",
+   "terms": {
+    "20261112": 1,
+    "a_wrong_generalisation_is_refused_only_where_a_check_exists__and_on_real_migrated_projects_the_check_could_not_run_at_all__0_of_42_files__because_no_test_module_imported_the_file_or_a_declared_dependency_was_not_installed": 1,
+    "check": 1,
+    "environment": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "reuse_the_rung_gradient_arms_and_check_class__add_isolated_venv_standing_of_declared_dependencies_manifest_named_missing_module_repair_a_per_path_test_entry_finder_with_direct_in_directory_indirect_confidence_and_a_ran_zero_tests_refusal__carry_the_manifests_in_the_corpus__then_remeasure_the_same_twelve_pull_requests_by_label": 1,
+    "round": 1,
+    "standing": 1,
+    "standing_the_check_is_the_environment_round_20261112_v1": 1,
+    "the_oracle_deficit_named_last_round_is_now_an_implemented_organ__standing_up_a_project_s_checks__and_the_verified_coverage_on_this_corpus_remains_zero_with_each_residual_named_per_project_instead_of_bucketed_half_half": 1,
+    "v1": 1
    }
   },
   {
