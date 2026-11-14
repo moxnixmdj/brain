@@ -1097,6 +1097,8 @@ class VerifiedSkillStore:
         admission_victims: Sequence[Any] | None = None,
         admission_archive: Sequence[Any] | None = None,
         localize_lesson: bool = False,
+        oracle_licence: Mapping[str, Any] | None = None,
+        licence_site: str | None = None,
     ) -> dict[str, Any]:
         from canonical.runtime.memory_policy_v1 import can_write_memory
 
@@ -1316,6 +1318,46 @@ class VerifiedSkillStore:
             rule["admission"] = _admission.record_for_store(admission_report)
         else:
             rule["admission"] = dict(_admission.UNGATED_RECORD)
+        # THE ORACLE LICENCE: can the check SEE a change at the place this rule will fire?
+        #
+        # The admission gate above asks whether the lesson repaired an unseen program and left a
+        # correct one alone. That question has a precondition nobody was measuring: the check must
+        # be able to fail. Measured on real projects (`canonical/swe_kernel/oracle_licence_v1.py`),
+        # a project's own suite is blind to between 10% and 50% of the sites tried -- and at a blind
+        # site every one of those admission verdicts is a coin landing on its edge: REPAIRED and
+        # PRESERVED are both reported without the check ever being able to disagree. So a caller that
+        # HAS measured a licence gets a refusal here, and a caller that has not is recorded as
+        # unlicensed rather than being left to look licensed.
+        if oracle_licence is not None:
+            from canonical.swe_kernel import oracle_licence_v1 as _licence
+
+            scope = str(oracle_licence.get("scope") or "")
+            if scope == "PROJECT":
+                permission = _licence.project_permission(
+                    oracle_licence, site_id=licence_site)
+            else:
+                permission = _licence.teaching_permission(oracle_licence, site_id=licence_site or "")
+            if not permission.get("permitted"):
+                return {
+                    "crystallized": False,
+                    "reason": f"ORACLE_LICENCE_REFUSED:{permission.get('reason')}",
+                    "oracle_licence": permission,
+                }
+            rule["oracle_licence"] = {
+                "verdict": permission.get("reason"),
+                "site_id": licence_site,
+                "sites_licensed": oracle_licence.get("sites_licensed"),
+                "sites_measured": oracle_licence.get("sites_measured"),
+                "fraction_licensed": oracle_licence.get("fraction_licensed"),
+                "authority": "NONE",
+                "whole_task_correctness_proved": False,
+            }
+        else:
+            rule["oracle_licence"] = {
+                "verdict": "UNLICENSED",
+                "note": "no oracle licence was supplied, so whether the check can see a change at "
+                        "this site is unknown; this rule is admitted on the demonstration alone",
+            }
         if precondition_evidence is not None:
             rule["precondition_presence"] = precondition_evidence
         if localization_record is not None:
@@ -2376,7 +2418,15 @@ class VerifiedSkillStore:
         finally:
             conn.close()
         # Any cached rule list for this store is now stale; a stale cache would hide an import.
-        for key in [k for k in _MEM_SKILLS if k.startswith((f"{self.db_path}::", f"{self.db_path.resolve()}::"))]:
+        # Snapshot BEFORE filtering. A materialised `dict` is not a lock: building the list above
+        # iterates the live dict, and this store is used from a process pool
+        # (`canonical/tools/quixbugs_repair_solver_measure_v1.py` runs two workers), where another
+        # thread filling the same module-level cache raises `RuntimeError: dictionary changed size
+        # during iteration`. Measured 2026-11-14: 7 errors at setup in
+        # `test_quixbugs_repair_solver_v1.py` when the whole 35-suite set runs together, 61 passed
+        # when it runs alone.
+        prefixes = (f"{self.db_path}::", f"{self.db_path.resolve()}::")
+        for key in [k for k in list(_MEM_SKILLS) if k.startswith(prefixes)]:
             _MEM_SKILLS.pop(key, None)
         return {"accepted": accepted, "merged": merged,
                 "refused": len(refusals), "refusals": refusals}

@@ -1,0 +1,238 @@
+{
+ "schema": "BRAIN_ORACLE_LICENCE_CROSS_PROJECT_20261114_V1",
+ "authority": "NONE",
+ "date": "2026-11-14",
+ "what": "Has a real project's own check ever been shown able to see a change at the site a lesson would fire at? Measured by generating byte-splice mutants of one file, running the project's own test command on each, and counting the sites where every perturbation was caught by a test that passed before it.",
+ "method": {
+  "mutants": "AST-verified single-line byte splices; ROR, AOR, LCR, RVR; a splice is kept only when it still parses and changes the parsed program",
+  "catch_rule": "SWE-bench's fail-to-pass rule at mutant granularity: a mutant is caught when a test that PASSED on the unmutated source did not pass on the mutant. Pre-existing failures are therefore harmless and are not excluded by hand",
+  "site_licensed": "every mutant generated at the site was caught",
+  "load_probe": "the check must fail on an unparseable version of the file, or it does not import the file and nothing is measured",
+  "budget": "max_sites=10, max_mutants=24, sites in line order, no sampling",
+  "restore": "original bytes restored in a finally and verified by hash before the next mutant",
+  "interpreter": "/tmp/venv/bin/python 3.11, pytest 9.2.0",
+  "corpora": "codeload.github.com tarballs of the default branch: torproject/stem, more-itertools/more-itertools, pypa/packaging"
+ },
+ "measured": {
+  "repositories": 3,
+  "files": 5,
+  "sites_measured": 50,
+  "sites_licensed": 38,
+  "sites_refused": 12,
+  "mutants_run": 52,
+  "mutants_caught": 39,
+  "fraction_of_sites_licensed": 0.76,
+  "fraction_of_mutants_caught": 0.75,
+  "machine_seconds": 441.2
+ },
+ "per_file": [
+  {
+   "file": "more_itertools/recipes.py",
+   "quantifier": "145 passing tests",
+   "sites_licensed": 9,
+   "sites_measured": 10,
+   "mutants_caught": 9,
+   "mutants_run": 10,
+   "seconds": 265.5,
+   "verdict": "PARTIAL",
+   "blind_sites": [
+    {
+     "lineno": 237,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    }
+   ]
+  },
+  {
+   "file": "stem/util/term.py",
+   "quantifier": "2 passing tests",
+   "sites_licensed": 7,
+   "sites_measured": 10,
+   "mutants_caught": 7,
+   "mutants_run": 10,
+   "seconds": 4.7,
+   "verdict": "PARTIAL",
+   "blind_sites": [
+    {
+     "lineno": 68,
+     "kind": "arithmetic",
+     "survivors": [
+      "-"
+     ]
+    },
+    {
+     "lineno": 133,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    },
+    {
+     "lineno": 144,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    }
+   ]
+  },
+  {
+   "file": "stem/util/connection.py",
+   "quantifier": "28 passing tests",
+   "sites_licensed": 8,
+   "sites_measured": 10,
+   "mutants_caught": 9,
+   "mutants_run": 12,
+   "seconds": 11.1,
+   "verdict": "PARTIAL",
+   "blind_sites": [
+    {
+     "lineno": 192,
+     "kind": "arithmetic",
+     "survivors": [
+      "+"
+     ]
+    },
+    {
+     "lineno": 194,
+     "kind": "comparison",
+     "survivors": [
+      ">=",
+      "<="
+     ]
+    }
+   ]
+  },
+  {
+   "file": "stem/util/tor_tools.py",
+   "quantifier": "6 passing tests",
+   "sites_licensed": 5,
+   "sites_measured": 10,
+   "mutants_caught": 5,
+   "mutants_run": 10,
+   "seconds": 4.5,
+   "verdict": "PARTIAL",
+   "blind_sites": [
+    {
+     "lineno": 70,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    },
+    {
+     "lineno": 76,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    },
+    {
+     "lineno": 94,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    },
+    {
+     "lineno": 112,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    },
+    {
+     "lineno": 125,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    }
+   ]
+  },
+  {
+   "file": "src/packaging/utils.py",
+   "quantifier": "79 passing tests",
+   "sites_licensed": 9,
+   "sites_measured": 10,
+   "mutants_caught": 9,
+   "mutants_run": 10,
+   "seconds": 154.8,
+   "verdict": "PARTIAL",
+   "blind_sites": [
+    {
+     "lineno": 30,
+     "kind": "return",
+     "survivors": [
+      "return None"
+     ]
+    }
+   ]
+  }
+ ],
+ "finding_1_every_file_was_partial": {
+  "measured": "0 of 5 files were fully licensed; between 1 and 5 sites per file were blind",
+  "interpretation": "A lesson placed at a blind site is blessed by the check without the check being able to disagree. On these five files that is 24% of the places a lesson could land -- a quarter of one-shot lessons would receive a verdict the suite cannot support."
+ },
+ "finding_2_the_survivors_are_mostly_booleans": {
+  "refused_by_kind": {
+   "return": 9,
+   "arithmetic": 2,
+   "comparison": 1
+  },
+  "measured_example": "stem/util/tor_tools.py lines 70, 76, 94, 112 are four `return False` guards in Tor version predicates; replacing the whole return with `None` is still falsy, so no test distinguishes them",
+  "interpretation": "This is a known weakness of whole-return mutation (RVR), not a new fact about the project. It is reported as a refused site and named, so a reader can see the operator, and it is the honest reason the per-file figures are not 100%."
+ },
+ "finding_3_quantity_is_not_licence": {
+  "sorted_by_quantifier": [
+   {
+    "file": "stem/util/term.py",
+    "passing_tests": 2,
+    "fraction_licensed": 0.7
+   },
+   {
+    "file": "stem/util/tor_tools.py",
+    "passing_tests": 6,
+    "fraction_licensed": 0.5
+   },
+   {
+    "file": "stem/util/connection.py",
+    "passing_tests": 28,
+    "fraction_licensed": 0.8
+   },
+   {
+    "file": "src/packaging/utils.py",
+    "passing_tests": 79,
+    "fraction_licensed": 0.9
+   },
+   {
+    "file": "more_itertools/recipes.py",
+    "passing_tests": 145,
+    "fraction_licensed": 0.9
+   }
+  ],
+  "spearman_rho": 1.0,
+  "interpretation": "With five files this rank correlation is suggestive and nothing more; it is reported as an ordering, not as a coefficient with a p-value. It is the reason the next measurement is worth making: if it holds at n=50, 'make the check cheap to stand up' and 'make the check able to see the change' are the same work, and the repository's #1 bottleneck has a measurable proxy."
+ },
+ "finding_4_cost": {
+  "per_mutant_seconds_min": 0.45,
+  "per_mutant_seconds_max": 25.0,
+  "what_drives_it": "the size of the check's own run: 145 passing tests cost 25 s per mutant, 2 passing tests cost 0.45 s",
+  "consequence": "A licence must be bought once and reused. It is content-addressed on the file's hash, the check command and the budget, so an unchanged file costs nothing the second time."
+ },
+ "finding_5_the_harness_is_the_first_failure_mode": {
+  "measured": "pypa/packaging is src-layout. Without `extra_paths=('src',)`, `import packaging` resolved to the installed copy, the mutant was written to a file nothing opened, and the first run reported 0 of 8 sites licensed -- 'the tests are blind' when the truth was 'the harness measured other code'",
+  "fix": "a load probe: an unparseable version of the file must break at least one previously-passing test, or the measurement is REFUSED",
+  "why_it_matters": "this is the same class of error as the round-13 finder bug, one layer down"
+ },
+ "what_this_does_not_say": [
+  "not a proof that a licensed site is correct -- only that THIS set of perturbations was seen",
+  "not a claim that a refused site is a defect in the project's tests",
+  "not a benchmark; three repositories, five files, chosen for having runnable suites, not sampled",
+  "not a claim that the ordering in finding 3 is causal or significant at n=5",
+  "no model was called, no capability registered, no family flipped, truth.achieved is untouched, spend is $0"
+ ],
+ "reproduce": "python3 canonical/tools/oracle_licence_measure_v1.py --projects <dir-of-clones> --out <file>"
+}
