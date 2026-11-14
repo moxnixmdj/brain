@@ -1,0 +1,148 @@
+{
+ "schema": "BRAIN_CLAIM_LEDGER_REAL_MERGED_COMMITS_20261114_V1",
+ "authority": "NONE",
+ "date": "2026-11-14",
+ "why": "The previous record measured a licence over five files the author chose, with tests the author wrote. That is the defect the owner named: testing on bugs we already know work. This measures on real merged commits of public repositories nobody in this session wrote, with the projects' own suites and runners, and the answer cost 50 minutes of machine time.",
+ "question": "When a real fix is put back to its pre-fix source, with the fix's own tests left in place, does the project's suite notice?",
+ "method": {
+  "step_1": "materialise the commit tree with `git archive` (no working tree, no index, no trace of this repo)",
+  "step_2": "run the project's own check; it must be green or the commit is not judged",
+  "step_3": "write the parent's bytes over only the non-test Python files the commit changed",
+  "step_4": "run the same check again. Green = REVERT_NOT_NOTICED",
+  "quantifier_guard": "a check that exits 0 without naming any tests is CHECK_RAN_NOTHING, not a pass. Found by measurement: stem's first invocation reported 'Ran 1 test ... OK' for all of test/unit/util and made all 12 reverts look unnoticed",
+  "change_classifier": "exact and mechanical, applied before counting: DOCSTRING_OR_COMMENT, VERSION_ONLY and ANNOTATION_ONLY are excluded from the headline because no test can be held to them, and the unfiltered count is published beside it",
+  "environment": "python 3.11.2, pytest 9.2.0, hypothesis, pretend, tomli_w"
+ },
+ "totals": {
+  "repositories": 3,
+  "judged_code_changes": 29,
+  "noticed": 10,
+  "not_noticed": 19,
+  "fraction_noticed": 0.3448,
+  "fraction_not_noticed": 0.6552
+ },
+ "per_repository": [
+  {
+   "repository": "more-itertools/more-itertools",
+   "note": "771 tests. Every commit's own tree was green before its revert.",
+   "check": "python -m pytest -q",
+   "commits_examined": 20,
+   "judged_code_changes": 13,
+   "noticed": 6,
+   "not_noticed": 7,
+   "fraction_noticed": 0.4615,
+   "by_change_class": {
+    "DOCSTRING_OR_COMMENT": {
+     "noticed": 0,
+     "not_noticed": 5
+    },
+    "CODE_CHANGE": {
+     "noticed": 6,
+     "not_noticed": 7
+    },
+    "VERSION_ONLY": {
+     "noticed": 0,
+     "not_noticed": 2
+    }
+   },
+   "examples_not_noticed": [
+    "Speed up interleave_longest()",
+    "Revert PR 1194 changes to tail",
+    "Revert PR 1182 changes to iter_index",
+    "Micro-optimization for partition"
+   ]
+  },
+  {
+   "repository": "torproject/stem",
+   "note": "test/unit/util only. unittest discovery ran 1 test and passed everything, which is how the quantifier guard was found; pytest with python_files=*.py was used after that.",
+   "check": "python -m pytest -q -o python_files=*.py test/unit/util",
+   "commits_examined": 8,
+   "judged_code_changes": 7,
+   "noticed": 0,
+   "not_noticed": 7,
+   "fraction_noticed": 0.0,
+   "by_change_class": {
+    "CODE_CHANGE": {
+     "noticed": 0,
+     "not_noticed": 7
+    },
+    "DOCSTRING_OR_COMMENT": {
+     "noticed": 0,
+     "not_noticed": 1
+    }
+   },
+   "examples_not_noticed": [
+    "Fix multiprocessing w/ `spawn` & top level imports",
+    "Make compatible with python cryptography>=42",
+    "Clean up cryptography *_backends",
+    "Update dirauth details"
+   ]
+  },
+  {
+   "repository": "pypa/packaging",
+   "note": "63,795 tests. src-layout: without src/ on PYTHONPATH all 10 commits came back BASELINE_RED against the installed copy, which is how the extra-path argument was found.",
+   "check": "PYTHONPATH=src python -m pytest -q tests",
+   "commits_examined": 10,
+   "judged_code_changes": 9,
+   "noticed": 4,
+   "not_noticed": 5,
+   "fraction_noticed": 0.4444,
+   "by_change_class": {
+    "CODE_CHANGE": {
+     "noticed": 4,
+     "not_noticed": 5
+    }
+   },
+   "examples_not_noticed": [
+    "perf(specifiers): speed up Specifier str, hash, and equality (#1529)",
+    "ci(perf): comment on PRs with significant benchmark changes (#1528)",
+    "perf(licenses): validate expressions without compiling Python (#1527)",
+    "perf(parser): skip repeated marker whitespace checks (#1525)"
+   ]
+  }
+ ],
+ "finding_1": {
+  "headline": "19 of 29 real merged code changes (65.5%) were put back to their pre-fix source and the project's own suite still passed",
+  "interpretation": "A merged change is permanent by construction. If its own suite cannot fail without it, then permanence there is exactly the property the owner proposes to rely on, granted without a check that can disagree."
+ },
+ "finding_2_the_spread_is_the_point": {
+  "measured": {
+   "more-itertools/more-itertools": 0.4615,
+   "torproject/stem": 0.0,
+   "pypa/packaging": 0.4444
+  },
+  "interpretation": "0%, 44%, 46%. 'This project has a test suite' carries no information about what that suite can see. The difference between the worst and the best project here is the difference between no protection and half of it, and nothing about the project's size or test count predicts which one it is."
+ },
+ "finding_3_guards_before_the_claim": {
+  "two_false_measurements_caught": [
+   "stem: `unittest discover` ran 1 test and exited 0 -> every revert 'unnoticed'. This repository has made this exact mistake before ('our verifier was running zero tests and reporting PASS').",
+   "packaging: `import packaging` resolved to site-packages -> all 10 commits 'BASELINE_RED'. Same src-layout trap the oracle licence hit on the same repository the same day."
+  ],
+  "why_it_matters": "Both would have produced a publishable number. Both were caught only because the tool records WHAT THE RUNNER SAID and refuses when it said nothing."
+ },
+ "finding_4_what_the_figure_overstates_and_understates": {
+  "overstates": "4 of the 5 packaging misses are 'perf(...)' commits, behaviour-preserving refactors for which a green suite after a revert is CORRECT. They set a floor on this measure and must not be read as risk.",
+  "understates": "stem's real runner is run_tests.py; it was not reproduced, so stem's 0 of 6 is measured against a partial suite and its true protection is unknown.",
+  "consequence": "Direction established, exact value not. The honest sentence is: on real merged code, a large share of changes are protected by no test that can fail, and which share depends on the project rather than on its test count."
+ },
+ "independent_mutation_check": {
+  "what": "A second, author-independent form of the same question: perturb the PRE-FIX file of a real fix with the oracle licence's mutants and ask whether the suite sees the guard move.",
+  "more_itertools/more.py": "10 of 14 sites licensed",
+  "stem/connection.py": "11 of 14 sites licensed",
+  "reading": "Both guards at the centre of real historical fixes are visible to the suites; the sites the suite cannot see are arithmetic and one comparison. So the projects' suites are not blind in general -- they are blind in particular places, which is why a per-site answer is the only useful one."
+ },
+ "research_grounding": [
+  "Who Tests the Tests (Jul 2026): 'a regression test never shown to fail on the broken commit is not a regression test, it's an assertion of faith'",
+  "Characterizing Regression Bug-Inducing Changes (ICSE 2026): 21.79% of bug-inducing commits added or modified no test; in 65.57% of those the project had no test targeting the feature that broke",
+  "full-census study of 252 bug-fix commits (arXiv 2606.22475): 42.5% of fixes shipped with a test, and a guard written into the same blind harness cannot see the repeat",
+  "On the Risks of using LLM-Generated Tests for Regression Testing (arXiv 2610.11835): 8-17% of generated tests are fault-ENFORCING and only 2.4-4.8% reveal faults"
+ ],
+ "what_this_does_not_say": [
+  "not that these commits are wrong: a behaviour-preserving refactor SHOULD pass after a revert",
+  "not a benchmark: 28 judged code changes across 3 repositories",
+  "not the projects' official test procedure (stem's run_tests.py was not reproduced)",
+  "not a claim about this repository's capabilities; it is a measurement of the world",
+  "no model called, no capability registered, truth.achieved untouched, spend $0"
+ ],
+ "reproduce": "python3 canonical/tools/revert_test_ledger_v1.py --repo <clone> --limit 20 --check -- python -m pytest -q tests --out ledger.json"
+}
