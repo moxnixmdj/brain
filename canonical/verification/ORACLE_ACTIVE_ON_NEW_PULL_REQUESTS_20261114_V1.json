@@ -1,0 +1,79 @@
+{
+ "schema": "ORACLE_ACTIVE_ON_NEW_PULL_REQUESTS_20261114_V1",
+ "authority": "NONE",
+ "date": "2026-11-14",
+ "why": "The owner's claim, in his words: if an action is shown once it is learned permanently, so the only remaining work is to give the model the smartest actions and let it meet each coding environment once. The tree has measured the SPEED half on constructed spaces (one demonstration is right ~10% of held out inputs; the same demonstration plus the two questions worth asking is right 100% of the time). It had never measured the half that decides whether this is a solution or a tautology: on REAL code, how much of the organ's output does the oracle confirm, and how much of that is the oracle's doing rather than the organ's.",
+ "method": {
+  "corpus": "8 pull requests collected on 2026-11-14, every one excluded because it appears in no earlier record in this tree (42 prior names excluded before searching); PEP 585 / built-in-generics / modernize-typing migrations found by GitHub title search",
+  "design": "each changed file is the demonstration for every other changed file, and every PAIR of files is a second showing, put together with the tree's existing put_together",
+  "organ": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py, unmodified",
+  "oracle": "the demonstration's own two versions of its own function. An answer is the PATH the function takes (line offsets relative to its first line) or the exception it raises -- never the returned value, because `return 1` in the demonstration and `return 2` in the target are the same behaviour and comparing values reported every copied change as wrong (measured: that was the first version of this instrument)",
+  "claim_site": "outside the demonstration's own probe grid only. Inside the grid the demonstration could have answered the question itself, so agreement there is not the oracle doing what the learner could not",
+  "counted": "a change is a changed line, compared one statement per line; a change is confirmed when the oracle's path agrees with the organ's edited path, and it is a wrong right-looking change when the oracle contradicts it outside the grid"
+ },
+ "measured": {
+  "pairs_tested": 230,
+  "one_showing": {
+   "applied_a_change": 44,
+   "share_of_pairs": 0.0478,
+   "edited_form_is_loadable": 11,
+   "oracle_confirmed_on_the_probe_grid": 2,
+   "share_of_probeable": 0.1818,
+   "changes_the_developers_made_and_the_organ_made": 98,
+   "changes_the_developers_made": 331,
+   "share": 0.2961,
+   "changes_the_organ_made_that_the_developers_did_not": 44,
+   "targets_wholly_right": 12,
+   "share_of_applied": 0.2727
+  },
+  "two_showings": {
+   "applied_a_change": 128,
+   "changes_right": 218,
+   "changes_the_developers_made": 647,
+   "share": 0.3369,
+   "changes_the_organ_made_that_the_developers_did_not": 79,
+   "targets_wholly_right": 49,
+   "share_of_applied": 0.3828
+  },
+  "ceiling_false_arm": {
+   "share_of_changes_right": 1.0,
+   "why_it_is_1": 0,
+   "note": "the developers' own answer. Not an output of the organ and not knowable from it: the ceiling of any reviewer, i.e. the false arm"
+  },
+  "calibration": {
+   "targets": 230,
+   "one_showing_made_something_the_developers_made": 40,
+   "share": 0.1739,
+   "reading": "the organ reproduced the developers' change on 40 of 230 targets by itself. This is the same magnitude as the held-out transfer record's 37.52% coverage at 76.36% precision on a class its operators were designed for, and it is the number that makes the oracle's job possible at all"
+  }
+ },
+ "why_the_oracle_could_not_be_asked_more_often": {
+  "the_organ_refused": 123,
+  "no_loadable_function_in_the_demonstration": 85,
+  "target_not_a_loadable_function": 11,
+  "probeable": 11,
+  "the_refusals_in_the_organ_s_own_words": {
+   "nothing_in_the_file_has_the_form_the_example_changed": 101,
+   "a_line_was_changed_but_the_same_code_was_left_alone": 40,
+   "the_two_example_files_hold_the_same_code_apart_from_imports": 20,
+   "a_line_adds_removes_or_reshapes_whole_statements": 14
+  },
+  "reading": "THE BOTTLENECK IS NOT LEARNING SPEED. It is that a taught edit needs a loadable, single-function, value-driven target before any oracle can speak about it: 219 of 230 pairs never reach a question. The organ's own refusals are correct and they are the ceiling, and no amount of showing-once changes a `__init__`, a class body, a decorator or a call graph"
+ },
+ "what_the_owned_instruments_already_settled_and_this_confirms": {
+  "one_showing_memorises_two_generalise": "ONE 0.2961 -> TWO 0.3369 of the developers' changes, with 44 vs 79 wrong-looking changes; coherent with ONE_SHOWING_IS_LITERAL_TWO_SHOWINGS_ARE_GENERAL_20261112_V1.md, and it moves the number by 4 points, not from 0.1 to 1.0",
+  "the_questions_are_worth_2_queries_on_constructed_spaces": "README: one demo held-out accuracy 0.10 vs one demo + chosen questions 1.00, mean 2.0 queries. That is real and it is on a space of 47 hand-authored unary integer programs, not on code",
+  "the_measured_conclusion": "an oracle makes one showing usable; it does not make it general, and on real code the oracle can only speak about the 4.8% of pairs that load as a value-driven function at all"
+ },
+ "what_this_does_not_say": [
+  "not that instant learning is worthless: it is the difference between 0 and 29.6-33.7% of a real migration, reproduced on code collected today",
+  "not that the oracle is a solution: 2 of 11 probeable on one showing is 18%, and the arm that reaches 100% is the developers' own answer, which is not a capability of any system",
+  "not a computer-use result in any form: every pair here is a pure-Python source edit of a single function with no runtime dependency",
+  "not an independent verification: producer runs and reports; there is no second verifier in this record"
+ ],
+ "research_grounding": [
+  "Continual-ARC (arXiv 2611.14505, submitted 10 Nov 2026): no harness-based method gains on unseen tasks; weights trained on the teacher's moves saved 0.57 on puzzles it had met and 0.29 on 100 new ones. Memory without learning: a stored program per puzzle scored 0.65 on met puzzles and 0.03 on new ones",
+  "this tree's own one-shot identifiability probe: 14.1 of 47 programs fit after one demonstration, leader right on 10% of held-out inputs; one demonstration plus chosen questions 1.00 at a mean of 2.0 questions"
+ ],
+ "reproduce": "python3 canonical/tools/oracle_active_on_new_pull_requests_20261114_v1.py --pulls FILE --json OUT, after collecting FILE with the GitHub search in the method above; tests: canonical/tests/test_oracle_active_measure_v1.py"
+}
