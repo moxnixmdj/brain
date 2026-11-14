@@ -164,6 +164,110 @@ def _promote_r3_episode_if_configured(r3_state_path: pathlib.Path | None) -> dic
         return {"drained": False, "error": f"{type(exc).__name__}:{str(exc)[:160]}"}
 
 
+def _record_gap_and_read_knowledge(
+    goal: str,
+    front_res: Mapping[str, Any],
+    *,
+    allow_tier2_learning: bool,
+    allow_jit_network: bool,
+    record_open_gap: bool,
+) -> dict[str, Any]:
+    """Record a learnable front-door gap and read external knowledge about it.
+
+    This is the read-only half of the old learn-on-failure path.  It deliberately
+    does not run a named program, infer a CLI contract by execution, register a
+    capability, or retry the goal.  Those are effectful steps and remain behind
+    the computer-execution boundary.  External documents are K1 evidence only;
+    they grant no authority and are not a verified capability.
+    """
+    learned: dict[str, Any] = {"attempted": False, "gap_recorded": False}
+    front_status = str(front_res.get("status") or "")
+    gap_shape = front_status in _LEARNABLE_FRONT_STATUSES
+    if not gap_shape:
+        return learned
+
+    from canonical.runtime.memory_policy_v1 import can_write_memory
+
+    writes_allowed = can_write_memory()
+    if record_open_gap and writes_allowed:
+        try:
+            from canonical.runtime import ignorance_ledger_v1 as led
+
+            # `note()` is a no-op under READ_ONLY/OFF.  Do not report a persisted
+            # gap when the active memory policy forbids the write.
+            why_text = f"raw goal compilation gap ({front_status})"
+            gap_id = led.note(goal or "unmatched goal", why=why_text, cost=1.0)
+            learned["gap_recorded"] = True
+            learned["gap_id"] = gap_id
+            learned["what_to_learn_next"] = [g["what"] for g in led.rank(limit=3)]
+        except Exception:
+            pass
+
+    # JIT retrieval also credits source value, which is a memory write.  Under
+    # READ_ONLY/OFF the read-only learning seam stays closed rather than smuggling
+    # a write through the knowledge path.
+    if allow_tier2_learning and allow_jit_network and writes_allowed:
+        try:
+            from canonical.runtime import jit_knowledge_v1 as jit
+
+            known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
+            if not known.get("complete"):
+                try:
+                    from canonical.runtime.curriculum_v1 import query_for
+
+                    rephrased = query_for(goal)
+                    if rephrased and rephrased != goal:
+                        again = jit.resolve(rephrased, min_sources=1, limit=6, timeout=8)
+                        if again.get("complete") or again.get("document_count", 0) > known.get("document_count", 0):
+                            known = again
+                            known["query_was_rephrased_to"] = rephrased
+                except Exception:
+                    pass
+            learned["knowledge"] = {
+                "status": known.get("status"),
+                "documents": known.get("document_count", 0),
+                "sources_answered": known.get("sources_answered") or [],
+                "kinds_answered": known.get("kinds_answered") or [],
+                "min_kinds_required": known.get("min_kinds_required"),
+                "gap": known.get("gap"),
+                "query_was_rephrased_to": known.get("query_was_rephrased_to"),
+                "complete": known.get("complete", False),
+                "authority": known.get("authority"),
+            }
+            candidates: list[str] = []
+            for doc in known.get("documents") or []:
+                for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
+                    head = text.strip().split()[0] if text.strip() else ""
+                    head = head.strip(".,()[]{}'\"")
+                    if 2 <= len(head) <= 40 and _is_executable(head):
+                        candidates.append(head)
+            if candidates:
+                learned["knowledge"]["candidates_present"] = candidates[:6]
+                if not _named_executable(goal):
+                    learned.setdefault("from_knowledge", candidates[0])
+        except Exception as exc:
+            learned.setdefault("knowledge", {"error": f"{type(exc).__name__}:{str(exc)[:160]}"})
+
+    if allow_tier2_learning:
+        exe = _named_executable(goal)
+        if not exe:
+            exe = str(learned.get("from_knowledge") or "")
+            if exe:
+                learned["executable_source"] = "jit_knowledge"
+        if exe:
+            # Naming a program is not permission to run it, even `--help`.
+            learned["executable"] = exe
+            learned["executable_status"] = computer_boundary.STATUS
+        learned["computer_env_status"] = computer_boundary.STATUS
+        try:
+            from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
+
+            learned["verified_skill_store_rules"] = VerifiedSkillStore().count()
+        except Exception:
+            pass
+    return learned
+
+
 def _deterministic_zero_llm_mcp_substrate(kind: str, payload: Mapping[str, Any]) -> dict[str, Any]:
     """Deterministic `K3 = 0` substrate for `toolathlon_brain_host_integration_v1` (zero external LLM)."""
     from canonical.runtime.brain_unified_model_v1 import tokenize
@@ -1600,484 +1704,75 @@ def _solve_or_learn_impl(
                 pass
 
         # Documentation-mined snippets run as host Python programs. Do not
-        # execute this fallback without the same admitted boundary.
-        return {"schema": SCHEMA, "task_id": task_id, "pass": False,
-                "status": computer_boundary.STATUS,
-                "failure_class": computer_boundary.FAILURE_CLASS,
-                "executed": True if front_res.get("executed") is True else None,
-                "side_effects_may_exist": True,
-                "served_after": front_res.get("status"), "documentation_fallback_executed": False,
-                "semantic_acceptance_complete": False,
-                "tier_used": "tier2_unconfined_documentation_execution_refused",
-                "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
-
-        # 2D: General Computer Environment Execution (`computer_env_v1.perform`) on stated workspace paths
-        try:
-            from canonical.runtime import computer_env_v1 as cenv
-            from canonical.runtime import goal_compiler as _gc
-
-            stated_paths = [abs_p for _raw_p, abs_p in _gc._repo_paths(goal, ra.ROOT)]
-            env_dir = (
-                stated_paths[0].parent
-                if stated_paths and stated_paths[0].is_file()
-                else (stated_paths[0] if stated_paths and stated_paths[0].is_dir() else None)
-            )
-            if env_dir is not None and env_dir.is_dir():
-                c_res = cenv.perform(goal, str(env_dir))
-                if c_res.get("pass") is True and c_res.get("verified") is True:
-                    closed_gaps = _close_matching_ignorance_gaps(goal, "computer_env.perform")
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__COMPUTER_ENV_LEARNED_AND_VERIFIED",
-                        "tier_used": "tier2_computer_env_perform",
-                        "executed": True,
-                        "semantic_acceptance_complete": True,
-                        "from_memory": bool(c_res.get("from_memory")),
-                        "learned_this_turn": True,
-                        "closed_gap_ids": closed_gaps,
-                        "computer_env_result": c_res,
-                        "model_dependency_count": 0,
-                        "incremental_spend_usd": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-        except Exception:
-            pass
-
-        # 2E: Full Multi-Layer Computer, OSWorld v19, MCP JSON-RPC & Harbor Terminal Sovereignty
-        mcp_rpc = req.get("mcp_rpc")
-        if callable(mcp_rpc):
-            try:
-                import asyncio
-                from canonical.runtime import toolathlon_brain_host_integration_v1 as mcp_host
-
-                mcp_step = asyncio.run(
-                    mcp_host.execute_one_brain_selected_step(
-                        rpc=mcp_rpc,
-                        substrate=_deterministic_zero_llm_mcp_substrate,
-                        task_context=goal,
-                        public_state_summary=str(req.get("public_state_summary") or ""),
-                    )
-                )
-                gw_res = dict(mcp_step.get("gateway_result") or {})
-                is_err = bool(gw_res.get("isError") is True)
-                if not is_err:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_MCP_GATEWAY_STEP_EXECUTED",
-                        "tier_used": "tier2_mcp_gateway",
-                        "selected_tool_id": mcp_step["selected_tool_id"],
-                        "arguments": mcp_step["arguments"],
-                        "gateway_result": gw_res,
-                        "schema_judgment_receipts": mcp_step["schema_judgment_receipts"],
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        harbor_env = req.get("harbor_env")
-        if harbor_env is not None:
-            try:
-                import asyncio
-                from canonical.runtime import harbor_brain_agent as harbor_mod
-
-                harbor_out = asyncio.run(
-                    harbor_mod.run_bounded_harbor_goal(
-                        goal,
-                        harbor_env,
-                        max_cycles=int(req.get("harbor_max_cycles", 8)),
-                    )
-                )
-                if harbor_out.get("completed") is True or harbor_out.get("pass") is True:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_HARBOR_TERMINAL_COMPLETED",
-                        "tier_used": "tier2_harbor_terminal",
-                        "harbor_result": harbor_out,
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        osworld_obs = req.get("osworld_obs")
-        if isinstance(osworld_obs, Mapping):
-            try:
-                from canonical.runtime import osworld_v21_brain_subject_v19 as osw19
-
-                subject = osw19.build_subject()
-                osw_env = req.get("osworld_env")
-                if osw_env is not None:
-                    try:
-                        subject.bind_environment(osw_env)
-                    except Exception:
-                        pass
-
-                max_osw_steps = max(1, int(req.get("osworld_max_steps") or req.get("max_osworld_steps") or 6))
-                cur_obs: Mapping[str, Any] = osworld_obs
-                step_actions: list[list[str]] = []
-                last_response = ""
-                completed = False
-                for _step_i in range(max_osw_steps):
-                    response_text, py_actions = subject.predict(goal, cur_obs)
-                    last_response = str(response_text or "")
-                    act_list = list(py_actions or [])
-                    if not act_list:
-                        break
-                    step_actions.append(act_list)
-                    if act_list == ["DONE"]:
-                        completed = True
-                        break
-                    if osw_env is not None and hasattr(osw_env, "step") and callable(osw_env.step):
-                        step_out = osw_env.step(act_list[0] if len(act_list) == 1 else act_list)
-                        if isinstance(step_out, tuple) and step_out and isinstance(step_out[0], Mapping):
-                            cur_obs = step_out[0]
-                            if len(step_out) >= 3 and bool(step_out[2]):
-                                completed = True
-                                break
-                        elif isinstance(step_out, Mapping):
-                            cur_obs = step_out
-                        else:
-                            break
-                    else:
-                        break
-
-                # Automatic GUI/Pixel -> Sub-5ms SQLite/HTTP/CLI Layer Collapse when causal effects are observed!
-                elevated_qualification = None
-                causal_gui_trace = (
-                    req.get("observed_causal_trace")
-                    or req.get("osworld_elevated_trace")
-                    or (getattr(osw_env, "causal_trace", None) if osw_env is not None else None)
-                )
-                gui_post = req.get("osworld_postcondition") or req.get("postcondition") or demo_post
-                if isinstance(causal_gui_trace, (list, Mapping)) and causal_gui_trace and isinstance(gui_post, Mapping):
-                    elevated_qualification = compile_and_qualify_skill(
-                        goal=goal,
-                        trace=causal_gui_trace,
-                        postcondition=gui_post,
-                        heldout_goal=req.get("heldout_goal"),
-                        heldout_postcondition=req.get("heldout_postcondition"),
-                        sabotaged_postcondition=req.get("sabotaged_postcondition"),
-                        auto_synthesize_twin=True,
-                        source_cwd=work_cwd,
-                        db_path=skill_db,
-                    )
-
-                if step_actions:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_OSWORLD_V19_DECIDED",
-                        "tier_used": "tier2_osworld_v19",
-                        "subject_id": osw19.SUBJECT_ID,
-                        "response": last_response,
-                        "actions": step_actions[-1],
-                        "trajectory_actions": step_actions,
-                        "steps_executed": len(step_actions),
-                        "completed": completed,
-                        "learned_this_turn": bool(
-                            elevated_qualification
-                            and (elevated_qualification.get("qualified") or elevated_qualification.get("pass"))
-                        ),
-                        "layer_elevation_receipt": elevated_qualification,
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        # 2F: Type-Level Multi-Step Capability Composition (`type_level_composer_v1` — 113-edge artifact type graph)
-        type_chain_target = req.get("type_chain_target")
-        if type_chain_target or req.get("allow_type_level_composition") is True:
-            try:
-                from canonical.swe_kernel.verified_capability_bridge_index_v1 import (
-                    compose_and_execute_type_level_chain,
-                )
-
-                tc_res = compose_and_execute_type_level_chain(
-                    str(type_chain_target or goal),
-                    macro_state_path=macro_state_path,
-                )
-                if tc_res.get("pass") is True:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_TYPE_LEVEL_CHAIN_EXECUTED",
-                        "tier_used": "tier2_type_level_composer",
-                        "from_memory": bool(tc_res.get("from_macro_cache")),
-                        "learned_this_turn": not bool(tc_res.get("from_macro_cache")),
-                        "chain": tc_res.get("chain"),
-                        "type_chain_result": tc_res,
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        # 2G: Zero-Field Plain-Sentence Workspace Autonomy (`autonomous_v1.run`) inside transactional CoW rollback
-        repo_root_resolved = pathlib.Path(__file__).resolve().parents[2]
-        has_project_taskfile = work_cwd != repo_root_resolved and any(
-            (work_cwd / fn).is_file() for fn in ("Makefile", "package.json", "pyproject.toml", "Taskfile.yml")
+        # execute this fallback without the same admitted boundary.  The refusal
+        # of that effectful fallback must not swallow the read-only learn-on-
+        # failure path: a real compile gap is still the most precise information
+        # available, and the ignorance ledger / JIT knowledge can consume it
+        # without running anything.
+        learned = _record_gap_and_read_knowledge(
+            goal,
+            front_res,
+            allow_tier2_learning=allow_tier2_learning,
+            allow_jit_network=allow_jit_network,
+            record_open_gap=record_open_gap,
         )
-        if req.get("autonomous_workspace") is True or has_project_taskfile:
-            try:
-                from canonical.runtime import autonomous_v1 as auto_v1
-                from canonical.swe_kernel.transactional_parallel_execution_v1 import (
-                    execute_transactional_cow_action,
-                )
-
-                def _verify_auto_v1(_rp: pathlib.Path, res_d: Mapping[str, Any]) -> bool:
-                    ver_d = res_d.get("verification") or {}
-                    if not (ver_d.get("verified") is True or ver_d.get("pass") is True):
-                        return False
-                    g_toks = [str(t).lower() for t in (ver_d.get("goal_tokens") or []) if str(t)]
-                    matched = [
-                        str(p).lower()
-                        for p in list(ver_d.get("matching") or []) + list(ver_d.get("new_paths") or [])
-                    ]
-                    if not matched:
-                        return False
-                    if g_toks and not any(gt in mp for gt in g_toks for mp in matched):
-                        return False
-                    return True
-
-                tx_auto = execute_transactional_cow_action(
-                    work_cwd,
-                    lambda root_p: auto_v1.run(
-                        goal,
-                        root_p,
-                        binary_limit=int(req.get("binary_limit", 20)),
-                        iterations=int(req.get("iterations", 3)),
-                    ),
-                    verify_fn=_verify_auto_v1,
-                )
-                if tx_auto.get("committed") is True:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_ZERO_FIELD_AUTONOMOUS_V1_VERIFIED",
-                        "tier_used": "tier2_autonomous_v1",
-                        "autonomous_result": tx_auto.get("action_output"),
-                        "files_updated": tx_auto.get("files_updated"),
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        # 2H: Active Black-Box Mechanism Discovery (`h100_zero_learned_mechanism_synthesizer_v1`) & 2D Grid Rule Induction (`grid_delta_rule_inducer_v2`)
-        if callable(req.get("mechanism_oracle")) or isinstance(req.get("mechanism_rows"), (list, tuple)):
-            try:
-                from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-                    discover_mechanism_actively,
-                )
-
-                m_out = discover_mechanism_actively(
-                    req.get("mechanism_oracle"),
-                    bounds=req.get("mechanism_bounds"),
-                    rows=req.get("mechanism_rows"),
-                    target=str(req.get("mechanism_target") or "y"),
-                    inputs=req.get("mechanism_inputs"),
-                    max_discriminator_rounds=int(req.get("max_discriminator_rounds", 6)),
-                    holdout_points=req.get("holdout_points"),
-                )
-                if m_out.get("pass") is True:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_ACTIVE_MECHANISM_DISCOVERED",
-                        "tier_used": "tier2_active_mechanism_discovery",
-                        "learned_this_turn": True,
-                        "mechanism": m_out,
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        if isinstance(req.get("grid_training_pairs"), (list, tuple)):
-            try:
-                from canonical.swe_kernel.global_extrapolation_chase_spine_v1 import (
-                    induce_and_predict_grid_delta_rule,
-                )
-
-                g_out = induce_and_predict_grid_delta_rule(
-                    req["grid_training_pairs"],
-                    test_grids=req.get("grid_test_inputs"),
-                )
-                if g_out.get("pass") is True:
-                    return {
-                        "schema": SCHEMA,
-                        "task_id": task_id,
-                        "goal": goal,
-                        "pass": True,
-                        "status": "PASS__TIER2_GRID_DELTA_RULE_INDUCED",
-                        "tier_used": "tier2_grid_delta_rule_inducer",
-                        "learned_this_turn": True,
-                        "grid_induction": g_out,
-                        "k3_external_llm_calls": 0,
-                        "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                    }
-            except Exception:
-                pass
-
-        gui_action = req.get("gui_action")
-        if isinstance(gui_action, Mapping):
-            try:
-                from canonical.runtime import osworld_computer_surface_v1 as gui_surface
-
-                raw_screen = req.get("gui_screen") or {}
-                screen = gui_surface.Screen(
-                    width=int(raw_screen.get("width", 1920)),
-                    height=int(raw_screen.get("height", 1080)),
-                )
-                compiled_gui = gui_surface.compile_osworld_pyautogui(gui_action, screen)
-                gui_env = req.get("gui_env")
-                exec_receipt = (
-                    gui_surface.execute_typed_action(gui_env, gui_action)
-                    if gui_env is not None
-                    else {"compiled_pyautogui": compiled_gui, "executed_in_env": False}
-                )
-                return {
-                    "schema": SCHEMA,
-                    "task_id": task_id,
-                    "goal": goal,
-                    "pass": True,
-                    "status": "PASS__TIER2_TYPED_GUI_SURFACE_ACTION",
-                    "tier_used": "tier2_typed_gui_surface",
-                    "compiled_pyautogui": compiled_gui,
-                    "gui_receipt": exec_receipt,
-                    "learned_this_turn": False,
-                    "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3),
-                }
-            except Exception:
-                pass
+        prior_may_have_effects = (
+            front_res.get("executed") is True
+            or front_res.get("side_effects_may_exist") is True
+        )
+        refused = {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                   "status": computer_boundary.STATUS,
+                   "failure_class": computer_boundary.FAILURE_CLASS,
+                   # Do not upgrade uncertain effects into a claim of execution.
+                   "executed": (front_res.get("executed") if prior_may_have_effects else False),
+                   "side_effects_may_exist": True if prior_may_have_effects else False,
+                   "served_after": front_res.get("status"),
+                   "documentation_fallback_executed": False,
+                   "semantic_acceptance_complete": False,
+                   "tier_used": "tier2_unconfined_documentation_execution_refused",
+                   "elapsed_ms": round((perf_counter_ns() - t0) / 1e6, 3)}
+        if (not prior_may_have_effects
+                and learned.get("gap_recorded") is True
+                and str(front_res.get("status") or "") in _LEARNABLE_FRONT_STATUSES):
+            # The carrier decision is preserved, not deleted.  Nothing executed,
+            # so the earlier compile gap remains the served reason and the
+            # read-only learning record travels with it.
+            kept = dict(front_res)
+            kept.update({
+                "controller_schema": SCHEMA,
+                "pass": False,
+                "executed": False,
+                "side_effects_may_exist": False,
+                "semantic_acceptance_complete": False,
+                "served_after": front_res.get("status"),
+                "carrier_gate": {k: refused.get(k) for k in ("status", "failure_class")},
+                "refusal_precedes_the_carrier_gate": True,
+                "documentation_fallback_executed": False,
+                "tier_used": "tier2_unconfined_documentation_execution_refused",
+                "qualification_receipt": qualification_receipt,
+                "learning": learned,
+                "learned_this_turn": False,
+                "elapsed_ms": refused["elapsed_ms"],
+            })
+            return kept
+        refused["learning"] = learned
+        refused["learned_this_turn"] = False
+        return refused
 
     # ------------------------------------------------------------------
-    # Record Open Gap + JIT Multi-Channel Knowledge + CLI `--help` Acquisition
+    # Record Open Gap + JIT Multi-Channel Knowledge (read-only)
     # ------------------------------------------------------------------
-    learned: dict[str, Any] = {"attempted": False, "gap_recorded": False}
-    front_status = str(front_res.get("status") or "")
-    learnable_gap = allow_tier2_learning and (front_status in _LEARNABLE_FRONT_STATUSES)
-
-    if record_open_gap:
-        try:
-            from canonical.runtime import ignorance_ledger_v1 as led
-
-            why_text = f"raw goal compilation gap ({front_status})" if front_status else "raw goal compilation gap"
-            gap_id = led.note(goal or "unmatched goal", why=why_text, cost=1.0)
-            learned["gap_recorded"] = True
-            learned["gap_id"] = gap_id
-            learned["what_to_learn_next"] = [g["what"] for g in led.rank(limit=3)]
-        except Exception:
-            pass
-
-    if learnable_gap and allow_jit_network:
-        try:
-            from canonical.runtime import jit_knowledge_v1 as jit
-
-            known = jit.resolve(goal, min_sources=1, limit=6, timeout=8)
-            if not known.get("complete"):
-                try:
-                    from canonical.runtime.curriculum_v1 import query_for
-
-                    rephrased = query_for(goal)
-                    if rephrased and rephrased != goal:
-                        again = jit.resolve(rephrased, min_sources=1, limit=6, timeout=8)
-                        if again.get("complete") or again.get("document_count", 0) > known.get("document_count", 0):
-                            known = again
-                            known["query_was_rephrased_to"] = rephrased
-                except Exception:
-                    pass
-            learned["knowledge"] = {
-                "status": known.get("status"),
-                "documents": known.get("document_count", 0),
-                "sources_answered": known.get("sources_answered") or [],
-                "kinds_answered": known.get("kinds_answered") or [],
-                "min_kinds_required": known.get("min_kinds_required"),
-                "gap": known.get("gap"),
-                "query_was_rephrased_to": known.get("query_was_rephrased_to"),
-                "complete": known.get("complete", False),
-                "authority": known.get("authority"),
-            }
-            candidates: list[str] = []
-            for doc in known.get("documents") or []:
-                for text in (str(doc.get("id") or ""), str(doc.get("title") or "")):
-                    head = text.strip().split()[0] if text.strip() else ""
-                    head = head.strip(".,()[]{}'\"")
-                    if 2 <= len(head) <= 40 and _is_executable(head):
-                        candidates.append(head)
-            if candidates:
-                learned["knowledge"]["candidates_present"] = candidates[:6]
-                if not _named_executable(goal):
-                    learned.setdefault("from_knowledge", candidates[0])
-        except Exception as exc:
-            learned.setdefault("knowledge", {"error": f"{type(exc).__name__}:{str(exc)[:160]}"})
-
-    if learnable_gap:
-        exe = _named_executable(goal)
-        if not exe:
-            exe = str(learned.get("from_knowledge") or "")
-            if exe:
-                learned["attempted"] = True
-                learned["executable"] = exe
-                learned["executable_source"] = "jit_knowledge"
-        if exe:
-            learned["attempted"] = True
-            learned["executable"] = exe
-            try:
-                import subprocess
-                from canonical.runtime import cli_capability_acquisition_v1 as acq
-
-                with tempfile.TemporaryDirectory(prefix="brain-learn-") as td:
-                    out_proc = subprocess.run([exe, "--help"], capture_output=True, timeout=30, cwd=td)
-                    help_text = (out_proc.stdout + out_proc.stderr).decode("utf-8", "replace")
-                probe_doc = {"executables": [{"executable": exe, "help_attempts": [{"text": help_text}]}]}
-                acquired = acq.acquire(probe_doc, goal)
-                learned["acquisition_status"] = acquired.get("status")
-                if acquired.get("verified"):
-                    cid = "acquired." + exe.replace(".", "_")
-                    reg = acq.register(acquired, cid, registry_path=registry_path)
-                    learned["registered"] = reg.get("registered") is True
-                    learned["capability_id"] = cid
-                    if learned["registered"]:
-                        _close_matching_ignorance_gaps(goal, cid)
-                        r3_promo = _promote_r3_episode_if_configured(r3_path)
-                        if r3_promo is not None:
-                            learned["r3_promotion"] = r3_promo
-                        retry = ra.solve(clean_req)
-                        retry["learning"] = learned
-                        retry["learned_this_turn"] = True
-                        retry["controller_schema"] = SCHEMA
-                        retry["tier_used"] = "tier2_cli_help_acquisition"
-                        retry["elapsed_ms"] = round((perf_counter_ns() - t0) / 1e6, 3)
-                        return retry
-            except Exception as exc:
-                learned["error"] = f"{type(exc).__name__}:{str(exc)[:200]}"
-
-        try:
-            from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
-
-            learned["verified_skill_store_rules"] = VerifiedSkillStore().count()
-        except Exception:
-            pass
+    # The old tail also ran a named program's `--help`, inferred a contract by
+    # execution, registered a capability and retried.  Those are effects, not
+    # knowledge; they stay behind the computer-execution boundary.  The live
+    # learn-on-failure seam is the read-only record + retrieval below.
+    learned = _record_gap_and_read_knowledge(
+        goal,
+        front_res,
+        allow_tier2_learning=allow_tier2_learning,
+        allow_jit_network=allow_jit_network,
+        record_open_gap=record_open_gap,
+    )
 
     r3_promo = _promote_r3_episode_if_configured(r3_path)
     if r3_promo is not None:
