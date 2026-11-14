@@ -60,7 +60,29 @@
     "instrument_contrast_regime": "chosen contrasts with failures identify 25/25 in a mean of 2.76 demonstrations, 0 wrong requirements",
     "new_seam_suite": "8 passed with the fix; 3 failed, 5 passed with the context forwarding removed",
     "affected_set": "1 failed, 71 passed; the single failure reproduced at base",
-    "known_remaining_failures": 1
+    "known_remaining_failures": 1,
+    "open_benchmark_capability_evidence": {
+      "dataset": "MiniWoB++ (Farama-Foundation/miniwob-plusplus), MIT, upstream 33c3b4ddef8c6eb67c57a29663d844b1eda7e614",
+      "split": "held_out: 92 real task pages not looked at while the arms were built",
+      "judge": "each page's own reward",
+      "external_model_calls": 0,
+      "incremental_spend_usd": 0,
+      "demonstrated_once": 40,
+      "never_demonstrated": 52,
+      "tasks_needing_generalisation": 35,
+      "mean_success_where_replay_is_not_enough": {
+        "random": 0.0814,
+        "verbatim_cache": 0.15,
+        "existing_compiler": 0.1886,
+        "version_space_one_success": 0.6,
+        "blind_control": 0.2,
+        "three_practice_instances": 0.6614
+      },
+      "conclusion": "One success is ~4x a cache on unseen instances but is 60%, not 100%; 52/92 tasks were never demonstrated. Perfect permanent learning is refuted on real open held-out data.",
+      "not_a_leaderboard_entry": "the demonstration is found by exploration against the page reward, which a leaderboard agent is not given",
+      "receipt": "canonical/verification/OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_20261114_V1.json"
+    },
+    "synthetic_evidence_labelled": "what_a_success_teaches_20261112.py is exhaustive but SYNTHETIC: a bound on inference, not capability evidence. The eight plumbing tests use invented fact names and claim no capability."
   },
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -72,7 +94,8 @@
       "canonical/runtime/live_brain_route_admission_v1.py",
       "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
       "canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py",
-      "WHAT_ONE_SUCCESS_CAN_AND_CANNOT_TEACH_20261114_V1.md"
+      "WHAT_ONE_SUCCESS_CAN_AND_CANNOT_TEACH_20261114_V1.md",
+      "canonical/verification/OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_20261114_V1.json"
     ],
     "route_class": "REUSE",
     "producer_cognition_model_dependency_count": 0,
@@ -443,6 +466,7 @@
     "authority": "NONE__PRODUCER_RUN_SANDBOX",
     "independent_verification_completed": false,
     "commands": [
+      "python3 canonical/tools/miniwob_one_success_generalisation_measure_v1.py --html-dir <MiniWoB++ html> --node-modules-dir <nodemods> --substrate jsdom --only-split held_out --test-episodes 20 --action-budget 1500",
       "python3 what_a_success_teaches_20261112.py",
       ".venv/bin/python -m pytest -q canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py",
       ".venv/bin/python -m pytest -q canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py canonical/tests/test_a_chosen_contrast_teaches_what_repetition_cannot_v1.py canonical/tests/test_skill_scope_acquisition_v1.py canonical/tests/test_redundant_literals_are_not_ambiguity_v1.py canonical/tests/test_incremental_semantic_graph_and_swe_upgrades_v1.py",
@@ -453,10 +477,12 @@
       "instrument": "one success 0/200 identified; chosen contrasts 25/25 in mean 2.76; live store 3 successes / 0 failures",
       "new_seam_suite": "8 passed in 0.27s",
       "falsification_run": "context forwarding removed -> 3 failed, 5 passed",
-      "affected_set": "1 failed, 71 passed in 9.24s; same single failure at base"
+      "affected_set": "1 failed, 71 passed in 9.24s; same single failure at base",
+      "open_benchmark_held_out": "92 real tasks; 40 demonstrated; one success 60.0% vs cache 15.0% vs existing compiler 18.9% vs random 8.1% on the 35 tasks needing generalisation; 0 model calls, $0"
     },
     "remaining_failures": [
-      "test_incremental_semantic_graph_and_swe_upgrades_v1::test_navigation_and_complexity_deliver_answers confinement refusal (reproduced at base)"
+      "test_incremental_semantic_graph_and_swe_upgrades_v1::test_navigation_and_complexity_deliver_answers confinement refusal (reproduced at base)",
+      "chromium substrate run on the same split did not complete in-session (7/92 tasks); no partial number is claimed"
     ]
   }
 }

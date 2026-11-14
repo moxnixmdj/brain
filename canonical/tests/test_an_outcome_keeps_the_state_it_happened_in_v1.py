@@ -18,6 +18,23 @@ live loop fed it the 0/200 regime.
 These tests pin the repair at the seam that lost the information, not at the
 learner that was already correct.
 
+WHAT THESE TESTS ARE NOT
+------------------------
+The fact names below (`keep`, `other`, `source.available`) are INVENTED. These
+are plumbing controls: they prove a value is forwarded and that a named verdict
+is refused. They establish NO capability, on no environment, and must never be
+cited as evidence that the system learned anything real. A green run here means
+"the state is no longer discarded", nothing more.
+
+Capability evidence has to come from real, open, held-out tasks executed by this
+system alone with no external model. For the claim in question that instrument is
+`canonical/tools/miniwob_one_success_generalisation_measure_v1.py` over the
+held-out split of MiniWoB++ (Farama-Foundation, MIT): 130 real task pages, the
+page's own reward as the only judge, one demonstration then unseen instances.
+Its result is reported separately and is not a leaderboard entry, because the
+demonstration is found by exploration against the page reward, which a
+leaderboard agent is not given.
+
 Producer-run regression tests. Authority NONE. No capability credit.
 """
 from __future__ import annotations

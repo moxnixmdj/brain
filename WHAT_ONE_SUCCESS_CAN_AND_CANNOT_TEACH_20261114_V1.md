@@ -12,9 +12,56 @@ weight updated, `truth.achieved` unchanged. Independent verification is open.
 
 The direction is real. The word **once** is false, and this repository already proved it false.
 
-## 2. The measurement that settles it
+## 2. The capability evidence: a real open benchmark, held out, no model
 
-`what_a_success_teaches_20261112.py`, run on this tree during this session (zero model dependency, $0):
+Synthetic probes cannot settle a capability claim. This one was run on **MiniWoB++**
+(Farama-Foundation, MIT, upstream `33c3b4ddef8c6eb67c57a29663d844b1eda7e614`, 130 real task pages),
+on the **held-out split** — the 92 tasks that were *not* looked at while the arms were built. The
+judge is each page's own reward. The solver is this repository's own code:
+`producer_cognition_model_dependency_count = 0`, external model calls 0, spend $0.
+
+Protocol: find one success on one instance by the system's own exploration, then get one try on each
+of 20 **unseen** instances of the same task.
+
+```text
+92 held-out tasks
+  demonstrated even once          40
+  never demonstrated              52   (36 no first success, 11 page does not run, 5 unstable seed)
+  fixed replay already solves      5
+  tasks that NEED generalisation  35   <- the only ones that test the claim
+```
+
+Mean success rate **on the tasks where replay is not enough** (800 episodes per arm):
+
+| arm | success | tasks at 100% | tasks at 0% |
+|---|---|---|---|
+| random | 8.1% | 2 | 16 |
+| verbatim — what a cache does | 15.0% | 5 | 11 |
+| existing compiler (this repo's own) | 18.9% | 7 | 19 |
+| **version_space — one success** | **60.0%** | **20** | **1** |
+| blind control (cannot read the instruction) | 20.0% | 5 | 7 |
+| **version_space + 3 practice instances** | **66.1%** | **21** | 2 |
+
+**What this proves.** The mechanism is real and large: one success generalises to unseen instances
+**4× better than a cache** and **3.2× better than the repo's own previous generaliser**, with no
+model and no spend. The blind control collapses to 20%, so most of the gain is genuine grounding in
+the instruction, not memorised clicking.
+
+**What it disproves.** "Solved perfectly / permanently / anything on a computer" is false. One success
+yields **60%**, not 100%. **52 of 92** tasks could not be demonstrated even once. And three extra
+instances buy only **+6.1 points** — exposure alone has sharply diminishing returns, exactly as the
+information argument predicts.
+
+Receipt: `canonical/verification/OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_20261114_V1.json`.
+This is **not a leaderboard entry**: the demonstration is found by exploration against the page's
+own reward, which a leaderboard agent is not given. Substrate limit: jsdom has no layout, so 11 pages
+did not run and geometry-dependent tasks are not faithfully represented.
+
+## 3. The information-theoretic bound (a synthetic instrument, and labelled as one)
+
+The instrument below is **exhaustive but synthetic** — it enumerates hidden requirements over
+constructed fact sets. It is a mathematical bound on what any learner can infer, **not** capability
+evidence. The capability evidence is the open benchmark in §2. Run on this tree (zero model, $0):
 
 ```text
 A. ONE SUCCESS  (200 exact cases)
@@ -56,7 +103,7 @@ repeating a success in the state it already worked in has exactly zero informati
 the contrast kills the most survivors per attempt. That is the fastest possible route, and it is
 already implemented here.
 
-## 3. The single bottleneck, located
+## 4. The single bottleneck, located
 
 Not storage. Not retrieval. Not model size.
 
@@ -81,7 +128,7 @@ where it applies".
 This is the highest-leverage defect available: it is upstream of every learner, every skill library,
 and every future weight update, because all of them consume this evidence.
 
-## 4. What was changed
+## 5. What was changed
 
 No new organ. One information loss deleted, and existing organs connected. ("The best part is no
 part.")
@@ -115,20 +162,25 @@ discriminating_facts:   ['python.source.file.available', 'python.test.corpus.ava
 The door now says the true sentence: *"I did this once; I do not yet know where it applies; here is
 exactly what would have to differ to find out."* Before, it said `recorded: true` and nothing else.
 
-## 5. What is real, and what is not
+## 6. What is real, and what is not
 
-**Real:** instant *recall* of a demonstrated instance; a version-space learner that keeps every
-hypothesis consistent with evidence; exact-information-gain contrast selection that identifies a
-requirement in ~2.76 chosen demonstrations; JIT external knowledge with no parameters; an admission
-gate that rejects a lesson which breaks a correct program.
+**Real, and measured on held-out open tasks with no model (§2):** one success generalises to unseen
+instances at **60%** where a cache gets **15%** and the previous compiler **18.9%**; 20 of 40
+demonstrated tasks reach 100% on unseen instances; the blind control falls to 20%, so the gain is
+grounding, not memorised clicking. Also real: exact-information-gain contrast selection; JIT external
+knowledge with no parameters; an admission gate that rejects a lesson which breaks a correct program.
 
-**Not real:** "once ⇒ permanent correct generalisation"; "any computer task" (no admitted general
-effect carrier is wired to the door); a sentience result; independent verification of this change.
+**Not real:** "once ⇒ permanent correct generalisation" — it is 60%, and **52 of 92** held-out tasks
+could not be demonstrated even once; "any computer task" (no admitted general effect carrier is wired
+to the door); a sentience result; independent verification of this change.
+
+**Also not evidence:** the eight plumbing tests in this PR. Their fact names are invented. They prove
+a value is forwarded, nothing about capability. They are labelled as such in the file itself.
 
 **Sentience.** Nothing here measures it. Modules named `sentient_*` are names, not evidence. The
 honest claim is about identification, verification and authority — not experience.
 
-## 6. Why this is the advanced answer, not the incremental one
+## 7. Why this is the advanced answer, not the incremental one
 
 The ordinary answer is "collect more demonstrations" or "fine-tune on the successes". Both are
 strictly worse: repetition in the same state has provably zero gain (0/200), and training on
@@ -145,7 +197,7 @@ edits that improve a held-out split (1–4 accepted edits, ties rejected); Skill
 falsifiable contracts; Veritas and VerifierBench make the point that most real tasks arrive **without
 a verifier**, which is the same bottleneck seen from the other side.
 
-## 7. Weights, and "every bit must be calculated"
+## 8. Weights, and "every bit must be calculated"
 
 This result gives that instruction an operational meaning. A parameter is justified only by evidence
 that **identifies** it. An unidentified survivor is not knowledge; it is one of 13 readings that
@@ -163,7 +215,7 @@ Parameters then carry *procedure and composition*, not facts; facts stay in inst
 knowledge. That is the resource-efficient design, and it is not a compromise against the weights
 approach — it is the condition under which weights are worth their compute.
 
-## 8. Honest limits of this change
+## 9. Honest limits of this change
 
 - The failure side is only recorded when the plan was **recalled** and then failed inside the
   transactional DAG. A goal refused by an earlier guard never reaches the recorder. Measured: deleting
@@ -175,7 +227,7 @@ approach — it is the condition under which weights are worth their compute.
   `test_incremental_semantic_graph_and_swe_upgrades_v1::test_navigation_and_complexity_deliver_answers`
   (confinement refusal on "Show me the definition of Derived"). Not caused by this change, not fixed.
 
-## 9. Test ledger — real counts
+## 10. Test ledger — real counts
 
 ```text
 New seam suite (canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py)
@@ -193,7 +245,7 @@ Affected set: new suite + chosen-contrast + skill-scope-acquisition
 The falsification run matters more than the pass count: removing only the context forwarding makes
 three tests fail, so they test the defect rather than the shape of the code.
 
-## 10. Ranked next work
+## 11. Ranked next work
 
 1. **Record the failure side at the earlier refusals.** Same class of defect, one seam up: a refused
    attempt is evidence about that state. Until then the door can only learn scope from failures that
@@ -203,7 +255,7 @@ three tests fail, so they test the defect rather than the shape of the code.
 3. **Owner decision on confinement/effect adoption.** Still the gate on "anything on a computer".
 4. **Only then weight consolidation**, from identified, admitted, contrastive evidence.
 
-## 11. Sources used for ranking, not authority
+## 12. Sources used for ranking, not authority
 
 - FGSE — arXiv:2611.14326 (10 Nov 2026): commit only on transfer + falsification + archived regression.
 - Veritas — arXiv:2611.13336 (9 Nov 2026): most real tasks arrive without a verifier; generating one
@@ -214,7 +266,7 @@ three tests fail, so they test the defect rather than the shape of the code.
 - Skill-V — arXiv:2610.11781: skills as versioned falsifiable contracts; non-regression gate.
 - SkillOps — arXiv:2605.13716: library-level technical debt; maintenance becomes load-bearing at scale.
 
-## 12. Stop condition
+## 13. Stop condition
 
 Stop here. The information loss is closed and tested; the door reports its own ignorance precisely;
 no capability, family, terminal or weight credit is claimed.
