@@ -86,6 +86,11 @@ PASS_VERIFIED = "PASS__GOAL_REACHED_AGAIN_BY_REPLAYING_THE_PLAN"
 OPEN_BUDGET = "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
 OPEN_UNSTABLE = "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY"
 FAIL_EXHAUSTED = "FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT"
+# Nothing was ever offered to try. "I tried everything reachable and the goal is not there"
+# is not earned by a vocabulary that named no action in the first place: the space was never
+# enumerable, let alone exhausted. Saying CLOSED here is a false claim about the world when
+# the truth is about us.
+OPEN_NO_VOCABULARY = "OPEN__NOTHING_OFFERED_BY_THIS_ACTION_VOCABULARY"
 FAIL_NOT_REPRODUCIBLE = "FAIL__GOAL_OBSERVED_ONCE_BUT_NO_PLAN_REPLAYS_TO_IT"
 
 AUTHORITY_OBSERVED = "GOAL_OBSERVED_ONCE_DURING_EXPLORATION_NOT_REPLAYED"
@@ -245,7 +250,7 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
     schedule = _EffectSchedule() if effect_prior else None
 
     counters = {"acts": 0, "resets": 0, "travel_acts": 0, "experiment_acts": 0,
-                "surprises": 0, "revisits": 0, "self_loops": 0}
+                "surprises": 0, "revisits": 0, "self_loops": 0, "states_offering_an_action": 0}
     price = max(0, int(reset_cost))
 
     def spent() -> int:
@@ -262,6 +267,8 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
         if k not in available:
             offered = actions_of(observation) if actions_of is not None else static_actions
             available[k] = tuple(dict.fromkeys(str(a) for a in offered))
+            if available[k]:
+                counters["states_offering_an_action"] += 1
             if order == "cheapest":
                 quoted: dict[str, int] = {}
                 turn: dict[str, float] = {}
@@ -350,6 +357,7 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
             "transition_count": sum(len(v) for v in model.values()),
             "dead_state_count": len(dead),
             "exhausted": status == FAIL_EXHAUSTED,
+            "states_offering_an_action": counters["states_offering_an_action"],
             "revisit_rate": round(counters["revisits"] / max(1, counters["acts"]), 4),
             "effect_prior": bool(effect_prior),
             "order": order,
@@ -413,6 +421,19 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
         current = after
         return obs, after, surprised
 
+    def exhausted_verdict() -> str:
+        """What running out of things to try has actually earned the right to say.
+
+        A contradiction means the map is wrong, not that the world is empty. No action ever
+        offered means the vocabulary is blind here, not that the goal is absent. Only a space
+        that really offered actions, all of which were tried, is closed.
+        """
+        if counters["surprises"]:
+            return OPEN_UNSTABLE
+        if not counters["states_offering_an_action"]:
+            return OPEN_NO_VOCABULARY
+        return FAIL_EXHAUSTED
+
     def too_surprised() -> bool:
         allowed = max(MIN_SURPRISE_ALLOWANCE, int(SURPRISE_FRACTION * counters["acts"]))
         return counters["surprises"] > allowed
@@ -444,7 +465,7 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
         if order == "cheapest":
             choice = pick_cheapest()
             if choice is None:
-                return finish(OPEN_UNSTABLE if counters["surprises"] else FAIL_EXHAUSTED, None)
+                return finish(exhausted_verdict(), None)
             target, chosen = choice
             if target == current:
                 observation, _, _ = step(chosen, travelling=False)
@@ -489,8 +510,7 @@ def explore_to_goal(env: Any, actions: Sequence[Any], *,
                      else _shortest_path(model, current, lambda k: k == target))
 
         if local is None and (from_root is None or current == root):
-            status = OPEN_UNSTABLE if counters["surprises"] else FAIL_EXHAUSTED
-            return finish(status, None)
+            return finish(exhausted_verdict(), None)
 
         use_reset = current != root and from_root is not None and (
             local is None or price + len(from_root) < len(local))

@@ -1,0 +1,306 @@
+{
+ "answer": "NO, NOT MEASURABLY. Choosing tied accepting (0.6987 vs 0.7038 overall; 0.6557 vs 0.6614 where replay is not enough), two tasks better and two worse, for 360 extra page reads. The textbook-optimal policy for version spaces did not unlock capability on this split.",
+ "authority": "NONE",
+ "baseline_reproduced_exactly": {
+  "existing_compiler": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.29,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.1886,
+   "tasks_at_100_percent": 7
+  },
+  "note": "The four untouched arms reproduced the merged 2026-11-14 receipt to four decimal places in both runs.",
+  "one_success": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.65,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.6,
+   "tasks_at_100_percent": 20
+  },
+  "random": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.1525,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.0814,
+   "tasks_at_100_percent": 2
+  },
+  "verbatim": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.2562,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.15,
+   "tasks_at_100_percent": 5
+  }
+ },
+ "code_that_produced_each_number": {
+  "current_tree": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "0146a8588a1d072a2f0fe9b48e698b8e4a8f3981f31e2b46eb5ea797dae27628",
+   "explorer": "1f19cba07292638c9de34cd186b5659b882c2cf418388d599e7a46fbb07a15e2",
+   "tool": "4e8f87b383b119ffb508c9acc295a0561c1bec96b8e3ec008e1aeff72b894b06",
+   "version_space_learner": "f1f7dca46304a7b58609811e018b604f3b02f543f18ff6b5b52562ecdf8cc7ef"
+  },
+  "declining_run": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "0146a8588a1d072a2f0fe9b48e698b8e4a8f3981f31e2b46eb5ea797dae27628",
+   "explorer": "32fcdc7a501b81efcadd82ec9359c46564356662a893dbd8acd089bb23cffc7a",
+   "tool": "47b0c32453405a88f5a9195599861f4e8c7d35e5fd12385d2fadffa43b3c11ca",
+   "version_space_learner": "906dd337f95496248ce832b93db760d0d37c3d616cbeffc6d8686a11ec448829"
+  },
+  "equal_budget_run": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "0146a8588a1d072a2f0fe9b48e698b8e4a8f3981f31e2b46eb5ea797dae27628",
+   "explorer": "32fcdc7a501b81efcadd82ec9359c46564356662a893dbd8acd089bb23cffc7a",
+   "tool": "30c507f27d7f2685760fdd8aab5f3266bb83570870d9c6bcd8ed70769dee5009",
+   "version_space_learner": "f1f7dca46304a7b58609811e018b604f3b02f543f18ff6b5b52562ecdf8cc7ef"
+  },
+  "what_changed_after_the_runs": "Only documentation in the instrument, and a verdict correction in the explorer (an empty action vocabulary now reports OPEN instead of an unearned closed absence). The correction changes a status string, never behaviour, and it fired on none of the 92 tasks: the seven tasks that report absence within four actions all offer actions and were re-measured with identical verdicts. No score can move by it."
+ },
+ "commands": [
+  "python3 canonical/tools/miniwob_one_success_generalisation_measure_v1.py --html-dir <MiniWoB++>/miniwob/html --node-modules-dir <nodemods> --substrate jsdom --only-split held_out --test-episodes 20 --action-budget 1500 --practice-episodes 3 --practice-pool 9 --arms random verbatim existing_compiler version_space version_space_blind version_space_practice version_space_active --out <file>"
+ ],
+ "environment": {
+  "code_sha256": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "0146a8588a1d072a2f0fe9b48e698b8e4a8f3981f31e2b46eb5ea797dae27628",
+   "explorer": "32fcdc7a501b81efcadd82ec9359c46564356662a893dbd8acd089bb23cffc7a",
+   "tool": "30c507f27d7f2685760fdd8aab5f3266bb83570870d9c6bcd8ed70769dee5009",
+   "version_space_learner": "f1f7dca46304a7b58609811e018b604f3b02f543f18ff6b5b52562ecdf8cc7ef"
+  },
+  "epoch_ms": 1767225600000,
+  "fake_timers": "15.4.0",
+  "html_tree_sha256": "d5693b72ec82bae9041e40f5c9ae3c3c50201849d10c92ea6439967fd73529c8",
+  "jsdom": "31.0.1",
+  "node": "v22.22.3",
+  "python": "3.11.2",
+  "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
+  "step_ms": 500,
+  "substrate": "jsdom headless DOM, element-level actions, virtual clock; no layout, no pixels",
+  "substrate_name": "jsdom",
+  "task_pages": 130
+ },
+ "equal_budget_comparison": {
+  "accepting": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.7038,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.6614,
+   "tasks_at_100_percent": 21
+  },
+  "choosing": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.6987,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.6557,
+   "tasks_at_100_percent": 21
+  },
+  "demonstrations_each_arm_may_spend": 3,
+  "instances_offered_to_each_arm": 9,
+  "summary": {
+   "demonstrations_spent_accepting": 120,
+   "demonstrations_spent_choosing": 120,
+   "instances_offered_to_each_arm": 360,
+   "mean_success_accepting": 0.7038,
+   "mean_success_choosing": 0.6987,
+   "pages_read_before_choosing": 360,
+   "tasks_choosing_loses": 2,
+   "tasks_choosing_wins": 2,
+   "tasks_compared": 40,
+   "unanimous_instances_offered_not_vetoed": 184
+  },
+  "tasks_where_they_differ": [
+   {
+    "accepting": 0.2,
+    "choosing": 0.25,
+    "delta": 0.05,
+    "task": "click-shape"
+   },
+   {
+    "accepting": 0.8,
+    "choosing": 0.6,
+    "delta": -0.2,
+    "task": "click-widget"
+   },
+   {
+    "accepting": 0.35,
+    "choosing": 0.4,
+    "delta": 0.05,
+    "task": "identify-shape"
+   },
+   {
+    "accepting": 0.6,
+    "choosing": 0.5,
+    "delta": -0.1,
+    "task": "social-media"
+   }
+  ]
+ },
+ "generated_utc": "2026-11-14",
+ "incomplete_and_not_claimed": {
+  "chromium": "Not attempted this turn; the previous turn's chromium run stopped at 8 of 92 and no number was claimed.",
+  "full_held_out_guided_search": "Stopped at 41 of 92 tasks after stalling on a large email page. Guided search offers the whole hand at every element and did not finish in session. NO aggregate number is claimed from it. On the tasks it did finish it newly demonstrated choose-date and click-checkboxes and lost email-inbox; that is an observation on a prefix, not a result."
+ },
+ "incremental_spend_usd": 0.0,
+ "not_a_leaderboard_entry": "The demonstration is found by exploring against the page's own reward, so this measures generalisation from one success, not the MiniWoB++ benchmark protocol.",
+ "parameters": {
+  "acquisition_action_budget": 1500,
+  "arms": [
+   "random",
+   "verbatim",
+   "existing_compiler",
+   "version_space",
+   "version_space_blind",
+   "version_space_practice",
+   "version_space_active"
+  ],
+  "demonstration_seed": 0,
+  "exploration_time_limit_ms": 3600000,
+  "first_success_search": "blind",
+  "max_episode_steps": 30,
+  "practice_demonstrations_budget": 3,
+  "practice_pool_offered": 9,
+  "practice_seeds": [
+   500,
+   501,
+   502,
+   503,
+   504,
+   505,
+   506,
+   507,
+   508
+  ],
+  "split_rule": "sha256(task name) mod 4 == 0 is development, the rest held out",
+  "test_seeds": [
+   1000,
+   1001,
+   1002,
+   1003,
+   1004,
+   1005,
+   1006,
+   1007,
+   1008,
+   1009,
+   1010,
+   1011,
+   1012,
+   1013,
+   1014,
+   1015,
+   1016,
+   1017,
+   1018,
+   1019
+  ]
+ },
+ "producer_cognition_model_dependency_count": 0,
+ "question": "Does choosing which instances to learn from buy more capability than accepting them, at an equal number of demonstrations?",
+ "schema": "PROJECT_BRAIN_CHOOSING_WHAT_TO_LEARN_FROM_MEASURED_V1",
+ "substrate_limit": "jsdom headless DOM: no layout, no pixels. 11 pages do not run here and geometry-dependent tasks are not faithfully represented. A chromium run on the same split is the harder, more faithful substrate and has not been completed.",
+ "tests": {
+  "falsifiers": "Restoring the veto fails 1 test; removing the ranking fails 2; removing the earned-verdict check fails 3. Stub pages guard mechanism only and are not capability evidence.",
+  "mechanism_guards": "canonical/tests/test_miniwob_one_success_generalisation_v1.py::ChoosingWhatToLearnFromTests (9 tests)",
+  "verdict_guards": "canonical/tests/test_systematic_exploration_v1.py::AVocabularyIsNotTheWorldTests (4 tests)"
+ },
+ "what_was_refuted": {
+  "claim": "An instance where every surviving hypothesis proposes the same action cannot teach anything, so a demonstration should not be spent on it (query-by-committee / greedy minimax).",
+  "measured": {
+   "beyond_replay_accepting": 0.6614,
+   "beyond_replay_declining": 0.61,
+   "demonstrations_spent_accepting": 120,
+   "demonstrations_spent_declining": 55,
+   "mean_success_accepting": 0.7038,
+   "mean_success_declining": 0.6588,
+   "tasks_better": 2,
+   "tasks_worse": 5
+  },
+  "per_task_evidence": [
+   {
+    "accepting": 1.0,
+    "declining_unanimous": 0.15,
+    "delta": -0.85,
+    "instances_declined": 3,
+    "new_ways_accepting_found": 1,
+    "task": "click-dialog-2"
+   },
+   {
+    "accepting": 0.2,
+    "declining_unanimous": 0.15,
+    "delta": -0.05,
+    "instances_declined": 1,
+    "new_ways_accepting_found": 1,
+    "task": "click-shape"
+   },
+   {
+    "accepting": 0.8,
+    "declining_unanimous": 0.6,
+    "delta": -0.2,
+    "instances_declined": 1,
+    "new_ways_accepting_found": 2,
+    "task": "click-widget"
+   },
+   {
+    "accepting": 0.3,
+    "declining_unanimous": 0.45,
+    "delta": 0.15,
+    "instances_declined": 3,
+    "new_ways_accepting_found": 2,
+    "task": "find-greatest"
+   },
+   {
+    "accepting": 0.65,
+    "declining_unanimous": 0.15,
+    "delta": -0.5,
+    "instances_declined": 3,
+    "new_ways_accepting_found": 2,
+    "task": "generate-number"
+   },
+   {
+    "accepting": 0.85,
+    "declining_unanimous": 0.45,
+    "delta": -0.4,
+    "instances_declined": 3,
+    "new_ways_accepting_found": 1,
+    "task": "login-user-popup"
+   },
+   {
+    "accepting": 0.45,
+    "declining_unanimous": 0.5,
+    "delta": 0.05,
+    "instances_declined": 3,
+    "new_ways_accepting_found": 1,
+    "task": "stock-market"
+   }
+  ],
+  "verdict": "REFUTED ON REAL HELD-OUT TASKS",
+  "why_it_is_wrong": "A committee cannot vote on a hypothesis none of its members holds. Unanimous AND WRONG is the largest possible information gain, and only trying the instance reveals it. Every task the declining policy lost is a task where accepting explored a unanimous instance and discovered a new way of asking."
+ },
+ "where_the_ceiling_actually_is": {
+  "demonstration_quality_probe": {
+   "at_equal_20_scored_episodes": {
+    "click-menu-2": {
+     "blind": 0.3,
+     "guided": 0.3
+    },
+    "click-widget": {
+     "blind": 0.65,
+     "guided": 0.65
+    },
+    "identify-shape": {
+     "blind": 0.35,
+     "guided": 0.35
+    }
+   },
+   "question": "Does a different single demonstration (guided hand search vs blind press-and-type) change what one success teaches?",
+   "verdict": "NO EFFECT MEASURED. An earlier five-episode probe appeared to show 0.35 -> 1.00 on identify-shape; at the same twenty scored episodes the difference vanished. The apparent gain was the episode-count confound and is NOT claimed."
+  },
+  "held_out_tasks": 92,
+  "reading": "52 of 92 tasks are never demonstrated even once, so no policy about how many demonstrations to take, or which, can reach them. Among the 36 never demonstrated, only 13 spent the whole 1500-action budget; the median spend was 565 and the minimum 1.",
+  "stages": {
+   "DEMONSTRATED": 40,
+   "NO_FIRST_SUCCESS_FOUND": 36,
+   "PAGE_DOES_NOT_RUN_HERE": 11,
+   "SAME_SEED_GIVES_DIFFERENT_PAGE": 5
+  },
+  "tasks_never_demonstrated_once": 36
+ }
+}

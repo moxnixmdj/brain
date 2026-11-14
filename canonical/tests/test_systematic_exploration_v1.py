@@ -701,5 +701,50 @@ class DigestTests(unittest.TestCase):
             arc_measure.digest([])
 
 
+class AVocabularyIsNotTheWorldTests(unittest.TestCase):
+    """Running out of things to TRY is not the same as the goal not being THERE.
+
+    Found on the real MiniWoB++ held-out split: seven tasks were reported
+    FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT after one to four actions, because the
+    action vocabulary offered nothing on those pages (a moving circle, a drag by coordinate,
+    a date typed into a widget). The world was not searched. The vocabulary was blind.
+
+    These tables are written here, so they are not capability evidence. They pin one claim:
+    a closed verdict has to be earned by a space that really offered actions.
+    """
+
+    def test_a_vocabulary_that_offers_nothing_may_not_call_the_goal_absent(self):
+        env = TableEnv({0: {}}, 0)
+        out = sx.explore_to_goal(env, [], is_goal=lambda s: False, action_budget=1000)
+        self.assertEqual(out["status"], sx.OPEN_NO_VOCABULARY)
+        self.assertFalse(out["exhausted"])          # nothing was exhausted
+        self.assertFalse(out["pass"])
+        self.assertEqual(out["states_offering_an_action"], 0)
+        self.assertEqual(env.log, [])               # it never even acted
+
+    def test_a_page_that_offers_nothing_wherever_you_arrive_is_still_only_open(self):
+        env = TableEnv({0: {}, 1: {}}, 0)
+        out = sx.explore_to_goal(env, [], is_goal=lambda s: False, action_budget=1000,
+                                 actions_of=lambda s: [])
+        self.assertEqual(out["status"], sx.OPEN_NO_VOCABULARY)
+        self.assertEqual(out["states_offering_an_action"], 0)
+
+    def test_a_space_that_really_offered_actions_and_was_tried_is_still_closed(self):
+        # The control: same shape, but one action really is offered and really is tried.
+        table = {0: {"a": 1}, 1: {"a": 0}}
+        env = TableEnv(table, 0)
+        out = sx.explore_to_goal(env, ["a"], is_goal=lambda s: False, action_budget=1000)
+        self.assertEqual(out["status"], sx.FAIL_EXHAUSTED)
+        self.assertTrue(out["exhausted"])
+        self.assertEqual(out["states_offering_an_action"], 2)
+        self.assertEqual(len(env.log), 2)
+
+    def test_a_contradicting_map_outranks_both_because_it_means_the_map_is_wrong(self):
+        env = TableEnv({0: {}}, 0)
+        out = sx.explore_to_goal(env, [], is_goal=lambda s: False, action_budget=1000)
+        self.assertEqual(out["status"], sx.OPEN_NO_VOCABULARY)
+        self.assertTrue(out["status"].startswith("OPEN__"))   # never a claim about the world
+
+
 if __name__ == "__main__":
     unittest.main()

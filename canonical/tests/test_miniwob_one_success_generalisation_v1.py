@@ -2913,5 +2913,143 @@ class RealBrowserTests(RealPageTests):
             tool.Bridge(os.environ["MINIWOB_HTML_DIR"], "", substrate="a real person")
 
 
+class ChoosingWhatToLearnFromTests(unittest.TestCase):
+    """Seeking the contrast instead of accepting whatever arrives.
+
+    Same standing as the rest of this file: these pages are written here, so nothing below is
+    evidence about MiniWoB++ or about capability. They guard one mechanism -- that a
+    demonstration is spent where the surviving hypotheses disagree, and not where they already
+    agree. The capability number is the held-out run in `canonical/verification/`.
+
+    Every expected count below was read off a run of the two arms, not chosen to look good.
+    """
+
+    POOL = list(range(500, 506))
+
+    def _after_one_success(self, task):
+        """The committee as ONE demonstration leaves it, before any practice narrows it."""
+        bridge = StubBridge()
+        trace, _ = _demonstrate(bridge, task, seed=0)
+        return vs.build_arm(bridge=bridge, task=task, trace=trace, practice_seeds=[],
+                            action_budget=300, tier=0, tool=tool)
+
+    def _arm(self, task, *, select):
+        bridge = StubBridge()
+        trace, _ = _demonstrate(bridge, task, seed=0)
+        before = bridge.acts
+        arm = vs.build_arm(bridge=bridge, task=task, trace=trace, practice_seeds=self.POOL,
+                           action_budget=300, tier=0, tool=tool, select_practice=select)
+        return arm, bridge.acts - before
+
+    def test_the_probe_only_ever_reports_actions_the_executor_would_really_take(self):
+        # If the probe could invent an action no survivor takes, its disagreement count would
+        # be fiction. On every step of every page here, the acting answer is inside the set.
+        for task in ("nth-box", "starts-and-ends", "mail-rows", "numbered-section", "one-box"):
+            bridge = StubBridge()
+            trace, _ = _demonstrate(bridge, task, seed=0)
+            arm = self._after_one_success(task)
+            skill = arm.skills.choose(str(_TASKS[task](500).utterance))
+            self.assertIsNotNone(skill, task)
+            for seed in self.POOL:
+                bridge.load(task)
+                page = vs.Page(bridge.reset(seed))
+                for step in range(len(skill.kinds)):
+                    proposals = skill._proposals(step, page, 256)
+                    answer = skill._action(step, page)
+                    if answer is not None:
+                        self.assertIn(answer, proposals, (task, seed, step))
+                    else:
+                        self.assertEqual(proposals, set(), (task, seed, step))
+
+    def test_a_page_where_the_committee_agrees_promises_no_elimination(self):
+        arm = self._after_one_success("nth-box")
+        bridge = StubBridge()
+        bridge.load("nth-box")
+        row = arm.skills.disagreement(bridge.reset(501))
+        self.assertEqual(row["distinct_actions"], 1)
+        self.assertFalse(row["guaranteed_discrimination"])
+
+    def test_a_page_where_the_committee_differs_promises_elimination(self):
+        arm = self._after_one_success("nth-box")
+        bridge = StubBridge()
+        bridge.load("nth-box")
+        row = arm.skills.disagreement(bridge.reset(500))
+        self.assertEqual(row["distinct_actions"], 3)
+        self.assertTrue(row["guaranteed_discrimination"])
+
+    def test_ambiguity_deeper_than_the_next_action_is_not_thrown_away(self):
+        # `numbered-section` is unanimous about the NEXT action on all six pages and split
+        # about a later one. Reading only the next action would call all six worthless and
+        # skip the lot. This is the test that fails if the later-step scan is removed.
+        arm, _ = self._arm("numbered-section", select=True)
+        log = arm.learning
+        self.assertEqual(log["committee_sizes_seen"], [1] * 6)
+        self.assertEqual(log["predicted_split_steps_seen"], [1] * 6)
+        self.assertEqual(log["practice_unanimous_offered"], 0)   # a forecast still ranks them
+        self.assertEqual(log["practice_instances_used"], 6)
+
+    def test_the_largest_disagreement_is_demonstrated_first(self):
+        arm, _ = self._arm("starts-and-ends", select=True)
+        log = arm.learning
+        self.assertEqual(log["committee_sizes_seen"], [6, 4, 4, 3, 5, 3])
+        # descending disagreement, ties by seed: the order the pages were then acted on
+        self.assertEqual(log["practice_order"], [500, 504, 501, 502, 503, 505])
+
+    def test_agreement_never_vetoes_an_instance(self):
+        # THE REGRESSION THAT THE REAL BENCHMARK TAUGHT. An earlier version declined instances
+        # where the committee agreed. On the held-out split it spent 55 demonstrations instead
+        # of 120 and scored 0.6588 against 0.7038, losing every task where the committee was
+        # unanimously wrong and trying it discovered a new way of asking. Every page here is
+        # unanimous; all six must still be practised.
+        passive, passive_acts = self._arm("always-the-same", select=False)
+        active, active_acts = self._arm("always-the-same", select=True)
+        self.assertEqual(active.learning["committee_sizes_seen"], [1] * 6)
+        self.assertEqual(active.learning["practice_unanimous_offered"], 6)
+        self.assertEqual(passive.learning["practice_instances_used"], 6)
+        self.assertEqual(active.learning["practice_instances_used"], 6)   # nothing vetoed
+        self.assertEqual(active_acts, passive_acts)
+
+    def test_choosing_spends_the_same_budget_on_the_instances_that_must_teach(self):
+        # Nine on offer, three to spend. Accepting takes 500,501,502 -- 501 is unanimous and
+        # cannot be guaranteed to eliminate anything. Choosing reads all nine first and spends
+        # the same three demonstrations on committees of three.
+        pool = list(range(500, 509))
+        seen = {}
+        for select in (False, True):
+            bridge = StubBridge()
+            trace, _ = _demonstrate(bridge, "nth-box", seed=0)
+            arm = vs.build_arm(bridge=bridge, task="nth-box", trace=trace, practice_seeds=pool,
+                               action_budget=300, tier=0, tool=tool, select_practice=select,
+                               practice_budget=3)
+            seen[select] = arm
+        self.assertEqual(seen[False].learning["practice_instances_used"], 3)
+        self.assertEqual(seen[True].learning["practice_instances_used"], 3)   # equal budget
+        self.assertEqual(seen[True].learning["pages_inspected_to_choose"], 9) # cost, reported
+        self.assertEqual(seen[False].learning["pages_inspected_to_choose"], 0)
+        self.assertEqual(seen[True].learning["practice_order"][:3], [500, 503, 506])
+        self.assertEqual(seen[True].learning["committee_sizes_seen"], [3, 1, 2, 3, 2, 2, 3, 2, 2])
+        self.assertIn(1, seen[False].learning["committee_sizes_seen"] or [1])  # arrival order took the dud
+
+    def test_inspecting_a_page_never_acts_on_it_and_never_asks_for_a_reward(self):
+        bridge = StubBridge()
+        trace, _ = _demonstrate(bridge, "nth-box", seed=0)
+        arm = vs.build_arm(bridge=bridge, task="nth-box", trace=trace, practice_seeds=[],
+                           action_budget=300, tier=0, tool=tool)
+        for seed in self.POOL:
+            bridge.load("nth-box")
+            observation = bridge.reset(seed)
+            before_acts, before_reward = bridge.acts, observation["raw_reward"]
+            arm.skills.disagreement(observation)
+            self.assertEqual(bridge.acts, before_acts)
+            self.assertEqual(bridge.page.reward, before_reward)
+            self.assertEqual(bridge.page.done, False)
+
+    def test_the_same_pool_always_chooses_the_same_instances(self):
+        first = self._arm("nth-box", select=True)[0].learning
+        second = self._arm("nth-box", select=True)[0].learning
+        self.assertEqual(first["practice_order"], second["practice_order"])
+        self.assertEqual(first["committee_sizes_seen"], second["committee_sizes_seen"])
+
+
 if __name__ == "__main__":
     unittest.main()

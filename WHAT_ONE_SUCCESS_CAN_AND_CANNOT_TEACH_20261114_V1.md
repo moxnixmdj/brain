@@ -245,15 +245,84 @@ Affected set: new suite + chosen-contrast + skill-scope-acquisition
 The falsification run matters more than the pass count: removing only the context forwarding makes
 three tests fail, so they test the defect rather than the shape of the code.
 
+## 10b. The next bottleneck was tested, and the smart-sounding answer lost
+
+Ranked item 2 above said: let a scheduler seek the discriminating instance instead of accepting
+whatever arrives. The 2026 literature agrees unanimously — greedy-minimax / query-by-committee over
+the surviving version space is the known-optimal way to choose (Socrates, PLDI 2026; FlashProg;
+SampleSy/SmartLabel; Tong & Koller). It was built and measured on the same real held-out split,
+same 92 tasks, same 20 scored episodes, same action budget, 0 model calls, $0.
+
+**It bought nothing.**
+
+| policy | demonstrations spent | overall | where replay is not enough |
+|---|---|---|---|
+| one success only | 0 extra | 0.6500 | 0.6000 |
+| accept 3, arrival order | 120 | **0.7038** | **0.6614** |
+| choose 3 of 9 by committee disagreement | 120 + 360 page reads | 0.6987 | 0.6557 |
+| decline instances the committee agrees on | 55 | 0.6588 | 0.6100 |
+
+Choosing tied accepting: two tasks better, two worse, a 0.5-point difference for 360 extra page
+reads. And the aggressive version — the one the theory recommends, refusing to pay for an instance
+that cannot eliminate a hypothesis — was **worse than doing nothing smart at all**, while spending
+54% fewer demonstrations.
+
+**Why the theory failed here is the useful part.** A committee cannot vote on a hypothesis none of
+its members holds. Query-by-committee measures disagreement *among the survivors*; it is blind to
+the case where every survivor is wrong. That case is the largest information gain available, and
+only trying the instance reveals it. Every single task the declining policy lost was a task where
+accepting tried a unanimous instance, failed, explored, and **discovered a new way of asking**
+(`click-dialog-2` 1.00 -> 0.15, `generate-number` 0.65 -> 0.15, `login-user-popup` 0.85 -> 0.45).
+The fix was to let disagreement **rank** instances and never **veto** them.
+
+Two smaller findings, both negative and both checked:
+
+- **Which single demonstration you find did not matter** at equal scoring. A five-episode probe
+  looked like a 0.35 -> 1.00 jump on `identify-shape` under the guided hand search. At the same
+  twenty scored episodes the guided and blind searches score identically on `identify-shape`
+  (0.35), `click-menu-2` (0.30) and `click-widget` (0.65). The apparent gain was an episode-count
+  confound and is not claimed.
+- **The four untouched arms reproduced the merged receipt to four decimal places** in both runs
+  (0.1525 / 0.2562 / 0.2900 / 0.6500). The instrument is not drifting.
+
+**Where the ceiling actually is.** 52 of the 92 held-out tasks are never demonstrated even once:
+36 with no first success found, 11 pages that do not run under jsdom, 5 that change under the same
+seed. No policy about how many demonstrations to take, or which ones, can reach a task that never
+produced a first success. Of the 36, only 13 spent the whole 1500-action budget; the median spend
+was 565 and the minimum was **1**. `chase-circle` asks the agent to keep the mouse inside a moving
+circle; the blind search offers it one click, tries it, and reports
+`FAIL_CLOSED__REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT`. The hand that could hover exists in the
+instrument (`HAND_TIER` adds 7 actions there, 21 on `drag-box`, 14 on `highlight-text`) and the
+learner can already represent every one of those actions — but the blind ladder does not include
+it, by design, and the guided search that does use it did not finish the split in session.
+
+So the honest ranking changes: **coverage, not selection, is the binding constraint.** The next
+capability is getting a first success at all on the 39% of tasks that never produce one, on a
+substrate with real geometry. That is a perception-and-action problem, not a learning-from-success
+problem, and it is not solved by anything in this document.
+
+One real correctness defect was fixed along the way: an explorer whose action vocabulary offers
+nothing at all used to report the closed verdict `REACHABLE_SPACE_EXHAUSTED_GOAL_ABSENT`. Trying
+nothing does not prove absence. It now reports `OPEN__NOTHING_OFFERED_BY_THIS_ACTION_VOCABULARY`.
+This is honest, tested, and falsifiable — and it changed **none** of the 92 verdicts, because those
+pages all offer at least one action. It is recorded as a truthfulness fix, not a capability gain.
+
+Receipt: `canonical/verification/CHOOSING_WHAT_TO_LEARN_FROM_MEASURED_20261114_V1.json`.
+
 ## 11. Ranked next work
 
-1. **Record the failure side at the earlier refusals.** Same class of defect, one seam up: a refused
-   attempt is evidence about that state. Until then the door can only learn scope from failures that
-   occur after recall.
-2. **Let a scheduler act on `next_contrast`.** The door now emits the discriminating facts; nothing
-   yet seeks that state. This is what turns 0/200 into 25/25 in production rather than in a probe.
+1. **Get a first success on the tasks that never produce one.** 36 of 92 held-out tasks, and the
+   median give-up is 565 of 1500 actions. This is now the largest single pool of unrealised
+   capability, and it needs a substrate with real geometry (chromium) plus a search that uses the
+   whole hand. Selection among instances is measured and does not reach it.
+2. **Record the failure side at the earlier refusals.** A refused attempt is evidence about that
+   state. Until then the door can only learn scope from failures that occur after recall.
 3. **Owner decision on confinement/effect adoption.** Still the gate on "anything on a computer".
 4. **Only then weight consolidation**, from identified, admitted, contrastive evidence.
+
+Demoted: choosing which instances to learn from. It was item 2 and it is now measured at a tie.
+The `version_space_active` arm stays in the instrument as the control that refutes it, off by
+default, so the next person does not have to take this on trust.
 
 ## 12. Sources used for ranking, not authority
 
