@@ -1,0 +1,153 @@
+{
+ "arms": {
+  "existing_compiler": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.29,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.1886,
+   "refused_episodes": 395,
+   "share_of_all_tasks_at_or_above_90_percent": 0.0761,
+   "successes": 232,
+   "tasks_at_100_percent": 7,
+   "tasks_at_or_above_90_percent": 7,
+   "tasks_at_or_above_90_percent_where_replay_is_not_enough": 2,
+   "tasks_at_zero": 19,
+   "tasks_scored": 40
+  },
+  "random": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.1525,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.0814,
+   "refused_episodes": 0,
+   "share_of_all_tasks_at_or_above_90_percent": 0.0217,
+   "successes": 122,
+   "tasks_at_100_percent": 2,
+   "tasks_at_or_above_90_percent": 2,
+   "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+   "tasks_at_zero": 16,
+   "tasks_scored": 40
+  },
+  "verbatim": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.2562,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.15,
+   "refused_episodes": 0,
+   "share_of_all_tasks_at_or_above_90_percent": 0.0543,
+   "successes": 205,
+   "tasks_at_100_percent": 5,
+   "tasks_at_or_above_90_percent": 5,
+   "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+   "tasks_at_zero": 11,
+   "tasks_scored": 40
+  },
+  "version_space": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.65,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.6,
+   "refused_episodes": 3,
+   "share_of_all_tasks_at_or_above_90_percent": 0.2174,
+   "successes": 520,
+   "tasks_at_100_percent": 20,
+   "tasks_at_or_above_90_percent": 20,
+   "tasks_at_or_above_90_percent_where_replay_is_not_enough": 15,
+   "tasks_at_zero": 1,
+   "tasks_scored": 40
+  },
+  "version_space_blind": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.3,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.2,
+   "refused_episodes": 3,
+   "share_of_all_tasks_at_or_above_90_percent": 0.0543,
+   "successes": 240,
+   "tasks_at_100_percent": 5,
+   "tasks_at_or_above_90_percent": 5,
+   "tasks_at_or_above_90_percent_where_replay_is_not_enough": 0,
+   "tasks_at_zero": 7,
+   "tasks_scored": 40
+  },
+  "version_space_practice": {
+   "episodes": 800,
+   "mean_task_success_rate": 0.7038,
+   "mean_task_success_rate_where_replay_is_not_enough": 0.6614,
+   "refused_episodes": 25,
+   "share_of_all_tasks_at_or_above_90_percent": 0.2283,
+   "successes": 563,
+   "tasks_at_100_percent": 21,
+   "tasks_at_or_above_90_percent": 21,
+   "tasks_at_or_above_90_percent_where_replay_is_not_enough": 16,
+   "tasks_at_zero": 2,
+   "tasks_scored": 40
+  }
+ },
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "coverage": {
+  "demonstrated_once": 40,
+  "never_demonstrated": 52,
+  "stages": {
+   "DEMONSTRATED": 40,
+   "NO_FIRST_SUCCESS_FOUND": 36,
+   "PAGE_DOES_NOT_RUN_HERE": 11,
+   "SAME_SEED_GIVES_DIFFERENT_PAGE": 5
+  },
+  "tasks": 92,
+  "tasks_a_fixed_replay_already_solves": 5,
+  "tasks_that_need_generalisation": 35
+ },
+ "environment": {
+  "code_sha256": {
+   "bridge": "39a7c969a36fd1e1bb66e968002e7f57d94b93a70c80b5594c0f38fb94fba91c",
+   "bridge_chromium": "a9680e089efd20010c3460065c139fab4ac08204418c81bbbb621f8f7ae656ad",
+   "existing_compiler": "0146a8588a1d072a2f0fe9b48e698b8e4a8f3981f31e2b46eb5ea797dae27628",
+   "explorer": "32fcdc7a501b81efcadd82ec9359c46564356662a893dbd8acd089bb23cffc7a",
+   "tool": "953e15e746b409e578da4903eb3baa669aae987e17b84422bc9cc637500cd11d",
+   "version_space_learner": "73aef38b18534d9100e895b027ee8c300643c9265f52f0d1fb9ba6b4cda6bed9"
+  },
+  "epoch_ms": 1767225600000,
+  "fake_timers": "15.4.0",
+  "html_tree_sha256": "d5693b72ec82bae9041e40f5c9ae3c3c50201849d10c92ea6439967fd73529c8",
+  "jsdom": "31.0.1",
+  "node": "v22.22.3",
+  "python": "3.11.2",
+  "source": "github.com/Farama-Foundation/miniwob-plusplus (MIT), miniwob/html",
+  "step_ms": 500,
+  "substrate": "jsdom headless DOM, element-level actions, virtual clock; no layout, no pixels",
+  "substrate_name": "jsdom",
+  "task_pages": 130
+ },
+ "generated_utc": "2026-11-14T20:45:49Z",
+ "headline": {
+  "blind_control_same_metric": 0.2,
+  "cache_verbatim_same_metric": 0.15,
+  "existing_compiler_same_metric": 0.1886,
+  "interpretation": "One success is ~4x a cache on unseen instances, but it is 60%, not 100%. 52 of 92 tasks could not be demonstrated even once. Three extra instances buy +6.1 points, so exposure alone has sharply diminishing returns.",
+  "one_success_mean_success_where_generalisation_is_required": 0.6,
+  "random_same_metric": 0.0814,
+  "three_practice_instances_same_metric": 0.6614
+ },
+ "independent_verification_completed": false,
+ "raw_result_path": "measurement run in-session; raw JSON retained by the producer, not committed (219 KB)",
+ "schema": "BRAIN_OPEN_BENCHMARK_ONE_SUCCESS_GENERALISATION_RECEIPT_V1",
+ "substrate_limit": "jsdom has no layout and no pixels; 11 pages did not run here and geometry-dependent tasks are not faithfully represented. A chromium run on the same split is the harder, more faithful substrate.",
+ "test_integrity": {
+  "dataset": "MiniWoB++ (Farama-Foundation/miniwob-plusplus), MIT",
+  "external_model_calls": 0,
+  "incremental_spend_usd": 0,
+  "judge": "each page's own reward",
+  "real_task_pages": 130,
+  "solver": "this repository only; producer_cognition_model_dependency_count=0",
+  "split_measured": "held_out (the tasks NOT looked at while the arms were built)",
+  "split_rule": "sha256(task name) mod 4 == 0 is development, the rest held out",
+  "tasks_in_split": 92,
+  "upstream_commit": "33c3b4ddef8c6eb67c57a29663d844b1eda7e614",
+  "upstream_commit_date": "2026-08-13T18:55:32Z"
+ },
+ "truth": {
+  "achieved": false
+ },
+ "what_this_is": "One demonstration, then unseen instances of the SAME task, on real open benchmark pages, executed by this repository's own code with no external model.",
+ "what_this_is_not": [
+  "NOT a MiniWoB++ leaderboard entry: the demonstration is found by exploration against the page's own reward, which a leaderboard agent is not given.",
+  "NOT a claim of permanent or perfect learning.",
+  "NOT synthetic data, and not a task authored by the producer of the arms."
+ ]
+}

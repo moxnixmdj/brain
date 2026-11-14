@@ -6886,6 +6886,25 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     _sres["compiled_capability_id"] = _capability_id_of(_sres)
                 return _sres
 
+            # The state an outcome happens in is the only thing that can identify
+            # WHERE this plan applies. Snapshot it BEFORE the first side effect:
+            # `chain_v1.precondition_context` reads the world's own probes and
+            # deliberately refuses the effects the plan itself produces, which
+            # would teach the circular rule "this plan requires what it creates".
+            # Measured on this tree by what_a_success_teaches_20261112.py: without
+            # a discriminating state, one success identifies 0 of 200 requirements.
+            _preconditions = None
+            if not _exclude_mem and can_write_memory():
+                try:
+                    from canonical.runtime.chain_v1 import precondition_context as _pre_ctx
+
+                    _preconditions = _pre_ctx(
+                        _clauses, ROOT, goal,
+                        [str(s.get("capability_id") or "") for s in _macro_plan],
+                    )
+                except Exception:
+                    _preconditions = None
+
             _dag = execute_transactional_goal_dag(
                 root=ROOT,
                 stages=_clauses,
@@ -6902,7 +6921,7 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                         try:
                             if _macro_state is not None:
                                 _m_mod.STATE = pathlib.Path(_macro_state).resolve()
-                            _m_mod.note_failure(str(_macro_hit["key"]))
+                            _m_mod.note_failure(str(_macro_hit["key"]), context=_preconditions)
                         finally:
                             _m_mod.STATE = _orig_m
                     except Exception:
@@ -6932,13 +6951,30 @@ def _solve_request(request: Mapping[str, Any]) -> dict[str, Any]:
                     _clauses,
                     [{"capability_id": r.get("capability_id") or "step", "verified": True} for r in _receipts],
                     state_path=_macro_state,
+                    context=_preconditions,
                 )
             )
             _merged_exec = [item for r in _receipts for item in (r.get("execution") or [])]
             _answers = [r["answer"] for r in _receipts if r.get("answer") is not None]
+            # "Recorded" is not "learned where it applies". Report which of the two
+            # happened, and what experience would settle it, so a caller can seek
+            # the contrast instead of repeating a success that teaches nothing.
+            _learning = None
+            if _macro_saved:
+                from canonical.swe_kernel.forged_binding_and_macro_spine_v1 import (
+                    verified_chain_learning_receipt,
+                )
+
+                _learning = verified_chain_learning_receipt(
+                    _clauses, state_path=_macro_state, context=_preconditions,
+                )
             return {
                 "schema": LIVE_SCHEMA,
                 "status": "PASS__COMPOUND_SWE_MULTI_STEP_VERIFIED",
+                "chain_learning": _learning,
+                "preconditions_observed": (
+                    None if _preconditions is None else sorted(_preconditions)
+                ),
                 "pass": True,
                 "task_id": str(request.get("task_id") or ""),
                 "goal": goal,
