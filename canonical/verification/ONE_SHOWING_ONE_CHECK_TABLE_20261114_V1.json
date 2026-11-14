@@ -1,0 +1,51 @@
+{
+ "schema": "BRAIN_ONE_SHOWING_ONE_CHECK_TABLE_V1",
+ "authority": "NONE",
+ "claim": "show it once, it is learned permanently and everywhere, and that solves any computer use",
+ "verdict": "The claim holds at clauses 1, 2 and 4 and fails at 3: the lesson is kept, it reaches an unseen function of the same shape, a harmful version of it is refused -- and the very behaviour it teaches is invisible to the project's own tests, which never probe the boundary value. Permanence here is granted to a change the check could not have refused. Clause 5 is not measured at all.",
+ "rows": [
+  {
+   "clause": "1. A change shown once is kept",
+   "measured": true,
+   "evidence": "crystallized=True rows_in_store=1",
+   "does_not_say": "that the change is right, or where it applies"
+  },
+  {
+   "clause": "2. The lesson transfers to an unseen function",
+   "measured": true,
+   "evidence": "the rule rewrote an unseen function into exactly the intended fix",
+   "does_not_say": "that it transfers to a different SHAPE or language"
+  },
+  {
+   "clause": "3. The check can tell a right change from a wrong one here",
+   "measured": false,
+   "evidence": "1 of 2 sites licensed; the boundary in question is NOT among them; perturbing it to ['<'] changed no passing test",
+   "does_not_say": "that the check would accept the RIGHT change -- it says it can disagree"
+  },
+  {
+   "clause": "4. Permanence is safe: a wrong lesson is refused",
+   "measured": true,
+   "evidence": "REJECT (it would have broken a correct program); rows left in the store: 0",
+   "does_not_say": "that the victims chosen were the right victims -- a gate is bounded by its inputs"
+  },
+  {
+   "clause": "5. The same trick covers anything on a computer",
+   "measured": null,
+   "evidence": "NOT MEASURED: this tree has no computer-use surface that executes real applications, and a stub would prove nothing",
+   "does_not_say": "anything at all"
+  }
+ ],
+ "totals": {
+  "clauses_measured": 4,
+  "clauses_true": 3,
+  "clauses_false": 1,
+  "clauses_unmeasured": 1
+ },
+ "what_would_change_the_answer": [
+  "a second demonstration from a different place, so the rule varies where it must",
+  "a check that reaches the changed file and fails on a mutation of it (clause 3)",
+  "an execution surface with rollback and a success predicate, for clause 5"
+ ],
+ "spend_usd": 0,
+ "model_calls": 0
+}
