@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path.cwd()))
-from canonical.swe_kernel.comprehensive_security_understanding import ComprehensiveSecurityUnderstandingSystem
+from canonical.swe_kernel.comprehensive_distributed_systems_understanding import ComprehensiveDistributedSystemsUnderstandingSystem
 
 
 # Test 1: Raft Consensus - Log Replication Bug
@@ -59,13 +59,13 @@ print("Buggy Code:")
 print(raft_leader_buggy)
 print()
 
-system = ComprehensiveSecurityUnderstandingSystem()
+system = ComprehensiveDistributedSystemsUnderstandingSystem()
 result1 = system.understand_and_fix(raft_leader_buggy)
 
 print("Understanding:")
 print(f"  Risk: {result1['understanding']['overall_risk']}")
-if result1['understanding']['vulnerabilities']:
-    print(f"  Issue: {result1['understanding']['vulnerabilities'][0]['description']}")
+if result1['understanding']['violations']:
+    print(f"  Issue: {result1['understanding']['violations'][0]['description']}")
 print()
 
 if result1['fix']:
@@ -132,8 +132,8 @@ result2 = system.understand_and_fix(paxos_buggy)
 
 print("Understanding:")
 print(f"  Risk: {result2['understanding']['overall_risk']}")
-if result2['understanding']['vulnerabilities']:
-    print(f"  Issue: {result2['understanding']['vulnerabilities'][0]['description']}")
+if result2['understanding']['violations']:
+    print(f"  Issue: {result2['understanding']['violations'][0]['description']}")
 print()
 
 if result2['fix']:
@@ -203,8 +203,8 @@ result3 = system.understand_and_fix(multipaxos_buggy)
 
 print("Understanding:")
 print(f"  Risk: {result3['understanding']['overall_risk']}")
-if result3['understanding']['vulnerabilities']:
-    print(f"  Issue: {result3['understanding']['vulnerabilities'][0]['description']}")
+if result3['understanding']['violations']:
+    print(f"  Issue: {result3['understanding']['violations'][0]['description']}")
 print()
 
 if result3['fix']:

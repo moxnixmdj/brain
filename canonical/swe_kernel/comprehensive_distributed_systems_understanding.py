@@ -67,24 +67,44 @@ class RaftAnalyzer:
         
         # Check for missing persistence checks
         if 'handle_client_request' in code or 'append_entry' in code:
-            # Check if we persist before returning success
-            has_persist_call = False
+            # Find the function that handles client requests
             for node in ast.walk(tree):
-                if isinstance(node, ast.Call):
-                    if isinstance(node.func, ast.Attribute):
-                        if 'persist' in node.func.attr or 'write' in node.func.attr:
-                            has_persist_call = True
-            
-            if not has_persist_call and 'storage' in code:
-                violations.append(DistributedViolation(
-                    type=DistributedViolationType.DURABILITY_VIOLATION,
-                    algorithm=ConsensusAlgorithm.RAFT,
-                    description="Log entry not persisted before returning success",
-                    evidence="handle_client_request returns success without calling persist",
-                    severity="critical",
-                    fix_description="Persist log entry before returning success to ensure durability",
-                    fix_code=None
-                ))
+                if isinstance(node, ast.FunctionDef) and node.name == 'handle_client_request':
+                    # Check if this function returns success
+                    returns_success = False
+                    has_persist_before_return = False
+                    
+                    for stmt in ast.walk(node):
+                        if isinstance(stmt, ast.Return):
+                            # Check if returning success
+                            if stmt.value and isinstance(stmt.value, ast.Dict):
+                                for key, value in zip(stmt.value.keys, stmt.value.values):
+                                    if isinstance(key, ast.Constant) and key.value == 'success':
+                                        if isinstance(value, ast.Constant) and value.value == True:
+                                            returns_success = True
+                    
+                    # Check if persist is called before return in this function
+                    stmts = list(ast.walk(node))
+                    for i, stmt in enumerate(stmts):
+                        if isinstance(stmt, ast.Call):
+                            if isinstance(stmt.func, ast.Attribute):
+                                if 'persist' in stmt.func.attr or 'write' in stmt.func.attr:
+                                    # Check if there's a return after this
+                                    for later_stmt in stmts[i+1:]:
+                                        if isinstance(later_stmt, ast.Return):
+                                            has_persist_before_return = True
+                                            break
+                    
+                    if returns_success and not has_persist_before_return:
+                        violations.append(DistributedViolation(
+                            type=DistributedViolationType.DURABILITY_VIOLATION,
+                            algorithm=ConsensusAlgorithm.RAFT,
+                            description="Log entry not persisted before returning success",
+                            evidence="handle_client_request returns success without calling persist",
+                            severity="critical",
+                            fix_description="Persist log entry before returning success to ensure durability",
+                            fix_code=None
+                        ))
         
         # Check for missing quorum checks
         if 'replicate' in code or 'send_vote' in code:
@@ -173,25 +193,46 @@ class MultiPaxosAnalyzer:
         """Analyze Multi-Paxos-specific bugs."""
         violations = []
         
-        # Check for missing lease expiration checks
+        # Check for missing lease expiration checks during replication
         if 'lease' in code and 'replicate' in code:
-            # Check if we verify lease won't expire during replication
-            has_lease_check = False
+            # Find functions that call replicate
             for node in ast.walk(tree):
-                if isinstance(node, ast.If):
-                    if 'lease' in ast.unparse(node) and ('expir' in ast.unparse(node) or 'timeout' in ast.unparse(node)):
-                        has_lease_check = True
-            
-            if not has_lease_check:
-                violations.append(DistributedViolation(
-                    type=DistributedViolationType.CONSISTENCY_VIOLATION,
-                    algorithm=ConsensusAlgorithm.MULTI_PAXOS,
-                    description="No lease expiration check during replication",
-                    evidence="Replicating without checking if lease will expire",
-                    severity="critical",
-                    fix_description="Check lease expiration before/during replication",
-                    fix_code=None
-                ))
+                if isinstance(node, ast.FunctionDef):
+                    # Check if this function calls replicate
+                    calls_replicate = False
+                    has_lease_check_after_replicate = False
+                    
+                    stmts = list(ast.walk(node))
+                    replicate_idx = -1
+                    
+                    for i, stmt in enumerate(stmts):
+                        if isinstance(stmt, ast.Call):
+                            if isinstance(stmt.func, ast.Attribute):
+                                if 'replicate' in stmt.func.attr:
+                                    calls_replicate = True
+                                    replicate_idx = i
+                    
+                    if calls_replicate:
+                        # Check if there's a lease check AFTER replicate
+                        for i in range(replicate_idx + 1, len(stmts)):
+                            stmt = stmts[i]
+                            if isinstance(stmt, ast.If):
+                                unparsed = ast.unparse(stmt)
+                                if 'lease' in unparsed and ('expir' in unparsed or 'timeout' in unparsed):
+                                    has_lease_check_after_replicate = True
+                                    break
+                        
+                        # If no lease check after replicate, it's a violation
+                        if not has_lease_check_after_replicate:
+                            violations.append(DistributedViolation(
+                                type=DistributedViolationType.CONSISTENCY_VIOLATION,
+                                algorithm=ConsensusAlgorithm.MULTI_PAXOS,
+                                description="No lease expiration check after replication",
+                                evidence=f"Function {node.name} calls replicate without checking lease expiration",
+                                severity="critical",
+                                fix_description="Check lease expiration after replication to ensure consistency",
+                                fix_code=None
+                            ))
         
         return violations
 
