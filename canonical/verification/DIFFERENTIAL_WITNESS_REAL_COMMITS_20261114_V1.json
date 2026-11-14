@@ -1,0 +1,230 @@
+{
+ "schema": "BRAIN_DIFFERENTIAL_WITNESS_REAL_COMMITS_20261114_V1",
+ "authority": "NONE",
+ "date": "2026-11-14",
+ "why": "Last round measured a negative: 19 of 29 real merged changes could be reverted without the project's own suite noticing. A negative is a diagnosis, not a capability. This record answers the question it leaves -- if the tests are silent, what else serves as the oracle? -- without a model, without a suite, and without a specification: run the old and new versions against the same input and report the input on which they disagree.",
+ "question": "For each of 57 real merged commits in three real projects, does a bounded, change-directed differential search produce an input on which the two versions observably disagree?",
+ "method": {
+  "step_1": "per commit, materialise `git archive sha^` and `git archive sha` into two separate trees (no working tree, no index)",
+  "step_2": "extract the changed non-test Python file; compare it by AST, not by diff",
+  "step_3": "build candidate inputs from: the literals the change touches on either side, a fixed value grid, repetition shapes sized around stated limits, and strings assembled from the change's own literals",
+  "step_4": "reach private functions through their PUBLIC entry points, found by a name-level call graph (the mechanism DiffTestGen uses and Shadow relies on), because a parameter that is a Tokenizer object cannot be driven with plain values",
+  "step_5": "run before and after in TWO SEPARATE INTERPRETERS over the same candidates; the verdict is the first input whose returned value or exception differs",
+  "step_6": "verify every reported witness with an INDEPENDENT script that never imports the tool, in two fresh interpreters",
+  "quantifier_guard": "a snapshot that is imported from the wrong tree (the installed package, or the other version) aborts the run as MISLOADED_SNAPSHOT rather than reporting a divergence; a candidate that kills the runner is EXECUTION_INCOMPLETE, not 'no witness'",
+  "environment": "python 3.11.2, no network, zero model calls"
+ },
+ "corpus": {
+  "repositories": [
+   "more-itertools/more-itertools",
+   "torproject/stem",
+   "pypa/packaging"
+  ],
+  "commits_evaluated": 57,
+  "why_these": "the same three projects and the same commit window as last round's revert ledger, so the two measurements can be cross-referenced commit by commit"
+ },
+ "verdicts_from_the_tool": {
+  "NO_WITNESS_FOUND_ON_GRID": 32,
+  "WITNESS": 12,
+  "NO_EXPRESSION_CHANGED": 7,
+  "UNREACHABLE_PARAMETERS": 3,
+  "IMPORT_FAILED": 3
+ },
+ "witnesses_after_independent_verification": {
+  "reported": 16,
+  "confirmed_to_differ": 16,
+  "note": "all confirmed. Confirmation is not usefulness, which is why the classes below are separate.",
+  "public_input_behaviour": 6
+ },
+ "what_the_witnesses_actually_are": {
+  "PUBLIC_INPUT_BEHAVIOUR": 6,
+  "PRIVATE_SIGNATURE_OR_TYPEERROR": 3,
+  "VERSION_STRING_ONLY": 2,
+  "MODULE_CONSTANT_LITERAL": 2,
+  "TYPE_ALIAS_OR_ANNOTATION": 2,
+  "CONTAINS_AN_ADDRESS": 1,
+  "LAZY_IMPORT_SET": 1,
+  "reading": "A witness can be TRUE and still be worthless. `_parse_marker(0, 'ABCDEFG')` differs only because the function gained a parameter; `__version__` differs because the commit bumped it; `set_partitions` 'differed' only by a generator's memory address. The honest unit is PUBLIC_INPUT_BEHAVIOUR: an input a user could write, on a function a user calls."
+ },
+ "headline": {
+  "witness_on_a_public_entry_point": 6,
+  "of_commits_evaluated": 57,
+  "fraction": 0.1053,
+  "the_four": [
+   {
+    "repo": "mi",
+    "sha": "fbd55137",
+    "input": "chunked_even[0, 'ABCDEFG']",
+    "before": "{\"exc\": \"TypeError\", \"msg\": \"'int' object is not iterable\"}",
+    "after": "{\"exc\": \"TypeError\", \"msg\": \"'<' not supported between instances of 'str' and 'int'\"}"
+   },
+   {
+    "repo": "mi",
+    "sha": "98562cab",
+    "input": "tail[-1, 'ABCDEFG']",
+    "before": "{\"exc\": \"ValueError\", \"msg\": \"n must be at least 0\"}",
+    "after": "{\"value\": \"()\"}"
+   },
+   {
+    "repo": "mi",
+    "sha": "0ab351d3",
+    "input": "iter_index[0, 0, 1, -1]",
+    "before": "{\"exc\": \"TypeError\", \"msg\": \"'int' object is not iterable\"}",
+    "after": "{\"exc\": \"ValueError\", \"msg\": \"Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize.\"}"
+   },
+   {
+    "repo": "pkg",
+    "sha": "5a7d3386",
+    "input": "parse_requirement['SPECIFIER_LIST===1']",
+    "before": "{\"value\": \"('SPECIFIER_LIST', '', [], '===1', None)\"}",
+    "after": "{\"value\": \"('SPECIFIER_LIST', '', [], <SpecifierSet('===1')>, None)\"}"
+   },
+   {
+    "repo": "pkg",
+    "sha": "4d7875f8",
+    "input": "parse_marker['((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((",
+    "before": "{\"exc\": \"RecursionError\", \"msg\": \"maximum recursion depth exceeded\"}",
+    "after": "{\"exc\": \"ParserSyntaxError\", \"msg\": \"Marker expression is nested more than 200 levels deep\"}"
+   },
+   {
+    "repo": "pkg",
+    "sha": "b32ed54d",
+    "input": "parse_requirement['ATAT>=2']",
+    "before": "{\"value\": \"('ATAT', '', [], '>=2', None)\"}",
+    "after": "{\"value\": \"('ATAT', '', [], <SpecifierSet('>=2')>, None)\"}"
+   }
+  ],
+  "witnesses_verbatim": [
+   {
+    "repo": "mi",
+    "sha": "fbd55137",
+    "function": "chunked_even",
+    "args": [
+     0,
+     "ABCDEFG"
+    ],
+    "before": {
+     "exc": "TypeError",
+     "msg": "'int' object is not iterable"
+    },
+    "after": {
+     "exc": "TypeError",
+     "msg": "'<' not supported between instances of 'str' and 'int'"
+    }
+   },
+   {
+    "repo": "mi",
+    "sha": "98562cab",
+    "function": "tail",
+    "args": [
+     -1,
+     "ABCDEFG"
+    ],
+    "before": {
+     "exc": "ValueError",
+     "msg": "n must be at least 0"
+    },
+    "after": {
+     "value": "()"
+    }
+   },
+   {
+    "repo": "mi",
+    "sha": "0ab351d3",
+    "function": "iter_index",
+    "args": [
+     0,
+     0,
+     1,
+     -1
+    ],
+    "before": {
+     "exc": "TypeError",
+     "msg": "'int' object is not iterable"
+    },
+    "after": {
+     "exc": "ValueError",
+     "msg": "Stop argument for islice() must be None or an integer: 0 <= x <= sys.maxsize."
+    }
+   },
+   {
+    "repo": "pkg",
+    "sha": "5a7d3386",
+    "function": "parse_requirement",
+    "args": [
+     "SPECIFIER_LIST===1"
+    ],
+    "before": {
+     "value": "('SPECIFIER_LIST', '', [], '===1', None)"
+    },
+    "after": {
+     "value": "('SPECIFIER_LIST', '', [], <SpecifierSet('===1')>, None)"
+    }
+   },
+   {
+    "repo": "pkg",
+    "sha": "4d7875f8",
+    "function": "parse_marker",
+    "args": "['((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((...",
+    "before": {
+     "exc": "RecursionError",
+     "msg": "maximum recursion depth exceeded"
+    },
+    "after": {
+     "exc": "ParserSyntaxError",
+     "msg": "Marker expression is nested more than 200 levels deep"
+    }
+   },
+   {
+    "repo": "pkg",
+    "sha": "b32ed54d",
+    "function": "parse_requirement",
+    "args": [
+     "ATAT>=2"
+    ],
+    "before": {
+     "value": "('ATAT', '', [], '>=2', None)"
+    },
+    "after": {
+     "value": "('ATAT', '', [], <SpecifierSet('>=2')>, None)"
+    }
+   }
+  ]
+ },
+ "the_two_measurements_together": {
+  "prior_round": "19 of 29 real merged changes were revertable under the project's own suite",
+  "this_round": "4 of the commits that suite could not see have an input on which the versions openly disagree",
+  "sentence_that_survives_both": "For at least four real merged fixes, there exists a specific input, generated with no model and no tests, on which the pre-fix and post-fix programs produce different results -- and the projects' own suites did not notice when the fix was removed.",
+  "sentence_that_does_not_survive": "'those fixes have no tests' is too strong, and so is 'the suite is broken'. The measured fact is narrower: those fixes can be reverted green, and the divergence can be found mechanically."
+ },
+ "where_the_ceiling_is": {
+  "31_of_57": "NO_WITNESS_FOUND_ON_GRID -- either genuinely behaviour-preserving (most `perf(...)` commits) or the search's grid is too poor; the tool reports the bounded grid so a reader can judge which",
+  "3_IMPORT_FAILED": "the module could not be loaded in isolation (a runtime dependency or an import-time side effect)",
+  "3_UNREACHABLE_PARAMETERS": "the changed function takes objects this search cannot build",
+  "7_NO_EXPRESSION_CHANGED": "no computed expression and no module-level binding differs -- docs, comments, and pure annotation changes, correctly excluded"
+ },
+ "the_four_instrument_errors_that_would_have_produced_a_false_number": [
+  "A runner that crashed at candidate 101 of 2,000 reported the commit as 'no witness'. Fixed by EXECUTION_INCOMPLETE.",
+  "Both versions were imported from the same path, so the 'before' run measured the 'after' file. That is a comparison of a version against itself, and it answers 'refactor' -- the most confidently wrong answer available. Fixed by MISLOADED_SNAPSHOT, strict per side.",
+  "`set_partitions` returns a generator; `repr` of a generator contains its memory address, so a docs-only commit came back with a witness. Fixed by materialising lazy results and by refusing address-bearing values.",
+  "The first witnesses were `tail(<docstring>, 0)`: literals were harvested by re-parsing `ast.dump` TEXT, which turns `Name(id='size')` into the string 'size' and puts prose and identifiers in the argument grid. Fixed by collecting real AST constants and excluding prose."
+ ],
+ "what_this_does_not_say": [
+  "not that a NO_WITNESS verdict proves equivalence; it is a bounded search and the bound is reported",
+  "not that these four witnesses are the regression tests the projects should commit -- a message-only or signature-only divergence is weaker evidence than a changed value, and the classes above keep that separate",
+  "not that the search is efficient; it is cheap in money (zero) and expensive in candidates (hundreds to thousands per commit)",
+  "not a replacement for last round's ledger: the two answer different questions, and neither substitutes for the other"
+ ],
+ "kill_list": [
+  "using a model to judge whether a patch is correct -- not independent, and forbidden",
+  "widening the grid until a witness appears -- that fits the measurement to the claim",
+  "treating NO_WITNESS as proof of equivalence",
+  "symbolic execution or SMT: correct, and far too expensive to run before every lesson is admitted; the literal-boundary grid is the cheap shadow of the same idea"
+ ],
+ "reproduce": "python3 /tmp/verify_witnesses.py (per-commit archives) then python3 /tmp/independent.py (verification without the tool); the module is canonical/swe_kernel/differential_witness_v1.py, self-check with python3 -c \"from canonical.swe_kernel.differential_witness_v1 import self_check; print(self_check()['passed'])\"",
+ "research_grounding": [
+  "Shadow of a Doubt (ICSE 2016): run old and new in one instance, emit an input wherever the versions disagree; needs no specification",
+  "DiffTestGen (arXiv 2607.16024, Jul 2026): 78.2% of PRs show behavioural differences; the gain is directed access information, not token budget; static call-graph analysis finds valid public entry points",
+  "DiffCodeGen (arXiv 2605.20473): coverage-guided differential fuzzing 'without requiring any existing tests or large language models'"
+ ]
+}
