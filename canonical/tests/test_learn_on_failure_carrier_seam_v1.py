@@ -32,7 +32,7 @@ from canonical.runtime import computer_execution_boundary_v1 as boundary
 from canonical.runtime import ignorance_ledger_v1 as ledger
 from canonical.runtime import jit_knowledge_v1 as jit
 from canonical.runtime import live_brain_route_admission_v1 as door
-from canonical.runtime.memory_policy_v1 import READ_ONLY, memory_policy_scope
+from canonical.runtime.memory_policy_v1 import OFF, READ_ONLY, memory_policy_scope
 from canonical.swe_kernel import closed_loop_autonomous_controller_v1 as controller
 from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
 
@@ -76,7 +76,6 @@ class LearnOnFailureCarrierSeamTests(unittest.TestCase):
         with mock.patch.object(controller, "recall_and_execute_workflow", return_value=None), \
              mock.patch.object(door, "solve", return_value=dict(self.front)), \
              mock.patch.object(jit, "resolve", return_value=dict(self.knowledge)) as resolve, \
-             mock.patch.object(VerifiedSkillStore, "count", return_value=0), \
              mock.patch.object(cenv, "perform", return_value={"pass": False}) as perform:
             result = controller.solve_or_learn(
                 {"task_id": "seam", "goal": goal},
@@ -152,16 +151,35 @@ class LearnOnFailureCarrierSeamTests(unittest.TestCase):
         self.assertNotIn("knowledge", result["learning"])
         resolve.assert_not_called()
 
-    def test_read_only_memory_does_not_claim_a_persisted_gap_or_credit_jit_sources(self) -> None:
-        with memory_policy_scope(READ_ONLY):
-            result, resolve, _ = self._solve()
-        self.assertFalse(result["pass"])
-        self.assertEqual(result["status"], boundary.STATUS)
-        self.assertFalse(result["learning"]["gap_recorded"])
-        self.assertNotIn("gap_id", result["learning"])
-        self.assertNotIn("knowledge", result["learning"])
-        self.assertFalse(self.ledger_path.exists())
-        resolve.assert_not_called()
+    def test_read_only_and_off_memory_do_not_write_or_initialize_learned_stores(self) -> None:
+        """A forbidden memory policy must not persist, credit, or open a store.
+
+        Measured: READ_ONLY still reaches the seam but records nothing, so the
+        carrier refusal stays the served answer.  OFF turns learning off at the
+        wrapper, so the front answer travels unchanged with no learning block.
+        Neither mode may construct the SQLite skill store: opening it creates
+        schema/seed state, which is a write.
+        """
+        for mode in (READ_ONLY, OFF):
+            with self.subTest(mode=mode):
+                with memory_policy_scope(mode), \
+                     mock.patch.object(VerifiedSkillStore, "__init__",
+                                       side_effect=AssertionError("skill store initialized")) as init:
+                    result, resolve, _ = self._solve()
+                self.assertFalse(result["pass"])
+                self.assertFalse(result["executed"])
+                if mode == READ_ONLY:
+                    self.assertEqual(result["status"], boundary.STATUS)
+                    self.assertFalse(result["learning"]["gap_recorded"])
+                    self.assertNotIn("gap_id", result["learning"])
+                    self.assertNotIn("knowledge", result["learning"])
+                    self.assertNotIn("verified_skill_store_rules", result["learning"])
+                else:
+                    self.assertEqual(result["status"], GAP)
+                    self.assertNotIn("learning", result)
+                self.assertFalse(self.ledger_path.exists())
+                resolve.assert_not_called()
+                init.assert_not_called()
 
 
 if __name__ == "__main__":

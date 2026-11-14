@@ -259,12 +259,9 @@ def _record_gap_and_read_knowledge(
             learned["executable"] = exe
             learned["executable_status"] = computer_boundary.STATUS
         learned["computer_env_status"] = computer_boundary.STATUS
-        try:
-            from canonical.swe_kernel.verified_skill_crystallizer_v1 import VerifiedSkillStore
-
-            learned["verified_skill_store_rules"] = VerifiedSkillStore().count()
-        except Exception:
-            pass
+        # Do not initialize/count the skill store here.  Opening it can create
+        # schema/seed state, which is not part of recording a compile gap and
+        # would violate READ_ONLY/OFF even though no program was executed.
     return learned
 
 

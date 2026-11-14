@@ -52,10 +52,13 @@
     "authority": "NONE__PRODUCER_RUN_SANDBOX",
     "before": "solve_or_learn returned the carrier status with side_effects_may_exist=True and no gap/JIT on real audio/pdf compile gaps.",
     "after": "solve_or_learn returns FAIL__RAW_GOAL_COMPILATION_GAP with executed=False, side_effects_may_exist=False, carrier_gate preserved, gap_recorded=True and JIT knowledge resolved when writes and network are allowed.",
-    "final_admission_jit_set": "98 passed in 55.48s",
-    "final_carrier_guard_set": "45 passed, 2 subtests passed in 2.18s; wake/sleep suite alone 6 passed in 7.27s",
-    "known_remaining_failures": 3,
-    "timing_flake": "wake/sleep 50 ms wall assertion failed under concurrent suite load (about 3.8-4.8 s) and passed alone; no assertion relaxed"
+    "final_admission_jit_set": "98 passed, 2 subtests passed in 76.21s",
+    "final_carrier_guard_set": "45 passed, 4 subtests passed in 3.56s; wake/sleep suite alone 6 passed in 8.99s",
+    "known_remaining_failures": 4,
+    "timing_flake": "wake/sleep 50 ms wall assertion failed under concurrent suite load (about 3.8-4.8 s) and passed alone; no assertion relaxed",
+    "base_vs_head_same_three_suites": "base controller fee45dc4: 6 failed, 28 passed, 5 subtests in 36.48s; this tree: 4 failed, 30 passed, 5 subtests in 37.97s (two pre-existing failures repaired)",
+    "deleted_block_reachability_control": "the two suites naming the deleted tiers produce identical failure sets with the block present at base and deleted here: 5 failed, 4 passed in both runs",
+    "unified_model_artifact": "recompiled from this tree; verifier TOTAL 33/33 PASS with ARTIFACT_INTEGRITY 6/6. No digest literal is pinned here: this intent is indexed by the compiler, so embedding the artifact digest would make the compile a non-converging cycle. The committed artifact carries the authoritative digest."
   },
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -122,7 +125,8 @@
       "named-program --help subprocess acquisition tail",
       "capability registration and retry after unconfined acquisition",
       "false side_effects_may_exist=True when no prior execution or uncertain effects exist",
-      "gap_recorded=True under READ_ONLY memory policy"
+      "gap_recorded=True under READ_ONLY memory policy",
+      "VerifiedSkillStore construction inside the refusal seam (opening it creates schema/seed state, a write under READ_ONLY/OFF)"
     ],
     "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
     "selected_surviving_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
@@ -210,7 +214,7 @@
     },
     "route_frontier": {
       "discovery_required": true,
-      "checked_at_utc": "2026-11-14T17:22:20Z",
+      "checked_at_utc": "2026-11-14T18:43:10Z",
       "max_age_hours": 24,
       "source_classes_checked": [
         "BRAIN_INHERITED",
@@ -343,7 +347,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
       "selected_route_preflight": {
-        "checked_at_utc": "2026-11-14T17:22:20Z",
+        "checked_at_utc": "2026-11-14T18:43:10Z",
         "max_age_hours": 2,
         "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
         "status": "READY",
@@ -360,7 +364,7 @@
             "evidence_scope": "GLOBAL",
             "status": "READY",
             "evidence": [
-              "producer ran compileall and the final 98-pass admission/JIT set and 45-pass carrier/guard set"
+              "producer ran compileall; final admission/JIT set 98 passed + 2 subtests; carrier/guard set 45 passed + 4 subtests; unified-model verifier 33/33 PASS after recompiling the artifact"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -374,9 +378,9 @@
             "scope": "GLOBAL",
             "evidence_scope": "GLOBAL",
             "status": "READY",
-            "observed_at_utc": "2026-11-14T17:22:20Z",
+            "observed_at_utc": "2026-11-14T18:43:10Z",
             "evidence": [
-              "git ls-remote origin refs/heads/main returned fee45dc43f8c145db0776ce8e1f49e1ebf1b78d9"
+              "git ls-remote origin refs/heads/main returned fee45dc43f8c145db0776ce8e1f49e1ebf1b78d9 at 2026-11-14T18:43:10Z"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -442,21 +446,30 @@
       ".venv/bin/python -m pytest -q canonical/tests/test_learn_on_failure_carrier_seam_v1.py canonical/tests/test_jit_knowledge_v1.py canonical/tests/test_lesson_admission_gate_v1.py canonical/tests/test_lesson_admission_regression_v1.py canonical/tests/test_weight_space_fuel_v1.py canonical/tests/test_experience_corpus_training_readiness_v1.py",
       ".venv/bin/python -m pytest -q canonical/tests/test_learn_on_failure_carrier_seam_v1.py canonical/tests/test_the_carrier_gate_does_not_eat_the_reason_v1.py canonical/tests/test_a_precise_refusal_is_not_replaced_by_a_generic_one_v1.py canonical/tests/test_compiled_cli_confinement_guard_v1.py canonical/tests/test_python_ast_query_transfer_v1.py",
       ".venv/bin/python -m pytest -q canonical/tests/test_wake_sleep_recall_and_specialist_controller_v1.py",
+      ".venv/bin/python -m pytest -q canonical/tests/test_integrated_autonomous_loop_v1.py canonical/tests/test_computer_unconfined_route_guard_v1.py canonical/tests/test_live_route_memory_consult_v1.py",
+      ".venv/bin/python canonical/runtime/compile_brain_unified_model_v1.py",
+      ".venv/bin/python canonical/runtime/verify_brain_unified_model_v1.py",
+      ".venv/bin/python -m unittest canonical.tests.test_brain_unified_model_v1 canonical.tests.test_goal_compiler canonical.tests.test_goal_compiler_world_binding_v1",
+      ".venv/bin/python canonical/runtime/goal_compilation_benchmark_v1.py",
       "python3 execution_guard/repo_integrity_guard_v1.py --self-test",
       "python3 execution_guard/agent_orientation_check_v1.py verify"
     ],
     "results": {
-      "admission_jit_set": "98 passed in 55.48s",
-      "carrier_guard_set": "45 passed, 2 subtests passed in 2.18s",
-      "wake_sleep_alone": "6 passed in 7.27s",
-      "known_remaining_failures": "3 failed, 1 passed, 1 subtests passed in 8.72s (isolated pre-existing failures)",
+      "admission_jit_set": "98 passed, 2 subtests passed in 76.21s",
+      "carrier_guard_set": "45 passed, 4 subtests passed in 3.56s",
+      "wake_sleep_alone": "6 passed in 8.99s",
+      "known_remaining_failures": "4 failed, 30 passed, 5 subtests passed in 37.97s; the same three suites with the base controller: 6 failed, 28 passed, 5 subtests in 36.48s",
+      "unified_model_verify": "TOTAL 33/33 PASS, ARTIFACT_INTEGRITY 6/6 (random seed per run)",
+      "unified_model_unittest": "Ran 137 tests, OK",
+      "goal_compilation_benchmark": "combined 21/23 compiled, expected capability selected 19/23, 2 wrong-capability selections (pre-existing)",
       "repo_integrity_self_test": "PASS",
       "orientation_verify": "ok:true"
     },
     "remaining_failures": [
-      "test_integrated_autonomous_loop_v1 stale refusal premise",
-      "test_computer_unconfined_route_guard_v1 count-lines stale refusal premise",
-      "test_live_route_memory_consult_v1 base64 misroute to pdf.extract.text.pypdf / missing pypdf"
+      "test_integrated_autonomous_loop_v1 stale refusal premise (reproduced at base)",
+      "test_computer_unconfined_route_guard_v1 count-lines stale refusal premise (reproduced at base)",
+      "test_live_route_memory_consult_v1 ConsultationTests expects PASS__RAW_GOAL_COMPILED but the door returns the stronger executed-and-verified status (reproduced at base)",
+      "test_live_route_memory_consult_v1 test_a_goal_naming_a_real_program_is_attempted demands the unconfined --help attempt this PR removes; base64 misroute to pdf.extract.text.pypdf also real (reproduced at base)"
     ]
   }
 }

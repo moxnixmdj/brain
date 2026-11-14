@@ -62,6 +62,24 @@ A second finding: roughly 366 lines after that unconditional return were unreach
 labels). Tests naming those tiers were not exercising that controller path. This change deletes the
 dead block instead of pretending it is live capability.
 
+That claim was tested rather than asserted. The two suites that name those tiers were run against
+this tree and then against the base controller restored from `fee45dc4`:
+
+```text
+canonical/tests/test_optimal_four_stage_unified_organism_v1.py
+canonical/tests/test_self_expanding_awake_organism_v1.py
+
+head (block deleted): 5 failed, 4 passed in 21.81s
+base (block present): 5 failed, 4 passed in 20.99s
+failure sets: IDENTICAL (diff of the FAILED lines is empty)
+```
+
+Deleting the block changed no test outcome, which is what "unreachable" has to mean. Two of those
+five failures are missing optional substrates (`tree_sitter`), one is a sub-0.25 ms warm-lookup wall
+assertion, and two assert tier results the door already refused before this PR. They are pre-existing
+and are not claimed as fixed. `pillow` was installed into the local venv only so the suite could be
+collected at all; that is a test-environment change, not a repository change.
+
 ## 3. What changed
 
 `canonical/swe_kernel/closed_loop_autonomous_controller_v1.py`:
@@ -82,6 +100,10 @@ dead block instead of pretending it is live capability.
    same read-only helper. No execution authority is granted.
 4. Honors `READ_ONLY`/`OFF`: no persisted-gap claim and no JIT source-value credit when memory writes
    are forbidden.
+5. Removed the `VerifiedSkillStore().count()` call from the seam. Measured: constructing that store
+   opens SQLite, creates schema, and can import the seed bundle — a write performed while merely
+   reporting a refusal. The seam now records the gap and reads knowledge without touching the skill
+   store at all. The new test fails if the store constructor is reached under `READ_ONLY` or `OFF`.
 
 After, on the same audio/pdf goals:
 
@@ -132,7 +154,8 @@ to execute the effectful half.
 - No global completeness of opportunity data. “All hidden data” is not a finite retrieval target;
   the honest mechanism is bounded search, explicit uncertainty, and falsification.
 - No capability credit from dead code, document titles, retrieved packages, or non-firing rules.
-- No claim that the three remaining failures below are fixed.
+- No claim that the four remaining failures below are fixed. Two other failures **are** fixed, and
+  the base-vs-head run in §9 is the evidence.
 
 ## 6. Single bottleneck
 
@@ -201,12 +224,10 @@ precise gap -> bounded knowledge -> candidate hypothesis -> held-out verificatio
 
 ## 9. Test ledger — real counts, including failures
 
-Producer-run on this tree with `.venv/bin/python -m pytest`:
+Producer-run on this tree with `.venv/bin/python -m pytest`. These are the final numbers after the
+skill-store write was removed from the seam:
 
 ```text
-Baseline affected front suites:
-  5 failed, 72 passed, 7 subtests passed in 44.74s
-
 Final admission/JIT/seam set:
   canonical/tests/test_learn_on_failure_carrier_seam_v1.py
   canonical/tests/test_jit_knowledge_v1.py
@@ -214,7 +235,7 @@ Final admission/JIT/seam set:
   canonical/tests/test_lesson_admission_regression_v1.py
   canonical/tests/test_weight_space_fuel_v1.py
   canonical/tests/test_experience_corpus_training_readiness_v1.py
-  -> 98 passed in 55.48s
+  -> 98 passed, 2 subtests passed in 76.21s
 
 Final carrier/guard set, excluding the timing-sensitive wake suite:
   canonical/tests/test_learn_on_failure_carrier_seam_v1.py
@@ -222,19 +243,46 @@ Final carrier/guard set, excluding the timing-sensitive wake suite:
   canonical/tests/test_a_precise_refusal_is_not_replaced_by_a_generic_one_v1.py
   canonical/tests/test_compiled_cli_confinement_guard_v1.py
   canonical/tests/test_python_ast_query_transfer_v1.py
-  -> 45 passed, 2 subtests passed in 2.18s
+  -> 45 passed, 4 subtests passed in 3.56s
 
 Wake/sleep suite alone:
   canonical/tests/test_wake_sleep_recall_and_specialist_controller_v1.py
-  -> 6 passed in 7.27s
-
-Known remaining failures, isolated:
-  test_integrated_autonomous_loop_v1.py::...gap_ledger_gui_fallback_and_honest_refusal
-  test_computer_unconfined_route_guard_v1.py::...unconfined_query_or_archive
-    subtest goal='count lines in notes.txt'
-  test_live_route_memory_consult_v1.py::LearnOnFailureTests::test_a_goal_naming_a_real_program_is_attempted
-  -> 3 failed, 1 passed, 1 subtests passed in 8.72s
+  -> 6 passed in 8.99s
 ```
+
+The three suites that still contain failures were run **whole**, on this tree and then with the base
+controller restored, so the comparison is like-for-like rather than a hand-picked subset:
+
+```text
+test_integrated_autonomous_loop_v1.py
+test_computer_unconfined_route_guard_v1.py
+test_live_route_memory_consult_v1.py
+
+base controller (fee45dc4): 6 failed, 28 passed, 5 subtests passed in 36.48s
+this tree:                  4 failed, 30 passed, 5 subtests passed in 37.97s
+```
+
+Two failures are repaired by this change, both in `test_live_route_memory_consult_v1.py`:
+`test_failure_records_the_gap` and `test_failure_says_what_to_learn_next`. They failed at base
+because the refusal swallowed the gap. That is the seam defect, caught by tests that already existed.
+
+Four failures remain, all reproduced at base:
+
+- `test_integrated_autonomous_loop_v1.py::...gap_ledger_gui_fallback_and_honest_refusal` — stale
+  refusal premise; tier0a now answers correctly.
+- `test_computer_unconfined_route_guard_v1.py::...unconfined_query_or_archive`, subtest
+  `count lines in notes.txt` — same stale premise. The no-execution assertions in that test still
+  pass; only the "must refuse" expectation is wrong.
+- `test_live_route_memory_consult_v1.py::ConsultationTests::test_consultation_does_not_change_the_verdict`
+  — expects the literal `PASS__RAW_GOAL_COMPILED`; the live door now returns
+  `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`, a stronger success status.
+- `test_live_route_memory_consult_v1.py::LearnOnFailureTests::test_a_goal_naming_a_real_program_is_attempted`
+  — demands `attempted=True` for a named program, which is exactly the unconfined `--help` behavior
+  this PR removes; the underlying base64→`pdf.extract.text.pypdf` misroute is also real.
+
+The last one is a genuine conflict of intent, not a flake: the old test asserts the authority this
+repair refuses to grant. It is left failing and visible rather than edited inside a PR whose stated
+purpose is to remove that authority; changing it is owner-visible follow-up work.
 
 Timing flake observed and not hidden: when the wake/sleep suite was run together with the carrier
 set under load, `test_tier0_compiled_http_skill_recall_stays_under_50ms_across_even_wake_episodes`
@@ -251,12 +299,45 @@ python3 execution_guard/agent_orientation_check_v1.py verify   -> ok:true
 git diff --check                                               -> clean
 ```
 
-The three remaining failures are pre-existing and out of this PR’s narrow scope:
+The four remaining failures above are pre-existing and out of this PR's narrow scope. They are
+reported, not papered over.
 
-- two stale refusal premises where tier0a now answers safely and correctly;
-- one base64 misroute to `pdf.extract.text.pypdf` plus missing `pypdf`.
+### The unified-model artifact had to be recompiled
 
-They are reported, not papered over.
+The first CI run on this PR was red, and the reason was real: `verify-brain-unified-model-v1`
+recompiles the content-addressed model from the tree and requires byte identity. Adding an action
+intent and a root markdown document adds two indexed records, so the stored artifact was stale:
+
+```text
+before recompile: ARTIFACT_INTEGRITY 5/6 FAIL recompilation_is_byte_identical
+                  TOTAL 32/33 FAIL
+after  recompile: ARTIFACT_INTEGRITY 6/6 PASS
+                  TOTAL 33/33 PASS
+```
+
+No digest literal is quoted here on purpose. This document is itself indexed by the compiler, so
+writing the artifact's digest into it would change the document, change the artifact, and never
+converge — the cycle the compiler's `_GENERATED_OUTPUTS` comment describes. The authoritative digest
+is the one inside the committed artifact, and `recompilation_is_byte_identical` is what checks it.
+
+The fix was to run the compiler, not to touch the verifier or the workflow. The rest of that
+workflow was also run locally:
+
+```text
+python -m unittest canonical.tests.test_brain_unified_model_v1 \
+                   canonical.tests.test_goal_compiler \
+                   canonical.tests.test_goal_compiler_world_binding_v1
+  -> Ran 137 tests, OK
+
+canonical/runtime/goal_compilation_benchmark_v1.py
+  -> primary 8/9 compiled, extended 13/14, combined 21/23
+     expected capability selected 19/23; 2 compiled against the wrong capability
+     (EXT_XLSX_CREATE, EXT_SQLITE_VERIFY -> auto.pypi.msgpack)
+```
+
+Those two wrong-capability selections and the two unbindable goals are pre-existing compiler gaps,
+already documented in the benchmark module. They are not caused by this PR and are not claimed as
+fixed.
 
 ## 10. External context used for ranking, not authority
 
