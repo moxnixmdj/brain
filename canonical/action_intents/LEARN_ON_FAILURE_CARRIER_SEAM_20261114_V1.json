@@ -1,0 +1,475 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "action_id": "LEARN_ON_FAILURE_CARRIER_SEAM_20261114_V1",
+  "action_intent_id": "LEARN_ON_FAILURE_CARRIER_SEAM_20261114_V1",
+  "date": "2026-11-14",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "fee45dc43f8c145db0776ce8e1f49e1ebf1b78d9",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "causal_blocker": "THE_DOCUMENTATION_FALLBACK_RETURNED_BEFORE_GAP_AND_JIT_AND_CLAIMED_POSSIBLE_EFFECTS_WHEN_NOTHING_RAN_SO_LEARN_ON_FAILURE_COULD_NOT_START_WITHOUT_EXECUTION_AUTHORITY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_DOCUMENTATION_FALLBACK_RETURNED_BEFORE_GAP_AND_JIT_AND_CLAIMED_POSSIBLE_EFFECTS_WHEN_NOTHING_RAN_SO_LEARN_ON_FAILURE_COULD_NOT_START_WITHOUT_EXECUTION_AUTHORITY",
+  "intentional_route_race": false,
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "highest_leverage_now": true,
+  "explicit_user_authorization": [
+    "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
+    "you must think from first principles",
+    "kill all the bad and dumb ideas before you waste time implementing them",
+    "maximize your web use",
+    "always after you make any of your work, push and merge your work always"
+  ],
+  "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
+  "route_id": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
+  "prior_work_reused": [
+    "canonical/runtime/ignorance_ledger_v1.py",
+    "canonical/runtime/jit_knowledge_v1.py",
+    "canonical/runtime/computer_execution_boundary_v1.py",
+    "canonical/runtime/memory_policy_v1.py"
+  ],
+  "expected_parent_change": "The controller preserves a precise compile gap, records it and reads JIT knowledge only when writes are allowed, keeps the carrier refusal visible, and no longer contains the unreachable effectful tier block.",
+  "expected_parent_frontier_change": "The controller preserves a precise compile gap, records it and reads JIT knowledge only when writes are allowed, keeps the carrier refusal visible, and no longer contains the unreachable effectful tier block.",
+  "falsification_condition": "A learnable front-door gap with no prior effects fails to record a gap/JIT result when writes are allowed; or any named program is executed even for --help; or prior effects are erased; or READ_ONLY claims a persisted gap or credits JIT sources; or the carrier boundary is weakened.",
+  "next_step": "Wire the existing falsification-gated admission mechanism into one autonomous caller with real victim programs; obtain the owner's confinement/effect-adoption decision; then independently reproduce the seam and admission-harm measurements.",
+  "stop_condition": "The read-only seam is repaired and tested; effectful acquisition/registration/retry remains refused; no capability, family, terminal or weight credit is claimed.",
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "scope_complete_discharge": false,
+  "truth": {
+    "achieved": false
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "before": "solve_or_learn returned the carrier status with side_effects_may_exist=True and no gap/JIT on real audio/pdf compile gaps.",
+    "after": "solve_or_learn returns FAIL__RAW_GOAL_COMPILATION_GAP with executed=False, side_effects_may_exist=False, carrier_gate preserved, gap_recorded=True and JIT knowledge resolved when writes and network are allowed.",
+    "final_admission_jit_set": "98 passed, 2 subtests passed in 76.21s",
+    "final_carrier_guard_set": "45 passed, 4 subtests passed in 3.56s; wake/sleep suite alone 6 passed in 8.99s",
+    "known_remaining_failures": 4,
+    "timing_flake": "wake/sleep 50 ms wall assertion failed under concurrent suite load (about 3.8-4.8 s) and passed alone; no assertion relaxed",
+    "base_vs_head_same_three_suites": "base controller fee45dc4: 6 failed, 28 passed, 5 subtests in 36.48s; this tree: 4 failed, 30 passed, 5 subtests in 37.97s (two pre-existing failures repaired)",
+    "deleted_block_reachability_control": "the two suites naming the deleted tiers produce identical failure sets with the block present at base and deleted here: 5 failed, 4 passed in both runs",
+    "unified_model_artifact": "recompiled from this tree; verifier TOTAL 33/33 PASS with ARTIFACT_INTEGRITY 6/6. No digest literal is pinned here: this intent is indexed by the compiler, so embedding the artifact digest would make the compile a non-converging cycle. The committed artifact carries the authoritative digest."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/tests/test_learn_on_failure_carrier_seam_v1.py",
+      "WHAT_IS_REAL_AND_WHAT_TO_DO_20261114_V1.md",
+      "canonical/action_intents/LEARN_ON_FAILURE_CARRIER_SEAM_20261114_V1.json"
+    ],
+    "route_class": "REUSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "terminal_achieved": false,
+    "scope_complete_discharge": false
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1,
+    "interpretation": "Speculative forecast only: repairing the read-only failure signal is the cheapest currently available prerequisite to verified general capability work. No obligation discharge, benchmark gain, capability credit or independent verification is claimed."
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "fee45dc43f8c145db0776ce8e1f49e1ebf1b78d9",
+    "real_outcome": "A real compile gap reaches the ignorance ledger and JIT knowledge without granting execution authority.",
+    "required_capability": "Read-only learn-on-failure: precise gap preservation, ledger intake, JIT knowledge retrieval, and honest effect flags.",
+    "iteration_limit": 1,
+    "routes_considered": [
+      "DELETE the unreachable effectful tier block and reuse the existing read-only gap/JIT path at the refusal site",
+      "Leave the carrier refusal and skip learning entirely",
+      "Run documentation-mined code or a named program --help to acquire a CLI contract",
+      "Replace the boundary with a broader unconfined carrier",
+      "Install an external sandbox package and claim authority from the package"
+    ],
+    "deleted_or_bypassed_paths": [
+      "unreachable 2D-2H controller block after the unconditional documentation-fallback return",
+      "named-program --help subprocess acquisition tail",
+      "capability registration and retry after unconfined acquisition",
+      "false side_effects_may_exist=True when no prior execution or uncertain effects exist",
+      "gap_recorded=True under READ_ONLY memory policy",
+      "VerifiedSkillStore construction inside the refusal seam (opening it creates schema/seed state, a write under READ_ONLY/OFF)"
+    ],
+    "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
+    "selected_surviving_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
+    "selected_surviving_route_class": "REUSE_AND_DELETE",
+    "why_selected_route_is_fastest_sufficient": "The existing ledger, JIT resolver and boundary already encode the needed contracts. The defect was control flow and false effect reporting. Deleting dead code and moving the read-only helper ahead of the refusal restores the signal without inventing a new learner or granting authority.",
+    "expected_parent_level_state_change": "The controller preserves a precise compile gap, records it and reads JIT knowledge only when writes are allowed, keeps the carrier refusal visible, and no longer contains the unreachable effectful tier block.",
+    "stop_condition": "The read-only seam is repaired and tested; effectful acquisition/registration/retry remains refused; no capability, family, terminal or weight credit is claimed.",
+    "obs_goal": {
+      "real_outcome": "A precise, learnable failure signal is available to the existing learning organs without executing anything new.",
+      "proxy_goals_deleted": [
+        "green suite by weakening guards",
+        "counting dead tiers as capability",
+        "running --help as knowledge"
+      ],
+      "surviving_necessity": "The system must know the exact hole before it can verify and admit a repair."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "ignorance_ledger_v1",
+        "jit_knowledge_v1",
+        "computer_execution_boundary_v1",
+        "memory_policy_v1"
+      ],
+      "external_existing_routes_checked": [
+        "FGSE falsification-gated admission",
+        "GRASP regression-budget acceptance",
+        "maf-sandbox / agent-sandbox isolation patterns"
+      ],
+      "capability_work_deleted": [
+        "unreachable tier2 effectful block",
+        "unconfined CLI help acquisition tail"
+      ],
+      "surviving_gap": "No admitted general effect carrier and no autonomous caller yet supplies real victim programs to the admission gate."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "path_specific control-flow defect; the broader admission/confinement gap remains intrinsic",
+      "delete_bypass_substitute_options": [
+        "delete dead code",
+        "reuse read-only helper",
+        "do not substitute an unconfined carrier"
+      ],
+      "surviving_causal_blocker": "Effect adoption and general computer execution still require an owner-authorized admitted confinement path."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "reuse read-only gap/JIT + delete dead effectful code",
+        "skip learning",
+        "run --help / documentation code",
+        "broaden unconfined carrier",
+        "external sandbox package as authority"
+      ],
+      "losing_routes_reason": "Skipping learning leaves the severed loop; running code or broadening the carrier grants authority; an external package does not verify Brain-owned admission or effect adoption.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Unit controls cover no-execution and READ_ONLY; live probes cover the real audio/pdf gaps; independent personnel reproduction remains open.",
+      "oracle_paths": [
+        "canonical/tests/test_learn_on_failure_carrier_seam_v1.py",
+        "canonical/tests/test_jit_knowledge_v1.py",
+        "canonical/tests/test_the_carrier_gate_does_not_eat_the_reason_v1.py",
+        "canonical/tests/test_compiled_cli_confinement_guard_v1.py"
+      ]
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "Any claim that the dead tier block was live capability; any --help acquisition path outside admitted confinement.",
+      "adjacent_capabilities_absorbed": "None. This repairs signal flow, not capability ownership.",
+      "fresh_reuse_plan": "Re-run the seam tests on the changed tree and the live audio/pdf gap probes; later reproduce independently."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Reused the existing admission-harm, fuel, readiness and confinement measurements rather than re-deriving them.",
+      "search_stop_decision": "Stop after the read-only seam and dead-code deletion are tested; do not build the effectful half without the owner's adoption decision.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-14T18:43:10Z",
+      "max_age_hours": 24,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/ignorance_ledger_v1.py",
+          "canonical/runtime/jit_knowledge_v1.py",
+          "canonical/runtime/computer_execution_boundary_v1.py",
+          "canonical/runtime/memory_policy_v1.py",
+          "PREREG_THE_CONFINEMENT_SEAM_20261112_V1.md"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2611.14326v1 (FGSE: temporary hypothesis + target-transfer/falsification/archived-regression before commit)",
+          "https://arxiv.org/abs/2605.29668 (GRASP: acceptance gate and hard regression budget, not skill writing alone)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/maf-sandbox/0.54.0/ (host chooses isolation/cleanup; experimental, not Brain authority)",
+          "https://github.com/kubernetes-sigs/agent-sandbox/releases (v1.0.11, isolation lifecycle, not admission authority)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/ThinkFlowLab/agentdescent/issues/938 (community adoption of falsification-gated lesson admission)",
+          "https://www.astaqc.com/software-testing-blog/sandbox-testing-autonomous-ai-agents-2026-validate-safe-execution-tool-boundaries (sandbox testing still requires explicit boundary/rollback validation)"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "falsification gated skill self evolution regression held out admission arxiv 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "PyPI sandbox agent tool execution isolation package"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "agent sandbox effect adoption declared outputs rollback verification latest"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub agent sandbox verification regression gating framework latest release"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "incumbent_route": "controller documentation-fallback refusal that swallowed the gap and claimed possible effects",
+      "challenger_routes": [
+        {
+          "route": "skip learning after carrier refusal",
+          "evidence": [
+            "live before probe: no gap_recorded, no knowledge on audio/pdf gaps"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_learn_on_failure_carrier_seam_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "leaves the learn-on-failure loop severed",
+            "CAPABILITY_STRENGTH": "no gap signal reaches learning organs",
+            "WALL_CLOCK": "fast refusal but no useful next step",
+            "INCREMENTAL_COST": "zero code but permanent blind spot",
+            "RELIABILITY": "repeats the same failure forever",
+            "VERIFIABILITY": "cannot verify a repair it never records"
+          }
+        },
+        {
+          "route": "run named program --help or documentation-mined code",
+          "evidence": [
+            "old controller tail used subprocess.run([exe, '--help']) before admission"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_learn_on_failure_carrier_seam_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "executes host code without admitted confinement",
+            "CAPABILITY_STRENGTH": "may acquire a contract but grants authority",
+            "WALL_CLOCK": "extra subprocess and retry",
+            "INCREMENTAL_COST": "new authority surface",
+            "RELIABILITY": "unsafe under the boundary law",
+            "VERIFIABILITY": "help output is not a verified capability"
+          }
+        },
+        {
+          "route": "external sandbox package as authority",
+          "evidence": [
+            "https://pypi.org/project/maf-sandbox/0.54.0/",
+            "https://github.com/kubernetes-sigs/agent-sandbox/releases"
+          ],
+          "qualification_evidence": [
+            "PREREG_THE_CONFINEMENT_SEAM_20261112_V1.md"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "isolation is not effect-adoption authority",
+            "CAPABILITY_STRENGTH": "useful future carrier, not this read-only repair",
+            "WALL_CLOCK": "integration and backend setup dominate",
+            "INCREMENTAL_COST": "dependencies and possible spend",
+            "RELIABILITY": "experimental or deployment-owned policy",
+            "VERIFIABILITY": "does not prove Brain-owned admission"
+          }
+        }
+      ],
+      "negative_search_summary": "No external package or paper was found that grants Brain execution authority or replaces the owner's effect-adoption decision. The selected route reuses existing Brain organs and adds no model dependency.",
+      "unresolved_plausible_dominators": [],
+      "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-14T18:43:10Z",
+        "max_age_hours": 2,
+        "selected_route": "REPAIR_THE_READ_ONLY_LEARN_ON_FAILURE_SEAM_AND_DELETE_UNREACHABLE_EFFECTFUL_TIER_CODE",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest and the controller/ledger/JIT modules",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "producer ran compileall; final admission/JIT set 98 passed + 2 subtests; carrier/guard set 45 passed + 4 subtests; unified-model verifier 33/33 PASS after recompiling the artifact"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "GitHub read access for base commit and current main ref",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-11-14T18:43:10Z",
+            "evidence": [
+              "git ls-remote origin refs/heads/main returned fee45dc43f8c145db0776ce8e1f49e1ebf1b78d9 at 2026-11-14T18:43:10Z"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "existing ignorance ledger, JIT knowledge and memory-policy modules",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/tests/test_learn_on_failure_carrier_seam_v1.py exercises all three contracts"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "terminal": false,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "proof_state_reachability": "This repairs the read-only failure-signal path used by general capability work; it does not discharge a truth obligation.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "LEARN_ON_FAILURE_CARRIER_SEAM_20261114_V1",
+      "falsifier_id": "SEAM_SIX_TESTS_PLUS_LIVE_AUDIO_PDF_GAP_PROBES",
+      "decisive_question": "Can a real compile gap reach ledger/JIT without executing anything or granting authority?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "The live audio/pdf probes and six seam tests are the counterexamples to the old swallowed-gap path; no additional receipt file is created by this PR."
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "independent_verification_completed": false,
+    "commands": [
+      ".venv/bin/python -m pytest -q canonical/tests/test_learn_on_failure_carrier_seam_v1.py canonical/tests/test_jit_knowledge_v1.py canonical/tests/test_lesson_admission_gate_v1.py canonical/tests/test_lesson_admission_regression_v1.py canonical/tests/test_weight_space_fuel_v1.py canonical/tests/test_experience_corpus_training_readiness_v1.py",
+      ".venv/bin/python -m pytest -q canonical/tests/test_learn_on_failure_carrier_seam_v1.py canonical/tests/test_the_carrier_gate_does_not_eat_the_reason_v1.py canonical/tests/test_a_precise_refusal_is_not_replaced_by_a_generic_one_v1.py canonical/tests/test_compiled_cli_confinement_guard_v1.py canonical/tests/test_python_ast_query_transfer_v1.py",
+      ".venv/bin/python -m pytest -q canonical/tests/test_wake_sleep_recall_and_specialist_controller_v1.py",
+      ".venv/bin/python -m pytest -q canonical/tests/test_integrated_autonomous_loop_v1.py canonical/tests/test_computer_unconfined_route_guard_v1.py canonical/tests/test_live_route_memory_consult_v1.py",
+      ".venv/bin/python canonical/runtime/compile_brain_unified_model_v1.py",
+      ".venv/bin/python canonical/runtime/verify_brain_unified_model_v1.py",
+      ".venv/bin/python -m unittest canonical.tests.test_brain_unified_model_v1 canonical.tests.test_goal_compiler canonical.tests.test_goal_compiler_world_binding_v1",
+      ".venv/bin/python canonical/runtime/goal_compilation_benchmark_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py --self-test",
+      "python3 execution_guard/agent_orientation_check_v1.py verify"
+    ],
+    "results": {
+      "admission_jit_set": "98 passed, 2 subtests passed in 76.21s",
+      "carrier_guard_set": "45 passed, 4 subtests passed in 3.56s",
+      "wake_sleep_alone": "6 passed in 8.99s",
+      "known_remaining_failures": "4 failed, 30 passed, 5 subtests passed in 37.97s; the same three suites with the base controller: 6 failed, 28 passed, 5 subtests in 36.48s",
+      "unified_model_verify": "TOTAL 33/33 PASS, ARTIFACT_INTEGRITY 6/6 (random seed per run)",
+      "unified_model_unittest": "Ran 137 tests, OK",
+      "goal_compilation_benchmark": "combined 21/23 compiled, expected capability selected 19/23, 2 wrong-capability selections (pre-existing)",
+      "repo_integrity_self_test": "PASS",
+      "orientation_verify": "ok:true"
+    },
+    "remaining_failures": [
+      "test_integrated_autonomous_loop_v1 stale refusal premise (reproduced at base)",
+      "test_computer_unconfined_route_guard_v1 count-lines stale refusal premise (reproduced at base)",
+      "test_live_route_memory_consult_v1 ConsultationTests expects PASS__RAW_GOAL_COMPILED but the door returns the stronger executed-and-verified status (reproduced at base)",
+      "test_live_route_memory_consult_v1 test_a_goal_naming_a_real_program_is_attempted demands the unconfined --help attempt this PR removes; base64 misroute to pdf.extract.text.pypdf also real (reproduced at base)"
+    ]
+  }
+}
