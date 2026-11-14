@@ -1,0 +1,462 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "action_id": "AN_OUTCOME_KEEPS_THE_STATE_IT_HAPPENED_IN_20261114_V1",
+  "action_intent_id": "AN_OUTCOME_KEEPS_THE_STATE_IT_HAPPENED_IN_20261114_V1",
+  "date": "2026-11-14",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "cfb7947011d4f060d15b0165b8a679bff61bc0b0",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "causal_blocker": "THE_LIVE_DOOR_AND_CONTROLLER_RECORDED_MACRO_OUTCOMES_WITHOUT_THE_STATE_THEY_HAPPENED_IN_SO_APPLICABILITY_COULD_NEVER_LEAVE_UNDETERMINED_AND_ONE_SUCCESS_IDENTIFIED_ZERO_OF_TWO_HUNDRED_REQUIREMENTS",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LIVE_DOOR_AND_CONTROLLER_RECORDED_MACRO_OUTCOMES_WITHOUT_THE_STATE_THEY_HAPPENED_IN_SO_APPLICABILITY_COULD_NEVER_LEAVE_UNDETERMINED_AND_ONE_SUCCESS_IDENTIFIED_ZERO_OF_TWO_HUNDRED_REQUIREMENTS",
+  "intentional_route_race": false,
+  "action_kind": "GOVERNANCE_GUARD",
+  "governance_change": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "highest_leverage_now": true,
+  "explicit_user_authorization": [
+    "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
+    "you must think from first principles",
+    "kill all the bad and dumb ideas before you waste time implementing them",
+    "maximize your web use",
+    "NEVER BUILD BEFORE REASRCHING EXHASIATAION IS HAPPENED",
+    "We must build our own weights from scratch",
+    "the best part is no part",
+    "What is the single bottleneck that, if fixed, would unlock the most capability?",
+    "Work in branch, merge only when complete (fastest)",
+    "Merge once, not 10 times."
+  ],
+  "selected_route": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+  "route_id": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+  "prior_work_reused": [
+    "canonical/runtime/macro_v1.py",
+    "canonical/runtime/applicability_v1.py",
+    "canonical/runtime/contrast_selection_v1.py",
+    "canonical/runtime/chain_v1.py"
+  ],
+  "expected_parent_change": "Every live macro outcome retains the pre-state it happened in, and the door reports the boundary verdict plus the next discriminating contrast instead of only recorded:true.",
+  "expected_parent_frontier_change": "Every live macro outcome retains the pre-state it happened in, and the door reports the boundary verdict plus the next discriminating contrast instead of only recorded:true.",
+  "falsification_condition": "A live success writes no evidence row; or a bare failure is reported as an identified scope; or one success is reported as IDENTIFIED; or a repeated success in the same state claims information gain; or READ_ONLY writes evidence; or the pre-state is taken after side effects (circular requirement).",
+  "next_step": "Record the failure side at the earlier refusals; let a scheduler act on next_contrast; obtain the owner confinement/effect-adoption decision; only then consolidate identified evidence into weights.",
+  "stop_condition": "The information loss is closed and tested; the door reports its own ignorance precisely; no capability, family, terminal or weight credit is claimed.",
+  "terminal_credit_delta": 0,
+  "capability_credit_delta": 0,
+  "incremental_spend_usd": 0,
+  "scope_complete_discharge": false,
+  "truth": {
+    "achieved": false
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "before": "what_a_success_teaches_20261112.py on this tree: one success identifies 0/200 requirements, 13.05/32 hypotheses survive, 3.40 bits unresolved; the live store held 3 successes / 0 failures and no states.",
+    "after": "the live front door writes an evidence row carrying the observed pre-state facts and reports UNDETERMINED__NO_CONTRASTING_OUTCOME plus the discriminating facts, instead of only recorded:true.",
+    "instrument_contrast_regime": "chosen contrasts with failures identify 25/25 in a mean of 2.76 demonstrations, 0 wrong requirements",
+    "new_seam_suite": "8 passed with the fix; 3 failed, 5 passed with the context forwarding removed",
+    "affected_set": "1 failed, 71 passed; the single failure reproduced at base",
+    "known_remaining_failures": 1
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/forged_binding_and_macro_spine_v1.py",
+      "canonical/runtime/live_brain_route_admission_v1.py",
+      "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+      "canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py",
+      "WHAT_ONE_SUCCESS_CAN_AND_CANNOT_TEACH_20261114_V1.md"
+    ],
+    "route_class": "REUSE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "terminal_achieved": false,
+    "scope_complete_discharge": false
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 1,
+    "interpretation": "Speculative forecast only: repairing the read-only failure signal is the cheapest currently available prerequisite to verified general capability work. No obligation discharge, benchmark gain, capability credit or independent verification is claimed."
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "cfb7947011d4f060d15b0165b8a679bff61bc0b0",
+    "real_outcome": "A live outcome keeps the state it happened in, so the boundary learner can identify scope instead of guessing from one success.",
+    "required_capability": "State-carrying outcome evidence and honest reporting of an unidentified applicability boundary.",
+    "iteration_limit": 1,
+    "routes_considered": [
+      "DELETE the unreachable effectful tier block and reuse the existing read-only gap/JIT path at the refusal site",
+      "Leave the carrier refusal and skip learning entirely",
+      "Run documentation-mined code or a named program --help to acquire a CLI contract",
+      "Replace the boundary with a broader unconfined carrier",
+      "Install an external sandbox package and claim authority from the package"
+    ],
+    "deleted_or_bypassed_paths": [
+      "recording a macro outcome without its state (zero identifying information)",
+      "reporting recorded:true as if it meant the applicability scope was learned",
+      "taking the state after side effects, which would teach a circular requirement"
+    ],
+    "selected_route": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+    "selected_surviving_route": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+    "selected_surviving_route_class": "REUSE_AND_DELETE",
+    "why_selected_route_is_fastest_sufficient": "The existing ledger, JIT resolver and boundary already encode the needed contracts. The defect was control flow and false effect reporting. Deleting dead code and moving the read-only helper ahead of the refusal restores the signal without inventing a new learner or granting authority.",
+    "expected_parent_level_state_change": "Every live macro outcome retains the pre-state it happened in, and the door reports the boundary verdict plus the next discriminating contrast instead of only recorded:true.",
+    "stop_condition": "The information loss is closed and tested; the door reports its own ignorance precisely; no capability, family, terminal or weight credit is claimed.",
+    "obs_goal": {
+      "real_outcome": "A precise, learnable failure signal is available to the existing learning organs without executing anything new.",
+      "proxy_goals_deleted": [
+        "green suite by weakening guards",
+        "counting dead tiers as capability",
+        "running --help as knowledge"
+      ],
+      "surviving_necessity": "The system must know the exact hole before it can verify and admit a repair."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "ignorance_ledger_v1",
+        "jit_knowledge_v1",
+        "computer_execution_boundary_v1",
+        "memory_policy_v1"
+      ],
+      "external_existing_routes_checked": [
+        "FGSE falsification-gated admission",
+        "GRASP regression-budget acceptance",
+        "maf-sandbox / agent-sandbox isolation patterns"
+      ],
+      "capability_work_deleted": [
+        "unreachable tier2 effectful block",
+        "unconfined CLI help acquisition tail"
+      ],
+      "surviving_gap": "No admitted general effect carrier and no autonomous caller yet supplies real victim programs to the admission gate."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "path_specific control-flow defect; the broader admission/confinement gap remains intrinsic",
+      "delete_bypass_substitute_options": [
+        "delete dead code",
+        "reuse read-only helper",
+        "do not substitute an unconfined carrier"
+      ],
+      "surviving_causal_blocker": "Effect adoption and general computer execution still require an owner-authorized admitted confinement path."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "reuse read-only gap/JIT + delete dead effectful code",
+        "skip learning",
+        "run --help / documentation code",
+        "broaden unconfined carrier",
+        "external sandbox package as authority"
+      ],
+      "losing_routes_reason": "Skipping learning leaves the severed loop; running code or broadening the carrier grants authority; an external package does not verify Brain-owned admission or effect adoption.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Unit controls cover no-execution and READ_ONLY; live probes cover the real audio/pdf gaps; independent personnel reproduction remains open.",
+      "oracle_paths": [
+        "canonical/tests/test_learn_on_failure_carrier_seam_v1.py",
+        "canonical/tests/test_jit_knowledge_v1.py",
+        "canonical/tests/test_the_carrier_gate_does_not_eat_the_reason_v1.py",
+        "canonical/tests/test_compiled_cli_confinement_guard_v1.py"
+      ]
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "Any claim that the dead tier block was live capability; any --help acquisition path outside admitted confinement.",
+      "adjacent_capabilities_absorbed": "None. This repairs signal flow, not capability ownership.",
+      "fresh_reuse_plan": "Re-run the seam tests on the changed tree and the live audio/pdf gap probes; later reproduce independently."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Reused the existing admission-harm, fuel, readiness and confinement measurements rather than re-deriving them.",
+      "search_stop_decision": "Stop after the read-only seam and dead-code deletion are tested; do not build the effectful half without the owner's adoption decision.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-14T19:32:19Z",
+      "max_age_hours": 24,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/ignorance_ledger_v1.py",
+          "canonical/runtime/jit_knowledge_v1.py",
+          "canonical/runtime/computer_execution_boundary_v1.py",
+          "canonical/runtime/memory_policy_v1.py",
+          "PREREG_THE_CONFINEMENT_SEAM_20261112_V1.md"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2611.14326v1 (FGSE: temporary hypothesis + target-transfer/falsification/archived-regression before commit)",
+          "https://arxiv.org/abs/2605.29668 (GRASP: acceptance gate and hard regression budget, not skill writing alone)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://pypi.org/project/maf-sandbox/0.54.0/ (host chooses isolation/cleanup; experimental, not Brain authority)",
+          "https://github.com/kubernetes-sigs/agent-sandbox/releases (v1.0.11, isolation lifecycle, not admission authority)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/ThinkFlowLab/agentdescent/issues/938 (community adoption of falsification-gated lesson admission)",
+          "https://www.astaqc.com/software-testing-blog/sandbox-testing-autonomous-ai-agents-2026-validate-safe-execution-tool-boundaries (sandbox testing still requires explicit boundary/rollback validation)"
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "falsification gated skill self evolution regression held out admission arxiv 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "PyPI sandbox agent tool execution isolation package"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "agent sandbox effect adoption declared outputs rollback verification latest"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "GitHub agent sandbox verification regression gating framework latest release"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "incumbent_route": "live callers record macro outcomes without context, leaving applicability permanently UNDETERMINED",
+      "challenger_routes": [
+        {
+          "route": "skip learning after carrier refusal",
+          "evidence": [
+            "live before probe: no gap_recorded, no knowledge on audio/pdf gaps"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_learn_on_failure_carrier_seam_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "leaves the learn-on-failure loop severed",
+            "CAPABILITY_STRENGTH": "no gap signal reaches learning organs",
+            "WALL_CLOCK": "fast refusal but no useful next step",
+            "INCREMENTAL_COST": "zero code but permanent blind spot",
+            "RELIABILITY": "repeats the same failure forever",
+            "VERIFIABILITY": "cannot verify a repair it never records"
+          }
+        },
+        {
+          "route": "run named program --help or documentation-mined code",
+          "evidence": [
+            "old controller tail used subprocess.run([exe, '--help']) before admission"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_learn_on_failure_carrier_seam_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "executes host code without admitted confinement",
+            "CAPABILITY_STRENGTH": "may acquire a contract but grants authority",
+            "WALL_CLOCK": "extra subprocess and retry",
+            "INCREMENTAL_COST": "new authority surface",
+            "RELIABILITY": "unsafe under the boundary law",
+            "VERIFIABILITY": "help output is not a verified capability"
+          }
+        },
+        {
+          "route": "external sandbox package as authority",
+          "evidence": [
+            "https://pypi.org/project/maf-sandbox/0.54.0/",
+            "https://github.com/kubernetes-sigs/agent-sandbox/releases"
+          ],
+          "qualification_evidence": [
+            "PREREG_THE_CONFINEMENT_SEAM_20261112_V1.md"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY",
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "resolution": "NON_DOMINATING",
+          "comparison": {
+            "CORRECTNESS": "isolation is not effect-adoption authority",
+            "CAPABILITY_STRENGTH": "useful future carrier, not this read-only repair",
+            "WALL_CLOCK": "integration and backend setup dominate",
+            "INCREMENTAL_COST": "dependencies and possible spend",
+            "RELIABILITY": "experimental or deployment-owned policy",
+            "VERIFIABILITY": "does not prove Brain-owned admission"
+          }
+        }
+      ],
+      "negative_search_summary": "No external package or paper was found that grants Brain execution authority or replaces the owner's effect-adoption decision. The selected route reuses existing Brain organs and adds no model dependency.",
+      "unresolved_plausible_dominators": [],
+      "selected_route": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-14T19:32:19Z",
+        "max_age_hours": 2,
+        "selected_route": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest and the controller/ledger/JIT modules",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "producer ran the instrument and the new seam suite: 8 passed; defect re-introduced -> 3 failed"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "GitHub read access for base commit and current main ref",
+            "kind": "NETWORK_ENDPOINT",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "observed_at_utc": "2026-11-14T19:32:19Z",
+            "evidence": [
+              "git ls-remote origin refs/heads/main returned cfb7947011d4f060d15b0165b8a679bff61bc0b0 at 2026-11-14T19:32:19Z"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "existing macro_v1, applicability_v1, contrast_selection_v1 and chain_v1.precondition_context",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py exercises all four contracts"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "terminal": false,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4",
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "proof_state_reachability": "This repairs the read-only failure-signal path used by general capability work; it does not discharge a truth obligation.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "AN_OUTCOME_KEEPS_THE_STATE_IT_HAPPENED_IN_20261114_V1",
+      "falsifier_id": "EIGHT_SEAM_TESTS_PLUS_DEFECT_REINTRODUCTION_PLUS_LIVE_DOOR_PROBE",
+      "decisive_question": "Does a live outcome retain the state that lets a requirement be identified, and does the door refuse to call one success an identified scope?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [],
+      "no_known_counterexample_reason": "The live door probe and the eight seam tests are the counterexamples to the old context-dropping path; no new receipt file is created by this PR."
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "independent_verification_completed": false,
+    "commands": [
+      "python3 what_a_success_teaches_20261112.py",
+      ".venv/bin/python -m pytest -q canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py",
+      ".venv/bin/python -m pytest -q canonical/tests/test_an_outcome_keeps_the_state_it_happened_in_v1.py canonical/tests/test_a_chosen_contrast_teaches_what_repetition_cannot_v1.py canonical/tests/test_skill_scope_acquisition_v1.py canonical/tests/test_redundant_literals_are_not_ambiguity_v1.py canonical/tests/test_incremental_semantic_graph_and_swe_upgrades_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py --self-test",
+      "python3 execution_guard/agent_orientation_check_v1.py verify"
+    ],
+    "results": {
+      "instrument": "one success 0/200 identified; chosen contrasts 25/25 in mean 2.76; live store 3 successes / 0 failures",
+      "new_seam_suite": "8 passed in 0.27s",
+      "falsification_run": "context forwarding removed -> 3 failed, 5 passed",
+      "affected_set": "1 failed, 71 passed in 9.24s; same single failure at base"
+    },
+    "remaining_failures": [
+      "test_incremental_semantic_graph_and_swe_upgrades_v1::test_navigation_and_complexity_deliver_answers confinement refusal (reproduced at base)"
+    ]
+  }
+}

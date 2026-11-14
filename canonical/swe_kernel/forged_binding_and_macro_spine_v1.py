@@ -229,17 +229,76 @@ def record_verified_chain_macro(
     steps: Sequence[Mapping[str, Any]],
     *,
     state_path: str | pathlib.Path | None = None,
+    context=None,
 ) -> bool:
-    """Record a multi-clause plan where every step has `verified: True`."""
+    """Record a multi-clause plan where every step has `verified: True`.
+
+    `context` is the set of facts observed TRUE **before** the plan ran. It is
+    forwarded to `macro_v1.record`, which retains it as an evidence row. Without
+    it `macro_v1` writes no evidence at all, so `applicability` can never leave
+    `UNDETERMINED` and the boundary learner never receives anything it can use.
+    Measured by `what_a_success_teaches_20261112.py` on this tree: outcomes
+    without a discriminating state identify 0 of 200 hidden requirements, while
+    chosen contrasts identify 25 of 25 in a mean of 2.76 demonstrations. The
+    state is what carries that information; dropping it is not a simplification,
+    it is the deletion of the only signal that can identify a scope.
+
+    Omitted -> exactly the previous behaviour.
+    """
     from canonical.runtime import macro_v1
 
     orig = macro_v1.STATE
     try:
         if state_path is not None:
             macro_v1.STATE = pathlib.Path(state_path).resolve()
-        ok = bool(macro_v1.record(list(clauses), [dict(s) for s in steps]))
+        ok = bool(macro_v1.record(list(clauses), [dict(s) for s in steps], context=context))
         _MACRO_MEM_CACHE.clear()
         return ok
+    finally:
+        macro_v1.STATE = orig
+
+
+def verified_chain_learning_receipt(
+    clauses: Sequence[str],
+    *,
+    state_path: str | pathlib.Path | None = None,
+    context=None,
+) -> dict[str, Any]:
+    """What the retained evidence licenses, and which experience would teach the most.
+
+    Read-only. Executes nothing and changes nothing.
+
+    A caller that only reports "recorded: true" hides the difference between a
+    plan it may reuse anywhere and a plan whose applicability is still unknown.
+    This surfaces that difference at the door: the boundary verdict, and the
+    reachable state whose outcome would eliminate the most surviving
+    requirements (`macro_v1.next_contrast`). When no reachable state separates
+    them it names the facts that would have to differ, which is a request a
+    scheduler can satisfy rather than a guess.
+    """
+    from canonical.runtime import macro_v1
+
+    orig = macro_v1.STATE
+    try:
+        if state_path is not None:
+            macro_v1.STATE = pathlib.Path(state_path).resolve()
+        key = macro_v1.signature(list(clauses))
+        boundary = macro_v1.applicability(key)
+        pool = () if context is None else (context,)
+        contrast = macro_v1.next_contrast(key, pool)
+        return {
+            "schema": "PROJECT_BRAIN_CHAIN_LEARNING_RECEIPT_V1",
+            "macro_key": key,
+            "applicability": boundary.as_row(),
+            "next_contrast": contrast.as_row(),
+            "authority": "NONE",
+        }
+    except Exception as exc:  # a learning report must never break a served answer
+        return {
+            "schema": "PROJECT_BRAIN_CHAIN_LEARNING_RECEIPT_V1",
+            "error": f"{type(exc).__name__}:{str(exc)[:160]}",
+            "authority": "NONE",
+        }
     finally:
         macro_v1.STATE = orig
 

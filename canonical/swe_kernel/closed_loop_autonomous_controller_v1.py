@@ -1882,6 +1882,20 @@ def execute_and_elevate_confined_trajectory(
     if not steps_list:
         return {"schema": SCHEMA, "ok": False, "pass": False, "confined": False, "reason": "NO_TRAJECTORY_STEPS"}
 
+    # Snapshot the state BEFORE the first command runs. An outcome recorded
+    # without the state it happened in cannot identify where the plan applies;
+    # it can only count for or against the plan everywhere. The facts come from
+    # the same sanctioned probe organ `chain_v1` uses, which refuses the effects
+    # the plan itself produces. Undecidable facts stay absent, never guessed.
+    _preconditions = None
+    if can_write_memory():
+        try:
+            from canonical.runtime.chain_v1 import precondition_context as _pre_ctx
+
+            _preconditions = _pre_ctx(clauses, ws, goal)
+        except Exception:
+            _preconditions = None
+
     executed_cmds: list[str] = []
     changed_union: set[str] = set()
     for step_cmd in steps_list:
@@ -1894,7 +1908,7 @@ def execute_and_elevate_confined_trajectory(
                 orig_st = macro_v1.STATE
                 try:
                     macro_v1.STATE = macro_state_p
-                    macro_v1.note_failure(str(recalled_hit["key"]))
+                    macro_v1.note_failure(str(recalled_hit["key"]), context=_preconditions)
                 finally:
                     macro_v1.STATE = orig_st
             return {
@@ -1945,7 +1959,9 @@ def execute_and_elevate_confined_trajectory(
                 {"capability_id": f"confined_cmd:{c}", "verified": True} for c in executed_cmds
             ]
             # Preserve `pending_instances` across `macro_v1.record`
-            macro_saved = record_verified_chain_macro(clauses, macro_steps, state_path=macro_state_p)
+            macro_saved = record_verified_chain_macro(
+                clauses, macro_steps, state_path=macro_state_p, context=_preconditions,
+            )
             after_doc = json.loads(macro_state_p.read_text(encoding="utf-8"))
             after_doc["pending_instances"] = pending
             macro_state_p.write_text(json.dumps(after_doc, indent=1, sort_keys=True) + "\n", encoding="utf-8")
