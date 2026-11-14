@@ -1,0 +1,472 @@
+{
+ "action_id": "CHOOSING_WHAT_TO_LEARN_FROM_IS_MEASURED_AND_TIES_20261114_V1",
+ "action_intent_id": "CHOOSING_WHAT_TO_LEARN_FROM_IS_MEASURED_AND_TIES_20261114_V1",
+ "action_kind": "RECONCILE_FRONTIER",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "WHAT_ONE_SUCCESS_CAN_AND_CANNOT_TEACH_20261114_V1.md",
+   "canonical/runtime/demonstration_version_space_v1.py",
+   "canonical/runtime/systematic_exploration_v1.py",
+   "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+   "canonical/tests/test_systematic_exploration_v1.py",
+   "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+   "canonical/verification/CHOOSING_WHAT_TO_LEARN_FROM_MEASURED_20261114_V1.json",
+   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+  ],
+  "route_class": "REUSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::IT_WAS_NOT_KNOWN_WHETHER_SPENDING_DEMONSTRATIONS_ON_THE_INSTANCES_WHERE_SURVIVING_HYPOTHESES_DISAGREE_BUYS_MORE_CAPABILITY_THAN_ACCEPTING_THEM_AND_THE_RANKED_NEXT_STEP_DEPENDED_ON_THE_ANSWER",
+ "canonical_base_commit": "34b0134985a00c1a10bd39f77b3f94e7f5d204f4",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "IT_WAS_NOT_KNOWN_WHETHER_SPENDING_DEMONSTRATIONS_ON_THE_INSTANCES_WHERE_SURVIVING_HYPOTHESES_DISAGREE_BUYS_MORE_CAPABILITY_THAN_ACCEPTING_THEM_AND_THE_RANKED_NEXT_STEP_DEPENDED_ON_THE_ANSWER",
+ "date": "2026-11-14",
+ "expected_parent_change": "The instrument can offer both practice arms the same pool and the same demonstration budget, and report what choosing cost beside what it bought. On 92 real held-out MiniWoB++ tasks at 20 scored episodes, choosing scored 0.6987 against accepting 0.7038 (0.6557 against 0.6614 where replay is not enough), two tasks each way, for 360 extra page reads. The theory-recommended policy of declining unanimous instances scored 0.6588 while spending 55 demonstrations instead of 120.",
+ "expected_parent_frontier_change": "The instrument can offer both practice arms the same pool and the same demonstration budget, and report what choosing cost beside what it bought. On 92 real held-out MiniWoB++ tasks at 20 scored episodes, choosing scored 0.6987 against accepting 0.7038 (0.6557 against 0.6614 where replay is not enough), two tasks each way, for 360 extra page reads. The theory-recommended policy of declining unanimous instances scored 0.6588 while spending 55 demonstrations instead of 120.",
+ "explicit_user_authorization": [
+  "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
+  "you must think from first principles",
+  "kill all the bad and dumb ideas before you waste time implementing them",
+  "maximize your web use",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATAION IS HAPPENED",
+  "We must build our own weights from scratch",
+  "the best part is no part",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "Choosing beats accepting by more than noise at an equal demonstration budget on the held-out split; or the four untouched arms fail to reproduce the merged receipt; or restoring the veto leaves the regression test passing; or removing the ranking leaves the ordering tests passing.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only: repairing the read-only failure signal is the cheapest currently available prerequisite to verified general capability work. No obligation discharge, benchmark gain, capability credit or independent verification is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "after": "Choosing three of nine scored 0.6557 against accepting 0.6614: a tie, two tasks better and two worse, for 360 extra page reads. Declining unanimous instances scored 0.6100 with 54% fewer demonstrations.",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "before": "One success scored 0.6000 where replay is not enough; accepting three further demonstrations scored 0.6614. Whether choosing them helped was unknown.",
+  "ceiling": "52 of 92 held-out tasks are never demonstrated once; median acquisition spend on the never-demonstrated tasks is 565 of 1500 actions.",
+  "not_claimed": "The full guided-search run stopped at 41 of 92 and no aggregate is claimed from it. A five-episode probe suggesting a demonstration-quality gain vanished at equal twenty episodes and is not claimed.",
+  "reproduction": "random 0.1525, verbatim 0.2562, existing_compiler 0.2900, version_space 0.6500 -- identical to the merged receipt to four decimals in both runs."
+ },
+ "next_step": "Get a first success on the 36 of 92 held-out tasks that never produce one, on a substrate with real geometry and a search that uses the whole hand; record the failure side at earlier refusals; obtain the owner confinement decision; only then consolidate weights.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/runtime/demonstration_version_space_v1.py",
+  "canonical/runtime/contrast_selection_v1.py",
+  "canonical/runtime/systematic_exploration_v1.py",
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py"
+ ],
+ "probe_specific": false,
+ "progress_evidence_paths": [
+  "WHAT_ONE_SUCCESS_CAN_AND_CANNOT_TEACH_20261114_V1.md",
+  "canonical/runtime/demonstration_version_space_v1.py",
+  "canonical/runtime/systematic_exploration_v1.py",
+  "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+  "canonical/tests/test_systematic_exploration_v1.py",
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+  "canonical/verification/CHOOSING_WHAT_TO_LEARN_FROM_MEASURED_20261114_V1.json",
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+ ],
+ "recursive_obs": {
+  "canonical_base_commit": "34b0134985a00c1a10bd39f77b3f94e7f5d204f4",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the veto on unanimous instances, deleted after the real benchmark refuted it; a regression test fails if it returns",
+   "the hand-tier ladder change, reverted rather than kept because it redefined a pinned baseline",
+   "writing any new explorer, generaliser, contrast selector or benchmark"
+  ],
+  "expected_parent_level_state_change": "The instrument can offer both practice arms the same pool and the same demonstration budget, and report what choosing cost beside what it bought. On 92 real held-out MiniWoB++ tasks at 20 scored episodes, choosing scored 0.6987 against accepting 0.7038 (0.6557 against 0.6614 where replay is not enough), two tasks each way, for 360 extra page reads. The theory-recommended policy of declining unanimous instances scored 0.6588 while spending 55 demonstrations instead of 120.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the veto the benchmark refuted",
+    "reuse the existing instrument and explorer",
+    "do not substitute a new benchmark"
+   ],
+   "intrinsic_or_path_specific": "path_specific: an unmeasured ranking decision; the intrinsic coverage gap on 52 of 92 tasks remains",
+   "surviving_causal_blocker": "Getting a first success at all on the 36 held-out tasks that never produce one, on a substrate with real geometry, and the owner-authorized confinement path for general computer execution."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "unreachable tier2 effectful block",
+    "unconfined CLI help acquisition tail"
+   ],
+   "existing_inherited_routes_checked": [
+    "ignorance_ledger_v1",
+    "jit_knowledge_v1",
+    "computer_execution_boundary_v1",
+    "memory_policy_v1"
+   ],
+   "external_existing_routes_checked": [
+    "FGSE falsification-gated admission",
+    "GRASP regression-budget acceptance",
+    "maf-sandbox / agent-sandbox isolation patterns"
+   ],
+   "surviving_gap": "No admitted general effect carrier and no autonomous caller yet supplies real victim programs to the admission gate."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "green suite by weakening guards",
+    "counting dead tiers as capability",
+    "running --help as knowledge"
+   ],
+   "real_outcome": "A precise, learnable failure signal is available to the existing learning organs without executing anything new.",
+   "surviving_necessity": "The system must know the exact hole before it can verify and admit a repair."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None. This repairs signal flow, not capability ownership.",
+   "downstream_work_to_delete_or_supersede": "Any claim that the dead tier block was live capability; any --help acquisition path outside admitted confinement.",
+   "fresh_reuse_plan": "Re-run the seam tests on the changed tree and the live audio/pdf gap probes; later reproduce independently."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the existing admission-harm, fuel, readiness and confinement measurements rather than re-deriving them.",
+   "search_stop_decision": "Stop after the read-only seam and dead-code deletion are tested; do not build the effectful half without the owner's adoption decision."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Declining unanimous instances was measured and lost 4.5 points because a committee cannot vote on a hypothesis none of its members holds. Widening the blind ladder redefines a pinned baseline. The guided search did not finish the split in session. A new scheduler and benchmark would rebuild organs that already exist and would still not answer the question the real split answers.",
+   "routes_ranked": [
+    "reuse the existing instrument and measure choosing against accepting at an equal budget",
+    "decline unanimous instances",
+    "widen the blind ladder to the hand",
+    "switch the whole split to the guided search",
+    "write a new scheduler and benchmark"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+    "canonical/tests/test_miniwob_one_success_generalisation_v1.py",
+    "canonical/tests/test_systematic_exploration_v1.py",
+    "canonical/verification/CHOOSING_WHAT_TO_LEARN_FROM_MEASURED_20261114_V1.json"
+   ],
+   "synthetic_verification_necessity": "Stub pages guard the mechanism only and are labelled as not capability evidence. The capability question is answered by the real MiniWoB++ held-out split, scored by the page's own reward. Independent personnel reproduction remains open."
+  },
+  "real_outcome": "The instrument can offer both practice arms the same pool and the same demonstration budget, and report what choosing cost beside what it bought. On 92 real held-out MiniWoB++ tasks at 20 scored episodes, choosing scored 0.6987 against accepting 0.7038 (0.6557 against 0.6614 where replay is not enough), two tasks each way, for 360 extra page reads. The theory-recommended policy of declining unanimous instances scored 0.6588 while spending 55 demonstrations instead of 120.",
+  "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no gap signal reaches learning organs",
+      "CORRECTNESS": "leaves the learn-on-failure loop severed",
+      "INCREMENTAL_COST": "zero code but permanent blind spot",
+      "RELIABILITY": "repeats the same failure forever",
+      "VERIFIABILITY": "cannot verify a repair it never records",
+      "WALL_CLOCK": "fast refusal but no useful next step"
+     },
+     "evidence": [
+      "live before probe: no gap_recorded, no knowledge on audio/pdf gaps"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_learn_on_failure_carrier_seam_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "skip learning after carrier refusal"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "may acquire a contract but grants authority",
+      "CORRECTNESS": "executes host code without admitted confinement",
+      "INCREMENTAL_COST": "new authority surface",
+      "RELIABILITY": "unsafe under the boundary law",
+      "VERIFIABILITY": "help output is not a verified capability",
+      "WALL_CLOCK": "extra subprocess and retry"
+     },
+     "evidence": [
+      "old controller tail used subprocess.run([exe, '--help']) before admission"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_learn_on_failure_carrier_seam_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "run named program --help or documentation-mined code"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "useful future carrier, not this read-only repair",
+      "CORRECTNESS": "isolation is not effect-adoption authority",
+      "INCREMENTAL_COST": "dependencies and possible spend",
+      "RELIABILITY": "experimental or deployment-owned policy",
+      "VERIFIABILITY": "does not prove Brain-owned admission",
+      "WALL_CLOCK": "integration and backend setup dominate"
+     },
+     "evidence": [
+      "https://pypi.org/project/maf-sandbox/0.54.0/",
+      "https://github.com/kubernetes-sigs/agent-sandbox/releases"
+     ],
+     "qualification_evidence": [
+      "PREREG_THE_CONFINEMENT_SEAM_20261112_V1.md"
+     ],
+     "qualification_evidence_classes": [
+      "OFFICIAL_PRIMARY",
+      "CODE_OR_PACKAGE_REGISTRY"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "external sandbox package as authority"
+    }
+   ],
+   "checked_at_utc": "2026-11-14T19:32:19Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "live callers record macro outcomes without context, leaving applicability permanently UNDETERMINED",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external package or paper was found that grants Brain execution authority or replaces the owner's effect-adoption decision. The selected route reuses existing Brain organs and adds no model dependency.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "falsification gated skill self evolution regression held out admission arxiv 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "PyPI sandbox agent tool execution isolation package"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "agent sandbox effect adoption declared outputs rollback verification latest"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "GitHub agent sandbox verification regression gating framework latest release"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "MEASURE_ACTIVE_INSTANCE_SELECTION_AGAINST_ACCEPTING_AT_AN_EQUAL_DEMONSTRATION_BUDGET_ON_THE_REAL_HELD_OUT_SPLIT",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-14T22:07:24Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest, node 22 and jsdom for the real benchmark bridge",
+      "evidence": [
+       "producer ran the two affected suites on this tree: 205 passed, 27 skipped; each falsifier re-introduced fails 1, 2 and 3 tests respectively"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "GitHub read access for the base commit and the current main ref",
+      "evidence": [
+       "git ls-remote origin refs/heads/main returned 34b0134985a00c1a10bd39f77b3f94e7f5d204f4 at 2026-11-14T22:07:24Z"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-14T22:07:24Z",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "the real MiniWoB++ task pages and the existing instrument, bridge, learner and explorer",
+      "evidence": [
+       "130 upstream task pages fetched from codeload refs/heads/main; 92 in the held-out split; both complete runs scored 800 episodes per arm at 0 model calls"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_ACTIVE_INSTANCE_SELECTION_AGAINST_ACCEPTING_AT_AN_EQUAL_DEMONSTRATION_BUDGET_ON_THE_REAL_HELD_OUT_SPLIT",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/ignorance_ledger_v1.py",
+     "canonical/runtime/jit_knowledge_v1.py",
+     "canonical/runtime/computer_execution_boundary_v1.py",
+     "canonical/runtime/memory_policy_v1.py",
+     "PREREG_THE_CONFINEMENT_SEAM_20261112_V1.md"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/ThinkFlowLab/agentdescent/issues/938 (community adoption of falsification-gated lesson admission)",
+     "https://www.astaqc.com/software-testing-blog/sandbox-testing-autonomous-ai-agents-2026-validate-safe-execution-tool-boundaries (sandbox testing still requires explicit boundary/rollback validation)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/project/maf-sandbox/0.54.0/ (host chooses isolation/cleanup; experimental, not Brain authority)",
+     "https://github.com/kubernetes-sigs/agent-sandbox/releases (v1.0.11, isolation lifecycle, not admission authority)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2611.14326v1 (FGSE: temporary hypothesis + target-transfer/falsification/archived-regression before commit)",
+     "https://arxiv.org/abs/2605.29668 (GRASP: acceptance gate and hard regression budget, not skill writing alone)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "REUSE the existing instrument and learner; offer both practice arms the same pool and budget and measure choosing against accepting",
+   "Decline instances where the committee is unanimous (textbook query-by-committee) -- built, measured, refuted at 0.6588 against 0.7038",
+   "Add the hand tier to the blind acquisition ladder -- built then reverted; two tests pin blind as press-and-type only",
+   "Use the existing guided search that already offers the whole hand -- identical scores at equal episodes; full split unfinished",
+   "Write a new active-learning scheduler and a new benchmark for it"
+  ],
+  "selected_route": "RETAIN_THE_PRE_STATE_OF_EVERY_LIVE_MACRO_OUTCOME_AND_SURFACE_THE_NEXT_CONTRAST",
+  "selected_surviving_route": "MEASURE_ACTIVE_INSTANCE_SELECTION_AGAINST_ACCEPTING_AT_AN_EQUAL_DEMONSTRATION_BUDGET_ON_THE_REAL_HELD_OUT_SPLIT",
+  "selected_surviving_route_class": "REUSE_AND_DELETE",
+  "stop_condition": "The selection question is answered by measurement on real held-out tasks, the refuted policy is kept only as a labelled control, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "The instrument already scores both practice arms on the real held-out split; offering them the same pool and the same demonstration budget is the smallest change that answers the question, and it needs no new environment, no model and no new benchmark."
+ },
+ "route_id": "MEASURE_ACTIVE_INSTANCE_SELECTION_AGAINST_ACCEPTING_AT_AN_EQUAL_DEMONSTRATION_BUDGET_ON_THE_REAL_HELD_OUT_SPLIT",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASURE_ACTIVE_INSTANCE_SELECTION_AGAINST_ACCEPTING_AT_AN_EQUAL_DEMONSTRATION_BUDGET_ON_THE_REAL_HELD_OUT_SPLIT",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "The selection question is answered by measurement on real held-out tasks, the refuted policy is kept only as a labelled control, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This repairs the read-only failure-signal path used by general capability work; it does not discharge a truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does a live outcome retain the state that lets a requirement be identified, and does the door refuse to call one success an identified scope?",
+   "falsifier_id": "EIGHT_SEAM_TESTS_PLUS_DEFECT_REINTRODUCTION_PLUS_LIVE_DOOR_PROBE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The live door probe and the eight seam tests are the counterexamples to the old context-dropping path; no new receipt file is created by this PR.",
+   "proposal_id": "AN_OUTCOME_KEEPS_THE_STATE_IT_HAPPENED_IN_20261114_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/miniwob_one_success_generalisation_measure_v1.py --html-dir <MiniWoB++>/miniwob/html --node-modules-dir <nodemods> --substrate jsdom --only-split held_out --test-episodes 20 --action-budget 1500 --practice-episodes 3 --practice-pool 9 --arms random verbatim existing_compiler version_space version_space_blind version_space_practice version_space_active --out <file>",
+   ".venv/bin/python -m pytest canonical/tests/test_miniwob_one_success_generalisation_v1.py canonical/tests/test_systematic_exploration_v1.py -q"
+  ],
+  "independent_verification_completed": false,
+  "remaining_failures": [
+   "test_incremental_semantic_graph_and_swe_upgrades_v1::test_navigation_and_complexity_deliver_answers confinement refusal (reproduced at base)",
+   "chromium substrate run on the same split did not complete in-session (7/92 tasks); no partial number is claimed"
+  ],
+  "results": {
+   "affected_set": "1 failed, 71 passed in 9.24s; same single failure at base",
+   "falsification_run": "context forwarding removed -> 3 failed, 5 passed",
+   "instrument": "one success 0/200 identified; chosen contrasts 25/25 in mean 2.76; live store 3 successes / 0 failures",
+   "new_seam_suite": "8 passed in 0.27s",
+   "open_benchmark_held_out": "92 real tasks; 40 demonstrated; one success 60.0% vs cache 15.0% vs existing compiler 18.9% vs random 8.1% on the 35 tasks needing generalisation; 0 model calls, $0"
+  }
+ },
+ "weakens_existing_guard": false
+}

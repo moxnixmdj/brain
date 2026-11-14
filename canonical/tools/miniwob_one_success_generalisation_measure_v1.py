@@ -56,6 +56,19 @@ Arms
                        the skill as it stands; when the page says no it explores that instance
                        for a success. Only page-rewarded traces are ever added, and the
                        exploration it costs is reported.
+    version_space_active
+                       the SAME number of demonstrations, but chosen. Both practice arms are
+                       offered the same pool (--practice-pool). Accepting takes the first
+                       --practice-episodes in arrival order. Choosing first READS every page on
+                       offer -- a load and a reset, no action, no exploration, no reward -- asks
+                       the surviving hypotheses what each would do there, and spends its
+                       demonstrations largest disagreement first. Agreement lowers priority and
+                       never vetoes: an earlier version that declined unanimous instances spent
+                       55 demonstrations instead of 120 and scored 0.6588 against 0.7038,
+                       because a committee cannot vote on a hypothesis none of its members
+                       holds. MEASURED OUTCOME: a tie (0.6987 against 0.7038, two tasks each
+                       way). This arm is kept as the control that refutes the claim, not as an
+                       improvement.
 
 What a number here is not
 -------------------------
@@ -1023,7 +1036,8 @@ def page_gate(bridge: Any, task: str, seeds: Sequence[int]) -> dict[str, Any]:
     return {"stage": None, "distinct_instances_in_gate": len(set(first.values()))}
 
 
-ARM_NAMES = ("random", "verbatim", "existing_compiler", "version_space", "version_space_blind", "version_space_practice")
+ARM_NAMES = ("random", "verbatim", "existing_compiler", "version_space", "version_space_blind", "version_space_practice",
+             "version_space_active")
 
 
 def keep_skills(skills_dir: str | None, task: str, arm_name: str, arm: Any) -> None:
@@ -1049,7 +1063,7 @@ def kept_skills(skills_dir: str) -> dict[str, dict[str, Any]]:
 
 def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_budget: int,
                  arm_names: Sequence[str], practice: Sequence[int] = (), search: str = "blind",
-                 skills_dir: str | None = None) -> dict[str, Any]:
+                 skills_dir: str | None = None, practice_budget: int | None = None) -> dict[str, Any]:
     if any(name not in ARM_NAMES for name in arm_names):
         raise ValueError("ARM_UNKNOWN")
     row: dict[str, Any] = {"task": task, "split": split_of(task)}
@@ -1099,8 +1113,11 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
             else:
                 arm = build_version_space_arm(bridge, task, trace, practice=practice,
                                               action_budget=action_budget, tier=int(acquired["tier"] or 0),
-                                              search=search)
-            if name in ("version_space", "version_space_practice"):
+                                              search=search,
+                                              select_practice=(name == "version_space_active"),
+                                              practice_budget=(len(practice) if practice_budget is None
+                                                               else int(practice_budget)))
+            if name in ("version_space", "version_space_practice", "version_space_active"):
                 keep_skills(skills_dir, task, name, arm)
             scored = score_arm(bridge, task, arm, test_seeds)
             for key in ("parameters", "learning"):
@@ -1124,10 +1141,12 @@ def measure_task(bridge: Any, task: str, *, test_seeds: Sequence[int], action_bu
 
 
 def build_version_space_arm(bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any], str]], *,
-                            practice: Sequence[int], action_budget: int, tier: int, search: str = "blind") -> Any:
+                            practice: Sequence[int], action_budget: int, tier: int, search: str = "blind",
+                            select_practice: bool = False, practice_budget: int | None = None) -> Any:
     from canonical.runtime import demonstration_version_space_v1 as learner
     return learner.build_arm(bridge=bridge, task=task, trace=trace, practice_seeds=list(practice),
-                             action_budget=action_budget, tier=tier, tool=sys.modules[__name__], search=search)
+                             action_budget=action_budget, tier=tier, tool=sys.modules[__name__], search=search,
+                             select_practice=select_practice, practice_budget=practice_budget)
 
 
 # --------------------------------------------------------------------------- #
@@ -1328,6 +1347,37 @@ def summarise(rows: Sequence[Mapping[str, Any]], arm_names: Sequence[str]) -> di
                 "of_which_still_succeed_although_the_instruction_changes": len(unexplained),
                 "tasks_that_succeed_without_an_instruction_that_changes": unexplained,
             }
+        if "version_space_practice" in arm_names and "version_space_active" in arm_names:
+            # What choosing cost and what it bought, beside accepting the same offer. Both
+            # spend the same demonstrations; choosing also reads pages before it decides, and
+            # that cost is printed rather than hidden.
+            pairs = [r for r in demonstrated if "version_space_practice" in r["arms"]
+                     and "version_space_active" in r["arms"]]
+            spent_p = spent_a = offered = unanimous = inspected = 0
+            for row in pairs:
+                lp = row["arms"]["version_space_practice"].get("learning") or {}
+                la = row["arms"]["version_space_active"].get("learning") or {}
+                spent_p += int(lp.get("practice_instances_used") or 0)
+                spent_a += int(la.get("practice_instances_used") or 0)
+                offered += int(la.get("practice_instances") or 0)
+                inspected += int(la.get("pages_inspected_to_choose") or 0)
+                unanimous += int(la.get("practice_unanimous_offered") or 0)
+            block["choosing_versus_accepting_at_an_equal_budget"] = {
+                "tasks_compared": len(pairs),
+                "instances_offered_to_each_arm": offered,
+                "pages_read_before_choosing": inspected,
+                "demonstrations_spent_accepting": spent_p,
+                "demonstrations_spent_choosing": spent_a,
+                "unanimous_instances_offered_not_vetoed": unanimous,
+                "mean_success_accepting": round(sum(
+                    r["arms"]["version_space_practice"]["success_rate"] for r in pairs) / max(1, len(pairs)), 4),
+                "mean_success_choosing": round(sum(
+                    r["arms"]["version_space_active"]["success_rate"] for r in pairs) / max(1, len(pairs)), 4),
+                "tasks_choosing_wins": sum(1 for r in pairs if r["arms"]["version_space_active"]["success_rate"]
+                                           > r["arms"]["version_space_practice"]["success_rate"]),
+                "tasks_choosing_loses": sum(1 for r in pairs if r["arms"]["version_space_active"]["success_rate"]
+                                            < r["arms"]["version_space_practice"]["success_rate"]),
+            }
         for name in arm_names:
             scored = [r["arms"][name] for r in demonstrated if name in r["arms"]]
             beyond = [r["arms"][name] for r in demonstrated if name in r["arms"] and r["task"] not in replay_enough]
@@ -1373,18 +1423,20 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
         action_budget: int, arm_names: Sequence[str], practice_episodes: int = 0,
         progress: Callable[[str], None] | None = None, substrate: str = "jsdom",
         search: str = "blind", skills_dir: str | None = None, rows_path: str | None = None,
-        first_test_seed: int | None = None) -> dict[str, Any]:
+        first_test_seed: int | None = None, practice_pool: int = 0) -> dict[str, Any]:
     if search not in SEARCHES:
         raise ValueError("SEARCH_UNKNOWN")
     names = list(tasks) if tasks else list_tasks(html_dir)
-    test_seeds, practice = seed_plan(test_episodes, practice_episodes, first_test_seed)
+    pool = max(int(practice_episodes), int(practice_pool or 0))
+    test_seeds, practice = seed_plan(test_episodes, pool, first_test_seed)
     bridge = Bridge(html_dir, node_modules_dir, substrate=substrate)
     try:
         versions = bridge.versions()
         rows = []
         for name in names:
             row = measure_task(bridge, name, test_seeds=test_seeds, action_budget=action_budget,
-                               arm_names=arm_names, practice=practice, search=search, skills_dir=skills_dir)
+                               arm_names=arm_names, practice=practice, search=search, skills_dir=skills_dir,
+                               practice_budget=int(practice_episodes))
             rows.append(row)
             if rows_path:                       # a run that dies later keeps what it had finished
                 with open(rows_path, "a") as handle:
@@ -1410,6 +1462,7 @@ def run(html_dir: str, node_modules_dir: str, *, tasks: Sequence[str] | None, te
         },
         "parameters": {
             "demonstration_seed": DEMO_SEED, "test_seeds": test_seeds, "practice_seeds": practice,
+            "practice_pool_offered": len(practice), "practice_demonstrations_budget": int(practice_episodes),
             "acquisition_action_budget": int(action_budget), "first_success_search": search,
             "max_episode_steps": MAX_EPISODE_STEPS,
             "exploration_time_limit_ms": EXPLORATION_TIME_LIMIT_MS,
@@ -1507,11 +1560,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--test-episodes", type=int, default=20)
     parser.add_argument("--first-test-seed", type=int, default=None,
                         help=f"score on instances from this seed on (default {FIRST_TEST_SEED}); use ones nobody has looked at")
-    parser.add_argument("--practice-episodes", type=int, default=3, help="extra instances the version_space_practice arm learns from")
+    parser.add_argument("--practice-episodes", type=int, default=3, help="demonstrations each practice arm may spend")
+    parser.add_argument("--practice-pool", type=int, default=0,
+                        help="instances offered to BOTH practice arms (default: same as --practice-episodes). "
+                             "Larger than the budget, this is what makes choosing possible: accepting takes the "
+                             "first --practice-episodes, choosing reads them all and takes the most informative.")
     parser.add_argument("--action-budget", type=int, default=1500)
     parser.add_argument("--arms", nargs="*",
                         default=["random", "verbatim", "existing_compiler", "version_space", "version_space_blind",
-                                 "version_space_practice"])
+                                 "version_space_practice", "version_space_active"])
     parser.add_argument("--out", help="write the full result here")
     parser.add_argument("--save-skills", help="directory to keep every learned skill in (one file per task and arm)")
     parser.add_argument("--digest-from", nargs="+",
@@ -1550,7 +1607,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                  action_budget=args.action_budget, arm_names=args.arms, practice_episodes=args.practice_episodes,
                  progress=lambda line: print(line, flush=True), substrate=args.substrate, search=args.search,
                  skills_dir=args.save_skills, rows_path=(args.out + ".rows.jsonl") if args.out else None,
-                 first_test_seed=args.first_test_seed)
+                 first_test_seed=args.first_test_seed, practice_pool=args.practice_pool)
     if args.out:
         pathlib.Path(args.out).write_text(json.dumps(result, indent=1, sort_keys=True))
     print(json.dumps(result["summary"], indent=1, sort_keys=True))

@@ -932,6 +932,99 @@ class VersionSpaceSkill:
             return None
         return self._action(step, Page(observation))
 
+    def _proposals(self, step: int, page: Page, cap: int) -> set[str]:
+        """Every action the surviving hypotheses propose for one step on one real page.
+
+        Mirrors `_action` survivor by survivor instead of taking the first that applies. The
+        SET_STEP slice matches `_action` exactly, so this cannot report a disagreement the
+        executor would never exhibit.
+        """
+        kind = self.kinds[step]
+        actions: set[str] = set()
+        if kind == WAIT_STEP:
+            for expression in self._texts[step]:
+                text = evaluate(expression, page)
+                if text is not None and _word_fits(kind, text):
+                    actions.add(f"{WAIT_STEP}={text}")
+                if len(actions) >= cap:
+                    break
+            return actions
+        if kind == SET_STEP:
+            for description in self._targets[step][:1]:
+                for target in matches(description, page):
+                    if page.elements[target].get("can_click"):
+                        actions.add(f"click@{target}")
+                        break
+            return actions
+        flag = "can_type" if kind == "type" else "can_click"
+        for description in self._targets[step]:
+            target = pick(description, page)
+            if target is None or not page.elements[target].get(flag):
+                continue
+            if kind in AT_AN_ELEMENT:
+                actions.add(f"{kind}@{target}")
+            else:
+                for expression in self._texts[step]:
+                    text = evaluate(expression, page)
+                    if text is not None and _word_fits(kind, text):
+                        actions.add(f"{kind}@{target}={text}")
+                        break
+            if len(actions) >= cap:
+                break
+        return actions
+
+    def disagreement(self, observation: Mapping[str, Any], *, cap: int = 256) -> dict[str, Any]:
+        """What the surviving hypotheses cannot yet decide, on a page the environment offered.
+
+        `_action` takes the first survivor that applies and so answers silently. This asks the
+        whole committee. Two different questions are kept apart, because only one of them can
+        be answered honestly from a single page:
+
+        GUARANTEED -- at the step that would act next, the proposals are computed on the page
+        that is really in front of us. If they differ, some hypothesis must die whatever the
+        page says next. If they agree, trying that action cannot be guaranteed to eliminate
+        anything when it works.
+
+        PREDICTED -- later steps are also read on this page. Their elements may change before
+        the program reaches them, so a split seen there is a forecast used only to rank
+        instances, never a claim. Ignoring later steps entirely would throw away the instances
+        whose ambiguity is deeper than the first click, which is most of them.
+
+        This invents no world and synthesises no page: the same restriction
+        `contrast_selection_v1` obeys, that only reachable states may be considered. Nothing
+        here acts, resets, or spends reward.
+        """
+        page = Page(observation)
+        acting_step: int | None = None
+        acting_kind: str | None = None
+        acting_actions = 0
+        predicted: list[int] = []
+        for step in range(len(self.kinds)):
+            count = len(self._proposals(step, page, cap))
+            if count and acting_step is None:
+                acting_step, acting_kind, acting_actions = step, self.kinds[step], count
+            elif count > 1:
+                predicted.append(step)
+        if acting_step is None:
+            return {"step": None, "kind": None, "distinct_actions": 0, "capped": False,
+                    "descriptions_left": 0, "text_expressions_left": None,
+                    "predicted_split_steps": [], "guaranteed_discrimination": False,
+                    "predicted_discrimination": False}
+        return {
+            "step": acting_step,
+            "kind": acting_kind,
+            "distinct_actions": acting_actions,
+            "capped": acting_actions >= cap,
+            "descriptions_left": len(self._targets[acting_step]),
+            "text_expressions_left": (len(self._texts[acting_step])
+                                      if acting_kind in WITH_A_WORD else None),
+            "predicted_split_steps": predicted,
+            # Zero when the committee agrees at the acting step: trying it cannot be
+            # guaranteed to eliminate anything. Positive means some hypothesis must die.
+            "guaranteed_discrimination": acting_actions > 1,
+            "predicted_discrimination": bool(predicted),
+        }
+
     def begins(self, page: Page) -> int:
         """Can this program start on this page? 2: its first step finds its element by a
         description of the best kind that survived; 1: only by a weaker one; 0: not at all. A
@@ -1126,6 +1219,16 @@ class SkillSet:
         skill = self.choose(str(observation.get("utterance") or ""), observation)
         return None if skill is None else Execution(skill)
 
+    def disagreement(self, observation: Mapping[str, Any]) -> dict[str, Any]:
+        """What the program that would act here still cannot decide. Reads only; never acts."""
+        skill = self.choose(str(observation.get("utterance") or ""), observation)
+        if skill is None:
+            return {"step": None, "kind": None, "distinct_actions": 0, "capped": False,
+                    "descriptions_left": 0, "text_expressions_left": None,
+                    "predicted_split_steps": [], "guaranteed_discrimination": False,
+                    "predicted_discrimination": False}
+        return skill.disagreement(observation)
+
     def describe(self) -> dict[str, Any]:
         return {"schema": SCHEMA, "programs": len(self.skills), "examples": self.examples,
                 "per_program": [skill.describe() for skill in self.skills]}
@@ -1253,7 +1356,8 @@ class LibraryArm:
 
 def build_arm(*, bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any], str]],
               practice_seeds: Sequence[int], action_budget: int, tier: int, tool: Any,
-              search: str = "blind") -> VersionSpaceArm:
+              search: str = "blind", select_practice: bool = False,
+              practice_budget: int | None = None) -> VersionSpaceArm:
     """Start from one success. On each practice instance try what is held; if the page says
     no, find a success there by exploration and take that. Either way the only thing ever
     added is a trace the page itself rewarded.
@@ -1264,10 +1368,19 @@ def build_arm(*, bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any]
     pays again, that is the success kept (the order did not matter, and "press every one of
     them" can be read off it); if it does not, the order did matter and nothing is changed.
     """
+    practice_seeds = list(practice_seeds)
+    # Both arms spend the same number of demonstrations. Accepting takes them in arrival
+    # order; choosing reads the pages first and takes the most informative ones.
+    budget = len(practice_seeds) if practice_budget is None else max(0, int(practice_budget))
     log = {"own_success": 0, "found_by_search": 0, "new_ways": 0, "no_success": 0,
-           "search_actions": 0, "practice_instances": len(list(practice_seeds)),
+           "search_actions": 0, "practice_instances": len(practice_seeds),
            "order_questions": 0, "order_questions_answered_yes": 0, "order_question_actions": 0,
-           "own_success_with_looking": 0}
+           "own_success_with_looking": 0,
+           "practice_selected": select_practice, "pages_inspected_to_choose": 0,
+           "practice_unanimous_offered": 0, "practice_instances_used": 0,
+           "practice_budget": budget,
+           "committee_sizes_seen": [], "predicted_split_steps_seen": [],
+           "practice_chosen_for_guarantee": 0, "practice_order": []}
 
     def settled(found: Sequence[tuple[Mapping[str, Any], str]], seed: int) -> Sequence[tuple[Mapping[str, Any], str]]:
         reordered = page_order(found)
@@ -1283,7 +1396,47 @@ def build_arm(*, bridge: Any, task: str, trace: Sequence[tuple[Mapping[str, Any]
 
     skills = SkillSet()
     skills.add_success(settled(trace, tool.DEMO_SEED))
-    for seed in practice_seeds:
+
+    if select_practice and practice_seeds:
+        # RANK, NEVER VETO. One success leaves a committee of hypotheses that all explain it.
+        # Where they propose different actions, some must die whatever the page says, so those
+        # instances go first (greedy minimax over the version space).
+        #
+        # Where they all agree it does NOT follow that the instance is worthless, and the
+        # first version of this said otherwise and was measurably wrong. On the real held-out
+        # split, declining unanimous instances spent 55 demonstrations instead of 120 and
+        # scored 0.6588 instead of 0.7038: every task it lost was one where the committee was
+        # UNANIMOUSLY WRONG and trying it is what discovered a new way of asking. A committee
+        # cannot vote on a hypothesis none of its members holds. So agreement lowers an
+        # instance's priority and never removes it.
+        #
+        # Only pages the environment really offers are read; no world is invented, the same
+        # restriction `contrast_selection_v1` obeys. Reading is a load and a reset: no action,
+        # no exploration, no reward.
+        inspected: list[tuple[int, int, int, int]] = []
+        for seed in practice_seeds:
+            if not bridge.load(task).get("ok"):
+                break
+            observation = bridge.reset(seed)
+            log["pages_inspected_to_choose"] += 1
+            row = skills.disagreement(observation)
+            inspected.append((int(bool(row.get("guaranteed_discrimination"))),
+                              int(row.get("distinct_actions") or 0),
+                              len(row.get("predicted_split_steps") or ()), seed))
+        log["committee_sizes_seen"] = [size for _, size, _, _ in inspected]
+        log["predicted_split_steps_seen"] = [deep for _, _, deep, _ in inspected]
+        log["practice_unanimous_offered"] = sum(1 for row in inspected if not row[0] and not row[2])
+        log["practice_chosen_for_guarantee"] = sum(1 for row in inspected[:budget] if row[0])
+        # A guaranteed split outranks a forecast; within each, the largest committee split
+        # first (greedy minimax: the most hypotheses that must die). Ties by seed, so the same
+        # pool always chooses alike and the run is reproducible. Nothing is dropped for being
+        # unanimous: it simply queues behind the instances that must teach something.
+        inspected.sort(key=lambda row: (-row[0], -row[1], -row[2], row[3]))
+        practice_seeds = [row[3] for row in inspected]
+        log["practice_order"] = list(practice_seeds)
+
+    for seed in practice_seeds[:budget]:
+        log["practice_instances_used"] += 1
         if not bridge.load(task).get("ok"):
             break
         observation = bridge.reset(seed)
