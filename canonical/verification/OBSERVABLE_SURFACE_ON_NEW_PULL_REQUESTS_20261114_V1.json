@@ -1,0 +1,783 @@
+{
+ "schema": "BRAIN_OBSERVABLE_SURFACE_MEASURE_V1",
+ "authority": "NONE",
+ "pulls": 8,
+ "pairs_the_organ_altered": 44,
+ "per_pair": [
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/backend/multimodal_sagemaker_backend.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 5,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 5,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/utils/s3_utils.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 3
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/backend/multimodal_sagemaker_backend.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/job/sagemaker_job.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 3,
+    "surfaces_before": 36,
+    "surfaces_after": 36
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 3,
+    "surfaces_before": 36,
+    "surfaces_after": 36
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/backend/multimodal_sagemaker_backend.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/data/format_converter.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 14,
+    "surfaces_after": 14
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 16,
+    "surfaces_after": 16
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/job/sagemaker_job.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 36,
+    "surfaces_after": 36
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 36,
+    "surfaces_after": 36
+   }
+  },
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "path": "src/autogluon/cloud/utils/s3_utils.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 3
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 7,
+    "surfaces_after": 7
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/send/type.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/ssh/command.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 2,
+    "surfaces_after": 2
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 3
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/command.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 11,
+    "surfaces_after": 11
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 11,
+    "surfaces_after": 11
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/receive/type.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 5,
+    "surfaces_after": 5
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 5,
+    "surfaces_after": 5
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/ssh/command.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 2,
+    "surfaces_after": 2
+   },
+   "lenient": {
+    "behaviour": 1,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 2
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/command.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 11,
+    "surfaces_after": 11
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 11,
+    "surfaces_after": 11
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/receive/type.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 5,
+    "surfaces_after": 5
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 5,
+    "surfaces_after": 5
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/send/type.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/command.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 11,
+    "surfaces_after": 11
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 11,
+    "surfaces_after": 11
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/receive/type.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 5,
+    "surfaces_after": 5
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 5,
+    "surfaces_after": 5
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/send/type.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   }
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "path": "zfs/replicate/ssh/command.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 2,
+    "surfaces_after": 2
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 3
+   }
+  },
+  {
+   "pull": "jr04ball-byte/jarvis-os#2",
+   "path": "api-gateway/providers/opencode.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 9,
+    "surfaces_after": 9
+   }
+  },
+  {
+   "pull": "jr04ball-byte/jarvis-os#2",
+   "path": "api-gateway/brains.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 30,
+    "surfaces_after": 30
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 4,
+    "surfaces_before": 30,
+    "surfaces_after": 30
+   }
+  },
+  {
+   "pull": "jr04ball-byte/jarvis-os#2",
+   "path": "api-gateway/google_oauth.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 7,
+    "surfaces_before": 22,
+    "surfaces_after": 22
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 7,
+    "surfaces_before": 22,
+    "surfaces_after": 22
+   }
+  },
+  {
+   "pull": "jr04ball-byte/jarvis-os#2",
+   "path": "api-gateway/providers/base.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 6,
+    "surfaces_before": 18,
+    "surfaces_after": 18
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 6,
+    "surfaces_before": 25,
+    "surfaces_after": 25
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/models/styles.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 6,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 6,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/parser.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 0,
+    "surfaces_before": 45,
+    "surfaces_after": 45
+   },
+   "lenient": {
+    "behaviour": 1,
+    "declaration": 0,
+    "surfaces_before": 57,
+    "surfaces_after": 57
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/cli.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 8,
+    "surfaces_after": 8
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 18,
+    "surfaces_after": 18
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/cli.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 8,
+    "surfaces_after": 8
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 18,
+    "surfaces_after": 18
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/models/styles.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 15,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 15,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/codecs/sld_se/_cascade.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/ast_converter.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 9,
+    "surfaces_before": 23,
+    "surfaces_after": 23
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 9,
+    "surfaces_before": 47,
+    "surfaces_after": 47
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/cql2/from_text.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 6,
+    "surfaces_before": 39,
+    "surfaces_after": 39
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 6,
+    "surfaces_before": 39,
+    "surfaces_after": 39
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/codecs/sld_se/_cascade.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/cli.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 8,
+    "surfaces_after": 8
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 18,
+    "surfaces_after": 18
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/models/styles.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 15,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 15,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/parser.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 45,
+    "surfaces_after": 45
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 57,
+    "surfaces_after": 57
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/codecs/sld_se/_cascade.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 2,
+    "surfaces_before": 20,
+    "surfaces_after": 20
+   }
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "path": "src/cartosym_transcoder/ast_converter.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 9,
+    "surfaces_before": 23,
+    "surfaces_after": 23
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 9,
+    "surfaces_before": 47,
+    "surfaces_after": 47
+   }
+  },
+  {
+   "pull": "nornir-automation/nornir_jinja2#30",
+   "path": "tests/unit/test_template_file.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 0,
+    "surfaces_before": 4,
+    "surfaces_after": 4
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 0,
+    "surfaces_before": 4,
+    "surfaces_after": 4
+   }
+  },
+  {
+   "pull": "nornir-automation/nornir_jinja2#30",
+   "path": "tests/unit/test_template_string.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 0,
+    "surfaces_before": 4,
+    "surfaces_after": 4
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 0,
+    "surfaces_before": 4,
+    "surfaces_after": 4
+   }
+  },
+  {
+   "pull": "nornir-automation/nornir-utils#71",
+   "path": "docs/source/conf.py",
+   "old_reader_reached": false,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 10,
+    "surfaces_after": 10
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 10,
+    "surfaces_after": 10
+   }
+  },
+  {
+   "pull": "nornir-automation/nornir-utils#71",
+   "path": "nornir_utils/plugins/tasks/files/write_file.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 3
+   },
+   "lenient": {
+    "behaviour": 1,
+    "declaration": 1,
+    "surfaces_before": 6,
+    "surfaces_after": 6
+   }
+  },
+  {
+   "pull": "nornir-automation/nornir-utils#71",
+   "path": "nornir_utils/plugins/tasks/networking/tcp_ping.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 1,
+    "surfaces_after": 1
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 2,
+    "surfaces_after": 2
+   }
+  },
+  {
+   "pull": "nornir-automation/nornir-utils#71",
+   "path": "nornir_utils/plugins/inventory/transform_functions.py",
+   "old_reader_reached": true,
+   "strict": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 1,
+    "surfaces_after": 1
+   },
+   "lenient": {
+    "behaviour": 0,
+    "declaration": 1,
+    "surfaces_before": 3,
+    "surfaces_after": 3
+   }
+  }
+ ],
+ "summary": {
+  "old_reader_reached": 25,
+  "old_reader_did_not_reach": 19,
+  "newly_seen": {
+   "strict": 18,
+   "lenient": 18
+  },
+  "still_unseen": 1,
+  "seen_among_the_old_25": {
+   "strict": 23,
+   "lenient": 24
+  },
+  "behaviour_vs_declaration": {
+   "strict": {
+    "behaviour_only_pairs": 0,
+    "declaration_only_pairs": 41,
+    "both": 0,
+    "neither": 3
+   },
+   "lenient": {
+    "behaviour_only_pairs": 1,
+    "declaration_only_pairs": 39,
+    "both": 2,
+    "neither": 2
+   }
+  }
+ }
+}
