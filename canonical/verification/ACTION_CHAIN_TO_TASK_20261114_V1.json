@@ -1,0 +1,76 @@
+{
+ "schema": "BRAIN_ACTION_CHAIN_TO_TASK_V1",
+ "authority": "NONE",
+ "pulls": 8,
+ "per_pull": [
+  {
+   "pull": "autogluon/autogluon-cloud#285",
+   "changed_files": 6,
+   "files_edited": 4,
+   "files_exact": 0,
+   "solved": false
+  },
+  {
+   "pull": "bagofseeds/bagof-dispatchers#62",
+   "changed_files": 5,
+   "files_edited": 0,
+   "files_exact": 0,
+   "solved": false
+  },
+  {
+   "pull": "alunduil/zfs-replicate#695",
+   "changed_files": 6,
+   "files_edited": 4,
+   "files_exact": 1,
+   "solved": false
+  },
+  {
+   "pull": "jr04ball-byte/jarvis-os#2",
+   "changed_files": 6,
+   "files_edited": 4,
+   "files_exact": 0,
+   "solved": false
+  },
+  {
+   "pull": "maxcollombin/pycartosym#9",
+   "changed_files": 6,
+   "files_edited": 6,
+   "files_exact": 0,
+   "solved": false
+  },
+  {
+   "pull": "maxcollombin/pycartosym#11",
+   "changed_files": 6,
+   "files_edited": 0,
+   "files_exact": 0,
+   "solved": false
+  },
+  {
+   "pull": "nornir-automation/nornir_jinja2#30",
+   "changed_files": 6,
+   "files_edited": 2,
+   "files_exact": 0,
+   "solved": false
+  },
+  {
+   "pull": "nornir-automation/nornir-utils#71",
+   "changed_files": 6,
+   "files_edited": 4,
+   "files_exact": 0,
+   "solved": false
+  }
+ ],
+ "per_file_exactness": 0.0213,
+ "per_task_completion": 0.0,
+ "changed_files": 47,
+ "files_exact": 1,
+ "tasks_solved": 0,
+ "the_compounding": {
+  "reading": "with an action that lands p of the time and a job that needs k of them, the job lands p**k of the time for independent actions, and less once a growing library writes lines nobody asked for",
+  "measured_p": 0.0213,
+  "at_k_1": 0.0213,
+  "at_k_2": 0.0005,
+  "at_k_3": 0.0,
+  "at_k_10": 1.901e-17
+ }
+}
