@@ -1,0 +1,491 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-16T16:49:00Z",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "pages": [
+  {
+   "arms": {
+    "A_baseline": {
+     "acts": 378,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 5.7,
+     "states": 28,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "B_class_prior": {
+     "acts": 377,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 5.7,
+     "states": 25,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "C_page_local": {
+     "acts": 364,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.3,
+     "states": 28,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_shuffled_prior": {
+     "acts": 366,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.0,
+     "states": 20,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 10889,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "inert_share": 0.525,
+   "kind": "page",
+   "learn_rows_total": 339,
+   "prior_rows_used": 40,
+   "probe_inert": 21,
+   "probe_measured": 40,
+   "probe_offered": 40,
+   "probe_seconds": 4.5,
+   "seed": 1060,
+   "task": "guess-number"
+  },
+  {
+   "arms": {
+    "A_baseline": {
+     "acts": 333,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 5.9,
+     "states": 20,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "B_class_prior": {
+     "acts": 333,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 5.9,
+     "states": 20,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "C_page_local": {
+     "acts": 334,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.1,
+     "states": 25,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_shuffled_prior": {
+     "acts": 341,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 5.7,
+     "states": 26,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 10889,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "inert_share": 0.1406,
+   "kind": "page",
+   "learn_rows_total": 339,
+   "prior_rows_used": 64,
+   "probe_inert": 9,
+   "probe_measured": 64,
+   "probe_offered": 64,
+   "probe_seconds": 3.8,
+   "seed": 1060,
+   "task": "order-food"
+  },
+  {
+   "arms": {
+    "A_baseline": {
+     "acts": 296,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.9,
+     "states": 147,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "B_class_prior": {
+     "acts": 295,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.3,
+     "states": 147,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "C_page_local": {
+     "acts": 302,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.5,
+     "states": 150,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_shuffled_prior": {
+     "acts": 273,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 8.3,
+     "states": 119,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 10889,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "inert_share": 0.2264,
+   "kind": "page",
+   "learn_rows_total": 339,
+   "prior_rows_used": 53,
+   "probe_inert": 12,
+   "probe_measured": 53,
+   "probe_offered": 53,
+   "probe_seconds": 4.6,
+   "seed": 1060,
+   "task": "scroll-text"
+  },
+  {
+   "arms": {
+    "A_baseline": {
+     "acts": 3,
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "seconds": 0.2,
+     "states": 4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "B_class_prior": {
+     "acts": 3,
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "seconds": 0.2,
+     "states": 4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "C_page_local": {
+     "acts": 3,
+     "budget_spent": 3,
+     "pass": true,
+     "plan_len": 3,
+     "seconds": 0.2,
+     "states": 4,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    },
+    "D_shuffled_prior": {
+     "acts": 16,
+     "budget_spent": 26,
+     "pass": true,
+     "plan_len": 3,
+     "seconds": 0.7,
+     "states": 14,
+     "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+     "verified_on_fresh_page": true
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 10889,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "inert_share": 0.3235,
+   "kind": "page",
+   "learn_rows_total": 339,
+   "prior_rows_used": 34,
+   "probe_inert": 11,
+   "probe_measured": 34,
+   "probe_offered": 34,
+   "probe_seconds": 3.3,
+   "seed": 1060,
+   "task": "search-engine"
+  },
+  {
+   "arms": {
+    "A_baseline": {
+     "acts": 335,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.9,
+     "states": 51,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "B_class_prior": {
+     "acts": 319,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.3,
+     "states": 51,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "C_page_local": {
+     "acts": 303,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.1,
+     "states": 51,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_shuffled_prior": {
+     "acts": 303,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.0,
+     "states": 51,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 10889,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "inert_share": 0.375,
+   "kind": "page",
+   "learn_rows_total": 339,
+   "prior_rows_used": 40,
+   "probe_inert": 15,
+   "probe_measured": 40,
+   "probe_offered": 40,
+   "probe_seconds": 4.3,
+   "seed": 1060,
+   "task": "simple-arithmetic"
+  },
+  {
+   "arms": {
+    "A_baseline": {
+     "acts": 299,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.8,
+     "states": 115,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "B_class_prior": {
+     "acts": 299,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.5,
+     "states": 115,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "C_page_local": {
+     "acts": 301,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 6.9,
+     "states": 144,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    },
+    "D_shuffled_prior": {
+     "acts": 281,
+     "budget_spent": 400,
+     "pass": false,
+     "plan_len": 0,
+     "seconds": 7.5,
+     "states": 89,
+     "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+     "verified_on_fresh_page": false
+    }
+   },
+   "budget": 400,
+   "environment": {
+    "browser": "HeadlessChrome/153.0.8010.0",
+    "browser_pid": 10889,
+    "chromium_package": "153.0.0",
+    "drag_steps": 12,
+    "epoch_ms": 1767225600000,
+    "node": "v22.22.3",
+    "nudge_px": 30,
+    "puppeteer_core": "25.17.0",
+    "step_ms": 500,
+    "viewport": [
+     480,
+     360
+    ]
+   },
+   "inert_share": 0.5781,
+   "kind": "page",
+   "learn_rows_total": 339,
+   "prior_rows_used": 64,
+   "probe_inert": 37,
+   "probe_measured": 64,
+   "probe_offered": 64,
+   "probe_seconds": 9.6,
+   "seed": 1060,
+   "task": "text-editor"
+  }
+ ],
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "BRAIN_INERT_ACTION_PRIOR_MEASURE_V1",
+ "summary": {
+  "arms": {
+   "A_baseline": {
+    "actions_spent": 2003,
+    "pass": 1,
+    "pass_tasks": [
+     "search-engine"
+    ],
+    "seconds": 33.4,
+    "verified_on_fresh_page": 1,
+    "verified_tasks": [
+     "search-engine"
+    ]
+   },
+   "B_class_prior": {
+    "actions_spent": 2003,
+    "pass": 1,
+    "pass_tasks": [
+     "search-engine"
+    ],
+    "seconds": 32.9,
+    "verified_on_fresh_page": 1,
+    "verified_tasks": [
+     "search-engine"
+    ]
+   },
+   "C_page_local": {
+    "actions_spent": 2003,
+    "pass": 1,
+    "pass_tasks": [
+     "search-engine"
+    ],
+    "seconds": 34.1,
+    "verified_on_fresh_page": 1,
+    "verified_tasks": [
+     "search-engine"
+    ]
+   },
+   "D_shuffled_prior": {
+    "actions_spent": 2026,
+    "pass": 1,
+    "pass_tasks": [
+     "search-engine"
+    ],
+    "seconds": 35.2,
+    "verified_on_fresh_page": 1,
+    "verified_tasks": [
+     "search-engine"
+    ]
+   }
+  },
+  "inert_share_mean": 0.3614,
+  "learn_prior": {
+   "classes": null,
+   "deferred_classes": null,
+   "digest": null,
+   "rows": 339
+  },
+  "pages": 6,
+  "probe_rows": 0
+ }
+}
