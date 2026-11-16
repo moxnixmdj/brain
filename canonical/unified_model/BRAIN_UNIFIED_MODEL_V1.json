@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 457,
+  "knowledge_documents": 458,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6866,
+  "research_index_records": 6871,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "899677440754521e387a348b5b42b594ebd98f71af7d735cce4975a064d2c3e0"
+  "value": "5d23584bdb6973ac89a85d7d13b2b1164406d32559d9b20b557d57d6690a9bb8"
  },
  "engines": [
   {
@@ -61728,6 +61728,86 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 6620,
+   "headings": [
+    "The edit space is the program, not a list — a hypothesis is a rewrite, and a comparison is part of the grammar",
+    "The claim on trial",
+    "What four rounds of measurement did to that claim",
+    "Where the refusals were — measured, not guessed",
+    "What was built and removed in the same turn",
+    "What is real, and what is not",
+    "What this is not"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.md",
+   "sha256": "b076750de58266556ad208deea06168effb550eae2207bf3a6b695b2fee510da",
+   "summary": "**2026-11-16 · branch `arena/b399b1d7-brain` · 40 real published bugs, no model, no weights, no network**",
+   "terms": {
+    "40": 7,
+    "actions": 3,
+    "all": 3,
+    "any": 4,
+    "best": 3,
+    "budget": 3,
+    "built": 3,
+    "cannot": 6,
+    "comparison": 4,
+    "corpus": 3,
+    "coverage": 3,
+    "each": 3,
+    "edit": 4,
+    "edits": 4,
+    "every": 4,
+    "family": 3,
+    "four": 3,
+    "generator": 3,
+    "grammar": 3,
+    "hypothesis": 7,
+    "inside": 3,
+    "instant": 4,
+    "learning": 6,
+    "lesson": 3,
+    "list": 6,
+    "missing": 4,
+    "model": 4,
+    "more": 3,
+    "move": 4,
+    "never": 5,
+    "no": 11,
+    "not": 19,
+    "nothing": 4,
+    "once": 3,
+    "one": 16,
+    "only": 5,
+    "oracle": 3,
+    "own": 4,
+    "part": 4,
+    "plus": 3,
+    "program": 4,
+    "real": 6,
+    "refusals": 6,
+    "rewrite": 7,
+    "run": 4,
+    "search": 4,
+    "so": 5,
+    "space": 9
+   },
+   "title": "The edit space is the program, not a list — a hypothesis is a rewrite, and a comparison is part of the grammar",
+   "title_terms": [
+    "comparison",
+    "edit",
+    "grammar",
+    "hypothesis",
+    "list",
+    "not",
+    "part",
+    "program",
+    "rewrite",
+    "space"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 11263,
    "headings": [
     "The environment is not in the key",
@@ -80579,10 +80659,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1259,
+  "included_source_count": 1260,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "1c01d43f043af05f26a9918d831b62a26201925a8026bbae0ac1c14381092766"
+  "source_tree_digest": "04d9cfc76d0990a9cc9922587eca9f88d9d8374a180e6349673b38e2ac476eab"
  },
  "research_index": [
   {
@@ -155086,6 +155166,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+   "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+   "sha256": "f530134ad0370214990eedf134044ab8e2dde89d4b5f2abdfa43398cf88de4b9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "close": 1,
+    "comparisons": 1,
+    "last": 1,
+    "mile": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-07",
    "id": "research:canonical/verification/COMPLETE_SELECTED_ROUTE_COVER_SINGLE_ABC_FRONTIER_WOLFRAM_VERIFY_20261007_V2.json",
    "kind": "RESEARCH_RECORD",
@@ -192073,6 +192172,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
+   "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+   "sha256": "4bd5edb2d10ed9a4702c969ab562137fbd043c13c254186a775579e55c0fa1a9",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "audit": 1,
+    "refusal": 1,
+    "region": 1,
+    "rewrites": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-04",
    "id": "research:canonical/verification/RELATIVE_ELO_ABSOLUTE_PROOF_NONTRANSPORT_PUBLIC_RUNNER_VERIFICATION_20261004_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -207491,6 +207609,26 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+   "sha256": "5d4bb083e8a386c1443a8b90962d9922e5445d1806a19bd964e23456ba0d4fe2",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "edit": 1,
+    "list": 1,
+    "not": 1,
+    "program": 1,
+    "space": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -210793,6 +210931,24 @@
     "showing": 1,
     "trusted": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
+   "schema": "BRAIN_REPAIR_SPACE_AUDIT_V1",
+   "sha256": "a3fc2357b77fd1fb18d2141c854728247c18773e02a72f0a500b875d91cf7fd4",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "actually": 1,
+    "refusals": 1,
+    "v1": 1,
+    "were": 1
    }
   },
   {
@@ -239800,6 +239956,51 @@
     "ten_paraphrases_of_two_questions_scored_three_of_ten_on_4db59c51_because_dispatch_was_decided_by_lists_of_english_phrasings_that_did_not_know_about_each_other__display_data_py_was_rejected_by_the_routing_regex_even_though_display_was_in_the_content_list_two_modules_away_and_line_count_of_data_py_was_not_recognised_as_a_question_at_all": 1,
     "the_door_resolves_what_a_sentence_names_instead_of_matching_english_phrasings_20261104_v1": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_EDIT_SPACE_IS_THE_PROGRAM_NOT_A_LIST_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "0fa2f9dd1828f43ccd221cd7ac7c8dd4c7d413fdf7ebd34301ec06affc4680ce",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "atom": 1,
+    "becomes": 1,
+    "being": 1,
+    "composition": 1,
+    "costs": 1,
+    "counts": 1,
+    "edit": 1,
+    "express": 1,
+    "fixes": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "generated": 1,
+    "hypothesis": 1,
+    "insertion": 1,
+    "less": 1,
+    "list": 1,
+    "node": 1,
+    "not": 2,
+    "one": 1,
+    "permutation": 1,
+    "program": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "provably": 1,
+    "quarter": 1,
+    "reaches": 1,
+    "region": 1,
+    "rewrite": 1,
+    "search": 1,
+    "shape": 1,
+    "space": 2,
+    "statement": 1,
+    "stops": 1
    }
   },
   {
