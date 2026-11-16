@@ -172,6 +172,13 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/tools/derived_value_full_suite_receipt_v1.py",
         "canonical/tools/learn_or_read_board_v1.py",
     ),
+    "long_tail_trigger_and_basin": (
+        "canonical/runtime/declared_trigger_census_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/swe_kernel/one_demonstration_basin_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -235,6 +242,14 @@ EVIDENCE_READ = (
     "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
     "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
     "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+    # Final main move: the trigger was a phrase, the unsolved remainder is a
+    # long tail, and one demonstration learns a domain, not an environment.
+    "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+    "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md",
+    "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+    "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
 )
 
 
@@ -367,6 +382,10 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     operand = read_json(A / "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json") if (A / "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json").is_file() else None
     replay = read_json(A / "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json") if (A / "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json").is_file() else None
     replay_receipt = read_json(V / "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json") if (V / "ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json").is_file() else None
+    taxonomy = read_json(V / "DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json") if (V / "DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json").is_file() else None
+    basin = read_json(V / "ONE_DEMONSTRATION_BASIN_20261116_V1.json") if (V / "ONE_DEMONSTRATION_BASIN_20261116_V1.json").is_file() else None
+    long_tail_intent = read_json(A / "THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json") if (A / "THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json").is_file() else None
+    basin_intent = read_json(A / "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json") if (A / "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -485,6 +504,36 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and replay.get("measured_effect", {}).get("arms", {}).get("replay_of_the_record", {}).get("stale") == 122
             and replay_receipt.get("counts", {}).get("SILENT_CORRUPTION") == 71
         ),
+        "declared_format_prior_is_too_small_to_be_a_single_lever": bool(
+            taxonomy
+            and taxonomy.get("declared_surface", {}).get("pages_usable") == 123
+            and taxonomy.get("declared_surface", {}).get("pages_declaring_a_format") == 6
+            and taxonomy.get("declared_surface", {}).get("pages_with_a_typeable_field") == 39
+            and taxonomy.get("declared_surface", {}).get("pages_with_no_typeable_field") == 84
+            and taxonomy.get("declared_surface", {}).get("input_type_counts", {}).get("text") == 37
+        ),
+        "the_unsolved_remainder_is_a_long_tail_not_one_bottleneck": bool(
+            taxonomy
+            and long_tail_intent
+            and taxonomy.get("taxonomy", {}).get("pages_unsolved") == 46
+            and taxonomy.get("taxonomy", {}).get("classes") == 16
+            and taxonomy.get("taxonomy", {}).get("largest_class") == 6
+            and long_tail_intent.get("measured_effect", {}).get("taxonomy", {}).get("classes") == 16
+            and long_tail_intent.get("measured_effect", {}).get("taxonomy", {}).get("largest_class") == 6
+            and "English phrase" in taxonomy.get("why_the_algebra_did_not_transfer", {}).get("cause", "")
+        ),
+        "one_demonstration_learns_a_domain_not_the_environment": bool(
+            basin
+            and basin_intent
+            and basin.get("environment", {}).get("states") == 168
+            and basin.get("environment", {}).get("executed_transitions") == 1680
+            and basin.get("environment", {}).get("truncated") is False
+            and basin_intent.get("measured_effect", {}).get("arms", {}).get("status_level_goal", {}).get("true_domain") == 112
+            and basin_intent.get("measured_effect", {}).get("arms", {}).get("premise_task_under_status", {}).get("undecidable") == 24
+            and basin_intent.get("measured_effect", {}).get("arms", {}).get("premise_task_under_one_file", {}).get("undecidable") == 16
+            and basin_intent.get("measured_effect", {}).get("arms", {}).get("premise_task_under_all_content", {}).get("undecidable") == 0
+            and basin_intent.get("measured_effect", {}).get("arms", {}).get("command_output_control", {}).get("undecidable") == 168
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -560,6 +609,17 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "replay": (replay or {}).get("measured_effect", {}),
             "status": "READ_FIRST_FOR_A_NAMED_GAP_ADD_THE_MISSING_OPERAND_NEVER_REPLAY_A_PLAN_AS_A_MACRO",
         },
+        "long_tail_trigger_and_basin": {
+            "receipts": [
+                "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+                "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
+            ],
+            "declared_surface": (taxonomy or {}).get("declared_surface", {}),
+            "taxonomy": (taxonomy or {}).get("taxonomy", {}),
+            "why_the_algebra_did_not_transfer": (taxonomy or {}).get("why_the_algebra_did_not_transfer", {}),
+            "basin": (basin_intent or {}).get("measured_effect", {}),
+            "status": "NO_SINGLE_LEVER_THE_REMAINDER_IS_A_LONG_TAIL_AND_THE_PREMISE_MUST_BE_OBSERVABLE",
+        },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "claimed_repaired": (rerun or {}).get("claimed_repaired"),
@@ -617,7 +677,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "clean held-out arms, plus an effect-based census of mechanisms already in the tree. "
             "The 24/40 union is now also one composed run under the corpus pytest, and the audit "
             "reads the later invariance, exact-decision, browser, new-environment, read-first, "
-            "operand and replay-drift measurements without crediting any of them as new capability. It also indexes the separate selection "
+            "operand, replay-drift, trigger, long-tail and one-demonstration-basin measurements "
+            "without crediting any of them as new capability. It also indexes the separate selection "
             "measurement among test-passing HumanEvalFix candidates; that measurement is not a "
             "QuixBugs repair receipt. It is not a solver."
         ),
@@ -641,6 +702,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_NETWORK_CALLS",
             "NO_WEIGHT_UPDATE",
             "NO_REPLAY_FOREVER_ANYWHERE_CLAIM",
+            "NO_SINGLE_LEVER_CLAIM",
+            "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
             "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
             "TERMINAL_TRUTH_UNTOUCHED",
         ],

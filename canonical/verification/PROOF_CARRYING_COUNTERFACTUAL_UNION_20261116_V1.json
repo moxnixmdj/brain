@@ -211,7 +211,13 @@
     "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
     "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
     "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
-    "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json"
+    "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+    "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+    "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md",
+    "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+    "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
   ],
   "exact_decision_past_enumeration_wall": {
     "measured_effect": {
@@ -243,7 +249,7 @@
     "subsequences",
     "wrap"
   ],
-  "generated_at_utc": "2026-11-16T23:37:03.353401+00:00",
+  "generated_at_utc": "2026-11-16T23:56:53.374668+00:00",
   "hard_nonclaims": [
     "NOT_A_FRONTIER_SCORE",
     "NOT_SWE_BENCH",
@@ -259,6 +265,8 @@
     "NO_NETWORK_CALLS",
     "NO_WEIGHT_UPDATE",
     "NO_REPLAY_FOREVER_ANYWHERE_CLAIM",
+    "NO_SINGLE_LEVER_CLAIM",
+    "NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM",
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
@@ -402,6 +410,7 @@
     "browser_zero_experience_census_is_66_with_no_regressions": true,
     "claimed_learned_arm_superseded_by_pytest_rerun": true,
     "composed_run_is_one_run_one_judge_24_of_40": true,
+    "declared_format_prior_is_too_small_to_be_a_single_lever": true,
     "exact_decision_past_enumeration_wall_is_not_capability_credit": true,
     "invariance_changes_reach_not_capability": true,
     "new_environment_cost_law_is_bounded_and_shuffle_invariant": true,
@@ -411,11 +420,13 @@
     "no_receipt_task_outside_real_corpus": true,
     "no_screen_only_verdict_counted_as_repair": true,
     "observable_gap_receipt_read": true,
+    "one_demonstration_learns_a_domain_not_the_environment": true,
     "operand_addition_is_bounded_to_its_design_set": true,
     "read_first_policy_is_measured_and_does_not_forbid_learning": true,
     "repaired_and_open_partition_corpus": true,
     "replay_forever_is_falsified_by_state_drift": true,
     "selection_measurement_read": true,
+    "the_unsolved_remainder_is_a_long_tail_not_one_bottleneck": true,
     "verified_union_is_24_not_the_projected_26": true
   },
   "killed_instruments": [
@@ -463,6 +474,611 @@
     "sieve",
     "to_base"
   ],
+  "long_tail_trigger_and_basin": {
+    "basin": {
+      "arms": {
+        "command_output_control": {
+          "licensed": 0,
+          "observations": 3,
+          "reading": "the tool's own success message is not the goal's truth: 168 states collapse into 3 classes and no class is inside the plan's domain",
+          "silent_failure": 112,
+          "undecidable": 168
+        },
+        "demonstrations_for_full_licensing": {
+          "cells_no_demonstration_can_license": 4,
+          "decision_classes_premise_task": 9,
+          "premise_task": 1,
+          "status_level_goal": 4
+        },
+        "premise_task_under_all_content": {
+          "licensed": 56,
+          "plan_domain": 56,
+          "reading": "the same demonstration, on the same states, is licensed on its whole domain once the sense carries the premise -- the knowledge did not change, the observable did",
+          "undecidable": 0
+        },
+        "premise_task_under_one_file": {
+          "reading": "reading one file removes a third of the doubt and no more: the residue is exactly the part of the goal that lives in the file nobody opened",
+          "undecidable": 16,
+          "undecidable_share": 0.0952
+        },
+        "premise_task_under_status": {
+          "clear_outside": 96,
+          "licensed": 48,
+          "lucky": 8,
+          "mixed_cells": 4,
+          "reading": "16 states run the demonstration, watch it succeed and are wrong; 8 more work without anything licensing it",
+          "silent_failure": 16,
+          "undecidable": 24,
+          "undecidable_share": 0.1429
+        },
+        "status_level_goal": {
+          "demonstration_actions": 3,
+          "reading": "even a goal the coarsest sense can read leaves a third of the environment outside the demonstration's domain, so one success never covers the states on offer",
+          "states": {
+            "clear_outside": 56,
+            "decision_classes": 20,
+            "demonstration": [
+              "write:a.txt=two",
+              "stage:a.txt",
+              "commit:c1"
+            ],
+            "demonstration_length": 3,
+            "demonstrations_needed": 4,
+            "label": "commit the work as c1 (status-level goal)",
+            "licensed": 112,
+            "licensed_share": 0.6667,
+            "lucky": 0,
+            "mixed_cells": 0,
+            "observations": 64,
+            "plan_domain": 112,
+            "plan_domain_share": 0.6667,
+            "sense": "status",
+            "silent_failure": 0,
+            "states": 168,
+            "uncoverable_cells": 0,
+            "undecidable": 0,
+            "undecidable_share": 0.0,
+            "winning_states": 168
+          },
+          "true_domain": 112,
+          "undecidable_by_status": 0
+        }
+      },
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "environment": {
+        "actions": [
+          "write:a.txt=two",
+          "write:a.txt=one",
+          "write:b.txt=two",
+          "write:note.log=x",
+          "stage:a.txt",
+          "stage:b.txt",
+          "commit:c1",
+          "rm:a.txt",
+          "branch:dev",
+          "reset:hard"
+        ],
+        "executed_transitions": 1680,
+        "kind": "real git repository in a throw-away directory",
+        "senses": [
+          "status",
+          "status+content(a.txt)",
+          "status+content(all)",
+          "status+content(all)+staged",
+          "feedback(command output)"
+        ],
+        "states": 168,
+        "truncated": false
+      },
+      "external_state": {
+        "across_environments_in_this_tree": "ACROSS_ENVIRONMENTS_20261112_V1: exact rung precision 1.0 over 562 right / 0 wrong; any_rung precision 0.29 with 71 wrong",
+        "computer_use_world_models": "World Models as an Intermediary (2602.00785): direct real-system interaction is undesirable and simulated backends are approximated, not executed, leaving a semantic gap on the live system",
+        "environment_reuse_in_this_tree": "environment_reuse_v1: visit 2 with a stored prior cost exactly visit 1 (1672 interactions, 245 states, plan 18)",
+        "inert_action_prior_in_this_tree": "INERT_ACTION_PRIOR_20261116_V1: arms A/B/C/D all spent 2003-2026 actions and all passed 1 of 6 pages; inert_share_mean 0.3614",
+        "irreversibility": "no undo for a sent payment or a deleted file; today's gates are hand-coded rules and human review catches only 9-26% of coding-agent errors",
+        "test_time_adaptation": "ICLR 2026: persona-driven exploration lifts WebArena multi-site 2% to 23% with about 7M tokens of exploration per site; the gain appears only where transitions are unpredictable and a naive hybrid underperforms"
+      },
+      "incremental_spend_usd": 0,
+      "measured_at_commit": "24d723047d6f07ac26c2c95646b3295d4dcd86d8",
+      "model_calls": 0,
+      "network_calls": 0,
+      "what_this_does_not_claim": [
+        "no capability credit, no benchmark rank, no terminal credit",
+        "no claim that a finer sense is free: it costs a probe, a test or an instrument",
+        "no claim that these 168 states are all of git, or that one environment is all environments",
+        "no claim that the undecidable set is small everywhere; it was measured here, under five senses"
+      ]
+    },
+    "declared_surface": {
+      "declaring_pages": [
+        "enter-date",
+        "enter-password",
+        "enter-time",
+        "guess-number",
+        "login-user",
+        "login-user-popup"
+      ],
+      "input_type_counts": {
+        "(none)": 14,
+        "date": 1,
+        "number": 1,
+        "password": 4,
+        "text": 37,
+        "time": 1
+      },
+      "pages_declaring_a_format": 6,
+      "pages_usable": 123,
+      "pages_with_a_typeable_field": 39,
+      "pages_with_no_typeable_field": 84
+    },
+    "receipts": [
+      "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+      "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json"
+    ],
+    "status": "NO_SINGLE_LEVER_THE_REMAINDER_IS_A_LONG_TAIL_AND_THE_PREMISE_MUST_BE_OBSERVABLE",
+    "taxonomy": {
+      "by_class": {
+        "A_CONSTRAINED_SEARCH": {
+          "n": 2,
+          "pages": [
+            "multi-layouts",
+            "multi-orderings"
+          ]
+        },
+        "A_CONTINUOUS_SIZE": {
+          "n": 1,
+          "pages": [
+            "resize-textarea"
+          ]
+        },
+        "A_COORDINATED_SEQUENCE": {
+          "n": 1,
+          "pages": [
+            "form-sequence-2"
+          ]
+        },
+        "A_COUNT_OF_WHAT_IS_SHOWN": {
+          "n": 1,
+          "pages": [
+            "visual-addition"
+          ]
+        },
+        "A_GEOMETRIC_CONSTRUCTION": {
+          "n": 1,
+          "pages": [
+            "bisect-angle"
+          ]
+        },
+        "A_NAMED_CONTROL": {
+          "n": 2,
+          "pages": [
+            "sign-agreement",
+            "social-media"
+          ]
+        },
+        "A_PERCEPTUAL_PROPERTY": {
+          "n": 5,
+          "pages": [
+            "click-checkboxes-soft",
+            "click-shades",
+            "drag-shapes-2",
+            "hover-shape",
+            "text-editor"
+          ]
+        },
+        "A_POINT_NOT_AN_ELEMENT": {
+          "n": 6,
+          "pages": [
+            "circle-center",
+            "draw-circle",
+            "draw-line",
+            "find-midpoint",
+            "hot-cold",
+            "right-angle"
+          ]
+        },
+        "A_RENDERED_PATTERN": {
+          "n": 1,
+          "pages": [
+            "number-checkboxes"
+          ]
+        },
+        "A_SUSTAINED_MOUSE_STATE": {
+          "n": 2,
+          "pages": [
+            "chase-circle",
+            "moving-items"
+          ]
+        },
+        "A_TIME_PLACED_ON_A_GRID": {
+          "n": 3,
+          "pages": [
+            "choose-date",
+            "choose-date-nodelay",
+            "daily-calendar"
+          ]
+        },
+        "A_VALUE_CARRIED_ACROSS_FIELDS": {
+          "n": 4,
+          "pages": [
+            "copy-paste",
+            "copy-paste-2",
+            "find-word",
+            "read-table-2"
+          ]
+        },
+        "CONTINUOUS_TO_POSITION": {
+          "n": 5,
+          "pages": [
+            "form-sequence",
+            "use-colorwheel",
+            "use-colorwheel-2",
+            "use-slider",
+            "use-slider-2"
+          ]
+        },
+        "FEEDBACK_ACROSS_TURNS": {
+          "n": 3,
+          "pages": [
+            "guess-number",
+            "simon-says",
+            "tic-tac-toe"
+          ]
+        },
+        "FIND_BY_CONTENT": {
+          "n": 5,
+          "pages": [
+            "click-menu",
+            "email-inbox-forward-nl-turk",
+            "social-media-all",
+            "social-media-some",
+            "terminal"
+          ]
+        },
+        "WORLD_KNOWLEDGE": {
+          "n": 4,
+          "pages": [
+            "book-flight",
+            "book-flight-nodelay",
+            "odd-or-even",
+            "order-food"
+          ]
+        }
+      },
+      "classes": 16,
+      "largest_class": 6,
+      "pages_unsolved": 46,
+      "rows": [
+        {
+          "class": "A_GEOMETRIC_CONSTRUCTION",
+          "missing_factor": "the answer is a placement satisfying a stated relation",
+          "task": "bisect-angle",
+          "typeable_fields": 0,
+          "utterance": "Create a line that bisects the angle evenly in two, then press submit."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "book-flight",
+          "typeable_fields": 2,
+          "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "book-flight-nodelay",
+          "typeable_fields": 2,
+          "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+        },
+        {
+          "class": "A_SUSTAINED_MOUSE_STATE",
+          "missing_factor": "the action is a held state, not a discrete step",
+          "task": "chase-circle",
+          "typeable_fields": 0,
+          "utterance": "Keep your mouse inside the circle as it moves around."
+        },
+        {
+          "class": "A_TIME_PLACED_ON_A_GRID",
+          "missing_factor": "the date is derivable, its cell must be located",
+          "task": "choose-date",
+          "typeable_fields": 0,
+          "utterance": "Select 11/10/2016 as the date and hit submit."
+        },
+        {
+          "class": "A_TIME_PLACED_ON_A_GRID",
+          "missing_factor": "the date is derivable, its cell must be located",
+          "task": "choose-date-nodelay",
+          "typeable_fields": 0,
+          "utterance": "Select 11/10/2016 as the date and hit submit."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "circle-center",
+          "typeable_fields": 0,
+          "utterance": "Find and click on the center of the circle, then press submit."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "click-checkboxes-soft",
+          "typeable_fields": 0,
+          "utterance": "Select words similar to homes, unhappy, real, chubby and click Submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "click-menu",
+          "typeable_fields": 0,
+          "utterance": "Select Milissent>Harmonia>Anita"
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "click-shades",
+          "typeable_fields": 0,
+          "utterance": "Select all the shades of blue and press Submit."
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "copy-paste",
+          "typeable_fields": 2,
+          "utterance": "Copy the text in the textarea below, paste it into the textbox and press Submit."
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "copy-paste-2",
+          "typeable_fields": 4,
+          "utterance": "Copy the text from the 3rd text area below and paste it into the text input, then press Submit."
+        },
+        {
+          "class": "A_TIME_PLACED_ON_A_GRID",
+          "missing_factor": "the date is derivable, its cell must be located",
+          "task": "daily-calendar",
+          "typeable_fields": 0,
+          "utterance": "Create a 90 mins event named \"Party\", between 12PM and 4PM."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "drag-shapes-2",
+          "typeable_fields": 0,
+          "utterance": "Drag all blue shapes into the left box, and everything else into the right box."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "draw-circle",
+          "typeable_fields": 0,
+          "utterance": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "draw-line",
+          "typeable_fields": 0,
+          "utterance": "Draw a vertical line that runs through the dot, then press submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "email-inbox-forward-nl-turk",
+          "typeable_fields": 0,
+          "utterance": "Find the email from Janot and send it to Wren."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "find-midpoint",
+          "typeable_fields": 0,
+          "utterance": "Find and click on the shortest mid-point between the two points, then press submit."
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "find-word",
+          "typeable_fields": 1,
+          "utterance": "Find the 5th word in the paragraph, type that into the textbox and press \"Submit\"."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "form-sequence",
+          "typeable_fields": 0,
+          "utterance": "Select 5 with the slider, click the 3rd checkbox, then hit Submit."
+        },
+        {
+          "class": "A_COORDINATED_SEQUENCE",
+          "missing_factor": "each step exists; the sequence is the missing thing",
+          "task": "form-sequence-2",
+          "typeable_fields": 3,
+          "utterance": "Check the 3rd radio button and enter the number \"10\" into the 2nd textbox."
+        },
+        {
+          "class": "FEEDBACK_ACROSS_TURNS",
+          "missing_factor": "no single action is correct; the page must be asked",
+          "task": "guess-number",
+          "typeable_fields": 1,
+          "utterance": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "hot-cold",
+          "typeable_fields": 0,
+          "utterance": "Find and click on the HOT area."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "hover-shape",
+          "typeable_fields": 0,
+          "utterance": "Keep the mouse hovered over the colored square."
+        },
+        {
+          "class": "A_SUSTAINED_MOUSE_STATE",
+          "missing_factor": "the action is a held state, not a discrete step",
+          "task": "moving-items",
+          "typeable_fields": 0,
+          "utterance": "Click as many moving circles as possible."
+        },
+        {
+          "class": "A_CONSTRAINED_SEARCH",
+          "missing_factor": "several conditions must hold at once over the page's records",
+          "task": "multi-layouts",
+          "typeable_fields": 3,
+          "utterance": "Search for thriller movies directed by George from year 1994."
+        },
+        {
+          "class": "A_CONSTRAINED_SEARCH",
+          "missing_factor": "several conditions must hold at once over the page's records",
+          "task": "multi-orderings",
+          "typeable_fields": 3,
+          "utterance": "Search for thriller movies directed by George from year 1994."
+        },
+        {
+          "class": "A_RENDERED_PATTERN",
+          "missing_factor": "the answer is a shape that must be built cell by cell",
+          "task": "number-checkboxes",
+          "typeable_fields": 0,
+          "utterance": "Draw the number \"8\" in the checkboxes using the example on the right and press Submit when finished."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "odd-or-even",
+          "typeable_fields": 0,
+          "utterance": "Mark the numbers below as odd or even and press submit when done."
+        },
+        {
+          "class": "WORLD_KNOWLEDGE",
+          "missing_factor": "the answer is a fact about the world, not a function of the page",
+          "task": "order-food",
+          "typeable_fields": 0,
+          "utterance": "Order 3 items that are meat"
+        },
+        {
+          "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+          "missing_factor": "the page holds the answer; it must be moved and constrained",
+          "task": "read-table-2",
+          "typeable_fields": 2,
+          "utterance": "Enter the value that corresponds with each label into the form and submit when done."
+        },
+        {
+          "class": "A_CONTINUOUS_SIZE",
+          "missing_factor": "the answer is a size, not a value or an element",
+          "task": "resize-textarea",
+          "typeable_fields": 1,
+          "utterance": "Resize the textarea so that the height is larger than its initial size then press Submit."
+        },
+        {
+          "class": "A_POINT_NOT_AN_ELEMENT",
+          "missing_factor": "no element names the answer; the answer is a location",
+          "task": "right-angle",
+          "typeable_fields": 0,
+          "utterance": "Add a third point to create a right angle, then press submit."
+        },
+        {
+          "class": "A_NAMED_CONTROL",
+          "missing_factor": "the control is named; pressing it is the whole task",
+          "task": "sign-agreement",
+          "typeable_fields": 0,
+          "utterance": "Scroll to the bottom of the textarea, enter the name \"Kanesha\" then press \"Agree\""
+        },
+        {
+          "class": "FEEDBACK_ACROSS_TURNS",
+          "missing_factor": "no single action is correct; the page must be asked",
+          "task": "simon-says",
+          "typeable_fields": 0,
+          "utterance": "Push the buttons in the order displayed."
+        },
+        {
+          "class": "A_NAMED_CONTROL",
+          "missing_factor": "the control is named; pressing it is the whole task",
+          "task": "social-media",
+          "typeable_fields": 0,
+          "utterance": "For the user @lorem, click on the \"Mute\" button."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "social-media-all",
+          "typeable_fields": 0,
+          "utterance": "Click the \"Reply\" button on all posts by @eget and then click Submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "social-media-some",
+          "typeable_fields": 0,
+          "utterance": "Click the \"Reply\" button on 3 posts by @eget and then click Submit."
+        },
+        {
+          "class": "FIND_BY_CONTENT",
+          "missing_factor": "the target is present and named; finding it is the work",
+          "task": "terminal",
+          "typeable_fields": 1,
+          "utterance": "Use the terminal below to delete a file that has no file extension."
+        },
+        {
+          "class": "A_PERCEPTUAL_PROPERTY",
+          "missing_factor": "the element is present but only a look tells which",
+          "task": "text-editor",
+          "typeable_fields": 0,
+          "utterance": "Using the text editor, give the text viverra. the style underlined and press Submit."
+        },
+        {
+          "class": "FEEDBACK_ACROSS_TURNS",
+          "missing_factor": "no single action is correct; the page must be asked",
+          "task": "tic-tac-toe",
+          "typeable_fields": 0,
+          "utterance": "Playing as 'X', win a game of tic-tac-toe."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-colorwheel",
+          "typeable_fields": 1,
+          "utterance": "Select magenta with the color picker and hit Submit."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-colorwheel-2",
+          "typeable_fields": 1,
+          "utterance": "Select the following color with the color picker and hit Submit."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-slider",
+          "typeable_fields": 0,
+          "utterance": "Select 108 with the slider and hit Submit."
+        },
+        {
+          "class": "CONTINUOUS_TO_POSITION",
+          "missing_factor": "the value is derivable, the widget is not a text field",
+          "task": "use-slider-2",
+          "typeable_fields": 0,
+          "utterance": "Set the sliders to the combination [15,15,16] and submit."
+        },
+        {
+          "class": "A_COUNT_OF_WHAT_IS_SHOWN",
+          "missing_factor": "the count is derivable, nothing else is missing",
+          "task": "visual-addition",
+          "typeable_fields": 1,
+          "utterance": "Type the total number of blocks into the textbox and press Submit."
+        }
+      ]
+    },
+    "why_the_algebra_did_not_transfer": {
+      "cause": "every rule in derived_value_v1.derivations is gated on a hand-written English phrase: LAST_WORD on 'last word'/'ends with', JOIN_SHOWN on 'below'/'shown'/'following'/'these', CLOCK24 on a type=time field or the word 'time', CASE_UPPER on 'upper'/'capital'",
+      "measured_elsewhere": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json: +5 pages, all inside the 8 design pages, 0 of 121 held out",
+      "reading": "the phrase is a fact about the eight pages the author read, not a fact about a page the author never saw. The part was a lookup with nothing to look up, not a method that failed to generalise."
+    }
+  },
   "measured_receipts": [
     {
       "answer_keys_present": null,
@@ -786,6 +1402,17 @@
         "canonical/tools/arm_learned_from_its_own_verified_repairs_v1.py",
         "canonical/tools/what_one_verified_repair_travels_v1.py",
         "canonical/swe_kernel/induced_edit_basis_v1.py"
+      ]
+    },
+    "long_tail_trigger_and_basin": {
+      "count": 5,
+      "missing": [],
+      "present": [
+        "canonical/runtime/declared_trigger_census_v1.py",
+        "canonical/runtime/derived_value_v1.py",
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/swe_kernel/one_demonstration_basin_v1.py"
       ]
     },
     "read_first_operand_and_replay_drift": {
@@ -1327,6 +1954,6 @@
     "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
     "screen_said_pass_runner_said_no_in_the_record": 0
   },
-  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The 24/40 union is now also one composed run under the corpus pytest, and the audit reads the later invariance, exact-decision, browser, new-environment, read-first, operand and replay-drift measurements without crediting any of them as new capability. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
+  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The 24/40 union is now also one composed run under the corpus pytest, and the audit reads the later invariance, exact-decision, browser, new-environment, read-first, operand, replay-drift, trigger, long-tail and one-demonstration-basin measurements without crediting any of them as new capability. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
   "what_this_is_not": "Not a repair contest, not a capability, not a benchmark score, not independent verification, not a proof of correctness, not a sentience claim, and not permission to merge over a red or missing referee."
 }

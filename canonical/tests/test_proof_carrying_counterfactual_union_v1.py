@@ -114,6 +114,12 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
             "canonical/verification/LEARN_OR_READ_BOARD_20261116_V1.json",
             "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
+            "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+            "ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.md",
+            "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+            "canonical/action_intents/ONE_TRY_LEARNS_A_DOMAIN_NOT_THE_ENVIRONMENT_20261116_V1.json",
+            "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+            "canonical/verification/ONE_DEMONSTRATION_BASIN_20261116_V1.json",
         ):
             self.assertIn(path, mod.EVIDENCE_READ)
 
@@ -153,6 +159,7 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "invariance_and_in_run_learning",
             "environment_cost_and_composition",
             "read_first_operand_and_replay_drift",
+            "long_tail_trigger_and_basin",
         ):
             self.assertIn(group, census["groups"])
             self.assertEqual(census["groups"][group]["missing"], [])
@@ -217,6 +224,33 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertIn("NO_CAPABILITY_REGISTERED", data["hard_nonclaims"])
         self.assertEqual(data["incremental_spend_usd"], 0)
         self.assertEqual(data["model_dependency_count"], 0)
+
+    def test_final_main_long_tail_and_basin_are_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for key in (
+            "declared_format_prior_is_too_small_to_be_a_single_lever",
+            "the_unsolved_remainder_is_a_long_tail_not_one_bottleneck",
+            "one_demonstration_learns_a_domain_not_the_environment",
+        ):
+            self.assertTrue(data["invariants"][key], key)
+        section = data["long_tail_trigger_and_basin"]
+        self.assertEqual(
+            section["status"],
+            "NO_SINGLE_LEVER_THE_REMAINDER_IS_A_LONG_TAIL_AND_THE_PREMISE_MUST_BE_OBSERVABLE",
+        )
+        self.assertEqual(section["declared_surface"]["pages_usable"], 123)
+        self.assertEqual(section["declared_surface"]["pages_declaring_a_format"], 6)
+        self.assertEqual(section["declared_surface"]["pages_with_no_typeable_field"], 84)
+        self.assertEqual(section["taxonomy"]["classes"], 16)
+        self.assertEqual(section["taxonomy"]["largest_class"], 6)
+        self.assertEqual(section["taxonomy"]["pages_unsolved"], 46)
+        self.assertEqual(section["basin"]["arms"]["status_level_goal"]["true_domain"], 112)
+        self.assertEqual(section["basin"]["arms"]["premise_task_under_status"]["undecidable"], 24)
+        self.assertEqual(section["basin"]["arms"]["premise_task_under_all_content"]["undecidable"], 0)
+        self.assertEqual(section["basin"]["arms"]["command_output_control"]["undecidable"], 168)
+        self.assertIn("NO_SINGLE_LEVER_CLAIM", data["hard_nonclaims"])
+        self.assertIn("NO_ONE_DEMONSTRATION_PER_ENVIRONMENT_CLAIM", data["hard_nonclaims"])
 
     def test_selection_measurement_is_read_but_not_counted_as_a_quixbugs_repair(self) -> None:
         path = ROOT / "canonical" / "verification" / "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
