@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c4bfb3d8f8ac29dc92bcc297e2c6223770e45887f748d04ab02ceae27663d645"
+  "value": "cb4fa31a03eb364dcc69edc923f5dfbbb4b7b9726f9dc4618717a0a3a5bd7740"
  },
  "engines": [
   {
@@ -62264,7 +62264,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 26316,
+   "bytes": 26622,
    "headings": [
     "The goal is a counterfactual world model, not a memory",
     "0. The short answer",
@@ -62284,16 +62284,17 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_GOAL_IS_A_COUNTERFACTUAL_WORLD_MODEL_20261116_V1.md",
-   "sha256": "e23eee1c37b070b12bbab5dcbd69ae20c5f35fd1258cadbfcfa4b8f73d028546",
+   "sha256": "9dfe6d29e33f312850c838c986f479dbc13f6a126b62b2d51c11b764df67f2a7",
    "summary": "**Date:** 2026-11-16 (UTC). **Branch:** `arena/5ea0bf08-brain`. **Authority:** NONE — producer-run sandbox measurement, no terminal truth, no leaderboard entry, no sentience/capability/family/weight claim.",
    "terms": {
     "16": 7,
     "2026": 11,
-    "after": 8,
-    "all": 10,
+    "after": 9,
+    "all": 9,
     "already": 9,
     "answer": 9,
     "any": 9,
+    "because": 7,
     "cannot": 7,
     "canonical": 17,
     "claim": 8,
@@ -62306,7 +62307,6 @@
     "executed": 13,
     "false": 12,
     "goal": 20,
-    "half": 7,
     "here": 10,
     "https": 21,
     "instant": 10,
@@ -62319,15 +62319,15 @@
     "never": 8,
     "new": 15,
     "no": 46,
-    "not": 63,
+    "not": 65,
     "one": 10,
     "only": 9,
     "own": 9,
-    "pr": 8,
+    "pr": 9,
     "published": 9,
     "real": 17,
     "swe-bench": 8,
-    "tasks": 15,
+    "tasks": 16,
     "tests": 10,
     "use": 12,
     "verdict": 11,
@@ -80979,7 +80979,7 @@
   "included_source_count": 1264,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "41db8f13ff0509f039ffee51baa4d93f6acf7955c86d064eaa000058cff9476f"
+  "source_tree_digest": "d6c3809533bfdb113eb032f30265b61ccb0536be3d46c3f08a2fed305626c66a"
  },
  "research_index": [
   {
