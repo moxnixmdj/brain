@@ -90,6 +90,10 @@ LABEL_NOT_ON_THE_PAGE = "REFUSED__LABEL_NOT_ON_THE_PAGE"
 SPATIAL = "REFUSED__SPATIAL_NEEDS_GEOMETRY"
 STYLE_NOT_OBSERVABLE = "REFUSED__STYLE_NOT_IN_OBSERVATION"
 CONTINUOUS = "REFUSED__CONTINUOUS_NO_END_STATE"
+#: Two instructions in one, joined by "and" ("Expand the section below and click submit"). The
+#: refuse-everything reading is only honest if the piece that is undecidable is the whole
+#: instruction; here it is not, so the decidable half is compiled and the other half is refused.
+PART_LIST = "REFUSED__PART_OF_THE_INSTRUCTION_IS_NOT_OBSERVABLE"
 FUZZY = "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE"
 MULTI_APP = "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION"
 NO_CLAUSE = "REFUSED__NO_CLAUSE_UNDERSTOOD"
@@ -199,7 +203,20 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
     }
     code = refusal_for(said)
     if code:
-        contract["refusal"] = code
+        split = _conjunction(said)
+        if split:
+            for half in split:
+                if refusal_for(half) is None:
+                    sub = compile_contract(half, observation)
+                    if sub["clauses"]:
+                        contract["clauses"] += sub["clauses"]
+        if contract["clauses"]:
+            contract["refusal"] = None
+            contract["refused_part"] = code
+            contract["verifies"] = (
+                "THAT_THE_DECIDABLE_HALF_OF_THE_INSTRUCTION_HAPPENED_NOT_THAT_THE_WHOLE_DID")
+        else:
+            contract["refusal"] = code
         return contract
 
     fields = [e for e in observation.get("elements") or [] if e.get("can_type")]
@@ -308,11 +325,56 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
             # numbers: the slider value and the checkbox ordinal. Only the number the slider
             # clause owns belongs here.
             window = said[max(0, control_word.start() - 40):control_word.end() + 40]
-            values = [float(token) for token in re.findall(r"\d+(?:\.\d+)?", window)]
+            # "Select 5 with the slider, click the 3rd checkbox" names TWO numbers for two
+            # different controls. Drop the ones that an ORDINAL already owns.
+            ordinals = {match.group(1) for match in
+                        re.finditer(r"(\d{1,2}(?:st|nd|rd|th))", said, re.IGNORECASE)}
+            tokens = [token for token in re.findall(r"\d+(?:\.\d+)?", window)
+                      if f"{token}th" not in ordinals and f"{token}rd" not in ordinals
+                      and f"{token}st" not in ordinals and f"{token}nd" not in ordinals]
+            values = [float(token) for token in tokens]
         if values:
             contract["clauses"].append({
                 "operator": "SET_CONTROL", "control": control_word.group(1),
                 "values": values, "provenance": control_word.group(0) + " " + str(values)})
+
+    # 4b-1. READ_PAIR: "Enter the value of Language into the text field" -- the answer is the
+    #     table cell NEXT TO the named cell. Both are in the observation, so this is decidable.
+    pair = re.search(r"\bvalue of\s+(.+?)\s+into\b", said, re.IGNORECASE)
+    if pair and fields:
+        wanted_label = pair.group(1).strip().strip('"').strip()
+        neighbour = _table_neighbour(elements, wanted_label)
+        if neighbour is not None:
+            # the precise reading owns the field: "Enter the value of Language" must not also
+            # leave a TYPE_VALUE that types the LABEL ("Color") into it. Measured 2026-11-16.
+            contract["clauses"] = [clause for clause in contract["clauses"]
+                                   if not (clause["operator"] == "TYPE_VALUE"
+                                           and int(clause.get("index", -1)) == int(fields[0]["index"]))]
+            contract["clauses"].append({
+                "operator": "READ_PAIR", "label": wanted_label, "answer_index": neighbour,
+                "index": int(fields[0]["index"]),
+                "provenance": f"value of {wanted_label}"})
+
+    # 4b-2. RANK_PICK: "the greatest number" / "the smallest". The numbers are on the page, and
+    #     the hidden container is the thing to press. Decidable, no pixels needed.
+    rank = re.search(r"\b(greatest|largest|biggest|smallest|least|lowest|highest)\b", low)
+    if rank:
+        card = _rank_pick(elements, rank.group(1))
+        if card is not None:
+            contract["clauses"].append({
+                "operator": "RANK_PICK", "rank": rank.group(1), "index": card,
+                "provenance": rank.group(0)})
+
+    # 4b-3. EXPAND: "Expand the section below" -- open every collapsed container, then continue.
+    #     The state that matters is the press, and the press is on the page. Decidable.
+    if re.search(r"\bexpand\b", low):
+        collapsed = [int(e["index"]) for e in elements
+                     if e.get("can_click")
+                     and ("collapsed" in str(e.get("classes") or "")
+                          or "ui-accordion-header" in str(e.get("classes") or ""))]
+        if collapsed:
+            contract["clauses"].append({"operator": "EXPAND", "indices": collapsed,
+                                        "provenance": "expand the section"})
 
     # 4c. focus: "Focus into the textbox" -- the observation carries `focused`, so this is a
     # state predicate like any other, not a refusal.
@@ -420,8 +482,23 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
 
     # 7. an order over the numbers of the elements pressed
     if re.search(r"\b(ascending|increasing order|from (?:smallest|lowest)|starting with the lowest)\b", low):
-        contract["clauses"].append({"operator": "ORDER", "direction": "ascending",
-                                    "provenance": "ascending order"})
+        numeric = [int(e["index"]) for e in elements
+                   if e.get("can_click") and re.fullmatch(r"-?\d+", plain(element_label(e)))]
+        if numeric:
+            numeric.sort(key=lambda index: float(plain(element_label(
+                next(e for e in elements if int(e["index"]) == index)))))
+            by_index = {int(e["index"]): plain(element_label(e)) for e in elements}
+            contract["clauses"].append({
+                "operator": "PRESS_SEQUENCE_BY_INDEX", "indices": numeric,
+                # a frozen INDEX is not an action: pages rewrite themselves mid-episode and the
+                # same index then names a different element. The labels are what stays true.
+                "labels": [by_index[index] for index in numeric],
+                "provenance": "ascending order"})
+            contract["clauses"] = [c for c in contract["clauses"]
+                                   if c["operator"] not in ("ORDER", "CLICK_LABELLED")]
+        else:
+            contract["clauses"].append({"operator": "ORDER", "direction": "ascending",
+                                        "provenance": "ascending order"})
     elif re.search(r"\b(descending|decreasing|starting with the (?:highest|largest))\b", low):
         contract["clauses"].append({"operator": "ORDER", "direction": "descending",
                                     "provenance": "descending order"})
@@ -429,6 +506,24 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
     if not contract["clauses"]:
         contract["refusal"] = NO_CLAUSE
     return contract
+
+
+def _conjunction(instruction: str) -> list[str]:
+    """"Expand the section below and click submit." -> ["Expand the section below", "click submit"]
+
+    Only an "and"/"then" that joins two INSTRUCTIONS is split. A split that leaves a fragment
+    without a verb is not a split, so nothing is invented.
+    """
+    if re.search(r"\bthen\b", instruction, re.IGNORECASE):
+        parts = re.split(r"\bthen\b", instruction, flags=re.IGNORECASE)
+    else:
+        parts = re.split(r"\band\b", instruction, flags=re.IGNORECASE)
+    parts = [part.strip(" ,.") for part in parts if part.strip(" ,.")]
+    verbs = re.compile(r"\b(expand|click|press|hit|enter|type|select|choose|pick|submit|fill|"
+                       r"find|focus|open|close|set|check)\b", re.IGNORECASE)
+    if len(parts) < 2 or not all(verbs.search(part) for part in parts):
+        return []
+    return parts
 
 
 def _press_sequence(instruction: str, observation: Mapping[str, Any]) -> list[str]:
@@ -488,6 +583,41 @@ def _field_named(observation: Mapping[str, Any], word: str, *, exclude: set[int]
                     if int(other["index"]) not in exclude:
                         return int(other["index"])
     return None
+
+
+def _table_neighbour(elements: Sequence[Mapping[str, Any]], label: str) -> int | None:
+    """The cell's partner: the element after the one that shows `label` in the same row."""
+    key = plain(label)
+    ordered = sorted(elements, key=lambda e: int(e.get("index", 0)))
+    for position, element in enumerate(ordered):
+        if plain(element_label(element)) != key:
+            continue
+        for later in ordered[position + 1:position + 3]:
+            text = plain(element_label(later))
+            if text and text != key:
+                return int(later["index"])
+    return None
+
+
+def _rank_pick(elements: Sequence[Mapping[str, Any]], rank: str) -> int | None:
+    """Which pressable container holds the extreme number the instruction asks for."""
+    best: tuple[float, int] | None = None
+    for element in elements:
+        if not element.get("can_click"):
+            continue
+        numbers = re.findall(r"-?\d+(?:\.\d+)?", str(element.get("full_text")
+                                                      or element_label(element) or ""))
+        if not numbers:
+            continue
+        for token in numbers:
+            value = float(token)
+            if best is None:
+                best = (value, int(element["index"]))
+            elif rank in ("greatest", "largest", "biggest", "highest") and value > best[0]:
+                best = (value, int(element["index"]))
+            elif rank in ("smallest", "least", "lowest") and value < best[0]:
+                best = (value, int(element["index"]))
+    return None if best is None else best[1]
 
 
 def _element_label_set(observation: Mapping[str, Any]) -> dict[str, list[int]]:
@@ -605,7 +735,15 @@ def _type_targets(instruction: str, observation: Mapping[str, Any],
     if shaped is None:
         shaped = re.search(r"\b(\d{1,2}:\d{2}(?::\d{2})?)\b", instruction)
     if shaped:
-        return {"value": shaped.group(1), "indices": indices,
+        literal = shaped.group(1)
+        # a time field will not take "1:13 PM". The conversion already exists in
+        # derived_value_v1 and was simply not applied to the shaped-literal path -- measured
+        # 2026-11-16 on enter-time, where "1:13" was typed and the page rejected it.
+        if re.search(r":", literal) and re.search(r"\b(am|pm)\b", instruction, re.IGNORECASE):
+            converted, _ = derived.clock24(instruction)
+            if converted:
+                literal = converted
+        return {"value": literal, "indices": indices,
                 "rule": "SHAPED_LITERAL_FROM_INSTRUCTION", "predicate": None,
                 "provenance": f"literal {shaped.group(1)!r}"}
 
@@ -702,6 +840,14 @@ def _check_clause(clause: Mapping[str, Any], trace: Sequence[tuple[Mapping[str, 
     operator = clause["operator"]
     if operator == "CLICK_NAMED":
         return _check_click_named(clause, trace)
+    if operator == "PRESS_SEQUENCE_BY_INDEX":
+        return _check_press_sequence_by_index(clause, trace)
+    if operator == "READ_PAIR":
+        return _check_read_pair(clause, trace)
+    if operator == "RANK_PICK":
+        return _check_rank_pick(clause, trace)
+    if operator == "EXPAND":
+        return _check_expand(clause, trace)
     if operator == "FOCUS":
         return _check_focus(clause, trace)
     if operator == "SET_CONTROL":
@@ -767,6 +913,66 @@ def _check_click_named(clause, trace) -> dict[str, Any]:
     return {"operator": "CLICK_NAMED", "verdict": PASS, "witness": hits[-1]}
 
 
+def _check_read_pair(clause, trace) -> dict[str, Any]:
+    """"the value of X" -> the field holds the cell that sits beside X."""
+    index = int(clause["index"])
+    answer = None
+    for observation, _action in trace:
+        elements = observation.get("elements") or []
+        partner = _table_neighbour(elements, clause["label"])
+        if partner is None:
+            continue
+        answer = plain(element_label(elements[partner]))
+        if index < len(elements) and plain(elements[index].get("value")) == answer:
+            return {"operator": "READ_PAIR", "verdict": PASS, "witness": f"{clause['label']}={answer}"}
+    if answer is None:
+        return {"operator": "READ_PAIR", "verdict": FAIL, "reason": "THE_NAMED_CELL_IS_NOT_ON_THE_PAGE"}
+    return {"operator": "READ_PAIR", "verdict": FAIL,
+            "reason": f"FIELD_DOES_NOT_HOLD_THE_NEIGHBOUR:{answer}"}
+
+
+def _check_rank_pick(clause, trace) -> dict[str, Any]:
+    """The extreme card was pressed."""
+    wanted = clause["index"]
+    for observation, action in trace:
+        match = re.fullmatch(r"(?:click|triple)@(\d+)", str(action or ""))
+        if match and int(match.group(1)) == int(wanted):
+            return {"operator": "RANK_PICK", "verdict": PASS, "witness": int(wanted)}
+    return {"operator": "RANK_PICK", "verdict": FAIL,
+            "reason": f"THE_{clause['rank'].upper()}_CARD_WAS_NEVER_PRESSED"}
+
+
+def _check_press_sequence_by_index(clause, trace) -> dict[str, Any]:
+    """The given elements were pressed, in exactly this order (ascending numbers, top to bottom)."""
+    wanted = [int(index) for index in clause["indices"]]
+    pressed: list[int] = []
+    for observation, action in trace:
+        match = re.fullmatch(r"(?:click|triple)@(\d+)", str(action or ""))
+        if match:
+            pressed.append(int(match.group(1)))
+    hits = [index for index in pressed if index in wanted]
+    if hits == wanted[:len(hits)] and len(hits) == len(wanted):
+        return {"operator": "PRESS_SEQUENCE_BY_INDEX", "verdict": PASS, "witness": hits}
+    return {"operator": "PRESS_SEQUENCE_BY_INDEX", "verdict": FAIL,
+            "reason": f"PRESSED_{hits}_WANTED_{wanted}"}
+
+
+def _contains_word(blob: str, word: str) -> bool:
+    if not word:
+        return False
+    return re.search(r"(?<![a-z0-9])" + re.escape(word) + r"(?![a-z0-9])", blob) is not None
+
+
+def _check_expand(clause, trace) -> dict[str, Any]:
+    """An element that was collapsed when the episode began has been pressed."""
+    wanted = {int(index) for index in clause["indices"]}
+    for observation, action in trace:
+        match = re.fullmatch(r"(?:click|triple)@(\d+)", str(action or ""))
+        if match and int(match.group(1)) in wanted:
+            return {"operator": "EXPAND", "verdict": PASS, "witness": int(match.group(1))}
+    return {"operator": "EXPAND", "verdict": FAIL, "reason": "NOTHING_WAS_EXPANDED"}
+
+
 def _check_focus(clause, trace) -> dict[str, Any]:
     """One of the instruction's fields took the focus -- read from the state OR from the action.
 
@@ -828,9 +1034,17 @@ def _check_set_control(clause, trace) -> dict[str, Any]:
 
 
 def _control_values(observation: Mapping[str, Any]) -> list[float]:
-    """The numeric values of every settable control the observation shows."""
+    """The numeric values the observation shows for settable controls.
+
+    A jQuery slider has no input: its value is DISPLAYED in a separate element and changed by
+    dragging or by the arrow keys. Reading only form controls found nothing (measured 2026-11-16
+    on use-slider, whose only numeric element is a div showing "107").
+    """
     out: list[float] = []
     for element in observation.get("elements") or []:
+        displayed = re.findall(r"-?\d+(?:\.\d+)?", str(element.get("text") or ""))
+        if displayed and (element.get("can_click") or element.get("can_type")):
+            out.append(float(displayed[0]))
         tag = str(element.get("tag") or "").lower()
         kind = str(element.get("type") or "").lower()
         settable = (bool(element.get("can_type")) or bool(element.get("can_click"))
@@ -941,9 +1155,13 @@ def _check_label_on_trace(clause, trace) -> dict[str, Any]:
         match = re.fullmatch(r"(?:click|triple)@(\d+)", str(action or ""))
         if match and int(match.group(1)) < len(elements):
             element = elements[int(match.group(1))]
-            if wanted and (wanted in plain(element_label(element))
-                           or wanted in plain(element.get("full_text"))
-                           or wanted in plain(element.get("text"))):
+            # WHOLE WORDS. A substring test made "ut" match "vulputate." and the wrong link was
+            # pressed -- measured 2026-11-16 on click-tab-2-easy, a false accept waiting to be
+            # recorded as a skill.
+            blob = plain(" ".join(str(element.get(field) or "")
+                                  for field in ("text", "full_text", "value",
+                                                "aria-label", "title")))
+            if wanted and _contains_word(blob, wanted):
                 return {"operator": "LABEL_ON_TRACE", "verdict": PASS,
                         "witness": f"PRESSED_AFTER_FINDING:{int(match.group(1))}"}
         for element in elements:
