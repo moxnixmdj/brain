@@ -11,16 +11,16 @@
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "action_kind": "INDEPENDENT_MEASUREMENT",
+ "causal_blocker": "THE_REPOSITORY_ASSERTED_THAT_THE_37_UNSOLVED_HELD_OUT_PAGES_NEED_A_SUBSTRATE_WITH_REAL_GEOMETRY_AND_A_SEARCH_THAT_USES_THE_WHOLE_HAND_BUT_THAT_RUN_ALREADY_EXISTED_AND_NOBODY_HAD_SEPARATED_UNREACHABLE_FROM_MERELY_UNEXPLORED_SO_THE_ROADMAP_WAS_BUILT_ON_AN_UNMEASURED_ASSUMPTION",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_REPOSITORY_ASSERTED_THAT_THE_37_UNSOLVED_HELD_OUT_PAGES_NEED_A_SUBSTRATE_WITH_REAL_GEOMETRY_AND_A_SEARCH_THAT_USES_THE_WHOLE_HAND_BUT_THAT_RUN_ALREADY_EXISTED_AND_NOBODY_HAD_SEPARATED_UNREACHABLE_FROM_MERELY_UNEXPLORED_SO_THE_ROADMAP_WAS_BUILT_ON_AN_UNMEASURED_ASSUMPTION",
+ "intentional_route_race": false,
+ "action_kind": "GOVERNANCE_GUARD",
  "governance_change": false,
  "user_authorized_governance_change": false,
  "weakens_existing_guard": false,
  "probe_specific": false,
  "generic_repair_from_single_probe": false,
  "highest_leverage_now": true,
- "causal_blocker": "THE_REPOSITORY_ASSERTED_THAT_THE_37_UNSOLVED_HELD_OUT_PAGES_NEED_A_SUBSTRATE_WITH_REAL_GEOMETRY_AND_A_SEARCH_THAT_USES_THE_WHOLE_HAND_BUT_THAT_RUN_ALREADY_EXISTED_AND_NOBODY_HAD_SEPARATED_UNREACHABLE_FROM_MERELY_UNEXPLORED_SO_THE_ROADMAP_WAS_BUILT_ON_AN_UNMEASURED_ASSUMPTION",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_REPOSITORY_ASSERTED_THAT_THE_37_UNSOLVED_HELD_OUT_PAGES_NEED_A_SUBSTRATE_WITH_REAL_GEOMETRY_AND_A_SEARCH_THAT_USES_THE_WHOLE_HAND_BUT_THAT_RUN_ALREADY_EXISTED_AND_NOBODY_HAD_SEPARATED_UNREACHABLE_FROM_MERELY_UNEXPLORED_SO_THE_ROADMAP_WAS_BUILT_ON_AN_UNMEASURED_ASSUMPTION",
- "intentional_route_race": false,
  "explicit_user_authorization": [
   "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
   "Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them?",
@@ -33,18 +33,18 @@
   "Work in branch, merge only when complete (fastest)",
   "Merge once, not 10 times."
  ],
+ "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+ "route_id": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
  "prior_work_reused": [
   "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
   "canonical/tools/miniwob_chromium_bridge_v1.mjs",
   "canonical/runtime/systematic_exploration_v1.py",
   "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
  ],
- "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
- "route_id": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
- "expected_parent_change": "The residual coverage gap stops being an unmeasured assumption: each of the 37 unsolved held-out pages is assigned to budget, state, action-vocabulary, or nothing-offered, with the repair that world implies, so the next capability work is aimed by measurement.",
+ "expected_parent_change": "The residual coverage gap stops being an unmeasured assumption: each of the 37 unsolved held-out pages is assigned to budget, state, action-vocabulary or nothing-offered, with the repair that world implies.",
  "expected_parent_frontier_change": "Coverage work is aimed at the action prior and the state key instead of at more action primitives that no page is evidence for.",
  "falsification_condition": "Any of the 37 pages converts at 1500 actions beyond the one observed; or a page reported as budget turns out to have closed on exhaustion; or the world labels do not partition the rows; or the task set is not exactly the held-out pages the baseline receipt calls undemonstrated; or the receipt claims capability or credit.",
- "next_step": "Build an instruction-grounded prior over actions that lowers the measured 8.34 actions per distinguishable state, pre-registered to gain at least 8 of the 37 pages with zero regression on the 55 already covered; and add the observable that the three state-blind pages need.",
+ "next_step": "Build an instruction-grounded prior over actions that lowers the measured 8.34 actions per distinguishable state, pre-registered to gain at least 8 of the 37 pages with zero regression on the 55 already covered; and add the observable the three state-blind pages need.",
  "stop_condition": "The 37 pages are classified into worlds by their own recorded terminal status and the receipt states no capability, family, terminal or weight credit.",
  "terminal_credit_delta": 0,
  "capability_credit_delta": 0,
@@ -56,7 +56,7 @@
  "measured_effect": {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
   "question": "For the 37 held-out MiniWoB++ pages that yield no first success, are they unreachable or merely unexplored?",
-  "protocol": "Same 37 pages derived from the baseline receipt, same pages (upstream 33c3b4ddef8c6eb67c57a29663d844b1eda7e614), same hand, headless Chromium 153.0.8010.0, guided order, 1500 actions = 2.5x the baseline 600.",
+  "protocol": "Same 37 pages derived from the baseline receipt, same pages (upstream 33c3b4dd), same hand, headless Chromium 153.0.8010.0, guided order, 1500 actions = 2.5x the baseline 600.",
   "actions_spent": 50154,
   "pages_that_used_the_whole_budget": "32 of 36 measured",
   "first_successes_found": 1,
@@ -64,17 +64,21 @@
   "coverage_before": "55 of 92 held-out pages demonstrated once",
   "coverage_after": "56 of 92",
   "pages_proved_unreachable": 0,
-  "state_blind": ["hot-cold", "hover-shape", "simon-says"],
+  "state_blind": [
+   "hot-cold",
+   "hover-shape",
+   "simon-says"
+  ],
   "still_unexplored": 32,
   "instrument_error": "stock-market: BridgeHang, recorded as an instrument error and not as a wall",
   "measured_branching": "8.34 actions per distinguishable state (50154 actions / 6017 states)",
   "depth_arithmetic": "b^depth at b=8.34 puts depth 6 near 336511 actions against 1500 spent; at b=2 it is 64. Order-of-magnitude only: the explorer merges states.",
-  "new_tests": "canonical/tests/test_where_the_wall_actually_is_v1.py: 11 passed; two fail if an exhausted space or a state-blind stop is called a budget problem, one if a stale stored label outvotes the recorded statuses",
+  "new_tests": "canonical/tests/test_where_the_wall_actually_is_v1.py: 11 passed",
   "external_context_for_ranking_not_authority": [
-   "OSWorld 2.0, arXiv:2606.29537 - best 2026 configuration 20.6% binary on 108 long-horizon tasks; failures are state loss, missed updates and skipped verification, not GUI control",
-   "Veritas, arXiv:2611.13336 - self-improvement is gated by the verifier, and most real tasks arrive without one",
-   "VerifierBench, arXiv:2610.28679 - generated verifiers reject valid solutions far more reliably than they accept invalid ones",
-   "ContinualSkillBench, arXiv:2608.03874 - in-context skill maintenance is at parity with no library (0.605 vs 0.602)"
+   "OSWorld 2.0, arXiv:2606.29537 - best 2026 configuration 20.6% binary on 108 long-horizon tasks",
+   "Veritas, arXiv:2611.13336 - self-improvement is gated by the verifier",
+   "VerifierBench, arXiv:2610.28679 - generated verifiers reject valid solutions more often than they accept invalid ones",
+   "ContinualSkillBench, arXiv:2608.03874 - in-context skill maintenance is at parity with no library"
   ]
  },
  "agent_orientation": {
@@ -107,7 +111,7 @@
    "AGENTS.md"
   ],
   "independent_verification_completed": false,
-  "independent_verification_note": "Producer-run in one sandbox. Independent personnel verification is open.",
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
   "terminal_achieved": false,
   "scope_complete_discharge": false
  },
@@ -121,6 +125,369 @@
   "expected_obligation_unlock_lcb": "1/100",
   "success_probability_lcb": "1/2",
   "wall_clock_cost_ub": 1,
-  "interpretation": "Speculative forecast only. Computer use is gated on a first success existing at all and on a verifier existing at all; this measurement localises which of those is binding on the residual pages. No obligation discharge, benchmark gain, capability credit or independent verification is claimed."
+  "interpretation": "Speculative forecast only: repairing the read-only failure signal is the cheapest currently available prerequisite to verified general capability work. No obligation discharge, benchmark gain, capability credit or independent verification is claimed."
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "a0265cc6a443ad3304b3acdfce08f2397191ce82",
+  "real_outcome": "Each of the 37 held-out pages that yields no first success is assigned to the world its own terminal explorer status proves, so the next capability work is aimed by measurement instead of by an inherited assumption.",
+  "required_capability": "Honest classification of a search failure into unreachable, unexplored, state-blind or nothing-offered, with the repair each implies.",
+  "iteration_limit": 1,
+  "routes_considered": [
+   "Re-run the whole 130-page benchmark on chromium with the whole hand (checked: this already exists as the V5 receipt)",
+   "Raise the action budget on the unsolved pages and see whether they convert",
+   "Add action primitives (scroll, coordinate pointing) and measure whether pages convert",
+   "Read each page's own source to decide which primitive it needs (peeking at the spec: a diagnosis, not an agent-side result)",
+   "Classify each page by the terminal status its own search recorded"
+  ],
+  "deleted_or_bypassed_paths": [
+   "re-running a measurement the repository had already made",
+   "asserting the residual is a missing primitive without a closed exhaustion",
+   "treating an unexplored page as if it were proven unreachable",
+   "spending more compute on a budget wall before knowing whether a budget wall is what it is"
+  ],
+  "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+  "selected_surviving_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+  "selected_surviving_route_class": "REUSE",
+  "why_selected_route_is_fastest_sufficient": "The instrument, the chromium bridge, the explorer and its four terminal statuses already exist and already decide unreachable versus unexplored. Reusing them costs one run and answers the question that ranks all further work; adding primitives or learners first would spend the same time on a hypothesis nobody had tested.",
+  "expected_parent_level_state_change": "The residual coverage gap stops being an unmeasured assumption: each of the 37 unsolved held-out pages is assigned to budget, state, action-vocabulary or nothing-offered, with the repair that world implies.",
+  "stop_condition": "The 37 pages are classified into worlds by their own recorded terminal status and the receipt states no capability, family, terminal or weight credit.",
+  "obs_goal": {
+   "real_outcome": "The residual coverage gap is located, not assumed, so the highest-leverage next capability is chosen by evidence.",
+   "proxy_goals_deleted": [
+    "a higher coverage number reached by loosening the success rule",
+    "counting a page as solved because it was searched harder",
+    "calling an unexplored page unreachable"
+   ],
+   "surviving_necessity": "Computer use is gated on a first success existing at all; no learner can act on a task that never succeeded."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "systematic_exploration_v1 (four terminal statuses)",
+    "miniwob_one_success_generalisation_measure_v1",
+    "miniwob_chromium_bridge_v1.mjs"
+   ],
+   "external_existing_routes_checked": [
+    "OSWorld 2.0 failure analysis (state loss, skipped verification)",
+    "Veritas verifier-generation harness",
+    "ContinualSkillBench in-context skill maintenance"
+   ],
+   "capability_work_deleted": [
+    "a second learner",
+    "a new action primitive chosen without evidence",
+    "a re-run of the existing V5 coverage measurement"
+   ],
+   "surviving_gap": "No prior over actions exists that lowers the effective branching factor, and the state key cannot see what three pages depend on."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "path_specific: this measurement removes an unmeasured assumption; the exponential search cost and the verifier gap remain intrinsic",
+   "delete_bypass_substitute_options": [
+    "delete the assumption",
+    "reuse the existing instrument",
+    "do not substitute more compute for a measurement"
+   ],
+   "surviving_causal_blocker": "Uniform search over an ungrounded action set, and the absence of a constructed verifier in the live loop."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "classify by recorded terminal status",
+    "re-run the whole benchmark",
+    "raise the budget",
+    "add primitives",
+    "read the page specs"
+   ],
+   "losing_routes_reason": "Re-running the whole benchmark repeats a made measurement; raising the budget without a classification cannot say whether a budget wall exists; adding primitives on a story is what this measurement finds no evidence for; reading page specs diagnoses the agent but is not an agent-side result.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The capability evidence is the public benchmark's own reward; unit controls pin the classification; independent reproduction remains open.",
+   "oracle_paths": [
+    "canonical/tests/test_where_the_wall_actually_is_v1.py",
+    "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+   ]
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds an action primitive on the claim that the residual needs one.",
+   "adjacent_capabilities_absorbed": "None. This classifies failures; it owns no new capability.",
+   "fresh_reuse_plan": "Re-run the classifier over the same raw rows; later reproduce independently on another substrate."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "Reused the V5 coverage receipt and the explorer's own verdicts instead of re-deriving coverage or re-running 130 pages.",
+   "search_stop_decision": "Stop after the 37 pages are classified and tested; do not add primitives or a learner without the measurement.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-16T13:54:14Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+     "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+     "canonical/runtime/systematic_exploration_v1.py",
+     "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2606.29537 (OSWorld 2.0: best configuration 20.6% binary; failures are state loss and skipped verification)",
+     "https://arxiv.org/abs/2611.13336 (Veritas: self-improvement is gated by the verifier)",
+     "https://arxiv.org/html/2610.28679 (VerifierBench: generated verifiers mostly reject valid solutions)",
+     "https://arxiv.org/pdf/2608.03874 (ContinualSkillBench: in-context skill maintenance at parity with no library)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://registry.npmjs.org/jsdom (31.0.1, the substrate the baseline receipt was taken on)",
+     "https://registry.npmjs.org/@sparticuz/chromium (chromium 153, real layout and hit-testing)",
+     "https://registry.npmjs.org/puppeteer-core (25.17.0, the input pipeline the bridge drives)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/Farama-Foundation/miniwob-plusplus (MIT, upstream 33c3b4ddef8c6eb67c57a29663d844b1eda7e614 byte-identical to the receipt)",
+     "https://www.sota2.com/research/dataset/miniwob (2026 reporting of MiniWoB++ agent scores, used only to bound how hard the suite is)"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "OSWorld 2.0 long-horizon computer use agents benchmark 2026 verification state drift"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "Veritas verifier generation harness agent tasks arxiv 2611.13336"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "agents generate their own verifiers bottleneck 2026 VerifierBench test-time verification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "MiniWoB++ benchmark saturated 2026 web agents small task suite still useful evaluation"
+    },
+    {
+     "intent": "FAILURE_MODE",
+     "query": "2026 continual learning agents why in-context experience does not become capability without weights skill library drift"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "incumbent_route": "estimate the residual coverage gap from the count of undemonstrated pages, without a per-page verdict",
+   "challenger_routes": [
+    {
+     "route": "re-run the full 130-page benchmark on chromium with the whole hand",
+     "evidence": [
+      "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json already is that run: 78 of 130 demonstrated"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+     ],
+     "qualification_evidence_classes": [
+      "BRAIN_INHERITED"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "would produce the same 55 of 92",
+      "CAPABILITY_STRENGTH": "no new information",
+      "WALL_CLOCK": "about two hours of the whole suite",
+      "INCREMENTAL_COST": "full",
+      "RELIABILITY": "identical result",
+      "VERIFIABILITY": "already verified producer-side"
+     }
+    },
+    {
+     "route": "raise the action budget until the pages convert",
+     "evidence": [
+      "2.26x the baseline budget converted 1 page in 37"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "budget is near-inelastic here",
+      "CAPABILITY_STRENGTH": "one page for doubled compute",
+      "WALL_CLOCK": "about 27 minutes",
+      "INCREMENTAL_COST": "high",
+      "RELIABILITY": "exponential cost in depth",
+      "VERIFIABILITY": "measured"
+     }
+    },
+    {
+     "route": "add an action primitive because the pages look like they need one",
+     "evidence": [
+      "no page closed on exhaustion, so no page is evidence for a specific missing primitive"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "unfounded by the data",
+      "CAPABILITY_STRENGTH": "unmeasured",
+      "WALL_CLOCK": "days",
+      "INCREMENTAL_COST": "high and permanent",
+      "RELIABILITY": "also raises branching factor",
+      "VERIFIABILITY": "cannot say which primitive"
+     }
+    },
+    {
+     "route": "read each page's own source to decide which primitive it needs",
+     "evidence": [
+      "the page spec states the goal condition, but this diagnoses the agent rather than measuring it"
+     ],
+     "qualification_evidence": [
+      "canonical/tools/miniwob_where_the_wall_actually_is_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DEFERRED",
+     "comparison": {
+      "CORRECTNESS": "diagnosis only",
+      "CAPABILITY_STRENGTH": "none claimed",
+      "WALL_CLOCK": "hours",
+      "INCREMENTAL_COST": "low",
+      "RELIABILITY": "requires care against peeking",
+      "VERIFIABILITY": "spec is external"
+     }
+    }
+   ],
+   "negative_search_summary": "No external system was found that separates unreachable from unexplored for an agent's own search, and no paper supplies a per-page repair ranking; the four terminal statuses this repository already computes are the only mechanism found that decides it, so the work reuses them.",
+   "unresolved_plausible_dominators": [],
+   "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-16T13:54:14Z",
+    "max_age_hours": 2,
+    "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "producer ran the classifier suite: 11 passed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "headless Chromium 153 via npm (@sparticuz/chromium, puppeteer-core)",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "50,154 actions executed against real pages with real mouse and key input"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "MiniWoB++ task pages at the receipt's upstream commit",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "upstream HEAD is 33c3b4ddef8c6eb67c57a29663d844b1eda7e614, the byte-identical tree the baseline used"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "terminal": false,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "proof_state_reachability": "This classifies the residual coverage gap for computer use; it discharges no truth obligation.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "WHERE_THE_WALL_ACTUALLY_IS_20261116_V1",
+   "falsifier_id": "FOUR_WORLD_CLASSIFICATION_TESTS_PLUS_THE_1500_ACTION_RERUN",
+   "decisive_question": "Is each unsolved held-out page unreachable, merely unexplored, state-blind, or nothing-offered -- and therefore which repair does it ask for?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "The rerun is itself the counterexample to the inherited claim; no new external receipt is added by this PR."
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "independent_verification_completed": false,
+  "commands": [
+   "npm install jsdom@31.0.1 @sinonjs/fake-timers@15.4.0 puppeteer-core @sparticuz/chromium",
+   "python3 canonical/tools/miniwob_where_the_wall_actually_is_v1.py --html-dir <miniwob/html> --node-modules-dir <dir containing node_modules> --budget 1500 --part 0 --parts 2 --out /tmp/wall.jsonl",
+   "python3 canonical/tools/miniwob_where_the_wall_actually_is_v1.py --consolidate /tmp/wall.jsonl /tmp/wall1.jsonl --out canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json",
+   "python3 -m pytest canonical/tests/test_where_the_wall_actually_is_v1.py canonical/tests/test_insufficiency_witness_v1.py -q",
+   "python3 execution_guard/repo_integrity_guard_v1.py",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py"
+  ],
+  "result": "1 of 37 pages reached a first success; 0 closed on exhaustion; 3 state-blind; 32 unexplored; 1 instrument error. 24 tests passed; guard PASS; model 33/33."
  }
 }
