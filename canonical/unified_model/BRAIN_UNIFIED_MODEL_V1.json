@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 467,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6894,
+  "research_index_records": 6895,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
-  "source_index_modules": 1985
+  "source_index_modules": 1987
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e86185856061329a6f7523a27b8e08b3e1abeb684f85d1ac61147b935a7344f"
+  "value": "523ac6ce417bd904f068e0cf87bed308126719aca5631af24b0e1af36c090dfb"
  },
  "engines": [
   {
@@ -208543,6 +208543,27 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+   "sha256": "0b001506ffd3be835c469c2e4a5ccfacce7a3a77e3fdda3c9d47a528103394f9",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "did": 1,
+    "not": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "say": 1,
+    "sentence": 1,
+    "submit": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -279958,6 +279979,39 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/implied_ending_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/implied_ending_v1.py",
+   "sha256": "5f7200727b198811a35db80b9207e11df671b18d1560ef18a1529f6af7551207",
+   "summary": "A SENTENCE DOES NOT NEED TO SAY \"SUBMIT\" FOR THE PAGE TO GRADED IT ON SUBMIT.",
+   "symbol_count": 4,
+   "symbols": [
+    "Ending",
+    "_own_words",
+    "find_ending",
+    "might_need_an_ending"
+   ],
+   "terms": {
+    "ending": 2,
+    "find_ending": 1,
+    "graded": 1,
+    "implied": 1,
+    "might_need_an_ending": 1,
+    "need": 1,
+    "not": 1,
+    "own_words": 1,
+    "page": 1,
+    "say": 1,
+    "sentence": 1,
+    "submit": 2,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/incumbent_dominance_search_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -280290,9 +280344,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/instruction_contract_v1.py",
-   "sha256": "e5188a36624ace83271c95e43260680aa09df59938cb69749360a807545493e6",
+   "sha256": "0d7fd126ad015fecacab3ab7a896733adf3b6ce2cfb1623031dd2060a19c9ac7",
    "summary": "Compile an instruction into a checkable contract, so the verifier stops being missing.",
-   "symbol_count": 58,
+   "symbol_count": 60,
    "symbols": [
     "_check_clause",
     "_check_click_in_frame",
@@ -280314,10 +280368,10 @@
     "_check_press_sequence_by_index",
     "_check_rank_pick",
     "_check_read_pair",
+    "_check_select_picker",
     "_check_select_set",
     "_check_set_control",
-    "_check_type_matching",
-    "_check_type_value"
+    "_check_type_matching"
    ],
    "terms": {
     "being": 1,
@@ -280364,9 +280418,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/instruction_policy_v1.py",
-   "sha256": "7042ee0d06a54b7a223b29d3e9dd326a46e0d156cf074c264786790c908f38d3",
+   "sha256": "1af71dc0fcfb156bef118ab91986d0b5a47b01e94732c5dd2cb0718a8839ae10",
    "summary": "The instruction is the policy: produce the first action with NO experience and NO reward.",
-   "symbol_count": 24,
+   "symbol_count": 29,
    "symbols": [
     "ContractArm",
     "_applied",
@@ -280378,20 +280432,20 @@
     "_holding",
     "_horizontal",
     "_inside",
+    "_is_instance_done",
+    "_is_tab",
     "_label_at",
     "_label_served",
     "_nearest_box",
     "_one_step_along",
     "_opens_on_hover",
+    "_picker_filled",
+    "_picker_step",
     "_pressable",
+    "_probe_day",
     "_reveal",
     "_slider_track",
-    "_spinner_arrows",
-    "action_for_clause",
-    "first_action",
-    "main",
-    "order_for_execution",
-    "satisfied_by_construction"
+    "_spinner_arrows"
    ],
    "terms": {
     "action": 1,
@@ -280404,15 +280458,15 @@
     "field_for": 1,
     "fingerprint": 1,
     "first": 1,
-    "first_action": 1,
     "first_matching": 1,
     "holding": 1,
     "horizontal": 1,
     "inside": 1,
     "instruction": 2,
+    "is_instance_done": 1,
+    "is_tab": 1,
     "label_at": 1,
     "label_served": 1,
-    "main": 1,
     "nearest_box": 1,
     "no": 2,
     "one_step_along": 1,
@@ -292143,6 +292197,45 @@
     "strong_check": 1,
     "v1": 1,
     "weak_check": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/picker_answer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/picker_answer_v1.py",
+   "sha256": "3286f8113c9855aece0127a5c78b2e4a55af20c47882122167b66a4910a11451",
+   "summary": "A CONTROL THAT ASKS A FURTHER QUESTION, AND THE WORDS THAT ANSWER IT.",
+   "symbol_count": 8,
+   "symbols": [
+    "Answer",
+    "_own_text",
+    "_parts_of",
+    "answer_picker",
+    "date_parts",
+    "declared_order",
+    "months_name",
+    "navigate_to_month"
+   ],
+   "terms": {
+    "answer": 3,
+    "answer_picker": 1,
+    "asks": 1,
+    "control": 1,
+    "date_parts": 1,
+    "declared_order": 1,
+    "further": 1,
+    "months_name": 1,
+    "navigate_to_month": 1,
+    "own_text": 1,
+    "parts_of": 1,
+    "picker": 1,
+    "question": 1,
+    "v1": 1,
+    "words": 1
    }
   },
   {
