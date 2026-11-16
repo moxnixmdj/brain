@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_NEVER_MEASURED_HOW_MUCH_OF_A_TASK_ONE_DEMONSTRATION_LICENSES_SO_ONE_SUCCESS_WAS_COUNTED_AS_LEARNING_THE_ENVIRONMENT_WHEN_IT_LEARNS_ONE_TRAJECTORY_AND_AN_UNDECIDABLE_SET_THAT_NO_FURTHER_EXPERIENCE_CAN_CLOSE",
-  "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
+  "canonical_base_commit": "989cac08384b3550d5013a7ba9235df12ad350af",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -178,7 +178,7 @@
       "test_time_adaptation": "ICLR 2026: persona-driven exploration lifts WebArena multi-site 2% to 23% with about 7M tokens of exploration per site; the gain appears only where transitions are unpredictable and a naive hybrid underperforms"
     },
     "incremental_spend_usd": 0,
-    "measured_at_commit": "6dbd2239a47ad05f12b618f3d4b8464ca7001132",
+    "measured_at_commit": "24d723047d6f07ac26c2c95646b3295d4dcd86d8",
     "model_calls": 0,
     "network_calls": 0,
     "what_this_does_not_claim": [
@@ -207,7 +207,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
+    "canonical_base_commit": "989cac08384b3550d5013a7ba9235df12ad350af",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "counting one success as learning an environment",
