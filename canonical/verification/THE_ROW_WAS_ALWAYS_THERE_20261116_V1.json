@@ -186,5 +186,5 @@
  "terminal_credit_delta": 0,
  "capability_credit_delta": 0,
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010"
+ "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9"
 }

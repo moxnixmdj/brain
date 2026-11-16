@@ -5,7 +5,7 @@
  "action_intent_id": "THE_ROW_WAS_ALWAYS_THERE_20261116_V1",
  "date": "2026-11-16",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010",
+ "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -176,7 +176,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010",
+  "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9",
   "real_outcome": "Six email pages that three rounds of refusal had called 'state outside the observation' now resolve from the instruction alone: open the named record, write the quoted text, press the control the sentence names -- with the page's reward read only afterwards.",
   "required_capability": "Naming the region of an observation that a word picks out, and proving by name when it cannot: more than one record matches, the record holds no such control, no element shows the identifier, or the record is reachable but not present.",
   "iteration_limit": 1,
