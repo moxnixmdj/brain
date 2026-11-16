@@ -321,7 +321,7 @@
           "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
         }
       ],
-      "checked_at_utc": "2026-11-16T15:44:03Z",
+      "checked_at_utc": "2026-11-16T23:58:07Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -332,7 +332,7 @@
       ],
       "discovery_required": true,
       "incumbent_route": "extend the hand-written mutation list and raise the candidate budget when a bug does not close",
-      "max_age_hours": 24,
+      "max_age_hours": 2,
       "negative_search_summary": "Four routes were searched and refused with evidence: a single added mutation kind, more candidate budget, the existing token anti-unifier, and a model-written patch.",
       "query_families": [
         {
@@ -358,61 +358,61 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+      "selected_route": "SYNTHESIZE_AN_OFFLINE_COMPOSER_OVER_THE_MEASURED_OPERATOR_TABLE_WITH_A_FRAME_CONDITION_AND_A_PER_STEP_PREDICTION_AUDIT_AND_EXHAUSTIVE_UNREACHABILITY_PROOFS",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T21:45:29Z",
+        "checked_at_utc": "2026-11-16T23:58:05Z",
         "execution_dependencies": [
           {
-            "dependency": "local Python 3.11 runtime with pytest 9.2.0",
-            "evidence": [
-              "Python 3.11.2 pytest 9.2.0; 4 tests in canonical/tests/test_composed_repair_one_run_v1.py pass"
-            ],
-            "evidence_classes": [
-              "DIRECT_PROBE"
-            ],
-            "evidence_scope": "GLOBAL",
+            "dependency": "local Python 3.11 runtime with pytest",
             "kind": "LOCAL_RUNTIME",
             "required": true,
             "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "volatility": "STATIC",
             "status": "READY",
-            "volatility": "STATIC"
-          },
-          {
-            "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
-            "evidence": [
-              "QuixBugs re-fetched; 41 task files, every verdict the corpus's own pytest"
-            ],
             "evidence_classes": [
               "DIRECT_PROBE"
             ],
-            "evidence_scope": "GLOBAL",
+            "evidence": [
+              "Python 3.11.2 + pytest 9.2.0; 8 tests in canonical/tests/test_compose_measured_effects_v1.py pass at 2026-11-16T23:58:05Z"
+            ]
+          },
+          {
+            "dependency": "four real machines on this sandbox: git 2.39.5, tar 1.34, sh/find, python3 sqlite3 module",
             "kind": "CODE_ARTIFACT",
             "required": true,
-            "scope": "GLOBAL",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "volatility": "STATIC",
             "status": "READY",
-            "volatility": "STATIC"
-          },
-          {
-            "dependency": "local filesystem tempdir for per-task isolation",
-            "evidence": [
-              "per-task tempdir, answer key absent, across the 41-file composed run (387.8 s)"
-            ],
             "evidence_classes": [
               "DIRECT_PROBE"
             ],
-            "evidence_scope": "GLOBAL",
+            "evidence": [
+              "probed at 2026-11-16T23:58:05Z: git 2.39.5, tar 1.34, sqlite3 3.40.1, /bin/sh and find present; 29 measured cells and 15 executed steps this run"
+            ]
+          },
+          {
+            "dependency": "local filesystem tempdir for per-machine isolation",
             "kind": "STORAGE",
             "required": true,
-            "scope": "GLOBAL",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "volatility": "STATIC",
             "status": "READY",
-            "volatility": "STATIC"
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence": [
+              "one tempdir per machine and per request, answer key absent; 14 of 16 solved at 2026-11-16T23:58:05Z"
+            ]
           }
         ],
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+        "selected_route": "SYNTHESIZE_AN_OFFLINE_COMPOSER_OVER_THE_MEASURED_OPERATOR_TABLE_WITH_A_FRAME_CONDITION_AND_A_PER_STEP_PREDICTION_AUDIT_AND_EXHAUSTIVE_UNREACHABILITY_PROOFS",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -451,7 +451,7 @@
       "Ask a model to write the patch (refused: producer cognition, zero credit)"
     ],
     "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
-    "selected_surviving_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+    "selected_surviving_route": "SYNTHESIZE_AN_OFFLINE_COMPOSER_OVER_THE_MEASURED_OPERATOR_TABLE_WITH_A_FRAME_CONDITION_AND_A_PER_STEP_PREDICTION_AUDIT_AND_EXHAUSTIVE_UNREACHABILITY_PROOFS",
     "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
     "stop_condition": "One merged change on this branch, with the corpus measurement reproducible from the receipt.",
     "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real artifact and refused: the crystallizer's token anti-unification cannot express position-level containment and has no site context, and the existing repair primitive has no ast.AugAssign rule at all. Inducing a template from one demonstration pair and letting the corpus's own tests decide costs two runs; adding another hand-written mutation kind would lift one bug of forty and leave the question unmeasured.",
