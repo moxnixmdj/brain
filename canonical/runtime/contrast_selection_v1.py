@@ -138,6 +138,15 @@ def select_contrast(
     so the caller owns that contract and this module keeps the pool small by default.
     """
     boundary = APP.learn(evidence)
+    # BEYOND THE ENUMERATION CAP the survivor family is too large to list, but its splits are
+    # still exactly countable (`applicability_v1.count_survivors`). Under those conditions the
+    # selection is made from counts; every smaller space keeps the list path unchanged.
+    rows = [(APP.normalise_state(s), bool(ok)) for s, ok in (evidence or ())]
+    allowed = APP._success_intersection(rows)
+    if (allowed is not None
+            and len(allowed) > APP.MAX_CANDIDATE_FACTS
+            and APP._reduces_identically(allowed)):
+        return _select_from_arithmetic(rows, allowed, boundary, candidate_states)
     # Use the surviving SPACE, not the licensed boundary. After successes alone `learn` correctly
     # reports UNDETERMINED with no survivors -- but the successes still constrain which
     # requirements are possible, and that is precisely what makes a first contrast choosable.
@@ -183,6 +192,96 @@ def select_contrast(
         survivors_before=len(requirements),
         worst_case_survivors_after=max(yes, no),
         discriminating_facts=discriminating_facts(requirements),
+        gain_log_terms={str(base): str(coeff) for base, coeff in terms.items()},
+        reason="MOST_EVEN_SPLIT_OF_THE_SURVIVING_REQUIREMENTS",
+    )
+
+
+def _discriminating_from_arithmetic(
+    allowed: frozenset[str],
+    exclusions: Sequence[frozenset[str]],
+) -> tuple[str, ...]:
+    """Facts on which the survivors disagree, without listing them.
+
+    A fact is required by EVERY survivor iff dropping it orphans some exclusion, i.e. some
+    exclusion is exactly that singleton; every other fact of `allowed` appears in some survivor
+    and is absent from another. Both directions are set arguments, not samples.
+    """
+    pinned = {next(iter(d)) for d in exclusions if len(d) == 1}
+    return tuple(sorted(frozenset(allowed) - pinned))
+
+
+def _select_from_arithmetic(
+    rows: Sequence[tuple[frozenset[str], bool]],
+    allowed: frozenset[str],
+    boundary: APP.Boundary,
+    candidate_states: Iterable[Iterable[str]],
+) -> Contrast:
+    """The same choice, decided by exact counts instead of a list of requirements.
+
+    With uniform weight per survivor and a deterministic likelihood, a test's information gain
+    is the entropy of its yes/no split, so ranking needs only `count_survivors` per reachable
+    state -- 2^|failure rows| terms each, never 2^|facts|. Ties keep pool order, which is the
+    stable order the exact ranker uses. The reported gain terms come from the reused
+    `information_gain_log_terms` on the two-group marginal, whose collected log bases are the
+    full space's.
+    """
+    exclusions = [allowed - state for state, ok in rows if not ok]
+    total = APP.count_survivors(allowed, exclusions)
+
+    def _stop(status: str, reason: str, discriminating: tuple[str, ...] = ()) -> Contrast:
+        return Contrast(
+            schema=SCHEMA, status=status, state=None,
+            survivors_before=(total or 0), worst_case_survivors_after=None,
+            discriminating_facts=discriminating,
+            gain_log_terms={}, reason=reason,
+        )
+
+    if total is None or total == 0:
+        # None: the arithmetic itself is over budget (learn says BOUNDED). Zero: no requirement
+        # survives (learn says INCONSISTENT). Both are "nothing to disambiguate", by name.
+        return _stop(NO_SPACE, boundary.status)
+
+    discriminating = _discriminating_from_arithmetic(allowed, exclusions)
+    if total == 1 and boundary.identified:
+        return _stop(ALREADY_SETTLED, "ONE_REQUIREMENT_ALREADY_EXPLAINS_EVERY_OUTCOME",
+                     discriminating)
+
+    pool = sorted({APP.normalise_state(s) for s in (candidate_states or ())},
+                  key=lambda s: (len(s), sorted(s)))
+    if not pool:
+        return _stop(NO_POOL, "CALLER_SUPPLIED_NO_REACHABLE_STATE", discriminating)
+
+    splits: list[int] = []
+    for state in pool:
+        universe = allowed & state
+        yes = APP.count_survivors(universe, [d & universe for d in exclusions])
+        if yes is None:  # pragma: no cover -- same exclusion count as `total`, which was fine
+            return _stop(NO_SPACE, boundary.status, discriminating)
+        splits.append(yes)
+
+    # Closest to an even split wins; equal distances keep the earlier pool entry, the stable
+    # order `rank_tests_by_information_gain`'s sort preserves.
+    best = min(range(len(pool)), key=lambda i: (abs(2 * splits[i] - total), i))
+    yes, no = splits[best], total - splits[best]
+    if yes == 0 or no == 0:
+        # Exact zero, not a float below an epsilon: every survivor gives the same answer in
+        # every reachable state, so no amount of repetition in this pool can teach anything.
+        return _stop(NO_INFORMATIVE_STATE,
+                     "EVERY_REACHABLE_STATE_GIVES_THE_SAME_ANSWER_FOR_ALL_SURVIVORS",
+                     discriminating)
+
+    prior = {"split.yes": Fraction(yes, total), "split.no": Fraction(no, total)}
+    likelihood = {"split.yes": {_YES: 1, _NO: 0}, "split.no": {_YES: 0, _NO: 1}}
+    terms = information_gain_log_terms(prior, likelihood)
+    state = pool[best]
+    return Contrast(
+        schema=SCHEMA,
+        status=SELECTED,
+        state=tuple(sorted(state)),
+        survivors_before=total,
+        worst_case_survivors_after=max(yes, no),
+        discriminating_facts=discriminating,
         gain_log_terms={str(base): str(coeff) for base, coeff in terms.items()},
         reason="MOST_EVEN_SPLIT_OF_THE_SURVIVING_REQUIREMENTS",
     )
