@@ -43,7 +43,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PAGE_GRADES_ON_A_PRESS_AND_A_COORDINATE_THE_SENTENCE_NEVER_NAMES__SO_THE_ARM_THAT_UNDERSTOOD_EVERY_WORD_STOPPED_ONE_UNSTATED_ACT_SHORT_AND_REPORTED_IT_ONLY_AS_NOT_REFUSED",
- "canonical_base_commit": "66c90b85b78e46080be4c49f8dced04293826278",
+ "canonical_base_commit": "51e0e8491938c17020c136857e0aed613dcf40d0",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -117,7 +117,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "66c90b85b78e46080be4c49f8dced04293826278",
+  "canonical_base_commit": "51e0e8491938c17020c136857e0aed613dcf40d0",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "one vocabulary entry per application",
