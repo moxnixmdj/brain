@@ -50,6 +50,7 @@ _ROOT = pathlib.Path(__file__).resolve().parents[2]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
+from canonical.runtime import anchored_frame_v1 as anchored  # noqa: E402
 from canonical.runtime import instruction_contract_v1 as contract_lib  # noqa: E402
 
 SCHEMA = "PROJECT_BRAIN_INSTRUCTION_POLICY_V1"
@@ -73,6 +74,11 @@ _TERMINAL = frozenset("submit ok login log in sign in agree confirm done continu
 # Clause kinds whose every step legitimately looks like the last one: a multi-press sequence, a
 # set of selections, a slider nudged repeatedly. Only these may repeat an identical action; a
 # single CLICK_NAMED that repeats is always a no-op loop and is blocked.
+#: The clauses a sentence's LATER half can compile to, once the page has what the earlier half
+#: was for. Kept in one place so "read again" cannot quietly become a different compiler.
+_LATE_OPERATORS = ("TYPE_VALUE", "NUMBER_PREDICATE", "SELECT_SET", "PRESS_CLASS")
+_WRITES = ("TYPE_VALUE", "NUMBER_PREDICATE", "SELECT_SET")
+
 _REPEATABLE = frozenset({"PRESS_SEQUENCE", "PRESS_SEQUENCE_BY_INDEX", "SELECT_SET", "EXPAND",
                          "ORDER", "SET_CONTROL", "DRAG_DESCRIBED", "MOVE_DIRECTION"})
 
@@ -445,6 +451,65 @@ def action_for_clause(clause: Mapping[str, Any], observation: Mapping[str, Any],
                 return f"click@{index}"
         return None
 
+    if operator == "PRESS_CLASS":
+        # The name may be a class OR the element's id: measured 2026-11-16, `send-forward` is an
+        # id, so a classes-only lookup found nothing and the filled-in form was never sent.
+        token = str(clause.get("token") or "").lower()
+        for element in elements:
+            names = {str(t).lower() for t in str(element.get("classes") or "").split()}
+            names.add(str(element.get("id") or "").lower())
+            if token in names and element.get("can_click"):
+                return f"click@{int(element['index'])}"
+        return None
+
+    if operator == "OPEN_THEN_CLICK":
+        # The record's own frame is what opens it -- the thread responds to a click anywhere in it,
+        # and the frame is the largest thing that is entirely this record. Then the control the
+        # instruction asked for is looked for INSIDE the opened record.
+        frame = anchored.find_frame(str(clause.get("identifier") or ""), observation,
+                                    controls=[str(w) for w in clause.get("wanted") or []])
+        if frame.outcome != anchored.RESOLVED:
+            return None
+        hits = [c for c in frame.controls if c["can_click"] and c["index"] != frame.container]
+        # A WRAPPER IS NOT A CONTROL. Measured 2026-11-16: inside the opened email the word
+        # `reply` matched `#reply` (the whole reply screen, index 0) before it matched anything a
+        # person would press, so the arm "pressed reply" by clicking the page container.
+        hits = sorted(hits, key=lambda c: (len(str(c["carried"])), c["index"]))
+        named = [c for c in hits if c["word"] in str(clause.get("provenance") or "").lower()]
+        hits = named or hits
+        if hits:
+            return f"click@{hits[0]['index']}"
+        if frame.container is not None and frame.container not in [
+                int(i) for i in already if str(i).isdigit()]:
+            return f"click@{frame.container}"
+        return None
+
+    if operator == "CLICK_IN_FRAME" and clause.get("opens") is not None and clause.get("wants_text"):
+        # The control is inside a record that is not open yet. Opening it is not a different
+        # language: the frame that names the record names what opens it.
+        frame = anchored.find_frame(str(clause.get("identifier") or ""), observation,
+                                    controls=[str(clause.get("control") or "")])
+        if frame.outcome != anchored.RESOLVED:
+            return None
+        openable = [c for c in frame.controls if c["can_click"]
+                    and c["word"] == str(clause.get("control") or "")]
+        if openable and openable[0]["index"] not in [int(i) for i in already if str(i).isdigit()]:
+            return f"click@{openable[0]['index']}"
+        return None
+
+    if operator == "CLICK_IN_FRAME":
+        # Re-resolve the frame on the LIVE page. An index captured at compile time is not an
+        # action: the page renumbers between observations, and the whole point of the frame is
+        # that it names the record again rather than trusting a number.
+        frame = anchored.find_frame(str(clause.get("identifier") or ""), observation,
+                                    controls=[str(clause.get("control") or "")])
+        if frame.outcome != anchored.RESOLVED:
+            return None
+        for control in frame.controls:
+            if control["can_click"] and control["word"] == str(clause.get("control") or ""):
+                return f"click@{control['index']}"
+        return None
+
     if operator == "CLICK_NAMED":
         index = _first_matching(elements, [clause.get("name") or ""],
                                 also=("aria-label", "title", "value"))
@@ -687,8 +752,11 @@ class ContractArm:
         self._stuck = 0
 
     def begin(self, observation: Mapping[str, Any], seed: int) -> None:
-        self.contract = contract_lib.compile_contract(
-            str(observation.get("utterance") or ""), observation)
+        self._utterance = str(observation.get("utterance") or "")
+        self.contract = contract_lib.compile_contract(self._utterance, observation)
+        # The sentence asks for something to be typed but no field on THIS page can hold it. That is
+        # not a reason to drop it; it is a reason to look again once the page has changed.
+        self._wants_text = bool(self.contract.get("wants_text"))
         self._clauses = order_for_execution(self.contract.get("clauses") or [])
         # ACT only on an instruction that was fully understood. A contract may honestly verify
         # HALF an instruction ("...then press submit") but executing that half is how a wrong
@@ -718,6 +786,33 @@ class ContractArm:
             if isinstance(box, (list, tuple)) and len(box) == 4:
                 self._positions[label] = list(box)
 
+    def _read_again(self, observation: Mapping[str, Any]) -> None:
+        """Read the SAME sentence against THIS page and add whatever half it can now act on.
+
+        A sentence can ask for two things that become possible at different times -- the record to
+        press and the field to write in. Compiling once at time zero silently dropped the second.
+        Each look asks the words again; a clause already held is not added twice, so the cost is
+        one comparison and no action.
+        """
+        late = contract_lib.compile_contract(self._utterance, observation)
+        found = [c for c in late.get("clauses") or [] if c.get("operator") in _LATE_OPERATORS]
+        # The form compiler is a DIFFERENT reading of the same words, not a fallback for an empty
+        # one: on the inbox the late compile returns the record clause AND the form's send control
+        # is only ever found by asking the form reader. Asking only when the first came back empty
+        # meant the reply was typed and never sent -- the exact failure the clause exists to fix.
+        form = contract_lib._form_action(self._utterance, observation)
+        if form:
+            found = list(form["clause"]) + found
+        # A clause already held and already applied does not block; one merely held does not block
+        # either -- it is about to be acted on. Only what is DONE stops a repeat.
+        done = {(c.get("operator"), c.get("index"), c.get("value"), c.get("token"))
+                for c in self._clauses
+                if c.get("operator") not in _WRITES or _applied(c, observation)}
+        new = [c for c in found
+               if (c.get("operator"), c.get("index"), c.get("value"), c.get("token")) not in done]
+        if new:
+            self._clauses = order_for_execution(new) + list(self._clauses)
+
     def next_action(self, observation: Mapping[str, Any]) -> str | None:
         """The next action, or None when nothing left can change the page.
 
@@ -743,10 +838,28 @@ class ContractArm:
             opened = (clause.get("operator") == "EXPAND"
                       and {str(index) for index in clause.get("indices") or []}
                       <= {str(index) for index in self._reveal})
+            if clause.get("operator") == "OPEN_THEN_CLICK" and any(
+                    e.get("can_type") for e in observation.get("elements") or []):
+                # THE RECORD IS OPEN: a field exists that could not exist before it was.
+                self._clauses.remove(clause)
+                self._done.append("OPEN_THEN_CLICK")
+                continue
             if opened or finished_target or id(clause) in self._done_ops or (
                     action is None and satisfied_by_construction(clause, observation)):
                 self._clauses.remove(clause)
                 self._done.append(str(clause.get("operator")))
+        # A PLACE TO PUT THE TEXT MUST BE FOUND ON THE PAGE THAT HAS ONE. Measured 2026-11-16 on
+        # `email-inbox-reply`: the text box does not exist until the email is opened, so compiling
+        # the typed value at time zero found no field and dropped the sentence's text. What was
+        # missing at time zero was not a word -- it was a page. So the SAME sentence is read again
+        # against the page that now exists. Nothing is remembered and nothing is guessed; the
+        # reading is repeated where it can be done. It happens AFTER the finished clauses are
+        # removed: measured 2026-11-16, doing it before meant the control that SENDS the typed
+        # text was never asked for, and the episode ended with the field filled and nothing
+        # pressed.
+        if self._wants_text:
+            self._read_again(observation)
+
         for clause in self._clauses:
             self._remember_positions(clause, observation)
             action = action_for_clause(clause, observation, self._pressed_indices,
@@ -781,7 +894,11 @@ class ContractArm:
                     self._pressed_indices.append(index)
                 if index not in self._reveal:
                     self._reveal.append(index)
-                if clause.get("operator") not in _REPEATABLE:
+                if clause.get("operator") == "OPEN_THEN_CLICK":
+                    # Opening the record is the FIRST half of this clause, not the whole of it.
+                    # Marking it done here is how the email got opened and then abandoned.
+                    pass
+                elif clause.get("operator") not in _REPEATABLE:
                     self._done_ops[id(clause)] = [str(clause.get("operator"))]
             return action
         self.refused = bool(self._clauses) or bool(self.contract.get("refused_part"))
@@ -816,6 +933,20 @@ def _label_at(observation: Mapping[str, Any], index: int) -> str:
     if 0 <= index < len(elements):
         return plain(element_label(elements[index]))
     return ""
+
+
+def _applied(clause: Mapping[str, Any], observation: Mapping[str, Any]) -> bool:
+    """Whether a writing clause has already happened on this page."""
+    index = clause.get("index")
+    if index is None:
+        return False
+    elements = observation.get("elements") or []
+    if not (0 <= int(index) < len(elements)):
+        return False
+    value = clause.get("value")
+    if value is None:
+        return False
+    return plain(elements[int(index)].get("value")) == plain(value)
 
 
 def _fingerprint(observation: Mapping[str, Any]) -> str:
