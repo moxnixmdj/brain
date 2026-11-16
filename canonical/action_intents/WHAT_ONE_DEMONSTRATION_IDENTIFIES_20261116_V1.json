@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_TREATED_ONE_DEMONSTRATION_AS_IF_IT_IDENTIFIED_THE_OPERATION_WHEN_A_SINGLE_POINT_LICENSES_ONLY_THE_EMPTY_REQUIREMENT_AND_THE_MISSING_OBSERVABLE_HAD_NEVER_BEEN_NAMED",
-  "canonical_base_commit": "e53278dc7fc3cf7dda5bca321edaca0c15d121f2",
+  "canonical_base_commit": "ac1e1f44b513f1e8a05aaaa1c38ac079a8fad1b3",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -167,7 +167,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "e53278dc7fc3cf7dda5bca321edaca0c15d121f2",
+    "canonical_base_commit": "ac1e1f44b513f1e8a05aaaa1c38ac079a8fad1b3",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "enumerating more hand-written mutation kinds",
@@ -333,7 +333,7 @@
           "route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS"
         }
       ],
-      "checked_at_utc": "2026-11-16T20:15:22Z",
+      "checked_at_utc": "2026-11-16T20:20:28Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -373,7 +373,7 @@
       "selected_route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T20:15:22Z",
+        "checked_at_utc": "2026-11-16T20:20:28Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
