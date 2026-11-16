@@ -277,7 +277,7 @@
      "route": "compile the sentence once at time zero"
     }
    ],
-   "checked_at_utc": "2026-11-16T19:40:00Z",
+   "checked_at_utc": "2026-11-16T22:30:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -287,7 +287,7 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "refuse pages that name a record, on the grounds that the app's state lives outside the observation",
+   "incumbent_route": "refuse pages whose sentence does not name every act it needs: the missing Submit and the calendar behind a date field both look like 'no clause understood' and were left as refusals",
    "max_age_hours": 24,
    "negative_search_summary": "Four routes were searched and refused with evidence: one vocabulary entry per app, a learned selector table, the nearest control-holding ancestor, and a one-shot compile at time zero.",
    "query_families": [
@@ -314,15 +314,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE",
+   "selected_route": "AN_IMPLIED_ENDING_AND_A_PICKER_READ_AS_COMPONENTS__BOTH_DERIVED_FROM_SENTENCE_AND_OBSERVATION_WITH_NOTHING_REMEMBERED",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T20:45:00Z",
+    "checked_at_utc": "2026-11-16T22:45:00Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime (no third-party test runner required)",
       "evidence": [
-       "11 tests in canonical/tests/test_anchored_frame_v1.py pass; descriptor 13, contract 22, policy 20 pass"
+       "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30 reports 66/130, 24 refused, zero regressions, in a single run with no PAGE_ERROR rows"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -337,7 +337,7 @@
      {
       "dependency": "Farama-Foundation/miniwob-plusplus pages at /tmp/mw plus node_modules with puppeteer-core and @sparticuz/chromium",
       "evidence": [
-       "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30 reports 51/130 with 17 refusals"
+       "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30 reports 66/130, 24 refused, zero regressions, in a single run with no PAGE_ERROR rows"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -352,7 +352,7 @@
      {
       "dependency": "chromium execution substrate (headless shell, no display)",
       "evidence": [
-       "130/130 pages loaded and 51 registered success in a single run; zero PAGE_ERROR rows"
+       "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30 reports 66/130, 24 refused, zero regressions, in a single run with no PAGE_ERROR rows"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -368,7 +368,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE",
+    "selected_route": "AN_IMPLIED_ENDING_AND_A_PICKER_READ_AS_COMPONENTS__BOTH_DERIVED_FROM_SENTENCE_AND_OBSERVATION_WITH_NOTHING_REMEMBERED",
     "status": "READY"
    },
    "source_classes_checked": [
