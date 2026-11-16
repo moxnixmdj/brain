@@ -5,7 +5,7 @@
  "action_intent_id": "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1",
  "date": "2026-11-16",
  "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
- "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+ "canonical_base_commit": "fa47bbc0e20cb8a5ccd625cc1de76660f7c09a89",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -119,7 +119,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
-  "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+  "canonical_base_commit": "fa47bbc0e20cb8a5ccd625cc1de76660f7c09a89",
   "real_outcome": "The learner decides the pinned corpus and every budget-fit case exactly: AMBIGUOUS with survivor_count 8,388,600 where it answered BOUNDED, and BOUNDED only when neither arithmetic axis fits its stated budget.",
   "required_capability": "Deciding a version space of arbitrary fact-set size by inclusion-extraction over the failure rows, with exact counts, edges and honest compute refusals.",
   "iteration_limit": 1,
