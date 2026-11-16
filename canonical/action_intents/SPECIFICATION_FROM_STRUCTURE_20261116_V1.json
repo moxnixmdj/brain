@@ -287,7 +287,7 @@
      "route": "read each page's own source to decide which primitive it needs"
     }
    ],
-   "checked_at_utc": "2026-11-16T18:00:00Z",
+   "checked_at_utc": "2026-11-16T15:20:43Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -331,7 +331,7 @@
    "selected_route": "REUSE_THE_TREES_OWN_MUTATION_ENGINE_ON_THE_TREES_OWN_CODE_TO_MEASURE_HOW_MUCH_OF_A_VERIFIER_STRUCTURE_ALONE_CAN_SUPPLY",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T18:00:00Z",
+    "checked_at_utc": "2026-11-16T15:20:43Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
@@ -444,7 +444,7 @@
  "v22_prewrite_admission": {
   "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
   "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
-  "checked_at_utc": "2026-11-16T18:00:00Z",
+  "checked_at_utc": "2026-11-16T15:20:43Z",
   "currentness": {
    "accepted_families": 5,
    "meta_envelope_open_count": 8,
