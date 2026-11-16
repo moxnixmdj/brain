@@ -1,0 +1,462 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "action_id": "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1",
+ "action_intent_id": "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1",
+ "date": "2026-11-16",
+ "canonical_generation": "2026-10-10-general-reusable-capability-frontier-v1",
+ "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "causal_blocker": "THE_LEARNER_ENUMERATED_2_TO_THE_23_HYPOTHESES_TO_DECIDE_WHAT_ONE_INCLUSION_EXTRACTION_OVER_TWO_FAILURE_TERMS_DECIDES_EXACTLY_AND_THE_WALL_ROUND_NAMED_THIS_REPAIR_IN_SECTION_4_AND_SHIPPED_NEITHER",
+ "blocker_lease_key": "2026-10-10-general-reusable-capability-frontier-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LEARNER_ENUMERATED_2_TO_THE_23_HYPOTHESES_TO_DECIDE_WHAT_ONE_INCLUSION_EXTRACTION_OVER_TWO_FAILURE_TERMS_DECIDES_EXACTLY_AND_THE_WALL_ROUND_NAMED_THIS_REPAIR_IN_SECTION_4_AND_SHIPPED_NEITHER",
+ "intentional_route_race": false,
+ "action_kind": "FRESH_REUSE",
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "probe_specific": false,
+ "generic_repair_from_single_probe": false,
+ "highest_leverage_now": true,
+ "explicit_user_authorization": [
+  "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
+  "Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them?",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "selected_route": "EXACT_SURVIVOR_ARITHMETIC_REPLACES_ENUMERATION_OF_THE_VERSION_SPACE",
+ "route_id": "EXACT_SURVIVOR_ARITHMETIC_REPLACES_ENUMERATION_OF_THE_VERSION_SPACE",
+ "prior_work_reused": [
+  "canonical/runtime/applicability_v1.py",
+  "canonical/runtime/contrast_selection_v1.py",
+  "canonical/runtime/fact_entailment_v1.py",
+  "canonical/runtime/settlement_v1.py (VersionSpace/survivors)",
+  "canonical/runtime/precondition_discovery_v1.py",
+  "THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.md (section 4 named repair)",
+  "canonical/verification/INSUFFICIENCY_CERTIFICATE_20261113_V1.json"
+ ],
+ "expected_parent_change": "The learner decides every case whose failure side fits the inclusion-extraction budget: exact survivor counts, exact status and edges where the wall round measured BOUNDED on the pinned real corpus (8,388,600 survivors, agreed with brute force over 2^23 subsets).",
+ "expected_parent_frontier_change": "Capability work on applicability is aimed at keeping the failure side small (chosen questions) instead of at raising an enumeration cap that cannot hold a closed vocabulary.",
+ "falsification_condition": "Any disagreement between count_survivors and brute-force enumeration on the exhaustive small universe suite; or the pinned corpus count differing from 8,388,600; or the selector ranking differing from the list path on any forced small case; or BOUNDED appearing for a case that fits both budgets; or a BOUNDED boundary that withholds (explains_failure True).",
+ "next_step": "Drive the failure side down with chosen questions on live repair traces so m stays inside the budget at vocabulary sizes a closed vocabulary actually produces, and wire buy_scope victims through the arithmetic selector when any victim exceeds the enumeration cap.",
+ "stop_condition": "The wall suite is green: exhaustive IE equality, seeded learn-vs-enumeration equality, selector equivalence, the pinned corpus decided at 8,388,600, and BOUNDED only over budget with no withholding; receipt states no capability, benchmark or weight credit.",
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "incremental_spend_usd": 0,
+ "scope_complete_discharge": false,
+ "truth": {
+  "achieved": false
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "question": "Can the survivor space the wall round measured at 2^23 be decided exactly without enumerating it?",
+  "protocol": "Inclusion-extraction over the failure rows of the pinned kind-closed corpus; exhaustive equality vs brute force on every universe of size <= 4; 120 seeded learn-vs-enumeration trials at |A| 13..16; 120 forced selector-equivalence cases; consumer batteries 272+82+91; full-suite set-join against a pristine run of the same 357 failing files.",
+  "raw_survivors_pinned_corpus": 8388600,
+  "brute_force_seconds": 1.37,
+  "inclusion_extraction_seconds": 0.0,
+  "exhaustive_ie_families": 5058,
+  "seeded_learn_trials": 120,
+  "selector_equivalence_cases": 120,
+  "new_tests": "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py",
+  "receipt": "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+  "capability_credit_claimed": false,
+  "benchmark_credit_claimed": false
+ },
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+   "canonical/runtime/applicability_v1.py",
+   "canonical/runtime/contrast_selection_v1.py",
+   "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py",
+   "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md"
+  ],
+  "route_class": "REUSE",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "terminal_achieved": false,
+  "scope_complete_discharge": false
+ },
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1,
+  "interpretation": "Speculative forecast only: exact applicability arithmetic removes a compute refusal that otherwise withholds skill loading decisions on large fact sets, a prerequisite class for correct scope gating on computer-use style tasks. No obligation discharge, benchmark gain, capability credit or independent verification is claimed."
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-10-general-reusable-capability-frontier-v1",
+  "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+  "real_outcome": "The learner decides the pinned corpus and every budget-fit case exactly: AMBIGUOUS with survivor_count 8,388,600 where it answered BOUNDED, and BOUNDED only when neither arithmetic axis fits its stated budget.",
+  "required_capability": "Deciding a version space of arbitrary fact-set size by inclusion-extraction over the failure rows, with exact counts, edges and honest compute refusals.",
+  "iteration_limit": 1,
+  "routes_considered": [
+   "raise max_candidate_facts and keep enumerating 2^|A| subsets",
+   "sample the survivor space and report estimates as counts",
+   "compute minimal hitting sets by inclusion-extraction over the failure rows (wall section 4)",
+   "refuse past the cap and let the certificate answer alone",
+   "close the vocabulary further before touching combinatorics"
+  ],
+  "deleted_or_bypassed_paths": [
+   "raising the enumeration cap until the machine agrees to stall",
+   "Monte-Carlo estimates presented as exact survivor counts",
+   "keeping BOUNDED for a case one term decides",
+   "re-enumerating 2^23 subsets in the selector for every candidate state"
+  ],
+  "selected_route": "EXACT_SURVIVOR_ARITHMETIC_REPLACES_ENUMERATION_OF_THE_VERSION_SPACE",
+  "selected_surviving_route": "EXACT_SURVIVOR_ARITHMETIC_REPLACES_ENUMERATION_OF_THE_VERSION_SPACE",
+  "selected_surviving_route_class": "REUSE",
+  "why_selected_route_is_fastest_sufficient": "The version space, the entailment reducer, the exact ranker and the certificate already exist; the missing part was counting instead of listing. One inclusion-extraction over two failure terms reproduces the 1.37-second brute force in 0.000 seconds, so no new engine is justified.",
+  "expected_parent_level_state_change": "Capability work on applicability is aimed at keeping the failure side small (chosen questions) instead of at raising an enumeration cap that cannot hold a closed vocabulary.",
+  "stop_condition": "The wall suite is green: exhaustive IE equality, seeded learn-vs-enumeration equality, selector equivalence, the pinned corpus decided at 8,388,600, and BOUNDED only over budget with no withholding; receipt states no capability, benchmark or weight credit.",
+  "obs_goal": {
+   "real_outcome": "Applicability decisions stop depending on how many facts happened to be present.",
+   "proxy_goals_deleted": [
+    "a bigger cap reported as a repair",
+    "BOUNDED treated as an epistemic verdict",
+    "listing millions of survivors so a ranker can count them"
+   ],
+   "surviving_necessity": "A closed vocabulary makes A large by construction; only the failure side stays small, so only arithmetic over failures scales with chosen questions."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/fact_entailment_v1.py reduce_requirement/distinct_requirements",
+    "canonical/runtime/contrast_selection_v1.py rank_tests_by_information_gain",
+    "canonical/runtime/precondition_discovery_v1.py",
+    "canonical/runtime/settlement_v1.py VersionSpace/survivors",
+    "canonical/runtime/applicability_v1.py insufficiency_witness"
+   ],
+   "external_existing_routes_checked": [
+    "arxiv 2506.06739 (Cropper: logical preprocessing shrinks the hypothesis space before search)",
+    "arxiv 2609.26863 SkillApt (applicability from matched with/without counterfactuals)",
+    "arxiv 2605.23904 SkillOpt (one-shot skills are the weak baseline)",
+    "arxiv 2604.20087 SkillLearnBench (single-pass generation provides no benefit on average)",
+    "arxiv 2610.02788 Skill2Real (verifier-gated evidence admission)",
+    "exact hitting-set / inclusion-extraction arithmetic (no external system counts survivor spaces exactly)"
+   ],
+   "capability_work_deleted": "Any plan to raise the enumeration cap or to sample survivors for exact statuses.",
+   "surviving_gap": "The failure side must stay small; chosen questions are the organ that keeps m bounded, and licensing still refuses when the budget is exceeded."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "path_specific: the representation repair already happened; the remaining wall was an implementation that listed what one term counts.",
+   "delete_bypass_substitute_options": [
+    "delete the listing",
+    "reuse the entailment reducer and the exact ranker",
+    "do not substitute more memory for arithmetic"
+   ],
+   "surviving_causal_blocker": "Nothing: the enumerated wall is closed by arithmetic; what survives is the honest compute refusal when failure rows exceed the budget."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "inclusion-extraction over failure rows",
+    "raise the cap and enumerate",
+    "sample the space",
+    "keep the refusal",
+    "shrink the vocabulary further first"
+   ],
+   "losing_routes_reason": "Raising the cap trades a refusal for a stall at the next power of two; sampling cannot honestly report an exact count or an exact tie; keeping the refusal abandons a case one term decides; further vocabulary work is already done and the certificate already stops firing.",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The oracle is brute-force enumeration itself and the pinned four-repair corpus; both are real, and the wall suite compares against them exhaustively rather than against a story.",
+   "oracle_paths": [
+    "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py",
+    "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md"
+   ]
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "Any consumer that treated BOUNDED past the cap as a property of the evidence instead of a property of the enumerator.",
+   "adjacent_capabilities_absorbed": "None. This decides an existing space; it owns no new capability.",
+   "fresh_reuse_plan": "Re-run the wall suite after any vocabulary or sensor change; the pinned corpus count is the regression anchor."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "Reused the measured wall receipt and the certificate corpus instead of re-deriving the vocabulary or re-running the repairs.",
+   "search_stop_decision": "Stop when the wall suite is green and the batteries show zero attributable regressions; do not raise caps or add samplers.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "route_frontier": {
+   "discovery_required": true,
+   "checked_at_utc": "2026-11-16T22:26:49Z",
+   "max_age_hours": 24,
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/fact_entailment_v1.py (reduce_requirement, distinct_requirements)",
+     "canonical/runtime/contrast_selection_v1.py (exact ranker, deterministic likelihoods)",
+     "canonical/runtime/applicability_v1.py insufficiency_witness (certificate corpus)",
+     "THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.md section 4 named the repair"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2506.06739 (logical preprocessing shrinks the hypothesis space before search: 10 hours to 2 seconds)",
+     "https://arxiv.org/abs/2609.26863 (SkillApt: applicability as LOAD/ABSTAIN from matched with/without counterfactuals)",
+     "https://arxiv.org/abs/2605.23904 (SkillOpt: one-shot skills are the weak baseline everyone beats)",
+     "https://arxiv.org/abs/2604.20087 (SkillLearnBench: one-shot skill generation provides no benefit on average)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://pypi.org/project/pytest/ (9.2.0, the runner the wall suite executes on)",
+     "https://pypi.org/project/pytest-xdist/ (2-worker recheck discipline against phantom failures)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "SWE-bench rebench/Pro leaderboards: honest fresh-issue solving around 61-65 percent, composition still failing to synthesize concrete edits (SWE-bench Pro failure buckets)",
+     "ContinualSkillBench/SkillRevise write-ups: verifier-driven revision, not one-shot generation, is what makes skills hold"
+    ]
+   },
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "exact version space counting inclusion exclusion hitting set hypothesis space"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "pyproject hypothesis based testing exhaustive small model checker python"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "count subsets avoiding all failure sets bitmask dynamic programming"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 skill applicability counterfactual load abstain agent memory"
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "incumbent_route": "enumerate 2^|A| subsets under max_candidate_facts and refuse past the cap",
+   "challenger_routes": [
+    {
+     "route": "RAISE_MAX_CANDIDATE_FACTS_AND_ENUMERATE",
+     "evidence": [
+      "brute force over 2^23 subsets of the pinned corpus takes 1.37 seconds and 8.4M survivor objects"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py brute-force reference"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "exact but only while 2^|A| fits memory",
+      "CAPABILITY_STRENGTH": "same verdicts, refuses one power of two earlier than arithmetic",
+      "WALL_CLOCK": "1.37s for the pinned corpus vs 0.000s for two exclusion terms",
+      "INCREMENTAL_COST": "8.4M objects per learn call versus two integers per term",
+      "RELIABILITY": "degrades to the wall at the next vocabulary growth",
+      "VERIFIABILITY": "verified by the brute-force reference it replaces"
+     }
+    },
+    {
+     "route": "SAMPLE_SURVIVORS_AND_ESTIMATE_SPLITS",
+     "evidence": [
+      "an estimate cannot honestly report survivor_count 8,388,600 or break an exact tie"
+     ],
+     "qualification_evidence": [
+      "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md exactness law"
+     ],
+     "qualification_evidence_classes": [
+      "INDEPENDENT_VERIFIER"
+     ],
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "approximate; fails the exact-count contract",
+      "CAPABILITY_STRENGTH": "cannot certify IDENTIFIED or INCONSISTENT",
+      "WALL_CLOCK": "competitive only by giving up the answer",
+      "INCREMENTAL_COST": "sample budget grows with confidence",
+      "RELIABILITY": "variance at the tail of the split",
+      "VERIFIABILITY": "no deterministic oracle to compare against"
+     }
+    },
+    {
+     "route": "KEEP_THE_BOUNDED_REFUSAL_AND_LET_THE_CERTIFICATE_ANSWER_ALONE",
+     "evidence": [
+      "the certificate decided both directions but never yields status, count, edges or a selector"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_insufficiency_witness_v1.py certificate cases"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "comparison": {
+      "CORRECTNESS": "sound but strictly less informative",
+      "CAPABILITY_STRENGTH": "no AMBIGUOUS/IDENTIFIED decision, no selector input",
+      "WALL_CLOCK": "fast",
+      "INCREMENTAL_COST": "zero",
+      "RELIABILITY": "honest refusal, never wrong",
+      "VERIFIABILITY": "certificate witness is checkable"
+     }
+    }
+   ],
+   "negative_search_summary": "No external system was found that counts a version space exactly without listing it; the frontier instead prunes before search (Cropper) or scores applicability from counterfactual traces (SkillApt), neither of which decides survivor counts, so the arithmetic is built here on the organs this repository already owns.",
+   "unresolved_plausible_dominators": [],
+   "selected_route": "EXACT_SURVIVOR_ARITHMETIC_REPLACES_ENUMERATION_OF_THE_VERSION_SPACE",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-16T22:26:49Z",
+    "max_age_hours": 2,
+    "selected_route": "EXACT_SURVIVOR_ARITHMETIC_REPLACES_ENUMERATION_OF_THE_VERSION_SPACE",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "local Python runtime with pytest 9.2.0 and pytest-xdist",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "producer ran the wall suite: 11 passed; consumer batteries 272 + 82 + 91 passed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "pinned historical repair fixtures and the real_repair_localization probe",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "four-case corpus yields vocab 31, A 23, count 8,388,600 matching brute force"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "tree-sitter substrate restored by scripts/restore_substrate_v1.py",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "SUBSTRATE_READY modules_present=10/10 parser 0.20.4 MATCH"
+      ],
+      "evidence_classes": [
+       "OFFICIAL_PRIMARY"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "total_families": 19,
+   "total_atomic": 38,
+   "terminal": false,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "historical_atomic_registry_count": 38,
+   "deleted_nonnecessary_atomic_count": 2,
+   "current_load_bearing_atomic_count": 36
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "proof_state_reachability": "Exact survivor arithmetic is an internal learner repair on the way to correctly gated capability transfer; it discharges no truth obligation.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1",
+   "falsifier_id": "EXHAUSTIVE_IE_EQUALITY_PLUS_PINNED_CORPUS_COUNT_8388600_PLUS_SELECTOR_EQUIVALENCE",
+   "decisive_question": "Can the 8,388,600-survivor space of the pinned corpus be decided exactly, with the same verdicts as enumeration, without listing it?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "The brute force over all 2^23 subsets and the exhaustive small-universe suite are the counterexample search; both agree with the arithmetic, so no counterexample is added by this PR."
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "independent_verification_completed": false,
+  "commands": [
+   "/tmp/brainvenv/bin/python -m pytest canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py canonical/tests/test_insufficiency_witness_v1.py canonical/tests/test_a_failure_is_a_context_not_a_ban_v1.py canonical/tests/test_shipped_skill_scope_gate_v1.py canonical/tests/test_a_chosen_contrast_teaches_what_repetition_cannot_v1.py canonical/tests/test_redundant_literals_are_not_ambiguity_v1.py -q",
+   "/tmp/brainvenv/bin/python -m pytest canonical/tests -q -n2 --tb=no -rf  (989 failed vs pristine 985 on the same files; set-join: zero attributable)",
+   "python canonical/runtime/verify_brain_unified_model_v1.py  (recompilation_is_byte_identical after artifact recompile)",
+   "/tmp/brainvenv/bin/python .guard_trusted/runtime/enforce_goal_hierarchy.py --base 4de9acde... --head HEAD",
+   "/tmp/brainvenv/bin/python /tmp/trusted_load_bearing_primary_pr.py --base 4de9acde... --head HEAD"
+  ],
+  "independent_reproduction": "open"
+ }
+}
