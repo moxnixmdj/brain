@@ -12,6 +12,31 @@
  ],
  "date": "2026-11-16",
  "decision": "MEASURED__AND_THE_ANSWER_REORDERS_THE_PLAN",
+ "external_confirmation_fetched_2026_11_16": {
+  "More Skills, Worse Agents? (arXiv 2605.24050, Sep 2026)": {
+   "finding": "performance degrades as libraries grow -- up to 21 points -- and the cause is skill SHADOWING (selecting the wrong skill more often), not context overhead, which is indistinguishable from zero",
+   "url": "https://awesomepapers.io/ai-agents/papers/2605.24050",
+   "why_it_matters": "the failure is selection, which is exactly what a pre-action READ/LEARN gate is: it is a selection rule that can say 'use nothing'."
+  },
+  "SkillLens (arXiv 2605.23899, Microsoft Research, May 2026)": {
+   "finding": "model-generated skills improve performance in 75% of extractor-target pairings and DEGRADE it in 25% (delta < 0); ALFWorld is the most fragile domain at 47%",
+   "url": "https://arxiv.org/pdf/2605.23899",
+   "why_it_matters": "this is the same effect measured from the other side. Their unit is a skill x target pairing; ours is a page. Both say the default must be NOT to inject, and that the decision has to be made before the policy is used."
+  },
+  "SkillsBench (Li et al. 2026) via arXiv 2605.20023": {
+   "finding": "16 of 84 tasks show NEGATIVE deltas when skills are provided; software engineering has the smallest average gain of any domain (+4.5pp)",
+   "url": "https://arxiv.org/html/2605.20023v1"
+  },
+  "When Continual Learning Moves to Memory (arXiv 2604.27003, Apr 2026)": {
+   "finding": "raw trajectories hinder adaptation, abstract insights are safer to reuse; 'negative transfer concentrates on hard cases -- cross-task retrieval disproportionately harms cases the agent cannot yet solve on its own, while cases it already handles are comparatively robust'",
+   "url": "https://arxiv.org/html/2604.27003v1",
+   "why_it_matters": "this is my measured result in their vocabulary: my 57/78 are the 'comparatively robust' cases and my 21 are the hard ones. It also gives the shape of the fix -- store an ABSTRACT procedure with its applicability condition, never a trace."
+  },
+  "when_should_an_agent_retrieve_instead_of_read (registered, Sep 2026)": {
+   "finding": "retrieval leads only in the zero-interference limit (+0.062 nats) and loses at every interference level containing confusable distractors (down to -1.226)",
+   "why_it_matters": "registers the boundary of the analogy: theirs is text evidence access, ours is policy acquisition. Both refute 'retrieval/learning is unconditionally good'."
+  }
+ },
  "files": {
   "canonical/runtime/learn_or_read_v1.py": "6993b3edb7081a19642cd232a38bc2e3deab9a666c1daf15f8a6a1ea1ba573da",
   "canonical/tests/test_learn_or_read_v1.py": "f521350b0c6dca0d718badfbb0a4d4aac08050c5fa0355faa08d6b36dc25f508",
@@ -30,7 +55,8 @@
   "A ladder over arms that all assume a demonstration was found cannot say whether a demonstration should be sought.",
   "On a task the sentence already determines, acquiring a policy adds nothing and makes the agent depend on a procedure instead of the page -- the grounding-displacement failure, measured elsewhere at 59% of gross gain cancelled.",
   "Where no demonstration is reachable at all, reading still wins: 9 pages a budgeted search never demonstrated are solved from the instruction.",
-  "A gate is only trustworthy if it fails closed and never forbids the acquisition that is needed. This one has 0 false negatives on 130 pages."
+  "A gate is only trustworthy if it fails closed and never forbids the acquisition that is needed. This one has 0 false negatives on 130 pages.",
+  "The 2026 literature measured the same effect independently: 25% of skill deployments degrade performance (47% in ALFWorld), and the cause is selection, not context. A default that injects must be replaced by a gate that can say 'use nothing'."
  ],
  "measured_effect": {
   "cells": {

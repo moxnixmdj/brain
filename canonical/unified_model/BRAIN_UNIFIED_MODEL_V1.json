@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "947717fd3ce0ac62cf54cf673f3598178ef7a37977d884b3d03e32881fe30a40"
+  "value": "64187a4423d4a162df2f75b53a001211d4af30b018fa7d4ca71d46ecb0286fb2"
  },
  "engines": [
   {
@@ -192738,7 +192738,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
    "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
-   "sha256": "79c4f86b6bfd5ea0bbfc72dafbe2f24551bd9ffc9e64ca3d3b6413920f3be9c3",
+   "sha256": "085801efae82a053e83b264ad61748d49d2b0bfce647afa43a14ff9006b4ed0b",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
