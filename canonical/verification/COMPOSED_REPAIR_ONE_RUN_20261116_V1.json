@@ -1,0 +1,669 @@
+{
+ "schema": "BRAIN_COMPOSED_REPAIR_ONE_RUN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "arms_in_order": [
+  "SYNTHESIZED_FROM_THE_FAILURE",
+  "REWRITE_FAMILIES",
+  "RECORDED_LEARNED_REPAIR"
+ ],
+ "recorded_arm_is_a_replay": true,
+ "recorded_arm_note": "the lesson corpus is not in this repository, so the learned kinds are replayed from their own record's removed/put-in lines and never re-learned",
+ "tasks": 41,
+ "repaired": 24,
+ "by_arm": {
+  "RECORDED_LEARNED_REPAIR": [
+   "hanoi",
+   "knapsack",
+   "levenshtein",
+   "longest_common_subsequence",
+   "minimum_spanning_tree",
+   "to_base"
+  ],
+  "REWRITE_FAMILIES": [
+   "bitcount",
+   "find_first_in_sorted",
+   "find_in_sorted",
+   "gcd",
+   "get_factors",
+   "kth",
+   "lcs_length",
+   "lis",
+   "max_sublist_sum",
+   "mergesort",
+   "next_palindrome",
+   "next_permutation",
+   "pascal",
+   "rpn_eval",
+   "sieve"
+  ],
+  "SYNTHESIZED_FROM_THE_FAILURE": [
+   "bucketsort",
+   "is_valid_parenthesization",
+   "quicksort"
+  ]
+ },
+ "stages": {
+  "NOT_REPAIRED__NO_IMPROVING_CANDIDATE": 6,
+  "NOT_REPAIRED__PARTIAL_EXAMPLES_ONLY": 2,
+  "NO_EXAMPLES": 9,
+  "REPAIRED": 24
+ },
+ "seconds": 387.8,
+ "rows": [
+  {
+   "task": "bitcount",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 9,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 439,
+   "edit": {
+    "site": "n ^= n - 1",
+    "replacement": "BitAnd",
+    "kind": "OPERATOR"
+   },
+   "seconds": 13.5
+  },
+  {
+   "task": "breadth_first_search",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "bucketsort",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "REPAIRED",
+   "winner": "SYNTHESIZED_FROM_THE_FAILURE",
+   "expression": "sorted(arr)",
+   "seconds": 0.2
+  },
+  {
+   "task": "depth_first_search",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "recorded_arm": "REMOVED_LINE_NOT_IN_SOURCE:return any((search_from(nextnode) for nextnode in node.succe",
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "detect_cycle",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "find_first_in_sorted",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 43,
+   "edit": {
+    "site": "lo",
+    "replacement": "lo + 1",
+    "kind": "ATOM_SHAPE"
+   },
+   "seconds": 9.4
+  },
+  {
+   "task": "find_in_sorted",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 11,
+   "edit": {
+    "site": "start",
+    "replacement": "start + 1",
+    "kind": "ATOM_SHAPE"
+   },
+   "seconds": 6.7
+  },
+  {
+   "task": "flatten",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "NOT_REPAIRED__NO_IMPROVING_CANDIDATE",
+   "seconds": 1.6
+  },
+  {
+   "task": "gcd",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 6,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 22,
+   "edit": {
+    "site": "gcd(a % b, b)",
+    "replacement": "b,a % b",
+    "kind": "PERMUTE"
+   },
+   "seconds": 0.7
+  },
+  {
+   "task": "get_factors",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 11,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 2723,
+   "edit": {
+    "site": "int(n ** 0.5) + 1",
+    "replacement": "(int(n ** 0.5) + 1) ** 2",
+    "kind": "REPLACE"
+   },
+   "seconds": 4.4
+  },
+  {
+   "task": "hanoi",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 8,
+   "stage": "REPAIRED",
+   "winner": "RECORDED_LEARNED_REPAIR",
+   "replay": "APPLIED",
+   "seconds": 11.2
+  },
+  {
+   "task": "is_valid_parenthesization",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE"
+   ],
+   "arms_rejected": 0,
+   "examples": 3,
+   "stage": "REPAIRED",
+   "winner": "SYNTHESIZED_FROM_THE_FAILURE",
+   "expression": "(not depth)",
+   "seconds": 0.2
+  },
+  {
+   "task": "kheapsort",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 4,
+   "stage": "NOT_REPAIRED__NO_IMPROVING_CANDIDATE",
+   "seconds": 2.8
+  },
+  {
+   "task": "knapsack",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 10,
+   "stage": "REPAIRED",
+   "winner": "RECORDED_LEARNED_REPAIR",
+   "replay": "APPLIED",
+   "seconds": 22.7
+  },
+  {
+   "task": "kth",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 624,
+   "edit": {
+    "site": "arr[0]",
+    "replacement": "max(arr)",
+    "kind": "REPLACE"
+   },
+   "seconds": 9.1
+  },
+  {
+   "task": "lcs_length",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 9,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 155,
+   "edit": {
+    "site": "j",
+    "replacement": "j + 1",
+    "kind": "ATOM_SHAPE"
+   },
+   "seconds": 7.6
+  },
+  {
+   "task": "levenshtein",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "REPAIRED",
+   "winner": "RECORDED_LEARNED_REPAIR",
+   "replay": "APPLIED",
+   "seconds": 32.7
+  },
+  {
+   "task": "lis",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 12,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 17234,
+   "edit": {
+    "site": "length + 1",
+    "replacement": "len(ends)",
+    "kind": "REPLACE"
+   },
+   "seconds": 13.1
+  },
+  {
+   "task": "longest_common_subsequence",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 10,
+   "stage": "REPAIRED",
+   "winner": "RECORDED_LEARNED_REPAIR",
+   "replay": "APPLIED",
+   "seconds": 40.5
+  },
+  {
+   "task": "max_sublist_sum",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 6,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 1211,
+   "edit": {
+    "site": "max_ending_here + x",
+    "replacement": "max(0, (max_ending_here + x))",
+    "kind": "REPLACE"
+   },
+   "seconds": 1.3
+  },
+  {
+   "task": "mergesort",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 14,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 15,
+   "edit": {
+    "site": "arr",
+    "replacement": "arr[1:]",
+    "kind": "ATOM_SHAPE"
+   },
+   "seconds": 25.8
+  },
+  {
+   "task": "minimum_spanning_tree",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "REPAIRED",
+   "winner": "RECORDED_LEARNED_REPAIR",
+   "replay": "APPLIED",
+   "seconds": 0.2
+  },
+  {
+   "task": "next_palindrome",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 5,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 272,
+   "edit": {
+    "site": "digit_list",
+    "replacement": "digit_list[1:]",
+    "kind": "ATOM_SHAPE"
+   },
+   "seconds": 14.8
+  },
+  {
+   "task": "next_permutation",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 8,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 11532,
+   "edit": {
+    "site": "perm[j] < perm[i]",
+    "replacement": "(perm[j] < perm[i]) - 1",
+    "kind": "REPLACE"
+   },
+   "seconds": 17.9
+  },
+  {
+   "task": "node",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "pascal",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 5,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 65,
+   "edit": {
+    "site": "r",
+    "replacement": "r + 1",
+    "kind": "ATOM_SHAPE"
+   },
+   "seconds": 10.8
+  },
+  {
+   "task": "possible_change",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 10,
+   "stage": "NOT_REPAIRED__PARTIAL_EXAMPLES_ONLY",
+   "seconds": 6.5
+  },
+  {
+   "task": "powerset",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 5,
+   "stage": "NOT_REPAIRED__NO_IMPROVING_CANDIDATE",
+   "seconds": 2.6
+  },
+  {
+   "task": "quicksort",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE"
+   ],
+   "arms_rejected": 0,
+   "examples": 13,
+   "stage": "REPAIRED",
+   "winner": "SYNTHESIZED_FROM_THE_FAILURE",
+   "expression": "sorted(arr)",
+   "seconds": 0.2
+  },
+  {
+   "task": "reverse_linked_list",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "rpn_eval",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 6,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 1,
+   "edit": {
+    "site": "{'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*': lambda a, b: a * b, '/': lambda a, b: a / b}[symbol](a, b)",
+    "replacement": "b,a",
+    "kind": "PERMUTE"
+   },
+   "seconds": 16.2
+  },
+  {
+   "task": "shortest_path_length",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "shortest_path_lengths",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "recorded_arm": "REMOVED_LINE_NOT_IN_SOURCE:length_by_path[i, j] = min(length_by_path[i, j], length_by_p",
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "shortest_paths",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "shunting_yard",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 6,
+   "stage": "NOT_REPAIRED__NO_IMPROVING_CANDIDATE",
+   "seconds": 10.9
+  },
+  {
+   "task": "sieve",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 6,
+   "stage": "REPAIRED",
+   "winner": "REWRITE_FAMILIES",
+   "candidates_tested": 3407,
+   "edit": {
+    "site": "any",
+    "replacement": "all",
+    "kind": "REPLACE"
+   },
+   "seconds": 3.2
+  },
+  {
+   "task": "sqrt",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 7,
+   "stage": "NOT_REPAIRED__PARTIAL_EXAMPLES_ONLY",
+   "seconds": 40.3
+  },
+  {
+   "task": "subsequences",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 12,
+   "stage": "NOT_REPAIRED__NO_IMPROVING_CANDIDATE",
+   "seconds": 6.3
+  },
+  {
+   "task": "to_base",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES",
+    "RECORDED_LEARNED_REPAIR"
+   ],
+   "arms_rejected": 0,
+   "examples": 10,
+   "stage": "REPAIRED",
+   "winner": "RECORDED_LEARNED_REPAIR",
+   "replay": "APPLIED",
+   "seconds": 23.8
+  },
+  {
+   "task": "topological_ordering",
+   "kind": "task",
+   "arms_tried": [
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 0,
+   "stage": "NO_EXAMPLES",
+   "seconds": 0.0
+  },
+  {
+   "task": "wrap",
+   "kind": "task",
+   "arms_tried": [
+    "SYNTHESIZED_FROM_THE_FAILURE",
+    "REWRITE_FAMILIES"
+   ],
+   "arms_rejected": 0,
+   "examples": 5,
+   "stage": "NOT_REPAIRED__NO_IMPROVING_CANDIDATE",
+   "seconds": 30.3
+  }
+ ]
+}

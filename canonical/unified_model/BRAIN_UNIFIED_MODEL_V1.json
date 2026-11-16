@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 467,
+  "knowledge_documents": 468,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6894,
+  "research_index_records": 6896,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e86185856061329a6f7523a27b8e08b3e1abeb684f85d1ac61147b935a7344f"
+  "value": "e043fc857473113493c23ef2a5df41faf9ba43f461d2c8206e714427dc51dad8"
  },
  "engines": [
   {
@@ -54855,6 +54855,83 @@
     "one",
     "published",
     "skill"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 5548,
+   "headings": [
+    "One run, three vocabularies, one judge — 24 of 40, measured",
+    "What was never done before today",
+    "The result",
+    "What is real, what is not — the standing answer, with the best number this tree can currently show",
+    "What is next, in the order it pays",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+   "sha256": "27c8fd28d5be464dfe749589062397ef4837f91c72992b9dd7184c0e42a5e0d1",
+   "summary": "**2026-11-16 · branch `arena/68eb44a5-brain` · 41 task files, 40 real bugs · no model, no weights, no network**",
+   "terms": {
+    "0.2": 5,
+    "10": 3,
+    "16": 3,
+    "18": 4,
+    "24": 8,
+    "40": 9,
+    "answer": 4,
+    "arm": 10,
+    "bugs": 9,
+    "corpus": 3,
+    "cost": 3,
+    "different": 3,
+    "every": 3,
+    "examples": 3,
+    "failure": 4,
+    "families": 4,
+    "files": 3,
+    "first": 3,
+    "json": 3,
+    "judge": 4,
+    "kind": 4,
+    "learned": 7,
+    "measured": 4,
+    "more": 3,
+    "never": 3,
+    "no": 11,
+    "not": 20,
+    "now": 3,
+    "number": 6,
+    "one": 13,
+    "only": 4,
+    "own": 6,
+    "real": 6,
+    "record": 3,
+    "repair": 3,
+    "repaired": 3,
+    "repairs": 3,
+    "replay": 3,
+    "replayed": 3,
+    "run": 9,
+    "same": 5,
+    "synthesis": 3,
+    "system": 3,
+    "they": 3,
+    "three": 3,
+    "together": 3,
+    "vocabulary": 5,
+    "won": 3
+   },
+   "title": "One run, three vocabularies, one judge — 24 of 40, measured",
+   "title_terms": [
+    "24",
+    "40",
+    "judge",
+    "measured",
+    "one",
+    "run",
+    "three",
+    "vocabularies"
    ]
   },
   {
@@ -81355,10 +81432,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1269,
+  "included_source_count": 1270,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8af0b30af724fc2235cd007a500e85520dcbe71f6abecabb149a76268004976c"
+  "source_tree_digest": "c47f9fe95020e3c8c540e152d6762d7505d49f4028515800c13076738ecf87fe"
  },
  "research_index": [
   {
@@ -155947,6 +156024,25 @@
     "subsumption": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+   "schema": "BRAIN_COMPOSED_REPAIR_ONE_RUN_V1",
+   "sha256": "f2c312d1ed571bd63e427fc417b590d1349fd78df7d951d7f15d85bf683394f2",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "composed": 1,
+    "one": 1,
+    "repair": 1,
+    "run": 1,
+    "v1": 1
    }
   },
   {
@@ -237510,6 +237606,47 @@
     "runner": 3,
     "so": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e0327bbbd73ad4b985dea8b6c75b887239cbf2453afb87d1adb551b64d4a28f8",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "arithmetic": 1,
+    "attribution": 1,
+    "becomes": 1,
+    "being": 1,
+    "capability": 1,
+    "come": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "judge": 2,
+    "measured": 1,
+    "next": 1,
+    "one": 4,
+    "one_run_three_vocabularies_one_judge_20261116_v1": 1,
+    "per-arm": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "receipts": 1,
+    "repair": 1,
+    "run": 2,
+    "shows": 1,
+    "stops": 1,
+    "synthesize_an_ast_level_edit_inducer_that_folds_one_demonstration_pair_into_a_hole_generalized_template_with_a_context_precondition_and_measures_it_end_to_end_on_a_public_bug_corpus": 1,
+    "the_best_repair_number_in_this_tree_was_a_union_of_two_receipts_rather_than_a_run_and_the_three_vocabularies_had_never_competed_under_one_judge_so_capability_was_never_measured": 1,
+    "three": 1,
+    "under": 1,
+    "union": 1,
+    "v1": 1,
+    "vocabularies": 1,
+    "vocabulary": 1
    }
   },
   {
