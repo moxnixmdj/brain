@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_BINDING_CONSTRAINT_IS_OBSERVABLE_CONTENT_AND_CONTRACT_COVERAGE_NOT_EXPERIENCE__A_ZERO_EXPERIENCE_ARM_SOLVES_39_OF_130_REAL_PAGES_AND_REFUSES_63_WITH_A_TYPED_REASON_WHILE_ONLY_12_OF_ITS_28_ACTED_FAILURES_ARE_EXECUTION_ERRORS",
- "canonical_base_commit": "080a8ad7326a0b10063b461ad6514b68cdb3c50d",
+ "canonical_base_commit": "30e272ff19a52437f2a1f47505dedb140375c723",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -129,7 +129,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "080a8ad7326a0b10063b461ad6514b68cdb3c50d",
+  "canonical_base_commit": "30e272ff19a52437f2a1f47505dedb140375c723",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "adding law shapes until a number moves",

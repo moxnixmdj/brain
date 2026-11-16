@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0f7e22cbba46e2564778ce1939f4c08488c5183c450bfb9257d24ba6e4f82876"
+  "value": "0dc13a06e139158bca768e491bb16c4b64c1c721956d70d1e58767e2a61a2d6b"
  },
  "engines": [
   {
@@ -243450,7 +243450,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ZERO_EXPERIENCE_INSTRUCTION_POLICY_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "915ae4fbfc3e1a63710014c73eeed863b80f6530d7079c6bb0a9b67a8cc25745",
+   "sha256": "2aa0cb3a6a035614c1d56be00454836c98ceb259a93ab6ad3f2f217d2884b7aa",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
