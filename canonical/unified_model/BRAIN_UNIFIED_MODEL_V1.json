@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 453,
+  "knowledge_documents": 454,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6856,
+  "research_index_records": 6857,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a554407b77ecd3b6f195c814ace15f92f793e3d97434d43550143884ac7dd881"
+  "value": "0a8442aebf357a92504b4b84fed8f01d221e76e4d7a2f28a9cd308d17b5ec742"
  },
  "engines": [
   {
@@ -65900,6 +65900,91 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 19828,
+   "headings": [
+    "What is real, what is not, and the one bottleneck — 16 November 2026",
+    "1. The claim is five claims, and they do not chain",
+    "2. New measurement: the wall is not the budget, and it is not the hand",
+    "What this kills",
+    "What it establishes instead, arithmetically",
+    "3. Why \"once\" cannot be enough — the bits, not an opinion",
+    "4. Why \"the most advanced actions\" is not the lever — and is partly an anti-lever",
+    "5. The single bottleneck",
+    "The consequence that reorders the whole roadmap",
+    "6. The reframe that makes your two mechanisms fit together",
+    "7. On \"sentient creature\"",
+    "8. Kill list — measured dead, do not rebuild",
+    "9. Build list — ranked by what it unlocks",
+    "10. Honest limits of this document",
+    "11. Test ledger"
+   ],
+   "kind": "DOCUMENT",
+   "path": "WHAT_IS_REAL_AND_THE_ONE_BOTTLENECK_20261116_V1.md",
+   "sha256": "e808ae8993cb94fba4cc214b2f08ab50d69eedd553a9c5517a32d71e90b05dd9",
+   "summary": "Authority: **NONE**. Producer-run sandbox measurement on branch `arena/51709a27-brain`, base `a0265cc6`. No capability registered, no family flipped, no weight touched, `truth.achieved` unchanged. Independent verification is open.",
+   "terms": {
+    "37": 6,
+    "action": 13,
+    "actions": 21,
+    "all": 10,
+    "already": 7,
+    "any": 11,
+    "because": 7,
+    "both": 7,
+    "budget": 13,
+    "but": 7,
+    "coverage": 9,
+    "demonstration": 7,
+    "depth": 11,
+    "every": 9,
+    "exactly": 8,
+    "exists": 6,
+    "first": 7,
+    "four": 6,
+    "frontier": 7,
+    "hand": 12,
+    "instant": 8,
+    "knowledge": 9,
+    "learning": 13,
+    "measured": 12,
+    "more": 11,
+    "most": 7,
+    "needs": 7,
+    "no": 16,
+    "not": 56,
+    "nothing": 7,
+    "one": 27,
+    "only": 9,
+    "oracle": 8,
+    "own": 7,
+    "page": 15,
+    "pages": 17,
+    "prior": 8,
+    "real": 13,
+    "same": 15,
+    "so": 11,
+    "state": 12,
+    "states": 7,
+    "success": 13,
+    "than": 7,
+    "thing": 7,
+    "two": 7,
+    "wall": 7,
+    "wrong": 13
+   },
+   "title": "What is real, what is not, and the one bottleneck — 16 November 2026",
+   "title_terms": [
+    "16",
+    "2026",
+    "bottleneck",
+    "not",
+    "november",
+    "one",
+    "real"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 15404,
    "headings": [
     "You are right about one thing and wrong about the other, and the difference is measurable",
@@ -80255,10 +80340,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1255,
+  "included_source_count": 1256,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "70cbccf17670957cf9467534537c1306d940d34ae3cba3f328ec3819864d8c09"
+  "source_tree_digest": "5d799b80fe04041fb5e22e494d868d3d44a33955e8f04afdeccc1d62270bc3df"
  },
  "research_index": [
   {
@@ -210379,6 +210464,23 @@
     "showing": 1,
     "trusted": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json",
+   "schema": "BRAIN_MINIWOB_WHERE_THE_WALL_ACTUALLY_IS_V1",
+   "sha256": "239a7b5e26d03b54e9949274d922f18cfe29cca885e6b45a98a9ebaa98a35d03",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "actually": 1,
+    "v1": 1,
+    "wall": 1
    }
   },
   {
