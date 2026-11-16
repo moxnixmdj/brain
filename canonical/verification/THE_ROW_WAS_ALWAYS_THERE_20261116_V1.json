@@ -1,0 +1,190 @@
+{
+ "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
+ "receipt_id": "THE_ROW_WAS_ALWAYS_THERE_20261116_V1",
+ "date": "2026-11-16",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "claim_under_test": "The compiler could not name THE REGION of the page a word picks out. It could list 107 elements; it could not say 'that row, and the trash inside it'. That inability -- not any missing app state -- is what produced the MULTI_APP refusals, and naming the region converts those pages.",
+ "decision": "BUILD_THE_FRAME__ONE_COORDINATE_CHANGE__NOT_ONE_VOCABULARY_ENTRY_PER_APP",
+ "the_wrong_answer_this_replaces": {
+  "label": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+  "how_long_it_stood": "three consecutive rounds",
+  "why_it_was_believed": "the instruction named an app (email, contacts, calendar) and the observation showed a page, so 'the state lives outside the observation' was a plausible sentence.",
+  "what_dumping_the_page_showed": "on email-inbox the observation carries 107 elements including div.email-sender 'Enrichetta', div.email-subject, div.email-body and div.email-actions holding span.trash and span.star. Nothing was outside the observation. The machine had no way to SAY which of the 107 a word picked out, so it reported the absence of a name as the absence of a state.",
+  "generalisation": "this is the third round in a row where a refusal label aimed engineering at the world when the defect was in the language. A refusal is a work list, and a work list that names the wrong thing is worse than no work list."
+ },
+ "what_was_built": {
+  "module": "canonical/runtime/anchored_frame_v1.py",
+  "idea": "A frame is (container, identifier, path_from_id): a coordinate change instead of a vocabulary entry. One implementation serves every record-shaped page, because 'the star of that row' is not an email fact.",
+  "outcomes": [
+   "RESOLVED__THE_FRAME_NAMES_ONE_CONTROL",
+   "AMBIGUOUS__MORE_THAN_ONE_RECORD_MATCHES",
+   "ABSENT__THE_RECORD_HOLDS_NO_SUCH_CONTROL",
+   "NOTHING__NO_ELEMENT_SHOWS_THE_IDENTIFIER",
+   "ABSENT__THE_IDENTIFIER_IS_NOT_INSIDE_A_CONTAINER",
+   "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE"
+  ],
+  "rules_learned_by_measurement": [
+   {
+    "rule": "a frame is the LARGEST container that does not swallow a second record",
+    "why": "the nearest container holding a control is div.email-left (sender, subject, body) but the star is in the SIBLING div.email-right. Stopping at the nearest one locates the email and then cannot find the control in the same row. Walking further up spans the two halves; the only thing that must stop it is another record's identifier."
+   },
+   {
+    "rule": "a control is named by its OWN text or an EXACT class token, never a prefix",
+    "why": "email-sender starts with 'email'; a prefix test made the sender's name a control for the word 'email'."
+   },
+   {
+    "rule": "identity uses own text/value/aria/title/alt -- never full_text",
+    "why": "full_text is the whole subtree, so every ancestor of a name 'showed' the name and one email looked like seven records."
+   },
+   {
+    "rule": "a record that is one page-turn away is a SEARCH, not a missing observable",
+    "why": "phone-book does not show 'Larissa' and does show a pager; the honest answer is reachable_by, and the repair is paging, not a new channel."
+   },
+   {
+    "rule": "the whole sentence survives the frame",
+    "why": "the frame answers WHICH RECORD. Returning it alone dropped \"Felis massa ac nulla.\" -- the text to write -- so the email was opened and nothing was sent."
+   },
+   {
+    "rule": "the record is also a THING TO OPEN, and the form behind it names controls by CLASS",
+    "why": "Reply lives in div.email-send inside the OPENED email; the forward form's send icon is #send-forward with no text at all. Its class/id is the sentence's own verb and the preposition says which field."
+   },
+   {
+    "rule": "read the sentence again against the page that now exists",
+    "why": "the reply field does not exist until the record opens. Compiling once at time zero dropped the value. This is the same reading applied where it can be done -- not memory: nothing is carried between pages."
+   }
+  ]
+ },
+ "measured_effect": {
+  "instrument": "canonical/tools/miniwob_contract_arm_arm_v1.py",
+  "why_a_new_instrument": "the previous harness lived in /tmp and was lost with the sandbox. A measurement you cannot re-run is a memory, not a result.",
+  "substrate": "chromium, Farama-Foundation/miniwob-plusplus, 130 pages",
+  "seed": 1060,
+  "action_budget": 30,
+  "experience": "none",
+  "search": "none",
+  "reward": "read only after the arm stops, and only to record whether it was right",
+  "external_model": "none",
+  "after": {
+   "solved": 52,
+   "of_all": 0.4,
+   "refused": 51
+  },
+  "before": {
+   "solved": 43,
+   "of_all": 0.331,
+   "refused": 44
+  },
+  "delta": {
+   "solved": 9,
+   "rate": 0.069,
+   "refusals": 44
+  },
+  "regressions": [],
+  "pages_gained": [
+   "email-inbox",
+   "email-inbox-forward",
+   "email-inbox-forward-nl",
+   "email-inbox-noscroll",
+   "email-inbox-reply",
+   "email-inbox-star-reply",
+   "click-test"
+  ],
+  "refusal_census": {
+   "REFUSED__NO_CLAUSE_UNDERSTOOD": 10,
+   "REFUSED__THE_ARM_CANNOT_ACT": 9,
+   "REFUSED__SPATIAL_NEEDS_GEOMETRY": 5,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__SPATIAL_NEEDS_GEOMETRY": 4,
+   "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+   "REFUSED__CONTINUOUS_NO_END_STATE": 3,
+   "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS": 3,
+   "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+   "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 2,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+   "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 1,
+   "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+   "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE": 1,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 1
+  },
+  "census_reading": "52 won, 51 refused, 27 executed-and-lost. The refused total is HIGHER than the round's starting 44 despite 9 more pages solved, because the instrument was corrected mid-round: it had been counting 16 pages that emitted nothing as 'not refused' and 6 pages with a `refused_part` as having no refusal. A measurement that under-reports its own refusals is measuring its optimism. MULTI_APP is down from 12 to 1 (+2 half-understood), which is the claim this receipt makes."
+ },
+ "laws": [
+  "a refusal stated before the evidence is not caution, it is a bug that looks like discipline",
+  "the frame answers WHICH RECORD, and it does not answer WHAT ELSE THE SENTENCE SAID",
+  "a control is what it says it is; a class prefix is not a name",
+  "a record that is not on screen is a search to run, not an observable to build",
+  "read the sentence again against the page that now exists, and remember nothing",
+  "an index captured at compile time is not an action -- the page renumbers between observations"
+ ],
+ "corrections": [
+  {
+   "claim": "12 pages were refused because the app's state lives outside the observation",
+   "status": "FALSE. 11 of 12 were one row away. MULTI_APP was a statement about the vocabulary."
+  },
+  {
+   "claim": "a bridge action is written {kind: click, index: n}",
+   "status": "FALSE. It is {type: click, index: n}. Three probe rounds reported 'the page does not change on a click' because every click was UNKNOWN_ACTION. The page changed the whole time (37 -> 24 elements)."
+  },
+  {
+   "claim": "the reply control is named 'Reply'",
+   "status": "FALSE. 'Reply' is the words under the icon; the control is #send-reply (or span.email-reply), and the forward form's send icon has no text at all."
+  },
+  {
+   "claim": "43/130 with 44 refusals was an honest census",
+   "status": "FALSE. The instrument counted a page that emitted no action and carried no refusal label as neither refused nor failing, and counted a half-understood instruction (`refused_part`) as not refused. 16 + 6 pages were invisible. Corrected before the next measurement."
+  },
+  {
+   "claim": "\"Click the button.\" is an instruction that cannot be understood",
+   "status": "FALSE, and a test asserted it for months. The page states tag='button' on exactly one element. CLICK_KIND existed with a checker and had no producer. It is now produced -- last, after every path that names or describes a target, because putting it first cost 12 pages that were already solved."
+  },
+  {
+   "claim": "the first capitalised word of an instruction is a name",
+   "status": "FALSE. 'Use the terminal' made 'Use' a record and 'Switch between the tabs' made 'Switch' one. A capital at a sentence start is capitalised because of where it is; the rule is positional, not a vocabulary of verbs to skip."
+  }
+ ],
+ "tests": {
+  "file": "canonical/tests/test_anchored_frame_v1.py",
+  "fixture": "canonical/tests/fixtures/real_observations_20261116_frames_v1.json",
+  "provenance": "captured by this project's own chromium bridge against the real pages at seed 1060 on 2026-11-16; no synthetic observation is used",
+  "count": 12,
+  "failures": 0,
+  "hardest_open_pages_covered": [
+   "email-inbox",
+   "email-inbox-reply",
+   "email-inbox-forward",
+   "email-inbox-delete",
+   "email-inbox-important",
+   "email-inbox-noscroll",
+   "phone-book"
+  ],
+  "regression_suites": {
+   "canonical/tests/test_observable_descriptor_v1.py": "0 failure(s)",
+   "canonical/tests/test_instruction_contract_v1.py": "0 failure(s)",
+   "canonical/tests/test_instruction_policy_v1.py": "0 failure(s)"
+  }
+ },
+ "honest_limits": [
+  "52 of 130 is capability on these pages at this seed with a 30-action budget. It is not a benchmark claim and not a family rank.",
+  "51 pages are refused and 27 more execute without reward. The largest named groups are NO_CLAUSE_UNDERSTOOD (10) and THE_ARM_CANNOT_ACT (9), and the second is a new, honest name for what used to be invisible.",
+  "daily-calendar still refuses under MULTI_APP, where that label is true: an interval plus a named event is calendar semantics, not a frame.",
+  "the drag pages (drag-box, drag-shapes, drag-shapes-2) still compile and dispatch and do not register reward; that defect is untouched.",
+  "the four choose-date pages and use-autocomplete emit one action and lose; they are likely a DOM-events defect (selecting a value without dispatching what the widget listens for), which is a hypothesis, not a measurement."
+ ],
+ "verification": {
+  "commands": [
+   "python3 canonical/tests/test_anchored_frame_v1.py",
+   "python3 canonical/tests/test_observable_descriptor_v1.py",
+   "python3 canonical/tests/test_instruction_contract_v1.py",
+   "python3 canonical/tests/test_instruction_policy_v1.py",
+   "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30",
+   "python3 -m canonical.runtime.compile_brain_unified_model_v1",
+   "python3 -m canonical.runtime.verify_brain_unified_model_v1"
+  ],
+  "independent_verification_completed": false
+ },
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9"
+}

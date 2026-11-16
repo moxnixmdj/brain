@@ -2,7 +2,7 @@
   "action_id": "SEPARATION_IS_THE_BOTTLENECK_20261116_V1",
   "action_intent_id": "SEPARATION_IS_THE_BOTTLENECK_20261116_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "action_summary": "Audit the clean projected repair union, bound it with screen integrity and version-space selection, falsify previous single-factor bottleneck answers, and bind separation to the existing mechanism census.",
+  "action_summary": "Audit the pytest-rejudged repair union, fold in the corrected browser and selection measurements, falsify previous single-factor bottleneck answers, and bind separation to the existing mechanism census.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -39,15 +39,15 @@
     "route_class": "COMPOSE"
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
-  "blocker_lease_key": "2026-11-16::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ONE_DEMONSTRATION_LEAVES_TEN_BITS_AND_THREE_NAMED_BOTTLENECKS_ARE_ONE_SEPARATION_EQUATION",
-  "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::SEPARATION_EQUATION_CLEAN_UNION_AUDIT_6877_FBA7_20261116",
+  "canonical_base_commit": "66c90b85b78e46080be4c49f8dced04293826278",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "ONE_DEMONSTRATION_LEAVES_TEN_BITS_AND_THREE_NAMED_BOTTLENECKS_ARE_ONE_SEPARATION_EQUATION",
+  "causal_blocker": "SEPARATION_EQUATION_CLEAN_UNION_AUDIT_6877_FBA7_20261116",
   "date": "2026-11-16",
   "expected_parent_change": "Which factor of the separation equation binds each task, and which real tasks remain open after every clean measured mechanism.",
-  "expected_parent_frontier_change": "Bottleneck claims stop being single-factor projections; the hard-open population is audited from clean receipts, the union is labelled an upper bound until one pytest-only composed run, selection among test-passing candidates is routed to a chosen question or refusal, and proof-decided observables use predict-prove-act.",
+  "expected_parent_frontier_change": "Bottleneck claims stop being single-factor projections; the hard-open population is audited from clean receipts, the verified union is 24/40 with 16 hard-open tasks, selection among test-passing candidates is routed to a chosen question or refusal, and proof-decided observables use predict-prove-act.",
   "explicit_user_authorization": [
     "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
     "you must think from first principles for everything",
@@ -60,7 +60,7 @@
     "Work in branch, merge only when complete (fastest)",
     "Merge once, not 10 times."
   ],
-  "falsification_condition": "A known repaired task counted as open progress, a synthetic task in the population, a screen-only pass or a majority vote recorded as identification, or a clean-union count that changes when the QuixBugs-shown arm is admitted.",
+  "falsification_condition": "A known repaired task counted as open progress, a synthetic task in the population, an unreconstructible claimed repair counted as confirmed, a screen-only pass or majority vote recorded as identification, or a clean-union count that changes when the contaminated QuixBugs-shown arm is admitted.",
   "generic_repair_from_single_probe": false,
   "governance_change": false,
   "highest_leverage_now": true,
@@ -72,7 +72,7 @@
     ],
     "expected_obligation_discharge_lcb": 0,
     "expected_obligation_unlock_lcb": "1/100",
-    "interpretation": "Speculative forecast only. A coding benchmark floor cannot move while the reachable space is a fixed vocabulary, the open-task population is stale, a fast screen can disagree with the published pytest, and agreement among passing candidates can be mistaken for identification. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed.",
+    "interpretation": "Speculative forecast only. A coding benchmark floor cannot move while the reachable space is a fixed vocabulary, the open-task population is stale, a fast screen can disagree with the published pytest on one probe, and agreement among passing candidates can be mistaken for identification. The union is pytest-rejudged on both arms but not one composed run. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": "1/4",
@@ -80,22 +80,31 @@
   },
   "measured_effect": {
     "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "browser_census": {
+      "executed_and_lost": 27,
+      "of": 130,
+      "receipt": "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+      "refused": 51,
+      "regressions": 0,
+      "zero_experience_solved": 52
+    },
     "clean_receipt_union": {
       "of": 40,
-      "only_hand_written": 6,
-      "only_learned": 8,
-      "repaired": 26,
-      "status": "UPPER_BOUND_UNTIL_COMPOSED_PYTEST_ONLY_RUN"
+      "only_hand_written": 8,
+      "only_learned": 6,
+      "repaired": 24,
+      "status": "PYTEST_REJUDGED_ON_BOTH_ARMS_NOT_ONE_COMPOSED_RUN"
     },
     "corpus": "jkoppel/QuixBugs (MIT), 40 published bugs, the corpus own pytest as the only judge",
     "hard_open_population": {
       "contaminated_arm_ignored": true,
       "example_searchable": 8,
       "no_json_tasks_no_longer_unmeasurable": true,
-      "tasks": 14,
-      "unmeasurable": 6
+      "superseded_claimed_arm_ignored": true,
+      "tasks": 16,
+      "unmeasurable": 8
     },
-    "headline": "separation is the bottleneck; one demonstration leaves ten bits and licenses zero requirements, the space must be assembled from each failure, some decisions need the operation proof as the observable, agreement among passing candidates is not identification, and the 26/40 union is an upper bound until pytest alone judges one composed run",
+    "headline": "separation is the bottleneck; one demonstration leaves ten bits and licenses zero requirements, the space must be assembled from each failure, some decisions need the operation proof as the observable, agreement among passing candidates is not identification, and the pytest-rejudged union is 24/40 with 16 hard-open tasks",
     "identification": {
       "bits_after_one_demonstration_median": 10.018,
       "questions_to_sufficiency_mean": 1.31,
@@ -139,14 +148,18 @@
       "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
       "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
       "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
-      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+      "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json"
     ],
     "screen_integrity": {
+      "learned_arm_screen_disagreements": 0,
+      "no_json_probe_over_acceptances": 3,
       "no_json_tasks_made_searchable": 9,
       "no_survivor_at_screen": 6,
       "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
       "repaired": 0,
-      "rule": "The screen may order candidates; the published pytest is the only judge.",
+      "rule": "The screen may order candidates; the published pytest is the only judge. The projected 26/40 union is superseded by the verified 24/40 union.",
       "screen_accepted_but_corpus_pytest_failed": 3
     },
     "selection_among_test_passing_candidates": {
@@ -161,9 +174,17 @@
       "status": "SELECTION_MEASUREMENT_NOT_A_QUIXBUGS_REPAIR_RECEIPT",
       "test_passing_candidates": 51,
       "unseparated": 43
+    },
+    "verified_repair_rerun": {
+      "claimed": 20,
+      "confirmed": 16,
+      "not_confirmed": 0,
+      "not_reconstructible": 4,
+      "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+      "screen_disagreements_in_that_record": 0
     }
   },
-  "next_step": "Compose the learned-kind mechanism and the hand-written families into ONE run with the published pytest as the only judge; start all future hard-open work from the 14 audited unrepaired tasks; spend the next oracle budget on the 46 tasks where no candidate passed; use predict-prove-act on proof-decided sites; never quote a fast-screen pass or majority vote as identification.",
+  "next_step": "Compose the learned-kind mechanism and the hand-written families into ONE run with the published pytest as the only judge; start all future hard-open work from the 16 audited unrepaired tasks; spend the next oracle budget on the 46 tasks where no candidate passed; use predict-prove-act on proof-decided sites; never quote a fast-screen pass, majority vote, or unreconstructible claimed repair as identification.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "prior_work_reused": [
     "canonical/tools/grammar_closed_repair_v1.py",
@@ -177,11 +198,14 @@
     "canonical/swe_kernel/repair_version_space_selection_v1.py",
     "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
     "canonical/tools/version_space_selection_measure_v1.py",
-    "canonical/tools/closed_loop_trace_abduction_measure_v1.py"
+    "canonical/tools/closed_loop_trace_abduction_measure_v1.py",
+    "canonical/tools/rerun_the_learned_arms_repairs_v1.py",
+    "canonical/runtime/anchored_frame_v1.py",
+    "canonical/tools/miniwob_contract_arm_arm_v1.py"
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "fba7d0e2f438615a676fd1800a7e7b63051b6010",
+    "canonical_base_commit": "66c90b85b78e46080be4c49f8dced04293826278",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "re-testing known repaired bugs",
@@ -191,10 +215,12 @@
       "counting a fast-screen pass as a repair",
       "building a fourth vocabulary by guessing",
       "counting a majority vote among self-consistent candidates as identification",
-      "growing the skill library before a settled question gates admission"
+      "growing the skill library before a settled question gates admission",
+      "quoting the 20-task claimed learned arm after the 16-task pytest rerun",
+      "treating the earlier browser refusal census as complete"
     ],
-    "expected_parent_frontier_change": "Bottleneck claims stop being single-factor projections; the hard-open population is audited from clean receipts and the next capability work starts from 14 unrepaired real tasks.",
-    "expected_parent_level_state_change": "The admission population is derived from clean measured receipts; single-factor bottleneck claims are refused unless a per-task test says which factor binds.",
+    "expected_parent_frontier_change": "Bottleneck claims stop being single-factor projections; the hard-open population is audited from clean receipts, the verified union is 24/40 with 16 hard-open tasks, selection among test-passing candidates is routed to a chosen question or refusal, and proof-decided observables use predict-prove-act.",
+    "expected_parent_level_state_change": "Bottleneck claims stop being single-factor projections; the hard-open population is audited from clean receipts, the verified union is 24/40 with 16 hard-open tasks, selection among test-passing candidates is routed to a chosen question or refusal, and proof-decided observables use predict-prove-act.",
     "independent_verification_required": true,
     "iteration_limit": 1,
     "obs_blocker": {
@@ -388,7 +414,7 @@
           "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
         }
       ],
-      "checked_at_utc": "2026-11-16T15:44:03Z",
+      "checked_at_utc": "2026-11-16T21:42:58Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -425,10 +451,10 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+      "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T19:58:04Z",
+        "checked_at_utc": "2026-11-16T21:42:58Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
@@ -479,7 +505,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+        "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -517,10 +543,10 @@
       "Induce node-level templates from demonstration pairs and let the corpus's oracle decide",
       "Ask a model to write the patch (refused: producer cognition, zero credit)"
     ],
-    "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
-    "selected_surviving_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
-    "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-    "stop_condition": "One merged change on this branch, with the corpus measurement reproducible from the receipt.",
+    "selected_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+    "selected_surviving_route": "AUDIT_CLEAN_REPAIR_UNION_AND_BIND_SEPARATION_TO_EXISTING_MECHANISMS",
+    "selected_surviving_route_class": "COMPOSE",
+    "stop_condition": "One merge on this branch after the required referee is green; no duplicate PR.",
     "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real artifact and refused: the crystallizer's token anti-unification cannot express position-level containment and has no site context, and the existing repair primitive has no ast.AugAssign rule at all. Inducing a template from one demonstration pair and letting the corpus's own tests decide costs two runs; adding another hand-written mutation kind would lift one bug of forty and leave the question unmeasured.",
     "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
   },
@@ -583,10 +609,11 @@
       "python3 execution_guard/repo_integrity_guard_v1.py",
       "python3 -m pytest -q canonical/tests/test_one_demonstration_identifies_v1.py",
       "python3 -m pytest -q canonical/tests/test_repair_where_the_suite_is_the_observable_v1.py",
-      "python3 -m pytest -q canonical/tests/test_repair_version_space_selection_v1.py canonical/tests/test_closed_loop_trace_abduction_v1.py"
+      "python3 -m pytest -q canonical/tests/test_repair_version_space_selection_v1.py canonical/tests/test_closed_loop_trace_abduction_v1.py",
+      "python3 -m pytest -q canonical/tests/test_rerun_the_learned_arms_repairs_v1.py canonical/tests/test_anchored_frame_v1.py"
     ],
     "independent_verification_completed": false,
-    "result": "40 real tasks; 26 projected repaired union (upper bound until one pytest-only composed run); 14 hard-open; 8 example-searchable; 6 no-JSON tasks made searchable by PR #6885 with 0/9 repairs; 100 held-out HumanEvalFix selection measurement read separately (8/8 settled, 0 regressions, majority vote wrong 3/5); 8 new audit tests passed; 28 selected related suites gave 350 passed, 2 pre-existing failures, 25 subtests passed in 93.69 s; model 33/33; guard 17/0; git diff --check clean; compileall reports two untouched main-only syntax errors reproduced on a clean origin/main archive."
+    "result": "40 real tasks; 24 pytest-rejudged repaired union; 16 hard-open; 8 example-searchable; 8 no-JSON tasks made searchable by PR #6885 with 0/9 repairs; PR #6887 confirmed 16 of 20 claimed learned-arm repairs with 4 unknown and 0 screen disagreements in that record; 100 held-out HumanEvalFix selection measurement read separately (8/8 settled, 0 regressions, majority vote wrong 3/5); corrected zero-experience browser census 52/130 solved, 51 refused, 0 regressions; 9 new audit tests passed; 30 selected related suites gave 365 passed, 2 pre-existing failures, 25 subtests passed in 93.30 s; model 33/33; guard 17/0; git diff --check clean; compileall reports two untouched main-only syntax errors reproduced on a clean origin/main archive."
   },
   "weakens_existing_guard": false
 }

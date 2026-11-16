@@ -57,18 +57,25 @@ REPAIR_RECEIPTS = (
     "REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
     "CONTRACT_GROUNDED_REPAIR_20261116_V1.json",
     "INTERVENTIONAL_GOAL_20261116_V1.json",
-    "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+    "RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
     "SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
     "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
 )
 
 #: The cross-corpus transfer receipt has a second arm shown 39 other QuixBugs
-#: fixes. It is deliberately NOT admitted to the held-out union.
+#: fixes. Its clean arm was also a claim until PR #6887 re-ran the recorded line
+#: changes under the corpus pytest: 16 confirmed, 4 not reconstructible. Only the
+#: rerun receipt's confirmed list is admitted to the union.
 RECEIPT_ARMS_IGNORED = (
     {
         "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
         "arm": "summary.all_other_fixes",
         "reason": "Shown 39 QuixBugs fixes; not a clean held-out vocabulary transfer.",
+    },
+    {
+        "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+        "arm": "summary.another_benchmark",
+        "reason": "Claimed 20 repairs; PR #6887 re-judged them under pytest and confirmed 16, with 4 not reconstructible. Superseded by RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json.",
     },
 )
 
@@ -86,7 +93,9 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/tools/quixbugs_required_edit_taxonomy_v1.py",
         "canonical/runtime/derived_value_v1.py",
         "canonical/runtime/inert_action_prior_v1.py",
+        "canonical/runtime/anchored_frame_v1.py",
         "canonical/tools/synthesized_expression_from_the_failure_v1.py",
+        "canonical/tools/miniwob_contract_arm_arm_v1.py",
     ),
     "goal_and_counterfactual_verdict": (
         "canonical/swe_kernel/contract_grounded_repair_v1.py",
@@ -110,6 +119,7 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/runtime/instruction_policy_v1.py",
         "canonical/runtime/observable_descriptor_v1.py",
         "canonical/tools/repair_where_the_suite_is_the_observable_v1.py",
+        "canonical/tools/rerun_the_learned_arms_repairs_v1.py",
         "canonical/swe_kernel/test_suite_admission_v1.py",
         "canonical/swe_kernel/weight_update_admission_v1.py",
         "canonical/swe_kernel/learned_skill_verdict_v1.py",
@@ -143,6 +153,10 @@ EVIDENCE_READ = (
     "WHAT_ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.md",
     "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.md",
     "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
+    "RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1.md",
+    "canonical/action_intents/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+    "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+    "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
     "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
     "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
     "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
@@ -167,7 +181,11 @@ def read_json(path: pathlib.Path) -> dict[str, Any]:
 
 def repaired_from_receipt(data: dict[str, Any]) -> set[str]:
     names: set[str] = set()
-    for value in (data.get("repaired_tasks"), data.get("measured", {}).get("repaired_tasks")):
+    for value in (
+        data.get("repaired_tasks"),
+        data.get("measured", {}).get("repaired_tasks"),
+        data.get("confirmed"),
+    ):
         if isinstance(value, list):
             names.update(str(x) for x in value if isinstance(x, str) and x)
     # QUIXBUGS_EDIT_KIND_TRANSFER has two arms. Only `another_benchmark` is
@@ -265,6 +283,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     observable_gap = read_json(observable_gap_path) if observable_gap_path.is_file() else None
     selection_path = root / "canonical" / "verification" / "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
     selection = read_json(selection_path) if selection_path.is_file() else None
+    rerun_path = root / "canonical" / "verification" / "RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json"
+    rerun = read_json(rerun_path) if rerun_path.is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -295,6 +315,13 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             == "self-consistency is not evidence; a labelled answer to a chosen input is"
             and selection.get("summary", {}).get("settled_and_equal_to_the_reference_behaviour") == 8
         ),
+        "claimed_learned_arm_superseded_by_pytest_rerun": bool(
+            rerun
+            and len(rerun.get("confirmed", [])) == 16
+            and len(rerun.get("inapplicable", [])) == 4
+            and rerun.get("screen_said_pass_runner_said_no_in_the_record") == 0
+        ),
+        "verified_union_is_24_not_the_projected_26": len(repaired) == 24,
     }
     audit_pass = all(invariants.values())
     return {
@@ -311,8 +338,16 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
         "measured_receipts": census["rows"],
         "receipt_arms_ignored": list(RECEIPT_ARMS_IGNORED),
         "union_projection_status": {
-            "status": "UPPER_BOUND_UNTIL_COMPOSED_PYTEST_ONLY_RUN",
-            "reason": "The 26/40 number is a projection from clean receipts; PR #6885 found the fast screen accepted 3 candidates that the corpus pytest refused. The screen may order candidates, never decide them.",
+            "status": "PYTEST_REJUDGED_VERIFIED_UNION_24_OF_40_NOT_ONE_COMPOSED_RUN",
+            "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The earlier 26/40 projection is superseded; the three over-accepted candidates found by PR #6885 were on the separate no-JSON probe.",
+        },
+        "verified_repair_rerun": {
+            "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+            "claimed_repaired": (rerun or {}).get("claimed_repaired"),
+            "confirmed": (rerun or {}).get("confirmed", []),
+            "not_confirmed": (rerun or {}).get("not_confirmed", []),
+            "inapplicable": (rerun or {}).get("inapplicable", []),
+            "screen_said_pass_runner_said_no_in_the_record": (rerun or {}).get("screen_said_pass_runner_said_no_in_the_record"),
         },
         "observable_gap_receipt": {
             "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
@@ -361,9 +396,9 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
         "what_this_is": (
             "A set-algebra audit of measured receipts against the real published corpus, using only "
             "clean held-out arms, plus an effect-based census of mechanisms already in the tree. "
-            "The union is an upper bound until one composed run uses the corpus pytest as the only "
-            "judge. It also indexes the separate selection measurement among test-passing HumanEvalFix "
-            "candidates; that measurement is not a QuixBugs repair receipt. It is not a solver."
+            "The union is pytest-rejudged on both arms but is not one composed run. It also indexes "
+            "the separate selection measurement among test-passing HumanEvalFix candidates; that "
+            "measurement is not a QuixBugs repair receipt. It is not a solver."
         ),
         "what_this_is_not": (
             "Not a repair contest, not a capability, not a benchmark score, not independent "
@@ -377,6 +412,7 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NO_KNOWN_WIN_COUNTED_AS_PROGRESS",
             "NO_SCREEN_ONLY_VERDICT_COUNTED_AS_REPAIR",
             "NO_MAJORITY_VOTE_AS_SELECTOR",
+            "NO_UNRERUN_CLAIMED_ARM_COUNTED_AS_CONFIRMED",
             "NO_NEW_LEARNER_OR_VERIFIER",
             "NO_CAPABILITY_REGISTERED",
             "NO_PROTECTED_PATH_TOUCHED",
