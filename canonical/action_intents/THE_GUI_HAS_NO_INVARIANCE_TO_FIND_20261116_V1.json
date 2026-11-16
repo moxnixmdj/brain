@@ -302,7 +302,7 @@
      "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
     }
    ],
-   "checked_at_utc": "2026-11-16T23:52:24Z",
+   "checked_at_utc": "2026-11-16T23:53:39Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -342,7 +342,7 @@
    "selected_route": "FALSIFY_THE_GUI_INVARIANCE_HYPOTHESIS_WITH_TWO_ARMS__IDENTITY_PERTURBATION_AND_JUDGE_PERTURBATION__BEFORE_BUILDING_ANY_QUOTIENT_MACHINERY",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T23:27:49Z",
+    "checked_at_utc": "2026-11-16T23:53:39Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with the repository's own venv",
@@ -393,7 +393,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "MEASURE_THE_DOMAIN_OF_A_DEMONSTRATION_AND_SCORE_IT_AGAINST_EVERY_SENSE_THAT_COULD_CERTIFY_IT",
+    "selected_route": "FALSIFY_THE_GUI_INVARIANCE_HYPOTHESIS_WITH_TWO_ARMS__IDENTITY_PERTURBATION_AND_JUDGE_PERTURBATION__BEFORE_BUILDING_ANY_QUOTIENT_MACHINERY",
     "status": "READY"
    },
    "source_classes_checked": [
