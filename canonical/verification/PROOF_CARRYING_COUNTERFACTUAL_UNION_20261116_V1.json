@@ -1,6 +1,121 @@
 {
   "audit_pass": true,
   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "browser_zero_experience_census": {
+    "measured_effect": {
+      "experience": "none",
+      "external_model": "none",
+      "instrument": "canonical/tools/miniwob_contract_arm_arm_v1.py",
+      "pages_gained": [
+        "choose-date",
+        "choose-date-easy",
+        "choose-date-medium",
+        "choose-date-nodelay",
+        "click-collapsible-2",
+        "click-collapsible-2-nodelay",
+        "click-tab-2",
+        "click-tab-2-hard",
+        "click-tab-2-medium",
+        "drag-box",
+        "drag-cube",
+        "drag-shapes",
+        "use-autocomplete",
+        "use-autocomplete-nodelay"
+      ],
+      "parameters": 0,
+      "refusal_census_of_the_remaining_64": {
+        "EXECUTED_AND_LOST": 17,
+        "REFUSED__CONTINUOUS_NO_END_STATE": 3,
+        "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+        "REFUSED__HALF_UNDERSTOOD": 8,
+        "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+        "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 1,
+        "REFUSED__NO_CLAUSE_UNDERSTOOD": 10,
+        "REFUSED__SPATIAL_NEEDS_GEOMETRY": 5,
+        "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+        "REFUSED__THE_ARM_CANNOT_ACT": 6,
+        "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS": 3,
+        "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE": 1,
+        "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2
+      },
+      "regressions": [],
+      "replication": {
+        "seed_1061": {
+          "after": 56,
+          "before": 47,
+          "delta": 9
+        },
+        "seed_1062": {
+          "after": 57,
+          "before": 49,
+          "delta": 8
+        }
+      },
+      "reward": "read only after the arm stops, and only to record whether it was right",
+      "search": "none",
+      "seed_1060": {
+        "after": 66,
+        "before": 52,
+        "delta": 14,
+        "of_all": 0.5077,
+        "refused": 24
+      },
+      "stopping_state_of_the_78_unsolved_at_baseline": {
+        "BUDGET": 0,
+        "THE_ARM_HAD_NOTHING_LEFT_TO_SAY": 59,
+        "THE_PAGE_FAILED_IT": 19
+      },
+      "substrate": "chromium, Farama-Foundation/miniwob-plusplus, 130 pages, 30-action budget"
+    },
+    "receipt": "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "status": "IMPLIED_ENDING_AND_PICKER_ARE_CONTRACT_NOT_NEW_WEIGHTS"
+  },
+  "composed_run": {
+    "by_arm": {
+      "RECORDED_LEARNED_REPAIR": [
+        "hanoi",
+        "knapsack",
+        "levenshtein",
+        "longest_common_subsequence",
+        "minimum_spanning_tree",
+        "to_base"
+      ],
+      "REWRITE_FAMILIES": [
+        "bitcount",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "kth",
+        "lcs_length",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "rpn_eval",
+        "sieve"
+      ],
+      "SYNTHESIZED_FROM_THE_FAILURE": [
+        "bucketsort",
+        "is_valid_parenthesization",
+        "quicksort"
+      ]
+    },
+    "judge": "the corpus's own pytest on a fresh copy with the answer key absent",
+    "receipt": "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+    "repaired": 24,
+    "seconds": 387.8,
+    "stages": {
+      "NOT_REPAIRED__NO_IMPROVING_CANDIDATE": 6,
+      "NOT_REPAIRED__PARTIAL_EXAMPLES_ONLY": 2,
+      "NO_EXAMPLES": 9,
+      "REPAIRED": 24
+    },
+    "status": "MEASURED_ONE_RUN_NOT_CAPABILITY_GAIN_OVER_THE_PYTEST_REJUDGED_UNION",
+    "tasks": 41
+  },
   "corpus": {
     "real_published_test_files": 40,
     "source_of_task_names": "python_testcases/test_*.py in a fresh clone; no invented task",
@@ -72,8 +187,42 @@
     "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
     "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
     "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
-    "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json"
+    "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+    "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+    "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
+    "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+    "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md",
+    "canonical/action_intents/ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.json",
+    "canonical/action_intents/THE_INVARIANCE_IS_THE_REACH_20261116_V1.json",
+    "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
+    "canonical/action_intents/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "canonical/action_intents/THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+    "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+    "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+    "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
   ],
+  "exact_decision_past_enumeration_wall": {
+    "measured_effect": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "benchmark_credit_claimed": false,
+      "brute_force_seconds": 1.37,
+      "capability_credit_claimed": false,
+      "exhaustive_ie_families": 5058,
+      "inclusion_extraction_seconds": 0.0,
+      "new_tests": "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py",
+      "protocol": "Inclusion-extraction over the failure rows of the pinned kind-closed corpus; exhaustive equality vs brute force on every universe of size <= 4; 120 seeded learn-vs-enumeration trials at |A| 13..16; 120 forced selector-equivalence cases; consumer batteries 272+82+91; full-suite set-join against a pristine run of the same 357 failing files.",
+      "question": "Can the survivor space the wall round measured at 2^23 be decided exactly without enumerating it?",
+      "raw_survivors_pinned_corpus": 8388600,
+      "receipt": "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+      "seeded_learn_trials": 120,
+      "selector_equivalence_cases": 120
+    },
+    "receipt": "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
+    "status": "EXACT_INCLUSION_EXTRACTION_NOT_A_NEW_CAPABILITY"
+  },
   "example_searchable_open_count": 8,
   "example_searchable_open_tasks": [
     "flatten",
@@ -85,7 +234,7 @@
     "subsequences",
     "wrap"
   ],
-  "generated_at_utc": "2026-11-16T21:42:59.013233+00:00",
+  "generated_at_utc": "2026-11-16T23:06:34.790115+00:00",
   "hard_nonclaims": [
     "NOT_A_FRONTIER_SCORE",
     "NOT_SWE_BENCH",
@@ -123,11 +272,129 @@
     "wrap"
   ],
   "incremental_spend_usd": 0,
+  "invariance_and_reach": {
+    "alpha_canonical_preconditions": {
+      "candidates_proposed": 384,
+      "judged": 4,
+      "survived_the_programs_own_examples": 4,
+      "tasks_where_it_proposed": 28,
+      "wins_over_bugs_the_three_arms_could_not_repair": [],
+      "won": [
+        "find_in_sorted",
+        "mergesort",
+        "next_palindrome",
+        "quicksort"
+      ]
+    },
+    "capability_gain_over_the_three_arm_composition": 0,
+    "literal_preconditions": {
+      "candidates_proposed": 304,
+      "judged": 0,
+      "survived_the_programs_own_examples": 0,
+      "tasks_where_it_proposed": 23,
+      "wins_over_bugs_the_three_arms_could_not_repair": [],
+      "won": []
+    },
+    "receipts": [
+      "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+      "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json"
+    ],
+    "status": "DEMONSTRATION_IS_CONTENT_INVARIANCE_IS_REACH",
+    "travel_ladder": {
+      "rung_1_same_bug": {
+        "applicable": 24,
+        "count_tasks_fired_on": 0,
+        "fired": 80,
+        "fired_pairs": 0,
+        "repaired": 15,
+        "reproduces_the_accepted_program": 14,
+        "survived_examples": 17,
+        "tasks_fired_on": [],
+        "tasks_repaired": [],
+        "transfers": 0
+      },
+      "rung_2_same_bug_renamed": {
+        "applicable": 24,
+        "count_tasks_fired_on": 0,
+        "fired": 80,
+        "fired_pairs": 0,
+        "repaired": 15,
+        "reproduces_the_accepted_program": 0,
+        "survived_examples": 17,
+        "tasks_fired_on": [],
+        "tasks_repaired": [],
+        "transfers": 0
+      },
+      "rung_3_a_different_bug": {
+        "applicable": 24,
+        "count_tasks_fired_on": 39,
+        "fired": 0,
+        "fired_pairs": 333,
+        "repaired": 0,
+        "reproduces_the_accepted_program": 0,
+        "survived_examples": 0,
+        "tasks_fired_on": [
+          "bitcount",
+          "breadth_first_search",
+          "bucketsort",
+          "depth_first_search",
+          "detect_cycle",
+          "find_first_in_sorted",
+          "find_in_sorted",
+          "flatten",
+          "gcd",
+          "get_factors",
+          "hanoi",
+          "is_valid_parenthesization",
+          "kheapsort",
+          "knapsack",
+          "kth",
+          "lcs_length",
+          "levenshtein",
+          "lis",
+          "longest_common_subsequence",
+          "max_sublist_sum",
+          "mergesort",
+          "minimum_spanning_tree",
+          "next_palindrome",
+          "next_permutation",
+          "pascal",
+          "possible_change",
+          "powerset",
+          "quicksort",
+          "rpn_eval",
+          "shortest_path_length",
+          "shortest_path_lengths",
+          "shortest_paths",
+          "shunting_yard",
+          "sieve",
+          "sqrt",
+          "subsequences",
+          "to_base",
+          "topological_ordering",
+          "wrap"
+        ],
+        "tasks_repaired": [
+          "find_first_in_sorted",
+          "find_in_sorted",
+          "mergesort",
+          "next_palindrome",
+          "quicksort"
+        ],
+        "transfers": 11
+      }
+    }
+  },
   "invariants": {
     "all_declared_mechanism_files_present": true,
     "all_newly_merged_evidence_files_read": true,
     "all_task_names_from_real_published_test_files": true,
+    "browser_zero_experience_census_is_66_with_no_regressions": true,
     "claimed_learned_arm_superseded_by_pytest_rerun": true,
+    "composed_run_is_one_run_one_judge_24_of_40": true,
+    "exact_decision_past_enumeration_wall_is_not_capability_credit": true,
+    "invariance_changes_reach_not_capability": true,
+    "new_environment_cost_law_is_bounded_and_shuffle_invariant": true,
     "no_answer_key_count_above_zero_in_measured_receipts": true,
     "no_known_win_in_open_population": true,
     "no_majority_vote_counted_as_selector": true,
@@ -327,6 +594,72 @@
       "repaired_tasks": [],
       "sha256": "3b2ff583214b7869038666bf150b95cc3e494c772770325c387c40c151a60c27",
       "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+      "repaired_count": 24,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "hanoi",
+        "is_valid_parenthesization",
+        "knapsack",
+        "kth",
+        "lcs_length",
+        "levenshtein",
+        "lis",
+        "longest_common_subsequence",
+        "max_sublist_sum",
+        "mergesort",
+        "minimum_spanning_tree",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve",
+        "to_base"
+      ],
+      "sha256": "f2c312d1ed571bd63e427fc417b590d1349fd78df7d951d7f15d85bf683394f2",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+      "repaired_count": 24,
+      "repaired_tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "hanoi",
+        "is_valid_parenthesization",
+        "knapsack",
+        "kth",
+        "lcs_length",
+        "levenshtein",
+        "lis",
+        "longest_common_subsequence",
+        "max_sublist_sum",
+        "mergesort",
+        "minimum_spanning_tree",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve",
+        "to_base"
+      ],
+      "sha256": "085fc5b7374d464c83cf06a2553361ac5657738e0a587eb5cd5a297315d13e6c",
+      "status": "READ"
     }
   ],
   "mechanism_census_by_effect": {
@@ -351,6 +684,31 @@
         "canonical/runtime/anchored_frame_v1.py",
         "canonical/tools/synthesized_expression_from_the_failure_v1.py",
         "canonical/tools/miniwob_contract_arm_arm_v1.py"
+      ]
+    },
+    "environment_cost_and_composition": {
+      "count": 10,
+      "missing": [],
+      "present": [
+        "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+        "canonical/runtime/environment_learning_v1.py",
+        "canonical/runtime/capability_planner.py",
+        "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+        "canonical/runtime/capability_composer_v1.py",
+        "canonical/runtime/verified_skill_macro_planner_v1.py",
+        "canonical/runtime/explicit_recovery_planner.py",
+        "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+        "canonical/swe_kernel/operator_semantics_v1.py",
+        "canonical/swe_kernel/hierarchical_skill_library_v1.py"
+      ]
+    },
+    "exact_decision_past_enumeration": {
+      "count": 3,
+      "missing": [],
+      "present": [
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py"
       ]
     },
     "goal_and_counterfactual_verdict": {
@@ -404,10 +762,190 @@
         "canonical/swe_kernel/weight_update_admission_v1.py",
         "canonical/swe_kernel/learned_skill_verdict_v1.py"
       ]
+    },
+    "invariance_and_in_run_learning": {
+      "count": 6,
+      "missing": [],
+      "present": [
+        "canonical/runtime/implied_ending_v1.py",
+        "canonical/runtime/picker_answer_v1.py",
+        "canonical/tools/composed_repair_one_run_v1.py",
+        "canonical/tools/arm_learned_from_its_own_verified_repairs_v1.py",
+        "canonical/tools/what_one_verified_repair_travels_v1.py",
+        "canonical/swe_kernel/induced_edit_basis_v1.py"
+      ]
     }
   },
   "model_dependency_count": 0,
   "network_dependency_count": 0,
+  "new_environment_cost_law": {
+    "measured_effect": {
+      "adaptation_trials_active": 29,
+      "adaptation_trials_probing_every_atom": 36,
+      "atoms": 18,
+      "atoms_whose_effect_ignores_the_argument": 4,
+      "atoms_whose_only_effect_moves_identity": 1,
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "break_even_requests_per_machine": 6.44,
+      "break_even_requests_total": 25.78,
+      "cells": 36,
+      "context_sensitive_atoms": "5 of 18 (an action's effect depends on the state class it runs in)",
+      "headline": "instant learning in a new environment is a cost law, not a solution: ~6.4 requests per machine to break even, 13 of 16 solved against 11 by demonstration, and every remaining refusal is composition or expressivity",
+      "inert_cells": "17 of 36 (47.2%)",
+      "machines": 4,
+      "receipts": [
+        "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+        "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
+      ],
+      "refusals": {
+        "effect_needs_composition": [
+          "TARBALL REPLACE"
+        ],
+        "surface_cannot_express_the_effect": [
+          "GIT REPLACE",
+          "GIT REMOVE"
+        ]
+      },
+      "requests": 16,
+      "requests_solved_by_demonstration": 11,
+      "requests_solved_by_measurement": 13,
+      "shuffled_control": {
+        "note": "re-labelling and re-ordering every atom leaves the measuring agent's solved set identical machine by machine, while the demonstrator's numbers move: its capability is a function of the order actions happen to be offered",
+        "solved_by_demonstration": 12,
+        "solved_by_measurement_unchanged": 13,
+        "trials_by_demonstration": 46
+      },
+      "trials_demonstration": 34,
+      "trials_measurement": 44,
+      "trials_per_request_after_adaptation": 1.0,
+      "trials_per_request_by_demonstration": 2.125,
+      "unclassified_cells": 1,
+      "what": "four real machines (filesystem, git, tarball, sqlite) sharing no command, argument or identity scheme, solved through one shared effect vocabulary learned by one trial per (atom, state class)"
+    },
+    "receipts": [
+      "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
+    ],
+    "shuffled_summary": {
+      "adaptation_trials_active": 35,
+      "adaptation_trials_probing_every_atom": 36,
+      "atoms_offered": 18,
+      "atoms_that_cannot_change_the_state": 17,
+      "atoms_whose_effect_ignores_the_argument": 4,
+      "atoms_whose_only_effect_moves_identity": 1,
+      "crossover_requests": 18.67,
+      "learn_each_requests_solved": 12,
+      "learn_each_trials": 46,
+      "learn_each_trials_per_request": 2.875,
+      "machines": 4,
+      "ours_requests_solved": 13,
+      "ours_trials": 50,
+      "per_machine": {
+        "FILESYSTEM": {
+          "adaptation": 9,
+          "context_sensitive_atoms": [
+            "FIL_X1",
+            "FIL_X3",
+            "FIL_X5"
+          ],
+          "learn_each": 8,
+          "ours": 13,
+          "solved": 4,
+          "solved_by_demonstration": 4
+        },
+        "GIT": {
+          "adaptation": 10,
+          "context_sensitive_atoms": [],
+          "learn_each": 14,
+          "ours": 14,
+          "solved": 2,
+          "solved_by_demonstration": 2
+        },
+        "SQLITE": {
+          "adaptation": 8,
+          "context_sensitive_atoms": [],
+          "learn_each": 12,
+          "ours": 12,
+          "solved": 4,
+          "solved_by_demonstration": 3
+        },
+        "TARBALL": {
+          "adaptation": 8,
+          "context_sensitive_atoms": [
+            "TAR_X3",
+            "TAR_X4"
+          ],
+          "learn_each": 12,
+          "ours": 11,
+          "solved": 3,
+          "solved_by_demonstration": 3
+        }
+      },
+      "requests": 16,
+      "requests_solved": 13,
+      "unclassified_atoms": 1
+    },
+    "status": "COST_MOVES_FROM_REQUESTS_TO_ENVIRONMENTS_NOT_ZERO_AND_NOT_ALL_COMPUTER_USE",
+    "summary": {
+      "adaptation_trials_active": 29,
+      "adaptation_trials_probing_every_atom": 36,
+      "atoms_offered": 18,
+      "atoms_that_cannot_change_the_state": 17,
+      "atoms_whose_effect_ignores_the_argument": 4,
+      "atoms_whose_only_effect_moves_identity": 1,
+      "crossover_requests": 25.78,
+      "learn_each_requests_solved": 11,
+      "learn_each_trials": 34,
+      "learn_each_trials_per_request": 2.125,
+      "machines": 4,
+      "ours_requests_solved": 13,
+      "ours_trials": 44,
+      "per_machine": {
+        "FILESYSTEM": {
+          "adaptation": 9,
+          "context_sensitive_atoms": [
+            "FS_A1",
+            "FS_A2",
+            "FS_A4"
+          ],
+          "learn_each": 4,
+          "ours": 13,
+          "solved": 4,
+          "solved_by_demonstration": 4
+        },
+        "GIT": {
+          "adaptation": 6,
+          "context_sensitive_atoms": [],
+          "learn_each": 12,
+          "ours": 10,
+          "solved": 2,
+          "solved_by_demonstration": 2
+        },
+        "SQLITE": {
+          "adaptation": 6,
+          "context_sensitive_atoms": [],
+          "learn_each": 8,
+          "ours": 10,
+          "solved": 4,
+          "solved_by_demonstration": 3
+        },
+        "TARBALL": {
+          "adaptation": 8,
+          "context_sensitive_atoms": [
+            "TAR_A1",
+            "TAR_A2"
+          ],
+          "learn_each": 10,
+          "ours": 11,
+          "solved": 3,
+          "solved_by_demonstration": 2
+        }
+      },
+      "requests": 16,
+      "requests_solved": 13,
+      "unclassified_atoms": 1
+    }
+  },
   "observable_gap_receipt": {
     "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
     "repaired": 0,
@@ -516,8 +1054,8 @@
     "WHAT_IS_REAL_AND_THE_ONE_BOTTLENECK_20261116_V1.md"
   ],
   "union_projection_status": {
-    "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The earlier 26/40 projection is superseded; the three over-accepted candidates found by PR #6885 were on the separate no-JSON probe.",
-    "status": "PYTEST_REJUDGED_VERIFIED_UNION_24_OF_40_NOT_ONE_COMPOSED_RUN"
+    "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The projected 26/40 is superseded by the verified 24/40; main #6892 then ran the three vocabularies together in one command under the corpus's own pytest and measured the same 24/40 in 387.8 s. The earlier union is no longer an arithmetic projection, but capability is unchanged: 16 tasks remain hard-open.",
+    "status": "ONE_COMPOSED_RUN_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40"
   },
   "unknown_receipt_tasks_outside_real_corpus": [],
   "unmeasurable_without_published_input_output_examples": [
@@ -563,6 +1101,6 @@
     "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
     "screen_said_pass_runner_said_no_in_the_record": 0
   },
-  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The union is pytest-rejudged on both arms but is not one composed run. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
+  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The 24/40 union is now also one composed run under the corpus pytest, and the audit reads the later invariance, exact-decision, browser and new-environment measurements without crediting any of them as new capability. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
   "what_this_is_not": "Not a repair contest, not a capability, not a benchmark score, not independent verification, not a proof of correctness, not a sentience claim, and not permission to merge over a red or missing referee."
 }

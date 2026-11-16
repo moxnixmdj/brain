@@ -660,6 +660,10 @@ def repair_task(root: pathlib.Path, name: str, *, budget_s: float, per_example_t
         row.update(build_task(root, name, where))
         (where / "python_programs" / f"{name}.py").write_text(best["source"] + "\n")
         verdict = verify_with_corpus_test(where, f"python_testcases/test_{name}.py", verify_timeout)
+    if verdict["returncode"] == 0:
+        # the artifact the judge accepted, carried in the record so a later arm can learn from the
+        # verified program rather than from a description of it
+        row["patched"] = best["source"] + "\n"
     row["corpus_test"] = verdict
     row["stage"] = "REPAIRED__CORPUS_TEST_PASSES" if verdict["returncode"] == 0 \
         else "NOT_REPAIRED__CORPUS_TEST_STILL_FAILS"

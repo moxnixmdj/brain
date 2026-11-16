@@ -89,12 +89,22 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
             "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.md",
             "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
             "RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1.md",
+            "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+            "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
+            "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+            "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md",
             "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
             "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
             "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
             "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
             "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
             "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+            "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+            "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+            "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+            "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+            "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+            "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
         ):
             self.assertIn(path, mod.EVIDENCE_READ)
 
@@ -112,8 +122,12 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         data = json.loads(path.read_text(encoding="utf-8"))
         self.assertEqual(
             data["union_projection_status"]["status"],
-            "PYTEST_REJUDGED_VERIFIED_UNION_24_OF_40_NOT_ONE_COMPOSED_RUN",
+            "ONE_COMPOSED_RUN_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40",
         )
+        self.assertEqual(data["composed_run"]["repaired"], 24)
+        self.assertEqual(data["composed_run"]["seconds"], 387.8)
+        self.assertEqual(sum(len(v) for v in data["composed_run"]["by_arm"].values()), 24)
+        self.assertEqual(data["composed_run"]["status"], "MEASURED_ONE_RUN_NOT_CAPABILITY_GAIN_OVER_THE_PYTEST_REJUDGED_UNION")
         self.assertEqual(data["repaired_union_count"], 24)
         self.assertEqual(data["hard_open_population_count"], 16)
         self.assertEqual(data["unmeasurable_without_published_input_output_examples_count"], 8)
@@ -121,6 +135,49 @@ class HardOpenPopulationAuditTests(unittest.TestCase):
         self.assertEqual(len(data["verified_repair_rerun"]["confirmed"]), 16)
         self.assertTrue(data["invariants"]["claimed_learned_arm_superseded_by_pytest_rerun"])
         self.assertTrue(data["invariants"]["verified_union_is_24_not_the_projected_26"])
+
+    def test_new_mechanism_groups_are_present_by_effect(self) -> None:
+        census = mod.mechanism_census(ROOT)
+        self.assertTrue(census["all_declared_mechanism_files_present"], census)
+        for group in (
+            "exact_decision_past_enumeration",
+            "invariance_and_in_run_learning",
+            "environment_cost_and_composition",
+        ):
+            self.assertIn(group, census["groups"])
+            self.assertEqual(census["groups"][group]["missing"], [])
+        for path in (
+            "canonical/runtime/capability_planner.py",
+            "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+            "canonical/runtime/capability_composer_v1.py",
+            "canonical/runtime/verified_skill_macro_planner_v1.py",
+            "canonical/runtime/explicit_recovery_planner.py",
+            "canonical/runtime/environment_learning_v1.py",
+            "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+            "canonical/swe_kernel/operator_semantics_v1.py",
+            "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+        ):
+            self.assertIn(path, census["groups"]["environment_cost_and_composition"]["present"])
+
+    def test_one_run_invariance_decision_browser_and_environment_are_read_without_credit(self) -> None:
+        path = ROOT / "canonical" / "verification" / "PROOF_CARRYING_COUNTERFACTUAL_UNION_20261116_V1.json"
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for key in (
+            "composed_run_is_one_run_one_judge_24_of_40",
+            "invariance_changes_reach_not_capability",
+            "exact_decision_past_enumeration_wall_is_not_capability_credit",
+            "browser_zero_experience_census_is_66_with_no_regressions",
+            "new_environment_cost_law_is_bounded_and_shuffle_invariant",
+        ):
+            self.assertTrue(data["invariants"][key], key)
+        self.assertEqual(data["invariance_and_reach"]["capability_gain_over_the_three_arm_composition"], 0)
+        self.assertEqual(data["exact_decision_past_enumeration_wall"]["measured_effect"]["raw_survivors_pinned_corpus"], 8388600)
+        self.assertEqual(data["browser_zero_experience_census"]["measured_effect"]["seed_1060"]["after"], 66)
+        self.assertEqual(data["new_environment_cost_law"]["summary"]["requests_solved"], 13)
+        self.assertEqual(data["new_environment_cost_law"]["shuffled_summary"]["requests_solved"], 13)
+        self.assertIn("COMPOSED_REPAIR_ONE_RUN_20261116_V1.json", mod.REPAIR_RECEIPTS)
+        self.assertIn("ARM_LEARNED_IN_ONE_RUN_20261116_V1.json", mod.REPAIR_RECEIPTS)
+        self.assertNotIn("WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json", mod.REPAIR_RECEIPTS)
 
     def test_selection_measurement_is_read_but_not_counted_as_a_quixbugs_repair(self) -> None:
         path = ROOT / "canonical" / "verification" / "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"

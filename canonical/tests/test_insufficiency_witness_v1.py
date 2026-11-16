@@ -173,16 +173,29 @@ def test_the_equal_facts_shape_reports_the_more_specific_kind():
 
 
 # ---------------------------------------------------------------- the added power
-def test_the_certificate_decides_where_the_learner_refuses_to_enumerate():
-    """|A| above the cap makes `learn` answer BOUNDED. The certificate still decides, both ways."""
+def test_the_learner_and_the_certificate_agree_past_the_enumeration_cap():
+    """Past the cap the learner no longer refuses: it decides, and agrees with the certificate.
+
+    This was `test_the_certificate_decides_where_the_learner_refuses_to_enumerate` while
+    `learn` answered BOUNDED for |A| above the cap. The wall round (§4 of
+    `THE_WALL_IS_IN_THE_VOCABULARY_AND_IT_CAN_NOW_BE_PROVED_20261113_V1.md`) named the repair --
+    decide by arithmetic instead of enumerating -- and this round ships it, so the pinned
+    assertion flips with it: where the certificate used to be the ONLY decider, both instruments
+    now reach the same verdict, by different methods, on both sides.
+    """
     many = frozenset(f"f{i}" for i in range(20))
     # separable: one fact only the success has
     separable = [(many | {"x"}, True), (many, False)]
-    assert app.learn(separable).status == app.BOUNDED
+    b = app.learn(separable)
+    assert b.status == app.AMBIGUOUS
+    assert b.survivor_count == 2 ** 20  # every subset of the 21-fact A that contains x
+    assert b.most_general == ("x",)
     assert app.insufficiency_witness(separable) is None
     # inseparable: the failure has everything the success has
     inseparable = [(many, True), (many | {"y"}, False)]
-    assert app.learn(inseparable).status == app.BOUNDED
+    b2 = app.learn(inseparable)
+    assert b2.status == app.INCONSISTENT
+    assert b2.survivor_count == 0
     w = app.insufficiency_witness(inseparable)
     assert w is not None and w["kind"] == app.WITNESS_SEPARATION_IMPOSSIBLE
     assert len(w["shared_facts"]) == 20
@@ -206,14 +219,17 @@ def test_the_two_unrepairable_kinds_are_exactly_the_two_separation_kinds():
 
 
 # ---------------------------------------------------------------- the repair, measured
-def test_adding_absence_makes_it_expressible_but_moves_the_wall_to_combinatorics(real_evidence):
-    """What a vocabulary repair costs, measured rather than proposed.
+def test_adding_absence_makes_it_expressible_and_the_arithmetic_decides_it(real_evidence):
+    """What a vocabulary repair costs, measured -- and now decided, not bounded.
 
-    Closing the fact vocabulary to kinds and emitting absence for every kind not present removes the
-    obstruction: the certificate stops firing. But the shared literal set grows past the learner's
-    own enumeration cap, so `learn` answers BOUNDED. The obstacle moves from representation to
-    combinatorics, which is a different problem with a different repair -- and this test pins that
-    decomposition instead of letting "add negation" be shipped as if it were the end of it.
+    Closing the fact vocabulary to kinds and emitting absence for every kind not present removes
+    the obstruction: the certificate stops firing. That used to move the wall to combinatorics --
+    2^23 = 8,388,608 hypotheses against a cap of 12, `learn` answering BOUNDED -- and this test
+    pinned that decomposition instead of letting "add negation" ship as if it were the end of it.
+    The combinatorics repair named by that round (arithmetic over the evidence instead of
+    enumeration) now decides the same version space exactly: the status, the count, the edges.
+    The assertions flip with the authorization the wall round left: the wall is to be crossed,
+    not memorialised.
     """
     def kind(f: str) -> str:
         parts = f.split(".")
@@ -228,9 +244,16 @@ def test_adding_absence_makes_it_expressible_but_moves_the_wall_to_combinatorics
 
     ev = [(closed(facts), ok) for _, facts, ok in real_evidence]
     assert app.insufficiency_witness(ev) is None, "absence removes the separation obstruction"
-    assert app.learn(ev).status == app.BOUNDED, "but not the enumeration bound"
-    shared = set.intersection(*[set(f) for f, ok in ev if ok])
-    assert len(shared) == 23 and 2 ** len(shared) == 8388608
+    boundary = app.learn(ev)
+    assert boundary.status == app.AMBIGUOUS, boundary.status
+    # Measured by brute force over all 2^23 subsets: 8 subsets miss both exclusions.
+    assert boundary.survivor_count == 8_388_600
+    assert len(boundary.most_specific) == 23
+    # G is the lex-first singleton that hits both exclusions: a fact of A no failure has.
+    failures = [closed(facts) for _, facts, ok in real_evidence if not ok]
+    candidates = sorted(set(boundary.most_specific) - set().union(*failures))
+    assert len(candidates) == 20
+    assert boundary.most_general == (candidates[0],)
 
 
 # ---------------------------------------------------------------- what this must not become

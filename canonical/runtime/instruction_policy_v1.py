@@ -80,7 +80,12 @@ _LATE_OPERATORS = ("TYPE_VALUE", "NUMBER_PREDICATE", "SELECT_SET", "PRESS_CLASS"
 _WRITES = ("TYPE_VALUE", "NUMBER_PREDICATE", "SELECT_SET")
 
 _REPEATABLE = frozenset({"PRESS_SEQUENCE", "PRESS_SEQUENCE_BY_INDEX", "SELECT_SET", "EXPAND",
-                         "ORDER", "SET_CONTROL", "DRAG_DESCRIBED", "MOVE_DIRECTION"})
+                         "ORDER", "SET_CONTROL", "DRAG_DESCRIBED", "MOVE_DIRECTION",
+                         # A PICKER IS A SEQUENCE TOO, and it is the one clause whose steps happen
+                         # on DIFFERENT pages of the widget: open, step the month, answer the day.
+                         # Measured 2026-11-16: marking it done on its first press made the arm
+                         # click the field and stop with the calendar open.
+                         "SELECT_PICKER"})
 
 
 # --------------------------------------------------------------------------- #
@@ -92,11 +97,21 @@ def _pressable(elements: Sequence[Mapping[str, Any]], index: int) -> bool:
 
 
 def _first_matching(elements, wanted: Sequence[str], *, also: Sequence[str] = (),
-                    prefer_kind: str | None = None) -> int | None:
-    """The first element whose label (or one of `also`) contains one of `wanted`."""
+                    prefer_kind: str | None = None,
+                    prefer_own_word: bool = False) -> int | None:
+    """The first element whose label (or one of `also`) contains one of `wanted`.
+
+    `prefer_own_word` returns the SHORTEST-named match rather than the first, because a container
+    whose subtree text contains the target is not the target: measured 2026-11-16, `Quis` sat at
+    `span.alink` index 13 and the panel `p` at index 11 was returned first because its subtree
+    happened to contain the word. Rejecting the container outright also failed, because the scan
+    never continued past it -- so the choice is made over ALL matches, by how much the element says
+    about itself.
+    """
     keys = [plain(word) for word in wanted if plain(word)]
     if not keys:
         return None
+    found: list[tuple[int, int]] = []
     for element in elements:
         if not (element.get("can_click") or element.get("can_type")):
             continue
@@ -109,8 +124,14 @@ def _first_matching(elements, wanted: Sequence[str], *, also: Sequence[str] = ()
                 # "ut" must not select "vulputate." -- containment is allowed, substrings are not
                 if text and (text == key or contract_lib._contains_word(text, key)
                              or (len(text) > len(key) and contract_lib._contains_word(key, text))):
-                    return int(element["index"])
-    return None
+                    if not prefer_own_word:
+                        return int(element["index"])
+                    found.append((len(str(element.get("text") or "").split()),
+                                  int(element["index"])))
+                    break
+    if not found:
+        return None
+    return min(found)[1]
 
 
 def _field_for(elements, index: int) -> int | None:
@@ -367,6 +388,9 @@ def action_for_clause(clause: Mapping[str, Any], observation: Mapping[str, Any],
     """
     elements = observation.get("elements") or []
     operator = clause.get("operator")
+
+    if operator == "SELECT_PICKER":
+        return _picker_step(clause, observation, already)
 
     if operator in ("TYPE_VALUE",):
         target = clause.get("index")
@@ -628,10 +652,42 @@ def action_for_clause(clause: Mapping[str, Any], observation: Mapping[str, Any],
         return None
 
     if operator == "EXPAND":
-        for index in clause.get("indices") or []:
-            if int(index) not in {int(x) for x in already}:
-                return f"click@{int(index)}"
-        return None     # nothing left to open; the clause is finished
+        # INDICES ARE NOT IDENTITIES. Measured 2026-11-16 on `click-collapsible-2`: expanding
+        # Section #1 renumbers the page, so Section #2 moves from 5 to 11 and Section #3 from 7 to
+        # 13 -- and the clause, holding [3,5,7], pressed index 5 (which is now a paragraph of
+        # content) and index 7 (a link) and never opened the other two sections. The clause must
+        # re-find its headers on EVERY page, by the one property that does not move: a container
+        # that is still collapsed. What was opened is remembered by the count, not by the index.
+        # STILL SHUT, POSITIVELY. The first attempt selected anything whose classes merely
+        # contained "collapsed" and also anything that was an accordion header at all -- which
+        # includes the ACTIVE one, so the arm pressed 3, 11, then 3 again and closed the section it
+        # had just opened. A header that is open says so in its own classes
+        # (`ui-accordion-header-active`); the only headers worth pressing are those that are not.
+        # STEP THROUGH THE SECTIONS, ONE AT A TIME. An EXCLUSIVE accordion (`active: false,
+        # collapsible: true` -- read from click-collapsible-2.html) has no state in which all its
+        # sections are shut, so "press whatever is still collapsed" re-pressed Section #1 forever
+        # and never reached the section that held `Quis`. What is needed is a WALK: open a section,
+        # look, and if the target is not in it move to the NEXT section -- never back to one this
+        # episode has already opened. Measured 2026-11-16: `Quis` is in Section #3 of three.
+        headers = []
+        for element in elements:
+            classes = str(element.get("classes") or "")
+            if "ui-accordion-header-icon" in classes:
+                continue
+            if "ui-accordion-header" not in classes and "collapsed" not in classes:
+                continue
+            if not str(element.get("text") or "").strip():
+                continue
+            headers.append(int(element["index"]))
+        for index in headers:
+            if str(index) not in {str(a) for a in already}:
+                return f"click@{index}"
+        # every section has been opened once and the target was in none of them
+        return None
+        # No collapsed container is left: the expansion the sentence asked for is done. The count
+        # in the clause is the record of HOW MANY the sentence named, and this branch is only
+        # reached when none remain -- which is the observation, not a press this arm remembers.
+        return None
 
     if operator == "READ_PAIR":
         index = int(clause["index"])
@@ -691,8 +747,14 @@ def action_for_clause(clause: Mapping[str, Any], observation: Mapping[str, Any],
     if operator == "LABEL_ON_TRACE":
         # If the thing the instruction said to FIND is visible now, press it. Only when it is not
         # visible is opening a container the right move.
+        # A CONTAINER THAT HOLDS THE TARGET IS NOT THE TARGET. Measured 2026-11-16 on
+        # `click-tab-2`: `_first_matching` allows containment in both directions, so the panel's
+        # own paragraph -- whose subtree text happens to include the word "Quis" -- was returned as
+        # the match, pressed, changed nothing, and the arm never reached the `span.alink` that IS
+        # `Quis`. A link is a thing with a short name of its own; the panel is the place it lives.
         index = _first_matching(elements, [clause.get("label") or ""],
-                                also=("aria-label", "title", "classes", "id", "alt"))
+                                also=("aria-label", "title", "classes", "id", "alt"),
+                                prefer_own_word=True)
         if index is not None and plain(str(clause.get("label") or "")) not in {
                 plain(x) for x in pressed}:
             return f"click@{index}"
@@ -717,12 +779,49 @@ def _reveal(clause: Mapping[str, Any], observation: Mapping[str, Any],
             continue
         classes = str(element.get("classes") or "")
         tag = str(element.get("tag") or "")
+        # A CONTAINER THAT HIDES ITS CONTENT AND IS OPENED BY A PRESS. The list is the page's own
+        # vocabulary for "there is more behind me": a collapsed header, an accordion, a details
+        # summary -- and a TAB, which was missing. Measured 2026-11-16 on all three `click-tab-2*`
+        # pages: the clause compiled (`LABEL_ON_TRACE "Quis"`), the tabs sat there as
+        # `a.ui-tabs-anchor` with their own text, and the reveal never pressed one, because `_reveal`
+        # had no name for a tab. The arm held the whole instruction and dispatched nothing.
+        # A CONTAINER, NOT A SENTENCE THAT HAPPENS TO BE IN ONE. Measured 2026-11-16 on
+        # `click-tab-2`: having opened all three tabs the reveal fell through to the panel's own
+        # paragraph, pressed it, changed nothing, and re-pressed it. An element whose own text is
+        # a whole sentence is content; what the reveal is looking for is furniture that hides
+        # content. The limit is the page's own shape: a control's label is short, prose is not.
+        if len(str(element.get("text") or "").split()) > 4:
+            continue
         if ("collapsed" in classes or "ui-accordion-header" in classes or tag == "h3"
-                or tag == "summary"):
+                or tag == "summary" or _is_tab(element)):
             index = int(element["index"])
-            if index not in already:
+            if str(index) not in {str(a) for a in already}:
                 return f"click@{index}"
+    # A TAB STAYS PRESSABLE AFTER IT IS PRESSED -- it is "already pressed", not "already tried", and
+    # the target may be on the FIRST tab (three tabs, `Quis` on the third -> open, open, open). The
+    # accordion branch above cannot tell the two apart, so a pressed tab is remembered and REFUSED
+    # only after every container on the page has been opened once. Measured 2026-11-16: the arm
+    # opened one tab and stopped, holding `LABEL_ON_TRACE "Quis"` in front of a page that had it.
+    for element in elements:
+        if not element.get("can_click") or not _is_tab(element):
+            continue
+        index = str(element["index"])
+        if index not in {str(a) for a in already}:
+            return f"click@{element['index']}"
     return None
+
+
+def _is_tab(element: Mapping[str, Any]) -> bool:
+    """Whether this element is a tab: the page says so, or it sits in a row of siblings that are.
+
+    Both readings are the page's own structure. A `role=tab` is the page declaring it; a
+    `ui-tabs-anchor` inside a tab list is the page's framework declaring it. Neither is a guess
+    about what the tab means -- only about what pressing it does, which the classes state.
+    """
+    said = " ".join(str(element.get(key) or "") for key in ("classes", "id", "role")).lower()
+    if "tab" in said and "table" not in said:
+        return True
+    return False
 
 
 def satisfied_by_construction(clause: Mapping[str, Any], observation: Mapping[str, Any]) -> bool:
@@ -755,10 +854,12 @@ class ContractArm:
         self._blocked: list[str] = []   # (operator, action) pairs that changed nothing
         self._done_ops: dict[int, list[str]] = {}   # clauses finished by their own action
         self._pressed_labels: list[str] = []        # labels actually pressed, for LABEL_ON_TRACE
+        self._pressed_targets: list[str] = []       # labels pressed AS THE TARGET, never as a step
         self._pressed_indices: list[str] = []       # indices already acted on
         self._last_page = ""
         self._stuck = 0
         self._seen: list[tuple[str, str]] = []   # (page fingerprint, action) already emitted
+        self._ending_tried = False              # an ending is implied once per episode, never twice
         self._last_page = ""
         self._stuck = 0
 
@@ -843,9 +944,15 @@ class ContractArm:
         # a clause is finished when its action is no longer available AND the clause holds
         for clause in list(self._clauses):
             action = action_for_clause(clause, observation, self._reveal)
+            # FINDING THE TARGET IS NOT REACHED BY PRESSING SOMETHING ELSE. Measured 2026-11-16 on
+            # `click-tab-2*`: the reveal pressed a tab, the tab's own label "Tab #1" was recorded
+            # among the pressed labels, and this line asked only "is the target's name among the
+            # labels pressed" -- which is a different question and was answered by an unrelated
+            # press. The clause was retired with `Quis` never touched. The retirement must be the
+            # TARGET ITSELF having been pressed, never merely something on the way to it.
             finished_target = (clause.get("operator") == "LABEL_ON_TRACE"
                                and plain(str(clause.get("label") or ""))
-                               in {plain(x) for x in self._pressed_labels})
+                               in {plain(x) for x in self._pressed_targets})
             opened = (clause.get("operator") == "EXPAND"
                       and {str(index) for index in clause.get("indices") or []}
                       <= {str(index) for index in self._reveal})
@@ -901,6 +1008,12 @@ class ContractArm:
                                           int(index), self._positions, self._pressed_labels)
                 if label and label not in self._pressed_labels:
                     self._pressed_labels.append(label)
+                # A SECOND LEDGER, because "pressed at all" and "pressed THE THING" are different
+                # facts and the reveal depends on the difference.
+                if label and label not in self._pressed_targets and (
+                        clause.get("operator") != "LABEL_ON_TRACE"
+                        or plain(label) == plain(str(clause.get("label") or ""))):
+                    self._pressed_targets.append(label)
                 if index not in self._pressed_indices:
                     self._pressed_indices.append(index)
                 if index not in self._reveal:
@@ -909,11 +1022,53 @@ class ContractArm:
                     # Opening the record is the FIRST half of this clause, not the whole of it.
                     # Marking it done here is how the email got opened and then abandoned.
                     pass
+                elif clause.get("operator") == "LABEL_ON_TRACE":
+                    # A STEP TOWARDS THE TARGET IS NOT THE TARGET. Measured 2026-11-16 on
+                    # `click-tab-2`: the reveal pressed tab #1 and this line marked the FIND clause
+                    # done, so the arm held "find and click Quis" -- which was on tab #3 -- and
+                    # stopped with a tab open and nothing said. The clause is done when the TARGET
+                    # has been pressed, which the ledger above decides, and at no other time.
+                    pass
                 elif clause.get("operator") not in _REPEATABLE:
                     self._done_ops[id(clause)] = [str(clause.get("operator"))]
             return action
+        # THE SENTENCE DOES NOT HAVE TO SAY "SUBMIT" FOR THE PAGE TO GRADE ON SUBMIT. Measured
+        # 2026-11-16: five drag pages end the episode only on a press of `#subbtn`, whose visible
+        # word is Submit, and their instructions never say so -- the arm dragged the box to exactly
+        # the right place and stopped one unstated press short. This is tried ONLY here, after every
+        # clause the sentence itself supplied has been exhausted (one clause fewer would be acting
+        # before the instruction's own acts, which is the trace a wrong answer makes).
+        # HALF AN INSTRUCTION EARNS NO ENDING. Measured 2026-11-16 by the tree's own test of this
+        # arm: "Find and click on the center of the circle, then press submit." compiles a press and
+        # reports `refused_part` (the centre is not observable). The implied ending then pressed
+        # Submit -- delivering work that was never done, with confidence, which is precisely the
+        # trace this module exists to refuse. An ending is implied only for a sentence whose whole
+        # meaning was read.
+        if self.contract.get("refused_part"):
+            pass
+        elif not self._clauses or all(_is_instance_done(c, self._done_ops) for c in self._clauses):
+            action = self._implied_ending(observation)
+            if action is not None:
+                return action
         self.refused = bool(self._clauses) or bool(self.contract.get("refused_part"))
         return None
+
+    def _implied_ending(self, observation: Mapping[str, Any]) -> str | None:
+        """The one control that hands the work in, once the work the sentence asked for is done."""
+        from .implied_ending_v1 import find_ending, IMPLIED
+        if self._ending_tried:
+            return None
+        ending = find_ending(self._utterance, observation)
+        if ending.outcome != IMPLIED or ending.index is None:
+            return None
+        action = f"click@{ending.index}"
+        fingerprint = _fingerprint(observation)
+        if (fingerprint, action) in self._seen:
+            return None
+        self._ending_tried = True
+        self._seen.append((fingerprint, action))
+        self._done.append("IMPLIED_ENDING")
+        return action
 
     def blocked(self) -> list[str]:
         return list(self._blocked)
@@ -940,9 +1095,17 @@ def order_for_execution(clauses: Sequence[Mapping[str, Any]]) -> list[dict[str, 
 
 
 def _label_at(observation: Mapping[str, Any], index: int) -> str:
-    elements = observation.get("elements") or []
-    if 0 <= index < len(elements):
-        return plain(element_label(elements[index]))
+    """The label of the element with this INDEX -- found by index, not by list position.
+
+    An index is the bridge's name for an element; a position is where it happens to sit in the
+    list. They agree on every capture measured so far, which is exactly why indexing the list by
+    the element's own name is a latent fault rather than a visible one: the day the bridge reports
+    a sparse index, this would read a DIFFERENT element's label and record the wrong thing as
+    pressed -- and the FIND clause retires on that ledger.
+    """
+    for element in observation.get("elements") or []:
+        if int(element.get("index", -1)) == int(index):
+            return plain(element_label(element))
     return ""
 
 
@@ -958,6 +1121,11 @@ def _applied(clause: Mapping[str, Any], observation: Mapping[str, Any]) -> bool:
     if value is None:
         return False
     return plain(elements[int(index)].get("value")) == plain(value)
+
+
+def _is_instance_done(clause: Mapping[str, Any], done_ops: Mapping[int, list[str]]) -> bool:
+    """Whether THIS clause (by identity, not by operator) has already been carried out."""
+    return id(clause) in done_ops
 
 
 def _fingerprint(observation: Mapping[str, Any]) -> str:
@@ -1002,3 +1170,133 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def _picker_step(clause: Mapping[str, Any], observation: Mapping[str, Any],
+                 already: Sequence[str]) -> str | None:
+    """One step towards the date the sentence named. A picker is a SEQUENCE, not a press.
+
+    The order is forced by the widget and by nothing else:
+      1. the picker is not open      -> open it (the field whose class/id says datepicker)
+      2. the page shows a day grid   -> step the month into position, then answer the day
+      3. the answer is in the field  -> done (the caller drops the clause on `satisfied_by_construction`)
+
+    Every step is derived from (clause, observation). No date is remembered between steps: the
+    parts are in the clause, which came from the sentence.
+    """
+    from . import picker_answer_v1 as picker
+
+    parts = [str(p) for p in clause.get("parts") or []]
+    elements = list(observation.get("elements") or [])
+    if not parts:
+        return None
+
+    # THE PICKER IS OPEN when the page shows a month name next to a step control. That pair is the
+    # calendar's own signature; a page that merely has a text field has neither.
+    months = [e for e in elements if e.get("can_click")
+              and str(e.get("text") or "").strip().lower() in picker.MONTHS]
+    opened = bool(months)
+    field = next((e for e in elements
+                  if "datepicker" in (str(e.get("classes") or "") + " "
+                                      + str(e.get("id") or "")).lower()), None)
+
+    if not opened:
+        # ALREADY ANSWERED is a property of the FIELD, not of a press this arm made. Measured
+        # 2026-11-16: the day was chosen correctly and then the arm clicked the field again,
+        # re-opening the calendar it had just closed, because "have I clicked this?" is not the
+        # question. The question is "does the field now hold what the sentence named?", and a
+        # picker writes its own value back where it can be read.
+        if field is not None and _picker_filled(field, clause, picker):
+            return None
+        if field is not None and field.get("can_click"):
+            action = f"click@{field['index']}"
+            if action in set(already):
+                return None
+            return action
+        return None
+
+    # WHICH NUMBER IS THE MONTH. "12/26": 26 is not a month, so range alone decides. "11/10": both
+    # are legal months and both are legal days, so the SENTENCE is genuinely ambiguous and any
+    # choice would be a locale I assumed. Ask the page instead, with a probe whose result can only
+    # be read one way: choose a day ABOVE 12 (the page always shows some), which the page then
+    # writes back as a number that cannot be a month. Whichever slot it lands in is the day slot,
+    # and the field's own value declares the order. This is not a guess and it is not learning from
+    # a reward: it reads the page's own state, which is the only evidence there is.
+    if clause.get("ambiguous") and not picker.declared_order(observation):
+        if not clause.get("probe"):
+            clause = dict(clause)
+        probe = _probe_day(elements, picker)
+        if probe is not None:
+            return probe
+    year = next((p for p in parts if len(p) == 4), "")
+    numbers = [p for p in parts if len(p) <= 2]
+    target_month = None
+    for number in numbers:
+        if 1 <= int(number) <= 12:
+            target_month = int(number)
+            break
+
+    nav = picker.navigate_to_month(clause.get("provenance") or "", observation)
+    if nav.get("outcome") == picker.NOT_YET:
+        # Step ONE month per action: the page has to be re-read between steps, because the grid
+        # behind the month is what changes.
+        return f"click@{nav['control']}"
+
+    # THE DAY. Chosen from the grid the page is showing, by the number the sentence names, and only
+    # from a control that is a bare number -- the year and the step controls are not days.
+    shown_month = nav.get("shown")
+    if target_month is not None and shown_month is not None and shown_month != target_month:
+        return None                        # naming the wrong month's day is a confident error
+    days = [int(p) for p in numbers if int(p) != target_month or len(numbers) == 1]
+    for day in days:
+        hits = [e for e in elements if e.get("can_click")
+                and str(e.get("text") or "").strip() == str(day)
+                and not any(month in " " + str(e.get("classes") or "").lower()
+                            for month in ("ui-datepicker-month", "ui-datepicker-year"))]
+        if len(hits) == 1:
+            return f"click@{hits[0]['index']}"
+    return None
+
+
+def _picker_filled(field: Mapping[str, Any], clause: Mapping[str, Any],
+                   picker) -> bool:
+    """Whether the picker's own field already carries a date whose parts match the sentence.
+
+    The page declares the answer in its own notation; this compares PARTS, not strings, so
+    `12/26/2016` is recognised whether the page writes `12/26/2016` or `2016-12-26`.
+    """
+    value = str(field.get("value") or "").strip()
+    if not value:
+        return False
+    declared = picker.declared_order({"elements": [field]})
+    found = [p for p in re.split(r"[/.\-T ]+", value) if p.strip().isdigit()]
+    if len(found) < 3:
+        return False
+    wanted = [str(p).lstrip("0") or "0" for p in clause.get("parts") or []]
+    if not {str(p).lstrip("0") or "0" for p in found} >= {w for w in wanted if len(w) <= 2}:
+        return False
+    year = next((w for w in wanted if len(w) == 4), "")
+    return (not year) or str(year) in found or str(year)[-2:] in found or declared != ""
+
+
+def _probe_day(elements: Sequence[Mapping[str, Any]], picker) -> str | None:
+    """A day above 12, on the grid the calendar is showing, chosen so the page declares its order.
+
+    Returns None when no such day is on screen (the calendar is showing part of a month whose
+    numbers above 12 are all missing), because a probe that cannot be read is just a wrong press.
+    """
+    if any(str(e.get("text") or "").strip().lower() in picker.MONTHS for e in elements) is False:
+        return None
+    for element in elements:
+        if not element.get("can_click"):
+            continue
+        said = str(element.get("text") or "").strip()
+        if not said.isdigit():
+            continue
+        if not 13 <= int(said) <= 31:
+            continue
+        classes = str(element.get("classes") or "").lower()
+        if "month" in classes or "year" in classes:
+            continue
+        return f"click@{element['index']}"
+    return None

@@ -60,6 +60,11 @@ REPAIR_RECEIPTS = (
     "RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
     "SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
     "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+    # New main evidence: the projected union is now a composed run under one
+    # judge, and a second run learns its own alpha-canonical vocabulary inside
+    # the pass. They report the same 24 tasks; neither adds a new repair.
+    "COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+    "ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
 )
 
 #: The cross-corpus transfer receipt has a second arm shown 39 other QuixBugs
@@ -133,6 +138,33 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/runtime/bound_capabilities/software_patch_cegis_z3_v1.py",
         "canonical/runtime/bound_capabilities/hardcore_software_engineering_orchestrator_v1.py",
     ),
+    # 2026-11-16 main additions, indexed by EFFECT. The decision/composition
+    # layer is not missing: these are the non-obvious names it already has.
+    "exact_decision_past_enumeration": (
+        "canonical/runtime/applicability_v1.py",
+        "canonical/runtime/contrast_selection_v1.py",
+        "canonical/tests/test_the_learner_decides_past_the_enumeration_wall_v1.py",
+    ),
+    "invariance_and_in_run_learning": (
+        "canonical/runtime/implied_ending_v1.py",
+        "canonical/runtime/picker_answer_v1.py",
+        "canonical/tools/composed_repair_one_run_v1.py",
+        "canonical/tools/arm_learned_from_its_own_verified_repairs_v1.py",
+        "canonical/tools/what_one_verified_repair_travels_v1.py",
+        "canonical/swe_kernel/induced_edit_basis_v1.py",
+    ),
+    "environment_cost_and_composition": (
+        "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+        "canonical/runtime/environment_learning_v1.py",
+        "canonical/runtime/capability_planner.py",
+        "canonical/runtime/generic_goal_tool_effect_planner_v1.py",
+        "canonical/runtime/capability_composer_v1.py",
+        "canonical/runtime/verified_skill_macro_planner_v1.py",
+        "canonical/runtime/explicit_recovery_planner.py",
+        "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+        "canonical/swe_kernel/operator_semantics_v1.py",
+        "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+    ),
 }
 
 SUPERSEDES = (
@@ -168,6 +200,23 @@ EVIDENCE_READ = (
     "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
     "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
     "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
+    # One-run, invariance, exact-decision, browser and new-environment evidence
+    # merged to main after the previous answer was written.
+    "ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.md",
+    "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md",
+    "THE_LEARNER_DECIDES_PAST_THE_ENUMERATION_WALL_20261116_V1.md",
+    "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md",
+    "canonical/action_intents/ONE_RUN_THREE_VOCABULARIES_ONE_JUDGE_20261116_V1.json",
+    "canonical/action_intents/THE_INVARIANCE_IS_THE_REACH_20261116_V1.json",
+    "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
+    "canonical/action_intents/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "canonical/action_intents/THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+    "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+    "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+    "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+    "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+    "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
 )
 
 
@@ -285,6 +334,17 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     selection = read_json(selection_path) if selection_path.is_file() else None
     rerun_path = root / "canonical" / "verification" / "RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json"
     rerun = read_json(rerun_path) if rerun_path.is_file() else None
+    V = root / "canonical" / "verification"
+    A = root / "canonical" / "action_intents"
+    composed = read_json(V / "COMPOSED_REPAIR_ONE_RUN_20261116_V1.json") if (V / "COMPOSED_REPAIR_ONE_RUN_20261116_V1.json").is_file() else None
+    arm = read_json(V / "ARM_LEARNED_IN_ONE_RUN_20261116_V1.json") if (V / "ARM_LEARNED_IN_ONE_RUN_20261116_V1.json").is_file() else None
+    travel = read_json(V / "WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json") if (V / "WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json").is_file() else None
+    browser_new = read_json(V / "THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json") if (V / "THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json").is_file() else None
+    environment = read_json(V / "INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json") if (V / "INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json").is_file() else None
+    shuffled = read_json(V / "INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json") if (V / "INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json").is_file() else None
+    invariance_intent = read_json(A / "THE_INVARIANCE_IS_THE_REACH_20261116_V1.json") if (A / "THE_INVARIANCE_IS_THE_REACH_20261116_V1.json").is_file() else None
+    decide_intent = read_json(A / "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json") if (A / "DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json").is_file() else None
+    environment_intent = read_json(A / "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json") if (A / "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.json").is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -322,6 +382,58 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             and rerun.get("screen_said_pass_runner_said_no_in_the_record") == 0
         ),
         "verified_union_is_24_not_the_projected_26": len(repaired) == 24,
+        "composed_run_is_one_run_one_judge_24_of_40": bool(
+            composed
+            and composed.get("tasks") == 41
+            and composed.get("repaired") == 24
+            and composed.get("stages", {}).get("REPAIRED") == 24
+            and sum(len(v) for v in composed.get("by_arm", {}).values()) == 24
+            and composed.get("model_dependency_count") == 0
+        ),
+        "invariance_changes_reach_not_capability": bool(
+            arm
+            and travel
+            and invariance_intent
+            and arm.get("learned_arms", {}).get("LEARNED_THIS_RUN", {}).get("survived_the_programs_own_examples") == 0
+            and arm.get("learned_arms", {}).get("ALPHA_LEARNED_THIS_RUN", {}).get("survived_the_programs_own_examples") == 4
+            and arm.get("learned_arms", {}).get("ALPHA_LEARNED_THIS_RUN", {}).get("won")
+            == ["find_in_sorted", "mergesort", "next_palindrome", "quicksort"]
+            and arm.get("learned_arms", {}).get("ALPHA_LEARNED_THIS_RUN", {}).get("wins_over_bugs_the_three_arms_could_not_repair") == []
+            and travel.get("rung_3_a_different_bug", {}).get("transfers") == 11
+            and len(travel.get("rung_3_a_different_bug", {}).get("tasks_repaired", [])) == 5
+            and invariance_intent.get("measured_effect", {}).get("capability_gain_over_the_three_arm_composition") == 0
+        ),
+        "exact_decision_past_enumeration_wall_is_not_capability_credit": bool(
+            decide_intent
+            and decide_intent.get("measured_effect", {}).get("raw_survivors_pinned_corpus") == 8388600
+            and decide_intent.get("measured_effect", {}).get("inclusion_extraction_seconds") == 0.0
+            and decide_intent.get("measured_effect", {}).get("exhaustive_ie_families") == 5058
+            and decide_intent.get("measured_effect", {}).get("capability_credit_claimed") is False
+            and decide_intent.get("measured_effect", {}).get("benchmark_credit_claimed") is False
+        ),
+        "browser_zero_experience_census_is_66_with_no_regressions": bool(
+            browser_new
+            and browser_new.get("measured_effect", {}).get("seed_1060", {}).get("after") == 66
+            and browser_new.get("measured_effect", {}).get("seed_1060", {}).get("before") == 52
+            and browser_new.get("measured_effect", {}).get("regressions") == []
+            and browser_new.get("measured_effect", {}).get("parameters") == 0
+            and browser_new.get("measured_effect", {}).get("experience") == "none"
+        ),
+        "new_environment_cost_law_is_bounded_and_shuffle_invariant": bool(
+            environment
+            and shuffled
+            and environment_intent
+            and environment.get("summary", {}).get("machines") == 4
+            and environment.get("summary", {}).get("requests") == 16
+            and environment.get("summary", {}).get("requests_solved") == 13
+            and environment.get("summary", {}).get("learn_each_requests_solved") == 11
+            and environment.get("summary", {}).get("learn_each_trials_per_request") == 2.125
+            and environment_intent.get("measured_effect", {}).get("trials_per_request_after_adaptation") == 1.0
+            and environment_intent.get("measured_effect", {}).get("trials_per_request_by_demonstration") == 2.125
+            and shuffled.get("summary", {}).get("requests_solved") == 13
+            and environment_intent.get("measured_effect", {}).get("break_even_requests_per_machine") == 6.44
+            and environment_intent.get("measured_effect", {}).get("refusals", {}).get("effect_needs_composition") == ["TARBALL REPLACE"]
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -338,8 +450,53 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
         "measured_receipts": census["rows"],
         "receipt_arms_ignored": list(RECEIPT_ARMS_IGNORED),
         "union_projection_status": {
-            "status": "PYTEST_REJUDGED_VERIFIED_UNION_24_OF_40_NOT_ONE_COMPOSED_RUN",
-            "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The earlier 26/40 projection is superseded; the three over-accepted candidates found by PR #6885 were on the separate no-JSON probe.",
+            "status": "ONE_COMPOSED_RUN_UNDER_THE_CORPUS_PYTEST_MEASURED_24_OF_40",
+            "reason": "PR #6887 re-ran the claimed learned-arm repairs from their own record: 16 confirmed, 4 not reconstructible, 0 screen disagreements in that record. The projected 26/40 is superseded by the verified 24/40; main #6892 then ran the three vocabularies together in one command under the corpus's own pytest and measured the same 24/40 in 387.8 s. The earlier union is no longer an arithmetic projection, but capability is unchanged: 16 tasks remain hard-open.",
+        },
+        "composed_run": {
+            "receipt": "canonical/verification/COMPOSED_REPAIR_ONE_RUN_20261116_V1.json",
+            "tasks": (composed or {}).get("tasks"),
+            "repaired": (composed or {}).get("repaired"),
+            "seconds": (composed or {}).get("seconds"),
+            "by_arm": (composed or {}).get("by_arm", {}),
+            "stages": (composed or {}).get("stages", {}),
+            "judge": "the corpus's own pytest on a fresh copy with the answer key absent",
+            "status": "MEASURED_ONE_RUN_NOT_CAPABILITY_GAIN_OVER_THE_PYTEST_REJUDGED_UNION",
+        },
+        "invariance_and_reach": {
+            "receipts": [
+                "canonical/verification/ARM_LEARNED_IN_ONE_RUN_20261116_V1.json",
+                "canonical/verification/WHAT_ONE_VERIFIED_REPAIR_TRAVELS_20261116_V1.json",
+            ],
+            "literal_preconditions": (arm or {}).get("learned_arms", {}).get("LEARNED_THIS_RUN", {}),
+            "alpha_canonical_preconditions": (arm or {}).get("learned_arms", {}).get("ALPHA_LEARNED_THIS_RUN", {}),
+            "travel_ladder": {
+                "rung_1_same_bug": (travel or {}).get("rung_1_same_bug", {}),
+                "rung_2_same_bug_renamed": (travel or {}).get("rung_2_same_bug_renamed", {}),
+                "rung_3_a_different_bug": (travel or {}).get("rung_3_a_different_bug", {}),
+            },
+            "capability_gain_over_the_three_arm_composition": (invariance_intent or {}).get("measured_effect", {}).get("capability_gain_over_the_three_arm_composition"),
+            "status": "DEMONSTRATION_IS_CONTENT_INVARIANCE_IS_REACH",
+        },
+        "exact_decision_past_enumeration_wall": {
+            "receipt": "canonical/action_intents/DECIDE_PAST_THE_ENUMERATION_WALL_20261116_V1.json",
+            "measured_effect": (decide_intent or {}).get("measured_effect", {}),
+            "status": "EXACT_INCLUSION_EXTRACTION_NOT_A_NEW_CAPABILITY",
+        },
+        "browser_zero_experience_census": {
+            "receipt": "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+            "measured_effect": (browser_new or {}).get("measured_effect", {}),
+            "status": "IMPLIED_ENDING_AND_PICKER_ARE_CONTRACT_NOT_NEW_WEIGHTS",
+        },
+        "new_environment_cost_law": {
+            "receipts": [
+                "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+                "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+            ],
+            "summary": (environment or {}).get("summary", {}),
+            "shuffled_summary": (shuffled or {}).get("summary", {}),
+            "measured_effect": (environment_intent or {}).get("measured_effect", {}),
+            "status": "COST_MOVES_FROM_REQUESTS_TO_ENVIRONMENTS_NOT_ZERO_AND_NOT_ALL_COMPUTER_USE",
         },
         "verified_repair_rerun": {
             "receipt": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
@@ -396,9 +553,11 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
         "what_this_is": (
             "A set-algebra audit of measured receipts against the real published corpus, using only "
             "clean held-out arms, plus an effect-based census of mechanisms already in the tree. "
-            "The union is pytest-rejudged on both arms but is not one composed run. It also indexes "
-            "the separate selection measurement among test-passing HumanEvalFix candidates; that "
-            "measurement is not a QuixBugs repair receipt. It is not a solver."
+            "The 24/40 union is now also one composed run under the corpus pytest, and the audit "
+            "reads the later invariance, exact-decision, browser and new-environment measurements "
+            "without crediting any of them as new capability. It also indexes the separate selection "
+            "measurement among test-passing HumanEvalFix candidates; that measurement is not a "
+            "QuixBugs repair receipt. It is not a solver."
         ),
         "what_this_is_not": (
             "Not a repair contest, not a capability, not a benchmark score, not independent "

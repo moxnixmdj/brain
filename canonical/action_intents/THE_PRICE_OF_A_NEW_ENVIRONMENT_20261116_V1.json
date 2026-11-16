@@ -1,0 +1,539 @@
+{
+  "action_id": "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1",
+  "action_intent_id": "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE was tried first and exhausted against real artifacts: inert_action_prior_v1 was read (47.1% of actions inert on MiniWoB++, effect statistics keyed by the action STRING so nothing transfers), instant_learning_boundary_probe_v1 was read (a state-keyed carried model breaks when state names change), transfer_learning_v1 was read (recalls a plan by shape and re-verifies it), attested_state_v1 was read and reused as the readout discipline, and predicate_world_abstraction_v1 was read (it elevates a UI plan into CLI/SQLite skills via twin-world self-experimentation). None of them measures what a new machine costs. ADAPT was rejected because adapting a state-keyed model would not have produced a cost law.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+      "canonical/tests/test_instant_learning_in_a_new_environment_v1.py",
+      "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json",
+      "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1.md"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::INSTANT_LEARNING_HAD_BEEN_CALLED_A_PERFECT_SOLUTION_FOR_ANY_ENVIRONMENT_WHILE_ITS_COST_STRUCTURE_AND_ITS_FAILURE_MODES_HAD_NEVER_BEEN_MEASURED_ON_REAL_MACHINES_SO_NEITHER_ITS_REVOLUTIONARY_PART_NOR_THE_WALL_BEHIND_IT_WAS_KNOWN",
+  "canonical_base_commit": "57a83e9e8ca49f4c3404d5c643960af973b8986f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "INSTANT_LEARNING_HAD_BEEN_CALLED_A_PERFECT_SOLUTION_FOR_ANY_ENVIRONMENT_WHILE_ITS_COST_STRUCTURE_AND_ITS_FAILURE_MODES_HAD_NEVER_BEEN_MEASURED_ON_REAL_MACHINES_SO_NEITHER_ITS_REVOLUTIONARY_PART_NOR_THE_WALL_BEHIND_IT_WAS_KNOWN",
+  "date": "2026-11-16",
+  "expected_parent_change": "Whether instant learning in a new environment is a measured cost law with a break-even, or a slogan; and whether its remaining failures are cost or expressivity",
+  "expected_parent_frontier_change": "Learning's currency changes from requests to environments, with the exchange rate measured (~6.4 requests per machine), and every remaining refusal is attributed to composition or surface expressivity rather than to budget -- so the next capability work is a composer over measured effects, not more demonstrations.",
+  "explicit_user_authorization": [
+    "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+    "you must think from first principles for everything",
+    "You should kill all the bad and dumb ideas before you waste time implementing them.",
+    "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+    "maximize your web use",
+    "What is the single bottleneck that, if fixed, would unlock the most capability?",
+    "all the tests are not on synthetic data but are on the hardest open tests",
+    "only our agent/system may run them; integrity 100% real",
+    "Work in branch, merge only when complete (fastest)",
+    "Merge once, not 10 times."
+  ],
+  "falsification_condition": "A request solved by a measuring agent whose atom identifiers were shuffled (that would mean the label, not the measurement, carried the knowledge), or a demonstration baseline that beats measurement on a large number of requests per machine (that would invert the cost law).",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. A coding benchmark floor cannot move while the reachable edit space is a hand-written list that omits whole classes of real fix; this makes the reachable space a measured property and one transfer real. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "what": "four real machines (filesystem, git, tarball, sqlite) sharing no command, argument or identity scheme, solved through one shared effect vocabulary learned by one trial per (atom, state class)",
+    "machines": 4,
+    "atoms": 18,
+    "cells": 36,
+    "requests": 16,
+    "adaptation_trials_active": 29,
+    "adaptation_trials_probing_every_atom": 36,
+    "requests_solved_by_measurement": 13,
+    "requests_solved_by_demonstration": 11,
+    "trials_measurement": 44,
+    "trials_demonstration": 34,
+    "trials_per_request_after_adaptation": 1.0,
+    "trials_per_request_by_demonstration": 2.125,
+    "break_even_requests_total": 25.78,
+    "break_even_requests_per_machine": 6.44,
+    "shuffled_control": {
+      "solved_by_measurement_unchanged": 13,
+      "solved_by_demonstration": 12,
+      "trials_by_demonstration": 46,
+      "note": "re-labelling and re-ordering every atom leaves the measuring agent's solved set identical machine by machine, while the demonstrator's numbers move: its capability is a function of the order actions happen to be offered"
+    },
+    "context_sensitive_atoms": "5 of 18 (an action's effect depends on the state class it runs in)",
+    "inert_cells": "17 of 36 (47.2%)",
+    "atoms_whose_effect_ignores_the_argument": 4,
+    "atoms_whose_only_effect_moves_identity": 1,
+    "unclassified_cells": 1,
+    "refusals": {
+      "surface_cannot_express_the_effect": [
+        "GIT REPLACE",
+        "GIT REMOVE"
+      ],
+      "effect_needs_composition": [
+        "TARBALL REPLACE"
+      ]
+    },
+    "headline": "instant learning in a new environment is a cost law, not a solution: ~6.4 requests per machine to break even, 13 of 16 solved against 11 by demonstration, and every remaining refusal is composition or expressivity",
+    "receipts": [
+      "canonical/verification/INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_20261116_V1.json",
+      "canonical/verification/INSTANT_LEARNING_SHUFFLED_CONTROL_20261116_V1.json"
+    ]
+  },
+  "next_step": "Join the measured effect table to a composer over preconditions and effects -- predicate_world_abstraction_v1, operator_semantics_v1 and hierarchical_skill_library_v1 already exist and must be reused rather than rebuilt -- because every remaining refusal here is a composition or an addressing gap, not a measurement gap.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "prior_work_reused": [
+    "canonical/runtime/attested_state_v1.py",
+    "canonical/runtime/inert_action_prior_v1.py",
+    "canonical/runtime/instant_learning_boundary_probe_v1.py",
+    "canonical/runtime/transfer_learning_v1.py",
+    "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+    "canonical/swe_kernel/operator_semantics_v1.py"
+  ],
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "57a83e9e8ca49f4c3404d5c643960af973b8986f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "counting one experience per action as one experience per effect",
+      "trusting a command's own report of success instead of the machine's reader",
+      "measuring a success rate on one environment and calling it a law about any environment",
+      "learning each request by demonstration and carrying nothing to the next one"
+    ],
+    "expected_parent_frontier_change": "The claim 'experience each action once and any environment is solved' becomes a table of measured cells: 5 of 18 atoms change effect with the state class, 17 of 36 cells are inert, and 3 of 16 requests are refused for reasons that no amount of experience removes.",
+    "expected_parent_level_state_change": "Learning's currency changes from requests to environments, with the exchange rate measured (~6.4 requests per machine), and every remaining refusal is attributed to composition or surface expressivity rather than to budget -- so the next capability work is a composer over measured effects, not more demonstrations.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the per-request demonstration baseline as the definition of learning",
+        "bypass the missing interface knowledge by one measured trial per (atom, state class)",
+        "substitute each machine's own reader for any invented notion of success"
+      ],
+      "intrinsic_or_path_specific": "path_specific: the vocabulary ceiling is a design choice and was removed here; the multi-position and insertion rungs, and non-terminating defects, remain open.",
+      "surviving_causal_blocker": "The hypothesis space of edits: identity does not transport across programs, so a lesson must be abstracted past the edit it was learned from."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a second lesson store or admission gate",
+        "another hand-written mutation kind",
+        "a larger search budget on an inexpressible edit"
+      ],
+      "existing_inherited_routes_checked": [
+        "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
+        "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
+        "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
+        "lesson_localization_v1 (refuses shape changes by design)"
+      ],
+      "external_existing_routes_checked": [
+        "QuixBugs itself, as the corpus and the oracle",
+        "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+      ],
+      "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher repair count reached by loosening what counts as repaired",
+        "counting a self-taught repair as transfer",
+        "treating a longer candidate list as more capability",
+        "quoting a corpus score as a frontier position"
+      ],
+      "real_outcome": "Whether a demonstrated fix can reach an undemonstrated bug becomes a measured property of the edit basis instead of an open question answered by assertion.",
+      "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+      "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Reused the existing repair loop and patch-search primitive instead of writing a second repairer; the corpus's own test files are used unmodified.",
+      "search_stop_decision": "Stop after the ladder and the 20/20 comparison; do not add template rungs without the measurement that says which rung is missing."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "efficiency_mechanism": "Templates prune the space before execution: 224 candidates instead of 5,021 for the same held-out half.",
+      "generality_mechanism": "Anti-unification with shared holes plus a node-type context precondition, so one demonstration yields a rule that fires wherever its precondition literally holds.",
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "The list edit is a hard zero on real fixes; the budget cannot reach an inexpressible edit; the token rule has no position or context; a model is prohibited producer cognition.",
+      "routes_ranked": [
+        "induce node-level templates from demonstration pairs",
+        "add an AugAssign rule to the hand-written list",
+        "raise the candidate budget",
+        "reuse the token anti-unifier",
+        "ask a model to write the patch"
+      ],
+      "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/tests/test_induced_edit_basis_v1.py",
+        "canonical/tests/test_quixbugs_measurement_integrity_v1.py",
+        "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+      ],
+      "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+    },
+    "real_outcome": "Each of the corpus's 40 fixes is assigned the rung of edit space that could express it, the two bases are run end to end on the same 20 held-out bugs, and the next capability work is aimed at the rungs the measurement proves are missing instead of at more candidates.",
+    "required_capability": "Compiling one demonstrated fix into a template that generalizes to holes, and reporting honestly where it fires, where it repairs, and where no candidate can exist at all.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "one operator class, nothing general",
+            "CORRECTNESS": "lift one bug of forty",
+            "INCREMENTAL_COST": "low",
+            "RELIABILITY": "leaves 26 of 40 untouched",
+            "VERIFIABILITY": "measured",
+            "WALL_CLOCK": "under a minute"
+          },
+          "evidence": [
+            "bitcount needs ^= -> &=, which the list cannot express: 280 candidates, 0 accepted"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json (ladder: 9 leaf, 18 node, 7 multi, 6 shape)"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "extend the hand-written mutation list with an ast.AugAssign rule and re-run the corpus"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "none",
+            "CORRECTNESS": "no candidate exists to find",
+            "INCREMENTAL_COST": "high",
+            "RELIABILITY": "budget does not change expressibility",
+            "VERIFIABILITY": "measured",
+            "WALL_CLOCK": "about 25 minutes for 20 tasks"
+          },
+          "evidence": [
+            "the control spent 5,021 candidates and repaired 2 of 20; bitcount returns 0 at 280 because the edit is not expressible"
+          ],
+          "qualification_evidence": [
+            "/tmp/qb_holdout_control.jsonl via canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "raise the candidate budget on the existing repair loop"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "cannot express the rung",
+            "CORRECTNESS": "wrong level of representation",
+            "INCREMENTAL_COST": "zero",
+            "RELIABILITY": "would silently teach nothing",
+            "VERIFIABILITY": "read, not run",
+            "WALL_CLOCK": "no run needed"
+          },
+          "evidence": [
+            "it unifies token snippets and carries no AST position or site context; it cannot express a containment wrap"
+          ],
+          "qualification_evidence": [
+            "canonical/swe_kernel/verified_skill_crystallizer_v1.py lines 447-456, 470-477"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "reuse verified_skill_crystallizer_v1.anti_unify_code_rule as the inducer"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "apparent only",
+            "CORRECTNESS": "unverifiable provenance",
+            "INCREMENTAL_COST": "spend",
+            "RELIABILITY": "fails closed",
+            "VERIFIABILITY": "zero credit by law",
+            "WALL_CLOCK": "fast"
+          },
+          "evidence": [
+            "producer cognition from another model is prohibited and receives zero credit"
+          ],
+          "qualification_evidence": [
+            "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+          ],
+          "qualification_evidence_classes": [
+            "OFFICIAL_PRIMARY"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "ask another model to write the patch or the templates"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "one real transfer plus a measured ladder",
+            "CORRECTNESS": "verdict is the corpus's own test on a fresh copy",
+            "INCREMENTAL_COST": "zero",
+            "RELIABILITY": "224 candidates, reproducible from the receipt",
+            "VERIFIABILITY": "producer-run, independent reproduction open",
+            "WALL_CLOCK": "177 s for 20 held-out tasks"
+          },
+          "evidence": [
+            "1 of 20 held-out bugs repaired by a template taught by a different program (pascal <- find_in_sorted), verified by the corpus's own tests"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
+        }
+      ],
+      "checked_at_utc": "2026-11-16T15:44:03Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "extend the hand-written mutation list and raise the candidate budget when a bug does not close",
+      "max_age_hours": 24,
+      "negative_search_summary": "Four routes were searched and refused with evidence: a single added mutation kind, more candidate budget, the existing token anti-unifier, and a model-written patch.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "program repair from a single demonstration transfer to unseen bugs 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "QuixBugs bug corpus python programs tests published"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "anti-unification edit template hole generalization program repair"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 automatic program repair vocabulary expressibility limit"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-16T21:45:29Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+            "evidence": [
+              "Python 3.11.2 pytest 9.2.0; 4 tests in canonical/tests/test_composed_repair_one_run_v1.py pass"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
+            "evidence": [
+              "QuixBugs re-fetched; 41 task files, every verdict the corpus's own pytest"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "local filesystem tempdir for per-task isolation",
+            "evidence": [
+              "per-task tempdir, answer key absent, across the 41-file composed run (387.8 s)"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/lesson_localization_v1.py",
+          "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+          "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+          "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "Reuse the crystallizer's token anti-unification to induce the rule (checked: it cannot express position-level containment and has no site context)",
+      "Extend the hand-listed mutation list with an AugAssign rule and re-run (checked against the ladder: it lifts one bug and leaves 26 of 40 untouched)",
+      "Raise the candidate budget on the existing loop (checked: 280 candidates already return zero on bitcount because the edit is not expressible)",
+      "Induce node-level templates from demonstration pairs and let the corpus's oracle decide",
+      "Ask a model to write the patch (refused: producer cognition, zero credit)"
+    ],
+    "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
+    "selected_surviving_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+    "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "stop_condition": "One merged change on this branch, with the corpus measurement reproducible from the receipt.",
+    "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real artifact and refused: the crystallizer's token anti-unification cannot express position-level containment and has no site context, and the existing repair primitive has no ast.AugAssign rule at all. Inducing a template from one demonstration pair and letting the corpus's own tests decide costs two runs; adding another hand-written mutation kind would lift one bug of forty and leave the question unmeasured.",
+    "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+  },
+  "route_id": "SYNTHESIZE_A_SURFACE_AGNOSTIC_EFFECT_MEASURER_OVER_FOUR_REAL_MACHINES_AND_MEASURE_THE_ADAPTATION_TAX_AGAINST_LEARN_EACH_REQUEST_BY_DEMONSTRATION",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "SYNTHESIZE_A_SURFACE_AGNOSTIC_EFFECT_MEASURER_OVER_FOUR_REAL_MACHINES_AND_MEASURE_THE_ADAPTATION_TAX_AGAINST_LEARN_EACH_REQUEST_BY_DEMONSTRATION",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "One merged change on this branch, with the corpus measurement reproducible from the receipt.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "current_load_bearing_atomic_count": 36,
+      "deleted_nonnecessary_atomic_count": 2,
+      "historical_atomic_registry_count": 38,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_atomic": 38,
+      "total_families": 19,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair; it discharges no truth obligation.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Is one experience per action enough to be competent in a new environment, and if not, what exactly does a new environment cost?",
+      "falsifier_id": "OPAQUE_LABEL_SHUFFLE_PLUS_THE_PER_REQUEST_DEMONSTRATION_BASELINE",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The machines are the counterexample: 5 of 18 atoms change effect with the state class, 17 of 36 cells are inert, and 3 of 16 requests are refused for reasons no amount of experience removes.",
+      "proposal_id": "THE_PRICE_OF_A_NEW_ENVIRONMENT_20261116_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 canonical/tools/instant_learning_in_a_new_environment_v1.py --out /tmp/inst.jsonl --receipt /tmp/inst_receipt.json",
+      "python3 canonical/tools/instant_learning_in_a_new_environment_v1.py --out /tmp/inst_shuf.jsonl --receipt /tmp/inst_shuf_receipt.json --shuffle 7",
+      "python3 -m pytest canonical/tests/test_instant_learning_in_a_new_environment_v1.py -q",
+      "python3 execution_guard/repo_integrity_guard_v1.py",
+      "python3 canonical/runtime/verify_brain_unified_model_v1.py"
+    ],
+    "independent_verification_completed": false,
+    "result": "18 atoms over 4 real machines, 29 adaptation trials, 13 of 16 requests solved against 11 by demonstration, break-even 25.78 requests (6.44 per machine), shuffled control solves the identical 13 while the demonstrator moves 11->12 and 34->46 trials; 7 tests passed; guard PASS; model verified."
+  },
+  "weakens_existing_guard": false
+}
