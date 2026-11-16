@@ -1,0 +1,1366 @@
+{
+  "agreement": {
+    "repaired_by_both": [],
+    "repaired_only_by_control": [
+      "next_permutation",
+      "quicksort"
+    ],
+    "repaired_only_by_treatment": [
+      "pascal"
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "control": {
+    "by_stage": {
+      "NOT_REPAIRED__NO_STRICTLY_IMPROVING_CANDIDATE": 2,
+      "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED": 14,
+      "REPAIRED__CORPUS_TEST_PASSES": 2,
+      "UNMEASURABLE__DEFECT_DOES_NOT_TERMINATE": 2
+    },
+    "method": "python.software.repair.loop.test_guided.ast.v1 -- the tree's existing hand-listed edit basis, run end to end",
+    "repaired": [
+      "next_permutation",
+      "quicksort"
+    ],
+    "repaired_count": 2,
+    "rows": {
+      "bitcount": {
+        "accepted_edit_count": null,
+        "baseline_timed_out": true,
+        "seconds": 90.1,
+        "stage": "UNMEASURABLE__DEFECT_DOES_NOT_TERMINATE",
+        "tested_candidate_count": null
+      },
+      "bucketsort": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 66.1,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 340
+      },
+      "gcd": {
+        "accepted_edit_count": 3,
+        "baseline_timed_out": false,
+        "seconds": 68.8,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 360
+      },
+      "hanoi": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 72.6,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 376
+      },
+      "is_valid_parenthesization": {
+        "accepted_edit_count": 0,
+        "baseline_timed_out": false,
+        "seconds": 65.7,
+        "stage": "NOT_REPAIRED__NO_STRICTLY_IMPROVING_CANDIDATE",
+        "tested_candidate_count": 203
+      },
+      "kheapsort": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 68.6,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 181
+      },
+      "knapsack": {
+        "accepted_edit_count": 0,
+        "baseline_timed_out": false,
+        "seconds": 247.1,
+        "stage": "NOT_REPAIRED__NO_STRICTLY_IMPROVING_CANDIDATE",
+        "tested_candidate_count": 250
+      },
+      "lis": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 68.7,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 356
+      },
+      "longest_common_subsequence": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 64.3,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 253
+      },
+      "minimum_spanning_tree": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 68.7,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 223
+      },
+      "next_permutation": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 16.5,
+        "stage": "REPAIRED__CORPUS_TEST_PASSES",
+        "tested_candidate_count": 29
+      },
+      "pascal": {
+        "accepted_edit_count": 2,
+        "baseline_timed_out": false,
+        "seconds": 63.8,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 274
+      },
+      "possible_change": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 79.3,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 338
+      },
+      "powerset": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 66.5,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 350
+      },
+      "quicksort": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 4.0,
+        "stage": "REPAIRED__CORPUS_TEST_PASSES",
+        "tested_candidate_count": 11
+      },
+      "shortest_paths": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 96.4,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 485
+      },
+      "shunting_yard": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 68.1,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 354
+      },
+      "sqrt": {
+        "accepted_edit_count": null,
+        "baseline_timed_out": true,
+        "seconds": 90.1,
+        "stage": "UNMEASURABLE__DEFECT_DOES_NOT_TERMINATE",
+        "tested_candidate_count": null
+      },
+      "to_base": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 75.6,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 318
+      },
+      "wrap": {
+        "accepted_edit_count": 1,
+        "baseline_timed_out": false,
+        "seconds": 63.1,
+        "stage": "NOT_REPAIRED__PARTIAL_EDITS_DISCARDED",
+        "tested_candidate_count": 320
+      }
+    },
+    "tasks_measured": 20
+  },
+  "corpus_tasks": 40,
+  "expressibility_ladder": {
+    "by_rung": {
+      "NO_CHANGE": [],
+      "RUNG_LEAF": [
+        "bitcount",
+        "breadth_first_search",
+        "bucketsort",
+        "find_first_in_sorted",
+        "hanoi",
+        "knapsack",
+        "quicksort",
+        "sieve",
+        "topological_ordering"
+      ],
+      "RUNG_MULTI": [
+        "gcd",
+        "mergesort",
+        "next_permutation",
+        "rpn_eval",
+        "shortest_path_lengths",
+        "shortest_paths",
+        "to_base"
+      ],
+      "RUNG_NODE": [
+        "detect_cycle",
+        "find_in_sorted",
+        "flatten",
+        "is_valid_parenthesization",
+        "kheapsort",
+        "kth",
+        "lcs_length",
+        "levenshtein",
+        "lis",
+        "longest_common_subsequence",
+        "max_sublist_sum",
+        "minimum_spanning_tree",
+        "next_palindrome",
+        "pascal",
+        "possible_change",
+        "powerset",
+        "shortest_path_length",
+        "sqrt"
+      ],
+      "RUNG_SHAPE": [
+        "depth_first_search",
+        "get_factors",
+        "reverse_linked_list",
+        "shunting_yard",
+        "subsequences",
+        "wrap"
+      ]
+    },
+    "counts": {
+      "NO_CHANGE": 0,
+      "RUNG_LEAF": 9,
+      "RUNG_MULTI": 7,
+      "RUNG_NODE": 18,
+      "RUNG_SHAPE": 6
+    },
+    "expressible_by_one_node_substitution": 27,
+    "expressible_fraction": 0.675,
+    "per_task": {
+      "bitcount": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "breadth_first_search": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "bucketsort": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "depth_first_search": {
+        "position_count": 1,
+        "rung": "RUNG_SHAPE"
+      },
+      "detect_cycle": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "find_first_in_sorted": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "find_in_sorted": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "flatten": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "gcd": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "get_factors": {
+        "position_count": 1,
+        "rung": "RUNG_SHAPE"
+      },
+      "hanoi": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "is_valid_parenthesization": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "kheapsort": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "knapsack": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "kth": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "lcs_length": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "levenshtein": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "lis": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "longest_common_subsequence": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "max_sublist_sum": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "mergesort": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "minimum_spanning_tree": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "next_palindrome": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "next_permutation": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "pascal": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "possible_change": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "powerset": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "quicksort": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "reverse_linked_list": {
+        "position_count": 1,
+        "rung": "RUNG_SHAPE"
+      },
+      "rpn_eval": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "shortest_path_length": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "shortest_path_lengths": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "shortest_paths": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "shunting_yard": {
+        "position_count": 1,
+        "rung": "RUNG_SHAPE"
+      },
+      "sieve": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "sqrt": {
+        "position_count": 1,
+        "rung": "RUNG_NODE"
+      },
+      "subsequences": {
+        "position_count": 1,
+        "rung": "RUNG_SHAPE"
+      },
+      "to_base": {
+        "position_count": 2,
+        "rung": "RUNG_MULTI"
+      },
+      "topological_ordering": {
+        "position_count": 1,
+        "rung": "RUNG_LEAF"
+      },
+      "wrap": {
+        "position_count": 1,
+        "rung": "RUNG_SHAPE"
+      }
+    },
+    "tasks": 40
+  },
+  "external_capability_provider_count": 0,
+  "generated_utc": "2026-11-16T15:36:42Z",
+  "hard_nonclaims": [
+    "NOT_A_SWE_BENCH_SCORE",
+    "NOT_INDEPENDENT_VERIFICATION__PRODUCER_RUN",
+    "NO_CLAIM_THAT_QUIXBUGS_IS_THE_FRONTIER",
+    "NO_CLAIM_OF_GENERAL_REPAIR_COMPLETENESS",
+    "NO_CLAIM_THAT_A_REPAIRED_TASK_REPAIRED_THE_PROGRAM_AS_A_WHOLE",
+    "NO_SENTIENCE_CLAIM"
+  ],
+  "incremental_spend_usd": 0,
+  "producer_cognition_model_dependency_count": 0,
+  "schema": "BRAIN_WHAT_ONE_DEMONSTRATION_BUYS_V1",
+  "split": {
+    "held_out": [
+      "sqrt",
+      "pascal",
+      "is_valid_parenthesization",
+      "minimum_spanning_tree",
+      "next_permutation",
+      "kheapsort",
+      "bitcount",
+      "knapsack",
+      "gcd",
+      "to_base",
+      "lis",
+      "longest_common_subsequence",
+      "quicksort",
+      "shortest_paths",
+      "possible_change",
+      "powerset",
+      "bucketsort",
+      "wrap",
+      "shunting_yard",
+      "hanoi"
+    ],
+    "method": "sorted by sha256(name); first 20 train, rest held out",
+    "train": [
+      "next_palindrome",
+      "depth_first_search",
+      "rpn_eval",
+      "find_in_sorted",
+      "find_first_in_sorted",
+      "lcs_length",
+      "subsequences",
+      "shortest_path_lengths",
+      "detect_cycle",
+      "shortest_path_length",
+      "flatten",
+      "levenshtein",
+      "kth",
+      "max_sublist_sum",
+      "sieve",
+      "topological_ordering",
+      "breadth_first_search",
+      "get_factors",
+      "mergesort",
+      "reverse_linked_list"
+    ]
+  },
+  "treatment": {
+    "by_stage": {
+      "BASELINE_METRIC_UNPARSEABLE": 2,
+      "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS": 17,
+      "REPAIRED__CORPUS_TEST_PASSES": 1
+    },
+    "leaf_template_count": 9,
+    "method": "induced_edit_basis_v1 -- templates folded from the training half only",
+    "node_template_count": 25,
+    "repaired": [
+      "pascal"
+    ],
+    "repaired_by_a_template_taught_elsewhere": [
+      "pascal"
+    ],
+    "repaired_count": 1,
+    "rows": {
+      "bitcount": {
+        "accepted": [],
+        "candidates_tested": 0,
+        "seconds": null,
+        "stage": "BASELINE_METRIC_UNPARSEABLE",
+        "transferred": false
+      },
+      "bucketsort": {
+        "accepted": [],
+        "candidates_tested": 5,
+        "seconds": 1.3,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "gcd": {
+        "accepted": [],
+        "candidates_tested": 10,
+        "seconds": 5.3,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "hanoi": {
+        "accepted": [],
+        "candidates_tested": 17,
+        "seconds": 4.4,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "is_valid_parenthesization": {
+        "accepted": [],
+        "candidates_tested": 5,
+        "seconds": 1.8,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "kheapsort": {
+        "accepted": [],
+        "candidates_tested": 8,
+        "seconds": 3.4,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "knapsack": {
+        "accepted": [],
+        "candidates_tested": 36,
+        "seconds": 17.8,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "lis": {
+        "accepted": [],
+        "candidates_tested": 11,
+        "seconds": 5.4,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "longest_common_subsequence": {
+        "accepted": [],
+        "candidates_tested": 23,
+        "seconds": 99.4,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "minimum_spanning_tree": {
+        "accepted": [],
+        "candidates_tested": 13,
+        "seconds": 4.5,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "next_permutation": {
+        "accepted": [],
+        "candidates_tested": 24,
+        "seconds": 10.4,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "pascal": {
+        "accepted": [
+          {
+            "final_source_sha256": "365ace88cc6ccb53a522a5080f352782b01c2f1d0327261217ee0828205f04d8",
+            "mutation": "Name->Name(RELATIONAL)",
+            "round": 1,
+            "rung": "NODE_SUBSTITUTION",
+            "score_after": 0,
+            "score_before": 4,
+            "taught_by": [
+              "find_in_sorted"
+            ],
+            "taught_by_self": false,
+            "template_context": [
+              "Call"
+            ],
+            "template_id": "1fd84d601ada6e36",
+            "template_kind": "RELATIONAL",
+            "template_support": 1
+          }
+        ],
+        "candidates_tested": 8,
+        "seconds": 3.2,
+        "stage": "REPAIRED__CORPUS_TEST_PASSES",
+        "transferred": true
+      },
+      "possible_change": {
+        "accepted": [],
+        "candidates_tested": 19,
+        "seconds": 6.7,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "powerset": {
+        "accepted": [],
+        "candidates_tested": 4,
+        "seconds": 1.1,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "quicksort": {
+        "accepted": [],
+        "candidates_tested": 6,
+        "seconds": 1.9,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "shortest_paths": {
+        "accepted": [],
+        "candidates_tested": 13,
+        "seconds": 3.4,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "shunting_yard": {
+        "accepted": [],
+        "candidates_tested": 8,
+        "seconds": 1.9,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "sqrt": {
+        "accepted": [],
+        "candidates_tested": 0,
+        "seconds": null,
+        "stage": "BASELINE_METRIC_UNPARSEABLE",
+        "transferred": false
+      },
+      "to_base": {
+        "accepted": [],
+        "candidates_tested": 6,
+        "seconds": 3.3,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      },
+      "wrap": {
+        "accepted": [],
+        "candidates_tested": 8,
+        "seconds": 2.1,
+        "stage": "NO_STRICTLY_IMPROVING_CANDIDATE_IN_BASIS",
+        "transferred": false
+      }
+    },
+    "tasks_measured": 20,
+    "templates": {
+      "leaf": [
+        {
+          "context": [
+            "If"
+          ],
+          "kind": "OP_PAIR",
+          "new": "LtE",
+          "node_type": "Compare",
+          "old": "Eq",
+          "reason": "",
+          "role": "ops",
+          "support": 1,
+          "taught_by": [
+            "mergesort"
+          ],
+          "template_id": "02a57ed7869685ac"
+        },
+        {
+          "context": [
+            "Compare"
+          ],
+          "kind": "CONST_PAIR",
+          "new": 1,
+          "node_type": "Constant",
+          "old": 0,
+          "reason": "",
+          "role": "value",
+          "support": 1,
+          "taught_by": [
+            "mergesort"
+          ],
+          "template_id": "033063a323d96624"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "NAME_PAIR",
+          "new": "all",
+          "node_type": "Name",
+          "old": "any",
+          "reason": "",
+          "role": "id",
+          "support": 1,
+          "taught_by": [
+            "sieve"
+          ],
+          "template_id": "0950da6a72d16ce3"
+        },
+        {
+          "context": [
+            "While"
+          ],
+          "kind": "OP_PAIR",
+          "new": "Lt",
+          "node_type": "Compare",
+          "old": "LtE",
+          "reason": "",
+          "role": "ops",
+          "support": 1,
+          "taught_by": [
+            "find_first_in_sorted"
+          ],
+          "template_id": "16da5f335e4a1e16"
+        },
+        {
+          "context": [
+            "Tuple"
+          ],
+          "kind": "NAME_PAIR",
+          "new": "j",
+          "node_type": "Name",
+          "old": "k",
+          "reason": "",
+          "role": "id",
+          "support": 1,
+          "taught_by": [
+            "shortest_path_lengths"
+          ],
+          "template_id": "2037a74d215c5ce0"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "NAME_PAIR",
+          "new": "b",
+          "node_type": "Name",
+          "old": "a",
+          "reason": "",
+          "role": "id",
+          "support": 1,
+          "taught_by": [
+            "rpn_eval"
+          ],
+          "template_id": "5734f438bd948878"
+        },
+        {
+          "context": [
+            "Tuple"
+          ],
+          "kind": "NAME_PAIR",
+          "new": "k",
+          "node_type": "Name",
+          "old": "j",
+          "reason": "",
+          "role": "id",
+          "support": 1,
+          "taught_by": [
+            "shortest_path_lengths"
+          ],
+          "template_id": "856c56552c2a2c3d"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "NAME_PAIR",
+          "new": "incoming_nodes",
+          "node_type": "Attribute",
+          "old": "outgoing_nodes",
+          "reason": "",
+          "role": "attr",
+          "support": 1,
+          "taught_by": [
+            "topological_ordering"
+          ],
+          "template_id": "99dabc731942dc90"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "NAME_PAIR",
+          "new": "a",
+          "node_type": "Name",
+          "old": "b",
+          "reason": "",
+          "role": "id",
+          "support": 1,
+          "taught_by": [
+            "rpn_eval"
+          ],
+          "template_id": "9dc61596dd1c171b"
+        },
+        {
+          "context": [
+            "BinOp"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "Call",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 2,
+          "taught_by": [
+            "next_palindrome",
+            "shortest_path_length"
+          ],
+          "template_id": "160f15553bf46afc"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "Name",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 2,
+          "taught_by": [
+            "find_in_sorted",
+            "kth"
+          ],
+          "template_id": "38de799585ce1cc2"
+        },
+        {
+          "context": [
+            "Return"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "List",
+          "old": null,
+          "reason": "STATEMENT_INSERT",
+          "role": "elts",
+          "support": 2,
+          "taught_by": [
+            "get_factors",
+            "subsequences"
+          ],
+          "template_id": "7c254c6fb95f4ecb"
+        },
+        {
+          "context": [
+            "Tuple"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "Name",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 1,
+          "taught_by": [
+            "lcs_length"
+          ],
+          "template_id": "42a5d5eb7a63cc76"
+        },
+        {
+          "context": [
+            "Assign"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "BinOp",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 1,
+          "taught_by": [
+            "max_sublist_sum"
+          ],
+          "template_id": "48b8d5f24da4c683"
+        },
+        {
+          "context": [
+            "If"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "If",
+          "old": null,
+          "reason": "STATEMENT_INSERT",
+          "role": "orelse",
+          "support": 1,
+          "taught_by": [
+            "depth_first_search"
+          ],
+          "template_id": "9d6451fd1633a177"
+        },
+        {
+          "context": [
+            "If"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "Compare",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 1,
+          "taught_by": [
+            "detect_cycle"
+          ],
+          "template_id": "a1d895703c3358fc"
+        },
+        {
+          "context": [
+            "While"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "Constant",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 1,
+          "taught_by": [
+            "breadth_first_search"
+          ],
+          "template_id": "e3b809c75a9bed25"
+        },
+        {
+          "context": [
+            "FunctionDef"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "While",
+          "old": null,
+          "reason": "STATEMENT_INSERT",
+          "role": "body",
+          "support": 1,
+          "taught_by": [
+            "reverse_linked_list"
+          ],
+          "template_id": "f45f40244019c72b"
+        },
+        {
+          "context": [
+            "Return"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "BinOp",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 1,
+          "taught_by": [
+            "levenshtein"
+          ],
+          "template_id": "f9e70d1fa3f31e42"
+        },
+        {
+          "context": [
+            "Yield"
+          ],
+          "kind": "NON_EXECUTABLE",
+          "new": null,
+          "node_type": "Call",
+          "old": null,
+          "reason": "SUBTREE_REWRITE",
+          "role": "",
+          "support": 1,
+          "taught_by": [
+            "flatten"
+          ],
+          "template_id": "facbecd0abf90884"
+        }
+      ],
+      "node": [
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__ - num_lessoreq",
+          "old_pattern": "__brain_hole_0__",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "kth"
+          ],
+          "template_id": "1f5a2e21b242831f"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__ + 1",
+          "old_pattern": "__brain_hole_0__",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "find_in_sorted"
+          ],
+          "template_id": "1fd84d601ada6e36"
+        },
+        {
+          "context": [
+            "Assign"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "max(0, __brain_hole_0__)",
+          "old_pattern": "__brain_hole_0__",
+          "root_type": "BinOp",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "max_sublist_sum"
+          ],
+          "template_id": "36f65fbd02b5caa5"
+        },
+        {
+          "context": [
+            "BinOp"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__ - 1",
+          "old_pattern": "__brain_hole_0__",
+          "root_type": "Call",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "next_palindrome"
+          ],
+          "template_id": "4201cd40fad88118"
+        },
+        {
+          "context": [
+            "If"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "hare is None or __brain_hole_0__",
+          "old_pattern": "__brain_hole_0__",
+          "root_type": "Compare",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "detect_cycle"
+          ],
+          "template_id": "54fd42e743a94ed3"
+        },
+        {
+          "context": [
+            "Yield"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__",
+          "old_pattern": "flatten(__brain_hole_0__)",
+          "root_type": "Call",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "flatten"
+          ],
+          "template_id": "6802e97b46e0bae4"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__",
+          "old_pattern": "(search_from(nextnode) for nextnode in __brain_hole_0__.successors)",
+          "root_type": "GeneratorExp",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "depth_first_search"
+          ],
+          "template_id": "7335ccef3e0cb62d"
+        },
+        {
+          "context": [
+            "Tuple"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__ - 1",
+          "old_pattern": "__brain_hole_0__",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "lcs_length"
+          ],
+          "template_id": "94feed24481088dc"
+        },
+        {
+          "context": [
+            "Return"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "[[]]",
+          "old_pattern": "[]",
+          "root_type": "List",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "subsequences"
+          ],
+          "template_id": "cf206b82e136e407"
+        },
+        {
+          "context": [
+            "Return"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "__brain_hole_0__",
+          "old_pattern": "1 + __brain_hole_0__",
+          "root_type": "BinOp",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "levenshtein"
+          ],
+          "template_id": "f3b98f66a04aec78"
+        },
+        {
+          "context": [
+            "Return"
+          ],
+          "kind": "RELATIONAL",
+          "mode": "EXPR",
+          "new_pattern": "[n]",
+          "old_pattern": "[]",
+          "root_type": "List",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "get_factors"
+          ],
+          "template_id": "fb3c96c2c3efe3c4"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "a",
+          "old_pattern": "b",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "rpn_eval"
+          ],
+          "template_id": "08aa66b4711a431a"
+        },
+        {
+          "context": [
+            "Compare"
+          ],
+          "kind": "LITERAL",
+          "mode": "STMT",
+          "new_pattern": "",
+          "old_pattern": "",
+          "root_type": "Eq",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "mergesort"
+          ],
+          "template_id": "2eed3c2f99b9199a"
+        },
+        {
+          "context": [
+            "While"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "queue",
+          "old_pattern": "True",
+          "root_type": "Constant",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "breadth_first_search"
+          ],
+          "template_id": "4a87e32f441b4f7b"
+        },
+        {
+          "context": [
+            "Assign"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "prevnode",
+          "old_pattern": "node",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "reverse_linked_list"
+          ],
+          "template_id": "5aed22809537ca2b"
+        },
+        {
+          "context": [
+            "Assign"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "node",
+          "old_pattern": "nextnode",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "reverse_linked_list"
+          ],
+          "template_id": "68de426d2eee5735"
+        },
+        {
+          "context": [
+            "Tuple"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "k",
+          "old_pattern": "j",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "shortest_path_lengths"
+          ],
+          "template_id": "7151d28bf2dc5422"
+        },
+        {
+          "context": [
+            "BinOp"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "distance",
+          "old_pattern": "get(unvisited_nodes, nextnode)",
+          "root_type": "Call",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "shortest_path_length"
+          ],
+          "template_id": "73180c021e2a590e"
+        },
+        {
+          "context": [
+            "Tuple"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "j",
+          "old_pattern": "k",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "shortest_path_lengths"
+          ],
+          "template_id": "92f69da8cadefe54"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "all",
+          "old_pattern": "any",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "sieve"
+          ],
+          "template_id": "a34f36831ae83255"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "b",
+          "old_pattern": "a",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "rpn_eval"
+          ],
+          "template_id": "da14c968a7e54fba"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "nodesvisited.add",
+          "old_pattern": "any",
+          "root_type": "Name",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "depth_first_search"
+          ],
+          "template_id": "e0f266fed067734c"
+        },
+        {
+          "context": [
+            "Compare"
+          ],
+          "kind": "LITERAL",
+          "mode": "STMT",
+          "new_pattern": "",
+          "old_pattern": "",
+          "root_type": "LtE",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "find_first_in_sorted"
+          ],
+          "template_id": "e335770f3375a506"
+        },
+        {
+          "context": [
+            "Call"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "nextnode.incoming_nodes",
+          "old_pattern": "nextnode.outgoing_nodes",
+          "root_type": "Attribute",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "topological_ordering"
+          ],
+          "template_id": "e752e23f53753785"
+        },
+        {
+          "context": [
+            "Compare"
+          ],
+          "kind": "LITERAL",
+          "mode": "EXPR",
+          "new_pattern": "1",
+          "old_pattern": "0",
+          "root_type": "Constant",
+          "rung": "NODE_SUBSTITUTION",
+          "support": 1,
+          "taught_by": [
+            "mergesort"
+          ],
+          "template_id": "fd86fed4189aedd3"
+        }
+      ]
+    }
+  },
+  "upstream": "https://github.com/jkoppel/QuixBugs",
+  "upstream_commit": ""
+}
