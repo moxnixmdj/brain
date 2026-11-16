@@ -209,8 +209,8 @@
    ],
    "synthetic_verification_necessity": "None. Every observation in the fixture was captured from the real pages by this project's own chromium bridge at seed 1060, and the 130-page measurement is the real benchmark pages."
   },
-  "real_outcome": "Six email pages that three rounds of refusal had called 'state outside the observation' now resolve from the instruction alone: open the named record, write the quoted text, press the control the sentence names -- with the page's reward read only afterwards.",
-  "required_capability": "Naming the region of an observation that a word picks out, and proving by name when it cannot: more than one record matches, the record holds no such control, no element shows the identifier, or the record is reachable but not present.",
+  "real_outcome": "Nine page families that the refusal census could not see are now carried out from the instruction alone: five drag pages graded only on an unstated Submit, four choose-date pages whose date is a coordinate inside a calendar, three click-tab-2 pages whose target sat in a tab the reveal had no name for, and both click-collapsible-2 pages whose exclusive accordion had to be walked rather than re-shut.",
+  "required_capability": "Carrying out a sentence whose acts are not all in the sentence: the page decides when work is delivered, and a widget's state must be read and stepped before its parts can be answered -- while refusing, by name, when the page shows a part twice or the sentence is genuinely ambiguous.",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -408,17 +408,17 @@
    "Treat the record as only a place to press -- measured incomplete: the reply field does not exist until the record opens",
    "Compile the value once at time zero -- measured wrong: the field did not exist yet; the sentence is read again against the page that now exists"
   ],
-  "selected_surviving_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE",
+  "selected_surviving_route": "AN_IMPLIED_ENDING_AND_A_PICKER_READ_AS_COMPONENTS__BOTH_DERIVED_FROM_SENTENCE_AND_OBSERVATION_WITH_NOTHING_REMEMBERED",
   "self_model_claim": "It can name what it can name, and it says so when it cannot. No further claim is made.",
-  "stop_condition": "The email, contacts and kind-addressed families resolve from the instruction alone with no reward and no memory; the 12 frame and census tests pass on real captured pages; MULTI_APP is reduced to the one page where it is true; the census counts every failure; and the receipt claims no capability, family, terminal or weight credit.",
-  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real page and refused by measurement: the nearest ancestor holding a control is div.email-left and the star is in the sibling div.email-right; full_text identity makes one email look like seven records; class-prefix matching makes email-sender a control; a one-shot compile drops the field that only exists after the record opens. The frame is the smallest thing that survives all four measurements."
+  "stop_condition": "The two failures the stopping-state census named are closed on the real pages -- an ending the sentence never names, and a date the sentence names as a coordinate -- with zero regressions at three seeds; the 17 new tests pass and the 97 that came before still pass; and the receipt claims no capability, family, terminal or weight credit.",
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real page and refused by measurement: adding 'submit' to the compiler's verb list does not help a sentence that never says it; pressing the date FIELD is the wrong half (it opens the calendar); answering '10' on December's grid is a confident wrong answer scored -1; assuming month-first for 11/10 is a locale the reader would have invented; pressing a tab retired the FIND clause because a step is not a target; holding [3,5,7] as container indices failed when opening a section renumbered the page."
  },
  "route_id": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE_INSTEAD_OF_ONE_VOCABULARY_ENTRY_PER_APP",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "scope_complete_discharge": false,
  "selected_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE_INSTEAD_OF_ONE_VOCABULARY_ENTRY_PER_APP",
  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "The email, contacts and kind-addressed families resolve from the instruction alone with no reward and no memory; the 12 frame and census tests pass on real captured pages; MULTI_APP is reduced to the one page where it is true; the census counts every failure; and the receipt claims no capability, family, terminal or weight credit.",
+ "stop_condition": "The two failures the stopping-state census named are closed on the real pages -- an ending the sentence never names, and a date the sentence names as a coordinate -- with zero regressions at three seeds; the 17 new tests pass and the 97 that came before still pass; and the receipt claims no capability, family, terminal or weight credit.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
