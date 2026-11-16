@@ -261,111 +261,75 @@
       "challenger_routes": [
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "one operator class, nothing general",
-            "CORRECTNESS": "lift one bug of forty",
+            "CAPABILITY_STRENGTH": "adds actions, not proofs",
+            "CORRECTNESS": "high, but says nothing about reach",
+            "INCREMENTAL_COST": "low per action",
+            "RELIABILITY": "unchanged: fires only where its own premise holds",
+            "VERIFIABILITY": "measured per action",
+            "WALL_CLOCK": "cheap to add, unbounded to enumerate"
+          },
+          "evidence": [
+            "bundle: 11 skills, hit_count 0 of 11",
+            "stored stdout verdict admitted a do-nothing program 4 of 4",
+            "four-arm certificate refuses 12 of 12 impostors"
+          ],
+          "qualification_evidence": [
+            "measured in canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "PRODUCER_MEASURED"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "ADD_MORE_LEARNED_ACTIONS_TO_THE_BUNDLE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "looks like reach, adds none",
+            "CORRECTNESS": "unsound: similarity is not a proof of meaning preservation",
             "INCREMENTAL_COST": "low",
-            "RELIABILITY": "leaves 26 of 40 untouched",
-            "VERIFIABILITY": "measured",
-            "WALL_CLOCK": "under a minute"
-          },
-          "evidence": [
-            "bitcount needs ^= -> &=, which the list cannot express: 280 candidates, 0 accepted"
-          ],
-          "qualification_evidence": [
-            "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json (ladder: 9 leaf, 18 node, 7 multi, 6 shape)"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "extend the hand-written mutation list with an ast.AugAssign rule and re-run the corpus"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "none",
-            "CORRECTNESS": "no candidate exists to find",
-            "INCREMENTAL_COST": "high",
-            "RELIABILITY": "budget does not change expressibility",
-            "VERIFIABILITY": "measured",
-            "WALL_CLOCK": "about 25 minutes for 20 tasks"
-          },
-          "evidence": [
-            "the control spent 5,021 candidates and repaired 2 of 20; bitcount returns 0 at 280 because the edit is not expressible"
-          ],
-          "qualification_evidence": [
-            "/tmp/qb_holdout_control.jsonl via canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "raise the candidate budget on the existing repair loop"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "cannot express the rung",
-            "CORRECTNESS": "wrong level of representation",
-            "INCREMENTAL_COST": "zero",
-            "RELIABILITY": "would silently teach nothing",
-            "VERIFIABILITY": "read, not run",
-            "WALL_CLOCK": "no run needed"
-          },
-          "evidence": [
-            "it unifies token snippets and carries no AST position or site context; it cannot express a containment wrap"
-          ],
-          "qualification_evidence": [
-            "canonical/swe_kernel/verified_skill_crystallizer_v1.py lines 447-456, 470-477"
-          ],
-          "qualification_evidence_classes": [
-            "DIRECT_PROBE"
-          ],
-          "resolution": "DISQUALIFIED",
-          "route": "reuse verified_skill_crystallizer_v1.anti_unify_code_rule as the inducer"
-        },
-        {
-          "comparison": {
-            "CAPABILITY_STRENGTH": "apparent only",
-            "CORRECTNESS": "unverifiable provenance",
-            "INCREMENTAL_COST": "spend",
-            "RELIABILITY": "fails closed",
-            "VERIFIABILITY": "zero credit by law",
+            "RELIABILITY": "would fire outside the premise; the one outcome this tree forbids",
+            "VERIFIABILITY": "would need a proof anyway, which is the selected route",
             "WALL_CLOCK": "fast"
           },
           "evidence": [
-            "producer cognition from another model is prohibited and receives zero credit"
+            "structure-derived laws added 0 kills over 19 survivors",
+            "skill_scope_ledger: 5/5 shipped skills EXACT_MATCH_ONLY",
+            "rule_scope_learning: one lesson reached 1 of 7 structurally novel instances"
           ],
           "qualification_evidence": [
-            "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+            "measured in canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json"
           ],
           "qualification_evidence_classes": [
-            "OFFICIAL_PRIMARY"
+            "PRODUCER_MEASURED"
           ],
           "resolution": "DISQUALIFIED",
-          "route": "ask another model to write the patch or the templates"
+          "route": "WIDEN_EACH_ACTION_BY_SIMILARITY_TO_NEIGHBOURING_SITES"
         },
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "one real transfer plus a measured ladder",
-            "CORRECTNESS": "verdict is the corpus's own test on a fresh copy",
-            "INCREMENTAL_COST": "zero",
-            "RELIABILITY": "224 candidates, reproducible from the receipt",
-            "VERIFIABILITY": "producer-run, independent reproduction open",
-            "WALL_CLOCK": "177 s for 20 held-out tasks"
+            "CAPABILITY_STRENGTH": "turns reach into a number and a growth metric",
+            "CORRECTNESS": "every application is verified by the file, the claim and the scope",
+            "INCREMENTAL_COST": "zero model spend, zero network",
+            "RELIABILITY": "0 damaged in 600; declines name their reason",
+            "VERIFIABILITY": "reproducible from the receipt with one command",
+            "WALL_CLOCK": "48s static classification, 42s for 600 executed applications"
           },
           "evidence": [
-            "1 of 20 held-out bugs repaired by a template taught by a different program (pascal <- find_in_sorted), verified by the corpus's own tests"
+            "139,439 sites classified statically in 48s with no model call",
+            "inline reach 5.3% / rename reach 86.3% on a deterministic stride sample",
+            "0 damaged in 600 executed applications; 12 declined classes named"
           ],
           "qualification_evidence": [
-            "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+            "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json"
           ],
           "qualification_evidence_classes": [
-            "DIRECT_PROBE"
+            "PRODUCER_MEASURED"
           ],
           "resolution": "SELECTED",
-          "route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS"
+          "route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION"
         }
       ],
-      "checked_at_utc": "2026-11-16T15:44:03Z",
+      "checked_at_utc": "2026-11-16T19:11:45Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -375,9 +339,9 @@
         "VERIFIABILITY"
       ],
       "discovery_required": true,
-      "incumbent_route": "extend the hand-written mutation list and raise the candidate budget when a bug does not close",
+      "incumbent_route": "keep growing the learned-skill bundle by adding actions, and treat the stored example as proof that an action was learned",
       "max_age_hours": 24,
-      "negative_search_summary": "Four routes were searched and refused with evidence: a single added mutation kind, more candidate budget, the existing token anti-unifier, and a model-written patch.",
+      "negative_search_summary": "Three routes were searched and refused with evidence on this tree: adding more actions to the bundle (11 skills, 0 ever used, stored verdict admits a program that writes nothing 4 of 4), widenening a rule by similarity (shape-derived laws produced 0 kills of 19 survivors), and letting a model write the action (forbidden: no model may be used, and it would put a knowledge house back in the execution path).",
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
@@ -402,10 +366,10 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+      "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T15:44:03Z",
+        "checked_at_utc": "2026-11-16T19:11:45Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
@@ -455,8 +419,8 @@
         ],
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
-        "max_age_hours": 2,
-        "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION_AND_MEASURES_IT_END_TO_END_ON_A_PUBLIC_BUG_CORPUS",
+        "max_age_hours": 24,
+        "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
         "status": "READY"
       },
       "source_classes_checked": [
