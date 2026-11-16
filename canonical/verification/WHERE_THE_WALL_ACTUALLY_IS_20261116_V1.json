@@ -1,0 +1,902 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "generated_utc": "2026-11-16T13:41:04Z",
+ "header": {
+  "assigned": [
+   "book-flight",
+   "choose-date",
+   "click-shades",
+   "drag-shapes-2",
+   "enter-time",
+   "find-word",
+   "guess-number",
+   "hover-shape",
+   "multi-orderings",
+   "order-food",
+   "resize-textarea",
+   "scroll-text",
+   "simon-says",
+   "simple-arithmetic",
+   "stock-market",
+   "text-editor",
+   "use-colorwheel-2",
+   "use-slider-2"
+  ],
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "baseline": "/home/user/brain/canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json",
+  "baseline_budget": 600,
+  "budget": 1500,
+  "generated_utc": "2026-11-16T13:23:44Z",
+  "incremental_spend_usd": 0,
+  "kind": "header",
+  "part": 1,
+  "parts": 2,
+  "producer_cognition_model_dependency_count": 0,
+  "schema": "BRAIN_MINIWOB_WHERE_THE_WALL_ACTUALLY_IS_V1",
+  "substrate": "chromium",
+  "versions": {
+   "browser": "HeadlessChrome/153.0.8010.0",
+   "browser_pid": 2048,
+   "chromium_package": "153.0.0",
+   "drag_steps": 12,
+   "epoch_ms": 1767225600000,
+   "node": "v22.22.3",
+   "nudge_px": 30,
+   "puppeteer_core": "25.17.0",
+   "step_ms": 500,
+   "viewport": [
+    480,
+    360
+   ]
+  }
+ },
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "BRAIN_MINIWOB_WHERE_THE_WALL_ACTUALLY_IS_V1",
+ "summary": {
+  "budget_spent_total": 50154,
+  "not_reached": 36,
+  "pages_measured": 37,
+  "reached": 1,
+  "seconds_total": 1615.5,
+  "states_seen_total": 6017,
+  "worlds": {
+   "REACHED__FIRST_SUCCESS_FOUND_WITH_THE_SAME_HAND": {
+    "count": 1,
+    "repair": "none",
+    "tasks": [
+     "use-slider"
+    ]
+   },
+   "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT": {
+    "count": 32,
+    "repair": "improve_the_prior_over_actions_or_spend_more_search",
+    "tasks": [
+     "bisect-angle",
+     "book-flight",
+     "chase-circle",
+     "choose-date",
+     "click-checkboxes-soft",
+     "click-shades",
+     "daily-calendar",
+     "drag-shapes-2",
+     "draw-circle",
+     "enter-time",
+     "find-midpoint",
+     "find-word",
+     "form-sequence",
+     "guess-number",
+     "multi-layouts",
+     "multi-orderings",
+     "number-checkboxes",
+     "order-food",
+     "read-table-2",
+     "resize-textarea",
+     "right-angle",
+     "scroll-text",
+     "search-engine",
+     "simple-algebra",
+     "simple-arithmetic",
+     "social-media-some",
+     "terminal",
+     "text-editor",
+     "text-transform",
+     "use-colorwheel-2",
+     "use-slider-2",
+     "visual-addition"
+    ]
+   },
+   "STATE_WORLD__PAGE_BEHAVES_DIFFERENTLY_ON_WHAT_LOOKS_THE_SAME": {
+    "count": 3,
+    "repair": "add_the_missing_observable_or_reduce_the_page_to_a_state_the_look_can_tell_apart",
+    "tasks": [
+     "hot-cold",
+     "hover-shape",
+     "simon-says"
+    ]
+   },
+   "UNKNOWN__PAGE_OR_BRIDGE_ERROR": {
+    "count": 1,
+    "repair": "repair_the_instrument",
+    "tasks": [
+     "stock-market"
+    ]
+   }
+  }
+ },
+ "tasks": [
+  {
+   "acts": 1400,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 101,
+   "seconds": 17.2,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 196,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "bisect-angle",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1127,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 374,
+   "seconds": 59.8,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 318,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "book-flight",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1367,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 134,
+   "seconds": 34.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 58,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "chase-circle",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1296,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 205,
+   "seconds": 43.0,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 182,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "choose-date",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1190,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 311,
+   "seconds": 35.5,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 165,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "click-checkboxes-soft",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1156,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 345,
+   "seconds": 26.5,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 356,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "click-shades",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1300,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 201,
+   "seconds": 28.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 159,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "daily-calendar",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1199,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 302,
+   "seconds": 51.3,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 242,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "drag-shapes-2",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1274,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 227,
+   "seconds": 70.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 149,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "draw-circle",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1313,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 188,
+   "seconds": 82.3,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 29,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "enter-time",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1371,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 130,
+   "seconds": 14.3,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 232,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "find-midpoint",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1409,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 92,
+   "seconds": 35.2,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 95,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "find-word",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1330,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 171,
+   "seconds": 25.5,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 129,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "form-sequence",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1455,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 46,
+   "seconds": 22.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 55,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "guess-number",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 103,
+   "budget": 1500,
+   "budget_spent": 141,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 39,
+   "seconds": 7.4,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 10,
+   "statuses": [
+    "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY"
+   ],
+   "steps_found": null,
+   "task": "hot-cold",
+   "tier": null,
+   "trace_actions": null,
+   "world": "STATE_WORLD__PAGE_BEHAVES_DIFFERENTLY_ON_WHAT_LOOKS_THE_SAME"
+  },
+  {
+   "acts": 70,
+   "budget": 1500,
+   "budget_spent": 92,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 23,
+   "seconds": 5.0,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 15,
+   "statuses": [
+    "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY"
+   ],
+   "steps_found": null,
+   "task": "hover-shape",
+   "tier": null,
+   "trace_actions": null,
+   "world": "STATE_WORLD__PAGE_BEHAVES_DIFFERENTLY_ON_WHAT_LOOKS_THE_SAME"
+  },
+  {
+   "acts": 1187,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 314,
+   "seconds": 24.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 152,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "multi-layouts",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1187,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 314,
+   "seconds": 44.5,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 152,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "multi-orderings",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1118,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 383,
+   "seconds": 37.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 658,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "number-checkboxes",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1232,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 269,
+   "seconds": 37.4,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 124,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "order-food",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1090,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 411,
+   "seconds": 37.3,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 188,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "read-table-2",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1355,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 146,
+   "seconds": 35.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 99,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "resize-textarea",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1404,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 97,
+   "seconds": 16.3,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 190,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "right-angle",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1216,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 285,
+   "seconds": 34.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 304,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "scroll-text",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1485,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 16,
+   "seconds": 15.2,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 201,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "search-engine",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 575,
+   "budget": 1500,
+   "budget_spent": 735,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 161,
+   "seconds": 46.1,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 42,
+   "statuses": [
+    "OPEN__ENVIRONMENT_NOT_REPEATABLE_UNDER_THIS_STATE_KEY"
+   ],
+   "steps_found": null,
+   "task": "simon-says",
+   "tier": null,
+   "trace_actions": null,
+   "world": "STATE_WORLD__PAGE_BEHAVES_DIFFERENTLY_ON_WHAT_LOOKS_THE_SAME"
+  },
+  {
+   "acts": 1413,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 88,
+   "seconds": 33.9,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 83,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "simple-algebra",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1412,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 89,
+   "seconds": 33.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 90,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "simple-arithmetic",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1500,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 1,
+   "seconds": 14.8,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 93,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "social-media-some",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "budget": 1500,
+   "budget_spent_at_600": null,
+   "detail": "NO_REPLY_TO_ACT_IN_20S",
+   "kind": "task",
+   "reason": "BridgeHang",
+   "seconds": 332.8,
+   "stage": "NOT_MEASURED",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "task": "stock-market",
+   "world": "UNKNOWN__PAGE_OR_BRIDGE_ERROR"
+  },
+  {
+   "acts": 1221,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 280,
+   "seconds": 38.8,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 460,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "terminal",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1146,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 355,
+   "seconds": 23.5,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 283,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "text-editor",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1359,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 142,
+   "seconds": 52.6,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 126,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "text-transform",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1276,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 225,
+   "seconds": 21.5,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 55,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "use-colorwheel-2",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1011,
+   "budget": 1500,
+   "budget_spent": 1186,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 176,
+   "seconds": 91.2,
+   "stage": "DEMONSTRATED",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 87,
+   "statuses": [
+    "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION"
+   ],
+   "steps_found": 4,
+   "task": "use-slider",
+   "tier": 3,
+   "trace_actions": [
+    "nudge@4=up",
+    "nudge@4=up",
+    "click@6"
+   ],
+   "world": "REACHED__FIRST_SUCCESS_FOUND_WITH_THE_SAME_HAND"
+  },
+  {
+   "acts": 1312,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 189,
+   "seconds": 48.8,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 167,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "use-slider-2",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  },
+  {
+   "acts": 1310,
+   "budget": 1500,
+   "budget_spent": 1500,
+   "budget_spent_at_600": null,
+   "kind": "task",
+   "reason": null,
+   "resets": 191,
+   "seconds": 35.4,
+   "stage": "NO_FIRST_SUCCESS_FOUND",
+   "stage_at_600": "NO_FIRST_SUCCESS_FOUND",
+   "states_seen": 73,
+   "statuses": [
+    "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED"
+   ],
+   "steps_found": null,
+   "task": "visual-addition",
+   "tier": null,
+   "trace_actions": null,
+   "world": "SEARCH_WORLD__STILL_UNEXPLORED_WHEN_THE_BUDGET_RAN_OUT"
+  }
+ ]
+}
