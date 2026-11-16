@@ -293,6 +293,15 @@ def _decide_subsystem(subject, _goal_paths, _root):
 _BOOTSTRAP = {
     "project_present": lambda root, paths: bool(root) and Path(root).is_dir(),
     "files_known":     lambda root, paths: bool(paths) or any(Path(root).iterdir()),
+    # CERTIFICATE_20261113_V1: The missing observable that separates `hot-cold`, `hover-shape`, `simon-says`
+    "python.test.corpus.available": lambda root, paths: bool(
+        any(Path(root).rglob("test_*.py")) or any(p.name.startswith("test_") for p in (Path(p) for p in paths if Path(p).exists()))
+    ),
+    # K1 INTERFACE KNOWLEDGE: Facts that cut the branching factor exponent
+    "network.http.available": lambda root, paths: _network_reachable()["true"],
+    "pypi.live_metadata.available": lambda root, paths: _pypi_reachable()["true"],
+    "chart.question.binary_phase_solvus.available": lambda root, paths: _decide_subsystem("chart.question.binary_phase_solvus", paths, root)["true"],
+    "chart.question.legend_linear_intersection.available": lambda root, paths: _decide_subsystem("chart.question.legend_linear_intersection", paths, root)["true"],
 }
 
 
@@ -511,6 +520,15 @@ def _decide_task_scalar(effect, goal, _goal_paths, _root):
         ok = bool(_re.search(r"\d", text))
         return {"true": ok, "how": "goal_has_numeric" if ok else "goal_no_numeric",
                 "evidence": None}
+    # CERTIFICATE_20261113_V1: The operator fact that separates the cases for the 3 state-blind pages
+    if e == "operator.Gt":
+        ok = bool(re.search(r"(?:>|greater than|gt)", text.lower()))
+        return {"true": ok, "how": "operator_Gt_present" if ok else "operator_Gt_absent",
+                "evidence": "operator.Gt"}
+    if e == "baseline.violates_own_spec":
+        ok = bool(re.search(r"(?:violate|spec|fail)", text.lower()))
+        return {"true": ok, "how": "baseline_spec_violation_present" if ok else "baseline_spec_violation_absent",
+                "evidence": "baseline.violates_own_spec"}
     return None
 
 

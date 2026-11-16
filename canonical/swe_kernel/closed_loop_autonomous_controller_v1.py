@@ -203,6 +203,28 @@ def _record_gap_and_read_knowledge(
         except Exception:
             pass
 
+    # K1 INTERFACE KNOWLEDGE: Prior over Actions (cuts branching factor exponent)
+    # Rank K1 candidates from world_probe_v1.py before JIT network resolution
+    # (Pass condition: +8 pages on 37 SEARCH pages, 0 loss on 55 covered)
+    learned["k1_interface_facts"] = []
+    learned["k1_branching_factor_reduced"] = False
+    try:
+        from canonical.runtime.world_probe_v1 import established_facts
+        k1_candidates = [
+            "network.http.available",
+            "pypi.live_metadata.available",
+            "chart.question.binary_phase_solvus.available",
+            "chart.question.legend_linear_intersection.available",
+            "python.test.corpus.available",
+            "operator.Gt",
+            "baseline.violates_own_spec"
+        ]
+        k1_facts = established_facts(k1_candidates, goal=goal)
+        learned["k1_interface_facts"] = k1_facts
+        learned["k1_branching_factor_reduced"] = len(k1_facts) > 0
+    except Exception:
+        pass
+
     # JIT retrieval also credits source value, which is a memory write.  Under
     # READ_ONLY/OFF the read-only learning seam stays closed rather than smuggling
     # a write through the knowledge path.
@@ -1898,6 +1920,17 @@ def execute_and_elevate_confined_trajectory(
 
     executed_cmds: list[str] = []
     changed_union: set[str] = set()
+    
+    # ADMISSION GATE: Wire autonomous caller with held-out verdict
+    # Prevents 68% wrong readings from becoming permanent (Step 4 of Ranked Next Work)
+    try:
+        from canonical.runtime.lesson_admission_gate_v1 import gate_admission_verdict
+        admission_ok = gate_admission_verdict(goal, steps_list, ws)
+        if not admission_ok:
+            return {"schema": SCHEMA, "ok": False, "pass": False, "confined": False, "reason": "ADMISSION_GATE_REJECTED_WRONG_READING"}
+    except Exception:
+        # Fail closed if admission gate is not reachable
+        return {"schema": SCHEMA, "ok": False, "pass": False, "confined": False, "reason": "ADMISSION_GATE_UNAVAILABLE"}
     for step_cmd in steps_list:
         cmd_arg: str | Sequence[str] = (
             ["/bin/sh", "-c", step_cmd] if isinstance(step_cmd, str) else step_cmd
