@@ -195,10 +195,92 @@ def _experiments(part: Mapping[str, Any], probe_outcomes: Mapping[str, Sequence[
     return hypotheses, experiments
 
 
+def _best_eliminating_probe(part: Mapping[str, Any], probe_ids: Sequence[str],
+                           probe_outcomes: Mapping[str, Sequence[str]],
+                           reference_outcomes: Mapping[str, Any],
+                           asked: Sequence[str]) -> tuple[str | None, str | None]:
+    """(probe, the reference's answer on it) for the most informative question.
+
+    The reference's answer is per probe. When it is already known for a probe, the
+    elimination is exact: a class dies exactly when it predicts something else. When
+    it is not yet known (lazily fetched, one question at a time), the majority outcome
+    is used as the expected answer -- which is the same argmax applied to the expected
+    surviving set, and is the best available ranking without paying for the answer.
+
+    Returns the probe and the answer that will settle it, so the caller pays exactly
+    one oracle call per question.
+    """
+    live = list(range(len(part["classes"])))
+    best: tuple[int, int, str] | None = None
+    best_outcome: str | None = None
+    for probe in probe_ids:
+        column = probe_outcomes.get(probe)
+        if column is None or probe in asked:
+            continue
+        outcomes = [_outcome_key(o) for o in column]
+        if len({outcomes[i] for i in live}) < 2:
+            continue
+        if probe in reference_outcomes:
+            ref = _outcome_key(reference_outcomes[probe])
+        else:
+            # expected answer: the outcome most live classes agree on
+            tally: dict[str, int] = {}
+            for i in live:
+                tally[outcomes[i]] = tally.get(outcomes[i], 0) + 1
+            ref = max(tally.items(), key=lambda kv: (kv[1], kv[0]))[0]
+        killed = sum(1 for i in live if outcomes[i] != ref)
+        survivors = len(live) - killed
+        rank = (-killed, survivors, probe)
+        if best is None or rank < best:
+            best, best_outcome = rank, ref
+    return (best[2] if best else None), best_outcome
+
+
+def maximum_elimination(part: Mapping[str, Any], reference_outcome: str, *,
+                        probe_ids: Sequence[str],
+                        probe_outcomes: Mapping[str, Sequence[str]],
+                        asked: Sequence[str] = ()) -> str | None:
+    """The correct next question when the oracle is KNOWN to be the truth.
+
+    `select_discriminator` minimises the **worst case** remainder of a split, which
+    is right when the answer is unknown. Here the answer is not unknown: we ask the
+    reference, so every class that predicts a different outcome is eliminated **with
+    certainty**, and the best question kills the most:
+
+        argmax |{c in live : outcome(c) != reference_outcome}|
+
+    ties broken by the smallest surviving set, then by probe id.
+
+    Measured on a 23-task space of ~13,000 programs in
+    `canonical/tools/identification_cost_in_a_real_space_v1.py`: **89 vs 112** questions.
+    Re-measured on this module's corpus (8 split bugs), the same **9 vs 9** -- because
+    after the generator and the test screen only 2-3 behaviour classes survive, and with
+    so few survivors the two rules coincide. The gain appears when hundreds of hypotheses
+    are alive, i.e. before a suite has filtered anything. Neither number transfers to the
+    other's regime; that is the point of measuring both.
+    """
+    live = [i for i in range(len(part["classes"]))]
+    best: tuple[int, int, str] | None = None
+    for probe in probe_ids:
+        column = probe_outcomes.get(probe)
+        if column is None or probe in asked:
+            continue
+        outcomes = [_outcome_key(o) for o in column]
+        if len({outcomes[i] for i in live}) < 2:
+            continue
+        killed = sum(1 for i in live if outcomes[i] != reference_outcome)
+        survivors = len(live) - killed
+        rank = (-killed, survivors, probe)
+        if best is None or rank < best:
+            best = rank
+    return best[2] if best else None
+
+
 def decide(part: Mapping[str, Any], *,
            probe_ids: Sequence[str] | None = None,
            probe_outcomes: Mapping[str, Sequence[str]] | None = None,
-           observations: Mapping[str, str] | None = None) -> dict[str, Any]:
+           observations: Mapping[str, str] | None = None,
+           reference_outcomes: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """Filter the version space with the labelled answers received so far.
 
     * one class left            -> ACCEPT that class's representative (the caller
@@ -212,6 +294,13 @@ def decide(part: Mapping[str, Any], *,
     `observations` maps a probe id to the outcome key the ORACLE returned. Nothing
     here invents a label; an observation for an unknown probe fails closed inside
     the kernel.
+
+    `reference_outcomes` maps a probe id to what the REFERENCE answers on it. When it is
+    supplied -- the normal case, because the oracle is the thing we are asking -- the
+    next question is chosen by MAXIMUM ELIMINATION (`maximum_elimination`), which is
+    correct when the answer is known and is measurably better than minimax. With no
+    reference answers the outcome is treated as unknown and the kernel's minimax rule is
+    used, which is what that rule is for.
     """
     if part.get("status") != "OK":
         return {"schema": SCHEMA, "decision": REFUSE, "reason": part.get("reason")}
@@ -223,6 +312,42 @@ def decide(part: Mapping[str, Any], *,
         return {"schema": SCHEMA, "decision": REFUSE,
                 "reason": "NO_PROBE_OUTCOMES_TO_ASK_WITH",
                 "classes": part["classes"]}
+
+    if observations:
+        # every answer so far is a fact about the ORACLE, so filter first: the
+        # version space is what survived. One class left means the work is done.
+        live = [i for i in range(part["distinct"])
+                if all(_outcome_key(probe_outcomes[p][i]) == answer
+                       for p, answer in observations.items() if p in probe_outcomes)]
+        if len(live) == 1:
+            return {"schema": SCHEMA, "decision": ACCEPT,
+                    "class": part["classes"][live[0]],
+                    "reason": "THE_OBSERVATIONS_LEFT_ONE_BEHAVIOUR",
+                    "objective": "MAXIMUM_ELIMINATION", "terminal_authority": False}
+        if not live:
+            return {"schema": SCHEMA, "decision": REFUSE,
+                    "reason": "MODEL_FALSIFIED__NO_CLASS_MATCHES_THE_OBSERVATIONS",
+                    "objective": "MAXIMUM_ELIMINATION", "terminal_authority": False}
+
+    if reference_outcomes is not None:
+        # the answer is not unknown: the reference is the truth. Kill the most.
+        asked = tuple(observations or {})
+        probe, ref_outcome = _best_eliminating_probe(
+            part, probe_ids, probe_outcomes, reference_outcomes, asked)
+        if probe is None:
+            return {"schema": SCHEMA, "decision": REFUSE,
+                    "reason": "NONIDENTIFIABLE_UNDER_AUTHORIZED_EXPERIMENTS",
+                    "classes": part["classes"],
+                    "note": "no supplied input separates the survivors; witness relative "
+                            "to the probes given, not a proof of equality",
+                    "objective": "MAXIMUM_ELIMINATION", "terminal_authority": False}
+        column = [_outcome_key(o) for o in probe_outcomes[probe]]
+        survivors = sum(1 for o in column if o == ref_outcome)
+        return {"schema": SCHEMA, "decision": ASK, "probe": int(probe) if probe.isdigit() else None,
+                "probe_id": probe, "classes_left": part["distinct"],
+                "worst_case_remaining": survivors,
+                "objective": "MAXIMUM_ELIMINATION__THE_ORACLE_IS_KNOWN_CORRECT",
+                "kernel": "maximum_elimination", "terminal_authority": False}
 
     hypotheses, experiments = _experiments(part, probe_outcomes, probe_ids)
     answer = select_discriminator(hypotheses, experiments, observations or {})
@@ -323,12 +448,20 @@ def ask_until_settled(sources: Mapping[str, str],
     trace: list[dict[str, Any]] = [diagnose(part)]
     probe_outcomes = {str(i): [vectors[part["classes"][k][0]][i] for k in range(part["distinct"])]
                       for i in range(len(probe_ids))}
+    # The reference's answer is fetched LAZILY, one per question actually asked, so
+    # `rounds` is the true oracle cost. A candidate that is the reference is excluded
+    # from the candidate set here: comparing it to itself would settle by identity
+    # rather than by evidence, and that is exactly the illusion this module removes.
+    reference_vector: dict[str, Any] = {}
     # re-partition progressively: each answer can only merge observations, never
     # move a candidate between classes, so the class table stays valid.
     for round_index in range(max_questions):
+        # the reference answers each question, so its outcome is known: rank the
+        # next question by maximum elimination rather than by minimax.
         step = decide(part, probe_ids=[str(i) for i in range(len(probe_ids))],
                       probe_outcomes=probe_outcomes,
-                      observations=observations)
+                      observations=observations,
+                      reference_outcomes=reference_vector)
         trace.append(step)
         if step["decision"] == ACCEPT:
             members = step.get("class") or []
@@ -352,7 +485,9 @@ def ask_until_settled(sources: Mapping[str, str],
                              rounds=round_index, trace=trace)
         index = step["probe_id"]
         local = int(index)
-        observations[index] = _outcome_key(oracle(probe_ids[local]))
+        answer = _outcome_key(oracle(probe_ids[local]))
+        reference_vector[index] = answer   # known from now on; costs one question
+        observations[index] = answer
     return Selection(REFUSE, refused_because="QUESTIONS_EXHAUSTED",
                      disposition=UNSEPARATED,
                      rounds=max_questions, trace=trace)

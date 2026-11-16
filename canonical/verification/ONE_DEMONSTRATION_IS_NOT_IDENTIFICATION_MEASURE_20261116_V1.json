@@ -14,17 +14,21 @@
   "SETTLED_TO_A_BEHAVIOUR_CLASS": 7,
   "UNSEPARATED__NO_INPUT_TOLD_THEM_APART": 43
  },
- "documents": "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
+ "documents": [
+  "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
+  "ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md"
+ ],
  "generated_utc": "2026-11-16T00:00:00Z",
  "harness": "canonical/tools/version_space_selection_measure_v1.py",
  "limits": [
   "One corpus, one split, one producer, one machine.",
   "Correct means behaviourally equal to the published fix on the probe library used.",
-  "The refusal path is covered by tests, not observed on this corpus (0 refusals in 51).",
-  "1 bug (Python/156) did not finish; 1 hit a memory limit; both are reported, not folded in.",
+  "The refusal path is covered by 15 mechanism tests, not observed on this corpus.",
+  "1 bug hit a memory limit in a sharded run and was measured alone; 1 (Python/156) did not finish. Both reported, not folded in.",
   "terminal_authority is false everywhere; no capability is registered and no weights are updated."
  ],
  "model_calls": 0,
+ "note": "v2: reconciled with ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md. The selector now uses maximum elimination (correct when the oracle is known correct) instead of the kernel's minimax, which is the right rule only when the answer is unknown. Re-measured on this corpus both rules ask the same 9 questions, because only 2-3 behaviour classes survive the test screen; the elimination gain appears in the ~13,000-program regime measured in that note.",
  "per_bug": {
   "Python/1": {
    "budget": 200,
@@ -48,10 +52,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": false,
    "refused_because": null,
-   "seconds": 3.07,
+   "seconds": 4.86,
    "shipped_behaviour_equals_reference": false,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -78,10 +83,11 @@
     "status": "OK"
    },
    "passing": 4,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.36,
+   "seconds": 13.68,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -112,10 +118,11 @@
     "status": "OK"
    },
    "passing": 5,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": false,
    "refused_because": null,
-   "seconds": 10.18,
+   "seconds": 12.71,
    "shipped_behaviour_equals_reference": false,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -142,10 +149,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 7.74,
+   "seconds": 10.49,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -155,7 +163,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 11.85,
+   "seconds": 17.09,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/107": {
@@ -180,10 +188,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 13.8,
+   "seconds": 24.14,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -210,10 +219,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 14.51,
+   "seconds": 20.42,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -223,7 +233,7 @@
    "bug_type": "variable misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 15.02,
+   "seconds": 18.85,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/11": {
@@ -248,10 +258,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 13.29,
+   "seconds": 18.53,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -278,10 +289,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 11.55,
+   "seconds": 15.53,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -291,7 +303,7 @@
    "bug_type": "function misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 13.85,
+   "seconds": 19.11,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/118": {
@@ -299,7 +311,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 13.75,
+   "seconds": 21.73,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/120": {
@@ -324,10 +336,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 8.05,
+   "seconds": 13.86,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -354,10 +367,11 @@
     "status": "OK"
    },
    "passing": 7,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 8.8,
+   "seconds": 11.12,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -367,7 +381,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 5.84,
+   "seconds": 6.91,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/123": {
@@ -392,10 +406,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 40.7,
+   "seconds": 109.92,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -405,7 +420,7 @@
    "bug_type": "variable misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 18.19,
+   "seconds": 30.51,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/125": {
@@ -430,10 +445,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 8.17,
+   "seconds": 15.41,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -464,10 +480,11 @@
     "status": "OK"
    },
    "passing": 4,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 18.03,
+   "seconds": 24.84,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -477,7 +494,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 11.78,
+   "seconds": 19.27,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/130": {
@@ -502,10 +519,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 18.5,
+   "seconds": 21.15,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -515,7 +533,7 @@
    "bug_type": "value misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 3.23,
+   "seconds": 20.84,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/133": {
@@ -523,7 +541,7 @@
    "bug_type": "operator misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 8.68,
+   "seconds": 8.19,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/134": {
@@ -531,7 +549,7 @@
    "bug_type": "function misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 9.53,
+   "seconds": 2.78,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/135": {
@@ -556,10 +574,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 10.02,
+   "seconds": 15.42,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -569,7 +588,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 16.21,
+   "seconds": 20.22,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/138": {
@@ -594,10 +613,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 7.12,
+   "seconds": 9.84,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -624,10 +644,11 @@
     "status": "OK"
    },
    "passing": 7,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 4.3,
+   "seconds": 17.03,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -637,7 +658,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 4.57,
+   "seconds": 20.81,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/141": {
@@ -645,7 +666,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 15.46,
+   "seconds": 14.21,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/143": {
@@ -653,7 +674,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 12.02,
+   "seconds": 18.99,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/144": {
@@ -661,7 +682,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 3.94,
+   "seconds": 9.55,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/145": {
@@ -686,10 +707,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 12.07,
+   "seconds": 3.15,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -703,7 +725,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 3.35,
+   "seconds": 7.68,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/15": {
@@ -728,10 +750,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 15.77,
+   "seconds": 30.05,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -758,10 +781,11 @@
     "status": "OK"
    },
    "passing": 7,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 8.98,
+   "seconds": 10.8,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -771,7 +795,7 @@
    "bug_type": "value misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 12.08,
+   "seconds": 11.24,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/157": {
@@ -779,7 +803,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 7.02,
+   "seconds": 10.65,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/158": {
@@ -787,7 +811,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 1.94,
+   "seconds": 2.04,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/159": {
@@ -795,7 +819,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 2.4,
+   "seconds": 2.61,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/16": {
@@ -803,7 +827,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 5.66,
+   "seconds": 5.92,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/163": {
@@ -828,10 +852,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 10.08,
+   "seconds": 2.51,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -858,10 +883,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.92,
+   "seconds": 9.97,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -888,10 +914,11 @@
     "status": "OK"
    },
    "passing": 4,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 12.93,
+   "seconds": 16.77,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -901,7 +928,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 12.58,
+   "seconds": 14.4,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/20": {
@@ -909,7 +936,7 @@
    "bug_type": "operator misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 13.62,
+   "seconds": 25.51,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/21": {
@@ -917,7 +944,7 @@
    "bug_type": "operator misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 10.88,
+   "seconds": 12.58,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/22": {
@@ -942,10 +969,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 8.47,
+   "seconds": 10.54,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -972,10 +1000,11 @@
     "status": "OK"
    },
    "passing": 7,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.23,
+   "seconds": 10.53,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -985,7 +1014,7 @@
    "bug_type": "operator misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 7.48,
+   "seconds": 11.06,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/25": {
@@ -1010,10 +1039,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 14.26,
+   "seconds": 21.02,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1040,10 +1070,11 @@
     "status": "OK"
    },
    "passing": 4,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 10.8,
+   "seconds": 13.08,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1053,7 +1084,7 @@
    "bug_type": "function misuse",
    "candidates": 153,
    "passing": 0,
-   "seconds": 5.97,
+   "seconds": 7.32,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/28": {
@@ -1078,10 +1109,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.46,
+   "seconds": 10.39,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1091,7 +1123,7 @@
    "bug_type": "function misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 7.34,
+   "seconds": 11.26,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/3": {
@@ -1120,10 +1152,11 @@
     "status": "OK"
    },
    "passing": 4,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 4.18,
+   "seconds": 5.34,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1150,10 +1183,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 7.38,
+   "seconds": 11.98,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1171,7 +1205,7 @@
    },
    "passing": 4,
    "reference_behaviour_is_in_the_candidate_set": true,
-   "seconds": 27.73,
+   "seconds": 36.29,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "PARTITION_REFUSED"
@@ -1198,10 +1232,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 10.4,
+   "seconds": 12.41,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1211,7 +1246,7 @@
    "bug_type": "variable misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 14.92,
+   "seconds": 22.4,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/4": {
@@ -1219,7 +1254,7 @@
    "bug_type": "variable misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 6.84,
+   "seconds": 9.03,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/40": {
@@ -1248,10 +1283,11 @@
     "status": "OK"
    },
    "passing": 6,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 14.08,
+   "seconds": 20.69,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1278,10 +1314,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 5.49,
+   "seconds": 8.41,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1308,10 +1345,11 @@
     "status": "OK"
    },
    "passing": 6,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 2,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 11.04,
+   "seconds": 15.13,
    "shipped_behaviour_equals_reference": false,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1338,10 +1376,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.36,
+   "seconds": 10.26,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1368,10 +1407,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 15.27,
+   "seconds": 22.25,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1381,7 +1421,7 @@
    "bug_type": "value misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 11.24,
+   "seconds": 14.05,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/49": {
@@ -1406,10 +1446,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 13.51,
+   "seconds": 17.36,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1419,7 +1460,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 8.61,
+   "seconds": 14.67,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/51": {
@@ -1448,10 +1489,11 @@
     "status": "OK"
    },
    "passing": 4,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.1,
+   "seconds": 11.28,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1461,7 +1503,7 @@
    "bug_type": "operator misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 7.1,
+   "seconds": 11.1,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/53": {
@@ -1486,10 +1528,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 7.97,
+   "seconds": 10.53,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1499,7 +1542,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 6.55,
+   "seconds": 10.2,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/58": {
@@ -1507,7 +1550,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 10.06,
+   "seconds": 13.2,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/60": {
@@ -1532,10 +1575,11 @@
     "status": "OK"
    },
    "passing": 3,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 10.13,
+   "seconds": 15.86,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1562,10 +1606,11 @@
     "status": "OK"
    },
    "passing": 6,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.73,
+   "seconds": 13.18,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1575,7 +1620,7 @@
    "bug_type": "value misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 7.82,
+   "seconds": 10.74,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/63": {
@@ -1583,7 +1628,7 @@
    "bug_type": "value misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 8.52,
+   "seconds": 17.53,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/64": {
@@ -1591,7 +1636,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 8.8,
+   "seconds": 13.83,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/65": {
@@ -1616,10 +1661,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 13.75,
+   "seconds": 16.59,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1629,7 +1675,7 @@
    "bug_type": "function misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 9.03,
+   "seconds": 11.41,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/69": {
@@ -1654,10 +1700,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 16.13,
+   "seconds": 21.16,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1684,10 +1731,11 @@
     "status": "OK"
    },
    "passing": 8,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 14.96,
+   "seconds": 16.28,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1714,10 +1762,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.86,
+   "seconds": 12.03,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1744,10 +1793,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 12.64,
+   "seconds": 16.98,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1757,7 +1807,7 @@
    "bug_type": "excess logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 32.34,
+   "seconds": 43.95,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/82": {
@@ -1782,10 +1832,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 12.75,
+   "seconds": 13.87,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1795,7 +1846,7 @@
    "bug_type": "operator misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 9.83,
+   "seconds": 13.11,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/85": {
@@ -1820,10 +1871,11 @@
     "status": "OK"
    },
    "passing": 2,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 9.56,
+   "seconds": 13.22,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": true,
    "status": "MEASURED"
@@ -1833,7 +1885,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 8.76,
+   "seconds": 11.23,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/88": {
@@ -1858,10 +1910,11 @@
     "status": "OK"
    },
    "passing": 5,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 10.98,
+   "seconds": 12.69,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1871,7 +1924,7 @@
    "bug_type": "value misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 8.1,
+   "seconds": 14.68,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/9": {
@@ -1879,7 +1932,7 @@
    "bug_type": "variable misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 11.73,
+   "seconds": 16.1,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/90": {
@@ -1904,10 +1957,11 @@
     "status": "OK"
    },
    "passing": 6,
+   "published_fix_was_also_a_candidate": true,
    "questions_asked": 1,
    "reference_behaviour_is_in_the_candidate_set": true,
    "refused_because": null,
-   "seconds": 6.7,
+   "seconds": 12.26,
    "shipped_behaviour_equals_reference": true,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1938,10 +1992,11 @@
     "status": "OK"
    },
    "passing": 1,
+   "published_fix_was_also_a_candidate": false,
    "questions_asked": 0,
    "reference_behaviour_is_in_the_candidate_set": false,
    "refused_because": null,
-   "seconds": 9.96,
+   "seconds": 14.04,
    "shipped_behaviour_equals_reference": false,
    "shipped_is_published_fix": false,
    "status": "MEASURED"
@@ -1951,7 +2006,7 @@
    "bug_type": "missing logic",
    "candidates": 200,
    "passing": 0,
-   "seconds": 10.72,
+   "seconds": 16.18,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/96": {
@@ -1959,7 +2014,7 @@
    "bug_type": "variable misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 12.04,
+   "seconds": 18.07,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   },
   "Python/99": {
@@ -1967,11 +2022,23 @@
    "bug_type": "function misuse",
    "candidates": 200,
    "passing": 0,
-   "seconds": 18.79,
+   "seconds": 23.99,
    "status": "NO_CANDIDATE_PASSES_THE_TESTS"
   }
  },
  "schema": "BRAIN_ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_V1",
+ "selection_rules_compared": {
+  "on_the_23_task_13000_program_space": {
+   "kernel_minimax": 112,
+   "maximum_elimination": 89,
+   "receipt": "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json"
+  },
+  "on_this_corpus_8_split_bugs": {
+   "kernel_minimax": 9,
+   "maximum_elimination": 9,
+   "note": "identical: only 2-3 classes survive the screen"
+  }
+ },
  "summary": {
   "behaviours_left_unseparated_by_every_probe": 43,
   "behaviours_split_by_a_probe": 8,
@@ -1982,6 +2049,9 @@
   "correct_after_selection": 48,
   "correct_before_selection": 47,
   "crashed_or_unfinished": 1,
+  "did_not_finish": [
+   "Python/156"
+  ],
   "first_pass_candidate_was_correct": 47,
   "no_candidate_passed_the_tests": 46,
   "oracle_questions_asked": 9,

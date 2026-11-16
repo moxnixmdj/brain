@@ -241,6 +241,13 @@ def one_bug(bug: dict[str, Any], lessons: Any, extra: dict[int, dict[str, Any]],
     def oracle(_probe_index: int) -> tuple:
         return tuple(rows[-1]["outcomes"][_probe_index])
 
+    # The published fix may itself be among the candidates. It is KEPT: the scoring
+    # rule is behavioural (does the chosen candidate's outcome vector equal the
+    # reference's on the whole probe library?), never textual, so a candidate that
+    # happens to be the published text is judged the same way as any other -- and if
+    # it is settled on, that is a correct settlement, not a shortcut. Dropping it was
+    # tried and measured worse: Python/163 lost its only correct candidate.
+    out["published_fix_was_also_a_candidate"] = published_in_set
     selection = vspace.ask_until_settled(
         {cid: programs[ids.index(cid)] for cid in ids},
         list(range(len(inputs))),

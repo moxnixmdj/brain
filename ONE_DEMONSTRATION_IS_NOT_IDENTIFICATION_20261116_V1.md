@@ -198,7 +198,45 @@ precisely because the number is small — not because the price is zero.
 
 ---
 
-## 9. Reproduce every number here
+## 9. Reconciliation with `ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md` (merged the same day)
+
+A parallel session reached the same equation by a different road, and one of its findings **corrects the
+rule this module originally used**. It is worth being exact about who is right where.
+
+**Where they are right and this work was wrong.** `select_discriminator` — the project's kernel, which I
+reused — minimises the **worst-case** remainder of a split. That is the correct objective when the answer
+to a question is *unknown*. Here the answer is never unknown: we ask the reference, so every candidate
+predicting something else dies **with certainty**. The correct rule is **maximum elimination**,
+`argmax |{live class : outcome != reference}|`. That note measured it as 89 questions vs 112 over 23 tasks
+in spaces of ~13,000 programs. This module now uses maximum elimination
+(`maximum_elimination`, `_best_eliminating_probe`) and falls back to minimax only when no reference answer
+is available — which is what minimax is for.
+
+**Where the regimes differ, stated honestly.** Re-measured on this corpus's 8 split bugs with identical
+outcome tables, maximum elimination asks the **same 9 questions** as minimax (it wins on 0, ties on 8).
+The reason is the space size: after the generator and the test screen, only **2–3 behaviour classes**
+survive here, and with two or three survivors the two rules coincide. The elimination gain appears when
+hundreds of hypotheses are alive — which is the state *before* a test suite has filtered anything, and is
+exactly what that note measured. **Neither number generalises to the other's regime**, and claiming
+otherwise would be the error both notes are about.
+
+**What is genuinely new here and not in that note:** it partitions a space of ~13,000 programs; this
+partitions the *behaviour classes of candidates that already pass the tests*, and reports the disposition
+**`UNSEPARATED`** for the 43 of 51 where no input we can construct splits them at all. That case is
+invisible in a large-space measurement (a space that large is always splittable) and it is where the
+error actually lives here: 40 of those 43 were right and 3 were wrong, and **the system cannot tell which
+without an outside answer.**
+
+Together the two measurements give one statement neither gives alone:
+
+> A demonstration leaves ~10 bits and ~1,000 survivors. A test suite removes almost all of them. What is
+> left is 2–3 behaviours, and **those are the ones that matter** — they are cheap to separate (about one
+> question) and impossible to separate by agreement (majority vote was wrong 3 times in 5). `UNSEPARATED`
+> is the name of not knowing which one you are holding.
+
+---
+
+## 10. Reproduce every number here
 
 ```bash
 python3 canonical/tools/version_space_selection_measure_v1.py \
@@ -212,7 +250,7 @@ Full per-bug record, including every bug that did not reach a measurement:
 Mechanism tests: `canonical/tests/test_repair_version_space_selection_v1.py` (13) and
 `canonical/tests/test_closed_loop_trace_abduction_v1.py` (13).
 
-## 10. Honest limits of this document
+## 11. Honest limits of this document
 
 - One corpus (HumanEvalFix), one split, one producer, one machine. Of 100 scored bugs: 51 measured,
   46 had no candidate that passed the tests, 1 was refused at partition, 1 hit a memory limit, 1 did not

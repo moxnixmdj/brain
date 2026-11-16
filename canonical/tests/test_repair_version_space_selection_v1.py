@@ -138,3 +138,35 @@ def test_refusal_is_a_record_not_an_exception():
     record = selection.as_record()
     assert record["decision"] == vspace.REFUSE
     assert record["terminal_authority"] is False
+
+
+def test_maximum_elimination_beats_a_balanced_split():
+    """Three classes. Probe 0 is the BALANCED split (2 vs 1). Probe 1 is three-way, and
+    the reference's answer on it ("Z") is predicted by no class, so asking it kills all
+    three at once. A minimax rule prefers the balanced split; elimination must not.
+
+    The per-probe path is the one the module actually uses: the reference's answer is a
+    vector, not a scalar, because different inputs have different answers.
+    """
+    part = vspace.partition(
+        ["a", "b", "c"],
+        {"a": [("value", "x"), ("value", "1")],
+         "b": [("value", "y"), ("value", "1")],
+         "c": [("value", "x"), ("value", "2")]})
+    assert part["distinct"] == 3
+    probe, answer = vspace._best_eliminating_probe(
+        part, ["0", "1"],
+        {"0": ["x", "y", "x"], "1": ["Z", "W", "V"]},
+        {"0": "x", "1": "Z"}, ())
+    assert (probe, answer) == ("1", "Z")   # kills three; probe 0 kills one
+
+
+def test_decide_asks_the_eliminating_probe_when_the_answer_is_known():
+    part = vspace.partition(
+        ["a", "b", "c"],
+        {"a": [("value", "1")], "b": [("value", "2")], "c": [("value", "3")]})
+    step = vspace.decide(part, probe_ids=["0", "1"],
+                         probe_outcomes={"0": ["1", "2", "3"], "1": ["7", "2", "3"]},
+                         reference_outcomes={"0": "1", "1": "7"})
+    assert step["decision"] == vspace.ASK
+    assert step["objective"].startswith("MAXIMUM_ELIMINATION")

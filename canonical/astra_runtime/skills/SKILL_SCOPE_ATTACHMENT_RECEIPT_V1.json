@@ -1,0 +1,92 @@
+{
+ "authority": "NONE__PRODUCER_RUN",
+ "both_numbers": {
+  "all_identified_rules_moved_both_numbers": true,
+  "per_rule": [
+   {
+    "both_numbers_moved": true,
+    "broke_correct_unscoped": 9,
+    "gated_admitted_defective": 9,
+    "gated_refused_correct": 9,
+    "repaired_unscoped": 9,
+    "skill_id": "skill_5b30b7cd667d062d"
+   },
+   {
+    "both_numbers_moved": true,
+    "broke_correct_unscoped": 9,
+    "gated_admitted_defective": 9,
+    "gated_refused_correct": 9,
+    "repaired_unscoped": 9,
+    "skill_id": "skill_5e717ccbddc250f9"
+   }
+  ],
+  "totals": {
+   "broke_correct_unscoped": 18,
+   "gated_admitted_defective": 18,
+   "gated_refused_correct": 18,
+   "repaired_unscoped": 18
+  }
+ },
+ "bundle": "/home/user/brain/canonical/astra_runtime/skills/VERIFIED_SKILLS_BUNDLE_V1.json",
+ "output": "/home/user/brain/canonical/astra_runtime/skills/VERIFIED_SKILLS_BUNDLE_V1.json",
+ "report": {
+  "authority": "NONE__PRODUCER_RUN",
+  "entries": [
+   {
+    "evidence_rows": 3,
+    "language": "python",
+    "observations_spent": 3,
+    "required": [
+     "baseline.violates_own_spec"
+    ],
+    "skill_id": "skill_5b30b7cd667d062d",
+    "status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+    "victims_offered": 18
+   },
+   {
+    "evidence_rows": 3,
+    "language": "python",
+    "observations_spent": 3,
+    "required": [
+     "baseline.violates_own_spec"
+    ],
+    "skill_id": "skill_5e717ccbddc250f9",
+    "status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+    "victims_offered": 18
+   },
+   {
+    "evidence_rows": 0,
+    "language": "go",
+    "observations_spent": 0,
+    "required": null,
+    "skill_id": "skill_72276765c53ffea4",
+    "status": "SCOPE_NOT_BOUGHT__NOT_A_SINGLE_OPERATOR_LESSON",
+    "victims_offered": 0
+   },
+   {
+    "evidence_rows": 0,
+    "language": "typescript",
+    "observations_spent": 0,
+    "required": null,
+    "skill_id": "skill_9df30abeb867023c",
+    "status": "SCOPE_NOT_BOUGHT__NOT_A_SINGLE_OPERATOR_LESSON",
+    "victims_offered": 0
+   },
+   {
+    "evidence_rows": 0,
+    "language": "rust",
+    "observations_spent": 0,
+    "required": null,
+    "skill_id": "skill_f8b41c7e705cda49",
+    "status": "SCOPE_NOT_BOUGHT__NO_FACT_EXTRACTOR_FOR_LANGUAGE",
+    "victims_offered": 0
+   }
+  ],
+  "identified": 2,
+  "not_bought": 3,
+  "rule_count": 5,
+  "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1"
+ },
+ "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1__RECEIPT",
+ "whole_task_correctness_proved": false
+}

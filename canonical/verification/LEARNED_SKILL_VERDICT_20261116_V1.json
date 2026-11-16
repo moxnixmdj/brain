@@ -1,0 +1,390 @@
+{
+  "artifacts": {
+    "bundle": "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json",
+    "kernel": "canonical/swe_kernel/learned_skill_verdict_v1.py",
+    "oracle_changed": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+    "tests": "canonical/tests/test_learned_skill_verdict_v1.py (8 passed)"
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "four_arm_certificate": {
+    "arms": {
+      "corrupt": "truncates the target file to invalid or incomplete source",
+      "null": "prints the success sentence, touches no file",
+      "real": "the learned skill run against a request this repository actually contains",
+      "wrong_claim": "edits a DIFFERENT variable in the same function than the one the request named"
+    },
+    "bundle_rule": "admitted = one certificate per exercisable skill, all refused every impostor",
+    "function": "admission_decision()",
+    "per_skill": "a skill is certified only if every arm was run and every non-real arm was refused while the real one was accepted",
+    "produced_by": "canonical/swe_kernel/learned_skill_verdict_v1.py --certify",
+    "skills_certified": 4,
+    "skills_unexercised": 7,
+    "stored_verdict": {
+      "admitted": false,
+      "reason": "AT_LEAST_ONE_SKILL_ADMITTED_A_NON_REAL_ARM",
+      "refused_skills": [
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.038c0a66235d2a96"
+        },
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_WRONG_CLAIM_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.39a63d292d2d68c4"
+        },
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.d50b791d66f3a2c2"
+        },
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_WRONG_CLAIM_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.ef0c74240e9e32a8"
+        }
+      ]
+    },
+    "what_the_arms_forced": [
+      "the file witness alone still accepted the wrong-claim arm: it changed the world correctly and printed a different sentence, so a verdict must hold the file AND the claim",
+      "the file witness alone still accepted the corrupt arm on both rename skills: with the symbol gone, deleting the rest of the file satisfied every check, so the SCOPE of a change is part of the claim (outside_digests / POSTCONDITION_CHANGE_ESCAPED_THE_FUNCTION)",
+      "with both halves and the scope, 4 of 4 real skills are admitted and 12 of 12 impostor runs are refused; under the shipped stdout verdict 0 of 4 skills survive"
+    ],
+    "witness_verdict": {
+      "admitted": true,
+      "reason": "EVERY_EXERCISABLE_SKILL_SURVIVED_ALL_ARMS",
+      "refused_skills": []
+    }
+  },
+  "generated_utc": "2026-11-16T16:51:34Z",
+  "headline": {
+    "a_do_nothing_program_a_file_witness_accepted": "0 of 4",
+    "a_do_nothing_program_the_stored_verdict_accepted": "4 of 4",
+    "ever_used_hit_count_above_zero": 0,
+    "exercisable_with_a_real_request_from_this_repository": 4,
+    "judged_only_by_their_own_stdout": 11,
+    "real_skills_a_file_witness_still_accepted": "4 of 4",
+    "skills_in_the_bundle": 11,
+    "unexercisable_the_bundle_carries_no_example_pair": 7
+  },
+  "incremental_spend_usd": 0,
+  "instrument_defect_found_here": [
+    "param_order is not the order the stored step unpacks REQUEST in. Binding by param_order handed the inline skills a variable name where they wanted a path, and every attempt was refused with 'there is no file probes' -- a refusal that reads like the skill being careful and was this instrument passing arguments in the wrong order. The order is now read off the stored REQUEST tuple itself."
+  ],
+  "measurement": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+    "bundle": "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json",
+    "impostors_a_file_witness_verdict_accepted": 0,
+    "impostors_the_stored_verdict_accepted": 4,
+    "incremental_spend_usd": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "real_skills_a_file_witness_verdict_accepted": 4,
+    "rows": [
+      {
+        "attempts": 1,
+        "goal": "inline the variable '?str0' in the function '?str1' in ?path0",
+        "goal_skeleton": "inline the variable '?str0' in the function '?str1' in ?path0",
+        "hit_count": 0,
+        "impostor": {
+          "independent": {
+            "claim": "inline the variable '?str0' in the function '?str1' in ?path0",
+            "holds": false,
+            "why": "THE_FILE_DID_NOT_CHANGE"
+          },
+          "returncode": 0,
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": false,
+            "why": "POSTCONDITION_FILE_UNCHANGED"
+          }
+        },
+        "needs_an_example_pair": false,
+        "postcondition": {
+          "expected": "inlined the variable 'usable' in the function 'evaluate' in canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "kind": "stdout_equals"
+        },
+        "postcondition_kind": "stdout_equals",
+        "request": {
+          "path0": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "str0": "usable",
+          "str1": "evaluate"
+        },
+        "skill": {
+          "independent": {
+            "claim": "inline the variable '?str0' in the function '?str1' in ?path0",
+            "holds": true,
+            "why": "THE_VARIABLE_IS_GONE_AND_THE_FILE_PARSES"
+          },
+          "returncode": 0,
+          "stderr_tail": "",
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": true,
+            "why": "FILE_EDIT_VERIFIED"
+          }
+        },
+        "skill_id": "workflow.038c0a66235d2a96",
+        "status": "EXERCISED",
+        "verdict_has_power": false
+      },
+      {
+        "goal_skeleton": "edit ?path0 the way ?path1 remembers and try the rest with ?path2",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.0b6cfba4465a96af",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "goal_skeleton": "edit ?path0 the way ?path1 was changed into ?path2",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.2b3a227464751b2c",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "goal_skeleton": "make the same change in ?path0 that turned ?path1 into ?path2",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.38d1a8554c81ca7a",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "attempts": 1,
+        "goal": "inline the local variable '?str0' in the function '?str1' in ?path0",
+        "goal_skeleton": "inline the local variable '?str0' in the function '?str1' in ?path0",
+        "hit_count": 0,
+        "impostor": {
+          "independent": {
+            "claim": "inline the local variable '?str0' in the function '?str1' in ?path0",
+            "holds": false,
+            "why": "THE_FILE_DID_NOT_CHANGE"
+          },
+          "returncode": 0,
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": false,
+            "why": "POSTCONDITION_FILE_UNCHANGED"
+          }
+        },
+        "needs_an_example_pair": false,
+        "postcondition": {
+          "expected": "inlined the variable 'usable' in the function 'evaluate' in canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "kind": "stdout_equals"
+        },
+        "postcondition_kind": "stdout_equals",
+        "request": {
+          "path0": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "str0": "usable",
+          "str1": "evaluate"
+        },
+        "skill": {
+          "independent": {
+            "claim": "inline the local variable '?str0' in the function '?str1' in ?path0",
+            "holds": true,
+            "why": "THE_FILE_CHANGED_AND_STILL_PARSES"
+          },
+          "returncode": 0,
+          "stderr_tail": "",
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": true,
+            "why": "FILE_EDIT_VERIFIED"
+          }
+        },
+        "skill_id": "workflow.39a63d292d2d68c4",
+        "status": "EXERCISED",
+        "verdict_has_power": false
+      },
+      {
+        "goal_skeleton": "edit ?path0 the way ?path1 remembers",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.4908b5b8c2253457",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "goal_skeleton": "edit ?path0 the way ?path1 remembers and leave the rest alone",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.954a7ad95eab7d6a",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "goal_skeleton": "remember in ?path0 the way ?path1 was changed into ?path2",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.cc1bc70839f4f441",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "attempts": 1,
+        "goal": "rename the variable '?str0' to '?str1' in the function '?str2' in ?path0",
+        "goal_skeleton": "rename the variable '?str0' to '?str1' in the function '?str2' in ?path0",
+        "hit_count": 0,
+        "impostor": {
+          "independent": {
+            "claim": "rename the variable '?str0' to '?str1' in the function '?str2' in ?path0",
+            "holds": false,
+            "why": "THE_FILE_DID_NOT_CHANGE"
+          },
+          "returncode": 0,
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": false,
+            "why": "POSTCONDITION_FILE_UNCHANGED"
+          }
+        },
+        "needs_an_example_pair": false,
+        "postcondition": {
+          "expected": "renamed the variable 'usable' to 'usable_brain_renamed' in the function 'evaluate' in canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "kind": "stdout_equals"
+        },
+        "postcondition_kind": "stdout_equals",
+        "request": {
+          "path0": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "str0": "usable",
+          "str1": "usable_brain_renamed",
+          "str2": "evaluate"
+        },
+        "skill": {
+          "independent": {
+            "claim": "rename the variable '?str0' to '?str1' in the function '?str2' in ?path0",
+            "holds": true,
+            "why": "THE_VARIABLE_IS_GONE_AND_THE_FILE_PARSES"
+          },
+          "returncode": 0,
+          "stderr_tail": "",
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": true,
+            "why": "FILE_EDIT_VERIFIED"
+          }
+        },
+        "skill_id": "workflow.d50b791d66f3a2c2",
+        "status": "EXERCISED",
+        "verdict_has_power": false
+      },
+      {
+        "goal_skeleton": "remember in ?path0 also the way ?path1 was changed into ?path2",
+        "hit_count": 0,
+        "needs_an_example_pair": true,
+        "postcondition_kind": "stdout_equals",
+        "skill_id": "workflow.d677a709e738ada3",
+        "status": "UNEXERCISED_THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"
+      },
+      {
+        "attempts": 1,
+        "goal": "rename the local variable '?str0' to '?str1' in the function '?str2' in ?path0",
+        "goal_skeleton": "rename the local variable '?str0' to '?str1' in the function '?str2' in ?path0",
+        "hit_count": 0,
+        "impostor": {
+          "independent": {
+            "claim": "rename the local variable '?str0' to '?str1' in the function '?str2' in ?path0",
+            "holds": false,
+            "why": "THE_FILE_DID_NOT_CHANGE"
+          },
+          "returncode": 0,
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": false,
+            "why": "POSTCONDITION_FILE_UNCHANGED"
+          }
+        },
+        "needs_an_example_pair": false,
+        "postcondition": {
+          "expected": "renamed the variable 'usable' to 'usable_brain_renamed' in the function 'evaluate' in canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "kind": "stdout_equals"
+        },
+        "postcondition_kind": "stdout_equals",
+        "request": {
+          "path0": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "str0": "usable",
+          "str1": "usable_brain_renamed",
+          "str2": "evaluate"
+        },
+        "skill": {
+          "independent": {
+            "claim": "rename the local variable '?str0' to '?str1' in the function '?str2' in ?path0",
+            "holds": true,
+            "why": "THE_FILE_CHANGED_AND_STILL_PARSES"
+          },
+          "returncode": 0,
+          "stderr_tail": "",
+          "verdict": {
+            "accepted": true,
+            "why": "STDOUT_EQUALS_VERIFIED"
+          },
+          "witness_verdict": {
+            "accepted": true,
+            "why": "FILE_EDIT_VERIFIED"
+          }
+        },
+        "skill_id": "workflow.ef0c74240e9e32a8",
+        "status": "EXERCISED",
+        "verdict_has_power": false
+      }
+    ],
+    "schema": "PROJECT_BRAIN_LEARNED_SKILL_VERDICT_V1",
+    "skills": 11,
+    "skills_ever_used": 0,
+    "skills_exercised": 4,
+    "skills_judged_only_by_their_own_stdout": 11,
+    "skills_unexercised": 7,
+    "verdicts_with_power": 0
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "question": "The tree stores 'learned once, kept forever' actions. What can the verdict attached to each of them tell apart?",
+  "schema": "PROJECT_BRAIN_LEARNED_SKILL_VERDICT_RECEIPT_20261116_V1",
+  "the_fix_that_was_measured": {
+    "change": "causal_trace_to_skill_compiler_v1.verify_postcondition now supports kind 'file_edit_claim': the claimed file must exist, differ from its recorded sha256, parse, still contain the named function, and no longer assign the named symbol.",
+    "effect": "the same three-line impostor is refused 4 of 4 while the four real skills are still accepted 4 of 4 -- the verdict separates, which it did not before.",
+    "not_done": "the shipped bundle still carries stdout_equals. Rewriting its 11 stored postconditions is a change to learned artifacts, not to this instrument, and is left for the run that owns them."
+  },
+  "what_is_not_real": [
+    "That a learned skill is verified. The postcondition is stdout_equals on the sentence the skill itself prints; a program that writes nothing satisfies it.",
+    "That 'learned permanently' has any protection: nothing in the bundle records a discriminating check, and none of the 11 has ever been used (hit_count 0)."
+  ],
+  "what_is_real": [
+    "The four exercisable skills DO what their sentence says: on real files in this repository each produced the claimed edit, the file parsed afterwards, and the symbol the sentence names was gone (independent filesystem check, not the program's own output).",
+    "The stored verdict, run through the tree's own compiler.verify_postcondition, accepted a three-line program that printed the success sentence and opened no file."
+  ]
+}
