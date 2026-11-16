@@ -143,7 +143,7 @@
     "bypass the chooser where the tests already identify the repair (43 of 51)",
     "substitute the reference's answer for an invented notion of correctness"
    ],
-   "intrinsic_or_path_specific": "path_specific: the chooser is now measured and built. What remains is the generator -- 46 of 99 scored bugs had no candidate that passed the tests at all, and 3 more had the right behaviour nowhere in the candidate set. No question fixes those.",
+   "intrinsic_or_path_specific": "path_specific: the chooser is measured and built. What remains is the generator -- 46 of 99 scored HumanEvalFix bugs had no candidate that passed the tests at all, and 3 more had the right behaviour nowhere in the candidate set. The same-day QuixBugs measurement made 9 such bugs searchable and repaired 0 of them, which is the same wall from the other side: reachability is not the binding term.",
    "surviving_causal_blocker": "Nothing could tell a correct behaviour from a consistent one without a labelled answer to an input it chose. Storage was solved; verification was cheap; the chooser was missing."
   },
   "obs_capability": {
@@ -158,7 +158,8 @@
     "canonical/swe_kernel/one_demonstration_reach_v1.py (merged today: reach of a skill's premise)",
     "canonical/tools/identification_cost_in_a_real_space_v1.py (merged today: identification cost in ~13,000-program spaces)",
     "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py (the generator -- REUSED)",
-    "canonical/runtime/demonstration_version_space_v1.py (same idea, GUI pages only, not source text)"
+    "canonical/runtime/demonstration_version_space_v1.py (same idea, GUI pages only, not source text)",
+    "canonical/tools/repair_where_the_suite_is_the_observable_v1.py (merged today: the 9 QuixBugs bugs with no json_testcases; made searchable, repaired 0)"
    ],
    "external_existing_routes_checked": [
     "2026 fault-localisation placebo study: 4.4% for localised infill vs 10.1% for a blind resample -- more search is not better",
