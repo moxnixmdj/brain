@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "cb4fa31a03eb364dcc69edc923f5dfbbb4b7b9726f9dc4618717a0a3a5bd7740"
+  "value": "3c63090337259d4fc8590148322a922e6f0fb98f9cd593868044ad61ba6f9f43"
  },
  "engines": [
   {
@@ -62264,7 +62264,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 26622,
+   "bytes": 26657,
    "headings": [
     "The goal is a counterfactual world model, not a memory",
     "0. The short answer",
@@ -62284,7 +62284,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "THE_GOAL_IS_A_COUNTERFACTUAL_WORLD_MODEL_20261116_V1.md",
-   "sha256": "9dfe6d29e33f312850c838c986f479dbc13f6a126b62b2d51c11b764df67f2a7",
+   "sha256": "e899652e6791f40ed547944a1e2bdf2659a7f3b34b254424227d9bee77a88360",
    "summary": "**Date:** 2026-11-16 (UTC). **Branch:** `arena/5ea0bf08-brain`. **Authority:** NONE — producer-run sandbox measurement, no terminal truth, no leaderboard entry, no sentience/capability/family/weight claim.",
    "terms": {
     "16": 7,
@@ -62307,7 +62307,7 @@
     "executed": 13,
     "false": 12,
     "goal": 20,
-    "here": 10,
+    "here": 11,
     "https": 21,
     "instant": 10,
     "intervention": 8,
@@ -62318,7 +62318,7 @@
     "model": 16,
     "never": 8,
     "new": 15,
-    "no": 46,
+    "no": 47,
     "not": 65,
     "one": 10,
     "only": 9,
@@ -80979,7 +80979,7 @@
   "included_source_count": 1264,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "d6c3809533bfdb113eb032f30265b61ccb0536be3d46c3f08a2fed305626c66a"
+  "source_tree_digest": "198a8211e086affcadc342c228b4862e01c8cc5eeac8fd903a30aa05f72349a3"
  },
  "research_index": [
   {
