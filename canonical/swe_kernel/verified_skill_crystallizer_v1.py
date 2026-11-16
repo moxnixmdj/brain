@@ -1752,9 +1752,25 @@ class VerifiedSkillStore:
 
         from canonical.swe_kernel import skill_recheck_v1 as _recheck
 
+        # THE SCOPE LAW, AT CALL TIME (`skill_scope_bundle_v1`). Withhold a rule only when it
+        # carries an IDENTIFIED requirement and this target's observed facts do not meet it.
+        # A rule with no identified scope is admitted with a named basis -- never a pretended
+        # check. Facts are computed once per recall and only when some candidate rule carries
+        # an identified scope, so an unscoped store recalls exactly as before.
+        from canonical.swe_kernel import skill_scope_bundle_v1 as _scope_bundle
+        _scope_observed: dict[str, Any] | None = None
+        if any(_scope_bundle.has_identified_scope(r) for r in ordered):
+            _scope_observed = _scope_bundle.observed_facts(
+                source_text, verifier=verifier, language=lang)
+
         for rule in ordered:
             if str(rule.get("skill_id") or "") in stale_ids:
                 continue
+            if _scope_observed is not None and _scope_bundle.has_identified_scope(rule):
+                if not _scope_bundle.admit(
+                    rule, source_text, language=lang, observed=_scope_observed
+                ).get("admitted"):
+                    continue
             if rule.get('state') not in (None, 'ACTIVE') or not applicable(
                 rule.get('contract'), scope_id, context, allow_cross_scope=allow_cross_scope_transfer
             ):
@@ -2349,6 +2365,11 @@ class VerifiedSkillStore:
                     # an older active bundle must never reactivate local invalidation.
                     retained = json.loads(old_pattern)
                     _merge_taught_sources(retained, rule)
+                    # Applicability scope is metadata on the payload and is not covered by the
+                    # content address; an incoming bundle's bought scope must survive the merge,
+                    # or a re-attach would silently roll the record back to EXACT_MATCH_ONLY.
+                    if isinstance(rule.get("scope"), Mapping):
+                        retained["scope"] = rule["scope"]
                     if rule.get('state') == 'INVALIDATED':
                         retained['state'] = 'INVALIDATED'
                         counterexamples = retained.setdefault('counterexamples', [])

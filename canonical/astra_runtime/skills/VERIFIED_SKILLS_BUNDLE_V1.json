@@ -112,6 +112,18 @@
       "?id1"
      ]
     ],
+    "scope": {
+     "authority": "NONE__PRODUCER_RUN",
+     "evidence_rows": 3,
+     "observations_spent": 3,
+     "reason": "ONE_CONSISTENT_REQUIREMENT",
+     "required": [
+      "baseline.violates_own_spec"
+     ],
+     "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1",
+     "status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+     "victims_offered": 18
+    },
     "skeleton_fp": "8570c0366584aae4",
     "skill_id": "skill_5b30b7cd667d062d"
    },
@@ -244,6 +256,18 @@
       "?id3"
      ]
     ],
+    "scope": {
+     "authority": "NONE__PRODUCER_RUN",
+     "evidence_rows": 3,
+     "observations_spent": 3,
+     "reason": "ONE_CONSISTENT_REQUIREMENT",
+     "required": [
+      "baseline.violates_own_spec"
+     ],
+     "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1",
+     "status": "IDENTIFIED__ONE_CONSISTENT_REQUIREMENT",
+     "victims_offered": 18
+    },
     "skeleton_fp": "72628dc647fa05d1",
     "skill_id": "skill_5e717ccbddc250f9"
    },
@@ -356,6 +380,16 @@
       ")"
      ]
     ],
+    "scope": {
+     "authority": "NONE__PRODUCER_RUN",
+     "evidence_rows": 0,
+     "observations_spent": 0,
+     "reason": "NOT_A_SINGLE_OPERATOR_LESSON",
+     "required": null,
+     "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1",
+     "status": "SCOPE_NOT_BOUGHT__NOT_A_SINGLE_OPERATOR_LESSON",
+     "victims_offered": 0
+    },
     "skeleton_fp": "2f74c81a81a4385c",
     "skill_id": "skill_72276765c53ffea4"
    },
@@ -448,6 +482,16 @@
       ";"
      ]
     ],
+    "scope": {
+     "authority": "NONE__PRODUCER_RUN",
+     "evidence_rows": 0,
+     "observations_spent": 0,
+     "reason": "NOT_A_SINGLE_OPERATOR_LESSON",
+     "required": null,
+     "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1",
+     "status": "SCOPE_NOT_BOUGHT__NOT_A_SINGLE_OPERATOR_LESSON",
+     "victims_offered": 0
+    },
     "skeleton_fp": "3e884f99c59e1a39",
     "skill_id": "skill_9df30abeb867023c"
    },
@@ -596,6 +640,16 @@
       "{"
      ]
     ],
+    "scope": {
+     "authority": "NONE__PRODUCER_RUN",
+     "evidence_rows": 0,
+     "observations_spent": 0,
+     "reason": "NO_FACT_EXTRACTOR_FOR_LANGUAGE",
+     "required": null,
+     "schema": "PROJECT_BRAIN_SKILL_SCOPE_BUNDLE_V1",
+     "status": "SCOPE_NOT_BOUGHT__NO_FACT_EXTRACTOR_FOR_LANGUAGE",
+     "victims_offered": 0
+    },
     "skeleton_fp": "9abe90b10fd97b2c",
     "skill_id": "skill_f8b41c7e705cda49"
    },
