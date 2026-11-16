@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 455,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6859,
+  "research_index_records": 6860,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "93df29d8a30df57d5dcb3de079a1091b13b7508f917425ee130e58ecc6c770e8"
+  "value": "fc2e20f10da8a69e556d5da4cf815005b001e25c824efd4a127c2ab92cb70a19"
  },
  "engines": [
   {
@@ -242541,6 +242541,51 @@
     "the_generalisation_organ_is_importable_again_and_one_showing_is_measured_as_insufficient__transfer_comes_from_a_second_differing_showing_and_from_a_check_neither_of_which_is_automatic__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "v1": 1,
     "what_is_real_and_what_is_not_20261113_v1": 1
+   }
+  },
+  {
+   "action_id": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "953c90985b73614be7f4eddae2d2c5ed1ca573ebc2a8ae5b6ab555464aca57ac",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "aimed": 1,
+    "applicability": 1,
+    "author": 1,
+    "basis": 1,
+    "being": 1,
+    "buys": 1,
+    "capability": 1,
+    "ceiling": 1,
+    "condition": 1,
+    "consider": 1,
+    "context": 1,
+    "corpus": 1,
+    "demonstration": 2,
+    "edits": 1,
+    "fixes": 1,
+    "folded": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "imagined": 1,
+    "instead": 1,
+    "list": 1,
+    "measured": 1,
+    "missing": 1,
+    "next": 1,
+    "one": 1,
+    "property": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "proves": 1,
+    "reachable": 1,
+    "rungs": 1,
+    "silent": 1,
+    "so": 1
    }
   },
   {
