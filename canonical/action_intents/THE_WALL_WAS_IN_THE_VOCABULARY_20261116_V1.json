@@ -5,7 +5,7 @@
  "action_intent_id": "THE_WALL_WAS_IN_THE_VOCABULARY_20261116_V1",
  "date": "2026-11-16",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "e53278dc7fc3cf7dda5bca321edaca0c15d121f2",
+ "canonical_base_commit": "4a49ab799fa1e19101bbc78bb1a4b933a8cdf803",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -143,7 +143,7 @@
  },
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "e53278dc7fc3cf7dda5bca321edaca0c15d121f2",
+  "canonical_base_commit": "4a49ab799fa1e19101bbc78bb1a4b933a8cdf803",
   "real_outcome": "Each of the 37 held-out pages that yields no first success is assigned to the world its own terminal explorer status proves, so the next capability work is aimed by measurement instead of by an inherited assumption.",
   "required_capability": "Honest classification of a search failure into unreachable, unexplored, state-blind or nothing-offered, with the repair each implies.",
   "iteration_limit": 1,
@@ -244,7 +244,7 @@
   },
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-16T20:03:01Z",
+   "checked_at_utc": "2026-11-16T20:05:19Z",
    "max_age_hours": 24,
    "source_classes_checked": [
     "BRAIN_INHERITED",
@@ -402,7 +402,7 @@
    "unresolved_plausible_dominators": [],
    "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-16T20:03:01Z",
+    "checked_at_utc": "2026-11-16T20:05:19Z",
     "max_age_hours": 2,
     "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
     "status": "READY",
