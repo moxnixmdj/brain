@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 454,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6857,
+  "research_index_records": 6858,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "dd2d1b809920f4eb7e509f9fdfde0f983360b6e0ff54935ce3b381ed7b6060eb"
+  "value": "a1c3f0dd9b7317aecbac7290f90ea44024db12a3f22e8bd2616d2549ab58d392"
  },
  "engines": [
   {
@@ -242469,6 +242469,41 @@
     "stops": 1,
     "v1": 1,
     "where_generalisation_stops_and_what_moves_it_20261112_v1": 1
+   }
+  },
+  {
+   "action_id": "WHERE_THE_WALL_ACTUALLY_IS_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "8dd36eef1196aa31be27f4ed845acfd6497a2d8747885020a7824a479f4b5e0a",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "action": 2,
+    "actually": 1,
+    "aimed": 1,
+    "coverage": 1,
+    "evidence": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instead": 1,
+    "key": 1,
+    "more": 1,
+    "no": 1,
+    "page": 1,
+    "primitives": 1,
+    "prior": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "reuse_the_existing_chromium_instrument_and_classify_each_unsolved_pages_terminal_explorer_status_into_one_of_four_worlds": 1,
+    "state": 1,
+    "the_repository_asserted_that_the_37_unsolved_held_out_pages_need_a_substrate_with_real_geometry_and_a_search_that_uses_the_whole_hand_but_that_run_already_existed_and_nobody_had_separated_unreachable_from_merely_unexplored_so_the_roadmap_was_built_on_an_unmeasured_assumption": 1,
+    "v1": 1,
+    "wall": 1,
+    "where_the_wall_actually_is_20261116_v1": 1,
+    "work": 1
    }
   },
   {
