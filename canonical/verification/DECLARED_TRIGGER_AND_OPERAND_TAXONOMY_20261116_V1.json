@@ -1,0 +1,1641 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "census_rows": [
+  {
+   "error": "NO_REPLY_TO_RESET_IN_20S",
+   "task": "ascending-numbers"
+  },
+  {
+   "error": "BRIDGE_EXCEPTION: svg.select(...)[0][0].getBBox is not a function",
+   "task": "bisect-angle"
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": "From:",
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": "To:",
+     "type": "text"
+    }
+   ],
+   "task": "book-flight-nodelay",
+   "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": "From:",
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": "To:",
+     "type": "text"
+    }
+   ],
+   "task": "book-flight",
+   "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+  },
+  {
+   "fields": [],
+   "task": "button-delay",
+   "utterance": "Click button ONE, wait 3 seconds, then click button TWO."
+  },
+  {
+   "fields": [],
+   "task": "buy-ticket",
+   "utterance": "Buy the ticket with the shortest duration."
+  },
+  {
+   "fields": [],
+   "task": "chase-circle",
+   "utterance": "Keep your mouse inside the circle as it moves around."
+  },
+  {
+   "fields": [],
+   "task": "choose-date-easy",
+   "utterance": "Select 12/26/2016 as the date and hit submit."
+  },
+  {
+   "fields": [],
+   "task": "choose-date-medium",
+   "utterance": "Select 12/22/2016 as the date and hit submit."
+  },
+  {
+   "fields": [],
+   "task": "choose-date-nodelay",
+   "utterance": "Select 11/10/2016 as the date and hit submit."
+  },
+  {
+   "fields": [],
+   "task": "choose-date",
+   "utterance": "Select 11/10/2016 as the date and hit submit."
+  },
+  {
+   "fields": [],
+   "task": "choose-list",
+   "utterance": "Select Martinique from the list and click Submit."
+  },
+  {
+   "fields": [],
+   "task": "circle-center",
+   "utterance": "Find and click on the center of the circle, then press submit."
+  },
+  {
+   "fields": [],
+   "task": "click-button-sequence",
+   "utterance": "Click button ONE, then click button TWO."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "click-button",
+   "utterance": "Click on the \"No\" button."
+  },
+  {
+   "fields": [],
+   "task": "click-checkboxes-large",
+   "utterance": "Select 1G, 4bVXp, bAB0vVJ, FiG, m95l, PwCmQQA, LZC5F, onP, K7, Ss410, jeKVl and click Submit."
+  },
+  {
+   "fields": [],
+   "task": "click-checkboxes-soft",
+   "utterance": "Select words similar to homes, unhappy, real, chubby and click Submit."
+  },
+  {
+   "fields": [],
+   "task": "click-checkboxes-transfer",
+   "utterance": "Select LZC5F, K7, PwCmQQA and click Submit."
+  },
+  {
+   "fields": [],
+   "task": "click-checkboxes",
+   "utterance": "Select 3PwCm, AwK7, 95l8, eKV and click Submit."
+  },
+  {
+   "fields": [],
+   "task": "click-collapsible-2-nodelay",
+   "utterance": "Expand the sections below, to find and click on the link \"Quis\"."
+  },
+  {
+   "fields": [],
+   "task": "click-collapsible-2",
+   "utterance": "Expand the sections below, to find and click on the link \"Quis\"."
+  },
+  {
+   "fields": [],
+   "task": "click-collapsible-nodelay",
+   "utterance": "Expand the section below and click submit."
+  },
+  {
+   "fields": [],
+   "task": "click-collapsible",
+   "utterance": "Expand the section below and click submit."
+  },
+  {
+   "fields": [],
+   "task": "click-color",
+   "utterance": "Click on the black colored box."
+  },
+  {
+   "fields": [],
+   "task": "click-dialog-2",
+   "utterance": "Click the button in the dialog box labeled \"OK\"."
+  },
+  {
+   "fields": [],
+   "task": "click-dialog",
+   "utterance": "Close the dialog box by clicking the \"x\"."
+  },
+  {
+   "fields": [],
+   "task": "click-link",
+   "utterance": "Click on the link \"ut\"."
+  },
+  {
+   "fields": [],
+   "task": "click-menu-2",
+   "utterance": "Click the \"Menu\" button, and then find and click on the item labeled \"Zoom Out\"."
+  },
+  {
+   "fields": [],
+   "task": "click-menu",
+   "utterance": "Select Milissent>Harmonia>Anita"
+  },
+  {
+   "fields": [],
+   "task": "click-option",
+   "utterance": "Select ULZC and click Submit."
+  },
+  {
+   "error": "BRIDGE_EXCEPTION: n.createSVGMatrix is not a function",
+   "task": "click-pie-nodelay"
+  },
+  {
+   "error": "BRIDGE_EXCEPTION: n.createSVGMatrix is not a function",
+   "task": "click-pie"
+  },
+  {
+   "fields": [],
+   "task": "click-scroll-list",
+   "utterance": "Select Ecuador from the scroll list and click Submit."
+  },
+  {
+   "fields": [],
+   "task": "click-shades",
+   "utterance": "Select all the shades of blue and press Submit."
+  },
+  {
+   "fields": [],
+   "task": "click-shape",
+   "utterance": "Click on a triangle"
+  },
+  {
+   "fields": [],
+   "task": "click-tab-2-easy",
+   "utterance": "Switch between the tabs to find and click on the link \"placerat.\"."
+  },
+  {
+   "fields": [],
+   "task": "click-tab-2-hard",
+   "utterance": "Switch between the tabs to find and click on the link \"Purus\"."
+  },
+  {
+   "fields": [],
+   "task": "click-tab-2-medium",
+   "utterance": "Switch between the tabs to find and click on the link \"placerat.\"."
+  },
+  {
+   "fields": [],
+   "task": "click-tab-2",
+   "utterance": "Switch between the tabs to find and click on the link \"egestas\"."
+  },
+  {
+   "fields": [],
+   "task": "click-tab",
+   "utterance": "Click on Tab #2."
+  },
+  {
+   "fields": [],
+   "task": "click-test-2",
+   "utterance": "Click button ONE."
+  },
+  {
+   "fields": [],
+   "task": "click-test-transfer",
+   "utterance": "Click button ONE."
+  },
+  {
+   "fields": [],
+   "task": "click-test",
+   "utterance": "Click the button."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "click-widget",
+   "utterance": "Click on a \"radio\" widget."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "copy-paste-2",
+   "utterance": "Copy the text from the 3rd text area below and paste it into the text input, then press Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "copy-paste",
+   "utterance": "Copy the text in the textarea below, paste it into the textbox and press Submit."
+  },
+  {
+   "fields": [],
+   "task": "count-shape",
+   "utterance": "How many large blue items are there?"
+  },
+  {
+   "fields": [],
+   "task": "count-sides",
+   "utterance": "Press the button that correctly denotes how many sides the shape has."
+  },
+  {
+   "fields": [],
+   "task": "daily-calendar",
+   "utterance": "Create a 90 mins event named \"Party\", between 12PM and 4PM."
+  },
+  {
+   "fields": [],
+   "task": "drag-box",
+   "utterance": "Drag the smaller box so that it is completely inside the larger box."
+  },
+  {
+   "fields": [],
+   "task": "drag-circle",
+   "utterance": "Drag the circle down then press Submit."
+  },
+  {
+   "error": "BRIDGE_EXCEPTION: cube is not defined",
+   "task": "drag-cube"
+  },
+  {
+   "fields": [],
+   "task": "drag-items-grid",
+   "utterance": "Drag Winna to the bottom right."
+  },
+  {
+   "fields": [],
+   "task": "drag-items",
+   "utterance": "Drag Milissent to the 1st position."
+  },
+  {
+   "fields": [],
+   "task": "drag-shapes-2",
+   "utterance": "Drag all blue shapes into the left box, and everything else into the right box."
+  },
+  {
+   "fields": [],
+   "task": "drag-shapes",
+   "utterance": "Drag all triangles into the black box."
+  },
+  {
+   "fields": [],
+   "task": "drag-single-shape",
+   "utterance": "Drag the item down then press Submit."
+  },
+  {
+   "fields": [],
+   "task": "drag-sort-numbers",
+   "utterance": "Sort the numbers in increasing order, starting with the lowest number at the top of the list."
+  },
+  {
+   "fields": [],
+   "task": "draw-circle",
+   "utterance": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done."
+  },
+  {
+   "fields": [],
+   "task": "draw-line",
+   "utterance": "Draw a vertical line that runs through the dot, then press submit."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-delete",
+   "utterance": "Find the email by Enrichetta and click the trash icon to delete it."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-forward-nl-turk",
+   "utterance": "Find the email from Janot and send it to Wren."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-forward-nl",
+   "utterance": "Forward the email from Peggi to Jolynn."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-forward",
+   "utterance": "Find the email by Enrichetta and forward that email to Roz."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-important",
+   "utterance": "Find the email by Enrichetta and click the star icon to mark it as important."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-nl-turk",
+   "utterance": "Find the important email from Janot"
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-noscroll",
+   "utterance": "Find the email by Enrichetta and forward that email to Roz."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-reply",
+   "utterance": "Find the email by Enrichetta and reply to them with the text \"Felis massa ac nulla.\"."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox-star-reply",
+   "utterance": "Find the email by Enrichetta and reply to them with the text \"Felis massa ac nulla.\"."
+  },
+  {
+   "fields": [],
+   "task": "email-inbox",
+   "utterance": "Find the email by Enrichetta and reply to them with the text \"Egestas duis.\"."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "date"
+    }
+   ],
+   "task": "enter-date",
+   "utterance": "Enter 08/13/2018 as the date and hit submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "password"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "password"
+    }
+   ],
+   "task": "enter-password",
+   "utterance": "Enter the password \"xULZC\" into both text fields and press submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "enter-text-2",
+   "utterance": "Type \"donovan\" in all upper case letters in the text input and press Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "enter-text-dynamic",
+   "utterance": "Enter \"ZC5F\" into the text field and press Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "enter-text",
+   "utterance": "Enter \"Donovan\" into the text field and press Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "time"
+    }
+   ],
+   "task": "enter-time",
+   "utterance": "Enter 1:13 PM as the time and press submit."
+  },
+  {
+   "fields": [],
+   "task": "find-greatest",
+   "utterance": "Find and pick the card with the greatest number, then press submit."
+  },
+  {
+   "fields": [],
+   "task": "find-midpoint",
+   "utterance": "Find and click on the shortest mid-point between the two points, then press submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "find-word",
+   "utterance": "Find the 5th word in the paragraph, type that into the textbox and press \"Submit\"."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "focus-text-2",
+   "utterance": "Focus into the 3rd input textbox."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "focus-text",
+   "utterance": "Focus into the textbox."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "form-sequence-2",
+   "utterance": "Check the 3rd radio button and enter the number \"10\" into the 2nd textbox."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "form-sequence-3",
+   "utterance": "Choose 6ft 1in from the dropdown, then click the button labeled \"No\"."
+  },
+  {
+   "fields": [],
+   "task": "form-sequence",
+   "utterance": "Select 5 with the slider, click the 3rd checkbox, then hit Submit."
+  },
+  {
+   "fields": [],
+   "task": "generate-number",
+   "utterance": "Generate an even number, then press submit."
+  },
+  {
+   "fields": [],
+   "task": "grid-coordinate",
+   "utterance": "Click on the grid coordinate (2,-1)."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "number"
+    }
+   ],
+   "task": "guess-number",
+   "utterance": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number."
+  },
+  {
+   "fields": [],
+   "task": "highlight-text-2",
+   "utterance": "Highlight the text in the 2nd paragraph and click submit."
+  },
+  {
+   "fields": [],
+   "task": "highlight-text",
+   "utterance": "Highlight the text in the paragraph below and click submit."
+  },
+  {
+   "fields": [],
+   "task": "hot-cold",
+   "utterance": "Find and click on the HOT area."
+  },
+  {
+   "error": "NO_REPLY_TO_RESET_IN_20S",
+   "task": "hover-shape"
+  },
+  {
+   "fields": [],
+   "task": "identify-shape",
+   "utterance": "Click the button that best describes the figure below."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "password"
+    }
+   ],
+   "task": "login-user-popup",
+   "utterance": "Enter the username \"olin\" and the password \"ULZ\" into the text fields and press login."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "password"
+    }
+   ],
+   "task": "login-user",
+   "utterance": "Enter the username \"olin\" and the password \"ULZ\" into the text fields and press login."
+  },
+  {
+   "error": "BRIDGE_EXCEPTION: shape.getBBox is not a function",
+   "task": "moving-items"
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "multi-layouts",
+   "utterance": "Search for thriller movies directed by George from year 1994."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "multi-orderings",
+   "utterance": "Search for thriller movies directed by George from year 1994."
+  },
+  {
+   "fields": [],
+   "task": "navigate-tree",
+   "utterance": "Navigate through the file tree. Find and click on the folder or file named \"Cristin\"."
+  },
+  {
+   "fields": [],
+   "task": "number-checkboxes",
+   "utterance": "Draw the number \"8\" in the checkboxes using the example on the right and press Submit when finished."
+  },
+  {
+   "fields": [],
+   "task": "odd-or-even",
+   "utterance": "Mark the numbers below as odd or even and press submit when done."
+  },
+  {
+   "fields": [],
+   "task": "order-food",
+   "utterance": "Order 3 items that are meat"
+  },
+  {
+   "fields": [],
+   "task": "phone-book",
+   "utterance": "Find Larissa in the contact book and click on their email."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "read-table-2",
+   "utterance": "Enter the value that corresponds with each label into the form and submit when done."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "read-table",
+   "utterance": "Enter the value of Language into the text field and press Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "resize-textarea",
+   "utterance": "Resize the textarea so that the height is larger than its initial size then press Submit."
+  },
+  {
+   "fields": [],
+   "task": "right-angle",
+   "utterance": "Add a third point to create a right angle, then press submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "scroll-text-2",
+   "utterance": "Scroll the textarea to the top of the text hit submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    },
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "scroll-text",
+   "utterance": "Find the last word in the text area, enter it into the text field and hit Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "search-engine",
+   "utterance": "Use the textbox to enter \"Nathalie\" and press \"Search\", then find and click the 3rd search result."
+  },
+  {
+   "fields": [],
+   "task": "sign-agreement",
+   "utterance": "Scroll to the bottom of the textarea, enter the name \"Kanesha\" then press \"Agree\""
+  },
+  {
+   "fields": [],
+   "task": "simon-says",
+   "utterance": "Push the buttons in the order displayed."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "simple-algebra",
+   "utterance": "Solve for x and type your answer into the textbox. Press Submit when done."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "simple-arithmetic",
+   "utterance": "Solve the math problem and type your answer into the textbox. Press submit when done."
+  },
+  {
+   "fields": [],
+   "task": "social-media-all",
+   "utterance": "Click the \"Reply\" button on all posts by @eget and then click Submit."
+  },
+  {
+   "fields": [],
+   "task": "social-media-some",
+   "utterance": "Click the \"Reply\" button on 3 posts by @eget and then click Submit."
+  },
+  {
+   "fields": [],
+   "task": "social-media",
+   "utterance": "For the user @lorem, click on the \"Mute\" button."
+  },
+  {
+   "fields": [],
+   "task": "stock-market",
+   "utterance": "Buy WIN stock when the price is less than $63.60."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "terminal",
+   "utterance": "Use the terminal below to delete a file that has no file extension."
+  },
+  {
+   "fields": [],
+   "task": "text-editor",
+   "utterance": "Using the text editor, give the text viverra. the style underlined and press Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "text-transform",
+   "utterance": "Type the text below into the text field and press Submit."
+  },
+  {
+   "fields": [],
+   "task": "tic-tac-toe",
+   "utterance": "Playing as 'X', win a game of tic-tac-toe."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "unicode-test",
+   "utterance": "Click on the \"\u00c7\u00a1\u00ae\u00e5\u00ae\u0161\" button."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "use-autocomplete-nodelay",
+   "utterance": "Enter an item that starts with \"Sur\" and ends with \"ame\"."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "use-autocomplete",
+   "utterance": "Enter an item that starts with \"Sur\" and ends with \"ame\"."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "use-colorwheel-2",
+   "utterance": "Select the following color with the color picker and hit Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "use-colorwheel",
+   "utterance": "Select magenta with the color picker and hit Submit."
+  },
+  {
+   "fields": [],
+   "task": "use-slider-2",
+   "utterance": "Set the sliders to the combination [15,15,16] and submit."
+  },
+  {
+   "fields": [],
+   "task": "use-slider",
+   "utterance": "Select 108 with the slider and hit Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": ""
+    }
+   ],
+   "task": "use-spinner",
+   "utterance": "Select 7 with the spinner and hit Submit."
+  },
+  {
+   "fields": [
+    {
+     "max": null,
+     "maxlength": null,
+     "min": null,
+     "pattern": null,
+     "placeholder": null,
+     "type": "text"
+    }
+   ],
+   "task": "visual-addition",
+   "utterance": "Type the total number of blocks into the textbox and press Submit."
+  }
+ ],
+ "declared_surface": {
+  "declaring_pages": [
+   "enter-date",
+   "enter-password",
+   "enter-time",
+   "guess-number",
+   "login-user",
+   "login-user-popup"
+  ],
+  "input_type_counts": {
+   "(none)": 14,
+   "date": 1,
+   "number": 1,
+   "password": 4,
+   "text": 37,
+   "time": 1
+  },
+  "pages_declaring_a_format": 6,
+  "pages_usable": 123,
+  "pages_with_a_typeable_field": 39,
+  "pages_with_no_typeable_field": 84
+ },
+ "generated_utc": "2026-11-16T23:40:00Z",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "producer_cognition_model_dependency_count": 0,
+ "question": "if the operand wall is real, is there a trigger that transfers, and what do the unsolved pages actually lack?",
+ "schema": "BRAIN_DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_V1",
+ "taxonomy": {
+  "by_class": {
+   "A_CONSTRAINED_SEARCH": {
+    "n": 2,
+    "pages": [
+     "multi-layouts",
+     "multi-orderings"
+    ]
+   },
+   "A_CONTINUOUS_SIZE": {
+    "n": 1,
+    "pages": [
+     "resize-textarea"
+    ]
+   },
+   "A_COORDINATED_SEQUENCE": {
+    "n": 1,
+    "pages": [
+     "form-sequence-2"
+    ]
+   },
+   "A_COUNT_OF_WHAT_IS_SHOWN": {
+    "n": 1,
+    "pages": [
+     "visual-addition"
+    ]
+   },
+   "A_GEOMETRIC_CONSTRUCTION": {
+    "n": 1,
+    "pages": [
+     "bisect-angle"
+    ]
+   },
+   "A_NAMED_CONTROL": {
+    "n": 2,
+    "pages": [
+     "sign-agreement",
+     "social-media"
+    ]
+   },
+   "A_PERCEPTUAL_PROPERTY": {
+    "n": 5,
+    "pages": [
+     "click-checkboxes-soft",
+     "click-shades",
+     "drag-shapes-2",
+     "hover-shape",
+     "text-editor"
+    ]
+   },
+   "A_POINT_NOT_AN_ELEMENT": {
+    "n": 6,
+    "pages": [
+     "circle-center",
+     "draw-circle",
+     "draw-line",
+     "find-midpoint",
+     "hot-cold",
+     "right-angle"
+    ]
+   },
+   "A_RENDERED_PATTERN": {
+    "n": 1,
+    "pages": [
+     "number-checkboxes"
+    ]
+   },
+   "A_SUSTAINED_MOUSE_STATE": {
+    "n": 2,
+    "pages": [
+     "chase-circle",
+     "moving-items"
+    ]
+   },
+   "A_TIME_PLACED_ON_A_GRID": {
+    "n": 3,
+    "pages": [
+     "choose-date",
+     "choose-date-nodelay",
+     "daily-calendar"
+    ]
+   },
+   "A_VALUE_CARRIED_ACROSS_FIELDS": {
+    "n": 4,
+    "pages": [
+     "copy-paste",
+     "copy-paste-2",
+     "find-word",
+     "read-table-2"
+    ]
+   },
+   "CONTINUOUS_TO_POSITION": {
+    "n": 5,
+    "pages": [
+     "form-sequence",
+     "use-colorwheel",
+     "use-colorwheel-2",
+     "use-slider",
+     "use-slider-2"
+    ]
+   },
+   "FEEDBACK_ACROSS_TURNS": {
+    "n": 3,
+    "pages": [
+     "guess-number",
+     "simon-says",
+     "tic-tac-toe"
+    ]
+   },
+   "FIND_BY_CONTENT": {
+    "n": 5,
+    "pages": [
+     "click-menu",
+     "email-inbox-forward-nl-turk",
+     "social-media-all",
+     "social-media-some",
+     "terminal"
+    ]
+   },
+   "WORLD_KNOWLEDGE": {
+    "n": 4,
+    "pages": [
+     "book-flight",
+     "book-flight-nodelay",
+     "odd-or-even",
+     "order-food"
+    ]
+   }
+  },
+  "classes": 16,
+  "largest_class": 6,
+  "pages_unsolved": 46,
+  "rows": [
+   {
+    "class": "A_GEOMETRIC_CONSTRUCTION",
+    "missing_factor": "the answer is a placement satisfying a stated relation",
+    "task": "bisect-angle",
+    "typeable_fields": 0,
+    "utterance": "Create a line that bisects the angle evenly in two, then press submit."
+   },
+   {
+    "class": "WORLD_KNOWLEDGE",
+    "missing_factor": "the answer is a fact about the world, not a function of the page",
+    "task": "book-flight",
+    "typeable_fields": 2,
+    "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+   },
+   {
+    "class": "WORLD_KNOWLEDGE",
+    "missing_factor": "the answer is a fact about the world, not a function of the page",
+    "task": "book-flight-nodelay",
+    "typeable_fields": 2,
+    "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016."
+   },
+   {
+    "class": "A_SUSTAINED_MOUSE_STATE",
+    "missing_factor": "the action is a held state, not a discrete step",
+    "task": "chase-circle",
+    "typeable_fields": 0,
+    "utterance": "Keep your mouse inside the circle as it moves around."
+   },
+   {
+    "class": "A_TIME_PLACED_ON_A_GRID",
+    "missing_factor": "the date is derivable, its cell must be located",
+    "task": "choose-date",
+    "typeable_fields": 0,
+    "utterance": "Select 11/10/2016 as the date and hit submit."
+   },
+   {
+    "class": "A_TIME_PLACED_ON_A_GRID",
+    "missing_factor": "the date is derivable, its cell must be located",
+    "task": "choose-date-nodelay",
+    "typeable_fields": 0,
+    "utterance": "Select 11/10/2016 as the date and hit submit."
+   },
+   {
+    "class": "A_POINT_NOT_AN_ELEMENT",
+    "missing_factor": "no element names the answer; the answer is a location",
+    "task": "circle-center",
+    "typeable_fields": 0,
+    "utterance": "Find and click on the center of the circle, then press submit."
+   },
+   {
+    "class": "A_PERCEPTUAL_PROPERTY",
+    "missing_factor": "the element is present but only a look tells which",
+    "task": "click-checkboxes-soft",
+    "typeable_fields": 0,
+    "utterance": "Select words similar to homes, unhappy, real, chubby and click Submit."
+   },
+   {
+    "class": "FIND_BY_CONTENT",
+    "missing_factor": "the target is present and named; finding it is the work",
+    "task": "click-menu",
+    "typeable_fields": 0,
+    "utterance": "Select Milissent>Harmonia>Anita"
+   },
+   {
+    "class": "A_PERCEPTUAL_PROPERTY",
+    "missing_factor": "the element is present but only a look tells which",
+    "task": "click-shades",
+    "typeable_fields": 0,
+    "utterance": "Select all the shades of blue and press Submit."
+   },
+   {
+    "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+    "missing_factor": "the page holds the answer; it must be moved and constrained",
+    "task": "copy-paste",
+    "typeable_fields": 2,
+    "utterance": "Copy the text in the textarea below, paste it into the textbox and press Submit."
+   },
+   {
+    "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+    "missing_factor": "the page holds the answer; it must be moved and constrained",
+    "task": "copy-paste-2",
+    "typeable_fields": 4,
+    "utterance": "Copy the text from the 3rd text area below and paste it into the text input, then press Submit."
+   },
+   {
+    "class": "A_TIME_PLACED_ON_A_GRID",
+    "missing_factor": "the date is derivable, its cell must be located",
+    "task": "daily-calendar",
+    "typeable_fields": 0,
+    "utterance": "Create a 90 mins event named \"Party\", between 12PM and 4PM."
+   },
+   {
+    "class": "A_PERCEPTUAL_PROPERTY",
+    "missing_factor": "the element is present but only a look tells which",
+    "task": "drag-shapes-2",
+    "typeable_fields": 0,
+    "utterance": "Drag all blue shapes into the left box, and everything else into the right box."
+   },
+   {
+    "class": "A_POINT_NOT_AN_ELEMENT",
+    "missing_factor": "no element names the answer; the answer is a location",
+    "task": "draw-circle",
+    "typeable_fields": 0,
+    "utterance": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done."
+   },
+   {
+    "class": "A_POINT_NOT_AN_ELEMENT",
+    "missing_factor": "no element names the answer; the answer is a location",
+    "task": "draw-line",
+    "typeable_fields": 0,
+    "utterance": "Draw a vertical line that runs through the dot, then press submit."
+   },
+   {
+    "class": "FIND_BY_CONTENT",
+    "missing_factor": "the target is present and named; finding it is the work",
+    "task": "email-inbox-forward-nl-turk",
+    "typeable_fields": 0,
+    "utterance": "Find the email from Janot and send it to Wren."
+   },
+   {
+    "class": "A_POINT_NOT_AN_ELEMENT",
+    "missing_factor": "no element names the answer; the answer is a location",
+    "task": "find-midpoint",
+    "typeable_fields": 0,
+    "utterance": "Find and click on the shortest mid-point between the two points, then press submit."
+   },
+   {
+    "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+    "missing_factor": "the page holds the answer; it must be moved and constrained",
+    "task": "find-word",
+    "typeable_fields": 1,
+    "utterance": "Find the 5th word in the paragraph, type that into the textbox and press \"Submit\"."
+   },
+   {
+    "class": "CONTINUOUS_TO_POSITION",
+    "missing_factor": "the value is derivable, the widget is not a text field",
+    "task": "form-sequence",
+    "typeable_fields": 0,
+    "utterance": "Select 5 with the slider, click the 3rd checkbox, then hit Submit."
+   },
+   {
+    "class": "A_COORDINATED_SEQUENCE",
+    "missing_factor": "each step exists; the sequence is the missing thing",
+    "task": "form-sequence-2",
+    "typeable_fields": 3,
+    "utterance": "Check the 3rd radio button and enter the number \"10\" into the 2nd textbox."
+   },
+   {
+    "class": "FEEDBACK_ACROSS_TURNS",
+    "missing_factor": "no single action is correct; the page must be asked",
+    "task": "guess-number",
+    "typeable_fields": 1,
+    "utterance": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number."
+   },
+   {
+    "class": "A_POINT_NOT_AN_ELEMENT",
+    "missing_factor": "no element names the answer; the answer is a location",
+    "task": "hot-cold",
+    "typeable_fields": 0,
+    "utterance": "Find and click on the HOT area."
+   },
+   {
+    "class": "A_PERCEPTUAL_PROPERTY",
+    "missing_factor": "the element is present but only a look tells which",
+    "task": "hover-shape",
+    "typeable_fields": 0,
+    "utterance": "Keep the mouse hovered over the colored square."
+   },
+   {
+    "class": "A_SUSTAINED_MOUSE_STATE",
+    "missing_factor": "the action is a held state, not a discrete step",
+    "task": "moving-items",
+    "typeable_fields": 0,
+    "utterance": "Click as many moving circles as possible."
+   },
+   {
+    "class": "A_CONSTRAINED_SEARCH",
+    "missing_factor": "several conditions must hold at once over the page's records",
+    "task": "multi-layouts",
+    "typeable_fields": 3,
+    "utterance": "Search for thriller movies directed by George from year 1994."
+   },
+   {
+    "class": "A_CONSTRAINED_SEARCH",
+    "missing_factor": "several conditions must hold at once over the page's records",
+    "task": "multi-orderings",
+    "typeable_fields": 3,
+    "utterance": "Search for thriller movies directed by George from year 1994."
+   },
+   {
+    "class": "A_RENDERED_PATTERN",
+    "missing_factor": "the answer is a shape that must be built cell by cell",
+    "task": "number-checkboxes",
+    "typeable_fields": 0,
+    "utterance": "Draw the number \"8\" in the checkboxes using the example on the right and press Submit when finished."
+   },
+   {
+    "class": "WORLD_KNOWLEDGE",
+    "missing_factor": "the answer is a fact about the world, not a function of the page",
+    "task": "odd-or-even",
+    "typeable_fields": 0,
+    "utterance": "Mark the numbers below as odd or even and press submit when done."
+   },
+   {
+    "class": "WORLD_KNOWLEDGE",
+    "missing_factor": "the answer is a fact about the world, not a function of the page",
+    "task": "order-food",
+    "typeable_fields": 0,
+    "utterance": "Order 3 items that are meat"
+   },
+   {
+    "class": "A_VALUE_CARRIED_ACROSS_FIELDS",
+    "missing_factor": "the page holds the answer; it must be moved and constrained",
+    "task": "read-table-2",
+    "typeable_fields": 2,
+    "utterance": "Enter the value that corresponds with each label into the form and submit when done."
+   },
+   {
+    "class": "A_CONTINUOUS_SIZE",
+    "missing_factor": "the answer is a size, not a value or an element",
+    "task": "resize-textarea",
+    "typeable_fields": 1,
+    "utterance": "Resize the textarea so that the height is larger than its initial size then press Submit."
+   },
+   {
+    "class": "A_POINT_NOT_AN_ELEMENT",
+    "missing_factor": "no element names the answer; the answer is a location",
+    "task": "right-angle",
+    "typeable_fields": 0,
+    "utterance": "Add a third point to create a right angle, then press submit."
+   },
+   {
+    "class": "A_NAMED_CONTROL",
+    "missing_factor": "the control is named; pressing it is the whole task",
+    "task": "sign-agreement",
+    "typeable_fields": 0,
+    "utterance": "Scroll to the bottom of the textarea, enter the name \"Kanesha\" then press \"Agree\""
+   },
+   {
+    "class": "FEEDBACK_ACROSS_TURNS",
+    "missing_factor": "no single action is correct; the page must be asked",
+    "task": "simon-says",
+    "typeable_fields": 0,
+    "utterance": "Push the buttons in the order displayed."
+   },
+   {
+    "class": "A_NAMED_CONTROL",
+    "missing_factor": "the control is named; pressing it is the whole task",
+    "task": "social-media",
+    "typeable_fields": 0,
+    "utterance": "For the user @lorem, click on the \"Mute\" button."
+   },
+   {
+    "class": "FIND_BY_CONTENT",
+    "missing_factor": "the target is present and named; finding it is the work",
+    "task": "social-media-all",
+    "typeable_fields": 0,
+    "utterance": "Click the \"Reply\" button on all posts by @eget and then click Submit."
+   },
+   {
+    "class": "FIND_BY_CONTENT",
+    "missing_factor": "the target is present and named; finding it is the work",
+    "task": "social-media-some",
+    "typeable_fields": 0,
+    "utterance": "Click the \"Reply\" button on 3 posts by @eget and then click Submit."
+   },
+   {
+    "class": "FIND_BY_CONTENT",
+    "missing_factor": "the target is present and named; finding it is the work",
+    "task": "terminal",
+    "typeable_fields": 1,
+    "utterance": "Use the terminal below to delete a file that has no file extension."
+   },
+   {
+    "class": "A_PERCEPTUAL_PROPERTY",
+    "missing_factor": "the element is present but only a look tells which",
+    "task": "text-editor",
+    "typeable_fields": 0,
+    "utterance": "Using the text editor, give the text viverra. the style underlined and press Submit."
+   },
+   {
+    "class": "FEEDBACK_ACROSS_TURNS",
+    "missing_factor": "no single action is correct; the page must be asked",
+    "task": "tic-tac-toe",
+    "typeable_fields": 0,
+    "utterance": "Playing as 'X', win a game of tic-tac-toe."
+   },
+   {
+    "class": "CONTINUOUS_TO_POSITION",
+    "missing_factor": "the value is derivable, the widget is not a text field",
+    "task": "use-colorwheel",
+    "typeable_fields": 1,
+    "utterance": "Select magenta with the color picker and hit Submit."
+   },
+   {
+    "class": "CONTINUOUS_TO_POSITION",
+    "missing_factor": "the value is derivable, the widget is not a text field",
+    "task": "use-colorwheel-2",
+    "typeable_fields": 1,
+    "utterance": "Select the following color with the color picker and hit Submit."
+   },
+   {
+    "class": "CONTINUOUS_TO_POSITION",
+    "missing_factor": "the value is derivable, the widget is not a text field",
+    "task": "use-slider",
+    "typeable_fields": 0,
+    "utterance": "Select 108 with the slider and hit Submit."
+   },
+   {
+    "class": "CONTINUOUS_TO_POSITION",
+    "missing_factor": "the value is derivable, the widget is not a text field",
+    "task": "use-slider-2",
+    "typeable_fields": 0,
+    "utterance": "Set the sliders to the combination [15,15,16] and submit."
+   },
+   {
+    "class": "A_COUNT_OF_WHAT_IS_SHOWN",
+    "missing_factor": "the count is derivable, nothing else is missing",
+    "task": "visual-addition",
+    "typeable_fields": 1,
+    "utterance": "Type the total number of blocks into the textbox and press Submit."
+   }
+  ]
+ },
+ "why_the_algebra_did_not_transfer": {
+  "cause": "every rule in derived_value_v1.derivations is gated on a hand-written English phrase: LAST_WORD on 'last word'/'ends with', JOIN_SHOWN on 'below'/'shown'/'following'/'these', CLOCK24 on a type=time field or the word 'time', CASE_UPPER on 'upper'/'capital'",
+  "measured_elsewhere": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json: +5 pages, all inside the 8 design pages, 0 of 121 held out",
+  "reading": "the phrase is a fact about the eight pages the author read, not a fact about a page the author never saw. The part was a lookup with nothing to look up, not a method that failed to generalise."
+ }
+}
