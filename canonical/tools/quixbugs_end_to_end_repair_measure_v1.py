@@ -183,6 +183,17 @@ def measure(root: pathlib.Path, name: str, *, wall_budget_s: float, timeout_s: i
         except Exception as error:  # noqa: BLE001
             row.update(loop_status="LOOP_RAISED", loop_error=type(error).__name__,
                        loop_detail=str(error)[:300])
+            # A defective program that never terminates gives the oracle no failure count to guide or
+            # confirm a repair. That is a category of its own, not a crash and not a refusal: the
+            # search cannot even start, because the baseline never finishes.
+            if "BASELINE_TIMEOUT" in str(error):
+                row["stage"] = "UNMEASURABLE__DEFECT_DOES_NOT_TERMINATE"
+            elif "BASELINE_ALREADY_PASSES" in str(error):
+                row["stage"] = "DEFECT_DOES_NOT_REPRODUCE"
+            elif "BASELINE_FAILURE_METRIC_UNPARSEABLE" in str(error):
+                row["stage"] = "UNMEASURABLE__BASELINE_METRIC_UNPARSEABLE"
+            else:
+                row["stage"] = "LOOP_RAISED__" + type(error).__name__
             row["seconds"] = round(time.time() - started, 1)
             return row
 

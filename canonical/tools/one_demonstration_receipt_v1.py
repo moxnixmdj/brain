@@ -50,6 +50,11 @@ def reclassify(row: dict[str, Any]) -> str:
     number would understate what the hand-listed basis actually did.
     """
     stage = str(row.get("stage"))
+    if stage in ("None", ""):
+        detail = str(row.get("loop_detail") or "")
+        if "BASELINE_TIMEOUT" in detail:
+            return "UNMEASURABLE__DEFECT_DOES_NOT_TERMINATE"
+        return "UNMEASURABLE__" + (detail or "NO_STAGE_RECORDED")
     if stage == "NOT_REPAIRED__NO_CANDIDATE":
         accepted = row.get("accepted_edit_count") or 0
         return ("NOT_REPAIRED__PARTIAL_EDITS_DISCARDED" if accepted
@@ -107,6 +112,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         control[str(row["task"])] = {
             "stage": reclassify(row),
             "accepted_edit_count": row.get("accepted_edit_count"),
+            "baseline_timed_out": bool((row.get("baseline") or {}).get("timed_out")),
             "tested_candidate_count": row.get("tested_candidate_count"),
             "seconds": row.get("seconds"),
         }
