@@ -64,11 +64,29 @@ def run_page(bridge: Any, task: str, seed: int, budget: int) -> dict[str, Any]:
 
     # The reward is read HERE and only here, after the arm has stopped.
     won = bool(measure.succeeded(observation))
+    # THE ARM'S OWN VERDICT, NOT THE LABEL ON IT. Measured 2026-11-16: six pages were refused with
+    # `refused_part` (half an instruction understood) while `refusal` was None, and the census
+    # counted them as neither refused nor failing -- a measurement that under-reports its own
+    # refusals is measuring its optimism. The refusal is what the arm DID.
+    label = arm.contract.get("refusal")
+    if label is None and arm.refused:
+        part = arm.contract.get("refused_part")
+        label = f"REFUSED__HALF_UNDERSTOOD:{part}" if part else "REFUSED__THE_ARM_CANNOT_ACT"
+    # AND THE OTHER HALF OF THE SAME LIE: an arm that is NOT refused, holds a clause, and still
+    # emits nothing has failed to turn its own clause into an action. Calling that "not refused"
+    # made 16 pages invisible in the census -- the arm had understood the words and could not
+    # reach the thing. A refusal that costs no words spent is still a refusal, and it must be
+    # counted as one or the census measures only the failures that are convenient to name.
+    if label is None and not arm.refused and not actions and not won:
+        held = [str(c.get("operator")) for c in arm.contract.get("clauses") or []]
+        label = ("REFUSED__THE_CLAUSE_COULD_NOT_BECOME_AN_ACTION:" + ",".join(held)
+                 if held else "REFUSED__NOTHING_TO_ACT_ON")
     return {
         "page": task,
         "utterance": utterance,
         "refused": bool(arm.refused),
-        "refusal": arm.contract.get("refusal"),
+        "refusal": label,
+        "refused_part": arm.contract.get("refused_part"),
         "operators": [c["operator"] for c in arm.contract.get("clauses") or []],
         "actions": actions,
         "won": won,

@@ -577,6 +577,24 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
         contract["clauses"].append({"operator": "ORDER", "direction": "descending",
                                     "provenance": "descending order"})
 
+    # --------------------------------------------------------------------------------------- #
+    # A KIND IS A THING THE PAGE STATES, AND IT IS THE LAST RESORT -- AFTER every path that names
+    # or describes a target. Measured 2026-11-16 twice: putting it first cost 12 pages the named,
+    # typed and described paths already solved ("enter text into the field", "click the button
+    # labelled X, then ..."), because a kind answers "which one" only when nothing else does.
+    # "Click the button." is four words, one element whose tag is `button`, and it was refused as
+    # NO_CLAUSE_UNDERSTOOD while the `CLICK_KIND` operator with its checker sat unused.
+    # --------------------------------------------------------------------------------------- #
+    if not contract["clauses"]:
+        kinds = _kind_action(said, observation)
+        if kinds is not None:
+            if kinds.get("unresolved"):
+                contract["refusal"] = kinds["unresolved"]
+                contract["refusal_detail"] = kinds.get("detail")
+                return contract
+            contract["clauses"] = [kinds["clause"]]
+            return contract
+
     if not contract["clauses"]:
         contract["refusal"] = NO_CLAUSE
     return contract
@@ -613,6 +631,83 @@ _CONTROL_VERBS = ("reply", "respond", "forward", "send", "submit", "delete", "tr
 #: alone cannot tell `close-forward` from `send-forward` -- measured 2026-11-16, where the forward
 #: form was dismissed instead of sent.
 _NOT_A_SEND = ("close", "cancel", "back", "dismiss", "delete", "trash", "remove")
+
+
+#: What the instruction can call a KIND, and the tags/roles that are that kind. Only kinds the
+#: page STATES are here -- a kind that has to be inferred from a picture is refused elsewhere.
+_KIND_WORDS = {
+    "button": {"button"},
+    "link": {"a"},
+    "checkbox": {"input:checkbox"},
+    "textbox": {"input:text", "input", "textarea"},
+    "input": {"input", "textarea"},
+    "field": {"input", "textarea"},
+    "image": {"img"},
+}
+
+
+def _kind_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Press the one element of the KIND the instruction names.
+
+    This is not a description and not a vocabulary entry per page: `tag` is stated by every page,
+    and the instruction names the kind in a word. `CLICK_KIND` is the operator that already
+    decided this; it had no producer.
+    """
+    low = instruction.lower()
+    wanted = None
+    for word in re.findall(r"[a-z]+", low):
+        if word in _KIND_WORDS:
+            wanted = word
+            break
+    if wanted is None:
+        return None
+    if not re.search(r"\b(?:click|press|hit|tap)\b", low):
+        return None                      # the kind is named but nothing is asked of it
+    # ONLY WHEN THE KIND IS THE WHOLE SUBJECT. Measured 2026-11-16: firing on any mention of
+    # "button"/"input"/"field" cost 12 pages that the named, typed and described paths already
+    # solved -- "enter text into the field", "click the button labelled X , then ..." all name
+    # something else. A kind answers "which one" only when nothing else does.
+    if quotes(instruction):
+        return None
+    if re.search(r"\b(?:enter|type|fill|input|put|write)\b", low):
+        return None
+    if _DROP_WORDS.search(low) or (set(re.findall(r"[a-z]+", low)) & _DESCRIPTOR_CUES):
+        return None
+    # and the sentence must be ABOUT the kind, not merely mentioning it: after removing the kind's
+    # own word and the press verb, nothing that could name a different target may remain.
+    residue = [w for w in re.findall(r"[a-z]+", low)
+               if w not in _KIND_WORDS and w not in {"click", "press", "hit", "tap", "on", "the",
+                                                      "a", "an", "at", "then", "and", "this", "it"}]
+    if residue:
+        return None
+    tags = _KIND_WORDS[wanted]
+    candidates = []
+    for element in observation.get("elements") or []:
+        if not element.get("can_click"):
+            continue
+        tag = str(element.get("tag") or "").lower()
+        kind = str(element.get("type") or "").lower()
+        state = tag if not kind else f"{tag}:{kind}"
+        if tag in tags or state in tags:
+            candidates.append(int(element["index"]))
+    if not candidates:
+        return {"unresolved": OBSERVABLE_ABSENT,
+                "detail": {"kind": wanted, "reason": "NO_ELEMENT_OF_THAT_KIND"}}
+    if len(candidates) == 1:
+        return {"clause": {"operator": "CLICK_KIND", "kinds": [wanted],
+                           "index": candidates[0], "rule": "THE_PAGE_STATES_THE_KIND",
+                           "provenance": instruction}}
+    # More than one element of that kind: the instruction must say WHICH, and if it does not, that
+    # is an ambiguity. Picking the first is how "click the button" presses Submit on a form.
+    named = [i for i in candidates
+             if plain(str(observation["elements"][i].get("text") or "")).lower() and
+             plain(str(observation["elements"][i].get("text") or "")).lower() in low]
+    if len(named) == 1:
+        return {"clause": {"operator": "CLICK_KIND", "kinds": [wanted], "index": named[0],
+                           "rule": "THE_KIND_AND_ITS_OWN_WORDS", "provenance": instruction}}
+    return {"unresolved": LABEL_NOT_ON_THE_PAGE,
+            "detail": {"kind": wanted, "candidates": candidates,
+                       "reason": "MORE_THAN_ONE_ELEMENT_OF_THAT_KIND_AND_THE_INSTRUCTION_DOES_NOT_SAY_WHICH"}}
 
 
 def _form_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:

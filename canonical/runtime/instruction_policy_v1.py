@@ -497,6 +497,17 @@ def action_for_clause(clause: Mapping[str, Any], observation: Mapping[str, Any],
             return f"click@{openable[0]['index']}"
         return None
 
+    if operator == "CLICK_KIND":
+        kinds = [str(k) for k in clause.get("kinds") or []]
+        index = clause.get("index")
+        if index is not None and _pressable(elements, int(index)):
+            return f"click@{int(index)}"
+        for element in elements:
+            tag = str(element.get("tag") or "").lower()
+            if tag in kinds and element.get("can_click"):
+                return f"click@{int(element['index'])}"
+        return None
+
     if operator == "CLICK_IN_FRAME":
         # Re-resolve the frame on the LIVE page. An index captured at compile time is not an
         # action: the page renumbers between observations, and the whole point of the frame is

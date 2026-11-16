@@ -360,10 +360,23 @@ def identifiers_in(utterance: str) -> list[str]:
     # reading the quote as the identifier searched the page for the reply body it was about to
     # create. The record's name is the unquoted proper noun.
     text = _IDENTIFIER_QUOTED.sub(" ", utterance or "")
-    words = re.findall(r"\b[A-Z][a-z]{2,}\b", text)
+    # A CAPITAL AT THE START OF A SENTENCE IS CAPITALISED BECAUSE OF WHERE IT IS.
+    # Measured 2026-11-16 on `terminal` ("Use the terminal below to delete a file that has no file
+    # extension") and `click-tab-2` ("Switch between the tabs..."): the first word of every
+    # instruction is a capital, so a list of verbs to skip can never be complete -- "Use" and
+    # "Switch" are not control words, they are just first. The rule that actually holds is
+    # positional, and it needs no vocabulary at all: a name in these instructions is a capital
+    # that appears in the MIDDLE of the sentence, or that appears twice.
+    words = []
+    for match in re.finditer(r"\b[A-Z][a-z]{2,}\b", text):
+        before = text[:match.start()].rstrip()
+        starts_a_sentence = not before or before[-1] in ".!?"
+        if starts_a_sentence:
+            continue
+        words.append(match.group(0))
     controlish = {w.title() for word in CONTROL_WORDS for w in (word,)}
-    skipped = {"find", "click", "create", "looking", "the", "create", "add", "make", "select",
-               "drag", "enter", "type", "press", "submit"}
+    skipped = {"the", "add", "make", "select", "drag", "enter", "type", "press", "submit",
+               "then", "and", "all", "any", "each", "every", "that", "this", "them", "their"}
     return [w for w in words if w.title() not in controlish and w.lower() not in skipped]
 
 

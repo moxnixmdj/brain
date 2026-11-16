@@ -1,0 +1,112 @@
+{
+ "schema": "BRAIN_REPAIR_WHERE_THE_SUITE_IS_THE_OBSERVABLE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "why": "nine of the forty QuixBugs bugs ship no json_testcases, so the examples-based search reported NO_EXAMPLES and never ran; their cases are objects and assertions inside their own test file",
+ "tasks_with_no_json": [
+  "breadth_first_search",
+  "depth_first_search",
+  "detect_cycle",
+  "minimum_spanning_tree",
+  "reverse_linked_list",
+  "shortest_path_length",
+  "shortest_path_lengths",
+  "shortest_paths",
+  "topological_ordering"
+ ],
+ "tasks_measured": 9,
+ "repaired": 0,
+ "repaired_tasks": [],
+ "stages": {
+  "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN": 6,
+  "SCREEN_ACCEPTED__CORPUS_TEST_FAILS": 3
+ },
+ "rows": [
+  {
+   "task": "breadth_first_search",
+   "kind": "task",
+   "candidates": 6000,
+   "accepted_at_screen_rank": 4780,
+   "accepted_source_sha256": "01b853d3a2641c9fe36b25b5945348666c57e3e4dbca5b83d51860deb3501705",
+   "corpus_test_returncode": 2,
+   "corpus_test_tail": [
+    "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!",
+    "1 error in 0.08s"
+   ],
+   "stage": "SCREEN_ACCEPTED__CORPUS_TEST_FAILS",
+   "seconds": 26.2
+  },
+  {
+   "task": "depth_first_search",
+   "kind": "task",
+   "candidates": 6000,
+   "accepted_at_screen_rank": 5040,
+   "accepted_source_sha256": "f1f418ee5cec7be56df0c16c8d84c59fd90345c1e80f9ac0d2228befea9c4ce0",
+   "corpus_test_returncode": 2,
+   "corpus_test_tail": [
+    "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!",
+    "1 error in 0.08s"
+   ],
+   "stage": "SCREEN_ACCEPTED__CORPUS_TEST_FAILS",
+   "seconds": 22.0
+  },
+  {
+   "task": "detect_cycle",
+   "kind": "task",
+   "candidates": 4364,
+   "accepted_at_screen_rank": 23,
+   "accepted_source_sha256": "e24efdbd53a062272a9f57a55889e207c264cfd731f58472f856d5211882b562",
+   "corpus_test_returncode": 2,
+   "corpus_test_tail": [
+    "!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!",
+    "1 error in 0.09s"
+   ],
+   "stage": "SCREEN_ACCEPTED__CORPUS_TEST_FAILS",
+   "seconds": 2.1
+  },
+  {
+   "task": "minimum_spanning_tree",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 34.3
+  },
+  {
+   "task": "reverse_linked_list",
+   "kind": "task",
+   "candidates": 2347,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 11.7
+  },
+  {
+   "task": "shortest_path_length",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 72.8
+  },
+  {
+   "task": "shortest_path_lengths",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 42.0
+  },
+  {
+   "task": "shortest_paths",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 31.9
+  },
+  {
+   "task": "topological_ordering",
+   "kind": "task",
+   "candidates": 6000,
+   "stage": "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN",
+   "seconds": 28.9
+  }
+ ]
+}
