@@ -310,6 +310,44 @@ def public_functions(module_source: str) -> tuple[list[dict[str, Any]], list[dic
     return accepted, declined
 
 
+def _annotations(node: ast.AST) -> list[ast.AST]:
+    """Every annotation attached to a signature, which `def` evaluates at definition time."""
+    arguments = getattr(node, "args", None)
+    if arguments is None:
+        return []
+    found = list(arguments.posonlyargs) + list(arguments.args) + list(arguments.kwonlyargs)
+    if arguments.vararg is not None:
+        found.append(arguments.vararg)
+    if arguments.kwarg is not None:
+        found.append(arguments.kwarg)
+    return [entry.annotation for entry in found]
+
+
+_INERT_CLASS_BODY = (ast.FunctionDef, ast.AsyncFunctionDef, ast.Pass)
+
+
+def _class_is_inert(node: ast.ClassDef) -> bool:
+    """A class may be kept only if defining it cannot run code.
+
+    A class body is a statement list, not a declaration: `class X: TABLE = load()` runs `load()`
+    at import. Decorators and base expressions are the other two places a definition evaluates
+    something, and they are checked by the caller. Everything else here must be inert.
+    """
+    for statement in node.body:
+        if isinstance(statement, _INERT_CLASS_BODY):
+            continue
+        if isinstance(statement, ast.AnnAssign) and statement.value is None:
+            continue
+        if isinstance(statement, ast.Assign):
+            if not _has_a_call(statement.value):
+                continue
+            return False
+        if isinstance(statement, ast.Expr) and isinstance(statement.value, ast.Constant):
+            continue  # a docstring
+        return False
+    return True
+
+
 def _has_a_call(node: ast.AST) -> bool:
     return any(isinstance(sub, (ast.Call, ast.Await, ast.Yield, ast.YieldFrom)) for sub in ast.walk(node))
 
@@ -321,6 +359,15 @@ def reduce_module(module_source: str, function_names: Sequence[str]) -> str:
     could execute something are dropped, and every other top-level statement -- including the
     `sys.path.insert(...)` and the `if __name__ == "__main__"` block that real modules carry --
     is dropped. Nothing at module scope can then have an effect.
+
+    Every top-level function and class is kept, not only the selected ones, because a selected
+    function that calls a helper which was removed raises `NameError` and then reports
+    NOT_APPLICABLE for every law -- silence indistinguishable from "this code has no laws".
+    Measured on this tree: narrowing the reduction to the selected names alone was the main
+    reason a structure-only verifier reached only 6% of functions. Keeping definitions is safe
+    in a way that keeping statements is not: a `def` executes nothing but its decorators and
+    default arguments, and a `class` nothing but its decorators, bases and body-free attribute
+    reads, so those are what the filter still checks.
     """
     tree = ast.parse(module_source)
     wanted = set(function_names)
@@ -339,8 +386,19 @@ def reduce_module(module_source: str, function_names: Sequence[str]) -> str:
         elif isinstance(node, ast.AnnAssign):
             if node.value is None or not _has_a_call(node.value):
                 body.append(node)
-        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in wanted:
-            body.append(node)
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            if isinstance(node, ast.ClassDef):
+                loaded = list(node.decorator_list) + list(node.bases) + [
+                    keyword.value for keyword in node.keywords
+                ]
+                inert = _class_is_inert(node)
+            else:
+                loaded = list(node.decorator_list) + list(node.args.defaults) + [
+                    default for default in node.args.kw_defaults if default is not None
+                ] + [annotation for annotation in _annotations(node) if annotation is not None]
+                inert = True
+            if inert and not any(_has_a_call(part) for part in loaded):
+                body.append(node)
     reduced = ast.Module(body=body, type_ignores=[])
     ast.fix_missing_locations(reduced)
     return ast.unparse(reduced) + "\n"
@@ -562,13 +620,38 @@ def _third_value(second: Any) -> Any:
 
 
 def _load_module(source: str, name: str, directory: pathlib.Path) -> Any:
+    """Load the reduced source, and if one definition cannot be defined, keep the rest.
+
+    The reduction keeps every definition it can, which is what makes a helper callable. The cost
+    is that a kept definition may name something the reduction dropped (a non-stdlib decorator, a
+    base class from another module) and then the whole module fails to load -- 43 of 121 modules
+    in this tree failed exactly that way, and a module that fails to load produces no laws at all.
+    Falling back to statement-by-statement execution keeps everything that can be defined and
+    records, on the module, what could not be, so the loss is visible instead of total.
+    """
+    import ast
     import importlib.util
 
     path = directory / (name + ".py")
     path.write_text(source, encoding="utf-8")
     spec = importlib.util.spec_from_file_location("_subject_" + name, path)
     module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
+    try:
+        spec.loader.exec_module(module)
+        return module
+    except BaseException:  # noqa: BLE001 - a definition that cannot be defined is data
+        pass
+    skipped: list[dict[str, Any]] = []
+    for statement in ast.parse(source).body:
+        segment = ast.Module(body=[statement], type_ignores=[])
+        ast.fix_missing_locations(segment)
+        try:
+            exec(compile(segment, str(path), "exec"), module.__dict__)  # noqa: S102
+        except BaseException as exc:  # noqa: BLE001
+            skipped.append({"name": getattr(statement, "name", None),
+                            "line": getattr(statement, "lineno", None),
+                            "why": type(exc).__name__})
+    module.__dict__["_BRAIN_SKIPPED_DEFINITIONS"] = skipped
     return module
 
 
@@ -850,6 +933,17 @@ def confirm_and_judge(kernel: Any, payload: dict[str, Any]) -> dict[str, Any]:
         functions = {name: getattr(module, name) for name in payload["function_names"]
                      if hasattr(module, name)}
         changed = variant.get("function")
+        skipped_names = {entry["name"] for entry in
+                         (getattr(module, "_BRAIN_SKIPPED_DEFINITIONS", None) or [])}
+        if changed and changed in skipped_names:
+            # The mutation was in a definition that could not be defined. Judging the rest of
+            # the module would compare the baseline against a candidate that is missing the very
+            # thing that changed, and report the pair as a survivor. That is a difference.
+            record["killed_by"] = ["IMPORT_FAILED"]
+            record["counterexample"] = {"law": "IMPORT_FAILED",
+                                        "why": "THE_CHANGED_DEFINITION_DID_NOT_LOAD"}
+            judged.append(record)
+            continue
         relevant = [
             invariant_id
             for invariant_id in sorted(confirmed)
@@ -907,15 +1001,20 @@ def child_payload(
     variants: Sequence[Mapping[str, Any]],
     call_timeout_s: float = 0.5,
     extra_pools: Mapping[str, Sequence[Any]] | None = None,
+    grids: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
 ) -> dict[str, Any]:
-    """Assemble the JSON the child executes. Kept public so a caller can inspect it."""
+    """Assemble the JSON the child executes. Kept public so a caller can inspect it.
+
+    `grids` overrides the invented grid with a caller-supplied one, which is how the arguments
+    a real test suite already passed can become the inputs a law is confirmed on.
+    """
     functions = derived["functions"]
     return {
         "action_name": "confirm_and_judge",
         "module_name": module_name,
         "baseline_source": baseline_source,
         "function_names": [entry["name"] for entry in functions],
-        "grids": {
+        "grids": dict(grids) if grids is not None else {
             entry["name"]: build_grid(entry["required"], extra_pools=extra_pools)
             for entry in functions
         },

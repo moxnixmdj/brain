@@ -1,0 +1,242 @@
+{
+ "schema": "BRAIN_RERUN_THE_LEARNED_ARMS_REPAIRS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "network_calls_at_run_time": 0,
+ "arm": "another_benchmark",
+ "source_record": "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+ "claimed_repaired": 20,
+ "tally": {
+  "CONFIRMED": 16,
+  "INAPPLICABLE": 4
+ },
+ "confirmed": [
+  "bucketsort",
+  "find_first_in_sorted",
+  "find_in_sorted",
+  "gcd",
+  "get_factors",
+  "hanoi",
+  "is_valid_parenthesization",
+  "knapsack",
+  "lcs_length",
+  "levenshtein",
+  "longest_common_subsequence",
+  "minimum_spanning_tree",
+  "next_permutation",
+  "pascal",
+  "quicksort",
+  "to_base"
+ ],
+ "not_confirmed": [],
+ "inapplicable": [
+  "depth_first_search",
+  "next_palindrome",
+  "rpn_eval",
+  "shortest_path_lengths"
+ ],
+ "screen_said_pass_runner_said_no_in_the_record": 0,
+ "seconds": 5.0,
+ "rows": [
+  {
+   "task": "bucketsort",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".......                                                                  [100%]",
+    "7 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "depth_first_search",
+   "kind": "task",
+   "apply": "REMOVED_LINE_NOT_IN_SOURCE:return any((search_from(nextnode) for nextnode in node.succe",
+   "stage": "INAPPLICABLE"
+  },
+  {
+   "task": "find_first_in_sorted",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".......                                                                  [100%]",
+    "7 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "find_in_sorted",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".......                                                                  [100%]",
+    "7 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "gcd",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "......                                                                   [100%]",
+    "6 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "get_factors",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "...........                                                              [100%]",
+    "11 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "hanoi",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "........                                                                 [100%]",
+    "8 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "is_valid_parenthesization",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "...                                                                      [100%]",
+    "3 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "knapsack",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".........s                                                               [100%]",
+    "9 passed, 1 skipped in 0.02s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "lcs_length",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".........                                                                [100%]",
+    "9 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "levenshtein",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "...s...                                                                  [100%]",
+    "6 passed, 1 skipped in 1.54s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "longest_common_subsequence",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "..........                                                               [100%]",
+    "10 passed in 0.19s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "minimum_spanning_tree",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "...                                                                      [100%]",
+    "3 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "next_palindrome",
+   "kind": "task",
+   "apply": "REMOVED_LINE_NOT_IN_SOURCE:return [1] + len(digit_list) * [0] + [1]",
+   "stage": "INAPPLICABLE"
+  },
+  {
+   "task": "next_permutation",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "........                                                                 [100%]",
+    "8 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "pascal",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".....                                                                    [100%]",
+    "5 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "quicksort",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".............                                                            [100%]",
+    "13 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  },
+  {
+   "task": "rpn_eval",
+   "kind": "task",
+   "apply": "REMOVED_LINE_NOT_IN_SOURCE:return {'+': lambda a, b: a + b, '-': lambda a, b: a - b, '*",
+   "stage": "INAPPLICABLE"
+  },
+  {
+   "task": "shortest_path_lengths",
+   "kind": "task",
+   "apply": "REMOVED_LINE_NOT_IN_SOURCE:length_by_path[i, j] = min(length_by_path[i, j], length_by_p",
+   "stage": "INAPPLICABLE"
+  },
+  {
+   "task": "to_base",
+   "kind": "task",
+   "apply": "APPLIED",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "..........                                                               [100%]",
+    "10 passed in 0.01s"
+   ],
+   "stage": "CONFIRMED"
+  }
+ ]
+}

@@ -1,0 +1,3548 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "generated_utc": "2026-11-16T16:14:34Z",
+  "headline_change_v1_to_v2": {
+    "blind_spot_rate": {
+      "v1": 0.6517,
+      "v2": 0.7333
+    },
+    "functions_reached": {
+      "v1": 384,
+      "v2": 535
+    },
+    "functions_with_a_non_trivial_law": {
+      "v1": 23,
+      "v2": 43
+    },
+    "killed_by_a_law": {
+      "v1": 8,
+      "v2": 12
+    },
+    "killed_only_by_it_still_ran": {
+      "v1": 23,
+      "v2": 16
+    },
+    "modules_judged": {
+      "v1": 12,
+      "v2": 20
+    },
+    "variants": {
+      "v1": 89,
+      "v2": 105
+    }
+  },
+  "incremental_spend_usd": 0,
+  "measurement": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+    "coverage_census": {
+      "functions_offered": 1186,
+      "functions_reached": 535,
+      "functions_with_a_non_trivial_law": 43
+    },
+    "files_scanned": 171,
+    "grid": {
+      "call_timeout_s": 0.5,
+      "max_inputs_per_function": 24,
+      "max_modules": 60,
+      "max_mutants_per_module": 12
+    },
+    "incremental_spend_usd": 0,
+    "law_kills": {
+      "COMMUTATIVITY": 4,
+      "IDEMPOTENCE": 7,
+      "PERMUTATION_INVARIANT": 1
+    },
+    "law_totals": {
+      "ASSOCIATIVITY:CONFIRMED": 6,
+      "ASSOCIATIVITY:NOT_APPLICABLE": 315,
+      "ASSOCIATIVITY:REFUTED_ON_THE_BASELINE": 16,
+      "ASSOCIATIVITY:VACUOUS": 33,
+      "COMMUTATIVITY:CONFIRMED": 6,
+      "COMMUTATIVITY:NOT_APPLICABLE": 259,
+      "COMMUTATIVITY:REFUTED_ON_THE_BASELINE": 42,
+      "COMMUTATIVITY:VACUOUS": 63,
+      "IDEMPOTENCE:CONFIRMED": 17,
+      "IDEMPOTENCE:NOT_APPLICABLE": 449,
+      "IDEMPOTENCE:REFUTED_ON_THE_BASELINE": 55,
+      "IDEMPOTENCE:VACUOUS": 100,
+      "INVOLUTION:NOT_APPLICABLE": 449,
+      "INVOLUTION:REFUTED_ON_THE_BASELINE": 147,
+      "INVOLUTION:VACUOUS": 25,
+      "MULTISET_PRESERVED:NOT_APPLICABLE": 3,
+      "MULTISET_PRESERVED:VACUOUS": 1,
+      "PERMUTATION_INVARIANT:CONFIRMED": 14,
+      "PERMUTATION_INVARIANT:NOT_APPLICABLE": 589,
+      "PERMUTATION_INVARIANT:REFUTED_ON_THE_BASELINE": 7,
+      "PERMUTATION_INVARIANT:VACUOUS": 11,
+      "SET_PRESERVED:NOT_APPLICABLE": 1,
+      "STDLIB_DIFFERENTIAL:NOT_APPLICABLE": 1,
+      "STDLIB_DIFFERENTIAL:REFUTED_ON_THE_BASELINE": 1,
+      "TOTALITY:CONFIRMED": 535,
+      "TOTALITY:NOT_APPLICABLE": 651
+    },
+    "law_verdict_totals": {
+      "CONFIRMED": 578,
+      "NOT_APPLICABLE": 2717,
+      "REFUTED_ON_THE_BASELINE": 268,
+      "VACUOUS": 233
+    },
+    "model_calls": 0,
+    "modules": [
+      {
+        "counterexamples": [
+          {
+            "args": [
+              []
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:derive_probe_domain",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          },
+          {
+            "args": [
+              [
+                "_span",
+                "_single_compare",
+                "_is_boundary_disjunction"
+              ]
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:derive_probe_domain",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 364,
+            "name": "_exec_fn",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:compile,exec",
+            "required": [
+              {
+                "kind": "str",
+                "name": "source"
+              },
+              {
+                "kind": "str",
+                "name": "entrypoint"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "exec",
+              "fn"
+            ]
+          },
+          {
+            "lineno": 697,
+            "name": "rewrite_source_with_abstractions",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:compile,exec",
+            "required": [
+              {
+                "kind": "str",
+                "name": "source"
+              },
+              {
+                "kind": null,
+                "name": "library"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "rewrite",
+              "source",
+              "with",
+              "abstractions"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_entry_fn",
+          "lift_shape",
+          "family_of",
+          "description_bytes",
+          "derive_probe_domain",
+          "compress_corpus",
+          "admit_corpus_abstraction",
+          "concept_id_for_source",
+          "helper_body_stmts",
+          "_helper_name_of",
+          "_arg_names_of",
+          "licensed_table_policy",
+          "_library_abstractions"
+        ],
+        "functions_reached": [
+          "_entry_fn",
+          "_helper_name_of",
+          "_library_abstractions",
+          "admit_corpus_abstraction",
+          "concept_id_for_source",
+          "derive_probe_domain",
+          "description_bytes",
+          "family_of",
+          "helper_body_stmts",
+          "licensed_table_policy",
+          "lift_shape"
+        ],
+        "functions_with_a_confirmed_law": [
+          "admit_corpus_abstraction",
+          "derive_probe_domain"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 2,
+        "laws_by_verdict": {
+          "CONFIRMED": 13,
+          "NOT_APPLICABLE": 24,
+          "REFUTED_ON_THE_BASELINE": 9,
+          "VACUOUS": 4
+        },
+        "laws_proposed": 50,
+        "path": "canonical/swe_kernel/compression_gain_v1.py",
+        "survived_the_specification": 10,
+        "variants": 12
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:metamorphic_signature_kind",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          },
+          {
+            "args": [
+              "\"egraph_and_deductive_synthesizer_v1\","
+            ],
+            "derivation": "unary and therefore testable for a fixed point; the name does not claim one, so this is a hypothesis execution must confirm",
+            "invariant_id": "IDEMPOTENCE:metamorphic_signature_kind",
+            "law": "IDEMPOTENCE",
+            "observed": {
+              "first": [
+                4,
+                "bytes"
+              ],
+              "holds": false,
+              "second": [
+                5,
+                "bytes"
+              ]
+            }
+          },
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "unary and therefore testable for a fixed point; the name does not claim one, so this is a hypothesis execution must confirm",
+            "invariant_id": "IDEMPOTENCE:metamorphic_signature_kind",
+            "law": "IDEMPOTENCE",
+            "observed": {
+              "first": null,
+              "holds": false,
+              "second": ""
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 121,
+            "name": "_run_pipeline_bytes",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:environ,open,run",
+            "required": [
+              {
+                "kind": "list",
+                "name": "stages"
+              },
+              {
+                "kind": null,
+                "name": "input_path"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "run",
+              "pipeline",
+              "bytes"
+            ]
+          },
+          {
+            "lineno": 198,
+            "name": "classify_metamorphic_signature",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "vals"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "classify",
+              "metamorphic",
+              "signature"
+            ]
+          },
+          {
+            "lineno": 267,
+            "name": "evaluate_pipeline_signature",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "list",
+                "name": "stages"
+              },
+              {
+                "kind": "dict",
+                "name": "files_map"
+              },
+              {
+                "kind": "dict",
+                "name": "meta"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "evaluate",
+              "pipeline",
+              "signature"
+            ]
+          },
+          {
+            "lineno": 328,
+            "name": "answer_query_by_metamorphic_signature",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:__import__,chmod,compile,run,write_bytes",
+            "required": [
+              {
+                "kind": "str",
+                "name": "kind"
+              },
+              {
+                "kind": null,
+                "name": "target_file"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "answer",
+              "query",
+              "by",
+              "metamorphic",
+              "signature"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_ensure_trailing_newline",
+          "build_metamorphic_tuple",
+          "metamorphic_signature_kind",
+          "_parse_single_int"
+        ],
+        "functions_reached": [
+          "_ensure_trailing_newline",
+          "build_metamorphic_tuple",
+          "metamorphic_signature_kind"
+        ],
+        "functions_with_a_confirmed_law": [
+          "metamorphic_signature_kind"
+        ],
+        "killed_by_a_law": 2,
+        "killed_by_totality_only": 2,
+        "laws_by_verdict": {
+          "CONFIRMED": 4,
+          "NOT_APPLICABLE": 7,
+          "REFUTED_ON_THE_BASELINE": 3,
+          "VACUOUS": 2
+        },
+        "laws_proposed": 16,
+        "path": "canonical/swe_kernel/metamorphic_cli_compiler_v1.py",
+        "survived_the_specification": 7,
+        "variants": 11
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 175,
+            "name": "run_probe",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:run",
+            "required": [
+              {
+                "kind": "str",
+                "name": "op"
+              },
+              {
+                "kind": "str",
+                "name": "language"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "run",
+              "probe"
+            ]
+          },
+          {
+            "lineno": 265,
+            "name": "may_generalize",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "str",
+                "name": "op"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "may",
+              "generalize"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "toolchain",
+          "resolve",
+          "_probe_text",
+          "_normalise",
+          "_observed_all",
+          "semantics",
+          "audit_frozen_list",
+          "main"
+        ],
+        "functions_reached": [
+          "_normalise",
+          "_probe_text",
+          "resolve",
+          "toolchain"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_normalise"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 5,
+          "NOT_APPLICABLE": 18,
+          "REFUTED_ON_THE_BASELINE": 3,
+          "VACUOUS": 2
+        },
+        "laws_proposed": 24,
+        "path": "canonical/swe_kernel/operator_semantics_v1.py",
+        "survived_the_specification": 4,
+        "variants": 4
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 121,
+            "name": "run_tests",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "run",
+              "tests"
+            ]
+          },
+          {
+            "lineno": 174,
+            "name": "prepare_laws",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "prepare",
+              "laws"
+            ]
+          },
+          {
+            "lineno": 201,
+            "name": "laws_against_prepared",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "prepared"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "laws",
+              "against",
+              "prepared"
+            ]
+          },
+          {
+            "lineno": 286,
+            "name": "laws_against",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "laws",
+              "against"
+            ]
+          },
+          {
+            "lineno": 300,
+            "name": "amplify",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "amplify"
+            ]
+          },
+          {
+            "lineno": 428,
+            "name": "trace_suite_calls",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "trace",
+              "suite",
+              "calls"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_executable",
+          "module_dotted_name",
+          "recorded_grids"
+        ],
+        "functions_reached": [
+          "_executable",
+          "module_dotted_name",
+          "recorded_grids"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_executable",
+          "module_dotted_name"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 5,
+          "NOT_APPLICABLE": 2,
+          "REFUTED_ON_THE_BASELINE": 3,
+          "VACUOUS": 1
+        },
+        "laws_proposed": 11,
+        "path": "canonical/swe_kernel/patch_verdict_amplification_v1.py",
+        "survived_the_specification": 5,
+        "variants": 5
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:dedented",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 118,
+            "name": "compile_rule",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "before"
+              },
+              {
+                "kind": null,
+                "name": "after"
+              },
+              {
+                "kind": null,
+                "name": "error_class"
+              },
+              {
+                "kind": null,
+                "name": "builder"
+              },
+              {
+                "kind": null,
+                "name": "identity"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "compile",
+              "rule"
+            ]
+          },
+          {
+            "lineno": 192,
+            "name": "_narrow_statement_edit",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "before"
+              },
+              {
+                "kind": null,
+                "name": "after"
+              },
+              {
+                "kind": null,
+                "name": "bb"
+              },
+              {
+                "kind": null,
+                "name": "ab"
+              },
+              {
+                "kind": null,
+                "name": "locate"
+              },
+              {
+                "kind": null,
+                "name": "a_locate"
+              },
+              {
+                "kind": null,
+                "name": "start"
+              },
+              {
+                "kind": null,
+                "name": "end"
+              },
+              {
+                "kind": null,
+                "name": "a_start"
+              },
+              {
+                "kind": null,
+                "name": "a_end"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "narrow",
+              "statement",
+              "edit"
+            ]
+          },
+          {
+            "lineno": 245,
+            "name": "_statement_windows",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "source"
+              },
+              {
+                "kind": null,
+                "name": "stmts"
+              },
+              {
+                "kind": null,
+                "name": "locate"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "statement",
+              "windows"
+            ]
+          },
+          {
+            "lineno": 282,
+            "name": "candidates",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "source"
+              },
+              {
+                "kind": null,
+                "name": "rule"
+              },
+              {
+                "kind": null,
+                "name": "matcher"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "candidates"
+            ]
+          },
+          {
+            "lineno": 330,
+            "name": "renamed",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "source"
+              },
+              {
+                "kind": null,
+                "name": "rename_map"
+              },
+              {
+                "kind": null,
+                "name": "keep"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "renamed"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "tokens",
+          "parameters",
+          "generator",
+          "body",
+          "functions",
+          "dedented"
+        ],
+        "functions_reached": [
+          "dedented",
+          "functions"
+        ],
+        "functions_with_a_confirmed_law": [
+          "dedented"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 1,
+        "laws_by_verdict": {
+          "CONFIRMED": 3,
+          "NOT_APPLICABLE": 19,
+          "REFUTED_ON_THE_BASELINE": 1
+        },
+        "laws_proposed": 23,
+        "path": "canonical/swe_kernel/python_scoped_edit_rule_v1.py",
+        "survived_the_specification": 1,
+        "variants": 2
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py",
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:gate",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          },
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py",
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:gate",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          },
+          {
+            "args": [
+              "",
+              "a"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:gate",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 366,
+            "name": "semantic_sensitivity_gate",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "str",
+                "name": "before_source"
+              },
+              {
+                "kind": "str",
+                "name": "after_source"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "semantic",
+              "sensitivity",
+              "gate"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_slots",
+          "_body_loads",
+          "parameter_use",
+          "lost_dependencies",
+          "_names_by_slot",
+          "_collect_non_stdlib_imports",
+          "_local_shadows",
+          "_attr_root_name",
+          "imported_callee_use",
+          "lost_imported_callees",
+          "gate"
+        ],
+        "functions_reached": [
+          "_attr_root_name",
+          "_names_by_slot",
+          "gate",
+          "imported_callee_use",
+          "lost_dependencies",
+          "lost_imported_callees",
+          "parameter_use"
+        ],
+        "functions_with_a_confirmed_law": [
+          "gate"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 3,
+        "laws_by_verdict": {
+          "CONFIRMED": 8,
+          "NOT_APPLICABLE": 26,
+          "REFUTED_ON_THE_BASELINE": 2,
+          "VACUOUS": 4
+        },
+        "laws_proposed": 40,
+        "path": "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+        "survived_the_specification": 9,
+        "variants": 12
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              ""
+            ],
+            "derivation": "unary and therefore testable for a fixed point; the name does not claim one, so this is a hypothesis execution must confirm",
+            "invariant_id": "IDEMPOTENCE:task_family_key",
+            "law": "IDEMPOTENCE",
+            "observed": {
+              "first": [
+                "general"
+              ],
+              "holds": false,
+              "second": [
+                "['general']"
+              ]
+            }
+          },
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "unary and therefore testable for a fixed point; the name does not claim one, so this is a hypothesis execution must confirm",
+            "invariant_id": "IDEMPOTENCE:task_family_key",
+            "law": "IDEMPOTENCE",
+            "observed": {
+              "first": "canonical.swe_kernel",
+              "holds": false,
+              "second": "canonical"
+            }
+          },
+          {
+            "args": [
+              ""
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:task_family_key",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:IndexError",
+              "why": "__RAISED__:IndexError"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 91,
+            "name": "_atomic_write_json",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,unlink",
+            "required": [
+              {
+                "kind": null,
+                "name": "path"
+              },
+              {
+                "kind": "dict",
+                "name": "payload"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "atomic",
+              "write",
+              "json"
+            ]
+          },
+          {
+            "lineno": 2417,
+            "name": "shared_cognitive_core",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:environ",
+            "required": [],
+            "returns": null,
+            "tokens": [
+              "shared",
+              "cognitive",
+              "core"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_sigmoid",
+          "_binary_entropy",
+          "task_family_key",
+          "_epistemic_mutual_information_bits",
+          "_empirical_mutual_information_bits"
+        ],
+        "functions_reached": [
+          "_binary_entropy",
+          "_empirical_mutual_information_bits",
+          "_epistemic_mutual_information_bits",
+          "_sigmoid",
+          "task_family_key"
+        ],
+        "functions_with_a_confirmed_law": [
+          "task_family_key"
+        ],
+        "killed_by_a_law": 3,
+        "killed_by_totality_only": 1,
+        "laws_by_verdict": {
+          "CONFIRMED": 6,
+          "NOT_APPLICABLE": 4,
+          "REFUTED_ON_THE_BASELINE": 7,
+          "VACUOUS": 1
+        },
+        "laws_proposed": 18,
+        "path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+        "survived_the_specification": 8,
+        "variants": 12
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              "x\ny",
+              "import re"
+            ],
+            "derivation": "binary and therefore testable for symmetry; a name that does not claim it makes this a hypothesis execution must confirm",
+            "invariant_id": "COMMUTATIVITY:_first_diff_offset_and_line",
+            "law": "COMMUTATIVITY",
+            "observed": {
+              "forward": [
+                3,
+                2
+              ],
+              "holds": false,
+              "swapped": [
+                3,
+                1
+              ]
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 175,
+            "name": "trace_project_target",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "project_root"
+              },
+              {
+                "kind": "str",
+                "name": "target_path"
+              },
+              {
+                "kind": "list",
+                "name": "test_paths"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "trace",
+              "project",
+              "target"
+            ]
+          },
+          {
+            "lineno": 250,
+            "name": "propose_execution_locus_candidates",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "source_text"
+              },
+              {
+                "kind": "dict",
+                "name": "rule"
+              },
+              {
+                "kind": null,
+                "name": "executed_lines"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "propose",
+              "execution",
+              "locus",
+              "candidates"
+            ]
+          },
+          {
+            "lineno": 280,
+            "name": "execution_locus_facts",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "str",
+                "name": "source_text"
+              },
+              {
+                "kind": "dict",
+                "name": "rule"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "execution",
+              "locus",
+              "facts"
+            ]
+          },
+          {
+            "lineno": 354,
+            "name": "apply_localized_skill_with_locus",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": null,
+                "name": "oracle"
+              },
+              {
+                "kind": "str",
+                "name": "source_text"
+              },
+              {
+                "kind": "dict",
+                "name": "rule"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "apply",
+              "localized",
+              "skill",
+              "with",
+              "locus"
+            ]
+          },
+          {
+            "lineno": 448,
+            "name": "measure_real_historical_pipeline",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "measure",
+              "real",
+              "historical",
+              "pipeline"
+            ]
+          },
+          {
+            "lineno": 721,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_copy_project_clean",
+          "_first_diff_offset_and_line",
+          "learn_execution_locus_scope"
+        ],
+        "functions_reached": [
+          "_first_diff_offset_and_line"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_first_diff_offset_and_line"
+        ],
+        "killed_by_a_law": 1,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 2,
+          "NOT_APPLICABLE": 7,
+          "VACUOUS": 1
+        },
+        "laws_proposed": 10,
+        "path": "canonical/swe_kernel/verified_lesson_pipeline_v1.py",
+        "survived_the_specification": 3,
+        "variants": 4
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 101,
+            "name": "replay",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "before"
+              },
+              {
+                "kind": "str",
+                "name": "after"
+              },
+              {
+                "kind": "list",
+                "name": "files"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "replay"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "corpus",
+          "measure",
+          "_first_change",
+          "_reason",
+          "main"
+        ],
+        "functions_reached": [
+          "_first_change",
+          "_reason"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_reason"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 3,
+          "NOT_APPLICABLE": 8,
+          "REFUTED_ON_THE_BASELINE": 2
+        },
+        "laws_proposed": 13,
+        "path": "canonical/tools/blast_radius_of_a_one_shot_rule_20261112_v1.py",
+        "survived_the_specification": 1,
+        "variants": 1
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 117,
+            "name": "_git",
+            "reason": "VARIADIC_SIGNATURE_HAS_NO_FINITE_CALL_GRID",
+            "required": [
+              {
+                "kind": null,
+                "name": "directory"
+              }
+            ],
+            "returns": "str",
+            "tokens": [
+              "git"
+            ]
+          },
+          {
+            "lineno": 124,
+            "name": "listing",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "directory"
+              },
+              {
+                "kind": "str",
+                "name": "repository"
+              },
+              {
+                "kind": "str",
+                "name": "commit"
+              }
+            ],
+            "returns": "list",
+            "tokens": [
+              "listing"
+            ]
+          },
+          {
+            "lineno": 137,
+            "name": "fetch",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "trees"
+              },
+              {
+                "kind": "list",
+                "name": "tasks"
+              },
+              {
+                "kind": "dict",
+                "name": "commits"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "fetch"
+            ]
+          },
+          {
+            "lineno": 226,
+            "name": "of_task",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "documents"
+              },
+              {
+                "kind": null,
+                "name": "source_of"
+              },
+              {
+                "kind": "dict",
+                "name": "record"
+              },
+              {
+                "kind": "list",
+                "name": "diffs"
+              },
+              {
+                "kind": "str",
+                "name": "text"
+              },
+              {
+                "kind": "str",
+                "name": "other_text"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "of",
+              "task"
+            ]
+          },
+          {
+            "lineno": 289,
+            "name": "summarise",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "per_task"
+              },
+              {
+                "kind": "list",
+                "name": "reached_with_the_file"
+              },
+              {
+                "kind": "list",
+                "name": "earlier_kept_with_the_file"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "summarise"
+            ]
+          },
+          {
+            "lineno": 368,
+            "name": "refused",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "records"
+              },
+              {
+                "kind": "int",
+                "name": "submissions_with_patches"
+              },
+              {
+                "kind": "int",
+                "name": "submissions_then"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "refused"
+            ]
+          },
+          {
+            "lineno": 387,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "project_of",
+          "repository_of",
+          "base_commits",
+          "targets_of",
+          "rank_of",
+          "place_of",
+          "of_chunk",
+          "_share",
+          "_within",
+          "rule",
+          "earlier_kept",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "_share",
+          "_within",
+          "place_of",
+          "project_of",
+          "rank_of"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_within"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 6,
+          "NOT_APPLICABLE": 28,
+          "REFUTED_ON_THE_BASELINE": 2,
+          "VACUOUS": 3
+        },
+        "laws_proposed": 39,
+        "path": "canonical/tools/file_found_from_task_text_measure_v1.py",
+        "survived_the_specification": 3,
+        "variants": 3
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              [
+                3,
+                1,
+                2
+              ]
+            ],
+            "derivation": "unary, so if this program folds a sequence the answer may not depend on the order it was handed; execution decides",
+            "invariant_id": "PERMUTATION_INVARIANT:_median",
+            "law": "PERMUTATION_INVARIANT",
+            "observed": {
+              "holds": false,
+              "original": [
+                3,
+                1,
+                2
+              ],
+              "reversed": [
+                2,
+                1,
+                3
+              ],
+              "rotated": [
+                1,
+                2,
+                3
+              ]
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 303,
+            "name": "of_task",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "list",
+                "name": "patches"
+              },
+              {
+                "kind": null,
+                "name": "held"
+              },
+              {
+                "kind": "str",
+                "name": "issue"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "of",
+              "task"
+            ]
+          },
+          {
+            "lineno": 344,
+            "name": "summarise",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "per_task"
+              },
+              {
+                "kind": "dict",
+                "name": "reached_before"
+              },
+              {
+                "kind": "list",
+                "name": "only_put_in_or_exchange"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "summarise"
+            ]
+          },
+          {
+            "lineno": 396,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "statement_of",
+          "statements",
+          "copies_agree",
+          "squeezed",
+          "pool_of",
+          "_parsed",
+          "wanted_leaves",
+          "at_hand",
+          "_is_only_a_string",
+          "weights",
+          "changed_lines",
+          "place_of_line",
+          "is_quoted",
+          "held_by",
+          "_best_of",
+          "_median",
+          "rule",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "_best_of",
+          "_is_only_a_string",
+          "_median",
+          "at_hand",
+          "changed_lines",
+          "copies_agree",
+          "held_by",
+          "is_quoted",
+          "place_of_line",
+          "rule",
+          "squeezed",
+          "statement_of",
+          "weights"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_median",
+          "squeezed"
+        ],
+        "killed_by_a_law": 1,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 15,
+          "NOT_APPLICABLE": 40,
+          "REFUTED_ON_THE_BASELINE": 4
+        },
+        "laws_proposed": 59,
+        "path": "canonical/tools/fix_content_in_task_text_measure_v1.py",
+        "survived_the_specification": 0,
+        "variants": 1
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              []
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:other_text_of",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:UnboundLocalError",
+              "why": "__RAISED__:UnboundLocalError"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 282,
+            "name": "summarise",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "per_task"
+              },
+              {
+                "kind": "list",
+                "name": "the_80"
+              },
+              {
+                "kind": "dict",
+                "name": "earlier_in_turns"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "summarise"
+            ]
+          },
+          {
+            "lineno": 314,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "cut",
+          "place_in",
+          "of_task",
+          "other_text_of",
+          "_best",
+          "_share",
+          "part",
+          "earlier_lists",
+          "rule",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "_best",
+          "_share",
+          "earlier_lists",
+          "other_text_of",
+          "place_in"
+        ],
+        "functions_with_a_confirmed_law": [
+          "other_text_of"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 1,
+        "laws_by_verdict": {
+          "CONFIRMED": 6,
+          "NOT_APPLICABLE": 20,
+          "REFUTED_ON_THE_BASELINE": 4,
+          "VACUOUS": 1
+        },
+        "laws_proposed": 31,
+        "path": "canonical/tools/function_found_from_task_text_measure_v1.py",
+        "survived_the_specification": 5,
+        "variants": 6
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py",
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:equivalent",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:NameError",
+              "why": "__RAISED__:NameError"
+            }
+          },
+          {
+            "args": [
+              "canonical/swe_kernel/__init__.py",
+              "canonical/swe_kernel/__init__.py"
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:equivalent",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:NameError",
+              "why": "__RAISED__:NameError"
+            }
+          },
+          {
+            "args": [
+              "from __future__ import annotations",
+              "from typing import Any, Callable, Iterable, List"
+            ],
+            "derivation": "binary and therefore testable for symmetry; a name that does not claim it makes this a hypothesis execution must confirm",
+            "invariant_id": "COMMUTATIVITY:equivalent",
+            "law": "COMMUTATIVITY",
+            "observed": {
+              "forward": "rom __future__ import annotations",
+              "holds": false,
+              "swapped": "rom typing import Any, Callable, Iterable, List"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 197,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_import_key",
+          "equivalent",
+          "_same_change",
+          "classify",
+          "measure"
+        ],
+        "functions_reached": [
+          "_import_key",
+          "_same_change",
+          "classify",
+          "equivalent"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_same_change",
+          "equivalent"
+        ],
+        "killed_by_a_law": 1,
+        "killed_by_totality_only": 2,
+        "laws_by_verdict": {
+          "CONFIRMED": 6,
+          "NOT_APPLICABLE": 9,
+          "REFUTED_ON_THE_BASELINE": 1,
+          "VACUOUS": 1
+        },
+        "laws_proposed": 17,
+        "path": "canonical/tools/generalization_or_lookup_v1.py",
+        "survived_the_specification": 5,
+        "variants": 8
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 353,
+            "name": "gh",
+            "reason": "VARIADIC_SIGNATURE_HAS_NO_FINITE_CALL_GRID",
+            "required": [],
+            "returns": null,
+            "tokens": [
+              "gh"
+            ]
+          },
+          {
+            "lineno": 381,
+            "name": "pull_details",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "owner"
+              },
+              {
+                "kind": "str",
+                "name": "name"
+              },
+              {
+                "kind": "int",
+                "name": "number"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "pull",
+              "details"
+            ]
+          },
+          {
+            "lineno": 399,
+            "name": "gh_graphql",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:run",
+            "required": [
+              {
+                "kind": "str",
+                "name": "query"
+              },
+              {
+                "kind": "dict",
+                "name": "variables"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "gh",
+              "graphql"
+            ]
+          },
+          {
+            "lineno": 429,
+            "name": "fetch_tree",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,open,urlopen,write_text",
+            "required": [
+              {
+                "kind": "str",
+                "name": "repo"
+              },
+              {
+                "kind": "str",
+                "name": "ref"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "fetch",
+              "tree"
+            ]
+          },
+          {
+            "lineno": 463,
+            "name": "_reads",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:compile",
+            "required": [
+              {
+                "kind": null,
+                "name": "text"
+              }
+            ],
+            "returns": "bool",
+            "tokens": [
+              "reads"
+            ]
+          },
+          {
+            "lineno": 473,
+            "name": "collect_pull",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "owner"
+              },
+              {
+                "kind": "str",
+                "name": "name"
+              },
+              {
+                "kind": "int",
+                "name": "number"
+              },
+              {
+                "kind": "int",
+                "name": "files"
+              },
+              {
+                "kind": null,
+                "name": "say"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "collect",
+              "pull"
+            ]
+          },
+          {
+            "lineno": 508,
+            "name": "collect",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "list",
+                "name": "queries"
+              },
+              {
+                "kind": "int",
+                "name": "per_query"
+              },
+              {
+                "kind": "int",
+                "name": "files"
+              },
+              {
+                "kind": null,
+                "name": "say"
+              }
+            ],
+            "returns": "list",
+            "tokens": [
+              "collect"
+            ]
+          },
+          {
+            "lineno": 602,
+            "name": "score",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "before"
+              },
+              {
+                "kind": "str",
+                "name": "after"
+              },
+              {
+                "kind": null,
+                "name": "got"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "score"
+            ]
+          },
+          {
+            "lineno": 1318,
+            "name": "_one_place_at_a_time",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "source"
+              },
+              {
+                "kind": null,
+                "name": "lesson"
+              },
+              {
+                "kind": null,
+                "name": "check"
+              },
+              {
+                "kind": "str",
+                "name": "path"
+              },
+              {
+                "kind": "list",
+                "name": "proposals"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "one",
+              "place",
+              "at",
+              "a",
+              "time"
+            ]
+          },
+          {
+            "lineno": 1332,
+            "name": "arms",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "list",
+                "name": "files"
+              },
+              {
+                "kind": null,
+                "name": "check"
+              },
+              {
+                "kind": "bool",
+                "name": "two_showings"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "arms"
+            ]
+          },
+          {
+            "lineno": 1394,
+            "name": "_exact",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "target"
+              },
+              {
+                "kind": "str",
+                "name": "example_before"
+              },
+              {
+                "kind": "str",
+                "name": "example_after"
+              }
+            ],
+            "returns": "list",
+            "tokens": [
+              "exact"
+            ]
+          },
+          {
+            "lineno": 1405,
+            "name": "_literal",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "target"
+              },
+              {
+                "kind": "str",
+                "name": "example_before"
+              },
+              {
+                "kind": "str",
+                "name": "example_after"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "literal"
+            ]
+          },
+          {
+            "lineno": 1499,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "demo",
+          "check_discriminates",
+          "positive_control",
+          "oracle_makes_the_difference",
+          "_the_changed_line",
+          "search_pulls",
+          "_carries",
+          "fetch_again",
+          "without_texts",
+          "statements",
+          "changed",
+          "only_imports",
+          "_tree_defines_tests",
+          "_missing_module_names",
+          "_learned",
+          "_apply_everywhere",
+          "summarise",
+          "report"
+        ],
+        "functions_reached": [
+          "_carries",
+          "_missing_module_names",
+          "_the_changed_line",
+          "changed",
+          "check_discriminates",
+          "fetch_again",
+          "only_imports",
+          "statements",
+          "without_texts"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_the_changed_line"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 10,
+          "NOT_APPLICABLE": 43,
+          "REFUTED_ON_THE_BASELINE": 2,
+          "VACUOUS": 4
+        },
+        "laws_proposed": 59,
+        "path": "canonical/tools/generalization_rung_gradient_v1.py",
+        "survived_the_specification": 2,
+        "variants": 2
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              0
+            ],
+            "derivation": "unary and therefore testable for a fixed point; the name does not claim one, so this is a hypothesis execution must confirm",
+            "invariant_id": "IDEMPOTENCE:_low",
+            "law": "IDEMPOTENCE",
+            "observed": {
+              "first": "0",
+              "holds": false,
+              "second": ""
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 219,
+            "name": "load",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:open",
+            "required": [],
+            "returns": "dict",
+            "tokens": [
+              "load"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "counted_artefacts",
+          "_low",
+          "check_phase",
+          "check_plan",
+          "main"
+        ],
+        "functions_reached": [
+          "_low"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_low"
+        ],
+        "killed_by_a_law": 1,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 2,
+          "NOT_APPLICABLE": 14,
+          "REFUTED_ON_THE_BASELINE": 1
+        },
+        "laws_proposed": 17,
+        "path": "canonical/tools/plan_admission_v1.py",
+        "survived_the_specification": 0,
+        "variants": 1
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              [
+                "_span",
+                "_single_compare",
+                "_is_boundary_disjunction"
+              ]
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:_middle",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:IndexError",
+              "why": "__RAISED__:IndexError"
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 71,
+            "name": "lay_out",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "root"
+              },
+              {
+                "kind": "str",
+                "name": "name"
+              },
+              {
+                "kind": null,
+                "name": "where"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "lay",
+              "out"
+            ]
+          },
+          {
+            "lineno": 84,
+            "name": "solver_args",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "str",
+                "name": "name"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "solver",
+              "args"
+            ]
+          },
+          {
+            "lineno": 132,
+            "name": "_in_a_process",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "mode"
+              },
+              {
+                "kind": null,
+                "name": "where"
+              },
+              {
+                "kind": "dict",
+                "name": "args"
+              },
+              {
+                "kind": "int",
+                "name": "wall_limit_s"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "in",
+              "a",
+              "process"
+            ]
+          },
+          {
+            "lineno": 161,
+            "name": "solve",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "where"
+              },
+              {
+                "kind": "dict",
+                "name": "args"
+              },
+              {
+                "kind": "int",
+                "name": "wall_limit_s"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "solve"
+            ]
+          },
+          {
+            "lineno": 165,
+            "name": "propose",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "where"
+              },
+              {
+                "kind": "dict",
+                "name": "args"
+              },
+              {
+                "kind": "int",
+                "name": "wall_limit_s"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "propose"
+            ]
+          },
+          {
+            "lineno": 172,
+            "name": "judged",
+            "reason": "REQUIRED_KEYWORD_ONLY_ARGUMENT",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "run"
+              },
+              {
+                "kind": null,
+                "name": "where"
+              },
+              {
+                "kind": "str",
+                "name": "name"
+              },
+              {
+                "kind": "str",
+                "name": "buggy"
+              },
+              {
+                "kind": "str",
+                "name": "fixed"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "judged"
+            ]
+          },
+          {
+            "lineno": 220,
+            "name": "measure",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "root"
+              },
+              {
+                "kind": "list",
+                "name": "names"
+              },
+              {
+                "kind": null,
+                "name": "work"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "measure"
+            ]
+          },
+          {
+            "lineno": 389,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "_changed_lines",
+          "_middle",
+          "summarise",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "_changed_lines",
+          "_middle"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_middle"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 1,
+        "laws_by_verdict": {
+          "CONFIRMED": 3,
+          "NOT_APPLICABLE": 6,
+          "REFUTED_ON_THE_BASELINE": 3
+        },
+        "laws_proposed": 12,
+        "path": "canonical/tools/quixbugs_repair_solver_measure_v1.py",
+        "survived_the_specification": 1,
+        "variants": 2
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 67,
+            "name": "of_definition",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "before"
+              },
+              {
+                "kind": "list",
+                "name": "wanted"
+              },
+              {
+                "kind": "str",
+                "name": "text"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "of",
+              "definition"
+            ]
+          },
+          {
+            "lineno": 132,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "of_task",
+          "within",
+          "summarise",
+          "rule",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "rule",
+          "summarise",
+          "within"
+        ],
+        "functions_with_a_confirmed_law": [
+          "within"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 4,
+          "NOT_APPLICABLE": 11
+        },
+        "laws_proposed": 15,
+        "path": "canonical/tools/quoted_line_place_measure_v1.py",
+        "survived_the_specification": 3,
+        "variants": 3
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 126,
+            "name": "score",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "before"
+              },
+              {
+                "kind": "str",
+                "name": "after"
+              },
+              {
+                "kind": null,
+                "name": "got"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "score"
+            ]
+          },
+          {
+            "lineno": 160,
+            "name": "the_organ",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "target"
+              },
+              {
+                "kind": "str",
+                "name": "example_before"
+              },
+              {
+                "kind": "str",
+                "name": "example_after"
+              }
+            ],
+            "returns": "list",
+            "tokens": [
+              "the",
+              "organ"
+            ]
+          },
+          {
+            "lineno": 165,
+            "name": "the_organ_leaving_the_rest",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "target"
+              },
+              {
+                "kind": "str",
+                "name": "example_before"
+              },
+              {
+                "kind": "str",
+                "name": "example_after"
+              }
+            ],
+            "returns": "list",
+            "tokens": [
+              "the",
+              "organ",
+              "leaving",
+              "the",
+              "rest"
+            ]
+          },
+          {
+            "lineno": 172,
+            "name": "the_organ_with_every_try_kept",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "str",
+                "name": "target"
+              },
+              {
+                "kind": "str",
+                "name": "example_before"
+              },
+              {
+                "kind": "str",
+                "name": "example_after"
+              }
+            ],
+            "returns": "list",
+            "tokens": [
+              "the",
+              "organ",
+              "with",
+              "every",
+              "try",
+              "kept"
+            ]
+          },
+          {
+            "lineno": 228,
+            "name": "_add",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "total"
+              },
+              {
+                "kind": "dict",
+                "name": "one"
+              },
+              {
+                "kind": null,
+                "name": "why"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "add"
+            ]
+          },
+          {
+            "lineno": 359,
+            "name": "gh",
+            "reason": "VARIADIC_SIGNATURE_HAS_NO_FINITE_CALL_GRID",
+            "required": [],
+            "returns": null,
+            "tokens": [
+              "gh"
+            ]
+          },
+          {
+            "lineno": 468,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "statement_lines",
+          "changes",
+          "only_imports",
+          "put_together",
+          "_alarm",
+          "_asked",
+          "reason_class",
+          "_empty",
+          "rates",
+          "_share",
+          "one_pull_request",
+          "elsewhere",
+          "measure",
+          "summarise",
+          "usable",
+          "draw",
+          "one_pull",
+          "collect",
+          "fetched_again",
+          "without_texts",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "_empty",
+          "_share",
+          "changes",
+          "draw",
+          "elsewhere",
+          "fetched_again",
+          "measure",
+          "one_pull_request",
+          "only_imports",
+          "reason_class",
+          "summarise",
+          "usable",
+          "without_texts"
+        ],
+        "functions_with_a_confirmed_law": [
+          "draw",
+          "reason_class"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 15,
+          "NOT_APPLICABLE": 41,
+          "REFUTED_ON_THE_BASELINE": 6,
+          "VACUOUS": 6
+        },
+        "laws_proposed": 68,
+        "path": "canonical/tools/repeated_change_one_example_measure_v1.py",
+        "survived_the_specification": 1,
+        "variants": 1
+      },
+      {
+        "counterexamples": [],
+        "functions_declined": [
+          {
+            "lineno": 198,
+            "name": "targets",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "records"
+              },
+              {
+                "kind": "list",
+                "name": "tasks"
+              },
+              {
+                "kind": "dict",
+                "name": "resolved"
+              },
+              {
+                "kind": null,
+                "name": "proposals"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "targets"
+            ]
+          },
+          {
+            "lineno": 221,
+            "name": "_late",
+            "reason": "VARIADIC_SIGNATURE_HAS_NO_FINITE_CALL_GRID",
+            "required": [],
+            "returns": null,
+            "tokens": [
+              "late"
+            ]
+          },
+          {
+            "lineno": 225,
+            "name": "places",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": null,
+                "name": "lessons"
+              },
+              {
+                "kind": "str",
+                "name": "before"
+              },
+              {
+                "kind": "list",
+                "name": "wanted"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "places"
+            ]
+          },
+          {
+            "lineno": 364,
+            "name": "put_together",
+            "reason": "ARITY_ABOVE_TWO",
+            "required": [
+              {
+                "kind": "dict",
+                "name": "found_targets"
+              },
+              {
+                "kind": "dict",
+                "name": "answers"
+              },
+              {
+                "kind": "dict",
+                "name": "functions"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "put",
+              "together"
+            ]
+          },
+          {
+            "lineno": 383,
+            "name": "main",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:mkdir,write_text",
+            "required": [],
+            "returns": "int",
+            "tokens": [
+              "main"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "lessons_of",
+          "normal",
+          "nodes_of",
+          "parts_of",
+          "functions_in",
+          "small_passing_patches",
+          "_one",
+          "asked",
+          "best",
+          "within",
+          "_median",
+          "summarise",
+          "rule",
+          "code_sha256"
+        ],
+        "functions_reached": [
+          "_median",
+          "best",
+          "within"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_median",
+          "within"
+        ],
+        "killed_by_a_law": 0,
+        "killed_by_totality_only": 0,
+        "laws_by_verdict": {
+          "CONFIRMED": 5,
+          "NOT_APPLICABLE": 41,
+          "REFUTED_ON_THE_BASELINE": 2
+        },
+        "laws_proposed": 48,
+        "path": "canonical/tools/small_passing_patch_place_measure_v1.py",
+        "survived_the_specification": 3,
+        "variants": 3
+      },
+      {
+        "counterexamples": [
+          {
+            "args": [
+              [
+                3,
+                1,
+                2
+              ]
+            ],
+            "derivation": "unary and therefore testable for a fixed point; the name does not claim one, so this is a hypothesis execution must confirm",
+            "invariant_id": "IDEMPOTENCE:_ranks",
+            "law": "IDEMPOTENCE",
+            "observed": {
+              "first": [
+                1,
+                2,
+                0
+              ],
+              "holds": false,
+              "second": [
+                2,
+                0,
+                1
+              ]
+            }
+          },
+          {
+            "args": [
+              [
+                "_span",
+                "_single_compare",
+                "_is_boundary_disjunction"
+              ]
+            ],
+            "derivation": "a function that returned on this input returns on this input; every other law is only meaningful on a defined input",
+            "invariant_id": "TOTALITY:_ranks",
+            "law": "TOTALITY",
+            "observed": {
+              "holds": null,
+              "status": "__RAISED__:TypeError",
+              "why": "__RAISED__:TypeError"
+            }
+          },
+          {
+            "args": [
+              [
+                1,
+                1,
+                2
+              ],
+              [
+                3,
+                1,
+                2
+              ]
+            ],
+            "derivation": "binary and therefore testable for symmetry; a name that does not claim it makes this a hypothesis execution must confirm",
+            "invariant_id": "COMMUTATIVITY:_pearson",
+            "law": "COMMUTATIVITY",
+            "observed": {
+              "forward": 0.4714045207910317,
+              "holds": false,
+              "swapped": 0.816496580927726
+            }
+          }
+        ],
+        "functions_declined": [
+          {
+            "lineno": 246,
+            "name": "_locate_html",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:environ",
+            "required": [],
+            "returns": null,
+            "tokens": [
+              "locate",
+              "html"
+            ]
+          },
+          {
+            "lineno": 257,
+            "name": "_locate_modules",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:environ",
+            "required": [],
+            "returns": null,
+            "tokens": [
+              "locate",
+              "modules"
+            ]
+          },
+          {
+            "lineno": 266,
+            "name": "_probe_bridge",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:run",
+            "required": [
+              {
+                "kind": null,
+                "name": "html"
+              },
+              {
+                "kind": null,
+                "name": "modules"
+              }
+            ],
+            "returns": "dict",
+            "tokens": [
+              "probe",
+              "bridge"
+            ]
+          },
+          {
+            "lineno": 290,
+            "name": "_browser_version",
+            "reason": "REACHES_A_SIDE_EFFECTING_NAME:run",
+            "required": [
+              {
+                "kind": null,
+                "name": "html"
+              },
+              {
+                "kind": null,
+                "name": "modules"
+              }
+            ],
+            "returns": null,
+            "tokens": [
+              "browser",
+              "version"
+            ]
+          }
+        ],
+        "functions_offered": [
+          "newest_run",
+          "_steps",
+          "table",
+          "_ranks",
+          "_pearson",
+          "_residualise",
+          "relationships",
+          "_judge",
+          "feasibility",
+          "_sparticuz_root",
+          "report",
+          "main"
+        ],
+        "functions_reached": [
+          "_judge",
+          "_pearson",
+          "_ranks",
+          "_residualise",
+          "_sparticuz_root",
+          "_steps",
+          "feasibility",
+          "relationships",
+          "table"
+        ],
+        "functions_with_a_confirmed_law": [
+          "_pearson",
+          "_ranks"
+        ],
+        "killed_by_a_law": 3,
+        "killed_by_totality_only": 3,
+        "laws_by_verdict": {
+          "CONFIRMED": 11,
+          "NOT_APPLICABLE": 14,
+          "REFUTED_ON_THE_BASELINE": 5
+        },
+        "laws_proposed": 30,
+        "path": "canonical/tools/what_a_demonstration_leaves_open_v1.py",
+        "survived_the_specification": 6,
+        "variants": 12
+      }
+    ],
+    "modules_judged": 20,
+    "modules_offered": 156,
+    "modules_with_a_law": 30,
+    "network_calls": 0,
+    "real_geometry": {
+      "example_strings": [
+        "canonical/swe_kernel/__init__.py",
+        "from __future__ import annotations",
+        "import os",
+        "from typing import Any, Callable, Iterable, List",
+        "__all__ = ["
+      ],
+      "list_inputs": 1,
+      "source": "paths, source lines and identifier lists read from the corpus roots",
+      "string_inputs": 72
+    },
+    "roots": [
+      "canonical/swe_kernel",
+      "canonical/tools"
+    ],
+    "schema": "PROJECT_BRAIN_SPECIFICATION_FROM_STRUCTURE_MEASURE_V1",
+    "skipped": [
+      {
+        "path": "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/boundary_disjunction_normalization_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/closed_loop_autonomous_controller_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/concept_library_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/diagnostics_perf_and_design_engine_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/experiential_strategy_extractor_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/forged_binding_and_macro_spine_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/global_extrapolation_chase_spine_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/goal_dag_executor_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/incremental_semantic_graph_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/lesson_localization_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/multistep_repo_closed_loop_solver_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/operator_generalization_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/polyglot_build_ci_engine_v1.py",
+        "reason": "CHILD_FAILED:SPECIFICATION_CHILD_FAILED:Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\n  File \"/home/user/"
+      },
+      {
+        "path": "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/python_ast_query_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/recursive_self_architect_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/retained_repair_session_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/rule_expiry_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/rule_scope_learning_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/self_reflective_learning_system_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/semantic_unification_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/skill_precondition_presence_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/skill_recheck_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/skill_scope_ledger_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/skill_sequence_verify_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/skill_verification_contract_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/specification_from_structure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/swe_self_improvement_bridge_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/bring_names_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/expression_operator_pack_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/generic_alias_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/inline_variable_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/kept_under_an_old_name_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/rename_local_variable_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/taught_actions/settled_admission_v1.py",
+        "reason": "CHILD_FAILED:SPECIFICATION_CHILD_FAILED:"
+      },
+      {
+        "path": "canonical/swe_kernel/test_suite_admission_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/transactional_parallel_execution_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/transform_contracts_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/transition_verifier_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/tree_sitter_cst_skill_skeleton_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/upstream_routing_ledger_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/verified_capability_bridge_index_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/swe_kernel/weight_update_admission_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/workflow_goal_generalization_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/swe_kernel/zygote_worker_pool_v1.py",
+        "reason": "CHILD_FAILED:Expecting value: line 1 column 1 (char 0)"
+      },
+      {
+        "path": "canonical/tools/across_environments_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/arc_agi_3_public_exploration_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/audit_living_canary_isolation_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/auditability_report_v1.py",
+        "reason": "CHILD_FAILED:SPECIFICATION_CHILD_FAILED:Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\n  File \"/home/user/"
+      },
+      {
+        "path": "canonical/tools/bring_names_measure_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/candidate_under_the_tasks_tests_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/carrier_qualification_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/census_orphan_capabilities_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/changed_state_transfer_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/compose_hardcore_swe_problem_inventory_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/computer_branch_comparison_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/concept_ladder_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/concept_lifecycle_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/concept_totality_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/confinement_seam_shadow_probe_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/cross_kind_compounding_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/cross_kind_learning_to_learn_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/cross_language_lesson_transfer_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/demonstration_choice_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/demonstration_pair_selection_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/diagnose_branch_comparison_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/edit_kind_choice_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/edits_repeated_across_projects_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/experience_corpus_training_readiness_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/expert_fix_pull_request_collector_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/expert_fix_repetition_measure_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/expert_fixes_dose_response_measure_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/expression_operator_pack_measure_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/external_evidence_ledger_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/failure_attribution_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/fix_shape_census_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/generic_alias_measure_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/held_out_transfer_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/hold_out_the_precision_curve_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/humanevalfix_edit_kind_transfer_measure_v1.py",
+        "reason": "CHILD_FAILED:SPECIFICATION_CHILD_FAILED:Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\n  File \"/home/user/"
+      },
+      {
+        "path": "canonical/tools/humanevalfix_experience_stream_measure_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/humanevalfix_recorded_proposals_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/humanevalfix_repair_solver_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/humanevalfix_solver_record_as_rows_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/index_capability_evidence_v1.py",
+        "reason": "CHILD_FAILED:Expecting value: line 1 column 3 (char 2)"
+      },
+      {
+        "path": "canonical/tools/instant_learning_boundary_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/insufficiency_certificate_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/invalidation_enforcement_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/learn_path_verification_wiring_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/learning_claim_adjudicator_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/lesson_admission_harm_measure_20261113_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/lesson_pool_interference_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/lift_the_refusal_and_see_what_remains_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/live_scoped_transfer_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/living_canary_isolation_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/living_self_model_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+        "reason": "CHILD_FAILED:SPECIFICATION_CHILD_FAILED:Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\n  File \"/home/user/"
+      },
+      {
+        "path": "canonical/tools/miniwob_where_the_wall_actually_is_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/one_lesson_one_kind_probe_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/one_published_fix_counterfactual_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/one_success_where_it_counts_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/one_try_compounding_probe_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/one_try_coverage_frontier_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/one_try_state_probe_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/passing_patch_shape_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/patch_verdict_amplification_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/pr_c2_apply_time_broadening_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/quixbugs_edit_kind_transfer_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
+        "reason": "CHILD_FAILED:SPECIFICATION_CHILD_FAILED:Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\n  File \"/home/user/"
+      },
+      {
+        "path": "canonical/tools/real_repair_localization_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/realistic_goal_reach_probe_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/receipt_program_identity_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/resolving_candidate_under_the_whole_suite_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/rule_generalization_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/seeded_faults_file_found_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/seeded_faults_function_found_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/seeded_faults_tests_as_the_judge_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/seeded_faults_whole_suite_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/self_audit_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/semantic_join_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/sentient_branch_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/shared_skill_transfer_benchmark_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/skill_scope_acquisition_probe_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/specification_from_structure_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/take_out_measure_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/teach_actions_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/test_entry_point_finder_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/test_oracle_strength_measure_20261113_v1.py",
+        "reason": "NO_CALLABLE_PUBLIC_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/the_exchange_rate_of_one_lesson_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/weight_space_fuel_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/weight_update_interference_measure_20261113_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/what_the_machine_kept_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/what_the_operand_names_cost_v1.py",
+        "reason": "NO_VARIANT_OF_A_LAW_BEARING_FUNCTION"
+      },
+      {
+        "path": "canonical/tools/what_transfers_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/when_one_showing_should_be_trusted_20261112_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/which_fix_moves_generalization_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/which_refusal_is_actually_firing_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      },
+      {
+        "path": "canonical/tools/which_wall_actually_stops_it_v1.py",
+        "reason": "NO_NON_TRIVIAL_LAW_CONFIRMED_ON_THIS_MODULE"
+      }
+    ],
+    "totals": {
+      "blind_spot_rate": 0.733333,
+      "files_scanned": 171,
+      "functions_called": 1186,
+      "functions_reached": 535,
+      "functions_with_a_confirmed_law": 43,
+      "killed_by_a_law": 12,
+      "killed_by_totality_only": 16,
+      "laws_confirmed": 578,
+      "laws_not_applicable": 2717,
+      "laws_proposed": 3796,
+      "laws_refuted": 268,
+      "laws_vacuous": 233,
+      "modules_judged": 20,
+      "modules_measured": 20,
+      "modules_offered": 156,
+      "modules_with_a_law": 30,
+      "rejection_rate": 0.266667,
+      "rejection_rate_by_a_law": 0.114286,
+      "survived_the_specification": 77,
+      "variants": 105
+    }
+  },
+  "model_calls": 0,
+  "network_calls": 0,
+  "reading": "With the hole closed the instrument reaches more code and rejects more, and the conclusion does not move: a specification read off structure alone rejects a real minority of behaviourally-altered variants (11.4% here) and is blind to roughly three quarters of them. It is a real oracle and a weak one, and the limit is vocabulary, not coverage.",
+  "schema": "PROJECT_BRAIN_SPECIFICATION_FROM_STRUCTURE_RECEIPT_20261116_V2",
+  "supersedes": "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+  "why_a_new_receipt": "The V1 measurement ran with a reduction that kept only the functions under test. A function that calls a helper therefore raised NameError and reported NOT_APPLICABLE for every law, and modules whose kept definitions named a dropped name failed to load entirely (43 of 121 in this tree). V1's numbers are not wrong so much as measured through a hole; V2 keeps every call-safe definition, falls back to statement-by-statement loading, and is the number to quote. V1 is left in the tree, unedited, because deleting an unflattering measurement is how a receipt becomes a brochure."
+}

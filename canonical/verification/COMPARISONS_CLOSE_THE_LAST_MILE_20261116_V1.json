@@ -1,0 +1,252 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "by_stage": {
+    "NOT_REPAIRED__NO_IMPROVING_CANDIDATE": {
+      "count": 9,
+      "tasks": [
+        "flatten",
+        "hanoi",
+        "kheapsort",
+        "knapsack",
+        "powerset",
+        "shunting_yard",
+        "subsequences",
+        "to_base",
+        "wrap"
+      ]
+    },
+    "NOT_REPAIRED__PARTIAL_EXAMPLES_ONLY": {
+      "count": 4,
+      "tasks": [
+        "levenshtein",
+        "longest_common_subsequence",
+        "possible_change",
+        "sqrt"
+      ]
+    },
+    "NO_EXAMPLES": {
+      "count": 9,
+      "tasks": [
+        "breadth_first_search",
+        "depth_first_search",
+        "detect_cycle",
+        "minimum_spanning_tree",
+        "reverse_linked_list",
+        "shortest_path_length",
+        "shortest_path_lengths",
+        "shortest_paths",
+        "topological_ordering"
+      ]
+    },
+    "REPAIRED__CORPUS_TEST_PASSES": {
+      "count": 18,
+      "tasks": [
+        "bitcount",
+        "bucketsort",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "is_valid_parenthesization",
+        "kth",
+        "lcs_length",
+        "lis",
+        "max_sublist_sum",
+        "mergesort",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "sieve"
+      ]
+    }
+  },
+  "candidates_tested": 200529,
+  "corpus": {
+    "source_present": true,
+    "upstream": "https://github.com/jkoppel/QuixBugs"
+  },
+  "hard_nonclaims": [
+    "NOT_A_FRONTIER_SCORE",
+    "NOT_SWE_BENCH",
+    "SINGLE_EDIT_ONLY",
+    "PYTHON_ONLY",
+    "NO_MULTI_EDIT_OR_CROSS_FILE_REPAIR",
+    "EXAMPLES_ARE_NOT_A_PROOF_OF_CORRECTNESS",
+    "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION"
+  ],
+  "header": {
+    "answer_key_present_at_source": true,
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+    "budget_s": 45.0,
+    "generated_utc": "2026-11-16T18:28:53Z",
+    "incremental_spend_usd": 0,
+    "kind": "header",
+    "model_dependency_count": 0,
+    "network_calls_during_measurement": 0,
+    "python": "3.11.2",
+    "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_V1",
+    "tasks_planned": [
+      "bitcount",
+      "breadth_first_search",
+      "bucketsort",
+      "depth_first_search",
+      "detect_cycle",
+      "find_first_in_sorted",
+      "find_in_sorted",
+      "flatten",
+      "gcd",
+      "get_factors",
+      "hanoi",
+      "is_valid_parenthesization",
+      "kheapsort",
+      "knapsack",
+      "kth",
+      "lcs_length",
+      "levenshtein",
+      "lis",
+      "longest_common_subsequence",
+      "max_sublist_sum",
+      "mergesort",
+      "minimum_spanning_tree",
+      "next_palindrome",
+      "next_permutation",
+      "pascal",
+      "possible_change",
+      "powerset",
+      "quicksort",
+      "reverse_linked_list",
+      "rpn_eval",
+      "shortest_path_length",
+      "shortest_path_lengths",
+      "shortest_paths",
+      "shunting_yard",
+      "sieve",
+      "sqrt",
+      "subsequences",
+      "to_base",
+      "topological_ordering",
+      "wrap"
+    ],
+    "upstream": "https://github.com/jkoppel/QuixBugs"
+  },
+  "measured_tasks": 40,
+  "reading": "A repaired task means the corpus's own pytest file passed on a FRESH copy of the task with the candidate applied, the answer key absent from the task directory, and no model, network or learned parameter in the loop. NO_EXAMPLES means the corpus specifies the task by constructing objects inline and asserting a bare boolean, so no input/output example exists to search against: one bit per test cannot direct a search, and that is reported as unmeasurable rather than as a failure or a success.",
+  "repair_classification": {
+    "bitcount": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "bucketsort": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "find_first_in_sorted": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "find_in_sorted": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "gcd": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "get_factors": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "is_valid_parenthesization": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "kth": {
+      "introduced": [
+        "max"
+      ],
+      "verdict": "PLAUSIBLE_REWRITE__BUILTIN_NOT_IN_PROGRAM"
+    },
+    "lcs_length": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "lis": {
+      "introduced": [
+        "len"
+      ],
+      "verdict": "PLAUSIBLE_REWRITE__BUILTIN_NOT_IN_PROGRAM"
+    },
+    "max_sublist_sum": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "mergesort": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "next_palindrome": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "next_permutation": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "pascal": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "quicksort": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "rpn_eval": {
+      "verdict": "LOCAL_EDIT"
+    },
+    "sieve": {
+      "introduced": [
+        "all"
+      ],
+      "verdict": "PLAUSIBLE_REWRITE__BUILTIN_NOT_IN_PROGRAM"
+    }
+  },
+  "repaired": 18,
+  "repaired_by_edit_kind": {
+    "ATOM_SHAPE": 7,
+    "OPERATOR": 1,
+    "PERMUTE": 2,
+    "REPLACE": 8
+  },
+  "repaired_tasks": [
+    "bitcount",
+    "bucketsort",
+    "find_first_in_sorted",
+    "find_in_sorted",
+    "gcd",
+    "get_factors",
+    "is_valid_parenthesization",
+    "kth",
+    "lcs_length",
+    "lis",
+    "max_sublist_sum",
+    "mergesort",
+    "next_palindrome",
+    "next_permutation",
+    "pascal",
+    "quicksort",
+    "rpn_eval",
+    "sieve"
+  ],
+  "repairs_that_are_local_edits": [
+    "bitcount",
+    "bucketsort",
+    "find_first_in_sorted",
+    "find_in_sorted",
+    "gcd",
+    "get_factors",
+    "is_valid_parenthesization",
+    "lcs_length",
+    "max_sublist_sum",
+    "mergesort",
+    "next_palindrome",
+    "next_permutation",
+    "pascal",
+    "quicksort",
+    "rpn_eval"
+  ],
+  "repairs_that_are_plausible_rewrites": [
+    "kth",
+    "lis",
+    "sieve"
+  ],
+  "schema": "BRAIN_GRAMMAR_CLOSED_REPAIR_RECEIPT_V1",
+  "seconds_total": 510.2
+}

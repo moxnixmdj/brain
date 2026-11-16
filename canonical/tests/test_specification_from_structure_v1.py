@@ -21,6 +21,7 @@ from __future__ import annotations
 import json
 import pathlib
 import sys
+import tempfile
 import unittest
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -59,6 +60,22 @@ def run(source, variants=(), extra_pools=None):
     )
 
 
+class LoadingTests(unittest.TestCase):
+    def test_a_definition_that_cannot_be_defined_does_not_take_the_module_with_it(self):
+        # 43 of 121 modules in this tree failed to load as a reduction because one kept
+        # definition needed a name the reduction had dropped. A module that fails to load
+        # yields no laws, so that failure was silently removing a third of the corpus.
+        source = (
+            "from nowhere import Missing\n"
+            "class Broken(Missing):\n    pass\n"
+            "def fine(a):\n    return a\n"
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            module = spec._load_module(source, "fallback", pathlib.Path(directory))
+        self.assertEqual(module.fine(2), 2)
+        self.assertTrue(module._BRAIN_SKIPPED_DEFINITIONS)
+
+
 class DerivationTests(unittest.TestCase):
     def test_a_name_that_says_canonical_form_proposes_a_fixed_point(self):
         derived = spec.derive("def normalize(text):\n    return text\n", "m")
@@ -79,21 +96,61 @@ class DerivationTests(unittest.TestCase):
         self.assertIn("REACHES_A_SIDE_EFFECTING_NAME", declined["read_it"])
         self.assertIn("open", declined["read_it"])
 
-    def test_only_the_selected_definitions_and_stdlib_imports_survive_reduction(self):
+    def test_reduction_keeps_definitions_and_drops_module_level_effects(self):
+        # This test used to assert that an unselected definition was *removed* from the reduced
+        # module. That assertion pinned the wrong behaviour and it cost a measurement: a selected
+        # function that calls a helper which the reduction had deleted raises `NameError`, and a
+        # raising function is reported NOT_APPLICABLE for every law -- silence that reads exactly
+        # like "this code has no laws". Kept in full: definitions may stay because a `def`
+        # executes nothing but its decorators and defaults; what may not stay is a statement.
         source = (
             "import os\n"
             "import requests\n"
             "sys_path_hack = os.getcwd()\n"
             "TABLE = {1: 2}\n"
-            "def keep(a):\n    return a\n"
-            "def drop(a):\n    return 2\n"
+            "def keep(a):\n    return helper(a)\n"
+            "def helper(a):\n    return a\n"
+            "def decorated():\n    return 2\n"
+            "decorated = os.getcwd()(decorated)\n"
         )
         reduced = spec.reduce_module(source, ["keep"])
         self.assertIn("def keep", reduced)
-        self.assertNotIn("def drop", reduced)
+        self.assertIn("def helper", reduced)
         self.assertNotIn("requests", reduced)
         self.assertNotIn("sys_path_hack", reduced)
+        self.assertNotIn("decorated = os.getcwd()", reduced)
         self.assertIn("TABLE", reduced)
+
+    def test_a_class_whose_body_runs_code_is_not_kept_by_the_reduction(self):
+        # Keeping definitions is safe only up to the class body, which is a statement list. A
+        # reduction that kept `TABLE = load()` inside a class crashed every child that loaded it,
+        # which surfaced as SPECIFICATION_CHILD_FAILED rather than as a wrong number.
+        source = (
+            "def load():\n    raise SystemExit('must not run')\n"
+            "class Inert:\n    TABLE = {1: 2}\n    def f(self):\n        return 1\n"
+            "class Live:\n    TABLE = load()\n"
+        )
+        reduced = spec.reduce_module(source, ["load"])
+        self.assertIn("class Inert", reduced)
+        self.assertNotIn("class Live", reduced)
+        namespace: dict[str, object] = {}
+        exec(compile(reduced, "<reduced>", "exec"), namespace)  # noqa: S102 - our own reduction
+        self.assertIn("Inert", namespace)
+
+    def test_a_helper_removed_from_the_reduction_is_what_silences_a_law(self):
+        # The measurement above is the reason this exists: with the helper kept, `keep` is
+        # callable and a law about it can be confirmed; with the helper deleted, the same law is
+        # NOT_APPLICABLE and reports nothing. The difference is the reduction, not the code.
+        source = "def keep(a):\n    return helper(a)\n\ndef helper(a):\n    return a\n"
+        reduced = spec.reduce_module(source, ["keep"])
+        namespace: dict[str, object] = {}
+        exec(compile(reduced, "<reduced>", "exec"), namespace)  # noqa: S102 - our own reduction
+        self.assertEqual(namespace["keep"](3), 3)
+        without = "def keep(a):\n    return helper(a)\n"
+        namespace = {}
+        exec(compile(without, "<reduced>", "exec"), namespace)  # noqa: S102
+        with self.assertRaises(NameError):
+            namespace["keep"](3)  # type: ignore[operator]
 
     def test_a_module_whose_top_level_raises_is_still_judgeable(self):
         source = (

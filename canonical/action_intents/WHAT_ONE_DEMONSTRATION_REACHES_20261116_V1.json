@@ -1,0 +1,528 @@
+{
+  "action_id": "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1",
+  "action_intent_id": "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "REUSE was tried first and exhausted against real artifacts: the learned-skill bundle already stores the action (11 skills, 0 ever used) and skill_scope_bundle_v1 already buys scope from observations, so nothing new had to be stored. What was missing was the measurement: neither module had ever been executed against a sample of the whole tree to ask how far one demonstration reaches, and the false general claim 'one experience, then permanent everywhere' was repeated without a number attached to it.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "AGENTS.md",
+      "README.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/one_demonstration_reach_v1.py",
+      "canonical/tests/test_one_demonstration_reach_v1.py",
+      "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json",
+      "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.md"
+    ],
+    "route_class": "REUSE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_CALLED_A_DEMONSTRATION_SOLVED_BECAUSE_THE_STORED_SKILL_REPRODUCED_ITS_OWN_EXAMPLE_AND_NEVER_MEASURED_HOW_MUCH_OF_A_REAL_REPOSITORY_THE_SINGLE_DEMONSTRATION_REACHES",
+  "canonical_base_commit": "ec087313b9903e7a3e26c29bfb135ecad8735022",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_TREE_CALLED_A_DEMONSTRATION_SOLVED_BECAUSE_THE_STORED_SKILL_REPRODUCED_ITS_OWN_EXAMPLE_AND_NEVER_MEASURED_HOW_MUCH_OF_A_REAL_REPOSITORY_THE_SINGLE_DEMONSTRATION_REACHES",
+  "date": "2026-11-16",
+  "expected_parent_change": "'One demonstration, learned permanently' stops being a slogan and becomes four measured numbers on 139,439 real sites: reach 5.3% for a semantic rewrite and 86.3% for an alpha-conversion, 0 damaged in 600 executed applications, and 12 classes of site declined. Reach is shown to be a property of the operation's premise, not of the environment.",
+  "expected_parent_frontier_change": "The growth target moves from 'more skills' and 'more experiences' to 'more proofs': the class space a repository exposes is measured rather than imagined, and every future operation is judged by the marginal verified sites it adds over one fixed stride sample.",
+  "explicit_user_authorization": [
+    "Why can't we just give our model the most advanced coding actions, let it experience them once, and have it learn them? Can't we do this now?",
+    "you must think from first principles for everything",
+    "You should kill all the bad and dumb ideas before you waste time implementing them.",
+    "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+    "maximize your web use",
+    "What is the single bottleneck that, if fixed, would unlock the most capability?",
+    "all the tests are not on synthetic data but are on the hardest open tests",
+    "only our agent/system may run them; integrity 100% real",
+    "Work in branch, merge only when complete (fastest)",
+    "Merge once, not 10 times."
+  ],
+  "falsification_condition": "Any damaged site in a reach run; a declined site with no named reason; a verified site whose file did not change or whose scope check failed; an environment variable that predicts reach better than the premise does; a claim of capability, benchmark, or terminal credit.",
+  "generic_repair_from_single_probe": false,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. A coding benchmark floor cannot move while the reachable edit space is a hand-written list that omits whole classes of real fix; this makes the reachable space a measured property and one transfer real. No obligation is discharged, no benchmark gain is claimed, and no capability or independent credit is claimed.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "combined": {
+      "damaged": 0,
+      "distinct_classes": 12,
+      "reach": 0.4583,
+      "sampled": 600,
+      "verified": 275
+    },
+    "external_state": {
+      "arithmetic": "0.995 ** 318 is approximately 0.20: a 99.5%-reliable step finishes one long task in five",
+      "memory_centric_cl": "arXiv:2610.29357: stored content can survive while remaining unaccessed, unused, or ineffective",
+      "osworld2": "arXiv:2606.29537: 108 long-horizon tasks, median 1.6h, ~318 tool calls; best 20.6% binary at release, ~44% now; failures are dropped constraints, missed mid-task information, guessing instead of asking, and skipped verification",
+      "skillos": "arXiv:2605.06614: environment-specific skills transfer worst, abstract strategies best",
+      "voyager": "skill-library transfer works because the world protocol is identical; the paper's ablations: no self-verification -73%, no curriculum -93%"
+    },
+    "families": {
+      "inline": {
+        "classes": 9,
+        "damaged": 0,
+        "declined": 284,
+        "premise_proxy_sites": 18,
+        "premise_proxy_verified": 12,
+        "reach": 0.0533,
+        "sampled": 300,
+        "verified": 16
+      },
+      "rename": {
+        "classes": 4,
+        "damaged": 0,
+        "declined": 41,
+        "premise_proxy_sites": 18,
+        "premise_proxy_verified": 18,
+        "reach": 0.8633,
+        "sampled": 300,
+        "verified": 259
+      }
+    },
+    "incremental_spend_usd": 0,
+    "model_calls": 0,
+    "sample": "deterministic stride, 300 sites per family over the whole sorted site list",
+    "top_declined_classes": {
+      "bound_in_a_nested_scope": 31,
+      "not_a_plain_assignment": 66,
+      "not_assigned_in_function": 34,
+      "not_the_first_thing_computed": 32,
+      "read_twice": 126,
+      "set_twice": 25
+    },
+    "tree": {
+      "direct_sites": 60808,
+      "files": 5513,
+      "files_with_sites": 4188,
+      "scan_seconds": 48.08,
+      "sites": 139439
+    },
+    "what_this_does_not_claim": [
+      "no capability credit, no benchmark rank, no terminal credit",
+      "no model call and no spent compute: the whole measurement is arithmetic on this tree",
+      "computer-use reach is not measured here; OSWorld-class measurement needs a harness that this sandbox does not have, and it is not faked"
+    ]
+  },
+  "next_step": "Add one operation per top-mass declined class (read-twice needs a purity proof, non-plain binding needs a tuple/attribute binding model, nested scope needs scope analysis, set-twice needs dataflow, parameters need a different operation) and measure the marginal verified sites each adds over the same deterministic stride sample.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "paths": [
+    "canonical/swe_kernel/one_demonstration_reach_v1.py",
+    "canonical/tests/test_one_demonstration_reach_v1.py",
+    "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json",
+    "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.md",
+    "canonical/action_intents/WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.json"
+  ],
+  "prior_work_reused": [
+    "canonical/swe_kernel/learned_skill_verdict_v1.py",
+    "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+    "canonical/swe_kernel/skill_scope_bundle_v1.py",
+    "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+    "canonical/runtime/applicability_v1.py",
+    "canonical/runtime/contrast_selection_v1.py",
+    "canonical/swe_kernel/rule_scope_learning_v1.py"
+  ],
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "ec087313b9903e7a3e26c29bfb135ecad8735022",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "enumerating more hand-written mutation kinds",
+      "spending more search budget on a basis that cannot contain the answer",
+      "teaching whole files instead of the smallest differing position",
+      "counting a self-taught repair as transfer"
+    ],
+    "expected_parent_frontier_change": "The space of edits the system can consider stops being a list an author imagined: a demonstration is folded into a template whose context is its applicability condition, so which fixes are reachable is a measured property of the basis instead of a silent ceiling, and the next capability work is aimed at the rungs the corpus proves are missing.",
+    "expected_parent_level_state_change": "The growth target moves from 'more skills' and 'more experiences' to 'more proofs': the class space a repository exposes is measured rather than imagined, and every future operation is judged by the marginal verified sites it adds over one fixed stride sample.",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete the hand-written list as the definition of the space",
+        "bypass enumeration by folding demonstrations",
+        "substitute the corpus's own tests for any invented notion of correctness"
+      ],
+      "intrinsic_or_path_specific": "path_specific: the vocabulary ceiling is a design choice and was removed here; the multi-position and insertion rungs, and non-terminating defects, remain open.",
+      "surviving_causal_blocker": "The hypothesis space of edits: identity does not transport across programs, so a lesson must be abstracted past the edit it was learned from."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "a second lesson store or admission gate",
+        "another hand-written mutation kind",
+        "a larger search budget on an inexpressible edit"
+      ],
+      "existing_inherited_routes_checked": [
+        "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
+        "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
+        "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
+        "lesson_localization_v1 (refuses shape changes by design)"
+      ],
+      "external_existing_routes_checked": [
+        "QuixBugs itself, as the corpus and the oracle",
+        "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+      ],
+      "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "a higher repair count reached by loosening what counts as repaired",
+        "counting a self-taught repair as transfer",
+        "treating a longer candidate list as more capability",
+        "quoting a corpus score as a frontier position"
+      ],
+      "real_outcome": "Whether a demonstrated fix can reach an undemonstrated bug becomes a measured property of the edit basis instead of an open question answered by assertion.",
+      "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+      "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+      "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Reused the existing repair loop and patch-search primitive instead of writing a second repairer; the corpus's own test files are used unmodified.",
+      "search_stop_decision": "Stop after the ladder and the 20/20 comparison; do not add template rungs without the measurement that says which rung is missing."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "efficiency_mechanism": "Templates prune the space before execution: 224 candidates instead of 5,021 for the same held-out half.",
+      "generality_mechanism": "Anti-unification with shared holes plus a node-type context precondition, so one demonstration yields a rule that fires wherever its precondition literally holds.",
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "The list edit is a hard zero on real fixes; the budget cannot reach an inexpressible edit; the token rule has no position or context; a model is prohibited producer cognition.",
+      "routes_ranked": [
+        "induce node-level templates from demonstration pairs",
+        "add an AugAssign rule to the hand-written list",
+        "raise the candidate budget",
+        "reuse the token anti-unifier",
+        "ask a model to write the patch"
+      ],
+      "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "oracle_paths": [
+        "canonical/tests/test_induced_edit_basis_v1.py",
+        "canonical/tests/test_quixbugs_measurement_integrity_v1.py",
+        "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+      ],
+      "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+    },
+    "real_outcome": "One demonstration reaches 5.3% of a real repository's name sites as an inline rewrite and 86.3% as a rename, damages nothing in 600 executed applications, and declines 12 classes of site that each need a different proof.",
+    "required_capability": "Operations that carry a computed premise and check it before acting, plus a growth metric of marginal verified sites per operation over a fixed real sample.",
+    "route_frontier": {
+      "challenger_routes": [
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "adds actions, not proofs",
+            "CORRECTNESS": "high, but says nothing about reach",
+            "INCREMENTAL_COST": "low per action",
+            "RELIABILITY": "unchanged: fires only where its own premise holds",
+            "VERIFIABILITY": "measured per action",
+            "WALL_CLOCK": "cheap to add, unbounded to enumerate"
+          },
+          "evidence": [
+            "bundle: 11 skills, hit_count 0 of 11",
+            "stored stdout verdict admitted a do-nothing program 4 of 4",
+            "four-arm certificate refuses 12 of 12 impostors"
+          ],
+          "qualification_evidence": [
+            "measured in canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "NON_DOMINATING",
+          "route": "ADD_MORE_LEARNED_ACTIONS_TO_THE_BUNDLE"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "looks like reach, adds none",
+            "CORRECTNESS": "unsound: similarity is not a proof of meaning preservation",
+            "INCREMENTAL_COST": "low",
+            "RELIABILITY": "would fire outside the premise; the one outcome this tree forbids",
+            "VERIFIABILITY": "would need a proof anyway, which is the selected route",
+            "WALL_CLOCK": "fast"
+          },
+          "evidence": [
+            "structure-derived laws added 0 kills over 19 survivors",
+            "skill_scope_ledger: 5/5 shipped skills EXACT_MATCH_ONLY",
+            "rule_scope_learning: one lesson reached 1 of 7 structurally novel instances"
+          ],
+          "qualification_evidence": [
+            "measured in canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "route": "WIDEN_EACH_ACTION_BY_SIMILARITY_TO_NEIGHBOURING_SITES"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "turns reach into a number and a growth metric",
+            "CORRECTNESS": "every application is verified by the file, the claim and the scope",
+            "INCREMENTAL_COST": "zero model spend, zero network",
+            "RELIABILITY": "0 damaged in 600; declines name their reason",
+            "VERIFIABILITY": "reproducible from the receipt with one command",
+            "WALL_CLOCK": "48s static classification, 42s for 600 executed applications"
+          },
+          "evidence": [
+            "139,439 sites classified statically in 48s with no model call",
+            "inline reach 5.3% / rename reach 86.3% on a deterministic stride sample",
+            "0 damaged in 600 executed applications; 12 declined classes named"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION"
+        }
+      ],
+      "checked_at_utc": "2026-11-16T19:19:12Z",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "discovery_required": true,
+      "incumbent_route": "keep growing the learned-skill bundle by adding actions, and treat the stored example as proof that an action was learned",
+      "max_age_hours": 24,
+      "negative_search_summary": "Three routes were searched and refused with evidence on this tree: adding more actions to the bundle (11 skills, 0 ever used, stored verdict admits a program that writes nothing 4 of 4), widenening a rule by similarity (shape-derived laws produced 0 kills of 19 survivors), and letting a model write the action (forbidden: no model may be used, and it would put a knowledge house back in the execution path).",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "program repair from a single demonstration transfer to unseen bugs 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "QuixBugs bug corpus python programs tests published"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "anti-unification edit template hole generalization program repair"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "2026 automatic program repair vocabulary expressibility limit"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-16T19:19:12Z",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+            "evidence": [
+              "25 mechanism and integrity tests ran; every corpus verdict is a pytest run"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
+            "evidence": [
+              "40 tasks enumerated from the corpus's own test files; each program and test hashed in the receipt"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          },
+          {
+            "dependency": "local filesystem tempdir for per-task isolation",
+            "evidence": [
+              "correct_python_programs asserted absent in every task directory before it runs"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ],
+            "evidence_scope": "GLOBAL",
+            "kind": "STORAGE",
+            "required": true,
+            "scope": "GLOBAL",
+            "status": "READY",
+            "volatility": "STATIC"
+          }
+        ],
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
+        "status": "READY"
+      },
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/lesson_localization_v1.py",
+          "canonical/swe_kernel/lesson_admission_gate_v1.py",
+          "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+          "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+          "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+          "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+        ]
+      },
+      "unresolved_plausible_dominators": []
+    },
+    "routes_considered": [
+      "Reuse the crystallizer's token anti-unification to induce the rule (checked: it cannot express position-level containment and has no site context)",
+      "Extend the hand-listed mutation list with an AugAssign rule and re-run (checked against the ladder: it lifts one bug and leaves 26 of 40 untouched)",
+      "Raise the candidate budget on the existing loop (checked: 280 candidates already return zero on bitcount because the edit is not expressible)",
+      "Induce node-level templates from demonstration pairs and let the corpus's oracle decide",
+      "Ask a model to write the patch (refused: producer cognition, zero credit)"
+    ],
+    "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
+    "selected_surviving_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
+    "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "stop_condition": "One merged change on this branch whose four numbers are reproducible from the receipt by running one command.",
+    "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real artifact and refused: the crystallizer's token anti-unification cannot express position-level containment and has no site context, and the existing repair primitive has no ast.AugAssign rule at all. Inducing a template from one demonstration pair and letting the corpus's own tests decide costs two runs; adding another hand-written mutation kind would lift one bug of forty and leave the question unmeasured.",
+    "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+  },
+  "route_id": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
+  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+  "stop_condition": "One merged change on this branch whose four numbers are reproducible from the receipt by running one command.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "current_load_bearing_atomic_count": 36,
+      "deleted_nonnecessary_atomic_count": 2,
+      "historical_atomic_registry_count": 38,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_atomic": 38,
+      "total_families": 19,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair; it discharges no truth obligation.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Does one demonstrated fix reach an undemonstrated bug, and what about the basis decides it?",
+      "falsifier_id": "EXPRESSIBILITY_LADDER_PLUS_THE_20_HELD_OUT_COMPARISON",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "The corpus is the counterexample: 40 published fixes with pairwise distinct edits, so the measurement is itself the falsifier and no new external receipt is added by this PR.",
+      "proposal_id": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1"
+    }
+  },
+  "verification": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "commands": [
+      "python3 canonical/swe_kernel/one_demonstration_reach_v1.py --sample 300 --json canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json",
+      "python3 -m pytest canonical/tests/test_one_demonstration_reach_v1.py",
+      "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+      "python3 execution_guard/repo_integrity_guard_v1.py"
+    ],
+    "receipt": "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json"
+  },
+  "weakens_existing_guard": false
+}
