@@ -1,0 +1,537 @@
+{
+ "action_id": "WHAT_A_PASS_IS_WORTH_20261116_V1",
+ "action_intent_id": "WHAT_A_PASS_IS_WORTH_20261116_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/patch_verdict_amplification_v1.py",
+   "canonical/tools/patch_verdict_amplification_measure_v1.py",
+   "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
+   "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
+   "WHAT_A_PASS_IS_WORTH_20261116_V1.md"
+  ],
+  "route_class": "MEASURE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_COULD_NOT_SAY_WHAT_A_PASSING_TEST_SUITE_IS_WORTH_AND_ASSUMED_THAT_A_CONFIRMED_LAW_WOULD_ADD_ON_TOP_OF_IT__MEASURED_ON_16_OWN_SUITES_THE_SUITE_REJECTED_77_OF_96_BEHAVIOUR_ALTERING_CANDIDATES_AND_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTED_ZERO_OF_THE_19_IT_ACCEPTED_EVEN_THOUGH_THE_LAW_WAS_POINTED_AT_THE_MUTATED_FUNCTION_IN_ALL_19",
+ "canonical_base_commit": "305b6da7ce576993deca08522fce9761f7a1518d",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "THE_TREE_COULD_NOT_SAY_WHAT_A_PASSING_TEST_SUITE_IS_WORTH_AND_ASSUMED_THAT_A_CONFIRMED_LAW_WOULD_ADD_ON_TOP_OF_IT__MEASURED_ON_16_OWN_SUITES_THE_SUITE_REJECTED_77_OF_96_BEHAVIOUR_ALTERING_CANDIDATES_AND_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTED_ZERO_OF_THE_19_IT_ACCEPTED_EVEN_THOUGH_THE_LAW_WAS_POINTED_AT_THE_MUTATED_FUNCTION_IN_ALL_19",
+ "date": "2026-11-16",
+ "expected_parent_change": "The claim that a confirmed law amplifies a passing test suite stops being an assumption and becomes a number: 0 of 19 survivors, with the reason decomposed per law kind. The tree also gains a way to say what a pass was worth (suite rejection rate per pair) so a learned thing can carry its verdict budget.",
+ "expected_parent_frontier_change": "Verifier work is aimed at vocabulary that names what code means (relations taken from real assertions, method-level laws) instead of at more shape-derived relations, which are measured at exactly zero added value on top of a real suite.",
+ "explicit_user_authorization": [
+  "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
+  "Give the model the most advanced actions, let it do a thing once, it learns it permanently, and every computer task plus the most advanced software engineering is solved. Am I right or wrong? What is real, what is not, and what are the smartest things we can do?",
+  "You must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATAION IS HAPPENED",
+  "maximize your web use",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Testing on bugs we already know work is not progress -- that is self-congratulation.",
+  "YOU SURE THIS THE SMARTEST APPROACH?",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "falsification_condition": "A run of the same harness in which a law confirmed on the pristine module rejects a candidate the real suite accepted, in any arm, at a rate materially above zero; or a pair where the arm using the suite's own arguments makes the laws speak and kill where the invented arm did not.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "interpretation": "Speculative forecast only: repairing the read-only failure signal is the cheapest currently available prerequisite to verified general capability work. No obligation discharge, benchmark gain, capability credit or independent verification is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "arms_all_zero": true,
+  "arms_reported": [
+   "invented grid (control)",
+   "recorded grid (the arguments the suite passed)",
+   "both"
+  ],
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "candidates": 96,
+  "external_context_for_ranking_not_authority": [
+   "UTBoost (ACL 2025): 26 of 500 SWE-bench Verified tasks have tests that accept wrong patches after expert screening",
+   "All Smoke, No Alarm (arXiv:2606.18168): 80.2% of 86,156 agent-authored test-file patches carry weak or no oracle signals",
+   "arXiv:2503.15223 as reported by aiwiki: more than 15% of Verified instances have test patches loose enough for incorrect or partial solutions"
+  ],
+  "instrument_defects_found_and_fixed": [
+   "relative interpreter resolved through the virtualenv symlink into the base interpreter",
+   "pytest hook named pytest_session_finished, so no trace was ever written",
+   "reduction kept only the functions under test, so helpers raised NameError and every law read NOT_APPLICABLE",
+   "keeping definitions made 43 of 121 modules unloadable; the loader now falls back statement by statement",
+   "the law grid was invented and could not call the functions that mattered"
+  ],
+  "law_amplification_on_survivors": 0.0,
+  "law_census_invented_arm": {
+   "ASSOCIATIVITY": {
+    "confirmed": 0,
+    "not_applicable": 42,
+    "proposed": 42,
+    "refuted": 0
+   },
+   "COMMUTATIVITY": {
+    "confirmed": 0,
+    "not_applicable": 34,
+    "proposed": 42,
+    "refuted": 3
+   },
+   "IDEMPOTENCE": {
+    "confirmed": 2,
+    "not_applicable": 45,
+    "proposed": 65,
+    "refuted": 7
+   },
+   "INVOLUTION": {
+    "confirmed": 0,
+    "not_applicable": 45,
+    "proposed": 65,
+    "refuted": 20
+   },
+   "PERMUTATION_INVARIANT": {
+    "confirmed": 0,
+    "not_applicable": 65,
+    "proposed": 65,
+    "refuted": 0
+   },
+   "TOTALITY": {
+    "confirmed": 71,
+    "not_applicable": 49,
+    "proposed": 120,
+    "refuted": 0
+   }
+  },
+  "new_tests": {
+   "canonical/tests/test_patch_verdict_amplification_measure_v1.py": 6,
+   "canonical/tests/test_patch_verdict_amplification_v1.py": 11,
+   "canonical/tests/test_specification_from_structure_v1.py": 23
+  },
+  "pairs_discovered": 65,
+  "pairs_measured": 16,
+  "pairs_skipped": 6,
+  "pairs_where_a_law_could_speak": 2,
+  "protocol": "16 module/test pairs discovered by name convention across canonical/swe_kernel and canonical/tools; each suite run on pristine code first (skip on BASELINE_FAIL or >20 s); candidates from this tree's own mutation engine (canonical/runtime/bound_capabilities/python_tests_mutation_score.py); the candidate installed under the module's own dotted name in a fresh interpreter before collection, so the real test file runs unedited; laws derived from and confirmed on the pristine module only, never on the candidate.",
+  "question": "Of the wrong variants a real, unedited test suite accepts, how many can a law confirmed on the pristine module reject?",
+  "rejected_by_a_confirmed_law": 0,
+  "rejected_by_the_real_suite": 77,
+  "skipped_reasons": {
+   "BASELINE_FAIL": 5,
+   "BASELINE_TOO_SLOW": 1
+  },
+  "structure_only_remeasurement_with_the_fixed_instrument": {
+   "blind_spot_rate": 0.7333,
+   "killed_by_a_law": 12,
+   "killed_only_by_it_still_ran": 16,
+   "modules_judged": 20,
+   "receipt": "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
+   "variants": 105
+  },
+  "suite_rejection_rate": 0.8021,
+  "survivors_where_a_confirmed_law_was_pointed_at_the_mutated_function": 19,
+  "the_suite_let_through": 19
+ },
+ "next_step": "Attach the measured verdict budget to every lesson admission: a lesson admitted against a suite carries that suite's rejection rate and survivor list, so permanence is bounded by what the verdict could distinguish.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "prior_work_reused": [
+  "canonical/swe_kernel/specification_from_structure_v1.py",
+  "canonical/tools/specification_from_structure_measure_v1.py",
+  "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+  "canonical/runtime/bound_capabilities/python_tests_mutation_score.py",
+  "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md"
+ ],
+ "probe_specific": false,
+ "recursive_obs": {
+  "canonical_base_commit": "305b6da7ce576993deca08522fce9761f7a1518d",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "adding law shapes until a number moves",
+   "deleting the arm that disagrees",
+   "counting a child-process failure as a pass",
+   "calling an invented relation a law because it has a name"
+  ],
+  "expected_parent_level_state_change": "Verifier work is aimed at vocabulary that names what code means (relations taken from real assertions, method-level laws) instead of at more shape-derived relations, which are measured at exactly zero added value on top of a real suite.",
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the assumption",
+    "reuse the real suites",
+    "measure instead of argue"
+   ],
+   "intrinsic_or_path_specific": "intrinsic: the vocabulary of shape-derived laws is insufficient by construction for real code; path_specific: the reduction and grid defects were measured and fixed here",
+   "surviving_causal_blocker": "The verdict's reach is the reach of the knowledge inside it, and this tree's laws contain no knowledge of what the code means."
+  },
+  "obs_capability": {
+   "capability": "Two-gate verdict over real suites with an honest residual, and a per-kind law census.",
+   "not_claimed": "No capability credit, no terminal credit, no weight update, no benchmark rank."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher kill count reached by adding law shapes",
+    "a comparison in which the losing arm is not printed"
+   ],
+   "real_outcome": "The value of a pass, and the value a confirmed law adds to it, stop being assumptions.",
+   "surviving_necessity": "Every learning loop in this tree ends at the verdict; the verdict has to be measured where the tests are real."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None. This measures a verdict; it owns no new capability.",
+   "downstream_work_to_delete_or_supersede": "The V1 structure-only receipt is superseded by the V2 re-measurement made with the fixed reduction; the V1 amplifier result (0.00) is confirmed, not superseded.",
+   "fresh_reuse_plan": "Re-run the harness on any corpus with module/test name pairs; the mutation engine and the suites are the only inputs."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Baseline suite runs are reused for every candidate; law confirmation is prepared once per pair per arm.",
+   "search_stop_decision": "Stop after the three arms agree; do not add law kinds without a measurement that says which kind could add anything."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "MEASURE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Adding shapes without measuring is the failure mode the receipt already contains; enlarging the invented grid was measured and changes nothing because invention is not the binding constraint.",
+   "routes_ranked": [
+    "measure both gates on real suites",
+    "add structural law kinds",
+    "enlarge the invented grid"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_patch_verdict_amplification_v1.py",
+    "canonical/tests/test_patch_verdict_amplification_measure_v1.py",
+    "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "The oracle is the repository's own unedited test files; the controls are unit tests of the instrument; independent reproduction remains open."
+  },
+  "real_outcome": "A pass is worth what its suite covers: 80.2% of behaviour-altering candidates rejected here, per pair between 1 of 6 and 6 of 6. A law confirmed on the code as it stands added exactly zero on top of that, and the census shows why: the only law kind that confirms on real code is the word 'it ran', which a pass has already said, and the informative relations are refuted by the code itself.",
+  "required_capability": "A verdict that can speak about what a program means rather than about the shape of its definitions, plus the discipline of recording what each verdict was worth.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no new information",
+      "CORRECTNESS": "would produce the same 55 of 92",
+      "INCREMENTAL_COST": "full",
+      "RELIABILITY": "identical result",
+      "VERIFIABILITY": "already verified producer-side",
+      "WALL_CLOCK": "about two hours of the whole suite"
+     },
+     "evidence": [
+      "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json already is that run: 78 of 130 demonstrated"
+     ],
+     "qualification_evidence": [
+      "the V5 receipt's own per-task stages were counted: 78 of 130 demonstrated, 55 of 92 held out"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "re-run the full 130-page benchmark on chromium with the whole hand"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "one page for doubled compute",
+      "CORRECTNESS": "budget is near-inelastic here",
+      "INCREMENTAL_COST": "high",
+      "RELIABILITY": "exponential cost in depth",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "about 27 minutes"
+     },
+     "evidence": [
+      "2.26x the baseline budget converted 1 page in 37"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "raise the action budget until the pages convert"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "unmeasured",
+      "CORRECTNESS": "unfounded by the data",
+      "INCREMENTAL_COST": "high and permanent",
+      "RELIABILITY": "also raises branching factor",
+      "VERIFIABILITY": "cannot say which primitive",
+      "WALL_CLOCK": "days"
+     },
+     "evidence": [
+      "no page closed on exhaustion, so no page is evidence for a specific missing primitive"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "add an action primitive because the pages look like they need one"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "diagnosis of the agent, not an agent-side measurement; nothing is claimed",
+      "CORRECTNESS": "diagnosis only",
+      "INCREMENTAL_COST": "low",
+      "RELIABILITY": "requires care against peeking",
+      "VERIFIABILITY": "spec is external",
+      "WALL_CLOCK": "hours"
+     },
+     "evidence": [
+      "the page spec states the goal condition, but this diagnoses the agent rather than measuring it"
+     ],
+     "qualification_evidence": [
+      "canonical/tools/miniwob_where_the_wall_actually_is_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "read each page's own source to decide which primitive it needs"
+    }
+   ],
+   "checked_at_utc": "2026-11-16T16:15:27Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "estimate the residual coverage gap from the count of undemonstrated pages, without a per-page verdict",
+   "max_age_hours": 24,
+   "negative_search_summary": "No external system was found that separates unreachable from unexplored for an agent's own search, and no paper supplies a per-page repair ranking; the four terminal statuses this repository already computes are the only mechanism found that decides it, so the work reuses them.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "OSWorld 2.0 long-horizon computer use agents benchmark 2026 verification state drift"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "Veritas verifier generation harness agent tasks arxiv 2611.13336"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "agents generate their own verifiers bottleneck 2026 VerifierBench test-time verification"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "MiniWoB++ benchmark saturated 2026 web agents small task suite still useful evaluation"
+    },
+    {
+     "intent": "FAILURE_MODE",
+     "query": "2026 continual learning agents why in-context experience does not become capability without weights skill library drift"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-16T13:54:14Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest",
+      "evidence": [
+       "producer ran the classifier suite: 11 passed"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "headless Chromium 153 via npm (@sparticuz/chromium, puppeteer-core)",
+      "evidence": [
+       "50,154 actions executed against real pages with real mouse and key input"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "MiniWoB++ task pages at the receipt's upstream commit",
+      "evidence": [
+       "upstream HEAD is 33c3b4ddef8c6eb67c57a29663d844b1eda7e614, the byte-identical tree the baseline used"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "REUSE_THE_EXISTING_CHROMIUM_INSTRUMENT_AND_CLASSIFY_EACH_UNSOLVED_PAGES_TERMINAL_EXPLORER_STATUS_INTO_ONE_OF_FOUR_WORLDS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+     "canonical/tools/miniwob_chromium_bridge_v1.mjs",
+     "canonical/runtime/systematic_exploration_v1.py",
+     "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://github.com/Farama-Foundation/miniwob-plusplus (MIT, upstream 33c3b4ddef8c6eb67c57a29663d844b1eda7e614 byte-identical to the receipt)",
+     "https://www.sota2.com/research/dataset/miniwob (2026 reporting of MiniWoB++ agent scores, used only to bound how hard the suite is)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://registry.npmjs.org/jsdom (31.0.1, the substrate the baseline receipt was taken on)",
+     "https://registry.npmjs.org/@sparticuz/chromium (chromium 153, real layout and hit-testing)",
+     "https://registry.npmjs.org/puppeteer-core (25.17.0, the input pipeline the bridge drives)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/abs/2606.18168 (All Smoke, No Alarm: 80.2% of 86,156 agent-authored test-file patches carry weak or no oracle signals)",
+     "https://ddkang.substack.com/p/swe-bench-verified-is-flawed-despite (UTBoost, ACL 2025: 26 of 500 Verified tasks have tests that accept wrong patches after expert screening)",
+     "https://aiwiki.ai/wiki/swe-bench_verified (arXiv:2503.15223: more than 15% of Verified instances have incomplete test patches; OpenAI deprecation audit: 59.4% of the hardest unsolved problems had flawed test cases)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Add more law kinds of the same structural family",
+   "Enlarge the invented argument grid",
+   "Use the arguments the real suite passed as the grid (the route taken, as a separate arm)",
+   "Keep the control arm out of the report once the recorded arm exists",
+   "Report every arm and decompose the zero per law kind"
+  ],
+  "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_EDITED_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_REPORT_EVERY_ARM",
+  "selected_surviving_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_EDITED_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_REPORT_EVERY_ARM",
+  "selected_surviving_route_class": "MEASURE",
+  "stop_condition": "The two gates are measured on this tree's own suites with every arm reported, the law census per kind is in the receipt, and no capability, family, terminal or weight credit is claimed.",
+  "why_selected_route_is_fastest_sufficient": "The suites, the mutation engine and the structure kernel already exist; the only new work is one harness. Any other route would have had to invent the oracle it was trying to measure."
+ },
+ "route_id": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_EDITED_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_REPORT_EVERY_ARM",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": false,
+ "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_EDITED_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_REPORT_EVERY_ARM",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "The two gates are measured on this tree's own suites with every arm reported, the law census per kind is in the receipt, and no capability, family, terminal or weight credit is claimed.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This measures the verdict; it discharges no truth obligation and claims no terminal credit.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Of the wrong variants the real suite accepts, can a law confirmed on the code as it stands reject any -- and if not, which law kind was missing?",
+   "falsifier_id": "A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTING_A_SURVIVOR_IN_ANY_ARM",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The rerun is itself the counterexample to the inherited claim; no new external receipt is added by this PR.",
+   "proposal_id": "WHAT_A_PASS_IS_WORTH_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "/home/user/brain/.venv/bin/python canonical/tools/patch_verdict_amplification_measure_v1.py --max-pairs 16 --max-mutants 6 --json canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
+   "/home/user/brain/.venv/bin/python canonical/tools/specification_from_structure_measure_v1.py --json canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
+   "/home/user/brain/.venv/bin/python -m pytest canonical/tests/test_patch_verdict_amplification_v1.py canonical/tests/test_patch_verdict_amplification_measure_v1.py canonical/tests/test_specification_from_structure_v1.py -q",
+   "python3 execution_guard/repo_integrity_guard_v1.py",
+   "python3 execution_guard/enforce_load_bearing_primary_pr.py",
+   "python3 canonical/runtime/enforce_goal_hierarchy.py",
+   "python3 canonical/runtime/verify_brain_unified_model_v1.py"
+  ],
+  "independent_verification_completed": false,
+  "result": "1 of 37 pages reached a first success; 0 closed on exhaustion; 3 state-blind; 32 unexplored; 1 instrument error. 24 tests passed; guard PASS; model 33/33."
+ },
+ "weakens_existing_guard": false
+}

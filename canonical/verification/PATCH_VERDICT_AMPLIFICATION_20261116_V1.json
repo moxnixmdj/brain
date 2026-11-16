@@ -1,0 +1,3078 @@
+{
+  "artifacts": {
+    "harness": "canonical/tools/patch_verdict_amplification_measure_v1.py",
+    "kernel": "canonical/swe_kernel/patch_verdict_amplification_v1.py",
+    "structure_kernel_changed": "canonical/swe_kernel/specification_from_structure_v1.py",
+    "tests": [
+      "canonical/tests/test_patch_verdict_amplification_v1.py",
+      "canonical/tests/test_patch_verdict_amplification_measure_v1.py",
+      "canonical/tests/test_specification_from_structure_v1.py"
+    ]
+  },
+  "generated_utc": "2026-11-16T16:14:34Z",
+  "headline": {
+    "candidates": 96,
+    "law_amplification_on_survivors": 0.0,
+    "pairs_measured": 16,
+    "pairs_where_a_law_could_speak_at_all": 2,
+    "rejected_by_a_confirmed_law_in_any_arm": 0,
+    "rejected_by_the_real_suite": 77,
+    "suite_rejection_rate": 0.8021,
+    "survivors_where_a_confirmed_law_was_pointed_at_the_mutated_function": 19,
+    "the_suite_let_through": 19
+  },
+  "instrument_defects_this_measurement_found_and_forced_fixes_for": [
+    "A relative interpreter path was resolved with Path.resolve(), which followed the virtualenv symlink into the base interpreter; every suite then reported 'No module named pytest'.",
+    "The trace hook was named pytest_session_finished, which pytest does not know; the suite ran, passed, and wrote no trace -- indistinguishable from 'the module was never called'.",
+    "reduce_module() kept only the functions under test, so a function that called a helper raised NameError and every law about it reported NOT_APPLICABLE: silence that reads exactly like 'this code has no laws'.",
+    "Keeping definitions then made whole modules unloadable when a kept definition named something the reduction dropped; 43 of 121 modules failed to load, and a module that fails to load produces no laws at all. _load_module now falls back to statement-by-statement loading and records what could not be defined.",
+    "A candidate whose changed definition could not be defined in the reduction is reported UNVERIFIABLE (CANDIDATE_NOT_LOADABLE_UNDER_REDUCTION), never as a survivor and never as a law kill.",
+    "The law grid was invented (small ints, short strings), which cannot call a function that takes a parsed record. The grid can now be the arguments the real suite itself passed, captured by tracing its execution."
+  ],
+  "measurement": {
+    "arms": [
+      "invented",
+      "recorded_grid",
+      "recorded_plus_invented"
+    ],
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+    "bounds": {
+      "max_baseline_seconds": 20.0,
+      "max_mutants_per_pair": 6,
+      "max_pairs": 16,
+      "test_timeout_s": 120.0
+    },
+    "incremental_spend_usd": 0,
+    "law_census_by_kind": {
+      "invented:ASSOCIATIVITY": {
+        "confirmed": 0,
+        "not_applicable": 45,
+        "proposed": 45,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "invented:COMMUTATIVITY": {
+        "confirmed": 0,
+        "not_applicable": 37,
+        "proposed": 45,
+        "refuted": 3,
+        "vacuous": 5
+      },
+      "invented:IDEMPOTENCE": {
+        "confirmed": 2,
+        "not_applicable": 48,
+        "proposed": 68,
+        "refuted": 7,
+        "vacuous": 11
+      },
+      "invented:INVOLUTION": {
+        "confirmed": 0,
+        "not_applicable": 48,
+        "proposed": 68,
+        "refuted": 20,
+        "vacuous": 0
+      },
+      "invented:PERMUTATION_INVARIANT": {
+        "confirmed": 0,
+        "not_applicable": 68,
+        "proposed": 68,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "invented:TOTALITY": {
+        "confirmed": 73,
+        "not_applicable": 55,
+        "proposed": 128,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "recorded_grid:ASSOCIATIVITY": {
+        "confirmed": 0,
+        "not_applicable": 45,
+        "proposed": 45,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "recorded_grid:COMMUTATIVITY": {
+        "confirmed": 0,
+        "not_applicable": 37,
+        "proposed": 45,
+        "refuted": 6,
+        "vacuous": 2
+      },
+      "recorded_grid:IDEMPOTENCE": {
+        "confirmed": 2,
+        "not_applicable": 51,
+        "proposed": 68,
+        "refuted": 14,
+        "vacuous": 1
+      },
+      "recorded_grid:INVOLUTION": {
+        "confirmed": 0,
+        "not_applicable": 51,
+        "proposed": 68,
+        "refuted": 17,
+        "vacuous": 0
+      },
+      "recorded_grid:PERMUTATION_INVARIANT": {
+        "confirmed": 0,
+        "not_applicable": 68,
+        "proposed": 68,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "recorded_grid:TOTALITY": {
+        "confirmed": 53,
+        "not_applicable": 75,
+        "proposed": 128,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "recorded_plus_invented:ASSOCIATIVITY": {
+        "confirmed": 0,
+        "not_applicable": 45,
+        "proposed": 45,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "recorded_plus_invented:COMMUTATIVITY": {
+        "confirmed": 0,
+        "not_applicable": 37,
+        "proposed": 45,
+        "refuted": 6,
+        "vacuous": 2
+      },
+      "recorded_plus_invented:IDEMPOTENCE": {
+        "confirmed": 2,
+        "not_applicable": 48,
+        "proposed": 68,
+        "refuted": 14,
+        "vacuous": 4
+      },
+      "recorded_plus_invented:INVOLUTION": {
+        "confirmed": 0,
+        "not_applicable": 48,
+        "proposed": 68,
+        "refuted": 20,
+        "vacuous": 0
+      },
+      "recorded_plus_invented:PERMUTATION_INVARIANT": {
+        "confirmed": 0,
+        "not_applicable": 68,
+        "proposed": 68,
+        "refuted": 0,
+        "vacuous": 0
+      },
+      "recorded_plus_invented:TOTALITY": {
+        "confirmed": 73,
+        "not_applicable": 55,
+        "proposed": 128,
+        "refuted": 0,
+        "vacuous": 0
+      }
+    },
+    "model_calls": 0,
+    "network_calls": 0,
+    "pairs_discovered": [
+      {
+        "module": "canonical/swe_kernel/boundary_disjunction_normalization_v1.py",
+        "test": "canonical/tests/test_boundary_disjunction_normalization_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
+        "test": "canonical/tests/test_language_neutral_skill_bridge_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+        "test": "canonical/tests/test_lesson_admission_gate_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/lesson_localization_v1.py",
+        "test": "canonical/tests/test_lesson_localization_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/operator_generalization_v1.py",
+        "test": "canonical/tests/test_operator_generalization_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/operator_semantics_v1.py",
+        "test": "canonical/tests/test_operator_semantics_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/patch_verdict_amplification_v1.py",
+        "test": "canonical/tests/test_patch_verdict_amplification_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+        "test": "canonical/tests/test_repair_input_dependency_gate_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/rule_expiry_v1.py",
+        "test": "canonical/tests/test_rule_expiry_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/rule_scope_learning_v1.py",
+        "test": "canonical/tests/test_rule_scope_learning_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/semantic_unification_v1.py",
+        "test": "canonical/tests/test_semantic_unification_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+        "test": "canonical/tests/test_sentient_cognitive_core_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/skill_precondition_presence_v1.py",
+        "test": "canonical/tests/test_skill_precondition_presence_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/skill_recheck_v1.py",
+        "test": "canonical/tests/test_skill_recheck_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+        "test": "canonical/tests/test_skill_scope_acquisition_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/skill_scope_ledger_v1.py",
+        "test": "canonical/tests/test_skill_scope_ledger_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/skill_sequence_verify_v1.py",
+        "test": "canonical/tests/test_skill_sequence_verify_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/specification_from_structure_v1.py",
+        "test": "canonical/tests/test_specification_from_structure_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/swe_self_improvement_bridge_v1.py",
+        "test": "canonical/tests/test_swe_self_improvement_bridge_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/taught_actions/bring_names_v1.py",
+        "test": "canonical/tests/test_bring_names_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/taught_actions/expression_operator_pack_v1.py",
+        "test": "canonical/tests/test_expression_operator_pack_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/taught_actions/generic_alias_v1.py",
+        "test": "canonical/tests/test_generic_alias_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/test_suite_admission_v1.py",
+        "test": "canonical/tests/test_test_suite_admission_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/weight_update_admission_v1.py",
+        "test": "canonical/tests/test_weight_update_admission_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/workflow_goal_generalization_v1.py",
+        "test": "canonical/tests/test_workflow_goal_generalization_v1.py"
+      },
+      {
+        "module": "canonical/tools/across_environments_v1.py",
+        "test": "canonical/tests/test_across_environments_v1.py"
+      },
+      {
+        "module": "canonical/tools/auditability_report_v1.py",
+        "test": "canonical/tests/test_auditability_report_v1.py"
+      },
+      {
+        "module": "canonical/tools/candidate_under_the_tasks_tests_measure_v1.py",
+        "test": "canonical/tests/test_candidate_under_the_tasks_tests_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/carrier_qualification_probe_v1.py",
+        "test": "canonical/tests/test_carrier_qualification_probe_v1.py"
+      },
+      {
+        "module": "canonical/tools/census_orphan_capabilities_v1.py",
+        "test": "canonical/tests/test_census_orphan_capabilities_v1.py"
+      },
+      {
+        "module": "canonical/tools/changed_state_transfer_benchmark_v1.py",
+        "test": "canonical/tests/test_changed_state_transfer_benchmark_v1.py"
+      },
+      {
+        "module": "canonical/tools/computer_branch_comparison_v1.py",
+        "test": "canonical/tests/test_computer_branch_comparison_v1.py"
+      },
+      {
+        "module": "canonical/tools/demonstration_choice_measure_v1.py",
+        "test": "canonical/tests/test_demonstration_choice_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/diagnose_branch_comparison_v1.py",
+        "test": "canonical/tests/test_diagnose_branch_comparison_v1.py"
+      },
+      {
+        "module": "canonical/tools/edit_kind_choice_measure_v1.py",
+        "test": "canonical/tests/test_edit_kind_choice_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/experience_corpus_training_readiness_v1.py",
+        "test": "canonical/tests/test_experience_corpus_training_readiness_v1.py"
+      },
+      {
+        "module": "canonical/tools/external_evidence_ledger_v1.py",
+        "test": "canonical/tests/test_external_evidence_ledger_v1.py"
+      },
+      {
+        "module": "canonical/tools/file_found_from_task_text_measure_v1.py",
+        "test": "canonical/tests/test_file_found_from_task_text_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/fix_content_in_task_text_measure_v1.py",
+        "test": "canonical/tests/test_fix_content_in_task_text_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/fix_shape_census_measure_v1.py",
+        "test": "canonical/tests/test_fix_shape_census_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/function_found_from_task_text_measure_v1.py",
+        "test": "canonical/tests/test_function_found_from_task_text_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/generalization_or_lookup_v1.py",
+        "test": "canonical/tests/test_generalization_or_lookup_v1.py"
+      },
+      {
+        "module": "canonical/tools/humanevalfix_solver_record_as_rows_v1.py",
+        "test": "canonical/tests/test_humanevalfix_solver_record_as_rows_v1.py"
+      },
+      {
+        "module": "canonical/tools/invalidation_enforcement_v1.py",
+        "test": "canonical/tests/test_invalidation_enforcement_v1.py"
+      },
+      {
+        "module": "canonical/tools/learn_path_verification_wiring_v1.py",
+        "test": "canonical/tests/test_learn_path_verification_wiring_v1.py"
+      },
+      {
+        "module": "canonical/tools/learning_claim_adjudicator_v1.py",
+        "test": "canonical/tests/test_learning_claim_adjudicator_v1.py"
+      },
+      {
+        "module": "canonical/tools/live_scoped_transfer_benchmark_v1.py",
+        "test": "canonical/tests/test_live_scoped_transfer_benchmark_v1.py"
+      },
+      {
+        "module": "canonical/tools/living_canary_isolation_v1.py",
+        "test": "canonical/tests/test_living_canary_isolation_v1.py"
+      },
+      {
+        "module": "canonical/tools/one_published_fix_counterfactual_v1.py",
+        "test": "canonical/tests/test_one_published_fix_counterfactual_v1.py"
+      },
+      {
+        "module": "canonical/tools/one_success_where_it_counts_v1.py",
+        "test": "canonical/tests/test_one_success_where_it_counts_v1.py"
+      },
+      {
+        "module": "canonical/tools/passing_patch_shape_measure_v1.py",
+        "test": "canonical/tests/test_passing_patch_shape_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/patch_verdict_amplification_measure_v1.py",
+        "test": "canonical/tests/test_patch_verdict_amplification_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/plan_admission_v1.py",
+        "test": "canonical/tests/test_plan_admission_v1.py"
+      },
+      {
+        "module": "canonical/tools/receipt_program_identity_v1.py",
+        "test": "canonical/tests/test_receipt_program_identity_v1.py"
+      },
+      {
+        "module": "canonical/tools/resolving_candidate_under_the_whole_suite_measure_v1.py",
+        "test": "canonical/tests/test_resolving_candidate_under_the_whole_suite_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/rule_generalization_probe_v1.py",
+        "test": "canonical/tests/test_rule_generalization_probe_v1.py"
+      },
+      {
+        "module": "canonical/tools/shared_skill_transfer_benchmark_v1.py",
+        "test": "canonical/tests/test_shared_skill_transfer_benchmark_v1.py"
+      },
+      {
+        "module": "canonical/tools/small_passing_patch_place_measure_v1.py",
+        "test": "canonical/tests/test_small_passing_patch_place_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/take_out_measure_v1.py",
+        "test": "canonical/tests/test_take_out_measure_v1.py"
+      },
+      {
+        "module": "canonical/tools/test_entry_point_finder_v1.py",
+        "test": "canonical/tests/test_test_entry_point_finder_v1.py"
+      },
+      {
+        "module": "canonical/tools/weight_space_fuel_v1.py",
+        "test": "canonical/tests/test_weight_space_fuel_v1.py"
+      },
+      {
+        "module": "canonical/tools/what_a_demonstration_leaves_open_v1.py",
+        "test": "canonical/tests/test_what_a_demonstration_leaves_open_v1.py"
+      },
+      {
+        "module": "canonical/tools/what_the_operand_names_cost_v1.py",
+        "test": "canonical/tests/test_what_the_operand_names_cost_v1.py"
+      },
+      {
+        "module": "canonical/tools/what_transfers_v1.py",
+        "test": "canonical/tests/test_what_transfers_v1.py"
+      },
+      {
+        "module": "canonical/tools/which_fix_moves_generalization_v1.py",
+        "test": "canonical/tests/test_which_fix_moves_generalization_v1.py"
+      }
+    ],
+    "pairs_measured": [
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 4,
+                "refuted": 1,
+                "vacuous": 2
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 4,
+                "refuted": 3,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 4,
+                "not_applicable": 1,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 9,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 4,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 2,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 4,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 4,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 3,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 15,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 4,
+                "refuted": 1,
+                "vacuous": 2
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 4,
+                "refuted": 3,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 4,
+                "not_applicable": 1,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 9,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 4,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 2,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.573,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/boundary_disjunction_normalization_v1.py",
+        "rejected_by_the_suite": 5,
+        "suite_let_through": 1,
+        "test": "canonical/tests/test_boundary_disjunction_normalization_v1.py",
+        "trace": {
+          "arg_tuples": 17,
+          "functions_of_this_module": 5,
+          "functions_of_this_module_with_a_grid": 2,
+          "functions_traced": 5,
+          "records": 22,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 3,
+                "not_applicable": 0,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 6,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 1,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 1,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 7,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 1,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 3,
+                "not_applicable": 0,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 6,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 1,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.745,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
+        "rejected_by_the_suite": 5,
+        "suite_let_through": 1,
+        "test": "canonical/tests/test_language_neutral_skill_bridge_v1.py",
+        "trace": {
+          "arg_tuples": 15,
+          "functions_of_this_module": 3,
+          "functions_of_this_module_with_a_grid": 3,
+          "functions_traced": 5,
+          "records": 17,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 2,
+                "not_applicable": 2,
+                "proposed": 10,
+                "refuted": 4,
+                "vacuous": 2
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 10,
+                "refuted": 8,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 10,
+                "proposed": 10,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 14,
+                "not_applicable": 6,
+                "proposed": 20,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 2,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 32,
+            "pairs_where_a_law_could_speak": 2,
+            "refuted_laws": 12,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 2,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 2,
+                "not_applicable": 2,
+                "proposed": 10,
+                "refuted": 6,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 10,
+                "refuted": 8,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 10,
+                "proposed": 10,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 12,
+                "not_applicable": 8,
+                "proposed": 20,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 2,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 34,
+            "pairs_where_a_law_could_speak": 2,
+            "refuted_laws": 14,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 2,
+                "not_applicable": 2,
+                "proposed": 10,
+                "refuted": 6,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 10,
+                "refuted": 8,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 10,
+                "proposed": 10,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 14,
+                "not_applicable": 6,
+                "proposed": 20,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 2,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 32,
+            "pairs_where_a_law_could_speak": 2,
+            "refuted_laws": 14,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.63,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/lesson_admission_gate_v1.py",
+        "rejected_by_the_suite": 4,
+        "suite_let_through": 2,
+        "test": "canonical/tests/test_lesson_admission_gate_v1.py",
+        "trace": {
+          "arg_tuples": 83,
+          "functions_of_this_module": 10,
+          "functions_of_this_module_with_a_grid": 9,
+          "functions_traced": 13,
+          "records": 90,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 6,
+                "refuted": 2,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 4,
+                "not_applicable": 4,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 14,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 6,
+                "refuted": 2,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 6,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 16,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 6,
+                "refuted": 2,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 4,
+                "not_applicable": 4,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 14,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 15.684,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/lesson_localization_v1.py",
+        "rejected_by_the_suite": 4,
+        "suite_let_through": 2,
+        "test": "canonical/tests/test_lesson_localization_v1.py",
+        "trace": {
+          "arg_tuples": 14,
+          "functions_of_this_module": 4,
+          "functions_of_this_module_with_a_grid": 2,
+          "functions_traced": 6,
+          "records": 18,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 2
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 5,
+                "refuted": 2,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 6,
+                "not_applicable": 1,
+                "proposed": 7,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 16,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 2,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 1
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 5,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 5,
+                "not_applicable": 2,
+                "proposed": 7,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 19,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 1,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 1,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 2
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 5,
+                "refuted": 2,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 6,
+                "not_applicable": 1,
+                "proposed": 7,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 16,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 2,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.576,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/operator_generalization_v1.py",
+        "rejected_by_the_suite": 5,
+        "suite_let_through": 1,
+        "test": "canonical/tests/test_operator_generalization_v1.py",
+        "trace": {
+          "arg_tuples": 43,
+          "functions_of_this_module": 7,
+          "functions_of_this_module_with_a_grid": 6,
+          "functions_traced": 10,
+          "records": 70,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.494,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+        "rejected_by_the_suite": 6,
+        "suite_let_through": 0,
+        "test": "canonical/tests/test_repair_input_dependency_gate_v1.py",
+        "trace": {
+          "arg_tuples": 59,
+          "functions_of_this_module": 11,
+          "functions_of_this_module_with_a_grid": 6,
+          "functions_traced": 8,
+          "records": 61,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 1
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 4,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 15,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 1,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 4,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 4,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 15,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 3,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 4,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 2,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 4,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 15,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 3,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.693,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/rule_expiry_v1.py",
+        "rejected_by_the_suite": 5,
+        "suite_let_through": 1,
+        "test": "canonical/tests/test_rule_expiry_v1.py",
+        "trace": {
+          "arg_tuples": 10,
+          "functions_of_this_module": 6,
+          "functions_of_this_module_with_a_grid": 2,
+          "functions_traced": 5,
+          "records": 13,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 4,
+                "not_applicable": 10,
+                "proposed": 14,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 38,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 12,
+                "proposed": 14,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 40,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 4,
+                "proposed": 4,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 4,
+                "not_applicable": 10,
+                "proposed": 14,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 38,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.632,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/rule_scope_learning_v1.py",
+        "rejected_by_the_suite": 4,
+        "suite_let_through": 2,
+        "test": "canonical/tests/test_rule_scope_learning_v1.py",
+        "trace": {
+          "arg_tuples": 4,
+          "functions_of_this_module": 7,
+          "functions_of_this_module_with_a_grid": 4,
+          "functions_traced": 7,
+          "records": 7,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.51,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/skill_precondition_presence_v1.py",
+        "rejected_by_the_suite": 6,
+        "suite_let_through": 0,
+        "test": "canonical/tests/test_skill_precondition_presence_v1.py",
+        "trace": {
+          "arg_tuples": 10,
+          "functions_of_this_module": 2,
+          "functions_of_this_module_with_a_grid": 2,
+          "functions_traced": 5,
+          "records": 23,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 5,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 25,
+                "proposed": 30,
+                "refuted": 0,
+                "vacuous": 5
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 25,
+                "proposed": 30,
+                "refuted": 5,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 30,
+                "proposed": 30,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 25,
+                "not_applicable": 15,
+                "proposed": 40,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 5,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 105,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 5,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 5,
+            "vacuous_laws": 5,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 5,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 25,
+                "proposed": 30,
+                "refuted": 5,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 25,
+                "proposed": 30,
+                "refuted": 5,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 30,
+                "proposed": 30,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 15,
+                "not_applicable": 25,
+                "proposed": 40,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 5,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 115,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 10,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 5,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 5,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 5,
+                "proposed": 5,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 25,
+                "proposed": 30,
+                "refuted": 5,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 25,
+                "proposed": 30,
+                "refuted": 5,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 30,
+                "proposed": 30,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 25,
+                "not_applicable": 15,
+                "proposed": 40,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 5,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 105,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 10,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 5,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.565,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/skill_recheck_v1.py",
+        "rejected_by_the_suite": 1,
+        "suite_let_through": 5,
+        "test": "canonical/tests/test_skill_recheck_v1.py",
+        "trace": {
+          "arg_tuples": 25,
+          "functions_of_this_module": 8,
+          "functions_of_this_module_with_a_grid": 6,
+          "functions_traced": 8,
+          "records": 29,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.663,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+        "rejected_by_the_suite": 6,
+        "suite_let_through": 0,
+        "test": "canonical/tests/test_skill_scope_acquisition_v1.py",
+        "trace": {
+          "arg_tuples": 18,
+          "functions_of_this_module": 8,
+          "functions_of_this_module_with_a_grid": 2,
+          "functions_traced": 10,
+          "records": 89,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 6,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 21,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 6,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 21,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 3,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 2,
+                "not_applicable": 6,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 21,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.562,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/skill_scope_ledger_v1.py",
+        "rejected_by_the_suite": 5,
+        "suite_let_through": 1,
+        "test": "canonical/tests/test_skill_scope_ledger_v1.py",
+        "trace": {
+          "arg_tuples": 136,
+          "functions_of_this_module": 8,
+          "functions_of_this_module_with_a_grid": 6,
+          "functions_traced": 7,
+          "records": 137,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 0,
+                "proposed": 1,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 0,
+                "proposed": 1,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 1,
+                "not_applicable": 2,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 7,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 0,
+                "proposed": 1,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 0,
+                "proposed": 1,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 1,
+                "not_applicable": 2,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 7,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 1,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 2,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 0,
+                "proposed": 1,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 0,
+                "proposed": 1,
+                "refuted": 1,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 1,
+                "proposed": 1,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 1,
+                "not_applicable": 2,
+                "proposed": 3,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 1,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 7,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 1,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.53,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/skill_sequence_verify_v1.py",
+        "rejected_by_the_suite": 5,
+        "suite_let_through": 1,
+        "test": "canonical/tests/test_skill_sequence_verify_v1.py",
+        "trace": {
+          "arg_tuples": 13,
+          "functions_of_this_module": 3,
+          "functions_of_this_module_with_a_grid": 3,
+          "functions_traced": 5,
+          "records": 17,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.518,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/taught_actions/bring_names_v1.py",
+        "rejected_by_the_suite": 6,
+        "suite_let_through": 0,
+        "test": "canonical/tests/test_bring_names_v1.py",
+        "trace": {
+          "arg_tuples": 1,
+          "functions_of_this_module": 6,
+          "functions_of_this_module_with_a_grid": 1,
+          "functions_traced": 4,
+          "records": 5,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 4
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 8,
+                "not_applicable": 6,
+                "proposed": 14,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 38,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 4,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 6,
+                "refuted": 2,
+                "vacuous": 2
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 8,
+                "not_applicable": 6,
+                "proposed": 14,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 38,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 2,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 2,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {
+              "ASSOCIATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 6,
+                "proposed": 6,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "COMMUTATIVITY": {
+                "confirmed": 0,
+                "not_applicable": 2,
+                "proposed": 6,
+                "refuted": 2,
+                "vacuous": 2
+              },
+              "IDEMPOTENCE": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "INVOLUTION": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "PERMUTATION_INVARIANT": {
+                "confirmed": 0,
+                "not_applicable": 8,
+                "proposed": 8,
+                "refuted": 0,
+                "vacuous": 0
+              },
+              "TOTALITY": {
+                "confirmed": 8,
+                "not_applicable": 6,
+                "proposed": 14,
+                "refuted": 0,
+                "vacuous": 0
+              }
+            },
+            "confirmed_laws": 0,
+            "judged": 2,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 38,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 2,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 2,
+            "vacuous_laws": 2,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.561,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/taught_actions/expression_operator_pack_v1.py",
+        "rejected_by_the_suite": 4,
+        "suite_let_through": 2,
+        "test": "canonical/tests/test_expression_operator_pack_v1.py",
+        "trace": {
+          "arg_tuples": 17,
+          "functions_of_this_module": 7,
+          "functions_of_this_module_with_a_grid": 4,
+          "functions_traced": 7,
+          "records": 20,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      },
+      {
+        "arms": {
+          "invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_grid": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          },
+          "recorded_plus_invented": {
+            "accepted_by_both": 0,
+            "candidate_not_loadable_under_reduction": 0,
+            "census_by_kind": {},
+            "confirmed_laws": 0,
+            "judged": 0,
+            "killed_among_those": 0,
+            "kills_by_kind": {},
+            "laws_child_failed": 0,
+            "not_applicable_laws": 0,
+            "pairs_where_a_law_could_speak": 0,
+            "refuted_laws": 0,
+            "rejected_by_a_law": 0,
+            "survivors_where_a_law_was_pointed_at_the_mutant": 0,
+            "vacuous_laws": 0,
+            "witnesses": []
+          }
+        },
+        "baseline_seconds": 0.446,
+        "candidate_did_not_import": 0,
+        "candidates": 6,
+        "module": "canonical/swe_kernel/taught_actions/generic_alias_v1.py",
+        "rejected_by_the_suite": 6,
+        "suite_let_through": 0,
+        "test": "canonical/tests/test_generic_alias_v1.py",
+        "trace": {
+          "arg_tuples": 12,
+          "functions_of_this_module": 8,
+          "functions_of_this_module_with_a_grid": 3,
+          "functions_traced": 7,
+          "records": 43,
+          "why": "TRACED"
+        },
+        "unverifiable": 0
+      }
+    ],
+    "python_executable": "/home/user/brain/.venv/bin/python",
+    "real_geometry": {
+      "list_inputs": 1,
+      "source": "paths, source lines and identifier lists read from the corpus roots",
+      "string_inputs": 72
+    },
+    "schema": "PROJECT_BRAIN_PATCH_VERDICT_AMPLIFICATION_MEASURE_V1",
+    "skipped": [
+      {
+        "module": "canonical/swe_kernel/operator_semantics_v1.py",
+        "reason": "BASELINE_FAIL",
+        "tail": [
+          "=========================== short test summary info ============================",
+          "FAILED ../../home/user/brain/canonical/tests/test_operator_semantics_v1.py::test_the_proposer_refuses_the_unsound_widening_but_not_the_lesson_itself",
+          "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!",
+          "1 failed, 4 passed, 6 skipped in 1.02s"
+        ],
+        "test": "canonical/tests/test_operator_semantics_v1.py",
+        "why": "TESTS_FAILED"
+      },
+      {
+        "module": "canonical/swe_kernel/patch_verdict_amplification_v1.py",
+        "reason": "BASELINE_FAIL",
+        "tail": [
+          "=========================== short test summary info ============================",
+          "FAILED ../../home/user/brain/canonical/tests/test_patch_verdict_amplification_v1.py::InjectionTests::test_a_suite_run_against_the_pristine_module_passes",
+          "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!",
+          "1 failed, 3 passed in 0.59s"
+        ],
+        "test": "canonical/tests/test_patch_verdict_amplification_v1.py",
+        "why": "TESTS_FAILED"
+      },
+      {
+        "module": "canonical/swe_kernel/semantic_unification_v1.py",
+        "reason": "BASELINE_FAIL",
+        "tail": [
+          "=========================== short test summary info ============================",
+          "FAILED ../../home/user/brain/canonical/tests/test_semantic_unification_v1.py::test_join_admission_direction_is_not_claimed",
+          "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!",
+          "1 failed, 8 passed in 17.90s"
+        ],
+        "test": "canonical/tests/test_semantic_unification_v1.py",
+        "why": "TESTS_FAILED"
+      },
+      {
+        "module": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+        "reason": "BASELINE_FAIL",
+        "tail": [
+          "=========================== short test summary info ============================",
+          "FAILED ../../home/user/brain/canonical/tests/test_sentient_cognitive_core_v1.py::SentientCognitiveCoreAdversarialTests::test_control_a_non_static_lived_history_divergence_on_identical_code",
+          "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!",
+          "1 failed, 1 warning in 1.70s"
+        ],
+        "test": "canonical/tests/test_sentient_cognitive_core_v1.py",
+        "why": "TESTS_FAILED"
+      },
+      {
+        "module": "canonical/swe_kernel/specification_from_structure_v1.py",
+        "reason": "BASELINE_TOO_SLOW",
+        "seconds": 71.132,
+        "test": "canonical/tests/test_specification_from_structure_v1.py"
+      },
+      {
+        "module": "canonical/swe_kernel/swe_self_improvement_bridge_v1.py",
+        "reason": "BASELINE_FAIL",
+        "tail": [
+          "=========================== short test summary info ============================",
+          "FAILED ../../home/user/brain/canonical/tests/test_swe_self_improvement_bridge_v1.py::test_swe_bridge_experiment_all_checks_pass",
+          "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!",
+          "1 failed, 1 warning in 2.42s"
+        ],
+        "test": "canonical/tests/test_swe_self_improvement_bridge_v1.py",
+        "why": "TESTS_FAILED"
+      }
+    ],
+    "totals": {
+      "candidate_did_not_import": 0,
+      "candidates": 96,
+      "functions_of_this_module": 103,
+      "functions_of_this_module_with_a_recorded_grid": 61,
+      "invented_accepted_by_both": 19,
+      "invented_candidate_not_loadable_under_reduction": 0,
+      "invented_confirmed_laws": 2,
+      "invented_judged": 19,
+      "invented_killed_among_those": 0,
+      "invented_law_amplification_on_survivors": 0.0,
+      "invented_laws_child_failed": 0,
+      "invented_not_applicable_laws": 301,
+      "invented_pairs_where_a_law_could_speak": 2,
+      "invented_refuted_laws": 30,
+      "invented_rejected_by_a_law": 0,
+      "invented_residual_rate": 0.197917,
+      "invented_survivors_where_a_law_was_pointed_at_the_mutant": 19,
+      "invented_vacuous_laws": 16,
+      "pairs_discovered": 65,
+      "pairs_measured": 16,
+      "pairs_skipped": 6,
+      "recorded_grid_accepted_by_both": 19,
+      "recorded_grid_candidate_not_loadable_under_reduction": 0,
+      "recorded_grid_confirmed_laws": 2,
+      "recorded_grid_judged": 19,
+      "recorded_grid_killed_among_those": 0,
+      "recorded_grid_law_amplification_on_survivors": 0.0,
+      "recorded_grid_laws_child_failed": 0,
+      "recorded_grid_not_applicable_laws": 327,
+      "recorded_grid_pairs_where_a_law_could_speak": 2,
+      "recorded_grid_refuted_laws": 37,
+      "recorded_grid_rejected_by_a_law": 0,
+      "recorded_grid_residual_rate": 0.197917,
+      "recorded_grid_survivors_where_a_law_was_pointed_at_the_mutant": 19,
+      "recorded_grid_vacuous_laws": 3,
+      "recorded_plus_invented_accepted_by_both": 19,
+      "recorded_plus_invented_candidate_not_loadable_under_reduction": 0,
+      "recorded_plus_invented_confirmed_laws": 2,
+      "recorded_plus_invented_judged": 19,
+      "recorded_plus_invented_killed_among_those": 0,
+      "recorded_plus_invented_law_amplification_on_survivors": 0.0,
+      "recorded_plus_invented_laws_child_failed": 0,
+      "recorded_plus_invented_not_applicable_laws": 301,
+      "recorded_plus_invented_pairs_where_a_law_could_speak": 2,
+      "recorded_plus_invented_refuted_laws": 40,
+      "recorded_plus_invented_rejected_by_a_law": 0,
+      "recorded_plus_invented_residual_rate": 0.197917,
+      "recorded_plus_invented_survivors_where_a_law_was_pointed_at_the_mutant": 19,
+      "recorded_plus_invented_vacuous_laws": 6,
+      "rejected_by_the_suite": 77,
+      "residual_accepted_by_both_rate": 0.197917,
+      "suite_let_through": 19,
+      "suite_lets_through_rate": 0.197917,
+      "suite_rejection_rate": 0.802083,
+      "unverifiable": 0
+    }
+  },
+  "reading": {
+    "what_a_pass_is_worth_here": "0.8021 of behaviour-altering candidates were rejected by the paired real suite; per pair the rate ranged from 1/6 (skill_recheck_v1) to 6/6 (six pairs). A pass is therefore a coverage certificate of real but unequal strength, not a correctness proof.",
+    "what_this_does_not_show": "That a verifier is impossible. It shows that a verifier made of the relations a program's own SHAPE suggests is worth 0 on top of a real suite, and that what would add information is a relation that names what the code MEANS.",
+    "why_the_law_adds_zero": [
+      "The only law kind that confirms widely on real code is TOTALITY ('it ran'): 71 of 120 proposed on the invented grid, 51 of 120 on the suite's own arguments. On the very arguments a suite already executed, a passing suite has already certified it.",
+      "The informative kinds are refuted by the code itself (INVOLUTION 20 refuted, IDEMPOTENCE 7, COMMUTATIVITY 3 of 42). An invented relation about real code is usually false, and knowing which relation is true of a program is knowledge, not shape.",
+      "Structure-derived laws address top-level functions; in this tree much of the behaviour lives in methods (the mutation engine produced e.g. `Localization.localized`), which no law in this vocabulary can address.",
+      "Even with a confirmed law pointed at the mutated function (19 of 19 survivors), the law did not fire: the behaviour the mutation changed was invisible on the inputs it was confirmed on. That is identifiability, in the small, measured rather than argued."
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PATCH_VERDICT_AMPLIFICATION_RECEIPT_20261116_V1",
+  "what_this_is": "A producer-run measurement, on this repository's own code and its own unedited test files, of two quantities: (1) of behaviour-altering candidates a real suite ACCEPTS, how many are actually wrong; (2) of those the suite accepts, how many a law confirmed on the pristine module can still reject, with a witness.",
+  "what_this_is_not": "Not a proof of correctness, not a benchmark score, not independent verification. ACCEPTED_BY_BOTH means nothing available falsified the candidate. A kill is not a proof and a survivor is not an approval. truth.achieved remains false."
+}
