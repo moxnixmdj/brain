@@ -104,13 +104,25 @@ The claim has two halves, and this measurement separates them cleanly.
 
 **The half that is right.** Where a real suite exists, a pass is strong evidence: 80.2% of wrong
 behaviour is rejected here, and this tree's suites are *stronger* than the field's agent-authored
-tests (26 of 500 SWE-bench Verified tasks had tests that accepted wrong patches after expert
-human screening^[UTBoost, ACL 2025 — [ddkang.substack.com](https://ddkang.substack.com/p/swe-bench-verified-is-flawed-despite)]^;
-80.2% of 86,156 agent-authored test-file patches carried weak or no oracle signals^[arXiv:2606.18168 — [arxiv.org/abs/2606.18168](https://arxiv.org/abs/2606.18168)]^;
-more than 15% of Verified instances have test patches loose enough for incorrect or partial
-solutions to pass^[arXiv:2503.15223, reported in [aiwiki.ai/wiki/swe-bench_verified](https://aiwiki.ai/wiki/swe-bench_verified)]^).
+tests. The field's numbers describe the same residual from the other side:
+
+- 26 of 500 SWE-bench Verified tasks had tests that accepted wrong patches after expert human
+  screening (UTBoost, ACL 2025 — [ddkang.substack.com](https://ddkang.substack.com/p/swe-bench-verified-is-flawed-despite));
+- 80.2% of 86,156 agent-authored test-file patches carried weak or no oracle signals
+  ([arXiv:2606.18168](https://arxiv.org/abs/2606.18168));
+- more than 15% of Verified instances have test patches loose enough for incorrect or partial
+  solutions to pass ([arXiv:2503.15223](https://arxiv.org/abs/2503.15223), as reported by
+  [aiwiki.ai/wiki/swe-bench_verified](https://aiwiki.ai/wiki/swe-bench_verified));
+- generated suites are 88–96% *valid* and 38–56% *strong* — they pass on the reference
+  implementation and still fail to kill most mutants
+  ([TestSuiteBench, arXiv:2610.13065](https://arxiv.org/html/2610.13065v1));
+- 77% of developer task instances admitted at least one surviving variant under the existing
+  suite (PROBE, ASE '26, reported in
+  [shippedbyagents.com](https://shippedbyagents.com/posts/mutation-testing-for-agent-generated-code)).
+
 So "one experience, verified by a real suite, kept" is worth a lot — *proportional to that
-suite's coverage, and no more*.
+suite's coverage, and no more*. A mutation score is a lower bound on test strength, never a
+certificate of correctness, and the same is true of every number in this document.
 
 **The half that is false.** The permanence. What you keep is exactly what the verdict could
 distinguish, and a verdict built from the program's own shape can distinguish *nothing* that a
@@ -149,7 +161,10 @@ weak" — it is "the verdict's reach is the reach of the knowledge inside it".
    contain such relations, expressed as assertions (`material_differences(a, b) != ...`,
    `usable(...) after expire_stale(...)` is false). Generalising an *assertion the suite already
    makes* into a law over a wider grid is a real research direction, unlike inventing relations
-   from `def normalize(`.
+   from `def normalize(`. The 2026 literature points the same way: metamorphic relations are
+   derived from *specifications* ([MET 2026, arXiv:2605.25101](https://arxiv.org/abs/2605.25101)),
+   never from the shape of the definitions — which is exactly why ours are refuted by the code
+   they were proposed about.
 3. **Move the laws to methods — that is where the behaviour and the weakness both are.** Six of
    16 pairs are fully defended (6/6) and one defends 1/6; the mutants that survive are
    disproportionately in classes. A vocabulary that cannot name a method cannot help there.

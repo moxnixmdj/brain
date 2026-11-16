@@ -333,7 +333,7 @@
      "route": "trust the suites alone and drop the whole law instrument"
     }
    ],
-   "checked_at_utc": "2026-11-16T16:19:18Z",
+   "checked_at_utc": "2026-11-16T16:20:31Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -373,7 +373,7 @@
    "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T16:19:18Z",
+    "checked_at_utc": "2026-11-16T16:20:31Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest 9.2.0 in .venv",

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bf39d58d5c5dd0d47d258f165f8a1ab23f5aeac8263c153074d5ad34dffe61f5"
+  "value": "59677ee4dc44337f7dd9ecc8c3de6d8ca3db312b2dc70c867e522294d8c164de"
  },
  "engines": [
   {
@@ -65828,7 +65828,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 11874,
+   "bytes": 12855,
    "headings": [
     "What a pass is worth",
     "1. The two numbers",
@@ -65842,7 +65842,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "WHAT_A_PASS_IS_WORTH_20261116_V1.md",
-   "sha256": "26d9979f55247fb4e6638433768c68f3890c9175dd7532880e0e6be96908ee5c",
+   "sha256": "ec12c7f167c9ce0da86c7a9d876e99771f8888a17b930a8542528828e732ebb8",
    "summary": "**Measured on this repository's own code, its own unedited test files, and its own mutation engine. $0, no model, no network, no synthetic data. Producer-run. `truth.achieved` stays false.**",
    "terms": {
     "16": 5,
@@ -65854,42 +65854,42 @@
     "behaviour": 5,
     "candidates": 5,
     "canonical": 6,
-    "code": 13,
+    "code": 14,
     "confirmed": 8,
     "each": 5,
-    "every": 7,
+    "every": 8,
     "function": 11,
     "had": 5,
     "here": 7,
+    "https": 7,
     "instrument": 6,
     "law": 21,
     "laws": 5,
     "measured": 5,
     "measurement": 6,
     "module": 6,
-    "mutation": 7,
+    "mutation": 8,
     "name": 7,
     "no": 13,
     "not": 29,
     "nothing": 6,
-    "one": 11,
+    "number": 5,
+    "one": 12,
     "own": 7,
     "pairs": 7,
-    "pass": 12,
+    "pass": 13,
     "pointed": 5,
     "produced": 6,
     "real": 12,
     "rejected": 5,
-    "relations": 5,
-    "shape": 5,
+    "relations": 6,
+    "same": 6,
+    "shape": 6,
     "so": 5,
-    "suite": 23,
-    "test": 10,
-    "than": 5,
+    "suite": 24,
+    "test": 11,
     "tree": 10,
-    "two": 5,
     "verdict": 7,
-    "vocabulary": 5,
     "worth": 7,
     "wrong": 9,
     "zero": 7
@@ -80503,7 +80503,7 @@
   "included_source_count": 1258,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f3a97a7bc0c36e89ca85be9f196e640dad38572ecf9e0073f8480e705a1455e3"
+  "source_tree_digest": "ca5e33d13243e228f840182d154679d04a6a46fff307f21ac2a93d5ad58faf7f"
  },
  "research_index": [
   {
@@ -242604,7 +242604,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHAT_A_PASS_IS_WORTH_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "ae973873de8bfe754db862f580359647cc04fc651a79332fa0cd03a27f87eb07",
+   "sha256": "3975f1a7c21538fb0a2fe314911dd9c283aad7e3eb628a9b9453be5e86d2267f",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
@@ -242617,7 +242617,7 @@
     "instead": 1,
     "laws": 1,
     "means": 1,
-    "measure_the_verdict_instead_of_arguing_it_one_gate_is_the_real_edited_unedited_test_suite_the_other_is_a_law_confirmed_on_the_pristine_module_and_report_every_arm": 1,
+    "measure_the_verdict_instead_of_arguing_it_one_gate_is_the_real_unedited_test_suite_the_other_is_a_law_confirmed_on_the_pristine_module_and_every_arm_is_reported": 1,
     "measured": 1,
     "method-level": 1,
     "more": 1,
