@@ -1,0 +1,2080 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "benchmark": {
+  "development": 64,
+  "humanevalfix_sha256": "b1376d72be4bd016a62ad043d9de3846edb8d63edf1222da802a31330c14c3a7",
+  "lessons": "64 development fixes + 40 QuixBugs fixes, each once; a scored bug's own fix is never among its lessons",
+  "name": "HumanEvalFix (Python split of HumanEvalPack)",
+  "oracle_used_only_for_questions": true,
+  "scored": 100,
+  "split_seed": 20261111
+ },
+ "decision_counts": {
+  "SETTLED_BY_QUESTION": 1,
+  "SETTLED_TO_A_BEHAVIOUR_CLASS": 7,
+  "UNSEPARATED__NO_INPUT_TOLD_THEM_APART": 43
+ },
+ "documents": [
+  "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
+  "ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md"
+ ],
+ "generated_utc": "2026-11-16T00:00:00Z",
+ "harness": "canonical/tools/version_space_selection_measure_v1.py",
+ "limits": [
+  "One corpus, one split, one producer, one machine.",
+  "Correct means behaviourally equal to the published fix on the probe library used.",
+  "The refusal path is covered by 15 mechanism tests, not observed on this corpus.",
+  "1 bug hit a memory limit in a sharded run and was measured alone; 1 (Python/156) did not finish. Both reported, not folded in.",
+  "terminal_authority is false everywhere; no capability is registered and no weights are updated."
+ ],
+ "model_calls": 0,
+ "note": "v2: reconciled with ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md. The selector now uses maximum elimination (correct when the oracle is known correct) instead of the kernel's minimax, which is the right rule only when the answer is unknown. Re-measured on this corpus both rules ask the same 9 questions, because only 2-3 behaviour classes survive the test screen; the elimination gain appears in the ~13,000-program regime measured in that note.",
+ "per_bug": {
+  "Python/1": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": false,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 7,
+    "first_difference": null,
+    "inputs_used": 7
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": false,
+   "refused_because": null,
+   "seconds": 4.86,
+   "shipped_behaviour_equals_reference": false,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/100": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 4,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 9,
+    "first_difference": null,
+    "inputs_used": 9
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 4,
+    "status": "OK"
+   },
+   "passing": 4,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 13.68,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/101": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": false,
+   "chosen_class_size": 5,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 7,
+    "first_difference": {
+     "candidate": "('value', ['Elephantgiraffelionzebra'])",
+     "input": "['Elephant,giraffe,,lion,zebra']",
+     "published": "['Elephant', 'giraffe', 'lion', 'zebra']"
+    },
+    "inputs_used": 9
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 5,
+    "status": "OK"
+   },
+   "passing": 5,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": false,
+   "refused_because": null,
+   "seconds": 12.71,
+   "shipped_behaviour_equals_reference": false,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/102": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 15,
+    "first_difference": null,
+    "inputs_used": 15
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.49,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/105": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 17.09,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/107": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 11,
+    "first_difference": null,
+    "inputs_used": 11
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 24.14,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/108": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 3,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 12,
+    "first_difference": null,
+    "inputs_used": 12
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 3,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 20.42,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/109": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 18.85,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/11": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 8,
+    "first_difference": null,
+    "inputs_used": 8
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 18.53,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/110": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 15,
+    "first_difference": null,
+    "inputs_used": 15
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 15.53,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/114": {
+   "budget": 200,
+   "bug_type": "function misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 19.11,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/118": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 21.73,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/120": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 16,
+    "first_difference": null,
+    "inputs_used": 16
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 13.86,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/121": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 7,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 11,
+    "first_difference": null,
+    "inputs_used": 11
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 7,
+    "status": "OK"
+   },
+   "passing": 7,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 11.12,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/122": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 6.91,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/123": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 10,
+    "first_difference": null,
+    "inputs_used": 10
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 109.92,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/124": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 30.51,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/125": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 13,
+    "first_difference": null,
+    "inputs_used": 13
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 15.41,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/127": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 4,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 13,
+    "first_difference": {
+     "candidate": "('value', 'YES')",
+     "input": "[[-6, -2], [-6, -2]]",
+     "published": "'NO'"
+    },
+    "inputs_used": 15
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 4,
+    "status": "OK"
+   },
+   "passing": 4,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 24.84,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/128": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 19.27,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/130": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 15,
+    "first_difference": null,
+    "inputs_used": 15
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 21.15,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/132": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 20.84,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/133": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 8.19,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/134": {
+   "budget": 200,
+   "bug_type": "function misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 2.78,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/135": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 3,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 13,
+    "first_difference": null,
+    "inputs_used": 13
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 3,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 15.42,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/136": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 20.22,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/138": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 18,
+    "first_difference": null,
+    "inputs_used": 18
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 9.84,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/14": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 7,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 8,
+    "first_difference": null,
+    "inputs_used": 8
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 7,
+    "status": "OK"
+   },
+   "passing": 7,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 17.03,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/140": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 20.81,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/141": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 14.21,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/143": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 18.99,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/144": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 9.55,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/145": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 9,
+    "first_difference": null,
+    "inputs_used": 9
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 3.15,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/147": {
+   "error": "MemoryError: ",
+   "status": "CRASHED"
+  },
+  "Python/149": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 7.68,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/15": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 10,
+    "first_difference": null,
+    "inputs_used": 10
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 30.05,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/150": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 7,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 19,
+    "first_difference": null,
+    "inputs_used": 19
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 7,
+    "status": "OK"
+   },
+   "passing": 7,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.8,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/154": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 11.24,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/157": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 10.65,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/158": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 2.04,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/159": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 2.61,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/16": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 5.92,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/163": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_BY_QUESTION",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 8,
+    "first_difference": null,
+    "inputs_used": 8
+   },
+   "partition": {
+    "classes": 3,
+    "distinct": 3,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 2.51,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/17": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 10,
+    "first_difference": null,
+    "inputs_used": 10
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 9.97,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/18": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 14,
+    "first_difference": null,
+    "inputs_used": 14
+   },
+   "partition": {
+    "classes": 2,
+    "distinct": 2,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 4,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 16.77,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/19": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 14.4,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/20": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 25.51,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/21": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 12.58,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/22": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 5,
+    "first_difference": null,
+    "inputs_used": 5
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.54,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/23": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 7,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 8,
+    "first_difference": null,
+    "inputs_used": 8
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 7,
+    "status": "OK"
+   },
+   "passing": 7,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.53,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/24": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 11.06,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/25": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 15,
+    "first_difference": null,
+    "inputs_used": 15
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 21.02,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/26": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 4,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 7,
+    "first_difference": null,
+    "inputs_used": 7
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 4,
+    "status": "OK"
+   },
+   "passing": 4,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 13.08,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/27": {
+   "budget": 200,
+   "bug_type": "function misuse",
+   "candidates": 153,
+   "passing": 0,
+   "seconds": 7.32,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/28": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 8,
+    "first_difference": null,
+    "inputs_used": 8
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.39,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/29": {
+   "budget": 200,
+   "bug_type": "function misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 11.26,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/3": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 4,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 14,
+    "first_difference": {
+     "candidate": "('value', False)",
+     "input": "[[1, 2, 3, 4, -10, 5, 6, -15]]",
+     "published": "True"
+    },
+    "inputs_used": 16
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 4,
+    "status": "OK"
+   },
+   "passing": 4,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 5.34,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/30": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 10,
+    "first_difference": null,
+    "inputs_used": 10
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 11.98,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/32": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "diagnosis": "REFUSED",
+   "partition": {
+    "classes": 0,
+    "distinct": 0,
+    "largest": 0,
+    "status": "REFUSED"
+   },
+   "passing": 4,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "seconds": 36.29,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "PARTITION_REFUSED"
+  },
+  "Python/35": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 9,
+    "first_difference": null,
+    "inputs_used": 9
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 12.41,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/37": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 22.4,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/4": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 9.03,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/40": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 5,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 17,
+    "first_difference": {
+     "candidate": "('value', False)",
+     "input": "[[1, 2, 3, 4, 5, -9]]",
+     "published": "True"
+    },
+    "inputs_used": 24
+   },
+   "partition": {
+    "classes": 2,
+    "distinct": 2,
+    "largest": 5,
+    "status": "OK"
+   },
+   "passing": 6,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 20.69,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/41": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 163,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 3,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 9,
+    "first_difference": null,
+    "inputs_used": 9
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 3,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 8.41,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/43": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 22,
+    "first_difference": null,
+    "inputs_used": 22
+   },
+   "partition": {
+    "classes": 3,
+    "distinct": 3,
+    "largest": 3,
+    "status": "OK"
+   },
+   "passing": 6,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 2,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 15.13,
+   "shipped_behaviour_equals_reference": false,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/45": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 7,
+    "first_difference": null,
+    "inputs_used": 7
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.26,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/46": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 3,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 13,
+    "first_difference": null,
+    "inputs_used": 13
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 3,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 22.25,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/47": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 14.05,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/49": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 19,
+    "first_difference": null,
+    "inputs_used": 19
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 17.36,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/5": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 14.67,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/51": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 4,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 11,
+    "first_difference": {
+     "candidate": "('value', 'Th qck brn ybcd\\n\\n\\n\\nfghjklmnpqrstvxyzHd.lHlfx jmps vr th lzyg.')",
+     "input": "['The quick brown AEEIayoubcd\\n\\n\\n\\nefghijklmnopqrstuvwxyzOUaeHdo.elHlofox jumps over the lazyog.']",
+     "published": "'Th qck brwn ybcd\\n\\n\\n\\nfghjklmnpqrstvwxyzHd.lHlfx jmps vr th lzyg.'"
+    },
+    "inputs_used": 12
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 4,
+    "status": "OK"
+   },
+   "passing": 4,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 11.28,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/52": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 11.1,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/53": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 109,
+    "first_difference": null,
+    "inputs_used": 109
+   },
+   "partition": {
+    "classes": 2,
+    "distinct": 2,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 10.53,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/54": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 10.2,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/58": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 13.2,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/60": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 18,
+    "first_difference": null,
+    "inputs_used": 18
+   },
+   "partition": {
+    "classes": 2,
+    "distinct": 2,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 3,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 15.86,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/61": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 3,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 24,
+    "first_difference": null,
+    "inputs_used": 24
+   },
+   "partition": {
+    "classes": 2,
+    "distinct": 2,
+    "largest": 3,
+    "status": "OK"
+   },
+   "passing": 6,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 13.18,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/62": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 10.74,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/63": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 17.53,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/64": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 13.83,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/65": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 14,
+    "first_difference": null,
+    "inputs_used": 14
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 16.59,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/66": {
+   "budget": 200,
+   "bug_type": "function misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 11.41,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/69": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 34,
+    "first_difference": null,
+    "inputs_used": 34
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 21.16,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/70": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 8,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 14,
+    "first_difference": null,
+    "inputs_used": 14
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 8,
+    "status": "OK"
+   },
+   "passing": 8,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 16.28,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/74": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 16,
+    "first_difference": null,
+    "inputs_used": 16
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 12.03,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/78": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 20,
+    "first_difference": null,
+    "inputs_used": 20
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 16.98,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/81": {
+   "budget": 200,
+   "bug_type": "excess logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 43.95,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/82": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 27,
+    "first_difference": null,
+    "inputs_used": 27
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 13.87,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/84": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 13.11,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/85": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 2,
+   "chosen_is_published_fix": true,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 8,
+    "first_difference": null,
+    "inputs_used": 8
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 2,
+    "status": "OK"
+   },
+   "passing": 2,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 13.22,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": true,
+   "status": "MEASURED"
+  },
+  "Python/86": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 11.23,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/88": {
+   "budget": 200,
+   "bug_type": "operator misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 5,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 12,
+    "first_difference": null,
+    "inputs_used": 12
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 5,
+    "status": "OK"
+   },
+   "passing": 5,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 12.69,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/89": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 14.68,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/9": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 16.1,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/90": {
+   "budget": 200,
+   "bug_type": "value misuse",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": true,
+   "chosen_class_size": 5,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "UNDETERMINED__A_QUESTION_DECIDES",
+   "disposition": "SETTLED_TO_A_BEHAVIOUR_CLASS",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 14,
+    "first_difference": null,
+    "inputs_used": 14
+   },
+   "partition": {
+    "classes": 2,
+    "distinct": 2,
+    "largest": 5,
+    "status": "OK"
+   },
+   "passing": 6,
+   "published_fix_was_also_a_candidate": true,
+   "questions_asked": 1,
+   "reference_behaviour_is_in_the_candidate_set": true,
+   "refused_because": null,
+   "seconds": 12.26,
+   "shipped_behaviour_equals_reference": true,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/92": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "chosen_behaviour_equals_reference": false,
+   "chosen_class_size": 1,
+   "chosen_is_published_fix": false,
+   "decision": "ACCEPT",
+   "diagnosis": "IDENTIFIED_BY_TESTS",
+   "disposition": "UNSEPARATED__NO_INPUT_TOLD_THEM_APART",
+   "on_inputs_the_tests_do_not_have": {
+    "agree": 20,
+    "first_difference": {
+     "candidate": "('value', False)",
+     "input": "[-2, 5, 7]",
+     "published": "True"
+    },
+    "inputs_used": 25
+   },
+   "partition": {
+    "classes": 1,
+    "distinct": 1,
+    "largest": 1,
+    "status": "OK"
+   },
+   "passing": 1,
+   "published_fix_was_also_a_candidate": false,
+   "questions_asked": 0,
+   "reference_behaviour_is_in_the_candidate_set": false,
+   "refused_because": null,
+   "seconds": 14.04,
+   "shipped_behaviour_equals_reference": false,
+   "shipped_is_published_fix": false,
+   "status": "MEASURED"
+  },
+  "Python/93": {
+   "budget": 200,
+   "bug_type": "missing logic",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 16.18,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/96": {
+   "budget": 200,
+   "bug_type": "variable misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 18.07,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  },
+  "Python/99": {
+   "budget": 200,
+   "bug_type": "function misuse",
+   "candidates": 200,
+   "passing": 0,
+   "seconds": 23.99,
+   "status": "NO_CANDIDATE_PASSES_THE_TESTS"
+  }
+ },
+ "schema": "BRAIN_ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_V1",
+ "selection_rules_compared": {
+  "on_the_23_task_13000_program_space": {
+   "kernel_minimax": 112,
+   "maximum_elimination": 89,
+   "receipt": "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json"
+  },
+  "on_this_corpus_8_split_bugs": {
+   "kernel_minimax": 9,
+   "maximum_elimination": 9,
+   "note": "identical: only 2-3 classes survive the screen"
+  }
+ },
+ "summary": {
+  "behaviours_left_unseparated_by_every_probe": 43,
+  "behaviours_split_by_a_probe": 8,
+  "bugs_asked": 99,
+  "bugs_measured": 51,
+  "chosen_agrees_with_published_fix_on_every_humaneval_plus_input": 45,
+  "chosen_compared_on_humaneval_plus": 51,
+  "correct_after_selection": 48,
+  "correct_before_selection": 47,
+  "crashed_or_unfinished": 1,
+  "did_not_finish": [
+   "Python/156"
+  ],
+  "first_pass_candidate_was_correct": 47,
+  "no_candidate_passed_the_tests": 46,
+  "oracle_questions_asked": 9,
+  "partition_refused": 1,
+  "reference_behaviour_was_in_the_candidate_set": 48,
+  "regressions_caused_by_selection": 0,
+  "settled_and_equal_to_the_reference_behaviour": 8,
+  "settled_by_a_question": 8,
+  "still_wrong_because_the_right_behaviour_was_never_generated": [
+   "Python/1",
+   "Python/101",
+   "Python/92"
+  ],
+  "unseparated_and_equal_to_the_reference_behaviour": 40,
+  "unseparated_total": 43
+ },
+ "system_under_test": "canonical/swe_kernel/repair_version_space_selection_v1.py",
+ "why_majority_vote_is_not_a_selector": {
+  "conclusion": "self-consistency is not evidence; a labelled answer to a chosen input is",
+  "examples": {
+   "Python/101": "5 of 6 candidates shared one behaviour; it was wrong",
+   "Python/3": "4 of 5 candidates shared one behaviour; it was wrong"
+  },
+  "measured": "among candidates that pass the SAME tests, the majority behaviour was the WRONG one in 3 of 5 disagreements"
+ }
+}
