@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 472,
+  "knowledge_documents": 473,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6910,
+  "research_index_records": 6912,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "984531184732448f022e7355aa4c911f89fe9ded485e36243a9b910cd7577a8f"
+  "value": "655e666370be956fc332fb4561b57f5cac6d5435984602c06c8dc3da37f6fe13"
  },
  "engines": [
   {
@@ -63716,6 +63716,88 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 21386,
+   "headings": [
+    "The missing part is not the experience — it is the operand, and it does not transfer",
+    "0. The question, and the answer in one paragraph",
+    "1. What was actually done this session, and why it is not another essay",
+    "The numbers, real Chromium, 400 actions, two seeds",
+    "2. The finding that is worth more than the win",
+    "3. So is the plan right? Step by step, with the number attached",
+    "Why \"give it the most advanced actions\" is not the lever — and is partly an anti-lever",
+    "4. The bottleneck, said once, with the evidence that picks it",
+    "5. What the 2026 field measured, and how it lands on the same conclusion",
+    "6. On \"our model\", \"from scratch\", and \"sentient\"",
+    "7. The smartest next moves, ranked, each with its kill condition",
+    "8. Honest limits of this document",
+    "9. Test ledger"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_MISSING_PART_IS_THE_OPERAND_NOT_THE_EXPERIENCE_20261116_V1.md",
+   "sha256": "8912bb858ec8e41f770b725c5edc770e9fed964060838815cbf1abff82ac150c",
+   "summary": "**2026-11-16 · branch `arena/f81a8f89-brain` · base `fba7d0e2` · measured on MiniWoB++ with real headless Chromium, 130 pages nobody in this repository wrote, $0, no model**",
+   "terms": {
+    "121": 8,
+    "2026": 8,
+    "action": 9,
+    "actions": 20,
+    "agent": 6,
+    "algebra": 13,
+    "all": 10,
+    "any": 11,
+    "arxiv": 10,
+    "budget": 10,
+    "cannot": 6,
+    "capability": 10,
+    "chromium": 8,
+    "depth": 7,
+    "each": 6,
+    "every": 10,
+    "experience": 9,
+    "fail": 9,
+    "five": 7,
+    "gain": 9,
+    "hand": 8,
+    "measured": 20,
+    "missing": 11,
+    "model": 6,
+    "more": 8,
+    "never": 6,
+    "no": 23,
+    "not": 49,
+    "nothing": 8,
+    "one": 27,
+    "only": 10,
+    "page": 18,
+    "pages": 32,
+    "part": 21,
+    "real": 14,
+    "same": 14,
+    "seed": 9,
+    "session": 11,
+    "shipped": 10,
+    "so": 9,
+    "state": 7,
+    "step": 8,
+    "transfer": 11,
+    "tree": 9,
+    "two": 8,
+    "vocabulary": 7,
+    "vs": 8,
+    "wrong": 9
+   },
+   "title": "The missing part is not the experience — it is the operand, and it does not transfer",
+   "title_terms": [
+    "experience",
+    "missing",
+    "not",
+    "operand",
+    "part",
+    "transfer"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 18207,
    "headings": [
     "The multiplier is not the multiplicand",
@@ -81738,10 +81820,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1274,
+  "included_source_count": 1275,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "12bfd302485dd085a8e523503543784ae8db9338cb520fe10e586023988483dd"
+  "source_tree_digest": "70bea44992b4a29a447a5d56098309ae0f5ef525a920a577e7628222136c7744"
  },
  "research_index": [
   {
@@ -162943,6 +163025,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json",
+   "schema": "BRAIN_DERIVED_VALUE_FULL_SUITE_V1",
+   "sha256": "ad20b50987b45a4c13d1a494da3b8a50654c0c4dde433567ef1ce0bc472947a8",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "derived": 1,
+    "full": 1,
+    "suite": 1,
+    "v1": 1,
+    "value": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/DIFFERENTIAL_DOMINANCE_COMPILER_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -192953,7 +193054,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
    "schema": "PROJECT_BRAIN_VERIFICATION_RECEIPT_V1",
-   "sha256": "0636125f5ffa5c04c97065975773ad7234eaf3b4d770746801118821e1d07e67",
+   "sha256": "6334eb702ced54eeb390014d4fb626f2a3b88c3fee82058b1c14e34cf1c97f7d",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
@@ -239073,7 +239174,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/READ_FIRST_AND_LEARN_ONLY_FOR_A_NAMED_GAP_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "513325b20c53b02946e6cbdbbca0d678138f51bc5f9a25ad4f5a79c55c4cac32",
+   "sha256": "105a825ad86b1384c28a1d0fa8a9330338109a9225319b562ed685088a14b5e9",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
@@ -242144,6 +242245,30 @@
     "ten-row": 2,
     "unique": 5,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "THE_MISSING_PART_IS_THE_OPERAND_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MISSING_PART_IS_THE_OPERAND_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "25b723d86a32593546b60a8136736ac8b3c80ce00db3aa595b137befde5693ee",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "add_the_missing_operand_part_alongside_the_working_vocabulary_never_instead_of_it__and_measure_every_part_at_full_suite_scale_on_held_out_pages": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measured_at_full_suite_scale_the_operand_is_the_missing_part_and_it_does_not_transfer": 1,
+    "missing": 1,
+    "operand": 1,
+    "part": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "the_missing_part_is_the_operand_20261116_v1": 1,
+    "the_wall_is_not_experience_it_is_expression__a_page_that_wants_19_55_from_7_55_pm_or_the_last_word_of_a_900_character_textarea_is_unreachable_at_any_budget_because_no_generator_can_build_the_operand__and_the_part_that_fixes_it_transfers_nowhere__measured_here_the_value_algebra_gains_5_pages_all_inside_the_eight_pages_it_was_designed_on_and_changes_nothing_on_the_other_121": 1,
+    "v1": 1
    }
   },
   {

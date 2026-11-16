@@ -1,7 +1,7 @@
 {
  "authority": "NONE__PRODUCER_RUN_SANDBOX",
  "benchmark_or_family_rank_authority": null,
- "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
+ "canonical_base_commit": "9d3a37625d71c4551d1437345e2d085549f79ef1",
  "capability_credit_delta": 0,
  "causal_blocker": "A_LADDER_THAT_REPORTS_HOW_WELL_ONE_SUCCESS_GENERALISES_CANNOT_SAY_WHERE_LEARNING_HAS_NOTHING_TO_ADD_SO_ACQUISITION_WAS_NEVER_GATED_ON_WHETHER_THE_READING_ALREADY_DETERMINES_THE_ACTION",
  "claim_under_test": "'After he does them at least once he would learn all of those permanently, so we solve everything on a computer.' The storage half is measured elsewhere in this tree (~60-70% of unseen instances, 0 of the generalising tasks survive an instruction change). The half never measured is whether learning should happen AT ALL on a given task, and that is what decides the architecture.",

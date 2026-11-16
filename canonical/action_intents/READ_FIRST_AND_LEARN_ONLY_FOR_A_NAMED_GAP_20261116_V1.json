@@ -43,7 +43,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_LADDER_THAT_REPORTS_HOW_WELL_ONE_SUCCESS_GENERALISES_CANNOT_SAY_WHERE_LEARNING_HAS_NOTHING_TO_ADD_SO_ACQUISITION_WAS_NEVER_GATED_ON_WHETHER_THE_READING_ALREADY_DETERMINES_THE_ACTION",
- "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
+ "canonical_base_commit": "9d3a37625d71c4551d1437345e2d085549f79ef1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -112,7 +112,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
+  "canonical_base_commit": "9d3a37625d71c4551d1437345e2d085549f79ef1",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "one vocabulary entry per application",
