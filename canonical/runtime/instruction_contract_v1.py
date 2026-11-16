@@ -284,6 +284,23 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
     # over those attributes, so a description that cannot be resolved is refused BY THE MISSING
     # DIMENSION, not as an unknown instruction.
     # --------------------------------------------------------------------------------------- #
+    # --------------------------------------------------------------------------------------- #
+    # A DATE IS A PLACE, NOT A NAME. Before the descriptor: `describe("date", obs)` DOES resolve to
+    # the input (measured 2026-11-16: class `hasDatepicker`, one subject, index 4), so the
+    # descriptor path returns a clause that clicks the field and then has nothing left to say. The
+    # field is the WRONG half of the task -- pressing it opens a calendar, and the answer is three
+    # words inside that calendar that no sentence ties together. This reads the sentence's date as
+    # components and lets the picker be answered incrementally (see picker_answer_v1).
+    # --------------------------------------------------------------------------------------- #
+    picked = _picker_action(said, observation)
+    if picked is not None:
+        if picked.get("unresolved"):
+            contract["refusal"] = picked["unresolved"]
+            contract["refusal_detail"] = picked.get("detail")
+            return contract
+        contract["clauses"] = [picked["clause"]]
+        return contract
+
     described = _described_action(said, observation)
     if described is not None:
         if described.get("unresolved"):
@@ -1350,6 +1367,8 @@ def _check_clause(clause: Mapping[str, Any], trace: Sequence[tuple[Mapping[str, 
         return _check_expand(clause, trace)
     if operator == "FOCUS":
         return _check_focus(clause, trace)
+    if operator == "SELECT_PICKER":
+        return _check_select_picker(clause, trace)
     if operator == "SET_CONTROL":
         return _check_set_control(clause, trace)
     if operator == "PRESS_SEQUENCE":
@@ -1977,3 +1996,70 @@ def _check_order(clause, trace) -> dict[str, Any]:
     ascending = numbers == sorted(numbers)
     good = ascending if clause["direction"] == "ascending" else numbers == sorted(numbers, reverse=True)
     return {"operator": "ORDER", "verdict": PASS if good else FAIL, "witness": numbers}
+
+
+def _picker_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """A sentence that names a date or a time, compiled to SELECT_PICKER.
+
+    Returns None when the sentence names no date/time at all, so every other instruction is
+    untouched. When it does, the clause records the PARTS, because the parts are what the page
+    shows and no control on the page is called "12/26/2016".
+    """
+    from . import picker_answer_v1 as picker
+    said = picker.date_parts(instruction)
+    if not said.get("shape"):
+        return None
+    # A FIELD THAT CAN BE TYPED INTO IS NOT A PICKER. Measured 2026-11-16: taking the picker path
+    # on `enter-date` and `enter-time` lost both pages, which the ordinary typed-value path had
+    # been winning -- their fields are native `<input type=date|time>`, and the sentence's own
+    # literal is exactly what goes in them. The calendar route is for the field that REFUSES text
+    # (`hasDatepicker`, readonly), where the sentence's literal has nowhere to go.
+    if any(e.get("can_type") for e in observation.get("elements") or []):
+        return None
+    if said["shape"] == "H:MM":
+        parts = (said["hour"], said["minute"])
+    elif said["shape"] == "MONTH D Y":
+        parts = (said["month"], said["day"], said["year"])
+    else:
+        # BOTH numbers are kept and neither is assumed to be the month. Which is which is read
+        # from the page when the page declares it (see picker.declared_order) -- a notation this
+        # reader asserts without evidence is exactly the knowledge-house parameter.
+        parts = (said["ambiguous_day_month"][0], said["ambiguous_day_month"][1], said["year"])
+    return {"clause": {"operator": "SELECT_PICKER", "parts": list(parts),
+                       "shape": said["shape"], "provenance": instruction,
+                       "ambiguous": said["shape"] in ("M/D/Y", "D/M/Y") and all(
+                           len(p) <= 2 for p in parts[:2]) and all(
+                           1 <= int(p) <= 12 for p in parts[:2]),
+                       "rule": "THE_SENTENCE_NAMES_A_" + said["shape"].replace("/", "_")}}
+
+
+def _check_select_picker(clause, trace) -> dict[str, Any]:
+    """Did the picker's own field end up holding the date the sentence named?
+
+    Judged on the FIELD's value, never on which elements were pressed: a calendar can be answered
+    by a day press, by a month step and a day press, or by typing, and the instruction does not say
+    which. What it says is what the date must be, and the field is where the page writes it.
+    """
+    from . import picker_answer_v1 as picker
+    wanted = [str(p).lstrip("0") or "0" for p in clause.get("parts") or []]
+    short = {w for w in wanted if len(w) <= 2}
+    year = next((w for w in wanted if len(w) == 4), "")
+    for observation, _action in trace:
+        for element in observation.get("elements") or []:
+            said = (str(element.get("classes") or "") + " "
+                    + str(element.get("id") or "")).lower()
+            if "datepicker" not in said and "picker" not in said:
+                continue
+            value = str(element.get("value") or "")
+            found = [f for f in re.split(r"[/.\-T: ]+", value) if f.isdigit()]
+            if not found:
+                continue
+            normal = {str(f).lstrip("0") or "0" for f in found}
+            if short and not short <= normal:
+                continue
+            if year and str(year) not in found and str(year)[-2:] not in normal:
+                continue
+            return {"operator": "SELECT_PICKER", "verdict": PASS,
+                    "witness": f"THE_FIELD_HOLDS_{value}"}
+    return {"operator": "SELECT_PICKER", "verdict": FAIL,
+            "witness": "THE_PICKERS_FIELD_NEVER_HELD_THAT_DATE"}
