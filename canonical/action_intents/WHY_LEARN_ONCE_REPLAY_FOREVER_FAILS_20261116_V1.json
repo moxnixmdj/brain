@@ -31,10 +31,10 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
     "progress_evidence_paths": [
-      "canonical/swe_kernel/one_demonstration_identifies_v1.py",
-      "canonical/tests/test_one_demonstration_identifies_v1.py",
-      "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
-      "WHAT_ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.md"
+      "canonical/swe_kernel/action_replay_under_change_v1.py",
+      "canonical/tests/test_action_replay_under_change_v1.py",
+      "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json",
+      "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.md"
     ],
     "route_class": "REUSE",
     "scope_complete_discharge": false,
@@ -258,18 +258,18 @@
       "challenger_routes": [
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "no composition: ordering decides safety",
+            "CAPABILITY_STRENGTH": "none: ordering alone turns a correct composition into a broken file",
             "CORRECTNESS": "a plan is a fact about one state; applied to another it is a guess",
-            "INCREMENTAL_COST": "zero to record, one damaged file to trust",
-            "RELIABILITY": "18.7% of applications damage the file silently",
+            "INCREMENTAL_COST": "zero to record, one silently damaged file to trust",
+            "RELIABILITY": "18.7% of applications damage the file without any error being raised",
             "VERIFIABILITY": "only a postcondition check can tell, which is the selected route",
-            "WALL_CLOCK": "faster by one parse per step"
+            "WALL_CLOCK": "faster by one parse and one name scan per step"
           },
           "evidence": [
-            "114 of 230 matches",
-            "116 stale",
-            "43 silent corruptions",
-            "all 114 matches had zero drift"
+            "114 of 230 matches (49.6%); 116 stale (50.4%)",
+            "43 of 230 produced a file that parses and still binds the removed name (18.7%)",
+            "all 114 matches had zero drift; 3 stale replays had zero drift as well",
+            "the operation itself stayed legal in 230 of 230 pairs, so the loss is addressing, not capability"
           ],
           "qualification_evidence": [
             "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
@@ -277,21 +277,21 @@
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
           ],
-          "resolution": "LOWER_TRUST_AT_EQUAL_COST",
-          "route": "REPLAY_THE_RECORDED_PLAN"
+          "resolution": "DISQUALIFIED",
+          "route": "REPLAY_THE_RECORDED_PLAN_WHEREVER_THE_ACTION_IS_NEEDED"
         },
         {
           "comparison": {
             "CAPABILITY_STRENGTH": "none without the re-check",
-            "CORRECTNESS": "removes most staleness, admits the rest",
+            "CORRECTNESS": "removes most staleness and admits the rest",
             "INCREMENTAL_COST": "one hash per region",
-            "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition",
-            "VERIFIABILITY": "fingerprint is a cheap filter; the postcondition is the proof",
-            "WALL_CLOCK": "cheapest possible filter"
+            "RELIABILITY": "strictly better than replay, strictly weaker than a postcondition check",
+            "VERIFIABILITY": "a filter, not a proof; the postcondition is the proof",
+            "WALL_CLOCK": "one hash per region, the cheapest possible filter"
           },
           "evidence": [
-            "113 of 116 stale replays had nonzero drift",
-            "3 stale replays had zero drift"
+            "113 of 116 stale replays had nonzero drift, so a region fingerprint removes most of them",
+            "3 stale replays had zero drift, so the fingerprint cannot be the licence"
           ],
           "qualification_evidence": [
             "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
@@ -299,11 +299,34 @@
           "qualification_evidence_classes": [
             "DIRECT_PROBE"
           ],
-          "resolution": "COMPLEMENTARY_NOT_SUFFICIENT",
-          "route": "FINGERPRINT_THE_REGION_AND_REFUSE_STALE_REPLAYS"
+          "resolution": "NON_DOMINATING",
+          "route": "FINGERPRINT_THE_TOUCHED_REGION_AND_REFUSE_STALE_REPLAYS"
+        },
+        {
+          "comparison": {
+            "CAPABILITY_STRENGTH": "composition becomes available instead of accidental",
+            "CORRECTNESS": "the proof is re-run on the state in hand and the sentence is re-read after acting",
+            "INCREMENTAL_COST": "no model, no network, no store",
+            "RELIABILITY": "silent corruptions fall from 18.7% to 0 by construction",
+            "VERIFIABILITY": "reproducible from the receipt with one command and pinned by pytest",
+            "WALL_CLOCK": "one parse plus one name scan per application"
+          },
+          "evidence": [
+            "230 real two-step compositions in 57 files, four independent samples",
+            "the premise held after the change in 230 of 230 pairs, so re-deciding keeps both steps",
+            "a postcondition check costs one parse and one name scan and removes all 43 silent corruptions by construction"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/ACTION_REPLAY_UNDER_CHANGE_20261116_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "SELECTED",
+          "route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN"
         }
       ],
-      "checked_at_utc": "2026-11-16T20:20:28Z",
+      "checked_at_utc": "2026-11-16T21:27:00Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -313,25 +336,25 @@
         "VERIFIABILITY"
       ],
       "discovery_required": true,
-      "incumbent_route": "treat one demonstration as sufficient and let the stored action fire wherever its shape matches",
+      "incumbent_route": "record the edit a learned action produced and replay that plan wherever the action is needed",
       "max_age_hours": 24,
-      "negative_search_summary": "Three routes were searched and refused on this tree's own evidence: more demonstrations of the same operation (reach measured at 5.3% and one success licenses 0 of 200 requirements), similarity-based widening (0 kills over 19 survivors), and letting a model choose (forbidden: no model may be used).",
+      "negative_search_summary": "Three routes were refused on this tree's own measurement: plain replay (50.4% of 230 real compositions stale, 18.7% silently corrupt), fingerprint-only invalidation (necessary but 3 stale replays had zero drift), and one stored plan per state (unbounded, and every plan is still unproved on the next state). A model-based repair was refused as producer cognition.",
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
-          "query": "program repair from a single demonstration transfer to unseen bugs 2026"
+          "query": "do coding agents replay past patches or synthesise new edits 2026"
         },
         {
           "intent": "SUPPLIER_OR_PRODUCT",
-          "query": "QuixBugs bug corpus python programs tests published"
+          "query": "SWE-bench Verified patches keep deleted code Guard-and-Go deletion check"
         },
         {
           "intent": "IMPLEMENTATION_FORM",
-          "query": "anti-unification edit template hole generalization program repair"
+          "query": "abstract plan reuse versus raw trajectory reuse SWE agent STAIR 2026"
         },
         {
           "intent": "RECENCY_OR_NEW_RELEASE",
-          "query": "2026 automatic program repair vocabulary expressibility limit"
+          "query": "SWE-Touch mid-run user edit agent retained conflict 2026"
         }
       ],
       "refresh_triggers": [
@@ -340,15 +363,15 @@
         "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
         "BEFORE_SCARCE_GATE_SPEND"
       ],
-      "selected_route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
+      "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T20:20:28Z",
+        "checked_at_utc": "2026-11-16T21:27:00Z",
         "execution_dependencies": [
           {
-            "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+            "dependency": "local Python 3.11 runtime with the repository's own venv",
             "evidence": [
-              "25 mechanism and integrity tests ran; every corpus verdict is a pytest run"
+              "35 mechanism and integrity tests ran; every verdict is an executed subprocess"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -361,9 +384,9 @@
             "volatility": "STATIC"
           },
           {
-            "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
+            "dependency": "this repository's own sources under canonical/**/*.py as the corpus",
             "evidence": [
-              "40 tasks enumerated from the corpus's own test files; each program and test hashed in the receipt"
+              "5,538 files scanned; 546 eligible sites found by running the learned operation; corpus sha256 recorded"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -376,9 +399,9 @@
             "volatility": "STATIC"
           },
           {
-            "dependency": "local filesystem tempdir for per-task isolation",
+            "dependency": "throw-away temp copies so no measurement can modify the tree",
             "evidence": [
-              "correct_python_programs asserted absent in every task directory before it runs"
+              "every application runs in a TemporaryDirectory; the tree is byte-identical after the run"
             ],
             "evidence_classes": [
               "DIRECT_PROBE"
@@ -394,7 +417,7 @@
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
-        "selected_route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
+        "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
         "status": "READY"
       },
       "source_classes_checked": [
@@ -439,10 +462,10 @@
     "why_selected_route_is_fastest_sufficient": "It is the only route that gets the 230 of 230 legality the measurement says is available without accepting the 50.4% staleness: the check is one parse and one name scan, cheaper than generating a plan, and it is the same code path for a file edit and a GUI action.",
     "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
   },
-  "route_id": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
+  "route_id": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "scope_complete_discharge": false,
-  "selected_route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
+  "selected_route": "RE_DECIDE_EVERY_ACTION_PROVE_THE_PREMISE_ON_THE_LIVE_STATE_AND_POSTCONDITION_CHECK_THE_CLAIMED_SENTENCE_INSTEAD_OF_REPLAYING_THE_PLAN",
   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
   "stop_condition": "One merged change on this branch whose four-sample measurement and the reverse-order witness are reproducible by one command.",
   "terminal_credit_delta": 0,
@@ -474,18 +497,18 @@
     "fresh_reality_authority": false,
     "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
     "mode": "ACTIVE_INTERFACE",
-    "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair; it discharges no truth obligation.",
+    "proof_state_reachability": "This makes reuse a measured property of the state rather than of the record; it discharges no truth obligation.",
     "target_truth_obligations": [
       "CODING_TB4_GE_66_4"
     ],
     "terminal_credit_delta": 0,
     "tournament": {
       "counterexample_receipts": [],
-      "decisive_question": "Does one demonstrated fix reach an undemonstrated bug, and what about the basis decides it?",
-      "falsifier_id": "EXPRESSIBILITY_LADDER_PLUS_THE_20_HELD_OUT_COMPARISON",
+      "decisive_question": "Is a learned action reusable because it was learned, or only where its premise is re-proved on the state in hand?",
+      "falsifier_id": "REVERSE_ORDER_WITNESS_PLUS_SILENT_CORRUPTION_COUNT",
       "known_counterexamples_checked": true,
-      "no_known_counterexample_reason": "The corpus is the counterexample: 40 published fixes with pairwise distinct edits, so the measurement is itself the falsifier and no new external receipt is added by this PR.",
-      "proposal_id": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1"
+      "no_known_counterexample_reason": "The repository is the counterexample: 230 real compositions, 116 stale replays and 43 silent corruptions, with the same two operations both safe and unsafe depending only on order.",
+      "proposal_id": "WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1"
     }
   },
   "verification": {

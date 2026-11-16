@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "6a167fc1be5b8e70b7a53d0615897e437d995388168af317b99e9d529ed963ab"
+  "value": "67d6fd05d62b883d90a1ab6d50c538f7199cdaa49454c3c5ccb1d548ce2fb9e2"
  },
  "engines": [
   {
@@ -244275,7 +244275,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHY_LEARN_ONCE_REPLAY_FOREVER_FAILS_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "23ec01867f80080481d6eba56791717294427d2ef2ff427458ce2e4175b34f45",
+   "sha256": "4068e359cdeb128551b50a5b7540e5a90b20c806ad8768a9dcad3511095da438",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
@@ -244299,7 +244299,6 @@
     "license": 1,
     "live": 1,
     "may": 1,
-    "measure_identification_on_real_code_with_three_arms_one_demonstration_versus_information_gain_chosen_observations_versus_random_and_name_the_observable_the_vocabulary_lacks": 1,
     "method": 1,
     "never": 2,
     "object": 1,
@@ -244309,7 +244308,8 @@
     "premise": 3,
     "procedure": 1,
     "proposed__producer_measured__independent_verification_open": 1,
-    "re-checks": 1
+    "re-checks": 1,
+    "re-proves": 1
    }
   },
   {
