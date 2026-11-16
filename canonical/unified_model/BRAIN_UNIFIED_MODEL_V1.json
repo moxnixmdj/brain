@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 459,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6870,
+  "research_index_records": 6871,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a851b60eff71df9135d19dfca8a46b15d6735773aa8b0065f54b7928b6531685"
+  "value": "0f7e22cbba46e2564778ce1939f4c08488c5183c450bfb9257d24ba6e4f82876"
  },
  "engines": [
   {
@@ -243440,6 +243440,50 @@
     "v1": 2,
     "write": 3,
     "write_the_tests_for_this_tree_must_write_tests_v1_20261027_v1": 2
+   }
+  },
+  {
+   "action_id": "ZERO_EXPERIENCE_INSTRUCTION_POLICY_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ZERO_EXPERIENCE_INSTRUCTION_POLICY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ZERO_EXPERIENCE_INSTRUCTION_POLICY_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "915ae4fbfc3e1a63710014c73eeed863b80f6530d7079c6bb0a9b67a8cc25745",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "30": 1,
+    "agent": 1,
+    "aimed": 1,
+    "arm": 1,
+    "capability": 1,
+    "causal": 1,
+    "contract": 1,
+    "coverage": 1,
+    "done": 1,
+    "experience": 2,
+    "express": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instruction": 1,
+    "measure_the_verdict_instead_of_arguing_it_one_gate_is_the_real_unedited_test_suite_the_other_is_a_law_confirmed_on_the_pristine_module_and_every_arm_is_reported": 1,
+    "missing": 1,
+    "never": 1,
+    "not": 2,
+    "observable": 1,
+    "page": 1,
+    "policy": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "see": 1,
+    "seen": 1,
+    "so": 1,
+    "solves": 1,
+    "the_binding_constraint_is_observable_content_and_contract_coverage_not_experience__a_zero_experience_arm_solves_39_of_130_real_pages_and_refuses_63_with_a_typed_reason_while_only_12_of_its_28_acted_failures_are_execution_errors": 1,
+    "v1": 1,
+    "work": 1,
+    "zero": 1,
+    "zero_experience_instruction_policy_20261116_v1": 1
    }
   },
   {
