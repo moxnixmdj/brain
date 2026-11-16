@@ -169,6 +169,47 @@ real skills still pass 4 of 4 — the verdict separates, which it did not before
 still carries `stdout_equals`; rewriting eleven learned artifacts is a change to what was learned,
 not to the instrument, and is left to the run that owns them.
 
+## 4c. From a survey to a gate: what the four adversarial arms forced
+
+A survey says a verdict is weak. A gate has to say *when a skill may be admitted*, and that is a
+harder claim, so the same instrument now runs four arms per skill in isolated copies of the target:
+
+| arm | what it does | what it should prove |
+|---|---|---|
+| `real` | the learned skill, on a request this repository really contains | the gate is not a machine for saying no |
+| `null` | prints the success sentence, opens nothing | reading one's own stdout is not evidence |
+| `wrong_claim` | edits a **different** variable in the same function than the request named | changing the world is not doing the task |
+| `corrupt` | truncates the target file to incomplete source | destroying the artifact is not doing the task |
+
+`certify()` admits a skill only if all four arms ran and every non-real arm was refused while the
+real one was accepted; `admission_decision()` admits the bundle only if every exercisable skill
+holds its own certificate. Measured on the tree's four exercisable skills:
+
+| verdict | skills admitted | impostor runs refused |
+|---|---|---|
+| the shipped `stdout_equals` | **0 of 4** (it accepted `null` on 4 of 4) | 0 of 12 |
+| the file witness, first version | 0 of 4 (`corrupt` survived on both rename skills) | 9 of 12 |
+| the file witness **and** the sentence **and** the scope | **4 of 4** | **12 of 12** |
+
+Two of those rows were not visible from the survey, and both changed the design:
+
+1. **A verdict that checks only the file accepts a wrong claim.** The `wrong_claim` arm performs a
+   real edit — of the wrong variable — and prints a sentence about the right one. The file witness
+   said *verified*: it had changed the world, just not as asked. The claim has two halves, and a
+   verdict holding one of them is half a verdict.
+2. **A verdict that checks only the postcondition accepts a destroyed file.** With the symbol gone
+   because the rest of the file was deleted, every local check passed on both rename skills. The
+   scope of a claim is part of the claim: `outside_digests` records the digest of every top-level
+   node the edit has no business touching, and `POSTCONDITION_CHANGE_ESCAPED_THE_FUNCTION` refuses
+   an edit that reaches past what it named.
+
+That is the useful shape of this answer. The first version of the fix was a *better postcondition*
+and it was still a bad oracle; only an arm that tries to satisfy the claim the wrong way shows
+where the oracle stops. A gate is worth exactly the arms it survived — which is why the arms, and
+not the sentence describing them, are now the artifact: `learned_skill_verdict_v1.py --certify`,
+receipt key `four_arm_certificate`, and four pinned tests in
+`canonical/tests/test_learned_skill_verdict_v1.py`.
+
 ## 5. The three challenges, answered by this measurement rather than by prose
 
 **Identifiability.** 19 survivors, a confirmed law pointed at the mutated function in every one,

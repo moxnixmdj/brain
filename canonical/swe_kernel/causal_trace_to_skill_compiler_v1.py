@@ -1523,6 +1523,16 @@ def verify_postcondition(
             return False, "POSTCONDITION_FILE_DOES_NOT_PARSE:" + type(exc).__name__
         function = str(postcondition.get("function") or "")
         symbol = str(postcondition.get("symbol") or "")
+        expected_outside = [str(d) for d in (postcondition.get("outside_digests") or [])]
+        if expected_outside:
+            # Anything the claim did not name must still be there, byte for byte. Without this, a
+            # program that edits the symbol correctly and deletes the rest of the file passes the
+            # file witness (measured: corrupt arm, both rename skills).
+            present = {_outside_digest(node) for node in tree.body
+                       if not (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                               and node.name == function)}
+            if any(digest not in present for digest in expected_outside):
+                return False, "POSTCONDITION_CHANGE_ESCAPED_THE_FUNCTION"
         if function and symbol:
             target = None
             for node in ast.walk(tree):
@@ -1546,6 +1556,14 @@ def verify_postcondition(
         return True, "STEP_RESPONSE_VERIFIED"
 
     return False, f"UNSUPPORTED_POSTCONDITION_KIND:{kind}"
+
+
+def _outside_digest(node: Any) -> str:
+    import ast
+    import hashlib
+
+    return hashlib.sha256(
+        ast.dump(node, include_attributes=False).encode("utf-8")).hexdigest()
 
 
 def _sabotage_world(postcondition: Mapping[str, Any], cwd: pathlib.Path) -> bool:

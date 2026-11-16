@@ -18,6 +18,7 @@ from __future__ import annotations
 import hashlib
 import json
 import pathlib
+import shutil
 import sys
 import tempfile
 import unittest
@@ -144,3 +145,63 @@ class ExerciseTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --- the four-arm certificate: a verdict is admitted only if it can tell a real action from
+# --- three ways of not doing it (nothing / the wrong edit / a destroyed file).
+
+SEARCH = ["canonical/swe_kernel/lesson_admission_gate_v1.py"]
+
+
+def _first_exercisable_skill():
+    for skill in verdict.load_skills():
+        if "path1" in str(skill.get("goal_skeleton")):
+            continue
+        found = verdict.find_an_accepted_request(skill, SEARCH)
+        if found is not None:
+            return skill, found["request"]
+    raise AssertionError("no exercisable skill in this repository")
+
+
+class CertificateTests(unittest.TestCase):
+    def test_a_verdict_that_reads_only_stdout_admits_a_program_that_does_nothing(self):
+        skill, request = _first_exercisable_skill()
+        certificate = verdict.certify(skill, request, postcondition_kind="stored")
+        self.assertFalse(certificate["admitted"])
+        self.assertIn("THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM", certificate["refusals"])
+        self.assertTrue(certificate["arms"]["null"]["accepted"])
+
+    def test_the_file_witness_refuses_all_three_impostors_and_keeps_the_real_action(self):
+        skill, request = _first_exercisable_skill()
+        certificate = verdict.certify(skill, request, postcondition_kind="witness")
+        self.assertTrue(certificate["arms"]["real"]["accepted"])
+        for impostor in ("null", "wrong_claim", "corrupt"):
+            self.assertFalse(certificate["arms"][impostor]["accepted"], impostor)
+
+    def test_a_claim_that_did_not_name_everything_it_changed_is_refused(self):
+        """The scope of a claim is part of the claim: deleting the rest of the file is not the edit."""
+        target = "canonical/swe_kernel/lesson_admission_gate_v1.py"
+        skill, request = _first_exercisable_skill()
+        before = (verdict.ROOT / target).read_text(encoding="utf-8")
+        postcondition = verdict.witness_postcondition(skill, request, before)
+        self.assertTrue(postcondition["outside_digests"], "the file has other top-level nodes")
+
+        workdir = pathlib.Path(tempfile.mkdtemp(prefix="verdict_scope_"))
+        try:
+            path = workdir / target
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(before[: len(before) // 2], encoding="utf-8")
+            ok, why = compiler.verify_postcondition(postcondition, cwd=workdir)
+            self.assertFalse(ok)
+            self.assertTrue(
+                why.startswith("POSTCONDITION_FILE_DOES_NOT_PARSE")
+                or why == "POSTCONDITION_CHANGE_ESCAPED_THE_FUNCTION", why)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_admission_tells_the_loader_which_verdict_it_can_trust(self):
+        decision = verdict.admission_decision(SEARCH)
+        self.assertTrue(decision["admitted"])
+        self.assertEqual(decision["under"], "witness")
+        self.assertFalse(decision["stored_verdict_admitted"])
+        self.assertGreaterEqual(decision["skills_certified"], 1)

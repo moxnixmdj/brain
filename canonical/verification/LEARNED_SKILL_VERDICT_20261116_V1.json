@@ -6,6 +6,66 @@
     "tests": "canonical/tests/test_learned_skill_verdict_v1.py (8 passed)"
   },
   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "four_arm_certificate": {
+    "arms": {
+      "corrupt": "truncates the target file to invalid or incomplete source",
+      "null": "prints the success sentence, touches no file",
+      "real": "the learned skill run against a request this repository actually contains",
+      "wrong_claim": "edits a DIFFERENT variable in the same function than the one the request named"
+    },
+    "bundle_rule": "admitted = one certificate per exercisable skill, all refused every impostor",
+    "function": "admission_decision()",
+    "per_skill": "a skill is certified only if every arm was run and every non-real arm was refused while the real one was accepted",
+    "produced_by": "canonical/swe_kernel/learned_skill_verdict_v1.py --certify",
+    "skills_certified": 4,
+    "skills_unexercised": 7,
+    "stored_verdict": {
+      "admitted": false,
+      "reason": "AT_LEAST_ONE_SKILL_ADMITTED_A_NON_REAL_ARM",
+      "refused_skills": [
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.038c0a66235d2a96"
+        },
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_WRONG_CLAIM_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.39a63d292d2d68c4"
+        },
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.d50b791d66f3a2c2"
+        },
+        {
+          "refusals": [
+            "THE_VERDICT_ACCEPTED_THE_NULL_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_WRONG_CLAIM_PROGRAM",
+            "THE_VERDICT_ACCEPTED_THE_CORRUPT_PROGRAM"
+          ],
+          "skill_id": "workflow.ef0c74240e9e32a8"
+        }
+      ]
+    },
+    "what_the_arms_forced": [
+      "the file witness alone still accepted the wrong-claim arm: it changed the world correctly and printed a different sentence, so a verdict must hold the file AND the claim",
+      "the file witness alone still accepted the corrupt arm on both rename skills: with the symbol gone, deleting the rest of the file satisfied every check, so the SCOPE of a change is part of the claim (outside_digests / POSTCONDITION_CHANGE_ESCAPED_THE_FUNCTION)",
+      "with both halves and the scope, 4 of 4 real skills are admitted and 12 of 12 impostor runs are refused; under the shipped stdout verdict 0 of 4 skills survive"
+    ],
+    "witness_verdict": {
+      "admitted": true,
+      "reason": "EVERY_EXERCISABLE_SKILL_SURVIVED_ALL_ARMS",
+      "refused_skills": []
+    }
+  },
   "generated_utc": "2026-11-16T16:51:34Z",
   "headline": {
     "a_do_nothing_program_a_file_witness_accepted": "0 of 4",

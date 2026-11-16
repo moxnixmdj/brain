@@ -215,6 +215,32 @@ def independent_check(claim: str, *, before: str, after: str,
     return {"holds": True, "why": "THE_VARIABLE_IS_GONE_AND_THE_FILE_PARSES", "claim": claim}
 
 
+def _node_digest(node: Any) -> str:
+    import ast
+    import hashlib
+
+    return hashlib.sha256(
+        ast.dump(node, include_attributes=False).encode("utf-8")).hexdigest()
+
+
+def outside_digests(before: str, function: str) -> list[str]:
+    """Digests of every top-level node the claimed edit has no business touching.
+
+    A postcondition that only asks "is the symbol gone?" is satisfied by deleting the rest of the
+    file (measured: the corrupt arm survived the file witness on both rename skills). The scope of
+    a claim is part of the claim.
+    """
+    import ast
+
+    try:
+        tree = ast.parse(before)
+    except SyntaxError:
+        return []
+    return [_node_digest(node) for node in tree.body
+            if not (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                    and node.name == function)]
+
+
 def witness_postcondition(skill: Mapping[str, Any], request: Mapping[str, Any],
                           before: str) -> dict[str, Any]:
     """The same claim, expressed so that it can only be satisfied by changing the file.
@@ -226,12 +252,14 @@ def witness_postcondition(skill: Mapping[str, Any], request: Mapping[str, Any],
     import hashlib
 
     function_key, variable_key = claim_roles(skill)
+    function = str(request.get(function_key) or "") if function_key else ""
     return {
         "kind": "file_edit_claim",
         "path": str(request.get("path0") or ""),
-        "function": request.get(function_key) if function_key else "",
+        "function": function,
         "symbol": request.get(variable_key) if variable_key else "",
         "before_sha256": hashlib.sha256(before.encode("utf-8")).hexdigest(),
+        "outside_digests": outside_digests(before, function) if function else [],
     }
 
 
@@ -301,6 +329,124 @@ def claim_roles(skill: Mapping[str, Any]) -> tuple[str | None, str | None]:
     variable = re.search(r"the variable '(\?[A-Za-z0-9_]+)'", claim)
     strip = lambda match: match.group(1).lstrip("?") if match else None  # noqa: E731
     return strip(function), strip(variable)
+
+
+# --------------------------------------------------------------------------- #
+# The admission rule: a verdict that a null action satisfies certifies nothing.
+# --------------------------------------------------------------------------- #
+#: The four arms every learned action is put through before it may be admitted. The first three
+#: are counterfactual interventions in the smallest form that exists: do nothing, do the wrong
+#: thing, do a destructive thing. A verdict that answers the same way to any of them has no
+#: discriminating power, and an action admitted under it is admitted on nothing.
+ARMS = ("real", "null", "wrong_claim", "corrupt")
+
+
+def another_symbol(path: str, function: str, symbol: str, *,
+                   repo: pathlib.Path = ROOT) -> str | None:
+    """A different variable really assigned in that function, to aim the wrong-claim arm at."""
+    import ast
+
+    target = (repo / path).read_text(encoding="utf-8")
+    for node in ast.walk(ast.parse(target)):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == function:
+            for statement in node.body:
+                for inner in ast.walk(statement):
+                    if (isinstance(inner, ast.Name) and isinstance(inner.ctx, ast.Store)
+                            and inner.id != symbol):
+                        return inner.id
+    return None
+
+
+def adversarial_programs(skill: Mapping[str, Any], request: Mapping[str, Any],
+                         *, repo: pathlib.Path = ROOT) -> dict[str, str]:
+    """The null, wrong and destructive programs that must be refused, plus the real one.
+
+    `null`          prints the sentence the postcondition looks for and writes nothing.
+    `wrong_claim`   performs the real edit, then prints the sentence for a DIFFERENT symbol than
+                    the one it changed -- an action that half works and claims the whole.
+    `corrupt`       writes a file that no longer parses, then prints the sentence.
+    """
+    expected = concrete_postcondition(skill, request)["expected"]
+    function_key, variable_key = claim_roles(skill)
+    path = str(request.get("path0") or "")
+    real = source_with_request(skill, request)
+    function = str(request.get(function_key) or "") if function_key else ""
+    symbol = str(request.get(variable_key) or "") if variable_key else ""
+    # The wrong-claim arm edits a DIFFERENT variable in the same function while the request asked
+    # for this one: the file changes, it parses, and the thing that was asked for is untouched.
+    # Appending a false sentence to the real code does not work -- the stored steps end in
+    # `sys.exit(main(...))`, so anything appended is dead code (measured).
+    sibling = another_symbol(path, function, symbol, repo=repo) if function and symbol else None
+    wrong_request = dict(request)
+    if sibling and variable_key:
+        wrong_request[variable_key] = sibling
+    wrong_claim = source_with_request(skill, wrong_request) if sibling else (
+        "import sys\nprint(%r)\nsys.exit(0)\n" % expected)
+    return {
+        "real": real,
+        "null": "import sys\nprint(%r)\nsys.exit(0)\n" % expected,
+        "wrong_claim": wrong_claim,
+        "corrupt": (
+            "import pathlib, sys\n"
+            "path = pathlib.Path(%r)\n"
+            "if path.is_file():\n"
+            "    path.write_text(path.read_text()[:20] + ' def (:', encoding='utf-8')\n"
+            "print(%r)\n" % (path, expected)
+        ),
+    }
+
+
+def certify(skill: Mapping[str, Any], request: Mapping[str, Any], *,
+            postcondition_kind: str = "stored",
+            repo: pathlib.Path = ROOT,
+            python_executable: str | None = None,
+            timeout_s: float = 120.0) -> dict[str, Any]:
+    """Run every arm and return the certificate, or the named reasons admission is refused.
+
+    `postcondition_kind` selects the verdict under test: `stored` is the postcondition the skill
+    carries, `witness` is the one that reads the file the claim is about.
+    """
+    kind = str((skill.get("abstract_postcondition") or {}).get("kind") or "")
+    path = str(request.get("path0") or "")
+    arms: dict[str, Any] = {}
+    for name, source in adversarial_programs(skill, request, repo=repo).items():
+        with tempfile.TemporaryDirectory(prefix="brain_certify_") as directory:
+            workdir = pathlib.Path(directory)
+            before = _copy_target(path, workdir, repo)
+            postcondition = (concrete_postcondition(skill, request) if postcondition_kind == "stored"
+                             else witness_postcondition(skill, request, before))
+            run = run_program(source, workdir=workdir, timeout_s=timeout_s,
+                              python_executable=python_executable)
+            judged = judge(postcondition, workdir=workdir, run=run)
+            accepted = judged["accepted"]
+            why = judged["why"]
+            if postcondition_kind != "stored":
+                # The claim has two halves and a verdict that checks one of them is half a
+                # verdict. Measured: a file witness alone accepts a program that performs the
+                # right edit and then reports a different symbol -- it changed the world
+                # correctly and told the user something false. So the witness arm must hold the
+                # file AND the sentence.
+                said = judge(concrete_postcondition(skill, request), workdir=workdir, run=run)
+                accepted = accepted and said["accepted"]
+                why = judged["why"] if judged["accepted"] else judged["why"]
+                if judged["accepted"] and not said["accepted"]:
+                    why = "THE_CLAIM_DOES_NOT_MATCH_WHAT_WAS_DONE:" + said["why"]
+            arms[name] = {"returncode": run.get("returncode"), "accepted": accepted, "why": why}
+    refusals: list[str] = []
+    if not arms["real"]["accepted"]:
+        refusals.append("THE_REAL_ACTION_WAS_NOT_ACCEPTED")
+    for arm in ("null", "wrong_claim", "corrupt"):
+        if arms[arm]["accepted"]:
+            refusals.append("THE_VERDICT_ACCEPTED_THE_%s_PROGRAM" % arm.upper())
+    return {
+        "skill_id": skill.get("skill_id"),
+        "postcondition_kind_under_test": ("stored:" + kind if postcondition_kind == "stored"
+                                         else "file_edit_claim"),
+        "request": dict(request),
+        "arms": arms,
+        "admitted": not refusals,
+        "refusals": refusals,
+    }
 
 
 def _local_names(function_node: Any) -> list[str]:
@@ -468,15 +614,116 @@ def summarize(report: Mapping[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def certify_bundle(paths: Sequence[str] | None = None,
+                   bundle_path: str | pathlib.Path = BUNDLE,
+                   postcondition_kind: str = "witness",
+                   repo: pathlib.Path = ROOT,
+                   python_executable: str | None = None) -> dict[str, Any]:
+    """Run all four arms against every skill in the bundle that this repository can exercise.
+
+    A bundle is admitted only when the verdict refused every non-real arm on every exercisable
+    skill AND still admitted the real one. One refused impostor per skill is not a certificate:
+    a verdict that says no to everything also refuses impostors.
+    """
+    skills = load_skills(bundle_path)
+    search_paths = list(paths or ["canonical/swe_kernel/lesson_admission_gate_v1.py",
+                                  "canonical/swe_kernel/rule_expiry_v1.py",
+                                  "canonical/tools/specification_from_structure_measure_v1.py"])
+    certificates: list[dict[str, Any]] = []
+    unexercised: list[dict[str, Any]] = []
+    for skill in skills:
+        if "path1" in str(skill.get("goal_skeleton")):
+            unexercised.append({"skill_id": skill.get("skill_id"),
+                                "reason": "THE_BUNDLE_CARRIES_NO_EXAMPLE_PAIR"})
+            continue
+        found = find_an_accepted_request(skill, search_paths, repo=repo,
+                                         python_executable=python_executable)
+        if found is None:
+            unexercised.append({"skill_id": skill.get("skill_id"),
+                                "reason": "NO_REQUEST_IN_THESE_PATHS_IT_ANSWERS"})
+            continue
+        certificate = certify(skill, found["request"], postcondition_kind=postcondition_kind,
+                              repo=repo, python_executable=python_executable)
+        certificate["skill_id"] = skill.get("skill_id")
+        certificates.append(certificate)
+
+    exercised = len(certificates)
+    admitted_here = [c for c in certificates if c["admitted"]]
+    refusals = [{"skill_id": c["skill_id"], "refusals": c["refusals"]}
+                for c in certificates if not c["admitted"]]
+    admitted = exercised > 0 and len(admitted_here) == exercised
+    if exercised == 0:
+        reason = "NOTHING_WAS_CERTIFIED"
+    elif admitted:
+        reason = "EVERY_EXERCISABLE_SKILL_SURVIVED_ALL_ARMS"
+    else:
+        reason = "AT_LEAST_ONE_SKILL_ADMITTED_A_NON_REAL_ARM"
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "postcondition_kind": postcondition_kind,
+        "model_calls": 0,
+        "incremental_spend_usd": 0,
+        "skills_in_bundle": len(skills),
+        "skills_certified": exercised,
+        "skills_unexercised": len(unexercised),
+        "arms_per_skill": list(ARMS),
+        "admitted": admitted,
+        "reason": reason,
+        "refusals": refusals,
+        "unexercised": unexercised,
+        "certificates": certificates,
+    }
+
+
+def admission_decision(paths: Sequence[str] | None = None,
+                       bundle_path: str | pathlib.Path = BUNDLE,
+                       repo: pathlib.Path = ROOT,
+                       python_executable: str | None = None) -> dict[str, Any]:
+    """What a loader of the bundle should be told, in one bool and one reason.
+
+    A skill whose stored verdict admits a program that does nothing is admitted only under a
+    witness that holds both halves of the claim: the file, and the sentence.
+    """
+    stored = certify_bundle(paths, bundle_path=bundle_path, postcondition_kind="stored",
+                            repo=repo, python_executable=python_executable)
+    witness = certify_bundle(paths, bundle_path=bundle_path, postcondition_kind="witness",
+                             repo=repo, python_executable=python_executable)
+    return {
+        "admitted": witness["admitted"],
+        "under": "witness" if witness["admitted"] else "none",
+        "reason": witness["reason"],
+        "stored_verdict_admitted": stored["admitted"],
+        "stored_verdict_reason": stored["reason"],
+        "stored_refusals": stored["refusals"],
+        "witness_refusals": witness["refusals"],
+        "skills_certified": witness["skills_certified"],
+        "skills_unexercised": witness["skills_unexercised"],
+    }
+
+
 def main() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(description="Measure what a learned skill's verdict is worth.")
     parser.add_argument("--json", dest="json_path", default=None)
     parser.add_argument("--paths", nargs="*", default=None)
+    parser.add_argument("--certify", action="store_true",
+                        help="run the four-arm certificate instead of the survey")
+    parser.add_argument("--postcondition-kind", default="witness",
+                        choices=("stored", "witness"))
     ns = parser.parse_args()
-    report = measure(ns.paths)
-    print(summarize(report))
+    if ns.certify:
+        report = certify_bundle(ns.paths, postcondition_kind=ns.postcondition_kind)
+        print("certify %s: admitted=%s reason=%s certified=%d/%d unexercised=%d" % (
+            report["postcondition_kind"], report["admitted"], report["reason"],
+            report["skills_certified"], report["skills_in_bundle"],
+            report["skills_unexercised"]))
+        for refusal in report["refusals"]:
+            print("  refused", refusal["skill_id"], refusal["refusals"])
+    else:
+        report = measure(ns.paths)
+        print(summarize(report))
     if ns.json_path:
         path = pathlib.Path(ns.json_path)
         path.parent.mkdir(parents=True, exist_ok=True)
