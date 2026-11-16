@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a1c3f0dd9b7317aecbac7290f90ea44024db12a3f22e8bd2616d2549ab58d392"
+  "value": "8836a3667bbe8aa5bd0c4c98ddb84e815c5bc25d7c4248a017cdcc62770e5fa9"
  },
  "engines": [
   {
@@ -242479,7 +242479,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHERE_THE_WALL_ACTUALLY_IS_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "8dd36eef1196aa31be27f4ed845acfd6497a2d8747885020a7824a479f4b5e0a",
+   "sha256": "dad4a6c61fe306e0422ab6b4be1f75d978a4cf714d626fd27bdde0e42d67910d",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
