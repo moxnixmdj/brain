@@ -1,0 +1,4729 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "corpus_files": 5562,
+  "corpus_sha256": "dbfd2a3db52ff9680881cbd087e379842859ec7d5a34ac6872192b957a8c3cf6",
+  "counts": {
+    "REPLAY_DIFFERS_BUT_HOLDS": 4,
+    "REPLAY_DOES_NOT_PARSE": 47,
+    "REPLAY_MATCHES_LIVE": 106,
+    "SILENT_CORRUPTION": 71
+  },
+  "drifts": [
+    -365,
+    -356,
+    -195,
+    -145,
+    -141,
+    -129,
+    -121,
+    -119,
+    -115,
+    -108,
+    -100,
+    -99,
+    -90,
+    -89,
+    -87,
+    -83,
+    -77,
+    -76,
+    -73,
+    -71,
+    -69,
+    -59,
+    -58,
+    -56,
+    -55,
+    -54,
+    -53,
+    -52,
+    -49,
+    -47,
+    -46,
+    -44,
+    -43,
+    -41,
+    -40,
+    -39,
+    -38,
+    -37,
+    -34,
+    -33,
+    -32,
+    -31,
+    -28,
+    -26,
+    -24,
+    -22,
+    -21,
+    -20,
+    -19,
+    -18,
+    -17,
+    -16,
+    -15,
+    -14,
+    -13,
+    -12,
+    -11,
+    -10,
+    -9,
+    -8,
+    -7,
+    -6,
+    -5,
+    -4,
+    -3,
+    -2,
+    -1,
+    0
+  ],
+  "eligible_sites_found": 509,
+  "files_with_several_eligible_sites": 119,
+  "incremental_spend_usd": 0,
+  "matches_at_zero_drift": 106,
+  "measured_at_commit": "c3a4c75ef5fa13c2c46708255fc822e8b677f4d8",
+  "model_calls": 0,
+  "network_calls": 0,
+  "pairs_measured": 228,
+  "pairs_where_replay_was_possible": 228,
+  "pairs_where_the_recorded_plan_is_stale": 122,
+  "pattern": "canonical/**/*.py",
+  "per_sample_counts": {
+    "0": {
+      "REPLAY_DIFFERS_BUT_HOLDS": 2,
+      "REPLAY_DOES_NOT_PARSE": 14,
+      "REPLAY_MATCHES_LIVE": 25,
+      "SILENT_CORRUPTION": 19
+    },
+    "1": {
+      "REPLAY_DIFFERS_BUT_HOLDS": 1,
+      "REPLAY_DOES_NOT_PARSE": 10,
+      "REPLAY_MATCHES_LIVE": 28,
+      "SILENT_CORRUPTION": 19
+    },
+    "2": {
+      "REPLAY_DOES_NOT_PARSE": 11,
+      "REPLAY_MATCHES_LIVE": 27,
+      "SILENT_CORRUPTION": 16
+    },
+    "3": {
+      "REPLAY_DIFFERS_BUT_HOLDS": 1,
+      "REPLAY_DOES_NOT_PARSE": 12,
+      "REPLAY_MATCHES_LIVE": 26,
+      "SILENT_CORRUPTION": 17
+    }
+  },
+  "records": [
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "truth"
+      ],
+      "live_line": 41,
+      "path": "canonical/runtime/agency_finite_portfolio_ceiling_v1.py",
+      "planned_line": 41,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "verify",
+        "pb"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -13,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "pb"
+      ],
+      "live_line": 41,
+      "path": "canonical/runtime/agency_finite_portfolio_ceiling_v1.py",
+      "planned_line": 54,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "verify",
+        "truth"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_candidate_specs",
+        "_fn_swaps"
+      ],
+      "live_line": 59,
+      "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "planned_line": 59,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_run_tests",
+        "allowed"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -356,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_run_tests",
+        "allowed"
+      ],
+      "live_line": 59,
+      "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "planned_line": 415,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "_candidate_specs",
+        "_fn_swaps"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "validate",
+        "repair"
+      ],
+      "live_line": 44,
+      "path": "canonical/runtime/cad_t0_post_refreeze_binding_v3_validator.py",
+      "planned_line": 44,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "validate",
+        "actual"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -52,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "validate",
+        "actual"
+      ],
+      "live_line": 44,
+      "path": "canonical/runtime/cad_t0_post_refreeze_binding_v3_validator.py",
+      "planned_line": 96,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "validate",
+        "repair"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "rule_source_id"
+      ],
+      "live_line": 62,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 62,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_scope_id",
+        "material"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "rule_source_id"
+      ],
+      "live_line": 64,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 64,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "rule_source_id"
+      ],
+      "live_line": 69,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 69,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_atom",
+        "payload"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -56,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "material"
+      ],
+      "live_line": 62,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 118,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "verify",
+        "rule_source_id"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -2,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "material"
+      ],
+      "live_line": 62,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 64,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -7,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "material"
+      ],
+      "live_line": 62,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 69,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "_atom",
+        "payload"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -54,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "live_line": 64,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 118,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "verify",
+        "rule_source_id"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "live_line": 62,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 62,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_scope_id",
+        "material"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -5,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "live_line": 64,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 69,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "_atom",
+        "payload"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -49,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_atom",
+        "payload"
+      ],
+      "live_line": 69,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 118,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "verify",
+        "rule_source_id"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_atom",
+        "payload"
+      ],
+      "live_line": 62,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 62,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_scope_id",
+        "material"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_atom",
+        "payload"
+      ],
+      "live_line": 64,
+      "path": "canonical/runtime/finance_explicit_alias_unless_verify_v1.py",
+      "planned_line": 64,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_invoke_h100",
+        "out"
+      ],
+      "live_line": 46,
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "planned_line": 46,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "classify",
+        "raw"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -83,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "classify",
+        "raw"
+      ],
+      "live_line": 46,
+      "path": "canonical/runtime/live_capability_invoker_v1.py",
+      "planned_line": 129,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "_invoke_h100",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "construct",
+        "response_trigrams"
+      ],
+      "live_line": 86,
+      "path": "canonical/runtime/livebench_ratio_overlap_visible_token_constructor_v1.py",
+      "planned_line": 86,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "construct",
+        "stable"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -39,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "construct",
+        "stable"
+      ],
+      "live_line": 86,
+      "path": "canonical/runtime/livebench_ratio_overlap_visible_token_constructor_v1.py",
+      "planned_line": 125,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "construct",
+        "response_trigrams"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_obligation_key",
+        "modality"
+      ],
+      "live_line": 34,
+      "path": "canonical/runtime/m0a_semantic_graph_consensus.py",
+      "planned_line": 34,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_binding_key",
+        "kind"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -22,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_binding_key",
+        "kind"
+      ],
+      "live_line": 34,
+      "path": "canonical/runtime/m0a_semantic_graph_consensus.py",
+      "planned_line": 56,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "_obligation_key",
+        "modality"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "orient_v_structures",
+        "sep"
+      ],
+      "live_line": 52,
+      "path": "canonical/runtime/pc_stable_cpdag.py",
+      "planned_line": 52,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "fisher_z_pvalue",
+        "statistic"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -108,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "fisher_z_pvalue",
+        "statistic"
+      ],
+      "live_line": 52,
+      "path": "canonical/runtime/pc_stable_cpdag.py",
+      "planned_line": 160,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "orient_v_structures",
+        "sep"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_adapter",
+        "mod"
+      ],
+      "live_line": 113,
+      "path": "canonical/runtime/theory_runtime_v1.py",
+      "planned_line": 113,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "jit_use_and_discard",
+        "digest"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -87,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "jit_use_and_discard",
+        "digest"
+      ],
+      "live_line": 113,
+      "path": "canonical/runtime/theory_runtime_v1.py",
+      "planned_line": 200,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "_adapter",
+        "mod"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_restore_tree",
+        "cur"
+      ],
+      "live_line": 49,
+      "path": "canonical/swe_kernel/goal_dag_executor_v1.py",
+      "planned_line": 49,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "_restore_tree",
+        "after"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -9,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_restore_tree",
+        "after"
+      ],
+      "live_line": 49,
+      "path": "canonical/swe_kernel/goal_dag_executor_v1.py",
+      "planned_line": 58,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "_restore_tree",
+        "cur"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_power_with_exponent_one_is_not_counted_as_a_second_explanation",
+        "power"
+      ],
+      "live_line": 99,
+      "path": "canonical/tests/test_hypothesis_classes_v1.py",
+      "planned_line": 99,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_a_piecewise_world_is_not_explained_by_one_family",
+        "points"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -73,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_piecewise_world_is_not_explained_by_one_family",
+        "points"
+      ],
+      "live_line": 99,
+      "path": "canonical/tests/test_hypothesis_classes_v1.py",
+      "planned_line": 172,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_a_power_with_exponent_one_is_not_counted_as_a_second_explanation",
+        "power"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 32,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "live_line": 33,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 33,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "live_line": 39,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 39,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "live_line": 40,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 40,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -39,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -1,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 33,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -7,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 39,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -8,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 40,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -38,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "live_line": 33,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 32,
+      "replay_claims_the_edit": true,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "status": "REPLAY_DIFFERS_BUT_HOLDS"
+    },
+    {
+      "drift": -6,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "live_line": 33,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 39,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -7,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "live_line": 33,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 40,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -32,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "live_line": 39,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 32,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "live_line": 33,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 33,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -1,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "live_line": 39,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 40,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -31,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "live_line": 40,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_v15_workflow_uses_comparative_fallback_after_v14_wait",
+        "data"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "live_line": 32,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 32,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "data"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "live_line": 33,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 33,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_largest_selects_unique_larger_region",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_smallest_selects_unique_smaller_region",
+        "out"
+      ],
+      "live_line": 39,
+      "path": "canonical/tests/test_osworld_v21_comparative_visual_v15.py",
+      "planned_line": 39,
+      "replay_claims_the_edit": true,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 0,
+      "second": [
+        "test_smallest_selects_unique_smaller_region",
+        "data"
+      ],
+      "status": "REPLAY_DIFFERS_BUT_HOLDS"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_desktop_fill_routes_to_click_then_type",
+        "out"
+      ],
+      "live_line": 18,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 18,
+      "replay_equals_live": true,
+      "sample": 0,
+      "second": [
+        "test_browser_search_routes_to_semantic_fill",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -12,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_desktop_fill_routes_to_click_then_type",
+        "out"
+      ],
+      "live_line": 27,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 39,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_background_chrome_does_not_hijack_active_desktop",
+        "xml"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -32,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_desktop_fill_routes_to_click_then_type",
+        "out"
+      ],
+      "live_line": 27,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 59,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_duplicate_same_length_targets_fail_closed",
+        "xml"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -39,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_desktop_fill_routes_to_click_then_type",
+        "out"
+      ],
+      "live_line": 27,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 66,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_duplicate_same_length_targets_fail_closed",
+        "out"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -47,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_desktop_fill_routes_to_click_then_type",
+        "out"
+      ],
+      "live_line": 27,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 74,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_same_state_repeat_does_not_repeat_action",
+        "out"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -9,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_browser_search_routes_to_semantic_fill",
+        "out"
+      ],
+      "live_line": 18,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 27,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_desktop_fill_routes_to_click_then_type",
+        "out"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -21,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_browser_search_routes_to_semantic_fill",
+        "out"
+      ],
+      "live_line": 18,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 39,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_background_chrome_does_not_hijack_active_desktop",
+        "xml"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -41,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_browser_search_routes_to_semantic_fill",
+        "out"
+      ],
+      "live_line": 18,
+      "path": "canonical/tests/test_osworld_v21_generic_policy_v3.py",
+      "planned_line": 59,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 0,
+      "second": [
+        "test_duplicate_same_length_targets_fail_closed",
+        "xml"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_audit_gap_b",
+        "decreases"
+      ],
+      "live_line": 71,
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "planned_line": 71,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_proof_digest_valid",
+        "material"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -121,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_proof_digest_valid",
+        "material"
+      ],
+      "live_line": 71,
+      "path": "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
+      "planned_line": 192,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "_audit_gap_b",
+        "decreases"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "load_pack",
+        "designation_class"
+      ],
+      "live_line": 115,
+      "path": "canonical/runtime/fibo_q2_2026_basel_designation_authority_v1.py",
+      "planned_line": 115,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "load_pack",
+        "expected_upstream"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -115,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "load_pack",
+        "expected_upstream"
+      ],
+      "live_line": 115,
+      "path": "canonical/runtime/fibo_q2_2026_basel_designation_authority_v1.py",
+      "planned_line": 230,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "load_pack",
+        "designation_class"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "invoke",
+        "out"
+      ],
+      "live_line": 38,
+      "path": "canonical/runtime/h100_verified_capability_registry_v2.py",
+      "planned_line": 38,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_input_name",
+        "text"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -69,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_input_name",
+        "text"
+      ],
+      "live_line": 38,
+      "path": "canonical/runtime/h100_verified_capability_registry_v2.py",
+      "planned_line": 107,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "invoke",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -1,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "effective_timeout_s",
+        "prompt_floor"
+      ],
+      "live_line": 57,
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "planned_line": 58,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "effective_timeout_s",
+        "required"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "effective_timeout_s",
+        "required"
+      ],
+      "live_line": 57,
+      "path": "canonical/runtime/harbor_science_planner_v1.py",
+      "planned_line": 57,
+      "replay_claims_the_edit": true,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "effective_timeout_s",
+        "prompt_floor"
+      ],
+      "status": "REPLAY_DIFFERS_BUT_HOLDS"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "run",
+        "prompt"
+      ],
+      "live_line": 47,
+      "path": "canonical/runtime/ifbench_ratio_overlap_prompt_only_solver_v1.py",
+      "planned_line": 47,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "overlap_percent",
+        "ref"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -195,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "overlap_percent",
+        "ref"
+      ],
+      "live_line": 47,
+      "path": "canonical/runtime/ifbench_ratio_overlap_prompt_only_solver_v1.py",
+      "planned_line": 242,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "run",
+        "prompt"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "pc_stable_skeleton_with_sepsets",
+        "degrees"
+      ],
+      "live_line": 52,
+      "path": "canonical/runtime/pc_stable_cpdag.py",
+      "planned_line": 52,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "fisher_z_pvalue",
+        "statistic"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -28,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "fisher_z_pvalue",
+        "statistic"
+      ],
+      "live_line": 52,
+      "path": "canonical/runtime/pc_stable_cpdag.py",
+      "planned_line": 80,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "pc_stable_skeleton_with_sepsets",
+        "degrees"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -18,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify_precommit_isolation_receipt",
+        "declared"
+      ],
+      "live_line": 40,
+      "path": "canonical/runtime/precommit_isolation_guard_v1.py",
+      "planned_line": 58,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "verify_precommit_isolation_receipt",
+        "committed"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify_precommit_isolation_receipt",
+        "committed"
+      ],
+      "live_line": 40,
+      "path": "canonical/runtime/precommit_isolation_guard_v1.py",
+      "planned_line": 40,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "verify_precommit_isolation_receipt",
+        "declared"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "certify",
+        "nonclaims"
+      ],
+      "live_line": 69,
+      "path": "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+      "planned_line": 69,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "certify",
+        "expected"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -17,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "certify",
+        "expected"
+      ],
+      "live_line": 69,
+      "path": "canonical/runtime/professional_r8_population_semantic_certificate_v1.py",
+      "planned_line": 86,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "certify",
+        "nonclaims"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "preflight",
+        "output"
+      ],
+      "live_line": 74,
+      "path": "canonical/runtime/r2_regcap_contextual_fact_direct_adequacy_v1.py",
+      "planned_line": 74,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_policy_id",
+        "payload"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -77,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_policy_id",
+        "payload"
+      ],
+      "live_line": 74,
+      "path": "canonical/runtime/r2_regcap_contextual_fact_direct_adequacy_v1.py",
+      "planned_line": 151,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "preflight",
+        "output"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -5,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "maven",
+        "url"
+      ],
+      "live_line": 72,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "nuget",
+        "url"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -10,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "maven",
+        "url"
+      ],
+      "live_line": 72,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 82,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "rubygems",
+        "url"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -15,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "maven",
+        "url"
+      ],
+      "live_line": 72,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 87,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "packagist",
+        "url"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "nuget",
+        "url"
+      ],
+      "live_line": 72,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 72,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "maven",
+        "url"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -5,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "nuget",
+        "url"
+      ],
+      "live_line": 77,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 82,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "rubygems",
+        "url"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -10,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "nuget",
+        "url"
+      ],
+      "live_line": 77,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 87,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "packagist",
+        "url"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "rubygems",
+        "url"
+      ],
+      "live_line": 72,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 72,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "maven",
+        "url"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "rubygems",
+        "url"
+      ],
+      "live_line": 77,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 77,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "nuget",
+        "url"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -5,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "rubygems",
+        "url"
+      ],
+      "live_line": 82,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 87,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "packagist",
+        "url"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "packagist",
+        "url"
+      ],
+      "live_line": 72,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 72,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "maven",
+        "url"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "packagist",
+        "url"
+      ],
+      "live_line": 77,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 77,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "nuget",
+        "url"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "packagist",
+        "url"
+      ],
+      "live_line": 82,
+      "path": "canonical/runtime/retrieval_live_provider_arena_v11.py",
+      "planned_line": 82,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "rubygems",
+        "url"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_connect_db",
+        "_held"
+      ],
+      "live_line": 125,
+      "path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+      "planned_line": 125,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_connect_db",
+        "columns"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -19,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_connect_db",
+        "columns"
+      ],
+      "live_line": 125,
+      "path": "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+      "planned_line": 144,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "_connect_db",
+        "_held"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_determined_problems_still_crystallize",
+        "graph"
+      ],
+      "live_line": 43,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 43,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_accuracy",
+        "ok"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_determined_problems_still_crystallize",
+        "graph"
+      ],
+      "live_line": 80,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 80,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_questions_spent_are_reported_and_bounded",
+        "graph"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -108,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_accuracy",
+        "ok"
+      ],
+      "live_line": 43,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 151,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_determined_problems_still_crystallize",
+        "graph"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -37,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_accuracy",
+        "ok"
+      ],
+      "live_line": 43,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 80,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_questions_spent_are_reported_and_bounded",
+        "graph"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -71,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_questions_spent_are_reported_and_bounded",
+        "graph"
+      ],
+      "live_line": 80,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 151,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_determined_problems_still_crystallize",
+        "graph"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_questions_spent_are_reported_and_bounded",
+        "graph"
+      ],
+      "live_line": 43,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 43,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_accuracy",
+        "ok"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_same_blank_twice_needs_the_same_code_twice",
+        "edited"
+      ],
+      "live_line": 102,
+      "path": "canonical/tests/test_an_edit_is_worked_out_from_an_example_and_repeated_on_another_file_v1.py",
+      "planned_line": 102,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_code_the_example_left_alone_makes_the_rule_take_in_more_of_its_surroundings",
+        "edited"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -59,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_code_the_example_left_alone_makes_the_rule_take_in_more_of_its_surroundings",
+        "edited"
+      ],
+      "live_line": 102,
+      "path": "canonical/tests/test_an_edit_is_worked_out_from_an_example_and_repeated_on_another_file_v1.py",
+      "planned_line": 161,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_the_same_blank_twice_needs_the_same_code_twice",
+        "edited"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_text_that_quotes_no_code_gives_no_candidate",
+        "made"
+      ],
+      "live_line": 114,
+      "path": "canonical/tests/test_candidate_under_the_tasks_tests_measure_v1.py",
+      "planned_line": 114,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "_git",
+        "done"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -365,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_git",
+        "done"
+      ],
+      "live_line": 114,
+      "path": "canonical/tests/test_candidate_under_the_tasks_tests_measure_v1.py",
+      "planned_line": 479,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_a_text_that_quotes_no_code_gives_no_candidate",
+        "made"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_an_enforcing_filter_is_still_not_a_reviewed_one",
+        "must"
+      ],
+      "live_line": 54,
+      "path": "canonical/tests/test_carrier_qualification_probe_v1.py",
+      "planned_line": 54,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_the_objection_that_is_still_true_is_reported_unsatisfied",
+        "by"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_an_enforcing_filter_is_still_not_a_reviewed_one",
+        "must"
+      ],
+      "live_line": 64,
+      "path": "canonical/tests/test_carrier_qualification_probe_v1.py",
+      "planned_line": 64,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_the_filter_is_observed_in_the_worker_and_not_read_from_the_source",
+        "by"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -24,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_objection_that_is_still_true_is_reported_unsatisfied",
+        "by"
+      ],
+      "live_line": 54,
+      "path": "canonical/tests/test_carrier_qualification_probe_v1.py",
+      "planned_line": 78,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_an_enforcing_filter_is_still_not_a_reviewed_one",
+        "must"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -10,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_objection_that_is_still_true_is_reported_unsatisfied",
+        "by"
+      ],
+      "live_line": 54,
+      "path": "canonical/tests/test_carrier_qualification_probe_v1.py",
+      "planned_line": 64,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "test_the_filter_is_observed_in_the_worker_and_not_read_from_the_source",
+        "by"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -14,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_filter_is_observed_in_the_worker_and_not_read_from_the_source",
+        "by"
+      ],
+      "live_line": 64,
+      "path": "canonical/tests/test_carrier_qualification_probe_v1.py",
+      "planned_line": 78,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_an_enforcing_filter_is_still_not_a_reviewed_one",
+        "must"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_filter_is_observed_in_the_worker_and_not_read_from_the_source",
+        "by"
+      ],
+      "live_line": 54,
+      "path": "canonical/tests/test_carrier_qualification_probe_v1.py",
+      "planned_line": 54,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_the_objection_that_is_still_true_is_reported_unsatisfied",
+        "by"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_unknown_transform_runtime_pass_does_not_self_certify_region_membership",
+        "out"
+      ],
+      "live_line": 41,
+      "path": "canonical/tests/test_cursorbench_typed_acceptance_plan_policy_adequacy_v1.py",
+      "planned_line": 41,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_exact_sources_and_target_relevance_are_bound",
+        "row"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -100,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_sources_and_target_relevance_are_bound",
+        "row"
+      ],
+      "live_line": 41,
+      "path": "canonical/tests/test_cursorbench_typed_acceptance_plan_policy_adequacy_v1.py",
+      "planned_line": 141,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_unknown_transform_runtime_pass_does_not_self_certify_region_membership",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_ties_are_broken_by_specificity_then_path_and_not_by_luck",
+        "picked"
+      ],
+      "live_line": 62,
+      "path": "canonical/tests/test_demonstration_choice_measure_v1.py",
+      "planned_line": 62,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_a_lesson_about_one_name_reaches_nothing_else",
+        "reach"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -43,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_lesson_about_one_name_reaches_nothing_else",
+        "reach"
+      ],
+      "live_line": 62,
+      "path": "canonical/tests/test_demonstration_choice_measure_v1.py",
+      "planned_line": 105,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 1,
+      "second": [
+        "test_ties_are_broken_by_specificity_then_path_and_not_by_luck",
+        "picked"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_after_native_helper_v1_submits_evidence_not_fake_semantics",
+        "history"
+      ],
+      "live_line": 37,
+      "path": "canonical/tests/test_finance_agent_v2_brain_native_llm_v1.py",
+      "planned_line": 37,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_extracts_official_question_envelope",
+        "q"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -129,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_extracts_official_question_envelope",
+        "q"
+      ],
+      "live_line": 37,
+      "path": "canonical/tests/test_finance_agent_v2_brain_native_llm_v1.py",
+      "planned_line": 166,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "test_after_native_helper_v1_submits_evidence_not_fake_semantics",
+        "history"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_cross_task_replay_is_rejected",
+        "r1"
+      ],
+      "live_line": 19,
+      "path": "canonical/tests/test_general_cognition_proposal_packet_v1.py",
+      "planned_line": 19,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_round_trip_binds_untrusted_proposal_to_exact_request",
+        "p"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -7,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_round_trip_binds_untrusted_proposal_to_exact_request",
+        "p"
+      ],
+      "live_line": 19,
+      "path": "canonical/tests/test_general_cognition_proposal_packet_v1.py",
+      "planned_line": 26,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "test_cross_task_replay_is_rejected",
+        "r1"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_nth_paragraph_source_template",
+        "text"
+      ],
+      "live_line": 17,
+      "path": "canonical/tests/test_livebench_legacy_visible_constraint_compiler_v1.py",
+      "planned_line": 17,
+      "replay_equals_live": true,
+      "sample": 1,
+      "second": [
+        "test_dynamic_recovery",
+        "cases"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -41,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_dynamic_recovery",
+        "cases"
+      ],
+      "live_line": 17,
+      "path": "canonical/tests/test_livebench_legacy_visible_constraint_compiler_v1.py",
+      "planned_line": 58,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 1,
+      "second": [
+        "test_exact_nth_paragraph_source_template",
+        "text"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_add_tool_branch",
+        "avg_dur"
+      ],
+      "live_line": 79,
+      "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/utils/logging.py",
+      "planned_line": 79,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_format_token_usage",
+        "total"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -119,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_format_token_usage",
+        "total"
+      ],
+      "live_line": 79,
+      "path": "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/utils/logging.py",
+      "planned_line": 198,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "_add_tool_branch",
+        "avg_dur"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify_internal_top_support_bridge",
+        "dims"
+      ],
+      "live_line": 32,
+      "path": "canonical/runtime/aa_briefcase_internal_top_support_bridge_v1.py",
+      "planned_line": 32,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_require_bool",
+        "value"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -40,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_require_bool",
+        "value"
+      ],
+      "live_line": 32,
+      "path": "canonical/runtime/aa_briefcase_internal_top_support_bridge_v1.py",
+      "planned_line": 72,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "verify_internal_top_support_bridge",
+        "dims"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -55,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_verified_snapshot",
+        "project_hash"
+      ],
+      "live_line": 36,
+      "path": "canonical/runtime/chartography_zero_spend_guard_v1.py",
+      "planned_line": 91,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "authorize_next_call",
+        "capacity"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "authorize_next_call",
+        "capacity"
+      ],
+      "live_line": 36,
+      "path": "canonical/runtime/chartography_zero_spend_guard_v1.py",
+      "planned_line": 36,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_verified_snapshot",
+        "project_hash"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_mutation_can_supply_later",
+        "shared"
+      ],
+      "live_line": 77,
+      "path": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
+      "planned_line": 77,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_resource_overlap",
+        "right"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -87,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_resource_overlap",
+        "right"
+      ],
+      "live_line": 77,
+      "path": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
+      "planned_line": 164,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "_mutation_can_supply_later",
+        "shared"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "c"
+      ],
+      "live_line": 24,
+      "path": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py",
+      "planned_line": 24,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "verify",
+        "r"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -3,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify",
+        "r"
+      ],
+      "live_line": 24,
+      "path": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py",
+      "planned_line": 27,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "verify",
+        "c"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "evaluate_documents",
+        "required_components"
+      ],
+      "live_line": 83,
+      "path": "canonical/runtime/professional_r12_c8_nonvacuity_v1.py",
+      "planned_line": 83,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "evaluate_documents",
+        "expected_links"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -16,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "evaluate_documents",
+        "expected_links"
+      ],
+      "live_line": 83,
+      "path": "canonical/runtime/professional_r12_c8_nonvacuity_v1.py",
+      "planned_line": 99,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "evaluate_documents",
+        "required_components"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "run",
+        "runner"
+      ],
+      "live_line": 64,
+      "path": "canonical/runtime/r2_finance_external_json_policy_direct_adequacy_v1.py",
+      "planned_line": 64,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_contract",
+        "ids"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -76,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_contract",
+        "ids"
+      ],
+      "live_line": 64,
+      "path": "canonical/runtime/r2_finance_external_json_policy_direct_adequacy_v1.py",
+      "planned_line": 140,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "run",
+        "runner"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify_candidate",
+        "common"
+      ],
+      "live_line": 39,
+      "path": "canonical/runtime/recursive_abstraction_v5.py",
+      "planned_line": 39,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_verify_skill",
+        "basis"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -44,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_verify_skill",
+        "basis"
+      ],
+      "live_line": 39,
+      "path": "canonical/runtime/recursive_abstraction_v5.py",
+      "planned_line": 83,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "verify_candidate",
+        "common"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "prove_v7_invariants",
+        "v6inv"
+      ],
+      "live_line": 113,
+      "path": "canonical/runtime/universal_learning_proof_program_router_v7.py",
+      "planned_line": 113,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "prove_v7_invariants",
+        "fsha"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -37,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "prove_v7_invariants",
+        "fsha"
+      ],
+      "live_line": 113,
+      "path": "canonical/runtime/universal_learning_proof_program_router_v7.py",
+      "planned_line": 150,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "prove_v7_invariants",
+        "v6inv"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "summarize",
+        "lexical"
+      ],
+      "live_line": 49,
+      "path": "canonical/runtime/zero_learned_extractive_summary_v1.py",
+      "planned_line": 49,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_sentence_spans",
+        "ch"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -99,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_sentence_spans",
+        "ch"
+      ],
+      "live_line": 49,
+      "path": "canonical/runtime/zero_learned_extractive_summary_v1.py",
+      "planned_line": 148,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "summarize",
+        "lexical"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_nothing_is_fabricated_for_structure_it_cannot_acquire",
+        "graph"
+      ],
+      "live_line": 43,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 43,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "_accuracy",
+        "ok"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_nothing_is_fabricated_for_structure_it_cannot_acquire",
+        "graph"
+      ],
+      "live_line": 80,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 80,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_questions_spent_are_reported_and_bounded",
+        "graph"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -145,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_accuracy",
+        "ok"
+      ],
+      "live_line": 43,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 188,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_nothing_is_fabricated_for_structure_it_cannot_acquire",
+        "graph"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -108,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_questions_spent_are_reported_and_bounded",
+        "graph"
+      ],
+      "live_line": 80,
+      "path": "canonical/tests/test_a_refusal_must_learn_v1.py",
+      "planned_line": 188,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_nothing_is_fabricated_for_structure_it_cannot_acquire",
+        "graph"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -4,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_adapter_rejects_kernel_with_promotion_authority",
+        "out"
+      ],
+      "live_line": 49,
+      "path": "canonical/tests/test_benchmark_proof_evidence_adapter_v1.py",
+      "planned_line": 53,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_receipt_must_be_content_addressed",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_receipt_must_be_content_addressed",
+        "out"
+      ],
+      "live_line": 49,
+      "path": "canonical/tests/test_benchmark_proof_evidence_adapter_v1.py",
+      "planned_line": 49,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_adapter_rejects_kernel_with_promotion_authority",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_no_dispatch_path_grants_terminal_or_global_totality_credit",
+        "out"
+      ],
+      "live_line": 61,
+      "path": "canonical/tests/test_certified_reached_escape_repair_dispatch_v1.py",
+      "planned_line": 61,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_uncovered_region_compiles_policy_only_alternative",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -90,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_uncovered_region_compiles_policy_only_alternative",
+        "out"
+      ],
+      "live_line": 61,
+      "path": "canonical/tests/test_certified_reached_escape_repair_dispatch_v1.py",
+      "planned_line": 151,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_no_dispatch_path_grants_terminal_or_global_totality_credit",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_docx_text_and_structure_measurements",
+        "p"
+      ],
+      "live_line": 21,
+      "path": "canonical/tests/test_content_addressed_artifact_measurement_v1.py",
+      "planned_line": 21,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_file_identity_measurements_are_content_addressed",
+        "p"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -31,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_file_identity_measurements_are_content_addressed",
+        "p"
+      ],
+      "live_line": 21,
+      "path": "canonical/tests/test_content_addressed_artifact_measurement_v1.py",
+      "planned_line": 52,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "test_docx_text_and_structure_measurements",
+        "p"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_registry_accepts_frozen_claim_but_keeps_all_roots_open",
+        "mission"
+      ],
+      "live_line": 22,
+      "path": "canonical/tests/test_coverage_active_claim_r3_promotion_safety_v1.py",
+      "planned_line": 22,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_active_r3_promotion_safety_claim_is_exact_and_zero_credit",
+        "claim"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -10,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_active_r3_promotion_safety_claim_is_exact_and_zero_credit",
+        "claim"
+      ],
+      "live_line": 22,
+      "path": "canonical/tests/test_coverage_active_claim_r3_promotion_safety_v1.py",
+      "planned_line": 32,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "test_registry_accepts_frozen_claim_but_keeps_all_roots_open",
+        "mission"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_conservative_statistic_controls_admission",
+        "r"
+      ],
+      "live_line": 42,
+      "path": "canonical/tests/test_fixed_bar_aggregate_admission_v1.py",
+      "planned_line": 42,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_exact_frozen_bar_passes",
+        "r"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -28,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_conservative_statistic_controls_admission",
+        "r"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_fixed_bar_aggregate_admission_v1.py",
+      "planned_line": 81,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_shared_aa_briefcase_measurement_can_prove_two_atoms",
+        "r"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -11,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_frozen_bar_passes",
+        "r"
+      ],
+      "live_line": 42,
+      "path": "canonical/tests/test_fixed_bar_aggregate_admission_v1.py",
+      "planned_line": 53,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "test_conservative_statistic_controls_admission",
+        "r"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -39,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_frozen_bar_passes",
+        "r"
+      ],
+      "live_line": 42,
+      "path": "canonical/tests/test_fixed_bar_aggregate_admission_v1.py",
+      "planned_line": 81,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_shared_aa_briefcase_measurement_can_prove_two_atoms",
+        "r"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_shared_aa_briefcase_measurement_can_prove_two_atoms",
+        "r"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_fixed_bar_aggregate_admission_v1.py",
+      "planned_line": 53,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_conservative_statistic_controls_admission",
+        "r"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_shared_aa_briefcase_measurement_can_prove_two_atoms",
+        "r"
+      ],
+      "live_line": 42,
+      "path": "canonical/tests/test_fixed_bar_aggregate_admission_v1.py",
+      "planned_line": 42,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_exact_frozen_bar_passes",
+        "r"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_resource_and_ownership_remain_load_bearing",
+        "d"
+      ],
+      "live_line": 20,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 20,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_exact_source_bindings_are_frozen",
+        "got"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_resource_and_ownership_remain_load_bearing",
+        "d"
+      ],
+      "live_line": 28,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 28,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_candidate_reduces_two_unbound_semantic_labels_to_one",
+        "d"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_resource_and_ownership_remain_load_bearing",
+        "d"
+      ],
+      "live_line": 38,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 38,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_new_residual_is_trace_policy_not_modality_label",
+        "d"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -26,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_source_bindings_are_frozen",
+        "got"
+      ],
+      "live_line": 20,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 46,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_resource_and_ownership_remain_load_bearing",
+        "d"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -8,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_source_bindings_are_frozen",
+        "got"
+      ],
+      "live_line": 20,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 28,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_candidate_reduces_two_unbound_semantic_labels_to_one",
+        "d"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -18,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_exact_source_bindings_are_frozen",
+        "got"
+      ],
+      "live_line": 20,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 38,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_new_residual_is_trace_policy_not_modality_label",
+        "d"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -18,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_candidate_reduces_two_unbound_semantic_labels_to_one",
+        "d"
+      ],
+      "live_line": 28,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 46,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_resource_and_ownership_remain_load_bearing",
+        "d"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_candidate_reduces_two_unbound_semantic_labels_to_one",
+        "d"
+      ],
+      "live_line": 20,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 20,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_exact_source_bindings_are_frozen",
+        "got"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -10,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_candidate_reduces_two_unbound_semantic_labels_to_one",
+        "d"
+      ],
+      "live_line": 28,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 38,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_new_residual_is_trace_policy_not_modality_label",
+        "d"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -8,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_new_residual_is_trace_policy_not_modality_label",
+        "d"
+      ],
+      "live_line": 38,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 46,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_resource_and_ownership_remain_load_bearing",
+        "d"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_new_residual_is_trace_policy_not_modality_label",
+        "d"
+      ],
+      "live_line": 20,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 20,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_exact_source_bindings_are_frozen",
+        "got"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_new_residual_is_trace_policy_not_modality_label",
+        "d"
+      ],
+      "live_line": 28,
+      "path": "canonical/tests/test_g6_g7_single_semantic_residual_reduction_v1.py",
+      "planned_line": 28,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_candidate_reduces_two_unbound_semantic_labels_to_one",
+        "d"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_fresh_bug_has_exactly_one_failing_per_function_script",
+        "proc"
+      ],
+      "live_line": 68,
+      "path": "canonical/tests/test_live_solver_families_v3.py",
+      "planned_line": 68,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_minimal_pdf_has_a_valid_xref_and_carries_the_text",
+        "off"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -20,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_minimal_pdf_has_a_valid_xref_and_carries_the_text",
+        "off"
+      ],
+      "live_line": 68,
+      "path": "canonical/tests/test_live_solver_families_v3.py",
+      "planned_line": 88,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 2,
+      "second": [
+        "test_fresh_bug_has_exactly_one_failing_per_function_script",
+        "proc"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_objective_trace_proves_three_target_semantics",
+        "out"
+      ],
+      "live_line": 14,
+      "path": "canonical/tests/test_matched_agency_stateful_case_v1.py",
+      "planned_line": 14,
+      "replay_equals_live": true,
+      "sample": 2,
+      "second": [
+        "test_stateful_agency_case_passes",
+        "token"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -10,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_stateful_agency_case_passes",
+        "token"
+      ],
+      "live_line": 14,
+      "path": "canonical/tests/test_matched_agency_stateful_case_v1.py",
+      "planned_line": 24,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 2,
+      "second": [
+        "test_objective_trace_proves_three_target_semantics",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "bootstrap_diff_interval",
+        "high"
+      ],
+      "live_line": 33,
+      "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/stats.py",
+      "planned_line": 33,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "wilson_interval",
+        "high"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -33,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "wilson_interval",
+        "high"
+      ],
+      "live_line": 33,
+      "path": "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/stats.py",
+      "planned_line": 66,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "bootstrap_diff_interval",
+        "high"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_declared_fields",
+        "targets"
+      ],
+      "live_line": 59,
+      "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "planned_line": 59,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_run_tests",
+        "allowed"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -141,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_run_tests",
+        "allowed"
+      ],
+      "live_line": 59,
+      "path": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+      "planned_line": 200,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_declared_fields",
+        "targets"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -1,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_current_open_obligation_count",
+        "doc"
+      ],
+      "live_line": 109,
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "planned_line": 110,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_current_open_obligation_count",
+        "live"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_current_open_obligation_count",
+        "live"
+      ],
+      "live_line": 109,
+      "path": "canonical/runtime/capability_first_scheduler_v1.py",
+      "planned_line": 109,
+      "replay_claims_the_edit": true,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "_current_open_obligation_count",
+        "doc"
+      ],
+      "status": "REPLAY_DIFFERS_BUT_HOLDS"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "construct",
+        "candidate_state_core"
+      ],
+      "live_line": 97,
+      "path": "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+      "planned_line": 97,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_verify_receipt",
+        "expected_digest"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -108,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_verify_receipt",
+        "expected_digest"
+      ],
+      "live_line": 97,
+      "path": "canonical/runtime/certified_reached_escape_state_constructor_v2.py",
+      "planned_line": 205,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "construct",
+        "candidate_state_core"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "evaluate",
+        "out"
+      ],
+      "live_line": 75,
+      "path": "canonical/runtime/data_anonymization_stage_b_gate.py",
+      "planned_line": 75,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "evaluate",
+        "observed"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -47,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "evaluate",
+        "observed"
+      ],
+      "live_line": 75,
+      "path": "canonical/runtime/data_anonymization_stage_b_gate.py",
+      "planned_line": 122,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "evaluate",
+        "out"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_atom",
+        "payload"
+      ],
+      "live_line": 60,
+      "path": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "planned_line": 60,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_scope_id",
+        "material"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_atom",
+        "payload"
+      ],
+      "live_line": 65,
+      "path": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "planned_line": 65,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -17,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "material"
+      ],
+      "live_line": 60,
+      "path": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_atom",
+        "payload"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -5,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "material"
+      ],
+      "live_line": 60,
+      "path": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "planned_line": 65,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -12,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "live_line": 65,
+      "path": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_atom",
+        "payload"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_scope_id",
+        "scope_raw"
+      ],
+      "live_line": 60,
+      "path": "canonical/runtime/finance_explicit_definition_unless_verify_v1.py",
+      "planned_line": 60,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_scope_id",
+        "material"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_authority_ok",
+        "required"
+      ],
+      "live_line": 107,
+      "path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
+      "planned_line": 107,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_authority_ok",
+        "bound"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -4,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_authority_ok",
+        "bound"
+      ],
+      "live_line": 107,
+      "path": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py",
+      "planned_line": 111,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_authority_ok",
+        "required"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": -3,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "evaluate",
+        "contract"
+      ],
+      "live_line": 116,
+      "path": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+      "planned_line": 119,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "evaluate",
+        "root"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "evaluate",
+        "root"
+      ],
+      "live_line": 116,
+      "path": "canonical/runtime/p3_real_context_v3_admission_v8.py",
+      "planned_line": 116,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "evaluate",
+        "contract"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -19,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "certify",
+        "objective"
+      ],
+      "live_line": 70,
+      "path": "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+      "planned_line": 89,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "certify",
+        "nonclaims"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "certify",
+        "nonclaims"
+      ],
+      "live_line": 70,
+      "path": "canonical/runtime/professional_r11_firewall_semantic_certificate_v1.py",
+      "planned_line": 70,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "certify",
+        "objective"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -55,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_adapter_request",
+        "state"
+      ],
+      "live_line": 37,
+      "path": "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py",
+      "planned_line": 92,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "acquire",
+        "state"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "acquire",
+        "state"
+      ],
+      "live_line": 37,
+      "path": "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py",
+      "planned_line": 37,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_adapter_request",
+        "state"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "verify_property_request",
+        "evidence"
+      ],
+      "live_line": 172,
+      "path": "canonical/runtime/regcap_necessary_property_authority_v1.py",
+      "planned_line": 172,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "load_pack",
+        "required_source_ids"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -89,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "load_pack",
+        "required_source_ids"
+      ],
+      "live_line": 172,
+      "path": "canonical/runtime/regcap_necessary_property_authority_v1.py",
+      "planned_line": 261,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "verify_property_request",
+        "evidence"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_check_line_count",
+        "cases"
+      ],
+      "live_line": 141,
+      "path": "canonical/runtime/verify_file_facts_provenance_v1.py",
+      "planned_line": 141,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "_command_agreement",
+        "out"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -14,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "_command_agreement",
+        "out"
+      ],
+      "live_line": 141,
+      "path": "canonical/runtime/verify_file_facts_provenance_v1.py",
+      "planned_line": 155,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": false,
+      "sample": 3,
+      "second": [
+        "_check_line_count",
+        "cases"
+      ],
+      "status": "REPLAY_DOES_NOT_PARSE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 53,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 58,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "live_line": 65,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 65,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "live_line": 71,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 71,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "live_line": 77,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 77,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -58,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 111,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -5,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 58,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -12,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 65,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -18,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -24,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -53,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 111,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 53,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -7,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 65,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -13,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -19,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -46,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "live_line": 65,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 111,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 53,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 58,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -6,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "live_line": 65,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 71,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -12,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "live_line": 65,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -40,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "live_line": 71,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 111,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 53,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 58,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "live_line": 65,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 65,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_name_the_file_still_writes_keeps_the_import",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": -6,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_a_comment_on_the_import_line_keeps_it",
+        "target"
+      ],
+      "live_line": 71,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 77,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": -34,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "live_line": 77,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 111,
+      "replay_claims_the_edit": false,
+      "replay_equals_live": false,
+      "replay_parses": true,
+      "sample": 3,
+      "second": [
+        "test_the_lesson_says_what_the_change_takes_away",
+        "held"
+      ],
+      "status": "SILENT_CORRUPTION"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "live_line": 53,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 53,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_the_dead_import_is_taken_away_with_the_change",
+        "edited"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    },
+    {
+      "drift": 0,
+      "eligible_after": true,
+      "eligible_before": true,
+      "first": [
+        "test_an_import_line_shared_with_another_statement_is_never_cut",
+        "target"
+      ],
+      "live_line": 58,
+      "path": "canonical/tests/test_a_dead_import_the_example_also_removed_is_taken_away_v1.py",
+      "planned_line": 58,
+      "replay_equals_live": true,
+      "sample": 3,
+      "second": [
+        "test_a_use_the_change_does_not_reach_keeps_the_import",
+        "target"
+      ],
+      "status": "REPLAY_MATCHES_LIVE"
+    }
+  ],
+  "samples": [
+    {
+      "candidates": 1400,
+      "eligible_sites": 91,
+      "files_with_two_eligible_sites": 18,
+      "index": 0,
+      "pairs": 60
+    },
+    {
+      "candidates": 1820,
+      "eligible_sites": 141,
+      "files_with_two_eligible_sites": 31,
+      "index": 1,
+      "pairs": 60
+    },
+    {
+      "candidates": 2240,
+      "eligible_sites": 115,
+      "files_with_two_eligible_sites": 29,
+      "index": 2,
+      "pairs": 60
+    },
+    {
+      "candidates": 2660,
+      "eligible_sites": 162,
+      "files_with_two_eligible_sites": 41,
+      "index": 3,
+      "pairs": 60
+    }
+  ],
+  "schema": "action_replay_under_change_v1",
+  "silent_corruptions": 71,
+  "stale_at_zero_drift": 4,
+  "what_this_shows": "The operation stayed legal on the changed state in 228 of 228 pairs, so legality survived the change. The recorded plan did not: 122 of 228 replays are stale, 71 of them produce a file that still parses while the binding the edit claimed to remove is still there, and 106 of the 106 correct replays had zero drift"
+}

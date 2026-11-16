@@ -1,0 +1,5105 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "board": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "cells": {
+   "demonstrable_but_reading_lost": {
+    "count": 21,
+    "pages": [
+     "button-delay",
+     "buy-ticket",
+     "click-dialog",
+     "count-shape",
+     "count-sides",
+     "drag-items",
+     "drag-items-grid",
+     "email-inbox-nl-turk",
+     "focus-text-2",
+     "form-sequence-3",
+     "generate-number",
+     "grid-coordinate",
+     "highlight-text",
+     "highlight-text-2",
+     "identify-shape",
+     "login-user-popup",
+     "odd-or-even",
+     "phone-book",
+     "scroll-text-2",
+     "social-media",
+     "tic-tac-toe"
+    ]
+   },
+   "out_of_reach_of_both": {
+    "count": 43,
+    "pages": [
+     "bisect-angle",
+     "book-flight",
+     "book-flight-nodelay",
+     "chase-circle",
+     "circle-center",
+     "click-checkboxes-soft",
+     "click-shades",
+     "copy-paste",
+     "copy-paste-2",
+     "daily-calendar",
+     "drag-shapes-2",
+     "drag-sort-numbers",
+     "draw-circle",
+     "draw-line",
+     "email-inbox-forward-nl-turk",
+     "find-midpoint",
+     "find-word",
+     "form-sequence",
+     "form-sequence-2",
+     "guess-number",
+     "hot-cold",
+     "hover-shape",
+     "moving-items",
+     "multi-layouts",
+     "multi-orderings",
+     "number-checkboxes",
+     "order-food",
+     "read-table-2",
+     "resize-textarea",
+     "right-angle",
+     "scroll-text",
+     "sign-agreement",
+     "simon-says",
+     "social-media-all",
+     "social-media-some",
+     "stock-market",
+     "terminal",
+     "text-editor",
+     "use-colorwheel",
+     "use-colorwheel-2",
+     "use-slider",
+     "use-slider-2",
+     "visual-addition"
+    ]
+   },
+   "reading_wins_and_demonstrable": {
+    "count": 57,
+    "pages": [
+     "ascending-numbers",
+     "choose-date-easy",
+     "choose-date-medium",
+     "choose-list",
+     "click-button",
+     "click-button-sequence",
+     "click-checkboxes",
+     "click-checkboxes-large",
+     "click-checkboxes-transfer",
+     "click-collapsible",
+     "click-collapsible-2",
+     "click-collapsible-2-nodelay",
+     "click-collapsible-nodelay",
+     "click-color",
+     "click-dialog-2",
+     "click-link",
+     "click-menu",
+     "click-menu-2",
+     "click-option",
+     "click-pie",
+     "click-pie-nodelay",
+     "click-scroll-list",
+     "click-shape",
+     "click-tab",
+     "click-tab-2",
+     "click-tab-2-easy",
+     "click-tab-2-hard",
+     "click-tab-2-medium",
+     "click-test",
+     "click-test-2",
+     "click-test-transfer",
+     "click-widget",
+     "drag-box",
+     "drag-circle",
+     "drag-shapes",
+     "drag-single-shape",
+     "email-inbox",
+     "email-inbox-delete",
+     "email-inbox-forward",
+     "email-inbox-forward-nl",
+     "email-inbox-important",
+     "email-inbox-noscroll",
+     "email-inbox-reply",
+     "email-inbox-star-reply",
+     "enter-date",
+     "enter-password",
+     "enter-text",
+     "enter-text-2",
+     "enter-text-dynamic",
+     "find-greatest",
+     "focus-text",
+     "login-user",
+     "read-table",
+     "unicode-test",
+     "use-autocomplete",
+     "use-autocomplete-nodelay",
+     "use-spinner"
+    ]
+   },
+   "reading_wins_where_nothing_was_demonstrable": {
+    "count": 9,
+    "pages": [
+     "choose-date",
+     "choose-date-nodelay",
+     "drag-cube",
+     "enter-time",
+     "navigate-tree",
+     "search-engine",
+     "simple-algebra",
+     "simple-arithmetic",
+     "text-transform"
+    ]
+   }
+  },
+  "composition_rule": {
+   "outcome_counts": {
+    "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR": 41,
+    "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN": 89
+   },
+   "rows": [
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "ascending-numbers",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "bisect-angle",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "book-flight-nodelay",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "book-flight",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "button-delay",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "buy-ticket",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__CONTINUOUS_NO_END_STATE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "chase-circle",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "choose-date-easy",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "choose-date-medium",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "choose-date-nodelay",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "choose-date",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "choose-list",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "circle-center",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-button-sequence",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-button",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-checkboxes-large",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "click-checkboxes-soft",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-checkboxes-transfer",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-checkboxes",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-collapsible-2-nodelay",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-collapsible-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-collapsible-nodelay",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-collapsible",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-color",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-dialog-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "click-dialog",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-link",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-menu-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-menu",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-option",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-pie-nodelay",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-pie",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-scroll-list",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "click-shades",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-shape",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-tab-2-easy",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-tab-2-hard",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-tab-2-medium",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-tab-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-tab",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-test-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-test-transfer",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-test",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "click-widget",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "copy-paste-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "copy-paste",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "count-shape",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "count-sides",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "daily-calendar",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-box",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-circle",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-cube",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "drag-items-grid",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "drag-items",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-shapes-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-shapes",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-single-shape",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "drag-sort-numbers",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "draw-circle",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "draw-line",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-delete",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-forward-nl-turk",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-forward-nl",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-forward",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-important",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-nl-turk",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-noscroll",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-reply",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox-star-reply",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "email-inbox",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "enter-date",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 3,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "enter-password",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "enter-text-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "enter-text-dynamic",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "enter-text",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "enter-time",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "find-greatest",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "find-midpoint",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "find-word",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "focus-text-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "focus-text",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "form-sequence-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 3,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "form-sequence-3",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 3,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "form-sequence",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "generate-number",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "grid-coordinate",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "guess-number",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "highlight-text-2",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "highlight-text",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "hot-cold",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__CONTINUOUS_NO_END_STATE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "hover-shape",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "identify-shape",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "login-user-popup",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 3,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "login-user",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__CONTINUOUS_NO_END_STATE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "moving-items",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "multi-layouts",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "multi-orderings",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "navigate-tree",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "number-checkboxes",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "odd-or-even",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "order-food",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "phone-book",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "read-table-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "read-table",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "resize-textarea",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "right-angle",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "scroll-text-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "scroll-text",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 3,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "search-engine",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "sign-agreement",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "simon-says",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "simple-algebra",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "simple-arithmetic",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "social-media-all",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "social-media-some",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "social-media",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "stock-market",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "terminal",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "text-editor",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "text-transform",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 0,
+     "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "tic-tac-toe",
+     "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "unicode-test",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "use-autocomplete-nodelay",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "use-autocomplete",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "use-colorwheel-2",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "use-colorwheel",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "use-slider-2",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "use-slider",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 2,
+     "gap": "",
+     "learning_forbidden": true,
+     "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+     "page": "use-spinner",
+     "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    },
+    {
+     "clauses": 1,
+     "gap": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+     "learning_forbidden": false,
+     "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+     "page": "visual-addition",
+     "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+     "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+    }
+   ],
+   "rule": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+    "forbidden": [
+     "learning a policy for a task whose sentence already determines the action",
+     "replacing a live reading with a stored procedure",
+     "calling a stored procedure 'permanent knowledge' before a held-out verdict admits it"
+    ],
+    "required": [
+     "the gap named before anything is acquired",
+     "admission against a held-out instance, not against the demonstration"
+    ],
+    "rule": "READ first, always. Acquire a policy only for a gap the reading NAMED. Never store a policy for a task the reading already determines.",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1",
+    "why": "measured 2026-11-16 on 130 real pages: the zero-experience reading arm already wins 57 of the 78 pages any demonstration could ever reach (73%), so learning there adds nothing and displaces the reading; and it wins 9 pages exploration never demonstrated at all, so on those reading beats trying outright"
+   }
+  },
+  "demonstrable": 78,
+  "never_demonstrable": 52,
+  "pages": 130,
+  "reading_won": 66,
+  "schema": "BRAIN_LEARN_OR_READ_BOARD_V1",
+  "the_two_facts": {
+   "learning_had_nothing_to_add_on": 57,
+   "named_gaps_a_policy_may_be_acquired_for": 21,
+   "of_which_share_of_demonstrable": 0.7308,
+   "reading_beat_trying_on": 9
+  },
+  "what_this_is_not": "Not a leaderboard entry: the ladder's demonstrations were found with the page's reward visible, which a deployed agent is not given. The reading arm never reads a reward at all."
+ },
+ "composition_rule": {
+  "outcome_counts": {
+   "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR": 41,
+   "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN": 89
+  },
+  "rows": [
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "ascending-numbers",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "bisect-angle",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "book-flight-nodelay",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "book-flight",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "button-delay",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "buy-ticket",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__CONTINUOUS_NO_END_STATE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "chase-circle",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "choose-date-easy",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "choose-date-medium",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "choose-date-nodelay",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "choose-date",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "choose-list",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "circle-center",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-button-sequence",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-button",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-checkboxes-large",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "click-checkboxes-soft",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-checkboxes-transfer",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-checkboxes",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-collapsible-2-nodelay",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-collapsible-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-collapsible-nodelay",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-collapsible",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-color",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-dialog-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "click-dialog",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-link",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-menu-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-menu",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-option",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-pie-nodelay",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-pie",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-scroll-list",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "click-shades",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-shape",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-tab-2-easy",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-tab-2-hard",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-tab-2-medium",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-tab-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-tab",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-test-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-test-transfer",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-test",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "click-widget",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "copy-paste-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "copy-paste",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "count-shape",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "count-sides",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "daily-calendar",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-box",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-circle",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-cube",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "drag-items-grid",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "drag-items",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-shapes-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-shapes",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-single-shape",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "drag-sort-numbers",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "draw-circle",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "draw-line",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-delete",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-forward-nl-turk",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-forward-nl",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-forward",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-important",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-nl-turk",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-noscroll",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-reply",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox-star-reply",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "email-inbox",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "enter-date",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 3,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "enter-password",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "enter-text-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "enter-text-dynamic",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "enter-text",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "enter-time",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "find-greatest",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "find-midpoint",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "find-word",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "focus-text-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "focus-text",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "form-sequence-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 3,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "form-sequence-3",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 3,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "form-sequence",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "generate-number",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "grid-coordinate",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "guess-number",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "highlight-text-2",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "highlight-text",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "hot-cold",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__CONTINUOUS_NO_END_STATE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "hover-shape",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "identify-shape",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "login-user-popup",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 3,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "login-user",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__CONTINUOUS_NO_END_STATE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "moving-items",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "multi-layouts",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "multi-orderings",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "navigate-tree",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "number-checkboxes",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "odd-or-even",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "order-food",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "phone-book",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "read-table-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "read-table",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "resize-textarea",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "right-angle",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "scroll-text-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "scroll-text",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 3,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "search-engine",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "sign-agreement",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "simon-says",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "simple-algebra",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "simple-arithmetic",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "social-media-all",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "social-media-some",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "social-media",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "stock-market",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "terminal",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "text-editor",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "text-transform",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 0,
+    "gap": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "tic-tac-toe",
+    "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "unicode-test",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "use-autocomplete-nodelay",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "use-autocomplete",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "use-colorwheel-2",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "use-colorwheel",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "use-slider-2",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "use-slider",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 2,
+    "gap": "",
+    "learning_forbidden": true,
+    "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+    "page": "use-spinner",
+    "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   },
+   {
+    "clauses": 1,
+    "gap": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "learning_forbidden": false,
+    "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+    "page": "visual-addition",
+    "reason": "THE_READING_CARRIED_PART_OF_THE_SENTENCE_AND_NAMED_THE_REST",
+    "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+   }
+  ],
+  "rule": {
+   "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+   "forbidden": [
+    "learning a policy for a task whose sentence already determines the action",
+    "replacing a live reading with a stored procedure",
+    "calling a stored procedure 'permanent knowledge' before a held-out verdict admits it"
+   ],
+   "required": [
+    "the gap named before anything is acquired",
+    "admission against a held-out instance, not against the demonstration"
+   ],
+   "rule": "READ first, always. Acquire a policy only for a gap the reading NAMED. Never store a policy for a task the reading already determines.",
+   "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1",
+   "why": "measured 2026-11-16 on 130 real pages: the zero-experience reading arm already wins 57 of the 78 pages any demonstration could ever reach (73%), so learning there adds nothing and displaces the reading; and it wins 9 pages exploration never demonstrated at all, so on those reading beats trying outright"
+  }
+ },
+ "denominator_warning": "the ladder's 78 demonstrated pages were reached by a search that could SEE the page's reward. A deployed agent is not given that. The reading arm never reads a reward, which is why the two are reported per page and intersected rather than compared as rates.",
+ "environment": {
+  "action_budget": 30,
+  "experience": "none for the reading arm",
+  "external_model": "none",
+  "pages": "Farama-Foundation/miniwob-plusplus, 130 pages",
+  "parameters": 0,
+  "reward": "read only after the arm stops, and only to record whether it was right",
+  "seed": 1060,
+  "substrate": "chromium (puppeteer-core@23 + @sparticuz/chromium)"
+ },
+ "generated_utc": "2026-11-16T22:47:29Z",
+ "reading": {
+  "action_budget": 30,
+  "authority": "NONE -- SANDBOX MEASUREMENT",
+  "pages": 130,
+  "rate": 0.5077,
+  "refusals": {
+   "REFUSED__CONTINUOUS_NO_END_STATE": 3,
+   "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__FUZZY_NO_DECIDABLE_PREDICATE": 1,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 2,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__SPATIAL_NEEDS_GEOMETRY": 4,
+   "REFUSED__HALF_UNDERSTOOD:REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 1,
+   "REFUSED__LABEL_NOT_ON_THE_PAGE": 4,
+   "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION": 1,
+   "REFUSED__NO_CLAUSE_UNDERSTOOD": 10,
+   "REFUSED__SPATIAL_NEEDS_GEOMETRY": 5,
+   "REFUSED__STYLE_NOT_IN_OBSERVATION": 3,
+   "REFUSED__THE_ARM_CANNOT_ACT": 6,
+   "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS": 3,
+   "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE": 1,
+   "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS": 2
+  },
+  "refused": 24,
+  "results": [
+   {
+    "actions": [
+     "click@4",
+     "click@4",
+     "click@4",
+     "click@4",
+     "click@4"
+    ],
+    "failed": false,
+    "operators": [
+     "PRESS_SEQUENCE_BY_INDEX"
+    ],
+    "page": "ascending-numbers",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "PRESS_SEQUENCE_BY_INDEX"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on the numbers in ascending order.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@9"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "bisect-angle",
+    "refusal": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Create a line that bisects the angle evenly in two, then press submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "book-flight",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "book-flight-nodelay",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Book the shortest one-way flight from: South Naknek, AK to: LEB on 12/06/2016.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@4"
+    ],
+    "failed": true,
+    "operators": [
+     "PRESS_SEQUENCE"
+    ],
+    "page": "button-delay",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "PRESS_SEQUENCE"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Click button ONE, wait 3 seconds, then click button TWO.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "buy-ticket",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Buy the ticket with the shortest duration.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "chase-circle",
+    "refusal": "REFUSED__CONTINUOUS_NO_END_STATE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Keep your mouse inside the circle as it moves around.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@4",
+     "click@65",
+     "click@4",
+     "click@8",
+     "click@56",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_PICKER"
+    ],
+    "page": "choose-date",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_PICKER"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 11/10/2016 as the date and hit submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@4",
+     "click@93",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_PICKER"
+    ],
+    "page": "choose-date-easy",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_PICKER"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 12/26/2016 as the date and hit submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@4",
+     "click@84",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_PICKER"
+    ],
+    "page": "choose-date-medium",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_PICKER"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 12/22/2016 as the date and hit submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@4",
+     "click@65",
+     "click@4",
+     "click@8",
+     "click@56",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_PICKER"
+    ],
+    "page": "choose-date-nodelay",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_PICKER"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 11/10/2016 as the date and hit submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@9"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "page": "choose-list",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select Martinique from the list and click Submit.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "circle-center",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Find and click on the center of the circle, then press submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "click-button",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on the \"No\" button.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@4"
+    ],
+    "failed": false,
+    "operators": [
+     "PRESS_SEQUENCE"
+    ],
+    "page": "click-button-sequence",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "PRESS_SEQUENCE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click button ONE, then click button TWO.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@9",
+     "click@11",
+     "click@15",
+     "click@16"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "page": "click-checkboxes",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 3PwCm, AwK7, 95l8, eKV and click Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@18",
+     "click@24",
+     "click@13",
+     "click@26",
+     "click@11",
+     "click@7",
+     "click@5",
+     "click@22",
+     "click@9",
+     "click@20",
+     "click@15",
+     "click@27"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "page": "click-checkboxes-large",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 1G, 4bVXp, bAB0vVJ, FiG, m95l, PwCmQQA, LZC5F, onP, K7, Ss410, jeKVl and click Submit.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "click-checkboxes-soft",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+    "refused": true,
+    "refused_part": "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Select words similar to homes, unhappy, real, chubby and click Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@9",
+     "click@7",
+     "click@12"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "page": "click-checkboxes-transfer",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select LZC5F, K7, PwCmQQA and click Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@8"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED",
+     "EXPAND"
+    ],
+    "page": "click-collapsible",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "EXPAND"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Expand the section below and click submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@11",
+     "click@5",
+     "click@7",
+     "click@11"
+    ],
+    "failed": false,
+    "operators": [
+     "EXPAND",
+     "LABEL_ON_TRACE"
+    ],
+    "page": "click-collapsible-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "EXPAND",
+     "LABEL_ON_TRACE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Expand the sections below, to find and click on the link \"Quis\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@11",
+     "click@5",
+     "click@7",
+     "click@11"
+    ],
+    "failed": false,
+    "operators": [
+     "EXPAND",
+     "LABEL_ON_TRACE"
+    ],
+    "page": "click-collapsible-2-nodelay",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "EXPAND",
+     "LABEL_ON_TRACE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Expand the sections below, to find and click on the link \"Quis\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@8"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED",
+     "EXPAND"
+    ],
+    "page": "click-collapsible-nodelay",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "EXPAND"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Expand the section below and click submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@4"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "click-color",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on the black colored box.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "click-dialog",
+    "refusal": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Close the dialog box by clicking the \"x\".",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@14"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "click-dialog-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click the button in the dialog box labeled \"OK\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "click-link",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on the link \"ut\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "hover@9",
+     "hover@16",
+     "click@20"
+    ],
+    "failed": false,
+    "operators": [
+     "PRESS_SEQUENCE"
+    ],
+    "page": "click-menu",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "PRESS_SEQUENCE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select Milissent>Harmonia>Anita",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@18"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED",
+     "LABEL_ON_TRACE"
+    ],
+    "page": "click-menu-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "LABEL_ON_TRACE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click the \"Menu\" button, and then find and click on the item labeled \"Zoom Out\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@16"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "page": "click-option",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select ULZC and click Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@24",
+     "click@24"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "click-pie",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Expand the pie menu below and click on the item labeled \"7\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@24",
+     "click@24"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "click-pie-nodelay",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Expand the pie menu below and click on the item labeled \"7\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@11",
+     "click@13"
+    ],
+    "failed": false,
+    "operators": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "page": "click-scroll-list",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SELECT_SET",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select Ecuador from the scroll list and click Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@15"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "click-shades",
+    "refusal": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Select all the shades of blue and press Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@4"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "click-shape",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on a triangle",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "click-tab",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on Tab #1.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@7",
+     "click@9",
+     "click@13"
+    ],
+    "failed": false,
+    "operators": [
+     "LABEL_ON_TRACE"
+    ],
+    "page": "click-tab-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "LABEL_ON_TRACE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Switch between the tabs to find and click on the link \"Quis\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@10"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "click-tab-2-easy",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Switch between the tabs to find and click on the link \"ut\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@7",
+     "click@20"
+    ],
+    "failed": false,
+    "operators": [
+     "LABEL_ON_TRACE"
+    ],
+    "page": "click-tab-2-hard",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "LABEL_ON_TRACE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Switch between the tabs to find and click on the link \"Neque.\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@7"
+    ],
+    "failed": false,
+    "operators": [
+     "LABEL_ON_TRACE"
+    ],
+    "page": "click-tab-2-medium",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "LABEL_ON_TRACE"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Switch between the tabs to find and click on the link \"volutpat\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_KIND"
+    ],
+    "page": "click-test",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_KIND"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click the button.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "click-test-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click button ONE.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "click-test-transfer",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click button ONE.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@9"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "click-widget",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on a \"radio\" widget.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@6"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "copy-paste",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Copy the text in the textarea below, paste it into the textbox and press Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "copy-paste-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Copy the text from the 3rd text area below and paste it into the text input, then press Submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "count-shape",
+    "refusal": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "How many large blue items are there?",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "count-sides",
+    "refusal": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Press the button that correctly denotes how many sides the shape has.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "daily-calendar",
+    "refusal": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Create a 90 mins event named \"Party\", between 12PM and 4PM.",
+    "won": false
+   },
+   {
+    "actions": [
+     "grab@4",
+     "drop@5",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "DRAG_DESCRIBED"
+    ],
+    "page": "drag-box",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "DRAG_DESCRIBED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Drag the smaller box so that it is completely inside the larger box.",
+    "won": true
+   },
+   {
+    "actions": [
+     "grab@4",
+     "drop@5",
+     "grab@4",
+     "drop@4"
+    ],
+    "failed": false,
+    "operators": [
+     "MOVE_DIRECTION"
+    ],
+    "page": "drag-circle",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "MOVE_DIRECTION"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Drag the circle down then press Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@17",
+     "click@18"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "drag-cube",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Move the cube around so that \"6\" is the active side facing the user.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "drag-items",
+    "refusal": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Drag Milissent to the 1st position.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "drag-items-grid",
+    "refusal": "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Drag Winna to the bottom right.",
+    "won": false
+   },
+   {
+    "actions": [
+     "grab@7",
+     "drop@8",
+     "click@9"
+    ],
+    "failed": false,
+    "operators": [
+     "DRAG_DESCRIBED"
+    ],
+    "page": "drag-shapes",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "DRAG_DESCRIBED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Drag all triangles into the black box.",
+    "won": true
+   },
+   {
+    "actions": [
+     "grab@6",
+     "drop@9",
+     "click@11"
+    ],
+    "failed": true,
+    "operators": [
+     "DRAG_DESCRIBED"
+    ],
+    "page": "drag-shapes-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "DRAG_DESCRIBED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Drag all blue shapes into the left box, and everything else into the right box.",
+    "won": false
+   },
+   {
+    "actions": [
+     "grab@4",
+     "drop@5",
+     "grab@4",
+     "drop@4"
+    ],
+    "failed": false,
+    "operators": [
+     "MOVE_DIRECTION"
+    ],
+    "page": "drag-single-shape",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "MOVE_DIRECTION"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Drag the item down then press Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@16"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "drag-sort-numbers",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Sort the numbers in increasing order, starting with the lowest number at the top of the list.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@6"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "draw-circle",
+    "refusal": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Draw a circle centered around the marked point by dragging the mouse. Press submit when done.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@6"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "draw-line",
+    "refusal": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Draw a vertical line that runs through the dot, then press submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@20",
+     "type@14=Egestas duis.",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and reply to them with the text \"Egestas duis.\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@15"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_IN_FRAME"
+    ],
+    "page": "email-inbox-delete",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_IN_FRAME"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and click the trash icon to delete it.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@23",
+     "type@10=Roz",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-forward",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and forward that email to Roz.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@17",
+     "click@23",
+     "type@10=Jolynn",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-forward-nl",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Forward the email from Peggi to Jolynn.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@57",
+     "click@0"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-forward-nl-turk",
+    "refusal": "REFUSED__THE_ARM_CANNOT_ACT",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Find the email from Janot and send it to Wren.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@16"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_IN_FRAME"
+    ],
+    "page": "email-inbox-important",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_IN_FRAME"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and click the star icon to mark it as important.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@57",
+     "click@0"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-nl-turk",
+    "refusal": "REFUSED__THE_ARM_CANNOT_ACT",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Find the important email from Janot",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@23",
+     "type@10=Roz",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-noscroll",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and forward that email to Roz.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@20",
+     "type@14=Felis massa ac nulla.",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-reply",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and reply to them with the text \"Felis massa ac nulla.\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@20",
+     "type@14=Felis massa ac nulla.",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "OPEN_THEN_CLICK"
+    ],
+    "page": "email-inbox-star-reply",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "OPEN_THEN_CLICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find the email by Enrichetta and reply to them with the text \"Felis massa ac nulla.\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=08/13/2018",
+     "type@4=08/13/2018",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "enter-date",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter 08/13/2018 as the date and hit submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@6=xULZC",
+     "type@9=xULZC",
+     "click@10"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "enter-password",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter the password \"xULZC\" into both text fields and press submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=Donovan",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "enter-text",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter \"Donovan\" into the text field and press Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=DONOVAN",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "enter-text-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Type \"donovan\" in all upper case letters in the text input and press Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=ZC5F",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "enter-text-dynamic",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter \"ZC5F\" into the text field and press Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=13:13",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "enter-time",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter 1:13 PM as the time and press submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@8",
+     "click@11"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED",
+     "RANK_PICK"
+    ],
+    "page": "find-greatest",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "RANK_PICK"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Find and pick the card with the greatest number, then press submit.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "find-midpoint",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Find and click on the shortest mid-point between the two points, then press submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@5"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "find-word",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Find the 5th word in the paragraph, type that into the textbox and press \"Submit\".",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@3"
+    ],
+    "failed": false,
+    "operators": [
+     "FOCUS"
+    ],
+    "page": "focus-text",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "FOCUS"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Focus into the textbox.",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@3"
+    ],
+    "failed": true,
+    "operators": [
+     "FOCUS"
+    ],
+    "page": "focus-text-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "FOCUS"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Focus into the 3rd input textbox.",
+    "won": false
+   },
+   {
+    "actions": [
+     "nudge@5=right",
+     "nudge@5=right",
+     "nudge@5=left",
+     "nudge@5=right",
+     "click@10",
+     "nudge@5=left",
+     "nudge@5=right",
+     "nudge@5=left",
+     "click@12"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_NAMED",
+     "SET_CONTROL",
+     "CLICK_ORDINAL"
+    ],
+    "page": "form-sequence",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "SET_CONTROL",
+     "CLICK_ORDINAL"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Select 5 with the slider, click the 3rd checkbox, then hit Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@9=10",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_ORDINAL"
+    ],
+    "page": "form-sequence-2",
+    "refusal": "REFUSED__THE_ARM_CANNOT_ACT",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_ORDINAL"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Check the 3rd radio button and enter the number \"10\" into the 2nd textbox.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@20"
+    ],
+    "failed": true,
+    "operators": [
+     "SET_CONTROL",
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "form-sequence-3",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SET_CONTROL",
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Choose 6ft 1in from the dropdown, then click the button labeled \"No\".",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@5",
+     "click@6"
+    ],
+    "failed": true,
+    "operators": [
+     "PRESS_SEQUENCE",
+     "CLICK_NAMED"
+    ],
+    "page": "generate-number",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "PRESS_SEQUENCE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Generate an even number, then press submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "grid-coordinate",
+    "refusal": "REFUSED__THE_ARM_CANNOT_ACT",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Click on the grid coordinate (2,-1).",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "guess-number",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Guess the number between 0-9 and press Submit. Use the feedback below to find the right number.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@4"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "highlight-text",
+    "refusal": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Highlight the text in the paragraph below and click submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "highlight-text-2",
+    "refusal": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Highlight the text in the 2nd paragraph and click submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "hot-cold",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Find and click on the HOT area.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "hover-shape",
+    "refusal": "REFUSED__CONTINUOUS_NO_END_STATE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Keep the mouse hovered over the colored square.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "identify-shape",
+    "refusal": "REFUSED__FUZZY_NO_DECIDABLE_PREDICATE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Click the button that best describes the figure below.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@6=olin",
+     "type@9=ULZ",
+     "click@10"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "login-user",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter the username \"olin\" and the password \"ULZ\" into the text fields and press login.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@6=olin",
+     "type@9=ULZ"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "TYPE_VALUE"
+    ],
+    "page": "login-user-popup",
+    "refusal": "REFUSED__THE_ARM_CANNOT_ACT",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "TYPE_VALUE"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Enter the username \"olin\" and the password \"ULZ\" into the text fields and press login.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "moving-items",
+    "refusal": "REFUSED__CONTINUOUS_NO_END_STATE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Click as many moving circles as possible.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "multi-layouts",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Search for thriller movies directed by George from year 1994.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@18"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "multi-orderings",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Search for thriller movies directed by George from year 1994.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@10"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "page": "navigate-tree",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED",
+     "CLICK_LABELLED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Navigate through the file tree. Find and click on the folder or file named \"Cristin\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "click@49"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "number-checkboxes",
+    "refusal": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Draw the number \"8\" in the checkboxes using the example on the right and press Submit when finished.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@26"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "odd-or-even",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Mark the numbers below as odd or even and press submit when done.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "order-food",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Order 3 items that are meat",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "phone-book",
+    "refusal": "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Find Larissa in the contact book and click on their email.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@21=Russian",
+     "click@22"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED",
+     "READ_PAIR"
+    ],
+    "page": "read-table",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "READ_PAIR"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter the value of Language into the text field and press Submit.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@23=Color",
+     "type@26=Color"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "TYPE_VALUE"
+    ],
+    "page": "read-table-2",
+    "refusal": "REFUSED__THE_ARM_CANNOT_ACT",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "TYPE_VALUE"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Enter the value that corresponds with each label into the form and submit when done.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@8"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "resize-textarea",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Resize the textarea so that the height is larger than its initial size then press Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@7"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "right-angle",
+    "refusal": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Add a third point to create a right angle, then press submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@3=volutpat",
+     "click@5"
+    ],
+    "failed": true,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "scroll-text",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Find the last word in the text area, enter it into the text field and hit Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@3",
+     "click@4"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_LABELLED"
+    ],
+    "page": "scroll-text-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_LABELLED"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Scroll the textarea to the top of the text hit submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@4=Nathalie",
+     "click@5",
+     "type@4=https://www.massaaenean.mx",
+     "type@4=Nathalie",
+     "type@4=https://www.massaaenean.mx",
+     "click@16"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED",
+     "ORDINAL_PRESS"
+    ],
+    "page": "search-engine",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED",
+     "ORDINAL_PRESS"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Use the textbox to enter \"Nathalie\" and press \"Search\", then find and click the 3rd search result.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "sign-agreement",
+    "refusal": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Scroll to the bottom of the textarea, enter the name \"Kanesha\" then press \"Agree\"",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "simon-says",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Push the buttons in the order displayed.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@6=25",
+     "click@7"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "simple-algebra",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Solve for x and type your answer into the textbox. Press Submit when done.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@5=11",
+     "click@6"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "simple-arithmetic",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Solve the math problem and type your answer into the textbox. Press submit when done.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "social-media",
+    "refusal": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "For the user @lorem, click on the \"Mute\" button.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "social-media-all",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "refused": true,
+    "refused_part": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Click the \"Reply\" button on all posts by @eget and then click Submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "social-media-some",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "refused": true,
+    "refused_part": "REFUSED__MULTI_APP_STATE_OUTSIDE_OBSERVATION",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Click the \"Reply\" button on 3 posts by @eget and then click Submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "stock-market",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Buy WIN stock when the price is less than $63.60.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "terminal",
+    "refusal": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Use the terminal below to delete a file that has no file extension.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@29"
+    ],
+    "failed": true,
+    "operators": [],
+    "page": "text-editor",
+    "refusal": "REFUSED__STYLE_NOT_IN_OBSERVATION",
+    "refused": true,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Using the text editor, give the text viverra. the style underlined and press Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "type@9=ZC5F",
+     "click@10"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "page": "text-transform",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_VALUE",
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Type the text below into the text field and press Submit.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [],
+    "page": "tic-tac-toe",
+    "refusal": "REFUSED__LABEL_NOT_ON_THE_PAGE",
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Playing as 'X', win a game of tic-tac-toe.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "unicode-test",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Click on the \"\u786e\u5b9a\" button.",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=Surame",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_MATCHING"
+    ],
+    "page": "use-autocomplete",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_MATCHING"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter an item that starts with \"Sur\" and ends with \"ame\".",
+    "won": true
+   },
+   {
+    "actions": [
+     "type@4=Surame",
+     "click@5"
+    ],
+    "failed": false,
+    "operators": [
+     "TYPE_MATCHING"
+    ],
+    "page": "use-autocomplete-nodelay",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "TYPE_MATCHING"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Enter an item that starts with \"Sur\" and ends with \"ame\".",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "use-colorwheel",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Select magenta with the color picker and hit Submit.",
+    "won": false
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "use-colorwheel-2",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "refused": true,
+    "refused_part": "REFUSED__SPATIAL_NEEDS_GEOMETRY",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Select the following color with the color picker and hit Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "nudge@4=up",
+     "nudge@4=down",
+     "nudge@4=up",
+     "click@6"
+    ],
+    "failed": true,
+    "operators": [
+     "CLICK_NAMED",
+     "SET_CONTROL"
+    ],
+    "page": "use-slider",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "SET_CONTROL"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Select 108 with the slider and hit Submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@12"
+    ],
+    "failed": true,
+    "operators": [
+     "SET_CONTROL"
+    ],
+    "page": "use-slider-2",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "SET_CONTROL"
+    ],
+    "stopping": "THE_PAGE_FAILED_IT",
+    "utterance": "Set the sliders to the combination [15,15,16] and submit.",
+    "won": false
+   },
+   {
+    "actions": [
+     "click@6",
+     "click@6",
+     "click@6",
+     "click@6",
+     "click@6",
+     "click@6",
+     "click@6",
+     "click@12"
+    ],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED",
+     "SET_CONTROL"
+    ],
+    "page": "use-spinner",
+    "refusal": null,
+    "refused": false,
+    "refused_part": null,
+    "still_holding": [
+     "CLICK_NAMED",
+     "SET_CONTROL"
+    ],
+    "stopping": "SUCCEEDED",
+    "utterance": "Select 7 with the spinner and hit Submit.",
+    "won": true
+   },
+   {
+    "actions": [],
+    "failed": false,
+    "operators": [
+     "CLICK_NAMED"
+    ],
+    "page": "visual-addition",
+    "refusal": "REFUSED__HALF_UNDERSTOOD:REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "refused": true,
+    "refused_part": "REFUSED__VISUAL_QUANTITY_NEEDS_PIXELS",
+    "still_holding": [
+     "CLICK_NAMED"
+    ],
+    "stopping": "THE_ARM_HAD_NOTHING_LEFT_TO_SAY",
+    "utterance": "Type the total number of blocks into the textbox and press Submit.",
+    "won": false
+   }
+  ],
+  "seed": 1060,
+  "won": 66
+ },
+ "schema": "PROJECT_BRAIN_LEARN_OR_READ_EVIDENCE_V1"
+}
