@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 473,
+  "knowledge_documents": 474,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6912,
+  "research_index_records": 6914,
   "routing_tokens": 2373,
   "skills": 18,
-  "source_index_entry_points": 450,
-  "source_index_modules": 1988
+  "source_index_entry_points": 451,
+  "source_index_modules": 1989
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "655e666370be956fc332fb4561b57f5cac6d5435984602c06c8dc3da37f6fe13"
+  "value": "0a898e0c8b7bad4cb12173a3ea42bc8d1d93a2f65ed9b7f583aa9a093bcf6b2d"
  },
  "engines": [
   {
@@ -61105,6 +61105,88 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 18676,
+   "headings": [
+    "There is no single bottleneck — the remainder is a long tail, and the trigger was the reason",
+    "0. The question, answered in one paragraph",
+    "1. Why the last measurement was not the end of the story",
+    "2. So is there a trigger that transfers? Counted before building it",
+    "3. The answer to \"the single bottleneck\": the remainder is a long tail",
+    "The correction I had to make to my own method",
+    "4. And the 2026 frontier measured the same shape, from the other end",
+    "5. What is real, and what the smartest moves are — ranked, each with a kill condition",
+    "6. On \"our model\", \"from scratch\", and \"sentient\" — plainly",
+    "7. Honest limits of this document",
+    "8. Test ledger"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THERE_IS_NO_SINGLE_BOTTLENECK_AND_THE_TRIGGER_WAS_THE_REASON_20261116_V1.md",
+   "sha256": "dc0e93d657bb2cf814f6c66d76495f102672565a13a385ab771e27a248e1a0fe",
+   "summary": "**2026-11-16 · branch `arena/8f1472e2-brain` · base `6ace9318` · measured on MiniWoB++ (130 real pages) with a real Chromium run already on main, plus a declared-format census and an operand taxonomy on jsdom · $0, no model**",
+   "terms": {
+    "2026": 7,
+    "about": 7,
+    "actions": 9,
+    "all": 7,
+    "any": 11,
+    "arithmetic": 7,
+    "bottleneck": 7,
+    "budget": 7,
+    "cannot": 7,
+    "declares": 7,
+    "each": 7,
+    "every": 7,
+    "experience": 6,
+    "field": 10,
+    "instruction": 13,
+    "jsdom": 8,
+    "kill": 6,
+    "last": 7,
+    "measured": 10,
+    "model": 6,
+    "most": 6,
+    "never": 6,
+    "no": 21,
+    "none": 8,
+    "not": 38,
+    "number": 8,
+    "one": 19,
+    "only": 7,
+    "own": 12,
+    "page": 24,
+    "pages": 29,
+    "part": 16,
+    "pass": 7,
+    "per": 6,
+    "prior": 6,
+    "real": 13,
+    "result": 6,
+    "rule": 6,
+    "same": 12,
+    "says": 6,
+    "session": 8,
+    "single": 6,
+    "suite": 8,
+    "test": 6,
+    "those": 7,
+    "time": 6,
+    "trigger": 7,
+    "would": 7
+   },
+   "title": "There is no single bottleneck — the remainder is a long tail, and the trigger was the reason",
+   "title_terms": [
+    "bottleneck",
+    "long",
+    "no",
+    "reason",
+    "remainder",
+    "single",
+    "tail",
+    "trigger"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9403,
    "headings": [
     "The admitted confinement exists: the wall the most advanced capabilities actually hit",
@@ -81820,10 +81902,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1275,
+  "included_source_count": 1276,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "70bea44992b4a29a447a5d56098309ae0f5ef525a920a577e7628222136c7744"
+  "source_tree_digest": "4e75d9072f9429d76faaff13c54a812e90af27cfc5fa4a7faef21cebf8590c16"
  },
  "research_index": [
   {
@@ -162479,6 +162561,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json",
+   "schema": "BRAIN_DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_V1",
+   "sha256": "e4759d24ac54192e60ce1e6e7482e4e77e19bedad797d0903ac7aef46788916a",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "declared": 1,
+    "operand": 1,
+    "taxonomy": 1,
+    "trigger": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/DEFAULT_RUNTIME_INTEGRATION_ISOLATED_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -242523,6 +242624,30 @@
    }
   },
   {
+   "action_id": "THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_REMAINDER_IS_A_LONG_TAIL_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "01d3e5ffdaa86b189ae421fa47247973ede3f3a249ac6d0a3cabbfa290dc9451",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "bind_each_operator_to_something_the_page_declares_or_the_instruction_structurally_implies_never_to_a_phrase__and_classify_the_remainder_by_what_each_instruction_asks_for_before_building_any_part": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "long": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "remainder": 1,
+    "tail": 1,
+    "the_algebra_did_not_transfer_because_every_rule_is_gated_on_a_hand_written_english_phrase__same_page_same_text_same_field_reworded_from_last_word_to_final_token_and_the_rule_fires_zero_times__the_part_was_a_lookup_keyed_on_eight_pages__and_the_remainder_has_no_single_bottleneck_to_buy_it_back_46_pages_16_classes_largest_6": 1,
+    "the_remainder_is_a_long_tail_20261116_v1": 1,
+    "the_trigger_is_the_phrase_and_the_remainder_is_a_long_tail_of_sixteen_parts": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "THE_RENAME_ANSWERS_THE_OBJECT_THE_SENTENCE_NAMES_V1_20261031_V1",
    "capability": false,
    "date": "2026-10-31",
@@ -266437,6 +266562,43 @@
     "tree_of": 1,
     "typed": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/declared_trigger_census_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/declared_trigger_census_v1.py",
+   "sha256": "2d126bf4ae85d74ea7d78f04230d0b9026853c4448e0c4b2087b105e0ba411ba",
+   "summary": "Why the value algebra bought 5 pages and none outside its design set: the trigger is a phrase.",
+   "symbol_count": 4,
+   "symbols": [
+    "classify",
+    "declared_surface",
+    "load_census",
+    "taxonomy"
+   ],
+   "terms": {
+    "algebra": 1,
+    "bought": 1,
+    "census": 1,
+    "classify": 1,
+    "declared": 1,
+    "declared_surface": 1,
+    "design": 1,
+    "load_census": 1,
+    "none": 1,
+    "outside": 1,
+    "pages": 1,
+    "phrase": 1,
+    "set": 1,
+    "taxonomy": 1,
+    "trigger": 2,
+    "v1": 1,
+    "value": 1
    }
   },
   {

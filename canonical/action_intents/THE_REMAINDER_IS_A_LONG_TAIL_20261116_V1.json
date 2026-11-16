@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_ALGEBRA_DID_NOT_TRANSFER_BECAUSE_EVERY_RULE_IS_GATED_ON_A_HAND_WRITTEN_ENGLISH_PHRASE__SAME_PAGE_SAME_TEXT_SAME_FIELD_REWORDED_FROM_LAST_WORD_TO_FINAL_TOKEN_AND_THE_RULE_FIRES_ZERO_TIMES__THE_PART_WAS_A_LOOKUP_KEYED_ON_EIGHT_PAGES__AND_THE_REMAINDER_HAS_NO_SINGLE_BOTTLENECK_TO_BUY_IT_BACK_46_PAGES_16_CLASSES_LARGEST_6",
- "canonical_base_commit": "6f78086bc2ee7b4992bee6e21aaa422f4be1eba1",
+ "canonical_base_commit": "6ace93187227a167fc929912044c0c47be30951b",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -131,7 +131,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "0000000000000000000000000000000000000000",
+  "canonical_base_commit": "6ace93187227a167fc929912044c0c47be30951b",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "majority vote among candidates that pass the same tests (measured wrong 3 times in 5)",
@@ -339,7 +339,7 @@
      "route": "the verifier, in the domain that has an oracle (code)"
     }
    ],
-   "checked_at_utc": "2026-11-16T23:55:00Z",
+   "checked_at_utc": "2026-11-16T23:22:25Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -379,7 +379,7 @@
    "selected_route": "BIND_EACH_OPERATOR_TO_SOMETHING_THE_PAGE_DECLARES_OR_THE_INSTRUCTION_STRUCTURALLY_IMPLIES_NEVER_TO_A_PHRASE__AND_CLASSIFY_THE_REMAINDER_BY_WHAT_EACH_INSTRUCTION_ASKS_FOR_BEFORE_BUILDING_ANY_PART",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T23:55:00Z",
+    "checked_at_utc": "2026-11-16T23:22:25Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
