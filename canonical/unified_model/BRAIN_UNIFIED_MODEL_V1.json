@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 454,
+  "knowledge_documents": 455,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6858,
+  "research_index_records": 6860,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8836a3667bbe8aa5bd0c4c98ddb84e815c5bc25d7c4248a017cdcc62770e5fa9"
+  "value": "1dc4cd5a3d060ddfc264de3e6802bf8f77d833702fbcaa4cd63e938b124c9922"
  },
  "engines": [
   {
@@ -64171,6 +64171,92 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 21629,
+   "headings": [
+    "The verifier is knowledge, not learning — 16 November 2026",
+    "1. The claim is five steps. Four of them are not learning problems.",
+    "2. What was actually missing, said in one sentence",
+    "3. The mechanism: a law proposed by structure, confirmed by execution",
+    "4. The measurement, on this repository's own code",
+    "What the numbers say, without decoration",
+    "The two denominator errors this measurement had before it meant anything",
+    "Four defects in the instrument itself, each now pinned by a test",
+    "5. The three ceilings the owner named, restated with numbers",
+    "6. The answer to the owner's question",
+    "7. On \"the most advanced coding actions\"",
+    "8. What this session does and does not establish",
+    "9. Kill list — measured dead, do not rebuild",
+    "10. Ranked next work, pre-registered",
+    "11. Test ledger (producer-run, this tree)",
+    "12. External context used for ranking, not for authority"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md",
+   "sha256": "fa7dc96b5a3ff6a60ea8909d6e8c05679d9e0d65470aad2751904d71ad18bd2c",
+   "summary": "Authority: **NONE**. Producer-run sandbox measurement on branch `arena/754f5d1c-brain`, base `fcd3ec29`. No capability registered, no family flipped, no weight touched, `truth.achieved` unchanged. Independent verification is open.",
+   "terms": {
+    "about": 15,
+    "action": 8,
+    "actions": 7,
+    "advanced": 7,
+    "all": 9,
+    "already": 7,
+    "arxiv": 10,
+    "because": 11,
+    "canonical": 8,
+    "code": 16,
+    "confirmed": 16,
+    "every": 10,
+    "execution": 7,
+    "function": 13,
+    "functions": 7,
+    "grid": 9,
+    "instrument": 12,
+    "knowledge": 7,
+    "law": 37,
+    "laws": 7,
+    "learning": 10,
+    "measured": 10,
+    "model": 8,
+    "more": 9,
+    "most": 10,
+    "name": 8,
+    "no": 40,
+    "not": 43,
+    "nothing": 9,
+    "number": 8,
+    "one": 25,
+    "only": 10,
+    "own": 10,
+    "program": 10,
+    "real": 12,
+    "rejected": 11,
+    "same": 11,
+    "says": 8,
+    "session": 12,
+    "so": 12,
+    "test": 15,
+    "they": 8,
+    "tree": 11,
+    "two": 9,
+    "variants": 9,
+    "verifier": 10,
+    "vocabulary": 10,
+    "wrong": 9
+   },
+   "title": "The verifier is knowledge, not learning — 16 November 2026",
+   "title_terms": [
+    "16",
+    "2026",
+    "knowledge",
+    "learning",
+    "not",
+    "november",
+    "verifier"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 17511,
    "headings": [
     "No — and the reason is not the one you think. Our verifier was running zero tests and reporting PASS.",
@@ -80340,10 +80426,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1256,
+  "included_source_count": 1257,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ba9e215a517dbd7aa764188dd61af2815a8797810e9619fcf72c43cf0a76b976"
+  "source_tree_digest": "6f014294a1c303b7ff25c19cc7dda29b160c0e2889c9ba55a4f6acaa9a5e4acd"
  },
  "research_index": [
   {
@@ -197614,6 +197700,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_SPECIFICATION_FROM_STRUCTURE_MEASURE_V1",
+   "sha256": "57a559d92bfef5fba05dc24d40860b4784b599b1854e13d8f46ab5ba84b23175",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "specification": 1,
+    "structure": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/SPREAD_RELATION_CONTEXT_IDENTITY_VERIFY_20261010_V2.json",
    "kind": "RESEARCH_RECORD",
@@ -238272,6 +238375,29 @@
     "source": 3,
     "source_root_bound_from_the_sentence_role_v1_20261023_v1": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "SPECIFICATION_FROM_STRUCTURE_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "7e4ade54a8e95e8d27b3f8b273b85849060fa4da987e4ce991255cf67d4ab363",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "reuse_the_trees_own_mutation_engine_on_the_trees_own_code_to_measure_how_much_of_a_verifier_structure_alone_can_supply": 1,
+    "specification": 1,
+    "specification_from_structure_20261116_v1": 1,
+    "structure": 1,
+    "the_single_bottleneck_was_named_as_the_verifier_without_measuring_how_much_verifier_structure_alone_can_supply__measured_on_this_trees_own_code_eight_of_eighty_nine_behavioural_perturbations_are_rejected_by_a_law_confirmed_by_execution_twenty_three_more_only_by_it_still_ran_and_fifty_eight_are_indistinguishable__so_the_verifier_is_knowledge_that_must_be_acquired_and_is_not_an_outcome_of_learning": 1,
+    "the_verifier_ceases_to_be_an_assumed_single_bottleneck_and_becomes_a_measured_coefficient__structure_alone_supplies_a_real_but_weak_oracle_eight_of_eighty_nine_perturbations_rejected_by_a_confirmed_law_and_fifty_eight_indistinguishable__the_wall_is_a_vocabulary_wall_measured_at_sixty_five_percent__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
+    "v1": 1
    }
   },
   {
