@@ -269,115 +269,91 @@
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "none",
-      "CORRECTNESS": "wrong 3 times in 5 disagreements",
-      "INCREMENTAL_COST": "zero",
-      "RELIABILITY": "confidently wrong",
+      "CORRECTNESS": "0 of 5 pages gained",
+      "INCREMENTAL_COST": "4x compute, measured",
+      "RELIABILITY": "unchanged",
       "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "free"
+      "WALL_CLOCK": "unbounded"
      },
      "evidence": [
-      "Python/3: 4 of 5 candidates shared the wrong behaviour",
-      "Python/101: 5 of 6 shared the wrong behaviour"
+      "shipped hand fails all 5 gain pages at 1600 actions (4x), budget 400",
+      "0 bits are bought by repeating the same state: 0 of 200 identified"
      ],
      "qualification_evidence": [
-      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "majority vote among candidates that pass the same tests"
+     "route": "more demonstrations or more pages of the same kind (the owner's original plan)"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "lower",
+      "CORRECTNESS": "net negative: 5 pages gained, 7 lost",
+      "INCREMENTAL_COST": "same",
+      "RELIABILITY": "worse on email-inbox",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "same"
+     },
+     "evidence": [
+      "jsdom 123 pages: shipped 62, derived-only 61",
+      "the entire email-inbox family plus enter-password regress"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "REPLACE the shipped vocabulary with the derived-value algebra"
     },
     {
      "comparison": {
       "CAPABILITY_STRENGTH": "none",
-      "CORRECTNESS": "unchanged",
-      "INCREMENTAL_COST": "budget",
-      "RELIABILITY": "does not change the version space",
+      "CORRECTNESS": "net -12 / -11 pages",
+      "INCREMENTAL_COST": "same",
+      "RELIABILITY": "lower",
       "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "minutes"
+      "WALL_CLOCK": "same"
      },
      "evidence": [
-      "46 of 99 bugs had no candidate pass at all",
-      "a budget cannot split candidates that already pass every test"
+      "chromium seed 1060: decoy 66 vs shipped 78; seed 771: 66 vs 77"
      ],
      "qualification_evidence": [
-      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "raise the candidate budget"
+     "route": "a decoy vocabulary of the same size drawn from the wrong witness (the negative control)"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "same",
-      "CORRECTNESS": "same outcomes",
-      "INCREMENTAL_COST": "zero",
-      "RELIABILITY": "measured",
-      "VERIFIABILITY": "measured",
-      "WALL_CLOCK": "up to 9x more questions at worst"
+      "CAPABILITY_STRENGTH": "unmeasured",
+      "CORRECTNESS": "untested for these pages",
+      "INCREMENTAL_COST": "high",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "weak",
+      "WALL_CLOCK": "high"
      },
      "evidence": [
-      "minimax is optimal only when the answer is unknown",
-      "here the reference answers, so maximum elimination is correct: 89 vs 112 questions"
+      "4x budget bought 0 of 5 pages here; a real tax and not the binding constraint"
      ],
      "qualification_evidence": [
-      "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json"
+      "canonical/verification/DERIVED_VALUE_FULL_SUITE_20261116_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "resolution": "DISQUALIFIED",
-     "route": "reuse the kernel's minimax discriminator unexamined"
-    },
-    {
-     "comparison": {
-      "CAPABILITY_STRENGTH": "apparent only",
-      "CORRECTNESS": "unverifiable provenance",
-      "INCREMENTAL_COST": "spend",
-      "RELIABILITY": "fails closed",
-      "VERIFIABILITY": "zero credit by law",
-      "WALL_CLOCK": "fast"
-     },
-     "evidence": [
-      "producer cognition from another model is prohibited and receives zero credit"
-     ],
-     "qualification_evidence": [
-      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
-     ],
-     "qualification_evidence_classes": [
-      "OFFICIAL_PRIMARY"
-     ],
-     "resolution": "DISQUALIFIED",
-     "route": "ask a model to choose the repair"
-    },
-    {
-     "comparison": {
-      "CAPABILITY_STRENGTH": "one real transfer of the chooser",
-      "CORRECTNESS": "8/8 when it settles, and it refuses otherwise",
-      "INCREMENTAL_COST": "zero",
-      "RELIABILITY": "15 mechanism tests including the negative one",
-      "VERIFIABILITY": "producer-run; independent reproduction open",
-      "WALL_CLOCK": "about 4 minutes for 51 bugs"
-     },
-     "evidence": [
-      "8 of 8 settled choices were the reference behaviour",
-      "0 of 47 correct repairs broken",
-      "9 questions across 51 bugs"
-     ],
-     "qualification_evidence": [
-      "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "SELECTED",
-     "route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS"
+     "resolution": "NON_DOMINATING",
+     "route": "more action primitives for the 44 pages that stopped on budget"
     }
    ],
-   "checked_at_utc": "2026-11-16T20:30:00Z",
+   "checked_at_utc": "2026-11-16T22:10:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -387,9 +363,9 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "first candidate that passes the tests wins; when several pass, prefer the earliest or the most common",
-   "max_age_hours": 24,
-   "negative_search_summary": "Four routes were refused with evidence: majority vote (wrong 3 of 5), a bigger budget (cannot split passing candidates), an unexamined minimax kernel (wrong objective when the answer is known), and a model chooser (prohibited).",
+   "incumbent_route": "keep the shipped literal vocabulary and look for more experiences of it: run the same pages again, add demonstrations, or widen the action hand",
+   "max_age_hours": 2,
+   "negative_search_summary": "Searched the tree before building: the previous session's top-ranked lever (a prior over actions) was already built AND killed (INERT_ACTION_PRIOR_20261116_V1: four arms tied at 1/6, 2003 actions each), and the derived-value algebra was already measured on 8 hand-picked pages. The gap was not the idea; it was that the idea had never been run on pages chosen by nobody.",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
@@ -414,15 +390,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+   "selected_route": "ADD_THE_MISSING_OPERAND_PART_ALONGSIDE_THE_WORKING_VOCABULARY_NEVER_INSTEAD_OF_IT__AND_MEASURE_EVERY_PART_AT_FULL_SUITE_SCALE_ON_HELD_OUT_PAGES",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T20:30:00Z",
+    "checked_at_utc": "2026-11-16T22:10:00Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest",
       "evidence": [
-       "Python 3.11.2; 15 mechanism tests pass this session"
+       "Python 3.11.2; 43 tests pass across the derived-value and flywheel suites"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -435,9 +411,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "HumanEvalPack and HumanEval+ Mini JSONL, QuixBugs checkout",
+      "dependency": "MiniWoB++ task pages at the pinned upstream commit",
       "evidence": [
-       "164 HumanEvalPack rows sha b1376d72, 164 HumanEval+ rows, 50 QuixBugs programs, all re-read this session"
+       "Farama-Foundation/miniwob-plusplus @33c3b4dd, 130 task pages, re-read this session"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -450,15 +426,15 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "per-bug tempdir isolation for the behaviour matrix",
+      "dependency": "headless Chromium with real layout and input",
       "evidence": [
-       "the probe writes to a scratch dir, never into the tree"
+       "@sparticuz/chromium 153.0.0 + puppeteer-core 25.17.0; 129 pages measured, 1 instrument error recorded not hidden"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
-      "kind": "STORAGE",
+      "kind": "LOCAL_RUNTIME",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
@@ -468,7 +444,7 @@
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "PARTITION_TEST_PASSING_CANDIDATES_BY_BEHAVIOUR_ASK_THE_CHEAPEST_DISCRIMINATING_QUESTION_AND_REFUSE_WHEN_NONE_EXISTS",
+    "selected_route": "ADD_THE_MISSING_OPERAND_PART_ALONGSIDE_THE_WORKING_VOCABULARY_NEVER_INSTEAD_OF_IT__AND_MEASURE_EVERY_PART_AT_FULL_SUITE_SCALE_ON_HELD_OUT_PAGES",
     "status": "READY"
    },
    "source_classes_checked": [
