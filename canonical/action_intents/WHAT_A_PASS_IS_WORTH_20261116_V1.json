@@ -32,7 +32,9 @@
    "canonical/tools/patch_verdict_amplification_measure_v1.py",
    "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json",
    "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json",
-   "WHAT_A_PASS_IS_WORTH_20261116_V1.md"
+   "WHAT_A_PASS_IS_WORTH_20261116_V1.md",
+   "canonical/swe_kernel/learned_skill_verdict_v1.py",
+   "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
   ],
   "route_class": "REUSE",
   "scope_complete_discharge": false,
@@ -46,7 +48,7 @@
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "causal_blocker": "THE_TREE_COULD_NOT_SAY_WHAT_A_PASSING_TEST_SUITE_IS_WORTH_AND_ASSUMED_THAT_A_CONFIRMED_LAW_WOULD_ADD_ON_TOP_OF_IT__MEASURED_ON_16_OWN_SUITES_THE_SUITE_REJECTED_77_OF_96_BEHAVIOUR_ALTERING_CANDIDATES_AND_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTED_ZERO_OF_THE_19_IT_ACCEPTED_EVEN_THOUGH_THE_LAW_WAS_POINTED_AT_THE_MUTATED_FUNCTION_IN_ALL_19",
  "date": "2026-11-16",
- "expected_parent_change": "The claim that a confirmed law amplifies a passing test suite stops being an assumption and becomes a number: 0 of 19 survivors, with the reason decomposed per law kind. The tree also gains a way to say what a pass was worth (suite rejection rate per pair) so a learned thing can carry its verdict budget.",
+ "expected_parent_change": "The claim that a confirmed law amplifies a passing test suite stops being an assumption and becomes a number: 0 of 19 survivors, with the reason decomposed per law kind. The tree also gains a way to say what a pass was worth (suite rejection rate per pair) so a learned thing can carry its verdict budget. The learned-skill verdict is measured too: 11 of 11 skills are judged only by their own stdout, a do-nothing program is accepted 4 of 4, and a file witness refuses it 0 of 4 while still accepting the real skills 4 of 4.",
  "expected_parent_frontier_change": "Verifier work is aimed at vocabulary that names what code means (relations taken from real assertions, method-level laws) instead of at more shape-derived relations, which are measured at exactly zero added value on top of a real suite.",
  "explicit_user_authorization": [
   "Instant learning + instant learning in new arbitrary environments -- we solved those perfectly. Doesn't that mean we can solve any computer use?",
@@ -139,6 +141,21 @@
     "refuted": 0
    }
   },
+  "learned_skills": {
+   "a_do_nothing_program_a_file_witness_accepted": "0 of 4",
+   "a_do_nothing_program_the_stored_verdict_accepted": "4 of 4",
+   "bundle": "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json",
+   "ever_used_hit_count_above_zero": 0,
+   "exercised_with_a_real_request": 4,
+   "judged_only_by_their_own_stdout": 11,
+   "oracle_change": "causal_trace_to_skill_compiler_v1.verify_postcondition supports kind file_edit_claim",
+   "question": "The tree stores 'learned once, kept forever' actions. What can the verdict attached to each of them tell apart?",
+   "real_skills_a_file_witness_still_accepted": "4 of 4",
+   "receipt": "canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json",
+   "skills": 11,
+   "unexercised_no_example_pair": 7,
+   "what_the_real_skills_did": "each of the four produced the claimed edit on a real file, the file parsed afterwards, and the named symbol was gone (checked by reading the file)"
+  },
   "new_tests": {
    "canonical/tests/test_patch_verdict_amplification_measure_v1.py": 6,
    "canonical/tests/test_patch_verdict_amplification_v1.py": 11,
@@ -175,7 +192,9 @@
   "canonical/tools/specification_from_structure_measure_v1.py",
   "canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V1.json",
   "canonical/runtime/bound_capabilities/python_tests_mutation_score.py",
-  "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md"
+  "THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md",
+  "canonical/swe_kernel/causal_trace_to_skill_compiler_v1.py",
+  "canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json"
  ],
  "probe_specific": false,
  "recursive_obs": {
@@ -265,7 +284,7 @@
    ],
    "synthetic_verification_necessity": "The oracle is the repository's own unedited test files; the controls are unit tests of the instrument; independent reproduction remains open."
   },
-  "real_outcome": "A pass is worth what its suite covers: 80.2% of behaviour-altering candidates rejected here, per pair between 1 of 6 and 6 of 6. A law confirmed on the code as it stands added exactly zero on top of that, and the census shows why: the only law kind that confirms on real code is the word 'it ran', which a pass has already said, and the informative relations are refuted by the code itself.",
+  "real_outcome": "A pass is worth what its suite covers: 80.2% of behaviour-altering candidates rejected here, per pair between 1 of 6 and 6 of 6. A law confirmed on the code as it stands added exactly zero on top of that, and the census shows why: the only law kind that confirms on real code is the word 'it ran', which a pass has already said, and the informative relations are refuted by the code itself. The same question asked of the tree's own learned skills: the four exercisable ones really do the edit, and the verdict attached to all eleven admits a program that writes nothing, 4 of 4.",
   "required_capability": "A verdict that can speak about what a program means rather than about the shape of its definitions, plus the discipline of recording what each verdict was worth.",
   "route_frontier": {
    "challenger_routes": [
@@ -333,7 +352,7 @@
      "route": "trust the suites alone and drop the whole law instrument"
     }
    ],
-   "checked_at_utc": "2026-11-16T16:24:16Z",
+   "checked_at_utc": "2026-11-16T16:51:43Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -373,7 +392,7 @@
    "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T16:24:16Z",
+    "checked_at_utc": "2026-11-16T16:51:43Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3.11 runtime with pytest 9.2.0 in .venv",

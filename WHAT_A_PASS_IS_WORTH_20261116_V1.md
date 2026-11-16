@@ -133,6 +133,42 @@ receipt `SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json`). That i
 insufficiency certificate, no longer an argument: it is a census with a number next to every kind
 of law this vocabulary can express.
 
+## 4b. The same question asked of the learned skills themselves
+
+The "learn it once, keep it forever" objects in this tree are the compiled skills in
+`canonical/astra_runtime/skills/COMPILED_WORKFLOWS_BUNDLE_V1.json`. So the same instrument was
+pointed at them, and against the tree's own judge (`verify_postcondition`), not a copy of it:
+
+| quantity | value |
+|---|---|
+| skills in the bundle | **11** |
+| judged **only** by their own stdout | **11** |
+| ever used (`hit_count > 0`) | **0** |
+| exercisable with a real request from this repository | **4** |
+| — of those, the stored verdict accepted a 3-line program that prints the sentence and writes nothing | **4 of 4** |
+| — of those, a verdict that reads the file it claims changed accepted the same program | **0 of 4** |
+| — and still accepted the **real** skill | **4 of 4** |
+
+Two facts, and they point in opposite directions, which is why both are reported:
+
+**The learning works.** All four exercisable skills did exactly what their sentence says on real
+files here: the edit appeared, the file still parsed, and the symbol the sentence names was gone —
+checked by reading the file, not by reading what the program printed.
+
+**The verdict attached to them does not exist.** Each skill's postcondition is
+`stdout_equals`: the last line of the skill's own output is compared with the sentence the skill
+says it will print. A three-line program that prints that sentence and opens no file satisfies it
+— 4 of 4. So a skill that silently stopped working, or that corrupted the file while printing the
+right words, would be admitted and kept forever. Nothing in the bundle has ever run once
+(`hit_count` 0 of 11), so nothing has yet contradicted it.
+
+**The fix was measured, not argued.** `verify_postcondition` now has a `file_edit_claim` kind:
+the claimed file must exist, differ from its recorded sha256, still parse, still contain the named
+function, and no longer assign the named symbol. With it, the impostor is refused 4 of 4 and the
+real skills still pass 4 of 4 — the verdict separates, which it did not before. The shipped bundle
+still carries `stdout_equals`; rewriting eleven learned artifacts is a change to what was learned,
+not to the instrument, and is left to the run that owns them.
+
 ## 5. The three challenges, answered by this measurement rather than by prose
 
 **Identifiability.** 19 survivors, a confirmed law pointed at the mutated function in every one,
@@ -198,6 +234,8 @@ weak" — it is "the verdict's reach is the reach of the knowledge inside it".
 | the harness that produced the numbers | `canonical/tools/patch_verdict_amplification_measure_v1.py` |
 | receipt, amplifier | `canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json` |
 | receipt, structure re-measured with the fixed instrument | `canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json` |
+| receipt, learned skills | `canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json` |
+| the learned-skill instrument | `canonical/swe_kernel/learned_skill_verdict_v1.py` |
 | the earlier answer (kept, for the argument this one measures) | `THE_VERIFIER_IS_KNOWLEDGE_NOT_LEARNING_20261116_V1.md` |
 
 Reproduce: `.venv/bin/python canonical/tools/patch_verdict_amplification_measure_v1.py --max-pairs 16 --max-mutants 6`

@@ -1503,6 +1503,41 @@ def verify_postcondition(
                     return False, f"POSTCONDITION_JSON_SUBSET_MISMATCH:{k}"
         return True, "HTTP_STATUS_JSON_VERIFIED"
 
+    if kind == "file_edit_claim":
+        # A skill that EDITS a file must be judged by the file, not by what it printed. Without
+        # this kind, a program that prints the success sentence and writes nothing satisfies every
+        # postcondition the learned-edit skills carry (measured: 4 of 4, see
+        # canonical/swe_kernel/learned_skill_verdict_v1.py).
+        import ast
+
+        p = _resolve_local_path(str(postcondition["path"]), work_dir)
+        if not p.is_file():
+            return False, "POSTCONDITION_FILE_MISSING"
+        after = p.read_text(encoding="utf-8")
+        before_sha = str(postcondition.get("before_sha256") or "")
+        if before_sha and hashlib.sha256(after.encode("utf-8")).hexdigest() == before_sha:
+            return False, "POSTCONDITION_FILE_UNCHANGED"
+        try:
+            tree = ast.parse(after)
+        except SyntaxError as exc:
+            return False, "POSTCONDITION_FILE_DOES_NOT_PARSE:" + type(exc).__name__
+        function = str(postcondition.get("function") or "")
+        symbol = str(postcondition.get("symbol") or "")
+        if function and symbol:
+            target = None
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == function:
+                    target = node
+            if target is None:
+                return False, "POSTCONDITION_FUNCTION_MISSING"
+            if postcondition.get("must_be_absent", True):
+                for statement in target.body:
+                    for inner in ast.walk(statement):
+                        if (isinstance(inner, ast.Name) and inner.id == symbol
+                                and isinstance(inner.ctx, ast.Store)):
+                            return False, "POSTCONDITION_SYMBOL_STILL_ASSIGNED"
+        return True, "FILE_EDIT_VERIFIED"
+
     if kind == "step_response_contains":
         expected = str(postcondition.get("contains") or "")
         receipts = list((execution_result or {}).get("step_receipts") or [])
