@@ -40,7 +40,7 @@
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A_REPAIR_THAT_PASSES_THE_TESTS_IS_NOT_AN_IDENTIFIED_REPAIR__CANDIDATES_THAT_PASS_THE_SAME_TESTS_DISAGREE__AND_SELF_CONSISTENCY_CANNOT_CHOOSE__MAJORITY_VOTE_WAS_WRONG_3_TIMES_IN_5__THE_CHOICE_NEEDS_A_LABELLED_ANSWER_TO_AN_INPUT_SOMEONE_CHOSE",
- "canonical_base_commit": "ac1e1f44b513f1e8a05aaaa1c38ac079a8fad1b3",
+ "canonical_base_commit": "51f261ff057ae5368a54e6b0425b0cd081095359",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -124,7 +124,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "ac1e1f44b513f1e8a05aaaa1c38ac079a8fad1b3",
+  "canonical_base_commit": "51f261ff057ae5368a54e6b0425b0cd081095359",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "majority vote among candidates that pass the same tests (measured wrong 3 times in 5)",
