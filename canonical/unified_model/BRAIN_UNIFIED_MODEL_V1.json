@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 456,
+  "knowledge_documents": 457,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6862,
+  "research_index_records": 6863,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 449,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ff2420b710d51bbe2659a08c12c7888a3447a51ad148c24a35d49e1135a33ed9"
+  "value": "8a0cb1915244c17a20e7682398f34be7b937b8a9ab4500becbb0371c260ec182"
  },
  "engines": [
   {
@@ -62184,6 +62184,87 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 21846,
+   "headings": [
+    "The goal is the bottleneck — 16 November 2026",
+    "0. Read this first",
+    "1. First principles: what \"learn once, forever, anything\" would require",
+    "2. Why nine rounds named five different \"single bottlenecks\"",
+    "3. What was built (one organ, \"no part added\")",
+    "Measured, preregistered, on the hardest OPEN test that runs here",
+    "What this does NOT claim — read before celebrating",
+    "4. Weights from scratch, \"every bit calculated\", and \"the best part is no part\"",
+    "5. Sentience and \"understand, not pattern match\"",
+    "6. Kill list — measured dead, do not rebuild",
+    "7. The fastest complete plan (ultimate, not incremental)",
+    "8. Honest status, one sentence",
+    "Sources (for ranking, never for authority)"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_GOAL_IS_THE_BOTTLENECK_20261116_V1.md",
+   "sha256": "5bdf653a5e50dbed3477988a0ba32e706879a30ed1b0404b8d8c258a695cdabd",
+   "summary": "**Authority: NONE.** Producer-run sandbox measurement on branch `arena/5ea0bf08-brain`. No capability registered, no family flipped, no weight touched, `truth.achieved` unchanged, $0, zero model calls, zero network at run time. Independent verification is open.",
+   "terms": {
+    "20": 12,
+    "2026": 8,
+    "actions": 6,
+    "against": 7,
+    "all": 9,
+    "answer": 7,
+    "any": 7,
+    "arxiv.org": 6,
+    "computer": 7,
+    "contract": 10,
+    "corpus": 7,
+    "edit": 8,
+    "environment": 9,
+    "every": 11,
+    "exactly": 8,
+    "executed": 8,
+    "goal": 8,
+    "held-out": 9,
+    "https": 14,
+    "identified": 7,
+    "knowledge": 9,
+    "learning": 13,
+    "measured": 13,
+    "model": 8,
+    "more": 7,
+    "most": 7,
+    "never": 8,
+    "no": 29,
+    "not": 50,
+    "one": 14,
+    "only": 13,
+    "over": 7,
+    "own": 8,
+    "permanent": 7,
+    "prior": 10,
+    "published": 11,
+    "real": 14,
+    "repairs": 7,
+    "state": 7,
+    "system": 7,
+    "test": 9,
+    "tests": 9,
+    "use": 7,
+    "verdict": 10,
+    "verified": 9,
+    "verifier": 7,
+    "weights": 13,
+    "zero": 9
+   },
+   "title": "The goal is the bottleneck — 16 November 2026",
+   "title_terms": [
+    "16",
+    "2026",
+    "bottleneck",
+    "goal",
+    "november"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 6040,
    "headings": [
     "THE GRAMMAR CAN NOW FIND WHAT NO WRITER KNEW",
@@ -80503,10 +80584,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1258,
+  "included_source_count": 1259,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "5a058c4fb459c49cdad5c26def654bf9fd6f1b3b8c12c8166570b15f4aed8b96"
+  "source_tree_digest": "bcddb0ae0845ea58a2053880b7f23bf772865e921a063cac45293e2f4e6bb510"
  },
  "research_index": [
   {
@@ -156213,6 +156294,24 @@
     "counterexample": 1,
     "known": 1,
     "self": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CONTRACT_GROUNDED_REPAIR_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CONTRACT_GROUNDED_REPAIR_20261116_V1.json",
+   "schema": "BRAIN_CONTRACT_GROUNDED_REPAIR_MEASURE_V1",
+   "sha256": "5a29eb0651eba8bdbbeedfc8d10bfe100e47569148f660014c885e2bd23af93a",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "contract": 1,
+    "grounded": 1,
+    "repair": 1,
     "v1": 1
    }
   },
