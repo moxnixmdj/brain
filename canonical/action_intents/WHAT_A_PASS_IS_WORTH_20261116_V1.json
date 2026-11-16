@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_COULD_NOT_SAY_WHAT_A_PASSING_TEST_SUITE_IS_WORTH_AND_ASSUMED_THAT_A_CONFIRMED_LAW_WOULD_ADD_ON_TOP_OF_IT__MEASURED_ON_16_OWN_SUITES_THE_SUITE_REJECTED_77_OF_96_BEHAVIOUR_ALTERING_CANDIDATES_AND_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTED_ZERO_OF_THE_19_IT_ACCEPTED_EVEN_THOUGH_THE_LAW_WAS_POINTED_AT_THE_MUTATED_FUNCTION_IN_ALL_19",
-  "canonical_base_commit": "305b6da7ce576993deca08522fce9761f7a1518d",
+  "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -186,8 +186,8 @@
         "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json",
         "canonical/tools/one_demonstration_receipt_v1.py"
       ],
-      "sibling_intent_folded": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1",
-      "why": "one PR carries one action intent (execution_guard/enforce_load_bearing_primary_pr.py); the sibling measured the same object -- what one demonstration buys -- so its record now lives here and in its receipt rather than in a second intent file"
+      "relation": "already on main; this PR neither adds nor removes it, and the two measure one object from two sides (what a single demonstration buys, and what the verdict on it is worth)",
+      "sibling_intent": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1"
     },
     "pairs_discovered": 65,
     "pairs_measured": 16,
@@ -233,7 +233,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "305b6da7ce576993deca08522fce9761f7a1518d",
+    "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "adding law shapes until a number moves",

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9765a717d56ab4e8e2f806ec5af3fb6a114098bcb821050d95d535b651b46b8f"
+  "value": "899677440754521e387a348b5b42b594ebd98f71af7d735cce4975a064d2c3e0"
  },
  "engines": [
   {
@@ -242719,7 +242719,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/WHAT_A_PASS_IS_WORTH_20261116_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "6932b325638b467378a025862a67b25bcc69ed3fe93f76de2c1fc7f85bacce5b",
+   "sha256": "da6357845e5890c887a43a881eee1fa761500ff42c811d70ecd6821556d440e9",
    "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
    "terms": {
     "20261116": 1,
