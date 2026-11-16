@@ -198,7 +198,28 @@ precisely because the number is small — not because the price is zero.
 
 ---
 
-## 9. Reconciliation with `ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md` (merged the same day)
+## 9. Where this sits among the six measurements merged on 2026-11-16
+
+Six sessions answered this prompt on the same day from six different objects. They are not rival
+answers; each measures one term of one equation, and reading them together is more honest than any
+one of them alone.
+
+| note | the object it measures | what it settles |
+|---|---|---|
+| `WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.md` | a learned skill's **premise** over 139,439 real sites | reach is 5.3%–86.3% by operation; **the environment is not the variable** |
+| `WHAT_ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.md` | the **applicability condition** of one skill | one point leaves "applies everywhere", wrong on 297 of 319; **2 chosen observations** reach precision 1.000 |
+| `WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.md` | the **edit basis** on 40 QuixBugs bugs | which fixes are reachable is a property of the basis, not of the budget |
+| `ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md` | **identification cost** in ~13,000-program spaces | one demonstration leaves ~10 bits; **1.31 questions** reach sufficiency |
+| `THE_WALL_WAS_IN_THE_VOCABULARY_20261116_V1.md` | the **computer-use observable** | 16 refusals were missing vocabulary, not missing geometry |
+| **this note** | **choosing among repairs that already pass the tests** | majority vote is wrong 3 of 5; **8/8** correct when a question settles it, and `UNSEPARATED` when none does |
+
+The last row is the only one whose object is *selection among candidates the generator already
+produced*. That is why its numbers look different from the others and are not in competition with
+them: the other five ask "what does one demonstration buy?", this one asks "given several things that
+all pass the tests, which one is the repair?" — and the answer is that the tests do not say, the
+candidates' agreement does not say, and only a labelled question does, at a measured price.
+
+### Reconciliation with `ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md`
 
 A parallel session reached the same equation by a different road, and one of its findings **corrects the
 rule this module originally used**. It is worth being exact about who is right where.

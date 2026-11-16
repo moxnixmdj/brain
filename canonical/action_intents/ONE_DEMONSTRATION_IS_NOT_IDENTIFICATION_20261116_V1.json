@@ -154,17 +154,18 @@
    ],
    "existing_inherited_routes_checked": [
     "canonical/runtime/finite_identifiability.py (version space and discriminator -- REUSED)",
-    "canonical/runtime/demonstration_version_space_v1.py (same idea, GUI pages only, not source text)",
+    "canonical/swe_kernel/one_demonstration_identifies_v1.py (merged today: applicability of ONE skill, not choice among repairs)",
+    "canonical/swe_kernel/one_demonstration_reach_v1.py (merged today: reach of a skill's premise)",
+    "canonical/tools/identification_cost_in_a_real_space_v1.py (merged today: identification cost in ~13,000-program spaces)",
     "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py (the generator -- REUSED)",
-    "canonical/swe_kernel/lesson_admission_gate_v1.py (gates admission, not selection)",
-    "canonical/tools/identification_cost_in_a_real_space_v1.py (merged the same day; large-space regime)"
+    "canonical/runtime/demonstration_version_space_v1.py (same idea, GUI pages only, not source text)"
    ],
    "external_existing_routes_checked": [
     "2026 fault-localisation placebo study: 4.4% for localised infill vs 10.1% for a blind resample -- more search is not better",
     "falsification-gated self-evolution (arXiv 2611.14326): a lesson must survive falsification probes before it persists",
     "SWE-Verifier (arXiv 2610.30284): a cheap verifier is worth most when it is SELECTIVE, not uniform"
    ],
-   "surviving_gap": "A program-domain adapter over the existing version-space kernel that (a) partitions candidates that already pass the same tests, (b) uses maximum elimination rather than minimax because the oracle is known correct, and (c) carries the UNSEPARATED disposition that says agreement is not evidence."
+   "surviving_gap": "Five measurements merged today ask what ONE demonstration buys; none of them asks what to do when SEVERAL candidates already pass the tests. This adds that: a program-domain adapter over the existing version-space kernel that partitions test-passing candidates by behaviour, uses maximum elimination because the oracle is known correct, and carries the UNSEPARATED disposition."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
