@@ -39,8 +39,8 @@
   "terminal_achieved": false
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
- "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_TREE_COULD_NOT_SAY_WHAT_A_PASSING_TEST_SUITE_IS_WORTH_AND_ASSUMED_THAT_A_CONFIRMED_LAW_WOULD_ADD_ON_TOP_OF_IT__MEASURED_ON_16_OWN_SUITES_THE_SUITE_REJECTED_77_OF_96_BEHAVIOUR_ALTERING_CANDIDATES_AND_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_REJECTED_ZERO_OF_THE_19_IT_ACCEPTED_EVEN_THOUGH_THE_LAW_WAS_POINTED_AT_THE_MUTATED_FUNCTION_IN_ALL_19",
- "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_BINDING_CONSTRAINT_IS_OBSERVABLE_CONTENT_AND_CONTRACT_COVERAGE_NOT_EXPERIENCE__A_ZERO_EXPERIENCE_ARM_SOLVES_39_OF_130_REAL_PAGES_AND_REFUSES_63_WITH_A_TYPED_REASON_WHILE_ONLY_12_OF_ITS_28_ACTED_FAILURES_ARE_EXECUTION_ERRORS",
+ "canonical_base_commit": "080a8ad7326a0b10063b461ad6514b68cdb3c50d",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -129,7 +129,7 @@
  ],
  "probe_specific": false,
  "recursive_obs": {
-  "canonical_base_commit": "4de9acde7cd18140465ef8b0dcd7c6b50d0f32d5",
+  "canonical_base_commit": "080a8ad7326a0b10063b461ad6514b68cdb3c50d",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "adding law shapes until a number moves",
@@ -137,56 +137,56 @@
    "counting a child-process failure as a pass",
    "calling an invented relation a law because it has a name"
   ],
-  "expected_parent_level_state_change": "Verifier work is aimed at vocabulary that names what code means (relations taken from real assertions, method-level laws) instead of at more shape-derived relations, which are measured at exactly zero added value on top of a real suite.",
+  "expected_parent_level_state_change": "Capability work is aimed at the causal observable and contract coverage, not at experience: an arm that has never seen a page solves 30% of them, so what is missing is what the agent can see and express, not what it has done.",
   "iteration_limit": 1,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
-    "delete the assumption",
-    "reuse the real suites",
+    "delete the assumption that experience is what is missing",
+    "reuse the existing MiniWoB++ pages as the test",
     "measure instead of argue"
    ],
-   "intrinsic_or_path_specific": "intrinsic: the vocabulary of shape-derived laws is insufficient by construction for real code; path_specific: the reduction and grid defects were measured and fixed here",
-   "surviving_causal_blocker": "The verdict's reach is the reach of the knowledge inside it, and this tree's laws contain no knowledge of what the code means."
+   "intrinsic_or_path_specific": "intrinsic: a target with no name in the DOM cannot be identified by any amount of experience; path_specific: the widget laws (spinner, slider, submenu, positional identity) were measured and fixed here",
+   "surviving_causal_blocker": "The arm's reach is the reach of its observable: what it cannot see, it cannot check, and 16 of its 28 acted failures name something the page never exposes as an element."
   },
   "obs_capability": {
+   "surviving_gap": "An observation that can identify a target the page never names, and a contract language that covers what pages actually express.",
    "capability_work_deleted": [
-    "adding more shape-derived law kinds before measuring whether any kind can add anything",
-    "enlarging the invented argument grid, measured to change nothing because invention is not the binding constraint",
-    "deleting the control arm that disagrees with the newer arm"
+    "recording traces to replay",
+    "enlarging a skill library (both ceilings already measured in-repo)"
    ],
    "existing_inherited_routes_checked": [
-    "canonical/swe_kernel/specification_from_structure_v1.py (structure-only laws, already built and measured)",
-    "canonical/tools/specification_from_structure_measure_v1.py (its harness)",
-    "canonical/swe_kernel/test_suite_admission_v1.py and lesson_admission_gate_v1.py (existing verdict gates)",
-    "canonical/runtime/verified_bound_capability_execution_adapter_v1.py (existing execution carrier)"
+    "canonical/runtime/instruction_contract_v1.py",
+    "canonical/tools/miniwob_one_success_generalisation_measure_v1.py"
    ],
    "external_existing_routes_checked": [
-    "PROBE at ASE '26: 77% of developer instances admitted at least one surviving program variant under the existing suite (reported in shippedbyagents.com, 2026-10)",
-    "TestSuiteBench (arXiv:2610.13065): generated suites are 88-96% valid and 38-56% mutation score -- valid but weak",
-    "UTBoost (ACL 2025): 26 of 500 SWE-bench Verified tasks have tests that accept wrong patches after expert screening",
-    "All Smoke, No Alarm (arXiv:2606.18168): 80.2% of 86,156 agent-authored test-file patches carry weak or no oracle signals"
-   ],
-   "surviving_gap": "No verdict in this tree can say anything about what code MEANS. The measured value of a pass (0.8021) and of a confirmed structural law on top of it (0.0) bound how much permanence any learned thing may claim."
+    "OSWorld 2.0 leaderboard",
+    "One-Shot Imitation Learning (CoRL 2023)",
+    "IMOP (RSS 2024)",
+    "2026 skill-library survey (selection phase transition)"
+   ]
   },
   "obs_goal": {
+   "real_outcome": "An arm with no experience of any page solved 39 of 130 real computer-use pages (0.300) and 58.2% of the 67 it could parse, read no reward, searched nothing, and used no external model. It refused 63 pages with a typed reason instead of guessing, and nothing earned partial credit without succeeding. Of its 28 acted failures only 12 are execution errors; 16 name something the page never shows as an element (a calendar, a colour region, prose, a prefix family) or need the environment's hidden state.",
    "proxy_goals_deleted": [
-    "a higher kill count reached by adding law shapes",
-    "a comparison in which the losing arm is not printed"
+    "a solved count reached by naming pages",
+    "a policy found by search",
+    "a policy chosen by reading the reward"
    ],
-   "real_outcome": "The value of a pass, and the value a confirmed law adds to it, stop being assumptions.",
-   "surviving_necessity": "Every learning loop in this tree ends at the verdict; the verdict has to be measured where the tests are real."
+   "surviving_necessity": "What a computer-use agent lacks has to be measured where the pages are real and the reward is unavailable, or the number says nothing."
   },
   "obs_inherited_system": {
-   "adjacent_capabilities_absorbed": "None. This measures a verdict; it owns no new capability.",
-   "downstream_work_to_delete_or_supersede": "The V1 structure-only receipt is superseded by the V2 re-measurement made with the fixed reduction; the V1 amplifier result (0.00) is confirmed, not superseded.",
-   "fresh_reuse_plan": "Re-run the harness on any corpus with module/test name pairs; the mutation engine and the suites are the only inputs."
+   "adjacent_capabilities_absorbed": "None. The arm owns no new capability claim; it measures what the existing compiler reaches.",
+   "downstream_work_to_delete_or_supersede": "The assumption that experience is the binding constraint is superseded by a zero-experience measurement.",
+   "fresh_reuse_plan": "Re-run the same arm against any page set the bridge can load; nothing about it is specific to these 130 pages."
   },
   "obs_obs": {
    "affected_layers_only_on_revalidation": true,
-   "analysis_steps_deleted_or_cached": "Baseline suite runs are reused for every candidate; law confirmation is prepared once per pair per arm.",
-   "search_stop_decision": "Stop after the three arms agree; do not add law kinds without a measurement that says which kind could add anything."
+   "analysis_steps_deleted_or_cached": "The 130 pages are provisioned once per run; scoring is separate from acting and the agent never sees it.",
+   "search_stop_decision": "Stop after the 130 pages are measured and the failures are classified by cause; do not add vocabulary without a measurement that says which part of the contract is missing."
   },
   "obs_solution": {
+   "solution": "A contract compiler plus an execution arm that resolves every action against the live page: positional identity for targets whose text the page erases, geometry as observed state, hover for submenu headers, track orientation for sliders, arrows for spinners, and refusal instead of half-execution.",
+   "why_this_and_not_something_else": "Experience cannot supply a name the DOM does not contain, so the work belongs in observation and contract coverage.",
    "deletion_first_order_applied": [
     "DELETE",
     "BYPASS",
@@ -197,26 +197,26 @@
     "CONFIGURE",
     "INTEGRATE"
    ],
-   "implementation_still_necessary": true,
-   "losing_routes_reason": "Adding shapes without measuring is the failure mode the receipt already contains; enlarging the invented grid was measured and changes nothing because invention is not the binding constraint.",
    "routes_ranked": [
-    "measure both gates on real suites",
-    "add structural law kinds",
-    "enlarge the invented grid"
-   ]
+    "compile the instruction and act on it, refusing when it cannot be compiled",
+    "add more instruction vocabulary without measuring what the current vocabulary reaches",
+    "record traces and replay them"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Replay and bigger libraries were already measured in-repo at a ceiling; adding vocabulary without measuring is the failure mode this receipt replaces."
   },
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
    "oracle_paths": [
-    "canonical/tests/test_patch_verdict_amplification_v1.py",
-    "canonical/tests/test_patch_verdict_amplification_measure_v1.py",
-    "canonical/verification/PATCH_VERDICT_AMPLIFICATION_20261116_V1.json"
+    "canonical/tests/test_instruction_policy_v1.py",
+    "canonical/tests/test_instruction_contract_v1.py",
+    "canonical/verification/PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_20261116_V1.json"
    ],
-   "synthetic_verification_necessity": "The oracle is the repository's own unedited test files; the controls are unit tests of the instrument; independent reproduction remains open."
+   "synthetic_verification_necessity": "None: the oracle is 130 real benchmark pages in a real browser, scored by the harness the project already had. Independent reproduction remains open."
   },
-  "real_outcome": "A pass is worth what its suite covers: 80.2% of behaviour-altering candidates rejected here, per pair between 1 of 6 and 6 of 6. A law confirmed on the code as it stands added exactly zero on top of that, and the census shows why: the only law kind that confirms on real code is the word 'it ran', which a pass has already said, and the informative relations are refuted by the code itself. The same question asked of the tree's own learned skills: the four exercisable ones really do the edit, and the verdict attached to all eleven admits a program that writes nothing, 4 of 4.",
-  "required_capability": "A verdict that can speak about what a program means rather than about the shape of its definitions, plus the discipline of recording what each verdict was worth.",
+  "real_outcome": "An arm with no experience of any page solved 39 of 130 real computer-use pages (0.300) and 58.2% of the 67 it could parse, read no reward, searched nothing, and used no external model. It refused 63 pages with a typed reason instead of guessing, and nothing earned partial credit without succeeding. Of its 28 acted failures only 12 are execution errors; 16 name something the page never shows as an element (a calendar, a colour region, prose, a prefix family) or need the environment's hidden state.",
+  "required_capability": "An observation rich enough to identify an unnamed target, plus a contract language that covers what the page can express.",
   "route_frontier": {
    "challenger_routes": [
     {
@@ -408,24 +408,24 @@
    "unresolved_plausible_dominators": []
   },
   "routes_considered": [
-   "Add more law kinds of the same structural family",
-   "Enlarge the invented argument grid",
-   "Use the arguments the real suite passed as the grid (the route taken, as a separate arm)",
-   "Keep the control arm out of the report once the recorded arm exists",
-   "Report every arm and decompose the zero per law kind"
+   "add more instruction vocabulary without measuring what the existing vocabulary reaches",
+   "record traces and replay them (ceiling already measured in-repo)",
+   "read the reward to choose actions",
+   "use an external model as a fallback on hard pages",
+   "compile a contract and refuse when it cannot be compiled (the route taken)"
   ],
   "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
   "selected_surviving_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
   "selected_surviving_route_class": "REUSE",
-  "stop_condition": "The two gates are measured on this tree's own suites with every arm reported, the law census per kind is in the receipt, and no capability, family, terminal or weight credit is claimed.",
-  "why_selected_route_is_fastest_sufficient": "The suites, the mutation engine and the structure kernel already exist; the only new work is one harness. Any other route would have had to invent the oracle it was trying to measure."
+  "stop_condition": "130 real pages measured, the refusals classified by reason, the acted failures classified by cause, and the chain answered with numbers.",
+  "why_selected_route_is_fastest_sufficient": "The pages, the harness and the compiler already exist; every gain came from a structural law found by measurement, and refusal keeps the number honest."
  },
  "route_id": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "scope_complete_discharge": false,
  "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
  "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
- "stop_condition": "The two gates are measured on this tree's own suites with every arm reported, the law census per kind is in the receipt, and no capability, family, terminal or weight credit is claimed.",
+ "stop_condition": "130 real pages measured, the refusals classified by reason, the acted failures classified by cause, and the chain answered with numbers.",
  "terminal_credit_delta": 0,
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "truth": {
