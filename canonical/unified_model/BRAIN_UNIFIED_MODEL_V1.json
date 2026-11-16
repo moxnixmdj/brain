@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 464,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6885,
+  "research_index_records": 6886,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2b6b6f33f9f8c7df5f81e08f9e74c272f4726d7da3e519677126ffec1c7bc5ad"
+  "value": "0cca2c9932b7d5c734bb903d2b893cb319ba3003f4c437513dea028da86f6fc2"
  },
  "engines": [
   {
@@ -236935,6 +236935,45 @@
     "numeric": 1,
     "one": 2,
     "transport": 3
+   }
+  },
+  {
+   "action_id": "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "1a67901c06151fb9ec130e2adca8148aa3123695c9e60d60607efe9a2ba7998e",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "a_repair_that_passes_the_tests_is_not_an_identified_repair__candidates_that_pass_the_same_tests_disagree__and_self_consistency_cannot_choose__majority_vote_was_wrong_3_times_in_5__the_choice_needs_a_labelled_answer_to_an_input_someone_chose": 1,
+    "becomes": 1,
+    "being": 1,
+    "between": 1,
+    "binds": 1,
+    "demonstration": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "identification": 2,
+    "learner": 1,
+    "measured": 1,
+    "not": 1,
+    "observation": 1,
+    "one": 2,
+    "one-question": 1,
+    "one_demonstration_is_not_identification_20261116_v1": 1,
+    "per-task": 1,
+    "property": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "space": 1,
+    "split": 1,
+    "stops": 1,
+    "synthesize_an_ast_level_edit_inducer_that_folds_one_demonstration_pair_into_a_hole_generalized_template_with_a_context_precondition_and_measures_it_end_to_end_on_a_public_bug_corpus": 1,
+    "test": 1,
+    "treated": 1,
+    "v1": 1
    }
   },
   {
