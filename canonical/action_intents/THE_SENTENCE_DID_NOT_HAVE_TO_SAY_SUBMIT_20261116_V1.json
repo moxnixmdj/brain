@@ -7,7 +7,7 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "conversation_memory_is_authority": false,
-  "earlier_routes_exhausted_reason": "REUSE was tried first and exhausted against real artifacts: the observation already carried every element (107 on email-inbox) and the existing compilers were read -- the contract compiler refused with MULTI_APP before any clause was built, so no existing path could name a row; the descriptor resolver resolves a DESCRIBED target by attribute but has no notion of containment, so it cannot say 'the control inside the record named X'. ADAPT was rejected because adapting the descriptor's version space to records would have introduced a second resolver with its own vocabulary, which is exactly the one-entry-per-app route this receipt refuses.",
+  "earlier_routes_exhausted_reason": "REUSE was tried and exhausted against real artifacts: the descriptor resolver ALREADY resolves 'date' to the input (measured: class hasDatepicker, one subject, index 4), so no new vocabulary was invented for it -- the missing half was that pressing that field opens a calendar whose parts are separate controls. The reveal ALREADY knew collapsed headers and accordions; a tab was a one-line absence in its container vocabulary. applicability_v1, settlement_v1 VersionSpace and the finite_observational_obstruction_reducer already answer 'learn when a plan applies' and were NOT rebuilt. ADAPT was rejected where a second resolver would have been introduced.",
   "incremental_spend_usd": 0,
   "independent_verification_completed": false,
   "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
@@ -31,14 +31,15 @@
   "producer_cognition_model_dependency_count": 0,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
-   "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
-   "canonical/tests/test_anchored_frame_v1.py",
-   "canonical/runtime/anchored_frame_v1.py"
+   "canonical/verification/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+   "canonical/tests/test_implied_ending_and_picker_v1.py",
+   "canonical/runtime/implied_ending_v1.py",
+   "canonical/runtime/picker_answer_v1.py"
   ],
   "route_class": "COMPOSE",
   "scope_complete_discharge": false,
   "terminal_achieved": false,
-  "what_this_is_not": "Not a claim of sentience, not a benchmark rank, not a capability or weight credit. It is a coordinate language for one observation plus the measurement that it converts pages."
+  "what_this_is_not": "Not a claim of sentience, not a benchmark rank, not a capability or weight credit. It is a measurement of what an instruction arm does with an ending the sentence never names and a date the sentence names as a coordinate, on 130 real pages, in one sandbox."
  },
  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_PAGE_GRADES_ON_A_PRESS_AND_A_COORDINATE_THE_SENTENCE_NEVER_NAMES__SO_THE_ARM_THAT_UNDERSTOOD_EVERY_WORD_STOPPED_ONE_UNSTATED_ACT_SHORT_AND_REPORTED_IT_ONLY_AS_NOT_REFUSED",
