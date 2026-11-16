@@ -1,0 +1,2202 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "claim": "The GUI value task has no non-trivial quotient, so the code-side invariance lever does not transfer.",
+ "incremental_spend_usd": 0,
+ "kind": "receipt",
+ "part_a_identity_use_by_the_rules": "derived_value_v1:397 -- index is the ADDRESS of the field to type into, never a term",
+ "part_a_invariance_census": {
+  "identity_arms": 15,
+  "identity_verdicts": {
+   "INVARIANT": 13,
+   "UNDECIDED__THE_PAGE_WAS_NOT_PERTURBED_SO_THERE_IS_NOTHING_TO_COMPARE": 2
+  },
+  "judge_pages": 5,
+  "judge_quotient_sizes": {
+   "enter-time": 0,
+   "scroll-text": 4,
+   "simple-algebra": 0,
+   "simple-arithmetic": 0,
+   "text-transform": 0
+  },
+  "pages_with_a_nontrivial_quotient": [
+   "scroll-text"
+  ],
+  "quotient_is_real": {
+   "enter-time": "SPELLING_NORMALISATION_ONLY",
+   "scroll-text": "SEMANTIC__trailing dot",
+   "simple-algebra": "SPELLING_NORMALISATION_ONLY",
+   "simple-arithmetic": "SPELLING_NORMALISATION_ONLY",
+   "text-transform": "SPELLING_NORMALISATION_ONLY"
+  }
+ },
+ "part_a_judges": [
+  {
+   "accepted_variants": [
+    "as-is"
+   ],
+   "answer": "11",
+   "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+   "quotient_size": 0,
+   "task": "simple-arithmetic"
+  },
+  {
+   "accepted_variants": [
+    "as-is"
+   ],
+   "answer": "25",
+   "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+   "quotient_size": 0,
+   "task": "simple-algebra"
+  },
+  {
+   "accepted_variants": [
+    "as-is"
+   ],
+   "answer": "13:13",
+   "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+   "quotient_size": 0,
+   "task": "enter-time"
+  },
+  {
+   "accepted_variants": [
+    "as-is",
+    "trailing dot",
+    "leading space",
+    "trailing space",
+    "padded"
+   ],
+   "answer": "volutpat",
+   "quotient_kind": "SEMANTIC__trailing dot",
+   "quotient_size": 4,
+   "task": "scroll-text"
+  },
+  {
+   "accepted_variants": [
+    "as-is"
+   ],
+   "answer": "ZC5F",
+   "quotient_kind": "SPELLING_NORMALISATION_ONLY",
+   "quotient_size": 0,
+   "task": "text-transform"
+  }
+ ],
+ "part_b_phrase_blind_arm": {
+  "blind_actions": 2611,
+  "blind_only": [],
+  "blind_solved": 5,
+  "gated_actions": 566,
+  "gated_only": [
+   "enter-text",
+   "enter-text-2",
+   "enter-text-dynamic",
+   "enter-time"
+  ],
+  "gated_solved": 9,
+  "pages": 123,
+  "per_page": [
+   {
+    "blind": {
+     "actions": 117,
+     "basis_size": 13,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 13
+    },
+    "gated": {
+     "actions": 18,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "book-flight"
+   },
+   {
+    "blind": {
+     "actions": 117,
+     "basis_size": 13,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 13
+    },
+    "gated": {
+     "actions": 18,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "book-flight-nodelay"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "button-delay"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 37,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "buy-ticket"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "chase-circle"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "choose-date"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "choose-date-easy"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "choose-date-medium"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "choose-date-nodelay"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 22,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "choose-list"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "circle-center"
+   },
+   {
+    "blind": {
+     "actions": 24,
+     "basis_size": 12,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 12
+    },
+    "gated": {
+     "actions": 2,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "click-button"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-button-sequence"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 19,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-checkboxes"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 32,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-checkboxes-large"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 15,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-checkboxes-soft"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-checkboxes-transfer"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 8,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-collapsible"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 13,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-collapsible-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 13,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-collapsible-2-nodelay"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 8,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-collapsible-nodelay"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-color"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-dialog"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-dialog-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 15,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 5,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-link"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 9,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-menu"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-menu-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 19,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-option"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 37,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-scroll-list"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-shades"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 24,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-shape"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 15,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-tab"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 28,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 6,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-tab-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 20,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 6,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-tab-2-easy"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 18,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 5,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-tab-2-hard"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 24,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 6,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-tab-2-medium"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 5,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-test"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-test-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "click-test-transfer"
+   },
+   {
+    "blind": {
+     "actions": 22,
+     "basis_size": 11,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 11
+    },
+    "gated": {
+     "actions": 4,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "click-widget"
+   },
+   {
+    "blind": {
+     "actions": 12,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "copy-paste"
+   },
+   {
+    "blind": {
+     "actions": 18,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "copy-paste-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 15,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "count-shape"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "count-sides"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 57,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "daily-calendar"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 9,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 2,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-box"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-circle"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 15,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 5,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-items"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 27,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 9,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-items-grid"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-shapes"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-shapes-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-single-shape"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 8,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "drag-sort-numbers"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "draw-circle"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "draw-line"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 120,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 10,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-delete"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 10,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-forward"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 10,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-forward-nl"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 120,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-forward-nl-turk"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 10,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-important"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 120,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-nl-turk"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 10,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-noscroll"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 11,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-reply"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 42,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 11,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "email-inbox-star-reply"
+   },
+   {
+    "blind": {
+     "actions": 9,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "enter-date"
+   },
+   {
+    "blind": {
+     "actions": 60,
+     "basis_size": 10,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 10
+    },
+    "gated": {
+     "actions": 6,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "enter-password"
+   },
+   {
+    "blind": {
+     "actions": 9,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 3,
+     "answer": "Donovan",
+     "basis_size": 1,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "enter-text"
+   },
+   {
+    "blind": {
+     "actions": 9,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 6,
+     "answer": "DONOVAN",
+     "basis_size": 2,
+     "solved": true,
+     "tried": 2
+    },
+    "task": "enter-text-2"
+   },
+   {
+    "blind": {
+     "actions": 9,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 3,
+     "answer": "ZC5F",
+     "basis_size": 1,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "enter-text-dynamic"
+   },
+   {
+    "blind": {
+     "actions": 9,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 3,
+     "answer": "13:13",
+     "basis_size": 1,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "enter-time"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 6,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "find-greatest"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "find-midpoint"
+   },
+   {
+    "blind": {
+     "actions": 20,
+     "basis_size": 5,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 5
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "find-word"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "focus-text"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "focus-text-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 5,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "form-sequence"
+   },
+   {
+    "blind": {
+     "actions": 24,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 8,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "form-sequence-2"
+   },
+   {
+    "blind": {
+     "actions": 372,
+     "basis_size": 31,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 31
+    },
+    "gated": {
+     "actions": 12,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "form-sequence-3"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "generate-number"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 11,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 7,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "grid-coordinate"
+   },
+   {
+    "blind": {
+     "actions": 32,
+     "basis_size": 8,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 8
+    },
+    "gated": {
+     "actions": 4,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "guess-number"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 8,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "highlight-text"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 16,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 2,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "highlight-text-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "hot-cold"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 15,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "identify-shape"
+   },
+   {
+    "blind": {
+     "actions": 54,
+     "basis_size": 9,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 9
+    },
+    "gated": {
+     "actions": 12,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "login-user"
+   },
+   {
+    "blind": {
+     "actions": 48,
+     "basis_size": 8,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 8
+    },
+    "gated": {
+     "actions": 12,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "login-user-popup"
+   },
+   {
+    "blind": {
+     "actions": 152,
+     "basis_size": 19,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 19
+    },
+    "gated": {
+     "actions": 24,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "task": "multi-layouts"
+   },
+   {
+    "blind": {
+     "actions": 153,
+     "basis_size": 17,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 17
+    },
+    "gated": {
+     "actions": 45,
+     "basis_size": 5,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 5
+    },
+    "task": "multi-orderings"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 9,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "navigate-tree"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "number-checkboxes"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 14,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "odd-or-even"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 76,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "order-food"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 32,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "phone-book"
+   },
+   {
+    "blind": {
+     "actions": 377,
+     "answer": "Russian",
+     "basis_size": 34,
+     "solved": true,
+     "tried": 29
+    },
+    "gated": {
+     "actions": 130,
+     "answer": "Russian",
+     "basis_size": 10,
+     "solved": true,
+     "tried": 10
+    },
+    "task": "read-table"
+   },
+   {
+    "blind": {
+     "actions": 400,
+     "basis_size": 34,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 25
+    },
+    "gated": {
+     "actions": 160,
+     "basis_size": 10,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 10
+    },
+    "task": "read-table-2"
+   },
+   {
+    "blind": {
+     "actions": 18,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "resize-textarea"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "right-angle"
+   },
+   {
+    "blind": {
+     "actions": 4,
+     "answer": "volutpat",
+     "basis_size": 5,
+     "solved": true,
+     "tried": 1
+    },
+    "gated": {
+     "actions": 4,
+     "answer": "volutpat",
+     "basis_size": 4,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "scroll-text"
+   },
+   {
+    "blind": {
+     "actions": 15,
+     "basis_size": 5,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 5
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "scroll-text-2"
+   },
+   {
+    "blind": {
+     "actions": 15,
+     "basis_size": 3,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 3
+    },
+    "gated": {
+     "actions": 5,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "search-engine"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 13,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 2,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "sign-agreement"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "simon-says"
+   },
+   {
+    "blind": {
+     "actions": 20,
+     "answer": "25",
+     "basis_size": 11,
+     "solved": true,
+     "tried": 4
+    },
+    "gated": {
+     "actions": 5,
+     "answer": "25",
+     "basis_size": 3,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "simple-algebra"
+   },
+   {
+    "blind": {
+     "actions": 16,
+     "answer": "11",
+     "basis_size": 7,
+     "solved": true,
+     "tried": 4
+    },
+    "gated": {
+     "actions": 4,
+     "answer": "11",
+     "basis_size": 2,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "simple-arithmetic"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 119,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "social-media"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 69,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "social-media-all"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 69,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 12,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "social-media-some"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 17,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 2,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "stock-market"
+   },
+   {
+    "blind": {
+     "actions": 105,
+     "basis_size": 15,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 15
+    },
+    "gated": {
+     "actions": 28,
+     "basis_size": 4,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 4
+    },
+    "task": "terminal"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 8,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "text-editor"
+   },
+   {
+    "blind": {
+     "actions": 77,
+     "answer": "ZC5F",
+     "basis_size": 12,
+     "solved": true,
+     "tried": 11
+    },
+    "gated": {
+     "actions": 7,
+     "answer": "ZC5F",
+     "basis_size": 6,
+     "solved": true,
+     "tried": 1
+    },
+    "task": "text-transform"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "tic-tac-toe"
+   },
+   {
+    "blind": {
+     "actions": 34,
+     "basis_size": 17,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 17
+    },
+    "gated": {
+     "actions": 2,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "unicode-test"
+   },
+   {
+    "blind": {
+     "actions": 28,
+     "basis_size": 7,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 7
+    },
+    "gated": {
+     "actions": 8,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "use-autocomplete"
+   },
+   {
+    "blind": {
+     "actions": 28,
+     "basis_size": 7,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 7
+    },
+    "gated": {
+     "actions": 8,
+     "basis_size": 2,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 2
+    },
+    "task": "use-autocomplete-nodelay"
+   },
+   {
+    "blind": {
+     "actions": 28,
+     "basis_size": 7,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 7
+    },
+    "gated": {
+     "actions": 4,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "use-colorwheel"
+   },
+   {
+    "blind": {
+     "actions": 28,
+     "basis_size": 7,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 7
+    },
+    "gated": {
+     "actions": 4,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "use-colorwheel-2"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 4,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 1,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "use-slider"
+   },
+   {
+    "blind": {
+     "actions": 0,
+     "basis_size": 6,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 3,
+     "reason": "NO_TYPEABLE_FIELD",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "use-slider-2"
+   },
+   {
+    "blind": {
+     "actions": 80,
+     "basis_size": 8,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 8
+    },
+    "gated": {
+     "actions": 0,
+     "basis_size": 0,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 0
+    },
+    "task": "use-spinner"
+   },
+   {
+    "blind": {
+     "actions": 68,
+     "basis_size": 4,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 4
+    },
+    "gated": {
+     "actions": 17,
+     "basis_size": 1,
+     "reason": "EXHAUSTED_BASIS_OR_BUDGET",
+     "solved": false,
+     "tried": 1
+    },
+    "task": "visual-addition"
+   }
+  ]
+ },
+ "part_c_instrument_limits": [
+  "ascending-numbers",
+  "hover-shape (jsdom reply timeout)",
+  "bisect-angle",
+  "click-pie",
+  "click-pie-nodelay",
+  "drag-cube",
+  "moving-items (jsdom SVG/getBBox absence)"
+ ],
+ "producer_cognition_model_dependency_count": 0,
+ "schema": "GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1",
+ "seed": 1060
+}

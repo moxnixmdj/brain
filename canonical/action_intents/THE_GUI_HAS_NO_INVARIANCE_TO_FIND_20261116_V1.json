@@ -1,0 +1,455 @@
+{
+ "action_id": "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1",
+ "action_intent_id": "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1",
+ "action_kind": "MEASUREMENT",
+ "active_program": "FALSIFY_BEFORE_BUILDING",
+ "agent_orientation": "AUTONOMOUS",
+ "benchmark_or_family_rank_authority": "NONE",
+ "blocker_lease_key": "GUI_INVARIANCE_IS_ABSENT_NOT_MISSING",
+ "canonical_base_commit": "989cac08384b3550d5013a7ba9235df12ad350af",
+ "canonical_generation": "2026-11-16-gui-invariance-absent-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GUI value tasks: identify the bottleneck by falsification before spending on an invariance lever that cannot exist there.",
+ "causal_blocker": "The GUI side was assumed to be missing the invariance that gives the code side its reach. If that were true the fix would be a quotient machinery. It is false: the identity arms are vacuous by construction (the value algebra never reads index/name/id as a term -- index appears once, at derived_value_v1:397, only as the ADDRESS of the field to type into) and the judge has no quotient (4 of 5 pages accept exactly one spelling; text-transform scores ZC5F 1 and F5CZ -1; enter-time rejects the utterance's own 1:13 PM). The real blocker is operand vocabulary, of which enter-time's 12h->24h rewrite is the first measured member.",
+ "date": "2026-11-16",
+ "expected_parent_change": "Spend on the operand vocabulary -- specifically on operands that are rewrites in the world rather than content on the page -- because that is the only one of the two candidate diagnoses that survived measurement.",
+ "expected_parent_frontier_change": "Capability growth is aimed at the observable rather than at the experience: the blocking certificate names 18 sites that share every fact and differ, and a predictor is only allowed to veto, never to license, so the proof stays the safety boundary while learning buys speed.",
+ "explicit_user_authorization": false,
+ "falsification_condition": "A GUI value page whose judge accepts a semantically different answer -- i.e. a pair of distinct strings, differing in more than the page's own tokenization, that both score 1 -- would refute \"no non-trivial quotient\" and reopen the invariance route.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": "Spend on the operand vocabulary -- specifically on operands that are rewrites in the world rather than content on the page -- because that is the only one of the two candidate diagnoses that survived measurement.",
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_primary": false,
+ "measured_effect": {
+  "enter_time_rejects_the_utterance_itself": {
+   "0113PM": -1,
+   "01:13 PM": -1,
+   "13:13": 1,
+   "13:13:00": -1,
+   "1:13 PM": -1,
+   "1:13PM": -1
+  },
+  "identity_arms_run": 15,
+  "identity_invariant": 13,
+  "identity_undecided_page_not_perturbed": 2,
+  "identity_use_by_the_rules": "derived_value_v1:397 -- index is the ADDRESS of the field to type into, never a term",
+  "instrument_excluded_pages": [
+   "ascending-numbers",
+   "hover-shape",
+   "bisect-angle",
+   "click-pie",
+   "click-pie-nodelay",
+   "drag-cube",
+   "moving-items"
+  ],
+  "judge_pages": 5,
+  "judge_pages_with_quotient_zero": 4,
+  "only_semantic_quotient": "scroll-text trailing dot -- caused by the page's own .replace(/[^a-zA-Z0-9]/g, \"\")",
+  "phrase_blind_arm_design_set": {
+   "blind_actions": 126,
+   "blind_solved": 4,
+   "gated_actions": 23,
+   "gated_solved": 5
+  },
+  "phrase_blind_arm_full_surface": {
+   "blind_actions": 2611,
+   "blind_only": [],
+   "blind_solved": 5,
+   "gated_actions": 566,
+   "gated_only": [
+    "enter-text",
+    "enter-text-2",
+    "enter-text-dynamic",
+    "enter-time"
+   ],
+   "gated_solved": 9,
+   "pages": 123
+  },
+  "text_transform_reorder_is_a_truth_not_a_defect": {
+   "F5CZ": -1,
+   "ZC5F": 1
+  }
+ },
+ "next_step": "Enumerate operands that are rewrites in the world and cannot be read off any page (12h->24h time is the first), since that set is the vocabulary gap the falsification isolated.",
+ "parent_capability": "Phrase-gated GUI value algebra with a measured 0-of-121 transfer.",
+ "paths": [
+  "canonical/tools/gui_invariance_census_v1.py",
+  "canonical/tools/gui_phrase_blind_basis_arm_v1.py",
+  "canonical/tests/test_gui_invariance_census_v1.py",
+  "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json",
+  "THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.md",
+  "canonical/action_intents/THE_GUI_HAS_NO_INVARIANCE_TO_FIND_20261116_V1.json"
+ ],
+ "prior_work_reused": [
+  "THE_INVARIANCE_IS_THE_REACH_20261116_V1.md -- the code-side 0->4 survivors / 0->5 repairs result this tests the transfer of",
+  "canonical/runtime/derived_value_v1.py -- derivations(), the phrase-gated algebra under test (unchanged)",
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py -- Bridge(jsdom), the instrument",
+  "canonical/verification/DECLARED_TRIGGER_AND_OPERAND_TAXONOMY_20261116_V1.json -- the 16-class operand taxonomy this lands the bottleneck back into"
+ ],
+ "probe_specific": true,
+ "recursive_obs": {
+  "canonical_base_commit": "989cac08384b3550d5013a7ba9235df12ad350af",
+  "canonical_generation_or_commit": "2026-11-16-gui-invariance-absent-v1",
+  "deleted_or_bypassed_paths": [
+   "building an invariance / quotient machinery for GUI value tasks",
+   "treating a rule difference as a defect without perturbing the page",
+   "counting a case or whitespace spelling as a quotient",
+   "counting \"11\".upper() as a distinct variant",
+   "typing into can_type[0] when the page has a passage textarea",
+   "reporting jsdom failures as findings"
+  ],
+  "expected_parent_frontier_change": "The GUI bottleneck stops being a matter of opinion between \"missing invariance\" and \"missing vocabulary\": the invariance route is measured shut and the vocabulary route is the only one standing, with enter-time as its first named member.",
+  "expected_parent_level_state_change": "Effort moves from building a lever the environment cannot support to enumerating world-rewrites no page can show.",
+  "independent_verification_required": true,
+  "iteration_limit": 1,
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the assumed GUI invariance",
+    "bypass the quotient question by asking the judge directly",
+    "substitute the operand vocabulary as the only surviving bottleneck"
+   ],
+   "intrinsic_or_path_specific": "path_specific: the vocabulary ceiling is a design choice and was removed here; the multi-position and insertion rungs, and non-terminating defects, remain open.",
+   "surviving_causal_blocker": "The hypothesis space of edits: identity does not transport across programs, so a lesson must be abstracted past the edit it was learned from."
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second lesson store or admission gate",
+    "another hand-written mutation kind",
+    "a larger search budget on an inexpressible edit"
+   ],
+   "existing_inherited_routes_checked": [
+    "verified_skill_crystallizer_v1.anti_unify_code_rule (token-level; no site context)",
+    "python_test_guided_patch_search_v1 mutation list (no ast.AugAssign rule)",
+    "python_iterative_software_repair_loop_v1 (candidate-only, strict progress)",
+    "lesson_localization_v1 (refuses shape changes by design)"
+   ],
+   "external_existing_routes_checked": [
+    "QuixBugs itself, as the corpus and the oracle",
+    "2026 verifier-gated self-improvement literature (the verifier is the gate once a candidate exists)"
+   ],
+   "surviving_gap": "An edit basis whose content is folded from demonstrations and whose applicability is a context precondition, so the reachable space is not a list an author imagined."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher repair count reached by loosening what counts as repaired",
+    "counting a self-taught repair as transfer",
+    "treating a longer candidate list as more capability",
+    "quoting a corpus score as a frontier position"
+   ],
+   "real_outcome": "Whether a demonstrated fix can reach an undemonstrated bug becomes a measured property of the edit basis instead of an open question answered by assertion.",
+   "surviving_necessity": "Coding capability is gated on a correct candidate existing at all; no oracle, budget or weight can select a hypothesis the basis cannot build."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
+   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Reused the existing repair loop and patch-search primitive instead of writing a second repairer; the corpus's own test files are used unmodified.",
+   "search_stop_decision": "Stop after the ladder and the 20/20 comparison; do not add template rungs without the measurement that says which rung is missing."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "efficiency_mechanism": "Templates prune the space before execution: 224 candidates instead of 5,021 for the same held-out half.",
+   "generality_mechanism": "Anti-unification with shared holes plus a node-type context precondition, so one demonstration yields a rule that fires wherever its precondition literally holds.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "The list edit is a hard zero on real fixes; the budget cannot reach an inexpressible edit; the token rule has no position or context; a model is prohibited producer cognition.",
+   "routes_ranked": [
+    "induce node-level templates from demonstration pairs",
+    "add an AugAssign rule to the hand-written list",
+    "raise the candidate budget",
+    "reuse the token anti-unifier",
+    "ask a model to write the patch"
+   ],
+   "white_box_harvest_note": "The canonical ladder is recorded in full; the WHITE_BOX_HARVEST step was considered and found empty. No donor model, weight or external artifact was harvested: the mechanism was induced from the corpus's own demonstration pairs and the tree's own repair primitive."
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_induced_edit_basis_v1.py",
+    "canonical/tests/test_quixbugs_measurement_integrity_v1.py",
+    "canonical/verification/WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "The corpus's own published tests are the oracle; unit tests pin only the mechanism and the measurement's integrity. Independent reproduction remains open."
+  },
+  "real_outcome": "One demonstration licenses no requirement and acts on 297 of 319 held-out sites wrongly; two chosen observations reach precision 1.000 with 0 dangerous errors at recall 0.455; random observations identify nothing in 12 of 12 sequences; 18 sites prove the vocabulary cannot separate the rest.",
+  "required_capability": "Choosing the observation that decides, and naming the observable the vocabulary lacks, with the per-site proof retained as the only licence to act.",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "raises confidence where nothing is uncertain",
+      "CORRECTNESS": "adding points in one region cannot split hypotheses",
+      "INCREMENTAL_COST": "low per run, unbounded in count",
+      "RELIABILITY": "no change to the dangerous-error rate",
+      "VERIFIABILITY": "measured",
+      "WALL_CLOCK": "costs an execution per demonstration"
+     },
+     "evidence": [
+      "one demonstration: UNDETERMINED with 0 survivors",
+      "random observations identified a condition in 0 of 12 sequences",
+      "reach of the stored action is 5.3% on real sites"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "MORE_DEMONSTRATIONS_OF_THE_SAME_OPERATION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none over the proof",
+      "CORRECTNESS": "licensing on a partial condition admits ineligible sites",
+      "INCREMENTAL_COST": "zero",
+      "RELIABILITY": "the one direction of error that damages a file",
+      "VERIFIABILITY": "would need the proof anyway, which is the selected route",
+      "WALL_CLOCK": "fast"
+     },
+     "evidence": [
+      "precision 1.000 but recall 0.455 on held out",
+      "18 blocking sites share every observable and differ"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "LET_THE_LEARNED_CONDITION_LICENSE_THE_ACTION"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "turns experience into a decidable condition",
+      "CORRECTNESS": "the proof remains the licence; the predictor only vetoes",
+      "INCREMENTAL_COST": "zero model spend, zero network",
+      "RELIABILITY": "0 dangerous errors on held out",
+      "VERIFIABILITY": "reproducible from the receipt with one command",
+      "WALL_CLOCK": "2 executed observations, 55 ms per proof"
+     },
+     "evidence": [
+      "three arms measured on 479 real sites with an executed oracle",
+      "two chosen observations reach precision 1.000 and 0 dangerous errors",
+      "the certificate names 18 sites and the missing observable"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "SELECTED",
+     "route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS"
+    }
+   ],
+   "checked_at_utc": "2026-11-16T23:50:54Z",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "treat one demonstration as sufficient and let the stored action fire wherever its shape matches",
+   "max_age_hours": 24,
+   "negative_search_summary": "Three routes were searched and refused on this tree's own evidence: more demonstrations of the same operation (reach measured at 5.3% and one success licenses 0 of 200 requirements), similarity-based widening (0 kills over 19 survivors), and letting a model choose (forbidden: no model may be used).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "program repair from a single demonstration transfer to unseen bugs 2026"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "QuixBugs bug corpus python programs tests published"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "anti-unification edit template hole generalization program repair"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 automatic program repair vocabulary expressibility limit"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "FALSIFY_THE_GUI_INVARIANCE_HYPOTHESIS_WITH_TWO_ARMS_IDENTITY_PERTURBATION_AND_JUDGE_PERTURBATION_BEFORE_BUILDING_ANY_INVARIANCE_MACHINERY",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-16T20:20:28Z",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime with pytest 9.2.0",
+      "evidence": [
+       "25 mechanism and integrity tests ran; every corpus verdict is a pytest run"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "jkoppel/QuixBugs checkout (python_programs, python_testcases, json_testcases)",
+      "evidence": [
+       "40 tasks enumerated from the corpus's own test files; each program and test hashed in the receipt"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local filesystem tempdir for per-task isolation",
+      "evidence": [
+       "correct_python_programs asserted absent in every task directory before it runs"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "STORAGE",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+     "canonical/swe_kernel/lesson_localization_v1.py",
+     "canonical/swe_kernel/lesson_admission_gate_v1.py",
+     "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+     "canonical/runtime/bound_capabilities/python_iterative_software_repair_loop_v1.py"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "https://www.sota2.com/research/dataset/miniwob (2026 aggregate reporting, used only to bound suite difficulty)"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
+     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://arxiv.org/html/2605.11030v1 (executable benchmarking suite for tool-using agents, May 2026)",
+     "https://arxiv.org/pdf/2507.04103 (how to train your LLM web agent: task horizons of 2-5 steps)"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   "Reuse the crystallizer's token anti-unification to induce the rule (checked: it cannot express position-level containment and has no site context)",
+   "Extend the hand-listed mutation list with an AugAssign rule and re-run (checked against the ladder: it lifts one bug and leaves 26 of 40 untouched)",
+   "Raise the candidate budget on the existing loop (checked: 280 candidates already return zero on bitcount because the edit is not expressible)",
+   "Induce node-level templates from demonstration pairs and let the corpus's oracle decide",
+   "Ask a model to write the patch (refused: producer cognition, zero credit)"
+  ],
+  "selected_route": "SYNTHESIZE_AN_AST_LEVEL_EDIT_INDUCER_THAT_FOLDS_ONE_DEMONSTRATION_PAIR_INTO_A_HOLE_GENERALIZED_TEMPLATE_WITH_A_CONTEXT_PRECONDITION",
+  "selected_surviving_route": "MEASURE_IDENTIFICATION_ON_REAL_CODE_WITH_THREE_ARMS_ONE_DEMONSTRATION_VERSUS_INFORMATION_GAIN_CHOSEN_OBSERVATIONS_VERSUS_RANDOM_AND_NAME_THE_OBSERVABLE_THE_VOCABULARY_LACKS",
+  "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "stop_condition": "One merged change on this branch whose three arms and certificate are reproducible from the receipt by one command.",
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real artifact and refused: the crystallizer's token anti-unification cannot express position-level containment and has no site context, and the existing repair primitive has no ast.AugAssign rule at all. Inducing a template from one demonstration pair and letting the corpus's own tests decide costs two runs; adding another hand-written mutation kind would lift one bug of forty and leave the question unmeasured.",
+  "why_this_is_not_another_organ": "It replaces a list with a fold over experience and reuses the existing repair primitive, the corpus oracle and the hashing/verification discipline; the only new machinery is induction and the rung classifier, and both are measured."
+ },
+ "route_id": "FALSIFY_THE_GUI_INVARIANCE_HYPOTHESIS_WITH_TWO_ARMS_IDENTITY_PERTURBATION_AND_JUDGE_PERTURBATION_BEFORE_BUILDING_ANY_INVARIANCE_MACHINERY",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "scope_complete_discharge": true,
+ "selected_route": "FALSIFY_THE_GUI_INVARIANCE_HYPOTHESIS_WITH_TWO_ARMS_IDENTITY_PERTURBATION_AND_JUDGE_PERTURBATION_BEFORE_BUILDING_ANY_INVARIANCE_MACHINERY",
+ "status": "COMPLETE",
+ "stop_condition": "Both arms measured on the declared 5-page design set and the 123-page jsdom surface; verdicts recorded; no invariance machinery built.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "Identify the GUI bottleneck by falsification rather than by assumption.",
+ "truth": "The GUI value task is a total equality checked by string comparison, so it admits no non-trivial invariance. The code-side lever does not transfer, and the limitation is vocabulary, not invariance.",
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "current_load_bearing_atomic_count": 36,
+   "deleted_nonnecessary_atomic_count": 2,
+   "historical_atomic_registry_count": 38,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_atomic": 38,
+   "total_families": 19,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "This makes the reachable edit space a measured property for coding repair; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does one demonstrated fix reach an undemonstrated bug, and what about the basis decides it?",
+   "falsifier_id": "EXPRESSIBILITY_LADDER_PLUS_THE_20_HELD_OUT_COMPARISON",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "The corpus is the counterexample: 40 published fixes with pairwise distinct edits, so the measurement is itself the falsifier and no new external receipt is added by this PR.",
+   "proposal_id": "WHAT_ONE_DEMONSTRATION_BUYS_20261116_V1"
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tools/gui_invariance_census_v1.py",
+   "python3 -m pytest canonical/tests/test_gui_invariance_census_v1.py",
+   "python3 canonical/runtime/compile_brain_unified_model_v1.py",
+   "python3 execution_guard/repo_integrity_guard_v1.py"
+  ],
+  "receipt": "canonical/verification/GUI_INVARIANCE_IS_VACUOUS_OR_ABSENT_20261116_V1.json"
+ },
+ "weakens_existing_guard": false
+}
