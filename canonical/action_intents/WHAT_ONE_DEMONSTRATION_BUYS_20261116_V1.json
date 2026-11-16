@@ -42,7 +42,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_REPOSITORY_TREATED_ITS_HAND_WRITTEN_EDIT_LIST_AS_THE_SPACE_OF_POSSIBLE_FIXES_WHEN_IT_WAS_ONLY_THE_SPACE_ITS_AUTHOR_IMAGINED_SO_A_REAL_FIX_OUTSIDE_THE_LIST_WAS_UNREACHABLE_AT_ANY_BUDGET_AND_THE_QUESTION_OF_WHETHER_ONE_DEMONSTRATION_TEACHES_THE_NEXT_BUG_HAD_NEVER_BEEN_MEASURED_ON_REAL_CODE",
-  "canonical_base_commit": "fcd3ec29dfcd47d82bfa96823e0ee640bcb78b92",
+  "canonical_base_commit": "305b6da7ce576993deca08522fce9761f7a1518d",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -150,7 +150,7 @@
   ],
   "probe_specific": false,
   "recursive_obs": {
-    "canonical_base_commit": "fcd3ec29dfcd47d82bfa96823e0ee640bcb78b92",
+    "canonical_base_commit": "305b6da7ce576993deca08522fce9761f7a1518d",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "enumerating more hand-written mutation kinds",
