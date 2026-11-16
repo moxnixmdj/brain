@@ -277,7 +277,7 @@
             "measured in canonical/verification/LEARNED_SKILL_VERDICT_20261116_V1.json"
           ],
           "qualification_evidence_classes": [
-            "PRODUCER_MEASURED"
+            "DIRECT_PROBE"
           ],
           "resolution": "NON_DOMINATING",
           "route": "ADD_MORE_LEARNED_ACTIONS_TO_THE_BUNDLE"
@@ -300,7 +300,7 @@
             "measured in canonical/verification/SPECIFICATION_FROM_STRUCTURE_20261116_V2_REDUCTION_FIXED.json"
           ],
           "qualification_evidence_classes": [
-            "PRODUCER_MEASURED"
+            "DIRECT_PROBE"
           ],
           "resolution": "DISQUALIFIED",
           "route": "WIDEN_EACH_ACTION_BY_SIMILARITY_TO_NEIGHBOURING_SITES"
@@ -323,13 +323,13 @@
             "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json"
           ],
           "qualification_evidence_classes": [
-            "PRODUCER_MEASURED"
+            "DIRECT_PROBE"
           ],
           "resolution": "SELECTED",
           "route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION"
         }
       ],
-      "checked_at_utc": "2026-11-16T19:11:45Z",
+      "checked_at_utc": "2026-11-16T19:12:01Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -369,7 +369,7 @@
       "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-16T19:11:45Z",
+        "checked_at_utc": "2026-11-16T19:12:01Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 runtime with pytest 9.2.0",
@@ -419,7 +419,7 @@
         ],
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
-        "max_age_hours": 24,
+        "max_age_hours": 2,
         "selected_route": "MEASURE_THE_REACH_OF_ONE_DEMONSTRATION_BY_EXECUTING_THE_STORED_SKILL_AT_A_STRIDE_SAMPLE_OF_A_REAL_REPOSITORY_AND_CLASSIFYING_EVERY_DECLINE_AS_A_CLASS_OF_SITE_THAT_NEEDS_ITS_OWN_OPERATION",
         "status": "READY"
       },
