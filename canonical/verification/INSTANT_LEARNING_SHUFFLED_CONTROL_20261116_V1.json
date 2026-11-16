@@ -1,0 +1,1390 @@
+{
+ "schema": "BRAIN_INSTANT_LEARNING_IN_A_NEW_ENVIRONMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "external_capability_provider_count": 0,
+ "network_calls_at_run_time": 0,
+ "shared_effect_vocabulary": [
+  "PERSIST",
+  "REMOVE",
+  "REPLACE"
+ ],
+ "atom_identifiers_are_opaque": true,
+ "effects_learned_only_by_execution": true,
+ "verdict_source": "each machine's own reader, before and after the command",
+ "summary": {
+  "machines": 4,
+  "atoms_offered": 18,
+  "adaptation_trials_active": 35,
+  "adaptation_trials_probing_every_atom": 36,
+  "requests": 16,
+  "requests_solved": 13,
+  "ours_trials": 50,
+  "learn_each_trials": 46,
+  "learn_each_requests_solved": 12,
+  "ours_requests_solved": 13,
+  "per_machine": {
+   "FILESYSTEM": {
+    "adaptation": 9,
+    "ours": 13,
+    "learn_each": 8,
+    "solved": 4,
+    "solved_by_demonstration": 4,
+    "context_sensitive_atoms": [
+     "FIL_X1",
+     "FIL_X3",
+     "FIL_X5"
+    ]
+   },
+   "GIT": {
+    "adaptation": 10,
+    "ours": 14,
+    "learn_each": 14,
+    "solved": 2,
+    "solved_by_demonstration": 2,
+    "context_sensitive_atoms": []
+   },
+   "TARBALL": {
+    "adaptation": 8,
+    "ours": 11,
+    "learn_each": 12,
+    "solved": 3,
+    "solved_by_demonstration": 3,
+    "context_sensitive_atoms": [
+     "TAR_X3",
+     "TAR_X4"
+    ]
+   },
+   "SQLITE": {
+    "adaptation": 8,
+    "ours": 12,
+    "learn_each": 12,
+    "solved": 4,
+    "solved_by_demonstration": 3,
+    "context_sensitive_atoms": []
+   }
+  },
+  "atoms_that_cannot_change_the_state": 17,
+  "atoms_whose_effect_ignores_the_argument": 4,
+  "atoms_whose_only_effect_moves_identity": 1,
+  "unclassified_atoms": 1,
+  "learn_each_trials_per_request": 2.875,
+  "crossover_requests": 18.67
+ },
+ "rows": [
+  {
+   "machine": "FILESYSTEM",
+   "atoms_offered": 5,
+   "adaptation_trials_probing_every_atom": 10,
+   "adaptation_trials_active": 9,
+   "effects_witnessed_by_probing": [
+    "PERSIST@TARGET_ABSENT",
+    "PERSIST@TARGET_EXISTS",
+    "REMOVE@TARGET_EXISTS",
+    "REPLACE@TARGET_EXISTS"
+   ],
+   "atoms_that_cannot_change_the_state": 6,
+   "atoms_whose_effect_ignores_the_argument": 0,
+   "atoms_whose_only_effect_moves_identity": 1,
+   "unclassified_atoms": [],
+   "context_sensitive_atoms": [
+    "FIL_X1",
+    "FIL_X3",
+    "FIL_X5"
+   ],
+   "measured_table": [
+    {
+     "atom": "FIL_X4",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "ls",
+        "-1"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "FIL_X4",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "ls",
+        "-1"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "FIL_X1",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "sh",
+        "-c",
+        "printf %s \"$0\" > \"$1\"",
+        "{content}",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "FIL_X1",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "sh",
+        "-c",
+        "printf %s \"$0\" > \"$1\"",
+        "{content}",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REPLACE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "FIL_X5",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "cp",
+        "-f",
+        "{name}",
+        "{target}"
+       ],
+       null
+      ]
+     ],
+     "exit": 1,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "FIL_X5",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "cp",
+        "-f",
+        "{name}",
+        "{target}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "OLD"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "FIL_X3",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "rm",
+        "-f",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "FIL_X3",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "rm",
+        "-f",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REMOVE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": -1,
+      "arrived": [],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "FIL_X2",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "mv",
+        "-f",
+        "{name}",
+        "{target}"
+       ],
+       null
+      ]
+     ],
+     "exit": 1,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "FIL_X2",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "mv",
+        "-f",
+        "{name}",
+        "{target}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": true
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "FIL_X1"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "FIL_X1"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "FIL_X1"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "FIL_X3"
+    }
+   ],
+   "requests_solved": 4,
+   "ours_trials_for_four_requests": 13,
+   "demonstration": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "FIL_X1"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "FIL_X1"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "FIL_X1"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "FIL_X1"
+    }
+   ],
+   "learn_each_requests_solved": 4,
+   "learn_each_trials": 8,
+   "crossover_requests": 9.0,
+   "trials_to_break_even": 9.0,
+   "seconds": 0.05,
+   "attested_state_seal": "8aa3fe76664f2e4a8da2bcecd103bc741f085dcf832ef3db5ed9067c6a727024"
+  },
+  {
+   "machine": "GIT",
+   "atoms_offered": 5,
+   "adaptation_trials_probing_every_atom": 10,
+   "adaptation_trials_active": 10,
+   "effects_witnessed_by_probing": [
+    "PERSIST@TARGET_ABSENT",
+    "PERSIST@TARGET_EXISTS",
+    "REMOVE@TARGET_ABSENT",
+    "REMOVE@TARGET_EXISTS",
+    "REPLACE@TARGET_ABSENT",
+    "REPLACE@TARGET_EXISTS"
+   ],
+   "atoms_that_cannot_change_the_state": 4,
+   "atoms_whose_effect_ignores_the_argument": 4,
+   "atoms_whose_only_effect_moves_identity": 0,
+   "unclassified_atoms": [],
+   "context_sensitive_atoms": [],
+   "measured_table": [
+    {
+     "atom": "GIT_X4",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "git",
+        "add",
+        "-A"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "GIT_X4",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "git",
+        "add",
+        "-A"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "GIT_X1",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "git",
+        "commit",
+        "--allow-empty",
+        "-m",
+        "{content}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "GIT_X1",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "git",
+        "commit",
+        "--allow-empty",
+        "-m",
+        "{content}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "GIT_X5",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "git",
+        "status",
+        "--short"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "GIT_X5",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "git",
+        "status",
+        "--short"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "GIT_X3",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "git",
+        "reset",
+        "--hard",
+        "HEAD~1"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REMOVE",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": -1,
+      "arrived": [],
+      "departed": [
+       "PROBE"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "GIT_X3",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "git",
+        "reset",
+        "--hard",
+        "HEAD~1"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REMOVE",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": -1,
+      "arrived": [],
+      "departed": [
+       "PROBE"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "GIT_X2",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "git",
+        "commit",
+        "--amend",
+        "--allow-empty",
+        "-m",
+        "{content}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REPLACE",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": [
+       "PROBE"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "GIT_X2",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "git",
+        "commit",
+        "--amend",
+        "--allow-empty",
+        "-m",
+        "{content}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REPLACE",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": [
+       "PROBE"
+      ]
+     },
+     "identity_changed": true
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "GIT_X1"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "GIT_X1"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "REFUSED__THE_READER_DISAGREED",
+     "trials": 1,
+     "atom": null
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "REFUSED__THE_READER_DISAGREED",
+     "trials": 1,
+     "atom": null
+    }
+   ],
+   "requests_solved": 2,
+   "ours_trials_for_four_requests": 14,
+   "demonstration": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "GIT_X1"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "GIT_X1"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "REFUSED__EXHAUSTED",
+     "trials": 5,
+     "atom": null
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "REFUSED__EXHAUSTED",
+     "trials": 5,
+     "atom": null
+    }
+   ],
+   "learn_each_requests_solved": 2,
+   "learn_each_trials": 14,
+   "crossover_requests": 4.0,
+   "trials_to_break_even": 4.0,
+   "seconds": 0.66,
+   "attested_state_seal": "00ffcb7e3fc8ff46f108d295bc622f7b4d031b84d5a90f7e8cb0d75ca3493f39"
+  },
+  {
+   "machine": "TARBALL",
+   "atoms_offered": 4,
+   "adaptation_trials_probing_every_atom": 8,
+   "adaptation_trials_active": 8,
+   "effects_witnessed_by_probing": [
+    "PERSIST@TARGET_ABSENT",
+    "REMOVE@TARGET_EXISTS"
+   ],
+   "atoms_that_cannot_change_the_state": 5,
+   "atoms_whose_effect_ignores_the_argument": 0,
+   "atoms_whose_only_effect_moves_identity": 0,
+   "unclassified_atoms": [
+    "TAR_X4"
+   ],
+   "context_sensitive_atoms": [
+    "TAR_X3",
+    "TAR_X4"
+   ],
+   "measured_table": [
+    {
+     "atom": "TAR_X1",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "tar",
+        "-xf",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "TAR_X1",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "tar",
+        "-xf",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "TAR_X3",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "tar",
+        "--delete",
+        "-f",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 2,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "TAR_X3",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "tar",
+        "--delete",
+        "-f",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REMOVE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": -1,
+      "arrived": [],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "TAR_X4",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "sh",
+        "-c",
+        "printf %s \"$0\" > \"$1\"",
+        "{content}",
+        "{name}"
+       ],
+       null
+      ],
+      [
+       [
+        "tar",
+        "-rf",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar",
+        "{name}"
+       ],
+       null
+      ],
+      [
+       [
+        "rm",
+        "-f",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "TAR_X4",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "sh",
+        "-c",
+        "printf %s \"$0\" > \"$1\"",
+        "{content}",
+        "{name}"
+       ],
+       null
+      ],
+      [
+       [
+        "tar",
+        "-rf",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar",
+        "{name}"
+       ],
+       null
+      ],
+      [
+       [
+        "rm",
+        "-f",
+        "{name}"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "UNCLASSIFIED",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "OTHER",
+       "OTHER"
+      ],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "TAR_X2",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "tar",
+        "-tf",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "TAR_X2",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "tar",
+        "-tf",
+        "/tmp/tmp5jrw88tj/tarball/pack.tar"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "TAR_X4"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "TAR_X4"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "UNREACHABLE__NO_MEASURED_ATOM_HAS_THIS_EFFECT",
+     "trials": 0,
+     "atom": null
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "TAR_X3"
+    }
+   ],
+   "requests_solved": 3,
+   "ours_trials_for_four_requests": 11,
+   "demonstration": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 3,
+     "atom": "TAR_X4"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 3,
+     "atom": "TAR_X4"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "REFUSED__EXHAUSTED",
+     "trials": 4,
+     "atom": null
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "TAR_X3"
+    }
+   ],
+   "learn_each_requests_solved": 3,
+   "learn_each_trials": 12,
+   "crossover_requests": 4.0,
+   "trials_to_break_even": 4.0,
+   "seconds": 0.47,
+   "attested_state_seal": "d1e7121ccf494c6ec02c2cdfba6a7d3138527bb2886dffc3888c4f14826444d9"
+  },
+  {
+   "machine": "SQLITE",
+   "atoms_offered": 4,
+   "adaptation_trials_probing_every_atom": 8,
+   "adaptation_trials_active": 8,
+   "effects_witnessed_by_probing": [
+    "PERSIST@TARGET_ABSENT",
+    "PERSIST@TARGET_EXISTS",
+    "REMOVE@TARGET_ABSENT",
+    "REMOVE@TARGET_EXISTS",
+    "REPLACE@TARGET_ABSENT",
+    "REPLACE@TARGET_EXISTS"
+   ],
+   "atoms_that_cannot_change_the_state": 2,
+   "atoms_whose_effect_ignores_the_argument": 0,
+   "atoms_whose_only_effect_moves_identity": 0,
+   "unclassified_atoms": [],
+   "context_sensitive_atoms": [],
+   "measured_table": [
+    {
+     "atom": "SQL_X1",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "SELECT count(*) FROM t"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "SQL_X1",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "SELECT count(*) FROM t"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "INERT",
+     "addressable": false,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [],
+      "departed": []
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "SQL_X3",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "DELETE FROM t WHERE value='{old}'"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REMOVE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": -1,
+      "arrived": [],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "SQL_X3",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "DELETE FROM t WHERE value='{old}'"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REMOVE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": -1,
+      "arrived": [],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "SQL_X4",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "INSERT INTO t (value) VALUES ('{content}')"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "SQL_X4",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "INSERT INTO t (value) VALUES ('{content}')"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "PERSIST",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 1,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": []
+     },
+     "identity_changed": true
+    },
+    {
+     "atom": "SQL_X2",
+     "state_class": "TARGET_ABSENT",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "UPDATE t SET value='{content}' WHERE value='{old}'"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REPLACE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": false
+    },
+    {
+     "atom": "SQL_X2",
+     "state_class": "TARGET_EXISTS",
+     "steps": [
+      [
+       [
+        "/tmp/.venv/bin/python",
+        "-c",
+        "import sqlite3,sys;c=sqlite3.connect(sys.argv[1]);c.execute(sys.argv[2]);c.commit();c.close()",
+        "/tmp/tmp5jrw88tj/sqlite/store.db",
+        "UPDATE t SET value='{content}' WHERE value='{old}'"
+       ],
+       null
+      ]
+     ],
+     "exit": 0,
+     "effect": "REPLACE",
+     "addressable": true,
+     "delta": {
+      "cardinality_change": 0,
+      "arrived": [
+       "ARG"
+      ],
+      "departed": [
+       "OLD"
+      ]
+     },
+     "identity_changed": false
+    }
+   ],
+   "requests": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "SQL_X4"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "SQL_X4"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "SQL_X2"
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "SOLVED",
+     "trials": 1,
+     "atom": "SQL_X3"
+    }
+   ],
+   "requests_solved": 4,
+   "ours_trials_for_four_requests": 12,
+   "demonstration": [
+    {
+     "index": 0,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 3,
+     "atom": "SQL_X4"
+    },
+    {
+     "index": 1,
+     "effect": "PERSIST",
+     "status": "SOLVED",
+     "trials": 3,
+     "atom": "SQL_X4"
+    },
+    {
+     "index": 2,
+     "effect": "REPLACE",
+     "status": "REFUSED__EXHAUSTED",
+     "trials": 4,
+     "atom": null
+    },
+    {
+     "index": 3,
+     "effect": "REMOVE",
+     "status": "SOLVED",
+     "trials": 2,
+     "atom": "SQL_X3"
+    }
+   ],
+   "learn_each_requests_solved": 3,
+   "learn_each_trials": 12,
+   "crossover_requests": 4.0,
+   "trials_to_break_even": 4.0,
+   "seconds": 2.48,
+   "attested_state_seal": "c4bd4e2293f085e84b1dbaa278e34f8eb0689c093a6346d5273feb55b2d876d0"
+  }
+ ]
+}
