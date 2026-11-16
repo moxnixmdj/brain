@@ -73,6 +73,7 @@ import re
 from typing import Any, Mapping, Sequence
 
 from canonical.runtime import derived_value_v1 as derived
+from canonical.runtime import anchored_frame_v1 as anchored
 from canonical.runtime import observable_descriptor_v1 as descriptor
 
 SCHEMA = "PROJECT_BRAIN_INSTRUCTION_CONTRACT_V1"
@@ -94,6 +95,11 @@ STYLE_NOT_OBSERVABLE = "REFUSED__STYLE_NOT_IN_OBSERVATION"
 #: by a stylesheet, a content that is an image. Distinct from SPATIAL, which used to swallow these
 #: and thereby hid that the fix was an OBSERVATION, not a coordinate.
 OBSERVABLE_ABSENT = "REFUSED__THE_DESCRIPTION_NEEDS_A_DIMENSION_THE_OBSERVATION_LACKS"
+#: The record exists but is not in the observation yet, and the page shows the control that would
+#: bring it into view. This is a SEARCH to run, not an observable to build -- keeping it apart from
+#: MULTI_APP is the point: two rounds aimed engineering at "missing app state" when the state was
+#: one page-turn away.
+RECORD_NOT_ON_SCREEN = "REFUSED__THE_RECORD_IS_NOT_IN_THE_OBSERVATION_YET_BUT_IS_REACHABLE"
 CONTINUOUS = "REFUSED__CONTINUOUS_NO_END_STATE"
 #: Two instructions in one, joined by "and" ("Expand the section below and click submit"). The
 #: refuse-everything reading is only honest if the piece that is undecidable is the whole
@@ -215,7 +221,43 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
     contract: dict[str, Any] = {
         "schema": SCHEMA, "instruction": said, "clauses": [], "refusal": None,
         "verifies": "THAT_THE_INSTRUCTION_HAPPENED_NOT_THAT_THE_ANSWER_WAS_RIGHT",
+        # Whether the sentence asks for something to be WRITTEN. A property of the words, not of
+        # any one compiler -- it must not be set only on a branch, or a page where the field
+        # appears later silently loses the text.
+        "wants_text": _wants_text(said),
     }
+    # A CONTROL INSIDE A NAMED RECORD, BEFORE the refusal. The refusal is a claim about the
+    # WORDS; the frame is a claim about the PAGE, and when the page answers, the refusal was
+    # simply wrong. Measured 2026-11-16: `MULTI_APP` fired here for three rounds while
+    # `email-sender 'Enrichetta'`, the subject, the body and `div.email-actions` holding
+    # `span.trash`/`span.star` sat in the observation the whole time. A refusal stated before the
+    # evidence is not caution, it is a bug that looks like discipline.
+    framed = _framed_action(said, observation)
+    if framed is not None and not framed.get("unresolved"):
+        # THE FRAME ANSWERS "WHICH RECORD"; IT DOES NOT ANSWER "WHAT ELSE THE SENTENCE SAID".
+        # Measured 2026-11-16 on `email-inbox-reply`: returning the frame clause alone dropped
+        # `"Felis massa ac nulla."` -- the text to type -- so the arm opened the email and stopped.
+        # A clause that swallows the rest of its sentence is not a better reading, it is a shorter
+        # one. The typed value is compiled exactly as it would be without the frame.
+        clauses = [framed["clause"]]
+        fields = [e for e in observation.get("elements") or [] if e.get("can_type")]
+        if fields and re.search(r"\b(?:enter|type|fill|input|put|reply|respond|send|forward)\b", low):
+            targets = _type_targets(said, observation, fields)
+            if targets["value"] is not None:
+                for index in targets["indices"]:
+                    clauses.append({"operator": "TYPE_VALUE", "index": index,
+                                    "value": targets["value"], "rule": targets.get("rule"),
+                                    "provenance": targets["provenance"]})
+        contract["clauses"] = clauses
+        return contract
+    if framed is not None and framed.get("unresolved") == RECORD_NOT_ON_SCREEN:
+        # The record is not on this screen. No other compiler can act on something that is not
+        # visible, so this refusal is final and names the search to run.
+        if framed.get("unresolved"):
+            contract["refusal"] = framed["unresolved"]
+            contract["refusal_detail"] = framed.get("detail")
+            return contract
+
     code = refusal_for(said)
     if code:
         split = _conjunction(said)
@@ -535,6 +577,24 @@ def compile_contract(utterance: str, observation: Mapping[str, Any]) -> dict[str
         contract["clauses"].append({"operator": "ORDER", "direction": "descending",
                                     "provenance": "descending order"})
 
+    # --------------------------------------------------------------------------------------- #
+    # A KIND IS A THING THE PAGE STATES, AND IT IS THE LAST RESORT -- AFTER every path that names
+    # or describes a target. Measured 2026-11-16 twice: putting it first cost 12 pages the named,
+    # typed and described paths already solved ("enter text into the field", "click the button
+    # labelled X, then ..."), because a kind answers "which one" only when nothing else does.
+    # "Click the button." is four words, one element whose tag is `button`, and it was refused as
+    # NO_CLAUSE_UNDERSTOOD while the `CLICK_KIND` operator with its checker sat unused.
+    # --------------------------------------------------------------------------------------- #
+    if not contract["clauses"]:
+        kinds = _kind_action(said, observation)
+        if kinds is not None:
+            if kinds.get("unresolved"):
+                contract["refusal"] = kinds["unresolved"]
+                contract["refusal_detail"] = kinds.get("detail")
+                return contract
+            contract["clauses"] = [kinds["clause"]]
+            return contract
+
     if not contract["clauses"]:
         contract["refusal"] = NO_CLAUSE
     return contract
@@ -549,6 +609,239 @@ _DESCRIPTOR_CUES = frozenset(
     set(descriptor.COLOUR_WORDS) | set(descriptor.SHAPE_TAGS) | set(descriptor.SIZE_WORDS)
     | set(descriptor.ALIGN_WORDS) | {"colored", "coloured", "color", "colour"}
 )
+
+
+_CONTROL_REQUEST = re.compile(
+    r"\b(reply|forward|trash|delete|star|unstar|email|phone|address|message|remove|archive)\b",
+    re.IGNORECASE)
+
+
+def _wants_text(instruction: str) -> bool:
+    """Whether the sentence asks for something to be WRITTEN. A property of the words alone."""
+    return bool(re.search(r"\b(?:enter|type|fill|input|put|reply|respond|send|forward|write)\b",
+                          instruction, re.IGNORECASE))
+
+
+#: Verbs that make an element a CONTROL when the sentence says them and the element is named
+#: after them. Deliberately short: a name that only says WHERE (`reply-to` says a recipient, not
+#: an act) is not a control, and a list that grows without a measurement is a guess.
+_CONTROL_VERBS = ("reply", "respond", "forward", "send", "submit", "delete", "trash",
+                  "star", "save", "confirm")
+#: Names that say a control CLOSES or CANCELS. They are named after a verb too, so a list of verbs
+#: alone cannot tell `close-forward` from `send-forward` -- measured 2026-11-16, where the forward
+#: form was dismissed instead of sent.
+_NOT_A_SEND = ("close", "cancel", "back", "dismiss", "delete", "trash", "remove")
+
+
+#: What the instruction can call a KIND, and the tags/roles that are that kind. Only kinds the
+#: page STATES are here -- a kind that has to be inferred from a picture is refused elsewhere.
+_KIND_WORDS = {
+    "button": {"button"},
+    "link": {"a"},
+    "checkbox": {"input:checkbox"},
+    "textbox": {"input:text", "input", "textarea"},
+    "input": {"input", "textarea"},
+    "field": {"input", "textarea"},
+    "image": {"img"},
+}
+
+
+def _kind_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Press the one element of the KIND the instruction names.
+
+    This is not a description and not a vocabulary entry per page: `tag` is stated by every page,
+    and the instruction names the kind in a word. `CLICK_KIND` is the operator that already
+    decided this; it had no producer.
+    """
+    low = instruction.lower()
+    wanted = None
+    for word in re.findall(r"[a-z]+", low):
+        if word in _KIND_WORDS:
+            wanted = word
+            break
+    if wanted is None:
+        return None
+    if not re.search(r"\b(?:click|press|hit|tap)\b", low):
+        return None                      # the kind is named but nothing is asked of it
+    # ONLY WHEN THE KIND IS THE WHOLE SUBJECT. Measured 2026-11-16: firing on any mention of
+    # "button"/"input"/"field" cost 12 pages that the named, typed and described paths already
+    # solved -- "enter text into the field", "click the button labelled X , then ..." all name
+    # something else. A kind answers "which one" only when nothing else does.
+    if quotes(instruction):
+        return None
+    if re.search(r"\b(?:enter|type|fill|input|put|write)\b", low):
+        return None
+    if _DROP_WORDS.search(low) or (set(re.findall(r"[a-z]+", low)) & _DESCRIPTOR_CUES):
+        return None
+    # and the sentence must be ABOUT the kind, not merely mentioning it: after removing the kind's
+    # own word and the press verb, nothing that could name a different target may remain.
+    residue = [w for w in re.findall(r"[a-z]+", low)
+               if w not in _KIND_WORDS and w not in {"click", "press", "hit", "tap", "on", "the",
+                                                      "a", "an", "at", "then", "and", "this", "it"}]
+    if residue:
+        return None
+    tags = _KIND_WORDS[wanted]
+    candidates = []
+    for element in observation.get("elements") or []:
+        if not element.get("can_click"):
+            continue
+        tag = str(element.get("tag") or "").lower()
+        kind = str(element.get("type") or "").lower()
+        state = tag if not kind else f"{tag}:{kind}"
+        if tag in tags or state in tags:
+            candidates.append(int(element["index"]))
+    if not candidates:
+        return {"unresolved": OBSERVABLE_ABSENT,
+                "detail": {"kind": wanted, "reason": "NO_ELEMENT_OF_THAT_KIND"}}
+    if len(candidates) == 1:
+        return {"clause": {"operator": "CLICK_KIND", "kinds": [wanted],
+                           "index": candidates[0], "rule": "THE_PAGE_STATES_THE_KIND",
+                           "provenance": instruction}}
+    # More than one element of that kind: the instruction must say WHICH, and if it does not, that
+    # is an ambiguity. Picking the first is how "click the button" presses Submit on a form.
+    named = [i for i in candidates
+             if plain(str(observation["elements"][i].get("text") or "")).lower() and
+             plain(str(observation["elements"][i].get("text") or "")).lower() in low]
+    if len(named) == 1:
+        return {"clause": {"operator": "CLICK_KIND", "kinds": [wanted], "index": named[0],
+                           "rule": "THE_KIND_AND_ITS_OWN_WORDS", "provenance": instruction}}
+    return {"unresolved": LABEL_NOT_ON_THE_PAGE,
+            "detail": {"kind": wanted, "candidates": candidates,
+                       "reason": "MORE_THAN_ONE_ELEMENT_OF_THAT_KIND_AND_THE_INSTRUCTION_DOES_NOT_SAY_WHICH"}}
+
+
+def _form_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """A page that shows a FORM the sentence asked for: a field to fill and a control to press.
+
+    Measured 2026-11-16 on `email-inbox-forward`: after the record opens and Forward is pressed,
+    the page shows `forward-sender` and `send-forward` -- and the sentence that remains
+    unexecuted is exactly "forward that email to Roz". Neither half had a name before: the field
+    had no verb of its own and the control is an icon with no text. Its CLASS is the sentence's
+    verb, and the preposition says which field. Both come from the words, neither from a page.
+    """
+    elements = observation.get("elements") or []
+    fields = [e for e in elements if e.get("can_type")]
+    if not fields:
+        return None
+    said = instruction.lower()
+    words = set(re.findall(r"[a-z]+", said))
+    chosen = None
+    for element in elements:
+        if not element.get("can_click") or element.get("can_type"):
+            continue        # a field is where text GOES; it is not the control that sends it
+        tokens = [str(t) for t in str(element.get("classes") or "").split()] + \
+                 [str(element.get("id") or "")]
+        for token in tokens:
+            pieces = [piece for piece in re.split(r"[-_]", token.lower()) if piece]
+            # THE SENTENCE MUST SAY A VERB THE CONTROL IS NAMED BY; the rest of the name is the
+            # page's business. `send-reply` says `send` and `reply`; the sentence says `reply`, so
+            # this is the control to press. Demanding every piece be spoken was too strict and
+            # matched nothing (`send` is not in the sentence either).
+            if not any(piece in _CONTROL_VERBS and piece in words for piece in pieces):
+                continue
+            # A LABEL IS NOT A BUTTON. `reply-to` is a label saying where the reply goes; it is
+            # clickable only because clicking text selects it. Among controls, the one that SENDS
+            # is the one with no words of its own -- its class is its whole name.
+            if (element.get("text") or "").strip():
+                continue
+            if any(piece in _NOT_A_SEND for piece in pieces):
+                continue
+            # A NAMED CONTROL IS AN ICON. Measured 2026-11-16: among `send-reply`, `close-reply`
+            # and `reply-to`, the first two are icons whose class is their whole name; `reply-to`
+            # is a LABEL that says where the reply goes and merely happens to be clickable
+            # (clicking it selects text). Rank by that -- an element that shows words is telling
+            # you what it says, not what pressing it does.
+            # Sorting is by SHOWS-WORDS FIRST; the token is only a tie-break, never the decider.
+            score = (1 if (element.get("text") or "").strip() else 0,
+                     len(pieces), token.lower())
+            if chosen is None or score < chosen[0]:
+                chosen = (score, element, token)
+    if chosen is None:
+        return None
+    element, token = chosen[1], chosen[2]
+    targets = _type_targets(instruction, observation, fields)
+    clauses = []
+    if targets["value"] is not None and targets["indices"]:
+        for index in targets["indices"]:
+            clauses.append({"operator": "TYPE_VALUE", "index": index,
+                            "value": targets["value"], "rule": targets.get("rule"),
+                            "provenance": targets["provenance"]})
+    clauses.append({"operator": "PRESS_CLASS", "index": int(element["index"]),
+                    "token": token.lower(), "rule": "THE_CLASS_IS_THE_VERB",
+                    "provenance": f"class {token!r}"})
+    return {"clause": clauses}
+
+
+def _framed_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Press a control that lives INSIDE the record the instruction names.
+
+    Returns None when the instruction names no record and wants no control inside one, so that the
+    other compilers see the instruction unchanged.
+    """
+    wanted = [m.group(1).lower() for m in _CONTROL_REQUEST.finditer(instruction)]
+    if not wanted:
+        return None
+    identifiers = anchored.identifiers_in(instruction)
+    if not identifiers:
+        return None
+    for identifier in identifiers:
+        frame = anchored.find_frame(identifier, observation, controls=wanted)
+        if frame.outcome == anchored.RESOLVED:
+            hits = [c for c in frame.controls if c["can_click"]]
+            # `email` matches the whole row (sender/subject/body are all `email-*`), so a bare
+            # class-prefix match is not a control: it must be an EXACT class or the word itself.
+            # Measured: without this, "reply to the email" pressed the sender (index 9) instead of
+            # Reply, because `email-sender` starts with `email`.
+            hits = [c for c in hits if _is_a_control(hits, c)]
+            # And the instruction's own verb wins: "reply" must choose `reply`, not any control
+            # whose class happens to mention email.
+            named = [c for c in hits if c["word"] in instruction.lower()]
+            hits = named or hits
+            if not hits:
+                # THE RECORD MUST BE OPENED FIRST. Measured 2026-11-16 on `email-inbox-reply`:
+                # `Reply` lives in `div.email-send` inside the OPENED email, and the frame names
+                # the closed thread. So the clause is two steps in one language, not two
+                # languages: open the frame, then press the control inside it. The step is named
+                # rather than guessed, and a record that is already open reports `OPEN` so the
+                # same clause costs nothing on the second look.
+                if frame.container is not None:
+                    return {"clause": {"operator": "OPEN_THEN_CLICK", "identifier": identifier,
+                                       "control": None, "index": frame.container,
+                                       "wanted": wanted,
+                                       "rule": "THE_CONTROL_IS_INSIDE_THE_RECORD_SO_OPEN_IT",
+                                       "provenance": instruction}}
+                return {"unresolved": OBSERVABLE_ABSENT,
+                        "detail": {"identifier": identifier, "frame": frame.as_dict(),
+                                   "asked_for": wanted}}
+            # THE SAME RECORD IS BOTH A PLACE AND A THING TO OPEN. On the inbox the thread holds
+            # `trash` and `star` AND responds to a press anywhere in it: pressing the record's own
+            # trash is one act, but a sentence that also asks for a value to be written names a
+            # field that only exists after the record opens. So the record clause is emitted even
+            # when a control was found, and it costs nothing when the control is already reachable
+            # -- the arm presses the control and the record clause is satisfied by construction.
+            chosen = min(hits, key=lambda c: len(str(c["carried"])))
+            return {"clause": {"operator": "CLICK_IN_FRAME", "identifier": identifier,
+                               "control": chosen["word"], "index": chosen["index"],
+                               "frame": frame.container,
+                               "opens": frame.container,
+                               "wants_text": _wants_text(instruction),
+                               "rule": "A_CONTROL_INSIDE_THE_NAMED_RECORD",
+                               "provenance": instruction}}
+        if frame.outcome in (anchored.AMBIGUOUS, anchored.NOT_A_RECORD):
+            return {"unresolved": LABEL_NOT_ON_THE_PAGE,
+                    "detail": {"identifier": identifier, "frame": frame.as_dict()}}
+        if frame.reachable_by:
+            return {"unresolved": RECORD_NOT_ON_SCREEN,
+                    "detail": {"identifier": identifier, "frame": frame.as_dict(),
+                               "reachable_by": frame.reachable_by}}
+    return None
+
+
+def _is_a_control(hits: Sequence[Mapping[str, Any]], candidate: Mapping[str, Any]) -> bool:
+    """Whether this element is THE control, not a wrapper whose class merely starts with the word."""
+    carried = str(candidate.get("carried") or "")
+    word = str(candidate.get("word") or "")
+    return carried.split(" ")[0] == word or carried.strip() == word
 
 
 def _described_action(instruction: str, observation: Mapping[str, Any]) -> dict[str, Any] | None:
@@ -884,7 +1177,25 @@ def _type_targets(instruction: str, observation: Mapping[str, Any],
     if re.search(r"\bboth text fields\b", instruction, re.IGNORECASE):
         indices = indices[:2]
 
-    if not re.search(r"\b(?:enter|type|fill|input|put)\b", instruction, re.IGNORECASE):
+    # A QUOTED SPAN INTRODUCED BY "with the text" IS A VALUE, whoever types it. Measured
+    # 2026-11-16 on `email-inbox-reply`: "reply to them with the text \"Felis massa ac nulla.\""
+    # names no field at all -- the field appears only once the email is open -- and the sentence
+    # was read as a press with no value, so the reply went out empty. The verb that says something
+    # is written is not always `type`.
+    # A SECOND VALUE IN A SECOND FIELD. Measured 2026-11-16 on `email-inbox-forward`: "forward
+    # that email to Roz" -- `Roz` is typed into the recipient field that appears only after
+    # Forward is pressed, and the type clause was aimed at the first field (the message body), so
+    # the name went into the body and the forward was never addressed. Which field is not a
+    # preference: the sentence says WHICH ONE with its preposition.
+    recipient = re.search(r"\bto\s+([A-Z][a-z]+)\b", instruction)
+    if recipient and not re.search(r"\bemail by\b", instruction[recipient.start():] or ""):
+        return {"value": recipient.group(1), "indices": indices[:1],
+                "rule": "THE_FIELD_THE_PREPOSITION_NAMES", "predicate": None,
+                "provenance": f"to {recipient.group(1)!r}"}
+    relayed = re.search(r"\bwith (?:the )?(?:text|message|words?|body)\b", instruction, re.IGNORECASE)
+    if relayed and not re.search(r"\b(?:enter|type|fill|input|put)\b", instruction, re.IGNORECASE):
+        pass
+    elif not re.search(r"\b(?:enter|type|fill|input|put)\b", instruction, re.IGNORECASE):
         return {"value": None, "indices": indices, "rule": None, "predicate": None,
                 "provenance": None}      # nothing is being typed; a quote here names a press target
     quoted = quotes(instruction)
@@ -1021,6 +1332,12 @@ def _final(trace: Sequence[tuple[Mapping[str, Any], str]]) -> Mapping[str, Any]:
 def _check_clause(clause: Mapping[str, Any], trace: Sequence[tuple[Mapping[str, Any], str]]
                   ) -> dict[str, Any]:
     operator = clause["operator"]
+    if operator == "CLICK_IN_FRAME":
+        return _check_click_in_frame(clause, trace)
+    if operator == "OPEN_THEN_CLICK":
+        return _check_open_then_click(clause, trace)
+    if operator == "PRESS_CLASS":
+        return _check_press_class(clause, trace)
     if operator == "CLICK_NAMED":
         return _check_click_named(clause, trace)
     if operator == "PRESS_SEQUENCE_BY_INDEX":
@@ -1072,6 +1389,61 @@ def _presses(trace: Sequence[tuple[Mapping[str, Any], str]]):
             index_text = rest.split("=")[0]
             if index_text.isdigit():
                 yield observation, int(index_text)
+
+
+def _check_press_class(clause, trace) -> dict[str, Any]:
+    """The press landed on the element whose own class carries the sentence's verb."""
+    token = str(clause.get("token") or "").lower()
+    for observation, index in _presses(trace):
+        elements = observation.get("elements") or []
+        if 0 <= index < len(elements):
+            classes = {str(t).lower() for t in str(elements[index].get("classes") or "").split()}
+            classes.add(str(elements[index].get("id") or "").lower())
+            if token in classes:
+                return {"operator": "PRESS_CLASS", "verdict": PASS,
+                        "reason": f"PRESSED_{token.upper()}"}
+    return {"operator": "PRESS_CLASS", "verdict": FAIL, "reason": f"NEVER_PRESSED_{token.upper()}"}
+
+
+def _check_open_then_click(clause, trace) -> dict[str, Any]:
+    """The record was opened and the control pressed inside it afterwards."""
+    identifier = str(clause.get("identifier") or "")
+    wanted = [str(w) for w in clause.get("wanted") or []]
+    opened_at = None
+    for position, (observation, index) in enumerate(_presses(trace)):
+        if opened_at is None:
+            frame = anchored.find_frame(identifier, observation, controls=wanted)
+            if frame.outcome == anchored.RESOLVED and frame.container == index:
+                opened_at = position
+            continue
+        frame = anchored.find_frame(identifier, observation, controls=wanted)
+        if frame.outcome == anchored.RESOLVED and any(
+                c["can_click"] and c["index"] == index for c in frame.controls):
+            return {"operator": "OPEN_THEN_CLICK", "verdict": PASS,
+                    "reason": f"OPENED_AND_PRESSED_INSIDE_{identifier.upper()}"}
+    return {"operator": "OPEN_THEN_CLICK", "verdict": FAIL,
+            "reason": f"NEVER_PRESSED_A_CONTROL_INSIDE_{identifier.upper()}"}
+
+
+def _check_click_in_frame(clause, trace) -> dict[str, Any]:
+    """The press landed on a control inside the record the instruction named.
+
+    Checked against the frame AS IT WAS at the moment of the press, by re-finding the record in
+    that observation. This is what makes the clause checkable rather than merely plausible: if the
+    press hit the right class in the wrong row, the re-found frame will not contain it.
+    """
+    identifier = str(clause.get("identifier") or "")
+    control_word = str(clause.get("control") or "")
+    for observation, index in _presses(trace):
+        frame = anchored.find_frame(identifier, observation, controls=[control_word])
+        if frame.outcome != anchored.RESOLVED:
+            continue
+        if any(c["can_click"] and c["index"] == index and c["word"] == control_word
+               for c in frame.controls):
+            return {"operator": "CLICK_IN_FRAME", "verdict": PASS,
+                    "reason": f"PRESSED_{control_word.upper()}_INSIDE_{identifier.upper()}"}
+    return {"operator": "CLICK_IN_FRAME", "verdict": FAIL,
+            "reason": f"NEVER_PRESSED_{control_word.upper()}_INSIDE_{identifier.upper()}"}
 
 
 def _check_click_named(clause, trace) -> dict[str, Any]:

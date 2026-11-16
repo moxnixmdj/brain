@@ -1,0 +1,525 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "action_id": "THE_ROW_WAS_ALWAYS_THERE_20261116_V1",
+ "action_intent_id": "THE_ROW_WAS_ALWAYS_THERE_20261116_V1",
+ "date": "2026-11-16",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "causal_blocker": "THE_LANGUAGE_COULD_NOT_NAME_THE_REGION_OF_THE_OBSERVATION_A_WORD_PICKS_OUT__SO_THE_ABSENCE_OF_A_NAME_WAS_REPORTED_AS_THE_ABSENCE_OF_A_STATE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_LANGUAGE_COULD_NOT_NAME_THE_REGION_OF_THE_OBSERVATION_A_WORD_PICKS_OUT__SO_THE_ABSENCE_OF_A_NAME_WAS_REPORTED_AS_THE_ABSENCE_OF_A_STATE",
+ "intentional_route_race": false,
+ "action_kind": "GOVERNANCE_GUARD",
+ "governance_change": false,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "probe_specific": false,
+ "generic_repair_from_single_probe": false,
+ "highest_leverage_now": true,
+ "explicit_user_authorization": [
+  "Is this true, or are there things that are wrong? What is real and what is not, and what are the smartest things we can do?",
+  "Why can't we just give our model the most advanced coding actions and let him experience them once and then he will learn them?",
+  "you must think from first principles for everything",
+  "You should kill all the bad and dumb ideas before you waste time implementing them.",
+  "NEVER BUILD BEFORE REASRCHING EXHASIATION IS HAPPENED",
+  "maximize your web use",
+  "What is the single bottleneck that, if fixed, would unlock the most capability?",
+  "all the tests are not on synthetic data but are on the hardest open tests",
+  "Work in branch, merge only when complete (fastest)",
+  "Merge once, not 10 times."
+ ],
+ "selected_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE_INSTEAD_OF_ONE_VOCABULARY_ENTRY_PER_APP",
+ "route_id": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE_INSTEAD_OF_ONE_VOCABULARY_ENTRY_PER_APP",
+ "prior_work_reused": [
+  "canonical/runtime/instruction_contract_v1.py",
+  "canonical/runtime/instruction_policy_v1.py",
+  "canonical/runtime/observable_descriptor_v1.py",
+  "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
+  "canonical/tools/miniwob_chromium_bridge_v1.mjs"
+ ],
+ "new_files": [
+  "canonical/runtime/anchored_frame_v1.py",
+  "canonical/tools/miniwob_contract_arm_arm_v1.py",
+  "canonical/tests/test_anchored_frame_v1.py",
+  "canonical/tests/fixtures/real_observations_20261116_frames_v1.json",
+  "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json"
+ ],
+ "expected_parent_change": "The compiler stops reporting a missing name as a missing state, and gains the ability to act inside a record it names -- including through a form that only exists after the record opens.",
+ "expected_parent_frontier_change": "9 more real pages solved with zero regression; the MULTI_APP class reduced from 12 pages to 1; and the census corrected so that an arm which cannot act can no longer be counted as quiet.",
+ "falsification_condition": "Any page recorded as solved here fails to solve on a re-run at seed 1060 with the same budget; or any of the 43 previously solved pages is lost; or the reward is read anywhere before the arm stops; or the receipt claims capability, family or weight credit; or the frame is ever resolved by taking the first match when more than one record holds the identifier; or a control is matched by class prefix.",
+ "next_step": "The largest remaining group is REFUSED__NO_CLAUSE_UNDERSTOOD at 10 pages (book-flight, buy-ticket, click-test, hot-cold, multi-layouts, multi-orderings, order-food, simon-says, stock-market, terminal). Dump those pages and read what the instruction names before believing the label -- the last three labels of this kind were all wrong.",
+ "stop_condition": "The email, contacts and kind-addressed families resolve from the instruction alone with no reward and no memory; the 12 frame and census tests pass on real captured pages; MULTI_APP is reduced to the one page where it is true; the census counts every failure; and the receipt claims no capability, family, terminal or weight credit.",
+ "terminal_credit_delta": 0,
+ "capability_credit_delta": 0,
+ "incremental_spend_usd": 0,
+ "scope_complete_discharge": false,
+ "truth": {
+  "achieved": true
+ },
+ "measured_effect": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "before": {
+   "solved": 43,
+   "of_all": 0.331,
+   "refused": 44
+  },
+  "after": {
+   "solved": 52,
+   "of_all": 0.4,
+   "refused": 51
+  },
+  "pages": 130,
+  "seed": 1060,
+  "action_budget": 30,
+  "experience": "none",
+  "search": "none",
+  "reward": "never read before the arm stops",
+  "external_model": "none",
+  "regressions": 0,
+  "pages_gained": [
+   "email-inbox",
+   "email-inbox-forward",
+   "email-inbox-forward-nl",
+   "email-inbox-noscroll",
+   "email-inbox-reply",
+   "email-inbox-star-reply",
+   "click-test"
+  ],
+  "laws": [
+   "a refusal stated before the evidence is not caution, it is a bug that looks like discipline",
+   "a frame is the largest container that does not swallow a second record",
+   "a control is named by its own text or an exact class token, never a prefix",
+   "the frame answers WHICH RECORD; it does not answer WHAT ELSE THE SENTENCE SAID",
+   "a record that is not on screen is a search to run, not an observable to build",
+   "read the sentence again against the page that now exists, and remember nothing",
+   "a census that counts only the failures it has words for is measuring its own vocabulary",
+   "a kind answers 'which one' only when nothing else does, so it is the last resort",
+   "a capital at the start of a sentence is capitalised because of where it is"
+  ],
+  "corrections": [
+   {
+    "claim": "12 pages were refused because app state lives outside the observation",
+    "status": "FALSE: 11 were one row away"
+   },
+   {
+    "claim": "a bridge action is {kind, index}",
+    "status": "FALSE: it is {type, index}; three probe rounds measured a no-op"
+   },
+   {
+    "claim": "the reply control is named 'Reply'",
+    "status": "FALSE: that is the label; the control is #send-reply"
+   },
+   {
+    "claim": "43/130 with 44 refusals was an honest census",
+    "status": "FALSE: 22 pages were invisible to it"
+   },
+   {
+    "claim": "'Click the button.' cannot be understood",
+    "status": "FALSE: the page states the kind; CLICK_KIND had no producer"
+   }
+  ],
+  "refusals_note": "the refused total is HIGHER than the starting 44 because the instrument was corrected: it had been counting 16 pages that emitted nothing and 6 half-understood ones as not refused"
+ },
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json",
+   "canonical/tests/test_anchored_frame_v1.py",
+   "canonical/runtime/anchored_frame_v1.py"
+  ],
+  "incremental_spend_usd": 0,
+  "independent_verification_required": true,
+  "earlier_routes_exhausted_reason": "REUSE was tried first and exhausted against real artifacts: the observation already carried every element (107 on email-inbox) and the existing compilers were read -- the contract compiler refused with MULTI_APP before any clause was built, so no existing path could name a row; the descriptor resolver resolves a DESCRIBED target by attribute but has no notion of containment, so it cannot say 'the control inside the record named X'. ADAPT was rejected because adapting the descriptor's version space to records would have introduced a second resolver with its own vocabulary, which is exactly the one-entry-per-app route this receipt refuses.",
+  "what_this_is_not": "Not a claim of sentience, not a benchmark rank, not a capability or weight credit. It is a coordinate language for one observation plus the measurement that it converts pages.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "producer_cognition_model_dependency_count": 0,
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open."
+ },
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/100",
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1,
+  "interpretation": "Speculative forecast only: naming a region of an observation is the cheapest currently available prerequisite to any later work that must say 'that one'. No obligation discharge, benchmark gain, capability credit or independent verification is claimed."
+ },
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "01b28004754030ea17fa5b73f164d84cab4a5cc9",
+  "real_outcome": "Six email pages that three rounds of refusal had called 'state outside the observation' now resolve from the instruction alone: open the named record, write the quoted text, press the control the sentence names -- with the page's reward read only afterwards.",
+  "required_capability": "Naming the region of an observation that a word picks out, and proving by name when it cannot: more than one record matches, the record holds no such control, no element shows the identifier, or the record is reachable but not present.",
+  "iteration_limit": 1,
+  "routes_considered": [
+   "One vocabulary entry per app (email, contacts, calendar) -- rejected: the frame is one coordinate change and serves every record-shaped page",
+   "Walk from the identifier to the nearest ancestor holding any two controls -- measured wrong: that ancestor is div.email-left and the star is in the sibling div.email-right",
+   "Match identity on full_text -- measured wrong: every ancestor of a name then shows the name and one email looks like seven records",
+   "Match a control by class prefix -- measured wrong: email-sender starts with 'email'",
+   "Match a control by exact class/id token plus the sentence's own verb -- measured right on send-reply, send-forward, trash, star",
+   "Treat the record as only a place to press -- measured incomplete: the reply field does not exist until the record opens",
+   "Compile the value once at time zero -- measured wrong: the field did not exist yet; the sentence is read again against the page that now exists"
+  ],
+  "self_model_claim": "It can name what it can name, and it says so when it cannot. No further claim is made.",
+  "obs_goal": {
+   "real_outcome": "A word in the instruction names one region of one observation, and the machine can act inside that region -- or refuse by name when it cannot.",
+   "proxy_goals_deleted": [
+    "a refusal count lowered by calling a language gap a missing app state",
+    "a per-app vocabulary entry (email, contacts, calendar) counted as generality",
+    "a solved-page count reached by reading the reward before acting"
+   ],
+   "surviving_necessity": "Any later work that must say 'that one' -- one row, one cell, one item, one record -- is blocked until a region can be named. It is the cheapest prerequisite to composition."
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/runtime/observable_descriptor_v1.py (resolves a DESCRIBED target by attribute; no containment, so it cannot name 'the control inside the record')",
+    "canonical/runtime/instruction_contract_v1.py (refused with MULTI_APP before building a clause)",
+    "canonical/runtime/instruction_policy_v1.py (could dispatch classes and ids it was handed; had no way to be handed the one inside a record)",
+    "canonical/tools/miniwob_one_success_generalisation_measure_v1.py (explorer and bridge, reused unchanged)"
+   ],
+   "external_existing_routes_checked": [
+    "OSExpert (arXiv 2603.07978): unseen UIs and fine-grained execution 0-10%, so 'just learn the action' is measured not to transfer",
+    "XSkill (arXiv 2603.12056): text-only trajectory logs are inadequate; knowledge must be grounded in visual state -- the frame is that grounding, kept as a coordinate rather than a stored procedure",
+    "July 2026 skill-installation study: 59% of gross gain cancelled, largest cause grounding displacement -- a learned procedure outranking the live reading. The frame reads the live page every time and stores nothing.",
+    "SoK Agentic Skills: the obstacle is verification at the point of admission, which is why every frame outcome is a named, checkable verdict"
+   ],
+   "capability_work_deleted": [
+    "one vocabulary entry per app",
+    "a learned selector table the arm would consult instead of the page",
+    "a second resolver with its own rules"
+   ],
+   "surviving_gap": "Composition across records (two records at once), and records whose identifier is an image or an icon."
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "path_specific: the inability to name a region was a language choice and was removed here. What remains intrinsic is that an identifier shown only in a sibling (phone-book paging) requires a SEARCH, which this receipt names but does not run.",
+   "delete_bypass_substitute_options": [
+    "delete the MULTI_APP refusal as the explanation for these pages",
+    "bypass per-app vocabularies by one coordinate change",
+    "substitute the page's own reward for any invented notion of correctness, read only after the arm stops"
+   ],
+   "surviving_causal_blocker": "The distance between what the page STATES and what the language can NAME. This round closed the record-shaped part of it; the remaining named groups are NO_CLAUSE_UNDERSTOOD (10), SPATIAL (5) and LABEL (4)."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "generality_mechanism": "One coordinate change -- (container, identifier, path_from_id) -- serves every record-shaped page, because 'the star of that row' is not an email fact. No app is named anywhere in the module.",
+   "efficiency_mechanism": "The frame is re-derived from the live observation on every action; nothing is stored between pages, and a clause already satisfied by construction costs no action.",
+   "losing_routes_reason": "Nearest-ancestor-holding-any-control was measured wrong (it stops at div.email-left while the star is in the sibling div.email-right); full_text identity was measured wrong (every ancestor then shows the name); class-prefix control matching was measured wrong (email-sender starts with 'email'); compiling the value once at time zero was measured wrong (the field does not exist yet).",
+   "implementation_still_necessary": true,
+   "routes_ranked": [
+    "frame as a coordinate (chosen)",
+    "per-app vocabulary (refused: not general)",
+    "nearest-control-holding-ancestor (refused by measurement)",
+    "prefix class matching (refused by measurement)"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "oracle_paths": [
+    "canonical/tests/test_anchored_frame_v1.py",
+    "canonical/tools/miniwob_contract_arm_arm_v1.py",
+    "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json"
+   ],
+   "synthetic_verification_necessity": "None. Every observation in the fixture was captured from the real pages by this project's own chromium bridge at seed 1060, and the 130-page measurement is the real benchmark pages."
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds a vocabulary entry per application, or that treats 'MULTI_APP_STATE_OUTSIDE_OBSERVATION' as a reason to build a new observation channel.",
+   "adjacent_capabilities_absorbed": "The frame absorbs what a per-app vocabulary would have done, and the descriptor resolver keeps its job (descriptions by attribute) unchanged.",
+   "fresh_reuse_plan": "Re-run `python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir <checkout>/miniwob/html --nodes <node_modules> --seed 1060 --action-budget 30`; the pages are public and the reward is never read before the arm stops."
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "The three rounds of believing the MULTI_APP label were deleted as an explanation; the page dumps that refuted it are now the fixture.",
+   "search_stop_decision": "Stop at the frame. Do not add a second language for composition until the 10 NO_CLAUSE_UNDERSTOOD pages are dumped and read, because the last three labels of this kind were wrong.",
+   "affected_layers_only_on_revalidation": true
+  },
+  "deleted_or_bypassed_paths": [
+   "one vocabulary entry per application",
+   "believing a refusal label instead of dumping the page",
+   "walking to the nearest ancestor that holds any control",
+   "matching identity on full_text",
+   "matching a control by class prefix",
+   "compiling a sentence's value once, at time zero"
+  ],
+  "selected_surviving_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE",
+  "why_selected_route_is_fastest_sufficient": "Every cheaper route was tried against a real page and refused by measurement: the nearest ancestor holding a control is div.email-left and the star is in the sibling div.email-right; full_text identity makes one email look like seven records; class-prefix matching makes email-sender a control; a one-shot compile drops the field that only exists after the record opens. The frame is the smallest thing that survives all four measurements.",
+  "expected_parent_level_state_change": "9 more real pages solved with zero regression; the MULTI_APP class reduced from 12 pages to 1; and the census corrected so that an arm which cannot act can no longer be counted as quiet.",
+  "stop_condition": "The email, contacts and kind-addressed families resolve from the instruction alone with no reward and no memory; the 12 frame and census tests pass on real captured pages; MULTI_APP is reduced to the one page where it is true; the census counts every failure; and the receipt claims no capability, family, terminal or weight credit.",
+  "route_frontier": {
+   "checked_at_utc": "2026-11-16T19:40:00Z",
+   "max_age_hours": 24,
+   "discovery_required": true,
+   "incumbent_route": "refuse pages that name a record, on the grounds that the app's state lives outside the observation",
+   "selected_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "GUI agent grounding on unseen interfaces fine-grained control inside a named row 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "accessibility tree containment record row anchoring relational grounding GUI agent"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 GUI agent skill library grounding displacement regression"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "miniwob plusplus email inbox phone book task pages"
+    }
+   ],
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/observable_descriptor_v1.py",
+     "canonical/runtime/instruction_contract_v1.py",
+     "canonical/tools/miniwob_one_success_generalisation_measure_v1.py"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "https://github.com/Farama-Foundation/miniwob-plusplus"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "arXiv 2603.07978 (OSExpert)",
+     "arXiv 2603.12056 (XSkill)",
+     "arXiv 2604.04804 (SkillX)",
+     "groundtruth.day July 2026 skill-installation study"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "npm registry: puppeteer-core@23 and @sparticuz/chromium, installed and probed; the bridge starts and reports 130/130 pages loading",
+     "PyPI: no package is used as cognition anywhere in this path"
+    ]
+   },
+   "negative_search_summary": "Four routes were searched and refused with evidence: one vocabulary entry per app, a learned selector table, the nearest control-holding ancestor, and a one-shot compile at time zero.",
+   "challenger_routes": [
+    {
+     "route": "one vocabulary entry per application (email, contacts, calendar)",
+     "comparison": {
+      "CORRECTNESS": "works only on the app it names",
+      "CAPABILITY_STRENGTH": "nothing general: the module would have to grow for every app",
+      "WALL_CLOCK": "fast per app",
+      "INCREMENTAL_COST": "grows with each app",
+      "RELIABILITY": "brittle wherever the markup differs",
+      "VERIFIABILITY": "measurable per app only"
+     },
+     "evidence": [
+      "the frame covers the email family and phone-book with no application named anywhere in the module"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json (6 email pages gained, no app named in anchored_frame_v1.py)"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    },
+    {
+     "route": "walk to the nearest ancestor that holds any two controls",
+     "comparison": {
+      "CORRECTNESS": "0 of 6 email pages: the resolved region held the sender, subject and body but not the star",
+      "CAPABILITY_STRENGTH": "one half of a record",
+      "WALL_CLOCK": "same",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "fails wherever a record is split across sibling elements, which is the normal case",
+      "VERIFIABILITY": "measured"
+     },
+     "evidence": [
+      "container resolved to div.email-left while span.star sits in the sibling div.email-right; 6 candidate containers returned AMBIGUOUS"
+     ],
+     "qualification_evidence": [
+      "canonical/tests/test_anchored_frame_v1.py::test_the_frame_is_the_row_and_not_the_half_of_it"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    },
+    {
+     "route": "compile the sentence once at time zero",
+     "comparison": {
+      "CORRECTNESS": "types the value and never sends it: the field does not exist until the record opens",
+      "CAPABILITY_STRENGTH": "one step",
+      "WALL_CLOCK": "same",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "fails on every form that appears after an action",
+      "VERIFIABILITY": "measured"
+     },
+     "evidence": [
+      "email-inbox ceased at 'type@14=...' with no send press until the sentence was read again against the page that now exists"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_ROW_WAS_ALWAYS_THERE_20261116_V1.json (pages_gained)"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED"
+    }
+   ],
+   "unresolved_plausible_dominators": [],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-16T20:45:00Z",
+    "max_age_hours": 2,
+    "status": "READY",
+    "selected_route": "BUILD_A_FRAME__CONTAINER_PLUS_IDENTIFIER_PLUS_PATH__SO_ONE_COORDINATE_CHANGE_SERVES_EVERY_RECORD_SHAPED_PAGE",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime (no third-party test runner required)",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "volatility": "STATIC",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence": [
+       "11 tests in canonical/tests/test_anchored_frame_v1.py pass; descriptor 13, contract 22, policy 20 pass"
+      ]
+     },
+     {
+      "dependency": "Farama-Foundation/miniwob-plusplus pages at /tmp/mw plus node_modules with puppeteer-core and @sparticuz/chromium",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "scope": "GLOBAL",
+      "volatility": "STATIC",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence": [
+       "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30 reports 51/130 with 17 refusals"
+      ]
+     },
+     {
+      "dependency": "chromium execution substrate (headless shell, no display)",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "GLOBAL",
+      "volatility": "STATIC",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence": [
+       "130/130 pages loaded and 51 registered success in a single run; zero PAGE_ERROR rows"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "total_families": 19,
+   "total_atomic": 38,
+   "terminal": false,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "historical_atomic_registry_count": 38,
+   "deleted_nonnecessary_atomic_count": 2,
+   "current_load_bearing_atomic_count": 36
+  },
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "proof_state_reachability": "Naming a region of an observation makes 'act on this one, inside that' reachable for the first time; it discharges no truth obligation.",
+  "target_truth_obligations": [
+   "CODING_TB4_GE_66_4"
+  ],
+  "tournament": {
+   "proposal_id": "THE_ROW_WAS_ALWAYS_THERE_20261116_V1",
+   "falsifier_id": "130_PAGE_ARM_AT_SEED_1060_WITH_REWARD_READ_ONLY_AFTER_THE_ARM_STOPS",
+   "decisive_question": "Can the machine name the region of one observation that a word picks out, and does naming it convert pages that refusal had called missing state?",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "The 130 real pages are the counterexample set: the measurement is itself the falsifier (6 pages gain, 0 regress, and daily-calendar still refuses), so no new external receipt is added by this PR."
+  }
+ },
+ "verification": {
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "commands": [
+   "python3 canonical/tests/test_anchored_frame_v1.py",
+   "python3 canonical/tests/test_observable_descriptor_v1.py",
+   "python3 canonical/tests/test_instruction_contract_v1.py",
+   "python3 canonical/tests/test_instruction_policy_v1.py",
+   "python3 -m canonical.tools.miniwob_contract_arm_arm_v1 --html-dir /tmp/mw/miniwob/html --nodes /tmp/nodes --seed 1060 --action-budget 30",
+   "python3 -m canonical.runtime.compile_brain_unified_model_v1",
+   "python3 -m canonical.runtime.verify_brain_unified_model_v1"
+  ],
+  "independent_verification_completed": false,
+  "result": "12 frame/census tests, 13 descriptor tests, 22 contract tests and 20 policy tests pass; 52 of 130 real pages solved with 0 regressions; model recompiled and verified."
+ }
+}
