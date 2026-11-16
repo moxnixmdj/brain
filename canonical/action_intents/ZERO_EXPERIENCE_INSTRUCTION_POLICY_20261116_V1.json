@@ -283,7 +283,7 @@
      "route": "trust the suites alone and drop the whole law instrument"
     }
    ],
-   "checked_at_utc": "2026-11-16T16:51:43Z",
+   "checked_at_utc": "2026-11-16T19:04:24Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -323,48 +323,33 @@
    "selected_route": "MEASURE_THE_VERDICT_INSTEAD_OF_ARGUING_IT_ONE_GATE_IS_THE_REAL_UNEDITED_TEST_SUITE_THE_OTHER_IS_A_LAW_CONFIRMED_ON_THE_PRISTINE_MODULE_AND_EVERY_ARM_IS_REPORTED",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-16T16:51:43Z",
+    "checked_at_utc": "2026-11-16T19:04:24Z",
     "execution_dependencies": [
      {
-      "dependency": "local Python 3.11 runtime with pytest 9.2.0 in .venv",
+      "dependency": "the 130 real MiniWoB++ pages, cloned and served by the existing bridge",
       "evidence": [
-       "this session ran 41 tests across the three touched test files, and 96 candidate suite runs"
+       "this session measured all 130 pages in a live chromium substrate"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "local Python 3.11 runtime (no third-party packages; the arm is stdlib only)",
+      "evidence": [
+       "20 policy tests and 22 contract tests executed this session"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "GLOBAL",
       "kind": "LOCAL_RUNTIME",
-      "required": true,
-      "scope": "GLOBAL",
-      "status": "READY",
-      "volatility": "STATIC"
-     },
-     {
-      "dependency": "this repository's own module/test pairs (65 discovered, 16 measured)",
-      "evidence": [
-       "paired by name convention under canonical/swe_kernel and canonical/tools; the test files are unedited by this PR"
-      ],
-      "evidence_classes": [
-       "BRAIN_INHERITED"
-      ],
-      "evidence_scope": "GLOBAL",
-      "kind": "CODE_ARTIFACT",
-      "required": true,
-      "scope": "GLOBAL",
-      "status": "READY",
-      "volatility": "STATIC"
-     },
-     {
-      "dependency": "this repository's own mutation engine (canonical/runtime/bound_capabilities/python_tests_mutation_score.py)",
-      "evidence": [
-       "96 behaviour-altering candidates produced and measured this session"
-      ],
-      "evidence_classes": [
-       "BRAIN_INHERITED"
-      ],
-      "evidence_scope": "GLOBAL",
-      "kind": "CODE_ARTIFACT",
       "required": true,
       "scope": "GLOBAL",
       "status": "READY",
