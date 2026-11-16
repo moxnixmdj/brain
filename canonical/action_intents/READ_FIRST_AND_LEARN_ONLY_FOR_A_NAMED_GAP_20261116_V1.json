@@ -122,7 +122,7 @@
    "matching a control by class prefix",
    "compiling a sentence's value once, at time zero"
   ],
-  "expected_parent_level_state_change": "the plan is re-ordered: acquisition is gated on the reading, and 89 of 130 pages are now measured as needing no policy at all",
+  "expected_parent_level_state_change": "frontier unchanged: measured in one sandbox, AUTHORITY NONE",
   "iteration_limit": 1,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
