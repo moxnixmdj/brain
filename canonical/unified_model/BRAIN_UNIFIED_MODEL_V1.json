@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 467,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6895,
+  "research_index_records": 6896,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "523ac6ce417bd904f068e0cf87bed308126719aca5631af24b0e1af36c090dfb"
+  "value": "dee69536b5699c5e5d0449868212db255b4acc799dad2ac33a64fb6453a9add9"
  },
  "engines": [
   {
@@ -241933,6 +241933,51 @@
     "the_second_time_is_instant_v1_20261101_v1": 2,
     "time": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_SENTENCE_DID_NOT_HAVE_TO_SAY_SUBMIT_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9599d9ca015b4aadaaff0a254cfa48d77776e28251509199ebdafb73512de5d8",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "130": 1,
+    "20261116": 1,
+    "47": 1,
+    "49": 1,
+    "52": 1,
+    "56": 1,
+    "57": 1,
+    "66": 1,
+    "added": 1,
+    "alone": 1,
+    "build_a_frame__container_plus_identifier_plus_path__so_one_coordinate_change_serves_every_record_shaped_page_instead_of_one_vocabulary_entry_per_app": 1,
+    "did": 1,
+    "further": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "instruction": 1,
+    "no": 2,
+    "not": 1,
+    "pages": 1,
+    "parameter": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "read": 1,
+    "real": 1,
+    "regressions": 1,
+    "replicated": 1,
+    "reward": 1,
+    "say": 1,
+    "seeds": 1,
+    "sentence": 1,
+    "solved": 1,
+    "submit": 1,
+    "the_page_grades_on_a_press_and_a_coordinate_the_sentence_never_names__so_the_arm_that_understood_every_word_stopped_one_unstated_act_short_and_reported_it_only_as_not_refused": 1,
+    "the_sentence_did_not_have_to_say_submit_20261116_v1": 1
    }
   },
   {
