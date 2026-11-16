@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 466,
+  "knowledge_documents": 467,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 6890,
+  "research_index_records": 6892,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 450,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "15c86b3f3b809f126ae193e73c38f45bdccb029e884016c2cdad432197ce51af"
+  "value": "dcae91f65e8855c0947149cb22a0656d511d620c5e28aa871a4f486da76e8fb3"
  },
  "engines": [
   {
@@ -58792,6 +58792,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 4906,
+   "headings": [
+    "Re-running another arm's repairs instead of believing them",
+    "Why this exists",
+    "What was done",
+    "What it found",
+    "The union, recomputed on verified evidence only",
+    "What is real and what is not, one more time",
+    "Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1.md",
+   "sha256": "e08349a8b432584310ecba795cf9e22ff95936249eadf1e1cee8e29d8e29394f",
+   "summary": "**2026-11-16 · branch `arena/c542a50f-brain` · 20 claimed repairs, re-judged · no model, no weights, no network**",
+   "terms": {
+    "10": 2,
+    "16": 3,
+    "18": 3,
+    "20": 5,
+    "24": 2,
+    "26": 2,
+    "40": 9,
+    "about": 2,
+    "all": 2,
+    "arm": 7,
+    "between": 2,
+    "both": 2,
+    "bug": 2,
+    "bugs": 5,
+    "cases": 2,
+    "claim": 4,
+    "claimed": 4,
+    "confirmed": 2,
+    "corpus": 6,
+    "cross-corpus": 3,
+    "every": 3,
+    "families": 4,
+    "hand-written": 4,
+    "here": 3,
+    "kinds": 3,
+    "learned": 3,
+    "missing": 3,
+    "no": 9,
+    "not": 18,
+    "nothing": 3,
+    "one": 6,
+    "only": 5,
+    "own": 6,
+    "pytest": 7,
+    "re-running": 3,
+    "real": 5,
+    "reconstructible": 3,
+    "record": 5,
+    "recorded": 5,
+    "repair": 3,
+    "repaired": 4,
+    "repairs": 6,
+    "rpn_eval": 3,
+    "screen": 4,
+    "so": 4,
+    "turn": 3,
+    "union": 5,
+    "verified": 3
+   },
+   "title": "Re-running another arm's repairs instead of believing them",
+   "title_terms": [
+    "another",
+    "arm",
+    "believing",
+    "instead",
+    "re-running",
+    "repairs"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 11022,
    "headings": [
     "Retained repair through the fabric — unadmitted trace, 2026-11-02",
@@ -81279,10 +81355,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1268,
+  "included_source_count": 1269,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "15ad0d947bbac812c2f3575255f4832453d6bd882c7a7de0ed1b9889a49d4fb9"
+  "source_tree_digest": "8af0b30af724fc2235cd007a500e85520dcbe71f6abecabb149a76268004976c"
  },
  "research_index": [
   {
@@ -193080,6 +193156,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RERUN_THE_LEARNED_ARMS_REPAIRS_20261116_V1.json",
+   "schema": "BRAIN_RERUN_THE_LEARNED_ARMS_REPAIRS_V1",
+   "sha256": "f7a19a843fba7295553c2f2fde48abdc62eced0b5d9ca1ced793687d1a0ec9a4",
+   "status": "",
+   "terms": {
+    "20261116": 1,
+    "arms": 1,
+    "learned": 1,
+    "repairs": 1,
+    "rerun": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-02",
    "id": "research:canonical/verification/RESEARCH_CONTROL_INFORMATION_SAFE_PUBLIC_RUNNER_VERIFICATION_20261002_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -238825,6 +238920,44 @@
     "requirement_names_an_effect_not_a_row_v1_20261031_v1": 1,
     "row": 1,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1",
+   "capability": false,
+   "date": "2026-11-16",
+   "id": "research:canonical/action_intents/RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/RERUN_THE_REPAIRS_NOT_THE_CLAIM_20261116_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9f7e4094777dcfec9db708aed62ec90af455508cdee2af3cdef26cdd846099b1",
+   "status": "PROPOSED__PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+   "terms": {
+    "20261116": 1,
+    "alone": 1,
+    "becomes": 1,
+    "being": 1,
+    "capability": 1,
+    "claim": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "measurement": 1,
+    "no_arm_in_this_tree_can_be_quoted_until_its_repairs_are_rerunnable_from_its_own_record_under_one_judge_and_the_three_arms_have_never_been_composed_into_one_run": 1,
+    "not": 1,
+    "number": 1,
+    "projections": 1,
+    "proposed__producer_measured__independent_verification_open": 1,
+    "quotable": 1,
+    "re-runnable": 1,
+    "record": 1,
+    "repairs": 1,
+    "replaced": 1,
+    "rerun": 1,
+    "rerun_the_repairs_not_the_claim_20261116_v1": 1,
+    "so": 1,
+    "stops": 1,
+    "synthesize_an_ast_level_edit_inducer_that_folds_one_demonstration_pair_into_a_hole_generalized_template_with_a_context_precondition_and_measures_it_end_to_end_on_a_public_bug_corpus": 1,
+    "tree": 1,
+    "v1": 1
    }
   },
   {
