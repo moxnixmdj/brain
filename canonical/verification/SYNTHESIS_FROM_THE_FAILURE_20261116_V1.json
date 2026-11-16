@@ -1,0 +1,419 @@
+{
+ "schema": "BRAIN_SYNTHESIZED_EXPRESSION_FROM_THE_FAILURE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_dependency_count": 0,
+ "network_calls_at_run_time": 0,
+ "tasks": 31,
+ "stages": {
+  "NOT_IN_THIS_FAMILY": 27,
+  "REPAIRED__CORPUS_TEST_PASSES": 3,
+  "SYNTHESIZED_BUT_PASSES_NO_TARGET": 1
+ },
+ "found_expression": 4,
+ "repaired_by_corpus_test": 3,
+ "rows": [
+  {
+   "task": "bitcount",
+   "kind": "task",
+   "examples": 9,
+   "function": "bitcount",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.5
+  },
+  {
+   "task": "bucketsort",
+   "kind": "task",
+   "examples": 7,
+   "function": "bucketsort",
+   "baseline_examples_passed": 1,
+   "expressions": [
+    "sorted(arr)"
+   ],
+   "expressions_tried": 3585,
+   "scopes": 7,
+   "synthesis_status": "FOUND",
+   "chosen_expression": "sorted(arr)",
+   "chosen_source_sha256": "be3a6f035b9906cde9b86291baee46e38173629c9bb471cf6e98c242a3008528",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".......                                                                  [100%]",
+    "7 passed in 0.01s"
+   ],
+   "stage": "REPAIRED__CORPUS_TEST_PASSES",
+   "seconds": 0.2
+  },
+  {
+   "task": "find_first_in_sorted",
+   "kind": "task",
+   "examples": 7,
+   "function": "find_first_in_sorted",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "find_in_sorted",
+   "kind": "task",
+   "examples": 7,
+   "function": "find_in_sorted",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "flatten",
+   "kind": "task",
+   "examples": 7,
+   "function": "flatten",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 1341,
+   "scopes": 7,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "gcd",
+   "kind": "task",
+   "examples": 6,
+   "function": "gcd",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "get_factors",
+   "kind": "task",
+   "examples": 11,
+   "function": "get_factors",
+   "baseline_examples_passed": 1,
+   "expressions": [],
+   "expressions_tried": 1640,
+   "scopes": 11,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "hanoi",
+   "kind": "task",
+   "examples": 8,
+   "function": "hanoi",
+   "baseline_examples_passed": 1,
+   "expressions": [],
+   "expressions_tried": 2717,
+   "scopes": 8,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "is_valid_parenthesization",
+   "kind": "task",
+   "examples": 3,
+   "function": "is_valid_parenthesization",
+   "baseline_examples_passed": 2,
+   "expressions": [
+    "(not depth)",
+    "(depth == 0)",
+    "(depth == False)",
+    "(paren > parens)",
+    "(paren >= parens)",
+    "(parens < paren)",
+    "(parens <= paren)",
+    "(0 == depth)"
+   ],
+   "expressions_tried": 655,
+   "scopes": 3,
+   "synthesis_status": "FOUND",
+   "chosen_expression": "(not depth)",
+   "chosen_source_sha256": "96b5cd3894d13a8162f3a1ea2c1c5e478577717a7c8f0ab78f21b7346de77d11",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    "...                                                                      [100%]",
+    "3 passed in 0.01s"
+   ],
+   "stage": "REPAIRED__CORPUS_TEST_PASSES",
+   "seconds": 0.2
+  },
+  {
+   "task": "kheapsort",
+   "kind": "task",
+   "examples": 4,
+   "function": "kheapsort",
+   "baseline_examples_passed": 0,
+   "expressions": [
+    "sorted(arr)"
+   ],
+   "expressions_tried": 1640,
+   "scopes": 4,
+   "synthesis_status": "FOUND",
+   "stage": "SYNTHESIZED_BUT_PASSES_NO_TARGET",
+   "seconds": 0.0
+  },
+  {
+   "task": "knapsack",
+   "kind": "task",
+   "examples": 10,
+   "function": "knapsack",
+   "baseline_examples_passed": 1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "kth",
+   "kind": "task",
+   "examples": 7,
+   "function": "kth",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "lcs_length",
+   "kind": "task",
+   "examples": 9,
+   "function": "lcs_length",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 3136,
+   "scopes": 9,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "levenshtein",
+   "kind": "task",
+   "examples": 7,
+   "function": "levenshtein",
+   "baseline_examples_passed": 0,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.2
+  },
+  {
+   "task": "lis",
+   "kind": "task",
+   "examples": 12,
+   "function": "lis",
+   "baseline_examples_passed": 8,
+   "expressions": [],
+   "expressions_tried": 3585,
+   "scopes": 12,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "longest_common_subsequence",
+   "kind": "task",
+   "examples": 10,
+   "function": "longest_common_subsequence",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.2
+  },
+  {
+   "task": "max_sublist_sum",
+   "kind": "task",
+   "examples": 6,
+   "function": "max_sublist_sum",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 2328,
+   "scopes": 6,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "mergesort",
+   "kind": "task",
+   "examples": 14,
+   "function": "mergesort",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "next_palindrome",
+   "kind": "task",
+   "examples": 5,
+   "function": "next_palindrome",
+   "baseline_examples_passed": 4,
+   "expressions": [],
+   "expressions_tried": 1969,
+   "scopes": 5,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "next_permutation",
+   "kind": "task",
+   "examples": 8,
+   "function": "next_permutation",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 2328,
+   "scopes": 8,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "pascal",
+   "kind": "task",
+   "examples": 5,
+   "function": "pascal",
+   "baseline_examples_passed": 1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "possible_change",
+   "kind": "task",
+   "examples": 10,
+   "function": "possible_change",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "powerset",
+   "kind": "task",
+   "examples": 5,
+   "function": "powerset",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 2328,
+   "scopes": 5,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "quicksort",
+   "kind": "task",
+   "examples": 13,
+   "function": "quicksort",
+   "baseline_examples_passed": 1,
+   "expressions": [
+    "sorted(arr)"
+   ],
+   "expressions_tried": 2328,
+   "scopes": 13,
+   "synthesis_status": "FOUND",
+   "chosen_expression": "sorted(arr)",
+   "chosen_source_sha256": "638f12f79be7a82580cb4e129b0236a2193cb81d252dad53e1b1e45a6fbec6a5",
+   "corpus_test_returncode": 0,
+   "corpus_test_tail": [
+    ".............                                                            [100%]",
+    "13 passed in 0.01s"
+   ],
+   "stage": "REPAIRED__CORPUS_TEST_PASSES",
+   "seconds": 0.2
+  },
+  {
+   "task": "rpn_eval",
+   "kind": "task",
+   "examples": 6,
+   "function": "rpn_eval",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 3136,
+   "scopes": 6,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "shunting_yard",
+   "kind": "task",
+   "examples": 6,
+   "function": "shunting_yard",
+   "baseline_examples_passed": 2,
+   "expressions": [],
+   "expressions_tried": 2717,
+   "scopes": 6,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.1
+  },
+  {
+   "task": "sieve",
+   "kind": "task",
+   "examples": 6,
+   "function": "sieve",
+   "baseline_examples_passed": 1,
+   "expressions": [],
+   "expressions_tried": 1969,
+   "scopes": 6,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "sqrt",
+   "kind": "task",
+   "examples": 7,
+   "function": "sqrt",
+   "baseline_examples_passed": -1,
+   "synthesis_status": "SCOPE_UNOBSERVABLE",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.4
+  },
+  {
+   "task": "subsequences",
+   "kind": "task",
+   "examples": 12,
+   "function": "subsequences",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 2717,
+   "scopes": 12,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "to_base",
+   "kind": "task",
+   "examples": 10,
+   "function": "to_base",
+   "baseline_examples_passed": 3,
+   "expressions": [],
+   "expressions_tried": 2717,
+   "scopes": 10,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  },
+  {
+   "task": "wrap",
+   "kind": "task",
+   "examples": 5,
+   "function": "wrap",
+   "baseline_examples_passed": 0,
+   "expressions": [],
+   "expressions_tried": 2717,
+   "scopes": 5,
+   "synthesis_status": "NO_EXPRESSION",
+   "stage": "NOT_IN_THIS_FAMILY",
+   "seconds": 0.0
+  }
+ ]
+}

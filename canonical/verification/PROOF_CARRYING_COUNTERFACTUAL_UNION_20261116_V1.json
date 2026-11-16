@@ -54,33 +54,41 @@
     "THE_JUDGE_WAS_THE_MISSING_PART_20261116_V1.md",
     "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.md",
     "ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md",
+    "THE_SPACE_IS_ASSEMBLED_NOT_LISTED_20261116_V1.md",
+    "WHAT_ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.md",
+    "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.md",
+    "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
     "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
     "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json",
     "canonical/verification/PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_20261116_V1.json",
     "canonical/verification/INSTRUCTION_CONTRACT_20261116_V1.json",
+    "canonical/verification/OBSERVABLE_DESCRIPTOR_20261116_V1.json",
+    "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+    "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+    "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
     "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json"
   ],
-  "example_searchable_open_count": 12,
+  "example_searchable_open_count": 8,
   "example_searchable_open_tasks": [
     "flatten",
-    "hanoi",
     "kheapsort",
-    "knapsack",
-    "levenshtein",
     "possible_change",
     "powerset",
     "shunting_yard",
     "sqrt",
     "subsequences",
-    "to_base",
     "wrap"
   ],
-  "generated_at_utc": "2026-11-16T20:07:17.833338+00:00",
+  "generated_at_utc": "2026-11-16T21:22:21.534338+00:00",
   "hard_nonclaims": [
     "NOT_A_FRONTIER_SCORE",
     "NOT_SWE_BENCH",
     "NO_SYNTHETIC_TASKS",
     "NO_KNOWN_WIN_COUNTED_AS_PROGRESS",
+    "NO_SCREEN_ONLY_VERDICT_COUNTED_AS_REPAIR",
+    "NO_MAJORITY_VOTE_AS_SELECTOR",
     "NO_NEW_LEARNER_OR_VERIFIER",
     "NO_CAPABILITY_REGISTERED",
     "NO_PROTECTED_PATH_TOUCHED",
@@ -90,27 +98,20 @@
     "PRODUCER_RUN_NOT_INDEPENDENT_VERIFICATION",
     "TERMINAL_TRUTH_UNTOUCHED"
   ],
-  "hard_open_population_count": 21,
+  "hard_open_population_count": 14,
   "hard_open_population_tasks": [
     "breadth_first_search",
-    "depth_first_search",
     "detect_cycle",
     "flatten",
-    "hanoi",
     "kheapsort",
-    "knapsack",
-    "levenshtein",
-    "minimum_spanning_tree",
     "possible_change",
     "powerset",
     "reverse_linked_list",
     "shortest_path_length",
-    "shortest_path_lengths",
     "shortest_paths",
     "shunting_yard",
     "sqrt",
     "subsequences",
-    "to_base",
     "topological_ordering",
     "wrap"
   ],
@@ -121,8 +122,12 @@
     "all_task_names_from_real_published_test_files": true,
     "no_answer_key_count_above_zero_in_measured_receipts": true,
     "no_known_win_in_open_population": true,
+    "no_majority_vote_counted_as_selector": true,
     "no_receipt_task_outside_real_corpus": true,
-    "repaired_and_open_partition_corpus": true
+    "no_screen_only_verdict_counted_as_repair": true,
+    "observable_gap_receipt_read": true,
+    "repaired_and_open_partition_corpus": true,
+    "selection_measurement_read": true
   },
   "killed_instruments": [
     {
@@ -146,23 +151,30 @@
   "known_wins_not_counted_as_progress": [
     "bitcount",
     "bucketsort",
+    "depth_first_search",
     "find_first_in_sorted",
     "find_in_sorted",
     "gcd",
     "get_factors",
+    "hanoi",
     "is_valid_parenthesization",
+    "knapsack",
     "kth",
     "lcs_length",
+    "levenshtein",
     "lis",
     "longest_common_subsequence",
     "max_sublist_sum",
     "mergesort",
+    "minimum_spanning_tree",
     "next_palindrome",
     "next_permutation",
     "pascal",
     "quicksort",
     "rpn_eval",
-    "sieve"
+    "shortest_path_lengths",
+    "sieve",
+    "to_base"
   ],
   "measured_receipts": [
     {
@@ -263,6 +275,55 @@
       ],
       "sha256": "293a6241aa901795e3f85020c2b4c4d34218520e9c85adf3df89b7c514bcff9d",
       "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+      "repaired_count": null,
+      "repaired_tasks": [
+        "bucketsort",
+        "depth_first_search",
+        "find_first_in_sorted",
+        "find_in_sorted",
+        "gcd",
+        "get_factors",
+        "hanoi",
+        "is_valid_parenthesization",
+        "knapsack",
+        "lcs_length",
+        "levenshtein",
+        "longest_common_subsequence",
+        "minimum_spanning_tree",
+        "next_palindrome",
+        "next_permutation",
+        "pascal",
+        "quicksort",
+        "rpn_eval",
+        "shortest_path_lengths",
+        "to_base"
+      ],
+      "sha256": "3ce066df1b508158f6f5167594f4e67389bade1fff2959e5845b0c43ede774a4",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+      "repaired_count": null,
+      "repaired_tasks": [
+        "bucketsort",
+        "is_valid_parenthesization",
+        "quicksort"
+      ],
+      "sha256": "c9964d0f4963ffb48f41de687c917e0d296bd5fa92aedf0a5782026e4173d029",
+      "status": "READ"
+    },
+    {
+      "answer_keys_present": null,
+      "receipt": "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+      "repaired_count": 0,
+      "repaired_tasks": [],
+      "sha256": "3b2ff583214b7869038666bf150b95cc3e494c772770325c387c40c151a60c27",
+      "status": "READ"
     }
   ],
   "mechanism_census_by_effect": {
@@ -277,13 +338,14 @@
       ]
     },
     "constructive_actions_and_operands": {
-      "count": 4,
+      "count": 5,
       "missing": [],
       "present": [
         "canonical/tools/grammar_closed_repair_v1.py",
         "canonical/tools/quixbugs_required_edit_taxonomy_v1.py",
         "canonical/runtime/derived_value_v1.py",
-        "canonical/runtime/inert_action_prior_v1.py"
+        "canonical/runtime/inert_action_prior_v1.py",
+        "canonical/tools/synthesized_expression_from_the_failure_v1.py"
       ]
     },
     "goal_and_counterfactual_verdict": {
@@ -310,21 +372,28 @@
       ]
     },
     "identification_and_separation": {
-      "count": 4,
+      "count": 9,
       "missing": [],
       "present": [
         "canonical/runtime/finite_identifiability.py",
         "canonical/tools/identification_cost_in_a_real_space_v1.py",
+        "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+        "canonical/swe_kernel/repair_version_space_selection_v1.py",
+        "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+        "canonical/tools/version_space_selection_measure_v1.py",
+        "canonical/tools/closed_loop_trace_abduction_measure_v1.py",
         "canonical/swe_kernel/specification_from_structure_v1.py",
         "canonical/tools/grammar_closed_repair_v1.py"
       ]
     },
     "independent_witness_and_admission": {
-      "count": 5,
+      "count": 7,
       "missing": [],
       "present": [
         "canonical/runtime/instruction_contract_v1.py",
         "canonical/runtime/instruction_policy_v1.py",
+        "canonical/runtime/observable_descriptor_v1.py",
+        "canonical/tools/repair_where_the_suite_is_the_observable_v1.py",
         "canonical/swe_kernel/test_suite_admission_v1.py",
         "canonical/swe_kernel/weight_update_admission_v1.py",
         "canonical/swe_kernel/learned_skill_verdict_v1.py"
@@ -333,49 +402,126 @@
   },
   "model_dependency_count": 0,
   "network_dependency_count": 0,
-  "repaired_union_count": 19,
+  "observable_gap_receipt": {
+    "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+    "repaired": 0,
+    "stages": {
+      "NOT_REPAIRED__NO_SURVIVOR_AT_THE_SCREEN": 6,
+      "SCREEN_ACCEPTED__CORPUS_TEST_FAILS": 3
+    },
+    "tasks_measured": 9,
+    "tasks_without_json": [
+      "breadth_first_search",
+      "depth_first_search",
+      "detect_cycle",
+      "minimum_spanning_tree",
+      "reverse_linked_list",
+      "shortest_path_length",
+      "shortest_path_lengths",
+      "shortest_paths",
+      "topological_ordering"
+    ]
+  },
+  "receipt_arms_ignored": [
+    {
+      "arm": "summary.all_other_fixes",
+      "reason": "Shown 39 QuixBugs fixes; not a clean held-out vocabulary transfer.",
+      "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json"
+    }
+  ],
+  "repaired_union_count": 26,
   "repaired_union_tasks": [
     "bitcount",
     "bucketsort",
+    "depth_first_search",
     "find_first_in_sorted",
     "find_in_sorted",
     "gcd",
     "get_factors",
+    "hanoi",
     "is_valid_parenthesization",
+    "knapsack",
     "kth",
     "lcs_length",
+    "levenshtein",
     "lis",
     "longest_common_subsequence",
     "max_sublist_sum",
     "mergesort",
+    "minimum_spanning_tree",
     "next_palindrome",
     "next_permutation",
     "pascal",
     "quicksort",
     "rpn_eval",
-    "sieve"
+    "shortest_path_lengths",
+    "sieve",
+    "to_base"
   ],
   "schema": "BRAIN_PROOF_CARRYING_COUNTERFACTUAL_UNION_AUDIT_V1",
+  "selection_measurement": {
+    "corpus": "100 held-out HumanEvalFix bugs; scored bug's own fix was never a lesson",
+    "majority_vote": {
+      "conclusion": "self-consistency is not evidence; a labelled answer to a chosen input is",
+      "examples": {
+        "Python/101": "5 of 6 candidates shared one behaviour; it was wrong",
+        "Python/3": "4 of 5 candidates shared one behaviour; it was wrong"
+      },
+      "measured": "among candidates that pass the SAME tests, the majority behaviour was the WRONG one in 3 of 5 disagreements"
+    },
+    "receipt": "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "status": "SELECTION_AMONG_TEST_PASSING_CANDIDATES_NOT_A_QUIXBUGS_REPAIR_RECEIPT",
+    "summary": {
+      "behaviours_left_unseparated_by_every_probe": 43,
+      "behaviours_split_by_a_probe": 8,
+      "bugs_asked": 99,
+      "bugs_measured": 51,
+      "chosen_agrees_with_published_fix_on_every_humaneval_plus_input": 45,
+      "chosen_compared_on_humaneval_plus": 51,
+      "correct_after_selection": 48,
+      "correct_before_selection": 47,
+      "crashed_or_unfinished": 1,
+      "did_not_finish": [
+        "Python/156"
+      ],
+      "first_pass_candidate_was_correct": 47,
+      "no_candidate_passed_the_tests": 46,
+      "oracle_questions_asked": 9,
+      "partition_refused": 1,
+      "reference_behaviour_was_in_the_candidate_set": 48,
+      "regressions_caused_by_selection": 0,
+      "settled_and_equal_to_the_reference_behaviour": 8,
+      "settled_by_a_question": 8,
+      "still_wrong_because_the_right_behaviour_was_never_generated": [
+        "Python/1",
+        "Python/101",
+        "Python/92"
+      ],
+      "unseparated_and_equal_to_the_reference_behaviour": 40,
+      "unseparated_total": 43
+    }
+  },
   "supersedes": [
     "THE_GOAL_IS_A_COUNTERFACTUAL_WORLD_MODEL_20261116_V1.md",
     "THE_GOAL_IS_THE_BOTTLENECK_20261116_V1.md",
     "WHAT_IS_REAL_AND_THE_ONE_BOTTLENECK_20261116_V1.md"
   ],
+  "union_projection_status": {
+    "reason": "The 26/40 number is a projection from clean receipts; PR #6885 found the fast screen accepted 3 candidates that the corpus pytest refused. The screen may order candidates, never decide them.",
+    "status": "UPPER_BOUND_UNTIL_COMPOSED_PYTEST_ONLY_RUN"
+  },
   "unknown_receipt_tasks_outside_real_corpus": [],
   "unmeasurable_without_published_input_output_examples": [
     "breadth_first_search",
-    "depth_first_search",
     "detect_cycle",
-    "minimum_spanning_tree",
     "reverse_linked_list",
     "shortest_path_length",
-    "shortest_path_lengths",
     "shortest_paths",
     "topological_ordering"
   ],
-  "unmeasurable_without_published_input_output_examples_count": 9,
+  "unmeasurable_without_published_input_output_examples_count": 6,
   "upstream": "https://github.com/jkoppel/QuixBugs",
   "upstream_head": "4257f44b0ff1181dedaedee6a447e133219fcebf",
-  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, plus an effect-based census of mechanisms already in the tree. It is not a solver.",
+  "what_this_is": "A set-algebra audit of measured receipts against the real published corpus, using only clean held-out arms, plus an effect-based census of mechanisms already in the tree. The union is an upper bound until one composed run uses the corpus pytest as the only judge. It also indexes the separate selection measurement among test-passing HumanEvalFix candidates; that measurement is not a QuixBugs repair receipt. It is not a solver.",
   "what_this_is_not": "Not a repair contest, not a capability, not a benchmark score, not independent verification, not a proof of correctness, not a sentience claim, and not permission to merge over a red or missing referee."
 }

@@ -57,6 +57,19 @@ REPAIR_RECEIPTS = (
     "REGION_REWRITES_AND_THE_REFUSAL_AUDIT_20261116_V1.json",
     "CONTRACT_GROUNDED_REPAIR_20261116_V1.json",
     "INTERVENTIONAL_GOAL_20261116_V1.json",
+    "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+    "SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+    "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+)
+
+#: The cross-corpus transfer receipt has a second arm shown 39 other QuixBugs
+#: fixes. It is deliberately NOT admitted to the held-out union.
+RECEIPT_ARMS_IGNORED = (
+    {
+        "receipt": "QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
+        "arm": "summary.all_other_fixes",
+        "reason": "Shown 39 QuixBugs fixes; not a clean held-out vocabulary transfer.",
+    },
 )
 
 #: Mechanisms indexed by EFFECT, not filename. A future session that searches for
@@ -73,6 +86,7 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
         "canonical/tools/quixbugs_required_edit_taxonomy_v1.py",
         "canonical/runtime/derived_value_v1.py",
         "canonical/runtime/inert_action_prior_v1.py",
+        "canonical/tools/synthesized_expression_from_the_failure_v1.py",
     ),
     "goal_and_counterfactual_verdict": (
         "canonical/swe_kernel/contract_grounded_repair_v1.py",
@@ -83,12 +97,19 @@ MECHANISM_GROUPS: dict[str, tuple[str, ...]] = {
     "identification_and_separation": (
         "canonical/runtime/finite_identifiability.py",
         "canonical/tools/identification_cost_in_a_real_space_v1.py",
+        "canonical/swe_kernel/one_demonstration_identifies_v1.py",
+        "canonical/swe_kernel/repair_version_space_selection_v1.py",
+        "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+        "canonical/tools/version_space_selection_measure_v1.py",
+        "canonical/tools/closed_loop_trace_abduction_measure_v1.py",
         "canonical/swe_kernel/specification_from_structure_v1.py",
         "canonical/tools/grammar_closed_repair_v1.py",
     ),
     "independent_witness_and_admission": (
         "canonical/runtime/instruction_contract_v1.py",
         "canonical/runtime/instruction_policy_v1.py",
+        "canonical/runtime/observable_descriptor_v1.py",
+        "canonical/tools/repair_where_the_suite_is_the_observable_v1.py",
         "canonical/swe_kernel/test_suite_admission_v1.py",
         "canonical/swe_kernel/weight_update_admission_v1.py",
         "canonical/swe_kernel/learned_skill_verdict_v1.py",
@@ -118,10 +139,20 @@ EVIDENCE_READ = (
     "THE_JUDGE_WAS_THE_MISSING_PART_20261116_V1.md",
     "WHAT_ONE_DEMONSTRATION_REACHES_20261116_V1.md",
     "ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.md",
+    "THE_SPACE_IS_ASSEMBLED_NOT_LISTED_20261116_V1.md",
+    "WHAT_ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.md",
+    "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.md",
+    "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_20261116_V1.md",
     "canonical/verification/IDENTIFICATION_COST_IN_A_REAL_SPACE_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+    "canonical/verification/ONE_DEMONSTRATION_IDENTIFIES_20261116_V1.json",
     "canonical/verification/ONE_DEMONSTRATION_REACH_20261116_V1.json",
     "canonical/verification/PROJECT_BRAIN_INSTRUCTION_POLICY_VERIFICATION_20261116_V1.json",
     "canonical/verification/INSTRUCTION_CONTRACT_20261116_V1.json",
+    "canonical/verification/OBSERVABLE_DESCRIPTOR_20261116_V1.json",
+    "canonical/verification/SYNTHESIS_FROM_THE_FAILURE_20261116_V1.json",
+    "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+    "canonical/verification/QUIXBUGS_EDIT_KIND_TRANSFER_20261112_V1.json",
     "canonical/verification/COMPARISONS_CLOSE_THE_LAST_MILE_20261116_V1.json",
 )
 
@@ -139,12 +170,25 @@ def repaired_from_receipt(data: dict[str, Any]) -> set[str]:
     for value in (data.get("repaired_tasks"), data.get("measured", {}).get("repaired_tasks")):
         if isinstance(value, list):
             names.update(str(x) for x in value if isinstance(x, str) and x)
+    # QUIXBUGS_EDIT_KIND_TRANSFER has two arms. Only `another_benchmark` is
+    # clean: 164 HumanEvalFix fixes and ZERO QuixBugs fixes. `all_other_fixes`
+    # was shown 39 QuixBugs fixes and is deliberately never read here.
+    clean_arm = data.get("summary", {}).get("another_benchmark", {})
+    if isinstance(clean_arm, dict):
+        which = clean_arm.get("which")
+        if isinstance(which, list):
+            names.update(str(x) for x in which if isinstance(x, str) and x)
+    for task, row in (data.get("per_bug") or {}).items():
+        if isinstance(row, dict) and row.get("another_benchmark", {}).get("repaired") is True:
+            if isinstance(task, str) and task:
+                names.add(task)
     for row in data.get("rows", []):
         if not isinstance(row, dict):
             continue
         status = str(row.get("status", ""))
+        stage = str(row.get("stage", ""))
         task = row.get("task") or row.get("name")
-        if status.startswith("REPAIRED") and isinstance(task, str) and task:
+        if (status.startswith("REPAIRED") or stage.startswith("REPAIRED")) and isinstance(task, str) and task:
             names.add(task)
         if row.get("repaired") is True and isinstance(task, str) and task:
             names.add(task)
@@ -217,6 +261,10 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
     mechanisms = mechanism_census(root)
     evidence_present = [p for p in EVIDENCE_READ if (root / p).is_file()]
     evidence_missing = [p for p in EVIDENCE_READ if p not in evidence_present]
+    observable_gap_path = root / "canonical" / "verification" / "WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json"
+    observable_gap = read_json(observable_gap_path) if observable_gap_path.is_file() else None
+    selection_path = root / "canonical" / "verification" / "ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json"
+    selection = read_json(selection_path) if selection_path.is_file() else None
     answer_key_counts = [
         row["answer_keys_present"] for row in census["rows"]
         if isinstance(row.get("answer_keys_present"), int)
@@ -233,6 +281,20 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
         "no_answer_key_count_above_zero_in_measured_receipts": all(x == 0 for x in answer_key_counts),
         "all_declared_mechanism_files_present": mechanisms["all_declared_mechanism_files_present"],
         "all_newly_merged_evidence_files_read": not evidence_missing,
+        "observable_gap_receipt_read": observable_gap is not None,
+        "no_screen_only_verdict_counted_as_repair": bool(
+            observable_gap
+            and observable_gap.get("repaired") == 0
+            and not observable_gap.get("repaired_tasks")
+            and observable_gap.get("stages", {}).get("SCREEN_ACCEPTED__CORPUS_TEST_FAILS") == 3
+        ),
+        "selection_measurement_read": selection is not None,
+        "no_majority_vote_counted_as_selector": bool(
+            selection
+            and selection.get("why_majority_vote_is_not_a_selector", {}).get("conclusion")
+            == "self-consistency is not evidence; a labelled answer to a chosen input is"
+            and selection.get("summary", {}).get("settled_and_equal_to_the_reference_behaviour") == 8
+        ),
     }
     audit_pass = all(invariants.values())
     return {
@@ -247,6 +309,25 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "source_of_task_names": "python_testcases/test_*.py in a fresh clone; no invented task",
         },
         "measured_receipts": census["rows"],
+        "receipt_arms_ignored": list(RECEIPT_ARMS_IGNORED),
+        "union_projection_status": {
+            "status": "UPPER_BOUND_UNTIL_COMPOSED_PYTEST_ONLY_RUN",
+            "reason": "The 26/40 number is a projection from clean receipts; PR #6885 found the fast screen accepted 3 candidates that the corpus pytest refused. The screen may order candidates, never decide them.",
+        },
+        "observable_gap_receipt": {
+            "receipt": "canonical/verification/WHERE_THE_OBSERVABLE_WAS_MISSING_20261116_V1.json",
+            "tasks_without_json": (observable_gap or {}).get("tasks_with_no_json", []),
+            "tasks_measured": (observable_gap or {}).get("tasks_measured"),
+            "repaired": (observable_gap or {}).get("repaired"),
+            "stages": (observable_gap or {}).get("stages", {}),
+        },
+        "selection_measurement": {
+            "receipt": "canonical/verification/ONE_DEMONSTRATION_IS_NOT_IDENTIFICATION_MEASURE_20261116_V1.json",
+            "corpus": "100 held-out HumanEvalFix bugs; scored bug's own fix was never a lesson",
+            "summary": (selection or {}).get("summary", {}),
+            "majority_vote": (selection or {}).get("why_majority_vote_is_not_a_selector", {}),
+            "status": "SELECTION_AMONG_TEST_PASSING_CANDIDATES_NOT_A_QUIXBUGS_REPAIR_RECEIPT",
+        },
         "repaired_union_count": len(repaired),
         "repaired_union_tasks": sorted(repaired),
         "known_wins_not_counted_as_progress": sorted(repaired),
@@ -278,8 +359,11 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             },
         ],
         "what_this_is": (
-            "A set-algebra audit of measured receipts against the real published corpus, plus an "
-            "effect-based census of mechanisms already in the tree. It is not a solver."
+            "A set-algebra audit of measured receipts against the real published corpus, using only "
+            "clean held-out arms, plus an effect-based census of mechanisms already in the tree. "
+            "The union is an upper bound until one composed run uses the corpus pytest as the only "
+            "judge. It also indexes the separate selection measurement among test-passing HumanEvalFix "
+            "candidates; that measurement is not a QuixBugs repair receipt. It is not a solver."
         ),
         "what_this_is_not": (
             "Not a repair contest, not a capability, not a benchmark score, not independent "
@@ -291,6 +375,8 @@ def audit(quixbugs_root: pathlib.Path, root: pathlib.Path = ROOT) -> dict[str, A
             "NOT_SWE_BENCH",
             "NO_SYNTHETIC_TASKS",
             "NO_KNOWN_WIN_COUNTED_AS_PROGRESS",
+            "NO_SCREEN_ONLY_VERDICT_COUNTED_AS_REPAIR",
+            "NO_MAJORITY_VOTE_AS_SELECTOR",
             "NO_NEW_LEARNER_OR_VERIFIER",
             "NO_CAPABILITY_REGISTERED",
             "NO_PROTECTED_PATH_TOUCHED",
